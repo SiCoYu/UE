@@ -18,4 +18,11 @@ protected:
 	/** kills background icon. */
 	UPROPERTY()
 	FCanvasIcon KillsBg;
+
+	/** Large font - used for ammo display etc. */
+	UPROPERTY()
+	UFont* BigFont;
+
+	/** Darker HUD color. */
+	FColor HUDDark;
 };

@@ -3,6 +3,7 @@
 #include "MyProject.h"
 #include "MyProjectGameMode.h"
 #include "MyProjectCharacter.h"
+#include "GameFramework/HUD.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -12,5 +13,11 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
+	}
+
+	static ConstructorHelpers::FClassFinder<AHUD> HUBBPClass(TEXT("/Game/Blueprints/HUB"));
+	if (HUBBPClass.Class != NULL)
+	{
+		HUDClass = HUBBPClass.Class;
 	}
 }
