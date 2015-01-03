@@ -18,6 +18,7 @@ public class MyProject : ModuleRules
             new string[] {
 				"Slate",
 				"SlateCore",
+                "UMG",
 			}
         );
 
