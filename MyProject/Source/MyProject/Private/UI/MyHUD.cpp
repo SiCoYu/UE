@@ -2,6 +2,9 @@
 #include "UI/MyHUD.h"
 
 #include "CanvasItem.h"
+#include "MyDialog.h"
+//#include "EngineGlobals.h"		// GEngine
+#include "Engine.h"
 
 #define LOCTEXT_NAMESPACE "MyProject.HUD"
 
@@ -28,4 +31,16 @@ void AMyHUD::DrawHUD()
 	//TextItem.FontRenderInfo = ShadowedFont;
 	TextItem.SetColor(FLinearColor(0.75f, 0.125f, 0.125f, 1.0f));
 	Canvas->DrawItem(TextItem);
+
+	if (!DialogWidget.IsValid())
+	{
+		DialogWidget = SNew(SMyDialog)
+			.MessageText("asdfasdasdfadsf");
+
+		SMyDialog::FArguments aaa;
+		aaa.MessageText("asdfasdasdfadsf");
+		DialogWidget->Construct(aaa);
+
+		GEngine->GameViewport->AddViewportWidgetContent(DialogWidget.ToSharedRef());
+	}
 }

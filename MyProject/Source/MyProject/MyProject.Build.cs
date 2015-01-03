@@ -6,13 +6,20 @@ public class MyProject : ModuleRules
 {
 	public MyProject(TargetInfo Target)
 	{
-        //PrivateIncludePaths.AddRange(
-        //    new string[] { 
-		//        "MyProject/Classes/UI",
-	    //    }
-        //);
+        PrivateIncludePaths.AddRange(
+            new string[] { 
+		        "MyProject/Private/UI/Widgets",
+	        }
+        );
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+
+        PrivateDependencyModuleNames.AddRange(
+            new string[] {
+				"Slate",
+				"SlateCore",
+			}
+        );
 
         MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;

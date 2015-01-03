@@ -4,6 +4,8 @@
 #include "GameFramework/HUD.h"
 #include "MyHUD.generated.h"
 
+class SMyDialog;
+
 UCLASS()
 class AMyHUD : public AHUD
 {
@@ -25,4 +27,6 @@ protected:
 
 	/** Darker HUD color. */
 	FColor HUDDark;
+
+	TSharedPtr<SMyDialog>			DialogWidget;
 };

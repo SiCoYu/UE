@@ -4,6 +4,7 @@
 #include "MyProjectGameMode.h"
 #include "MyProjectCharacter.h"
 #include "GameFramework/HUD.h"
+#include "UI/MyHUD.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -18,6 +19,7 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 	static ConstructorHelpers::FClassFinder<AHUD> HUBBPClass(TEXT("/Game/Blueprints/HUB"));
 	if (HUBBPClass.Class != NULL)
 	{
-		HUDClass = HUBBPClass.Class;
+		//HUDClass = HUBBPClass.Class;
+		HUDClass = AMyHUD::StaticClass();
 	}
 }
