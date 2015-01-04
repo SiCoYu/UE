@@ -3,13 +3,13 @@
 
 #include "SlateBasics.h"
 #include "SlateExtras.h"
-//#include "UMG.h"
+#include "UMG.h"
 
 class SMyDialog : public SCompoundWidget
 {
 public:
 	SMyDialog();
-	SLATE_BEGIN_ARGS(UUserWidget)
+	SLATE_BEGIN_ARGS(SMyDialog)
 	{}
 
 	SLATE_TEXT_ARGUMENT(MessageText)
