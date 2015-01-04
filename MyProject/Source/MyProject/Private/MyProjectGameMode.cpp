@@ -16,10 +16,10 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 
-	static ConstructorHelpers::FClassFinder<AHUD> HUBBPClass(TEXT("/Game/Blueprints/HUB"));
-	if (HUBBPClass.Class != NULL)
-	{
+	//static ConstructorHelpers::FClassFinder<AHUD> HUBBPClass(TEXT("/Game/Blueprints/HUB"));
+	//if (HUBBPClass.Class != NULL)
+	//{
 		//HUDClass = HUBBPClass.Class;
 		HUDClass = AMyHUD::StaticClass();
-	}
+	//}
 }
