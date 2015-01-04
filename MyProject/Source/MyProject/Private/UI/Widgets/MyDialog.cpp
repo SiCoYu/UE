@@ -5,13 +5,13 @@
 
 SMyDialog::SMyDialog()
 {
-	//static ConstructorHelpers::FClassFinder<UUserWidget> BigFontOb(TEXT("/Game/Blueprints/NewWidgetBlueprint"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> BigFontOb(TEXT("/Game/Blueprints/NewWidgetBlueprint"));
 
-	//if (BigFontOb.Class != NULL)
-	//{
-	//	WidgetClass = BigFontOb.Class;
-	//	UUserWidget* PawnToFit = WidgetClass->GetDefaultObject<UUserWidget>();
-	//}
+	if (BigFontOb.Class != NULL)
+	{
+		WidgetClass = BigFontOb.Class;
+		UUserWidget* PawnToFit = WidgetClass->GetDefaultObject<UUserWidget>();
+	}
 }
 
 void SMyDialog::Construct( const FArguments& InArgs )

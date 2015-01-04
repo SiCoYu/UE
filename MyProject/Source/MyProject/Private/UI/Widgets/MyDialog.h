@@ -18,5 +18,5 @@ public:
 
 	void Construct(const FArguments& InArgs);
 
-	//TSubclassOf<class UUserWidget>  WidgetClass;
+	TSubclassOf<class UUserWidget>  WidgetClass;
 };
