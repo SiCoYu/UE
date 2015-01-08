@@ -16,6 +16,14 @@ SMyDialog::SMyDialog()
 
 void SMyDialog::Construct( const FArguments& InArgs )
 {
+	//static ConstructorHelpers::FClassFinder<UUserWidget> BigFontOb(TEXT("/Game/Blueprints/NewWidgetBlueprint"));
+
+	//if (BigFontOb.Class != NULL)
+	//{
+	//	WidgetClass = BigFontOb.Class;
+	//	UUserWidget* PawnToFit = WidgetClass->GetDefaultObject<UUserWidget>();
+	//}
+
 	ChildSlot
 	.VAlign(VAlign_Center)
 	.HAlign(HAlign_Center)

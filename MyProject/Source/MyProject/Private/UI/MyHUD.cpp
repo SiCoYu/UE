@@ -13,6 +13,17 @@ AMyHUD::AMyHUD(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitia
 	static ConstructorHelpers::FObjectFinder<UFont> BigFontOb(TEXT("/Game/UI/HUD/Roboto51"));
 	BigFont = BigFontOb.Object;
 	HUDDark = FColor(110, 124, 131, 255);
+
+	static ConstructorHelpers::FClassFinder<UUserWidget> aaa(TEXT("/Game/Blueprints/NewWidgetBlueprint"));
+
+	if (aaa.Class != NULL)
+	{
+		TSubclassOf<class UUserWidget> WidgetClass = aaa.Class;
+		UUserWidget* PawnToFit = WidgetClass->GetDefaultObject<UUserWidget>();
+
+		NewWidget = Cast<UUserWidget>(StaticConstructObject(*WidgetClass));
+		//NewWidget->AddToViewport();
+	}
 }
 
 void AMyHUD::DrawHUD()
@@ -41,6 +52,14 @@ void AMyHUD::DrawHUD()
 		aaa.MessageText("asdfasdasdfadsf");
 		DialogWidget->Construct(aaa);
 
-		GEngine->GameViewport->AddViewportWidgetContent(DialogWidget.ToSharedRef());
+		//GEngine->GameViewport->AddViewportWidgetContent(DialogWidget.ToSharedRef());
+
+		//NewWidget->AddToViewport();
+
+		TSharedPtr<SWidget> OutUserSlateWidget;
+		TSharedRef<SWidget> RootWidget = NewWidget->MakeViewportWidget(OutUserSlateWidget);
+		GEngine->GameViewport->AddViewportWidgetContent(RootWidget);
 	}
+
+	//NewWidget->AddToViewport();
 }

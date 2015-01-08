@@ -29,4 +29,5 @@ protected:
 	FColor HUDDark;
 
 	TSharedPtr<SMyDialog>			DialogWidget;
+	UUserWidget* NewWidget;
 };
