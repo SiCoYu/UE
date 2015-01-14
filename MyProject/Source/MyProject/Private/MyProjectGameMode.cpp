@@ -23,3 +23,8 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 		HUDClass = AMyHUD::StaticClass();
 	//}
 }
+
+void AMyProjectGameMode::StartPlay()
+{
+	FSlateApplication::Get().GetPlatformApplication().
+}

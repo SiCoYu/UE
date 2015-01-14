@@ -10,7 +10,7 @@ class AMyProjectGameMode : public AGameMode
 
 public:
 	AMyProjectGameMode(const FObjectInitializer& ObjectInitializer);
+
+private:
+	virtual void StartPlay();
 };
-
-
-
