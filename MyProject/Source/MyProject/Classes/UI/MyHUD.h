@@ -14,8 +14,8 @@ class AMyHUD : public AHUD
 public:
 	/** Main HUD update loop. */
 	virtual void DrawHUD() override;
+	FReply OnConfirmGeneric();
 
-		
 protected:
 	/** kills background icon. */
 	UPROPERTY()

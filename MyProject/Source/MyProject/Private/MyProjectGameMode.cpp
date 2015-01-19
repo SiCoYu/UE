@@ -26,5 +26,5 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 
 void AMyProjectGameMode::StartPlay()
 {
-	FSlateApplication::Get().GetPlatformApplication().
+	FSlateApplication::Get().GetPlatformApplication()->Cursor->Show(true);
 }
