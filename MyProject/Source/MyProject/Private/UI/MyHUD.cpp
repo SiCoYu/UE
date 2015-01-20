@@ -82,7 +82,8 @@ void AMyHUD::DrawHUD()
 	//NewWidget->AddToViewport();
 }
 
-FReply AMyHUD::OnConfirmGeneric()
+//FReply AMyHUD::OnConfirmGeneric()
+void AMyHUD::OnConfirmGeneric()
 {
-	return FReply::Handled();
+	//return FReply::Handled();
 }

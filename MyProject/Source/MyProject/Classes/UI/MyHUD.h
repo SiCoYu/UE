@@ -15,8 +15,12 @@ public:
 	/** Main HUD update loop. */
 	virtual void DrawHUD() override;
 
+public:
+	//UFUNCTION(BlueprintCallable, Category = "Button")
+	//FReply OnConfirmGeneric();
+
 	UFUNCTION(BlueprintCallable, Category = "Button")
-	FReply OnConfirmGeneric();
+	void OnConfirmGeneric();
 
 protected:
 	/** kills background icon. */
