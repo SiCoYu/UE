@@ -63,7 +63,13 @@ void AMyHUD::DrawHUD()
 		
 		//TSharedPtr<SButton> bbb = MakeShareable((SButton*)(NewWidget->GetSlateWidgetFromName("Button_16").Get()));
 
-		UButton* ccc = (UButton*)NewWidget->GetWidgetFromName("Button_16");
+		UButton* ccc = (UButton*)NewWidget->GetWidgetFromName("Button_19");
+		//FWeakObjectPtr fff(this);
+		TScriptDelegate<FWeakObjectPtr> ddd;
+		//TScriptDelegate<AMyHUD> ddd;
+
+		ddd.BindUFunction((UObject *)this, "OnConfirmGeneric");
+		ccc->OnClicked.Add(ddd);
 
 		//bbb->SetOnClicked(FOnClicked::CreateRaw(this, &AMyHUD::OnConfirmGeneric));
 		//bbb->SetOnClicked(FOnClicked::CreateSP(this, &AMyHUD::OnConfirmGeneric));

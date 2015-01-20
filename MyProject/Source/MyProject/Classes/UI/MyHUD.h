@@ -14,6 +14,8 @@ class AMyHUD : public AHUD
 public:
 	/** Main HUD update loop. */
 	virtual void DrawHUD() override;
+
+	UFUNCTION(BlueprintCallable, Category = "Button")
 	FReply OnConfirmGeneric();
 
 protected:
