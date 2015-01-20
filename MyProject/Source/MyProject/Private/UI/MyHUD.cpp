@@ -60,12 +60,17 @@ void AMyHUD::DrawHUD()
 		TSharedRef<SWidget> RootWidget = NewWidget->MakeViewportWidget(OutUserSlateWidget);
 		GEngine->GameViewport->AddViewportWidgetContent(RootWidget);
 		//UWidget* bbb = NewWidget->GetContentForSlot("aaa");
-		TSharedPtr<SButton> bbb = MakeShareable((SButton*)(NewWidget->GetSlateWidgetFromName("Button_16").Get()));
+		
+		//TSharedPtr<SButton> bbb = MakeShareable((SButton*)(NewWidget->GetSlateWidgetFromName("Button_16").Get()));
+
+		UButton* ccc = (UButton*)NewWidget->GetWidgetFromName("Button_16");
+
 		//bbb->SetOnClicked(FOnClicked::CreateRaw(this, &AMyHUD::OnConfirmGeneric));
 		//bbb->SetOnClicked(FOnClicked::CreateSP(this, &AMyHUD::OnConfirmGeneric));
 		//bbb->SetOnClicked(BIND_UOBJECT_DELEGATE(FOnClicked, OnConfirmGeneric));
-		FOnClicked InOnClicked = FOnClicked::CreateUObject(this, &AMyHUD::OnConfirmGeneric);
-		bbb->SetOnClicked(InOnClicked);
+
+		//FOnClicked InOnClicked = FOnClicked::CreateUObject(this, &AMyHUD::OnConfirmGeneric);
+		//bbb->SetOnClicked(InOnClicked);
 	}
 
 	//NewWidget->AddToViewport();
