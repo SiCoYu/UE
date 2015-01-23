@@ -1,5 +1,5 @@
-﻿#ifndef _SINGLETON_H
-#define _SINGLETON_H
+﻿#ifndef __SINGLETON_H
+#define __SINGLETON_H
 
 template<class T>
 class Singleton
@@ -18,4 +18,4 @@ public:
 	}
 };
 
-#endif				// SINGLETON_H
+#endif				// __SINGLETON_H

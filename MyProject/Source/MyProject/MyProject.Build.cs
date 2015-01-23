@@ -9,6 +9,9 @@ public class MyProject : ModuleRules
         PrivateIncludePaths.AddRange(
             new string[] { 
 		        "MyProject/Private/UI/Widgets",
+                "MyProject/Private/Common/UICore",
+                "MyProject/Private/Game/FrameWork",
+                "MyProject/Private/Game/UI/UICore",
 	        }
         );
 
