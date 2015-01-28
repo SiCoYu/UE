@@ -1,7 +1,9 @@
 #ifndef __UIPACK_H
 #define __UIPACK_H
 
-class UIPack
+#include "UMGForm.h"
+
+class UIPack : public UMGForm
 {
 
 };

@@ -5,7 +5,11 @@
 
 class MyCtx : public Singleton<MyCtx>
 {
+protected:
+	IUIManager* m_uiMgr;
 
+public:
+	void initUIMgr(IUIManager* uiMgr);
 };
 
 #endif				// __MYCTX_H

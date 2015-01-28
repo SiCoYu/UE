@@ -12,6 +12,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Common/UICore",
                 "MyProject/Private/Game/FrameWork",
                 "MyProject/Private/Game/UI/UICore",
+                "MyProject/Private/Game/UI/UIInterActive/UIPack",
 	        }
         );
 

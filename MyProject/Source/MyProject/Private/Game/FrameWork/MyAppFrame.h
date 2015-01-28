@@ -3,7 +3,8 @@
 
 class MyAppFrame
 {
-
+public:
+	void initApp();
 };
 
 #endif				// __MYAPPFRAME_H
