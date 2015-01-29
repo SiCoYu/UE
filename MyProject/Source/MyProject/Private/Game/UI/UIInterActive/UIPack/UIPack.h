@@ -5,7 +5,10 @@
 
 class UIPack : public UMGForm
 {
-
+protected:
+	
+public:
+	UIPack();
 };
 
 #endif				// __UIPACK_H

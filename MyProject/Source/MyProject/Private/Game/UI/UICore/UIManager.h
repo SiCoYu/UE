@@ -3,8 +3,9 @@
 
 #include <map>
 #include "FormID.h"
+#include "IUIManager.h"
 
-class UIFormBase;
+class FormBase;
 class UIFactory;
 
 class UIManager : public IUIManager
@@ -15,7 +16,7 @@ protected:
 
 public:
 	UIManager();
-	FormBase* loadForm(FormID formID);
+	virtual FormBase* loadForm(FormID formID);
 };
 
 #endif				// __UIMANAGER_H

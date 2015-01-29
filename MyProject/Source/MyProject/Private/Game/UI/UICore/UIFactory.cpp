@@ -17,4 +17,6 @@ FormBase* UIFactory::createForm(FormID formID)
 			break;
 		}
 	}
+
+	return nullptr;
 }

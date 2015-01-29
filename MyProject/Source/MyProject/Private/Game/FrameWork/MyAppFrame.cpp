@@ -5,5 +5,9 @@
 
 void MyAppFrame::initApp()
 {
+	MyCtx::getSingletonPtr()->init();
 	MyCtx::getSingletonPtr()->initUIMgr(new UIManager());
+
+	// test
+	MyCtx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
 }
