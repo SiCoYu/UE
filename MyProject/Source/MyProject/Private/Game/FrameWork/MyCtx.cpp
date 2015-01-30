@@ -18,3 +18,13 @@ IUIManager* MyCtx::getUIMgr()
 {
 	return m_uiMgr;
 }
+
+void MyCtx::setGameInstance(UGameInstance* ins)
+{
+	m_uGameInstance = ins;
+}
+
+UGameInstance* MyCtx::getGameInstance()
+{
+	return m_uGameInstance;
+}

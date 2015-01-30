@@ -2,6 +2,8 @@
 
 #include "MyProject.h"
 #include "MyProjectCharacter.h"
+#include "MyCtx.h"
+#include "FormID.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMyProjectCharacter
@@ -125,4 +127,9 @@ void AMyProjectCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void AMyProjectCharacter::BeginPlay()
+{
+	MyCtx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
 }

@@ -21,7 +21,7 @@ AMyHUD::AMyHUD(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitia
 		TSubclassOf<class UUserWidget> WidgetClass = aaa.Class;
 		UUserWidget* PawnToFit = WidgetClass->GetDefaultObject<UUserWidget>();
 
-		NewWidget = Cast<UUserWidget>(StaticConstructObject(*WidgetClass));
+		//NewWidget = Cast<UUserWidget>(StaticConstructObject(*WidgetClass));
 		//NewWidget->AddToViewport();
 	}
 }
@@ -56,20 +56,20 @@ void AMyHUD::DrawHUD()
 
 		//NewWidget->AddToViewport();
 
-		TSharedPtr<SWidget> OutUserSlateWidget;
-		TSharedRef<SWidget> RootWidget = NewWidget->MakeViewportWidget(OutUserSlateWidget);
-		GEngine->GameViewport->AddViewportWidgetContent(RootWidget);
+		//TSharedPtr<SWidget> OutUserSlateWidget;
+		//TSharedRef<SWidget> RootWidget = NewWidget->MakeViewportWidget(OutUserSlateWidget);
+		//GEngine->GameViewport->AddViewportWidgetContent(RootWidget);
 		//UWidget* bbb = NewWidget->GetContentForSlot("aaa");
 		
 		//TSharedPtr<SButton> bbb = MakeShareable((SButton*)(NewWidget->GetSlateWidgetFromName("Button_16").Get()));
 
-		UButton* ccc = (UButton*)NewWidget->GetWidgetFromName("Button_19");
+		//UButton* ccc = (UButton*)NewWidget->GetWidgetFromName("Button_14");
 		//FWeakObjectPtr fff(this);
-		TScriptDelegate<FWeakObjectPtr> ddd;
+		//TScriptDelegate<FWeakObjectPtr> ddd;
 		//TScriptDelegate<AMyHUD> ddd;
 
-		ddd.BindUFunction((UObject *)this, "OnConfirmGeneric");
-		ccc->OnClicked.Add(ddd);
+		//ddd.BindUFunction((UObject *)this, "OnConfirmGeneric");
+		//ccc->OnClicked.Add(ddd);
 
 		//bbb->SetOnClicked(FOnClicked::CreateRaw(this, &AMyHUD::OnConfirmGeneric));
 		//bbb->SetOnClicked(FOnClicked::CreateSP(this, &AMyHUD::OnConfirmGeneric));

@@ -10,6 +10,8 @@ class UMGForm : public FormBase
 {
 protected:
 	UUserWidget* m_umgWidget;
+	//TSharedPtr<SWidget> m_outUserSlateWidget;
+	//TSharedRef<SWidget> m_rootWidget;
 
 protected:
 	void loadUWidget(const TCHAR* name);
