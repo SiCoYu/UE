@@ -3,7 +3,7 @@
 
 class FormBase
 {
-
+	FormBase();
 };
 
 #endif				// __FORMBASE_H

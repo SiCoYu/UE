@@ -5,16 +5,16 @@ template<class T>
 class Singleton
 {
 private:
-	static T* msSingleton;
+	static T* m_sSingleton;
 
 public:
 	static T* getSingletonPtr()
 	{
-		if(msSingleton == NULL)
+		if (m_sSingleton == NULL)
 		{
-			msSingleton = new T();
+			m_sSingleton = new T();
 		}
-		return msSingleton;
+		return m_sSingleton;
 	}
 };
 

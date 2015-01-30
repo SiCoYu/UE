@@ -4,6 +4,7 @@
 enum FormID
 {
 	eUIPack,		// ±³°ü
+	eUILog,			// ÈÕÖ¾
 	eUITotal
 };
 

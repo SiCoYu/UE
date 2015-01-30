@@ -3,7 +3,11 @@
 
 class FormAttrItem
 {
+public:
+	FormID m_formID;
 
+public:
+	FormAttrItem();
 };
 
 #endif				// __FORMATTRITEM_H

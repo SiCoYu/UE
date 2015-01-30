@@ -9,5 +9,5 @@ void MyAppFrame::initApp()
 	MyCtx::getSingletonPtr()->initUIMgr(new UIManager());
 
 	// test
-	MyCtx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
+	//MyCtx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
 }
