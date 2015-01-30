@@ -2,7 +2,7 @@
 
 #include "MyProject.h"
 #include "MyProjectCharacter.h"
-#include "MyCtx.h"
+#include "Ctx.h"
 #include "FormID.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -131,5 +131,5 @@ void AMyProjectCharacter::MoveRight(float Value)
 
 void AMyProjectCharacter::BeginPlay()
 {
-	MyCtx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
+	Ctx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
 }
