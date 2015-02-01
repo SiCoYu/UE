@@ -6,19 +6,27 @@
 
 class IUIManager;
 class UGameInstance;
+class EngineData;
+class IEngineApi;
 
 class Ctx : public Singleton<Ctx>
 {
 protected:
 	IUIManager* m_uiMgr;
-	UGameInstance* m_uGameInstance;
+	//UGameInstance* m_uGameInstance;
+	EngineData* m_engineData;
+	IEngineApi* m_engineApi;
 
 public:
 	void init();
-	void initUIMgr(IUIManager* uiMgr);
+	void setUIMgr(IUIManager* uiMgr);
 	IUIManager* getUIMgr();
-	void setGameInstance(UGameInstance* ins);
-	UGameInstance* getGameInstance();
+	//void setGameInstance(UGameInstance* ins);
+	//UGameInstance* getGameInstance();
+
+	EngineData* getEngineData();
+	IEngineApi* getEngineApi();
+	void setEngineApi(IEngineApi* engineApi);
 };
 
 #endif				// __CTX_H
