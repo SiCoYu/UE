@@ -1,18 +1,18 @@
 ﻿#include "MyProject.h"
 #include "MyProjectGameInstance.h"
 
-#include "MyAppFrame.h"
-//#include "MyCtx.h"
+#include "AppFrame.h"
+//#include "Ctx.h"
 
 UMyProjectGameInstance::UMyProjectGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	m_myAppFrame = new MyAppFrame();
+	m_appFrame = new AppFrame();
 }
 
 void UMyProjectGameInstance::Init()
 {
 	Super::Init();
-	//MyCtx::getSingletonPtr()->setGameInstance(this);
-	m_myAppFrame->initApp();
+	//Ctx::getSingletonPtr()->setGameInstance(this);
+	m_appFrame->initApp();
 }

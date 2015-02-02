@@ -1,6 +1,8 @@
 #ifndef __FORMATTRITEM_H
 #define __FORMATTRITEM_H
 
+enum FormID;
+
 class FormAttrItem
 {
 public:

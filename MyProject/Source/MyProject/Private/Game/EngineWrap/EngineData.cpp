@@ -6,7 +6,7 @@ void EngineData::setMainActor(UObject* actor)
 	m_mainActor = actor;
 }
 
-void EngineData::getMainActor()
+UObject* EngineData::getMainActor()
 {
 	return m_mainActor;
 }

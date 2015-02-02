@@ -5,9 +5,10 @@ public class MySockets : ModuleRules
 {
 	public MySockets(TargetInfo Target)
 	{
+        string selfProjectRpptPath = "E:/Self/Self/unreal/UE-GIT/UE/MyProject/Source/";
 		Type = ModuleType.External;
 
-		string SocketsPath = UEBuildConfiguration.UEThirdPartySourceDirectory + "Sockets/Sockets-2.3.9.9/";
+		string SocketsPath = selfProjectRpptPath + "Sockets/Sockets-2.3.9.9/";
 
 		PublicIncludePaths.Add(SocketsPath);
 

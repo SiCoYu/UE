@@ -1,6 +1,7 @@
 #include "MyProject.h"
 #include "UMGForm.h"
-#include "MyCtx.h"
+#include "Ctx.h"
+#include "IEngineApi.h"
 
 void UMGForm::loadUWidget(const TCHAR* name)
 {
@@ -9,6 +10,6 @@ void UMGForm::loadUWidget(const TCHAR* name)
 	{
 		//m_umgWidget = Cast<UUserWidget>(StaticConstructObject(widgetClass, GEngine->GameViewport->GetWorld()->GetGameInstance()));
 		//m_umgWidget = Cast<UUserWidget>(StaticConstructObject(widgetClass, MyCtx::getSingletonPtr()->getGameInstance()));
-		m_umgWidget = Cast<UUserWidget>(StaticConstructObject(widgetClass, MyCtx::getSingletonPtr()->getEngineApi()->getGameInstance()));
+		m_umgWidget = Cast<UUserWidget>(StaticConstructObject(widgetClass, Ctx::getSingletonPtr()->getEngineApi()->getGameInstance()));
 	}
 }

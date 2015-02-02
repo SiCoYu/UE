@@ -3,6 +3,7 @@
 
 class FormBase
 {
+public:
 	FormBase();
 };
 

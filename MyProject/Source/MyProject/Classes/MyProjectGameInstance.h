@@ -5,7 +5,7 @@
 #include "MyProject.h"
 #include "MyProjectGameInstance.generated.h"
 
-class MyAppFrame;
+class AppFrame;
 
 UCLASS(config=Game)
 class UMyProjectGameInstance : public UGameInstance
@@ -14,7 +14,7 @@ public:
 	GENERATED_UCLASS_BODY()
 
 protected:
-	MyAppFrame* m_myAppFrame;
+	AppFrame* m_appFrame;
 
 public:
 	virtual void Init() override;

@@ -3,7 +3,7 @@
 #include "EngineData.h"
 
 // Æ«ÌØ»¯
-template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
+template<> Ctx* Ctx::Singleton<Ctx>::m_sSingleton = 0;
 
 void Ctx::init()
 {
