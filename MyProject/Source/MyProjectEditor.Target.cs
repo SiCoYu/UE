@@ -21,6 +21,5 @@ public class MyProjectEditorTarget : TargetRules
 		)
 	{
 		OutExtraModuleNames.Add("MyProject");
-        OutExtraModuleNames.Add("Sockets");
 	}
 }
