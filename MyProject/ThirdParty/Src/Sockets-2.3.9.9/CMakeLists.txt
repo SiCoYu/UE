@@ -210,79 +210,82 @@ if(WIN32)
     ADD_LIBRARY(Sockets STATIC ${SRCS} ${INCS})
 	set_target_properties(Sockets PROPERTIES DEBUG_POSTFIX _d)
 	
-	file(REMOVE_RECURSE "${CMAKE_SOURCE_DIR}/../../Inc/${CMAKE_PROJECT_NAME}")
-	file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/../../Inc/${CMAKE_PROJECT_NAME}")
+	file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}")
+	file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}")
+	
+	message(STATUS "aaa ${CMAKE_LIBRARY_ARCHITECTURE}")
+	message(STATUS "bbb ${CMAKE_BUILD_TYPE}")
 	
 	install(FILES 
-		${CMAKE_SOURCE_DIR}/ajp13.h
-		${CMAKE_SOURCE_DIR}/Ajp13Socket.h
-		${CMAKE_SOURCE_DIR}/AjpBaseSocket.h
-		${CMAKE_SOURCE_DIR}/Base64.h
-		${CMAKE_SOURCE_DIR}/Debug.h
-		${CMAKE_SOURCE_DIR}/Event.h
-		${CMAKE_SOURCE_DIR}/EventHandler.h
-		${CMAKE_SOURCE_DIR}/EventTime.h
-		${CMAKE_SOURCE_DIR}/Exception.h
-		${CMAKE_SOURCE_DIR}/File.h
-		${CMAKE_SOURCE_DIR}/FileStream.h
-		${CMAKE_SOURCE_DIR}/HttpBaseSocket.h
-		${CMAKE_SOURCE_DIR}/HttpClientSocket.h
-		${CMAKE_SOURCE_DIR}/HttpdCookies.h
-		${CMAKE_SOURCE_DIR}/HttpDebugSocket.h
-		${CMAKE_SOURCE_DIR}/HttpdForm.h
-		${CMAKE_SOURCE_DIR}/HttpdSocket.h
-		${CMAKE_SOURCE_DIR}/HttpGetSocket.h
-		${CMAKE_SOURCE_DIR}/HttpPostSocket.h
-		${CMAKE_SOURCE_DIR}/HttpPutSocket.h
-		${CMAKE_SOURCE_DIR}/HttpRequest.h
-		${CMAKE_SOURCE_DIR}/HttpResponse.h
-		${CMAKE_SOURCE_DIR}/HTTPSocket.h
-		${CMAKE_SOURCE_DIR}/HttpTransaction.h
-		${CMAKE_SOURCE_DIR}/IBase.h
-		${CMAKE_SOURCE_DIR}/IEventHandler.h
-		${CMAKE_SOURCE_DIR}/IEventOwner.h
-		${CMAKE_SOURCE_DIR}/IFile.h
-		${CMAKE_SOURCE_DIR}/IFileUpload.h
-		${CMAKE_SOURCE_DIR}/IHttpServer.h
-		${CMAKE_SOURCE_DIR}/IModel.h
-		${CMAKE_SOURCE_DIR}/IMutex.h
-		${CMAKE_SOURCE_DIR}/Ipv4Address.h
-		${CMAKE_SOURCE_DIR}/Ipv6Address.h
-		${CMAKE_SOURCE_DIR}/ISocketHandler.h
-		${CMAKE_SOURCE_DIR}/IStream.h
-		${CMAKE_SOURCE_DIR}/Json.h
-		${CMAKE_SOURCE_DIR}/ListenSocket.h
-		${CMAKE_SOURCE_DIR}/Lock.h
-		${CMAKE_SOURCE_DIR}/MemFile.h
-		${CMAKE_SOURCE_DIR}/Mutex.h
-		${CMAKE_SOURCE_DIR}/Parse.h
-		${CMAKE_SOURCE_DIR}/ResolvServer.h
-		${CMAKE_SOURCE_DIR}/ResolvSocket.h
-		${CMAKE_SOURCE_DIR}/SctpSocket.h
-		${CMAKE_SOURCE_DIR}/Semaphore.h
-		${CMAKE_SOURCE_DIR}/SmtpdSocket.h
-		${CMAKE_SOURCE_DIR}/Socket.h
-		${CMAKE_SOURCE_DIR}/SocketAddress.h
-		${CMAKE_SOURCE_DIR}/SocketHandler.h
-		${CMAKE_SOURCE_DIR}/SocketHandlerEp.h
-		${CMAKE_SOURCE_DIR}/SocketHandlerThread.h
-		${CMAKE_SOURCE_DIR}/sockets-config.h
-		${CMAKE_SOURCE_DIR}/SocketStream.h
-		${CMAKE_SOURCE_DIR}/SocketThread.h
-		${CMAKE_SOURCE_DIR}/socket_include.h
-		${CMAKE_SOURCE_DIR}/SSLInitializer.h
-		${CMAKE_SOURCE_DIR}/StdLog.h
-		${CMAKE_SOURCE_DIR}/StdoutLog.h
-		${CMAKE_SOURCE_DIR}/StreamSocket.h
-		${CMAKE_SOURCE_DIR}/StreamWriter.h
-		${CMAKE_SOURCE_DIR}/TcpSocket.h
-		${CMAKE_SOURCE_DIR}/Thread.h
-		${CMAKE_SOURCE_DIR}/UdpSocket.h
-		${CMAKE_SOURCE_DIR}/Utility.h
-		${CMAKE_SOURCE_DIR}/XmlDocument.h
-		${CMAKE_SOURCE_DIR}/XmlException.h
-		${CMAKE_SOURCE_DIR}/XmlNode.h
-		DESTINATION "${CMAKE_SOURCE_DIR}/../../Inc/${CMAKE_PROJECT_NAME}"
+		${CMAKE_CURRENT_SOURCE_DIR}/ajp13.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Ajp13Socket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/AjpBaseSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Base64.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Debug.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Event.h
+		${CMAKE_CURRENT_SOURCE_DIR}/EventHandler.h
+		${CMAKE_CURRENT_SOURCE_DIR}/EventTime.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Exception.h
+		${CMAKE_CURRENT_SOURCE_DIR}/File.h
+		${CMAKE_CURRENT_SOURCE_DIR}/FileStream.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpBaseSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpClientSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpdCookies.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpDebugSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpdForm.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpdSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpGetSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpPostSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpPutSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpRequest.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpResponse.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HTTPSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/HttpTransaction.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IBase.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IEventHandler.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IEventOwner.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IFile.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IFileUpload.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IHttpServer.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IModel.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IMutex.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Ipv4Address.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Ipv6Address.h
+		${CMAKE_CURRENT_SOURCE_DIR}/ISocketHandler.h
+		${CMAKE_CURRENT_SOURCE_DIR}/IStream.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Json.h
+		${CMAKE_CURRENT_SOURCE_DIR}/ListenSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Lock.h
+		${CMAKE_CURRENT_SOURCE_DIR}/MemFile.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Mutex.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Parse.h
+		${CMAKE_CURRENT_SOURCE_DIR}/ResolvServer.h
+		${CMAKE_CURRENT_SOURCE_DIR}/ResolvSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SctpSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Semaphore.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SmtpdSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Socket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SocketAddress.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SocketHandler.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SocketHandlerEp.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SocketHandlerThread.h
+		${CMAKE_CURRENT_SOURCE_DIR}/sockets-config.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SocketStream.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SocketThread.h
+		${CMAKE_CURRENT_SOURCE_DIR}/socket_include.h
+		${CMAKE_CURRENT_SOURCE_DIR}/SSLInitializer.h
+		${CMAKE_CURRENT_SOURCE_DIR}/StdLog.h
+		${CMAKE_CURRENT_SOURCE_DIR}/StdoutLog.h
+		${CMAKE_CURRENT_SOURCE_DIR}/StreamSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/StreamWriter.h
+		${CMAKE_CURRENT_SOURCE_DIR}/TcpSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Thread.h
+		${CMAKE_CURRENT_SOURCE_DIR}/UdpSocket.h
+		${CMAKE_CURRENT_SOURCE_DIR}/Utility.h
+		${CMAKE_CURRENT_SOURCE_DIR}/XmlDocument.h
+		${CMAKE_CURRENT_SOURCE_DIR}/XmlException.h
+		${CMAKE_CURRENT_SOURCE_DIR}/XmlNode.h
+		DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}"
 	)
 	
 endif(WIN32)
