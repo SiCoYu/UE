@@ -7,10 +7,13 @@ public class MyProject : ModuleRules
 	public MyProject(TargetInfo Target)
 	{
         PrivateIncludePaths.AddRange(
-            new string[] { 
-		        "MyProject/Private/UI/Widgets",
-                "MyProject/Private/Common/UICore",
+            new string[] {
+                "MyProject/Private/Game/DataStruct",
+                "MyProject/Private/Game/EngineWrap",
                 "MyProject/Private/Game/FrameWork",
+                "MyProject/Private/Game/Socket",
+
+                "MyProject/Private/UI/Widgets",
                 "MyProject/Private/Game/UI/UICore",
                 "MyProject/Private/Game/UI/UIInterActive/UIPack",
 	        }
@@ -26,7 +29,7 @@ public class MyProject : ModuleRules
 			}
         );
 
-        MinFilesUsingPrecompiledHeaderOverride = 1;
+        //MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;
 	}
 }
