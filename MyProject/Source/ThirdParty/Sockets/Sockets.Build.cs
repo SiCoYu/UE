@@ -14,7 +14,7 @@ public class Sockets : ModuleRules
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
 			PublicLibraryPaths.Add(SocketsPath + "Lib/Win64");
-			PublicAdditionalLibraries.Add("zlib_64.lib");
+			PublicAdditionalLibraries.Add("Sockets.lib");
 		}
     }
 }
