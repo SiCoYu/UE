@@ -1,9 +1,9 @@
 ﻿// Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 using UnrealBuildTool;
 
-public class Sockets : ModuleRules
+public class MySockets : ModuleRules
 {
-	public Sockets(TargetInfo Target)
+	public MySockets(TargetInfo Target)
 	{
 		Type = ModuleType.External;
 

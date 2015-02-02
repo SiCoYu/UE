@@ -1,4 +1,7 @@
-class CircularBuffer
+#ifndef __CIRCULARBUFFER_H
+#define __CIRCULARBUFFER_H
+
+class RingBuffer
 {
 //private:
 //	//! The internal buffer used for storing elements in the circular buffer.
@@ -2500,4 +2503,6 @@ class CircularBuffer
 //template <class T, class Alloc>
 //inline void swap(circular_buffer<T, Alloc>& lhs, circular_buffer<T, Alloc>& rhs) BOOST_NOEXCEPT{
 //	lhs.swap(rhs);
-}
+};
+
+#endif				// __CIRCULARBUFFER_H

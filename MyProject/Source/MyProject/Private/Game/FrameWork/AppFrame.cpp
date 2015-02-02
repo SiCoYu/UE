@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "MyAppFrame.h"
+#include "AppFrame.h"
 #include "UIManager.h"
 #include "Ctx.h"
 #include "EngineApi.h"
