@@ -1,6 +1,7 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using System.IO;
 
 public class MyProject : ModuleRules
 {
@@ -29,16 +30,17 @@ public class MyProject : ModuleRules
 			}
         );
 
-        //MinFilesUsingPrecompiledHeaderOverride = 1;
-        bFasterWithoutUnity = true;
+        PublicIncludePaths.AddRange(
+            new string[] {
+                // ... add public include paths required here ...
+                Path.Combine(ThirdPartyPath, "Inc"),
+            }
+        );
 
-		
-        //PublicIncludePaths.AddRange(
-        //    new string[] {
-        //        // ... add public include paths required here ...
-        //        Path.Combine(ThirdPartyPath, "v8", "include"),
-        //    }
-        //);
+        Definitions.Add("WIN32_LEAN_AND_MEAN");
+
+        MinFilesUsingPrecompiledHeaderOverride = 1;
+        bFasterWithoutUnity = true;
 
         //PrivateIncludePaths.AddRange(
         //    new string[] {
@@ -71,67 +73,80 @@ public class MyProject : ModuleRules
         //    }
         //);
 		
-        //LoadV8(Target);
-        //}
-
-        ///// <summary>
-        ///// Accessor for the Module's path
-        ///// </summary>
-        //protected string ModulePath
-        //{
-        //    get 
-        //    { 
-        //        return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name));
-        //    }
-        //}
-	
-        ///// <summary>
-        ///// Accessor for thee ThirdParty Path.
-        ///// </summary>
-        //protected string ThirdPartyPath
-        //{
-        //    get 
-        //    { 
-        //        return Path.GetFullPath(Path.Combine(ModulePath, "..", "..", "ThirdParty"));
-        //    }
-        //}
-
-        //private bool LoadV8(TargetInfo Target)
-        //{
-        //    if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
-        //    {
-        //        string PlatformString;
-        //        string LibrariesPath = Path.Combine(ThirdPartyPath, "v8", "lib");
-
-        //        if (Target.Platform == UnrealTargetPlatform.Win64)
-        //        {
-        //            PlatformString = "x64";
-        //            LibrariesPath = Path.Combine(LibrariesPath, "Win64");
-        //        }
-        //        else
-        //        {
-        //            PlatformString = "ia32";
-        //            LibrariesPath = Path.Combine(LibrariesPath, "Win32");
-        //        }
-
-        //        LibrariesPath = Path.Combine(LibrariesPath, "Debug");
-
-        //        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "icui18n.lib"));
-        //        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "icuuc.lib"));
-        //        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_base.lib"));
-        //        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_libbase.lib"));
-        //        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_nosnapshot.lib"));
-        //        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_snapshot.lib"));
-
-        //        PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "v8", "Includes"));
-
-        //        Definitions.Add(string.Format("WITH_COUPLING=1"));
-
-        //        return true;
-        //    }
-
-        //    Definitions.Add(string.Format("WITH_COUPLING=0"));
-        //    return false;
-        //}
+        LoadSockets(Target);
 	}
+
+    /// <summary>
+    /// Accessor for the Module's path
+    /// </summary>
+    protected string ModulePath
+    {
+        get
+        {
+            return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name));
+        }
+    }
+
+    /// <summary>
+    /// Accessor for thee ThirdParty Path.
+    /// </summary>
+    protected string ThirdPartyPath
+    {
+        get
+        {
+            return Path.GetFullPath(Path.Combine(ModulePath, "..", "..", "ThirdParty"));
+        }
+    }
+
+    private bool LoadSockets(TargetInfo Target)
+    {
+        if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+        {
+            string PlatformString;
+            string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets");
+
+            if (Target.Platform == UnrealTargetPlatform.Win64)
+            {
+                //PlatformString = "x64";
+                //LibrariesPath = Path.Combine(LibrariesPath, "Win64");
+
+                if (Target.Configuration == UnrealTargetConfiguration.Debug)
+                {
+                    LibrariesPath = Path.Combine(LibrariesPath, "Debug");
+                }
+            }
+            else
+            {
+                //PlatformString = "ia32";
+                //LibrariesPath = Path.Combine(LibrariesPath, "Win32");
+            }
+
+            //LibrariesPath = Path.Combine(LibrariesPath, "Debug");
+
+            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "icui18n.lib"));
+            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "icuuc.lib"));
+            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_base.lib"));
+            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_libbase.lib"));
+            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_nosnapshot.lib"));
+            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_snapshot.lib"));
+
+            //PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "v8", "Includes"));
+
+            //Definitions.Add(string.Format("WITH_COUPLING=1"));
+
+            if (Target.Configuration == UnrealTargetConfiguration.Debug)
+            {
+                PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets_d.lib"));
+            }
+            else
+            {
+                PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets.lib"));
+            }
+
+            return true;
+        }
+
+        //Definitions.Add(string.Format("WITH_COUPLING=0"));
+        return false;
+    }
 }
