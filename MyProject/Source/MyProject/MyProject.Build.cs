@@ -30,13 +30,6 @@ public class MyProject : ModuleRules
 			}
         );
 
-        PublicIncludePaths.AddRange(
-            new string[] {
-                // ... add public include paths required here ...
-                Path.Combine(ThirdPartyPath, "Inc"),
-            }
-        );
-
         Definitions.Add("WIN32_LEAN_AND_MEAN");
 
         MinFilesUsingPrecompiledHeaderOverride = 1;
@@ -72,8 +65,10 @@ public class MyProject : ModuleRules
         //        // ... add any modules that your module loads dynamically here ...
         //    }
         //);
-		
-        LoadSockets(Target);
+
+        loadThirdPartyInclude();
+        //LoadSockets(Target);
+        LoadTestExtern(Target);
 	}
 
     /// <summary>
@@ -96,6 +91,17 @@ public class MyProject : ModuleRules
         {
             return Path.GetFullPath(Path.Combine(ModulePath, "..", "..", "ThirdParty"));
         }
+    }
+
+    private bool loadThirdPartyInclude()
+    {
+        PublicIncludePaths.AddRange(
+            new string[] 
+            {
+                // ... add public include paths required here ...
+                Path.Combine(ThirdPartyPath, "Inc"),
+            }
+        );
     }
 
     private bool LoadSockets(TargetInfo Target)
@@ -148,5 +154,13 @@ public class MyProject : ModuleRules
 
         //Definitions.Add(string.Format("WITH_COUPLING=0"));
         return false;
+    }
+
+    private bool LoadTestExtern(TargetInfo Target)
+    {
+        string PlatformString;
+        string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "Debug", "TestStaticLib_d.lib");
+
+        PublicAdditionalLibraries.Add(LibrariesPath);
     }
 }

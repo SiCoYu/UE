@@ -19,3 +19,4 @@ if(MSVC)
 endif(MSVC)
 
 add_subdirectory(Sockets-2.3.9.9)
+add_subdirectory(TestStaticLib)
