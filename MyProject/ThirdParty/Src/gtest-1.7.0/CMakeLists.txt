@@ -250,3 +250,28 @@ if (gtest_build_tests)
   cxx_executable(gtest_xml_output_unittest_ test gtest)
   py_test(gtest_xml_output_unittest)
 endif()
+
+file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}")
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/gtest DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc")
+
+file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}")
+
+install(FILES 
+	${gtest_BINARY_DIR}/Debug/gtest_d.lib
+	DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}" CONFIGURATIONS Debug
+)
+install(FILES 
+	${gtest_BINARY_DIR}/Release/gtest.lib
+	DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}" CONFIGURATIONS Release None ""
+)
+install(FILES 
+	${gtest_BINARY_DIR}/RelWithDebInfo/gtest.lib
+	DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}" CONFIGURATIONS RelWithDebInfo
+)
+install(FILES 
+	${gtest_BINARY_DIR}/MinSizeRel/gtest.lib
+	DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}" CONFIGURATIONS MinSizeRel
+)
