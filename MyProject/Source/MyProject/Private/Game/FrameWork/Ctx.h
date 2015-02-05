@@ -9,7 +9,7 @@ class UGameInstance;
 class EngineData;
 class IEngineApi;
 
-class TestExtern;
+class Test;
 
 class Ctx : public Singleton<Ctx>
 {
@@ -19,7 +19,7 @@ protected:
 	EngineData* m_engineData;
 	IEngineApi* m_engineApi;
 
-	TestExtern* m_testExtern;
+	Test* m_test;
 
 public:
 	void init();

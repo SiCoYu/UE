@@ -1,52 +1,52 @@
 #include "MyProject.h"
 #include "NetMgr.h"
 
-//NetMgr::NetMgr(StdLog *p)
-//	: SocketHandler(p), m_done(false), m_quit(false) 
-//{
-//
-//}
-//NetMgr::~NetMgr() 
-//{
-//
-//}
-//
-//void NetMgr::List(TcpSocket *p) 
-//{
-//	for (socket_m::iterator it = m_sockets.begin(); it != m_sockets.end(); it++)
-//	{
-//		Socket *p0 = (*it).second;
-//		//if (dynamic_cast<TcpSocket *>(p0))
-//		//{
-//		//	p->Send("TcpSocket\n");
-//		//}
-//		//else
-//		//{
-//		//	p->Send("Some kind of Socket\n");
-//		//}
-//	}
-//}
-//void NetMgr::SetQuit() 
-//{ 
-//	m_quit = true; 
-//}
-//
-//bool NetMgr::Quit() 
-//{ 
-//	return m_quit; 
-//}
-//
-//void NetMgr::CheckHtml() 
-//{
-//	if (m_done)
-//	{
-//		if (m_ok)
-//			printf("Html OK:\n%s\n", m_html.c_str());
-//		else
-//			printf("Html Failed\n");
-//		m_done = false;
-//	}
-//}
+NetMgr::NetMgr(StdLog *p)
+	: SocketHandler(p), m_done(false), m_quit(false) 
+{
+
+}
+NetMgr::~NetMgr() 
+{
+
+}
+
+void NetMgr::List(TcpSocket *p) 
+{
+	for (socket_m::iterator it = m_sockets.begin(); it != m_sockets.end(); it++)
+	{
+		Socket *p0 = (*it).second;
+		//if (dynamic_cast<TcpSocket *>(p0))
+		//{
+		//	p->Send("TcpSocket\n");
+		//}
+		//else
+		//{
+		//	p->Send("Some kind of Socket\n");
+		//}
+	}
+}
+void NetMgr::SetQuit() 
+{ 
+	m_quit = true; 
+}
+
+bool NetMgr::Quit() 
+{ 
+	return m_quit; 
+}
+
+void NetMgr::CheckHtml() 
+{
+	if (m_done)
+	{
+		if (m_ok)
+			printf("Html OK:\n%s\n", m_html.c_str());
+		else
+			printf("Html Failed\n");
+		m_done = false;
+	}
+}
 
 //int main()
 //{

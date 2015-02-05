@@ -33,6 +33,7 @@ public class MyProject : ModuleRules
         );
 
         Definitions.Add("WIN32_LEAN_AND_MEAN");
+        Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
 
         MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;
@@ -69,7 +70,7 @@ public class MyProject : ModuleRules
         //);
 
         loadThirdPartyInclude();
-        //LoadSockets(Target);
+        LoadSockets(Target);
         LoadTestExtern(Target);
 	}
 
@@ -106,7 +107,7 @@ public class MyProject : ModuleRules
         );
     }
 
-    private bool LoadSockets(TargetInfo Target)
+    private bool LoadSockets_bak(TargetInfo Target)
     {
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
@@ -144,7 +145,7 @@ public class MyProject : ModuleRules
 
             if (Target.Configuration == UnrealTargetConfiguration.Debug)
             {
-                PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets_d.lib"));
+                PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets.lib"));
             }
             else
             {
@@ -156,6 +157,16 @@ public class MyProject : ModuleRules
 
         //Definitions.Add(string.Format("WITH_COUPLING=0"));
         return false;
+    }
+
+    private bool LoadSockets(TargetInfo Target)
+    {
+        string PlatformString;
+        string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets", "Release", "Sockets.lib");
+
+        PublicAdditionalLibraries.Add(LibrariesPath);
+
+        return true;
     }
 
     private bool LoadTestExtern(TargetInfo Target)
