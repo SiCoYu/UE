@@ -2,12 +2,15 @@
 #include "Ctx.h"
 #include "EngineData.h"
 
+#include "TestExtern.h"
+
 // Æ«ÌØ»¯
 template<> Ctx* Ctx::Singleton<Ctx>::m_sSingleton = 0;
 
 void Ctx::init()
 {
 	m_engineData = new EngineData();
+	m_testExtern = new TestExtern();
 }
 
 void Ctx::setUIMgr(IUIManager* uiMgr)
