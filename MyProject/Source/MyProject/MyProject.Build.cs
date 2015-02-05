@@ -93,7 +93,7 @@ public class MyProject : ModuleRules
         }
     }
 
-    private bool loadThirdPartyInclude()
+    private void loadThirdPartyInclude()
     {
         PublicIncludePaths.AddRange(
             new string[] 
@@ -162,5 +162,7 @@ public class MyProject : ModuleRules
         string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "Debug", "TestStaticLib_d.lib");
 
         PublicAdditionalLibraries.Add(LibrariesPath);
+
+        return true;
     }
 }

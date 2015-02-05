@@ -22,4 +22,17 @@ public class MyProjectEditorTarget : TargetRules
 	{
 		OutExtraModuleNames.Add("MyProject");
 	}
+
+    public override void SetupGlobalEnvironment(
+        TargetInfo Target,
+        ref LinkEnvironmentConfiguration OutLinkEnvironmentConfiguration,
+        ref CPPEnvironmentConfiguration OutCPPEnvironmentConfiguration
+        )
+    {
+        OutCPPEnvironmentConfiguration.bUseRTTI = true;
+        //OutCPPEnvironmentConfiguration.bUseStaticCRT = false;
+
+        //OutCPPEnvironmentConfiguration.Target.Configuration = CPPTargetConfiguration.Debug;
+        //BuildConfiguration.bDebugBuildsActuallyUseDebugCRT = true;
+    }
 }

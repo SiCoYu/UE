@@ -17,6 +17,7 @@ protected:
 	EngineData* m_engineData;
 	IEngineApi* m_engineApi;
 
+
 public:
 	void init();
 	void setUIMgr(IUIManager* uiMgr);

@@ -8,6 +8,8 @@
 //#include <Sockets/TcpSocket.h>
 //#include <iostream>
 //
+//#include "Windows/HideWindowsPlatformTypes.h"
+//
 //#ifdef SOCKETS_NAMESPACE
 //using namespace SOCKETS_NAMESPACE;
 //#endif

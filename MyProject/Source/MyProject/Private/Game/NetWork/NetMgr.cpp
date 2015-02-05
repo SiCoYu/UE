@@ -16,26 +16,14 @@
 //	for (socket_m::iterator it = m_sockets.begin(); it != m_sockets.end(); it++)
 //	{
 //		Socket *p0 = (*it).second;
-//#ifdef ENABLE_POOL
-//		if (dynamic_cast<ISocketHandler::PoolSocket *>(p0))
-//		{
-//			p->Send("PoolSocket\n");
-//		}
-//		else
-//#endif
-//			if (dynamic_cast<HttpGetSocket *>(p0))
-//			{
-//				p->Send("HttpGetSocket\n");
-//			}
-//			else
-//				if (dynamic_cast<TcpSocket *>(p0))
-//				{
-//					p->Send("TcpSocket\n");
-//				}
-//				else
-//				{
-//					p->Send("Some kind of Socket\n");
-//				}
+//		//if (dynamic_cast<TcpSocket *>(p0))
+//		//{
+//		//	p->Send("TcpSocket\n");
+//		//}
+//		//else
+//		//{
+//		//	p->Send("Some kind of Socket\n");
+//		//}
 //	}
 //}
 //void NetMgr::SetQuit() 
