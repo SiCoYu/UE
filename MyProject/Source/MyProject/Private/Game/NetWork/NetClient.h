@@ -15,15 +15,15 @@ using namespace SOCKETS_NAMESPACE;
 
 class NetClient : public TcpSocket
 {
+protected:
+	NetBuffer* m_pNetBuffer;
+
 public:
 	NetClient(ISocketHandler& h);
-	void OnConnect();
-	void OnConnectFailed();
-	void OnLine(const std::string& line);
-	void OnDelete();
-#ifdef ENABLE_RESOLVER
-	void OnResolved(int id, ipaddr_t a, port_t port);
-#endif
+	virtual void OnConnect();
+	virtual void OnConnectFailed();
+	virtual void OnRawData(const char *buf, size_t len);
+	virtual void OnDelete();
 };
 
 #endif				// __NETCLIENT_H
