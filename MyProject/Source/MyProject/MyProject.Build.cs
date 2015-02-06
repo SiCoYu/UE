@@ -162,7 +162,7 @@ public class MyProject : ModuleRules
     private bool LoadSockets(TargetInfo Target)
     {
         string PlatformString;
-        string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets", "Release", "Sockets.lib");
+        string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets", "Sockets.lib");
 
         PublicAdditionalLibraries.Add(LibrariesPath);
 
@@ -172,7 +172,7 @@ public class MyProject : ModuleRules
     private bool LoadTestExtern(TargetInfo Target)
     {
         string PlatformString;
-        string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "Debug", "TestStaticLib_d.lib");
+        string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "TestStaticLib.lib");
 
         PublicAdditionalLibraries.Add(LibrariesPath);
 

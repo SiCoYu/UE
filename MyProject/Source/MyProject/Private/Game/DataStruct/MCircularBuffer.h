@@ -33,14 +33,14 @@ private:
 };
 
 template <typename T, int N>
-MCircularBuffer<T, N>::CircularBuffer() :
+MCircularBuffer<T, N>::MCircularBuffer() :
 head(0),
 tail(0)
 {
 }
 
 template <typename T, int N>
-MCircularBuffer<T, N>::CircularBuffer(T initial_value) :
+MCircularBuffer<T, N>::MCircularBuffer(T initial_value) :
 head(0),
 tail(0)
 {
