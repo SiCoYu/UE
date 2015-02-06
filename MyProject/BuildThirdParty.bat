@@ -1,4 +1,5 @@
-echo on
+:: echo on
+@echo off
 set base_dir=%~dp0
 %base_dir:~0,2%
 
@@ -11,11 +12,15 @@ if exist %base_dir%BatPath.bat call %base_dir%BatPath.bat
 if defined CMAKEPATH (
 	%CMAKEPATH% -G "Visual Studio 12 2013" -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo %base_dir%ThirdParty\Src
 ) else (
-	echo CMAKEPATH not define
+	echo Error CMAKEPATH not define
 )
 
 cd %base_dir%
 
-start "" %base_dir%ThirdParty\Src\build\ThirdParty.sln
+if exist %base_dir%ThirdParty\Src\build\ThirdParty.sln (
+	start "" %base_dir%ThirdParty\Src\build\ThirdParty.sln
+) else (
+	echo Error %base_dir%ThirdParty\Src\build\ThirdParty.sln not exist
+)
 
 pause
