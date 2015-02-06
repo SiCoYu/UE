@@ -12,8 +12,6 @@ public:
 	//bool is_linearized();
 	//void rotate();
 	//size_t size(){ return m_size; }
-	//bool empty(){ return size() == 0; }
-	//bool full(){ return capacity() == size(); }
 	//size_t reserve(){ return capacity() - size(); }
 	//size_t capacity(){ return m_end - m_buff; }
 	//void set_capacity(size_t new_capacity);
@@ -25,8 +23,8 @@ public:
 	bool push(T item);
 	void pop();
 	T front();
-	bool is_full();
-	bool is_empty();
+	bool full();
+	bool empty();
 private:
 	T storage[N + 1];
 	std::size_t head, tail;
@@ -85,13 +83,13 @@ T MCircularBuffer<T, N>::front()
 }
 
 template <typename T, int N>
-bool MCircularBuffer<T, N>::is_full()
+bool MCircularBuffer<T, N>::full()
 {
 	return (tail == N);
 }
 
 template <typename T, int N>
-bool MCircularBuffer<T, N>::is_empty()
+bool MCircularBuffer<T, N>::empty()
 {
 	return (head == tail);
 }
