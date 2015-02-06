@@ -3,95 +3,35 @@
 
 #include <cstddef>
 #include <iostream>
+#include <vector>
 
-template <typename T, int N>
 class MCircularBuffer
 {
 public:
-	//void linearize();
-	//bool is_linearized();
-	//void rotate();
-	//size_t size(){ return m_size; }
-	//size_t reserve(){ return capacity() - size(); }
-	//size_t capacity(){ return m_end - m_buff; }
-	//void set_capacity(size_t new_capacity);
-	//void resize(size_t new_size);
-public:
 	MCircularBuffer();
-	MCircularBuffer(T initial_value);
-	std::size_t count();
-	bool push(T item);
-	void pop();
-	T front();
+	std::size_t size();
 	bool full();
 	bool empty();
+	void linearize();
+	bool isLinearized();
+	size_t capacity();
+	void setCapacity(size_t newCapacity);
+	bool canAddData(uint num);
+
+	void pushBack(char* pItem, std::size_t startPos, std::size_t len);
+	bool pushFront(char* pItem, std::size_t startPos, std::size_t len);
+	bool popBack(char* pItem, std::size_t startPos, std::size_t len);
+	char back(char* pItem, std::size_t startPos, std::size_t len);
+	bool popFront(char* pItem, std::size_t startPos, std::size_t len);
+	char front(char* pItem, std::size_t startPos, std::size_t len);
+
+protected:
+	bool canAddData(uint32 num);
+
 private:
-	T storage[N + 1];
-	std::size_t head, tail;
+	char* m_storage;
+	std::size_t m_head, m_tail, m_size, m_iCapacity;
 };
 
-template <typename T, int N>
-MCircularBuffer<T, N>::MCircularBuffer() :
-head(0),
-tail(0)
-{
-}
-
-template <typename T, int N>
-MCircularBuffer<T, N>::MCircularBuffer(T initial_value) :
-head(0),
-tail(0)
-{
-	for (int i = 0; i < N; ++i) {
-		storage[i] = initial_value;
-	}
-}
-
-template <typename T, int N>
-std::size_t MCircularBuffer<T, N>::count()
-{
-	if (this->is_full()) {
-		return N;
-	}
-	else {
-		return tail - head;
-	}
-}
-
-template <typename T, int N>
-bool MCircularBuffer<T, N>::push(T item)
-{
-	if (this->is_full()) {
-		return false;
-	}
-	storage[tail++] = item;
-	return true;
-}
-
-template <typename T, int N>
-void MCircularBuffer<T, N>::pop()
-{
-	if (!this->is_empty()) {
-		++head;
-	}
-}
-
-template <typename T, int N>
-T MCircularBuffer<T, N>::front()
-{
-	return storage[head];
-}
-
-template <typename T, int N>
-bool MCircularBuffer<T, N>::full()
-{
-	return (tail == N);
-}
-
-template <typename T, int N>
-bool MCircularBuffer<T, N>::empty()
-{
-	return (head == tail);
-}
 
 #endif				// __CIRCULARBUFFER_H
