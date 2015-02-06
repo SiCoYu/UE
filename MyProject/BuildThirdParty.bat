@@ -10,7 +10,7 @@ cd %base_dir%ThirdParty\Src\build
 
 if exist %base_dir%BatPath.bat call %base_dir%BatPath.bat
 if defined CMAKEPATH (
-	%CMAKEPATH% -G "Visual Studio 12 2013" -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo %base_dir%ThirdParty\Src
+	%CMAKEPATH% -G "Visual Studio 12 2013 Win64" -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo %base_dir%ThirdParty\Src
 ) else (
 	echo set CMAKEPATH="D:\Program Files (x86)\cmake-3.1.0-win32-x86\bin\cmake.exe" > %base_dir%BatPath.bat
 	echo Error CMAKEPATH not define
