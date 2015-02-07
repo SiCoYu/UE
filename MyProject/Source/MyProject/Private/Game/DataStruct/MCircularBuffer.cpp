@@ -12,6 +12,11 @@ MCircularBuffe::MCircularBuffer()
 	m_storage = new char[INITCAPACITY];
 }
 
+MCircularBuffe::~MCircularBuffer()
+{
+	delete[] m_storage;
+}
+
 std::size_t MCircularBuffer::size()
 {
 	return m_size;
@@ -164,10 +169,7 @@ bool MCircularBuffer::popBack(char* pItem, std::size_t startPos, std::size_t len
 {
 	if (back(pItem, startPos, len))
 	{
-		m_tail -= len;
-		m_tail += m_iCapacity;
-		m_tail %= m_iCapacity;
-		m_size -= len;
+		popBackLenNoData(len);
 	}
 }
 
@@ -199,6 +201,14 @@ char MCircularBuffer::back(char* pItem, std::size_t startPos, std::size_t len)
 	}
 }
 
+void MCircularBuffer::popBackLenNoData(std::size_t len)
+{
+	m_tail -= len;
+	m_tail += m_iCapacity;
+	m_tail %= m_iCapacity;
+	m_size -= len;
+}
+
 /**
 * @brief 获取缓冲区头部，但是删除
 */
@@ -206,9 +216,7 @@ bool MCircularBuffer::popFront(char* pItem, std::size_t startPos, std::size_t le
 {
 	if (front(pItem, startPos, len))
 	{
-		m_head += len;
-		m_head %= m_iCapacity;
-		m_size -= len;
+		popFrontLenNoData(len);
 	}
 }
 
@@ -238,4 +246,11 @@ char MCircularBuffer::front(char* pItem, std::size_t startPos, std::size_t len)
 			std::memcpy(pItem + startPos + m_iCapacity - m_head, m_storage + 0, len - (m_iCapacity - m_head));
 		}
 	}
+}
+
+void MCircularBuffer::popFrontLenNoData(std::size_t len)
+{
+	m_head += len;
+	m_head %= m_iCapacity;
+	m_size -= len;
 }

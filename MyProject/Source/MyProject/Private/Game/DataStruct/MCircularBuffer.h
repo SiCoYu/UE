@@ -7,8 +7,21 @@
 
 class MCircularBuffer
 {
+private:
+	char* m_storage;
+	std::size_t m_head;
+	std::size_t m_tail;
+	std::size_t m_size;
+	std::size_t m_iCapacity;
+
+protected:
+	bool canAddData(uint32 num);
+
 public:
 	MCircularBuffer();
+	~MCircularBuffer();
+
+public:
 	std::size_t size();
 	bool full();
 	bool empty();
@@ -16,21 +29,16 @@ public:
 	bool isLinearized();
 	size_t capacity();
 	void setCapacity(size_t newCapacity);
-	bool canAddData(uint num);
 
+	// 添加和获取数据
 	void pushBack(char* pItem, std::size_t startPos, std::size_t len);
 	bool pushFront(char* pItem, std::size_t startPos, std::size_t len);
 	bool popBack(char* pItem, std::size_t startPos, std::size_t len);
 	char back(char* pItem, std::size_t startPos, std::size_t len);
 	bool popFront(char* pItem, std::size_t startPos, std::size_t len);
 	char front(char* pItem, std::size_t startPos, std::size_t len);
-
-protected:
-	bool canAddData(uint32 num);
-
-private:
-	char* m_storage;
-	std::size_t m_head, m_tail, m_size, m_iCapacity;
+	void popBackLenNoData(std::size_t len);
+	void popFrontLenNoData(std::size_t len);
 };
 
 
