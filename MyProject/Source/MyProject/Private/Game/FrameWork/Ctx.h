@@ -5,19 +5,13 @@
 #include "IUIManager.h"
 #include <Sockets/StdoutLog.h>
 
-#include "EngineData.h"
-#include "IEngineApi.h"
-#include "INetMgr.h"
-
-#include "Test.h"
-
 class IUIManager;
 class UGameInstance;
-//class EngineData;
-//class IEngineApi;
-//class INetMgr;
+class EngineData;
+class IEngineApi;
+class INetMgr;
 
-//class Test;
+class Test;
 
 class Ctx : public Singleton<Ctx>
 {

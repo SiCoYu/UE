@@ -5,15 +5,20 @@
 
 class DynBuffer
 {
+	friend class NetClientBuffer;
+
 protected:
 	char* m_storage;
+	std::size_t m_size;
 	std::size_t m_iCapacity;
 
 public:
 	DynBuffer();
 	~DynBuffer();
+	std::size_t size();
 	std::size_t capacity();
 	void setCapacity(std::size_t newCapacity);
+	void push(char* pItem, std::size_t len);
 };
 
 #endif			// __DYNBUFFER_H

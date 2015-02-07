@@ -42,7 +42,7 @@ protected:
 	SysEndian m_sysEndian;
 
 public:
-    const static size_t DEFAULT_SIZE = 1 * 1024;	// 1024 д╛хо 4k
+    const static size_t DEFAULT_SIZE = 1 * 1024;	// д╛хо 1k
 
     // constructor
     ByteBuffer(): _rpos(0), _wpos(0)

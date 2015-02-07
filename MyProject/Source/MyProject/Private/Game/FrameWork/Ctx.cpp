@@ -2,6 +2,10 @@
 #include "Ctx.h"
 #include "EngineData.h"
 
+#include "EngineData.h"
+#include "IEngineApi.h"
+#include "INetMgr.h"
+
 #include "Test.h"
 
 // Æ«ÌØ»¯
