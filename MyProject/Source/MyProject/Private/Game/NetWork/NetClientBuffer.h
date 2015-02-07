@@ -30,7 +30,7 @@ public:
 
 	void moveRecvSocketDyn2RecvSocket();
 	void moveRecvSocket2RecvClient();
-	ByteBuffer getMsg();
+	ByteBuffer* getMsg();
 
 	void sendMsg();
 	void moveSendClient2SendSocket();

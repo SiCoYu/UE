@@ -21,7 +21,7 @@ bool MsgBuffer::checkHasMsg()
 	}
 
 	m_pHeaderBA->clear();
-	m_pMCircularBuffer->front(m_pHeaderBA->contents(), 0, MSGHEADERSIZE);
+	m_pMCircularBuffer->front((char*)m_pHeaderBA->contents(), 0, MSGHEADERSIZE);
 
 	m_pHeaderBA->readUnsignedInt32(m_msgLen);
 	if (m_msgLen + MSGHEADERSIZE <= m_pMCircularBuffer->size())
@@ -43,5 +43,5 @@ void MsgBuffer::moveOutOneMsg()
 	}
 	m_pMsgBA->clear();
 
-	m_pMCircularBuffer->popFront(m_pMsgBA->contents(), 0, m_msgLen);
+	m_pMCircularBuffer->popFront((char*)m_pMsgBA->contents(), 0, m_msgLen);
 }

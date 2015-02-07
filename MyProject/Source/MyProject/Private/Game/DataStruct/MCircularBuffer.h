@@ -29,6 +29,8 @@ public:
 	bool isLinearized();
 	size_t capacity();
 	void setCapacity(size_t newCapacity);
+	void clear();
+	char* getStorage();
 
 	// 添加和获取数据
 	void pushBack(char* pItem, std::size_t startPos, std::size_t len);

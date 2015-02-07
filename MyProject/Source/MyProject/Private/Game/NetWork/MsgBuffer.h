@@ -1,7 +1,7 @@
 #ifndef __MSGBUFFER_H
 #define __MSGBUFFER_H
 
-#define MSGHEADERSIZE 4;   // 包长度占据几个字节
+#define MSGHEADERSIZE 4   // 包长度占据几个字节
 
 class MCircularBuffer;
 class ByteBuffer;
@@ -23,7 +23,7 @@ public:
 	MsgBuffer();
 	~MsgBuffer();
 	bool checkHasMsg();
-	bool moveOutOneMsg();
+	void moveOutOneMsg();
 };
 
 #endif				// __MSGBUFFER_H

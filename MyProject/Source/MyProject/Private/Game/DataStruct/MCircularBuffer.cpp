@@ -28,6 +28,18 @@ bool MCircularBuffer::full()
 	return (m_iCapacity == m_size);
 }
 
+void MCircularBuffer::clear()
+{
+	m_head = 0;
+	m_tail = 0;
+	m_size = 0;
+}
+
+char* MCircularBuffer::getStorage()
+{
+	return m_storage;
+}
+
 bool MCircularBuffer::empty()
 {
 	return (m_size == 0);
