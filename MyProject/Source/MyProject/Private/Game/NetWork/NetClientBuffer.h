@@ -1,6 +1,10 @@
 #ifndef __NETCLIENTBUFFER_H
 #define __NETCLIENTBUFFER_H
 
+class MsgBuffer;
+class DynBuffer;
+class ByteBuffer;
+
 /**
 * @brief 消息缓冲区
 */
@@ -12,7 +16,7 @@ protected:
 	MsgBuffer* m_sendRawBuffer;		// 发送临时缓冲区，发送的数据都暂时放在这里
 	MsgBuffer* m_sendMsgBuffer;		// 发送缓冲区，压缩或者加密过的
 
-	MCircularBuffer* m_dynBuff;        // 接收到的临时数据，将要放到 m_recvRawBuffer 中去
+	DynBuffer* m_dynBuff;			// 接收到的临时数据，将要放到 m_recvRawBuffer 中去
 	ByteBuffer* m_unCompressHeaderBA;  // 存放解压后的头的长度
 	ByteBuffer* m_sendData;            // 存放将要发送的数据，将要放到 m_sendBuffer 中去
 	ByteBuffer* m_tmpData;             // 临时需要转换的数据放在这里

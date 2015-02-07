@@ -32,11 +32,11 @@ public:
 
 	// 添加和获取数据
 	void pushBack(char* pItem, std::size_t startPos, std::size_t len);
-	bool pushFront(char* pItem, std::size_t startPos, std::size_t len);
+	void pushFront(char* pItem, std::size_t startPos, std::size_t len);
 	bool popBack(char* pItem, std::size_t startPos, std::size_t len);
-	char back(char* pItem, std::size_t startPos, std::size_t len);
+	bool back(char* pItem, std::size_t startPos, std::size_t len);
 	bool popFront(char* pItem, std::size_t startPos, std::size_t len);
-	char front(char* pItem, std::size_t startPos, std::size_t len);
+	bool front(char* pItem, std::size_t startPos, std::size_t len);
 	void popBackLenNoData(std::size_t len);
 	void popFrontLenNoData(std::size_t len);
 };

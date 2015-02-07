@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include <sstream>
-
 #include "ByteBuffer.h"
+
+#include <sstream>
 
 void ByteBufferException::PrintPosError() const
 {

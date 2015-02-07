@@ -13,6 +13,8 @@
 using namespace SOCKETS_NAMESPACE;
 #endif
 
+class NetBuffer;
+
 class NetClient : public TcpSocket
 {
 protected:
