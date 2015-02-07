@@ -4,20 +4,21 @@
 #include "DynBuffer.h"
 #include "ByteBuffer.h"
 #include "MCircularBuffer.h"
+#include "BufferDefaultValue.h"
 
 NetClientBuffer::NetClientBuffer()
 {
 	m_recvSocketBuffer = new MsgBuffer();
 	m_recvClientBuffer = new MsgBuffer();
-	m_recvSocketDynBuffer = new DynBuffer();
+	m_recvSocketDynBuffer = new DynBuffer(INITCAPACITY);
 
-	m_sendClientBuffer = new MCircularBuffer();
-	m_sendSocketBuffer = new MCircularBuffer();
-	m_sendClientBA = new ByteBuffer();
+	m_sendClientBuffer = new MCircularBuffer(INITCAPACITY);
+	m_sendSocketBuffer = new MCircularBuffer(INITCAPACITY);
+	m_sendClientBA = new ByteBuffer(INITCAPACITY);
 
-	m_unCompressHeaderBA = new ByteBuffer();
-	m_pHeaderBA = new ByteBuffer();
-	m_pMsgBA = new DynBuffer();
+	m_unCompressHeaderBA = new ByteBuffer(MSGHEADERSIZE);
+	m_pHeaderBA = new ByteBuffer(MSGHEADERSIZE);
+	m_pMsgBA = new DynBuffer(INITCAPACITY);
 }
 
 NetClientBuffer::~NetClientBuffer()

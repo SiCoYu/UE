@@ -18,7 +18,7 @@ protected:
 	bool canAddData(uint32 num);
 
 public:
-	MCircularBuffer();
+	MCircularBuffer(std::size_t len);
 	~MCircularBuffer();
 
 public:

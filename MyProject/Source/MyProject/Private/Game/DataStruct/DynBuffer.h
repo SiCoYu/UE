@@ -13,7 +13,7 @@ protected:
 	std::size_t m_iCapacity;
 
 public:
-	DynBuffer();
+	DynBuffer(std::size_t len);
 	~DynBuffer();
 	std::size_t size();
 	std::size_t capacity();

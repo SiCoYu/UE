@@ -1,8 +1,6 @@
 #ifndef __MSGBUFFER_H
 #define __MSGBUFFER_H
 
-#define MSGHEADERSIZE 4   // 包长度占据几个字节
-
 class MCircularBuffer;
 class ByteBuffer;
 

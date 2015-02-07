@@ -2,12 +2,11 @@
 #include "DynBuffer.h"
 #include "DynBufResizePolicy.h"
 #include <string.h>
-#include "BufferDefaultValue.h"
 
-DynBuffer::DynBuffer()
-	: m_iCapacity(INITCAPACITY)
+DynBuffer::DynBuffer(std::size_t len)
+	: m_iCapacity(len)
 {
-	m_storage = new char[INITCAPACITY];
+	m_storage = new char[len];
 }
 
 DynBuffer::~DynBuffer()

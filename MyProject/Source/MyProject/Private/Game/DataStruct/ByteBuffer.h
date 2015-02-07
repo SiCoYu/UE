@@ -11,7 +11,6 @@
 #include "Error.h"
 #include "SystemEndian.h"
 #include "System.h"
-#include "BufferDefaultValue.h"
 
 
 class ByteBufferException
@@ -43,12 +42,12 @@ protected:
 	SysEndian m_sysEndian;
 
 public:
-    // constructor
-    ByteBuffer(): _rpos(0), _wpos(0)
-    {
-		m_sysEndian = eSys_LITTLE_ENDIAN;		// 默认是小端
-		_storage.reserve(INITCAPACITY);
-    }
+  //  // constructor
+  //  ByteBuffer(): _rpos(0), _wpos(0)
+  //  {
+		//m_sysEndian = eSys_LITTLE_ENDIAN;		// 默认是小端
+		//_storage.reserve(INITCAPACITY);
+  //  }
 
     // constructor
     ByteBuffer(size_t res): _rpos(0), _wpos(0)

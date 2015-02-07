@@ -3,15 +3,14 @@
 #include "DynBufResizePolicy.h"
 #include "BufferUtil.h"
 #include <string.h>
-#include "BufferDefaultValue.h"
 
 /**
  * @brief ¹¹Ôìº¯Êý
  */
-MCircularBuffer::MCircularBuffer()
-	: m_head(0), m_tail(0), m_size(0), m_iCapacity(INITCAPACITY)
+MCircularBuffer::MCircularBuffer(std::size_t len)
+	: m_head(0), m_tail(0), m_size(0), m_iCapacity(len)
 {
-	m_storage = new char[INITCAPACITY];
+	m_storage = new char[len];
 }
 
 MCircularBuffer::~MCircularBuffer()
