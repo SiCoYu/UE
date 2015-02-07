@@ -5,7 +5,6 @@
 
 #include <Sockets/SocketHandler.h>
 #include <Sockets/TcpSocket.h>
-#include <iostream>
 
 #include "Windows/HideWindowsPlatformTypes.h"
 

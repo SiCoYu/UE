@@ -25,7 +25,6 @@ public:
 	~NetMgr();
 
 	virtual void openSocket(std::string ip, uint32 port);
-
 };
 
 #endif				// __NETMGR_H
