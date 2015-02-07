@@ -5,6 +5,7 @@ class MsgBuffer;
 class DynBuffer;
 class ByteBuffer;
 class MCircularBuffer;
+class Mutex;
 
 /**
 * @brief 消息缓冲区
@@ -25,6 +26,8 @@ protected:
 	ByteBuffer* m_unCompressHeaderBA;  // 存放解压后的头的长度
 	ByteBuffer* m_pHeaderBA;	// 写入四个字节头部
 	DynBuffer* m_pMsgBA;		// 发送消息临时缓冲区，减小加锁粒度
+
+	Mutex* m_pMutex;
 
 public:
 	NetClientBuffer();
