@@ -9,6 +9,7 @@ class INetMgr
 public:
 	virtual ~INetMgr(){};
 	virtual void openSocket(std::string ip, uint32 port) = 0;
+	virtual void recAndSendMsg() = 0;
 };
 
 #endif		// __INETMGR_H

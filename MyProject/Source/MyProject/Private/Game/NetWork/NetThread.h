@@ -25,17 +25,18 @@ class Socket;
 class NetThread : public Thread
 {
 public:
-	NetThread(Socket *p);
+	NetThread(SocketHandler *p);
 	~NetThread();
 
 	void Run();
+	void setExitFlag(bool exit);
 
 private:
-	NetThread(const NetThread& s) : m_socket(s.m_socket) {}
+	NetThread(const NetThread& s) {}
 	NetThread& operator=(const NetThread&) { return *this; }
 
-	SocketHandler m_h;
-	Socket *m_socket;
+	SocketHandler* m_h;
+	bool m_ExitFlag;
 };
 
 #ifdef SOCKETS_NAMESPACE

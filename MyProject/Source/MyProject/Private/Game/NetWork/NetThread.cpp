@@ -9,13 +9,17 @@
 
 #include "Windows/HideWindowsPlatformTypes.h"
 
+#include "INetMgr.h"
+#include "NetClient.h"
+
 #ifdef SOCKETS_NAMESPACE
 namespace SOCKETS_NAMESPACE {
 #endif
 
-NetThread::NetThread(Socket *p)
-	:Thread(false)
-	, m_socket(p)
+NetThread::NetThread(SocketHandler *p)
+	: Thread(false)
+	, m_h(p)
+	, m_ExitFlag(false)
 {
 	// Creator will release
 }
@@ -26,27 +30,29 @@ NetThread::~NetThread()
 	{
 		SetRelease(true);
 		SetRunning(false);
-		m_h.Release();
 		Utility::Sleep(5);
 	}
 }
 
 void NetThread::Run()
 {
-	m_h.SetSlave();
-	m_h.Add(m_socket);
-	m_socket->SetSlaveHandler(&m_h);
-	m_socket->OnDetached();
-	m_h.EnableRelease();
-	while (m_h.GetCount() > 1 && IsRunning())
+	while (m_h->GetCount() > 1 && IsRunning())
 	{
-		m_h.Select(0, 500000);
+		m_h->Select(0, 500000);
+		((INetMgr*)m_h)->recAndSendMsg();
+
+		Utility::Sleep(0.04);
 	}
 	// m_socket now deleted oops
 	//  (a socket can only be detached if DeleteByHandler() is true)
 	// yeah oops m_socket delete its socket thread, that means this
 	// so Socket will no longer delete its socket thread, instead we do this:
 	SetDeleteOnExit();
+}
+
+void NetThread::setExitFlag(bool exit)
+{
+	m_ExitFlag = exit;
 }
 
 #ifdef SOCKETS_NAMESPACE

@@ -5,11 +5,12 @@
 
 #include <Sockets/StdoutLog.h>
 #include <Sockets/SocketHandler.h>
-#include <Sockets/SocketThread.h>
+#include <Sockets/Mutex.h>
 
 #include "Windows/HideWindowsPlatformTypes.h"
 
 #include "INetMgr.h"
+class NetThread;
 
 #ifdef SOCKETS_NAMESPACE
 using namespace SOCKETS_NAMESPACE;
@@ -18,13 +19,15 @@ using namespace SOCKETS_NAMESPACE;
 class NetMgr : public SocketHandler, public INetMgr
 {
 private:
-	SocketThread* m_pSocketThread;
+	NetThread* m_pNetThread;
+	Mutex* m_pMutex;
 
 public:
 	NetMgr(StdLog *p);
 	~NetMgr();
 
 	virtual void openSocket(std::string ip, uint32 port);
+	virtual void recAndSendMsg();
 };
 
 #endif				// __NETMGR_H
