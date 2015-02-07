@@ -18,6 +18,8 @@ public:
 	std::size_t size();
 	std::size_t capacity();
 	void setCapacity(std::size_t newCapacity);
+	void setSize(std::size_t len);
+	char* getStorage();
 	void push(char* pItem, std::size_t len);
 };
 

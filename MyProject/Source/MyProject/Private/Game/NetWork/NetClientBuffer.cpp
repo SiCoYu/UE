@@ -11,12 +11,13 @@ NetClientBuffer::NetClientBuffer()
 	m_recvClientBuffer = new MsgBuffer();
 	m_recvSocketDynBuffer = new DynBuffer();
 
-	m_sendClientBuffer = new MsgBuffer();
-	m_sendSocketBuffer = new MsgBuffer();
+	m_sendClientBuffer = new MCircularBuffer();
+	m_sendSocketBuffer = new MCircularBuffer();
 	m_sendClientBA = new ByteBuffer();
 
 	m_unCompressHeaderBA = new ByteBuffer();
-	m_tmpData = new ByteBuffer();
+	m_pHeaderBA = new ByteBuffer();
+	m_pMsgBA = new DynBuffer();
 }
 
 NetClientBuffer::~NetClientBuffer()
@@ -30,7 +31,6 @@ NetClientBuffer::~NetClientBuffer()
 	delete m_sendClientBA;
 
 	delete m_unCompressHeaderBA;
-	delete m_tmpData;
 }
 
 void NetClientBuffer::moveRecvSocketDyn2RecvSocket()
@@ -65,16 +65,20 @@ ByteBuffer* NetClientBuffer::getMsg()
 
 void NetClientBuffer::sendMsg()
 {
-	m_tmpData->clear();
-	m_tmpData->writeUnsignedInt32(m_sendClientBA->size());      // 填充长度
-	m_sendClientBuffer->m_pMCircularBuffer->pushBack((char*)m_tmpData->contents(), 0, m_tmpData->size());
-	m_sendClientBuffer->m_pMCircularBuffer->pushBack((char*)m_sendClientBA->contents(), 0, m_sendClientBA->size());
+	m_pHeaderBA->clear();
+	m_pHeaderBA->writeUnsignedInt32(m_sendClientBA->size());      // 填充长度
+	m_sendClientBuffer->pushBack((char*)m_pHeaderBA->contents(), 0, m_pHeaderBA->size());
+	m_sendClientBuffer->pushBack((char*)m_sendClientBA->contents(), 0, m_sendClientBA->size());
 }
 
 // 获取数据，然后压缩加密
 void NetClientBuffer::moveSendClient2SendSocket()
 {
-	m_sendSocketBuffer->m_pMCircularBuffer->clear();           // 清理之前的缓冲区
-	m_sendSocketBuffer->m_pMCircularBuffer->pushBack(m_sendClientBuffer->m_pMCircularBuffer->getStorage(), 0, m_sendClientBuffer->m_pMCircularBuffer->size());
-	m_sendClientBuffer->m_pMCircularBuffer->clear();
+	m_sendSocketBuffer->clear(); // 清理，这样环形缓冲区又可以从 0 索引开始了
+	m_pMsgBA->setSize(m_sendClientBuffer->size());
+
+	m_sendClientBuffer->popFront(m_pMsgBA->getStorage(), 0, m_sendClientBuffer->size());
+
+	m_sendSocketBuffer->pushBack(m_pMsgBA->getStorage(), 0, m_pMsgBA->size());
+	m_sendClientBuffer->clear(); // 清理，这样环形缓冲区又可以从 0 索引开始了
 }

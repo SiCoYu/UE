@@ -3,6 +3,7 @@
 #include "DynBufResizePolicy.h"
 #include "BufferUtil.h"
 #include <string.h>
+#include "BufferDefaultValue.h"
 
 /**
  * @brief ¹¹Ôìº¯Êý

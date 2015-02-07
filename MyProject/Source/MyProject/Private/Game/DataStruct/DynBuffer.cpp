@@ -2,6 +2,7 @@
 #include "DynBuffer.h"
 #include "DynBufResizePolicy.h"
 #include <string.h>
+#include "BufferDefaultValue.h"
 
 DynBuffer::DynBuffer()
 	: m_iCapacity(INITCAPACITY)
@@ -24,6 +25,16 @@ size_t DynBuffer::capacity()
 	return m_iCapacity;
 }
 
+void DynBuffer::setSize(std::size_t len)
+{
+	m_size = len;
+
+	if (m_size > capacity())
+	{
+		setCapacity(m_size);
+	}
+}
+
 void DynBuffer::setCapacity(std::size_t newCapacity)
 {
 	if (newCapacity <= capacity())
@@ -37,6 +48,11 @@ void DynBuffer::setCapacity(std::size_t newCapacity)
 
 	delete[] m_storage;
 	m_storage = tmpbuff;
+}
+
+char* DynBuffer::getStorage()
+{
+	return m_storage;
 }
 
 void DynBuffer::push(char* pItem, std::size_t len)

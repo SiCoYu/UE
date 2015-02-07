@@ -11,6 +11,7 @@
 #include "Error.h"
 #include "SystemEndian.h"
 #include "System.h"
+#include "BufferDefaultValue.h"
 
 
 class ByteBufferException
@@ -42,13 +43,11 @@ protected:
 	SysEndian m_sysEndian;
 
 public:
-    const static size_t DEFAULT_SIZE = 1 * 1024;	// 默认 1k
-
     // constructor
     ByteBuffer(): _rpos(0), _wpos(0)
     {
 		m_sysEndian = eSys_LITTLE_ENDIAN;		// 默认是小端
-        _storage.reserve(DEFAULT_SIZE);
+		_storage.reserve(INITCAPACITY);
     }
 
     // constructor
@@ -372,9 +371,12 @@ public:
 
     void resize(size_t newsize)
     {
-        _storage.resize(newsize);
-        _rpos = 0;
-        _wpos = size();
+		if (newsize > size())
+		{
+			_storage.resize(newsize);
+			_rpos = 0;
+			_wpos = size();
+		}
     }
 
     void reserve(size_t ressize)

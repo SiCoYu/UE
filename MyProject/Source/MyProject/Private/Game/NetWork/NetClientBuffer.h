@@ -4,6 +4,7 @@
 class MsgBuffer;
 class DynBuffer;
 class ByteBuffer;
+class MCircularBuffer;
 
 /**
 * @brief 消息缓冲区
@@ -17,12 +18,13 @@ protected:
 	DynBuffer* m_recvSocketDynBuffer;	// 接收到的临时数据，将要放到 m_recvRawBuffer 中去
 
 	// 发送的 Buffer
-	MsgBuffer* m_sendClientBuffer;		// 发送临时缓冲区，发送的数据都暂时放在这里
-	MsgBuffer* m_sendSocketBuffer;		// 发送缓冲区，压缩或者加密过的
+	MCircularBuffer* m_sendClientBuffer;		// 发送临时缓冲区，发送的数据都暂时放在这里
+	MCircularBuffer* m_sendSocketBuffer;		// 发送缓冲区，压缩或者加密过的
 	ByteBuffer* m_sendClientBA;			// 存放将要发送的临时数据，将要放到 m_sendClientBuffer 中去
 
 	ByteBuffer* m_unCompressHeaderBA;  // 存放解压后的头的长度
-	ByteBuffer* m_tmpData;             // 临时需要转换的数据放在这里
+	ByteBuffer* m_pHeaderBA;	// 写入四个字节头部
+	DynBuffer* m_pMsgBA;		// 发送消息临时缓冲区，减小加锁粒度
 
 public:
 	NetClientBuffer();
