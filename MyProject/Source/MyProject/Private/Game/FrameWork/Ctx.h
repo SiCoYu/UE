@@ -3,13 +3,21 @@
 
 #include "Singleton.h"
 #include "IUIManager.h"
+#include <Sockets/StdoutLog.h>
+
+#include "EngineData.h"
+#include "IEngineApi.h"
+#include "INetMgr.h"
+
+#include "Test.h"
 
 class IUIManager;
 class UGameInstance;
-class EngineData;
-class IEngineApi;
+//class EngineData;
+//class IEngineApi;
+//class INetMgr;
 
-class Test;
+//class Test;
 
 class Ctx : public Singleton<Ctx>
 {
@@ -18,10 +26,15 @@ protected:
 	//UGameInstance* m_uGameInstance;
 	EngineData* m_engineData;
 	IEngineApi* m_engineApi;
+	INetMgr* m_pINetMgr;
+	StdoutLog* m_pStdoutLog;
 
 	Test* m_test;
 
 public:
+	Ctx();
+	~Ctx();
+
 	void init();
 	void setUIMgr(IUIManager* uiMgr);
 	IUIManager* getUIMgr();
@@ -31,6 +44,9 @@ public:
 	EngineData* getEngineData();
 	IEngineApi* getEngineApi();
 	void setEngineApi(IEngineApi* engineApi);
+	void setNetMgr(INetMgr* pINetMgr);
+
+	StdoutLog* getStdLog();
 };
 
 #endif				// __CTX_H

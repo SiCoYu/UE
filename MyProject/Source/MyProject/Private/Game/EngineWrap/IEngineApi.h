@@ -6,6 +6,7 @@ class UGameInstance;
 class IEngineApi
 {
 public:
+	virtual ~IEngineApi(){};
 	virtual UGameInstance* getGameInstance() = 0;
 };
 

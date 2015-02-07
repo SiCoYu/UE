@@ -5,32 +5,27 @@
 
 #include <Sockets/StdoutLog.h>
 #include <Sockets/SocketHandler.h>
-#include <Sockets/TcpSocket.h>
-#include <iostream>
+#include <Sockets/SocketThread.h>
 
 #include "Windows/HideWindowsPlatformTypes.h"
+
+#include "INetMgr.h"
 
 #ifdef SOCKETS_NAMESPACE
 using namespace SOCKETS_NAMESPACE;
 #endif
 
-class NetMgr : public SocketHandler
+class NetMgr : public SocketHandler, public INetMgr
 {
+private:
+	SocketThread* m_pSocketThread;
+
 public:
 	NetMgr(StdLog *p);
 	~NetMgr();
 
-	void List(TcpSocket *p);
-	void SetQuit();
-	bool Quit();
-	void CheckHtml();
+	virtual void openSocket(std::string ip, uint32 port);
 
-	std::string m_html;
-	bool m_ok;
-	bool m_done;
-
-private:
-	bool m_quit;
 };
 
 #endif				// __NETMGR_H

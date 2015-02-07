@@ -12,7 +12,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/DataStruct",
                 "MyProject/Private/Game/EngineWrap",
                 "MyProject/Private/Game/FrameWork",
-                "MyProject/Private/Game/Socket",
+                "MyProject/Private/Game/NetWork",
 
                 "MyProject/Private/UI/Widgets",
                 "MyProject/Private/Game/UI/UICore",

@@ -7,10 +7,26 @@
 // Æ«ÌØ»¯
 template<> Ctx* Ctx::Singleton<Ctx>::m_sSingleton = 0;
 
+Ctx::Ctx()
+{
+
+}
+
+Ctx::~Ctx()
+{
+	delete m_uiMgr;
+	delete m_engineData;
+	delete m_engineApi;
+	delete m_pINetMgr;
+	delete m_pStdoutLog;
+	delete m_test;
+}
+
 void Ctx::init()
 {
 	m_engineData = new EngineData();
 	m_test = new Test();
+	m_pStdoutLog = new StdoutLog();
 }
 
 void Ctx::setUIMgr(IUIManager* uiMgr)
@@ -46,4 +62,14 @@ IEngineApi* Ctx::getEngineApi()
 void Ctx::setEngineApi(IEngineApi* engineApi)
 {
 	m_engineApi = engineApi;
+}
+
+void Ctx::setNetMgr(INetMgr* pINetMgr)
+{
+	m_pINetMgr = pINetMgr;
+}
+
+StdoutLog* Ctx::getStdLog()
+{
+	return m_pStdoutLog;
 }

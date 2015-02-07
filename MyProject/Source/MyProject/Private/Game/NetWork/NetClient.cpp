@@ -21,3 +21,8 @@ void NetClient::OnDelete()
 {
 	
 }
+
+void NetClient::OnRawData(const char *buf, size_t len)
+{
+
+}

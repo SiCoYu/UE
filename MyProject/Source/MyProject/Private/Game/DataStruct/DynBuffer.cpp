@@ -27,7 +27,7 @@ void DynBuffer::setCapacity(std::size_t newCapacity)
 	}
 
 	char* tmpbuff = new char[newCapacity];   // 分配新的空间
-	std::memcpy(tmpbuff, m_storage, m_iCapacity);
+	memcpy(tmpbuff, m_storage, m_iCapacity);
 	m_iCapacity = newCapacity;
 
 	delete[] m_storage;
