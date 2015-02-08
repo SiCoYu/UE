@@ -5,6 +5,10 @@
 
 #include "gtest/gtest.h"
 
+#include "Windows/AllowWindowsPlatformTypes.h"
+#include <shellapi.h>
+#include "Windows/HideWindowsPlatformTypes.h"
+
 Test::Test()
 {
 	m_testExtern = new TestExtern();
@@ -13,6 +17,12 @@ Test::Test()
 
 void Test::runTest()
 {
-	testing::InitGoogleTest((int*)nullptr, (char**)nullptr);
+	const TCHAR* CmdLine = GetCommandLine();
+	LPWSTR *szArgList;
+	int argCount;
+	szArgList = CommandLineToArgvW(CmdLine, &argCount);
+	testing::InitGoogleTest(&argCount, szArgList);
+
+	//testing::InitGoogleTest(__argc, __argv);
 	RUN_ALL_TESTS();
 }
