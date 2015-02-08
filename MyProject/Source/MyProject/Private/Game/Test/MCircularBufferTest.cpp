@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MCircularBufferTest.h"
 
-#include <iostream>
+//#include <iostream>
 
 MCircularBufferTest::MCircularBufferTest()
 	: m_circularBuffer(4)
@@ -16,22 +16,26 @@ MCircularBufferTest::~MCircularBufferTest()
 
 void MCircularBufferTest::SetUpTestCase()
 {
-	std::cout << "gtest MCircularBufferTest static SetUpTestCase execute" << std::endl;
+	//std::cout << "gtest MCircularBufferTest static SetUpTestCase execute" << std::endl;
+	GLog->Logf(TEXT("gtest MCircularBufferTest static SetUpTestCase execute"));
 }
 
 void MCircularBufferTest::TearDownTestCase()
 {
-	std::cout << "gtest MCircularBufferTest static TearDownTestCase execute" << std::endl;
+	//std::cout << "gtest MCircularBufferTest static TearDownTestCase execute" << std::endl;
+	GLog->Logf(TEXT("gtest MCircularBufferTest static TearDownTestCase execute"));
 }
 
 void MCircularBufferTest::SetUp()
 {
-	std::cout << "gtest MCircularBufferTest SetUp execute" << std::endl;
+	//std::cout << "gtest MCircularBufferTest SetUp execute" << std::endl;
+	GLog->Logf(TEXT("gtest MCircularBufferTest SetUp execute"));
 }
 
 void MCircularBufferTest::TearDown()
 {
-	std::cout << "gtest MCircularBufferTest TearDown execute" << std::endl;
+	//std::cout << "gtest MCircularBufferTest TearDown execute" << std::endl;
+	GLog->Logf(TEXT("gtest MCircularBufferTest TearDown execute"));
 }
 
 
