@@ -12,6 +12,7 @@ public:
 
 public:
 	Test();
+	void runTest();
 };
 
 #endif				// __TEST_H

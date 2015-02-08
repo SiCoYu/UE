@@ -72,6 +72,7 @@ public class MyProject : ModuleRules
         loadThirdPartyInclude();
         LoadSockets(Target);
         LoadTestExtern(Target);
+        LoadGtest(Target);
 	}
 
     /// <summary>
@@ -161,9 +162,9 @@ public class MyProject : ModuleRules
 
     private bool LoadSockets(TargetInfo Target)
     {
-        string PlatformString;
-        string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets", "Sockets.lib");
+        string LibrariesPath;
 
+        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets", "Sockets.lib");
         PublicAdditionalLibraries.Add(LibrariesPath);
 
         return true;
@@ -171,9 +172,19 @@ public class MyProject : ModuleRules
 
     private bool LoadTestExtern(TargetInfo Target)
     {
-        string PlatformString;
-        string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "TestStaticLib.lib");
+        string LibrariesPath;
+        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "TestStaticLib.lib");
 
+        PublicAdditionalLibraries.Add(LibrariesPath);
+
+        return true;
+    }
+
+    private bool LoadGtest(TargetInfo Target)
+    {
+        string LibrariesPath;
+
+        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "gtest", "gtest.lib");
         PublicAdditionalLibraries.Add(LibrariesPath);
 
         return true;

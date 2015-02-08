@@ -13,7 +13,7 @@ template<> Ctx* Ctx::Singleton<Ctx>::m_sSingleton = 0;
 
 Ctx::Ctx()
 {
-
+	
 }
 
 Ctx::~Ctx()
@@ -29,8 +29,10 @@ Ctx::~Ctx()
 void Ctx::init()
 {
 	m_engineData = new EngineData();
-	m_test = new Test();
 	m_pStdoutLog = new StdoutLog();
+
+	m_test = new Test();
+	m_test->runTest();
 }
 
 void Ctx::setUIMgr(IUIManager* uiMgr)
