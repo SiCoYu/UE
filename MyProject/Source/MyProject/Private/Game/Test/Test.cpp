@@ -4,6 +4,7 @@
 #include "TestSocket.h"
 
 #include "gtest/gtest.h"
+#include "GrobalEvent.h"
 
 #include "Windows/AllowWindowsPlatformTypes.h"
 #include <shellapi.h>
@@ -21,6 +22,8 @@ void Test::runTest()
 	LPWSTR *szArgList;
 	int argCount;
 	szArgList = CommandLineToArgvW(CmdLine, &argCount);
+
+	testing::AddGlobalTestEnvironment(new GrobalEvent);
 	testing::InitGoogleTest(&argCount, szArgList);
 
 	//testing::InitGoogleTest(__argc, __argv);

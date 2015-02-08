@@ -1,11 +1,39 @@
 #include "MyProject.h"
 #include "MCircularBufferTest.h"
 
+#include <iostream>
+
 MCircularBufferTest::MCircularBufferTest()
 	: m_circularBuffer(4)
 {
 
 }
+
+MCircularBufferTest::~MCircularBufferTest()
+{
+
+}
+
+void MCircularBufferTest::SetUpTestCase()
+{
+	std::cout << "gtest MCircularBufferTest static SetUpTestCase execute" << std::endl;
+}
+
+void MCircularBufferTest::TearDownTestCase()
+{
+	std::cout << "gtest MCircularBufferTest static TearDownTestCase execute" << std::endl;
+}
+
+void MCircularBufferTest::SetUp()
+{
+	std::cout << "gtest MCircularBufferTest SetUp execute" << std::endl;
+}
+
+void MCircularBufferTest::TearDown()
+{
+	std::cout << "gtest MCircularBufferTest TearDown execute" << std::endl;
+}
+
 
 TEST_F(MCircularBufferTest, size)
 {

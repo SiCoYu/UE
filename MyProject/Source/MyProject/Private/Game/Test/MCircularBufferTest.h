@@ -7,18 +7,18 @@
 class MCircularBufferTest : public testing::Test
 {
 protected:
-	virtual void SetUp() 
-	{
-		// None yet
-	}
-	virtual void TearDown() 
-	{
-		// None yet
-	}
 	MCircularBuffer m_circularBuffer;
+
+protected:
+	static void SetUpTestCase();
+	static void TearDownTestCase();
+
+	virtual void SetUp();
+	virtual void TearDown();
 
 public:
 	MCircularBufferTest();
+	virtual ~MCircularBufferTest();
 };
 
 
