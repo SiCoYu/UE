@@ -75,6 +75,11 @@ void Ctx::setNetMgr(INetMgr* pINetMgr)
 	m_pINetMgr = pINetMgr;
 }
 
+INetMgr* Ctx::getNetMgr()
+{
+	return m_pINetMgr;
+}
+
 StdoutLog* Ctx::getStdLog()
 {
 	return m_pStdoutLog;

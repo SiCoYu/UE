@@ -14,4 +14,5 @@ void AppFrame::initApp()
 
 	// test
 	//Ctx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
+	Ctx::getSingletonPtr()->getNetMgr()->openSocket("192.168.125.254", 10002);
 }

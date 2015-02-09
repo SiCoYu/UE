@@ -39,6 +39,7 @@ public:
 	IEngineApi* getEngineApi();
 	void setEngineApi(IEngineApi* engineApi);
 	void setNetMgr(INetMgr* pINetMgr);
+	INetMgr* getNetMgr();
 
 	StdoutLog* getStdLog();
 };
