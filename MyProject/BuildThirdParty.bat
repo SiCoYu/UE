@@ -16,7 +16,7 @@ if defined CMAKEPATH (
 	%CMAKEPATH% -G%GENERATOR% -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo -DCMAKE_INSTALL_PREFIX:PATH=%base_dir%ThirdParty\Src\build %base_dir%ThirdParty\Src
 ) else (
 	echo set CMAKEPATH="D:\Program Files (x86)\cmake-3.1.0-win32-x86\bin\cmake.exe" > %base_dir%BatPath.bat
-	echo DEVENV="F:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe" >> %base_dir%BatPath.bat
+	echo set DEVENV="F:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe" >> %base_dir%BatPath.bat
 	echo Error CMAKEPATH not define
 )
 
