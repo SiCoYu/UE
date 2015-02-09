@@ -251,6 +251,22 @@ if (gtest_build_tests)
   py_test(gtest_xml_output_unittest)
 endif()
 
+if (MSVC)
+	set(CompilerFlags
+		CMAKE_CXX_FLAGS
+		CMAKE_CXX_FLAGS_DEBUG
+		CMAKE_CXX_FLAGS_RELEASE
+		CMAKE_CXX_FLAGS_MINSIZEREL
+		CMAKE_CXX_FLAGS_RELWITHDEBINFO
+		CMAKE_C_FLAGS
+		CMAKE_C_FLAGS_DEBUG
+		CMAKE_C_FLAGS_RELEASE
+		)
+	foreach(CompilerFlag ${CompilerFlags})
+		string(REPLACE "/MDd" "/MD" ${CompilerFlag} "${${CompilerFlag}}")
+	endforeach()
+endif()
+
 file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}")
 

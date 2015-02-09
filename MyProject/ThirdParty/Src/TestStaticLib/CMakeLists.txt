@@ -14,6 +14,22 @@ if(WIN32)
 
 	source_group("Source Files" FILES ${SRCS} ${INCS})
 
+	if (MSVC)
+		set(CompilerFlags
+			CMAKE_CXX_FLAGS
+			CMAKE_CXX_FLAGS_DEBUG
+			CMAKE_CXX_FLAGS_RELEASE
+			CMAKE_CXX_FLAGS_MINSIZEREL
+			CMAKE_CXX_FLAGS_RELWITHDEBINFO
+			CMAKE_C_FLAGS
+			CMAKE_C_FLAGS_DEBUG
+			CMAKE_C_FLAGS_RELEASE
+			)
+		foreach(CompilerFlag ${CompilerFlags})
+			string(REPLACE "/MDd" "/MD" ${CompilerFlag} "${${CompilerFlag}}")
+		endforeach()
+	endif()
+	
     include_directories(.)
     ADD_LIBRARY(TestStaticLib STATIC ${SRCS} ${INCS})
 	set_target_properties(TestStaticLib PROPERTIES DEBUG_POSTFIX _d)

@@ -29,5 +29,6 @@ cd %base_dir%
 ::)
 
 %DEVENV% %base_dir%ThirdParty\Src\build\ThirdParty.sln /build "RelWithDebInfo" /project "INSTALL"
+::%DEVENV% %base_dir%ThirdParty\Src\build\ThirdParty.sln /build "Debug" /project "INSTALL"
 
 pause

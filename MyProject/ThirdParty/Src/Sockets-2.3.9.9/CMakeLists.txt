@@ -206,6 +206,22 @@ if(WIN32)
 	set(SRCS ${AsynchronousDNS_SRCS} ${BasicSockets_SRCS} ${Filehandling_SRCS} ${HTTPSockets_SRCS} ${Internal_SRCS} ${Loghelpclasses_SRCS} ${SMTP_SRCS} ${SourceFiles_SRCS} ${Threading_SRCS} ${TimerEvents_SRCS} ${TimerEvents_SRCS} ${Utilities_SRCS} ${Webserverframework_SRCS} ${Xml_SRCS})
 	set(INCS ${AsynchronousDNS_INCS} ${BasicSockets_INCS} ${Filehandling_INCS} ${HeaderFiles_INCS} ${HTTPSockets_INCS} ${Internal_INCS} ${Loghelpclasses_INCS} ${SMTP_INCS} ${Threading_INCS} ${TimerEvents_INCS} ${Utilities_INCS} ${Webserverframework_INCS} ${Xml_INCS})
 	
+	if (MSVC)
+		set(CompilerFlags
+			CMAKE_CXX_FLAGS
+			CMAKE_CXX_FLAGS_DEBUG
+			CMAKE_CXX_FLAGS_RELEASE
+			CMAKE_CXX_FLAGS_MINSIZEREL
+			CMAKE_CXX_FLAGS_RELWITHDEBINFO
+			CMAKE_C_FLAGS
+			CMAKE_C_FLAGS_DEBUG
+			CMAKE_C_FLAGS_RELEASE
+			)
+		foreach(CompilerFlag ${CompilerFlags})
+			string(REPLACE "/MDd" "/MD" ${CompilerFlag} "${${CompilerFlag}}")
+		endforeach()
+	endif()
+	
     include_directories(.)
     ADD_LIBRARY(Sockets STATIC ${SRCS} ${INCS})
 	set_target_properties(Sockets PROPERTIES DEBUG_POSTFIX _d)

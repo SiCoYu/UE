@@ -75,7 +75,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 /* Socks4 client support. */
-#define ENABLE_SOCKS4
+//#define ENABLE_SOCKS4
 
 
 /* Asynchronous resolver. */
@@ -86,7 +86,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 	Socket::OnReconnect
 	Socket::OnDisconnect
 */
-//#define ENABLE_RECONNECT
+#define ENABLE_RECONNECT
 
 
 /* Enable socket thread detach functionality. */

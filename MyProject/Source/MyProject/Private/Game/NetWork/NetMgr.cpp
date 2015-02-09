@@ -23,7 +23,7 @@ NetMgr::~NetMgr()
 void NetMgr::openSocket(std::string ip, uint32 port)
 {
 	NetClient* pClient = new NetClient(*this);
-	pClient->Open(ip, port);
+	bool success = pClient->Open(ip, port);
 
 	m_pMutex->Lock();
 
