@@ -36,10 +36,13 @@ NetThread::~NetThread()
 
 void NetThread::Run()
 {
-	while (m_h->GetCount() > 1 && IsRunning())
+	while (!m_ExitFlag)
 	{
-		m_h->Select(0, 500000);
-		((INetMgr*)m_h)->recAndSendMsg();
+		if (m_h->GetCount() > 1 && IsRunning())
+		{
+			m_h->Select(0, 500000);
+			((INetMgr*)m_h)->recAndSendMsg();
+		}
 
 		Utility::Sleep(0.04);
 	}

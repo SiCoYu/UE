@@ -116,12 +116,11 @@ NetMgr::NetMgr(StdLog *p)
 
 	this->SetSlave();
 	this->EnableRelease();
-
-	m_pNetThread->Run();
 }
 
 NetMgr::~NetMgr() 
 {
+	m_pNetThread->setExitFlag(true);
 	this->Release();
 }
 
