@@ -45,5 +45,6 @@ if(WIN32)
 	ADD_EXECUTABLE(Sockets_Test WIN32 ${SRCS})
 	set_target_properties(Sockets_Test PROPERTIES DEBUG_POSTFIX _d LINK_FLAGS "/ENTRY:\"mainCRTStartup\"")
 	TARGET_LINK_LIBRARIES(Sockets_Test Sockets)
+	add_dependencies(Sockets_Test Sockets)
 	
 endif(WIN32)
