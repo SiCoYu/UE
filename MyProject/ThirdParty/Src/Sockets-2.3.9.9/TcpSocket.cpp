@@ -289,8 +289,9 @@ bool TcpSocket::Open(SocketAddress& ad,SocketAddress& bind_ad,bool skip_socks)
 	{
 		// check error code that means a connect is in progress
 #ifdef _WIN32
-		int aaa = WSAGetLastError();
-		if (Errno == WSAEWOULDBLOCK)
+		int selfError = WSAGetLastError();
+		//if (Errno == WSAEWOULDBLOCK)
+		if (Errno == WSAEWOULDBLOCK || Errno == 0)
 #else
 		if (Errno == EINPROGRESS)
 #endif

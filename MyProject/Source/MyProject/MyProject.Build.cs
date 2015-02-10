@@ -32,11 +32,11 @@ public class MyProject : ModuleRules
 			}
         );
 
-        Definitions.Add("WIN32_LEAN_AND_MEAN");
-        Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
-        Definitions.Add("NO_GETADDRINFO");
-        Definitions.Add("ENABLE_EXCEPTIONS");
-        Definitions.Add("ENABLE_DETACH");
+        //Definitions.Add("WIN32_LEAN_AND_MEAN");
+        //Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
+        //Definitions.Add("NO_GETADDRINFO");
+        //Definitions.Add("ENABLE_EXCEPTIONS");
+        //Definitions.Add("ENABLE_DETACH");
 
         MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;

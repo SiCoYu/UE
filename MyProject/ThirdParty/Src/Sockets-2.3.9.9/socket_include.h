@@ -186,7 +186,7 @@ namespace SOCKETS_NAMESPACE {
 // ----------------------------------------
 // Win32
 #ifdef _MSC_VER
-#pragma comment(lib, "wsock32.lib")
+#pragma comment(lib, "ws2_32.lib")
 #endif
 #define strcasecmp _stricmp
 #ifndef __CYGWIN__
