@@ -14,6 +14,10 @@ if(WIN32)
 
 	source_group("Source Files" FILES ${SRCS} ${INCS})
 
+	if (CMAKE_BUILD_TYPE STREQUAL Debug)
+		add_definitions(-DNDEBUG)
+	endif ()
+	
 	if (MSVC)
 		set(CompilerFlags
 			CMAKE_CXX_FLAGS
@@ -27,6 +31,15 @@ if(WIN32)
 			)
 		foreach(CompilerFlag ${CompilerFlags})
 			string(REPLACE "/MDd" "/MD" ${CompilerFlag} "${${CompilerFlag}}")
+		endforeach()
+	endif()
+	
+	if (MSVC)
+		set(CompilerFlags
+			CMAKE_CXX_FLAGS_DEBUG
+			)
+		foreach(CompilerFlag ${CompilerFlags})
+			string(REPLACE "_DEBUG" "NDEBUG" ${CompilerFlag} "${${CompilerFlag}}")
 		endforeach()
 	endif()
 	

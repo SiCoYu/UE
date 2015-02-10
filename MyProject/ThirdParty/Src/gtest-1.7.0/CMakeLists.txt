@@ -251,6 +251,10 @@ if (gtest_build_tests)
   py_test(gtest_xml_output_unittest)
 endif()
 
+if (CMAKE_BUILD_TYPE STREQUAL Debug)
+	add_definitions(-DNDEBUG)
+endif ()
+
 if (MSVC)
 	set(CompilerFlags
 		CMAKE_CXX_FLAGS
@@ -264,6 +268,15 @@ if (MSVC)
 		)
 	foreach(CompilerFlag ${CompilerFlags})
 		string(REPLACE "/MDd" "/MD" ${CompilerFlag} "${${CompilerFlag}}")
+	endforeach()
+endif()
+
+if (MSVC)
+	set(CompilerFlags
+		CMAKE_CXX_FLAGS_DEBUG
+		)
+	foreach(CompilerFlag ${CompilerFlags})
+		string(REPLACE "_DEBUG" "NDEBUG" ${CompilerFlag} "${${CompilerFlag}}")
 	endforeach()
 endif()
 

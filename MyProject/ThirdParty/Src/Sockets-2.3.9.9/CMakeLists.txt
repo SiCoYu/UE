@@ -206,6 +206,10 @@ if(WIN32)
 	set(SRCS ${AsynchronousDNS_SRCS} ${BasicSockets_SRCS} ${Filehandling_SRCS} ${HTTPSockets_SRCS} ${Internal_SRCS} ${Loghelpclasses_SRCS} ${SMTP_SRCS} ${SourceFiles_SRCS} ${Threading_SRCS} ${TimerEvents_SRCS} ${TimerEvents_SRCS} ${Utilities_SRCS} ${Webserverframework_SRCS} ${Xml_SRCS})
 	set(INCS ${AsynchronousDNS_INCS} ${BasicSockets_INCS} ${Filehandling_INCS} ${HeaderFiles_INCS} ${HTTPSockets_INCS} ${Internal_INCS} ${Loghelpclasses_INCS} ${SMTP_INCS} ${Threading_INCS} ${TimerEvents_INCS} ${Utilities_INCS} ${Webserverframework_INCS} ${Xml_INCS})
 	
+	if (CMAKE_BUILD_TYPE STREQUAL Debug)
+		add_definitions(-DNDEBUG)
+	endif ()
+	
 	if (MSVC)
 		set(CompilerFlags
 			CMAKE_CXX_FLAGS
@@ -219,6 +223,15 @@ if(WIN32)
 			)
 		foreach(CompilerFlag ${CompilerFlags})
 			string(REPLACE "/MDd" "/MD" ${CompilerFlag} "${${CompilerFlag}}")
+		endforeach()
+	endif()
+	
+	if (MSVC)
+		set(CompilerFlags
+			CMAKE_CXX_FLAGS_DEBUG
+			)
+		foreach(CompilerFlag ${CompilerFlags})
+			string(REPLACE "_DEBUG" "NDEBUG" ${CompilerFlag} "${${CompilerFlag}}")
 		endforeach()
 	endif()
 	

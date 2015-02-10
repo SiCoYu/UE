@@ -1,9 +1,10 @@
 #include "TestStaticLib.h"
-#include "stdio.h"
+#include <stdio.h>
 
-int TestStaticLib::testFunc()
+
+int TestStaticLib::testFunc(std::string bbb)
 {
 	char aaa[20];
-	sprintf(aaa, "%d", 10);
+	sprintf(aaa, "%s %d", bbb, 10);
 	return 5;
 }

@@ -34,6 +34,9 @@ public class MyProject : ModuleRules
 
         Definitions.Add("WIN32_LEAN_AND_MEAN");
         Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
+        Definitions.Add("NO_GETADDRINFO");
+        Definitions.Add("ENABLE_EXCEPTIONS");
+        Definitions.Add("ENABLE_DETACH");
 
         MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;
@@ -164,7 +167,7 @@ public class MyProject : ModuleRules
     {
         string LibrariesPath;
 
-        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets", "Sockets.lib");
+        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets", "Sockets_d.lib");
         PublicAdditionalLibraries.Add(LibrariesPath);
 
         return true;
@@ -173,7 +176,7 @@ public class MyProject : ModuleRules
     private bool LoadTestExtern(TargetInfo Target)
     {
         string LibrariesPath;
-        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "TestStaticLib.lib");
+        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "TestStaticLib_d.lib");
 
         PublicAdditionalLibraries.Add(LibrariesPath);
 
@@ -184,7 +187,7 @@ public class MyProject : ModuleRules
     {
         string LibrariesPath;
 
-        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "gtest", "gtest.lib");
+        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "gtest", "gtest_d.lib");
         PublicAdditionalLibraries.Add(LibrariesPath);
 
         return true;

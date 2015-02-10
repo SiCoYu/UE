@@ -28,7 +28,7 @@ cd %base_dir%
 ::	echo Error %base_dir%ThirdParty\Src\build\ThirdParty.sln not exist
 ::)
 
-%DEVENV% %base_dir%ThirdParty\Src\build\ThirdParty.sln /build "RelWithDebInfo" /project "INSTALL"
-::%DEVENV% %base_dir%ThirdParty\Src\build\ThirdParty.sln /build "Debug" /project "INSTALL"
+::%DEVENV% %base_dir%ThirdParty\Src\build\ThirdParty.sln /build "RelWithDebInfo" /project "INSTALL"
+%DEVENV% %base_dir%ThirdParty\Src\build\ThirdParty.sln /build "Debug" /project "INSTALL"
 
 pause

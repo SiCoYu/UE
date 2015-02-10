@@ -19,5 +19,6 @@ if(MSVC)
 endif(MSVC)
 
 add_subdirectory(Sockets-2.3.9.9)
+add_subdirectory(Sockets-2.3.9.9/tests)
 add_subdirectory(TestStaticLib)
 add_subdirectory(gtest-1.7.0)

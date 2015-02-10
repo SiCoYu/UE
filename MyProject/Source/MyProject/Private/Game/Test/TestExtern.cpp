@@ -4,5 +4,5 @@
 TestExtern::TestExtern()
 {
 	m_testStaticLib = new TestStaticLib();
-	m_testStaticLib->testFunc();
+	m_testStaticLib->testFunc("aaaaaaa");
 }
