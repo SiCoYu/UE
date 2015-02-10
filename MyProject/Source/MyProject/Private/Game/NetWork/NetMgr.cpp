@@ -133,7 +133,9 @@ void NetMgr::openSocket(std::string ip, uint32 port)
 
 		TestSocket ts(h);
 		printf(">>> TestSocket.Open\n");
+
 		ts.Open("192.168.0.101", 10002);
+
 		printf(">>> Adding TestSocket\n");
 		h.Add(&ts);
 
