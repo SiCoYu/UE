@@ -1,8 +1,8 @@
-#include "TestStaticLib.h"
+#include "TestStaticLibB.h"
 #include <stdio.h>
 
 
-int TestStaticLib::testFunc(std::string bbb)
+int TestStaticLibB::testFunc(std::string bbb)
 {
 	char aaa[20];
 	sprintf(aaa, "%s %d", bbb, 10);

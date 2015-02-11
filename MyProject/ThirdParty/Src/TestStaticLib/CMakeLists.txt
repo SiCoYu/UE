@@ -5,11 +5,13 @@ if(WIN32)
 	message(STATUS "TestStaticLib Project")
 	
 	set(SRCS
-		./TestStaticLib.cpp
+		./TestStaticLibA.cpp
+		./TestStaticLibB.cpp
 	)
 
 	set(INCS
-		./TestStaticLib.h
+		./TestStaticLibA.h
+		./TestStaticLibB.h
 	)
 
 	source_group("Source Files" FILES ${SRCS} ${INCS})
@@ -53,7 +55,8 @@ if(WIN32)
 	file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}")
 	
 	install(FILES 
-		${CMAKE_CURRENT_SOURCE_DIR}/TestStaticLib.h
+		${CMAKE_CURRENT_SOURCE_DIR}/TestStaticLibA.h
+		${CMAKE_CURRENT_SOURCE_DIR}/TestStaticLibB.h
 		DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Inc/${PROJECT_NAME}"
 	)
 	
