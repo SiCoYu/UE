@@ -29,6 +29,7 @@ public class MyProjectEditorTarget : TargetRules
         ref CPPEnvironmentConfiguration OutCPPEnvironmentConfiguration
         )
     {
+        OutCPPEnvironmentConfiguration.CLRMode = CPPCLRMode.CLRDisabled;
         OutCPPEnvironmentConfiguration.bUseRTTI = true;
         //OutCPPEnvironmentConfiguration.bUseStaticCRT = false;
 

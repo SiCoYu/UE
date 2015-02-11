@@ -22,6 +22,8 @@
 
 #include "Windows/HideWindowsPlatformTypes.h"
 
+#include "Core.h"
+
 #ifdef SOCKETS_NAMESPACE
 using namespace SOCKETS_NAMESPACE;
 #endif
@@ -37,26 +39,26 @@ public:
 		for (socket_m::iterator it = m_sockets.begin(); it != m_sockets.end(); it++)
 		{
 			Socket *p0 = (*it).second;
-//#ifdef ENABLE_POOL
-//			if (dynamic_cast<ISocketHandler::PoolSocket *>(p0))
-//			{
-//				p->Send("PoolSocket\n");
-//			}
-//			else
-//#endif
-//				if (dynamic_cast<HttpGetSocket *>(p0))
-//				{
-//					p->Send("HttpGetSocket\n");
-//				}
-//				else
-//					if (dynamic_cast<TcpSocket *>(p0))
-//					{
-//						p->Send("TcpSocket\n");
-//					}
-//					else
-//					{
-//						p->Send("Some kind of Socket\n");
-//					}
+#ifdef ENABLE_POOL
+			if (dynamic_cast<ISocketHandler::PoolSocket *>(p0))
+			{
+				p->Send("PoolSocket\n");
+			}
+			else
+#endif
+				if (dynamic_cast<HttpGetSocket *>(p0))
+				{
+					p->Send("HttpGetSocket\n");
+				}
+				else
+					if (dynamic_cast<TcpSocket *>(p0))
+					{
+						p->Send("TcpSocket\n");
+					}
+					else
+					{
+						p->Send("Some kind of Socket\n");
+					}
 		}
 	}
 	void SetQuit() { m_quit = true; }
@@ -127,37 +129,37 @@ NetMgr::~NetMgr()
 
 void NetMgr::openSocket(std::string ip, uint32 port)
 {
-	//try
-	//{
-	//	StdoutLog log;
-	//	MyHandler h(&log);
+	try
+	{
+		StdoutLog log;
+		MyHandler h(&log);
 
-	//	TestSocket ts(h);
-	//	printf(">>> TestSocket.Open\n");
+		TestSocket ts(h);
+		printf(">>> TestSocket.Open\n");
 
-	//	ts.Open("192.168.0.101", 10002);
-	//	ts.Send("aaaaaaaaabbbbbbbbb");
+		ts.Open("192.168.125.17", 10002);
+		ts.Send("aaaaaaaaabbbbbbbbb");
 
-	//	printf(">>> Adding TestSocket\n");
-	//	h.Add(&ts);
+		printf(">>> Adding TestSocket\n");
+		h.Add(&ts);
 
-	//	printf(">>> Enter mainloop\n");
-	//	h.Select(0, 0);
-	//	while (!h.Quit())
-	//	{
-	//		h.Select(1, 0);
-	//	}
-	//	printf(">>> Leaving mainloop\n");
+		printf(">>> Enter mainloop\n");
+		h.Select(0, 0);
+		while (!h.Quit())
+		{
+			h.Select(1, 0);
+		}
+		printf(">>> Leaving mainloop\n");
 
-	//}
-	//catch (const Exception& e)
-	//{
-	//	std::cerr << e.ToString() << std::endl;
-	//}
-	//catch (const std::exception& e)
-	//{
-	//	std::cerr << e.what() << std::endl;
-	//}
+	}
+	catch (const Exception& e)
+	{
+		std::cerr << e.ToString() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 
 	NetClient* pClient = new NetClient(*this);
 	bool success = pClient->Open(ip, port);
