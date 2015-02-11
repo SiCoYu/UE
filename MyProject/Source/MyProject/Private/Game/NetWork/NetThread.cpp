@@ -17,7 +17,7 @@ namespace SOCKETS_NAMESPACE {
 #endif
 
 NetThread::NetThread(SocketHandler *p)
-	: Thread(false)
+	: Thread(true)
 	, m_h(p)
 	, m_ExitFlag(false)
 {
