@@ -44,7 +44,7 @@ void NetThread::Run()
 			((INetMgr*)m_h)->recAndSendMsg();
 		}
 
-		Utility::Sleep(0.04);
+		Utility::Sleep(100);
 	}
 	// m_socket now deleted oops
 	//  (a socket can only be detached if DeleteByHandler() is true)
