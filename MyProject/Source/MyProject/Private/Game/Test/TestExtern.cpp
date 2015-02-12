@@ -2,6 +2,8 @@
 #include "TestExtern.h"
 #include "Templates/Casts.h"
 
+#define dynamic_cast aaa
+
 TestExtern::TestExtern()
 {
 	//m_testStaticLibB = new TestStaticLibB();
