@@ -28,18 +28,18 @@ public:
 		{
 			Socket *p0 = (*it).second;
 #ifdef ENABLE_POOL
-			if (dynamic_cast<ISocketHandler::PoolSocket *>(p0))
+			if (static_cast<ISocketHandler::PoolSocket *>(p0))
 			{
 				p -> Send("PoolSocket\n");
 			}
 			else
 #endif
-			if (dynamic_cast<HttpGetSocket *>(p0))
+			if (static_cast<HttpGetSocket *>(p0))
 			{
 				p -> Send("HttpGetSocket\n");
 			}
 			else
-			if (dynamic_cast<TcpSocket *>(p0))
+			if (static_cast<TcpSocket *>(p0))
 			{
 				p -> Send("TcpSocket\n");
 			}
@@ -134,12 +134,12 @@ public:
 			else
 			if (cmd == "list")
 			{
-				dynamic_cast<MyHandler&>(Handler()).List( this );
+				static_cast<MyHandler&>(Handler()).List( this );
 			}
 			else
 			if (cmd == "stop")
 			{
-				dynamic_cast<MyHandler&>(Handler()).SetQuit();
+				static_cast<MyHandler&>(Handler()).SetQuit();
 			}
 			else
 			if (cmd == "resolve")

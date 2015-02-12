@@ -97,7 +97,7 @@ void EventHandler::CheckEvents()
 	while (it != m_events.end() && (*it) -> GetTime() < now)
 	{
 		Event *e = *it;
-		Socket *s = dynamic_cast<Socket *>(e -> GetFrom());
+		Socket *s = reinterpret_cast<Socket *>(e->GetFrom());
 		/*
 		s == NULL    This is another object implementing 'IEventOwner' and not a socket.
 		s != NULL    This is a Socket implementing IEventOwner, and we can check that the
@@ -122,7 +122,7 @@ void EventHandler::CheckEvents()
 
 long EventHandler::AddEvent(IEventOwner *from,long sec,long usec)
 {
-	Socket *s = dynamic_cast<Socket *>(from);
+	Socket *s = reinterpret_cast<Socket *>(from);
 	Event *e = new Event(from, sec, usec, s ? s -> UniqueIdentifier() : 0);
 	std::list<Event *>::iterator it = m_events.begin();
 	while (it != m_events.end() && *(*it) < *e)

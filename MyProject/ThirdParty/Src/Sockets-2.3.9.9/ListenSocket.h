@@ -71,7 +71,7 @@ public:
 		{
 			m_creator = new X(h);
 			Socket *tmp = m_creator -> Create();
-			if (tmp && dynamic_cast<X *>(tmp))
+			if (tmp && static_cast<X *>(tmp))
 			{
 				m_bHasCreate = true;
 			}
@@ -125,7 +125,7 @@ public:
 
 	int Bind(SocketAddress& ad,int depth) {
 #ifdef USE_SCTP
-		if (dynamic_cast<SctpSocket *>(m_creator))
+		if (static_cast<SctpSocket *>(m_creator))
 		{
 			return Bind(ad, "sctp", depth);
 		}
@@ -224,7 +224,7 @@ public:
 	int Bind(ipaddr_t a,port_t port,int depth = 20) {
 		Ipv4Address ad(a, port);
 #ifdef USE_SCTP
-		if (dynamic_cast<SctpSocket *>(m_creator))
+		if (static_cast<SctpSocket *>(m_creator))
 		{
 			return Bind(ad, "sctp", depth);
 		}
@@ -250,7 +250,7 @@ public:
 	int Bind(in6_addr a,port_t port,int depth = 20) {
 		Ipv6Address ad(a, port);
 #ifdef USE_SCTP
-		if (dynamic_cast<SctpSocket *>(m_creator))
+		if (static_cast<SctpSocket *>(m_creator))
 		{
 			return Bind(ad, "sctp", depth);
 		}
