@@ -129,37 +129,36 @@ NetMgr::~NetMgr()
 
 void NetMgr::openSocket(std::string ip, uint32 port)
 {
-	try
-	{
-		StdoutLog log;
-		MyHandler h(&log);
+	//try
+	//{
+	//	StdoutLog log;
+	//	MyHandler h(&log);
 
-		TestSocket ts(h);
-		printf(">>> TestSocket.Open\n");
+	//	TestSocket ts(h);
+	//	printf(">>> TestSocket.Open\n");
 
-		ts.Open("192.168.125.17", 10002);
-		ts.Send("aaaaaaaaabbbbbbbbb");
+	//	ts.Open("192.168.125.17", 10002);
+	//	ts.Send("aaaaaaaaabbbbbbbbb");
 
-		printf(">>> Adding TestSocket\n");
-		h.Add(&ts);
+	//	printf(">>> Adding TestSocket\n");
+	//	h.Add(&ts);
 
-		printf(">>> Enter mainloop\n");
-		h.Select(0, 0);
-		while (!h.Quit())
-		{
-			h.Select(1, 0);
-		}
-		printf(">>> Leaving mainloop\n");
-
-	}
-	catch (const Exception& e)
-	{
-		std::cerr << e.ToString() << std::endl;
-	}
-	catch (const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
+	//	printf(">>> Enter mainloop\n");
+	//	h.Select(0, 0);
+	//	while (!h.Quit())
+	//	{
+	//		h.Select(1, 0);
+	//	}
+	//	printf(">>> Leaving mainloop\n");
+	//}
+	//catch (const Exception& e)
+	//{
+	//	std::cerr << e.ToString() << std::endl;
+	//}
+	//catch (const std::exception& e)
+	//{
+	//	std::cerr << e.what() << std::endl;
+	//}
 
 	NetClient* pClient = new NetClient(*this);
 	bool success = pClient->Open(ip, port);

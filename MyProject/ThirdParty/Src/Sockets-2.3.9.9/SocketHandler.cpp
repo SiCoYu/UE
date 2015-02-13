@@ -657,7 +657,7 @@ ISocketHandler::PoolSocket *SocketHandler::FindConnection(int type,const std::st
 {
 	for (socket_m::iterator it = m_sockets.begin(); it != m_sockets.end() && m_sockets.size(); ++it)
 	{
-		PoolSocket *pools = dynamic_cast<PoolSocket *>(it -> second);
+		PoolSocket *pools = static_cast<PoolSocket *>(it -> second);
 		if (pools)
 		{
 			if (pools -> GetSocketType() == type &&
@@ -905,14 +905,14 @@ DEB(		fprintf(stderr, "Trying to add fd %d,  m_add.size() %d\n", (int)s, (int)m_
 				m_b_check_retry = true;
 			}
 */
-			StreamSocket *scp = dynamic_cast<StreamSocket *>(p);
+			StreamSocket *scp = static_cast<StreamSocket *>(p);
 			if (scp && scp -> Connecting()) // 'Open' called before adding socket
 			{
 				ISocketHandler_Add(p,false,true);
 			}
 			else
 			{
-				TcpSocket *tcp = dynamic_cast<TcpSocket *>(p);
+				TcpSocket *tcp = static_cast<TcpSocket *>(p);
 				bool bWrite = tcp ? tcp -> GetOutputLength() != 0 : false;
 				if (p -> IsDisableRead())
 				{
@@ -1000,7 +1000,7 @@ void SocketHandler::CheckCallOnConnect()
 			else
 #endif
 			{
-				TcpSocket *tcp = dynamic_cast<TcpSocket *>(p);
+				TcpSocket *tcp = static_cast<TcpSocket *>(p);
 				if (tcp)
 				{
 					if (tcp -> GetOutputLength())
@@ -1064,7 +1064,7 @@ void SocketHandler::CheckTimeout(time_t tnow)
 		{
 			if (p -> Timeout(tnow))
 			{
-				StreamSocket *scp = dynamic_cast<StreamSocket *>(p);
+				StreamSocket *scp = static_cast<StreamSocket *>(p);
 				p -> SetTimeout(0);
 				if (scp && scp -> Connecting())
 				{
@@ -1091,7 +1091,7 @@ void SocketHandler::CheckRetry()
 		Socket *p = it -> second;
 		if (Valid(p) && Valid(p -> UniqueIdentifier()) && p -> RetryClientConnect())
 		{
-			TcpSocket *tcp = dynamic_cast<TcpSocket *>(p);
+			TcpSocket *tcp = static_cast<TcpSocket *>(p);
 			tcp -> SetRetryClientConnect(false);
 DEB(					fprintf(stderr, "Close() before retry client connect\n");)
 			p -> Close(); // removes from m_fds_retry
@@ -1120,7 +1120,7 @@ void SocketHandler::CheckClose()
 		Socket *p = it -> second;
 		if (Valid(p) && Valid(p -> UniqueIdentifier()) && p -> CloseAndDelete() )
 		{
-			TcpSocket *tcp = dynamic_cast<TcpSocket *>(p);
+			TcpSocket *tcp = static_cast<TcpSocket *>(p);
 #ifdef ENABLE_RECONNECT
 			if (p -> Lost() && !(tcp && tcp -> Reconnect()))
 #else

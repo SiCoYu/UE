@@ -1383,7 +1383,7 @@ void TcpSocket::UseCertificateChainFile(const std::string& filename)
 int TcpSocket::SSL_password_cb(char *buf,int num,int rwflag,void *userdata)
 {
 	Socket *p0 = static_cast<Socket *>(userdata);
-	TcpSocket *p = dynamic_cast<TcpSocket *>(p0);
+	TcpSocket *p = static_cast<TcpSocket *>(p0);
 	std::string pw = p ? p -> GetPassword() : "";
 	if ( (size_t)num < pw.size() + 1)
 	{
