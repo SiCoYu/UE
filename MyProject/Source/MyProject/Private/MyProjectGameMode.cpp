@@ -7,6 +7,7 @@
 #include "UI/MyHUD.h"
 #include "Ctx.h"
 #include "IEngineApi.h"
+#include "FormID.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -29,5 +30,7 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 void AMyProjectGameMode::StartPlay()
 {
 	Super::StartPlay();
+	// 各种初始化
 	Ctx::getSingletonPtr()->getEngineApi()->showCursor();
+	Ctx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
 }

@@ -3,7 +3,6 @@
 #include "MyProject.h"
 #include "MyProjectCharacter.h"
 #include "Ctx.h"
-#include "FormID.h"
 #include "EngineData.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -135,5 +134,4 @@ void AMyProjectCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	Ctx::getSingletonPtr()->getEngineData()->setMainActor(this);
-	Ctx::getSingletonPtr()->getUIMgr()->loadForm(eUIPack);
 }
