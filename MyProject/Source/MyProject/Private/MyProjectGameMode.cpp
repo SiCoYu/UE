@@ -5,6 +5,8 @@
 #include "MyProjectCharacter.h"
 #include "GameFramework/HUD.h"
 #include "UI/MyHUD.h"
+#include "Ctx.h"
+#include "IEngineApi.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -26,5 +28,6 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 
 void AMyProjectGameMode::StartPlay()
 {
-	FSlateApplication::Get().GetPlatformApplication()->Cursor->Show(true);
+	Super::StartPlay();
+	Ctx::getSingletonPtr()->getEngineApi()->showCursor();
 }
