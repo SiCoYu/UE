@@ -4,9 +4,7 @@
 UIPack::UIPack()
 {
 	loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
-
 	m_umgWidget->AddToViewport();
-
 
 	//TSharedPtr<SWidget> m_outUserSlateWidget;
 	//TSharedRef<SWidget> m_rootWidget = m_umgWidget->MakeViewportWidget(m_outUserSlateWidget);

@@ -1,9 +1,6 @@
 #include "MyProject.h"
 #include "AppFrame.h"
-#include "UIManager.h"
-#include "Ctx.h"
-#include "EngineApi.h"
-#include "NetMgr.h"
+#include "Common.h"
 
 void AppFrame::initApp()
 {
