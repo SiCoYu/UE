@@ -3,8 +3,11 @@
 #include "EngineData.h"
 
 #include "EngineData.h"
-#include "IEngineApi.h"
 #include "INetMgr.h"
+
+#include "UIManager.h"
+#include "EngineApi.h"
+#include "NetMgr.h"
 
 #include "Test.h"
 
@@ -30,6 +33,10 @@ void Ctx::init()
 {
 	m_engineData = new EngineData();
 	m_pStdoutLog = new StdoutLog();
+
+	m_uiMgr = new UIManager();
+	m_engineApi = new EngineApi();
+	m_pINetMgr = new NetMgr(getStdLog());
 
 	m_test = new Test();
 	m_test->runTest();
@@ -60,12 +67,12 @@ EngineData* Ctx::getEngineData()
 	return m_engineData;
 }
 
-IEngineApi* Ctx::getEngineApi()
+EngineApi* Ctx::getEngineApi()
 {
 	return m_engineApi;
 }
 
-void Ctx::setEngineApi(IEngineApi* engineApi)
+void Ctx::setEngineApi(EngineApi* engineApi)
 {
 	m_engineApi = engineApi;
 }

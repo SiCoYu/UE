@@ -1,11 +1,9 @@
 #ifndef __ENGINEAPI_H
 #define __ENGINEAPI_H
 
-#include "IEngineApi.h"
-
 class UGameInstance;
 
-class EngineApi : public IEngineApi
+class EngineApi
 {
 public:
 	virtual UGameInstance* getGameInstance();

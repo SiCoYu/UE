@@ -2,8 +2,7 @@
 
 #include "MyProject.h"
 #include "MyProjectCharacter.h"
-#include "Ctx.h"
-#include "EngineData.h"
+#include "Common.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMyProjectCharacter

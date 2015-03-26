@@ -8,7 +8,7 @@
 class IUIManager;
 class UGameInstance;
 class EngineData;
-class IEngineApi;
+class EngineApi;
 class INetMgr;
 
 class Test;
@@ -19,7 +19,7 @@ protected:
 	IUIManager* m_uiMgr;
 	//UGameInstance* m_uGameInstance;
 	EngineData* m_engineData;
-	IEngineApi* m_engineApi;
+	EngineApi* m_engineApi;
 	INetMgr* m_pINetMgr;
 	StdoutLog* m_pStdoutLog;
 
@@ -36,8 +36,8 @@ public:
 	//UGameInstance* getGameInstance();
 
 	EngineData* getEngineData();
-	IEngineApi* getEngineApi();
-	void setEngineApi(IEngineApi* engineApi);
+	EngineApi* getEngineApi();
+	void setEngineApi(EngineApi* engineApi);
 	void setNetMgr(INetMgr* pINetMgr);
 	INetMgr* getNetMgr();
 

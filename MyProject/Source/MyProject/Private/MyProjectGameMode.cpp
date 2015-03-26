@@ -5,8 +5,7 @@
 #include "MyProjectCharacter.h"
 #include "GameFramework/HUD.h"
 #include "UI/MyHUD.h"
-#include "Ctx.h"
-#include "IEngineApi.h"
+#include "Common.h"
 #include "FormID.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
