@@ -1,14 +1,16 @@
-#ifndef __UIPACK_H
-#define __UIPACK_H
+#pragma once
 
 #include "UMGForm.h"
+#include "UIPack.generated.h"
 
-class UIPack : public UMGForm
+UCLASS(config = Game)
+class UUIPack : public UUMGForm
 {
-protected:
-	
-public:
-	UIPack();
-};
+	GENERATED_BODY()
 
-#endif				// __UIPACK_H
+public:
+	UUIPack(const FObjectInitializer& ObjectInitializer);
+
+	UFUNCTION(BlueprintCallable, Category = "Button")
+	void OnConfirmGeneric();
+};

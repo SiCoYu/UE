@@ -4,7 +4,7 @@
 #include "MyProject.h"
 #include "FormBase.h"
 
-class SlateForm : public FormBase
+class SlateForm : public UFormBase
 {
 public:
 	SlateForm();

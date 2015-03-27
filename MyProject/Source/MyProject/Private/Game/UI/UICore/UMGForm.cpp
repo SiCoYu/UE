@@ -3,7 +3,7 @@
 #include "Ctx.h"
 #include "EngineApi.h"
 
-void UMGForm::loadUWidget(const TCHAR* name)
+void UUMGForm::loadUWidget(const TCHAR* name)
 {
 	UClass* widgetClass = StaticLoadClass(UUserWidget::StaticClass(), NULL, name);
 	if (widgetClass != NULL)

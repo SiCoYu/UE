@@ -1,10 +1,12 @@
-#ifndef __FORMBASE_H
-#define __FORMBASE_H
+#pragma once
 
-class FormBase
+#include "FormBase.generated.h"
+
+
+UCLASS(abstract, config = Game)
+class UFormBase : public UObject
 {
+	GENERATED_BODY()
 public:
-	FormBase();
+	//FormBase();
 };
-
-#endif				// __FORMBASE_H

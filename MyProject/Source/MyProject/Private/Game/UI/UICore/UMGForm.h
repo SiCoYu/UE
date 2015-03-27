@@ -1,13 +1,16 @@
-#ifndef __UMGFORM_H
-#define __UMGFORM_H
+#pragma once
 
 #include "MyProject.h"
 #include "FormBase.h"
+#include "UMGForm.generated.h"
 
 class UUserWidget;
 
-class UMGForm : public FormBase
+UCLASS(abstract, config = Game)
+class UUMGForm : public UFormBase
 {
+	GENERATED_BODY()
+
 protected:
 	UUserWidget* m_umgWidget;
 	//TSharedPtr<SWidget> m_outUserSlateWidget;
@@ -16,5 +19,3 @@ protected:
 protected:
 	void loadUWidget(const TCHAR* name);
 };
-
-#endif				// __UMGFORM_H

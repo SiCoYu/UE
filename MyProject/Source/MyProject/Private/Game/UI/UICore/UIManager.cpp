@@ -7,7 +7,7 @@ UIManager::UIManager()
 	m_uiFactory = new UIFactory();
 }
 
-FormBase* UIManager::loadForm(FormID formID)
+UFormBase* UIManager::loadForm(FormID formID)
 {
 	if (m_id2Form[formID] == nullptr)
 	{

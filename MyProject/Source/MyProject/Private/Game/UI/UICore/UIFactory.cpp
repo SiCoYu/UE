@@ -4,13 +4,14 @@
 #include "FormBase.h"
 #include "UIPack.h"
 
-FormBase* UIFactory::createForm(FormID formID)
+UFormBase* UIFactory::createForm(FormID formID)
 {
 	switch (formID)
 	{
 		case eUIPack:
 		{
-			return new UIPack();
+			//return new UUIPack();
+			return Cast<UFormBase>(StaticConstructObject(UUIPack::StaticClass()));
 		}
 		default:
 		{

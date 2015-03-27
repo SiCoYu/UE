@@ -23,3 +23,10 @@ void EngineApi::showCursor()
 	}
 	FSlateApplication::Get().GetPlatformApplication()->Cursor->Show(true);
 }
+
+void EngineApi::addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName)
+{
+	TScriptDelegate<FWeakObjectPtr> ptrDelegate;
+	ptrDelegate.BindUFunction(pFuncObj, funcName);
+	pBtn->OnClicked.Add(ptrDelegate);
+}

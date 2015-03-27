@@ -3,12 +3,12 @@
 
 #include "FormID.h"
 
-class FormBase;
+class UFormBase;
 
 class UIFactory
 {
 public:
-	FormBase* createForm(FormID formID);
+	UFormBase* createForm(FormID formID);
 };
 
 #endif				// __UIFACTOREY_H
