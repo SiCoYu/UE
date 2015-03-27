@@ -13,4 +13,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Button")
 	void OnConfirmGeneric();
+
+	virtual void onReady();
 };

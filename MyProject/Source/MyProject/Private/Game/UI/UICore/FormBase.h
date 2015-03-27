@@ -8,5 +8,5 @@ class UFormBase : public UObject
 {
 	GENERATED_BODY()
 public:
-	//FormBase();
+	virtual void onReady(){};
 };

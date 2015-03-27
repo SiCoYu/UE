@@ -1,6 +1,7 @@
 #include "MyProject.h"
 #include "UIManager.h"
 #include "UIFactory.h"
+#include "FormBase.h"
 
 UIManager::UIManager()
 {
@@ -13,6 +14,6 @@ UFormBase* UIManager::loadForm(FormID formID)
 	{
 		m_id2Form[formID] = m_uiFactory->createForm(formID);
 	}
-
+	m_id2Form[formID]->onReady();
 	return m_id2Form[formID];
 }
