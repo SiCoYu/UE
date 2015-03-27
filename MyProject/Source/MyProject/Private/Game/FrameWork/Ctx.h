@@ -5,7 +5,7 @@
 #include "IUIManager.h"
 #include <Sockets/StdoutLog.h>
 
-class IUIManager;
+class UIManager;
 class UGameInstance;
 class EngineData;
 class EngineApi;
@@ -16,7 +16,7 @@ class Test;
 class Ctx : public Singleton<Ctx>
 {
 protected:
-	IUIManager* m_uiMgr;
+	UIManager* m_uiMgr;
 	//UGameInstance* m_uGameInstance;
 	EngineData* m_engineData;
 	EngineApi* m_engineApi;
@@ -30,8 +30,8 @@ public:
 	~Ctx();
 
 	void init();
-	void setUIMgr(IUIManager* uiMgr);
-	IUIManager* getUIMgr();
+	void setUIMgr(UIManager* uiMgr);
+	UIManager* getUIMgr();
 	//void setGameInstance(UGameInstance* ins);
 	//UGameInstance* getGameInstance();
 

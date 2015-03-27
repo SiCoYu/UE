@@ -3,20 +3,29 @@
 
 #include <map>
 #include "FormID.h"
-#include "IUIManager.h"
 
 class UFormBase;
-class UIFactory;
 
-class UIManager : public IUIManager
+class UIManager
 {
 protected:
 	std::map<FormID, UFormBase*> m_id2Form;
-	UIFactory* m_uiFactory;
 
 public:
 	UIManager();
-	virtual UFormBase* loadForm(FormID formID);
+	template <class T>
+	UFormBase* loadForm(FormID formID);
 };
+
+template <class T>
+UFormBase* UIManager::loadForm(FormID formID)
+{
+	if (m_id2Form[formID] == nullptr)
+	{
+		m_id2Form[formID] = Cast<UFormBase>(StaticConstructObject(T::StaticClass()));
+	}
+	m_id2Form[formID]->onReady();
+	return m_id2Form[formID];
+}
 
 #endif				// __UIMANAGER_H

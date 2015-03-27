@@ -1,10 +1,8 @@
 #include "MyProject.h"
 #include "Ctx.h"
 #include "EngineData.h"
-
 #include "EngineData.h"
 #include "INetMgr.h"
-
 #include "UIManager.h"
 #include "EngineApi.h"
 #include "NetMgr.h"
@@ -42,12 +40,12 @@ void Ctx::init()
 	m_test->runTest();
 }
 
-void Ctx::setUIMgr(IUIManager* uiMgr)
+void Ctx::setUIMgr(UIManager* uiMgr)
 {
 	m_uiMgr = uiMgr;
 }
 
-IUIManager* Ctx::getUIMgr()
+UIManager* Ctx::getUIMgr()
 {
 	return m_uiMgr;
 }
