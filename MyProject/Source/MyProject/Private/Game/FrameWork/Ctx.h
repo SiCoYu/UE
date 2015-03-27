@@ -2,7 +2,6 @@
 #define __CTX_H
 
 #include "Singleton.h"
-#include "IUIManager.h"
 #include <Sockets/StdoutLog.h>
 
 class UIManager;
