@@ -1,5 +1,5 @@
-﻿#ifndef __TableItemBase_H_
-#define __TableItemBase_H_
+﻿#ifndef __TableBase_H_
+#define __TableBase_H_
 
 #include "string"
 #include "vector"

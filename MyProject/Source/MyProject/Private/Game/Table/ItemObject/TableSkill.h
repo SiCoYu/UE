@@ -1,5 +1,5 @@
-﻿#ifndef __TableItemBase_H_
-#define __TableItemBase_H_
+﻿#ifndef __TableSkill_H_
+#define __TableSkill_H_
 
 #include <string>
 #include "HAL/Platform.h"

@@ -5,7 +5,7 @@
 
 void TableSkillItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 {
-    bytes.position = offset;
+    bytes->pos(offset);
     m_name = UtilTable::readString(bytes);
     m_effect = UtilTable::readString(bytes);
     m_desc = UtilTable::readString(bytes);

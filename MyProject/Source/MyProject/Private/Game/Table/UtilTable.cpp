@@ -1,9 +1,11 @@
 ﻿#include "MyProject.h"
-#include "TableBase.h"
+#include "UtilTable.h"
 #include "ByteBuffer.h"
+#include "MEncode.h"
 
 std::string UtilTable::readString(ByteBuffer* bytes)
 {
-    m_sCnt = bytes->readUnsignedShort();
-    return bytes->readMultiByte(m_sCnt, GkEncode.UTF8);
+	bytes->readUnsignedInt16(m_sCnt);
+	bytes->readMultiByte(m_retStr, m_sCnt, MEncode::eUTF8);
+	return m_retStr;
 }

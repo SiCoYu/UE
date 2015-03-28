@@ -5,10 +5,10 @@
 
 void TableObjectItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 {
-    bytes->position = offset;  // 从偏移处继续读取真正的内容
+	bytes->pos(offset);  // 从偏移处继续读取真正的内容
     m_name = UtilTable::readString(bytes);
-	m_maxNum = bytes->readInt();
-	m_type = bytes->readInt();
-	m_color = bytes->readInt();
-    m_prefab = UtilTable::readString(bytes as ByteArray);
+	bytes->readInt32(m_maxNum);
+	bytes->readInt32(m_type);
+	bytes->readInt32(m_color);
+    m_prefab = UtilTable::readString(bytes);
 }
