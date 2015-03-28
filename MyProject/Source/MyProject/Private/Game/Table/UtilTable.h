@@ -1,13 +1,17 @@
-﻿namespace SDK.Common
+﻿#ifndef __TableItemBase_H_
+#define __TableItemBase_H_
+
+#include "MyProject.h"
+#include "string"
+
+class ByteBuffer;
+
+class UtilTable
 {
-    public class UtilTable
-    {
-        static public uint m_prePos;        // 记录之前的位置
-        static public uint m_sCnt;
-        static public string readString(ByteArray bytes)
-        {
-            m_sCnt = bytes.readUnsignedShort();
-            return bytes.readMultiByte(m_sCnt, GkEncode.UTF8);
-        }
-    }
-}
+public:
+    static uint32 m_prePos;        // 记录之前的位置
+    static uint32 m_sCnt;
+	static std::string readString(ByteBuffer* bytes);
+};
+
+#endif

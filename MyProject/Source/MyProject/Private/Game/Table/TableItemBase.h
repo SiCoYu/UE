@@ -1,39 +1,48 @@
-﻿namespace SDK.Common
+﻿#ifndef __TableItemBase_H_
+#define __TableItemBase_H_
+
+class TableItemHeader;
+class TableItemBodyBase;
+class ByteArray;
+
+class TableItemBase
 {
-    public class TableItemBase
-    {
-        public TableItemHeader m_itemHeader;
-        public TableItemBodyBase m_itemBody;
+public:
+	TableItemHeader* m_itemHeader;
+    TableItemBodyBase* m_itemBody;
 
-        virtual public void parseHeaderByteArray(ByteArray bytes)
-        {
-            if (null == m_itemHeader)
-            {
-                m_itemHeader = new TableItemHeader();
-            }
-            m_itemHeader.parseHeaderByteArray(bytes);
-        }
+public:
+	virtual void parseHeaderByteArray(ByteArray* bytes);
 
-        virtual public void parseBodyByteArray<T>(ByteArray bytes, uint offset) where T : TableItemBodyBase, new()
-        {
-            if (null == m_itemBody)
-            {
-                m_itemBody = new T();
-            }
+	template <class T>
+	virtual void parseBodyByteArray(ByteArray* bytes, uint offset);
 
-            m_itemBody.parseBodyByteArray(bytes, offset);
-        }
+	template <class T>
+	virtual void parseAllByteArray(ByteArray* bytes);
+};
 
-        virtual public void parseAllByteArray<T>(ByteArray bytes) where T : TableItemBodyBase, new()
-        {
-            // 解析头
-            parseHeaderByteArray(bytes);
-            // 保存下一个 Item 的头位置
-            UtilTable.m_prePos = (bytes as ByteArray).position;
-            // 解析内容
-            parseBodyByteArray<T>(bytes, m_itemHeader.m_offset);
-            // 移动到下一个 Item 头位置
-            bytes.setPos(UtilTable.m_prePos);
-        }
-    }
+template <class T>
+void TableItemBase::parseBodyByteArray(ByteArray* bytes, uint offset)
+{
+	if (null == m_itemBody)
+	{
+		m_itemBody = new T();
+	}
+
+	m_itemBody.parseBodyByteArray(bytes, offset);
 }
+
+template <class T>
+void TableItemBase::parseAllByteArray(ByteArray* bytes)
+{
+	// 解析头
+	parseHeaderByteArray(bytes);
+	// 保存下一个 Item 的头位置
+	UtilTable.m_prePos = (bytes as ByteArray).position;
+	// 解析内容
+	parseBodyByteArray<T>(bytes, m_itemHeader.m_offset);
+	// 移动到下一个 Item 头位置
+	bytes.setPos(UtilTable.m_prePos);
+}
+
+#endif

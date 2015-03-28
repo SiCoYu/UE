@@ -1,24 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#include "MyProject.h"
+#include "TableBase.h"
 
-namespace SDK.Common
+TableBase::TableBase(std::string resname, std::string tablename, std::string prefabname)
 {
-    //public class TableBase<T> where T : ItemBase, new()
-    public class TableBase
-    {
-        public string m_resName;
-        public string m_tableName;      // 表的名字
-        public string m_prefabName;     // prefab 名字
+    m_resName = resname;
+    m_tableName = tablename;
+    m_prefabName = prefabname;
 
-        public List<TableItemBase> m_List;
-        public ByteArray m_byteArray;      // 整个表格所有的原始数据
-
-        public TableBase(string resname, string tablename, string prefabname)
-        {
-            m_resName = resname;
-            m_tableName = tablename;
-            m_prefabName = prefabname;
-
-            m_List = new List<TableItemBase>();
-        }
-    }
+	m_List = new std::vector<TableItemBase>();
 }
