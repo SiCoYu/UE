@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "TableBase.h"
+#include "ByteBuffer.h"
 
 std::string UtilTable::readString(ByteBuffer* bytes)
 {

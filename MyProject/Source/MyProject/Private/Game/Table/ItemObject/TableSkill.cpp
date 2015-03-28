@@ -1,10 +1,12 @@
 ﻿#include "MyProject.h"
-#include "TableCard.h"
+#include "TableSkill.h"
+#include "ByteBuffer.h"
+#include "UtilTable.h"
 
-override public void TableSkillItemBody::parseBodyByteArray(ByteArray bytes, uint offset)
+void TableSkillItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 {
-    (bytes as ByteArray).position = offset;
-    m_name = UtilTable.readString(bytes as ByteArray);
-    m_effect = UtilTable.readString(bytes as ByteArray);
-    m_desc = UtilTable.readString(bytes as ByteArray);
+    bytes.position = offset;
+    m_name = UtilTable::readString(bytes);
+    m_effect = UtilTable::readString(bytes);
+    m_desc = UtilTable::readString(bytes);
 }

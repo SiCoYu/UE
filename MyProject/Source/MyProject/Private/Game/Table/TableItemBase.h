@@ -1,9 +1,11 @@
 ﻿#ifndef __TableItemBase_H_
 #define __TableItemBase_H_
 
+#include "HAL/Platform.h"
+
 class TableItemHeader;
 class TableItemBodyBase;
-class ByteArray;
+class ByteBuffer;
 
 class TableItemBase
 {
@@ -12,17 +14,17 @@ public:
     TableItemBodyBase* m_itemBody;
 
 public:
-	virtual void parseHeaderByteArray(ByteArray* bytes);
+	virtual void parseHeaderByteArray(ByteBuffer* bytes);
 
 	template <class T>
-	virtual void parseBodyByteArray(ByteArray* bytes, uint offset);
+	virtual void parseBodyByteArray(ByteBuffer* bytes, uint32 offset);
 
 	template <class T>
-	virtual void parseAllByteArray(ByteArray* bytes);
+	virtual void parseAllByteArray(ByteBuffer* bytes);
 };
 
 template <class T>
-void TableItemBase::parseBodyByteArray(ByteArray* bytes, uint offset)
+void TableItemBase::parseBodyByteArray(ByteArray* bytes, uint32 offset)
 {
 	if (null == m_itemBody)
 	{
@@ -33,12 +35,12 @@ void TableItemBase::parseBodyByteArray(ByteArray* bytes, uint offset)
 }
 
 template <class T>
-void TableItemBase::parseAllByteArray(ByteArray* bytes)
+void TableItemBase::parseAllByteArray(ByteBuffer* bytes)
 {
 	// 解析头
 	parseHeaderByteArray(bytes);
 	// 保存下一个 Item 的头位置
-	UtilTable.m_prePos = (bytes as ByteArray).position;
+	UtilTable.m_prePos = bytes.position;
 	// 解析内容
 	parseBodyByteArray<T>(bytes, m_itemHeader.m_offset);
 	// 移动到下一个 Item 头位置

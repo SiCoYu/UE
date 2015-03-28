@@ -1,7 +1,8 @@
 ﻿#include "MyProject.h"
 #include "TableItemBase.h"
+#include "ByteBuffer.h"
 
-void TableItemBase::parseHeaderByteArray(ByteArray* bytes)
+void TableItemBase::parseHeaderByteArray(ByteBuffer* bytes)
 {
     if (null == m_itemHeader)
     {

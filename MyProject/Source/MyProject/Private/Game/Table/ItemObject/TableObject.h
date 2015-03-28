@@ -1,16 +1,20 @@
 ﻿#ifndef __TableItemBase_H_
 #define __TableItemBase_H_
 
+#include <string>
+#include "HAL/Platform.h"
+#include "TableItemBodyBase.h"
+
 class TableObjectItemBody : TableItemBodyBase
 {
-    public string m_name;
-    public int m_maxNum;
-    public int m_type;
-    public int m_color;
-    public string m_prefab;
+public:
+    std::string m_name;
+    int m_maxNum;
+    int m_type;
+    int m_color;
+	std::string m_prefab;
 
-	override public void parseBodyByteArray(ByteArray bytes, uint offset);
-	public string path;
+	virtual void parseBodyByteArray(ByteBuffer* bytes, uint32 offset);
 };
 
 #endif

@@ -1,16 +1,17 @@
 #include "MyProject.h"
 #include "TableSys.h"
+#include "TableBase.h"
+#include "TableItemBase.h"
 
-public TableSys::TableSys()
+TableSys::TableSys()
 {
-	m_dicTable = new Dictionary<TableID, TableBase>();
     m_dicTable[TableID.TABLE_OBJECT] = new TableBase("ObjectBase_client", "ObjectBase_client", "ObjectBase_client");
     m_dicTable[TableID.TABLE_CARD] = new TableBase("CardBase_client", "CardBase_client", "CardBase_client");
     m_dicTable[TableID.TABLE_SKILL] = new TableBase("SkillBase_client", "SkillBase_client", "SkillBase_client");    // 添加一个表的步骤三
 }
 
 // 返回一个表
-public List<TableItemBase> TableSys::getTable(TableID tableID)
+List<TableItemBase*> TableSys::getTable(TableID tableID)
 {
 	TableBase table = m_dicTable[tableID];
 	if (table == null)
@@ -22,7 +23,7 @@ public List<TableItemBase> TableSys::getTable(TableID tableID)
 }
 		
 // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
-public TableItemBase TableSys::getItem(TableID tableID, uint itemID)
+TableItemBase* TableSys::getItem(TableID tableID, uint itemID)
 {
     TableBase table = m_dicTable[tableID];
     if (null == table.m_byteArray)
@@ -46,7 +47,7 @@ public TableItemBase TableSys::getItem(TableID tableID, uint itemID)
 }
 		
 // 加载一个表
-public void TableSys::loadOneTable(TableID tableID)
+void TableSys::loadOneTable(TableID tableID)
 {
 	TableBase table = m_dicTable[tableID];
 
@@ -62,7 +63,7 @@ public void TableSys::loadOneTable(TableID tableID)
 }
 
 // 加载一个表完成
-public void TableSys::onloaded(IDispatchObject resEvt)
+void TableSys::onloaded(IDispatchObject resEvt)
 {
     m_res = resEvt as IResItem;                         // 类型转换
     TextAsset textAsset = m_res.getObject("") as TextAsset;
@@ -77,7 +78,7 @@ public void TableSys::onloaded(IDispatchObject resEvt)
 }
 
 // 根据路径查找表的 ID
-protected TableID TableSys::getTableIDByPath(string path)
+TableID TableSys::getTableIDByPath(string path)
 {
     foreach (KeyValuePair<TableID, TableBase> kv in m_dicTable)
     {
@@ -91,7 +92,7 @@ protected TableID TableSys::getTableIDByPath(string path)
 }
 
 // 加载一个表中一项的所有内容
-public void TableSys::loadOneTableOneItemAll(TableID tableID, TableBase table, TableItemBase itemBase)
+void TableSys::loadOneTableOneItemAll(TableID tableID, TableBase* table, TableItemBase* itemBase)
 {
     if (TableID.TABLE_OBJECT == tableID)
     {
@@ -108,7 +109,7 @@ public void TableSys::loadOneTableOneItemAll(TableID tableID, TableBase table, T
 }
 		
 // 获取一个表的名字
-public string TableSys::getTableName(TableID tableID)
+string TableSys::getTableName(TableID tableID)
 {
 	TableBase table = m_dicTable[tableID];
 	if (table != null)
@@ -119,7 +120,7 @@ public string TableSys::getTableName(TableID tableID)
 }
 
 // 读取一个表，仅仅读取表头
-private void TableSys::readTable(TableID tableID, ByteArray bytes)
+void TableSys::readTable(TableID tableID, ByteBuffer* bytes)
 {
     TableBase table = m_dicTable[tableID];
     table.m_byteArray = bytes;
@@ -147,7 +148,7 @@ private void TableSys::readTable(TableID tableID, ByteArray bytes)
 }
 
 // 查找表中的一项
-static public TableItemBase TableSys::findDataItem(TableBase table, uint id)
+TableItemBase TableSys::findDataItem(TableBase* table, uint id)
 {
 	int size = table.m_List.Count;
 	int low = 0;
