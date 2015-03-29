@@ -37,6 +37,10 @@ public class MyProject : ModuleRules
 			}
         );
 
+        if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+        {
+            Definitions.Add("_CRT_SECURE_NO_WARNINGS");
+        }
         //Definitions.Add("WIN32_LEAN_AND_MEAN");
         //Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
         //Definitions.Add("NO_GETADDRINFO");

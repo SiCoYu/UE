@@ -7,7 +7,7 @@
 void TableCardItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 {
     bytes->pos(offset);
-    m_name = UtilTable::readString(bytes);
+	UtilTable::readString(bytes, m_name);
 
 	bytes->readInt32(m_type);
 	bytes->readInt32(m_career);
@@ -18,7 +18,7 @@ void TableCardItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 	bytes->readInt32(m_attack);
 	bytes->readInt32(m_hp);
 	bytes->readInt32(m_Durable);
-    m_prefab = UtilTable::readString(bytes);
+	UtilTable::readString(bytes, m_prefab);
 
 	bytes->readInt32(m_chaoFeng);
 	bytes->readInt32(m_chongFeng);

@@ -26,9 +26,9 @@ public:
 template <class T>
 void TableItemBase::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 {
-	if (null == m_itemBody)
+	if (nullptr == m_itemBody)
 	{
-		m_itemBody = new T();
+		m_itemBody = (TableItemBodyBase *)new T();
 	}
 
 	m_itemBody->parseBodyByteArray(bytes, offset);

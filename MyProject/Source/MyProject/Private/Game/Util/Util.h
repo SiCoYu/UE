@@ -1,5 +1,5 @@
-#ifndef __TableBase_H_
-#define __TableBase_H_
+#ifndef __Util_H_
+#define __Util_H_
 
 #include <string>
 

@@ -3,9 +3,11 @@
 #include "ByteBuffer.h"
 #include "MEncode.h"
 
-std::string UtilTable::readString(ByteBuffer* bytes)
+uint32 UtilTable::m_prePos = 0;        // 记录之前的位置
+uint16 UtilTable::m_sCnt;
+
+void UtilTable::readString(ByteBuffer* bytes, std::string& tmpStr)
 {
 	bytes->readUnsignedInt16(m_sCnt);
-	bytes->readMultiByte(m_retStr, m_sCnt, MEncode::eUTF8);
-	return m_retStr;
+	bytes->readMultiByte(tmpStr, m_sCnt, MEncode::eUTF8);
 }
