@@ -1,6 +1,7 @@
 #include "MyProject.h"
 #include "UIPack.h"
 #include "Common.h"
+#include "BinaryLoadItem.h"
 
 UUIPack::UUIPack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -28,5 +29,5 @@ void UUIPack::onReady()
 
 void UUIPack::OnConfirmGeneric()
 {
-
+	UBinaryLoadItem* pBinaryLoadItem = LoadObject<UBinaryLoadItem>(NULL, TEXT("/Game/Table/aaa.tbl"), NULL, LOAD_None, NULL);
 }

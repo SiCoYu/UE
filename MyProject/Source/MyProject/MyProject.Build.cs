@@ -22,6 +22,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Table",
                 "MyProject/Private/Game/Table/ItemObject",
                 "MyProject/Private/Game/Util",
+                "MyProject/Private/Game/Resource/LoadItem",
 
                 "MyProject/Private/Game/Test",
 	        }
