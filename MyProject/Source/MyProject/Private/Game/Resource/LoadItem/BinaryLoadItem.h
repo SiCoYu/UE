@@ -8,5 +8,5 @@ class UBinaryLoadItem : public UDataAsset
 	GENERATED_BODY()
 
 public:
-	void load();
+	void loadFile(const FString& Filename);
 };
