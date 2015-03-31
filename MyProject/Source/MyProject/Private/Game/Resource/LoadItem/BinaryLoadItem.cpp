@@ -17,8 +17,7 @@ void UBinaryLoadItem::loadFile(const FString& Filename)
 		if (FFileHelper::LoadFileToString(Text, *Filename))
 		{
 			ByteBuffer* fileBU = new ByteBuffer(Text.GetAllocatedSize());
-			fileBU->writeBytes(Text.ParseIntoArray, 0, Text.GetAllocatedSize());
-
+			fileBU->writeBytes(TCHAR_TO_ANSI(Text.GetData()), 0, Text.GetAllocatedSize());
 		}
 	}
 }
