@@ -23,8 +23,9 @@ void UBinaryLoadItem::loadFile(const FString& Filename)
 		TArray<uint8> arrayBuffer;
 		if (FFileHelper::LoadFileToArray(arrayBuffer, *Filename))
 		{
-			ByteBuffer* fileBU = new ByteBuffer(arrayBuffer.GetAllocatedSize());
-			fileBU->writeBytes((const char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
+			ByteBuffer* pFileBU = new ByteBuffer(arrayBuffer.GetAllocatedSize());
+			pFileBU->writeBytes((const char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
+			delete pFileBU;
 		}
 	}
 }

@@ -30,7 +30,9 @@ void UUIPack::onReady()
 void UUIPack::OnConfirmGeneric()
 {
 	//UBinaryLoadItem* pBinaryLoadItem = LoadObject<UBinaryLoadItem>(NULL, TEXT("/Game/Table/aaa"), NULL, LOAD_None, NULL);
-	FString Filename = "/Game/Table/aaa.tbl";
+	FString Filename = FString::Printf(TEXT("%s%s"), *FPaths::GameContentDir(), TEXT("/Table/aaa.tbl"));
 	UBinaryLoadItem* pBinaryLoadItem = new UBinaryLoadItem();
+	//pBinaryLoadItem->loadFile(IFileManager::Get().ConvertToRelativePath(*Filename));
 	pBinaryLoadItem->loadFile(Filename);
+	delete pBinaryLoadItem;
 }
