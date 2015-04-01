@@ -29,5 +29,8 @@ void UUIPack::onReady()
 
 void UUIPack::OnConfirmGeneric()
 {
-	UBinaryLoadItem* pBinaryLoadItem = LoadObject<UBinaryLoadItem>(NULL, TEXT("/Game/Table/aaa"), NULL, LOAD_None, NULL);
+	//UBinaryLoadItem* pBinaryLoadItem = LoadObject<UBinaryLoadItem>(NULL, TEXT("/Game/Table/aaa"), NULL, LOAD_None, NULL);
+	FString Filename = "/Game/Table/aaa.tbl";
+	UBinaryLoadItem* pBinaryLoadItem = new UBinaryLoadItem();
+	pBinaryLoadItem->loadFile(Filename);
 }

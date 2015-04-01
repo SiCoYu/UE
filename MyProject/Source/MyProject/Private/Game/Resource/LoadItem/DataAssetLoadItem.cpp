@@ -1,14 +1,14 @@
 #include "MyProject.h"
-#include "BinaryLoadItem.h"
+#include "DataAssetLoadItem.h"
 #include "ByteBuffer.h"
 
-//UBinaryLoadItem::UBinaryLoadItem(const FObjectInitializer& ObjectInitializer)
+//UDataAssetLoadItem::UDataAssetLoadItem(const FObjectInitializer& ObjectInitializer)
 //	: Super(ObjectInitializer)
 //{
 //
 //}
 
-void UBinaryLoadItem::loadFile(const FString& Filename)
+void UDataAssetLoadItem::loadFile(const FString& Filename)
 {
 	// if the file has some data in it, read it in
 	if (IFileManager::Get().FileSize(*Filename) >= 0)
