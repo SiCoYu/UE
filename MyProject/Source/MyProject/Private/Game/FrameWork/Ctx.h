@@ -9,6 +9,7 @@ class UGameInstance;
 class EngineData;
 class EngineApi;
 class INetMgr;
+class TableSys;
 
 class Test;
 
@@ -20,6 +21,7 @@ protected:
 	EngineData* m_engineData;
 	EngineApi* m_engineApi;
 	INetMgr* m_pINetMgr;
+	TableSys* m_pTableSys;
 	StdoutLog* m_pStdoutLog;
 
 	Test* m_test;
@@ -39,8 +41,11 @@ public:
 	void setEngineApi(EngineApi* engineApi);
 	void setNetMgr(INetMgr* pINetMgr);
 	INetMgr* getNetMgr();
+	TableSys* getTableSys();
 
 	StdoutLog* getStdLog();
 };
+
+#define G_PTABLESYS Ctx::getSingletonPtr()->getTableSys()
 
 #endif				// __CTX_H

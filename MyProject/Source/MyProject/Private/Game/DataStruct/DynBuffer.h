@@ -2,6 +2,7 @@
 #define __DYNBUFFER_H
 
 #include <cstddef>
+#include "BufferDefaultValue.h"
 
 class DynBuffer
 {
@@ -11,12 +12,14 @@ protected:
 	char* m_storage;
 	std::size_t m_size;
 	std::size_t m_iCapacity;
+	std::size_t m_maxCapacity;
 
 public:
-	DynBuffer(std::size_t len);
+	DynBuffer(size_t initCapacity = INITCAPACITY, size_t maxCapacity = MAXCAPACITY);
 	~DynBuffer();
 	std::size_t size();
 	std::size_t capacity();
+	std::size_t maxCapacity();
 	void setCapacity(std::size_t newCapacity);
 	void setSize(std::size_t len);
 	char* getStorage();

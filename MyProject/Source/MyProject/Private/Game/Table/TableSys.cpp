@@ -16,6 +16,8 @@ TableSys::TableSys()
     m_dicTable[TableID::TABLE_OBJECT] = new TableBase("ObjectBase_client", "ObjectBase_client", "ObjectBase_client");
     m_dicTable[TableID::TABLE_CARD] = new TableBase("CardBase_client", "CardBase_client", "CardBase_client");
     m_dicTable[TableID::TABLE_SKILL] = new TableBase("SkillBase_client", "SkillBase_client", "SkillBase_client");    // 添加一个表的步骤三
+
+	m_byteBuffer = new ByteBuffer();
 }
 
 // 返回一个表
@@ -59,31 +61,14 @@ void TableSys::loadOneTable(TableID::TableID tableID)
 {
 	TableBase* table = m_dicTable[tableID];
 
-    //LoadParam param = Ctx.m_instance.m_poolSys.newObject<LoadParam>();
-    //param.m_path = Ctx.m_instance.m_cfg.m_pathLst[(int)ResPathType.ePathTablePath] + table.m_resName;
-    //param.m_prefabName = table.m_prefabName;
-    //param.m_loaded = onloaded;
-    //param.m_loadNeedCoroutine = false;
-    //param.m_resNeedCoroutine = false;
-    //Ctx.m_instance.m_resLoadMgr.loadResources(param);
-    ////TextAsset textAsset = Resources.Load(param.m_path, typeof(TextAsset)) as TextAsset;
-    //Ctx.m_instance.m_poolSys.deleteObj(param);
-}
+	FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/Table/"), table->m_tableName.c_str(), TEXT(".tbl"));
 
-// 加载一个表完成
-//void TableSys::onloaded(IDispatchObject resEvt)
-//{
-//    m_res = resEvt as IResItem;                         // 类型转换
-//    TextAsset textAsset = m_res.getObject("") as TextAsset;
-//    if (textAsset != null)
-//    {
-//        m_byteArray = Ctx.m_instance.m_factoryBuild.buildByteArray();
-//        m_byteArray.clear();
-//        m_byteArray.writeBytes(textAsset.bytes, 0, (uint)textAsset.bytes.Length);
-//        m_byteArray.setPos(0);
-//        readTable(getTableIDByPath(m_res.GetPath()), m_byteArray);
-//    }
-//}
+	if (FFileHelper::LoadFileToArray(m_arrayBuffer, *Filename))
+	{
+		ByteBuffer* pFileBU = new ByteBuffer(m_arrayBuffer.GetAllocatedSize());
+		pFileBU->writeBytes((const char*)(m_arrayBuffer.GetData()), 0, m_arrayBuffer.GetAllocatedSize());
+	}
+}
 
 // 根据路径查找表的 ID
 TableID::TableID TableSys::getTableIDByPath(std::string& path)

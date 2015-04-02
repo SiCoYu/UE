@@ -3,10 +3,10 @@
 #include "DynBufResizePolicy.h"
 #include <string.h>
 
-DynBuffer::DynBuffer(std::size_t len)
-	: m_iCapacity(len)
+DynBuffer::DynBuffer(size_t initCapacity, size_t maxCapacity)
+	: m_iCapacity(initCapacity), m_maxCapacity(maxCapacity)
 {
-	m_storage = new char[len];
+	m_storage = new char[m_iCapacity];
 }
 
 DynBuffer::~DynBuffer()
@@ -24,6 +24,11 @@ size_t DynBuffer::capacity()
 	return m_iCapacity;
 }
 
+std::size_t DynBuffer::maxCapacity()
+{
+	return m_maxCapacity;
+}
+
 void DynBuffer::setSize(std::size_t len)
 {
 	m_size = len;
@@ -36,6 +41,10 @@ void DynBuffer::setSize(std::size_t len)
 
 void DynBuffer::setCapacity(std::size_t newCapacity)
 {
+	if (newCapacity > maxCapacity())
+	{
+		newCapacity = m_maxCapacity;
+	}
 	if (newCapacity <= capacity())
 	{
 		return;
@@ -58,7 +67,7 @@ void DynBuffer::push(char* pItem, std::size_t len)
 {
 	if (len > m_iCapacity)
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(len, capacity());
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(len, capacity(), maxCapacity());
 		setCapacity(closeSize);
 	}
 

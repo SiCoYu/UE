@@ -2,6 +2,8 @@
 #include "UIPack.h"
 #include "Common.h"
 #include "BinaryLoadItem.h"
+#include "Ctx.h"
+#include "TableSys.h"
 
 UUIPack::UUIPack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -29,10 +31,11 @@ void UUIPack::onReady()
 
 void UUIPack::OnConfirmGeneric()
 {
-	//UBinaryLoadItem* pBinaryLoadItem = LoadObject<UBinaryLoadItem>(NULL, TEXT("/Game/Table/aaa"), NULL, LOAD_None, NULL);
-	FString Filename = FString::Printf(TEXT("%s%s"), *FPaths::GameContentDir(), TEXT("/Table/aaa.tbl"));
-	UBinaryLoadItem* pBinaryLoadItem = new UBinaryLoadItem();
-	//pBinaryLoadItem->loadFile(IFileManager::Get().ConvertToRelativePath(*Filename));
-	pBinaryLoadItem->loadFile(Filename);
-	delete pBinaryLoadItem;
+	////UBinaryLoadItem* pBinaryLoadItem = LoadObject<UBinaryLoadItem>(NULL, TEXT("/Game/Table/aaa"), NULL, LOAD_None, NULL);
+	//FString Filename = FString::Printf(TEXT("%s%s"), *FPaths::GameContentDir(), TEXT("/Table/aaa.tbl"));
+	//UBinaryLoadItem* pBinaryLoadItem = new UBinaryLoadItem();
+	////pBinaryLoadItem->loadFile(IFileManager::Get().ConvertToRelativePath(*Filename));
+	//pBinaryLoadItem->loadFile(Filename);
+	//delete pBinaryLoadItem;
+	G_PTABLESYS->loadOneTable(TableID::TABLE_OBJECT);
 }

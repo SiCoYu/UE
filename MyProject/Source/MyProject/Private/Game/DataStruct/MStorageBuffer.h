@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include "HAL/Platform.h"
+#include "BufferDefaultValue.h"
 
 class MStorageBuffer
 {
@@ -10,9 +11,10 @@ public:
 	char* m_storage;
 	std::size_t m_size;
 	std::size_t m_iCapacity;
+	std::size_t m_maxCapacity;
 
 public:
-	MStorageBuffer(std::size_t len);
+	MStorageBuffer(std::size_t initCapacity = INITCAPACITY, std::size_t maxCapacity = MAXCAPACITY);
 	~MStorageBuffer();
 	void setCapacity(std::size_t newCapacity);
 	void setSize(std::size_t len);

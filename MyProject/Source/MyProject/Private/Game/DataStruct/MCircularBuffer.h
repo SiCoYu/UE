@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <iostream>
 #include <vector>
+#include "BufferDefaultValue.h"
 
 class MCircularBuffer
 {
@@ -13,12 +14,13 @@ private:
 	std::size_t m_tail;
 	std::size_t m_size;
 	std::size_t m_iCapacity;
+	std::size_t m_maxCapacity;
 
 protected:
 	bool canAddData(uint32 num);
 
 public:
-	MCircularBuffer(std::size_t len);
+	MCircularBuffer(size_t initCapacity = INITCAPACITY, size_t maxCapacity = MAXCAPACITY);
 	~MCircularBuffer();
 
 public:
@@ -29,6 +31,7 @@ public:
 	bool isLinearized();
 	size_t capacity();
 	void setCapacity(size_t newCapacity);
+	size_t maxCapacity();
 	void clear();
 	char* getStorage();
 

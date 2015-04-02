@@ -12,6 +12,7 @@
 #include "SystemEndian.h"
 #include "MStorageBuffer.h"
 #include "MEncode.h"
+#include "BufferDefaultValue.h"
 
 class ByteBufferException
 {
@@ -43,7 +44,7 @@ protected:
 
 public:
 	// constructor
-	ByteBuffer(size_t len);
+	ByteBuffer(size_t initCapacity = INITCAPACITY, size_t maxCapacity = MAXCAPACITY);
 	~ByteBuffer();
 
 	void setEndian(SysEndian endian);
@@ -117,6 +118,7 @@ public:
 	void setSize(size_t len);
 	bool empty() const;
 	size_t capacity();
+	size_t maxCapacity();
 	void readAddPos(int delta);
 	void writeAddPos(int delta);
 	void setCapacity(std::size_t newCapacity);

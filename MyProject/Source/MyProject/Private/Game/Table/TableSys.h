@@ -24,9 +24,10 @@ class TableSys
 
 private:
 	std::map<TableID::TableID, TableBase*> m_dicTable;
-	//IResItem m_res;
 	ByteBuffer* m_byteBuffer;
+	TArray<uint8> m_arrayBuffer;
 
+public:
 	TableSys();
     // 返回一个表
 	std::vector<TableItemBase*>* getTable(TableID::TableID tableID);

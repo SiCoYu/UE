@@ -5,7 +5,7 @@
 class DynBufResizePolicy
 {
 public:
-	static uint32 getCloseSize(uint32 needSize, uint32 capacity);
+	static uint32 getCloseSize(uint32 needSize, uint32 capacity, uint32 maxCapacity);
 };
 
 

@@ -3,10 +3,10 @@
 #include "DynBufResizePolicy.h"
 #include <string.h>
 
-MStorageBuffer::MStorageBuffer(std::size_t len)
-	: m_size(0), m_iCapacity(len)
+MStorageBuffer::MStorageBuffer(std::size_t initCapacity, std::size_t maxCapacity)
+	: m_size(0), m_iCapacity(initCapacity), m_maxCapacity(maxCapacity)
 {
-	m_storage = new char[len];
+	m_storage = new char[m_iCapacity];
 }
 
 MStorageBuffer::~MStorageBuffer()
@@ -26,6 +26,11 @@ void MStorageBuffer::setSize(std::size_t len)
 
 void MStorageBuffer::setCapacity(std::size_t newCapacity)
 {
+	if (newCapacity > m_maxCapacity)
+	{
+		newCapacity = m_maxCapacity;
+	}
+
 	if (newCapacity <= m_size)       // 不能分配比当前已经占有的空间还小的空间
 	{
 		return;

@@ -7,10 +7,10 @@
 /**
  * @brief 构造函数
  */
-MCircularBuffer::MCircularBuffer(std::size_t len)
-	: m_head(0), m_tail(0), m_size(0), m_iCapacity(len)
+MCircularBuffer::MCircularBuffer(size_t initCapacity, size_t maxCapacity)
+	: m_head(0), m_tail(0), m_size(0), m_iCapacity(initCapacity), m_maxCapacity(maxCapacity)
 {
-	m_storage = new char[len];
+	m_storage = new char[m_iCapacity];
 }
 
 MCircularBuffer::~MCircularBuffer()
@@ -84,6 +84,11 @@ size_t MCircularBuffer::capacity()
 	return m_iCapacity;
 }
 
+size_t MCircularBuffer::maxCapacity()
+{
+	return m_maxCapacity;
+}
+
 void MCircularBuffer::setCapacity(std::size_t newCapacity)
 {
 	if (newCapacity == capacity())
@@ -133,7 +138,7 @@ void MCircularBuffer::pushBack(char* pItem, std::size_t startPos, std::size_t le
 {
 	if (!canAddData(len)) // 存储空间必须要比实际数据至少多 1
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + size(), capacity());
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + size(), capacity(), maxCapacity());
 		setCapacity(closeSize);
 	}
 
@@ -167,7 +172,7 @@ void MCircularBuffer::pushFront(char* pItem, std::size_t startPos, std::size_t l
 {
 	if (!canAddData(len)) // 存储空间必须要比实际数据至少多 1
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + size(), capacity());
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + size(), capacity(), maxCapacity());
 		setCapacity(closeSize);
 	}
 

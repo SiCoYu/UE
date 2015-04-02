@@ -10,9 +10,9 @@ void ByteBufferException::PrintPosError() const
 }
 
 // constructor
-ByteBuffer::ByteBuffer(size_t len) : m_pos(0)
+ByteBuffer::ByteBuffer(size_t initCapacity, size_t maxCapacity) : m_pos(0)
 {
-	m_pStorageBuffer = new MStorageBuffer(len);
+	m_pStorageBuffer = new MStorageBuffer(initCapacity, maxCapacity);
 	m_sysEndian = eSys_LITTLE_ENDIAN;		// 默认是小端
 }
 
@@ -383,6 +383,11 @@ size_t ByteBuffer::capacity()
 	return m_pStorageBuffer->m_iCapacity;
 }
 
+size_t ByteBuffer::maxCapacity()
+{
+	return m_pStorageBuffer->m_maxCapacity;
+}
+
 void ByteBuffer::readAddPos(int delta)
 {
 	m_pos += delta;
@@ -433,7 +438,7 @@ void ByteBuffer::append(const uint8* src, size_t cnt)
 
 	if (!canAddData(cnt))
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(cnt + size(), capacity());
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(cnt + size(), capacity(), maxCapacity());
 		setCapacity(closeSize);
 	}
 	//memcpy(&m_pStorageBuffer->m_storage[m_pos], src, cnt);
@@ -451,7 +456,7 @@ void ByteBuffer::append(size_t cnt)
 
 	if (!canAddData(cnt))
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(cnt + size(), capacity());
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(cnt + size(), capacity(), maxCapacity());
 		setCapacity(closeSize);
 	}
 	writeAddPos(cnt);

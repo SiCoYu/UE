@@ -6,6 +6,7 @@
 #include "UIManager.h"
 #include "EngineApi.h"
 #include "NetMgr.h"
+#include "TableSys.h"
 
 #include "Test.h"
 
@@ -23,6 +24,7 @@ Ctx::~Ctx()
 	delete m_engineData;
 	delete m_engineApi;
 	delete m_pINetMgr;
+	delete m_pTableSys;
 	delete m_pStdoutLog;
 	delete m_test;
 }
@@ -34,6 +36,7 @@ void Ctx::init()
 
 	m_uiMgr = new UIManager();
 	m_engineApi = new EngineApi();
+	m_pTableSys = new TableSys();
 	m_pINetMgr = new NetMgr(getStdLog());
 
 	m_test = new Test();
@@ -88,4 +91,9 @@ INetMgr* Ctx::getNetMgr()
 StdoutLog* Ctx::getStdLog()
 {
 	return m_pStdoutLog;
+}
+
+TableSys* Ctx::getTableSys()
+{
+	return m_pTableSys;
 }
