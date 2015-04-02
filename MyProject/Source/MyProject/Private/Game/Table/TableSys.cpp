@@ -61,7 +61,7 @@ void TableSys::loadOneTable(TableID::TableID tableID)
 {
 	TableBase* table = m_dicTable[tableID];
 
-	FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/Table/"), table->m_tableName.c_str(), TEXT(".tbl"));
+	FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/Table/"), ANSI_TO_TCHAR(table->m_tableName.c_str()), TEXT(".tbl"));
 
 	if (FFileHelper::LoadFileToArray(m_arrayBuffer, *Filename))
 	{

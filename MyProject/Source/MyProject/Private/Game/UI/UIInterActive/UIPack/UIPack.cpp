@@ -37,5 +37,5 @@ void UUIPack::OnConfirmGeneric()
 	////pBinaryLoadItem->loadFile(IFileManager::Get().ConvertToRelativePath(*Filename));
 	//pBinaryLoadItem->loadFile(Filename);
 	//delete pBinaryLoadItem;
-	G_PTABLESYS->loadOneTable(TableID::TABLE_OBJECT);
+	G_PTABLESYS->getItem(TableID::TABLE_OBJECT, 10001);
 }

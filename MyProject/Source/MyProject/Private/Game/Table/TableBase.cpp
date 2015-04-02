@@ -8,4 +8,5 @@ TableBase::TableBase(std::string resname, std::string tablename, std::string pre
     m_prefabName = prefabname;
 
 	m_List = new std::vector<TableItemBase*>();
+	m_byteBuffer = nullptr;
 }

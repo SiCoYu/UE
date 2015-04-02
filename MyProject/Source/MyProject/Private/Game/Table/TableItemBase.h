@@ -14,6 +14,7 @@ public:
     TableItemBodyBase* m_itemBody;
 
 public:
+	TableItemBase();
 	virtual void parseHeaderByteArray(ByteBuffer* bytes);
 
 	template <class T>
