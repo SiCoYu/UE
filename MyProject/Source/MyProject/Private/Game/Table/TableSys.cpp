@@ -59,14 +59,16 @@ TableItemBase* TableSys::getItem(TableID::TableID tableID, uint32 itemID)
 // 加载一个表
 void TableSys::loadOneTable(TableID::TableID tableID)
 {
+	m_byteBuffer->clear();
+	m_arrayBuffer.Empty();
 	TableBase* table = m_dicTable[tableID];
 
 	FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/Table/"), ANSI_TO_TCHAR(table->m_tableName.c_str()), TEXT(".tbl"));
 
 	if (FFileHelper::LoadFileToArray(m_arrayBuffer, *Filename))
 	{
-		ByteBuffer* pFileBU = new ByteBuffer(m_arrayBuffer.GetAllocatedSize());
-		pFileBU->writeBytes((const char*)(m_arrayBuffer.GetData()), 0, m_arrayBuffer.GetAllocatedSize());
+		m_byteBuffer->setSize(m_arrayBuffer.GetAllocatedSize());
+		m_byteBuffer->writeBytes((const char*)(m_arrayBuffer.GetData()), 0, m_arrayBuffer.GetAllocatedSize());
 	}
 }
 

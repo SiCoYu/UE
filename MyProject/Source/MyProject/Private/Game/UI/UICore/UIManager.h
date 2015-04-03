@@ -15,6 +15,9 @@ public:
 	UIManager();
 	template <class T>
 	UFormBase* loadForm(FormID formID);
+
+	template <class T>
+	T* getForm(FormID formID);
 };
 
 template <class T>
@@ -26,6 +29,12 @@ UFormBase* UIManager::loadForm(FormID formID)
 	}
 	m_id2Form[formID]->onReady();
 	return m_id2Form[formID];
+}
+
+template <class T>
+T* UIManager::getForm(FormID formID)
+{
+	return (T*)m_id2Form[formID];
 }
 
 #endif				// __UIMANAGER_H
