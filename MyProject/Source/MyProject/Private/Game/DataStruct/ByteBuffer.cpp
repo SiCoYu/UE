@@ -123,20 +123,12 @@ ByteBuffer& ByteBuffer::writeMultiByte(const std::string& value, size_t len)
 	return *this;
 }
 
+// 不能使用strlen 之类的字符串函数，因为 str 中可能有 '\0'
 ByteBuffer& ByteBuffer::writeBytes(const char* str, size_t startPos, size_t len)
 {
 	if (str)
 	{
-		size_t charLen = strlen(str) / sizeof(char);
-		if (len > charLen)
-		{
-			append(str, charLen);
-			append(len - charLen);
-		}
-		else
-		{
-			append(str, len);
-		}
+		append(str + startPos, len);
 	}
 	else
 	{
