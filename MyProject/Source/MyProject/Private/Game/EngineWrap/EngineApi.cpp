@@ -30,3 +30,24 @@ void EngineApi::addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName)
 	ptrDelegate.BindUFunction(pFuncObj, funcName);
 	pBtn->OnClicked.Add(ptrDelegate);
 }
+
+UMyProjectEngine* EngineApi::getEngine()
+{
+	UEngine* const Engine = GetEngine();
+	return Cast<UMyProjectEngine>(Engine);
+}
+
+UMyProjectGameInstance* EngineApi::getMyProjectGameInstanceByEngine()
+{
+	UEngine* const Engine = GetEngine();
+	UMyProjectGameInstance* pUMyProjectGameInstance = Cast<UMyProjectEngine>(Engine);
+	UShooterGameInstance* const GI = Cast<UShooterGameInstance>(pUMyProjectGameInstance->GameInstance);
+	return GI;
+}
+
+UWorld* EngineApi::getWorldByEngine()
+{
+	UMyProjectGameInstance* pUMyProjectGameInstance = getMyProjectGameInstanceByEngine();
+	UWorld* const World = pUMyProjectGameInstance->GetWorld();
+	return World;
+}
