@@ -67,8 +67,10 @@ void TableSys::loadOneTable(TableID::TableID tableID)
 
 	if (FFileHelper::LoadFileToArray(m_arrayBuffer, *Filename))
 	{
-		m_byteBuffer->setSize(m_arrayBuffer.GetAllocatedSize());
+		m_byteBuffer->setCapacity(m_arrayBuffer.GetAllocatedSize());
 		m_byteBuffer->writeBytes((const char*)(m_arrayBuffer.GetData()), 0, m_arrayBuffer.GetAllocatedSize());
+		m_byteBuffer->pos(0);
+		readTable(tableID, m_byteBuffer);
 	}
 }
 
