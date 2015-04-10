@@ -40,9 +40,9 @@ void UUIPack::OnConfirmGeneric()
 	//delete pBinaryLoadItem;
 
 
-	//G_PTABLESYS->getItem(TableID::TABLE_OBJECT, 10001);
+	G_PTABLESYS->getItem(TableID::TABLE_OBJECT, 10001);
 
-	UPackage* Pkg = CreatePackage(NULL, NULL);
-	EObjectFlags Flags = RF_Public | RF_Standalone;
-	UObject* pObj = ConstructObject<UDataAssetLoadItem>(UDataAssetLoadItem::StaticClass(), Pkg, "/Game/Table/aaa", Flags);
+	//UPackage* Pkg = CreatePackage(NULL, NULL);
+	//EObjectFlags Flags = RF_Public | RF_Standalone;
+	//UObject* pObj = ConstructObject<UDataAssetLoadItem>(UDataAssetLoadItem::StaticClass(), Pkg, "/Game/Table/aaa", Flags);
 }

@@ -17,7 +17,6 @@ class Ctx : public Singleton<Ctx>
 {
 protected:
 	UIManager* m_uiMgr;
-	//UGameInstance* m_uGameInstance;
 	EngineData* m_engineData;
 	EngineApi* m_engineApi;
 	INetMgr* m_pINetMgr;
@@ -33,8 +32,6 @@ public:
 	void init();
 	void setUIMgr(UIManager* uiMgr);
 	UIManager* getUIMgr();
-	//void setGameInstance(UGameInstance* ins);
-	//UGameInstance* getGameInstance();
 
 	EngineData* getEngineData();
 	EngineApi* getEngineApi();

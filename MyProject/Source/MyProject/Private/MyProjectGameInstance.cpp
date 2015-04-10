@@ -13,6 +13,5 @@ UMyProjectGameInstance::UMyProjectGameInstance(const FObjectInitializer& ObjectI
 void UMyProjectGameInstance::Init()
 {
 	Super::Init();
-	//Ctx::getSingletonPtr()->setGameInstance(this);
 	m_appFrame->initApp();
 }

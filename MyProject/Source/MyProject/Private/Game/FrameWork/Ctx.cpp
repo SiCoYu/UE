@@ -53,16 +53,6 @@ UIManager* Ctx::getUIMgr()
 	return m_uiMgr;
 }
 
-//void Ctx::setGameInstance(UGameInstance* ins)
-//{
-//	m_uGameInstance = ins;
-//}
-//
-//UGameInstance* Ctx::getGameInstance()
-//{
-//	return m_uGameInstance;
-//}
-
 EngineData* Ctx::getEngineData()
 {
 	return m_engineData;
