@@ -46,5 +46,6 @@ void UUIPack::OnConfirmGeneric()
 	//EObjectFlags Flags = RF_Public | RF_Standalone;
 	//UObject* pObj = ConstructObject<UDataAssetLoadItem>(UDataAssetLoadItem::StaticClass(), Pkg, "/Game/Table/aaa", Flags);
 
-	UDataAssetLoadItem* ObjectPtr = LoadObject<UDataAssetLoadItem>(NULL, TEXT("/Game/Table/ObjectBase_client"));
+	UPackage* tblPkg = CreatePackage(NULL, TEXT("/Game/Table/ObjectBase_client"));
+	UDataAssetLoadItem* ObjectPtr = LoadObject<UDataAssetLoadItem>(tblPkg, TEXT("/Game/Table/ObjectBase_client"));
 }
