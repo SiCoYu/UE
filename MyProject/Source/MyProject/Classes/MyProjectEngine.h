@@ -1,8 +1,8 @@
-#pragma once
-
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
-#include "ShooterEngine.generated.h"
+#pragma once
+
+#include "MyProjectEngine.generated.h"
 
 UCLASS()
 class UMyProjectEngine : public UGameEngine

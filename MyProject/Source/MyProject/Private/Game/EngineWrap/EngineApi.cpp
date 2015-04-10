@@ -2,6 +2,8 @@
 #include "EngineApi.h"
 #include "Ctx.h"
 #include "EngineData.h"
+#include "MyProjectEngine.h"
+#include "MyProjectGameInstance.h"
 
 UGameInstance* EngineApi::getGameInstance()
 {
@@ -33,15 +35,13 @@ void EngineApi::addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName)
 
 UMyProjectEngine* EngineApi::getEngine()
 {
-	UEngine* const Engine = GetEngine();
-	return Cast<UMyProjectEngine>(Engine);
+	return Cast<UMyProjectEngine>(GEngine);
 }
 
 UMyProjectGameInstance* EngineApi::getMyProjectGameInstanceByEngine()
 {
-	UEngine* const Engine = GetEngine();
-	UMyProjectGameInstance* pUMyProjectGameInstance = Cast<UMyProjectEngine>(Engine);
-	UShooterGameInstance* const GI = Cast<UShooterGameInstance>(pUMyProjectGameInstance->GameInstance);
+	UMyProjectEngine* pUMyProjectEngine = Cast<UMyProjectEngine>(GEngine);
+	UMyProjectGameInstance* const GI = Cast<UMyProjectGameInstance>(pUMyProjectEngine->GameInstance);
 	return GI;
 }
 

@@ -5,8 +5,9 @@ ShooterEngine.cpp: ShooterEngine c++ code.
 =============================================================================*/
 
 #include "MyProject.h"
+#include "MyProjectEngine.h"
 
-UMyProjectEngine::UShooterEngine(const FObjectInitializer& ObjectInitializer)
+UMyProjectEngine::UMyProjectEngine(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }

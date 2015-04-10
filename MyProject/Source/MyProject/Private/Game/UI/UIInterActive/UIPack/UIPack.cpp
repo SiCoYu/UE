@@ -4,6 +4,7 @@
 #include "BinaryLoadItem.h"
 #include "Ctx.h"
 #include "TableSys.h"
+#include  "DataAssetLoadItem.h"
 
 UUIPack::UUIPack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -37,5 +38,11 @@ void UUIPack::OnConfirmGeneric()
 	////pBinaryLoadItem->loadFile(IFileManager::Get().ConvertToRelativePath(*Filename));
 	//pBinaryLoadItem->loadFile(Filename);
 	//delete pBinaryLoadItem;
-	G_PTABLESYS->getItem(TableID::TABLE_OBJECT, 10001);
+
+
+	//G_PTABLESYS->getItem(TableID::TABLE_OBJECT, 10001);
+
+	UPackage* Pkg = CreatePackage(NULL, NULL);
+	EObjectFlags Flags = RF_Public | RF_Standalone;
+	UObject* pObj = ConstructObject<UDataAssetLoadItem>(UDataAssetLoadItem::StaticClass(), Pkg, "/Game/Table/aaa", Flags);
 }
