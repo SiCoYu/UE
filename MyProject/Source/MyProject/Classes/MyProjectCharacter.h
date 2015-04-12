@@ -53,6 +53,7 @@ protected:
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
 	virtual void BeginPlay();
+	virtual void Tick(float DeltaTime) override;
 
 protected:
 	// APawn interface

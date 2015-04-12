@@ -3,6 +3,7 @@
 #include "MyProject.h"
 #include "MyProjectCharacter.h"
 #include "Common.h"
+#include "MyAnimInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMyProjectCharacter
@@ -133,4 +134,16 @@ void AMyProjectCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	Ctx::getSingletonPtr()->getEngineData()->setMainActor(this);
+}
+
+void AMyProjectCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	for (TObjectIterator<UMyAnimInstance> Anim; Anim; ++Anim)
+	{
+		const FRotator Rotation = GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Pitch, 0);
+		Anim->NeckSpring = YawRotation;
+	}
 }
