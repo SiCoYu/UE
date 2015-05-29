@@ -1,7 +1,7 @@
 #ifndef __FORMID_H
 #define __FORMID_H
 
-enum FormID
+enum UIFormID
 {
 	eUIPack,		// ±³°ü
 	eUILog,			// ÈÕÖ¾
