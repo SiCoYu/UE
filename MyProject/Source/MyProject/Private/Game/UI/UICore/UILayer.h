@@ -29,9 +29,16 @@ protected:
 	std::map<UIFormID, UFormBase*> m_winDic;        // 当前层所有的界面
 	std::string m_goName;
 public:
-	UILayer();
+	UILayer(UILayerID layerID);
 	std::map<UIFormID, UFormBase*>& getWinDic();
-	USceneComponent& getLayerTrans();
-	USceneComponent& setLayerTrans(USceneComponent* rhv);
+	FSlateRenderTransform& getLayerTrans();
+	void setLayerTrans(FSlateRenderTransform* rhv);
 	void setGoName(std::string& rhv);
+	bool hasForm(UFormBase* form);
+	void removeForm(UFormBase* form);
+	UILayerID getLayerID();
+	void addForm(UFormBase* form);
+	void onStageReSize();
+	void closeAllForm();
+	void findLayerGOAndTrans();
 };

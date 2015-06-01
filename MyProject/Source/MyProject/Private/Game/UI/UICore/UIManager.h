@@ -2,26 +2,26 @@
 #define __UIMANAGER_H
 
 #include <map>
-#include "FormID.h"
+#include "UIFormID.h"
 
 class UFormBase;
 
 class UIManager
 {
 protected:
-	std::map<FormID, UFormBase*> m_id2Form;
+	std::map<UIFormID, UFormBase*> m_id2Form;
 
 public:
 	UIManager();
 	template <class T>
-	UFormBase* loadForm(FormID formID);
+	UFormBase* loadForm(UIFormID formID);
 
 	template <class T>
-	T* getForm(FormID formID);
+	T* getForm(UIFormID formID);
 };
 
 template <class T>
-UFormBase* UIManager::loadForm(FormID formID)
+UFormBase* UIManager::loadForm(UIFormID formID)
 {
 	if (m_id2Form[formID] == nullptr)
 	{
@@ -32,7 +32,7 @@ UFormBase* UIManager::loadForm(FormID formID)
 }
 
 template <class T>
-T* UIManager::getForm(FormID formID)
+T* UIManager::getForm(UIFormID formID)
 {
 	return (T*)m_id2Form[formID];
 }

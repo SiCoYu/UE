@@ -6,7 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "UI/MyHUD.h"
 #include "Common.h"
-#include "FormID.h"
+#include "UIFormID.h"
 #include "UIPack.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)

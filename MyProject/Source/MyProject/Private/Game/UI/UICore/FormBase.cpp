@@ -5,3 +5,8 @@ void UFormBase::onReady()
 {
 
 }
+
+UIFormID UFormBase::getFormId()
+{
+	return m_formId;
+}

@@ -1,7 +1,8 @@
 #include "MyProject.h"
 #include "UILayer.h"
+#include "FormBase.h"
 
-UILayer::UILayer()
+UILayer::UILayer(UILayerID layerID)
 {
 
 }
@@ -11,14 +12,14 @@ std::map<UIFormID, UFormBase*>& UILayer::getWinDic()
 	return m_winDic;
 }
 
-USceneComponent& UILayer::getLayerTrans()
+FSlateRenderTransform& UILayer::getLayerTrans()
 {
 	return *m_layerTrans;
 }
 
-USceneComponent& UILayer::setLayerTrans(USceneComponent* rhv)
+void UILayer::setLayerTrans(FSlateRenderTransform* rhv)
 {
-	m_layerTrans = rhv
+	m_layerTrans = rhv;
 }
 
 void UILayer::setGoName(std::string& rhv)
@@ -26,49 +27,52 @@ void UILayer::setGoName(std::string& rhv)
 	m_goName = rhv;
 }
 
-bool hasForm(Form form)
+bool UILayer::hasForm(UFormBase* form)
 {
-	return m_winDic.ContainsKey(form.id);
+	return m_winDic[form->getFormId()] != nullptr;
 }
 
-void removeForm(Form form)
+void UILayer::removeForm(UFormBase* form)
 {
-	if (m_winDic.ContainsKey(form.id))
+	if (m_winDic[form->getFormId()] != nullptr)
 	{
-		m_winDic.Remove(form.id);
+		m_winDic.erase(form->getFormId());
 	}
 }
 
-UILayerID layerID
-{
-get
+UILayerID UILayer::getLayerID()
 {
 	return m_layer;
 }
+
+void UILayer::addForm(UFormBase* form)
+{
+	m_winDic[form->getFormId()] = form;
 }
 
-void addForm(Form form)
+void UILayer::onStageReSize()
 {
-	m_winDic[form.id] = form;
-}
-
-void onStageReSize()
-{
-	foreach(Form form in m_winDic.Values)
+	std::map<UIFormID, UFormBase*>::iterator itBegin, itEnd;
+	itBegin = m_winDic.begin();
+	itEnd = m_winDic.end();
+	for (; itBegin != itEnd; ++itBegin)
 	{
-		form.onStageReSize();
+		//itBegin->second->onStageReSize();
 	}
 }
 
-void closeAllForm()
+void UILayer::closeAllForm()
 {
-	foreach(Form form in m_winDic.Values)
+	std::map<UIFormID, UFormBase*>::iterator itBegin, itEnd;
+	itBegin = m_winDic.begin();
+	itEnd = m_winDic.end();
+	for (; itBegin != itEnd; ++itBegin)
 	{
-		form.exit();
+		//itBegin->second->exit();
 	}
 }
 
-void findLayerGOAndTrans()
+void UILayer::findLayerGOAndTrans()
 {
-	m_layerTrans = Ctx.m_instance.m_layerMgr.m_path2Go[m_goName].transform;
+	//m_layerTrans = Ctx.m_instance.m_layerMgr.m_path2Go[m_goName].transform;
 }

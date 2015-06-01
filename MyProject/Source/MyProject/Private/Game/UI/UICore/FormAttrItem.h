@@ -2,6 +2,8 @@
 #define __FORMATTRITEM_H
 
 #include <string>
+#include "UILayer.h"
+#include "UICanvas.h"
 
 enum FormID;
 
