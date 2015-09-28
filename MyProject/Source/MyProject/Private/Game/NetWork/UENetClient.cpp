@@ -41,3 +41,8 @@ void UENetClient::sendMsg()
 {
 	m_pNetClientBuffer->sendMsg();
 }
+
+void UENetClient::connect(FString ip, uint32 port)
+{
+	const IOnlineSubsystem OnlineSub = IOnlineSubsystem::Get();
+}

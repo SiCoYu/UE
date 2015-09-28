@@ -28,10 +28,19 @@ public class MyProject : ModuleRules
 	        }
         );
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(
+            new string[] { 
+                "Core", 
+                "CoreUObject", 
+                "Engine", 
+                "OnlineSubsystem",
+				"OnlineSubsystemUtils"
+            }
+        );
 
         PrivateDependencyModuleNames.AddRange(
             new string[] {
+                "InputCore",
 				"Slate",
 				"SlateCore",
                 "UMG",
