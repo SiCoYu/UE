@@ -8,6 +8,8 @@
 
 #include "Windows/HideWindowsPlatformTypes.h"
 
+#include "PlatformDefine.h"			// 是否使用 UE 的 Socket
+
 #ifdef SOCKETS_NAMESPACE
 using namespace SOCKETS_NAMESPACE;
 #endif

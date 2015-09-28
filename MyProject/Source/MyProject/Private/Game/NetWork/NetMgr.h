@@ -10,6 +10,7 @@
 #include "Windows/HideWindowsPlatformTypes.h"
 
 #include "INetMgr.h"
+
 class NetThread;
 
 #ifdef SOCKETS_NAMESPACE
