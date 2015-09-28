@@ -2,8 +2,9 @@
 #define __UENETCLIENT_H
 
 #include "MyProject.h"
-#include "IPv4Address.h"		// FIPv4Address
-#include "IPv4Endpoint.h"		// FIPv4Endpoint
+//#include "IPv4Address.h"		// FIPv4Address
+//#include "IPv4Endpoint.h"		// 只包含 IPv4Endpoint.h 会编译不过 // FIPv4Endpoint
+#include "Networking.h"			// 网络一次性全包括，防止只包含部分导致编译不过
 
 class FSocket;
 class NetClientBuffer;
