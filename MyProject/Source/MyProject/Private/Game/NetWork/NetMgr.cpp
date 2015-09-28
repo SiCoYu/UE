@@ -4,31 +4,41 @@
 #include "NetThread.h"
 #include "NetClientBuffer.h"
 
-#include "Windows/AllowWindowsPlatformTypes.h"
+#ifdef USE_EXTERN_THREAD
 
-#ifdef _WIN32
-#pragma warning(disable:4786)
+	#include "Windows/AllowWindowsPlatformTypes.h"
+
+	#ifdef _WIN32
+	#pragma warning(disable:4786)
+	#endif
+	#include <Sockets/StdoutLog.h>
+	#include <Sockets/SocketHandler.h>
+	#include <Sockets/TcpSocket.h>
+	#include <Sockets/ListenSocket.h>
+	#include <Sockets/Utility.h>
+	#include <Sockets/Parse.h>
+	#include <Sockets/HttpGetSocket.h>
+	#include <Sockets/Socket.h>
+	#include <Sockets/HttpDebugSocket.h>
+	#include <iostream>
+
+	#include "Windows/HideWindowsPlatformTypes.h"
+
+#else
+	#include "UENetThread.h"
 #endif
-#include <Sockets/StdoutLog.h>
-#include <Sockets/SocketHandler.h>
-#include <Sockets/TcpSocket.h>
-#include <Sockets/ListenSocket.h>
-#include <Sockets/Utility.h>
-#include <Sockets/Parse.h>
-#include <Sockets/HttpGetSocket.h>
-#include <Sockets/Socket.h>
-#include <Sockets/HttpDebugSocket.h>
-#include <iostream>
-
-#include "Windows/HideWindowsPlatformTypes.h"
 
 #include "Core.h"
 
-#ifdef SOCKETS_NAMESPACE
-using namespace SOCKETS_NAMESPACE;
+#ifdef USE_EXTERN_THREAD
+
+	#ifdef SOCKETS_NAMESPACE
+	using namespace SOCKETS_NAMESPACE;
+	#endif
+
 #endif
 
-
+#ifdef USE_EXTERN_THREAD
 class MyHandler : public SocketHandler
 {
 public:
@@ -110,8 +120,24 @@ public:
 #endif
 };
 
+#endif
+
+#ifdef USE_EXTERN_THREAD
 NetMgr::NetMgr(StdLog *p)
 	: SocketHandler(p)
+#else
+NetMgr::NetMgr()
+#endif
+{
+#ifdef USE_EXTERN_THREAD
+	NetMgr_Extern();
+#else
+	NetMgr_Inter();
+#endif
+}
+
+#ifdef USE_EXTERN_THREAD
+void NetMgr::NetMgr_Extern()
 {
 	m_pNetThread = new NetThread(this);
 	m_pMutex = new Mutex();
@@ -119,15 +145,37 @@ NetMgr::NetMgr(StdLog *p)
 	this->SetSlave();
 	this->EnableRelease();
 }
+#endif
+
+#ifndef USE_EXTERN_THREAD
+void NetMgr::NetMgr_Inter()
+{
+	m_pNetThread = new UENetThread(this);
+	m_pRenderingThread = FRunnableThread::Create(m_pNetThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
+	((UENetThread*)m_pRenderingThread)->m_pTaskGraphBoundSyncEvent->Wait();
+}
+#endif
 
 NetMgr::~NetMgr() 
 {
 	m_pNetThread->setExitFlag(true);
+#ifdef USE_EXTERN_THREAD
 	this->Release();
+#endif
 }
 
 
 void NetMgr::openSocket(std::string ip, uint32 port)
+{
+#ifdef USE_EXTERN_THREAD
+	openSocket_Extern(ip, port);
+#else
+	openSocket_Inter(ip, port);
+#endif
+}
+
+#ifdef USE_EXTERN_THREAD
+void NetMgr::openSocket_Extern(std::string ip, uint32 port)
 {
 	//try
 	//{
@@ -168,11 +216,29 @@ void NetMgr::openSocket(std::string ip, uint32 port)
 	this->Add(pClient);
 	pClient->SetSlaveHandler(this);
 	pClient->OnDetached();
-	
+
 	m_pMutex->Unlock();
 }
+#endif
+
+#ifndef USE_EXTERN_THREAD
+void NetMgr::openSocket_Inter(std::string ip, uint32 port)
+{
+
+}
+#endif
 
 void NetMgr::recAndSendMsg()
+{
+#ifdef USE_EXTERN_THREAD
+	recAndSendMsg_Extern();
+#else
+	recAndSendMsg_Inter();
+#endif
+}
+
+#ifdef USE_EXTERN_THREAD
+void NetMgr::recAndSendMsg_Extern()
 {
 	m_pMutex->Lock();
 
@@ -187,3 +253,11 @@ void NetMgr::recAndSendMsg()
 
 	m_pMutex->Unlock();
 }
+#endif
+
+#ifndef USE_EXTERN_THREAD
+void NetMgr::recAndSendMsg_Inter()
+{
+
+}
+#endif

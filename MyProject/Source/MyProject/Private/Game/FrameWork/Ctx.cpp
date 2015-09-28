@@ -8,6 +8,7 @@
 #include "NetMgr.h"
 #include "TableSys.h"
 
+#include "PlatformDefine.h"
 #include "Test.h"
 
 // Æ«ÌØ»¯
@@ -37,7 +38,11 @@ void Ctx::init()
 	m_uiMgr = new UIManager();
 	m_engineApi = new EngineApi();
 	m_pTableSys = new TableSys();
-	m_pINetMgr = new NetMgr(getStdLog());
+	#ifdef	USE_EXTERN_THREAD
+		m_pINetMgr = new NetMgr(getStdLog());
+	#else
+		m_pINetMgr = new NetMgr();
+	#endif
 
 	m_test = new Test();
 	m_test->runTest();

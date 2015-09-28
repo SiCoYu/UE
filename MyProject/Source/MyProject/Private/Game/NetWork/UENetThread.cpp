@@ -3,27 +3,45 @@
 
 #include "INetMgr.h"
 #include "NetClient.h"
+#include "INetMgr.h"
 
-UENetThread::UENetThread()
+UENetThread::UENetThread(INetMgr* pNetMgr)
 	: m_ExitFlag(false)
 {
-	
+	m_pNetMgr = pNetMgr;
+	m_pTaskGraphBoundSyncEvent = FPlatformProcess::GetSynchEventFromPool(true);
 }
 
 UENetThread::~UENetThread()
 {
-	//if (IsRunning())
-	//{
-	//	Utility::Sleep(5);
-	//}
+	FPlatformProcess::ReturnSynchEventToPool(m_pTaskGraphBoundSyncEvent);
+	m_pTaskGraphBoundSyncEvent = nullptr;
 }
 
-void UENetThread::Run()
+bool UENetThread::Init(void)
 {
-	//while (!m_ExitFlag)
-	//{
-	//	Utility::Sleep(1000);
-	//}
+	return true;
+}
+
+void UENetThread::Exit(void)
+{
+
+}
+
+uint32 UENetThread::Run(void)
+{
+	if (m_pTaskGraphBoundSyncEvent != NULL)
+	{
+		m_pTaskGraphBoundSyncEvent->Trigger();
+	}
+
+	while (!m_ExitFlag)
+	{
+		m_pNetMgr->recAndSendMsg();
+		FPlatformProcess::Sleep(1.0f);
+	}
+
+	return 0;
 }
 
 void UENetThread::setExitFlag(bool exit)

@@ -7,3 +7,4 @@
 
 // 是否使用外部的 Thread 库，不使用 UE 自己的 Thread
 #define USE_EXTERN_THREAD
+#undef USE_EXTERN_THREAD
