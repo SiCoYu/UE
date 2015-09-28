@@ -46,11 +46,16 @@ void AMyHUD::DrawHUD()
 
 	if (!DialogWidget.IsValid())
 	{
+		// warning C4996: 'SMyDialog::FArguments::MessageText': Passing text to Slate as FString is deprecated, please use FText instead (likely via a LOCTEXT). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//DialogWidget = SNew(SMyDialog)
+		//	.MessageText("asdfasdasdfadsf");
+
 		DialogWidget = SNew(SMyDialog)
-			.MessageText("asdfasdasdfadsf");
+			.MessageText(LOCTEXT("MyHUB", "asdfasdasdfadsf"));
 
 		SMyDialog::FArguments aaa;
-		aaa.MessageText("asdfasdasdfadsf");
+		//aaa.MessageText("asdfasdasdfadsf");
+		aaa.MessageText(LOCTEXT("MyHUB", "asdfasdasdfadsf"));
 		DialogWidget->Construct(aaa);
 
 		//GEngine->GameViewport->AddViewportWidgetContent(DialogWidget.ToSharedRef());
