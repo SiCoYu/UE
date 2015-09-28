@@ -2,13 +2,19 @@
 #define __UENETCLIENT_H
 
 #include "MyProject.h"
+#include "IPv4Address.h"		// FIPv4Address
+#include "IPv4Endpoint.h"		// FIPv4Endpoint
 
+class FSocket;
 class NetClientBuffer;
 
 class UENetClient
 {
 protected:
+	FSocket* m_pSocket;
 	NetClientBuffer* m_pNetClientBuffer;
+	FString	m_strDesc;
+	FIPv4Endpoint m_boundEndpoint;
 
 public:
 	UENetClient();

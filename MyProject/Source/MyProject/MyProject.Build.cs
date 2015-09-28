@@ -34,7 +34,9 @@ public class MyProject : ModuleRules
                 "CoreUObject", 
                 "Engine", 
                 "OnlineSubsystem",
-				"OnlineSubsystemUtils"
+				"OnlineSubsystemUtils",
+                "Sockets",
+                "Networking"
             }
         );
 
