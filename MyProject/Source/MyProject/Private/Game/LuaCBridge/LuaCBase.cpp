@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "LuaCBase.h"
 #include "LuaCScriptMgr.h"
 #include "LuaCObject.h"

@@ -25,6 +25,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Resource/LoadItem",
 
                 "MyProject/Private/Game/Test",
+                "MyProject/Private/Game/LuaCBridge",
 	        }
         );
 
@@ -97,6 +98,7 @@ public class MyProject : ModuleRules
         LoadSockets(Target);
         LoadTestExtern(Target);
         LoadGtest(Target);
+        LoadLua(Target);
 	}
 
     /// <summary>
@@ -128,6 +130,7 @@ public class MyProject : ModuleRules
             {
                 // ... add public include paths required here ...
                 Path.Combine(ThirdPartyPath, "Inc"),
+                Path.Combine(ThirdPartyPath, "Inc", "Lua"),
             }
         );
     }
@@ -209,6 +212,17 @@ public class MyProject : ModuleRules
         string LibrariesPath;
 
         LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "gtest", "gtest_d.lib");
+        PublicAdditionalLibraries.Add(LibrariesPath);
+
+        return true;
+    }
+
+    // ╪сть Lua
+    private bool LoadLua(TargetInfo Target)
+    {
+        string LibrariesPath;
+
+        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Lua", "Lua_d.lib");
         PublicAdditionalLibraries.Add(LibrariesPath);
 
         return true;

@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "LuaCBridge.h"
 
 LuaCBridge::LuaCBridge()

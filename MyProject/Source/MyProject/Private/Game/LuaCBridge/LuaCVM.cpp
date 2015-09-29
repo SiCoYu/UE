@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "LuaCVM.h"
 #include "LuaCObjectTranslator.h"
 #include "LuaCObject.h"

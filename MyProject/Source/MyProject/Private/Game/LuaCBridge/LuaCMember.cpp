@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "LuaCMember.h"
 
 LuaMethod::LuaMethod(std::string str, lua_CFunction f)

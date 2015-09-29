@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "LuaCTable.h"
 #include "LuaCVM.h"
 #include "LuaCObject.h"

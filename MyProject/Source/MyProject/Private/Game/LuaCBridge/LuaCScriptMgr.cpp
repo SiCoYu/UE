@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "LuaCScriptMgr.h"
 #include <sstream>
 #include "LuaCVM.h"
@@ -1093,7 +1094,7 @@ bool LuaCScriptMgr::GetBoolean(lua_State* L, int stackPos)
 {
 	if (lua_isboolean(L, stackPos))
 	{
-		return lua_toboolean(L, stackPos);
+		return lua_toboolean(L, stackPos) != 0;
 	}
 
 	//luaL_typerror(L, stackPos, "boolean");
@@ -1228,7 +1229,7 @@ std::string LuaCScriptMgr::GetLuaString(lua_State* L, int stackPos)
 	}
 	else if (luatype == LUA_TBOOLEAN)
 	{
-		bool b = lua_toboolean(L, stackPos);
+		bool b = lua_toboolean(L, stackPos) != 0;
 		strStream << b;
 		retVal = strStream.str();
 	}

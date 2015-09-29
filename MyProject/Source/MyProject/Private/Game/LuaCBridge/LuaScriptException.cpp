@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "LuaScriptException.h"
 
 LuaScriptException::LuaScriptException()
