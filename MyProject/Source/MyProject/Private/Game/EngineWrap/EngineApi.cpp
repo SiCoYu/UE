@@ -51,3 +51,20 @@ UWorld* EngineApi::getWorldByEngine()
 	UWorld* const World = pUMyProjectGameInstance->GetWorld();
 	return World;
 }
+
+ACharacter* EngineApi::getFirstCharacter()
+{
+	ACharacter* Character = nullptr;
+	APlayerController* PC = nullptr;
+	UWorld* World = getWorld();
+	if (World)
+	{
+		PC = World->GetFirstPlayerController();
+		if (PC != nullptr)
+		{
+			Character = Cast<ACharacter>(PC->GetPawn());
+		}
+	}
+
+	return Character;
+}
