@@ -27,6 +27,4 @@ public:
 	void setExitFlag(bool exit);
 };
 
-void RenderingThreadMain(FEvent* TaskGraphBoundSyncEvent);
-
 #endif

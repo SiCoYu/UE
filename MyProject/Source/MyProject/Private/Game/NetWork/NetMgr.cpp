@@ -152,9 +152,7 @@ void NetMgr::NetMgr_Extern()
 #ifndef USE_EXTERN_THREAD
 void NetMgr::NetMgr_Inter()
 {
-	m_pNetThread = new UENetThread(this);
-	m_pRenderingThread = FRunnableThread::Create(m_pNetThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
-	((UENetThread*)m_pRenderingThread)->m_pTaskGraphBoundSyncEvent->Wait();
+	startThread();
 }
 #endif
 
@@ -166,6 +164,12 @@ NetMgr::~NetMgr()
 #endif
 }
 
+void NetMgr::startThread()
+{
+	m_pNetThread = new UENetThread(this);
+	m_pRenderingThread = FRunnableThread::Create(m_pNetThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
+	m_pNetThread->m_pTaskGraphBoundSyncEvent->Wait();
+}
 
 void NetMgr::openSocket(std::string ip, uint32 port)
 {
@@ -174,6 +178,26 @@ void NetMgr::openSocket(std::string ip, uint32 port)
 #else
 	openSocket_Inter(ip, port);
 #endif
+}
+
+void NetMgr::closeSocket(std::string ip, uint32 port)
+{
+	std::stringstream strStream;
+	strStream << ip << "&" << port;
+	std::string ipId = strStream.str();
+	if (m_id2ClientMap[ipId] != nullptr)	// 如果没有这个 NetClient
+	{
+		// 关闭 socket 之前要等待所有的数据都发送完成，如果发送一直超时，可能就卡在这很长时间
+		m_id2ClientMap[ipId].msgSendEndEvent.Reset();        // 重置信号
+		m_id2ClientMap[ipId].msgSendEndEvent.WaitOne();      // 阻塞等待数据全部发送完成
+
+		using (MLock mlock = new MLock(m_visitMutex))
+		{
+			m_id2ClientMap[ipId].Disconnect(0);
+			m_id2ClientMap.Remove(key);
+		}
+		m_curSocket = nullptr;
+	}
 }
 
 #ifdef USE_EXTERN_THREAD

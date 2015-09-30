@@ -6,11 +6,15 @@
 #include "MCircularBuffer.h"
 #include "BufferDefaultValue.h"
 
-#include "Windows/AllowWindowsPlatformTypes.h"
+#ifdef USE_EXTERN_THREAD
 
-#include "Sockets/Mutex.h"
+	#include "Windows/AllowWindowsPlatformTypes.h"
 
-#include "Windows/HideWindowsPlatformTypes.h"
+	#include "Sockets/Mutex.h"
+
+	#include "Windows/HideWindowsPlatformTypes.h"
+
+#endif
 
 NetClientBuffer::NetClientBuffer()
 {
@@ -26,7 +30,11 @@ NetClientBuffer::NetClientBuffer()
 	m_pHeaderBA = new ByteBuffer(MSGHEADERSIZE);
 	m_pMsgBA = new DynBuffer(INITCAPACITY);
 
+#ifdef USE_EXTERN_THREAD
 	m_pMutex = new Mutex();
+#else
+	m_pMutex = new FCriticalSection();
+#endif
 }
 
 NetClientBuffer::~NetClientBuffer()
@@ -41,7 +49,11 @@ NetClientBuffer::~NetClientBuffer()
 
 	delete m_unCompressHeaderBA;
 
+#ifdef USE_EXTERN_THREAD
 	delete m_pMutex;
+#else
+	delete m_pMutex;
+#endif
 }
 
 void NetClientBuffer::moveRecvSocketDyn2RecvSocket()
@@ -79,12 +91,19 @@ void NetClientBuffer::sendMsg()
 	m_pHeaderBA->clear();
 	m_pHeaderBA->writeUnsignedInt32(m_sendClientBA->size());      // 填充长度
 
+#ifdef USE_EXTERN_THREAD
 	m_pMutex->Lock();
+#else
+	//FScopeLock Lock(&m_pMutex);
+	m_pMutex->Lock();
+#endif
 
 	m_sendClientBuffer->pushBack((char*)m_pHeaderBA->getStorage(), 0, m_pHeaderBA->size());
 	m_sendClientBuffer->pushBack((char*)m_sendClientBA->getStorage(), 0, m_sendClientBA->size());
 
+#ifdef USE_EXTERN_THREAD
 	m_pMutex->Unlock();
+#endif
 }
 
 // 获取数据，然后压缩加密
@@ -92,12 +111,20 @@ void NetClientBuffer::moveSendClient2SendSocket()
 {
 	m_sendSocketBuffer->clear(); // 清理，这样环形缓冲区又可以从 0 索引开始了
 
+#ifdef USE_EXTERN_THREAD
 	m_pMutex->Lock();
+#else
+	m_pMutex->Lock();
+#endif
 
 	m_pMsgBA->setSize(m_sendClientBuffer->size());
 	m_sendClientBuffer->popFront(m_pMsgBA->getStorage(), 0, m_sendClientBuffer->size());
 
+#ifdef USE_EXTERN_THREAD
 	m_pMutex->Unlock();
+#else
+	m_pMutex->Unlock();
+#endif
 
 	m_sendSocketBuffer->pushBack(m_pMsgBA->getStorage(), 0, m_pMsgBA->size());
 	m_sendClientBuffer->clear(); // 清理，这样环形缓冲区又可以从 0 索引开始了

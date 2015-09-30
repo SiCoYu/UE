@@ -8,14 +8,20 @@
 
 class FSocket;
 class NetClientBuffer;
+class MEvent;
+class MMutex;
 
 class UENetClient
 {
 protected:
 	FSocket* m_pSocket;
-	NetClientBuffer* m_pNetClientBuffer;
+	NetClientBuffer* m_dataBuffer;
 	FString	m_strDesc;
 	FIPv4Endpoint m_boundEndpoint;
+
+	MEvent* m_msgSendEndEvent;
+	MMutex* m_sendMutex;
+	bool m_isConnected;
 
 protected:
 	void testSendData();
@@ -32,6 +38,8 @@ public:
 	void sendMsg();
 
 	bool connect(FString ip, uint32 port);	// 连接服务器
+	void Send();
+	bool checkAndUpdateConnect();
 };
 
 #endif

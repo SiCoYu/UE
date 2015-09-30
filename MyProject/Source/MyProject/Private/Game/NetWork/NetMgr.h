@@ -47,6 +47,7 @@ private:
 	FRunnableThread* m_pRenderingThread;
 	std::map<std::string, UENetClient*> m_id2ClientMap;
 #endif
+	UENetClient* m_curSocket;	// 当前正在使用的 Client
 
 	void testSendData(std::string ip, uint32 port);
 
@@ -58,6 +59,7 @@ private:
 	void NetMgr_Inter();
 	void recAndSendMsg_Inter();		// 使用内部库
 	void openSocket_Inter(std::string ip, uint32 port);
+	void startThread();
 #endif
 
 public:
@@ -69,6 +71,10 @@ public:
 	~NetMgr();
 
 	virtual void openSocket(std::string ip, uint32 port);
+	/**
+	* @brief 关闭 socket
+	*/
+	virtual void closeSocket(std::string ip, uint32 port);
 	virtual void recAndSendMsg();
 };
 

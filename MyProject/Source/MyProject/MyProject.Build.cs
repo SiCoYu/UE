@@ -26,6 +26,7 @@ public class MyProject : ModuleRules
 
                 "MyProject/Private/Game/Test",
                 "MyProject/Private/Game/LuaCBridge",
+                "MyProject/Private/Game/Thread",
 	        }
         );
 

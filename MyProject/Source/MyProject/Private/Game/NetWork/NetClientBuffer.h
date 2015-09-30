@@ -1,11 +1,17 @@
 #ifndef __NETCLIENTBUFFER_H
 #define __NETCLIENTBUFFER_H
 
+#include "MyProject.h"
+#include "PlatformDefine.h"
+
 class MsgBuffer;
 class DynBuffer;
 class ByteBuffer;
 class MCircularBuffer;
-class Mutex;
+
+#ifdef USE_EXTERN_THREAD
+	class Mutex;
+#endif
 
 /**
 * @brief 消息缓冲区
@@ -27,7 +33,11 @@ protected:
 	ByteBuffer* m_pHeaderBA;	// 写入四个字节头部
 	DynBuffer* m_pMsgBA;		// 发送消息临时缓冲区，减小加锁粒度
 
+#ifdef USE_EXTERN_THREAD
 	Mutex* m_pMutex;
+#else
+	FCriticalSection* m_pMutex;
+#endif
 
 public:
 	NetClientBuffer();
