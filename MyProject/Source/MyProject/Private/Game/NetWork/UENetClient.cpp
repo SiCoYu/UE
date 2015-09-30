@@ -45,21 +45,34 @@ NetClientBuffer* UENetClient::getNetClientBuffer()
 
 void UENetClient::sendMsg()
 {
-	m_pNetClientBuffer->sendMsg();
+	//m_pNetClientBuffer->sendMsg();
+	testSendData();
 }
 
-void UENetClient::connect(FString ip, uint32 port)
+bool UENetClient::connect(FString ip, uint32 port)
 {
 	FIPv4Address IPAddress;
 	FIPv4Address::Parse(ip, IPAddress);
 	m_boundEndpoint = FIPv4Endpoint(IPAddress, port);
 
 	ISocketSubsystem* SocketSubsystem = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM);
-
+	bool result = false;
 	if (SocketSubsystem != nullptr)
 	{
 		m_pSocket = SocketSubsystem->CreateSocket(NAME_Stream, *m_strDesc, true);
 
-		m_pSocket->Connect(*m_boundEndpoint.ToInternetAddr());
+		result = m_pSocket->Connect(*m_boundEndpoint.ToInternetAddr());
+	}
+
+	return result;
+}
+
+void UENetClient::testSendData()
+{
+	int sendByte = 0;
+	uint8 data[5] = { 1, 2, 3, 4, 5 };
+	if (m_pSocket != nullptr)
+	{
+		m_pSocket->Send(data, 5, sendByte);
 	}
 }

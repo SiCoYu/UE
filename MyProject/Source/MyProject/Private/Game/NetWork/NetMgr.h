@@ -27,6 +27,9 @@
 
 #else
 	class UENetThread;
+	class UENetClient;
+	#include <map>
+	#include <string>
 #endif
 
 #ifdef USE_EXTERN_THREAD
@@ -41,8 +44,11 @@ private:
 	Mutex* m_pMutex;
 #else
 	UENetThread* m_pNetThread;
-	FRunnableThread* m_pRenderingThread = nullptr;
+	FRunnableThread* m_pRenderingThread;
+	std::map<std::string, UENetClient*> m_id2ClientMap;
 #endif
+
+	void testSendData(std::string ip, uint32 port);
 
 #ifdef USE_EXTERN_THREAD
 	void NetMgr_Extern();

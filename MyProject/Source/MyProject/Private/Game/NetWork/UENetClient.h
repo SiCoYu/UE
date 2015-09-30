@@ -17,6 +17,9 @@ protected:
 	FString	m_strDesc;
 	FIPv4Endpoint m_boundEndpoint;
 
+protected:
+	void testSendData();
+
 public:
 	UENetClient();
 	~UENetClient();
@@ -28,7 +31,7 @@ public:
 	NetClientBuffer* getNetClientBuffer();
 	void sendMsg();
 
-	void connect(FString ip, uint32 port);	// 连接服务器
+	bool connect(FString ip, uint32 port);	// 连接服务器
 };
 
 #endif

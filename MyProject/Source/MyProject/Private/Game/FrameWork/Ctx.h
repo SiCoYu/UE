@@ -2,7 +2,11 @@
 #define __CTX_H
 
 #include "Singleton.h"
-#include <Sockets/StdoutLog.h>
+#include "PlatformDefine.h"
+
+#ifdef USE_EXTERN_THREAD
+	#include <Sockets/StdoutLog.h>
+#endif
 
 class UIManager;
 class UGameInstance;
@@ -11,7 +15,9 @@ class EngineApi;
 class INetMgr;
 class TableSys;
 
-class Test;
+#ifdef ENABLE_UNIT_TEST
+	class Test;
+#endif
 
 class Ctx : public Singleton<Ctx>
 {
@@ -21,9 +27,14 @@ protected:
 	EngineApi* m_engineApi;
 	INetMgr* m_pINetMgr;
 	TableSys* m_pTableSys;
-	StdoutLog* m_pStdoutLog;
 
+#ifdef USE_EXTERN_THREAD
+	StdoutLog* m_pStdoutLog;
+#endif
+
+#ifdef ENABLE_UNIT_TEST
 	Test* m_test;
+#endif
 
 public:
 	Ctx();
@@ -40,9 +51,14 @@ public:
 	INetMgr* getNetMgr();
 	TableSys* getTableSys();
 
+#ifdef USE_EXTERN_THREAD
 	StdoutLog* getStdLog();
+#endif
 };
 
-#define G_PTABLESYS Ctx::getSingletonPtr()->getTableSys()
+#define g_pCtx Ctx::getSingletonPtr()
+#define g_pTableSys Ctx::getSingletonPtr()->getTableSys()
+#define g_pNetMgr Ctx::getSingletonPtr()->getNetMgr()
+#define g_pUIMgr Ctx::getSingletonPtr()->getUIMgr()
 
 #endif				// __CTX_H

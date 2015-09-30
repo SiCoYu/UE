@@ -40,7 +40,7 @@ void UUIPack::OnConfirmGeneric()
 	//delete pBinaryLoadItem;
 
 
-	G_PTABLESYS->getItem(TableID::TABLE_OBJECT, 100);
+	g_pTableSys->getItem(TableID::TABLE_OBJECT, 100);
 
 	//UPackage* Pkg = CreatePackage(NULL, NULL);
 	//EObjectFlags Flags = RF_Public | RF_Standalone;

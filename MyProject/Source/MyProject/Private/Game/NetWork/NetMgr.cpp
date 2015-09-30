@@ -3,6 +3,7 @@
 #include "NetClient.h"
 #include "NetThread.h"
 #include "NetClientBuffer.h"
+#include <sstream>
 
 #ifdef USE_EXTERN_THREAD
 
@@ -26,6 +27,7 @@
 
 #else
 	#include "UENetThread.h"
+	#include "UENetClient.h"
 #endif
 
 #include "Core.h"
@@ -224,7 +226,16 @@ void NetMgr::openSocket_Extern(std::string ip, uint32 port)
 #ifndef USE_EXTERN_THREAD
 void NetMgr::openSocket_Inter(std::string ip, uint32 port)
 {
+	std::stringstream strStream;
+	strStream << ip << "&" << port;
+	std::string ipId = strStream.str();
+	if (m_id2ClientMap[ipId] == nullptr)	// 如果没有这个 NetClient
+	{
+		m_id2ClientMap[ipId] = new UENetClient();
+		m_id2ClientMap[ipId]->connect(ip.c_str(), port);
 
+		testSendData(ip, port);
+	}
 }
 #endif
 
@@ -261,3 +272,14 @@ void NetMgr::recAndSendMsg_Inter()
 
 }
 #endif
+
+void NetMgr::testSendData(std::string ip, uint32 port)
+{
+	std::stringstream strStream;
+	strStream << ip << "&" << port;
+	std::string ipId = strStream.str();
+	if (m_id2ClientMap[ipId] != nullptr)
+	{
+		m_id2ClientMap[ipId]->sendMsg();
+	}
+}
