@@ -16,7 +16,7 @@
 
 #endif
 
-NetClientBuffer::NetClientBuffer()
+ClientBuffer::ClientBuffer()
 {
 	m_recvSocketBuffer = new MsgBuffer();
 	m_recvClientBuffer = new MsgBuffer();
@@ -37,7 +37,7 @@ NetClientBuffer::NetClientBuffer()
 #endif
 }
 
-NetClientBuffer::~NetClientBuffer()
+ClientBuffer::~ClientBuffer()
 {
 	delete m_recvSocketBuffer;
 	delete m_recvClientBuffer;
@@ -56,13 +56,13 @@ NetClientBuffer::~NetClientBuffer()
 #endif
 }
 
-void NetClientBuffer::moveRecvSocketDyn2RecvSocket()
+void ClientBuffer::moveRecvSocketDyn2RecvSocket()
 {
 	m_recvSocketBuffer->m_pMCircularBuffer->pushBack(m_recvSocketDynBuffer->m_storage, 0, m_recvSocketDynBuffer->size());
 }
 
 // 有可能一个数据包有多个消息，这个地方没有处理，如果有多个消息，需要处理，否则会丢失消息
-void NetClientBuffer::moveRecvSocket2RecvClient()
+void ClientBuffer::moveRecvSocket2RecvClient()
 {
 	while (m_recvSocketBuffer->checkHasMsg())  // 如果有数据
 	{
@@ -76,7 +76,7 @@ void NetClientBuffer::moveRecvSocket2RecvClient()
 	}
 }
 
-ByteBuffer* NetClientBuffer::getMsg()
+ByteBuffer* ClientBuffer::getMsg()
 {
 	if (m_recvClientBuffer->checkHasMsg())
 	{
@@ -86,7 +86,7 @@ ByteBuffer* NetClientBuffer::getMsg()
 	return nullptr;
 }
 
-void NetClientBuffer::sendMsg()
+void ClientBuffer::sendMsg()
 {
 	m_pHeaderBA->clear();
 	m_pHeaderBA->writeUnsignedInt32(m_sendClientBA->size());      // 填充长度
@@ -107,7 +107,7 @@ void NetClientBuffer::sendMsg()
 }
 
 // 获取数据，然后压缩加密
-void NetClientBuffer::moveSendClient2SendSocket()
+void ClientBuffer::moveSendClient2SendSocket()
 {
 	m_sendSocketBuffer->clear(); // 清理，这样环形缓冲区又可以从 0 索引开始了
 

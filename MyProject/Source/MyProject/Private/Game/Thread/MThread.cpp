@@ -1,4 +1,5 @@
-﻿#include "MThread.h"
+﻿#include "MyProject.h"
+#include "MThread.h"
 #include "MEvent.h"
 
 MThread::MThread()

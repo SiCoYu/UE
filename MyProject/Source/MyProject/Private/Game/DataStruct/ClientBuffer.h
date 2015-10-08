@@ -16,7 +16,7 @@ class MCircularBuffer;
 /**
 * @brief 消息缓冲区
 */
-class NetClientBuffer
+class ClientBuffer
 {
 protected:
 	// 接收的 Buffer
@@ -40,8 +40,8 @@ protected:
 #endif
 
 public:
-	NetClientBuffer();
-	~NetClientBuffer();
+	ClientBuffer();
+	~ClientBuffer();
 
 	void moveRecvSocketDyn2RecvSocket();
 	void moveRecvSocket2RecvClient();

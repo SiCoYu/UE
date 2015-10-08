@@ -14,22 +14,22 @@
 using namespace SOCKETS_NAMESPACE;
 #endif
 
-class NetClientBuffer;
+class ClientBuffer;
 
-class NetClient : public TcpSocket
+class NetTCPClient : public TcpSocket
 {
 protected:
-	NetClientBuffer* m_pNetClientBuffer;
+	ClientBuffer* m_dataBuffer;
 
 public:
-	NetClient(ISocketHandler& h);
-	~NetClient();
+	NetTCPClient(ISocketHandler& h);
+	~NetTCPClient();
 
 	virtual void OnConnect();
 	virtual void OnConnectFailed();
 	virtual void OnRawData(const char *buf, size_t len);
 	virtual void OnDelete();
-	NetClientBuffer* getNetClientBuffer();
+	ClientBuffer* getNetClientBuffer();
 	void sendMsg();
 };
 
