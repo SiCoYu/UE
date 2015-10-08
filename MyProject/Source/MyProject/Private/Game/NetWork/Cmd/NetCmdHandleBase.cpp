@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#include "MyProject.h"
+#include "NetCmdHandleBase.h"
+#include "Common.h"
 
-namespace SDK.Lib
+void NetCmdHandleBase::handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam)
 {
-    public class NetCmdHandleBase
-    {
-        public Dictionary<int, Action<ByteBuffer>> m_id2HandleDic = new Dictionary<int, Action<ByteBuffer>>();
-
-        public virtual void handleMsg(ByteBuffer bu, byte byCmd, byte byParam)
-        {
-            if(m_id2HandleDic.ContainsKey(byParam))
-            {
-                m_id2HandleDic[byParam](bu);
-            }
-            else
-            {
-                Ctx.m_instance.m_logSys.log(string.Format("消息没有处理: byCmd = {0},  byParam = {1}", byCmd, byParam));
-            }
-        }
-    }
+	if (m_id2HandleDic[byParam])
+	{
+		m_id2HandleDic[byParam](bu);
+	}
+	else
+	{
+		g_pLogSys->log(string.Format("消息没有处理: byCmd = {0},  byParam = {1}", byCmd, byParam));
+	}
 }

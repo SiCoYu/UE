@@ -1,10 +1,11 @@
 #include "stNullUserCmd.h"
+#include "EngineApi.h"
 
 void stNullUserCmd::serialize(ByteBuffer* bu)
 {
 	bu->writeUnsignedInt8(byCmd);
 	bu->writeUnsignedInt8(byParam);
-	dwTimestamp = UtilApi.getUTCSec();
+	dwTimestamp = EngineApi::getUTCSec();
 	bu.writeUnsignedInt32(dwTimestamp);
 }
 

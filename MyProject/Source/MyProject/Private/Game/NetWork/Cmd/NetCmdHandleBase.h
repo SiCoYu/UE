@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#ifndef __NetCmdHandleBase_H
+#define __NetCmdHandleBase_H
 
-namespace SDK.Lib
+#include "Platform.h"		// uint8
+// #include "Map.h"			// UE4 自己的 Tmap
+#include <map>
+#include "FastDelegate.h"	// FastDelegate1
+
+class ByteBuffer;
+
+class NetCmdHandleBase
 {
-    public class NetCmdHandleBase
-    {
-        public Dictionary<int, Action<ByteBuffer>> m_id2HandleDic = new Dictionary<int, Action<ByteBuffer>>();
+public:
+	typedef FastDelegate1<ByteBuffer*> HandleDelegate;
 
-        public virtual void handleMsg(ByteBuffer bu, byte byCmd, byte byParam)
-        {
-            if(m_id2HandleDic.ContainsKey(byParam))
-            {
-                m_id2HandleDic[byParam](bu);
-            }
-            else
-            {
-                Ctx.m_instance.m_logSys.log(string.Format("消息没有处理: byCmd = {0},  byParam = {1}", byCmd, byParam));
-            }
-        }
-    }
-}
+public:
+	std::map<int, HandleDelegate> m_id2HandleDic;
+
+public:
+	virtual void handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam);
+};
+
+#endif
