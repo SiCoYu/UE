@@ -1,9 +1,9 @@
-#ifndef __Util_H_
-#define __Util_H_
+#ifndef __UtilStr_H_
+#define __UtilStr_H_
 
 #include <string>
 
-class Util
+class UtilStr
 {
 public:
 	static std::string m_sDefaultStr;

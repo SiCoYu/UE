@@ -14,6 +14,7 @@ class EngineData;
 class EngineApi;
 class INetMgr;
 class TableSys;
+class LogSys;
 
 #ifdef ENABLE_UNIT_TEST
 	class Test;
@@ -27,6 +28,7 @@ protected:
 	EngineApi* m_engineApi;
 	INetMgr* m_pINetMgr;
 	TableSys* m_pTableSys;
+	LogSys* m_pLogSys;
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* m_pStdoutLog;
@@ -42,14 +44,15 @@ public:
 
 	void init();
 	void setUIMgr(UIManager* uiMgr);
-	UIManager* getUIMgr();
+	UIManager* getUIMgrPtr();
 
-	EngineData* getEngineData();
-	EngineApi* getEngineApi();
-	void setEngineApi(EngineApi* engineApi);
-	void setNetMgr(INetMgr* pINetMgr);
-	INetMgr* getNetMgr();
-	TableSys* getTableSys();
+	EngineData* getEngineDataPtr();
+	EngineApi* getEngineApiPtr();
+	void setEngineApiPtr(EngineApi* engineApi);
+	void setNetMgrPtr(INetMgr* pINetMgr);
+	INetMgr* getNetMgrPtr();
+	TableSys* getTableSysPtr();
+	LogSys* getLogSysPtr();
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* getStdLog();
@@ -57,8 +60,11 @@ public:
 };
 
 #define g_pCtx Ctx::getSingletonPtr()
-#define g_pTableSys Ctx::getSingletonPtr()->getTableSys()
-#define g_pNetMgr Ctx::getSingletonPtr()->getNetMgr()
-#define g_pUIMgr Ctx::getSingletonPtr()->getUIMgr()
+#define g_pTableSys g_pCtx->getTableSysPtr()
+#define g_pNetMgr g_pCtx->getNetMgrPtr()
+#define g_pUIMgr g_pCtx->getUIMgrPtr()
+#define g_pLogSys g_pCtx->getLogSysPtr();
+#define g_pEngineData g_pCtx->getEngineDataPtr();
+#define g_pEngineApi g_pCtx->getEngineApiPtr();
 
 #endif				// __CTX_H

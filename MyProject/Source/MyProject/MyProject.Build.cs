@@ -12,7 +12,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/DataStruct",
                 "MyProject/Private/Game/EngineWrap",
                 "MyProject/Private/Game/FrameWork",
-                "MyProject/Private/Game/NetWork",
+                "MyProject/Private/Game/NetWork/Socket",
+                "MyProject/Private/Game/NetWork/Cmd",
 
                 "MyProject/Private/UI/Widgets",
                 "MyProject/Private/Game/UI/UICore",
@@ -27,6 +28,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Test",
                 "MyProject/Private/Game/LuaCBridge",
                 "MyProject/Private/Game/Thread",
+                "MyProject/Private/Game/FastDelegate",
 	        }
         );
 

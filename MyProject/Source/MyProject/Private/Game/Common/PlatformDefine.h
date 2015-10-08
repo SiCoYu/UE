@@ -12,3 +12,11 @@
 
 // 是否进行单元测试
 #define ENABLE_UNIT_TEST
+
+// 是否加密
+#define MSG_ENCRIPT
+#undef MSG_ENCRIPT
+
+// 是否压缩
+#define MSG_COMPRESS
+#undef MSG_COMPRESS

@@ -1,5 +1,5 @@
-#ifndef __NETCLIENTBUFFER_H
-#define __NETCLIENTBUFFER_H
+#ifndef __CLIENTBUFFER_H
+#define __CLIENTBUFFER_H
 
 #include "MyProject.h"
 #include "PlatformDefine.h"
@@ -8,10 +8,7 @@ class MsgBuffer;
 class DynBuffer;
 class ByteBuffer;
 class MCircularBuffer;
-
-#ifdef USE_EXTERN_THREAD
-	class Mutex;
-#endif
+class MMutex;
 
 /**
 * @brief 消息缓冲区
@@ -19,36 +16,59 @@ class MCircularBuffer;
 class ClientBuffer
 {
 protected:
-	// 接收的 Buffer
-	MsgBuffer* m_recvSocketBuffer;		// 直接从服务器接收到的原始的数据，可能压缩和加密过
-	MsgBuffer* m_recvClientBuffer;		// 解压解密后可以使用的缓冲区
-	DynBuffer* m_recvSocketDynBuffer;	// 接收到的临时数据，将要放到 m_recvRawBuffer 中去
+	MsgBuffer* m_rawBuffer;			// 直接从服务器接收到的原始的数据，可能压缩和加密过
+	MsgBuffer* m_msgBuffer;			// 可以使用的缓冲区
+	//ByteBuffer* m_sendTmpBA;		// 发送临时缓冲区，发送的数据都暂时放在这里
+	MsgBuffer* m_sendTmpBuffer;		// 发送临时缓冲区，发送的数据都暂时放在这里
+	ByteBuffer* m_socketSendBA;     // 真正发送缓冲区
 
-	// 发送的 Buffer
-	MCircularBuffer* m_sendClientBuffer;		// 发送临时缓冲区，发送的数据都暂时放在这里
-	MCircularBuffer* m_sendSocketBuffer;		// 发送缓冲区，压缩或者加密过的
-	ByteBuffer* m_sendClientBA;			// 存放将要发送的临时数据，将要放到 m_sendClientBuffer 中去
+	DynBuffer* m_dynBuff;				// 接收到的临时数据，将要放到 m_rawBuffer 中去
+	ByteBuffer* m_unCompressHeaderBA;	// 存放解压后的头的长度
+	ByteBuffer* m_sendData;				// 存放将要发送的数据，将要放到 m_sendBuffer 中去
+	ByteBuffer* m_tmpData;				// 临时需要转换的数据放在这里
+	ByteBuffer* m_tmp1fData;			// 临时需要转换的数据放在这里
 
-	ByteBuffer* m_unCompressHeaderBA;  // 存放解压后的头的长度
-	ByteBuffer* m_pHeaderBA;	// 写入四个字节头部
-	DynBuffer* m_pMsgBA;		// 发送消息临时缓冲区，减小加锁粒度
+	MMutex* m_readMutex;				// 读互斥
+	MMutex* m_writeMutex;				// 写互斥
 
-#ifdef USE_EXTERN_THREAD
-	Mutex* m_pMutex;
-#else
-	FCriticalSection* m_pMutex;
+#if MSG_ENCRIPT
+	CryptContext* m_cryptContext;
 #endif
 
 public:
 	ClientBuffer();
 	~ClientBuffer();
 
-	void moveRecvSocketDyn2RecvSocket();
-	void moveRecvSocket2RecvClient();
-	ByteBuffer* getMsg();
+	DynBuffer* getDynBuff();
+	MsgBuffer* getSendTmpBuffer();
+	ByteBuffer* getSendBuffer();
+	ByteBuffer* getSendData();
 
-	void sendMsg();
-	void moveSendClient2SendSocket();
+#if MSG_ENCRIPT
+	void setCryptKey(byte[] encrypt)
+	void checkDES()
+#endif
+
+	MsgBuffer* getRawBuffer();
+	void SetRevBufferSize(int32 size);
+	void moveDyn2Raw();
+	void moveRaw2Msg();
+	void send(bool bnet = true);
+	ByteBuffer* getMsg();
+	// 获取数据，然后压缩加密
+	void getSocketSendData();
+
+protected:
+	// 压缩加密每一个包
+	void CompressAndEncryptEveryOne();
+	// 压缩解密作为一个包
+	void CompressAndEncryptAllInOne();
+	// 消息格式
+	// |------------- 加密的整个消息  -------------------------------------|
+	// |----4 Header----|-压缩的 body----|----4 Header----|-压缩的 body----|
+	// |                |                |                |                |
+	void UnCompressAndDecryptEveryOne();
+	void UnCompressAndDecryptAllInOne();
 };
 
 #endif				// __NETCLIENTBUFFER_H

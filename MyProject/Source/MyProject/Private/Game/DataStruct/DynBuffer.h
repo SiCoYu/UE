@@ -7,7 +7,6 @@
 /**
  * @brief 动态增长缓冲区，不分类型，就是 byte 缓冲区
  */
-template <class T>
 class DynBuffer
 {
 	friend class ClientBuffer;

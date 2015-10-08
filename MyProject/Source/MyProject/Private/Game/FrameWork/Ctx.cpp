@@ -34,10 +34,13 @@ Ctx::~Ctx()
 #ifdef ENABLE_UNIT_TEST
 	delete m_test;
 #endif
+
+	delete m_pLogSys;
 }
 
 void Ctx::init()
 {
+	m_pLogSys = new LogSys();
 	m_engineData = new EngineData();
 #ifdef USE_EXTERN_THREAD
 	m_pStdoutLog = new StdoutLog();
@@ -58,37 +61,37 @@ void Ctx::init()
 #endif
 }
 
-void Ctx::setUIMgr(UIManager* uiMgr)
+void Ctx::setUIMgrPtr(UIManager* uiMgr)
 {
 	m_uiMgr = uiMgr;
 }
 
-UIManager* Ctx::getUIMgr()
+UIManager* Ctx::getUIMgrPtr()
 {
 	return m_uiMgr;
 }
 
-EngineData* Ctx::getEngineData()
+EngineData* Ctx::getEngineDataPtr()
 {
 	return m_engineData;
 }
 
-EngineApi* Ctx::getEngineApi()
+EngineApi* Ctx::getEngineApiPtr()
 {
 	return m_engineApi;
 }
 
-void Ctx::setEngineApi(EngineApi* engineApi)
+void Ctx::setEngineApiPtr(EngineApi* engineApi)
 {
 	m_engineApi = engineApi;
 }
 
-void Ctx::setNetMgr(INetMgr* pINetMgr)
+void Ctx::setNetMgrPtr(INetMgr* pINetMgr)
 {
 	m_pINetMgr = pINetMgr;
 }
 
-INetMgr* Ctx::getNetMgr()
+INetMgr* Ctx::getNetMgrPtr()
 {
 	return m_pINetMgr;
 }
@@ -100,7 +103,12 @@ StdoutLog* Ctx::getStdLog()
 }
 #endif
 
-TableSys* Ctx::getTableSys()
+TableSys* Ctx::getTableSysPtr()
 {
 	return m_pTableSys;
+}
+
+LogSys* Ctx::getLogSysPtr()
+{
+	return m_pLogSys;
 }
