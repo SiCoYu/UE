@@ -15,7 +15,7 @@ public:
 	static void sendMsg(stNullUserCmd& msg, bool bnet = true);
 	static void checkStr(std::string str);
 	// 格式化消息数据到数组形式
-	static void formatBytes2Array(char* bytes, uint32 len)
+	static void formatBytes2Array(char* bytes, uint32 len);
 };
 
 #endif

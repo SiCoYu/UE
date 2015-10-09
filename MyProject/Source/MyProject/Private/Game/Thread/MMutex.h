@@ -30,6 +30,12 @@ public:
 	MMutex();
 	~MMutex();
 
+#ifdef USE_EXTERN_THREAD
+	Mutex* getMutex();
+#else
+	FCriticalSection* getMutex();
+#endif
+
 	void Lock();
 	void Unlock();
 };

@@ -194,3 +194,25 @@ bool UENetClient::checkAndUpdateConnect()
 
 	return m_isConnected;
 }
+
+MEvent* UENetClient::getMsgSendEndEvent()
+{
+	return m_msgSendEndEvent;
+}
+
+void UENetClient::setMsgSendEndEvent(MEvent* value)
+{
+	m_msgSendEndEvent = value;
+}
+
+bool UENetClient::canSendNewData()
+{
+	return (m_clientBuffer->getSendBuffer()->getBytesAvailable() == 0);
+}
+
+void UENetClient::SetRevBufferSize(int size)
+{
+	int retSize = 0;
+	m_socket->SetSendBufferSize(size, retSize);      // ReceiveBufferSize Ä¬ÈÏ 8096 ×Ö½Ú
+	m_clientBuffer->SetRevBufferSize(size);
+}

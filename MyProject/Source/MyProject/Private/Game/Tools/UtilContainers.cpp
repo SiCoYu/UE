@@ -3,7 +3,7 @@
 
 //==================== vector ÇøÓò ===================
 template<class T>
-int UtilVector::IndexOf(std::vector<T>& vec, T item)
+int UtilVector::IndexOf(std::vector<T>& vec, T& item)
 {
 	int idx = -1;
 	for (auto elem : vec)
@@ -18,7 +18,7 @@ int UtilVector::IndexOf(std::vector<T>& vec, T item)
 }
 
 template<class T>
-bool UtilVector::Remove(std::vector<T>& vec, T item)
+bool UtilVector::Remove(std::vector<T>& vec, T& item)
 {
 	std::vector<T>::iterator _beginIte;
 	std::vector<T>::iterator _endIte;
@@ -40,7 +40,7 @@ bool UtilVector::Remove(std::vector<T>& vec, T item)
 //=================== map ÇøÓò ========================
 
 template<class TKey, class TValue>
-bool UtilMap::ContainsKey(std::map<TKey, TValue>& map, TKey key)
+bool UtilMap::ContainsKey(std::map<TKey, TValue>& map, TKey& key)
 {
 	std::map<TKey, TValue>::iterator iter = map.find(key);
 	if (map.end() != iter)
@@ -51,7 +51,7 @@ bool UtilMap::ContainsKey(std::map<TKey, TValue>& map, TKey key)
 }
 
 template<class TKey, class TValue>
-bool UtilMap::Remove(std::map<TKey, TValue>& map, T item)
+bool UtilMap::Remove(std::map<TKey, TValue>& map, TKey& item)
 {
 	std::map<TKey, TValue>::iterator iter = map.find(key);
 	if (map.end() != iter)

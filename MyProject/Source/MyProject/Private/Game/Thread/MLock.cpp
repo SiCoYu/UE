@@ -2,12 +2,12 @@
 #include "MLock.h"
 
 MLock::MLock(MMutex* mutex)
-	: m_Lock(mutex)
+	: m_Lock(mutex->getMutex())
 {
     
 }
 
-void MLock::~MLock()
+MLock::~MLock()
 {
     
 }

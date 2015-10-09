@@ -93,8 +93,6 @@ public:
 	void send(bool bnet = true);
 	// 关闭 App ，需要等待子线程结束
 	void quipApp();
-	// 关闭 App ，需要等待子线程结束
-	void quipApp();
 	void sendAndRecData();
 };
 

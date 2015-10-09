@@ -19,6 +19,15 @@ MMutex::~MMutex()
 #endif
 }
 
+#ifdef USE_EXTERN_THREAD
+Mutex* MMutex::getMutex()
+#else
+FCriticalSection* MMutex::getMutex()
+#endif
+{
+	return m_pMutex;
+}
+
 void MMutex::Lock()
 {
 #ifdef USE_EXTERN_THREAD

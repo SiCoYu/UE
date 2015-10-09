@@ -12,11 +12,11 @@ class UtilVector
 public:
 	// 查找向量某个元素索引，如果没有查找到就返回 -1
 	template<class T>
-	static int IndexOf(std::vector<T>& vec, T item);
+	static int IndexOf(std::vector<T>& vec, T& item);
 
 	// 移除一个元素，如果移除成功，就返回 true
 	template<class T>
-	static bool Remove(std::vector<T>& vec, T item);
+	static bool Remove(std::vector<T>& vec, T& item);
 };
 
 //=================== map 区域 ========================
@@ -27,10 +27,10 @@ class UtilMap
 public:
 	// 查找 map 中某个 key 是否存在
 	template<class TKey, class TValue>
-	static bool ContainsKey(std::map<TKey, TValue>& map, TKey key);
+	static bool ContainsKey(std::map<TKey, TValue>& map, TKey& key);
 	// 删除某个 key
 	template<class TKey, class TValue>
-	static bool Remove(std::map<TKey, TValue>& map, T item);
+	static bool Remove(std::map<TKey, TValue>& map, TKey& item);
 };
 
 #endif
