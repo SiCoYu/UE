@@ -28,6 +28,9 @@ public:
 	// 查找 map 中某个 key 是否存在
 	template<class TKey, class TValue>
 	static bool ContainsKey(std::map<TKey, TValue>& map, TKey key);
+	// 删除某个 key
+	template<class TKey, class TValue>
+	static bool Remove(std::map<TKey, TValue>& map, T item);s
 };
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef __stNullUserCmd_H
 #define __stNullUserCmd_H
 
-#include "MyProject.h"		// int8
+#include "Platform.h"		// int8
 
 class ByteBuffer;
 

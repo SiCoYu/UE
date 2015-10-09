@@ -1,7 +1,7 @@
 ﻿#ifndef __DYNBUFFER_H
 #define __DYNBUFFER_H
 
-#include "MyProject.h"
+#include "Platform.h"
 #include <cstddef>
 #include "BufferDefaultValue.h"
 

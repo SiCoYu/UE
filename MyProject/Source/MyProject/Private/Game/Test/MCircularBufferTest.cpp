@@ -41,7 +41,7 @@ void MCircularBufferTest::TearDown()
 
 TEST_F(MCircularBufferTest, size)
 {
-	EXPECT_TRUE(m_circularBuffer.size() == 0);
+	EXPECT_TRUE(m_circularBuffer.getSize() == 0);
 }
 
 //TEST_F(MCircularBufferTest, PushOne)

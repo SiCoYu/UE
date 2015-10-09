@@ -6,7 +6,7 @@
 
 void TableCardItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 {
-    bytes->pos(offset);
+    bytes->setPos(offset);
 	UtilTable::readString(bytes, m_name);
 
 	bytes->readInt32(m_type);

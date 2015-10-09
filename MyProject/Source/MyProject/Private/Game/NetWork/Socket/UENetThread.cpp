@@ -1,21 +1,23 @@
 #include "MyProject.h"
 #include "UENetThread.h"
-
 #include "INetMgr.h"
-#include "NetClient.h"
-#include "INetMgr.h"
+#include "MEvent.h"
 
-UENetThread::UENetThread(INetMgr* pNetMgr)
-	: m_ExitFlag(false)
+UENetThread::UENetThread(INetMgr* pNetMgr, std::string m_threadName)
+	: UENetThread(m_threadName), m_ExitFlag(false)
 {
 	m_pNetMgr = pNetMgr;
-	m_pTaskGraphBoundSyncEvent = FPlatformProcess::GetSynchEventFromPool(true);
+	m_pSyncEvent = new MEvent();
 }
 
 UENetThread::~UENetThread()
 {
-	FPlatformProcess::ReturnSynchEventToPool(m_pTaskGraphBoundSyncEvent);
-	m_pTaskGraphBoundSyncEvent = nullptr;
+	delete m_pSyncEvent;
+}
+
+MEvent* UENetThread::getSyncEventPtr()
+{
+	return m_pSyncEvent;
 }
 
 bool UENetThread::Init(void)
@@ -30,9 +32,9 @@ void UENetThread::Exit(void)
 
 uint32 UENetThread::Run(void)
 {
-	if (m_pTaskGraphBoundSyncEvent != NULL)
+	if (m_pSyncEvent != nullptr)
 	{
-		m_pTaskGraphBoundSyncEvent->Trigger();
+		m_pSyncEvent->Set();
 	}
 
 	while (!m_ExitFlag)
@@ -42,9 +44,4 @@ uint32 UENetThread::Run(void)
 	}
 
 	return 0;
-}
-
-void UENetThread::setExitFlag(bool exit)
-{
-	m_ExitFlag = exit;
 }

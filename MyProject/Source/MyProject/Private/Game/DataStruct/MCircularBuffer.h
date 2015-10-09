@@ -1,7 +1,7 @@
 #ifndef __CIRCULARBUFFER_H
 #define __CIRCULARBUFFER_H
 
-#include "MyProject.h"
+#include "Platform.h"
 #include <cstddef>
 #include <iostream>
 #include <vector>

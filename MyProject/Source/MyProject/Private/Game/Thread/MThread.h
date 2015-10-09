@@ -15,10 +15,10 @@ protected:
 	bool m_ExitFlag;           // 退出标志
 	FRunnableThread* m_pThread;
 	std::string m_threadName;
-	MEvent* m_pSyncEvent;
+	//MEvent* m_pSyncEvent;
 
 public:
-	MThread();
+	MThread(std::string threadName = "");
 	~MThread();
 
 	void setExitFlag(bool value);

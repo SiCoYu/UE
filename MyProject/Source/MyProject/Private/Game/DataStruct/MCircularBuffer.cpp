@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "MCircularBuffer.h"
 #include "DynBufResizePolicy.h"
 #include "BufferUtil.h"

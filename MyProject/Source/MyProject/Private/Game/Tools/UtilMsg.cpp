@@ -1,7 +1,8 @@
-﻿#include "UtilMsg.h"
+﻿#include "MyProject.h"
+#include "UtilMsg.h"
 
 // 发送消息， bnet 如果 true 就直接发送到 socket ，否则直接进入输出消息队列
-void UtilMsg::sendMsg(stNullUserCmd msg, bool bnet = true)
+void UtilMsg::sendMsg(stNullUserCmd& msg, bool bnet = true)
 {
     Ctx.m_instance.m_shareData.m_tmpBA = Ctx.m_instance.m_netMgr.getSendBA();
     if (Ctx.m_instance.m_shareData.m_tmpBA != null)
@@ -30,7 +31,7 @@ void UtilMsg::checkStr(std::string str)
 }
 
 // 格式化消息数据到数组形式
-void UtilMsg::formatBytes2Array(byte[] bytes, uint len)
+void UtilMsg::formatBytes2Array(char* bytes, uint len)
 {
     string str = "{ ";
     bool isFirst = true;

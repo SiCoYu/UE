@@ -32,6 +32,8 @@
 	#include <string>
 #endif
 
+class MMutex;
+
 #ifdef USE_EXTERN_THREAD
 class NetMgr : public SocketHandler, public INetMgr
 #else
@@ -44,10 +46,10 @@ private:
 	Mutex* m_pMutex;
 #else
 	UENetThread* m_pNetThread;
-	FRunnableThread* m_pRenderingThread;
-	std::map<std::string, UENetClient*> m_id2ClientMap;
+	std::map<std::string, UENetClient*> m_id2ClientDic;
 #endif
 	UENetClient* m_curSocket;	// 当前正在使用的 Client
+	MMutex* m_visitMutex;
 
 	void testSendData(std::string ip, uint32 port);
 

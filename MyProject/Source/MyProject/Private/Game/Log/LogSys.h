@@ -1,7 +1,7 @@
 #ifndef __LogSys_H
 #define __LogSys_H
 
-#include "MyProject.h"		// FString
+#include "UnrealString.h"		// FString
 #include <string>
 
 class LogSys

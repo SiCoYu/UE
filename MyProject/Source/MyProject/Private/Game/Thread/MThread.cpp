@@ -2,15 +2,15 @@
 #include "MThread.h"
 #include "MEvent.h"
 
-MThread::MThread()
-	: m_threadName("")
+MThread::MThread(std::string threadName)
+	: m_threadName(threadName)
 {
-	m_pSyncEvent = new MEvent();
+	//m_pSyncEvent = new MEvent();
 }
 
 MThread::~MThread()
 {
-	delete m_pSyncEvent;
+	//delete m_pSyncEvent;
 }
 
 void MThread::setExitFlag(bool value)
@@ -21,7 +21,7 @@ void MThread::setExitFlag(bool value)
 void MThread::start()
 {
 	m_pThread = FRunnableThread::Create(this, m_threadName.c_str(), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
-	this->m_pSyncEvent->Wait();
+	//this->m_pSyncEvent->Wait();
 }
 
 void MThread::join()

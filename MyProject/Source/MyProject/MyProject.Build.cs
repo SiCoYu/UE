@@ -29,6 +29,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/LuaCBridge",
                 "MyProject/Private/Game/Thread",
                 "MyProject/Private/Game/FastDelegate",
+                "MyProject/Private/Game/Tools",
 	        }
         );
 

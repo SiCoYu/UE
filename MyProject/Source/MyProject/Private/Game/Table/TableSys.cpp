@@ -2,7 +2,7 @@
 #include "TableSys.h"
 #include "TableBase.h"
 #include "TableItemBase.h"
-#include "Util.h"
+#include "UtilStr.h"
 #include "SystemEndian.h"
 #include "TableObject.h"
 #include "TableCard.h"
@@ -115,7 +115,7 @@ std::string& TableSys::getTableName(TableID::TableID tableID)
 	{
 		return table->m_tableName;
 	}			
-	return Util::m_sDefaultStr;
+	return UtilStr::m_sDefaultStr;
 }
 
 // 读取一个表，仅仅读取表头

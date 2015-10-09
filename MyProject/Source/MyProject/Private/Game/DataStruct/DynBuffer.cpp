@@ -1,4 +1,5 @@
-﻿#include "DynBuffer.h"
+﻿#include "MyProject.h"
+#include "DynBuffer.h"
 #include "DynBufResizePolicy.h"
 #include <string.h>
 

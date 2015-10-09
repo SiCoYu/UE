@@ -1,12 +1,13 @@
 #include "MyProject.h"
 #include "NetMgr.h"
-#include "NetClient.h"
 #include "NetThread.h"
-#include "NetClientBuffer.h"
+#include "ClientBuffer.h"
 #include <sstream>
+#include "MMutex.h"
+#include "UtilContainers.h"
 
 #ifdef USE_EXTERN_THREAD
-
+	#include "NetTCPClient.h"
 	#include "Windows/AllowWindowsPlatformTypes.h"
 
 	#ifdef _WIN32
@@ -152,6 +153,7 @@ void NetMgr::NetMgr_Extern()
 #ifndef USE_EXTERN_THREAD
 void NetMgr::NetMgr_Inter()
 {
+	m_visitMutex = new MMutex();
 	startThread();
 }
 #endif
@@ -162,13 +164,15 @@ NetMgr::~NetMgr()
 #ifdef USE_EXTERN_THREAD
 	this->Release();
 #endif
+
+	delete m_visitMutex;
 }
 
 void NetMgr::startThread()
 {
-	m_pNetThread = new UENetThread(this);
-	m_pRenderingThread = FRunnableThread::Create(m_pNetThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
-	m_pNetThread->m_pTaskGraphBoundSyncEvent->Wait();
+	m_pNetThread = new UENetThread(this, "NetThread");
+	m_pNetThread->start();
+	m_pNetThread->getSyncEventPtr()->Wait();
 }
 
 void NetMgr::openSocket(std::string ip, uint32 port)
@@ -185,17 +189,18 @@ void NetMgr::closeSocket(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string ipId = strStream.str();
-	if (m_id2ClientMap[ipId] != nullptr)	// 如果没有这个 NetClient
+	if (UtilMap::ContainsKey(m_id2ClientDic, ipId))	// 如果没有这个 NetClient
 	{
 		// 关闭 socket 之前要等待所有的数据都发送完成，如果发送一直超时，可能就卡在这很长时间
-		m_id2ClientMap[ipId].msgSendEndEvent.Reset();        // 重置信号
-		m_id2ClientMap[ipId].msgSendEndEvent.WaitOne();      // 阻塞等待数据全部发送完成
+		m_id2ClientDic[ipId].msgSendEndEvent.Reset();        // 重置信号
+		m_id2ClientDic[ipId].msgSendEndEvent.WaitOne();      // 阻塞等待数据全部发送完成
 
-		using (MLock mlock = new MLock(m_visitMutex))
+		m_visitMutex->Lock();
 		{
-			m_id2ClientMap[ipId].Disconnect(0);
-			m_id2ClientMap.Remove(key);
+			m_id2ClientDic[ipId].Disconnect(0);
+			m_id2ClientDic.Remove(key);
 		}
+		m_visitMutex->UnLock();
 		m_curSocket = nullptr;
 	}
 }
@@ -253,10 +258,10 @@ void NetMgr::openSocket_Inter(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string ipId = strStream.str();
-	if (m_id2ClientMap[ipId] == nullptr)	// 如果没有这个 NetClient
+	if (m_id2ClientDic[ipId] == nullptr)	// 如果没有这个 NetClient
 	{
-		m_id2ClientMap[ipId] = new UENetClient();
-		m_id2ClientMap[ipId]->connect(ip.c_str(), port);
+		m_id2ClientDic[ipId] = new UENetClient();
+		m_id2ClientDic[ipId]->connect(ip.c_str(), port);
 
 		testSendData(ip, port);
 	}
@@ -302,8 +307,8 @@ void NetMgr::testSendData(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string ipId = strStream.str();
-	if (m_id2ClientMap[ipId] != nullptr)
+	if (m_id2ClientDic[ipId] != nullptr)
 	{
-		m_id2ClientMap[ipId]->sendMsg();
+		m_id2ClientDic[ipId]->sendMsg();
 	}
 }

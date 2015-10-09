@@ -1,3 +1,4 @@
+#include "MyProject.h"		// FString
 #include "LogSys.h"
 
 LogSys::LogSys()
