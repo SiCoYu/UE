@@ -5,9 +5,10 @@
 //#include "IPv4Address.h"		// FIPv4Address
 //#include "IPv4Endpoint.h"		// 只包含 IPv4Endpoint.h 会编译不过 // FIPv4Endpoint
 #include "Networking.h"			// 网络一次性全包括，防止只包含部分导致编译不过
+#include <string>
 
 class FSocket;
-class NetClientBuffer;
+class ClientBuffer;
 class MEvent;
 class MMutex;
 
@@ -15,7 +16,7 @@ class UENetClient
 {
 protected:
 	FSocket* m_pSocket;
-	NetClientBuffer* m_dataBuffer;
+	ClientBuffer* m_clientBuffer;
 	FString	m_strDesc;
 	FIPv4Endpoint m_boundEndpoint;
 
@@ -27,6 +28,9 @@ protected:
 	void testSendData();
 
 public:
+	std::string m_ip = "127.0.0.1";
+	int m_port = 50000;
+
 	UENetClient();
 	~UENetClient();
 
@@ -34,12 +38,13 @@ public:
 	virtual void OnConnectFailed();
 	virtual void OnRawData(const char *buf, size_t len);
 	virtual void OnDelete();
-	NetClientBuffer* getNetClientBuffer();
+	ClientBuffer* getClientBuffer();
 	void sendMsg();
 
 	bool connect(FString ip, uint32 port);	// 连接服务器
 	void Send();
 	bool checkAndUpdateConnect();
+	void Disconnect();
 };
 
 #endif

@@ -30,7 +30,7 @@ public:
 	static bool ContainsKey(std::map<TKey, TValue>& map, TKey key);
 	// É¾³ýÄ³¸ö key
 	template<class TKey, class TValue>
-	static bool Remove(std::map<TKey, TValue>& map, T item);s
+	static bool Remove(std::map<TKey, TValue>& map, T item);
 };
 
 #endif

@@ -29,7 +29,7 @@ public:
 	virtual void OnConnectFailed();
 	virtual void OnRawData(const char *buf, size_t len);
 	virtual void OnDelete();
-	ClientBuffer* getNetClientBuffer();
+	ClientBuffer* getClientBuffer();
 	void sendMsg();
 };
 

@@ -33,6 +33,7 @@
 #endif
 
 class MMutex;
+class ByteBuffer;
 
 #ifdef USE_EXTERN_THREAD
 class NetMgr : public SocketHandler, public INetMgr
@@ -40,15 +41,17 @@ class NetMgr : public SocketHandler, public INetMgr
 class NetMgr : public INetMgr
 #endif
 {
+public:
+	typedef std::map<std::string, UENetClient*>::iterator ClientMapIte;
 private:
 #ifdef USE_EXTERN_THREAD
 	NetThread* m_pNetThread;
 	Mutex* m_pMutex;
 #else
-	UENetThread* m_pNetThread;
+	UENetThread* m_netThread;
 	std::map<std::string, UENetClient*> m_id2ClientDic;
 #endif
-	UENetClient* m_curSocket;	// 当前正在使用的 Client
+	UENetClient* m_curClient;	// 当前正在使用的 Client
 	MMutex* m_visitMutex;
 
 	void testSendData(std::string ip, uint32 port);
@@ -78,6 +81,21 @@ public:
 	*/
 	virtual void closeSocket(std::string ip, uint32 port);
 	virtual void recAndSendMsg();
+
+	/**
+	* @brief 关闭当前 socket
+	*/
+	void closeCurSocket();
+	ByteBuffer* getMsg();
+	// 获取发送消息缓冲区
+	ByteBuffer* getSendBA();
+	// 注意这个仅仅是放入缓冲区冲，真正发送在子线程中发送
+	void send(bool bnet = true);
+	// 关闭 App ，需要等待子线程结束
+	void quipApp();
+	// 关闭 App ，需要等待子线程结束
+	void quipApp();
+	void sendAndRecData();
 };
 
 #endif				// __NETMGR_H

@@ -33,12 +33,12 @@ void NetTCPClient::OnRawData(const char *buf, size_t len)
 
 }
 
-ClientBuffer* NetTCPClient::getNetClientBuffer()
+ClientBuffer* NetTCPClient::getClientBuffer()
 {
-	return m_pNetClientBuffer;
+	return m_dataBuffer;
 }
 
 void NetTCPClient::sendMsg()
 {
-	m_pNetClientBuffer->sendMsg();
+	m_dataBuffer->sendMsg();
 }

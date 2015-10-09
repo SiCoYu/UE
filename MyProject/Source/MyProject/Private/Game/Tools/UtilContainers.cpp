@@ -44,6 +44,20 @@ bool UtilMap::ContainsKey(std::map<TKey, TValue>& map, TKey key)
 {
 	std::map<TKey, TValue>::iterator iter = map.find(key);
 	if (map.end() != iter)
+	{
 		return true;
+	}
 	return false;
+}
+
+template<class TKey, class TValue>
+bool UtilMap::Remove(std::map<TKey, TValue>& map, T item)
+{
+	std::map<TKey, TValue>::iterator iter = map.find(key);
+	if (map.end() != iter)
+	{
+		map.erase(iter);
+		return true;
+	}
+	return fasle
 }
