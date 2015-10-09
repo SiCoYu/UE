@@ -1,6 +1,7 @@
 ﻿#ifndef __DYNBUFFER_H
 #define __DYNBUFFER_H
 
+#include "MyProject.h"
 #include <cstddef>
 #include "BufferDefaultValue.h"
 
@@ -11,22 +12,28 @@ class DynBuffer
 {
 	friend class ClientBuffer;
 
-protected:
-	char* m_storage;
-	std::size_t m_size;
+public:
 	std::size_t m_iCapacity;
-	std::size_t m_maxCapacity;
+	std::size_t m_iMaxCapacity;
+	std::size_t m_size;
+	char* m_buff;
 
 public:
 	DynBuffer(size_t initCapacity = INITCAPACITY, size_t maxCapacity = MAXCAPACITY);
 	~DynBuffer();
-	std::size_t size();
-	std::size_t capacity();
-	std::size_t maxCapacity();
-	void setCapacity(std::size_t newCapacity);
-	void setSize(std::size_t len);
-	char* getStorage();
-	void push(char* pItem, std::size_t len);
+
+	char* getBuff();
+	void setBuff(char* value, uint32 len);
+
+	std::size_t getMaxCapacity();
+	std::size_t getCapacity();
+	void setCapacity(std::size_t value);
+	std::size_t getSize();
+	void setSize(std::size_t value);
+
+	void extendDeltaCapicity(uint32 delta);
+	//void push(char* pItem, std::size_t len);
+	bool canAddData(uint32 num);
 };
 
 #endif			// __DYNBUFFER_H

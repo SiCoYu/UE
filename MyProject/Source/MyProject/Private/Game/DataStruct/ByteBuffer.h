@@ -10,7 +10,7 @@
 #include "ByteConverter.h"
 #include "Error.h"
 #include "SystemEndian.h"
-#include "MStorageBuffer.h"
+#include "DynBuffer.h"
 #include "MEncode.h"
 #include "BufferDefaultValue.h"
 
@@ -89,8 +89,8 @@ public:
 	ByteBuffer& readUnused(MUnused<T> const&);
 
 	uint8 operator[](size_t pos) const;
-	size_t pos() const;
-	size_t pos(size_t pos_);
+	size_t getPos() const;
+	size_t setPos(size_t pos_);
 
 	// 根据类型跳过
 	template<typename T>
@@ -113,9 +113,10 @@ public:
 	T read(size_t pos) const;
 
 	void read(uint8* dest, size_t len);
-	const uint8* getStorage() const;
-	size_t size() const;
+	const uint8* getBuff() const;
+	size_t getSize() const;
 	void setSize(size_t len);
+	size_t getLength();
 	bool empty() const;
 	size_t capacity();
 	size_t maxCapacity();
@@ -145,6 +146,7 @@ public:
 	void textlike() const;
 	void hexlike() const;
 	void writeFile(FILE* file);
+	DynBuffer* getDynBuff();
 
 private:
 	// 添加的一定是和系统大小端相同的
@@ -154,7 +156,7 @@ private:
 
 protected:
 	size_t m_pos;		// 读取写入位置
-	MStorageBuffer* m_pStorageBuffer;
+	DynBuffer* m_dynBuff;
 	char m_encryptKey[8];
 	char m_decryptKey[8];
 };

@@ -12,15 +12,15 @@ void ByteBufferException::PrintPosError() const
 // constructor
 ByteBuffer::ByteBuffer(size_t initCapacity, size_t maxCapacity) : m_pos(0)
 {
-	m_pStorageBuffer = new MStorageBuffer(initCapacity, maxCapacity);
+	m_dynBuff = new DynBuffer(initCapacity, maxCapacity);
 	m_sysEndian = eSys_LITTLE_ENDIAN;		// 默认是小端
 }
 
 ByteBuffer::~ByteBuffer()
 {
-	if (m_pStorageBuffer)
+	if (m_dynBuff)
 	{
-		delete m_pStorageBuffer;
+		delete m_dynBuff;
 	}
 }
 
@@ -31,7 +31,7 @@ void ByteBuffer::setEndian(SysEndian endian)
 
 void ByteBuffer::clear()
 {
-	m_pStorageBuffer->m_size = 0;
+	m_dynBuff->m_size = 0;
 	m_pos = 0;
 }
 
@@ -210,7 +210,7 @@ ByteBuffer& ByteBuffer::readMultiByte(std::string& value, size_t len, MEncode::M
 	if (len)		// 如果不为 0 ，就读取指定数量
 	{
 		size_t readNum = 0;	// 已经读取的数量
-		while (pos() < size() && readNum < len) // prevent crash at wrong string format in packet
+		while (getPos() < getSize() && readNum < len) // prevent crash at wrong string format in packet
 		{
 			char c = read<char>();
 			value += c;
@@ -219,7 +219,7 @@ ByteBuffer& ByteBuffer::readMultiByte(std::string& value, size_t len, MEncode::M
 	}
 	else				// 如果为 0 ，就一直读取，直到遇到第一个 '\0'
 	{
-		while (pos() < size()) // prevent crash at wrong string format in packet
+		while (getPos() < getSize()) // prevent crash at wrong string format in packet
 		{
 			char c = read<char>();
 			if (c == 0)
@@ -237,7 +237,7 @@ ByteBuffer& ByteBuffer::readMultiByte(char* value, size_t len, MEncode::MEncode 
 	char c = 0;
 	if (len)		// 如果不为 0 ，就读取指定数量
 	{
-		while (pos() < size() && readNum < len)                         // prevent crash at wrong string format in packet
+		while (getPos() < getSize() && readNum < len)                         // prevent crash at wrong string format in packet
 		{
 			c = read<char>();
 			value[readNum] = c;
@@ -246,7 +246,7 @@ ByteBuffer& ByteBuffer::readMultiByte(char* value, size_t len, MEncode::MEncode 
 	}
 	else				// 如果为 0 ，就一直读取，直到遇到第一个 '\0'
 	{
-		while (pos() < size()) // prevent crash at wrong string format in packet
+		while (getPos() < getSize()) // prevent crash at wrong string format in packet
 		{
 			c = read<char>();
 			if (c == 0)
@@ -273,12 +273,12 @@ uint8 ByteBuffer::operator[](size_t pos) const
 	return read<uint8>(pos);
 }
 
-size_t ByteBuffer::pos() const 
+size_t ByteBuffer::getPos() const 
 { 
 	return m_pos; 
 }
 
-size_t ByteBuffer::pos(size_t pos_)
+size_t ByteBuffer::setPos(size_t pos_)
 {
 	m_pos = pos_;
 	return m_pos;
@@ -287,9 +287,9 @@ size_t ByteBuffer::pos(size_t pos_)
 // 根据大小跳过
 void ByteBuffer::read_skip(size_t skip)
 {
-	if (m_pos + skip > size())
+	if (m_pos + skip > getSize())
 	{
-		throw ByteBufferException(false, m_pos, skip, size());
+		throw ByteBufferException(false, m_pos, skip, getSize());
 	}
 	m_pos += skip;
 }
@@ -325,8 +325,8 @@ T ByteBuffer::read()
 template <typename T>
 T ByteBuffer::read(size_t pos) const
 {
-	if (pos + sizeof(T) > size())
-		throw ByteBufferException(false, pos, sizeof(T), size());
+	if (pos + sizeof(T) > getSize())
+		throw ByteBufferException(false, pos, sizeof(T), getSize());
 	T val = *((T const*)&m_pStorageBuffer->m_storage[pos]);
 	if (sSysEndian != m_sysEndian)
 	{
@@ -337,24 +337,29 @@ T ByteBuffer::read(size_t pos) const
 
 void ByteBuffer::read(uint8* dest, size_t len)
 {
-	if (m_pos + len > size())
+	if (m_pos + len > getSize())
 	{
-		throw ByteBufferException(false, m_pos, len, size());
+		throw ByteBufferException(false, m_pos, len, getSize());
 	}
-	memcpy(dest, &m_pStorageBuffer->m_storage[m_pos], len);
+	memcpy(dest, &m_dynBuff->m_buff[m_pos], len);
 	readAddPos(len);
 }
 
-const uint8* ByteBuffer::getStorage() const
+const uint8* ByteBuffer::getBuff() const
 {
-	return (uint8*)m_pStorageBuffer->m_storage;
+	return (uint8*)m_dynBuff->m_buff;
 }
 
-size_t ByteBuffer::size() const
+DynBuffer* ByteBuffer::getDynBuff()
 {
-	if (m_pStorageBuffer != nullptr)
+	return m_dynBuff;
+}
+
+size_t ByteBuffer::getSize() const
+{
+	if (m_dynBuff != nullptr)
 	{
-		return m_pStorageBuffer->m_size;
+		return m_dynBuff->m_size;
 	}
 
 	return 0;
@@ -362,22 +367,27 @@ size_t ByteBuffer::size() const
 
 void ByteBuffer::setSize(size_t len)
 {
-	m_pStorageBuffer->setSize(len);
+	m_dynBuff->setSize(len);
+}
+
+size_t ByteBuffer::getLength()
+{
+	return this->getSize();
 }
 
 bool ByteBuffer::empty() const
 {
-	return m_pStorageBuffer->m_size == 0;
+	return m_dynBuff->m_size == 0;
 }
 
 size_t ByteBuffer::capacity()
 {
-	return m_pStorageBuffer->m_iCapacity;
+	return m_dynBuff->m_iCapacity;
 }
 
 size_t ByteBuffer::maxCapacity()
 {
-	return m_pStorageBuffer->m_maxCapacity;
+	return m_dynBuff->m_iMaxCapacity;
 }
 
 void ByteBuffer::readAddPos(int delta)
@@ -388,12 +398,12 @@ void ByteBuffer::readAddPos(int delta)
 void ByteBuffer::writeAddPos(int delta)
 {
 	m_pos += delta;
-	m_pStorageBuffer->m_size += delta;
+	m_dynBuff->m_size += delta;
 }
 
 void ByteBuffer::setCapacity(std::size_t newCapacity)
 {
-	m_pStorageBuffer->setCapacity(newCapacity);
+	m_dynBuff->setCapacity(newCapacity);
 }
 
 /**
@@ -401,7 +411,7 @@ void ByteBuffer::setCapacity(std::size_t newCapacity)
 */
 bool ByteBuffer::canAddData(uint32 num)
 {
-	return m_pStorageBuffer->canAddData(num);
+	return m_dynBuff->canAddData(num);
 }
 
 // 在最后添加
@@ -430,11 +440,11 @@ void ByteBuffer::append(const uint8* src, size_t cnt)
 
 	if (!canAddData(cnt))
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(cnt + size(), capacity(), maxCapacity());
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(cnt + getSize(), capacity(), maxCapacity());
 		setCapacity(closeSize);
 	}
 	//memcpy(&m_pStorageBuffer->m_storage[m_pos], src, cnt);
-	memmove(&m_pStorageBuffer->m_storage[m_pos], src, cnt);	// 同一块内存方式覆盖
+	memmove(&m_dynBuff->m_buff[m_pos], src, cnt);	// 同一块内存方式覆盖
 	writeAddPos(cnt);
 }
 
@@ -448,7 +458,7 @@ void ByteBuffer::append(size_t cnt)
 
 	if (!canAddData(cnt))
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(cnt + size(), capacity(), maxCapacity());
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(cnt + getSize(), capacity(), maxCapacity());
 		setCapacity(closeSize);
 	}
 	writeAddPos(cnt);
@@ -456,9 +466,9 @@ void ByteBuffer::append(size_t cnt)
 
 void ByteBuffer::append(const ByteBuffer& buffer)
 {
-	if (buffer.pos())
+	if (buffer.getPos())
 	{
-		append(buffer.getStorage(), buffer.size());
+		append(buffer.getBuff(), buffer.getSize());
 	}
 }
 
@@ -466,52 +476,52 @@ void ByteBuffer::put(size_t pos, const uint8* src, size_t cnt)
 {
 	if (!canAddData(cnt))
 	{
-		throw ByteBufferException(true, pos, cnt, size());
+		throw ByteBufferException(true, pos, cnt, getSize());
 	}
-	memcpy(&m_pStorageBuffer->m_storage[pos], src, cnt);
+	memcpy(&m_dynBuff->m_buff[pos], src, cnt);
 }
 
 char* ByteBuffer::rd_ptr()
 {
-	return m_pStorageBuffer->m_storage + m_pos;
+	return m_dynBuff->m_buff + m_pos;
 }
 
 size_t ByteBuffer::avaliableBytes()
 {
-	return m_pStorageBuffer->m_size - m_pos;
+	return m_dynBuff->m_size - m_pos;
 }
 
 void ByteBuffer::print_storage() const
 {
     std::ostringstream ss;
-    ss <<  "STORAGE_SIZE: " << size() << "\n";
+    ss <<  "STORAGE_SIZE: " << getSize() << "\n";
     ss << "         ";
 
-    for (size_t i = 0; i < size(); ++i)
+    for (size_t i = 0; i < getSize(); ++i)
         ss << uint32(read<uint8>(i)) << " - ";
 }
 
 void ByteBuffer::textlike() const
 {
     std::ostringstream ss;
-    ss <<  "STORAGE_SIZE: " << size() << "\n";
+    ss <<  "STORAGE_SIZE: " << getSize() << "\n";
 
     ss << "         ";
 
-    for (size_t i = 0; i < size(); ++i)
+    for (size_t i = 0; i < getSize(); ++i)
         ss << read<uint8>(i);
 }
 
 void ByteBuffer::hexlike() const
 {
     std::ostringstream ss;
-    ss <<  "STORAGE_SIZE: " << size() << "\n";
+    ss <<  "STORAGE_SIZE: " << getSize() << "\n";
 
     ss << "         ";
 
     size_t j = 1, k = 1;
 
-    for (size_t i = 0; i < size(); ++i)
+    for (size_t i = 0; i < getSize(); ++i)
     {
         if ((i == (j * 8)) && ((i != (k * 16))))
         {
@@ -536,7 +546,7 @@ void ByteBuffer::hexlike() const
 
 void ByteBuffer::writeFile(FILE* file)
 {
-	fwrite((void*)&m_pStorageBuffer->m_storage[0], sizeof(char), this->size(), file);
+	fwrite((void*)&m_dynBuff->m_buff[0], sizeof(char), this->getSize(), file);
 }
 
 template <typename T>

@@ -7,6 +7,9 @@ class UtilStr
 {
 public:
 	static std::string m_sDefaultStr;
+
+public:
+	static std::string Format(const char * format, ...);
 };
 
 #endif

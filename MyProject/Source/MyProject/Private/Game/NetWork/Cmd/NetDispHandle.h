@@ -14,6 +14,6 @@ public:
 
 public:
 	virtual void handleMsg(ByteBuffer* msg);
-}
+};
 
 #endif

@@ -1,10 +1,11 @@
 ﻿#include "MyProject.h"
 #include "NetCmdHandleBase.h"
 #include "Common.h"
+#include "UtilContainers.h"
 
 void NetCmdHandleBase::handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam)
 {
-	if (m_id2HandleDic[byParam])
+	if (UtilMap::ContainsKey(m_id2HandleDic, byParam))
 	{
 		m_id2HandleDic[byParam](bu);
 	}

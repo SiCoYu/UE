@@ -1,121 +1,137 @@
-#include "MyProject.h"
 #include "MCircularBuffer.h"
 #include "DynBufResizePolicy.h"
 #include "BufferUtil.h"
-#include <string.h>
+#include "DynBuffer.h"
+#include "ByteBuffer.h"
 
 /**
  * @brief 构造函数
  */
 MCircularBuffer::MCircularBuffer(size_t initCapacity, size_t maxCapacity)
-	: m_head(0), m_tail(0), m_size(0), m_iCapacity(initCapacity), m_maxCapacity(maxCapacity)
 {
-	m_storage = new char[m_iCapacity];
+	m_dynBuffer = new DynBuffer(initCapacity, maxCapacity);
+
+	m_first = 0;
+	m_last = 0;
+
+	m_tmpBA = new ByteBuffer();
 }
 
 MCircularBuffer::~MCircularBuffer()
 {
-	delete[] m_storage;
+	delete m_dynBuffer;
+	delete m_tmpBA;
 }
 
-std::size_t MCircularBuffer::size()
+uint32 MCircularBuffer::getFirst()
 {
-	return m_size;
+	return m_first;
 }
 
-bool MCircularBuffer::full()
+uint32 MCircularBuffer::getLast()
 {
-	return (m_iCapacity == m_size);
+	return m_last;
 }
 
-void MCircularBuffer::clear()
+char* MCircularBuffer::getBuff()
 {
-	m_head = 0;
-	m_tail = 0;
-	m_size = 0;
+	return m_dynBuffer->m_buff;
 }
 
-char* MCircularBuffer::getStorage()
+std::size_t MCircularBuffer::getSize()
 {
-	return m_storage;
+	return m_dynBuffer->m_size;
 }
 
-bool MCircularBuffer::empty()
+void MCircularBuffer::setSize(std::size_t value)
 {
-	return (m_size == 0);
-}
-
-void MCircularBuffer::linearize()
-{
-	if (isLinearized())
-	{
-		// 函数memcpy()   从source  指向的区域向dest指向的区域复制count个字符，如果两数组重叠，不定义该函数的行为。而memmove(), 如果两函数重叠，赋值仍正确进行。memcpy函数假设要复制的内存区域不存在重叠，如果你能确保你进行复制操作的的内存区域没有任何重叠，可以直接用memcpy；如果你不能保证是否有重叠，为了确保复制的正确性，你必须用memmove。memcpy的效率会比memmove高一些，如果还不明白的话可以看一些两者的实现： 函数memcpy()   从source  指向的区域向dest指向的区域复制count个字符，如果两数组重叠，不定义该函数的行为。而memmove(), 如果两函数重叠，赋值仍正确进行。	memcpy函数假设要复制的内存区域不存在重叠，如果你能确保你进行复制操作的的内存区域没有任何重叠，可以直接用memcpy；如果你不能保证是否有重叠，为了确保复制的正确性，你必须用memmove。memcpy的效率会比memmove高一些
-		std::memmove(m_storage, m_storage + m_head, m_size);
-	}
-	else
-	{
-		if (m_iCapacity - m_head == m_tail)
-		{
-			BufferUtil::memSwap(m_storage, m_storage + m_head, m_tail);
-		}
-		else if (m_iCapacity - m_head > m_tail)
-		{
-			BufferUtil::memSwap(m_storage, m_storage + m_head, m_size - m_head);
-			std::memmove(m_storage + (m_size - m_tail), m_storage + m_head, m_tail);
-		}
-		else
-		{
-			BufferUtil::memSwap(m_storage, m_storage + (m_size - m_tail), m_tail);
-			std::memmove(m_storage, m_storage + (m_tail - m_head), m_head);
-		}
-	}
-
-	m_head = 0;
-	m_tail = m_size;
+	m_dynBuffer->setSize(value);
 }
 
 bool MCircularBuffer::isLinearized()
 {
-	return m_head <= m_tail;
+	if (this->getSize() == 0)
+	{
+		return true;
+	}
+
+	return m_first < m_last;
 }
 
-size_t MCircularBuffer::capacity()
+bool MCircularBuffer::empty()
 {
-	return m_iCapacity;
+	return m_dynBuffer->m_size == 0;
 }
 
-size_t MCircularBuffer::maxCapacity()
+size_t MCircularBuffer::getCapacity()
 {
-	return m_maxCapacity;
+	return m_dynBuffer->m_iCapacity;
+}
+
+bool MCircularBuffer::full()
+{
+	return this->getCapacity() == this->getSize();
+}
+
+void MCircularBuffer::clear()
+{
+	m_dynBuffer->m_size = 0;
+	m_first = 0;
+	m_last = 0;
+}
+
+void MCircularBuffer::linearize()
+{
+	if (this->empty())        // 没有数据
+	{
+		return;
+	}
+	if (isLinearized())
+	{
+		return;
+	}
+	else
+	{
+		// 数据在两个不连续的内存空间中
+		char* tmp = new char[m_last];
+		BufferUtil::Copy(m_dynBuffer->m_buff, 0, tmp, 0, m_last);  // 拷贝一段内存空间中的数据到 tmp
+		BufferUtil::Copy(m_dynBuffer->m_buff, m_first, m_dynBuffer->m_buff, 0, m_dynBuffer->m_iCapacity - m_first);  // 拷贝第一段数据到 0 索引位置
+		BufferUtil::Copy(tmp, 0, m_dynBuffer->m_buff, m_dynBuffer->m_iCapacity - m_first, m_last);      // 拷贝第二段数据到缓冲区
+
+		delete tmp;
+
+		m_first = 0;
+		m_last = this->getSize();
+	}
 }
 
 void MCircularBuffer::setCapacity(std::size_t newCapacity)
 {
-	if (newCapacity == capacity())
+	if (newCapacity == this->getCapacity())
 	{
 		return;
 	}
-	if (newCapacity < size())       // 不能分配比当前已经占有的空间还小的空间
+	if (newCapacity < this->getSize())       // 不能分配比当前已经占有的空间还小的空间
 	{
 		return;
 	}
 	char* tmpbuff = new char[newCapacity];   // 分配新的空间
 	if (isLinearized()) // 如果是在一段内存空间
 	{
-		std::memcpy(tmpbuff, m_storage + m_head, m_size);
+		// 已经是线性空间了仍然将数据移动到索引 0 的位置
+		BufferUtil::Copy(m_dynBuffer->m_buff, m_first, tmpbuff, 0, m_dynBuffer->m_size);
 	}
 	else    // 如果在两端内存空间
 	{
-		std::memcpy(tmpbuff, m_storage + m_head, m_iCapacity - m_head);
-		std::memcpy(tmpbuff + m_iCapacity - m_head, m_storage, m_tail);
+		BufferUtil::Copy(m_dynBuffer->m_buff, m_first, tmpbuff, 0, m_dynBuffer->m_iCapacity - m_first);
+		BufferUtil::Copy(m_dynBuffer->m_buff, 0, tmpbuff, m_dynBuffer->m_iCapacity - m_first, m_last);
 	}
 
-	m_head = 0;
-	m_tail = m_size;
-	m_iCapacity = newCapacity;
-
-	delete[] m_storage;
-	m_storage = tmpbuff;
+	m_first = 0;
+	m_last = m_dynBuffer->m_size;
+	m_dynBuffer->m_iCapacity = newCapacity;
+	delete m_dynBuffer->m_buff;
+	m_dynBuffer->m_buff = tmpbuff;
 }
 
 /**
@@ -123,7 +139,7 @@ void MCircularBuffer::setCapacity(std::size_t newCapacity)
 */
 bool MCircularBuffer::canAddData(uint32 num)
 {
-	if (m_iCapacity - m_size > num)
+	if (m_dynBuffer->m_iCapacity - m_dynBuffer->m_size > num) // 浪费一个字节，不用 >= ，使用 > 
 	{
 		return true;
 	}
@@ -132,177 +148,161 @@ bool MCircularBuffer::canAddData(uint32 num)
 }
 
 /**
-* @brief 在缓冲区尾部添加
+*@brief 向存储空尾部添加一段内容
 */
-void MCircularBuffer::pushBack(char* pItem, std::size_t startPos, std::size_t len)
+void MCircularBuffer::pushBackArr(char* items, uint32 start, std::size_t len)
 {
 	if (!canAddData(len)) // 存储空间必须要比实际数据至少多 1
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + size(), capacity(), maxCapacity());
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + m_dynBuffer->m_size, m_dynBuffer->m_iCapacity, m_dynBuffer->m_iMaxCapacity);
 		setCapacity(closeSize);
 	}
 
 	if (isLinearized())
 	{
-		if (len <= (m_iCapacity - m_tail))
+		if (len <= (m_dynBuffer->m_iCapacity - m_last))
 		{
-			std::memcpy(m_storage + m_tail, pItem + startPos, len);
+			BufferUtil::Copy(items, start, m_dynBuffer->m_buff, m_last, len);
 		}
 		else
 		{
-			std::memcpy(m_storage + m_tail, pItem + startPos, m_iCapacity - m_tail);
-			std::memcpy(m_storage + 0, pItem + m_iCapacity - m_tail, len - (m_iCapacity - m_tail));
+			BufferUtil::Copy(items, start, m_dynBuffer->m_buff, m_last, m_dynBuffer->m_iCapacity - m_last);
+			BufferUtil::Copy(items, m_dynBuffer->m_iCapacity - m_last, m_dynBuffer->m_buff, 0, len - (m_dynBuffer->m_iCapacity - m_last));
 		}
 	}
 	else
 	{
-		std::memcpy(m_storage + m_tail, pItem + startPos, len);
+		BufferUtil::Copy(items, start, m_dynBuffer->m_buff, m_last, len);
 	}
 
-	m_tail += len;
-	m_tail %= m_iCapacity;
+	m_last += len;
+	m_last %= m_dynBuffer->m_iCapacity;
 
-	m_size += len;
+	m_dynBuffer->m_size += len;
+}
+
+void MCircularBuffer::pushBackBA(ByteBuffer* bu)
+{
+	//pushBack(bu.dynBuff.buff, bu.position, bu.bytesAvailable);
+	pushBackArr(bu->dynBuff.buff, 0, bu->getLength());
 }
 
 /**
-* @brief 在缓冲区头部添加
+*@brief 向存储空头部添加一段内容
 */
-void MCircularBuffer::pushFront(char* pItem, std::size_t startPos, std::size_t len)
+void MCircularBuffer::pushFrontArr(char* items, std::size_t len)
 {
-	if (!canAddData(len)) // 存储空间必须要比实际数据至少多 1
+	if (!canAddData((uint)items.Length)) // 存储空间必须要比实际数据至少多 1
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + size(), capacity(), maxCapacity());
+		uint closeSize = DynBufResizePolicy.getCloseSize((uint)items.Length + m_dynBuffer.m_size, m_dynBuffer.m_iCapacity, m_dynBuffer.m_iMaxCapacity);
 		setCapacity(closeSize);
 	}
 
 	if (isLinearized())
 	{
-		if (len <= m_head)
+		if (items.Length <= m_first)
 		{
-			std::memcpy(m_storage + m_head - len, pItem + startPos, len);
+			Array.Copy(items, 0, m_dynBuffer.m_buff, m_first - items.Length, items.Length);
 		}
 		else
 		{
-			std::memcpy(m_storage + 0, pItem + startPos + len - m_head, m_head);
-			std::memcpy(m_storage + m_iCapacity - (len - m_head), pItem + 0, len - m_head);
+			Array.Copy(items, items.Length - m_first, m_dynBuffer.m_buff, 0, m_first);
+			Array.Copy(items, 0, m_dynBuffer.m_buff, m_dynBuffer.m_iCapacity - (items.Length - m_first), items.Length - m_first);
 		}
 	}
 	else
 	{
-		std::memcpy(m_storage + m_head - len, pItem + startPos + 0, len);
+		Array.Copy(items, 0, m_dynBuffer.m_buff, m_first - items.Length, items.Length);
 	}
 
-	if (len <= m_head)
+	if (items.Length <= m_first)
 	{
-		m_head -= (uint32)len;
+		m_first -= (uint)items.Length;
 	}
 	else
 	{
-		m_head = m_iCapacity - ((uint32)len - m_head);
+		m_first = m_dynBuffer.m_iCapacity - ((uint)items.Length - m_first);
 	}
-	m_size += (uint32)len;
+	m_dynBuffer.m_size += (uint)items.Length;
 }
 
 /**
-* @brief 获取缓冲区尾部，并且删除
+* @brief 从 CB 中读取内容，并且将数据删除
 */
-bool MCircularBuffer::popBack(char* pItem, std::size_t startPos, std::size_t len)
+void MCircularBuffer::popFrontBA(ByteBuffer* bytearray, std::size_t len)
 {
-	if (back(pItem, startPos, len))
-	{
-		popBackLenNoData(len);
-		return true;
-	}
-
-	return false;
+	frontBA(bytearray, len);
+	popFrontLen(len);
 }
 
-/**
-* @brief 获取缓冲区尾部，但是不删除
-*/
-bool MCircularBuffer::back(char* pItem, std::size_t startPos, std::size_t len)
+// 仅仅是获取数据，并不删除
+void MCircularBuffer::frontBA(ByteBuffer* bytearray, std::size_t len)
 {
-	if (len <= size())
+	bytearray->clear();          // 设置数据为初始值
+	if (m_dynBuffer->m_size >= len)          // 头部占据 4 个字节
 	{
-		return false;
-	}
-
-	if (isLinearized())
-	{
-		std::memcpy(pItem + startPos, m_storage + m_tail - len, len);
-	}
-	else
-	{
-		if (len <= m_tail)
+		if (isLinearized())      // 在一段连续的内存
 		{
-			std::memcpy(pItem + startPos, m_storage, len);
+			bytearray->writeBytes(m_dynBuffer->m_buff, m_first, len);
+		}
+		else if (m_dynBuffer->m_iCapacity - m_first >= len)
+		{
+			bytearray->writeBytes(m_dynBuffer->m_buff, m_first, len);
 		}
 		else
 		{
-			std::memcpy(pItem + startPos, m_storage + m_iCapacity - (len - m_tail), len - m_tail);
-			std::memcpy(pItem + startPos + len - m_tail, m_storage + 0, m_tail);
+			bytearray->writeBytes(m_dynBuffer->m_buff, m_first, m_dynBuffer->m_iCapacity - m_first);
+			bytearray->writeBytes(m_dynBuffer->m_buff, 0, len - (m_dynBuffer->m_iCapacity - m_first));
 		}
 	}
 
-	return true;
-}
-
-void MCircularBuffer::popBackLenNoData(std::size_t len)
-{
-	m_tail -= len;
-	m_tail += m_iCapacity;
-	m_tail %= m_iCapacity;
-	m_size -= len;
+	bytearray->setPos(0);        // 设置数据读取起始位置
 }
 
 /**
-* @brief 获取缓冲区头部，但是删除
+* @brief 从 CB 头部删除数据
 */
-bool MCircularBuffer::popFront(char* pItem, std::size_t startPos, std::size_t len)
+void MCircularBuffer::popFrontLen(uint32 len)
 {
-	if (front(pItem, startPos, len))
+	if (isLinearized())  // 在一段连续的内存
 	{
-		popFrontLenNoData(len);
-		return true;
+		m_first += len;
 	}
-
-	return false;
-}
-
-/**
-* @brief 获取缓冲区头部，但是不删除
-*/
-bool MCircularBuffer::front(char* pItem, std::size_t startPos, std::size_t len)
-{
-	if (len <= size())
+	else if (m_dynBuffer->m_iCapacity - m_first >= len)
 	{
-		return false;
-	}
-
-	if (isLinearized())
-	{
-		std::memcpy(pItem + startPos, m_storage + m_head, len);
+		m_first += len;
 	}
 	else
 	{
-		if (len <= (m_iCapacity - m_head))
-		{
-			std::memcpy(pItem + startPos, m_storage + m_head, len);
-		}
-		else
-		{
-			std::memcpy(pItem + startPos, m_storage + m_head, m_iCapacity - m_head);
-			std::memcpy(pItem + startPos + m_iCapacity - m_head, m_storage + 0, len - (m_iCapacity - m_head));
-		}
+		m_first = len - (m_dynBuffer->m_iCapacity - m_first);
 	}
 
-	return true;
+	m_dynBuffer.m_size -= len;
 }
 
-void MCircularBuffer::popFrontLenNoData(std::size_t len)
+// 向自己尾部添加一个 CirculeBuffer 
+void MCircularBuffer::pushBackCB(MCircularBuffer* rhv)
 {
-	m_head += len;
-	m_head %= m_iCapacity;
-	m_size -= len;
+	if (m_dynBuffer->m_iCapacity - m_dynBuffer->m_size < rhv->getSize())
+	{
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(rhv->getSize() + m_dynBuffer->m_size, m_dynBuffer->m_iCapacity, m_dynBuffer->m_iMaxCapacity);
+		setCapacity(closeSize);
+	}
+	//this.m_size += rhv.size;
+	//this.m_last = this.m_size;
+
+	//m_tmpBA.clear();
+	rhv->frontBA(m_tmpBA, rhv->getSize());
+	pushBackBA(m_tmpBA);
+
+	//if (rhv.isLinearized()) // 如果是在一段内存空间
+	//{
+	//    Array.Copy(rhv.buff, rhv.first, m_buff, 0, rhv.size);
+	//}
+	//else    // 如果在两端内存空间
+	//{
+	//    Array.Copy(rhv.buff, rhv.first, m_buff, 0, rhv.capacity() - rhv.first);
+	//    Array.Copy(m_buff, 0, m_buff, rhv.capacity() - rhv.first, rhv.last);
+	//}
+	//rhv.clear();
 }

@@ -2,6 +2,7 @@
 #define __LogSys_H
 
 #include "MyProject.h"		// FString
+#include <string>
 
 class LogSys
 {
@@ -10,6 +11,7 @@ public:
 	~LogSys();
 
 	void log(FString message);
+	void log(std::string message);
 };
 
 #endif

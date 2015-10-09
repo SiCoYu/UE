@@ -1,76 +1,100 @@
-﻿#include "MyProject.h"
-#include "DynBuffer.h"
+﻿#include "DynBuffer.h"
 #include "DynBufResizePolicy.h"
 #include <string.h>
 
 DynBuffer::DynBuffer(size_t initCapacity, size_t maxCapacity)
-	: m_iCapacity(initCapacity), m_maxCapacity(maxCapacity)
+	: m_iCapacity(initCapacity), m_iMaxCapacity(maxCapacity)
 {
-	m_storage = new char[m_iCapacity];
+	m_size = 0;
+	m_buff = new char[m_iCapacity];
 }
 
 DynBuffer::~DynBuffer()
 {
-	delete[] m_storage;
+	delete[] m_buff;
 }
 
-std::size_t DynBuffer::size()
+char* DynBuffer::getBuff()
 {
-	return m_size;
+	return m_buff;
 }
 
-size_t DynBuffer::capacity()
+void DynBuffer::setBuff(char* value, uint32 len)
+{
+	m_buff = value;
+	m_iCapacity = len;
+}
+
+std::size_t DynBuffer::getMaxCapacity()
+{
+	return m_iMaxCapacity;
+}
+
+size_t DynBuffer::getCapacity()
 {
 	return m_iCapacity;
 }
 
-std::size_t DynBuffer::maxCapacity()
+void DynBuffer::setCapacity(std::size_t value)
 {
-	return m_maxCapacity;
-}
-
-void DynBuffer::setSize(std::size_t len)
-{
-	m_size = len;
-
-	if (m_size > capacity())
+	if (value == m_iCapacity)
 	{
-		setCapacity(m_size);
+		return;
 	}
-}
-
-void DynBuffer::setCapacity(std::size_t newCapacity)
-{
-	if (newCapacity > maxCapacity())
-	{
-		newCapacity = m_maxCapacity;
-	}
-	if (newCapacity <= capacity())
+	if (value < this->getSize())       // 不能分配比当前已经占有的空间还小的空间
 	{
 		return;
 	}
 
-	char* tmpbuff = new char[newCapacity];   // 分配新的空间
-	memcpy(tmpbuff, m_storage, m_iCapacity);
-	m_iCapacity = newCapacity;
+	char* tmpbuff = new char[value];   // 分配新的空间
+	memcpy(tmpbuff, m_buff, m_iCapacity);
 
-	delete[] m_storage;
-	m_storage = tmpbuff;
+	delete[] m_buff;
+	m_buff = tmpbuff;
+	m_iCapacity = value;
 }
 
-char* DynBuffer::getStorage()
+std::size_t DynBuffer::getSize()
 {
-	return m_storage;
+	return m_size;
 }
 
-void DynBuffer::push(char* pItem, std::size_t len)
+void DynBuffer::setSize(std::size_t value)
 {
-	if (len > m_iCapacity)
+	if (m_size > this->getCapacity())
 	{
-		uint32 closeSize = DynBufResizePolicy::getCloseSize(len, capacity(), maxCapacity());
-		setCapacity(closeSize);
+		extendDeltaCapicity(value - this->getSize());
 	}
 
-	memcpy(m_storage, pItem, len);
-	m_size = len;
+	m_size = value;
+}
+
+//void DynBuffer::push(char* pItem, std::size_t len)
+//{
+//	if (len > m_iCapacity)
+//	{
+//		uint32 closeSize = DynBufResizePolicy::getCloseSize(len, this->getCapacity(), this->getMaxCapacity());
+//		setCapacity(closeSize);
+//	}
+//
+//	memcpy(m_buff, pItem, len);
+//	m_size = len;
+//}
+
+void DynBuffer::extendDeltaCapicity(uint32 delta)
+{
+	this->setCapacity(DynBufResizePolicy::getCloseSize(this->getSize() + delta, this->getCapacity(), this->getMaxCapacity()));
+}
+
+/**
+*@brief 能否添加 num 长度的数据
+*/
+bool DynBuffer::canAddData(uint32 num)
+{
+	if (m_iCapacity - m_size >= num)
+	{
+		return true;
+	}
+
+	return false;
 }
