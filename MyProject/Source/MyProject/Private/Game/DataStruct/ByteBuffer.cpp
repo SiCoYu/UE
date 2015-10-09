@@ -284,6 +284,11 @@ size_t ByteBuffer::setPos(size_t pos_)
 	return m_pos;
 }
 
+uint32 ByteBuffer::getBytesAvailable()
+{
+	return (m_dynBuff->getSize() - m_pos);
+}
+
 // 根据大小跳过
 void ByteBuffer::read_skip(size_t skip)
 {

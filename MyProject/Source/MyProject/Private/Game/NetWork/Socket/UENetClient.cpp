@@ -6,13 +6,15 @@
 #include "MEvent.h"
 #include "MMutex.h"
 #include "MLock.h"
+#include "Common.h"
+#include "UtilStr.h"
 
 UENetClient::UENetClient()
 	: m_boundEndpoint(FIPv4Address::Any, 0),
 	m_isConnected(false)
 {
-	m_pSocket = nullptr;
-	m_clientBuffer = new NetClientBuffer();
+	m_socket = nullptr;
+	m_clientBuffer = new ClientBuffer();
 	m_strDesc = "";
 	//m_boundEndpoint(FIPv4Address::Any, 0);
 
@@ -27,24 +29,24 @@ UENetClient::~UENetClient()
 	delete m_sendMutex;
 }
 
-void UENetClient::OnConnect()
+bool UENetClient::getRecvThreadStart()
 {
-	
+	return m_brecvThreadStart;
 }
 
-void UENetClient::OnConnectFailed()
+void UENetClient::setRecvThreadStart(bool value)
 {
-	
+	m_brecvThreadStart = value;
 }
 
-void UENetClient::OnDelete()
+bool UENetClient::getIsConnected()
 {
-
+	return m_isConnected;
 }
 
-void UENetClient::OnRawData(const char *buf, size_t len)
+void UENetClient::setIsConnected(bool value)
 {
-
+	m_isConnected = value;
 }
 
 void UENetClient::Disconnect()
@@ -73,9 +75,9 @@ bool UENetClient::connect(FString ip, uint32 port)
 	bool result = false;
 	if (SocketSubsystem != nullptr)
 	{
-		m_pSocket = SocketSubsystem->CreateSocket(NAME_Stream, *m_strDesc, true);
+		m_socket = SocketSubsystem->CreateSocket(NAME_Stream, *m_strDesc, true);
 
-		result = m_pSocket->Connect(*m_boundEndpoint.ToInternetAddr());
+		result = m_socket->Connect(*m_boundEndpoint.ToInternetAddr());
 	}
 
 	return result;
@@ -85,9 +87,9 @@ void UENetClient::testSendData()
 {
 	int sendByte = 0;
 	uint8 data[5] = { 1, 2, 3, 4, 5 };
-	if (m_pSocket != nullptr)
+	if (m_socket != nullptr)
 	{
-		m_pSocket->Send(data, 5, sendByte);
+		m_socket->Send(data, 5, sendByte);
 	}
 }
 
@@ -101,46 +103,87 @@ void UENetClient::Send()
 		return;
 	}
 
-	if (m_clientBuffer->sendBuffer.bytesAvailable == 0)     // 如果发送缓冲区没有要发送的数据
+	if (m_clientBuffer->getSendBuffer()->getBytesAvailable() == 0)     // 如果发送缓冲区没有要发送的数据
 	{
-		if (m_clientBuffer->sendTmpBuffer.circuleBuffer.size > 0)      // 如果发送临时缓冲区有数据要发
+		if (m_clientBuffer->getSendTmpBuffer()->getCirculeBuffer()->getSize() > 0)      // 如果发送临时缓冲区有数据要发
 		{
 			m_clientBuffer->getSendData();
 		}
 
-		if (m_clientBuffer->sendBuffer.bytesAvailable == 0)        // 如果发送缓冲区中确实没有数据
+		if (m_clientBuffer->getSendBuffer()->getBytesAvailable() == 0)        // 如果发送缓冲区中确实没有数据
 		{
-			m_msgSendEndEvent.Set();        // 通知等待线程，所有数据都发送完成
+			m_msgSendEndEvent->Set();        // 通知等待线程，所有数据都发送完成
 			return;
 		}
 	}
 
-	try
-	{
-		Ctx.m_instance.m_logSys.log(string.Format("开始发送字节数 {0} ", m_clientBuffer.sendBuffer.bytesAvailable));
+	g_pLogSys->log(UitlStr::Format("开始发送字节数 {0} ", m_clientBuffer->getSendBuffer()->getBytesAvailable()));
 
-		IAsyncResult asyncSend = m_socket.BeginSend(m_clientBuffer.sendBuffer.dynBuff.buff, (int)m_clientBuffer.sendBuffer.position, (int)m_clientBuffer.sendBuffer.bytesAvailable, 0, new System.AsyncCallback(SendCallback), 0);
-		//bool success = asyncSend.AsyncWaitHandle.WaitOne(m_sendTimeout, true);
-		//if (!success)
-		//{
-		//    Ctx.m_instance.m_logSys.asyncLog(string.Format("SendMsg Timeout {0} ", m_sendTimeout));
-		//}
-	}
-	catch (System.Exception e)
+	bool ret = true;
+	int bytesSent = 0;
+	ret = m_socket->Send(m_clientBuffer->getSendBuffer()->getDynBuff()->getBuff() + m_clientBuffer->getSendBuffer()->getPos(), m_clientBuffer->getSendBuffer()->getBytesAvailable(), bytesSent);
+	
+	if (!ret)		// 如果发送失败
 	{
-#if NET_MULTHREAD
-		m_msgSendEndEvent.Set();        // 发生异常，通知等待线程，所有数据都发送完成，防止等待线程不能解锁
-#endif
+		m_msgSendEndEvent->Set();        // 发生异常，通知等待线程，所有数据都发送完成，防止等待线程不能解锁
 		// 输出日志
-		Ctx.m_instance.m_logSys.error(e.Message);
+		g_pLogSys->error("发送失败");
 		//Disconnect(0);
+	}
+	else
+	{
+		g_pLogSys->log(UtilStr::Format("结束发送字节数 {0} ", bytesSent));
+
+		if (m_clientBuffer->getSendBuffer().getLength() < m_clientBuffer->getSendBuffer()->getPos() + bytesSent)
+		{
+			g_pLogSys->log(UtilStr::Format("结束发送字节数错误 {0}", bytesSent));
+			m_clientBuffer->getSendBuffer()->setPos(m_clientBuffer->getSendBuffer().getLength());
+		}
+		else
+		{
+			m_clientBuffer->getSendBuffer()->setPos(m_clientBuffer->getSendBuffer()->getPos() + bytesSent);
+		}
+
+		if (m_clientBuffer->getSendBuffer()->getBytesAvailable() > 0)     // 如果上一次发送的数据还没发送完成，继续发送
+		{
+			Send();                 // 继续发送数据
+		}
+	}
+}
+
+// 接受数据
+void UENetClient::Receive()
+{
+	// 只有 socket 连接的时候才继续接收数据
+	if (!m_isConnected)
+	{
+		// 接收从服务器返回的信息
+		bool ret = true;	// 默认是接收的
+		int32 bytesRead = 0;	// 读取的总的字节数
+		ret = m_socket->Recv(m_clientBuffer->getDynBuff()->getBuff(), (int)m_clientBuffer->getDynBuff()->getCapacity(), bytesRead, ESocketReceiveFlags::None);
+
+		if (!ret)
+		{
+			g_pLogSys->error("接收数据出错");
+		}
+		else
+		{
+			if (bytesRead > 0)
+			{
+				g_pLogSys->log("接收到数据 " + read.ToString());
+				m_clientBuffer->getDynBuff()->setSize(bytesRead);	// 设置读取大小
+				m_clientBuffer->moveDyn2Raw();             // 将接收到的数据放到原始数据队列
+				m_clientBuffer->moveRaw2Msg();             // 将完整的消息移动到消息缓冲区
+				Receive();                  // 继续接收
+			}
+		}
 	}
 }
 
 // 检查并且更新连接状态
 bool UENetClient::checkAndUpdateConnect()
 {
-	if (m_pSocket != nullptr && m_pSocket->GetConnectionState() != SCS_Connected)	// 如果不是连接状态
+	if (m_socket != nullptr && m_socket->GetConnectionState() != SCS_Connected)	// 如果不是连接状态
 	{
 		//if (m_isConnected)
 		//{

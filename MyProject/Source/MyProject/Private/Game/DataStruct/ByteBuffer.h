@@ -147,6 +147,7 @@ public:
 	void hexlike() const;
 	void writeFile(FILE* file);
 	DynBuffer* getDynBuff();
+	uint32 getBytesAvailable();
 
 private:
 	// 添加的一定是和系统大小端相同的

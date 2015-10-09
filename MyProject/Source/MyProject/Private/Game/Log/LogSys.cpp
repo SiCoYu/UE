@@ -20,3 +20,8 @@ void LogSys::log(std::string message)
 {
 
 }
+
+void LogSys::error(std::string message)
+{
+
+}

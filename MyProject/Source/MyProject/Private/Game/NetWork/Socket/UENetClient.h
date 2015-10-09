@@ -15,34 +15,40 @@ class MMutex;
 class UENetClient
 {
 protected:
-	FSocket* m_pSocket;
-	ClientBuffer* m_clientBuffer;
 	FString	m_strDesc;
 	FIPv4Endpoint m_boundEndpoint;
 
+	FSocket* m_socket;
+	ClientBuffer* m_clientBuffer;
+
+	bool m_brecvThreadStart;      // 接收线程是否启动
+	bool m_isConnected;
+
 	MEvent* m_msgSendEndEvent;
 	MMutex* m_sendMutex;
-	bool m_isConnected;
 
 protected:
 	void testSendData();
 
 public:
-	std::string m_ip = "127.0.0.1";
-	int m_port = 50000;
+	std::string m_ip;
+	int m_port;
 
 	UENetClient();
 	~UENetClient();
 
-	virtual void OnConnect();
-	virtual void OnConnectFailed();
-	virtual void OnRawData(const char *buf, size_t len);
-	virtual void OnDelete();
+	bool getRecvThreadStart();
+	void setRecvThreadStart(bool value);
+
+	bool getIsConnected();
+	void setIsConnected(bool value);
+
 	ClientBuffer* getClientBuffer();
 	void sendMsg();
 
-	bool connect(FString ip, uint32 port);	// 连接服务器
+	bool connect(FString ip = "127.0.0.1", uint32 port = 5000);	// 连接服务器
 	void Send();
+	void Receive();
 	bool checkAndUpdateConnect();
 	void Disconnect();
 };

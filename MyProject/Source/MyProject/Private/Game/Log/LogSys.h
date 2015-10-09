@@ -12,6 +12,7 @@ public:
 
 	void log(FString message);
 	void log(std::string message);
+	void error(std::string message);
 };
 
 #endif
