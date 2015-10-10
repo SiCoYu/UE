@@ -10,6 +10,7 @@ public:
 
 public:
 	static std::string Format(const char * format, ...);
+	static bool IsNullOrEmpty(std::string value);
 };
 
 #endif

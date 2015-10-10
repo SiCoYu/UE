@@ -2,6 +2,7 @@
 #include "NetCmdHandleBase.h"
 #include "Common.h"
 #include "UtilContainers.h"
+#include "UtilStr.h"
 
 void NetCmdHandleBase::handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam)
 {
@@ -11,6 +12,6 @@ void NetCmdHandleBase::handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam)
 	}
 	else
 	{
-		g_pLogSys->log(string.Format("消息没有处理: byCmd = {0},  byParam = {1}", byCmd, byParam));
+		g_pLogSys->log(UtilStr::Format("消息没有处理: byCmd = {0},  byParam = {1}", byCmd, byParam));
 	}
 }

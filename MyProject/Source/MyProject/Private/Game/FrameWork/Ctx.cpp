@@ -6,6 +6,7 @@
 #include "EngineApi.h"
 #include "NetMgr.h"
 #include "TableSys.h"
+#include "ShareData.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -40,6 +41,7 @@ Ctx::~Ctx()
 
 void Ctx::init()
 {
+	m_pShareData = new ShareData();
 	m_pLogSys = new LogSys();
 	m_engineData = new EngineData();
 #ifdef USE_EXTERN_THREAD
@@ -111,4 +113,9 @@ TableSys* Ctx::getTableSysPtr()
 LogSys* Ctx::getLogSysPtr()
 {
 	return m_pLogSys;
+}
+
+ShareData* Ctx::getShareDataPtr()
+{
+	return m_pShareData;
 }

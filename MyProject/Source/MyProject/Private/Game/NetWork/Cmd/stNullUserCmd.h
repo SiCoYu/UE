@@ -22,8 +22,8 @@ enum class EnstNullUserCmd
 class stNullUserCmd
 {
 public:
-    int8 byCmd;
-    int8 byParam;
+    uint8 byCmd;
+    uint8 byParam;
     uint32 dwTimestamp;
 
 public:

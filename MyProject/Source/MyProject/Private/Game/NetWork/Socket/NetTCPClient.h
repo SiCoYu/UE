@@ -1,5 +1,5 @@
-#ifndef __NETCLIENT_H
-#define __NETCLIENT_H
+#ifndef __NetTCPClient_H
+#define __NetTCPClient_H
 
 #include "Windows/AllowWindowsPlatformTypes.h"
 
@@ -19,7 +19,7 @@ class ClientBuffer;
 class NetTCPClient : public TcpSocket
 {
 protected:
-	ClientBuffer* m_dataBuffer;
+	ClientBuffer* m_clientBuffer;
 
 public:
 	NetTCPClient(ISocketHandler& h);

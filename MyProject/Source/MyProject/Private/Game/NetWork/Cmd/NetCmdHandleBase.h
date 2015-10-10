@@ -11,10 +11,10 @@ class ByteBuffer;
 class NetCmdHandleBase
 {
 public:
-	typedef FastDelegate1<ByteBuffer*> HandleDelegate;
+	typedef fastdelegate::FastDelegate1<ByteBuffer*> HandleDelegate;
 
 public:
-	std::map<int, HandleDelegate> m_id2HandleDic;
+	std::map<uint8, HandleDelegate> m_id2HandleDic;
 
 public:
 	virtual void handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam);

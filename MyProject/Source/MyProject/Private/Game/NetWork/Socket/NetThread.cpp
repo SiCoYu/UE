@@ -10,7 +10,6 @@
 #include "Windows/HideWindowsPlatformTypes.h"
 
 #include "INetMgr.h"
-#include "NetClient.h"
 
 #ifdef SOCKETS_NAMESPACE
 namespace SOCKETS_NAMESPACE {

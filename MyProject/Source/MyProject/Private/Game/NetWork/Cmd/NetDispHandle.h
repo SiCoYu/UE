@@ -2,6 +2,7 @@
 #define __NetDispHandle_H
 
 #include <map>
+#include "Platform.h"		// uint8
 
 class NetCmdHandleBase;
 class ByteBuffer;
@@ -9,7 +10,7 @@ class ByteBuffer;
 class NetDispHandle
 {
 public:
-	std::map<int, NetCmdHandleBase> m_id2DispDic;
+	std::map<uint8, NetCmdHandleBase*> m_id2DispDic;
     //LuaCSBridgeNetDispHandle m_luaCSBridgeNetDispHandle;     // Lua 网络事件处理器
 
 public:

@@ -1,5 +1,5 @@
-﻿#ifndef __NetDispHandle_H
-#define __NetDispHandle_H
+﻿#ifndef __NetDispList_H
+#define __NetDispList_H
 
 #include <vector>
 

@@ -5,7 +5,7 @@
 #include <cstddef>
 #include <iostream>
 #include <vector>
-#include "BufferDefaultValue.h"
+#include "BufferCV.h"
 
 class DynBuffer;
 class ByteBuffer;
@@ -26,7 +26,7 @@ protected:
 	void setCapacity(size_t newCapacity);
 
 public:
-	MCircularBuffer(size_t initCapacity = INITCAPACITY, size_t maxCapacity = MAXCAPACITY);
+	MCircularBuffer(size_t initCapacity = BufferCV.INIT_CAPACITY, size_t maxCapacity = BufferCV.MAX_CAPACITY);
 	~MCircularBuffer();
 
 public:

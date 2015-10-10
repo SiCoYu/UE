@@ -4,10 +4,10 @@
 #include "DynBuffer.h"
 #include "ByteBuffer.h"
 #include "MCircularBuffer.h"
-#include "BufferDefaultValue.h"
 #include "MMutex.h"
 #include "MLock.h"
 #include "Common.h"
+#include "UtilStr.h"
 
 ClientBuffer::ClientBuffer()
 {
@@ -101,18 +101,18 @@ void ClientBuffer::SetRevBufferSize(int32 size)
 
 void ClientBuffer::moveDyn2Raw()
 {
-	g_pLogSys->log(string.Format("移动动态数据消息数据到原始数据队列，消息长度　{0}", m_dynBuff->getSize()));
-	UtilMsg.formatBytes2Array(m_dynBuff->getBuff(), m_dynBuff->getSize());
+	g_pLogSys->log(UtilStr::Format("移动动态数据消息数据到原始数据队列，消息长度　{0}", m_dynBuff->getSize()));
+	UtilMsg::formatBytes2Array(m_dynBuff->getBuff(), m_dynBuff->getSize());
 
 #if MSG_ENCRIPT
 	checkDES();
 #endif
 	// 接收到一个socket数据，就被认为是一个数据包，这个地方可能会有问题，服务器是这么发送的，只能这么处理，自己写入包的长度
-	m_tmp1fData.clear();
-	m_tmp1fData.writeUnsignedInt32(m_dynBuff.size);      // 填充长度
-	m_rawBuffer.circuleBuffer.pushBackBA(m_tmp1fData);
+	m_tmp1fData->clear();
+	m_tmp1fData->writeUnsignedInt32(m_dynBuff.size);      // 填充长度
+	m_rawBuffer->getCircularBuffer()->pushBackBA(m_tmp1fData);
 	// 写入包的数据
-	m_rawBuffer.circuleBuffer.pushBackArr(m_dynBuff.buff, 0, m_dynBuff.size);
+	m_rawBuffer->getCircularBuffer()->pushBackArr(m_dynBuff->getBuff(), 0, m_dynBuff->getSize());
 }
 
 void ClientBuffer::moveRaw2Msg()

@@ -163,7 +163,7 @@ void NetMgr::NetMgr_Inter()
 
 NetMgr::~NetMgr() 
 {
-	m_pNetThread->setExitFlag(true);
+	m_netThread->setExitFlag(true);
 #ifdef USE_EXTERN_THREAD
 	this->Release();
 #endif

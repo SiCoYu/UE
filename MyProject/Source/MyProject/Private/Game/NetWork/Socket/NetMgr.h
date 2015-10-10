@@ -88,9 +88,9 @@ public:
 	void closeCurSocket();
 	ByteBuffer* getMsg();
 	// 获取发送消息缓冲区
-	ByteBuffer* getSendBA();
+	virtual ByteBuffer* getSendBA();
 	// 注意这个仅仅是放入缓冲区冲，真正发送在子线程中发送
-	void send(bool bnet = true);
+	virtual void send(bool bnet = true);
 	// 关闭 App ，需要等待子线程结束
 	void quipApp();
 	void sendAndRecData();

@@ -3,7 +3,7 @@
 
 #include "Platform.h"
 #include <cstddef>
-#include "BufferDefaultValue.h"
+#include "BufferCV.h"
 
 /**
  * @brief 动态增长缓冲区，不分类型，就是 byte 缓冲区
@@ -19,7 +19,7 @@ public:
 	char* m_buff;
 
 public:
-	DynBuffer(size_t initCapacity = INITCAPACITY, size_t maxCapacity = MAXCAPACITY);
+	DynBuffer(size_t initCapacity = BufferCV.INIT_CAPACITY, size_t maxCapacity = BufferCV.MAX_CAPACITY);
 	~DynBuffer();
 
 	char* getBuff();

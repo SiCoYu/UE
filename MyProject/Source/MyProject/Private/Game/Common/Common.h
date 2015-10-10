@@ -11,5 +11,6 @@
 #include "EngineApi.h"
 #include "NetMgr.h"
 #include "LogSys.h"
+#include "ShareData.h"
 
 #endif

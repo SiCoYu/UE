@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "NetCmdHandleBase.h"
+#include "NetDispHandle.h"
 #include "ByteBuffer.h"
 #include "UtilContainers.h"
 #include "Common.h"
@@ -16,7 +16,7 @@ void NetDispHandle::handleMsg(ByteBuffer* msg)
 	if (UtilMap::ContainsKey(m_id2DispDic, byCmd))
     {
 		g_pLogSys->log(UtilStr::Format("处理消息: byCmd = {0},  byParam = {1}", byCmd, byParam));
-        m_id2DispDic[byCmd].handleMsg(msg, byCmd, byParam);
+        m_id2DispDic[byCmd]->handleMsg(msg, byCmd, byParam);
     }
     else
     {

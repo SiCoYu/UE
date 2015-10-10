@@ -1,16 +1,16 @@
 #include "MyProject.h"
-#include "NetClient.h"
-#include "NetClientBuffer.h"
+#include "NetTCPClient.h"
+#include "ClientBuffer.h"
 
 NetTCPClient::NetTCPClient(ISocketHandler& h)
 	: TcpSocket(h) 
 {
-	m_pNetClientBuffer = new ClientBuffer();
+	m_clientBuffer = new ClientBuffer();
 }
 
 NetTCPClient::~NetTCPClient()
 {
-	delete m_pNetClientBuffer;
+	delete m_clientBuffer;
 }
 
 void NetTCPClient::OnConnect()
@@ -35,10 +35,10 @@ void NetTCPClient::OnRawData(const char *buf, size_t len)
 
 ClientBuffer* NetTCPClient::getClientBuffer()
 {
-	return m_dataBuffer;
+	return m_clientBuffer;
 }
 
 void NetTCPClient::sendMsg()
 {
-	m_dataBuffer->sendMsg();
+	//m_clientBuffer->sendMsg();
 }

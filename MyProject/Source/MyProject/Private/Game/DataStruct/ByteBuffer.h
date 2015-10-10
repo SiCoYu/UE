@@ -12,7 +12,7 @@
 #include "SystemEndian.h"
 #include "DynBuffer.h"
 #include "MEncode.h"
-#include "BufferDefaultValue.h"
+#include "BufferCV.h"
 
 class ByteBufferException
 {
@@ -44,7 +44,7 @@ protected:
 
 public:
 	// constructor
-	ByteBuffer(size_t initCapacity = INITCAPACITY, size_t maxCapacity = MAXCAPACITY);
+	ByteBuffer(size_t initCapacity = BufferCV.INIT_CAPACITY, size_t maxCapacity = BufferCV.MAX_CAPACITY);
 	~ByteBuffer();
 
 	void setEndian(SysEndian endian);

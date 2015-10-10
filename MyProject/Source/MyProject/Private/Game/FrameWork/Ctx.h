@@ -15,6 +15,7 @@ class EngineApi;
 class INetMgr;
 class TableSys;
 class LogSys;
+class ShareData;
 
 #ifdef ENABLE_UNIT_TEST
 	class Test;
@@ -29,6 +30,7 @@ protected:
 	INetMgr* m_pINetMgr;
 	TableSys* m_pTableSys;
 	LogSys* m_pLogSys;
+	ShareData* m_pShareData;
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* m_pStdoutLog;
@@ -53,6 +55,7 @@ public:
 	INetMgr* getNetMgrPtr();
 	TableSys* getTableSysPtr();
 	LogSys* getLogSysPtr();
+	ShareData* getShareDataPtr();
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* getStdLog();
@@ -63,8 +66,9 @@ public:
 #define g_pTableSys g_pCtx->getTableSysPtr()
 #define g_pNetMgr g_pCtx->getNetMgrPtr()
 #define g_pUIMgr g_pCtx->getUIMgrPtr()
-#define g_pLogSys g_pCtx->getLogSysPtr();
-#define g_pEngineData g_pCtx->getEngineDataPtr();
-#define g_pEngineApi g_pCtx->getEngineApiPtr();
+#define g_pLogSys g_pCtx->getLogSysPtr()
+#define g_pEngineData g_pCtx->getEngineDataPtr()
+#define g_pEngineApi g_pCtx->getEngineApiPtr()
+#define g_pShareData g_pCtx->getShareDataPtr()
 
 #endif				// __CTX_H

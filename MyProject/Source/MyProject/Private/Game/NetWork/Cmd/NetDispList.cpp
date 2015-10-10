@@ -3,6 +3,7 @@
 #include "UtilContainers.h"
 #include "Common.h"
 #include "UtilStr.h"
+#include "NetDispHandle.h"
 
 NetDispList::NetDispList()
 	: m_revMsgCnt(0),
@@ -60,7 +61,7 @@ void NetDispList::addOneHandleMsg()
 {
     ++m_handleMsgCnt;
 
-	g_pLogSys->log(string.Format("处理消息数量 {0}", m_handleMsgCnt));
+	g_pLogSys->log(UtilStr::Format("处理消息数量 {0}", m_handleMsgCnt));
 }
 
 void NetDispList::clearOneRevMsg()
