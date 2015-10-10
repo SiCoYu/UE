@@ -8,6 +8,7 @@
 #include "TableSys.h"
 #include "ShareData.h"
 #include "NetDispList.h"
+#include "LogSys.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -38,6 +39,8 @@ Ctx::~Ctx()
 #endif
 
 	delete m_pLogSys;
+	delete m_pNetDispList;
+	delete m_pShareData;
 }
 
 void Ctx::init()
@@ -63,11 +66,6 @@ void Ctx::init()
 	m_test = new Test();
 	m_test->runTest();
 #endif
-}
-
-void Ctx::setUIMgrPtr(UIManager* uiMgr)
-{
-	m_uiMgr = uiMgr;
 }
 
 UIManager* Ctx::getUIMgrPtr()

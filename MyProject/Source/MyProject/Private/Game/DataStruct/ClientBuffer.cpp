@@ -388,7 +388,7 @@ void ClientBuffer::UnCompressAndDecryptEveryOne()
 			m_msgBuffer->getCircularBuffer()->pushBackArr(m_rawBuffer->getMsgBodyBA()->getDynBuff()->getBuff(), m_rawBuffer->getMsgBodyBA()->getPos() - msglen, msglen);      // 保存消息大小字段
 		}
 
-		g_pLogSys->log(UtilStr::Format("解压解密后消息起始索引 {0}, 消息长度　{1}, 消息 position 位置 {2}, 消息 size {3}", m_rawBuffer->getMsgBodyBA()->getPos() - msglen, msglen, m_rawBuffer->getMsgBodyBA()->getPos, m_rawBuffer->getMsgBodyBA()->getLength()));
+		g_pLogSys->log(UtilStr::Format("解压解密后消息起始索引 {0}, 消息长度　{1}, 消息 position 位置 {2}, 消息 size {3}", m_rawBuffer->getMsgBodyBA()->getPos() - msglen, msglen, m_rawBuffer->getMsgBodyBA()->getPos(), m_rawBuffer->getMsgBodyBA()->getLength()));
 		g_pNetDispList->addOneRevMsg();
 
 		// Test 读取消息头
@@ -426,6 +426,6 @@ void ClientBuffer::UnCompressAndDecryptAllInOne()
 #if !MSG_COMPRESS && !MSG_ENCRIPT
 		m_msgBuffer->getCircularBuffer()->pushBackBA(m_unCompressHeaderBA);             // 保存消息大小字段
 #endif
-		m_msgBuffer->getCircularBuffer->pushBackBA(m_rawBuffer->getMsgBodyBA());      // 保存消息大小字段
+		m_msgBuffer->getCircularBuffer()->pushBackBA(m_rawBuffer->getMsgBodyBA());      // 保存消息大小字段
 	}
 }

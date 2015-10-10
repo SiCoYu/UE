@@ -133,7 +133,7 @@ void AMyProjectCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Ctx::getSingletonPtr()->getEngineData()->setMainActor(this);
+	g_pEngineData->setMainActor(this);
 }
 
 void AMyProjectCharacter::Tick(float DeltaTime)

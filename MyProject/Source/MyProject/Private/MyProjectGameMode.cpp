@@ -32,6 +32,6 @@ void AMyProjectGameMode::StartPlay()
 {
 	Super::StartPlay();
 	// 各种初始化
-	Ctx::getSingletonPtr()->getEngineApi()->showCursor();
-	Ctx::getSingletonPtr()->getUIMgr()->loadForm<UUIPack>(eUIPack);
+	g_pEngineApi->showCursor();
+	g_pUIMgr->loadForm<UUIPack>(eUIPack);
 }

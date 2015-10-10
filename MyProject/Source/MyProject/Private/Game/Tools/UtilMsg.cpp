@@ -37,7 +37,7 @@ void UtilMsg::formatBytes2Array(char* bytes, uint32 len)
 {
     std::string str = "{ ";
     bool isFirst = true;
-    for (int idx = 0; idx < len; ++idx)
+    for (int idx = 0; idx < (int)len; ++idx)
     {
         if (isFirst)
         {

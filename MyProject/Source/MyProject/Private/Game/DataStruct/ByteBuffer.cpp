@@ -342,7 +342,7 @@ T ByteBuffer::read(size_t pos) const
 {
 	if (pos + sizeof(T) > getSize())
 		throw ByteBufferException(false, pos, sizeof(T), getSize());
-	T val = *((T const*)&m_pStorageBuffer->m_storage[pos]);
+	T val = *((T const*)&m_dynBuff->m_buff[pos]);
 	if (sSysEndian != m_sysEndian)
 	{
 		EndianConvert(val);

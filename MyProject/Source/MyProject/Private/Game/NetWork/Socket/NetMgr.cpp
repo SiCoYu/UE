@@ -174,6 +174,11 @@ NetMgr::~NetMgr()
 
 void NetMgr::startThread()
 {
+	//m_netThread = new UENetThread(this);
+	//m_pRenderingThread = FRunnableThread::Create(m_netThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
+	//m_netThread->m_pTaskGraphBoundSyncEvent->Wait();
+
+	// 函数 FRunnableThread::Create 第二个参数一定是款字节字符串，如果是多字节就会编译报错
 	m_netThread = new UENetThread(this, "NetThread");
 	m_netThread->start();
 	m_netThread->getSyncEventPtr()->Wait();

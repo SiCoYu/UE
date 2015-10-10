@@ -125,7 +125,7 @@ void UENetClient::Send()
 
 	bool ret = true;
 	int bytesSent = 0;
-	ret = m_socket->Send(m_clientBuffer->getSendBuffer()->getDynBuff()->getBuff() + m_clientBuffer->getSendBuffer()->getPos(), m_clientBuffer->getSendBuffer()->getBytesAvailable(), bytesSent);
+	ret = m_socket->Send((uint8*)(m_clientBuffer->getSendBuffer()->getDynBuff()->getBuff() + m_clientBuffer->getSendBuffer()->getPos()), m_clientBuffer->getSendBuffer()->getBytesAvailable(), bytesSent);
 	
 	if (!ret)		// 如果发送失败
 	{
@@ -138,10 +138,10 @@ void UENetClient::Send()
 	{
 		g_pLogSys->log(UtilStr::Format("结束发送字节数 {0} ", bytesSent));
 
-		if (m_clientBuffer->getSendBuffer().getLength() < m_clientBuffer->getSendBuffer()->getPos() + bytesSent)
+		if (m_clientBuffer->getSendBuffer()->getLength() < m_clientBuffer->getSendBuffer()->getPos() + bytesSent)
 		{
 			g_pLogSys->log(UtilStr::Format("结束发送字节数错误 {0}", bytesSent));
-			m_clientBuffer->getSendBuffer()->setPos(m_clientBuffer->getSendBuffer().getLength());
+			m_clientBuffer->getSendBuffer()->setPos(m_clientBuffer->getSendBuffer()->getLength());
 		}
 		else
 		{
@@ -164,7 +164,7 @@ void UENetClient::Receive()
 		// 接收从服务器返回的信息
 		bool ret = true;	// 默认是接收的
 		int32 bytesRead = 0;	// 读取的总的字节数
-		ret = m_socket->Recv(m_clientBuffer->getDynBuff()->getBuff(), (int)m_clientBuffer->getDynBuff()->getCapacity(), bytesRead, ESocketReceiveFlags::None);
+		ret = m_socket->Recv((uint8*)(m_clientBuffer->getDynBuff()->getBuff()), (int)m_clientBuffer->getDynBuff()->getCapacity(), bytesRead, ESocketReceiveFlags::None);
 
 		if (!ret)
 		{
@@ -174,7 +174,7 @@ void UENetClient::Receive()
 		{
 			if (bytesRead > 0)
 			{
-				g_pLogSys->log("接收到数据 " + read.ToString());
+				g_pLogSys->log(UtilStr::Format("接收到数据 {0}", bytesRead));
 				m_clientBuffer->getDynBuff()->setSize(bytesRead);	// 设置读取大小
 				m_clientBuffer->moveDyn2Raw();             // 将接收到的数据放到原始数据队列
 				m_clientBuffer->moveRaw2Msg();             // 将完整的消息移动到消息缓冲区

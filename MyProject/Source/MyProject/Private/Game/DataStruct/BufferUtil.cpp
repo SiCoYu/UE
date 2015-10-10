@@ -29,8 +29,6 @@ void* BufferUtil::memSwap(void* dest, void* source, std::size_t count)
 void BufferUtil::Copy(void* src, long srcIndex, void* dest, long destIndex, long length)
 {
 	char *tmp_source, *tmp_dest;
-	char tmpChar;
-
 	tmp_source = (char *)src + srcIndex;
 	tmp_dest = (char *)dest + destIndex;
 
