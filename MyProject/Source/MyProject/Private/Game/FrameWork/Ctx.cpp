@@ -7,6 +7,7 @@
 #include "NetMgr.h"
 #include "TableSys.h"
 #include "ShareData.h"
+#include "NetDispList.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -42,6 +43,7 @@ Ctx::~Ctx()
 void Ctx::init()
 {
 	m_pShareData = new ShareData();
+	m_pNetDispList = new NetDispList();
 	m_pLogSys = new LogSys();
 	m_engineData = new EngineData();
 #ifdef USE_EXTERN_THREAD
@@ -118,4 +120,9 @@ LogSys* Ctx::getLogSysPtr()
 ShareData* Ctx::getShareDataPtr()
 {
 	return m_pShareData;
+}
+
+NetDispList* Ctx::getNetDispListPtr()
+{
+	return m_pNetDispList;
 }

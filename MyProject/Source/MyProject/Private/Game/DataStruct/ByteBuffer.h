@@ -148,6 +148,8 @@ public:
 	void writeFile(FILE* file);
 	DynBuffer* getDynBuff();
 	uint32 getBytesAvailable();
+	void incPosDelta(int delta);		// 添加 pos delta 数量
+	void decPosDelta(int delta);		// 减少 pos delta 数量
 
 private:
 	// 添加的一定是和系统大小端相同的

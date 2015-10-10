@@ -289,6 +289,16 @@ uint32 ByteBuffer::getBytesAvailable()
 	return (m_dynBuff->getSize() - m_pos);
 }
 
+void ByteBuffer::incPosDelta(int delta)
+{
+	m_pos += delta;
+}
+
+void ByteBuffer::decPosDelta(int delta)
+{
+	m_pos -= delta;
+}
+
 // 根据大小跳过
 void ByteBuffer::read_skip(size_t skip)
 {

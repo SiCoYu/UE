@@ -402,7 +402,7 @@ void NetMgr::sendAndRecData()
 		_endIte = m_id2ClientDic.end();
 		for (; _beginIte != _endIte; ++_beginIte)
 		{
-			if (!_beginIte->second->getRecvThreadStart() && _beginIte->second.getIsConnected())
+			if (!_beginIte->second->getRecvThreadStart() && _beginIte->second->getIsConnected())
 			{
 				_beginIte->second->setRecvThreadStart(true);
 				_beginIte->second->Receive();

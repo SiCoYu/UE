@@ -11,6 +11,7 @@
 #include "ByteBuffer.h"
 #include "MsgBuffer.h"
 #include "UtilStr.h"
+#include "MCircularBuffer.h"
 
 UENetClient::UENetClient()
 	: m_boundEndpoint(FIPv4Address::Any, 0),
@@ -108,7 +109,7 @@ void UENetClient::Send()
 
 	if (m_clientBuffer->getSendBuffer()->getBytesAvailable() == 0)     // 如果发送缓冲区没有要发送的数据
 	{
-		if (m_clientBuffer->getSendTmpBuffer()->getCirculeBuffer()->getSize() > 0)      // 如果发送临时缓冲区有数据要发
+		if (m_clientBuffer->getSendTmpBuffer()->getCircularBuffer()->getSize() > 0)      // 如果发送临时缓冲区有数据要发
 		{
 			m_clientBuffer->getSendData();
 		}

@@ -71,5 +71,5 @@ ACharacter* EngineApi::getFirstCharacter()
 
 uint32 EngineApi::getUTCSec()
 {
-	return g_pEngineApi->GetWorld()->GetTimeSeconds();
+	return g_pEngineApi->getWorld()->GetTimeSeconds();
 }
