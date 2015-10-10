@@ -1,6 +1,7 @@
 #include "MyProject.h"
 #include "UtilContainers.h"
 
+/*
 //==================== vector ÇøÓò ===================
 template<class T>
 int UtilVector::IndexOf(std::vector<T>& vec, T& item)
@@ -61,3 +62,4 @@ bool UtilMap::Remove(std::map<TKey, TValue>& map, TKey& item)
 	}
 	return fasle
 }
+*/
