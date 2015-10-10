@@ -44,7 +44,7 @@ protected:
 
 public:
 	// constructor
-	ByteBuffer(size_t initCapacity = BufferCV.INIT_CAPACITY, size_t maxCapacity = BufferCV.MAX_CAPACITY);
+	ByteBuffer(size_t initCapacity = BufferCV::INIT_CAPACITY, size_t maxCapacity = BufferCV::MAX_CAPACITY);
 	~ByteBuffer();
 
 	void setEndian(SysEndian endian);

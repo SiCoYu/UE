@@ -8,6 +8,9 @@
 #include "MLock.h"
 #include "Common.h"
 #include "UtilStr.h"
+#include "ByteBuffer.h"
+#include "MsgBuffer.h"
+#include "UtilStr.h"
 
 UENetClient::UENetClient()
 	: m_boundEndpoint(FIPv4Address::Any, 0),
@@ -117,7 +120,7 @@ void UENetClient::Send()
 		}
 	}
 
-	g_pLogSys->log(UitlStr::Format("开始发送字节数 {0} ", m_clientBuffer->getSendBuffer()->getBytesAvailable()));
+	g_pLogSys->log(UtilStr::Format("开始发送字节数 {0} ", m_clientBuffer->getSendBuffer()->getBytesAvailable()));
 
 	bool ret = true;
 	int bytesSent = 0;

@@ -8,6 +8,7 @@
 #include "ByteBuffer.h"
 #include "MLock.h"
 #include "Common.h"
+#include "MEvent.h"
 
 #ifdef USE_EXTERN_THREAD
 	#include "NetTCPClient.h"
@@ -173,9 +174,9 @@ NetMgr::~NetMgr()
 
 void NetMgr::startThread()
 {
-	m_pNetThread = new UENetThread(this, "NetThread");
-	m_pNetThread->start();
-	m_pNetThread->getSyncEventPtr()->Wait();
+	m_netThread = new UENetThread(this, "NetThread");
+	m_netThread->start();
+	m_netThread->getSyncEventPtr()->Wait();
 }
 
 void NetMgr::openSocket(std::string ip, uint32 port)
@@ -191,20 +192,20 @@ void NetMgr::closeSocket(std::string ip, uint32 port)
 {
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
-	std::string ipId = strStream.str();
-	if (UtilMap::ContainsKey(m_id2ClientDic, ipId))	// 如果没有这个 NetClient
+	std::string key = strStream.str();
+	if (UtilMap::ContainsKey(m_id2ClientDic, key))	// 如果没有这个 NetClient
 	{
 		// 关闭 socket 之前要等待所有的数据都发送完成，如果发送一直超时，可能就卡在这很长时间
-		m_id2ClientDic[ipId].msgSendEndEvent.Reset();        // 重置信号
-		m_id2ClientDic[ipId].msgSendEndEvent.WaitOne();      // 阻塞等待数据全部发送完成
+		m_id2ClientDic[key]->getMsgSendEndEvent()->Reset();        // 重置信号
+		m_id2ClientDic[key]->getMsgSendEndEvent()->WaitOne();      // 阻塞等待数据全部发送完成
 
 		m_visitMutex->Lock();
 		{
-			m_id2ClientDic[ipId].Disconnect(0);
+			m_id2ClientDic[key]->Disconnect();
 			UtilMap::Remove(m_id2ClientDic, key);
 		}
 		m_visitMutex->Unlock();
-		m_curSocket = nullptr;
+		m_curClient = nullptr;
 	}
 }
 
@@ -340,7 +341,7 @@ void NetMgr::closeCurSocket()
 			using (MLock mlock = new MLock(m_visitMutex))
 #endif
 			{
-				m_id2ClientDic[key]->Disconnect(0);
+				m_id2ClientDic[key]->Disconnect();
 				UtilMap::ContainsKey(m_id2ClientDic, key);
 			}
 			m_curClient = nullptr;
@@ -401,7 +402,7 @@ void NetMgr::sendAndRecData()
 		_endIte = m_id2ClientDic.end();
 		for (; _beginIte != _endIte; ++_beginIte)
 		{
-			if (!_beginIte->second->brecvThreadStart && _beginIte->second.isConnected)
+			if (!_beginIte->second->getRecvThreadStart() && _beginIte->second.getIsConnected())
 			{
 				_beginIte->second->setRecvThreadStart(true);
 				_beginIte->second->Receive();

@@ -26,3 +26,8 @@ void MEvent::Set()
 {
 	return m_event->Trigger();
 }
+
+void MEvent::WaitOne()
+{
+	m_event->Wait(MAX_uint32);
+}

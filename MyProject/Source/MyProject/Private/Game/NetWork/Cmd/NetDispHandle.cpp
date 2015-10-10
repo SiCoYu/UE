@@ -4,6 +4,7 @@
 #include "UtilContainers.h"
 #include "Common.h"
 #include "UtilStr.h"
+#include "NetCmdHandleBase.h"
 
 void NetDispHandle::handleMsg(ByteBuffer* msg)
 {

@@ -26,7 +26,7 @@ protected:
 	bool checkHasMsg();
 
 public:
-	MsgBuffer(uint32 initCapacity = BufferCV.INIT_CAPACITY, uint32 maxCapacity = BufferCV.MAX_CAPACITY);
+	MsgBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY);
 	~MsgBuffer();
 
 	ByteBuffer* getHeaderBA();

@@ -19,7 +19,7 @@ public:
 	char* m_buff;
 
 public:
-	DynBuffer(size_t initCapacity = BufferCV.INIT_CAPACITY, size_t maxCapacity = BufferCV.MAX_CAPACITY);
+	DynBuffer(size_t initCapacity = BufferCV::INIT_CAPACITY, size_t maxCapacity = BufferCV::MAX_CAPACITY);
 	~DynBuffer();
 
 	char* getBuff();

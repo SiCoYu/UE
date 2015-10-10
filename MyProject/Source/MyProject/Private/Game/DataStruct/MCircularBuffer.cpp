@@ -185,7 +185,7 @@ void MCircularBuffer::pushBackArr(char* items, uint32 start, std::size_t len)
 void MCircularBuffer::pushBackBA(ByteBuffer* bu)
 {
 	//pushBack(bu.dynBuff.buff, bu.position, bu.bytesAvailable);
-	pushBackArr(bu->dynBuff.buff, 0, bu->getLength());
+	pushBackArr(bu->getDynBuff()->getBuff(), 0, bu->getLength());
 }
 
 /**
@@ -193,38 +193,38 @@ void MCircularBuffer::pushBackBA(ByteBuffer* bu)
 */
 void MCircularBuffer::pushFrontArr(char* items, std::size_t len)
 {
-	if (!canAddData((uint)items.Length)) // 存储空间必须要比实际数据至少多 1
+	if (!canAddData(len)) // 存储空间必须要比实际数据至少多 1
 	{
-		uint closeSize = DynBufResizePolicy.getCloseSize((uint)items.Length + m_dynBuffer.m_size, m_dynBuffer.m_iCapacity, m_dynBuffer.m_iMaxCapacity);
+		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + m_dynBuffer->m_size, m_dynBuffer->m_iCapacity, m_dynBuffer->m_iMaxCapacity);
 		setCapacity(closeSize);
 	}
 
 	if (isLinearized())
 	{
-		if (items.Length <= m_first)
+		if (len <= m_first)
 		{
-			Array.Copy(items, 0, m_dynBuffer.m_buff, m_first - items.Length, items.Length);
+			BufferUtil::Copy(items, 0, m_dynBuffer->m_buff, m_first - len, len);
 		}
 		else
 		{
-			Array.Copy(items, items.Length - m_first, m_dynBuffer.m_buff, 0, m_first);
-			Array.Copy(items, 0, m_dynBuffer.m_buff, m_dynBuffer.m_iCapacity - (items.Length - m_first), items.Length - m_first);
+			BufferUtil::Copy(items, len - m_first, m_dynBuffer->m_buff, 0, m_first);
+			BufferUtil::Copy(items, 0, m_dynBuffer->m_buff, m_dynBuffer->m_iCapacity - (len - m_first), len - m_first);
 		}
 	}
 	else
 	{
-		Array.Copy(items, 0, m_dynBuffer.m_buff, m_first - items.Length, items.Length);
+		BufferUtil::Copy(items, 0, m_dynBuffer->m_buff, m_first - len, len);
 	}
 
-	if (items.Length <= m_first)
+	if (len <= m_first)
 	{
-		m_first -= (uint)items.Length;
+		m_first -= len;
 	}
 	else
 	{
-		m_first = m_dynBuffer.m_iCapacity - ((uint)items.Length - m_first);
+		m_first = m_dynBuffer->m_iCapacity - (len - m_first);
 	}
-	m_dynBuffer.m_size += (uint)items.Length;
+	m_dynBuffer->m_size += len;
 }
 
 /**
@@ -278,7 +278,7 @@ void MCircularBuffer::popFrontLen(uint32 len)
 		m_first = len - (m_dynBuffer->m_iCapacity - m_first);
 	}
 
-	m_dynBuffer.m_size -= len;
+	m_dynBuffer->m_size -= len;
 }
 
 // 向自己尾部添加一个 CirculeBuffer 

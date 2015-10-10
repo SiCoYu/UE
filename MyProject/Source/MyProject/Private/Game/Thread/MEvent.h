@@ -15,6 +15,7 @@ public:
 	void Wait();
 	void Reset();
 	void Set();
+	void WaitOne();
 };
 
 #endif

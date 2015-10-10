@@ -1,18 +1,18 @@
 #include "MyProject.h"
 #include "EngineApi.h"
-#include "Ctx.h"
+#include "Common.h"
 #include "EngineData.h"
 #include "MyProjectEngine.h"
 #include "MyProjectGameInstance.h"
 
 UGameInstance* EngineApi::getGameInstance()
 {
-	return UGameplayStatics::GetGameInstance(Ctx::getSingletonPtr()->getEngineData()->getMainActor());
+	return UGameplayStatics::GetGameInstance(g_pEngineData->getMainActor());
 }
 
 UWorld* EngineApi::getWorld()
 {
-	UWorld* World = GEngine->GetWorldFromContextObject(Ctx::getSingletonPtr()->getEngineData()->getMainActor());
+	UWorld* World = GEngine->GetWorldFromContextObject(g_pEngineData->getMainActor());
 	return World;
 }
 
