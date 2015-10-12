@@ -15,7 +15,7 @@ void UUMGForm::loadUWidget(const TCHAR* name)
 		//m_umgWidget = Cast<UUserWidget>(StaticConstructObject(widgetClass, Ctx::getSingletonPtr()->getEngineApi()->getGameInstance()));
 		// 直接构造一个抽象类是报错误的
 		// NewObject<UUserWidget>();
-		// 构造一个类的子类，最新的 api 如下就可以了%
+		// 构造一个类的子类，最新的 api 如下就可以了
 		m_umgWidget = NewObject<UUserWidget>(g_pEngineApi->getGameInstance(), widgetClass);
 	}
 }

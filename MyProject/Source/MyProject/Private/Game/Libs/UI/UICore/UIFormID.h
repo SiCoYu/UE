@@ -5,6 +5,7 @@ enum UIFormID
 {
 	eUIPack,		// ±≥∞¸
 	eUILog,			// »’÷æ
+	eUITestCanvas,	// ≤‚ ‘ Canvas
 	eUITotal
 };
 

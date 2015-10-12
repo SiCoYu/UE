@@ -31,6 +31,7 @@ public class MyProject : ModuleRules
 
                 // UI ÇøÓò
                 "MyProject/Private/Game/UI/UIPack",
+                "MyProject/Private/Game/UI/UITestCanvas",
 
                 // Test ÇøÓò
                 "MyProject/Private/Game/UnitTest",

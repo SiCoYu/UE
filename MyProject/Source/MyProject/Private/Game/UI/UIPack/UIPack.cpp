@@ -2,9 +2,8 @@
 #include "UIPack.h"
 #include "Common.h"
 #include "BinaryLoadItem.h"
-#include "Ctx.h"
 #include "TableSys.h"
-#include  "DataAssetLoadItem.h"
+#include "DataAssetLoadItem.h"
 
 UUIPack::UUIPack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

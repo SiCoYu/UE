@@ -8,6 +8,7 @@
 #include "Common.h"
 #include "UIFormID.h"
 #include "UIPack.h"
+#include "UITestCanvas.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -33,5 +34,14 @@ void AMyProjectGameMode::StartPlay()
 	Super::StartPlay();
 	// 各种初始化
 	g_pEngineApi->showCursor();
-	g_pUIMgr->loadForm<UUIPack>(eUIPack);
+
+	// 各种 UI 测试
+	TestUI();
+}
+
+void AMyProjectGameMode::TestUI()
+{
+	// Test 加载 UIPack
+	//g_pUIMgr->loadForm<UUIPack>(eUIPack);
+	g_pUIMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 }
