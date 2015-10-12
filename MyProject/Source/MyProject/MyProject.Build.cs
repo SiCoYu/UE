@@ -9,27 +9,34 @@ public class MyProject : ModuleRules
 	{
         PrivateIncludePaths.AddRange(
             new string[] {
-                "MyProject/Private/Game/DataStruct",
-                "MyProject/Private/Game/EngineWrap",
-                "MyProject/Private/Game/FrameWork",
-                "MyProject/Private/Game/NetWork/Socket",
-                "MyProject/Private/Game/NetWork/Cmd",
+                // Libs 区域
+                "MyProject/Private/Game/Libs/Common",
+                "MyProject/Private/Game/Libs/DataStruct",
+                "MyProject/Private/Game/Libs/EngineWrap",
+                "MyProject/Private/Game/Libs/FrameWork",
+                "MyProject/Private/Game/Libs/NetWork/Socket",
+                "MyProject/Private/Game/Libs/NetWork/Cmd",
 
+                "MyProject/Private/Game/Libs/UI/UICore",
+                "MyProject/Private/Game/Libs/Log",
+                "MyProject/Private/Game/Libs/Table",
+                "MyProject/Private/Game/Libs/Table/ItemObject",
+                "MyProject/Private/Game/Libs/Util",
+                "MyProject/Private/Game/Libs/Resource/LoadItem",
+
+                "MyProject/Private/Game/Libs/LuaCBridge",
+                "MyProject/Private/Game/Libs/Thread",
+                "MyProject/Private/Game/Libs/FastDelegate",
+                "MyProject/Private/Game/Libs/Tools",
+
+                // UI 区域
+                "MyProject/Private/Game/UI/UIPack",
+
+                // Test 区域
+                "MyProject/Private/Game/UnitTest",
+
+                // 其它
                 "MyProject/Private/UI/Widgets",
-                "MyProject/Private/Game/UI/UICore",
-                "MyProject/Private/Game/UI/UIInterActive/UIPack",
-                "MyProject/Private/Game/Common",
-                "MyProject/Private/Game/Log",
-                "MyProject/Private/Game/Table",
-                "MyProject/Private/Game/Table/ItemObject",
-                "MyProject/Private/Game/Util",
-                "MyProject/Private/Game/Resource/LoadItem",
-
-                "MyProject/Private/Game/Test",
-                "MyProject/Private/Game/LuaCBridge",
-                "MyProject/Private/Game/Thread",
-                "MyProject/Private/Game/FastDelegate",
-                "MyProject/Private/Game/Tools",
 	        }
         );
 
