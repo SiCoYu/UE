@@ -3,7 +3,7 @@
 #include "ByteBuffer.h"
 
 // 解析头部
-void TableItemHeader::parseHeaderByteArray(ByteBuffer* bytes)
+void TableItemHeader::parseHeaderByteBuffer(ByteBuffer* bytes)
 {
 	bytes->readUnsignedInt32(m_uID);
 	bytes->readUnsignedInt32(m_offset);

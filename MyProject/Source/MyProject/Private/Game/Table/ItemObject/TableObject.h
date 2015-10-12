@@ -12,9 +12,9 @@ public:
     int m_maxNum;
     int m_type;
     int m_color;
-	std::string m_prefab;
+	std::string m_objResName;
 
-	virtual void parseBodyByteArray(ByteBuffer* bytes, uint32 offset);
+	virtual void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
 };
 
 #endif

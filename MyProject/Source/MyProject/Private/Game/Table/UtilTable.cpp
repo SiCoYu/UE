@@ -4,7 +4,7 @@
 #include "MEncode.h"
 
 uint32 UtilTable::m_prePos = 0;        // 记录之前的位置
-uint16 UtilTable::m_sCnt;
+uint16 UtilTable::m_sCnt = 0;
 
 void UtilTable::readString(ByteBuffer* bytes, std::string& tmpStr)
 {

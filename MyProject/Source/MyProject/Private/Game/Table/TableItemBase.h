@@ -15,37 +15,37 @@ public:
 
 public:
 	TableItemBase();
-	virtual void parseHeaderByteArray(ByteBuffer* bytes);
+	virtual void parseHeaderByteBuffer(ByteBuffer* bytes);
 
 	template <class T>
-	void parseBodyByteArray(ByteBuffer* bytes, uint32 offset);
+	void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
 
 	template <class T>
-	void parseAllByteArray(ByteBuffer* bytes);
+	void parseAllByteBuffer(ByteBuffer* bytes);
 };
 
 template <class T>
-void TableItemBase::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
+void TableItemBase::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
 {
 	if (nullptr == m_itemBody)
 	{
 		m_itemBody = (TableItemBodyBase *)new T();
 	}
 
-	m_itemBody->parseBodyByteArray(bytes, offset);
+	m_itemBody->parseBodyByteBuffer(bytes, offset);
 }
 
 template <class T>
-void TableItemBase::parseAllByteArray(ByteBuffer* bytes)
+void TableItemBase::parseAllByteBuffer(ByteBuffer* bytes)
 {
 	// 解析头
-	parseHeaderByteArray(bytes);
+	parseHeaderByteBuffer(bytes);
 	// 保存下一个 Item 的头位置
 	UtilTable::m_prePos = bytes->position;
 	// 解析内容
-	parseBodyByteArray<T>(bytes, m_itemHeader->m_offset);
+	parseBodyByteBuffer<T>(bytes, m_itemHeader->m_offset);
 	// 移动到下一个 Item 头位置
-	bytes->pos(UtilTable::m_prePos);
+	bytes->setPos(UtilTable::m_prePos);
 }
 
 #endif

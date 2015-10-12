@@ -3,10 +3,11 @@
 #include "ByteBuffer.h"
 #include "UtilTable.h"
 
-void TableSkillItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
+void TableSkillItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
 {
     bytes->setPos(offset);
 	UtilTable::readString(bytes, m_name);
 	UtilTable::readString(bytes, m_effect);
-	UtilTable::readString(bytes, m_desc);
+	bytes->readUnsignedInt32(m_skillAttackEffect);
+	bytes->readInt32(m_bNeedMove);
 }

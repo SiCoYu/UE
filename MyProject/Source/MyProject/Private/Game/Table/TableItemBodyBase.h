@@ -9,7 +9,7 @@ class TableItemBodyBase
 {
 public:
     // 解析主要数据部分
-	virtual void parseBodyByteArray(ByteBuffer* bytes, uint32 offset);
+	virtual void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
 };
 
 #endif

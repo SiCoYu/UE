@@ -1,5 +1,5 @@
-#ifndef __BYTEBUFFER_H
-#define __BYTEBUFFER_H
+#ifndef __ByteBuffer_H
+#define __ByteBuffer_H
 
 #include <vector>
 #include <list>

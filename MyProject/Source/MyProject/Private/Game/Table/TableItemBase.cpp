@@ -9,11 +9,11 @@ TableItemBase::TableItemBase()
 
 }
 
-void TableItemBase::parseHeaderByteArray(ByteBuffer* bytes)
+void TableItemBase::parseHeaderByteBuffer(ByteBuffer* bytes)
 {
     if (nullptr == m_itemHeader)
     {
-        m_itemHeader = new TableItemHeader;
+        m_itemHeader = new TableItemHeader();
     }
-    m_itemHeader->parseHeaderByteArray(bytes);
+    m_itemHeader->parseHeaderByteBuffer(bytes);
 }

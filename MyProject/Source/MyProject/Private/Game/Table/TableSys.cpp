@@ -10,12 +10,13 @@
 #include "TableItemHeader.h"
 #include "TableItemBodyBase.h"
 #include "ByteBuffer.h"
+#include "Common.h"
 
 TableSys::TableSys()
 {
-    m_dicTable[TableID::TABLE_OBJECT] = new TableBase("ObjectBase_client", "ObjectBase_client", "ObjectBase_client");
-    m_dicTable[TableID::TABLE_CARD] = new TableBase("CardBase_client", "CardBase_client", "CardBase_client");
-    m_dicTable[TableID::TABLE_SKILL] = new TableBase("SkillBase_client", "SkillBase_client", "SkillBase_client");    // 添加一个表的步骤三
+    m_dicTable[TableID::TABLE_OBJECT] = new TableBase("ObjectBase_client.bytes", "ObjectBase_client");
+    m_dicTable[TableID::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
+    m_dicTable[TableID::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
 
 	m_byteBuffer = new ByteBuffer();
 }
@@ -24,7 +25,7 @@ TableSys::TableSys()
 std::vector<TableItemBase*>* TableSys::getTable(TableID::TableID tableID)
 {
 	TableBase* table = m_dicTable[tableID];
-	if (table == nullptr)
+	if (nullptr == table)
 	{
 		loadOneTable(tableID);
 		table = m_dicTable[tableID];
@@ -48,9 +49,9 @@ TableItemBase* TableSys::getItem(TableID::TableID tableID, uint32 itemID)
         loadOneTableOneItemAll(tableID, table, ret);
     }
 
-    if (ret == nullptr)
+    if (nullptr == ret)
     {
-		
+		g_pLogSys->log(UtilStr::Format("table name: {0}, table Item {1} 加载失败", (int)tableID, itemID));
     }
 
 	return ret;
@@ -81,7 +82,7 @@ TableID::TableID TableSys::getTableIDByPath(std::string& path)
 	TableMapIte endIte = m_dicTable.end();
 	for(; beginIte != endIte; ++beginIte)
     {
-		if (beginIte->second->m_prefabName == path)
+		if (beginIte->second->m_resName == path)
         {
 			return beginIte->first;
         }
@@ -95,15 +96,15 @@ void TableSys::loadOneTableOneItemAll(TableID::TableID tableID, TableBase* table
 {
     if (TableID::TABLE_OBJECT == tableID)
     {
-		itemBase->parseBodyByteArray<TableObjectItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
+		itemBase->parseBodyByteBuffer<TableObjectItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
     }
     else if (TableID::TABLE_CARD == tableID)
     {
-		itemBase->parseBodyByteArray<TableCardItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
+		itemBase->parseBodyByteBuffer<TableCardItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
     }
 	else if (TableID::TABLE_SKILL == tableID)  // 添加一个表的步骤四
     {
-		itemBase->parseBodyByteArray<TableSkillItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
+		itemBase->parseBodyByteBuffer<TableSkillItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
     }
 }
 		
@@ -111,7 +112,7 @@ void TableSys::loadOneTableOneItemAll(TableID::TableID tableID, TableBase* table
 std::string& TableSys::getTableName(TableID::TableID tableID)
 {
 	TableBase* table = m_dicTable[tableID];
-	if (table != nullptr)
+	if (nullptr != table)
 	{
 		return table->m_tableName;
 	}			
@@ -125,7 +126,7 @@ void TableSys::readTable(TableID::TableID tableID, ByteBuffer* bytes)
 	table->m_byteBuffer = bytes;
 
 	bytes->setEndian(eSys_LITTLE_ENDIAN);
-	uint32 len;
+	uint32 len = 0;
 	bytes->readUnsignedInt32(len);
     uint32 i = 0;
     TableItemBase* item = nullptr;
@@ -136,7 +137,7 @@ void TableSys::readTable(TableID::TableID tableID, ByteBuffer* bytes)
         //    item = new TableItemObject();
         //}
         item = new TableItemBase();
-        item->parseHeaderByteArray(bytes);
+        item->parseHeaderByteBuffer(bytes);
         // 加载完整数据
         //loadOneTableOneItemAll(tableID, table, item);
         //if (TableID.TABLE_OBJECT == tableID)
@@ -154,7 +155,7 @@ TableItemBase* TableSys::findDataItem(TableBase* table, uint32 id)
 	int low = 0;
 	int high = size - 1;
 	int middle = 0;
-	uint32 idCur;
+	uint32 idCur = 0;
 			
 	while (low <= high)
 	{

@@ -1,7 +1,3 @@
-#include "MyProject.h"
-#include "UtilContainers.h"
-
-/*
 //==================== vector ÇøÓò ===================
 template<class T>
 int UtilVector::IndexOf(std::vector<T>& vec, T& item)
@@ -52,7 +48,7 @@ bool UtilMap::ContainsKey(std::map<TKey, TValue>& map, TKey& key)
 }
 
 template<class TKey, class TValue>
-bool UtilMap::Remove(std::map<TKey, TValue>& map, TKey& item)
+bool UtilMap::Remove(std::map<TKey, TValue>& map, TKey& key)
 {
 	std::map<TKey, TValue>::iterator iter = map.find(key);
 	if (map.end() != iter)
@@ -60,6 +56,5 @@ bool UtilMap::Remove(std::map<TKey, TValue>& map, TKey& item)
 		map.erase(iter);
 		return true;
 	}
-	return fasle
+	return false;
 }
-*/

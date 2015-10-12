@@ -4,7 +4,7 @@
 #include "ByteBuffer.h"
 #include "UtilTable.h"
 
-void TableCardItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
+void TableCardItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
 {
     bytes->setPos(offset);
 	UtilTable::readString(bytes, m_name);
@@ -18,7 +18,6 @@ void TableCardItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 	bytes->readInt32(m_attack);
 	bytes->readInt32(m_hp);
 	bytes->readInt32(m_Durable);
-	UtilTable::readString(bytes, m_prefab);
 
 	bytes->readInt32(m_chaoFeng);
 	bytes->readInt32(m_chongFeng);
@@ -29,7 +28,9 @@ void TableCardItemBody::parseBodyByteArray(ByteBuffer* bytes, uint32 offset)
 	bytes->readInt32(m_guoZai);
 	bytes->readInt32(m_faShu);
 	bytes->readInt32(m_zhanHou);
-	bytes->readInt32(m_wangYu);
-	bytes->readInt32(m_jiNu);
 	bytes->readUnsignedInt8(m_bNeedFaShuTarget);
+	bytes->readInt32(m_bNeedZhanHouTarget);
+	UtilTable::readString(bytes, m_cardDesc);
+	UtilTable::readString(bytes, m_cardHeader);
+	bytes->readUnsignedInt32(m_skillPrepareEffect);
 }
