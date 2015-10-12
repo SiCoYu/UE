@@ -16,9 +16,8 @@ void UUITestCanvas::onReady()
 {
 	//loadCanvas();
 	//loadNoCanvas();
-	//loadNamedSlot();
-	loadOverlay();
-	m_umgWidget->AddToViewport();
+	loadNamedSlot();
+	//loadOverlay();
 	//EngineApi::addEventHandle((UButton*)m_umgWidget->GetWidgetFromName("Button_32"), (UObject*)this, "OnConfirmGeneric");
 }
 
@@ -33,11 +32,13 @@ void UUITestCanvas::OnConfirmGeneric()
 void UUITestCanvas::loadCanvas()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestCanvas_Canvas.UITestCanvas_Canvas_C"));
+	m_umgWidget->AddToViewport();
 }
 
 void UUITestCanvas::loadNoCanvas()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestCanvas_NoCanvas.UITestCanvas_NoCanvas_C"));
+	m_umgWidget->AddToViewport();
 }
 
 void UUITestCanvas::loadCanvasWithNoCanvas()
@@ -48,13 +49,19 @@ void UUITestCanvas::loadCanvasWithNoCanvas()
 void UUITestCanvas::loadNamedSlot()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestNamedSlot.UITestNamedSlot_C"));
-
+	//loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
+	m_umgWidget->AddToViewport();	// 一定要先 AddToViewport ，然后再获取控件，否则 GetWidgetFromName 的时候会报错
 	// 目前已经有点 NamedSlot 是 "NamedSlot_28"
 	m_umgWidget->GetSlotNames(m_namedSlotArr);
+	m_namedSlot = (UNamedSlot*)(m_umgWidget->GetWidgetFromName("NamedSlot_28"));
+	//UWidget* widget = m_umgWidget->GetWidgetFromName("Button_16");
 }
 
 void UUITestCanvas::loadOverlay()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestOveray.UITestOveray_C"));
-	m_overlay = (UOverlay*)(m_umgWidget->GetWidgetFromName("Overlay_17"));
+	m_umgWidget->AddToViewport();
+	// Overlay_17 已经有的 Overlay 
+	//m_overlay = (UOverlay*)(m_umgWidget->GetWidgetFromName("Overlay_17"));
+	UWidget* widget = m_umgWidget->GetWidgetFromName("Button_32");
 }

@@ -12,6 +12,7 @@ class UUITestCanvas : public UUMGForm
 protected:
 	TArray<FName> m_namedSlotArr;		// 所有的 NamedSlot 的名字
 	UOverlay* m_overlay;				// 一个层
+	UNamedSlot* m_namedSlot;				// NamedSlot
 
 protected:
 	void loadCanvas();		// 加载有 Canvas 的 UI
