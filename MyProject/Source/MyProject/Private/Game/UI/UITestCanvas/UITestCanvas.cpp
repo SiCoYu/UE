@@ -38,17 +38,10 @@ void UUITestCanvas::loadCanvas()
 	UButtonSlot* pBtnSlot = Cast<UButtonSlot>(pButton->GetContentSlot());
 
 	// 测试移动位置
-	UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(pButton->Slot);	// 终于找到 UButton 的 UCanvasPanelSlot 元素了
-	//UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(pButton->GetContentSlot());
-	pPanelSlot->SetPosition(FVector2D(700, 600));
-
-	// 获取 CanvasPanel 
-	//UCanvasPanel* pCanvasPanel = (UCanvasPanel*)(m_umgWidget->GetWidgetFromName("UCanvasPanel"));
-	// UCanvasPanel 是没有 UPanelSlot 的，因为 UCanvasPanel 继承 UPanelWidget，而 UButton 继承 UContentWidget ，而 GetContentSlot 是在 UContentWidget 中的
-	//UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(pCanvasPanel->GetContentSlot());
+	//testMove(pButton);
 
 	// 测试隐藏控件
-	//pButton->Visibility = ESlateVisibility::Hidden;
+	testHide(pButton);
 }
 
 void UUITestCanvas::loadNoCanvas()
@@ -80,7 +73,6 @@ void UUITestCanvas::loadCanvasWithNoCanvas()
 	{
 		parentWidget->SetContentForSlot("NamedSlot_24", childWidget);
 	}
-	//parentWidget->get
 }
 
 void UUITestCanvas::loadNamedSlot()
@@ -101,4 +93,21 @@ void UUITestCanvas::loadOverlay()
 	// Overlay_17 已经有的 Overlay 
 	m_overlay = (UOverlay*)(m_umgWidget->GetWidgetFromName("Overlay_17"));
 	UWidget* widget = m_umgWidget->GetWidgetFromName("Button_32");
+}
+
+void UUITestCanvas::testMove(UWidget* ptr)
+{
+	UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(ptr->Slot);	// 终于找到 UButton 的 UCanvasPanelSlot 元素了
+	//UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(pButton->GetContentSlot());
+	pPanelSlot->SetPosition(FVector2D(700, 600));
+
+	// 获取 CanvasPanel 
+	//UCanvasPanel* pCanvasPanel = (UCanvasPanel*)(m_umgWidget->GetWidgetFromName("UCanvasPanel"));
+	// UCanvasPanel 是没有 UPanelSlot 的，因为 UCanvasPanel 继承 UPanelWidget，而 UButton 继承 UContentWidget ，而 GetContentSlot 是在 UContentWidget 中的
+	//UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(pCanvasPanel->GetContentSlot());
+}
+
+void UUITestCanvas::testHide(UWidget* ptr)
+{
+	ptr->Visibility = ESlateVisibility::Hidden;
 }
