@@ -20,6 +20,7 @@ void UUITestCanvas::onReady()
 	//loadOverlay();
 	//loadCanvasWithNoCanvas();
 	//EngineApi::addEventHandle((UButton*)m_umgWidget->GetWidgetFromName("Button_32"), (UObject*)this, "OnConfirmGeneric");
+	unloadCanvas();
 }
 
 void UUITestCanvas::OnConfirmGeneric()
@@ -41,7 +42,7 @@ void UUITestCanvas::loadCanvas()
 	//testMove(pButton);
 
 	// 测试隐藏控件
-	testHide(pButton);
+	//testHide(pButton);
 }
 
 void UUITestCanvas::loadNoCanvas()
@@ -95,6 +96,12 @@ void UUITestCanvas::loadOverlay()
 	UWidget* widget = m_umgWidget->GetWidgetFromName("Button_32");
 }
 
+void UUITestCanvas::unloadCanvas()
+{
+	m_umgWidget->RemoveFromViewport();
+	m_umgWidget = nullptr;
+}
+
 void UUITestCanvas::testMove(UWidget* ptr)
 {
 	UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(ptr->Slot);	// 终于找到 UButton 的 UCanvasPanelSlot 元素了
@@ -109,5 +116,6 @@ void UUITestCanvas::testMove(UWidget* ptr)
 
 void UUITestCanvas::testHide(UWidget* ptr)
 {
-	ptr->Visibility = ESlateVisibility::Hidden;
+	//ptr->Visibility = ESlateVisibility::Hidden;
+	ptr->SetVisibility(ESlateVisibility::Hidden);
 }

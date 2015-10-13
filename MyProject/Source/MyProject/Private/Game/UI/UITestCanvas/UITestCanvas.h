@@ -21,6 +21,8 @@ protected:
 	void loadNamedSlot();	// 加载有 Named Slot 控件的 UI
 	void loadOverlay();		// 加载 Overlay 
 
+	void unloadCanvas();	// 卸载
+
 	void testMove(UWidget* ptr);
 	void testHide(UWidget* ptr);
 
