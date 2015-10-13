@@ -56,16 +56,21 @@ void Ctx::init()
 	m_uiMgr = new UIManager();
 	m_engineApi = new EngineApi();
 	m_pTableSys = new TableSys();
-	#ifdef	USE_EXTERN_THREAD
-		m_pINetMgr = new NetMgr(getStdLog());
-	#else
-		m_pINetMgr = new NetMgr();
-	#endif
+#ifdef	USE_EXTERN_THREAD
+	m_pINetMgr = new NetMgr(getStdLog());
+#else
+	m_pINetMgr = new NetMgr();
+#endif
+
+	// ¹ÒÔÚÄ¿Â¼
+	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
 
 #ifdef ENABLE_UNIT_TEST
 	m_test = new Test();
 	m_test->runTest();
 #endif
+
+	testApi();
 }
 
 UIManager* Ctx::getUIMgrPtr()
@@ -123,4 +128,9 @@ ShareData* Ctx::getShareDataPtr()
 NetDispList* Ctx::getNetDispListPtr()
 {
 	return m_pNetDispList;
+}
+
+void Ctx::testApi()
+{
+	EngineApi::GameUserDir();
 }

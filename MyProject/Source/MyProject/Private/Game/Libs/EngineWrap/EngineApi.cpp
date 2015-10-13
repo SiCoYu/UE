@@ -73,3 +73,26 @@ uint32 EngineApi::getUTCSec()
 {
 	return g_pEngineApi->getWorld()->GetTimeSeconds();
 }
+
+void EngineApi::InsertMountPoint(const FString& RootPath, const FString& ContentPath)
+{
+	FPackageName::RegisterMountPoint(RootPath, ContentPath);
+}
+
+bool EngineApi::FileExists(const FString& InPath)
+{
+	return FPaths::FileExists(InPath);
+}
+
+bool EngineApi::PackageExists(const FString& InPackageFilename)
+{
+	//FString fileName = FPackageName::LongPackageNameToFilename(InPackageFilename);	// 转换包的名字到相对当前工作目录的目录
+	//FString OutFilename;
+	//return FPackageName::FindPackageFileWithoutExtension(fileName, OutFilename);
+	return FPackageName::DoesPackageExist(InPackageFilename);
+}
+
+FString EngineApi::GameUserDir()
+{
+	return FPaths::GameUserDir();
+}

@@ -60,6 +60,11 @@ public:
 	ShareData* getShareDataPtr();
 	NetDispList* getNetDispListPtr();
 
+	/**
+	 *@brief 测试 Api，以后放到 UnitTest 中去
+	 */
+	void testApi();
+
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* getStdLog();
 #endif

@@ -20,7 +20,7 @@ void UUITestCanvas::onReady()
 	//loadOverlay();
 	//loadCanvasWithNoCanvas();
 	//EngineApi::addEventHandle((UButton*)m_umgWidget->GetWidgetFromName("Button_32"), (UObject*)this, "OnConfirmGeneric");
-	unloadCanvas();
+	//unloadCanvas();
 }
 
 void UUITestCanvas::OnConfirmGeneric()
@@ -34,6 +34,7 @@ void UUITestCanvas::OnConfirmGeneric()
 void UUITestCanvas::loadCanvas()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestCanvas_Canvas.UITestCanvas_Canvas_C"));
+	//loadUWidget(TEXT("/CacheData/UMG/UITestCanvas_Canvas.UITestCanvas_Canvas_C"));
 	m_umgWidget->AddToViewport();
 	UButton* pButton = (UButton*)(m_umgWidget->GetWidgetFromName("Button_32"));
 	UButtonSlot* pBtnSlot = Cast<UButtonSlot>(pButton->GetContentSlot());
