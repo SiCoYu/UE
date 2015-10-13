@@ -35,7 +35,8 @@ void UUITestCanvas::loadCanvas()
 	loadUWidget(TEXT("/Game/UMG/UITestCanvas_Canvas.UITestCanvas_Canvas_C"));
 	m_umgWidget->AddToViewport();
 	UButton* pButton = (UButton*)(m_umgWidget->GetWidgetFromName("Button_32"));
-	UPanelSlot* pPanelSlot = Cast<UPanelSlot>(pButton->GetContentSlot());
+	UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(pButton->GetContentSlot());
+	pPanelSlot->SetPosition(FVector2D(700, 600));
 }
 
 void UUITestCanvas::loadNoCanvas()
