@@ -1,57 +1,29 @@
 ﻿#ifndef __ResLoadResultNotify_H
 #define __ResLoadResultNotify_H
 
-#include "ResLoadState.h"
+class ResLoadState;
+class ResEventDispatch;
+class IDispatchObject;
 
 /**
     * @brief 非引用计数资源加载结果通知
     */
 class ResLoadResultNotify
 {
-    protected ResLoadState m_resLoadState;          // 资源加载状态
-    protected ResEventDispatch m_loadResEventDispatch;    // 事件分发器
+protected:
+	ResLoadState* m_resLoadState;          // 资源加载状态
+    ResEventDispatch* m_loadResEventDispatch;    // 事件分发器
 
-    public ResLoadResultNotify()
-    {
-        m_resLoadState = new ResLoadState();
-        m_loadResEventDispatch = new ResEventDispatch();
-    }
+public:
+	ResLoadResultNotify();
+	~ResLoadResultNotify();
 
-    public ResLoadState resLoadState
-    {
-        get
-        {
-            return m_resLoadState;
-        }
-        set
-        {
-            m_resLoadState = value;
-        }
-    }
-
-    public ResEventDispatch loadResEventDispatch
-    {
-        get
-        {
-            return m_loadResEventDispatch;
-        }
-        set
-        {
-            m_loadResEventDispatch = value;
-        }
-    }
-
-    public void onLoadEventHandle(IDispatchObject dispObj)
-    {
-        m_loadResEventDispatch.dispatchEvent(dispObj);
-        m_loadResEventDispatch.clearEventHandle();
-    }
-
-    virtual public void copyFrom(ResLoadResultNotify rhv)
-    {
-        m_resLoadState.copyFrom(rhv.resLoadState);
-        m_loadResEventDispatch = rhv.loadResEventDispatch;
-    }
+	ResLoadState getResLoadState();
+	void setResLoadState(ResLoadState* value);
+	ResEventDispatch* getLoadResEventDispatch();
+	void setLoadResEventDispatch(ResEventDispatch* value);
+	void onLoadEventHandle(IDispatchObject* dispObj);
+	virtual void copyFrom(ResLoadResultNotify& rhv);
 };
 
 #endif

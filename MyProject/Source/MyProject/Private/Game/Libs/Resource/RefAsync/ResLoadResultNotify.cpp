@@ -1,53 +1,49 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "ResLoadResultNotify.h"
+#include "ResLoadState.h"
+#include "ResEventDispatch.h"
+#include "IDispatchObject.h"
+
+ResLoadResultNotify::ResLoadResultNotify()
 {
-    /**
-     * @brief 非引用计数资源加载结果通知
-     */
-    public class ResLoadResultNotify
-    {
-        protected ResLoadState m_resLoadState;          // 资源加载状态
-        protected ResEventDispatch m_loadResEventDispatch;    // 事件分发器
+	m_resLoadState = new ResLoadState();
+	m_loadResEventDispatch = new ResEventDispatch();
+}
 
-        public ResLoadResultNotify()
-        {
-            m_resLoadState = new ResLoadState();
-            m_loadResEventDispatch = new ResEventDispatch();
-        }
+ResLoadResultNotify::~ResLoadResultNotify()
+{
+	delete m_resLoadState;
+	delete m_loadResEventDispatch;
+}
 
-        public ResLoadState resLoadState
-        {
-            get
-            {
-                return m_resLoadState;
-            }
-            set
-            {
-                m_resLoadState = value;
-            }
-        }
+ResLoadState ResLoadResultNotify::getResLoadState()
+{
+	return m_resLoadState;
+}
 
-        public ResEventDispatch loadResEventDispatch
-        {
-            get
-            {
-                return m_loadResEventDispatch;
-            }
-            set
-            {
-                m_loadResEventDispatch = value;
-            }
-        }
+void ResLoadResultNotify::setResLoadState(ResLoadState* value)
+{
+	m_resLoadState = value;
+}
 
-        public void onLoadEventHandle(IDispatchObject dispObj)
-        {
-            m_loadResEventDispatch.dispatchEvent(dispObj);
-            m_loadResEventDispatch.clearEventHandle();
-        }
+ResEventDispatch* ResLoadResultNotify::getLoadResEventDispatch()
+{
+	return m_loadResEventDispatch;
+}
 
-        virtual public void copyFrom(ResLoadResultNotify rhv)
-        {
-            m_resLoadState.copyFrom(rhv.resLoadState);
-            m_loadResEventDispatch = rhv.loadResEventDispatch;
-        }
-    }
+void ResLoadResultNotify::setLoadResEventDispatch(ResEventDispatch* value)
+{
+	m_loadResEventDispatch = value;
+}
+
+void ResLoadResultNotify::onLoadEventHandle(IDispatchObject* dispObj)
+{
+	m_loadResEventDispatch->dispatchEvent(dispObj);
+	m_loadResEventDispatch->clearEventHandle();
+}
+
+void ResLoadResultNotify::copyFrom(ResLoadResultNotify& rhv)
+{
+	m_resLoadState->copyFrom(rhv.getResLoadState());
+	m_loadResEventDispatch = rhv.getLoadResEventDispatch();
 }

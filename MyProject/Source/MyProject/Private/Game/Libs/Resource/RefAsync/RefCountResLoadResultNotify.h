@@ -1,33 +1,25 @@
-﻿namespace SDK.Lib
+﻿#ifndef __RefCountResLoadResultNotify_H
+#define __RefCountResLoadResultNotify_H
+
+#include "ResLoadResultNotify.h"
+
+class RefCount;
+
+/**
+ * @brief 引用计数资源加载结果通知
+ */
+class RefCountResLoadResultNotify : public ResLoadResultNotify
 {
-    /**
-     * @brief 引用计数资源加载结果通知
-     */
-    public class RefCountResLoadResultNotify : ResLoadResultNotify
-    {
-        protected RefCount m_refCount;                  // 引用计数
+protected:
+	RefCount* m_refCount;                  // 引用计数
 
-        public RefCountResLoadResultNotify()
-        {
-            m_refCount = new RefCount();
-        }
+public:
+	RefCountResLoadResultNotify();
+	~RefCountResLoadResultNotify();
 
-        public RefCount refCount
-        {
-            get
-            {
-                return m_refCount;
-            }
-            set
-            {
-                m_refCount = value;
-            }
-        }
-
-        override public void copyFrom(ResLoadResultNotify rhv)
-        {
-            base.copyFrom(rhv);
-            m_refCount.copyFrom((rhv as RefCountResLoadResultNotify).refCount);
-        }
-    }
+	RefCount* getRefCount();
+	void setRefCount(RefCount* value);
+	virtual void copyFrom(ResLoadResultNotify& rhv) override;
 }
+
+#endif

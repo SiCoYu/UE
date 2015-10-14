@@ -1,9 +1,12 @@
-﻿namespace SDK.Lib
+﻿#ifndef __IDispatchObject_H
+#define __IDispatchObject_H
+
+/**
+ * @brief 可分发的对象
+ */
+class IDispatchObject
 {
-    /**
-     * @brief 可分发的对象
-     */
-    public interface IDispatchObject
-    {
-    }
-}
+
+};
+
+#endif
