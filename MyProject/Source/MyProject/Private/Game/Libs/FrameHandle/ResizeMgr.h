@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#ifndef __ResizeMgr_H
+#define __ResizeMgr_H
 
 namespace SDK.Lib
 {
@@ -20,3 +21,5 @@ namespace SDK.Lib
         }
     }
 }
+
+#endif

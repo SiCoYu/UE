@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#ifndef __TickMgr_H
+#define __TickMgr_H
 
 /**
  * @brief 心跳管理器
@@ -95,3 +96,5 @@ namespace SDK.Lib
         }
     }
 }
+
+#endif

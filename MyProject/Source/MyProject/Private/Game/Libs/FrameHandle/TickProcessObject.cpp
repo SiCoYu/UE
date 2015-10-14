@@ -1,8 +1,7 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "TickProcessObject.h"
+
+TickProcessObject::TickProcessObject()
 {
-    public class TickProcessObject
-    {
-        public ITickedObject m_tickObject = null;
-		public float m_priority = 0.0f;
-    }
+
 }

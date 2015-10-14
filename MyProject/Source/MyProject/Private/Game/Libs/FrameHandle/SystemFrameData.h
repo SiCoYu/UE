@@ -1,4 +1,5 @@
-﻿namespace SDK.Lib
+﻿#ifndef __SystemFrameData_H
+#define __SystemFrameData_H
 {
     public class SystemFrameData
     {
@@ -24,3 +25,5 @@
         }
     }
 }
+
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#ifndef __SystemTimeData_H
+#define __SystemTimeData_H
 
 namespace SDK.Lib
 {
@@ -55,3 +56,5 @@ namespace SDK.Lib
         }
     }
 }
+
+#endif
