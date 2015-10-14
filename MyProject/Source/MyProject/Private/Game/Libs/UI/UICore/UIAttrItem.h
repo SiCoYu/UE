@@ -1,5 +1,5 @@
-#ifndef __FORMATTRITEM_H
-#define __FORMATTRITEM_H
+#ifndef __UIATTRITEM_H
+#define __UIATTRITEM_H
 
 #include <string>
 #include "UILayer.h"
@@ -15,7 +15,7 @@ protected:
 	std::string m_widgetPath;             // 拖放的控件 path 
 
 	UICanvasID m_canvasID;           // 在哪个 Canvas
-	UILayerID m_LayerID;             // 所在的 Layer
+	UILayerID::UILayerID m_LayerID;             // 所在的 Layer
 	uint8 m_uiSceneType;   // 场景类型列表
 
 public:

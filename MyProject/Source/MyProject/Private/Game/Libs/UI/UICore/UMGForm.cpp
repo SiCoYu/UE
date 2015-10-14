@@ -1,7 +1,8 @@
 #include "MyProject.h"
 #include "UMGForm.h"
-#include "Ctx.h"
+#include "Common.h"
 #include "EngineApi.h"
+#include "PointF.h"
 
 void UUMGForm::loadUWidget(const TCHAR* name)
 {
@@ -73,52 +74,52 @@ void UUMGForm::setBLoadWidgetRes(bool value)
 	m_bLoadWidgetRes = true;
 }
 
-bool getBReady()
+bool UUMGForm::getBReady()
 {
 	return m_bReady;
 }
 
-std::string getFormName()
+std::string UUMGForm::getFormName()
 {
 	return m_formName;
 }
-void setFormName(std::string value)
+void UUMGForm::setFormName(std::string value)
 {
 	m_formName = value;
 }
 
-LuaCSBridgeForm* getLuaCSBridgeForm()
+LuaCSBridgeForm* UUMGForm::getLuaCSBridgeForm()
 {
 	return m_luaCSBridgeForm;
 }
 
-void getLuaCSBridgeForm(LuaCSBridgeForm* value)
+void UUMGForm::getLuaCSBridgeForm(LuaCSBridgeForm* value)
 {
 	m_luaCSBridgeForm = value;
 }
 
-void init()
+void UUMGForm::init()
 {
 	onInit();
 }
 
-void show()
+void UUMGForm::show()
 {
-	Ctx.m_instance.m_uiMgr.showForm(m_id);
+	g_pUIMgr->showForm(m_id);
 }
 
-//private void hide()
+//private void UUMGForm::hide()
 //{
-//    Ctx.m_instance.m_uiMgr.hideForm(m_id);
+//    g_pUIMgr->hideForm(m_id);
 //}
 
-void exit()
+void UUMGForm::exit()
 {
-	Ctx.m_instance.m_uiMgr.exitForm(m_id);
+	g_pUIMgr->exitForm(m_id);
 }
 
 // 界面代码创建后就调用
-void onInit()
+void UUMGForm::onInit()
 {
 	if (m_luaCSBridgeForm != null)
 	{
@@ -127,12 +128,12 @@ void onInit()
 	//if (m_bLoadWidgetRes)
 	//{
 	// 默认会继续加载资源
-	Ctx.m_instance.m_uiMgr.loadWidgetRes(this.id);
+	g_pUIMgr->loadWidgetRes(this.id);
 	//}
 }
 
 // 第一次显示之前会调用一次
-void onReady()
+void UUMGForm::onReady()
 {
 	if (m_luaCSBridgeForm != null)
 	{
@@ -147,7 +148,7 @@ void onReady()
 }
 
 // 每一次显示都会调用一次
-void onShow()
+void UUMGForm::onShow()
 {
 	if (m_luaCSBridgeForm != null)
 	{
@@ -156,13 +157,13 @@ void onShow()
 
 	if (m_bBlurBg)
 	{
-		Ctx.m_instance.m_uiMgr.showForm(UIFormID.eUIBlurBg);        // 显示模糊背景界面
+		g_pUIMgr->showForm(UIFormID.eUIBlurBg);        // 显示模糊背景界面
 	}
 	//adjustPosWithAlign();
 }
 
 // 每一次隐藏都会调用一次
-void onHide()
+void UUMGForm::onHide()
 {
 	if (m_luaCSBridgeForm != null)
 	{
@@ -171,12 +172,12 @@ void onHide()
 
 	if (m_bBlurBg)
 	{
-		Ctx.m_instance.m_uiMgr.exitForm(UIFormID.eUIBlurBg);
+		g_pUIMgr->exitForm(UIFormID.eUIBlurBg);
 	}
 }
 
 // 每一次关闭都会调用一次
-void onExit()
+void UUMGForm::onExit()
 {
 	if (m_luaCSBridgeForm != null)
 	{
@@ -185,11 +186,11 @@ void onExit()
 
 	if (m_bBlurBg)
 	{
-		Ctx.m_instance.m_uiMgr.exitForm(UIFormID.eUIBlurBg);
+		g_pUIMgr->exitForm(UIFormID.eUIBlurBg);
 	}
 }
 
-bool isVisible()
+bool UUMGForm::isVisible()
 {
 	return m_GUIWin.m_uiRoot.activeSelf;        // 仅仅是自己是否可见
 }
@@ -197,19 +198,19 @@ bool isVisible()
 /*
 * stage的大小发生变化后，这个函数会被调用。子类可重载这个函数
 */
-void onStageReSize()
+void UUMGForm::onStageReSize()
 {
 	adjustPosWithAlign();
 }
 
-void adjustPosWithAlign()
+void UUMGForm::adjustPosWithAlign()
 {
 	PointF pos = computeAdjustPosWithAlign();
 	this.x = pos.x;
 	this.y = pos.y;
 }
 
-PointF computeAdjustPosWithAlign()
+PointF UUMGForm::computeAdjustPosWithAlign()
 {
 	PointF ret = new PointF(0, 0);
 	int widthStage = 0;
@@ -243,12 +244,12 @@ PointF computeAdjustPosWithAlign()
 }
 
 // 按钮点击关闭
-void onExitBtnClick()
+void UUMGForm::onExitBtnClick()
 {
 	exit();
 }
 
-void registerBtnClickEventByList(string[] btnList)
+void UUMGForm::registerBtnClickEventByList(string[] btnList)
 {
 	foreach(var path in btnList)
 	{
@@ -256,12 +257,12 @@ void registerBtnClickEventByList(string[] btnList)
 	}
 }
 
-void registerImageClickEventByList(string[] imageList)
+void UUMGForm::registerImageClickEventByList(string[] imageList)
 {
 
 }
 
-void registerWidgetEvent()
+void UUMGForm::registerWidgetEvent()
 {
 	string[] pathArr = m_luaCSBridgeForm.getTable2StrArray("BtnClickTable");
 	foreach(var path in pathArr)
@@ -270,7 +271,7 @@ void registerWidgetEvent()
 	}
 }
 
-void onBtnClk(GameObject go_)
+void UUMGForm::onBtnClk(GameObject go_)
 {
 	if (m_luaCSBridgeForm != null)
 	{
@@ -284,7 +285,7 @@ void onBtnClk(GameObject go_)
 	// Ctx.m_instance.m_globalEventMgr.eventDispatchGroup.dispatchEvent((int)eGlobalEventType.eGlobalTest, null);
 }
 
-void addClick(GameObject go, string path)
+void UUMGForm::addClick(GameObject go, string path)
 {
 	UtilApi.addEventHandle(go, path, onBtnClk);
 	GameObject btnGo = UtilApi.TransFindChildByPObjAndPath(go, path);
@@ -298,7 +299,7 @@ void addClick(GameObject go, string path)
 	}
 }
 
-void removeClick(GameObject go, string path)
+void UUMGForm::removeClick(GameObject go, string path)
 {
 	UtilApi.removeEventHandle(go, path);
 	GameObject btnGo = UtilApi.TransFindChildByPObjAndPath(go, path);

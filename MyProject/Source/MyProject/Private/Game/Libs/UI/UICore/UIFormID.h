@@ -1,12 +1,15 @@
 #ifndef __FORMID_H
 #define __FORMID_H
 
-enum UIFormID
+namespace UIFormID
 {
-	eUIPack,		// 背包
-	eUILog,			// 日志
-	eUITestCanvas,	// 测试 Canvas
-	eUITotal
-};
+	enum UIFormID
+	{
+		eUIPack,		// 背包
+		eUILog,			// 日志
+		eUITestCanvas,	// 测试 Canvas
+		eUITotal
+	};
+}
 
 #endif				// __FORMID_H

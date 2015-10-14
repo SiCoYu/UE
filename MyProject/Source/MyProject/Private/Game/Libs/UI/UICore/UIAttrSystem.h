@@ -1,5 +1,5 @@
-#ifndef __FORMATTRSYSTEM_H
-#define __FORMATTRSYSTEM_H
+#ifndef __UIATTRSYSTEM_H
+#define __UIATTRSYSTEM_H
 
 #include <map>
 #include "FormAttrItem.h"
