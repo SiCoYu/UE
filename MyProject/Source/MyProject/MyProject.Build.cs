@@ -28,6 +28,13 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/Thread",
                 "MyProject/Private/Game/Libs/FastDelegate",
                 "MyProject/Private/Game/Libs/Tools",
+                "MyProject/Private/Game/Libs/DelayHandle",
+                "MyProject/Private/Game/Libs/EventHandle",
+                "MyProject/Private/Game/Libs/FrameHandle",
+
+                "MyProject/Private/Game/Libs/Resource/ResLoad",
+                "MyProject/Private/Game/Libs/Resource/ResLoadData",
+                "MyProject/Private/Game/Libs/Resource/RefAsync",
 
                 // UI ÇøÓò
                 "MyProject/Private/Game/UI/UIPack",

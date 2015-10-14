@@ -1,49 +1,25 @@
-﻿namespace SDK.Lib
+﻿#ifndef __RefCount_H
+#define __RefCount_H
+
+#include "Platform.h"
+
+/**
+ * @brief 脚本引用计数
+ */
+class RefCount
 {
-    public class RefCount
-    {
-        protected uint m_refNum;                // 引用计数
+protected:
+	uint32 m_refNum;                // 引用计数
 
-        public RefCount()
-        {
-            m_refNum = 0;       // 引用计数从 1 改成 0 
-        }
+public:
+	RefCount();
+	uint32 getRefNum();
+	void setRefNum(int32 value);
+	void reset();
+	void incRef();
+	void decRef();
+	bool bNoRef();
+    void copyFrom(RefCount rhv);
+};
 
-        public uint refNum
-        {
-            get
-            {
-                return m_refNum;
-            }
-            set
-            {
-                m_refNum = value;
-            }
-        }
-
-        public void reset()
-        {
-            m_refNum = 0;
-        }
-
-        public void incRef()
-        {
-            ++m_refNum;
-        }
-
-        public void decRef()
-        {
-            --m_refNum;
-        }
-
-        public bool bNoRef()
-        {
-            return m_refNum == 0;
-        }
-
-        public void copyFrom(RefCount rhv)
-        {
-            m_refNum = rhv.refNum;
-        }
-    }
-}
+#endif
