@@ -1,8 +1,17 @@
-﻿namespace SDK.Lib
+﻿#ifndef __DelayHandleObject_H
+#define __DelayHandleObject_H
+
+class IDelayHandleItem;
+class DelayHandleParamBase;
+
+class DelayHandleObject
 {
-    public class DelayHandleObject
-    {
-        public IDelayHandleItem m_delayObject;
-        public DelayHandleParamBase m_delayParam;
-    }
-}
+public:
+	IDelayHandleItem* m_delayObject;
+    DelayHandleParamBase* m_delayParam;
+
+public:
+	DelayHandleObject();
+};
+
+#endif

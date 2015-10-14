@@ -1,25 +1,17 @@
-﻿using System;
+﻿#include "MyProject.h"
+#include "EventDispatchFunctionObject.h"
 
-namespace SDK.Lib
+EventDispatchFunctionObject::EventDispatchFunctionObject()
 {
-    public class EventDispatchFunctionObject : IDelayHandleItem
-    {
-        public bool m_bClientDispose;       // 是否释放了资源
-        public Action<IDispatchObject> m_handle;
+	m_bClientDispose = false;
+}
 
-        public EventDispatchFunctionObject()
-        {
-            m_bClientDispose = false;
-        }
+void EventDispatchFunctionObject::setClientDispose()
+{
+	m_bClientDispose = true;
+}
 
-        public void setClientDispose()
-        {
-            m_bClientDispose = true;
-        }
-
-        public bool getClientDispose()
-        {
-            return m_bClientDispose;
-        }
-    }
+bool EventDispatchFunctionObject::getClientDispose()
+{
+	return m_bClientDispose;
 }

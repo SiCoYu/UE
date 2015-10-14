@@ -1,102 +1,42 @@
-﻿using System.Collections.Generic;
+﻿#ifndef __MList_H
+#define __MList_H
 
-namespace SDK.Lib
+#include <vector>
+#include "Common.h"
+#include "UtilStr.h"
+#include "UtilContainers.h"
+
+/**
+ * @brief 对系统 List 的封装
+ */
+template <class T>
+class MList
 {
-    /**
-     * @brief 对系统 List 的封装
-     */
-    public class MList<T>
-    {
-        protected List<T> m_list;
-        protected int m_uniqueId;       // 唯一 Id ，调试使用
+public:
+	typedef std::vector<T>::iterator Ite;
 
-        public MList()
-        {
-            m_list = new List<T>();
-        }
+protected:
+	std::vector<T> m_list;
+    protected int m_uniqueId;       // 唯一 Id ，调试使用
 
-        public MList(int capacity)
-        {
-            m_list = new List<T>(capacity);
-        }
+public:
+	MList();
+	MList(int capacity);
+	~MList();
 
-        public List<T> list
-        {
-            get
-            {
-                return m_list;
-            }
-        }
+	std::vector<T>& getList();
+	int getUniqueId();
+	void setUniqueId(int value);
+	void Add(T item);
+	bool Remove(T item);
 
-        public int uniqueId
-        {
-            get
-            {
-                return m_uniqueId;
-            }
-            set
-            {
-                m_uniqueId = value;
-            }
-        }
+	T& operator [] (int index);
+	void Clear();
+	int Count();
+	void RemoveAt(int index);
+	int IndexOf(T item);
+	void Insert(int index, T item);
+	bool Contains(T item);
+};
 
-        public void Add(T item)
-        {
-            m_list.Add(item);
-        }
-
-        public bool Remove(T item)
-        {
-            return m_list.Remove(item);
-        }
-
-        public T this[int index] 
-        { 
-            get
-            {
-                return m_list[index];
-            }
-            set
-            {
-                m_list[index] = value;
-            }
-        }
-
-        public void Clear()
-        {
-            m_list.Clear();
-        }
-
-        public int Count()
-        {
-            return m_list.Count;
-        }
-
-        public void RemoveAt(int index)
-        {
-            m_list.RemoveAt(index);
-        }
-
-        public int IndexOf(T item)
-        {
-            return m_list.IndexOf(item);
-        }
-
-        public void Insert(int index, T item)
-        {
-            if (index <= Count())
-            {
-                m_list.Insert(index, item);
-            }
-            else
-            {
-                Ctx.m_instance.m_logSys.log(string.Format("Insert Failed index={0}, Count={1}", index, Count()));
-            }
-        }
-
-        public bool Contains(T item)
-        {
-            return m_list.Contains(item);
-        }
-    }
-}
+#endif

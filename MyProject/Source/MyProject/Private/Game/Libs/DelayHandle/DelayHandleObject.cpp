@@ -1,8 +1,8 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "DelayHandleObject.h"
+
+DelayHandleObject::DelayHandleObject()
+	: m_delayObject(nullptr), m_delayParam(nullptr)
 {
-    public class DelayHandleObject
-    {
-        public IDelayHandleItem m_delayObject;
-        public DelayHandleParamBase m_delayParam;
-    }
+
 }

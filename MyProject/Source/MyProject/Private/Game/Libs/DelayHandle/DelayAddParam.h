@@ -1,7 +1,15 @@
-﻿namespace SDK.Lib
+﻿#ifndef __DelayAddParam_H
+#define __DelayAddParam_H
+
+#include "DelayHandleParamBase.h"
+
+class DelayAddParam : public DelayHandleParamBase
 {
-    public class DelayAddParam : DelayHandleParamBase
-    {
-        public float m_priority = 0.0f;
-    }
-}
+public:
+	float m_priority;
+
+public:
+	DelayAddParam();
+};
+
+#endif

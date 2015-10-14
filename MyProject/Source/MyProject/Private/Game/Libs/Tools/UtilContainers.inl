@@ -34,6 +34,30 @@ bool UtilVector::Remove(std::vector<T>& vec, T& item)
 	return false;
 }
 
+template<class T>
+void UtilVector::RemoveAt(std::vector<T>& vec, int index)
+{
+	if (index < vec.size())
+	{
+		std::vector<T>::iterator _beginIte;
+		_beginIte = vec.begin();
+		std::advance(_beginIte, index);
+		vec.erase(_beginIte);
+	}
+}
+
+template<class T>
+void UtilVector::Insert(std::vector<T>& vec, int index, T& item)
+{
+	if (index < vec.size())
+	{
+		std::vector<T>::iterator _beginIte;
+		_beginIte = vec.begin();
+		std::advance(_beginIte, index);
+		vec.insert(_beginIte, item);
+	}
+}
+
 //=================== map ÇøÓò ========================
 
 template<class TKey, class TValue>

@@ -18,6 +18,14 @@ public:
 	// 移除一个元素，如果移除成功，就返回 true
 	template<class T>
 	static bool Remove(std::vector<T>& vec, T& item);
+
+	// 移除指定索引处的元素
+	template<class T>
+	static void RemoveAt(std::vector<T>& vec, int index);
+
+	// 在指定索引位置插入一个值
+	template<class T>
+	static void Insert(std::vector<T>& vec, int index, T& item);
 };
 
 //=================== map 区域 ========================

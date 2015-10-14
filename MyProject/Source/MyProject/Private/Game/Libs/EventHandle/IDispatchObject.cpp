@@ -1,9 +1,7 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "IDispatchObject.h"
+
+IDispatchObject::IDispatchObject()
 {
-    /**
-     * @brief 可分发的对象
-     */
-    public interface IDispatchObject
-    {
-    }
+
 }

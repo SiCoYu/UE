@@ -6,7 +6,8 @@
  */
 class IDispatchObject
 {
-
+public:
+	IDispatchObject();
 };
 
 #endif

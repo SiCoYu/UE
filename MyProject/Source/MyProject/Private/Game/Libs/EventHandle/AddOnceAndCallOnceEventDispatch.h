@@ -1,21 +1,13 @@
-﻿using System;
+﻿#ifndef __AddOnceAndCallOnceEventDispatch_H
+#define __AddOnceAndCallOnceEventDispatch_H
 
-namespace SDK.Lib
+#include "EventDispatch.h"
+
+class AddOnceAndCallOnceEventDispatch : public EventDispatch
 {
-    public class AddOnceAndCallOnceEventDispatch : EventDispatch
-    {
-        override public void addEventHandle(Action<IDispatchObject> handle)
-        {
-            if (!existEventHandle(handle))
-            {
-                base.addEventHandle(handle);
-            }
-        }
+public:
+	virtual void addEventHandle(Action<IDispatchObject> handle) override;
+	virtual void dispatchEvent(IDispatchObject dispatchObject) override;
+};
 
-        override public void dispatchEvent(IDispatchObject dispatchObject)
-        {
-            base.dispatchEvent(dispatchObject);
-            clearEventHandle();
-        }
-    }
-}
+#endif

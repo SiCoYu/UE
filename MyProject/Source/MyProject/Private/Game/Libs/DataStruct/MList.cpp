@@ -1,102 +1,100 @@
-﻿using System.Collections.Generic;
+﻿#include "MyProject.h"
+#include "MList.h"
 
-namespace SDK.Lib
+template <class T>
+MList<T>::MList()
 {
-    /**
-     * @brief 对系统 List 的封装
-     */
-    public class MList<T>
-    {
-        protected List<T> m_list;
-        protected int m_uniqueId;       // 唯一 Id ，调试使用
+	
+}
 
-        public MList()
-        {
-            m_list = new List<T>();
-        }
+template <class T>
+MList<T>::MList(int capacity)
+	: m_list(capacity)
+{
+	
+}
 
-        public MList(int capacity)
-        {
-            m_list = new List<T>(capacity);
-        }
+template <class T>
+MList<T>::~MList()
+{
 
-        public List<T> list
-        {
-            get
-            {
-                return m_list;
-            }
-        }
+}
 
-        public int uniqueId
-        {
-            get
-            {
-                return m_uniqueId;
-            }
-            set
-            {
-                m_uniqueId = value;
-            }
-        }
+template <class T>
+std::vector<T> MList<T>::getList()
+{
+	return m_list;
+}
 
-        public void Add(T item)
-        {
-            m_list.Add(item);
-        }
+template <class T>
+int MList<T>::getUniqueId()
+{
+	return m_uniqueId;
+}
 
-        public bool Remove(T item)
-        {
-            return m_list.Remove(item);
-        }
+template <class T>
+void MList<T>::setUniqueId(int value)
+{
+	m_uniqueId = value;
+}
 
-        public T this[int index] 
-        { 
-            get
-            {
-                return m_list[index];
-            }
-            set
-            {
-                m_list[index] = value;
-            }
-        }
+template <class T>
+void MList<T>::Add(T item)
+{
+	m_list.Add(item);
+}
 
-        public void Clear()
-        {
-            m_list.Clear();
-        }
+template <class T>
+bool MList<T>::Remove(T item)
+{
+	return m_list.Remove(item);
+}
 
-        public int Count()
-        {
-            return m_list.Count;
-        }
+template <class T>
+T& operator [] (int index)
+{
+	return m_list[index];
+}
 
-        public void RemoveAt(int index)
-        {
-            m_list.RemoveAt(index);
-        }
+template <class T>
+void MList<T>::Clear()
+{
+	m_list.clear();
+}
 
-        public int IndexOf(T item)
-        {
-            return m_list.IndexOf(item);
-        }
+template <class T>
+int MList<T>::Count()
+{
+	return m_list.size();
+}
 
-        public void Insert(int index, T item)
-        {
-            if (index <= Count())
-            {
-                m_list.Insert(index, item);
-            }
-            else
-            {
-                Ctx.m_instance.m_logSys.log(string.Format("Insert Failed index={0}, Count={1}", index, Count()));
-            }
-        }
+template <class T>
+void MList<T>::RemoveAt(int index)
+{
+	UtilVector::RemoveAt(m_list, index);
+}
 
-        public bool Contains(T item)
-        {
-            return m_list.Contains(item);
-        }
-    }
+template <class T>
+int MList<T>::IndexOf(T item)
+{
+	return UtilVector::IndexOf(m_list, item);
+}
+
+template <class T>
+void MList<T>::Insert(int index, T item)
+{
+	if (index <= Count())
+	{
+		UtilVector::Insert(m_list, index, item);
+	}
+	else
+	{
+		g_pLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, Count()));
+	}
+}
+
+template <class T>
+bool MList<T>::Contains(T item)
+{
+	return IndexOf(item) != -1;
 }

@@ -1,7 +1,8 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "DelayAddParam.h"
+
+DelayAddParam::DelayAddParam()
+	: m_priority(0)
 {
-    public class DelayAddParam : DelayHandleParamBase
-    {
-        public float m_priority = 0.0f;
-    }
+
 }

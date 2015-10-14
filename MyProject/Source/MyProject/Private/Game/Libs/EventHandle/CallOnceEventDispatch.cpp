@@ -1,19 +1,13 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "CallOnceEventDispatch.h"
+
+CallOnceEventDispatch::CallOnceEventDispatch()
 {
-    /**
-     * @brief 一次事件分发，分发一次就清理
-     */
-    public class CallOnceEventDispatch : EventDispatch
-    {
-        public CallOnceEventDispatch()
-        {
 
-        }
+}
 
-        override public void dispatchEvent(IDispatchObject dispatchObject)
-        {
-            base.dispatchEvent(dispatchObject);
-            clearEventHandle();
-        }
-    }
+void CallOnceEventDispatch::dispatchEvent(IDispatchObject dispatchObject)
+{
+	base.dispatchEvent(dispatchObject);
+	clearEventHandle();
 }

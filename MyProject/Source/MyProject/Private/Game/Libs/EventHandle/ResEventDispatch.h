@@ -1,16 +1,13 @@
-﻿namespace SDK.Lib
+﻿#ifndef __ResEventDispatch_H
+#define __ResEventDispatch_H
+
+#include "EventDispatch.h"
+
+class ResEventDispatch : public EventDispatch
 {
-    public class ResEventDispatch : EventDispatch
-    {
-        public ResEventDispatch()
-        {
+public:
+	ResEventDispatch();
+	virtual void dispatchEvent(IDispatchObject dispatchObject) override
+};
 
-        }
-
-        override public void dispatchEvent(IDispatchObject dispatchObject)
-        {
-            base.dispatchEvent(dispatchObject);
-            clearEventHandle();
-        }
-    }
-}
+#endif
