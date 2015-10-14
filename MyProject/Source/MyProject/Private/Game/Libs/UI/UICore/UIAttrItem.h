@@ -7,7 +7,7 @@
 
 enum FormID;
 
-class FormAttrItem
+class UIAttrItem
 {
 protected:
 	FormID m_formID;
@@ -19,7 +19,7 @@ protected:
 	uint8 m_uiSceneType;   // 场景类型列表
 
 public:
-	FormAttrItem();
+	UIAttrItem();
 };
 
 #endif				// __FORMATTRITEM_H

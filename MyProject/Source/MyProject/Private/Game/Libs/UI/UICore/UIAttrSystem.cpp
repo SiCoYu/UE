@@ -1,7 +1,8 @@
 #include "MyProject.h"
-#include "FormAttrSystem.h"
+#include "UIAttrSystem.h"
+#include "UIAttrItem.h"
 
-FormAttrSystem::FormAttrSystem()
+UIAttrSystem::UIAttrSystem()
 {
 
 }

@@ -2,15 +2,17 @@
 #define __UIATTRSYSTEM_H
 
 #include <map>
-#include "FormAttrItem.h"
+#include "UIFormID.h"
 
-class FormAttrSystem
+class UIAttrItem;
+
+class UIAttrSystem
 {
 protected:
-	std::map<FormID, FormAttrItem*> m_id2FormAttrItemDic;
+	std::map<UIFormID::UIFormID, UIAttrItem*> m_id2AttrDic;
 
 public:
-	FormAttrSystem();
+	UIAttrSystem();
 };
 
 #endif				// __FORMATTRSYSTEM_H

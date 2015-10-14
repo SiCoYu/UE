@@ -1,12 +1,15 @@
 #pragma once
 
-enum UICanvasID
+namespace UICanvasID
 {
-	eCanvas_50,
-	eCanvas_100,
+	enum UICanvasID
+	{
+		eCanvas_50,
+		eCanvas_100,
 
-	eeCanvas_Total,
-};
+		eeCanvas_Total,
+	};
+}
 
 #include <string>
 #include <vector>
