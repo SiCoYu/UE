@@ -1,79 +1,62 @@
-﻿namespace SDK.Lib
+﻿#include "ResLoadState.h"
+
+ResLoadState::ResLoadState()
 {
-    public enum CVResLoadState
-    {
-        eNotLoad,       // 没有加载
-        eLoading,       // 正在加载
-        eLoaded,        // 加载成功
-        eFailed         // 加载失败
-    }
+    m_resLoadState = eNotLoad;
+}
 
-    public class ResLoadState
-    {
-        protected CVResLoadState m_resLoadState;
+CVResLoadState ResLoadState::getResLoadState()
+{
+	return m_resLoadState;
+}
+void ResLoadState::setResLoadState(CVResLoadState value)
+{
+	m_resLoadState = value;
+}
 
-        public ResLoadState()
-        {
-            m_resLoadState = CVResLoadState.eNotLoad;
-        }
+void ResLoadState::reset()
+{
+    m_resLoadState = eNotLoad;
+}
 
-        public CVResLoadState resLoadState
-        {
-            get
-            {
-                return m_resLoadState;
-            }
-            set
-            {
-                m_resLoadState = value;
-            }
-        }
+// 是否加载完成，可能成功可能失败
+bool ResLoadState::hasLoaded()
+{
+    return m_resLoadState == eFailed || m_resLoadState == eLoaded;
+}
 
-        public void reset()
-        {
-            m_resLoadState = CVResLoadState.eNotLoad;
-        }
+bool ResLoadState::hasSuccessLoaded()
+{
+    return m_resLoadState == eLoaded;
+}
 
-        // 是否加载完成，可能成功可能失败
-        public bool hasLoaded()
-        {
-            return m_resLoadState == CVResLoadState.eFailed || m_resLoadState == CVResLoadState.eLoaded;
-        }
+bool ResLoadState::hasFailed()
+{
+    return m_resLoadState == eFailed;
+}
 
-        public bool hasSuccessLoaded()
-        {
-            return m_resLoadState == CVResLoadState.eLoaded;
-        }
+// 没有加载或者正在加载中
+bool ResLoadState::hasNotLoadOrLoading()
+{
+    return (m_resLoadState == eLoading || m_resLoadState == eNotLoad);
+}
 
-        public bool hasFailed()
-        {
-            return m_resLoadState == CVResLoadState.eFailed;
-        }
+void ResLoadState::setSuccessLoaded()
+{
+    m_resLoadState = eLoaded;
+}
 
-        // 没有加载或者正在加载中
-        public bool hasNotLoadOrLoading()
-        {
-            return (m_resLoadState == CVResLoadState.eLoading || m_resLoadState == CVResLoadState.eNotLoad);
-        }
+void ResLoadState::setFailed()
+{
+    m_resLoadState = eFailed;
+}
 
-        public void setSuccessLoaded()
-        {
-            m_resLoadState = CVResLoadState.eLoaded;
-        }
+void ResLoadState::setLoading()
+{
+    m_resLoadState = eLoading;
+}
 
-        public void setFailed()
-        {
-            m_resLoadState = CVResLoadState.eFailed;
-        }
-
-        public void setLoading()
-        {
-            m_resLoadState = CVResLoadState.eLoading;
-        }
-
-        public void copyFrom(ResLoadState rhv)
-        {
-            m_resLoadState = rhv.resLoadState;
-        }
-    }
+void ResLoadState::copyFrom(ResLoadState& rhv)
+{
+    m_resLoadState = rhv.getResLoadState();
 }
