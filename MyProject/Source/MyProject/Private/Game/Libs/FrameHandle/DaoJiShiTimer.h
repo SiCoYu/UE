@@ -1,42 +1,16 @@
-﻿namespace SDK.Lib
+﻿#ifndef __DaoJiShiTimer_H
+#define __DaoJiShiTimer_H
+
+#include "TimerItemBase.h"
+
+/**
+ * @brief 倒计时定时器
+ */
+class DaoJiShiTimer : public TimerItemBase
 {
-    /**
-     * @brief 倒计时定时器
-     */
-    public class DaoJiShiTimer : TimerItemBase
-    {
-        public override void OnTimer(float delta)
-        {
-            if (m_disposed)
-            {
-                return;
-            }
+public:
+	virtual void OnTimer(float delta) override;
+	virtual void reset() override;
+};
 
-            m_curTime -= delta;
-            m_curLeftTimer += delta;
-
-            if (m_bInfineLoop)
-            {
-                checkAndDisp();
-            }
-            else
-            {
-                if (m_curTime <= 0)
-                {
-                    disposeAndDisp();
-                }
-                else
-                {
-                    checkAndDisp();
-                }
-            }
-        }
-
-        public override void reset()
-        {
-            m_curTime = m_totalTime;
-            m_curLeftTimer = 0;
-            m_disposed = false;
-        }
-    }
-}
+#endif
