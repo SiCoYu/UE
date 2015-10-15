@@ -1,5 +1,5 @@
-﻿#ifndef __CVResLoadState_H
-#define __CVResLoadState_H
+﻿#ifndef __ResLoadState_H
+#define __ResLoadState_H
 
 enum CVResLoadState
 {
@@ -14,6 +14,7 @@ class ResLoadState
 protected:
 	CVResLoadState m_resLoadState;
 
+public:
 	ResLoadState();
 
 	CVResLoadState getResLoadState();
