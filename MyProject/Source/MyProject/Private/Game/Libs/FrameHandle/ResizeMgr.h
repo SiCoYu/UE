@@ -1,25 +1,17 @@
 ﻿#ifndef __ResizeMgr_H
 #define __ResizeMgr_H
 
-namespace SDK.Lib
+#include "MList.h"
+class IResizeObject;
+
+class ResizeMgr
 {
-    public class ResizeMgr
-    {
-        protected List<IResizeObject> m_ResizeLst = new List<IResizeObject>();
+protected:
+	MList<IResizeObject*> m_ResizeLst;
 
-        public void addResizeObject(IResizeObject obj)
-        {
-            m_ResizeLst.Add(obj);
-        }
-
-        public void onResize(int viewWidth, int viewHeight)
-        {
-            foreach (IResizeObject resizeObj in m_ResizeLst)
-            {
-                resizeObj.onResize(viewWidth, viewHeight);
-            }
-        }
-    }
-}
+public:
+	void addResizeObject(IResizeObject* obj);
+	void onResize(int viewWidth, int viewHeight);
+};
 
 #endif
