@@ -36,6 +36,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/Resource/ResLoadData",
                 "MyProject/Private/Game/Libs/Resource/RefAsync",
 
+                "MyProject/Private/Game/Libs/ObjectPool",
+
                 // UI ÇøÓò
                 "MyProject/Private/Game/UI/UIPack",
                 "MyProject/Private/Game/UI/UITestCanvas",

@@ -1,30 +1,17 @@
-﻿using System.IO;
+﻿#ifndef __DataResItem_H
+#define __DataResItem_H
 
-namespace SDK.Lib
+#include "ResItem.h"
+
+class LoadItem;
+
+class DataResItem : public ResItem
 {
-    public class DataResItem : ResItem
-    {
-        protected byte[] m_bytes;
-        protected string m_localPath;
+protected:
+    std::string m_localPath;
 
-        override public void init(LoadItem item)
-        {
-            base.init(item);
+public:
+	virtual void init(LoadItem* item) override;
+};
 
-            m_bytes = (item as DataLoadItem).m_bytes;
-            m_localPath = (item as DataLoadItem).m_localPath;
-
-            refCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
-        }
-
-        public byte[] getBytes()
-        {
-            if(m_bytes == null)
-            {
-                m_bytes = Ctx.m_instance.m_localFileSys.LoadFileByte(m_localPath);
-            }
-
-            return m_bytes;
-        }
-    }
-}
+#endif

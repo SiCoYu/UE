@@ -22,78 +22,78 @@ void ResItem::setResPackType(ResPackType value)
 	m_resPackType = value;
 }
 
-std::string getPath()
+std::string ResItem::getPath()
 {
 	return m_path;
 }
 
-void setPath(std::string value)
+void ResItem::setPath(std::string value)
 {
 	m_path = value;
 }
 
-std::string getPathNoExt()
+std::string ResItem::getPathNoExt()
 {
 	return m_pathNoExt;
 }
 
-void setPathNoExt(std::string value)
+void ResItem::setPathNoExt(std::string value)
 {
 	m_pathNoExt = value;
 }
 
-std::string getExtName()
+std::string ResItem::getExtName()
 {
 	return m_extName;
 }
 
-void setExtName(std::string value)
+void ResItem::setExtName(std::string value)
 {
 	m_extName = value;
 }
 
-std::string getPath()
+std::string ResItem::getPath()
 {
 	return m_path;
 }
 
-ResLoadType getResLoadType()
+ResLoadType ResItem::getResLoadType()
 {
 	return m_resLoadType;
 }
 
-void setResLoadType(ResLoadType value)
+void ResItem::setResLoadType(ResLoadType value)
 {
 	m_resLoadType = value;
 }
 
-RefCountResLoadResultNotify* getRefCountResLoadResultNotify()
+RefCountResLoadResultNotify* ResItem::getRefCountResLoadResultNotify()
 {
 	return m_refCountResLoadResultNotify;
 }
 
-void setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value)
+void ResItem::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value)
 {
 	m_refCountResLoadResultNotify = value;
 }
 
-virtual std::string getPrefabName()         // 只有 Prefab 资源才实现这个函数
+std::string ResItem::getPrefabName()         // 只有 Prefab 资源才实现这个函数
 {
 	return "";
 }
 
-virtual void init(LoadItem* item)
+void ResItem::init(LoadItem* item)
 {
 	m_refCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
 }
 
-virtual void failed(LoadItem* item)
+void ResItem::failed(LoadItem* item)
 {
 	m_refCountResLoadResultNotify->getResLoadState()->setFailed();
 	m_refCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }
 
-virtual void reset()
+void ResItem::reset()
 {
 	m_path = "";
 	m_refCountResLoadResultNotify->getResLoadState()->reset();
@@ -101,32 +101,32 @@ virtual void reset()
 }
 
 // 卸载
-virtual void unload()
+void ResItem::unload()
 {
 
 }
 
-virtual GameObject InstantiateObject(std::string resName)
-{
-	return nullptr;
-}
-
-virtual UnityEngine.Object getObject(string resName)
+GameObject ResItem::InstantiateObject(std::string resName)
 {
 	return nullptr;
 }
 
-virtual byte[] getBytes(string resName)            // 获取字节数据
+UnityEngine.Object ResItem::getObject(string resName)
+{
+	return nullptr;
+}
+
+byte[] ResItem::getBytes(string resName)            // 获取字节数据
 {
 	return null;
 }
 
-virtual string getText(string resName)
+std::string ResItem::getText(std::string resName)
 {
 	return null;
 }
 
-void copyFrom(ResItem rhv)
+void ResItem::copyFrom(ResItem rhv)
 {
 	m_resPackType = rhv.m_resPackType;
 	m_resLoadType = rhv.m_resLoadType;
