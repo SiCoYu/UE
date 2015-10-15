@@ -37,6 +37,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/Resource/RefAsync",
 
                 "MyProject/Private/Game/Libs/ObjectPool",
+                "MyProject/Private/Game/Libs/MsgRoute",
 
                 // UI ÇøÓò
                 "MyProject/Private/Game/UI/UIPack",
