@@ -3,21 +3,16 @@
 
 #include "EventDispatch.h"
 
+class IDispatchObject;
+
 /**
  * @brief 一次事件分发，分发一次就清理
  */
 class CallOnceEventDispatch : public EventDispatch
 {
-    CallOnceEventDispatch()
-    {
-
-    }
-
-	virtual void dispatchEvent(IDispatchObject dispatchObject) override
-    {
-        base.dispatchEvent(dispatchObject);
-        clearEventHandle();
-    }
+public:
+	CallOnceEventDispatch();
+	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;
 };
 
 #endif

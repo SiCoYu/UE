@@ -1,7 +1,9 @@
 ﻿#include "MyProject.h"
 #include "EventDispatch.h"
+#include "Common.h"
+#include "EventDispatchFunctionObject.h"
 
-EventDispatch::EventDispatch(int eventId_ = 0)
+EventDispatch::EventDispatch(int eventId_)
 {
 	m_eventId = eventId_;
 }
@@ -14,7 +16,7 @@ int EventDispatch::getUniqueId()
 void EventDispatch::setUniqueId(int value)
 {
 	m_uniqueId = value;
-	m_handleList.uniqueId = m_uniqueId;
+	m_handleList.setUniqueId(m_uniqueId);
 }
 
 //public LuaCSBridgeDispatch luaCSBridgeDispatch
@@ -30,39 +32,39 @@ void EventDispatch::setUniqueId(int value)
 //}
 
 // 相同的函数只能增加一次
-void EventDispatch::addEventHandle(Action<IDispatchObject> handle)
+void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 {
-	EventDispatchFunctionObject funcObject = new EventDispatchFunctionObject();
-	funcObject.m_handle = handle;
-	if (null != handle)
+	EventDispatchFunctionObject* funcObject = new EventDispatchFunctionObject();
+	funcObject->m_handle = handle;
+	if (nullptr != handle)
 	{
 		addObject(funcObject);
 	}
 	else
 	{
-		Ctx.m_instance.m_logSys.log("Event Handle is null");
+		g_pLogSys->log("Event Handle is null");
 	}
 }
 
-void EventDispatch::addObject(IDelayHandleItem delayObject, float priority = 0.0f)
+void EventDispatch::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	if (bInDepth())
 	{
-		base.addObject(delayObject, priority);
+		DelayHandleMgrBase::addObject(delayObject, priority);
 	}
 	else
 	{
 		// 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-		m_handleList.Add(delayObject as EventDispatchFunctionObject);
+		m_handleList.Add((EventDispatchFunctionObject*)delayObject);
 	}
 }
 
-void EventDispatch::removeEventHandle(Action<IDispatchObject> handle)
+void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 {
 	int idx = 0;
 	for (idx = 0; idx < m_handleList.Count(); ++idx)
 	{
-		if (UtilApi.isAddressEqual(m_handleList[idx].m_handle, handle))
+		if (m_handleList[idx]->m_handle, handle)
 		{
 			break;
 		}
@@ -73,43 +75,43 @@ void EventDispatch::removeEventHandle(Action<IDispatchObject> handle)
 	}
 	else
 	{
-		Ctx.m_instance.m_logSys.log("Event Handle not exist");
+		g_pLogSys->log("Event Handle not exist");
 	}
 }
 
-void EventDispatch::delObject(IDelayHandleItem delayObject)
+void EventDispatch::delObject(IDelayHandleItem* delayObject)
 {
 	if (bInDepth())
 	{
-		base.delObject(delayObject);
+		DelayHandleMgrBase::delObject(delayObject);
 	}
 	else
 	{
-		if (!m_handleList.Remove(delayObject as EventDispatchFunctionObject))
+		if (!m_handleList.Remove((EventDispatchFunctionObject*)delayObject))
 		{
-			Ctx.m_instance.m_logSys.log("Event Handle not exist");
+			g_pLogSys->log("Event Handle not exist");
 		}
 	}
 }
 
-void EventDispatch::dispatchEvent(IDispatchObject dispatchObject)
+void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 {
 	//try
 	//{
 	incDepth();
 
-	foreach(var handle in m_handleList.list)
+	for(auto handle : m_handleList.getList())
 	{
-		if (!handle.m_bClientDispose)
+		if (!handle->m_bClientDispose)
 		{
-			handle.m_handle(dispatchObject);
+			handle->m_handle(dispatchObject);
 		}
 	}
 
-	if (m_luaCSBridgeDispatch != null)
-	{
-		m_luaCSBridgeDispatch.handleGlobalEvent(m_eventId, dispatchObject);
-	}
+	//if (m_luaCSBridgeDispatch != nullptr)
+	//{
+	//	m_luaCSBridgeDispatch.handleGlobalEvent(m_eventId, dispatchObject);
+	//}
 
 	decDepth();
 	//}
@@ -123,7 +125,7 @@ void EventDispatch::clearEventHandle()
 {
 	if (bInDepth())
 	{
-		foreach(var item in m_handleList.list)
+		for(auto item : m_handleList.getList())
 		{
 			delObject(item);
 		}
@@ -135,12 +137,12 @@ void EventDispatch::clearEventHandle()
 }
 
 // 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-bool EventDispatch::existEventHandle(Action<IDispatchObject> handle)
+bool EventDispatch::existEventHandle(EventDispatchDelegate handle)
 {
 	bool bFinded = false;
-	foreach(var item in m_handleList.list)
+	for(auto item : m_handleList.getList())
 	{
-		if (UtilApi.isAddressEqual(item.m_handle, handle))
+		if (item->m_handle == handle)
 		{
 			bFinded = true;
 			break;
@@ -150,9 +152,9 @@ bool EventDispatch::existEventHandle(Action<IDispatchObject> handle)
 	return bFinded;
 }
 
-void EventDispatch::copyFrom(ResEventDispatch rhv)
+void EventDispatch::copyFrom(EventDispatch& rhv)
 {
-	foreach(var handle in rhv.handleList.list)
+	for(auto handle : rhv.getHandleList().getList())
 	{
 		m_handleList.Add(handle);
 	}

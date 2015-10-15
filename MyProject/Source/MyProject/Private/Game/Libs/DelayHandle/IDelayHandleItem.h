@@ -6,6 +6,7 @@
  */
 class IDelayHandleItem
 {
+public:
 	virtual void setClientDispose() = 0;
     virtual bool getClientDispose() = 0;
 };

@@ -2,6 +2,7 @@
 #define __EventDispatchGroup_H
 
 #include <map>
+#include "EventDispatchDelegate.h"
 
 class EventDispatch;
 
@@ -14,10 +15,10 @@ protected:
 public:
 	EventDispatchGroup();
     // 添加分发器
-	void addEventDispatch(int groupID, EventDispatch disp);
-	void addEventHandle(int groupID, Action<IDispatchObject> handle);
-	void removeEventHandle(int groupID, Action<IDispatchObject> handle);
-	void dispatchEvent(int groupID, IDispatchObject dispatchObject);
+	void addEventDispatch(int groupID, EventDispatch* disp);
+	void addEventHandle(int groupID, EventDispatchDelegate handle);
+	void removeEventHandle(int groupID, EventDispatchDelegate handle);
+	void dispatchEvent(int groupID, IDispatchObject* dispatchObject);
 	void clearAllEventHandle();
 	void clearGroupEventHandle(int groupID);
 };

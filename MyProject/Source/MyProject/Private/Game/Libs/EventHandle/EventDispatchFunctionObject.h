@@ -2,27 +2,18 @@
 #define __EventDispatchFunctionObject_H
 
 #include "IDelayHandleItem.h"
+#include "EventDispatchDelegate.h"
 
 class EventDispatchFunctionObject : public IDelayHandleItem
 {
 public:
 	bool m_bClientDispose;       // 是否释放了资源
-    Action<IDispatchObject> m_handle;
+	EventDispatchDelegate m_handle;
 
-    EventDispatchFunctionObject()
-    {
-        m_bClientDispose = false;
-    }
-
-    void setClientDispose()
-    {
-        m_bClientDispose = true;
-    }
-
-    bool getClientDispose()
-    {
-        return m_bClientDispose;
-    }
+public:
+	EventDispatchFunctionObject();
+	void setClientDispose();
+	bool getClientDispose();
 };
 
 #endif

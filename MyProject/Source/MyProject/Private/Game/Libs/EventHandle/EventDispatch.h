@@ -3,6 +3,7 @@
 
 #include "DelayHandleMgrBase.h"
 #include "MList.h"
+#include "EventDispatchDelegate.h"
 
 class EventDispatchFunctionObject;
 
@@ -19,10 +20,7 @@ protected :
     //LuaCSBridgeDispatch m_luaCSBridgeDispatch;
 
 protected:
-	MList<EventDispatchFunctionObject*>& getHandleList()
-	{
-		return m_handleList;
-	}
+	MList<EventDispatchFunctionObject*>& getHandleList();
 
 public:
 	EventDispatch(int eventId_ = 0);
@@ -30,15 +28,15 @@ public:
 	void setUniqueId(int value);
     //public LuaCSBridgeDispatch luaCSBridgeDispatch;
     // 相同的函数只能增加一次
-	virtual void addEventHandle(Action<IDispatchObject> handle);
-	virtual void addObject(IDelayHandleItem delayObject, float priority = 0.0f) override;
-	void removeEventHandle(Action<IDispatchObject> handle);
-	virtual void delObject(IDelayHandleItem delayObject) override;
-	virtual void dispatchEvent(IDispatchObject dispatchObject);
+	virtual void addEventHandle(EventDispatchDelegate handle);
+	virtual void addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
+	void removeEventHandle(EventDispatchDelegate handle);
+	virtual void delObject(IDelayHandleItem* delayObject) override;
+	virtual void dispatchEvent(IDispatchObject* dispatchObject);
 	void clearEventHandle();
     // 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-	bool existEventHandle(Action<IDispatchObject> handle);
-	void copyFrom(ResEventDispatch rhv);
-}
+	bool existEventHandle(EventDispatchDelegate handle);
+	void copyFrom(EventDispatch& rhv);
+};
 
 #endif

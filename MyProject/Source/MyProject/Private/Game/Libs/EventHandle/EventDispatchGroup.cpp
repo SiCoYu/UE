@@ -1,5 +1,8 @@
 ﻿#include "MyProject.h"
 #include "EventDispatchGroup.h"
+#include "Common.h"
+#include "UtilContainers.h"
+#include "EventDispatch.h"
 
 EventDispatchGroup::EventDispatchGroup()
 {
@@ -7,41 +10,41 @@ EventDispatchGroup::EventDispatchGroup()
 }
 
 // 添加分发器
-void EventDispatchGroup::addEventDispatch(int groupID, EventDispatch disp)
+void EventDispatchGroup::addEventDispatch(int groupID, EventDispatch* disp)
 {
-	if (!m_groupID2DispatchDic.ContainsKey(groupID))
+	if (!UtilMap::ContainsKey(m_groupID2DispatchDic, groupID))
 	{
 		m_groupID2DispatchDic[groupID] = disp;
 	}
 }
 
-void EventDispatchGroup::addEventHandle(int groupID, Action<IDispatchObject> handle)
+void EventDispatchGroup::addEventHandle(int groupID, EventDispatchDelegate handle)
 {
-	m_groupID2DispatchDic[groupID].addEventHandle(handle);
+	m_groupID2DispatchDic[groupID]->addEventHandle(handle);
 }
 
-void EventDispatchGroup::removeEventHandle(int groupID, Action<IDispatchObject> handle)
+void EventDispatchGroup::removeEventHandle(int groupID, EventDispatchDelegate handle)
 {
-	if (m_groupID2DispatchDic.ContainsKey(groupID))
+	if (UtilMap::ContainsKey(m_groupID2DispatchDic, groupID))
 	{
-		m_groupID2DispatchDic[groupID].removeEventHandle(handle);
+		m_groupID2DispatchDic[groupID]->removeEventHandle(handle);
 	}
 	else
 	{
-		Ctx.m_instance.m_logSys.log("Event Dispatch Group not exist");
+		g_pLogSys->log("Event Dispatch Group not exist");
 	}
 }
 
-void EventDispatchGroup::dispatchEvent(int groupID, IDispatchObject dispatchObject)
+void EventDispatchGroup::dispatchEvent(int groupID, IDispatchObject* dispatchObject)
 {
 	m_bInLoop = true;
-	if (m_groupID2DispatchDic.ContainsKey(groupID))
+	if (UtilMap::ContainsKey(m_groupID2DispatchDic, groupID))
 	{
-		m_groupID2DispatchDic[groupID].dispatchEvent(dispatchObject);
+		m_groupID2DispatchDic[groupID]->dispatchEvent(dispatchObject);
 	}
 	else
 	{
-		Ctx.m_instance.m_logSys.log("Event Dispatch Group not exist");
+		g_pLogSys->log("Event Dispatch Group not exist");
 	}
 	m_bInLoop = false;
 }
@@ -50,16 +53,17 @@ void EventDispatchGroup::clearAllEventHandle()
 {
 	if (!m_bInLoop)
 	{
-		foreach(EventDispatch dispatch in m_groupID2DispatchDic.Values)
+		// map for 语句
+		for(auto dispatch : m_groupID2DispatchDic)
 		{
-			dispatch.clearEventHandle();
+			dispatch.second->clearEventHandle();
 		}
 
-		m_groupID2DispatchDic.Clear();
+		m_groupID2DispatchDic.clear();
 	}
 	else
 	{
-		Ctx.m_instance.m_logSys.log("looping cannot delete element");
+		g_pLogSys->log("looping cannot delete element");
 	}
 }
 
@@ -67,18 +71,18 @@ void EventDispatchGroup::clearGroupEventHandle(int groupID)
 {
 	if (!m_bInLoop)
 	{
-		if (m_groupID2DispatchDic.ContainsKey(groupID))
+		if (UtilMap::ContainsKey(m_groupID2DispatchDic, groupID))
 		{
-			m_groupID2DispatchDic[groupID].clearEventHandle();
-			m_groupID2DispatchDic.Remove(groupID);
+			m_groupID2DispatchDic[groupID]->clearEventHandle();
+			UtilMap::Remove(m_groupID2DispatchDic, groupID);
 		}
 		else
 		{
-			Ctx.m_instance.m_logSys.log("Event Dispatch Group not exist");
+			g_pLogSys->log("Event Dispatch Group not exist");
 		}
 	}
 	else
 	{
-		Ctx.m_instance.m_logSys.log("looping cannot delete element");
+		g_pLogSys->log("looping cannot delete element");
 	}
 }

@@ -3,11 +3,13 @@
 
 #include "EventDispatch.h"
 
+class IDispatchObject;
+
 class ResEventDispatch : public EventDispatch
 {
 public:
 	ResEventDispatch();
-	virtual void dispatchEvent(IDispatchObject dispatchObject) override
+	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;
 };
 
 #endif
