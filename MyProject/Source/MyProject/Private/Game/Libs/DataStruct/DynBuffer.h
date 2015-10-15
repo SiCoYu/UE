@@ -8,6 +8,7 @@
 /**
  * @brief 动态增长缓冲区，不分类型，就是 byte 缓冲区
  */
+template <class T>
 class DynBuffer
 {
 	friend class ClientBuffer;
@@ -16,13 +17,13 @@ public:
 	std::size_t m_iCapacity;
 	std::size_t m_iMaxCapacity;
 	std::size_t m_size;
-	char* m_buff;
+	T* m_buff;
 
 public:
 	DynBuffer(size_t initCapacity = BufferCV::INIT_CAPACITY, size_t maxCapacity = BufferCV::MAX_CAPACITY);
 	~DynBuffer();
 
-	char* getBuff();
+	T* getBuff();
 	void setBuff(char* value, uint32 len);
 
 	std::size_t getMaxCapacity();

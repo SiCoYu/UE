@@ -97,7 +97,7 @@ MsgBuffer* ClientBuffer::getRawBuffer()
 
 void ClientBuffer::SetRevBufferSize(int32 size)
 {
-	m_dynBuff = new DynBuffer(size);
+	m_dynBuff = new DynBuffer<char>(size);
 }
 
 void ClientBuffer::moveDyn2Raw()

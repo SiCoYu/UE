@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#ifndef __MsgRouteHandleBase_H
+#define __MsgRouteHandleBase_H
 
-namespace SDK.Lib
+#include <map>
+#include "MsgRouteDelegate.h"
+
+class MsgRouteBase;
+
+class MsgRouteHandleBase
 {
-    public class MsgRouteHandleBase
-    {
-        public Dictionary<int, Action<MsgRouteBase>> m_id2HandleDic = new Dictionary<int, Action<MsgRouteBase>>();
+public:
+	std::map<int, MsgRouteDelegate> m_id2HandleDic;
 
-        public virtual void handleMsg(MsgRouteBase msg)
-        {
-            if (m_id2HandleDic.ContainsKey((int)msg.m_msgID))
-            {
-                m_id2HandleDic[(int)msg.m_msgID](msg);
-            }
-            else
-            {
-                Ctx.m_instance.m_logSys.log(string.Format(Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem1), (int)msg.m_msgID));
-            }
-        }
-    }
-}
+public:
+	virtual void handleMsg(MsgRouteBase* msg);
+};
+
+#endif

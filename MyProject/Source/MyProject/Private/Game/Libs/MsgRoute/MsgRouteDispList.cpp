@@ -1,35 +1,30 @@
-﻿using System.Collections.Generic;
+﻿#include "MyProject.h"
+#include "MsgRouteDispList.h"
+#include "MsgRouteBase.h"
+#include "MsgRouteDispHandle.h"
 
-namespace SDK.Lib
+void MsgRouteDispList::addOneDisp(MsgRouteDispHandle* disp)
 {
-    public class MsgRouteDispList
-    {
-        protected List<MsgRouteDispHandle> m_dispList = new List<MsgRouteDispHandle>();
+	if (m_dispList.IndexOf(disp) == -1)
+	{
+		m_dispList.Add(disp);
+	}
+}
 
-        public void addOneDisp(MsgRouteDispHandle disp)
-        {
-            if(m_dispList.IndexOf(disp) == -1)
-            {
-                m_dispList.Add(disp);
-            }
-        }
+void MsgRouteDispList::removeOneDisp(MsgRouteDispHandle* disp)
+{
+	if (m_dispList.IndexOf(disp) != -1)
+	{
+		m_dispList.Remove(disp);
+	}
+}
 
-        public void removeOneDisp(MsgRouteDispHandle disp)
-        {
-            if(m_dispList.IndexOf(disp) != -1)
-            {
-                m_dispList.Remove(disp);
-            }
-        }
+void MsgRouteDispList::handleMsg(MsgRouteBase* msg)
+{
+	for (auto item : m_dispList.getList())
+	{
+		item->handleMsg(msg);
+	}
 
-        public void handleMsg(MsgRouteBase msg)
-        {
-            foreach(var item in m_dispList)
-            {
-                item.handleMsg(msg);
-            }
-
-            Ctx.m_instance.m_poolSys.deleteObj(msg);
-        }
-    }
+	//Ctx.m_instance.m_poolSys.deleteObj(msg);
 }

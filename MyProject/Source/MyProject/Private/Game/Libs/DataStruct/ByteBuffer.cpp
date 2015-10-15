@@ -12,7 +12,7 @@ void ByteBufferException::PrintPosError() const
 // constructor
 ByteBuffer::ByteBuffer(size_t initCapacity, size_t maxCapacity) : m_pos(0)
 {
-	m_dynBuff = new DynBuffer(initCapacity, maxCapacity);
+	m_dynBuff = new DynBuffer<char>(initCapacity, maxCapacity);
 	m_sysEndian = eSys_LITTLE_ENDIAN;		// 默认是小端
 }
 

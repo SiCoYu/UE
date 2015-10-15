@@ -3,40 +3,47 @@
 #include "DynBufResizePolicy.h"
 #include <string.h>
 
-DynBuffer::DynBuffer(size_t initCapacity, size_t maxCapacity)
+template <class T>
+DynBuffer<T>::DynBuffer(size_t initCapacity, size_t maxCapacity)
 	: m_iCapacity(initCapacity), m_iMaxCapacity(maxCapacity)
 {
 	m_size = 0;
 	m_buff = new char[m_iCapacity];
 }
 
-DynBuffer::~DynBuffer()
+template <class T>
+DynBuffer<T>::~DynBuffer()
 {
 	delete[] m_buff;
 }
 
-char* DynBuffer::getBuff()
+template <class T>
+T* DynBuffer<T>::getBuff()
 {
 	return m_buff;
 }
 
-void DynBuffer::setBuff(char* value, uint32 len)
+template <class T>
+void DynBuffer<T>::setBuff(char* value, uint32 len)
 {
 	m_buff = value;
 	m_iCapacity = len;
 }
 
-std::size_t DynBuffer::getMaxCapacity()
+template <class T>
+std::size_t DynBuffer<T>::getMaxCapacity()
 {
 	return m_iMaxCapacity;
 }
 
-size_t DynBuffer::getCapacity()
+template <class T>
+size_t DynBuffer<T>::getCapacity()
 {
 	return m_iCapacity;
 }
 
-void DynBuffer::setCapacity(std::size_t value)
+template <class T>
+void DynBuffer<T>::setCapacity(std::size_t value)
 {
 	if (value == m_iCapacity)
 	{
@@ -55,11 +62,13 @@ void DynBuffer::setCapacity(std::size_t value)
 	m_iCapacity = value;
 }
 
-std::size_t DynBuffer::getSize()
+template <class T>
+std::size_t DynBuffer<T>::getSize()
 {
 	return m_size;
 }
 
+template <class T>
 void DynBuffer::setSize(std::size_t value)
 {
 	if (m_size > this->getCapacity())
@@ -82,7 +91,8 @@ void DynBuffer::setSize(std::size_t value)
 //	m_size = len;
 //}
 
-void DynBuffer::extendDeltaCapicity(uint32 delta)
+template <class T>
+void DynBuffer<T>::extendDeltaCapicity(uint32 delta)
 {
 	this->setCapacity(DynBufResizePolicy::getCloseSize(this->getSize() + delta, this->getCapacity(), this->getMaxCapacity()));
 }
@@ -90,7 +100,8 @@ void DynBuffer::extendDeltaCapicity(uint32 delta)
 /**
 *@brief 能否添加 num 长度的数据
 */
-bool DynBuffer::canAddData(uint32 num)
+template <class T>
+bool DynBuffer<T>::canAddData(uint32 num)
 {
 	if (m_iCapacity - m_size >= num)
 	{

@@ -1,48 +1,38 @@
-﻿namespace SDK.Lib
+﻿#ifndef __MsgRoute_H
+#define __MsgRoute_H
+
+#include "MsgRouteBase.h"
+#include <string>
+
+class SocketOpenedMR : public MsgRouteBase
 {
-    public class SocketOpenedMR : MsgRouteBase
-    {
-        public SocketOpenedMR()
-            : base(MsgRouteID.eMRIDSocketOpened)
-        {
+public:
+	SocketOpenedMR();
+};
 
-        }
-    }
+class SocketCloseedMR : public MsgRouteBase
+{
+public:
+	SocketCloseedMR();
+};
 
-    public class SocketCloseedMR : MsgRouteBase
-    {
-        public SocketCloseedMR()
-            : base(MsgRouteID.eMRIDSocketClosed)
-        {
+class LoadedWebResMR : MsgRouteBase
+{
+    //public ITask m_task;
 
-        }
-    }
+public:
+	LoadedWebResMR();
+	virtual void resetDefault() override;
+};
 
-    public class LoadedWebResMR : MsgRouteBase
-    {
-        public ITask m_task;
+// 线程日志
+class ThreadLogMR : public MsgRouteBase
+{
+public:
+	std::string m_logSys;
 
-        public LoadedWebResMR()
-            : base(MsgRouteID.eMRIDLoadedWebRes)
-        {
+public:
+	ThreadLogMR();
+};
 
-        }
-
-        override public void resetDefault()
-        {
-            m_task = null;
-        }
-    }
-
-    // 线程日志
-    public class ThreadLogMR : MsgRouteBase
-    {
-        public string m_logSys;
-
-        public ThreadLogMR()
-            : base(MsgRouteID.eMRIDThreadLog)
-        {
-
-        }
-    }
-}
+#endif

@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#include "MyProject.h"
+#include "MsgRouteHandleBase.h"
+#include "MsgRouteBase.h"
+#include "UtilContainers.h"
+#include "UtilStr.h"
+#include "Common.h"
 
-namespace SDK.Lib
+void MsgRouteHandleBase::handleMsg(MsgRouteBase* msg)
 {
-    public class MsgRouteHandleBase
-    {
-        public Dictionary<int, Action<MsgRouteBase>> m_id2HandleDic = new Dictionary<int, Action<MsgRouteBase>>();
-
-        public virtual void handleMsg(MsgRouteBase msg)
-        {
-            if (m_id2HandleDic.ContainsKey((int)msg.m_msgID))
-            {
-                m_id2HandleDic[(int)msg.m_msgID](msg);
-            }
-            else
-            {
-                Ctx.m_instance.m_logSys.log(string.Format(Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem1), (int)msg.m_msgID));
-            }
-        }
-    }
+	int key = ((int)msg->m_msgID);
+	if (UtilMap::ContainsKey(m_id2HandleDic, key))
+	{
+		m_id2HandleDic[key](msg);
+	}
+	else
+	{
+		//g_pLogSys->log(UtilStr::Format(Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem1), (int)msg.m_msgID));
+	}
 }
