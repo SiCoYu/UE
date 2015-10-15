@@ -1,5 +1,7 @@
 ﻿#include "MyProject.h"
 #include "TickMgr.h"
+#include "ITickedObject.h"
+#include "TickProcessObject.h"
 
 TickMgr::TickMgr()
 {
@@ -8,38 +10,38 @@ TickMgr::TickMgr()
 
 void TickMgr::addTick(ITickedObject* tickObj, float priority = 0.0f)
 {
-	addObject(tickObj as IDelayHandleItem, priority);
+	addObject((IDelayHandleItem*)tickObj, priority);
 }
 
 void TickMgr::addObject(IDelayHandleItem* delayObject, float priority = 0.0f)
 {
 	if (bInDepth())
 	{
-		base.addObject(delayObject, priority);
+		DelayHandleMgrBase::addObject(delayObject, priority);
 	}
 	else
 	{
 		int position = -1;
 		for (int i = 0; i < m_tickLst.Count; i++)
 		{
-			if (m_tickLst[i] == null)
+			if (m_tickLst[i] == nullptr)
 				continue;
 
-			if (m_tickLst[i].m_tickObject == delayObject)
+			if (m_tickLst[i]->m_tickObject == delayObject)
 			{
 				return;
 			}
 
-			if (m_tickLst[i].m_priority < priority)
+			if (m_tickLst[i]->m_priority < priority)
 			{
 				position = i;
 				break;
 			}
 		}
 
-		TickProcessObject processObject = new TickProcessObject();
-		processObject.m_tickObject = delayObject as ITickedObject;
-		processObject.m_priority = priority;
+		TickProcessObject* processObject = new TickProcessObject();
+		processObject->m_tickObject = (ITickedObject*)delayObject;
+		processObject->m_priority = priority;
 
 		if (position < 0 || position >= m_tickLst.Count)
 		{
@@ -56,13 +58,13 @@ void TickMgr::delObject(IDelayHandleItem* delayObject)
 {
 	if (bInDepth())
 	{
-		base.delObject(delayObject);
+		DelayHandleMgrBase::delObject(delayObject);
 	}
 	else
 	{
-		foreach(TickProcessObject item in m_tickLst)
+		for(TickProcessObject* item : m_tickLst.getList())
 		{
-			if (UtilApi.isAddressEqual(item.m_tickObject, delayObject))
+			if (item->m_tickObject == delayObject)
 			{
 				m_tickLst.Remove(item);
 				break;
@@ -75,11 +77,11 @@ void TickMgr::Advance(float delta)
 {
 	incDepth();
 
-	foreach(TickProcessObject tk in m_tickLst)
+	for(TickProcessObject* tk : m_tickLst.getList())
 	{
-		if (!(tk.m_tickObject as IDelayHandleItem).getClientDispose())
+		if (!((IDelayHandleItem*)(tk->m_tickObject)).getClientDispose())
 		{
-			(tk.m_tickObject as ITickedObject).onTick(delta);
+			((ITickedObject*)(tk.m_tickObject)).onTick(delta);
 		}
 	}
 

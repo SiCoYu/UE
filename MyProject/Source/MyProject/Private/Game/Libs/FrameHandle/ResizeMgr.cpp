@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "ResizeMgr.h"
+#include "IResizeObject.h"
 
 void ResizeMgr::addResizeObject(IResizeObject* obj)
 {
@@ -8,8 +9,8 @@ void ResizeMgr::addResizeObject(IResizeObject* obj)
 
 void ResizeMgr::onResize(int viewWidth, int viewHeight)
 {
-	foreach(IResizeObject resizeObj in m_ResizeLst)
+	for(IResizeObject* resizeObj : m_ResizeLst.getList())
 	{
-		resizeObj.onResize(viewWidth, viewHeight);
+		resizeObj->onResize(viewWidth, viewHeight);
 	}
 }

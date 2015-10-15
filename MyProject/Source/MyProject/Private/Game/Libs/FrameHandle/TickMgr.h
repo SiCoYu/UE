@@ -5,6 +5,7 @@
 #include "MList.h"
 
 class TickProcessObject;
+class ITickedObject;
 
 /**
 * @brief 心跳管理器

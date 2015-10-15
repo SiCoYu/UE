@@ -1,23 +1,26 @@
 ﻿#include "MyProject.h"
 #include "TimerMgr.h"
+#include "UtilContainers.h"
+#include "TimerItemBase.h"
 
 TimerMgr::TimerMgr()
 {
 
 }
 
-void TimerMgr::addObject(IDelayHandleItem* delayObject, float priority = 0.0f)
+void TimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	// 检查当前是否已经在队列中
-	if (m_timerLists.IndexOf((TimerItemBase*)delayObject) == -1)
+	TimerItemBase* timerItemBase = (TimerItemBase*)delayObject;
+	if (UtilVector::IndexOf(m_timerLists.getList(), timerItemBase) == -1)
 	{
 		if (bInDepth())
 		{
-			base.addObject(delayObject, priority);
+			DelayHandleMgrBase::addObject(delayObject, priority);
 		}
 		else
 		{
-			m_timerLists.Add(delayObject as TimerItemBase);
+			m_timerLists.Add((TimerItemBase*)delayObject);
 		}
 	}
 }
@@ -25,20 +28,21 @@ void TimerMgr::addObject(IDelayHandleItem* delayObject, float priority = 0.0f)
 void TimerMgr::delObject(IDelayHandleItem* delayObject)
 {
 	// 检查当前是否在队列中
-	if (m_timerLists.IndexOf((TimerItemBase*)delayObject) != -1)
+	TimerItemBase* timerItemBase = (TimerItemBase*)delayObject;
+	if (UtilVector::IndexOf(m_timerLists.getList(), timerItemBase) != -1)
 	{
-		(delayObject as TimerItemBase).m_disposed = true;
+		((TimerItemBase*)delayObject)->m_disposed = true;
 		if (bInDepth())
 		{
-			base.delObject(delayObject);
+			DelayHandleMgrBase::delObject(delayObject);
 		}
 		else
 		{
-			foreach(TimerItemBase item in m_timerLists)
+			for(TimerItemBase* item : m_timerLists.getList())
 			{
-				if (UtilApi.isAddressEqual(item, delayObject))
+				if (item == delayObject)
 				{
-					m_timerLists.Remove(item);
+					UtilVector::Remove(m_timerLists.getList(), item);
 					break;
 				}
 			}
@@ -50,14 +54,14 @@ void TimerMgr::Advance(float delta)
 {
 	incDepth();
 
-	foreach(TimerItemBase timerItem in m_timerLists)
+	for(TimerItemBase* timerItem : m_timerLists.getList())
 	{
-		if (!timerItem.getClientDispose())
+		if (!timerItem->getClientDispose())
 		{
-			timerItem.OnTimer(delta);
+			timerItem->OnTimer(delta);
 		}
 
-		if (timerItem.m_disposed)        // 如果已经结束
+		if (timerItem->m_disposed)        // 如果已经结束
 		{
 			delObject(timerItem);
 		}

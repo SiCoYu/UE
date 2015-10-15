@@ -35,7 +35,7 @@ void FrameTimerItem::OnFrameTimer()
 		{
 			m_curLeftFrame = 0;
 
-			if (m_timerDisp != null)
+			if (!m_timerDisp.empty())
 			{
 				m_timerDisp(this);
 			}
@@ -46,7 +46,7 @@ void FrameTimerItem::OnFrameTimer()
 		if (m_curFrame == m_totalFrameCount)
 		{
 			m_disposed = true;
-			if (m_timerDisp != null)
+			if (!m_timerDisp.empty())
 			{
 				m_timerDisp(this);
 			}
@@ -56,7 +56,7 @@ void FrameTimerItem::OnFrameTimer()
 			if (m_curLeftFrame == m_internal)
 			{
 				m_curLeftFrame = 0;
-				if (m_timerDisp != null)
+				if (!m_timerDisp.empty())
 				{
 					m_timerDisp(this);
 				}

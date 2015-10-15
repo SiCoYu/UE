@@ -1,14 +1,16 @@
 ﻿#ifndef __TickProcessObject_H
 #define __TickProcessObject_H
 
-public class TickProcessObject
+class ITickedObject;
+
+class TickProcessObject
 {
 public:
-	ITickedObject m_tickObject = null;
-	float m_priority = 0.0f;
+	ITickedObject* m_tickObject;
+	float m_priority;
 
 public:
 	TickProcessObject();
-}
+};
 
 #endif

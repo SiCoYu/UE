@@ -1,6 +1,7 @@
 ﻿#ifndef __TimerMgr_H
 #define __TimerMgr_H
 
+#include "DelayHandleMgrBase.h"
 #include "MList.h"
 
 class TimerItemBase;
@@ -9,7 +10,7 @@ class IDelayHandleItem;
 /**
 * @brief 定时器管理器
 */
-public class TimerMgr : DelayHandleMgrBase
+class TimerMgr : DelayHandleMgrBase
 {
 protected:
 	MList<TimerItemBase*> m_timerLists;     // 当前所有的定时器列表

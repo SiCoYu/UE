@@ -1,44 +1,49 @@
 ﻿#include "MyProject.h"
 #include "FrameTimerMgr.h"
+#include "IDelayHandleItem.h"
+#include "FrameTimerItem.h"
+#include "UtilContainers.h"
 
 FrameTimerMgr::FrameTimerMgr()
 {
 
 }
 
-void FrameTimerMgr::addObject(IDelayHandleItem delayObject, float priority = 0.0f)
+void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	// 检查当前是否已经在队列中
-	if (m_timerLists.IndexOf(delayObject as FrameTimerItem) == -1)
+	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
+	if (UtilVector::IndexOf(m_timerLists, frameTimerItem) == -1)
 	{
 		if (bInDepth())
 		{
-			base.addObject(delayObject, priority);
+			DelayHandleMgrBase::addObject(delayObject, priority);
 		}
 		else
 		{
-			m_timerLists.Add(delayObject as FrameTimerItem);
+			m_timerLists.push_back((FrameTimerItem*)delayObject);
 		}
 	}
 }
 
-void FrameTimerMgr::delObject(IDelayHandleItem delayObject)
+void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
 {
 	// 检查当前是否在队列中
-	if (m_timerLists.IndexOf(delayObject as FrameTimerItem) != -1)
+	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
+	if (UtilVector::IndexOf(m_timerLists, frameTimerItem) != -1)
 	{
-		(delayObject as FrameTimerItem).m_disposed = true;
+		((FrameTimerItem*)delayObject)->m_disposed = true;
 		if (bInDepth())
 		{
-			base.addObject(delayObject);
+			DelayHandleMgrBase::addObject(delayObject);
 		}
 		else
 		{
-			foreach(FrameTimerItem item in m_timerLists)
+			for(FrameTimerItem* item : m_timerLists)
 			{
-				if (UtilApi.isAddressEqual(item, delayObject))
+				if (item == delayObject)
 				{
-					m_timerLists.Remove(item);
+					UtilVector::Remove(m_timerLists, item);
 					break;
 				}
 			}
@@ -50,13 +55,13 @@ void FrameTimerMgr::Advance(float delta)
 {
 	incDepth();
 
-	foreach(FrameTimerItem timerItem in m_timerLists)
+	for(FrameTimerItem* timerItem : m_timerLists)
 	{
-		if (!timerItem.getClientDispose())
+		if (!timerItem->getClientDispose())
 		{
-			timerItem.OnFrameTimer();
+			timerItem->OnFrameTimer();
 		}
-		if (timerItem.m_disposed)
+		if (timerItem->m_disposed)
 		{
 			delObject(timerItem);
 		}

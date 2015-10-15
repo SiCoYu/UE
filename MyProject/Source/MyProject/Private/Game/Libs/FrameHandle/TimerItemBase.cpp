@@ -42,7 +42,7 @@ void TimerItemBase::OnTimer(float delta)
 void TimerItemBase::disposeAndDisp()
 {
 	m_disposed = true;
-	if (m_timerDisp != null)
+	if (!m_timerDisp.empty())
 	{
 		m_timerDisp(this);
 	}
@@ -54,7 +54,7 @@ void TimerItemBase::checkAndDisp()
 	{
 		m_curLeftTimer = m_curLeftTimer - m_internal;
 
-		if (m_timerDisp != null)
+		if (!m_timerDisp.empty())
 		{
 			m_timerDisp(this);
 		}

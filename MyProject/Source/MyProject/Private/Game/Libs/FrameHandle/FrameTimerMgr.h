@@ -17,8 +17,8 @@ protected:
 
 public:
 	FrameTimerMgr();
-	virtual void addObject(IDelayHandleItem delayObject, float priority = 0.0f) override;
-	virtual void delObject(IDelayHandleItem delayObject) override;
+	virtual void addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
+	virtual void delObject(IDelayHandleItem* delayObject) override;
 	void Advance(float delta);
 };
 
