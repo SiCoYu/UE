@@ -16,7 +16,7 @@ ResLoadResultNotify::~ResLoadResultNotify()
 	delete m_loadResEventDispatch;
 }
 
-ResLoadState ResLoadResultNotify::getResLoadState()
+ResLoadState* ResLoadResultNotify::getResLoadState()
 {
 	return m_resLoadState;
 }

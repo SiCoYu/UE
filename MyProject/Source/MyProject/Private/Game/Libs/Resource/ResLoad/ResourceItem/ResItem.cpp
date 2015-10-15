@@ -1,178 +1,138 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿#include "MyProject.h"
+#include "ResItem.h"
+#include "RefCountResLoadResultNotify.h"
 
-namespace SDK.Lib
+ResItem::ResItem()
 {
-    public class ResItem : IDispatchObject
-    {
-        protected ResPackType m_resPackType;    // 资源打包类型
-        protected ResLoadType m_resLoadType;    // 资源加载类型
+	m_refCountResLoadResultNotify = new RefCountResLoadResultNotify();
+}
 
-        protected string m_path;                // 完整的目录
-        protected string m_pathNoExt;           // 不包括扩展名字的路径
-        protected string m_extName;             // 扩展名字
+ResPackType ResItem::getResPackType()
+{
+	return m_resPackType;
+}
 
-        protected bool m_resNeedCoroutine;     // 资源是否需要协同程序
-        protected RefCountResLoadResultNotify m_refCountResLoadResultNotify;
+ResPackType ResItem::getResPackType()
+{
+	return m_resPackType;
+}
 
-        public ResItem()
-        {
-            m_refCountResLoadResultNotify = new RefCountResLoadResultNotify();
-        }
+void ResItem::setResPackType(ResPackType value)
+{
+	m_resPackType = value;
+}
 
-        public ResPackType GetResPackType()
-        {
-            return m_resPackType;
-        }
+std::string getPath()
+{
+	return m_path;
+}
 
-        public ResPackType resPackType
-        {
-            get
-            {
-                return m_resPackType;
-            }
-            set
-            {
-                m_resPackType = value;
-            }
-        }
+void setPath(std::string value)
+{
+	m_path = value;
+}
 
-        public string path
-        {
-            get
-            {
-                return m_path;
-            }
-            set
-            {
-                m_path = value;
-            }
-        }
+std::string getPathNoExt()
+{
+	return m_pathNoExt;
+}
 
-        public string pathNoExt
-        {
-            get
-            {
-                return m_pathNoExt;
-            }
-            set
-            {
-                m_pathNoExt = value;
-            }
-        }
+void setPathNoExt(std::string value)
+{
+	m_pathNoExt = value;
+}
 
-        public string extName
-        {
-            get
-            {
-                return m_extName;
-            }
-            set
-            {
-                m_extName = value;
-            }
-        }
+std::string getExtName()
+{
+	return m_extName;
+}
 
-        public string GetPath()
-        {
-            return m_path;
-        }
+void setExtName(std::string value)
+{
+	m_extName = value;
+}
 
-        public bool resNeedCoroutine
-        {
-            get
-            {
-                return m_resNeedCoroutine;
-            }
-            set
-            {
-                m_resNeedCoroutine = value;
-            }
-        }
+std::string getPath()
+{
+	return m_path;
+}
 
-        public ResLoadType resLoadType
-        {
-            get
-            {
-                return m_resLoadType;
-            }
-            set
-            {
-                m_resLoadType = value;
-            }
-        }
+ResLoadType getResLoadType()
+{
+	return m_resLoadType;
+}
 
-        public RefCountResLoadResultNotify refCountResLoadResultNotify
-        {
-            get
-            {
-                return m_refCountResLoadResultNotify;
-            }
-            set
-            {
-                m_refCountResLoadResultNotify = value;
-            }
-        }
+void setResLoadType(ResLoadType value)
+{
+	m_resLoadType = value;
+}
 
-        public virtual string getPrefabName()         // 只有 Prefab 资源才实现这个函数
-        {
-            return "";
-        }
+RefCountResLoadResultNotify* getRefCountResLoadResultNotify()
+{
+	return m_refCountResLoadResultNotify;
+}
 
-        virtual public void init(LoadItem item)
-        {
-            m_refCountResLoadResultNotify.resLoadState.setSuccessLoaded();
-        }
+void setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value)
+{
+	m_refCountResLoadResultNotify = value;
+}
 
-        virtual public void failed(LoadItem item)
-        {
-            m_refCountResLoadResultNotify.resLoadState.setFailed();
-            m_refCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
-        }
+virtual std::string getPrefabName()         // 只有 Prefab 资源才实现这个函数
+{
+	return "";
+}
 
-        virtual public void reset()
-        {
-            m_path = "";
-            m_refCountResLoadResultNotify.resLoadState.reset();
-            m_refCountResLoadResultNotify.refCount.refNum = 0;
-        }
+virtual void init(LoadItem* item)
+{
+	m_refCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
+}
 
-        // 卸载
-        virtual public void unload()
-        {
+virtual void failed(LoadItem* item)
+{
+	m_refCountResLoadResultNotify->getResLoadState()->setFailed();
+	m_refCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
+}
 
-        }
+virtual void reset()
+{
+	m_path = "";
+	m_refCountResLoadResultNotify->getResLoadState()->reset();
+	m_refCountResLoadResultNotify->getRefCount()->setRefNum(0);
+}
 
-        virtual public GameObject InstantiateObject(string resName)
-        {
-            return null;
-        }
+// 卸载
+virtual void unload()
+{
 
-        virtual public UnityEngine.Object getObject(string resName)
-        {
-            return null;
-        }
+}
 
-        virtual public byte[] getBytes(string resName)            // 获取字节数据
-        {
-            return null;
-        }
+virtual GameObject InstantiateObject(std::string resName)
+{
+	return nullptr;
+}
 
-        virtual public string getText(string resName)
-        {
-            return null;
-        }
+virtual UnityEngine.Object getObject(string resName)
+{
+	return nullptr;
+}
 
-        public void copyFrom(ResItem rhv)
-        {
-            m_resPackType = rhv.m_resPackType;
-            m_resLoadType = rhv.m_resLoadType;
-            m_path = rhv.m_path;
-            m_pathNoExt = rhv.m_pathNoExt;
-            m_extName = rhv.m_extName;
-            m_resNeedCoroutine = rhv.m_resNeedCoroutine;
-            m_refCountResLoadResultNotify.copyFrom(rhv.refCountResLoadResultNotify);
-        }
-    }
+virtual byte[] getBytes(string resName)            // 获取字节数据
+{
+	return null;
+}
+
+virtual string getText(string resName)
+{
+	return null;
+}
+
+void copyFrom(ResItem rhv)
+{
+	m_resPackType = rhv.m_resPackType;
+	m_resLoadType = rhv.m_resLoadType;
+	m_path = rhv.m_path;
+	m_pathNoExt = rhv.m_pathNoExt;
+	m_extName = rhv.m_extName;
+	m_resNeedCoroutine = rhv.m_resNeedCoroutine;
+	m_refCountResLoadResultNotify.copyFrom(rhv.refCountResLoadResultNotify);
 }

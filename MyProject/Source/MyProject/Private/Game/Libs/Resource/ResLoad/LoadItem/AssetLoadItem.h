@@ -2,6 +2,7 @@
 #define __FileLoadItem_H
 
 #include "LoadItem.h"
+#include "CoreUObject.h"	// Class 
 
 /**
  * @brief 从 uasset 扩展名的本地 Package 中加载资源
@@ -9,76 +10,64 @@
 class AssetLoadItem : public LoadItem
 {
 protected:
-	UnityEngine.Object m_prefabObj;
+	UClass* m_resObj = nullptr;		// uasset 类型的资源
 
-    public UnityEngine.Object prefabObj
+protected:
+	//void loadFromDefaultAssetBundle()
+	//{
+	//	m_prefabObj = Resources.Load<Object>(m_pathNoExt);
+
+	//	if (m_prefabObj != null)
+	//	{
+	//		nonRefCountResLoadResultNotify.resLoadState.setSuccessLoaded();
+	//	}
+	//	else
+	//	{
+	//		nonRefCountResLoadResultNotify.resLoadState.setFailed();
+	//	}
+	//	nonRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
+	//}
+
+	//IEnumerator loadFromDefaultAssetBundleByCoroutine()
+	//{
+	//	ResourceRequest req = Resources.LoadAsync<Object>(m_pathNoExt);
+	//	yield return req;
+
+	//	if (req.asset != null && req.isDone)
+	//	{
+	//		m_prefabObj = req.asset;
+	//		nonRefCountResLoadResultNotify.resLoadState.setSuccessLoaded();
+	//	}
+	//	else
+	//	{
+	//		nonRefCountResLoadResultNotify.resLoadState.setFailed();
+	//	}
+
+	//	nonRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
+	//}
+
+public:
+	AssetLoadItem();
+
+	UClass* getResObj()
     {
-        get
-        {
-            return m_prefabObj;
-        }
-        set
-        {
-            m_prefabObj = value;
-        }
+		return m_resObj;
     }
 
-    override public void load()
+	void setResObj(UClass* value)
     {
-        base.load();
-        if (m_loadNeedCoroutine)
-        {
-            Ctx.m_instance.m_coroutineMgr.StartCoroutine(loadFromDefaultAssetBundleByCoroutine());
-        }
-        else
-        {
-            loadFromDefaultAssetBundle();
-        }
+		m_resObj = value;
+    }
+
+	virtual void load() override
+    {
+		LoadItem::load();
     }
 
     // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
-    override public void unload()
+	virtual void unload() override
     {
-        if (m_prefabObj != null)
-        {
-            UtilApi.DestroyImmediate(m_prefabObj, true);
-            m_prefabObj = null;
-        }
-        base.unload();
-    }
-
-    // Resources.Load就是从一个缺省打进程序包里的AssetBundle里加载资源，而一般AssetBundle文件需要你自己创建，运行时 动态加载，可以指定路径和来源的。
-    protected void loadFromDefaultAssetBundle()
-    {
-        m_prefabObj = Resources.Load<Object>(m_pathNoExt);
-
-        if (m_prefabObj != null)
-        {
-            nonRefCountResLoadResultNotify.resLoadState.setSuccessLoaded();
-        }
-        else
-        {
-            nonRefCountResLoadResultNotify.resLoadState.setFailed();
-        }
-        nonRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
-    }
-
-    protected IEnumerator loadFromDefaultAssetBundleByCoroutine()
-    {
-        ResourceRequest req = Resources.LoadAsync<Object>(m_pathNoExt);
-        yield return req;
-
-        if (req.asset != null && req.isDone)
-        {
-            m_prefabObj = req.asset;
-            nonRefCountResLoadResultNotify.resLoadState.setSuccessLoaded();
-        }
-        else
-        {
-            nonRefCountResLoadResultNotify.resLoadState.setFailed();
-        }
-
-        nonRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
+		LoadItem::unload();
     }
 };
 
