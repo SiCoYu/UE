@@ -58,6 +58,12 @@ void UtilVector::Insert(std::vector<T>& vec, int index, T& item)
 	}
 }
 
+template<class T>
+void UtilVector::Add(std::vector<T>& vec, T& item)
+{
+	vec.push_back(item);
+}
+
 //================== list ÇøÓò =========================
 template<class T>
 bool UtilList::Remove(std::list<T>& list, T& item)

@@ -2,13 +2,15 @@
 #include "Ctx.h"
 #include "EngineData.h"
 #include "INetMgr.h"
-#include "UIManager.h"
+#include "UIMgr.h"
 #include "EngineApi.h"
 #include "NetMgr.h"
 #include "TableSys.h"
 #include "ShareData.h"
 #include "NetDispList.h"
 #include "LogSys.h"
+#include "Config.h"
+#include "LocalFileSys.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -41,6 +43,8 @@ Ctx::~Ctx()
 	delete m_pLogSys;
 	delete m_pNetDispList;
 	delete m_pShareData;
+	delete m_pConfig;
+	delete m_pLocalFileSys;
 }
 
 void Ctx::init()
@@ -56,6 +60,8 @@ void Ctx::init()
 	m_uiMgr = new UIManager();
 	m_engineApi = new EngineApi();
 	m_pTableSys = new TableSys();
+	m_pConfig = new Config();
+	m_pLocalFileSys = new LocalFileSys();
 #ifdef	USE_EXTERN_THREAD
 	m_pINetMgr = new NetMgr(getStdLog());
 #else
@@ -129,6 +135,15 @@ NetDispList* Ctx::getNetDispListPtr()
 {
 	return m_pNetDispList;
 }
+
+Config* Ctx::getConfigPtr()
+{
+	return m_pConfig;
+}
+
+LocalFileSys* Ctx::getLocalFileSysPtr()
+{
+	return m_pLocalFileSys;
 
 void Ctx::testApi()
 {

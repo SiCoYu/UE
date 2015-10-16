@@ -26,6 +26,9 @@ public:
 	// 在指定索引位置插入一个值
 	template<class T>
 	static void Insert(std::vector<T>& vec, int index, T& item);
+
+	template<class T>
+	static void Add(std::vector<T>& vec, T& item);
 };
 
 //================== list 区域 =========================

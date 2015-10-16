@@ -7,11 +7,13 @@
 #include "Ctx.h"
 #include "EngineData.h"
 #include "INetMgr.h"
-#include "UIManager.h"
+#include "UIMgr.h"
 #include "EngineApi.h"
 #include "NetMgr.h"
 #include "LogSys.h"
 #include "ShareData.h"
 #include "NetDispList.h"
+#include "Config.h"
+#include "LocalFileSys.h"
 
 #endif

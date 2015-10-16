@@ -32,6 +32,8 @@ public:
 	void setPathNoExt(std::string value);
 	std::string getExtName();
 	void setExtName(std::string value);
+	bool getLoadNeedCoroutine();
+	void setLoadNeedCoroutine(bool value);
 	ResLoadType getResLoadType();
 	void setResLoadType(ResLoadType value);
 	NonRefCountResLoadResultNotify* getNonRefCountResLoadResultNotify();

@@ -47,6 +47,16 @@ void LoadItem::setExtName(std::string value)
 	m_extName = value;
 }
 
+bool LoadItem::getLoadNeedCoroutine()
+{
+	return m_loadNeedCoroutine;
+}
+
+void LoadItem::setLoadNeedCoroutine(bool value)
+{
+	m_loadNeedCoroutine = value;
+}
+
 ResLoadType LoadItem::getResLoadType()
 {
 	return m_resLoadType;

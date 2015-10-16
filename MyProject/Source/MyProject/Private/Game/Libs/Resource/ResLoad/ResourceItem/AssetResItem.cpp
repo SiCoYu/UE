@@ -11,3 +11,8 @@ void AssetResItem::unload()
 {
 
 }
+
+void AssetResItem::setPrefabName(std::string prefabName)
+{
+
+}

@@ -52,6 +52,16 @@ void ResItem::setExtName(std::string value)
 	m_extName = value;
 }
 
+bool ResItem::getResNeedCoroutine()
+{
+	return m_resNeedCoroutine;
+}
+
+void ResItem::setResNeedCoroutine(bool value)
+{
+	m_resNeedCoroutine = value;
+}
+
 std::string ResItem::getPath()
 {
 	return m_path;

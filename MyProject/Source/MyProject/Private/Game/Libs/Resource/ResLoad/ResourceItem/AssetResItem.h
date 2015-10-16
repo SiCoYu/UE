@@ -10,10 +10,11 @@ class AssetResItem : public ResItem
 {
 protected:
 
-
 public:
 	virtual void init(LoadItem* item) override;
 	virtual void unload() override;
+
+	void setPrefabName(std::string prefabName);
 };
 
 #endif

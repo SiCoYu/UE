@@ -17,6 +17,8 @@ class TableSys;
 class LogSys;
 class ShareData;
 class NetDispList;
+class Config;
+class LocalFileSys;
 
 #ifdef ENABLE_UNIT_TEST
 	class Test;
@@ -33,6 +35,8 @@ protected:
 	LogSys* m_pLogSys;
 	ShareData* m_pShareData;
 	NetDispList* m_pNetDispList;
+	Config* m_pConfig;
+	LocalFileSys* m_pLocalFileSys;
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* m_pStdoutLog;
@@ -59,6 +63,8 @@ public:
 	LogSys* getLogSysPtr();
 	ShareData* getShareDataPtr();
 	NetDispList* getNetDispListPtr();
+	Config* getConfigPtr();
+	LocalFileSys* getLocalFileSysPtr();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -79,5 +85,7 @@ public:
 #define g_pEngineApi g_pCtx->getEngineApiPtr()
 #define g_pShareData g_pCtx->getShareDataPtr()
 #define g_pNetDispList g_pCtx->getNetDispListPtr()
+#define g_pCfg g_pCtx->getConfigPtr()
+#define g_pLocalFileSys g_pCtx->getLocalFileSysPtr()
 
 #endif				// __CTX_H

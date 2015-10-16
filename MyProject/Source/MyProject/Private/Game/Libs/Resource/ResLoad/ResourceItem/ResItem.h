@@ -33,6 +33,8 @@ public:
 	void setPathNoExt(std::string value);
 	std::string getExtName();
 	void setExtName(std::string value);
+	bool getResNeedCoroutine();
+	void setResNeedCoroutine(bool value);
 	std::string getPath();
 	ResLoadType getResLoadType();
 	void setResLoadType(ResLoadType value);
