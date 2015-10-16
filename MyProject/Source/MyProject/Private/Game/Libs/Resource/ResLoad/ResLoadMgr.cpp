@@ -1,56 +1,70 @@
 ﻿#include "MyProject.h"
 #include "ResLoadMgr.h"
+#include "ResLoadData.h"
+#include "UtilContainers.h"
+#include "LoadParam.h"
+#include "UtilStr.h"
+#include "Common.h"
+#include "LoadItem.h"
+#include "ResItem.h"
+#include "NonRefCountResLoadResultNotify.h"
+#include "ResEventDispatch.h"
+#include "ResLoadState.h"
+#include "EventDispatchDelegate.h"
+#include "RefCountResLoadResultNotify.h"
+#include "RefCount.h"
 
 ResLoadMgr::ResLoadMgr()
 {
+	m_maxParral = 8;
+	m_curNum = 0;
 	m_LoadData = new ResLoadData();
-	m_id2HandleDic[(int)MsgRouteID.eMRIDLoadedWebRes] = onMsgRouteResLoad;
-	m_zeroRefResIDList = new List<string>();
+	//m_id2HandleDic[(int)eMRIDLoadedWebRes] = onMsgRouteResLoad;
 	m_loadingDepth = 0;
 }
 
 void ResLoadMgr::postInit()
 {
-// 游戏逻辑处理
-//m_resMsgRouteCB = new ResMsgRouteCB();
-//Ctx.m_instance.m_msgRouteList.addOneDisp(m_resMsgRouteCB);
+	// 游戏逻辑处理
+	//m_resMsgRouteCB = new ResMsgRouteCB();
+	//Ctx.m_instance.m_msgRouteList.addOneDisp(m_resMsgRouteCB);
 }
 
 // 重置加载设置
 void ResLoadMgr::resetLoadParam(LoadParam* loadParam)
 {
-	loadParam.m_loadNeedCoroutine = true;
-	loadParam.m_resNeedCoroutine = true;
+	loadParam->m_loadNeedCoroutine = true;
+	loadParam->m_resNeedCoroutine = true;
 }
 
-ResItem ResLoadMgr::getResource(std::string path)
+ResItem* ResLoadMgr::getResource(std::string path)
 {
 	// 如果 path == null ，程序会宕机
-	if (m_LoadData.m_path2Res.ContainsKey(path))
+	if (UtilMap::ContainsKey(m_LoadData->m_path2Res, path))
 	{
-		return m_LoadData.m_path2Res[path];
+		return m_LoadData->m_path2Res[path];
 	}
 	else
 	{
-		return null;
+		return nullptr;
 	}
 }
 
 void ResLoadMgr::loadData(LoadParam* param)
 {
-	param.m_resPackType = ResPackType.eDataType;
+	param->m_resPackType = eDataType;
 
-	if (ResLoadType.eStreamingAssets == param.m_resLoadType)
+	if (eStreamingAssets == param->m_resLoadType)
 	{
-		param.m_path = Path.Combine(Ctx.m_instance.m_localFileSys.getLocalReadDir(), param.m_path);
+		param->m_path = Path.Combine(Ctx.m_instance.m_localFileSys.getLocalReadDir(), param.m_path);
 	}
-	else if (ResLoadType.ePersistentData == param.m_resLoadType)
+	else if (ePersistentData == param->m_resLoadType)
 	{
-		param.m_path = Path.Combine(Ctx.m_instance.m_localFileSys.getLocalWriteDir(), param.m_path);
+		param->m_path = Path.Combine(Ctx.m_instance.m_localFileSys.getLocalWriteDir(), param->m_path);
 	}
 	else if (ResLoadType.eLoadWeb == param.m_resLoadType)
 	{
-		param.m_path = Path.Combine(Ctx.m_instance.m_cfg.m_webIP, param.m_path);
+		param->m_path = Path.Combine(Ctx.m_instance.m_cfg.m_webIP, param->m_path);
 	}
 	//if (!string.IsNullOrEmpty(param.m_version))
 	//{
@@ -62,8 +76,8 @@ void ResLoadMgr::loadData(LoadParam* param)
 // eBundleType 打包类型资源加载
 void ResLoadMgr::loadBundle(LoadParam* param)
 {
-	param.m_resPackType = ResPackType.eBundleType;
-	param.m_resLoadType = Ctx.m_instance.m_cfg.m_resLoadType;
+	param->m_resPackType = eBundleType;
+	param->m_resLoadType = Ctx.m_instance.m_cfg.m_resLoadType;
 
 	load(param);
 }
@@ -71,7 +85,7 @@ void ResLoadMgr::loadBundle(LoadParam* param)
 // eLevelType 打包类型资源加载，都用协程加载
 void ResLoadMgr::loadLevel(LoadParam* param)
 {
-	param.resolveLevel();
+	param->resolveLevel();
 
 #if PKG_RES_LOAD
 	param.m_resPackType = ResPackType.ePakLevelType;
@@ -82,8 +96,8 @@ void ResLoadMgr::loadLevel(LoadParam* param)
 	param.m_resLoadType = ResLoadType.eStreamingAssets;
 	load(param);
 #else
-	param.m_resPackType = ResPackType.eLevelType;
-	param.m_resLoadType = Ctx.m_instance.m_cfg.m_resLoadType;
+	param->m_resPackType = eLevelType;
+	param->m_resLoadType = Ctx.m_instance.m_cfg.m_resLoadType;
 	load(param);
 #endif
 }
@@ -91,7 +105,7 @@ void ResLoadMgr::loadLevel(LoadParam* param)
 // eResourcesType 打包类型资源加载
 void ResLoadMgr::loadResources(LoadParam* param)
 {
-	param.resolvePath();
+	param->resolvePath();
 
 #if PKG_RES_LOAD
 	if (param.m_path.IndexOf(PakSys.PAK_EXT) != -1)     // 如果加载的是打包文件
@@ -109,76 +123,76 @@ void ResLoadMgr::loadResources(LoadParam* param)
 	param.m_resLoadType = ResLoadType.eStreamingAssets;
 	return load(param);
 #else
-	param.m_resPackType = ResPackType.eResourcesType;
-	param.m_resLoadType = ResLoadType.eLoadResource;
+	param->m_resPackType = eResourcesType;
+	param->m_resLoadType = eLoadResource;
 	load(param);
 #endif
 }
 
 ResItem ResLoadMgr::createResItem(LoadParam* param)
 {
-	ResItem resItem = findResFormPool(param.m_resPackType);
-	if (ResPackType.eLevelType == param.m_resPackType)
+	ResItem* resItem = findResFormPool(param->m_resPackType);
+	if (eLevelType == param->m_resPackType)
 	{
-		if (resItem == null)
+		if (resItem == nullptr)
 		{
 			resItem = new LevelResItem();
 		}
-		(resItem as LevelResItem).levelName = param.lvlName;
+		((LevelResItem*)resItem)->levelName = param->getLvlName();
 	}
-	else if (ResPackType.eBundleType == param.m_resPackType)
+	else if (eBundleType == param->m_resPackType)
 	{
-		if (resItem == null)
+		if (resItem == nullptr)
 		{
 			resItem = new BundleResItem();
 		}
 	}
-	else if (ResPackType.eResourcesType == param.m_resPackType)
+	else if (eResourcesType == param->m_resPackType)
 	{
-		if (resItem == null)
+		if (resItem == nullptr)
 		{
 			resItem = new PrefabResItem();
 		}
 
-		(resItem as PrefabResItem).prefabName = param.prefabName;
+		((PrefabResItem*)resItem)->prefabName = param->prefabName;
 	}
-	else if (ResPackType.eDataType == param.m_resPackType)
+	else if (eDataType == param.m_resPackType)
 	{
-		if (resItem == null)
+		if (resItem == nullptr)
 		{
 			resItem = new DataResItem();
 		}
 	}
-	else if (ResPackType.eUnPakType == param.m_resPackType)
+	else if (eUnPakType == param.m_resPackType)
 	{
-		if (resItem == null)
+		if (resItem == nullptr)
 		{
 			resItem = new ABUnPakComFileResItem();
 		}
 	}
-	else if (ResPackType.eUnPakLevelType == param.m_resPackType)
+	else if (eUnPakLevelType == param->m_resPackType)
 	{
-		if (resItem == null)
+		if (resItem == nullptr)
 		{
 			resItem = new ABUnPakLevelFileResItem();
 		}
-		(resItem as ABUnPakLevelFileResItem).levelName = param.lvlName;
+		((ABUnPakLevelFileResItem*)resItem).levelName = param->getLvlName();
 	}
-	else if (ResPackType.ePakType == param.m_resPackType)
+	else if (ePakType == param.m_resPackType)
 	{
-		if (resItem == null)
+		if (resItem == nullptr)
 		{
 			resItem = new ABPakComFileResItem();
 		}
 	}
-	else if (ResPackType.ePakLevelType == param.m_resPackType)
+	else if (ePakLevelType == param->m_resPackType)
 	{
-		if (resItem == null)
+		if (resItem == nullptr)
 		{
 			resItem = new ABPakLevelFileResItem();
 		}
-		(resItem as ABPakLevelFileResItem).levelName = param.lvlName;
-		(resItem as ABPakLevelFileResItem).m_origPath = param.m_origPath;
+		((ABPakLevelFileResItem*)resItem)->setLevelName(param->getLvlName());
+		((ABPakLevelFileResItem*)resItem)->m_origPath = param->m_origPath;
 	}
 	//else if (ResPackType.ePakMemType == param.m_resPackType)
 	//{
@@ -197,81 +211,81 @@ ResItem ResLoadMgr::createResItem(LoadParam* param)
 	//    (resitem as ABMemUnPakLevelFileResItem).levelName = param.lvlName;
 	//}
 
-	resItem.refCountResLoadResultNotify.refCount.incRef();
-	resItem.resNeedCoroutine = param.m_resNeedCoroutine;
-	resItem.resPackType = param.m_resPackType;
-	resItem.resLoadType = param.m_resLoadType;
-	resItem.path = param.m_path;
-	resItem.pathNoExt = param.m_pathNoExt;
-	resItem.extName = param.extName;
+	resItem->getRefCountResLoadResultNotify().refCount.incRef();
+	resItem->setResNeedCoroutine(param->m_resNeedCoroutine);
+	resItem->setResPackType(param->m_resPackType);
+	resItem->setResLoadType(param->m_resLoadType);
+	resItem->setPath(param->m_path);
+	resItem->setPathNoExt(param->m_pathNoExt);
+	resItem->setExtName(param->getExtName());
 
-	if (param.m_loadEventHandle != null)
+	if (param->m_loadEventHandle != nullptr)
 	{
-		resItem.refCountResLoadResultNotify.loadResEventDispatch.addEventHandle(param.m_loadEventHandle);
+		resItem->getRefCountResLoadResultNotify().loadResEventDispatch.addEventHandle(param->m_loadEventHandle);
 	}
 
 	return resItem;
 }
 
 
-LoadItem ResLoadMgr::createLoadItem(LoadParam* param)
+LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 {
-	LoadItem loadItem = findLoadItemFormPool(param.m_resPackType);
+	LoadItem* loadItem = findLoadItemFormPool(param->m_resPackType);
 
-	if (ResPackType.eResourcesType == param.m_resPackType)        // 默认 Bundle 中资源
+	if (eResourcesType == param->m_resPackType)        // 默认 Bundle 中资源
 	{
-		if (loadItem == null)
+		if (loadItem == nullptr)
 		{
 			loadItem = new ResourceLoadItem();
 		}
 	}
-	else if (ResPackType.eBundleType == param.m_resPackType)        // Bundle 打包模式
+	else if (eBundleType == param->m_resPackType)        // Bundle 打包模式
 	{
-		if (loadItem == null)
+		if (loadItem == nullptr)
 		{
 			loadItem = new BundleLoadItem();
 		}
 	}
-	else if (ResPackType.eLevelType == param.m_resPackType)
+	else if (eLevelType == param->m_resPackType)
 	{
-		if (loadItem == null)
+		if (loadItem == nullptr)
 		{
 			loadItem = new LevelLoadItem();
 		}
 
-		(loadItem as LevelLoadItem).levelName = param.lvlName;
+		((LevelLoadItem*)loadItem)->setLevelName(param->getLvlName());
 	}
-	else if (ResPackType.eDataType == param.m_resPackType)
+	else if (eDataType == param->m_resPackType)
 	{
-		if (loadItem == null)
+		if (loadItem == nullptr)
 		{
 			loadItem = new DataLoadItem();
 		}
 
-		(loadItem as DataLoadItem).m_version = param.m_version;
+		((DataLoadItem*)loadItem)->m_version = param->m_version;
 	}
-	else if (ResPackType.eUnPakType == param.m_resPackType || ResPackType.eUnPakLevelType == param.m_resPackType)
+	else if (eUnPakType == param->m_resPackType || eUnPakLevelType == param->m_resPackType)
 	{
-		if (loadItem == null)
+		if (loadItem == nullptr)
 		{
 			loadItem = new ABUnPakLoadItem();
 		}
 	}
-	else if (ResPackType.ePakType == param.m_resPackType || ResPackType.ePakLevelType == param.m_resPackType)
+	else if (ePakType == param->m_resPackType || ePakLevelType == param->m_resPackType)
 	{
-		if (loadItem == null)
+		if (loadItem == nullptr)
 		{
 			loadItem = new ABPakLoadItem();
 		}
 	}
 
-	loadItem.resPackType = param.m_resPackType;
-	loadItem.resLoadType = param.m_resLoadType;
-	loadItem.path = param.m_path;
-	loadItem.pathNoExt = param.m_pathNoExt;
-	loadItem.extName = param.extName;
-	loadItem.loadNeedCoroutine = param.m_loadNeedCoroutine;
-	loadItem.nonRefCountResLoadResultNotify.loadResEventDispatch.addEventHandle(onLoadEventHandle);
+	loadItem->setResPackType(param->m_resPackType);
+	loadItem->setResLoadType(param->m_resLoadType);
+	loadItem->setPath(param->m_path);
+	loadItem->setPathNoExt(param->m_pathNoExt);
+	loadItem->setExtName(param->getExtName());
+	loadItem->setLoadNeedCoroutine(param->m_loadNeedCoroutine);
+	loadItem->getNonRefCountResLoadResultNotify().loadResEventDispatch.addEventHandle(onLoadEventHandle);
 
 	return loadItem;
 }
@@ -279,19 +293,19 @@ LoadItem ResLoadMgr::createLoadItem(LoadParam* param)
 // 资源创建并且正在被加载
 void ResLoadMgr::loadWithResCreatedAndLoad(LoadParam* param)
 {
-	m_LoadData.m_path2Res[param.m_path].refCountResLoadResultNotify.refCount.incRef();
-	if (m_LoadData.m_path2Res[param.m_path].refCountResLoadResultNotify.resLoadState.hasLoaded())
+	m_LoadData->m_path2Res[param->m_path].refCountResLoadResultNotify.refCount.incRef();
+	if (m_LoadData->m_path2Res[param->m_path].refCountResLoadResultNotify.resLoadState.hasLoaded())
 	{
-		if (param.m_loadEventHandle != null)
+		if (param->m_loadEventHandle != nullptr)
 		{
-			param.m_loadEventHandle(m_LoadData.m_path2Res[param.m_path]);
+			param->m_loadEventHandle(m_LoadData->m_path2Res[param->m_path]);
 		}
 	}
 	else
 	{
-		if (param.m_loadEventHandle != null)
+		if (param->m_loadEventHandle != nullptr)
 		{
-			m_LoadData.m_path2Res[param.m_path].refCountResLoadResultNotify.loadResEventDispatch.addEventHandle(param.m_loadEventHandle);
+			m_LoadData->m_path2Res[param->m_path]->getRefCountResLoadResultNotify().loadResEventDispatch.addEventHandle(param->m_loadEventHandle);
 		}
 	}
 
@@ -300,19 +314,19 @@ void ResLoadMgr::loadWithResCreatedAndLoad(LoadParam* param)
 
 void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem)
 {
-	m_LoadData.m_path2Res[param.m_path] = resItem;
-	m_LoadData.m_path2Res[param.m_path].refCountResLoadResultNotify.resLoadState.setLoading();
-	LoadItem loadItem = createLoadItem(param);
+	m_LoadData->m_path2Res[param->m_path] = resItem;
+	m_LoadData->m_path2Res[param->m_path]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
+	LoadItem* loadItem = createLoadItem(param);
 
 	if (m_curNum < m_maxParral)
 	{
-		m_LoadData.m_path2LDItem[param.m_path] = loadItem;
-		m_LoadData.m_path2LDItem[param.m_path].load();
+		m_LoadData->m_path2LDItem[param->m_path] = loadItem;
+		m_LoadData->m_path2LDItem[param->m_path]->load();
 		++m_curNum;
 	}
 	else
 	{
-		m_LoadData.m_willLDItem.Add(loadItem);
+		UtilList::(m_LoadData->m_willLDItem, loadItem);
 	}
 
 	resetLoadParam(param);
@@ -320,7 +334,7 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 
 void ResLoadMgr::loadWithNotResCreatedAndNotLoad(LoadParam* param)
 {
-	ResItem resItem = createResItem(param);
+	ResItem* resItem = createResItem(param);
 	loadWithResCreatedAndNotLoad(param, resItem);
 }
 
@@ -328,13 +342,13 @@ void ResLoadMgr::loadWithNotResCreatedAndNotLoad(LoadParam* param)
 void ResLoadMgr::load(LoadParam* param)
 {
 	++m_loadingDepth;
-	if (m_LoadData.m_path2Res.ContainsKey(param.m_path))
+	if (UtilMap::ContainsKey(m_LoadData->m_path2Res, param->m_path))
 	{
 		loadWithResCreatedAndLoad(param);
 	}
-	else if (param.m_loadRes != null)
+	else if (param->m_loadRes != nullptr)
 	{
-		loadWithResCreatedAndNotLoad(param, m_LoadData.m_path2Res[param.m_path]);
+		loadWithResCreatedAndNotLoad(param, m_LoadData->m_path2Res[param->m_path]);
 	}
 	else
 	{
@@ -348,21 +362,21 @@ void ResLoadMgr::load(LoadParam* param)
 	}
 }
 
-ResItem ResLoadMgr::getAndLoad(LoadParam* param)
+ResItem* ResLoadMgr::getAndLoad(LoadParam* param)
 {
-	param.resolvePath();
+	param->resolvePath();
 	load(param);
-	return getResource(param.m_path);
+	return getResource(param->m_path);
 }
 
 // 这个卸载有引用计数，如果有引用计数就卸载不了
-void ResLoadMgr::unload(std::string path, Action<IDispatchObject> loadEventHandle)
+void ResLoadMgr::unload(std::string path, EventDispatchDelegate loadEventHandle)
 {
-	if (m_LoadData.m_path2Res.ContainsKey(path))
+	if (UtilMap::ContainsKey(m_LoadData->m_path2Res, path))
 	{
-		m_LoadData.m_path2Res[path].refCountResLoadResultNotify.loadResEventDispatch.removeEventHandle(loadEventHandle);
-		m_LoadData.m_path2Res[path].refCountResLoadResultNotify.refCount.decRef();
-		if (m_LoadData.m_path2Res[path].refCountResLoadResultNotify.refCount.bNoRef())
+		m_LoadData->m_path2Res[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, loadEventHandle));
+		m_LoadData->m_path2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
+		if (m_LoadData->m_path2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->bNoRef())
 		{
 			if (m_loadingDepth != 0)
 			{
@@ -385,9 +399,9 @@ void ResLoadMgr::addNoRefResID2List(std::string path)
 // 卸载没有引用的资源列表中的资源
 void ResLoadMgr::unloadNoRefResFromList()
 {
-	foreach(string path in m_zeroRefResIDList)
+	for(std::string path : m_zeroRefResIDList.getList())
 	{
-		if (m_LoadData.m_path2Res[path].refCountResLoadResultNotify.refCount.bNoRef())
+		if (m_LoadData->m_path2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->bNoRef())
 		{
 			unloadNoRef(path);
 		}
@@ -398,29 +412,29 @@ void ResLoadMgr::unloadNoRefResFromList()
 // 不考虑引用计数，直接卸载
 void ResLoadMgr::unloadNoRef(std::string path)
 {
-	if (m_LoadData.m_path2Res.ContainsKey(path))
+	if (UtilMap::ContainsKey(m_LoadData->m_path2Res, path))
 	{
-		m_LoadData.m_path2Res[path].unload();
-		m_LoadData.m_path2Res[path].reset();
-		m_LoadData.m_noUsedResItem.Add(m_LoadData.m_path2Res[path]);
+		m_LoadData->m_path2Res[path]->unload();
+		m_LoadData->m_path2Res[path]->reset();
+		UtilList::Add(m_LoadData->m_noUsedResItem, m_LoadData->m_path2Res[path]);
 
-		m_LoadData.m_path2Res.Remove(path);
+		UtilMap::Remove(m_LoadData->m_path2Res, path);
 	}
 	else
 	{
-		Ctx.m_instance.m_logSys.log(string.Format("路径不能查找到 {0}", path));
+		g_pLogSys->log(UtilStr::Format("路径不能查找到 {0}", path));
 	}
 }
 
 void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 {
-	LoadItem item = dispObj as LoadItem;
-	item.nonRefCountResLoadResultNotify.loadResEventDispatch.removeEventHandle(onLoadEventHandle);
-	if (item.nonRefCountResLoadResultNotify.resLoadState.hasSuccessLoaded())
+	LoadItem* item = (LoadItem*)dispObj;
+	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, onLoadEventHandle));
+	if (item->getNonRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
 		onLoaded(item);
 	}
-	else if (item.nonRefCountResLoadResultNotify.resLoadState.hasFailed())
+	else if (item->getNonRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
 		onFailed(item);
 	}
@@ -432,57 +446,57 @@ void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 
 void ResLoadMgr::onLoaded(LoadItem* item)
 {
-	if (m_LoadData.m_path2Res.ContainsKey(item.path))
+	if (UtilMap::ContainsKey(m_LoadData->m_path2Res, item->getPath()))
 	{
-		m_LoadData.m_path2Res[item.path].init(m_LoadData.m_path2LDItem[item.path]);
+		m_LoadData->m_path2Res[item->getPath()]->init(m_LoadData->m_path2LDItem[item->getPath()]);
 	}
 	else        // 如果资源已经没有使用的地方了
 	{
-		item.unload();          // 直接卸载掉
+		item->unload();          // 直接卸载掉
 	}
 }
 
 void ResLoadMgr::onFailed(LoadItem* item)
 {
-	string path = item.path;
-	if (m_LoadData.m_path2Res.ContainsKey(path))
+	std::string path = item->getPath();
+	if (UtilMap::ContainsKey(m_LoadData->m_path2Res, path))
 	{
-		m_LoadData.m_path2Res[path].failed(m_LoadData.m_path2LDItem[path]);
+		m_LoadData->m_path2Res[path]->failed(m_LoadData->m_path2LDItem[path]);
 	}
 }
 
 void ResLoadMgr::releaseLoadItem(LoadItem* item)
 {
-	item.reset();
-	m_LoadData.m_noUsedLDItem.Add(item);
-	m_LoadData.m_path2LDItem.Remove(item.path);
+	item->reset();
+	UtilList::Add(m_LoadData->m_noUsedLDItem, item);
+	UtilMap::Remove(m_LoadData->m_path2LDItem, item->getPath());
 }
 
 void ResLoadMgr::loadNextItem()
 {
 	if (m_curNum < m_maxParral)
 	{
-		if (m_LoadData.m_willLDItem.Count > 0)
+		if (UtilList::Count(m_LoadData->m_willLDItem) > 0)
 		{
-			string path = (m_LoadData.m_willLDItem[0] as LoadItem).path;
-			m_LoadData.m_path2LDItem[path] = m_LoadData.m_willLDItem[0] as LoadItem;
-			m_LoadData.m_willLDItem.RemoveAt(0);
-			m_LoadData.m_path2LDItem[path].load();
+			std::string path = ((LoadItem*)(UtilList::At(m_LoadData->m_willLDItem, 0)))->getPath();
+			m_LoadData->m_path2LDItem[path] = (LoadItem*)(UtilList::At(m_LoadData->m_willLDItem, 0));
+			UtilList::RemoveAt(m_LoadData->m_willLDItem, 0);
+			m_LoadData->m_path2LDItem[path]->load();
 
 			++m_curNum;
 		}
 	}
 }
 
-ResItem ResLoadMgr::findResFormPool(ResPackType type)
+ResItem* ResLoadMgr::findResFormPool(ResPackType type)
 {
-	m_retResItem = null;
-	foreach(ResItem item in m_LoadData.m_noUsedResItem)
+	m_retResItem = nullptr;
+	for(ResItem* item : m_LoadData->m_noUsedResItem)
 	{
-		if (item.resPackType == type)
+		if (item->getResPackType() == type)
 		{
 			m_retResItem = item;
-			m_LoadData.m_noUsedResItem.Remove(m_retResItem);
+			UtilList::Remove(m_LoadData->m_noUsedResItem, m_retResItem);
 			break;
 		}
 	}
@@ -490,15 +504,15 @@ ResItem ResLoadMgr::findResFormPool(ResPackType type)
 	return m_retResItem;
 }
 
-LoadItem ResLoadMgr::findLoadItemFormPool(ResPackType type)
+LoadItem* ResLoadMgr::findLoadItemFormPool(ResPackType type)
 {
-	m_retLoadItem = null;
-	foreach(LoadItem item in m_LoadData.m_noUsedLDItem)
+	m_retLoadItem = nullptr;
+	for(LoadItem* item : m_LoadData->m_noUsedLDItem)
 	{
-		if (item.resPackType == type)
+		if (item->getResPackType() == type)
 		{
 			m_retLoadItem = item;
-			m_LoadData.m_noUsedLDItem.Remove(m_retLoadItem);
+			UtilList::Remove(m_LoadData->m_noUsedLDItem, m_retLoadItem);
 			break;
 		}
 	}

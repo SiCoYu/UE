@@ -6,17 +6,19 @@
 #include <string>
 #include "MList.h"
 #include "ResPackType.h"
+#include "EventDispatchDelegate.h"
 
 class ResLoadData;
 class LoadItem;
 class ResItem;
 class IDispatchObject;
+class LoadParam;
 
 class ResLoadMgr : public MsgRouteHandleBase
 {
 protected:
-	uint32 m_maxParral = 8;                             // 最多同时加载的内容
-    uint32 m_curNum = 0;                                // 当前加载的数量
+	uint32 m_maxParral;                             // 最多同时加载的内容
+    uint32 m_curNum;                                // 当前加载的数量
     ResLoadData* m_LoadData;
     LoadItem* m_retLoadItem;
     ResItem* m_retResItem;
@@ -31,7 +33,7 @@ public:
 protected:
 	void resetLoadParam(LoadParam* loadParam);
 public:
-	ResItem getResource(std::string path);
+	ResItem* getResource(std::string path);
 	void loadData(LoadParam* param);
     // eBundleType 打包类型资源加载
 	void loadBundle(LoadParam* param);
@@ -39,8 +41,8 @@ public:
 	void loadLevel(LoadParam* param);
     // eResourcesType 打包类型资源加载
 	void loadResources(LoadParam* param);
-	ResItem createResItem(LoadParam* param);
-	LoadItem createLoadItem(LoadParam* param);
+	ResItem* createResItem(LoadParam* param);
+	LoadItem* createLoadItem(LoadParam* param);
     // 资源创建并且正在被加载
 	void loadWithResCreatedAndLoad(LoadParam* param);
 	void loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem);
@@ -48,9 +50,9 @@ public:
     // 通用类型，需要自己设置很多参数
 public:
 	void load(LoadParam* param);
-	ResItem getAndLoad(LoadParam* param);
+	ResItem* getAndLoad(LoadParam* param);
     // 这个卸载有引用计数，如果有引用计数就卸载不了
-	void unload(std::string path, Action<IDispatchObject> loadEventHandle);
+	void unload(std::string path, EventDispatchDelegate loadEventHandle);
     // 添加无引用资源到 List
 protected:
 	void addNoRefResID2List(std::string path);
@@ -65,8 +67,8 @@ public:
 protected:
 	void releaseLoadItem(LoadItem* item);
 	void loadNextItem();
-	ResItem findResFormPool(ResPackType type);
-	LoadItem findLoadItemFormPool(ResPackType type);
+	ResItem* findResFormPool(ResPackType type);
+	LoadItem* findLoadItemFormPool(ResPackType type);
     // 资源加载完成，触发下一次加载
 	//void onMsgRouteResLoad(MsgRouteBase msg);
 };

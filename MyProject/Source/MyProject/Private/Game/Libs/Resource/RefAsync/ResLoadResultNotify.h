@@ -18,7 +18,7 @@ public:
 	ResLoadResultNotify();
 	~ResLoadResultNotify();
 
-	ResLoadState getResLoadState();
+	ResLoadState* getResLoadState();
 	void setResLoadState(ResLoadState* value);
 	ResEventDispatch* getLoadResEventDispatch();
 	void setLoadResEventDispatch(ResEventDispatch* value);

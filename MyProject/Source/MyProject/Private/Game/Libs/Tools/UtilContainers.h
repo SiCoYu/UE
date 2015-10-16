@@ -28,6 +28,37 @@ public:
 	static void Insert(std::vector<T>& vec, int index, T& item);
 };
 
+//================== list 区域 =========================
+
+#include <list>
+
+class UtilList
+{
+public:
+	// 移除一个元素，如果移除成功，就返回 true
+	template<class T>
+	static bool Remove(std::list<T>& list, T& item);
+
+	// 根据索引移除元素
+	template<class T>
+	static void RemoveAt(std::list<T>& list, int index);
+
+	// 返回元素的数量
+	template<class T>
+	static int Count(std::list<T>& list);
+
+	// 添加一个元素
+	template<class T>
+	static int Add(std::list<T>& list, T& item);
+
+	// 获取一个元素
+	//template<class T>
+	//static T& operator[](std::list<T>& list, int index);
+
+	template<class T>
+	static T& At(std::list<T>& list, int index);
+};
+
 //=================== map 区域 ========================
 
 #include <map>

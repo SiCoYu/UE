@@ -1,5 +1,5 @@
 ﻿#ifndef __ResLoadData_H
-#define ResLoadData
+#define __ResLoadData_H
 
 #include <map>
 #include <string>

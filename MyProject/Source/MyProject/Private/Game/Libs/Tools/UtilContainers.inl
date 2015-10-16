@@ -58,6 +58,84 @@ void UtilVector::Insert(std::vector<T>& vec, int index, T& item)
 	}
 }
 
+//================== list 区域 =========================
+template<class T>
+bool UtilList::Remove(std::list<T>& list, T& item)
+{
+	std::list<T>::iterator _beginIte;
+	std::list<T>::iterator _endIte;
+	_beginIte = list.begin();
+	_endIte = list.end();
+
+	for (; _beginIte != _endIte; ++_beginIte)
+	{
+		if (*_beginIte == item)
+		{
+			list.erase(_beginIte);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+template<class T>
+void UtilList::RemoveAt(std::list<T>& list, int index)
+{
+	if (index < list.size())
+	{
+		std::list<T>::iterator _beginIte;
+		_beginIte = list.begin();
+		std::advance(_beginIte, index);
+		list.erase(_beginIte);
+	}
+}
+
+template<class T>
+int UtilList::Count(std::list<T>& list)
+{
+	return list.size();
+}
+
+template<class T>
+int UtilList::Add(std::list<T>& list, T& item)
+{
+	list.push_back(item);
+	return 0;
+}
+
+//template<class T>
+//T& UtilList::operator[](std::list<T>& list, int index)
+//{
+//	if (index < list.size())
+//	{
+//		std::list<T>::iterator _beginIte;
+//		_beginIte = list.begin();
+//		std::advance(_beginIte, index);
+//		return *_beginIte;
+//	}
+//
+//	// 返回一个引用
+//	static T m_defRef;		// 必须有一个默认的构造函数
+//	return m_defRef;
+//}
+
+template<class T>
+T& UtilList::At(std::list<T>& list, int index)
+{
+	if (index < list.size())
+	{
+		std::list<T>::iterator _beginIte;
+		_beginIte = list.begin();
+		std::advance(_beginIte, index);
+		return *_beginIte;
+	}
+	
+	// 返回一个引用
+	static T m_defRef;		// 必须有一个默认的构造函数
+	return m_defRef;
+}
+
 //=================== map 区域 ========================
 
 template<class TKey, class TValue>

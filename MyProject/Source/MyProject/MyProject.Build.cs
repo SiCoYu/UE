@@ -22,7 +22,6 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/Table",
                 "MyProject/Private/Game/Libs/Table/ItemObject",
                 "MyProject/Private/Game/Libs/Util",
-                "MyProject/Private/Game/Libs/Resource/LoadItem",
 
                 "MyProject/Private/Game/Libs/LuaCBridge",
                 "MyProject/Private/Game/Libs/Thread",
@@ -33,6 +32,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/FrameHandle",
 
                 "MyProject/Private/Game/Libs/Resource/ResLoad",
+                "MyProject/Private/Game/Libs/Resource/ResLoad/LoadItem",
+                "MyProject/Private/Game/Libs/Resource/ResLoad/ResourceItem",
                 "MyProject/Private/Game/Libs/Resource/ResLoadData",
                 "MyProject/Private/Game/Libs/Resource/RefAsync",
 
