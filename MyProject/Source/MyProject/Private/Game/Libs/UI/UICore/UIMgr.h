@@ -3,12 +3,15 @@
 
 #include <map>
 #include <vector>
+#include <string>
 #include "UIFormID.h"
+#include "EventDispatchDelegate.h"
 
 class UFormBase;
 class UICanvas;
 class UIAttrSystem;
 class UILoadingItem;
+class IDispatchObject;
 
 /**
  * @brief 所有 UI 管理
@@ -18,16 +21,15 @@ class UILoadingItem;
 class UIMgr
 {
 protected:
-	std::map<UIFormID::UIFormID, UFormBase*> m_id2FormDic;
+	std::map<UIFormID, UFormBase*> m_id2FormDic;
 	std::vector<UICanvas*> m_canvasList;
 	UIAttrSystem* m_UIAttrs;
 
-	std::map<UIFormID::UIFormID, UILoadingItem*> m_ID2CodeLoadingItemDic;         // 记录当前代码正在加载的项
-	std::map<UIFormID::UIFormID, UILoadingItem*> m_ID2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
+	std::map<UIFormID, UILoadingItem*> m_ID2CodeLoadingItemDic;         // 记录当前代码正在加载的项
+	std::map<UIFormID, UILoadingItem*> m_ID2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
 
-	std::vector<UIFormID::UIFormID> m_tmpList;
+	std::vector<UIFormID> m_tmpList;
 	//GameObject m_sceneUIRootGo;           // 每一个场景都会有一个这样的节点，专门放一些 Scene 中 UI 的一些信息
-
 
 public:
 	UIMgr();
@@ -39,28 +41,28 @@ public:
 
 	void createCanvas();
 	void findCanvasGO();
-	void loadAndShow(UIFormID::UIFormID ID);
-	void showForm(UIFormID::UIFormID ID);
-	void showFormInternal(UIFormID::UIFormID ID);
-	void hideFormInternal(UIFormID::UIFormID ID);
-	void exitForm(UIFormID::UIFormID ID, bool bForce = false);
-	void exitFormInternal(UIFormID::UIFormID ID);
-	void addForm(Form form);
-	void addFormNoReady(Form form);
-	Form getForm(UIFormID::UIFormID ID);
-	bool hasForm(UIFormID::UIFormID ID);
-	void loadForm(UIFormID::UIFormID ID);
-	void loadWidgetRes(UIFormID::UIFormID ID);
-	void loadFromFile(string reaPath, Action<IDispatchObject> onLoadEventHandle);
-	void onCodeLoadEventHandle(IDispatchObject dispObj);
-	void onWidgetLoadEventHandle(IDispatchObject dispObj);
-	void onCodeloadedByRes(UIPrefabRes res);
-	void onCodeLoadedByForm(Form form);
-	void onWidgetloadedByRes(UIPrefabRes res);
+	void loadAndShow(UIFormID ID);
+	void showForm(UIFormID ID);
+	void showFormInternal(UIFormID ID);
+	void hideFormInternal(UIFormID ID);
+	void exitForm(UIFormID ID, bool bForce = false);
+	void exitFormInternal(UIFormID ID);
+	void addForm(UFormBase* form);
+	void addFormNoReady(UFormBase* form);
+	UFormBase* getForm(UIFormID ID);
+	bool hasForm(UIFormID ID);
+	void loadForm(UIFormID ID);
+	void loadWidgetRes(UIFormID ID);
+	void loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle);
+	void onCodeLoadEventHandle(IDispatchObject* dispObj);
+	void onWidgetLoadEventHandle(IDispatchObject* dispObj);
+	void onCodeloadedByRes(UIPrefabRes* res);
+	void onCodeLoadedByForm(UFormBase* form);
+	void onWidgetloadedByRes(UIPrefabRes* res);
 	void onResize(int viewWidth, int viewHeight);
 	void exitAllWin();
 	void findSceneUIRootGo();
-	void unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe);
+	//void unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe);
 };
 
 #include "UIMgr.inl"			// 模板具体的实现

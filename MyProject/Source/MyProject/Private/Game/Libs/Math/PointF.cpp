@@ -1,4 +1,5 @@
-﻿#include "PointF.h"
+﻿#include "MyProject.h"
+#include "PointF.h"
 
 PointF::PointF(float x, float y)
 {
