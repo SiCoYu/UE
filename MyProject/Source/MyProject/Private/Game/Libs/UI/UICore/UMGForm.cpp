@@ -311,3 +311,8 @@ void UUMGForm::removeClick(GameObject go, string path)
 		}
 	}
 }
+
+bool UUMGForm::getIsReady()
+{
+	return m_bReady;
+}

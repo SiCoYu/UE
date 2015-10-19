@@ -96,3 +96,25 @@ FString EngineApi::GameUserDir()
 {
 	return FPaths::GameUserDir();
 }
+
+void EngineApi::SetActive(UWidget* target, bool bshow)
+{
+	if (bshow)
+	{
+		target->SetVisibility(ESlateVisibility::Visible);
+	}
+	else
+	{
+		target->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void EngineApi::Destroy(UWidget* obj)
+{
+
+}
+
+void EngineApi::UnloadUnusedAssets()
+{
+
+}

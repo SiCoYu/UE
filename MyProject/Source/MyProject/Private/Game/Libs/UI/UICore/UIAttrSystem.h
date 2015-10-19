@@ -8,8 +8,8 @@ class UIAttrItem;
 
 class UIAttrSystem
 {
-protected:
-	std::map<UIFormID::UIFormID, UIAttrItem*> m_id2AttrDic;
+public:
+	std::map<UIFormID, UIAttrItem*> m_id2AttrDic;
 
 public:
 	UIAttrSystem();

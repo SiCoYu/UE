@@ -7,6 +7,7 @@
 class UGameInstance;
 class UMyProjectEngine;
 class UMyProjectGameInstance;
+class UUserWidget;
 
 class EngineApi
 {
@@ -40,6 +41,9 @@ public:
 	 *@brief 获取游戏用户目录，类似 Unity 的 Application.persistentDataPath 可写目录
 	 */
 	static FString GameUserDir();
+	static void SetActive(UWidget* target, bool bshow);
+	static void Destroy(UWidget* obj);
+	static void UnloadUnusedAssets();
 };
 
 #endif				// __ENGINEAPI_H

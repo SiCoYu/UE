@@ -36,6 +36,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/Resource/ResLoad/ResourceItem",
                 "MyProject/Private/Game/Libs/Resource/ResLoadData",
                 "MyProject/Private/Game/Libs/Resource/RefAsync",
+                "MyProject/Private/Game/Libs/Resource/InsResMgr",
+                "MyProject/Private/Game/Libs/Resource/InsRes",
 
                 "MyProject/Private/Game/Libs/ObjectPool",
                 "MyProject/Private/Game/Libs/MsgRoute",

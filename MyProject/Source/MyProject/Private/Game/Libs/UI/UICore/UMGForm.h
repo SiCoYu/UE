@@ -32,4 +32,7 @@ protected:
 
 protected:
 	void loadUWidget(const TCHAR* name);
+
+public:
+	virtual bool getIsReady() override;
 };

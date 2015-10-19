@@ -6,14 +6,17 @@
 
 class UILayer;
 
-UCLASS(abstract, config = Game)
+//UCLASS(abstract, config = Game)
+UCLASS(config = Game)
 class UFormBase : public UObject
 {
 	GENERATED_BODY()
 
 protected:
-	UIFormID m_formId;
-	GUIWin m_GUIWin;      // 控件数据
+	UIFormID m_id;
+public:
+	GUIWin* m_GUIWin;      // 控件数据
+protected:
 	bool m_draggable;
 
 	int m_hitYMax;	// 可点击范围 Y 的最大值
@@ -34,8 +37,8 @@ public:
 	UFormBase();
 
 	virtual void onReady();
-	UIFormID getFormId();
-	UIFormID getFormId();
+	UIFormID getId();
+	void setId(UIFormID value);
 	virtual int getPosX();
 	virtual void setPosX(int posX);
 	virtual int getPosY();
@@ -46,4 +49,6 @@ public:
 	bool getIsResReady();
 	void setIsResReady(bool value);
 	GUIWin* getGUIWin();
+
+	virtual bool getIsReady();
 };

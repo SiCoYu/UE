@@ -16,9 +16,14 @@ void UFormBase::onReady()
 
 }
 
-UIFormID UFormBase::getFormId()
+UIFormID UFormBase::getId()
 {
-	return m_formId;
+	return m_id;
+}
+
+void UFormBase::setId(UIFormID value);
+{
+	m_id = value;
 }
 
 int UFormBase::getPosX()
@@ -65,7 +70,12 @@ void UFormBase::setIsResReady(bool value)
 	m_isResReady = value;
 }
 
-public GUIWin* UFormBase::getGUIWin()
+GUIWin* UFormBase::getGUIWin()
 {
 	return m_GUIWin;
+}
+
+bool UFormBase::getIsReady()
+{
+	return true;
 }
