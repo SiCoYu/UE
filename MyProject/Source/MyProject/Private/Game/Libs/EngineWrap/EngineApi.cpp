@@ -118,3 +118,8 @@ void EngineApi::UnloadUnusedAssets()
 {
 
 }
+
+void EngineApi::SetParent(UWidget*child, UPanelWidget* parent, bool worldPositionStays)
+{
+	parent->AddChild(child);
+}

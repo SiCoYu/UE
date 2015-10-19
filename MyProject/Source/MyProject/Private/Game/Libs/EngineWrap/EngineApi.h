@@ -44,6 +44,8 @@ public:
 	static void SetActive(UWidget* target, bool bshow);
 	static void Destroy(UWidget* obj);
 	static void UnloadUnusedAssets();
+
+	static void SetParent(UWidget*child, UPanelWidget* parent, bool worldPositionStays = true);
 };
 
 #endif				// __ENGINEAPI_H
