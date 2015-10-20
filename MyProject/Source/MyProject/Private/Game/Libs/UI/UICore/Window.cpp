@@ -56,12 +56,12 @@ void UWindow::setIsResReady(bool value)
 	m_isResReady = value;
 }
 
-GUIWin* UFormBase::getGUIWin()
+GUIWin* UWindow::getGUIWin()
 {
 	return m_GUIWin;
 }
 
-bool UFormBase::getIsReady()
+bool UWindow::getIsReady()
 {
 	return true;
 }

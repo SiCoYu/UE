@@ -33,7 +33,6 @@ protected:
 	MList<UIFormID> m_tmpList;
 	//GameObject m_sceneUIRootGo;           // 每一个场景都会有一个这样的节点，专门放一些 Scene 中 UI 的一些信息
 
-
 public:
 	UIMgr();
 	template <class T>

@@ -6,6 +6,8 @@
 UCLASS(config = Game)
 class UUMGForm : public UForm
 {
+	GENERATED_BODY()
+
 public:
 	UUMGForm();
-}
+};

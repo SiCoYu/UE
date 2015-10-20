@@ -1,5 +1,5 @@
 template <class T>
-UFormBase* UIMgr::loadForm(UIFormID formID)
+UForm* UIMgr::loadForm(UIFormID formID)
 {
 	if (m_id2Form[formID] == nullptr)
 	{
