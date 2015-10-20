@@ -4,7 +4,7 @@
 class IRecycle;
 
 template<class T>
-T PoolSys::newObject<T>()
+T* PoolSys::newObject()
 {
 	//T retObj = default(T);
 	//// 查找

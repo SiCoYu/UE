@@ -2,9 +2,9 @@
 
 #include "MyProject.h"
 #include "FormBase.h"
-#include "UMGForm.generated.h"
-
 #include <string>
+
+#include "UMGForm.generated.h"
 
 class UUserWidget;
 

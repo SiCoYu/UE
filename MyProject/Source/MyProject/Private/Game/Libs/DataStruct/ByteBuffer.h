@@ -146,7 +146,7 @@ public:
 	void textlike() const;
 	void hexlike() const;
 	void writeFile(FILE* file);
-	DynBuffer* getDynBuff();
+	DynBuffer<char>* getDynBuff();
 	uint32 getBytesAvailable();
 	void incPosDelta(int delta);		// 添加 pos delta 数量
 	void decPosDelta(int delta);		// 减少 pos delta 数量
@@ -159,7 +159,7 @@ private:
 
 protected:
 	size_t m_pos;		// 读取写入位置
-	DynBuffer* m_dynBuff;
+	DynBuffer<char>* m_dynBuff;
 	char m_encryptKey[8];
 	char m_decryptKey[8];
 };

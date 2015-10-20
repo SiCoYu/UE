@@ -1,15 +1,13 @@
 ﻿#include "MyProject.h"
 #include "ResItem.h"
 #include "RefCountResLoadResultNotify.h"
+#include "ResLoadState.h"
+#include "ResEventDispatch.h"
+#include "RefCount.h"
 
 ResItem::ResItem()
 {
 	m_refCountResLoadResultNotify = new RefCountResLoadResultNotify();
-}
-
-ResPackType ResItem::getResPackType()
-{
-	return m_resPackType;
 }
 
 ResPackType ResItem::getResPackType()
@@ -62,11 +60,6 @@ void ResItem::setResNeedCoroutine(bool value)
 	m_resNeedCoroutine = value;
 }
 
-std::string ResItem::getPath()
-{
-	return m_path;
-}
-
 ResLoadType ResItem::getResLoadType()
 {
 	return m_resLoadType;
@@ -116,33 +109,33 @@ void ResItem::unload()
 
 }
 
-GameObject ResItem::InstantiateObject(std::string resName)
+UObject* ResItem::InstantiateObject(std::string resName)
 {
 	return nullptr;
 }
 
-UnityEngine.Object ResItem::getObject(string resName)
+UObject* ResItem::getObject(std::string resName)
 {
 	return nullptr;
 }
 
-byte[] ResItem::getBytes(string resName)            // 获取字节数据
+uint8* ResItem::getBytes(std::string resName)            // 获取字节数据
 {
-	return null;
+	return nullptr;
 }
 
 std::string ResItem::getText(std::string resName)
 {
-	return null;
+	return "";
 }
 
-void ResItem::copyFrom(ResItem rhv)
+void ResItem::copyFrom(ResItem* rhv)
 {
-	m_resPackType = rhv.m_resPackType;
-	m_resLoadType = rhv.m_resLoadType;
-	m_path = rhv.m_path;
-	m_pathNoExt = rhv.m_pathNoExt;
-	m_extName = rhv.m_extName;
-	m_resNeedCoroutine = rhv.m_resNeedCoroutine;
-	m_refCountResLoadResultNotify.copyFrom(rhv.refCountResLoadResultNotify);
+	m_resPackType = rhv->m_resPackType;
+	m_resLoadType = rhv->m_resLoadType;
+	m_path = rhv->m_path;
+	m_pathNoExt = rhv->m_pathNoExt;
+	m_extName = rhv->m_extName;
+	m_resNeedCoroutine = rhv->m_resNeedCoroutine;
+	m_refCountResLoadResultNotify->copyFrom(rhv->getRefCountResLoadResultNotify());
 }

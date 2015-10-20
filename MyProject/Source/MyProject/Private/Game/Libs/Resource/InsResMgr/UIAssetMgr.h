@@ -1,5 +1,5 @@
-﻿#ifndef __UIPrefabMgr_H
-#define __UIPrefabMgr_H
+﻿#ifndef __UIAssetMgr_H
+#define __UIAssetMgr_H
 
 #include "ResMgrBase.h"
 
@@ -11,3 +11,5 @@ class UIAssetMgr : public ResMgrBase
 public:
 	UIAssetMgr();
 };
+
+#endif

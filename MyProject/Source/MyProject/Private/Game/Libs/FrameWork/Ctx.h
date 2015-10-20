@@ -21,6 +21,7 @@ class Config;
 class LocalFileSys;
 class PoolSys;
 class UIAssetMgr;
+class ResLoadMg;
 
 #ifdef ENABLE_UNIT_TEST
 	class Test;
@@ -41,6 +42,7 @@ protected:
 	LocalFileSys* m_pLocalFileSys;
 	PoolSys* m_poolSys;
 	UIAssetMgr* m_uiAssetMgr;
+	ResLoadMg* m_resLoadMgr;
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* m_pStdoutLog;
@@ -71,6 +73,7 @@ public:
 	LocalFileSys* getLocalFileSysPtr();
 	PoolSys* getPoolSysPtr();
 	UIAssetMgr* getUIAssetMgrPtr();
+	ResLoadMg* getResLoadMgrPtr();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -95,5 +98,6 @@ public:
 #define g_pLocalFileSys g_pCtx->getLocalFileSysPtr()
 #define g_pPoolSys g_pCtx->getPoolSysPtr()
 #define g_pUIAssetMgr g_pCtx->getUIAssetMgrPtr()
+#define g_pResLoadMgr* g_pCtx->getResLoadMgrPtr();
 
 #endif				// __CTX_H

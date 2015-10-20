@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "LevelResItem.h"
 #include "LoadItem.h"
+#include "RefCountResLoadResultNotify.h"
+#include "ResEventDispatch.h"
 
 void LevelResItem::init(LoadItem* item)
 {

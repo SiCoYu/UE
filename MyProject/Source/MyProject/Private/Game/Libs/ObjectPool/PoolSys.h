@@ -15,8 +15,8 @@ protected:
 
 public:
 	template<class T>
-	T newObject<T>();
-	void deleteObj(IRecycle obj);
+	T* newObject();
+	void deleteObj(IRecycle* obj);
 };
 
 #endif

@@ -19,7 +19,7 @@ public:
 
 	RefCount* getRefCount();
 	void setRefCount(RefCount* value);
-	virtual void copyFrom(ResLoadResultNotify& rhv) override;
-}
+	virtual void copyFrom(ResLoadResultNotify* rhv) override;
+};
 
 #endif

@@ -13,7 +13,7 @@ template <class T>
 class MList
 {
 public:
-	typedef std::vector<T>::iterator Ite;
+	typedef typename std::vector<T>::iterator Ite;
 
 protected:
 	std::vector<T> m_list;

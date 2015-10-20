@@ -13,6 +13,7 @@
 #include "LocalFileSys.h"
 #include "PoolSys.h"
 #include "UIAssetMgr.h"
+#include "ResLoadMg.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -156,6 +157,11 @@ PoolSys* Ctx::getPoolSysPtr()
 UIAssetMgr* Ctx::getUIAssetMgrPtr()
 {
 	return m_uiAssetMgr;
+}
+
+ResLoadMg* Ctx::getResLoadMgrPtr()
+{
+	return m_resLoadMgr;
 }
 
 void Ctx::testApi()
