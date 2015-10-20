@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
-#include "PrefabResBase.h"
+#include "UIAssetRes.h"
 #include "ResItem.h"
+#include "EngineApi.h"
+#include "Common.h"
 
 UIAssetRes::UIAssetRes()
 {
@@ -9,43 +11,43 @@ UIAssetRes::UIAssetRes()
 
 void UIAssetRes::initImpl(ResItem* res)
 {
-	m_go = res.getObject(res.getPrefabName()) as GameObject;
-	base.initImpl(res);
+	//m_go = res.getObject(res.getPrefabName()) as GameObject;
+	//base.initImpl(res);
 }
 
-GameObject UIAssetRes::InstantiateObject(std::string resName)
+UObject* UIAssetRes::InstantiateObject(std::string resName)
 {
-	m_retGO = null;
+	m_retGO = nullptr;
 
-	if (null == m_go)
+	if (nullptr == m_go)
 	{
-		Ctx.m_instance.m_logSys.log("prefab 为 null");
+		g_pLogSys->log("prefab 为 null");
 	}
 	else
 	{
-		m_retGO = GameObject.Instantiate(m_go) as GameObject;
-		if (null == m_retGO)
+		// m_retGO = GameObject.Instantiate(m_go) as GameObject;
+		if (nullptr == m_retGO)
 		{
-			Ctx.m_instance.m_logSys.log("不能实例化数据");
+			g_pLogSys->log("不能实例化数据");
 		}
 	}
 	return m_retGO;
 }
 
-GameObject UIAssetRes::getObject()
+UObject* UIAssetRes::getObject()
 {
 	return m_go;
 }
 
-void UIAssetRes::unload() override
+void UIAssetRes::unload()
 {
-	if (m_go != null)
+	if (m_go != nullptr)
 	{
 		//UtilApi.UnloadAsset(m_go);      // 强制卸载资源数据
 		//UtilApi.DestroyImmediate(m_go, true);
-		UtilApi.UnloadUnusedAssets();
-		m_go = null;
+		EngineApi::UnloadUnusedAssets();
+		m_go = nullptr;
 	}
-	m_retGO = null;
-	base.unload();
+	m_retGO = nullptr;
+	InsResBase::unload();
 }

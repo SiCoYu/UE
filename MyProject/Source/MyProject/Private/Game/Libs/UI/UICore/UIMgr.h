@@ -8,7 +8,7 @@
 #include "UICanvas.h"
 #include "UILayer.h"
 
-class UFormBase;
+class UForm;
 class UICanvas;
 class UIAttrSystem;
 class UILoadingItem;
@@ -23,7 +23,7 @@ class UIAssetRes;
 class UIMgr
 {
 protected:
-	std::map<UIFormID, UFormBase*> m_id2FormDic;
+	std::map<UIFormID, UForm*> m_id2FormDic;
 	std::vector<UICanvas*> m_canvasList;
 	UIAttrSystem* m_UIAttrs;
 
@@ -37,7 +37,7 @@ protected:
 public:
 	UIMgr();
 	template <class T>
-	UFormBase* loadForm(UIFormID formID);
+	UForm* loadForm(UIFormID formID);
 
 	template <class T>
 	T* getForm(UIFormID formID);
@@ -50,10 +50,10 @@ public:
 	void hideFormInternal(UIFormID ID);
 	void exitForm(UIFormID ID, bool bForce = false);
 	void exitFormInternal(UIFormID ID);
-	void addForm(UFormBase* form);
+	void addForm(UForm* form);
 	UILayer* getLayer(UICanvasID canvasID, UILayerID layerID);
-	void addFormNoReady(UFormBase* form);
-	UFormBase* getForm(UIFormID ID);
+	void addFormNoReady(UForm* form);
+	UForm* getForm(UIFormID ID);
 	bool hasForm(UIFormID ID);
 	void loadForm(UIFormID ID);
 	void loadWidgetRes(UIFormID ID);
@@ -61,7 +61,7 @@ public:
 	void onCodeLoadEventHandle(IDispatchObject* dispObj);
 	void onWidgetLoadEventHandle(IDispatchObject* dispObj);
 	void onCodeloadedByRes(UIAssetRes* res);
-	void onCodeLoadedByForm(UFormBase* form);
+	void onCodeLoadedByForm(UForm* form);
 	void onWidgetloadedByRes(UIAssetRes* res);
 	void onResize(int viewWidth, int viewHeight);
 	void exitAllWin();

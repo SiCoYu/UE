@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "UIMgr.h"
-#include "FormBase.h"
+#include "Form.h"
 #include "UIAttrSystem.h"
 #include "NotDestroyPath.h"
 #include "EngineApi.h"
@@ -62,7 +62,7 @@ void UIMgr::showForm(UIFormID ID)
 
 void UIMgr::showFormInternal(UIFormID ID)
 {
-	UFormBase* win = getForm(ID);
+	UForm* win = getForm(ID);
 	if (win != nullptr)
 	{
 		if (!win->getIsReady())
@@ -80,21 +80,21 @@ void UIMgr::showFormInternal(UIFormID ID)
 // 隐藏一个 UI
 void UIMgr::hideFormInternal(UIFormID ID)
 {
-	UFormBase* win = getForm(ID);
+	UForm* win = getForm(ID);
 	if (win != nullptr)
 	{
 		if (win->IsVisible())
 		{
-			UtilApi.SetActive(win->m_GUIWin->m_uiRoot, false);
+			EngineApi::SetActive(win->m_GUIWin->m_uiRoot, false);
 			win->onHide();
 		}
 	}
 }
 
 // 退出一个 UI
-void UIMgr::exitForm(UIFormID ID, bool bForce = false)
+void UIMgr::exitForm(UIFormID ID, bool bForce)
 {
-	UFormBase* win = getForm(ID);
+	UForm* win = getForm(ID);
 
 	if (win != nullptr)
 	{
@@ -111,7 +111,7 @@ void UIMgr::exitForm(UIFormID ID, bool bForce = false)
 
 void UIMgr::exitFormInternal(UIFormID ID)
 {
-	UFormBase* win = getForm(ID);
+	UForm* win = getForm(ID);
 
 	if (win != nullptr)
 	{
@@ -134,7 +134,7 @@ void UIMgr::exitFormInternal(UIFormID ID)
 	}
 }
 
-void UIMgr::addForm(UFormBase* form)
+void UIMgr::addForm(UForm* form)
 {
 	addFormNoReady(form);
 	form->onInit();
@@ -156,7 +156,7 @@ UILayer* UIMgr::getLayer(UICanvasID canvasID, UILayerID layerID)
 }
 
 // 内部接口
-void UIMgr::addFormNoReady(UFormBase* form)
+void UIMgr::addFormNoReady(UForm* form)
 {
 	UILayer* layer = getLayer(m_UIAttrs->m_id2AttrDic[form->getId()]->m_canvasID, m_UIAttrs->m_id2AttrDic[form->getId()]->m_LayerID);
 	form->setUiLayer(layer);
@@ -166,7 +166,7 @@ void UIMgr::addFormNoReady(UFormBase* form)
 	form->init();        // 初始化
 }
 
-UFormBase* UIMgr::getForm(UIFormID ID)
+UForm* UIMgr::getForm(UIFormID ID)
 {
 	if (UtilMap::ContainsKey(m_id2FormDic, ID))
 	{
@@ -187,7 +187,7 @@ bool UIMgr::hasForm(UIFormID ID)
 void UIMgr::loadForm(UIFormID ID)
 {
 	UIAttrItem* attrItem = m_UIAttrs->m_id2AttrDic[ID];
-	UFormBase* window = getForm(ID);
+	UForm* window = getForm(ID);
 
 	if (window != nullptr)     // 本地已经创建了这个窗口，
 	{
@@ -202,7 +202,7 @@ void UIMgr::loadForm(UIFormID ID)
 	else if (!UtilMap::ContainsKey(m_ID2CodeLoadingItemDic, ID))                       // 如果什么都没有创建，第一次加载
 	{
 		// 创建窗口
-		UFormBase* form = nullptr;
+		UForm* form = nullptr;
 		//if (attrItem.m_bNeedLua)
 		//{
 		//	form = new Form();
@@ -214,7 +214,7 @@ void UIMgr::loadForm(UIFormID ID)
 
 		if (form != nullptr)                   // 如果代码已经在本地
 		{
-			((UFormBase*)form).setId(ID);
+			((UForm*)form).setId(ID);
 			//if (attrItem.m_bNeedLua)
 			//{
 			//	form.luaCSBridgeForm = new LuaCSBridgeForm(attrItem.m_luaScriptTableName, form);
@@ -301,7 +301,7 @@ void UIMgr::onCodeloadedByRes(UIAssetRes* res)
 	onCodeLoadedByForm(m_id2FormDic[ID]);
 }
 
-void UIMgr::onCodeLoadedByForm(UFormBase* form)
+void UIMgr::onCodeLoadedByForm(UForm* form)
 {
 	//if (null != Ctx.m_instance.m_cbUIEvent)
 	//{
@@ -369,7 +369,7 @@ void UIMgr::onResize(int viewWidth, int viewHeight)
 // 关闭所有显示的窗口
 void UIMgr::exitAllWin()
 {
-	for(std::pair<UIFormID, UFormBase*> keyValue : m_id2FormDic)
+	for(std::pair<UIFormID, UForm*> keyValue : m_id2FormDic)
 	{
 		m_tmpList.Add(keyValue.first);
 	}

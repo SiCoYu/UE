@@ -365,7 +365,7 @@ const uint8* ByteBuffer::getBuff() const
 	return (uint8*)m_dynBuff->m_buff;
 }
 
-DynBuffer* ByteBuffer::getDynBuff()
+DynBuffer<char>* ByteBuffer::getDynBuff()
 {
 	return m_dynBuff;
 }

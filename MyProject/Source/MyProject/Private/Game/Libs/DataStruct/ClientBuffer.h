@@ -5,7 +5,7 @@
 #include "PlatformDefine.h"
 
 class MsgBuffer;
-class DynBuffer;
+template <class T> class DynBuffer;
 class ByteBuffer;
 class MCircularBuffer;
 class MMutex;
@@ -22,7 +22,7 @@ protected:
 	MsgBuffer* m_sendTmpBuffer;		// 发送临时缓冲区，发送的数据都暂时放在这里
 	ByteBuffer* m_socketSendBA;     // 真正发送缓冲区
 
-	DynBuffer* m_dynBuff;				// 接收到的临时数据，将要放到 m_rawBuffer 中去
+	DynBuffer<char>* m_dynBuff;				// 接收到的临时数据，将要放到 m_rawBuffer 中去
 	ByteBuffer* m_unCompressHeaderBA;	// 存放解压后的头的长度
 	ByteBuffer* m_sendData;				// 存放将要发送的数据，将要放到 m_sendBuffer 中去
 	ByteBuffer* m_tmpData;				// 临时需要转换的数据放在这里
@@ -39,7 +39,7 @@ public:
 	ClientBuffer();
 	~ClientBuffer();
 
-	DynBuffer* getDynBuff();
+	DynBuffer<char>* getDynBuff();
 	MsgBuffer* getSendTmpBuffer();
 	ByteBuffer* getSendBuffer();
 	ByteBuffer* getSendData();

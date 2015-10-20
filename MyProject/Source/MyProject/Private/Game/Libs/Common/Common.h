@@ -17,6 +17,6 @@
 #include "LocalFileSys.h"
 #include "PoolSys.h"
 #include "UIAssetMgr.h"
-#include "ResLoadMg.h"
+#include "ResLoadMgr.h"
 
 #endif

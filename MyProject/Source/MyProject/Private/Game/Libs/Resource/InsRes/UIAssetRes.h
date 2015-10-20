@@ -4,11 +4,13 @@
 #include "InsResBase.h"
 #include <string>
 
+class UObject;
+
 class UIAssetRes : public InsResBase
 {
 public:
-	GameObject m_go;
-	GameObject m_retGO;
+	UObject* m_go;
+	UObject* m_retGO;
 
 public:
 	UIAssetRes();
@@ -16,8 +18,8 @@ protected:
 	virtual void initImpl(ResItem* res) override;
 
 public:
-	GameObject InstantiateObject(std::string resName);
-	GameObject getObject();
+	UObject* InstantiateObject(std::string resName);
+	UObject* getObject();
 	virtual void unload() override;
 };
 

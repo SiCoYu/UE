@@ -10,7 +10,7 @@
  */
 MCircularBuffer::MCircularBuffer(size_t initCapacity, size_t maxCapacity)
 {
-	m_dynBuffer = new DynBuffer(initCapacity, maxCapacity);
+	m_dynBuffer = new DynBuffer<char>(initCapacity, maxCapacity);
 
 	m_first = 0;
 	m_last = 0;

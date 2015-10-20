@@ -19,7 +19,7 @@ public:
 	void incRef();
 	void decRef();
 	bool bNoRef();
-    void copyFrom(RefCount rhv);
+    void copyFrom(RefCount* rhv);
 };
 
 #endif

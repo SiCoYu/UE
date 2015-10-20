@@ -13,7 +13,7 @@
 #include "LocalFileSys.h"
 #include "PoolSys.h"
 #include "UIAssetMgr.h"
-#include "ResLoadMg.h"
+#include "ResLoadMgr.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -60,7 +60,7 @@ void Ctx::init()
 	m_pStdoutLog = new StdoutLog();
 #endif
 
-	m_uiMgr = new UIManager();
+	m_uiMgr = new UIMgr();
 	m_engineApi = new EngineApi();
 	m_pTableSys = new TableSys();
 	m_pConfig = new Config();
@@ -82,7 +82,7 @@ void Ctx::init()
 	testApi();
 }
 
-UIManager* Ctx::getUIMgrPtr()
+UIMgr* Ctx::getUIMgrPtr()
 {
 	return m_uiMgr;
 }

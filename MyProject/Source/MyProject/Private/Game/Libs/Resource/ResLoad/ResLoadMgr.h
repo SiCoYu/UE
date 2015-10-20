@@ -7,14 +7,14 @@
 #include "MList.h"
 #include "ResPackType.h"
 #include "EventDispatchDelegate.h"
+#include "IDispatchObject.h"
 
 class ResLoadData;
 class LoadItem;
 class ResItem;
-class IDispatchObject;
 class LoadParam;
 
-class ResLoadMgr : public MsgRouteHandleBase
+class ResLoadMgr : public MsgRouteHandleBase, public IDispatchObject
 {
 protected:
 	uint32 m_maxParral;                             // 最多同时加载的内容

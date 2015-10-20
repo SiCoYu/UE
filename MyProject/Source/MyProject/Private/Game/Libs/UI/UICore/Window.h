@@ -3,13 +3,13 @@
 #include "MyProject.h"
 #include "UIFormID.h"
 #include "GUIWin.h"
-#include "FormBase.generated.h"
+#include "Window.generated.h"
 
 class UILayer;
 
 //UCLASS(abstract, config = Game)
 UCLASS(config = Game)
-class UFormBase : public UObject
+class UWindow : public UObject
 {
 	GENERATED_BODY()
 
@@ -35,11 +35,8 @@ protected:
 	bool m_isResReady;            // 资源是否已经加载并初始化
 
 public:
-	UFormBase();
+	UWindow();
 
-	virtual void onReady();
-	UIFormID getId();
-	void setId(UIFormID value);
 	virtual int getPosX();
 	virtual void setPosX(int posX);
 	virtual int getPosY();

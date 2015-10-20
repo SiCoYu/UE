@@ -52,7 +52,7 @@ ClientBuffer::~ClientBuffer()
 #endif
 }
 
-DynBuffer* ClientBuffer::getDynBuff()
+DynBuffer<char>* ClientBuffer::getDynBuff()
 {
 	return m_dynBuff;
 }

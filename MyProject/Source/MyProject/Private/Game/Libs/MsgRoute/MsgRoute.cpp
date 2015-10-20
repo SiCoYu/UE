@@ -28,3 +28,4 @@ ThreadLogMR::ThreadLogMR()
 	: MsgRouteBase(eMRIDThreadLog)
 {
 
+}

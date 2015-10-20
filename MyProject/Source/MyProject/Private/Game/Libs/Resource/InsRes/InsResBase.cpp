@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "InsResBase.h"
+#include "RefCountResLoadResultNotify.h"
 
 InsResBase::InsResBase()
 {
@@ -34,7 +35,7 @@ std::string InsResBase::getPrefabName()         // 只有 Prefab 资源才实现
 void InsResBase::init(ResItem* res)
 {
 	initImpl(res);         // 内部初始化完成后，才分发事件
-	refCountResLoadResultNotify.onLoadEventHandle(this);
+	m_refCountResLoadResultNotify->onLoadEventHandle(this);
 }
 
 // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重在了
@@ -46,7 +47,7 @@ void InsResBase::initImpl(ResItem* res)
 void InsResBase::failed(ResItem* res)
 {
 	unload();
-	m_refCountResLoadResultNotify.onLoadEventHandle(this);
+	m_refCountResLoadResultNotify->onLoadEventHandle(this);
 }
 
 void InsResBase::unload()

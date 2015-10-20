@@ -7,16 +7,19 @@
 #include "UtilContainers.h"
 #include "UtilStr.h"
 #include "InsResBase.h"
+#include "ResEventDispatch.h"
+#include "ResItem.h"
+#include "ResLoadState.h"
 
 ResMgrBase::ResMgrBase()
 {
 	m_loadingDepth = 0;
 }
 template<class T>
-T ResMgrBase::getAndSyncLoad<T>(std::string path)
+T* ResMgrBase::getAndSyncLoad(std::string path)
 {
 	syncLoad<T>(path);
-	return getRes(path) as T;
+	return (T*)getRes(path);
 }
 
 template<class T>
@@ -43,7 +46,7 @@ T* ResMgrBase::getAndLoad(LoadParam* param)
 
 // 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能喝异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
 template<class T>
-void ResMgrBase::syncLoad<T>(string path)
+void ResMgrBase::syncLoad(std::string path)
 {
 	LoadParam param;
 	param = Ctx.m_instance.m_poolSys.newObject<LoadParam>();
@@ -56,11 +59,11 @@ void ResMgrBase::syncLoad<T>(string path)
 }
 
 template<class T>
-T ResMgrBase::createResItem<T>(LoadParam param)
+T* ResMgrBase::createResItem(LoadParam* param)
 {
-	T ret = new T();
-	ret.refCountResLoadResultNotify.refCount.incRef();
-	ret.m_path = param.m_path;
+	T* ret = new T();
+	ret->getRefCountResLoadResultNotify()->getRefCount().incRef();
+	ret.m_path = param->m_path;
 
 	ret.refCountResLoadResultNotify.loadResEventDispatch.addEventHandle(param.m_loadEventHandle);
 
@@ -69,7 +72,7 @@ T ResMgrBase::createResItem<T>(LoadParam param)
 
 void ResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 {
-	m_path2ResDic[param->m_path]->getRefCountResLoadResultNotify()->getRefCount()->getIncRef();
+	m_path2ResDic[param->m_path]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
 	if (m_path2ResDic[param->m_path]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
 		if (!param->m_loadEventHandle.empty())
@@ -81,7 +84,7 @@ void ResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 	{
 		if (!param->m_loadEventHandle.empty())
 		{
-			m_path2ResDic[param->m_path]->getEefCountResLoadResultNotify().getLoadResEventDispatch()->addEventHandle(param->m_loadEventHandle);
+			m_path2ResDic[param->m_path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->m_loadEventHandle);
 		}
 	}
 }
@@ -155,7 +158,7 @@ void ResMgrBase::addNoRefResID2List(std::string path)
 // 卸载没有引用的资源列表中的资源
 void ResMgrBase::unloadNoRefResFromList()
 {
-	for(std::string path : m_zeroRefResIDList)
+	for(std::string path : m_zeroRefResIDList.getList())
 	{
 		if (m_path2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->bNoRef())
 		{
@@ -167,7 +170,7 @@ void ResMgrBase::unloadNoRefResFromList()
 
 void ResMgrBase::unloadNoRef(std::string path)
 {
-	m_path2ResDic[path].unload();
+	m_path2ResDic[path]->unload();
 	// 卸载加载的原始资源
 	g_pResLoadMgr->unload(path, EventDispatchDelegate(this, onLoadEventHandle));
 	UtilMap::Remove(m_path2ResDic, path);
@@ -199,12 +202,12 @@ void ResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else
 	{
-		g_pLogSys.log(UtilStr::Format("路径不能查找到 {0}", path));
+		g_pLogSys->log(UtilStr::Format("路径不能查找到 {0}", path));
 		g_pResLoadMgr->unload(path, EventDispatchDelegate(this, onLoadEventHandle));
 	}
 }
 
-UObject* ResMgrBase::getRes(std::string path)
+InsResBase* ResMgrBase::getRes(std::string path)
 {
 	return m_path2ResDic[path];
 }

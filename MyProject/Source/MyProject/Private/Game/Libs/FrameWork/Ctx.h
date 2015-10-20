@@ -8,7 +8,7 @@
 	#include <Sockets/StdoutLog.h>
 #endif
 
-class UIManager;
+class UIMgr;
 class UGameInstance;
 class EngineData;
 class EngineApi;
@@ -30,7 +30,7 @@ class ResLoadMg;
 class Ctx : public Singleton<Ctx>
 {
 protected:
-	UIManager* m_uiMgr;
+	UIMgr* m_uiMgr;
 	EngineData* m_engineData;
 	EngineApi* m_engineApi;
 	INetMgr* m_pINetMgr;
@@ -57,8 +57,8 @@ public:
 	~Ctx();
 
 	void init();
-	void setUIMgr(UIManager* uiMgr);
-	UIManager* getUIMgrPtr();
+	void setUIMgr(UIMgr* uiMgr);
+	UIMgr* getUIMgrPtr();
 
 	EngineData* getEngineDataPtr();
 	EngineApi* getEngineApiPtr();
@@ -98,6 +98,6 @@ public:
 #define g_pLocalFileSys g_pCtx->getLocalFileSysPtr()
 #define g_pPoolSys g_pCtx->getPoolSysPtr()
 #define g_pUIAssetMgr g_pCtx->getUIAssetMgrPtr()
-#define g_pResLoadMgr* g_pCtx->getResLoadMgrPtr();
+#define g_pResLoadMgr g_pCtx->getResLoadMgrPtr();
 
 #endif				// __CTX_H

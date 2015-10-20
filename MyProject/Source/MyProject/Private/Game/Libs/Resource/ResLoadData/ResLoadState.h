@@ -29,7 +29,7 @@ public:
 	void setSuccessLoaded();
 	void setFailed();
 	void setLoading();
-	void copyFrom(ResLoadState& rhv);
+	void copyFrom(ResLoadState* rhv);
 };
 
 #endif

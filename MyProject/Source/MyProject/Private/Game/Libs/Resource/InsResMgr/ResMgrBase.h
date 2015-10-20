@@ -9,7 +9,6 @@
 class InsResBase;
 class LoadParam;
 class IDispatchObject;
-class UObject;
 
 /**
  * @brief 资源管理器，不包括资源加载
@@ -46,7 +45,8 @@ protected:
 
 public:
 	template<class T>
-	virtual void load(LoadParam* param);
+	//virtual void load(LoadParam* param);	// 模板函数不能使虚函数
+	void load(LoadParam* param);
 	virtual void unload(std::string path, EventDispatchDelegate loadEventHandle);
     // 添加无引用资源到 List
 protected:
@@ -56,7 +56,7 @@ protected:
 	void unloadNoRef(std::string path);
 public:
 	virtual void onLoadEventHandle(IDispatchObject* dispObj);
-	UObject* getRes(std::string path);
+	InsResBase* getRes(std::string path);
     // 卸载所有的资源
 	void unloadAll();
 };
