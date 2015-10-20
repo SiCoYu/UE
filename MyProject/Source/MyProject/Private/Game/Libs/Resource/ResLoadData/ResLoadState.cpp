@@ -1,4 +1,5 @@
-﻿#include "ResLoadState.h"
+﻿#include "MyProject.h"
+#include "ResLoadState.h"
 
 ResLoadState::ResLoadState()
 {

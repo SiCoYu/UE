@@ -11,6 +11,8 @@
 #include "LogSys.h"
 #include "Config.h"
 #include "LocalFileSys.h"
+#include "PoolSys.h"
+#include "UIAssetMgr.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -144,6 +146,17 @@ Config* Ctx::getConfigPtr()
 LocalFileSys* Ctx::getLocalFileSysPtr()
 {
 	return m_pLocalFileSys;
+}
+
+PoolSys* Ctx::getPoolSysPtr()
+{
+	return m_poolSys;
+}
+
+UIAssetMgr* Ctx::getUIAssetMgrPtr()
+{
+	return m_uiAssetMgr;
+}
 
 void Ctx::testApi()
 {

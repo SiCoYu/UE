@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "PoolSys.h"
 
+class IRecycle;
+
 template<class T>
 T PoolSys::newObject<T>()
 {
@@ -22,11 +24,11 @@ T PoolSys::newObject<T>()
 	//    }
 	//}
 
-	//retObj = new T();
-	//return retObj;
+	T* retObj = new T();
+	return retObj;
 }
 
-void PoolSys::deleteObj(IRecycle obj)
+void PoolSys::deleteObj(IRecycle* obj)
 {
 	//if (m_poolList.IndexOf(obj) == -1)
 	//{

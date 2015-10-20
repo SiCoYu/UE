@@ -6,8 +6,8 @@
 /**
  * @brief 主要管理各种 UI 的 Prefab 元素
  */
-class UIPrefabMgr : public ResMgrBase
+class UIAssetMgr : public ResMgrBase
 {
 public:
-	UIPrefabMgr();
+	UIAssetMgr();
 };

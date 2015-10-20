@@ -1,5 +1,6 @@
 #pragma once
 
+#include "MyProject.h"
 #include "UIFormID.h"
 #include "GUIWin.h"
 #include "FormBase.generated.h"

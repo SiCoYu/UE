@@ -19,6 +19,8 @@ class ShareData;
 class NetDispList;
 class Config;
 class LocalFileSys;
+class PoolSys;
+class UIAssetMgr;
 
 #ifdef ENABLE_UNIT_TEST
 	class Test;
@@ -37,6 +39,8 @@ protected:
 	NetDispList* m_pNetDispList;
 	Config* m_pConfig;
 	LocalFileSys* m_pLocalFileSys;
+	PoolSys* m_poolSys;
+	UIAssetMgr* m_uiAssetMgr;
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* m_pStdoutLog;
@@ -65,6 +69,8 @@ public:
 	NetDispList* getNetDispListPtr();
 	Config* getConfigPtr();
 	LocalFileSys* getLocalFileSysPtr();
+	PoolSys* getPoolSysPtr();
+	UIAssetMgr* getUIAssetMgrPtr();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -87,5 +93,7 @@ public:
 #define g_pNetDispList g_pCtx->getNetDispListPtr()
 #define g_pCfg g_pCtx->getConfigPtr()
 #define g_pLocalFileSys g_pCtx->getLocalFileSysPtr()
+#define g_pPoolSys g_pCtx->getPoolSysPtr()
+#define g_pUIAssetMgr g_pCtx->getUIAssetMgrPtr()
 
 #endif				// __CTX_H
