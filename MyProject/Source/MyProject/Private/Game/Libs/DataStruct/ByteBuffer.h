@@ -16,19 +16,19 @@
 
 class ByteBufferException
 {
-    public:
-        ByteBufferException(bool _add, size_t _pos, size_t _esize, size_t _size)
-            : add(_add), pos(_pos), esize(_esize), size(_size)
-        {
-            PrintPosError();
-        }
+public:
+    ByteBufferException(bool _add, size_t _pos, size_t _esize, size_t _size)
+        : add(_add), pos(_pos), esize(_esize), size(_size)
+    {
+        PrintPosError();
+    }
 
-        void PrintPosError() const;
-    private:
-        bool add;
-        size_t pos;
-        size_t esize;
-        size_t size;
+    void PrintPosError() const;
+private:
+    bool add;
+    size_t pos;
+    size_t esize;
+    size_t size;
 };
 
 template<class T>

@@ -1,5 +1,5 @@
 ﻿template <class T>
-LockQueue<T>::LockQueue(string name)
+LockQueue<T>::LockQueue(std::string name)
 {
 	m_list = new LockList<T>("name");
 }
