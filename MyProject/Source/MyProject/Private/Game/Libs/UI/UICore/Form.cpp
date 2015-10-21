@@ -3,6 +3,7 @@
 #include "Common.h"
 #include "EngineApi.h"
 #include "PointF.h"
+#include "WindowAnchor.h"
 
 void UForm::loadUWidget(const TCHAR* name)
 {
@@ -17,7 +18,7 @@ void UForm::loadUWidget(const TCHAR* name)
 		// 直接构造一个抽象类是报错误的
 		// NewObject<UUserWidget>();
 		// 构造一个类的子类，最新的 api 如下就可以了
-		m_umgWidget = NewObject<UUserWidget>(g_pEngineApi->getGameInstance(), widgetClass);
+		m_GUIWin->m_uiRoot = NewObject<UUserWidget>(g_pEngineApi->getGameInstance(), widgetClass);
 	}
 }
 
@@ -129,7 +130,7 @@ void UForm::onInit()
 	//if (m_bLoadWidgetRes)
 	//{
 	// 默认会继续加载资源
-	g_pUIMgr->loadWidgetRes(this.id);
+	g_pUIMgr->loadWidgetRes(this->getID());
 	//}
 }
 
@@ -144,7 +145,7 @@ void UForm::onReady()
 	m_bReady = true;
 	if (m_bHandleExitBtn)
 	{
-		UtilApi.addEventHandle(m_GUIWin.m_uiRoot, "BtnClose", onExitBtnClick); // 关闭事件
+		//UtilApi.addEventHandle(m_GUIWin.m_uiRoot, "BtnClose", onExitBtnClick); // 关闭事件
 	}
 }
 
@@ -158,7 +159,7 @@ void UForm::onShow()
 
 	if (m_bBlurBg)
 	{
-		g_pUIMgr->showForm(UIFormID.eUIBlurBg);        // 显示模糊背景界面
+		//g_pUIMgr->showForm(eUIBlurBg);        // 显示模糊背景界面
 	}
 	//adjustPosWithAlign();
 }
@@ -193,7 +194,8 @@ void UForm::onExit()
 
 bool UForm::isVisible()
 {
-	return m_GUIWin->m_uiRoot->activeSelf;        // 仅仅是自己是否可见
+	//return m_GUIWin->m_uiRoot->activeSelf;        // 仅仅是自己是否可见
+	return true;
 }
 
 /*
@@ -207,40 +209,40 @@ void UForm::onStageReSize()
 void UForm::adjustPosWithAlign()
 {
 	PointF* pos = computeAdjustPosWithAlign();
-	this.x = pos.x;
-	this.y = pos.y;
+	this->setPosX(pos->getX());
+	this->setPosY(pos->getY());
 }
 
-PointF UForm::computeAdjustPosWithAlign()
+PointF* UForm::computeAdjustPosWithAlign()
 {
 	PointF* ret = new PointF(0, 0);
-	int widthStage = 0;
-	int heightStage = 0;
-	if (m_alignVertial == (int)WindowAnchor.CENTER)
-	{
-		ret.y = (heightStage - this.m_height) / 2;
-	}
-	else if (m_alignVertial == (int)WindowAnchor.TOP)
-	{
-		ret.y = this.m_marginTop;
-	}
-	else
-	{
-		ret.y = heightStage - this.m_height - this.m_marginBottom;
-	}
+	//int widthStage = 0;
+	//int heightStage = 0;
+	//if (m_alignVertial == (int)CENTER)
+	//{
+	//	ret->setX((heightStage - this->m_height) / 2);
+	//}
+	//else if (m_alignVertial == (int)TOP)
+	//{
+	//	ret->setY(this->m_marginTop);
+	//}
+	//else
+	//{
+	//	ret->setY(heightStage - this->m_height - this->m_marginBottom);
+	//}
 
-	if (m_alignHorizontal == (int)WindowAnchor.CENTER)
-	{
-		ret.x = (widthStage - this.m_width) / 2;
-	}
-	else if (m_alignHorizontal == (int)WindowAnchor.LEFT)
-	{
-		ret.x = m_marginLeft;
-	}
-	else
-	{
-		ret.x = widthStage - this.m_width - m_marginRight;
-	}
+	//if (m_alignHorizontal == (int)CENTER)
+	//{
+	//	ret->setX((widthStage - this->m_width) / 2);
+	//}
+	//else if (m_alignHorizontal == (int)LEFT)
+	//{
+	//	ret->setX(m_marginLeft);
+	//}
+	//else
+	//{
+	//	ret->setX(widthStage - this->m_width - m_marginRight);
+	//}
 	return ret;
 }
 
@@ -250,68 +252,68 @@ void UForm::onExitBtnClick()
 	exit();
 }
 
-void UForm::registerBtnClickEventByList(string[] btnList)
-{
-	foreach(var path in btnList)
-	{
-		addClick(m_GUIWin.m_uiRoot, path);
-	}
-}
+//void UForm::registerBtnClickEventByList(string[] btnList)
+//{
+//	foreach(var path in btnList)
+//	{
+//		addClick(m_GUIWin.m_uiRoot, path);
+//	}
+//}
+//
+//void UForm::registerImageClickEventByList(string[] imageList)
+//{
+//
+//}
 
-void UForm::registerImageClickEventByList(string[] imageList)
-{
+//void UForm::registerWidgetEvent()
+//{
+//	string[] pathArr = m_luaCSBridgeForm.getTable2StrArray("BtnClickTable");
+//	foreach(var path in pathArr)
+//	{
+//		addClick(m_GUIWin.m_uiRoot, path);
+//	}
+//}
 
-}
+//void UForm::onBtnClk(GameObject go_)
+//{
+//	if (m_luaCSBridgeForm != null)
+//	{
+//		if (m_go2Path.ContainsKey(go_))
+//		{
+//			m_luaCSBridgeForm.handleUIEvent("onBtnClk", m_formName, m_go2Path[go_].m_path);
+//		}
+//	}
+//
+//	// 测试全局分发事件
+//	// Ctx.m_instance.m_globalEventMgr.eventDispatchGroup.dispatchEvent((int)eGlobalEventType.eGlobalTest, null);
+//}
 
-void UForm::registerWidgetEvent()
-{
-	string[] pathArr = m_luaCSBridgeForm.getTable2StrArray("BtnClickTable");
-	foreach(var path in pathArr)
-	{
-		addClick(m_GUIWin.m_uiRoot, path);
-	}
-}
+//void UForm::addClick(GameObject go, string path)
+//{
+//	UtilApi.addEventHandle(go, path, onBtnClk);
+//	GameObject btnGo = UtilApi.TransFindChildByPObjAndPath(go, path);
+//	if (btnGo = null)
+//	{
+//		if (!m_go2Path.ContainsKey(btnGo))
+//		{
+//			m_go2Path[btnGo] = new GOExtraInfo();
+//			m_go2Path[btnGo].m_path = path;
+//		}
+//	}
+//}
 
-void UForm::onBtnClk(GameObject go_)
-{
-	if (m_luaCSBridgeForm != null)
-	{
-		if (m_go2Path.ContainsKey(go_))
-		{
-			m_luaCSBridgeForm.handleUIEvent("onBtnClk", m_formName, m_go2Path[go_].m_path);
-		}
-	}
-
-	// 测试全局分发事件
-	// Ctx.m_instance.m_globalEventMgr.eventDispatchGroup.dispatchEvent((int)eGlobalEventType.eGlobalTest, null);
-}
-
-void UForm::addClick(GameObject go, string path)
-{
-	UtilApi.addEventHandle(go, path, onBtnClk);
-	GameObject btnGo = UtilApi.TransFindChildByPObjAndPath(go, path);
-	if (btnGo = null)
-	{
-		if (!m_go2Path.ContainsKey(btnGo))
-		{
-			m_go2Path[btnGo] = new GOExtraInfo();
-			m_go2Path[btnGo].m_path = path;
-		}
-	}
-}
-
-void UForm::removeClick(GameObject go, string path)
-{
-	UtilApi.removeEventHandle(go, path);
-	GameObject btnGo = UtilApi.TransFindChildByPObjAndPath(go, path);
-	if (btnGo != null)
-	{
-		if (m_go2Path.ContainsKey(btnGo))
-		{
-			m_go2Path.Remove(btnGo);
-		}
-	}
-}
+//void UForm::removeClick(GameObject go, string path)
+//{
+//	UtilApi.removeEventHandle(go, path);
+//	GameObject btnGo = UtilApi.TransFindChildByPObjAndPath(go, path);
+//	if (btnGo != null)
+//	{
+//		if (m_go2Path.ContainsKey(btnGo))
+//		{
+//			m_go2Path.Remove(btnGo);
+//		}
+//	}
+//}
 
 bool UForm::getIsReady()
 {

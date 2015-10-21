@@ -1,7 +1,4 @@
-﻿#include "MyProject.h"
-#include "LockQueue.h"
-
-template <class T>
+﻿template <class T>
 LockQueue<T>::LockQueue(string name)
 {
 	m_list = new LockList<T>("name");

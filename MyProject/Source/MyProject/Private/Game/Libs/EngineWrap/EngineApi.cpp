@@ -69,8 +69,9 @@ ACharacter* EngineApi::getFirstCharacter()
 	return Character;
 }
 
-uint32 EngineApi::getUTCSec()
+float EngineApi::getUTCSec()
 {
+	//return g_pEngineApi->getWorld()->GetRealTimeSeconds();
 	return g_pEngineApi->getWorld()->GetTimeSeconds();
 }
 

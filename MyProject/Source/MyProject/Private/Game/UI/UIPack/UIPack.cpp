@@ -25,8 +25,8 @@ UUIPack::UUIPack(const FObjectInitializer& ObjectInitializer)
 void UUIPack::onReady()
 {
 	loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
-	m_umgWidget->AddToViewport();
-	EngineApi::addEventHandle((UButton*)m_umgWidget->GetWidgetFromName("Button_16"), (UObject*)this, "OnConfirmGeneric");
+	m_GUIWin->m_uiRoot->AddToViewport();
+	EngineApi::addEventHandle((UButton*)m_GUIWin->m_uiRoot->GetWidgetFromName("Button_16"), (UObject*)this, "OnConfirmGeneric");
 }
 
 void UUIPack::OnConfirmGeneric()

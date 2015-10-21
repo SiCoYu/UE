@@ -9,6 +9,7 @@
 #include "Form.generated.h"
 
 class UUserWidget;
+class PointF;
 
 UCLASS(config = Game)
 class UForm : public UWindow
@@ -69,14 +70,14 @@ public:
 	*/
 	void onStageReSize();
 	void adjustPosWithAlign();
-	PointF computeAdjustPosWithAlign();
+	PointF* computeAdjustPosWithAlign();
 	// °´Å¥µã»÷¹Ø±Õ
 	void onExitBtnClick();
-	void registerBtnClickEventByList(string[] btnList);
-	void registerImageClickEventByList(string[] imageList);
-	void registerWidgetEvent();
-	void onBtnClk(GameObject go_);
-	void addClick(GameObject go, string path);
-	void removeClick(GameObject go, string path);
+	//void registerBtnClickEventByList(std::string[] btnList);
+	//void registerImageClickEventByList(string[] imageList);
+	//void registerWidgetEvent();
+	//void onBtnClk(GameObject go_);
+	//void addClick(GameObject go, string path);
+	//void removeClick(GameObject go, string path);
 	bool getIsReady();
 };

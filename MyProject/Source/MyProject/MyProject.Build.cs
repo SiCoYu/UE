@@ -42,6 +42,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/ObjectPool",
                 "MyProject/Private/Game/Libs/MsgRoute",
                 "MyProject/Private/Game/Libs/LocalFileSystem",
+                "MyProject/Private/Game/Libs/Math",
 
                 // UI ÇøÓò
                 "MyProject/Private/Game/UI/UIPack",

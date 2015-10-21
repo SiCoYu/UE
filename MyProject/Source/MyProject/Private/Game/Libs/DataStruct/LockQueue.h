@@ -16,4 +16,6 @@ public:
 	T pop();
 };
 
+#include "LockQueue.inl"
+
 #endif

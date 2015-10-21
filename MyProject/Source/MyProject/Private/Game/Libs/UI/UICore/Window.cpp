@@ -23,7 +23,7 @@ void UWindow::setPosX(int posX)
 
 int UWindow::getPosY()
 {
-
+	return 0;
 }
 
 void UWindow::setPosY(int posY)

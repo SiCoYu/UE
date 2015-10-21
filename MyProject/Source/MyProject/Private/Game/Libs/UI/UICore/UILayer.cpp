@@ -1,13 +1,13 @@
 #include "MyProject.h"
 #include "UILayer.h"
-#include "FormBase.h"
+#include "Form.h"
 
 UILayer::UILayer(UILayerID layerID)
 {
 
 }
 
-std::map<UIFormID, UFormBase*>& UILayer::getWinDic()
+std::map<UIFormID, UForm*>& UILayer::getWinDic()
 {
 	return m_winDic;
 }
@@ -27,16 +27,16 @@ void UILayer::setGoName(std::string& rhv)
 	m_goName = rhv;
 }
 
-bool UILayer::hasForm(UFormBase* form)
+bool UILayer::hasForm(UForm* form)
 {
 	return m_winDic[form->getId()] != nullptr;
 }
 
-void UILayer::removeForm(UFormBase* form)
+void UILayer::removeForm(UForm* form)
 {
 	if (m_winDic[form->getId()] != nullptr)
 	{
-		m_winDic.erase(form->getId());
+		//m_winDic.erase(form->getId());
 	}
 }
 
@@ -45,14 +45,14 @@ UILayerID UILayer::getLayerID()
 	return m_layer;
 }
 
-void UILayer::addForm(UFormBase* form)
+void UILayer::addForm(UForm* form)
 {
 	m_winDic[form->getId()] = form;
 }
 
 void UILayer::onStageReSize()
 {
-	std::map<UIFormID, UFormBase*>::iterator itBegin, itEnd;
+	std::map<UIFormID, UForm*>::iterator itBegin, itEnd;
 	itBegin = m_winDic.begin();
 	itEnd = m_winDic.end();
 	for (; itBegin != itEnd; ++itBegin)
@@ -63,7 +63,7 @@ void UILayer::onStageReSize()
 
 void UILayer::closeAllForm()
 {
-	std::map<UIFormID, UFormBase*>::iterator itBegin, itEnd;
+	std::map<UIFormID, UForm*>::iterator itBegin, itEnd;
 	itBegin = m_winDic.begin();
 	itEnd = m_winDic.end();
 	for (; itBegin != itEnd; ++itBegin)

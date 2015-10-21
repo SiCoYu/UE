@@ -2,9 +2,9 @@
 #define __SLATEFORM_H
 
 #include "MyProject.h"
-#include "FormBase.h"
+#include "Window.h"
 
-class SlateForm : public UFormBase
+class SlateForm : public UWindow
 {
 public:
 	SlateForm();

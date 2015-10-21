@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "SystemTimeData.h"
+#include "EngineApi.h"
 
 SystemTimeData::SystemTimeData()
 {
@@ -29,11 +30,10 @@ void SystemTimeData::setCurTime(long value)
 
 void SystemTimeData::nextFrame()
 {
-	m_curTime = DateTime.Now.Ticks;
-	if (m_preTime != 0f)     // 第一帧跳过，因为这一帧不好计算间隔
+	m_curTime = EngineApi::getUTCSec();
+	if (m_preTime != 0.0f)     // 第一帧跳过，因为这一帧不好计算间隔
 	{
-		TimeSpan ts = new TimeSpan(m_curTime - m_preTime);
-		m_deltaSec = (float)(ts.TotalSeconds);
+		m_deltaSec = m_curTime - m_preTime;
 	}
 	else
 	{

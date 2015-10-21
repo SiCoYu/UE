@@ -7,7 +7,8 @@
 #include <vector>
 #include "BufferCV.h"
 
-class DynBuffer<char>;
+// 模板偏特化声明
+template <> class DynBuffer<char>;
 class ByteBuffer;
 
 /**
