@@ -2,7 +2,7 @@
 #define __TMList_H
 
 #include <vector>
-#include "Common.h"
+//#include "Common.h"	// 添加了这一样包含文件，导致 UIMgr.h  TMList<UIFormID> m_tmpList; 这一行编译错误，凡是使用 TMList 的都会报错
 #include "UtilStr.h"
 #include "UtilContainers.h"
 
@@ -95,7 +95,7 @@ public:
 		}
 		else
 		{
-			g_pLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, Count()));
+			//g_pLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, Count()));
 		}
 	}
 
@@ -104,7 +104,5 @@ public:
 		return IndexOf(item) != -1;
 	}
 };
-
-//typedef TMList<int> IntTMList;
 
 #endif
