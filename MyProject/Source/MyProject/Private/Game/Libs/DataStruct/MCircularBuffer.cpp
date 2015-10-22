@@ -2,7 +2,6 @@
 #include "MCircularBuffer.h"
 #include "DynBufResizePolicy.h"
 #include "BufferUtil.h"
-#include "DynBuffer.h"
 #include "ByteBuffer.h"
 
 /**

@@ -6,9 +6,9 @@
 #include <iostream>
 #include <vector>
 #include "BufferCV.h"
+#include "DynBuffer.h"
 
-// 模板偏特化声明
-template <> class DynBuffer<char>;
+//template <class T> class DynBuffer<char>;
 class ByteBuffer;
 
 /**

@@ -11,11 +11,21 @@ protected:
 	LockList<T> m_list;
 
 public:
-	LockQueue(std::string name);
-	void push(T item);
-	T pop();
-};
+	LockQueue(std::string name)
+		: m_list(name)
+	{
+		//m_list = new LockList<T>("name");
+	}
 
-#include "LockQueue.inl"
+	void push(T item)
+	{
+		m_list.Add(item);
+	}
+
+	T pop()
+	{
+		return m_list.RemoveAt(0);
+	}
+};
 
 #endif

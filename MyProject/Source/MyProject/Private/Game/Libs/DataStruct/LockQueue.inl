@@ -6,9 +6,7 @@ LockQueue<T>::LockQueue(std::string name)
 
 template <class T>
 void LockQueue<T>::push(T item)
-{
-	m_list.Add(item);
-}
+
 
 template <class T>
 T LockQueue<T>::pop()

@@ -1,6 +1,11 @@
 ﻿#include "MyProject.h"
 #include "MsgRouteBase.h"
 
+MsgRouteBase::MsgRouteBase()
+{
+
+}
+
 MsgRouteBase::MsgRouteBase(MsgRouteID id)
 {
 	m_msgType = eMRT_BASIC;

@@ -2,13 +2,14 @@
 #include "TickMgr.h"
 #include "ITickedObject.h"
 #include "TickProcessObject.h"
+#include "IDelayHandleItem.h"
 
 TickMgr::TickMgr()
 {
 
 }
 
-void TickMgr::addTick(ITickedObject* tickObj, float priority = 0.0f)
+void TickMgr::addTick(ITickedObject* tickObj, float priority)
 {
 	addObject((IDelayHandleItem*)tickObj, priority);
 }
@@ -43,7 +44,7 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 		processObject->m_tickObject = (ITickedObject*)delayObject;
 		processObject->m_priority = priority;
 
-		if (position < 0 || position >= m_tickLst.Count)
+		if (position < 0 || position >= m_tickLst.Count())
 		{
 			m_tickLst.Add(processObject);
 		}
