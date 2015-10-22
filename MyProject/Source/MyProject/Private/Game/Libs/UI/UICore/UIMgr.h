@@ -2,7 +2,7 @@
 #define __UIMGR_H
 
 #include <map>
-#include "TMList.h"
+#include "MList.h"
 #include "UIFormID.h"
 #include "EventDispatchDelegate.h"
 #include "UICanvas.h"
@@ -30,7 +30,7 @@ protected:
 	std::map<UIFormID, UILoadingItem*> m_ID2CodeLoadingItemDic;         // 记录当前代码正在加载的项
 	std::map<UIFormID, UILoadingItem*> m_ID2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
 
-	TMList<UIFormID> m_tmpList;
+	MList<UIFormID> m_tmpList;
 	//GameObject m_sceneUIRootGo;           // 每一个场景都会有一个这样的节点，专门放一些 Scene 中 UI 的一些信息
 
 public:

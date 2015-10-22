@@ -3,7 +3,7 @@
 
 #include <map>
 #include <string>
-#include "TMList.h"
+#include "MList.h"
 #include "EventDispatchDelegate.h"
 
 class InsResBase;
@@ -19,7 +19,7 @@ public:
 	std::map<std::string, InsResBase*> m_path2ResDic;
 
 protected:
-	TMList<std::string> m_zeroRefResIDList;      // 没有引用的资源 ID 列表
+	MList<std::string> m_zeroRefResIDList;      // 没有引用的资源 ID 列表
     int m_loadingDepth;          // 加载深度
 
 public:
