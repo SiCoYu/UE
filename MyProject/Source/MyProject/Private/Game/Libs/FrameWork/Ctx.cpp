@@ -159,7 +159,7 @@ UIAssetMgr* Ctx::getUIAssetMgrPtr()
 	return m_uiAssetMgr;
 }
 
-ResLoadMg* Ctx::getResLoadMgrPtr()
+ResLoadMgr* Ctx::getResLoadMgrPtr()
 {
 	return m_resLoadMgr;
 }
