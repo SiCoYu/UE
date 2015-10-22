@@ -154,9 +154,13 @@ bool EventDispatch::existEventHandle(EventDispatchDelegate handle)
 
 void EventDispatch::copyFrom(EventDispatch& rhv)
 {
-	// 链接不过
-	//for(auto handle : rhv.getHandleList().getList())
-	//{
-	//	m_handleList.Add(handle);
-	//}
+	for(auto handle : rhv.getHandleList().getList())
+	{
+		m_handleList.Add(handle);
+	}
+}
+
+MList<EventDispatchFunctionObject*>& EventDispatch::getHandleList()
+{
+	return m_handleList;
 }

@@ -255,14 +255,14 @@ void UIMgr::loadWidgetRes(UIFormID ID)
 // 从本地磁盘或者网络加载资源
 void UIMgr::loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle)
 {
-	// 链接不过
-	//LoadParam* param = g_pPoolSys->newObject<LoadParam>();
-	//LocalFileSys::modifyLoadParam(reaPath, param);
-	//param->m_loadNeedCoroutine = false;
-	//param->m_resNeedCoroutine = false;
-	//param->m_loadEventHandle = onLoadEventHandle;
-	//g_pUIAssetMgr->load<UIAssetRes>(param);
-	//g_pPoolSys->deleteObj(param);
+	// TODO:
+	LoadParam* param = g_pPoolSys->newObject<LoadParam>();
+	LocalFileSys::modifyLoadParam(reaPath, param);
+	param->m_loadNeedCoroutine = false;
+	param->m_resNeedCoroutine = false;
+	param->m_loadEventHandle = onLoadEventHandle;
+	g_pUIAssetMgr->load<UIAssetRes>(param);
+	g_pPoolSys->deleteObj(param);
 }
 
 // 代码资源加载处理

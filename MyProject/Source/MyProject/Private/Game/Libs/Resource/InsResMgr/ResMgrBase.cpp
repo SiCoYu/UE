@@ -1,73 +1,11 @@
 ﻿#include "MyProject.h"
 #include "ResMgrBase.h"
-#include "Common.h"
-#include "LoadParam.h"
-#include "RefCountResLoadResultNotify.h"
-#include "RefCount.h"
-#include "UtilContainers.h"
 #include "UtilStr.h"
-#include "InsResBase.h"
-#include "ResEventDispatch.h"
 #include "ResItem.h"
-#include "ResLoadState.h"
 
 ResMgrBase::ResMgrBase()
 {
 	m_loadingDepth = 0;
-}
-template<class T>
-T* ResMgrBase::getAndSyncLoad(std::string path)
-{
-	syncLoad<T>(path);
-	return (T*)getRes(path);
-}
-
-template<class T>
-T* ResMgrBase::getAndAsyncLoad(std::string path, EventDispatchDelegate handle)
-{
-	T* ret = nullptr;
-	LoadParam* param = g_pPoolSys->newObject<LoadParam>();
-	LocalFileSys.modifyLoadParam(path, param);
-	param.m_loadNeedCoroutine = true;
-	param.m_resNeedCoroutine = true;
-	param.m_loadEventHandle = handle;
-	ret = getAndLoad<T>(param);
-	Ctx.m_instance.m_poolSys.deleteObj(param);
-
-	return ret;
-}
-
-template<class T>
-T* ResMgrBase::getAndLoad(LoadParam* param)
-{
-	load<T>(param);
-	return (T*)getRes(param.m_path);
-}
-
-// 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能喝异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
-template<class T>
-void ResMgrBase::syncLoad(std::string path)
-{
-	LoadParam param;
-	param = Ctx.m_instance.m_poolSys.newObject<LoadParam>();
-	param.m_path = path;
-	// param.m_loadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.m_loadEventHandle = onLoadEventHandle ，内部会自动调用
-	param.m_loadNeedCoroutine = false;
-	param.m_resNeedCoroutine = false;
-	load<T>(param);
-	Ctx.m_instance.m_poolSys.deleteObj(param);
-}
-
-template<class T>
-T* ResMgrBase::createResItem(LoadParam* param)
-{
-	T* ret = new T();
-	ret->getRefCountResLoadResultNotify()->getRefCount().incRef();
-	ret.m_path = param->m_path;
-
-	ret.refCountResLoadResultNotify.loadResEventDispatch.addEventHandle(param.m_loadEventHandle);
-
-	return ret;
 }
 
 void ResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
@@ -86,46 +24,6 @@ void ResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 		{
 			m_path2ResDic[param->m_path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->m_loadEventHandle);
 		}
-	}
-}
-
-template<class T>
-void ResMgrBase::loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
-{
-	m_path2ResDic[param->m_path] = resItem;
-	m_path2ResDic[param->m_path].getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
-	param->m_loadEventHandle = onLoadEventHandle;
-	g_pResLoadMgr->loadResources(param);
-}
-
-template<class T>
-void ResMgrBase::loadWithNotResCreatedAndNotLoad(LoadParam* param)
-{
-	T* resItem = createResItem<T>(param);
-	loadWithResCreatedAndNotLoad<T>(param, resItem);
-}
-
-template<class T>
-void ResMgrBase::load(LoadParam* param)
-{
-	++m_loadingDepth;
-	if (UtilMap::ContainsKey(m_path2ResDic, param->m_path))
-	{
-		loadWithResCreatedAndLoad(param);
-	}
-	else if (param.m_loadInsRes != nullptr)
-	{
-		loadWithResCreatedAndNotLoad<T>(param, (T*)(param->m_loadInsRes));
-	}
-	else
-	{
-		loadWithNotResCreatedAndNotLoad<T>(param);
-	}
-	--m_loadingDepth;
-
-	if (m_loadingDepth == 0)
-	{
-		unloadNoRefResFromList();
 	}
 }
 

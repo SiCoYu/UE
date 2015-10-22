@@ -61,25 +61,25 @@ ResItem* ResLoadMgr::getResource(std::string path)
 void ResLoadMgr::loadData(LoadParam* param)
 {
 	// 链接不过
-	//param->m_resPackType = eDataType;
+	param->m_resPackType = eDataType;
 
-	//if (eStreamingAssets == param->m_resLoadType)
+	if (eStreamingAssets == param->m_resLoadType)
+	{
+		param->m_path = UtilPath::Combine(g_pLocalFileSys->getLocalReadDir(), param->m_path);
+	}
+	else if (ePersistentData == param->m_resLoadType)
+	{
+		param->m_path = UtilPath::Combine(g_pLocalFileSys->getLocalWriteDir(), param->m_path);
+	}
+	else if (eLoadWeb == param->m_resLoadType)
+	{
+		param->m_path = UtilPath::Combine(g_pCfg->m_webIP, param->m_path);
+	}
+	//if (!string.IsNullOrEmpty(param.m_version))
 	//{
-	//	param->m_path = UtilPath::Combine(g_pLocalFileSys->getLocalReadDir(), param->m_path);
+	//    param.m_path = string.Format("{0}?v={1}", param.m_path, param.m_version);
 	//}
-	//else if (ePersistentData == param->m_resLoadType)
-	//{
-	//	param->m_path = UtilPath::Combine(g_pLocalFileSys->getLocalWriteDir(), param->m_path);
-	//}
-	//else if (eLoadWeb == param->m_resLoadType)
-	//{
-	//	param->m_path = UtilPath::Combine(g_pCfg->m_webIP, param->m_path);
-	//}
-	////if (!string.IsNullOrEmpty(param.m_version))
-	////{
-	////    param.m_path = string.Format("{0}?v={1}", param.m_path, param.m_version);
-	////}
-	//load(param);
+	load(param);
 }
 
 // eBundleType 打包类型资源加载
