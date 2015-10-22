@@ -10,6 +10,9 @@
 #include "LocalFileSys.h"
 #include "LoadParam.h"
 #include "UIAssetRes.h"
+#include "UIAttrItem.h"
+#include "RefCountResLoadResultNotify.h"
+#include "ResLoadState.h"
 
 UIMgr::UIMgr()
 {
@@ -158,11 +161,11 @@ UILayer* UIMgr::getLayer(UICanvasID canvasID, UILayerID layerID)
 // 内部接口
 void UIMgr::addFormNoReady(UForm* form)
 {
-	UILayer* layer = getLayer(m_UIAttrs->m_id2AttrDic[form->getId()]->m_canvasID, m_UIAttrs->m_id2AttrDic[form->getId()]->m_LayerID);
+	UILayer* layer = getLayer(m_UIAttrs->m_id2AttrDic[form->getID()]->m_canvasID, m_UIAttrs->m_id2AttrDic[form->getID()]->m_LayerID);
 	form->setUiLayer(layer);
 	layer->addForm(form);
 
-	m_id2FormDic[form->getId()] = form;
+	m_id2FormDic[form->getID()] = form;
 	form->init();        // 初始化
 }
 
@@ -214,7 +217,7 @@ void UIMgr::loadForm(UIFormID ID)
 
 		if (form != nullptr)                   // 如果代码已经在本地
 		{
-			((UForm*)form).setId(ID);
+			form->setID(ID);
 			//if (attrItem.m_bNeedLua)
 			//{
 			//	form.luaCSBridgeForm = new LuaCSBridgeForm(attrItem.m_luaScriptTableName, form);
@@ -231,7 +234,7 @@ void UIMgr::loadForm(UIFormID ID)
 			m_ID2CodeLoadingItemDic[ID] = new UILoadingItem();
 			m_ID2CodeLoadingItemDic[ID]->m_ID = ID;
 
-			loadFromFile(attrItem->m_codePath, EventDispatchDelegate（this, onCodeLoadEventHandle));
+			loadFromFile(attrItem->m_codePath, EventDispatchDelegate(this, &UIMgr::onCodeLoadEventHandle));
 		}
 	}
 }
@@ -245,7 +248,7 @@ void UIMgr::loadWidgetRes(UIFormID ID)
 		m_ID2WidgetLoadingItemDic[ID] = new UILoadingItem();
 		m_ID2WidgetLoadingItemDic[ID]->m_ID = ID;
 
-		loadFromFile(attrItem->m_widgetPath, EventDispatchDelegate(this, onWidgetLoadEventHandle));
+		loadFromFile(attrItem->m_widgetPath, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 	}
 }
 
@@ -310,15 +313,15 @@ void UIMgr::onCodeLoadedByForm(UForm* form)
 }
 
 // 窗口控件资源加载完成处理
-void onWidgetloadedByRes(UIAssetRes* res)
+void UIMgr::onWidgetloadedByRes(UIAssetRes* res)
 {
 	std::string path = res->GetPath();
 	UIFormID ID = m_UIAttrs->GetFormIDByPath(path, ePathComUI);  // 获取 FormID
 	UtilMap::Remove(m_ID2WidgetLoadingItemDic, ID);
 
-	UIAttrItem* attrItem = m_UIAttrs.m_id2AttrDic[ID];
+	UIAttrItem* attrItem = m_UIAttrs->m_id2AttrDic[ID];
 	m_id2FormDic[ID]->setIsLoadWidgetRes(true);
-	m_id2FormDic[ID].m_GUIWin.m_uiRoot = res->InstantiateObject(attrItem->m_widgetPath);
+	m_id2FormDic[ID]->m_GUIWin->m_uiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->m_widgetPath));
 	//if (attrItem.m_bNeedLua)
 	//{
 	//	m_id2FormDic[ID].luaCSBridgeForm.gameObject = m_id2FormDic[ID].m_GUIWin.m_uiRoot;
@@ -326,10 +329,10 @@ void onWidgetloadedByRes(UIAssetRes* res)
 	//}
 
 	// 设置位置
-	EngineApi::SetParent(m_id2FormDic[ID]->m_GUIWin->m_uiRoot.transform, m_canvasList[(int)(attrItem->m_canvasID)]->getLayerList()[(int)(attrItem->m_LayerID)]->getLayerTrans(), false);
+	//EngineApi::SetParent(m_id2FormDic[ID]->m_GUIWin->m_uiRoot.transform, m_canvasList[(int)(attrItem->m_canvasID)]->getLayerList()[(int)(attrItem->m_LayerID)]->getLayerTrans(), false);
 
 	// 先设置再设置缩放，否则无效
-	m_id2FormDic[ID]->m_GUIWin->m_uiRoot.transform.SetAsLastSibling();               // 放在最后
+	//m_id2FormDic[ID]->m_GUIWin->m_uiRoot.transform.SetAsLastSibling();               // 放在最后
 	EngineApi::SetActive(m_id2FormDic[ID]->m_GUIWin->m_uiRoot, false);      // 出发 onShow 事件
 	//if (m_id2FormDic[ID].hideOnCreate)
 	//{
@@ -349,7 +352,7 @@ void onWidgetloadedByRes(UIAssetRes* res)
 	//}
 
 	// 卸载资源
-	g_pUIAssetMgr->unload(path, EventDispatchDelegate(this, onWidgetLoadEventHandle));
+	g_pUIAssetMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 }
 
 // 大小发生变化后，调用此函数

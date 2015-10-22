@@ -4,7 +4,7 @@
 #include "MsgRouteHandleBase.h"
 #include "Platform.h"
 #include <string>
-#include "MList.h"
+#include "TMList.h"
 #include "ResPackType.h"
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
@@ -23,7 +23,7 @@ protected:
     LoadItem* m_retLoadItem;
     ResItem* m_retResItem;
     //ResMsgRouteCB m_resMsgRouteCB;
-    MList<std::string> m_zeroRefResIDList;      // 没有引用的资源 ID 列表
+    TMList<std::string> m_zeroRefResIDList;      // 没有引用的资源 ID 列表
     int m_loadingDepth;      // 加载深度
 
 public:

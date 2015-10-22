@@ -22,8 +22,8 @@ void UForm::loadUWidget(const TCHAR* name)
 	}
 }
 
-UForm::UForm()
-	:UWindow()
+UForm::UForm(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	m_exitMode = true;
 	m_bHideOnCreate = false;
@@ -65,12 +65,12 @@ void UForm::setExitMode(bool value)
 	m_exitMode = value;
 }
 
-bool UForm::getLoadWidgetRes()
+bool UForm::getIsLoadWidgetRes()
 {
 	return m_bLoadWidgetRes;
 }
 
-void UForm::setBLoadWidgetRes(bool value)
+void UForm::setIsLoadWidgetRes(bool value)
 {
 	m_bLoadWidgetRes = true;
 }

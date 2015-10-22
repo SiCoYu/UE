@@ -35,7 +35,7 @@ protected:
 	bool m_isResReady;            // 资源是否已经加载并初始化
 
 public:
-	UWindow();
+	UWindow(const FObjectInitializer& ObjectInitializer);
 
 	virtual int getPosX();
 	virtual void setPosX(int posX);

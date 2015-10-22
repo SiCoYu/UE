@@ -9,5 +9,5 @@ class UUMGForm : public UForm
 	GENERATED_BODY()
 
 public:
-	UUMGForm();
+	UUMGForm(const FObjectInitializer& ObjectInitializer);
 };

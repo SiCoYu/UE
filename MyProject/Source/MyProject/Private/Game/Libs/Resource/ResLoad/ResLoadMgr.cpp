@@ -274,7 +274,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	loadItem->setPathNoExt(param->m_pathNoExt);
 	loadItem->setExtName(param->getExtName());
 	loadItem->setLoadNeedCoroutine(param->m_loadNeedCoroutine);
-	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, onLoadEventHandle));
+	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 
 	return loadItem;
 }
@@ -418,7 +418,7 @@ void ResLoadMgr::unloadNoRef(std::string path)
 void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 {
 	LoadItem* item = (LoadItem*)dispObj;
-	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, onLoadEventHandle));
+	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 	if (item->getNonRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
 		onLoaded(item);

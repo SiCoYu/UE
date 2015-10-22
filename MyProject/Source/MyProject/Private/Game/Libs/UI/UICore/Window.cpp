@@ -2,7 +2,8 @@
 #include "Window.h"
 #include "UILayer.h"
 
-UWindow::UWindow()
+UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	m_draggable = true;
 	m_hitYMax = 30;

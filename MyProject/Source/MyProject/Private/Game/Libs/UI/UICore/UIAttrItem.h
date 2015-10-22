@@ -9,7 +9,7 @@ enum FormID;
 
 class UIAttrItem
 {
-protected:
+public:
 	FormID m_formID;
 	std::string m_codePath;               // 逻辑代码 path 
 	std::string m_widgetPath;             // 拖放的控件 path 

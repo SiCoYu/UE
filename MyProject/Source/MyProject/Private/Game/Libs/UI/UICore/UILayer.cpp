@@ -29,12 +29,12 @@ void UILayer::setGoName(std::string& rhv)
 
 bool UILayer::hasForm(UForm* form)
 {
-	return m_winDic[form->getId()] != nullptr;
+	return m_winDic[form->getID()] != nullptr;
 }
 
 void UILayer::removeForm(UForm* form)
 {
-	if (m_winDic[form->getId()] != nullptr)
+	if (m_winDic[form->getID()] != nullptr)
 	{
 		//m_winDic.erase(form->getId());
 	}
@@ -47,7 +47,7 @@ UILayerID UILayer::getLayerID()
 
 void UILayer::addForm(UForm* form)
 {
-	m_winDic[form->getId()] = form;
+	m_winDic[form->getID()] = form;
 }
 
 void UILayer::onStageReSize()

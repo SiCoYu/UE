@@ -34,7 +34,7 @@ protected:
 	//std::map<GameObject, GOExtraInfo> m_go2Path;
 
 public:
-	UForm();
+	UForm(const FObjectInitializer& ObjectInitializer);
 
 	void loadUWidget(const TCHAR* name);
 	UIFormID getID();
@@ -43,8 +43,8 @@ public:
 	void setHideOnCreate(bool value);
 	bool getExitMode();
 	void setExitMode(bool value);
-	bool getLoadWidgetRes();
-	void setBLoadWidgetRes(bool value);
+	bool getIsLoadWidgetRes();
+	void setIsLoadWidgetRes(bool value);
 	bool getBReady();
 	std::string getFormName();
 	void setFormName(std::string value);

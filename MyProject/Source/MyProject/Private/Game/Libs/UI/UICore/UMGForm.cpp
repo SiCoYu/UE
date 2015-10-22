@@ -1,7 +1,8 @@
 #include "MyProject.h"
 #include "UMGForm.h"
 
-UUMGForm::UUMGForm()
+UUMGForm::UUMGForm(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 
 }
