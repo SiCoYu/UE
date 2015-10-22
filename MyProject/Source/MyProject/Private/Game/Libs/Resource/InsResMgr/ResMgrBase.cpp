@@ -90,7 +90,7 @@ void ResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 }
 
 template<class T>
-void ResMgrBase::loadWithResCreatedAndNotLoad<T>(LoadParam* param, T* resItem)
+void ResMgrBase::loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
 {
 	m_path2ResDic[param->m_path] = resItem;
 	m_path2ResDic[param->m_path].getRefCountResLoadResultNotify()->getResLoadState()->setLoading();

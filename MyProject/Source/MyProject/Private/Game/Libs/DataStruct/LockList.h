@@ -19,8 +19,9 @@ protected:
 
 public:
 	LockList(std::string name, uint32 initCapacity = 32/*BufferCV.INIT_ELEM_CAPACITY*/, uint32 maxCapacity = 8 * 1024 * 1024/*BufferCV.MAX_CAPACITY*/)
+		: m_dynamicBuffer(initCapacity, maxCapacity)
 	{
-		m_dynamicBuffer = new DynBuffer<T>(initCapacity, maxCapacity);
+		//m_dynamicBuffer = new DynBuffer<T>(initCapacity, maxCapacity);
 		m_visitMutex = new MMutex();
 	}
 

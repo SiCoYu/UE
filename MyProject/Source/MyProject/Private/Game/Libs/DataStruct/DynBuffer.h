@@ -25,7 +25,7 @@ public:
 		: m_iCapacity(initCapacity), m_iMaxCapacity(maxCapacity)
 	{
 		m_size = 0;
-		m_buff = new char[m_iCapacity];
+		m_buff = new T[m_iCapacity];
 	}
 
 	~DynBuffer()
