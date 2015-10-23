@@ -4,7 +4,7 @@
 #include "ResMgrBase.h"
 
 /**
- * @brief 主要管理各种 UI 的 Prefab 元素
+ * @brief 主要管理各种 UI 的 Asset 元素
  */
 class UIAssetMgr : public ResMgrBase
 {
