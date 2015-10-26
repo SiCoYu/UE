@@ -1,12 +1,9 @@
 ﻿#ifndef __MEncode_H_
 #define __MEncode_H_
 
-namespace MEncode
+enum MEncode
 {
-	enum MEncode
-	{
-		eUTF8,		// utf8 
-	};
-}
+	eUTF8,		// utf8 
+};
 
 #endif
