@@ -3,6 +3,7 @@
 
 // #include "Platform.h"
 #include "Core.h"		// "Platform.h" 已经包含在 "Core.h" 中了
+//#include "ICUUtilities.h"
 
 class UGameInstance;
 class UMyProjectEngine;
@@ -46,6 +47,8 @@ public:
 	static void UnloadUnusedAssets();
 
 	static void SetParent(UWidget*child, UPanelWidget* parent, bool worldPositionStays = true);
+
+	//static void ConvertString(const FString& Source, icu::UnicodeString& Destination, const bool ShouldNullTerminate);
 };
 
 #endif				// __ENGINEAPI_H

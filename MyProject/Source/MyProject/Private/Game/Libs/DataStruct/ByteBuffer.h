@@ -82,8 +82,8 @@ public:
 	ByteBuffer& readInt64(int64& value);
 	ByteBuffer& readFloat(float& value);
 	ByteBuffer& readDouble(double& value);
-	ByteBuffer& readMultiByte(std::string& value, size_t len, MEncode::MEncode encode = MEncode::eUTF8);
-	ByteBuffer& readMultiByte(char* value, size_t len, MEncode::MEncode encode = MEncode::eUTF8);
+	ByteBuffer& readMultiByte(std::string& value, size_t len, MEncode encode = eUTF8);
+	ByteBuffer& readMultiByte(char* value, size_t len, MEncode encode = eUTF8);
 
 	template<class T>
 	ByteBuffer& readUnused(MUnused<T> const&);

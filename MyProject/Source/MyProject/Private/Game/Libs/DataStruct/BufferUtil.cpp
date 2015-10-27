@@ -36,3 +36,31 @@ void BufferUtil::Copy(void* src, long srcIndex, void* dest, long destIndex, long
 	// 不用调整从 0 开始存储数据，只要是线性就可以了
 	memmove(tmp_dest, tmp_source, length);
 }
+
+void BufferUtil::Reverse(char* buff, int index, int length)
+{
+	// 如果是 length 0 或者 1 直接返回
+	if (length <= 1)
+	{
+		return;
+	}
+
+	char* tmp_source = buff + index;
+	char* tmp_dest = buff + index + (length - 1);
+	char tmpChar;
+
+	while (tmp_source < tmp_dest)	// 只有起始地址没有超过目的地址才交换
+	{
+		tmpChar = *tmp_dest;
+		*tmp_dest = *tmp_source;
+		*tmp_source = tmpChar;
+
+		++tmp_source;
+		--tmp_dest;
+	}
+}
+
+void BufferUtil::Clear(char* buff, int index, int length)
+{
+	memset(buff + index, 0, length);
+}

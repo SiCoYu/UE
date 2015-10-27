@@ -3,11 +3,13 @@
 
 #include <sstream>
 #include "DynBufResizePolicy.h"
+#include "BitConverter.h"
+#include "BufferUtil.h"
 
 MByteBuffer::MByteBuffer(uint32 initCapacity, uint32 maxCapacity, SysEndian endian)
 {
 	m_endian = endian;        // 缓冲区默认是小端的数据，因为服务器是 linux 的
-	m_dynBuff = new DynBuffer<char>*(initCapacity, maxCapacity);
+	m_dynBuff = new DynBuffer<char>(initCapacity, maxCapacity);
 }
 
 DynBuffer<char>* MByteBuffer::getDynBuff()
@@ -135,6 +137,16 @@ void MByteBuffer::decPosDelta(int delta)     // 减少 pos delta 数量
 	m_pos -= (uint32)delta;
 }
 
+void MByteBuffer::incLenDelta(int delta)
+{
+	setLength(getLength() + (uint32)delta);
+}
+
+void MByteBuffer::decLenDelta(int delta)
+{
+	setLength(getLength() - (uint32)delta);
+}
+
 //// 压缩
 //uint MByteBuffer::compress(uint len_ = 0, CompressionAlgorithm algorithm = CompressionAlgorithm.ZLIB)
 //{
@@ -259,11 +271,11 @@ void MByteBuffer::decPosDelta(int delta)     // 减少 pos delta 数量
 //	return this;
 //}
 
-MByteBuffer& MByteBuffer::readInt8(char& tmpByte)
+MByteBuffer& MByteBuffer::readInt8(int8& tmpByte)
 {
 	if (canRead(sizeof(char)))
 	{
-		tmpByte = (char)System.BitConverter.ToChar(m_dynBuff->getBuff()uff, (int)m_pos);
+		tmpByte = (char)BitConverter::ToChar(m_dynBuff->getBuff(), (int)m_pos);
 		advPos(sizeof(char));
 	}
 
@@ -276,8 +288,8 @@ MByteBuffer& MByteBuffer::readUnsignedInt8(uint8& tmpByte)
 {
 	if (canRead(sizeof(uint8)))
 	{
-		tmpByte = (byte)System.BitConverter.ToChar(m_dynBuff.buff, (int)m_pos);
-		advPos(sizeof(byte));
+		tmpByte = (uint8)BitConverter::ToChar(m_dynBuff->getBuff(), (int)m_pos);
+		advPos(sizeof(uint8));
 	}
 
 	//check();
@@ -285,22 +297,15 @@ MByteBuffer& MByteBuffer::readUnsignedInt8(uint8& tmpByte)
 	return *this;
 }
 
-MByteBuffer& MByteBuffer::readInt16(int16 tmpShort)
+MByteBuffer& MByteBuffer::readInt16(int16& tmpShort)
 {
 	if (canRead(sizeof(int16)))
 	{
-		if (m_endian == SystemEndian.m_sEndian)
+		if (m_endian != sSysEndian)
 		{
-			tmpShort = System.BitConverter.ToInt16(m_dynBuff.buff, (int)m_pos);
+			BufferUtil::Reverse(m_dynBuff->getBuff(), (int)m_pos, sizeof(short));
 		}
-		else
-		{
-			//Array.Copy(m_dynBuff.buff, (int)m_pos, m_shortByte, 0, sizeof(short));
-			//Array.Reverse(m_shortByte);
-			//tmpShort = System.BitConverter.ToInt16(m_shortByte, 0);
-			Array.Reverse(m_dynBuff.buff, (int)m_pos, sizeof(short));
-			System.BitConverter.ToInt16(m_dynBuff.buff, (int)m_pos);
-		}
+		tmpShort = BitConverter::ToInt16(m_dynBuff->getBuff(), (int)m_pos);
 
 		advPos(sizeof(int16));
 	}
@@ -310,265 +315,217 @@ MByteBuffer& MByteBuffer::readInt16(int16 tmpShort)
 	return *this;
 }
 
-MByteBuffer& MByteBuffer::readUnsignedInt16(ref ushort tmpUshort)
+MByteBuffer& MByteBuffer::readUnsignedInt16(uint16& tmpUshort)
 {
-	if (canRead(sizeof(ushort)))
+	if (canRead(sizeof(uint16)))
 	{
-		if (m_endian == SystemEndian.m_sEndian)
+		if (m_endian != sSysEndian)
 		{
-			tmpUshort = System.BitConverter.ToUInt16(m_dynBuff.buff, (int)m_pos);
+			BufferUtil::Reverse(m_dynBuff->getBuff(), (int)m_pos, sizeof(uint16));
 		}
-		else
-		{
-			//Array.Copy(m_dynBuff.buff, (int)m_pos, m_shortByte, 0, sizeof(ushort));
-			//Array.Reverse(m_shortByte);
-			//tmpUshort = System.BitConverter.ToUInt16(m_shortByte, 0);
-			Array.Reverse(m_dynBuff.buff, (int)m_pos, sizeof(ushort));
-			System.BitConverter.ToUInt16(m_dynBuff.buff, (int)m_pos);
-		}
+		tmpUshort = BitConverter::ToUInt16(m_dynBuff->getBuff(), (int)m_pos);
 
-		advPos(sizeof(ushort));
+		advPos(sizeof(uint16));
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
-MByteBuffer& MByteBuffer::readInt32(ref int tmpInt)
+MByteBuffer& MByteBuffer::readInt32(int32& tmpInt)
 {
-	if (canRead(sizeof(int)))
+	if (canRead(sizeof(int32)))
 	{
-		if (m_endian == SystemEndian.m_sEndian)
+		if (m_endian != sSysEndian)
 		{
-			tmpInt = System.BitConverter.ToInt32(m_dynBuff.buff, (int)m_pos);
+			BufferUtil::Reverse(m_dynBuff->getBuff(), (int)m_pos, sizeof(int32));
 		}
-		else
-		{
-			//Array.Copy(m_dynBuff.buff, (int)m_pos, m_intByte, 0, sizeof(int));
-			//Array.Reverse(m_intByte);
-			//tmpInt = System.BitConverter.ToInt32(m_intByte, 0);
-			Array.Reverse(m_dynBuff.buff, (int)m_pos, sizeof(int));
-			System.BitConverter.ToInt32(m_dynBuff.buff, (int)m_pos);
-		}
-		advPos(sizeof(int));
+		tmpInt = BitConverter::ToInt32(m_dynBuff->getBuff(), (int)m_pos);
+
+		advPos(sizeof(int32));
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
-MByteBuffer& MByteBuffer::readUnsignedInt32(ref uint tmpUint)
+MByteBuffer& MByteBuffer::readUnsignedInt32(uint32& tmpUint)
 {
-	if (canRead(sizeof(uint)))
+	if (canRead(sizeof(uint32)))
 	{
-		if (m_endian == SystemEndian.m_sEndian)
+		if (m_endian != sSysEndian)
 		{
-			tmpUint = System.BitConverter.ToUInt32(m_dynBuff.buff, (int)m_pos);
+			BufferUtil::Reverse(m_dynBuff->getBuff(), (int)m_pos, sizeof(uint32));
 		}
-		else
-		{
-			//Array.Copy(m_dynBuff.buff, (int)m_pos, m_intByte, 0, sizeof(uint));
-			//Array.Reverse(m_intByte);
-			//tmpUint = System.BitConverter.ToUInt32(m_intByte, 0);
-			Array.Reverse(m_dynBuff.buff, (int)m_pos, sizeof(uint));
-			System.BitConverter.ToUInt32(m_dynBuff.buff, (int)m_pos);
-		}
+		tmpUint = BitConverter::ToUInt32(m_dynBuff->getBuff(), (int)m_pos);
 
-		advPos(sizeof(uint));
+		advPos(sizeof(uint32));
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
-MByteBuffer& MByteBuffer::readInt64(ref long tmpLong)
+MByteBuffer& MByteBuffer::readInt64(int64& tmpLong)
 {
-	if (canRead(sizeof(long)))
+	if (canRead(sizeof(int64)))
 	{
-		if (m_endian == SystemEndian.m_sEndian)
+		if (m_endian != sSysEndian)
 		{
-			tmpLong = System.BitConverter.ToInt64(m_dynBuff.buff, (int)m_pos);
+			BufferUtil::Reverse(m_dynBuff->getBuff(), (int)m_pos, sizeof(int64));
 		}
-		else
-		{
-			//Array.Copy(m_dynBuff.buff, (int)m_pos, m_longByte, 0, sizeof(long));
-			//Array.Reverse(m_longByte);
-			//tmpLong = System.BitConverter.ToInt64(m_longByte, 0);
-			Array.Reverse(m_dynBuff.buff, (int)m_pos, sizeof(long));
-			System.BitConverter.ToInt64(m_dynBuff.buff, (int)m_pos);
-		}
+		tmpLong = BitConverter::ToInt64(m_dynBuff->getBuff(), (int)m_pos);
 
-		advPos(sizeof(long));
+		advPos(sizeof(int64));
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
-MByteBuffer& MByteBuffer::readUnsignedInt64(ref ulong tmpUlong)
+MByteBuffer& MByteBuffer::readUnsignedInt64(uint64& tmpUlong)
 {
-	if (canRead(sizeof(ulong)))
+	if (canRead(sizeof(uint64)))
 	{
-		if (m_endian == SystemEndian.m_sEndian)
+		if (m_endian != sSysEndian)
 		{
-			tmpUlong = System.BitConverter.ToUInt64(m_dynBuff.buff, (int)m_pos);
+			BufferUtil::Reverse(m_dynBuff->getBuff(), (int)m_pos, sizeof(uint64));
 		}
-		else
-		{
-			//Array.Copy(m_dynBuff.buff, (int)m_pos, m_longByte, 0, sizeof(ulong));
-			//Array.Reverse(m_longByte);
-			//tmpUlong = System.BitConverter.ToUInt64(m_longByte, 0);
-			Array.Reverse(m_dynBuff.buff, (int)m_pos, sizeof(ulong));
-			System.BitConverter.ToUInt64(m_dynBuff.buff, (int)m_pos);
-		}
+		tmpUlong = BitConverter::ToUInt64(m_dynBuff->getBuff(), (int)m_pos);
 
-		advPos(sizeof(ulong));
+		advPos(sizeof(uint64));
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
-MByteBuffer& MByteBuffer::readFloat(ref float tmpFloat)
+MByteBuffer& MByteBuffer::readFloat(float& tmpFloat)
 {
 	if (canRead(sizeof(float)))
 	{
-		if (m_endian == SystemEndian.m_sEndian)
+		if (m_endian != sSysEndian)
 		{
-			tmpFloat = System.BitConverter.ToSingle(m_dynBuff.buff, (int)m_pos);
+			BufferUtil::Reverse(m_dynBuff->getBuff(), (int)m_pos, sizeof(float));
 		}
-		else
-		{
-			//Array.Copy(m_dynBuff.buff, (int)m_pos, m_floatByte, 0, sizeof(float));
-			//Array.Reverse(m_floatByte);
-			//tmpFloat = System.BitConverter.ToSingle(m_floatByte, 0);
-			Array.Reverse(m_dynBuff.buff, (int)m_pos, sizeof(float));
-			System.BitConverter.ToSingle(m_dynBuff.buff, (int)m_pos);
-		}
+		tmpFloat = BitConverter::ToSingle(m_dynBuff->getBuff(), (int)m_pos);
+
 		advPos(sizeof(float));
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
-MByteBuffer& MByteBuffer::readDouble(ref double tmpDouble)
+MByteBuffer& MByteBuffer::readDouble(double& tmpDouble)
 {
 	if (canRead(sizeof(double)))
 	{
-		if (m_endian == SystemEndian.m_sEndian)
+		if (m_endian == sSysEndian)
 		{
-			tmpDouble = System.BitConverter.ToDouble(m_dynBuff.buff, (int)m_pos);
+			BufferUtil::Reverse(m_dynBuff->getBuff(), (int)m_pos, sizeof(double));
 		}
-		else
-		{
-			//Array.Copy(m_dynBuff.buff, (int)m_pos, m_doubleByte, 0, sizeof(double));
-			//Array.Reverse(m_doubleByte);
-			//tmpDouble = System.BitConverter.ToDouble(m_doubleByte, 0);
-			Array.Reverse(m_dynBuff.buff, (int)m_pos, sizeof(double));
-			System.BitConverter.ToDouble(m_dynBuff.buff, (int)m_pos);
-		}
+		tmpDouble = BitConverter::ToDouble(m_dynBuff->getBuff(), (int)m_pos);
+
 		advPos(sizeof(double));
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
-MByteBuffer& MByteBuffer::readMultiByte(ref string tmpStr, uint len, Encoding charSet)
+MByteBuffer& MByteBuffer::readMultiByte(std::string& tmpStr, uint32 len, MEncode charSet)
 {
 	// 如果是 unicode ，需要大小端判断
 	if (canRead(len))
 	{
-		tmpStr = charSet.GetString(m_dynBuff.buff, (int)m_pos, (int)len);
+		//tmpStr = charSet.GetString(m_dynBuff->getBuff(), (int)m_pos, (int)len);
 		advPos(len);
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
 // 这个是字节读取，没有大小端的区别
-MByteBuffer& MByteBuffer::readBytes(ref byte[] tmpBytes, uint len)
+MByteBuffer& MByteBuffer::readBytes(char* tmpBytes, uint32 len)
 {
 	if (canRead(len))
 	{
-		Array.Copy(m_dynBuff.buff, (int)m_pos, tmpBytes, 0, (int)len);
+		BufferUtil::Copy(m_dynBuff->getBuff(), (int)m_pos, tmpBytes, 0, (int)len);
 		advPos(len);
 	}
 
 	//check();
 
-	return this;
+	return *this;
 }
 
 // 如果要使用 writeInt8 ，直接使用 writeMultiByte 这个函数
-void MByteBuffer::writeInt8(char value)
+void MByteBuffer::writeInt8(int8 value)
 {
-	if (!canWrite(sizeof(char)))
+	if (!canWrite(sizeof(int8)))
 	{
-		extendDeltaCapicity(sizeof(char));
+		extendDeltaCapicity(sizeof(int8));
 	}
-	m_dynBuff.buff[m_pos] = (byte)value;
-	advPosAndLen(sizeof(char));
+	m_dynBuff->getBuff()[m_pos] = (int8)value;
+	advPosAndLen(sizeof(int8));
 
 	//check();
 }
 
-void writeUnsignedInt8(byte value)
+void MByteBuffer::writeUnsignedInt8(uint8 value)
 {
-	if (!canWrite(sizeof(byte)))
+	if (!canWrite(sizeof(uint8)))
 	{
-		extendDeltaCapicity(sizeof(byte));
+		extendDeltaCapicity(sizeof(uint8));
 	}
-	m_dynBuff.buff[m_pos] = value;
-	advPosAndLen(sizeof(byte));
+	m_dynBuff->getBuff()[m_pos] = value;
+	advPosAndLen(sizeof(uint8));
 
 	//check();
 }
 
-void MByteBuffer::writeInt16(short value)
+void MByteBuffer::writeInt16(int16 value)
 {
-	if (!canWrite(sizeof(short)))
+	if (!canWrite(sizeof(int16)))
 	{
-		extendDeltaCapicity(sizeof(short));
+		extendDeltaCapicity(sizeof(int16));
 	}
 
-	m_writeInt16Bytes = System.BitConverter.GetBytes(value);
-	if (m_endian != SystemEndian.m_sEndian)
+	if (m_endian != sSysEndian)
 	{
-		Array.Reverse(m_writeInt16Bytes);
+		BufferUtil::Reverse((char*)(&value), 0, sizeof(int16));
 	}
-	Array.Copy(m_writeInt16Bytes, 0, m_dynBuff.buff, m_pos, sizeof(short));
+	BufferUtil::Copy((char*)(&value), 0, m_dynBuff->getBuff(), m_pos, sizeof(int16));
 
 	advPosAndLen(sizeof(short));
 
 	//check();
 }
 
-void MByteBuffer::writeUnsignedInt16(ushort value)
+void MByteBuffer::writeUnsignedInt16(uint16 value)
 {
-	if (!canWrite(sizeof(ushort)))
+	if (!canWrite(sizeof(uint16)))
 	{
-		extendDeltaCapicity(sizeof(ushort));
+		extendDeltaCapicity(sizeof(uint16));
 	}
 
-	m_writeInt16Bytes = System.BitConverter.GetBytes(value);
-	if (m_endian != SystemEndian.m_sEndian)
+	if (m_endian != sSysEndian)
 	{
-		Array.Reverse(m_writeInt16Bytes);
+		BufferUtil::Reverse((char*)(&value), 0, sizeof(uint16));
 	}
-	Array.Copy(m_writeInt16Bytes, 0, m_dynBuff.buff, m_pos, sizeof(ushort));
+	BufferUtil::Copy((char*)(&value), 0, m_dynBuff->getBuff(), m_pos, sizeof(uint16));
 
-	advPosAndLen(sizeof(ushort));
+	advPosAndLen(sizeof(uint16));
 
 	//check();
 }
@@ -580,78 +537,74 @@ void MByteBuffer::writeInt32(int value)
 		extendDeltaCapicity(sizeof(int));
 	}
 
-	m_writeInt32Bytes = System.BitConverter.GetBytes(value);
-	if (m_endian != SystemEndian.m_sEndian)
+	if (m_endian != sSysEndian)
 	{
-		Array.Reverse(m_writeInt32Bytes);
+		BufferUtil::Reverse((char*)(&value), 0, sizeof(int32));
 	}
-	Array.Copy(m_writeInt32Bytes, 0, m_dynBuff.buff, m_pos, sizeof(int));
+	BufferUtil::Copy((char*)(&value), 0, m_dynBuff->getBuff(), m_pos, sizeof(int32));
 
 	advPosAndLen(sizeof(int));
 
 	//check();
 }
 
-void MByteBuffer::writeUnsignedInt32(uint value, bool bchangeLen = true)
+void MByteBuffer::writeUnsignedInt32(uint32 value, bool bchangeLen)
 {
-	if (!canWrite(sizeof(uint)))
+	if (!canWrite(sizeof(uint32)))
 	{
-		extendDeltaCapicity(sizeof(uint));
+		extendDeltaCapicity(sizeof(uint32));
 	}
 
-	m_writeInt32Bytes = System.BitConverter.GetBytes(value);
-	if (m_endian != SystemEndian.m_sEndian)
+	if (m_endian != sSysEndian)
 	{
-		Array.Reverse(m_writeInt32Bytes);
+		BufferUtil::Reverse((char*)(&value), 0, sizeof(uint32));
 	}
-	Array.Copy(m_writeInt32Bytes, 0, m_dynBuff.buff, m_pos, sizeof(uint));
+	BufferUtil::Copy((char*)(&value), 0, m_dynBuff->getBuff(), m_pos, sizeof(uint32));
 
 	if (bchangeLen)
 	{
-		advPosAndLen(sizeof(uint));
+		advPosAndLen(sizeof(uint32));
 	}
 	else
 	{
-		advPos(sizeof(uint));
+		advPos(sizeof(uint32));
 	}
 
 	//check();
 }
 
-void MByteBuffer::writeInt64(long value)
+void MByteBuffer::writeInt64(int64 value)
 {
-	if (!canWrite(sizeof(long)))
+	if (!canWrite(sizeof(int64)))
 	{
-		extendDeltaCapicity(sizeof(long));
+		extendDeltaCapicity(sizeof(int64));
 	}
 
-	m_writeInt64Bytes = System.BitConverter.GetBytes(value);
-	if (m_endian != SystemEndian.m_sEndian)
+	if (m_endian != sSysEndian)
 	{
-		Array.Reverse(m_writeInt64Bytes);
+		BufferUtil::Reverse((char*)(&value), 0, sizeof(int64));
 	}
-	Array.Copy(m_writeInt64Bytes, 0, m_dynBuff.buff, m_pos, sizeof(long));
+	BufferUtil::Copy((char*)(&value), 0, m_dynBuff->getBuff(), m_pos, sizeof(int64));
 
 	advPosAndLen(sizeof(long));
 
 	//check();
 }
 
-void MByteBuffer::writeUnsignedInt64(ulong value)
+void MByteBuffer::writeUnsignedInt64(uint64 value)
 {
-	if (!canWrite(sizeof(ulong)))
+	if (!canWrite(sizeof(uint64)))
 	{
-		extendDeltaCapicity(sizeof(ulong));
+		extendDeltaCapicity(sizeof(uint64));
 	}
 
-	m_writeInt64Bytes = System.BitConverter.GetBytes(value);
-	if (m_endian != SystemEndian.m_sEndian)
+	if (m_endian != sSysEndian)
 	{
-		Array.Reverse(m_writeInt64Bytes);
+		BufferUtil::Reverse((char*)(&value), 0, sizeof(uint64));
 	}
-	Array.Copy(m_writeInt64Bytes, 0, m_dynBuff.buff, m_pos, sizeof(ulong));
+	BufferUtil::Copy((char*)(&value), 0, m_dynBuff->getBuff(), m_pos, sizeof(uint64));
 
-	advPosAndLen(sizeof(ulong));
+	advPosAndLen(sizeof(uint64));
 
 	//check();
 }
@@ -663,12 +616,11 @@ void MByteBuffer::writeFloat(float value)
 		extendDeltaCapicity(sizeof(float));
 	}
 
-	m_writeFloatBytes = System.BitConverter.GetBytes(value);
-	if (m_endian != SystemEndian.m_sEndian)
+	if (m_endian != sSysEndian)
 	{
-		Array.Reverse(m_writeFloatBytes);
+		BufferUtil::Reverse((char*)(&value), 0, sizeof(float));
 	}
-	Array.Copy(m_writeFloatBytes, 0, m_dynBuff.buff, m_pos, sizeof(float));
+	BufferUtil::Copy((char*)(&value), 0, m_dynBuff->getBuff(), m_pos, sizeof(float));
 
 	advPosAndLen(sizeof(float));
 
@@ -682,12 +634,11 @@ void MByteBuffer::writeDouble(double value)
 		extendDeltaCapicity(sizeof(double));
 	}
 
-	m_writeDoubleBytes = System.BitConverter.GetBytes(value);
-	if (m_endian != SystemEndian.m_sEndian)
+	if (m_endian != sSysEndian)
 	{
-		Array.Reverse(m_writeDoubleBytes);
+		BufferUtil::Reverse((char*)(&value), 0, sizeof(double));
 	}
-	Array.Copy(m_writeDoubleBytes, 0, m_dynBuff.buff, m_pos, sizeof(double));
+	BufferUtil::Copy((char*)(&value), 0, m_dynBuff->getBuff(), m_pos, sizeof(double));
 
 	advPosAndLen(sizeof(double));
 
@@ -695,7 +646,7 @@ void MByteBuffer::writeDouble(double value)
 }
 
 // 写入字节， bchangeLen 是否改变长度
-void MByteBuffer::writeBytes(byte[] value, uint start, uint len, bool bchangeLen = true)
+void MByteBuffer::writeBytes(char* value, uint32 start, uint32 len, bool bchangeLen)
 {
 	if (len > 0)            // 如果有长度才写入
 	{
@@ -703,7 +654,7 @@ void MByteBuffer::writeBytes(byte[] value, uint start, uint len, bool bchangeLen
 		{
 			extendDeltaCapicity(len);
 		}
-		Array.Copy(value, start, m_dynBuff.buff, m_pos, len);
+		BufferUtil::Copy(value, start, m_dynBuff->getBuff(), m_pos, len);
 		if (bchangeLen)
 		{
 			advPosAndLen(len);
@@ -718,80 +669,80 @@ void MByteBuffer::writeBytes(byte[] value, uint start, uint len, bool bchangeLen
 }
 
 // 写入字符串
-void MByteBuffer::writeMultiByte(string value, Encoding charSet, int len)
+void MByteBuffer::writeMultiByte(std::string& value, MEncode charSet, int len)
 {
-	int num = 0;
+	//int num = 0;
 
-	if (null != value)
-	{
-		//char[] charPtr = value.ToCharArray();
-		num = charSet.GetByteCount(value);
+	//if (value.length() > 0)
+	//{
+	//	//char[] charPtr = value.ToCharArray();
+	//	num = charSet.GetByteCount(value);
 
-		if (0 == len)
-		{
-			len = num;
-		}
+	//	if (0 == len)
+	//	{
+	//		len = num;
+	//	}
 
-		if (!canWrite((uint)len))
-		{
-			extendDeltaCapicity((uint)len);
-		}
+	//	if (!canWrite((uint32)len))
+	//	{
+	//		extendDeltaCapicity((uint32)len);
+	//	}
 
-		if (num < len)
-		{
-			Array.Copy(charSet.GetBytes(value), 0, m_dynBuff.buff, m_pos, num);
-			// 后面补齐 0 
-			Array.Clear(m_dynBuff.buff, (int)(m_pos + num), len - num);
-		}
-		else
-		{
-			Array.Copy(charSet.GetBytes(value), 0, m_dynBuff.buff, m_pos, len);
-		}
-		advPosAndLen((uint)len);
-	}
-	else
-	{
-		if (!canWrite((uint)len))
-		{
-			extendDeltaCapicity((uint)len);
-		}
+	//	if (num < len)
+	//	{
+	//		BufferUtil::Copy(charSet.GetBytes(value), 0, m_dynBuff->getBuff(), m_pos, num);
+	//		// 后面补齐 0 
+	//		BufferUtil::Clear(m_dynBuff->getBuff(), (int)(m_pos + num), len - num);
+	//	}
+	//	else
+	//	{
+	//		BufferUtil::Copy(charSet.GetBytes(value), 0, m_dynBuff->getBuff(), m_pos, len);
+	//	}
+	//	advPosAndLen((uint32)len);
+	//}
+	//else
+	//{
+	//	if (!canWrite((uint32)len))
+	//	{
+	//		extendDeltaCapicity((uint32)len);
+	//	}
 
-		advPosAndLen((uint)len);
-	}
+	//	advPosAndLen((uint32)len);
+	//}
 
 	//check();
 }
 
 // 替换已经有的一段数据
-void MByteBuffer::replace(byte[] srcBytes, uint srcStartPos = 0, uint srclen_ = 0, uint destStartPos = 0, uint destlen_ = 0)
+void MByteBuffer::replace(char* srcBytes, uint32 srcStartPos, uint32 srclen_, uint32 destStartPos, uint32 destlen_)
 {
-	uint lastLeft = length - destStartPos - destlen_;        // 最后一段的长度
-	length = destStartPos + srclen_ + lastLeft;      // 设置大小，保证足够大小空间
+	uint32 lastLeft = this->getLength() - destStartPos - destlen_;        // 最后一段的长度
+	this->setLength(destStartPos + srclen_ + lastLeft);      // 设置大小，保证足够大小空间
 
-	position = destStartPos + srclen_;
+	this->setPos(destStartPos + srclen_);
 	if (lastLeft > 0)
 	{
-		writeBytes(m_dynBuff.buff, destStartPos + destlen_, lastLeft, false);          // 这个地方自己区域覆盖自己区域，可以保证自己不覆盖自己区域
+		writeBytes(m_dynBuff->getBuff(), destStartPos + destlen_, lastLeft, false);          // 这个地方自己区域覆盖自己区域，可以保证自己不覆盖自己区域
 	}
 
-	position = destStartPos;
+	this->setPos(destStartPos);
 	writeBytes(srcBytes, srcStartPos, srclen_, false);
 	//check();
 }
 
-void MByteBuffer::insertUnsignedInt32(uint value)
+void MByteBuffer::insertUnsignedInt32(uint32 value)
 {
-	length += sizeof(int);       // 扩大长度
+	incLenDelta(sizeof(uint32));       // 扩大长度
 	writeUnsignedInt32(value);     // 写入
 	//check();
 }
 
-ByteBuffer MByteBuffer::readUnsignedLongByOffset(ref ulong tmpUlong, uint offset)
+MByteBuffer& MByteBuffer::readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset)
 {
-	position = offset;
-	readUnsignedInt64(ref tmpUlong);
+	this->setPos(offset);
+	readUnsignedInt64(tmpUlong);
 	//check();
-	return this;
+	return *this;
 }
 
 //bool MByteBuffer::check()

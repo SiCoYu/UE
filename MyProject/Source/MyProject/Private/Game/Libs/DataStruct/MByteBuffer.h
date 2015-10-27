@@ -57,6 +57,9 @@ protected:
 public:
 	void incPosDelta(int delta);        // 添加 pos delta 数量
 	void decPosDelta(int delta);		// 减少 pos delta 数量
+
+	void incLenDelta(int delta);
+	void decLenDelta(int delta);
 	// 压缩
 	//uint32 compress(uint32 len_ = 0, CompressionAlgorithm algorithm = CompressionAlgorithm.ZLIB);
 	// 解压
@@ -66,28 +69,28 @@ public:
 	// 解密，现在必须 8 字节对齐解密
 	//void decrypt(CryptContext cryptContext, uint len_ = 0);
 	MByteBuffer& readBoolean(bool& tmpBool);
-	MByteBuffer& readInt8(char& tmpByte);
-	MByteBuffer& readUnsignedInt8(char& tmpByte);
-	MByteBuffer& readInt16(short& tmpShort);
+	MByteBuffer& readInt8(int8& tmpByte);
+	MByteBuffer& readUnsignedInt8(uint8& tmpByte);
+	MByteBuffer& readInt16(int16& tmpShort);
 	MByteBuffer& readUnsignedInt16(uint16& tmpUshort);
-	MByteBuffer& readInt32(int& tmpInt);
+	MByteBuffer& readInt32(int32& tmpInt);
 	MByteBuffer& readUnsignedInt32(uint32& tmpUint);
-	MByteBuffer& readInt64(long& tmpLong);
-	MByteBuffer& readUnsignedInt64(unsigned long& tmpUlong);
+	MByteBuffer& readInt64(int64& tmpLong);
+	MByteBuffer& readUnsignedInt64(uint64& tmpUlong);
 	MByteBuffer& readFloat(float& tmpFloat);
 	MByteBuffer& readDouble(double& tmpDouble);
 	MByteBuffer& readMultiByte(std::string& tmpStr, uint32 len, MEncode charSet);
 	// 这个是字节读取，没有大小端的区别
-	MByteBuffer readBytes(char* tmpBytes, uint32 len);
+	MByteBuffer& readBytes(char* tmpBytes, uint32 len);
 	// 如果要使用 writeInt8 ，直接使用 writeMultiByte 这个函数
-	void writeInt8(char value);
+	void writeInt8(int8 value);
 	void writeUnsignedInt8(uint8 value);
-	void writeInt16(short value);
+	void writeInt16(int16 value);
 	void writeUnsignedInt16(uint16 value);
-	void writeInt32(int value);
+	void writeInt32(int32 value);
 	void writeUnsignedInt32(uint32 value, bool bchangeLen = true);
-	void writeInt64(long value);
-	void writeUnsignedInt64(unsigned long value);
+	void writeInt64(int64 value);
+	void writeUnsignedInt64(uint64 value);
 	void writeFloat(float value);
 	void writeDouble(double value);
 	// 写入字节， bchangeLen 是否改变长度
@@ -101,7 +104,7 @@ protected:
 
 public:
 	void insertUnsignedInt32(uint32 value);
-	MByteBuffer& readUnsignedLongByOffset(unsigned long& tmpUlong, uint32 offset);
+	MByteBuffer& readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset);
 	//bool check();
 };
 

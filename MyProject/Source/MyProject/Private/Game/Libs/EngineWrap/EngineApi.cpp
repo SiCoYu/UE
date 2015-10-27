@@ -124,3 +124,8 @@ void EngineApi::SetParent(UWidget*child, UPanelWidget* parent, bool worldPositio
 {
 	parent->AddChild(child);
 }
+
+//void EngineApi::ConvertString(const FString& Source, icu::UnicodeString& Destination, const bool ShouldNullTerminate)
+//{
+//	ICUUtilities::ConvertString(Source, Destination, ShouldNullTerminate);
+//}

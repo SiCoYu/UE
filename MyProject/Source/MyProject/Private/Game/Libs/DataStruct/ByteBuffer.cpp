@@ -204,7 +204,7 @@ ByteBuffer& ByteBuffer::readDouble(double& value)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readMultiByte(std::string& value, size_t len, MEncode::MEncode encode)
+ByteBuffer& ByteBuffer::readMultiByte(std::string& value, size_t len, MEncode encode)
 {
 	value.clear();
 	if (len)		// 如果不为 0 ，就读取指定数量
@@ -231,7 +231,7 @@ ByteBuffer& ByteBuffer::readMultiByte(std::string& value, size_t len, MEncode::M
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readMultiByte(char* value, size_t len, MEncode::MEncode encode)
+ByteBuffer& ByteBuffer::readMultiByte(char* value, size_t len, MEncode encode)
 {
 	size_t readNum = 0;	// 已经读取的数量
 	char c = 0;

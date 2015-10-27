@@ -70,6 +70,7 @@ public class MyProject : ModuleRules
 
         PrivateDependencyModuleNames.AddRange(
             new string[] {
+                "Core",
                 "InputCore",
 				"Slate",
 				"SlateCore",
