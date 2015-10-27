@@ -125,6 +125,11 @@ void EngineApi::SetParent(UWidget*child, UPanelWidget* parent, bool worldPositio
 	parent->AddChild(child);
 }
 
+void EngineApi::SetContentForSlot(UUserWidget* userWidget, FName SlotName, UWidget* Content)
+{
+	userWidget->SetContentForSlot(SlotName, Content);
+}
+
 //void EngineApi::ConvertString(const FString& Source, icu::UnicodeString& Destination, const bool ShouldNullTerminate)
 //{
 //	ICUUtilities::ConvertString(Source, Destination, ShouldNullTerminate);

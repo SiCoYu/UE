@@ -48,6 +48,11 @@ public:
 
 	static void SetParent(UWidget*child, UPanelWidget* parent, bool worldPositionStays = true);
 
+	/**
+	 * @brief Ìí¼ÓÒ»¸ö Child 
+	 */
+	void SetContentForSlot(UUserWidget* userWidget, FName SlotName, UWidget* Content);
+
 	//static void ConvertString(const FString& Source, icu::UnicodeString& Destination, const bool ShouldNullTerminate);
 };
 
