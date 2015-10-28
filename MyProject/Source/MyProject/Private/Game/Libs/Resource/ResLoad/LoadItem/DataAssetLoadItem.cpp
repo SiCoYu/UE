@@ -24,7 +24,7 @@ void UDataAssetLoadItem::loadFile(const FString& Filename)
 		if (FFileHelper::LoadFileToArray(arrayBuffer, *Filename))
 		{
 			ByteBuffer* fileBU = new ByteBuffer(arrayBuffer.GetAllocatedSize());
-			fileBU->writeBytes((const char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
+			fileBU->writeBytes((char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
 		}
 	}
 }

@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "Array.h"
 
-void BufferUtil::Copy(void* src, long srcIndex, void* dest, long destIndex, long length)
+void Array::Copy(void* src, long srcIndex, void* dest, long destIndex, long length)
 {
 	char *tmp_source, *tmp_dest;
 	tmp_source = (char *)src + srcIndex;
@@ -12,7 +12,7 @@ void BufferUtil::Copy(void* src, long srcIndex, void* dest, long destIndex, long
 	memmove(tmp_dest, tmp_source, length);
 }
 
-void BufferUtil::Reverse(char* buff, int index, int length)
+void Array::Reverse(char* buff, int index, int length)
 {
 	// 如果是 length 0 或者 1 直接返回
 	if (length <= 1)
@@ -35,7 +35,7 @@ void BufferUtil::Reverse(char* buff, int index, int length)
 	}
 }
 
-void BufferUtil::Clear(char* buff, int index, int length)
+void Array::Clear(char* buff, int index, int length)
 {
 	memset(buff + index, 0, length);
 }

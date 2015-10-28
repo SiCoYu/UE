@@ -24,7 +24,7 @@ void UBinaryLoadItem::loadFile(const FString& Filename)
 		if (FFileHelper::LoadFileToArray(arrayBuffer, *Filename))
 		{
 			ByteBuffer* pFileBU = new ByteBuffer(arrayBuffer.GetAllocatedSize());
-			pFileBU->writeBytes((const char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
+			pFileBU->writeBytes((char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
 			delete pFileBU;
 		}
 	}

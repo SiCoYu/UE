@@ -3,7 +3,7 @@
 #include "TableBase.h"
 #include "TableItemBase.h"
 #include "UtilStr.h"
-#include "SystemEndian.h"
+#include "Endian.h"
 #include "TableObject.h"
 #include "TableCard.h"
 #include "TableSkill.h"
@@ -68,8 +68,8 @@ void TableSys::loadOneTable(TableID::TableID tableID)
 
 	if (FFileHelper::LoadFileToArray(m_arrayBuffer, *Filename))
 	{
-		m_byteBuffer->setCapacity(m_arrayBuffer.GetAllocatedSize());
-		m_byteBuffer->writeBytes((const char*)(m_arrayBuffer.GetData()), 0, m_arrayBuffer.GetAllocatedSize());
+		m_byteBuffer->setLength(m_arrayBuffer.GetAllocatedSize());
+		m_byteBuffer->writeBytes((char*)(m_arrayBuffer.GetData()), 0, m_arrayBuffer.GetAllocatedSize());
 		m_byteBuffer->setPos(0);
 		readTable(tableID, m_byteBuffer);
 	}
@@ -125,7 +125,7 @@ void TableSys::readTable(TableID::TableID tableID, ByteBuffer* bytes)
     TableBase* table = m_dicTable[tableID];
 	table->m_byteBuffer = bytes;
 
-	bytes->setEndian(eSys_LITTLE_ENDIAN);
+	bytes->setEndian(eLITTLE_ENDIAN);
 	uint32 len = 0;
 	bytes->readUnsignedInt32(len);
     uint32 i = 0;

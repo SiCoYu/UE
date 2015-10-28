@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MCircularBuffer.h"
 #include "DynBufResizePolicy.h"
-#include "BufferUtil.h"
+#include "Array.h"
 #include "ByteBuffer.h"
 
 /**
@@ -94,9 +94,9 @@ void MCircularBuffer::linearize()
 	{
 		// 数据在两个不连续的内存空间中
 		char* tmp = new char[m_last];
-		BufferUtil::Copy(m_dynBuffer->m_buff, 0, tmp, 0, m_last);  // 拷贝一段内存空间中的数据到 tmp
-		BufferUtil::Copy(m_dynBuffer->m_buff, m_first, m_dynBuffer->m_buff, 0, m_dynBuffer->m_iCapacity - m_first);  // 拷贝第一段数据到 0 索引位置
-		BufferUtil::Copy(tmp, 0, m_dynBuffer->m_buff, m_dynBuffer->m_iCapacity - m_first, m_last);      // 拷贝第二段数据到缓冲区
+		Array::Copy(m_dynBuffer->m_buff, 0, tmp, 0, m_last);  // 拷贝一段内存空间中的数据到 tmp
+		Array::Copy(m_dynBuffer->m_buff, m_first, m_dynBuffer->m_buff, 0, m_dynBuffer->m_iCapacity - m_first);  // 拷贝第一段数据到 0 索引位置
+		Array::Copy(tmp, 0, m_dynBuffer->m_buff, m_dynBuffer->m_iCapacity - m_first, m_last);      // 拷贝第二段数据到缓冲区
 
 		delete tmp;
 
@@ -119,12 +119,12 @@ void MCircularBuffer::setCapacity(std::size_t newCapacity)
 	if (isLinearized()) // 如果是在一段内存空间
 	{
 		// 已经是线性空间了仍然将数据移动到索引 0 的位置
-		BufferUtil::Copy(m_dynBuffer->m_buff, m_first, tmpbuff, 0, m_dynBuffer->m_size);
+		Array::Copy(m_dynBuffer->m_buff, m_first, tmpbuff, 0, m_dynBuffer->m_size);
 	}
 	else    // 如果在两端内存空间
 	{
-		BufferUtil::Copy(m_dynBuffer->m_buff, m_first, tmpbuff, 0, m_dynBuffer->m_iCapacity - m_first);
-		BufferUtil::Copy(m_dynBuffer->m_buff, 0, tmpbuff, m_dynBuffer->m_iCapacity - m_first, m_last);
+		Array::Copy(m_dynBuffer->m_buff, m_first, tmpbuff, 0, m_dynBuffer->m_iCapacity - m_first);
+		Array::Copy(m_dynBuffer->m_buff, 0, tmpbuff, m_dynBuffer->m_iCapacity - m_first, m_last);
 	}
 
 	m_first = 0;
@@ -162,17 +162,17 @@ void MCircularBuffer::pushBackArr(char* items, uint32 start, std::size_t len)
 	{
 		if (len <= (m_dynBuffer->m_iCapacity - m_last))
 		{
-			BufferUtil::Copy(items, start, m_dynBuffer->m_buff, m_last, len);
+			Array::Copy(items, start, m_dynBuffer->m_buff, m_last, len);
 		}
 		else
 		{
-			BufferUtil::Copy(items, start, m_dynBuffer->m_buff, m_last, m_dynBuffer->m_iCapacity - m_last);
-			BufferUtil::Copy(items, m_dynBuffer->m_iCapacity - m_last, m_dynBuffer->m_buff, 0, len - (m_dynBuffer->m_iCapacity - m_last));
+			Array::Copy(items, start, m_dynBuffer->m_buff, m_last, m_dynBuffer->m_iCapacity - m_last);
+			Array::Copy(items, m_dynBuffer->m_iCapacity - m_last, m_dynBuffer->m_buff, 0, len - (m_dynBuffer->m_iCapacity - m_last));
 		}
 	}
 	else
 	{
-		BufferUtil::Copy(items, start, m_dynBuffer->m_buff, m_last, len);
+		Array::Copy(items, start, m_dynBuffer->m_buff, m_last, len);
 	}
 
 	m_last += len;
@@ -202,17 +202,17 @@ void MCircularBuffer::pushFrontArr(char* items, std::size_t len)
 	{
 		if (len <= m_first)
 		{
-			BufferUtil::Copy(items, 0, m_dynBuffer->m_buff, m_first - len, len);
+			Array::Copy(items, 0, m_dynBuffer->m_buff, m_first - len, len);
 		}
 		else
 		{
-			BufferUtil::Copy(items, len - m_first, m_dynBuffer->m_buff, 0, m_first);
-			BufferUtil::Copy(items, 0, m_dynBuffer->m_buff, m_dynBuffer->m_iCapacity - (len - m_first), len - m_first);
+			Array::Copy(items, len - m_first, m_dynBuffer->m_buff, 0, m_first);
+			Array::Copy(items, 0, m_dynBuffer->m_buff, m_dynBuffer->m_iCapacity - (len - m_first), len - m_first);
 		}
 	}
 	else
 	{
-		BufferUtil::Copy(items, 0, m_dynBuffer->m_buff, m_first - len, len);
+		Array::Copy(items, 0, m_dynBuffer->m_buff, m_first - len, len);
 	}
 
 	if (len <= m_first)
