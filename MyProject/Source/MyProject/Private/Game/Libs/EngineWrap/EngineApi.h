@@ -24,6 +24,7 @@ public:
 
 	static void addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName);
 	static float getUTCSec();
+	static float GetRealTimeSeconds();
 	/**
 	 *@brief 插入挂在点
 	 */
@@ -54,6 +55,21 @@ public:
 	void SetContentForSlot(UUserWidget* userWidget, FName SlotName, UWidget* Content);
 
 	//static void ConvertString(const FString& Source, icu::UnicodeString& Destination, const bool ShouldNullTerminate);
+
+	/**
+	 * @brief 光线点选
+	 */
+	static bool LineTraceSingleByChannel(UWorld* World, struct FHitResult& OutHit, const FVector& Start, const FVector& End, ECollisionChannel TraceChannel, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam);
+
+	/**
+	 * @brief 区域点选
+	 */
+	static bool SweepTestByChannel(UWorld* World, const FVector& Start, const FVector& End, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam);
+
+	/**
+	 * @brief 重叠测试点选
+	 */
+	static bool OverlapBlockingTestByChannel(UWorld* World, const FVector& Pos, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam);
 };
 
 #endif				// __ENGINEAPI_H

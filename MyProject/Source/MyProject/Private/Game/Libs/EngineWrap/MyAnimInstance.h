@@ -13,4 +13,7 @@ class UMyAnimInstance : public UAnimInstance
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Anim)
 	FRotator NeckSpring;
+
+public:
+	void testA();
 };

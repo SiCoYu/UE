@@ -75,6 +75,11 @@ float EngineApi::getUTCSec()
 	return g_pEngineApi->getWorld()->GetTimeSeconds();
 }
 
+float EngineApi::GetRealTimeSeconds()
+{
+	return g_pEngineApi->getWorld()->GetRealTimeSeconds();
+}
+
 void EngineApi::InsertMountPoint(const FString& RootPath, const FString& ContentPath)
 {
 	FPackageName::RegisterMountPoint(RootPath, ContentPath);
@@ -134,3 +139,18 @@ void EngineApi::SetContentForSlot(UUserWidget* userWidget, FName SlotName, UWidg
 //{
 //	ICUUtilities::ConvertString(Source, Destination, ShouldNullTerminate);
 //}
+
+bool EngineApi::LineTraceSingleByChannel(UWorld* World, struct FHitResult& OutHit, const FVector& Start, const FVector& End, ECollisionChannel TraceChannel, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam)
+{
+	World->LineTraceSingleByChannel(OutHit, Start, End, TraceChannel, Params, ResponseParam);
+}
+
+bool EngineApi::SweepTestByChannel(UWorld* World, const FVector& Start, const FVector& End, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam)
+{
+	World->SweepTestByChannel(Start, End, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
+}
+
+bool EngineApi::OverlapBlockingTestByChannel(UWorld* World, const FVector& Pos, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam)
+{
+	World->OverlapBlockingTestByChannel(Pos, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
+}
