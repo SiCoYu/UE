@@ -8,42 +8,42 @@ char BitConverter::ToChar(char* value, int startIndex)
 
 int16 BitConverter::ToInt16(char* value, int startIndex)
 {
-	return 0;
+	return *((int16*)(value + startIndex));
 }
 
 int32 BitConverter::ToInt32(char* value, int startIndex)
 {
-	return 0;
+	return *((int32*)(value + startIndex));
 }
 
 int64 BitConverter::ToInt64(char* value, int startIndex)
 {
-	return 0;
+	return *((int64*)(value + startIndex));
 }
 
 uint16 BitConverter::ToUInt16(char* value, int startIndex)
 {
-	return 0;
+	return *((uint16*)(value + startIndex));
 }
 
 uint32 BitConverter::ToUInt32(char* value, int startIndex)
 {
-	return 0;
+	return *((uint32*)(value + startIndex));
 }
 
 uint64 BitConverter::ToUInt64(char* value, int startIndex)
 {
-	return 0;
+	return *((uint64*)(value + startIndex));
 }
 
 float BitConverter::ToSingle(char* value, int startIndex)
 {
-	return 0;
+	return *((float*)(value + startIndex));
 }
 
 double BitConverter::ToDouble(char* value, int startIndex)
 {
-	return 0;
+	return *((double*)(value + startIndex));
 }
 
 int32 BitConverter::swapByteOrder(int32 value)
