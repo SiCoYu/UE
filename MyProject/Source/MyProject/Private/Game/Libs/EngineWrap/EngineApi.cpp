@@ -154,3 +154,23 @@ bool EngineApi::OverlapBlockingTestByChannel(UWorld* World, const FVector& Pos, 
 {
 	World->OverlapBlockingTestByChannel(Pos, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
 }
+
+float EngineApi::GetAxisValue(UInputComponent* pUInputComponent, const FName AxisName)
+{
+	pUInputComponent->GetAxisValue(AxisName);
+}
+
+float EngineApi::GetInputAxisValue(AActor* pAActor, const FName InputAxisName)
+{
+	pAActor->GetInputAxisValue(InputAxisName);
+}
+
+float EngineApi::GetInputAxisValue(const FName InputAxisName)
+{
+	g_pEngineData->getMainActor()->GetInputAxisValue(InputAxisName);
+}
+
+static FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
+{
+	return pUSceneComponent->ComponentToWorld;
+}

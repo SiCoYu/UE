@@ -1,9 +1,55 @@
 #include "MyProject.h"
 #include "InputMgr.h"
 
+bool InputMgr::showTooltips = true;
+FVector2D InputMgr::lastTouchPosition = FVector2D::ZeroVector;
+FVector InputMgr::lastWorldPosition = FVector::ZeroVector;
+ControlScheme InputMgr::currentScheme = Mouse;
+FKey InputMgr::currentKey = EKeys::AnyKey;
+int InputMgr::currentTouchID = -1;
+bool InputMgr::inputHasFocus = false;
+
+AActor* InputMgr::mCurrentSelection = nullptr;
+AActor* InputMgr::mNextSelection = nullptr;
+ControlScheme InputMgr::mNextScheme = Controller;
+
+float InputMgr::mNextEvent = 0;
+std::map<int, MouseOrTouch> InputMgr::mTouches;
+
+int InputMgr::mWidth = 0;
+int InputMgr::mHeight = 0;
+bool InputMgr::isDragging = false;
+bool InputMgr::mNotifying = false;
+
 InputMgr::InputMgr()
 {
-	
+	eventType = World_3D;
+	eventsGoToColliders = false;
+	debug = false;
+	useMouse = true;
+	useTouch = true;
+	allowMultiTouch = true;
+	useKeyboard = true;
+	useController = true;
+	stickyTooltip = true;
+	tooltipDelay = 1;
+	mouseDragThreshold = 4;
+	mouseClickThreshold = 10;
+	touchDragThreshold = 40;
+	touchClickThreshold = 40;
+	rangeDistance = -1;
+	scrollAxisName = "Mouse ScrollWheel";
+	verticalAxisName = "Vertical";
+	horizontalAxisName = "Horizontal";
+
+	submitKey0 = EKeys::Enter;
+	submitKey1 = EKeys::Gamepad_LeftThumbstick;
+	cancelKey0 = EKeys::Escape;
+	cancelKey1 = EKeys::Gamepad_RightThumbstick;
+
+	mTooltip = nullptr;
+	mTooltipTime = 0;
+	mNextRaycast = 0;
 }
 
 bool InputMgr::getStickyPress()
@@ -11,63 +57,67 @@ bool InputMgr::getStickyPress()
 	return true;
 }
 
-Ray InputMgr::getCurrentRay()
+MRay InputMgr::getCurrentRay()
 {
-	return (currentCamera != null && currentTouch != null) ?
-		currentCamera.ScreenPointToRay(currentTouch.pos) : new Ray();
+	//return (currentCamera != null && currentTouch != null) ?
+	//	currentCamera.ScreenPointToRay(currentTouch.pos) : new Ray();
+
+	return MRay();
 }
 
-GameObject InputMgr::getGenericEventHandler()
+AActor* InputMgr::getGenericEventHandler()
 {
 	return mGenericHandler;
 }
 
-void InputMgr::setGenericEventHandler(GameObject value)
+void InputMgr::setGenericEventHandler(AActor* value)
 {
 	mGenericHandler = value;
 }
 
 bool InputMgr::getHandlesEvents()
 {
-	return eventHandler == this;
+	//return eventHandler == this;
+	return false;
 }
 
-Camera InputMgr::getCachedCamera()
-{
-	if (mCam == null)
-	mCam = Camera.main; return mCam;
-}
+//Camera InputMgr::getCachedCamera()
+//{
+//	if (mCam == null)
+//	mCam = Camera.main; return mCam;
+//}
 
 bool InputMgr::getIsOverUI()
 {
-	if (currentTouch != null) return currentTouch.isOverUI;
-	if (hoveredObject == null) return false;
+	if (currentTouch != nullptr) return currentTouch->getIsOverUI();
+	if (hoveredObject == nullptr) return false;
 	if (hoveredObject == fallThrough) return false;
 	//return NGUITools.FindInParents<UIRoot>(hoveredObject) != null;
 	return false;
 }
 
-GameObject InputMgr::getSelectedObject()
+AActor* InputMgr::getSelectedObject()
 {
 	return mCurrentSelection;
 }
 
-void InputMgr::setGameObject(GameObject value)
+void InputMgr::setGameObject(AActor* value)
 {
-	SetSelection(value, UICamera.currentScheme);
+	//SetSelection(value, UICamera.currentScheme);
 }
 
-bool InputMgr::IsPressed(GameObject go)
+bool InputMgr::IsPressed(AActor* go)
 {
 	for (int i = 0; i < 3; ++i) if (mMouse[i].pressed == go) return true;
-	foreach(KeyValuePair<int, MouseOrTouch> touch in mTouches) if (touch.Value.pressed == go) return true;
+	for(std::pair<int, MouseOrTouch> touch : mTouches) 
+		if (touch.second.pressed == go) return true;
 	if (controller.pressed == go) return true;
 	return false;
 }
 
-void InputMgr::SetSelection(GameObject go, ControlScheme scheme)
+void InputMgr::SetSelection(AActor* go, ControlScheme scheme)
 {
-	if (mNextSelection != null)
+	if (mNextSelection != nullptr)
 	{
 		mNextSelection = go;
 	}
@@ -84,38 +134,38 @@ void InputMgr::SetSelection(GameObject go, ControlScheme scheme)
 	}
 }
 
-System.Collections.IEnumerator InputMgr::ChangeSelection()
-{
-	yield return new WaitForEndOfFrame();
-	if (onSelect != null) onSelect(mCurrentSelection, false);
-	Notify(mCurrentSelection, "OnSelect", false);
-	mCurrentSelection = mNextSelection;
-	mNextSelection = null;
-
-	if (mCurrentSelection != null)
-	{
-		current = this;
-		currentCamera = mCam;
-		UICamera.currentScheme = mNextScheme;
-		//inputHasFocus = (mCurrentSelection.GetComponent<UIInput>() != null);
-		inputHasFocus = false;
-		if (onSelect != null) onSelect(mCurrentSelection, true);
-		Notify(mCurrentSelection, "OnSelect", true);
-		current = null;
-	}
-	else inputHasFocus = false;
-}
+//System.Collections.IEnumerator InputMgr::ChangeSelection()
+//{
+//	yield return new WaitForEndOfFrame();
+//	if (onSelect != null) onSelect(mCurrentSelection, false);
+//	Notify(mCurrentSelection, "OnSelect", false);
+//	mCurrentSelection = mNextSelection;
+//	mNextSelection = null;
+//
+//	if (mCurrentSelection != null)
+//	{
+//		current = this;
+//		currentCamera = mCam;
+//		UICamera.currentScheme = mNextScheme;
+//		//inputHasFocus = (mCurrentSelection.GetComponent<UIInput>() != null);
+//		inputHasFocus = false;
+//		if (onSelect != null) onSelect(mCurrentSelection, true);
+//		Notify(mCurrentSelection, "OnSelect", true);
+//		current = null;
+//	}
+//	else inputHasFocus = false;
+//}
 
 int InputMgr::getTouchCount()
 {
 	int count = 0;
 
-	foreach(KeyValuePair<int, MouseOrTouch> touch in mTouches)
-		if (touch.Value.pressed != null)
+	for(std::pair<int, MouseOrTouch> touch : mTouches)
+		if (touch.second.pressed != nullptr)
 			++count;
 
-	for (int i = 0; i < mMouse.Length; ++i)
-		if (mMouse[i].pressed != null)
+	for (int i = 0; i < EMouseOrTouch.eLength; ++i)
+		if (mMouse[i].pressed != nullptr)
 			++count;
 
 	if (controller.pressed != null)
@@ -142,30 +192,30 @@ int InputMgr::getDragCount()
 	return count;
 }
 
-Camera InputMgr::getMainCamera()
-{
-	UICamera mouse = eventHandler;
-	return (mouse != null) ? mouse.cachedCamera : null;
-}
+//Camera InputMgr::getMainCamera()
+//{
+//	UICamera mouse = eventHandler;
+//	return (mouse != null) ? mouse.cachedCamera : null;
+//}
+//
+//UICamera InputMgr::getEventHandler()
+//{
+//	for (int i = 0; i < list.size; ++i)
+//	{
+//		// Invalid or inactive entry -- keep going
+//		UICamera cam = list.buffer[i];
+//		if (cam == null || !cam.enabled || !NGUITools.GetActive(cam.gameObject)) continue;
+//		return cam;
+//	}
+//	return null;
+//}
 
-UICamera InputMgr::getEventHandler()
-{
-	for (int i = 0; i < list.size; ++i)
-	{
-		// Invalid or inactive entry -- keep going
-		UICamera cam = list.buffer[i];
-		if (cam == null || !cam.enabled || !NGUITools.GetActive(cam.gameObject)) continue;
-		return cam;
-	}
-	return null;
-}
-
-int InputMgr::CompareFunc(UICamera a, UICamera b)
-{
-	if (a.cachedCamera.depth < b.cachedCamera.depth) return 1;
-	if (a.cachedCamera.depth > b.cachedCamera.depth) return -1;
-	return 0;
-}
+//int InputMgr::CompareFunc(UICamera a, UICamera b)
+//{
+//	if (a.cachedCamera.depth < b.cachedCamera.depth) return 1;
+//	if (a.cachedCamera.depth > b.cachedCamera.depth) return -1;
+//	return 0;
+//}
 
 Rigidbody InputMgr::FindRootRigidbody(Transform trans)
 {

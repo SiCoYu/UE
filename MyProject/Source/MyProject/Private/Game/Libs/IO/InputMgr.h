@@ -4,6 +4,15 @@
 #include "MyProject.h"
 #include "MCamera.h"
 #include "EngineApi.h"
+#include "FastDelegate.h"
+#include <string>
+#include <map>
+#include "MRay.h"
+
+enum EMouseOrTouch
+{
+	eLength = 3,
+};
 
 enum ControlScheme
 {
@@ -87,190 +96,175 @@ public:
 class InputMgr
 {
 public:
-	static BetterList<UICamera> list = new BetterList<UICamera>();
+	//static BetterList<UICamera> list = new BetterList<UICamera>();
 
-	delegate bool GetKeyStateFunc(KeyCode key);
-	delegate float GetAxisFunc(string name);
+	static fastdelegate::FastDelegate1<FKey, bool> GetKeyDown;
 
-	static GetKeyStateFunc GetKeyDown = Input.GetKeyDown;
+	static fastdelegate::FastDelegate1<FKey, bool> GetKeyUp;
 
-	static GetKeyStateFunc GetKeyUp = Input.GetKeyUp;
+	static fastdelegate::FastDelegate1<FKey, bool> GetKey;
 
-	static GetKeyStateFunc GetKey = Input.GetKey;
+	static fastdelegate::FastDelegate1<const FName, float> GetAxis;
 
-	static GetAxisFunc GetAxis = Input.GetAxis;
+	static fastdelegate::FastDelegate1<void> onScreenResize;
 
-	delegate void OnScreenResize();
+	EventType eventType;
 
-	static OnScreenResize onScreenResize;
+	bool eventsGoToColliders;
 
-	EventType eventType = EventType.World_3D;
+	//LayerMask eventReceiverMask = -1;
 
-	bool eventsGoToColliders = false;
+	bool debug;
 
-	LayerMask eventReceiverMask = -1;
+	bool useMouse;
 
-	bool debug = false;
+	bool useTouch;
 
-	bool useMouse = true;
+	bool allowMultiTouch;
 
-	bool useTouch = true;
+	bool useKeyboard;
 
-	bool allowMultiTouch = true;
+	bool useController;
 
-	bool useKeyboard = true;
+	bool stickyTooltip;
 
-	bool useController = true;
+	float tooltipDelay;
 
-	bool stickyTooltip = true;
+	float mouseDragThreshold;
 
-	float tooltipDelay = 1f;
+	float mouseClickThreshold;
 
-	float mouseDragThreshold = 4f;
+	float touchDragThreshold;
 
-	float mouseClickThreshold = 10f;
+	float touchClickThreshold;
 
-	float touchDragThreshold = 40f;
+	float rangeDistance;
 
-	float touchClickThreshold = 40f;
+	std::string scrollAxisName;
 
-	float rangeDistance = -1f;
+	std::string verticalAxisName;
 
-	string scrollAxisName = "Mouse ScrollWheel";
+	std::string horizontalAxisName;
 
-	string verticalAxisName = "Vertical";
+	FKey submitKey0;
+	FKey submitKey1;
+	FKey cancelKey0;
+	FKey cancelKey1;
 
-	string horizontalAxisName = "Horizontal";
+	static fastdelegate::FastDelegate1<void> onCustomInput;
 
-	KeyCode submitKey0 = KeyCode.Return;
-	KeyCode submitKey1 = KeyCode.JoystickButton0;
-	KeyCode cancelKey0 = KeyCode.Escape;
-	KeyCode cancelKey1 = KeyCode.JoystickButton1;
+	static bool showTooltips;
 
-	delegate void OnCustomInput();
+	static FVector2D lastTouchPosition;
 
-	static OnCustomInput onCustomInput;
+	static FVector lastWorldPosition;
 
-	static bool showTooltips = true;
+	static FHitResult lastHit;
 
-	static Vector2 lastTouchPosition = Vector2.zero;
+	//static UICamera current = null;
 
-	static Vector3 lastWorldPosition = Vector3.zero;
+	//static Camera currentCamera = null;
 
-	static RaycastHit lastHit;
+	static ControlScheme currentScheme;
 
-	static UICamera current = null;
+	static int currentTouchID;
 
-	static Camera currentCamera = null;
+	static FKey currentKey;
 
-	static ControlScheme currentScheme = ControlScheme.Mouse;
+	static MouseOrTouch* currentTouch;
 
-	static int currentTouchID = -1;
+	static bool inputHasFocus;
 
-	static KeyCode currentKey = KeyCode.None;
+	static AActor* mGenericHandler;
 
-	static MouseOrTouch currentTouch = null;
+	static AActor* fallThrough;
 
-	static bool inputHasFocus = false;
+	static fastdelegate::FastDelegate1<AActor*, void> onClick;
+	static fastdelegate::FastDelegate1<AActor*, void> onDoubleClick;
+	static fastdelegate::FastDelegate2<AActor*, bool, void> onHover;
+	static fastdelegate::FastDelegate2<AActor*, bool, void> onPress;
+	static fastdelegate::FastDelegate2<AActor*, bool, void> onSelect;
+	static fastdelegate::FastDelegate2<AActor*, float, void> onScroll;
+	static fastdelegate::FastDelegate2<AActor*, FVector2D, void> onDrag;
+	static fastdelegate::FastDelegate1<AActor*, void> onDragStart;
+	static fastdelegate::FastDelegate2<AActor*, AActor*, void> onDragOver;
+	static fastdelegate::FastDelegate2<AActor*, AActor*, void> onDragOut;
+	static fastdelegate::FastDelegate1<AActor*, void> onDragEnd;
+	static fastdelegate::FastDelegate2<AActor*, AActor*, void> onDrop;
+	static fastdelegate::FastDelegate2<AActor*, FKey, void> onKey;
+	static fastdelegate::FastDelegate2<AActor*, bool, void> onTooltip;
+	static fastdelegate::FastDelegate1<FVector2D, void> onMouseMove;
 
-	static GameObject mGenericHandler;
+	static AActor* mCurrentSelection;
+	static AActor* mNextSelection;
+	static ControlScheme mNextScheme;
 
-	static GameObject fallThrough;
+	static AActor* mHover;
 
-	delegate void MoveDelegate(Vector2 delta);
-	delegate void VoidDelegate(GameObject go);
-	delegate void BoolDelegate(GameObject go, bool state);
-	delegate void FloatDelegate(GameObject go, float delta);
-	delegate void VectorDelegate(GameObject go, Vector2 delta);
-	delegate void ObjectDelegate(GameObject go, GameObject obj);
-	delegate void KeyCodeDelegate(GameObject go, KeyCode key);
+	static MouseOrTouch controller;
 
-	static VoidDelegate onClick;
-	static VoidDelegate onDoubleClick;
-	static BoolDelegate onHover;
-	static BoolDelegate onPress;
-	static BoolDelegate onSelect;
-	static FloatDelegate onScroll;
-	static VectorDelegate onDrag;
-	static VoidDelegate onDragStart;
-	static ObjectDelegate onDragOver;
-	static ObjectDelegate onDragOut;
-	static VoidDelegate onDragEnd;
-	static ObjectDelegate onDrop;
-	static KeyCodeDelegate onKey;
-	static BoolDelegate onTooltip;
-	static MoveDelegate onMouseMove;
+	static float mNextEvent;
 
-	static GameObject mCurrentSelection = null;
-	static GameObject mNextSelection = null;
-	static ControlScheme mNextScheme = ControlScheme.Controller;
+	static std::map<int, MouseOrTouch> mTouches;
 
-	static GameObject mHover;
+	static int mWidth;
+	static int mHeight;
 
-	static MouseOrTouch controller = new MouseOrTouch();
+	AActor* mTooltip;
 
-	static float mNextEvent = 0f;
+	// Camera mCam = null;
+	float mTooltipTime;
+	float mNextRaycast;
 
-	static Dictionary<int, MouseOrTouch> mTouches = new Dictionary<int, MouseOrTouch>();
+	static bool isDragging;
 
-	static int mWidth = 0;
-	static int mHeight = 0;
+	static AActor* hoveredObject;
 
-	GameObject mTooltip = null;
+	static bool mNotifying;
 
-	Camera mCam = null;
-	float mTooltipTime = 0f;
-	float mNextRaycast = 0f;
-
-	static bool isDragging = false;
-
-	static GameObject hoveredObject;
-
-	static bool mNotifying = false;
-
-	static MouseOrTouch[] mMouse = new MouseOrTouch[] { new MouseOrTouch(), new MouseOrTouch(), new MouseOrTouch() };
+	static MouseOrTouch mMouse[EMouseOrTouch.eLength];
 
 public:
 	InputMgr();
 
 	bool getStickyPress();
-	static Ray getCurrentRay();
-	static GameObject getGenericEventHandler();
-	static void setGenericEventHandler(GameObject value);
+	static MRay getCurrentRay();
+	static AActor* getGenericEventHandler();
+	static void setGenericEventHandler(AActor* value);
 	bool getHandlesEvents();
-	Camera getCachedCamera();
+	// Camera getCachedCamera();
 
 	static bool getIsOverUI();
 
-	static GameObject getSelectedObject();
-	static void setGameObject(GameObject value);
+	static AActor* getSelectedObject();
+	static void setGameObject(AActor* value);
 
-	static bool IsPressed(GameObject go);
+	static bool IsPressed(AActor* go);
 
 protected:
-	static void SetSelection(GameObject go, ControlScheme scheme);
+	static void SetSelection(AActor* go, ControlScheme scheme);
 
 public:
-	System.Collections.IEnumerator ChangeSelection();
+	//System.Collections.IEnumerator ChangeSelection();
 	static int getTouchCount();
 	static int getDragCount();
-	static Camera getMainCamera();
-	static UICamera getEventHandler();
+	//static Camera getMainCamera();
+	//static UICamera getEventHandler();
 
-	static int CompareFunc(UICamera a, UICamera b);
-	static Rigidbody FindRootRigidbody(Transform trans);
-	static Rigidbody2D FindRootRigidbody2D(Transform trans);
-	static bool Raycast(Vector3 inPos);
-	static bool IsVisible(Vector3 worldPoint, GameObject go);
+	//static int CompareFunc(UICamera a, UICamera b);
+	static ARigidBodyBase FindRootRigidbody(USceneComponent* trans);
+	static ARigidBodyBase FindRootRigidbody2D(USceneComponent* trans);
+	static bool Raycast(FVector inPos);
+	static bool IsVisible(FVector worldPoint, AActor* go);
 
-	static bool IsVisible(ref DepthEntry de);
-	static bool IsHighlighted(GameObject go);
-	static UICamera FindCameraForLayer(int layer);
-	static int GetDirection(KeyCode up, KeyCode down);
+	static bool IsVisible(DepthEntry de);
+	static bool IsHighlighted(AActor* go);
+	//static UICamera FindCameraForLayer(int layer);
+	static int GetDirection(FKey up, FKey down);
 
-	static int GetDirection(KeyCode up0, KeyCode up1, KeyCode down0, KeyCode down1);
-	static int GetDirection(string axis);
-	static void Notify(GameObject go, string funcName, object obj);
+	static int GetDirection(FKey up0, FKey up1, FKey down0, FKey down1);
+	static int GetDirection(std::string axis);
+	static void Notify(AActor* go, std::string funcName, AActor* obj);
 	static MouseOrTouch GetMouse(int button);
 	static MouseOrTouch GetTouch(int id);
 	static void RemoveTouch(int id);
@@ -282,15 +276,15 @@ public:
 	void Update();
 
 	void LateUpdate();
-	public void ProcessMouse();
-	public void ProcessTouches();
+	void ProcessMouse();
+	void ProcessTouches();
 	void ProcessFakeTouches();
-	public void ProcessOthers();
+	void ProcessOthers();
 
-	public void ProcessTouch(bool pressed, bool unpressed);
-	public void ShowTooltip(bool val);
+	void ProcessTouch(bool pressed, bool unpressed);
+	void ShowTooltip(bool val);
 	// 模拟停止拖放
-	static public void simuStopDrag();
+	static void simuStopDrag();
 	void OnApplicationPause();
 };
 
