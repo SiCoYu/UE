@@ -18,7 +18,7 @@ void UForm::loadUWidget(const TCHAR* name)
 		// 直接构造一个抽象类是报错误的
 		// NewObject<UUserWidget>();
 		// 构造一个类的子类，最新的 api 如下就可以了
-		m_GUIWin->m_uiRoot = NewObject<UUserWidget>(g_pEngineApi->getGameInstance(), widgetClass);
+		m_GUIWin->m_uiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
 	}
 }
 

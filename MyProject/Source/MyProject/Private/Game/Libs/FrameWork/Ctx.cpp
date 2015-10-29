@@ -3,8 +3,8 @@
 #include "EngineData.h"
 #include "INetMgr.h"
 #include "UIMgr.h"
-#include "EngineApi.h"
 #include "NetMgr.h"
+#include "EngineApi.h"
 #include "TableSys.h"
 #include "ShareData.h"
 #include "NetDispList.h"
@@ -31,7 +31,6 @@ Ctx::~Ctx()
 {
 	delete m_uiMgr;
 	delete m_engineData;
-	delete m_engineApi;
 	delete m_pINetMgr;
 	delete m_pTableSys;
 
@@ -61,7 +60,6 @@ void Ctx::init()
 #endif
 
 	m_uiMgr = new UIMgr();
-	m_engineApi = new EngineApi();
 	m_pTableSys = new TableSys();
 	m_pConfig = new Config();
 	m_pLocalFileSys = new LocalFileSys();
@@ -90,16 +88,6 @@ UIMgr* Ctx::getUIMgrPtr()
 EngineData* Ctx::getEngineDataPtr()
 {
 	return m_engineData;
-}
-
-EngineApi* Ctx::getEngineApiPtr()
-{
-	return m_engineApi;
-}
-
-void Ctx::setEngineApiPtr(EngineApi* engineApi)
-{
-	m_engineApi = engineApi;
 }
 
 void Ctx::setNetMgrPtr(INetMgr* pINetMgr)

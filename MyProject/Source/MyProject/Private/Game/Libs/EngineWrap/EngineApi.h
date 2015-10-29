@@ -78,11 +78,11 @@ public:
 	/**
 	 * @brief 从 AActor 获取 Axis 输入值
 	 */
-	float GetInputAxisValue(AActor* pAActor, const FName InputAxisName) const;
+	float GetInputAxisValue(AActor* pAActor, const FName InputAxisName);
 	/**
 	 * @brief 从 MainActor 获取 Axis 输入值
 	 */
-	float GetInputAxisValue(const FName InputAxisName) const;
+	float GetInputAxisValue(const FName InputAxisName);
 
 	/**
 	 * @brief 获取场景组件的具体位置信息

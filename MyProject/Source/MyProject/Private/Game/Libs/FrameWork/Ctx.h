@@ -11,7 +11,6 @@
 class UIMgr;
 class UGameInstance;
 class EngineData;
-class EngineApi;
 class INetMgr;
 class TableSys;
 class LogSys;
@@ -32,7 +31,6 @@ class Ctx : public Singleton<Ctx>
 protected:
 	UIMgr* m_uiMgr;
 	EngineData* m_engineData;
-	EngineApi* m_engineApi;
 	INetMgr* m_pINetMgr;
 	TableSys* m_pTableSys;
 	LogSys* m_pLogSys;
@@ -61,8 +59,6 @@ public:
 	UIMgr* getUIMgrPtr();
 
 	EngineData* getEngineDataPtr();
-	EngineApi* getEngineApiPtr();
-	void setEngineApiPtr(EngineApi* engineApi);
 	void setNetMgrPtr(INetMgr* pINetMgr);
 	INetMgr* getNetMgrPtr();
 	TableSys* getTableSysPtr();
@@ -91,7 +87,6 @@ public:
 #define g_pUIMgr g_pCtx->getUIMgrPtr()
 #define g_pLogSys g_pCtx->getLogSysPtr()
 #define g_pEngineData g_pCtx->getEngineDataPtr()
-#define g_pEngineApi g_pCtx->getEngineApiPtr()
 #define g_pShareData g_pCtx->getShareDataPtr()
 #define g_pNetDispList g_pCtx->getNetDispListPtr()
 #define g_pCfg g_pCtx->getConfigPtr()

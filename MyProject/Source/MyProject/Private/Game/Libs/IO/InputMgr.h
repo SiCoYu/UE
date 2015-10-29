@@ -64,12 +64,14 @@ public:
 
 	float getDeltaTime()
 	{
-		return touchBegan ? EngineApi::GetRealTimeSeconds() - pressTime : 0;
+		//return touchBegan ? EngineApi::GetRealTimeSeconds() - pressTime : 0;
+		return 0;
 	}
 
 	bool getIsOverUI()
 	{
-		return current != nullptr && current != InputMgr::fallThrough;
+		//return current != nullptr && current != InputMgr::fallThrough;
+		return true;
 	}
 };
 
@@ -222,7 +224,7 @@ public:
 
 	static bool mNotifying;
 
-	static MouseOrTouch mMouse[EMouseOrTouch.eLength];
+	static MouseOrTouch mMouse[eLength];
 
 public:
 	InputMgr();
@@ -252,8 +254,8 @@ public:
 	//static UICamera getEventHandler();
 
 	//static int CompareFunc(UICamera a, UICamera b);
-	static ARigidBodyBase FindRootRigidbody(USceneComponent* trans);
-	static ARigidBodyBase FindRootRigidbody2D(USceneComponent* trans);
+	static ARigidBodyBase* FindRootRigidbody(USceneComponent* trans);
+	static ARigidBodyBase* FindRootRigidbody2D(USceneComponent* trans);
 	static bool Raycast(FVector inPos);
 	static bool IsVisible(FVector worldPoint, AActor* go);
 
@@ -266,7 +268,7 @@ public:
 	static int GetDirection(std::string axis);
 	static void Notify(AActor* go, std::string funcName, AActor* obj);
 	static MouseOrTouch GetMouse(int button);
-	static MouseOrTouch GetTouch(int id);
+	static MouseOrTouch* GetTouch(int id);
 	static void RemoveTouch(int id);
 
 	void Awake();

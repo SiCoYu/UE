@@ -3,5 +3,5 @@
 
 float MCamera::GetFOVAngle()
 {
-
+	return 0;
 }

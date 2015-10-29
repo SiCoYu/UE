@@ -72,12 +72,12 @@ ACharacter* EngineApi::getFirstCharacter()
 float EngineApi::getUTCSec()
 {
 	//return g_pEngineApi->getWorld()->GetRealTimeSeconds();
-	return g_pEngineApi->getWorld()->GetTimeSeconds();
+	return EngineApi::getWorld()->GetTimeSeconds();
 }
 
 float EngineApi::GetRealTimeSeconds()
 {
-	return g_pEngineApi->getWorld()->GetRealTimeSeconds();
+	return EngineApi::getWorld()->GetRealTimeSeconds();
 }
 
 void EngineApi::InsertMountPoint(const FString& RootPath, const FString& ContentPath)
@@ -140,37 +140,37 @@ void EngineApi::SetContentForSlot(UUserWidget* userWidget, FName SlotName, UWidg
 //	ICUUtilities::ConvertString(Source, Destination, ShouldNullTerminate);
 //}
 
-bool EngineApi::LineTraceSingleByChannel(UWorld* World, struct FHitResult& OutHit, const FVector& Start, const FVector& End, ECollisionChannel TraceChannel, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam)
+bool EngineApi::LineTraceSingleByChannel(UWorld* World, struct FHitResult& OutHit, const FVector& Start, const FVector& End, ECollisionChannel TraceChannel, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
 {
-	World->LineTraceSingleByChannel(OutHit, Start, End, TraceChannel, Params, ResponseParam);
+	return World->LineTraceSingleByChannel(OutHit, Start, End, TraceChannel, Params, ResponseParam);
 }
 
-bool EngineApi::SweepTestByChannel(UWorld* World, const FVector& Start, const FVector& End, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam)
+bool EngineApi::SweepTestByChannel(UWorld* World, const FVector& Start, const FVector& End, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
 {
-	World->SweepTestByChannel(Start, End, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
+	return World->SweepTestByChannel(Start, End, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
 }
 
-bool EngineApi::OverlapBlockingTestByChannel(UWorld* World, const FVector& Pos, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params = FCollisionQueryParams::DefaultQueryParam, const FCollisionResponseParams& ResponseParam = FCollisionResponseParams::DefaultResponseParam)
+bool EngineApi::OverlapBlockingTestByChannel(UWorld* World, const FVector& Pos, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
 {
-	World->OverlapBlockingTestByChannel(Pos, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
+	return World->OverlapBlockingTestByChannel(Pos, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
 }
 
 float EngineApi::GetAxisValue(UInputComponent* pUInputComponent, const FName AxisName)
 {
-	pUInputComponent->GetAxisValue(AxisName);
+	return pUInputComponent->GetAxisValue(AxisName);
 }
 
 float EngineApi::GetInputAxisValue(AActor* pAActor, const FName InputAxisName)
 {
-	pAActor->GetInputAxisValue(InputAxisName);
+	return pAActor->GetInputAxisValue(InputAxisName);
 }
 
 float EngineApi::GetInputAxisValue(const FName InputAxisName)
 {
-	g_pEngineData->getMainActor()->GetInputAxisValue(InputAxisName);
+	return g_pEngineData->getMainActor()->GetInputAxisValue(InputAxisName);
 }
 
-static FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
+FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
 {
 	return pUSceneComponent->ComponentToWorld;
 }
