@@ -57,7 +57,7 @@ void ResLoadState::setLoading()
     m_resLoadState = eLoading;
 }
 
-void ResLoadState::copyFrom(ResLoadState& rhv)
+void ResLoadState::copyFrom(ResLoadState* rhv)
 {
-    m_resLoadState = rhv.getResLoadState();
+    m_resLoadState = rhv->getResLoadState();
 }

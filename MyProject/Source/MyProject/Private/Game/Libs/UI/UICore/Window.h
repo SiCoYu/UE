@@ -1,19 +1,23 @@
 #pragma once
 
+#include "MyProject.h"
 #include "UIFormID.h"
 #include "GUIWin.h"
-#include "FormBase.generated.h"
+#include "Window.generated.h"
 
 class UILayer;
 
-UCLASS(abstract, config = Game)
-class UFormBase : public UObject
+//UCLASS(abstract, config = Game)
+UCLASS(config = Game)
+class UWindow : public UObject
 {
 	GENERATED_BODY()
 
 protected:
-	UIFormID m_formId;
-	GUIWin m_GUIWin;      // 控件数据
+	UIFormID m_id;
+public:
+	GUIWin* m_GUIWin;      // 控件数据
+protected:
 	bool m_draggable;
 
 	int m_hitYMax;	// 可点击范围 Y 的最大值
@@ -31,11 +35,8 @@ protected:
 	bool m_isResReady;            // 资源是否已经加载并初始化
 
 public:
-	UFormBase();
+	UWindow(const FObjectInitializer& ObjectInitializer);
 
-	virtual void onReady();
-	UIFormID getFormId();
-	UIFormID getFormId();
 	virtual int getPosX();
 	virtual void setPosX(int posX);
 	virtual int getPosY();
@@ -46,4 +47,6 @@ public:
 	bool getIsResReady();
 	void setIsResReady(bool value);
 	GUIWin* getGUIWin();
+
+	virtual bool getIsReady();
 };

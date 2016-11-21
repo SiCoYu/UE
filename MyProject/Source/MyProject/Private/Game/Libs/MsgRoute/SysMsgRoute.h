@@ -11,11 +11,7 @@
 class SysMsgRoute : LockQueue<MsgRouteBase>
 {
 public:
-	SysMsgRoute(std::string name)
-		: LockQueue<MsgRouteBase>(name)
-    {
-
-    }
+	SysMsgRoute(std::string name);
 };
 
 #endif

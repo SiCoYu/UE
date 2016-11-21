@@ -89,7 +89,7 @@ DelayHandleMgrBase::DelayHandleMgrBase()
 	m_loopDepth = 0;
 }
 
-void DelayHandleMgrBase::addObject(IDelayHandleItem* delayObject, float priority = 0.0f)
+void DelayHandleMgrBase::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	if (m_loopDepth > 0)
 	{

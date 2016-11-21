@@ -36,10 +36,13 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/Resource/ResLoad/ResourceItem",
                 "MyProject/Private/Game/Libs/Resource/ResLoadData",
                 "MyProject/Private/Game/Libs/Resource/RefAsync",
+                "MyProject/Private/Game/Libs/Resource/InsResMgr",
+                "MyProject/Private/Game/Libs/Resource/InsRes",
 
                 "MyProject/Private/Game/Libs/ObjectPool",
                 "MyProject/Private/Game/Libs/MsgRoute",
                 "MyProject/Private/Game/Libs/LocalFileSystem",
+                "MyProject/Private/Game/Libs/Math",
 
                 // UI ÇøÓò
                 "MyProject/Private/Game/UI/UIPack",
@@ -67,6 +70,7 @@ public class MyProject : ModuleRules
 
         PrivateDependencyModuleNames.AddRange(
             new string[] {
+                "Core",
                 "InputCore",
 				"Slate",
 				"SlateCore",

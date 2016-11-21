@@ -22,8 +22,8 @@ void RefCountResLoadResultNotify::setRefCount(RefCount* value)
 	m_refCount = value;
 }
 
-void RefCountResLoadResultNotify::copyFrom(ResLoadResultNotify& rhv)
+void RefCountResLoadResultNotify::copyFrom(ResLoadResultNotify* rhv)
 {
 	ResLoadResultNotify::copyFrom(rhv);
-	m_refCount->copyFrom(((RefCountResLoadResultNotify&)(rhv))->getRefCount());
+	m_refCount->copyFrom(((RefCountResLoadResultNotify*)(rhv))->getRefCount());
 }

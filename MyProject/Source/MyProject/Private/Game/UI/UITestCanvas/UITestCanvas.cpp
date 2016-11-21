@@ -35,8 +35,8 @@ void UUITestCanvas::loadCanvas()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestCanvas_Canvas.UITestCanvas_Canvas_C"));
 	//loadUWidget(TEXT("/CacheData/UMG/UITestCanvas_Canvas.UITestCanvas_Canvas_C"));
-	m_umgWidget->AddToViewport();
-	UButton* pButton = (UButton*)(m_umgWidget->GetWidgetFromName("Button_32"));
+	m_GUIWin->m_uiRoot->AddToViewport();
+	UButton* pButton = (UButton*)(m_GUIWin->m_uiRoot->GetWidgetFromName("Button_32"));
 	UButtonSlot* pBtnSlot = Cast<UButtonSlot>(pButton->GetContentSlot());
 
 	// 测试移动位置
@@ -49,7 +49,7 @@ void UUITestCanvas::loadCanvas()
 void UUITestCanvas::loadNoCanvas()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestCanvas_NoCanvas.UITestCanvas_NoCanvas_C"));
-	m_umgWidget->AddToViewport();
+	m_GUIWin->m_uiRoot->AddToViewport();
 }
 
 void UUITestCanvas::loadCanvasWithNoCanvas()
@@ -59,7 +59,7 @@ void UUITestCanvas::loadCanvasWithNoCanvas()
 	UUserWidget* parentWidget = nullptr;
 	if (nullptr != widgetClass)
 	{
-		parentWidget = NewObject<UUserWidget>(g_pEngineApi->getGameInstance(), widgetClass);
+		parentWidget = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
 		parentWidget->AddToViewport();
 	}
 
@@ -68,7 +68,7 @@ void UUITestCanvas::loadCanvasWithNoCanvas()
 	widgetClass = StaticLoadClass(UUserWidget::StaticClass(), NULL, TEXT("/Game/UMG/UITestCanvas_NoCanvas.UITestCanvas_NoCanvas_C"));
 	if (nullptr != widgetClass)
 	{
-		childWidget = NewObject<UUserWidget>(g_pEngineApi->getGameInstance(), widgetClass);
+		childWidget = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
 	}
 
 	if (nullptr != parentWidget && nullptr != childWidget)
@@ -81,26 +81,26 @@ void UUITestCanvas::loadNamedSlot()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestNamedSlot.UITestNamedSlot_C"));
 	//loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
-	m_umgWidget->AddToViewport();	// 一定要先 AddToViewport ，然后再获取控件，否则 GetWidgetFromName 的时候会报错
+	m_GUIWin->m_uiRoot->AddToViewport();	// 一定要先 AddToViewport ，然后再获取控件，否则 GetWidgetFromName 的时候会报错
 	// 目前已经有点 NamedSlot 是 "NamedSlot_28"
-	m_umgWidget->GetSlotNames(m_namedSlotArr);
-	m_namedSlot = (UNamedSlot*)(m_umgWidget->GetWidgetFromName("NamedSlot_28"));
+	m_GUIWin->m_uiRoot->GetSlotNames(m_namedSlotArr);
+	m_namedSlot = (UNamedSlot*)(m_GUIWin->m_uiRoot->GetWidgetFromName("NamedSlot_28"));
 	//UWidget* widget = m_umgWidget->GetWidgetFromName("Button_16");
 }
 
 void UUITestCanvas::loadOverlay()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestOveray.UITestOveray_C"));
-	m_umgWidget->AddToViewport();
+	m_GUIWin->m_uiRoot->AddToViewport();
 	// Overlay_17 已经有的 Overlay 
-	m_overlay = (UOverlay*)(m_umgWidget->GetWidgetFromName("Overlay_17"));
-	UWidget* widget = m_umgWidget->GetWidgetFromName("Button_32");
+	m_overlay = (UOverlay*)(m_GUIWin->m_uiRoot->GetWidgetFromName("Overlay_17"));
+	UWidget* widget = m_GUIWin->m_uiRoot->GetWidgetFromName("Button_32");
 }
 
 void UUITestCanvas::unloadCanvas()
 {
-	m_umgWidget->RemoveFromViewport();
-	m_umgWidget = nullptr;
+	m_GUIWin->m_uiRoot->RemoveFromViewport();
+	m_GUIWin->m_uiRoot = nullptr;
 }
 
 void UUITestCanvas::testMove(UWidget* ptr)

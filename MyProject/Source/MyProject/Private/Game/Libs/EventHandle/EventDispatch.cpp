@@ -159,3 +159,8 @@ void EventDispatch::copyFrom(EventDispatch& rhv)
 		m_handleList.Add(handle);
 	}
 }
+
+MList<EventDispatchFunctionObject*>& EventDispatch::getHandleList()
+{
+	return m_handleList;
+}

@@ -9,6 +9,6 @@
 class NonRefCountResLoadResultNotify : public ResLoadResultNotify
 {
 
-}
+};
 
 #endif

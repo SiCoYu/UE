@@ -3,14 +3,17 @@
 #include "EngineData.h"
 #include "INetMgr.h"
 #include "UIMgr.h"
-#include "EngineApi.h"
 #include "NetMgr.h"
+#include "EngineApi.h"
 #include "TableSys.h"
 #include "ShareData.h"
 #include "NetDispList.h"
 #include "LogSys.h"
 #include "Config.h"
 #include "LocalFileSys.h"
+#include "PoolSys.h"
+#include "UIAssetMgr.h"
+#include "ResLoadMgr.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -28,7 +31,6 @@ Ctx::~Ctx()
 {
 	delete m_uiMgr;
 	delete m_engineData;
-	delete m_engineApi;
 	delete m_pINetMgr;
 	delete m_pTableSys;
 
@@ -57,8 +59,7 @@ void Ctx::init()
 	m_pStdoutLog = new StdoutLog();
 #endif
 
-	m_uiMgr = new UIManager();
-	m_engineApi = new EngineApi();
+	m_uiMgr = new UIMgr();
 	m_pTableSys = new TableSys();
 	m_pConfig = new Config();
 	m_pLocalFileSys = new LocalFileSys();
@@ -79,7 +80,7 @@ void Ctx::init()
 	testApi();
 }
 
-UIManager* Ctx::getUIMgrPtr()
+UIMgr* Ctx::getUIMgrPtr()
 {
 	return m_uiMgr;
 }
@@ -87,16 +88,6 @@ UIManager* Ctx::getUIMgrPtr()
 EngineData* Ctx::getEngineDataPtr()
 {
 	return m_engineData;
-}
-
-EngineApi* Ctx::getEngineApiPtr()
-{
-	return m_engineApi;
-}
-
-void Ctx::setEngineApiPtr(EngineApi* engineApi)
-{
-	m_engineApi = engineApi;
 }
 
 void Ctx::setNetMgrPtr(INetMgr* pINetMgr)
@@ -144,6 +135,22 @@ Config* Ctx::getConfigPtr()
 LocalFileSys* Ctx::getLocalFileSysPtr()
 {
 	return m_pLocalFileSys;
+}
+
+PoolSys* Ctx::getPoolSysPtr()
+{
+	return m_poolSys;
+}
+
+UIAssetMgr* Ctx::getUIAssetMgrPtr()
+{
+	return m_uiAssetMgr;
+}
+
+ResLoadMgr* Ctx::getResLoadMgrPtr()
+{
+	return m_resLoadMgr;
+}
 
 void Ctx::testApi()
 {

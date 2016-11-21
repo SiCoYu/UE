@@ -60,6 +60,7 @@ ResItem* ResLoadMgr::getResource(std::string path)
 
 void ResLoadMgr::loadData(LoadParam* param)
 {
+	// 链接不过
 	param->m_resPackType = eDataType;
 
 	if (eStreamingAssets == param->m_resLoadType)
@@ -274,7 +275,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	loadItem->setPathNoExt(param->m_pathNoExt);
 	loadItem->setExtName(param->getExtName());
 	loadItem->setLoadNeedCoroutine(param->m_loadNeedCoroutine);
-	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, onLoadEventHandle));
+	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 
 	return loadItem;
 }
@@ -418,7 +419,7 @@ void ResLoadMgr::unloadNoRef(std::string path)
 void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 {
 	LoadItem* item = (LoadItem*)dispObj;
-	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, onLoadEventHandle));
+	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 	if (item->getNonRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
 		onLoaded(item);
@@ -435,7 +436,8 @@ void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 
 void ResLoadMgr::onLoaded(LoadItem* item)
 {
-	if (UtilMap::ContainsKey(m_LoadData->m_path2Res, item->getPath()))
+	std::string _path = item->getPath();
+	if (UtilMap::ContainsKey(m_LoadData->m_path2Res, _path))
 	{
 		m_LoadData->m_path2Res[item->getPath()]->init(m_LoadData->m_path2LDItem[item->getPath()]);
 	}
@@ -458,7 +460,8 @@ void ResLoadMgr::releaseLoadItem(LoadItem* item)
 {
 	item->reset();
 	UtilList::Add(m_LoadData->m_noUsedLDItem, item);
-	UtilMap::Remove(m_LoadData->m_path2LDItem, item->getPath());
+	std::string _path = item->getPath();
+	UtilMap::Remove(m_LoadData->m_path2LDItem, _path);
 }
 
 void ResLoadMgr::loadNextItem()

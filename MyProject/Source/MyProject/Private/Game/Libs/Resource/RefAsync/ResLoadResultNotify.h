@@ -23,7 +23,7 @@ public:
 	ResEventDispatch* getLoadResEventDispatch();
 	void setLoadResEventDispatch(ResEventDispatch* value);
 	void onLoadEventHandle(IDispatchObject* dispObj);
-	virtual void copyFrom(ResLoadResultNotify& rhv);
+	virtual void copyFrom(ResLoadResultNotify* rhv);
 };
 
 #endif

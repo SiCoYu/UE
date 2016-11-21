@@ -3,6 +3,7 @@
 
 class IResizeObject
 {
+public:
     virtual void onResize(int viewWidth, int viewHeight) = 0;
 };
 

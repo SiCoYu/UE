@@ -7,162 +7,104 @@
 #include <map>
 
 #include "MyProject.h"
-#include "ByteConverter.h"
 #include "Error.h"
-#include "SystemEndian.h"
+#include "Endian.h"
 #include "DynBuffer.h"
 #include "MEncode.h"
 #include "BufferCV.h"
 
-class ByteBufferException
-{
-    public:
-        ByteBufferException(bool _add, size_t _pos, size_t _esize, size_t _size)
-            : add(_add), pos(_pos), esize(_esize), size(_size)
-        {
-            PrintPosError();
-        }
-
-        void PrintPosError() const;
-    private:
-        bool add;
-        size_t pos;
-        size_t esize;
-        size_t size;
-};
-
-template<class T>
-struct MUnused
-{
-    MUnused() {}
-};
+template <class T> class DynBuffer;
 
 class ByteBuffer
 {
+public:
+	// int m_id;        // 测试使用
+	// bool m_startTest;        // 开始测试使用
+
 protected:
-	SysEndian m_sysEndian;
+	DynBuffer<char>* m_dynBuff;
+	uint32 m_pos;          // 当前可以读取的位置索引
+	EEndian m_endian;          // 大端小端
+
+	char m_padBytes[8];
+
+	//LuaCSBridgeByteBuffer m_luaCSBridgeByteBuffer;        // Lua 中的缓冲区
 
 public:
-	// constructor
-	ByteBuffer(size_t initCapacity = BufferCV::INIT_CAPACITY, size_t maxCapacity = BufferCV::MAX_CAPACITY);
-	~ByteBuffer();
-
-	void setEndian(SysEndian endian);
+	ByteBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY, EEndian endian = eLITTLE_ENDIAN);
+	DynBuffer<char>* getDynBuff();
+	uint32 getBytesAvailable();
+	EEndian getEndian();
+	void setEndian(EEndian value);
+	uint32 getLength();
+	void setLength(uint32 value);
+	void setPos(uint32 pos);
+	uint32 getPos();
+	//LuaCSBridgeByteBuffer* getLuaCSBridgeByteBuffer();
+	//void setLuaCSBridgeByteBuffer(LuaCSBridgeByteBuffer* value);
 	void clear();
 
-	// 放入的值一定和系统大小端一样的
-	template <typename T>
-	void put(size_t pos, T value);
+protected:
+	// 检查是否有足够的大小可以扩展
+	bool canWrite(uint32 delta);
+	// 读取检查
+	bool canRead(uint32 delta);
+	void extendDeltaCapicity(uint32 delta);
+	void advPos(uint32 num);
+	void advPosAndLen(uint32 num);
 
-	ByteBuffer& writeUnsignedInt8(uint8 value);
-	ByteBuffer& writeUnsignedInt16(uint16 value);
-	ByteBuffer& writeUnsignedInt32(uint32 value);
-	ByteBuffer& writeUnsignedInt64(uint64 value);
-	// signed as in 2e complement
-	ByteBuffer& writeInt8(int8 value);
-	ByteBuffer& writeInt16(int16 value);
-	ByteBuffer& writeInt32(int32 value);
-	ByteBuffer& writeInt64(int64 value);
-	// floating points
-	ByteBuffer& writeFloat(float value);
-	ByteBuffer& writeDouble(double value);
-	// 写入 UTF-8 字符串，并且字符串中有 '\0' ，自己不用单独添加
-	ByteBuffer& writeMultiByte(const std::string& value, size_t len);
-	//ByteBuffer& writeMultiByte(const char* str, size_t len)
-	ByteBuffer& writeBytes(const char* str, size_t startPos, size_t len);
-	ByteBuffer& readBoolean(bool& value);
-	ByteBuffer& readUnsignedInt8(uint8& value);
-	ByteBuffer& readUnsignedInt16(uint16& value);
-	ByteBuffer& readUnsignedInt32(uint32& value);
-	ByteBuffer& readUnsignedInt64(uint64& value);
-	// signed as in 2e complement
-	ByteBuffer& readInt8(int8& value);
-	ByteBuffer& readInt16(int16& value);
-	ByteBuffer& readInt32(int32& value);
-	ByteBuffer& readInt64(int64& value);
-	ByteBuffer& readFloat(float& value);
-	ByteBuffer& readDouble(double& value);
-	ByteBuffer& readMultiByte(std::string& value, size_t len, MEncode::MEncode encode = MEncode::eUTF8);
-	ByteBuffer& readMultiByte(char* value, size_t len, MEncode::MEncode encode = MEncode::eUTF8);
-
-	template<class T>
-	ByteBuffer& readUnused(MUnused<T> const&);
-
-	uint8 operator[](size_t pos) const;
-	size_t getPos() const;
-	size_t setPos(size_t pos_);
-
-	// 根据类型跳过
-	template<typename T>
-	void read_skip();
-
-	// 根据大小跳过
-	void read_skip(size_t skip);
-
-	template<typename T>
-	void write_skip();
-
-	// 根据大小跳过
-	void write_skip(size_t skip);
-
-	template <typename T>
-	T read();
-
-	// 读取出来的一定是和系统大小端一样的
-	template <typename T>
-	T read(size_t pos) const;
-
-	void read(uint8* dest, size_t len);
-	const uint8* getBuff() const;
-	size_t getSize() const;
-	void setSize(size_t len);
-	size_t getLength();
-	bool empty() const;
-	size_t capacity();
-	size_t maxCapacity();
-	void readAddPos(int delta);
-	void writeAddPos(int delta);
-	void setCapacity(std::size_t newCapacity);
-
-	/**
-	*@brief 能否添加 num 长度的数据
-	*/
-	bool canAddData(uint32 num);
-	// 在最后添加
-	void append(const std::string& str);
-	void append(const char* src, size_t cnt);
-
-	template<class T>
-	void append(const T* src, size_t cnt);
-
-	void append(const uint8* src, size_t cnt);
-	// 仅仅移动写指针，并不添加内容
-	void append(size_t cnt);
-	void append(const ByteBuffer& buffer);
-	void put(size_t pos, const uint8* src, size_t cnt);
-	char* rd_ptr();
-	size_t avaliableBytes();
-	void print_storage() const;
-	void textlike() const;
-	void hexlike() const;
-	void writeFile(FILE* file);
-	DynBuffer* getDynBuff();
-	uint32 getBytesAvailable();
-	void incPosDelta(int delta);		// 添加 pos delta 数量
+public:
+	void incPosDelta(int delta);        // 添加 pos delta 数量
 	void decPosDelta(int delta);		// 减少 pos delta 数量
 
-private:
-	// 添加的一定是和系统大小端相同的
-	// limited for internal use because can "append" any unexpected type (like pointer and etc) with hard detection problem
-	template <typename T>
-	void append(T value);
+	void incLenDelta(int delta);
+	void decLenDelta(int delta);
+	// 压缩
+	//uint32 compress(uint32 len_ = 0, CompressionAlgorithm algorithm = CompressionAlgorithm.ZLIB);
+	// 解压
+	//uint uncompress(uint32 len_ = 0, CompressionAlgorithm algorithm = CompressionAlgorithm.ZLIB);
+	// 加密，使用 des 对称数字加密算法，加密8字节补齐，可能会导致变长
+	//uint encrypt(CryptContext cryptContext, uint len_ = 0);
+	// 解密，现在必须 8 字节对齐解密
+	//void decrypt(CryptContext cryptContext, uint len_ = 0);
+	ByteBuffer& readBoolean(bool& tmpBool);
+	ByteBuffer& readInt8(int8& tmpByte);
+	ByteBuffer& readUnsignedInt8(uint8& tmpByte);
+	ByteBuffer& readInt16(int16& tmpShort);
+	ByteBuffer& readUnsignedInt16(uint16& tmpUshort);
+	ByteBuffer& readInt32(int32& tmpInt);
+	ByteBuffer& readUnsignedInt32(uint32& tmpUint);
+	ByteBuffer& readInt64(int64& tmpLong);
+	ByteBuffer& readUnsignedInt64(uint64& tmpUlong);
+	ByteBuffer& readFloat(float& tmpFloat);
+	ByteBuffer& readDouble(double& tmpDouble);
+	ByteBuffer& readMultiByte(std::string& tmpStr, uint32 len, MEncode charSet);
+	// 这个是字节读取，没有大小端的区别
+	ByteBuffer& readBytes(char* tmpBytes, uint32 len);
+	// 如果要使用 writeInt8 ，直接使用 writeMultiByte 这个函数
+	void writeInt8(int8 value);
+	void writeUnsignedInt8(uint8 value);
+	void writeInt16(int16 value);
+	void writeUnsignedInt16(uint16 value);
+	void writeInt32(int32 value);
+	void writeUnsignedInt32(uint32 value, bool bchangeLen = true);
+	void writeInt64(int64 value);
+	void writeUnsignedInt64(uint64 value);
+	void writeFloat(float value);
+	void writeDouble(double value);
+	// 写入字节， bchangeLen 是否改变长度
+	void writeBytes(char* value, uint32 start, uint32 len, bool bchangeLen = true);
+	// 写入字符串
+	void writeMultiByte(std::string& value, MEncode charSet, int len);
 
 protected:
-	size_t m_pos;		// 读取写入位置
-	DynBuffer* m_dynBuff;
-	char m_encryptKey[8];
-	char m_decryptKey[8];
-};
+	// 替换已经有的一段数据
+	void replace(char* srcBytes, uint32 srcStartPos = 0, uint32 srclen_ = 0, uint32 destStartPos = 0, uint32 destlen_ = 0);
 
+public:
+	void insertUnsignedInt32(uint32 value);
+	ByteBuffer& readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset);
+	//bool check();
+};
 
 #endif

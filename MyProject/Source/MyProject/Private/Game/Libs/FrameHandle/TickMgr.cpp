@@ -2,18 +2,19 @@
 #include "TickMgr.h"
 #include "ITickedObject.h"
 #include "TickProcessObject.h"
+#include "IDelayHandleItem.h"
 
 TickMgr::TickMgr()
 {
 
 }
 
-void TickMgr::addTick(ITickedObject* tickObj, float priority = 0.0f)
+void TickMgr::addTick(ITickedObject* tickObj, float priority)
 {
 	addObject((IDelayHandleItem*)tickObj, priority);
 }
 
-void TickMgr::addObject(IDelayHandleItem* delayObject, float priority = 0.0f)
+void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	if (bInDepth())
 	{
@@ -22,12 +23,12 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority = 0.0f)
 	else
 	{
 		int position = -1;
-		for (int i = 0; i < m_tickLst.Count; i++)
+		for (int i = 0; i < m_tickLst.Count(); i++)
 		{
 			if (m_tickLst[i] == nullptr)
 				continue;
 
-			if (m_tickLst[i]->m_tickObject == delayObject)
+			if (m_tickLst[i]->m_tickObject == (ITickedObject*)delayObject)
 			{
 				return;
 			}
@@ -43,7 +44,7 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority = 0.0f)
 		processObject->m_tickObject = (ITickedObject*)delayObject;
 		processObject->m_priority = priority;
 
-		if (position < 0 || position >= m_tickLst.Count)
+		if (position < 0 || position >= m_tickLst.Count())
 		{
 			m_tickLst.Add(processObject);
 		}
@@ -64,7 +65,7 @@ void TickMgr::delObject(IDelayHandleItem* delayObject)
 	{
 		for(TickProcessObject* item : m_tickLst.getList())
 		{
-			if (item->m_tickObject == delayObject)
+			if (item->m_tickObject == (ITickedObject*)delayObject)
 			{
 				m_tickLst.Remove(item);
 				break;
@@ -79,9 +80,9 @@ void TickMgr::Advance(float delta)
 
 	for(TickProcessObject* tk : m_tickLst.getList())
 	{
-		if (!((IDelayHandleItem*)(tk->m_tickObject)).getClientDispose())
+		if (!((IDelayHandleItem*)(tk->m_tickObject))->getClientDispose())
 		{
-			((ITickedObject*)(tk.m_tickObject)).onTick(delta);
+			((ITickedObject*)(tk->m_tickObject))->onTick(delta);
 		}
 	}
 

@@ -35,7 +35,7 @@ bool RefCount::bNoRef()
 	return m_refNum == 0;
 }
 
-void RefCount::copyFrom(RefCount rhv)
+void RefCount::copyFrom(RefCount* rhv)
 {
-	m_refNum = rhv.getRefNum();
+	m_refNum = rhv->getRefNum();
 }

@@ -12,6 +12,7 @@
 #include "MsgBuffer.h"
 #include "UtilStr.h"
 #include "MCircularBuffer.h"
+#include "DynBuffer.h"
 
 UENetClient::UENetClient()
 	: m_boundEndpoint(FIPv4Address::Any, 0),

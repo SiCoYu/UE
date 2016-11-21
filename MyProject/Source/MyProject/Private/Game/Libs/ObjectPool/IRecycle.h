@@ -4,6 +4,6 @@
 class IRecycle
 {
     virtual void resetDefault() = 0;
-}
+};
 
 #endif

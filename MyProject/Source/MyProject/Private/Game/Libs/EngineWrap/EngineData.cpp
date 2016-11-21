@@ -1,12 +1,12 @@
 #include "MyProject.h"
 #include "EngineData.h"
 
-void EngineData::setMainActor(UObject* actor)
+void EngineData::setMainActor(AActor* actor)
 {
 	m_mainActor = actor;
 }
 
-UObject* EngineData::getMainActor()
+AActor* EngineData::getMainActor()
 {
 	return m_mainActor;
 }

@@ -6,8 +6,9 @@
 #include <iostream>
 #include <vector>
 #include "BufferCV.h"
+#include "DynBuffer.h"
 
-class DynBuffer;
+//template <class T> class DynBuffer<char>;
 class ByteBuffer;
 
 /**
@@ -16,7 +17,7 @@ class ByteBuffer;
 class MCircularBuffer
 {
 protected:
-	DynBuffer* m_dynBuffer;
+	DynBuffer<char>* m_dynBuffer;
 	uint32 m_first;             // 当前缓冲区数据的第一个索引
 	uint32 m_last;              // 当前缓冲区数据的最后一个索引的后面一个索引，浪费一个字节
 	ByteBuffer* m_tmpBA;        // 临时数据

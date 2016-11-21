@@ -42,8 +42,8 @@ void ResLoadResultNotify::onLoadEventHandle(IDispatchObject* dispObj)
 	m_loadResEventDispatch->clearEventHandle();
 }
 
-void ResLoadResultNotify::copyFrom(ResLoadResultNotify& rhv)
+void ResLoadResultNotify::copyFrom(ResLoadResultNotify* rhv)
 {
-	m_resLoadState->copyFrom(rhv.getResLoadState());
-	m_loadResEventDispatch = rhv.getLoadResEventDispatch();
+	m_resLoadState->copyFrom(rhv->getResLoadState());
+	m_loadResEventDispatch = rhv->getLoadResEventDispatch();
 }

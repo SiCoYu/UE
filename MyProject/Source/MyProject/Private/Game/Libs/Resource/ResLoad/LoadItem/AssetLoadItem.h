@@ -48,27 +48,11 @@ protected:
 
 public:
 	AssetLoadItem();
-
-	UClass* getResObj()
-    {
-		return m_resObj;
-    }
-
-	void setResObj(UClass* value)
-    {
-		m_resObj = value;
-    }
-
-	virtual void load() override
-    {
-		LoadItem::load();
-    }
-
+	UClass* getResObj();
+	void setResObj(UClass* value);
+	virtual void load() override;
     // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
-	virtual void unload() override
-    {
-		LoadItem::unload();
-    }
+	virtual void unload() override;
 };
 
 #endif

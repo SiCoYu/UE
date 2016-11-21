@@ -33,7 +33,7 @@ void AMyProjectGameMode::StartPlay()
 {
 	Super::StartPlay();
 	// 各种初始化
-	g_pEngineApi->showCursor();
+	EngineApi::showCursor();
 
 	// 各种 UI 测试
 	TestUI();

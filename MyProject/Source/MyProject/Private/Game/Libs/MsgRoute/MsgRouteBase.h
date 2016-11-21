@@ -23,6 +23,7 @@ public:
     MsgRouteID m_msgID;          // 只需要一个 ID 就行了
 
 public:
+	MsgRouteBase();
 	MsgRouteBase(MsgRouteID id);
 	virtual void resetDefault();
 };

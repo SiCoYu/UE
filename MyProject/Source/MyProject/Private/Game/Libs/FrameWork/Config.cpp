@@ -38,8 +38,13 @@ Config::Config()
 	m_pathLst[(int)ePathLuaScript] = "LuaScript/";
 	m_pathLst[(int)ePathSkillAction] = "SkillAction/";
 
-	UtilVector::Add(m_pakExtNameList, std::string("prefab"));
-	UtilVector::Add(m_pakExtNameList, std::string("png"));
-	UtilVector::Add(m_pakExtNameList, std::string("shader"));
-	UtilVector::Add(m_pakExtNameList, std::string("unity"));
+	std::string value;
+	value = std::string("prefab");
+	UtilVector::Add(m_pakExtNameList, value);
+	value = std::string("png");
+	UtilVector::Add(m_pakExtNameList, value);
+	value = std::string("shader");
+	UtilVector::Add(m_pakExtNameList, value);
+	value = std::string("unity");
+	UtilVector::Add(m_pakExtNameList, value);
 }

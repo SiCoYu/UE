@@ -69,9 +69,15 @@ ACharacter* EngineApi::getFirstCharacter()
 	return Character;
 }
 
-uint32 EngineApi::getUTCSec()
+float EngineApi::getUTCSec()
 {
-	return g_pEngineApi->getWorld()->GetTimeSeconds();
+	//return g_pEngineApi->getWorld()->GetRealTimeSeconds();
+	return EngineApi::getWorld()->GetTimeSeconds();
+}
+
+float EngineApi::GetRealTimeSeconds()
+{
+	return EngineApi::getWorld()->GetRealTimeSeconds();
 }
 
 void EngineApi::InsertMountPoint(const FString& RootPath, const FString& ContentPath)
@@ -95,4 +101,76 @@ bool EngineApi::PackageExists(const FString& InPackageFilename)
 FString EngineApi::GameUserDir()
 {
 	return FPaths::GameUserDir();
+}
+
+void EngineApi::SetActive(UWidget* target, bool bshow)
+{
+	if (bshow)
+	{
+		target->SetVisibility(ESlateVisibility::Visible);
+	}
+	else
+	{
+		target->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void EngineApi::Destroy(UWidget* obj)
+{
+
+}
+
+void EngineApi::UnloadUnusedAssets()
+{
+
+}
+
+void EngineApi::SetParent(UWidget*child, UPanelWidget* parent, bool worldPositionStays)
+{
+	parent->AddChild(child);
+}
+
+void EngineApi::SetContentForSlot(UUserWidget* userWidget, FName SlotName, UWidget* Content)
+{
+	userWidget->SetContentForSlot(SlotName, Content);
+}
+
+//void EngineApi::ConvertString(const FString& Source, icu::UnicodeString& Destination, const bool ShouldNullTerminate)
+//{
+//	ICUUtilities::ConvertString(Source, Destination, ShouldNullTerminate);
+//}
+
+bool EngineApi::LineTraceSingleByChannel(UWorld* World, struct FHitResult& OutHit, const FVector& Start, const FVector& End, ECollisionChannel TraceChannel, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
+{
+	return World->LineTraceSingleByChannel(OutHit, Start, End, TraceChannel, Params, ResponseParam);
+}
+
+bool EngineApi::SweepTestByChannel(UWorld* World, const FVector& Start, const FVector& End, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
+{
+	return World->SweepTestByChannel(Start, End, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
+}
+
+bool EngineApi::OverlapBlockingTestByChannel(UWorld* World, const FVector& Pos, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
+{
+	return World->OverlapBlockingTestByChannel(Pos, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
+}
+
+float EngineApi::GetAxisValue(UInputComponent* pUInputComponent, const FName AxisName)
+{
+	return pUInputComponent->GetAxisValue(AxisName);
+}
+
+float EngineApi::GetInputAxisValue(AActor* pAActor, const FName InputAxisName)
+{
+	return pAActor->GetInputAxisValue(InputAxisName);
+}
+
+float EngineApi::GetInputAxisValue(const FName InputAxisName)
+{
+	return g_pEngineData->getMainActor()->GetInputAxisValue(InputAxisName);
+}
+
+FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
+{
+	return pUSceneComponent->ComponentToWorld;
 }

@@ -9,5 +9,5 @@ uint16 UtilTable::m_sCnt = 0;
 void UtilTable::readString(ByteBuffer* bytes, std::string& tmpStr)
 {
 	bytes->readUnsignedInt16(m_sCnt);
-	bytes->readMultiByte(tmpStr, m_sCnt, MEncode::eUTF8);
+	bytes->readMultiByte(tmpStr, m_sCnt, eUTF8);
 }

@@ -3,6 +3,7 @@
 
 class ITickedObject
 {
+public:
     virtual void onTick(float delta) = 0;
 };
 

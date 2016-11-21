@@ -11,7 +11,7 @@ class UILoadingItem
 {
 public:
 	UIFormID m_ID;               // Form ID
-    std::string m_resPath;            // 拖放的控件 path
+    std::string m_resPath;            // 拖放的控件 path 
 
 public:
 	UILoadingItem();

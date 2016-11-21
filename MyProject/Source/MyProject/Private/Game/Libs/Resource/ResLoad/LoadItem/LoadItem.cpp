@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "LoadItem.h"
 #include "NonRefCountResLoadResultNotify.h"
+#include "ResLoadState.h"
 
 LoadItem::LoadItem()
 {

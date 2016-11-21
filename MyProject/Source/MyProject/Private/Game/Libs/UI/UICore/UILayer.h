@@ -19,25 +19,25 @@ enum UILayerID
 
 #include "UIFormID.h"
 
-class UFormBase;
+class UForm;
 
 class UILayer
 {
 protected:
 	UILayerID m_layer;	                        // UIFormID.FirstLayer定义
 	FSlateRenderTransform* m_layerTrans;                 // 当前所在层根节点转换
-	std::map<UIFormID, UFormBase*> m_winDic;        // 当前层所有的界面
+	std::map<UIFormID, UForm*> m_winDic;        // 当前层所有的界面
 	std::string m_goName;
 public:
 	UILayer(UILayerID layerID);
-	std::map<UIFormID, UFormBase*>& getWinDic();
+	std::map<UIFormID, UForm*>& getWinDic();
 	FSlateRenderTransform& getLayerTrans();
 	void setLayerTrans(FSlateRenderTransform* rhv);
 	void setGoName(std::string& rhv);
-	bool hasForm(UFormBase* form);
-	void removeForm(UFormBase* form);
+	bool hasForm(UForm* form);
+	void removeForm(UForm* form);
 	UILayerID getLayerID();
-	void addForm(UFormBase* form);
+	void addForm(UForm* form);
 	void onStageReSize();
 	void closeAllForm();
 	void findLayerGOAndTrans();

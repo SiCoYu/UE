@@ -6,11 +6,14 @@
 class EngineData
 {
 protected:
-	UObject* m_mainActor;
+	//UObject* m_mainActor;
+	AActor* m_mainActor;
 
 public:
-	UObject* getMainActor();
-	void setMainActor(UObject* actor);
+	//UObject* getMainActor();
+	//void setMainActor(UObject* actor);
+	AActor* getMainActor();
+	void setMainActor(AActor* actor);
 };
 
 #endif				// __ENGINEDATA_H

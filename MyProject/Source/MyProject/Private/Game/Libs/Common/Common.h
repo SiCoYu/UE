@@ -15,5 +15,8 @@
 #include "NetDispList.h"
 #include "Config.h"
 #include "LocalFileSys.h"
+#include "PoolSys.h"
+#include "UIAssetMgr.h"
+#include "ResLoadMgr.h"
 
 #endif
