@@ -64,7 +64,8 @@ public class MyProject : ModuleRules
                 "OnlineSubsystem",
 				"OnlineSubsystemUtils",
                 "Sockets",
-                "Networking"
+                "Networking",
+                "UMG",
             }
         );
 
@@ -136,7 +137,10 @@ public class MyProject : ModuleRules
     {
         get
         {
-            return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name));
+            // “UnrealBuildTool.RulesCompiler.GetModuleFilename(string)”已过时:“GetModuleFilename is deprecated, use the ModuleDirectory property on any ModuleRules instead to get a path to your module.”
+            //return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name));
+            //return Path.GetDirectoryName(ModuleDirectory);    // 不是这样获取
+            return ModuleDirectory;      // 参照 Engine\Plugins\Runtime\Nvidia\Ansel\Source\Ansel\Ansel.Build.cs 实现
         }
     }
 
@@ -167,7 +171,7 @@ public class MyProject : ModuleRules
     {
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
-            string PlatformString;
+            //string PlatformString;
             string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets");
 
             if (Target.Platform == UnrealTargetPlatform.Win64)

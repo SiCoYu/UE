@@ -12,7 +12,8 @@ public:
 	SLATE_BEGIN_ARGS(SMyDialog)
 	{}
 
-	SLATE_TEXT_ARGUMENT(MessageText)
+	//SLATE_TEXT_ARGUMENT(MessageText)
+	SLATE_ATTRIBUTE(FText, MessageText)
 
 	SLATE_END_ARGS()	
 
