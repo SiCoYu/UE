@@ -7,6 +7,7 @@ public class MyProject : ModuleRules
 {
 	public MyProject(TargetInfo Target)
 	{
+        // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
         PrivateIncludePaths.AddRange(
             new string[] {
                 // Libs 区域
@@ -16,6 +17,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/Libs/FrameWork",
                 "MyProject/Private/Game/Libs/NetWork/Socket",
                 "MyProject/Private/Game/Libs/NetWork/Cmd",
+                "MyProject/Private/Game/Libs/NetWork/Web",
 
                 "MyProject/Private/Game/Libs/UI/UICore",
                 "MyProject/Private/Game/Libs/Log",
@@ -51,12 +53,16 @@ public class MyProject : ModuleRules
                 // Test 区域
                 "MyProject/Private/Game/UnitTest",
 
+                // Example
+                "MyProject/Private/Game/Example/CustomActorIcon",
+
                 // 其它
                 "MyProject/Private/UI/Widgets",
-	        }
+            }
         );
 
-		PublicDependencyModuleNames.AddRange(
+        // 添加需要包含目录的 Public 模块
+        PublicDependencyModuleNames.AddRange(
             new string[] { 
                 "Core", 
                 "CoreUObject", 
@@ -69,6 +75,7 @@ public class MyProject : ModuleRules
             }
         );
 
+        // 添加需要包含目录的 Private 模块
         PrivateDependencyModuleNames.AddRange(
             new string[] {
                 "Core",
@@ -151,7 +158,7 @@ public class MyProject : ModuleRules
     {
         get
         {
-            return Path.GetFullPath(Path.Combine(ModulePath, "..", "..", "ThirdParty"));
+            return Path.GetFullPath(Path.Combine(ModulePath, "../..", "ThirdParty"));
         }
     }
 
