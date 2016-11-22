@@ -55,6 +55,8 @@ public class MyProject : ModuleRules
 
                 // Example
                 "MyProject/Private/Game/Example/CustomActorIcon",
+                "MyProject/Private/Game/Example/AsyncLoad",
+                "MyProject/Private/Game/Example/ObjectLibraryLoad",
 
                 // ÆäËü
                 "MyProject/Private/UI/Widgets",
