@@ -12,6 +12,6 @@ class UHttpWeb : public UObject
 public:
 	UHttpWeb(const FObjectInitializer& ObjectInitializer);
 	FString buildJson();
-	void sendJson();
+	void sendJson(FString JsonStr);
 	void HttpCompleteCallback(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
 };

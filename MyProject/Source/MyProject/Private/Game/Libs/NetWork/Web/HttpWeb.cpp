@@ -18,16 +18,18 @@ FString UHttpWeb::buildJson()
 
 	// Close the writer and finalize the output such that JsonStr has what we want
 	JsonWriter->Close();
+
+	return JsonStr;
 }
 
-void UHttpWeb::sendJson()
+void UHttpWeb::sendJson(FString JsonStr)
 {
 	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
 	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json; charset=utf-8"));
 	HttpRequest->SetURL(TEXT("http://localhost/mywebpage.php"));
 	HttpRequest->SetVerb(TEXT("POST"));
 	HttpRequest->SetContentAsString(JsonStr);
-	HttpRequest->OnProcessRequestComplete().BindUObject(this, &ASUMiniGameMode::HttpCompleteCallback);
+	HttpRequest->OnProcessRequestComplete().BindUObject(this, &UHttpWeb::HttpCompleteCallback);
 	HttpRequest->ProcessRequest();
 }
 

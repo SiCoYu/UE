@@ -61,7 +61,7 @@ public class MyProject : ModuleRules
             }
         );
 
-        // 添加需要包含目录的 Public 模块
+        // 添加需要包含目录和链接库的 Public 模块
         PublicDependencyModuleNames.AddRange(
             new string[] { 
                 "Core", 
@@ -87,11 +87,12 @@ public class MyProject : ModuleRules
             }
         );
 
-        PrivateIncludePathModuleNames.AddRange(
-            new string[] {
-                "HTTP"
-            }
-        );
+        // 包含 Private 模块中的头文件目录
+        //PrivateIncludePathModuleNames.AddRange(
+        //    new string[] {
+        //        "HTTP"
+        //    }
+        //);
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
