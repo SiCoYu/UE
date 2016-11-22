@@ -83,7 +83,14 @@ public class MyProject : ModuleRules
 				"Slate",
 				"SlateCore",
                 "UMG",
-			}
+                "HTTP",
+            }
+        );
+
+        PrivateIncludePathModuleNames.AddRange(
+            new string[] {
+                "HTTP"
+            }
         );
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
