@@ -16,7 +16,7 @@ class UObjectLibraryLoad : public UObject
 
 public:
 	UObjectLibraryLoad(const FObjectInitializer& ObjectInitializer);
-
-	void LoadAssetDataFromPath();
-	void GetAssetDataFromPath(Class* BaseClass, bool bFullyLoad);
+	// UClass ²»ÊÇ Class
+	void LoadAssetDataFromPath(UClass* BaseClass, bool bFullyLoad);
+	FAssetData GetAssetDataFromPath();
 };

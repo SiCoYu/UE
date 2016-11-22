@@ -10,7 +10,7 @@ UAsyncLoad::UAsyncLoad(const class FObjectInitializer& PCIP)
 void UAsyncLoad::SimpleAsyncLoad()
 {
 	FStringAssetReference AssetToLoad;
-	this->AssetToLoad = MyItem.ToStringReference();
+	AssetToLoad = MyItem.ToStringReference();
 	this->AssetLoader.SimpleAsyncLoad(AssetToLoad);
 }
 
@@ -21,7 +21,7 @@ void UAsyncLoad::RequestAsyncLoad()
 	{
 		AssetsToLoad.AddUnique(AssetPtr.ToStringReference());
 	}
-	AssetLoader.RequestAsyncLoad(AssetsToLoad, FStreamableDelegate::CreateUObject(this, &MyClass::MyFunctionToBeCalledAfterAssetsAreLoaded));
+	AssetLoader.RequestAsyncLoad(AssetsToLoad, FStreamableDelegate::CreateUObject(this, &UAsyncLoad::MyFunctionToBeCalledAfterAssetsAreLoaded));
 }
 
 void UAsyncLoad::MyFunctionToBeCalledAfterAssetsAreLoaded()

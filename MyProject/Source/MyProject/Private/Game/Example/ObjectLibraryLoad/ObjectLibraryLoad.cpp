@@ -7,7 +7,8 @@ UObjectLibraryLoad::UObjectLibraryLoad(const class FObjectInitializer& PCIP)
 	
 }
 
-void UObjectLibraryLoad::LoadAssetDataFromPath(Class* BaseClass, bool bFullyLoad)
+// UClass 不是 Class
+void UObjectLibraryLoad::LoadAssetDataFromPath(UClass* BaseClass, bool bFullyLoad)
 {
 	if (!ObjectLibrary)
 	{
@@ -15,14 +16,14 @@ void UObjectLibraryLoad::LoadAssetDataFromPath(Class* BaseClass, bool bFullyLoad
 		ObjectLibrary->AddToRoot();
 	}
 
-	ObjectLibrary->LoadAssetDataFromPath(TEXT("/Game/PathWithAllObjectsOfSameType");
+	ObjectLibrary->LoadAssetDataFromPath(TEXT("/Game/PathWithAllObjectsOfSameType"));
 	if (bFullyLoad)
 	{
 		ObjectLibrary->LoadAssetsFromAssetData();
 	}
 }
 
-void UObjectLibraryLoad::GetAssetDataFromPath()
+FAssetData UObjectLibraryLoad::GetAssetDataFromPath()
 {
 	TArray<FAssetData> AssetDatas;
 	ObjectLibrary->GetAssetDataList(AssetDatas);
@@ -31,11 +32,16 @@ void UObjectLibraryLoad::GetAssetDataFromPath()
 	{
 		FAssetData& AssetData = AssetDatas[i];
 
-		const FString* FoundTypeNameString = AssetData.TagsAndValues.Find(GET_MEMBER_NAME_CHECKED(UAssetObject, TypeName));
+		// 这一行原来是这样的，但是不知道这么修改， UAssetObject 是一个类型， TypeName 是类型中的一个属性
+		//const FString* FoundTypeNameString = AssetData.TagsAndValues.Find(GET_MEMBER_NAME_CHECKED(UAssetObject, TypeName));
+		// 静态成员检查
+		const FString* FoundTypeNameString = AssetData.TagsAndValues.Find(GET_MEMBER_NAME_CHECKED(UStaticMesh, bAutoComputeLODScreenSize));
 
 		if (FoundTypeNameString && FoundTypeNameString->Contains(TEXT("FooType")))
 		{
 			return AssetData;
 		}
 	}
+
+	return FAssetData();
 }
