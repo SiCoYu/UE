@@ -16,6 +16,6 @@ class UUmgExtendInCpp : public UUserWidget
 {
 	GENERATED_UCLASS_BODY()
 
-public:
-	UUmgInCpp(const FObjectInitializer& ObjectInitializer);
+//public:
+//	UUmgExtendInCpp(const FObjectInitializer& ObjectInitializer);
 };
