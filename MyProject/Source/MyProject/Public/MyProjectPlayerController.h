@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "MyProject.h"
 #include "MyProjectPlayerController.generated.h"
 
 UCLASS(Within=Engine, transient, config=Engine)

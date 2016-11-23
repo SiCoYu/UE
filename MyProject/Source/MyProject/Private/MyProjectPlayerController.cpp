@@ -3,7 +3,7 @@
 #include "MyProject.h"
 #include "MyProjectPlayerController.h"
 
-UMyProjectPlayerController::UMyProjectPlayerController(const FObjectInitializer& ObjectInitializer)
+AMyProjectPlayerController::AMyProjectPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 

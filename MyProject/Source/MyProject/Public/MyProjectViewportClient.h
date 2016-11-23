@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "MyProject.h"
 #include "MyProjectViewportClient.generated.h"
 
 UCLASS(Within=Engine, transient, config=Engine)
