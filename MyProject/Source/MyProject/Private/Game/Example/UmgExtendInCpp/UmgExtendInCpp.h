@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Runtime/UMG/Public/UMG.h"
-#include "Runtime/UMG/Public/UMGStyle.h"
-#include "Runtime/UMG/Public/Slate/SObjectWidget.h"
-#include "Runtime/UMG/Public/IUMGModule.h"
-#include "Runtime/UMG/Public/Blueprint/UserWidget.h"
+//#include "Runtime/UMG/Public/UMG.h"
+//#include "Runtime/UMG/Public/UMGStyle.h"
+//#include "Runtime/UMG/Public/Slate/SObjectWidget.h"
+//#include "Runtime/UMG/Public/IUMGModule.h"
+//#include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "UmgExtendInCpp.generated.h"
 
@@ -15,4 +15,7 @@ UCLASS(config=Game)
 class UUmgExtendInCpp : public UUserWidget
 {
 	GENERATED_UCLASS_BODY()
+
+public:
+	UUmgInCpp(const FObjectInitializer& ObjectInitializer);
 };

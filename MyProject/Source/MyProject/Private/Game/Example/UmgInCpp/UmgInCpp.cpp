@@ -12,7 +12,7 @@ void UUmgInCpp::showMenu()
 	if (wMainMenu) // Check if the Asset is assigned in the blueprint.
 	{
 		// Create the widget and store it.
-		MyMainMenu = CreateWidget<UUserWidget>(this, wMainMenu);
+		MyMainMenu = CreateWidget<UUserWidget>(mPlayerController, wMainMenu);
 
 		// now you can use the widget directly since you have a referance for it.
 		// Extra check to  make sure the pointer holds the widget.
