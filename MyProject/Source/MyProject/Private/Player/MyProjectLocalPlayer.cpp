@@ -7,6 +7,11 @@ UMyProjectLocalPlayer::UMyProjectLocalPlayer(const FObjectInitializer& ObjectIni
 {
 }
 
+void UMyProjectLocalPlayer::SetControllerId(int32 NewControllerId)
+{
+	Super::SetControllerId(NewControllerId);
+}
+
 UMyProjectPersistentUser* UMyProjectLocalPlayer::GetPersistentUser() const
 {
 	// if persistent data isn't loaded yet, load it

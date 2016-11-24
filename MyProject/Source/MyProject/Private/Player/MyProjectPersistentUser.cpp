@@ -2,7 +2,7 @@
 #include "Player/MyProjectPersistentUser.h"
 #include "MyProjectLocalPlayer.h"
 
-UMyProjectLocalPlayer::UMyProjectLocalPlayer(const FObjectInitializer& ObjectInitializer)
+UMyProjectPersistentUser::UMyProjectPersistentUser(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	
