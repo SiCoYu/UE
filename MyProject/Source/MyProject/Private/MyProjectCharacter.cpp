@@ -1,5 +1,3 @@
-// Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
-
 #include "MyProject.h"
 #include "MyProjectCharacter.h"
 #include "Common.h"
