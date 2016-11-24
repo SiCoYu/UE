@@ -10,6 +10,12 @@ public class MyProject : ModuleRules
         // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
         PrivateIncludePaths.AddRange(
             new string[] {
+                // Player 区域
+                "MyProject/Private/Player",
+                
+                // Online 区域
+                "MyProject/Private/Online",
+
                 // Libs 区域
                 "MyProject/Private/Game/Libs/Common",
                 "MyProject/Private/Game/Libs/DataStruct",

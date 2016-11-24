@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Online/MyProjectPlayerState.h"
 #include "MyProjectGameState.generated.h"
 
 /** ranked PlayerState map, created from the GameState */

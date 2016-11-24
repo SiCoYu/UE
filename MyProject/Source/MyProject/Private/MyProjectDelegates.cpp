@@ -1,5 +1,6 @@
 #include "MyProject.h"
-#include "GameDelegates.h"
+#include "MyProjectDelegates.h"
+#include "Online/MyProjectGameState.h"
 
 // respond to requests from a companion app
 static void WebServerDelegate(int32 UserIndex, const FString& Action, const FString& URL, const TMap<FString, FString>& Params, TMap<FString, FString>& Response)
