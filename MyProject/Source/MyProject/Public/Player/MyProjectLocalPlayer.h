@@ -16,7 +16,7 @@ public:
 
 	virtual FString GetNickname() const;
 
-	class UShooterPersistentUser* GetPersistentUser() const;
+	class UMyProjectPersistentUser* GetPersistentUser() const;
 	
 	/** Initializes the PersistentUser */
 	void LoadPersistentUser();
@@ -24,7 +24,7 @@ public:
 private:
 	/** Persistent user data stored between sessions (i.e. the user's savegame) */
 	UPROPERTY()
-	class UShooterPersistentUser* PersistentUser;
+	class UMyProjectPersistentUser* PersistentUser;
 };
 
 

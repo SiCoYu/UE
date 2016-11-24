@@ -35,7 +35,7 @@ static void WebServerDelegate(int32 UserIndex, const FString& Action, const FStr
 	}
 }
 
-void InitializeShooterGameDelegates()
+void InitializeMyProjectDelegates()
 {
 	FGameDelegates::Get().GetWebServerActionDelegate() = FWebServerActionDelegate::CreateStatic(WebServerDelegate);
 }

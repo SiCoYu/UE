@@ -24,7 +24,7 @@ void UMyProjectLocalPlayer::LoadPersistentUser()
 	FString SaveGameName = GetNickname();
 }
 
-FString UShooterLocalPlayer::GetNickname() const
+FString UMyProjectLocalPlayer::GetNickname() const
 {
 	FString UserNickName = Super::GetNickname();
 

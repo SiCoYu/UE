@@ -3,7 +3,7 @@
 #include "MyProjectGameState.generated.h"
 
 /** ranked PlayerState map, created from the GameState */
-typedef TMap<int32, TWeakObjectPtr<AShooterPlayerState> > RankedPlayerMap; 
+typedef TMap<int32, TWeakObjectPtr<AMyProjectPlayerState> > RankedPlayerMap;
 
 UCLASS()
 class AMyProjectGameState : public AGameState
