@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "Player/MyProjectCameraManager.h"
+#include "Player/MyProjectPlayerCameraManager.h"
 
-AMyProjectCameraManager::AMyProjectCameraManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+AMyProjectPlayerCameraManager::AMyProjectPlayerCameraManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	NormalFOV = 90.0f;
 	TargetingFOV = 60.0f;
@@ -10,7 +10,7 @@ AMyProjectCameraManager::AMyProjectCameraManager(const FObjectInitializer& Objec
 	bAlwaysApplyModifiers = true;
 }
 
-void AMyProjectCameraManager::UpdateCamera(float DeltaTime)
+void AMyProjectPlayerCameraManager::UpdateCamera(float DeltaTime)
 {
 	Super::UpdateCamera(DeltaTime);
 }
