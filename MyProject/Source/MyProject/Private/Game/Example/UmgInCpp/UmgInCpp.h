@@ -11,7 +11,6 @@ class UUmgInCpp : public UObject
 {
 	GENERATED_BODY()
 
-
 	// Note: that am using forward declaration Because am not including the
 	// widget in the header and to prevent circular dependency.
 	// you dont need to do that if you include the Widget Class in the .h
