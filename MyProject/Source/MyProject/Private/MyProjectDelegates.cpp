@@ -20,22 +20,10 @@ static void WebServerDelegate(int32 UserIndex, const FString& Action, const FStr
 				if (Player)
 				{
 					// get the shoter game
-					AShooterGameState* const GameState = Player->PlayerController->GetWorld()->GetGameState<AShooterGameState>();
-
+					AMyProjectGameState* const GameState = Player->PlayerController->GetWorld()->GetGameState<AMyProjectGameState>();
 
 					RankedPlayerMap Players;
 					GameState->GetRankedMap(0, Players);
-
-					bool bNeedsComma = false;
-					for (auto It = Players.CreateIterator(); It; ++It)
-					{
-						if (bNeedsComma)
-						{
-							ScoreboardStr += TEXT(" ,");
-						}
-						ScoreboardStr += FString::Printf(TEXT(" { \"n\" : \"%s\" , \"k\" : \"%d\" , \"d\" : \"%d\" }"), *It.Value()->GetShortPlayerName(), It.Value()->GetKills(), It.Value()->GetDeaths());
-						bNeedsComma = true;
-					}
 				}
 
 				ScoreboardStr += TEXT(" ] }");
