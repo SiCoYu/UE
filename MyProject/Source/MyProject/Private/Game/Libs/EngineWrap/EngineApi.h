@@ -88,6 +88,12 @@ public:
 	 * @brief 获取场景组件的具体位置信息
 	 */
 	static FTransform& getTransform(USceneComponent* pUSceneComponent);
+
+	/**
+	 * @brief 启动浏览器，浏览网址
+	 * @brief https://wiki.unrealengine.com/How_to_Launch_Web_Browser_with_URL_From_In-Game
+	 */
+	static void LaunchURL(FString url);
 };
 
 #endif				// __ENGINEAPI_H

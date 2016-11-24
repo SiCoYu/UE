@@ -174,3 +174,9 @@ FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
 {
 	return pUSceneComponent->ComponentToWorld;
 }
+
+void EngineApi::LaunchURL(FString url)
+{
+	FString TheURL = "http://www.google.com/";
+	FPlatformProcess::LaunchURL(*TheURL, nullptr, nullptr);
+}
