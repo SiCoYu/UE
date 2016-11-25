@@ -15,6 +15,7 @@ void AEventHand::OnOverlap(AActor* OtherActor)
 
 void AEventHand::addEventHandle()
 {
-	//this->OnActorBeginOverlap.AddDynamic(this, &AEventHand::OnOverlap);
-	AddDynamic(this, &AEventHand::OnOverlap);
+	this->OnActorBeginOverlap.AddDynamic(this, &AEventHand::OnOverlap);
+	//AddDynamic(this, &AEventHand::OnOverlap);
+	//this->OnActorBeginOverlap.AddUnique
 }
