@@ -70,13 +70,28 @@ void ARWConfigFilePlayerController::VictoryConfigSetTests()
 	//New Section to Add
 	FString VictorySection = "Victory.Core";
 
+	// Error
 	//String
+	//GConfig->SetString(
+	//	*VictorySection,
+	//	TEXT("RootDir"),
+	//	TEXT("E:\UE4\IsAwesome"),
+	//	GGameIni
+	//	);
+
 	GConfig->SetString(
 		*VictorySection,
 		TEXT("RootDir"),
-		TEXT("E:\UE4\IsAwesome"),
+		TEXT("E:\\UE4\\IsAwesome"),
 		GGameIni
 		);
+
+	//GConfig->SetString(
+	//	*VictorySection,
+	//	TEXT("RootDir"),
+	//	*FString("E:\\UE4\\IsAwesome"),
+	//	GGameIni
+	//	);
 
 	//FColor
 	GConfig->SetColor(
