@@ -9,13 +9,13 @@
 //}
 
 // 客户端过地图
-AClearWidgetsPlayerController* AClearWidgetsGameMode::ProcessClientTravel(FString& FURL, FGuid NextMapGuid, bool bSeamless, bool bAbsolute)
+APlayerController* AClearWidgetsGameMode::ProcessClientTravel(FString& FURL, FGuid NextMapGuid, bool bSeamless, bool bAbsolute)
 {
 	// We call PreClientTravel directly on any local PlayerPawns (ie listen server)
-	AClearWidgetsPlayerController* LocalPlayerController = NULL;
+	APlayerController* LocalPlayerController = NULL;
 	for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
 	{
-		AClearWidgetsPlayerController* PlayerController = *Iterator;
+		APlayerController* PlayerController = *Iterator;
 		if (Cast<UNetConnection>(PlayerController->Player) != NULL)
 		{
 			/* Check if we're using our Custom Controller */

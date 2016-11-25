@@ -16,5 +16,5 @@ class AClearWidgetsGameMode : public AGameMode
 	GENERATED_BODY()
 
 public:
-	virtual AClearWidgetsPlayerController* ProcessClientTravel(FString& FURL, FGuid NextMapGuid, bool bSeamless, bool bAbsolute) override;
+	virtual APlayerController* ProcessClientTravel(FString& FURL, FGuid NextMapGuid, bool bSeamless, bool bAbsolute) override;
 };
