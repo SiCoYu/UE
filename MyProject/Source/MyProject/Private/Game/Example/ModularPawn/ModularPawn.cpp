@@ -9,7 +9,7 @@ AModularPawn::AModularPawn(const class FObjectInitializer& PCIP)
 {
 	static FName CollisionProfileName(TEXT("IgnoreOnlyPawn"));
 
-	Body = PCIP.CreateOptionalDefaultSubobject<USkeletalMeshComponent>(this, AMyCharacter::BodyComponentName);
+	Body = PCIP.CreateOptionalDefaultSubobject<USkeletalMeshComponent>(this, AModularPawn::BodyComponentName);
 	if (Body)
 	{
 		Body->AlwaysLoadOnClient = true;
@@ -18,18 +18,21 @@ AModularPawn::AModularPawn(const class FObjectInitializer& PCIP)
 		Body->MeshComponentUpdateFlag = EMeshComponentUpdateFlag::AlwaysTickPose;
 		Body->bCastDynamicShadow = true;
 		Body->PrimaryComponentTick.TickGroup = TG_PrePhysics;
-		Body->bChartDistanceFactor = true;
+		// USkinnedMeshComponent::bChartDistanceFactor': bChartDistanceFactor is no longer useful, please remove references to it Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//Body->bChartDistanceFactor = true;
 		Body->SetCollisionProfileName(CollisionProfileName);
 		Body->bGenerateOverlapEvents = false;
 
 		// Mesh acts as the head, as well as the parent for both animation and attachment.
-		Body->AttachParent = Mesh;
-		Body->SetMasterPoseComponent(Mesh);
+		//Body->AttachParent = Mesh;
+		Body->AttachToComponent(this->GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
+		//Body->SetMasterPoseComponent(Mesh);
+		Body->SetMasterPoseComponent(this->GetMesh());
 
-		Components.Add(Body);
+		//Components.Add(Body);
 	}
 
-	Legs = PCIP.CreateOptionalDefaultSubobject<USkeletalMeshComponent>(this, AMyCharacter::LegsComponentName);
+	Legs = PCIP.CreateOptionalDefaultSubobject<USkeletalMeshComponent>(this, AModularPawn::LegsComponentName);
 	if (Legs)
 	{
 		Legs->AlwaysLoadOnClient = true;
@@ -38,14 +41,17 @@ AModularPawn::AModularPawn(const class FObjectInitializer& PCIP)
 		Legs->MeshComponentUpdateFlag = EMeshComponentUpdateFlag::AlwaysTickPose;
 		Legs->bCastDynamicShadow = true;
 		Legs->PrimaryComponentTick.TickGroup = TG_PrePhysics;
-		Legs->bChartDistanceFactor = true;
+		// 'USkinnedMeshComponent::bChartDistanceFactor': bChartDistanceFactor is no longer useful, please remove references to it Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//Legs->bChartDistanceFactor = true;
 		Legs->SetCollisionProfileName(CollisionProfileName);
 		Legs->bGenerateOverlapEvents = false;
 
 		// Mesh acts as the head, as well as the parent for both animation and attachment.
-		Legs->AttachParent = Mesh;
-		Legs->SetMasterPoseComponent(Mesh);
+		//Legs->AttachParent = Mesh;
+		Legs->AttachToComponent(this->GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
+		//Legs->SetMasterPoseComponent(Mesh);
+		Legs->SetMasterPoseComponent(this->GetMesh());
 
-		Components.Add(Legs);
+		//Components.Add(Legs);
 	}
 }
