@@ -12,12 +12,14 @@ UCLASS()
 class AFrog : public ACharacter, public IReactsToTimeOfDay
 {
 	GENERATED_BODY()
-		/*
-		... other AFrog properties and functions declared ...
-		*/
 
-		UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-		bool ReactToHighNoon();
+public:
+	// A Private function cannot be a BlueprintNativeEvent!
+	/*
+	... other AFrog properties and functions declared ...
+	*/
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
+	bool ReactToHighNoon();
+
 	virtual bool ReactToHighNoon_Implementation() override;
-
 };

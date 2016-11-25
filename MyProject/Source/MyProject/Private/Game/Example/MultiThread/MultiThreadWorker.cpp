@@ -1,10 +1,14 @@
+#include "MyProject.h"
+#include "MultiThreadWorker.h"
+#include "MyProjectPlayerController.h"
+
 //***********************************************************
 //Thread Worker Starts as NULL, prior to being instanced
 //		This line is essential! Compiler error without it
-FPrimeNumberWorker* FPrimeNumberWorker::Runnable = NULL;
+FMultiThreadWorker* FMultiThreadWorker::Runnable = NULL;
 //***********************************************************
 
-FPrimeNumberWorker::FPrimeNumberWorker(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AVictoryGamePlayerController* IN_PC)
+FMultiThreadWorker::FMultiThreadWorker(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyProjectPlayerController* IN_PC)
 	: ThePC(IN_PC)
 	, TotalPrimesToFind(IN_TotalPrimesToFind)
 	, StopTaskCounter(0)
@@ -16,14 +20,14 @@ FPrimeNumberWorker::FPrimeNumberWorker(TArray<uint32>& TheArray, const int32 IN_
 	Thread = FRunnableThread::Create(this, TEXT("FPrimeNumberWorker"), 0, TPri_BelowNormal); //windows default = 8mb for thread, could specify more
 }
 
-FPrimeNumberWorker::~FPrimeNumberWorker()
+FMultiThreadWorker::~FMultiThreadWorker()
 {
 	delete Thread;
 	Thread = NULL;
 }
 
 //Init
-bool FPrimeNumberWorker::Init()
+bool FMultiThreadWorker::Init()
 {
 	//Init the Data 
 	PrimeNumbers->Empty();
@@ -32,15 +36,15 @@ bool FPrimeNumberWorker::Init()
 
 	if (ThePC)
 	{
-		ThePC->ClientMessage("**********************************");
-		ThePC->ClientMessage("Prime Number Thread Started!");
-		ThePC->ClientMessage("**********************************");
+		//ThePC->ClientMessage("**********************************");
+		//ThePC->ClientMessage("Prime Number Thread Started!");
+		//ThePC->ClientMessage("**********************************");
 	}
 	return true;
 }
 
 //Run
-uint32 FPrimeNumberWorker::Run()
+uint32 FMultiThreadWorker::Run()
 {
 	//Initial wait before starting
 	FPlatformProcess::Sleep(0.03);
@@ -60,7 +64,7 @@ uint32 FPrimeNumberWorker::Run()
 
 		//	  All calcs for making stuff can be done in the threads
 		//	     But the actual making/modifying of the UObjects should be done in main game thread.
-		ThePC->ClientMessage(FString::FromInt(PrimeNumbers->Last()));
+		//ThePC->ClientMessage(FString::FromInt(PrimeNumbers->Last()));
 		//***************************************
 
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,12 +80,12 @@ uint32 FPrimeNumberWorker::Run()
 }
 
 //stop
-void FPrimeNumberWorker::Stop()
+void FMultiThreadWorker::Stop()
 {
 	StopTaskCounter.Increment();
 }
 
-FPrimeNumberWorker* FPrimeNumberWorker::JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AVictoryGamePlayerController* IN_PC)
+FMultiThreadWorker* FMultiThreadWorker::JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyProjectPlayerController* IN_PC)
 {
 	//Create new instance of thread if it does not exist
 	//		and the platform supports multi threading!
@@ -92,13 +96,13 @@ FPrimeNumberWorker* FPrimeNumberWorker::JoyInit(TArray<uint32>& TheArray, const 
 	return Runnable;
 }
 
-void FPrimeNumberWorker::EnsureCompletion()
+void FMultiThreadWorker::EnsureCompletion()
 {
 	Stop();
 	Thread->WaitForCompletion();
 }
 
-void FPrimeNumberWorker::Shutdown()
+void FMultiThreadWorker::Shutdown()
 {
 	if (Runnable)
 	{
@@ -108,12 +112,12 @@ void FPrimeNumberWorker::Shutdown()
 	}
 }
 
-bool FPrimeNumberWorker::IsThreadFinished()
+bool FMultiThreadWorker::IsThreadFinished()
 {
 	if (Runnable) return Runnable->IsFinished();
 	return true;
 }
-int32 FPrimeNumberWorker::FindNextPrimeNumber()
+int32 FMultiThreadWorker::FindNextPrimeNumber()
 {
 	//Last known prime number  + 1
 	int32 TestPrime = PrimeNumbers->Last();

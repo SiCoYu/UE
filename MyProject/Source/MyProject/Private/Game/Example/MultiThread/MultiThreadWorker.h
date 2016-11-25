@@ -1,3 +1,7 @@
+#pragma once
+
+#include "MyProject.h"
+
 /**
  * @brief https://wiki.unrealengine.com/Multi-Threading:_How_to_Create_Threads_in_UE4
  */
@@ -33,11 +37,13 @@
 //	// code to execute on game thread here
 //})
 
+class AMyProjectPlayerController;
+
 //~~~~~ Multi Threading ~~~
-class FPrimeNumberWorker : public FRunnable
+class FMultiThreadWorker : public FRunnable
 {
 	/** Singleton instance, can access the thread any time via static accessor, if it is active! */
-	static  FPrimeNumberWorker* Runnable;
+	static  FMultiThreadWorker* Runnable;
 
 	/** Thread to run the worker FRunnable on */
 	FRunnableThread* Thread;
@@ -46,7 +52,7 @@ class FPrimeNumberWorker : public FRunnable
 	TArray<uint32>* PrimeNumbers;
 
 	/** The PC */
-	AVictoryGamePlayerController* ThePC;
+	AMyProjectPlayerController* ThePC;
 
 	/** Stop this thread? Uses Thread Safe Counter */
 	FThreadSafeCounter StopTaskCounter;
@@ -69,8 +75,8 @@ public:
 	//~~~ Thread Core Functions ~~~
 
 	//Constructor / Destructor
-	FPrimeNumberWorker(TArray<uint32>& TheArray, const int32 IN_PrimesToFindPerTick, AVictoryGamePlayerController* IN_PC);
-	virtual ~FPrimeNumberWorker();
+	FMultiThreadWorker(TArray<uint32>& TheArray, const int32 IN_PrimesToFindPerTick, AMyProjectPlayerController* IN_PC);
+	virtual ~FMultiThreadWorker();
 
 	// Begin FRunnable interface.
 	virtual bool Init();
@@ -92,7 +98,7 @@ public:
 	This code ensures only 1 Prime Number thread will be able to run at a time.
 	This function returns a handle to the newly started instance.
 	*/
-	static FPrimeNumberWorker* JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AVictoryGamePlayerController* IN_PC);
+	static FMultiThreadWorker* JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyProjectPlayerController* IN_PC);
 
 	/** Shuts down the thread. Static so it can easily be called from outside the thread context */
 	static void Shutdown();

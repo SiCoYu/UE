@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "UtilPath.h"
 #include "Containers/UnrealString.h"
 #include "Misc/Paths.h"

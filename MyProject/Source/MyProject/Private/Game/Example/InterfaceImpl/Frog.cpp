@@ -1,3 +1,6 @@
+#include "MyProject.h"
+#include "Frog.h"
+
 //other Frog code
 
 bool AFrog::ReactToHighNoon_Implementation()

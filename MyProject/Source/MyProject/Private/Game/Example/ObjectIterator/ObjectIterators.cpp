@@ -1,20 +1,22 @@
+#include "MyProject.h"
 #include "ObjectIterators.h"
 #include "UObject/UObjectIterator.h"
 #include "EngineUtils.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/StaticMeshActor.h"
+#include "EngineApi.h"
 
 void ObjectIterators::IteratorAllComponent()
 {
 	for (TObjectIterator<USkeletalMeshComponent> Itr; Itr; ++Itr)
 	{
-		USkeletalMeshCompoment *Component = *Itr;
+		USkeletalMeshComponent *Component = *Itr;
 	}
 }
 
-void ObjectIterators::IteratorAllComponent()
+void ObjectIterators::IteratorAllActor()
 {
-	for (TActorIterator<AStaticMeshActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	for (TActorIterator<AStaticMeshActor> ActorItr(EngineApi::getWorld()); ActorItr; ++ActorItr)
 	{
 		// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
 		AStaticMeshActor *Mesh = *ActorItr;

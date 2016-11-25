@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "LogDefine.h"
 
 //General Log

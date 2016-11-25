@@ -1,3 +1,6 @@
+#include "MyProject.h"
+#include "Flower.h"
+
 //other flower.cpp code
 
 bool AFlower::ReactToHighNoon_Implementation()
@@ -8,5 +11,4 @@ bool AFlower::ReactToHighNoon_Implementation()
 	//...
 
 	return true;
-
 }

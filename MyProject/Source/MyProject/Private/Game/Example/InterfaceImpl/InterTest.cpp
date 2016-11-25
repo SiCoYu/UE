@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "InterTest.h"
+#include "ReactsToTimeOfDay.h"
 
 AInterTest::AInterTest(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
@@ -15,8 +16,6 @@ void AInterTest::test()
 	UObject* pointerToAnyUObject;
 
 	//....
-
-
 	IReactsToTimeOfDay* TheInterface = Cast<IReactsToTimeOfDay>(pointerToAnyUObject);
 	if (TheInterface)
 	{
@@ -26,7 +25,6 @@ void AInterTest::test()
 		TheInterface->Execute_ReactToHighNoon(pointerToAnyUObject);
 		TheInterface->Execute_ReactToMidnight(pointerToAnyUObject);
 	}
-
 
 	//end of code segment
 }

@@ -10,12 +10,12 @@
 /* must have BlueprintType as a specifier to have this interface exposed to blueprints
 with this line you can easily add this interface to any blueprint class */
 UINTERFACE(BlueprintType)
-class MYPROJECT_API UReactsToTimeOfDay : public UInterface
+class UReactsToTimeOfDay : public UInterface
 {
 	GENERATED_UINTERFACE_BODY()
 };
 
-class MYPROJECT_API IReactsToTimeOfDay
+class IReactsToTimeOfDay
 {
 	GENERATED_IINTERFACE_BODY()
 

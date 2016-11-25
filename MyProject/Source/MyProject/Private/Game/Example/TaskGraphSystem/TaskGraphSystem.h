@@ -1,4 +1,4 @@
-
+#pragma once
 
 //The UE4 task graph system allows you to perform many actions, each of which is relatively small, on separate threads from the game thread.
 //
@@ -8,3 +8,9 @@
 /**
  * @brief https://wiki.unrealengine.com/Multi-Threading:_Task_Graph_System
  */
+
+class TaskGraphSystem
+{
+public:
+	TaskGraphSystem();
+};
