@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Logging/LogMacros.h"
+
 /**
 * @brief https://wiki.unrealengine.com/Log_Macro_with_Netmode_and_Colour
 */
@@ -70,3 +71,11 @@
         GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::White, Msg); \
     } \
 }
+
+// DECLARE_LOG_CATEGORY_EXTERN 和 DEFINE_LOG_CATEGORY 成对出现，否则会出现没有声明编译错误
+// Engine\Source\Runtime\Core\Public\Logging\LogMacros.h
+/** 
+ *A macro to define a logging category, usually paired with DECLARE_LOG_CATEGORY_EXTERN from the header.
+ * @param CategoryName, category to define
+ */
+DECLARE_LOG_CATEGORY_EXTERN(LogYourCategory, Log, All);

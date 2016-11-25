@@ -1,3 +1,6 @@
+#ifndef __PlatformDefine_H
+#define __PlatformDefine_H
+
 /**
  * @brief 各种平台定义和宏定义
  */
@@ -20,3 +23,5 @@
 // 是否压缩
 #define MSG_COMPRESS
 #undef MSG_COMPRESS
+
+#endif

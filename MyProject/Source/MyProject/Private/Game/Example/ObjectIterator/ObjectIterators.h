@@ -8,5 +8,6 @@ class ObjectIterators
 {
 public:
 	static void IteratorAllComponent();
+	static void IteratorAllActor();
 	static void IteratorWorldActor();
 };
