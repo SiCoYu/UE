@@ -12,7 +12,7 @@ float ADistanceToCollision::DistanceOfActorToThisMeshSurface(AActor* TestActor, 
 	if (!TestActor) return 0;
 	if (!TestActor->IsValidLowLevel()) return 0;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+	UStaticMeshComponent* StaticMeshComponent = this->GetComponentByClass<UStaticMeshComponent::StaticClass()>();
 	//Dist of Actor to Surface, retrieve closest Surface Point to Actor
 	return StaticMeshComponent->GetDistanceToCollision(
 		TestActor->GetActorLocation(), ClosestSurfacePoint

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MyProject.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "ModularPawn.generated.h"
 
 /**
@@ -16,8 +17,9 @@ class AModularPawn : public ACharacter
 	*  Mesh (inherited from ACharacter) will act as characters head.
 	*/
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly)
-	TSubobjectPtr<class USkeletalMeshComponent> Body;
-
+	//TSubobjectPtr<class USkeletalMeshComponent> Body;
+	// TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.
+	USkeletalMeshComponent* Body;
 	/**
 	*  Name of the BodyComponentName.
 	*  Use this name if you want to prevent creation of the component (with PCIP.DoNotCreateDefaultSubobject).
@@ -29,7 +31,9 @@ class AModularPawn : public ACharacter
 	*  Mesh (inherited from ACharacter) will act as characters head.
 	*/
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly)
-		TSubobjectPtr<class USkeletalMeshComponent> Legs;
+	// TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.
+	// TSubobjectPtr<class USkeletalMeshComponent> Legs;
+	USkeletalMeshComponent* Legs;
 
 	/**
 	*  Name of the BodyComponentName.

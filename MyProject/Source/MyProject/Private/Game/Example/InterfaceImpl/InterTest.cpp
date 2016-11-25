@@ -13,7 +13,7 @@ void AInterTest::test()
 	//Example: somewhere else in code we are trying to see if our object reacts to time of day
 
 	//Some pointer is defined to any class inheriting from UObject
-	UObject* pointerToAnyUObject;
+	UObject* pointerToAnyUObject = nullptr;
 
 	//....
 	IReactsToTimeOfDay* TheInterface = Cast<IReactsToTimeOfDay>(pointerToAnyUObject);

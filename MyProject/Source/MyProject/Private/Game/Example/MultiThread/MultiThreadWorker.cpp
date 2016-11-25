@@ -91,7 +91,7 @@ FMultiThreadWorker* FMultiThreadWorker::JoyInit(TArray<uint32>& TheArray, const 
 	//		and the platform supports multi threading!
 	if (!Runnable && FPlatformProcess::SupportsMultithreading())
 	{
-		Runnable = new FPrimeNumberWorker(TheArray, IN_TotalPrimesToFind, IN_PC);
+		Runnable = new FMultiThreadWorker(TheArray, IN_TotalPrimesToFind, IN_PC);
 	}
 	return Runnable;
 }
