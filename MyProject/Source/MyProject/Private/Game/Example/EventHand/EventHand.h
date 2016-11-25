@@ -17,6 +17,7 @@ public:
 
 	UFUNCTION()
 	void OnOverlap(AActor* OtherActor);
+	void OnOverlapTwo(AActor* thisActor, AActor* OtherActor);
 
 	void addEventHandle();
 };
