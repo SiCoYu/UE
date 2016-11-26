@@ -1,14 +1,14 @@
 #include "MyProject.h"
-#include "InterTest.h"
+#include "InterTestActor.h"
 #include "ReactsToTimeOfDay.h"
 
-AInterTest::AInterTest(const class FObjectInitializer& PCIP)
+AInterTestActor::AInterTestActor(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 
 }
 
-void AInterTest::test()
+void AInterTestActor::test()
 {
 	//Example: somewhere else in code we are trying to see if our object reacts to time of day
 
