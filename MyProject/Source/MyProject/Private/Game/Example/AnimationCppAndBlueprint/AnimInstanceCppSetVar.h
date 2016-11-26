@@ -6,6 +6,12 @@
 #include "Animation/AnimInstance.h"
 #include "AnimInstanceCppSetVar.generated.h"
 
+/**
+* @brief https://wiki.unrealengine.com/Animation_Blueprint,_Set_Custom_Variables_Via_C%2B%2B
+* @brief Cpp 和 Blueprint 共同驱动动画系统
+* @brief File -- Reparent Blueprint
+*/
+
 UCLASS(transient, Blueprintable, hideCategories = AnimInstance, BlueprintType)
 class UAnimInstanceCppSetVar : public UAnimInstance
 {
