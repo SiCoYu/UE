@@ -146,6 +146,7 @@ public class MyProject : ModuleRules
         //    }
         //);
 
+        // 添加对第三方库 PhysX_3.4 的引用头文件
         AddEngineThirdPartyPrivateStaticDependencies(Target,
             "PhysX",
             "APEX"
