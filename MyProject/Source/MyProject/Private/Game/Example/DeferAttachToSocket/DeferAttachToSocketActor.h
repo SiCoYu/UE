@@ -1,7 +1,6 @@
 #pragma once
 
 #include "MyProject.h"
-#include "GameFramework/Actor.h"
 #include "DeferAttachToSocketActor.generated.h"
 
 /**
@@ -9,14 +8,14 @@
 */
 
 UCLASS(config = Game)
-class ADeferAttachToSocketActor : public AActor
+class ADeferAttachToSocketActor : public ACharacter
 {
 	GENERATED_BODY()
 
 private:
 	// #define TSubobjectPtr \
-	EMIT_DEPRECATED_WARNING_MESSAGE("TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.") \
-	TSubobjectPtrDeprecated
+	//EMIT_DEPRECATED_WARNING_MESSAGE("TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.") \
+	//TSubobjectPtrDeprecated
 	// TSubobjectPtr 不要再使用了，或者 TSubobjectPtrDeprecated ，或者直接使用指针
 	//TSubobjectPtr<UStaticMeshComponent> JoyfulControl;
 	UStaticMeshComponent* JoyfulControl;

@@ -10,7 +10,8 @@ ADeferAttachToSocketActor::ADeferAttachToSocketActor(const class FObjectInitiali
 	AssetSM_JoyControl = StaticMeshOb_AW2.Object;
 
 	//Create
-	JoyfulControl = ObjectInitializer.CreateDefaultSubobject < UStaticMeshComponent >(this, TEXT("JoyfulControlYay"));
+	//JoyfulControl = ObjectInitializer.CreateDefaultSubobject < UStaticMeshComponent >(this, TEXT("JoyfulControlYay"));
+	JoyfulControl = PCIP.CreateDefaultSubobject < UStaticMeshComponent >(this, TEXT("JoyfulControlYay"));
 
 	//Set Mesh
 	JoyfulControl->SetStaticMesh(AssetSM_JoyControl);
@@ -19,6 +20,9 @@ ADeferAttachToSocketActor::ADeferAttachToSocketActor(const class FObjectInitiali
 	SetupSMComponentsWithCollision(JoyfulControl);
 
 	//Deferred Attachment (Ty Nick W.! Actual attach gets done after blueprint stuff)
-	JoyfulControl->AttachParent = Mesh;
-	JoyfulControl->AttachSocketName = "JoyControl";
+	//JoyfulControl->AttachParent = Mesh;
+	// ACharacter ╡есп class USkeletalMeshComponent* Mesh;
+	JoyfulControl->AttachToComponent(this->GetMesh(), FAttachmentTransformRules::KeepWorldTransform, "JoyControl");
+	// SceneComponent.h  FName AttachSocketName;
+	// JoyfulControl->AttachSocketName = "JoyControl";
 }
