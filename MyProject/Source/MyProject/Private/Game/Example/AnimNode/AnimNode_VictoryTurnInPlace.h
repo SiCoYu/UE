@@ -72,7 +72,6 @@ protected:
 	void UpdateBlendAlpha();
 
 protected:
-
 	//Our very own Blend node, yay! (makes this all super clear)
 	FAnimationNode_TwoWayBlend OurVeryOwnBlend;
 

@@ -99,6 +99,9 @@ public class MyProject : ModuleRules
             }
         );
 
+        // AnimGraphRuntime 模块的包含目录需要这样导入，参考 Engine.Build.cs
+        DynamicallyLoadedModuleNames.Add("AnimGraphRuntime");
+
         // 包含 Private 模块中的头文件目录
         //PrivateIncludePathModuleNames.AddRange(
         //    new string[] {

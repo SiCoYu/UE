@@ -2,6 +2,11 @@
 
 #include "MyProject.h"
 #include "Animation/AnimInstanceProxy.h"	// FAnimInstanceProxy
+
+#include "BonePose.h"	// FBoneTransform
+#include "BoneIndices.h"	// FCompactPoseBoneIndex
+#include "AnimationRuntime.h"	// ContainsNaN
+
 #include "AnimNode_TranslateWith.h"
 
 FAnimNode_TranslateWith::FAnimNode_TranslateWith()
@@ -72,7 +77,10 @@ void FAnimNode_TranslateWith::EvaluateComponentSpace(FComponentSpacePoseContext&
 		//EvaluateBoneTransforms(Component, Output.AnimInstance->RequiredBones, Output.Pose, BoneTransforms);
 		EvaluateBoneTransforms(Component, Output.AnimInstanceProxy->GetRequiredBones(), Output.Pose, BoneTransforms);
 
+		//checkSlow(!ContainsNaN(BoneTransforms));
+#if DO_GUARD_SLOW
 		checkSlow(!ContainsNaN(BoneTransforms));
+#endif
 
 		if (BoneTransforms.Num() > 0)
 		{
@@ -82,13 +90,16 @@ void FAnimNode_TranslateWith::EvaluateComponentSpace(FComponentSpacePoseContext&
 }
 
 //This Evaluates the bones, and transforms	
-void FAnimNode_TranslateWith::EvaluateBoneTransforms(USkeletalMeshComponent* SkelComp, const FBoneContainer & RequiredBones, FA2CSPose& MeshBases, TArray<FBoneTransform>& OutBoneTransforms)
+//void FAnimNode_TranslateWith::EvaluateBoneTransforms(USkeletalMeshComponent* SkelComp, const FBoneContainer & RequiredBones, FA2CSPose& MeshBases, TArray<FBoneTransform>& OutBoneTransforms)
+void FAnimNode_TranslateWith::EvaluateBoneTransforms(USkeletalMeshComponent* SkelComp, const FBoneContainer & RequiredBones, FCSPose<FCompactPose>& MeshBases, TArray<FBoneTransform>& OutBoneTransforms)
 {
 	check(OutBoneTransforms.Num() == 0);
 
 	// Component Space Transforms used to modify Target Bone
-	FTransform SourceBoneTM = MeshBases.GetComponentSpaceTransform(SourceBone.BoneIndex);
-	FTransform TargetBoneTM = MeshBases.GetComponentSpaceTransform(TargetBone.BoneIndex);
+	//FTransform SourceBoneTM = MeshBases.GetComponentSpaceTransform(SourceBone.BoneIndex);
+	//FTransform TargetBoneTM = MeshBases.GetComponentSpaceTransform(TargetBone.BoneIndex);
+	FTransform SourceBoneTM = MeshBases.GetComponentSpaceTransform(FCompactPoseBoneIndex(SourceBone.BoneIndex));
+	FTransform TargetBoneTM = MeshBases.GetComponentSpaceTransform(FCompactPoseBoneIndex(TargetBone.BoneIndex));
 
 	// If any changes have occured, add them, and reset offset
 	if (!(CurrentAddedOffset == AddtoOffset))
@@ -134,7 +145,8 @@ void FAnimNode_TranslateWith::EvaluateBoneTransforms(USkeletalMeshComponent* Ske
 	TargetBoneTM.SetTranslation(ModTargetLocationInCompSpace);
 
 	// Returns to caller with new location
-	OutBoneTransforms.Add(FBoneTransform(TargetBone.BoneIndex, TargetBoneTM));
+	//OutBoneTransforms.Add(FBoneTransform(TargetBone.BoneIndex, TargetBoneTM));
+	OutBoneTransforms.Add(FBoneTransform(FCompactPoseBoneIndex(TargetBone.BoneIndex), TargetBoneTM));
 }
 
 // Makes sure that both bones are valid

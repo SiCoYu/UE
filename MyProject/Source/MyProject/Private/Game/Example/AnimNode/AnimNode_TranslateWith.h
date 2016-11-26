@@ -14,37 +14,37 @@ struct FAnimNode_TranslateWith : public  FAnimNode_Base
 {
 	GENERATED_USTRUCT_BODY()
 
-		/** Input link(Base Pose) **/
-		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links)
-		FComponentSpacePoseLink ComponentPose;
+	/** Input link(Base Pose) **/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links)
+	FComponentSpacePoseLink ComponentPose;
 
 	/** Name of bone to control **/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl)
-		FBoneReference TargetBone;
+	FBoneReference TargetBone;
 
 	/** Source Bone Name to get transform from **/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl)
-		FBoneReference SourceBone;
+	FBoneReference SourceBone;
 
 	/** This is typically the FORWARD Axis, and is false by default **/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AxisLock, meta = (PinHiddenByDefault))
-		bool bUpdateX;
+	bool bUpdateX;
 
 	/** This is typically the SIDE-TO-SIDE Axis, and is false by default **/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AxisLock, meta = (PinHiddenByDefault))
-		bool bUpdateY;
+	bool bUpdateY;
 
 	/** This is typically the UP Axis, and is true by default **/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AxisLock, meta = (PinHiddenByDefault))
-		bool bUpdateZ;
+	bool bUpdateZ;
 
 	/** Target Location in world space if LookAtBone is empty */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl)
-		FVector AddtoOffset;
+	FVector AddtoOffset;
 
 	/** Controls how much of the translation is blended to the target, default is 1 **/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl, meta = (PinShownByDefault))
-		float BlendWeight;
+	float BlendWeight;
 public:
 	FAnimNode_TranslateWith();
 public:
@@ -64,7 +64,8 @@ protected:
 	// return true if it is valid to Evaluate
 	virtual bool IsValidToEvaluate(const USkeleton * Skeleton, const FBoneContainer & RequiredBones);
 	// Evaluate the new component-space transforms for the affected bones.
-	virtual void EvaluateBoneTransforms(USkeletalMeshComponent* SkelComp, const FBoneContainer & RequiredBones, FA2CSPose& MeshBases, TArray<FBoneTransform>& OutBoneTransforms);// {}
+	//virtual void EvaluateBoneTransforms(USkeletalMeshComponent* SkelComp, const FBoneContainer & RequiredBones, FA2CSPose& MeshBases, TArray<FBoneTransform>& OutBoneTransforms);// {}
+	virtual void EvaluateBoneTransforms(USkeletalMeshComponent* SkelComp, const FBoneContainer & RequiredBones, FCSPose<FCompactPose>& MeshBases, TArray<FBoneTransform>& OutBoneTransforms);// {}
 private:
 	FVector ModTargetLocationInCompSpace;
 	FVector CurrentAddedOffset;
