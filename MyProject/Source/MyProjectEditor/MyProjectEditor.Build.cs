@@ -1,11 +1,16 @@
 using UnrealBuildTool;
  
-public class MyEditorExtension: ModuleRules
+public class MyProjectEditor : ModuleRules
 {
-    public MyEditorExtension(TargetInfo Target)
+    public MyProjectEditor(TargetInfo Target)
     {
- 
-        PrivateIncludePaths.Add("EditorModule/Private");
+        //PrivateIncludePaths.Add("MyProjectEditor/Private");
+		PrivateIncludePaths.AddRange(
+			new string[] {
+                "MyProjectEditor/Private",
+                "MyProjectEditor/Private/Animation"
+			}
+		);
  
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", });
  
@@ -13,13 +18,13 @@ public class MyEditorExtension: ModuleRules
  
         PublicDependencyModuleNames.AddRange(
              new string[] {
-                    "MyGameName"
+                    "MyProject"
                 }
         );
  
         CircularlyReferencedDependentModules.AddRange(
             new string[] {
-                    "MyGameName",
+                    "MyProject",
                 }
         );
     }

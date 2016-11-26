@@ -159,21 +159,23 @@ public class MyProject : ModuleRules
         //RuntimeDependencies.Add(new RuntimeDependency("$(EngineDir)/Binaries/ThirdParty/ARM/Win32/astcenc.exe"));
         //string APEXDir = UEBuildConfiguration.UEThirdPartySourceDirectory + "PhysX/" + ApexVersion + "/";
 
-        if (UEBuildConfiguration.bBuildEditor == true)
-        {
+        //if (UEBuildConfiguration.bBuildEditor == true)
+        //{
 
-            PublicDependencyModuleNames.AddRange(
-                new string[] {
-                    "MyEditorExtension"
-                }
-            );
+        //    PublicDependencyModuleNames.AddRange(
+        //        new string[] {
+        //            "MyProjectEditor"
+        //        }
+        //    );
 
-            CircularlyReferencedDependentModules.AddRange(
-                new string[] {
-                    "MyEditorExtension",
-                }
-            );
-        }
+        //    CircularlyReferencedDependentModules.AddRange(
+        //        new string[] {
+        //            "MyProjectEditor",
+        //        }
+        //    );
+        //}
+
+        //LoadMyProjectEditor(Target);
 
         loadThirdPartyInclude();
         LoadSockets(Target);
@@ -308,6 +310,28 @@ public class MyProject : ModuleRules
 
         LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Lua", "Lua_d.lib");
         PublicAdditionalLibraries.Add(LibrariesPath);
+
+        return true;
+    }
+
+    // ╪сть Lua
+    private bool LoadMyProjectEditor(TargetInfo Target)
+    {
+        if (UEBuildConfiguration.bBuildEditor == true)
+        {
+
+            PublicDependencyModuleNames.AddRange(
+                new string[] {
+                    "MyProjectEditor"
+                }
+            );
+
+            CircularlyReferencedDependentModules.AddRange(
+                new string[] {
+                    "MyProjectEditor",
+                }
+            );
+        }
 
         return true;
     }
