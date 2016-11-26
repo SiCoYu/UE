@@ -8,7 +8,7 @@ UTestFileAndPathBPFunctionLibrary::UTestFileAndPathBPFunctionLibrary(const class
 
 }
 
-void TestFileAndPathBPFunctionLibrary::CreateDirectory(FString FullPath)
+void UTestFileAndPathBPFunctionLibrary::CreateDirectory(FString FullPath)
 {
 	FPlatformFileManager::Get().GetPlatformFile().CreateDirectory(*FullPath);
 }
@@ -28,7 +28,7 @@ void TestFileAndPathBPFunctionLibrary::CreateDirectory(FString FullPath)
 //			Author: Rama
 
 
- void TestFileAndPath::CreateDirectoryRecursively(FString FolderToMake)
+ void UTestFileAndPathBPFunctionLibrary::CreateDirectoryRecursively(FString FolderToMake)
 {
 	//FolderToMake is not const so split can be used, and does not damage input
 
