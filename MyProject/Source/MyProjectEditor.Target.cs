@@ -3,6 +3,10 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
+/**
+ * @reference https://wiki.unrealengine.com/Animation_Node,_Translate_With_Complete_Source_Code_and_Instructions
+ */
+
 public class MyProjectEditorTarget : TargetRules
 {
 	public MyProjectEditorTarget(TargetInfo Target)

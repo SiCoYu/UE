@@ -3,6 +3,10 @@
 using UnrealBuildTool;
 using System.IO;
 
+/**
+ * @reference https://wiki.unrealengine.com/Animation_Node,_Translate_With_Complete_Source_Code_and_Instructions
+ */
+
 public class MyProject : ModuleRules
 {
 	public MyProject(TargetInfo Target)
@@ -154,6 +158,22 @@ public class MyProject : ModuleRules
         //PublicSystemIncludePaths.Add("ThirdParty/hlslcc/hlslcc/src/hlslcc_lib");
         //RuntimeDependencies.Add(new RuntimeDependency("$(EngineDir)/Binaries/ThirdParty/ARM/Win32/astcenc.exe"));
         //string APEXDir = UEBuildConfiguration.UEThirdPartySourceDirectory + "PhysX/" + ApexVersion + "/";
+
+        if (UEBuildConfiguration.bBuildEditor == true)
+        {
+
+            PublicDependencyModuleNames.AddRange(
+                new string[] {
+                    "MyEditorExtension"
+                }
+            );
+
+            CircularlyReferencedDependentModules.AddRange(
+                new string[] {
+                    "MyEditorExtension",
+                }
+            );
+        }
 
         loadThirdPartyInclude();
         LoadSockets(Target);
