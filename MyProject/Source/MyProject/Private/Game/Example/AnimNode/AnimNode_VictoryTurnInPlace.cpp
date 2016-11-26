@@ -29,10 +29,14 @@ void FAnimNode_VictoryTurnInPlace::Initialize(const FAnimationInitializeContext 
 	TurnPose.Initialize(Context);
 
 	//Get the Actor Owner
-	OwningActor = Context.AnimInstance->GetSkelMeshComponent()->GetOwner();
+	// 'FAnimationBaseContext::AnimInstance': Please use AnimInstanceProxy Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//OwningActor = Context.AnimInstance->GetSkelMeshComponent()->GetOwner();
+	OwningActor = Context.AnimInstanceProxy->GetSkelMeshComponent()->GetOwner();
 
 	//Editor or Game?
-	UWorld * TheWorld = Context.AnimInstance->GetWorld();
+	// 'FAnimationBaseContext::AnimInstance': Please use AnimInstanceProxy Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//UWorld * TheWorld = Context.AnimInstance->GetWorld();
+	UWorld * TheWorld = Context.AnimInstanceProxy->GetWorld();
 	if (!TheWorld) return;
 	//~~~~~~~~~~~~~~~~
 
@@ -113,7 +117,9 @@ void FAnimNode_VictoryTurnInPlace::Update(const FAnimationUpdateContext & Contex
 	else
 	{
 		//Try Again if not found
-		if (!OwningActor) OwningActor = Context.AnimInstance->GetSkelMeshComponent()->GetOwner();
+		// 'FAnimationBaseContext::AnimInstance': Please use AnimInstanceProxy Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//if (!OwningActor) OwningActor = Context.AnimInstance->GetSkelMeshComponent()->GetOwner();
+		if (!OwningActor) OwningActor = Context.AnimInstanceProxy->GetSkelMeshComponent()->GetOwner();
 
 		//Not found
 		if (!OwningActor)

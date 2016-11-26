@@ -37,10 +37,15 @@ struct FAnimNode_NameOfYourNode : public FAnimNode_Base
 public:
 
 	// FAnimNode_Base interface
-	virtual void Initialize(const FAnimationInitializeContext& Context) OVERRIDE;
-	virtual void CacheBones(const FAnimationCacheBonesContext & Context) OVERRIDE;
-	virtual void Update(const FAnimationUpdateContext & Context) OVERRIDE;
-	virtual void Evaluate(FPoseContext& Output) OVERRIDE;
+	// 'EMIT_DEPRECATED_WARNING_MESSAGE': unknown override specifier
+	//virtual void Initialize(const FAnimationInitializeContext& Context) OVERRIDE;
+	//virtual void CacheBones(const FAnimationCacheBonesContext & Context) OVERRIDE;
+	//virtual void Update(const FAnimationUpdateContext & Context) OVERRIDE;
+	//virtual void Evaluate(FPoseContext& Output) OVERRIDE;
+	virtual void Initialize(const FAnimationInitializeContext& Context) override;
+	virtual void CacheBones(const FAnimationCacheBonesContext & Context) override;
+	virtual void Update(const FAnimationUpdateContext & Context) override;
+	virtual void Evaluate(FPoseContext& Output) override;
 	// End of FAnimNode_Base interface
 
 	// Constructor 
