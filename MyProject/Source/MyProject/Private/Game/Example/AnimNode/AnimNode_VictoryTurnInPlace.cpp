@@ -45,9 +45,9 @@ void FAnimNode_VictoryTurnInPlace::Initialize(const FAnimationInitializeContext 
 	//~~~
 
 	//~~~ Init the Blend ~~~
-	OurVeryOwnBlend.A = BasePose;
-	OurVeryOwnBlend.B = TurnPose;
-	OurVeryOwnBlend.Initialize(Context);
+	//OurVeryOwnBlend.A = BasePose;
+	//OurVeryOwnBlend.B = TurnPose;
+	//OurVeryOwnBlend.Initialize(Context);
 }
 
 void FAnimNode_VictoryTurnInPlace::DetermineUseTurnPose()
@@ -153,8 +153,8 @@ void FAnimNode_VictoryTurnInPlace::Update(const FAnimationUpdateContext & Contex
 		//TurnPose.Update(Context);
 
 		//~~~ Update the Blend ~~~
-		OurVeryOwnBlend.Alpha = BlendAlpha;
-		OurVeryOwnBlend.Update(Context);
+		//OurVeryOwnBlend.Alpha = BlendAlpha;
+		//OurVeryOwnBlend.Update(Context);
 	}
 
 	//***************************************
@@ -174,6 +174,6 @@ void FAnimNode_VictoryTurnInPlace::Evaluate(FPoseContext & Output)
 	//~~~ Currently Blending ~~~
 	else
 	{
-		OurVeryOwnBlend.Evaluate(Output);
+		//OurVeryOwnBlend.Evaluate(Output);
 	}
 }

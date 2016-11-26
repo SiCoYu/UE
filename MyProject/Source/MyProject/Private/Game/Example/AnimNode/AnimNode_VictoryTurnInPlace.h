@@ -2,7 +2,7 @@
 
 #include "MyProject.h"
 #include "Animation/AnimNodeBase.h"	// FAnimNode_Base
-#include "AnimNodes/AnimNode_TwoWayBlend.h"	// FAnimationNode_TwoWayBlend
+//#include "AnimNodes/AnimNode_TwoWayBlend.h"	// FAnimationNode_TwoWayBlend
 #include "AnimNode_VictoryTurnInPlace.generated.h"
 
 /**
@@ -73,7 +73,7 @@ protected:
 
 protected:
 	//Our very own Blend node, yay! (makes this all super clear)
-	FAnimationNode_TwoWayBlend OurVeryOwnBlend;
+	//FAnimationNode_TwoWayBlend OurVeryOwnBlend;
 
 	AActor * OwningActor;
 	FVector PrevLoc;

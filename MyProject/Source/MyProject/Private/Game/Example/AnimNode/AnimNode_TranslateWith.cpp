@@ -79,7 +79,8 @@ void FAnimNode_TranslateWith::EvaluateComponentSpace(FComponentSpacePoseContext&
 
 		//checkSlow(!ContainsNaN(BoneTransforms));
 #if DO_GUARD_SLOW
-		checkSlow(!ContainsNaN(BoneTransforms));
+		// TODO:Error
+		//checkSlow(!ContainsNaN(BoneTransforms));
 #endif
 
 		if (BoneTransforms.Num() > 0)
