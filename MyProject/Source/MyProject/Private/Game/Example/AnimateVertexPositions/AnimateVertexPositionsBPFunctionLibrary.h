@@ -12,7 +12,4 @@ UCLASS()
 class UAnimateVertexPositionsBPFunctionLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
-
-	UFUNCTION(BlueprintCallable, Category = "TargetInterface")
-	static float GetHealth(const TScriptInterface<ICppAndBlueprintTargetInterface> &target);
 };
