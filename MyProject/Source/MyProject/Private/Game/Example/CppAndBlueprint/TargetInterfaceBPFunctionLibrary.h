@@ -15,6 +15,6 @@ class UTargetInterfaceBPFunctionLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
-		UFUNCTION(BlueprintCallable, Category = "TargetInterface")
-		static float GetHealth(const TScriptInterface<ICppAndBlueprintTargetInterface> &target);
+	UFUNCTION(BlueprintCallable, Category = "TargetInterface")
+	static float GetHealth(const TScriptInterface<ICppAndBlueprintTargetInterface> &target);
 };

@@ -1,6 +1,9 @@
 // Copyright 1998-2013 Epic Games, Inc. All Rights Reserved.
 
 #include "MyProject.h"
+
+#include "Animation/AnimInstanceProxy.h"	// FAnimInstanceProxy
+
 #include "AnimNode_VictoryTurnInPlace.h"
 
 //#include "AnimationRuntime.h"
@@ -36,7 +39,8 @@ void FAnimNode_VictoryTurnInPlace::Initialize(const FAnimationInitializeContext 
 	//Editor or Game?
 	// 'FAnimationBaseContext::AnimInstance': Please use AnimInstanceProxy Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//UWorld * TheWorld = Context.AnimInstance->GetWorld();
-	UWorld * TheWorld = Context.AnimInstanceProxy->GetWorld();
+	//UWorld * TheWorld = Context.AnimInstanceProxy->GetWorld();
+	UWorld * TheWorld = Cast<AActor>(Context.AnimInstanceProxy->GetSkelMeshComponent()->GetOuter())->GetWorld();
 	if (!TheWorld) return;
 	//~~~~~~~~~~~~~~~~
 
@@ -86,7 +90,9 @@ void FAnimNode_VictoryTurnInPlace::DetermineUseTurnPose()
 	RangeIn.Y = TurnSpeedModifierMAX;
 
 	//Mapped Range
-	BlendDurationMult = FMath::GetMappedRangeValue(RangeIn, RangeOut, TurnAmountThisTick);
+	// FMath::GetMappedRangeValue': GetMappedRangeValue is deprecated. Use GetMappedRangeValueClamped instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//BlendDurationMult = FMath::GetMappedRangeValue(RangeIn, RangeOut, TurnAmountThisTick);
+	BlendDurationMult = FMath::GetMappedRangeValueClamped(RangeIn, RangeOut, TurnAmountThisTick);
 }
 void FAnimNode_VictoryTurnInPlace::UpdateBlendAlpha()
 {
