@@ -1,6 +1,8 @@
 // Created by Chance_07 2014
 #pragma once
 
+#include "MyProject.h"
+#include "Animation/AnimNodeBase.h"
 #include "AnimNode_TranslateWith.generated.h"
 
 /**
@@ -47,10 +49,14 @@ public:
 	FAnimNode_TranslateWith();
 public:
 	// FAnimNode_Base interface
-	virtual void Initialize(const FAnimationInitializeContext& Context) OVERRIDE;
-	virtual void CacheBones(const FAnimationCacheBonesContext & Context)  OVERRIDE;
-	virtual void Update(const FAnimationUpdateContext& Context) OVERRIDE;
-	virtual void EvaluateComponentSpace(FComponentSpacePoseContext& Output) OVERRIDE;
+	//virtual void Initialize(const FAnimationInitializeContext& Context) OVERRIDE;
+	//virtual void CacheBones(const FAnimationCacheBonesContext & Context)  OVERRIDE;
+	//virtual void Update(const FAnimationUpdateContext& Context) OVERRIDE;
+	//virtual void EvaluateComponentSpace(FComponentSpacePoseContext& Output) OVERRIDE;
+	virtual void Initialize(const FAnimationInitializeContext& Context) override;
+	virtual void CacheBones(const FAnimationCacheBonesContext & Context)  override;
+	virtual void Update(const FAnimationUpdateContext& Context) override;
+	virtual void EvaluateComponentSpace(FComponentSpacePoseContext& Output) override;
 	// End of FAnimNode_RCAnimNode interface
 protected:
 	// initialize any bone references you have

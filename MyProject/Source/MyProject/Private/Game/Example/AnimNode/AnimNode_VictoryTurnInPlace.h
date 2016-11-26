@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MyProject.h"
+#include "Animation/AnimNodeBase.h"
 #include "AnimNode_VictoryTurnInPlace.generated.h"
 
 /**
@@ -51,9 +52,12 @@ struct FAnimNode_VictoryTurnInPlace : public FAnimNode_Base
 public:
 
 	// FAnimNode_Base interface
-	virtual void Initialize(const FAnimationInitializeContext& Context) 	OVERRIDE;
-	virtual void Update(const FAnimationUpdateContext & Context) 		OVERRIDE;
-	virtual void Evaluate(FPoseContext& Output) 							OVERRIDE;
+	//virtual void Initialize(const FAnimationInitializeContext& Context) 	OVERRIDE;
+	//virtual void Update(const FAnimationUpdateContext & Context) 		OVERRIDE;
+	//virtual void Evaluate(FPoseContext& Output) 							OVERRIDE;
+	virtual void Initialize(const FAnimationInitializeContext& Context) 	override;
+	virtual void Update(const FAnimationUpdateContext & Context) 		override;
+	virtual void Evaluate(FPoseContext& Output) 							override;
 	// End of FAnimNode_Base interface
 
 	//~~~ Constructor ~~~

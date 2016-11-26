@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "MyProject.h"
+#include "Animation/AnimNodeBase.h"	// FAnimNode_Base
 #include "AnimNode_NameOfYourNode.generated.h"
 
 /**
@@ -13,23 +15,23 @@ struct FAnimNode_NameOfYourNode : public FAnimNode_Base
 {
 	GENERATED_USTRUCT_BODY()
 
-		//FPoseLink - this can be any combination 
-		//of other nodes, not just animation sequences
-		//	so you could have an blend space leading into 
-		//a layer blend per bone to just use the arm
-		//	and then pass that into the PoseLink
+	//FPoseLink - this can be any combination 
+	//of other nodes, not just animation sequences
+	//	so you could have an blend space leading into 
+	//a layer blend per bone to just use the arm
+	//	and then pass that into the PoseLink
 
-		/** Base Pose - This Can Be Entire Anim Graph Up To This Point, or Any Combination of Other Nodes*/
-		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links)
-		FPoseLink BasePose;
+	/** Base Pose - This Can Be Entire Anim Graph Up To This Point, or Any Combination of Other Nodes*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links)
+	FPoseLink BasePose;
 
 	/** Other Pose! - This Can Be Entire Anim Graph Up To This Point, or Any Combination of Other Nodes */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links)
-		FPoseLink OtherPose;
+	FPoseLink OtherPose;
 
 	/** Sample Property That Will Show Up as a Pin */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links, meta = (PinShownByDefault))
-		float SampleFloat;
+	float SampleFloat;
 
 	// FAnimNode_Base interface
 public:

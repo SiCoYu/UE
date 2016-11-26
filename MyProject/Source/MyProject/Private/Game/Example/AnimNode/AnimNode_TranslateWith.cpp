@@ -1,7 +1,7 @@
 // Created by Chance_07 2014
 
-#include "YourGame.h"
-#include "EnginePrivate.h"
+#include "MyProject.h"
+#include "Animation/AnimInstanceProxy.h"	// FAnimInstanceProxy
 #include "AnimNode_TranslateWith.h"
 
 FAnimNode_TranslateWith::FAnimNode_TranslateWith()
@@ -31,7 +31,8 @@ void FAnimNode_TranslateWith::Update(const FAnimationUpdateContext& Context)
 
 void FAnimNode_TranslateWith::CacheBones(const FAnimationCacheBonesContext & Context)
 {
-	InitializeBoneReferences(Context.AnimInstance->RequiredBones);
+	//InitializeBoneReferences(Context.AnimInstance->RequiredBones);
+	InitializeBoneReferences(Context.AnimInstanceProxy->RequiredBones);
 	ComponentPose.CacheBones(Context);
 }
 
@@ -61,11 +62,14 @@ void FAnimNode_TranslateWith::EvaluateComponentSpace(FComponentSpacePoseContext&
 
 
 	// If any Axis is checked, and both bones are present, then we will continue
-	if (((bUpdateX) || (bUpdateY) || (bUpdateZ)) && IsValidToEvaluate(Output.AnimInstance->CurrentSkeleton, Output.AnimInstance->RequiredBones))
+	//if (((bUpdateX) || (bUpdateY) || (bUpdateZ)) && IsValidToEvaluate(Output.AnimInstance->CurrentSkeleton, Output.AnimInstance->RequiredBones))
+	if (((bUpdateX) || (bUpdateY) || (bUpdateZ)) && IsValidToEvaluate(Output.AnimInstanceProxy->CurrentSkeleton, Output.AnimInstanceProxy->RequiredBones))
 	{
-		USkeletalMeshComponent* Component = Output.AnimInstance->GetSkelMeshComponent();
+		//USkeletalMeshComponent* Component = Output.AnimInstance->GetSkelMeshComponent();
+		USkeletalMeshComponent* Component = Output.AnimInstanceProxy->GetSkelMeshComponent();
 		TArray<FBoneTransform> BoneTransforms;
-		EvaluateBoneTransforms(Component, Output.AnimInstance->RequiredBones, Output.Pose, BoneTransforms);
+		//EvaluateBoneTransforms(Component, Output.AnimInstance->RequiredBones, Output.Pose, BoneTransforms);
+		EvaluateBoneTransforms(Component, Output.AnimInstanceProxy->RequiredBones, Output.Pose, BoneTransforms);
 
 		checkSlow(!ContainsNaN(BoneTransforms));
 
