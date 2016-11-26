@@ -2,8 +2,8 @@
 
 #include "PhysicsPublic.h"
 #include "PhysXIncludes.h"
-#include "ThirdParty/PhysX/PhysX-3.3/include/geometry/PxTriangleMesh.h"
-#include "ThirdParty/PhysX/PhysX-3.3/include/foundation/PxSimpleTypes.h"
+#include "ThirdParty/PhysX/PhysX_3.4/Include/geometry/PxTriangleMesh.h"
+//#include "ThirdParty/PhysX/PhysX_3.4/Include/foundation/PxSimpleTypes.h"
 
 #include "AccessMeshActor.h"
 
@@ -15,7 +15,7 @@ AAccessMeshActor::AAccessMeshActor(const class FObjectInitializer& PCIP)
 
 void AAccessMeshActor::AccessData()
 {
-	MyStaticMesh = this->get
+	MyStaticMesh = Cast<UStaticMeshComponent>(this->GetComponentsByClass(UStaticMeshComponent::StaticClass()));
 
 	// MyStaticMesh is a UStaticMeshComponent
 	PxTriangleMesh* TempTriMesh = MyStaticMesh->BodyInstance.BodySetup.Get()->TriMesh;

@@ -146,6 +146,14 @@ public class MyProject : ModuleRules
         //    }
         //);
 
+        AddEngineThirdPartyPrivateStaticDependencies(Target,
+            "PhysX",
+            "APEX"
+            );
+        //PublicSystemIncludePaths.Add("ThirdParty/hlslcc/hlslcc/src/hlslcc_lib");
+        //RuntimeDependencies.Add(new RuntimeDependency("$(EngineDir)/Binaries/ThirdParty/ARM/Win32/astcenc.exe"));
+        //string APEXDir = UEBuildConfiguration.UEThirdPartySourceDirectory + "PhysX/" + ApexVersion + "/";
+
         loadThirdPartyInclude();
         LoadSockets(Target);
         LoadTestExtern(Target);
