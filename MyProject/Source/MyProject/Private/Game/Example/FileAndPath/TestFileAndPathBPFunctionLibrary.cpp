@@ -27,7 +27,6 @@ void UTestFileAndPathBPFunctionLibrary::CreateDirectory(FString FullPath)
 
 //			Author: Rama
 
-
  void UTestFileAndPathBPFunctionLibrary::CreateDirectoryRecursively(FString FolderToMake)
 {
 	//FolderToMake is not const so split can be used, and does not damage input
@@ -64,3 +63,27 @@ void UTestFileAndPathBPFunctionLibrary::CreateDirectory(FString FullPath)
 		LoopItr++;
 	}
 }
+
+void UTestFileAndPathBPFunctionLibrary::NormalizeDirectoryName(FString path)
+ {
+	 // Normalize all / and \ to TEXT("/") and remove any trailing TEXT("/") if the character before that is not a TEXT("/") or a colon
+	 FPaths::NormalizeDirectoryName(path);
+ }
+
+void UTestFileAndPathBPFunctionLibrary::TestUse()
+ {
+	 FString NewFolder =
+		 "C:/Users/Rama/Documents/Victory/FolderSong/FolderDance/FolderRain/FolderRainbow/";
+
+	 //remove UMyFunctionLibrary:: if you removed the "static"
+	 CreateDirectoryRecursively(NewFolder);
+ }
+
+void UTestFileAndPathBPFunctionLibrary::NormalizeDirectoryNameTwo(FString path)
+ {
+	 // Normalize all / and \ to TEXT("/") and remove any trailing TEXT("/") if the character before that is not a TEXT("/") or a colon
+	 FPaths::NormalizeDirectoryName(path);
+
+	 //Normalize removes the last "/", but my algorithm wants it
+	 path += "/";
+ }
