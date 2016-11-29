@@ -7,9 +7,14 @@ public class MyProjectEditor : ModuleRules
         //PrivateIncludePaths.Add("MyProjectEditor/Private");
 		PrivateIncludePaths.AddRange(
 			new string[] {
+                // Main area
                 "MyProjectEditor/Private",
                 "MyProjectEditor/Private/Animation"
-			}
+
+                // Example area
+                "MyProjectEditor/Private/AnimNode"
+                "MyProjectEditor/Private/Example/CppAndBlueprint"
+            }
 		);
  
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", });
