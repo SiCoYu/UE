@@ -9,10 +9,10 @@ public class MyProjectEditor : ModuleRules
 			new string[] {
                 // Main area
                 "MyProjectEditor/Private",
-                "MyProjectEditor/Private/Animation"
+                "MyProjectEditor/Private/Animation",
 
                 // Example area
-                "MyProjectEditor/Private/AnimNode"
+                "MyProjectEditor/Private/AnimNode",
                 "MyProjectEditor/Private/Example/CppAndBlueprint"
             }
 		);
