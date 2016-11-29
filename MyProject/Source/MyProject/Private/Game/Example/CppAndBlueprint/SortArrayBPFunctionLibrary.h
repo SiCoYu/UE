@@ -2,18 +2,20 @@
 
 #include "UnrealString.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "ESortDirection.h"
 #include "SortArrayBPFunctionLibrary.generated.h"
 
 /**
  * @brief https://wiki.unrealengine.com/Blueprint_Node:_Sort_Array_of_Actors_By_Field
  */
 
-UENUM(BlueprintType)
-enum class ESortDirection : uint8
-{
-	ASCENDING UMETA(DisplayName = "Ascending"),
-	DESCENDING UMETA(DisplayName = "Descending")
-};
+// 看来一个文件只能写一个类型，否则 UE4 在导出 UCLASS 的时候会报错
+//UENUM(BlueprintType)
+//enum class ESortDirection : uint8
+//{
+//	ASCENDING UMETA(DisplayName = "Ascending"),
+//	DESCENDING UMETA(DisplayName = "Descending")
+//};
 
 UCLASS()
 class USortArrayBPFunctionLibrary : public UBlueprintFunctionLibrary

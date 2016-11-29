@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "HAL/FileManager.h"
 #include "ShareBPFunctionLibrary.h"
 
 UShareBPFunctionLibrary::UShareBPFunctionLibrary(const class FObjectInitializer& PCIP)
@@ -20,16 +21,21 @@ bool UShareBPFunctionLibrary::SaveStringTextToFile(
 	bool AllowOverWriting
 ) {
 	//GFileManager?
-	if (!GFileManager) return false;
+	//IFileManager::Get().
+	//if (!GFileManager) return false;
+	//if (IFileManager::Get()) return false;
 
 	//Dir Exists?
-	if (!GFileManager->DirectoryExists(*SaveDirectory))
+	//if (!GFileManager->DirectoryExists(*SaveDirectory))
+	if (!IFileManager::Get().DirectoryExists(*SaveDirectory))
 	{
 		//create directory if it not exist
-		GFileManager->MakeDirectory(*SaveDirectory);
+		//GFileManager->MakeDirectory(*SaveDirectory);
+		IFileManager::Get().MakeDirectory(*SaveDirectory);
 
 		//still could not make directory?
-		if (!GFileManager->DirectoryExists(*SaveDirectory))
+		//if (!GFileManager->DirectoryExists(*SaveDirectory))
+		if (!IFileManager::Get().DirectoryExists(*SaveDirectory))
 		{
 			//Could not make the specified directory
 			return false;
@@ -45,7 +51,8 @@ bool UShareBPFunctionLibrary::SaveStringTextToFile(
 	if (!AllowOverWriting)
 	{
 		//Check if file exists already
-		if (GFileManager->GetFileAgeSeconds(*SaveDirectory) > 0)
+		//if (GFileManager->GetFileAgeSeconds(*SaveDirectory) > 0)
+		if (IFileManager::Get().GetFileAgeSeconds(*SaveDirectory) > 0)
 		{
 			//no overwriting
 			return false;

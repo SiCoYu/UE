@@ -77,11 +77,11 @@ struct FArraySortByFieldPredicate
 	ESortDirection SortDirection;
 };
 
-USortArrayBPFunctionLibrary::USortArrayBPFunctionLibrary(const class FObjectInitializer& PCIP)
-	: Super(PCIP)
-{
-
-}
+//USortArrayBPFunctionLibrary::USortArrayBPFunctionLibrary(const class FObjectInitializer& PCIP)
+//	: Super(PCIP)
+//{
+//
+//}
 
 
 void USortArrayBPFunctionLibrary::Array_Sort(const TArray<int32>& TargetArray, const UArrayProperty* ArrayProp, const FString &FieldName, ESortDirection SortDirection)

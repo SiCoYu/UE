@@ -64,9 +64,42 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Game/UnitTest",
 
                 // Example
-                "MyProject/Private/Game/Example/CustomActorIcon",
+                "MyProject/Private/Game/Example/AccessMesh",
+                "MyProject/Private/Game/Example/AnimateVertexPositions",
+                "MyProject/Private/Game/Example/AnimationCppAndBlueprint",
+                "MyProject/Private/Game/Example/AnimNode",
+
                 "MyProject/Private/Game/Example/AsyncLoad",
+                "MyProject/Private/Game/Example/ClearWidgets",
+                "MyProject/Private/Game/Example/CoordinateMapping",
+                "MyProject/Private/Game/Example/CppAndBlueprint",
+
+                "MyProject/Private/Game/Example/CustomActorIcon",
+                "MyProject/Private/Game/Example/CustomComponents",
+                "MyProject/Private/Game/Example/DeferAttachToSocket",
+                "MyProject/Private/Game/Example/DelegatesInCppBP",
+
+                "MyProject/Private/Game/Example/DistanceToCollision",
+                "MyProject/Private/Game/Example/DynamicLoadObject",
+                "MyProject/Private/Game/Example/EnumToString",
+                "MyProject/Private/Game/Example/EventHand",
+
+                "MyProject/Private/Game/Example/ExtendUserWidget",
+                "MyProject/Private/Game/Example/FileAndPath",
+                "MyProject/Private/Game/Example/InterfaceImpl",
+                "MyProject/Private/Game/Example/LogMacro",
+
+                "MyProject/Private/Game/Example/ModularPawn",
+                "MyProject/Private/Game/Example/MultiThread",
+                "MyProject/Private/Game/Example/ObjectIterator",
                 "MyProject/Private/Game/Example/ObjectLibraryLoad",
+
+                "MyProject/Private/Game/Example/RWConfigFile",
+                "MyProject/Private/Game/Example/SubclassAccess",
+                "MyProject/Private/Game/Example/TaskGraphSystem",
+                "MyProject/Private/Game/Example/UmgExtendInCpp",
+
+                "MyProject/Private/Game/Example/UmgInCpp",
 
                 // ÆäËü
                 "MyProject/Private/UI/Widgets",
