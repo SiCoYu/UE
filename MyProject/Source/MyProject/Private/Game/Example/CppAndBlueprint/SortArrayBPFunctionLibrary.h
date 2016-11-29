@@ -8,6 +8,13 @@
  * @brief https://wiki.unrealengine.com/Blueprint_Node:_Sort_Array_of_Actors_By_Field
  */
 
+UENUM(BlueprintType)
+enum class ESortDirection : uint8
+{
+	ASCENDING UMETA(DisplayName = "Ascending"),
+	DESCENDING UMETA(DisplayName = "Descending")
+};
+
 UCLASS()
 class USortArrayBPFunctionLibrary : public UBlueprintFunctionLibrary
 {
