@@ -57,11 +57,11 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Math",
 
                 // UI ÇøÓò
-                "MyProject/Private/Game/UI/UIPack",
-                "MyProject/Private/Game/UI/UITestCanvas",
+                "MyProject/Private/BasicFrame/UI/UIPack",
+                "MyProject/Private/BasicFrame/UI/UITestCanvas",
 
                 // Test ÇøÓò
-                "MyProject/Private/Game/UnitTest",
+                "MyProject/Private/BasicFrame/UnitTest",
 
                 // Anim area
                 "MyProject/Private/Anim",
