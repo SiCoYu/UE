@@ -4,7 +4,6 @@
 #include "MyProject.h"
 #include "CreateObjectFromBlueprint.h"
 
-
 UObject* UCreateObjectFromBlueprint::NewObjectFromBlueprint(UObject* WorldContextObject, UClass* UC)
 {
 	UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject);
