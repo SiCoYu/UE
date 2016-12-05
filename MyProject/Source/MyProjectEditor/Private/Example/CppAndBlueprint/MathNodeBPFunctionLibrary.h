@@ -7,8 +7,8 @@
 #include "MathNodeBPFunctionLibrary.generated.h"
 
 /**
-* Created by Gareth "G-Rath" Jones, 06/04/2014L
-*/
+ * Created by Gareth "G-Rath" Jones, 06/04/2014L
+ */
 UCLASS()
 class UMathNodeBPFunctionLibrary : public UEdGraphNode
 {

@@ -24,8 +24,4 @@ class UModifyBlueprintVariableReferencesInCppWithoutCopying : public UBlueprintF
 	/** Sort an integer array, smallest value will be at index 0 after sorting. Modifies the input array, no new data created. <3 Rama */
 	UFUNCTION(BlueprintCallable, meta = (Keywords = "sort integer array"), Category = "VictoryBPLibrary|Array")
 	static void VictorySortIntArray(UPARAM(ref) TArray<int32>& IntArray, TArray<int32>& IntArrayRef);
-
-	/** Sort an integer array, smallest value will be at index 0 after sorting. Modifies the input array, no new data created. <3 Rama */
-	UFUNCTION(BlueprintCallable, meta = (Keywords = "sort integer array"), Category = "VictoryBPLibrary|Array")
-	static void VictorySortIntArray(UPARAM(ref) TArray<int32>& IntArray, TArray<int32>& IntArrayRef);
 };

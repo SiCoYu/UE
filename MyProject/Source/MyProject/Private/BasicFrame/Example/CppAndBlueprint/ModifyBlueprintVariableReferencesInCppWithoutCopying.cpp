@@ -19,11 +19,3 @@ void UModifyBlueprintVariableReferencesInCppWithoutCopying::VictorySortIntArray(
 	IntArray.Sort();
 	IntArrayRef = IntArray;
 }
-
-//~~~
-
-void UModifyBlueprintVariableReferencesInCppWithoutCopying::VictorySortIntArray(UPARAM(ref) TArray<int32>& IntArray, TArray<int32>& IntArrayRef)
-{
-	IntArray.Sort();
-	IntArrayRef = IntArray;
-}
