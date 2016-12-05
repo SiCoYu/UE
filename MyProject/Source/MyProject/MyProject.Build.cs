@@ -345,10 +345,20 @@ public class MyProject : ModuleRules
     // ╪сть Lua
     private bool LoadLua(TargetInfo Target)
     {
-        string LibrariesPath;
+        if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+        {
+            string LibrariesPath;
+            LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Lua", "Lua_d.lib");
+            PublicAdditionalLibraries.Add(LibrariesPath);
+        }
+        else if (Target.Platform == UnrealTargetPlatform.Android)
+        {
+            string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
 
-        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Lua", "Lua_d.lib");
-        PublicAdditionalLibraries.Add(LibrariesPath);
+            AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+
+            PublicAdditionalLibraries.Add(BuildPath + "/armv7/libcrypto.so");
+        }
 
         return true;
     }
