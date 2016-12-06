@@ -262,6 +262,9 @@ public class MyProject : ModuleRules
 
     private bool LoadSockets_bak(TargetInfo Target)
     {
+        // https://wiki.unrealengine.com/Integrating_OpenCV_Into_Unreal_Engine_4
+        bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && BuildConfiguration.bDebugBuildsActuallyUseDebugCRT;
+
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
             //string PlatformString;
@@ -299,6 +302,9 @@ public class MyProject : ModuleRules
             if (Target.Configuration == UnrealTargetConfiguration.Debug)
             {
                 PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets.lib"));
+
+                //Add Dynamic Libraries (Debug Version)
+                //PublicDelayLoadDLLs.Add("opencv_world300d.dll");
             }
             else
             {
