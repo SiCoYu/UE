@@ -1,21 +1,25 @@
-#ifndef __WinLog_H
-#define __WinLog_H
+#ifndef __ClientWinLog_H
+#define __ClientWinLog_H
 
 #include "Logging/LogMacros.h"
 #include "UnrealString.h"		// FString
 #include "Internationalization/Text.h"	// FText
+#include "GameFramework/PlayerController.h"
 
 #include "MLogType.h"
 
 // https://wiki.unrealengine.com/Logs,_Printing_Messages_To_Yourself_During_Runtime
-DECLARE_LOG_CATEGORY_EXTERN(ComLog, Log, All);
-DECLARE_LOG_CATEGORY_EXTERN(ComWarning, Warning, All);
-DECLARE_LOG_CATEGORY_EXTERN(ComError, Error, All);
 
-class WinLog
+/**
+ * @brief Client ¥∞ø⁄»’÷æ, Pressing the ~ key in Unreal brings up the client console. 
+ */
+class ClientWinLog
 {
+protected:
+	APlayerController* mPlayerController;
+
 public:
-	WinLog();
+	ClientWinLog();
 	void log(FString str, MLogType::MLogType type);
 	void warn(FString str, MLogType::MLogType type);
 	void error(FString str, MLogType::MLogType type);
