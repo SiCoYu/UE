@@ -260,6 +260,7 @@ public class MyProject : ModuleRules
         );
     }
 
+    // https://wiki.unrealengine.com/Linking_Static_Libraries_Using_The_Build_System
     private bool LoadSockets_bak(TargetInfo Target)
     {
         // https://wiki.unrealengine.com/Integrating_OpenCV_Into_Unreal_Engine_4

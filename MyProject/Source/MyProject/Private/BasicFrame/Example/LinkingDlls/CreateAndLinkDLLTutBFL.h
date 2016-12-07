@@ -6,7 +6,7 @@
 
 
 UCLASS()
-class CREATEANDLINKDLLPROJ_API UCreateAndLinkDLLTutBFL : public UBlueprintFunctionLibrary
+class UCreateAndLinkDLLTutBFL : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	

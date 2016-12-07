@@ -1,5 +1,4 @@
-
-#include "CreateAndLinkDLLProj.h"
+#include "MyProject.h"
 #include "CreateAndLinkDLLTutBFL.h"
 #include <string>
 
