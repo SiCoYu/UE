@@ -5,6 +5,12 @@
 #include "Core.h"		// "Platform.h" 已经包含在 "Core.h" 中了
 //#include "ICUUtilities.h"
 
+#include "UObject/Object.h" // UObject : public UObjectBaseUtility
+#include "Math/Vector.h"	// FVector
+#include "GameFramework/Actor.h"	// AActor
+#include "Components/StaticMeshComponent.h"		// UStaticMeshComponent
+#include "GenericPlatform/GenericPlatformMath.h"	// Max
+
 class UGameInstance;
 class UMyProjectEngine;
 class UMyProjectGameInstance;
@@ -14,7 +20,7 @@ class EngineApi
 {
 public:
 	static UGameInstance* getGameInstance();
-	static UWorld* getWorld();
+	static UWorld* GetWorld();
 	static void showCursor();
 	static UMyProjectEngine* getEngine();
 	static UMyProjectGameInstance* getMyProjectGameInstanceByEngine();
@@ -94,6 +100,23 @@ public:
 	 * @brief https://wiki.unrealengine.com/How_to_Launch_Web_Browser_with_URL_From_In-Game
 	 */
 	static void LaunchURL(FString url);
+
+	// https://wiki.unrealengine.com/Mesh_Collision,_Obtain_Closest_Point_on_Mesh_Surface_To_Other_Point
+	static bool isValid(UObject* pObj);
+
+	// https://wiki.unrealengine.com/Mesh_Collision,_Obtain_Closest_Point_on_Mesh_Surface_To_Other_Point
+	float DistanceOfActorToThisMeshSurface(UStaticMeshComponent* StaticMeshComponent, AActor* TestActor, FVector& ClosestSurfacePoint) const;
+
+	// https://wiki.unrealengine.com/Mass_Scale_of_Physics_Mesh,_Dynamically_Update_During_Runtime
+	void SetMassScale(UStaticMeshComponent* StaticMeshComponent, const float& NewScale);
+
+	// https://wiki.unrealengine.com/Min/Max_of_An_Array_of_Any_DataType,_Including_Ones_That_You_Create
+	template< class T >
+	static FORCEINLINE T Max(const TArray<T>& Values, int32* MaxIndex = NULL)
+	{
+		const T MaxValue = FMath::Max<T>(Values, &MaxIndex);
+		return MaxValue;
+	}
 };
 
 #endif				// __ENGINEAPI_H

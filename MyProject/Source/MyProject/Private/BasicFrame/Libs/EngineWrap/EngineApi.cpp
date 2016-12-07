@@ -10,7 +10,7 @@ UGameInstance* EngineApi::getGameInstance()
 	return UGameplayStatics::GetGameInstance(g_pEngineData->getMainActor());
 }
 
-UWorld* EngineApi::getWorld()
+UWorld* EngineApi::GetWorld()
 {
 	UWorld* World = GEngine->GetWorldFromContextObject(g_pEngineData->getMainActor());
 	return World;
@@ -18,7 +18,7 @@ UWorld* EngineApi::getWorld()
 
 void EngineApi::showCursor()
 {
-	UWorld* World = getWorld();
+	UWorld* World = GetWorld();
 	if (World)
 	{
 		World->GetFirstPlayerController()->bShowMouseCursor = true;
@@ -56,7 +56,7 @@ ACharacter* EngineApi::getFirstCharacter()
 {
 	ACharacter* Character = nullptr;
 	APlayerController* PC = nullptr;
-	UWorld* World = getWorld();
+	UWorld* World = GetWorld();
 	if (World)
 	{
 		PC = World->GetFirstPlayerController();
@@ -72,12 +72,12 @@ ACharacter* EngineApi::getFirstCharacter()
 float EngineApi::getUTCSec()
 {
 	//return g_pEngineApi->getWorld()->GetRealTimeSeconds();
-	return EngineApi::getWorld()->GetTimeSeconds();
+	return EngineApi::GetWorld()->GetTimeSeconds();
 }
 
 float EngineApi::GetRealTimeSeconds()
 {
-	return EngineApi::getWorld()->GetRealTimeSeconds();
+	return EngineApi::GetWorld()->GetRealTimeSeconds();
 }
 
 void EngineApi::InsertMountPoint(const FString& RootPath, const FString& ContentPath)
@@ -179,4 +179,43 @@ void EngineApi::LaunchURL(FString url)
 {
 	FString TheURL = "http://www.google.com/";
 	FPlatformProcess::LaunchURL(*TheURL, nullptr, nullptr);
+}
+
+bool EngineApi::isValid(UObject* pObj)
+{
+	if (pObj && pObj->IsValidLowLevel())
+	{
+		return true;
+	}
+
+	return false;
+}
+
+float EngineApi::DistanceOfActorToThisMeshSurface(UStaticMeshComponent* StaticMeshComponent, AActor* TestActor, FVector& ClosestSurfacePoint) const
+{
+	if (!TestActor) return 0;
+	if (!TestActor->IsValidLowLevel()) return 0;
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	//Dist of Actor to Surface, retrieve closest Surface Point to Actor
+	return StaticMeshComponent->GetDistanceToCollision(
+		TestActor->GetActorLocation(), ClosestSurfacePoint
+		);
+}
+
+void EngineApi::SetMassScale(UStaticMeshComponent* StaticMeshComponent, const float& NewScale)
+{
+	if (!StaticMeshComponent) return;
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	FBodyInstance* BodyInst = StaticMeshComponent->GetBodyInstance();
+
+	if (!BodyInst) return;
+	//~~~~~~~~~~~~~~~~~~~~~~~~
+
+	// New Scale 
+	BodyInst->MassScale = NewScale;
+
+	// Trigger Update! 
+	BodyInst->UpdateMassProperties();
 }
