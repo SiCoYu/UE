@@ -8,6 +8,9 @@
 	#include <Sockets/StdoutLog.h>
 #endif
 
+#include "Containers/UnrealString.h"
+#include "IPlatformFileSandboxWrapper.h"
+
 class UIMgr;
 class UGameInstance;
 class EngineData;
@@ -41,6 +44,9 @@ protected:
 	PoolSys* m_poolSys;
 	UIAssetMgr* m_uiAssetMgr;
 	ResLoadMgr* m_resLoadMgr;
+
+	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
+	FSandboxPlatformFile* mSandboxFile;
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* m_pStdoutLog;

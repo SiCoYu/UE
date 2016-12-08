@@ -14,8 +14,10 @@ EditorWinLog::EditorWinLog()
 
 void EditorWinLog::log(FString str, MLogType::MLogType type)
 {
+	//UE_LOG(YourLog, Log, str.GetCharArray().GetData());
+	//UE_LOG(YourLog, Log, *str);
 	//UE_LOG(YourLog, Log, TEXT(*str));
-	UE_LOG(ComLog, Log, TEXT("aaa"));
+	//UE_LOG(ComLog, Log, TEXT("aaa"));
 	MLogMacro_V_LOGM(ComLog, "aaa");
 	MLogMacro_TRACE("aaa");
 }

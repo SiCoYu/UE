@@ -4,6 +4,7 @@
 #include "Misc/Paths.h"
 #include "Core.h"
 #include "CoreGlobals.h"
+#include "HAL/FileManager.h"
 
 FString UtilPath::BaseDir()
 {
@@ -45,4 +46,24 @@ FString UtilPath::GameLogDir()
 	//InstallDir/WindowsNoEditor/GameName/Saved/Logs
 	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameLogDir());
 	return ThePath;
+}
+
+FString UtilPath::GetFilenameOnDisk(FString FullFilename)
+{
+	IFileManager& FileManager = IFileManager::Get();
+	FString DiskFilename = FileManager.GetFilenameOnDisk(*FullFilename);
+	return DiskFilename;
+}
+
+FString UtilPath::ConvertToSandboxPath(FString FullFilename)
+{
+	//const FString ThePath = FPaths::ConvertToSandboxPath(FPaths::GameLogDir());
+	IFileManager& FileManager = IFileManager::Get();
+	FString DiskFilename = FileManager.ConvertToSandboxPath(*FullFilename);
+	return DiskFilename;
+}
+
+FString UtilPath::FPaths_ConvertToSandboxPath(FString FullFilename)
+{
+	return FPaths::ConvertToSandboxPath(FullFilename);
 }
