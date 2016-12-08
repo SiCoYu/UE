@@ -1,7 +1,4 @@
 #include "MyProject.h"
-#include "PhysicsEngine/PhysicsConstraintActor.h"
-#include "PhysicsEngine/ConstraintInstance.h"
-#include "Engine/EngineTypes.h"
 #include "DynamicCreateConstraintActor.h"
 
 ADynamicCreateConstraintActor::ADynamicCreateConstraintActor(const class FObjectInitializer& PCIP)
