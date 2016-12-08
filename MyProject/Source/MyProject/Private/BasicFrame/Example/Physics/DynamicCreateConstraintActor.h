@@ -5,6 +5,7 @@
 
 #include "PhysicsEngine/PhysicsConstraintActor.h"
 #include "PhysicsEngine/ConstraintInstance.h"
+#include "PhysicsEngine/PhysicsConstraintComponent.h"
 #include "Engine/EngineTypes.h"
 
 #include "DynamicCreateConstraintActor.generated.h"

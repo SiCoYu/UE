@@ -120,6 +120,9 @@ public class MyProject : ModuleRules
                 "Sockets",
                 "Networking",
                 "UMG",
+                "PhysX",    // PhysX
+                "APEX",     // PhysX
+                "SandboxFile",  // IPlatformFileSandboxWrapper.h，否则链接不过
             }
         );
 

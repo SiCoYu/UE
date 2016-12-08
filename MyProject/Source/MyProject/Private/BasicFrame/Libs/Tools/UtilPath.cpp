@@ -1,10 +1,11 @@
 #include "MyProject.h"
-#include "UtilPath.h"
 #include "Containers/UnrealString.h"
 #include "Misc/Paths.h"
 #include "Core.h"
 #include "CoreGlobals.h"
 #include "HAL/FileManager.h"
+#include "Ctx.h"
+#include "UtilPath.h"
 
 FString UtilPath::BaseDir()
 {
@@ -58,12 +59,12 @@ FString UtilPath::GetFilenameOnDisk(FString FullFilename)
 FString UtilPath::ConvertToSandboxPath(FString FullFilename)
 {
 	//const FString ThePath = FPaths::ConvertToSandboxPath(FPaths::GameLogDir());
-	IFileManager& FileManager = IFileManager::Get();
-	FString DiskFilename = FileManager.ConvertToSandboxPath(*FullFilename);
+	//IFileManager& FileManager = IFileManager::Get();
+	FString DiskFilename = GSandboxPlatformFile->ConvertToSandboxPath(*FullFilename);
 	return DiskFilename;
 }
 
 FString UtilPath::FPaths_ConvertToSandboxPath(FString FullFilename)
 {
-	return FPaths::ConvertToSandboxPath(FullFilename);
+	return FPaths::ConvertToSandboxPath(FullFilename, TEXT("aaaa"));
 }

@@ -46,7 +46,7 @@ protected:
 	ResLoadMgr* m_resLoadMgr;
 
 	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
-	FSandboxPlatformFile* mSandboxFile;
+	FSandboxPlatformFile* mSandboxPlatformFile;
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* m_pStdoutLog;
@@ -76,6 +76,7 @@ public:
 	PoolSys* getPoolSysPtr();
 	UIAssetMgr* getUIAssetMgrPtr();
 	ResLoadMgr* getResLoadMgrPtr();
+	FSandboxPlatformFile* getSandboxPlatformFilePtr();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -100,5 +101,6 @@ public:
 #define g_pPoolSys g_pCtx->getPoolSysPtr()
 #define g_pUIAssetMgr g_pCtx->getUIAssetMgrPtr()
 #define g_pResLoadMgr g_pCtx->getResLoadMgrPtr()
+#define GSandboxPlatformFile g_pCtx->getSandboxPlatformFilePtr()
 
 #endif				// __CTX_H

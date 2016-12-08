@@ -48,7 +48,7 @@ Ctx::~Ctx()
 	delete m_pConfig;
 	delete m_pLocalFileSys;
 
-	delete mSandboxFile;
+	delete mSandboxPlatformFile;
 }
 
 void Ctx::init()
@@ -72,10 +72,10 @@ void Ctx::init()
 #endif
 
 	// 初始化 SandBox 文件系统
-	mSandboxFile = new FSandboxPlatformFile(false);
+	mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	//FString OutputDirectory = GetOutputDirectoryOverride();
 	FString OutputDirectory = FPaths::GameDir();
-	mSandboxFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
+	mSandboxPlatformFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
 
 	// 挂在目录
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
@@ -158,6 +158,11 @@ UIAssetMgr* Ctx::getUIAssetMgrPtr()
 ResLoadMgr* Ctx::getResLoadMgrPtr()
 {
 	return m_resLoadMgr;
+}
+
+FSandboxPlatformFile* Ctx::getSandboxPlatformFilePtr()
+{
+	return this->mSandboxPlatformFile;
 }
 
 void Ctx::testApi()
