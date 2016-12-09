@@ -18,6 +18,11 @@ class AMyActorBase : public AActor
 public:
 	AMyActorBase(const FObjectInitializer& ObjectInitializer);
 
+	// https://wiki.unrealengine.com/Static_Const,_Make_Const_Versions_of_UE4_Types
+public:
+	static const FLinearColor Red;
+	static const FName HeadSocket;
+
 	// https://wiki.unrealengine.com/Physics_Constraints,_Create_New_Constraints_Dynamically_During_Runtime
 	void CreateNewPhysicsConstraintBetween(AStaticMeshActor* RootSMA, AStaticMeshActor* TargetSMA);
 

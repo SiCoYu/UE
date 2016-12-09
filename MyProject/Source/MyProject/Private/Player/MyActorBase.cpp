@@ -1,6 +1,9 @@
 #include "MyProject.h"
 #include "MyActorBase.h"
 
+const FName        AMyActorBase::HeadSocket = FName("Head");
+const FLinearColor AMyActorBase::Red = FLinearColor(1, 0, 0, 1);
+
 AMyActorBase::AMyActorBase(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {

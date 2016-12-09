@@ -37,3 +37,45 @@ std::string UtilStr::Substring(std::string& srcStr, int startIndex, int length)
 {
 	return srcStr.substr(startIndex, length);
 }
+
+FName UtilStr::ConvFString2FName(FString& fStr)
+{
+	FName ConvertedFString = FName(*fStr);
+	return ConvertedFString;
+}
+
+FString UtilStr::ConvStdStr2FString(std::string& stdStr)
+{
+	FString HappyString(stdStr.c_str());
+	return HappyString;
+}
+
+std::string UtilStr::ConvFString2StdStr(FString& fStr)
+{
+	std::string MyStdString(TCHAR_TO_UTF8(*fStr));
+	return MyStdString;
+}
+
+int32 UtilStr::ConvFString2Int(FString& fStr)
+{
+	int32 MyShinyNewInt = FCString::Atoi(*fStr);
+	return MyShinyNewInt;
+}
+
+float UtilStr::ConvFString2Float(FString& fStr)
+{
+	float MyShinyNewFloat = FCString::Atof(*fStr);
+	return MyShinyNewFloat;
+}
+
+FString UtilStr::ConvInt2FString(int32& iValue)
+{
+	FString NewString = FString::FromInt(iValue);
+	return MyShinyNewFloat;
+}
+
+FString UtilStr::ConvFloat2FString(float& fValue)
+{
+	FString VeryCleanString = FString::SanitizeFloat(fValue);
+	return MyShinyNewFloat;
+}

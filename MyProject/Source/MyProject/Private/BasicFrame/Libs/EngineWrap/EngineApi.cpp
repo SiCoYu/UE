@@ -277,3 +277,8 @@ void EngineApi::Format()
 	DayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
 	Health 	 = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
 }
+
+FString EngineApi::GetWorldAssetPackageName(ULevelStreaming* StreamedLevel)
+{
+	return StreamedLevel->GetWorldAssetPackageName()
+}

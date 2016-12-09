@@ -28,6 +28,18 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 		//HUDClass = HUBBPClass.Class;
 		HUDClass = AMyHUD::StaticClass();
 	//}
+
+	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Players_in_Multiplayer
+	PlayerControllerClass = AMyProjectPlayerController::StaticClass();
+}
+
+UClass* AMyProjectGameMode::GetDefaultPawnClassForController(AController* InController)
+{
+	AMyProjectPlayerController* PlayerController = Cast<AMyProjectPlayerController>(InController);
+
+	UClass* PawnClass = PawnTypes.Find(PlayerController->CurrentPawnData.Type);
+
+	return PawnClass;
 }
 
 void AMyProjectGameMode::StartPlay()

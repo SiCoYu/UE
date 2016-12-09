@@ -134,6 +134,9 @@ public:
 
 	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
 	static void Format();
+
+	// https://wiki.unrealengine.com/Streamed_Levels,_Test_If_Actor_Is_In_Level_Bounds
+	static FString GetWorldAssetPackageName(ULevelStreaming* StreamedLevel);
 };
 
 #endif				// __ENGINEAPI_H
