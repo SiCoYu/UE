@@ -10,3 +10,13 @@ AActor* EngineData::getMainActor()
 {
 	return m_mainActor;
 }
+
+APlayerController* EngineData::getMainPlayerController()
+{
+	return this->mMainPlayerController;
+}
+
+void EngineData::setMainPlayerController(APlayerController* playerController)
+{
+	this->mMainPlayerController = playerController;
+}

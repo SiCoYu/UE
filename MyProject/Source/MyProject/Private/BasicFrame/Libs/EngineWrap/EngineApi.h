@@ -24,6 +24,7 @@ public:
 	static void showCursor();
 	static UMyProjectEngine* getEngine();
 	static UMyProjectGameInstance* getMyProjectGameInstanceByEngine();
+	static UMyProjectGameInstance* getMyProjectGameInstanceByController();
 	static UWorld* getWorldByEngine();
 
 	static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
@@ -117,6 +118,22 @@ public:
 		const T MaxValue = FMath::Max<T>(Values, &MaxIndex);
 		return MaxValue;
 	}
+
+	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
+	// 使用 Cast<AYourLevelScriptActor>GetLevelScriptActor();
+	class ALevelScriptActor* GetLevelScriptActor(class ULevel* OwnerLevel = NULL) const;
+
+	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
+	static FORCEINLINE void GetDisplayAdapterScreenResolutions(FScreenResolutionArray& Resolutions);
+
+	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
+	static bool IsTextValid(FText MyText);
+
+	// https://wiki.unrealengine.com/Game_Instance,_Custom_Game_Instance_For_Inter-Level_Persistent_Data_Storage#Overview
+	static void ClientMessage(FString str);
+
+	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
+	static void Format();
 };
 
 #endif				// __ENGINEAPI_H

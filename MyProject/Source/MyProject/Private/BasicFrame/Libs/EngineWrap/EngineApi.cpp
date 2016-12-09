@@ -52,6 +52,11 @@ UWorld* EngineApi::getWorldByEngine()
 	return World;
 }
 
+static UMyProjectGameInstance* getMyProjectGameInstanceByController()
+{
+	return g_pEngineData->getMainPlayerController()->GetGameInstance();
+}
+
 ACharacter* EngineApi::getFirstCharacter()
 {
 	ACharacter* Character = nullptr;
@@ -218,4 +223,57 @@ void EngineApi::SetMassScale(UStaticMeshComponent* StaticMeshComponent, const fl
 
 	// Trigger Update! 
 	BodyInst->UpdateMassProperties();
+}
+
+ALevelScriptActor* EngineApi::GetLevelScriptActor(class ULevel* OwnerLevel)
+{
+	return GetWorld()->GetLevelScriptActor(OwnerLevel);
+}
+
+void EngineApi::GetDisplayAdapterScreenResolutions(FScreenResolutionArray& Resolutions)
+{
+	if (RHIGetAvailableResolutions(Resolutions, false))
+	{
+		for (const FScreenResolutionRHI& EachResolution : Resolutions)
+		{
+			UE_LOG(YourLog, Warning, TEXT("DefaultAdapter - %4d x %4d @ %d"),
+				EachResolution.Width, EachResolution.Height, EachResolution.RefreshRate);
+		}
+	}
+	else
+	{
+		UE_LOG(YourLog, Error, TEXT("Screen Resolutions could not be obtained"));
+	}
+}
+
+bool EngineApi::IsTextValid(FText MyText)
+{
+	if (MyText.IsEmpty())
+	{
+		return true;
+	}
+	return false;
+}
+
+void EngineApi::ClientMessage(FString str)
+{
+	g_pEngineData->getMainPlayerController()->ClientMessage(str);
+}
+
+void EngineApi::Format()
+{
+	//Set Formatted FTEXT from variable data.
+	FFormatNamedArguments Args;
+	Args.Add("DayCount", SaveDetails.DayCount);    	//int32 
+	Args.Add("HP", SaveDetails.PlayerHealth); 	//int32
+
+	//Get Formatted FText back!
+	FText DayCount = FText::Format(NSLOCTEXT("Solus", "Day", "Day {DayCount}"), Args);
+	FText Health = FText::Format(NSLOCTEXT("Solus", "HP", "HP {HP}"), Args);
+
+	FFormatOrderedArguments Args;
+	Args.Add(SaveDetails.DayCount);    	//int32 
+	Args.Add(SaveDetails.PlayerHealth); 	//int32
+	DayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
+	Health 	 = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
 }
