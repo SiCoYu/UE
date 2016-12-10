@@ -12,6 +12,7 @@ public class MyProject : ModuleRules
 	public MyProject(TargetInfo Target)
 	{
         // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
+        // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs
         PrivateIncludePaths.AddRange(
             new string[] {
                 // Player 区域
@@ -119,11 +120,14 @@ public class MyProject : ModuleRules
 
         PublicIncludePaths.AddRange(
             new string[] {
+                "MyProject/Public/Anim",
                 "MyProject/Public/Persist",
+                "MyProject/Public/Player",
+                "MyProject/Public/UI",
             }
         );
 
-        // 添加需要包含目录和链接库的 Public 模块
+        // 添加需要包含的 Public 模块，包括头文件目录，库文件目录和库文件名字
         PublicDependencyModuleNames.AddRange(
             new string[] { 
                 "Core", 
@@ -140,7 +144,7 @@ public class MyProject : ModuleRules
             }
         );
 
-        // 添加需要包含目录的 Private 模块
+        // 添加需要包含的 Private 模块，包括头文件目录，库文件目录和库文件名字
         PrivateDependencyModuleNames.AddRange(
             new string[] {
                 "Core",

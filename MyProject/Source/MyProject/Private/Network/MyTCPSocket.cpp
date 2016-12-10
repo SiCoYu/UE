@@ -1,8 +1,8 @@
 #include "MyProject.h"
 #include "EngineApi.h"
-
 #include <string>
-
+#include "Templates/SharedPointer.h"
+#include "Interfaces/IPv4/IPv4Address.h"
 #include "MyTCPSocket.h"
 
 void MyTCPSocket::Launch()
@@ -34,7 +34,7 @@ bool MyTCPSocket::StartTCPReceiver(
 	}
 
 	//Start the Listener! //thread this eventually
-	EngineApi::GetWorldTimerManager().SetTimer(this,
+	EngineApi::GetWorldTimerManager().SetTimer(*this,
 		&MyTCPSocket::TCPConnectionListener, 0.01, true);
 
 	return true;
@@ -50,7 +50,8 @@ bool MyTCPSocket::FormatIP4ToNumber(const FString& TheIP, uint8(&Out)[4])
 
 	//String Parts
 	TArray<FString> Parts;
-	TheIP.ParseIntoArray(&Parts, TEXT("."), true);
+	//TheIP.ParseIntoArray(&Parts, TEXT("."), true);
+	TheIP.ParseIntoArray(Parts, TEXT("."), true);
 	if (Parts.Num() != 4)
 		return false;
 
@@ -122,7 +123,7 @@ void MyTCPSocket::TCPConnectionListener()
 			//UE_LOG "Accepted Connection! WOOOHOOOO!!!";
 
 			//can thread this too
-			EngineApi::GetWorldTimerManager().SetTimer(this,
+			EngineApi::GetWorldTimerManager().SetTimer(*this,
 				&MyTCPSocket::TCPSocketListener, 0.01, true);
 		}
 	}
@@ -152,7 +153,8 @@ void MyTCPSocket::TCPSocketListener()
 	uint32 Size;
 	while (ConnectionSocket->HasPendingData(Size))
 	{
-		ReceivedData.Init(FMath::Min(Size, 65507u));
+		//ReceivedData.Init(FMath::Min(Size, 65507u));
+		ReceivedData.Init(0, FMath::Min(Size, 65507u));
 
 		int32 Read = 0;
 		ConnectionSocket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
@@ -167,7 +169,7 @@ void MyTCPSocket::TCPSocketListener()
 		return;
 	}
 
-	VShow("Total Data read!", ReceivedData.Num());
+	//VShow("Total Data read!", ReceivedData.Num());
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Data Bytes Read ~> %d"), ReceivedData.Num()));
 
 
@@ -177,7 +179,7 @@ void MyTCPSocket::TCPSocketListener()
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-	VShow("As String!!!!! ~>", ReceivedUE4String);
+	//VShow("As String!!!!! ~>", ReceivedUE4String);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("As String Data ~> %s"), *ReceivedUE4String));
 }
 
@@ -191,7 +193,7 @@ void MyTCPSocket::ConnectThirdPartySocketServer()
 	FIPv4Address::Parse(address, ip);
 
 
-	TSharedRef addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
+	TSharedRef<FInternetAddr> addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
 	addr->SetIp(ip.GetValue());
 	addr->SetPort(port);
 
