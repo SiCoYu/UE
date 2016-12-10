@@ -1,14 +1,16 @@
 #include "MyProject.h"
 #include "EngineApi.h"
 #include "MyProjectFunctionLibrary.h"
+#include "Net/UnrealNetwork.h"	// DOREPLIFETIME
+#include "MyFlowerActor.h"	// AMyFlowerActor
 #include "MyProjectPlayerController.h"
 
 AMyProjectPlayerController::AMyProjectPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	/* Initialize The Values */
-	PawnToUseA = NULL;
-	PawnToUseB = NULL;
+	//PawnToUseA = NULL;
+	//PawnToUseB = NULL;
 
 	/* Make sure the PawnClass is Replicated */
 	bReplicates = true;
@@ -59,7 +61,7 @@ void AMyProjectPlayerController::ServerSetPawn_Implementation(TSubclassOf<APawn>
 // Replication
 void AMyProjectPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
-	DOREPLIFETIME(AMyPlayerController, MyPawnClass);
+	DOREPLIFETIME(AMyProjectPlayerController, MyPawnClass);
 }
 
 bool AMyProjectPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
@@ -108,7 +110,7 @@ void AMyProjectPlayerController::ServerTaunt_Implementation()
 		if (!ISTIMERACTIVE(TimerHandle_Taunt))
 		{
 			// Delay the Taunt attempt a random amount to prevent trolling.
-			SETTIMERH(TimerHandle_Taunt, AYourPlayerController::TauntTimer, FMath::FRandRange(1.5f, 3.0f), false);
+			SETTIMERH(TimerHandle_Taunt, AMyProjectPlayerController::TauntTimer, FMath::FRandRange(1.5f, 3.0f), false);
 		}
 	}
 }
@@ -127,7 +129,7 @@ void AMyProjectPlayerController::ExampleUsageOne()
 	FHitResult HitData(ForceInit);
 
 	//If Trace Hits anything
-	if (UMyStaticFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, HitData))
+	if (UMyProjectFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, HitData))
 	{
 		//Print out the name of the traced actor
 		if (HitData.GetActor())
@@ -154,7 +156,7 @@ void AMyProjectPlayerController::ExampleUsageTwo()
 	FHitResult HitData(ForceInit);
 
 	//If Trace Hits anything (ignore the controlled pawn)
-	if (UMyStaticFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, HitData) && HitData.GetActor())
+	if (UMyProjectFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, HitData) && HitData.GetActor())
 	{
 		ClientMessage(HitData.GetActor()->GetName());
 
@@ -171,7 +173,7 @@ void AMyProjectPlayerController::ExampleUsageThree()
 	//Actors to Ignore
 	//  Ignore all AFlowers
 	TArray<AActor*> ActorsToIgnore;
-	for (TObjectIterator<AFlower> It; It; ++It)
+	for (TObjectIterator<AMyFlowerActor> It; It; ++It)
 	{
 		ActorsToIgnore.Add(*It);
 	}
@@ -180,7 +182,7 @@ void AMyProjectPlayerController::ExampleUsageThree()
 	ActorsToIgnore.Add(GetPawn());
 
 	//If Trace Hits anything
-	if (UMyStaticFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, ActorsToIgnore))
+	if (UMyProjectFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, ActorsToIgnore))
 	{
 		//Print out the name of the traced actor
 		if (HitData.GetActor())

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/LevelScriptActor.h"
+#include "Engine/EngineTypes.h"
 #include "MyLevelScriptActorBase.generated.h"
 
 /**
@@ -26,6 +27,8 @@ public:
 
 	//OVERRIDES
 protected:
+	//virtual void ReceiveBeginPlay() override;
+	// ALevelScriptActor 父类没有这个函数
 	virtual void ReceiveBeginPlay() override;
 
 	//ON REMOVE FROM WORLD - USE INSTEAD OF BEGIN DESTROY

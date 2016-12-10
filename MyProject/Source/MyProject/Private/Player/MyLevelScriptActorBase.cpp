@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyLevelScriptActorBase.h"
 
-AMyLevelScriptActorBase::AMyLevelScriptActorBase(const class FPostConstructInitializeProperties& PCIP) : Super(PCIP)
+AMyLevelScriptActorBase::AMyLevelScriptActorBase(const class FObjectInitializer& PCIP) : Super(PCIP)
 {
 	SolusLevelName = NAME_None;
 }
