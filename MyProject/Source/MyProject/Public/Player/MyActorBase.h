@@ -9,6 +9,7 @@
 #include "Containers/UnrealString.h"	// FString
 #include "Components/TimelineComponent.h"	// TimelineComponent
 #include "Curves/CurveFloat.h"	// CurveFloat
+#include "Curves/CurveVector.h"	// CurveVector
 
 #include "MyActorBase.generated.h"
 
@@ -157,8 +158,8 @@ protected:
 	float CameraZoom_v;
 
 protected:
-	// APawn interface
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponentParam) override;
+	// APawn interface, AActor 没有这个接口
+	//virtual void SetupPlayerInputComponent(class UInputComponent* InputComponentParam) override;
 
 	// https://wiki.unrealengine.com/Timeline_in_c%2B%2B
 public:
@@ -167,7 +168,9 @@ public:
 
 	UPROPERTY()
 	UCurveFloat* fCurve;
+	UCurveVector* fCurveVector;
 
+	//FOnTimelineFloat InterpFunction{};
 	FOnTimelineFloat InterpFunction{};
 
 	UFUNCTION()

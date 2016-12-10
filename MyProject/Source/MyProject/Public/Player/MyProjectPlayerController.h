@@ -2,7 +2,7 @@
 
 #include "MyProject.h"
 #include "PlayerPawnData.h"
-#include "Actor/MyPawnActor.h"
+#include "Actor/MyPawn.h"
 #include "MyProjectPlayerController.generated.h"
 
 UCLASS(Within=Engine, transient, config=Engine)

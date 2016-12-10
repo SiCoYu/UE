@@ -135,13 +135,13 @@ void AMyActorBase::CameraZoomOut()
 	}
 }
 
-void AMyActorBase::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
-{
-	Super::SetupPlayerInputComponent(InputComponentParam);
-
-	InputComponentParam->BindAction("ZoomIn", IE_Pressed, this, &AMyActorBase::CameraZoomIn);
-	InputComponentParam->BindAction("ZoomOut", IE_Pressed, this, &AMyActorBase::CameraZoomOut);
-}
+//void AMyActorBase::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
+//{
+//	Super::SetupPlayerInputComponent(InputComponentParam);
+//
+//	InputComponentParam->BindAction("ZoomIn", IE_Pressed, this, &AMyActorBase::CameraZoomIn);
+//	InputComponentParam->BindAction("ZoomOut", IE_Pressed, this, &AMyActorBase::CameraZoomOut);
+//}
 
 //BeginPlay
 void AMyActorBase::BeginPlay()
@@ -162,12 +162,12 @@ void AMyActorBase::TimelineFloatReturn(float val)
 
 float AMyActorBase::GetFloatValue()
 {
-	fCurve->GetFloatValue(ScoreTimeline->GetPlaybackposition());
+	fCurve->GetFloatValue(ScoreTimeline->GetPlaybackPosition());
 }
 
 float AMyActorBase::GetVectorValue()
 {
-	fCurve->GetVectorValue("");
+	fCurveVector->GetVectorValue(ScoreTimeline->GetPlaybackPosition());
 }
 
 void AMyActorBase::SetTimer()
