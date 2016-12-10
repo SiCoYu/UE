@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "EngineApi.h"
 #include "MyActorBase.h"
 
 const FName        AMyActorBase::HeadSocket = FName("Head");
@@ -162,15 +163,20 @@ void AMyActorBase::TimelineFloatReturn(float val)
 
 float AMyActorBase::GetFloatValue()
 {
-	fCurve->GetFloatValue(ScoreTimeline->GetPlaybackPosition());
+	return fCurve->GetFloatValue(ScoreTimeline->GetPlaybackPosition());
 }
 
 float AMyActorBase::GetVectorValue()
 {
-	fCurveVector->GetVectorValue(ScoreTimeline->GetPlaybackPosition());
+	return fCurveVector->GetVectorValue(ScoreTimeline->GetPlaybackPosition());
 }
 
 void AMyActorBase::SetTimer()
 {
 	SETTIMER(AMyActorBase::SomeFunction, 0.25f, false);
+}
+
+void AMyActorBase::SomeFunction()
+{
+
 }

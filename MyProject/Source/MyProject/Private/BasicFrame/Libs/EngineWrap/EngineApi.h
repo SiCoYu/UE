@@ -145,7 +145,7 @@ public:
 
 	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
 	// สนำร Cast<AYourLevelScriptActor>GetLevelScriptActor();
-	class ALevelScriptActor* GetLevelScriptActor(class ULevel* OwnerLevel = NULL) const;
+	ALevelScriptActor* GetLevelScriptActor(ULevel* OwnerLevel = NULL) const;
 
 	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
 	static FORCEINLINE void GetDisplayAdapterScreenResolutions(FScreenResolutionArray& Resolutions);

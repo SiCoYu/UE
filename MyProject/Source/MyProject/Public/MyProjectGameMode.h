@@ -23,6 +23,8 @@ public:
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Every_Player
 	UClass* GetDefaultPawnClassForController(AController* InController);
 
+	virtual void RestartPlayer(class AController* NewPlayer) override;
+
 private:
 	virtual void StartPlay();
 	void TestUI();

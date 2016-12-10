@@ -94,9 +94,9 @@ bool AMyProjectPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
 			ClientMessage("Yes Player Is Within This Level");
 			ret = true;
 		}
-
-		return ret;
 	}
+
+	return ret;
 }
 
 void AMyProjectPlayerController::ServerTaunt_Implementation()
@@ -181,8 +181,15 @@ void AMyProjectPlayerController::ExampleUsageThree()
 	//Ignore the player character too!
 	ActorsToIgnore.Add(GetPawn());
 
+	//location the PC is focused on
+	const FVector Start = GetFocalLocation();
+
+	//2000 units in facing direction of PC (in front of the camera)
+	const FVector End = Start + GetControlRotation().Vector() * 2000;
+
 	//If Trace Hits anything
-	if (UMyProjectFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, ActorsToIgnore))
+	//if (UMyProjectFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, ActorsToIgnore))
+	if (UMyProjectFunctionLibrary::Trace(GetWorld(), ActorsToIgnore, Start, End, HitData))
 	{
 		//Print out the name of the traced actor
 		if (HitData.GetActor())
@@ -199,9 +206,9 @@ void AMyProjectPlayerController::ExampleUsageFour()
 {
 	//In player controller class
 
-	ACharacter* CharacterToTrace = //set to some character
+	ACharacter* CharacterToTrace = nullptr;//set to some character
 
-		if (!CharacterToTrace) return;
+	if (!CharacterToTrace) return;
 	if (!CharacterToTrace->IsValidLowLevel()) return;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -215,7 +222,8 @@ void AMyProjectPlayerController::ExampleUsageFour()
 	FHitResult HitData(ForceInit);
 
 	//If Trace Hits any part of the Mesh of the Character To Trace
-	if (UMyProjectFunctionLibrary::Trace(CharacterToTrace->GetMesh(), Start, End, HitData))
+	//if (UMyProjectFunctionLibrary::Trace(CharacterToTrace->GetMesh(), Start, End, HitData))
+	if (UMyProjectFunctionLibrary::TraceComponent(CharacterToTrace->GetMesh(), Start, End, HitData))
 	{
 		//Print out the location of the impact on the Character's Mesh
 		ClientMessage(HitData.ImpactPoint.ToString());

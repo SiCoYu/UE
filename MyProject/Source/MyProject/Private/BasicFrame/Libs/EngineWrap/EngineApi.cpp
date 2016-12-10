@@ -267,16 +267,21 @@ void EngineApi::Format()
 {
 	//Set Formatted FTEXT from variable data.
 	FFormatNamedArguments Args;
-	Args.Add("DayCount", SaveDetails.DayCount);    	//int32 
-	Args.Add("HP", SaveDetails.PlayerHealth); 	//int32
+	//Args.Add("DayCount", SaveDetails.DayCount);    	//int32 
+	//Args.Add("HP", SaveDetails.PlayerHealth); 	//int32
+	Args.Add("DayCount", 1);    	//int32 
+	Args.Add("HP", 1); 	//int32
 
 	//Get Formatted FText back!
 	FText DayCount = FText::Format(NSLOCTEXT("Solus", "Day", "Day {DayCount}"), Args);
 	FText Health = FText::Format(NSLOCTEXT("Solus", "HP", "HP {HP}"), Args);
 
-	FFormatOrderedArguments Args;
-	Args.Add(SaveDetails.DayCount);    	//int32 
-	Args.Add(SaveDetails.PlayerHealth); 	//int32
+	//FFormatOrderedArguments Args;
+	Args.Clear();
+	//Args.Add(SaveDetails.DayCount);    	//int32 
+	//Args.Add(SaveDetails.PlayerHealth); 	//int32
+	Args.Add(1);    	//int32 
+	Args.Add(1); 	//int32
 	DayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
 	Health 	 = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
 }

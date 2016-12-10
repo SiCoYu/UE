@@ -29,7 +29,7 @@ public:
 protected:
 	//virtual void ReceiveBeginPlay() override;
 	// ALevelScriptActor 父类没有这个函数
-	virtual void ReceiveBeginPlay() override;
+	virtual void ReceiveBeginPlay();
 
 	//ON REMOVE FROM WORLD - USE INSTEAD OF BEGIN DESTROY
 	/** Called when this actor is in a level which is being removed from the world (e.g. my level is getting UWorld::RemoveFromWorld called on it) */

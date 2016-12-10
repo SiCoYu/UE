@@ -1,11 +1,14 @@
 #pragma once
 
+#include "Math/Vector2D.h"
+#include "MyVRect.generated.h"
+
 /**
 * @brief https://wiki.unrealengine.com/Static_Function_Libraries,_Your_Own_Version_of_UE4_C%2B%2B,_No_Engine_Compile_Times
 */
 
 USTRUCT()
-struct FVRect
+struct FMyVRect
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -46,7 +49,7 @@ struct FVRect
 	}
 
 	//base constructor
-	FVRect()
+	FMyVRect()
 	{
 		Min = FVector2D(0, 0);
 		Max = FVector2D(500, 500);
