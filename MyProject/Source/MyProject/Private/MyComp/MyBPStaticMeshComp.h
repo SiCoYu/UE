@@ -1,6 +1,6 @@
 #pragma once
 
-#include "UStaticMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "MyBPStaticMeshComp.generated.h"
 
 /**

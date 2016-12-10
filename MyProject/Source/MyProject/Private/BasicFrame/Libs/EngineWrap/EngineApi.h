@@ -160,7 +160,16 @@ public:
 	static FString GetWorldAssetPackageName(ULevelStreaming* StreamedLevel);
 
 	// https://wiki.unrealengine.com/Time_Macros
-	float GetTimeSeconds();
+	static float GetTimeSeconds();
+
+	// Engine\Source\Runtime\Engine\Private\Actor.cpp
+	//  error C2272: 'GetWorldTimerManager': modifiers not allowed on static member functions
+	//static FTimerManager& GetWorldTimerManager() const;
+	static FTimerManager& GetWorldTimerManager();
+	static void AddReferencedObjects(UObject* InThis, FReferenceCollector& Collector);
+	// error C2272: 'GetLevel': modifiers not allowed on static member functions
+	//static ULevel* GetLevel(AActor* actor) const;
+	static ULevel* GetLevel(AActor* actor);
 };
 
 #endif				// __ENGINEAPI_H

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LevelScriptActor.h"
+#include "Engine/LevelScriptActor.h.h"
 #include "MyLevelScriptActorBase.generated.h"
 
 /**

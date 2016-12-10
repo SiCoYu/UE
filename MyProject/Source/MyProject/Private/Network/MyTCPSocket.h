@@ -37,6 +37,8 @@ public:
 	//Rama's StringFromBinaryArray
 	FString StringFromBinaryArray(const TArray<uint8>& BinaryArray);
 
+	void Launch();
+
 	// https://wiki.unrealengine.com/Third_Party_Socket_Server_Connection
 public:
 	FSocket* ClientSocket;

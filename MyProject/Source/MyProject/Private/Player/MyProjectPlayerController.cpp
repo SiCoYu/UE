@@ -1,4 +1,6 @@
 #include "MyProject.h"
+#include "EngineApi.h"
+#include "MyProjectFunctionLibrary.h"
 #include "MyProjectPlayerController.h"
 
 AMyProjectPlayerController::AMyProjectPlayerController(const FObjectInitializer& ObjectInitializer)
@@ -211,7 +213,7 @@ void AMyProjectPlayerController::ExampleUsageFour()
 	FHitResult HitData(ForceInit);
 
 	//If Trace Hits any part of the Mesh of the Character To Trace
-	if (UMyStaticFunctionLibrary::Trace(CharacterToTrace->GetMesh(), Start, End, HitData))
+	if (UMyProjectFunctionLibrary::Trace(CharacterToTrace->GetMesh(), Start, End, HitData))
 	{
 		//Print out the location of the impact on the Character's Mesh
 		ClientMessage(HitData.ImpactPoint.ToString());

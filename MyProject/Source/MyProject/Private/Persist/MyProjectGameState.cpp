@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "Online/MyProjectGameState.h"
+#include "Persist/MyProjectGameState.h"
 
 AMyProjectGameState::AMyProjectGameState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {

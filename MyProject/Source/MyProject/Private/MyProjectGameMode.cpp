@@ -6,6 +6,7 @@
 #include "Common.h"
 #include "UIFormID.h"
 #include "UIPack.h"
+#include "MyProjectPlayerController.h"
 #include "UITestCanvas.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)

@@ -14,7 +14,7 @@ AMyActorBase::AMyActorBase(const class FObjectInitializer& PCIP)
 		fCurve = Curvy.Object;
 	}
 
-	ScoreTimeline = ObjectInitializer.CreateDefaultSubobject<UTimelineComponent>(this, TEXT("TimelineScore"));
+	ScoreTimeline = PCIP.CreateDefaultSubobject<UTimelineComponent>(this, TEXT("TimelineScore"));
 
 	//Bind the Callbackfuntion for the float return value
 	InterpFunction.BindUFunction(this, FName{ TEXT("TimelineFloatReturn") });
@@ -53,9 +53,10 @@ void AMyActorBase::LoadAsset()
 	MyAssetPointer.Get();
 
 	/** Special Note about TAssetSubclassOf Get() it returns a UClass pointer!!*/
-	MyAssetSubclassOfPointer.Get()
+	MyAssetSubclassOfPointer.Get();
 	/** To properly use a UClass pointer you must use GetDefaultObject<T>() to get a pointer to the UObject or derived class there of */
-	MyAssetSubclassOfPointer.Get()->GetDefaultObject<MyBaseClass>()
+	//MyAssetSubclassOfPointer.Get()->GetDefaultObject<MyBaseClass>();
+	MyAssetSubclassOfPointer.Get()->GetDefaultObject<AActor>();
 
 	// Call ToStringReference() to return the StringAssetReference of the asset you wish to load
 	// More on this below
@@ -64,36 +65,42 @@ void AMyActorBase::LoadAsset()
 
 void AMyActorBase::StrongReferenceLoadAsset()
 {
-	FStringAssetReference AssetToLoad
+	FStringAssetReference AssetToLoad;
 	AssetToLoad = MyItem.ToStringReference();
 	AssetLoader.SimpleAsyncLoad(AssetToLoad);
 }
 
 void AMyActorBase::StrongReferenceUnloadAsset()
 {
-	FStringAssetReference AssetToLoad
+	FStringAssetReference AssetToLoad;
 	AssetToLoad = MyItem.ToStringReference();
 	AssetLoader.Unload(AssetToLoad);
 }
 
 void AMyActorBase::StrongReferenceLoadAllAsset()
 {
-	TArray<FStringAssetReference> AssetsToLoad
-	for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
+	TArray<FStringAssetReference> AssetsToLoad;
+	//for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
+	for (TAssetPtr<AActor>& AssetPtr : MyItems) // C++11 ranged loop
 	{
 		AssetsToLoad.AddUnique(AssetPtr.ToStringReference());
 	}
-	AssetLoader.RequestAsyncLoad(AssetsToLoad, FStreamableDelegate::CreateUObject(this, &MyClass::MyFunctionToBeCalledAfterAssetsAreLoaded));
+	AssetLoader.RequestAsyncLoad(AssetsToLoad, FStreamableDelegate::CreateUObject(this, &AMyActorBase::MyFunctionToBeCalledAfterAssetsAreLoaded));
 }
 
 void AMyActorBase::StrongReferenceUnloadAllAsset()
 {
-	TArray<FStringAssetReference> AssetsToLoad
-	for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
+	TArray<FStringAssetReference> AssetsToLoad;
+	//for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
+	for (TAssetPtr<AActor>& AssetPtr : MyItems) // C++11 ranged loop
 	{
-		AssetsToLoad.AddUnique(AssetPtr.ToStringReference());
+		AssetLoader.Unload(AssetPtr.ToStringReference());
 	}
-	AssetLoader.Unload(AssetsToLoad, FStreamableDelegate::CreateUObject(this, &MyClass::MyFunctionToBeCalledAfterAssetsAreLoaded));
+}
+
+void AMyActorBase::MyFunctionToBeCalledAfterAssetsAreLoaded()
+{
+
 }
 
 void AMyActorBase::CameraZoomIn()
@@ -130,8 +137,10 @@ void AMyActorBase::CameraZoomOut()
 
 void AMyActorBase::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
 {
-	InputComponentParam->BindAction("ZoomIn", IE_Pressed, this, &ATutorialForOthersCharacter::CameraZoomIn);
-	InputComponentParam->BindAction("ZoomOut", IE_Pressed, this, &ATutorialForOthersCharacter::CameraZoomOut);
+	Super::SetupPlayerInputComponent(InputComponentParam);
+
+	InputComponentParam->BindAction("ZoomIn", IE_Pressed, this, &AMyActorBase::CameraZoomIn);
+	InputComponentParam->BindAction("ZoomOut", IE_Pressed, this, &AMyActorBase::CameraZoomOut);
 }
 
 //BeginPlay

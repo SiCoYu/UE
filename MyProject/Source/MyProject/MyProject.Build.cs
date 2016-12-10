@@ -106,6 +106,14 @@ public class MyProject : ModuleRules
 
                 // 其它
                 "MyProject/Private/UI/Widgets",
+
+                // 其它
+                "MyProject/Private/Persist",
+                "MyProject/Private/Actor",
+                "MyProject/Private/Math",
+                "MyProject/Private/Misc",
+                "MyProject/Private/MyComp",
+                "MyProject/Private/Network",
             }
         );
 

@@ -7,6 +7,8 @@
 #include "Engine/EngineTypes.h"	// ELinearConstraintMotion
 #include "PhysicsEngine/PhysicsConstraintComponent.h"	// UPhysicsConstraintComponent
 #include "Containers/UnrealString.h"	// FString
+#include "Components/TimelineComponent.h"	// TimelineComponent
+#include "Curves/CurveFloat.h"	// CurveFloat
 
 #include "MyActorBase.generated.h"
 
@@ -16,7 +18,7 @@ class AMyActorBase : public AActor
 	GENERATED_BODY()
 
 public:
-	AMyActorBase(const FObjectInitializer& ObjectInitializer);
+	AMyActorBase(const FObjectInitializer& PCIP);
 
 	// https://wiki.unrealengine.com/Static_Const,_Make_Const_Versions_of_UE4_Types
 public:
@@ -113,16 +115,16 @@ public:
 public:
 	/** Define the Asset Pointer. Don't forget to set a UPROPERTY */
 	UPROPERTY(EditAnywhere)
-	TAssetPtr<MyClass> MyAssetPointer;
+	TAssetPtr<AActor> MyAssetPointer;
 
 	/** Define a subclass version. This will only allow you to select subclasses of the defined type. */
 	UPROPERTY(EditAnywhere)
-	TAssetSubclassOf<MyBaseClass> MyAssetSubclassOfPointer;
+	TAssetSubclassOf<AActor> MyAssetSubclassOfPointer;
 
 	void LoadAsset();
 
 	// SimpleAsyncLoad which allows you to load a single asset that is strongly referenced. This means it will never be garbage collected until you unload it manually using Unload. 
-	TAssetPtr<ABaseItem> MyItem;
+	TAssetPtr<AActor> MyItem;
 	FStreamableManager AssetLoader;
 
 	void StrongReferenceLoadAsset();
@@ -130,9 +132,12 @@ public:
 
 	// RequestAsyncLoad loads an array of objects and fires a delegate when completed. This will Unload all the assets once the delegate is called, to ensure garbage collection takes place. 
 
-	TArray< TAssetPtr<ABaseItem> > MyItems;
+	//TArray< TAssetPtr<ABaseItem> > MyItems;
+	TArray< TAssetPtr<AActor> > MyItems;
 	void StrongReferenceLoadAllAsset();
 	void StrongReferenceUnloadAllAsset();
+
+	void MyFunctionToBeCalledAfterAssetsAreLoaded();
 
 	// After all this your asset(s) are ready to use.Don't forget to Get() them!
 	// MyItem.Get(); // returns a pointer to the LIVE UObject

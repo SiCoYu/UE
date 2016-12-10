@@ -2,6 +2,7 @@
 
 #include "MyProject.h"
 #include "PlayerPawnData.h"
+#include "Actor/MyPawnActor.h"
 #include "MyProjectPlayerController.generated.h"
 
 UCLASS(Within=Engine, transient, config=Engine)
@@ -42,10 +43,12 @@ protected:
 	/* First Pawn Type To Use */
 	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "My Controller")
 	//TSubclassOf<AGESGame_ServerPawn> PawnToUseA;
+	TSubclassOf<MyPawnActor> PawnToUseA;
 
 	/* Second Pawn Type To Use */
 	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "My Controller")
 	//TSubclassOf<AGESGame_Pawn> PawnToUseB;
+	TSubclassOf<MyPawnActor> PawnToUseB;
 
 	// https://wiki.unrealengine.com/Streamed_Levels,_Test_If_Actor_Is_In_Level_Bounds
 public:
@@ -59,6 +62,8 @@ protected:
 
 	UFUNCTION()
 	void TauntTimer();
+
+	void ServerTaunt_Implementation();
 
 
 	// https://wiki.unrealengine.com/Trace_Functions

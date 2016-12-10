@@ -1,6 +1,11 @@
+#include "MyProject.h"
+#include "EngineApi.h"
+
+#include <string>
+
 #include "MyTCPSocket.h"
 
-void MyTCPSocket::Laaaaaauuuunch()
+void MyTCPSocket::Launch()
 {
 	//IP = 127.0.0.1, Port = 8890 for my Python test case
 	if (!StartTCPReceiver("RamaSocketListener", "127.0.0.1", 8890))
@@ -30,7 +35,7 @@ bool MyTCPSocket::StartTCPReceiver(
 
 	//Start the Listener! //thread this eventually
 	GetWorldTimerManager().SetTimer(this,
-		&AYourClass::TCPConnectionListener, 0.01, true);
+		&MyTCPSocket::TCPConnectionListener, 0.01, true);
 
 	return true;
 }

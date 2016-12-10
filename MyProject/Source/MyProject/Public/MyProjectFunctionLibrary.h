@@ -43,7 +43,15 @@ public:
 		HitOut = FHitResult(ForceInit);
 
 		//Trace!
-		World->LineTraceSingle(
+		//World->LineTraceSingle(
+		//	HitOut,		//result
+		//	Start,	//start
+		//	End, //end
+		//	CollisionChannel, //collision channel
+		//	TraceParams
+		//	);
+
+		World->LineTraceSingleByChannel(
 			HitOut,		//result
 			Start,	//start
 			End, //end
@@ -83,7 +91,15 @@ public:
 		//Re-initialize hit info
 		HitOut = FHitResult(ForceInit);
 
-		World->LineTraceSingle(
+		//World->LineTraceSingle(
+		//	HitOut,		//result
+		//	Start,	//start
+		//	End, //end
+		//	CollisionChannel, //collision channel
+		//	TraceParams
+		//	);
+
+		World->LineTraceSingleByChannel(
 			HitOut,		//result
 			Start,	//start
 			End, //end

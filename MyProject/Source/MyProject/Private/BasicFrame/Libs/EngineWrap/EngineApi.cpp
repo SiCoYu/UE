@@ -287,3 +287,18 @@ float EngineApi::GetTimeSeconds()
 {
 	return GetWorld()->GetTimeSeconds();
 }
+
+FTimerManager& EngineApi::GetWorldTimerManager()
+{
+	return GetWorld()->GetTimerManager();
+}
+
+void EngineApi::AddReferencedObjects(UObject* InThis, FReferenceCollector& Collector)
+{
+	AActor::AddReferencedObjects(InThis, Collector);
+}
+
+ULevel* EngineApi::GetLevel(AActor* actor)
+{ 
+	return Cast<ULevel>(actor->GetOuter());
+}
