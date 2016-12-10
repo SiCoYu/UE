@@ -36,4 +36,10 @@ protected:
 
 	TSharedPtr<SMyDialog>			DialogWidget;
 	//UUserWidget* NewWidget;
+
+	// https://wiki.unrealengine.com/Survival_Sample_Game:_Section_4
+public:
+	/* An event hook to call HUD text events to display in the HUD. Blueprint HUD class must implement how to deal with this event. */
+	UFUNCTION(BlueprintImplementableEvent, Category = "HUDEvents")
+	void MessageReceived(const FString& TextMessage);
 };

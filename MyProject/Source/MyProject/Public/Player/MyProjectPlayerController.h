@@ -23,7 +23,7 @@ public:
 protected:
 	/* Return The Correct Pawn Class Client-Side */
 	UFUNCTION(Reliable, Client)
-		void DeterminePawnClass();
+	void DeterminePawnClass();
 	virtual void DeterminePawnClass_Implementation();
 
 	/* Use BeginPlay to start the functionality */
@@ -31,7 +31,7 @@ protected:
 
 	/* Set Pawn Class On Server For This Controller */
 	UFUNCTION(Reliable, Server, WithValidation)
-		virtual void ServerSetPawn(TSubclassOf<APawn> InPawnClass);
+	virtual void ServerSetPawn(TSubclassOf<APawn> InPawnClass);
 	virtual void ServerSetPawn_Implementation(TSubclassOf<APawn> InPawnClass);
 	virtual bool ServerSetPawn_Validate(TSubclassOf<APawn> InPawnClass);
 
