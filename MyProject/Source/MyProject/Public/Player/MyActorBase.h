@@ -179,7 +179,7 @@ public:
 	void BeginPlay() override;
 
 	float GetFloatValue();
-	float GetVectorValue();
+	FVector GetVectorValue();
 
 	// https://wiki.unrealengine.com/Timer_Macros
 protected:

@@ -147,3 +147,8 @@ void AMyProjectCharacter::Tick(float DeltaTime)
 		Anim->NeckSpring = YawRotation;
 	}
 }
+
+bool AMyProjectCharacter::IsAlive()
+{
+	return true;
+}

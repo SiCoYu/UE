@@ -194,7 +194,8 @@ void MyTCPSocket::ConnectThirdPartySocketServer()
 
 
 	TSharedRef<FInternetAddr> addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
-	addr->SetIp(ip.GetValue());
+	//addr->SetIp(ip.GetValue());
+	addr->SetIp(ip.Value);
 	addr->SetPort(port);
 
 	bool connected = ClientSocket->Connect(*addr);

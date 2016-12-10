@@ -38,7 +38,7 @@ void AMyLevelScriptActorBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	//Save Level Just Before Exiting
 	SolusLevel__UpdateLevelSaveData();
 
-	Super::OnRemoveFromWorld();
+	//Super::OnRemoveFromWorld();
 }
 
 void AMyLevelScriptActorBase::SolusLevel__UpdateLevelSaveData()

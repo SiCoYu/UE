@@ -19,7 +19,7 @@ struct FMyVRect
 	FVector2D Max;
 
 	//overloaded constructor
-	FVRect(const FVector2D& VPoint1, const FVector2D& VPoint2)
+	FMyVRect(const FVector2D& VPoint1, const FVector2D& VPoint2)
 	{
 		//drag topleft to bottom right
 		if (VPoint1.X < VPoint2.X &&
@@ -44,8 +44,6 @@ struct FMyVRect
 			Min = FVector2D(VPoint1.X, VPoint2.Y);
 			Max = FVector2D(VPoint2.X, VPoint1.Y);
 		}
-
-		//etc...
 	}
 
 	//base constructor

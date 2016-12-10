@@ -166,7 +166,7 @@ float AMyActorBase::GetFloatValue()
 	return fCurve->GetFloatValue(ScoreTimeline->GetPlaybackPosition());
 }
 
-float AMyActorBase::GetVectorValue()
+FVector AMyActorBase::GetVectorValue()
 {
 	return fCurveVector->GetVectorValue(ScoreTimeline->GetPlaybackPosition());
 }

@@ -228,7 +228,7 @@ void EngineApi::SetMassScale(UStaticMeshComponent* StaticMeshComponent, const fl
 	BodyInst->UpdateMassProperties();
 }
 
-ALevelScriptActor* EngineApi::GetLevelScriptActor(class ULevel* OwnerLevel)
+ALevelScriptActor* EngineApi::GetLevelScriptActor(ULevel* OwnerLevel) const
 {
 	return GetWorld()->GetLevelScriptActor(OwnerLevel);
 }
@@ -276,14 +276,14 @@ void EngineApi::Format()
 	FText DayCount = FText::Format(NSLOCTEXT("Solus", "Day", "Day {DayCount}"), Args);
 	FText Health = FText::Format(NSLOCTEXT("Solus", "HP", "HP {HP}"), Args);
 
-	//FFormatOrderedArguments Args;
-	Args.Clear();
-	//Args.Add(SaveDetails.DayCount);    	//int32 
-	//Args.Add(SaveDetails.PlayerHealth); 	//int32
-	Args.Add(1);    	//int32 
-	Args.Add(1); 	//int32
-	DayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
-	Health 	 = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
+	////FFormatOrderedArguments Args;
+	//Args.Clear();
+	////Args.Add(SaveDetails.DayCount);    	//int32 
+	////Args.Add(SaveDetails.PlayerHealth); 	//int32
+	//Args.Add(1);    	//int32 
+	//Args.Add(1); 	//int32
+	//DayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
+	//Health 	 = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
 }
 
 FString EngineApi::GetWorldAssetPackageName(ULevelStreaming* StreamedLevel)
