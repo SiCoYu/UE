@@ -40,14 +40,31 @@ protected:
 	TSubclassOf<APawn> MyPawnClass;
 
 	/* First Pawn Type To Use */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "My Controller")
-	TSubclassOf<AGESGame_ServerPawn> PawnToUseA;
+	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "My Controller")
+	//TSubclassOf<AGESGame_ServerPawn> PawnToUseA;
 
 	/* Second Pawn Type To Use */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "My Controller")
-	TSubclassOf<AGESGame_Pawn> PawnToUseB;
+	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "My Controller")
+	//TSubclassOf<AGESGame_Pawn> PawnToUseB;
 
 	// https://wiki.unrealengine.com/Streamed_Levels,_Test_If_Actor_Is_In_Level_Bounds
 public:
 	bool IsActorWithinTheBoundsOfStreamedInLeve();
+
+
+	// https://wiki.unrealengine.com/Timer_Macros
+protected:
+	FTimerHandle TimerHandle_Taunt;
+	float LastTauntTime;
+
+	UFUNCTION()
+	void TauntTimer();
+
+
+	// https://wiki.unrealengine.com/Trace_Functions
+public:
+	void ExampleUsageOne();
+	void ExampleUsageTwo();
+	void ExampleUsageThree();
+	void ExampleUsageFour();
 };

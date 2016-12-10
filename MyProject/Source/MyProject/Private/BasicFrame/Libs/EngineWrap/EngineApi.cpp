@@ -282,3 +282,8 @@ FString EngineApi::GetWorldAssetPackageName(ULevelStreaming* StreamedLevel)
 {
 	return StreamedLevel->GetWorldAssetPackageName()
 }
+
+float EngineApi::GetTimeSeconds()
+{
+	return GetWorld()->GetTimeSeconds();
+}

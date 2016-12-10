@@ -108,4 +108,74 @@ public:
 		Constraint.TwistLimitStiffness_DEPRECATED = TwistStiff;
 		Constraint.TwistLimitDamping_DEPRECATED = TwistDamp;
 	}
+
+	// https://wiki.unrealengine.com/TAssetPtr_and_Asynchronous_Asset_Loading
+public:
+	/** Define the Asset Pointer. Don't forget to set a UPROPERTY */
+	UPROPERTY(EditAnywhere)
+	TAssetPtr<MyClass> MyAssetPointer;
+
+	/** Define a subclass version. This will only allow you to select subclasses of the defined type. */
+	UPROPERTY(EditAnywhere)
+	TAssetSubclassOf<MyBaseClass> MyAssetSubclassOfPointer;
+
+	void LoadAsset();
+
+	// SimpleAsyncLoad which allows you to load a single asset that is strongly referenced. This means it will never be garbage collected until you unload it manually using Unload. 
+	TAssetPtr<ABaseItem> MyItem;
+	FStreamableManager AssetLoader;
+
+	void StrongReferenceLoadAsset();
+	void StrongReferenceUnloadAsset();
+
+	// RequestAsyncLoad loads an array of objects and fires a delegate when completed. This will Unload all the assets once the delegate is called, to ensure garbage collection takes place. 
+
+	TArray< TAssetPtr<ABaseItem> > MyItems;
+	void StrongReferenceLoadAllAsset();
+	void StrongReferenceUnloadAllAsset();
+
+	// After all this your asset(s) are ready to use.Don't forget to Get() them!
+	// MyItem.Get(); // returns a pointer to the LIVE UObject
+
+	// https://wiki.unrealengine.com/Third_Person_Camera_Zoom_C%2B%2B
+protected:
+	/** Camera boom positioning the camera behind the character */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* CameraBoom;
+
+	/** Follow camera */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class UCameraComponent* FollowCamera;
+
+	void CameraZoomIn();
+	void CameraZoomOut();
+	float CameraZoom_v;
+
+protected:
+	// APawn interface
+	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponentParam) override;
+
+	// https://wiki.unrealengine.com/Timeline_in_c%2B%2B
+public:
+	UPROPERTY()
+	UTimelineComponent* ScoreTimeline;
+
+	UPROPERTY()
+	UCurveFloat* fCurve;
+
+	FOnTimelineFloat InterpFunction{};
+
+	UFUNCTION()
+	void TimelineFloatReturn(float val);
+
+	void BeginPlay() override;
+
+	float GetFloatValue();
+	float GetVectorValue();
+
+	// https://wiki.unrealengine.com/Timer_Macros
+protected:
+	UFUNCTION()
+	void SomeFunction();
+	void SetTimer();
 };

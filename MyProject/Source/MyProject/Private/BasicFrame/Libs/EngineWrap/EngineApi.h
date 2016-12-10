@@ -16,6 +16,27 @@ class UMyProjectEngine;
 class UMyProjectGameInstance;
 class UUserWidget;
 
+
+// https://wiki.unrealengine.com/Time_Macros
+#define TIMENOW            (GetWorld() ? GetWorld()->GetTimeSeconds() : 0.0f)
+#define TIMESINCE(Time)    (GetWorld()->GetTimeSeconds() - Time)
+
+
+// https://wiki.unrealengine.com/Timer_Macros
+#define SETTIMER(param1, param2, param3) \
+{ \
+    FTimerHandle TimerHandle; \
+    GetWorldTimerManager().SetTimer(TimerHandle, this, &param1, param2, param3); \
+}
+
+#define SETTIMERH(handle, param1, param2, param3) (GetWorldTimerManager().SetTimer(handle, this, &param1, param2, param3))
+#define CLEARTIMER(handle) (GetWorldTimerManager().ClearTimer(handle))
+#define ISTIMERACTIVE(handle) (GetWorldTimerManager().IsTimerActive(handle))
+
+#define GETTIMERREMAINING(handle) (GetWorldTimerManager().GetTimerRemaining(handle))
+#define GETTIMERELAPSED(handle) (GetWorldTimerManager().GetTimerElapsed(handle))
+
+
 class EngineApi
 {
 public:
@@ -137,6 +158,9 @@ public:
 
 	// https://wiki.unrealengine.com/Streamed_Levels,_Test_If_Actor_Is_In_Level_Bounds
 	static FString GetWorldAssetPackageName(ULevelStreaming* StreamedLevel);
+
+	// https://wiki.unrealengine.com/Time_Macros
+	float GetTimeSeconds();
 };
 
 #endif				// __ENGINEAPI_H
