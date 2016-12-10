@@ -17,6 +17,9 @@ class UMyProjectGameInstance;
 class UUserWidget;
 
 
+DECLARE_LOG_CATEGORY_EXTERN(YourLog, Log, All);
+
+
 // https://wiki.unrealengine.com/Time_Macros
 #define TIMENOW            (GetWorld() ? GetWorld()->GetTimeSeconds() : 0.0f)
 #define TIMESINCE(Time)    (GetWorld()->GetTimeSeconds() - Time)

@@ -58,24 +58,24 @@ std::string UtilStr::ConvFString2StdStr(FString& fStr)
 
 int32 UtilStr::ConvFString2Int(FString& fStr)
 {
-	int32 MyShinyNewInt = FCString::Atoi(*fStr);
-	return MyShinyNewInt;
+	int32 NewInt = FCString::Atoi(*fStr);
+	return NewInt;
 }
 
 float UtilStr::ConvFString2Float(FString& fStr)
 {
-	float MyShinyNewFloat = FCString::Atof(*fStr);
-	return MyShinyNewFloat;
+	float NewFloat = FCString::Atof(*fStr);
+	return NewFloat;
 }
 
 FString UtilStr::ConvInt2FString(int32& iValue)
 {
 	FString NewString = FString::FromInt(iValue);
-	return MyShinyNewFloat;
+	return NewString;
 }
 
 FString UtilStr::ConvFloat2FString(float& fValue)
 {
-	FString VeryCleanString = FString::SanitizeFloat(fValue);
-	return MyShinyNewFloat;
+	FString NewString = FString::SanitizeFloat(fValue);
+	return NewString;
 }

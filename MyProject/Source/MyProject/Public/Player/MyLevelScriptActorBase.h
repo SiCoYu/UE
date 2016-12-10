@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/LevelScriptActor.h.h"
+#include "Engine/LevelScriptActor.h"
 #include "MyLevelScriptActorBase.generated.h"
 
 /**
@@ -26,7 +26,7 @@ public:
 
 	//OVERRIDES
 protected:
-	virtual void ReceiveBeginPlay() OVERRIDE;
+	virtual void ReceiveBeginPlay() override;
 
 	//ON REMOVE FROM WORLD - USE INSTEAD OF BEGIN DESTROY
 	/** Called when this actor is in a level which is being removed from the world (e.g. my level is getting UWorld::RemoveFromWorld called on it) */
@@ -39,5 +39,5 @@ protected:
 	//TICK
 protected:
 	//Tick
-	virtual void Tick(float DeltaSeconds) OVERRIDE;
+	virtual void Tick(float DeltaSeconds) override;
 };

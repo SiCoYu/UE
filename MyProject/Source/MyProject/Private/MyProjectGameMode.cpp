@@ -1,5 +1,4 @@
 #include "MyProject.h"
-#include "MyProjectGameMode.h"
 #include "MyProjectCharacter.h"
 #include "GameFramework/HUD.h"
 #include "UI/MyHUD.h"
@@ -8,6 +7,10 @@
 #include "UIPack.h"
 #include "MyProjectPlayerController.h"
 #include "UITestCanvas.h"
+#include "GameFramework/PlayerStart.h"
+#include "Actor/MyPlayerStart.h"
+#include "Player/MyProjectCharacter.h"
+#include "MyProjectGameMode.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -61,7 +64,7 @@ void AMyProjectGameMode::TestUI()
 }
 
 // https://wiki.unrealengine.com/Survival_Sample_Game:_Section_4
-void ASGameMode::RestartPlayer(class AController* NewPlayer)
+void AMyProjectGameMode::RestartPlayer(class AController* NewPlayer)
 {
 	// ...
 
@@ -70,7 +73,7 @@ void ASGameMode::RestartPlayer(class AController* NewPlayer)
 	FRotator StartRotation = FRotator::ZeroRotator;
 	for (FConstPawnIterator It = GetWorld()->GetPawnIterator(); It; It++)
 	{
-		ASCharacter* MyCharacter = Cast<ASCharacter>(*It);
+		AMyProjectCharacter* MyCharacter = Cast<AMyProjectCharacter>(*It);
 		if (MyCharacter && MyCharacter->IsAlive())
 		{
 			/* Get the origin of the first player we can find */
@@ -130,7 +133,7 @@ void ASGameMode::RestartPlayer(class AController* NewPlayer)
 	}
 }
 
-AActor* ASGameMode::ChoosePlayerStart(AController* Player)
+AActor* AMyProjectGameMode::ChoosePlayerStart(AController* Player)
 {
 	TArray<APlayerStart*> PreferredSpawns;
 	TArray<APlayerStart*> FallbackSpawns;
@@ -165,13 +168,13 @@ AActor* ASGameMode::ChoosePlayerStart(AController* Player)
 }
 
 /* Check to see if a player and/or AI may spawn at the PlayerStart */
-bool ASGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* Controller)
+bool AMyProjectGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* Controller)
 {
 	if (Controller == nullptr || Controller->PlayerState == nullptr)
 		return true;
 
 	/* Check for extended playerstart class */
-	ASPlayerStart* MyPlayerStart = Cast<ASPlayerStart>(SpawnPoint);
+	AMyPlayerStart* MyPlayerStart = Cast<AMyPlayerStart>(SpawnPoint);
 	if (MyPlayerStart)
 	{
 		return MyPlayerStart->GetIsPlayerOnly() && !Controller->PlayerState->bIsABot;
@@ -181,7 +184,7 @@ bool ASGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* Cont
 	return true;
 }
 
-bool ASGameMode::IsSpawnpointPreferred(APlayerStart* SpawnPoint, AController* Controller)
+bool AMyProjectGameMode::IsSpawnpointPreferred(APlayerStart* SpawnPoint, AController* Controller)
 {
 	if (SpawnPoint)
 	{
@@ -205,7 +208,7 @@ bool ASGameMode::IsSpawnpointPreferred(APlayerStart* SpawnPoint, AController* Co
 		}
 
 		/* Check if spawnpoint is exclusive to players */
-		ASPlayerStart* MyPlayerStart = Cast<ASPlayerStart>(SpawnPoint);
+		AMyPlayerStart* MyPlayerStart = Cast<AMyPlayerStart>(SpawnPoint);
 		if (MyPlayerStart)
 		{
 			return MyPlayerStart->GetIsPlayerOnly() && !Controller->PlayerState->bIsABot;

@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "Persist/MyProjectGameState.h"
 #include "MyPawn.h"
 
 AMyPawn::AMyPawn(const class FObjectInitializer& PCIP)

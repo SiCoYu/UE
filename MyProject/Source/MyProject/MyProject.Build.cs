@@ -117,6 +117,12 @@ public class MyProject : ModuleRules
             }
         );
 
+        PublicIncludePaths.AddRange(
+            new string[] {
+                "MyProject/Public/Persist",
+            }
+        );
+
         // 添加需要包含目录和链接库的 Public 模块
         PublicDependencyModuleNames.AddRange(
             new string[] { 

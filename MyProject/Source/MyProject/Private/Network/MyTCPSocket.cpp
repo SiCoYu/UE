@@ -34,7 +34,7 @@ bool MyTCPSocket::StartTCPReceiver(
 	}
 
 	//Start the Listener! //thread this eventually
-	GetWorldTimerManager().SetTimer(this,
+	EngineApi::GetWorldTimerManager().SetTimer(this,
 		&MyTCPSocket::TCPConnectionListener, 0.01, true);
 
 	return true;
@@ -68,7 +68,7 @@ FSocket* MyTCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocke
 	uint8 IP4Nums[4];
 	if (!FormatIP4ToNumber(TheIP, IP4Nums))
 	{
-		VShow("Invalid IP! Expecting 4 parts separated by .");
+		//VShow("Invalid IP! Expecting 4 parts separated by .");
 		return false;
 	}
 
@@ -122,8 +122,8 @@ void MyTCPSocket::TCPConnectionListener()
 			//UE_LOG "Accepted Connection! WOOOHOOOO!!!";
 
 			//can thread this too
-			GetWorldTimerManager().SetTimer(this,
-				&AYourClass::TCPSocketListener, 0.01, true);
+			EngineApi::GetWorldTimerManager().SetTimer(this,
+				&MyTCPSocket::TCPSocketListener, 0.01, true);
 		}
 	}
 }

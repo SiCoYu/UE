@@ -1,9 +1,12 @@
 #include "MyProject.h"
-#include "EngineApi.h"
 #include "Common.h"
 #include "EngineData.h"
 #include "MyProjectEngine.h"
+#include "Internationalization/Text.h"	// FFormatOrderedArguments
 #include "MyProjectGameInstance.h"
+#include "EngineApi.h"
+
+DEFINE_LOG_CATEGORY(YourLog);
 
 UGameInstance* EngineApi::getGameInstance()
 {
@@ -54,7 +57,7 @@ UWorld* EngineApi::getWorldByEngine()
 
 static UMyProjectGameInstance* getMyProjectGameInstanceByController()
 {
-	return g_pEngineData->getMainPlayerController()->GetGameInstance();
+	return Cast<UMyProjectGameInstance>(g_pEngineData->getMainPlayerController()->GetGameInstance());
 }
 
 ACharacter* EngineApi::getFirstCharacter()
@@ -280,7 +283,7 @@ void EngineApi::Format()
 
 FString EngineApi::GetWorldAssetPackageName(ULevelStreaming* StreamedLevel)
 {
-	return StreamedLevel->GetWorldAssetPackageName()
+	return StreamedLevel->GetWorldAssetPackageName();
 }
 
 float EngineApi::GetTimeSeconds()
