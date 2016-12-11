@@ -24,19 +24,18 @@ bool MyTCPSocket::StartTCPReceiver(
 	const int32 ThePort
 	) 
 {
-	////Rama's CreateTCPConnectionListener
-	//ListenerSocket = CreateTCPConnectionListener(YourChosenSocketName, TheIP, ThePort);
+	//Rama's CreateTCPConnectionListener
+	ListenerSocket = CreateTCPConnectionListener(YourChosenSocketName, TheIP, ThePort);
 
-	////Not created?
-	//if (!ListenerSocket)
-	//{
-	//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("StartTCPReceiver>> Listen socket could not be created! ~> %s %d"), *TheIP, ThePort));
-	//	return false;
-	//}
+	//Not created?
+	if (!ListenerSocket)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("StartTCPReceiver>> Listen socket could not be created! ~> %s %d"), *TheIP, ThePort));
+		return false;
+	}
 
-	////Start the Listener! //thread this eventually
-	//EngineApi::GetWorldTimerManager().SetTimer(*this,
-	//	&MyTCPSocket::TCPConnectionListener, 0.01, true);
+	//Start the Listener! //thread this eventually
+	//EngineApi::GetWorldTimerManager().SetTimer(*this, &MyTCPSocket::TCPConnectionListener, 0.01, true);
 
 	return true;
 }
@@ -93,41 +92,40 @@ FSocket* MyTCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocke
 //Rama's TCP Connection Listener
 void MyTCPSocket::TCPConnectionListener()
 {
-	////~~~~~~~~~~~~~
-	//if (!ListenerSocket) return;
-	////~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~
+	if (!ListenerSocket) return;
+	//~~~~~~~~~~~~~
 
-	////Remote address
-	//TSharedRef<FInternetAddr> RemoteAddress = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
-	//bool Pending;
+	//Remote address
+	TSharedRef<FInternetAddr> RemoteAddress = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
+	bool Pending;
 
-	//// handle incoming connections
-	//if (ListenerSocket->HasPendingConnection(Pending) && Pending)
-	//{
-	//	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//	//Already have a Connection? destroy previous
-	//	if (ConnectionSocket)
-	//	{
-	//		ConnectionSocket->Close();
-	//		ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(ConnectionSocket);
-	//	}
-	//	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// handle incoming connections
+	if (ListenerSocket->HasPendingConnection(Pending) && Pending)
+	{
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//Already have a Connection? destroy previous
+		if (ConnectionSocket)
+		{
+			ConnectionSocket->Close();
+			ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(ConnectionSocket);
+		}
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	//	//New Connection receive!
-	//	ConnectionSocket = ListenerSocket->Accept(*RemoteAddress, TEXT("RamaTCP Received Socket Connection"));
+		//New Connection receive!
+		ConnectionSocket = ListenerSocket->Accept(*RemoteAddress, TEXT("RamaTCP Received Socket Connection"));
 
-	//	if (ConnectionSocket != NULL)
-	//	{
-	//		//Global cache of current Remote Address
-	//		RemoteAddressForConnection = FIPv4Endpoint(RemoteAddress);
+		if (ConnectionSocket != NULL)
+		{
+			//Global cache of current Remote Address
+			RemoteAddressForConnection = FIPv4Endpoint(RemoteAddress);
 
-	//		//UE_LOG "Accepted Connection! WOOOHOOOO!!!";
+			//UE_LOG "Accepted Connection! WOOOHOOOO!!!";
 
-	//		//can thread this too
-	//		EngineApi::GetWorldTimerManager().SetTimer(*this,
-	//			&MyTCPSocket::TCPSocketListener, 0.01, true);
-	//	}
-	//}
+			//can thread this too
+			//EngineApi::GetWorldTimerManager().SetTimer(*this, &MyTCPSocket::TCPSocketListener, 0.01, true);
+		}
+	}
 }
 
 //Rama's String From Binary Array
