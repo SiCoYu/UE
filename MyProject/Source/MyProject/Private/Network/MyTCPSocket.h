@@ -6,14 +6,22 @@
 //#include "Interfaces/IPv4/IPv4Endpoint.h"	// 只包含 IPv4Endpoint.h 会编译不过 // FIPv4Endpoint
 //#include "Sockets.h"
 #include "Containers/UnrealString.h"
+#include "UObject/Object.h"
 
 /**
  * @brief https://wiki.unrealengine.com/TCP_Socket_Listener,_Receive_Binary_Data_From_an_IP/Port_Into_UE4,_(Full_Code_Sample)
  */
 
-class MyTCPSocket : public FTimerHandle
+// FTimerDelegate::CreateUObject 绑定必须继承 UObject
+// error C2243: 'type cast': conversion from 'MyTCPSocket *' to 'const UObjectBase *' exists, but is inaccessible
+//class MyTCPSocket : UObject
+class MyTCPSocket : public UObject
 {
 public:
+	// Engine\Plugins\Online\OnlineFramework\Source\Lobby\Private\LobbyBeaconState.cpp
+	FTimerHandle OneSecTimerHandle;
+	FTimerHandle CancelRPCFailsafe;
+
 	FSocket* ListenerSocket;
 	FSocket* ConnectionSocket;
 	FIPv4Endpoint RemoteAddressForConnection;
