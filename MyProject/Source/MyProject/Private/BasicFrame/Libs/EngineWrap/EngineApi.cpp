@@ -1,9 +1,9 @@
 #include "MyProject.h"
 #include "Common.h"
 #include "EngineData.h"
-#include "MyProjectEngine.h"
+#include "MyEngine.h"
 #include "Internationalization/Text.h"	// FFormatOrderedArguments
-#include "MyProjectGameInstance.h"
+#include "MyGameInstance.h"
 #include "EngineApi.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
@@ -41,23 +41,23 @@ UMyProjectEngine* EngineApi::getEngine()
 	return Cast<UMyProjectEngine>(GEngine);
 }
 
-UMyProjectGameInstance* EngineApi::getMyProjectGameInstanceByEngine()
+UMyGameInstance* EngineApi::getMyProjectGameInstanceByEngine()
 {
 	UMyProjectEngine* pUMyProjectEngine = Cast<UMyProjectEngine>(GEngine);
-	UMyProjectGameInstance* const GI = Cast<UMyProjectGameInstance>(pUMyProjectEngine->GameInstance);
+	UMyGameInstance* const GI = Cast<UMyGameInstance>(pUMyProjectEngine->GameInstance);
 	return GI;
 }
 
 UWorld* EngineApi::getWorldByEngine()
 {
-	UMyProjectGameInstance* pUMyProjectGameInstance = getMyProjectGameInstanceByEngine();
+	UMyGameInstance* pUMyProjectGameInstance = getMyProjectGameInstanceByEngine();
 	UWorld* const World = pUMyProjectGameInstance->GetWorld();
 	return World;
 }
 
-static UMyProjectGameInstance* getMyProjectGameInstanceByController()
+static UMyGameInstance* getMyProjectGameInstanceByController()
 {
-	return Cast<UMyProjectGameInstance>(g_pEngineData->getMainPlayerController()->GetGameInstance());
+	return Cast<UMyGameInstance>(g_pEngineData->getMainPlayerController()->GetGameInstance());
 }
 
 ACharacter* EngineApi::getFirstCharacter()

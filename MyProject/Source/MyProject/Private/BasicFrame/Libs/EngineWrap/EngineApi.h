@@ -12,8 +12,8 @@
 #include "GenericPlatform/GenericPlatformMath.h"	// Max
 
 class UGameInstance;
-class UMyProjectEngine;
-class UMyProjectGameInstance;
+class UMyEngine;
+class UMyGameInstance;
 class UUserWidget;
 
 
@@ -46,9 +46,9 @@ public:
 	static UGameInstance* getGameInstance();
 	static UWorld* GetWorld();
 	static void showCursor();
-	static UMyProjectEngine* getEngine();
-	static UMyProjectGameInstance* getMyProjectGameInstanceByEngine();
-	static UMyProjectGameInstance* getMyProjectGameInstanceByController();
+	static UMyEngine* getEngine();
+	static UMyGameInstance* getMyProjectGameInstanceByEngine();
+	static UMyGameInstance* getMyProjectGameInstanceByController();
 	static UWorld* getWorldByEngine();
 
 	static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己

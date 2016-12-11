@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "EngineApi.h"
-#include "MyProjectFunctionLibrary.h"
+#include "MyFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
 #include "MyProjectPlayerController.h"
@@ -134,7 +134,7 @@ void AMyProjectPlayerController::ExampleUsageOne()
 	FHitResult HitData(ForceInit);
 
 	//If Trace Hits anything
-	if (UMyProjectFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, HitData))
+	if (UMyFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, HitData))
 	{
 		//Print out the name of the traced actor
 		if (HitData.GetActor())
@@ -161,7 +161,7 @@ void AMyProjectPlayerController::ExampleUsageTwo()
 	FHitResult HitData(ForceInit);
 
 	//If Trace Hits anything (ignore the controlled pawn)
-	if (UMyProjectFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, HitData) && HitData.GetActor())
+	if (UMyFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, HitData) && HitData.GetActor())
 	{
 		ClientMessage(HitData.GetActor()->GetName());
 
@@ -193,8 +193,8 @@ void AMyProjectPlayerController::ExampleUsageThree()
 	const FVector End = Start + GetControlRotation().Vector() * 2000;
 
 	//If Trace Hits anything
-	//if (UMyProjectFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, ActorsToIgnore))
-	if (UMyProjectFunctionLibrary::Trace(GetWorld(), ActorsToIgnore, Start, End, HitData))
+	//if (UMyFunctionLibrary::Trace(GetWorld(), GetPawn(), Start, End, ActorsToIgnore))
+	if (UMyFunctionLibrary::Trace(GetWorld(), ActorsToIgnore, Start, End, HitData))
 	{
 		//Print out the name of the traced actor
 		if (HitData.GetActor())
@@ -227,8 +227,8 @@ void AMyProjectPlayerController::ExampleUsageFour()
 	FHitResult HitData(ForceInit);
 
 	//If Trace Hits any part of the Mesh of the Character To Trace
-	//if (UMyProjectFunctionLibrary::Trace(CharacterToTrace->GetMesh(), Start, End, HitData))
-	if (UMyProjectFunctionLibrary::TraceComponent(CharacterToTrace->GetMesh(), Start, End, HitData))
+	//if (UMyFunctionLibrary::Trace(CharacterToTrace->GetMesh(), Start, End, HitData))
+	if (UMyFunctionLibrary::TraceComponent(CharacterToTrace->GetMesh(), Start, End, HitData))
 	{
 		//Print out the location of the impact on the Character's Mesh
 		ClientMessage(HitData.ImpactPoint.ToString());

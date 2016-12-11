@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyProject.h"
-#include "MyProjectGameInstance.generated.h"
+#include "MyGameInstance.generated.h"
 
 class AppFrame;
 
@@ -15,7 +15,7 @@ class AppFrame;
  */
 
 UCLASS(config=Game)
-class UMyProjectGameInstance : public UGameInstance
+class UMyGameInstance : public UGameInstance
 {
 public:
 	GENERATED_UCLASS_BODY()

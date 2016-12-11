@@ -1,16 +1,16 @@
 ﻿#include "MyProject.h"
-#include "MyProjectGameInstance.h"
+#include "MyGameInstance.h"
 
 #include "AppFrame.h"
 //#include "Ctx.h"
 
-UMyProjectGameInstance::UMyProjectGameInstance(const FObjectInitializer& ObjectInitializer)
+UMyGameInstance::UMyGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	m_appFrame = new AppFrame();
 }
 
-void UMyProjectGameInstance::Init()
+void UMyGameInstance::Init()
 {
 	Super::Init();
 	m_appFrame->initApp();

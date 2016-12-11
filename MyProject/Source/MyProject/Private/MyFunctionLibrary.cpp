@@ -1,13 +1,13 @@
 #include "MyProject.h"
-#include "MyProjectFunctionLibrary.h"
+#include "MyFunctionLibrary.h"
 
-UMyProjectFunctionLibrary::UMyProjectFunctionLibrary(const FObjectInitializer& ObjectInitializer)
+UMyFunctionLibrary::UMyFunctionLibrary(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 
 }
 
-UMyDataStorage* UMyProjectFunctionLibrary::GetSolusData(bool& IsValid)
+UMyDataStorage* UMyFunctionLibrary::GetSolusData(bool& IsValid)
 {
 	IsValid = false;
 	UMyDataStorage* DataInstance = Cast<UMyDataStorage>(GEngine->GameSingleton);

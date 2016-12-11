@@ -1,12 +1,12 @@
 #include "MyProject.h"
-#include "MyProjectEngine.h"
+#include "MyEngine.h"
 
-UMyProjectEngine::UMyProjectEngine(const FObjectInitializer& ObjectInitializer)
+UMyEngine::UMyEngine(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }
 
-void UMyProjectEngine::Init(IEngineLoop* InEngineLoop)
+void UMyEngine::Init(IEngineLoop* InEngineLoop)
 {
 	// Note: Lots of important things happen in Super::Init(), including spawning the player pawn in-game and
 	// creating the renderer.

@@ -7,12 +7,12 @@
 #include "UObject/UObjectGlobals.h"		// FObjectInitializer
 #include "GameFramework/PlayerStart.h"
 #include "Containers/Array.h"	// TArray
-#include "MyProjectGameMode.generated.h"
+#include "MyGameMode.generated.h"
 
-// AMyProjectGameMode ±ØÐë¼Ì³Ð AGameModeBase£¬²»ÄÜ¼Ì³Ð AGameMode
+// AMyGameMode ±ØÐë¼Ì³Ð AGameModeBase£¬²»ÄÜ¼Ì³Ð AGameMode
 
 UCLASS(minimalapi)
-class AMyProjectGameMode : public AGameModeBase
+class AMyGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
@@ -21,7 +21,7 @@ protected:
 	TMap<int32, UClass> PawnTypes;
 
 public:
-	AMyProjectGameMode(const FObjectInitializer& ObjectInitializer);
+	AMyGameMode(const FObjectInitializer& ObjectInitializer);
 
 public:
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Every_Player

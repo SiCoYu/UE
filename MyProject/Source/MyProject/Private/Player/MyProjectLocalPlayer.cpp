@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "Player/MyProjectLocalPlayer.h"
-#include "MyProjectGameInstance.h"
+#include "MyGameInstance.h"
 
 UMyProjectLocalPlayer::UMyProjectLocalPlayer(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

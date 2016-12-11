@@ -10,9 +10,9 @@
 #include "GameFramework/PlayerStart.h"
 #include "MyPlayerStart.h"
 #include "MyProjectCharacter.h"
-#include "MyProjectGameMode.h"
+#include "MyGameMode.h"
 
-AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
+AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// set default pawn class to our Blueprinted character
@@ -37,7 +37,7 @@ AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializ
 	PlayerControllerClass = AMyProjectPlayerController::StaticClass();
 }
 
-UClass* AMyProjectGameMode::GetDefaultPawnClassForController(AController* InController)
+UClass* AMyGameMode::GetDefaultPawnClassForController(AController* InController)
 {
 	AMyProjectPlayerController* PlayerController = Cast<AMyProjectPlayerController>(InController);
 
@@ -46,7 +46,7 @@ UClass* AMyProjectGameMode::GetDefaultPawnClassForController(AController* InCont
 	return PawnClass;
 }
 
-void AMyProjectGameMode::StartPlay()
+void AMyGameMode::StartPlay()
 {
 	Super::StartPlay();
 	// 各种初始化
@@ -56,7 +56,7 @@ void AMyProjectGameMode::StartPlay()
 	TestUI();
 }
 
-void AMyProjectGameMode::TestUI()
+void AMyGameMode::TestUI()
 {
 	// Test 加载 UIPack
 	//g_pUIMgr->loadForm<UUIPack>(eUIPack);
@@ -64,7 +64,7 @@ void AMyProjectGameMode::TestUI()
 }
 
 // https://wiki.unrealengine.com/Survival_Sample_Game:_Section_4
-void AMyProjectGameMode::RestartPlayer(class AController* NewPlayer)
+void AMyGameMode::RestartPlayer(class AController* NewPlayer)
 {
 	// ...
 
@@ -136,7 +136,7 @@ void AMyProjectGameMode::RestartPlayer(class AController* NewPlayer)
 	}
 }
 
-AActor* AMyProjectGameMode::ChoosePlayerStart(AController* Player)
+AActor* AMyGameMode::ChoosePlayerStart(AController* Player)
 {
 	TArray<APlayerStart*> PreferredSpawns;
 	TArray<APlayerStart*> FallbackSpawns;
@@ -171,7 +171,7 @@ AActor* AMyProjectGameMode::ChoosePlayerStart(AController* Player)
 }
 
 /* Check to see if a player and/or AI may spawn at the PlayerStart */
-bool AMyProjectGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* Controller)
+bool AMyGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* Controller)
 {
 	if (Controller == nullptr || Controller->PlayerState == nullptr)
 		return true;
@@ -187,7 +187,7 @@ bool AMyProjectGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AControll
 	return true;
 }
 
-bool AMyProjectGameMode::IsSpawnpointPreferred(APlayerStart* SpawnPoint, AController* Controller)
+bool AMyGameMode::IsSpawnpointPreferred(APlayerStart* SpawnPoint, AController* Controller)
 {
 	if (SpawnPoint)
 	{

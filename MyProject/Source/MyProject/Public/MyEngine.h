@@ -1,9 +1,9 @@
 #pragma once
 
-#include "MyProjectEngine.generated.h"
+#include "MyEngine.generated.h"
 
 UCLASS()
-class UMyProjectEngine : public UGameEngine
+class UMyEngine : public UGameEngine
 {
 	GENERATED_UCLASS_BODY()
 
