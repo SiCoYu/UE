@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyProjectViewportClient.h"
+#include "MyViewportClient.h"
 
-UMyProjectViewportClient::UMyProjectViewportClient(const FObjectInitializer& ObjectInitializer)
+UMyViewportClient::UMyViewportClient(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	

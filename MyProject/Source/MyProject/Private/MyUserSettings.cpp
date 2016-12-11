@@ -1,13 +1,13 @@
 #include "MyProject.h"
-#include "MyProjectUserSettings.h"
+#include "MyUserSettings.h"
 
-UMyProjectUserSettings::UMyProjectUserSettings(const FObjectInitializer& ObjectInitializer)
+UMyUserSettings::UMyUserSettings(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	
 }
 
-void UMyProjectUserSettings::SetToDefaults()
+void UMyUserSettings::SetToDefaults()
 {
 	Super::SetToDefaults();
 }
