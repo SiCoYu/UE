@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyLevelScriptActorBase.h"
+#include "MyLevelScriptActor.h"
 
-AMyLevelScriptActorBase::AMyLevelScriptActorBase(const class FObjectInitializer& PCIP) : Super(PCIP)
+AMyLevelScriptActor::AMyLevelScriptActor(const class FObjectInitializer& PCIP) : Super(PCIP)
 {
 	SolusLevelName = NAME_None;
 }
@@ -11,7 +11,7 @@ AMyLevelScriptActorBase::AMyLevelScriptActorBase(const class FObjectInitializer&
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //Actor.h 		ReceiveBeginPlay()
-void AMyLevelScriptActorBase::ReceiveBeginPlay()
+void AMyLevelScriptActor::ReceiveBeginPlay()
 {
 	Super::ReceiveBeginPlay();
 	//~~~~~~~~~~
@@ -25,7 +25,7 @@ void AMyLevelScriptActorBase::ReceiveBeginPlay()
 //		 			Solus Level End Play
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-void AMyLevelScriptActorBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void AMyLevelScriptActor::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
 
@@ -41,12 +41,12 @@ void AMyLevelScriptActorBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	//Super::OnRemoveFromWorld();
 }
 
-void AMyLevelScriptActorBase::SolusLevel__UpdateLevelSaveData()
+void AMyLevelScriptActor::SolusLevel__UpdateLevelSaveData()
 {
 	//Save Level Data
 }
 
-void AMyLevelScriptActorBase::Tick(float DeltaSeconds)
+void AMyLevelScriptActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	//~~~~~~~~~~~~~~

@@ -23,6 +23,6 @@ void AMyPawn::SetupPlayerInputComponent(class UInputComponent* InputComponentPar
 {
 	Super::SetupPlayerInputComponent(InputComponentParam);
 
-	//InputComponentParam->BindAction("ZoomIn", IE_Pressed, this, &AMyActorBase::CameraZoomIn);
-	//InputComponentParam->BindAction("ZoomOut", IE_Pressed, this, &AMyActorBase::CameraZoomOut);
+	//InputComponentParam->BindAction("ZoomIn", IE_Pressed, this, &AMyActor::CameraZoomIn);
+	//InputComponentParam->BindAction("ZoomOut", IE_Pressed, this, &AMyActor::CameraZoomOut);
 }

@@ -2,14 +2,14 @@
 
 #include "Engine/LevelScriptActor.h"
 #include "Engine/EngineTypes.h"
-#include "MyLevelScriptActorBase.generated.h"
+#include "MyLevelScriptActor.generated.h"
 
 /**
  * @brief https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
  */
 
 UCLASS()
-class AMyLevelScriptActorBase : public ALevelScriptActor
+class AMyLevelScriptActor : public ALevelScriptActor
 {
 	GENERATED_UCLASS_BODY()
 

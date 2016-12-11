@@ -1,14 +1,14 @@
 #include "MyProject.h"
-#include "MyDestructibleActorBase.h"
+#include "MyDestructibleActor.h"
 
-AMyDestructibleActorBase::AMyDestructibleActorBase(const class FObjectInitializer& PCIP)
+AMyDestructibleActor::AMyDestructibleActor(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 
 }
 
 //Tick
-void AMyDestructibleActorBase::Tick(float DeltaTime)
+void AMyDestructibleActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	//~~~~~~~~~~~~

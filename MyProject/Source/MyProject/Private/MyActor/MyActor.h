@@ -11,15 +11,15 @@
 #include "Curves/CurveFloat.h"	// CurveFloat
 #include "Curves/CurveVector.h"	// CurveVector
 
-#include "MyActorBase.generated.h"
+#include "MyActor.generated.h"
 
 UCLASS(config = Game)
-class AMyActorBase : public AActor
+class AMyActor : public AActor
 {
 	GENERATED_BODY()
 
 public:
-	AMyActorBase(const FObjectInitializer& PCIP);
+	AMyActor(const FObjectInitializer& PCIP);
 
 	// https://wiki.unrealengine.com/Static_Const,_Make_Const_Versions_of_UE4_Types
 public:

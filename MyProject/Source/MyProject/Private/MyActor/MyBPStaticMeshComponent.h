@@ -1,19 +1,19 @@
 #pragma once
 
 #include "Components/StaticMeshComponent.h"
-#include "MyBPStaticMeshComp.generated.h"
+#include "MyBPStaticMeshComponent.generated.h"
 
 /**
  * @brief https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
  */
 
 UCLASS(ClassGroup = Solus, meta = (BlueprintSpawnableComponent))
-class UMyBPStaticMeshComp : public UStaticMeshComponent
+class UMyBPStaticMeshComponent : public UStaticMeshComponent
 {
 	GENERATED_UCLASS_BODY()
 
 public:
-	//UMyBPStaticMeshComp(class FObjectInitializer const& PCIP);
+	//UMyBPStaticMeshComponent(class FObjectInitializer const& PCIP);
 
 	//SkelMeshComp
 protected:

@@ -1,11 +1,11 @@
 #include "MyProject.h"
 #include "EngineApi.h"
-#include "MyActorBase.h"
+#include "MyActor.h"
 
-const FName        AMyActorBase::HeadSocket = FName("Head");
-const FLinearColor AMyActorBase::Red = FLinearColor(1, 0, 0, 1);
+const FName        AMyActor::HeadSocket = FName("Head");
+const FLinearColor AMyActor::Red = FLinearColor(1, 0, 0, 1);
 
-AMyActorBase::AMyActorBase(const class FObjectInitializer& PCIP)
+AMyActor::AMyActor(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 	CameraZoom_v = 300.0;
@@ -21,7 +21,7 @@ AMyActorBase::AMyActorBase(const class FObjectInitializer& PCIP)
 	InterpFunction.BindUFunction(this, FName{ TEXT("TimelineFloatReturn") });
 }
 
-void AMyActorBase::CreateNewPhysicsConstraintBetween(AStaticMeshActor* RootSMA, AStaticMeshActor* TargetSMA)
+void AMyActor::CreateNewPhysicsConstraintBetween(AStaticMeshActor* RootSMA, AStaticMeshActor* TargetSMA)
 {
 	FConstraintInstance ConstraintInstance;
 
@@ -45,7 +45,7 @@ void AMyActorBase::CreateNewPhysicsConstraintBetween(AStaticMeshActor* RootSMA, 
 	ConstraintComp->SetConstrainedComponents(RootSMA->GetStaticMeshComponent(), NAME_None, TargetSMA->GetStaticMeshComponent(), NAME_None);
 }
 
-void AMyActorBase::LoadAsset()
+void AMyActor::LoadAsset()
 {
 	// Call IsValid() to test if the asset pointer points to a live UObject
 	MyAssetPointer.IsValid();
@@ -64,21 +64,21 @@ void AMyActorBase::LoadAsset()
 	MyAssetPointer.ToStringReference();
 }
 
-void AMyActorBase::StrongReferenceLoadAsset()
+void AMyActor::StrongReferenceLoadAsset()
 {
 	FStringAssetReference AssetToLoad;
 	AssetToLoad = MyItem.ToStringReference();
 	AssetLoader.SimpleAsyncLoad(AssetToLoad);
 }
 
-void AMyActorBase::StrongReferenceUnloadAsset()
+void AMyActor::StrongReferenceUnloadAsset()
 {
 	FStringAssetReference AssetToLoad;
 	AssetToLoad = MyItem.ToStringReference();
 	AssetLoader.Unload(AssetToLoad);
 }
 
-void AMyActorBase::StrongReferenceLoadAllAsset()
+void AMyActor::StrongReferenceLoadAllAsset()
 {
 	TArray<FStringAssetReference> AssetsToLoad;
 	//for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
@@ -86,10 +86,10 @@ void AMyActorBase::StrongReferenceLoadAllAsset()
 	{
 		AssetsToLoad.AddUnique(AssetPtr.ToStringReference());
 	}
-	AssetLoader.RequestAsyncLoad(AssetsToLoad, FStreamableDelegate::CreateUObject(this, &AMyActorBase::MyFunctionToBeCalledAfterAssetsAreLoaded));
+	AssetLoader.RequestAsyncLoad(AssetsToLoad, FStreamableDelegate::CreateUObject(this, &AMyActor::MyFunctionToBeCalledAfterAssetsAreLoaded));
 }
 
-void AMyActorBase::StrongReferenceUnloadAllAsset()
+void AMyActor::StrongReferenceUnloadAllAsset()
 {
 	TArray<FStringAssetReference> AssetsToLoad;
 	//for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
@@ -99,12 +99,12 @@ void AMyActorBase::StrongReferenceUnloadAllAsset()
 	}
 }
 
-void AMyActorBase::MyFunctionToBeCalledAfterAssetsAreLoaded()
+void AMyActor::MyFunctionToBeCalledAfterAssetsAreLoaded()
 {
 
 }
 
-void AMyActorBase::CameraZoomIn()
+void AMyActor::CameraZoomIn()
 {
 	float a = 25.0;
 	CameraZoom_v = CameraZoom_v - 25.0;
@@ -120,7 +120,7 @@ void AMyActorBase::CameraZoomIn()
 	}
 }
 
-void AMyActorBase::CameraZoomOut()
+void AMyActor::CameraZoomOut()
 {
 	float a = 25.0;
 	CameraZoom_v = CameraZoom_v + 25.0;
@@ -136,16 +136,16 @@ void AMyActorBase::CameraZoomOut()
 	}
 }
 
-//void AMyActorBase::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
+//void AMyActor::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
 //{
 //	Super::SetupPlayerInputComponent(InputComponentParam);
 //
-//	InputComponentParam->BindAction("ZoomIn", IE_Pressed, this, &AMyActorBase::CameraZoomIn);
-//	InputComponentParam->BindAction("ZoomOut", IE_Pressed, this, &AMyActorBase::CameraZoomOut);
+//	InputComponentParam->BindAction("ZoomIn", IE_Pressed, this, &AMyActor::CameraZoomIn);
+//	InputComponentParam->BindAction("ZoomOut", IE_Pressed, this, &AMyActor::CameraZoomOut);
 //}
 
 //BeginPlay
-void AMyActorBase::BeginPlay()
+void AMyActor::BeginPlay()
 {
 	//Add the float curve to the timeline and connect it to your timelines's interpolation function
 	ScoreTimeline->AddInterpFloat(fCurve, InterpFunction, FName{ TEXT("Floaty") });
@@ -156,27 +156,27 @@ void AMyActorBase::BeginPlay()
 
 
 //Your Callback Function for the timeline float value
-void AMyActorBase::TimelineFloatReturn(float val)
+void AMyActor::TimelineFloatReturn(float val)
 {
 	//You
 }
 
-float AMyActorBase::GetFloatValue()
+float AMyActor::GetFloatValue()
 {
 	return fCurve->GetFloatValue(ScoreTimeline->GetPlaybackPosition());
 }
 
-FVector AMyActorBase::GetVectorValue()
+FVector AMyActor::GetVectorValue()
 {
 	return fCurveVector->GetVectorValue(ScoreTimeline->GetPlaybackPosition());
 }
 
-void AMyActorBase::SetTimer()
+void AMyActor::SetTimer()
 {
-	SETTIMER(AMyActorBase::SomeFunction, 0.25f, false);
+	SETTIMER(AMyActor::SomeFunction, 0.25f, false);
 }
 
-void AMyActorBase::SomeFunction()
+void AMyActor::SomeFunction()
 {
 
 }

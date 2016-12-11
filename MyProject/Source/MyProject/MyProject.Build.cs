@@ -65,7 +65,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/UnitTest",
 
                 // Anim area
-                "MyProject/Private/Anim",
+                "MyProject/Private/MyAnim",
 
                 // Example
                 "MyProject/Private/BasicFrame/Example/AccessMesh",
@@ -110,19 +110,17 @@ public class MyProject : ModuleRules
 
                 // ÆäËü
                 "MyProject/Private/Persist",
-                "MyProject/Private/Actor",
+                "MyProject/Private/MyActor",
                 "MyProject/Private/Math",
                 "MyProject/Private/Misc",
-                "MyProject/Private/MyComp",
             }
         );
 
         PublicIncludePaths.AddRange(
             new string[] {
-                "MyProject/Public/Anim",
-                "MyProject/Public/Persist",
                 "MyProject/Public/Player",
                 "MyProject/Public/UI",
+                "MyProject/Public/Persist",
             }
         );
 

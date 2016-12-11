@@ -9,10 +9,10 @@
 //For Scene Locking using Epic's awesome helper macros like SCOPED_SCENE_READ_LOCK
 #include "Runtime/Engine/Private/PhysicsEngine/PhysXSupport.h"
 
-#include "MyDestructibleActorBase.generated.h"
+#include "MyDestructibleActor.generated.h"
 
 UCLASS(config = Game)
-class AMyDestructibleActorBase : public ADestructibleActor
+class AMyDestructibleActor : public ADestructibleActor
 {
 	GENERATED_BODY()
 
@@ -20,7 +20,7 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	AMyDestructibleActorBase(const FObjectInitializer& ObjectInitializer);
+	AMyDestructibleActor(const FObjectInitializer& ObjectInitializer);
 
 	// https://wiki.unrealengine.com/PhysX,_Integrating_PhysX_Code_into_Your_Project
 	FORCEINLINE void DrawPoint
