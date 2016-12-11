@@ -1,6 +1,11 @@
 #include "MyProject.h"
 #include "MyBPStaticMeshComp.h"
 
+UMyBPStaticMeshComp::UMyBPStaticMeshComp(class FObjectInitializer const& PCIP)
+{
+
+}
+
 //Init
 void UMyBPStaticMeshComp::InitializeComponent()
 {

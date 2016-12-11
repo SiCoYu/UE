@@ -6,7 +6,7 @@
 #include "MyProjectGameInstance.h"
 #include "EngineApi.h"
 
-DEFINE_LOG_CATEGORY(YourLog);
+DEFINE_LOG_CATEGORY(MyLog);
 
 UGameInstance* EngineApi::getGameInstance()
 {
@@ -239,13 +239,13 @@ void EngineApi::GetDisplayAdapterScreenResolutions(FScreenResolutionArray& Resol
 	{
 		for (const FScreenResolutionRHI& EachResolution : Resolutions)
 		{
-			UE_LOG(YourLog, Warning, TEXT("DefaultAdapter - %4d x %4d @ %d"),
+			UE_LOG(MyLog, Warning, TEXT("DefaultAdapter - %4d x %4d @ %d"),
 				EachResolution.Width, EachResolution.Height, EachResolution.RefreshRate);
 		}
 	}
 	else
 	{
-		UE_LOG(YourLog, Error, TEXT("Screen Resolutions could not be obtained"));
+		UE_LOG(MyLog, Error, TEXT("Screen Resolutions could not be obtained"));
 	}
 }
 

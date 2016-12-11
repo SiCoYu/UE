@@ -17,7 +17,7 @@ class UMyProjectGameInstance;
 class UUserWidget;
 
 
-DECLARE_LOG_CATEGORY_EXTERN(YourLog, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
 
 
 // https://wiki.unrealengine.com/Time_Macros

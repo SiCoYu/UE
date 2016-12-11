@@ -99,6 +99,11 @@ bool AMyProjectPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
 	return ret;
 }
 
+void AMyProjectPlayerController::TauntTimer()
+{
+
+}
+
 void AMyProjectPlayerController::ServerTaunt_Implementation()
 {
 	// Only allow Taunt its been awhile since we last tried to commit Taunt.

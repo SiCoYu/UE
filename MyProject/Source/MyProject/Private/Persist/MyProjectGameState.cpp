@@ -10,3 +10,8 @@ void AMyProjectGameState::GetRankedMap(int32 TeamIndex, RankedPlayerMap& OutRank
 {
 	
 }
+
+void AMyProjectGameState::SetTimeOfDay(float NewTimeOfDay)
+{
+
+}

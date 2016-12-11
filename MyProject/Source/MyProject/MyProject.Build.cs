@@ -114,7 +114,6 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Math",
                 "MyProject/Private/Misc",
                 "MyProject/Private/MyComp",
-                "MyProject/Private/Network",
             }
         );
 

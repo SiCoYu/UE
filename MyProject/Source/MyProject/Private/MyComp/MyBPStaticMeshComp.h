@@ -12,6 +12,9 @@ class UMyBPStaticMeshComp : public UStaticMeshComponent
 {
 	GENERATED_UCLASS_BODY()
 
+public:
+	//UMyBPStaticMeshComp(class FObjectInitializer const& PCIP);
+
 	//SkelMeshComp
 protected:
 	/**
