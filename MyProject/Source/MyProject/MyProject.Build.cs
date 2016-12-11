@@ -113,6 +113,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyActor",
                 "MyProject/Private/Math",
                 "MyProject/Private/Misc",
+                "MyProject/Private/Network",
             }
         );
 
