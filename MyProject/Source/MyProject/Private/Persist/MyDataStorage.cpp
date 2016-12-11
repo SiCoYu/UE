@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "DataStorage.h"
+#include "MyDataStorage.h"
 
-UDataStorage::UDataStorage(const FObjectInitializer& ObjectInitializer)
+UMyDataStorage::UMyDataStorage(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	SolusCoreFilePath = "E:/Solus";

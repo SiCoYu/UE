@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DataStorage.generated.h"
+#include "MyDataStorage.generated.h"
 
 /**
  * @brief https://wiki.unrealengine.com/Global_Data_Access,_Data_Storage_Class_Accessible_From_Any_CPP_or_BP_Class_During_Runtime!
@@ -22,11 +22,11 @@
  */
 
 UCLASS(Blueprintable, BlueprintType)
-class UDataStorage : public UObject
+class UMyDataStorage : public UObject
 {
 	GENERATED_BODY()
 public:
-	UDataStorage(const FObjectInitializer& ObjectInitializer);
+	UMyDataStorage(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Solus Data Singleton")
 	TArray<UClass*> SolusTreeBlueprints;

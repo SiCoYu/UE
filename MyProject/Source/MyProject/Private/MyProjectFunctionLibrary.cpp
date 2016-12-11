@@ -7,10 +7,10 @@ UMyProjectFunctionLibrary::UMyProjectFunctionLibrary(const FObjectInitializer& O
 
 }
 
-UDataStorage* UMyProjectFunctionLibrary::GetSolusData(bool& IsValid)
+UMyDataStorage* UMyProjectFunctionLibrary::GetSolusData(bool& IsValid)
 {
 	IsValid = false;
-	UDataStorage* DataInstance = Cast<UDataStorage>(GEngine->GameSingleton);
+	UMyDataStorage* DataInstance = Cast<UMyDataStorage>(GEngine->GameSingleton);
 
 	if (!DataInstance) return NULL;
 	if (!DataInstance->IsValidLowLevel()) return NULL;
