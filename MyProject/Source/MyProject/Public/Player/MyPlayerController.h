@@ -3,15 +3,15 @@
 #include "MyProject.h"
 #include "PlayerPawnData.h"
 #include "MyPawn.h"
-#include "MyProjectPlayerController.generated.h"
+#include "MyPlayerController.generated.h"
 
 UCLASS(Within=Engine, transient, config=Engine)
-class AMyProjectPlayerController : public APlayerController
+class AMyPlayerController : public APlayerController
 {
 	GENERATED_UCLASS_BODY()
 
 	//public:
-	//	AMyProjectPlayerController(const FObjectInitializer& ObjectInitializer)
+	//	AMyPlayerController(const FObjectInitializer& ObjectInitializer)
 
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Every_Player
 public:

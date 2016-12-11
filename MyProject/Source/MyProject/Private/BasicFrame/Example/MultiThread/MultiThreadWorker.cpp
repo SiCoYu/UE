@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "MultiThreadWorker.h"
-#include "MyProjectPlayerController.h"
+#include "MyPlayerController.h"
 
 //***********************************************************
 //Thread Worker Starts as NULL, prior to being instanced
@@ -8,7 +8,7 @@
 FMultiThreadWorker* FMultiThreadWorker::Runnable = NULL;
 //***********************************************************
 
-FMultiThreadWorker::FMultiThreadWorker(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyProjectPlayerController* IN_PC)
+FMultiThreadWorker::FMultiThreadWorker(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyPlayerController* IN_PC)
 	: ThePC(IN_PC)
 	, TotalPrimesToFind(IN_TotalPrimesToFind)
 	, StopTaskCounter(0)
@@ -85,7 +85,7 @@ void FMultiThreadWorker::Stop()
 	StopTaskCounter.Increment();
 }
 
-FMultiThreadWorker* FMultiThreadWorker::JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyProjectPlayerController* IN_PC)
+FMultiThreadWorker* FMultiThreadWorker::JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyPlayerController* IN_PC)
 {
 	//Create new instance of thread if it does not exist
 	//		and the platform supports multi threading!

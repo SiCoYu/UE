@@ -1,16 +1,16 @@
 #include "MyProject.h"
-#include "Player/MyProjectCharacterMovement.h"
+#include "Player/MyCharacterMovement.h"
 
 //----------------------------------------------------------------------//
 // UPawnMovementComponent
 //----------------------------------------------------------------------//
-UMyProjectCharacterMovement::UMyProjectCharacterMovement(const FObjectInitializer& ObjectInitializer)
+UMyCharacterMovement::UMyCharacterMovement(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }
 
 
-float UMyProjectCharacterMovement::GetMaxSpeed() const
+float UMyCharacterMovement::GetMaxSpeed() const
 {
 	float MaxSpeed = Super::GetMaxSpeed();
 

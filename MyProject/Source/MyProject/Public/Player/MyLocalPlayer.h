@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include "MyProjectPersistentUser.h"
-#include "MyProjectLocalPlayer.generated.h"
+#include "MyPersistentUser.h"
+#include "MyLocalPlayer.generated.h"
 
 UCLASS(config=Engine, transient)
-class UMyProjectLocalPlayer : public ULocalPlayer
+class UMyLocalPlayer : public ULocalPlayer
 {
 	GENERATED_UCLASS_BODY()
 
@@ -16,7 +16,7 @@ public:
 
 	virtual FString GetNickname() const;
 
-	class UMyProjectPersistentUser* GetPersistentUser() const;
+	class UMyPersistentUser* GetPersistentUser() const;
 	
 	/** Initializes the PersistentUser */
 	void LoadPersistentUser();
@@ -24,7 +24,7 @@ public:
 private:
 	/** Persistent user data stored between sessions (i.e. the user's savegame) */
 	UPROPERTY()
-	class UMyProjectPersistentUser* PersistentUser;
+	class UMyPersistentUser* PersistentUser;
 };
 
 

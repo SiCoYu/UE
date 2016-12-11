@@ -1,15 +1,15 @@
 #include "MyProject.h"
-#include "MyProjectCharacter.h"
+#include "MyCharacter.h"
 #include "GameFramework/HUD.h"
 #include "UI/MyHUD.h"
 #include "Common.h"
 #include "UIFormID.h"
 #include "UIPack.h"
-#include "MyProjectPlayerController.h"
+#include "MyPlayerController.h"
 #include "UITestCanvas.h"
 #include "GameFramework/PlayerStart.h"
 #include "MyPlayerStart.h"
-#include "MyProjectCharacter.h"
+#include "MyCharacter.h"
 #include "MyGameMode.h"
 
 AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
@@ -34,12 +34,12 @@ AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 	//}
 
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Players_in_Multiplayer
-	PlayerControllerClass = AMyProjectPlayerController::StaticClass();
+	PlayerControllerClass = AMyPlayerController::StaticClass();
 }
 
 UClass* AMyGameMode::GetDefaultPawnClassForController(AController* InController)
 {
-	AMyProjectPlayerController* PlayerController = Cast<AMyProjectPlayerController>(InController);
+	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(InController);
 
 	UClass* PawnClass = PawnTypes.Find(PlayerController->CurrentPawnData.Type);
 
@@ -73,7 +73,7 @@ void AMyGameMode::RestartPlayer(class AController* NewPlayer)
 	FRotator StartRotation = FRotator::ZeroRotator;
 	for (FConstPawnIterator It = GetWorld()->GetPawnIterator(); It; It++)
 	{
-		AMyProjectCharacter* MyCharacter = Cast<AMyProjectCharacter>(*It);
+		AMyCharacter* MyCharacter = Cast<AMyCharacter>(*It);
 		if (MyCharacter && MyCharacter->IsAlive())
 		{
 			/* Get the origin of the first player we can find */

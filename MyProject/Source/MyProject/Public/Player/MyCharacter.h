@@ -1,9 +1,9 @@
 #pragma once
 #include "GameFramework/Character.h"
-#include "MyProjectCharacter.generated.h"
+#include "MyCharacter.generated.h"
 
 UCLASS(config=Game)
-class AMyProjectCharacter : public ACharacter
+class AMyCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -15,7 +15,7 @@ class AMyProjectCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 public:
-	AMyProjectCharacter(const FObjectInitializer& ObjectInitializer);
+	AMyCharacter(const FObjectInitializer& ObjectInitializer);
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)

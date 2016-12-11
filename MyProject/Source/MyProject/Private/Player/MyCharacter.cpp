@@ -1,12 +1,12 @@
 #include "MyProject.h"
-#include "MyProjectCharacter.h"
+#include "MyCharacter.h"
 #include "Common.h"
 #include "MyAnimInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
-// AMyProjectCharacter
+// AMyCharacter
 
-AMyProjectCharacter::AMyProjectCharacter(const FObjectInitializer& ObjectInitializer)
+AMyCharacter::AMyCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// Set size for collision capsule
@@ -47,31 +47,31 @@ AMyProjectCharacter::AMyProjectCharacter(const FObjectInitializer& ObjectInitial
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void AMyProjectCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
+void AMyCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
 {
 	// Set up gameplay key bindings
 	check(InputComponentParam);
 	InputComponentParam->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponentParam->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	InputComponent->BindAxis("MoveForward", this, &AMyProjectCharacter::MoveForward);
-	InputComponentParam->BindAxis("MoveRight", this, &AMyProjectCharacter::MoveRight);
+	InputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
+	InputComponentParam->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
 	InputComponentParam->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	InputComponentParam->BindAxis("TurnRate", this, &AMyProjectCharacter::TurnAtRate);
+	InputComponentParam->BindAxis("TurnRate", this, &AMyCharacter::TurnAtRate);
 	InputComponentParam->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	InputComponentParam->BindAxis("LookUpRate", this, &AMyProjectCharacter::LookUpAtRate);
+	InputComponentParam->BindAxis("LookUpRate", this, &AMyCharacter::LookUpAtRate);
 
 	// handle touch devices
-	InputComponentParam->BindTouch(IE_Pressed, this, &AMyProjectCharacter::TouchStarted);
-	InputComponentParam->BindTouch(IE_Released, this, &AMyProjectCharacter::TouchStopped);
+	InputComponentParam->BindTouch(IE_Pressed, this, &AMyCharacter::TouchStarted);
+	InputComponentParam->BindTouch(IE_Released, this, &AMyCharacter::TouchStopped);
 }
 
 
-void AMyProjectCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
+void AMyCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {
 	// jump, but only on the first touch
 	if (FingerIndex == ETouchIndex::Touch1)
@@ -80,7 +80,7 @@ void AMyProjectCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Lo
 	}
 }
 
-void AMyProjectCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
+void AMyCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 {
 	if (FingerIndex == ETouchIndex::Touch1)
 	{
@@ -88,19 +88,19 @@ void AMyProjectCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Lo
 	}
 }
 
-void AMyProjectCharacter::TurnAtRate(float Rate)
+void AMyCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
-void AMyProjectCharacter::LookUpAtRate(float Rate)
+void AMyCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
-void AMyProjectCharacter::MoveForward(float Value)
+void AMyCharacter::MoveForward(float Value)
 {
 	if ((Controller != NULL) && (Value != 0.0f))
 	{
@@ -114,7 +114,7 @@ void AMyProjectCharacter::MoveForward(float Value)
 	}
 }
 
-void AMyProjectCharacter::MoveRight(float Value)
+void AMyCharacter::MoveRight(float Value)
 {
 	if ( (Controller != NULL) && (Value != 0.0f) )
 	{
@@ -129,14 +129,14 @@ void AMyProjectCharacter::MoveRight(float Value)
 	}
 }
 
-void AMyProjectCharacter::BeginPlay()
+void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
 	g_pEngineData->setMainActor(this);
 }
 
-void AMyProjectCharacter::Tick(float DeltaTime)
+void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
@@ -148,7 +148,7 @@ void AMyProjectCharacter::Tick(float DeltaTime)
 	}
 }
 
-bool AMyProjectCharacter::IsAlive()
+bool AMyCharacter::IsAlive()
 {
 	return true;
 }

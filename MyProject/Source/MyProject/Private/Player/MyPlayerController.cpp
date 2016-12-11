@@ -3,9 +3,9 @@
 #include "MyFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
-#include "MyProjectPlayerController.h"
+#include "MyPlayerController.h"
 
-AMyProjectPlayerController::AMyProjectPlayerController(const FObjectInitializer& ObjectInitializer)
+AMyPlayerController::AMyPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	/* Initialize The Values */
@@ -16,7 +16,7 @@ AMyProjectPlayerController::AMyProjectPlayerController(const FObjectInitializer&
 	bReplicates = true;
 }
 
-void AMyProjectPlayerController::BeginPlay()
+void AMyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -24,7 +24,7 @@ void AMyProjectPlayerController::BeginPlay()
 }
 
 // Pawn Class
-void AMyProjectPlayerController::DeterminePawnClass_Implementation()
+void AMyPlayerController::DeterminePawnClass_Implementation()
 {
 	if (IsLocalController()) //Only Do This Locally (NOT Client-Only, since Server wants this too!)
 	{
@@ -45,12 +45,12 @@ void AMyProjectPlayerController::DeterminePawnClass_Implementation()
 	}
 }
 
-bool AMyProjectPlayerController::ServerSetPawn_Validate(TSubclassOf<APawn> InPawnClass)
+bool AMyPlayerController::ServerSetPawn_Validate(TSubclassOf<APawn> InPawnClass)
 {
 	return true;
 }
 
-void AMyProjectPlayerController::ServerSetPawn_Implementation(TSubclassOf<APawn> InPawnClass)
+void AMyPlayerController::ServerSetPawn_Implementation(TSubclassOf<APawn> InPawnClass)
 {
 	MyPawnClass = InPawnClass;
 
@@ -59,12 +59,12 @@ void AMyProjectPlayerController::ServerSetPawn_Implementation(TSubclassOf<APawn>
 }
 
 // Replication
-void AMyProjectPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+void AMyPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
-	DOREPLIFETIME(AMyProjectPlayerController, MyPawnClass);
+	DOREPLIFETIME(AMyPlayerController, MyPawnClass);
 }
 
-bool AMyProjectPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
+bool AMyPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
 {
 	bool ret = false;
 	//Get the Currently Streamed Levels
@@ -99,12 +99,12 @@ bool AMyProjectPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
 	return ret;
 }
 
-void AMyProjectPlayerController::TauntTimer()
+void AMyPlayerController::TauntTimer()
 {
 
 }
 
-void AMyProjectPlayerController::ServerTaunt_Implementation()
+void AMyPlayerController::ServerTaunt_Implementation()
 {
 	// Only allow Taunt its been awhile since we last tried to commit Taunt.
 	// TIMEXXX macros from https://wiki.unrealengine.com/Time_Macros
@@ -115,12 +115,12 @@ void AMyProjectPlayerController::ServerTaunt_Implementation()
 		if (!ISTIMERACTIVE(TimerHandle_Taunt))
 		{
 			// Delay the Taunt attempt a random amount to prevent trolling.
-			SETTIMERH(TimerHandle_Taunt, AMyProjectPlayerController::TauntTimer, FMath::FRandRange(1.5f, 3.0f), false);
+			SETTIMERH(TimerHandle_Taunt, AMyPlayerController::TauntTimer, FMath::FRandRange(1.5f, 3.0f), false);
 		}
 	}
 }
 
-void AMyProjectPlayerController::ExampleUsageOne()
+void AMyPlayerController::ExampleUsageOne()
 {
 	//In player controller class
 
@@ -147,7 +147,7 @@ void AMyProjectPlayerController::ExampleUsageOne()
 	}
 }
 
-void AMyProjectPlayerController::ExampleUsageTwo()
+void AMyPlayerController::ExampleUsageTwo()
 {
 	//In player controller class
 
@@ -170,7 +170,7 @@ void AMyProjectPlayerController::ExampleUsageTwo()
 	}
 }
 
-void AMyProjectPlayerController::ExampleUsageThree()
+void AMyPlayerController::ExampleUsageThree()
 {
 	//The trace data is stored here
 	FHitResult HitData(ForceInit);
@@ -207,7 +207,7 @@ void AMyProjectPlayerController::ExampleUsageThree()
 	}
 }
 
-void AMyProjectPlayerController::ExampleUsageFour()
+void AMyPlayerController::ExampleUsageFour()
 {
 	//In player controller class
 
