@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Engine/EngineTypes.h"	// FTimerHandle
-//#include "Networking.h"	// 添加这个报错误
-#include "Sockets.h"
-#include "Common/TcpSocketBuilder.h"
-#include "Interfaces/IPv4/IPv4Endpoint.h"
+#include "Networking.h"	// 网络一次性全包括，防止只包含部分导致编译不过
+//#include "Common/TcpSocketBuilder.h"
+//#include "Interfaces/IPv4/IPv4Endpoint.h"	// 只包含 IPv4Endpoint.h 会编译不过 // FIPv4Endpoint
+//#include "Sockets.h"
 #include "Containers/UnrealString.h"
 
 /**
