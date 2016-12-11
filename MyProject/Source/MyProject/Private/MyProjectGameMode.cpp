@@ -8,8 +8,8 @@
 #include "MyProjectPlayerController.h"
 #include "UITestCanvas.h"
 #include "GameFramework/PlayerStart.h"
-#include "Actor/MyPlayerStart.h"
-#include "Player/MyProjectCharacter.h"
+#include "MyPlayerStart.h"
+#include "MyProjectCharacter.h"
 #include "MyProjectGameMode.h"
 
 AMyProjectGameMode::AMyProjectGameMode(const FObjectInitializer& ObjectInitializer)
