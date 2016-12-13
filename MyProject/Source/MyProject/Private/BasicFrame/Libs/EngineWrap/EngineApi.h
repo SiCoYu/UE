@@ -47,11 +47,12 @@ public:
 	static UWorld* GetWorld();
 	static void showCursor();
 	static UMyEngine* getEngine();
-	static UMyGameInstance* getMyProjectGameInstanceByEngine();
-	static UMyGameInstance* getMyProjectGameInstanceByController();
+	static UMyGameInstance* getMyGameInstanceByEngine();
+	static UMyGameInstance* getMyGameInstanceByController();
 	static UWorld* getWorldByEngine();
 
 	static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
+	static APlayerController* GetPlayerController();
 
 	static void addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName);
 	static float getUTCSec();
@@ -173,6 +174,20 @@ public:
 	// error C2272: 'GetLevel': modifiers not allowed on static member functions
 	//static ULevel* GetLevel(AActor* actor) const;
 	static ULevel* GetLevel(AActor* actor);
+	// https://wiki.unrealengine.com/UMG,_Referencing_UMG_Widgets_in_Code
+	static void ExecuteConsoleCommand(const FString& Command);
+	static void AddToViewport(UUserWidget* userWidget);
+
+	template< class T >
+	T* CreateWidget(UWorld* World, UClass* UserWidgetClass = T::StaticClass());
+
+	template< class T >
+	T* CreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass = T::StaticClass());
+
+	template< class T >
+	T* CreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass = T::StaticClass());
 };
+
+#include "EngineApi.inl"
 
 #endif				// __ENGINEAPI_H

@@ -3,6 +3,7 @@
 #include "MyFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
+#include "Blueprint/UserWidget.h"	// UUserWidget
 #include "MyPlayerController.h"
 
 AMyPlayerController::AMyPlayerController(const FObjectInitializer& ObjectInitializer)
@@ -21,6 +22,24 @@ void AMyPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	DeterminePawnClass();
+
+	// https://wiki.unrealengine.com/UMG,_Referencing_UMG_Widgets_in_Code
+	if (wMainMenu) // Check if the Asset is assigned in the blueprint.
+	{
+		// Create the widget and store it.
+		MyMainMenu = CreateWidget<UUserWidget>(this, wMainMenu);
+
+		// now you can use the widget directly since you have a referance for it.
+		// Extra check to  make sure the pointer holds the widget.
+		if (MyMainMenu)
+		{
+			//let add it to the view port
+			MyMainMenu->AddToViewport();
+		}
+
+		//Show the Cursor.
+		bShowMouseCursor = true;
+	}
 }
 
 // Pawn Class

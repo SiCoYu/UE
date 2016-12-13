@@ -4,6 +4,7 @@
 #include "MyEngine.h"
 #include "Internationalization/Text.h"	// FFormatOrderedArguments
 #include "MyGameInstance.h"
+#include "Blueprint/UserWidget.h"	// UUserWidget
 #include "EngineApi.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
@@ -41,7 +42,7 @@ UMyEngine* EngineApi::getEngine()
 	return Cast<UMyEngine>(GEngine);
 }
 
-UMyGameInstance* EngineApi::getMyProjectGameInstanceByEngine()
+UMyGameInstance* EngineApi::getMyGameInstanceByEngine()
 {
 	UMyEngine* pUMyEngine = Cast<UMyEngine>(GEngine);
 	UMyGameInstance* const GI = Cast<UMyGameInstance>(pUMyEngine->GameInstance);
@@ -50,12 +51,12 @@ UMyGameInstance* EngineApi::getMyProjectGameInstanceByEngine()
 
 UWorld* EngineApi::getWorldByEngine()
 {
-	UMyGameInstance* pUMyProjectGameInstance = getMyProjectGameInstanceByEngine();
+	UMyGameInstance* pUMyProjectGameInstance = getMyGameInstanceByEngine();
 	UWorld* const World = pUMyProjectGameInstance->GetWorld();
 	return World;
 }
 
-static UMyGameInstance* getMyProjectGameInstanceByController()
+UMyGameInstance* EngineApi::getMyGameInstanceByController()
 {
 	return Cast<UMyGameInstance>(g_pEngineData->getMainPlayerController()->GetGameInstance());
 }
@@ -75,6 +76,12 @@ ACharacter* EngineApi::getFirstCharacter()
 	}
 
 	return Character;
+}
+
+APlayerController* EngineApi::GetPlayerController()
+{
+	APlayerController* TargetPC = UGameplayStatics::GetPlayerController(g_pEngineData->getMainActor(), 0);
+	return TargetPC;
 }
 
 float EngineApi::getUTCSec()
@@ -309,4 +316,21 @@ void EngineApi::AddReferencedObjects(UObject* InThis, FReferenceCollector& Colle
 ULevel* EngineApi::GetLevel(AActor* actor)
 { 
 	return Cast<ULevel>(actor->GetOuter());
+}
+
+void EngineApi::ExecuteConsoleCommand(const FString& Command)
+{
+	APlayerController* TargetPC = EngineApi::GetPlayerController();
+	if (TargetPC)
+	{
+		TargetPC->ConsoleCommand(Command, true);
+	}
+}
+
+void EngineApi::AddToViewport(UUserWidget* userWidget)
+{
+	if (nullptr != userWidget)
+	{
+		userWidget->AddToViewport();
+	}
 }
