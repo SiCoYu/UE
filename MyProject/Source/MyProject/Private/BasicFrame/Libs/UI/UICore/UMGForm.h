@@ -10,4 +10,9 @@ class UUMGForm : public UForm
 
 public:
 	UUMGForm(const FObjectInitializer& ObjectInitializer);
+
+	// https://wiki.unrealengine.com/Extend_UserWidget_for_UMG_Widgets
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My New User Widget")
+	FString MyNewWidgetName;
 };
