@@ -6,7 +6,7 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //Custom Slate Element
-#include "SMySlateImage.h"
+#include "MySlateImage.h"
 
 #include "MyUMGImage.generated.h"
 
@@ -100,6 +100,7 @@ public:
 	// End of UVisual interface
 
 #if WITH_EDITOR
+	// warning C4996: 'UWidget::GetEditorIcon': GetEditorIcon is deprecated. Please define widget icons in your style set in the form ClassIcon.MyWidget, and register your style through FClassIconFinder::(Un)RegisterIconSource Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	// UWidget interface
 	virtual const FSlateBrush* GetEditorIcon() override;
 	virtual const FText GetPaletteCategory() override;

@@ -21,7 +21,7 @@ UMyUMGImage::UMyUMGImage(const FObjectInitializer& ObjectInitializer)
 //		-Rama
 TSharedRef<SWidget> UMyUMGImage::RebuildWidget()
 {
-	MyImage = SNew(SSoftEdgeImage);
+	MyImage = SNew(SMySlateImage);
 	return MyImage.ToSharedRef();
 }
 
@@ -93,7 +93,7 @@ void UMyUMGImage::SetOpacity(float InOpacity)
 
 const FSlateBrush* UMyUMGImage::ConvertImage(TAttribute<FSlateBrush> InImageAsset) const
 {
-	UJoySoftEdgeImage* MutableThis = const_cast<UJoySoftEdgeImage*>(this);
+	UMyUMGImage* MutableThis = const_cast<UMyUMGImage*>(this);
 	MutableThis->Brush = InImageAsset.Get();
 
 	return &Brush;

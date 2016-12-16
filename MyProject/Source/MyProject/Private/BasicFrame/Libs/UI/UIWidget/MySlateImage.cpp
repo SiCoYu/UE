@@ -1,5 +1,5 @@
-#include "Abatron.h"
-#include "SMySlateImage.h"
+#include "MyProject.h"
+#include "MySlateImage.h"
 
 DECLARE_CYCLE_STAT(TEXT("OnPaint SMySlateImage"), STAT_SlateOnPaint_SMySlateImage, STATGROUP_Slate);
 
@@ -33,7 +33,9 @@ int32 SMySlateImage::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGe
 		const bool bIsEnabled = ShouldBeEnabled(bParentEnabled);
 		const uint32 DrawEffects = bIsEnabled ? ESlateDrawEffect::None : ESlateDrawEffect::DisabledEffect;
 
-		const FColor FinalColorAndOpacity(InWidgetStyle.GetColorAndOpacityTint() * ColorAndOpacity.Get().GetColor(InWidgetStyle) * ImageBrush->GetTint(InWidgetStyle));
+		// error C2248: 'FColor::FColor': cannot access private member declared in class 'FColor'
+		//const FColor FinalColorAndOpacity(InWidgetStyle.GetColorAndOpacityTint() * ColorAndOpacity.Get().GetColor(InWidgetStyle) * ImageBrush->GetTint(InWidgetStyle));
+		const FLinearColor FinalColorAndOpacity(InWidgetStyle.GetColorAndOpacityTint() * ColorAndOpacity.Get().GetColor(InWidgetStyle) * ImageBrush->GetTint(InWidgetStyle));
 
 		//For Thickness
 		for (int32 v = 0; v < Thickness; v++)
