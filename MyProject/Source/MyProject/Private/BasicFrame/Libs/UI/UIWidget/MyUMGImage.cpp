@@ -7,8 +7,6 @@
 /////////////////////////////////////////////////////
 // UJoySoftEdgeImage
 
-
-
 UMyUMGImage::UMyUMGImage(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 	, ColorAndOpacity(FLinearColor(0, 0, 1, 0.0333))
@@ -173,10 +171,10 @@ FReply UMyUMGImage::HandleMouseButtonDown(const FGeometry& Geometry, const FPoin
 
 #if WITH_EDITOR
 
-const FSlateBrush* UMyUMGImage::GetEditorIcon()
-{
-	return FUMGStyle::Get().GetBrush("Widget.Image");
-}
+//const FSlateBrush* UMyUMGImage::GetEditorIcon()
+//{
+//	return FUMGStyle::Get().GetBrush("Widget.Image");
+//}
 
 const FText UMyUMGImage::GetPaletteCategory()
 {

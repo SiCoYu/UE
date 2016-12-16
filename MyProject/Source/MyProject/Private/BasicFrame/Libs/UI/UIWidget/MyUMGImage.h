@@ -102,8 +102,12 @@ public:
 #if WITH_EDITOR
 	// warning C4996: 'UWidget::GetEditorIcon': GetEditorIcon is deprecated. Please define widget icons in your style set in the form ClassIcon.MyWidget, and register your style through FClassIconFinder::(Un)RegisterIconSource Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	// UWidget interface
-	virtual const FSlateBrush* GetEditorIcon() override;
+	//virtual const FSlateBrush* GetEditorIcon() override;
 	virtual const FText GetPaletteCategory() override;
+	// 最新的使用这个接口
+	/** Find the small icon to use for the supplied class */
+	//DEPRECATED(4.13, "Please use FSlateIconFinder::FindIconForClass directly (followed by FSlateIcon::GetIcon().")
+	//static const FSlateBrush* FindIconForClass(const UClass* InClass, const FName& InDefaultName = FName())
 	// End UWidget interface
 #endif
 
