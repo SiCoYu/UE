@@ -1,5 +1,5 @@
-#ifndef __CTX_H
-#define __CTX_H
+#ifndef __Ctx_H
+#define __Ctx_H
 
 #include "Singleton.h"
 #include "PlatformDefine.h"

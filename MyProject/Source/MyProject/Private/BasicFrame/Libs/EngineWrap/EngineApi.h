@@ -1,5 +1,5 @@
-#ifndef __ENGINEAPI_H
-#define __ENGINEAPI_H
+#ifndef __EngineApi_H
+#define __EngineApi_H
 
 // #include "Platform.h"
 #include "Core.h"		// "Platform.h" 已经包含在 "Core.h" 中了

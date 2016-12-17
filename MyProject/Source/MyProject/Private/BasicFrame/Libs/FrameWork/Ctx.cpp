@@ -20,7 +20,7 @@
 #endif
 
 // Æ«ÌØ»¯
-template<> Ctx* Ctx::Singleton<Ctx>::m_sSingleton = 0;
+template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
 
 Ctx::Ctx()
 {

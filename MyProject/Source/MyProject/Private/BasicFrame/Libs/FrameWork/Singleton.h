@@ -1,21 +1,22 @@
-﻿#ifndef __SINGLETON_H
-#define __SINGLETON_H
+﻿#ifndef __Singleton_H
+#define __Singleton_H
 
 template<class T>
 class Singleton
 {
 private:
-	static T* m_sSingleton;
+	static T* msSingleton;
 
 public:
 	static T* getSingletonPtr()
 	{
-		if (m_sSingleton == NULL)
+		if (msSingleton == NULL)
 		{
-			m_sSingleton = new T();
+			msSingleton = new T();
 		}
-		return m_sSingleton;
+
+		return msSingleton;
 	}
 };
 
-#endif				// __SINGLETON_H
+#endif				// __Singleton_H

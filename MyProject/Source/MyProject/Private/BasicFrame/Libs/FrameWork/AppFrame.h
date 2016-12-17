@@ -1,5 +1,5 @@
-#ifndef __APPFRAME_H
-#define __APPFRAME_H
+#ifndef __AppFrame_H
+#define __AppFrame_H
 
 class AppFrame
 {
@@ -7,4 +7,4 @@ public:
 	void initApp();
 };
 
-#endif				// __APPFRAME_H
+#endif				// __AppFrame_H

@@ -1,7 +1,9 @@
-#ifndef __ENGINEDATA_H
-#define __ENGINEDATA_H
+#ifndef __EngineData_H
+#define __EngineData_H
 
-#include "MyProject.h"
+class AActor;
+class APlayerController;
+class UMyEngine;
 
 class EngineData
 {
@@ -9,6 +11,7 @@ protected:
 	//UObject* m_mainActor;
 	AActor* m_mainActor;
 	APlayerController* mMainPlayerController;
+	UMyEngine* mMyEngine;
 
 public:
 	//UObject* getMainActor();
@@ -18,6 +21,9 @@ public:
 
 	APlayerController* getMainPlayerController();
 	void setMainPlayerController(APlayerController* playerController);
+
+	UMyEngine* getMyEngine();
+	void setMyEngine(UMyEngine* myEngine);
 };
 
 #endif				// __ENGINEDATA_H
