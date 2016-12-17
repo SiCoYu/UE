@@ -1,9 +1,8 @@
-// File Tree Viewer by Rama
-
 #pragma once
 
 //DD File Tree Item
 #include "DDFileTreeItem.h"
+#include "MyEngine.h"
 
 /**
 * @url https://wiki.unrealengine.com/Slate,_Tree_View_Widget,_Ex:_In-Editor_File_Structure_Explorer
@@ -13,7 +12,7 @@ DECLARE_LOG_CATEGORY_EXTERN(MFileTree_LogCategory, Log, All);
 
 //~~~ Forward Declarations ~~~
 //class UDDEdEngine;
-class UMyEngine;
+//class UMyEngine;
 
 typedef STreeView< FDDFileTreeItemPtr > SDDFileTreeView;
 
