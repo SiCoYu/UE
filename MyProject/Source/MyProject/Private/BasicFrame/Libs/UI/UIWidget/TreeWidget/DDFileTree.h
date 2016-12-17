@@ -12,6 +12,8 @@ DECLARE_LOG_CATEGORY_EXTERN(MFileTree_LogCategory, Log, All);
 
 //~~~ Forward Declarations ~~~
 //class UDDEdEngine;
+// error C2338: TWeakObjectPtr can only be constructed with UObject types
+// 必须包含类型 UMyEngine 的定义，不能仅仅是声明
 //class UMyEngine;
 
 typedef STreeView< FDDFileTreeItemPtr > SDDFileTreeView;
