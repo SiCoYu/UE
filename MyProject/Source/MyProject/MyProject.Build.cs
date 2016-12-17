@@ -31,6 +31,9 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/NetWork/Web",
 
                 "MyProject/Private/BasicFrame/Libs/UI/UICore",
+                "MyProject/Private/BasicFrame/Libs/UI/UIWidget",
+                "MyProject/Private/BasicFrame/Libs/UI/UIWidget/TreeWidget",
+
                 "MyProject/Private/BasicFrame/Libs/Log",
                 "MyProject/Private/BasicFrame/Libs/Table",
                 "MyProject/Private/BasicFrame/Libs/Table/ItemObject",
@@ -60,6 +63,10 @@ public class MyProject : ModuleRules
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",
                 "MyProject/Private/BasicFrame/UI/UITestCanvas",
+                "MyProject/Private/BasicFrame/UI/UICustomButton",
+                "MyProject/Private/BasicFrame/UI/UILoadStyles",
+                "MyProject/Private/BasicFrame/UI/UIChat",
+                "MyProject/Private/BasicFrame/UI/UILog",
 
                 // Test ÇøÓò
                 "MyProject/Private/BasicFrame/UnitTest",

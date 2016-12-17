@@ -23,7 +23,6 @@ typedef STreeView< FDDFileTreeItemPtr > SDDFileTreeView;
 class SDDFileTree : public SCompoundWidget
 {
 public:
-
 	SLATE_BEGIN_ARGS(SDDFileTree)
 	{}
 

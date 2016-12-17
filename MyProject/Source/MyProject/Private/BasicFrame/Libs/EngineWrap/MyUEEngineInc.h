@@ -21,5 +21,6 @@
 #include "Templates/SharedPointer.h"
 #include "SocketSubsystem.h"
 #include "Internationalization/Text.h"	// FText
+#include "Widgets/SCompoundWidget.h"	// SCompoundWidget
 
 #endif
