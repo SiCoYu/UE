@@ -5,6 +5,7 @@
 #include "Internationalization/Text.h"	// FFormatOrderedArguments
 #include "MyGameInstance.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
+#include "GenericPlatform/GenericPlatformMisc.h"	//	ClipboardCopy
 #include "EngineApi.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
@@ -333,4 +334,14 @@ void EngineApi::AddToViewport(UUserWidget* userWidget)
 	{
 		userWidget->AddToViewport();
 	}
+}
+
+void EngineApi::ClipboardCopy(const TCHAR* Str)
+{
+	FPlatformMisc::ClipboardCopy(Str);
+}
+
+void EngineApi::ClipboardPaste(class FString& Dest);
+{
+	FPlatformMisc::ClipboardPaste(Dest);
 }

@@ -1,10 +1,12 @@
 #pragma once
 
-#include "Persist/MyPlayerState.h"
+//#include "MyPlayerState.h"
 #include "MyGameState.generated.h"
 
+class AMyPlayerState;
+
 /** ranked PlayerState map, created from the GameState */
-typedef TMap<int32, TWeakObjectPtr<AMyProjectPlayerState> > RankedPlayerMap;
+typedef TMap<int32, TWeakObjectPtr<class AMyPlayerState> > RankedPlayerMap;
 
 UCLASS()
 class AMyGameState : public AGameState

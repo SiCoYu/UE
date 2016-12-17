@@ -1,5 +1,10 @@
 #pragma once
 
+#include "HAL/Platform.h"	// int32
+//#include "GenericPlatform/GenericPlatform.h"	// int32
+#include "Internationalization/Text.h"	// FText
+#include "Input/Events.h"	// FKeyEvent
+
 /**
  * @url https://wiki.unrealengine.com/Slate,_Simple_C%2B%2B_Chat_System
  */

@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "AMyHUD.h"
 #include "MyPlayerState.h"
 
 AMyPlayerState::AMyPlayerState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)

@@ -186,6 +186,13 @@ public:
 
 	template< class T >
 	T* CreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass = T::StaticClass());
+
+	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Programs\CrashReporter\CrashReportClient\Private\CrashReportClient.cpp
+	// /** Copies text to the operating system clipboard. */
+	static void ClipboardCopy(const TCHAR* Str);
+
+	/** Pastes in text from the operating system clipboard. */
+	static void ClipboardPaste(class FString& Dest);
 };
 
 #include "EngineApi.inl"

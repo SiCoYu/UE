@@ -4,47 +4,49 @@
 //Slate
 //#include "Slate.h"
 #include "SlateBasics.h"
+#include "Widgets/Input/SEditableText.h"	// SEditableText
+#include "Widgets/Text/STextBlock.h"		// STextBlock
+#include "Widgets/SCompoundWidget.h"
 
 /**
  * @URL https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
  */
 
 //~~~ Forward Declarations ~~~
-class AYourHUD;
-
-
+class AMyHUD;
 
 class SMyEditText : public SCompoundWidget
 {
 	//Slate Init
 public:
-	SLATE_BEGIN_ARGS(SVictoryEditText) : _JoyHUD() //, _bKeepVisible(false)
+	SLATE_BEGIN_ARGS(SMyEditText) : _JoyHUD() //, _bKeepVisible(false)
 	{}
 
-	SLATE_ARGUMENT(TWeakObjectPtr<AYourHUD>, JoyHUD)
+	SLATE_ARGUMENT(TWeakObjectPtr<class AMyHUD>, JoyHUD)
 
-		SLATE_END_ARGS()
+	SLATE_END_ARGS()
 
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		//~~~~~~~~
-		//  HUD
-		//~~~~~~~~
+	//~~~~~~~~
+	//  HUD
+	//~~~~~~~~
+
 public:
 	//HUD that owns this
-	TWeakObjectPtr<class AYourHUD> JoyHUD;
+	TWeakObjectPtr<class AMyHUD> JoyHUD;
 
 	//~~~~~~~~
 	//Components
 	//~~~~~~~~
 public:
 	//The edit text widget. 
-	TSharedPtr< SEditableText > ChatInput;
+	TSharedPtr<class SEditableText> ChatInput;
 
 	//How the Edit Text is actually displayed
-	TSharedPtr< STextBlock > ChatDisplay;
+	TSharedPtr<class STextBlock> ChatDisplay;
 
 	//~~~~~~~~~~~~~~~~~
 	//  Chat Visibility
@@ -61,14 +63,17 @@ public:
 	{
 		if (ChatInput.IsValid())
 		{
-			ChatInput->CopySelectedTextToClipboard();
+			// TODO:
+			//ChatInput->CopySelectedTextToClipboard();
+			FText text = ChatInput->GetSelectedText();
 		}
 	}
 	FORCEINLINE void PasteFromClipboard()
 	{
 		if (ChatInput.IsValid())
 		{
-			ChatInput->PasteTextFromClipboard();
+			// TODO:
+			//ChatInput->PasteTextFromClipboard();
 		}
 	}
 
@@ -98,14 +103,17 @@ public:
 	//~~~~~~~~~~~~~~~~~
 	//SWidget.h
 public:
-	//~~~ Keyboard Focused ~~~ 
-	virtual FReply OnKeyboardFocusReceived(const FGeometry& MyGeometry, const FKeyboardFocusEvent& InKeyboardFocusEvent) OVERRIDE;
+	//~~~ Keyboard Focused ~~~
+	// error C3646: 'EMIT_DEPRECATED_WARNING_MESSAGE': unknown override specifier
+	//virtual FReply OnKeyboardFocusReceived(const FGeometry& MyGeometry, const FKeyboardFocusEvent& InKeyboardFocusEvent) OVERRIDE;
+	virtual FReply OnKeyboardFocusReceived(const FGeometry& MyGeometry, const FKeyboardFocusEvent& InKeyboardFocusEvent) override;
 
 	//~~~ Key Down  ~~~  		
-	virtual FReply OnKeyDown(const FGeometry& MyGeometry, const FKeyboardEvent& InKeyboardEvent) OVERRIDE;
+	//virtual FReply OnKeyDown(const FGeometry& MyGeometry, const FKeyboardEvent& InKeyboardEvent) override;
+	virtual FReply OnKeyDown(const FGeometry& MyGeometry, const FKeyEvent& InKeyboardEvent) override;
 
 	//~~~ Mouse Down  ~~~
-	virtual FReply OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) OVERRIDE;
+	virtual FReply OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
 
 
 

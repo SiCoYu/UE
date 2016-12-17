@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "Persist/MyProjectGameState.h"
+#include "MyGameState.h"
 #include "MyTimeOfDayActor.h"
 
 AMyTimeOfDayActor::AMyTimeOfDayActor(const class FObjectInitializer& PCIP)
@@ -12,7 +12,7 @@ void AMyTimeOfDayActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	AMyProjectGameState* MyGameState = Cast<AMyProjectGameState>(GetWorld()->GetGameState());
+	AMyGameState* MyGameState = Cast<AMyGameState>(GetWorld()->GetGameState());
 	if (MyGameState)
 	{
 		///* Update the position of the sun. */

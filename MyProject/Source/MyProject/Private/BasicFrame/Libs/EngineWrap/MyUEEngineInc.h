@@ -23,4 +23,9 @@
 #include "Internationalization/Text.h"	// FText
 #include "Widgets/SCompoundWidget.h"	// SCompoundWidget
 
+#include "HAL/Platform.h"	// int32
+#include "GenericPlatform/GenericPlatform.h"	// int32
+#include "Templates/Casts.h"	// Cast
+#include "Input/Events.h"	// FKeyEvent
+
 #endif
