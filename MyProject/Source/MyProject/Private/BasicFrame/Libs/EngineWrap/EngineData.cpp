@@ -3,12 +3,12 @@
 
 void EngineData::setMainActor(AActor* actor)
 {
-	m_mainActor = actor;
+	mMainActor = actor;
 }
 
 AActor* EngineData::getMainActor()
 {
-	return m_mainActor;
+	return mMainActor;
 }
 
 APlayerController* EngineData::getMainPlayerController()

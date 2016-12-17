@@ -8,14 +8,11 @@ class UMyEngine;
 class EngineData
 {
 protected:
-	//UObject* m_mainActor;
-	AActor* m_mainActor;
+	AActor* mMainActor;
 	APlayerController* mMainPlayerController;
 	UMyEngine* mMyEngine;
 
 public:
-	//UObject* getMainActor();
-	//void setMainActor(UObject* actor);
 	AActor* getMainActor();
 	void setMainActor(AActor* actor);
 

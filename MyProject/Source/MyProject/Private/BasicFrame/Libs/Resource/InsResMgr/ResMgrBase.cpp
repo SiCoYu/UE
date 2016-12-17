@@ -70,7 +70,7 @@ void ResMgrBase::unloadNoRef(std::string path)
 {
 	m_path2ResDic[path]->unload();
 	// 卸载加载的原始资源
-	g_pResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
+	GResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
 	UtilMap::Remove(m_path2ResDic, path);
 	//UtilApi.UnloadUnusedAssets();           // 异步卸载共用资源
 }
@@ -89,19 +89,19 @@ void ResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 			if (m_path2ResDic[path]->getIsOrigResNeedImmeUnload())
 			{
 				// 卸载资源
-				g_pResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
+				GResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
 			}
 		}
 		else
 		{
 			m_path2ResDic[path]->failed(res);
-			g_pResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
+			GResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
 		}
 	}
 	else
 	{
-		g_pLogSys->log(UtilStr::Format("路径不能查找到 {0}", path));
-		g_pResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
+		GLogSys->log(UtilStr::Format("路径不能查找到 {0}", path));
+		GResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
 	}
 }
 

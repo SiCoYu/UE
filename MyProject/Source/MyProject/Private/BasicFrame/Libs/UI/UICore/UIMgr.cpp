@@ -129,7 +129,7 @@ void UIMgr::exitFormInternal(UIFormID ID)
 		//string path = m_UIAttrs.getPath(ID);
 		//if (path != null)
 		//{
-		//    Ctx.m_instance.m_resLoadMgr.unload(path);
+		//    Ctx.m_instance.mResLoadMgr.unload(path);
 		//}
 		EngineApi::UnloadUnusedAssets();       // 异步卸载共用资源
 		UtilMap::Remove(m_id2FormDic, ID);
@@ -256,13 +256,13 @@ void UIMgr::loadWidgetRes(UIFormID ID)
 void UIMgr::loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle)
 {
 	// TODO:
-	LoadParam* param = g_pPoolSys->newObject<LoadParam>();
+	LoadParam* param = GPoolSys->newObject<LoadParam>();
 	LocalFileSys::modifyLoadParam(reaPath, param);
 	param->m_loadNeedCoroutine = false;
 	param->m_resNeedCoroutine = false;
 	param->m_loadEventHandle = onLoadEventHandle;
-	g_pUIAssetMgr->load<UIAssetRes>(param);
-	g_pPoolSys->deleteObj(param);
+	GUiAssetMgr->load<UIAssetRes>(param);
+	GPoolSys->deleteObj(param);
 }
 
 // 代码资源加载处理
@@ -292,7 +292,7 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 	{
 		UIFormID ID = m_UIAttrs->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormID
 		UtilMap::Remove(m_ID2WidgetLoadingItemDic, ID);
-		g_pLogSys->log("UIFormID =  ， Failed Prefab");
+		GLogSys->log("UIFormID =  ， Failed Prefab");
 	}
 }
 
@@ -353,7 +353,7 @@ void UIMgr::onWidgetloadedByRes(UIAssetRes* res)
 	//}
 
 	// 卸载资源
-	g_pUIAssetMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
+	GUiAssetMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 }
 
 // 大小发生变化后，调用此函数

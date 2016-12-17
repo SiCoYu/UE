@@ -51,7 +51,7 @@ TableItemBase* TableSys::getItem(TableID::TableID tableID, uint32 itemID)
 
     if (nullptr == ret)
     {
-		g_pLogSys->log(UtilStr::Format("table name: {0}, table Item {1} 加载失败", (int)tableID, itemID));
+		GLogSys->log(UtilStr::Format("table name: {0}, table Item {1} 加载失败", (int)tableID, itemID));
     }
 
 	return ret;

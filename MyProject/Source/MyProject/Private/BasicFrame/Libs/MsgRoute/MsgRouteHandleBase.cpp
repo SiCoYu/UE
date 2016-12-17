@@ -14,6 +14,6 @@ void MsgRouteHandleBase::handleMsg(MsgRouteBase* msg)
 	}
 	else
 	{
-		//g_pLogSys->log(UtilStr::Format(Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem1), (int)msg.m_msgID));
+		//GLogSys->log(UtilStr::Format(Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem1), (int)msg.m_msgID));
 	}
 }

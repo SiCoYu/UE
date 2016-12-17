@@ -122,7 +122,7 @@ void UENetClient::Send()
 		}
 	}
 
-	g_pLogSys->log(UtilStr::Format("开始发送字节数 {0} ", m_clientBuffer->getSendBuffer()->getBytesAvailable()));
+	GLogSys->log(UtilStr::Format("开始发送字节数 {0} ", m_clientBuffer->getSendBuffer()->getBytesAvailable()));
 
 	bool ret = true;
 	int bytesSent = 0;
@@ -132,16 +132,16 @@ void UENetClient::Send()
 	{
 		m_msgSendEndEvent->Set();        // 发生异常，通知等待线程，所有数据都发送完成，防止等待线程不能解锁
 		// 输出日志
-		g_pLogSys->error("发送失败");
+		GLogSys->error("发送失败");
 		//Disconnect(0);
 	}
 	else
 	{
-		g_pLogSys->log(UtilStr::Format("结束发送字节数 {0} ", bytesSent));
+		GLogSys->log(UtilStr::Format("结束发送字节数 {0} ", bytesSent));
 
 		if (m_clientBuffer->getSendBuffer()->getLength() < m_clientBuffer->getSendBuffer()->getPos() + bytesSent)
 		{
-			g_pLogSys->log(UtilStr::Format("结束发送字节数错误 {0}", bytesSent));
+			GLogSys->log(UtilStr::Format("结束发送字节数错误 {0}", bytesSent));
 			m_clientBuffer->getSendBuffer()->setPos(m_clientBuffer->getSendBuffer()->getLength());
 		}
 		else
@@ -169,13 +169,13 @@ void UENetClient::Receive()
 
 		if (!ret)
 		{
-			g_pLogSys->error("接收数据出错");
+			GLogSys->error("接收数据出错");
 		}
 		else
 		{
 			if (bytesRead > 0)
 			{
-				g_pLogSys->log(UtilStr::Format("接收到数据 {0}", bytesRead));
+				GLogSys->log(UtilStr::Format("接收到数据 {0}", bytesRead));
 				m_clientBuffer->getDynBuff()->setSize(bytesRead);	// 设置读取大小
 				m_clientBuffer->moveDyn2Raw();             // 将接收到的数据放到原始数据队列
 				m_clientBuffer->moveRaw2Msg();             // 将完整的消息移动到消息缓冲区

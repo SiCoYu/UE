@@ -14,5 +14,5 @@ void UMyEngine::Init(IEngineLoop* InEngineLoop)
 	// creating the renderer.
 	Super::Init(InEngineLoop);
 
-	g_pEngineData->setMyEngine(this);
+	GEngineData->setMyEngine(this);
 }

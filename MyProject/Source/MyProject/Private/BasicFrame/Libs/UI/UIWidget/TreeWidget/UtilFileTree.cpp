@@ -13,6 +13,6 @@ void UtilFileTree::createFileTree()
 	if (!DDFileTree.IsValid())
 	{
 		//DDFileTree = SAssignNew(DDFileTree, SDDFileTree, Cast<UDDEdEngine>(this));
-		SAssignNew(DDFileTree, SDDFileTree, g_pEngineData->getMyEngine());
+		SAssignNew(DDFileTree, SDDFileTree, GEngineData->getMyEngine());
 	}
 }

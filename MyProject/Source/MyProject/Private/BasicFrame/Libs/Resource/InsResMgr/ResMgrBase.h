@@ -47,13 +47,13 @@ public:
 	T* getAndAsyncLoad(std::string path, EventDispatchDelegate handle)
 	{
 		T* ret = nullptr;
-		LoadParam* param = g_pPoolSys->newObject<LoadParam>();
+		LoadParam* param = GPoolSys->newObject<LoadParam>();
 		LocalFileSys.modifyLoadParam(path, param);
 		param.m_loadNeedCoroutine = true;
 		param.m_resNeedCoroutine = true;
 		param.m_loadEventHandle = handle;
 		ret = getAndLoad<T>(param);
-		g_pPoolSys->deleteObj(param);
+		GPoolSys->deleteObj(param);
 
 		return ret;
 	}
@@ -70,13 +70,13 @@ public:
 	void syncLoad(std::string path)
 	{
 		LoadParam param;
-		param = g_pPoolSys->newObject<LoadParam>();
+		param = GPoolSys->newObject<LoadParam>();
 		param->m_path = path;
 		// param.m_loadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.m_loadEventHandle = onLoadEventHandle ，内部会自动调用
 		param->m_loadNeedCoroutine = false;
 		param->m_resNeedCoroutine = false;
 		load<T>(param);
-		g_pPoolSys->deleteObj(param);
+		GPoolSys->deleteObj(param);
 	}
 
 	template<class T>
@@ -100,7 +100,7 @@ protected:
 		m_path2ResDic[param->m_path] = resItem;
 		m_path2ResDic[param->m_path]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
 		param->m_loadEventHandle = EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle);
-		g_pResLoadMgr->loadResources(param);
+		GResLoadMgr->loadResources(param);
 	}
 
 	template<class T>

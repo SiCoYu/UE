@@ -6,29 +6,29 @@
 // 发送消息， bnet 如果 true 就直接发送到 socket ，否则直接进入输出消息队列
 void UtilMsg::sendMsg(stNullUserCmd& msg, bool bnet)
 {
-	g_pShareData->m_tmpBA = g_pNetMgr->getSendBA();
-	if (g_pShareData->m_tmpBA != nullptr)
+	GShareData->m_tmpBA = GNetMgr->getSendBA();
+	if (GShareData->m_tmpBA != nullptr)
     {
-		msg.serialize(g_pShareData->m_tmpBA);
+		msg.serialize(GShareData->m_tmpBA);
     }
     else
     {
-		g_pLogSys->log("socket buffer null");
+		GLogSys->log("socket buffer null");
     }
     if (bnet)
     {
         // 打印日志
-		g_pShareData->m_tmpStr = UtilStr::Format("发送消息: byCmd = {0}, byParam = {1}", msg.byCmd, msg.byParam);
-		g_pLogSys->log(g_pShareData->m_tmpStr);
+		GShareData->m_tmpStr = UtilStr::Format("发送消息: byCmd = {0}, byParam = {1}", msg.byCmd, msg.byParam);
+		GLogSys->log(GShareData->m_tmpStr);
     }
-	g_pNetMgr->send(bnet);
+	GNetMgr->send(bnet);
 }
 
 void UtilMsg::checkStr(std::string str)
 {
 	if (UtilStr::IsNullOrEmpty(str))
     {
-		g_pLogSys->log("str is null");
+		GLogSys->log("str is null");
     }
 }
 
@@ -52,5 +52,5 @@ void UtilMsg::formatBytes2Array(char* bytes, uint32 len)
 
     str += " }";
 
-	g_pLogSys->log(str);
+	GLogSys->log(str);
 }

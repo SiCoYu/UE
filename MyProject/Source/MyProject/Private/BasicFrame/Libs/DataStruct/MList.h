@@ -99,7 +99,7 @@ public:
 		}
 		else
 		{
-			g_pLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, Count()));
+			GLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, Count()));
 		}
 	}
 

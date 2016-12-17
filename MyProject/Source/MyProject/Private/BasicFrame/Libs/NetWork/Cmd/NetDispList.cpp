@@ -54,24 +54,24 @@ void NetDispList::addOneRevMsg()
 {
     ++m_revMsgCnt;
 
-	g_pLogSys->log(UtilStr::Format("接收到消息数量 {0}", m_revMsgCnt));
+	GLogSys->log(UtilStr::Format("接收到消息数量 {0}", m_revMsgCnt));
 }
 
 void NetDispList::addOneHandleMsg()
 {
     ++m_handleMsgCnt;
 
-	g_pLogSys->log(UtilStr::Format("处理消息数量 {0}", m_handleMsgCnt));
+	GLogSys->log(UtilStr::Format("处理消息数量 {0}", m_handleMsgCnt));
 }
 
 void NetDispList::clearOneRevMsg()
 {
     m_revMsgCnt = 0;
-	g_pLogSys->log("清理接收消息数量");
+	GLogSys->log("清理接收消息数量");
 }
 
 void NetDispList::clearOneHandleMsg()
 {
     m_handleMsgCnt = 0;
-	g_pLogSys->log("清理处理消息数量");
+	GLogSys->log("清理处理消息数量");
 }

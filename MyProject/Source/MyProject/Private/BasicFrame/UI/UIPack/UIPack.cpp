@@ -38,7 +38,7 @@ void UUIPack::OnConfirmGeneric()
 	//pBinaryLoadItem->loadFile(Filename);
 	//delete pBinaryLoadItem;
 
-	g_pTableSys->getItem(TableID::TABLE_OBJECT, 100);
+	GTableSys->getItem(TableID::TABLE_OBJECT, 100);
 
 	//UPackage* Pkg = CreatePackage(NULL, NULL);
 	//EObjectFlags Flags = RF_Public | RF_Standalone;

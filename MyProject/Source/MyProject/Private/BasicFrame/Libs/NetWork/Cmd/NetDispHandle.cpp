@@ -16,12 +16,12 @@ void NetDispHandle::handleMsg(ByteBuffer* msg)
 
 	if (UtilMap::ContainsKey(m_id2DispDic, byCmd))
     {
-		g_pLogSys->log(UtilStr::Format("处理消息: byCmd = {0},  byParam = {1}", byCmd, byParam));
+		GLogSys->log(UtilStr::Format("处理消息: byCmd = {0},  byParam = {1}", byCmd, byParam));
         m_id2DispDic[byCmd]->handleMsg(msg, byCmd, byParam);
     }
     else
     {
-		g_pLogSys->log(UtilStr::Format("消息没有处理: byCmd = {0},  byParam = {1}", byCmd, byParam));
+		GLogSys->log(UtilStr::Format("消息没有处理: byCmd = {0},  byParam = {1}", byCmd, byParam));
     }
 
     //if(m_luaCSBridgeNetDispHandle != null)

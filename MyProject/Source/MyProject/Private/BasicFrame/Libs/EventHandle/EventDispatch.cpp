@@ -42,7 +42,7 @@ void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 	}
 	else
 	{
-		g_pLogSys->log("Event Handle is null");
+		GLogSys->log("Event Handle is null");
 	}
 }
 
@@ -75,7 +75,7 @@ void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 	}
 	else
 	{
-		g_pLogSys->log("Event Handle not exist");
+		GLogSys->log("Event Handle not exist");
 	}
 }
 
@@ -89,7 +89,7 @@ void EventDispatch::delObject(IDelayHandleItem* delayObject)
 	{
 		if (!m_handleList.Remove((EventDispatchFunctionObject*)delayObject))
 		{
-			g_pLogSys->log("Event Handle not exist");
+			GLogSys->log("Event Handle not exist");
 		}
 	}
 }

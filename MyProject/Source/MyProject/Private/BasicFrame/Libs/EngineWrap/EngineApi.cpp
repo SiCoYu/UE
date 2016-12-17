@@ -11,12 +11,12 @@ DEFINE_LOG_CATEGORY(MyLog);
 
 UGameInstance* EngineApi::getGameInstance()
 {
-	return UGameplayStatics::GetGameInstance(g_pEngineData->getMainActor());
+	return UGameplayStatics::GetGameInstance(GEngineData->getMainActor());
 }
 
 UWorld* EngineApi::GetWorld()
 {
-	UWorld* World = GEngine->GetWorldFromContextObject(g_pEngineData->getMainActor());
+	UWorld* World = GEngine->GetWorldFromContextObject(GEngineData->getMainActor());
 	return World;
 }
 
@@ -58,7 +58,7 @@ UWorld* EngineApi::getWorldByEngine()
 
 UMyGameInstance* EngineApi::getMyGameInstanceByController()
 {
-	return Cast<UMyGameInstance>(g_pEngineData->getMainPlayerController()->GetGameInstance());
+	return Cast<UMyGameInstance>(GEngineData->getMainPlayerController()->GetGameInstance());
 }
 
 ACharacter* EngineApi::getFirstCharacter()
@@ -80,7 +80,7 @@ ACharacter* EngineApi::getFirstCharacter()
 
 APlayerController* EngineApi::GetPlayerController()
 {
-	APlayerController* TargetPC = UGameplayStatics::GetPlayerController(g_pEngineData->getMainActor(), 0);
+	APlayerController* TargetPC = UGameplayStatics::GetPlayerController(GEngineData->getMainActor(), 0);
 	return TargetPC;
 }
 
@@ -182,7 +182,7 @@ float EngineApi::GetInputAxisValue(AActor* pAActor, const FName InputAxisName)
 
 float EngineApi::GetInputAxisValue(const FName InputAxisName)
 {
-	return g_pEngineData->getMainActor()->GetInputAxisValue(InputAxisName);
+	return GEngineData->getMainActor()->GetInputAxisValue(InputAxisName);
 }
 
 FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
@@ -267,7 +267,7 @@ bool EngineApi::IsTextValid(FText MyText)
 
 void EngineApi::ClientMessage(FString str)
 {
-	g_pEngineData->getMainPlayerController()->ClientMessage(str);
+	GEngineData->getMainPlayerController()->ClientMessage(str);
 }
 
 void EngineApi::Format()

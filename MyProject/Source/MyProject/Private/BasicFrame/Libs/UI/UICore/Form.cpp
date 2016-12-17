@@ -107,17 +107,17 @@ void UForm::init()
 
 void UForm::show()
 {
-	g_pUIMgr->showForm(m_id);
+	GUiMgr->showForm(m_id);
 }
 
 //private void UForm::hide()
 //{
-//    g_pUIMgr->hideForm(m_id);
+//    GUiMgr->hideForm(m_id);
 //}
 
 void UForm::exit()
 {
-	g_pUIMgr->exitForm(m_id);
+	GUiMgr->exitForm(m_id);
 }
 
 // 界面代码创建后就调用
@@ -130,7 +130,7 @@ void UForm::onInit()
 	//if (m_bLoadWidgetRes)
 	//{
 	// 默认会继续加载资源
-	g_pUIMgr->loadWidgetRes(this->getID());
+	GUiMgr->loadWidgetRes(this->getID());
 	//}
 }
 
@@ -159,7 +159,7 @@ void UForm::onShow()
 
 	if (m_bBlurBg)
 	{
-		//g_pUIMgr->showForm(eUIBlurBg);        // 显示模糊背景界面
+		//GUiMgr->showForm(eUIBlurBg);        // 显示模糊背景界面
 	}
 	//adjustPosWithAlign();
 }
@@ -174,7 +174,7 @@ void UForm::onHide()
 
 	//if (m_bBlurBg)
 	//{
-	//	g_pUIMgr->exitForm(UIFormID.eUIBlurBg);
+	//	GUiMgr->exitForm(UIFormID.eUIBlurBg);
 	//}
 }
 
@@ -188,7 +188,7 @@ void UForm::onExit()
 
 	//if (m_bBlurBg)
 	//{
-	//	g_pUIMgr->exitForm(UIFormID.eUIBlurBg);
+	//	GUiMgr->exitForm(UIFormID.eUIBlurBg);
 	//}
 }
 

@@ -32,18 +32,18 @@ class ResLoadMgr;
 class Ctx : public Singleton<Ctx>
 {
 protected:
-	UIMgr* m_uiMgr;
-	EngineData* m_engineData;
-	INetMgr* m_pINetMgr;
-	TableSys* m_pTableSys;
-	LogSys* m_pLogSys;
-	ShareData* m_pShareData;
-	NetDispList* m_pNetDispList;
-	Config* m_pConfig;
-	LocalFileSys* m_pLocalFileSys;
-	PoolSys* m_poolSys;
-	UIAssetMgr* m_uiAssetMgr;
-	ResLoadMgr* m_resLoadMgr;
+	UIMgr* mUiMgr;
+	EngineData* mEngineData;
+	INetMgr* mNetMgr;
+	TableSys* mTableSys;
+	LogSys* mLogSys;
+	ShareData* mShareData;
+	NetDispList* mNetDispList;
+	Config* mConfig;
+	LocalFileSys* mLocalFileSys;
+	PoolSys* mPoolSys;
+	UIAssetMgr* mUiAssetMgr;
+	ResLoadMgr* mResLoadMgr;
 
 	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;
@@ -61,22 +61,22 @@ public:
 	~Ctx();
 
 	void init();
-	void setUIMgr(UIMgr* uiMgr);
-	UIMgr* getUIMgrPtr();
+	void setUiMgr(UIMgr* uiMgr);
+	UIMgr* getUIMgr();
 
-	EngineData* getEngineDataPtr();
-	void setNetMgrPtr(INetMgr* pINetMgr);
-	INetMgr* getNetMgrPtr();
-	TableSys* getTableSysPtr();
-	LogSys* getLogSysPtr();
-	ShareData* getShareDataPtr();
-	NetDispList* getNetDispListPtr();
-	Config* getConfigPtr();
-	LocalFileSys* getLocalFileSysPtr();
-	PoolSys* getPoolSysPtr();
-	UIAssetMgr* getUIAssetMgrPtr();
-	ResLoadMgr* getResLoadMgrPtr();
-	FSandboxPlatformFile* getSandboxPlatformFilePtr();
+	EngineData* getEngineData();
+	void setNetMgr(INetMgr* pINetMgr);
+	INetMgr* getNetMgr();
+	TableSys* getTableSys();
+	LogSys* getLogSys();
+	ShareData* getShareData();
+	NetDispList* getNetDispList();
+	Config* getConfig();
+	LocalFileSys* getLocalFileSys();
+	PoolSys* getPoolSys();
+	UIAssetMgr* getUiAssetMgr();
+	ResLoadMgr* getResLoadMgr();
+	FSandboxPlatformFile* getSandboxPlatformFile();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -88,19 +88,19 @@ public:
 #endif
 };
 
-#define g_pCtx Ctx::getSingletonPtr()
-#define g_pTableSys g_pCtx->getTableSysPtr()
-#define g_pNetMgr g_pCtx->getNetMgrPtr()
-#define g_pUIMgr g_pCtx->getUIMgrPtr()
-#define g_pLogSys g_pCtx->getLogSysPtr()
-#define g_pEngineData g_pCtx->getEngineDataPtr()
-#define g_pShareData g_pCtx->getShareDataPtr()
-#define g_pNetDispList g_pCtx->getNetDispListPtr()
-#define g_pCfg g_pCtx->getConfigPtr()
-#define g_pLocalFileSys g_pCtx->getLocalFileSysPtr()
-#define g_pPoolSys g_pCtx->getPoolSysPtr()
-#define g_pUIAssetMgr g_pCtx->getUIAssetMgrPtr()
-#define g_pResLoadMgr g_pCtx->getResLoadMgrPtr()
-#define GSandboxPlatformFile g_pCtx->getSandboxPlatformFilePtr()
+#define GCtx Ctx::getSingletonPtr()
+#define GTableSys GCtx->getTableSys()
+#define GNetMgr GCtx->getNetMgr()
+#define GUiMgr GCtx->getUIMgr()
+#define GLogSys GCtx->getLogSys()
+#define GEngineData GCtx->getEngineData()
+#define GShareData GCtx->getShareData()
+#define GNetDispList GCtx->getNetDispList()
+#define GCfg GCtx->getConfig()
+#define GLocalFileSys GCtx->getLocalFileSys()
+#define GPoolSys GCtx->getPoolSys()
+#define GUiAssetMgr GCtx->getUiAssetMgr()
+#define GResLoadMgr GCtx->getResLoadMgr()
+#define GSandboxPlatformFile GCtx->getSandboxPlatformFile()
 
 #endif				// __CTX_H

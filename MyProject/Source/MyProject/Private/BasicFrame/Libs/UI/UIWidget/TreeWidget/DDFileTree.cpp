@@ -109,11 +109,11 @@ TSharedRef<ITableRow> SDDFileTree::DDFileTree_OnGenerateRow(FDDFileTreeItemPtr I
 {
 	if (!Item.IsValid())
 	{
-		return SNew(STableRow< FDDFileTreeItemPtr >, OwnerTable)
-			[
-				SNew(STextBlock)
-				.Text(FString("THIS WAS NULL SOMEHOW"))
-			];
+		//return SNew(STableRow< FDDFileTreeItemPtr >, OwnerTable)
+		//	[
+		//		SNew(STextBlock)
+		//		.Text(FString("THIS WAS NULL SOMEHOW"))
+		//	];
 	}
 	return SNew(STableRow< FDDFileTreeItemPtr >, OwnerTable)
 		[

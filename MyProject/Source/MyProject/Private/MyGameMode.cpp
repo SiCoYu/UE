@@ -59,8 +59,8 @@ void AMyGameMode::StartPlay()
 void AMyGameMode::TestUI()
 {
 	// Test ╪сть UIPack
-	//g_pUIMgr->loadForm<UUIPack>(eUIPack);
-	g_pUIMgr->loadForm<UUITestCanvas>(eUITestCanvas);
+	//GUiMgr->loadForm<UUIPack>(eUIPack);
+	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 }
 
 // https://wiki.unrealengine.com/Survival_Sample_Game:_Section_4

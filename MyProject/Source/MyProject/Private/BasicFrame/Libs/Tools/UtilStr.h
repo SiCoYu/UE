@@ -2,8 +2,9 @@
 #define __UtilStr_H_
 
 #include "CString.h"
-#include "UnrealString.h"
+#include "UnrealString.h"	// FString
 #include "NameTypes.h"
+#include "Internationalization/Text.h"	// FText
 #include <string>
 
 class UtilStr
@@ -34,6 +35,8 @@ public:
 	static float ConvFString2Float(FString& fStr);
 	static FString ConvInt2FString(int32& iValue);
 	static FString ConvFloat2FString(float& fValue);
+	static FText ConvFString2FText(FString& fStr);
+	static FString& ConvFText2FString(FText& fText);
 };
 
 #endif

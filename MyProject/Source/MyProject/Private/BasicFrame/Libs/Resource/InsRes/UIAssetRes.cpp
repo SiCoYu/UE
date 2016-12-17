@@ -21,14 +21,14 @@ UObject* UIAssetRes::InstantiateObject(std::string resName)
 
 	if (nullptr == m_go)
 	{
-		g_pLogSys->log("prefab 为 null");
+		GLogSys->log("prefab 为 null");
 	}
 	else
 	{
 		// m_retGO = GameObject.Instantiate(m_go) as GameObject;
 		if (nullptr == m_retGO)
 		{
-			g_pLogSys->log("不能实例化数据");
+			GLogSys->log("不能实例化数据");
 		}
 	}
 	return m_retGO;

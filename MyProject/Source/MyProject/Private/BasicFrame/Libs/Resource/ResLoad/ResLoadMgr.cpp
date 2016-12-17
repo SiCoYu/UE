@@ -65,15 +65,15 @@ void ResLoadMgr::loadData(LoadParam* param)
 
 	if (eStreamingAssets == param->m_resLoadType)
 	{
-		param->m_path = UtilPath::Combine(g_pLocalFileSys->getLocalReadDir(), param->m_path);
+		param->m_path = UtilPath::Combine(GLocalFileSys->getLocalReadDir(), param->m_path);
 	}
 	else if (ePersistentData == param->m_resLoadType)
 	{
-		param->m_path = UtilPath::Combine(g_pLocalFileSys->getLocalWriteDir(), param->m_path);
+		param->m_path = UtilPath::Combine(GLocalFileSys->getLocalWriteDir(), param->m_path);
 	}
 	else if (eLoadWeb == param->m_resLoadType)
 	{
-		param->m_path = UtilPath::Combine(g_pCfg->m_webIP, param->m_path);
+		param->m_path = UtilPath::Combine(GCfg->m_webIP, param->m_path);
 	}
 	//if (!string.IsNullOrEmpty(param.m_version))
 	//{
@@ -86,7 +86,7 @@ void ResLoadMgr::loadData(LoadParam* param)
 void ResLoadMgr::loadBundle(LoadParam* param)
 {
 	param->m_resPackType = eBundleType;
-	param->m_resLoadType = g_pCfg->m_resLoadType;
+	param->m_resLoadType = GCfg->m_resLoadType;
 
 	load(param);
 }
@@ -106,7 +106,7 @@ void ResLoadMgr::loadLevel(LoadParam* param)
 	load(param);
 #else
 	param->m_resPackType = eLevelType;
-	param->m_resLoadType = g_pCfg->m_resLoadType;
+	param->m_resLoadType = GCfg->m_resLoadType;
 	load(param);
 #endif
 }
@@ -412,7 +412,7 @@ void ResLoadMgr::unloadNoRef(std::string path)
 	}
 	else
 	{
-		g_pLogSys->log(UtilStr::Format("路径不能查找到 {0}", path));
+		GLogSys->log(UtilStr::Format("路径不能查找到 {0}", path));
 	}
 }
 

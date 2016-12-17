@@ -79,3 +79,13 @@ FString UtilStr::ConvFloat2FString(float& fValue)
 	FString NewString = FString::SanitizeFloat(fValue);
 	return NewString;
 }
+
+FText UtilStr::ConvFString2FText(FString& fStr)
+{
+	return FTextFormat::FromString(fStr).GetSourceText();
+}
+
+FString& UtilStr::ConvFText2FString(FText& fText);
+{
+	return FTextFormat(fText).GetSourceString();
+}

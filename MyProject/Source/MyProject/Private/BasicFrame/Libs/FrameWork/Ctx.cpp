@@ -29,10 +29,10 @@ Ctx::Ctx()
 
 Ctx::~Ctx()
 {
-	delete m_uiMgr;
-	delete m_engineData;
-	delete m_pINetMgr;
-	delete m_pTableSys;
+	delete mUiMgr;
+	delete mEngineData;
+	delete mNetMgr;
+	delete mTableSys;
 
 #ifdef USE_EXTERN_THREAD
 	delete m_pStdoutLog;
@@ -42,33 +42,33 @@ Ctx::~Ctx()
 	delete m_test;
 #endif
 
-	delete m_pLogSys;
-	delete m_pNetDispList;
-	delete m_pShareData;
-	delete m_pConfig;
-	delete m_pLocalFileSys;
+	delete mLogSys;
+	delete mNetDispList;
+	delete mShareData;
+	delete mConfig;
+	delete mLocalFileSys;
 
 	delete mSandboxPlatformFile;
 }
 
 void Ctx::init()
 {
-	m_pShareData = new ShareData();
-	m_pNetDispList = new NetDispList();
-	m_pLogSys = new LogSys();
-	m_engineData = new EngineData();
+	mShareData = new ShareData();
+	mNetDispList = new NetDispList();
+	mLogSys = new LogSys();
+	mEngineData = new EngineData();
 #ifdef USE_EXTERN_THREAD
 	m_pStdoutLog = new StdoutLog();
 #endif
 
-	m_uiMgr = new UIMgr();
-	m_pTableSys = new TableSys();
-	m_pConfig = new Config();
-	m_pLocalFileSys = new LocalFileSys();
+	mUiMgr = new UIMgr();
+	mTableSys = new TableSys();
+	mConfig = new Config();
+	mLocalFileSys = new LocalFileSys();
 #ifdef	USE_EXTERN_THREAD
-	m_pINetMgr = new NetMgr(getStdLog());
+	mNetMgr = new NetMgr(getStdLog());
 #else
-	m_pINetMgr = new NetMgr();
+	mNetMgr = new NetMgr();
 #endif
 
 	// 初始化 SandBox 文件系统
@@ -88,24 +88,29 @@ void Ctx::init()
 	testApi();
 }
 
-UIMgr* Ctx::getUIMgrPtr()
+void Ctx::setUiMgr(UIMgr* uiMgr)
 {
-	return m_uiMgr;
+	mUiMgr = uiMgr;
 }
 
-EngineData* Ctx::getEngineDataPtr()
+UIMgr* Ctx::getUIMgr()
 {
-	return m_engineData;
+	return mUiMgr;
 }
 
-void Ctx::setNetMgrPtr(INetMgr* pINetMgr)
+EngineData* Ctx::getEngineData()
 {
-	m_pINetMgr = pINetMgr;
+	return mEngineData;
 }
 
-INetMgr* Ctx::getNetMgrPtr()
+void Ctx::setNetMgr(INetMgr* pINetMgr)
 {
-	return m_pINetMgr;
+	mNetMgr = pINetMgr;
+}
+
+INetMgr* Ctx::getNetMgr()
+{
+	return mNetMgr;
 }
 
 #ifdef USE_EXTERN_THREAD
@@ -115,52 +120,52 @@ StdoutLog* Ctx::getStdLog()
 }
 #endif
 
-TableSys* Ctx::getTableSysPtr()
+TableSys* Ctx::getTableSys()
 {
-	return m_pTableSys;
+	return mTableSys;
 }
 
-LogSys* Ctx::getLogSysPtr()
+LogSys* Ctx::getLogSys()
 {
-	return m_pLogSys;
+	return mLogSys;
 }
 
-ShareData* Ctx::getShareDataPtr()
+ShareData* Ctx::getShareData()
 {
-	return m_pShareData;
+	return mShareData;
 }
 
-NetDispList* Ctx::getNetDispListPtr()
+NetDispList* Ctx::getNetDispList()
 {
-	return m_pNetDispList;
+	return mNetDispList;
 }
 
-Config* Ctx::getConfigPtr()
+Config* Ctx::getConfig()
 {
-	return m_pConfig;
+	return mConfig;
 }
 
-LocalFileSys* Ctx::getLocalFileSysPtr()
+LocalFileSys* Ctx::getLocalFileSys()
 {
-	return m_pLocalFileSys;
+	return mLocalFileSys;
 }
 
-PoolSys* Ctx::getPoolSysPtr()
+PoolSys* Ctx::getPoolSys()
 {
-	return m_poolSys;
+	return mPoolSys;
 }
 
-UIAssetMgr* Ctx::getUIAssetMgrPtr()
+UIAssetMgr* Ctx::getUiAssetMgr()
 {
-	return m_uiAssetMgr;
+	return mUiAssetMgr;
 }
 
-ResLoadMgr* Ctx::getResLoadMgrPtr()
+ResLoadMgr* Ctx::getResLoadMgr()
 {
-	return m_resLoadMgr;
+	return mResLoadMgr;
 }
 
-FSandboxPlatformFile* Ctx::getSandboxPlatformFilePtr()
+FSandboxPlatformFile* Ctx::getSandboxPlatformFile()
 {
 	return this->mSandboxPlatformFile;
 }

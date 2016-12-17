@@ -31,7 +31,7 @@ void EventDispatchGroup::removeEventHandle(int groupID, EventDispatchDelegate ha
 	}
 	else
 	{
-		g_pLogSys->log("Event Dispatch Group not exist");
+		GLogSys->log("Event Dispatch Group not exist");
 	}
 }
 
@@ -44,7 +44,7 @@ void EventDispatchGroup::dispatchEvent(int groupID, IDispatchObject* dispatchObj
 	}
 	else
 	{
-		g_pLogSys->log("Event Dispatch Group not exist");
+		GLogSys->log("Event Dispatch Group not exist");
 	}
 	m_bInLoop = false;
 }
@@ -63,7 +63,7 @@ void EventDispatchGroup::clearAllEventHandle()
 	}
 	else
 	{
-		g_pLogSys->log("looping cannot delete element");
+		GLogSys->log("looping cannot delete element");
 	}
 }
 
@@ -78,11 +78,11 @@ void EventDispatchGroup::clearGroupEventHandle(int groupID)
 		}
 		else
 		{
-			g_pLogSys->log("Event Dispatch Group not exist");
+			GLogSys->log("Event Dispatch Group not exist");
 		}
 	}
 	else
 	{
-		g_pLogSys->log("looping cannot delete element");
+		GLogSys->log("looping cannot delete element");
 	}
 }

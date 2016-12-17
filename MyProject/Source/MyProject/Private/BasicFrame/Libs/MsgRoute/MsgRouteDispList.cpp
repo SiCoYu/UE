@@ -26,5 +26,5 @@ void MsgRouteDispList::handleMsg(MsgRouteBase* msg)
 		item->handleMsg(msg);
 	}
 
-	//Ctx.m_instance.m_poolSys.deleteObj(msg);
+	//Ctx.m_instance.mPoolSys.deleteObj(msg);
 }
