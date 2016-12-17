@@ -3,11 +3,12 @@
 #include "Engine/Canvas.h"
 #include "GameFramework/HUD.h"
 // https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
-#include "SMyEditText.h"
+//#include "SMyEditText.h"
 #include "MyHUD.generated.h"
 
 class SMyDialog;
 class MyUILoadStyleWidget;
+class SMyEditText;
 
 UCLASS()
 class AMyHUD : public AHUD
@@ -68,25 +69,30 @@ public:
 protected:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Reference to SCompoundWidget
-	TSharedPtr<class MyUILoadStyleWidget> MyUIWidget;
+	TSharedPtr<class MyUILoadStyleWidget> mMyUILoadStyleWidget;
 
 	// https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
-private:
+	// error : BlueprintReadOnly should not be used on private members
+//private:
+public:
 	/** Default True Type Font. This should be the path off of Content that leads to your chosen TTF. Copy paste .ttf files from Windows/Fonts. Path should not include "Content".  Ex: "TTF/comicbd.ttf" */
+	// error : BlueprintReadOnly should not be used on private members
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = VictoryChat)
-		FString ChatFontTTF;
+	FString ChatFontTTF;
+	// error : BlueprintReadWrite should not be used on private members
+	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = VictoryChat)
+	//FString ChatFontTTF;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = VictoryChat)
-		int32 ChatInputFontSize;
+	int32 ChatInputFontSize;
 
 	/** Set a new .ttf for chat text! This should be the path off of Content that leads to your chosen TTF. Copy paste .ttf files from Windows/Fonts. Path should not include "Content".  Ex: "TTF/comicbd.ttf" */
 	UFUNCTION(BlueprintCallable, Category = VictoryChat)
-		void SetChatFont(FString NewFontPath);
+	void SetChatFont(FString NewFontPath);
 
 	//Slate Core
 public:
-
-	TSharedPtr<class SVictoryEditText> VictoryChat;
+	TSharedPtr<class SMyEditText> VictoryChat;
 
 	void JoyInit_VictoryChat();
 

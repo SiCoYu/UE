@@ -1,10 +1,10 @@
 #include "MyProject.h"
-#include "UI/MyHUD.h"
-
 #include "CanvasItem.h"
 #include "MyDialog.h"
 //#include "EngineGlobals.h"		// GEngine
 #include "Engine.h"
+#include "SMyEditText.h"
+#include "UI/MyHUD.h"
 
 // https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
 #define VICTORY_ALLOW_TICK if(!GEngine) return; if(!GEngine->GameViewport) return;

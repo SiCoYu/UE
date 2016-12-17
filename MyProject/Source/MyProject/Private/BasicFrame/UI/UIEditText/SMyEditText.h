@@ -1,7 +1,9 @@
 #pragma once
 
+// including Slate.h is deprecated. Please include SlateBasics.h and then individual widget headers instead.
 //Slate
-#include "Slate.h"
+//#include "Slate.h"
+#include "SlateBasics.h"
 
 /**
  * @URL https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont

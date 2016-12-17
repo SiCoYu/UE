@@ -1,7 +1,9 @@
 #pragma once
 
 #include "MyHUD.h"
-#include "Slate.h"
+// including Slate.h is deprecated. Please include SlateBasics.h and then individual widget headers instead.
+//#include "Slate.h"
+#include "SlateBasics.h"
 #include "SlateGameResources.h"
 
 /**

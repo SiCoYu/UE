@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "SlateGameResources.h"
-#include "MyUILoadStyleWidget.h"
+#include "MyUIResources.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /*SMyUIWidget*//*SMyUIWidget*//*SMyUIWidget*//*SMyUIWidget*//*SMyUIWidget*//*SMyUIWidget*/

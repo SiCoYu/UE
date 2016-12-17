@@ -3,11 +3,14 @@
 
 #include "EngineMinimal.h"
 #include "UMG.h"
+#include "MyUIResources.h"
 
 /**
  * @URL https://wiki.unrealengine.com/Slate,_Loading_Styles_%26_Resources
  * @URL https://wiki.unrealengine.com/Linking_Static_Libraries_Using_The_Build_System
  */
+
+class FSlateGameResources;
 
 class FMyProject : public FDefaultGameModuleImpl
 {
@@ -27,7 +30,7 @@ class FMyProject : public FDefaultGameModuleImpl
 public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Give a handle to MyUIResources to anyone who asks
-	TSharedPtr<FSlateGameResources> GetSlateGameResources();
+	TSharedPtr<class FSlateGameResources> GetSlateGameResources();
 
 protected:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
