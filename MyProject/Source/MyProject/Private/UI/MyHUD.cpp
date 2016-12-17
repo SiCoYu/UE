@@ -6,6 +6,9 @@
 //#include "EngineGlobals.h"		// GEngine
 #include "Engine.h"
 
+// https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
+#define VICTORY_ALLOW_TICK if(!GEngine) return; if(!GEngine->GameViewport) return;
+
 #define LOCTEXT_NAMESPACE "MyProject.HUD"
 
 AMyHUD::AMyHUD(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -25,6 +28,9 @@ AMyHUD::AMyHUD(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitia
 		//NewWidget = Cast<UUserWidget>(StaticConstructObject(*WidgetClass));
 		//NewWidget->AddToViewport();
 	//}
+
+	ChatFontTTF = "TTF/comicbd.ttf";
+	ChatInputFontSize = 24;
 }
 
 void AMyHUD::DrawHUD()
@@ -89,6 +95,7 @@ void AMyHUD::DrawHUD()
 	//NewWidget->AddToViewport();
 
 	this->DrawHUD_ChatSystem();
+	this->DrawHUD_EditText();
 }
 
 //FReply AMyHUD::OnConfirmGeneric()
@@ -159,4 +166,86 @@ void AMyHUD::BeginPlay()
 		/////Set widget's properties as visibile (sets child widget's properties recurisvely)
 		MyUIWidget->SetVisibility(EVisibility::Visible);
 	}
+}
+
+//-------------------------------------------------------------------------------
+//~~~~~~~~~~~~~~
+// Joy Init Victory Chat
+//~~~~~~~~~~~~~~
+
+void AMyHUD::JoyInit_VictoryChat()
+{
+	if (!VictoryChat.IsValid()) return;
+	//~~~~~~~~~~~~~~~~~~~
+
+	//Visible
+	VictoryChat->SetShowChat(true);
+
+	//Cursor						//No cursor!
+	//VictoryChat->SetCursor(EMouseCursor::None);//EMouseCursor::TextEditBeam);
+
+	//Font
+	SetChatFont(ChatFontTTF);
+
+	//Capture User Input immediately upon Creation
+	VictoryChat->SetSlateUIMode(true);
+}
+
+//~~~~~~~~~~~~
+//  Set Font
+//~~~~~~~~~~~~
+void AMyHUD::SetChatFont(FString NewFontPath)
+{
+	if (!VictoryChat.IsValid()) 			return;
+	if (!VictoryChat->ChatDisplay.IsValid()) 	return;
+	if (!VictoryChat->ChatInput.IsValid()) 	return;
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	//Get Font from TTF Path
+	const FString ChatInputFont = FString(FPaths::GameContentDir() / *NewFontPath);
+
+	//Create Font Info
+	FSlateFontInfo NewFontInfo(ChatInputFont, ChatInputFontSize);
+
+	//Show / Hide Edit Caret
+	FSlateFontInfo CaretSize = NewFontInfo;
+	CaretSize.Size = 0;		//set to 1 to show caret.
+
+							//Set !
+	VictoryChat->ChatInput->SetFont(CaretSize); //invisible input, just Caret
+	VictoryChat->ChatDisplay->SetFont(NewFontInfo);		//Display Text
+}
+
+//~~~~~~~~~~~~
+// Draw HUD
+//~~~~~~~~~~~~
+void AMyHUD::DrawHUD_EditText()
+{
+	Super::DrawHUD();
+	//~~~~~~~~~
+
+	//~~~~~~~~~~~~~
+	VICTORY_ALLOW_TICK
+		//~~~~~~~~~~~~~
+
+
+
+		//~~~ Recreate Chat As Needed ~~~
+		// Thank you Wraiyth for this code structure!
+		if (!VictoryChat.IsValid())
+		{
+			SAssignNew(VictoryChat, SVictoryEditText)
+				.JoyHUD(this);
+
+			if (VictoryChat.IsValid())
+			{
+				GEngine->GameViewport->AddViewportWidgetContent(
+					SNew(SWeakWidget)
+					.PossiblyNullContent(VictoryChat.ToSharedRef())
+					);
+
+				//~~~ Joy Init ~~~
+				JoyInit_VictoryChat();
+			}
+		}
 }

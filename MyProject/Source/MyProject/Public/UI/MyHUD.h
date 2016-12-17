@@ -2,6 +2,8 @@
 
 #include "Engine/Canvas.h"
 #include "GameFramework/HUD.h"
+// https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
+#include "SMyEditText.h"
 #include "MyHUD.generated.h"
 
 class SMyDialog;
@@ -67,4 +69,26 @@ protected:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Reference to SCompoundWidget
 	TSharedPtr<class MyUILoadStyleWidget> MyUIWidget;
+
+	// https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
+private:
+	/** Default True Type Font. This should be the path off of Content that leads to your chosen TTF. Copy paste .ttf files from Windows/Fonts. Path should not include "Content".  Ex: "TTF/comicbd.ttf" */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = VictoryChat)
+		FString ChatFontTTF;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = VictoryChat)
+		int32 ChatInputFontSize;
+
+	/** Set a new .ttf for chat text! This should be the path off of Content that leads to your chosen TTF. Copy paste .ttf files from Windows/Fonts. Path should not include "Content".  Ex: "TTF/comicbd.ttf" */
+	UFUNCTION(BlueprintCallable, Category = VictoryChat)
+		void SetChatFont(FString NewFontPath);
+
+	//Slate Core
+public:
+
+	TSharedPtr<class SVictoryEditText> VictoryChat;
+
+	void JoyInit_VictoryChat();
+
+	void DrawHUD_EditText();
 };
