@@ -9,7 +9,7 @@
 class SUICustomButton : public SCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SDDFileTree)
+	SLATE_BEGIN_ARGS(SUICustomButton)
 	{}
 
 	SLATE_END_ARGS()

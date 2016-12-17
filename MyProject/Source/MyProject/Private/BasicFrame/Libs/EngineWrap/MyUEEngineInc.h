@@ -28,4 +28,7 @@
 #include "Templates/Casts.h"	// Cast
 #include "Input/Events.h"	// FKeyEvent
 
+#include "UObject/ObjectMacros.h"	// GENERATED_USTRUCT_BODY
+#include "Widgets/Views/STableRow.h"	// ITableRow
+
 #endif

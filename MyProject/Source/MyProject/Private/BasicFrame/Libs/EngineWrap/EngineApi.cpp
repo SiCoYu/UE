@@ -341,7 +341,7 @@ void EngineApi::ClipboardCopy(const TCHAR* Str)
 	FPlatformMisc::ClipboardCopy(Str);
 }
 
-void EngineApi::ClipboardPaste(class FString& Dest);
+void EngineApi::ClipboardPaste(class FString& Dest)
 {
 	FPlatformMisc::ClipboardPaste(Dest);
 }

@@ -21,11 +21,11 @@ void SMyEditText::Construct(const FArguments& InArgs)
 			SAssignNew(ChatInput, SEditableText)
 
 			//Function to call when text is entered
-		.OnTextCommitted(this, &SVictoryEditText::OnChatTextCommitted)
+		.OnTextCommitted(this, &SMyEditText::OnChatTextCommitted)
 
 
 		//Function to call when text is changed
-		.OnTextChanged(this, &SVictoryEditText::OnChatTextChanged)
+		.OnTextChanged(this, &SMyEditText::OnChatTextChanged)
 
 
 		//Stay and possibly enter multiple lines
@@ -72,14 +72,17 @@ TSharedRef<SWidget> SMyEditText::AsWidget()
 // Base Input
 //~~~~~~~~~~~~~
 //Keyboard Focussed
-FReply SMyEditText::OnKeyboardFocusReceived(const FGeometry& MyGeometry, const FKeyboardFocusEvent& InKeyboardFocusEvent)
+//FReply SMyEditText::OnKeyboardFocusReceived(const FGeometry& MyGeometry, const FKeyboardFocusEvent& InKeyboardFocusEvent)
+FReply SMyEditText::OnFocusReceived(const FGeometry& MyGeometry, const FFocusEvent& InFocusEvent)
 {
 	//Lock Mouse To Edit
-	return FReply::Handled().ReleaseMouseCapture().ReleaseJoystickCapture().LockMouseToWidget(SharedThis(this));
+	//  warning C4996: 'FReply::ReleaseJoystickCapture': FReply::ReleaseJoystickCapture() is deprecated, use FReply::ClearUserFocus() instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//return FReply::Handled().ReleaseMouseCapture().ReleaseJoystickCapture().LockMouseToWidget(SharedThis(this));
+	return FReply::Handled().ReleaseMouseCapture().ClearUserFocus().LockMouseToWidget(SharedThis(this));
 }
 
 //~~~ Key Down ~~~
-FReply SMyEditText::OnKeyDown(const FGeometry& MyGeometry, const FKeyboardEvent& InKeyboardEvent)
+FReply SMyEditText::OnKeyDown(const FGeometry& MyGeometry, const FKeyEvent& InKeyboardEvent)
 {
 	//Get Key Pressed
 	const FKey VKey = InKeyboardEvent.GetKey();

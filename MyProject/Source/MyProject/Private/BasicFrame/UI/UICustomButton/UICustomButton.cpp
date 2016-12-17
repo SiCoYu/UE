@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "UICustomButton.h"
 
-void UICustomButton::Construct(const FArguments& InArgs)
+void SUICustomButton::Construct(const FArguments& InArgs)
 {
 	//The button!
 	SAssignNew(RefreshButton, SButton)
@@ -50,7 +50,7 @@ void UICustomButton::Construct(const FArguments& InArgs)
 		];
 }
 
-void UICustomButton::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
+void SUICustomButton::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
 {
 	// Call parent implementation
 	SCompoundWidget::Tick(AllottedGeometry, InCurrentTime, InDeltaTime);
@@ -70,14 +70,14 @@ void UICustomButton::Tick(const FGeometry& AllottedGeometry, const double InCurr
 	}
 }
 
-void UICustomButton::SetCursor()
+void SUICustomButton::SetCursor()
 {
 	//Set Cursors
 	ClearTileButton->SetCursor(EMouseCursor::SlashedCircle);
 	RefreshButton->SetCursor(EMouseCursor::Hand);
 }
 
-void UICustomButton::SetToolTip()
+void SUICustomButton::SetToolTip()
 {
 	ClearTileButton->SetToolTip(
 		SNew(SToolTip)

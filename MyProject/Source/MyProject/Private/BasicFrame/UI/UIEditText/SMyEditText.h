@@ -103,10 +103,12 @@ public:
 	//~~~~~~~~~~~~~~~~~
 	//SWidget.h
 public:
+	// Engine\Source\Runtime\SlateCore\Public\Widgets\SWidget.h
 	//~~~ Keyboard Focused ~~~
 	// error C3646: 'EMIT_DEPRECATED_WARNING_MESSAGE': unknown override specifier
 	//virtual FReply OnKeyboardFocusReceived(const FGeometry& MyGeometry, const FKeyboardFocusEvent& InKeyboardFocusEvent) OVERRIDE;
-	virtual FReply OnKeyboardFocusReceived(const FGeometry& MyGeometry, const FKeyboardFocusEvent& InKeyboardFocusEvent) override;
+	//virtual FReply OnKeyboardFocusReceived(const FGeometry& MyGeometry, const FKeyboardFocusEvent& InKeyboardFocusEvent) override;
+	virtual FReply OnFocusReceived(const FGeometry& MyGeometry, const FFocusEvent& InFocusEvent) override;
 
 	//~~~ Key Down  ~~~  		
 	//virtual FReply OnKeyDown(const FGeometry& MyGeometry, const FKeyboardEvent& InKeyboardEvent) override;
@@ -115,11 +117,8 @@ public:
 	//~~~ Mouse Down  ~~~
 	virtual FReply OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
 
-
-
 	//Slate Base
 public:
-
 	//Constructor
 	void Construct(const FArguments& InArgs);
 
@@ -128,5 +127,4 @@ public:
 
 	//~~~ Tick ~~~ 
 	void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime);
-
 };
