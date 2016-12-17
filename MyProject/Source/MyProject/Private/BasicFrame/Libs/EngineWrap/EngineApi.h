@@ -11,10 +11,13 @@
 #include "Components/StaticMeshComponent.h"		// UStaticMeshComponent
 #include "GenericPlatform/GenericPlatformMath.h"	// Max
 
+#include "Containers/Array.h"	// TArray
+
 class UGameInstance;
 class UMyEngine;
 class UMyGameInstance;
 class UUserWidget;
+class SWindow;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -193,6 +196,18 @@ public:
 
 	/** Pastes in text from the operating system clipboard. */
 	static void ClipboardPaste(class FString& Dest);
+
+	// f:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Runtime\Slate\Public\Framework\Application\SlateApplication.h
+	/** @return an array of top-level windows that can be interacted with. e.g. when a modal window is up, only return the modal window */
+	static TArray< TSharedRef<class SWindow> > GetInteractiveTopLevelWindows();
+
+	static bool FindPathToWidget(TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter = EVisibility::Visible);
+
+	static bool FindPathToWidget(const TArray<TSharedRef<SWindow>>& WindowsToSearch, TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter = EVisibility::Visible);
+
+	static bool SetKeyboardFocus(const TSharedPtr<SWidget>& OptionalWidgetToFocus, EFocusCause ReasonFocusIsChanging = EFocusCause::SetDirectly);
+
+	static void SetFocusToGameViewport();
 };
 
 #include "EngineApi.inl"

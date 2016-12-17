@@ -30,5 +30,10 @@
 
 #include "UObject/ObjectMacros.h"	// GENERATED_USTRUCT_BODY
 #include "Widgets/Views/STableRow.h"	// ITableRow
+#include "Containers/Array.h"	// TArray
+#include "Widgets/SWindow.h"	// SWindow
+
+#include "Framework/Application/SlateApplication.h"		// FSlateApplication
+#include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
 
 #endif

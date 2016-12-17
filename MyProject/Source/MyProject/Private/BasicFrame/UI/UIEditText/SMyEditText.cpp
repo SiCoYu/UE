@@ -208,7 +208,8 @@ void SMyEditText::SetSlateUIMode(bool EnterSlateUI)
 		{
 			FWidgetPath WidgetToFocusPath;
 
-			bool bFoundPath = FSlateApplication::Get().FindPathToWidget(FSlateApplication::Get().GetInteractiveTopLevelWindows(), ChatInput.ToSharedRef(), WidgetToFocusPath);
+			//bool bFoundPath = FSlateApplication::Get().FindPathToWidget(FSlateApplication::Get().GetInteractiveTopLevelWindows(), ChatInput.ToSharedRef(), WidgetToFocusPath);
+			bool bFoundPath = FSlateApplication::Get().FindPathToWidget(ChatInput.ToSharedRef(), WidgetToFocusPath);
 			if (bFoundPath && WidgetToFocusPath.IsValid())
 			{
 				FSlateApplication::Get().SetKeyboardFocus(WidgetToFocusPath, EKeyboardFocusCause::SetDirectly);

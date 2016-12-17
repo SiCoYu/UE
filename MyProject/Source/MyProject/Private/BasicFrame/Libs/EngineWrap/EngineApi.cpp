@@ -6,6 +6,9 @@
 #include "MyGameInstance.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
 #include "GenericPlatform/GenericPlatformMisc.h"	//	ClipboardCopy
+#include "Widgets/SWindow.h"	// SWindow
+#include "Framework/Application/SlateApplication.h"		// FSlateApplication
+#include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
 #include "EngineApi.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
@@ -344,4 +347,29 @@ void EngineApi::ClipboardCopy(const TCHAR* Str)
 void EngineApi::ClipboardPaste(class FString& Dest)
 {
 	FPlatformMisc::ClipboardPaste(Dest);
+}
+
+TArray< TSharedRef<class SWindow> > EngineApi::GetInteractiveTopLevelWindows()
+{
+	return FSlateApplication::Get().GetInteractiveTopLevelWindows();
+}
+
+bool EngineApi::FindPathToWidget(TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter)
+{
+	return FSlateApplication::Get().FindPathToWidget(InWidget, OutWidgetPath, VisibilityFilter);
+}
+
+bool EngineApi::FindPathToWidget(const TArray<TSharedRef<SWindow>>& WindowsToSearch, TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter)
+{
+	FSlateWindowHelper::FindPathToWidget(EngineApi::GetInteractiveTopLevelWindows(), InWidget, OutWidgetPath, VisibilityFilter);
+}
+
+bool EngineApi::SetKeyboardFocus(const TSharedPtr<SWidget>& OptionalWidgetToFocus, EFocusCause ReasonFocusIsChanging)
+{
+	return FSlateApplication::Get().SetKeyboardFocus(OptionalWidgetToFocus, ReasonFocusIsChanging);
+}
+
+void EngineApi::SetFocusToGameViewport()
+{
+	FSlateApplication::Get().SetFocusToGameViewport();
 }
