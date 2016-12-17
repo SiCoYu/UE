@@ -85,7 +85,7 @@ FText UtilStr::ConvFString2FText(FString& fStr)
 	return FTextFormat::FromString(fStr).GetSourceText();
 }
 
-FString& UtilStr::ConvFText2FString(FText& fText);
+const FString UtilStr::ConvFText2FString(FText& fText)
 {
 	return FTextFormat(fText).GetSourceString();
 }

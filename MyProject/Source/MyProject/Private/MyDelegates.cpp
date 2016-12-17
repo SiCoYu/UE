@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "MyDelegates.h"
-#include "MyProjectGameState.h"
+#include "MyGameState.h"
 #include "GameDelegates.h"
 
 // respond to requests from a companion app

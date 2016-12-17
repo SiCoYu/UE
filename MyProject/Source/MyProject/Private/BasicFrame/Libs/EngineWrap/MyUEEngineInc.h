@@ -35,5 +35,6 @@
 
 #include "Framework/Application/SlateApplication.h"		// FSlateApplication
 #include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
+#include "IDesktopPlatform.h"	// FOpenLauncherOptions
 
 #endif

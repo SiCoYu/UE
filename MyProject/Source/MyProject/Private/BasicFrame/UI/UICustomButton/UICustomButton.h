@@ -29,4 +29,9 @@ private:
 public:
 	void SetCursor();
 	void SetToolTip();
+
+public:
+	// Engine\Source\Programs\CrashReporter\CrashReportClient\Private\SCrashReportClient.cpp
+	FReply RefreshButtonPressed();
+	FReply ClearButtonPressed();
 };

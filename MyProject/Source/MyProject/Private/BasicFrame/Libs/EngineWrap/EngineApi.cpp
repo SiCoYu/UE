@@ -361,7 +361,7 @@ bool EngineApi::FindPathToWidget(TSharedRef<const SWidget> InWidget, FWidgetPath
 
 bool EngineApi::FindPathToWidget(const TArray<TSharedRef<SWindow>>& WindowsToSearch, TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter)
 {
-	FSlateWindowHelper::FindPathToWidget(EngineApi::GetInteractiveTopLevelWindows(), InWidget, OutWidgetPath, VisibilityFilter);
+	return FSlateWindowHelper::FindPathToWidget(EngineApi::GetInteractiveTopLevelWindows(), InWidget, OutWidgetPath, VisibilityFilter);
 }
 
 bool EngineApi::SetKeyboardFocus(const TSharedPtr<SWidget>& OptionalWidgetToFocus, EFocusCause ReasonFocusIsChanging)
@@ -369,7 +369,26 @@ bool EngineApi::SetKeyboardFocus(const TSharedPtr<SWidget>& OptionalWidgetToFocu
 	return FSlateApplication::Get().SetKeyboardFocus(OptionalWidgetToFocus, ReasonFocusIsChanging);
 }
 
-void EngineApi::SetFocusToGameViewport()
+void EngineApi::SetUserFocusToGameViewport(uint32 UserIndex, EFocusCause ReasonFocusIsChanging)
 {
-	FSlateApplication::Get().SetFocusToGameViewport();
+	FSlateApplication::Get().SetUserFocusToGameViewport(UserIndex, ReasonFocusIsChanging);
+}
+
+FString EngineApi::UrlEncode(const FString& UnencodedString)
+{
+	return FPlatformHttp::UrlEncode(UnencodedString);
+}
+
+bool EngineApi::OpenLauncher(const FOpenLauncherOptions& Options)
+{
+	FString CrashedAppPathUri;
+	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
+	FOpenLauncherOptions OpenOptions(FString::Printf(TEXT("apps/%s"), *CrashedAppPathUri));
+	OpenOptions.bSilent = true;
+	DesktopPlatform->OpenLauncher(OpenOptions);
+}
+
+FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild = nullptr)
+{
+	return FPlatformProcess::CreateProc(URL, Parms bLaunchDetached, bLaunchHidden, bLaunchReallyHidden, OutProcessID, PriorityModifier, OptionalWorkingDirectory, PipeWriteChild, PipeReadChild);
 }

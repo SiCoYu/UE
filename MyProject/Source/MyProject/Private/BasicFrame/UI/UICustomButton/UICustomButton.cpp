@@ -6,7 +6,7 @@ void SUICustomButton::Construct(const FArguments& InArgs)
 	//The button!
 	SAssignNew(RefreshButton, SButton)
 		.ButtonStyle(FCoreStyle::Get(), "NoBorder")
-		.OnClicked(this, &SDDFileTree::RefreshButtonPressed)
+		.OnClicked(this, &SUICustomButton::RefreshButtonPressed)
 		.HAlign(HAlign_Center)
 		.VAlign(VAlign_Center)
 		.ForegroundColor(FSlateColor::UseForeground())
@@ -37,7 +37,7 @@ void SUICustomButton::Construct(const FArguments& InArgs)
 			//~~~ Clear Button / Trash Can ~~~
 			SAssignNew(ClearTileButton, SButton)
 			.ButtonStyle(FCoreStyle::Get(), "NoBorder")
-		.OnClicked(this, &SDDFileTree::ClearButtonPressed)
+		.OnClicked(this, &SUICustomButton::ClearButtonPressed)
 		.HAlign(HAlign_Center)
 		.VAlign(VAlign_Center)
 		.ForegroundColor(FSlateColor::UseForeground())
@@ -104,4 +104,14 @@ void SUICustomButton::SetToolTip()
 		.ShadowOffset(FIntPoint(-2, 2))
 		]
 	);
+}
+
+FReply FCrashReportClient::RefreshButtonPressed()
+{
+	return FReply::Handled();
+}
+
+FReply FCrashReportClient::ClearButtonPressed()
+{
+	return FReply::Handled();
 }
