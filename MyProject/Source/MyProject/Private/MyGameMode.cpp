@@ -35,6 +35,9 @@ AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Players_in_Multiplayer
 	PlayerControllerClass = AMyPlayerController::StaticClass();
+
+	// https://wiki.unrealengine.com/Slate,_Simple_C%2B%2B_Chat_System
+	PlayerStateClass = AMyPlayerState::StaticClass();
 }
 
 UClass* AMyGameMode::GetDefaultPawnClassForController(AController* InController)

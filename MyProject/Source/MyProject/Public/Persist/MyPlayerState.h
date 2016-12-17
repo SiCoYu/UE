@@ -1,9 +1,9 @@
 #pragma once
 
-#include "MyProjectPlayerState.generated.h"
+#include "MyPlayerState.generated.h"
 
 UCLASS()
-class AMyProjectPlayerState : public APlayerState
+class AMyPlayerState : public APlayerState
 {
 	GENERATED_UCLASS_BODY()
 
