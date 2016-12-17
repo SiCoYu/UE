@@ -59,7 +59,7 @@ TSharedRef<ITableRow> SMyChatWidget::OnGenerateRowForList(TSharedPtr< FSChatMsg 
 			SNew(SBox)
 		];
 
-	if (Item.Get()->Type == = 1) // Type 1 is for player chat messages
+	if (Item.Get()->Type == 1) // Type 1 is for player chat messages
 		return
 		SNew(STableRow< TSharedPtr< FSChatMsg > >, OwnerTable)
 		[

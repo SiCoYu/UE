@@ -118,7 +118,8 @@ TSharedRef<ITableRow> SDDFileTree::DDFileTree_OnGenerateRow(FDDFileTreeItemPtr I
 	return SNew(STableRow< FDDFileTreeItemPtr >, OwnerTable)
 		[
 			SNew(STextBlock)
-			.Text(Item->GetDisplayName())
+			//.Text(Item->GetDisplayName())
+		.Text(FText::FromString(Item->GetDisplayName()))
 		.Font(FSlateFontInfo(FPaths::EngineContentDir() / TEXT("Slate/Fonts/Roboto-Bold.ttf"), 12))
 		.ColorAndOpacity(FLinearColor(1, 0, 1, 1))
 		.ShadowColorAndOpacity(FLinearColor::Black)

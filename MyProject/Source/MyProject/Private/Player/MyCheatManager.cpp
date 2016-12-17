@@ -1,6 +1,6 @@
 #include "MyProject.h"
-#include "Persist/MyProjectPlayerState.h"
-#include "Player/MyCheatManager.h"
+#include "MyPlayerState.h"
+#include "MyCheatManager.h"
 
 UMyCheatManager::UMyCheatManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {

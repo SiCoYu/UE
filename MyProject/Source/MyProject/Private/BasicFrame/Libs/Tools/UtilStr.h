@@ -37,6 +37,7 @@ public:
 	static FString ConvFloat2FString(float& fValue);
 	static FText ConvFString2FText(FString& fStr);
 	static const FString ConvFText2FString(FText& fText);
+	static FText ConvChar2FText(const char* pchar);
 };
 
 #endif

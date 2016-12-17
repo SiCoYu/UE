@@ -20,7 +20,8 @@ void SUICustomButton::Construct(const FArguments& InArgs)
 		[
 			//Button Text!! AssignNew so can change color later
 			SAssignNew(RefreshButtonText, STextBlock)
-			.Text(FString("Refresh (F5) "))
+			//.Text(FString("Refresh (F5) "))
+		.Text(FText::FromString("Refresh (F5) "))
 		.Font(FSlateFontInfo(FPaths::EngineContentDir() / TEXT("Slate/Fonts/Roboto-Bold.ttf"), 16))
 		.ColorAndOpacity(FLinearColor(1, 0, 1, 1))
 		.HighlightColor(FLinearColor(1, 1, 0, 1))
@@ -61,12 +62,15 @@ void SUICustomButton::Tick(const FGeometry& AllottedGeometry, const double InCur
 	//~~~~~~~~~~~~
 	if (RefreshButtonText->IsHovered())
 	{
-		SetRainbowGlowColor();
-		RefreshButtonText->SetForegroundColor(RainbowGlowingColor);
+		// TODO:
+		//SetRainbowGlowColor();
+		//RefreshButtonText->SetForegroundColor(RainbowGlowingColor);
+		RefreshButtonText->SetColorAndOpacity(FLinearColor(1, 0, 1, 1));
 	}
 	else
 	{
-		RefreshButtonText->SetForegroundColor(FLinearColor(1, 0, 1, 1));
+		//RefreshButtonText->SetForegroundColor(FLinearColor(1, 0, 1, 1));
+		RefreshButtonText->SetColorAndOpacity(FLinearColor(1, 0, 1, 1));
 	}
 }
 
@@ -106,12 +110,12 @@ void SUICustomButton::SetToolTip()
 	);
 }
 
-FReply FCrashReportClient::RefreshButtonPressed()
+FReply SUICustomButton::RefreshButtonPressed()
 {
 	return FReply::Handled();
 }
 
-FReply FCrashReportClient::ClearButtonPressed()
+FReply SUICustomButton::ClearButtonPressed()
 {
 	return FReply::Handled();
 }

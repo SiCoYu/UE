@@ -22,7 +22,7 @@ static void WebServerDelegate(int32 UserIndex, const FString& Action, const FStr
 				if (Player)
 				{
 					// get the shoter game
-					AMyProjectGameState* const GameState = Player->PlayerController->GetWorld()->GetGameState<AMyProjectGameState>();
+					AMyGameState* const GameState = Player->PlayerController->GetWorld()->GetGameState<AMyGameState>();
 
 					RankedPlayerMap Players;
 					GameState->GetRankedMap(0, Players);

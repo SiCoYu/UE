@@ -9,6 +9,7 @@
 class SMyDialog;
 class MyUILoadStyleWidget;
 class SMyEditText;
+class SMyChatWidget;
 
 UCLASS()
 class AMyHUD : public AHUD

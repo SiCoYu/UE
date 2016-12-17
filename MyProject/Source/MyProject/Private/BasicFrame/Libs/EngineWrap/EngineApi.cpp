@@ -9,6 +9,7 @@
 #include "Widgets/SWindow.h"	// SWindow
 #include "Framework/Application/SlateApplication.h"		// FSlateApplication
 #include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
+#include "GenericPlatform/GenericPlatformHttp.h"
 #include "EngineApi.h"
 
 DEFINE_LOG_CATEGORY(MyLog);

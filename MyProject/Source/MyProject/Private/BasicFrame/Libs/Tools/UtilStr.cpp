@@ -82,10 +82,17 @@ FString UtilStr::ConvFloat2FString(float& fValue)
 
 FText UtilStr::ConvFString2FText(FString& fStr)
 {
-	return FTextFormat::FromString(fStr).GetSourceText();
+	//return FTextFormat::FromString(fStr).GetSourceText();
+	return FText::FromString(fStr);
 }
 
 const FString UtilStr::ConvFText2FString(FText& fText)
 {
-	return FTextFormat(fText).GetSourceString();
+	//return FTextFormat(fText).GetSourceString();
+	return fText.ToString();
+}
+
+FText UtilStr::ConvChar2FText(const char* pchar)
+{
+	return FText::FromString(pchar);
 }

@@ -3,7 +3,10 @@
 #include "MyDialog.h"
 //#include "EngineGlobals.h"		// GEngine
 #include "Engine.h"
-#include "SMyEditText.h"
+#include "MyEditText.h"
+#include "MyChatWidget.h"
+#include "SChatMsg.h"
+#include "MyPlayerState.h"
 #include "UI/MyHUD.h"
 
 // https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
@@ -226,26 +229,24 @@ void AMyHUD::DrawHUD_EditText()
 
 	//~~~~~~~~~~~~~
 	VICTORY_ALLOW_TICK
-		//~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~
 
+	//~~~ Recreate Chat As Needed ~~~
+	// Thank you Wraiyth for this code structure!
+	if (!VictoryChat.IsValid())
+	{
+		SAssignNew(VictoryChat, SMyEditText)
+			.JoyHUD(this);
 
-
-		//~~~ Recreate Chat As Needed ~~~
-		// Thank you Wraiyth for this code structure!
-		if (!VictoryChat.IsValid())
+		if (VictoryChat.IsValid())
 		{
-			SAssignNew(VictoryChat, SVictoryEditText)
-				.JoyHUD(this);
+			GEngine->GameViewport->AddViewportWidgetContent(
+				SNew(SWeakWidget)
+				.PossiblyNullContent(VictoryChat.ToSharedRef())
+				);
 
-			if (VictoryChat.IsValid())
-			{
-				GEngine->GameViewport->AddViewportWidgetContent(
-					SNew(SWeakWidget)
-					.PossiblyNullContent(VictoryChat.ToSharedRef())
-					);
-
-				//~~~ Joy Init ~~~
-				JoyInit_VictoryChat();
-			}
+			//~~~ Joy Init ~~~
+			JoyInit_VictoryChat();
 		}
+	}
 }
