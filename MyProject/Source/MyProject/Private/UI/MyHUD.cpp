@@ -155,19 +155,19 @@ void AMyHUD::BeginPlay()
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Create a SMyUIWidget on heap referenced by MyUIWidget pointer member
-	SAssignNew(MyUIWidget, SMyUIWidget).OwnerHUD(this);
+	SAssignNew(mMyUILoadStyleWidget, SMyUILoadStyleWidget).OwnerHUD(this);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Pass our viewport a weak reference to our widget, will not increment refcount
 	if (GEngine->IsValidLowLevel())
 		GEngine->GameViewport->
-		AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MyUIWidget.ToSharedRef()));
+		AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(mMyUILoadStyleWidget.ToSharedRef()));
 
-	if (MyUIWidget.IsValid())
+	if (mMyUILoadStyleWidget.IsValid())
 	{
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////Set widget's properties as visibile (sets child widget's properties recurisvely)
-		MyUIWidget->SetVisibility(EVisibility::Visible);
+		mMyUILoadStyleWidget->SetVisibility(EVisibility::Visible);
 	}
 }
 

@@ -377,19 +377,20 @@ void EngineApi::SetUserFocusToGameViewport(uint32 UserIndex, EFocusCause ReasonF
 
 FString EngineApi::UrlEncode(const FString& UnencodedString)
 {
-	return FPlatformHttp::UrlEncode(UnencodedString);
+	//return FPlatformHttp::UrlEncode(UnencodedString);
+	return "";
 }
 
-bool EngineApi::OpenLauncher(const FOpenLauncherOptions& Options)
-{
-	FString CrashedAppPathUri;
-	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
-	FOpenLauncherOptions OpenOptions(FString::Printf(TEXT("apps/%s"), *CrashedAppPathUri));
-	OpenOptions.bSilent = true;
-	DesktopPlatform->OpenLauncher(OpenOptions);
-}
+//bool EngineApi::OpenLauncher(const FOpenLauncherOptions& Options)
+//{
+//	FString CrashedAppPathUri;
+//	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
+//	FOpenLauncherOptions OpenOptions(FString::Printf(TEXT("apps/%s"), *CrashedAppPathUri));
+//	OpenOptions.bSilent = true;
+//	DesktopPlatform->OpenLauncher(OpenOptions);
+//}
 
-FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild = nullptr)
+FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild)
 {
-	return FPlatformProcess::CreateProc(URL, Parms bLaunchDetached, bLaunchHidden, bLaunchReallyHidden, OutProcessID, PriorityModifier, OptionalWorkingDirectory, PipeWriteChild, PipeReadChild);
+	return FPlatformProcess::CreateProc(URL, Parms, bLaunchDetached, bLaunchHidden, bLaunchReallyHidden, OutProcessID, PriorityModifier, OptionalWorkingDirectory, PipeWriteChild, PipeReadChild);
 }

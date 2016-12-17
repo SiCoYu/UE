@@ -12,7 +12,7 @@
 #include "GenericPlatform/GenericPlatformMath.h"	// Max
 
 #include "Containers/Array.h"	// TArray
-#include "IDesktopPlatform.h"	// FOpenLauncherOptions
+//#include "IDesktopPlatform.h"	// FOpenLauncherOptions
 
 class UGameInstance;
 class UMyEngine;
@@ -213,7 +213,7 @@ public:
 	// Engine\Source\Runtime\Online\HTTP\Public\GenericPlatform\GenericPlatformHttp.h
 	static FString UrlEncode(const FString& UnencodedString);
 
-	static bool OpenLauncher(const FOpenLauncherOptions& Options);
+	//static bool OpenLauncher(const FOpenLauncherOptions& Options);
 
 	// Engine\Source\Runtime\Core\Public\Windows\WindowsPlatformProcess.h
 	static FProcHandle CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild = nullptr);

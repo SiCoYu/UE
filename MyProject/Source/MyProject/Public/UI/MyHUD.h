@@ -3,7 +3,7 @@
 #include "Engine/Canvas.h"
 #include "GameFramework/HUD.h"
 // https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
-//#include "SMyEditText.h"
+//#include "MyEditText.h"
 #include "MyHUD.generated.h"
 
 class SMyDialog;
@@ -70,7 +70,7 @@ public:
 protected:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Reference to SCompoundWidget
-	TSharedPtr<class MyUILoadStyleWidget> mMyUILoadStyleWidget;
+	TSharedPtr<class SMyUILoadStyleWidget> mMyUILoadStyleWidget;
 
 	// https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
 	// error : BlueprintReadOnly should not be used on private members

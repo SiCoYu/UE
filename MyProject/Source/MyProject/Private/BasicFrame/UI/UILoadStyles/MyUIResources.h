@@ -51,10 +51,10 @@ public:
 
 	SLATE_ARGUMENT(TWeakObjectPtr<AMyHUD>, OwnerHUD)
 
-		SLATE_END_ARGS()
+	SLATE_END_ARGS()
 
-		//needed for every widget, constructs widget and children.
-		void Construct(const FArguments& InArgs);
+	//needed for every widget, constructs widget and children.
+	void Construct(const FArguments& InArgs);
 
 protected:
 	//Pointer to our parent HUD

@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "SMyEditText.h"
+#include "MyEditText.h"
 
 void SMyEditText::Construct(const FArguments& InArgs)
 {
