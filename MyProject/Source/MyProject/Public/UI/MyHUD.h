@@ -10,7 +10,8 @@ class SMyDialog;
 class MyUILoadStyleWidget;
 class SMyEditText;
 class SMyChatWidget;
-class SMySlateTabWidget
+// fatal error C1083: Cannot open include file: 'MyHUD.generated.h': No such file or directory
+class SMySlateTabWidget;		// 这里需要添加分号
 
 UCLASS()
 class AMyHUD : public AHUD

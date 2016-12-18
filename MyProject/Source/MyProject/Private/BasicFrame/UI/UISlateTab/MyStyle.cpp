@@ -1,11 +1,8 @@
 #include "MyProject.h"
-#include "MyStyle.h"
-
-#include "TabbedView.h"
-#include "MyStyle.h"
 #include "Engine.h"
 #include "SlateBasics.h"
 #include "SlateStyle.h"
+#include "MyStyle.h"
 
 #define IMAGE_BRUSH(RelativePath, ...)	FSlateImageBrush(Style->RootToContentDir(RelativePath, TEXT(".png")), __VA_ARGS__)
 
