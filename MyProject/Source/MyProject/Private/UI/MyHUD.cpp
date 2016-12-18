@@ -171,7 +171,7 @@ void AMyHUD::BeginPlay()
 		mMyUILoadStyleWidget->SetVisibility(EVisibility::Visible);
 	}
 
-	this.BeginPlay_SlateTab();
+	this->BeginPlay_SlateTab();
 }
 
 //-------------------------------------------------------------------------------
@@ -256,15 +256,15 @@ void AMyHUD::DrawHUD_EditText()
 
 void AMyHUD::BeginPlay_SlateTab()
 {
-	SAssignNew(MyUIWidget, SMyUIWidget).OwnerHUD(this);
+	SAssignNew(MySlateTabWidget, SMySlateTabWidget).OwnerHUD(this);
 
 	if (GEngine->IsValidLowLevel())
 	{
-		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MyUIWidget.ToSharedRef()));
+		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MySlateTabWidget.ToSharedRef()));
 	}
 
-	if (MyUIWidget.IsValid())
+	if (MySlateTabWidget.IsValid())
 	{
-		MyUIWidget->SetVisibility(EVisibility::Visible);
+		MySlateTabWidget->SetVisibility(EVisibility::Visible);
 	}
 }

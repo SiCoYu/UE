@@ -25,7 +25,7 @@ void  FMyProject::StartupModule()
 	FSlateStyleRegistry::UnRegisterSlateStyle("PreloadStyle");
 	FMyStyle::Initialize();
 
-	this.StartupModule_SlateStyleSet();
+	this->StartupModule_SlateStyleSet();
 }
 
 /**
@@ -45,7 +45,7 @@ void  FMyProject::ShutdownModule()
 
 	FMyStyle::Shutdown();
 
-	this.ShutdownModule_SlateStyleSet();
+	this->ShutdownModule_SlateStyleSet();
 }
 
 /*First defined here, no need to call parent*/

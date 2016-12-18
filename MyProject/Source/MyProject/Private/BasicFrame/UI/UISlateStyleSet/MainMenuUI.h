@@ -6,7 +6,7 @@
  * @url https://wiki.unrealengine.com/Slate_Style_Sets_Part_2
  */
 
-class SLATETUTORIALS_API SMainMenuUI : public SCompoundWidget
+class SMainMenuUI : public SCompoundWidget
 {
 
 public:
