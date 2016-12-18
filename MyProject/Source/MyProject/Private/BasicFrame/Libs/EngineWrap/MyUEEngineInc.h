@@ -36,5 +36,9 @@
 #include "Framework/Application/SlateApplication.h"		// FSlateApplication
 #include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
 #include "IDesktopPlatform.h"	// FOpenLauncherOptions
+#include "UObject/WeakObjectPtrTemplates.h"	// TWeakObjectPtr
+
+#include "Input/Reply.h"		// FReply
+#include "Widgets/SUserWidget.h"	// SUserWidget\FArguments
 
 #endif

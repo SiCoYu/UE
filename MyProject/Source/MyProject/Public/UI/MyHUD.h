@@ -10,6 +10,7 @@ class SMyDialog;
 class MyUILoadStyleWidget;
 class SMyEditText;
 class SMyChatWidget;
+class SMySlateTabWidget
 
 UCLASS()
 class AMyHUD : public AHUD
@@ -98,4 +99,9 @@ public:
 	void JoyInit_VictoryChat();
 
 	void DrawHUD_EditText();
+
+
+private:
+	void BeginPlay_SlateTab();
+	TSharedPtr<class SMySlateTabWidget> MySlateTabWidget;
 };

@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "MyStyle.h"
 
 // #include "Welcome/to/bobsmagic.h"
 
@@ -19,6 +20,9 @@ void  FMyProject::StartupModule()
 	MyUIResources.Initialize();
 
 	/*TODO: Anything else game module might need to do on load*/
+
+	FSlateStyleRegistry::UnRegisterSlateStyle("PreloadStyle");
+	FMyStyle::Initialize();
 }
 
 /**
@@ -35,6 +39,8 @@ void  FMyProject::ShutdownModule()
 	MyUIResources.Shutdown();
 
 	/*Cleanup/free any resources here*/
+
+	FMyStyle::Shutdown();
 }
 
 /*First defined here, no need to call parent*/

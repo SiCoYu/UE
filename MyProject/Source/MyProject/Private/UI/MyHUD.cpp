@@ -7,6 +7,7 @@
 #include "MyChatWidget.h"
 #include "SChatMsg.h"
 #include "MyPlayerState.h"
+#include "MySlateTabWidget.h"
 #include "UI/MyHUD.h"
 
 // https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
@@ -169,6 +170,8 @@ void AMyHUD::BeginPlay()
 		/////Set widget's properties as visibile (sets child widget's properties recurisvely)
 		mMyUILoadStyleWidget->SetVisibility(EVisibility::Visible);
 	}
+
+	this.BeginPlay_SlateTab();
 }
 
 //-------------------------------------------------------------------------------
@@ -248,5 +251,20 @@ void AMyHUD::DrawHUD_EditText()
 			//~~~ Joy Init ~~~
 			JoyInit_VictoryChat();
 		}
+	}
+}
+
+void AMyHUD::BeginPlay_SlateTab()
+{
+	SAssignNew(MyUIWidget, SMyUIWidget).OwnerHUD(this);
+
+	if (GEngine->IsValidLowLevel())
+	{
+		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MyUIWidget.ToSharedRef()));
+	}
+
+	if (MyUIWidget.IsValid())
+	{
+		MyUIWidget->SetVisibility(EVisibility::Visible);
 	}
 }
