@@ -14,37 +14,37 @@
 
 TableSys::TableSys()
 {
-    m_dicTable[TableID::TABLE_OBJECT] = new TableBase("ObjectBase_client.bytes", "ObjectBase_client");
-    m_dicTable[TableID::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
-    m_dicTable[TableID::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
+    mDicTable[TableID::TABLE_OBJECT] = new TableBase("ObjectBase_client.bytes", "ObjectBase_client");
+    mDicTable[TableID::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
+    mDicTable[TableID::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
 
-	m_byteBuffer = new ByteBuffer();
+	mByteBuffer = new ByteBuffer();
 }
 
 // 返回一个表
 std::vector<TableItemBase*>* TableSys::getTable(TableID::TableID tableID)
 {
-	TableBase* table = m_dicTable[tableID];
+	TableBase* table = mDicTable[tableID];
 	if (nullptr == table)
 	{
 		loadOneTable(tableID);
-		table = m_dicTable[tableID];
+		table = mDicTable[tableID];
 	}
-	return table->m_List;
+	return table->mList;
 }
 		
 // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
 TableItemBase* TableSys::getItem(TableID::TableID tableID, uint32 itemID)
 {
-    TableBase* table = m_dicTable[tableID];
-	if (nullptr == table->m_byteBuffer)
+    TableBase* table = mDicTable[tableID];
+	if (nullptr == table->mByteBuffer)
 	{
 		loadOneTable(tableID);
-		table = m_dicTable[tableID];
+		table = mDicTable[tableID];
 	}
     TableItemBase* ret = TableSys::findDataItem(table, itemID);
 
-	if (nullptr != ret && nullptr == ret->m_itemBody)
+	if (nullptr != ret && nullptr == ret->mItemBody)
     {
         loadOneTableOneItemAll(tableID, table, ret);
     }
@@ -60,29 +60,29 @@ TableItemBase* TableSys::getItem(TableID::TableID tableID, uint32 itemID)
 // 加载一个表
 void TableSys::loadOneTable(TableID::TableID tableID)
 {
-	m_byteBuffer->clear();
-	m_arrayBuffer.Empty();
-	TableBase* table = m_dicTable[tableID];
+	mByteBuffer->clear();
+	mArrayBuffer.Empty();
+	TableBase* table = mDicTable[tableID];
 
-	FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/Table/"), ANSI_TO_TCHAR(table->m_tableName.c_str()), TEXT(".txt"));
+	FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/Table/"), ANSI_TO_TCHAR(table->mTableName.c_str()), TEXT(".txt"));
 
-	if (FFileHelper::LoadFileToArray(m_arrayBuffer, *Filename))
+	if (FFileHelper::LoadFileToArray(mArrayBuffer, *Filename))
 	{
-		m_byteBuffer->setLength(m_arrayBuffer.GetAllocatedSize());
-		m_byteBuffer->writeBytes((char*)(m_arrayBuffer.GetData()), 0, m_arrayBuffer.GetAllocatedSize());
-		m_byteBuffer->setPos(0);
-		readTable(tableID, m_byteBuffer);
+		mByteBuffer->setLength(mArrayBuffer.GetAllocatedSize());
+		mByteBuffer->writeBytes((char*)(mArrayBuffer.GetData()), 0, mArrayBuffer.GetAllocatedSize());
+		mByteBuffer->setPos(0);
+		readTable(tableID, mByteBuffer);
 	}
 }
 
 // 根据路径查找表的 ID
 TableID::TableID TableSys::getTableIDByPath(std::string& path)
 {
-	TableMapIte beginIte = m_dicTable.begin();
-	TableMapIte endIte = m_dicTable.end();
+	TableMapIte beginIte = mDicTable.begin();
+	TableMapIte endIte = mDicTable.end();
 	for(; beginIte != endIte; ++beginIte)
     {
-		if (beginIte->second->m_resName == path)
+		if (beginIte->second->mResName == path)
         {
 			return beginIte->first;
         }
@@ -96,25 +96,25 @@ void TableSys::loadOneTableOneItemAll(TableID::TableID tableID, TableBase* table
 {
     if (TableID::TABLE_OBJECT == tableID)
     {
-		itemBase->parseBodyByteBuffer<TableObjectItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
+		itemBase->parseBodyByteBuffer<TableObjectItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
     else if (TableID::TABLE_CARD == tableID)
     {
-		itemBase->parseBodyByteBuffer<TableCardItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
+		itemBase->parseBodyByteBuffer<TableCardItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
 	else if (TableID::TABLE_SKILL == tableID)  // 添加一个表的步骤四
     {
-		itemBase->parseBodyByteBuffer<TableSkillItemBody>(table->m_byteBuffer, itemBase->m_itemHeader->m_offset);
+		itemBase->parseBodyByteBuffer<TableSkillItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
 }
 		
 // 获取一个表的名字
 std::string& TableSys::getTableName(TableID::TableID tableID)
 {
-	TableBase* table = m_dicTable[tableID];
+	TableBase* table = mDicTable[tableID];
 	if (nullptr != table)
 	{
-		return table->m_tableName;
+		return table->mTableName;
 	}			
 	return UtilStr::msDefaultStr;
 }
@@ -122,8 +122,8 @@ std::string& TableSys::getTableName(TableID::TableID tableID)
 // 读取一个表，仅仅读取表头
 void TableSys::readTable(TableID::TableID tableID, ByteBuffer* bytes)
 {
-    TableBase* table = m_dicTable[tableID];
-	table->m_byteBuffer = bytes;
+    TableBase* table = mDicTable[tableID];
+	table->mByteBuffer = bytes;
 
 	bytes->setEndian(eLITTLE_ENDIAN);
 	uint32 len = 0;
@@ -144,14 +144,14 @@ void TableSys::readTable(TableID::TableID tableID, ByteBuffer* bytes)
         //{
             //item.parseAllByteArray<TableObjectItemBody>(bytes);
         //}
-        table->m_List->push_back(item);
+        table->mList->push_back(item);
     }
 }
 
 // 查找表中的一项
 TableItemBase* TableSys::findDataItem(TableBase* table, uint32 id)
 {
-	int size = table->m_List->size();
+	int size = table->mList->size();
 	int low = 0;
 	int high = size - 1;
 	int middle = 0;
@@ -160,7 +160,7 @@ TableItemBase* TableSys::findDataItem(TableBase* table, uint32 id)
 	while (low <= high)
 	{
 		middle = (low + high) / 2;
-        idCur = (*(table->m_List))[middle]->m_itemHeader->m_uID;
+        idCur = (*(table->mList))[middle]->mItemHeader->mId;
 		if (idCur == id)
 		{
 			break;
@@ -177,7 +177,7 @@ TableItemBase* TableSys::findDataItem(TableBase* table, uint32 id)
 			
 	if (low <= high)
 	{
-        return (*(table->m_List))[middle];
+        return (*(table->mList))[middle];
 	}
 	return nullptr;
 }

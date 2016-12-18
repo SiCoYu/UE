@@ -4,16 +4,16 @@
 #include "TableItemHeader.h"
 
 TableItemBase::TableItemBase()
-	: m_itemHeader(nullptr), m_itemBody(nullptr)
+	: mItemHeader(nullptr), mItemBody(nullptr)
 {
 
 }
 
 void TableItemBase::parseHeaderByteBuffer(ByteBuffer* bytes)
 {
-    if (nullptr == m_itemHeader)
+    if (nullptr == mItemHeader)
     {
-        m_itemHeader = new TableItemHeader();
+        mItemHeader = new TableItemHeader();
     }
-    m_itemHeader->parseHeaderByteBuffer(bytes);
+    mItemHeader->parseHeaderByteBuffer(bytes);
 }

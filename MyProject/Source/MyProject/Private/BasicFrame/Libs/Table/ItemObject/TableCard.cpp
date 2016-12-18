@@ -7,30 +7,30 @@
 void TableCardItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
 {
     bytes->setPos(offset);
-	UtilTable::readString(bytes, m_name);
+	UtilTable::readString(bytes, mName);
 
-	bytes->readInt32(m_type);
-	bytes->readInt32(m_career);
-	bytes->readInt32(m_race);
-	bytes->readInt32(m_quality);
-	bytes->readInt32(m_magicConsume);
+	bytes->readInt32(mType);
+	bytes->readInt32(mCareer);
+	bytes->readInt32(mRace);
+	bytes->readInt32(mQuality);
+	bytes->readInt32(mMagicConsume);
 
-	bytes->readInt32(m_attack);
-	bytes->readInt32(m_hp);
-	bytes->readInt32(m_Durable);
+	bytes->readInt32(mAttack);
+	bytes->readInt32(mHp);
+	bytes->readInt32(mDurable);
 
-	bytes->readInt32(m_chaoFeng);
-	bytes->readInt32(m_chongFeng);
-	bytes->readInt32(m_fengNu);
-	bytes->readInt32(m_qianXing);
-    bytes->readInt32(m_shengDun);
-	bytes->readInt32(m_mpAdded);
-	bytes->readInt32(m_guoZai);
-	bytes->readInt32(m_faShu);
-	bytes->readInt32(m_zhanHou);
-	bytes->readUnsignedInt8(m_bNeedFaShuTarget);
-	bytes->readInt32(m_bNeedZhanHouTarget);
-	UtilTable::readString(bytes, m_cardDesc);
-	UtilTable::readString(bytes, m_cardHeader);
-	bytes->readUnsignedInt32(m_skillPrepareEffect);
+	bytes->readInt32(mChaoFeng);
+	bytes->readInt32(mChongFeng);
+	bytes->readInt32(mFengNu);
+	bytes->readInt32(mQianXing);
+    bytes->readInt32(mShengDun);
+	bytes->readInt32(mMpAdded);
+	bytes->readInt32(mGuoZai);
+	bytes->readInt32(mFaShu);
+	bytes->readInt32(mZhanHou);
+	bytes->readUnsignedInt8(mIsNeedFaShuTarget);
+	bytes->readInt32(mIsNeedZhanHouTarget);
+	UtilTable::readString(bytes, mCardDesc);
+	UtilTable::readString(bytes, mCardHeader);
+	bytes->readUnsignedInt32(mSkillPrepareEffect);
 }

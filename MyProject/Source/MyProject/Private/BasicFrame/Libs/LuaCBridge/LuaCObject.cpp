@@ -13,5 +13,5 @@ LuaCObject::~LuaCObject()
 
 int LuaCObject::GetType()
 {
-	return m_type;
+	return mType;
 }

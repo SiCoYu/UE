@@ -23,9 +23,9 @@ class TableSys
 	typedef std::map<TableID::TableID, TableBase*>::iterator TableMapIte;
 
 private:
-	std::map<TableID::TableID, TableBase*> m_dicTable;
-	ByteBuffer* m_byteBuffer;
-	TArray<uint8> m_arrayBuffer;
+	std::map<TableID::TableID, TableBase*> mDicTable;
+	ByteBuffer* mByteBuffer;
+	TArray<uint8> mArrayBuffer;
 
 public:
 	TableSys();

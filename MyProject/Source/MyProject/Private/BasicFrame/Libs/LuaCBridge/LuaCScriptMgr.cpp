@@ -203,7 +203,7 @@ void LuaCScriptMgr::PrintLua(std::vector<std::string> param)
 
 	std::vector<LuaCObject*> paramList;
 	LuaCObject* pLuaCObject = new LuaCObject;
-	pLuaCObject->m_type = LUAC_TSTRING;
+	pLuaCObject->mType = LUAC_TSTRING;
 	pLuaCObject->m_pChar = param[1].c_str();
 	CallLuaFunction("PrintLua", paramList);
 }

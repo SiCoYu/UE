@@ -29,7 +29,7 @@ class LuaCFunction;
 class LuaCObject
 {
 public:
-	int m_type;
+	int mType;
 
 	union
 	{

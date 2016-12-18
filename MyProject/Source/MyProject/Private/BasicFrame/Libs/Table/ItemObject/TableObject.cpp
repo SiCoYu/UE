@@ -6,9 +6,9 @@
 void TableObjectItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
 {
 	bytes->setPos(offset);  // 从偏移处继续读取真正的内容
-	UtilTable::readString(bytes, m_name);
-	bytes->readInt32(m_maxNum);
-	bytes->readInt32(m_type);
-	bytes->readInt32(m_color);
-	UtilTable::readString(bytes, m_objResName);
+	UtilTable::readString(bytes, mName);
+	bytes->readInt32(mMaxNum);
+	bytes->readInt32(mType);
+	bytes->readInt32(mColor);
+	UtilTable::readString(bytes, mObjResName);
 }

@@ -5,6 +5,6 @@
 // 解析头部
 void TableItemHeader::parseHeaderByteBuffer(ByteBuffer* bytes)
 {
-	bytes->readUnsignedInt32(m_uID);
-	bytes->readUnsignedInt32(m_offset);
+	bytes->readUnsignedInt32(mId);
+	bytes->readUnsignedInt32(mOffset);
 }

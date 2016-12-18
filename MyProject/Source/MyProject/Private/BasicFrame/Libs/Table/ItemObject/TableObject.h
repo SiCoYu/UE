@@ -8,11 +8,11 @@
 class TableObjectItemBody : TableItemBodyBase
 {
 public:
-    std::string m_name;
-    int m_maxNum;
-    int m_type;
-    int m_color;
-	std::string m_objResName;
+    std::string mName;
+    int mMaxNum;
+    int mType;
+    int mColor;
+	std::string mObjResName;
 
 	virtual void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
 };
