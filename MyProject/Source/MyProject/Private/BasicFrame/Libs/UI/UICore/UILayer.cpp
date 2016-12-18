@@ -9,52 +9,52 @@ UILayer::UILayer(UILayerID layerID)
 
 std::map<UIFormID, UForm*>& UILayer::getWinDic()
 {
-	return m_winDic;
+	return mWinDic;
 }
 
 FSlateRenderTransform& UILayer::getLayerTrans()
 {
-	return *m_layerTrans;
+	return *mLayerTrans;
 }
 
 void UILayer::setLayerTrans(FSlateRenderTransform* rhv)
 {
-	m_layerTrans = rhv;
+	mLayerTrans = rhv;
 }
 
 void UILayer::setGoName(std::string& rhv)
 {
-	m_goName = rhv;
+	mGoName = rhv;
 }
 
 bool UILayer::hasForm(UForm* form)
 {
-	return m_winDic[form->getID()] != nullptr;
+	return mWinDic[form->getID()] != nullptr;
 }
 
 void UILayer::removeForm(UForm* form)
 {
-	if (m_winDic[form->getID()] != nullptr)
+	if (mWinDic[form->getID()] != nullptr)
 	{
-		//m_winDic.erase(form->getId());
+		//mWinDic.erase(form->getId());
 	}
 }
 
 UILayerID UILayer::getLayerID()
 {
-	return m_layer;
+	return mLayer;
 }
 
 void UILayer::addForm(UForm* form)
 {
-	m_winDic[form->getID()] = form;
+	mWinDic[form->getID()] = form;
 }
 
 void UILayer::onStageReSize()
 {
 	std::map<UIFormID, UForm*>::iterator itBegin, itEnd;
-	itBegin = m_winDic.begin();
-	itEnd = m_winDic.end();
+	itBegin = mWinDic.begin();
+	itEnd = mWinDic.end();
 	for (; itBegin != itEnd; ++itBegin)
 	{
 		//itBegin->second->onStageReSize();
@@ -64,8 +64,8 @@ void UILayer::onStageReSize()
 void UILayer::closeAllForm()
 {
 	std::map<UIFormID, UForm*>::iterator itBegin, itEnd;
-	itBegin = m_winDic.begin();
-	itEnd = m_winDic.end();
+	itBegin = mWinDic.begin();
+	itEnd = mWinDic.end();
 	for (; itBegin != itEnd; ++itBegin)
 	{
 		//itBegin->second->exit();
@@ -74,5 +74,5 @@ void UILayer::closeAllForm()
 
 void UILayer::findLayerGOAndTrans()
 {
-	//m_layerTrans = Ctx.m_instance.m_layerMgr.m_path2Go[m_goName].transform;
+	//mLayerTrans = Ctx.m_instance.m_layerMgr.m_path2Go[mGoName].transform;
 }

@@ -18,76 +18,76 @@ void UForm::loadUWidget(const TCHAR* name)
 		// 直接构造一个抽象类是报错误的
 		// NewObject<UUserWidget>();
 		// 构造一个类的子类，最新的 api 如下就可以了
-		m_GUIWin->m_uiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
+		mGuiWin->mUiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
 	}
 }
 
 UForm::UForm(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	m_exitMode = true;
-	m_bHideOnCreate = false;
-	m_bLoadWidgetRes = false;
-	m_bReady = false;
-	m_bBlurBg = false;
-	m_bHandleExitBtn = false;
-	m_alignVertial = (int)CENTER;
-	m_alignHorizontal = (int)CENTER;
+	mIsExitMode = true;
+	mIsHideOnCreate = false;
+	mIsLoadWidgetRes = false;
+	mIsReady = false;
+	mIsBlurBg = false;
+	mIsHandleExitBtn = false;
+	mAlignVertial = (int)CENTER;
+	mAlignHorizontal = (int)CENTER;
 }
 
 UIFormID UForm::getID()
 {
-	return m_id;
+	return mId;
 }
 
 void UForm::setID(UIFormID value)
 {
-	m_id = value;
+	mId = value;
 }
 
 bool UForm::getHideOnCreate()
 {
-	return m_bHideOnCreate;
+	return mIsHideOnCreate;
 }
 
 void UForm::setHideOnCreate(bool value)
 {
-	m_bHideOnCreate = value;
+	mIsHideOnCreate = value;
 }
 
 bool UForm::getExitMode()
 {
-	return m_exitMode;
+	return mIsExitMode;
 }
 
 void UForm::setExitMode(bool value)
 {
-	m_exitMode = value;
+	mIsExitMode = value;
 }
 
 bool UForm::getIsLoadWidgetRes()
 {
-	return m_bLoadWidgetRes;
+	return mIsLoadWidgetRes;
 }
 
 void UForm::setIsLoadWidgetRes(bool value)
 {
-	m_bLoadWidgetRes = true;
+	mIsLoadWidgetRes = true;
 }
 
 bool UForm::getBReady()
 {
-	return m_bReady;
+	return mIsReady;
 }
 
 std::string UForm::getFormName()
 {
-	return m_formName;
+	return mFormName;
 }
 
 void UForm::setFormName(std::string value)
 {
-	m_formName = value;
+	mFormName = value;
 }
 
 //LuaCSBridgeForm* UForm::getLuaCSBridgeForm()
@@ -107,17 +107,17 @@ void UForm::init()
 
 void UForm::show()
 {
-	GUiMgr->showForm(m_id);
+	GUiMgr->showForm(mId);
 }
 
 //private void UForm::hide()
 //{
-//    GUiMgr->hideForm(m_id);
+//    GUiMgr->hideForm(mId);
 //}
 
 void UForm::exit()
 {
-	GUiMgr->exitForm(m_id);
+	GUiMgr->exitForm(mId);
 }
 
 // 界面代码创建后就调用
@@ -127,7 +127,7 @@ void UForm::onInit()
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_INIT);
 	//}
-	//if (m_bLoadWidgetRes)
+	//if (mIsLoadWidgetRes)
 	//{
 	// 默认会继续加载资源
 	GUiMgr->loadWidgetRes(this->getID());
@@ -142,10 +142,10 @@ void UForm::onReady()
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_READY);
 	//}
 
-	m_bReady = true;
-	if (m_bHandleExitBtn)
+	mIsReady = true;
+	if (mIsHandleExitBtn)
 	{
-		//UtilApi.addEventHandle(m_GUIWin.m_uiRoot, "BtnClose", onExitBtnClick); // 关闭事件
+		//UtilApi.addEventHandle(mGuiWin.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
 	}
 }
 
@@ -157,7 +157,7 @@ void UForm::onShow()
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_SHOW);
 	//}
 
-	if (m_bBlurBg)
+	if (mIsBlurBg)
 	{
 		//GUiMgr->showForm(eUIBlurBg);        // 显示模糊背景界面
 	}
@@ -172,7 +172,7 @@ void UForm::onHide()
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_HIDE);
 	//}
 
-	//if (m_bBlurBg)
+	//if (mIsBlurBg)
 	//{
 	//	GUiMgr->exitForm(UIFormID.eUIBlurBg);
 	//}
@@ -186,7 +186,7 @@ void UForm::onExit()
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_EXIT);
 	//}
 
-	//if (m_bBlurBg)
+	//if (mIsBlurBg)
 	//{
 	//	GUiMgr->exitForm(UIFormID.eUIBlurBg);
 	//}
@@ -194,7 +194,7 @@ void UForm::onExit()
 
 bool UForm::isVisible()
 {
-	//return m_GUIWin->m_uiRoot->activeSelf;        // 仅仅是自己是否可见
+	//return mGuiWin->mUiRoot->activeSelf;        // 仅仅是自己是否可见
 	return true;
 }
 
@@ -218,11 +218,11 @@ PointF* UForm::computeAdjustPosWithAlign()
 	PointF* ret = new PointF(0, 0);
 	//int widthStage = 0;
 	//int heightStage = 0;
-	//if (m_alignVertial == (int)CENTER)
+	//if (mAlignVertial == (int)CENTER)
 	//{
 	//	ret->setX((heightStage - this->m_height) / 2);
 	//}
-	//else if (m_alignVertial == (int)TOP)
+	//else if (mAlignVertial == (int)TOP)
 	//{
 	//	ret->setY(this->m_marginTop);
 	//}
@@ -231,17 +231,17 @@ PointF* UForm::computeAdjustPosWithAlign()
 	//	ret->setY(heightStage - this->m_height - this->m_marginBottom);
 	//}
 
-	//if (m_alignHorizontal == (int)CENTER)
+	//if (mAlignHorizontal == (int)CENTER)
 	//{
 	//	ret->setX((widthStage - this->m_width) / 2);
 	//}
-	//else if (m_alignHorizontal == (int)LEFT)
+	//else if (mAlignHorizontal == (int)LEFT)
 	//{
 	//	ret->setX(m_marginLeft);
 	//}
 	//else
 	//{
-	//	ret->setX(widthStage - this->m_width - m_marginRight);
+	//	ret->setX(widthStage - this->m_width - mMarginRight);
 	//}
 	return ret;
 }
@@ -256,7 +256,7 @@ void UForm::onExitBtnClick()
 //{
 //	foreach(var path in btnList)
 //	{
-//		addClick(m_GUIWin.m_uiRoot, path);
+//		addClick(mGuiWin.mUiRoot, path);
 //	}
 //}
 //
@@ -270,7 +270,7 @@ void UForm::onExitBtnClick()
 //	string[] pathArr = m_luaCSBridgeForm.getTable2StrArray("BtnClickTable");
 //	foreach(var path in pathArr)
 //	{
-//		addClick(m_GUIWin.m_uiRoot, path);
+//		addClick(mGuiWin.mUiRoot, path);
 //	}
 //}
 
@@ -280,7 +280,7 @@ void UForm::onExitBtnClick()
 //	{
 //		if (m_go2Path.ContainsKey(go_))
 //		{
-//			m_luaCSBridgeForm.handleUIEvent("onBtnClk", m_formName, m_go2Path[go_].mPath);
+//			m_luaCSBridgeForm.handleUIEvent("onBtnClk", mFormName, m_go2Path[go_].mPath);
 //		}
 //	}
 //
@@ -317,5 +317,5 @@ void UForm::onExitBtnClick()
 
 bool UForm::getIsReady()
 {
-	return m_bReady;
+	return mIsReady;
 }

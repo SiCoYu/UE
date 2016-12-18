@@ -3,31 +3,31 @@
 
 MEvent::MEvent()
 {
-	m_event = FPlatformProcess::GetSynchEventFromPool(true);
+	mEvent = FPlatformProcess::GetSynchEventFromPool(true);
 }
 
 MEvent::~MEvent()
 {
-	FPlatformProcess::ReturnSynchEventToPool(m_event);
-	m_event = nullptr;
+	FPlatformProcess::ReturnSynchEventToPool(mEvent);
+	mEvent = nullptr;
 }
 
 void MEvent::Wait()
 {
-	m_event->Wait(MAX_uint32);
+	mEvent->Wait(MAX_uint32);
 }
 
 void MEvent::Reset()
 {
-	m_event->Reset();
+	mEvent->Reset();
 }
 
 void MEvent::Set()
 {
-	return m_event->Trigger();
+	return mEvent->Trigger();
 }
 
 void MEvent::WaitOne()
 {
-	m_event->Wait(MAX_uint32);
+	mEvent->Wait(MAX_uint32);
 }

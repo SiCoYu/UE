@@ -3,8 +3,8 @@
 #include "INetMgr.h"
 #include "MEvent.h"
 
-UENetThread::UENetThread(INetMgr* pNetMgr, std::string m_threadName)
-	: MThread(m_threadName), mIsExitFlag(false)
+UENetThread::UENetThread(INetMgr* pNetMgr, std::string mThreadName)
+	: MThread(mThreadName), mIsExitFlag(false)
 {
 	mNetMgr = pNetMgr;
 	mSyncEvent = new MEvent();

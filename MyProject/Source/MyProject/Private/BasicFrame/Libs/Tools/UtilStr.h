@@ -10,7 +10,7 @@
 class UtilStr
 {
 public:
-	static std::string m_sDefaultStr;
+	static std::string msDefaultStr;
 
 public:
 	static std::string Format(const char * format, ...);

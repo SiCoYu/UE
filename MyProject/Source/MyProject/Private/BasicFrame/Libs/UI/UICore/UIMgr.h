@@ -23,15 +23,15 @@ class UIAssetRes;
 class UIMgr
 {
 protected:
-	std::map<UIFormID, UForm*> m_id2FormDic;
-	std::vector<UICanvas*> m_canvasList;
-	UIAttrSystem* m_UIAttrs;
+	std::map<UIFormID, UForm*> mId2FormDic;
+	std::vector<UICanvas*> mCanvasList;
+	UIAttrSystem* mUiAttrs;
 
-	std::map<UIFormID, UILoadingItem*> m_ID2CodeLoadingItemDic;         // 记录当前代码正在加载的项
-	std::map<UIFormID, UILoadingItem*> m_ID2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
+	std::map<UIFormID, UILoadingItem*> mId2CodeLoadingItemDic;         // 记录当前代码正在加载的项
+	std::map<UIFormID, UILoadingItem*> mId2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
 
-	MList<UIFormID> m_tmpList;
-	//GameObject m_sceneUIRootGo;           // 每一个场景都会有一个这样的节点，专门放一些 Scene 中 UI 的一些信息
+	MList<UIFormID> mTmpList;
+	//GameObject mSceneUIRootGo;           // 每一个场景都会有一个这样的节点，专门放一些 Scene 中 UI 的一些信息
 
 public:
 	UIMgr();

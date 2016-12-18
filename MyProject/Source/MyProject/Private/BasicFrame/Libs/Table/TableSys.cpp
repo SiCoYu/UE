@@ -116,7 +116,7 @@ std::string& TableSys::getTableName(TableID::TableID tableID)
 	{
 		return table->m_tableName;
 	}			
-	return UtilStr::m_sDefaultStr;
+	return UtilStr::msDefaultStr;
 }
 
 // 读取一个表，仅仅读取表头

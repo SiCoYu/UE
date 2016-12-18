@@ -3,7 +3,7 @@
 #include "MMutex.h"
 
 MLock::MLock(MMutex* mutex)
-	: m_Lock(mutex->getMutex())
+	: mLock(mutex->getMutex())
 {
     
 }

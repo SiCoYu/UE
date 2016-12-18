@@ -18,7 +18,7 @@ template <class T> class DynBuffer;
 class ByteBuffer
 {
 public:
-	// int m_id;        // 测试使用
+	// int mId;        // 测试使用
 	// bool m_startTest;        // 开始测试使用
 
 protected:

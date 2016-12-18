@@ -3,7 +3,7 @@
 #include "MEvent.h"
 
 MThread::MThread(std::string threadName)
-	: m_threadName(threadName)
+	: mThreadName(threadName)
 {
 	//mSyncEvent = new MEvent();
 }
@@ -21,14 +21,14 @@ void MThread::setExitFlag(bool value)
 void MThread::start()
 {
 	// FRunnableThread::Create 的第二个参数如果穿 ansi 字符集会导致编译不过，需要传递宽字节编码
-	//m_pThread = FRunnableThread::Create(this, m_threadName.c_str(), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
-	m_pThread = FRunnableThread::Create(this, StringCast<TCHAR>(m_threadName.c_str()).Get(), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
+	//mThread = FRunnableThread::Create(this, mThreadName.c_str(), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
+	mThread = FRunnableThread::Create(this, StringCast<TCHAR>(mThreadName.c_str()).Get(), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
 	//this->mSyncEvent->Wait();
 }
 
 void MThread::join()
 {
-	m_pThread->WaitForCompletion();
+	mThread->WaitForCompletion();
 }
 
 bool MThread::Init(void)

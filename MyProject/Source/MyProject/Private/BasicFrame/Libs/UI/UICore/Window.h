@@ -22,25 +22,25 @@ class UWindow : public UUserWidget
 	GENERATED_BODY()
 
 protected:
-	UIFormID m_id;
+	UIFormID mId;
 public:
-	GUIWin* m_GUIWin;      // 控件数据
+	GUIWin* mGuiWin;      // 控件数据
 protected:
-	bool m_draggable;
+	bool mIsDraggable;
 
-	int m_hitYMax;	// 可点击范围 Y 的最大值
-	int m_alignVertial;
-	int m_alignHorizontal;
+	int mHitYMax;	// 可点击范围 Y 的最大值
+	int mAlignVertial;
+	int mAlignHorizontal;
 
-	int m_marginLeft;
-	int m_marginTop;
-	int m_marginRight;
-	int m_marginBottom;
+	int mMarginLeft;
+	int mMarginTop;
+	int mMarginRight;
+	int mMarginBottom;
 
-	int m_width;
-	int m_height;
-	UILayer* m_uiLayer;
-	bool m_isResReady;            // 资源是否已经加载并初始化
+	int mWidth;
+	int mHeight;
+	UILayer* mUiLayer;
+	bool mIsResReady;            // 资源是否已经加载并初始化
 
 public:
 	UWindow(const FObjectInitializer& ObjectInitializer);

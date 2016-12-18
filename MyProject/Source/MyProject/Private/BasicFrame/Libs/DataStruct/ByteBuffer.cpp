@@ -747,7 +747,7 @@ ByteBuffer& ByteBuffer::readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset
 
 //bool MByteBuffer::check()
 //{
-//    if (m_startTest && m_id == 1000)
+//    if (m_startTest && mId == 1000)
 //    {
 //        if (mPos == 32 || mPos == 16)
 //        {

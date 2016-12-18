@@ -11,7 +11,7 @@ class MMutex;
 class MLock
 {
 protected:
-	FScopeLock m_Lock;
+	FScopeLock mLock;
 
 public:
 	MLock(MMutex* mutex);

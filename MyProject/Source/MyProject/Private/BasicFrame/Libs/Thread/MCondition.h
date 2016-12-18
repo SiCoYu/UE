@@ -12,9 +12,9 @@ class MEvent;
 class MCondition
 {
 protected:
-	MMutex* m_pMMutex;
-    MEvent* m_pMEvent;
-    bool m_canEnterWait;  // 是否可以进入等待
+	MMutex* mMutex;
+    MEvent* mEvent;
+    bool mCanEnterWait;  // 是否可以进入等待
 
 public:
 	MCondition(std::string name = "");

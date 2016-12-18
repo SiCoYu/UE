@@ -7,7 +7,7 @@ class GUIWin
 {
 public:
 	//UUserWidget* m_umgWidget;
-	UUserWidget* m_uiRoot;      // ui 根节点
+	UUserWidget* mUiRoot;      // ui 根节点
 };
 
 #endif

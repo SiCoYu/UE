@@ -6,45 +6,45 @@
 
 MCondition::MCondition(std::string name)
 {
-    m_pMMutex = new MMutex();
-    m_pMEvent = new MEvent();
-    m_canEnterWait = true;      // 允许进入等待状态
+    mMutex = new MMutex();
+    mEvent = new MEvent();
+    mCanEnterWait = true;      // 允许进入等待状态
 }
 
 MCondition::~MCondition()
 {
-	delete m_pMMutex;
-	delete m_pMEvent;
+	delete mMutex;
+	delete mEvent;
 }
 
 bool MCondition::getCanEnterWait()
 {
-    return m_canEnterWait;
+    return mCanEnterWait;
 }
 
 void MCondition::wait()
 {
-	m_pMMutex->Lock();
-    if (m_canEnterWait)
+	mMutex->Lock();
+    if (mCanEnterWait)
     {
-		m_pMMutex->Unlock();   // 这个地方需要释放锁，否则 notifyAll 进不来
-        m_pMEvent->Wait();
-        m_pMEvent->Reset();      // 重置信号
+		mMutex->Unlock();   // 这个地方需要释放锁，否则 notifyAll 进不来
+        mEvent->Wait();
+        mEvent->Reset();      // 重置信号
     }
     else
     {
-        m_canEnterWait = true;
-		m_pMMutex->Unlock();
+        mCanEnterWait = true;
+		mMutex->Unlock();
     }
 }
 
 void MCondition::notifyAll()
 {
-	MLock mlock(m_pMMutex);
+	MLock mlock(mMutex);
 
-    if (m_canEnterWait) // 如果 m_canEnterWait == false，必然不能进入等待
+    if (mCanEnterWait) // 如果 mCanEnterWait == false，必然不能进入等待
     {
-        m_canEnterWait = false;
-        m_pMEvent->Set();        // 唤醒线程
+        mCanEnterWait = false;
+        mEvent->Set();        // 唤醒线程
     }
 }

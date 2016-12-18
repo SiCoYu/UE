@@ -11,7 +11,7 @@ class UIAttrItem;
 class UIAttrSystem
 {
 public:
-	std::map<UIFormID, UIAttrItem*> m_id2AttrDic;
+	std::map<UIFormID, UIAttrItem*> mId2AttrDic;
 
 public:
 	UIAttrSystem();

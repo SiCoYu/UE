@@ -13,8 +13,8 @@ class MThread : public FRunnable
 {
 protected:
 	bool mIsExitFlag;           // 退出标志
-	FRunnableThread* m_pThread;
-	std::string m_threadName;
+	FRunnableThread* mThread;
+	std::string mThreadName;
 	//MEvent* mSyncEvent;
 
 public:

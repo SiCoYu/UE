@@ -17,7 +17,7 @@ ClientBuffer::ClientBuffer()
 	//mSendTmpBA = new ByteBuffer();
 	mSendTmpBuffer = new MsgBuffer();
 	mSocketSendBA = new ByteBuffer();
-	//mSocketSendBA.m_id = 1000;
+	//mSocketSendBA.mId = 1000;
 
 	//mDynBuffer = new DynamicBuffer<byte>(8096);
 	mUnCompressHeaderBA = new ByteBuffer();

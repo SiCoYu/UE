@@ -10,13 +10,13 @@ enum FormID;
 class UIAttrItem
 {
 public:
-	FormID m_formID;
-	std::string m_codePath;               // 逻辑代码 path 
-	std::string m_widgetPath;             // 拖放的控件 path 
+	FormID mFormId;
+	std::string mCodePath;               // 逻辑代码 path 
+	std::string mWidgetPath;             // 拖放的控件 path 
 
-	UICanvasID m_canvasID;           // 在哪个 Canvas
-	UILayerID m_LayerID;             // 所在的 Layer
-	uint8 m_uiSceneType;   // 场景类型列表
+	UICanvasID mCanvasId;           // 在哪个 Canvas
+	UILayerID mLayerId;             // 所在的 Layer
+	uint8 mUiSceneType;   // 场景类型列表
 
 public:
 	UIAttrItem();

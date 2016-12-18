@@ -10,9 +10,9 @@ UIAttrSystem::UIAttrSystem()
 
 std::string UIAttrSystem::getPath(UIFormID id)
 {
-	if (UtilMap::ContainsKey(m_id2AttrDic, id))
+	if (UtilMap::ContainsKey(mId2AttrDic, id))
 	{
-		return m_id2AttrDic[id]->m_widgetPath;
+		return mId2AttrDic[id]->mWidgetPath;
 	}
 
 	return "";
@@ -21,18 +21,18 @@ std::string UIAttrSystem::getPath(UIFormID id)
 // 通过路径获取
 UIFormID UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
 {
-	for(auto keyValue : m_id2AttrDic)
+	for(auto keyValue : mId2AttrDic)
 	{
 		if (ePathComUI == pathType)
 		{
-			if (m_id2AttrDic[keyValue.first]->m_widgetPath == resPath)
+			if (mId2AttrDic[keyValue.first]->mWidgetPath == resPath)
 			{
 				return keyValue.first;
 			}
 		}
 		else if (ePathCodePath == pathType)
 		{
-			if (m_id2AttrDic[keyValue.first]->m_codePath == resPath)
+			if (mId2AttrDic[keyValue.first]->mCodePath == resPath)
 			{
 				return keyValue.first;
 			}

@@ -6,7 +6,7 @@ class FEvent;
 class MEvent
 {
 protected:
-	FEvent* m_event;
+	FEvent* mEvent;
 
 public:
 	MEvent();

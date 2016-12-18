@@ -2,7 +2,7 @@
 #include "UILoadingItem.h"
 
 UILoadingItem::UILoadingItem()
-	: m_resPath("")
+	: mResPath("")
 {
 
 }

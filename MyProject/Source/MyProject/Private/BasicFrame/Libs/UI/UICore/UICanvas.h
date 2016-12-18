@@ -18,9 +18,9 @@ enum UICanvasID
 class UICanvas
 {
 protected:
-	std::string m_goName;				// GameObject 的名字
-	UICanvasID m_canvasID;				// CanvasID
-	std::vector<UILayer*> m_layerList;   // Canvas 中的 Layer
+	std::string mGoName;				// GameObject 的名字
+	UICanvasID mCanvasId;				// CanvasID
+	std::vector<UILayer*> mLayerList;   // Canvas 中的 Layer
 
 public:
 	UICanvas(UICanvasID canvasID);
