@@ -9,7 +9,7 @@
 class RefCount
 {
 protected:
-	uint32 m_refNum;                // 引用计数
+	uint32 mRefNum;                // 引用计数
 
 public:
 	RefCount();

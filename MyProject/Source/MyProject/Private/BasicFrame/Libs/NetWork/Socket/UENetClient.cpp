@@ -15,43 +15,43 @@
 #include "DynBuffer.h"
 
 UENetClient::UENetClient()
-	: m_boundEndpoint(FIPv4Address::Any, 0),
-	m_isConnected(false)
+	: mBoundEndpoint(FIPv4Address::Any, 0),
+	mIsConnected(false)
 {
-	m_socket = nullptr;
-	m_clientBuffer = new ClientBuffer();
+	mSocket = nullptr;
+	mClientBuffer = new ClientBuffer();
 	m_strDesc = "";
-	//m_boundEndpoint(FIPv4Address::Any, 0);
+	//mBoundEndpoint(FIPv4Address::Any, 0);
 
-	m_msgSendEndEvent = new MEvent();
-	m_sendMutex = new MMutex();
+	mMsgSendEndEvent = new MEvent();
+	mSendMutex = new MMutex();
 }
 
 UENetClient::~UENetClient()
 {
-	delete m_clientBuffer;
-	delete m_msgSendEndEvent;
-	delete m_sendMutex;
+	delete mClientBuffer;
+	delete mMsgSendEndEvent;
+	delete mSendMutex;
 }
 
 bool UENetClient::getRecvThreadStart()
 {
-	return m_brecvThreadStart;
+	return mIsRecvThreadStart;
 }
 
 void UENetClient::setRecvThreadStart(bool value)
 {
-	m_brecvThreadStart = value;
+	mIsRecvThreadStart = value;
 }
 
 bool UENetClient::getIsConnected()
 {
-	return m_isConnected;
+	return mIsConnected;
 }
 
 void UENetClient::setIsConnected(bool value)
 {
-	m_isConnected = value;
+	mIsConnected = value;
 }
 
 void UENetClient::Disconnect()
@@ -61,12 +61,12 @@ void UENetClient::Disconnect()
 
 ClientBuffer* UENetClient::getClientBuffer()
 {
-	return m_clientBuffer;
+	return mClientBuffer;
 }
 
 void UENetClient::sendMsg()
 {
-	//m_clientBuffer->sendMsg();
+	//mClientBuffer->sendMsg();
 	testSendData();
 }
 
@@ -74,15 +74,15 @@ bool UENetClient::connect(FString ip, uint32 port)
 {
 	FIPv4Address IPAddress;
 	FIPv4Address::Parse(ip, IPAddress);
-	m_boundEndpoint = FIPv4Endpoint(IPAddress, port);
+	mBoundEndpoint = FIPv4Endpoint(IPAddress, port);
 
 	ISocketSubsystem* SocketSubsystem = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM);
 	bool result = false;
 	if (SocketSubsystem != nullptr)
 	{
-		m_socket = SocketSubsystem->CreateSocket(NAME_Stream, *m_strDesc, true);
+		mSocket = SocketSubsystem->CreateSocket(NAME_Stream, *m_strDesc, true);
 
-		result = m_socket->Connect(*m_boundEndpoint.ToInternetAddr());
+		result = mSocket->Connect(*mBoundEndpoint.ToInternetAddr());
 	}
 
 	return result;
@@ -92,45 +92,45 @@ void UENetClient::testSendData()
 {
 	int sendByte = 0;
 	uint8 data[5] = { 1, 2, 3, 4, 5 };
-	if (m_socket != nullptr)
+	if (mSocket != nullptr)
 	{
-		m_socket->Send(data, 5, sendByte);
+		mSocket->Send(data, 5, sendByte);
 	}
 }
 
 // 发送消息
 void UENetClient::Send()
 {
-	MLock mlock(m_sendMutex);
+	MLock mlock(mSendMutex);
 
 	if (!checkAndUpdateConnect())
 	{
 		return;
 	}
 
-	if (m_clientBuffer->getSendBuffer()->getBytesAvailable() == 0)     // 如果发送缓冲区没有要发送的数据
+	if (mClientBuffer->getSendBuffer()->getBytesAvailable() == 0)     // 如果发送缓冲区没有要发送的数据
 	{
-		if (m_clientBuffer->getSendTmpBuffer()->getCircularBuffer()->getSize() > 0)      // 如果发送临时缓冲区有数据要发
+		if (mClientBuffer->getSendTmpBuffer()->getCircularBuffer()->getSize() > 0)      // 如果发送临时缓冲区有数据要发
 		{
-			m_clientBuffer->getSendData();
+			mClientBuffer->getSendData();
 		}
 
-		if (m_clientBuffer->getSendBuffer()->getBytesAvailable() == 0)        // 如果发送缓冲区中确实没有数据
+		if (mClientBuffer->getSendBuffer()->getBytesAvailable() == 0)        // 如果发送缓冲区中确实没有数据
 		{
-			m_msgSendEndEvent->Set();        // 通知等待线程，所有数据都发送完成
+			mMsgSendEndEvent->Set();        // 通知等待线程，所有数据都发送完成
 			return;
 		}
 	}
 
-	GLogSys->log(UtilStr::Format("开始发送字节数 {0} ", m_clientBuffer->getSendBuffer()->getBytesAvailable()));
+	GLogSys->log(UtilStr::Format("开始发送字节数 {0} ", mClientBuffer->getSendBuffer()->getBytesAvailable()));
 
 	bool ret = true;
 	int bytesSent = 0;
-	ret = m_socket->Send((uint8*)(m_clientBuffer->getSendBuffer()->getDynBuffer()->getBuffer() + m_clientBuffer->getSendBuffer()->getPos()), m_clientBuffer->getSendBuffer()->getBytesAvailable(), bytesSent);
+	ret = mSocket->Send((uint8*)(mClientBuffer->getSendBuffer()->getDynBuffer()->getBuffer() + mClientBuffer->getSendBuffer()->getPos()), mClientBuffer->getSendBuffer()->getBytesAvailable(), bytesSent);
 	
 	if (!ret)		// 如果发送失败
 	{
-		m_msgSendEndEvent->Set();        // 发生异常，通知等待线程，所有数据都发送完成，防止等待线程不能解锁
+		mMsgSendEndEvent->Set();        // 发生异常，通知等待线程，所有数据都发送完成，防止等待线程不能解锁
 		// 输出日志
 		GLogSys->error("发送失败");
 		//Disconnect(0);
@@ -139,17 +139,17 @@ void UENetClient::Send()
 	{
 		GLogSys->log(UtilStr::Format("结束发送字节数 {0} ", bytesSent));
 
-		if (m_clientBuffer->getSendBuffer()->getLength() < m_clientBuffer->getSendBuffer()->getPos() + bytesSent)
+		if (mClientBuffer->getSendBuffer()->getLength() < mClientBuffer->getSendBuffer()->getPos() + bytesSent)
 		{
 			GLogSys->log(UtilStr::Format("结束发送字节数错误 {0}", bytesSent));
-			m_clientBuffer->getSendBuffer()->setPos(m_clientBuffer->getSendBuffer()->getLength());
+			mClientBuffer->getSendBuffer()->setPos(mClientBuffer->getSendBuffer()->getLength());
 		}
 		else
 		{
-			m_clientBuffer->getSendBuffer()->setPos(m_clientBuffer->getSendBuffer()->getPos() + bytesSent);
+			mClientBuffer->getSendBuffer()->setPos(mClientBuffer->getSendBuffer()->getPos() + bytesSent);
 		}
 
-		if (m_clientBuffer->getSendBuffer()->getBytesAvailable() > 0)     // 如果上一次发送的数据还没发送完成，继续发送
+		if (mClientBuffer->getSendBuffer()->getBytesAvailable() > 0)     // 如果上一次发送的数据还没发送完成，继续发送
 		{
 			Send();                 // 继续发送数据
 		}
@@ -160,12 +160,12 @@ void UENetClient::Send()
 void UENetClient::Receive()
 {
 	// 只有 socket 连接的时候才继续接收数据
-	if (!m_isConnected)
+	if (!mIsConnected)
 	{
 		// 接收从服务器返回的信息
 		bool ret = true;	// 默认是接收的
 		int32 bytesRead = 0;	// 读取的总的字节数
-		ret = m_socket->Recv((uint8*)(m_clientBuffer->getDynBuffer()->getBuffer()), (int)m_clientBuffer->getDynBuffer()->getCapacity(), bytesRead, ESocketReceiveFlags::None);
+		ret = mSocket->Recv((uint8*)(mClientBuffer->getDynBuffer()->getBuffer()), (int)mClientBuffer->getDynBuffer()->getCapacity(), bytesRead, ESocketReceiveFlags::None);
 
 		if (!ret)
 		{
@@ -176,9 +176,9 @@ void UENetClient::Receive()
 			if (bytesRead > 0)
 			{
 				GLogSys->log(UtilStr::Format("接收到数据 {0}", bytesRead));
-				m_clientBuffer->getDynBuffer()->setSize(bytesRead);	// 设置读取大小
-				m_clientBuffer->moveDyn2Raw();             // 将接收到的数据放到原始数据队列
-				m_clientBuffer->moveRaw2Msg();             // 将完整的消息移动到消息缓冲区
+				mClientBuffer->getDynBuffer()->setSize(bytesRead);	// 设置读取大小
+				mClientBuffer->moveDyn2Raw();             // 将接收到的数据放到原始数据队列
+				mClientBuffer->moveRaw2Msg();             // 将完整的消息移动到消息缓冲区
 				Receive();                  // 继续接收
 			}
 		}
@@ -188,36 +188,36 @@ void UENetClient::Receive()
 // 检查并且更新连接状态
 bool UENetClient::checkAndUpdateConnect()
 {
-	if (m_socket != nullptr && m_socket->GetConnectionState() != SCS_Connected)	// 如果不是连接状态
+	if (mSocket != nullptr && mSocket->GetConnectionState() != SCS_Connected)	// 如果不是连接状态
 	{
-		//if (m_isConnected)
+		//if (mIsConnected)
 		//{
 		//	Ctx.m_instance.m_sysMsgRoute.push(new SocketCloseedMR());
 		//}
-		m_isConnected = false;
+		mIsConnected = false;
 	}
 
-	return m_isConnected;
+	return mIsConnected;
 }
 
 MEvent* UENetClient::getMsgSendEndEvent()
 {
-	return m_msgSendEndEvent;
+	return mMsgSendEndEvent;
 }
 
 void UENetClient::setMsgSendEndEvent(MEvent* value)
 {
-	m_msgSendEndEvent = value;
+	mMsgSendEndEvent = value;
 }
 
 bool UENetClient::canSendNewData()
 {
-	return (m_clientBuffer->getSendBuffer()->getBytesAvailable() == 0);
+	return (mClientBuffer->getSendBuffer()->getBytesAvailable() == 0);
 }
 
 void UENetClient::SetRevBufferSize(int size)
 {
 	int retSize = 0;
-	m_socket->SetSendBufferSize(size, retSize);      // ReceiveBufferSize 默认 8096 字节
-	m_clientBuffer->SetRevBufferSize(size);
+	mSocket->SetSendBufferSize(size, retSize);      // ReceiveBufferSize 默认 8096 字节
+	mClientBuffer->SetRevBufferSize(size);
 }

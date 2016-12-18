@@ -7,7 +7,7 @@
 void LevelResItem::init(LoadItem* item)
 {
 	ResItem::init(item);
-	m_refCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
+	mRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }
 
 void LevelResItem::setLevelName(std::string lvlName)

@@ -17,14 +17,14 @@ class LoadParam;
 class ResLoadMgr : public MsgRouteHandleBase, public IDispatchObject
 {
 protected:
-	uint32 m_maxParral;                             // 最多同时加载的内容
-    uint32 m_curNum;                                // 当前加载的数量
-    ResLoadData* m_LoadData;
-    LoadItem* m_retLoadItem;
-    ResItem* m_retResItem;
-    //ResMsgRouteCB m_resMsgRouteCB;
-    MList<std::string> m_zeroRefResIDList;      // 没有引用的资源 ID 列表
-    int m_loadingDepth;      // 加载深度
+	uint32 mMaxParral;                             // 最多同时加载的内容
+    uint32 mCurNum;                                // 当前加载的数量
+    ResLoadData* mLoadData;
+    LoadItem* mRetLoadItem;
+    ResItem* mRetResItem;
+    //ResMsgRouteCB mResMsgRouteCB;
+    MList<std::string> mZeroRefResIDList;      // 没有引用的资源 ID 列表
+    int mLoadingDepth;      // 加载深度
 
 public:
 	ResLoadMgr();

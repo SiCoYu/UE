@@ -4,8 +4,9 @@
 #include <string>
 
 /**
-    * @brief 卡表中的属性名字
-    */
+ * @brief 卡表中的属性名字
+ */
+
 class TableCardAttrName
 {
 public:

@@ -4,26 +4,26 @@
 
 RefCountResLoadResultNotify::RefCountResLoadResultNotify()
 {
-	m_refCount = new RefCount();
+	mRefCount = new RefCount();
 }
 
 RefCountResLoadResultNotify::~RefCountResLoadResultNotify()
 {
-	delete m_refCount;
+	delete mRefCount;
 }
 
 RefCount* RefCountResLoadResultNotify::getRefCount()
 {
-	return m_refCount;
+	return mRefCount;
 }
 
 void RefCountResLoadResultNotify::setRefCount(RefCount* value)
 {
-	m_refCount = value;
+	mRefCount = value;
 }
 
 void RefCountResLoadResultNotify::copyFrom(ResLoadResultNotify* rhv)
 {
 	ResLoadResultNotify::copyFrom(rhv);
-	m_refCount->copyFrom(((RefCountResLoadResultNotify*)(rhv))->getRefCount());
+	mRefCount->copyFrom(((RefCountResLoadResultNotify*)(rhv))->getRefCount());
 }

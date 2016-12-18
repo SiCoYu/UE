@@ -17,8 +17,8 @@ namespace SOCKETS_NAMESPACE {
 
 NetThread::NetThread(SocketHandler *p)
 	: Thread(true)
-	, m_h(p)
-	, m_ExitFlag(false)
+	, mH(p)
+	, mIsExitFlag(false)
 {
 	// Creator will release
 }
@@ -35,26 +35,26 @@ NetThread::~NetThread()
 
 void NetThread::Run()
 {
-	while (!m_ExitFlag)
+	while (!mIsExitFlag)
 	{
-		if (m_h->GetCount() > 1 && IsRunning())
+		if (mH->GetCount() > 1 && IsRunning())
 		{
-			m_h->Select(0, 500000);
-			((INetMgr*)m_h)->recAndSendMsg();
+			mH->Select(0, 500000);
+			((INetMgr*)mH)->recAndSendMsg();
 		}
 
 		Utility::Sleep(1000);
 	}
-	// m_socket now deleted oops
+	// mSocket now deleted oops
 	//  (a socket can only be detached if DeleteByHandler() is true)
-	// yeah oops m_socket delete its socket thread, that means this
+	// yeah oops mSocket delete its socket thread, that means this
 	// so Socket will no longer delete its socket thread, instead we do this:
 	SetDeleteOnExit();
 }
 
 void NetThread::setExitFlag(bool exit)
 {
-	m_ExitFlag = exit;
+	mIsExitFlag = exit;
 }
 
 #ifdef SOCKETS_NAMESPACE

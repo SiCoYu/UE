@@ -5,57 +5,57 @@
 
 LoadItem::LoadItem()
 {
-	m_nonRefCountResLoadResultNotify = new NonRefCountResLoadResultNotify();
+	mNonRefCountResLoadResultNotify = new NonRefCountResLoadResultNotify();
 }
 
 ResPackType LoadItem::getResPackType()
 {
-	return m_resPackType;
+	return mResPackType;
 }
 
 void LoadItem::setResPackType(ResPackType value)
 {
-	m_resPackType = value;
+	mResPackType = value;
 }
 
 std::string LoadItem::getPath()
 {
-	return m_path;
+	return mPath;
 }
 
 void LoadItem::setPath(std::string value)
 {
-	m_path = value;
+	mPath = value;
 }
 
 std::string LoadItem::getPathNoExt()
 {
-	return m_pathNoExt;
+	return mPathNoExt;
 }
 
 void LoadItem::setPathNoExt(std::string value)
 {
-	m_pathNoExt = value;
+	mPathNoExt = value;
 }
 
 std::string LoadItem::getExtName()
 {
-	return m_extName;
+	return mExtName;
 }
 
 void LoadItem::setExtName(std::string value)
 {
-	m_extName = value;
+	mExtName = value;
 }
 
 bool LoadItem::getLoadNeedCoroutine()
 {
-	return m_loadNeedCoroutine;
+	return mIsLoadNeedCoroutine;
 }
 
 void LoadItem::setLoadNeedCoroutine(bool value)
 {
-	m_loadNeedCoroutine = value;
+	mIsLoadNeedCoroutine = value;
 }
 
 ResLoadType LoadItem::getResLoadType()
@@ -70,17 +70,17 @@ void LoadItem::setResLoadType(ResLoadType value)
 
 NonRefCountResLoadResultNotify* LoadItem::getNonRefCountResLoadResultNotify()
 {
-	return m_nonRefCountResLoadResultNotify;
+	return mNonRefCountResLoadResultNotify;
 }
 
 void LoadItem::setNonRefCountResLoadResultNotify(NonRefCountResLoadResultNotify* value)
 {
-	m_nonRefCountResLoadResultNotify = value;
+	mNonRefCountResLoadResultNotify = value;
 }
 
 void LoadItem::load()
 {
-	m_nonRefCountResLoadResultNotify->getResLoadState()->setLoading();
+	mNonRefCountResLoadResultNotify->getResLoadState()->setLoading();
 }
 
 // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
@@ -91,6 +91,6 @@ void LoadItem::unload()
 
 void LoadItem::reset()
 {
-	m_path = "";
-	m_loadNeedCoroutine = false;
+	mPath = "";
+	mIsLoadNeedCoroutine = false;
 }

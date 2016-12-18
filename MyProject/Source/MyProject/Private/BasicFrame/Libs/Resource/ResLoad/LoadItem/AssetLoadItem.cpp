@@ -8,12 +8,12 @@ AssetLoadItem::AssetLoadItem()
 
 UClass* AssetLoadItem::getResObj()
 {
-	return m_resObj;
+	return mResObj;
 }
 
 void AssetLoadItem::setResObj(UClass* value)
 {
-	m_resObj = value;
+	mResObj = value;
 }
 
 void AssetLoadItem::load()

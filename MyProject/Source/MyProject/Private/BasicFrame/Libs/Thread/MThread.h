@@ -12,10 +12,10 @@ class MEvent;
 class MThread : public FRunnable
 {
 protected:
-	bool m_ExitFlag;           // 退出标志
+	bool mIsExitFlag;           // 退出标志
 	FRunnableThread* m_pThread;
 	std::string m_threadName;
-	//MEvent* m_pSyncEvent;
+	//MEvent* mSyncEvent;
 
 public:
 	MThread(std::string threadName = "");

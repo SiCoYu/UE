@@ -11,7 +11,7 @@ class IRecycle;
 class PoolSys
 {
 protected:
-	LockList<IRecycle*> m_poolList;
+	LockList<IRecycle*> mPoolList;
 
 public:
 	template<class T>
@@ -20,12 +20,12 @@ public:
 		//T retObj = default(T);
 		//// 查找
 		//int idx = 0;
-		//for(idx = 0; idx < m_poolList.Count; ++idx)
+		//for(idx = 0; idx < mPoolList.Count; ++idx)
 		//{
-		//    if (typeof(T) == m_poolList[idx].GetType())
+		//    if (typeof(T) == mPoolList[idx].GetType())
 		//    {
-		//        retObj = (T)m_poolList[idx];
-		//        m_poolList.RemoveAt(idx);
+		//        retObj = (T)mPoolList[idx];
+		//        mPoolList.RemoveAt(idx);
 		//        MethodInfo myMethodInfo = retObj.GetType().GetMethod("resetDefault");
 		//        if (myMethodInfo != null)
 		//        {

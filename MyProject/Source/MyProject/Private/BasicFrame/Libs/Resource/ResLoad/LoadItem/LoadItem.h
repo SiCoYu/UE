@@ -11,16 +11,16 @@ class NonRefCountResLoadResultNotify;
 class LoadItem : public IDispatchObject
 {
 protected:
-    ResPackType m_resPackType;
+    ResPackType mResPackType;
     ResLoadType mResLoadType;   // 资源加载类型
 
-	std::string m_path;                // 完整的目录
-	std::string m_pathNoExt;           // 不包括扩展名字的路径
-	std::string m_extName;             // 扩展名字
+	std::string mPath;                // 完整的目录
+	std::string mPathNoExt;           // 不包括扩展名字的路径
+	std::string mExtName;             // 扩展名字
 
-    bool m_loadNeedCoroutine;     // 加载是否需要协同程序
+    bool mIsLoadNeedCoroutine;     // 加载是否需要协同程序
 
-    NonRefCountResLoadResultNotify* m_nonRefCountResLoadResultNotify;
+    NonRefCountResLoadResultNotify* mNonRefCountResLoadResultNotify;
 
 public:
 	LoadItem();

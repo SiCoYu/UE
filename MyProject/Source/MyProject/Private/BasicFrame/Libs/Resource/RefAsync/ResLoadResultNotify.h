@@ -11,8 +11,8 @@ class IDispatchObject;
 class ResLoadResultNotify
 {
 protected:
-	ResLoadState* m_resLoadState;          // 资源加载状态
-    ResEventDispatch* m_loadResEventDispatch;    // 事件分发器
+	ResLoadState* mResLoadState;          // 资源加载状态
+    ResEventDispatch* mLoadResEventDispatch;    // 事件分发器
 
 public:
 	ResLoadResultNotify();

@@ -9,8 +9,8 @@ class UObject;
 class UIAssetRes : public InsResBase
 {
 public:
-	UObject* m_go;
-	UObject* m_retGO;
+	UObject* mGo;
+	UObject* mRetGO;
 
 public:
 	UIAssetRes();

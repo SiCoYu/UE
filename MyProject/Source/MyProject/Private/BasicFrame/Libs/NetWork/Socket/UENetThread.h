@@ -13,9 +13,9 @@ class MEvent;
 class UENetThread : public MThread
 {
 private:
-	INetMgr* m_pNetMgr;
-	bool m_ExitFlag;
-	MEvent* m_pSyncEvent;
+	INetMgr* mNetMgr;
+	bool mIsExitFlag;
+	MEvent* mSyncEvent;
 
 public:
 	UENetThread(INetMgr* pNetMgr, std::string threadName);

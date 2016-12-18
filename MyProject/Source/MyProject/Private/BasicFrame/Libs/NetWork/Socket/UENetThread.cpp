@@ -4,20 +4,20 @@
 #include "MEvent.h"
 
 UENetThread::UENetThread(INetMgr* pNetMgr, std::string m_threadName)
-	: MThread(m_threadName), m_ExitFlag(false)
+	: MThread(m_threadName), mIsExitFlag(false)
 {
-	m_pNetMgr = pNetMgr;
-	m_pSyncEvent = new MEvent();
+	mNetMgr = pNetMgr;
+	mSyncEvent = new MEvent();
 }
 
 UENetThread::~UENetThread()
 {
-	delete m_pSyncEvent;
+	delete mSyncEvent;
 }
 
 MEvent* UENetThread::getSyncEventPtr()
 {
-	return m_pSyncEvent;
+	return mSyncEvent;
 }
 
 bool UENetThread::Init(void)
@@ -32,14 +32,14 @@ void UENetThread::Exit(void)
 
 uint32 UENetThread::Run(void)
 {
-	if (m_pSyncEvent != nullptr)
+	if (mSyncEvent != nullptr)
 	{
-		m_pSyncEvent->Set();
+		mSyncEvent->Set();
 	}
 
-	while (!m_ExitFlag)
+	while (!mIsExitFlag)
 	{
-		m_pNetMgr->recAndSendMsg();
+		mNetMgr->recAndSendMsg();
 		FPlatformProcess::Sleep(1.0f);
 	}
 

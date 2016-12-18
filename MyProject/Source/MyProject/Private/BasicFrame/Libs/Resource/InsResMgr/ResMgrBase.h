@@ -27,11 +27,11 @@ class IDispatchObject;
 class ResMgrBase
 {
 public:
-	std::map<std::string, InsResBase*> m_path2ResDic;
+	std::map<std::string, InsResBase*> mPath2ResDic;
 
 protected:
-	MList<std::string> m_zeroRefResIDList;      // 没有引用的资源 ID 列表
-    int m_loadingDepth;          // 加载深度
+	MList<std::string> mZeroRefResIDList;      // 没有引用的资源 ID 列表
+    int mLoadingDepth;          // 加载深度
 
 public:
 	ResMgrBase();
@@ -50,8 +50,8 @@ public:
 		LoadParam* param = GPoolSys->newObject<LoadParam>();
 		LocalFileSys.modifyLoadParam(path, param);
 		param.m_loadNeedCoroutine = true;
-		param.m_resNeedCoroutine = true;
-		param.m_loadEventHandle = handle;
+		param.mIsResNeedCoroutine = true;
+		param.mLoadEventHandle = handle;
 		ret = getAndLoad<T>(param);
 		GPoolSys->deleteObj(param);
 
@@ -62,7 +62,7 @@ public:
 	T* getAndLoad(LoadParam* param)
 	{
 		load<T>(param);
-		return (T*)getRes(param.m_path);
+		return (T*)getRes(param.mPath);
 	}
 
 	// 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能喝异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
@@ -71,10 +71,10 @@ public:
 	{
 		LoadParam param;
 		param = GPoolSys->newObject<LoadParam>();
-		param->m_path = path;
-		// param.m_loadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.m_loadEventHandle = onLoadEventHandle ，内部会自动调用
+		param->mPath = path;
+		// param.mLoadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.mLoadEventHandle = onLoadEventHandle ，内部会自动调用
 		param->m_loadNeedCoroutine = false;
-		param->m_resNeedCoroutine = false;
+		param->mIsResNeedCoroutine = false;
 		load<T>(param);
 		GPoolSys->deleteObj(param);
 	}
@@ -84,9 +84,9 @@ public:
 	{
 		T* ret = new T();
 		ret->getRefCountResLoadResultNotify()->getRefCount()->incRef();
-		ret->m_path = param->m_path;
+		ret->mPath = param->mPath;
 
-		ret->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->m_loadEventHandle);
+		ret->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
 
 		return ret;
 	}
@@ -97,9 +97,9 @@ protected:
 	template<class T>
 	void loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
 	{
-		m_path2ResDic[param->m_path] = resItem;
-		m_path2ResDic[param->m_path]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
-		param->m_loadEventHandle = EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle);
+		mPath2ResDic[param->mPath] = resItem;
+		mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
+		param->mLoadEventHandle = EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle);
 		GResLoadMgr->loadResources(param);
 	}
 
@@ -116,22 +116,22 @@ public:
 	template<class T>
 	void load(LoadParam* param)
 	{
-		++m_loadingDepth;
-		if (UtilMap::ContainsKey(m_path2ResDic, param->m_path))
+		++mLoadingDepth;
+		if (UtilMap::ContainsKey(mPath2ResDic, param->mPath))
 		{
 			loadWithResCreatedAndLoad(param);
 		}
-		else if (param->m_loadInsRes != nullptr)
+		else if (param->mLoadInsRes != nullptr)
 		{
-			loadWithResCreatedAndNotLoad<T>(param, (T*)(param->m_loadInsRes));
+			loadWithResCreatedAndNotLoad<T>(param, (T*)(param->mLoadInsRes));
 		}
 		else
 		{
 			loadWithNotResCreatedAndNotLoad<T>(param);
 		}
-		--m_loadingDepth;
+		--mLoadingDepth;
 
-		if (m_loadingDepth == 0)
+		if (mLoadingDepth == 0)
 		{
 			unloadNoRefResFromList();
 		}

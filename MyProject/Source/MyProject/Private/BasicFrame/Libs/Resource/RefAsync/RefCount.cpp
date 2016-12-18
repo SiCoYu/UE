@@ -3,39 +3,39 @@
 
 RefCount::RefCount()
 {
-	m_refNum = 0;       // 引用计数从 1 改成 0 
+	mRefNum = 0;       // 引用计数从 1 改成 0 
 }
 
 uint32 RefCount::getRefNum()
 {
-	return m_refNum;
+	return mRefNum;
 }
 void RefCount::setRefNum(int32 value)
 {
-	m_refNum = value;
+	mRefNum = value;
 }
 
 void RefCount::reset()
 {
-	m_refNum = 0;
+	mRefNum = 0;
 }
 
 void RefCount::incRef()
 {
-	++m_refNum;
+	++mRefNum;
 }
 
 void RefCount::decRef()
 {
-	--m_refNum;
+	--mRefNum;
 }
 
 bool RefCount::bNoRef()
 {
-	return m_refNum == 0;
+	return mRefNum == 0;
 }
 
 void RefCount::copyFrom(RefCount* rhv)
 {
-	m_refNum = rhv->getRefNum();
+	mRefNum = rhv->getRefNum();
 }

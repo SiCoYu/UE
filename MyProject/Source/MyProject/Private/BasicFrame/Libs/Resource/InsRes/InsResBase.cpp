@@ -5,26 +5,26 @@
 InsResBase::InsResBase()
 {
 #if PKG_RES_LOAD
-	m_bOrigResNeedImmeUnload = false;
+	mIsOrigResNeedImmeUnload = false;
 #else
-	m_bOrigResNeedImmeUnload = true;
+	mIsOrigResNeedImmeUnload = true;
 #endif
-	m_refCountResLoadResultNotify = new RefCountResLoadResultNotify();
+	mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
 }
 
 bool InsResBase::getIsOrigResNeedImmeUnload()
 {
-	return m_bOrigResNeedImmeUnload;
+	return mIsOrigResNeedImmeUnload;
 }
 
 void InsResBase::setIsOrigResNeedImmeUnload(bool value)
 {
-	m_bOrigResNeedImmeUnload = value;
+	mIsOrigResNeedImmeUnload = value;
 }
 
 std::string InsResBase::GetPath()
 {
-	return m_path;
+	return mPath;
 }
 
 std::string InsResBase::getPrefabName()         // 只有 Prefab 资源才实现这个函数
@@ -35,7 +35,7 @@ std::string InsResBase::getPrefabName()         // 只有 Prefab 资源才实现
 void InsResBase::init(ResItem* res)
 {
 	initImpl(res);         // 内部初始化完成后，才分发事件
-	m_refCountResLoadResultNotify->onLoadEventHandle(this);
+	mRefCountResLoadResultNotify->onLoadEventHandle(this);
 }
 
 // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重在了
@@ -47,7 +47,7 @@ void InsResBase::initImpl(ResItem* res)
 void InsResBase::failed(ResItem* res)
 {
 	unload();
-	m_refCountResLoadResultNotify->onLoadEventHandle(this);
+	mRefCountResLoadResultNotify->onLoadEventHandle(this);
 }
 
 void InsResBase::unload()
@@ -57,10 +57,10 @@ void InsResBase::unload()
 
 RefCountResLoadResultNotify* InsResBase::getRefCountResLoadResultNotify()
 {
-	return m_refCountResLoadResultNotify;
+	return mRefCountResLoadResultNotify;
 }
 
 void InsResBase::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value)
 {
-	m_refCountResLoadResultNotify = value;
+	mRefCountResLoadResultNotify = value;
 }

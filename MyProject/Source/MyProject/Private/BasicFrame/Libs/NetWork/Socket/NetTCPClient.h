@@ -19,7 +19,7 @@ class ClientBuffer;
 class NetTCPClient : public TcpSocket
 {
 protected:
-	ClientBuffer* m_clientBuffer;
+	ClientBuffer* mClientBuffer;
 
 public:
 	NetTCPClient(ISocketHandler& h);

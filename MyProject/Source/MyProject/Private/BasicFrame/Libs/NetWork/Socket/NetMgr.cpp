@@ -164,7 +164,7 @@ void NetMgr::NetMgr_Inter()
 
 NetMgr::~NetMgr() 
 {
-	m_netThread->setExitFlag(true);
+	mNetThread->setExitFlag(true);
 #ifdef USE_EXTERN_THREAD
 	this->Release();
 #endif
@@ -174,14 +174,14 @@ NetMgr::~NetMgr()
 
 void NetMgr::startThread()
 {
-	//m_netThread = new UENetThread(this);
-	//m_pRenderingThread = FRunnableThread::Create(m_netThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
-	//m_netThread->m_pTaskGraphBoundSyncEvent->Wait();
+	//mNetThread = new UENetThread(this);
+	//m_pRenderingThread = FRunnableThread::Create(mNetThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
+	//mNetThread->m_pTaskGraphBoundSyncEvent->Wait();
 
 	// 函数 FRunnableThread::Create 第二个参数一定是款字节字符串，如果是多字节就会编译报错
-	m_netThread = new UENetThread(this, "NetThread");
-	m_netThread->start();
-	m_netThread->getSyncEventPtr()->Wait();
+	mNetThread = new UENetThread(this, "NetThread");
+	mNetThread->start();
+	mNetThread->getSyncEventPtr()->Wait();
 }
 
 void NetMgr::openSocket(std::string ip, uint32 port)
@@ -198,19 +198,19 @@ void NetMgr::closeSocket(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string key = strStream.str();
-	if (UtilMap::ContainsKey(m_id2ClientDic, key))	// 如果没有这个 NetClient
+	if (UtilMap::ContainsKey(mId2ClientDic, key))	// 如果没有这个 NetClient
 	{
 		// 关闭 socket 之前要等待所有的数据都发送完成，如果发送一直超时，可能就卡在这很长时间
-		m_id2ClientDic[key]->getMsgSendEndEvent()->Reset();        // 重置信号
-		m_id2ClientDic[key]->getMsgSendEndEvent()->WaitOne();      // 阻塞等待数据全部发送完成
+		mId2ClientDic[key]->getMsgSendEndEvent()->Reset();        // 重置信号
+		mId2ClientDic[key]->getMsgSendEndEvent()->WaitOne();      // 阻塞等待数据全部发送完成
 
 		mVisitMutex->Lock();
 		{
-			m_id2ClientDic[key]->Disconnect();
-			UtilMap::Remove(m_id2ClientDic, key);
+			mId2ClientDic[key]->Disconnect();
+			UtilMap::Remove(mId2ClientDic, key);
 		}
 		mVisitMutex->Unlock();
-		m_curClient = nullptr;
+		mCurClient = nullptr;
 	}
 }
 
@@ -267,10 +267,10 @@ void NetMgr::openSocket_Inter(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string ipId = strStream.str();
-	if (!UtilMap::ContainsKey(m_id2ClientDic, ipId))	// 如果没有这个 NetClient
+	if (!UtilMap::ContainsKey(mId2ClientDic, ipId))	// 如果没有这个 NetClient
 	{
-		m_id2ClientDic[ipId] = new UENetClient();
-		m_id2ClientDic[ipId]->connect(ip.c_str(), port);
+		mId2ClientDic[ipId] = new UENetClient();
+		mId2ClientDic[ipId]->connect(ip.c_str(), port);
 
 		testSendData(ip, port);
 	}
@@ -316,21 +316,21 @@ void NetMgr::testSendData(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string ipId = strStream.str();
-	if (UtilMap::ContainsKey(m_id2ClientDic, ipId))
+	if (UtilMap::ContainsKey(mId2ClientDic, ipId))
 	{
-		m_id2ClientDic[ipId]->sendMsg();
+		mId2ClientDic[ipId]->sendMsg();
 	}
 }
 
 void NetMgr::closeCurSocket()
 {
-	if (m_curClient != nullptr)
+	if (mCurClient != nullptr)
 	{
 		std::string ip;
 		int port;
 
-		ip = m_curClient->mIp;
-		port = m_curClient->mPort;
+		ip = mCurClient->mIp;
+		port = mCurClient->mPort;
 
 		std::stringstream strStream;
 		strStream << ip << "&" << port;
@@ -340,25 +340,25 @@ void NetMgr::closeCurSocket()
 		//m_id2SocketDic[key].msgSendEndEvent.Reset();        // 重置信号
 		//m_id2SocketDic[key].msgSendEndEvent.WaitOne();      // 阻塞等待数据全部发送完成
 
-		if (UtilMap::ContainsKey(m_id2ClientDic, key))
+		if (UtilMap::ContainsKey(mId2ClientDic, key))
 		{
 #if NET_MULTHREAD
 			using (MLock mlock = new MLock(mVisitMutex))
 #endif
 			{
-				m_id2ClientDic[key]->Disconnect();
-				UtilMap::ContainsKey(m_id2ClientDic, key);
+				mId2ClientDic[key]->Disconnect();
+				UtilMap::ContainsKey(mId2ClientDic, key);
 			}
-			m_curClient = nullptr;
+			mCurClient = nullptr;
 		}
 	}
 }
 
 ByteBuffer* NetMgr::getMsg()
 {
-	if (m_curClient != nullptr)
+	if (mCurClient != nullptr)
 	{
-		return m_curClient->getClientBuffer()->getMsg();
+		return mCurClient->getClientBuffer()->getMsg();
 	}
 
 	return nullptr;
@@ -366,10 +366,10 @@ ByteBuffer* NetMgr::getMsg()
 
 ByteBuffer* NetMgr::getSendBA()
 {
-	if (m_curClient != nullptr)
+	if (mCurClient != nullptr)
 	{
-		m_curClient->getClientBuffer()->getSendData()->clear();
-		return m_curClient->getClientBuffer()->getSendData();
+		mCurClient->getClientBuffer()->getSendData()->clear();
+		return mCurClient->getClientBuffer()->getSendData();
 	}
 
 	return nullptr;
@@ -378,9 +378,9 @@ ByteBuffer* NetMgr::getSendBA()
 // 注意这个仅仅是放入缓冲区冲，真正发送在子线程中发送
 void NetMgr::send(bool bnet)
 {
-	if (m_curClient != nullptr)
+	if (mCurClient != nullptr)
 	{
-		m_curClient->getClientBuffer()->send(bnet);
+		mCurClient->getClientBuffer()->send(bnet);
 	}
 	else
 	{
@@ -392,8 +392,8 @@ void NetMgr::send(bool bnet)
 void NetMgr::quipApp()
 {
 	closeCurSocket();
-	m_netThread->setExitFlag(true);        // 设置退出标志
-	m_netThread->join();                 // 等待线程结束
+	mNetThread->setExitFlag(true);        // 设置退出标志
+	mNetThread->join();                 // 等待线程结束
 }
 
 void NetMgr::sendAndRecData()
@@ -403,8 +403,8 @@ void NetMgr::sendAndRecData()
 		// 从原始缓冲区取数据，然后放到解压和解密后的消息缓冲区中
 		ClientMapIte _beginIte;
 		ClientMapIte _endIte;
-		_beginIte = m_id2ClientDic.begin();
-		_endIte = m_id2ClientDic.end();
+		_beginIte = mId2ClientDic.begin();
+		_endIte = mId2ClientDic.end();
 		for (; _beginIte != _endIte; ++_beginIte)
 		{
 			if (!_beginIte->second->getRecvThreadStart() && _beginIte->second->getIsConnected())
@@ -427,6 +427,6 @@ void NetMgr::sendAndRecData()
 #if MSG_ENCRIPT
 void NetMgr::setCryptKey(byte[] encrypt)
 {
-	m_curClient.dataBuffer.setCryptKey(encrypt);
+	mCurClient.dataBuffer.setCryptKey(encrypt);
 }
 #endif

@@ -12,11 +12,11 @@ class ResLoadData
 {
     // 因为资源有些需要协同程序，因此重复利用资源
 public:
-	std::map<std::string, LoadItem*> m_path2LDItem;       // 正在加载的内容 loaditem
-	std::list<LoadItem*> m_willLDItem;                           // 将要加载的 loaditem
-	std::list<LoadItem*> m_noUsedLDItem;                         // 没有被使用的 loaditem
-	std::map<std::string, ResItem*> m_path2Res;
-	std::list<ResItem*> m_noUsedResItem;                         // 没有被使用的 Res
+	std::map<std::string, LoadItem*> mPath2LDItem;       // 正在加载的内容 loaditem
+	std::list<LoadItem*> mWillLDItem;                           // 将要加载的 loaditem
+	std::list<LoadItem*> mNoUsedLDItem;                         // 没有被使用的 loaditem
+	std::map<std::string, ResItem*> mPath2Res;
+	std::list<ResItem*> mNoUsedResItem;                         // 没有被使用的 Res
 
 public:
 	ResLoadData();

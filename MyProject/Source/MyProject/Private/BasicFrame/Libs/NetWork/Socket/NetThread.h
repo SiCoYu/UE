@@ -35,8 +35,8 @@ private:
 	NetThread(const NetThread& s) {}
 	NetThread& operator=(const NetThread&) { return *this; }
 
-	SocketHandler* m_h;
-	bool m_ExitFlag;
+	SocketHandler* mH;
+	bool mIsExitFlag;
 };
 
 #ifdef SOCKETS_NAMESPACE

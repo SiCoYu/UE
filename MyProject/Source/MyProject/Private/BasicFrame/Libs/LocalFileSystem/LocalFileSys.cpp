@@ -21,7 +21,7 @@ std::string LocalFileSys::getLocalWriteDir()
 void LocalFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 {
 //#if PKG_RES_LOAD
-//	param.m_origPath = resPath;             // 记录原始的资源名字
+//	param.mOrigPath = resPath;             // 记录原始的资源名字
 //
 //	string retPath = resPath;
 //
@@ -47,15 +47,15 @@ void LocalFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 //			Ctx.m_instance.m_localFileSys.getAbsPathByRelPath(ref retPath, ref tmp);
 //		}
 //	}
-//	param.m_path = retPath;
-//	param.m_pakPath = param.m_path;
+//	param.mPath = retPath;
+//	param.mPakPath = param.mPath;
 //#elif UnPKG_RES_LOAD
 //	if (param != null)
 //	{
 //		param.mResLoadType = ResLoadType.eStreamingAssets;
 //	}
-//	param.m_path = resPath;
+//	param.mPath = resPath;
 //#else
-//	param.m_path = resPath;
+//	param.mPath = resPath;
 //#endif
 }

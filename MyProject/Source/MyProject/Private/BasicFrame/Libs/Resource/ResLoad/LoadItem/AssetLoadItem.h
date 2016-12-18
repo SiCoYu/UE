@@ -10,12 +10,12 @@
 class AssetLoadItem : public LoadItem
 {
 protected:
-	UClass* m_resObj = nullptr;		// uasset 类型的资源
+	UClass* mResObj = nullptr;		// uasset 类型的资源
 
 protected:
 	//void loadFromDefaultAssetBundle()
 	//{
-	//	m_prefabObj = Resources.Load<Object>(m_pathNoExt);
+	//	m_prefabObj = Resources.Load<Object>(mPathNoExt);
 
 	//	if (m_prefabObj != null)
 	//	{
@@ -30,7 +30,7 @@ protected:
 
 	//IEnumerator loadFromDefaultAssetBundleByCoroutine()
 	//{
-	//	ResourceRequest req = Resources.LoadAsync<Object>(m_pathNoExt);
+	//	ResourceRequest req = Resources.LoadAsync<Object>(mPathNoExt);
 	//	yield return req;
 
 	//	if (req.asset != null && req.isDone)

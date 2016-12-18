@@ -4,8 +4,8 @@
 
 void PoolSys::deleteObj(IRecycle* obj)
 {
-	//if (m_poolList.IndexOf(obj) == -1)
+	//if (mPoolList.IndexOf(obj) == -1)
 	//{
-	//    m_poolList.Add(obj);
+	//    mPoolList.Add(obj);
 	//}
 }

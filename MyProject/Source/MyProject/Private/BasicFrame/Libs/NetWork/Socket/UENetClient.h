@@ -16,16 +16,16 @@ class UENetClient
 {
 protected:
 	FString	m_strDesc;
-	FIPv4Endpoint m_boundEndpoint;
+	FIPv4Endpoint mBoundEndpoint;
 
-	FSocket* m_socket;
-	ClientBuffer* m_clientBuffer;
+	FSocket* mSocket;
+	ClientBuffer* mClientBuffer;
 
-	bool m_brecvThreadStart;      // 接收线程是否启动
-	bool m_isConnected;
+	bool mIsRecvThreadStart;      // 接收线程是否启动
+	bool mIsConnected;
 
-	MEvent* m_msgSendEndEvent;
-	MMutex* m_sendMutex;
+	MEvent* mMsgSendEndEvent;
+	MMutex* mSendMutex;
 
 protected:
 	void testSendData();

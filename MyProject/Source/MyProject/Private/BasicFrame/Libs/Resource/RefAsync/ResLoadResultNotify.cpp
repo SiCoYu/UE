@@ -6,44 +6,44 @@
 
 ResLoadResultNotify::ResLoadResultNotify()
 {
-	m_resLoadState = new ResLoadState();
-	m_loadResEventDispatch = new ResEventDispatch();
+	mResLoadState = new ResLoadState();
+	mLoadResEventDispatch = new ResEventDispatch();
 }
 
 ResLoadResultNotify::~ResLoadResultNotify()
 {
-	delete m_resLoadState;
-	delete m_loadResEventDispatch;
+	delete mResLoadState;
+	delete mLoadResEventDispatch;
 }
 
 ResLoadState* ResLoadResultNotify::getResLoadState()
 {
-	return m_resLoadState;
+	return mResLoadState;
 }
 
 void ResLoadResultNotify::setResLoadState(ResLoadState* value)
 {
-	m_resLoadState = value;
+	mResLoadState = value;
 }
 
 ResEventDispatch* ResLoadResultNotify::getLoadResEventDispatch()
 {
-	return m_loadResEventDispatch;
+	return mLoadResEventDispatch;
 }
 
 void ResLoadResultNotify::setLoadResEventDispatch(ResEventDispatch* value)
 {
-	m_loadResEventDispatch = value;
+	mLoadResEventDispatch = value;
 }
 
 void ResLoadResultNotify::onLoadEventHandle(IDispatchObject* dispObj)
 {
-	m_loadResEventDispatch->dispatchEvent(dispObj);
-	m_loadResEventDispatch->clearEventHandle();
+	mLoadResEventDispatch->dispatchEvent(dispObj);
+	mLoadResEventDispatch->clearEventHandle();
 }
 
 void ResLoadResultNotify::copyFrom(ResLoadResultNotify* rhv)
 {
-	m_resLoadState->copyFrom(rhv->getResLoadState());
-	m_loadResEventDispatch = rhv->getLoadResEventDispatch();
+	mResLoadState->copyFrom(rhv->getResLoadState());
+	mLoadResEventDispatch = rhv->getLoadResEventDispatch();
 }

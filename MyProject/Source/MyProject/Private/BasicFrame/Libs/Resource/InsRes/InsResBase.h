@@ -10,11 +10,11 @@ class ResItem;
 class InsResBase : public IDispatchObject
 {
 protected:
-	RefCountResLoadResultNotify* m_refCountResLoadResultNotify;
-	bool m_bOrigResNeedImmeUnload;        // 原始资源是否需要立刻卸载
+	RefCountResLoadResultNotify* mRefCountResLoadResultNotify;
+	bool mIsOrigResNeedImmeUnload;        // 原始资源是否需要立刻卸载
 
 public:
-    std::string m_path;
+    std::string mPath;
 
 public:
 	InsResBase();

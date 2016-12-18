@@ -6,7 +6,7 @@
 class GOExtraInfo
 {
 public:
-	std::string m_path;
+	std::string mPath;
 };
 
 #endif

@@ -48,10 +48,10 @@ private:
 	NetThread* mNetThread;
 	Mutex* mMutex;
 #else
-	UENetThread* m_netThread;
-	std::map<std::string, UENetClient*> m_id2ClientDic;
+	UENetThread* mNetThread;
+	std::map<std::string, UENetClient*> mId2ClientDic;
 #endif
-	UENetClient* m_curClient;	// 当前正在使用的 Client
+	UENetClient* mCurClient;	// 当前正在使用的 Client
 	MMutex* mVisitMutex;
 
 	void testSendData(std::string ip, uint32 port);

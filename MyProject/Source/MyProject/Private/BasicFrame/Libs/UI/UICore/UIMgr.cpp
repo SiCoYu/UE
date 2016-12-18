@@ -258,9 +258,9 @@ void UIMgr::loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventH
 	// TODO:
 	LoadParam* param = GPoolSys->newObject<LoadParam>();
 	LocalFileSys::modifyLoadParam(reaPath, param);
-	param->m_loadNeedCoroutine = false;
-	param->m_resNeedCoroutine = false;
-	param->m_loadEventHandle = onLoadEventHandle;
+	param->mIsLoadNeedCoroutine = false;
+	param->mIsResNeedCoroutine = false;
+	param->mLoadEventHandle = onLoadEventHandle;
 	GUiAssetMgr->load<UIAssetRes>(param);
 	GPoolSys->deleteObj(param);
 }

@@ -14,15 +14,15 @@ class UObject;
 class ResItem : public IDispatchObject
 {
 protected :
-	ResPackType m_resPackType;    // 资源打包类型
+	ResPackType mResPackType;    // 资源打包类型
     ResLoadType mResLoadType;    // 资源加载类型
 
-	std::string m_path;                // 完整的目录
-	std::string m_pathNoExt;           // 不包括扩展名字的路径
-	std::string m_extName;             // 扩展名字
+	std::string mPath;                // 完整的目录
+	std::string mPathNoExt;           // 不包括扩展名字的路径
+	std::string mExtName;             // 扩展名字
 
-    bool m_resNeedCoroutine;     // 资源是否需要协同程序
-    RefCountResLoadResultNotify* m_refCountResLoadResultNotify;
+    bool mIsResNeedCoroutine;     // 资源是否需要协同程序
+    RefCountResLoadResultNotify* mRefCountResLoadResultNotify;
 
 public:
 	ResItem();

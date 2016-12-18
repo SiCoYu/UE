@@ -12,7 +12,7 @@ enum CVResLoadState
 class ResLoadState
 {
 protected:
-	CVResLoadState m_resLoadState;
+	CVResLoadState mResLoadState;
 
 public:
 	ResLoadState();

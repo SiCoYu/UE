@@ -280,7 +280,7 @@ void UForm::onExitBtnClick()
 //	{
 //		if (m_go2Path.ContainsKey(go_))
 //		{
-//			m_luaCSBridgeForm.handleUIEvent("onBtnClk", m_formName, m_go2Path[go_].m_path);
+//			m_luaCSBridgeForm.handleUIEvent("onBtnClk", m_formName, m_go2Path[go_].mPath);
 //		}
 //	}
 //
@@ -297,7 +297,7 @@ void UForm::onExitBtnClick()
 //		if (!m_go2Path.ContainsKey(btnGo))
 //		{
 //			m_go2Path[btnGo] = new GOExtraInfo();
-//			m_go2Path[btnGo].m_path = path;
+//			m_go2Path[btnGo].mPath = path;
 //		}
 //	}
 //}

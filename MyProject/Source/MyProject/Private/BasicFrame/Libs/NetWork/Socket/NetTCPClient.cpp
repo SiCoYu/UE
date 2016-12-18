@@ -5,12 +5,12 @@
 NetTCPClient::NetTCPClient(ISocketHandler& h)
 	: TcpSocket(h) 
 {
-	m_clientBuffer = new ClientBuffer();
+	mClientBuffer = new ClientBuffer();
 }
 
 NetTCPClient::~NetTCPClient()
 {
-	delete m_clientBuffer;
+	delete mClientBuffer;
 }
 
 void NetTCPClient::OnConnect()
@@ -35,10 +35,10 @@ void NetTCPClient::OnRawData(const char *buf, size_t len)
 
 ClientBuffer* NetTCPClient::getClientBuffer()
 {
-	return m_clientBuffer;
+	return mClientBuffer;
 }
 
 void NetTCPClient::sendMsg()
 {
-	//m_clientBuffer->sendMsg();
+	//mClientBuffer->sendMsg();
 }

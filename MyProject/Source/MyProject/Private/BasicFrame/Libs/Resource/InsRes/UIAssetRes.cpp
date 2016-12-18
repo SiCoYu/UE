@@ -11,43 +11,43 @@ UIAssetRes::UIAssetRes()
 
 void UIAssetRes::initImpl(ResItem* res)
 {
-	//m_go = res.getObject(res.getPrefabName()) as GameObject;
+	//mGo = res.getObject(res.getPrefabName()) as GameObject;
 	//base.initImpl(res);
 }
 
 UObject* UIAssetRes::InstantiateObject(std::string resName)
 {
-	m_retGO = nullptr;
+	mRetGO = nullptr;
 
-	if (nullptr == m_go)
+	if (nullptr == mGo)
 	{
 		GLogSys->log("prefab 为 null");
 	}
 	else
 	{
-		// m_retGO = GameObject.Instantiate(m_go) as GameObject;
-		if (nullptr == m_retGO)
+		// mRetGO = GameObject.Instantiate(mGo) as GameObject;
+		if (nullptr == mRetGO)
 		{
 			GLogSys->log("不能实例化数据");
 		}
 	}
-	return m_retGO;
+	return mRetGO;
 }
 
 UObject* UIAssetRes::getObject()
 {
-	return m_go;
+	return mGo;
 }
 
 void UIAssetRes::unload()
 {
-	if (m_go != nullptr)
+	if (mGo != nullptr)
 	{
-		//UtilApi.UnloadAsset(m_go);      // 强制卸载资源数据
-		//UtilApi.DestroyImmediate(m_go, true);
+		//UtilApi.UnloadAsset(mGo);      // 强制卸载资源数据
+		//UtilApi.DestroyImmediate(mGo, true);
 		EngineApi::UnloadUnusedAssets();
-		m_go = nullptr;
+		mGo = nullptr;
 	}
-	m_retGO = nullptr;
+	mRetGO = nullptr;
 	InsResBase::unload();
 }

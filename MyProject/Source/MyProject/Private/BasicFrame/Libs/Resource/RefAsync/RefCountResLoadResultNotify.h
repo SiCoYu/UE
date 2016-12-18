@@ -11,7 +11,7 @@ class RefCount;
 class RefCountResLoadResultNotify : public ResLoadResultNotify
 {
 protected:
-	RefCount* m_refCount;                  // 引用计数
+	RefCount* mRefCount;                  // 引用计数
 
 public:
 	RefCountResLoadResultNotify();
