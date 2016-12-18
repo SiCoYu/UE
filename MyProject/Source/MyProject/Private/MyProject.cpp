@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "MyStyle.h"
+#include "MenuStyles.h" 
 
 // #include "Welcome/to/bobsmagic.h"
 
@@ -23,6 +24,8 @@ void  FMyProject::StartupModule()
 
 	FSlateStyleRegistry::UnRegisterSlateStyle("PreloadStyle");
 	FMyStyle::Initialize();
+
+	this.StartupModule_SlateStyleSet();
 }
 
 /**
@@ -41,6 +44,8 @@ void  FMyProject::ShutdownModule()
 	/*Cleanup/free any resources here*/
 
 	FMyStyle::Shutdown();
+
+	this.ShutdownModule_SlateStyleSet();
 }
 
 /*First defined here, no need to call parent*/
@@ -50,4 +55,16 @@ TSharedPtr<FSlateGameResources> FMyProject::GetSlateGameResources()
 	/*Give caller a pointer to our FSlateGameResources*/
 	/*Giving strong pointer, helps gurantee access to resources*/
 	return MyUIResources.GetSlateGameResources();
+}
+
+void FMyProject::StartupModule_SlateStyleSet()
+{
+	//Hot reload hack
+	FSlateStyleRegistry::UnRegisterSlateStyle(FMenuStyles::GetStyleSetName());
+	FMenuStyles::Initialize();
+}
+
+void FMyProject::ShutdownModule_SlateStyleSet()
+{
+	FMenuStyles::Shutdown();
 }

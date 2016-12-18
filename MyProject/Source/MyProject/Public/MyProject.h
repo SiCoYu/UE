@@ -36,6 +36,10 @@ protected:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Data Structure and Interface for maintaining SlateGameResources on Game to Game basis
 	FMyUIResources MyUIResources;
+
+protected:
+	void StartupModule_SlateStyleSet();
+	void ShutdownModule_SlateStyleSet();
 };
 
 #endif
