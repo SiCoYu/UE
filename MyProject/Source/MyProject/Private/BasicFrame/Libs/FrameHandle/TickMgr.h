@@ -13,7 +13,7 @@ class ITickedObject;
 class TickMgr : public DelayHandleMgrBase
 {
 protected:
-	MList<TickProcessObject*> m_tickLst;
+	MList<TickProcessObject*> mTickList;
 
 public:
 	TickMgr();

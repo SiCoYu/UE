@@ -9,9 +9,9 @@
 // 只有没有添加到列表中的才能添加
 bool DelayHandleMgrBase::existAddList(IDelayHandleItem* delayObject)
 {
-	for(auto item : m_deferredAddQueue.getList())
+	for(auto item : mDeferredAddQueue.getList())
 	{
-		if (item->m_delayObject == delayObject)
+		if (item->mDelayObject == delayObject)
 		{
 			return true;
 		}
@@ -23,9 +23,9 @@ bool DelayHandleMgrBase::existAddList(IDelayHandleItem* delayObject)
 // 只有没有添加到列表中的才能添加
 bool DelayHandleMgrBase::existDelList(IDelayHandleItem* delayObject)
 {
-	for(auto item : m_deferredDelQueue.getList())
+	for(auto item : mDeferredDelQueue.getList())
 	{
-		if (item->m_delayObject == delayObject)
+		if (item->mDelayObject == delayObject)
 		{
 			return true;
 		}
@@ -37,11 +37,11 @@ bool DelayHandleMgrBase::existDelList(IDelayHandleItem* delayObject)
 // 从延迟添加列表删除一个 Item
 void DelayHandleMgrBase::delFromDelayAddList(IDelayHandleItem* delayObject)
 {
-	for(auto item : m_deferredAddQueue.getList())
+	for(auto item : mDeferredAddQueue.getList())
 	{
-		if (item->m_delayObject == delayObject)
+		if (item->mDelayObject == delayObject)
 		{
-			UtilVector::Remove(m_deferredAddQueue.getList(), item);
+			UtilVector::Remove(mDeferredAddQueue.getList(), item);
 		}
 	}
 }
@@ -49,49 +49,49 @@ void DelayHandleMgrBase::delFromDelayAddList(IDelayHandleItem* delayObject)
 // 从延迟删除列表删除一个 Item
 void DelayHandleMgrBase::delFromDelayDelList(IDelayHandleItem* delayObject)
 {
-	for(auto item : m_deferredDelQueue.getList())
+	for(auto item : mDeferredDelQueue.getList())
 	{
-		if (item->m_delayObject == delayObject)
+		if (item->mDelayObject == delayObject)
 		{
-			UtilVector::Remove(m_deferredDelQueue.getList(), item);
+			UtilVector::Remove(mDeferredDelQueue.getList(), item);
 		}
 	}
 }
 
 void DelayHandleMgrBase::processDelayObjects()
 {
-	if (0 == m_loopDepth)       // 只有全部退出循环后，才能处理添加删除
+	if (0 == mLoopDepth)       // 只有全部退出循环后，才能处理添加删除
 	{
-		if (m_deferredAddQueue.Count() > 0)
+		if (mDeferredAddQueue.Count() > 0)
 		{
-			for (int idx = 0; idx < m_deferredAddQueue.Count(); idx++)
+			for (int idx = 0; idx < mDeferredAddQueue.Count(); idx++)
 			{
-				addObject(m_deferredAddQueue[idx]->m_delayObject, ((DelayAddParam*)(m_deferredAddQueue[idx]->m_delayParam))->m_priority);
+				addObject(mDeferredAddQueue[idx]->mDelayObject, ((DelayAddParam*)(mDeferredAddQueue[idx]->mDelayParam))->mPriority);
 			}
 
-			m_deferredAddQueue.Clear();
+			mDeferredAddQueue.Clear();
 		}
 
-		if (m_deferredDelQueue.Count() > 0)
+		if (mDeferredDelQueue.Count() > 0)
 		{
-			for (int idx = 0; idx < m_deferredDelQueue.Count(); idx++)
+			for (int idx = 0; idx < mDeferredDelQueue.Count(); idx++)
 			{
-				delObject(m_deferredDelQueue[idx]->m_delayObject);
+				delObject(mDeferredDelQueue[idx]->mDelayObject);
 			}
 
-			m_deferredDelQueue.Clear();
+			mDeferredDelQueue.Clear();
 		}
 	}
 }
 
 DelayHandleMgrBase::DelayHandleMgrBase()
 {
-	m_loopDepth = 0;
+	mLoopDepth = 0;
 }
 
 void DelayHandleMgrBase::addObject(IDelayHandleItem* delayObject, float priority)
 {
-	if (m_loopDepth > 0)
+	if (mLoopDepth > 0)
 	{
 		if (!existAddList(delayObject))        // 如果添加列表中没有
 		{
@@ -101,18 +101,18 @@ void DelayHandleMgrBase::addObject(IDelayHandleItem* delayObject, float priority
 			}
 
 			DelayHandleObject* delayHandleObject = new DelayHandleObject();
-			delayHandleObject->m_delayParam = new DelayAddParam();
-			m_deferredAddQueue.Add(delayHandleObject);
+			delayHandleObject->mDelayParam = new DelayAddParam();
+			mDeferredAddQueue.Add(delayHandleObject);
 
-			delayHandleObject->m_delayObject = delayObject;
-			((DelayAddParam*)(delayHandleObject->m_delayParam))->m_priority = priority;
+			delayHandleObject->mDelayObject = delayObject;
+			((DelayAddParam*)(delayHandleObject->mDelayParam))->mPriority = priority;
 		}
 	}
 }
 
 void DelayHandleMgrBase::delObject(IDelayHandleItem* delayObject)
 {
-	if (m_loopDepth > 0)
+	if (mLoopDepth > 0)
 	{
 		if (!existDelList(delayObject))
 		{
@@ -124,25 +124,25 @@ void DelayHandleMgrBase::delObject(IDelayHandleItem* delayObject)
 			delayObject->setClientDispose();
 
 			DelayHandleObject* delayHandleObject = new DelayHandleObject();
-			delayHandleObject->m_delayParam = new DelayDelParam();
-			m_deferredDelQueue.Add(delayHandleObject);
-			delayHandleObject->m_delayObject = delayObject;
+			delayHandleObject->mDelayParam = new DelayDelParam();
+			mDeferredDelQueue.Add(delayHandleObject);
+			delayHandleObject->mDelayObject = delayObject;
 		}
 	}
 }
 
 void DelayHandleMgrBase::incDepth()
 {
-	++m_loopDepth;
+	++mLoopDepth;
 }
 
 void DelayHandleMgrBase::decDepth()
 {
-	--m_loopDepth;
+	--mLoopDepth;
 	processDelayObjects();
 }
 
 bool DelayHandleMgrBase::bInDepth()
 {
-	return m_loopDepth > 0;
+	return mLoopDepth > 0;
 }

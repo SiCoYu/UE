@@ -6,7 +6,7 @@
 class DelayAddParam : public DelayHandleParamBase
 {
 public:
-	float m_priority;
+	float mPriority;
 
 public:
 	DelayAddParam();

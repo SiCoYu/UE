@@ -62,12 +62,12 @@ void ResItem::setResNeedCoroutine(bool value)
 
 ResLoadType ResItem::getResLoadType()
 {
-	return m_resLoadType;
+	return mResLoadType;
 }
 
 void ResItem::setResLoadType(ResLoadType value)
 {
-	m_resLoadType = value;
+	mResLoadType = value;
 }
 
 RefCountResLoadResultNotify* ResItem::getRefCountResLoadResultNotify()
@@ -132,7 +132,7 @@ std::string ResItem::getText(std::string resName)
 void ResItem::copyFrom(ResItem* rhv)
 {
 	m_resPackType = rhv->m_resPackType;
-	m_resLoadType = rhv->m_resLoadType;
+	mResLoadType = rhv->mResLoadType;
 	m_path = rhv->m_path;
 	m_pathNoExt = rhv->m_pathNoExt;
 	m_extName = rhv->m_extName;

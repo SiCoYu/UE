@@ -4,9 +4,9 @@
 class SystemTimeData
 {
 protected:
-	long m_preTime;           // 上一次更新时的秒数
-    long m_curTime;           // 正在获取的时间
-    float m_deltaSec;         // 两帧之间的间隔
+	long mPreTime;           // 上一次更新时的秒数
+    long mCurTime;           // 正在获取的时间
+    float mDeltaSec;         // 两帧之间的间隔
 
 public:
 	SystemTimeData();

@@ -4,18 +4,18 @@
 MMutex::MMutex()
 {
 #ifdef USE_EXTERN_THREAD
-	m_pMutex = new Mutex();
+	mMutex = new Mutex();
 #else
-	m_pMutex = new FCriticalSection();
+	mMutex = new FCriticalSection();
 #endif
 }
 
 MMutex::~MMutex()
 {
 #ifdef USE_EXTERN_THREAD
-	delete m_pMutex;
+	delete mMutex;
 #else
-	delete m_pMutex;
+	delete mMutex;
 #endif
 }
 
@@ -25,23 +25,23 @@ Mutex* MMutex::getMutex()
 FCriticalSection* MMutex::getMutex()
 #endif
 {
-	return m_pMutex;
+	return mMutex;
 }
 
 void MMutex::Lock()
 {
 #ifdef USE_EXTERN_THREAD
-	m_pMutex->Lock();
+	mMutex->Lock();
 #else
-	m_pMutex->Lock();
+	mMutex->Lock();
 #endif
 }
 
 void MMutex::Unlock()
 {
 #ifdef USE_EXTERN_THREAD
-	m_pMutex->Lock();
+	mMutex->Lock();
 #else
-	m_pMutex->Unlock();
+	mMutex->Unlock();
 #endif
 }

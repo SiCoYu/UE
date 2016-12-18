@@ -146,8 +146,8 @@ NetMgr::NetMgr()
 #ifdef USE_EXTERN_THREAD
 void NetMgr::NetMgr_Extern()
 {
-	m_pNetThread = new NetThread(this);
-	m_pMutex = new Mutex();
+	mNetThread = new NetThread(this);
+	mMutex = new Mutex();
 
 	this->SetSlave();
 	this->EnableRelease();
@@ -157,7 +157,7 @@ void NetMgr::NetMgr_Extern()
 #ifndef USE_EXTERN_THREAD
 void NetMgr::NetMgr_Inter()
 {
-	m_visitMutex = new MMutex();
+	mVisitMutex = new MMutex();
 	startThread();
 }
 #endif
@@ -169,7 +169,7 @@ NetMgr::~NetMgr()
 	this->Release();
 #endif
 
-	delete m_visitMutex;
+	delete mVisitMutex;
 }
 
 void NetMgr::startThread()
@@ -204,12 +204,12 @@ void NetMgr::closeSocket(std::string ip, uint32 port)
 		m_id2ClientDic[key]->getMsgSendEndEvent()->Reset();        // 重置信号
 		m_id2ClientDic[key]->getMsgSendEndEvent()->WaitOne();      // 阻塞等待数据全部发送完成
 
-		m_visitMutex->Lock();
+		mVisitMutex->Lock();
 		{
 			m_id2ClientDic[key]->Disconnect();
 			UtilMap::Remove(m_id2ClientDic, key);
 		}
-		m_visitMutex->Unlock();
+		mVisitMutex->Unlock();
 		m_curClient = nullptr;
 	}
 }
@@ -251,13 +251,13 @@ void NetMgr::openSocket_Extern(std::string ip, uint32 port)
 	NetClient* pClient = new NetClient(*this);
 	bool success = pClient->Open(ip, port);
 
-	m_pMutex->Lock();
+	mMutex->Lock();
 
 	this->Add(pClient);
 	pClient->SetSlaveHandler(this);
 	pClient->OnDetached();
 
-	m_pMutex->Unlock();
+	mMutex->Unlock();
 }
 #endif
 
@@ -289,7 +289,7 @@ void NetMgr::recAndSendMsg()
 #ifdef USE_EXTERN_THREAD
 void NetMgr::recAndSendMsg_Extern()
 {
-	m_pMutex->Lock();
+	mMutex->Lock();
 
 	const std::map<SOCKET, Socket *>& allSockets = this->AllSockets();
 	for (socket_m::iterator it = m_sockets.begin(); it != m_sockets.end(); ++it)
@@ -300,7 +300,7 @@ void NetMgr::recAndSendMsg_Extern()
 		((NetClient*)(it->second))->sendMsg();
 	}
 
-	m_pMutex->Unlock();
+	mMutex->Unlock();
 }
 #endif
 
@@ -329,8 +329,8 @@ void NetMgr::closeCurSocket()
 		std::string ip;
 		int port;
 
-		ip = m_curClient->m_ip;
-		port = m_curClient->m_port;
+		ip = m_curClient->mIp;
+		port = m_curClient->mPort;
 
 		std::stringstream strStream;
 		strStream << ip << "&" << port;
@@ -343,7 +343,7 @@ void NetMgr::closeCurSocket()
 		if (UtilMap::ContainsKey(m_id2ClientDic, key))
 		{
 #if NET_MULTHREAD
-			using (MLock mlock = new MLock(m_visitMutex))
+			using (MLock mlock = new MLock(mVisitMutex))
 #endif
 			{
 				m_id2ClientDic[key]->Disconnect();
@@ -398,7 +398,7 @@ void NetMgr::quipApp()
 
 void NetMgr::sendAndRecData()
 {
-	MLock mlock(m_visitMutex);
+	MLock mlock(mVisitMutex);
 	{
 		// 从原始缓冲区取数据，然后放到解压和解密后的消息缓冲区中
 		ClientMapIte _beginIte;

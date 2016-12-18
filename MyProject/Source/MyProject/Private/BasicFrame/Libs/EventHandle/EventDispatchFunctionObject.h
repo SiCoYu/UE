@@ -7,13 +7,13 @@
 class EventDispatchFunctionObject : public IDelayHandleItem
 {
 public:
-	bool m_bClientDispose;       // 是否释放了资源
-	EventDispatchDelegate m_handle;
+	bool mIsClientDispose;       // 是否释放了资源
+	EventDispatchDelegate mHandle;
 
 public:
 	EventDispatchFunctionObject();
 	void setClientDispose();
-	bool getClientDispose();
+	bool isClientDispose();
 };
 
 #endif

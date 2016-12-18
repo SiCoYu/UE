@@ -11,7 +11,7 @@ class LoadParam;
 class LocalFileSys
 {
 protected:
-	std::string m_persistentDataPath;
+	std::string mPersistentDataPath;
 
 public:
 	LocalFileSys();

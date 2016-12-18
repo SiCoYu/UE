@@ -12,8 +12,8 @@ class FrameTimerItem;
 class FrameTimerMgr : public DelayHandleMgrBase
 {
 protected:
-	std::vector<FrameTimerItem*> m_timerLists;     // 当前所有的定时器列表
-	std::vector<FrameTimerItem*> m_delLists;       // 当前需要删除的定时器
+	std::vector<FrameTimerItem*> mTimerList;     // 当前所有的定时器列表
+	std::vector<FrameTimerItem*> mDelList;       // 当前需要删除的定时器
 
 public:
 	FrameTimerMgr();

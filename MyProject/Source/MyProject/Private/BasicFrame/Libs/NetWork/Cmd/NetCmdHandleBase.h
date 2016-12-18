@@ -14,7 +14,7 @@ public:
 	typedef fastdelegate::FastDelegate1<ByteBuffer*> HandleDelegate;
 
 public:
-	std::map<uint8, HandleDelegate*> m_id2HandleDic;
+	std::map<uint8, HandleDelegate*> mId2HandleDic;
 
 public:
 	virtual void handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam);

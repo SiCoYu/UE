@@ -13,7 +13,7 @@ void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	// 检查当前是否已经在队列中
 	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
-	if (UtilVector::IndexOf(m_timerLists, frameTimerItem) == -1)
+	if (UtilVector::IndexOf(mTimerList, frameTimerItem) == -1)
 	{
 		if (bInDepth())
 		{
@@ -21,7 +21,7 @@ void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 		}
 		else
 		{
-			m_timerLists.push_back((FrameTimerItem*)delayObject);
+			mTimerList.push_back((FrameTimerItem*)delayObject);
 		}
 	}
 }
@@ -30,20 +30,20 @@ void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
 {
 	// 检查当前是否在队列中
 	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
-	if (UtilVector::IndexOf(m_timerLists, frameTimerItem) != -1)
+	if (UtilVector::IndexOf(mTimerList, frameTimerItem) != -1)
 	{
-		((FrameTimerItem*)delayObject)->m_disposed = true;
+		((FrameTimerItem*)delayObject)->mIsDisposed = true;
 		if (bInDepth())
 		{
 			DelayHandleMgrBase::addObject(delayObject);
 		}
 		else
 		{
-			for(FrameTimerItem* item : m_timerLists)
+			for(FrameTimerItem* item : mTimerList)
 			{
 				if (item == delayObject)
 				{
-					UtilVector::Remove(m_timerLists, item);
+					UtilVector::Remove(mTimerList, item);
 					break;
 				}
 			}
@@ -55,13 +55,13 @@ void FrameTimerMgr::Advance(float delta)
 {
 	incDepth();
 
-	for(FrameTimerItem* timerItem : m_timerLists)
+	for(FrameTimerItem* timerItem : mTimerList)
 	{
-		if (!timerItem->getClientDispose())
+		if (!timerItem->isClientDispose())
 		{
 			timerItem->OnFrameTimer();
 		}
-		if (timerItem->m_disposed)
+		if (timerItem->mIsDisposed)
 		{
 			delObject(timerItem);
 		}

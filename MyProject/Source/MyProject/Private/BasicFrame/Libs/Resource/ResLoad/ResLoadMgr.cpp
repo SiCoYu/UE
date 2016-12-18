@@ -27,7 +27,7 @@ ResLoadMgr::ResLoadMgr()
 	m_maxParral = 8;
 	m_curNum = 0;
 	m_LoadData = new ResLoadData();
-	//m_id2HandleDic[(int)eMRIDLoadedWebRes] = onMsgRouteResLoad;
+	//mId2HandleDic[(int)eMRIDLoadedWebRes] = onMsgRouteResLoad;
 	m_loadingDepth = 0;
 }
 
@@ -63,17 +63,17 @@ void ResLoadMgr::loadData(LoadParam* param)
 	// 链接不过
 	param->m_resPackType = eDataType;
 
-	if (eStreamingAssets == param->m_resLoadType)
+	if (eStreamingAssets == param->mResLoadType)
 	{
 		param->m_path = UtilPath::Combine(GLocalFileSys->getLocalReadDir(), param->m_path);
 	}
-	else if (ePersistentData == param->m_resLoadType)
+	else if (ePersistentData == param->mResLoadType)
 	{
 		param->m_path = UtilPath::Combine(GLocalFileSys->getLocalWriteDir(), param->m_path);
 	}
-	else if (eLoadWeb == param->m_resLoadType)
+	else if (eLoadWeb == param->mResLoadType)
 	{
-		param->m_path = UtilPath::Combine(GCfg->m_webIP, param->m_path);
+		param->m_path = UtilPath::Combine(GCfg->mWebIP, param->m_path);
 	}
 	//if (!string.IsNullOrEmpty(param.m_version))
 	//{
@@ -86,7 +86,7 @@ void ResLoadMgr::loadData(LoadParam* param)
 void ResLoadMgr::loadBundle(LoadParam* param)
 {
 	param->m_resPackType = eBundleType;
-	param->m_resLoadType = GCfg->m_resLoadType;
+	param->mResLoadType = GCfg->mResLoadType;
 
 	load(param);
 }
@@ -102,11 +102,11 @@ void ResLoadMgr::loadLevel(LoadParam* param)
 	load(param);
 #elif UnPKG_RES_LOAD
 	param.m_resPackType = ResPackType.eUnPakLevelType;
-	param.m_resLoadType = ResLoadType.eStreamingAssets;
+	param.mResLoadType = ResLoadType.eStreamingAssets;
 	load(param);
 #else
 	param->m_resPackType = eLevelType;
-	param->m_resLoadType = GCfg->m_resLoadType;
+	param->mResLoadType = GCfg->mResLoadType;
 	load(param);
 #endif
 }
@@ -129,11 +129,11 @@ void ResLoadMgr::loadResources(LoadParam* param)
 #elif UnPKG_RES_LOAD
 	// 判断资源所在的目录，是在 StreamingAssets 目录还是在 persistentData 目录下，目前由于没有完成，只能从 StreamingAssets 目录下加载
 	param.m_resPackType = ResPackType.eUnPakType;
-	param.m_resLoadType = ResLoadType.eStreamingAssets;
+	param.mResLoadType = ResLoadType.eStreamingAssets;
 	return load(param);
 #else
 	param->m_resPackType = eResourcesType;
-	param->m_resLoadType = eLoadResource;
+	param->mResLoadType = eLoadResource;
 	load(param);
 #endif
 }
@@ -207,7 +207,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	resItem->getRefCountResLoadResultNotify()->getRefCount()->incRef();
 	resItem->setResNeedCoroutine(param->m_resNeedCoroutine);
 	resItem->setResPackType(param->m_resPackType);
-	resItem->setResLoadType(param->m_resLoadType);
+	resItem->setResLoadType(param->mResLoadType);
 	resItem->setPath(param->m_path);
 	resItem->setPathNoExt(param->m_pathNoExt);
 	resItem->setExtName(param->getExtName());
@@ -270,7 +270,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	//}
 
 	loadItem->setResPackType(param->m_resPackType);
-	loadItem->setResLoadType(param->m_resLoadType);
+	loadItem->setResLoadType(param->mResLoadType);
 	loadItem->setPath(param->m_path);
 	loadItem->setPathNoExt(param->m_pathNoExt);
 	loadItem->setExtName(param->getExtName());

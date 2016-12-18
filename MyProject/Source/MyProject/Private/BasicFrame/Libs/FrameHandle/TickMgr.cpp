@@ -23,17 +23,17 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 	else
 	{
 		int position = -1;
-		for (int i = 0; i < m_tickLst.Count(); i++)
+		for (int i = 0; i < mTickList.Count(); i++)
 		{
-			if (m_tickLst[i] == nullptr)
+			if (mTickList[i] == nullptr)
 				continue;
 
-			if (m_tickLst[i]->m_tickObject == (ITickedObject*)delayObject)
+			if (mTickList[i]->mTickObject == (ITickedObject*)delayObject)
 			{
 				return;
 			}
 
-			if (m_tickLst[i]->m_priority < priority)
+			if (mTickList[i]->mPriority < priority)
 			{
 				position = i;
 				break;
@@ -41,16 +41,16 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 		}
 
 		TickProcessObject* processObject = new TickProcessObject();
-		processObject->m_tickObject = (ITickedObject*)delayObject;
-		processObject->m_priority = priority;
+		processObject->mTickObject = (ITickedObject*)delayObject;
+		processObject->mPriority = priority;
 
-		if (position < 0 || position >= m_tickLst.Count())
+		if (position < 0 || position >= mTickList.Count())
 		{
-			m_tickLst.Add(processObject);
+			mTickList.Add(processObject);
 		}
 		else
 		{
-			m_tickLst.Insert(position, processObject);
+			mTickList.Insert(position, processObject);
 		}
 	}
 }
@@ -63,11 +63,11 @@ void TickMgr::delObject(IDelayHandleItem* delayObject)
 	}
 	else
 	{
-		for(TickProcessObject* item : m_tickLst.getList())
+		for(TickProcessObject* item : mTickList.getList())
 		{
-			if (item->m_tickObject == (ITickedObject*)delayObject)
+			if (item->mTickObject == (ITickedObject*)delayObject)
 			{
-				m_tickLst.Remove(item);
+				mTickList.Remove(item);
 				break;
 			}
 		}
@@ -78,11 +78,11 @@ void TickMgr::Advance(float delta)
 {
 	incDepth();
 
-	for(TickProcessObject* tk : m_tickLst.getList())
+	for(TickProcessObject* tk : mTickList.getList())
 	{
-		if (!((IDelayHandleItem*)(tk->m_tickObject))->getClientDispose())
+		if (!((IDelayHandleItem*)(tk->mTickObject))->isClientDispose())
 		{
-			((ITickedObject*)(tk->m_tickObject))->onTick(delta);
+			((ITickedObject*)(tk->mTickObject))->onTick(delta);
 		}
 	}
 

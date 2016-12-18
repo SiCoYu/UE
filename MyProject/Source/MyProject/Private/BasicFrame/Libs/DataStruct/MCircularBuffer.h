@@ -17,10 +17,10 @@ class ByteBuffer;
 class MCircularBuffer
 {
 protected:
-	DynBuffer<char>* m_dynBuffer;
-	uint32 m_first;             // 当前缓冲区数据的第一个索引
-	uint32 m_last;              // 当前缓冲区数据的最后一个索引的后面一个索引，浪费一个字节
-	ByteBuffer* m_tmpBA;        // 临时数据
+	DynBuffer<char>* mDynBuffer;
+	uint32 mFirst;             // 当前缓冲区数据的第一个索引
+	uint32 mLast;              // 当前缓冲区数据的最后一个索引的后面一个索引，浪费一个字节
+	ByteBuffer* mTmpBA;        // 临时数据
 
 protected:
 	bool canAddData(uint32 num);
@@ -35,7 +35,7 @@ public:
 	uint32 getLast();
 	std::size_t getSize();
 	void setSize(std::size_t value);
-	char* getBuff();
+	char* getBuffer();
 
 	bool isLinearized();
 	bool empty();

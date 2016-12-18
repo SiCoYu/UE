@@ -6,28 +6,28 @@
 
 EventDispatchGroup::EventDispatchGroup()
 {
-	m_bInLoop = false;
+	mIsInLoop = false;
 }
 
 // 添加分发器
 void EventDispatchGroup::addEventDispatch(int groupID, EventDispatch* disp)
 {
-	if (!UtilMap::ContainsKey(m_groupID2DispatchDic, groupID))
+	if (!UtilMap::ContainsKey(mGroupID2DispatchDic, groupID))
 	{
-		m_groupID2DispatchDic[groupID] = disp;
+		mGroupID2DispatchDic[groupID] = disp;
 	}
 }
 
 void EventDispatchGroup::addEventHandle(int groupID, EventDispatchDelegate handle)
 {
-	m_groupID2DispatchDic[groupID]->addEventHandle(handle);
+	mGroupID2DispatchDic[groupID]->addEventHandle(handle);
 }
 
 void EventDispatchGroup::removeEventHandle(int groupID, EventDispatchDelegate handle)
 {
-	if (UtilMap::ContainsKey(m_groupID2DispatchDic, groupID))
+	if (UtilMap::ContainsKey(mGroupID2DispatchDic, groupID))
 	{
-		m_groupID2DispatchDic[groupID]->removeEventHandle(handle);
+		mGroupID2DispatchDic[groupID]->removeEventHandle(handle);
 	}
 	else
 	{
@@ -37,29 +37,29 @@ void EventDispatchGroup::removeEventHandle(int groupID, EventDispatchDelegate ha
 
 void EventDispatchGroup::dispatchEvent(int groupID, IDispatchObject* dispatchObject)
 {
-	m_bInLoop = true;
-	if (UtilMap::ContainsKey(m_groupID2DispatchDic, groupID))
+	mIsInLoop = true;
+	if (UtilMap::ContainsKey(mGroupID2DispatchDic, groupID))
 	{
-		m_groupID2DispatchDic[groupID]->dispatchEvent(dispatchObject);
+		mGroupID2DispatchDic[groupID]->dispatchEvent(dispatchObject);
 	}
 	else
 	{
 		GLogSys->log("Event Dispatch Group not exist");
 	}
-	m_bInLoop = false;
+	mIsInLoop = false;
 }
 
 void EventDispatchGroup::clearAllEventHandle()
 {
-	if (!m_bInLoop)
+	if (!mIsInLoop)
 	{
 		// map for 语句
-		for(auto dispatch : m_groupID2DispatchDic)
+		for(auto dispatch : mGroupID2DispatchDic)
 		{
 			dispatch.second->clearEventHandle();
 		}
 
-		m_groupID2DispatchDic.clear();
+		mGroupID2DispatchDic.clear();
 	}
 	else
 	{
@@ -69,12 +69,12 @@ void EventDispatchGroup::clearAllEventHandle()
 
 void EventDispatchGroup::clearGroupEventHandle(int groupID)
 {
-	if (!m_bInLoop)
+	if (!mIsInLoop)
 	{
-		if (UtilMap::ContainsKey(m_groupID2DispatchDic, groupID))
+		if (UtilMap::ContainsKey(mGroupID2DispatchDic, groupID))
 		{
-			m_groupID2DispatchDic[groupID]->clearEventHandle();
-			UtilMap::Remove(m_groupID2DispatchDic, groupID);
+			mGroupID2DispatchDic[groupID]->clearEventHandle();
+			UtilMap::Remove(mGroupID2DispatchDic, groupID);
 		}
 		else
 		{

@@ -14,9 +14,9 @@ class EventDispatchFunctionObject;
 class EventDispatch : public DelayHandleMgrBase
 {
 protected :
-	int m_eventId;
-    MList<EventDispatchFunctionObject*> m_handleList;
-    int m_uniqueId;       // 唯一 Id ，调试使用
+	int mEventId;
+    MList<EventDispatchFunctionObject*> mHandleList;
+    int mUniqueId;       // 唯一 Id ，调试使用
     //LuaCSBridgeDispatch m_luaCSBridgeDispatch;
 
 protected:
@@ -35,7 +35,7 @@ public:
 	virtual void dispatchEvent(IDispatchObject* dispatchObject);
 	void clearEventHandle();
     // 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-	bool existEventHandle(EventDispatchDelegate handle);
+	bool isExistEventHandle(EventDispatchDelegate handle);
 	void copyFrom(EventDispatch& rhv);
 };
 

@@ -20,8 +20,8 @@ public:
 	typedef typename std::vector<T>::iterator Ite;
 
 protected:
-	std::vector<T> m_list;
-	int m_uniqueId;       // 唯一 Id ，调试使用
+	std::vector<T> mList;
+	int mUniqueId;       // 唯一 Id ，调试使用
 
 public:
 	MList()
@@ -30,7 +30,7 @@ public:
 	}
 
 	MList(int capacity)
-		: m_list(capacity)
+		: mList(capacity)
 	{
 
 	}
@@ -42,60 +42,60 @@ public:
 
 	std::vector<T>& getList()
 	{
-		return m_list;
+		return mList;
 	}
 
 	int getUniqueId()
 	{
-		return m_uniqueId;
+		return mUniqueId;
 	}
 
 	void setUniqueId(int value)
 	{
-		m_uniqueId = value;
+		mUniqueId = value;
 	}
 
 	void Add(T item)
 	{
-		m_list.push_back(item);
+		mList.push_back(item);
 	}
 
 	bool Remove(T item)
 	{
-		UtilVector::Remove(m_list, item);
+		UtilVector::Remove(mList, item);
 		return true;
 	}
 
 	T& operator [] (int index)
 	{
-		return m_list[index];
+		return mList[index];
 	}
 
 	void Clear()
 	{
-		m_list.clear();
+		mList.clear();
 	}
 
 	int Count()
 	{
-		return m_list.size();
+		return mList.size();
 	}
 
 	void RemoveAt(int index)
 	{
-		UtilVector::RemoveAt(m_list, index);
+		UtilVector::RemoveAt(mList, index);
 	}
 
 	int IndexOf(T item)
 	{
-		return UtilVector::IndexOf(m_list, item);
+		return UtilVector::IndexOf(mList, item);
 	}
 
 	void Insert(int index, T item)
 	{
 		if (index <= Count())
 		{
-			UtilVector::Insert(m_list, index, item);
+			UtilVector::Insert(mList, index, item);
 		}
 		else
 		{

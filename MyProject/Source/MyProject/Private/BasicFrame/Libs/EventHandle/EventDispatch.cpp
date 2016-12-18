@@ -5,18 +5,18 @@
 
 EventDispatch::EventDispatch(int eventId_)
 {
-	m_eventId = eventId_;
+	mEventId = eventId_;
 }
 
 int EventDispatch::getUniqueId()
 {
-	return m_uniqueId;
+	return mUniqueId;
 }
 
 void EventDispatch::setUniqueId(int value)
 {
-	m_uniqueId = value;
-	m_handleList.setUniqueId(m_uniqueId);
+	mUniqueId = value;
+	mHandleList.setUniqueId(mUniqueId);
 }
 
 //public LuaCSBridgeDispatch luaCSBridgeDispatch
@@ -35,7 +35,7 @@ void EventDispatch::setUniqueId(int value)
 void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 {
 	EventDispatchFunctionObject* funcObject = new EventDispatchFunctionObject();
-	funcObject->m_handle = handle;
+	funcObject->mHandle = handle;
 	if (nullptr != handle)
 	{
 		addObject(funcObject);
@@ -55,23 +55,23 @@ void EventDispatch::addObject(IDelayHandleItem* delayObject, float priority)
 	else
 	{
 		// 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-		m_handleList.Add((EventDispatchFunctionObject*)delayObject);
+		mHandleList.Add((EventDispatchFunctionObject*)delayObject);
 	}
 }
 
 void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 {
 	int idx = 0;
-	for (idx = 0; idx < m_handleList.Count(); ++idx)
+	for (idx = 0; idx < mHandleList.Count(); ++idx)
 	{
-		if (m_handleList[idx]->m_handle, handle)
+		if (mHandleList[idx]->mHandle, handle)
 		{
 			break;
 		}
 	}
-	if (idx < m_handleList.Count())
+	if (idx < mHandleList.Count())
 	{
-		delObject(m_handleList[idx]);
+		delObject(mHandleList[idx]);
 	}
 	else
 	{
@@ -87,7 +87,7 @@ void EventDispatch::delObject(IDelayHandleItem* delayObject)
 	}
 	else
 	{
-		if (!m_handleList.Remove((EventDispatchFunctionObject*)delayObject))
+		if (!mHandleList.Remove((EventDispatchFunctionObject*)delayObject))
 		{
 			GLogSys->log("Event Handle not exist");
 		}
@@ -100,17 +100,17 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 	//{
 	incDepth();
 
-	for(auto handle : m_handleList.getList())
+	for(auto handle : mHandleList.getList())
 	{
-		if (!handle->m_bClientDispose)
+		if (!handle->mIsClientDispose)
 		{
-			handle->m_handle(dispatchObject);
+			handle->mHandle(dispatchObject);
 		}
 	}
 
 	//if (m_luaCSBridgeDispatch != nullptr)
 	//{
-	//	m_luaCSBridgeDispatch.handleGlobalEvent(m_eventId, dispatchObject);
+	//	m_luaCSBridgeDispatch.handleGlobalEvent(mEventId, dispatchObject);
 	//}
 
 	decDepth();
@@ -125,24 +125,24 @@ void EventDispatch::clearEventHandle()
 {
 	if (bInDepth())
 	{
-		for(auto item : m_handleList.getList())
+		for(auto item : mHandleList.getList())
 		{
 			delObject(item);
 		}
 	}
 	else
 	{
-		m_handleList.Clear();
+		mHandleList.Clear();
 	}
 }
 
 // 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-bool EventDispatch::existEventHandle(EventDispatchDelegate handle)
+bool EventDispatch::isExistEventHandle(EventDispatchDelegate handle)
 {
 	bool bFinded = false;
-	for(auto item : m_handleList.getList())
+	for(auto item : mHandleList.getList())
 	{
-		if (item->m_handle == handle)
+		if (item->mHandle == handle)
 		{
 			bFinded = true;
 			break;
@@ -156,11 +156,11 @@ void EventDispatch::copyFrom(EventDispatch& rhv)
 {
 	for(auto handle : rhv.getHandleList().getList())
 	{
-		m_handleList.Add(handle);
+		mHandleList.Add(handle);
 	}
 }
 
 MList<EventDispatchFunctionObject*>& EventDispatch::getHandleList()
 {
-	return m_handleList;
+	return mHandleList;
 }

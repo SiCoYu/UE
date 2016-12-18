@@ -15,7 +15,7 @@ std::string LocalFileSys::getLocalReadDir()
 // 获取本地可以写的目录
 std::string LocalFileSys::getLocalWriteDir()
 {
-	return m_persistentDataPath;
+	return mPersistentDataPath;
 }
 
 void LocalFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
@@ -27,7 +27,7 @@ void LocalFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 //
 //	if ("Module/AutoUpdate.prefab" == resPath)       // 自动更新模块更新还没有实现
 //	{
-//		param.m_resLoadType = ResLoadType.eStreamingAssets;
+//		param.mResLoadType = ResLoadType.eStreamingAssets;
 //	}
 //	else
 //	{
@@ -39,7 +39,7 @@ void LocalFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 //
 //		if (param != null)
 //		{
-//			Ctx.m_instance.m_localFileSys.getAbsPathByRelPath(ref retPath, ref param.m_resLoadType);
+//			Ctx.m_instance.m_localFileSys.getAbsPathByRelPath(ref retPath, ref param.mResLoadType);
 //		}
 //		else
 //		{
@@ -52,7 +52,7 @@ void LocalFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 //#elif UnPKG_RES_LOAD
 //	if (param != null)
 //	{
-//		param.m_resLoadType = ResLoadType.eStreamingAssets;
+//		param.mResLoadType = ResLoadType.eStreamingAssets;
 //	}
 //	param.m_path = resPath;
 //#else

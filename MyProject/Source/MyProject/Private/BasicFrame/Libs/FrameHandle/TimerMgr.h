@@ -13,7 +13,7 @@ class IDelayHandleItem;
 class TimerMgr : DelayHandleMgrBase
 {
 protected:
-	MList<TimerItemBase*> m_timerLists;     // 当前所有的定时器列表
+	MList<TimerItemBase*> mTimerList;     // 当前所有的定时器列表
 
 public:
 	TimerMgr();

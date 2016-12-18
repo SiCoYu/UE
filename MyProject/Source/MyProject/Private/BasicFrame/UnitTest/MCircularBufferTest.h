@@ -7,7 +7,7 @@
 class MCircularBufferTest : public testing::Test
 {
 protected:
-	MCircularBuffer m_circularBuffer;
+	MCircularBuffer mCircularBuffer;
 
 protected:
 	static void SetUpTestCase();

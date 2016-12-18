@@ -9,7 +9,7 @@ class MsgRouteBase;
 class MsgRouteDispHandle
 {
 public:
-	std::map<int, MsgRouteHandleBase*> m_id2DispDic;
+	std::map<int, MsgRouteHandleBase*> mId2DispDic;
 
 public:
 	virtual void handleMsg(MsgRouteBase* msg);

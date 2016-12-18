@@ -45,14 +45,14 @@ public:
 	typedef std::map<std::string, UENetClient*>::iterator ClientMapIte;
 private:
 #ifdef USE_EXTERN_THREAD
-	NetThread* m_pNetThread;
-	Mutex* m_pMutex;
+	NetThread* mNetThread;
+	Mutex* mMutex;
 #else
 	UENetThread* m_netThread;
 	std::map<std::string, UENetClient*> m_id2ClientDic;
 #endif
 	UENetClient* m_curClient;	// 当前正在使用的 Client
-	MMutex* m_visitMutex;
+	MMutex* mVisitMutex;
 
 	void testSendData(std::string ip, uint32 port);
 

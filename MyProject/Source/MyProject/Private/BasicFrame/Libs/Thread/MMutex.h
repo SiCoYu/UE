@@ -21,9 +21,9 @@ class MMutex
 {
 private:
 #ifdef USE_EXTERN_THREAD
-	Mutex* m_pMutex;
+	Mutex* mMutex;
 #else
-	FCriticalSection* m_pMutex;
+	FCriticalSection* mMutex;
 #endif
 
 public:

@@ -7,8 +7,8 @@ class DelayHandleParamBase;
 class DelayHandleObject
 {
 public:
-	IDelayHandleItem* m_delayObject;
-    DelayHandleParamBase* m_delayParam;
+	IDelayHandleItem* mDelayObject;
+    DelayHandleParamBase* mDelayParam;
 
 public:
 	DelayHandleObject();

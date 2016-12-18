@@ -3,32 +3,32 @@
 
 TimerItemBase::TimerItemBase()
 {
-	m_internal = 1;
-	m_totalTime = 1;
-	m_curTime = 0;
-	m_bInfineLoop = false;
-	m_curLeftTimer = 0;
-	m_timerDisp = nullptr;
-	m_disposed = false;
+	mInternal = 1;
+	mTotalTime = 1;
+	mCurTime = 0;
+	mIsInfineLoop = false;
+	mCurLeftTimer = 0;
+	mTimerDisp = nullptr;
+	mIsDisposed = false;
 }
 
 void TimerItemBase::OnTimer(float delta)
 {
-	if (m_disposed)
+	if (mIsDisposed)
 	{
 		return;
 	}
 
-	m_curTime += delta;
-	m_curLeftTimer += delta;
+	mCurTime += delta;
+	mCurLeftTimer += delta;
 
-	if (m_bInfineLoop)
+	if (mIsInfineLoop)
 	{
 		checkAndDisp();
 	}
 	else
 	{
-		if (m_curTime >= m_totalTime)
+		if (mCurTime >= mTotalTime)
 		{
 			disposeAndDisp();
 		}
@@ -41,31 +41,31 @@ void TimerItemBase::OnTimer(float delta)
 
 void TimerItemBase::disposeAndDisp()
 {
-	m_disposed = true;
-	if (!m_timerDisp.empty())
+	mIsDisposed = true;
+	if (!mTimerDisp.empty())
 	{
-		m_timerDisp(this);
+		mTimerDisp(this);
 	}
 }
 
 void TimerItemBase::checkAndDisp()
 {
-	if (m_curLeftTimer >= m_internal)
+	if (mCurLeftTimer >= mInternal)
 	{
-		m_curLeftTimer = m_curLeftTimer - m_internal;
+		mCurLeftTimer = mCurLeftTimer - mInternal;
 
-		if (!m_timerDisp.empty())
+		if (!mTimerDisp.empty())
 		{
-			m_timerDisp(this);
+			mTimerDisp(this);
 		}
 	}
 }
 
 void TimerItemBase::reset()
 {
-	m_curTime = 0;
-	m_curLeftTimer = 0;
-	m_disposed = false;
+	mCurTime = 0;
+	mCurLeftTimer = 0;
+	mIsDisposed = false;
 }
 
 void TimerItemBase::setClientDispose()
@@ -73,7 +73,7 @@ void TimerItemBase::setClientDispose()
 
 }
 
-bool TimerItemBase::getClientDispose()
+bool TimerItemBase::isClientDispose()
 {
 	return false;
 }

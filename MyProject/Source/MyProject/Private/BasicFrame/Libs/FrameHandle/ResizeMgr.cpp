@@ -4,12 +4,12 @@
 
 void ResizeMgr::addResizeObject(IResizeObject* obj)
 {
-	m_ResizeLst.Add(obj);
+	mResizeList.Add(obj);
 }
 
 void ResizeMgr::onResize(int viewWidth, int viewHeight)
 {
-	for(IResizeObject* resizeObj : m_ResizeLst.getList())
+	for(IResizeObject* resizeObj : mResizeList.getList())
 	{
 		resizeObj->onResize(viewWidth, viewHeight);
 	}

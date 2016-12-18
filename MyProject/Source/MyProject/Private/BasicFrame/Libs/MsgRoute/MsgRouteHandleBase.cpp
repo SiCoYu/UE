@@ -8,9 +8,9 @@
 void MsgRouteHandleBase::handleMsg(MsgRouteBase* msg)
 {
 	int key = ((int)msg->m_msgID);
-	if (UtilMap::ContainsKey(m_id2HandleDic, key))
+	if (UtilMap::ContainsKey(mId2HandleDic, key))
 	{
-		m_id2HandleDic[key](msg);
+		mId2HandleDic[key](msg);
 	}
 	else
 	{

@@ -10,13 +10,13 @@
 class FrameTimerItem : public IDelayHandleItem
 {
 public:
-	int m_internal;              // 帧数间隔
-    int m_totalFrameCount;       // 总共次数
-    int m_curFrame;              // 当前已经调用的定时器的时间
-    int m_curLeftFrame;          // 剩余帧数
-    bool m_bInfineLoop;      // 是否是无限循环
-	FrameTimerDelegate m_timerDisp;       // 定时器分发
-    bool m_disposed;             // 是否已经被释放
+	int mInternal;              // 帧数间隔
+    int mTotalFrameCount;       // 总共次数
+    int mCurFrame;              // 当前已经调用的定时器的时间
+    int mCurLeftFrame;          // 剩余帧数
+    bool mIsInfineLoop;      // 是否是无限循环
+	FrameTimerDelegate mTimerDisp;       // 定时器分发
+    bool mIsDisposed;             // 是否已经被释放
 
     //int m_preFrame = 0;
 
@@ -25,7 +25,7 @@ public:
 	virtual void OnFrameTimer();
 	virtual void reset();
 	void setClientDispose();
-	bool getClientDispose();
+	bool isClientDispose();
 };
 
 #endif

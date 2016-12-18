@@ -12,10 +12,10 @@ class IDelayHandleItem;
 class DelayHandleMgrBase
 {
 protected:
-	MList<DelayHandleObject*> m_deferredAddQueue;
-    MList<DelayHandleObject*> m_deferredDelQueue;
+	MList<DelayHandleObject*> mDeferredAddQueue;
+    MList<DelayHandleObject*> mDeferredDelQueue;
 
-    int m_loopDepth;           // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
+    int mLoopDepth;           // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
 
 protected:
 	// 只有没有添加到列表中的才能添加

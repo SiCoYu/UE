@@ -6,8 +6,8 @@ class ITickedObject;
 class TickProcessObject
 {
 public:
-	ITickedObject* m_tickObject;
-	float m_priority;
+	ITickedObject* mTickObject;
+	float mPriority;
 
 public:
 	TickProcessObject();

@@ -9,8 +9,8 @@ class EventDispatch;
 class EventDispatchGroup
 {
 protected:
-	std::map<int, EventDispatch*> m_groupID2DispatchDic;
-    bool m_bInLoop;       // 是否是在循环遍历中
+	std::map<int, EventDispatch*> mGroupID2DispatchDic;
+    bool mIsInLoop;       // 是否是在循环遍历中
 
 public:
 	EventDispatchGroup();

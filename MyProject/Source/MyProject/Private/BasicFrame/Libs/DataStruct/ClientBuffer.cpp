@@ -12,113 +12,113 @@
 
 ClientBuffer::ClientBuffer()
 {
-	m_rawBuffer = new MsgBuffer();
-	m_msgBuffer = new MsgBuffer();
-	//m_sendTmpBA = new ByteBuffer();
-	m_sendTmpBuffer = new MsgBuffer();
-	m_socketSendBA = new ByteBuffer();
-	//m_socketSendBA.m_id = 1000;
+	mRawBuffer = new MsgBuffer();
+	mMsgBuffer = new MsgBuffer();
+	//mSendTmpBA = new ByteBuffer();
+	mSendTmpBuffer = new MsgBuffer();
+	mSocketSendBA = new ByteBuffer();
+	//mSocketSendBA.m_id = 1000;
 
-	//m_dynBuff = new DynamicBuffer<byte>(8096);
-	m_unCompressHeaderBA = new ByteBuffer();
-	m_sendData = new ByteBuffer();
-	m_tmpData = new ByteBuffer(4);
-	m_tmp1fData = new ByteBuffer(4);
+	//mDynBuffer = new DynamicBuffer<byte>(8096);
+	mUnCompressHeaderBA = new ByteBuffer();
+	mSendData = new ByteBuffer();
+	mTmpData = new ByteBuffer(4);
+	mTmp1fData = new ByteBuffer(4);
 
-	m_readMutex = new MMutex();
-	m_writeMutex = new MMutex();
+	mReadMutex = new MMutex();
+	mWriteMutex = new MMutex();
 
 #if MSG_ENCRIPT
-	m_cryptContext = new CryptContext();
+	mCryptContext = new CryptContext();
 #endif
 }
 
 ClientBuffer::~ClientBuffer()
 {
-	delete m_rawBuffer;
-	delete m_msgBuffer;
-	delete m_sendTmpBuffer;
+	delete mRawBuffer;
+	delete mMsgBuffer;
+	delete mSendTmpBuffer;
 
-	delete m_socketSendBA;
-	delete m_unCompressHeaderBA;
-	delete m_sendData;
-	delete m_tmpData;
+	delete mSocketSendBA;
+	delete mUnCompressHeaderBA;
+	delete mSendData;
+	delete mTmpData;
 
-	delete m_readMutex;
-	delete m_writeMutex;
+	delete mReadMutex;
+	delete mWriteMutex;
 
 #if MSG_ENCRIPT
-	delete m_cryptContext;
+	delete mCryptContext;
 #endif
 }
 
-DynBuffer<char>* ClientBuffer::getDynBuff()
+DynBuffer<char>* ClientBuffer::getDynBuffer()
 {
-	return m_dynBuff;
+	return mDynBuffer;
 }
 
 
 MsgBuffer* ClientBuffer::getSendTmpBuffer()
 {
-	return m_sendTmpBuffer;
+	return mSendTmpBuffer;
 }
 
 ByteBuffer* ClientBuffer::getSendBuffer()
 {
-	return m_socketSendBA;
+	return mSocketSendBA;
 }
 
 ByteBuffer* ClientBuffer::getSendData()
 {
-	return m_sendData;
+	return mSendData;
 }
 
 #if MSG_ENCRIPT
 public void ClientBuffer::setCryptKey(byte[] encrypt)
 {
-	//m_cryptContext.cryptAlgorithm = CryptAlgorithm.DES;
-	m_cryptContext.m_cryptKey = encrypt;
-	Dec.DES_set_key_unchecked(m_cryptContext.m_cryptKey, m_cryptContext.m_cryptKeyArr[(int)CryptAlgorithm.DES] as DES_key_schedule);
+	//mCryptContext.cryptAlgorithm = CryptAlgorithm.DES;
+	mCryptContext.m_cryptKey = encrypt;
+	Dec.DES_set_key_unchecked(mCryptContext.m_cryptKey, mCryptContext.m_cryptKeyArr[(int)CryptAlgorithm.DES] as DES_key_schedule);
 }
 
 public void ClientBuffer::checkDES()
 {
-	if (m_cryptContext.m_cryptKey != null && m_cryptContext.m_cryptAlgorithm != CryptAlgorithm.DES)
+	if (mCryptContext.m_cryptKey != null && mCryptContext.m_cryptAlgorithm != CryptAlgorithm.DES)
 	{
-		m_cryptContext.m_cryptAlgorithm = CryptAlgorithm.DES;
+		mCryptContext.m_cryptAlgorithm = CryptAlgorithm.DES;
 	}
 }
 #endif
 
 MsgBuffer* ClientBuffer::getRawBuffer()
 {
-	return m_rawBuffer;
+	return mRawBuffer;
 }
 
 void ClientBuffer::SetRevBufferSize(int32 size)
 {
-	m_dynBuff = new DynBuffer<char>(size);
+	mDynBuffer = new DynBuffer<char>(size);
 }
 
 void ClientBuffer::moveDyn2Raw()
 {
-	GLogSys->log(UtilStr::Format("移动动态数据消息数据到原始数据队列，消息长度　{0}", m_dynBuff->getSize()));
-	UtilMsg::formatBytes2Array(m_dynBuff->getBuff(), m_dynBuff->getSize());
+	GLogSys->log(UtilStr::Format("移动动态数据消息数据到原始数据队列，消息长度　{0}", mDynBuffer->getSize()));
+	UtilMsg::formatBytes2Array(mDynBuffer->getBuffer(), mDynBuffer->getSize());
 
 #if MSG_ENCRIPT
 	checkDES();
 #endif
 	// 接收到一个socket数据，就被认为是一个数据包，这个地方可能会有问题，服务器是这么发送的，只能这么处理，自己写入包的长度
-	m_tmp1fData->clear();
-	m_tmp1fData->writeUnsignedInt32(m_dynBuff->getSize());      // 填充长度
-	m_rawBuffer->getCircularBuffer()->pushBackBA(m_tmp1fData);
+	mTmp1fData->clear();
+	mTmp1fData->writeUnsignedInt32(mDynBuffer->getSize());      // 填充长度
+	mRawBuffer->getCircularBuffer()->pushBackBA(mTmp1fData);
 	// 写入包的数据
-	m_rawBuffer->getCircularBuffer()->pushBackArr(m_dynBuff->getBuff(), 0, m_dynBuff->getSize());
+	mRawBuffer->getCircularBuffer()->pushBackArr(mDynBuffer->getBuffer(), 0, mDynBuffer->getSize());
 }
 
 void ClientBuffer::moveRaw2Msg()
 {
-	while (m_rawBuffer->popFront())  // 如果有数据
+	while (mRawBuffer->popFront())  // 如果有数据
 	{
 		//UnCompressAndDecryptAllInOne();
 		UnCompressAndDecryptEveryOne();
@@ -127,20 +127,20 @@ void ClientBuffer::moveRaw2Msg()
 
 void ClientBuffer::send(bool bnet)
 {
-	m_tmpData->clear();
-	m_tmpData->writeUnsignedInt32(m_sendData->getLength());      // 填充长度
+	mTmpData->clear();
+	mTmpData->writeUnsignedInt32(mSendData->getLength());      // 填充长度
 
 	if (bnet)       // 从 socket 发送出去
 	{
 #if NET_MULTHREAD
-		using (MLock mlock = new MLock(m_writeMutex))
+		using (MLock mlock = new MLock(mWriteMutex))
 #endif
 		{
-			//m_sendTmpBA.writeUnsignedInt(m_sendData.length);                            // 写入头部长度
-			//m_sendTmpBA.writeBytes(m_sendData.dynBuff.buff, 0, m_sendData.length);      // 写入内容
+			//mSendTmpBA.writeUnsignedInt(mSendData.length);                            // 写入头部长度
+			//mSendTmpBA.writeBytes(mSendData.dynBuff.buff, 0, mSendData.length);      // 写入内容
 
-			m_sendTmpBuffer->getCircularBuffer()->pushBackBA(m_tmpData);
-			m_sendTmpBuffer->getCircularBuffer()->pushBackBA(m_sendData);
+			mSendTmpBuffer->getCircularBuffer()->pushBackBA(mTmpData);
+			mSendTmpBuffer->getCircularBuffer()->pushBackBA(mSendData);
 		}
 	}
 	else        // 直接放入接收消息缓冲区
@@ -149,22 +149,22 @@ void ClientBuffer::send(bool bnet)
 
 #endif
 		{
-			//m_tmpData.clear();
-			//m_tmpData.writeUnsignedInt(m_sendData.length);      // 填充长度
+			//mTmpData.clear();
+			//mTmpData.writeUnsignedInt(mSendData.length);      // 填充长度
 
-			m_msgBuffer->getCircularBuffer()->pushBackBA(m_tmpData);              // 保存消息大小字段
-			m_msgBuffer->getCircularBuffer()->pushBackBA(m_sendData);             // 保存消息大小字段
+			mMsgBuffer->getCircularBuffer()->pushBackBA(mTmpData);              // 保存消息大小字段
+			mMsgBuffer->getCircularBuffer()->pushBackBA(mSendData);             // 保存消息大小字段
 		}
 	}
 }
 
 ByteBuffer* ClientBuffer::getMsg()
 {
-	MLock mlock(m_readMutex);
+	MLock mlock(mReadMutex);
 	{
-		if (m_msgBuffer->popFront())
+		if (mMsgBuffer->popFront())
 		{
-			return m_msgBuffer->getMsgBodyBA();
+			return mMsgBuffer->getMsgBodyBA();
 		}
 	}
 
@@ -174,36 +174,36 @@ ByteBuffer* ClientBuffer::getMsg()
 // 获取数据，然后压缩加密
 void ClientBuffer::getSocketSendData()
 {
-	//m_socketSendBA.m_startTest = false;
+	//mSocketSendBA.m_startTest = false;
 
-	m_socketSendBA->clear();
+	mSocketSendBA->clear();
 
 	// 获取完数据，就解锁
 #if NET_MULTHREAD
-	using (MLock mlock = new MLock(m_writeMutex))
+	using (MLock mlock = new MLock(mWriteMutex))
 #endif
 	{
-		//m_socketSendBA.writeBytes(m_sendTmpBA.dynBuff.buff, 0, (uint)m_sendTmpBA.length);
-		//m_sendTmpBA.clear();
+		//mSocketSendBA.writeBytes(mSendTmpBA.dynBuff.buff, 0, (uint)mSendTmpBA.length);
+		//mSendTmpBA.clear();
 		// 一次全部取出来发送出去
-		//m_socketSendBA.writeBytes(m_sendTmpBuffer.circuleBuffer.buff, 0, (uint)m_sendTmpBuffer.circuleBuffer.size);
-		//m_sendTmpBuffer.circuleBuffer.clear();
+		//mSocketSendBA.writeBytes(mSendTmpBuffer.circuleBuffer.buff, 0, (uint)mSendTmpBuffer.circuleBuffer.size);
+		//mSendTmpBuffer.circuleBuffer.clear();
 		// 一次仅仅获取一个消息发送出去，因为每一个消息的长度要填写加密补位后的长度
-		if (m_sendTmpBuffer->popFront())     // 弹出一个消息，如果只有一个消息，内部会重置变量
+		if (mSendTmpBuffer->popFront())     // 弹出一个消息，如果只有一个消息，内部会重置变量
 		{
-			m_socketSendBA->writeBytes(m_sendTmpBuffer->getHeaderBA()->getDynBuff()->getBuff(), 0, m_sendTmpBuffer->getHeaderBA()->getLength());       // 写入头
-			m_socketSendBA->writeBytes(m_sendTmpBuffer->getMsgBodyBA()->getDynBuff()->getBuff(), 0, m_sendTmpBuffer->getMsgBodyBA()->getLength());             // 写入消息体
+			mSocketSendBA->writeBytes(mSendTmpBuffer->getHeaderBA()->getDynBuffer()->getBuffer(), 0, mSendTmpBuffer->getHeaderBA()->getLength());       // 写入头
+			mSocketSendBA->writeBytes(mSendTmpBuffer->getMsgBodyBA()->getDynBuffer()->getBuffer(), 0, mSendTmpBuffer->getMsgBodyBA()->getLength());             // 写入消息体
 		}
 	}
 
 #if MSG_COMPRESS || MSG_ENCRIPT
-	m_socketSendBA.setPos(0);
+	mSocketSendBA.setPos(0);
 	CompressAndEncryptEveryOne();
 	// CompressAndEncryptAllInOne();
 #endif
-	m_socketSendBA->setPos(0);        // 设置指针 pos
+	mSocketSendBA->setPos(0);        // 设置指针 pos
 
-	//m_socketSendBA.m_startTest = true;
+	//mSocketSendBA.m_startTest = true;
 }
 
 // 压缩加密每一个包
@@ -217,29 +217,29 @@ void ClientBuffer::CompressAndEncryptEveryOne()
 #if MSG_COMPRESS && !MSG_ENCRIPT
 	bool bHeaderChange = false; // 消息内容最前面的四个字节中消息的长度是否需要最后修正
 #endif
-	while (m_socketSendBA->getBytesAvailable() > 0)
+	while (mSocketSendBA->getBytesAvailable() > 0)
 	{
 #if MSG_COMPRESS && !MSG_ENCRIPT
 		bHeaderChange = false;
 #endif
 
-		m_socketSendBA->readUnsignedInt32(origMsgLen);    // 读取一个消息包头
+		mSocketSendBA->readUnsignedInt32(origMsgLen);    // 读取一个消息包头
 
 #if MSG_COMPRESS
 		if (origMsgLen > MsgCV::PACKET_ZIP_MIN)
 		{
-			compressMsgLen = m_socketSendBA->compress(origMsgLen);
+			compressMsgLen = mSocketSendBA->compress(origMsgLen);
 		}
 		else
 		{
-			m_socketSendBA->incPosDelta(origMsgLen);
+			mSocketSendBA->incPosDelta(origMsgLen);
 			compressMsgLen = origMsgLen;
 		}
 #endif
 		// 只加密消息 body
 		//#if MSG_ENCRIPT
-		//                m_socketSendBA.position -= compressMsgLen;      // 移动加密指针位置
-		//                cryptLen = m_socketSendBA.encrypt(m_cryptKeyArr[(int)m_cryptAlgorithm], compressMsgLen, m_cryptAlgorithm);
+		//                mSocketSendBA.position -= compressMsgLen;      // 移动加密指针位置
+		//                cryptLen = mSocketSendBA.encrypt(m_cryptKeyArr[(int)m_cryptAlgorithm], compressMsgLen, m_cryptAlgorithm);
 		//                if (compressMsgLen != cryptLen)
 		//                {
 		//                    bHeaderChange = true;
@@ -259,9 +259,9 @@ void ClientBuffer::CompressAndEncryptEveryOne()
 		//#if !MSG_ENCRIPT
 		if (bHeaderChange)
 		{
-			m_socketSendBA->position -= (compressMsgLen + 4);        // 移动到头部位置
-			m_socketSendBA->writeUnsignedInt32(origMsgLen, false);     // 写入压缩或者加密后的消息长度
-			m_socketSendBA->incPosDelta(compressMsgLen);              // 移动到下一个位置
+			mSocketSendBA->position -= (compressMsgLen + 4);        // 移动到头部位置
+			mSocketSendBA->writeUnsignedInt32(origMsgLen, false);     // 写入压缩或者加密后的消息长度
+			mSocketSendBA->incPosDelta(compressMsgLen);              // 移动到下一个位置
 		}
 #endif
 
@@ -278,18 +278,18 @@ void ClientBuffer::CompressAndEncryptEveryOne()
 			origMsgLen = cryptLen;                // 压缩后的长度
 		}
 
-		m_socketSendBA->decPosDelta((compressMsgLen + 4));        // 移动到头部位置
-		m_socketSendBA->writeUnsignedInt32(origMsgLen, false);     // 写入压缩或者加密后的消息长度
+		mSocketSendBA->decPosDelta((compressMsgLen + 4));        // 移动到头部位置
+		mSocketSendBA->writeUnsignedInt32(origMsgLen, false);     // 写入压缩或者加密后的消息长度
 
-		m_socketSendBA.decPosDelta(4);      // 移动到头部
-		m_socketSendBA.encrypt(m_cryptContext, 0);  // 加密
+		mSocketSendBA.decPosDelta(4);      // 移动到头部
+		mSocketSendBA.encrypt(mCryptContext, 0);  // 加密
 #endif
 	}
 
 	// 整个消息压缩后，包括 4 个字节头的长度，然后整个加密
 	//#if MSG_ENCRIPT
-	//m_socketSendBA.position = 0;      // 移动到头部
-	//m_socketSendBA.encrypt(m_cryptKeyArr[(int)m_cryptAlgorithm], 0, m_cryptAlgorithm);
+	//mSocketSendBA.position = 0;      // 移动到头部
+	//mSocketSendBA.encrypt(m_cryptKeyArr[(int)m_cryptAlgorithm], 0, m_cryptAlgorithm);
 	//#endif
 }
 
@@ -297,11 +297,11 @@ void ClientBuffer::CompressAndEncryptEveryOne()
 void ClientBuffer::CompressAndEncryptAllInOne()
 {
 #if MSG_COMPRESS
-	uint origMsgLen = m_socketSendBA.length;       // 原始的消息长度，后面判断头部是否添加压缩标志
+	uint origMsgLen = mSocketSendBA.length;       // 原始的消息长度，后面判断头部是否添加压缩标志
 	uint compressMsgLen = 0;
 	if (origMsgLen > MsgCV.PACKET_ZIP_MIN)
 	{
-		compressMsgLen = m_socketSendBA.compress();
+		compressMsgLen = mSocketSendBA.compress();
 	}
 #endif
 
@@ -309,11 +309,11 @@ void ClientBuffer::CompressAndEncryptAllInOne()
 	else
 	{
 		compressMsgLen = origMsgLen;
-		m_socketSendBA.position += origMsgLen;
+		mSocketSendBA.position += origMsgLen;
 	}
 
-	m_socketSendBA.position -= compressMsgLen;
-	compressMsgLen = m_socketSendBA.encrypt(m_cryptContext, 0);
+	mSocketSendBA.position -= compressMsgLen;
+	compressMsgLen = mSocketSendBA.encrypt(mCryptContext, 0);
 #endif
 
 #if MSG_COMPRESS || MSG_ENCRIPT             // 如果压缩或者加密，需要再次添加压缩或者加密后的头长度
@@ -327,8 +327,8 @@ void ClientBuffer::CompressAndEncryptAllInOne()
 		origMsgLen = compressMsgLen;
 	}
 
-	m_socketSendBA.position = 0;
-	m_socketSendBA.insertUnsignedInt32(origMsgLen);            // 写入压缩或者加密后的消息长度
+	mSocketSendBA.position = 0;
+	mSocketSendBA.insertUnsignedInt32(origMsgLen);            // 写入压缩或者加密后的消息长度
 #endif
 }
 
@@ -339,24 +339,24 @@ void ClientBuffer::CompressAndEncryptAllInOne()
 void ClientBuffer::UnCompressAndDecryptEveryOne()
 {
 #if MSG_ENCRIPT
-	m_rawBuffer.msgBodyBA.decrypt(m_cryptContext, 0);
+	mRawBuffer.msgBodyBA.decrypt(mCryptContext, 0);
 #endif
 	//#if MSG_COMPRESS
-	//m_rawBuffer.headerBA.setPos(0); // 这个头目前没有用，是客户端自己添加的，服务器发送一个包，就认为是一个完整的包
-	//m_rawBuffer.msgBodyBA.setPos(0);
-	//uint msglen = m_rawBuffer.headerBA.readUnsignedInt();
+	//mRawBuffer.headerBA.setPos(0); // 这个头目前没有用，是客户端自己添加的，服务器发送一个包，就认为是一个完整的包
+	//mRawBuffer.msgBodyBA.setPos(0);
+	//uint msglen = mRawBuffer.headerBA.readUnsignedInt();
 	//if ((msglen & DataCV.PACKET_ZIP) > 0)
 	//{
-	//    m_rawBuffer.msgBodyBA.uncompress();
+	//    mRawBuffer.msgBodyBA.uncompress();
 	//}
 	//#endif
 
-	m_rawBuffer->getMsgBodyBA()->setPos(0);
+	mRawBuffer->getMsgBodyBA()->setPos(0);
 
 	uint32 msglen = 0;
-	while (m_rawBuffer->getMsgBodyBA()->getBytesAvailable() >= 4)
+	while (mRawBuffer->getMsgBodyBA()->getBytesAvailable() >= 4)
 	{
-		m_rawBuffer->getMsgBodyBA()->readUnsignedInt32(msglen);    // 读取一个消息包头
+		mRawBuffer->getMsgBodyBA()->readUnsignedInt32(msglen);    // 读取一个消息包头
 		if (msglen == 0)     // 如果是 0 ，就说明最后是由于加密补齐的数据
 		{
 			break;
@@ -366,29 +366,29 @@ void ClientBuffer::UnCompressAndDecryptEveryOne()
 		{
 			msglen &= (~MsgCV.PACKET_ZIP);         // 去掉压缩标志位
 			Ctx.m_instance.m_logSys.log(string.Format("消息需要解压缩，消息未解压长度　{0}", msglen));
-			msglen = m_rawBuffer->getMsgBodyBA->uncompress(msglen);
+			msglen = mRawBuffer->getMsgBodyBA->uncompress(msglen);
 			Ctx.m_instance.m_logSys.log(string.Format("消息需要解压缩，消息解压后长度　{0}", msglen));
 		}
 		else
 #endif
 		{
 			GLogSys->log(UtilStr::Format("消息不需要解压缩，消息原始长度　{0}", msglen));
-			m_rawBuffer->getMsgBodyBA()->incPosDelta(msglen);
+			mRawBuffer->getMsgBodyBA()->incPosDelta(msglen);
 		}
 
-		m_unCompressHeaderBA->clear();
-		m_unCompressHeaderBA->writeUnsignedInt32(msglen);        // 写入解压后的消息的长度，不要写入 msglen ，如果压缩，再加密，解密后，再解压后的长度才是真正的长度
-		m_unCompressHeaderBA->setPos(0);
+		mUnCompressHeaderBA->clear();
+		mUnCompressHeaderBA->writeUnsignedInt32(msglen);        // 写入解压后的消息的长度，不要写入 msglen ，如果压缩，再加密，解密后，再解压后的长度才是真正的长度
+		mUnCompressHeaderBA->setPos(0);
 
 #if NET_MULTHREAD
-		using (MLock mlock = new MLock(m_readMutex))
+		using (MLock mlock = new MLock(mReadMutex))
 #endif
 		{
-			m_msgBuffer->getCircularBuffer()->pushBackBA(m_unCompressHeaderBA);             // 保存消息大小字段
-			m_msgBuffer->getCircularBuffer()->pushBackArr(m_rawBuffer->getMsgBodyBA()->getDynBuff()->getBuff(), m_rawBuffer->getMsgBodyBA()->getPos() - msglen, msglen);      // 保存消息大小字段
+			mMsgBuffer->getCircularBuffer()->pushBackBA(mUnCompressHeaderBA);             // 保存消息大小字段
+			mMsgBuffer->getCircularBuffer()->pushBackArr(mRawBuffer->getMsgBodyBA()->getDynBuffer()->getBuffer(), mRawBuffer->getMsgBodyBA()->getPos() - msglen, msglen);      // 保存消息大小字段
 		}
 
-		GLogSys->log(UtilStr::Format("解压解密后消息起始索引 {0}, 消息长度　{1}, 消息 position 位置 {2}, 消息 size {3}", m_rawBuffer->getMsgBodyBA()->getPos() - msglen, msglen, m_rawBuffer->getMsgBodyBA()->getPos(), m_rawBuffer->getMsgBodyBA()->getLength()));
+		GLogSys->log(UtilStr::Format("解压解密后消息起始索引 {0}, 消息长度　{1}, 消息 position 位置 {2}, 消息 size {3}", mRawBuffer->getMsgBodyBA()->getPos() - msglen, msglen, mRawBuffer->getMsgBodyBA()->getPos(), mRawBuffer->getMsgBodyBA()->getLength()));
 		GNetDispList->addOneRevMsg();
 
 		// Test 读取消息头
@@ -402,30 +402,30 @@ void ClientBuffer::UnCompressAndDecryptEveryOne()
 void ClientBuffer::UnCompressAndDecryptAllInOne()
 {
 #if MSG_ENCRIPT
-	m_rawBuffer.msgBodyBA.decrypt(m_cryptContext, 0);
+	mRawBuffer.msgBodyBA.decrypt(mCryptContext, 0);
 #endif
 #if MSG_COMPRESS
-	m_rawBuffer.headerBA.setPos(0);
+	mRawBuffer.headerBA.setPos(0);
 	uint msglen = 0;
-	m_rawBuffer.headerBA.readUnsignedInt32(ref msglen);
+	mRawBuffer.headerBA.readUnsignedInt32(ref msglen);
 	if ((msglen & MsgCV.PACKET_ZIP) > 0)
 	{
-		m_rawBuffer.msgBodyBA.uncompress();
+		mRawBuffer.msgBodyBA.uncompress();
 	}
 #endif
 
 #if !MSG_COMPRESS && !MSG_ENCRIPT
-	m_unCompressHeaderBA->clear();
-	m_unCompressHeaderBA->writeUnsignedInt32(m_rawBuffer->getMsgBodyBA()->getLength());
-	m_unCompressHeaderBA->setPos(0);
+	mUnCompressHeaderBA->clear();
+	mUnCompressHeaderBA->writeUnsignedInt32(mRawBuffer->getMsgBodyBA()->getLength());
+	mUnCompressHeaderBA->setPos(0);
 #endif
 #if NET_MULTHREAD
-	using (MLock mlock = new MLock(m_readMutex))
+	using (MLock mlock = new MLock(mReadMutex))
 #endif
 	{
 #if !MSG_COMPRESS && !MSG_ENCRIPT
-		m_msgBuffer->getCircularBuffer()->pushBackBA(m_unCompressHeaderBA);             // 保存消息大小字段
+		mMsgBuffer->getCircularBuffer()->pushBackBA(mUnCompressHeaderBA);             // 保存消息大小字段
 #endif
-		m_msgBuffer->getCircularBuffer()->pushBackBA(m_rawBuffer->getMsgBodyBA());      // 保存消息大小字段
+		mMsgBuffer->getCircularBuffer()->pushBackBA(mRawBuffer->getMsgBodyBA());      // 保存消息大小字段
 	}
 }

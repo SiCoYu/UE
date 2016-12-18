@@ -8,7 +8,7 @@ class IDelayHandleItem
 {
 public:
 	virtual void setClientDispose() = 0;
-    virtual bool getClientDispose() = 0;
+    virtual bool isClientDispose() = 0;
 };
 
 #endif

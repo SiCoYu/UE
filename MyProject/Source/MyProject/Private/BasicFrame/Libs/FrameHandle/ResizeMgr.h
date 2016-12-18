@@ -7,7 +7,7 @@ class IResizeObject;
 class ResizeMgr
 {
 protected:
-	MList<IResizeObject*> m_ResizeLst;
+	MList<IResizeObject*> mResizeList;
 
 public:
 	void addResizeObject(IResizeObject* obj);

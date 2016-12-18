@@ -4,7 +4,7 @@
 //#include <iostream>
 
 MCircularBufferTest::MCircularBufferTest()
-	: m_circularBuffer(4)
+	: mCircularBuffer(4)
 {
 
 }
@@ -41,7 +41,7 @@ void MCircularBufferTest::TearDown()
 
 TEST_F(MCircularBufferTest, size)
 {
-	EXPECT_TRUE(m_circularBuffer.getSize() == 0);
+	EXPECT_TRUE(mCircularBuffer.getSize() == 0);
 }
 
 //TEST_F(MCircularBufferTest, PushOne)

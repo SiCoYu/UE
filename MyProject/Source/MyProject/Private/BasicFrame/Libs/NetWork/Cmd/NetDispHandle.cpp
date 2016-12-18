@@ -14,10 +14,10 @@ void NetDispHandle::handleMsg(ByteBuffer* msg)
     msg->readUnsignedInt8(byParam);
     msg->setPos(0);
 
-	if (UtilMap::ContainsKey(m_id2DispDic, byCmd))
+	if (UtilMap::ContainsKey(mId2DispDic, byCmd))
     {
 		GLogSys->log(UtilStr::Format("处理消息: byCmd = {0},  byParam = {1}", byCmd, byParam));
-        m_id2DispDic[byCmd]->handleMsg(msg, byCmd, byParam);
+        mId2DispDic[byCmd]->handleMsg(msg, byCmd, byParam);
     }
     else
     {

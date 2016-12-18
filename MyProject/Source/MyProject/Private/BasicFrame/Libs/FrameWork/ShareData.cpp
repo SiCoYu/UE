@@ -2,7 +2,7 @@
 #include "ShareData.h"
 
 ShareData::ShareData()
-	: m_tmpStr("")
+	: mTmpStr("")
 {
 
 }

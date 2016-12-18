@@ -14,10 +14,10 @@ class MsgBuffer
 	friend class ClientBuffer;
 
 protected:
-	MCircularBuffer* m_circularBuffer;    // 环形缓冲区
+	MCircularBuffer* mCircularBuffer;    // 环形缓冲区
 
-	ByteBuffer* m_headerBA;     // 主要是用来分析头的大小
-	ByteBuffer* m_msgBodyBA;        // 返回的字节数组
+	ByteBuffer* mHeaderBA;     // 主要是用来分析头的大小
+	ByteBuffer* mMsgBodyBA;        // 返回的字节数组
 
 protected:
 	/**

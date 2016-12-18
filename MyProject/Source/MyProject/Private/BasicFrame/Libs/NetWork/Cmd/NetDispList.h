@@ -9,11 +9,11 @@ class ByteBuffer;
 class NetDispList
 {
 protected:
-    int m_revMsgCnt;      // 接收到消息的数量
-    int m_handleMsgCnt;   // 处理的消息的数量
+    int mRevMsgCnt;      // 接收到消息的数量
+    int mHandleMsgCnt;   // 处理的消息的数量
 
-    std::vector<NetDispHandle*> m_netDispList;
-    bool m_bStopNetHandle;       // 是否停止网络消息处理
+    std::vector<NetDispHandle*> mNetDispList;
+    bool mIsStopNetHandle;       // 是否停止网络消息处理
 
 public:
 	NetDispList();

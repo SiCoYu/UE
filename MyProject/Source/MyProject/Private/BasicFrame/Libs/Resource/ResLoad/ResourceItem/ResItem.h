@@ -15,7 +15,7 @@ class ResItem : public IDispatchObject
 {
 protected :
 	ResPackType m_resPackType;    // 资源打包类型
-    ResLoadType m_resLoadType;    // 资源加载类型
+    ResLoadType mResLoadType;    // 资源加载类型
 
 	std::string m_path;                // 完整的目录
 	std::string m_pathNoExt;           // 不包括扩展名字的路径

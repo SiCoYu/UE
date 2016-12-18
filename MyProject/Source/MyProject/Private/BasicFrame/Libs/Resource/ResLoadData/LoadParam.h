@@ -20,7 +20,7 @@ protected:
 
 public:
 	ResPackType m_resPackType;           // 加载资源的类型
-    ResLoadType m_resLoadType;           // 资源加载类型
+    ResLoadType mResLoadType;           // 资源加载类型
 
     std::string m_path;                  // 资源路径，传递进来都是完成的路径，都是相对 Prefabs\Resources 开始的，例如 Table\CardBase_client.txt，然后内部解析后
 	std::string m_subPath;               // 子目录，可能一个包中有多个资源

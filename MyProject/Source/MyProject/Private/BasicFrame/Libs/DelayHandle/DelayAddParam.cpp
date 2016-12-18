@@ -2,7 +2,7 @@
 #include "DelayAddParam.h"
 
 DelayAddParam::DelayAddParam()
-	: m_priority(0)
+	: mPriority(0)
 {
 
 }

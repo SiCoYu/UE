@@ -3,62 +3,62 @@
 
 FrameTimerItem::FrameTimerItem()
 {
-	m_internal = 1;
-	m_totalFrameCount = 1;
-	m_curFrame = 0;
-	m_curLeftFrame = 0;
-	m_bInfineLoop = false;
-	m_timerDisp = nullptr;
-	m_disposed = false;
+	mInternal = 1;
+	mTotalFrameCount = 1;
+	mCurFrame = 0;
+	mCurLeftFrame = 0;
+	mIsInfineLoop = false;
+	mTimerDisp = nullptr;
+	mIsDisposed = false;
 }
 
 void FrameTimerItem::OnFrameTimer()
 {
-	if (m_disposed)
+	if (mIsDisposed)
 	{
 		return;
 	}
 
-	++m_curFrame;
-	++m_curLeftFrame;
+	++mCurFrame;
+	++mCurLeftFrame;
 
-	//if (m_preFrame == m_curFrame)
+	//if (m_preFrame == mCurFrame)
 	//{
 	//    Ctx.m_instance.m_logSys.log("aaaaaaaafadfsasdf");
 	//}
 
-	//m_curFrame = m_preFrame;
+	//mCurFrame = m_preFrame;
 
-	if (m_bInfineLoop)
+	if (mIsInfineLoop)
 	{
-		if (m_curLeftFrame == m_internal)
+		if (mCurLeftFrame == mInternal)
 		{
-			m_curLeftFrame = 0;
+			mCurLeftFrame = 0;
 
-			if (!m_timerDisp.empty())
+			if (!mTimerDisp.empty())
 			{
-				m_timerDisp(this);
+				mTimerDisp(this);
 			}
 		}
 	}
 	else
 	{
-		if (m_curFrame == m_totalFrameCount)
+		if (mCurFrame == mTotalFrameCount)
 		{
-			m_disposed = true;
-			if (!m_timerDisp.empty())
+			mIsDisposed = true;
+			if (!mTimerDisp.empty())
 			{
-				m_timerDisp(this);
+				mTimerDisp(this);
 			}
 		}
 		else
 		{
-			if (m_curLeftFrame == m_internal)
+			if (mCurLeftFrame == mInternal)
 			{
-				m_curLeftFrame = 0;
-				if (!m_timerDisp.empty())
+				mCurLeftFrame = 0;
+				if (!mTimerDisp.empty())
 				{
-					m_timerDisp(this);
+					mTimerDisp(this);
 				}
 			}
 		}
@@ -67,9 +67,9 @@ void FrameTimerItem::OnFrameTimer()
 
 void FrameTimerItem::reset()
 {
-	m_curFrame = 0;
-	m_curLeftFrame = 0;
-	m_disposed = false;
+	mCurFrame = 0;
+	mCurLeftFrame = 0;
+	mIsDisposed = false;
 }
 
 void FrameTimerItem::setClientDispose()
@@ -77,7 +77,7 @@ void FrameTimerItem::setClientDispose()
 
 }
 
-bool FrameTimerItem::getClientDispose()
+bool FrameTimerItem::isClientDispose()
 {
 	return false;
 }

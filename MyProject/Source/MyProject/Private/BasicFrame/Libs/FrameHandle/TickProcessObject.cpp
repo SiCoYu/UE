@@ -3,7 +3,7 @@
 #include "ITickedObject.h"
 
 TickProcessObject::TickProcessObject()
-	: m_tickObject(nullptr), m_priority(0.0f)
+	: mTickObject(nullptr), mPriority(0.0f)
 {
 
 }

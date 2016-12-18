@@ -9,7 +9,7 @@ class MsgRouteBase;
 class MsgRouteDispList
 {
 protected:
-	MList<MsgRouteDispHandle*> m_dispList;
+	MList<MsgRouteDispHandle*> mDispList;
 
 public:
 	void addOneDisp(MsgRouteDispHandle* disp);

@@ -5,23 +5,23 @@
 
 void MsgRouteDispList::addOneDisp(MsgRouteDispHandle* disp)
 {
-	if (m_dispList.IndexOf(disp) == -1)
+	if (mDispList.IndexOf(disp) == -1)
 	{
-		m_dispList.Add(disp);
+		mDispList.Add(disp);
 	}
 }
 
 void MsgRouteDispList::removeOneDisp(MsgRouteDispHandle* disp)
 {
-	if (m_dispList.IndexOf(disp) != -1)
+	if (mDispList.IndexOf(disp) != -1)
 	{
-		m_dispList.Remove(disp);
+		mDispList.Remove(disp);
 	}
 }
 
 void MsgRouteDispList::handleMsg(MsgRouteBase* msg)
 {
-	for (auto item : m_dispList.getList())
+	for (auto item : mDispList.getList())
 	{
 		item->handleMsg(msg);
 	}

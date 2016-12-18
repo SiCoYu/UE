@@ -7,9 +7,9 @@
 
 void NetCmdHandleBase::handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam)
 {
-	if (UtilMap::ContainsKey(m_id2HandleDic, byParam))
+	if (UtilMap::ContainsKey(mId2HandleDic, byParam))
 	{
-		(*m_id2HandleDic[byParam])(bu);
+		(*mId2HandleDic[byParam])(bu);
 	}
 	else
 	{

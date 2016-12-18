@@ -4,7 +4,7 @@
 #include "DelayHandleParamBase.h"
 
 DelayHandleObject::DelayHandleObject()
-	: m_delayObject(nullptr), m_delayParam(nullptr)
+	: mDelayObject(nullptr), mDelayParam(nullptr)
 {
 
 }

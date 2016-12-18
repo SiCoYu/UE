@@ -3,16 +3,16 @@
 
 void SystemFrameData::nextFrame(float delta)
 {
-	++m_totalFrameCount;
-	++m_curFrameCount;
-	m_curTime += delta;
+	++mTotalFrameCount;
+	++mCurFrameCount;
+	mCurTime += delta;
 
-	if (m_curTime > 1.0f)
+	if (mCurTime > 1.0f)
 	{
-		m_fps = (int)(m_curFrameCount / m_curTime);
-		m_curFrameCount = 0;
-		m_curTime = 0;
+		mFps = (int)(mCurFrameCount / mCurTime);
+		mCurFrameCount = 0;
+		mCurTime = 0;
 
-		//Ctx.m_instance.m_logSys.log(string.Format("当前帧率 {0}", m_fps));
+		//Ctx.m_instance.m_logSys.log(string.Format("当前帧率 {0}", mFps));
 	}
 }

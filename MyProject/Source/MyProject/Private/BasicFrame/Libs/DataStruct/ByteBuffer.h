@@ -22,9 +22,9 @@ public:
 	// bool m_startTest;        // 开始测试使用
 
 protected:
-	DynBuffer<char>* m_dynBuff;
-	uint32 m_pos;          // 当前可以读取的位置索引
-	EEndian m_endian;          // 大端小端
+	DynBuffer<char>* mDynBuffer;
+	uint32 mPos;          // 当前可以读取的位置索引
+	EEndian mEndian;          // 大端小端
 
 	char m_padBytes[8];
 
@@ -32,7 +32,7 @@ protected:
 
 public:
 	ByteBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY, EEndian endian = eLITTLE_ENDIAN);
-	DynBuffer<char>* getDynBuff();
+	DynBuffer<char>* getDynBuffer();
 	uint32 getBytesAvailable();
 	EEndian getEndian();
 	void setEndian(EEndian value);

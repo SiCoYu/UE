@@ -60,12 +60,12 @@ void LoadItem::setLoadNeedCoroutine(bool value)
 
 ResLoadType LoadItem::getResLoadType()
 {
-	return m_resLoadType;
+	return mResLoadType;
 }
 
 void LoadItem::setResLoadType(ResLoadType value)
 {
-	m_resLoadType = value;
+	mResLoadType = value;
 }
 
 NonRefCountResLoadResultNotify* LoadItem::getNonRefCountResLoadResultNotify()

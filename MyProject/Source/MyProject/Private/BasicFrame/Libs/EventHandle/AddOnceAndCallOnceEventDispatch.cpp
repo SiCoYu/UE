@@ -3,7 +3,7 @@
 
 void AddOnceAndCallOnceEventDispatch::addEventHandle(EventDispatchDelegate handle)
 {
-	if (!existEventHandle(handle))
+	if (!isExistEventHandle(handle))
 	{
 		EventDispatch::addEventHandle(handle);
 	}

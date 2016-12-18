@@ -11,8 +11,8 @@ class ByteBuffer;
 class ShareData
 {
 public:
-	std::string m_tmpStr;		// 临时字符串缓冲区
-    ByteBuffer* m_tmpBA;		// 消息缓冲区
+	std::string mTmpStr;		// 临时字符串缓冲区
+    ByteBuffer* mTmpBA;		// 消息缓冲区
 
 public:
 	ShareData();

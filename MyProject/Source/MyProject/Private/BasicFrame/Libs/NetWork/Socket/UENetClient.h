@@ -31,8 +31,8 @@ protected:
 	void testSendData();
 
 public:
-	std::string m_ip;
-	int m_port;
+	std::string mIp;
+	int mPort;
 
 	UENetClient();
 	~UENetClient();

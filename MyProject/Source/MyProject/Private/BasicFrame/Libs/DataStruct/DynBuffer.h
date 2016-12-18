@@ -15,48 +15,48 @@ class DynBuffer
 	friend class ClientBuffer;
 
 public:
-	std::size_t m_iCapacity;
-	std::size_t m_iMaxCapacity;
-	std::size_t m_size;
-	T* m_buff;
+	std::size_t mCapacity;
+	std::size_t mMaxCapacity;
+	std::size_t mSize;
+	T* mBuffer;
 
 public:
 	DynBuffer(size_t initCapacity = BufferCV::INIT_CAPACITY, size_t maxCapacity = BufferCV::MAX_CAPACITY)
-		: m_iCapacity(initCapacity), m_iMaxCapacity(maxCapacity)
+		: mCapacity(initCapacity), mMaxCapacity(maxCapacity)
 	{
-		m_size = 0;
-		m_buff = new T[m_iCapacity];
+		mSize = 0;
+		mBuffer = new T[mCapacity];
 	}
 
 	~DynBuffer()
 	{
-		delete[] m_buff;
+		delete[] mBuffer;
 	}
 
-	T* getBuff()
+	T* getBuffer()
 	{
-		return m_buff;
+		return mBuffer;
 	}
 
 	void setBuff(char* value, uint32 len)
 	{
-		m_buff = value;
-		m_iCapacity = len;
+		mBuffer = value;
+		mCapacity = len;
 	}
 
 	std::size_t getMaxCapacity()
 	{
-		return m_iMaxCapacity;
+		return mMaxCapacity;
 	}
 
 	std::size_t getCapacity()
 	{
-		return m_iCapacity;
+		return mCapacity;
 	}
 
 	void setCapacity(std::size_t value)
 	{
-		if (value == m_iCapacity)
+		if (value == mCapacity)
 		{
 			return;
 		}
@@ -66,26 +66,26 @@ public:
 		}
 
 		char* tmpbuff = new char[value];   // 分配新的空间
-		memcpy(tmpbuff, m_buff, m_iCapacity);
+		memcpy(tmpbuff, mBuffer, mCapacity);
 
-		delete[] m_buff;
-		m_buff = tmpbuff;
-		m_iCapacity = value;
+		delete[] mBuffer;
+		mBuffer = tmpbuff;
+		mCapacity = value;
 	}
 
 	std::size_t getSize()
 	{
-		return m_size;
+		return mSize;
 	}
 
 	void setSize(std::size_t value)
 	{
-		if (m_size > this->getCapacity())
+		if (mSize > this->getCapacity())
 		{
 			extendDeltaCapicity(value - this->getSize());
 		}
 
-		m_size = value;
+		mSize = value;
 	}
 
 	void extendDeltaCapicity(uint32 delta)
@@ -95,19 +95,19 @@ public:
 
 	//void push(char* pItem, std::size_t len)
 	//{
-	//	if (len > m_iCapacity)
+	//	if (len > mCapacity)
 	//	{
 	//		uint32 closeSize = DynBufResizePolicy::getCloseSize(len, this->getCapacity(), this->getMaxCapacity());
 	//		setCapacity(closeSize);
 	//	}
 	//
-	//	memcpy(m_buff, pItem, len);
-	//	m_size = len;
+	//	memcpy(mBuffer, pItem, len);
+	//	mSize = len;
 	//}
 
 	bool canAddData(uint32 num)
 	{
-		if (m_iCapacity - m_size >= num)
+		if (mCapacity - mSize >= num)
 		{
 			return true;
 		}

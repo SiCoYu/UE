@@ -8,23 +8,23 @@ template <class T>
 class LockQueue
 {
 protected:
-	LockList<T> m_list;
+	LockList<T> mList;
 
 public:
 	LockQueue(std::string name)
-		: m_list(name)
+		: mList(name)
 	{
-		//m_list = new LockList<T>("name");
+		//mList = new LockList<T>("name");
 	}
 
 	void push(T item)
 	{
-		m_list.Add(item);
+		mList.Add(item);
 	}
 
 	T pop()
 	{
-		return m_list.RemoveAt(0);
+		return mList.RemoveAt(0);
 	}
 };
 
