@@ -43,4 +43,6 @@
 #include "GameFramework/WorldSettings.h"	// UWorldSettings
 #include "Engine/Console.h"		// UConsole
 
+#include "PhysicsEngine/PhysicsCollisionHandler.h"	// UPhysicsCollisionHandler
+
 #endif

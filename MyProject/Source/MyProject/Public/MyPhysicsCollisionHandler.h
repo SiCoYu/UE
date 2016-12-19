@@ -1,10 +1,10 @@
 #pragma once
 
-#include "GameFramework/WorldSettings.h"	// UWorldSettings
+#include "PhysicsEngine/PhysicsCollisionHandler.h"	// UPhysicsCollisionHandler
 #include "MyPhysicsCollisionHandler.generated.h"
 
 UCLASS()
-class AMyPhysicsCollisionHandler : public APhysicsCollisionHandler
+class UMyPhysicsCollisionHandler : public UPhysicsCollisionHandler
 {
 	GENERATED_UCLASS_BODY()
 };
