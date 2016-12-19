@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Engine/Console.h"		// UConsole
 #include "MyConsole.generated.h"
 
 UCLASS()

@@ -41,5 +41,6 @@
 #include "Input/Reply.h"		// FReply
 #include "Widgets/SUserWidget.h"	// SUserWidget\FArguments
 #include "GameFramework/WorldSettings.h"	// UWorldSettings
+#include "Engine/Console.h"		// UConsole
 
 #endif
