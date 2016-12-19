@@ -11,6 +11,7 @@
 #include "MyPlayerStart.h"
 #include "MyCharacter.h"
 #include "MyPlayerState.h"
+#include "MyGameState.h"
 #include "MyGameMode.h"
 
 AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
@@ -20,8 +21,10 @@ AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 	// 最新的 ThirdPerson 资源存放文件夹又改了
 	// ThirdPerson Cpp 资源加载
 	// static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter"));
+
+	// 通过 BP 资源设置
 	// ThirdPerson Blueprint 资源加载
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("Blueprint'/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter'"));
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("Blueprint'/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter_C'"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
@@ -39,6 +42,8 @@ AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 
 	// https://wiki.unrealengine.com/Slate,_Simple_C%2B%2B_Chat_System
 	PlayerStateClass = AMyPlayerState::StaticClass();
+
+	GameStateClass = AMyGameState::StaticClass();
 
 	/* use this is you wish to extend the c++ into a bp and assign the bp to the class
 	static ConstructorHelpers::FClassFinder<AMyHUD> hudclassobj(TEXT("Blueprint'/MyHUD.MyHUD_C'"));
