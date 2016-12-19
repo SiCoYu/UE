@@ -13,3 +13,12 @@ File:SlateTutorials-2.zip
 (4)
 https://wiki.unrealengine.com/Slate_Style_Sets_Part_2
 File:UIpack RPG.zip (~209KB). 
+
+======================
+(5)
+Replacing The Pathfinder
+https://wiki.unrealengine.com/Replacing_The_Pathfinder
+The original source for this tutorial is here. 
+
+https://crussel.net/2016/06/05/neatly-replacing-navmesh-with-a-in-ue4/
+
