@@ -10,7 +10,7 @@ AMyActor::AMyActor(const class FObjectInitializer& PCIP)
 {
 	CameraZoom_v = 300.0;
 
-	static ConstructorHelpers::FObjectFinder<UCurveFloat> Curvy(TEXT("Reference Path to your Float Curve"));
+	static ConstructorHelpers::FObjectFinder<UCurveFloat> Curvy(TEXT("CurveFloat'/Game/MyAsset/Curve/MyFloatCurve.MyFloatCurve'"));
 	if (Curvy.Object) {
 		fCurve = Curvy.Object;
 	}
