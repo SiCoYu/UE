@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "AMyPlayerStart.h"
+#include "MyPlayerStart.h"
 
 AMyPlayerStart::AMyPlayerStart(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer) 
