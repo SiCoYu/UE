@@ -2,7 +2,7 @@
 #include "GameFramework/Character.h"
 #include "MyCharacter.generated.h"
 
-UCLASS(config=Game)
+UCLASS(config=Game, Abstract)
 class AMyCharacter : public ACharacter
 {
 	GENERATED_BODY()

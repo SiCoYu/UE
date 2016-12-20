@@ -7,6 +7,8 @@
 //#include "Input/Events.h"
 #include "MyViewportClient.generated.h"
 
+// https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Classes/Specifiers/Within/index.html
+// https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Classes/Specifiers/Config/index.html
 UCLASS(Within=Engine, transient, config=Engine)
 class UMyViewportClient : public UGameViewportClient
 {

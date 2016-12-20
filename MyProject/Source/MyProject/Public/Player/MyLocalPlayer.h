@@ -5,7 +5,8 @@
 #include "MyPersistentUser.h"
 #include "MyLocalPlayer.generated.h"
 
-UCLASS(config=Engine, transient)
+//UCLASS(config=Engine, transient)
+UCLASS()
 class UMyLocalPlayer : public ULocalPlayer
 {
 	GENERATED_UCLASS_BODY()

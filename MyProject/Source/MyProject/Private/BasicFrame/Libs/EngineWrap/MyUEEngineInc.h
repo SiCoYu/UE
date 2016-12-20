@@ -44,5 +44,7 @@
 #include "Engine/Console.h"		// UConsole
 
 #include "PhysicsEngine/PhysicsCollisionHandler.h"	// UPhysicsCollisionHandler
+#include "GameFramework/SaveGame.h"		// USaveGame
+#include "GameFramework/PlayerStart.h"		// APlayerStart
 
 #endif

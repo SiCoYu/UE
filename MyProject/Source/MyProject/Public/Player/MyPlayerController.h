@@ -7,7 +7,8 @@
 
 class UUserWidget;
 
-UCLASS(Within=Engine, transient, config=Engine)
+//UCLASS(Within=Engine, transient, config=Engine)
+UCLASS(config = Game)
 class AMyPlayerController : public APlayerController
 {
 	GENERATED_UCLASS_BODY()
