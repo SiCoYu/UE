@@ -6,3 +6,14 @@ UUMGForm::UUMGForm(const FObjectInitializer& ObjectInitializer)
 {
 
 }
+
+void UUMGForm::OnSynchronizeProperties_Implementation()
+{
+	// Override this event in Blueprint
+}
+
+void UUMGForm::SynchronizeProperties()
+{
+	Super::SynchronizeProperties();
+	OnSynchronizeProperties();
+}
