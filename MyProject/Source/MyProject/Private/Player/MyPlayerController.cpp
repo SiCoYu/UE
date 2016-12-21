@@ -21,25 +21,14 @@ void AMyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	BeginPlay_PawnClass();
+
+	BeginPlay_UMGWidgets();
+}
+
+void AMyPlayerController::BeginPlay_PawnClass()
+{
 	DeterminePawnClass();
-
-	// https://wiki.unrealengine.com/UMG,_Referencing_UMG_Widgets_in_Code
-	if (wMainMenu) // Check if the Asset is assigned in the blueprint.
-	{
-		// Create the widget and store it.
-		MyMainMenu = CreateWidget<UUserWidget>(this, wMainMenu);
-
-		// now you can use the widget directly since you have a referance for it.
-		// Extra check to  make sure the pointer holds the widget.
-		if (MyMainMenu)
-		{
-			//let add it to the view port
-			MyMainMenu->AddToViewport();
-		}
-
-		//Show the Cursor.
-		bShowMouseCursor = true;
-	}
 }
 
 // Pawn Class
@@ -49,6 +38,7 @@ void AMyPlayerController::DeterminePawnClass_Implementation()
 	{
 		/* Load Text File Into String Array */
 		TArray<FString> TextStrings;
+		TextStrings.Add("PawnA");
 		const FString FilePath = FPaths::GameDir() + "Textfiles/PlayerSettings.txt";
 
 		/* Use PawnA if the Text File tells us to */
@@ -254,5 +244,26 @@ void AMyPlayerController::ExampleUsageFour()
 
 		//Print out distance from start of trace to impact point
 		ClientMessage("Trace Distance: " + FString::SanitizeFloat(HitData.Distance));
+	}
+}
+
+void AMyPlayerController::BeginPlay_UMGWidgets()
+{
+	// https://wiki.unrealengine.com/UMG,_Referencing_UMG_Widgets_in_Code
+	if (wMainMenu) // Check if the Asset is assigned in the blueprint.
+	{
+		// Create the widget and store it.
+		MyMainMenu = CreateWidget<UUserWidget>(this, wMainMenu);
+
+		// now you can use the widget directly since you have a referance for it.
+		// Extra check to  make sure the pointer holds the widget.
+		if (MyMainMenu)
+		{
+			//let add it to the view port
+			MyMainMenu->AddToViewport();
+		}
+
+		//Show the Cursor.
+		bShowMouseCursor = true;
 	}
 }

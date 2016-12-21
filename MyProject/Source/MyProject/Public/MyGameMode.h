@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameFramework/GameModeBase.h"	// AGameModeBase
+#include "GameFramework/GameMode.h"	// AGameModeBase
 #include "Containers/Map.h"				// TMapBase
 #include "GameFramework/Controller.h"	// AController
 #include "UObject/Class.h"				// UClass
@@ -11,8 +12,31 @@
 
 // AMyGameMode 必须继承 AGameModeBase，不能继承 AGameMode
 
+/**
+ 如果继承 AGameModeBase ，不会调用 Actor::BeginPlay
+ 如果继承 AGameMode，就会调用 Actor::BeginPlay，调用如下
+ (1)
+ F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Runtime\Engine\Private\GameMode.cpp
+ // First fire BeginPlay, if we haven't already in waiting to start match
+ GetWorldSettings()->NotifyBeginPlay();
+ (2)
+ void AWorldSettings::NotifyBeginPlay()
+ {
+	World->bBegunPlay = true;
+ }
+ F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Runtime\Engine\Private\WorldSettings.cpp
+ (3)
+ bool bRunBeginPlay = !bDeferBeginPlayAndUpdateOverlaps && World->HasBegunPlay();
+ if (bRunBeginPlay)
+ {
+	BeginPlay();
+ }
+ F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Runtime\Engine\Private\Actor.cpp
+ */
+
 UCLASS(minimalapi)
-class AMyGameMode : public AGameModeBase
+//class AMyGameMode : public AGameModeBase
+class AMyGameMode : public AGameMode
 {
 	GENERATED_BODY()
 

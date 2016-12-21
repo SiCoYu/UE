@@ -25,6 +25,8 @@ public:
 	FORCEINLINE UClass* GetPlayerPawnClass() { return MyPawnClass; }
 
 protected:
+	void BeginPlay_PawnClass();
+
 	/* Return The Correct Pawn Class Client-Side */
 	UFUNCTION(Reliable, Client)
 	void DeterminePawnClass();
@@ -78,6 +80,8 @@ public:
 
 	// https://wiki.unrealengine.com/UMG,_Referencing_UMG_Widgets_in_Code
 public:
+	void BeginPlay_UMGWidgets();
+
 	// Note: that am using forward declaration Because am not including the
 	// widget in the header and to prevent circular dependency.
 	// you dont need to do that if you include the Widget Class in the .h
@@ -86,7 +90,7 @@ public:
 
 	// Reference UMG Asset in the Editor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
-		TSubclassOf<class UUserWidget> wMainMenu;
+	TSubclassOf<class UUserWidget> wMainMenu;
 
 	// Variable to hold the widget After Creating it.
 	UUserWidget* MyMainMenu;
