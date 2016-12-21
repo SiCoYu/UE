@@ -10,13 +10,14 @@
 #include "Framework/Application/SlateApplication.h"		// FSlateApplication
 #include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
 #include "GenericPlatform/GenericPlatformHttp.h"
+#include "Engine/Engine.h"	// FWorldContext
 #include "EngineApi.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
 
-UGameInstance* EngineApi::getGameInstance()
+UMyGameInstance* EngineApi::getGameInstance()
 {
-	return UGameplayStatics::GetGameInstance(GEngineData->getMainActor());
+	return Cast<UMyEngine>(UGameplayStatics::GetGameInstance(GEngineData->getMainActor()));
 }
 
 UWorld* EngineApi::GetWorld()
@@ -83,10 +84,37 @@ ACharacter* EngineApi::getFirstCharacter()
 	return Character;
 }
 
-APlayerController* EngineApi::GetPlayerController()
+AMyPlayerController* EngineApi::GetPlayerController()
 {
-	APlayerController* TargetPC = UGameplayStatics::GetPlayerController(GEngineData->getMainActor(), 0);
+	AMyPlayerController* TargetPC = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GEngineData->getMainActor(), 0));
 	return TargetPC;
+}
+
+FWorldContext* EngineApi::GetWorldContextByGameInstance()
+{
+	UMyGameInstance* GameInstance = EngineApi::getGameInstance();
+	FWorldContext* const PieWorldContext = GameInstance->GetWorldContext();
+	return PieWorldContext;
+}
+
+UWorld* EngineApi::GetWorldByWorldContext()
+{
+	FWorldContext* PieWorldContext = EngineApi::GetWorldContextByGameInstance();
+	UWorld* PlayWorld = PieWorldContext->World();
+	return PlayWorld;
+}
+
+UMyGameInstance* EngineApi::GetGameInstanceByWorld()
+{
+	UWorld* NewWorld = EngineApi::GetWorld();
+	UMyGameInstance* GameInstance = Cast<UMyGameInstance>(NewWorld->GetGameInstance());
+}
+
+UMyLocalPlayer* EngineApi::GetLocalPlayerByPlayerController()
+{
+	AMyPlayerController* Controller = EngineApi::GetPlayerController();
+	UMyLocalPlayer* Player = Cast<UMyLocalPlayer>(Controller->Player);
+	return Player;
 }
 
 float EngineApi::getUTCSec()

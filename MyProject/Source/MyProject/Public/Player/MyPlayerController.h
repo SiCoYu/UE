@@ -7,6 +7,7 @@
 
 /**
  APlayerController BeginPlayer 就说明可以运行了
+ 逻辑控制基本获取 APlayerController就行了，不用必须在 Actor 中处理
  */
 
 class UUserWidget;
@@ -19,6 +20,11 @@ class AMyPlayerController : public APlayerController
 
 	//public:
 	//	AMyPlayerController(const FObjectInitializer& ObjectInitializer)
+
+protected:
+	/* Use BeginPlay to start the functionality */
+	virtual void BeginPlay() override;
+	virtual void ReceivedPlayer() override;
 
 protected:
 	void TestUI();
@@ -38,9 +44,6 @@ protected:
 	UFUNCTION(Reliable, Client)
 	void DeterminePawnClass();
 	//virtual void DeterminePawnClass_Implementation();
-
-	/* Use BeginPlay to start the functionality */
-	virtual void BeginPlay() override;
 
 	/* Set Pawn Class On Server For This Controller */
 	UFUNCTION(Reliable, Server, WithValidation)

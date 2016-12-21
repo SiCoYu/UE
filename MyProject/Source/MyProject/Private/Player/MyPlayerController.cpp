@@ -36,6 +36,14 @@ void AMyPlayerController::BeginPlay()
 	TestUI();
 
 	// 逻辑开始运行
+	//GCtx->beginPlay();
+}
+
+void AMyPlayerController::ReceivedPlayer()
+{
+	Super::ReceivedPlayer();
+
+	// 赋值控制 Player ，逻辑开始运行
 	GCtx->beginPlay();
 }
 

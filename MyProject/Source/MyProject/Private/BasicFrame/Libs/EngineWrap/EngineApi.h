@@ -19,6 +19,9 @@ class UMyEngine;
 class UMyGameInstance;
 class UUserWidget;
 class SWindow;
+class FWorldContext;
+class UWorld;
+class AMyPlayerController;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -47,7 +50,7 @@ DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
 class EngineApi
 {
 public:
-	static UGameInstance* getGameInstance();
+	static UMyGameInstance* getGameInstance();
 	static UWorld* GetWorld();
 	static void showCursor();
 	static UMyEngine* getEngine();
@@ -56,7 +59,11 @@ public:
 	static UWorld* getWorldByEngine();
 
 	static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
-	static APlayerController* GetPlayerController();
+	static AMyPlayerController* GetPlayerController();
+	static FWorldContext* GetWorldContextByGameInstance();
+	static UWorld* GetWorldByWorldContext();
+	static UMyGameInstance* GetGameInstanceByWorld();
+	static UMyLocalPlayer* GetLocalPlayerByPlayerController();
 
 	static void addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName);
 	static float getUTCSec();
