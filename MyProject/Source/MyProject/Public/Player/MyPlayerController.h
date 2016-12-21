@@ -5,6 +5,10 @@
 #include "MyPawn.h"
 #include "MyPlayerController.generated.h"
 
+/**
+ APlayerController BeginPlayer 就说明可以运行了
+ */
+
 class UUserWidget;
 
 //UCLASS(Within=Engine, transient, config=Engine)
@@ -15,6 +19,9 @@ class AMyPlayerController : public APlayerController
 
 	//public:
 	//	AMyPlayerController(const FObjectInitializer& ObjectInitializer)
+
+protected:
+	void TestUI();
 
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Every_Player
 public:

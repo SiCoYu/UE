@@ -79,13 +79,24 @@ void Ctx::init()
 
 	// ¹ÒÔÚÄ¿Â¼
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
+}
 
+void Ctx::beginPlay()
+{
 #ifdef ENABLE_UNIT_TEST
 	m_test = new Test();
 	m_test->runTest();
 #endif
 
 	testApi();
+
+	//GCtx->setUiMgr(new UIManager());
+	//GCtx->setEngineApi(new EngineApi());
+	//GCtx->setNetMgr(new NetMgr(Ctx::getSingletonPtr()->getStdLog()));
+
+	// test
+	//GUiMgr->loadForm(eUIPack);
+	GNetMgr->openSocket("192.168.124.26", 10002);
 }
 
 void Ctx::setUiMgr(UIMgr* uiMgr)

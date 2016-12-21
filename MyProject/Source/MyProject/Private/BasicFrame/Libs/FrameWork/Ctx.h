@@ -61,6 +61,8 @@ public:
 	~Ctx();
 
 	void init();
+	void beginPlay();
+
 	void setUiMgr(UIMgr* uiMgr);
 	UIMgr* getUIMgr();
 

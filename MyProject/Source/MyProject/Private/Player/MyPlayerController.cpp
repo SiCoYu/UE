@@ -4,6 +4,8 @@
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
 #include "Blueprint/UserWidget.h"	// UUserWidget
+#include "MyPlayerCameraManager.h"
+#include "Common.h"
 #include "MyPlayerController.h"
 
 AMyPlayerController::AMyPlayerController(const FObjectInitializer& ObjectInitializer)
@@ -15,6 +17,8 @@ AMyPlayerController::AMyPlayerController(const FObjectInitializer& ObjectInitial
 
 	/* Make sure the PawnClass is Replicated */
 	bReplicates = true;
+
+	PlayerCameraManagerClass = AMyPlayerCameraManager::StaticClass();
 }
 
 void AMyPlayerController::BeginPlay()
@@ -24,6 +28,22 @@ void AMyPlayerController::BeginPlay()
 	BeginPlay_PawnClass();
 
 	BeginPlay_UMGWidgets();
+
+	// 各种初始化
+	EngineApi::showCursor();
+
+	// 各种 UI 测试
+	TestUI();
+
+	// 逻辑开始运行
+	GCtx->beginPlay();
+}
+
+void AMyCharacter::TestUI()
+{
+	// Test 加载 UIPack
+	//GUiMgr->loadForm<UUIPack>(eUIPack);
+	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 }
 
 void AMyPlayerController::BeginPlay_PawnClass()

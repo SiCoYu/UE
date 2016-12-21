@@ -7,11 +7,13 @@
 UMyGameInstance::UMyGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	m_appFrame = new AppFrame();
+	mAppFrame = new AppFrame();
 }
 
 void UMyGameInstance::Init()
 {
 	Super::Init();
-	m_appFrame->initApp();
+
+	// UGameEngine 创建后，就创建 UGameInstance，这个是除 UGameEngine 外最早初始化的地方
+	mAppFrame->initApp();
 }

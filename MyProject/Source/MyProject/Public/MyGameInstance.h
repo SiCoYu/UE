@@ -21,7 +21,7 @@ public:
 	GENERATED_UCLASS_BODY()
 
 protected:
-	AppFrame* m_appFrame;
+	AppFrame* mAppFrame;
 
 public:
 	virtual void Init() override;
