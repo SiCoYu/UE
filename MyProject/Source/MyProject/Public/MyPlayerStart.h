@@ -1,10 +1,14 @@
 #pragma once
 
-#include "GameFramework/PlayerStart.h"		// APlayerStart
+#include "GameFramework/PlayerStart.h"
 #include "MyPlayerStart.generated.h"
 
-UCLASS()
+UCLASS(config=Game)
 class AMyPlayerStart : public APlayerStart
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
+
+public:
+	AMyPlayerStart(const FObjectInitializer& ObjectInitializer);
+	bool GetIsPlayerOnly();
 };
