@@ -134,6 +134,19 @@ void AMyCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	GEngineData->setMainActor(this);
+
+	// 各种初始化
+	//EngineApi::showCursor();
+
+	// 各种 UI 测试
+	//TestUI();
+}
+
+void AMyCharacter::TestUI()
+{
+	// Test 加载 UIPack
+	//GUiMgr->loadForm<UUIPack>(eUIPack);
+	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 }
 
 void AMyCharacter::Tick(float DeltaTime)
