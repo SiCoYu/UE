@@ -69,10 +69,10 @@ void AMyGameMode::StartPlay()
 {
 	Super::StartPlay();
 	// 各种初始化
-	EngineApi::showCursor();
+	//EngineApi::showCursor();
 
 	// 各种 UI 测试
-	TestUI();
+	//TestUI();
 }
 
 void AMyGameMode::TestUI()
