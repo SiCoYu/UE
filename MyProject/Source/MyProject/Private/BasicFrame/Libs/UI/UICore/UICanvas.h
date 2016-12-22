@@ -1,6 +1,6 @@
 #pragma once
 
-enum UICanvasID
+enum UICanvasId
 {
 	eCanvas_50,
 	eCanvas_100,
@@ -19,11 +19,11 @@ class UICanvas
 {
 protected:
 	std::string mGoName;				// GameObject 的名字
-	UICanvasID mCanvasId;				// CanvasID
+	UICanvasId mCanvasId;				// CanvasID
 	std::vector<UILayer*> mLayerList;   // Canvas 中的 Layer
 
 public:
-	UICanvas(UICanvasID canvasID);
+	UICanvas(UICanvasId canvasID);
 	void setGoName(std::string& rhv);
 	std::vector<UILayer*>& getLayerList();
 	void findCanvasGO();

@@ -25,7 +25,7 @@ void UIMgr::createCanvas()
 	int idx = 0;
 	for (idx = 0; idx < (int)eCanvas_Total; ++idx)
 	{
-		mCanvasList.push_back(new UICanvas((UICanvasID)idx));
+		mCanvasList.push_back(new UICanvas((UICanvasId)idx));
 	}
 
 	mCanvasList[(int)eCanvas_50]->setGoName(NotDestroyPath::ND_CV_UICanvas_50);
@@ -143,7 +143,7 @@ void UIMgr::addForm(UForm* form)
 	form->onInit();
 }
 
-UILayer* UIMgr::getLayer(UICanvasID canvasID, UILayerID layerID)
+UILayer* UIMgr::getLayer(UICanvasId canvasID, UILayerId layerID)
 {
 	UILayer* layer = nullptr;
 

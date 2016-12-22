@@ -14,8 +14,8 @@ public:
 	std::string mCodePath;               // 逻辑代码 path 
 	std::string mWidgetPath;             // 拖放的控件 path 
 
-	UICanvasID mCanvasId;           // 在哪个 Canvas
-	UILayerID mLayerId;             // 所在的 Layer
+	UICanvasId mCanvasId;           // 在哪个 Canvas
+	UILayerId mLayerId;             // 所在的 Layer
 	uint8 mUiSceneType;   // 场景类型列表
 
 public:

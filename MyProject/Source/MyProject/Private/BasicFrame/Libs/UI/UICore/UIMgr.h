@@ -50,7 +50,7 @@ public:
 	void exitForm(UIFormId ID, bool bForce = false);
 	void exitFormInternal(UIFormId ID);
 	void addForm(UForm* form);
-	UILayer* getLayer(UICanvasID canvasID, UILayerID layerID);
+	UILayer* getLayer(UICanvasId canvasID, UILayerId layerID);
 	void addFormNoReady(UForm* form);
 	UForm* getForm(UIFormId ID);
 	bool hasForm(UIFormId ID);

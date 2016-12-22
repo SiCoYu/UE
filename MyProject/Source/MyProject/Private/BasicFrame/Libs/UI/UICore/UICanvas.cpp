@@ -1,14 +1,14 @@
 #include "MyProject.h"
 #include "UICanvas.h"
 
-UICanvas::UICanvas(UICanvasID canvasID)
+UICanvas::UICanvas(UICanvasId canvasID)
 {
 	mCanvasId = canvasID;
 
 	int idx = 0;
 	for (idx = 0; idx < (int)eMaxLayer; ++idx)
 	{
-		mLayerList.push_back(new UILayer((UILayerID)idx));
+		mLayerList.push_back(new UILayer((UILayerId)idx));
 	}
 
 	//if (eCanvas_50 == mCanvasId)

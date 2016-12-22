@@ -2,7 +2,7 @@
 #include "UILayer.h"
 #include "Form.h"
 
-UILayer::UILayer(UILayerID layerID)
+UILayer::UILayer(UILayerId layerID)
 {
 
 }
@@ -40,7 +40,7 @@ void UILayer::removeForm(UForm* form)
 	}
 }
 
-UILayerID UILayer::getLayerID()
+UILayerId UILayer::getLayerID()
 {
 	return mLayer;
 }
