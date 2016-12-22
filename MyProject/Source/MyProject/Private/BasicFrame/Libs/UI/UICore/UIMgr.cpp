@@ -275,7 +275,7 @@ void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormID
+		UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
 		UtilMap::Remove(mId2CodeLoadingItemDic, ID);
 	}
 }
@@ -290,7 +290,7 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormID
+		UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormId
 		UtilMap::Remove(mId2WidgetLoadingItemDic, ID);
 		GLogSys->log("UIFormId =  ， Failed Prefab");
 	}
@@ -299,7 +299,7 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 // 代码资源加载完成处理
 void UIMgr::onCodeloadedByRes(UIAssetRes* res)
 {
-	UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormID
+	UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
 	UtilMap::Remove(mId2CodeLoadingItemDic, ID);
 	addFormNoReady(mId2FormDic[ID]);
 	onCodeLoadedByForm(mId2FormDic[ID]);
@@ -317,7 +317,7 @@ void UIMgr::onCodeLoadedByForm(UForm* form)
 void UIMgr::onWidgetloadedByRes(UIAssetRes* res)
 {
 	std::string path = res->GetPath();
-	UIFormId ID = mUiAttrs->GetFormIDByPath(path, ePathComUI);  // 获取 FormID
+	UIFormId ID = mUiAttrs->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
 	UtilMap::Remove(mId2WidgetLoadingItemDic, ID);
 
 	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[ID];

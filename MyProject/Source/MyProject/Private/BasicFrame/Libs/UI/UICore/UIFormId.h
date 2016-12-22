@@ -1,5 +1,5 @@
-#ifndef __FORMID_H
-#define __FORMID_H
+#ifndef __UIFormId_H
+#define __UIFormId_H
 
 enum UIFormId
 {
