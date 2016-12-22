@@ -215,6 +215,8 @@ void UIMgr::loadForm(UIFormId formId)
 		//	form = Ctx.m_instance.m_scriptDynLoad.getScriptObject(attrItem.m_scriptTypeName) as Form;
 		//}
 
+
+
 		if (form != nullptr)                   // 如果代码已经在本地
 		{
 			form->setId(formId);

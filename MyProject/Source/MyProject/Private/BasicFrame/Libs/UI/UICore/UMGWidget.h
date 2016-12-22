@@ -10,5 +10,6 @@ class UUMGWidget : public UUserWidget
 	GENERATED_BODY()
 
 protected:
-	TSubclassOf<class UUserWidget>  WidgetClass;
+	TSubclassOf<class UUserWidget>  mWidgetClass;
+	UUserWidget* mUiRoot;      // ui 根节点
 };
