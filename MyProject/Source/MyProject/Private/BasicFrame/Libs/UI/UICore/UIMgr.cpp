@@ -161,11 +161,11 @@ UILayer* UIMgr::getLayer(UICanvasID canvasID, UILayerID layerID)
 // 内部接口
 void UIMgr::addFormNoReady(UForm* form)
 {
-	UILayer* layer = getLayer(mUiAttrs->mId2AttrDic[form->getID()]->mCanvasId, mUiAttrs->mId2AttrDic[form->getID()]->mLayerId);
+	UILayer* layer = getLayer(mUiAttrs->mId2AttrDic[form->getId()]->mCanvasId, mUiAttrs->mId2AttrDic[form->getId()]->mLayerId);
 	form->setUiLayer(layer);
 	layer->addForm(form);
 
-	mId2FormDic[form->getID()] = form;
+	mId2FormDic[form->getId()] = form;
 	form->init();        // 初始化
 }
 
@@ -217,7 +217,7 @@ void UIMgr::loadForm(UIFormId ID)
 
 		if (form != nullptr)                   // 如果代码已经在本地
 		{
-			form->setID(ID);
+			form->setId(ID);
 			//if (attrItem.m_bNeedLua)
 			//{
 			//	form.luaCSBridgeForm = new LuaCSBridgeForm(attrItem.m_luaScriptTableName, form);
