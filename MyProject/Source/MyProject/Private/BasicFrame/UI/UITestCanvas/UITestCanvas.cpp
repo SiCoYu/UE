@@ -4,6 +4,7 @@
 #include "BinaryLoadItem.h"
 #include "Ctx.h"
 #include "TableSys.h"
+#include "MyGameInstance.h"	// UMyGameInstance
 #include "DataAssetLoadItem.h"
 
 UUITestCanvas::UUITestCanvas(const FObjectInitializer& ObjectInitializer)

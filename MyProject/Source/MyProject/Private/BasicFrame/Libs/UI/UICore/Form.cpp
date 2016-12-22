@@ -3,6 +3,7 @@
 #include "Common.h"
 #include "EngineApi.h"
 #include "PointF.h"
+#include "MyGameInstance.h"	// UMyGameInstance
 #include "WindowAnchor.h"
 
 void UForm::loadUWidget(const TCHAR* name)

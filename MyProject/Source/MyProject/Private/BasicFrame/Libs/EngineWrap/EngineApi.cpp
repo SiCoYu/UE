@@ -11,13 +11,15 @@
 #include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
 #include "GenericPlatform/GenericPlatformHttp.h"
 #include "Engine/Engine.h"	// FWorldContext
+#include "MyLocalPlayer.h"	// UMyLocalPlayer
+#include "MyPlayerController.h"	// AMyPlayerController
 #include "EngineApi.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
 
 UMyGameInstance* EngineApi::getGameInstance()
 {
-	return Cast<UMyEngine>(UGameplayStatics::GetGameInstance(GEngineData->getMainActor()));
+	return Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GEngineData->getMainActor()));
 }
 
 UWorld* EngineApi::GetWorld()
@@ -108,6 +110,7 @@ UMyGameInstance* EngineApi::GetGameInstanceByWorld()
 {
 	UWorld* NewWorld = EngineApi::GetWorld();
 	UMyGameInstance* GameInstance = Cast<UMyGameInstance>(NewWorld->GetGameInstance());
+	return GameInstance;
 }
 
 UMyLocalPlayer* EngineApi::GetLocalPlayerByPlayerController()

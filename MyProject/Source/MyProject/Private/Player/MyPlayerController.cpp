@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"	// UUserWidget
 #include "MyPlayerCameraManager.h"
 #include "Common.h"
+#include "UITestCanvas.h"	// UUITestCanvas
 #include "MyPlayerController.h"
 
 AMyPlayerController::AMyPlayerController(const FObjectInitializer& ObjectInitializer)
@@ -47,7 +48,7 @@ void AMyPlayerController::ReceivedPlayer()
 	GCtx->beginPlay();
 }
 
-void AMyCharacter::TestUI()
+void AMyPlayerController::TestUI()
 {
 	// Test ╪сть UIPack
 	//GUiMgr->loadForm<UUIPack>(eUIPack);

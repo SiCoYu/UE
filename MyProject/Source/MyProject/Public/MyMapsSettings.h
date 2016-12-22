@@ -6,5 +6,5 @@
 UCLASS()
 class UMyMapsSettings : public UGameMapsSettings
 {
-	GENERATED_CLASS_BODY()
+	GENERATED_BODY()
 };
