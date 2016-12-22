@@ -57,7 +57,7 @@ void UWindow::setIsResReady(bool value)
 	mIsResReady = value;
 }
 
-GUIWin* UWindow::getGUIWin()
+GuiWin* UWindow::getGUIWin()
 {
 	return mGuiWin;
 }

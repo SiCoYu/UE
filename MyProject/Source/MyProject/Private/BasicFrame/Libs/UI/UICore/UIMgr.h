@@ -3,7 +3,7 @@
 
 #include <map>
 #include "MList.h"
-#include "UIFormID.h"
+#include "UIFormId.h"
 #include "EventDispatchDelegate.h"
 #include "UICanvas.h"
 #include "UILayer.h"
@@ -23,39 +23,39 @@ class UIAssetRes;
 class UIMgr
 {
 protected:
-	std::map<UIFormID, UForm*> mId2FormDic;
+	std::map<UIFormId, UForm*> mId2FormDic;
 	std::vector<UICanvas*> mCanvasList;
 	UIAttrSystem* mUiAttrs;
 
-	std::map<UIFormID, UILoadingItem*> mId2CodeLoadingItemDic;         // 记录当前代码正在加载的项
-	std::map<UIFormID, UILoadingItem*> mId2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
+	std::map<UIFormId, UILoadingItem*> mId2CodeLoadingItemDic;         // 记录当前代码正在加载的项
+	std::map<UIFormId, UILoadingItem*> mId2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
 
-	MList<UIFormID> mTmpList;
+	MList<UIFormId> mTmpList;
 	//GameObject mSceneUIRootGo;           // 每一个场景都会有一个这样的节点，专门放一些 Scene 中 UI 的一些信息
 
 public:
 	UIMgr();
 	template <class T>
-	UForm* loadForm(UIFormID formID);
+	UForm* loadForm(UIFormId formID);
 
 	template <class T>
-	T* getForm(UIFormID formID);
+	T* getForm(UIFormId formID);
 
 	void createCanvas();
 	void findCanvasGO();
-	void loadAndShow(UIFormID ID);
-	void showForm(UIFormID ID);
-	void showFormInternal(UIFormID ID);
-	void hideFormInternal(UIFormID ID);
-	void exitForm(UIFormID ID, bool bForce = false);
-	void exitFormInternal(UIFormID ID);
+	void loadAndShow(UIFormId ID);
+	void showForm(UIFormId ID);
+	void showFormInternal(UIFormId ID);
+	void hideFormInternal(UIFormId ID);
+	void exitForm(UIFormId ID, bool bForce = false);
+	void exitFormInternal(UIFormId ID);
 	void addForm(UForm* form);
 	UILayer* getLayer(UICanvasID canvasID, UILayerID layerID);
 	void addFormNoReady(UForm* form);
-	UForm* getForm(UIFormID ID);
-	bool hasForm(UIFormID ID);
-	void loadForm(UIFormID ID);
-	void loadWidgetRes(UIFormID ID);
+	UForm* getForm(UIFormId ID);
+	bool hasForm(UIFormId ID);
+	void loadForm(UIFormId ID);
+	void loadWidgetRes(UIFormId ID);
 	void loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle);
 	void onCodeLoadEventHandle(IDispatchObject* dispObj);
 	void onWidgetLoadEventHandle(IDispatchObject* dispObj);

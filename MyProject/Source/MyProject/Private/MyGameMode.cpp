@@ -3,7 +3,7 @@
 #include "GameFramework/HUD.h"
 #include "UI/MyHUD.h"
 #include "Common.h"
-#include "UIFormID.h"
+#include "UIFormId.h"
 #include "UIPack.h"
 #include "MyPlayerController.h"
 #include "UITestCanvas.h"

@@ -17,20 +17,20 @@ enum UILayerID
 #include <string>
 #include <map>
 
-#include "UIFormID.h"
+#include "UIFormId.h"
 
 class UForm;
 
 class UILayer
 {
 protected:
-	UILayerID mLayer;	                        // UIFormID.FirstLayer定义
+	UILayerID mLayer;	                        // UIFormId.FirstLayer定义
 	FSlateRenderTransform* mLayerTrans;                 // 当前所在层根节点转换
-	std::map<UIFormID, UForm*> mWinDic;        // 当前层所有的界面
+	std::map<UIFormId, UForm*> mWinDic;        // 当前层所有的界面
 	std::string mGoName;
 public:
 	UILayer(UILayerID layerID);
-	std::map<UIFormID, UForm*>& getWinDic();
+	std::map<UIFormId, UForm*>& getWinDic();
 	FSlateRenderTransform& getLayerTrans();
 	void setLayerTrans(FSlateRenderTransform* rhv);
 	void setGoName(std::string& rhv);

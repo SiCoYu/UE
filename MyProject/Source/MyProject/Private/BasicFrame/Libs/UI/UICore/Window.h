@@ -1,8 +1,8 @@
 #pragma once
 
 #include "MyProject.h"
-#include "UIFormID.h"
-#include "GUIWin.h"
+#include "UIFormId.h"
+#include "GuiWin.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
 #include "Window.generated.h"
 
@@ -22,9 +22,9 @@ class UWindow : public UUserWidget
 	GENERATED_BODY()
 
 protected:
-	UIFormID mId;
+	UIFormId mId;
 public:
-	GUIWin* mGuiWin;      // 控件数据
+	GuiWin* mGuiWin;      // 控件数据
 protected:
 	bool mIsDraggable;
 
@@ -54,7 +54,7 @@ public:
 	bool IsVisible();
 	bool getIsResReady();
 	void setIsResReady(bool value);
-	GUIWin* getGUIWin();
+	GuiWin* getGUIWin();
 
 	virtual bool getIsReady();
 };

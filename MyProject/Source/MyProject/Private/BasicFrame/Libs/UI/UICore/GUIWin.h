@@ -3,7 +3,7 @@
 
 #include "UMG.h"
 
-class GUIWin
+class GuiWin
 {
 public:
 	//UUserWidget* m_umgWidget;

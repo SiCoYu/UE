@@ -42,7 +42,7 @@ void UIMgr::findCanvasGO()
 	}
 }
 
-void UIMgr::loadAndShow(UIFormID ID)
+void UIMgr::loadAndShow(UIFormId ID)
 {
 	if (hasForm(ID))
 	{
@@ -55,7 +55,7 @@ void UIMgr::loadAndShow(UIFormID ID)
 }
 
 // 显示一个 UI
-void UIMgr::showForm(UIFormID ID)
+void UIMgr::showForm(UIFormId ID)
 {
 	if (hasForm(ID))
 	{
@@ -63,7 +63,7 @@ void UIMgr::showForm(UIFormID ID)
 	}
 }
 
-void UIMgr::showFormInternal(UIFormID ID)
+void UIMgr::showFormInternal(UIFormId ID)
 {
 	UForm* win = getForm(ID);
 	if (win != nullptr)
@@ -81,7 +81,7 @@ void UIMgr::showFormInternal(UIFormID ID)
 }
 
 // 隐藏一个 UI
-void UIMgr::hideFormInternal(UIFormID ID)
+void UIMgr::hideFormInternal(UIFormId ID)
 {
 	UForm* win = getForm(ID);
 	if (win != nullptr)
@@ -95,7 +95,7 @@ void UIMgr::hideFormInternal(UIFormID ID)
 }
 
 // 退出一个 UI
-void UIMgr::exitForm(UIFormID ID, bool bForce)
+void UIMgr::exitForm(UIFormId ID, bool bForce)
 {
 	UForm* win = getForm(ID);
 
@@ -112,7 +112,7 @@ void UIMgr::exitForm(UIFormID ID, bool bForce)
 	}
 }
 
-void UIMgr::exitFormInternal(UIFormID ID)
+void UIMgr::exitFormInternal(UIFormId ID)
 {
 	UForm* win = getForm(ID);
 
@@ -169,7 +169,7 @@ void UIMgr::addFormNoReady(UForm* form)
 	form->init();        // 初始化
 }
 
-UForm* UIMgr::getForm(UIFormID ID)
+UForm* UIMgr::getForm(UIFormId ID)
 {
 	if (UtilMap::ContainsKey(mId2FormDic, ID))
 	{
@@ -181,13 +181,13 @@ UForm* UIMgr::getForm(UIFormID ID)
 	}
 }
 
-bool UIMgr::hasForm(UIFormID ID)
+bool UIMgr::hasForm(UIFormId ID)
 {
 	return UtilMap::ContainsKey(mId2FormDic, ID);
 }
 
 // 这个事加载界面需要的代码
-void UIMgr::loadForm(UIFormID ID)
+void UIMgr::loadForm(UIFormId ID)
 {
 	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[ID];
 	UForm* window = getForm(ID);
@@ -240,7 +240,7 @@ void UIMgr::loadForm(UIFormID ID)
 }
 
 // 加载窗口控件资源，窗口资源都是从文件加载
-void UIMgr::loadWidgetRes(UIFormID ID)
+void UIMgr::loadWidgetRes(UIFormId ID)
 {
 	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[ID];
 	if (!UtilMap::ContainsKey(mId2WidgetLoadingItemDic, ID))                       // 如果什么都没有创建，第一次加载
@@ -275,7 +275,7 @@ void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormID ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormID
+		UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormID
 		UtilMap::Remove(mId2CodeLoadingItemDic, ID);
 	}
 }
@@ -290,16 +290,16 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormID ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormID
+		UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormID
 		UtilMap::Remove(mId2WidgetLoadingItemDic, ID);
-		GLogSys->log("UIFormID =  ， Failed Prefab");
+		GLogSys->log("UIFormId =  ， Failed Prefab");
 	}
 }
 
 // 代码资源加载完成处理
 void UIMgr::onCodeloadedByRes(UIAssetRes* res)
 {
-	UIFormID ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormID
+	UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormID
 	UtilMap::Remove(mId2CodeLoadingItemDic, ID);
 	addFormNoReady(mId2FormDic[ID]);
 	onCodeLoadedByForm(mId2FormDic[ID]);
@@ -317,7 +317,7 @@ void UIMgr::onCodeLoadedByForm(UForm* form)
 void UIMgr::onWidgetloadedByRes(UIAssetRes* res)
 {
 	std::string path = res->GetPath();
-	UIFormID ID = mUiAttrs->GetFormIDByPath(path, ePathComUI);  // 获取 FormID
+	UIFormId ID = mUiAttrs->GetFormIDByPath(path, ePathComUI);  // 获取 FormID
 	UtilMap::Remove(mId2WidgetLoadingItemDic, ID);
 
 	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[ID];
@@ -373,12 +373,12 @@ void UIMgr::onResize(int viewWidth, int viewHeight)
 // 关闭所有显示的窗口
 void UIMgr::exitAllWin()
 {
-	for(std::pair<UIFormID, UForm*> keyValue : mId2FormDic)
+	for(std::pair<UIFormId, UForm*> keyValue : mId2FormDic)
 	{
 		mTmpList.Add(keyValue.first);
 	}
 
-	for(UIFormID id : mTmpList.getList())
+	for(UIFormId id : mTmpList.getList())
 	{
 		exitForm(id);
 	}
@@ -393,7 +393,7 @@ void UIMgr::findSceneUIRootGo()
 // 根据场景类型卸载 UI，强制卸载
 //void UIMgr::unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe)
 //{
-//	foreach(UIFormID id in mId2FormDic.Keys)
+//	foreach(UIFormId id in mId2FormDic.Keys)
 //	{
 //		if (mUiAttrs.mId2AttrDic[id].canUnloadUIBySceneType(unloadSceneType, loadSceneTpe))
 //		{
@@ -401,7 +401,7 @@ void UIMgr::findSceneUIRootGo()
 //		}
 //	}
 //
-//	foreach(UIFormID id in mTmpList)
+//	foreach(UIFormId id in mTmpList)
 //	{
 //		exitForm(id, true);
 //	}

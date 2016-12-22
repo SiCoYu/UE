@@ -3,7 +3,7 @@
 #include "MyProject.h"
 #include "Window.h"
 #include <string>
-#include "UIFormID.h"
+#include "UIFormId.h"
 #include "PointF.h"
 
 #include "Form.generated.h"
@@ -22,7 +22,7 @@ protected:
 
 	bool mIsExitMode;               // 关闭退出模式
 	bool mIsHideOnCreate;         // 创建后是否隐藏
-	UIFormID mId;
+	UIFormId mId;
 	bool mIsLoadWidgetRes;                // 是否应该加载窗口资源
 	bool mIsReady;            // 是否准备就绪
 
@@ -37,8 +37,8 @@ public:
 	UForm(const FObjectInitializer& ObjectInitializer);
 
 	void loadUWidget(const TCHAR* name);
-	UIFormID getID();
-	void setID(UIFormID value);
+	UIFormId getId();
+	void setId(UIFormId value);
 	bool getHideOnCreate();
 	void setHideOnCreate(bool value);
 	bool getExitMode();

@@ -8,7 +8,7 @@ UIAttrSystem::UIAttrSystem()
 
 }
 
-std::string UIAttrSystem::getPath(UIFormID id)
+std::string UIAttrSystem::getPath(UIFormId id)
 {
 	if (UtilMap::ContainsKey(mId2AttrDic, id))
 	{
@@ -19,7 +19,7 @@ std::string UIAttrSystem::getPath(UIFormID id)
 }
 
 // 通过路径获取
-UIFormID UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
+UIFormId UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
 {
 	for(auto keyValue : mId2AttrDic)
 	{
@@ -39,5 +39,5 @@ UIFormID UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType
 		}
 	}
 
-	return (UIFormID)0;       // 默认返回最大值
+	return (UIFormId)0;       // 默认返回最大值
 }

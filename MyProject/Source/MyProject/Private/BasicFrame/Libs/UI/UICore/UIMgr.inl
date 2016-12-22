@@ -1,5 +1,5 @@
 template <class T>
-UForm* UIMgr::loadForm(UIFormID formID)
+UForm* UIMgr::loadForm(UIFormId formID)
 {
 	if (mId2FormDic[formID] == nullptr)
 	{
@@ -12,7 +12,7 @@ UForm* UIMgr::loadForm(UIFormID formID)
 }
 
 template <class T>
-T* UIMgr::getForm(UIFormID formID)
+T* UIMgr::getForm(UIFormId formID)
 {
 	return (T*)mId2FormDic[formID];
 }

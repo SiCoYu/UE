@@ -7,7 +7,7 @@ UILayer::UILayer(UILayerID layerID)
 
 }
 
-std::map<UIFormID, UForm*>& UILayer::getWinDic()
+std::map<UIFormId, UForm*>& UILayer::getWinDic()
 {
 	return mWinDic;
 }
@@ -52,7 +52,7 @@ void UILayer::addForm(UForm* form)
 
 void UILayer::onStageReSize()
 {
-	std::map<UIFormID, UForm*>::iterator itBegin, itEnd;
+	std::map<UIFormId, UForm*>::iterator itBegin, itEnd;
 	itBegin = mWinDic.begin();
 	itEnd = mWinDic.end();
 	for (; itBegin != itEnd; ++itBegin)
@@ -63,7 +63,7 @@ void UILayer::onStageReSize()
 
 void UILayer::closeAllForm()
 {
-	std::map<UIFormID, UForm*>::iterator itBegin, itEnd;
+	std::map<UIFormId, UForm*>::iterator itBegin, itEnd;
 	itBegin = mWinDic.begin();
 	itEnd = mWinDic.end();
 	for (; itBegin != itEnd; ++itBegin)

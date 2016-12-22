@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyCharacter.h"
 #include "Common.h"
-#include "UIFormID.h"
+#include "UIFormId.h"
 #include "UITestCanvas.h"
 #include "MyAnimInstance.h"
 

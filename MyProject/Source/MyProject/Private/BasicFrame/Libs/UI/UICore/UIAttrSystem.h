@@ -2,7 +2,7 @@
 #define __UIATTRSYSTEM_H
 
 #include <map>
-#include "UIFormID.h"
+#include "UIFormId.h"
 #include <string>
 #include "ResPathType.h"
 
@@ -11,13 +11,13 @@ class UIAttrItem;
 class UIAttrSystem
 {
 public:
-	std::map<UIFormID, UIAttrItem*> mId2AttrDic;
+	std::map<UIFormId, UIAttrItem*> mId2AttrDic;
 
 public:
 	UIAttrSystem();
-	std::string getPath(UIFormID id);
+	std::string getPath(UIFormId id);
 	// 通过路径获取
-	UIFormID GetFormIDByPath(std::string resPath, ResPathType pathType);
+	UIFormId GetFormIDByPath(std::string resPath, ResPathType pathType);
 };
 
 #endif				// __FORMATTRSYSTEM_H

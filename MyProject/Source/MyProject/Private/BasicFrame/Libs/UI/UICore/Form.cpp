@@ -36,12 +36,12 @@ UForm::UForm(const FObjectInitializer& ObjectInitializer)
 	mAlignHorizontal = (int)CENTER;
 }
 
-UIFormID UForm::getID()
+UIFormId UForm::getId()
 {
 	return mId;
 }
 
-void UForm::setID(UIFormID value)
+void UForm::setId(UIFormId value)
 {
 	mId = value;
 }
@@ -175,7 +175,7 @@ void UForm::onHide()
 
 	//if (mIsBlurBg)
 	//{
-	//	GUiMgr->exitForm(UIFormID.eUIBlurBg);
+	//	GUiMgr->exitForm(UIFormId.eUIBlurBg);
 	//}
 }
 
@@ -189,7 +189,7 @@ void UForm::onExit()
 
 	//if (mIsBlurBg)
 	//{
-	//	GUiMgr->exitForm(UIFormID.eUIBlurBg);
+	//	GUiMgr->exitForm(UIFormId.eUIBlurBg);
 	//}
 }
 
