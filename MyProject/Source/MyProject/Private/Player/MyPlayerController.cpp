@@ -31,10 +31,10 @@ void AMyPlayerController::BeginPlay()
 	BeginPlay_UMGWidgets();
 
 	// 各种初始化
-	EngineApi::showCursor();
+	//EngineApi::showCursor();
 
 	// 各种 UI 测试
-	TestUI();
+	//TestUI();
 
 	// 逻辑开始运行
 	//GCtx->beginPlay();
@@ -45,7 +45,7 @@ void AMyPlayerController::ReceivedPlayer()
 	Super::ReceivedPlayer();
 
 	// 赋值控制 Player ，逻辑开始运行
-	GCtx->beginPlay();
+	//GCtx->beginPlay();
 }
 
 void AMyPlayerController::TestUI()
