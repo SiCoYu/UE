@@ -1,9 +1,9 @@
-﻿#ifndef __GOExtraInfo_H
-#define __GOExtraInfo_H
+﻿#ifndef __GoExtraInfo_H
+#define __GoExtraInfo_H
 
 #include <string>
 
-class GOExtraInfo
+class GoExtraInfo
 {
 public:
 	std::string mPath;

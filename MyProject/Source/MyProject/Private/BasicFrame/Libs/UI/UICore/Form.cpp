@@ -297,7 +297,7 @@ void UForm::onExitBtnClick()
 //	{
 //		if (!m_go2Path.ContainsKey(btnGo))
 //		{
-//			m_go2Path[btnGo] = new GOExtraInfo();
+//			m_go2Path[btnGo] = new GoExtraInfo();
 //			m_go2Path[btnGo].mPath = path;
 //		}
 //	}

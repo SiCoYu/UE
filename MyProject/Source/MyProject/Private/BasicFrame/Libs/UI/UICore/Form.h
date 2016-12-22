@@ -31,7 +31,7 @@ protected:
 
 	// LuaCSBridgeForm mLuaCSBridgeForm;
 	std::string mFormName;            // 这个是 Lua 中传的标识符，会传给 Lua 使用，客户端自己不用
-	//std::map<GameObject, GOExtraInfo> mGo2Path;
+	//std::map<GameObject, GoExtraInfo> mGo2Path;
 
 public:
 	UForm(const FObjectInitializer& ObjectInitializer);

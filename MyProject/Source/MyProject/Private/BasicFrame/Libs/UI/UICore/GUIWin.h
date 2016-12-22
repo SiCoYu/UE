@@ -1,5 +1,5 @@
-﻿#ifndef __GUIWin_H
-#define __GUIWin_H
+﻿#ifndef __GuiWin_H
+#define __GuiWin_H
 
 #include "UMG.h"
 
