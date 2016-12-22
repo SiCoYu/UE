@@ -48,4 +48,6 @@
 #include "GameFramework/PlayerStart.h"		// APlayerStart
 #include "GameMapsSettings.h"	// UGameMapsSettings
 
+#include "Templates/SubclassOf.h"		// TSubclassOf
+
 #endif

@@ -8,6 +8,13 @@ namespace NSFormType
 		eUMG,
 		eSlate,
 	};
+
+	enum UMGOuterType
+	{
+		eWorld,
+		ePlayerController,
+		eGameInstance,
+	};
 }
 
 #endif

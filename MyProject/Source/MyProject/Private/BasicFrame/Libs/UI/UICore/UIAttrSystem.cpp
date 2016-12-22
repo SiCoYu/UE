@@ -17,6 +17,7 @@ void UIAttrSystem::init()
 	mId2AttrDic[NSFormId::eUITestUMG] = item;
 	item->mWidgetPath = "";
 	item->mFormType = NSFormType::eUMG;
+	item->mUMGOuterType = NSFormType::eGameInstance;
 }
 
 std::string UIAttrSystem::getPath(UIFormId id)

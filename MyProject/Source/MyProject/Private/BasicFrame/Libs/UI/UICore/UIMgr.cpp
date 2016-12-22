@@ -192,7 +192,7 @@ void UIMgr::loadForm(UIFormId formId)
 	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[formId];
 	UForm* window = getForm(formId);
 
-	if (window != nullptr)     // 本地已经创建了这个窗口，
+	if (nullptr != window)     // 本地已经创建了这个窗口，
 	{
 		if (window->getIsResReady())      // 如果资源也已经加载进来了
 		{
