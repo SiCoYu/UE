@@ -1,11 +1,22 @@
 #include "MyProject.h"
-#include "UIAttrSystem.h"
 #include "UIAttrItem.h"
 #include "UtilContainers.h"
+#include "UIFormId.h"
+#include "UIAttrSystem.h"
 
 UIAttrSystem::UIAttrSystem()
 {
 
+}
+
+void UIAttrSystem::init()
+{
+	UIAttrItem* item = nullptr;
+
+	item = new UIAttrItem();
+	mId2AttrDic[NSFormId::eUITestUMG] = item;
+	item->mWidgetPath = "";
+	item->mFormType = NSFormType::eUMG;
 }
 
 std::string UIAttrSystem::getPath(UIFormId id)

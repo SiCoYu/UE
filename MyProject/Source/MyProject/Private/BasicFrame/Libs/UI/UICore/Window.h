@@ -6,6 +6,8 @@
 #include "Blueprint/UserWidget.h"	// UUserWidget
 #include "Window.generated.h"
 
+using namespace NSFormId;
+
 class UILayer;
 
 /**

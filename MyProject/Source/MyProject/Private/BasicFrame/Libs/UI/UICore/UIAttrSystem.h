@@ -15,6 +15,7 @@ public:
 
 public:
 	UIAttrSystem();
+	void init();
 	std::string getPath(UIFormId id);
 	// 通过路径获取
 	UIFormId GetFormIDByPath(std::string resPath, ResPathType pathType);

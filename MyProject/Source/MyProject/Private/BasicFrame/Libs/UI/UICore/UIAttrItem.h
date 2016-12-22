@@ -5,6 +5,10 @@
 #include "UILayer.h"
 #include "UICanvas.h"
 #include "UIFormId.h"
+#include "FormType.h"
+
+using namespace NSFormType;
+using namespace NSFormId;
 
 class UIAttrItem
 {
@@ -13,9 +17,11 @@ public:
 	std::string mCodePath;      // 逻辑代码 path 
 	std::string mWidgetPath;	// 控件 path 
 
-	UICanvasId mCanvasId;       // 在哪个 Canvas
+	UICanvasId mCanvasId;       // CanvasId
 	UILayerId mLayerId;			// 所在的 Layer
 	uint8 mUiSceneType;			// 场景类型列表
+
+	FormType mFormType;		// UI 类型
 
 public:
 	UIAttrItem();

@@ -8,6 +8,8 @@
 
 #include "Form.generated.h"
 
+using namespace NSFormId;
+
 class UUserWidget;
 class PointF;
 

@@ -8,6 +8,8 @@
 #include "UICanvas.h"
 #include "UILayer.h"
 
+using namespace NSFormId;
+
 class UForm;
 class UICanvas;
 class UIAttrSystem;

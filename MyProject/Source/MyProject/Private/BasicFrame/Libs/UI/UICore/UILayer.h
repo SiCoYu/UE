@@ -19,6 +19,8 @@ enum UILayerId
 
 #include "UIFormId.h"
 
+using namespace NSFormId;
+
 class UForm;
 
 class UILayer
