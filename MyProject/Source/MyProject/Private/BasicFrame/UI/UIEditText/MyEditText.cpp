@@ -218,8 +218,10 @@ void SMyEditText::SetSlateUIMode(bool EnterSlateUI)
 	}
 	else
 	{
+		// warning C4996: 'FSlateApplication::SetFocusToGameViewport': FSlateApplication::SetFocusToGameViewport() is deprecated, use FSlateApplication::SetUserFocusToGameViewport() instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 		// Exit UI mode
-		FSlateApplication::Get().SetFocusToGameViewport();
+		//FSlateApplication::Get().SetFocusToGameViewport();
+		FSlateApplication::Get().SetUserFocusToGameViewport();
 	}
 }
 //~~~~~~~~~~~~~~~~
