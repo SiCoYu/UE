@@ -239,7 +239,7 @@ public:
 	//}
 	static void SetUserFocusToGameViewport(uint32 UserIndex, EFocusCause ReasonFocusIsChanging = EFocusCause::SetDirectly);
 
-	static int32 GetUserIndexForKeyboard() const;
+	static int32 GetUserIndexForKeyboard();
 
 	// Engine\Source\Runtime\Online\HTTP\Public\GenericPlatform\GenericPlatformHttp.h
 	static FString UrlEncode(const FString& UnencodedString);
