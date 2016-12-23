@@ -6,3 +6,14 @@
 //{
 //
 //}
+
+void UUMGWidget::OnSynchronizeProperties_Implementation()
+{
+	// Override this event in Blueprint
+}
+
+void UUMGWidget::SynchronizeProperties()
+{
+	Super::SynchronizeProperties();
+	OnSynchronizeProperties();
+}

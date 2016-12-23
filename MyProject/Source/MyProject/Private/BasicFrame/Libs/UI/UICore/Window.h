@@ -18,8 +18,8 @@ class UILayer;
 
 //UCLASS(abstract, config = Game)
 UCLASS(config = Game)
-//class UWindow : public UObject
-class UWindow : public UUserWidget
+class UWindow : public UObject
+//class UWindow : public UUserWidget
 {
 	GENERATED_BODY()
 

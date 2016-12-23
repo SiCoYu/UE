@@ -1,9 +1,8 @@
 #include "MyProject.h"
 #include "SlateForm.h"
 
-//USlateForm::USlateForm(const FObjectInitializer& ObjectInitializer)
-//	: Super(ObjectInitializer)
-SlateForm::SlateForm()
+USlateForm::USlateForm(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 
 }
