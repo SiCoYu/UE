@@ -1,5 +1,5 @@
-#ifndef __GLOBALEVENT_H
-#define __GLOBALEVENT_H
+#ifndef __GrobalEvent_H
+#define __GrobalEvent_H
 
 #include "gtest/gtest.h"
 

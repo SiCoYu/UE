@@ -2,6 +2,7 @@
 #include "Test.h"
 #include "TestExtern.h"
 #include "TestSocket.h"
+#include "TestUI.h"
 
 #include "gtest/gtest.h"
 #include "GrobalEvent.h"
@@ -14,6 +15,7 @@ Test::Test()
 {
 	mTestExtern = new TestExtern();
 	mTestSocket = new TestSocket();
+	mTestUI = new TestUI();
 }
 
 void Test::runTest()

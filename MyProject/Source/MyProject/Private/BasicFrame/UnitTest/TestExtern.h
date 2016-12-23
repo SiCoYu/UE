@@ -1,5 +1,5 @@
-#ifndef __TESTEXTERN_H
-#define __TESTEXTERN_H
+#ifndef __TestExtern_H
+#define __TestExtern_H
 
 #include "TestStaticLib/TestStaticLibA.h"
 #include "TestStaticLib/TestStaticLibB.h"

@@ -1,5 +1,5 @@
-#ifndef __TESTSOCKET_H
-#define __TESTSOCKET_H
+#ifndef __TestSocket_H
+#define __TestSocket_H
 
 #include "Windows/AllowWindowsPlatformTypes.h"
 

@@ -1,5 +1,5 @@
-#ifndef __CIRCULARBUFFERTEST_H
-#define __CIRCULARBUFFERTEST_H
+#ifndef __TestNetClientBuffer_H
+#define __TestNetClientBuffer_H
 
 #include "MCircularBuffer.h"
 //#include "gtest/gtest.h"

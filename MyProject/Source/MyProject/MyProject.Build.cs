@@ -73,6 +73,7 @@ public class MyProject : ModuleRules
 
                 // Test ÇøÓò
                 "MyProject/Private/BasicFrame/UnitTest",
+                "MyProject/Private/BasicFrame/UnitTest/TestUI",
 
                 // Anim area
                 "MyProject/Private/MyAnim",
