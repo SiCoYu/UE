@@ -2,7 +2,7 @@
 #include "Test.h"
 #include "TestExtern.h"
 #include "TestSocket.h"
-#include "TestUI.h"
+#include "TestUI/TestUI.h"
 
 #include "gtest/gtest.h"
 #include "GrobalEvent.h"
@@ -30,4 +30,6 @@ void Test::runTest()
 
 	//testing::InitGoogleTest(__argc, __argv);
 	RUN_ALL_TESTS();
+
+	mTestUI->run();
 }
