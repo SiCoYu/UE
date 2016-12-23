@@ -22,7 +22,7 @@ template <class T>
 T* UIMgr::loadForm(UIFormId formId)
 {
 	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[formId];
-	UForm* form = getForm(formId);
+	UForm* form = getForm<UForm>(formId);
 
 	if (nullptr != form)     // 本地已经创建了这个窗口，
 	{
@@ -83,7 +83,7 @@ T* UIMgr::loadForm(UIFormId formId)
 }
 
 template <class T>
-T* UIMgr::getForm(UIFormId formID)
+T* UIMgr::getForm(UIFormId formId)
 {
 	if (UtilMap::ContainsKey(mId2FormDic, formId))
 	{

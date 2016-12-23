@@ -57,7 +57,7 @@ void UIMgr::showForm(UIFormId formId)
 
 void UIMgr::showFormInternal(UIFormId formId)
 {
-	UForm* win = getForm(formId);
+	UForm* win = getForm<UForm>(formId);
 	if (win != nullptr)
 	{
 		if (!win->getIsReady())
@@ -75,7 +75,7 @@ void UIMgr::showFormInternal(UIFormId formId)
 // 隐藏一个 UI
 void UIMgr::hideFormInternal(UIFormId formId)
 {
-	UForm* win = getForm(formId);
+	UForm* win = getForm<UForm>(formId);
 	if (win != nullptr)
 	{
 		if (win->IsVisible())
@@ -89,7 +89,7 @@ void UIMgr::hideFormInternal(UIFormId formId)
 // 退出一个 UI
 void UIMgr::exitForm(UIFormId formId, bool bForce)
 {
-	UForm* win = getForm(formId);
+	UForm* win = getForm<UForm>(formId);
 
 	if (win != nullptr)
 	{
@@ -106,7 +106,7 @@ void UIMgr::exitForm(UIFormId formId, bool bForce)
 
 void UIMgr::exitFormInternal(UIFormId formId)
 {
-	UForm* win = getForm(formId);
+	UForm* win = getForm<UForm>(formId);
 
 	if (win != nullptr)
 	{

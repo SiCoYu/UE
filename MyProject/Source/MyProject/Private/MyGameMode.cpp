@@ -85,8 +85,6 @@ void AMyGameMode::TestUI()
 // https://wiki.unrealengine.com/Survival_Sample_Game:_Section_4
 void AMyGameMode::RestartPlayer(class AController* NewPlayer)
 {
-	// ...
-
 	/* Look for a live player to spawn next to */
 	FVector SpawnOrigin = FVector::ZeroVector;
 	FRotator StartRotation = FRotator::ZeroRotator;

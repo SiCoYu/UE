@@ -59,9 +59,7 @@ public:
 	void addForm(UForm* form);
 	UILayer* getLayer(UICanvasId canvasID, UILayerId layerID);
 	void addFormNoReady(UForm* form);
-	UForm* getForm(UIFormId ID);
 	bool hasForm(UIFormId ID);
-	void loadForm(UIFormId ID);
 	void loadWidgetRes(UIFormId ID);
 	void loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle);
 	void onCodeLoadEventHandle(IDispatchObject* dispObj);
