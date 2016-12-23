@@ -130,8 +130,9 @@ ULevel* EngineApi::getCurrentLevelFromWorld()
 ULevel* EngineApi::getPersistentLevelFromWorld()
 {
 	UWorld* world = EngineApi::GetWorld();
-	ULevel* currentLevel = world->GetPersistentLevel();
-	return currentLevel;
+	//ULevel* persistentLevel = world->GetPersistentLevel();
+	ULevel* persistentLevel = nullptr;
+	return persistentLevel;
 }
 
 UGameInstance* EngineApi::getGameInstanceFromWorld()
