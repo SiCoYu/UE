@@ -43,9 +43,11 @@ public:
 	template <class T>
 	T* getForm(UIFormId formID);
 
+	template <class T>
+	T* loadAndShow(UIFormId ID);
+
 	void createCanvas();
 	void findCanvasGO();
-	void loadAndShow(UIFormId ID);
 	void showForm(UIFormId ID);
 	void showFormInternal(UIFormId ID);
 	void hideFormInternal(UIFormId ID);

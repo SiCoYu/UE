@@ -14,5 +14,23 @@ UForm* UIMgr::loadForm(UIFormId formID)
 template <class T>
 T* UIMgr::getForm(UIFormId formID)
 {
-	return (T*)mId2FormDic[formID];
+	return (T*)this->mId2FormDic[formID];
+}
+
+template <class T>
+T*  UIMgr::loadAndShow(UIFormId formId)
+{
+	T* retForm = nullptr;
+
+	if (this->hasForm(formId))
+	{
+		this->showFormInternal(formId);
+		retForm = this->getForm<T>(formId);
+	}
+	else
+	{
+		retForm = this->loadForm<T>(formId);
+	}
+
+	return retForm;
 }

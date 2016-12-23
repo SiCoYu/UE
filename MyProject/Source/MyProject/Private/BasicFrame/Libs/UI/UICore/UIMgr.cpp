@@ -46,18 +46,6 @@ void UIMgr::findCanvasGO()
 	}
 }
 
-void UIMgr::loadAndShow(UIFormId formId)
-{
-	if (hasForm(formId))
-	{
-		showFormInternal(formId);
-	}
-	else
-	{
-		loadForm(formId);
-	}
-}
-
 // ÏÔÊ¾Ò»¸ö UI
 void UIMgr::showForm(UIFormId formId)
 {
