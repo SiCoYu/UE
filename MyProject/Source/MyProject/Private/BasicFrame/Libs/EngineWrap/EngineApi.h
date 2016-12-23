@@ -66,6 +66,11 @@ public:
 	static UMyGameInstance* GetGameInstanceByWorld();
 	static UMyLocalPlayer* GetLocalPlayerByPlayerController();
 
+	static ULevel* getCurrentLevelFromWorld();
+	static ULevel* getPersistentLevelFromWorld();
+	static UGameInstance* getGameInstanceFromWorld();
+	static TArray<AActor*>& getActorArrayFromCurrentLevel();
+
 	static void addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName);
 	static float getUTCSec();
 	static float GetRealTimeSeconds();

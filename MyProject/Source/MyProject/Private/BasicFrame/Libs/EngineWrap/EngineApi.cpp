@@ -120,6 +120,34 @@ UMyLocalPlayer* EngineApi::GetLocalPlayerByPlayerController()
 	return Player;
 }
 
+ULevel* EngineApi::getCurrentLevelFromWorld()
+{
+	UWorld* world = EngineApi::GetWorld();
+	ULevel* currentLevel = world->GetCurrentLevel();
+	return currentLevel;
+}
+
+ULevel* EngineApi::getPersistentLevelFromWorld()
+{
+	UWorld* world = EngineApi::GetWorld();
+	ULevel* currentLevel = world->GetPersistentLevel();
+	return currentLevel;
+}
+
+UGameInstance* EngineApi::getGameInstanceFromWorld()
+{
+	UWorld* world = EngineApi::GetWorld();
+	UGameInstance* gameInstance = world->GetGameInstance();
+	return gameInstance;
+}
+
+TArray<AActor*>& EngineApi::getActorArrayFromCurrentLevel()
+{
+	ULevel* currentLevel = EngineApi::getCurrentLevelFromWorld();
+	TArray<AActor*>& actors = currentLevel->Actors;
+	return actors;
+}
+
 float EngineApi::getUTCSec()
 {
 	//return g_pEngineApi->getWorld()->GetRealTimeSeconds();
