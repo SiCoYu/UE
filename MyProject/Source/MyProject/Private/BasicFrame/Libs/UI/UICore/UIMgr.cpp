@@ -15,6 +15,7 @@
 #include "Templates/SubclassOf.h"	// TSubclassOf
 #include "UMGWidget.h"				// UUMGWidget
 #include "UtilStr.h"				// UtilStr
+#include "UMGWidget.h"				// UUMGWidget
 #include "UIMgr.h"
 
 UIMgr::UIMgr()
@@ -341,7 +342,8 @@ void UIMgr::onWidgetloadedByRes(UIAssetRes* res)
 
 	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[formId];
 	mId2FormDic[formId]->setIsLoadWidgetRes(true);
-	mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->mWidgetPath));
+	//mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->mWidgetPath));
+	mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
 	//if (attrItem.m_bNeedLua)
 	//{
 	//	mId2FormDic[formId].luaCSBridgeForm.gameObject = mId2FormDic[formId].mGuiWin.mUiRoot;

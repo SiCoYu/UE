@@ -4,6 +4,7 @@
 #include "EngineApi.h"
 #include "PointF.h"
 #include "MyGameInstance.h"	// UMyGameInstance
+#include "UMGWidget.h"		// UUMGWidget
 #include "WindowAnchor.h"
 
 void UForm::loadUWidget(const TCHAR* name)
@@ -19,7 +20,8 @@ void UForm::loadUWidget(const TCHAR* name)
 		// 直接构造一个抽象类是报错误的
 		// NewObject<UUserWidget>();
 		// 构造一个类的子类，最新的 api 如下就可以了
-		mGuiWin->mUiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
+		//mGuiWin->mUiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
+		mGuiWin->mUiRoot = NewObject<UUMGWidget>(EngineApi::getGameInstance(), widgetClass);
 	}
 }
 
