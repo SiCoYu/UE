@@ -1,17 +1,17 @@
 template< class T >
-T* EngineApi::CreateWidget(UWorld* World, UClass* UserWidgetClass)
+T* EngineApi::MCreateWidget(UWorld* World, UClass* UserWidgetClass)
 {
 	return CreateWidget<T>(World, UserWidgetClass);
 }
 
 template< class T >
-T* EngineApi::CreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass)
+T* EngineApi::MCreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass)
 {
 	return CreateWidget<T>(OwningPlayer, UserWidgetClass);
 }
 
 template< class T >
-T* EngineApi::CreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass)
+T* EngineApi::MCreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass)
 {
 	return CreateWidget<T>(OwningGame, UserWidgetClass);
 }

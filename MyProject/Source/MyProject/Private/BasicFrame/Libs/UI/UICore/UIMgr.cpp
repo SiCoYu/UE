@@ -227,7 +227,7 @@ void UIMgr::loadForm(UIFormId formId)
 		}
 		else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
 		{
-			WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+			WidgetObject = EngineApi::MCreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
 		}
 		else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
 		{

@@ -206,13 +206,13 @@ public:
 	static void AddToViewport(UUserWidget* userWidget);
 
 	template< class T >
-	static T* CreateWidget(UWorld* World, UClass* UserWidgetClass = T::StaticClass());
+	static T* MCreateWidget(UWorld* World, UClass* UserWidgetClass = T::StaticClass());
 
 	template< class T >
-	static T* CreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass = T::StaticClass());
+	static T* MCreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass = T::StaticClass());
 
 	template< class T >
-	static T* CreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass = T::StaticClass());
+	static T* MCreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass = T::StaticClass());
 
 	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Programs\CrashReporter\CrashReportClient\Private\CrashReportClient.cpp
 	// /** Copies text to the operating system clipboard. */
