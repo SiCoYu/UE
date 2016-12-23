@@ -44,3 +44,21 @@ T* EngineApi::MDuplicateObject(T const* SourceObject, UObject* Outer, const FNam
 {
 	return DuplicateObject(SourceObject, Outer, Namer);
 }
+
+template< class T >
+T* EngineApi::MNewObject(UObject* Outer, UClass* Class, FName Name, EObjectFlags Flags, UObject* Template, bool bCopyTransientsFromClassDefaults, FObjectInstancingGraph* InInstanceGraph)
+{
+	return NewObject<T>(Outer, Class, Name, Flags, Template, bCopyTransientsFromClassDefaults, InInstanceGraph);
+}
+
+template< class T >
+T* EngineApi::MNewObject(UObject* Outer)
+{
+	return NewObject<T>(Outer);
+}
+
+template< class T >
+T* EngineApi::MNewObject(UObject* Outer, FName Name, EObjectFlags Flags, UObject* Template, bool bCopyTransientsFromClassDefaults, FObjectInstancingGraph* InInstanceGraph)
+{
+	return NewObject<T>(Outer, Name, Flags, Template, bCopyTransientsFromClassDefaults, InInstanceGraph);
+}

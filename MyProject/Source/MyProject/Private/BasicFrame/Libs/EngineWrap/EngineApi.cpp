@@ -455,9 +455,3 @@ FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLa
 {
 	return FPlatformProcess::CreateProc(URL, Parms, bLaunchDetached, bLaunchHidden, bLaunchReallyHidden, OutProcessID, PriorityModifier, OptionalWorkingDirectory, PipeWriteChild, PipeReadChild);
 }
-
-UObject* EngineApi::MNewObject(UClass* UC)
-{
-	UObject* retObject = NewObject<UObject>(UC);
-	return retObject;
-}

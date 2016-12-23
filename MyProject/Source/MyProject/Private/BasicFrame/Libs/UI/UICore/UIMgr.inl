@@ -1,14 +1,20 @@
+#include "EngineApi.h"
+
 template <class T>
-UForm* UIMgr::loadForm(UIFormId formID)
+T* UIMgr::loadForm(UIFormId formID)
 {
-	if (mId2FormDic[formID] == nullptr)
+	if (nullptr == this->mId2FormDic[formID])
 	{
 		// warning C4996: 'StaticConstructObject': StaticConstructObject is deprecated, please use NewObject instead. For internal CoreUObject module usage, please use StaticConstructObject_Internal. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile
 		//m_id2Form[formID] = Cast<UFormBase>(StaticConstructObject(T::StaticClass()));
-		mId2FormDic[formID] = Cast<UForm>(NewObject<T>());
+		//mId2FormDic[formID] = Cast<UForm>(NewObject<T>());
+
+		this->mId2FormDic[formID] = EngineApi::MNewObject<T>();
 	}
-	mId2FormDic[formID]->onReady();
-	return mId2FormDic[formID];
+
+	this->mId2FormDic[formID]->onReady();
+
+	return Cast<T>(this->mId2FormDic[formID]);
 }
 
 template <class T>

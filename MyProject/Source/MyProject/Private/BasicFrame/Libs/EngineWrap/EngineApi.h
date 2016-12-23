@@ -248,7 +248,14 @@ public:
 	template<class T>
 	static T* FindObject(const TCHAR* ObjectToFind);
 
-	static UObject* MNewObject(UClass* UC);
+	template< class T >
+	static T* MNewObject(UObject* Outer, UClass* Class, FName Name = NAME_None, EObjectFlags Flags = RF_NoFlags, UObject* Template = nullptr, bool bCopyTransientsFromClassDefaults = false, FObjectInstancingGraph* InInstanceGraph = nullptr);
+
+	template< class T >
+	static T* MNewObject(UObject* Outer = (UObject*)GetTransientPackage());
+
+	template< class T >
+	static T* MNewObject(UObject* Outer, FName Name, EObjectFlags Flags = RF_NoFlags, UObject* Template = nullptr, bool bCopyTransientsFromClassDefaults = false, FObjectInstancingGraph* InInstanceGraph = nullptr);
 
 	template< class T >
 	static T* MDuplicateObject(T const* SourceObject, UObject* Outer, const FName Name = NAME_None);

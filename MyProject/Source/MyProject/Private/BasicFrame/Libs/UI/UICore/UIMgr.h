@@ -38,7 +38,7 @@ protected:
 public:
 	UIMgr();
 	template <class T>
-	UForm* loadForm(UIFormId formID);
+	T* loadForm(UIFormId formID);
 
 	template <class T>
 	T* getForm(UIFormId formID);
