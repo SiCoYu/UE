@@ -6,15 +6,15 @@
 
 TestExtern::TestExtern()
 {
-	//m_testStaticLibB = new TestStaticLibB();
-	//m_testStaticLibB->testFunc("aaaaaaa");
+	//mTestStaticLibB = new TestStaticLibB();
+	//mTestStaticLibB->testFunc("aaaaaaa");
 
-	//m_testStaticLibA = dynamic_cast<TestStaticLibA*>(m_testStaticLibB);
-	//m_testStaticLibA->testFunc("aaaaaaa");
+	//mTestStaticLibA = dynamic_cast<TestStaticLibA*>(mTestStaticLibB);
+	//mTestStaticLibA->testFunc("aaaaaaa");
 
-	m_testStaticLibA = new TestStaticLibB();
-	m_testStaticLibA->testFunc("aaaaaaa");
+	mTestStaticLibA = new TestStaticLibB();
+	mTestStaticLibA->testFunc("aaaaaaa");
 
-	m_testStaticLibB = (TestStaticLibB*)m_testStaticLibA;
-	m_testStaticLibA->testFunc("aaaaaaa");
+	mTestStaticLibB = (TestStaticLibB*)mTestStaticLibA;
+	mTestStaticLibA->testFunc("aaaaaaa");
 }

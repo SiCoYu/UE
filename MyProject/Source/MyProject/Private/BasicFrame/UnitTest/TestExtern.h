@@ -7,8 +7,8 @@
 class TestExtern
 {
 public:
-	TestStaticLibA* m_testStaticLibA;
-	TestStaticLibB* m_testStaticLibB;
+	TestStaticLibA* mTestStaticLibA;
+	TestStaticLibB* mTestStaticLibB;
 
 public:
 	TestExtern();

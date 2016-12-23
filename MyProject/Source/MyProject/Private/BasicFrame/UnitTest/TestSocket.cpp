@@ -4,5 +4,5 @@
 TestSocket::TestSocket()
 {
 	SocketHandler aaa(NULL);
-	m_tcpSocket = new TcpSocket(aaa);
+	mTcpSocket = new TcpSocket(aaa);
 }

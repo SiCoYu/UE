@@ -49,11 +49,11 @@ protected:
 	FSandboxPlatformFile* mSandboxPlatformFile;
 
 #ifdef USE_EXTERN_THREAD
-	StdoutLog* m_pStdoutLog;
+	StdoutLog* mStdoutLog;
 #endif
 
 #ifdef ENABLE_UNIT_TEST
-	Test* m_test;
+	Test* mTest;
 #endif
 
 public:

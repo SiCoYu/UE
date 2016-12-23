@@ -12,8 +12,8 @@
 
 Test::Test()
 {
-	m_testExtern = new TestExtern();
-	m_testSocket = new TestSocket();
+	mTestExtern = new TestExtern();
+	mTestSocket = new TestSocket();
 }
 
 void Test::runTest()

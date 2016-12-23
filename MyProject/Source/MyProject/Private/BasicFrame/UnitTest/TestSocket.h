@@ -12,7 +12,7 @@
 class TestSocket
 {
 public:
-	TcpSocket* m_tcpSocket;
+	TcpSocket* mTcpSocket;
 
 public:
 	TestSocket();

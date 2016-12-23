@@ -7,8 +7,8 @@ class TestSocket;
 class Test
 {
 public:
-	TestExtern* m_testExtern;
-	TestSocket* m_testSocket;
+	TestExtern* mTestExtern;
+	TestSocket* mTestSocket;
 
 public:
 	Test();

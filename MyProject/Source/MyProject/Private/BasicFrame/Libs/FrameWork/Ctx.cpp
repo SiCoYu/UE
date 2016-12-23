@@ -35,11 +35,11 @@ Ctx::~Ctx()
 	delete mTableSys;
 
 #ifdef USE_EXTERN_THREAD
-	delete m_pStdoutLog;
+	delete mStdoutLog;
 #endif
 
 #ifdef ENABLE_UNIT_TEST
-	delete m_test;
+	delete mTest;
 #endif
 
 	delete mLogSys;
@@ -58,7 +58,7 @@ void Ctx::init()
 	mLogSys = new LogSys();
 	mEngineData = new EngineData();
 #ifdef USE_EXTERN_THREAD
-	m_pStdoutLog = new StdoutLog();
+	mStdoutLog = new StdoutLog();
 #endif
 
 	mUiMgr = new UIMgr();
@@ -84,8 +84,8 @@ void Ctx::init()
 void Ctx::beginPlay()
 {
 #ifdef ENABLE_UNIT_TEST
-	m_test = new Test();
-	m_test->runTest();
+	mTest = new Test();
+	mTest->runTest();
 #endif
 
 	testApi();
@@ -127,7 +127,7 @@ INetMgr* Ctx::getNetMgr()
 #ifdef USE_EXTERN_THREAD
 StdoutLog* Ctx::getStdLog()
 {
-	return m_pStdoutLog;
+	return mStdoutLog;
 }
 #endif
 
