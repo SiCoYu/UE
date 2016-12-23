@@ -1,9 +1,13 @@
 #pragma once
 
 #include "SlateForm.h"
+#include "UILog.generated.h"
 
-class UILog : public USlateForm
+UCLASS(config = Game)
+class UUILog : public USlateForm
 {
+	GENERATED_BODY()
+
 public:
-	UILog();
+	UUILog(const FObjectInitializer& ObjectInitializer);
 };

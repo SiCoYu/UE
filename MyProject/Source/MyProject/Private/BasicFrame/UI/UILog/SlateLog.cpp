@@ -1,8 +1,9 @@
 #include "MyProject.h"
 #include "SlateLog.h"
 
-SSlateLog::SSlateLog()
-{
+// error C2248 : 'SSlateWidget::SSlateWidget' : cannot access private member declared in class 'SSlateWidget'
+//SSlateLog::SSlateLog()
+//{
 	//static ConstructorHelpers::FClassFinder<UUserWidget> BigFontOb(TEXT("/Game/Blueprints/NewWidgetBlueprint"));
 
 	//if (BigFontOb.Class != NULL)
@@ -10,7 +11,7 @@ SSlateLog::SSlateLog()
 	//	WidgetClass = BigFontOb.Class;
 	//	UUserWidget* PawnToFit = WidgetClass->GetDefaultObject<UUserWidget>();
 	//}
-}
+//}
 
 void SSlateLog::Construct(const FArguments& InArgs)
 {

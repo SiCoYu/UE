@@ -1,9 +1,9 @@
 #pragma once
 
-#include "SlateBasics.h"
-#include "SlateExtras.h"
-#include "UMG.h"
-#include "SlateForm.h"
+//#include "SlateBasics.h"
+//#include "SlateExtras.h"
+//#include "UMG.h"
+#include "SlateWidget.h"
 
 class SSlateLog : public SSlateWidget
 {

@@ -1,7 +1,8 @@
 #include "MyProject.h"
 #include "UILog.h"
 
-UILog::UILog()
+UUILog::UUILog(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
-	
+
 }
