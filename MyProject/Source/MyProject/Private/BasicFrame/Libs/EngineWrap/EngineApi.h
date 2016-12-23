@@ -232,7 +232,14 @@ public:
 
 	static bool SetKeyboardFocus(const TSharedPtr<SWidget>& OptionalWidgetToFocus, EFocusCause ReasonFocusIsChanging = EFocusCause::SetDirectly);
 
+	// Engine\Source\Runtime\Slate\Private\Framework\Application\SlateApplication.cpp
+	//void FSlateApplication::SetFocusToGameViewport()
+	//{
+	//	SetUserFocusToGameViewport(GetUserIndexForKeyboard(), EFocusCause::SetDirectly);
+	//}
 	static void SetUserFocusToGameViewport(uint32 UserIndex, EFocusCause ReasonFocusIsChanging = EFocusCause::SetDirectly);
+
+	static int32 GetUserIndexForKeyboard() const;
 
 	// Engine\Source\Runtime\Online\HTTP\Public\GenericPlatform\GenericPlatformHttp.h
 	static FString UrlEncode(const FString& UnencodedString);

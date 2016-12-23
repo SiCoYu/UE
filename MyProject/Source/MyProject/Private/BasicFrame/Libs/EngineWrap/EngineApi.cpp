@@ -436,6 +436,11 @@ void EngineApi::SetUserFocusToGameViewport(uint32 UserIndex, EFocusCause ReasonF
 	FSlateApplication::Get().SetUserFocusToGameViewport(UserIndex, ReasonFocusIsChanging);
 }
 
+int32 EngineApi::GetUserIndexForKeyboard()
+{
+	return FSlateApplication::Get().GetUserIndexForKeyboard();
+}
+
 FString EngineApi::UrlEncode(const FString& UnencodedString)
 {
 	//return FPlatformHttp::UrlEncode(UnencodedString);

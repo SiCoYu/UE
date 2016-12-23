@@ -1,8 +1,8 @@
 #include "MyProject.h"
 #include "UMGTest.h"
 
-UUMGTest::UUMGTest(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
-{
-
-}
+//UUMGTest::UUMGTest(const FObjectInitializer& ObjectInitializer)
+//	: Super(ObjectInitializer)
+//{
+//
+//}
