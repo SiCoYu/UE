@@ -15,7 +15,7 @@ void UIAttrSystem::init()
 
 	item = new UIAttrItem();
 	mId2AttrDic[NSFormId::eUITestUMG] = item;
-	item->mWidgetPath = "WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/NewWidgetBlueprint.NewWidgetBlueprint'";
+	item->mWidgetPath = "WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/NewWidgetBlueprint.NewWidgetBlueprint_C'";
 	item->mFormType = NSFormType::eUMG;
 	item->mUMGOuterType = NSFormType::ePlayerController;
 }

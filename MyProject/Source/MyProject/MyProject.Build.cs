@@ -70,6 +70,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/UI/UIEditText",
                 "MyProject/Private/BasicFrame/UI/UISlateTab",
                 "MyProject/Private/BasicFrame/UI/UISlateStyleSet",
+                "MyProject/Private/BasicFrame/UI/UITestUMG",
 
                 // Test ÇøÓò
                 "MyProject/Private/BasicFrame/UnitTest",
