@@ -1,5 +1,5 @@
-#ifndef __UIMGR_H
-#define __UIMGR_H
+#ifndef __UIMgr_H
+#define __UIMgr_H
 
 #include <map>
 #include "MList.h"
@@ -7,6 +7,9 @@
 #include "EventDispatchDelegate.h"
 #include "UICanvas.h"
 #include "UILayer.h"
+#include "UIAttrItem.h"
+#include "UIAttrSystem.h"
+#include "Form.h"
 
 using namespace NSFormId;
 

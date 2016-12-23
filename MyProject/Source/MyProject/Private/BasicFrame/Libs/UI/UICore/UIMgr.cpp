@@ -153,98 +153,17 @@ UILayer* UIMgr::getLayer(UICanvasId canvasID, UILayerId layerID)
 // 内部接口
 void UIMgr::addFormNoReady(UForm* form)
 {
-	UILayer* layer = getLayer(mUiAttrs->mId2AttrDic[form->getId()]->mCanvasId, mUiAttrs->mId2AttrDic[form->getId()]->mLayerId);
-	form->setUiLayer(layer);
-	layer->addForm(form);
+	//UILayer* layer = getLayer(mUiAttrs->mId2AttrDic[form->getId()]->mCanvasId, mUiAttrs->mId2AttrDic[form->getId()]->mLayerId);
+	//form->setUiLayer(layer);
+	//layer->addForm(form);
 
 	mId2FormDic[form->getId()] = form;
 	form->init();        // 初始化
 }
 
-UForm* UIMgr::getForm(UIFormId formId)
-{
-	if (UtilMap::ContainsKey(mId2FormDic, formId))
-	{
-		return mId2FormDic[formId];
-	}
-	else
-	{
-		return nullptr;
-	}
-}
-
 bool UIMgr::hasForm(UIFormId formId)
 {
 	return UtilMap::ContainsKey(mId2FormDic, formId);
-}
-
-// 这个事加载界面需要的代码
-void UIMgr::loadForm(UIFormId formId)
-{
-	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[formId];
-	UForm* window = getForm(formId);
-
-	if (nullptr != window)     // 本地已经创建了这个窗口，
-	{
-		if (window->getIsResReady())      // 如果资源也已经加载进来了
-		{
-			//if (nullptr != Ctx.m_instance.m_cbUIEvent)
-			//{
-			//	Ctx.m_instance.m_cbUIEvent.onCodeFormLoaded(window);  // 资源加载完成
-			//}
-		}
-	}
-	else if (!UtilMap::ContainsKey(mId2CodeLoadingItemDic, formId))                       // 如果什么都没有创建，第一次加载
-	{
-		// 创建窗口
-		UForm* form = nullptr;
-		//if (attrItem.m_bNeedLua)
-		//{
-		//	form = new Form();
-		//}
-		//else
-		//{
-		//	form = Ctx.m_instance.m_scriptDynLoad.getScriptObject(attrItem.m_scriptTypeName) as Form;
-		//}
-
-		TSubclassOf<UUMGWidget> WidgetClass = EngineApi::FindClass<UUMGWidget>(UtilStr::convStdStr2TCHAR(attrItem->mWidgetPath));
-		UUMGWidget* WidgetObject = nullptr;
-
-		if (NSFormType::eWorld == attrItem->mUMGOuterType)
-		{
-
-		}
-		else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
-		{
-			WidgetObject = EngineApi::MCreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
-		}
-		else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
-		{
-
-		}
-
-		if (form != nullptr)                   // 如果代码已经在本地
-		{
-			form->setId(formId);
-			//if (attrItem.m_bNeedLua)
-			//{
-			//	form.luaCSBridgeForm = new LuaCSBridgeForm(attrItem.m_luaScriptTableName, form);
-			//	form.luaCSBridgeForm.DoFile(attrItem.m_luaScriptPath);
-			//}
-
-			addFormNoReady(form);           // 仅仅是创建数据，资源还没有加载完成
-			onCodeLoadedByForm(form);
-		}
-
-		// 这个地方应该抛出异常
-		if (nullptr == form)    // 本地没有代码
-		{
-			mId2CodeLoadingItemDic[formId] = new UILoadingItem();
-			mId2CodeLoadingItemDic[formId]->mId = formId;
-
-			loadFromFile(attrItem->mCodePath, EventDispatchDelegate(this, &UIMgr::onCodeLoadEventHandle));
-		}
-	}
 }
 
 // 加载窗口控件资源，窗口资源都是从文件加载
