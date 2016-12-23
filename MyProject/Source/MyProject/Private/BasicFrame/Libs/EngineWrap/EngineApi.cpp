@@ -13,6 +13,7 @@
 #include "Engine/Engine.h"	// FWorldContext
 #include "MyLocalPlayer.h"	// UMyLocalPlayer
 #include "MyPlayerController.h"	// AMyPlayerController
+#include "UObject/UObjectGlobals.h"	// NewObject
 #include "EngineApi.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
@@ -453,4 +454,10 @@ FString EngineApi::UrlEncode(const FString& UnencodedString)
 FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild)
 {
 	return FPlatformProcess::CreateProc(URL, Parms, bLaunchDetached, bLaunchHidden, bLaunchReallyHidden, OutProcessID, PriorityModifier, OptionalWorkingDirectory, PipeWriteChild, PipeReadChild);
+}
+
+UObject* EngineApi::MNewObject(UClass* UC)
+{
+	UObject* retObject = NewObject<UObject>(UC);
+	return retObject;
 }

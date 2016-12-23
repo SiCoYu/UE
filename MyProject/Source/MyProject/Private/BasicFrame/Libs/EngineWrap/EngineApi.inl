@@ -38,3 +38,9 @@ T* EngineApi::FindObject(const TCHAR* ObjectToFind)
 	ConstructorHelpers::FObjectFinder<T> findObject(ObjectToFind);
 	return findObject.Object;
 }
+
+template< class T >
+T* EngineApi::MDuplicateObject(T const* SourceObject, UObject* Outer, const FName Name)
+{
+	return DuplicateObject(SourceObject, Outer, Namer);
+}

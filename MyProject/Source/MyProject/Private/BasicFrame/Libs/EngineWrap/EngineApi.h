@@ -15,6 +15,7 @@
 //#include "IDesktopPlatform.h"	// FOpenLauncherOptions
 #include "UObject/ConstructorHelpers.h"		// ConstructorHelpers
 #include "Templates/SubclassOf.h"	// TSubclassOf
+#include "UObject/UObjectGlobals.h"	// DuplicateObject
 
 class UGameInstance;
 class UMyEngine;
@@ -246,6 +247,11 @@ public:
 
 	template<class T>
 	static T* FindObject(const TCHAR* ObjectToFind);
+
+	static UObject* MNewObject(UClass* UC);
+
+	template< class T >
+	static T* MDuplicateObject(T const* SourceObject, UObject* Outer, const FName Name = NAME_None);
 };
 
 #include "EngineApi.inl"
