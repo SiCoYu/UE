@@ -46,8 +46,8 @@ FName UtilStr::ConvFString2FName(FString& fStr)
 
 FString UtilStr::ConvStdStr2FString(std::string& stdStr)
 {
-	FString HappyString(stdStr.c_str());
-	return HappyString;
+	FString fStr(stdStr.c_str());
+	return fStr;
 }
 
 std::string UtilStr::ConvFString2StdStr(FString& fStr)
@@ -95,4 +95,12 @@ const FString UtilStr::ConvFText2FString(FText& fText)
 FText UtilStr::ConvChar2FText(const char* pchar)
 {
 	return FText::FromString(pchar);
+}
+
+const TCHAR* UtilStr::convStdStr2TCHAR(std::string& stdStr)
+{
+	const TCHAR* retChar = nullptr;
+	FString fStr = UtilStr::ConvStdStr2FString(stdStr);
+	retChar = *fStr;
+	return retChar;
 }

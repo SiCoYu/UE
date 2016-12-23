@@ -79,6 +79,7 @@ void AMyPlayerController::DeterminePawnClass_Implementation()
 
 		/* Otherwise, Use PawnB :) */
 		ServerSetPawn(PawnToUseB);
+
 		return;
 	}
 }

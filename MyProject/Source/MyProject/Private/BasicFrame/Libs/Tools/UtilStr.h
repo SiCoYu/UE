@@ -38,6 +38,8 @@ public:
 	static FText ConvFString2FText(FString& fStr);
 	static const FString ConvFText2FString(FText& fText);
 	static FText ConvChar2FText(const char* pchar);
+
+	static const TCHAR* convStdStr2TCHAR(std::string& stdStr);
 };
 
 #endif

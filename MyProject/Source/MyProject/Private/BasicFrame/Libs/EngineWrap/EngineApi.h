@@ -13,6 +13,8 @@
 
 #include "Containers/Array.h"	// TArray
 //#include "IDesktopPlatform.h"	// FOpenLauncherOptions
+#include "UObject/ConstructorHelpers.h"		// ConstructorHelpers
+#include "Templates/SubclassOf.h"	// TSubclassOf
 
 class UGameInstance;
 class UMyEngine;
@@ -204,13 +206,13 @@ public:
 	static void AddToViewport(UUserWidget* userWidget);
 
 	template< class T >
-	T* CreateWidget(UWorld* World, UClass* UserWidgetClass = T::StaticClass());
+	static T* CreateWidget(UWorld* World, UClass* UserWidgetClass = T::StaticClass());
 
 	template< class T >
-	T* CreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass = T::StaticClass());
+	static T* CreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass = T::StaticClass());
 
 	template< class T >
-	T* CreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass = T::StaticClass());
+	static T* CreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass = T::StaticClass());
 
 	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Programs\CrashReporter\CrashReportClient\Private\CrashReportClient.cpp
 	// /** Copies text to the operating system clipboard. */
@@ -238,6 +240,12 @@ public:
 
 	// Engine\Source\Runtime\Core\Public\Windows\WindowsPlatformProcess.h
 	static FProcHandle CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild = nullptr);
+
+	template<class T>
+	static TSubclassOf<T> FindClass(const TCHAR* ClassToFind);
+
+	template<class T>
+	static T* FindObject(const TCHAR* ObjectToFind);
 };
 
 #include "EngineApi.inl"

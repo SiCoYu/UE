@@ -1,5 +1,4 @@
 #include "MyProject.h"
-#include "UIMgr.h"
 #include "Form.h"
 #include "UIAttrSystem.h"
 #include "NotDestroyPath.h"
@@ -13,6 +12,10 @@
 #include "UIAttrItem.h"
 #include "RefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
+#include "Templates/SubclassOf.h"	// TSubclassOf
+#include "UMGWidget.h"				// UUMGWidget
+#include "UtilStr.h"				// UtilStr
+#include "UIMgr.h"
 
 UIMgr::UIMgr()
 {
@@ -215,7 +218,21 @@ void UIMgr::loadForm(UIFormId formId)
 		//	form = Ctx.m_instance.m_scriptDynLoad.getScriptObject(attrItem.m_scriptTypeName) as Form;
 		//}
 
+		TSubclassOf<UUMGWidget> WidgetClass = EngineApi::FindClass<UUMGWidget>(UtilStr::convStdStr2TCHAR(attrItem->mWidgetPath));
+		UUMGWidget* WidgetObject = nullptr;
 
+		if (NSFormType::eWorld == attrItem->mUMGOuterType)
+		{
+
+		}
+		else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
+		{
+			WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+		}
+		else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
+		{
+
+		}
 
 		if (form != nullptr)                   // 如果代码已经在本地
 		{
