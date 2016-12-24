@@ -460,3 +460,13 @@ FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLa
 {
 	return FPlatformProcess::CreateProc(URL, Parms, bLaunchDetached, bLaunchHidden, bLaunchReallyHidden, OutProcessID, PriorityModifier, OptionalWorkingDirectory, PipeWriteChild, PipeReadChild);
 }
+
+UObject* EngineApi::MStaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox, bool bAllowObjectReconciliation)
+{
+	return StaticLoadObject(Class, InOuter, Name, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation);
+}
+
+UClass* EngineApi::MStaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
+{
+	return StaticLoadClass(BaseClass, InOuter, Name, Filename, LoadFlags, Sandbox);
+}

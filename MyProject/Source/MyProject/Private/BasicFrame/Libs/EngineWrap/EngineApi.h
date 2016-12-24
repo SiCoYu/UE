@@ -249,11 +249,19 @@ public:
 	// Engine\Source\Runtime\Core\Public\Windows\WindowsPlatformProcess.h
 	static FProcHandle CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild = nullptr);
 
+	// 构造函数才能调用函数
 	template<class T>
 	static TSubclassOf<T> FindClass(const TCHAR* ClassToFind);
 
 	template<class T>
 	static T* FindObject(const TCHAR* ObjectToFind);
+
+	// 任何地方都可以调用
+	// 参考 Engine\Source\Runtime\CoreUObject\Public\UObject\ConstructorHelpers.h
+	// inline UClass* FindOrLoadClass(FString& PathName, UClass* BaseClass)
+	static UObject* MStaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename = NULL, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = NULL, bool bAllowObjectReconciliation = true);
+
+	static UClass* MStaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename = NULL, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = NULL);
 
 	template< class T >
 	static T* MNewObject(UObject* Outer, UClass* Class, FName Name = NAME_None, EObjectFlags Flags = RF_NoFlags, UObject* Template = nullptr, bool bCopyTransientsFromClassDefaults = false, FObjectInstancingGraph* InInstanceGraph = nullptr);

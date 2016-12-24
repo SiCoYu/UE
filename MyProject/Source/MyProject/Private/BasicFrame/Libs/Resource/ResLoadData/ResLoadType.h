@@ -16,4 +16,22 @@ enum ResLoadType
 	eLoadNum
 };
 
+/**
+ * @brief 资源加载模式，同步还是异步
+ */
+enum ResLoadMode
+{
+	eSync,		// 同步
+	eAsync,		// 异步
+};
+
+/**
+ * @brief 资源加载点，构造函数，其它时机
+ */
+enum ResLoadPoint
+{
+	eConstruct,		// 同步
+	eOther,		// 异步
+};
+
 #endif
