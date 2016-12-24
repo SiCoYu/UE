@@ -11,13 +11,16 @@ UIAttrSystem::UIAttrSystem()
 
 void UIAttrSystem::init()
 {
-	UIAttrItem* item = nullptr;
+	this->addItem(
+		NSFormId::eUITestUMG, 
+		"WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/NewWidgetBlueprint.NewWidgetBlueprint_C'", 
+		NSFormType::eUMG,
+		NSFormType::ePlayerController);
+}
 
-	item = new UIAttrItem();
-	mId2AttrDic[NSFormId::eUITestUMG] = item;
-	item->mWidgetPath = "WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/NewWidgetBlueprint.NewWidgetBlueprint_C'";
-	item->mFormType = NSFormType::eUMG;
-	item->mUMGOuterType = NSFormType::ePlayerController;
+void UIAttrSystem::dispose()
+{
+
 }
 
 std::string UIAttrSystem::getPath(UIFormId id)
@@ -52,4 +55,15 @@ UIFormId UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType
 	}
 
 	return (UIFormId)0;       // 默认返回最大值
+}
+
+void UIAttrSystem::addItem(UIFormId formId, std::string widgetPath, FormType formType, UMGOuterType outerType)
+{
+	UIAttrItem* item = nullptr;
+
+	item = new UIAttrItem();
+	mId2AttrDic[formId] = item;
+	item->mWidgetPath = widgetPath;
+	item->mFormType = formType;
+	item->mUMGOuterType = outerType;
 }

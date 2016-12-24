@@ -20,8 +20,25 @@
 
 UIMgr::UIMgr()
 {
-	mUiAttrs = new UIAttrSystem();
-	createCanvas();
+	this->mUiAttrSystem = new UIAttrSystem();
+	this->createCanvas();
+}
+
+void UIMgr::init()
+{
+	if (nullptr != this->mUiAttrSystem)
+	{
+		this->mUiAttrSystem->init();
+	}
+}
+
+void UIMgr::dispose()
+{
+	if (nullptr != this->mUiAttrSystem)
+	{
+		this->mUiAttrSystem->dispose();
+		this->mUiAttrSystem = nullptr;
+	}
 }
 
 void UIMgr::createCanvas()
@@ -118,7 +135,7 @@ void UIMgr::exitFormInternal(UIFormId formId)
 		EngineApi::Destroy(win->mGuiWin->mUiRoot);
 		win->mGuiWin->mUiRoot = nullptr;
 		// 释放加载的资源
-		//string path = mUiAttrs.getPath(formId);
+		//string path = mUiAttrSystem.getPath(formId);
 		//if (path != null)
 		//{
 		//    Ctx.m_instance.mResLoadMgr.unload(path);
@@ -153,7 +170,7 @@ UILayer* UIMgr::getLayer(UICanvasId canvasID, UILayerId layerID)
 // 内部接口
 void UIMgr::addFormNoReady(UForm* form)
 {
-	//UILayer* layer = getLayer(mUiAttrs->mId2AttrDic[form->getId()]->mCanvasId, mUiAttrs->mId2AttrDic[form->getId()]->mLayerId);
+	//UILayer* layer = getLayer(mUiAttrSystem->mId2AttrDic[form->getId()]->mCanvasId, mUiAttrSystem->mId2AttrDic[form->getId()]->mLayerId);
 	//form->setUiLayer(layer);
 	//layer->addForm(form);
 
@@ -169,7 +186,7 @@ bool UIMgr::hasForm(UIFormId formId)
 // 加载窗口控件资源，窗口资源都是从文件加载
 void UIMgr::loadWidgetRes(UIFormId formId)
 {
-	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[formId];
+	UIAttrItem* attrItem = mUiAttrSystem->mId2AttrDic[formId];
 	if (!UtilMap::ContainsKey(mId2WidgetLoadingItemDic, formId))                       // 如果什么都没有创建，第一次加载
 	{
 		mId2WidgetLoadingItemDic[formId] = new UILoadingItem();
@@ -202,7 +219,7 @@ void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormId formId = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
+		UIFormId formId = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
 		UtilMap::Remove(mId2CodeLoadingItemDic, formId);
 	}
 }
@@ -217,7 +234,7 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormId ID = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormId
+		UIFormId ID = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormId
 		UtilMap::Remove(mId2WidgetLoadingItemDic, ID);
 		GLogSys->log("UIFormId =  ， Failed Prefab");
 	}
@@ -226,7 +243,7 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 // 代码资源加载完成处理
 void UIMgr::onCodeloadedByRes(UIAssetRes* res)
 {
-	UIFormId formId = mUiAttrs->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
+	UIFormId formId = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
 	UtilMap::Remove(mId2CodeLoadingItemDic, formId);
 	addFormNoReady(mId2FormDic[formId]);
 	onCodeLoadedByForm(mId2FormDic[formId]);
@@ -244,10 +261,10 @@ void UIMgr::onCodeLoadedByForm(UForm* form)
 void UIMgr::onWidgetloadedByRes(UIAssetRes* res)
 {
 	std::string path = res->GetPath();
-	UIFormId formId = mUiAttrs->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
+	UIFormId formId = mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
 	UtilMap::Remove(mId2WidgetLoadingItemDic, formId);
 
-	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[formId];
+	UIAttrItem* attrItem = mUiAttrSystem->mId2AttrDic[formId];
 	mId2FormDic[formId]->setIsLoadWidgetRes(true);
 	//mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->mWidgetPath));
 	mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
@@ -323,7 +340,7 @@ void UIMgr::findSceneUIRootGo()
 //{
 //	foreach(UIFormId id in mId2FormDic.Keys)
 //	{
-//		if (mUiAttrs.mId2AttrDic[id].canUnloadUIBySceneType(unloadSceneType, loadSceneTpe))
+//		if (mUiAttrSystem.mId2AttrDic[id].canUnloadUIBySceneType(unloadSceneType, loadSceneTpe))
 //		{
 //			mTmpList.Add(id);
 //		}

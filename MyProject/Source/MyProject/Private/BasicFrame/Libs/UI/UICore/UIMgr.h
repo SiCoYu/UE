@@ -30,7 +30,7 @@ class UIMgr
 protected:
 	std::map<UIFormId, UForm*> mId2FormDic;
 	std::vector<UICanvas*> mCanvasList;
-	UIAttrSystem* mUiAttrs;
+	UIAttrSystem* mUiAttrSystem;
 
 	std::map<UIFormId, UILoadingItem*> mId2CodeLoadingItemDic;         // 记录当前代码正在加载的项
 	std::map<UIFormId, UILoadingItem*> mId2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
@@ -40,6 +40,10 @@ protected:
 
 public:
 	UIMgr();
+
+	void init();
+	void dispose();
+
 	template <class T>
 	T* loadForm(UIFormId formID);
 
@@ -51,23 +55,29 @@ public:
 
 	void createCanvas();
 	void findCanvasGO();
+
 	void showForm(UIFormId ID);
 	void showFormInternal(UIFormId ID);
 	void hideFormInternal(UIFormId ID);
 	void exitForm(UIFormId ID, bool bForce = false);
 	void exitFormInternal(UIFormId ID);
 	void addForm(UForm* form);
+
 	UILayer* getLayer(UICanvasId canvasID, UILayerId layerID);
+
 	void addFormNoReady(UForm* form);
 	bool hasForm(UIFormId ID);
+
 	void loadWidgetRes(UIFormId ID);
 	void loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle);
+
 	void onCodeLoadEventHandle(IDispatchObject* dispObj);
 	void onWidgetLoadEventHandle(IDispatchObject* dispObj);
 	void onCodeloadedByRes(UIAssetRes* res);
 	void onCodeLoadedByForm(UForm* form);
 	void onWidgetloadedByRes(UIAssetRes* res);
 	void onResize(int viewWidth, int viewHeight);
+
 	void exitAllWin();
 	void findSceneUIRootGo();
 	//void unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe);

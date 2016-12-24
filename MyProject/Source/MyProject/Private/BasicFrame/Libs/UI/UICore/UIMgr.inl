@@ -21,7 +21,7 @@
 template <class T>
 T* UIMgr::loadForm(UIFormId formId)
 {
-	UIAttrItem* attrItem = mUiAttrs->mId2AttrDic[formId];
+	UIAttrItem* attrItem = mUiAttrSystem->mId2AttrDic[formId];
 	UForm* form = getForm<UForm>(formId);
 
 	if (nullptr != form)     // 本地已经创建了这个窗口，

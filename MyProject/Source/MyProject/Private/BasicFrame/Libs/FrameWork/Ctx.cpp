@@ -83,6 +83,8 @@ void Ctx::init()
 
 void Ctx::beginPlay()
 {
+	mUiMgr->init();
+
 #ifdef ENABLE_UNIT_TEST
 	mTest = new Test();
 	mTest->runTest();
