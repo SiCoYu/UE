@@ -31,11 +31,16 @@ ResLoadMgr::ResLoadMgr()
 	mLoadingDepth = 0;
 }
 
-void ResLoadMgr::postInit()
+void ResLoadMgr::init()
 {
 	// 游戏逻辑处理
 	//mResMsgRouteCB = new ResMsgRouteCB();
 	//Ctx.m_instance.m_msgRouteList.addOneDisp(mResMsgRouteCB);
+}
+
+void ResLoadMgr::dispose()
+{
+
 }
 
 // 重置加载设置
@@ -43,6 +48,11 @@ void ResLoadMgr::resetLoadParam(LoadParam* loadParam)
 {
 	loadParam->mIsLoadNeedCoroutine = true;
 	loadParam->mIsResNeedCoroutine = true;
+}
+
+void ResLoadMgr::loadAsset(LoadParam* param)
+{
+
 }
 
 ResItem* ResLoadMgr::getResource(std::string path)

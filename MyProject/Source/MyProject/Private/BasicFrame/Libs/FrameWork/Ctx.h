@@ -42,8 +42,8 @@ protected:
 	Config* mConfig;
 	LocalFileSys* mLocalFileSys;
 	PoolSys* mPoolSys;
-	UIAssetMgr* mUiAssetMgr;
 	ResLoadMgr* mResLoadMgr;
+	UIAssetMgr* mUiAssetMgr;
 
 	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;

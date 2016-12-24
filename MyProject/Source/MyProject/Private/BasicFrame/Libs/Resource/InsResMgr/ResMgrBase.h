@@ -36,6 +36,9 @@ protected:
 public:
 	ResMgrBase();
 
+	virtual void init();
+	virtual void dispose();
+
 	template<class T>
 	T* getAndSyncLoad(std::string path)
 	{

@@ -10,6 +10,9 @@ class UIAssetMgr : public ResMgrBase
 {
 public:
 	UIAssetMgr();
+
+	virtual void init() override;
+	virtual void dispose() override;
 };
 
 #endif

@@ -29,61 +29,66 @@ Ctx::Ctx()
 
 Ctx::~Ctx()
 {
-	delete mUiMgr;
-	delete mEngineData;
-	delete mNetMgr;
-	delete mTableSys;
+	delete this->mUiMgr;
+	delete this->mEngineData;
+	delete this->mNetMgr;
+	delete this->mTableSys;
 
 #ifdef USE_EXTERN_THREAD
-	delete mStdoutLog;
+	delete this->mStdoutLog;
 #endif
 
 #ifdef ENABLE_UNIT_TEST
-	delete mTest;
+	delete this->mTest;
 #endif
 
-	delete mLogSys;
-	delete mNetDispList;
-	delete mShareData;
-	delete mConfig;
-	delete mLocalFileSys;
+	delete this->mLogSys;
+	delete this->mNetDispList;
+	delete this->mShareData;
+	delete this->mConfig;
+	delete this->mLocalFileSys;
 
-	delete mSandboxPlatformFile;
+	delete this->mSandboxPlatformFile;
 }
 
 void Ctx::construct()
 {
-	mShareData = new ShareData();
-	mNetDispList = new NetDispList();
-	mLogSys = new LogSys();
-	mEngineData = new EngineData();
+	this->mShareData = new ShareData();
+	this->mNetDispList = new NetDispList();
+	this->mLogSys = new LogSys();
+	this->mEngineData = new EngineData();
 #ifdef USE_EXTERN_THREAD
-	mStdoutLog = new StdoutLog();
+	this->mStdoutLog = new StdoutLog();
 #endif
 
-	mUiMgr = new UIMgr();
-	mTableSys = new TableSys();
-	mConfig = new Config();
-	mLocalFileSys = new LocalFileSys();
+	this->mResLoadMgr = new ResLoadMgr();
+	this->mUiAssetMgr = new UIAssetMgr();
+
+	this->mUiMgr = new UIMgr();
+	this->mTableSys = new TableSys();
+	this->mConfig = new Config();
+	this->mLocalFileSys = new LocalFileSys();
 #ifdef	USE_EXTERN_THREAD
-	mNetMgr = new NetMgr(getStdLog());
+	this->mNetMgr = new NetMgr(getStdLog());
 #else
-	mNetMgr = new NetMgr();
+	this->mNetMgr = new NetMgr();
 #endif
 
 	// 初始化 SandBox 文件系统
-	mSandboxPlatformFile = new FSandboxPlatformFile(false);
+	this->mSandboxPlatformFile = new FSandboxPlatformFile(false);
 }
 
 void Ctx::init()
 {
-	mUiMgr->init();
+	this->mUiMgr->init();
+	this->mResLoadMgr->init();
+	this->mUiAssetMgr->init();
 
 	// 初始化 SandBox 文件系统
 	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	//FString OutputDirectory = GetOutputDirectoryOverride();
 	FString OutputDirectory = FPaths::GameDir();
-	mSandboxPlatformFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
+	this->mSandboxPlatformFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
 
 	// 挂在目录
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
@@ -94,8 +99,8 @@ void Ctx::beginPlay()
 	this->init();
 
 #ifdef ENABLE_UNIT_TEST
-	mTest = new Test();
-	mTest->runTest();
+	this->mTest = new Test();
+	this->mTest->runTest();
 #endif
 
 	//testApi();
@@ -111,79 +116,79 @@ void Ctx::beginPlay()
 
 void Ctx::setUiMgr(UIMgr* uiMgr)
 {
-	mUiMgr = uiMgr;
+	this->mUiMgr = uiMgr;
 }
 
 UIMgr* Ctx::getUIMgr()
 {
-	return mUiMgr;
+	return this->mUiMgr;
 }
 
 EngineData* Ctx::getEngineData()
 {
-	return mEngineData;
+	return this->mEngineData;
 }
 
 void Ctx::setNetMgr(INetMgr* pINetMgr)
 {
-	mNetMgr = pINetMgr;
+	this->mNetMgr = pINetMgr;
 }
 
 INetMgr* Ctx::getNetMgr()
 {
-	return mNetMgr;
+	return this->mNetMgr;
 }
 
 #ifdef USE_EXTERN_THREAD
 StdoutLog* Ctx::getStdLog()
 {
-	return mStdoutLog;
+	return this->mStdoutLog;
 }
 #endif
 
 TableSys* Ctx::getTableSys()
 {
-	return mTableSys;
+	return this->mTableSys;
 }
 
 LogSys* Ctx::getLogSys()
 {
-	return mLogSys;
+	return this->mLogSys;
 }
 
 ShareData* Ctx::getShareData()
 {
-	return mShareData;
+	return this->mShareData;
 }
 
 NetDispList* Ctx::getNetDispList()
 {
-	return mNetDispList;
+	return this->mNetDispList;
 }
 
 Config* Ctx::getConfig()
 {
-	return mConfig;
+	return this->mConfig;
 }
 
 LocalFileSys* Ctx::getLocalFileSys()
 {
-	return mLocalFileSys;
+	return this->mLocalFileSys;
 }
 
 PoolSys* Ctx::getPoolSys()
 {
-	return mPoolSys;
+	return this->mPoolSys;
 }
 
 UIAssetMgr* Ctx::getUiAssetMgr()
 {
-	return mUiAssetMgr;
+	return this->mUiAssetMgr;
 }
 
 ResLoadMgr* Ctx::getResLoadMgr()
 {
-	return mResLoadMgr;
+	return this->mResLoadMgr;
 }
 
 FSandboxPlatformFile* Ctx::getSandboxPlatformFile()

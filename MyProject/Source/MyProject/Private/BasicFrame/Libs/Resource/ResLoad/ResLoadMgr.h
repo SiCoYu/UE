@@ -28,11 +28,15 @@ protected:
 
 public:
 	ResLoadMgr();
-	void postInit();
+	void init();
+	void dispose();
+
     // 重置加载设置
 protected:
 	void resetLoadParam(LoadParam* loadParam);
+
 public:
+	void loadAsset(LoadParam* param);
 	ResItem* getResource(std::string path);
 	void loadData(LoadParam* param);
     // eBundleType 打包类型资源加载

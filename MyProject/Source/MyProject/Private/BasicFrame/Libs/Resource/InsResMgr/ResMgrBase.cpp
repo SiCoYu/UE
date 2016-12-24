@@ -8,6 +8,16 @@ ResMgrBase::ResMgrBase()
 	mLoadingDepth = 0;
 }
 
+void ResMgrBase::init()
+{
+
+}
+
+void ResMgrBase::dispose()
+{
+
+}
+
 void ResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 {
 	mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
