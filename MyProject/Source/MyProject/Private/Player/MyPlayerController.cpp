@@ -36,6 +36,8 @@ void AMyPlayerController::BeginPlay()
 	// 各种 UI 测试
 	//TestUI();
 
+	GEngineData->setMainPlayerController(this);
+
 	// 逻辑开始运行
 	//GCtx->beginPlay();
 }

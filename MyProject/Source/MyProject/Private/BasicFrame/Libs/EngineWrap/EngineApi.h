@@ -257,6 +257,33 @@ public:
 	static T* FindObject(const TCHAR* ObjectToFind);
 
 	// 任何地方都可以调用
+	// Load an object.
+	template< class T >
+	static inline T* MLoadObject(UObject* Outer, const TCHAR* Name, const TCHAR* Filename = nullptr, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = nullptr)
+	{
+		UClass* Class = T::StaticClass();
+		Class->GetDefaultObject(); // force the CDO to be created if it hasn't already
+		T* ObjectPtr = LoadObject<T>(Outer, Name, Filename, LoadFlags, Sandbox);
+		if (ObjectPtr)
+		{
+			ObjectPtr->AddToRoot();
+		}
+		return ObjectPtr;
+	}
+
+	// Load a class object.
+	template< class T >
+	static inline UClass* MLoadClass(UObject* Outer, const TCHAR* Name, const TCHAR* Filename = nullptr, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = nullptr)
+	{
+		UClass* LoadedClass = LoadClass<T>(Outer, Name, Filename, LoadFlags, Sandbox);
+		if (LoadedClass)
+		{
+			LoadedClass->AddToRoot();
+		}
+		return LoadedClass;
+	}
+
+	// 任何地方都可以调用
 	// 参考 Engine\Source\Runtime\CoreUObject\Public\UObject\ConstructorHelpers.h
 	// inline UClass* FindOrLoadClass(FString& PathName, UClass* BaseClass)
 	static UObject* MStaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename = NULL, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = NULL, bool bAllowObjectReconciliation = true);

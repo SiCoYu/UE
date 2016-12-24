@@ -463,10 +463,21 @@ FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLa
 
 UObject* EngineApi::MStaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox, bool bAllowObjectReconciliation)
 {
-	return StaticLoadObject(Class, InOuter, Name, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation);
+	Class->GetDefaultObject(); // force the CDO to be created if it hasn't already
+	UObject* ObjectPtr = StaticLoadObject(Class, InOuter, Name, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation);
+	if (ObjectPtr)
+	{
+		ObjectPtr->AddToRoot();
+	}
+	return ObjectPtr;
 }
 
 UClass* EngineApi::MStaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
 {
-	return StaticLoadClass(BaseClass, InOuter, Name, Filename, LoadFlags, Sandbox);
+	UClass* LoadedClass = StaticLoadClass(BaseClass, InOuter, Name, Filename, LoadFlags, Sandbox);
+	if (LoadedClass)
+	{
+		LoadedClass->AddToRoot();
+	}
+	return LoadedClass;
 }
