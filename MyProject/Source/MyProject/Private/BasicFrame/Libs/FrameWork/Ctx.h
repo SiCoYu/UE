@@ -22,8 +22,11 @@ class NetDispList;
 class Config;
 class LocalFileSys;
 class PoolSys;
-class UIAssetMgr;
+
 class ResLoadMgr;
+class UIAssetMgr;
+class ClassAssetMgr;
+class ObjectAssetMgr;
 
 #ifdef ENABLE_UNIT_TEST
 	class Test;
@@ -44,6 +47,8 @@ protected:
 	PoolSys* mPoolSys;
 	ResLoadMgr* mResLoadMgr;
 	UIAssetMgr* mUiAssetMgr;
+	ClassAssetMgr* mClassAssetMgr;
+	ObjectAssetMgr* mObjectAssetMgr;
 
 	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;

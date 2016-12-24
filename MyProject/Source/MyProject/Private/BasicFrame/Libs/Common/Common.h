@@ -16,7 +16,10 @@
 #include "Config.h"
 #include "LocalFileSys.h"
 #include "PoolSys.h"
-#include "UIAssetMgr.h"
+
 #include "ResLoadMgr.h"
+#include "UIAssetMgr.h"
+#include "ClassAssetMgr.h"
+#include "ObjectAssetMgr.h"
 
 #endif

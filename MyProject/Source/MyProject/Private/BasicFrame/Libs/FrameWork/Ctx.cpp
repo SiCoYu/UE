@@ -1,5 +1,4 @@
 #include "MyProject.h"
-#include "Ctx.h"
 #include "EngineData.h"
 #include "INetMgr.h"
 #include "UIMgr.h"
@@ -12,8 +11,13 @@
 #include "Config.h"
 #include "LocalFileSys.h"
 #include "PoolSys.h"
-#include "UIAssetMgr.h"
+
 #include "ResLoadMgr.h"
+#include "UIAssetMgr.h"
+#include "ClassAssetMgr.h"
+#include "ObjectAssetMgr.h"
+
+#include "Ctx.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "Test.h"
@@ -49,6 +53,11 @@ Ctx::~Ctx()
 	delete this->mLocalFileSys;
 
 	delete this->mSandboxPlatformFile;
+
+	delete this->mResLoadMgr;
+	delete this->mUiAssetMgr;
+	delete this->mClassAssetMgr;
+	delete this->mObjectAssetMgr;
 }
 
 void Ctx::construct()
@@ -63,6 +72,8 @@ void Ctx::construct()
 
 	this->mResLoadMgr = new ResLoadMgr();
 	this->mUiAssetMgr = new UIAssetMgr();
+	this->mClassAssetMgr = new ClassAssetMgr();
+	this->mObjectAssetMgr = new ObjectAssetMgr();
 
 	this->mUiMgr = new UIMgr();
 	this->mTableSys = new TableSys();
