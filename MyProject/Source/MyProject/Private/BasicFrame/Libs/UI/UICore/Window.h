@@ -56,7 +56,7 @@ public:
 	bool IsVisible();
 	bool getIsResReady();
 	void setIsResReady(bool value);
-	GuiWin* getGUIWin();
+	GuiWin* getGuiWin();
 
 	virtual bool getIsReady();
 };

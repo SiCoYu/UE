@@ -62,6 +62,7 @@ T* UIMgr::loadForm(UIFormId formId)
 
 		}
 
+		WidgetObject->->AddToViewport();
 		form = EngineApi::MNewObject<T>();
 
 		if (nullptr != form)                   // 如果代码已经在本地

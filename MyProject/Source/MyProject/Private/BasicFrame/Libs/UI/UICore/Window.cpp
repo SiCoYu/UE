@@ -10,6 +10,8 @@ UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	mAlignVertial = 0;
 	mAlignHorizontal = 0;
 	mIsResReady = false;
+
+	mGuiWin = new GuiWin();
 }
 
 int UWindow::getPosX()
@@ -57,7 +59,7 @@ void UWindow::setIsResReady(bool value)
 	mIsResReady = value;
 }
 
-GuiWin* UWindow::getGUIWin()
+GuiWin* UWindow::getGuiWin()
 {
 	return mGuiWin;
 }
