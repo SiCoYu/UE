@@ -7,7 +7,7 @@
 UCLASS(config=Game)
 class UUMGWidget : public UUserWidget
 {
-	GENERATED_BODY()
+	GENERATED_UCLASS_BODY()
 
 protected:
 	TSubclassOf<class UUserWidget>  mWidgetClass;

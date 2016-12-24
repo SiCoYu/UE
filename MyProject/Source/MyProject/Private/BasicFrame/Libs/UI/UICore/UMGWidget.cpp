@@ -1,11 +1,11 @@
 ﻿#include "MyProject.h"
 #include "UMGWidget.h"
 
-//UUMGWidget::UUMGWidget(const FObjectInitializer& ObjectInitializer)
-//	: Super(ObjectInitializer)
-//{
-//
-//}
+UUMGWidget::UUMGWidget(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+
+}
 
 void UUMGWidget::OnSynchronizeProperties_Implementation()
 {
