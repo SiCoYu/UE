@@ -4,5 +4,5 @@
 
 void AppFrame::initApp()
 {
-	GCtx->init();
+	GCtx->construct();
 }

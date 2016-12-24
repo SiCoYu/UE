@@ -45,7 +45,7 @@ T* UIMgr::loadForm(UIFormId formId)
 		//	form = Ctx.m_instance.m_scriptDynLoad.getScriptObject(attrItem.m_scriptTypeName) as Form;
 		//}
 
-		TSubclassOf<UUMGWidget> WidgetClass = EngineApi::FindClass<UUMGWidget>(UtilStr::convStdStr2TCHAR(attrItem->mWidgetPath));
+		TSubclassOf<UUMGWidget> WidgetClass = EngineApi::FindClass<UUMGWidget>(*UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
 		UUMGWidget* WidgetObject = nullptr;
 
 		if (NSFormType::eWorld == attrItem->mUMGOuterType)

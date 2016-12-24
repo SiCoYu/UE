@@ -51,7 +51,7 @@ Ctx::~Ctx()
 	delete mSandboxPlatformFile;
 }
 
-void Ctx::init()
+void Ctx::construct()
 {
 	mShareData = new ShareData();
 	mNetDispList = new NetDispList();
@@ -73,6 +73,14 @@ void Ctx::init()
 
 	// 初始化 SandBox 文件系统
 	mSandboxPlatformFile = new FSandboxPlatformFile(false);
+}
+
+void Ctx::init()
+{
+	mUiMgr->init();
+
+	// 初始化 SandBox 文件系统
+	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	//FString OutputDirectory = GetOutputDirectoryOverride();
 	FString OutputDirectory = FPaths::GameDir();
 	mSandboxPlatformFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
@@ -83,14 +91,14 @@ void Ctx::init()
 
 void Ctx::beginPlay()
 {
-	mUiMgr->init();
+	this->init();
 
 #ifdef ENABLE_UNIT_TEST
 	mTest = new Test();
 	mTest->runTest();
 #endif
 
-	testApi();
+	//testApi();
 
 	//GCtx->setUiMgr(new UIManager());
 	//GCtx->setEngineApi(new EngineApi());
@@ -98,7 +106,7 @@ void Ctx::beginPlay()
 
 	// test
 	//GUiMgr->loadForm(eUIPack);
-	GNetMgr->openSocket("192.168.124.26", 10002);
+	//GNetMgr->openSocket("192.168.124.26", 10002);
 }
 
 void Ctx::setUiMgr(UIMgr* uiMgr)

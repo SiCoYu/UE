@@ -60,6 +60,7 @@ public:
 	Ctx();
 	~Ctx();
 
+	void construct();
 	void init();
 	void beginPlay();
 

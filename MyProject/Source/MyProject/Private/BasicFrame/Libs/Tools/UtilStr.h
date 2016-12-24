@@ -39,6 +39,7 @@ public:
 	static const FString ConvFText2FString(FText& fText);
 	static FText ConvChar2FText(const char* pchar);
 
+	// Error 返回的局部变量会释放掉，仅仅作为代码参考
 	static const TCHAR* convStdStr2TCHAR(std::string& stdStr);
 };
 
