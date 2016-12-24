@@ -62,7 +62,7 @@ T* UIMgr::loadForm(UIFormId formId)
 
 		}
 
-		WidgetObject->->AddToViewport();
+		WidgetObject->AddToViewport();
 		form = EngineApi::MNewObject<T>();
 
 		if (nullptr != form)                   // 如果代码已经在本地
@@ -74,7 +74,7 @@ T* UIMgr::loadForm(UIFormId formId)
 			//	form.luaCSBridgeForm.DoFile(attrItem.m_luaScriptPath);
 			//}
 
-			mId2FormDic[formId]->mGuiWin->mUiRoot = WidgetObject;
+			form->mGuiWin->mUiRoot = WidgetObject;
 
 			addFormNoReady(form);           // 仅仅是创建数据，资源还没有加载完成
 			//onCodeLoadedByForm(form);
