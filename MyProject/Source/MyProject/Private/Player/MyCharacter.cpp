@@ -48,7 +48,6 @@ AMyCharacter::AMyCharacter(const FObjectInitializer& ObjectInitializer)
 
 //////////////////////////////////////////////////////////////////////////
 // Input
-
 void AMyCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
 {
 	// Set up gameplay key bindings
@@ -71,7 +70,6 @@ void AMyCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompone
 	InputComponentParam->BindTouch(IE_Pressed, this, &AMyCharacter::TouchStarted);
 	InputComponentParam->BindTouch(IE_Released, this, &AMyCharacter::TouchStopped);
 }
-
 
 void AMyCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {
@@ -138,13 +136,13 @@ void AMyCharacter::BeginPlay()
 	GEngineData->setMainActor(this);
 
 	// 各种初始化
-	EngineApi::showCursor();
+	//EngineApi::showCursor();
 
 	// 各种 UI 测试
-	TestUI();
+	//TestUI();
 
 	// 赋值控制 Player ，逻辑开始运行
-	//GCtx->beginPlay();
+	GCtx->beginPlay();
 }
 
 void AMyCharacter::TestUI()
