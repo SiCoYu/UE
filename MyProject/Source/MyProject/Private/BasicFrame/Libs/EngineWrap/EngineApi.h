@@ -302,7 +302,7 @@ public:
 	template< class T >
 	static T* MDuplicateObject(T const* SourceObject, UObject* Outer, const FName Name = NAME_None);
 
-	static FString GetPathName(const UObject* StopOuter/*=NULL*/) const;
+	static FString MGetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/);
 };
 
 #include "EngineApi.inl"

@@ -163,9 +163,9 @@ void AMyActor::SetLinearLimits(
 	bool bDisableCollision,
 	const uint8 XLim, const uint8 YLim, const uint8 ZLim,
 	const float Size,
-	bool SoftLimit = true,
-	const float SoftStiffness = 0,
-	const float SoftDampening = 0
+	bool SoftLimit,
+	const float SoftStiffness,
+	const float SoftDampening
 	)
 {
 	Constraint.SetDisableCollision(bDisableCollision);

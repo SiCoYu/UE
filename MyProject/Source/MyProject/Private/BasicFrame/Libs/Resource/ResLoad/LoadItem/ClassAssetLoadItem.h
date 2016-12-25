@@ -5,7 +5,7 @@
 #include "CoreUObject.h"	// Class 
 
 /**
- * @brief 从 uasset 扩展名的本地 Package 中加载资源
+ * @brief 从 uasset 扩展名的本地 Package 中加载资源 Class Blueprint 类型
  */
 class ClassAssetLoadItem : public LoadItem
 {
