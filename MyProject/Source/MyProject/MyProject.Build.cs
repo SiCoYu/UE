@@ -76,9 +76,6 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/UnitTest",
                 "MyProject/Private/BasicFrame/UnitTest/TestUI",
 
-                // Anim area
-                "MyProject/Private/MyAnim",
-
                 // Example
                 "MyProject/Private/BasicFrame/Example/AccessMesh",
                 "MyProject/Private/BasicFrame/Example/AnimateVertexPositions",
@@ -126,7 +123,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Math",
                 "MyProject/Private/Misc",
                 "MyProject/Private/Network",
-
+                // Anim area
+                "MyProject/Private/MyAnim",
                 // MyAsset
                 "MyProject/Private/MyAsset",
             }
