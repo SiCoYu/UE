@@ -11,8 +11,11 @@ class ClassAssetMgr : public ResMgrBase
 public:
 	ClassAssetMgr();
 
+public:
 	virtual void init() override;
 	virtual void dispose() override;
+
+	UClass* getAndSyncLoadClass(std::string path);
 };
 
 #endif

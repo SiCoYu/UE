@@ -110,7 +110,7 @@ void ResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else
 	{
-		GLogSys->log(UtilStr::Format("路径不能查找到 {0}", path));
+		GLogSys->log(UtilStr::Format("Path can not find {0}", path));
 		GResLoadMgr->unload(path, EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle));
 	}
 }

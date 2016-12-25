@@ -9,6 +9,7 @@
 class ClassAssetResItem : public ResItem
 {
 protected:
+	UClass* mResObj;		// uasset 类型的资源
 
 public:
 	ClassAssetResItem();

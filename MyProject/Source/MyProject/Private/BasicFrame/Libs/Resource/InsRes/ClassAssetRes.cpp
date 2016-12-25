@@ -11,8 +11,9 @@ ClassAssetRes::ClassAssetRes()
 
 void ClassAssetRes::initImpl(ResItem* res)
 {
-	//mGo = res.getObject(res.getPrefabName()) as GameObject;
-	//base.initImpl(res);
+	this->mGo = Cast<UClass>(res.getObject(res.getPrefabName()));
+
+	Super::initImpl(res);
 }
 
 UObject* ClassAssetRes::InstantiateObject(std::string resName)
@@ -36,7 +37,7 @@ UObject* ClassAssetRes::InstantiateObject(std::string resName)
 
 UObject* ClassAssetRes::getObject()
 {
-	return mGo;
+	return this->mGo;
 }
 
 void ClassAssetRes::unload()

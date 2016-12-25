@@ -4,22 +4,23 @@
 #include "InsResBase.h"
 #include <string>
 
-class UObject;
+class UClass;
 
 class ClassAssetRes : public InsResBase
 {
 public:
-	UObject* mGo;
-	UObject* mRetGO;
+	UClass* mGo;
+	UClass* mRetGO;
 
 public:
 	ClassAssetRes();
+
 protected:
 	virtual void initImpl(ResItem* res) override;
 
 public:
 	UObject* InstantiateObject(std::string resName);
-	UObject* getObject();
+	UClass* getObject();
 	virtual void unload() override;
 };
 

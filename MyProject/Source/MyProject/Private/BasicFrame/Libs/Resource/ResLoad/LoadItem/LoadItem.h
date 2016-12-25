@@ -46,6 +46,9 @@ public:
 	NonRefCountResLoadResultNotify* getNonRefCountResLoadResultNotify();
 	void setNonRefCountResLoadResultNotify(NonRefCountResLoadResultNotify* value);
 
+	virtual UObject* getObject();
+	virtual void setObject(UObject* value);
+
 	virtual void load();
     // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
 	virtual void unload();

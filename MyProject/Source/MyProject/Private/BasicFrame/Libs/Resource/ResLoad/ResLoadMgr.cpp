@@ -54,7 +54,7 @@ void ResLoadMgr::resetLoadParam(LoadParam* loadParam)
 
 void ResLoadMgr::loadAsset(LoadParam* param)
 {
-
+	this->load(param);
 }
 
 ResItem* ResLoadMgr::getResource(std::string path)

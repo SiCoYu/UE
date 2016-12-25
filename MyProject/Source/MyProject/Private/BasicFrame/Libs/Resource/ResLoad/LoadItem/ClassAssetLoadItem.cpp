@@ -6,22 +6,22 @@
 
 ClassAssetLoadItem::ClassAssetLoadItem()
 {
-
+	this->mResObj = nullptr;
 }
 
-UClass* ClassAssetLoadItem::getResObj()
+UObject* ClassAssetLoadItem::getObject()
 {
-	return mResObj;
+	return this->mResObj;
 }
 
-void ClassAssetLoadItem::setResObj(UClass* value)
+void ClassAssetLoadItem::setObject(UClass* value)
 {
-	mResObj = value;
+	this->mResObj = Case<UClass>(value);
 }
 
 void ClassAssetLoadItem::syncLoad()
 {
-	mResObj = GMyStreamableManager->SynchronousLoadType<UClass>(this->mPath);
+	this->mResObj = GMyStreamableManager->SynchronousLoadType<UClass>(this->mPath);
 
 	if (nullptr != mResObj)
 	{

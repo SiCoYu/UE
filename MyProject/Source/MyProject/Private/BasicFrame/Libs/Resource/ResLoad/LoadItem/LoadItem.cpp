@@ -5,12 +5,12 @@
 
 LoadItem::LoadItem()
 {
-	mNonRefCountResLoadResultNotify = new NonRefCountResLoadResultNotify();
+	this->mNonRefCountResLoadResultNotify = new NonRefCountResLoadResultNotify();
 }
 
 ResPackType LoadItem::getResPackType()
 {
-	return mResPackType;
+	return this->mResPackType;
 }
 
 void LoadItem::setResPackType(ResPackType value)
@@ -20,12 +20,12 @@ void LoadItem::setResPackType(ResPackType value)
 
 std::string LoadItem::getPath()
 {
-	return mPath;
+	return this->mPath;
 }
 
 void LoadItem::setPath(std::string value)
 {
-	mPath = value;
+	this->mPath = value;
 }
 
 std::string LoadItem::getPathNoExt()
@@ -35,12 +35,12 @@ std::string LoadItem::getPathNoExt()
 
 void LoadItem::setPathNoExt(std::string value)
 {
-	mPathNoExt = value;
+	this->mPathNoExt = value;
 }
 
 std::string LoadItem::getExtName()
 {
-	return mExtName;
+	return this->mExtName;
 }
 
 void LoadItem::setExtName(std::string value)
@@ -50,37 +50,47 @@ void LoadItem::setExtName(std::string value)
 
 bool LoadItem::getLoadNeedCoroutine()
 {
-	return mIsLoadNeedCoroutine;
+	return this->mIsLoadNeedCoroutine;
 }
 
 void LoadItem::setLoadNeedCoroutine(bool value)
 {
-	mIsLoadNeedCoroutine = value;
+	this->mIsLoadNeedCoroutine = value;
 }
 
 ResLoadType LoadItem::getResLoadType()
 {
-	return mResLoadType;
+	return this->mResLoadType;
 }
 
 void LoadItem::setResLoadType(ResLoadType value)
 {
-	mResLoadType = value;
+	this->mResLoadType = value;
 }
 
 NonRefCountResLoadResultNotify* LoadItem::getNonRefCountResLoadResultNotify()
 {
-	return mNonRefCountResLoadResultNotify;
+	return this->mNonRefCountResLoadResultNotify;
 }
 
 void LoadItem::setNonRefCountResLoadResultNotify(NonRefCountResLoadResultNotify* value)
 {
-	mNonRefCountResLoadResultNotify = value;
+	this->mNonRefCountResLoadResultNotify = value;
+}
+
+UObject* LoadItem::getObject()
+{
+	return nullptr;
+}
+
+void LoadItem::setObject(UObject* value)
+{
+
 }
 
 void LoadItem::load()
 {
-	mNonRefCountResLoadResultNotify->getResLoadState()->setLoading();
+	this->mNonRefCountResLoadResultNotify->getResLoadState()->setLoading();
 }
 
 // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
@@ -91,6 +101,6 @@ void LoadItem::unload()
 
 void LoadItem::reset()
 {
-	mPath = "";
-	mIsLoadNeedCoroutine = false;
+	this->mPath = "";
+	this->mIsLoadNeedCoroutine = false;
 }

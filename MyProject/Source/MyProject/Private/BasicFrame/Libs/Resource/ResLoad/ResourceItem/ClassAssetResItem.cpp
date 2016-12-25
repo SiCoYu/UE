@@ -1,15 +1,29 @@
 ﻿#include "MyProject.h"
 #include "LoadItem.h"
+#include "UObject/Class.h"	// UClass
 #include "ClassAssetResItem.h"
 
 ClassAssetResItem::ClassAssetResItem()
 {
-
+	this->mResObj = nullptr;
 }
 
 void ClassAssetResItem::init(LoadItem* item)
 {
 	ResItem::init(item);
+
+	this->mResObj = Cast<UClass>(item->getObject());
+
+	if (nullptr != this->mResObj)
+	{
+		this->mRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
+	}
+	else
+	{
+		this->mRefCountResLoadResultNotify->getResLoadState()->setFailed();
+	}
+
+	this->mRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }
 
 void ClassAssetResItem::unload()
