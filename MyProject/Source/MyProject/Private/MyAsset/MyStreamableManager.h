@@ -17,8 +17,7 @@ public:
 	UObject* SynchronousLoad(const std::string& path);
 
 	template< typename T >
-	T* SynchronousLoadType(const std::string& path)
-	{
-		return Cast< T >(SynchronousLoad(path));
-	}
+	T* SynchronousLoadType(const std::string& path);
 };
+
+#include "MyStreamableManager.inl"
