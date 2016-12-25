@@ -68,6 +68,18 @@ ResItem* ResLoadMgr::getResource(std::string path)
 	}
 }
 
+LoadItem* ResLoadMgr::getLoadItem(std::string path)
+{
+	if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, path))
+	{
+		return mLoadData->mPath2LDItem[path];
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
 void ResLoadMgr::loadData(LoadParam* param)
 {
 	// 链接不过
@@ -151,9 +163,17 @@ void ResLoadMgr::loadResources(LoadParam* param)
 ResItem* ResLoadMgr::createResItem(LoadParam* param)
 {
 	ResItem* resItem = findResFormPool(param->mResPackType);
-	if (eLevelType == param->mResPackType)
+
+	if (ePakClass == param->mResPackType)
 	{
-		if (resItem == nullptr)
+		if (nullptr == resItem)
+		{
+			resItem = new LevelResItem();
+		}
+	}
+	else if (eLevelType == param->mResPackType)
+	{
+		if (nullptr == resItem)
 		{
 			resItem = new LevelResItem();
 		}
@@ -168,7 +188,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	//}
 	else if (eResourcesType == param->mResPackType)
 	{
-		if (resItem == nullptr)
+		if (nullptr == resItem)
 		{
 			resItem = new AssetResItem();
 		}
@@ -177,7 +197,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	}
 	else if (eDataType == param->mResPackType)
 	{
-		if (resItem == nullptr)
+		if (nullptr == resItem)
 		{
 			resItem = new BinaryResItem();
 		}
@@ -222,7 +242,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	resItem->setPathNoExt(param->mPathNoExt);
 	resItem->setExtName(param->getExtName());
 
-	if (param->mLoadEventHandle != nullptr)
+	if (nullptr != param->mLoadEventHandle)
 	{
 		resItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
 	}
@@ -316,17 +336,27 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 {
 	mLoadData->mPath2Res[param->mPath] = resItem;
 	mLoadData->mPath2Res[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
-	LoadItem* loadItem = createLoadItem(param);
 
-	if (mCurNum < mMaxParral)
+	LoadItem* loadItem = getLoadItem(param->mPath);
+
+	if (nullptr == loadItem)
 	{
-		mLoadData->mPath2LDItem[param->mPath] = loadItem;
-		mLoadData->mPath2LDItem[param->mPath]->load();
-		++mCurNum;
+		loadItem = createLoadItem(param);
+
+		if (mCurNum < mMaxParral)
+		{
+			mLoadData->mPath2LDItem[param->mPath] = loadItem;
+			mLoadData->mPath2LDItem[param->mPath]->load();
+			++mCurNum;
+		}
+		else
+		{
+			UtilList::Add(mLoadData->mWillLDItem, loadItem);
+		}
 	}
 	else
 	{
-		UtilList::Add(mLoadData->mWillLDItem, loadItem);
+		loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 	}
 
 	resetLoadParam(param);

@@ -16,6 +16,9 @@ enum ResPackType
 	ePakType,     // 打包的 unity3d 数据
 	ePakLevelType,// 打包的 Level unity3d 数据
 
+	ePakClass,		// Class Blueprint 类型
+	ePakObject,		// Object 资源类型
+
 	eNoneType       // 默认类型
 };
 

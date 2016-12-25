@@ -1,5 +1,5 @@
-﻿#ifndef __FileLoadItem_H
-#define __FileLoadItem_H
+﻿#ifndef __ClassAssetLoadItem_H
+#define __ClassAssetLoadItem_H
 
 #include "LoadItem.h"
 #include "CoreUObject.h"	// Class 
@@ -7,7 +7,7 @@
 /**
  * @brief 从 uasset 扩展名的本地 Package 中加载资源
  */
-class AssetLoadItem : public LoadItem
+class ClassAssetLoadItem : public LoadItem
 {
 protected:
 	UClass* mResObj = nullptr;		// uasset 类型的资源
@@ -47,7 +47,9 @@ protected:
 	//}
 
 public:
-	AssetLoadItem();
+	ClassAssetLoadItem();
+
+public:
 	UClass* getResObj();
 	void setResObj(UClass* value);
 	virtual void load() override;

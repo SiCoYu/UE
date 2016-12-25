@@ -37,7 +37,10 @@ protected:
 
 public:
 	void loadAsset(LoadParam* param);
+
 	ResItem* getResource(std::string path);
+	LoadItem* getLoadItem(std::string path);
+
 	void loadData(LoadParam* param);
     // eBundleType 打包类型资源加载
 	void loadBundle(LoadParam* param);
@@ -45,29 +48,35 @@ public:
 	void loadLevel(LoadParam* param);
     // eResourcesType 打包类型资源加载
 	void loadResources(LoadParam* param);
+
 	ResItem* createResItem(LoadParam* param);
 	LoadItem* createLoadItem(LoadParam* param);
+
     // 资源创建并且正在被加载
 	void loadWithResCreatedAndLoad(LoadParam* param);
 	void loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem);
 	void loadWithNotResCreatedAndNotLoad(LoadParam* param);
     // 通用类型，需要自己设置很多参数
+
 public:
 	void load(LoadParam* param);
 	ResItem* getAndLoad(LoadParam* param);
     // 这个卸载有引用计数，如果有引用计数就卸载不了
 	void unload(std::string path, EventDispatchDelegate loadEventHandle);
     // 添加无引用资源到 List
+
 protected:
 	void addNoRefResID2List(std::string path);
     // 卸载没有引用的资源列表中的资源
 	void unloadNoRefResFromList();
     // 不考虑引用计数，直接卸载
 	void unloadNoRef(std::string path);
+
 public:
 	void onLoadEventHandle(IDispatchObject* dispObj);
 	void onLoaded(LoadItem* item);
 	void onFailed(LoadItem* item);
+
 protected:
 	void releaseLoadItem(LoadItem* item);
 	void loadNextItem();

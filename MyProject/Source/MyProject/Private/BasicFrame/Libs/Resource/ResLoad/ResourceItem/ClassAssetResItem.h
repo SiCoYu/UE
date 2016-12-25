@@ -1,14 +1,17 @@
-﻿#ifndef __AssetResItem_H
-#define __AssetResItem_H
+﻿#ifndef __ClassAssetResItem_H
+#define __ClassAssetResItem_H
 
 #include "ResItem.h"
 
 /**
  * @brief uasset 类型的资源
  */
-class AssetResItem : public ResItem
+class ClassAssetResItem : public ResItem
 {
 protected:
+
+public:
+	ClassAssetResItem();
 
 public:
 	virtual void init(LoadItem* item) override;

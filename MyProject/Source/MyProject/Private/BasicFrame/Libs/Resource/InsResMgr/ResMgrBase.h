@@ -103,7 +103,7 @@ protected:
 		mPath2ResDic[param->mPath] = resItem;
 		mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
 		param->mLoadEventHandle = EventDispatchDelegate(this, &ResMgrBase::onLoadEventHandle);
-		GResLoadMgr->loadResources(param);
+		GResLoadMgr->loadAsset(param);
 	}
 
 	template<class T>
