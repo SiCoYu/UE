@@ -49,5 +49,7 @@
 #include "GameMapsSettings.h"	// UGameMapsSettings
 
 #include "Templates/SubclassOf.h"		// TSubclassOf
+#include "Misc/StringAssetReference.h"	// FStringAssetReference
+#include "Engine/StreamableManager.h"	 // FStreamableManager
 
 #endif
