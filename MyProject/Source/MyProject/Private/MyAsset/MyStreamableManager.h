@@ -14,10 +14,10 @@ public:
 	void init();
 	void dispose();
 
-	UObject* SynchronousLoad(const std::string& path);
+	UObject* SynchronousLoad(std::string& path);
 
 	template< typename T >
-	T* SynchronousLoadType(const std::string& path);
+	T* SynchronousLoadType(std::string& path);
 };
 
 #include "MyStreamableManager.inl"

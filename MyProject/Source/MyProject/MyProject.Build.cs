@@ -17,9 +17,14 @@ public class MyProject : ModuleRules
             new string[] {
                 // Player 区域
                 "MyProject/Private/Player",
-                
-                // Online 区域
-                "MyProject/Private/Online",
+                "MyProject/Private/UI/Widgets",
+                "MyProject/Private/Persist",
+                "MyProject/Private/MyActor",
+                "MyProject/Private/Math",
+                "MyProject/Private/Misc",
+                "MyProject/Private/Network",
+                "MyProject/Private/MyAnim",
+                "MyProject/Private/MyAsset",
 
                 // Libs 区域
                 "MyProject/Private/BasicFrame/Libs/Common",
@@ -113,20 +118,6 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Example/UmgExtendInCpp",
 
                 "MyProject/Private/BasicFrame/Example/UmgInCpp",
-
-                // 其它
-                "MyProject/Private/UI/Widgets",
-
-                // 其它
-                "MyProject/Private/Persist",
-                "MyProject/Private/MyActor",
-                "MyProject/Private/Math",
-                "MyProject/Private/Misc",
-                "MyProject/Private/Network",
-                // Anim area
-                "MyProject/Private/MyAnim",
-                // MyAsset
-                "MyProject/Private/MyAsset",
             }
         );
 
