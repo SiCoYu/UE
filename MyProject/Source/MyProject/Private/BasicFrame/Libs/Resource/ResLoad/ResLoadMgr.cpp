@@ -166,7 +166,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 {
 	ResItem* resItem = findResFormPool(param->mResPackType);
 
-	if (ePakClass == param->mResPackType)
+	if (eClassType == param->mResPackType)
 	{
 		if (nullptr == resItem)
 		{
@@ -227,7 +227,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 {
 	LoadItem* loadItem = findLoadItemFormPool(param->mResPackType);
 
-	if (ePakClass == param->mResPackType)        // 默认 Bundle 中资源
+	if (eClassType == param->mResPackType)        // 默认 Bundle 中资源
 	{
 		if (nullptr == loadItem)
 		{

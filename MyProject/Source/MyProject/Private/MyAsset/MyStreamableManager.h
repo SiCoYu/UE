@@ -18,6 +18,8 @@ public:
 
 	template< typename T >
 	T* SynchronousLoadType(std::string& path);
+
+	//void RequestAsyncLoad(const FStringAssetReference& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority = DefaultAsyncLoadPriority);
 };
 
 #include "MyStreamableManager.inl"
