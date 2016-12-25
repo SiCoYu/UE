@@ -11,9 +11,11 @@ class IRecycle;
 class PoolSys
 {
 protected:
-	LockList<IRecycle*> mPoolList;
+	LockList<IRecycle*>* mPoolList;
 
 public:
+	PoolSys();
+
 	void init();
 	void dispose();
 
