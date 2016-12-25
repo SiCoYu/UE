@@ -126,6 +126,9 @@ public class MyProject : ModuleRules
                 "MyProject/Private/Math",
                 "MyProject/Private/Misc",
                 "MyProject/Private/Network",
+
+                // MyAsset
+                "MyProject/Private/MyAsset",
             }
         );
 
