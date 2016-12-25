@@ -2,44 +2,44 @@
 #include "ResItem.h"
 #include "EngineApi.h"
 #include "Common.h"
-#include "ClassAssetInsRes.h"
+#include "ObjectAssetInsRes.h"
 
-ClassAssetInsRes::ClassAssetInsRes()
+ObjectAssetInsRes::ObjectAssetInsRes()
 {
 
 }
 
-void ClassAssetInsRes::initImpl(ResItem* res)
+void ObjectAssetInsRes::initImpl(ResItem* res)
 {
 	//mGo = res.getObject(res.getPrefabName()) as GameObject;
 	//base.initImpl(res);
 }
 
-UObject* ClassAssetInsRes::InstantiateObject(std::string resName)
+UObject* ObjectAssetInsRes::InstantiateObject(std::string resName)
 {
 	mRetGO = nullptr;
 
 	if (nullptr == mGo)
 	{
-		GLogSys->log("prefab 为 null");
+		GLogSys->log("Prefab is null");
 	}
 	else
 	{
 		// mRetGO = GameObject.Instantiate(mGo) as GameObject;
 		if (nullptr == mRetGO)
 		{
-			GLogSys->log("不能实例化数据");
+			GLogSys->log("Can not instance data");
 		}
 	}
 	return mRetGO;
 }
 
-UClass* ClassAssetInsRes::getObject()
+UObject* ObjectAssetInsRes::getObject()
 {
 	return mGo;
 }
 
-void ClassAssetInsRes::unload()
+void ObjectAssetInsRes::unload()
 {
 	if (mGo != nullptr)
 	{

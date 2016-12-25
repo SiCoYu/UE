@@ -1,19 +1,19 @@
-﻿#ifndef __ClassAssetInsRes_H
-#define __ClassAssetInsRes_H
+﻿#ifndef __ObjectAssetInsRes_H
+#define __ObjectAssetInsRes_H
 
 #include "InsResBase.h"
 #include <string>
 
 class UObject;
 
-class ClassAssetInsRes : public InsResBase
+class ObjectAssetInsRes : public InsResBase
 {
 public:
 	UObject* mGo;
 	UObject* mRetGO;
 
 public:
-	ClassAssetInsRes();
+	ObjectAssetInsRes();
 protected:
 	virtual void initImpl(ResItem* res) override;
 
