@@ -10,7 +10,7 @@
 #include "Components/TimelineComponent.h"	// TimelineComponent
 #include "Curves/CurveFloat.h"	// CurveFloat
 #include "Curves/CurveVector.h"	// CurveVector
-
+#include "UObject/AssetPtr.h"	// TAssetPtr
 #include "MyActor.generated.h"
 
 UCLASS(config = Game)
@@ -37,37 +37,7 @@ public:
 		bool SoftLimit = true,
 		const float SoftStiffness = 0,
 		const float SoftDampening = 0
-		)
-	{
-		Constraint.SetDisableCollision(bDisableCollision);
-
-		switch (XLim)
-		{
-		case 0: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Free); break;
-		case 1: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Limited); break;
-		case 2: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Locked); break;
-		}
-		switch (YLim)
-		{
-		case 0: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Free); break;
-		case 1: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Limited); break;
-		case 2: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Locked); break;
-		}
-		switch (ZLim)
-		{
-		case 0: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Free); break;
-		case 1: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Limited); break;
-		case 2: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Locked); break;
-		}
-
-		Constraint.SetLinearLimitSize(Size);
-
-		if (SoftLimit) Constraint.bLinearLimitSoft_DEPRECATED = 1;
-		else Constraint.bLinearLimitSoft_DEPRECATED = 0;
-
-		Constraint.LinearLimitStiffness_DEPRECATED = SoftStiffness;
-		Constraint.LinearLimitDamping_DEPRECATED = SoftDampening;
-	}
+		);
 
 	static FORCEINLINE void SetAngularLimits(
 		FConstraintInstance& Constraint,
@@ -187,3 +157,43 @@ protected:
 	void SomeFunction();
 	void SetTimer();
 };
+
+void AMyActor::SetLinearLimits(
+	FConstraintInstance& Constraint,
+	bool bDisableCollision,
+	const uint8 XLim, const uint8 YLim, const uint8 ZLim,
+	const float Size,
+	bool SoftLimit = true,
+	const float SoftStiffness = 0,
+	const float SoftDampening = 0
+	)
+{
+	Constraint.SetDisableCollision(bDisableCollision);
+
+	switch (XLim)
+	{
+	case 0: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Free); break;
+	case 1: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Limited); break;
+	case 2: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Locked); break;
+	}
+	switch (YLim)
+	{
+	case 0: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Free); break;
+	case 1: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Limited); break;
+	case 2: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Locked); break;
+	}
+	switch (ZLim)
+	{
+	case 0: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Free); break;
+	case 1: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Limited); break;
+	case 2: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Locked); break;
+	}
+
+	Constraint.SetLinearLimitSize(Size);
+
+	if (SoftLimit) Constraint.bLinearLimitSoft_DEPRECATED = 1;
+	else Constraint.bLinearLimitSoft_DEPRECATED = 0;
+
+	Constraint.LinearLimitStiffness_DEPRECATED = SoftStiffness;
+	Constraint.LinearLimitDamping_DEPRECATED = SoftDampening;
+}

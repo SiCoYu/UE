@@ -51,5 +51,9 @@
 #include "Templates/SubclassOf.h"		// TSubclassOf
 #include "Misc/StringAssetReference.h"	// FStringAssetReference
 #include "Engine/StreamableManager.h"	 // FStreamableManager
+#include "UObject/AssetPtr.h"	// TAssetPtr\FAssetPtr
+#include "UObject/LazyObjectPtr.h"	// TLazyObjectPtr\FLazyObjectPtr
+
+#include "UObject/WeakObjectPtr.h"	// FWeakObjectPtr
 
 #endif

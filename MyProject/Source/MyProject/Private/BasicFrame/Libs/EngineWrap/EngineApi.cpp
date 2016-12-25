@@ -481,3 +481,10 @@ UClass* EngineApi::MStaticLoadClass(UClass* BaseClass, UObject* InOuter, const T
 	}
 	return LoadedClass;
 }
+
+FString EngineApi::GetPathName(const UObject* StopOuter/*=NULL*/)
+{
+	FString Result;
+	GetPathName(StopOuter, Result);
+	return Result;
+}

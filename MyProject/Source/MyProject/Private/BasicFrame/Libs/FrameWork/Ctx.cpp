@@ -73,7 +73,7 @@ void Ctx::construct()
 	this->mStdoutLog = new StdoutLog();
 #endif
 
-	this->mMyStreamableManager = new MyStreamableManager();
+	this->mMyStreamableManager = new FMyStreamableManager();
 	this->mResLoadMgr = new ResLoadMgr();
 	this->mUiAssetMgr = new UIAssetMgr();
 	this->mClassAssetMgr = new ClassAssetMgr();
