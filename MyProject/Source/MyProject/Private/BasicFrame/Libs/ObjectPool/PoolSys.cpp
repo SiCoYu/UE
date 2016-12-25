@@ -9,3 +9,13 @@ void PoolSys::deleteObj(IRecycle* obj)
 	//    mPoolList.Add(obj);
 	//}
 }
+
+void PoolSys::init()
+{
+
+}
+
+void PoolSys::dispose()
+{
+
+}

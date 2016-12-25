@@ -14,6 +14,9 @@ protected:
 	LockList<IRecycle*> mPoolList;
 
 public:
+	void init();
+	void dispose();
+
 	template<class T>
 	T* newObject()
 	{

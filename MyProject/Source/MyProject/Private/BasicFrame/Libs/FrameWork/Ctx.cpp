@@ -59,6 +59,7 @@ Ctx::~Ctx()
 	delete this->mObjectAssetInsMgr;
 
 	delete this->mMyStreamableManager;
+	delete this->mPoolSys;
 }
 
 void Ctx::construct()
@@ -88,6 +89,7 @@ void Ctx::construct()
 
 	// 初始化 SandBox 文件系统
 	this->mSandboxPlatformFile = new FSandboxPlatformFile(false);
+	this->mPoolSys = new PoolSys();
 }
 
 void Ctx::init()
@@ -97,6 +99,7 @@ void Ctx::init()
 	this->mResLoadMgr->init();
 	this->mClassAssetInsMgr->init();
 	this->mObjectAssetInsMgr->init();
+	this->mPoolSys->init();
 
 	// 初始化 SandBox 文件系统
 	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
