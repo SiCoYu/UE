@@ -55,5 +55,6 @@
 #include "UObject/LazyObjectPtr.h"	// TLazyObjectPtr\FLazyObjectPtr
 
 #include "UObject/WeakObjectPtr.h"	// FWeakObjectPtr
+#include "UObject/Class.h"	// UClass
 
 #endif

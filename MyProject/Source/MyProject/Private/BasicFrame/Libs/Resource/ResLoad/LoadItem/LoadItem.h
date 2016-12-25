@@ -24,20 +24,28 @@ protected:
 
 public:
 	LoadItem();
+
 	ResPackType getResPackType();
 	void setResPackType(ResPackType value);
+
 	std::string getPath();
 	void setPath(std::string value);
+
 	std::string getPathNoExt();
 	void setPathNoExt(std::string value);
+
 	std::string getExtName();
 	void setExtName(std::string value);
+
 	bool getLoadNeedCoroutine();
 	void setLoadNeedCoroutine(bool value);
+
 	ResLoadType getResLoadType();
 	void setResLoadType(ResLoadType value);
+
 	NonRefCountResLoadResultNotify* getNonRefCountResLoadResultNotify();
 	void setNonRefCountResLoadResultNotify(NonRefCountResLoadResultNotify* value);
+
 	virtual void load();
     // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
 	virtual void unload();

@@ -46,6 +46,9 @@ protected:
 	//	nonRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
 	//}
 
+	void syncLoad();
+	void asyncLoad();
+
 public:
 	ClassAssetLoadItem();
 
