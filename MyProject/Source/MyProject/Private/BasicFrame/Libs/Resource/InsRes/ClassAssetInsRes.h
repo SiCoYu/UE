@@ -5,12 +5,13 @@
 #include <string>
 
 class UClass;
+class UObject;
 
 class ClassAssetInsRes : public InsResBase
 {
 public:
 	UClass* mGo;
-	UClass* mRetGO;
+	UObject* mRetGO;
 
 public:
 	ClassAssetInsRes();

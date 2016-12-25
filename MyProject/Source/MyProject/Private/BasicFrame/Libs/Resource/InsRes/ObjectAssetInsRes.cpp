@@ -34,7 +34,7 @@ UObject* ClassAssetInsRes::InstantiateObject(std::string resName)
 	return mRetGO;
 }
 
-UObject* ClassAssetInsRes::getObject()
+UClass* ClassAssetInsRes::getObject()
 {
 	return mGo;
 }

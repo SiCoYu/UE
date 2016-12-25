@@ -13,9 +13,8 @@
 #include "PoolSys.h"
 
 #include "ResLoadMgr.h"
-#include "UIAssetMgr.h"
-#include "ClassAssetMgr.h"
-#include "ObjectAssetMgr.h"
+#include "ClassAssetInsMgr.h"
+#include "ObjectAssetInsMgr.h"
 #include "MyStreamableManager.h"
 
 #include "Ctx.h"
@@ -56,9 +55,8 @@ Ctx::~Ctx()
 	delete this->mSandboxPlatformFile;
 
 	delete this->mResLoadMgr;
-	delete this->mUiAssetMgr;
-	delete this->mClassAssetMgr;
-	delete this->mObjectAssetMgr;
+	delete this->mClassAssetInsMgr;
+	delete this->mObjectAssetInsMgr;
 
 	delete this->mMyStreamableManager;
 }
@@ -75,9 +73,8 @@ void Ctx::construct()
 
 	this->mMyStreamableManager = new FMyStreamableManager();
 	this->mResLoadMgr = new ResLoadMgr();
-	this->mUiAssetMgr = new UIAssetMgr();
-	this->mClassAssetMgr = new ClassAssetMgr();
-	this->mObjectAssetMgr = new ObjectAssetMgr();
+	this->mClassAssetInsMgr = new ClassAssetInsMgr();
+	this->mObjectAssetInsMgr = new ObjectAssetInsMgr();
 
 	this->mUiMgr = new UIMgr();
 	this->mTableSys = new TableSys();
@@ -98,7 +95,8 @@ void Ctx::init()
 	this->mMyStreamableManager->init();
 	this->mUiMgr->init();
 	this->mResLoadMgr->init();
-	this->mUiAssetMgr->init();
+	this->mClassAssetInsMgr->init();
+	this->mObjectAssetInsMgr->init();
 
 	// 初始化 SandBox 文件系统
 	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
@@ -197,9 +195,14 @@ PoolSys* Ctx::getPoolSys()
 	return this->mPoolSys;
 }
 
-UIAssetMgr* Ctx::getUiAssetMgr()
+ClassAssetInsMgr* Ctx::getClassAssetInsMgr()
 {
-	return this->mUiAssetMgr;
+	return this->mClassAssetInsMgr;
+}
+
+ObjectAssetInsMgr* Ctx::getObjectAssetInsMgr()
+{
+	return this->mObjectAssetInsMgr;
 }
 
 ResLoadMgr* Ctx::getResLoadMgr()

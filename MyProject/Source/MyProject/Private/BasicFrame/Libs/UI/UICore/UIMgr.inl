@@ -1,4 +1,6 @@
 #include "EngineApi.h"
+#include "ClassAssetInsRes.h"
+#include "Common.h"
 
 //template <class T>
 //T* UIMgr::loadForm(UIFormId formID)
@@ -47,7 +49,11 @@ T* UIMgr::loadForm(UIFormId formId)
 
 		//TSubclassOf<UUMGWidget> WidgetClass = EngineApi::FindClass<UUMGWidget>(*UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
 		//UClass* WidgetClass = EngineApi::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
-		UClass* WidgetClass = GMyStreamableManager->SynchronousLoadType<UClass>(attrItem->mWidgetPath);
+		//UClass* WidgetClass = GMyStreamableManager->SynchronousLoadType<UClass>(attrItem->mWidgetPath);
+
+		ClassAssetInsRes* asset = GClassAssetInsMgr->getAndSyncLoadClass(attrItem->mWidgetPath);
+		UClass* WidgetClass = asset->getObject();
+
 		UUMGWidget* WidgetObject = nullptr;
 
 		if (NSFormType::eWorld == attrItem->mUMGOuterType)

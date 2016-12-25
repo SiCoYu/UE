@@ -18,7 +18,7 @@ class UICanvas;
 class UIAttrSystem;
 class UILoadingItem;
 class IDispatchObject;
-class UIAssetRes;
+class ClassAssetInsRes;
 
 /**
  * @brief 所有 UI 管理
@@ -73,9 +73,9 @@ public:
 
 	void onCodeLoadEventHandle(IDispatchObject* dispObj);
 	void onWidgetLoadEventHandle(IDispatchObject* dispObj);
-	void onCodeloadedByRes(UIAssetRes* res);
+	void onCodeloadedByRes(ClassAssetInsRes* res);
 	void onCodeLoadedByForm(UForm* form);
-	void onWidgetloadedByRes(UIAssetRes* res);
+	void onWidgetloadedByRes(ClassAssetInsRes* res);
 	void onResize(int viewWidth, int viewHeight);
 
 	void exitAllWin();

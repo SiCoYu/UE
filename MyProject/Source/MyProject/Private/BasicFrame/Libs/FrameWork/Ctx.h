@@ -24,9 +24,8 @@ class LocalFileSys;
 class PoolSys;
 
 class ResLoadMgr;
-class UIAssetMgr;
-class ClassAssetMgr;
-class ObjectAssetMgr;
+class ClassAssetInsMgr;
+class ObjectAssetInsMgr;
 class FMyStreamableManager;
 
 #ifdef ENABLE_UNIT_TEST
@@ -47,9 +46,8 @@ protected:
 	LocalFileSys* mLocalFileSys;
 	PoolSys* mPoolSys;
 	ResLoadMgr* mResLoadMgr;
-	UIAssetMgr* mUiAssetMgr;
-	ClassAssetMgr* mClassAssetMgr;
-	ObjectAssetMgr* mObjectAssetMgr;
+	ClassAssetInsMgr* mClassAssetInsMgr;
+	ObjectAssetInsMgr* mObjectAssetInsMgr;
 
 	FMyStreamableManager* mMyStreamableManager;
 
@@ -85,8 +83,11 @@ public:
 	Config* getConfig();
 	LocalFileSys* getLocalFileSys();
 	PoolSys* getPoolSys();
-	UIAssetMgr* getUiAssetMgr();
 	ResLoadMgr* getResLoadMgr();
+
+	ClassAssetInsMgr* getClassAssetInsMgr();
+	ObjectAssetInsMgr* getObjectAssetInsMgr();
+
 	FSandboxPlatformFile* getSandboxPlatformFile();
 
 	FMyStreamableManager* getMyStreamableManager();
@@ -112,8 +113,11 @@ public:
 #define GCfg GCtx->getConfig()
 #define GLocalFileSys GCtx->getLocalFileSys()
 #define GPoolSys GCtx->getPoolSys()
-#define GUiAssetMgr GCtx->getUiAssetMgr()
 #define GResLoadMgr GCtx->getResLoadMgr()
+
+#define GClassAssetInsMgr GCtx->getClassAssetInsMgr()
+#define GObjectAssetInsMgr GCtx->getObjectAssetInsMgr()
+
 #define GSandboxPlatformFile GCtx->getSandboxPlatformFile()
 #define GMyStreamableManager GCtx->getMyStreamableManager()
 

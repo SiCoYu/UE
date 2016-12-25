@@ -17,7 +17,7 @@ void ClassAssetInsMgr::dispose()
 
 }
 
-UClass* ClassAssetMgr::getAndSyncLoadClass(std::string path)
+ClassAssetInsRes* ClassAssetInsMgr::getAndSyncLoadClass(std::string path)
 {
-	this->getAndSyncLoad<ClassAssetRes>(path);
+	return this->getAndSyncLoad<ClassAssetInsRes>(path);
 }

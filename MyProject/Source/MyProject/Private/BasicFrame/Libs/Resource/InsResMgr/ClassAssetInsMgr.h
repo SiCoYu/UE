@@ -6,6 +6,9 @@
 /**
  * @brief 类管理器， Blueprint
  */
+
+class ClassAssetInsRes;
+
 class ClassAssetInsMgr : public ResMgrBase
 {
 public:
@@ -15,7 +18,7 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 
-	UClass* getAndSyncLoadClass(std::string path);
+	ClassAssetInsRes* getAndSyncLoadClass(std::string path);
 };
 
 #endif

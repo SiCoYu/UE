@@ -8,7 +8,6 @@
 #include "Common.h"
 #include "LocalFileSys.h"
 #include "LoadParam.h"
-#include "UIAssetRes.h"
 #include "UIAttrItem.h"
 #include "RefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
@@ -16,6 +15,7 @@
 #include "UMGWidget.h"				// UUMGWidget
 #include "UtilStr.h"				// UtilStr
 #include "UMGWidget.h"				// UUMGWidget
+#include "ClassAssetInsRes.h"
 #include "UIMgr.h"
 
 UIMgr::UIMgr()
@@ -205,14 +205,14 @@ void UIMgr::loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventH
 	param->mIsLoadNeedCoroutine = false;
 	param->mIsResNeedCoroutine = false;
 	param->mLoadEventHandle = onLoadEventHandle;
-	GUiAssetMgr->load<UIAssetRes>(param);
+	GClassAssetInsMgr->load<ClassAssetInsRes>(param);
 	GPoolSys->deleteObj(param);
 }
 
 // 代码资源加载处理
 void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 {
-	UIAssetRes* res = (UIAssetRes*)dispObj;
+	ClassAssetInsRes* res = (ClassAssetInsRes*)dispObj;
 	if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
 		onCodeloadedByRes(res);
@@ -227,7 +227,7 @@ void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 // 窗口控件资源加载处理
 void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 {
-	UIAssetRes* res = (UIAssetRes*)dispObj;
+	ClassAssetInsRes* res = (ClassAssetInsRes*)dispObj;
 	if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
 		onWidgetloadedByRes(res);
@@ -241,7 +241,7 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 }
 
 // 代码资源加载完成处理
-void UIMgr::onCodeloadedByRes(UIAssetRes* res)
+void UIMgr::onCodeloadedByRes(ClassAssetInsRes* res)
 {
 	UIFormId formId = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
 	UtilMap::Remove(mId2CodeLoadingItemDic, formId);
@@ -258,7 +258,7 @@ void UIMgr::onCodeLoadedByForm(UForm* form)
 }
 
 // 窗口控件资源加载完成处理
-void UIMgr::onWidgetloadedByRes(UIAssetRes* res)
+void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 {
 	std::string path = res->GetPath();
 	UIFormId formId = mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
@@ -298,7 +298,7 @@ void UIMgr::onWidgetloadedByRes(UIAssetRes* res)
 	//}
 
 	// 卸载资源
-	GUiAssetMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
+	GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 }
 
 // 大小发生变化后，调用此函数

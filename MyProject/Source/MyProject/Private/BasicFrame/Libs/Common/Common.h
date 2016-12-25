@@ -18,9 +18,8 @@
 #include "PoolSys.h"
 
 #include "ResLoadMgr.h"
-#include "UIAssetMgr.h"
-#include "ClassAssetMgr.h"
-#include "ObjectAssetMgr.h"
+#include "ClassAssetInsMgr.h"
+#include "ObjectAssetInsMgr.h"
 #include "MyStreamableManager.h"
 
 #endif
