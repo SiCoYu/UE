@@ -46,7 +46,8 @@ T* UIMgr::loadForm(UIFormId formId)
 		//}
 
 		//TSubclassOf<UUMGWidget> WidgetClass = EngineApi::FindClass<UUMGWidget>(*UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
-		UClass* WidgetClass = EngineApi::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
+		//UClass* WidgetClass = EngineApi::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
+		UClass* WidgetClass = GMyStreamableManager->SynchronousLoadType<UClass>(attrItem->mWidgetPath);
 		UUMGWidget* WidgetObject = nullptr;
 
 		if (NSFormType::eWorld == attrItem->mUMGOuterType)

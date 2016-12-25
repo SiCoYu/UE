@@ -16,6 +16,7 @@
 #include "UIAssetMgr.h"
 #include "ClassAssetMgr.h"
 #include "ObjectAssetMgr.h"
+#include "MyStreamableManager.h"
 
 #include "Ctx.h"
 
@@ -58,6 +59,8 @@ Ctx::~Ctx()
 	delete this->mUiAssetMgr;
 	delete this->mClassAssetMgr;
 	delete this->mObjectAssetMgr;
+
+	delete this->mMyStreamableManager;
 }
 
 void Ctx::construct()
@@ -70,6 +73,7 @@ void Ctx::construct()
 	this->mStdoutLog = new StdoutLog();
 #endif
 
+	this->mMyStreamableManager = new MyStreamableManager();
 	this->mResLoadMgr = new ResLoadMgr();
 	this->mUiAssetMgr = new UIAssetMgr();
 	this->mClassAssetMgr = new ClassAssetMgr();
@@ -91,6 +95,7 @@ void Ctx::construct()
 
 void Ctx::init()
 {
+	this->mMyStreamableManager->init();
 	this->mUiMgr->init();
 	this->mResLoadMgr->init();
 	this->mUiAssetMgr->init();
@@ -205,6 +210,11 @@ ResLoadMgr* Ctx::getResLoadMgr()
 FSandboxPlatformFile* Ctx::getSandboxPlatformFile()
 {
 	return this->mSandboxPlatformFile;
+}
+
+FMyStreamableManager* Ctx::getMyStreamableManager()
+{
+	return this->mMyStreamableManager;
 }
 
 void Ctx::testApi()

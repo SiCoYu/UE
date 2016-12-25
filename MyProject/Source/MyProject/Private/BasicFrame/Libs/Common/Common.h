@@ -21,5 +21,6 @@
 #include "UIAssetMgr.h"
 #include "ClassAssetMgr.h"
 #include "ObjectAssetMgr.h"
+#include "MyStreamableManager.h"
 
 #endif

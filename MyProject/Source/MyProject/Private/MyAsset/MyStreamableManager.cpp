@@ -13,7 +13,17 @@ FMyStreamableManager::~FMyStreamableManager()
 	
 }
 
-UObject* FMyStreamableManager::SynchronousLoad(std::string path)
+void FMyStreamableManager::init()
+{
+
+}
+
+void FMyStreamableManager::dispose()
+{
+
+}
+
+UObject* FMyStreamableManager::SynchronousLoad(const std::string& path)
 {
 	FStringAssetReference assetRef;
 	assetRef.SetPath(UtilStr::ConvStdStr2FString(path));

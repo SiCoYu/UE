@@ -27,6 +27,7 @@ class ResLoadMgr;
 class UIAssetMgr;
 class ClassAssetMgr;
 class ObjectAssetMgr;
+class FMyStreamableManager;
 
 #ifdef ENABLE_UNIT_TEST
 	class Test;
@@ -49,6 +50,8 @@ protected:
 	UIAssetMgr* mUiAssetMgr;
 	ClassAssetMgr* mClassAssetMgr;
 	ObjectAssetMgr* mObjectAssetMgr;
+
+	FMyStreamableManager* mMyStreamableManager;
 
 	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;
@@ -86,6 +89,8 @@ public:
 	ResLoadMgr* getResLoadMgr();
 	FSandboxPlatformFile* getSandboxPlatformFile();
 
+	FMyStreamableManager* getMyStreamableManager();
+
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
 	 */
@@ -110,5 +115,6 @@ public:
 #define GUiAssetMgr GCtx->getUiAssetMgr()
 #define GResLoadMgr GCtx->getResLoadMgr()
 #define GSandboxPlatformFile GCtx->getSandboxPlatformFile()
+#define GMyStreamableManager GCtx->getMyStreamableManager()
 
 #endif				// __CTX_H

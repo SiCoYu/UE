@@ -1,28 +1,24 @@
 #pragma once
 
-#include <string.h>
+#include <string>
 #include "Engine/StreamableManager.h"	 // FStreamableManager
-#include "MyStreamableManager.generated.h"
 
-USTRUCT()
-struct FMyStreamableManager
+class FMyStreamableManager
 {
-	GENERATED_USTRUCT_BODY();
-
+public:
 	FStreamableManager mStreamableManager;
 
 	FMyStreamableManager();
 	~FMyStreamableManager();
 
-	/**
-	* Synchronously load the referred asset and return the loaded object, or NULL if it can't be found.
-	* A hard reference is made to the object (use Unload to release it), and this can be very slow.
-	*/
-	UObject* SynchronousLoad(std::string path);
+	void init();
+	void dispose();
+
+	UObject* SynchronousLoad(const std::string& path);
 
 	template< typename T >
-	T* SynchronousLoadType(FStringAssetReference const& Target)
+	T* SynchronousLoadType(const std::string& path)
 	{
-		return Cast< T >(SynchronousLoad(Target));
+		return Cast< T >(SynchronousLoad(path));
 	}
 };
