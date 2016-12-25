@@ -1,15 +1,15 @@
-﻿#ifndef __ObjectAssetMgr_H
-#define __ObjectAssetMgr_H
+﻿#ifndef __ObjectAssetInsMgr_H
+#define __ObjectAssetInsMgr_H
 
 #include "ResMgrBase.h"
 
 /**
  * @brief 资源管理器
  */
-class ObjectAssetMgr : public ResMgrBase
+class ObjectAssetInsMgr : public ResMgrBase
 {
 public:
-	ObjectAssetMgr();
+	ObjectAssetInsMgr();
 
 	virtual void init() override;
 	virtual void dispose() override;

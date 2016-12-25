@@ -14,9 +14,9 @@ UObject* ClassAssetLoadItem::getObject()
 	return this->mResObj;
 }
 
-void ClassAssetLoadItem::setObject(UClass* value)
+void ClassAssetLoadItem::setObject(UObject* value)
 {
-	this->mResObj = Case<UClass>(value);
+	this->mResObj = Cast<UClass>(value);
 }
 
 void ClassAssetLoadItem::syncLoad()

@@ -2,21 +2,21 @@
 #include "ResItem.h"
 #include "EngineApi.h"
 #include "Common.h"
-#include "ClassAssetRes.h"
+#include "ClassAssetInsRes.h"
 
-ClassAssetRes::ClassAssetRes()
+ClassAssetInsRes::ClassAssetInsRes()
 {
 
 }
 
-void ClassAssetRes::initImpl(ResItem* res)
+void ClassAssetInsRes::initImpl(ResItem* res)
 {
-	this->mGo = Cast<UClass>(res.getObject(res.getPrefabName()));
+	this->mGo = Cast<UClass>(res->getObject(res->getPrefabName()));
 
-	Super::initImpl(res);
+	InsResBase::initImpl(res);
 }
 
-UObject* ClassAssetRes::InstantiateObject(std::string resName)
+UObject* ClassAssetInsRes::InstantiateObject(std::string resName)
 {
 	mRetGO = nullptr;
 
@@ -35,12 +35,12 @@ UObject* ClassAssetRes::InstantiateObject(std::string resName)
 	return mRetGO;
 }
 
-UObject* ClassAssetRes::getObject()
+UObject* ClassAssetInsRes::getObject()
 {
 	return this->mGo;
 }
 
-void ClassAssetRes::unload()
+void ClassAssetInsRes::unload()
 {
 	if (mGo != nullptr)
 	{

@@ -1,21 +1,21 @@
 ﻿#include "MyProject.h"
-#include "UIAssetRes.h"
 #include "ResItem.h"
 #include "EngineApi.h"
 #include "Common.h"
+#include "ClassAssetInsRes.h"
 
-UIAssetRes::UIAssetRes()
+ClassAssetInsRes::ClassAssetInsRes()
 {
 
 }
 
-void UIAssetRes::initImpl(ResItem* res)
+void ClassAssetInsRes::initImpl(ResItem* res)
 {
 	//mGo = res.getObject(res.getPrefabName()) as GameObject;
 	//base.initImpl(res);
 }
 
-UObject* UIAssetRes::InstantiateObject(std::string resName)
+UObject* ClassAssetInsRes::InstantiateObject(std::string resName)
 {
 	mRetGO = nullptr;
 
@@ -34,12 +34,12 @@ UObject* UIAssetRes::InstantiateObject(std::string resName)
 	return mRetGO;
 }
 
-UObject* UIAssetRes::getObject()
+UObject* ClassAssetInsRes::getObject()
 {
 	return mGo;
 }
 
-void UIAssetRes::unload()
+void ClassAssetInsRes::unload()
 {
 	if (mGo != nullptr)
 	{

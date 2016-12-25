@@ -1,15 +1,15 @@
-﻿#ifndef __ClassAssetMgr_H
-#define __ClassAssetMgr_H
+﻿#ifndef __ClassAssetInsMgr_H
+#define __ClassAssetInsMgr_H
 
 #include "ResMgrBase.h"
 
 /**
  * @brief 类管理器， Blueprint
  */
-class ClassAssetMgr : public ResMgrBase
+class ClassAssetInsMgr : public ResMgrBase
 {
 public:
-	ClassAssetMgr();
+	ClassAssetInsMgr();
 
 public:
 	virtual void init() override;

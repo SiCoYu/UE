@@ -1,6 +1,9 @@
 ﻿#include "MyProject.h"
 #include "LoadItem.h"
 #include "UObject/Class.h"	// UClass
+#include "RefCountResLoadResultNotify.h"
+#include "ResLoadState.h"
+#include "ResEventDispatch.h"
 #include "ClassAssetResItem.h"
 
 ClassAssetResItem::ClassAssetResItem()
