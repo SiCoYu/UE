@@ -168,3 +168,15 @@ bool AMyCharacter::IsAlive()
 {
 	return true;
 }
+
+const UMyAnimInstance* const AMyCharacter::GetAnimInstance()
+{
+	UMyAnimInstance* AnimInstance = nullptr;
+
+	if (nullptr != GetMesh())
+	{
+		AnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+	}
+
+	return AnimInstance;
+}

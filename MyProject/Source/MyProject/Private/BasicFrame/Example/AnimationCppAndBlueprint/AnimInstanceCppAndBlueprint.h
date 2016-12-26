@@ -21,10 +21,7 @@ public:
 
 	//init and tick
 public:
-
 	APawn * OwningPawn;
-
 	virtual void NativeInitializeAnimation() override;
-
 	virtual void NativeUpdateAnimation(float DeltaTimeX) override;
 };

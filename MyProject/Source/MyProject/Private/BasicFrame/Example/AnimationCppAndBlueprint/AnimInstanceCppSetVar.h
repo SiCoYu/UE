@@ -23,9 +23,9 @@ class UAnimInstanceCppSetVar : public UAnimInstance
 
 	/** Left Foot Rotation, Set in Character.cpp Tick */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootPlacement)
-		FRotator SkelControl_LeftFootRotation;
+	FRotator SkelControl_LeftFootRotation;
 
 	/** Left Upper Leg Offset, Set in Character.cpp Tick */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootPlacement)
-		FVector SkelControl_LeftUpperLegPos;
+	FVector SkelControl_LeftUpperLegPos;
 };
