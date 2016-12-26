@@ -22,14 +22,14 @@ UObject* ClassAssetInsRes::InstantiateObject(std::string resName)
 
 	if (nullptr == mGo)
 	{
-		GLogSys->log("prefab 为 null");
+		GLogSys->log("Prefab is null");
 	}
 	else
 	{
 		// mRetGO = GameObject.Instantiate(mGo) as GameObject;
 		if (nullptr == mRetGO)
 		{
-			GLogSys->log("不能实例化数据");
+			GLogSys->log("Can not instance data");
 		}
 	}
 	return mRetGO;

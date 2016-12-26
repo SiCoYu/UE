@@ -40,9 +40,9 @@ public:
 	virtual void dispose();
 
 	template<class T>
-	T* getAndSyncLoad(std::string path)
+	T* getAndSyncLoad(std::string path, EventDispatchDelegate handle = nullptr)
 	{
-		syncLoad<T>(path);
+		syncLoad<T>(path, handle);
 		return (T*)getRes(path);
 	}
 
@@ -52,7 +52,7 @@ public:
 		T* ret = nullptr;
 		LoadParam* param = GPoolSys->newObject<LoadParam>();
 		LocalFileSys.modifyLoadParam(path, param);
-		param.m_loadNeedCoroutine = true;
+		param.mIsLoadNeedCoroutine = true;
 		param.mIsResNeedCoroutine = true;
 		param.mLoadEventHandle = handle;
 		ret = getAndLoad<T>(param);
@@ -68,14 +68,15 @@ public:
 		return (T*)getRes(param.mPath);
 	}
 
-	// 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能喝异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
+	// 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能和异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
 	template<class T>
-	void syncLoad(std::string path)
+	void syncLoad(std::string path, EventDispatchDelegate handle = nullptr)
 	{
 		LoadParam* param;
 		param = GPoolSys->newObject<LoadParam>();
 		param->mPath = path;
-		// param.mLoadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.mLoadEventHandle = onLoadEventHandle ，内部会自动调用
+		// param->mLoadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.mLoadEventHandle = onLoadEventHandle ，内部会自动调用
+		param->mLoadEventHandle = handle;
 		param->mIsLoadNeedCoroutine = false;
 		param->mIsResNeedCoroutine = false;
 		param->mResPackType = eClassType;
@@ -142,12 +143,14 @@ public:
 	}
 
 	virtual void unload(std::string path, EventDispatchDelegate loadEventHandle);
-    // 添加无引用资源到 List
+
 protected:
+	// 添加无引用资源到 List
 	void addNoRefResID2List(std::string path);
     // 卸载没有引用的资源列表中的资源
 	void unloadNoRefResFromList();
 	void unloadNoRef(std::string path);
+
 public:
 	virtual void onLoadEventHandle(IDispatchObject* dispObj);
 	InsResBase* getRes(std::string path);

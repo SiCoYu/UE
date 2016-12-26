@@ -200,13 +200,15 @@ void UIMgr::loadWidgetRes(UIFormId formId)
 void UIMgr::loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle)
 {
 	// TODO:
-	LoadParam* param = GPoolSys->newObject<LoadParam>();
-	LocalFileSys::modifyLoadParam(reaPath, param);
-	param->mIsLoadNeedCoroutine = false;
-	param->mIsResNeedCoroutine = false;
-	param->mLoadEventHandle = onLoadEventHandle;
-	GClassAssetInsMgr->load<ClassAssetInsRes>(param);
-	GPoolSys->deleteObj(param);
+	//LoadParam* param = GPoolSys->newObject<LoadParam>();
+	//LocalFileSys::modifyLoadParam(reaPath, param);
+	//param->mIsLoadNeedCoroutine = false;
+	//param->mIsResNeedCoroutine = false;
+	//param->mLoadEventHandle = onLoadEventHandle;
+	//GClassAssetInsMgr->load<ClassAssetInsRes>(param);
+	//GPoolSys->deleteObj(param);
+
+	GClassAssetInsMgr->getAndSyncLoadClass(reaPath, onLoadEventHandle);
 }
 
 // 代码资源加载处理
@@ -234,8 +236,8 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormId ID = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormId
-		UtilMap::Remove(mId2WidgetLoadingItemDic, ID);
+		UIFormId formId = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormId
+		UtilMap::Remove(mId2WidgetLoadingItemDic, formId);
 		GLogSys->log("UIFormId =  ， Failed Prefab");
 	}
 }

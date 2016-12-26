@@ -18,7 +18,7 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 
-	ClassAssetInsRes* getAndSyncLoadClass(std::string path);
+	ClassAssetInsRes* getAndSyncLoadClass(std::string path, EventDispatchDelegate handle = nullptr);
 };
 
 #endif

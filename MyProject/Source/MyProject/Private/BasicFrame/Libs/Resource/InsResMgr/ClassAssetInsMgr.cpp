@@ -17,7 +17,7 @@ void ClassAssetInsMgr::dispose()
 
 }
 
-ClassAssetInsRes* ClassAssetInsMgr::getAndSyncLoadClass(std::string path)
+ClassAssetInsRes* ClassAssetInsMgr::getAndSyncLoadClass(std::string path, EventDispatchDelegate handle)
 {
-	return this->getAndSyncLoad<ClassAssetInsRes>(path);
+	return this->getAndSyncLoad<ClassAssetInsRes>(path, handle);
 }
