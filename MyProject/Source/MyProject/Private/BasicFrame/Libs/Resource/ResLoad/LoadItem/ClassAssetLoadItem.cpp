@@ -37,6 +37,22 @@ void ClassAssetLoadItem::syncLoad()
 
 void ClassAssetLoadItem::asyncLoad()
 {
+	GMyStreamableManager->RequestAsyncLoad(this->mPath, FStreamableDelegate::CreateRaw(this, &ClassAssetLoadItem::onAsyncLoaded));
+
+	if (nullptr != mResObj)
+	{
+		this->mNonRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
+	}
+	else
+	{
+		this->mNonRefCountResLoadResultNotify->getResLoadState()->setFailed();
+	}
+
+	this->mNonRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
+}
+
+void ClassAssetLoadItem::onAsyncLoaded()
+{
 
 }
 

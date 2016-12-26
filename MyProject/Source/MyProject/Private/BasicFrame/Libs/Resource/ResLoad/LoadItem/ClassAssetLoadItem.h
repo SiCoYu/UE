@@ -12,47 +12,15 @@ class ClassAssetLoadItem : public LoadItem
 protected:
 	UClass* mResObj;		// uasset 类型的资源
 
+public:
+	ClassAssetLoadItem();
+
 protected:
-	//void loadFromDefaultAssetBundle()
-	//{
-	//	m_prefabObj = Resources.Load<Object>(mPathNoExt);
-
-	//	if (m_prefabObj != null)
-	//	{
-	//		nonRefCountResLoadResultNotify.resLoadState.setSuccessLoaded();
-	//	}
-	//	else
-	//	{
-	//		nonRefCountResLoadResultNotify.resLoadState.setFailed();
-	//	}
-	//	nonRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
-	//}
-
-	//IEnumerator loadFromDefaultAssetBundleByCoroutine()
-	//{
-	//	ResourceRequest req = Resources.LoadAsync<Object>(mPathNoExt);
-	//	yield return req;
-
-	//	if (req.asset != null && req.isDone)
-	//	{
-	//		m_prefabObj = req.asset;
-	//		nonRefCountResLoadResultNotify.resLoadState.setSuccessLoaded();
-	//	}
-	//	else
-	//	{
-	//		nonRefCountResLoadResultNotify.resLoadState.setFailed();
-	//	}
-
-	//	nonRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
-	//}
-
 	void syncLoad();
 	void asyncLoad();
 
 public:
-	ClassAssetLoadItem();
-
-public:
+	void onAsyncLoaded();
 	virtual UObject* getObject() override;
 	virtual void setObject(UObject* value) override;
 
