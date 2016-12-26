@@ -30,7 +30,7 @@ UObject* FMyStreamableManager::SynchronousLoad(std::string& path)
 	return mStreamableManager.SynchronousLoad(assetRef);
 }
 
-//void FMyStreamableManager::RequestAsyncLoad(const FStringAssetReference& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority = DefaultAsyncLoadPriority)
-//{
-//
-//}
+void FMyStreamableManager::RequestAsyncLoad(const std::string& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority)
+{
+
+}

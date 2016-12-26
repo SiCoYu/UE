@@ -6,7 +6,5 @@
 UCLASS(config = Game)
 class UMyObjectDelegate : public UObject
 {
-	GENERATED_BODY()
-
-
+	GENERATED_UCLASS_BODY()
 };
