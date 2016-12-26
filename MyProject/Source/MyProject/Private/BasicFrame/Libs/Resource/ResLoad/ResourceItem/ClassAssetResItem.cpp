@@ -29,6 +29,11 @@ void ClassAssetResItem::init(LoadItem* item)
 	this->mRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }
 
+UObject* ClassAssetResItem::getObject(std::string resName)
+{
+	return this->mResObj;
+}
+
 void ClassAssetResItem::unload()
 {
 

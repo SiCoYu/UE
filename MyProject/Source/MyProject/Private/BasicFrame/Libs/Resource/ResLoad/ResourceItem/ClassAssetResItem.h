@@ -15,10 +15,11 @@ public:
 	ClassAssetResItem();
 
 public:
-	virtual void init(LoadItem* item) override;
-	virtual void unload() override;
-
 	void setPrefabName(std::string prefabName);
+
+	virtual void init(LoadItem* item) override;
+	virtual UObject* getObject(std::string resName) override;
+	virtual void unload() override;
 };
 
 #endif
