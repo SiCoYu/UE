@@ -38,6 +38,11 @@ void ClassAssetLoadItem::syncLoad()
 void ClassAssetLoadItem::asyncLoad()
 {
 	GMyStreamableManager->RequestAsyncLoad(this->mPath, FStreamableDelegate::CreateRaw(this, &ClassAssetLoadItem::onAsyncLoaded));
+}
+
+void ClassAssetLoadItem::onAsyncLoaded()
+{
+	this->mResObj = Cast<UClass>GMyStreamableManager->GetStreamed(this->mPath);
 
 	if (nullptr != mResObj)
 	{
@@ -49,11 +54,6 @@ void ClassAssetLoadItem::asyncLoad()
 	}
 
 	this->mNonRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
-}
-
-void ClassAssetLoadItem::onAsyncLoaded()
-{
-
 }
 
 void ClassAssetLoadItem::load()

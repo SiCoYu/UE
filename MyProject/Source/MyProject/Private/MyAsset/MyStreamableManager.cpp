@@ -24,6 +24,13 @@ void FMyStreamableManager::dispose()
 
 }
 
+UObject* FMyStreamableManager::GetStreamed(std::string const& InTargetName)
+{
+	FStringAssetReference assetRef;
+	assetRef.SetPath(UtilStr::ConvStdStr2FString(const_cast<std::string&>(InTargetName)));
+	return mStreamableManager.GetStreamed(assetRef);
+}
+
 UObject* FMyStreamableManager::SynchronousLoad(std::string& path)
 {
 	FStringAssetReference assetRef;

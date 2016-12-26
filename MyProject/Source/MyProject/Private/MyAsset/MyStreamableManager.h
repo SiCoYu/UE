@@ -14,6 +14,8 @@ public:
 	void init();
 	void dispose();
 
+	UObject* GetStreamed(std::string const& path);
+
 	UObject* SynchronousLoad(std::string& path);
 
 	template< typename T >
