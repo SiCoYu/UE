@@ -26,17 +26,23 @@ T* EngineApi::MCreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass)
 }
 
 template<class T>
-TSubclassOf<T> EngineApi::FindClass(const TCHAR* ClassToFind)
+TSubclassOf<T> EngineApi::MFindClass(const TCHAR* ClassToFind)
 {
 	ConstructorHelpers::FClassFinder<T> findClass(ClassToFind);
 	return findClass.Class;
 }
 
 template<class T>
-T* EngineApi::FindObject(const TCHAR* ObjectToFind)
+T* EngineApi::MFindObject(const TCHAR* ObjectToFind)
 {
 	ConstructorHelpers::FObjectFinder<T> findObject(ObjectToFind);
 	return findObject.Object;
+}
+
+template< class T >
+T* EngineApi::MFindObject(UObject* Outer, const TCHAR* Name, bool ExactClass)
+{
+	return FindObject<T>(Outer, Name, ExactClass);
 }
 
 template< class T >

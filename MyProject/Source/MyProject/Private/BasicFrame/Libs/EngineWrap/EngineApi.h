@@ -251,10 +251,13 @@ public:
 
 	// 构造函数才能调用函数
 	template<class T>
-	static TSubclassOf<T> FindClass(const TCHAR* ClassToFind);
+	static TSubclassOf<T> MFindClass(const TCHAR* ClassToFind);
 
 	template<class T>
-	static T* FindObject(const TCHAR* ObjectToFind);
+	static T* MFindObject(const TCHAR* ObjectToFind);
+
+	template< class T >
+	inline static T* MFindObject(UObject* Outer, const TCHAR* Name, bool ExactClass = false);
 
 	// 任何地方都可以调用
 	// Load an object.

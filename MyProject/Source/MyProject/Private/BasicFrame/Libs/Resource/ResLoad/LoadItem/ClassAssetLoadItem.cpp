@@ -2,6 +2,7 @@
 #include "Common.h"
 #include "UObject/Class.h"	// UClass
 #include "NonRefCountResLoadResultNotify.h"		// NonRefCountResLoadResultNotify
+#include "EngineApi.h"
 #include "ClassAssetLoadItem.h"
 
 ClassAssetLoadItem::ClassAssetLoadItem()
@@ -45,9 +46,13 @@ void ClassAssetLoadItem::asyncLoad()
 void ClassAssetLoadItem::onAsyncLoaded()
 {
 	//this->mResObj = Cast<UClass>GMyStreamableManager->GetStreamed(this->mPath);
-	this->mResObj = Cast<UClass>(mAssetRef.ResolveObject());
+	//this->mResObj = Cast<UClass>(mAssetRef.ResolveObject());
+	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
+	// OnGameplayCueNotifyAsyncLoadComplete
+	this->mResObj = EngineApi::MFindObject<UClass>(nullptr, *mAssetRef.ToString());
 
-	if (nullptr != mResObj)
+	//if (nullptr != mResObj)
+	if (ensure(this->mResObj))
 	{
 		this->mNonRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
 	}
