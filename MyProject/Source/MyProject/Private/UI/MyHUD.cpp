@@ -98,8 +98,8 @@ void AMyHUD::DrawHUD()
 
 	//NewWidget->AddToViewport();
 
-	this->DrawHUD_ChatSystem();
-	this->DrawHUD_EditText();
+	//this->DrawHUD_ChatSystem();
+	//this->DrawHUD_EditText();
 }
 
 //FReply AMyHUD::OnConfirmGeneric()
