@@ -112,11 +112,12 @@ void AMyHUD::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	if (GEngine && GEngine->GameViewport) // make sure our screen is ready for the widget
-	{
-		SAssignNew(MyUIWidget, SMyChatWidget).OwnerHUD(this); // add the widget and assign it to the var
-		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MyUIWidget.ToSharedRef()));
-	}
+	// 暂时屏蔽显示界面
+	//if (GEngine && GEngine->GameViewport) // make sure our screen is ready for the widget
+	//{
+	//	SAssignNew(MyUIWidget, SMyChatWidget).OwnerHUD(this); // add the widget and assign it to the var
+	//	GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MyUIWidget.ToSharedRef()));
+	//}
 }
 
 void AMyHUD::DrawHUD_ChatSystem()
