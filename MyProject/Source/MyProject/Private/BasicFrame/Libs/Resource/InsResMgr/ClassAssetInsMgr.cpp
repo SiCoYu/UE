@@ -21,3 +21,8 @@ ClassAssetInsRes* ClassAssetInsMgr::getAndSyncLoadClass(std::string path, EventD
 {
 	return this->getAndSyncLoad<ClassAssetInsRes>(path, handle);
 }
+
+ClassAssetInsRes* ClassAssetInsMgr::getAndAsyncLoadClass(std::string path, EventDispatchDelegate handle)
+{
+	return this->getAndAsyncLoad<ClassAssetInsRes>(path, handle);
+}
