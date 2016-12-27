@@ -45,6 +45,8 @@ public:
     // 解析目录
 	void resolvePath();
 	void resolveLevel();
+
+	void setPath(std::string path);
 };
 
 #endif

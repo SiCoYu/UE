@@ -87,3 +87,8 @@ void LoadParam::resolveLevel()
 		mLvlName = UtilLogic::convScenePath2LevelName(mOrigPath);
 	}
 }
+
+void LoadParam::setPath(std::string path)
+{
+	this->mPath = path;
+}

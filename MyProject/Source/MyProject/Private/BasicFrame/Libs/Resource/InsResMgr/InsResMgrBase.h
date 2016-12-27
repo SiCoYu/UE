@@ -51,10 +51,12 @@ public:
 	{
 		T* ret = nullptr;
 		LoadParam* param = GPoolSys->newObject<LoadParam>();
-		LocalFileSys.modifyLoadParam(path, param);
-		param.mIsLoadNeedCoroutine = true;
-		param.mIsResNeedCoroutine = true;
-		param.mLoadEventHandle = handle;
+		//LocalFileSys.modifyLoadParam(path, param);
+		param->setPath(path);
+		param->mIsLoadNeedCoroutine = true;
+		param->mIsResNeedCoroutine = true;
+		param->mLoadEventHandle = handle;
+		param->mResPackType = eClassType;
 		ret = getAndLoad<T>(param);
 		GPoolSys->deleteObj(param);
 
@@ -65,7 +67,7 @@ public:
 	T* getAndLoad(LoadParam* param)
 	{
 		load<T>(param);
-		return (T*)getRes(param.mPath);
+		return (T*)getRes(param->mPath);
 	}
 
 	// 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能和异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
@@ -74,7 +76,7 @@ public:
 	{
 		LoadParam* param;
 		param = GPoolSys->newObject<LoadParam>();
-		param->mPath = path;
+		param->setPath(path);
 		// param->mLoadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.mLoadEventHandle = onLoadEventHandle ，内部会自动调用
 		param->mLoadEventHandle = handle;
 		param->mIsLoadNeedCoroutine = false;
