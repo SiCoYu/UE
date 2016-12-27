@@ -37,12 +37,15 @@ void ClassAssetLoadItem::syncLoad()
 
 void ClassAssetLoadItem::asyncLoad()
 {
-	GMyStreamableManager->RequestAsyncLoad(this->mPath, FStreamableDelegate::CreateRaw(this, &ClassAssetLoadItem::onAsyncLoaded));
+	mAssetRef.SetPath(UtilStr::ConvStdStr2FString(const_cast<std::string&>(this->mPath)));
+
+	GMyStreamableManager->RequestAsyncLoad(mAssetRef, FStreamableDelegate::CreateRaw(this, &ClassAssetLoadItem::onAsyncLoaded));
 }
 
 void ClassAssetLoadItem::onAsyncLoaded()
 {
-	this->mResObj = Cast<UClass>GMyStreamableManager->GetStreamed(this->mPath);
+	//this->mResObj = Cast<UClass>GMyStreamableManager->GetStreamed(this->mPath);
+	this->mResObj = Cast<UClass>(mAssetRef.ResolveObject());
 
 	if (nullptr != mResObj)
 	{

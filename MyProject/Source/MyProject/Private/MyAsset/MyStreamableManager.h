@@ -14,7 +14,7 @@ public:
 	void init();
 	void dispose();
 
-	UObject* GetStreamed(std::string const& path);
+	//UObject* GetStreamed(std::string const& path);
 
 	UObject* SynchronousLoad(std::string& path);
 
@@ -22,6 +22,8 @@ public:
 	T* SynchronousLoadType(std::string& path);
 
 	void RequestAsyncLoad(const std::string& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority = FStreamableManager::DefaultAsyncLoadPriority);
+
+	void RequestAsyncLoad(const FStringAssetReference& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority = FStreamableManager::DefaultAsyncLoadPriority);
 };
 
 #include "MyStreamableManager.inl"
