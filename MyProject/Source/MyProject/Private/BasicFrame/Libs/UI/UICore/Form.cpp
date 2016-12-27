@@ -133,7 +133,7 @@ void UForm::onInit()
 	//if (mIsLoadWidgetRes)
 	//{
 	// 默认会继续加载资源
-	GUiMgr->loadWidgetRes(this->getId());
+	//GUiMgr->loadWidgetRes(this->getId());
 	//}
 }
 
