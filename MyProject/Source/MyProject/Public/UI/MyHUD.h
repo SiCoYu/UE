@@ -21,6 +21,7 @@ class AMyHUD : public AHUD
 public:
 	/** Main HUD update loop. */
 	virtual void DrawHUD() override;
+	virtual void BeginPlay() override;
 
 public:
 	//UFUNCTION(BlueprintCallable, Category = "Button")
@@ -64,12 +65,12 @@ protected:
 
 	void DrawHUD_ChatSystem(); // The HUD is drawn on our screen
 
+protected:
 	// https://wiki.unrealengine.com/Slate,_Loading_Styles_%26_Resources
-public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Called as soon as game starts, create SCompoundWidget and give Viewport access
-	virtual void BeginPlay() override;
-protected:
+	void BeginPlay_LoadStyleWidget();
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Reference to SCompoundWidget
 	TSharedPtr<class SMyUILoadStyleWidget> mMyUILoadStyleWidget;

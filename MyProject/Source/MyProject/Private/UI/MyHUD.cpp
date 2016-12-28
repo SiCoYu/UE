@@ -154,7 +154,14 @@ void AMyHUD::AddMessageBP(const int32 Type, const FString& Username, const FStri
 
 void AMyHUD::BeginPlay()
 {
+	// ÔÝÊ±ÆÁ±Î
+	// this->BeginPlay_LoadStyleWidget();
+	// ÔÝÊ±ÆÁ±Î
+	//this->BeginPlay_SlateTab();
+}
 
+void AMyHUD::BeginPlay_LoadStyleWidget()
+{
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Create a SMyUIWidget on heap referenced by MyUIWidget pointer member
 	SAssignNew(mMyUILoadStyleWidget, SMyUILoadStyleWidget).OwnerHUD(this);
@@ -171,8 +178,6 @@ void AMyHUD::BeginPlay()
 		/////Set widget's properties as visibile (sets child widget's properties recurisvely)
 		mMyUILoadStyleWidget->SetVisibility(EVisibility::Visible);
 	}
-
-	this->BeginPlay_SlateTab();
 }
 
 //-------------------------------------------------------------------------------
