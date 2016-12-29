@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyCharacter.h"
 #include "GameFramework/HUD.h"
-#include "UI/MyHUD.h"
+#include "MyHUD.h"
 #include "Common.h"
 #include "UIFormId.h"
 #include "UIPack.h"

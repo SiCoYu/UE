@@ -8,7 +8,7 @@
 #include "SChatMsg.h"
 #include "MyPlayerState.h"
 #include "MySlateTabWidget.h"
-#include "UI/MyHUD.h"
+#include "MyHUD.h"
 
 // https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
 #define VICTORY_ALLOW_TICK if(!GEngine) return; if(!GEngine->GameViewport) return;
