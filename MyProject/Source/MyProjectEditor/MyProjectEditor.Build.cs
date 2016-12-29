@@ -8,15 +8,21 @@ public class MyProjectEditor : ModuleRules
 		PrivateIncludePaths.AddRange(
 			new string[] {
                 // Main area
-                "MyProjectEditor/Private",
-                "MyProjectEditor/Private/Animation",
+                "MyProjectEditor/Private/MyEngine",
+                "MyProjectEditor/Private/MyEngine/Animation",
 
                 // Example area
-                "MyProjectEditor/Private/AnimNode",
-                "MyProjectEditor/Private/Example/CppAndBlueprint"
+                "MyProjectEditor/Private/MyEngine/AnimNode",
+                "MyProjectEditor/Private/MyEngine/Example/CppAndBlueprint"
             }
 		);
- 
+
+        PublicIncludePaths.AddRange(
+            new string[] {
+                "MyProjectEditor/Public/MyEngine"
+            }
+        );
+
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", });
  
         PrivateDependencyModuleNames.AddRange(new string[] { "UnrealEd", "BlueprintGraph", "AnimGraph", });
