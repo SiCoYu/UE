@@ -1,397 +1,391 @@
-﻿using System.Collections.Generic;
+﻿#include "MyProject.h"
+#include "DownloadMgr.h"
+#include "DownloadData.h"
+#include "DownloadParam.h"
+#include "DownloadItem.h"
 
-namespace SDK.Lib
+DownloadMgr::DownloadMgr()
 {
-    /**
-     * @brief 数据下载管理器
-     */
-    public class DownloadMgr : MsgRouteHandleBase
+    mMaxParral = 8;
+    mCurNum = 0;
+    mLoadData = new DownloadData();
+    mLoadingDepth = 0;
+
+    //this.addMsgRouteHandle(MsgRouteID.eMRIDLoadedWebRes, onMsgRouteResLoad);
+}
+
+void DownloadMgr::init()
+{
+    // 游戏逻辑处理
+    //mResMsgRouteCB = new ResMsgRouteCB();
+    //Ctx.mInstance.mMsgRouteNotify.addOneDisp(mResMsgRouteCB);
+}
+
+void DownloadMgr::dispose()
+{
+
+}
+
+void DownloadMgr::resetLoadParam(DownloadParam* loadParam)
+{
+    loadParam->reset();
+}
+
+// 是否有正在加载的 DownloadItem
+bool DownloadMgr::hasDownloadItem(std::string resUniqueId)
+{
+	DownloadItem* loadItem = nullptr;
+
+	for (DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
     {
-        protected uint mMaxParral;                             // 最多同时加载的内容
-        protected uint mCurNum;                                // 当前加载的数量
-        protected DownloadData mLoadData;
-        protected DownloadItem mRetLoadItem;
-        protected ResMsgRouteCB mResMsgRouteCB;
-        protected List<string> mZeroRefResIDList;      // 没有引用的资源 ID 列表
-        protected int mLoadingDepth;                   // 加载深度
+		loadItem = kvValue.second;
 
-        public DownloadMgr()
+        if (loadItem->getResUniqueId() == resUniqueId)
         {
-            mMaxParral = 8;
-            mCurNum = 0;
-            mLoadData = new DownloadData();
-            mZeroRefResIDList = new List<string>();
-            mLoadingDepth = 0;
-
-            this.addMsgRouteHandle(MsgRouteID.eMRIDLoadedWebRes, onMsgRouteResLoad);
-        }
-
-        public void init()
-        {
-            // 游戏逻辑处理
-            mResMsgRouteCB = new ResMsgRouteCB();
-            Ctx.mInstance.mMsgRouteNotify.addOneDisp(mResMsgRouteCB);
-        }
-
-        public void dispose()
-        {
-
-        }
-
-        protected void resetLoadParam(DownloadParam loadParam)
-        {
-            loadParam.reset();
-        }
-
-        // 是否有正在加载的 DownloadItem
-        public bool hasDownloadItem(string resUniqueId)
-        {
-            foreach (DownloadItem loadItem in mLoadData.mPath2LDItem.Values)
-            {
-                if (loadItem.getResUniqueId() == resUniqueId)
-                {
-                    return true;
-                }
-            }
-
-            foreach (DownloadItem loadItem in mLoadData.mWillLDItem)
-            {
-                if (loadItem.getResUniqueId() == resUniqueId)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        // 重置加载设置
-        protected void resetDownloadParam(DownloadParam loadParam)
-        {
-            loadParam.reset();
-        }
-
-        // 资源是否已经加载，包括成功和失败
-        public bool isDownloaded(string path)
-        {
-            DownloadItem downloadItem = this.getDownloadItem(path);
-            if (downloadItem == null)
-            {
-                return false;
-            }
-            else if (downloadItem.refCountResLoadResultNotify.resLoadState.hasSuccessLoaded() ||
-                downloadItem.refCountResLoadResultNotify.resLoadState.hasFailed())
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool isSuccessDownLoaded(string resUniqueId)
-        {
-            DownloadItem downloadItem = this.getDownloadItem(resUniqueId);
-            if (downloadItem == null)
-            {
-                return false;
-            }
-            else if (downloadItem.refCountResLoadResultNotify.resLoadState.hasSuccessLoaded())
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public DownloadItem getDownloadItem(string resUniqueId)
-        {
-            foreach (DownloadItem loadItem in mLoadData.mPath2LDItem.Values)
-            {
-                if (loadItem.getResUniqueId() == resUniqueId)
-                {
-                    return loadItem;
-                }
-            }
-
-            foreach (DownloadItem loadItem in mLoadData.mWillLDItem)
-            {
-                if (loadItem.getResUniqueId() == resUniqueId)
-                {
-                    return loadItem;
-                }
-            }
-
-            return null;
-        }
-
-        protected DownloadItem createDownloadItem(DownloadParam param)
-        {
-            DownloadItem loadItem = findDownloadItemFormPool();
-            if (loadItem == null)
-            {
-                if (param.mDownloadType == DownloadType.eWWW)
-                {
-                    loadItem = new WWWDownloadItem();
-                }
-                else if (param.mDownloadType == DownloadType.eHttpWeb)
-                {
-                    loadItem = new HttpWebDownloadItem();
-                }
-            }
-            loadItem.setLoadParam(param);
-            loadItem.refCountResLoadResultNotify.loadResEventDispatch.addEventHandle(null, onLoadEventHandle);
-            loadItem.allLoadResEventDispatch.addEventHandle(null, param.mLoadEventHandle);
-
-            return loadItem;
-        }
-
-        protected void downloadWithDownloading(DownloadParam param)
-        {
-            mLoadData.mPath2LDItem[param.mResUniqueId].refCountResLoadResultNotify.refCount.incRef();
-            if (mLoadData.mPath2LDItem[param.mResUniqueId].refCountResLoadResultNotify.resLoadState.hasLoaded())
-            {
-                if (param.mLoadEventHandle != null)
-                {
-                    param.mLoadEventHandle(mLoadData.mPath2LDItem[param.mResUniqueId]);
-                }
-            }
-            else
-            {
-                if (param.mLoadEventHandle != null)
-                {
-                    mLoadData.mPath2LDItem[param.mResUniqueId].allLoadResEventDispatch.addEventHandle(null, param.mLoadEventHandle);
-                }
-            }
-
-            resetLoadParam(param);
-        }
-
-        protected void downloadWithNotDownload(DownloadParam param)
-        {
-            if (!hasDownloadItem(param.mResUniqueId))
-            {
-                DownloadItem loadItem = createDownloadItem(param);
-
-                if (mCurNum < mMaxParral)
-                {
-                    // 先增加，否则退出的时候可能是先减 1 ，导致越界出现很大的值
-                    ++mCurNum;
-                    mLoadData.mPath2LDItem[param.mResUniqueId] = loadItem;
-                    mLoadData.mPath2LDItem[param.mResUniqueId].load();
-                }
-                else
-                {
-                    mLoadData.mWillLDItem.Add(loadItem);
-                }
-            }
-
-            resetLoadParam(param);
-        }
-
-        // 通用类型，需要自己设置很多参数
-        public void load(DownloadParam param)
-        {
-            ++mLoadingDepth;
-            if (mLoadData.mPath2LDItem.ContainsKey(param.mResUniqueId))
-            {
-                downloadWithDownloading(param);
-            }
-            else
-            {
-                downloadWithNotDownload(param);
-            }
-            --mLoadingDepth;
-
-            if (mLoadingDepth == 0)
-            {
-                unloadNoRefResFromList();
-            }
-        }
-
-        public DownloadItem getAndDownload(DownloadParam param)
-        {
-            //param.resolvePath();
-            load(param);
-            return getDownloadItem(param.mResUniqueId);
-        }
-
-        // 这个卸载有引用计数，如果有引用计数就卸载不了
-        public void unload(string resUniqueId, MAction<IDispatchObject> loadEventHandle)
-        {
-            if (mLoadData.mPath2LDItem.ContainsKey(resUniqueId))
-            {
-                // 移除事件监听器，因为很有可能移除的时候，资源还没加载完成，这个时候事件监听器中的处理函数列表还没有清理
-                mLoadData.mPath2LDItem[resUniqueId].refCountResLoadResultNotify.loadResEventDispatch.removeEventHandle(null, loadEventHandle);
-                mLoadData.mPath2LDItem[resUniqueId].refCountResLoadResultNotify.refCount.decRef();
-                if (mLoadData.mPath2LDItem[resUniqueId].refCountResLoadResultNotify.refCount.isNoRef())
-                {
-                    if (mLoadingDepth != 0)
-                    {
-                        addNoRefResID2List(resUniqueId);
-                    }
-                    else
-                    {
-                        unloadNoRef(resUniqueId);
-                    }
-                }
-            }
-        }
-
-        // 卸载所有的资源
-        public void unloadAll()
-        {
-            MList<string> resUniqueIdList = new MList<string>();
-            foreach (string resUniqueId in mLoadData.mPath2LDItem.Keys)
-            {
-                resUniqueIdList.Add(resUniqueId);
-            }
-
-            int idx = 0;
-            int len = resUniqueIdList.length();
-            while (idx < len)
-            {
-                this.unloadNoRef(resUniqueIdList[idx]);
-                ++idx;
-            }
-
-            resUniqueIdList.Clear();
-            resUniqueIdList = null;
-        }
-
-        // 添加无引用资源到 List
-        protected void addNoRefResID2List(string resUniqueId)
-        {
-            mZeroRefResIDList.Add(resUniqueId);
-        }
-
-        // 卸载没有引用的资源列表中的资源
-        protected void unloadNoRefResFromList()
-        {
-            foreach (string path in mZeroRefResIDList)
-            {
-                if (mLoadData.mPath2LDItem[path].refCountResLoadResultNotify.refCount.isNoRef())
-                {
-                    unloadNoRef(path);
-                }
-            }
-            mZeroRefResIDList.Clear();
-        }
-
-        // 不考虑引用计数，直接卸载
-        protected void unloadNoRef(string resUniqueId)
-        {
-            if (mLoadData.mPath2LDItem.ContainsKey(resUniqueId))
-            {
-                mLoadData.mPath2LDItem[resUniqueId].unload();
-                mLoadData.mPath2LDItem[resUniqueId].reset();
-                mLoadData.mNoUsedLDItem.Add(mLoadData.mPath2LDItem[resUniqueId]);
-                mLoadData.mPath2LDItem.Remove(resUniqueId);
-
-                // 检查是否存在还没有执行的 LoadItem，如果存在就直接移除
-                removeWillLoadItem(resUniqueId);
-            }
-            else
-            {
-                
-            }
-        }
-
-        public void removeWillLoadItem(string resUniqueId)
-        {
-            foreach (DownloadItem loadItem in mLoadData.mWillLDItem)
-            {
-                if (loadItem.getResUniqueId() == resUniqueId)
-                {
-                    releaseLoadItem(loadItem);      // 必然只有一个，如果有多个就是错误
-                    break;
-                }
-            }
-        }
-
-        public void onLoadEventHandle(IDispatchObject dispObj)
-        {
-            DownloadItem item = dispObj as DownloadItem;
-            item.refCountResLoadResultNotify.loadResEventDispatch.removeEventHandle(null, onLoadEventHandle);
-            if (item.refCountResLoadResultNotify.resLoadState.hasSuccessLoaded())
-            {
-                onLoaded(item);
-            }
-            else if (item.refCountResLoadResultNotify.resLoadState.hasFailed())
-            {
-                onFailed(item);
-            }
-
-            item.allLoadResEventDispatch.dispatchEvent(item);
-
-            releaseLoadItem(item);
-            --mCurNum;
-            loadNextItem();
-        }
-
-        public void onLoaded(DownloadItem item)
-        {
-            if (mLoadData.mPath2LDItem.ContainsKey(item.getResUniqueId()))
-            {
-                mLoadData.mPath2LDItem[item.getResUniqueId()].init();
-            }
-            else        // 如果资源已经没有使用的地方了
-            {
-                item.unload();          // 直接卸载掉
-            }
-        }
-
-        public void onFailed(DownloadItem item)
-        {
-            string resUniqueId = item.getResUniqueId();
-            if (mLoadData.mPath2LDItem.ContainsKey(resUniqueId))
-            {
-                mLoadData.mPath2LDItem[resUniqueId].failed();
-            }
-        }
-
-        protected void releaseLoadItem(DownloadItem item)
-        {
-            item.reset();
-            mLoadData.mNoUsedLDItem.Add(item);
-            mLoadData.mWillLDItem.Remove(item);
-            mLoadData.mPath2LDItem.Remove(item.getResUniqueId());
-        }
-
-        protected void loadNextItem()
-        {
-            if (mCurNum < mMaxParral)
-            {
-                if (mLoadData.mWillLDItem.Count > 0)
-                {
-                    string resUniqueId = (mLoadData.mWillLDItem[0] as LoadItem).getResUniqueId();
-                    mLoadData.mPath2LDItem[resUniqueId] = mLoadData.mWillLDItem[0] as DownloadItem;
-                    mLoadData.mWillLDItem.RemoveAt(0);
-                    mLoadData.mPath2LDItem[resUniqueId].load();
-
-                    ++mCurNum;
-                }
-            }
-        }
-
-        protected DownloadItem findDownloadItemFormPool()
-        {
-            mRetLoadItem = null;
-            foreach (DownloadItem item in mLoadData.mNoUsedLDItem)
-            {
-                mRetLoadItem = item;
-                mLoadData.mNoUsedLDItem.Remove(mRetLoadItem);
-                break;
-            }
-
-            return mRetLoadItem;
-        }
-
-        // 资源加载完成，触发下一次加载
-        protected void onMsgRouteResLoad(IDispatchObject dispObj)
-        {
-            MsgRouteBase msg = dispObj as MsgRouteBase;
-            DownloadItem loadItem = (msg as LoadedWebResMR).m_task as DownloadItem;
-            loadItem.handleResult();
+            return true;
         }
     }
+
+    for (DownloadItem* loadItem : mLoadData->mWillLDItem)
+    {
+        if (loadItem->getResUniqueId() == resUniqueId)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// 重置加载设置
+void DownloadMgr::resetDownloadParam(DownloadParam* loadParam)
+{
+    loadParam->reset();
+}
+
+// 资源是否已经加载，包括成功和失败
+bool DownloadMgr::isDownloaded(std::string path)
+{
+    DownloadItem* downloadItem = this->getDownloadItem(path);
+    if (downloadItem == nullptr)
+    {
+        return false;
+    }
+    else if (downloadItem->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded() ||
+        downloadItem->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool DownloadMgr::isSuccessDownLoaded(std::string resUniqueId)
+{
+    DownloadItem* downloadItem = this->getDownloadItem(resUniqueId);
+    if (downloadItem == nullptr)
+    {
+        return false;
+    }
+    else if (downloadItem->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
+    {
+        return true;
+    }
+
+    return false;
+}
+
+DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
+{
+	DownloadItem* loadItem = nullptr;
+
+    for (DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
+    {
+		loadItem = kvValue.second;
+
+        if (loadItem->getResUniqueId() == resUniqueId)
+        {
+            return loadItem;
+        }
+    }
+
+    for (loadItem : mLoadData->mWillLDItem)
+    {
+        if (loadItem.getResUniqueId() == resUniqueId)
+        {
+            return loadItem;
+        }
+    }
+
+    return nullptr;
+}
+
+DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
+{
+    DownloadItem loadItem = findDownloadItemFormPool();
+    if (loadItem == nullptr)
+    {
+        if (param.mDownloadType == DownloadType.eWWW)
+        {
+            loadItem = new WWWDownloadItem();
+        }
+        else if (param.mDownloadType == DownloadType.eHttpWeb)
+        {
+            loadItem = new HttpWebDownloadItem();
+        }
+    }
+    loadItem.setLoadParam(param);
+    loadItem.refCountResLoadResultNotify.loadResEventDispatch.addEventHandle(null, onLoadEventHandle);
+    loadItem.allLoadResEventDispatch.addEventHandle(null, param.mLoadEventHandle);
+
+    return loadItem;
+}
+
+void DownloadMgr::downloadWithDownloading(DownloadParam* param)
+{
+    mLoadData->mPath2LDItem[param->mResUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+    if (mLoadData->mPath2LDItem[param->mResUniqueId]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
+    {
+        if (param->mLoadEventHandle != nullptr)
+        {
+            param->mLoadEventHandle(mLoadData->mPath2LDItem[param->mResUniqueId]);
+        }
+    }
+    else
+    {
+        if (param->mLoadEventHandle != nullptr)
+        {
+            mLoadData->mPath2LDItem[param->mResUniqueId].allLoadResEventDispatch.addEventHandle(nullptr, param->mLoadEventHandle);
+        }
+    }
+
+    resetLoadParam(param);
+}
+
+void DownloadMgr::downloadWithNotDownload(DownloadParam* param)
+{
+    if (!hasDownloadItem(param.mResUniqueId))
+    {
+        DownloadItem loadItem = createDownloadItem(param);
+
+        if (mCurNum < mMaxParral)
+        {
+            // 先增加，否则退出的时候可能是先减 1 ，导致越界出现很大的值
+            ++mCurNum;
+            mLoadData->mPath2LDItem[param->mResUniqueId] = loadItem;
+            mLoadData->mPath2LDItem[param->mResUniqueId].load();
+        }
+        else
+        {
+            mLoadData->mWillLDItem.Add(loadItem);
+        }
+    }
+
+    resetLoadParam(param);
+}
+
+// 通用类型，需要自己设置很多参数
+void DownloadMgr::load(DownloadParam* param)
+{
+    ++mLoadingDepth;
+    if (mLoadData->mPath2LDItem.ContainsKey(param->mResUniqueId))
+    {
+        downloadWithDownloading(param);
+    }
+    else
+    {
+        downloadWithNotDownload(param);
+    }
+    --mLoadingDepth;
+
+    if (mLoadingDepth == 0)
+    {
+        unloadNoRefResFromList();
+    }
+}
+
+DownloadItem DownloadMgr::getAndDownload(DownloadParam* param)
+{
+    //param.resolvePath();
+    load(param);
+    return getDownloadItem(param.mResUniqueId);
+}
+
+// 这个卸载有引用计数，如果有引用计数就卸载不了
+void DownloadMgr::unload(std::string resUniqueId, EventDispatchDelegate loadEventHandle)
+{
+    if (mLoadData->mPath2LDItem.ContainsKey(resUniqueId))
+    {
+        // 移除事件监听器，因为很有可能移除的时候，资源还没加载完成，这个时候事件监听器中的处理函数列表还没有清理
+        mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(nullptr, loadEventHandle);
+        mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
+        if (mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->getIsNoRef())
+        {
+            if (mLoadingDepth != 0)
+            {
+                addNoRefResID2List(resUniqueId);
+            }
+            else
+            {
+                unloadNoRef(resUniqueId);
+            }
+        }
+    }
+}
+
+// 卸载所有的资源
+void DownloadMgr::unloadAll()
+{
+    MList<string> resUniqueIdList = new MList<string>();
+    foreach (string resUniqueId in mLoadData.mPath2LDItem.Keys)
+    {
+        resUniqueIdList.Add(resUniqueId);
+    }
+
+    int idx = 0;
+    int len = resUniqueIdList.length();
+    while (idx < len)
+    {
+        this.unloadNoRef(resUniqueIdList[idx]);
+        ++idx;
+    }
+
+    resUniqueIdList.Clear();
+    resUniqueIdList = null;
+}
+
+// 添加无引用资源到 List
+void DownloadMgr::addNoRefResID2List(std::string resUniqueId)
+{
+    mZeroRefResIDList.Add(resUniqueId);
+}
+
+// 卸载没有引用的资源列表中的资源
+void DownloadMgr::unloadNoRefResFromList()
+{
+    for (std::string path : mZeroRefResIDList.getList())
+    {
+        if (mLoadData->mPath2LDItem[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
+        {
+            unloadNoRef(path);
+        }
+    }
+    mZeroRefResIDList.Clear();
+}
+
+// 不考虑引用计数，直接卸载
+void DownloadMgr::unloadNoRef(std::string resUniqueId)
+{
+    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
+    {
+        mLoadData->mPath2LDItem[resUniqueId]->unload();
+        mLoadData->mPath2LDItem[resUniqueId]->reset();
+		UtilList::Add(mLoadData->mNoUsedLDItem, mLoadData->mPath2LDItem[resUniqueId]);
+		UtilMap::Remove(mLoadData->mPath2LDItem, resUniqueId);
+
+        // 检查是否存在还没有执行的 LoadItem，如果存在就直接移除
+        removeWillLoadItem(resUniqueId);
+    }
+    else
+    {
+                
+    }
+}
+
+void DownloadMgr::removeWillLoadItem(std::string resUniqueId)
+{
+    for (DownloadItem* loadItem : mLoadData->mWillLDItem)
+    {
+        if (loadItem->getResUniqueId() == resUniqueId)
+        {
+            releaseLoadItem(loadItem);      // 必然只有一个，如果有多个就是错误
+            break;
+        }
+    }
+}
+
+void DownloadMgr::onLoadEventHandle(IDispatchObject* dispObj)
+{
+    DownloadItem item = (DownloadItem*)dispObj;
+    item->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(nullptr, onLoadEventHandle);
+    if (item->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
+    {
+        onLoaded(item);
+    }
+    else if (item->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
+    {
+        onFailed(item);
+    }
+
+    item->getAllLoadResEventDispatch()->dispatchEvent(item);
+
+    releaseLoadItem(item);
+    --mCurNum;
+    loadNextItem();
+}
+
+void DownloadMgr::onLoaded(DownloadItem* item)
+{
+    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, item.getResUniqueId()))
+    {
+        mLoadData->mPath2LDItem[item->getResUniqueId()]->init();
+    }
+    else        // 如果资源已经没有使用的地方了
+    {
+        item->unload();          // 直接卸载掉
+    }
+}
+
+void DownloadMgr::onFailed(DownloadItem* item)
+{
+    std::string resUniqueId = item->getResUniqueId();
+    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
+    {
+        mLoadData->mPath2LDItem[resUniqueId]->failed();
+    }
+}
+
+void DownloadMgr::releaseLoadItem(DownloadItem* item)
+{
+    item->reset();
+	UtilList::Add(mLoadData->mNoUsedLDItem, item);
+	UtilList::Remove(mLoadData->mWillLDItem, item);
+	UtilMap::Remove(mLoadData->mPath2LDItem, item->getResUniqueId());
+}
+
+void DownloadMgr::loadNextItem()
+{
+    if (mCurNum < mMaxParral)
+    {
+		if (UtilList::Count(mLoadData->mWillLDItem) > 0)
+        {
+            std::string resUniqueId = mLoadData->mWillLDItem[0]->getResUniqueId();
+            mLoadData->mPath2LDItem[resUniqueId] = mLoadData->mWillLDItem[0];
+			UtilList::RemoveAt(mLoadData->mWillLDItem, 0);
+            mLoadData->mPath2LDItem[resUniqueId]->load();
+
+            ++mCurNum;
+        }
+    }
+}
+
+DownloadItem* DownloadMgr::findDownloadItemFormPool()
+{
+    mRetLoadItem = nullptr;
+    for (DownloadItem* item : mLoadData->mNoUsedLDItem)
+    {
+        mRetLoadItem = item;
+		UtilList::Remove(mLoadData->mNoUsedLDItem, mRetLoadItem);
+        break;
+    }
+
+    return mRetLoadItem;
+}
+
+// 资源加载完成，触发下一次加载
+void DownloadMgr::onMsgRouteResLoad(IDispatchObject* dispObj)
+{
+    /*MsgRouteBase msg = dispObj as MsgRouteBase;
+    DownloadItem loadItem = (msg as LoadedWebResMR).m_task as DownloadItem;
+    loadItem.handleResult();*/
 }

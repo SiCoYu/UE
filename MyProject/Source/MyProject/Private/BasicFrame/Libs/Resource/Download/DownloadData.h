@@ -13,6 +13,8 @@ class DownloadItem;
 class DownloadData
 {
 public:
+	typedef std::pair<std::string, DownloadItem*> KVPairs;
+
     // 因为资源有些需要协同程序，因此重复利用资源
 	std::map<std::string, DownloadItem*> mPath2LDItem;       // 正在下载的内容 DownloadItem
 	std::list<DownloadItem*> mWillLDItem;                           // 将要下载的 DownloadItem
