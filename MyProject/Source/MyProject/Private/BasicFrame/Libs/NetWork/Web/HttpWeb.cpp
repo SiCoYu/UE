@@ -32,6 +32,16 @@ void HttpWeb::sendJson(FString JsonStr)
 	HttpRequest->ProcessRequest();
 }
 
+void HttpWeb::download(FString path)
+{
+	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
+	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/octet-stream; charset=utf-8"));
+	HttpRequest->SetURL(TEXT("http://localhost/mywebpage.php"));
+	HttpRequest->SetVerb(TEXT("GET"));
+	HttpRequest->OnProcessRequestComplete().BindRaw(this, &HttpWeb::HttpCompleteCallback);
+	HttpRequest->ProcessRequest();
+}
+
 void HttpWeb::HttpCompleteCallback(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
 {
 	FString MessageBody = "";

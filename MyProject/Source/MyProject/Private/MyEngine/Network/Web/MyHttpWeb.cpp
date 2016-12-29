@@ -29,7 +29,7 @@ void UMyHttpWeb::sendJson(FString JsonStr)
 	HttpRequest->SetURL(TEXT("http://localhost/mywebpage.php"));
 	HttpRequest->SetVerb(TEXT("POST"));
 	HttpRequest->SetContentAsString(JsonStr);
-	HttpRequest->OnProcessRequestComplete().BindUObject(this, &UHttpWeb::HttpCompleteCallback);
+	HttpRequest->OnProcessRequestComplete().BindUObject(this, &UMyHttpWeb::HttpCompleteCallback);
 	HttpRequest->ProcessRequest();
 }
 

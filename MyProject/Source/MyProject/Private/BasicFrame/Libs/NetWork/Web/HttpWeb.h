@@ -14,5 +14,6 @@ public:
 public:
 	FString buildJson();
 	void sendJson(FString JsonStr);
+	void download(FString path);
 	void HttpCompleteCallback(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
 };
