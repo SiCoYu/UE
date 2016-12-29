@@ -59,11 +59,13 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Resource/RefAsync",
                 "MyProject/Private/BasicFrame/Libs/Resource/InsResMgr",
                 "MyProject/Private/BasicFrame/Libs/Resource/InsRes",
+                "MyProject/Private/BasicFrame/Libs/Resource/Download",
 
                 "MyProject/Private/BasicFrame/Libs/ObjectPool",
                 "MyProject/Private/BasicFrame/Libs/MsgRoute",
                 "MyProject/Private/BasicFrame/Libs/LocalFileSystem",
                 "MyProject/Private/BasicFrame/Libs/Math",
+                "MyProject/Private/BasicFrame/Libs/Task",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",
