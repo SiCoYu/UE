@@ -3,6 +3,9 @@
 #include "DownloadData.h"
 #include "DownloadParam.h"
 #include "DownloadItem.h"
+#include "ResLoadState.h"
+#include "HttpWebDownloadItem.h"
+#include "RefCount.h"
 
 DownloadMgr::DownloadMgr()
 {
@@ -34,13 +37,13 @@ void DownloadMgr::resetLoadParam(DownloadParam* loadParam)
 // 是否有正在加载的 DownloadItem
 bool DownloadMgr::hasDownloadItem(std::string resUniqueId)
 {
-	DownloadItem* loadItem = nullptr;
+	DownloadItem* loadItemValue = nullptr;
 
 	for (DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
     {
-		loadItem = kvValue.second;
+		loadItemValue = kvValue.second;
 
-        if (loadItem->getResUniqueId() == resUniqueId)
+        if (loadItemValue->getResUniqueId() == resUniqueId)
         {
             return true;
         }
@@ -97,21 +100,21 @@ bool DownloadMgr::isSuccessDownLoaded(std::string resUniqueId)
 
 DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
 {
-	DownloadItem* loadItem = nullptr;
+	DownloadItem* loadItemValue = nullptr;
 
     for (DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
     {
-		loadItem = kvValue.second;
+		loadItemValue = kvValue.second;
 
-        if (loadItem->getResUniqueId() == resUniqueId)
+        if (loadItemValue->getResUniqueId() == resUniqueId)
         {
-            return loadItem;
+            return loadItemValue;
         }
     }
 
-    for (loadItem : mLoadData->mWillLDItem)
+    for (DownloadItem* loadItem : mLoadData->mWillLDItem)
     {
-        if (loadItem.getResUniqueId() == resUniqueId)
+        if (loadItem->getResUniqueId() == resUniqueId)
         {
             return loadItem;
         }
@@ -122,21 +125,17 @@ DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
 
 DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
 {
-    DownloadItem loadItem = findDownloadItemFormPool();
+    DownloadItem* loadItem = findDownloadItemFormPool();
     if (loadItem == nullptr)
     {
-        if (param.mDownloadType == DownloadType.eWWW)
-        {
-            loadItem = new WWWDownloadItem();
-        }
-        else if (param.mDownloadType == DownloadType.eHttpWeb)
+        if (param->mDownloadType == eHttpWeb)
         {
             loadItem = new HttpWebDownloadItem();
         }
     }
-    loadItem.setLoadParam(param);
-    loadItem.refCountResLoadResultNotify.loadResEventDispatch.addEventHandle(null, onLoadEventHandle);
-    loadItem.allLoadResEventDispatch.addEventHandle(null, param.mLoadEventHandle);
+    loadItem->setLoadParam(param);
+    loadItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, &DownloadMgr::onLoadEventHandle));
+    loadItem->getAllLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
 
     return loadItem;
 }
@@ -155,7 +154,7 @@ void DownloadMgr::downloadWithDownloading(DownloadParam* param)
     {
         if (param->mLoadEventHandle != nullptr)
         {
-            mLoadData->mPath2LDItem[param->mResUniqueId].allLoadResEventDispatch.addEventHandle(nullptr, param->mLoadEventHandle);
+            mLoadData->mPath2LDItem[param->mResUniqueId]->getAllLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
         }
     }
 
@@ -164,20 +163,20 @@ void DownloadMgr::downloadWithDownloading(DownloadParam* param)
 
 void DownloadMgr::downloadWithNotDownload(DownloadParam* param)
 {
-    if (!hasDownloadItem(param.mResUniqueId))
+    if (!hasDownloadItem(param->mResUniqueId))
     {
-        DownloadItem loadItem = createDownloadItem(param);
+        DownloadItem* loadItem = createDownloadItem(param);
 
         if (mCurNum < mMaxParral)
         {
             // 先增加，否则退出的时候可能是先减 1 ，导致越界出现很大的值
             ++mCurNum;
             mLoadData->mPath2LDItem[param->mResUniqueId] = loadItem;
-            mLoadData->mPath2LDItem[param->mResUniqueId].load();
+            mLoadData->mPath2LDItem[param->mResUniqueId]->load();
         }
         else
         {
-            mLoadData->mWillLDItem.Add(loadItem);
+            UtilList::Add(mLoadData->mWillLDItem, loadItem);
         }
     }
 
@@ -188,7 +187,7 @@ void DownloadMgr::downloadWithNotDownload(DownloadParam* param)
 void DownloadMgr::load(DownloadParam* param)
 {
     ++mLoadingDepth;
-    if (mLoadData->mPath2LDItem.ContainsKey(param->mResUniqueId))
+    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, param->mResUniqueId))
     {
         downloadWithDownloading(param);
     }
@@ -204,22 +203,22 @@ void DownloadMgr::load(DownloadParam* param)
     }
 }
 
-DownloadItem DownloadMgr::getAndDownload(DownloadParam* param)
+DownloadItem* DownloadMgr::getAndDownload(DownloadParam* param)
 {
     //param.resolvePath();
     load(param);
-    return getDownloadItem(param.mResUniqueId);
+    return getDownloadItem(param->mResUniqueId);
 }
 
 // 这个卸载有引用计数，如果有引用计数就卸载不了
 void DownloadMgr::unload(std::string resUniqueId, EventDispatchDelegate loadEventHandle)
 {
-    if (mLoadData->mPath2LDItem.ContainsKey(resUniqueId))
+    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
     {
         // 移除事件监听器，因为很有可能移除的时候，资源还没加载完成，这个时候事件监听器中的处理函数列表还没有清理
-        mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(nullptr, loadEventHandle);
+        mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
         mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
-        if (mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->getIsNoRef())
+        if (mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
         {
             if (mLoadingDepth != 0)
             {
@@ -236,22 +235,24 @@ void DownloadMgr::unload(std::string resUniqueId, EventDispatchDelegate loadEven
 // 卸载所有的资源
 void DownloadMgr::unloadAll()
 {
-    MList<string> resUniqueIdList = new MList<string>();
-    foreach (string resUniqueId in mLoadData.mPath2LDItem.Keys)
+    MList<std::string> resUniqueIdList;
+	std::string resUniqueId;
+
+    for(DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
     {
+		resUniqueId = kvValue.first;
         resUniqueIdList.Add(resUniqueId);
     }
 
     int idx = 0;
-    int len = resUniqueIdList.length();
+    int len = resUniqueIdList.Count();
     while (idx < len)
     {
-        this.unloadNoRef(resUniqueIdList[idx]);
+        this->unloadNoRef(resUniqueIdList[idx]);
         ++idx;
     }
 
     resUniqueIdList.Clear();
-    resUniqueIdList = null;
 }
 
 // 添加无引用资源到 List
@@ -306,8 +307,8 @@ void DownloadMgr::removeWillLoadItem(std::string resUniqueId)
 
 void DownloadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 {
-    DownloadItem item = (DownloadItem*)dispObj;
-    item->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(nullptr, onLoadEventHandle);
+    DownloadItem* item = (DownloadItem*)dispObj;
+    item->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, &DownloadMgr::onLoadEventHandle));
     if (item->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
     {
         onLoaded(item);
@@ -326,7 +327,8 @@ void DownloadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 
 void DownloadMgr::onLoaded(DownloadItem* item)
 {
-    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, item.getResUniqueId()))
+	std::string resUniqueId = item->getResUniqueId();
+    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
     {
         mLoadData->mPath2LDItem[item->getResUniqueId()]->init();
     }
@@ -347,10 +349,11 @@ void DownloadMgr::onFailed(DownloadItem* item)
 
 void DownloadMgr::releaseLoadItem(DownloadItem* item)
 {
+	std::string resUniqueId = item->getResUniqueId();
     item->reset();
 	UtilList::Add(mLoadData->mNoUsedLDItem, item);
 	UtilList::Remove(mLoadData->mWillLDItem, item);
-	UtilMap::Remove(mLoadData->mPath2LDItem, item->getResUniqueId());
+	UtilMap::Remove(mLoadData->mPath2LDItem, resUniqueId);
 }
 
 void DownloadMgr::loadNextItem()
@@ -359,8 +362,8 @@ void DownloadMgr::loadNextItem()
     {
 		if (UtilList::Count(mLoadData->mWillLDItem) > 0)
         {
-            std::string resUniqueId = mLoadData->mWillLDItem[0]->getResUniqueId();
-            mLoadData->mPath2LDItem[resUniqueId] = mLoadData->mWillLDItem[0];
+            std::string resUniqueId = mLoadData->mWillLDItem.front()->getResUniqueId();
+            mLoadData->mPath2LDItem[resUniqueId] = mLoadData->mWillLDItem.front();
 			UtilList::RemoveAt(mLoadData->mWillLDItem, 0);
             mLoadData->mPath2LDItem[resUniqueId]->load();
 

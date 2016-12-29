@@ -47,16 +47,16 @@ public:
     // 资源是否已经加载，包括成功和失败
 	bool isDownloaded(std::string path);
 	bool isSuccessDownLoaded(std::string resUniqueId);
-	DownloadItem getDownloadItem(std::string resUniqueId);
+	DownloadItem* getDownloadItem(std::string resUniqueId);
 
 protected:
-	DownloadItem createDownloadItem(DownloadParam* param);
+	DownloadItem* createDownloadItem(DownloadParam* param);
 	void downloadWithDownloading(DownloadParam* param);
 	void downloadWithNotDownload(DownloadParam* param);
 
 public:
     // 通用类型，需要自己设置很多参数
-	void load(DownloadParam param);
+	void load(DownloadParam* param);
 	DownloadItem* getAndDownload(DownloadParam* param);
     // 这个卸载有引用计数，如果有引用计数就卸载不了
 	void unload(std::string resUniqueId, EventDispatchDelegate loadEventHandle);
@@ -80,7 +80,7 @@ public:
 protected:
 	void releaseLoadItem(DownloadItem* item);
 	void loadNextItem();
-	DownloadItem findDownloadItemFormPool();
+	DownloadItem* findDownloadItemFormPool();
     // 资源加载完成，触发下一次加载
 	void onMsgRouteResLoad(IDispatchObject* dispObj);
 };

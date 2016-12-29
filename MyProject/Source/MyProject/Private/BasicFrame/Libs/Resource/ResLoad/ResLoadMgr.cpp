@@ -372,7 +372,7 @@ void ResLoadMgr::unload(std::string path, EventDispatchDelegate loadEventHandle)
 	{
 		mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
 		mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
-		if (mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->bNoRef())
+		if (mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			if (mLoadingDepth != 0)
 			{
@@ -397,7 +397,7 @@ void ResLoadMgr::unloadNoRefResFromList()
 {
 	for(std::string path : mZeroRefResIDList.getList())
 	{
-		if (mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->bNoRef())
+		if (mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			unloadNoRef(path);
 		}

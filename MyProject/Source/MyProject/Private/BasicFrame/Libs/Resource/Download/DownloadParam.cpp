@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "DownloadParam.h"
 
-public DownloadParam::DownloadParam()
+DownloadParam::DownloadParam()
 {
     reset();
 }
@@ -25,12 +25,12 @@ void DownloadParam::setPath(std::string origPath)
 
     //mExtName = UtilPath.getFileExt(mOrigPath);
 
-    if(mExtName == UtilApi.UNITY3D)
-    {
-        mResPackType = eBundleType;
-    }
-    else
-    {
-        mResPackType = eDataType;
-    }
+    //if(mExtName == UtilApi.UNITY3D)
+    //{
+    //    mResPackType = eBundleType;
+    //}
+    //else
+    //{
+    //    mResPackType = eDataType;
+    //}
 }

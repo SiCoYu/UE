@@ -18,7 +18,7 @@ public:
 	void reset();
 	void incRef();
 	void decRef();
-	bool bNoRef();
+	bool isNoRef();
     void copyFrom(RefCount* rhv);
 };
 

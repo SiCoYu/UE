@@ -43,7 +43,7 @@ void InsResMgrBase::unload(std::string path, EventDispatchDelegate loadEventHand
 	{
 		mPath2ResDic[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
 		mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
-		if (mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->bNoRef())
+		if (mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			if (mLoadingDepth != 0)       // 如果加载深度不是 0 的，说明正在加载，不能卸载对象
 			{
@@ -68,7 +68,7 @@ void InsResMgrBase::unloadNoRefResFromList()
 {
 	for(std::string path : mZeroRefResIDList.getList())
 	{
-		if (mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->bNoRef())
+		if (mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			unloadNoRef(path);
 		}

@@ -15,7 +15,7 @@
 class DownloadItem : public ITask, public IDispatchObject
 {
 protected:
-    char mBytes[128];
+    char* mBytes;
     std::string mText;
 	std::string mVersion;
 
@@ -62,7 +62,6 @@ public:
 	std::string getLogicPath();
 	void setResUniqueId(std::string value);
 	std::string getResUniqueId();
-	std::string getLoadPath();
     char* getBytes();
 	std::string getText();
 

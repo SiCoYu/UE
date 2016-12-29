@@ -1,9 +1,10 @@
 ﻿#include "MyProject.h"
 #include "DownloadItem.h"
+#include "ResLoadState.h"
 
 DownloadItem::DownloadItem()
 {
-    mResLoadType = ResLoadType.eLoadWeb;
+    mResLoadType = eLoadWeb;
     mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
     mAllLoadResEventDispatch = new ResEventDispatch();
 }
@@ -31,10 +32,9 @@ void DownloadItem::setAllLoadResEventDispatch(ResEventDispatch* value)
 void DownloadItem::reset()
 {
     mLoadPath = "";
-    mW3File = null;
-    mDownloadType = DownloadType.eHttpWeb;
+    mDownloadType = eHttpWeb;
 
-    mBytes = null;
+    mBytes = nullptr;
 }
 
 std::string DownloadItem::getLoadPath()
@@ -77,7 +77,7 @@ bool DownloadItem::hasFailed()
     return this->mRefCountResLoadResultNotify->getResLoadState()->hasFailed();
 }
 
-void DownloadItem::setLogicPath(string value)
+void DownloadItem::setLogicPath(std::string value)
 {
 	this->mLogicPath = value;
 }
@@ -95,11 +95,6 @@ void DownloadItem::setResUniqueId(std::string value)
 std::string DownloadItem::getResUniqueId()
 {
     return this->mResUniqueId;
-}
-
-std::string DownloadItem::getLoadPath()
-{
-    return this->mLoadPath;
 }
 
 char* DownloadItem::getBytes()
@@ -130,9 +125,9 @@ void DownloadItem::unload()
 
 void DownloadItem::setLoadParam(DownloadParam* param)
 {
-    this->loadPath = param->mLoadPath;
-    this->origPath = param->mOrigPath;
-    this->mDownloadType = param->mDownloadType;
+    this->setLoadPath(param->mLoadPath);
+    this->setOrigPath(param->mOrigPath);
+    this->setDownloadType(param->mDownloadType);
     this->mResLoadType = param->mResLoadType;
     this->mResPackType = param->mResPackType;
     this->mVersion = param->mVersion;

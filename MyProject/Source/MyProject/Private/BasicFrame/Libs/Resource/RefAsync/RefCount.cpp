@@ -30,7 +30,7 @@ void RefCount::decRef()
 	--mRefNum;
 }
 
-bool RefCount::bNoRef()
+bool RefCount::isNoRef()
 {
 	return mRefNum == 0;
 }

@@ -38,4 +38,4 @@ public:
 
 	void reset();
 	void setPath(std::string origPath);
-}
+};
