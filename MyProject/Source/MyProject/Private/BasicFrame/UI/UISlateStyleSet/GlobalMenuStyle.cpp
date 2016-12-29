@@ -9,7 +9,7 @@ const FName FGlobalStyle::TypeName = TEXT("FGlobalStyle");
 
 const FName FGlobalStyle::GetTypeName() const
 {
-	static const FName TypeName = TEXT("FGlobalStyle");
+	//static const FName TypeName = TEXT("FGlobalStyle");
 	return TypeName;
 }
 

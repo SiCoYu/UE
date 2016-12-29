@@ -16,15 +16,15 @@ public class MyProject : ModuleRules
         PrivateIncludePaths.AddRange(
             new string[] {
                 // Player ÇøÓò
-                "MyProject/Private/Player",
-                "MyProject/Private/UI/Widgets",
-                "MyProject/Private/Persist",
-                "MyProject/Private/MyActor",
-                "MyProject/Private/Math",
-                "MyProject/Private/Misc",
-                "MyProject/Private/Network",
-                "MyProject/Private/MyAnim",
-                "MyProject/Private/MyAsset",
+                "MyProject/Private/MyEngine/Player",
+                "MyProject/Private/MyEngine/UI/Widgets",
+                "MyProject/Private/MyEngine/Persist",
+                "MyProject/Private/MyEngine/MyActor",
+                "MyProject/Private/MyEngine/Math",
+                "MyProject/Private/MyEngine/Misc",
+                "MyProject/Private/MyEngine/Network",
+                "MyProject/Private/MyEngine/MyAnim",
+                "MyProject/Private/MyEngine/MyAsset",
 
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",
@@ -125,9 +125,9 @@ public class MyProject : ModuleRules
 
         PublicIncludePaths.AddRange(
             new string[] {
-                "MyProject/Public/Player",
-                "MyProject/Public/UI",
-                "MyProject/Public/Persist",
+                "MyProject/Public/MyEngine/Player",
+                "MyProject/Public/MyEngine/UI",
+                "MyProject/Public/MyEngine/Persist",
             }
         );
 
