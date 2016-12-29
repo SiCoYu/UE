@@ -1,12 +1,13 @@
 #include "MyProject.h"
-#include "HttpWeb.h"
+#include "MyHttpWeb.h"
 
-HttpWeb::HttpWeb()
+UMyHttpWeb::UMyHttpWeb(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	
 }
 
-FString HttpWeb::buildJson()
+FString UMyHttpWeb::buildJson()
 {
 	// Create a writer and hold it in this FString
 	FString JsonStr;
@@ -21,18 +22,18 @@ FString HttpWeb::buildJson()
 	return JsonStr;
 }
 
-void HttpWeb::sendJson(FString JsonStr)
+void UMyHttpWeb::sendJson(FString JsonStr)
 {
 	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
 	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json; charset=utf-8"));
 	HttpRequest->SetURL(TEXT("http://localhost/mywebpage.php"));
 	HttpRequest->SetVerb(TEXT("POST"));
 	HttpRequest->SetContentAsString(JsonStr);
-	HttpRequest->OnProcessRequestComplete().BindRaw(this, &HttpWeb::HttpCompleteCallback);
+	HttpRequest->OnProcessRequestComplete().BindUObject(this, &UHttpWeb::HttpCompleteCallback);
 	HttpRequest->ProcessRequest();
 }
 
-void HttpWeb::HttpCompleteCallback(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
+void UMyHttpWeb::HttpCompleteCallback(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
 {
 	FString MessageBody = "";
 

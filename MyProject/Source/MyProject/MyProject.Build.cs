@@ -23,6 +23,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/Math",
                 "MyProject/Private/MyEngine/Misc",
                 "MyProject/Private/MyEngine/Network",
+                "MyProject/Private/MyEngine/Network/Web",
                 "MyProject/Private/MyEngine/MyAnim",
                 "MyProject/Private/MyEngine/MyAsset",
 
