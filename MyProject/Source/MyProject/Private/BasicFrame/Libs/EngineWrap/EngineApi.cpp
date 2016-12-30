@@ -461,10 +461,10 @@ FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLa
 	return FPlatformProcess::CreateProc(URL, Parms, bLaunchDetached, bLaunchHidden, bLaunchReallyHidden, OutProcessID, PriorityModifier, OptionalWorkingDirectory, PipeWriteChild, PipeReadChild);
 }
 
-UObject* EngineApi::MStaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox, bool bAllowObjectReconciliation)
+UObject* EngineApi::StaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox, bool bAllowObjectReconciliation)
 {
 	Class->GetDefaultObject(); // force the CDO to be created if it hasn't already
-	UObject* ObjectPtr = StaticLoadObject(Class, InOuter, Name, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation);
+	UObject* ObjectPtr = ::StaticLoadObject(Class, InOuter, Name, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation);
 	if (ObjectPtr)
 	{
 		ObjectPtr->AddToRoot();
@@ -472,9 +472,9 @@ UObject* EngineApi::MStaticLoadObject(UClass* Class, UObject* InOuter, const TCH
 	return ObjectPtr;
 }
 
-UClass* EngineApi::MStaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
+UClass* EngineApi::StaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
 {
-	UClass* LoadedClass = StaticLoadClass(BaseClass, InOuter, Name, Filename, LoadFlags, Sandbox);
+	UClass* LoadedClass = ::StaticLoadClass(BaseClass, InOuter, Name, Filename, LoadFlags, Sandbox);
 	if (LoadedClass)
 	{
 		LoadedClass->AddToRoot();
@@ -482,7 +482,7 @@ UClass* EngineApi::MStaticLoadClass(UClass* BaseClass, UObject* InOuter, const T
 	return LoadedClass;
 }
 
-FString EngineApi::MGetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/)
+FString EngineApi::GetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/)
 {
 	FString Result;
 	Result = curObj->GetPathName(StopOuter);

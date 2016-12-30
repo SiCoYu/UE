@@ -64,7 +64,7 @@ T* UIMgr::loadForm(UIFormId formId)
 		}
 		else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
 		{
-			WidgetObject = EngineApi::MCreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+			WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
 		}
 		else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
 		{
@@ -72,7 +72,7 @@ T* UIMgr::loadForm(UIFormId formId)
 		}
 
 		WidgetObject->AddToViewport();
-		form = EngineApi::MNewObject<T>();
+		form = EngineApi::NewObject<T>();
 
 		if (nullptr != form)                   // 如果代码已经在本地
 		{

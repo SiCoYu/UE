@@ -164,15 +164,11 @@ public:
 
 	// https://wiki.unrealengine.com/Min/Max_of_An_Array_of_Any_DataType,_Including_Ones_That_You_Create
 	template< class T >
-	static FORCEINLINE T Max(const TArray<T>& Values, int32* MaxIndex = NULL)
-	{
-		const T MaxValue = FMath::Max<T>(Values, &MaxIndex);
-		return MaxValue;
-	}
+	static FORCEINLINE T Max(const TArray<T>& Values, int32* MaxIndex = nullptr);
 
 	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
 	// 使用 Cast<AYourLevelScriptActor>GetLevelScriptActor();
-	ALevelScriptActor* GetLevelScriptActor(ULevel* OwnerLevel = NULL) const;
+	ALevelScriptActor* GetLevelScriptActor(ULevel* OwnerLevel = nullptr) const;
 
 	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
 	static FORCEINLINE void GetDisplayAdapterScreenResolutions(FScreenResolutionArray& Resolutions);
@@ -207,13 +203,13 @@ public:
 	static void AddToViewport(UUserWidget* userWidget);
 
 	template< class T >
-	static T* MCreateWidget(UWorld* World, UClass* UserWidgetClass = T::StaticClass());
+	static T* CreateWidget(UWorld* World, UClass* UserWidgetClass = T::StaticClass());
 
 	template< class T >
-	static T* MCreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass = T::StaticClass());
+	static T* CreateWidget(APlayerController* OwningPlayer, UClass* UserWidgetClass = T::StaticClass());
 
 	template< class T >
-	static T* MCreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass = T::StaticClass());
+	static T* CreateWidget(UGameInstance* OwningGame, UClass* UserWidgetClass = T::StaticClass());
 
 	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Programs\CrashReporter\CrashReportClient\Private\CrashReportClient.cpp
 	// /** Copies text to the operating system clipboard. */
@@ -251,18 +247,18 @@ public:
 
 	// 构造函数才能调用函数
 	template<class T>
-	static TSubclassOf<T> MFindClass(const TCHAR* ClassToFind);
+	static TSubclassOf<T> FindClass(const TCHAR* ClassToFind);
 
 	template<class T>
-	static T* MFindObject(const TCHAR* ObjectToFind);
+	static T* FindObject(const TCHAR* ObjectToFind);
 
 	template< class T >
-	inline static T* MFindObject(UObject* Outer, const TCHAR* Name, bool ExactClass = false);
+	inline static T* FindObject(UObject* Outer, const TCHAR* Name, bool ExactClass = false);
 
 	// 任何地方都可以调用
 	// Load an object.
 	template< class T >
-	static inline T* MLoadObject(UObject* Outer, const TCHAR* Name, const TCHAR* Filename = nullptr, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = nullptr);
+	static inline T* LoadObject(UObject* Outer, const TCHAR* Name, const TCHAR* Filename = nullptr, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = nullptr);
 
 	// Load a class object.
 	template< class T >
@@ -271,23 +267,23 @@ public:
 	// 任何地方都可以调用
 	// 参考 Engine\Source\Runtime\CoreUObject\Public\UObject\ConstructorHelpers.h
 	// inline UClass* FindOrLoadClass(FString& PathName, UClass* BaseClass)
-	static UObject* MStaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename = NULL, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = NULL, bool bAllowObjectReconciliation = true);
+	static UObject* StaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename = NULL, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = NULL, bool bAllowObjectReconciliation = true);
 
-	static UClass* MStaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename = NULL, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = NULL);
-
-	template< class T >
-	static T* MNewObject(UObject* Outer, UClass* Class, FName Name = NAME_None, EObjectFlags Flags = RF_NoFlags, UObject* Template = nullptr, bool bCopyTransientsFromClassDefaults = false, FObjectInstancingGraph* InInstanceGraph = nullptr);
+	static UClass* StaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename = NULL, uint32 LoadFlags = LOAD_None, UPackageMap* Sandbox = NULL);
 
 	template< class T >
-	static T* MNewObject(UObject* Outer = (UObject*)GetTransientPackage());
+	static T* NewObject(UObject* Outer, UClass* Class, FName Name = NAME_None, EObjectFlags Flags = RF_NoFlags, UObject* Template = nullptr, bool bCopyTransientsFromClassDefaults = false, FObjectInstancingGraph* InInstanceGraph = nullptr);
 
 	template< class T >
-	static T* MNewObject(UObject* Outer, FName Name, EObjectFlags Flags = RF_NoFlags, UObject* Template = nullptr, bool bCopyTransientsFromClassDefaults = false, FObjectInstancingGraph* InInstanceGraph = nullptr);
+	static T* NewObject(UObject* Outer = (UObject*)GetTransientPackage());
 
 	template< class T >
-	static T* MDuplicateObject(T const* SourceObject, UObject* Outer, const FName Name = NAME_None);
+	static T* NewObject(UObject* Outer, FName Name, EObjectFlags Flags = RF_NoFlags, UObject* Template = nullptr, bool bCopyTransientsFromClassDefaults = false, FObjectInstancingGraph* InInstanceGraph = nullptr);
 
-	static FString MGetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/);
+	template< class T >
+	static T* DuplicateObject(T const* SourceObject, UObject* Outer, const FName Name = NAME_None);
+
+	static FString GetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/);
 };
 
 #include "EngineApi.inl"

@@ -49,7 +49,7 @@ void ClassAssetLoadItem::onAsyncLoaded()
 	//this->mResObj = Cast<UClass>(mAssetRef.ResolveObject());
 	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
 	// OnGameplayCueNotifyAsyncLoadComplete
-	this->mResObj = EngineApi::MFindObject<UClass>(nullptr, *mAssetRef.ToString());
+	this->mResObj = EngineApi::FindObject<UClass>(nullptr, *mAssetRef.ToString());
 
 	//if (nullptr != mResObj)
 	if (ensure(this->mResObj))
