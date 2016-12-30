@@ -6,7 +6,6 @@
 #include "UtilContainers.h"
 #include "UILoadingItem.h"
 #include "Common.h"
-#include "LocalFileSys.h"
 #include "LoadParam.h"
 #include "UIAttrItem.h"
 #include "RefCountResLoadResultNotify.h"

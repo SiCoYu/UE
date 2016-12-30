@@ -1,7 +1,8 @@
 ﻿#include "MyProject.h"
 #include "MFileSys.h"
 #include "Containers/UnrealString.h"		// FString
-#include "HAL/PlatformFilemanager.h"	   // FPlatformFileManager
+#include "HAL/PlatformFilemanager.h"		// FPlatformFileManager
+#include "IPlatformFileSandboxWrapper.h"	// FSandboxPlatformFile
 
 std::string MFileSys::msPersistentDataPath = "";
 std::string MFileSys::msStreamingAssetsPath = "";
@@ -47,7 +48,7 @@ std::string MFileSys::getLocalReadDir()
 // 获取本地可以写的目录
 std::string MFileSys::getLocalWriteDir()
 {
-	return mPersistentDataPath;
+	return msPersistentDataPath;
 }
 
 void MFileSys::modifyLoadParam(std::string resPath, LoadParam* param)

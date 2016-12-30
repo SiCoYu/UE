@@ -2,7 +2,7 @@
 #define __Common_H
 
 /**
- * @brief 公用的头文件
+ * @brief 全局变量需要的头文件
  */
 #include "Ctx.h"
 #include "EngineData.h"

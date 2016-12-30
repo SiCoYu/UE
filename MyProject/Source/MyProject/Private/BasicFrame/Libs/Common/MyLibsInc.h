@@ -2,7 +2,7 @@
 #define __MyLibsInc_H
 
 /**
- * @brief 最小 MyLibsInc 包含头文件
+ * @brief 整个库包含头文件
  */
 
 
