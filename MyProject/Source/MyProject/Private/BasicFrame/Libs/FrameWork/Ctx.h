@@ -28,6 +28,7 @@ class ClassAssetInsMgr;
 class ObjectAssetInsMgr;
 class FMyStreamableManager;
 class DownloadMgr;
+class MFileSys;
 
 #ifdef ENABLE_UNIT_TEST
 	class TestMain;
@@ -52,9 +53,7 @@ protected:
 
 	FMyStreamableManager* mMyStreamableManager;
 	DownloadMgr* mDownloadMgr;
-
-	// F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
-	FSandboxPlatformFile* mSandboxPlatformFile;
+	MFileSys* mFileSys;
 
 #ifdef USE_EXTERN_THREAD
 	StdoutLog* mStdoutLog;
@@ -90,10 +89,9 @@ public:
 	ClassAssetInsMgr* getClassAssetInsMgr();
 	ObjectAssetInsMgr* getObjectAssetInsMgr();
 
-	FSandboxPlatformFile* getSandboxPlatformFile();
-
 	FMyStreamableManager* getMyStreamableManager();
 	DownloadMgr* getDownloadMgr();
+	MFileSys* getFileSys();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -124,5 +122,6 @@ public:
 #define GSandboxPlatformFile GCtx->getSandboxPlatformFile()
 #define GMyStreamableManager GCtx->getMyStreamableManager()
 #define GDownloadMgr GCtx->getDownloadMgr()
+#define GFileSys GCtx->getFileSys()
 
 #endif				// __CTX_H

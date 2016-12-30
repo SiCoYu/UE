@@ -9,7 +9,7 @@
 #include "NetDispList.h"
 #include "LogSys.h"
 #include "Config.h"
-#include "LocalFileSys.h"
+#include "MFileSys.h"
 #include "PoolSys.h"
 
 #include "ResLoadMgr.h"
@@ -51,9 +51,6 @@ Ctx::~Ctx()
 	delete this->mNetDispList;
 	delete this->mShareData;
 	delete this->mConfig;
-	delete this->mLocalFileSys;
-
-	delete this->mSandboxPlatformFile;
 
 	delete this->mResLoadMgr;
 	delete this->mClassAssetInsMgr;
@@ -61,6 +58,7 @@ Ctx::~Ctx()
 
 	delete this->mMyStreamableManager;
 	delete this->mPoolSys;
+	delete this->mFileSys;
 }
 
 void Ctx::construct()
@@ -69,6 +67,7 @@ void Ctx::construct()
 	this->mNetDispList = new NetDispList();
 	this->mLogSys = new LogSys();
 	this->mEngineData = new EngineData();
+
 #ifdef USE_EXTERN_THREAD
 	this->mStdoutLog = new StdoutLog();
 #endif
@@ -81,17 +80,16 @@ void Ctx::construct()
 	this->mUiMgr = new UIMgr();
 	this->mTableSys = new TableSys();
 	this->mConfig = new Config();
-	this->mLocalFileSys = new LocalFileSys();
+
 #ifdef	USE_EXTERN_THREAD
 	this->mNetMgr = new NetMgr(getStdLog());
 #else
 	this->mNetMgr = new NetMgr();
 #endif
 
-	// 初始化 SandBox 文件系统
-	this->mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	this->mPoolSys = new PoolSys();
 	this->mDownloadMgr = new DownloadMgr();
+	this->mFileSys = new MFileSys()
 }
 
 void Ctx::init()
@@ -103,12 +101,7 @@ void Ctx::init()
 	this->mObjectAssetInsMgr->init();
 	this->mPoolSys->init();
 	this->mDownloadMgr->init();
-
-	// 初始化 SandBox 文件系统
-	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
-	//FString OutputDirectory = GetOutputDirectoryOverride();
-	FString OutputDirectory = FPaths::GameDir();
-	this->mSandboxPlatformFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
+	this->mFileSys->init();
 
 	// 挂在目录
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
@@ -216,11 +209,6 @@ ResLoadMgr* Ctx::getResLoadMgr()
 	return this->mResLoadMgr;
 }
 
-FSandboxPlatformFile* Ctx::getSandboxPlatformFile()
-{
-	return this->mSandboxPlatformFile;
-}
-
 FMyStreamableManager* Ctx::getMyStreamableManager()
 {
 	return this->mMyStreamableManager;
@@ -229,6 +217,11 @@ FMyStreamableManager* Ctx::getMyStreamableManager()
 DownloadMgr* Ctx::getDownloadMgr()
 {
 	return this->mDownloadMgr;
+}
+
+MFileSys* Ctx::getFileSys()
+{
+	return this->mFileSys;
 }
 
 void Ctx::testApi()

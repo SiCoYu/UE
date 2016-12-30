@@ -1,24 +1,56 @@
 ﻿#include "MyProject.h"
-#include "LocalFileSys.h"
+#include "MFileSys.h"
+#include "FContainers/UnrealString.h"		// FString
+#include "HAL/PlatformFilemanager.h"	   // FPlatformFileManager
 
-LocalFileSys::LocalFileSys()
+std::string MFileSys::msPersistentDataPath = "";
+std::string MFileSys::msStreamingAssetsPath = "";
+
+MFileSys::MFileSys()
 {
-	
+	// 初始化 SandBox 文件系统
+	this->mSandboxPlatformFile = new FSandboxPlatformFile(false);
+}
+
+void MFileSys::init()
+{
+	// 初始化 SandBox 文件系统
+	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
+	//FString OutputDirectory = GetOutputDirectoryOverride();
+	FString OutputDirectory = FPaths::GameDir();
+	this->mSandboxPlatformFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
+
+	MFileSys::initFileSys();
+}
+
+void MFileSys::dispose()
+{
+	delete this->mSandboxPlatformFile;
+}
+
+FSandboxPlatformFile* MFileSys::getSandboxPlatformFile()
+{
+	return this->mSandboxPlatformFile;
+}
+
+void MFileSys::initFileSys()
+{
+
 }
 
 // 获取本地可以读取的目录，但是不能写
-std::string LocalFileSys::getLocalReadDir()
+std::string MFileSys::getLocalReadDir()
 {
 	return "";
 }
 
 // 获取本地可以写的目录
-std::string LocalFileSys::getLocalWriteDir()
+std::string MFileSys::getLocalWriteDir()
 {
 	return mPersistentDataPath;
 }
 
-void LocalFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
+void MFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 {
 //#if PKG_RES_LOAD
 //	param.mOrigPath = resPath;             // 记录原始的资源名字
