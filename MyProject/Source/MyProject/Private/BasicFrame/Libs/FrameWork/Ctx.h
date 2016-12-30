@@ -30,7 +30,7 @@ class FMyStreamableManager;
 class DownloadMgr;
 
 #ifdef ENABLE_UNIT_TEST
-	class Test;
+	class TestMain;
 #endif
 
 class Ctx : public Singleton<Ctx>
@@ -61,7 +61,7 @@ protected:
 #endif
 
 #ifdef ENABLE_UNIT_TEST
-	Test* mTest;
+	TestMain* mTestMain;
 #endif
 
 public:

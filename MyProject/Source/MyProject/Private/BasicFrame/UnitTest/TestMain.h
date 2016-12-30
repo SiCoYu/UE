@@ -1,11 +1,11 @@
-#ifndef __Test_H
-#define __Test_H
+#ifndef __TestMain_H
+#define __TestMain_H
 
 class TestExtern;
 class TestSocket;
 class TestUI;
 
-class Test
+class TestMain
 {
 public:
 	TestExtern* mTestExtern;
@@ -17,4 +17,4 @@ public:
 	void runTest();
 };
 
-#endif				// __TEST_H
+#endif				// __TestMain_H

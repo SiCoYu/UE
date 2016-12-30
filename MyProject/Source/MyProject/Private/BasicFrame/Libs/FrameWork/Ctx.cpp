@@ -44,7 +44,7 @@ Ctx::~Ctx()
 #endif
 
 #ifdef ENABLE_UNIT_TEST
-	delete this->mTest;
+	delete this->mTestMain;
 #endif
 
 	delete this->mLogSys;
@@ -117,8 +117,8 @@ void Ctx::beginPlay()
 	this->init();
 
 #ifdef ENABLE_UNIT_TEST
-	this->mTest = new Test();
-	this->mTest->runTest();
+	this->mTestMain = new TestMain();
+	this->mTestMain->runTest();
 #endif
 
 	//testApi();
