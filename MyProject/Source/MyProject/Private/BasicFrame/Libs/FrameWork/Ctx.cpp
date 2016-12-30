@@ -89,7 +89,7 @@ void Ctx::construct()
 
 	this->mPoolSys = new PoolSys();
 	this->mDownloadMgr = new DownloadMgr();
-	this->mFileSys = new MFileSys()
+	this->mFileSys = new MFileSys();
 }
 
 void Ctx::init()

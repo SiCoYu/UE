@@ -68,3 +68,8 @@ FString UtilPath::FPaths_ConvertToSandboxPath(FString FullFilename)
 {
 	return FPaths::ConvertToSandboxPath(FullFilename, TEXT("aaaa"));
 }
+
+void UtilPath::NormalizeDirectoryName(FString& InPath)
+{
+	FPaths::NormalizeDirectoryName(InPath);
+}

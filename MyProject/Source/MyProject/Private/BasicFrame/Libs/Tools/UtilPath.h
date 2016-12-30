@@ -26,6 +26,7 @@ public:
 	static FString ConvertToSandboxPath(FString FullFilename);
 
 	static FString FPaths_ConvertToSandboxPath(FString FullFilename);
+	static void NormalizeDirectoryName(FString& InPath);
 };
 
 // Ä£°åÊµÏÖ

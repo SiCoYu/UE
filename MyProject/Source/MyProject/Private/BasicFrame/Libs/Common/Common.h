@@ -14,7 +14,6 @@
 #include "ShareData.h"
 #include "NetDispList.h"
 #include "Config.h"
-#include "LocalFileSys.h"
 #include "PoolSys.h"
 
 #include "ResLoadMgr.h"

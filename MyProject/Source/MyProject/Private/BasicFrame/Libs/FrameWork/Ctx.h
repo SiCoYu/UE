@@ -112,7 +112,6 @@ public:
 #define GShareData GCtx->getShareData()
 #define GNetDispList GCtx->getNetDispList()
 #define GCfg GCtx->getConfig()
-#define GLocalFileSys GCtx->getLocalFileSys()
 #define GPoolSys GCtx->getPoolSys()
 #define GResLoadMgr GCtx->getResLoadMgr()
 
@@ -123,5 +122,6 @@ public:
 #define GMyStreamableManager GCtx->getMyStreamableManager()
 #define GDownloadMgr GCtx->getDownloadMgr()
 #define GFileSys GCtx->getFileSys()
+#define GSandboxPlatformFile GCtx->getFileSys()->getSandboxPlatformFile()
 
 #endif				// __CTX_H

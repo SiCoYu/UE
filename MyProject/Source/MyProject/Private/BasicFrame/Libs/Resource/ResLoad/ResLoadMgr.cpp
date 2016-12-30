@@ -89,11 +89,11 @@ void ResLoadMgr::loadData(LoadParam* param)
 
 	if (eStreamingAssets == param->mResLoadType)
 	{
-		param->mPath = UtilPath::Combine(GLocalFileSys->getLocalReadDir(), param->mPath);
+		param->mPath = UtilPath::Combine(GFileSys->getLocalReadDir(), param->mPath);
 	}
 	else if (ePersistentData == param->mResLoadType)
 	{
-		param->mPath = UtilPath::Combine(GLocalFileSys->getLocalWriteDir(), param->mPath);
+		param->mPath = UtilPath::Combine(GFileSys->getLocalWriteDir(), param->mPath);
 	}
 	else if (eLoadWeb == param->mResLoadType)
 	{

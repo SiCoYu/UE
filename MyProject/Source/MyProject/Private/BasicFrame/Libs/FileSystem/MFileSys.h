@@ -7,16 +7,17 @@ class LoadParam;
 class FSandboxPlatformFile;
 
 /**
-    * @brief 本地文件系统
-    */
+ * @brief 本地文件系统
+ */
 class MFileSys
 {
 public:
-	static std::string msPersistentDataPath;
-	static std::string msStreamingAssetsPath;
+	static std::string msPersistentDataPath;		// 可写目录
+	static std::string msStreamingAssetsPath;		// 只读目录
 
 protected:
 	// Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
+	// Engine\Source\Editor\UnrealEd\Private\CookOnTheFlyServer.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;
 
 public:
@@ -26,7 +27,10 @@ public:
 
 	FSandboxPlatformFile* getSandboxPlatformFile();
 
+protected:
 	static void initFileSys();
+
+public:
     // 获取本地可以读取的目录，但是不能写
 	static std::string getLocalReadDir();
     // 获取本地可以写的目录
