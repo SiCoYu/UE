@@ -83,6 +83,10 @@ public class MyProject : ModuleRules
                 // Test ÇøÓò
                 "MyProject/Private/BasicFrame/UnitTest",
                 "MyProject/Private/BasicFrame/UnitTest/TestUI",
+                "MyProject/Private/BasicFrame/UnitTest/TestDownload",
+                "MyProject/Private/BasicFrame/UnitTest/TestNetClientBuffer",
+                "MyProject/Private/BasicFrame/UnitTest/TestOther",
+                "MyProject/Private/BasicFrame/UnitTest/TestBase",
 
                 // Example
                 "MyProject/Private/BasicFrame/Example/AccessMesh",

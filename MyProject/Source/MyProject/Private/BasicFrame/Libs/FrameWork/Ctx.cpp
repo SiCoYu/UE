@@ -16,11 +16,12 @@
 #include "ClassAssetInsMgr.h"
 #include "ObjectAssetInsMgr.h"
 #include "MyStreamableManager.h"
+#include "DownloadMgr.h"
 
 #include "Ctx.h"
 
 #ifdef ENABLE_UNIT_TEST
-	#include "Test.h"
+	#include "TestMain.h"
 #endif
 
 // Æ«ÌØ»¯
@@ -221,6 +222,11 @@ FSandboxPlatformFile* Ctx::getSandboxPlatformFile()
 FMyStreamableManager* Ctx::getMyStreamableManager()
 {
 	return this->mMyStreamableManager;
+}
+
+DownloadMgr* Ctx::getDownloadMgr()
+{
+	return this->mDownloadMgr;
 }
 
 void Ctx::testApi()

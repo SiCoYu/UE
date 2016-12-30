@@ -1,8 +1,8 @@
 #include "MyProject.h"
-#include "Test.h"
+#include "TestMain.h"
 #include "TestExtern.h"
 #include "TestSocket.h"
-#include "TestUI/TestUI.h"
+#include "TestUI.h"
 
 #include "gtest/gtest.h"
 #include "GrobalEvent.h"

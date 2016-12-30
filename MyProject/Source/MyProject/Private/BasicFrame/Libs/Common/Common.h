@@ -21,5 +21,6 @@
 #include "ClassAssetInsMgr.h"
 #include "ObjectAssetInsMgr.h"
 #include "MyStreamableManager.h"
+#include "DownloadMgr.h"
 
 #endif

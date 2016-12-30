@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "HttpWeb.h"
+#include "UtilStr.h"
 
 HttpWeb::HttpWeb()
 {
@@ -32,11 +33,17 @@ void HttpWeb::sendJson(FString JsonStr)
 	HttpRequest->ProcessRequest();
 }
 
-void HttpWeb::download(FString path)
+void HttpWeb::download(std::string path)
+{
+	FString fStrPath = UtilStr::ConvStdStr2FString(path);
+	this->download(fStrPath, true);
+}
+
+void HttpWeb::download(FString path, bool)
 {
 	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
 	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/octet-stream; charset=utf-8"));
-	HttpRequest->SetURL(TEXT("http://localhost/mywebpage.php"));
+	HttpRequest->SetURL(TEXT("http://127.0.0.1/GameWebServer/a.txt"));
 	HttpRequest->SetVerb(TEXT("GET"));
 	HttpRequest->OnProcessRequestComplete().BindRaw(this, &HttpWeb::HttpCompleteCallback);
 	HttpRequest->ProcessRequest();

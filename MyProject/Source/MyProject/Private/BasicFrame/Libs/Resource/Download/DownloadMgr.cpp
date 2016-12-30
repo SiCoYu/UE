@@ -184,7 +184,7 @@ void DownloadMgr::downloadWithNotDownload(DownloadParam* param)
 }
 
 // 通用类型，需要自己设置很多参数
-void DownloadMgr::load(DownloadParam* param)
+void DownloadMgr::download(DownloadParam* param)
 {
     ++mLoadingDepth;
     if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, param->mResUniqueId))
@@ -206,12 +206,12 @@ void DownloadMgr::load(DownloadParam* param)
 DownloadItem* DownloadMgr::getAndDownload(DownloadParam* param)
 {
     //param.resolvePath();
-    load(param);
+	download(param);
     return getDownloadItem(param->mResUniqueId);
 }
 
 // 这个卸载有引用计数，如果有引用计数就卸载不了
-void DownloadMgr::unload(std::string resUniqueId, EventDispatchDelegate loadEventHandle)
+void DownloadMgr::undownload(std::string resUniqueId, EventDispatchDelegate loadEventHandle)
 {
     if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
     {

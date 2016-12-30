@@ -56,10 +56,10 @@ protected:
 
 public:
     // 通用类型，需要自己设置很多参数
-	void load(DownloadParam* param);
+	void download(DownloadParam* param);
 	DownloadItem* getAndDownload(DownloadParam* param);
     // 这个卸载有引用计数，如果有引用计数就卸载不了
-	void unload(std::string resUniqueId, EventDispatchDelegate loadEventHandle);
+	void undownload(std::string resUniqueId, EventDispatchDelegate loadEventHandle);
     // 卸载所有的资源
 	void unloadAll();
 

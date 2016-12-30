@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "HttpWebDownloadItem.h"
+#include "HttpWeb.h"
 
 HttpWebDownloadItem::HttpWebDownloadItem()
 {
@@ -8,10 +9,13 @@ HttpWebDownloadItem::HttpWebDownloadItem()
 
 void HttpWebDownloadItem::load()
 {
-	DownloadItem::load();
+	Super::load();
 
     //Ctx.mInstance.mCoroutineMgr.StartCoroutine(coroutWebDown());
     //Ctx.mInstance.m_TaskQueue.push(this);
+
+	mHttpWeb = new HttpWeb();
+	mHttpWeb->download("");
 }
 
 // 线程下载
