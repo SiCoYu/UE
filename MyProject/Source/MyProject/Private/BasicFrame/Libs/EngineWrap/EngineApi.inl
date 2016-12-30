@@ -46,6 +46,30 @@ T* EngineApi::MFindObject(UObject* Outer, const TCHAR* Name, bool ExactClass)
 }
 
 template< class T >
+T* EngineApi::MLoadObject(UObject* Outer, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
+{
+	UClass* Class = T::StaticClass();
+	Class->GetDefaultObject(); // force the CDO to be created if it hasn't already
+	T* ObjectPtr = LoadObject<T>(Outer, Name, Filename, LoadFlags, Sandbox);
+	if (ObjectPtr)
+	{
+		ObjectPtr->AddToRoot();
+	}
+	return ObjectPtr;
+}
+
+template< class T >
+UClass* EngineApi::LoadClass(UObject* Outer, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
+{
+	UClass* LoadedClass = ::LoadClass<T>(Outer, Name, Filename, LoadFlags, Sandbox);
+	if (LoadedClass)
+	{
+		LoadedClass->AddToRoot();
+	}
+	return LoadedClass;
+}
+
+template< class T >
 T* EngineApi::MDuplicateObject(T const* SourceObject, UObject* Outer, const FName Name)
 {
 	return DuplicateObject(SourceObject, Outer, Namer);
