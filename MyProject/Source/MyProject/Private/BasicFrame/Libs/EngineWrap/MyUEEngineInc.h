@@ -59,4 +59,23 @@
 #include "HAL/FileManager.h"		// IFileManager
 #include "Serialization/Archive.h"	// FArchive
 
+ /**
+ * NOTE: The objects these macros declare have very short lifetimes. They are
+ * meant to be used as parameters to functions. You cannot assign a variable
+ * to the contents of the converted string as the object will go out of
+ * scope and the string released.
+ *
+ * NOTE: The parameter you pass in MUST be a proper string, as the parameter
+ * is typecast to a pointer. If you pass in a char, not char* it will compile
+ * and then crash at runtime.
+ *
+ * Usage:
+ *
+ *		SomeApi(TCHAR_TO_ANSI(SomeUnicodeString));
+ *
+ *		const char* SomePointer = TCHAR_TO_ANSI(SomeUnicodeString); <--- Bad!!!
+ */
+// Engine\Source\Runtime\Core\Public\Containers\StringConv.h
+#include "Containers/StringConv.h"	// FTCHARToUTF8\FUTF8ToTCHAR\TCHAR_TO_ANSI\ANSI_TO_TCHAR\TCHAR_TO_UTF8\UTF8_TO_TCHAR
+
 #endif

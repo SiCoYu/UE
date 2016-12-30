@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "GObject.h"
-#include "IDispatchObject"
+#include "IDispatchObject.h"
 #include <string>
 #include "EventDispatchDelegate.h"
 #include "GkEncode.h"
@@ -19,47 +19,64 @@ class FArchive;
    FPlatformFileManager 是平台相关的具体文件系统操作
    class SANDBOXFILE_API FSandboxPlatformFile : public IPlatformFile ，FSandboxPlatformFile 沙盒文件系统
  */
-class MDataStream : GObject, IDispatchObject
+class MDataStream : public GObject, public IDispatchObject
 {
-    enum FileOpState
-    {
-        eNoOp = 0,      // 无操作
-        eOpening = 1,   // 打开中
-        eOpenSuccess = 2,   // 打开成功
-        eOpenFail = 3,      // 打开失败
-        eOpenClose = 4,     // 关闭
-    }
-
-	enum FileMode
+	enum FileOpState
 	{
-
+		eNoOp = 0,      // 无操作
+		eOpening = 1,   // 打开中
+		eOpenSuccess = 2,   // 打开成功
+		eOpenFail = 3,      // 打开失败
+		eOpenClose = 4,     // 关闭
 	};
 
-	enum FileAccess
+	enum MFileMode
 	{
+		eCreateNew = 1,
+		eCreate = 2,
+		eOpen = 3,
+		eOpenOrCreate = 4,
+		eTruncate = 5,
+		eAppend = 6
+	};
 
+	enum MFileAccess
+	{
+		eRead = 1,
+		eWrite = 2,
+		eReadWrite = 3
+	};
+
+	enum MSeekOrigin
+	{
+		eBegin = 0,
+		eCurrent = 1,
+		eEnd = 2
 	};
 
 protected:
-	FArchive* 
+	FArchive* mFileStream;
 	std::string mFilePath;
-    eFileOpState mFileOpState;
+	MFileMode mMode;
+	MFileAccess mAccess;
+    FileOpState mFileOpState;
     bool mIsSyncMode;
-    AddOnceAndCallOnceEventDispatch* mOpenedEvtDisp;   // 文件打开结束分发，主要是 WWW 是异步读取本地文件的，因此需要确保文件被打开成功
+    AddOnceAndCallOnceEventDispatch* mOpenedEvtDisp;   // 文件打开结束分发
 
 	std::string mText;
     unsigned char* mBytes;
+	TArray<uint8> mArrayBuffer;
 
     /**
-        * @brief 仅支持同步操作，目前无视参数 isSyncMode 和 evtDisp。FileMode.CreateNew 如果文件已经存在就抛出异常，FileMode.Append 和 FileAccess.Write 要同时使用
-        */
+     * @brief 仅支持同步操作，目前无视参数 isSyncMode 和 evtDisp。FileMode.CreateNew 如果文件已经存在就抛出异常，FileMode.Append 和 FileAccess.Write 要同时使用
+     */
 public:
-	MDataStream(std::string filePath, EventDispatchDelegate openedDisp = nullptr, bool isSyncMode = true);
+	MDataStream(std::string filePath, EventDispatchDelegate openedDisp = nullptr, MFileMode mode = eOpen, MFileAccess access = eRead, bool isSyncMode = true);
 
 public:
-	void seek(long offset, SeekOrigin origin);
+	void seek(long offset, MSeekOrigin origin);
 	void addOpenedHandle(EventDispatchDelegate openedDisp = nullptr);
-    void dispose()
+	void dispose();
 
 protected:
 	void syncOpenFileStream();

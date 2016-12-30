@@ -97,10 +97,14 @@ FText UtilStr::ConvChar2FText(const char* pchar)
 	return FText::FromString(pchar);
 }
 
+const TCHAR* UtilStr::convFStr2TCHAR(FString& fStr)
+{
+	return *fStr;
+}
+
 const TCHAR* UtilStr::convStdStr2TCHAR(std::string& stdStr)
 {
 	const TCHAR* retChar = nullptr;
-	FString fStr = UtilStr::ConvStdStr2FString(stdStr);
-	retChar = *fStr;
+	retChar = ANSI_TO_TCHAR(stdStr.c_str());
 	return retChar;
 }

@@ -2,23 +2,28 @@
 #include "MDataStream.h"
 #include "HAL/FileManager.h"		// IFileManager
 #include "Serialization/Archive.h"	// FArchive
+#include "UtilStr.h"
+#include "Misc/FileHelper.h"		// FFileHelper
+#include "AddOnceAndCallOnceEventDispatch.h"
 
-MDataStream::MDataStream(std::string filePath, EventDispatchDelegate openedDisp, bool isSyncMode)
+MDataStream::MDataStream(std::string filePath, EventDispatchDelegate openedDisp, MFileMode mode, MFileAccess access, bool isSyncMode)
 {
     this->mTypeId = "MDataStream";
 
     mFilePath = filePath;
+	mMode = mode;
+	mAccess = access;
     mFileOpState = eNoOp;
     mIsSyncMode = isSyncMode;
 
     checkAndOpen(openedDisp);
 }
 
-void MDataStream::seek(long offset, SeekOrigin origin)
+void MDataStream::seek(long offset, MSeekOrigin origin)
 {
     if(mFileOpState == eOpenSuccess)
     {
-         mFileStream.Seek(offset, origin);
+         mFileStream->Seek(offset);
     }
 }
 
@@ -44,9 +49,18 @@ void MDataStream::syncOpenFileStream()
 		mFileOpState = eOpening;
 		//try
 		//{
-		IFileManager::Get().CreateFileReader
-			mFileStream = new FileStream(mFilePath, mMode, mAccess);
-			mFileOpState = eOpenSuccess;
+		FString path = UtilStr::ConvStdStr2FString(mFilePath);
+
+		if (MFileAccess.eRead == mAccess)
+		{
+			mFileStream = IFileManager::Get().CreateFileReader(*path);
+		}
+		else
+		{
+			mFileStream = IFileManager::Get().CreateFileWriter(*path);
+		}
+
+		mFileOpState = eOpenSuccess;
 		//}
 		//catch (Exception exp)
 		//{
@@ -60,9 +74,9 @@ void MDataStream::syncOpenFileStream()
 // 异步打开结束
 void MDataStream::onAsyncOpened()
 {
-	if (mOpenedEvtDisp != null)
+	if (mOpenedEvtDisp != nullptr)
 	{
-		mOpenedEvtDisp.dispatchEvent(this);
+		mOpenedEvtDisp->dispatchEvent(this);
 	}
 }
 
@@ -70,10 +84,10 @@ void MDataStream::checkAndOpen(EventDispatchDelegate openedDisp)
 {
 	if (openedDisp != nullptr)
 	{
-		this.addOpenedHandle(openedDisp);
+		this->addOpenedHandle(openedDisp);
 	}
 
-	if (mFileOpState == eFileOpState.eNoOp)
+	if (mFileOpState == eNoOp)
 	{
 		syncOpenFileStream();
 	}
@@ -81,18 +95,18 @@ void MDataStream::checkAndOpen(EventDispatchDelegate openedDisp)
 
 bool MDataStream::isValid()
 {
-	return mFileOpState == eFileOpState.eOpenSuccess;
+	return mFileOpState == eOpenSuccess;
 }
 
 // 获取总共长度
 int MDataStream::getLength()
 {
 	int len = 0;
-	if (mFileOpState == eFileOpState.eOpenSuccess)
+	if (mFileOpState == eOpenSuccess)
 	{
-		if (mFileStream != null)
+		if (mFileStream != nullptr)
 		{
-			len = (int)mFileStream.Length;
+			len = (int)mFileStream->TotalSize();
 		}
 	}
 
@@ -101,53 +115,35 @@ int MDataStream::getLength()
 
 void MDataStream::close()
 {
-	if (mFileOpState == eFileOpState.eOpenSuccess)
+	if (mFileOpState == eOpenSuccess)
 	{
-		if (mFileStream != null)
+		bool Success = false;
+		if (mFileStream != nullptr)
 		{
-			mFileStream.Close();
-			mFileStream.Dispose();
-			mFileStream = null;
+			Success = mFileStream->Close();
+			delete mFileStream;
+			mFileStream = nullptr;
 		}
 
-		mFileOpState = eFileOpState.eOpenClose;
-		mFileOpState = eFileOpState.eNoOp;
+		if (Success)
+		{
+			mFileOpState = eOpenClose;
+			mFileOpState = eNoOp;
+		}
+		else
+		{
+			mFileOpState = eOpenFail;
+		}
 	}
 }
 
 std::string MDataStream::readText(int offset, int count, GkEncode encode)
 {
-	checkAndOpen();
-
-	string retStr = "";
-	byte[] bytes = null;
-
-	if (encode == null)
+	std::string retStr = "";
+	FString fStr;
+	if (FFileHelper::LoadFileToString(fStr, UtilStr::convStdStr2TCHAR(mFilePath)))
 	{
-		encode = Encoding.UTF8;
-	}
-
-	if (count == 0)
-	{
-		count = getLength();
-	}
-
-	if (mFileOpState == eFileOpState.eOpenSuccess)
-	{
-		if (mFileStream.CanRead)
-		{
-			try
-			{
-				bytes = new byte[count];
-				mFileStream.Read(bytes, 0, count);
-
-				retStr = encode.GetString(bytes);
-			}
-			catch (Exception err)
-			{
-
-			}
-		}
+		retStr = UtilStr::ConvFString2StdStr(fStr);
 	}
 
 	return retStr;
@@ -155,84 +151,37 @@ std::string MDataStream::readText(int offset, int count, GkEncode encode)
 
 unsigned char* MDataStream::readByte(int offset, int count)
 {
-	checkAndOpen();
-
 	if (count == 0)
 	{
 		count = getLength();
 	}
 
-	byte[] bytes = null;
+	unsigned char* bytes = nullptr;
 
-	if (mFileStream.CanRead)
+	if (FFileHelper::LoadFileToArray(mArrayBuffer, UtilStr::convStdStr2TCHAR(mFilePath)))
 	{
-		try
-		{
-			bytes = new byte[count];
-			mFileStream.Read(bytes, 0, count);
-		}
-		catch (Exception err)
-		{
-
-		}
+		bytes = mArrayBuffer.GetData();
 	}
 
 	return bytes;
 }
 
-void MDataStream::writeText(string text, GkEncode gkEncode)
+void MDataStream::writeText(std::string text, GkEncode gkEncode)
 {
-	Encoding encode = UtilApi.convGkEncode2EncodingEncoding(gkEncode);
-
+	//Encoding encode = UtilApi.convGkEncode2EncodingEncoding(gkEncode);
+	EEncodingOptions::Type encode = EEncodingOptions::ForceUTF8;
 	checkAndOpen();
-
-	if (mFileStream.CanWrite)
-	{
-		byte[] bytes = encode.GetBytes(text);
-		if (bytes != null)
-		{
-			try
-			{
-				mFileStream.Write(bytes, 0, bytes.Length);
-			}
-			catch (Exception err)
-			{
-
-			}
-		}
-	}
+	FFileHelper::SaveStringToFile(UtilStr::ConvStdStr2FString(text), UtilStr::convStdStr2TCHAR(mFilePath), encode);
 }
 
 void MDataStream::writeByte(unsigned char* bytes, int offset, int count)
 {
-	checkAndOpen();
-
-	if (mFileStream.CanWrite)
-	{
-		if (bytes != null)
-		{
-			if (count == 0)
-			{
-				count = bytes.Length;
-			}
-
-			if (count != 0)
-			{
-				try
-				{
-					mFileStream.Write(bytes, offset, count);
-				}
-				catch (Exception err)
-				{
-
-				}
-			}
-		}
-	}
+	TArrayView<const uint8> Array;
+	FFileHelper::SaveArrayToFile(Array, UtilStr::convStdStr2TCHAR(mFilePath));
 }
 
 void MDataStream::writeLine(std::string text, GkEncode gkEncode)
 {
-	text = text + UtilApi.CR_LF;
+	//text = text + UtilApi.CR_LF;
 	writeText(text, gkEncode);
 }
