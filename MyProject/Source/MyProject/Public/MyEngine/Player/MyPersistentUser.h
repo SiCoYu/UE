@@ -1,6 +1,10 @@
 #pragma once
 #include "MyPersistentUser.generated.h"
 
+/**
+ * @url https://docs.unrealengine.com/latest/INT/Gameplay/SaveGame/Code/index.html
+ */
+
 UCLASS()
 class UMyPersistentUser : public USaveGame
 {
