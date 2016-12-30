@@ -64,9 +64,10 @@ public class MyProject : ModuleRules
 
                 "MyProject/Private/BasicFrame/Libs/ObjectPool",
                 "MyProject/Private/BasicFrame/Libs/MsgRoute",
-                "MyProject/Private/BasicFrame/Libs/LocalFileSystem",
+                "MyProject/Private/BasicFrame/Libs/FileSystem",
                 "MyProject/Private/BasicFrame/Libs/Math",
                 "MyProject/Private/BasicFrame/Libs/Task",
+                "MyProject/Private/BasicFrame/Libs/Core",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",

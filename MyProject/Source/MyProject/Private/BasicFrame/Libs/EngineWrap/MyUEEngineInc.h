@@ -56,5 +56,7 @@
 
 #include "UObject/WeakObjectPtr.h"	// FWeakObjectPtr
 #include "UObject/Class.h"	// UClass
+#include "HAL/FileManager.h"		// IFileManager
+#include "Serialization/Archive.h"	// FArchive
 
 #endif
