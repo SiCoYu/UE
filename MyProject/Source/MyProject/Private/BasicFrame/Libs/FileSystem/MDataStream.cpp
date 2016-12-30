@@ -51,7 +51,7 @@ void MDataStream::syncOpenFileStream()
 		//{
 		FString path = UtilStr::ConvStdStr2FString(mFilePath);
 
-		if (MFileAccess.eRead == mAccess)
+		if (eRead == mAccess)
 		{
 			mFileStream = IFileManager::Get().CreateFileReader(*path);
 		}
@@ -169,7 +169,7 @@ unsigned char* MDataStream::readByte(int offset, int count)
 void MDataStream::writeText(std::string text, GkEncode gkEncode)
 {
 	//Encoding encode = UtilApi.convGkEncode2EncodingEncoding(gkEncode);
-	EEncodingOptions::Type encode = EEncodingOptions::ForceUTF8;
+	FFileHelper::EEncodingOptions::Type encode = FFileHelper::EEncodingOptions::ForceUTF8;
 	checkAndOpen();
 	FFileHelper::SaveStringToFile(UtilStr::ConvStdStr2FString(text), UtilStr::convStdStr2TCHAR(mFilePath), encode);
 }
