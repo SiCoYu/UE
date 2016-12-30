@@ -91,6 +91,7 @@ void Ctx::construct()
 	// 初始化 SandBox 文件系统
 	this->mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	this->mPoolSys = new PoolSys();
+	this->mDownloadMgr = new DownloadMgr();
 }
 
 void Ctx::init()
@@ -101,6 +102,7 @@ void Ctx::init()
 	this->mClassAssetInsMgr->init();
 	this->mObjectAssetInsMgr->init();
 	this->mPoolSys->init();
+	this->mDownloadMgr->init();
 
 	// 初始化 SandBox 文件系统
 	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
