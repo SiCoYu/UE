@@ -13,7 +13,7 @@ public:
 	TestUI* mTestUI;
 
 public:
-	Test();
+	TestMain();
 	void runTest();
 };
 

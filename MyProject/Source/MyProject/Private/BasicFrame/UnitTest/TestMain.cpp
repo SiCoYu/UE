@@ -11,14 +11,14 @@
 #include <shellapi.h>
 #include "Windows/HideWindowsPlatformTypes.h"
 
-Test::Test()
+TestMain::TestMain()
 {
 	mTestExtern = new TestExtern();
 	mTestSocket = new TestSocket();
 	mTestUI = new TestUI();
 }
 
-void Test::runTest()
+void TestMain::runTest()
 {
 	const TCHAR* CmdLine = GetCommandLine();
 	LPWSTR *szArgList;

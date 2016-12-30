@@ -2,9 +2,8 @@
 
 enum DownloadType
 {
-	eWWW,
 	eHttpWeb,
-	eTotal
+	eDownloadTypeTotal
 };
 
 #include <string>
