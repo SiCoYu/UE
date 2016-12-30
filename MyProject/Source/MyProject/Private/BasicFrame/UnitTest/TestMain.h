@@ -4,6 +4,7 @@
 class TestExtern;
 class TestSocket;
 class TestUI;
+class TestDownload;
 
 class TestMain
 {
@@ -11,6 +12,7 @@ public:
 	TestExtern* mTestExtern;
 	TestSocket* mTestSocket;
 	TestUI* mTestUI;
+	TestDownload* mTestDownload;
 
 public:
 	TestMain();

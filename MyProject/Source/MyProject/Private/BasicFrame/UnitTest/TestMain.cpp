@@ -6,6 +6,7 @@
 
 #include "gtest/gtest.h"
 #include "GrobalEvent.h"
+#include "TestDownload.h"
 
 #include "Windows/AllowWindowsPlatformTypes.h"
 #include <shellapi.h>
@@ -16,6 +17,7 @@ TestMain::TestMain()
 	mTestExtern = new TestExtern();
 	mTestSocket = new TestSocket();
 	mTestUI = new TestUI();
+	mTestDownload = new TestDownload();
 }
 
 void TestMain::runTest()
@@ -32,4 +34,6 @@ void TestMain::runTest()
 	RUN_ALL_TESTS();
 
 	mTestUI->run();
+
+	mTestDownload->run();
 }
