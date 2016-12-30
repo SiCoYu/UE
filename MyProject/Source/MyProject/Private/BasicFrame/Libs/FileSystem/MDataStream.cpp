@@ -176,7 +176,7 @@ void MDataStream::writeText(std::string text, GkEncode gkEncode)
 
 void MDataStream::writeByte(unsigned char* bytes, int offset, int count)
 {
-	TArrayView<const uint8> Array;
+	TArrayView<const uint8> Array = MakeArrayView(bytes + offset, count);
 	FFileHelper::SaveArrayToFile(Array, UtilStr::convStdStr2TCHAR(mFilePath));
 }
 
