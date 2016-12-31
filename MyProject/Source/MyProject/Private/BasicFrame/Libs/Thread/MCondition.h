@@ -1,5 +1,5 @@
-﻿#ifndef __MCONDITION_H
-#define __MCONDITION_H
+﻿#ifndef __MCondition_H
+#define __MCondition_H
 
 #include <string>
 

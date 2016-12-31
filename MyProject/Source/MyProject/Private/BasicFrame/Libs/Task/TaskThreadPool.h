@@ -3,6 +3,7 @@
 #include "MList.h"
 
 class TaskThread;
+class TaskQueue;
 
 class TaskThreadPool
 {
@@ -15,4 +16,4 @@ public:
 public:
 	void initThreadPool(int numThread, TaskQueue* taskQueue);
 	void notifyIdleThread();
-}
+};

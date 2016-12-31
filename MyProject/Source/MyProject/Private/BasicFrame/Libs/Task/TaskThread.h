@@ -23,6 +23,6 @@ public:
     /**
      *brief 线程回调函数
      */
-	virtual void threadHandle() override;
+	virtual uint32 Run(void) override;
 	bool notifySelf();
 };

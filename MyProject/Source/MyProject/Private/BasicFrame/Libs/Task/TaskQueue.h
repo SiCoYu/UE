@@ -4,9 +4,9 @@
 #include "ITask.h"
 #include <string>
 
-class TaskThreadPool
+class TaskThreadPool;
 
-class TaskQueue : LockQueue<ITask>
+class TaskQueue : public LockQueue<ITask>
 {
 	typedef class LockQueue<ITask> Super;
 

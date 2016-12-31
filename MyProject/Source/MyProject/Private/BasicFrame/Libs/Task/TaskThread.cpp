@@ -1,8 +1,10 @@
 ﻿#include "MyProject.h"
 #include "TaskThread.h"
+#include "MCondition.h"
+#include "TaskQueue.h"
 
-TaskThread::TaskThread(std::string name, TaskQueue taskQueue)
-    : base(null, null)
+TaskThread::TaskThread(std::string name, TaskQueue* taskQueue)
+    : Super(name)
 {
     mTaskQueue = taskQueue;
     mCondition = new MCondition(name);
@@ -11,27 +13,27 @@ TaskThread::TaskThread(std::string name, TaskQueue taskQueue)
 /**
  *brief 线程回调函数
  */
-void TaskThread::threadHandle()
+uint32 TaskThread::Run(void)
 {
     while (!mIsExitFlag)
     {
-        mCurTask = mTaskQueue.pop();
-        if(mCurTask != default(ITask))
+        mCurTask = mTaskQueue->pop();
+        if(mCurTask != nullptr)
         {
-            mCurTask.runTask();
+            mCurTask->runTask();
         }
         else
         {
-            mCondition.wait();
+            mCondition->wait();
         }
     }
 }
 
 bool TaskThread::notifySelf()
 {
-    if(mCondition.canEnterWait)
+    if(mCondition->canEnterWait)
     {
-        mCondition.notifyAll();
+        mCondition->notifyAll();
         return true;
     }
 

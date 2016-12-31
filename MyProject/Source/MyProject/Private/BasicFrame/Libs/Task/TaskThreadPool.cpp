@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "TaskThreadPool.h"
 #include "UtilStr.h"
+#include "TaskThread.h"
+#include "TaskQueue.h"
 
 TaskThreadPool::TaskThreadPool()
 {
