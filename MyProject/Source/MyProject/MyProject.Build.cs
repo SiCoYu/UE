@@ -68,6 +68,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Math",
                 "MyProject/Private/BasicFrame/Libs/Task",
                 "MyProject/Private/BasicFrame/Libs/Core",
+                "MyProject/Private/BasicFrame/Libs/Core/Object",
+                "MyProject/Private/BasicFrame/Libs/Core/Templates",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",
