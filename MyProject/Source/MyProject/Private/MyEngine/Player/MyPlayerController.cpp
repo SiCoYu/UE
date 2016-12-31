@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "MyPlayerController.h"
 #include "EngineApi.h"
 #include "MyFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
@@ -7,7 +8,6 @@
 #include "MyPlayerCameraManager.h"
 #include "Common.h"
 #include "UITestCanvas.h"	// UUITestCanvas
-#include "MyPlayerController.h"
 
 AMyPlayerController::AMyPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -298,4 +298,41 @@ void AMyPlayerController::BeginPlay_UMGWidgets()
 		//Show the Cursor.
 		bShowMouseCursor = true;
 	}
+}
+
+#include "TaskGraphSystem.h"
+// https://wiki.unrealengine.com/Multi-Threading:_Task_Graph_System
+//~~~ In the Game Thread ~~~
+
+//timer to check when threads are done
+//Please note timers must be in the game thread / main / normal thread
+void AMyPlayerController::VictoryCheckAllThreadsDone()
+{
+	if (VictoryMultiThreadTest::TasksAreComplete())
+	{
+		//Clear Timer
+		//GetWorldTimerManager().ClearTimer(this,
+		//	&AMyPlayerController::VictoryCheckAllThreadsDone);
+		GetWorldTimerManager().ClearTimer(OneSecTimerHandle);
+
+		ClientMessage("Multi Thread Test Done!");
+
+		//VShow("Prime Numbers Found:");
+		for (int32 v = 0; v < VictoryMultiThreadTest::PrimeNumbers.Num(); v++)
+		{
+			//VShow(FString::FromInt(v) + FString("~ "), VictoryMultiThreadTest::PrimeNumbers[v]);
+		}
+	}
+}
+
+//Starting the Tasks / Threads
+void AMyPlayerController::StartThreadTest()
+{
+	VictoryMultiThreadTest::ThePC = this;
+	VictoryMultiThreadTest::FindPrimes(50000); //first 50,000 prime numbers
+	//Start a timer to check when all the threads are done!
+	//GetWorldTimerManager().SetTimer(this,
+	//	&AMyPlayerController::VictoryCheckAllThreadsDone, 1, true);
+	FTimerDelegate TimerDelegate = FTimerDelegate::CreateUObject(this, &AMyPlayerController::VictoryCheckAllThreadsDone);
+	EngineApi::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 1, true);
 }

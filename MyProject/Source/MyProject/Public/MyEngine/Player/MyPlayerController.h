@@ -3,6 +3,7 @@
 #include "MyProject.h"
 #include "PlayerPawnData.h"
 #include "MyPawn.h"
+#include "Engine/EngineTypes.h"	// FTimerHandle
 #include "MyPlayerController.generated.h"
 
 /**
@@ -104,4 +105,16 @@ public:
 
 	// Variable to hold the widget After Creating it.
 	UUserWidget* MyMainMenu;
+
+public:
+	// https://wiki.unrealengine.com/Multi-Threading:_Task_Graph_System
+	FTimerHandle OneSecTimerHandle;
+
+	//~~~ In the Game Thread ~~~
+
+	//timer to check when threads are done
+	//Please note timers must be in the game thread / main / normal thread
+	void VictoryCheckAllThreadsDone();
+	//Starting the Tasks / Threads
+	void StartThreadTest();
 };

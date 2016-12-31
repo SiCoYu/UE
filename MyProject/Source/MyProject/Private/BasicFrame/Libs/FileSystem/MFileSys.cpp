@@ -49,7 +49,8 @@ void MFileSys::initFileSys()
 
 	MFileSys::msPersistentDataPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
 
-	MFileSys::msStreamingAssetsPath = UtilStr::ConvFString2StdStr(UtilPath::GameContentDir());
+	CacheFolderPath = UtilPath::GameContentDir();
+	MFileSys::msStreamingAssetsPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
 }
 
 // 获取本地可以读取的目录，但是不能写

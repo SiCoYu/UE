@@ -9,8 +9,8 @@
  * @brief https://wiki.unrealengine.com/Multi-Threading:_Task_Graph_System
  */
 
-class TaskGraphSystem
+class TaskGraphSystemTest
 {
 public:
-	TaskGraphSystem();
+	TaskGraphSystemTest();
 };

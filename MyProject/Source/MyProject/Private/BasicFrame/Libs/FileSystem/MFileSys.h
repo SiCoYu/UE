@@ -17,6 +17,7 @@ public:
 	static std::string msStreamingAssetsPath;		// 只读目录
 
 protected:
+	// 编辑器 Sandbox 文件系统
 	// Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
 	// Engine\Source\Editor\UnrealEd\Private\CookOnTheFlyServer.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;
