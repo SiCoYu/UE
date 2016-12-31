@@ -1,5 +1,7 @@
 #pragma once
 
-#include "Templates/SharedPointer.h"
+//#include "Templates/SharedPointer.h"	// TSharedPtr
+#include <memory>	// shared_ptr
 
-#define MySharedPtr TSharedPtr
+#define MySharedPtr std::shared_ptr
+#define MyWeakPtr std::weak_ptr
