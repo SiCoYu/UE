@@ -300,7 +300,7 @@ void AMyPlayerController::BeginPlay_UMGWidgets()
 	}
 }
 
-#include "TaskGraphSystem.h"
+#include "VictoryMultiThreadTest.h"
 // https://wiki.unrealengine.com/Multi-Threading:_Task_Graph_System
 //~~~ In the Game Thread ~~~
 

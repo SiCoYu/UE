@@ -13,8 +13,6 @@
 #include "Containers/Array.h"				// TArray
 #include "MyPlayerController.h"
 
-class AMyPlayerController;
-
 //Multi thread Test, finding prime number
 namespace VictoryMultiThreadTest
 {
