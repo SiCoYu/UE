@@ -34,7 +34,8 @@ LOCAL_SRC_FILES += \
 LOCAL_CPPFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 
-include $(BUILD_SHARED_LIBRARY)
+#include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 
 ###########################
 #
@@ -45,4 +46,5 @@ LOCAL_MODULE := TestStatic
 
 LOCAL_MODULE_FILENAME := libTestStatic
 
-include $(BUILD_STATIC_LIBRARY)
+#include $(BUILD_STATIC_LIBRARY)
+include $(BUILD_SHARED_LIBRARY)
