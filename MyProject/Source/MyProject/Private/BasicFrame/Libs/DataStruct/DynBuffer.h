@@ -38,7 +38,7 @@ public:
 		return mBuffer;
 	}
 
-	void setBuff(char* value, uint32 len)
+	void setBuffer(char* value, uint32 len)
 	{
 		mBuffer = value;
 		mCapacity = len;

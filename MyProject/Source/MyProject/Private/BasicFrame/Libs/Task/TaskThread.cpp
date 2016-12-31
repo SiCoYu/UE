@@ -27,6 +27,8 @@ uint32 TaskThread::Run(void)
             mCondition->wait();
         }
     }
+
+	return 0;
 }
 
 bool TaskThread::notifySelf()
