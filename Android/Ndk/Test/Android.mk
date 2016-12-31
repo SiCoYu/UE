@@ -8,9 +8,9 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := Lua
+LOCAL_MODULE := TestDll
 
-LOCAL_MODULE_FILENAME := libLua
+LOCAL_MODULE_FILENAME := libTestDll
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/Src/TestA \
@@ -35,3 +35,14 @@ LOCAL_CPPFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 
 include $(BUILD_SHARED_LIBRARY)
+
+###########################
+#
+# static library
+#
+###########################
+LOCAL_MODULE := TestStatic
+
+LOCAL_MODULE_FILENAME := libTestStatic
+
+include $(BUILD_STATIC_LIBRARY)
