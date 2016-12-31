@@ -1,0 +1,5 @@
+class TestC
+{
+public:
+	TestC();
+};

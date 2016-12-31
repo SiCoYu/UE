@@ -1,0 +1,5 @@
+class TestB
+{
+public:
+	TestB();
+};

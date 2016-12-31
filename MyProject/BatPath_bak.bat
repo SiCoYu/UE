@@ -1,1 +1,1 @@
-set CMAKEPATH="D:\Program Files (x86)\cmake-3.1.0-win32-x86\bin\cmake.exe"
+set CMAKEPATH="F:\ProgramFiles\cmake-3.7.0-win64-x64\bin\cmake.exe"
