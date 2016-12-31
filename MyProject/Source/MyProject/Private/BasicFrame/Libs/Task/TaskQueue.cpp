@@ -9,7 +9,7 @@ TaskQueue::TaskQueue(std::string name)
 	mTaskThreadPool = new TaskThreadPool();
 }
 
-void TaskQueue::push(ITask item)
+void TaskQueue::push(ITask* item)
 {
 	Super::push(item);
 

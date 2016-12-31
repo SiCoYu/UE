@@ -31,7 +31,7 @@ uint32 TaskThread::Run(void)
 
 bool TaskThread::notifySelf()
 {
-    if(mCondition->canEnterWait)
+    if(mCondition->getCanEnterWait())
     {
         mCondition->notifyAll();
         return true;

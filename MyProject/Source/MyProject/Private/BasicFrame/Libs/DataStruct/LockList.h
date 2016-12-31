@@ -5,6 +5,7 @@
 #include "MMutex.h"
 #include "Platform.h"
 #include <string>
+#include "MLock.h"
 
 /**
  * @brief 线程安全列表， T 是 Object ，便于使用 Equal 比较地址

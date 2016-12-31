@@ -6,9 +6,9 @@
 
 class TaskThreadPool;
 
-class TaskQueue : public LockQueue<ITask>
+class TaskQueue : public LockQueue<ITask*>
 {
-	typedef class LockQueue<ITask> Super;
+	typedef class LockQueue<ITask*> Super;
 
 public:
     TaskThreadPool* mTaskThreadPool;
@@ -17,5 +17,5 @@ public:
 	TaskQueue(std::string name);
 
 public:
-	void push(ITask item);
+	void push(ITask* item);
 };
