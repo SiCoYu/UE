@@ -12,9 +12,11 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := Lua
 
+LOCAL_MODULE_FILENAME := libLua
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/src
 
-LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
+#LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 
 LOCAL_SRC_FILES := \
 	$(subst $(LOCAL_PATH)/,, \
@@ -32,11 +34,15 @@ include $(BUILD_SHARED_LIBRARY)
 # static library
 #
 ###########################
+LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := Lua_static
 
 LOCAL_MODULE_FILENAME := libLua
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/src
 
 LOCAL_SRC_FILES := \
 	$(subst $(LOCAL_PATH)/,, \
