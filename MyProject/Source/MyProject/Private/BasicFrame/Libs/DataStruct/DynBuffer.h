@@ -65,7 +65,7 @@ public:
 			return;
 		}
 
-		char* tmpbuff = new char[value];   // 分配新的空间
+		T* tmpbuff = new T[value];   // 分配新的空间
 		memcpy(tmpbuff, mBuffer, mCapacity);
 
 		delete[] mBuffer;

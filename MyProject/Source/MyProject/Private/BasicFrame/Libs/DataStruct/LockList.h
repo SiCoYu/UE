@@ -99,7 +99,7 @@ public:
 				{
 					if (index != mDynamicBuffer.mSize - 1 && 1 != mDynamicBuffer.mSize) // 如果删除不是最后一个元素或者总共就大于一个元素
 					{
-						Array.Copy(mDynamicBuffer.mBuffer, index + 1, mDynamicBuffer.mBuffer, index, mDynamicBuffer.mSize - 1 - index);
+						Array::Copy(mDynamicBuffer.mBuffer, index + 1, mDynamicBuffer.mBuffer, index, mDynamicBuffer.mSize - 1 - index);
 					}
 
 					--mDynamicBuffer.mSize;
@@ -107,7 +107,7 @@ public:
 			}
 			else
 			{
-				mRetItem = default(T);
+				mRetItem = nullptr;
 			}
 
 			return mRetItem;
