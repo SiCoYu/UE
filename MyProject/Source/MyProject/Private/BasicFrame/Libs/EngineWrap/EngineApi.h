@@ -284,6 +284,12 @@ public:
 	static T* DuplicateObject(T const* SourceObject, UObject* Outer, const FName Name = NAME_None);
 
 	static FString GetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/);
+
+	template< class T >
+	inline static T* FindSceneActor(const TCHAR* Name);
+
+	template< class T >
+	inline static T* FindSceneObject(const TCHAR* Name);
 };
 
 #include "EngineApi.inl"

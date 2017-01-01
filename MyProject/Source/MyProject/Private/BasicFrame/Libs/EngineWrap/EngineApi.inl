@@ -90,3 +90,46 @@ T* EngineApi::NewObject(UObject* Outer, FName Name, EObjectFlags Flags, UObject*
 {
 	return ::NewObject<T>(Outer, Name, Flags, Template, bCopyTransientsFromClassDefaults, InInstanceGraph);
 }
+
+template< class T >
+T* EngineApi::FindSceneActor(const TCHAR* Name)
+{
+	T* actor = nullptr;
+	for (TActorIterator<T> ActorItr(EngineApi::GetWorld()); ActorItr; ++ActorItr)
+	{
+		actor = *ActorItr;
+
+		if(actor->GetFName() != Name)
+		{ 
+			actor = nullptr;
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	return actor;
+}
+
+template< class T >
+T* EngineApi::FindSceneObject(const TCHAR* Name)
+{
+	T* retObject = nullptr;
+
+	for (TObjectIterator<T> Itr; Itr; ++Itr)
+	{
+		retObject = *Itr;
+
+		if (retObject->GetFName() != Name)
+		{
+			retObject = nullptr;
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	return retObject;
+}
