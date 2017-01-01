@@ -49,38 +49,7 @@ public:
 		bool SoftSwingLimit = true, bool SoftTwistLimit = true,
 		const float SwingStiff = 0, const float SwingDamp = 0,
 		const float TwistStiff = 0, const float TwistDamp = 0
-		)
-	{
-		switch (S1Lim)
-		{
-		case 0: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Free, Swing1LimitAngle); break;
-		case 1: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Limited, Swing1LimitAngle); break;
-		case 2: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked, Swing1LimitAngle); break;
-		}
-		switch (S2Lim)
-		{
-		case 0: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Free, Swing2LimitAngle); break;
-		case 1: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Limited, Swing2LimitAngle); break;
-		case 2: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Locked, Swing2LimitAngle); break;
-		}
-		switch (TLim)
-		{
-		case 0: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Free, TwistLimitAngle); break;
-		case 1: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Limited, TwistLimitAngle); break;
-		case 2: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked, TwistLimitAngle); break;
-		}
-
-		if (SoftSwingLimit) Constraint.bSwingLimitSoft_DEPRECATED = 1;
-		else Constraint.bSwingLimitSoft_DEPRECATED = 0;
-
-		if (SoftTwistLimit) Constraint.bTwistLimitSoft_DEPRECATED = 1;
-		else Constraint.bTwistLimitSoft_DEPRECATED = 0;
-
-		Constraint.SwingLimitStiffness_DEPRECATED = SwingStiff;
-		Constraint.SwingLimitDamping_DEPRECATED = SwingDamp;
-		Constraint.TwistLimitStiffness_DEPRECATED = TwistStiff;
-		Constraint.TwistLimitDamping_DEPRECATED = TwistDamp;
-	}
+		);
 
 	// https://wiki.unrealengine.com/TAssetPtr_and_Asynchronous_Asset_Loading
 public:
@@ -156,6 +125,14 @@ protected:
 	UFUNCTION()
 	void SomeFunction();
 	void SetTimer();
+
+public:
+	// Engine\Source\Runtime\Engine\Private\GameViewportClient.cpp
+	// FStringClassReference —”≥Ÿº”‘ÿ¿‡
+	UPROPERTY(config, EditAnywhere, Category = "Cursors", meta = (MetaClass = "UserWidget", ToolTip = "Widget to use when the Default Cursor is requested."))
+	FStringClassReference DelayLoadClass;
+
+	void DelayLoadClassHandle();
 };
 
 void AMyActor::SetLinearLimits(
@@ -196,4 +173,47 @@ void AMyActor::SetLinearLimits(
 
 	Constraint.LinearLimitStiffness_DEPRECATED = SoftStiffness;
 	Constraint.LinearLimitDamping_DEPRECATED = SoftDampening;
+}
+ 
+void AMyActor::SetAngularLimits(
+	FConstraintInstance& Constraint,
+	const uint8 S1Lim, const uint8 S2Lim, const uint8 TLim,
+	const float Swing1LimitAngle,
+	const float Swing2LimitAngle,
+	const float TwistLimitAngle,
+
+	bool SoftSwingLimit = true, bool SoftTwistLimit = true,
+	const float SwingStiff, const float SwingDamp,
+	const float TwistStiff, const float TwistDamp
+	)
+{
+	switch (S1Lim)
+	{
+	case 0: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Free, Swing1LimitAngle); break;
+	case 1: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Limited, Swing1LimitAngle); break;
+	case 2: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked, Swing1LimitAngle); break;
+	}
+	switch (S2Lim)
+	{
+	case 0: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Free, Swing2LimitAngle); break;
+	case 1: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Limited, Swing2LimitAngle); break;
+	case 2: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Locked, Swing2LimitAngle); break;
+	}
+	switch (TLim)
+	{
+	case 0: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Free, TwistLimitAngle); break;
+	case 1: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Limited, TwistLimitAngle); break;
+	case 2: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked, TwistLimitAngle); break;
+	}
+
+	if (SoftSwingLimit) Constraint.bSwingLimitSoft_DEPRECATED = 1;
+	else Constraint.bSwingLimitSoft_DEPRECATED = 0;
+
+	if (SoftTwistLimit) Constraint.bTwistLimitSoft_DEPRECATED = 1;
+	else Constraint.bTwistLimitSoft_DEPRECATED = 0;
+
+	Constraint.SwingLimitStiffness_DEPRECATED = SwingStiff;
+	Constraint.SwingLimitDamping_DEPRECATED = SwingDamp;
+	Constraint.TwistLimitStiffness_DEPRECATED = TwistStiff;
+	Constraint.TwistLimitDamping_DEPRECATED = TwistDamp;
 }

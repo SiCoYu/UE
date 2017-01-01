@@ -16,6 +16,7 @@
 #include "UObject/ConstructorHelpers.h"		// ConstructorHelpers
 #include "Templates/SubclassOf.h"	// TSubclassOf
 #include "UObject/UObjectGlobals.h"	// DuplicateObject
+#include "AudioDevice.h"		// FAudioDevice
 
 class UGameInstance;
 class UMyEngine;
@@ -26,6 +27,7 @@ struct FWorldContext;
 class UWorld;
 class AMyPlayerController;
 class UMyLocalPlayer;
+class UMyViewportClient;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -297,6 +299,25 @@ public:
 	inline static double Seconds();
 
 	inline static FWorldContext* GetWorldContextFromPIEInstance(const int32 PIEInstance = 0);
+
+	// Engine\Source\Editor\UnrealEd\Private\PlayLevel.cpp
+	// 设置音量大小
+	static inline void SetTransientMasterVolume(float size);
+
+	// Engine\Source\Runtime\Engine\Private\GameInstance.cpp
+	static UMyViewportClient* const GetGameViewportClient();
+	static FViewport* const GetViewport();
+	// Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+	static void EnableScreenSaver(bool bEnable);
+
+	// Engine\Source\Runtime\CoreUObject\Public\UObject\UObjectGlobals.h
+	int32 LoadPackageAsync(const FString& InName, FLoadPackageAsyncDelegate InCompletionDelegate, TAsyncLoadPriority InPackagePriority = 0, EPackageFlags InPackageFlags = PKG_None);
+
+	void CancelAsyncLoading();
+	float GetAsyncLoadPercentage(const FName& PackageName);
+	bool IsGarbageCollecting();
+	void CollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge = true);
+	bool TryCollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge = true);
 };
 
 #include "EngineApi.inl"

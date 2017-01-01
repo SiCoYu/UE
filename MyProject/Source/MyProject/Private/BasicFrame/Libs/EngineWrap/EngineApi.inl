@@ -150,3 +150,12 @@ UWorld* EngineApi::GetGlobalWorld()
 {
 	return GWorld;
 }
+
+void EngineApi::SetTransientMasterVolume(float size)
+{
+	UWorld* GameInstanceWorld = EngineApi::GetGlobalWorld();
+	if (FAudioDevice* GameInstanceAudioDevice = GameInstanceWorld->GetAudioDevice())
+	{
+		GameInstanceAudioDevice->SetTransientMasterVolume(0.0f);
+	}
+}

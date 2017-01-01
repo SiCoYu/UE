@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "EngineApi.h"
 #include "Common.h"
 #include "EngineData.h"
 #include "MyEngine.h"
@@ -14,7 +15,7 @@
 #include "MyLocalPlayer.h"	// UMyLocalPlayer
 #include "MyPlayerController.h"	// AMyPlayerController
 #include "UObject/UObjectGlobals.h"	// NewObject
-#include "EngineApi.h"
+#include "MyViewportClient.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -498,4 +499,58 @@ FString EngineApi::GetPathName(const UObject* curObj, const UObject* StopOuter/*
 	FString Result;
 	Result = curObj->GetPathName(StopOuter);
 	return Result;
+}
+
+UMyViewportClient* const EngineApi::GetGameViewportClient()
+{
+	UMyGameInstance* GameInstance = EngineApi::getGameInstance();
+	UMyViewportClient* const GameViewport = Cast<UMyViewportClient>(GameInstance->GetGameViewportClient());
+	return GameViewport;
+}
+
+FViewport* const EngineApi::GetViewport()
+{
+	UMyGameInstance* GameInstance = EngineApi::getGameInstance();
+	UGameViewportClient* const GameViewport = GameInstance->GetGameViewportClient();
+	if (GameViewport != NULL && GameViewport->Viewport != NULL)
+	{
+		return GameViewport->Viewport;
+	}
+
+	return nullptr;
+}
+
+void EngineApi::EnableScreenSaver(bool bEnable)
+{
+	GEngine->EnableScreenSaver(bEnable);
+}
+
+int32 LoadPackageAsync(const FString& InName, FLoadPackageAsyncDelegate InCompletionDelegate, TAsyncLoadPriority InPackagePriority, EPackageFlags InPackageFlags);
+{
+	::LoadPackageAsync(InName, InCompletionDelegate, InPackagePriority, InPackageFlags);
+}
+
+void EngineApi::CancelAsyncLoading()
+{
+	::CancelAsyncLoading();
+}
+
+float EngineApi::GetAsyncLoadPercentage(const FName& PackageName)
+{
+	::CancelAsyncLoading(PackageName);
+}
+
+bool EngineApi::IsGarbageCollecting()
+{
+	::CancelAsyncLoading();
+}
+
+void EngineApi::CollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
+{
+	::CancelAsyncLoading(KeepFlags, bPerformFullPurge);
+}
+
+bool EngineApi::TryCollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
+{
+	::CancelAsyncLoading(KeepFlags, bPerformFullPurge);
 }

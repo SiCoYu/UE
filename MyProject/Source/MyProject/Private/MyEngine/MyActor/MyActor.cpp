@@ -180,3 +180,11 @@ void AMyActor::SomeFunction()
 {
 
 }
+
+void AMyActor::DelayLoadClassHandle()
+{
+	if (DelayLoadClass.IsValid())
+	{
+		UClass* Class = DelayLoadClass.TryLoadClass<UUserWidget>();
+	}
+}

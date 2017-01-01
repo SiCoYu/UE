@@ -120,3 +120,9 @@ FText UtilStr::ConvFName2FText(FName& fName)
 	FText ret = FText::FromName(fName);
 	return ret;
 }
+
+FText UtilStr::ConvStdStr2FText(std::string& stdStr)
+{
+	FString fStr(stdStr.c_str());
+	return FText::FromString(fStr);
+}

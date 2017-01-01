@@ -43,6 +43,7 @@ public:
 	static const TCHAR* convStdStr2TCHAR(std::string& stdStr);
 	static FName ConvFText2FName(FText& fText);
 	static FText ConvFName2FText(FName& fName);
+	static FText ConvStdStr2FText(std::string& stdStr);
 };
 
 #endif

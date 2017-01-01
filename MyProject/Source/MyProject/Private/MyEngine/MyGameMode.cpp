@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "MyGameMode.h"
 #include "MyCharacter.h"
 #include "GameFramework/HUD.h"
 #include "MyHUD.h"
@@ -12,7 +13,8 @@
 #include "MyCharacter.h"
 #include "MyPlayerState.h"
 #include "MyGameState.h"
-#include "MyGameMode.h"
+#include "MyGameSession.h"
+#include "MySpectatorPawn.h"
 
 AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -54,6 +56,9 @@ AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 	if (psclassobj.Class != NULL)
 	PlayerStateClass = psclassobj.Class;
 	*/
+
+	GameSessionClass = AMyGameSession::StaticClass();
+	SpectatorClass = AMySpectatorPawn::StaticClass();
 }
 
 UClass* AMyGameMode::GetDefaultPawnClassForController(AController* InController)
