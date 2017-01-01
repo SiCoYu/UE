@@ -15,3 +15,19 @@ void UMyObjectDelegate::handle(int aaa, int bbb, bool ccc)
 {
 	
 }
+
+void UMyObjectDelegate::bindWorldHandle()
+{
+	FWorldDelegates::OnPreWorldInitialization.BindUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
+	FWorldDelegates::OnPostWorldInitialization.BindUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
+}
+
+void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const InitializationValues IVS)
+{
+
+}
+
+void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const InitializationValues IVS)
+{
+
+}

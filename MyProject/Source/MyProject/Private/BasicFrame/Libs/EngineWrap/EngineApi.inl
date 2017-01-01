@@ -133,3 +133,20 @@ T* EngineApi::FindSceneObject(const TCHAR* Name)
 
 	return retObject;
 }
+
+double EngineApi::Seconds()
+{
+	double StartTime = FPlatformTime::Seconds();
+	return StartTime;
+}
+
+FWorldContext* EngineApi::GetWorldContextFromPIEInstance(const int32 PIEInstance)
+{
+	FWorldContext* worldContext = GEngine->GetWorldContextFromPIEInstance(PIEInstance);
+	return worldContext;
+}
+
+UWorld* EngineApi::GetGlobalWorld()
+{
+	return GWorld;
+}

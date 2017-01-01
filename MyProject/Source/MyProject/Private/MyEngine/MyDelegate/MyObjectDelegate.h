@@ -2,6 +2,7 @@
 
 #include "UObject/Object.h"	// UObject
 #include "Delegates/DelegateCombinations.h"		// DECLARE_DELEGATE_ThreeParams
+#include "Engine/World.h"		// InitializationValues
 #include "MyObjectDelegate.generated.h"
 
 // 定义一个 Delegate 类型
@@ -21,4 +22,9 @@ public:
 
 public:
 	void handle(int aaa, int bbb, bool ccc);
+
+protected:
+	void bindWorldHandle();
+	void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const InitializationValues IVS = InitializationValues());
+	void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const InitializationValues IVS = InitializationValues());
 };

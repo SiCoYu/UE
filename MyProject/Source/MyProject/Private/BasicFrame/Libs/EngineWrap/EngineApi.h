@@ -73,6 +73,8 @@ public:
 	static ULevel* getPersistentLevelFromWorld();
 	static UGameInstance* getGameInstanceFromWorld();
 	static TArray<AActor*>& getActorArrayFromCurrentLevel();
+	// 这个接口只能在 World 加载完成后才能使用
+	static inline UWorld* GetGlobalWorld();
 
 	static void addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName);
 	static float getUTCSec();
@@ -290,6 +292,10 @@ public:
 
 	template< class T >
 	inline static T* FindSceneObject(const TCHAR* Name);
+
+	inline static double Seconds();
+
+	inline static FWorldContext* GetWorldContextFromPIEInstance(const int32 PIEInstance = 0);
 };
 
 #include "EngineApi.inl"

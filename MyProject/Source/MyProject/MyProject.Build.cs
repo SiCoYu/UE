@@ -26,6 +26,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/Network/Web",
                 "MyProject/Private/MyEngine/MyAnim",
                 "MyProject/Private/MyEngine/MyAsset",
+                "MyProject/Private/MyEngine/AI",
 
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",
