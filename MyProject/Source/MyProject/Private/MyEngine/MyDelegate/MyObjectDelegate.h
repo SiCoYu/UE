@@ -24,7 +24,15 @@ public:
 	void handle(int aaa, int bbb, bool ccc);
 
 protected:
-	void bindWorldHandle();
-	void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const InitializationValues IVS = InitializationValues());
-	void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const InitializationValues IVS = InitializationValues());
+	// Engine\Source\Runtime\Engine\Private\PhysicsEngine2D\Box2DIntegration.h
+	FWorldDelegates::FWorldInitializationEvent::FDelegate OnWorldCreatedDelegate;
+	FWorldDelegates::FWorldInitializationEvent::FDelegate OnWorldDestroyedDelegate;
+
+	FDelegateHandle OnWorldCreatedDelegateHandle;
+	FDelegateHandle OnWorldDestroyedDelegateHandle;
+
+	void addWorldHandle();
+	void removeWorldHandle();
+	void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const UWorld::InitializationValues IVS = UWorld::InitializationValues());
+	void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const UWorld::InitializationValues IVS = UWorld::InitializationValues());
 };

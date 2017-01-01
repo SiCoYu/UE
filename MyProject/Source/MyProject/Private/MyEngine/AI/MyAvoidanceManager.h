@@ -6,5 +6,5 @@
 UCLASS(config = Engine, Blueprintable)
 class UMyAvoidanceManager : public UAvoidanceManager
 {
-	GENERATED_BODY()
+	GENERATED_UCLASS_BODY()
 };

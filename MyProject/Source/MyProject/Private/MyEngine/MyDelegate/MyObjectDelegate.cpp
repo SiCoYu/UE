@@ -16,18 +16,35 @@ void UMyObjectDelegate::handle(int aaa, int bbb, bool ccc)
 	
 }
 
-void UMyObjectDelegate::bindWorldHandle()
+void UMyObjectDelegate::addWorldHandle()
 {
-	FWorldDelegates::OnPreWorldInitialization.BindUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
-	FWorldDelegates::OnPostWorldInitialization.BindUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
+	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
+	FWorldDelegates::OnPreWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
+	FWorldDelegates::OnPostWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
+
+	// Engine\Source\Runtime\Engine\Private\PhysicsEngine2D\Box2DIntegration.cpp
+	OnWorldCreatedDelegate = FWorldDelegates::FWorldInitializationEvent::FDelegate::CreateUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
+	OnWorldDestroyedDelegate = FWorldDelegates::FWorldInitializationEvent::FDelegate::CreateUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
+
+	OnWorldCreatedDelegateHandle = FWorldDelegates::OnPreWorldInitialization.Add(OnWorldCreatedDelegate);
+	OnWorldDestroyedDelegateHandle = FWorldDelegates::OnPostWorldInitialization.Add(OnWorldDestroyedDelegate);
 }
 
-void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const InitializationValues IVS)
+void UMyObjectDelegate::removeWorldHandle()
+{
+	FWorldDelegates::OnPreWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
+	FWorldDelegates::OnPostWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
+
+	FWorldDelegates::OnPreWorldInitialization.Remove(OnWorldCreatedDelegateHandle);
+	FWorldDelegates::OnPreWorldFinishDestroy.Remove(OnWorldDestroyedDelegateHandle);
+}
+
+void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const UWorld::InitializationValues IVS)
 {
 
 }
 
-void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const InitializationValues IVS)
+void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const UWorld::InitializationValues IVS)
 {
 
 }
