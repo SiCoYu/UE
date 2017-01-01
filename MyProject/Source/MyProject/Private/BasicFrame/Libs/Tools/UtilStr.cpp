@@ -108,3 +108,15 @@ const TCHAR* UtilStr::convStdStr2TCHAR(std::string& stdStr)
 	retChar = ANSI_TO_TCHAR(stdStr.c_str());
 	return retChar;
 }
+
+FName UtilStr::ConvFText2FName(FText& fText)
+{
+	FName ret = FName(*(fText.ToString()));
+	return ret;
+}
+
+FText UtilStr::ConvFName2FText(FName& fName)
+{
+	FText ret = FText::FromName(fName);
+	return ret;
+}

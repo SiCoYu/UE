@@ -18,10 +18,12 @@ void UMyObjectDelegate::handle(int aaa, int bbb, bool ccc)
 
 void UMyObjectDelegate::addWorldHandle()
 {
+	// 方法一
 	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
 	FWorldDelegates::OnPreWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
 	FWorldDelegates::OnPostWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
 
+	// 方法二
 	// Engine\Source\Runtime\Engine\Private\PhysicsEngine2D\Box2DIntegration.cpp
 	OnWorldCreatedDelegate = FWorldDelegates::FWorldInitializationEvent::FDelegate::CreateUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
 	OnWorldDestroyedDelegate = FWorldDelegates::FWorldInitializationEvent::FDelegate::CreateUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
@@ -32,9 +34,11 @@ void UMyObjectDelegate::addWorldHandle()
 
 void UMyObjectDelegate::removeWorldHandle()
 {
-	FWorldDelegates::OnPreWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
-	FWorldDelegates::OnPostWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
+	// 方法一，这种注册的事件不能移除
+	//FWorldDelegates::OnPreWorldInitialization.RemoveUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
+	//FWorldDelegates::OnPostWorldInitialization.RemoveUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
 
+	// 方法二
 	FWorldDelegates::OnPreWorldInitialization.Remove(OnWorldCreatedDelegateHandle);
 	FWorldDelegates::OnPreWorldFinishDestroy.Remove(OnWorldDestroyedDelegateHandle);
 }

@@ -349,6 +349,14 @@ void EngineApi::Format()
 	FText DayCount = FText::Format(NSLOCTEXT("Solus", "Day", "Day {DayCount}"), Args);
 	FText Health = FText::Format(NSLOCTEXT("Solus", "HP", "HP {HP}"), Args);
 
+	Args.Empty();
+	Args.Add(TEXT("GameName"), FText::FromString(FString("aaaaa")));
+	Args.Add(TEXT("PlatformBits"), FText::FromString(FString("bbbbb")));
+	Args.Add(TEXT("RHIName"), FText::FromName(FName("fffff")));
+
+
+	const FText ViewportName = FText::Format(NSLOCTEXT("UnrealEd", "PlayInEditor_RHI_F", "{GameName} Game Preview {NetMode} ({PlatformBits}-bit/{RHIName})"), Args);
+
 	////FFormatOrderedArguments Args;
 	//Args.Clear();
 	////Args.Add(SaveDetails.DayCount);    	//int32 

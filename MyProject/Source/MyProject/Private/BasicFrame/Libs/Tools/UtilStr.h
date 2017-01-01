@@ -3,7 +3,7 @@
 
 #include "CString.h"
 #include "UnrealString.h"	// FString
-#include "NameTypes.h"
+#include "NameTypes.h"		// FName
 #include "Internationalization/Text.h"	// FText
 #include <string>
 
@@ -41,6 +41,8 @@ public:
 
 	static const TCHAR* convFStr2TCHAR(FString& fStr);
 	static const TCHAR* convStdStr2TCHAR(std::string& stdStr);
+	static FName ConvFText2FName(FText& fText);
+	static FText ConvFName2FText(FName& fName);
 };
 
 #endif
