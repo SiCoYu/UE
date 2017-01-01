@@ -1,14 +1,15 @@
 #include "MyProject.h"
+#include "MyEngine.h"
 #include "Common.h"
 #include "MyPhysicsCollisionHandler.h"
-#include "MyEngine.h"
-
+#include "MyAvoidanceManager.h"
 
 UMyEngine::UMyEngine(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// 全局物理碰撞处理
 	PhysicsCollisionHandlerClass = UMyPhysicsCollisionHandler::StaticClass();
+	AvoidanceManagerClass = UMyAvoidanceManager::StaticClass();
 }
 
 void UMyEngine::Init(IEngineLoop* InEngineLoop)
