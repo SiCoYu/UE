@@ -5,3 +5,4 @@
  */
 #include "GObject.h"
 #include "MySharedPointer.h"
+#include "SafePointer.h"

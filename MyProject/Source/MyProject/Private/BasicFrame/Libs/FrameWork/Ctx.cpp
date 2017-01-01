@@ -40,7 +40,7 @@ Ctx::~Ctx()
 	this->mTableSys = nullptr;
 
 #ifdef USE_EXTERN_THREAD
-	this->mStdoutLog;
+	this->mStdoutLog = nullptr;
 #endif
 
 #ifdef ENABLE_UNIT_TEST
@@ -63,33 +63,33 @@ Ctx::~Ctx()
 
 void Ctx::construct()
 {
-	this->mShareData = MySharedPtr<ShareData>(new ShareData());
-	this->mNetDispList = MySharedPtr<NetDispList>(new NetDispList());
-	this->mLogSys = MySharedPtr<LogSys>(new LogSys());
-	this->mEngineData = MySharedPtr<EngineData>(new EngineData());
+	this->mShareData = MySharedPtr<ShareData>(SAFE_NEW ShareData());
+	this->mNetDispList = MySharedPtr<NetDispList>(SAFE_NEW NetDispList());
+	this->mLogSys = MySharedPtr<LogSys>(SAFE_NEW LogSys());
+	this->mEngineData = MySharedPtr<EngineData>(SAFE_NEW EngineData());
 
 #ifdef USE_EXTERN_THREAD
-	this->mStdoutLog = MySharedPtr<StdoutLog>(new StdoutLog());
+	this->mStdoutLog = MySharedPtr<StdoutLog>(SAFE_NEW StdoutLog());
 #endif
 
-	this->mMyStreamableManager = MySharedPtr<FMyStreamableManager>(new FMyStreamableManager());
-	this->mResLoadMgr = MySharedPtr<ResLoadMgr>(new ResLoadMgr());
-	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(new ClassAssetInsMgr());
-	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(new ObjectAssetInsMgr());
+	this->mMyStreamableManager = MySharedPtr<FMyStreamableManager>(SAFE_NEW FMyStreamableManager());
+	this->mResLoadMgr = MySharedPtr<ResLoadMgr>(SAFE_NEW ResLoadMgr());
+	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(SAFE_NEW ClassAssetInsMgr());
+	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(SAFE_NEW ObjectAssetInsMgr());
 
-	this->mUiMgr = MySharedPtr<UIMgr>(new UIMgr());
-	this->mTableSys = MySharedPtr<TableSys>(new TableSys());
-	this->mConfig = MySharedPtr<Config>(new Config());
+	this->mUiMgr = MySharedPtr<UIMgr>(SAFE_NEW UIMgr());
+	this->mTableSys = MySharedPtr<TableSys>(SAFE_NEW TableSys());
+	this->mConfig = MySharedPtr<Config>(SAFE_NEW Config());
 
 #ifdef	USE_EXTERN_THREAD
-	this->mNetMgr = MySharedPtr<NetMgr>(new NetMgr(getStdLog());
+	this->mNetMgr = MySharedPtr<NetMgr>(SAFE_NEW NetMgr(getStdLog());
 #else
-	this->mNetMgr = MySharedPtr<NetMgr>(new NetMgr());
+	this->mNetMgr = MySharedPtr<NetMgr>(SAFE_NEW NetMgr());
 #endif
 
-	this->mPoolSys = MySharedPtr<PoolSys>(new PoolSys());
-	this->mDownloadMgr = MySharedPtr<DownloadMgr>(new DownloadMgr());
-	this->mFileSys = MySharedPtr<MFileSys>(new MFileSys());
+	this->mPoolSys = MySharedPtr<PoolSys>(SAFE_NEW PoolSys());
+	this->mDownloadMgr = MySharedPtr<DownloadMgr>(SAFE_NEW DownloadMgr());
+	this->mFileSys = MySharedPtr<MFileSys>(SAFE_NEW MFileSys());
 }
 
 void Ctx::init()
@@ -153,7 +153,7 @@ MySharedPtr<INetMgr> Ctx::getNetMgr()
 }
 
 #ifdef USE_EXTERN_THREAD
-StdoutLog* Ctx::getStdLog()
+MySharedPtr<StdoutLog> Ctx::getStdLog()
 {
 	return this->mStdoutLog;
 }
@@ -169,7 +169,7 @@ MySharedPtr<LogSys> Ctx::getLogSys()
 	return this->mLogSys;
 }
 
-MySharedPtr<ShareData* Ctx::getShareData()
+MySharedPtr<ShareData> Ctx::getShareData()
 {
 	return this->mShareData;
 }
