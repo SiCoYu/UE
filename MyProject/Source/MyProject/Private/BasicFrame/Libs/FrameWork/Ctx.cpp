@@ -34,62 +34,62 @@ Ctx::Ctx()
 
 Ctx::~Ctx()
 {
-	delete this->mUiMgr;
-	delete this->mEngineData;
-	delete this->mNetMgr;
-	delete this->mTableSys;
+	this->mUiMgr = nullptr;
+	this->mEngineData = nullptr;
+	this->mNetMgr = nullptr;
+	this->mTableSys = nullptr;
 
 #ifdef USE_EXTERN_THREAD
-	delete this->mStdoutLog;
+	this->mStdoutLog;
 #endif
 
 #ifdef ENABLE_UNIT_TEST
-	delete this->mTestMain;
+	this->mTestMain = nullptr;
 #endif
 
-	delete this->mLogSys;
-	delete this->mNetDispList;
-	delete this->mShareData;
-	delete this->mConfig;
+	this->mLogSys = nullptr;
+	this->mNetDispList = nullptr;
+	this->mShareData = nullptr;
+	this->mConfig = nullptr;
 
-	delete this->mResLoadMgr;
-	delete this->mClassAssetInsMgr;
-	delete this->mObjectAssetInsMgr;
+	this->mResLoadMgr = nullptr;
+	this->mClassAssetInsMgr = nullptr;
+	this->mObjectAssetInsMgr = nullptr;
 
-	delete this->mMyStreamableManager;
-	delete this->mPoolSys;
-	delete this->mFileSys;
+	this->mMyStreamableManager = nullptr;
+	this->mPoolSys = nullptr;
+	this->mFileSys = nullptr;
 }
 
 void Ctx::construct()
 {
-	this->mShareData = new ShareData();
-	this->mNetDispList = new NetDispList();
-	this->mLogSys = new LogSys();
-	this->mEngineData = new EngineData();
+	this->mShareData = MySharedPtr<ShareData>(new ShareData());
+	this->mNetDispList = MySharedPtr<NetDispList>(new NetDispList());
+	this->mLogSys = MySharedPtr<LogSys>(new LogSys());
+	this->mEngineData = MySharedPtr<EngineData>(new EngineData());
 
 #ifdef USE_EXTERN_THREAD
-	this->mStdoutLog = new StdoutLog();
+	this->mStdoutLog = MySharedPtr<StdoutLog>(new StdoutLog());
 #endif
 
-	this->mMyStreamableManager = new FMyStreamableManager();
-	this->mResLoadMgr = new ResLoadMgr();
-	this->mClassAssetInsMgr = new ClassAssetInsMgr();
-	this->mObjectAssetInsMgr = new ObjectAssetInsMgr();
+	this->mMyStreamableManager = MySharedPtr<FMyStreamableManager>(new FMyStreamableManager());
+	this->mResLoadMgr = MySharedPtr<ResLoadMgr>(new ResLoadMgr());
+	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(new ClassAssetInsMgr());
+	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(new ObjectAssetInsMgr());
 
-	this->mUiMgr = new UIMgr();
-	this->mTableSys = new TableSys();
-	this->mConfig = new Config();
+	this->mUiMgr = MySharedPtr<UIMgr>(new UIMgr());
+	this->mTableSys = MySharedPtr<TableSys>(new TableSys());
+	this->mConfig = MySharedPtr<Config>(new Config());
 
 #ifdef	USE_EXTERN_THREAD
-	this->mNetMgr = new NetMgr(getStdLog());
+	this->mNetMgr = MySharedPtr<NetMgr>(new NetMgr(getStdLog());
 #else
-	this->mNetMgr = new NetMgr();
+	this->mNetMgr = MySharedPtr<NetMgr>(new NetMgr());
 #endif
 
-	this->mPoolSys = new PoolSys();
-	this->mDownloadMgr = new DownloadMgr();
-	this->mFileSys = new MFileSys();
+	this->mPoolSys = MySharedPtr<PoolSys>(new PoolSys());
+	this->mDownloadMgr = MySharedPtr<DownloadMgr>(new DownloadMgr());
+	this->mFileSys = MySharedPtr<MFileSys>(new MFileSys());
 }
 
 void Ctx::init()
@@ -112,7 +112,7 @@ void Ctx::beginPlay()
 	this->init();
 
 #ifdef ENABLE_UNIT_TEST
-	this->mTestMain = new TestMain();
+	this->mTestMain = MySharedPtr<TestMain>(new TestMain());
 	this->mTestMain->runTest();
 #endif
 
@@ -129,25 +129,25 @@ void Ctx::beginPlay()
 
 void Ctx::setUiMgr(UIMgr* uiMgr)
 {
-	this->mUiMgr = uiMgr;
+	this->mUiMgr.reset(uiMgr);
 }
 
-UIMgr* Ctx::getUIMgr()
+MySharedPtr<UIMgr> Ctx::getUIMgr()
 {
 	return this->mUiMgr;
 }
 
-EngineData* Ctx::getEngineData()
+MySharedPtr<EngineData> Ctx::getEngineData()
 {
 	return this->mEngineData;
 }
 
 void Ctx::setNetMgr(INetMgr* pINetMgr)
 {
-	this->mNetMgr = pINetMgr;
+	this->mNetMgr.reset(pINetMgr);
 }
 
-INetMgr* Ctx::getNetMgr()
+MySharedPtr<INetMgr> Ctx::getNetMgr()
 {
 	return this->mNetMgr;
 }
@@ -159,67 +159,67 @@ StdoutLog* Ctx::getStdLog()
 }
 #endif
 
-TableSys* Ctx::getTableSys()
+MySharedPtr<TableSys> Ctx::getTableSys()
 {
 	return this->mTableSys;
 }
 
-LogSys* Ctx::getLogSys()
+MySharedPtr<LogSys> Ctx::getLogSys()
 {
 	return this->mLogSys;
 }
 
-ShareData* Ctx::getShareData()
+MySharedPtr<ShareData* Ctx::getShareData()
 {
 	return this->mShareData;
 }
 
-NetDispList* Ctx::getNetDispList()
+MySharedPtr<NetDispList> Ctx::getNetDispList()
 {
 	return this->mNetDispList;
 }
 
-Config* Ctx::getConfig()
+MySharedPtr<Config> Ctx::getConfig()
 {
 	return this->mConfig;
 }
 
-LocalFileSys* Ctx::getLocalFileSys()
+MySharedPtr<LocalFileSys> Ctx::getLocalFileSys()
 {
 	return this->mLocalFileSys;
 }
 
-PoolSys* Ctx::getPoolSys()
+MySharedPtr<PoolSys> Ctx::getPoolSys()
 {
 	return this->mPoolSys;
 }
 
-ClassAssetInsMgr* Ctx::getClassAssetInsMgr()
+MySharedPtr<ClassAssetInsMgr> Ctx::getClassAssetInsMgr()
 {
 	return this->mClassAssetInsMgr;
 }
 
-ObjectAssetInsMgr* Ctx::getObjectAssetInsMgr()
+MySharedPtr<ObjectAssetInsMgr> Ctx::getObjectAssetInsMgr()
 {
 	return this->mObjectAssetInsMgr;
 }
 
-ResLoadMgr* Ctx::getResLoadMgr()
+MySharedPtr<ResLoadMgr> Ctx::getResLoadMgr()
 {
 	return this->mResLoadMgr;
 }
 
-FMyStreamableManager* Ctx::getMyStreamableManager()
+MySharedPtr<FMyStreamableManager> Ctx::getMyStreamableManager()
 {
 	return this->mMyStreamableManager;
 }
 
-DownloadMgr* Ctx::getDownloadMgr()
+MySharedPtr<DownloadMgr> Ctx::getDownloadMgr()
 {
 	return this->mDownloadMgr;
 }
 
-MFileSys* Ctx::getFileSys()
+MySharedPtr<MFileSys> Ctx::getFileSys()
 {
 	return this->mFileSys;
 }

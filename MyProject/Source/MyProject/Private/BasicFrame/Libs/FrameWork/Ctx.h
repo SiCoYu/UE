@@ -10,6 +10,7 @@
 
 #include "Containers/UnrealString.h"
 #include "IPlatformFileSandboxWrapper.h"
+#include "CoreInc.h"
 
 class UIMgr;
 class UGameInstance;
@@ -37,30 +38,30 @@ class MFileSys;
 class Ctx : public Singleton<Ctx>
 {
 protected:
-	UIMgr* mUiMgr;
-	EngineData* mEngineData;
-	INetMgr* mNetMgr;
-	TableSys* mTableSys;
-	LogSys* mLogSys;
-	ShareData* mShareData;
-	NetDispList* mNetDispList;
-	Config* mConfig;
-	LocalFileSys* mLocalFileSys;
-	PoolSys* mPoolSys;
-	ResLoadMgr* mResLoadMgr;
-	ClassAssetInsMgr* mClassAssetInsMgr;
-	ObjectAssetInsMgr* mObjectAssetInsMgr;
+	MySharedPtr<UIMgr> mUiMgr;
+	MySharedPtr<EngineData> mEngineData;
+	MySharedPtr<INetMgr> mNetMgr;
+	MySharedPtr<TableSys> mTableSys;
+	MySharedPtr<LogSys> mLogSys;
+	MySharedPtr<ShareData> mShareData;
+	MySharedPtr<NetDispList> mNetDispList;
+	MySharedPtr<Config> mConfig;
+	MySharedPtr<LocalFileSys> mLocalFileSys;
+	MySharedPtr<PoolSys> mPoolSys;
+	MySharedPtr<ResLoadMgr> mResLoadMgr;
+	MySharedPtr<ClassAssetInsMgr> mClassAssetInsMgr;
+	MySharedPtr<ObjectAssetInsMgr> mObjectAssetInsMgr;
 
-	FMyStreamableManager* mMyStreamableManager;
-	DownloadMgr* mDownloadMgr;
-	MFileSys* mFileSys;
+	MySharedPtr<FMyStreamableManager> mMyStreamableManager;
+	MySharedPtr<DownloadMgr> mDownloadMgr;
+	MySharedPtr<MFileSys> mFileSys;
 
 #ifdef USE_EXTERN_THREAD
-	StdoutLog* mStdoutLog;
+	MySharedPtr<StdoutLog*> mStdoutLog;
 #endif
 
 #ifdef ENABLE_UNIT_TEST
-	TestMain* mTestMain;
+	MySharedPtr<TestMain> mTestMain;
 #endif
 
 public:
@@ -72,26 +73,26 @@ public:
 	void beginPlay();
 
 	void setUiMgr(UIMgr* uiMgr);
-	UIMgr* getUIMgr();
+	MySharedPtr<UIMgr> getUIMgr();
 
-	EngineData* getEngineData();
+	MySharedPtr<EngineData> getEngineData();
 	void setNetMgr(INetMgr* pINetMgr);
-	INetMgr* getNetMgr();
-	TableSys* getTableSys();
-	LogSys* getLogSys();
-	ShareData* getShareData();
-	NetDispList* getNetDispList();
-	Config* getConfig();
-	LocalFileSys* getLocalFileSys();
-	PoolSys* getPoolSys();
-	ResLoadMgr* getResLoadMgr();
+	MySharedPtr<INetMgr> getNetMgr();
+	MySharedPtr<TableSys> getTableSys();
+	MySharedPtr<LogSys> getLogSys();
+	MySharedPtr<ShareData> getShareData();
+	MySharedPtr<NetDispList> getNetDispList();
+	MySharedPtr<Config> getConfig();
+	MySharedPtr<LocalFileSys> getLocalFileSys();
+	MySharedPtr<PoolSys> getPoolSys();
+	MySharedPtr<ResLoadMgr> getResLoadMgr();
 
-	ClassAssetInsMgr* getClassAssetInsMgr();
-	ObjectAssetInsMgr* getObjectAssetInsMgr();
+	MySharedPtr<ClassAssetInsMgr> getClassAssetInsMgr();
+	MySharedPtr<ObjectAssetInsMgr> getObjectAssetInsMgr();
 
-	FMyStreamableManager* getMyStreamableManager();
-	DownloadMgr* getDownloadMgr();
-	MFileSys* getFileSys();
+	MySharedPtr<FMyStreamableManager> getMyStreamableManager();
+	MySharedPtr<DownloadMgr> getDownloadMgr();
+	MySharedPtr<MFileSys> getFileSys();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
