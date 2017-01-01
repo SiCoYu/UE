@@ -366,8 +366,8 @@ void EngineApi::Format()
 	//Args.Add(SaveDetails.PlayerHealth); 	//int32
 	orderArgs.Add(1);    	//int32 
 	orderArgs.Add(1); 	//int32
-	const FText DayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
-	const FText Health 	 = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
+	const FText OrderDayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
+	const FText OrderHealth = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
 }
 
 FString EngineApi::GetWorldAssetPackageName(ULevelStreaming* StreamedLevel)
