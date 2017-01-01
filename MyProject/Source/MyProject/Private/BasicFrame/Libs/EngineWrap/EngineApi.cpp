@@ -336,8 +336,10 @@ void EngineApi::ClientMessage(FString str)
 	GEngineData->getMainPlayerController()->ClientMessage(str);
 }
 
+// FText::Format
 void EngineApi::Format()
 {
+	// {key} 通过 key 查找值
 	//Set Formatted FTEXT from variable data.
 	FFormatNamedArguments Args;
 	//Args.Add("DayCount", SaveDetails.DayCount);    	//int32 
@@ -357,14 +359,15 @@ void EngineApi::Format()
 
 	const FText ViewportName = FText::Format(NSLOCTEXT("UnrealEd", "PlayInEditor_RHI_F", "{GameName} Game Preview {NetMode} ({PlatformBits}-bit/{RHIName})"), Args);
 
-	////FFormatOrderedArguments Args;
-	//Args.Clear();
-	////Args.Add(SaveDetails.DayCount);    	//int32 
-	////Args.Add(SaveDetails.PlayerHealth); 	//int32
-	//Args.Add(1);    	//int32 
-	//Args.Add(1); 	//int32
-	//DayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
-	//Health 	 = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
+	// {key} 通过 key 查找值
+	FFormatOrderedArguments orderArgs;
+	orderArgs.Empty();
+	//Args.Add(SaveDetails.DayCount);    	//int32 
+	//Args.Add(SaveDetails.PlayerHealth); 	//int32
+	orderArgs.Add(1);    	//int32 
+	orderArgs.Add(1); 	//int32
+	const FText DayCount = FText::Format(NSLOCTEXT("Solus","Day","Day {0}"), Args);
+	const FText Health 	 = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
 }
 
 FString EngineApi::GetWorldAssetPackageName(ULevelStreaming* StreamedLevel)

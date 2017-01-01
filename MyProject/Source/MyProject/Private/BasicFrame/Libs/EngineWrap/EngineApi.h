@@ -182,6 +182,7 @@ public:
 	static void ClientMessage(FString str);
 
 	// https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
+	// FText::Format FText ∏Ò ΩªØ
 	static void Format();
 
 	// https://wiki.unrealengine.com/Streamed_Levels,_Test_If_Actor_Is_In_Level_Bounds
