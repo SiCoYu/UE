@@ -17,6 +17,8 @@ class UMyObjectDelegate : public UObject
 {
 	GENERATED_UCLASS_BODY()
 
+	using InitializationValues = UWorld::InitializationValues;
+
 public:
 	UMyObjectCommonDelegate MyObjectCommonDelegate;
 
@@ -33,6 +35,6 @@ protected:
 
 	void addWorldHandle();
 	void removeWorldHandle();
-	void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const UWorld::InitializationValues IVS = UWorld::InitializationValues());
-	void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const UWorld::InitializationValues IVS = UWorld::InitializationValues());
+	void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const InitializationValues IVS = InitializationValues());
+	void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const InitializationValues IVS = InitializationValues());
 };

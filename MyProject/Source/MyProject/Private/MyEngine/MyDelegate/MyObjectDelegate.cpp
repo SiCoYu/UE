@@ -39,12 +39,12 @@ void UMyObjectDelegate::removeWorldHandle()
 	FWorldDelegates::OnPreWorldFinishDestroy.Remove(OnWorldDestroyedDelegateHandle);
 }
 
-void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const UWorld::InitializationValues IVS)
+void UMyObjectDelegate::OnPreWorldInitialization(UWorld* world, const InitializationValues IVS)
 {
 
 }
 
-void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const UWorld::InitializationValues IVS)
+void UMyObjectDelegate::OnPostWorldInitialization(UWorld* world, const InitializationValues IVS)
 {
 
 }
