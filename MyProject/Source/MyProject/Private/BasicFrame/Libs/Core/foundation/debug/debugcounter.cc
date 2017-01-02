@@ -2,7 +2,7 @@
 //  debugcounter.cc
 //  (C) 2008 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "debug/debugcounter.h"
 #include "debug/debugserver.h"
 

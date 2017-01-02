@@ -2,7 +2,7 @@
 //  randomnumbertable.cc
 //  (C) 2008 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "util/randomnumbertable.h"
 
 namespace Util

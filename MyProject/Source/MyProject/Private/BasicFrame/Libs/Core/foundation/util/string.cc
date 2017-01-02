@@ -2,7 +2,7 @@
 //  string.cc
 //  (C) 2006 RadonLabs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "util/string.h"
 #include <string.h>
 #include <stdio.h>

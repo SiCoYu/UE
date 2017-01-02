@@ -2,7 +2,7 @@
 //  osxmemorypool.cc
 //  (C) 2010 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "memory/osx/osxmemorypool.h"
 
 namespace OSX

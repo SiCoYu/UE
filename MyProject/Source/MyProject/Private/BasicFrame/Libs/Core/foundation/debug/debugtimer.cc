@@ -2,7 +2,7 @@
 //  debugtimer.cc
 //  (C) 2008 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "debug/debugtimer.h"
 #include "debug/debugserver.h"
 

@@ -2,7 +2,7 @@
 //  win32stringconverter.cc
 //  (C) 2009 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "win32stringconverter.h"
 
 namespace Win32

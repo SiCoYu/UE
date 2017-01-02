@@ -2,7 +2,7 @@
 //  exithandler.cc
 //  (C) 2008 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "core/exithandler.h"
 #include "core/sysfunc.h"
 

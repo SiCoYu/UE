@@ -2,7 +2,7 @@
 //  osxguid.cc
 //  (C) 2010 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "osxguid.h"
 
 namespace OSX

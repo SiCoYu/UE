@@ -2,7 +2,7 @@
 //  poolarrayallocator.cc
 //  (C) 2009 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "memory/poolarrayallocator.h"
 #include "util/string.h"
 

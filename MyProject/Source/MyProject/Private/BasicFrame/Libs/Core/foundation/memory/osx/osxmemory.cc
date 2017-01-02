@@ -2,7 +2,7 @@
 //  osxmemory.cc
 //  (C) 2010 RadonLabs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "core/types.h"
 #include "core/sysfunc.h"
 

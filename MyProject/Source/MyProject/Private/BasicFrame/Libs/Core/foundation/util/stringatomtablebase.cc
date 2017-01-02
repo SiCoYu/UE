@@ -2,7 +2,7 @@
 //  stringatomtablebase.cc
 //  (C) 2009 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "util/stringatomtablebase.h"
 
 #include <string.h>

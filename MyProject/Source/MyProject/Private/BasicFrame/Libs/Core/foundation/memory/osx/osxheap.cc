@@ -2,7 +2,7 @@
 //  osxheap.cc
 //  (C) 2010 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "memory/osx/osxheap.h"
 #include "core/sysfunc.h"
 

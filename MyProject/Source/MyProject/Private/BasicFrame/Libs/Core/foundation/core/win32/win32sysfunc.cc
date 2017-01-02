@@ -2,7 +2,7 @@
 //  sysfunc.cc
 //  (C) 2006 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "core/win32/win32sysfunc.h"
 #include "core/refcounted.h"
 #include "debug/minidump.h"

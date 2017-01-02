@@ -2,7 +2,7 @@
 //  corepagehandler.cc
 //  (C) 2007 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "core/debug/corepagehandler.h"
 #include "http/html/htmlpagewriter.h"
 #include "system/systeminfo.h"

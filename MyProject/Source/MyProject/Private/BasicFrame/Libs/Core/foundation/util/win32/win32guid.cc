@@ -2,7 +2,7 @@
 //  win32guid.cc
 //  (C) 2006 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "util/win32/win32guid.h"
 
 namespace Win32

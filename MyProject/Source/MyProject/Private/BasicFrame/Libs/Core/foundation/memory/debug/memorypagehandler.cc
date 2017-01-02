@@ -2,7 +2,7 @@
 //  memorypagehandler.cc
 //  (C) 2007 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "memory/debug/memorypagehandler.h"
 #include "memory/heap.h"
 #include "http/html/htmlpagewriter.h"

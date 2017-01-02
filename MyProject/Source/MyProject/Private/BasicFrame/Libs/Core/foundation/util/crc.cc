@@ -2,7 +2,7 @@
 //  crc.cc
 //  (C) 2006 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "util/crc.h"
 
 namespace Util

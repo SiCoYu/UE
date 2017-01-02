@@ -2,7 +2,7 @@
 //  win360heap.cc
 //  (C) 2006 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "memory/win360/win360heap.h"
 
 namespace Win360

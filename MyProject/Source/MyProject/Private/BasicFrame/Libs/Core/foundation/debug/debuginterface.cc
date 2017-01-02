@@ -2,7 +2,7 @@
 //  debuginterface.cc
 //  (C) 2008 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "debug/debuginterface.h"
 #include "debug/debughandler.h"
 #include "messaging/runthroughhandlerthread.h"

@@ -2,7 +2,7 @@
 //  stringbuffer.cc
 //  (C) 2009 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "util/stringbuffer.h"
 
 #include <string.h>

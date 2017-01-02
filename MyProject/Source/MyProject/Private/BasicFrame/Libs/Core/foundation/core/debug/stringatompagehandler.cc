@@ -2,7 +2,7 @@
 //  stringatompagehandler.cc
 //  (C) 2009 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "core/debug/stringatompagehandler.h"
 #include "http/html/htmlpagewriter.h"
 #include "util/globalstringatomtable.h"

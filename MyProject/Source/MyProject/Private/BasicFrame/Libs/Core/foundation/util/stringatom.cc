@@ -2,7 +2,7 @@
 //  stringatom.cc
 //  (C) 2009 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "util/stringatom.h"
 #include "util/localstringatomtable.h"
 #include "util/globalstringatomtable.h"

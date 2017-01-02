@@ -2,7 +2,7 @@
 //  win32minidump.cc
 //  (C) 2007 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "debug/win32/win32minidump.h"
 
 namespace Win32

@@ -2,7 +2,7 @@
 //  blob.cc
 //  (C) 2006 RadonLabs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "util/blob.h"
 #include <string.h>
 

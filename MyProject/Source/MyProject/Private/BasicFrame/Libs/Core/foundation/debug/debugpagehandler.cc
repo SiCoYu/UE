@@ -2,7 +2,7 @@
 //  debugpagehandler.cc
 //  (C) 2008 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "debug/debugpagehandler.h"
 #include "http/html/htmlpagewriter.h"
 #include "http/svg/svglinechartwriter.h"

@@ -2,7 +2,7 @@
 //  core/coreserver.cc
 //  (C) 2006 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "core/coreserver.h"
 
 namespace Core

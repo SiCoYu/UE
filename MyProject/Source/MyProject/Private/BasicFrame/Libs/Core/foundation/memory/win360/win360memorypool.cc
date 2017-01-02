@@ -2,7 +2,7 @@
 //  win360memorypool.cc
 //  (C) 2009 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "memory/win360/win360memorypool.h"
 #include "util/string.h"
 

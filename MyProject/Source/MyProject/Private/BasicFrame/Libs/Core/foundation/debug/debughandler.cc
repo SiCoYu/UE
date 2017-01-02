@@ -2,7 +2,7 @@
 //  debughandler.cc
 //  (C) 2008 Radon Labs GmbH
 //------------------------------------------------------------------------------
-#include "stdneb.h"
+#include "MyProject.h"
 #include "debug/debughandler.h"
 #include "debug/debugpagehandler.h"
 #include "timing/time.h"
