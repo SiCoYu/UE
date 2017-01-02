@@ -1,12 +1,7 @@
 #pragma once
 //------------------------------------------------------------------------------
 /**
-    @file core/rttimacros.h
-    
-    This defines the macros for Nebula3's RTTI mechanism 
     (__DeclareClass, __ImplementClass, etc...).
-    
-    (C) 2008 Radon Labs GmbH
 */
 
 //------------------------------------------------------------------------------
@@ -48,7 +43,7 @@ private:
 /**
     Implementation macro for default memory pool sizes. Put this into the source file.
 */
-#if NEBULA3_DEBUG
+#if MY_DEBUG
 #define __ImplementClass(type, fourcc, baseType) \
     Core::Rtti type::RTTI(#type, fourcc, type::FactoryCreator, &baseType::RTTI, sizeof(type)); \
     Core::Rtti* type::GetRtti() const { return &this->RTTI; } \
@@ -99,7 +94,7 @@ private:
 /**
     Type implementation of topmost type in inheritance hierarchy (source file).
 */
-#if NEBULA3_DEBUG
+#if MY_DEBUG
 #define __ImplementRootClass(type, fourcc) \
     Core::Rtti type::RTTI(#type, fourcc, type::FactoryCreator, 0, sizeof(type)); \
     Core::Rtti* type::GetRtti() const { return &this->RTTI; } \
