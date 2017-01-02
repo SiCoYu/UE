@@ -1,5 +1,8 @@
 #pragma once
 
+#include <new>	// nothrow_t
+#include <stdlib.h>	// malloc, free
+
 #ifdef new
 #undef new
 #endif
@@ -8,46 +11,45 @@
 #undef delete
 #endif
 
-//------------------------------------------------------------------------------
-/*
-Override new / delete operators.
-*/
-//__forceinline void*
-//operator new(size_t size)
-//{
-//	return Memory::Alloc(Memory::ObjectHeap, size);
-//}
-//
-//__forceinline void*
-//operator new(size_t size, const std::nothrow_t& noThrow)
-//{
-//	return Memory::Alloc(Memory::ObjectHeap, size);
-//}
-//
-//__forceinline void*
-//operator new[](size_t size)
-//{
-//	return Memory::Alloc(Memory::ObjectArrayHeap, size);
-//}
-//
-//__forceinline void*
-//operator new[](size_t size, const std::nothrow_t& noThrow)
-//{
-//	return Memory::Alloc(Memory::ObjectArrayHeap, size);
-//}
-//
-//__forceinline void
-//operator delete(void* p)
-//{
-//	Memory::Free(Memory::ObjectHeap, p);
-//}
-//
-//__forceinline void
-//operator delete[](void* p)
-//{
-//	Memory::Free(Memory::ObjectArrayHeap, p);
-//}
-//#endif
+__forceinline void* operator new(size_t size)
+{
+	//return Memory::Alloc(Memory::ObjectHeap, size);
+	void* ptr = malloc(size);
+	return ptr;
+}
+
+__forceinline void* operator new(size_t size, const std::nothrow_t& noThrow)
+{
+	//return Memory::Alloc(Memory::ObjectHeap, size);
+	void* ptr = malloc(size);
+	return ptr;
+}
+
+__forceinline void* operator new[](size_t size)
+{
+	//return Memory::Alloc(Memory::ObjectArrayHeap, size);
+	void* ptr = malloc(size);
+	return ptr;
+}
+
+__forceinline void* operator new[](size_t size, const std::nothrow_t& noThrow)
+{
+	//return Memory::Alloc(Memory::ObjectArrayHeap, size);
+	void* ptr = malloc(size);
+	return ptr;
+}
+
+__forceinline void operator delete(void* ptr)
+{
+	//Memory::Free(Memory::ObjectHeap, ptr);
+	free(ptr);
+}
+
+__forceinline void operator delete[](void* ptr)
+{
+	//Memory::Free(Memory::ObjectArrayHeap, ptr);
+	free(ptr);
+}
 
 
 #define my_new(type) new type
