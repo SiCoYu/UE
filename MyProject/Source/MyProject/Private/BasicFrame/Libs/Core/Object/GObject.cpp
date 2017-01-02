@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "GObject.h"
 #include "TypeDef.h"
+#include "MyMemory.h"
+#include "MClassFactory.h"
 
 __ImplementRootClass(GObject);
 
@@ -8,11 +10,6 @@ __ImplementRootClass(GObject);
 MMutex GObject::criticalSection;
 bool GObject::isInCreate = false;
 #endif
-
-GObject::GObject()
-{
-    mTypeId = "GObject";
-}
 
 std::string GObject::getTypeId()
 {

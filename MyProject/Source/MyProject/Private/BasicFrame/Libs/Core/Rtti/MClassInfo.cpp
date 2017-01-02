@@ -3,6 +3,7 @@
 #include "GObject.h"
 #include "TypeDef.h"
 #include "MClassFactory.h"
+#include <stdlib.h>
 
 void MClassInfo::Construct(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize)
 {
@@ -84,7 +85,7 @@ void* MClassInfo::AllocInstanceMemory()
 #else
 	//void* ptr = Memory::Alloc(Memory::ObjectHeap, this->instanceSize);
 #endif
-	void* ptr = creator();
+	void* ptr = malloc(instanceSize);
 	return ptr;
 }
 
@@ -95,4 +96,5 @@ void MClassInfo::FreeInstanceMemory(void* ptr)
 #else
 	//Memory::Free(Memory::ObjectHeap, ptr);
 #endif
+	free(ptr);
 }

@@ -1,9 +1,9 @@
 ﻿#pragma once
 
 #include <string>
-#include "MClassInfo.h"
+#include "Rtti/MClassInfo.h"
 #include "MMutex.h"
-#include "MClassMacros.h"
+#include "Rtti/MClassMacros.h"
 
 class GObject
 {
@@ -44,7 +44,7 @@ protected:
 inline GObject::GObject() :
 	refCount(0)
 {
-	
+	mTypeId = "GObject";
 }
 
 inline void GObject::AddRef()
@@ -85,7 +85,7 @@ inline bool GObject::IsA(const std::string& other) const
 	return this->GetRtti()->IsDerivedFrom(other);
 }
 
-inline const std::string& RefCounted::GetClassName() const
+inline const std::string& GObject::GetClassName() const
 {
 	return this->GetRtti()->GetName();
 }
