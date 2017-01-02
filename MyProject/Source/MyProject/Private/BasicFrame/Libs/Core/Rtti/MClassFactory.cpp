@@ -27,14 +27,14 @@ void MClassFactory::Destroy()
 }
 
 MClassFactory::MClassFactory() :
-    nameTable(512)
+	mNameTable(512)
 {
     // empty
 }
 
 MClassFactory::~MClassFactory()
 {
-    this->nameTable.clear();
+    this->mNameTable.clear();
 }
 
 void MClassFactory::Register(const MClassInfo* rtti, const std::string& className)
@@ -46,20 +46,21 @@ void MClassFactory::Register(const MClassInfo* rtti, const std::string& classNam
         return;
     }
 
-    this->nameTable.insert(std::make_pair<const std::string, const MClassInfo*>(className, rtti));
+    this->mNameTable.insert(UMap::value_type(className, rtti));
 }
 
 bool MClassFactory::ClassExists(const std::string& className) const
 {
 	my_assert(className.length() > 0);
-    return this->nameTable.find(className) != this->nameTable.end();
+    return this->mNameTable.find(className) != this->mNameTable.end();
 }
 
 const MClassInfo* MClassFactory::GetClassRtti(const std::string& className) const
 {
     my_assert(className.length() > 0);
 	my_assert(this->ClassExists(className));
-    return this->nameTable[className];
+    //return this->mNameTable[className];
+	return this->mNameTable.find(className)->second;
 }
 
 GObject* MClassFactory::Create(const std::string& className) const
@@ -70,8 +71,9 @@ GObject* MClassFactory::Create(const std::string& className) const
     {
         return 0;
     }
+	//const MClassInfo* rtti = this->mNameTable[className];
+    const MClassInfo* rtti = this->mNameTable.find(className)->second;
 
-    const MClassInfo* rtti = this->nameTable[className];
     my_assert(0 != rtti);
 	GObject* newObject = rtti->Create();
     return newObject;

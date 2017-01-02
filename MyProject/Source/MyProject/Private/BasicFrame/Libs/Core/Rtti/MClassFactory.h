@@ -8,6 +8,8 @@ class MClassInfo;
 
 class MClassFactory
 {
+	typedef std::unordered_map<std::string, const MClassInfo*> UMap;
+
 public:
     static MClassFactory* Instance();
     static void Destroy();
@@ -22,5 +24,5 @@ private:
     ~MClassFactory();
 
     static MClassFactory* Singleton;
-    std::unordered_map<const std::string, const MClassInfo*> nameTable;
+	UMap mNameTable;
 };

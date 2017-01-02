@@ -73,6 +73,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Core/Templates",
                 "MyProject/Private/BasicFrame/Libs/Core/Rtti",
                 "MyProject/Private/BasicFrame/Libs/Core/Platform",
+                "MyProject/Private/BasicFrame/Libs/Core/Memory",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",
