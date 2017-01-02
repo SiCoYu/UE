@@ -11,8 +11,9 @@ UMyGameInstance::UMyGameInstance(const FObjectInitializer& ObjectInitializer)
 	mAppFrame = new AppFrame();
 
 	// 这个设置等价于在 Project Setting 中的设置
-	GetDefault<UGeneralProjectSettings>()->ProjectDisplayedTitle = UtilStr::ConvStdStr2FText("aaa");
-	GetDefault<UInputSettings>()->DefaultViewportMouseCaptureMode = false;
+	std::string aaa = "aaa";
+	//GetDefault<UGeneralProjectSettings>()->ProjectDisplayedTitle = UtilStr::ConvStdStr2FText(aaa);
+	//GetDefault<UInputSettings>()->DefaultViewportMouseCaptureMode = EMouseCaptureMode::CaptureDuringMouseDown;
 }
 
 void UMyGameInstance::Init()

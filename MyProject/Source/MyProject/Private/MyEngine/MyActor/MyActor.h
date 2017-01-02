@@ -182,7 +182,7 @@ void AMyActor::SetAngularLimits(
 	const float Swing2LimitAngle,
 	const float TwistLimitAngle,
 
-	bool SoftSwingLimit = true, bool SoftTwistLimit = true,
+	bool SoftSwingLimit, bool SoftTwistLimit,
 	const float SwingStiff, const float SwingDamp,
 	const float TwistStiff, const float TwistDamp
 	)

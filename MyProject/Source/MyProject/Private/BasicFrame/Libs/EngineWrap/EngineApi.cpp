@@ -525,9 +525,9 @@ void EngineApi::EnableScreenSaver(bool bEnable)
 	GEngine->EnableScreenSaver(bEnable);
 }
 
-int32 LoadPackageAsync(const FString& InName, FLoadPackageAsyncDelegate InCompletionDelegate, TAsyncLoadPriority InPackagePriority, EPackageFlags InPackageFlags);
+int32 EngineApi::LoadPackageAsync(const FString& InName, FLoadPackageAsyncDelegate InCompletionDelegate, TAsyncLoadPriority InPackagePriority, EPackageFlags InPackageFlags)
 {
-	::LoadPackageAsync(InName, InCompletionDelegate, InPackagePriority, InPackageFlags);
+	return ::LoadPackageAsync(InName, InCompletionDelegate, InPackagePriority, InPackageFlags);
 }
 
 void EngineApi::CancelAsyncLoading()
@@ -537,20 +537,20 @@ void EngineApi::CancelAsyncLoading()
 
 float EngineApi::GetAsyncLoadPercentage(const FName& PackageName)
 {
-	::CancelAsyncLoading(PackageName);
+	return ::GetAsyncLoadPercentage(PackageName);
 }
 
 bool EngineApi::IsGarbageCollecting()
 {
-	::CancelAsyncLoading();
+	return ::IsGarbageCollecting();
 }
 
 void EngineApi::CollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
 {
-	::CancelAsyncLoading(KeepFlags, bPerformFullPurge);
+	::CollectGarbage(KeepFlags, bPerformFullPurge);
 }
 
 bool EngineApi::TryCollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
 {
-	::CancelAsyncLoading(KeepFlags, bPerformFullPurge);
+	return ::TryCollectGarbage(KeepFlags, bPerformFullPurge);
 }
