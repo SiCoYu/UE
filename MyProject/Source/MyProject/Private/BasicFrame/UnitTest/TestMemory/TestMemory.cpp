@@ -1,10 +1,7 @@
 #include "MyProject.h"
-#include "Common.h"
-#include "UIFormId.h"
-#include "UITestUMG.h"
-#include "TestUI.h"
+#include "TestMemory.h"
 
-void TestUI::run()
+void TestMemory::run()
 {
-	GUiMgr->loadAndShow<UUITestUMG>(NSFormId::eUITestUMG);
+	
 }
