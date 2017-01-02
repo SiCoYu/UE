@@ -1,53 +1,38 @@
 #pragma once
-//------------------------------------------------------------------------------
-/**
-    (__DeclareClass, __ImplementClass, etc...).
-*/
 
-//------------------------------------------------------------------------------
-/**
-    Declaration macro. Put this into the class declaration.
-*/
 #define __DeclareClass(type) \
 public: \
     void* operator new(size_t size) \
     { \
-        return RTTI.AllocInstanceMemory(); \
+        return MClassInfo.AllocInstanceMemory(); \
     }; \
     void operator delete(void* p) \
     { \
-        RTTI.FreeInstanceMemory(p); \
+        MClassInfo.FreeInstanceMemory(p); \
     }; \
-    static Core::Rtti RTTI; \
-    static Core::RefCounted* FactoryCreator(); \
+    static MClassInfo RTTI; \
+    static GObject* FactoryCreator(); \
     static type* Create(); \
     static bool RegisterWithFactory(); \
-    virtual Core::Rtti* GetRtti() const; \
+    virtual MClassInfo* GetRtti() const; \
 private:
 
 #define __DeclareAbstractClass(class_name) \
 public: \
-    static Core::Rtti RTTI; \
-    virtual Core::Rtti* GetRtti() const; \
+    static MClassInfo RTTI; \
+    virtual MClassInfo* GetRtti() const; \
 private:
 
-//------------------------------------------------------------------------------
-/**
-    Register a class with the factory. This is only necessary for classes
-    which can create objects by name or fourcc.
-*/
+
 #define __RegisterClass(type) \
     static const bool type##_registered = type::RegisterWithFactory(); \
 
-//------------------------------------------------------------------------------
-/**
-    Implementation macro for default memory pool sizes. Put this into the source file.
-*/
+
 #if MY_DEBUG
-#define __ImplementClass(type, fourcc, baseType) \
-    Core::Rtti type::RTTI(#type, fourcc, type::FactoryCreator, &baseType::RTTI, sizeof(type)); \
-    Core::Rtti* type::GetRtti() const { return &this->RTTI; } \
-    Core::RefCounted* type::FactoryCreator() { return type::Create(); } \
+#define __ImplementClass(type, baseType) \
+    MClassInfo type::RTTI(#type, type::FactoryCreator, &baseType::RTTI, sizeof(type)); \
+    MClassInfo* type::GetRtti() const { return &this->RTTI; } \
+    GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
     { \
         RefCounted::criticalSection.Enter(); \
@@ -67,36 +52,32 @@ private:
         return true; \
     }
 #else
-#define __ImplementClass(type, fourcc, baseType) \
-    Core::Rtti type::RTTI(#type, fourcc, type::FactoryCreator, &baseType::RTTI, sizeof(type)); \
-    Core::Rtti* type::GetRtti() const { return &this->RTTI; } \
-    Core::RefCounted* type::FactoryCreator() { return type::Create(); } \
+#define __ImplementClass(type, baseType) \
+    MClassInfo type::RTTI(#type, type::FactoryCreator, &baseType::RTTI, sizeof(type)); \
+    MClassInfo* type::GetRtti() const { return &this->RTTI; } \
+    GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
     { \
         return n_new(type); \
     }\
     bool type::RegisterWithFactory() \
     { \
-        Core::SysFunc::Setup(); \
-        if (!Core::Factory::Instance()->ClassExists(#type)) \
+        if (!MClassFactory::Instance()->ClassExists(#type)) \
         { \
-            Core::Factory::Instance()->Register(&type::RTTI, #type, fourcc); \
+            MClassFactory::Instance()->Register(&type::RTTI, #type); \
         } \
         return true; \
     }
 #endif
 
-#define __ImplementAbstractClass(type, fourcc, baseType) \
-    Core::Rtti type::RTTI(#type, fourcc, 0, &baseType::RTTI, 0); \
-    Core::Rtti* type::GetRtti() const { return &this->RTTI; }
+#define __ImplementAbstractClass(type, baseType) \
+    MClassInfo type::RTTI(#type, 0, &baseType::RTTI, 0); \
+    MClassInfo* type::GetRtti() const { return &this->RTTI; }
 
-//------------------------------------------------------------------------------
-/**
-    Type implementation of topmost type in inheritance hierarchy (source file).
-*/
+
 #if MY_DEBUG
-#define __ImplementRootClass(type, fourcc) \
-    Core::Rtti type::RTTI(#type, fourcc, type::FactoryCreator, 0, sizeof(type)); \
+#define __ImplementRootClass(type) \
+    Core::Rtti type::RTTI(#type, type::FactoryCreator, 0, sizeof(type)); \
     Core::Rtti* type::GetRtti() const { return &this->RTTI; } \
     Core::RefCounted* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
@@ -110,29 +91,27 @@ private:
     }\
     bool type::RegisterWithFactory() \
     { \
-        if (!Core::Factory::Instance()->ClassExists(#type)) \
+        if (!MClassFactory::Instance()->ClassExists(#type)) \
         { \
-            Core::Factory::Instance()->Register(&type::RTTI, #type, fourcc); \
+            MClassFactory::Instance()->Register(&type::RTTI, #type, fourcc); \
         } \
         return true; \
     }
 #else
 #define __ImplementRootClass(type, fourcc) \
-    Core::Rtti type::RTTI(#type, fourcc, type::FactoryCreator, 0, sizeof(type)); \
-    Core::Rtti* type::GetRtti() const { return &this->RTTI; } \
-    Core::RefCounted* type::FactoryCreator() { return type::Create(); } \
+    MClassInfo type::RTTI(#type, fourcc, type::FactoryCreator, 0, sizeof(type)); \
+    MClassInfo* type::GetRtti() const { return &this->RTTI; } \
+    GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
     { \
-        return n_new(type); \
+        return my_new(type); \
     }\
     bool type::RegisterWithFactory() \
     { \
-        if (!Core::Factory::Instance()->ClassExists(#type)) \
+        if (!MClassFactory::Instance()->ClassExists(#type)) \
         { \
-            Core::Factory::Instance()->Register(&type::RTTI, #type, fourcc); \
+            MClassFactory::Instance()->Register(&type::RTTI, #type, fourcc); \
         } \
         return true; \
     }
 #endif
-//------------------------------------------------------------------------------
-    

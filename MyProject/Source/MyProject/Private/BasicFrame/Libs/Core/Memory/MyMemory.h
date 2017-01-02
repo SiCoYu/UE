@@ -1,5 +1,5 @@
 #pragma once
-#if !NEBULA3_EDITOR
+
 #ifdef new
 #undef new
 #endif
@@ -54,6 +54,3 @@ Override new / delete operators.
 #define my_new_array(type,size) new type[size]
 #define my_delete(ptr) delete ptr
 #define my_delete_array(ptr) delete[] ptr
-//------------------------------------------------------------------------------
-
-

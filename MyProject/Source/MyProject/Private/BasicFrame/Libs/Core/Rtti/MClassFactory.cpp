@@ -12,7 +12,7 @@ MClassFactory* MClassFactory::Instance()
     if (0 == Singleton)
     {
         Singleton = my_new(MClassFactory);
-        n_assert(0 != Singleton);
+        my_assert(0 != Singleton);
     }
     return Singleton;
 }
@@ -34,67 +34,43 @@ MClassFactory::MClassFactory() :
 
 MClassFactory::~MClassFactory()
 {
-    this->nameTable.Clear();
+    this->nameTable.clear();
 }
 
-void MClassFactory::Register(const MClassInfo* rtti, const String& className, const FourCC& classFourCC)
+void MClassFactory::Register(const MClassInfo* rtti, const std::string& className)
 {
     my_assert(0 != rtti);
 
-    // check if class name already exists
     if (this->ClassExists(className))
     {
         return;
     }
 
-    // check if class fourcc already exists
-    if (this->ClassExists(classFourCC))
-    {
-        return;
-    }
-
-    // register with lookup tables
-    this->nameTable.Add(className, rtti);
-}
-
-void MClassFactory::Register(const MClassInfo* rtti, const String& className)
-{
-    my_assert(0 != rtti);
-
-    // check if class name already exists
-    if (this->ClassExists(className))
-    {
-        return;
-    }
-
-    // register with lookup tables
-    this->nameTable.Add(className, rtti);
+    this->nameTable.insert(std::make_pair<const std::string, const MClassInfo*>(className, rtti));
 }
 
 bool MClassFactory::ClassExists(const std::string& className) const
 {
-	my_assert(className.IsValid());
-    return this->nameTable.Contains(className);
+	my_assert(className.length() > 0);
+    return this->nameTable.find(className) != this->nameTable.end();
 }
 
 const MClassInfo* MClassFactory::GetClassRtti(const std::string& className) const
 {
-    n_assert(className.IsValid());
-    n_assert(this->ClassExists(className));
+    my_assert(className.length() > 0);
+	my_assert(this->ClassExists(className));
     return this->nameTable[className];
 }
 
-RefCounted* MClassFactory::Create(const std::string& className) const
+GObject* MClassFactory::Create(const std::string& className) const
 {
-    n_assert(className.IsValid());
+	my_assert(className.length() > 0);
     
-    // check if class exists, otherwise give a meaningful error
     if (!this->ClassExists(className))
     {
         return 0;
     }
 
-    // lookup RTTI object of class through hash table and create new object
     const MClassInfo* rtti = this->nameTable[className];
     my_assert(0 != rtti);
 	GObject* newObject = rtti->Create();

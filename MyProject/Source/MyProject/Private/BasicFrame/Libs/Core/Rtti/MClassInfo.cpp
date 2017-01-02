@@ -23,7 +23,7 @@ void MClassInfo::Construct(const char* className, Creator creatorFunc, const MCl
 #if MY_DEBUG
 		else
 		{
-			const MClassInfo* checkRtti = Factory::Instance()->GetClassRtti(this->name);
+			const MClassInfo* checkRtti = MClassFactory::Instance()->GetClassRtti(this->name);
 			my_assert(0 != checkRtti);
 			if (checkRtti != this)
 			{
@@ -32,11 +32,6 @@ void MClassInfo::Construct(const char* className, Creator creatorFunc, const MCl
 		}
 #endif
 	}
-}
-
-MClassInfo::MClassInfo(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize)
-{
-	this->Construct(className, creatorFunc, parentClass, instSize);
 }
 
 MClassInfo::MClassInfo(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize)
@@ -85,18 +80,19 @@ bool MClassInfo::IsDerivedFrom(const std::string& otherClassName) const
 void* MClassInfo::AllocInstanceMemory()
 {
 #if MY_OBJECTS_USE_MEMORYPOOL
-	void* ptr = Memory::ObjectPoolAllocator->Alloc(this->instanceSize);
+	//void* ptr = Memory::ObjectPoolAllocator->Alloc(this->instanceSize);
 #else
-	void* ptr = Memory::Alloc(Memory::ObjectHeap, this->instanceSize);
+	//void* ptr = Memory::Alloc(Memory::ObjectHeap, this->instanceSize);
 #endif
+	void* ptr = nullptr;
 	return ptr;
 }
 
 void MClassInfo::FreeInstanceMemory(void* ptr)
 {
 #if MY_OBJECTS_USE_MEMORYPOOL
-	Memory::ObjectPoolAllocator->Free(ptr, this->instanceSize);
+	//Memory::ObjectPoolAllocator->Free(ptr, this->instanceSize);
 #else
-	Memory::Free(Memory::ObjectHeap, ptr);
+	//Memory::Free(Memory::ObjectHeap, ptr);
 #endif
 }
