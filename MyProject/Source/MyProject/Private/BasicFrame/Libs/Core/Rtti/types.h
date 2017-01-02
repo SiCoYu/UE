@@ -8,10 +8,6 @@
     (C) 2006 Radon Labs GmbH
 */
 
-#if !SPU
-#include "memory/memory.h"
-#endif
-
 // fixing Windows defines...
 #ifdef DeleteFile
 #undef DeleteFile
