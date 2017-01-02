@@ -2,6 +2,8 @@
 #include "MClassFactory.h"
 #include "GObject.h"
 #include "MClassInfo.h"
+#include "MyMemory.h"
+#include "TypeDef.h"
 
 MClassFactory* MClassFactory::Singleton = 0;
 
@@ -9,7 +11,7 @@ MClassFactory* MClassFactory::Instance()
 {
     if (0 == Singleton)
     {
-        Singleton = n_new(MClassFactory);
+        Singleton = my_new(MClassFactory);
         n_assert(0 != Singleton);
     }
     return Singleton;
@@ -19,7 +21,7 @@ void MClassFactory::Destroy()
 {
     if (0 != Singleton)
     {
-        n_delete(Singleton);
+		my_delete(Singleton);
         Singleton = 0;
     }
 }
@@ -33,7 +35,6 @@ MClassFactory::MClassFactory() :
 MClassFactory::~MClassFactory()
 {
     this->nameTable.Clear();
-    this->fourccTable.Clear();
 }
 
 void MClassFactory::Register(const Rtti* rtti, const String& className, const FourCC& classFourCC)
@@ -54,7 +55,6 @@ void MClassFactory::Register(const Rtti* rtti, const String& className, const Fo
 
     // register with lookup tables
     this->nameTable.Add(className, rtti);
-    this->fourccTable.Add(classFourCC, rtti);
 }
 
 void MClassFactory::Register(const Rtti* rtti, const String& className)
@@ -71,33 +71,20 @@ void MClassFactory::Register(const Rtti* rtti, const String& className)
     this->nameTable.Add(className, rtti);
 }
 
-bool MClassFactory::ClassExists(const String& className) const
+bool MClassFactory::ClassExists(const std::string& className) const
 {
-    n_assert(className.IsValid());
+	my_assert(className.IsValid());
     return this->nameTable.Contains(className);
 }
 
-bool MClassFactory::ClassExists(const FourCC fourCC) const
-{
-    n_assert(fourCC.IsValid());
-    return this->fourccTable.Contains(fourCC);
-}
-
-const Rtti* MClassFactory::GetClassRtti(const String& className) const
+const MClassInfo* MClassFactory::GetClassRtti(const std::string& className) const
 {
     n_assert(className.IsValid());
     n_assert(this->ClassExists(className));
     return this->nameTable[className];
 }
 
-const Rtti* MClassFactory::GetClassRtti(const FourCC& classFourCC) const
-{
-    n_assert(classFourCC.IsValid());
-    n_assert(this->ClassExists(classFourCC));
-    return this->fourccTable[classFourCC];
-}
-
-RefCounted* MClassFactory::Create(const String& className) const
+RefCounted* MClassFactory::Create(const std::string& className) const
 {
     n_assert(className.IsValid());
     
@@ -108,8 +95,8 @@ RefCounted* MClassFactory::Create(const String& className) const
     }
 
     // lookup RTTI object of class through hash table and create new object
-    const Rtti* rtti = this->nameTable[className];
+    const MClassInfo* rtti = this->nameTable[className];
     n_assert(0 != rtti);
-    RefCounted* newObject = rtti->Create();
+	GObject* newObject = rtti->Create();
     return newObject;
 }
