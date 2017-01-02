@@ -4,7 +4,7 @@
 #include "MyMemory.h"
 #include "MClassFactory.h"
 
-__ImplementRootClass(GObject);
+M_IMPLEMENT_ROOT_CLASS(GObject);
 
 #if MY_DEBUG
 MMutex GObject::criticalSection;

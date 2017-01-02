@@ -1,6 +1,6 @@
 #pragma once
 
-#define __DeclareClass(type) \
+#define M_DECLARE_CLASS(type) \
 public: \
     void* operator new(size_t size) \
     { \
@@ -18,19 +18,19 @@ public: \
 private:
 
 
-#define __DeclareAbstractClass(class_name) \
+#define M_DECLARE_ABSTRACT_CLASS(class_name) \
 public: \
     static MClassInfo CLASS_INFO; \
     virtual MClassInfo* GetClassInfo() const; \
 private:
 
 
-#define __RegisterClass(type) \
+#define M_REGISTER_CLASS(type) \
     static const bool type##_registered = type::RegisterWithFactory(); \
 
 
 #if MY_DEBUG
-#define __ImplementClass(type, baseType) \
+#define M_IMPLEMENT_CLASS(type, baseType) \
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, &baseType::CLASS_INFO, sizeof(type)); \
     MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
     GObject* type::FactoryCreator() { return type::Create(); } \
@@ -52,7 +52,7 @@ private:
         return true; \
     }
 #else
-#define __ImplementClass(type, baseType) \
+#define M_IMPLEMENT_CLASS(type, baseType) \
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, &baseType::CLASS_INFO, sizeof(type)); \
     MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
     GObject* type::FactoryCreator() { return type::Create(); } \
@@ -71,13 +71,13 @@ private:
 #endif
 
 
-#define __ImplementAbstractClass(type, baseType) \
+#define M_IMPLEMENT_ABSTRACT_CLASS(type, baseType) \
     MClassInfo type::CLASS_INFO(#type, 0, &baseType::CLASS_INFO, 0); \
     MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; }
 
 
 #if MY_DEBUG
-#define __ImplementRootClass(type) \
+#define M_IMPLEMENT_ROOT_CLASS(type) \
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, 0, sizeof(type)); \
     MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
     GObject* type::FactoryCreator() { return type::Create(); } \
@@ -99,7 +99,7 @@ private:
         return true; \
     }
 #else
-#define __ImplementRootClass(type) \
+#define M_IMPLEMENT_ROOT_CLASS(type) \
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, 0, sizeof(type)); \
     MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
     GObject* type::FactoryCreator() { return type::Create(); } \

@@ -7,7 +7,7 @@
 
 class GObject
 {
-	__DeclareClass(GObject);
+	M_DECLARE_CLASS(GObject);
 
 public:
 	GObject();
