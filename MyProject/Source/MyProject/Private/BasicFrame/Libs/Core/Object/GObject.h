@@ -9,9 +9,6 @@ class GObject
 {
 	__DeclareClass(GObject);
 
-protected:
-	std::string mTypeId;     // 名字
-
 public:
 	GObject();
 
@@ -21,10 +18,10 @@ public:
 	int GetRefCount() const;
 	void AddRef();
 	void Release();
-	bool IsInstanceOf(const MClassInfo& rtti) const;
+	bool IsInstanceOf(const MClassInfo& classInfo) const;
 	bool IsInstanceOf(const std::string& className) const;
-	bool IsA(const MClassInfo& rtti) const;
-	bool IsA(const std::string& rttiName) const;
+	bool IsA(const MClassInfo& classInfo) const;
+	bool IsA(const std::string& classInfoName) const;
 	const std::string& GetClassName() const;
 	static void DumpRefCountingLeaks();
 
@@ -44,7 +41,7 @@ protected:
 inline GObject::GObject() :
 	refCount(0)
 {
-	mTypeId = "GObject";
+	
 }
 
 inline void GObject::AddRef()
@@ -67,25 +64,25 @@ inline int GObject::GetRefCount() const
 
 inline bool GObject::IsInstanceOf(const MClassInfo& other) const
 {
-	return this->GetRtti() == &other;
+	return this->GetClassInfo() == &other;
 }
 
 inline bool GObject::IsInstanceOf(const std::string& other) const
 {
-	return this->GetRtti()->GetName() == other;
+	return this->GetClassInfo()->GetName() == other;
 }
 
 inline bool GObject::IsA(const MClassInfo& other) const
 {
-	return this->GetRtti()->IsDerivedFrom(other);
+	return this->GetClassInfo()->IsDerivedFrom(other);
 }
 
 inline bool GObject::IsA(const std::string& other) const
 {
-	return this->GetRtti()->IsDerivedFrom(other);
+	return this->GetClassInfo()->IsDerivedFrom(other);
 }
 
 inline const std::string& GObject::GetClassName() const
 {
-	return this->GetRtti()->GetName();
+	return this->GetClassInfo()->GetName();
 }

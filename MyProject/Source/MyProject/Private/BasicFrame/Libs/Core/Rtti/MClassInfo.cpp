@@ -24,9 +24,9 @@ void MClassInfo::Construct(const char* className, Creator creatorFunc, const MCl
 #if MY_DEBUG
 		else
 		{
-			const MClassInfo* checkRtti = MClassFactory::Instance()->GetClassRtti(this->name);
-			my_assert(0 != checkRtti);
-			if (checkRtti != this)
+			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetClassInfo(this->name);
+			my_assert(0 != checkClassInfo);
+			if (checkClassInfo != this)
 			{
 				
 			}

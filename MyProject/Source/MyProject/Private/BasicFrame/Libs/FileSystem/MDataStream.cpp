@@ -8,8 +8,6 @@
 
 MDataStream::MDataStream(std::string filePath, EventDispatchDelegate openedDisp, MFileMode mode, MFileAccess access, bool isSyncMode)
 {
-    this->mTypeId = "MDataStream";
-
     mFilePath = filePath;
 	mMode = mode;
 	mAccess = access;

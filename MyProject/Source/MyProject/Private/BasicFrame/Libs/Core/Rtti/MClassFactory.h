@@ -14,9 +14,9 @@ public:
     static MClassFactory* Instance();
     static void Destroy();
 
-    void Register(const MClassInfo* rtti, const std::string& className);
+    void Register(const MClassInfo* classInfo, const std::string& className);
     bool ClassExists(const std::string& className) const;
-    const MClassInfo* GetClassRtti(const std::string& className) const;
+    const MClassInfo* GetClassInfo(const std::string& className) const;
 	GObject* Create(const std::string& className) const;
 
 private:

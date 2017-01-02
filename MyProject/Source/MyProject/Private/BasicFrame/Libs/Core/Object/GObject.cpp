@@ -11,11 +11,6 @@ MMutex GObject::criticalSection;
 bool GObject::isInCreate = false;
 #endif
 
-std::string GObject::getTypeId()
-{
-    return mTypeId;
-}
-
 GObject::~GObject()
 {
 	my_assert(0 == this->refCount);
