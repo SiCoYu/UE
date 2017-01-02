@@ -1,65 +1,37 @@
 #pragma once
-//------------------------------------------------------------------------------
-/**
-    @class Core::Factory
 
-    Provides the central object factory mechanism for Nebula3. Classes
-    which are derived from RefCounted register themselves automatically
-    to the central Factory object through the __DeclareClass and
-    __ImplementClass macros.
+#include <string>
+#include <unordered_map>
 
-
-    (C) 2005 Radon Labs GmbH
-*/
-#include "util/array.h"
-#include "util/string.h"
-#include "util/fourcc.h"
-#include "util/dictionary.h"
-#include "util/hashtable.h"
-#include "core/ptr.h"
+class GObject;
+class MClassInfo;
 
 //------------------------------------------------------------------------------
-namespace Core 
-{
-class RefCounted;
-class Rtti;
-
-//------------------------------------------------------------------------------
-class Factory
+class MClassFactory
 {
 public:
     /// get pointer to singleton instance (cannot use singleton.h!)
-    static Factory* Instance();
+    static MClassFactory* Instance();
     /// static instance destruction method
     static void Destroy();
 
     /// register a RTTI object with the factory (with class name and class fourcc code)
-    void Register(const Rtti* rtti, const Util::String& className, const Util::FourCC& classFourCC);
+    void Register(const MClassInfo* rtti, const std::string& className);
     /// register a RTTI object with the factory (without fourcc code)
-    void Register(const Rtti* rtti, const Util::String& className);
+    void Register(const MClassInfo* rtti, const std::string& className);
     /// check if a class exists by class name
-    bool ClassExists(const Util::String& className) const;
-    /// check if a class exists by FourCC code
-    bool ClassExists(const Util::FourCC classFourCC) const;
+    bool ClassExists(const std::string& className) const;
     /// get class rtti object by name
-    const Rtti* GetClassRtti(const Util::String& className) const;
-    /// get class rtti object by fourcc code
-    const Rtti* GetClassRtti(const Util::FourCC& classFourCC) const;
+    const MClassInfo* GetClassRtti(const std::string& className) const;
     /// create an object by class name
-    RefCounted* Create(const Util::String& className) const;
-    /// create an object by FourCC code
-    RefCounted* Create(const Util::FourCC classFourCC) const;
+	GObject* Create(const std::string& className) const;
 
 private:
     /// constructor is private
-    Factory();
+	MClassFactory();
     /// destructor is private
-    ~Factory();
+    ~MClassFactory();
 
-    static Factory* Singleton;
-    Util::HashTable<Util::String, const Rtti*> nameTable;     // for fast lookup by class name
-    Util::Dictionary<Util::FourCC, const Rtti*> fourccTable;  // for fast lookup by fourcc code
+    static MClassFactory* Singleton;
+    std::unordered_map<std::string, const MClassInfo*> nameTable;     // for fast lookup by class name
 };
-
-} // namespace Foundation
-//------------------------------------------------------------------------------

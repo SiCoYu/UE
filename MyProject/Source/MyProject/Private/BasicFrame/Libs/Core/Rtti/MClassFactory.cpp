@@ -1,25 +1,17 @@
-//------------------------------------------------------------------------------
-//  factory.cc
-//  (C) 2006 Radon Labs GmbH
-//------------------------------------------------------------------------------
 #include "MyProject.h"
-#include "core/factory.h"
-#include "core/refcounted.h"
-#include "core/rtti.h"
-#include "core/sysfunc.h"
+#include "MClassFactory.h"
+#include "GObject.h"
+#include "MClassInfo.h"
 
-namespace Core
-{
-Factory* Factory::Singleton = 0;
-using namespace Util;
+MClassFactory* MClassFactory::Singleton = 0;
 
 //------------------------------------------------------------------------------
 /**
     The factory's constructor is called by the Instance() method, and 
     nobody else.
 */
-Factory*
-Factory::Instance()
+MClassFactory*
+MClassFactory::Instance()
 {
     if (0 == Singleton)
     {
@@ -36,7 +28,7 @@ Factory::Instance()
     no accidential memory leaks are reported by the debug heap.
 */
 void
-Factory::Destroy()
+MClassFactory::Destroy()
 {
     if (0 != Singleton)
     {
@@ -50,7 +42,7 @@ Factory::Destroy()
     The factory's constructor is private so that it may only be called 
     by Factory::Instance().
 */
-Factory::Factory() :
+MClassFactory::MClassFactory() :
     nameTable(512)
 {
     // empty
@@ -61,7 +53,7 @@ Factory::Factory() :
     The factory's destructor is private so that it may only be called
     by Factory::Destroy().
 */
-Factory::~Factory()
+MClassFactory::~MClassFactory()
 {
     this->nameTable.Clear();
     this->fourccTable.Clear();
@@ -80,7 +72,7 @@ Factory::~Factory()
     is undefined).
 */
 void
-Factory::Register(const Rtti* rtti, const String& className, const FourCC& classFourCC)
+MClassFactory::Register(const Rtti* rtti, const String& className, const FourCC& classFourCC)
 {
     n_assert(0 != rtti);
 
@@ -119,7 +111,7 @@ Factory::Register(const Rtti* rtti, const String& className, const FourCC& class
     This is for compatibility with old Mangalore applications.
 */
 void
-Factory::Register(const Rtti* rtti, const String& className)
+MClassFactory::Register(const Rtti* rtti, const String& className)
 {
     n_assert(0 != rtti);
 
@@ -143,7 +135,7 @@ Factory::Register(const Rtti* rtti, const String& className)
     This method checks if a class with the given name has been registered.
 */
 bool
-Factory::ClassExists(const String& className) const
+MClassFactory::ClassExists(const String& className) const
 {
     n_assert(className.IsValid());
     return this->nameTable.Contains(className);
@@ -155,7 +147,7 @@ Factory::ClassExists(const String& className) const
     registered.
 */
 bool
-Factory::ClassExists(const FourCC fourCC) const
+MClassFactory::ClassExists(const FourCC fourCC) const
 {
     n_assert(fourCC.IsValid());
     return this->fourccTable.Contains(fourCC);
@@ -165,7 +157,7 @@ Factory::ClassExists(const FourCC fourCC) const
 /**
 */
 const Rtti*
-Factory::GetClassRtti(const String& className) const
+MClassFactory::GetClassRtti(const String& className) const
 {
     n_assert(className.IsValid());
     n_assert(this->ClassExists(className));
@@ -176,7 +168,7 @@ Factory::GetClassRtti(const String& className) const
 /**
 */
 const Rtti*
-Factory::GetClassRtti(const FourCC& classFourCC) const
+MClassFactory::GetClassRtti(const FourCC& classFourCC) const
 {
     n_assert(classFourCC.IsValid());
     n_assert(this->ClassExists(classFourCC));
@@ -188,7 +180,7 @@ Factory::GetClassRtti(const FourCC& classFourCC) const
     Create an object by class name.
 */
 RefCounted*
-Factory::Create(const String& className) const
+MClassFactory::Create(const String& className) const
 {
     n_assert(className.IsValid());
     
@@ -207,30 +199,3 @@ Factory::Create(const String& className) const
     RefCounted* newObject = rtti->Create();
     return newObject;
 }
-
-//------------------------------------------------------------------------------
-/**
-    Create an object by FourCC code.
-*/
-RefCounted*
-Factory::Create(const FourCC classFourCC) const
-{
-    n_assert(classFourCC.IsValid());
-
-    // check if class exists, otherwise give meaningful error
-    if (!this->ClassExists(classFourCC))
-    {
-        String errorMsg;
-        errorMsg.Format("Factory::Create('%s'): unknown class FourCC code!", classFourCC.AsString().AsCharPtr());
-        SysFunc::Error(errorMsg.AsCharPtr());
-        return 0;
-    }
-
-    // lookup RTTI object of class through hash table and create new object
-    const Rtti* rtti = this->fourccTable[classFourCC];
-    n_assert(0 != rtti);
-    RefCounted* newObject = rtti->Create();
-    return newObject;
-}
-
-} // namespace Core

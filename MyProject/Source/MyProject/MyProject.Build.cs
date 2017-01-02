@@ -71,6 +71,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Core",
                 "MyProject/Private/BasicFrame/Libs/Core/Object",
                 "MyProject/Private/BasicFrame/Libs/Core/Templates",
+                "MyProject/Private/BasicFrame/Libs/Core/Rtti",
+                "MyProject/Private/BasicFrame/Libs/Core/Platform",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",
@@ -183,6 +185,7 @@ public class MyProject : ModuleRules
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
             Definitions.Add("_CRT_SECURE_NO_WARNINGS");
+            Definitions.Add("__WIN32__");
         }
         //Definitions.Add("WIN32_LEAN_AND_MEAN");
         //Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
