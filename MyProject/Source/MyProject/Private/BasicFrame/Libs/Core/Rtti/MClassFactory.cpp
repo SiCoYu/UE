@@ -37,9 +37,9 @@ MClassFactory::~MClassFactory()
     this->nameTable.Clear();
 }
 
-void MClassFactory::Register(const Rtti* rtti, const String& className, const FourCC& classFourCC)
+void MClassFactory::Register(const MClassInfo* rtti, const String& className, const FourCC& classFourCC)
 {
-    n_assert(0 != rtti);
+    my_assert(0 != rtti);
 
     // check if class name already exists
     if (this->ClassExists(className))
@@ -57,9 +57,9 @@ void MClassFactory::Register(const Rtti* rtti, const String& className, const Fo
     this->nameTable.Add(className, rtti);
 }
 
-void MClassFactory::Register(const Rtti* rtti, const String& className)
+void MClassFactory::Register(const MClassInfo* rtti, const String& className)
 {
-    n_assert(0 != rtti);
+    my_assert(0 != rtti);
 
     // check if class name already exists
     if (this->ClassExists(className))
@@ -96,7 +96,7 @@ RefCounted* MClassFactory::Create(const std::string& className) const
 
     // lookup RTTI object of class through hash table and create new object
     const MClassInfo* rtti = this->nameTable[className];
-    n_assert(0 != rtti);
+    my_assert(0 != rtti);
 	GObject* newObject = rtti->Create();
     return newObject;
 }

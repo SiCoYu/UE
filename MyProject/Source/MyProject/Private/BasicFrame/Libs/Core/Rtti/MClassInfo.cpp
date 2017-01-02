@@ -1,97 +1,53 @@
 #include "MyProject.h"
 #include "MClassInfo.h"
+#include "GObject.h"
+#include "TypeDef.h"
+#include "MClassFactory.h"
 
-//------------------------------------------------------------------------------
-/**
-*/
-void
-MClassInfo::Construct(const char* className, FourCC fcc, Creator creatorFunc, const Rtti* parentClass, SizeT instSize)
+void MClassInfo::Construct(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize)
 {
-	// make sure String, etc... is working correctly
-	Core::SysFunc::Setup();
+	my_assert(0 != className);
+	my_assert(parentClass != this);
 
-	// NOTE: FourCC code may be 0!
-	n_assert(0 != className);
-	n_assert(parentClass != this);
-
-	// setup members
 	this->parent = parentClass;
-	this->fourCC = fcc;     // NOTE: may be 0
 	this->creator = creatorFunc;
 	this->instanceSize = instSize;
 
-	// register class with factory
 	this->name = className;
-	if (fcc.IsValid())
+	if (nullptr != className)
 	{
-		// FourCC code valid
-		if (!Factory::Instance()->ClassExists(fcc))
+		if (!MClassFactory::Instance()->ClassExists(this->name))
 		{
-			Factory::Instance()->Register(this, this->name, fcc);
+			MClassFactory::Instance()->Register(this, this->name);
 		}
-		// make a debug check that no name/fcc collission occured, but only in debug mode
-#if NEBULA3_DEBUG
+#if MY_DEBUG
 		else
 		{
-			const Rtti* checkRtti = Factory::Instance()->GetClassRtti(fcc);
-			n_assert(0 != checkRtti);
+			const MClassInfo* checkRtti = Factory::Instance()->GetClassRtti(this->name);
+			my_assert(0 != checkRtti);
 			if (checkRtti != this)
 			{
-				n_error("Class registry collision: (%s, %s) collides with (%s, %s)!",
-					this->name.AsCharPtr(), this->fourCC.AsString().AsCharPtr(),
-					checkRtti->name.AsCharPtr(), checkRtti->fourCC.AsString().AsCharPtr());
-			}
-		}
-#endif
-	}
-	else
-	{
-		// FourCC code not valid
-		if (!Factory::Instance()->ClassExists(this->name))
-		{
-			Factory::Instance()->Register(this, this->name);
-		}
-		// make a debug check that no name/fcc collission occured, but only in debug mode
-#if NEBULA3_DEBUG
-		else
-		{
-			const Rtti* checkRtti = Factory::Instance()->GetClassRtti(this->name);
-			n_assert(0 != checkRtti);
-			if (checkRtti != this)
-			{
-				n_error("Class registry collision: (%s) collides with (%s)!",
-					this->name.AsCharPtr(), checkRtti->name.AsCharPtr());
+				
 			}
 		}
 #endif
 	}
 }
 
-//------------------------------------------------------------------------------
-/**
-*/
-MClassInfo::MClassInfo(const char* className, FourCC fcc, Creator creatorFunc, const Rtti* parentClass, SizeT instSize)
+MClassInfo::MClassInfo(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize)
 {
-	this->Construct(className, fcc, creatorFunc, parentClass, instSize);
+	this->Construct(className, creatorFunc, parentClass, instSize);
 }
 
-//------------------------------------------------------------------------------
-/**
-*/
-MClassInfo::MClassInfo(const char* className, Creator creatorFunc, const Rtti* parentClass, SizeT instSize)
+MClassInfo::MClassInfo(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize)
 {
-	this->Construct(className, 0, creatorFunc, parentClass, instSize);
+	this->Construct(className, creatorFunc, parentClass, instSize);
 }
 
-//------------------------------------------------------------------------------
-/**
-*/
-RefCounted*
-MClassInfo::Create() const
+GObject* MClassInfo::Create() const
 {
 	if (0 == this->creator)
 	{
-		n_error("Rtti::Create(): Trying to create instance of abstract class '%s'!", this->name.AsCharPtr());
 		return 0;
 	}
 	else
@@ -100,13 +56,9 @@ MClassInfo::Create() const
 	}
 }
 
-//------------------------------------------------------------------------------
-/**
-*/
-bool
-MClassInfo::IsDerivedFrom(const Rtti& other) const
+bool MClassInfo::IsDerivedFrom(const MClassInfo& other) const
 {
-	const Rtti* cur;
+	const MClassInfo* cur;
 	for (cur = this; cur != 0; cur = cur->GetParent())
 	{
 		if (cur == &other)
@@ -117,13 +69,9 @@ MClassInfo::IsDerivedFrom(const Rtti& other) const
 	return false;
 }
 
-//------------------------------------------------------------------------------
-/**
-*/
-bool
-MClassInfo::IsDerivedFrom(const Util::String& otherClassName) const
+bool MClassInfo::IsDerivedFrom(const std::string& otherClassName) const
 {
-	const Rtti* cur;
+	const MClassInfo* cur;
 	for (cur = this; cur != 0; cur = cur->GetParent())
 	{
 		if (cur->name == otherClassName)
@@ -134,30 +82,9 @@ MClassInfo::IsDerivedFrom(const Util::String& otherClassName) const
 	return false;
 }
 
-//------------------------------------------------------------------------------
-/**
-*/
-bool
-MClassInfo::IsDerivedFrom(const Util::FourCC& otherClassFourCC) const
+void* MClassInfo::AllocInstanceMemory()
 {
-	const Rtti* cur;
-	for (cur = this; cur != 0; cur = cur->GetParent())
-	{
-		if (cur->fourCC == otherClassFourCC)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-//------------------------------------------------------------------------------
-/**
-*/
-void*
-MClassInfo::AllocInstanceMemory()
-{
-#if NEBULA3_OBJECTS_USE_MEMORYPOOL    
+#if MY_OBJECTS_USE_MEMORYPOOL
 	void* ptr = Memory::ObjectPoolAllocator->Alloc(this->instanceSize);
 #else
 	void* ptr = Memory::Alloc(Memory::ObjectHeap, this->instanceSize);
@@ -165,13 +92,9 @@ MClassInfo::AllocInstanceMemory()
 	return ptr;
 }
 
-//------------------------------------------------------------------------------
-/**
-*/
-void
-	Rtti::FreeInstanceMemory(void* ptr)
+void MClassInfo::FreeInstanceMemory(void* ptr)
 {
-#if NEBULA3_OBJECTS_USE_MEMORYPOOL
+#if MY_OBJECTS_USE_MEMORYPOOL
 	Memory::ObjectPoolAllocator->Free(ptr, this->instanceSize);
 #else
 	Memory::Free(Memory::ObjectHeap, ptr);
