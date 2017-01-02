@@ -84,7 +84,7 @@ void* MClassInfo::AllocInstanceMemory()
 #else
 	//void* ptr = Memory::Alloc(Memory::ObjectHeap, this->instanceSize);
 #endif
-	void* ptr = nullptr;
+	void* ptr = creator();
 	return ptr;
 }
 

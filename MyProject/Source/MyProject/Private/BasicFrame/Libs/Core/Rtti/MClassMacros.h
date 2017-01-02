@@ -17,6 +17,7 @@ public: \
     virtual MClassInfo* GetRtti() const; \
 private:
 
+
 #define __DeclareAbstractClass(class_name) \
 public: \
     static MClassInfo RTTI; \
@@ -35,11 +36,11 @@ private:
     GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
     { \
-        RefCounted::criticalSection.Enter(); \
-        RefCounted::isInCreate = true; \
+        MClassInfo::criticalSection.Lock(); \
+        MClassInfo::isInCreate = true; \
         type* newObject = n_new(type); \
-        RefCounted::isInCreate = false; \
-        RefCounted::criticalSection.Leave(); \
+        MClassInfo::isInCreate = false; \
+        MClassInfo::criticalSection.Unlock(); \
         return newObject; \
     }\
     bool type::RegisterWithFactory() \
@@ -58,7 +59,7 @@ private:
     GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
     { \
-        return n_new(type); \
+        return my_new(type); \
     }\
     bool type::RegisterWithFactory() \
     { \
@@ -69,6 +70,7 @@ private:
         return true; \
     }
 #endif
+
 
 #define __ImplementAbstractClass(type, baseType) \
     MClassInfo type::RTTI(#type, 0, &baseType::RTTI, 0); \
@@ -82,11 +84,11 @@ private:
     Core::RefCounted* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
     { \
-        RefCounted::criticalSection.Enter(); \
-        RefCounted::isInCreate = true; \
+        MClassInfo::criticalSection.Lock(); \
+        MClassInfo::isInCreate = true; \
         type* newObject = n_new(type); \
-        RefCounted::isInCreate = false; \
-        RefCounted::criticalSection.Leave(); \
+        MClassInfo::isInCreate = false; \
+        MClassInfo::criticalSection.Unlock(); \
         return newObject; \
     }\
     bool type::RegisterWithFactory() \
