@@ -11,46 +11,12 @@
 #undef delete
 #endif
 
-__forceinline void* operator new(size_t size)
-{
-	//return Memory::Alloc(Memory::ObjectHeap, size);
-	void* ptr = malloc(size);
-	return ptr;
-}
-
-__forceinline void* operator new(size_t size, const std::nothrow_t& noThrow)
-{
-	//return Memory::Alloc(Memory::ObjectHeap, size);
-	void* ptr = malloc(size);
-	return ptr;
-}
-
-__forceinline void* operator new[](size_t size)
-{
-	//return Memory::Alloc(Memory::ObjectArrayHeap, size);
-	void* ptr = malloc(size);
-	return ptr;
-}
-
-__forceinline void* operator new[](size_t size, const std::nothrow_t& noThrow)
-{
-	//return Memory::Alloc(Memory::ObjectArrayHeap, size);
-	void* ptr = malloc(size);
-	return ptr;
-}
-
-__forceinline void operator delete(void* ptr)
-{
-	//Memory::Free(Memory::ObjectHeap, ptr);
-	free(ptr);
-}
-
-__forceinline void operator delete[](void* ptr)
-{
-	//Memory::Free(Memory::ObjectArrayHeap, ptr);
-	free(ptr);
-}
-
+__forceinline void* operator new(size_t size);
+__forceinline void* operator new(size_t size, const std::nothrow_t& noThrow);
+__forceinline void* operator new[](size_t size);
+__forceinline void* operator new[](size_t size, const std::nothrow_t& noThrow);
+__forceinline void operator delete(void* ptr);
+__forceinline void operator delete[](void* ptr);
 
 #define my_new(type) new type
 #define my_new_array(type,size) new type[size]
