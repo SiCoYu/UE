@@ -10,21 +10,21 @@ void MClassInfo::Construct(const char* className, Creator creatorFunc, const MCl
 	my_assert(0 != className);
 	my_assert(parentClass != this);
 
-	this->parent = parentClass;
-	this->creator = creatorFunc;
-	this->instanceSize = instSize;
+	this->mParent = parentClass;
+	this->mCreator = creatorFunc;
+	this->mInstanceSize = instSize;
 
-	this->name = className;
+	this->mName = className;
 	if (nullptr != className)
 	{
-		if (!MClassFactory::Instance()->ClassExists(this->name))
+		if (!MClassFactory::Instance()->ClassExists(this->mName))
 		{
-			MClassFactory::Instance()->Register(this, this->name);
+			MClassFactory::Instance()->Register(this, this->mName);
 		}
 #if MY_DEBUG
 		else
 		{
-			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetClassInfo(this->name);
+			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetClassInfo(this->mName);
 			my_assert(0 != checkClassInfo);
 			if (checkClassInfo != this)
 			{
@@ -42,13 +42,13 @@ MClassInfo::MClassInfo(const char* className, Creator creatorFunc, const MClassI
 
 GObject* MClassInfo::Create() const
 {
-	if (0 == this->creator)
+	if (0 == this->mCreator)
 	{
 		return 0;
 	}
 	else
 	{
-		return this->creator();
+		return this->mCreator();
 	}
 }
 
@@ -70,7 +70,7 @@ bool MClassInfo::IsDerivedFrom(const std::string& otherClassName) const
 	const MClassInfo* cur;
 	for (cur = this; cur != 0; cur = cur->GetParent())
 	{
-		if (cur->name == otherClassName)
+		if (cur->mName == otherClassName)
 		{
 			return true;
 		}
@@ -85,7 +85,7 @@ void* MClassInfo::AllocInstanceMemory()
 #else
 	//void* ptr = Memory::Alloc(Memory::ObjectHeap, this->instanceSize);
 #endif
-	void* ptr = malloc(instanceSize);
+	void* ptr = malloc(mInstanceSize);
 	return ptr;
 }
 

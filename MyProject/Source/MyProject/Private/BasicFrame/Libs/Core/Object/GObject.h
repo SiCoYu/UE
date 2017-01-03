@@ -29,29 +29,29 @@ protected:
 	virtual ~GObject();
 
 private:
-	volatile int refCount;
+	volatile int mRefCount;
 
 #if My_DEBUG
 protected:
-	static bool isInCreate;
-	static MMutex criticalSection;
+	static bool mIsInCreate;
+	static MMutex mCriticalSection;
 #endif
 };
 
 inline GObject::GObject() :
-	refCount(0)
+	mRefCount(0)
 {
 	
 }
 
 inline void GObject::AddRef()
 {
-	//Threading::Interlocked::Increment(this->refCount);
+	//Threading::Interlocked::Increment(this->mRefCount);
 }
 
 inline void GObject::Release()
 {
-	//if (0 == Threading::Interlocked::Decrement(this->refCount))
+	//if (0 == Threading::Interlocked::Decrement(this->mRefCount))
 	//{
 	//	n_delete(this);
 	//}
@@ -59,7 +59,7 @@ inline void GObject::Release()
 
 inline int GObject::GetRefCount() const
 {
-	return this->refCount;
+	return this->mRefCount;
 }
 
 inline bool GObject::IsInstanceOf(const MClassInfo& other) const

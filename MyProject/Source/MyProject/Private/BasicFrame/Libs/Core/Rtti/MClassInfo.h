@@ -26,10 +26,10 @@ public:
 private:
 	void Construct(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize);
 
-	std::string name;
-	const MClassInfo* parent;
-	Creator creator;
-	SizeT instanceSize;
+	std::string mName;
+	const MClassInfo* mParent;
+	Creator mCreator;
+	SizeT mInstanceSize;
 };
 
 inline bool MClassInfo::operator==(const MClassInfo& rhs) const
@@ -44,17 +44,17 @@ inline bool MClassInfo::operator!=(const MClassInfo& rhs) const
 
 inline const std::string& MClassInfo::GetName() const
 {
-	return this->name;
+	return this->mName;
 }
 
 inline const MClassInfo* MClassInfo::GetParent() const
 {
-	return this->parent;
+	return this->mParent;
 }
 
 inline SizeT MClassInfo::GetInstanceSize() const
 {
-	return this->instanceSize;
+	return this->mInstanceSize;
 }
 
 #include "MClassMacros.h"

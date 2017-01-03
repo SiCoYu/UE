@@ -7,13 +7,13 @@
 M_IMPLEMENT_ROOT_CLASS(GObject);
 
 #if MY_DEBUG
-MMutex GObject::criticalSection;
-bool GObject::isInCreate = false;
+MMutex GObject::mCriticalSection;
+bool GObject::mIsInCreate = false;
 #endif
 
 GObject::~GObject()
 {
-	my_assert(0 == this->refCount);
+	my_assert(0 == this->mRefCount);
 }
 
 void GObject::DumpRefCountingLeaks()

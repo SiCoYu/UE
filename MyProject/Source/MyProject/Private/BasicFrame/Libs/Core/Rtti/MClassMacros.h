@@ -36,11 +36,11 @@ private:
     GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
     { \
-        MClassInfo::criticalSection.Lock(); \
-        MClassInfo::isInCreate = true; \
+        MClassInfo::mCriticalSection.Lock(); \
+        MClassInfo::mIsInCreate = true; \
         type* newObject = my_new(type); \
-        MClassInfo::isInCreate = false; \
-        MClassInfo::criticalSection.Unlock(); \
+        MClassInfo::mIsInCreate = false; \
+        MClassInfo::mCriticalSection.Unlock(); \
         return newObject; \
     }\
     bool type::RegisterWithFactory() \
@@ -83,11 +83,11 @@ private:
     GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
     { \
-        MClassInfo::criticalSection.Lock(); \
-        MClassInfo::isInCreate = true; \
+        MClassInfo::mCriticalSection.Lock(); \
+        MClassInfo::mIsInCreate = true; \
         type* newObject = my_new(type); \
-        MClassInfo::isInCreate = false; \
-        MClassInfo::criticalSection.Unlock(); \
+        MClassInfo::mIsInCreate = false; \
+        MClassInfo::mCriticalSection.Unlock(); \
         return newObject; \
     }\
     bool type::RegisterWithFactory() \
