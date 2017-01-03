@@ -1,12 +1,23 @@
 #include <MyProject.h>
 #include <LuaSystem.h>
 
-void LuaSystem::setString(std::string key, std::string value)
+LuaSystem::LuaSystem();
 {
 
 }
 
-std::string LuaSystem::getString(std::string key)
+LuaSystem::~LuaSystem()
 {
-	return "";
+
+}
+
+void LuaSystem::init()
+{
+	L = luaL_newstate();
+	luaL_openlibs(L);
+}
+
+void LuaSystem::dispose()
+{
+	lua_close(L);
 }

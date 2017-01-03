@@ -1,17 +1,27 @@
 #pragma once
 
-#include <string>
+extern "C" 
+{
+	#include "lua.h"
+	#include "lualib.h"
+	#include "lauxlib.h"
+}  // extern "C"
+
+#include "LuaBridge/LuaBridge.h"
 
 /**
 * @brief œµÕ≥…Ë÷√
 */
 class LuaSystem
 {
-public:
-	static std::string USERNAME;
-	static std::string PASSWORD;
+protected:
+	lua_State* L;
 
 public:
-	void setString(std::string key, std::string value);
-	std::string getString(std::string key);
+	LuaSystem();
+	~LuaSystem();
+
+protected:
+	void init();
+	void dispose();
 };
