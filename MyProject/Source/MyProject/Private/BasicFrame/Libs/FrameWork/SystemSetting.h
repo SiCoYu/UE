@@ -8,17 +8,10 @@
 class SystemSetting
 {
 public:
-    static std::string USERNAME = "username";
-	static std::string PASSWORD = "password";
+    static std::string USERNAME;
+	static std::string PASSWORD;
 
 public:
-    void setString(std::string key, std::string value)
-    {
-        
-    }
-
-    std::string getString(std::string key)
-    {
-
-    }
+	void setString(std::string key, std::string value);
+	std::string getString(std::string key);
 };
