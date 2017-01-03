@@ -3,8 +3,13 @@
 
 #include "TestBase.h"
 
+class TestMemoryObject;
+
 class TestMemory : public TestBase
 {
+protected:
+	TestMemoryObject* mTestMemoryObject;
+
 public:
 	virtual void run() override;
 };
