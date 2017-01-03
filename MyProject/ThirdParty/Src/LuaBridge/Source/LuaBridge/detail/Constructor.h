@@ -68,7 +68,9 @@ struct Constructor <T, TypeList <P1> >
   }
   static T* call (void* mem, const TypeListValues<TypeList <P1> > &tvl)
   {
-    return new (mem) T(tvl.hd);
+	  // TODO:LUA5.3
+    //return ::new (mem) T(tvl.hd);
+	  return ::new (mem) T(tvl.hd);
   }
 };
 
