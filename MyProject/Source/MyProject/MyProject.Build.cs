@@ -75,6 +75,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Core/Platform",
                 "MyProject/Private/BasicFrame/Libs/Core/Memory",
 
+                "MyProject/Private/BasicFrame/Libs/LuaBind",
+
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",
                 "MyProject/Private/BasicFrame/UI/UITestCanvas",
@@ -295,6 +297,7 @@ public class MyProject : ModuleRules
                 // ... add public include paths required here ...
                 Path.Combine(ThirdPartyPath, "Inc"),
                 Path.Combine(ThirdPartyPath, "Inc", "Lua"),
+                Path.Combine(ThirdPartyPath, "Inc", "LuaBridge"),
             }
         );
     }

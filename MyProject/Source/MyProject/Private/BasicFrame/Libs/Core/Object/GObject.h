@@ -1,9 +1,9 @@
 ﻿#pragma once
 
 #include <string>
-#include "Rtti/MClassInfo.h"
+#include "MClassInfo.h"
 #include "MMutex.h"
-#include "Rtti/MClassMacros.h"
+#include "MClassMacros.h"
 
 class GObject
 {
