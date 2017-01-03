@@ -22,5 +22,7 @@
 #include "MyStreamableManager.h"
 #include "DownloadMgr.h"
 #include "MFileSys.h"
+#include "SystemSetting.h"
+#include "LuaSystem.h"
 
 #endif

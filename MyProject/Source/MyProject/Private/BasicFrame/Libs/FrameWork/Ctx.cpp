@@ -17,6 +17,8 @@
 #include "ObjectAssetInsMgr.h"
 #include "MyStreamableManager.h"
 #include "DownloadMgr.h"
+#include "SystemSetting.h"
+#include "LuaSystem.h"
 
 #include "Ctx.h"
 
@@ -222,6 +224,16 @@ MySharedPtr<DownloadMgr> Ctx::getDownloadMgr()
 MySharedPtr<MFileSys> Ctx::getFileSys()
 {
 	return this->mFileSys;
+}
+
+MySharedPtr<SystemSetting> Ctx::getSystemSetting()
+{
+	return mSystemSetting;
+}
+
+MySharedPtr<LuaSystem> Ctx::getLuaSystem()
+{
+	return mLuaSystem;
 }
 
 void Ctx::testApi()

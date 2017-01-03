@@ -30,6 +30,8 @@ class ObjectAssetInsMgr;
 class FMyStreamableManager;
 class DownloadMgr;
 class MFileSys;
+class SystemSetting;
+class LuaSystem;
 
 #ifdef ENABLE_UNIT_TEST
 	class TestMain;
@@ -55,6 +57,8 @@ protected:
 	MySharedPtr<FMyStreamableManager> mMyStreamableManager;
 	MySharedPtr<DownloadMgr> mDownloadMgr;
 	MySharedPtr<MFileSys> mFileSys;
+	MySharedPtr<SystemSetting> mSystemSetting;
+	MySharedPtr<LuaSystem> mLuaSystem;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -93,6 +97,8 @@ public:
 	MySharedPtr<FMyStreamableManager> getMyStreamableManager();
 	MySharedPtr<DownloadMgr> getDownloadMgr();
 	MySharedPtr<MFileSys> getFileSys();
+	MySharedPtr<SystemSetting> getSystemSetting();
+	MySharedPtr<LuaSystem> getLuaSystem();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -124,5 +130,7 @@ public:
 #define GDownloadMgr GCtx->getDownloadMgr()
 #define GFileSys GCtx->getFileSys()
 #define GSandboxPlatformFile GCtx->getFileSys()->getSandboxPlatformFile()
+#define GSystemSetting GCtx->getSystemSetting()
+#define GLuaSystem GCtx->getLuaSystem()
 
 #endif				// __CTX_H
