@@ -263,7 +263,7 @@ public class MyProject : ModuleRules
         LoadTestExtern(Target);
         //LoadGtest(Target);
         LoadLua(Target);
-        //LoadLuaSocket(Target);
+        LoadLuaSocket(Target);
     }
 
     /// <summary>
