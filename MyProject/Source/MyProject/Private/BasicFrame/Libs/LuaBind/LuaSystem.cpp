@@ -1,6 +1,7 @@
 #include <MyProject.h>
 #include "LuaSystem.h"
 #include "LuaCppBind.h"
+#include "LuaCustomLoader.h"
 
 LuaSystem::LuaSystem()
 {
@@ -21,6 +22,9 @@ void LuaSystem::init()
 	// 打开 Socket
 	luaopen_mime_core(L);
 	luaopen_socket_core(L);
+
+	// 绑定自定义加载器
+	dotAddLoader(L);
 
 	// 绑定外部库
 	LuaCppBind::bind(L);
