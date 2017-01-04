@@ -1,6 +1,6 @@
 project(LuaBridge)
 
-message(STATUS "LuaBridge")
+message(STATUS "${PROJECT_NAME} Project")
 
 # ¿½±´ÎÄ¼þ
 file(REMOVE_RECURSE "${CMAKE_SOURCE_DIR}/../Inc/${PROJECT_NAME}")

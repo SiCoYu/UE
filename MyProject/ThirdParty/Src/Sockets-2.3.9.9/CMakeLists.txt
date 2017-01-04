@@ -2,7 +2,7 @@ project(Sockets)
 
 # 只处理 win32 平台  
 if(WIN32)
-	message(STATUS "Sockets Project")
+	message(STATUS "${PROJECT_NAME} Project")
 	set(AsynchronousDNS_SRCS
 		./ResolvServer.cpp
 		./ResolvSocket.cpp
@@ -332,19 +332,19 @@ if(WIN32)
 	file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}")
 	
 	install(FILES 
-		${Sockets_BINARY_DIR}/Debug/Sockets_d.lib
+		${Sockets_BINARY_DIR}/Debug/${PROJECT_NAME}_d.lib
 		DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}" CONFIGURATIONS Debug
 	)
 	install(FILES 
-		${Sockets_BINARY_DIR}/Release/Sockets.lib
+		${Sockets_BINARY_DIR}/Release/${PROJECT_NAME}.lib
 		DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}" CONFIGURATIONS Release None ""
 	)
 	install(FILES 
-		${Sockets_BINARY_DIR}/RelWithDebInfo/Sockets.lib
+		${Sockets_BINARY_DIR}/RelWithDebInfo/${PROJECT_NAME}.lib
 		DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}" CONFIGURATIONS RelWithDebInfo
 	)
 	install(FILES 
-		${Sockets_BINARY_DIR}/MinSizeRel/Sockets.lib
+		${Sockets_BINARY_DIR}/MinSizeRel/${PROJECT_NAME}.lib
 		DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/${PROJECT_NAME}" CONFIGURATIONS MinSizeRel
 	)
 	
