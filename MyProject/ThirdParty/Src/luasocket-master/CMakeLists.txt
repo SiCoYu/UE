@@ -1,6 +1,6 @@
 project(LuaSocket)
 
-message(STATUS "LuaSocket Project")
+message(STATUS "${PROJECT_NAME} Project")
 set(SRCS
 	./src/auxiliar.h
 	./src/auxiliar.c
@@ -32,8 +32,10 @@ set(SRCS
 )
 
 source_group("Src" FILES ${SRCS})
-include_directories(./src ../lua-5.3.1/src)
 
+set(CMAKE_BUILD_TYPE Debug CACHE STRING "set build type to debug")  
+
+include_directories(./src ../lua-5.3.1/src)
 link_directories(../../Lib/Lua)
 
 ADD_LIBRARY(${PROJECT_NAME} STATIC ${SRCS})
