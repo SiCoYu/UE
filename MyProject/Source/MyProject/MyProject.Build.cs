@@ -261,7 +261,7 @@ public class MyProject : ModuleRules
         loadThirdPartyInclude();
         LoadSockets(Target);
         LoadTestExtern(Target);
-        LoadGtest(Target);
+        //LoadGtest(Target);
         LoadLua(Target);
         //LoadLuaSocket(Target);
     }

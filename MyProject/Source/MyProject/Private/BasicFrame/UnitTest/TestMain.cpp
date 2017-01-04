@@ -4,7 +4,7 @@
 #include "TestSocket.h"
 #include "TestUI.h"
 
-#include "gtest/gtest.h"
+//#include "gtest/gtest.h"
 #include "GrobalEvent.h"
 #include "TestDownload.h"
 #include "TestLuaBind.h"
@@ -24,16 +24,16 @@ TestMain::TestMain()
 
 void TestMain::runTest()
 {
-	const TCHAR* CmdLine = GetCommandLine();
-	LPWSTR *szArgList;
-	int argCount;
-	szArgList = CommandLineToArgvW(CmdLine, &argCount);
+	//const TCHAR* CmdLine = GetCommandLine();
+	//LPWSTR *szArgList;
+	//int argCount;
+	//szArgList = CommandLineToArgvW(CmdLine, &argCount);
 
-	testing::AddGlobalTestEnvironment(new GrobalEvent);
-	testing::InitGoogleTest(&argCount, szArgList);
+	//testing::AddGlobalTestEnvironment(new GrobalEvent);
+	//testing::InitGoogleTest(&argCount, szArgList);
 
-	//testing::InitGoogleTest(__argc, __argv);
-	RUN_ALL_TESTS();
+	////testing::InitGoogleTest(__argc, __argv);
+	//RUN_ALL_TESTS();
 
 	//mTestUI->run()
 	//mTestDownload->run();

@@ -17,32 +17,32 @@ MCircularBufferTest::~MCircularBufferTest()
 void MCircularBufferTest::SetUpTestCase()
 {
 	//std::cout << "gtest MCircularBufferTest static SetUpTestCase execute" << std::endl;
-	GLog->Logf(TEXT("gtest MCircularBufferTest static SetUpTestCase execute"));
+	//GLog->Logf(TEXT("gtest MCircularBufferTest static SetUpTestCase execute"));
 }
 
 void MCircularBufferTest::TearDownTestCase()
 {
 	//std::cout << "gtest MCircularBufferTest static TearDownTestCase execute" << std::endl;
-	GLog->Logf(TEXT("gtest MCircularBufferTest static TearDownTestCase execute"));
+	//GLog->Logf(TEXT("gtest MCircularBufferTest static TearDownTestCase execute"));
 }
 
 void MCircularBufferTest::SetUp()
 {
 	//std::cout << "gtest MCircularBufferTest SetUp execute" << std::endl;
-	GLog->Logf(TEXT("gtest MCircularBufferTest SetUp execute"));
+	//GLog->Logf(TEXT("gtest MCircularBufferTest SetUp execute"));
 }
 
 void MCircularBufferTest::TearDown()
 {
 	//std::cout << "gtest MCircularBufferTest TearDown execute" << std::endl;
-	GLog->Logf(TEXT("gtest MCircularBufferTest TearDown execute"));
+	//GLog->Logf(TEXT("gtest MCircularBufferTest TearDown execute"));
 }
 
 
-TEST_F(MCircularBufferTest, size)
-{
-	EXPECT_TRUE(mCircularBuffer.getSize() == 0);
-}
+//TEST_F(MCircularBufferTest, size)
+//{
+//	EXPECT_TRUE(mCircularBuffer.getSize() == 0);
+//}
 
 //TEST_F(MCircularBufferTest, PushOne)
 //{

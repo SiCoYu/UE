@@ -2,9 +2,10 @@
 #define __TestNetClientBuffer_H
 
 #include "MCircularBuffer.h"
-#include "gtest/gtest.h"
+//#include "gtest/gtest.h"
 
-class MCircularBufferTest : public testing::Test
+//class MCircularBufferTest : public testing::Test
+class MCircularBufferTest
 {
 protected:
 	MCircularBuffer mCircularBuffer;

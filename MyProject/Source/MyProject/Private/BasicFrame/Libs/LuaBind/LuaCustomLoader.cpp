@@ -199,8 +199,8 @@ int dotLoadLua(lua_State *L)
 
 		fclose(hFile);
 		//char* buffer = "function add(a, b)\r\n\t \
-					   			return 10\r\n \
-											end";
+		//			   			return 10\r\n \
+		//									end";
 		//char* buffer1 = "function add()\n\treturn 10\nend";
 		//int size1 = strlen(buffer1);
 
