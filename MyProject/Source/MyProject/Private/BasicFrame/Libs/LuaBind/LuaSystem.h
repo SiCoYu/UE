@@ -19,4 +19,6 @@ public:
 	void dispose();
 
 	lua_State* getLuaVM();
+
+	void doString(std::string str);
 };

@@ -23,5 +23,5 @@ void TestLuaBind::run()
 		"ok, off = testClass:startWith(true, 'if', 'else')\n"
 		"print(ok, off)\n";
 
-	luaL_dostring(GLuaSystem->getLuaVM(), "sayHello()");
+	GLuaSystem->doString("sayHello()");
 }

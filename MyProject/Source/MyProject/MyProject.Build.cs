@@ -263,7 +263,8 @@ public class MyProject : ModuleRules
         LoadTestExtern(Target);
         LoadGtest(Target);
         LoadLua(Target);
-	}
+        //LoadLuaSocket(Target);
+    }
 
     /// <summary>
     /// Accessor for the Module's path
@@ -299,6 +300,7 @@ public class MyProject : ModuleRules
                 Path.Combine(ThirdPartyPath, "Inc"),
                 Path.Combine(ThirdPartyPath, "Inc", "Lua"),
                 Path.Combine(ThirdPartyPath, "Inc", "LuaBridge"),
+                Path.Combine(ThirdPartyPath, "Inc", "LuaSocket"),
             }
         );
     }
@@ -407,7 +409,27 @@ public class MyProject : ModuleRules
 
             AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
 
-            PublicAdditionalLibraries.Add(BuildPath + "/armv7/libcrypto.so");
+            PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLua.so");
+        }
+
+        return true;
+    }
+
+    private bool LoadLuaSocket(TargetInfo Target)
+    {
+        if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+        {
+            string LibrariesPath;
+            LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "LuaSocket", "LuaSocket_d.lib");
+            PublicAdditionalLibraries.Add(LibrariesPath);
+        }
+        else if (Target.Platform == UnrealTargetPlatform.Android)
+        {
+            string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+
+            AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+
+            PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLuaSocket.so");
         }
 
         return true;
