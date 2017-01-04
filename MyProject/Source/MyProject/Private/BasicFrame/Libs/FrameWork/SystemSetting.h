@@ -12,6 +12,9 @@ public:
 	static std::string PASSWORD;
 
 public:
+	void init();
+	void dispose();
+
 	void setString(std::string key, std::string value);
 	std::string getString(std::string key);
 };

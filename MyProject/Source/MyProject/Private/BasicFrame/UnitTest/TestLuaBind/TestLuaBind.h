@@ -3,6 +3,9 @@
 
 #include "TestBase.h"
 
+/**
+ * @url https://segmentfault.com/a/1190000005765697
+ */
 class TestLuaBind : public TestBase
 {
 public:

@@ -61,6 +61,9 @@ Ctx::~Ctx()
 	this->mMyStreamableManager = nullptr;
 	this->mPoolSys = nullptr;
 	this->mFileSys = nullptr;
+
+	this->mSystemSetting = nullptr;
+	this->mLuaSystem = nullptr;
 }
 
 void Ctx::construct()
@@ -92,6 +95,8 @@ void Ctx::construct()
 	this->mPoolSys = MySharedPtr<PoolSys>(SAFE_NEW PoolSys());
 	this->mDownloadMgr = MySharedPtr<DownloadMgr>(SAFE_NEW DownloadMgr());
 	this->mFileSys = MySharedPtr<MFileSys>(SAFE_NEW MFileSys());
+	this->mSystemSetting = MySharedPtr<MFileSys>(SAFE_NEW SystemSetting());
+	this->mLuaSystem = MySharedPtr<MFileSys>(SAFE_NEW LuaSystem());
 }
 
 void Ctx::init()
@@ -104,6 +109,8 @@ void Ctx::init()
 	this->mPoolSys->init();
 	this->mDownloadMgr->init();
 	this->mFileSys->init();
+	this->mSystemSetting->init();
+	this->mLuaSystem->init();
 
 	// ¹ÒÔÚÄ¿Â¼
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");

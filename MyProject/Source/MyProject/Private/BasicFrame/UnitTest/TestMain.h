@@ -5,6 +5,7 @@ class TestExtern;
 class TestSocket;
 class TestUI;
 class TestDownload;
+class TestLuaBind;
 
 class TestMain
 {
@@ -13,6 +14,7 @@ public:
 	TestSocket* mTestSocket;
 	TestUI* mTestUI;
 	TestDownload* mTestDownload;
+	TestLuaBind* mTestLuaBind;
 
 public:
 	TestMain();

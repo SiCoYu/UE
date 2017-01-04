@@ -14,7 +14,7 @@ public:
 	LuaSystem();
 	~LuaSystem();
 
-protected:
+public:
 	void init();
 	void dispose();
 };

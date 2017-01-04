@@ -3,13 +3,22 @@
 
 void TestLuaBind::run()
 {
-	char* str =
-		"line = Line('  if ...')\n"
-		"print(line:startWith('if', false))\n"
-		"print(line:startWith('if', true))\n";
+	const char* str =
+		"local testClass = TestClass('test')\n"
+		"print(testClass:getLength())\n";
 
 	str =
-		"line = Line('  if ...')\n"
-		"ok, off = line:startWith('if', true)\n"
+		"local testClass = TestClass('  if ...')\n"
+		"print(testClass:startWith('if', false))\n"
+		"print(testClass:startWith('if', true))\n";
+
+	str =
+		"local testClass = TestClass('  if ...')\n"
+		"ok, off = testClass:startWith('if', true)\n"
+		"print(ok, off)\n";
+
+	str =
+		"local testClass = TestClass('  else ...')\n"
+		"ok, off = testClass:startWith(true, 'if', 'else')\n"
 		"print(ok, off)\n";
 }

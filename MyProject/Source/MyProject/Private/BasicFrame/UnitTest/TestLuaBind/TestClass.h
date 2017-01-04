@@ -10,8 +10,9 @@ class TestClass : public GObject
 public:
 	TestClass(const std::string& data);
 	size_t Length() const;
-	bool StartWith(const std::string& str,
-		bool ignore_spaces);
+	bool IsSpace(char c);
+	//bool StartWith(const std::string& str, bool ignore_spaces);
+	bool StartWith(const std::string& str, bool ignore_spaces, int* off = NULL);
 	int Lua_StartWith(lua_State* L);
 
 private:

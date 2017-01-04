@@ -7,6 +7,7 @@
 #include "gtest/gtest.h"
 #include "GrobalEvent.h"
 #include "TestDownload.h"
+#include "TestLuaBind.h"
 
 #include "Windows/AllowWindowsPlatformTypes.h"
 #include <shellapi.h>
@@ -18,6 +19,7 @@ TestMain::TestMain()
 	mTestSocket = new TestSocket();
 	mTestUI = new TestUI();
 	mTestDownload = new TestDownload();
+	mTestLuaBind = new TestLuaBind();
 }
 
 void TestMain::runTest()
@@ -33,7 +35,7 @@ void TestMain::runTest()
 	//testing::InitGoogleTest(__argc, __argv);
 	RUN_ALL_TESTS();
 
-	mTestUI->run();
-
-	mTestDownload->run();
+	//mTestUI->run()
+	//mTestDownload->run();
+	mTestLuaBind->run();
 }
