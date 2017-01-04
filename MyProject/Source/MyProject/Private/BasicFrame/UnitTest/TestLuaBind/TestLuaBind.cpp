@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "TestLuaBind.h"
+#include "Common.h"
 
 void TestLuaBind::run()
 {
@@ -21,4 +22,6 @@ void TestLuaBind::run()
 		"local testClass = TestClass('  else ...')\n"
 		"ok, off = testClass:startWith(true, 'if', 'else')\n"
 		"print(ok, off)\n";
+
+	luaL_dostring(GLuaSystem->getLuaVM(), "sayHello()");
 }

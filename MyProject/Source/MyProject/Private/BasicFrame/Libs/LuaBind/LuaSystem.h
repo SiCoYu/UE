@@ -17,4 +17,6 @@ public:
 public:
 	void init();
 	void dispose();
+
+	lua_State* getLuaVM();
 };

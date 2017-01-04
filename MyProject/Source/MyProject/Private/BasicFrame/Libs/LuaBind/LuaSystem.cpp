@@ -24,3 +24,8 @@ void LuaSystem::dispose()
 {
 	lua_close(L);
 }
+
+lua_State* LuaSystem::getLuaVM()
+{
+	return L;
+}
