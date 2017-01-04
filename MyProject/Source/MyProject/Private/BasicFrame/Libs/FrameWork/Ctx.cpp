@@ -95,8 +95,8 @@ void Ctx::construct()
 	this->mPoolSys = MySharedPtr<PoolSys>(SAFE_NEW PoolSys());
 	this->mDownloadMgr = MySharedPtr<DownloadMgr>(SAFE_NEW DownloadMgr());
 	this->mFileSys = MySharedPtr<MFileSys>(SAFE_NEW MFileSys());
-	this->mSystemSetting = MySharedPtr<MFileSys>(SAFE_NEW SystemSetting());
-	this->mLuaSystem = MySharedPtr<MFileSys>(SAFE_NEW LuaSystem());
+	this->mSystemSetting = MySharedPtr<SystemSetting>(SAFE_NEW SystemSetting());
+	this->mLuaSystem = MySharedPtr<LuaSystem>(SAFE_NEW LuaSystem());
 }
 
 void Ctx::init()
