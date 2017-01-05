@@ -8,9 +8,11 @@ class MUe4Task
 protected:
 	FString mTaskName;
 	FGraphEventArray mCompletionEvents;
+	FTimerHandle mOneSecTimerHandle;
+	FTimerDelegate mTimerDelegate;
 
 public:
-	FVictoryTestTask()
+	MUe4Task()
 	{
 		mTaskName = "MUe4Task"
 	}
@@ -56,5 +58,16 @@ public:
 	void startTask()
 	{
 		mCompletionEvents.Add(TGraphTask<T>::CreateTask(NULL, ENamedThreads::GameThread).ConstructAndDispatchWhenReady());
+
+		mTimerDelegate = FTimerDelegate::CreateRaw(this, &MUe4Task<T>::onTaskDone);
+		EngineApi::GetWorldTimerManager().SetTimer(mOneSecTimerHandle, mTimerDelegate, 1, true);
+	}
+
+	void onTaskDone()
+	{
+		if (TasksAreComplete())
+		{
+			GetWorldTimerManager().ClearTimer(OneSecTimerHandle);
+		}
 	}
 };
