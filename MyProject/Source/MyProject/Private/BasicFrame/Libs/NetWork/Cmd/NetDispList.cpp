@@ -13,6 +13,21 @@ NetDispList::NetDispList()
 
 }
 
+NetDispList::~NetDispList()
+{
+
+}
+
+void NetDispList::init()
+{
+
+}
+
+void NetDispList::dispose()
+{
+
+}
+
 bool NetDispList::getBStopNetHandle()
 {
 	return mIsStopNetHandle;

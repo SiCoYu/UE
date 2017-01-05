@@ -62,8 +62,3 @@ void MThread::Shutdown()
 {
 	this->EnsureCompletion();
 }
-
-bool MThread::IsThreadFinished()
-{
-	return this->IsFinished();
-}

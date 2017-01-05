@@ -79,5 +79,6 @@
 #include "Containers/StringConv.h"	// FTCHARToUTF8\FUTF8ToTCHAR\TCHAR_TO_ANSI\ANSI_TO_TCHAR\TCHAR_TO_UTF8\UTF8_TO_TCHAR
 #include "AI/Navigation/AvoidanceManager.h"		// UAvoidanceManager
 #include "Engine/World.h"		// InitializationValues
+#include "HAL/ThreadSafeCounter.h"	// FThreadSafeCounter
 
 #endif

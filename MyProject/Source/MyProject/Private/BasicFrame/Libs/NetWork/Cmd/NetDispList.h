@@ -17,6 +17,11 @@ protected:
 
 public:
 	NetDispList();
+	~NetDispList();
+
+public:
+	void init();
+	void dispose();
 
 	bool getBStopNetHandle();
 	void setBStopNetHandle(bool value);

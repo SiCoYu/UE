@@ -36,7 +36,6 @@ public:
 	void Stop();
 	void EnsureCompletion();
 	void Shutdown();
-	bool IsThreadFinished();
 };
 
 #endif

@@ -6,7 +6,7 @@ EngineData::EngineData()
 
 }
 
-~EngineData::EngineData()
+EngineData::~EngineData()
 {
 
 }

@@ -21,7 +21,7 @@ TableSys::TableSys()
 	mByteBuffer = new ByteBuffer();
 }
 
-TableSys::TableSys()
+TableSys::~TableSys()
 {
 
 }
