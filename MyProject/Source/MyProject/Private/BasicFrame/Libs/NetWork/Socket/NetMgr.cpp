@@ -179,7 +179,7 @@ void NetMgr::init()
 
 void NetMgr::dispose()
 {
-	this->quipApp();
+	this->quipNet();
 }
 
 void NetMgr::startThread()
@@ -188,7 +188,7 @@ void NetMgr::startThread()
 	//m_pRenderingThread = FRunnableThread::Create(mNetThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
 	//mNetThread->m_pTaskGraphBoundSyncEvent->Wait();
 
-	// 函数 FRunnableThread::Create 第二个参数一定是款字节字符串，如果是多字节就会编译报错
+	// 函数 FRunnableThread::Create 第二个参数一定是宽字节字符串，如果是多字节就会编译报错
 	mNetThread = new UENetThread(this, "NetThread");
 	mNetThread->start();
 	mNetThread->getSyncEventPtr()->Wait();
@@ -401,10 +401,11 @@ void NetMgr::send(bool bnet)
 }
 
 // 关闭 App ，需要等待子线程结束
-void NetMgr::quipApp()
+void NetMgr::quipNet()
 {
 	mNetThread->Shutdown();        // 设置退出标志
-	closeCurSocket();
+	// TODO:这里会宕机，不知道为什么
+	//closeCurSocket();
 }
 
 void NetMgr::sendAndRecData()

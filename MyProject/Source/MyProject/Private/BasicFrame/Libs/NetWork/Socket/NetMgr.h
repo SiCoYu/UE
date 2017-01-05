@@ -95,8 +95,8 @@ public:
 	virtual ByteBuffer* getSendBA();
 	// 注意这个仅仅是放入缓冲区冲，真正发送在子线程中发送
 	virtual void send(bool bnet = true);
-	// 关闭 App ，需要等待子线程结束
-	void quipApp();
+	// 关闭网络 ，需要等待子线程结束
+	void quipNet();
 	void sendAndRecData();
 };
 
