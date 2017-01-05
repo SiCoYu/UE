@@ -4,7 +4,7 @@
 #include "MEvent.h"
 
 UENetThread::UENetThread(INetMgr* pNetMgr, std::string mThreadName)
-	: MThread(mThreadName), mIsExitFlag(false)
+	: MThread(mThreadName)
 {
 	mNetMgr = pNetMgr;
 	mSyncEvent = new MEvent();

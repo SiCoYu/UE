@@ -3,7 +3,7 @@
 #include "MEvent.h"
 
 MThread::MThread(std::string threadName)
-	: mThreadName(threadName)
+	: mThreadName(threadName), mIsExitFlag(false)
 {
 	//mSyncEvent = new MEvent();
 }
