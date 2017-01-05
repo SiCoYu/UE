@@ -16,7 +16,6 @@ void dotAddLoader(lua_State *L)
 	lua_getfield(L, -1, "searchers");
 	int loaderTable = lua_gettop(L);
 
-	// Shift table elements right
 	for (int e = (int)lua_rawlen(L, loaderTable) + 1; e > 1; e--)
 	{
 		lua_rawgeti(L, loaderTable, e - 1);
