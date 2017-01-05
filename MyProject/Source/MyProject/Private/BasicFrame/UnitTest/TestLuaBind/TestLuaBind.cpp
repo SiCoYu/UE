@@ -23,6 +23,5 @@ void TestLuaBind::run()
 		"ok, off = testClass:startWith(true, 'if', 'else')\n"
 		"print(ok, off)\n";
 
-	//GLuaSystem->doString("sayHello()");
-	GLuaSystem->doString("require \"aaa.lua\"");
+	GLuaSystem->doString("require(\"\MyLua.Module.Entry.MainEntry\"");
 }

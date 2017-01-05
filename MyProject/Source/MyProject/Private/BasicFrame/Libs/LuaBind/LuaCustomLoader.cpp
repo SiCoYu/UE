@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "luaconf.h"
 
-std::string g_searchsRootPath = "D:/file/opensource/unity-game-git/unitygame/Tools/LuaCppWrap/LuaScript";
+std::string g_searchsRootPath = "E:/Self/Self/unreal/UE-GIT/UE/MyProject/Content/MyAsset/Lua";
 
 void dotAddLoader(lua_State *L)
 {
