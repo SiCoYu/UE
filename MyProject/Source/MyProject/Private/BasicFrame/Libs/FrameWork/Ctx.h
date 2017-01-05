@@ -74,6 +74,7 @@ public:
 
 	void construct();
 	void init();
+	void dispose();
 	void beginPlay();
 
 	void setUiMgr(UIMgr* uiMgr);

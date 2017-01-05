@@ -172,6 +172,16 @@ NetMgr::~NetMgr()
 	delete mVisitMutex;
 }
 
+void NetMgr::init()
+{
+
+}
+
+void NetMgr::dispose()
+{
+	this->quipApp();
+}
+
 void NetMgr::startThread()
 {
 	//mNetThread = new UENetThread(this);
@@ -391,9 +401,8 @@ void NetMgr::send(bool bnet)
 // 关闭 App ，需要等待子线程结束
 void NetMgr::quipApp()
 {
+	mNetThread->Shutdown();        // 设置退出标志
 	closeCurSocket();
-	mNetThread->setExitFlag(true);        // 设置退出标志
-	mNetThread->join();                 // 等待线程结束
 }
 
 void NetMgr::sendAndRecData()

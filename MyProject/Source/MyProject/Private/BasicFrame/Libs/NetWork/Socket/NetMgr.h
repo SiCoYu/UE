@@ -75,6 +75,10 @@ public:
 #endif
 	~NetMgr();
 
+public:
+	void init();
+	void dispose();
+
 	virtual void openSocket(std::string ip, uint32 port);
 	/**
 	* @brief ¹Ø±Õ socket

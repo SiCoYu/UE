@@ -18,6 +18,12 @@ public:
 
 public:
 	TestMain();
+	~TestMain();
+
+public:
+	void init();
+	void dispose();
+
 	void runTest();
 };
 

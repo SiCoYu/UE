@@ -32,6 +32,11 @@ public:
 	virtual bool Init(void) override;
 	virtual void Exit(void) override;
 	virtual uint32 Run(void) override;
+
+	void Stop();
+	void EnsureCompletion();
+	void Shutdown();
+	bool IsThreadFinished();
 };
 
 #endif

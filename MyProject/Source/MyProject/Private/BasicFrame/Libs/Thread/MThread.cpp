@@ -28,6 +28,7 @@ void MThread::start()
 
 void MThread::join()
 {
+	this->Stop();
 	mThread->WaitForCompletion();
 }
 
@@ -44,4 +45,25 @@ void MThread::Exit(void)
 uint32 MThread::Run(void)
 {
 	return 0;
+}
+
+void MThread::Stop()
+{
+	mIsExitFlag = true;
+}
+
+void MThread::EnsureCompletion()
+{
+	this->Stop();
+	this->mThread->WaitForCompletion();
+}
+
+void MThread::Shutdown()
+{
+	this->EnsureCompletion();
+}
+
+bool MThread::IsThreadFinished()
+{
+	return this->IsFinished();
 }

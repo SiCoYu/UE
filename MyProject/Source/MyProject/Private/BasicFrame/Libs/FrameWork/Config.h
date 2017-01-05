@@ -37,6 +37,11 @@ public:
 
 public:
 	Config();
+	~Config();
+
+public:
+	void init();
+	void dispose();
 };
 
 #endif

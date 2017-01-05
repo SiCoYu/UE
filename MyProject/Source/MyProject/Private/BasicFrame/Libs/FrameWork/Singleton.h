@@ -10,12 +10,21 @@ private:
 public:
 	static T* getSingletonPtr()
 	{
-		if (msSingleton == NULL)
+		if (nullptr == msSingleton)
 		{
 			msSingleton = new T();
 		}
 
 		return msSingleton;
+	}
+
+	static void deleteSingletonPtr()
+	{
+		if (nullptr != msSingleton)
+		{
+			delete msSingleton;
+			msSingleton = nullptr;
+		}
 	}
 };
 

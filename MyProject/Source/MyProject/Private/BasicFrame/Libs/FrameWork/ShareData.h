@@ -17,6 +17,10 @@ public:
 public:
 	ShareData();
 	~ShareData();
+
+public:
+	void init();
+	void dispose();
 };
 
 #endif

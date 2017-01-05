@@ -11,6 +11,16 @@ LogSys::~LogSys()
 
 }
 
+void LogSys::init()
+{
+
+}
+
+void LogSys::dispose()
+{
+
+}
+
 //void LogSys::log(FString message)
 //{
 //}

@@ -29,6 +29,12 @@ private:
 
 public:
 	TableSys();
+	~TableSys();
+
+public:
+	void init();
+	void dispose();
+
     // 返回一个表
 	std::vector<TableItemBase*>* getTable(TableID::TableID tableID);
     // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中

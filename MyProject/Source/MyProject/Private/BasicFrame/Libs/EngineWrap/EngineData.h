@@ -13,6 +13,13 @@ protected:
 	UMyEngine* mMyEngine;
 
 public:
+	EngineData();
+	~EngineData();
+
+public:
+	void init();
+	void dispose();
+
 	AActor* getMainActor();
 	void setMainActor(AActor* actor);
 

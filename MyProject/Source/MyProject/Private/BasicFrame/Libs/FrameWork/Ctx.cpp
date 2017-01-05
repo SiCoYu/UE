@@ -36,34 +36,7 @@ Ctx::Ctx()
 
 Ctx::~Ctx()
 {
-	this->mUiMgr = nullptr;
-	this->mEngineData = nullptr;
-	this->mNetMgr = nullptr;
-	this->mTableSys = nullptr;
-
-#ifdef USE_EXTERN_THREAD
-	this->mStdoutLog = nullptr;
-#endif
-
-#ifdef ENABLE_UNIT_TEST
-	this->mTestMain = nullptr;
-#endif
-
-	this->mLogSys = nullptr;
-	this->mNetDispList = nullptr;
-	this->mShareData = nullptr;
-	this->mConfig = nullptr;
-
-	this->mResLoadMgr = nullptr;
-	this->mClassAssetInsMgr = nullptr;
-	this->mObjectAssetInsMgr = nullptr;
-
-	this->mMyStreamableManager = nullptr;
-	this->mPoolSys = nullptr;
-	this->mFileSys = nullptr;
-
-	this->mSystemSetting = nullptr;
-	this->mLuaSystem = nullptr;
+	this->dispose();
 }
 
 void Ctx::construct()
@@ -114,6 +87,63 @@ void Ctx::init()
 
 	// ¹ÒÔÚÄ¿Â¼
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
+}
+
+void Ctx::dispose()
+{
+	this->mUiMgr->dispose();
+	this->mEngineData->dispose();
+	this->mNetMgr->dispose();
+	this->mTableSys->dispose();
+
+#ifdef ENABLE_UNIT_TEST
+	this->mTestMain->dispose();
+#endif
+
+	this->mLogSys->dispose();
+	this->mNetDispList->dispose();
+	this->mShareData->dispose();
+	this->mConfig->dispose();
+
+	this->mResLoadMgr->dispose();
+	this->mClassAssetInsMgr->dispose();
+	this->mObjectAssetInsMgr->dispose();
+
+	this->mMyStreamableManager->dispose();
+	this->mPoolSys->dispose();
+	this->mFileSys->dispose();
+
+	this->mSystemSetting->dispose();
+	this->mLuaSystem->dispose();
+
+	this->mUiMgr = nullptr;
+	this->mEngineData = nullptr;
+	this->mNetMgr = nullptr;
+	this->mTableSys = nullptr;
+
+#ifdef USE_EXTERN_THREAD
+	this->mStdoutLog = nullptr;
+#endif
+
+#ifdef ENABLE_UNIT_TEST
+	this->mTestMain = nullptr;
+#endif
+
+	this->mLogSys = nullptr;
+	this->mNetDispList = nullptr;
+	this->mShareData = nullptr;
+	this->mConfig = nullptr;
+
+	this->mResLoadMgr = nullptr;
+	this->mClassAssetInsMgr = nullptr;
+	this->mObjectAssetInsMgr = nullptr;
+
+	this->mMyStreamableManager = nullptr;
+	this->mPoolSys = nullptr;
+	this->mFileSys = nullptr;
+
+	this->mSystemSetting = nullptr;
+	this->mLuaSystem = nullptr;
 }
 
 void Ctx::beginPlay()

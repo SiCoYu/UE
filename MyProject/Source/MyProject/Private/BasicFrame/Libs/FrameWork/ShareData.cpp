@@ -11,3 +11,13 @@ ShareData::~ShareData()
 {
 
 }
+
+void ShareData::init()
+{
+
+}
+
+void ShareData::dispose()
+{
+
+}

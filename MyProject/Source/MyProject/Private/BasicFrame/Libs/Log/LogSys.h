@@ -10,6 +10,10 @@ public:
 	LogSys();
 	~LogSys();
 
+public:
+	void init();
+	void dispose();
+
 	//void log(FString message);
 	void log(std::string message);
 	void error(std::string message);

@@ -48,3 +48,18 @@ Config::Config()
 	value = std::string("unity");
 	UtilVector::Add(mPakExtNameList, value);
 }
+
+Config::~Config()
+{
+
+}
+
+void Config::init()
+{
+
+}
+
+void Config::dispose()
+{
+
+}

@@ -22,6 +22,21 @@ TestMain::TestMain()
 	mTestLuaBind = new TestLuaBind();
 }
 
+TestMain::~TestMain()
+{
+
+}
+
+void TestMain::init()
+{
+
+}
+
+void TestMain::dispose()
+{
+
+}
+
 void TestMain::runTest()
 {
 	//const TCHAR* CmdLine = GetCommandLine();

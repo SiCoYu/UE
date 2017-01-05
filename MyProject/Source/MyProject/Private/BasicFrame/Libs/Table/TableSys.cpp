@@ -21,6 +21,21 @@ TableSys::TableSys()
 	mByteBuffer = new ByteBuffer();
 }
 
+TableSys::TableSys()
+{
+
+}
+
+void TableSys::init()
+{
+
+}
+
+void TableSys::dispose()
+{
+
+}
+
 // 返回一个表
 std::vector<TableItemBase*>* TableSys::getTable(TableID::TableID tableID)
 {

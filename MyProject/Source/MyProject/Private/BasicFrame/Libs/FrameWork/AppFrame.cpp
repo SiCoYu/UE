@@ -6,3 +6,8 @@ void AppFrame::initApp()
 {
 	GCtx->construct();
 }
+
+void AppFrame::quitApp()
+{
+	GCtx->deleteSingletonPtr();
+}
