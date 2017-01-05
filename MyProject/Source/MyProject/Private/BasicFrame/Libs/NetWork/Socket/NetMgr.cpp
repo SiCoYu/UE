@@ -279,8 +279,10 @@ void NetMgr::openSocket_Inter(std::string ip, uint32 port)
 	std::string ipId = strStream.str();
 	if (!UtilMap::ContainsKey(mId2ClientDic, ipId))	// 如果没有这个 NetClient
 	{
-		mId2ClientDic[ipId] = new UENetClient();
-		mId2ClientDic[ipId]->connect(ip.c_str(), port);
+		mCurClient = new UENetClient();
+		mId2ClientDic[ipId] = mCurClient;
+
+		mCurClient->connect(ip.c_str(), port);
 
 		testSendData(ip, port);
 	}
