@@ -4,8 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "luaconf.h"
-
-std::string g_searchsRootPath = "E:/Self/Self/unreal/UE-GIT/UE/MyProject/Content/MyAsset/Lua";
+#include "Common.h"
 
 void dotAddLoader(lua_State *L)
 {
@@ -29,19 +28,20 @@ void dotAddLoader(lua_State *L)
 int dotLoadLua(lua_State *L)
 {
 	std::string fileName = lua_tostring(L, 1);
-	fileName += ".lua";
-	fileName = g_searchsRootPath + "/" + fileName;
+	fileName = GFileSys->getLuaPath(fileName);
 
 	const char* fullPath = fileName.c_str();
 	FILE* hFile = nullptr;
 	hFile = fopen(fullPath, "r");
 
-	lua_pushcfunction(L, traceback);	// 如果 luaL_loadbuffer 错误,继续调用 traceback
 	int oldTop = lua_gettop(L);
+	// 如果 luaL_loadbuffer 错误,继续调用 traceback
+	lua_pushcfunction(L, traceback);
 
 	if (hFile == nullptr) 
 	{
-		lua_pop(L, 1);
+		//lua_pop(L, 1);
+		lua_settop(L, oldTop);
 		return 0;
 	}
 
@@ -66,8 +66,6 @@ int dotLoadLua(lua_State *L)
 			}
 		}
 
-		fclose(hFile);
-
 		// 不知道为什么,从文件读取进来的字符内容 "function add()\n\treturn 10\nend" ,但是文件检查大小竟然是 31,明明是 29,最后多了两个  "\0\0" ,只要把 size 改成 29 就可以正确执行了
 		if (luaL_loadbuffer(L, buffer, size, fileName.c_str()) != LUA_OK)
 		{
@@ -77,8 +75,12 @@ int dotLoadLua(lua_State *L)
 		delete buffer;
 	}
 
+	fclose(hFile);
+
 	//int top = lua_gettop(L);
 	//int type = lua_type(L, -1);		// LUA_TFUNCTION
+	lua_settop(L, oldTop);
+
 	return 1;
 }
 

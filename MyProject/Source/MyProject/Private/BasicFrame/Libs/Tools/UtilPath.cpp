@@ -73,3 +73,9 @@ void UtilPath::NormalizeDirectoryName(FString& InPath)
 {
 	FPaths::NormalizeDirectoryName(InPath);
 }
+
+bool UtilPath::FileExists(const std::string& InPath)
+{
+	FString convPath = UtilStr::ConvStdStr2FString(const_cast<std::string&>(InPath));
+	return FPaths::FileExists(convPath);
+}

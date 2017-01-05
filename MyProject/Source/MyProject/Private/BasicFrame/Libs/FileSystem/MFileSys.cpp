@@ -17,6 +17,11 @@ MFileSys::MFileSys()
 
 void MFileSys::init()
 {
+	FString contentPath = UtilPath::GameContentDir();
+	std::string path = UtilStr::ConvFString2StdStr(contentPath);
+	path = path + "MyAsset/Lua/";
+	mLuaSearchPathList.push_back(path);
+
 	// 初始化 SandBox 文件系统
 	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	//FString OutputDirectory = GetOutputDirectoryOverride();
@@ -68,4 +73,29 @@ std::string MFileSys::getLocalWriteDir()
 void MFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 {
 
+}
+
+std::string MFileSys::getLuaPath(std::string luaPackage)
+{
+	std::string old_value = ".";
+	std::string new_value = "/";
+
+	std::string replace = UtilStr::replaceAllDistinct(luaPackage, old_value, new_value);
+	std::string fullPath;
+
+	for (auto searchPath : mLuaSearchPathList)
+	{
+		fullPath = searchPath + replace + ".lua";
+
+		if (UtilPath::FileExists(fullPath))
+		{
+			break;
+		}
+		else
+		{
+			fullPath = "";
+		}
+	}
+
+	return fullPath;
 }

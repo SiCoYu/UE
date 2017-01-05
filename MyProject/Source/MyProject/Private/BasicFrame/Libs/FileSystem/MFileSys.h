@@ -2,6 +2,7 @@
 #define __MFileSys_H
 
 #include <string>
+#include <vector>
 
 class LoadParam;
 class FSandboxPlatformFile;
@@ -21,13 +22,17 @@ protected:
 	// Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
 	// Engine\Source\Editor\UnrealEd\Private\CookOnTheFlyServer.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;
+	std::vector<std::string> mLuaSearchPathList;
 
 public:
 	MFileSys();
+
+public:
 	void init();
 	void dispose();
 
 	FSandboxPlatformFile* getSandboxPlatformFile();
+	std::string getLuaPath(std::string luaPackage);
 
 protected:
 	static void initFileSys();

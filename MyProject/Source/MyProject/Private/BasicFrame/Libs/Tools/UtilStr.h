@@ -44,6 +44,9 @@ public:
 	static FName ConvFText2FName(FText& fText);
 	static FText ConvFName2FText(FName& fName);
 	static FText ConvStdStr2FText(std::string& stdStr);
+
+	static std::string& replaceAll(std::string& str, const  std::string& old_value, const std::string& new_value);
+	static std::string& replaceAllDistinct(std::string& str, const  std::string& old_value, const std::string& new_value);
 };
 
 #endif

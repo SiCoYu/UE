@@ -27,6 +27,8 @@ public:
 
 	static FString FPaths_ConvertToSandboxPath(FString FullFilename);
 	static void NormalizeDirectoryName(FString& InPath);
+
+	static bool FileExists(const std::string& InPath);
 };
 
 // Ä£°åÊµÏÖ
