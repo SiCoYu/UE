@@ -27,6 +27,8 @@ void UMyGameInstance::Init()
 void UMyGameInstance::Shutdown()
 {
 	Super::Shutdown();
+
+	mAppFrame->quitApp();
 }
 
 void UMyGameInstance::FinishDestroy()
