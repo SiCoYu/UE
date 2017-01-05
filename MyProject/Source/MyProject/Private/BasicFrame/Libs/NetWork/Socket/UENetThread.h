@@ -14,7 +14,6 @@ class UENetThread : public MThread
 {
 private:
 	INetMgr* mNetMgr;
-	bool mIsExitFlag;
 	MEvent* mSyncEvent;
 
 public:
