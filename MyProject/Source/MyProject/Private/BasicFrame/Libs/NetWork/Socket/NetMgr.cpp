@@ -134,7 +134,7 @@ NetMgr::NetMgr(StdLog *p)
 	: SocketHandler(p)
 #else
 NetMgr::NetMgr()
-	£ºmCurClient(nullptr)
+	: mCurClient(nullptr)
 #endif
 {
 #ifdef USE_EXTERN_THREAD
