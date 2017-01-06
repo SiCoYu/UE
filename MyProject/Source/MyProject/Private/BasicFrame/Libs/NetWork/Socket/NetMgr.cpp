@@ -134,6 +134,7 @@ NetMgr::NetMgr(StdLog *p)
 	: SocketHandler(p)
 #else
 NetMgr::NetMgr()
+	：mCurClient(nullptr)
 #endif
 {
 #ifdef USE_EXTERN_THREAD
@@ -404,8 +405,8 @@ void NetMgr::send(bool bnet)
 void NetMgr::quipNet()
 {
 	mNetThread->Shutdown();        // 设置退出标志
-	// TODO:这里会宕机，不知道为什么
-	//closeCurSocket();
+	// TODO:这里会宕机，原来是因为 mCurClient 没有初始化
+	closeCurSocket();
 }
 
 void NetMgr::sendAndRecData()
