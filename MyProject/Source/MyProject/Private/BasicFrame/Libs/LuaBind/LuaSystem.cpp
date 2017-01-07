@@ -20,8 +20,21 @@ void LuaSystem::init()
 	luaL_openlibs(L);
 
 	// 打开 Socket
-	luaopen_mime_core(L);
-	luaopen_socket_core(L);
+	lua_getglobal(L, "package");
+	lua_getfield(L, -1, "preload");
+
+	lua_pushcfunction(L, luaopen_socket_core);
+	lua_setfield(L, -2, "socket.core");
+
+	lua_pushcfunction(L, luaopen_mime_core);
+	lua_setfield(L, -2, "mime.core");
+
+	lua_pop(L, 2);
+
+	//luaopen_mime_core(L);
+	//luaopen_socket_core(L);
+
+	lua_settop(L, 0);
 
 	// 绑定自定义加载器
 	dotAddLoader(L);
