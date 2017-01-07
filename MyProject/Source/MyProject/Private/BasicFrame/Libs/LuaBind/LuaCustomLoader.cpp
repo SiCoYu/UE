@@ -25,6 +25,9 @@ void dotAddLoader(lua_State *L)
 	lua_settop(L, 0);
 }
 
+// http://blog.chinaunix.net/uid-552961-id-2736410.html
+// ll_require会将这个loader的返回值符给package.loaded[modelname],如果loader不返回值同时 package.loaded[modelname]不存在时, ll_require就会把package.loaded[modelname]设为true。最后ll_reuqire把package.loaded [modelname]返回给调用者。
+// 失败加载返回 0，成功返回 1
 int dotLoadLua(lua_State *L)
 {
 	std::string fileName = lua_tostring(L, 1);
@@ -90,7 +93,7 @@ int dotLoadLua(lua_State *L)
 	fclose(hFile);
 	lua_settop(L, oldTop - 1);
 
-	return 0;
+	return 1;
 }
 
 int traceback(lua_State *L)
