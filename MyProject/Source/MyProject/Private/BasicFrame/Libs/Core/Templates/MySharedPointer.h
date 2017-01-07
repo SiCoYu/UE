@@ -5,23 +5,11 @@
 
 //#define MySharedPtr std::shared_ptr
 #define MySharedPtr MyNS::SharedPtr
-#define MyWeakPtr std::weak_ptr
 
-#include "MThreadSafeCounter.h"
+#include "MyRefPtrInfo.h"
 
 namespace MyNS
 {
-	struct SharedPtrInfo 
-	{
-		inline SharedPtrInfo()
-			: mRefCount(1)
-		{}
-
-		virtual ~SharedPtrInfo() {}
-
-		MThreadSafeCounter mRefCount;
-	};
-
 	template<class T> 
 	class SharedPtr
 	{
@@ -30,7 +18,7 @@ namespace MyNS
 
 	protected:
 		T*             mRefPtr;
-		SharedPtrInfo* mRefInfo;
+		RefPtrInfo* mRefInfo;
 
 	public:
 		SharedPtr(T* rep) 
