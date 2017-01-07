@@ -6,7 +6,7 @@
 //#define MySharedPtr std::shared_ptr
 #define MySharedPtr MyNS::SharedPtr
 
-#include "MyRefPtrInfo.h"
+#include "MyPtrRefInfo.h"
 
 namespace MyNS
 {

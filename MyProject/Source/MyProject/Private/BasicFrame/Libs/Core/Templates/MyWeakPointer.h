@@ -5,7 +5,7 @@
 //#define MyWeakPtr std::weak_ptr
 #define MyWeakPtr std::weak_ptr
 
-#include "MyRefPtrInfo.h"
+#include "MyPtrRefInfo.h"
 
 namespace MyNS
 {
