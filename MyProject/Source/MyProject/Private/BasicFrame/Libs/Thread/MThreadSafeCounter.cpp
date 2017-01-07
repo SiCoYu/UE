@@ -7,7 +7,7 @@ MThreadSafeCounter::MThreadSafeCounter()
 
 }
 
-MThreadSafeCounter(int Value)
+MThreadSafeCounter::MThreadSafeCounter(int Value)
 	: mThreadSafeCounter(Value)
 {
 

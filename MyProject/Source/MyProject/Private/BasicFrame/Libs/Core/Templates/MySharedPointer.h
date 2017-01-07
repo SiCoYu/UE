@@ -1,9 +1,10 @@
 #pragma once
 
 //#include "Templates/SharedPointer.h"	// TSharedPtr
-#include <memory>	// shared_ptr
+//#include <memory>	// shared_ptr
 
-#define MySharedPtr std::shared_ptr
+//#define MySharedPtr std::shared_ptr
+#define MySharedPtr MyNS::SharedPtr
 #define MyWeakPtr std::weak_ptr
 
 #include "MThreadSafeCounter.h"
@@ -13,12 +14,12 @@ namespace MyNS
 	struct SharedPtrInfo 
 	{
 		inline SharedPtrInfo()
-			: useCount(1)
+			: mRefCount(1)
 		{}
 
 		virtual ~SharedPtrInfo() {}
 
-		MThreadSafeCounter  useCount;
+		MThreadSafeCounter mRefCount;
 	};
 
 	template<class T> 
@@ -26,41 +27,44 @@ namespace MyNS
 	{
 		template<typename Y>friend class SharedPtr;
 	protected:
-		T*             pRep;
-		SharedPtrInfo pInfo;
+		T*             mRefPtr;
+		SharedPtrInfo* mRefInfo;
 
 		SharedPtr(T* rep) 
-			: pRep(rep), pInfo()
+			: mRefPtr(rep), mRefInfo(new SharedPtrInfo)
 		{
+
 		}
 
 	public:
 		SharedPtr() 
-			: pRep(0), pInfo(0)
+			: mRefPtr(0), mRefInfo(0)
 		{}
 
 	public:
 		template< class Y>
 		explicit SharedPtr(Y* rep)
-			: pRep(rep)
+			: mRefPtr(rep)
 		{
+
 		}
 
 		SharedPtr(const SharedPtr& r)
-			: pRep(r.pRep)
-			, pInfo(r.pInfo)
+			: mRefPtr(r.mRefPtr)
+			, mRefInfo(r.mRefInfo)
 		{
-			if (pRep)
+			if (mRefPtr)
 			{
-				++pInfo->useCount;
+				mRefInfo->Increment();
 			}
 		}
 
 		SharedPtr& operator=(const SharedPtr& r)
 		{
-			assert(pRep != r.pRep || pInfo == r.pInfo || dynamic_cast<SharedPtrInfoNone*>(pInfo) || dynamic_cast<SharedPtrInfoNone*>(r.pInfo));
-			if (pInfo == r.pInfo)
+			if (mRefInfo == r.mRefInfo)
+			{
 				return *this;
+			}
 
 			SharedPtr<T> tmp(r);
 			swap(tmp);
@@ -74,12 +78,12 @@ namespace MyNS
 		template<class Y>
 	#endif
 		SharedPtr(const SharedPtr<Y>& r)
-			: pRep(r.pRep)
-			, pInfo(r.pInfo)
+			: mRefPtr(r.mRefPtr)
+			, mRefInfo(r.mRefInfo)
 		{
-			if (pRep)
+			if (mRefPtr)
 			{
-				++pInfo->useCount;
+				mRefInfo->Increment();
 			}
 		}
 
@@ -92,59 +96,98 @@ namespace MyNS
 	#endif
 		SharedPtr& operator=(const SharedPtr<Y>& r)
 		{
-			assert(pRep != r.pRep || pInfo == r.pInfo || dynamic_cast<SharedPtrInfoNone*>(pInfo) || dynamic_cast<SharedPtrInfoNone*>(r.pInfo));
-			if (pInfo == r.pInfo)
+			if (mRefInfo == r.mRefInfo)
+			{
 				return *this;
+			}
 
 			SharedPtr<T> tmp(r);
 			swap(tmp);
 			return *this;
 		}
 
-		~SharedPtr() {
+		~SharedPtr() 
+		{
 			release();
 		}
 
 		template<typename Y>
 		SharedPtr<Y> staticCast() const
 		{
-			if (pRep) {
-				++pInfo->useCount;
-				return SharedPtr<Y>(static_cast<Y*>(pRep), pInfo);
+			if (mRefPtr) 
+			{
+				mRefInfo->Increment();
+				return SharedPtr<Y>(static_cast<Y*>(mRefPtr), mRefInfo);
 			}
-			else return SharedPtr<Y>();
+			else
+			{
+				return SharedPtr<Y>();
+			}
 		}
 
 		template<typename Y>
 		SharedPtr<Y> dynamicCast() const
 		{
-			Y* rep = dynamic_cast<Y*>(pRep);
-			if (rep) {
-				++pInfo->useCount;
-				return SharedPtr<Y>(rep, pInfo);
+			Y* rep = dynamic_cast<Y*>(mRefPtr);
+			if (rep) 
+			{
+				mRefInfo->Increment();
+				return SharedPtr<Y>(rep, mRefInfo);
 			}
-			else return SharedPtr<Y>();
+			else
+			{
+				return SharedPtr<Y>();
+			}
 		}
 
-		inline T& operator*() const { assert(pRep); return *pRep; }
-		inline T* operator->() const { assert(pRep); return pRep; }
-		inline T* get() const { return pRep; }
-
-		void bind(T* rep, SharedPtrFreeMethod inFreeMethod = SPFM_DELETE) {
-			assert(!pRep && !pInfo);
-			pInfo = createInfoForMethod(rep, inFreeMethod);
-			pRep = rep;
+		inline T& operator*() const 
+		{ 
+			assert(mRefPtr); 
+			return *mRefPtr; 
 		}
 
-		inline bool unique() const { assert(pInfo && pInfo->useCount.get()); return pInfo->useCount.get() == 1; }
+		inline T* operator->() const 
+		{ 
+			assert(mRefPtr); 
+			return mRefPtr; 
+		}
 
-		unsigned int useCount() const { return use_count(); }
+		inline T* get() const 
+		{ 
+			return mRefPtr; 
+		}
 
-		unsigned int use_count() const { assert(pInfo && pInfo->useCount.get()); return pInfo->useCount.get(); }
+		void bind(T* rep) 
+		{
+			assert(!mRefPtr && !mRefInfo);
+			mRefInfo = new SharedPtrInfo;
+			mRefPtr = rep;
+		}
 
-		void setUseCount(unsigned value) { assert(pInfo); pInfo->useCount = value; }
+		inline bool unique() const 
+		{ 
+			assert(mRefInfo && mRefInfo->mRefCount.get()); return mRefInfo->mRefCount.get() == 1; 
+		}
 
-		T* getPointer() const { return pRep; }
+		unsigned int mRefCount() const 
+		{ 
+			return use_count(); 
+		}
+
+		unsigned int use_count() const 
+		{ 
+			assert(mRefInfo && mRefInfo->mRefCount.get()); return mRefInfo->mRefCount.get(); 
+		}
+
+		void setUseCount(unsigned value)
+		{ 
+			assert(mRefInfo); mRefInfo->mRefCount = value; 
+		}
+
+		T* getPointer() const 
+		{ 
+			return mRefPtr; 
+		}
 
 		static void unspecified_bool(SharedPtr***)
 		{
@@ -154,46 +197,55 @@ namespace MyNS
 
 		operator unspecified_bool_type() const
 		{
-			return pRep == 0 ? 0 : unspecified_bool;
+			return mRefPtr == 0 ? 0 : unspecified_bool;
 		}
 
-		bool isNull(void) const { return pRep == 0; }
+		bool isNull(void) const 
+		{ 
+			return mRefPtr == 0; 
+		}
 
-		void setNull() { reset(); }
+		void setNull() 
+		{ 
+			reset(); 
+		}
 
-		void reset(void) {
+		void reset(void) 
+		{
 			release();
 		}
 
-		void reset(T* rep) {
+		void reset(T* rep) 
+		{
 			SharedPtr(rep).swap(*this);
 		}
 
 	protected:
-
 		inline void release(void)
 		{
-			if (pRep)
+			if (mRefPtr)
 			{
-				assert(pInfo);
-				if (--pInfo->useCount == 0)
+				assert(mRefInfo);
+				if (mRefInfo->mRefCount.Decrement() == 0)
+				{
 					destroy();
+				}
 			}
 
-			pRep = 0;
-			pInfo = 0;
+			mRefPtr = 0;
+			mRefInfo = 0;
 		}
 
 		inline void destroy(void)
 		{
-			assert(pRep && pInfo);
-			OGRE_DELETE_T(pInfo, SharedPtrInfo, MEMCATEGORY_GENERAL);
+			assert(mRefPtr && mRefInfo);
+			delete mRefInfo;
 		}
 
 		inline void swap(SharedPtr<T> &other)
 		{
-			std::swap(pRep, other.pRep);
-			std::swap(pInfo, other.pInfo);
+			std::swap(mRefPtr, other.mRefPtr);
+			std::swap(mRefInfo, other.mRefInfo);
 		}
 	};
 
