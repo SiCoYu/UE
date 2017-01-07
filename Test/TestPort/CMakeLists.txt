@@ -14,7 +14,13 @@ source_group("Src\\App" FILES ${SRCS_App_FILES})
 file(GLOB SRCS_Test_FILES Src/Test/*.h Src/Test/*.cpp)
 source_group("Src\\Test" FILES ${SRCS_Test_FILES})
 
+file(GLOB SRCS_TestApp_FILES Src/TestApp/*.h Src/TestApp/*.cpp)
+source_group("Src\\TestApp" FILES ${SRCS_TestApp_FILES})
+
 include_directories(./Src/Templates ./Src/Traits ./Src/App ./Src/Test)
-set(ALLSRCS ${SRCS_Templates_FILES} ${SRCS_Traits_FILES} ${SRCS_App_FILES} ${SRCS_Test_FILES})
+set(ALLSRCS ${SRCS_Templates_FILES} ${SRCS_Traits_FILES} ${SRCS_App_FILES} ${SRCS_Test_FILES} ${SRCS_TestApp_FILES})
 
 ADD_EXECUTABLE(${PROJECT_NAME} WIN32 ${ALLSRCS})
+
+#SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE C)
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
