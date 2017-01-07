@@ -17,7 +17,7 @@ namespace MyNS
 
 	protected:
 		T*             mRefPtr;
-		RefPtrInfo* mRefInfo;
+		PtrRefInfo* mRefInfo;
 
 	public:
 		WeakPtr(T* rep) 

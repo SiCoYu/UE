@@ -18,7 +18,7 @@ namespace MyNS
 
 	protected:
 		T*             mRefPtr;
-		RefPtrInfo* mRefInfo;
+		PtrRefInfo* mRefInfo;
 
 	public:
 		SharedPtr(T* rep) 
