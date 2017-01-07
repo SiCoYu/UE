@@ -29,8 +29,8 @@ namespace MyNS
 		T*             pRep;
 		SharedPtrInfo pInfo;
 
-		SharedPtr(T* rep, SharedPtrInfo* info) 
-			: pRep(rep), pInfo(info)
+		SharedPtr(T* rep) 
+			: pRep(rep), pInfo()
 		{
 		}
 
