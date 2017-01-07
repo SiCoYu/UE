@@ -4,15 +4,15 @@
 
 namespace MyNS
 {
-	struct RefPtrInfo
+	struct PtrRefInfo
 	{
-		inline RefPtrInfo()
+		inline PtrRefInfo()
 			: mRefCount(1)
 		{
 			
 		}
 
-		virtual ~SharedPtrInfo()
+		virtual ~PtrRefInfo()
 		{
 			
 		}

@@ -21,7 +21,7 @@ namespace MyNS
 
 	public:
 		WeakPtr(T* rep) 
-			: mRefPtr(rep), mRefInfo(new SharedPtrInfo)
+			: mRefPtr(rep), mRefInfo(new PtrRefInfo)
 		{
 
 		}
