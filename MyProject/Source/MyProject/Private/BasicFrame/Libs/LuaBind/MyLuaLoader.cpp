@@ -6,9 +6,9 @@
 #include "luaconf.h"
 #include "Common.h"
 
-void dotAddLoader(lua_State *L)
+void addLualoader(lua_State *L)
 {
-	lua_pushcfunction(L, dotLoadLua);
+	lua_pushcfunction(L, loadLuaFromBuffer);
 	int loaderFunc = lua_gettop(L);
 
 	lua_getglobal(L, "package");
@@ -25,7 +25,7 @@ void dotAddLoader(lua_State *L)
 	lua_settop(L, 0);
 }
 
-int dotLoadLua(lua_State *L)
+int loadLuaFromBuffer(lua_State *L)
 {
 	std::string fileName = luaL_checkstring(L, 1);
 	fileName = GFileSys->getLuaPath(fileName);
@@ -39,7 +39,7 @@ int dotLoadLua(lua_State *L)
 
 	const char* fullPath = fileName.c_str();
 	FILE* hFile = nullptr;
-	hFile = fopen(fullPath, "rt");
+	hFile = fopen(fullPath, "r");
 
 	fseek(hFile, 0, SEEK_END);
 	int size = ftell(hFile);
@@ -48,7 +48,33 @@ int dotLoadLua(lua_State *L)
 	char* buffer = new char[size];
 	memset(buffer, 0, size);
 	fread(buffer, size, 1, hFile);
+	size = removeZeroAndEof(buffer, size);
 
+	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+
+	delete[] buffer;
+	fclose(hFile);
+
+	return retCode;
+}
+
+int loadLuaFromFile(lua_State *L)
+{
+	std::string fileName = luaL_checkstring(L, 1);
+	fileName = GFileSys->getLuaPath(fileName);
+
+	if (0 == fileName.length())
+	{
+		return 1;
+	}
+
+	int retCode = 0;
+	retCode = checkResult(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
+	return retCode;
+}
+
+int removeZeroAndEof(const char* buffer, int size)
+{
 	for (int idx = size - 1; idx >= 0; --idx)
 	{
 		if (buffer[idx] == 0 || buffer[idx] == -1)
@@ -61,13 +87,7 @@ int dotLoadLua(lua_State *L)
 		}
 	}
 
-	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
-	//retCode = checkResult(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
-
-	delete[] buffer;
-	fclose(hFile);
-
-	return retCode;
+	return size;
 }
 
 int checkResult(lua_State *L, int stat, const char *filename)

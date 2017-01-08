@@ -7,9 +7,11 @@
 #include "lua.hpp"
 #include <string>
 
-void dotAddLoader(lua_State *L);
-int dotLoadLua(lua_State *L);
-int traceback(lua_State *L);
+void addLualoader(lua_State *L);
+int loadLuaFromBuffer(lua_State *L);
+int loadLuaFromFile(lua_State *L);
+// ÒÆ³ý×Ö·û´®»º³åÇø×îºóµÄ 0 ºÍ EOF(-1) ·ûºÅ
+int removeZeroAndEof(const char* buffer, int size);
 int checkResult(lua_State *L, int stat, const char *filename);
 
 #endif

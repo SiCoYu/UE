@@ -31,13 +31,10 @@ void LuaSystem::init()
 
 	lua_pop(L, 2);
 
-	//luaopen_mime_core(L);
-	//luaopen_socket_core(L);
-
 	lua_settop(L, 0);
 
 	// 绑定自定义加载器
-	dotAddLoader(L);
+	addLualoader(L);
 
 	// 绑定外部库
 	LuaCppBind::bind(L);
