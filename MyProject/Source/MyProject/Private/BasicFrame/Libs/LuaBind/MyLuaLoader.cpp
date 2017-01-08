@@ -100,7 +100,7 @@ int loadLuaFromBufferUseClosure(lua_State *L)
 		luaL_error(L, "'package.searchers' must be a table");
 	}
 
-	double val = lua_tointeger(L, lua_upvalueindex(1));
+	int val = lua_tointeger(L, lua_upvalueindex(2));
 
 	std::string fileName = luaL_checkstring(L, 1);
 	fileName = GFileSys->getLuaPath(fileName);
