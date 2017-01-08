@@ -1,7 +1,7 @@
 #include <MyProject.h>
 #include "LuaSystem.h"
 #include "LuaCppBind.h"
-#include "LuaCustomLoader.h"
+#include "MyLuaLoader.h"
 
 LuaSystem::LuaSystem()
 {

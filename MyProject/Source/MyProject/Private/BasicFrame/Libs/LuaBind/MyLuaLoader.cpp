@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "LuaCustomLoader.h"
+#include "MyLuaLoader.h"
 #include <string>
 #include <string.h>
 #include <stdio.h>
@@ -61,8 +61,8 @@ int dotLoadLua(lua_State *L)
 		}
 	}
 
-	//retCode = mcheckload(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
-	retCode = mcheckload(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
+	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+	//retCode = checkResult(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
 
 	delete[] buffer;
 	fclose(hFile);
@@ -70,24 +70,7 @@ int dotLoadLua(lua_State *L)
 	return retCode;
 }
 
-int traceback(lua_State *L)
-{
-	// debug.traceback ([thread,] [message])
-	lua_getglobal(L, "debug");
-	lua_getfield(L, -1, "traceback");
-	lua_pushvalue(L, 1);
-	lua_pushnumber(L, 2);
-	lua_call(L, 2, 1);
-
-	char* error;
-	if (lua_type(L, -1) == LUA_TSTRING)
-	{
-		error = (char*)lua_tostring(L, -1);
-	}
-	return 1;
-}
-
-int mcheckload(lua_State *L, int stat, const char *filename)
+int checkResult(lua_State *L, int stat, const char *filename)
 {
 	if (stat) 
 	{
