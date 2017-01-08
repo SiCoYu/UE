@@ -16,7 +16,13 @@
 TestMain::TestMain()
 {
 	mTestExtern = new TestExtern();
+
+#ifdef USE_EXTERN_THREAD
+
 	mTestSocket = new TestSocket();
+
+#endif	// USE_EXTERN_THREAD
+
 	mTestUI = new TestUI();
 	mTestDownload = new TestDownload();
 	mTestLuaBind = new TestLuaBind();

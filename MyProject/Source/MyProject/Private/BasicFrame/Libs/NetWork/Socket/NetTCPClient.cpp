@@ -2,6 +2,8 @@
 #include "NetTCPClient.h"
 #include "ClientBuffer.h"
 
+#ifdef USE_EXTERN_THREAD
+
 NetTCPClient::NetTCPClient(ISocketHandler& h)
 	: TcpSocket(h) 
 {
@@ -42,3 +44,5 @@ void NetTCPClient::sendMsg()
 {
 	//mClientBuffer->sendMsg();
 }
+
+#endif	// USE_EXTERN_THREAD

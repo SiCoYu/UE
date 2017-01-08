@@ -3,8 +3,12 @@
 
 #include "Windows/AllowWindowsPlatformTypes.h"
 
+#ifdef USE_EXTERN_THREAD
+
 #include <Sockets/SocketHandler.h>
 #include <Sockets/TcpSocket.h>
+
+#endif	// USE_EXTERN_THREAD
 
 #include "Windows/HideWindowsPlatformTypes.h"
 
@@ -13,6 +17,8 @@
 #ifdef SOCKETS_NAMESPACE
 using namespace SOCKETS_NAMESPACE;
 #endif
+
+#ifdef USE_EXTERN_THREAD
 
 class ClientBuffer;
 
@@ -32,5 +38,7 @@ public:
 	ClientBuffer* getClientBuffer();
 	void sendMsg();
 };
+
+#endif	// USE_EXTERN_THREAD
 
 #endif				// __NETCLIENT_H

@@ -3,10 +3,14 @@
 
 #include "Windows/AllowWindowsPlatformTypes.h"
 
+#ifdef ENABLE_DETACH
+
 #include "Sockets/Socket.h"
 #include "Sockets/Thread.h"
 #include "Sockets/SocketHandler.h"
 #include "Sockets/sockets-config.h"
+
+#endif // ENABLE_DETACH
 
 #include "Windows/HideWindowsPlatformTypes.h"
 

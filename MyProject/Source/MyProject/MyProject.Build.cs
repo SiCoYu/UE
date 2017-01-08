@@ -259,7 +259,7 @@ public class MyProject : ModuleRules
         //LoadMyProjectEditor(Target);
 
         loadThirdPartyInclude();
-        LoadSockets(Target);
+        //LoadSockets(Target);
         LoadTestExtern(Target);
         //LoadGtest(Target);
         LoadLua(Target);

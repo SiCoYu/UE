@@ -3,11 +3,17 @@
 
 #include "Windows/AllowWindowsPlatformTypes.h"
 
+#ifdef USE_EXTERN_THREAD
+
 #include <Sockets/StdoutLog.h>
 #include <Sockets/SocketHandler.h>
 #include <Sockets/TcpSocket.h>
 
+#endif	// USE_EXTERN_THREAD
+
 #include "Windows/HideWindowsPlatformTypes.h"
+
+#ifdef USE_EXTERN_THREAD
 
 class TestSocket
 {
@@ -17,5 +23,7 @@ public:
 public:
 	TestSocket();
 };
+
+#endif	// USE_EXTERN_THREAD
 
 #endif				// __TESTSOCKET_H
