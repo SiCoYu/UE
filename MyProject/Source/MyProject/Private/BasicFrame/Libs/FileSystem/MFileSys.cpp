@@ -19,8 +19,16 @@ void MFileSys::init()
 {
 	FString contentPath = UtilPath::GameContentDir();
 	std::string path = UtilStr::ConvFString2StdStr(contentPath);
-	path = path + "MyAsset/Lua/";
-	mLuaSearchPathList.push_back(path);
+	std::string searchPath = "";
+
+	searchPath = path + "MyAsset/Lua/";
+	mLuaSearchPathList.push_back(searchPath);
+
+	searchPath = path + "MyAsset/Lua/Socket/";
+	mLuaSearchPathList.push_back(searchPath);
+
+	searchPath = path + "MyAsset/Lua/ZeroBraneStudio/";
+	mLuaSearchPathList.push_back(searchPath);
 
 	// 初始化 SandBox 文件系统
 	//mSandboxPlatformFile = new FSandboxPlatformFile(false);

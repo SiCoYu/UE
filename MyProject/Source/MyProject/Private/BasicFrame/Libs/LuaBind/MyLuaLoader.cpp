@@ -20,6 +20,7 @@ void addLualoader(lua_State *L)
 		lua_rawgeti(L, loaderTable, e - 1);
 		lua_rawseti(L, loaderTable, e);
 	}
+
 	lua_pushvalue(L, loaderFunc);
 	lua_rawseti(L, loaderTable, 1);
 	lua_settop(L, 0);
