@@ -236,8 +236,8 @@ if(WIN32)
 	endif()
 	
     include_directories(.)
-    ADD_LIBRARY(Sockets STATIC ${SRCS} ${INCS})
-	set_target_properties(Sockets PROPERTIES DEBUG_POSTFIX _d)
+    ADD_LIBRARY(${PROJECT_NAME} STATIC ${SRCS} ${INCS})
+	set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX _d)
 	
 	#SET(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/../Lib/${PROJECT_NAME}")
 	
