@@ -107,3 +107,8 @@ std::string MFileSys::getLuaPath(std::string luaPackage)
 
 	return fullPath;
 }
+
+void MFileSys::addSearchPath(std::string path)
+{
+	
+}

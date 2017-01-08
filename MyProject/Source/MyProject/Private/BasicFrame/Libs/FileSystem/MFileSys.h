@@ -59,6 +59,8 @@ public:
 
 	// Engine\Source\Runtime\Launch\Private\Android\AndroidJNI.cpp
 	// GFilePathBase = FString(nativePathString);
+
+	void addSearchPath(std::string path);
 };
 
 #endif
