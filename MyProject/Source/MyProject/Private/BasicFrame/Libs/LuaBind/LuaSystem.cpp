@@ -34,6 +34,7 @@ void LuaSystem::init()
 	lua_settop(L, 0);
 
 	// 绑定自定义加载器
+	//addCClosureLualoader(L);
 	addCFunctionLualoader(L);
 
 	// 绑定外部库
