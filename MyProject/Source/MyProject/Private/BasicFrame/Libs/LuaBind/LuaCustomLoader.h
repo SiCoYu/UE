@@ -10,5 +10,6 @@
 void dotAddLoader(lua_State *L);
 int dotLoadLua(lua_State *L);
 int traceback(lua_State *L);
+int mcheckload(lua_State *L, int stat, const char *filename);
 
 #endif

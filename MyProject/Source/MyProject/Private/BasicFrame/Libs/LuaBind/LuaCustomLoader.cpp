@@ -27,77 +27,47 @@ void dotAddLoader(lua_State *L)
 
 int dotLoadLua(lua_State *L)
 {
-	std::string fileName = lua_tostring(L, 1);
+	std::string fileName = luaL_checkstring(L, 1);
 	fileName = GFileSys->getLuaPath(fileName);
+
+	if (0 == fileName.length())
+	{
+		return 1;
+	}
+
+	int retCode = 0;
 
 	const char* fullPath = fileName.c_str();
 	FILE* hFile = nullptr;
 	hFile = fopen(fullPath, "rt");
-	std::string retErr;
-
-	// 如果 luaL_loadbuffer 错误,继续调用 traceback
-	lua_pushcfunction(L, traceback);
-	int oldTop = lua_gettop(L);
-
-	if (hFile == nullptr) 
-	{
-		lua_settop(L, oldTop - 1);
-		return 0;
-	}
 
 	fseek(hFile, 0, SEEK_END);
 	int size = ftell(hFile);
 	fseek(hFile, 0, SEEK_SET);
 
-	if (size > 0)
+	char* buffer = new char[size];
+	memset(buffer, 0, size);
+	fread(buffer, size, 1, hFile);
+
+	for (int idx = size - 1; idx >= 0; --idx)
 	{
-		char* buffer = new char[size];
-		memset(buffer, 0, size);
-		fread(buffer, size, 1, hFile);
-
-		for (int idx = size - 1; idx >= 0; --idx)
+		if (buffer[idx] == 0 || buffer[idx] == -1)
 		{
-			if (buffer[idx] == 0 || buffer[idx] == -1)
-			{
-				--size;
-			}
-			else
-			{
-				break;
-			}
-		}
-
-		if (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str()))
-		{
-			if (LUA_OK == lua_pcall(L, 0, LUA_MULTRET, oldTop))
-			{
-				int newTop = lua_gettop(L);
-				int retNum = newTop - oldTop;
-
-				int type = lua_type(L, newTop);
-				if (LUA_TFUNCTION == type)
-				{
-
-				}
-				lua_replace(L, oldTop -1);
-			}
-			else
-			{
-				retErr = lua_tostring(L, -1);
-			}
+			--size;
 		}
 		else
 		{
-			retErr = lua_tostring(L, -1);
+			break;
 		}
-
-		delete buffer;
 	}
 
-	fclose(hFile);
-	lua_settop(L, oldTop);
+	//retCode = mcheckload(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+	retCode = mcheckload(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
 
-	return 1;
+	delete[] buffer;
+	fclose(hFile);
+
+	return retCode;
 }
 
 int traceback(lua_State *L)
@@ -115,4 +85,18 @@ int traceback(lua_State *L)
 		error = (char*)lua_tostring(L, -1);
 	}
 	return 1;
+}
+
+int mcheckload(lua_State *L, int stat, const char *filename)
+{
+	if (stat) 
+	{
+		lua_pushstring(L, filename);
+		return 2;
+	}
+	else
+	{
+		return luaL_error(L, "error loading module '%s' from file '%s':\n\t%s",
+			lua_tostring(L, 1), filename, lua_tostring(L, -1));
+	}
 }
