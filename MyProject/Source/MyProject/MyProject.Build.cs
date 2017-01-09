@@ -46,7 +46,6 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Table/ItemObject",
                 "MyProject/Private/BasicFrame/Libs/Util",
 
-                "MyProject/Private/BasicFrame/Libs/LuaCBridge",
                 "MyProject/Private/BasicFrame/Libs/Thread",
                 "MyProject/Private/BasicFrame/Libs/FastDelegate",
                 "MyProject/Private/BasicFrame/Libs/Tools",
@@ -76,6 +75,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Core/Memory",
 
                 "MyProject/Private/BasicFrame/Libs/LuaBind",
+                "MyProject/Private/BasicFrame/Libs/LuaCppInterface",
+                "MyProject/Private/BasicFrame/Libs/LuaCBridge",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",
