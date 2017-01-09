@@ -1,9 +1,9 @@
-#ifndef LUACOROUTINE_H
-#define LUACOROUTINE_H
+#ifndef __LuaCoroutine_H
+#define __LuaCoroutine_H
 
 #include <cassert>
 #include <string>
-#include "luareference.h"
+#include "LuaReference.h"
 
 class LuaCoroutine : public LuaReference
 {

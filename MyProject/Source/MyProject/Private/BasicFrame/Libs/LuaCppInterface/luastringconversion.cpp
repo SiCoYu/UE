@@ -1,4 +1,5 @@
-#include "luastringconversion.h"
+#include "MyProject.h"
+#include "LuaStringConversion.h"
 
 #include <clocale>
 #include <cstdlib>

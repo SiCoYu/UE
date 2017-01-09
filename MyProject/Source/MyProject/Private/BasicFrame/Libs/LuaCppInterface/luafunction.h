@@ -1,7 +1,7 @@
-#ifndef LUAFUNCTION_H
-#define LUAFUNCTION_H
+#ifndef __LuaFunction_H
+#define __LuaFunction_H
 
-#include "luagenericfunction.h"
+#include "LuaGenericFunction.h"
 
 template<typename SIG>
 class LuaFunction : public LuaGenericFunction<SIG>

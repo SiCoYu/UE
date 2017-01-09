@@ -1,10 +1,10 @@
-#ifndef LUAUSERDATA_H
-#define LUAUSERDATA_H
+#ifndef __LuaUserData_H
+#define __LuaUserData_H
 
 #include <cassert>
 #include <functional>
-#include "luatype.h"
-#include "luareference.h"
+#include "LuaType.h"
+#include "LuaReference.h"
 
 class Lua;
 class LuaTable;
@@ -53,7 +53,7 @@ public:
 	
     TYPE* operator->() const { return pointer; }
 
-#include "luauserdataforwards.h"
+#include "LuaUserDataForwards.h"
 
 	struct UserdataWrapper
 	{

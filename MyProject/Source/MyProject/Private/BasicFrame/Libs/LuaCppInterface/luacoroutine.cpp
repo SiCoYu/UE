@@ -1,3 +1,4 @@
+#include "MyProject.h"
 #include "luacoroutine.h"
 #include "luaerror.h"
 

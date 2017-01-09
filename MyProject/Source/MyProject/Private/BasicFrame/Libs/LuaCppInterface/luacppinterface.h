@@ -1,18 +1,18 @@
-#ifndef LUACPPINTERFACE_H
-#define LUACPPINTERFACE_H
+#ifndef __LuaCppInterface_H
+#define __LuaCppInterface_H
 
 #include <memory>
 #include <functional>
 #include <cstring>
 
-#include "luacoroutine.h"
-#include "luatable.h"
-#include "luatypetemplates.h"
-#include "luafunction.h"
-#include "luauserdata.h"
-#include "lualightuserdata.h"
-#include "luastringconversion.h"
-#include "luaerror.h"
+#include "LuaCoroutine.h"
+#include "LuaTable.h"
+#include "LuaTypeTemplates.h"
+#include "LuaFunction.h"
+#include "LuaUserData.h"
+#include "LuaLightUserData.h"
+#include "LuaStringConversion.h"
+#include "LuaError.h"
 
 class Lua
 {
@@ -47,7 +47,7 @@ class Lua
 		lua_setmetatable(state.get(), -2);
 		LuaFunction<SIG> function = LuaFunction<SIG>(state, -1, func);
 
-		// instantiate a luafunction that has a weak reference to the state
+		// instantiate a LuaFunction that has a weak reference to the state
 		// that the lua garbage collector will collect.
 		*ptr = new LuaFunction<SIG>(LuaFunction<SIG>(LuaNoDestructor(state.get()), -1, func));
 
@@ -163,6 +163,6 @@ public:
 
 };
 
-#include "luauserdatabindtemplates.h"
+#include "LuaUserDataBindTemplates.h"
 
 #endif // LUACPPINTERFACE

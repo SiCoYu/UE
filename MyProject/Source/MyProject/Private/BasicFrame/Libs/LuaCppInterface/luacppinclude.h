@@ -1,5 +1,5 @@
-#ifndef LUACPPINCLUDE
-#define LUACPPINCLUDE
+#ifndef __LuaCppInclude_H
+#define __LuaCppInclude_H
 
 
 extern "C" {

@@ -1,10 +1,10 @@
-#ifndef LUAREFERENCE_H
-#define LUAREFERENCE_H
+#ifndef __LuaReference_H
+#define __LuaReference_H
 
 #include <memory>
-#include "luacppinclude.h"
-#include "luatype.h"
-#include "luaerror.h"
+#include "LuaCppInclude.h"
+#include "LuaType.h"
+#include "LuaError.h"
 
 class LuaTable;
 class LuaReference

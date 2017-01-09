@@ -1,7 +1,7 @@
-#ifndef LUATYPE_H
-#define LUATYPE_H
+#ifndef __LuaType_H
+#define __LuaType_H
 
-#include "luacppinclude.h"
+#include "LuaCppInclude.h"
 
 namespace LuaType
 {

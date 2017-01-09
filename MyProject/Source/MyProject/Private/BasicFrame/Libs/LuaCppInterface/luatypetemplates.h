@@ -1,9 +1,9 @@
-#ifndef LUATYPETEMPLATES_H
-#define LUATYPETEMPLATES_H
+#ifndef __LuaTypeTemplates_H
+#define __LuaTypeTemplates_H
 
 #include <stdint.h>
 #include <lua.h>
-#include "luastringconversion.h"
+#include "LuaStringConversion.h"
 
 template<typename SIG>
 class LuaFunction;
@@ -60,7 +60,7 @@ struct popper
 
 
 #ifdef WIN32
-#include "luastringconversion.h"
+#include "LuaStringConversion.h"
 
 DEFINE_TYPE_TEMPLATE_FOR(std::wstring, ,								\
 																		\

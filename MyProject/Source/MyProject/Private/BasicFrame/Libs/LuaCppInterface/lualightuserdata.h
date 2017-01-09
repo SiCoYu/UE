@@ -1,11 +1,11 @@
-#ifndef LUALIGHTUSERDATA_H
-#define LUALIGHTUSERDATA_H
+#ifndef __LuaLightUserData_H
+#define __LuaLightUserData_H
 
 #include <cassert>
 #include <memory>
-#include "luareference.h"
-#include "luatype.h"
-#include "luauserdata.h"
+#include "LuaReference.h"
+#include "LuaType.h"
+#include "LuaUserData.h"
 
 template <typename T>
 class LuaLightUserdata : public LuaReference

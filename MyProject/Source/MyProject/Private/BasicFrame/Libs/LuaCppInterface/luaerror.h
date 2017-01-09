@@ -1,7 +1,7 @@
-#ifndef LUACPPERROR
-#define LUACPPERROR
+#ifndef __LuaError_H
+#define __LuaError_H
 
-#include "luacppinclude.h"
+#include "LuaCppInclude.h"
 
 #include <exception>
 #include <string>

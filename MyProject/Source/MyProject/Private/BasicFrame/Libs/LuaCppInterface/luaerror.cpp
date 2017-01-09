@@ -1,4 +1,5 @@
-#include "luaerror.h"
+#include "MyProject.h"
+#include "LuaError.h"
 
 #include <sstream>
 

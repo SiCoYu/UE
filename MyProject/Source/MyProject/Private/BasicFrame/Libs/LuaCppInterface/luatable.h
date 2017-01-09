@@ -1,5 +1,5 @@
-#ifndef LUATABLE_H
-#define LUATABLE_H
+#ifndef __LuaTable_H
+#define __LuaTable_H
 
 #include <cassert>
 #include <string>
@@ -7,7 +7,7 @@
 #include <memory>
 #include <stdint.h>
 
-#include "luareference.h"
+#include "LuaReference.h"
 
 template<typename SIG>
 class LuaFunction;

@@ -1,5 +1,6 @@
-#include "luareference.h"
-#include "luatable.h"
+#include "MyProject.h"
+#include "LuaReference.h"
+#include "LuaTable.h"
 
 LuaReference::LuaReference(std::shared_ptr<lua_State> state, int index) : state(state)
 {

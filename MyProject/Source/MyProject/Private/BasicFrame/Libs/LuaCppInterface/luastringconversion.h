@@ -1,5 +1,5 @@
-#ifndef LUASTRINGCONVERSION
-#define LUASTRINGCONVERSION
+#ifndef __LuaStringConversion_H
+#define __LuaStringConversion_H
 
 #include <string>
 

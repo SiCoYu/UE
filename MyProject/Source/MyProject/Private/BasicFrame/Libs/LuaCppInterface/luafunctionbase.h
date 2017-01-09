@@ -1,9 +1,9 @@
-#ifndef LUAFUNCTIONBASE_H
-#define LUAFUNCTIONBASE_H
+#ifndef __LuaFunctionBase_H
+#define __LuaFunctionBase_H
 
 #include <string>
 
-#include "luareference.h"
+#include "LuaReference.h"
 
 class LuaFunctionBase : public LuaReference
 {

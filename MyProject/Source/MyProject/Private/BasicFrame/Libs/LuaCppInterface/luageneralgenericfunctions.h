@@ -1,8 +1,8 @@
-#ifndef LUAGENERALGENERICFUNCTION_H
-#define LUAGENERALGENERICFUNCTION_H
+#ifndef __LuaGeneralGenericFunctions_H
+#define __LuaGeneralGenericFunctions_H
 
-#include "luatypetemplates.h"
-#include "luaerror.h"
+#include "LuaTypeTemplates.h"
+#include "LuaError.h"
 
 #ifndef UNREFERENCED_PARAMETER
 #define UNREFERENCED_PARAMETER( x ) do { (void)(x); } while (0)
