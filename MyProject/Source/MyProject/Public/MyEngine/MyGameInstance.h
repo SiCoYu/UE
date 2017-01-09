@@ -27,6 +27,8 @@ public:
 	virtual void Init() override;
 	virtual void Shutdown() override;
 	virtual void FinishDestroy() override;
+
+	virtual TSubclassOf<UOnlineSession> GetOnlineSessionClass() override;
 };
 
 

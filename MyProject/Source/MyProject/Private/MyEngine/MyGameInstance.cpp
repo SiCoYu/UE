@@ -4,6 +4,7 @@
 #include "AppFrame.h"
 //#include "Ctx.h"
 #include "UtilStr.h"
+#include "MyOnlineSession.h"
 
 UMyGameInstance::UMyGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -36,4 +37,9 @@ void UMyGameInstance::Shutdown()
 void UMyGameInstance::FinishDestroy()
 {
 	Super::FinishDestroy();
+}
+
+TSubclassOf<UOnlineSession> UMyGameInstance::GetOnlineSessionClass()
+{
+	return UMyOnlineSession::StaticClass();
 }
