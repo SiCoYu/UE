@@ -318,6 +318,9 @@ public:
 	bool IsGarbageCollecting();
 	void CollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge = true);
 	bool TryCollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge = true);
+
+	// Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+	const FWorldContext* GetWorldContextFromGameViewport(const UGameViewportClient *InViewport) const;
 };
 
 #include "EngineApi.inl"
