@@ -70,7 +70,10 @@ int loadLuaFromBufferUseFunction(lua_State *L)
 	fread(buffer, size, 1, hFile);
 	size = removeZeroAndEof(buffer, size);
 
+	int fnameindex = lua_gettop(L) + 1;
+	lua_pushfstring(L, "@%s", fullPath);
 	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+	lua_remove(L, fnameindex);
 
 	delete[] buffer;
 	fclose(hFile);
@@ -125,7 +128,10 @@ int loadLuaFromBufferUseClosure(lua_State *L)
 	fread(buffer, size, 1, hFile);
 	size = removeZeroAndEof(buffer, size);
 
+	int fnameindex = lua_gettop(L) + 1;
+	lua_pushfstring(L, "@%s", fullPath);
 	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+	lua_remove(L, fnameindex);
 
 	delete[] buffer;
 	fclose(hFile);
