@@ -33,6 +33,8 @@ public class MyProjectEditor : ModuleRules
                 "Engine",
                 "InputCore",
 
+                "AnimGraph",
+
                 "UnrealEd",
                 "BlueprintGraph",
                 "GraphEditor",
@@ -54,6 +56,14 @@ public class MyProjectEditor : ModuleRules
                 "BlueprintGraph",
                 "AnimGraph",
 
+                "GraphEditor",
+                "PropertyEditor",
+                "SlateCore",
+                "Slate",
+                "EditorStyle",
+                "Kismet",
+                "KismetCompiler",
+
                 "MyProject"
             }
         );
@@ -70,11 +80,11 @@ public class MyProjectEditor : ModuleRules
         //    }
         //);
  
-        CircularlyReferencedDependentModules.AddRange(
-            new string[] 
-            {
-                "MyProject",
-            }
-        );
+        //CircularlyReferencedDependentModules.AddRange(
+        //    new string[] 
+        //    {
+        //        "MyProject",
+        //    }
+        //);
     }
 }
