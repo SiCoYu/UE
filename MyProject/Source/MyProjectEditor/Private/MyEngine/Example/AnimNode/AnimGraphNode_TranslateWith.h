@@ -1,8 +1,6 @@
-// Created by Chance_07 2014
 #pragma once
 
-#include "AnimGraphNode_Base.h"
-#include "AnimNode_TranslateWith.h"
+#include "AnimGraphNode_Base.h"	// UAnimGraphNode_Base
 #include "AnimGraphNode_TranslateWith.generated.h"
 
 /**
@@ -16,19 +14,18 @@ class UAnimGraphNode_TranslateWith : public UAnimGraphNode_Base
 {
 	GENERATED_UCLASS_BODY()
 
-		UPROPERTY(EditAnywhere, Category = SkeletalControl)
-		FAnimNode_TranslateWith Node;
+	UPROPERTY(EditAnywhere, Category = SkeletalControl)
+	UAnimGraphNode_TranslateWith* Node;
 
 public:
 	// UEdGraphNode interface
-	virtual FText GetNodeTitle(ENodeTitleType::Type TitleType) const OVERRIDE;
-	virtual FString GetTooltip() const OVERRIDE;
-	virtual FString GetNodeCategory() const OVERRIDE;
-	virtual FLinearColor GetNodeTitleColor() const OVERRIDE;
-	virtual void CreateOutputPins() OVERRIDE;
+	virtual FText GetNodeTitle(ENodeTitleType::Type TitleType) const override;
+	virtual FString GetTooltip() const override;
+	virtual FString GetNodeCategory() const override;
+	virtual FLinearColor GetNodeTitleColor() const override;
+	virtual void CreateOutputPins() override;
 	// End of UEdGraphNode interface
 
 protected:
 	virtual FText GetControllerDescription() const;
-
 };

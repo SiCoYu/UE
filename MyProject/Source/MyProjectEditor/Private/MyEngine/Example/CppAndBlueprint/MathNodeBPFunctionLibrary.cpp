@@ -4,7 +4,7 @@
 
 #define SMALL_NUMBER		(1.e-8f)
 
-UMathNodeBPFunctionLibrary::UMathNodeBPFunctionLibrary(const class FPostConstructInitializeProperties& PCIP)
+UMathNodeBPFunctionLibrary::UMathNodeBPFunctionLibrary(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 }
@@ -47,5 +47,7 @@ bool UMathNodeBPFunctionLibrary::IsNearlyZero(float Value, float ErrorTolerence 
 
 bool UMathNodeBPFunctionLibrary::IsPowerOfTwo(float Value)
 {
-	return FMath::IsPowerOfTwo(Value);
+	// error C2296: '&': illegal, left operand has type 'float'
+	//return FMath::IsPowerOfTwo(Value);
+	return FMath::IsPowerOfTwo((int)Value);
 }

@@ -1,11 +1,12 @@
 #pragma once
+
 #include "SlateBasics.h"
-#include "GAGlobalTypes.h"
 #include "EdGraph/EdGraphPin.h"
 #include "EdGraph/EdGraphSchema.h"
 #include "EdGraphSchema_K2.h"
 #include "GAAttributePanelGraphPinFactory.h"
 #include "GAAttributePin.h"
+#include "GAAttribute.h"
 #include "EdGraphUtilities.h"
 
 /**

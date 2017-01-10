@@ -1,21 +1,20 @@
 #include "MyProjectEditor.h"
 #include "GAAttributePin.h"
-#include "GAGlobalTypes.h"
 #include "GAAttributePanelGraphPinFactory.h"
 
 IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, MyProjectEditor, "MyProjectEditor" );
 
-void MyProjectEditor::StartupModule()
+void FMyProjectEditor::StartupModule()
 {
 	this->StartupModule_GAAttribute();
 }
 
-void MyProjectEditor::ShutdownModule()
+void FMyProjectEditor::ShutdownModule()
 {
 
 }
 
-void MyProjectEditor::StartupModule_GAAttribute()
+void FMyProjectEditor::StartupModule_GAAttribute()
 {
 	//create your factory and shared pointer to it.
 	TSharedPtr<FGAAttributePanelGraphPinFactory> GAAttributePanelGraphPinFactory = MakeShareable(new FGAAttributePanelGraphPinFactory());
@@ -23,7 +22,7 @@ void MyProjectEditor::StartupModule_GAAttribute()
 	FEdGraphUtilities::RegisterVisualPinFactory(GAAttributePanelGraphPinFactory);
 }
 
-void MyProjectEditor::ShutdownModule_GAAttribute()
+void FMyProjectEditor::ShutdownModule_GAAttribute()
 {
 
 }

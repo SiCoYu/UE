@@ -56,6 +56,9 @@ public class MyProjectEditor : ModuleRules
             }
         );
 
+        // AnimGraphRuntime 模块的包含目录需要这样导入，参考 Engine.Build.cs
+        DynamicallyLoadedModuleNames.Add("AnimGraphRuntime");
+
         // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
         // You'll probably also want to add "MyCodeProject" to the PublicDependencyModuleNames in your MyCodeProjectEditor.Build.cs file, as this will allow your editor module access to your game code.
         PublicDependencyModuleNames.AddRange(

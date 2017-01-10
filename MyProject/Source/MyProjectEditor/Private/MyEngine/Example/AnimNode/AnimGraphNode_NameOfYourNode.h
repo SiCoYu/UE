@@ -1,11 +1,8 @@
-// Copyright 1998-2013 Epic Games, Inc. All Rights Reserved.
-
 #pragma once
 
+#include "AnimGraphNode_Base.h"		// UAnimGraphNode_Base
 #include "AnimGraphDefinitions.h"
 #include "Kismet2/BlueprintEditorUtils.h"
-
-#include "AnimNode_NameOfYourNode.h"
 
 #include "AnimGraphNode_NameOfYourNode.generated.h"
 
@@ -24,17 +21,16 @@ class UAnimGraphNode_NameOfYourNode : public UAnimGraphNode_Base
 {
 	GENERATED_UCLASS_BODY()
 
-		UPROPERTY(EditAnywhere, Category = Settings)
-		FAnimNode_NameOfYourNode Node;
+	UPROPERTY(EditAnywhere, Category = Settings)
+	FAnimNode_NameOfYourNode Node;
 
 public:
 	// UEdGraphNode interface
-	virtual FString GetNodeTitle(ENodeTitleType::Type TitleType) const OVERRIDE;
-	virtual FLinearColor GetNodeTitleColor() const OVERRIDE;
-	virtual FString GetNodeCategory() const OVERRIDE;
+	virtual FText GetNodeTitle(ENodeTitleType::Type TitleType) const override;
+	virtual FLinearColor GetNodeTitleColor() const override;
+	virtual FString GetNodeCategory() const override;
 	// End of UEdGraphNode interface
 
 protected:
 	virtual FString GetControllerDescription() const;
-
 };

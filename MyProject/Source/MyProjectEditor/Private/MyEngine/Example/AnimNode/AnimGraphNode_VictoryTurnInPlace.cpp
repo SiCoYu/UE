@@ -2,6 +2,7 @@
 
 #include "MyProjectEditor.h"
 #include "AnimGraphNode_VictoryTurnInPlace.h"
+#include "AnimNode_VictoryTurnInPlace.h"
 
 /////////////////////////////////////////////////////
 // UAnimGraphNode_VictoryTurnInPlace
