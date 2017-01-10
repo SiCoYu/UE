@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AnimGraphNode_Base.h"	// UAnimGraphNode_Base
+#include "AnimNode_TranslateWith.h"
 #include "AnimGraphNode_TranslateWith.generated.h"
 
 /**
@@ -15,7 +16,7 @@ class UAnimGraphNode_TranslateWith : public UAnimGraphNode_Base
 	GENERATED_UCLASS_BODY()
 
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
-	UAnimGraphNode_TranslateWith* Node;
+	FAnimNode_TranslateWith Node;
 
 public:
 	// UEdGraphNode interface

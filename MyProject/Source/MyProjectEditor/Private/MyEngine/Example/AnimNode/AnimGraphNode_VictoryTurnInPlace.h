@@ -3,9 +3,8 @@
 #include "AnimGraphNode_Base.h"	// UAnimGraphNode_Base
 #include "AnimGraphDefinitions.h"
 #include "Kismet2/BlueprintEditorUtils.h"
+#include "FAnimNode_VictoryTurnInPlace.h"
 #include "AnimGraphNode_VictoryTurnInPlace.generated.h"
-
-class FAnimNode_VictoryTurnInPlace;
 
 //Whole point of this is to be wrapper for node struct
 //		so it depends on it, and that node must compile first
@@ -23,11 +22,11 @@ class UAnimGraphNode_VictoryTurnInPlace : public UAnimGraphNode_Base
 	GENERATED_UCLASS_BODY()
 
 	UPROPERTY(EditAnywhere, Category = Settings)
-	FAnimNode_VictoryTurnInPlace* Node;
+	FAnimNode_VictoryTurnInPlace Node;
 
 public:
 	// UEdGraphNode interface
-	virtual FString GetNodeTitle(ENodeTitleType::Type TitleType) const override;
+	virtual FText GetNodeTitle(ENodeTitleType::Type TitleType) const override;
 	virtual FLinearColor GetNodeTitleColor() const override;
 	virtual FString GetNodeCategory() const override;
 	// End of UEdGraphNode interface
