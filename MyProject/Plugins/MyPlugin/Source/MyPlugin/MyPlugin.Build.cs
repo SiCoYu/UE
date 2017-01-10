@@ -1,10 +1,11 @@
 // Some copyright should be here...
 
 using UnrealBuildTool;
-
-public class RuntimeTests : ModuleRules
+// http://www.cnblogs.com/UnrealEngine4/p/3729720.html
+// UnrealEngine\Engine\Plugins\Tests\RuntimeTests 这是一个插件模板，可以从这里拷贝基本插件框架
+public class MyPlugin : ModuleRules
 {
-	public RuntimeTests(TargetInfo Target)
+	public MyPlugin(TargetInfo Target)
 	{
 		
 		PublicIncludePaths.AddRange(
