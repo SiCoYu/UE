@@ -3,7 +3,7 @@
 #include "AnimGraphNode_Base.h"	// UAnimGraphNode_Base
 #include "AnimGraphDefinitions.h"
 #include "Kismet2/BlueprintEditorUtils.h"
-#include "FAnimNode_VictoryTurnInPlace.h"
+#include "AnimNode_VictoryTurnInPlace.h"
 #include "AnimGraphNode_VictoryTurnInPlace.generated.h"
 
 //Whole point of this is to be wrapper for node struct
