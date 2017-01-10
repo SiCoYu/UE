@@ -559,3 +559,8 @@ const FWorldContext* EngineApi::GetWorldContextFromGameViewport(const UGameViewp
 {
 	return GEngine->GetWorldContextFromGameViewport(InViewport);
 }
+
+void EngineApi::LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
+{
+	return UGameplayStatics::LoadStreamLevel(WorldContextObject, LevelName, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
+}

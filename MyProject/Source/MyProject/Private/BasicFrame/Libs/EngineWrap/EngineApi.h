@@ -320,7 +320,8 @@ public:
 	bool TryCollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge = true);
 
 	// Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
-	const FWorldContext* GetWorldContextFromGameViewport(const UGameViewportClient *InViewport) const;
+	static const FWorldContext* GetWorldContextFromGameViewport(const UGameViewportClient *InViewport) const;
+	static void LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo);
 };
 
 #include "EngineApi.inl"
