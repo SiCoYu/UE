@@ -7,7 +7,7 @@
 
 #define LOCTEXT_NAMESPACE "AnimGraph_TranslateWith"
 
-UAnimGraphNode_TranslateWith::UAnimGraphNode_TranslateWith(const FPostConstructInitializeProperties& PCIP)
+UAnimGraphNode_TranslateWith::UAnimGraphNode_TranslateWith(const FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 }
@@ -49,9 +49,9 @@ FText UAnimGraphNode_TranslateWith::GetNodeTitle(ENodeTitleType::Type TitleType)
 	}
 	else
 	{
-		Args.Add(TEXT("SourceBoneName"), FText::FromName(Node.SourceBone.BoneName));
-		Args.Add(TEXT("TargetBoneName"), FText::FromName(Node.TargetBone.BoneName));
-		return FText::Format(LOCTEXT("AnimGraphNode_TranslateWith_Title", "{ControllerDescription}\nSource Bone: {SourceBoneName}\nTarget Bone: {TargetBoneName}"), Args);
+		//Args.Add(TEXT("SourceBoneName"), FText::FromName(Node.SourceBone.BoneName));
+		//Args.Add(TEXT("TargetBoneName"), FText::FromName(Node.TargetBone.BoneName));
+		//return FText::Format(LOCTEXT("AnimGraphNode_TranslateWith_Title", "{ControllerDescription}\nSource Bone: {SourceBoneName}\nTarget Bone: {TargetBoneName}"), Args);
 	}
 
 }

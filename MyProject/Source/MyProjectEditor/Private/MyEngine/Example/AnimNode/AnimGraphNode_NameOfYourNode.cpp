@@ -2,11 +2,12 @@
 
 #include "MyProjectEditor.h"
 #include "AnimGraphNode_NameOfYourNode.h"
+#include "UtilStr.h"
 
 /////////////////////////////////////////////////////
 // UAnimGraphNode_NameOfYourNode
 
-UAnimGraphNode_NameOfYourNode::UAnimGraphNode_NameOfYourNode(const FPostConstructInitializeProperties& PCIP)
+UAnimGraphNode_NameOfYourNode::UAnimGraphNode_NameOfYourNode(const FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 }
@@ -27,9 +28,9 @@ FString UAnimGraphNode_NameOfYourNode::GetControllerDescription() const
 	return TEXT(" Your Anim node Title ");
 }
 
-FString UAnimGraphNode_NameOfYourNode::GetNodeTitle(ENodeTitleType::Type TitleType) const
+FText UAnimGraphNode_NameOfYourNode::GetNodeTitle(ENodeTitleType::Type TitleType) const
 {
 	FString Result = *GetControllerDescription();
 	Result += (TitleType == ENodeTitleType::ListView) ? TEXT("") : TEXT("\n");
-	return Result;
+	return UtilStr::ConvFString2FText(Result);
 }

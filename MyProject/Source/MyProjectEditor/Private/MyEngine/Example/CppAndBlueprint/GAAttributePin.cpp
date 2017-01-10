@@ -15,10 +15,10 @@ void SGAAttributePin::Construct(const FArguments& InArgs, UEdGraphPin* InGraphPi
 TSharedRef<SWidget>	SGAAttributePin::GetDefaultValueWidget()
 {
 	//AttributesList.Empty();
-	return	SNew(STextComboBox) //note you can display any widget here
+	//note you can display any widget here
+	return SNew(STextComboBox)
 		.OptionsSource(&AttributesList)
 		.OnSelectionChanged(this, &SGAAttributePin::OnAttributeSelected);
-
 }
 void SGAAttributePin::OnAttributeSelected(TSharedPtr<FString> ItemSelected, ESelectInfo::Type SelectInfo)
 {

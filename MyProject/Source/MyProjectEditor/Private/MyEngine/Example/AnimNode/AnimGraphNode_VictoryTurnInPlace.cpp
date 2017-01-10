@@ -2,6 +2,7 @@
 
 #include "MyProjectEditor.h"
 #include "AnimGraphNode_VictoryTurnInPlace.h"
+#include "UtilStr.h"
 
 /////////////////////////////////////////////////////
 // UAnimGraphNode_VictoryTurnInPlace
@@ -27,9 +28,9 @@ FString UAnimGraphNode_VictoryTurnInPlace::GetControllerDescription() const
 	return TEXT("~~~ Victory Turn In Place ~~~");
 }
 
-FString UAnimGraphNode_VictoryTurnInPlace::GetNodeTitle(ENodeTitleType::Type TitleType) const
+FText UAnimGraphNode_VictoryTurnInPlace::GetNodeTitle(ENodeTitleType::Type TitleType) const
 {
 	FString Result = *GetControllerDescription();
 	Result += (TitleType == ENodeTitleType::ListView) ? TEXT("") : TEXT("\n");
-	return Result;
+	return UtilStr::ConvFString2FText(Result);
 }

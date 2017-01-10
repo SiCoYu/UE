@@ -3,7 +3,7 @@
 #include "AnimGraphNode_Base.h"		// UAnimGraphNode_Base
 #include "AnimGraphDefinitions.h"
 #include "Kismet2/BlueprintEditorUtils.h"
-#include "AnimNode_NameOfYourNode.h"
+//#include "AnimNode_NameOfYourNode.h"
 #include "AnimGraphNode_NameOfYourNode.generated.h"
 
 /**
@@ -21,8 +21,8 @@ class UAnimGraphNode_NameOfYourNode : public UAnimGraphNode_Base
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(EditAnywhere, Category = Settings)
-	FAnimNode_NameOfYourNode Node;
+	//UPROPERTY(EditAnywhere, Category = Settings)
+	//FAnimNode_NameOfYourNode Node;
 
 public:
 	// UEdGraphNode interface
