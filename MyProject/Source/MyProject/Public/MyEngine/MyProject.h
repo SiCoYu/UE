@@ -24,7 +24,7 @@ class FMyProject : public FDefaultGameModuleImpl
 	/**
 	* Called before the module is unloaded, right before the module object is destroyed.
 	*/
-	virtual void ShutdownModule();
+	virtual void ShutdownModule() override;
 
 	// https://wiki.unrealengine.com/Slate,_Loading_Styles_%26_Resources
 public:

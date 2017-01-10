@@ -1,3 +1,7 @@
+#pragma once
+
+#include "GAAttribute.generated.h"
+
 /**
  * @brief https://wiki.unrealengine.com/How_To_Create_Custom_Blueprint_Pin
  First you will need Editor module in your plugin/game project. You can find information how to add it here:
@@ -12,5 +16,5 @@ struct FGAAttribute
 public:
 	//It's important to mark property as UPROPERTY(), it doesn't need to have any specifiers though.
 	UPROPERTY(BlueprintReadOnly)
-		FName AttributeName;
+	FName AttributeName;
 };

@@ -1,13 +1,9 @@
 #include "MyProjectEditor.h"
-#include "GameAttributesEditor.h"
-
 #include "KismetEditorUtilities.h"
 
 #include "STextComboBox.h"
 #include "EdGraph/EdGraphPin.h"
 #include "EdGraph/EdGraphSchema.h"
-#include "GAGlobalTypes.h"
-#include "GAAttributesBase.h"
 #include "GAAttributePin.h"
 
 void SGAAttributePin::Construct(const FArguments& InArgs, UEdGraphPin* InGraphPinObj)

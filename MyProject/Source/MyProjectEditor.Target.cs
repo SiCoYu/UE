@@ -24,6 +24,7 @@ public class MyProjectEditorTarget : TargetRules
 		ref List<string> OutExtraModuleNames
 		)
 	{
+        // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
         // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
         OutExtraModuleNames.Add("MyProjectEditor");
 	}

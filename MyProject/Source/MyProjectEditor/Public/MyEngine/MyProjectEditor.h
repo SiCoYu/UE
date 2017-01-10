@@ -1,5 +1,17 @@
-#ifndef __MYEDITOREXTENSION_H__
-#define __MYEDITOREXTENSION_H__
+#ifndef __MyProjectEditor_H
+#define __MyProjectEditor_H
 
+#include "EngineMinimal.h"
 
-#endif // __MYEDITOREXTENSION_H__
+class FMyProjectEditor : public FDefaultGameModuleImpl
+{
+public:
+	virtual void StartupModule() override;
+	virtual void ShutdownModule() override;
+
+private:
+	void StartupModule_GAAttribute();
+	void ShutdownModule_GAAttribute();
+};
+
+#endif // __MyProjectEditor_H
