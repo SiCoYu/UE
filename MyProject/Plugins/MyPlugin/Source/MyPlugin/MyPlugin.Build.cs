@@ -31,14 +31,14 @@ public class MyPlugin : ModuleRules
     {
         PublicIncludePaths.AddRange( //公有文件搜索路径
             new string[] {
-                "TestPlugin/Public"
+                "MyPlugin/Public"
                 // ... add public include paths required here ...
             }
             );
 
         PrivateIncludePaths.AddRange(
             new string[] {
-                "TestPlugin/Private" //私有文件搜索路径
+                "MyPlugin/Private" //私有文件搜索路径
                 // ... add other private include paths required here ...
             }
             );
