@@ -46,58 +46,8 @@ void AMyHUD::DrawHUD()
 		return;
 	}
 
-	FString Text = LOCTEXT("WaitingForRespawn", "WAITING FOR RESPAWN").ToString();
-	FCanvasTextItem TextItem(FVector2D::ZeroVector, FText::GetEmpty(), BigFont, HUDDark);
-	TextItem.EnableShadow(FLinearColor::Black);
-	TextItem.Text = FText::FromString(Text);
-	TextItem.Scale = FVector2D(1.0f, 1.0f);
-	//TextItem.FontRenderInfo = ShadowedFont;
-	TextItem.SetColor(FLinearColor(0.75f, 0.125f, 0.125f, 1.0f));
-	Canvas->DrawItem(TextItem);
-
-	if (!DialogWidget.IsValid())
-	{
-		// warning C4996: 'SMyDialog::FArguments::MessageText': Passing text to Slate as FString is deprecated, please use FText instead (likely via a LOCTEXT). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-		//DialogWidget = SNew(SMyDialog)
-		//	.MessageText("asdfasdasdfadsf");
-
-		DialogWidget = SNew(SMyDialog)
-			.MessageText(LOCTEXT("MyHUB", "asdfasdasdfadsf"));
-
-		SMyDialog::FArguments aaa;
-		//aaa.MessageText("asdfasdasdfadsf");
-		aaa.MessageText(LOCTEXT("MyHUB", "asdfasdasdfadsf"));
-		DialogWidget->Construct(aaa);
-
-		//GEngine->GameViewport->AddViewportWidgetContent(DialogWidget.ToSharedRef());
-
-		//NewWidget->AddToViewport();
-
-		//TSharedPtr<SWidget> OutUserSlateWidget;
-		//TSharedRef<SWidget> RootWidget = NewWidget->MakeViewportWidget(OutUserSlateWidget);
-		//GEngine->GameViewport->AddViewportWidgetContent(RootWidget);
-		//UWidget* bbb = NewWidget->GetContentForSlot("aaa");
-		
-		//TSharedPtr<SButton> bbb = MakeShareable((SButton*)(NewWidget->GetSlateWidgetFromName("Button_16").Get()));
-
-		//UButton* ccc = (UButton*)NewWidget->GetWidgetFromName("Button_14");
-		//FWeakObjectPtr fff(this);
-		//TScriptDelegate<FWeakObjectPtr> ddd;
-		//TScriptDelegate<AMyHUD> ddd;
-
-		//ddd.BindUFunction((UObject *)this, "OnConfirmGeneric");
-		//ccc->OnClicked.Add(ddd);
-
-		//bbb->SetOnClicked(FOnClicked::CreateRaw(this, &AMyHUD::OnConfirmGeneric));
-		//bbb->SetOnClicked(FOnClicked::CreateSP(this, &AMyHUD::OnConfirmGeneric));
-		//bbb->SetOnClicked(BIND_UOBJECT_DELEGATE(FOnClicked, OnConfirmGeneric));
-
-		//FOnClicked InOnClicked = FOnClicked::CreateUObject(this, &AMyHUD::OnConfirmGeneric);
-		//bbb->SetOnClicked(InOnClicked);
-	}
-
-	//NewWidget->AddToViewport();
-
+	this->DrawText();
+	this->AddDialog();
 	//this->DrawHUD_ChatSystem();
 	//this->DrawHUD_EditText();
 }
@@ -273,4 +223,62 @@ void AMyHUD::BeginPlay_SlateTab()
 	{
 		MySlateTabWidget->SetVisibility(EVisibility::Visible);
 	}
+}
+
+void AMyHUD::DrawText()
+{
+	FString Text = LOCTEXT("WaitingForRespawn", "WAITING FOR RESPAWN").ToString();
+	FCanvasTextItem TextItem(FVector2D::ZeroVector, FText::GetEmpty(), BigFont, HUDDark);
+	TextItem.EnableShadow(FLinearColor::Black);
+	TextItem.Text = FText::FromString(Text);
+	TextItem.Scale = FVector2D(1.0f, 1.0f);
+	//TextItem.FontRenderInfo = ShadowedFont;
+	TextItem.SetColor(FLinearColor(0.75f, 0.125f, 0.125f, 1.0f));
+	Canvas->DrawItem(TextItem);
+}
+
+void AMyHUD::AddDialog()
+{
+	if (!DialogWidget.IsValid())
+	{
+		// warning C4996: 'SMyDialog::FArguments::MessageText': Passing text to Slate as FString is deprecated, please use FText instead (likely via a LOCTEXT). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//DialogWidget = SNew(SMyDialog)
+		//	.MessageText("asdfasdasdfadsf");
+
+		DialogWidget = SNew(SMyDialog)
+			.MessageText(LOCTEXT("MyHUB", "asdfasdasdfadsf"));
+
+		SMyDialog::FArguments aaa;
+		//aaa.MessageText("asdfasdasdfadsf");
+		aaa.MessageText(LOCTEXT("MyHUB", "asdfasdasdfadsf"));
+		DialogWidget->Construct(aaa);
+
+		//GEngine->GameViewport->AddViewportWidgetContent(DialogWidget.ToSharedRef());
+
+		//NewWidget->AddToViewport();
+
+		//TSharedPtr<SWidget> OutUserSlateWidget;
+		//TSharedRef<SWidget> RootWidget = NewWidget->MakeViewportWidget(OutUserSlateWidget);
+		//GEngine->GameViewport->AddViewportWidgetContent(RootWidget);
+		//UWidget* bbb = NewWidget->GetContentForSlot("aaa");
+
+		//TSharedPtr<SButton> bbb = MakeShareable((SButton*)(NewWidget->GetSlateWidgetFromName("Button_16").Get()));
+
+		//UButton* ccc = (UButton*)NewWidget->GetWidgetFromName("Button_14");
+		//FWeakObjectPtr fff(this);
+		//TScriptDelegate<FWeakObjectPtr> ddd;
+		//TScriptDelegate<AMyHUD> ddd;
+
+		//ddd.BindUFunction((UObject *)this, "OnConfirmGeneric");
+		//ccc->OnClicked.Add(ddd);
+
+		//bbb->SetOnClicked(FOnClicked::CreateRaw(this, &AMyHUD::OnConfirmGeneric));
+		//bbb->SetOnClicked(FOnClicked::CreateSP(this, &AMyHUD::OnConfirmGeneric));
+		//bbb->SetOnClicked(BIND_UOBJECT_DELEGATE(FOnClicked, OnConfirmGeneric));
+
+		//FOnClicked InOnClicked = FOnClicked::CreateUObject(this, &AMyHUD::OnConfirmGeneric);
+		//bbb->SetOnClicked(InOnClicked);
+	}
+
+	//NewWidget->AddToViewport();
 }

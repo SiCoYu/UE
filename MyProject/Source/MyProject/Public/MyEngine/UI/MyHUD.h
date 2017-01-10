@@ -23,6 +23,9 @@ public:
 	virtual void DrawHUD() override;
 	virtual void BeginPlay() override;
 
+	void DrawText();
+	void AddDialog();
+
 public:
 	//UFUNCTION(BlueprintCallable, Category = "Button")
 	//FReply OnConfirmGeneric();
