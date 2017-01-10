@@ -557,5 +557,5 @@ bool EngineApi::TryCollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge
 
 const FWorldContext* EngineApi::GetWorldContextFromGameViewport(const UGameViewportClient *InViewport) const
 {
-	GEngine->GetWorldContextFromGameViewport(InViewport);
+	return GEngine->GetWorldContextFromGameViewport(InViewport);
 }
