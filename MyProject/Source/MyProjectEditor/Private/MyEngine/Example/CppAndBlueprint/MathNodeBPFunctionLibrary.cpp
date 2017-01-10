@@ -1,6 +1,6 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
-#include "MyProject.h" //Change this to your project's header file (Its the file thats got the same name as your project and ends with .h)
+#include "MyProjectEditor.h" //Change this to your project's header file (Its the file thats got the same name as your project and ends with .h)
 #include "UnrealMathVectorCommon.h"
 #include "MathNodeBPFunctionLibrary.h"
 

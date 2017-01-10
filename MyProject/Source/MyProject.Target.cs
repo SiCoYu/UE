@@ -20,7 +20,8 @@ public class MyProjectTarget : TargetRules
 		ref List<string> OutExtraModuleNames
 		)
 	{
-		OutExtraModuleNames.Add("MyProject");
+        // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
+        OutExtraModuleNames.Add("MyProject");
 	}
 
     public override void SetupGlobalEnvironment(

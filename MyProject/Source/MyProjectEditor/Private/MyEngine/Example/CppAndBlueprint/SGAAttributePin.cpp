@@ -1,3 +1,4 @@
+#include "MyProjectEditor.h"
 #include "GameAttributesEditor.h"
 
 #include "KismetEditorUtilities.h"

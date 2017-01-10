@@ -26,7 +26,9 @@ public:
 	*
 	* Assumes world Y and Z, although this could be extended to handle arbitrary rotations.
 	*/
-	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", FriendlyName = "Random VCone", CompactNodeTitle = "RanVCone", Keywords = "random vector cone radians"), Category = Math)
+	// LogCompile:Error: Remapping old metadata key 'FriendlyName' to new key 'DisplayName', please update the declaration.
+	//UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", FriendlyName = "Random VCone", CompactNodeTitle = "RanVCone", Keywords = "random vector cone radians"), Category = Math)
+	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", DisplayName = "Random VCone", CompactNodeTitle = "RanVCone", Keywords = "random vector cone radians"), Category = Math)
 	static FVector VRandomConeFromRad(const FVector& Dir, float HorizontalConeHalfAngleRad, bool bIsSquished, float VerticalConeHalfAngleRad);
 
 	/*
@@ -39,15 +41,15 @@ public:
 	*
 	* Assumes world Y and Z, although this could be extended to handle arbitrary rotations.
 	*/
-	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", FriendlyName = "Random VCone From Degrees", CompactNodeTitle = "RanVConeDeg", Keywords = "random vector cone degrees"), Category = Math)
+	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", DisplayName = "Random VCone From Degrees", CompactNodeTitle = "RanVConeDeg", Keywords = "random vector cone degrees"), Category = Math)
 	static FVector VRandomConeFromDeg(const FVector& Dir, float HorizontalConeHalfAngleDeg, bool bIsSquished, float VerticalConeHalfAngleDeg);
 
 	/** Convets a angle in degrees into radians */
-	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", FriendlyName = "Convert Degrees to Radians", CompactNodeTitle = "DegToRad", Keywords = "convert radians degrees"), Category = Math)
+	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", DisplayName = "Convert Degrees to Radians", CompactNodeTitle = "DegToRad", Keywords = "convert radians degrees"), Category = Math)
 	static float FDegToRad(float AngleInDegrees);
 
 	/** Convets a angle in radians into degrees */
-	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", FriendlyName = "Convert Radians to Degrees", CompactNodeTitle = "RadToDeg", Keywords = "convert radians degrees"), Category = Math)
+	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", DisplayName = "Convert Radians to Degrees", CompactNodeTitle = "RadToDeg", Keywords = "convert radians degrees"), Category = Math)
 	static float FRadToDeg(float AngleInRadians);
 
 	/**
@@ -57,7 +59,7 @@ public:
 	*	@param ErrorTolerance	Maximum allowed difference for considering them as 'nearly equal'
 	*	@return					true if A and B are nearly equal
 	*/
-	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", FriendlyName = "Is float nearly equal", CompactNodeTitle = "IsNear=", Keywords = "nearly equal float"), Category = Math)
+	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", DisplayName = "Is float nearly equal", CompactNodeTitle = "IsNear=", Keywords = "nearly equal float"), Category = Math)
 	static bool IsNearlyEqual(float A, float B, float ErrorTolerance);
 
 	/**
@@ -66,7 +68,7 @@ public:
 	*	@param ErrorTolerance	Maximum allowed difference for considering Value as 'nearly zero'
 	*	@return					true if Value is nearly zero
 	*/
-	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", FriendlyName = "Is float nearly zero", CompactNodeTitle = "IsNear0", Keywords = "nearly zero float"), Category = Math)
+	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", DisplayName = "Is float nearly zero", CompactNodeTitle = "IsNear0", Keywords = "nearly zero float"), Category = Math)
 	static bool IsNearlyZero(float Value, float ErrorTolerance);
 
 	/**
@@ -74,6 +76,6 @@ public:
 	*	@param Value	Number to check
 	*	@return			true if Value is a power of two
 	*/
-	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", FriendlyName = "Is power of two", CompactNodeTitle = "IsPowOf2", Keywords = "is power two"), Category = Math)
+	UFUNCTION(BlueprintPure, meta = (HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject", DisplayName = "Is power of two", CompactNodeTitle = "IsPowOf2", Keywords = "is power two"), Category = Math)
 	static bool IsPowerOfTwo(float Value);
 };

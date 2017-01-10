@@ -9,7 +9,9 @@
  * @brief https://wiki.unrealengine.com/Animation_Node,_Translate_With_Complete_Source_Code_and_Instructions
  */
 
-UCLASS(MinimalAPI, dependson = AnimNode_TranslateWith)
+// error : The dependsOn specifier is deprecated. Please use #include "ClassHeaderFilename.h" instead.
+//UCLASS(MinimalAPI, dependson = AnimNode_TranslateWith)
+UCLASS()
 class UAnimGraphNode_TranslateWith : public UAnimGraphNode_Base
 {
 	GENERATED_UCLASS_BODY()

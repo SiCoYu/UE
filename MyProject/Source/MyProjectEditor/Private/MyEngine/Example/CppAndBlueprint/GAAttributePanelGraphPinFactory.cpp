@@ -1,4 +1,4 @@
-#pragma once
+#include "MyProjectEditor.h"
 #include "../Public/GameAttributesEditor.h"
 #include "GAAttributePin.h"
 #include "GAGlobalTypes.h"

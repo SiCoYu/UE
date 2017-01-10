@@ -1,6 +1,6 @@
 // Created by Chance_07 2014
 
-#include "YourGame.h"
+#include "MyProjectEditor.h"
 #include "Editor/AnimGraph/Private/AnimGraphPrivatePCH.h"
 #include "AnimationGraphSchema.h"
 #include "AnimGraphNode_TranslateWith.h"
