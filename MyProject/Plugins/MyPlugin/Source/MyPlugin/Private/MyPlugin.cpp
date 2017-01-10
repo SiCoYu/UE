@@ -17,6 +17,11 @@ void FMyPluginModule::ShutdownModule()
 	
 }
 
+bool FMyPluginModule::IsThisNumber42(int32 num)
+{
+	return num == 42;
+}
+
 #undef LOCTEXT_NAMESPACE
 	
 IMPLEMENT_MODULE(FMyPluginModule, MyPlugin)
