@@ -4,7 +4,7 @@
 
 #include "ModuleManager.h"
 
-class FRuntimeTestsModule : public IModuleInterface
+class FMyPluginModule : public IModuleInterface
 {
 public:
 
