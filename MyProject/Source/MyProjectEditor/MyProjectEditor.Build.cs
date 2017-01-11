@@ -45,7 +45,10 @@ public class MyProjectEditor : ModuleRules
                 "Kismet",
                 "KismetCompiler",
 
+                "AnimGraphRuntime",
                 "MyProject",
+                "AnimationEditor",
+                "GeometryMode"
             }
         );
  
@@ -64,12 +67,23 @@ public class MyProjectEditor : ModuleRules
                 "Kismet",
                 "KismetCompiler",
 
-                "MyProject"
+                "AnimGraphRuntime",
+                "MyProject",
+                "GeometryMode"
             }
         );
 
         // AnimGraphRuntime 模块的包含目录需要这样导入，参考 Engine.Build.cs
-        DynamicallyLoadedModuleNames.Add("AnimGraphRuntime");
+       // DynamicallyLoadedModuleNames.Add("AnimGraphRuntime");
+        //DynamicallyLoadedModuleNames.AddRange(
+        //    new string[] 
+        //    {
+        //        "AnimGraphRuntime"
+        //    }
+        //);
+
+        // Engine\Plugins\Editor\SpeedTreeImporter\Source\SpeedTreeImporter\SpeedTreeImporter.Build.cs
+        //AddEngineThirdPartyPrivateStaticDependencies(Target, "SpeedTree");
 
         // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
         // You'll probably also want to add "MyCodeProject" to the PublicDependencyModuleNames in your MyCodeProjectEditor.Build.cs file, as this will allow your editor module access to your game code.
@@ -79,7 +93,7 @@ public class MyProjectEditor : ModuleRules
         //        "MyProject"
         //    }
         //);
- 
+
         //CircularlyReferencedDependentModules.AddRange(
         //    new string[] 
         //    {

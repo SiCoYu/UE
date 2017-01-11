@@ -31,11 +31,13 @@ public class MyProjectEditorTarget : TargetRules
         bBuildAllPlugins = true;
     }
 
-	//
-	// TargetRules interface.
-	//
+    //
+    // TargetRules interface.
+    //
 
-	public override void SetupBinaries(
+    // Engine\Source\Programs\UnrealBuildTool\System\RulesCompiler.cs
+    // <param name="OutExtraModuleNames">Output list of extra modules that this target could utilize</param>
+    public override void SetupBinaries(
 		TargetInfo Target,
 		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
 		ref List<string> OutExtraModuleNames
@@ -43,8 +45,8 @@ public class MyProjectEditorTarget : TargetRules
 	{
         // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
         // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
-        //OutExtraModuleNames.Add("MyProjectEditor");
         OutExtraModuleNames.Add("MyProject");
+        //OutExtraModuleNames.Add("MyProjectEditor");
     }
 
     public override void SetupGlobalEnvironment(
