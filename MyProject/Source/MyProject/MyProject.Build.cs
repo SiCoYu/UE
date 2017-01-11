@@ -436,12 +436,11 @@ public class MyProject : ModuleRules
         return true;
     }
 
-    // ╪сть Lua
+    // ╪сть ProjectEditor
     private bool LoadMyProjectEditor(TargetInfo Target)
     {
         if (UEBuildConfiguration.bBuildEditor == true)
         {
-
             PublicDependencyModuleNames.AddRange(
                 new string[] {
                     "MyProjectEditor"

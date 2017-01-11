@@ -26,7 +26,7 @@ public class MyProjectTarget : TargetRules
         // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
         if (UEBuildConfiguration.bBuildEditor)
         {
-            OutExtraModuleNames.Add("MyCodeProjectEditor");
+            OutExtraModuleNames.Add("MyProjectEditor");
         }
     }
 
@@ -42,5 +42,6 @@ public class MyProjectTarget : TargetRules
 
         //OutCPPEnvironmentConfiguration.Target.Configuration = CPPTargetConfiguration.Debug;
         //BuildConfiguration.bDebugBuildsActuallyUseDebugCRT = true;
+        UEBuildConfiguration.bBuildEditor = true;
     }
 }
