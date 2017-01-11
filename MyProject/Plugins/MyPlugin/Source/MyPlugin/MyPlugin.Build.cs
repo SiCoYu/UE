@@ -19,29 +19,37 @@ public class MyPlugin : ModuleRules
 
     private string ThirdPartyPath //这个插件引用的第三方库的目录
     {
-        get { return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/")); }
+        get
+        {
+            return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/"));
+        }
     }
 
     private string MyTestLibPath //第三方库MyTestLib的目录
     {
-        get { return Path.GetFullPath(Path.Combine(ThirdPartyPath, "MyTestLib")); }
+        get
+        {
+            return Path.GetFullPath(Path.Combine(ThirdPartyPath, "MyTestLib"));
+        }
     }
 
     public MyPlugin(TargetInfo Target)
     {
         PublicIncludePaths.AddRange( //公有文件搜索路径
-            new string[] {
+            new string[] 
+            {
                 "MyPlugin/Public"
                 // ... add public include paths required here ...
             }
-            );
+        );
 
         PrivateIncludePaths.AddRange(
-            new string[] {
+            new string[] 
+            {
                 "MyPlugin/Private" //私有文件搜索路径
                 // ... add other private include paths required here ...
             }
-            );
+        );
 
         PublicDependencyModuleNames.AddRange(
             new string[]
@@ -49,7 +57,7 @@ public class MyPlugin : ModuleRules
                 "Core"
                 // ... add other public dependencies that you statically link with here ...
             }
-            );
+        );
 
         PrivateDependencyModuleNames.AddRange(
             new string[]
@@ -60,16 +68,16 @@ public class MyPlugin : ModuleRules
                 "SlateCore",
                 // ... add private dependencies that you statically link with here ...  
             }
-            );
+        );
 
         DynamicallyLoadedModuleNames.AddRange(
             new string[]
             {
                 // ... add any modules that your module loads dynamically here ...
             }
-            );
+        );
 
-        LoadThirdPartyLib(Target); //加载第三方库
+        //LoadThirdPartyLib(Target); //加载第三方库
     }
 
     public bool LoadThirdPartyLib(TargetInfo Target)
