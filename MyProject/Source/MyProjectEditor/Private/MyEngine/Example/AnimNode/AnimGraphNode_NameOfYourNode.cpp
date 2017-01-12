@@ -2,7 +2,7 @@
 
 #include "MyProjectEditor.h"
 #include "AnimGraphNode_NameOfYourNode.h"
-#include "UtilStr.h"
+//#include "UtilStr.h"
 
 /////////////////////////////////////////////////////
 // UAnimGraphNode_NameOfYourNode
@@ -30,7 +30,10 @@ FString UAnimGraphNode_NameOfYourNode::GetControllerDescription() const
 
 FText UAnimGraphNode_NameOfYourNode::GetNodeTitle(ENodeTitleType::Type TitleType) const
 {
-	FString Result = *GetControllerDescription();
-	Result += (TitleType == ENodeTitleType::ListView) ? TEXT("") : TEXT("\n");
-	return UtilStr::ConvFString2FText(Result);
+	//FString Result = *GetControllerDescription();
+	//Result += (TitleType == ENodeTitleType::ListView) ? TEXT("") : TEXT("\n");
+	//return UtilStr::ConvFString2FText(Result);
+
+	FString tmp = "Template";
+	return FText::FromString(tmp);
 }

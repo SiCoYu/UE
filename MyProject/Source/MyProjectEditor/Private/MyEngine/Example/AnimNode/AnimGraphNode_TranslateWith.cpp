@@ -38,7 +38,7 @@ FText UAnimGraphNode_TranslateWith::GetControllerDescription() const
 
 FText UAnimGraphNode_TranslateWith::GetTooltipText() const
 {
-	FString tmp = "aaa";
+	FString tmp = "Template";
 	return FText::FromString(tmp);
 }
 
