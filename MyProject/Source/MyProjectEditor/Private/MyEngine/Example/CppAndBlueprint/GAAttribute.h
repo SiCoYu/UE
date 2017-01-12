@@ -1,5 +1,7 @@
 #pragma once
 
+#include "UObject/NameTypes.h"	// FName
+#include "SlateCore.h"
 #include "GAAttribute.generated.h"
 
 /**
