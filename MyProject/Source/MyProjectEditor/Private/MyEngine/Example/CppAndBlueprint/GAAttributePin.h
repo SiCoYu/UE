@@ -7,6 +7,7 @@
 #include "Templates/SharedPointer.h"	// TSharedPtr
 #include "Widgets/SUserWidget.h"	// FArguments
 #include "SlateBasics.h"
+#include "SGraphPin.h"
 #include "Editor/GraphEditor/Public/SGraphPin.h"
 #include "SlateCore.h"
 
@@ -15,6 +16,7 @@
  First you will need Editor module in your plugin/game project. You can find information how to add it here:
 
  https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
+ https://wiki.unrealengine.com/How_To_Create_Custom_Blueprint_Pin
  */
 
 class SGAAttributePin : public SGraphPin
