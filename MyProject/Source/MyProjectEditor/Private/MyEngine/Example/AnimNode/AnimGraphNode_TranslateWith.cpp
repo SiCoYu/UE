@@ -1,11 +1,12 @@
 // Created by Chance_07 2014
 
 #include "MyProjectEditor.h"
+#include "AnimationRuntime.h"
 #include "Editor/AnimGraph/Private/AnimGraphPrivatePCH.h"
 #include "AnimationGraphSchema.h"
 #include "AnimGraphNode_TranslateWith.h"
 
-#define LOCTEXT_NAMESPACE "AnimGraph_TranslateWith"
+#define LOCTEXT_NAMESPACE "AnimGraphNode_TranslateWith"
 
 UAnimGraphNode_TranslateWith::UAnimGraphNode_TranslateWith(const FObjectInitializer& PCIP)
 	: Super(PCIP)

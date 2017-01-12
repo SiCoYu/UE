@@ -1,6 +1,19 @@
 #pragma once
 
+//https://answers.unrealengine.com/questions/524401/geteditormode-unknown-override-specifier.html
+//解决方案
+//(1)
+//I replaced this line:
+//#include "AnimGraphNode_Base.h"
+//on this line :
+//#include "AnimGraphDefinitions.h"
+//(2)
+//Hello, in case anyone is still having this issue, I included "Editor/UnrealEd/Public/Editor.h" before AnimGraphNode_Base.h and it worked for me.
+
+#include "Editor/UnrealEd/Public/Editor.h"
 #include "AnimGraphNode_Base.h"	// UAnimGraphNode_Base
+//#include "AnimGraphDefinitions.h"
+//#include "Kismet2/BlueprintEditorUtils.h"
 //#include "AnimNode_TranslateWith.h"
 #include "AnimGraphNode_TranslateWith.generated.h"
 
