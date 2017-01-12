@@ -1,8 +1,9 @@
 #pragma once
 
+#include "Editor/UnrealEd/Public/Editor.h"
 #include "AnimGraphNode_Base.h"		// UAnimGraphNode_Base
-#include "AnimGraphDefinitions.h"
-#include "Kismet2/BlueprintEditorUtils.h"
+//#include "AnimGraphDefinitions.h"
+//#include "Kismet2/BlueprintEditorUtils.h"
 //#include "AnimNode_NameOfYourNode.h"
 #include "AnimGraphNode_NameOfYourNode.generated.h"
 
