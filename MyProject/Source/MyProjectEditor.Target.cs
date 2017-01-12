@@ -28,6 +28,7 @@ public class MyProjectEditorTarget : TargetRules
         //}
 
         // UnrealEngine\Engine\Source\UE4Editor.Target.cs
+        // 奇怪这个设置后，MyProject\Plugins\MyPlugin 才会编译
         bBuildAllPlugins = true;
     }
 
