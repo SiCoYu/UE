@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /**
  * @reference https://wiki.unrealengine.com/Animation_Node,_Translate_With_Complete_Source_Code_and_Instructions
  */
-
+// 终于明白了 MyProjectEditor 在 sln 中是不会被编译的，只有启动 Editor 的时候，才会查找 MyProjectEditor 模块，如果没有才会重新编译，或者 OutExtraModuleNames.Add("MyProjectEditor"); 强制编译
 public class MyProjectEditorTarget : TargetRules
 {
 	public MyProjectEditorTarget(TargetInfo Target)
@@ -47,7 +47,7 @@ public class MyProjectEditorTarget : TargetRules
         // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
         // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
         OutExtraModuleNames.Add("MyProject");
-        //OutExtraModuleNames.Add("MyProjectEditor");
+        OutExtraModuleNames.Add("MyProjectEditor");
     }
 
     public override void SetupGlobalEnvironment(
