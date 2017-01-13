@@ -12,10 +12,12 @@ set ANDROID_CLASS_PATH=F:\ProgramFiles\android\sdk\platforms\android-25\android.
 
 cd %JAVA_CLASS_PATH%
 
+set JAVA_JNI_OUTPATH=%BASE_DIR%Java\JniHeader
+
 set INIT_PATH=%BASE_DIR%
 
 rem D:\ProgramFiles\Java\jdk1.8.0_65\bin\javah.exe -jni -classpath %ANDROID_CLASS_PATH%;%JAVA_CLASS_PATH% Com\Ndk\Test\JniClient
-D:\ProgramFiles\Java\jdk1.8.0_65\bin\javah.exe -jni -classpath %ANDROID_CLASS_PATH%;%JAVA_CLASS_PATH% Com.Ndk.Test.JniClient
+D:\ProgramFiles\Java\jdk1.8.0_65\bin\javah.exe -jni -classpath %ANDROID_CLASS_PATH%;%JAVA_CLASS_PATH% -d %JAVA_JNI_OUTPATH% Com.Ndk.Test.JniClient
 
 cd %INIT_PATH%
 
