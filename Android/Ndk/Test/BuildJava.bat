@@ -17,6 +17,7 @@ set JDK_PATH=D:\ProgramFiles\Java\jdk1.8.0_65
 
 rem %JDK_PATH%\bin\javac.exe -d %JAVA_CLASS_OUTPATH% -sourcepath %BASE_DIR%Java Com\Ndk\Test\JniClient.java
 rem %JDK_PATH%\bin\javac.exe -d %JAVA_CLASS_OUTPATH% -sourcepath %JAVA_SRC_ROOT% -s %JAVA_SRC_ROOT% Com\Ndk\Test\JniClient.java
-%JDK_PATH%\bin\javac.exe -d %JAVA_CLASS_OUTPATH% -sourcepath %JAVA_SRC_ROOT% -s %JAVA_SRC_ROOT% @%JAVA_SRC_ROOT%/Sources.list
+rem %JDK_PATH%\bin\javac.exe -d %JAVA_CLASS_OUTPATH% -sourcepath %JAVA_SRC_ROOT% -s %JAVA_SRC_ROOT% @%JAVA_SRC_ROOT%/Sources.list
+%JDK_PATH%\bin\javac.exe -d %JAVA_CLASS_OUTPATH% @%JAVA_SRC_ROOT%/Sources.list
 
 cd %INIT_PATH%
