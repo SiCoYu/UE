@@ -18,7 +18,67 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/src
 
 #LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 
-LOCAL_SRC_FILES := src/lapi.c src/lauxlib.c src/lbaselib.c src/lbitlib.c src/lcode.c src/lcorolib.c src/lctype.c src/ldblib.c src/ldebug.c src/ldo.c src/ldo.h src/ldump.c src/lfunc.c src/lgc.c src/lgc.h src/linit.c src/liolib.c src/llex.c src/llex.h src/lmathlib.c src/lmem.c src/loadlib.c src/lobject.c src/lopcodes.c src/loslib.c src/lparser.c src/lstate.c src/lstring.c src/lstrlib.c src/ltable.c src/ltable.h src/ltablib.c src/ltm.c src/lua.c src/lundump.c src/lutf8lib.c src/lvm.c src/lzio.c 
+LOCAL_SRC_FILES := \
+	$(LOCAL_PATH)/src/lapi.c \
+	$(LOCAL_PATH)/src/lapi.h \
+	$(LOCAL_PATH)/src/lauxlib.c \
+	$(LOCAL_PATH)/src/lauxlib.h \
+	$(LOCAL_PATH)/src/lbaselib.c \
+	$(LOCAL_PATH)/src/lbitlib.c \
+	$(LOCAL_PATH)/src/lcode.c \
+	$(LOCAL_PATH)/src/lcode.h \
+	$(LOCAL_PATH)/src/lcorolib.c \
+	$(LOCAL_PATH)/src/lctype.c \
+	$(LOCAL_PATH)/src/lctype.h \
+	$(LOCAL_PATH)/src/ldblib.c \
+	$(LOCAL_PATH)/src/ldebug.c \
+	$(LOCAL_PATH)/src/ldebug.h \
+	$(LOCAL_PATH)/src/ldo.c \
+	$(LOCAL_PATH)/src/ldo.h \
+	$(LOCAL_PATH)/src/ldump.c \
+	$(LOCAL_PATH)/src/lfunc.c \
+	$(LOCAL_PATH)/src/lfunc.h \
+	$(LOCAL_PATH)/src/lgc.c \
+	$(LOCAL_PATH)/src/lgc.h \
+	$(LOCAL_PATH)/src/linit.c \
+	$(LOCAL_PATH)/src/liolib.c \
+	$(LOCAL_PATH)/src/llex.c \
+	$(LOCAL_PATH)/src/llex.h \
+	$(LOCAL_PATH)/src/llimits.h \
+	$(LOCAL_PATH)/src/lmathlib.c \
+	$(LOCAL_PATH)/src/lmem.c \
+	$(LOCAL_PATH)/src/lmem.h \
+	$(LOCAL_PATH)/src/loadlib.c \
+	$(LOCAL_PATH)/src/lobject.c \
+	$(LOCAL_PATH)/src/lobject.h \
+	$(LOCAL_PATH)/src/lopcodes.c \
+	$(LOCAL_PATH)/src/lopcodes.h \
+	$(LOCAL_PATH)/src/loslib.c \
+	$(LOCAL_PATH)/src/lparser.c \
+	$(LOCAL_PATH)/src/lparser.h \
+	$(LOCAL_PATH)/src/lprefix.h \
+	$(LOCAL_PATH)/src/lstate.c \
+	$(LOCAL_PATH)/src/lstate.h \
+	$(LOCAL_PATH)/src/lstring.c \
+	$(LOCAL_PATH)/src/lstring.h \
+	$(LOCAL_PATH)/src/lstrlib.c \
+	$(LOCAL_PATH)/src/ltable.c \
+	$(LOCAL_PATH)/src/ltable.h \
+	$(LOCAL_PATH)/src/ltablib.c \
+	$(LOCAL_PATH)/src/ltm.c \
+	$(LOCAL_PATH)/src/ltm.h \
+	$(LOCAL_PATH)/src/lua.c \
+	$(LOCAL_PATH)/src/lua.h \
+	$(LOCAL_PATH)/src/lua.hpp \
+	$(LOCAL_PATH)/src/luaconf.h \
+	$(LOCAL_PATH)/src/lualib.h \
+	$(LOCAL_PATH)/src/lundump.c \
+	$(LOCAL_PATH)/src/lundump.h \
+	$(LOCAL_PATH)/src/lutf8lib.c \
+	$(LOCAL_PATH)/src/lvm.c \
+	$(LOCAL_PATH)/src/lvm.h \
+	$(LOCAL_PATH)/src/lzio.c \
+	$(LOCAL_PATH)/src/lzio.h
 
 LOCAL_CFLAGS += -DTEST_DEF -fPIC
 #LOCAL_CXXFLAGS += -DGL_GLEXT_PROTOTYPES
