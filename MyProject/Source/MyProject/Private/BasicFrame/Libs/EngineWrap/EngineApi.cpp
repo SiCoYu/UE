@@ -564,3 +564,8 @@ void EngineApi::LoadStreamLevel(const UObject* WorldContextObject, FName LevelNa
 {
 	return UGameplayStatics::LoadStreamLevel(WorldContextObject, LevelName, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
 }
+
+APlayerController* EngineApi::GetPrimaryPlayerController() const
+{
+	return EngineApi::getGameInstance().GetPrimaryPlayerController();
+}

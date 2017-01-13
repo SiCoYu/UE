@@ -322,6 +322,8 @@ public:
 	// Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
 	static const FWorldContext* GetWorldContextFromGameViewport(const UGameViewportClient *InViewport);
 	static void LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo);
+
+	static APlayerController* GetPrimaryPlayerController() const;
 };
 
 #include "EngineApi.inl"
