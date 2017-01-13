@@ -1,5 +1,4 @@
 :: echo on
-echo on
 rem @echo off
 set BaseDir=%~dp0
 %BaseDir:~0,2%
@@ -10,7 +9,7 @@ cd %BaseDir%
 set JAVA_SRC_ROOT=%BaseDir%Java
 cd %JAVA_SRC_ROOT%
 
-set JAVA_CLASS_OUTPATH=%BaseDir%Java\JavaClassFiles
+set JAVA_CLASS_OUTPATH=%BaseDir%Java\JavaClass
 
 set INIT_PATH=%BaseDir%
 
