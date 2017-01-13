@@ -1,13 +1,16 @@
 package Com.Ndk.Test;
 
-public class TestHello {
-    static {
-        System.loadLibrary("TestHello");
-    }
+public class TestNdkActivity {
+    //static 
+	//{
+    //    System.loadLibrary("TestHello");
+    //}
      
-    public static native void hello(String msg);
+    //public static native void hello(String msg);
      
-    public static void main(String[] args) {
-        hello("Hello,Kimm!");
+    public static void main(String[] args) 
+	{
+        //hello("Hello,Kimm!");
+		System.out.println("Hello World");
     }
 }
