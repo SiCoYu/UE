@@ -7,9 +7,12 @@
 #include "Templates/SharedPointer.h"	// TSharedPtr
 #include "Widgets/SUserWidget.h"	// FArguments
 #include "SlateBasics.h"
-#include "SGraphPin.h"
+//#include "SGraphPin.h"
 #include "Editor/GraphEditor/Public/SGraphPin.h"
 #include "SlateCore.h"
+#include "Editor/UnrealEd/Public/EdGraphUtilities.h"
+#include "Editor/UnrealEd/Public/GraphEditor.h"
+#include "Widgets/Input/STextComboBox.h"
 
 /**
  * @brief https://wiki.unrealengine.com/How_To_Create_Custom_Blueprint_Pin
