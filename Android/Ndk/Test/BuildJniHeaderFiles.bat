@@ -12,7 +12,7 @@ set ANDROID_CLASS_PATH=F:\ProgramFiles\android\sdk\platforms\android-25\android.
 
 cd %JAVA_CLASS_PATH%
 
-set JAVA_JNI_OUTPATH=%BASE_DIR%Java\JniHeader
+set JAVA_JNI_OUTPATH=%BASE_DIR%Src\JniHeader
 
 set INIT_PATH=%BASE_DIR%
 
