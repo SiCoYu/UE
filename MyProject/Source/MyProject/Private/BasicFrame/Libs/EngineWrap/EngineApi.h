@@ -323,7 +323,7 @@ public:
 	static const FWorldContext* GetWorldContextFromGameViewport(const UGameViewportClient *InViewport);
 	static void LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo);
 
-	static APlayerController* GetPrimaryPlayerController() const;
+	static APlayerController* GetPrimaryPlayerController();
 };
 
 #include "EngineApi.inl"
