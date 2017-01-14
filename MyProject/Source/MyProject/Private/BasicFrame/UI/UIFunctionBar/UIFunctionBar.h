@@ -13,4 +13,7 @@ public:
 
 public:
 	virtual void onReady() override;
+
+public:
+	void onTestButtonTouch();
 };
