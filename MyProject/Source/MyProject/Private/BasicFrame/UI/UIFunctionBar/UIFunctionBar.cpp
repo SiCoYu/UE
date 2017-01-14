@@ -6,3 +6,8 @@ UUIFunctionBar::UUIFunctionBar(const FObjectInitializer& ObjectInitializer)
 {
 
 }
+
+void UUIFunctionBar::onReady()
+{
+	Super::onReady();
+}

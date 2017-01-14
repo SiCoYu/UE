@@ -10,4 +10,7 @@ class UUIFunctionBar : public UUMGForm
 
 public:
 	UUIFunctionBar(const FObjectInitializer& ObjectInitializer);
+
+public:
+	virtual void onReady() override;
 };

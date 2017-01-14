@@ -52,20 +52,21 @@ public:
 	void setFormName(std::string value);
 	//LuaCSBridgeForm* UUMGForm::getLuaCSBridgeForm();
 	//void UUMGForm::getLuaCSBridgeForm(LuaCSBridgeForm* value);
-	void init();
-	void show();
+	virtual void init();
+	virtual void show();
 	//private void UUMGForm::hide();
-	void exit();
+	virtual void exit();
 	// 界面代码创建后就调用
-	void onInit();
+	virtual void onInit();
 	// 第一次显示之前会调用一次
-	void onReady();
+	virtual void onReady();
 	// 每一次显示都会调用一次
-	void onShow();
+	virtual void onShow();
 	// 每一次隐藏都会调用一次
-	void onHide();
+	virtual void onHide();
 	// 每一次关闭都会调用一次
-	void onExit();
+	virtual void onExit();
+
 	bool isVisible();
 	/*
 	* stage的大小发生变化后，这个函数会被调用。子类可重载这个函数
