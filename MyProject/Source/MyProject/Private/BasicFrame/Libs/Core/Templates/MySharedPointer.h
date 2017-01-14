@@ -7,6 +7,7 @@
 #define MySharedPtr MyNS::SharedPtr
 
 #include "MyPtrRefInfo.h"
+#include "TypeDef.h"
 
 namespace MyNS
 {
@@ -133,13 +134,13 @@ namespace MyNS
 
 		inline T& operator*() const 
 		{ 
-			assert(mRefPtr); 
+			my_assert(mRefPtr);
 			return *mRefPtr; 
 		}
 
 		inline T* operator->() const 
 		{ 
-			assert(mRefPtr); 
+			my_assert(mRefPtr);
 			return mRefPtr; 
 		}
 
@@ -150,24 +151,26 @@ namespace MyNS
 
 		void bind(T* rep) 
 		{
-			assert(!mRefPtr && !mRefInfo);
+			my_assert(!mRefPtr && !mRefInfo);
 			mRefInfo = new SharedPtrInfo;
 			mRefPtr = rep;
 		}
 
 		inline bool unique() const 
 		{ 
-			assert(mRefInfo && mRefInfo->mRefCount.get()); return mRefInfo->mRefCount.get() == 1; 
+			my_assert(mRefInfo && mRefInfo->mRefCount.get());
+			return mRefInfo->mRefCount.get() == 1; 
 		}
 
 		unsigned int getRefCount() const
 		{ 
-			assert(mRefInfo && mRefInfo->mRefCount.GetValue()); return mRefInfo->mRefCount.GetValue();
+			my_assert(mRefInfo && mRefInfo->mRefCount.GetValue());
+			return mRefInfo->mRefCount.GetValue();
 		}
 
 		void setUseCount(unsigned value)
 		{ 
-			assert(mRefInfo); mRefInfo->mRefCount.GetValue() = value; 
+			my_assert(mRefInfo); mRefInfo->mRefCount.GetValue() = value;
 		}
 
 		T* getPointer() const 
@@ -211,7 +214,7 @@ namespace MyNS
 		{
 			if (mRefPtr)
 			{
-				assert(mRefInfo);
+				my_assert(mRefInfo);
 				if (mRefInfo->mRefCount.Decrement() == 0)
 				{
 					destroy();
@@ -224,7 +227,7 @@ namespace MyNS
 
 		inline void destroy(void)
 		{
-			assert(mRefPtr && mRefInfo);
+			my_assert(mRefPtr && mRefInfo);
 			delete mRefInfo;
 		}
 

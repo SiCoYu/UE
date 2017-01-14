@@ -2,6 +2,7 @@
 
 #include "ISceneEventCB.h"
 #include "MySharedPointer.h"
+#include "PlatformDefine.h"
 
 #ifdef ENABLE_UNIT_TEST
 	class TestMain;
@@ -17,8 +18,9 @@ protected:
 public:
     // 场景加载完成处理事件
 	virtual void onLevelLoaded() override;
+	virtual void init() override;
+	virtual void dispose() override;
  
 protected:
 	void runTest();
-	void init();
 };

@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "GameSceneEventCB.h"
 #include "Common.h"
+#include "UIFunctionBar.h"
+#include "UIFormId.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "TestMain.h"
@@ -35,9 +37,4 @@ void GameSceneEventCB::runTest()
 	this->mTestMain = MySharedPtr<TestMain>(new TestMain());
 	this->mTestMain->runTest();
 #endif
-}
-
-void GameSceneEventCB::init()
-{
-
 }
