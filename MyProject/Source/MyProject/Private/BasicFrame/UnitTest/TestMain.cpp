@@ -58,5 +58,5 @@ void TestMain::runTest()
 
 	//mTestUI->run()
 	//mTestDownload->run();
-	mTestLuaBind->run();
+	//mTestLuaBind->run();
 }

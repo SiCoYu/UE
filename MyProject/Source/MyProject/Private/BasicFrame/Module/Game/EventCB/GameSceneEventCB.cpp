@@ -12,7 +12,8 @@
 void GameSceneEventCB::onLevelLoaded()
 {
 	GUiMgr->loadAndShow<UUIFunctionBar>(NSFormId::eUIFunctionBar);
-    //this->runTest();
+
+    this->runTest();
 }
 
 void GameSceneEventCB::init()
