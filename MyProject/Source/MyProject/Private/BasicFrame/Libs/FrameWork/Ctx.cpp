@@ -74,6 +74,7 @@ void Ctx::construct()
 
 void Ctx::init()
 {
+	this->mIsInit = true;
 	this->mMyStreamableManager->init();
 	this->mUiMgr->init();
 	this->mResLoadMgr->init();
@@ -93,6 +94,7 @@ void Ctx::init()
 
 void Ctx::dispose()
 {
+	this->mIsInit = false;
 	this->mUiMgr->dispose();
 	this->mEngineData->dispose();
 	this->mNetMgr->dispose();
@@ -146,19 +148,21 @@ void Ctx::dispose()
 
 void Ctx::beginPlay()
 {
-	this->init();
+	if (!this->mIsInit)
+	{
+		this->init();
+		this->mSceneEventCB->onLevelLoaded();
 
-	this->mSceneEventCB->onLevelLoaded();
+		//testApi();
 
-	//testApi();
+		//GCtx->setUiMgr(new UIManager());
+		//GCtx->setEngineApi(new EngineApi());
+		//GCtx->setNetMgr(new NetMgr(Ctx::getSingletonPtr()->getStdLog()));
 
-	//GCtx->setUiMgr(new UIManager());
-	//GCtx->setEngineApi(new EngineApi());
-	//GCtx->setNetMgr(new NetMgr(Ctx::getSingletonPtr()->getStdLog()));
-
-	// test
-	//GUiMgr->loadForm(eUIPack);
-	//GNetMgr->openSocket("192.168.124.26", 10002);
+		// test
+		//GUiMgr->loadForm(eUIPack);
+		//GNetMgr->openSocket("192.168.124.26", 10002);
+	}
 }
 
 void Ctx::setUiMgr(UIMgr* uiMgr)

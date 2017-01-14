@@ -38,6 +38,7 @@ class MyLatentActionManager;
 class Ctx : public Singleton<Ctx>
 {
 protected:
+	bool mIsInit;
 	MySharedPtr<UIMgr> mUiMgr;
 	MySharedPtr<EngineData> mEngineData;
 	MySharedPtr<INetMgr> mNetMgr;

@@ -575,7 +575,7 @@ void EngineApi::SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelTy
 	GEngine->SetClientTravel(InWorld, NextURL, InTravelType);
 }
 
-static bool ServerTravel(const FString& InURL, bool bAbsolute, bool bShouldSkipGameNotify)
+bool EngineApi::ServerTravel(const FString& InURL, bool bAbsolute, bool bShouldSkipGameNotify)
 {
-	EngineApi::GetWorld()->ServerTravel(InURL, bAbsolute, bShouldSkipGameNotify);
+	return EngineApi::GetWorld()->ServerTravel(InURL, bAbsolute, bShouldSkipGameNotify);
 }
