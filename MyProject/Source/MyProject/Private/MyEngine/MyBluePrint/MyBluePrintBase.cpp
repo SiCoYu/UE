@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyBluePrintBase.h"
 
-MyBluePrintBase::MyBluePrintBase(const class FObjectInitializer& PCIP)
+UMyBluePrintBase::UMyBluePrintBase(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 	
