@@ -33,6 +33,7 @@ class MFileSys;
 class SystemSetting;
 class LuaSystem;
 class ISceneEventCB;
+class MyLatentActionManager;
 
 class Ctx : public Singleton<Ctx>
 {
@@ -57,6 +58,7 @@ protected:
 	MySharedPtr<SystemSetting> mSystemSetting;
 	MySharedPtr<LuaSystem> mLuaSystem;
 	MySharedPtr<ISceneEventCB> mSceneEventCB;
+	MySharedPtr<MyLatentActionManager> mMyLatentActionManager;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -95,6 +97,7 @@ public:
 	MySharedPtr<SystemSetting> getSystemSetting();
 	MySharedPtr<LuaSystem> getLuaSystem();
 	MySharedPtr<ISceneEventCB> getSceneEventCB();
+	MySharedPtr<MyLatentActionManager> getMyLatentActionManager();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -129,5 +132,6 @@ public:
 #define GSystemSetting GCtx->getSystemSetting()
 #define GLuaSystem GCtx->getLuaSystem()
 #define GSceneEventCB GCtx->getSceneEventCB()
+#define GMyLatentActionManager GCtx->getMyLatentActionManager()
 
 #endif				// __CTX_H

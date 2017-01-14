@@ -20,6 +20,7 @@
 #include "SystemSetting.h"
 #include "LuaSystem.h"
 #include "GameSceneEventCB.h"
+#include "MyLatentActionManager.h"
 
 #include "Ctx.h"
 
@@ -68,6 +69,7 @@ void Ctx::construct()
 	this->mSystemSetting = MySharedPtr<SystemSetting>(SAFE_NEW SystemSetting());
 	this->mLuaSystem = MySharedPtr<LuaSystem>(SAFE_NEW LuaSystem());
 	this->mSceneEventCB = MySharedPtr<ISceneEventCB>(SAFE_NEW GameSceneEventCB());
+	this->mMyLatentActionManager = MySharedPtr<MyLatentActionManager>(SAFE_NEW MyLatentActionManager());
 }
 
 void Ctx::init()
@@ -83,6 +85,7 @@ void Ctx::init()
 	this->mSystemSetting->init();
 	this->mLuaSystem->init();
 	this->mSceneEventCB->init();
+	this->mMyLatentActionManager->init();
 
 	// ¹ÒÔÚÄ¿Â¼
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
@@ -111,6 +114,7 @@ void Ctx::dispose()
 	this->mSystemSetting->dispose();
 	this->mLuaSystem->dispose();
 	this->mSceneEventCB->dispose();
+	this->mMyLatentActionManager->dispose();
 
 	this->mUiMgr = nullptr;
 	this->mEngineData = nullptr;
@@ -137,6 +141,7 @@ void Ctx::dispose()
 	this->mSystemSetting = nullptr;
 	this->mLuaSystem = nullptr;
 	this->mSceneEventCB = nullptr;
+	this->mMyLatentActionManager = nullptr;
 }
 
 void Ctx::beginPlay()
@@ -266,6 +271,11 @@ MySharedPtr<LuaSystem> Ctx::getLuaSystem()
 MySharedPtr<ISceneEventCB> Ctx::getSceneEventCB()
 {
 	return mSceneEventCB;
+}
+
+MySharedPtr<MyLatentActionManager> Ctx::getMyLatentActionManager()
+{
+	return mMyLatentActionManager;
 }
 
 void Ctx::testApi()
