@@ -2,6 +2,8 @@
 #include "UIFunctionBar.h"
 #include "UtilApi.h"
 #include "FunctionBarCV.h"
+#include "EngineApi.h"
+#include "Common.h"
 
 UUIFunctionBar::UUIFunctionBar(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -18,5 +20,5 @@ void UUIFunctionBar::onReady()
 
 void UUIFunctionBar::onTestButtonTouch()
 {
-	int num = 0;
+	EngineApi::LoadStreamLevel(GEngineData->getMainActor());
 }
