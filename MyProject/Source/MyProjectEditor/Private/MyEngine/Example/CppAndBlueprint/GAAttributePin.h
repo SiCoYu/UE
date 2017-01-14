@@ -12,7 +12,13 @@
 #include "SlateCore.h"
 #include "Editor/UnrealEd/Public/EdGraphUtilities.h"
 #include "Editor/UnrealEd/Public/GraphEditor.h"
+
 #include "Widgets/Input/STextComboBox.h"
+#include "EdGraph/EdGraphPin.h"
+#include "EdGraph/EdGraph.h"
+#include "EdGraphUtilities.h"
+#include "EdGraph/EdGraphSchema.h"
+#include "EdGraphSchema_K2.h"
 
 /**
  * @brief https://wiki.unrealengine.com/How_To_Create_Custom_Blueprint_Pin
