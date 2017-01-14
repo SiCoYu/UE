@@ -34,12 +34,12 @@ namespace MyNS
 		{}
 
 	public:
-		template< class Y>
-		explicit SharedPtr(Y* rep)
-			: mRefPtr(rep)
-		{
+		//template< class Y>
+		//explicit SharedPtr(Y* rep)
+		//	: mRefPtr(rep)
+		//{
 
-		}
+		//}
 
 		SharedPtr(const SharedPtr& r)
 			: mRefPtr(r.mRefPtr)

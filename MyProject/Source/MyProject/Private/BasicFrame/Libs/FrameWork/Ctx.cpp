@@ -67,7 +67,7 @@ void Ctx::construct()
 	this->mFileSys = MySharedPtr<MFileSys>(SAFE_NEW MFileSys());
 	this->mSystemSetting = MySharedPtr<SystemSetting>(SAFE_NEW SystemSetting());
 	this->mLuaSystem = MySharedPtr<LuaSystem>(SAFE_NEW LuaSystem());
-	this->mSceneEventCB = MySharedPtr<LuaSystem>(SAFE_NEW GameSceneEventCB());
+	this->mSceneEventCB = MySharedPtr<ISceneEventCB>(SAFE_NEW GameSceneEventCB());
 }
 
 void Ctx::init()
