@@ -18,5 +18,5 @@ void UUIFunctionBar::onReady()
 
 void UUIFunctionBar::onTestButtonTouch()
 {
-
+	int num = 0;
 }

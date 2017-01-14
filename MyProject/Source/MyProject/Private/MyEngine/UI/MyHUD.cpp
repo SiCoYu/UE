@@ -46,8 +46,8 @@ void AMyHUD::DrawHUD()
 		return;
 	}
 
-	this->DrawText();
-	this->AddDialog();
+	//this->DrawText();
+	//this->AddDialog();
 	//this->DrawHUD_ChatSystem();
 	//this->DrawHUD_EditText();
 }
