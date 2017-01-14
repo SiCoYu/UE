@@ -4,6 +4,7 @@
 #include "FunctionBarCV.h"
 #include "EngineApi.h"
 #include "Common.h"
+#include "Engine/LatentActionManager.h"
 
 UUIFunctionBar::UUIFunctionBar(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -20,5 +21,14 @@ void UUIFunctionBar::onReady()
 
 void UUIFunctionBar::onTestButtonTouch()
 {
-	EngineApi::LoadStreamLevel(GEngineData->getMainActor());
+	FLatentActionInfo info;
+	info.ExecutionFunction = "onLevelLoaded";
+	info.CallbackTarget = this;
+
+	EngineApi::LoadStreamLevel(GEngineData->getMainActor(), "TestMap2", true, true, info);
+}
+
+void UUIFunctionBar::onLevelLoaded()
+{
+	int num = 0;
 }
