@@ -78,6 +78,11 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/LuaBind",
                 "MyProject/Private/BasicFrame/Libs/LuaCppInterface",
                 "MyProject/Private/BasicFrame/Libs/LuaCBridge",
+                "MyProject/Private/BasicFrame/Libs/Module",
+
+                "MyProject/Private/BasicFrame/Module",
+                "MyProject/Private/BasicFrame/Module/Game",
+                "MyProject/Private/BasicFrame/Module/Game/EventCB",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/UI/UIPack",
