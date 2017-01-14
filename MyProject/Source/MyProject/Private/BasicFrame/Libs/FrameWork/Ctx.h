@@ -34,10 +34,6 @@ class SystemSetting;
 class LuaSystem;
 class ISceneEventCB;
 
-#ifdef ENABLE_UNIT_TEST
-	class TestMain;
-#endif
-
 class Ctx : public Singleton<Ctx>
 {
 protected:
@@ -64,10 +60,6 @@ protected:
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
-#endif
-
-#ifdef ENABLE_UNIT_TEST
-	MySharedPtr<TestMain> mTestMain;
 #endif
 
 public:

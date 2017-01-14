@@ -23,10 +23,6 @@
 
 #include "Ctx.h"
 
-#ifdef ENABLE_UNIT_TEST
-	#include "TestMain.h"
-#endif
-
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
 
@@ -86,6 +82,7 @@ void Ctx::init()
 	this->mFileSys->init();
 	this->mSystemSetting->init();
 	this->mLuaSystem->init();
+	this->mSceneEventCB->init();
 
 	// 挂在目录
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
@@ -97,10 +94,6 @@ void Ctx::dispose()
 	this->mEngineData->dispose();
 	this->mNetMgr->dispose();
 	this->mTableSys->dispose();
-
-#ifdef ENABLE_UNIT_TEST
-	this->mTestMain->dispose();
-#endif
 
 	this->mLogSys->dispose();
 	this->mNetDispList->dispose();
@@ -117,6 +110,7 @@ void Ctx::dispose()
 
 	this->mSystemSetting->dispose();
 	this->mLuaSystem->dispose();
+	this->mSceneEventCB->dispose();
 
 	this->mUiMgr = nullptr;
 	this->mEngineData = nullptr;
@@ -125,10 +119,6 @@ void Ctx::dispose()
 
 #ifdef USE_EXTERN_THREAD
 	this->mStdoutLog = nullptr;
-#endif
-
-#ifdef ENABLE_UNIT_TEST
-	this->mTestMain = nullptr;
 #endif
 
 	this->mLogSys = nullptr;
@@ -153,10 +143,7 @@ void Ctx::beginPlay()
 {
 	this->init();
 
-#ifdef ENABLE_UNIT_TEST
-	this->mTestMain = MySharedPtr<TestMain>(new TestMain());
-	this->mTestMain->runTest();
-#endif
+	this->mSceneEventCB->onLevelLoaded();
 
 	//testApi();
 
