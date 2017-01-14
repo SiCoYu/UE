@@ -9,6 +9,7 @@ namespace NSFormId
 		eUILog,			// 日志
 		eUITestCanvas,	// 测试 Canvas
 		eUITestUMG,		// 测试 UMG
+		eUIFunctionBar,	// 底下功能栏
 		eUITotal
 	};
 }

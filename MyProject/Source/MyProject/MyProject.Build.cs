@@ -27,6 +27,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyAnim",
                 "MyProject/Private/MyEngine/MyAsset",
                 "MyProject/Private/MyEngine/AI",
+                "MyProject/Private/MyEngine/MyBluePrint",
 
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",
@@ -89,6 +90,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/UI/UISlateTab",
                 "MyProject/Private/BasicFrame/UI/UISlateStyleSet",
                 "MyProject/Private/BasicFrame/UI/UITestUMG",
+                "MyProject/Private/BasicFrame/UI/UIFunctionBar",
 
                 // Test ÇøÓò
                 "MyProject/Private/BasicFrame/UnitTest",

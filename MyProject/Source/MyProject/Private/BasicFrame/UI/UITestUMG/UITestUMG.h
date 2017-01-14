@@ -1,10 +1,10 @@
 #pragma once
 
-#include "SlateForm.h"
+#include "UMGForm.h"
 #include "UITestUMG.generated.h"
 
 UCLASS(config = Game)
-class UUITestUMG : public USlateForm
+class UUITestUMG : public UUMGForm
 {
 	GENERATED_BODY()
 
