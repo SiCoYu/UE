@@ -1,6 +1,6 @@
 #pragma once
 
-class FLatentActionManager;
+struct FLatentActionManager;
 
 class MyLatentActionManager
 {
