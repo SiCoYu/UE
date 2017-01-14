@@ -569,3 +569,13 @@ APlayerController* EngineApi::GetPrimaryPlayerController()
 {
 	return EngineApi::getGameInstance()->GetPrimaryPlayerController();
 }
+
+void EngineApi::SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType)
+{
+	GEngine->SetClientTravel(InWorld, NextURL, InTravelType);
+}
+
+static bool ServerTravel(const FString& InURL, bool bAbsolute, bool bShouldSkipGameNotify)
+{
+	EngineApi::GetWorld()->ServerTravel(InURL, bAbsolute, bShouldSkipGameNotify);
+}

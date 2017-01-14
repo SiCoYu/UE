@@ -324,6 +324,9 @@ public:
 	static void LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo);
 
 	static APlayerController* GetPrimaryPlayerController();
+	// InTravelType = TRAVEL_Absolute
+	static void SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType);
+	static bool ServerTravel(const FString& InURL, bool bAbsolute = false, bool bShouldSkipGameNotify = false);
 };
 
 #include "EngineApi.inl"

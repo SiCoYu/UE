@@ -25,7 +25,9 @@ void UUIFunctionBar::onTestButtonTouch()
 	info.ExecutionFunction = "onLevelLoaded";
 	info.CallbackTarget = this;
 
-	EngineApi::LoadStreamLevel(GEngineData->getMainActor(), "TestMap2", true, true, info);
+	//EngineApi::LoadStreamLevel(GEngineData->getMainActor(), "TestMap2", true, true, info);
+	//EngineApi::SetClientTravel(EngineApi::GetWorld(), TEXT("/Game/MyAsset/Map/TestMap2"), TRAVEL_Absolute);
+	EngineApi::ServerTravel(TEXT("/Game/MyAsset/Map/TestMap2?game=TDM?listen"));
 }
 
 void UUIFunctionBar::onLevelLoaded()
