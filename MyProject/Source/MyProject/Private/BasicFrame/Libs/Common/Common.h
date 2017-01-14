@@ -24,5 +24,6 @@
 #include "MFileSys.h"
 #include "SystemSetting.h"
 #include "LuaSystem.h"
+#include "GameSceneEventCB.h"
 
 #endif

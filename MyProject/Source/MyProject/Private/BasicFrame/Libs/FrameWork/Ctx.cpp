@@ -19,6 +19,7 @@
 #include "DownloadMgr.h"
 #include "SystemSetting.h"
 #include "LuaSystem.h"
+#include "GameSceneEventCB.h"
 
 #include "Ctx.h"
 
@@ -70,6 +71,7 @@ void Ctx::construct()
 	this->mFileSys = MySharedPtr<MFileSys>(SAFE_NEW MFileSys());
 	this->mSystemSetting = MySharedPtr<SystemSetting>(SAFE_NEW SystemSetting());
 	this->mLuaSystem = MySharedPtr<LuaSystem>(SAFE_NEW LuaSystem());
+	this->mSceneEventCB = MySharedPtr<LuaSystem>(SAFE_NEW GameSceneEventCB());
 }
 
 void Ctx::init()
@@ -144,6 +146,7 @@ void Ctx::dispose()
 
 	this->mSystemSetting = nullptr;
 	this->mLuaSystem = nullptr;
+	this->mSceneEventCB = nullptr;
 }
 
 void Ctx::beginPlay()
@@ -271,6 +274,11 @@ MySharedPtr<SystemSetting> Ctx::getSystemSetting()
 MySharedPtr<LuaSystem> Ctx::getLuaSystem()
 {
 	return mLuaSystem;
+}
+
+MySharedPtr<ISceneEventCB> Ctx::getSceneEventCB()
+{
+	return mSceneEventCB;
 }
 
 void Ctx::testApi()

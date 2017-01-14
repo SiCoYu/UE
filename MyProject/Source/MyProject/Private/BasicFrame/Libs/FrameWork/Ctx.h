@@ -32,6 +32,7 @@ class DownloadMgr;
 class MFileSys;
 class SystemSetting;
 class LuaSystem;
+class ISceneEventCB;
 
 #ifdef ENABLE_UNIT_TEST
 	class TestMain;
@@ -59,6 +60,7 @@ protected:
 	MySharedPtr<MFileSys> mFileSys;
 	MySharedPtr<SystemSetting> mSystemSetting;
 	MySharedPtr<LuaSystem> mLuaSystem;
+	MySharedPtr<ISceneEventCB> mSceneEventCB;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -100,6 +102,7 @@ public:
 	MySharedPtr<MFileSys> getFileSys();
 	MySharedPtr<SystemSetting> getSystemSetting();
 	MySharedPtr<LuaSystem> getLuaSystem();
+	MySharedPtr<ISceneEventCB> getSceneEventCB();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -133,5 +136,6 @@ public:
 #define GSandboxPlatformFile GCtx->getFileSys()->getSandboxPlatformFile()
 #define GSystemSetting GCtx->getSystemSetting()
 #define GLuaSystem GCtx->getLuaSystem()
+#define GSceneEventCB GCtx->getSceneEventCB()
 
 #endif				// __CTX_H
