@@ -325,6 +325,8 @@ public:
 
 	static APlayerController* GetPrimaryPlayerController();
 	// InTravelType = TRAVEL_Absolute
+	// void UEngine::TickWorldTravel(FWorldContext& Context, float DeltaSeconds)
+	// TickWorldTravel 的时候会执行设置的地图
 	static void SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType);
 	static bool ServerTravel(const FString& InURL, bool bAbsolute = false, bool bShouldSkipGameNotify = false);
 };
