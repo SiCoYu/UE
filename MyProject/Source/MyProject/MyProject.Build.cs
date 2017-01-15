@@ -28,10 +28,17 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyAsset",
                 "MyProject/Private/MyEngine/AI",
                 "MyProject/Private/MyEngine/MyBluePrint",
-                "MyProject/Private/MyEngine/MyFly",
+                
                 "MyProject/Private/MyEngine/MyBase",
                 "MyProject/Private/MyEngine/MyBase/Actor",
                 "MyProject/Private/MyEngine/MyBase/Frame",
+
+                "MyProject/Private/MyEngine/MyFly",
+                "MyProject/Private/MyEngine/MyFly/Actor",
+                "MyProject/Private/MyEngine/MyFly/Frame",
+
+                "MyProject/Private/MyEngine/MyThirdPerson",
+                "MyProject/Private/MyEngine/MyThirdPerson/Frame",
 
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",
