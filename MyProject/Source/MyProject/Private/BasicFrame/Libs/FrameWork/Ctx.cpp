@@ -29,7 +29,33 @@ template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
 
 Ctx::Ctx()
 {
-	
+	this->mIsInit = false;
+	this->mUiMgr = nullptr;
+	this->mEngineData = nullptr;
+	this->mNetMgr = nullptr;
+	this->mTableSys = nullptr;
+
+#ifdef USE_EXTERN_THREAD
+	this->mStdoutLog = nullptr;
+#endif
+
+	this->mLogSys = nullptr;
+	this->mNetDispList = nullptr;
+	this->mShareData = nullptr;
+	this->mConfig = nullptr;
+
+	this->mResLoadMgr = nullptr;
+	this->mClassAssetInsMgr = nullptr;
+	this->mObjectAssetInsMgr = nullptr;
+
+	this->mMyStreamableManager = nullptr;
+	this->mPoolSys = nullptr;
+	this->mFileSys = nullptr;
+
+	this->mSystemSetting = nullptr;
+	this->mLuaSystem = nullptr;
+	this->mSceneEventCB = nullptr;
+	this->mMyLatentActionManager = nullptr;
 }
 
 Ctx::~Ctx()
@@ -95,6 +121,7 @@ void Ctx::init()
 void Ctx::dispose()
 {
 	this->mIsInit = false;
+
 	this->mUiMgr->dispose();
 	this->mEngineData->dispose();
 	this->mNetMgr->dispose();
