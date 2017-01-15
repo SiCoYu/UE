@@ -1,9 +1,10 @@
 #pragma once
-#include "GameFramework/GameModeBase.h"
+
+#include "MyGameModeBase.h"
 #include "MyFlyGameMode.generated.h"
 
 UCLASS(minimalapi)
-class AMyFlyGameMode : public AGameModeBase
+class AMyFlyGameMode : public AMyGameModeBase
 {
 	GENERATED_BODY()
 

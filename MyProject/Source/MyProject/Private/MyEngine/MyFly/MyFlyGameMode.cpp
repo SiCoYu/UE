@@ -1,8 +1,8 @@
 #include "MyProject.h"
-#include "AMyFlyGameMode.h"
+#include "MyFlyGameMode.h"
 #include "MyFlyPawn.h"
 
-AAMyFlyGameMode::AAMyFlyGameMode()
+AMyFlyGameMode::AMyFlyGameMode()
 {
 	// set default pawn class to our flying pawn
 	DefaultPawnClass = AMyProjectPawn::StaticClass();
