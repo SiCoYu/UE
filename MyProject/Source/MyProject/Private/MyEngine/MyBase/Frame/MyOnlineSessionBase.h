@@ -1,10 +1,10 @@
 #pragma once
 
 #include "GameFramework/OnlineSession.h"
-#include "MyOnlineSession.generated.h"
+#include "MyOnlineSessionBase.generated.h"
 
 UCLASS(config = Game)
-class UMyOnlineSession : public UOnlineSession
+class UMyOnlineSessionBase : public UOnlineSession
 {
 	GENERATED_BODY()
 };

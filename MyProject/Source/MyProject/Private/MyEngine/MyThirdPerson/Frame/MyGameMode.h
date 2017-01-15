@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameFramework/GameModeBase.h"	// AGameModeBase
+#include "MyGameModeBase.h"	// AGameModeBase
 #include "GameFramework/GameMode.h"	// AGameModeBase
 #include "Containers/Map.h"				// TMapBase
 #include "GameFramework/Controller.h"	// AController
@@ -36,7 +36,7 @@
 
 UCLASS(minimalapi)
 //class AMyGameMode : public AGameModeBase
-class AMyGameMode : public AGameMode
+class AMyGameMode : public AMyGameModeBase
 {
 	GENERATED_BODY()
 
