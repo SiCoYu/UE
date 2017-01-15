@@ -5,5 +5,5 @@
 AMyFlyGameMode::AMyFlyGameMode()
 {
 	// set default pawn class to our flying pawn
-	DefaultPawnClass = AMyProjectPawn::StaticClass();
+	DefaultPawnClass = AMyFlyPawn::StaticClass();
 }

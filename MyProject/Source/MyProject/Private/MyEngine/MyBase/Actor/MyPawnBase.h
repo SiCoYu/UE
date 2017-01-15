@@ -7,4 +7,7 @@ UCLASS(config = Game)
 class AMyPawnBase : public APawn
 {
 	GENERATED_BODY()
+
+public:
+	AMyPawnBase();
 };

@@ -20,7 +20,7 @@ class AMyFlyPawn : public AMyPawnBase
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
 public:
-	AMyProjectPawn();
+	AMyFlyPawn();
 
 	// Begin AActor overrides
 	virtual void Tick(float DeltaSeconds) override;

@@ -75,9 +75,9 @@ void AMyFlyPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputCom
 	check(PlayerInputComponent);
 
 	// Bind our control axis' to callback functions
-	PlayerInputComponent->BindAxis("Thrust", this, &AMyProjectPawn::ThrustInput);
-	PlayerInputComponent->BindAxis("MoveUp", this, &AMyProjectPawn::MoveUpInput);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AMyProjectPawn::MoveRightInput);
+	PlayerInputComponent->BindAxis("Thrust", this, &AMyFlyPawn::ThrustInput);
+	PlayerInputComponent->BindAxis("MoveUp", this, &AMyFlyPawn::MoveUpInput);
+	PlayerInputComponent->BindAxis("MoveRight", this, &AMyFlyPawn::MoveRightInput);
 }
 
 void AMyFlyPawn::ThrustInput(float Val)

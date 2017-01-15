@@ -10,4 +10,5 @@ class AMyDefaultPawnBase : public APawn
 
 public:
 	AMyDefaultPawnBase(const FObjectInitializer& PCIP);
+	AMyDefaultPawnBase();
 };

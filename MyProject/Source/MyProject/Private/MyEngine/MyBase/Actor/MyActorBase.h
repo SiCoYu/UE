@@ -7,4 +7,7 @@ UCLASS(config=Game)
 class AMyActorBase : public APawn
 {
 	GENERATED_BODY()
+
+public:
+	AMyActorBase();
 };
