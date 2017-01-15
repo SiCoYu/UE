@@ -8,7 +8,7 @@ AMyFlyPawn::AMyFlyPawn()
 	{
 		ConstructorHelpers::FObjectFinderOptional<UStaticMesh> PlaneMesh;
 		FConstructorStatics()
-			: PlaneMesh(TEXT("/Game/Flying/Meshes/UFO.UFO"))
+			: PlaneMesh(TEXT("/Game/MyAsset/MyFly/Flying/Meshes/UFO.UFO"))
 		{
 		}
 	};

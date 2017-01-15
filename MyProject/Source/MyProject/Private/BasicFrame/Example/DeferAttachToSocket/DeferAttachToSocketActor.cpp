@@ -6,7 +6,7 @@ ADeferAttachToSocketActor::ADeferAttachToSocketActor(const class FObjectInitiali
 {
 	//Asset, Reference Obtained Via Right Click in Editor
 	//static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshOb_AW2(TEXT("StaticMesh'/Game/VictoryGoals/Mechs/JoyControl/JoyControl_WindTurtle.JoyControl_WindTurtle'"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshOb_AW2(TEXT("StaticMesh'/Game/ThirdPerson/Meshes/Bump_StaticMesh.Bump_StaticMesh'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshOb_AW2(TEXT("StaticMesh'/Game/MyAsset/MyThirdPerson/ThirdPerson/Meshes/Bump_StaticMesh.Bump_StaticMesh'"));
 
 	AssetSM_JoyControl = StaticMeshOb_AW2.Object;
 

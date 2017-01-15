@@ -17,7 +17,7 @@
 
 AMyHUD::AMyHUD(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<UFont> BigFontOb(TEXT("/Game/UI/HUD/Roboto51"));
+	static ConstructorHelpers::FObjectFinder<UFont> BigFontOb(TEXT("/Game/MyAsset/Font/Roboto51"));
 	BigFont = BigFontOb.Object;
 	HUDDark = FColor(110, 124, 131, 255);
 	AHUD* aa = dynamic_cast<AHUD*>(this);
