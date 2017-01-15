@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyProject.h"
-#include "MyGameInstance.generated.h"
+#include "MyGameInstanceBase.generated.h"
 
 class AppFrame;
 
@@ -15,7 +15,7 @@ class AppFrame;
  */
 
 UCLASS(config=Game)
-class UMyGameInstance : public UGameInstance
+class UMyGameInstanceBase : public UGameInstance
 {
 public:
 	GENERATED_UCLASS_BODY()
@@ -30,5 +30,3 @@ public:
 
 	virtual TSubclassOf<UOnlineSession> GetOnlineSessionClass() override;
 };
-
-

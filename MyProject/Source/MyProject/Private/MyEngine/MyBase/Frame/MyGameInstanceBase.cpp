@@ -1,12 +1,12 @@
 ﻿#include "MyProject.h"
-#include "MyGameInstance.h"
+#include "MyGameInstanceBase.h"
 
 #include "AppFrame.h"
 //#include "Ctx.h"
 #include "UtilStr.h"
 #include "MyOnlineSession.h"
 
-UMyGameInstance::UMyGameInstance(const FObjectInitializer& ObjectInitializer)
+UMyGameInstanceBase::UMyGameInstanceBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// 逻辑指针不要放在构造函数中，因为脚本会调用一次构造函数，这样就会申请多个指针
@@ -18,7 +18,7 @@ UMyGameInstance::UMyGameInstance(const FObjectInitializer& ObjectInitializer)
 	//GetDefault<UInputSettings>()->DefaultViewportMouseCaptureMode = EMouseCaptureMode::CaptureDuringMouseDown;
 }
 
-void UMyGameInstance::Init()
+void UMyGameInstanceBase::Init()
 {
 	Super::Init();
 
@@ -27,19 +27,19 @@ void UMyGameInstance::Init()
 	mAppFrame->initApp();
 }
 
-void UMyGameInstance::Shutdown()
+void UMyGameInstanceBase::Shutdown()
 {
 	Super::Shutdown();
 
 	mAppFrame->quitApp();
 }
 
-void UMyGameInstance::FinishDestroy()
+void UMyGameInstanceBase::FinishDestroy()
 {
 	Super::FinishDestroy();
 }
 
-TSubclassOf<UOnlineSession> UMyGameInstance::GetOnlineSessionClass()
+TSubclassOf<UOnlineSession> UMyGameInstanceBase::GetOnlineSessionClass()
 {
 	return UMyOnlineSession::StaticClass();
 }
