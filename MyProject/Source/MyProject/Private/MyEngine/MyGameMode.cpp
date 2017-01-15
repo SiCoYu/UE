@@ -29,23 +29,23 @@ AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("Blueprint'/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter_C'"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
-		DefaultPawnClass = PlayerPawnBPClass.Class;
+		this->DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 
 	//static ConstructorHelpers::FClassFinder<AHUD> HUBBPClass(TEXT("/Game/Blueprints/HUB"));
 	//if (HUBBPClass.Class != NULL)
 	//{
 		//HUDClass = HUBBPClass.Class;
-		HUDClass = AMyHUD::StaticClass();
+	this->HUDClass = AMyHUD::StaticClass();
 	//}
 
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Players_in_Multiplayer
-	PlayerControllerClass = AMyPlayerController::StaticClass();
+	this->PlayerControllerClass = AMyPlayerController::StaticClass();
+
+	this->GameStateClass = AMyGameState::StaticClass();
 
 	// https://wiki.unrealengine.com/Slate,_Simple_C%2B%2B_Chat_System
-	PlayerStateClass = AMyPlayerState::StaticClass();
-
-	GameStateClass = AMyGameState::StaticClass();
+	this->PlayerStateClass = AMyPlayerState::StaticClass();
 
 	/* use this is you wish to extend the c++ into a bp and assign the bp to the class
 	static ConstructorHelpers::FClassFinder<AMyHUD> hudclassobj(TEXT("Blueprint'/MyHUD.MyHUD_C'"));
@@ -57,8 +57,8 @@ AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 	PlayerStateClass = psclassobj.Class;
 	*/
 
-	GameSessionClass = AMyGameSession::StaticClass();
-	SpectatorClass = AMySpectatorPawn::StaticClass();
+	this->GameSessionClass = AMyGameSession::StaticClass();
+	this->SpectatorClass = AMySpectatorPawn::StaticClass();
 }
 
 UClass* AMyGameMode::GetDefaultPawnClassForController(AController* InController)
