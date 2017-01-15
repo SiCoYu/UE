@@ -1,10 +1,10 @@
 #pragma once
 
-#include "PhysicsEngine/PhysicsCollisionHandler.h"	// UPhysicsCollisionHandler
-#include "MyPhysicsCollisionHandler.generated.h"
+#include "UPhysicsCollisionHandlerBase.h"	// UPhysicsCollisionHandler
+#include "MyFlyPhysicsCollisionHandler.generated.h"
 
 UCLASS()
-class UMyPhysicsCollisionHandler : public UPhysicsCollisionHandler
+class UMyFlyPhysicsCollisionHandler : public UPhysicsCollisionHandlerBase
 {
 	GENERATED_UCLASS_BODY()
 };
