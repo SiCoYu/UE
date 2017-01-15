@@ -1,10 +1,10 @@
 #pragma once
 
-#include "GameFramework/DefaultPawn.h"
+#include "GameFramework/Pawn.h"
 #include "MyDefaultPawnBase.generated.h"
 
 UCLASS(config = Game)
-class AMyDefaultPawnBase : public ADefaultPawn
+class AMyDefaultPawnBase : public APawn
 {
 	GENERATED_BODY()
 

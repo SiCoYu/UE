@@ -29,6 +29,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/AI",
                 "MyProject/Private/MyEngine/MyBluePrint",
                 "MyProject/Private/MyEngine/MyFly",
+                "MyProject/Private/MyEngine/MyBase",
 
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",
