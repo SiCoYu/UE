@@ -16,6 +16,7 @@ public class MyProject : ModuleRules
         PrivateIncludePaths.AddRange(
             new string[] {
                 // Player ÇøÓò
+                "MyProject/Private/MyEngine",
                 "MyProject/Private/MyEngine/Player",
                 "MyProject/Private/MyEngine/UI/Widgets",
                 "MyProject/Private/MyEngine/Persist",
