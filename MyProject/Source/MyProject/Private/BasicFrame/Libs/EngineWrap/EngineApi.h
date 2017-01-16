@@ -58,7 +58,7 @@ public:
 	static UMyGameInstanceBase* getGameInstance();
 	static UWorld* GetWorld();
 	static void showCursor();
-	static UMyEngine* getEngine();
+	static UMyGameEngineBase* getEngine();
 	static UMyGameInstanceBase* getMyGameInstanceByEngine();
 	static UMyGameInstanceBase* getMyGameInstanceByController();
 	static UWorld* getWorldByEngine();
