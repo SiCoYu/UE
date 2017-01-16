@@ -2,7 +2,7 @@
 
 //DD File Tree Item
 #include "DDFileTreeItem.h"
-#include "MyEngine.h"
+#include "MyGameEngineBase.h"
 
 /**
 * @url https://wiki.unrealengine.com/Slate,_Tree_View_Widget,_Ex:_In-Editor_File_Structure_Explorer
@@ -35,7 +35,7 @@ public:
 public:
 	//owns this
 	//TWeakObjectPtr<class UDDEdEngine> DDEdEngine;
-	TWeakObjectPtr<class UMyEngine> mMyEngine;
+	TWeakObjectPtr<class UMyGameEngineBase> mMyEngine;
 
 	/** Refresh the Tree */
 	//bool DoRefresh;
@@ -44,7 +44,7 @@ public:
 public:
 	/** Widget constructor */
 	//void Construct(const FArguments& Args, TWeakObjectPtr<class UDDEdEngine> IN_DDEdEngine);
-	void Construct(const FArguments& Args, TWeakObjectPtr<class UMyEngine> IN_DDEdEngine);
+	void Construct(const FArguments& Args, TWeakObjectPtr<class UMyGameEngineBase> IN_DDEdEngine);
 
 	/** Destructor */
 	~SDDFileTree();

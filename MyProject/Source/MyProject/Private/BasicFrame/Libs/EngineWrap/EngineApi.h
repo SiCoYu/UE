@@ -25,7 +25,7 @@ class SWindow;
 struct FWorldContext;
 class UWorld;
 class AMyPlayerController;
-class UMyLocalPlayer;
+class UMyLocalPlayerBase;
 class UMyGameViewportClientBase;
 
 
@@ -68,7 +68,7 @@ public:
 	static FWorldContext* GetWorldContextByGameInstance();
 	static UWorld* GetWorldByWorldContext();
 	static UMyGameInstanceBase* GetGameInstanceByWorld();
-	static UMyLocalPlayer* GetLocalPlayerByPlayerController();
+	static UMyLocalPlayerBase* GetLocalPlayerByPlayerController();
 
 	static ULevel* getCurrentLevelFromWorld();
 	static ULevel* getPersistentLevelFromWorld();

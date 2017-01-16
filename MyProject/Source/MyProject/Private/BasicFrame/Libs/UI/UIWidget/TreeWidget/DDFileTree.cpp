@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "MyEngine.h"
+//#include "MyGameEngineBase.h"
 //This header
 #include "DDFileTree.h"
 //The Data
@@ -8,7 +8,7 @@
 DEFINE_LOG_CATEGORY(MFileTree_LogCategory);
 
 //void SDDFileTree::Construct(const FArguments& Args, TWeakObjectPtr<class UDDEdEngine> IN_DDEdEngine)
-void SDDFileTree::Construct(const FArguments& Args, TWeakObjectPtr<class UMyEngine> IN_DDEdEngine)
+void SDDFileTree::Construct(const FArguments& Args, TWeakObjectPtr<class UMyGameEngineBase> IN_DDEdEngine)
 {
 	//Set DDEdEngine
 	mMyEngine = IN_DDEdEngine;

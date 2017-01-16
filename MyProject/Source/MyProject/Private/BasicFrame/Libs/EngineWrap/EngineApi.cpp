@@ -2,7 +2,7 @@
 #include "EngineApi.h"
 #include "Common.h"
 #include "EngineData.h"
-#include "MyEngine.h"
+#include "MyGameEngineBase.h"
 #include "Internationalization/Text.h"	// FFormatOrderedArguments
 #include "MyGameInstanceBase.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
@@ -12,7 +12,7 @@
 #include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
 #include "GenericPlatform/GenericPlatformHttp.h"
 #include "Engine/Engine.h"	// FWorldContext
-#include "MyLocalPlayer.h"	// UMyLocalPlayer
+#include "MyLocalPlayerBase.h"	// UMyLocalPlayer
 #include "MyPlayerController.h"	// AMyPlayerController
 #include "UObject/UObjectGlobals.h"	// NewObject
 #include "MyGameViewportClientBase.h"
@@ -47,14 +47,14 @@ void EngineApi::addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName)
 	pBtn->OnClicked.Add(ptrDelegate);
 }
 
-UMyEngine* EngineApi::getEngine()
+UMyGameEngineBase* EngineApi::getEngine()
 {
-	return Cast<UMyEngine>(GEngine);
+	return Cast<UMyGameEngineBase>(GEngine);
 }
 
 UMyGameInstanceBase* EngineApi::getMyGameInstanceByEngine()
 {
-	UMyEngine* pUMyEngine = Cast<UMyEngine>(GEngine);
+	UMyGameEngineBase* pUMyEngine = Cast<UMyGameEngineBase>(GEngine);
 	UMyGameInstanceBase* const GI = Cast<UMyGameInstanceBase>(pUMyEngine->GameInstance);
 	return GI;
 }
@@ -115,10 +115,10 @@ UMyGameInstanceBase* EngineApi::GetGameInstanceByWorld()
 	return GameInstance;
 }
 
-UMyLocalPlayer* EngineApi::GetLocalPlayerByPlayerController()
+UMyLocalPlayerBase* EngineApi::GetLocalPlayerByPlayerController()
 {
 	AMyPlayerController* Controller = EngineApi::GetPlayerController();
-	UMyLocalPlayer* Player = Cast<UMyLocalPlayer>(Controller->Player);
+	UMyLocalPlayerBase* Player = Cast<UMyLocalPlayerBase>(Controller->Player);
 	return Player;
 }
 
