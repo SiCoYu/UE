@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyWorldSettingsBase.h"
 
-AMyWorldSettings::AMyWorldSettings(const FObjectInitializer& ObjectInitializer)
+AMyWorldSettingsBase::AMyWorldSettingsBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	

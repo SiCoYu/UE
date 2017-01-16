@@ -1,6 +1,7 @@
 #include "MyProject.h"
-#include "MyWorldSettings.h"
+#include "MyFlyWorldSettings.h"
 #include "MyFlyGameMode.h"
+#include "GameFramework/GameModeBase.h"
 
 AMyFlyWorldSettings::AMyFlyWorldSettings(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
