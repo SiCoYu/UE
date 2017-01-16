@@ -33,6 +33,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyBase",
                 "MyProject/Private/MyEngine/MyBase/Actor",
                 "MyProject/Private/MyEngine/MyBase/Frame",
+                "MyProject/Private/MyEngine/MyBase/AI",
 
                 "MyProject/Private/MyEngine/MyFly",
                 "MyProject/Private/MyEngine/MyFly/Actor",
