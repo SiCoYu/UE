@@ -1,10 +1,10 @@
 #pragma once
 
 #include "GameFramework/PlayerStart.h"
-#include "MyPlayerStart.generated.h"
+#include "MyPlayerStartBase.generated.h"
 
 UCLASS(config=Game)
-class AMyPlayerStart : public APlayerStart
+class AMyPlayerStartBase : public APlayerStart
 {
 	GENERATED_BODY()
 

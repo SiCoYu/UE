@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Engine/Console.h"		// UConsole
+#include "MyConsoleBase.h"		// UConsole
 #include "MyConsole.generated.h"
 
 UCLASS()
-class UMyConsole : public UConsole
+class UMyConsole : public UMyConsoleBase
 {
 	GENERATED_UCLASS_BODY()
 };

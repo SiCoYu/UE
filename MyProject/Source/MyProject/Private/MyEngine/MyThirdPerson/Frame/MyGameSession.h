@@ -1,10 +1,10 @@
 #pragma once
 
-#include "GameFramework/GameSession.h"
+#include "MyGameSessionBase.h"
 #include "MyGameSession.generated.h"
 
 UCLASS(config = Game)
-class AMyGameSession : public AGameSession
+class AMyGameSession : public AMyGameSessionBase
 {
 	GENERATED_BODY()
 };
