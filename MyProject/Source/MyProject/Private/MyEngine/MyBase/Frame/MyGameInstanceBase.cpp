@@ -4,7 +4,7 @@
 #include "AppFrame.h"
 //#include "Ctx.h"
 #include "UtilStr.h"
-#include "MyOnlineSession.h"
+#include "MyOnlineSessionBase.h"
 
 UMyGameInstanceBase::UMyGameInstanceBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -13,7 +13,7 @@ UMyGameInstanceBase::UMyGameInstanceBase(const FObjectInitializer& ObjectInitial
 	//mAppFrame = new AppFrame();
 
 	// 这个设置等价于在 Project Setting 中的设置
-	std::string aaa = "aaa";
+	//std::string aaa = "aaa";
 	//GetDefault<UGeneralProjectSettings>()->ProjectDisplayedTitle = UtilStr::ConvStdStr2FText(aaa);
 	//GetDefault<UInputSettings>()->DefaultViewportMouseCaptureMode = EMouseCaptureMode::CaptureDuringMouseDown;
 }
@@ -41,5 +41,5 @@ void UMyGameInstanceBase::FinishDestroy()
 
 TSubclassOf<UOnlineSession> UMyGameInstanceBase::GetOnlineSessionClass()
 {
-	return UMyOnlineSession::StaticClass();
+	return UMyOnlineSessionBase::StaticClass();
 }

@@ -111,7 +111,7 @@ UWorld* EngineApi::GetWorldByWorldContext()
 UMyGameInstanceBase* EngineApi::GetGameInstanceByWorld()
 {
 	UWorld* NewWorld = EngineApi::GetWorld();
-	UMyGameInstanceBase* GameInstance = Cast<UMyGameInstance>(NewWorld->GetGameInstance());
+	UMyGameInstanceBase* GameInstance = Cast<UMyGameInstanceBase>(NewWorld->GetGameInstance());
 	return GameInstance;
 }
 
@@ -501,7 +501,7 @@ FString EngineApi::GetPathName(const UObject* curObj, const UObject* StopOuter/*
 	return Result;
 }
 
-UMyGameViewportClient* const EngineApi::GetGameViewportClient()
+UMyGameViewportClientBase* const EngineApi::GetGameViewportClient()
 {
 	UMyGameInstanceBase* GameInstance = EngineApi::getGameInstance();
 	UMyGameViewportClientBase* const GameViewport = Cast<UMyGameViewportClientBase>(GameInstance->GetGameViewportClient());
@@ -510,8 +510,8 @@ UMyGameViewportClient* const EngineApi::GetGameViewportClient()
 
 FViewport* const EngineApi::GetViewport()
 {
-	UMyGameInstance* GameInstance = EngineApi::getGameInstance();
-	UGameViewportClient* const GameViewport = GameInstance->GetGameViewportClient();
+	UMyGameInstanceBase* GameInstance = EngineApi::getGameInstance();
+	UMyGameViewportClientBase* const GameViewport = Cast<UMyGameViewportClientBase>(GameInstance->GetGameViewportClient());
 	if (GameViewport != NULL && GameViewport->Viewport != NULL)
 	{
 		return GameViewport->Viewport;

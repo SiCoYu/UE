@@ -304,7 +304,7 @@ public:
 	static inline void SetTransientMasterVolume(float size);
 
 	// Engine\Source\Runtime\Engine\Private\GameInstance.cpp
-	static UMyGameViewportClient* const GetGameViewportClient();
+	static UMyGameViewportClientBase* const GetGameViewportClient();
 	static FViewport* const GetViewport();
 	// Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
 	static void EnableScreenSaver(bool bEnable);
