@@ -1,35 +1,35 @@
 #include "MyProject.h"
-#include "Player/MyLocalPlayer.h"
-#include "MyGameInstanceBase.h"
+#include "MyLocalPlayerBase.h"
+//#include "MyGameInstanceBase.h"
 
-UMyLocalPlayer::UMyLocalPlayer(const FObjectInitializer& ObjectInitializer)
+UMyLocalPlayerBase::UMyLocalPlayerBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }
 
-void UMyLocalPlayer::SetControllerId(int32 NewControllerId)
+void UMyLocalPlayerBase::SetControllerId(int32 NewControllerId)
 {
 	Super::SetControllerId(NewControllerId);
 }
 
-UMyPersistentUser* UMyLocalPlayer::GetPersistentUser() const
+UMyPersistentUser* UMyLocalPlayerBase::GetPersistentUser() const
 {
 	// if persistent data isn't loaded yet, load it
 	if (PersistentUser == nullptr)
 	{
-		UMyLocalPlayer* const MutableThis = const_cast<UMyLocalPlayer*>(this);
+		UMyLocalPlayerBase* const MutableThis = const_cast<UMyLocalPlayerBase*>(this);
 		// casting away constness to enable caching implementation behavior
 		MutableThis->LoadPersistentUser();
 	}
 	return PersistentUser;
 }
 
-void UMyLocalPlayer::LoadPersistentUser()
+void UMyLocalPlayerBase::LoadPersistentUser()
 {
 	FString SaveGameName = GetNickname();
 }
 
-FString UMyLocalPlayer::GetNickname() const
+FString UMyLocalPlayerBase::GetNickname() const
 {
 	FString UserNickName = Super::GetNickname();
 

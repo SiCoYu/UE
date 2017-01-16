@@ -3,11 +3,12 @@
 #pragma once
 
 #include "MyPersistentUser.h"
-#include "MyLocalPlayer.generated.h"
+#include "Engine/LocalPlayer.h"
+#include "MyLocalPlayerBase.generated.h"
 
 //UCLASS(config=Engine, transient)
 UCLASS()
-class UMyLocalPlayer : public ULocalPlayer
+class UMyLocalPlayerBase : public ULocalPlayer
 {
 	GENERATED_UCLASS_BODY()
 

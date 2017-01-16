@@ -1,6 +1,7 @@
 #pragma once
 
-#include "MyEngine.generated.h"
+#include "Engine/GameEngine.h"
+#include "MyGameEngineBase.generated.h"
 
 /**
  (1)
@@ -17,7 +18,7 @@
  */
 
 UCLASS()
-class UMyEngine : public UGameEngine
+class UMyGameEngineBase : public UGameEngine
 {
 	GENERATED_UCLASS_BODY()
 
