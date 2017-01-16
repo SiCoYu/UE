@@ -9,6 +9,6 @@ class AMyFlyPlayerStart : public AMyPlayerStartBase
 	GENERATED_BODY()
 
 public:
-	AMyPlayerStart(const FObjectInitializer& ObjectInitializer);
+	AMyFlyPlayerStart(const FObjectInitializer& ObjectInitializer);
 	bool GetIsPlayerOnly();
 };

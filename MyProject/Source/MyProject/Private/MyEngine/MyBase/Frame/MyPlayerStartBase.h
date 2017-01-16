@@ -9,6 +9,6 @@ class AMyPlayerStartBase : public APlayerStart
 	GENERATED_BODY()
 
 public:
-	//AMyPlayerStartBase(const FObjectInitializer& ObjectInitializer);
+	AMyPlayerStartBase(const FObjectInitializer& ObjectInitializer);
 	bool GetIsPlayerOnly();
 };
