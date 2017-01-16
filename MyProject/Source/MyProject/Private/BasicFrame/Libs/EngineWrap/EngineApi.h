@@ -18,16 +18,15 @@
 #include "UObject/UObjectGlobals.h"	// DuplicateObject
 #include "AudioDevice.h"		// FAudioDevice
 
-class UGameInstance;
 class UMyEngine;
-class UMyGameInstance;
+class UMyGameInstanceBase;
 class UUserWidget;
 class SWindow;
 struct FWorldContext;
 class UWorld;
 class AMyPlayerController;
 class UMyLocalPlayer;
-class UMyGameViewportClient;
+class UMyGameViewportClientBase;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -56,19 +55,19 @@ DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
 class EngineApi
 {
 public:
-	static UMyGameInstance* getGameInstance();
+	static UMyGameInstanceBase* getGameInstance();
 	static UWorld* GetWorld();
 	static void showCursor();
 	static UMyEngine* getEngine();
-	static UMyGameInstance* getMyGameInstanceByEngine();
-	static UMyGameInstance* getMyGameInstanceByController();
+	static UMyGameInstanceBase* getMyGameInstanceByEngine();
+	static UMyGameInstanceBase* getMyGameInstanceByController();
 	static UWorld* getWorldByEngine();
 
 	static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
 	static AMyPlayerController* GetPlayerController();
 	static FWorldContext* GetWorldContextByGameInstance();
 	static UWorld* GetWorldByWorldContext();
-	static UMyGameInstance* GetGameInstanceByWorld();
+	static UMyGameInstanceBase* GetGameInstanceByWorld();
 	static UMyLocalPlayer* GetLocalPlayerByPlayerController();
 
 	static ULevel* getCurrentLevelFromWorld();

@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "MyPlayerStart.h"
+#include "MyTPPlayerStart.h"
 
 AMyTPPlayerStart::AMyTPPlayerStart(const class FObjectInitializer& PCIP)
 	: Super(PCIP)

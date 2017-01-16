@@ -30,7 +30,7 @@ void UMyTPGameInstance::FinishDestroy()
 	Super::FinishDestroy();
 }
 
-TSubclassOf<UOnlineSession> UMyGameInstance::GetOnlineSessionClass()
+TSubclassOf<UOnlineSession> UMyTPGameInstance::GetOnlineSessionClass()
 {
 	return UMyTPOnlineSession::StaticClass();
 }

@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "EngineApi.h"
 #include "PointF.h"
-#include "MyGameInstance.h"	// UMyGameInstance
+#include "MyGameInstanceBase.h"	// UMyGameInstanceBase
 #include "UMGWidget.h"		// UUMGWidget
 #include "WindowAnchor.h"
 

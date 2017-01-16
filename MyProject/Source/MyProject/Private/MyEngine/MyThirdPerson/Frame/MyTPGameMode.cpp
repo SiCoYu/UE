@@ -9,10 +9,10 @@
 #include "MyPlayerController.h"
 #include "UITestCanvas.h"
 #include "GameFramework/PlayerStart.h"
-#include "MyPlayerStart.h"
+#include "MyTPPlayerStart.h"
 #include "MyCharacter.h"
 #include "MyPlayerState.h"
-#include "MyTPGameState.h"
+#include "MyGameState.h"
 #include "MyTPGameSession.h"
 #include "MySpectatorPawn.h"
 
@@ -57,7 +57,7 @@ AMyTPGameMode::AMyTPGameMode(const FObjectInitializer& ObjectInitializer)
 	PlayerStateClass = psclassobj.Class;
 	*/
 
-	this->GameSessionClass = AMyGameSession::StaticClass();
+	this->GameSessionClass = AMyTPGameSession::StaticClass();
 	this->SpectatorClass = AMySpectatorPawn::StaticClass();
 }
 
@@ -199,7 +199,7 @@ bool AMyTPGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* C
 		return true;
 
 	/* Check for extended playerstart class */
-	AMyPlayerStart* MyPlayerStart = Cast<AMyPlayerStart>(SpawnPoint);
+	AMyTPPlayerStart* MyPlayerStart = Cast<AMyTPPlayerStart>(SpawnPoint);
 	if (MyPlayerStart)
 	{
 		return MyPlayerStart->GetIsPlayerOnly() && !Controller->PlayerState->bIsABot;
@@ -233,7 +233,7 @@ bool AMyTPGameMode::IsSpawnpointPreferred(APlayerStart* SpawnPoint, AController*
 		}
 
 		/* Check if spawnpoint is exclusive to players */
-		AMyPlayerStart* MyPlayerStart = Cast<AMyPlayerStart>(SpawnPoint);
+		AMyTPPlayerStart* MyPlayerStart = Cast<AMyTPPlayerStart>(SpawnPoint);
 		if (MyPlayerStart)
 		{
 			return MyPlayerStart->GetIsPlayerOnly() && !Controller->PlayerState->bIsABot;

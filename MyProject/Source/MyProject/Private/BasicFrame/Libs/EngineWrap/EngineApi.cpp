@@ -4,7 +4,7 @@
 #include "EngineData.h"
 #include "MyEngine.h"
 #include "Internationalization/Text.h"	// FFormatOrderedArguments
-#include "MyGameInstance.h"
+#include "MyGameInstanceBase.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
 #include "GenericPlatform/GenericPlatformMisc.h"	//	ClipboardCopy
 #include "Widgets/SWindow.h"	// SWindow
@@ -15,13 +15,13 @@
 #include "MyLocalPlayer.h"	// UMyLocalPlayer
 #include "MyPlayerController.h"	// AMyPlayerController
 #include "UObject/UObjectGlobals.h"	// NewObject
-#include "MyGameViewportClient.h"
+#include "MyGameViewportClientBase.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
 
-UMyGameInstance* EngineApi::getGameInstance()
+UMyGameInstanceBase* EngineApi::getGameInstance()
 {
-	return Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GEngineData->getMainActor()));
+	return Cast<UMyGameInstanceBase>(UGameplayStatics::GetGameInstance(GEngineData->getMainActor()));
 }
 
 UWorld* EngineApi::GetWorld()
@@ -52,23 +52,23 @@ UMyEngine* EngineApi::getEngine()
 	return Cast<UMyEngine>(GEngine);
 }
 
-UMyGameInstance* EngineApi::getMyGameInstanceByEngine()
+UMyGameInstanceBase* EngineApi::getMyGameInstanceByEngine()
 {
 	UMyEngine* pUMyEngine = Cast<UMyEngine>(GEngine);
-	UMyGameInstance* const GI = Cast<UMyGameInstance>(pUMyEngine->GameInstance);
+	UMyGameInstanceBase* const GI = Cast<UMyGameInstanceBase>(pUMyEngine->GameInstance);
 	return GI;
 }
 
 UWorld* EngineApi::getWorldByEngine()
 {
-	UMyGameInstance* pUMyProjectGameInstance = getMyGameInstanceByEngine();
+	UMyGameInstanceBase* pUMyProjectGameInstance = getMyGameInstanceByEngine();
 	UWorld* const World = pUMyProjectGameInstance->GetWorld();
 	return World;
 }
 
-UMyGameInstance* EngineApi::getMyGameInstanceByController()
+UMyGameInstanceBase* EngineApi::getMyGameInstanceByController()
 {
-	return Cast<UMyGameInstance>(GEngineData->getMainPlayerController()->GetGameInstance());
+	return Cast<UMyGameInstanceBase>(GEngineData->getMainPlayerController()->GetGameInstance());
 }
 
 ACharacter* EngineApi::getFirstCharacter()
@@ -96,7 +96,7 @@ AMyPlayerController* EngineApi::GetPlayerController()
 
 FWorldContext* EngineApi::GetWorldContextByGameInstance()
 {
-	UMyGameInstance* GameInstance = EngineApi::getGameInstance();
+	UMyGameInstanceBase* GameInstance = EngineApi::getGameInstance();
 	FWorldContext* const PieWorldContext = GameInstance->GetWorldContext();
 	return PieWorldContext;
 }
@@ -108,10 +108,10 @@ UWorld* EngineApi::GetWorldByWorldContext()
 	return PlayWorld;
 }
 
-UMyGameInstance* EngineApi::GetGameInstanceByWorld()
+UMyGameInstanceBase* EngineApi::GetGameInstanceByWorld()
 {
 	UWorld* NewWorld = EngineApi::GetWorld();
-	UMyGameInstance* GameInstance = Cast<UMyGameInstance>(NewWorld->GetGameInstance());
+	UMyGameInstanceBase* GameInstance = Cast<UMyGameInstance>(NewWorld->GetGameInstance());
 	return GameInstance;
 }
 
@@ -503,8 +503,8 @@ FString EngineApi::GetPathName(const UObject* curObj, const UObject* StopOuter/*
 
 UMyGameViewportClient* const EngineApi::GetGameViewportClient()
 {
-	UMyGameInstance* GameInstance = EngineApi::getGameInstance();
-	UMyGameViewportClient* const GameViewport = Cast<UMyGameViewportClient>(GameInstance->GetGameViewportClient());
+	UMyGameInstanceBase* GameInstance = EngineApi::getGameInstance();
+	UMyGameViewportClientBase* const GameViewport = Cast<UMyGameViewportClientBase>(GameInstance->GetGameViewportClient());
 	return GameViewport;
 }
 

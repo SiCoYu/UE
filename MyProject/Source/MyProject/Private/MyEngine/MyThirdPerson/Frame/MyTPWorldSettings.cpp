@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyTPWorldSettings.h"
 #include "MyTPPhysicsCollisionHandler.h"
-#include "MyGameMode.h"
+#include "MyTPGameMode.h"
 
 AMyTPWorldSettings::AMyTPWorldSettings(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
