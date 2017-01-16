@@ -15,7 +15,7 @@
 #include "MyLocalPlayer.h"	// UMyLocalPlayer
 #include "MyPlayerController.h"	// AMyPlayerController
 #include "UObject/UObjectGlobals.h"	// NewObject
-#include "MyViewportClient.h"
+#include "MyGameViewportClient.h"
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -501,10 +501,10 @@ FString EngineApi::GetPathName(const UObject* curObj, const UObject* StopOuter/*
 	return Result;
 }
 
-UMyViewportClient* const EngineApi::GetGameViewportClient()
+UMyGameViewportClient* const EngineApi::GetGameViewportClient()
 {
 	UMyGameInstance* GameInstance = EngineApi::getGameInstance();
-	UMyViewportClient* const GameViewport = Cast<UMyViewportClient>(GameInstance->GetGameViewportClient());
+	UMyGameViewportClient* const GameViewport = Cast<UMyGameViewportClient>(GameInstance->GetGameViewportClient());
 	return GameViewport;
 }
 

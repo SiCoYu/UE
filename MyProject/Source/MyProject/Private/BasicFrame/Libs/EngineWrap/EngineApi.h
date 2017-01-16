@@ -27,7 +27,7 @@ struct FWorldContext;
 class UWorld;
 class AMyPlayerController;
 class UMyLocalPlayer;
-class UMyViewportClient;
+class UMyGameViewportClient;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -305,7 +305,7 @@ public:
 	static inline void SetTransientMasterVolume(float size);
 
 	// Engine\Source\Runtime\Engine\Private\GameInstance.cpp
-	static UMyViewportClient* const GetGameViewportClient();
+	static UMyGameViewportClient* const GetGameViewportClient();
 	static FViewport* const GetViewport();
 	// Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
 	static void EnableScreenSaver(bool bEnable);

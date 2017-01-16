@@ -1,10 +1,10 @@
 #pragma once
 
 #include "MyWorldSettingsBase.h"	// UWorldSettings
-#include "MyWorldSettings.generated.h"
+#include "MyTPWorldSettings.generated.h"
 
 UCLASS()
-class AMyWorldSettings : public AMyWorldSettingsBase
+class AMyTPWorldSettings : public AMyWorldSettingsBase
 {
 	GENERATED_UCLASS_BODY()
 };

@@ -1,7 +1,7 @@
 #pragma once
 
-//#include "GameMapsSettings.h"	// UGameMapsSettings
-//#include "MyMapsSettings.generated.h"
+//#include "GameMapsSettingsBase.h"	// UGameMapsSettings
+//#include "MyTPMapsSettings.generated.h"
 
 /**
  UGameMapsSettings 不能继承，因为代码里面都是直接获取 UGameMapsSettings 的
@@ -10,7 +10,7 @@
  */
 
 //UCLASS()
-//class UMyMapsSettings : public UGameMapsSettings
+//class UMyTPMapsSettings : public UGameMapsSettingsBase
 //{
 //	GENERATED_UCLASS_BODY()
 //};

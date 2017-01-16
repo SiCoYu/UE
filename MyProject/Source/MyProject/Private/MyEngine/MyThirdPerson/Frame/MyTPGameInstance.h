@@ -1,9 +1,8 @@
 #pragma once
 
 #include "MyProject.h"
-#include "MyGameInstance.generated.h"
-
-class AppFrame;
+#include "MyGameInstanceBase.h"
+#include "MyTPGameInstance.generated.h"
 
 /**
  * @brief 
@@ -15,13 +14,10 @@ class AppFrame;
  */
 
 UCLASS(config=Game)
-class UMyGameInstance : public UGameInstance
+class UMyTPGameInstance : public UMyGameInstanceBase
 {
 public:
 	GENERATED_UCLASS_BODY()
-
-protected:
-	AppFrame* mAppFrame;
 
 public:
 	virtual void Init() override;

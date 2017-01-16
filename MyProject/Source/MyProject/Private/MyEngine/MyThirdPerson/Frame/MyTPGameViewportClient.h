@@ -5,12 +5,12 @@
 // TODO: 包含下面这两个文件导致编译不过
 //#include "Misc/Optional.h"
 //#include "Input/Events.h"
-#include "MyGameViewportClient.generated.h"
+#include "MyTPGameViewportClient.generated.h"
 
 // https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Classes/Specifiers/Within/index.html
 // https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Classes/Specifiers/Config/index.html
 UCLASS(Within=Engine, transient, config=Engine)
-class UMyGameViewportClient : public UMyGameViewportClientBase
+class UMyTPGameViewportClient : public UMyGameViewportClientBase
 {
 	GENERATED_UCLASS_BODY()
 

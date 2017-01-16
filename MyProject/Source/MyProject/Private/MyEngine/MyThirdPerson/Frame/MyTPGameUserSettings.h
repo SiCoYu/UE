@@ -1,10 +1,10 @@
 #pragma once
 
 #include "MyGameUserSettingsBase.h"
-#include "MyGameUserSettings.generated.h"
+#include "MyTPGameUserSettings.generated.h"
 
 UCLASS()
-class UMyGameUserSettings : public UMyGameUserSettingsBase
+class UMyTPGameUserSettings : public UMyGameUserSettingsBase
 {
 	GENERATED_UCLASS_BODY()
 

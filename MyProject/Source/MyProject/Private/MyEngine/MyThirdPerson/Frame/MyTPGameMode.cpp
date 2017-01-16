@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "MyGameMode.h"
+#include "MyTPGameMode.h"
 #include "MyCharacter.h"
 #include "GameFramework/HUD.h"
 #include "MyHUD.h"
@@ -12,11 +12,11 @@
 #include "MyPlayerStart.h"
 #include "MyCharacter.h"
 #include "MyPlayerState.h"
-#include "MyGameState.h"
-#include "MyGameSession.h"
+#include "MyTPGameState.h"
+#include "MyTPGameSession.h"
 #include "MySpectatorPawn.h"
 
-AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
+AMyTPGameMode::AMyTPGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// set default pawn class to our Blueprinted character
@@ -61,7 +61,7 @@ AMyGameMode::AMyGameMode(const FObjectInitializer& ObjectInitializer)
 	this->SpectatorClass = AMySpectatorPawn::StaticClass();
 }
 
-UClass* AMyGameMode::GetDefaultPawnClassForController(AController* InController)
+UClass* AMyTPGameMode::GetDefaultPawnClassForController(AController* InController)
 {
 	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(InController);
 
@@ -70,7 +70,7 @@ UClass* AMyGameMode::GetDefaultPawnClassForController(AController* InController)
 	return PawnClass;
 }
 
-void AMyGameMode::StartPlay()
+void AMyTPGameMode::StartPlay()
 {
 	Super::StartPlay();
 	// 各种初始化
@@ -80,7 +80,7 @@ void AMyGameMode::StartPlay()
 	//TestUI();
 }
 
-void AMyGameMode::TestUI()
+void AMyTPGameMode::TestUI()
 {
 	// Test 加载 UIPack
 	//GUiMgr->loadForm<UUIPack>(eUIPack);
@@ -88,7 +88,7 @@ void AMyGameMode::TestUI()
 }
 
 // https://wiki.unrealengine.com/Survival_Sample_Game:_Section_4
-void AMyGameMode::RestartPlayer(class AController* NewPlayer)
+void AMyTPGameMode::RestartPlayer(class AController* NewPlayer)
 {
 	/* Look for a live player to spawn next to */
 	FVector SpawnOrigin = FVector::ZeroVector;
@@ -158,7 +158,7 @@ void AMyGameMode::RestartPlayer(class AController* NewPlayer)
 	}
 }
 
-AActor* AMyGameMode::ChoosePlayerStart(AController* Player)
+AActor* AMyTPGameMode::ChoosePlayerStart(AController* Player)
 {
 	TArray<APlayerStart*> PreferredSpawns;
 	TArray<APlayerStart*> FallbackSpawns;
@@ -193,7 +193,7 @@ AActor* AMyGameMode::ChoosePlayerStart(AController* Player)
 }
 
 /* Check to see if a player and/or AI may spawn at the PlayerStart */
-bool AMyGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* Controller)
+bool AMyTPGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* Controller)
 {
 	if (Controller == nullptr || Controller->PlayerState == nullptr)
 		return true;
@@ -209,7 +209,7 @@ bool AMyGameMode::IsSpawnpointAllowed(APlayerStart* SpawnPoint, AController* Con
 	return true;
 }
 
-bool AMyGameMode::IsSpawnpointPreferred(APlayerStart* SpawnPoint, AController* Controller)
+bool AMyTPGameMode::IsSpawnpointPreferred(APlayerStart* SpawnPoint, AController* Controller)
 {
 	if (SpawnPoint)
 	{
