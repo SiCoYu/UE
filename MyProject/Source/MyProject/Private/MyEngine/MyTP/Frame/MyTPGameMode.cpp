@@ -26,7 +26,7 @@ AMyTPGameMode::AMyTPGameMode(const FObjectInitializer& ObjectInitializer)
 
 	// 通过 BP 资源设置
 	// ThirdPerson Blueprint 资源加载
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("Blueprint'/Game/MyAsset/MyThirdPerson/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter_C'"));
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("Blueprint'/Game/MyAsset/MyTP/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter_C'"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		this->DefaultPawnClass = PlayerPawnBPClass.Class;
