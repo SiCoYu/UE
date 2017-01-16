@@ -39,6 +39,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyFly/Frame",
 
                 "MyProject/Private/MyEngine/MyThirdPerson",
+                "MyProject/Private/MyEngine/MyThirdPerson/Actor",
                 "MyProject/Private/MyEngine/MyThirdPerson/Frame",
 
                 // Libs ÇøÓò

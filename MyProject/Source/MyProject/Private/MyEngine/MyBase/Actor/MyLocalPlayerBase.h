@@ -28,6 +28,3 @@ private:
 	UPROPERTY()
 	class UMyPersistentUser* PersistentUser;
 };
-
-
-

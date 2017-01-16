@@ -27,6 +27,3 @@ class UMyTpLocalPlayer : public UMyLocalPlayerBase
 //	UPROPERTY()
 //	class UMyPersistentUser* PersistentUser;
 };
-
-
-

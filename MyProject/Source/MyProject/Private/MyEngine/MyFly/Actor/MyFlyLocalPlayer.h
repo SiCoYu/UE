@@ -3,7 +3,7 @@
 #pragma once
 
 #include "MyLocalPlayerBase.h"
-#include "MyLocalPlayer.generated.h"
+#include "MyFlyLocalPlayer.generated.h"
 
 //UCLASS(config=Engine, transient)
 UCLASS()
@@ -27,6 +27,3 @@ class UMyFlyLocalPlayer : public UMyLocalPlayerBase
 //	UPROPERTY()
 //	class UMyPersistentUser* PersistentUser;
 };
-
-
-

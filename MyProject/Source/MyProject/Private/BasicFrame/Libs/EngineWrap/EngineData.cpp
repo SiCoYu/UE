@@ -41,12 +41,12 @@ void EngineData::setMainPlayerController(APlayerController* playerController)
 	this->mMainPlayerController = playerController;
 }
 
-UMyEngine* EngineData::getMyEngine()
+UMyGameEngineBase* EngineData::getMyEngine()
 {
 	return mMyEngine;
 }
 
-void EngineData::setMyEngine(UMyEngine* myEngine)
+void EngineData::setMyEngine(UMyGameEngineBase* myEngine)
 {
 	mMyEngine = myEngine;
 }

@@ -5,7 +5,7 @@
 #include "MyAvoidanceManager.h"
 #include "MyFlyLocalPlayer.h"
 
-UMyEngine::UMyEngine(const FObjectInitializer& ObjectInitializer)
+UMyFlyGameEngine::UMyFlyGameEngine(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// 全局物理碰撞处理
@@ -15,7 +15,7 @@ UMyEngine::UMyEngine(const FObjectInitializer& ObjectInitializer)
 	this->LocalPlayerClass = UMyFlyLocalPlayer::StaticClass();
 }
 
-void UMyEngine::Init(IEngineLoop* InEngineLoop)
+void UMyFlyGameEngine::Init(IEngineLoop* InEngineLoop)
 {
 	// Note: Lots of important things happen in Super::Init(), including spawning the player pawn in-game and
 	// creating the renderer.

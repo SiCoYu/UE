@@ -18,7 +18,7 @@
 #include "UObject/UObjectGlobals.h"	// DuplicateObject
 #include "AudioDevice.h"		// FAudioDevice
 
-class UMyEngine;
+class UMyGameEngineBase;
 class UMyGameInstanceBase;
 class UUserWidget;
 class SWindow;

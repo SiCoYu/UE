@@ -3,14 +3,14 @@
 
 class AActor;
 class APlayerController;
-class UMyEngine;
+class UMyGameEngineBase;
 
 class EngineData
 {
 protected:
 	AActor* mMainActor;
 	APlayerController* mMainPlayerController;
-	UMyEngine* mMyEngine;
+	UMyGameEngineBase* mMyEngine;
 
 public:
 	EngineData();
@@ -26,8 +26,8 @@ public:
 	APlayerController* getMainPlayerController();
 	void setMainPlayerController(APlayerController* playerController);
 
-	UMyEngine* getMyEngine();
-	void setMyEngine(UMyEngine* myEngine);
+	UMyGameEngineBase* getMyEngine();
+	void setMyEngine(UMyGameEngineBase* myEngine);
 };
 
 #endif				// __ENGINEDATA_H
