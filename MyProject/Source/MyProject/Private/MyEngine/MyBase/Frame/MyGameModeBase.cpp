@@ -6,3 +6,9 @@ AMyGameModeBase::AMyGameModeBase()
 {
 	
 }
+
+AMyGameModeBase::AMyGameModeBase(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+	
+}

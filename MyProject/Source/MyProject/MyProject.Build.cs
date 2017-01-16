@@ -160,6 +160,7 @@ public class MyProject : ModuleRules
 
         PublicIncludePaths.AddRange(
             new string[] {
+                "MyProject/Public/MyEngine",
                 "MyProject/Public/MyEngine/Player",
                 "MyProject/Public/MyEngine/UI",
                 "MyProject/Public/MyEngine/Persist",

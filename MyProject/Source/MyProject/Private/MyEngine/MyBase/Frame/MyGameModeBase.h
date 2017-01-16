@@ -13,6 +13,7 @@ class AMyGameModeBase : public AGameMode
 
 public:
 	AMyGameModeBase();
+	AMyGameModeBase(const FObjectInitializer& ObjectInitializer);
 };
 
 
