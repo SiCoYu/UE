@@ -37,10 +37,12 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyFly",
                 "MyProject/Private/MyEngine/MyFly/Actor",
                 "MyProject/Private/MyEngine/MyFly/Frame",
+                "MyProject/Private/MyEngine/MyFly/AI",
 
-                "MyProject/Private/MyEngine/MyThirdPerson",
-                "MyProject/Private/MyEngine/MyThirdPerson/Actor",
-                "MyProject/Private/MyEngine/MyThirdPerson/Frame",
+                "MyProject/Private/MyEngine/MyTP",
+                "MyProject/Private/MyEngine/MyTP/Actor",
+                "MyProject/Private/MyEngine/MyTP/Frame",
+                "MyProject/Private/MyEngine/MyTP/AI",
 
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",

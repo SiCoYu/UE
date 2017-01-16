@@ -1,10 +1,10 @@
 #pragma once
 
 #include "MyAvoidanceManagerBase.h"		// UAvoidanceManager
-#include "MyFlyAvoidanceManager.generated.h"
+#include "MyTPAvoidanceManager.generated.h"
 
 UCLASS(config = Engine, Blueprintable)
-class UMyFlyAvoidanceManager : public UMyAvoidanceManagerBase
+class UMyTPAvoidanceManager : public UMyAvoidanceManagerBase
 {
 	GENERATED_UCLASS_BODY()
 };

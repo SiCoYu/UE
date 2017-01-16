@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyAvoidanceManager.h"
+#include "MyAvoidanceManagerBase.h"
 
-UMyAvoidanceManager::UMyAvoidanceManager(const class FObjectInitializer& PCIP)
+UMyAvoidanceManagerBase::UMyAvoidanceManagerBase(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 

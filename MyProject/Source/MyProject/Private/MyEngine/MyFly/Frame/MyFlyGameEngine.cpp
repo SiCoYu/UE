@@ -2,7 +2,7 @@
 #include "MyFlyGameEngine.h"
 #include "Common.h"
 #include "MyFlyPhysicsCollisionHandler.h"
-#include "MyAvoidanceManager.h"
+#include "MyFlyAvoidanceManager.h"
 #include "MyFlyLocalPlayer.h"
 
 UMyFlyGameEngine::UMyFlyGameEngine(const FObjectInitializer& ObjectInitializer)
@@ -10,7 +10,7 @@ UMyFlyGameEngine::UMyFlyGameEngine(const FObjectInitializer& ObjectInitializer)
 {
 	// 全局物理碰撞处理
 	this->PhysicsCollisionHandlerClass = UMyFlyPhysicsCollisionHandler::StaticClass();
-	this->AvoidanceManagerClass = UMyAvoidanceManager::StaticClass();
+	this->AvoidanceManagerClass = UMyFlyAvoidanceManager::StaticClass();
 	// 等价于 MyProject\Config\DefaultEngine.ini 配置文件中的 LocalPlayerClassName 设置
 	this->LocalPlayerClass = UMyFlyLocalPlayer::StaticClass();
 }
