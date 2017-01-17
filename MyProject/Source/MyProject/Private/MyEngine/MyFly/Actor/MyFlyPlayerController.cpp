@@ -17,9 +17,9 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 	//PawnToUseB = NULL;
 
 	/* Make sure the PawnClass is Replicated */
-	bReplicates = true;
+	this->bReplicates = true;
 
-	PlayerCameraManagerClass = AMyPlayerCameraManager::StaticClass();
+	this->PlayerCameraManagerClass = AMyFlyPlayerCameraManager::StaticClass();
 }
 
 //void AMyPlayerController::BeginPlay()
