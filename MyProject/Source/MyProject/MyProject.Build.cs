@@ -17,7 +17,6 @@ public class MyProject : ModuleRules
             new string[] {
                 // Player ÇøÓò
                 "MyProject/Private/MyEngine",
-                "MyProject/Private/MyEngine/Player",
                 "MyProject/Private/MyEngine/UI/Widgets",
                 "MyProject/Private/MyEngine/Persist",
                 "MyProject/Private/MyEngine/MyActor",
@@ -25,7 +24,6 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/Misc",
                 "MyProject/Private/MyEngine/Network",
                 "MyProject/Private/MyEngine/Network/Web",
-                "MyProject/Private/MyEngine/MyAnim",
                 "MyProject/Private/MyEngine/MyAsset",
                 "MyProject/Private/MyEngine/AI",
                 "MyProject/Private/MyEngine/MyBluePrint",
@@ -34,16 +32,19 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyBase/Actor",
                 "MyProject/Private/MyEngine/MyBase/Frame",
                 "MyProject/Private/MyEngine/MyBase/AI",
+                "MyProject/Private/MyEngine/MyBase/Anim",
 
                 "MyProject/Private/MyEngine/MyFly",
                 "MyProject/Private/MyEngine/MyFly/Actor",
                 "MyProject/Private/MyEngine/MyFly/Frame",
                 "MyProject/Private/MyEngine/MyFly/AI",
+                "MyProject/Private/MyEngine/MyFly/Anim",
 
                 "MyProject/Private/MyEngine/MyTP",
                 "MyProject/Private/MyEngine/MyTP/Actor",
                 "MyProject/Private/MyEngine/MyTP/Frame",
                 "MyProject/Private/MyEngine/MyTP/AI",
+                "MyProject/Private/MyEngine/MyTP/Anim",
 
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",
