@@ -92,7 +92,7 @@ public:
 	This code ensures only 1 Prime Number thread will be able to run at a time.
 	This function returns a handle to the newly started instance.
 	*/
-	static FMultiThreadWorker* JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyPlayerController* IN_PC);
+	static FMultiThreadWorker* JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyPlayerControllerBase* IN_PC);
 
 	/** Shuts down the thread. Static so it can easily be called from outside the thread context */
 	static void Shutdown();

@@ -3,7 +3,7 @@
 #include "Animation/AnimInstance.h"
 #include "Math/Rotator.h"
 
-#include "MyAnimInstanceBase"
+#include "MyAnimInstanceBase.h"
 #include "MyFlyAnimInstance.generated.h"
 
 UCLASS(config = Game)

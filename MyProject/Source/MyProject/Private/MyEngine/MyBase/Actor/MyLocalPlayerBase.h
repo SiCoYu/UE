@@ -28,7 +28,7 @@ public:
 
 	virtual FString GetNickname() const;
 
-	class UMyPersistentUser* GetPersistentUser() const;
+	class UMySaveGameBase* GetPersistentUser() const;
 	
 	/** Initializes the PersistentUser */
 	void LoadPersistentUser();

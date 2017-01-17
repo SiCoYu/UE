@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MyCheatManagerBase"
+#include "MyCheatManagerBase.h"
 #include "MyFlyCheatManager.generated.h"
 
 // E:/Self/Self/unreal/UE-GIT/UE/MyProject/Source/MyProject/Public/Player/MyCheatManager.h(7): error : Parent class declared within 'PlayerController'.  Cannot override within class with 'MyCheatManager' since it isn't a child

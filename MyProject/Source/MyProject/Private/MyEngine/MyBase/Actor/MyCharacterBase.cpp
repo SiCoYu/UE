@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "UIFormId.h"
 #include "UITestCanvas.h"
-#include "MyAnimInstance.h"
+#include "MyAnimInstanceBase.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMyCharacter

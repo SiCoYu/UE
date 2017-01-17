@@ -11,7 +11,7 @@ class UMyAnimInstanceBase;
 
 //UCLASS(config=Game, Abstract)
 UCLASS(config=Game)
-class ATPMyCharacter : public AMyCharacterBase
+class AMyTPCharacter : public AMyCharacterBase
 {
 	GENERATED_BODY()
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyProject.h"
-#include "PlayerPawnData.h"
+#include "TPPlayerPawnData.h"
 #include "MyPawn.h"
 #include "Engine/EngineTypes.h"	// FTimerHandle
 #include "MyPlayerControllerBase.h"

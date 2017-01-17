@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "UMyTPAnimInstance.h"
+#include "MyTPAnimInstance.h"
 
 UMyTPAnimInstance::UMyTPAnimInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
