@@ -3,29 +3,30 @@
 #include "Animation/AnimInstance.h"
 #include "Math/Rotator.h"
 
-#include "MyAnimInstance.generated.h"
+#include "MyAnimInstanceBase"
+#include "MyFlyAnimInstance.generated.h"
 
 UCLASS(config = Game)
-class UMyAnimInstance : public UAnimInstance
+class UMyFlyAnimInstance : public UMyAnimInstanceBase
 {
 	GENERATED_UCLASS_BODY()
 
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Anim)
-	FRotator NeckSpring;
-
-public:
-	void testA();
-
-public:
-	APawn * OwningPawn;
-
-	/** Is Moving */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement)
-	bool IsMoving;
-
-	//init and tick
-public:
-	virtual void NativeInitializeAnimation() override;
-	virtual void NativeUpdateAnimation(float DeltaTimeX) override;
+//public:
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Anim)
+//	FRotator NeckSpring;
+//
+//public:
+//	void testA();
+//
+//public:
+//	APawn * OwningPawn;
+//
+//	/** Is Moving */
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement)
+//	bool IsMoving;
+//
+//	//init and tick
+//public:
+//	virtual void NativeInitializeAnimation() override;
+//	virtual void NativeUpdateAnimation(float DeltaTimeX) override;
 };

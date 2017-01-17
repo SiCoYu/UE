@@ -3,10 +3,10 @@
 #include "Animation/AnimInstance.h"
 #include "Math/Rotator.h"
 
-#include "MyAnimInstance.generated.h"
+#include "MyAnimInstanceBase.generated.h"
 
 UCLASS(config = Game)
-class UMyAnimInstance : public UAnimInstance
+class UMyAnimInstanceBase : public UAnimInstance
 {
 	GENERATED_UCLASS_BODY()
 

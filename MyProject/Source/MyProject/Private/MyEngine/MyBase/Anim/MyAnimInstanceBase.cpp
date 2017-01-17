@@ -1,18 +1,18 @@
 #include "MyProject.h"
-#include "MyAnimInstance.h"
+#include "MyAnimInstanceBase.h"
 
-UMyAnimInstance::UMyAnimInstance(const FObjectInitializer& ObjectInitializer)
+UMyAnimInstanceBase::UMyAnimInstanceBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	
 }
 
-void UMyAnimInstance::testA()
+void UMyAnimInstanceBase::testA()
 {
 
 }
 
-void UMyAnimInstance::NativeInitializeAnimation()
+void UMyAnimInstanceBase::NativeInitializeAnimation()
 {
 	//Very Important Line
 	Super::NativeInitializeAnimation();
@@ -22,7 +22,7 @@ void UMyAnimInstance::NativeInitializeAnimation()
 }
 
 //Tick
-void UMyAnimInstance::NativeUpdateAnimation(float DeltaTimeX)
+void UMyAnimInstanceBase::NativeUpdateAnimation(float DeltaTimeX)
 {
 	//Very Important Line
 	Super::NativeUpdateAnimation(DeltaTimeX);
