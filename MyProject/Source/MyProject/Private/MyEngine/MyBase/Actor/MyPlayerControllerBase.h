@@ -4,7 +4,8 @@
 #include "PlayerPawnData.h"
 #include "MyPawn.h"
 #include "Engine/EngineTypes.h"	// FTimerHandle
-#include "MyPlayerController.generated.h"
+#include "GameFramework/PlayerController.h"
+#include "MyPlayerControllerBase.generated.h"
 
 /**
  APlayerController BeginPlayer 就说明可以运行了
@@ -15,7 +16,7 @@ class UUserWidget;
 
 //UCLASS(Within=Engine, transient, config=Engine)
 UCLASS(config = Game)
-class AMyPlayerController : public APlayerController
+class AMyPlayerControllerBase : public APlayerController
 {
 	GENERATED_UCLASS_BODY()
 
@@ -32,7 +33,7 @@ protected:
 
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Every_Player
 public:
-	PlayerPawnData CurrentPawnData;
+	PlayerPawnDataBase CurrentPawnData;
 
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Players_in_Multiplayer
 public:

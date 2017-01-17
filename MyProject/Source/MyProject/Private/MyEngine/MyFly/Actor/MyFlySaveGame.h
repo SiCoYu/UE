@@ -1,4 +1,6 @@
 #pragma once
+
+#include "MySaveGameBase.h"
 #include "MyPersistentUser.generated.h"
 
 /**
@@ -6,7 +8,7 @@
  */
 
 UCLASS()
-class UMyPersistentUser : public USaveGame
+class UMyFlySaveGame : public UMySaveGameBase
 {
 	GENERATED_UCLASS_BODY()
 

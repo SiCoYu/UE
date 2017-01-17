@@ -1,12 +1,14 @@
 #pragma once
-#include "MyPersistentUser.generated.h"
+
+#include "MySaveGameBase.h"
+#include "MyTPSaveGame.generated.h"
 
 /**
  * @url https://docs.unrealengine.com/latest/INT/Gameplay/SaveGame/Code/index.html
  */
 
 UCLASS()
-class UMyPersistentUser : public USaveGame
+class UMyTPSaveGame : public UMySaveGameBase
 {
 	GENERATED_UCLASS_BODY()
 

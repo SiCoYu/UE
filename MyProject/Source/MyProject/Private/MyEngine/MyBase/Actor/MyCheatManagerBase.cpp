@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyPlayerState.h"
-#include "MyCheatManager.h"
+#include "MyCheatManagerBase.h"
+//#include "MyPlayerState.h"
 
-UMyCheatManager::UMyCheatManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+UMyCheatManagerBase::UMyCheatManagerBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 }

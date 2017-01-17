@@ -1,10 +1,10 @@
 #include "MyProject.h"
-#include "Player/MyCharacterMovement.h"
+#include "MyFlyCharacterMovementComponent.h"
 
 //----------------------------------------------------------------------//
 // UPawnMovementComponent
 //----------------------------------------------------------------------//
-UMyCharacterMovement::UMyCharacterMovement(const FObjectInitializer& ObjectInitializer)
+UMyFlyCharacterMovementComponent::UMyFlyCharacterMovementComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// https://answers.unrealengine.com/questions/160397/hot-reload-how-to-use.html
@@ -12,7 +12,7 @@ UMyCharacterMovement::UMyCharacterMovement(const FObjectInitializer& ObjectIniti
 }
 
 
-float UMyCharacterMovement::GetMaxSpeed() const
+float UMyFlyCharacterMovementComponent::GetMaxSpeed() const
 {
 	float MaxSpeed = Super::GetMaxSpeed();
 

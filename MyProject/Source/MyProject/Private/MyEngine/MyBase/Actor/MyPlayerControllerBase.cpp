@@ -1,15 +1,15 @@
 #include "MyProject.h"
-#include "MyPlayerController.h"
+#include "MyPlayerControllerBase.h"
 #include "EngineApi.h"
 #include "MyFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
 #include "Blueprint/UserWidget.h"	// UUserWidget
-#include "MyPlayerCameraManager.h"
+//#include "MyPlayerCameraManager.h"
 #include "Common.h"
 #include "UITestCanvas.h"	// UUITestCanvas
 
-AMyPlayerController::AMyPlayerController(const FObjectInitializer& ObjectInitializer)
+AMyPlayerControllerBase::AMyPlayerControllerBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	/* Initialize The Values */
@@ -19,10 +19,10 @@ AMyPlayerController::AMyPlayerController(const FObjectInitializer& ObjectInitial
 	/* Make sure the PawnClass is Replicated */
 	bReplicates = true;
 
-	PlayerCameraManagerClass = AMyPlayerCameraManager::StaticClass();
+	//PlayerCameraManagerClass = AMyPlayerCameraManager::StaticClass();
 }
 
-void AMyPlayerController::BeginPlay()
+void AMyPlayerControllerBase::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -42,7 +42,7 @@ void AMyPlayerController::BeginPlay()
 	//GCtx->beginPlay();
 }
 
-void AMyPlayerController::ReceivedPlayer()
+void AMyPlayerControllerBase::ReceivedPlayer()
 {
 	Super::ReceivedPlayer();
 
@@ -50,20 +50,20 @@ void AMyPlayerController::ReceivedPlayer()
 	//GCtx->beginPlay();
 }
 
-void AMyPlayerController::TestUI()
+void AMyPlayerControllerBase::TestUI()
 {
 	// Test ╪сть UIPack
 	//GUiMgr->loadForm<UUIPack>(eUIPack);
 	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 }
 
-void AMyPlayerController::BeginPlay_PawnClass()
+void AMyPlayerControllerBase::BeginPlay_PawnClass()
 {
 	DeterminePawnClass();
 }
 
 // Pawn Class
-void AMyPlayerController::DeterminePawnClass_Implementation()
+void AMyPlayerControllerBase::DeterminePawnClass_Implementation()
 {
 	if (IsLocalController()) //Only Do This Locally (NOT Client-Only, since Server wants this too!)
 	{
@@ -86,12 +86,12 @@ void AMyPlayerController::DeterminePawnClass_Implementation()
 	}
 }
 
-bool AMyPlayerController::ServerSetPawn_Validate(TSubclassOf<APawn> InPawnClass)
+bool AMyPlayerControllerBase::ServerSetPawn_Validate(TSubclassOf<APawn> InPawnClass)
 {
 	return true;
 }
 
-void AMyPlayerController::ServerSetPawn_Implementation(TSubclassOf<APawn> InPawnClass)
+void AMyPlayerControllerBase::ServerSetPawn_Implementation(TSubclassOf<APawn> InPawnClass)
 {
 	MyPawnClass = InPawnClass;
 
@@ -100,12 +100,12 @@ void AMyPlayerController::ServerSetPawn_Implementation(TSubclassOf<APawn> InPawn
 }
 
 // Replication
-void AMyPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+void AMyPlayerControllerBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	DOREPLIFETIME(AMyPlayerController, MyPawnClass);
 }
 
-bool AMyPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
+bool AMyPlayerControllerBase::IsActorWithinTheBoundsOfStreamedInLeve()
 {
 	bool ret = false;
 	//Get the Currently Streamed Levels
@@ -140,12 +140,12 @@ bool AMyPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
 	return ret;
 }
 
-void AMyPlayerController::TauntTimer()
+void AMyPlayerControllerBase::TauntTimer()
 {
 
 }
 
-void AMyPlayerController::ServerTaunt_Implementation()
+void AMyPlayerControllerBase::ServerTaunt_Implementation()
 {
 	// Only allow Taunt its been awhile since we last tried to commit Taunt.
 	// TIMEXXX macros from https://wiki.unrealengine.com/Time_Macros
@@ -161,7 +161,7 @@ void AMyPlayerController::ServerTaunt_Implementation()
 	}
 }
 
-void AMyPlayerController::ExampleUsageOne()
+void AMyPlayerControllerBase::ExampleUsageOne()
 {
 	//In player controller class
 
@@ -188,7 +188,7 @@ void AMyPlayerController::ExampleUsageOne()
 	}
 }
 
-void AMyPlayerController::ExampleUsageTwo()
+void AMyPlayerControllerBase::ExampleUsageTwo()
 {
 	//In player controller class
 
@@ -211,7 +211,7 @@ void AMyPlayerController::ExampleUsageTwo()
 	}
 }
 
-void AMyPlayerController::ExampleUsageThree()
+void AMyPlayerControllerBase::ExampleUsageThree()
 {
 	//The trace data is stored here
 	FHitResult HitData(ForceInit);
@@ -248,7 +248,7 @@ void AMyPlayerController::ExampleUsageThree()
 	}
 }
 
-void AMyPlayerController::ExampleUsageFour()
+void AMyPlayerControllerBase::ExampleUsageFour()
 {
 	//In player controller class
 
@@ -279,7 +279,7 @@ void AMyPlayerController::ExampleUsageFour()
 	}
 }
 
-void AMyPlayerController::BeginPlay_UMGWidgets()
+void AMyPlayerControllerBase::BeginPlay_UMGWidgets()
 {
 	// https://wiki.unrealengine.com/UMG,_Referencing_UMG_Widgets_in_Code
 	if (wMainMenu) // Check if the Asset is assigned in the blueprint.
@@ -306,7 +306,7 @@ void AMyPlayerController::BeginPlay_UMGWidgets()
 
 //timer to check when threads are done
 //Please note timers must be in the game thread / main / normal thread
-void AMyPlayerController::VictoryCheckAllThreadsDone()
+void AMyPlayerControllerBase::VictoryCheckAllThreadsDone()
 {
 	if (VictoryMultiThreadTest::TasksAreComplete())
 	{
@@ -326,7 +326,7 @@ void AMyPlayerController::VictoryCheckAllThreadsDone()
 }
 
 //Starting the Tasks / Threads
-void AMyPlayerController::StartThreadTest()
+void AMyPlayerControllerBase::StartThreadTest()
 {
 	VictoryMultiThreadTest::ThePC = this;
 	VictoryMultiThreadTest::FindPrimes(50000); //first 50,000 prime numbers

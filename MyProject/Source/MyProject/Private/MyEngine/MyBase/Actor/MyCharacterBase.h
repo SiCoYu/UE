@@ -1,17 +1,17 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "MyCharacter.generated.h"
+#include "MyCharacterBase.generated.h"
 
 /**
  AMyCharacter 这个必须保存，基本所有全局对象都是根据 AMyCharacter 从 UGameplayStatics 中获取的
  */
 
-class UMyAnimInstance;
+class UMyAnimInstanceBase;
 
 //UCLASS(config=Game, Abstract)
 UCLASS(config=Game)
-class AMyCharacter : public ACharacter
+class AMyCharacterBase : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -23,7 +23,7 @@ class AMyCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 public:
-	AMyCharacter(const FObjectInitializer& ObjectInitializer);
+	AMyCharacterBase(const FObjectInitializer& ObjectInitializer);
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -78,5 +78,5 @@ public:
 public:
 	bool IsAlive();
 
-	const UMyAnimInstance* const GetAnimInstance();
+	virtual const UMyAnimInstanceBase* const GetAnimInstance();
 };

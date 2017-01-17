@@ -1,9 +1,10 @@
 #pragma once
 
-#include "MyPlayerCameraManager.generated.h"
+#include "MyPlayerCameraManagerBase"
+#include "MyFlyPlayerCameraManager.generated.h"
 
 UCLASS()
-class AMyPlayerCameraManager : public APlayerCameraManager
+class AMyFlyPlayerCameraManager : public AMyPlayerCameraManagerBase
 {
 	GENERATED_UCLASS_BODY()
 

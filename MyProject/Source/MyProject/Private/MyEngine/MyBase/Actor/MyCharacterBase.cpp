@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "MyCharacter.h"
+#include "MyCharacterBase.h"
 #include "Common.h"
 #include "UIFormId.h"
 #include "UITestCanvas.h"
@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////////////
 // AMyCharacter
 
-AMyCharacter::AMyCharacter(const FObjectInitializer& ObjectInitializer)
+AMyCharacterBase::AMyCharacterBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// Set size for collision capsule
@@ -48,7 +48,7 @@ AMyCharacter::AMyCharacter(const FObjectInitializer& ObjectInitializer)
 
 //////////////////////////////////////////////////////////////////////////
 // Input
-void AMyCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
+void AMyCharacterBase::SetupPlayerInputComponent(class UInputComponent* InputComponentParam)
 {
 	// Set up gameplay key bindings
 	check(InputComponentParam);
@@ -71,7 +71,7 @@ void AMyCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompone
 	InputComponentParam->BindTouch(IE_Released, this, &AMyCharacter::TouchStopped);
 }
 
-void AMyCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
+void AMyCharacterBase::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {
 	// jump, but only on the first touch
 	if (FingerIndex == ETouchIndex::Touch1)
@@ -80,7 +80,7 @@ void AMyCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 	}
 }
 
-void AMyCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
+void AMyCharacterBase::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 {
 	if (FingerIndex == ETouchIndex::Touch1)
 	{
@@ -88,19 +88,19 @@ void AMyCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 	}
 }
 
-void AMyCharacter::TurnAtRate(float Rate)
+void AMyCharacterBase::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
-void AMyCharacter::LookUpAtRate(float Rate)
+void AMyCharacterBase::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
-void AMyCharacter::MoveForward(float Value)
+void AMyCharacterBase::MoveForward(float Value)
 {
 	if ((Controller != NULL) && (Value != 0.0f))
 	{
@@ -114,7 +114,7 @@ void AMyCharacter::MoveForward(float Value)
 	}
 }
 
-void AMyCharacter::MoveRight(float Value)
+void AMyCharacterBase::MoveRight(float Value)
 {
 	if ( (Controller != NULL) && (Value != 0.0f) )
 	{
@@ -129,7 +129,7 @@ void AMyCharacter::MoveRight(float Value)
 	}
 }
 
-void AMyCharacter::BeginPlay()
+void AMyCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -145,14 +145,14 @@ void AMyCharacter::BeginPlay()
 	GCtx->beginPlay();
 }
 
-void AMyCharacter::TestUI()
+void AMyCharacterBase::TestUI()
 {
 	// Test ╪сть UIPack
 	//GUiMgr->loadForm<UUIPack>(eUIPack);
 	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 }
 
-void AMyCharacter::Tick(float DeltaTime)
+void AMyCharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
@@ -164,18 +164,18 @@ void AMyCharacter::Tick(float DeltaTime)
 	}
 }
 
-bool AMyCharacter::IsAlive()
+bool AMyCharacterBase::IsAlive()
 {
 	return true;
 }
 
-const UMyAnimInstance* const AMyCharacter::GetAnimInstance()
+const UMyAnimInstanceBase* const AMyCharacterBase::GetAnimInstance()
 {
-	UMyAnimInstance* AnimInstance = nullptr;
+	UMyAnimInstanceBase* AnimInstance = nullptr;
 
 	if (nullptr != GetMesh())
 	{
-		AnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+		AnimInstance = Cast<UMyAnimInstanceBase>(GetMesh()->GetAnimInstance());
 	}
 
 	return AnimInstance;
