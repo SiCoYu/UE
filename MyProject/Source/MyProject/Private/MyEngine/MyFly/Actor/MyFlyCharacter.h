@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameFramework/Character.h"
+#include "MyCharacterBase.h"
 #include "MyFlyCharacter.generated.h"
 
 /**
@@ -12,7 +12,7 @@ class UMyFlyAnimInstance;
 
 //UCLASS(config=Game, Abstract)
 UCLASS(config=Game)
-class AMyCharacter : public ACharacter
+class AMyFlyCharacter : public AMyCharacterBase
 {
 	GENERATED_BODY()
 
@@ -24,7 +24,7 @@ class AMyCharacter : public ACharacter
 	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	//class UCameraComponent* FollowCamera;
 public:
-	AMyCharacter(const FObjectInitializer& ObjectInitializer);
+	AMyFlyCharacter(const FObjectInitializer& ObjectInitializer);
 
 //	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 //	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)

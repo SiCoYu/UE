@@ -8,6 +8,5 @@ class UMyTPCharacterMovementComponent : public UMyCharacterMovementComponentBase
 {
 	GENERATED_UCLASS_BODY()
 
-	virtual float GetMaxSpeed() const override;
+	//virtual float GetMaxSpeed() const override;
 };
-

@@ -24,7 +24,7 @@ class UUserWidget;
 class SWindow;
 struct FWorldContext;
 class UWorld;
-class AMyPlayerController;
+class AMyPlayerControllerBase;
 class UMyLocalPlayerBase;
 class UMyGameViewportClientBase;
 
@@ -64,7 +64,7 @@ public:
 	static UWorld* getWorldByEngine();
 
 	static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
-	static AMyPlayerController* GetPlayerController();
+	static AMyPlayerControllerBase* GetPlayerController();
 	static FWorldContext* GetWorldContextByGameInstance();
 	static UWorld* GetWorldByWorldContext();
 	static UMyGameInstanceBase* GetGameInstanceByWorld();

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "MyPersistentUser.h"
+//#include "MySaveGameBase.h"
 #include "Engine/LocalPlayer.h"
 #include "MyLocalPlayerBase.generated.h"
 

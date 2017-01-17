@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "MyTPGameMode.h"
-#include "MyCharacter.h"
+#include "MyTpCharacter.h"
 #include "GameFramework/HUD.h"
 #include "MyHUD.h"
 #include "Common.h"

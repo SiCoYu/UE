@@ -37,7 +37,7 @@
 //	// code to execute on game thread here
 //})
 
-class AMyPlayerController;
+class AMyPlayerControllerBase;
 
 //~~~~~ Multi Threading ~~~
 class FMultiThreadWorker : public FRunnable
@@ -52,7 +52,7 @@ class FMultiThreadWorker : public FRunnable
 	TArray<uint32>* PrimeNumbers;
 
 	/** The PC */
-	AMyPlayerController* ThePC;
+	AMyPlayerControllerBase* ThePC;
 
 	/** Stop this thread? Uses Thread Safe Counter */
 	FThreadSafeCounter StopTaskCounter;
@@ -75,7 +75,7 @@ public:
 	//~~~ Thread Core Functions ~~~
 
 	//Constructor / Destructor
-	FMultiThreadWorker(TArray<uint32>& TheArray, const int32 IN_PrimesToFindPerTick, AMyPlayerController* IN_PC);
+	FMultiThreadWorker(TArray<uint32>& TheArray, const int32 IN_PrimesToFindPerTick, AMyPlayerControllerBase* IN_PC);
 	virtual ~FMultiThreadWorker();
 
 	// Begin FRunnable interface.
@@ -86,13 +86,7 @@ public:
 
 	/** Makes sure this thread has stopped properly */
 	void EnsureCompletion();
-
-
-
 	//~~~ Starting and Stopping Thread ~~~
-
-
-
 	/*
 	Start the thread and the worker from static (easy access)!
 	This code ensures only 1 Prime Number thread will be able to run at a time.
@@ -104,5 +98,4 @@ public:
 	static void Shutdown();
 
 	static bool IsThreadFinished();
-
 };

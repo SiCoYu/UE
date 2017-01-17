@@ -23,7 +23,7 @@ class ATPMyCharacter : public AMyCharacterBase
 	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	//class UCameraComponent* FollowCamera;
 public:
-	ATPMyCharacter(const FObjectInitializer& ObjectInitializer);
+	AMyTPCharacter(const FObjectInitializer& ObjectInitializer);
 
 //	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 //	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)

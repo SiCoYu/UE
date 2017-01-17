@@ -13,7 +13,7 @@
 #include "GenericPlatform/GenericPlatformHttp.h"
 #include "Engine/Engine.h"	// FWorldContext
 #include "MyLocalPlayerBase.h"	// UMyLocalPlayer
-#include "MyPlayerController.h"	// AMyPlayerController
+#include "MyPlayerControllerBase.h"	// AMyPlayerController
 #include "UObject/UObjectGlobals.h"	// NewObject
 #include "MyGameViewportClientBase.h"
 
@@ -88,9 +88,9 @@ ACharacter* EngineApi::getFirstCharacter()
 	return Character;
 }
 
-AMyPlayerController* EngineApi::GetPlayerController()
+AMyPlayerControllerBase* EngineApi::GetPlayerController()
 {
-	AMyPlayerController* TargetPC = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GEngineData->getMainActor(), 0));
+	AMyPlayerControllerBase* TargetPC = Cast<AMyPlayerControllerBase>(UGameplayStatics::GetPlayerController(GEngineData->getMainActor(), 0));
 	return TargetPC;
 }
 
@@ -117,7 +117,7 @@ UMyGameInstanceBase* EngineApi::GetGameInstanceByWorld()
 
 UMyLocalPlayerBase* EngineApi::GetLocalPlayerByPlayerController()
 {
-	AMyPlayerController* Controller = EngineApi::GetPlayerController();
+	AMyPlayerControllerBase* Controller = EngineApi::GetPlayerController();
 	UMyLocalPlayerBase* Player = Cast<UMyLocalPlayerBase>(Controller->Player);
 	return Player;
 }

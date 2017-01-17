@@ -11,10 +11,9 @@ UMyTPCharacterMovementComponent::UMyTPCharacterMovementComponent(const FObjectIn
 	//this->bOrientRotationToMovement = true;
 }
 
-
-float UMyCharacterMovement::GetMaxSpeed() const
-{
-	float MaxSpeed = Super::GetMaxSpeed();
-
-	return MaxSpeed;
-}
+//float UMyTPCharacterMovementComponent::GetMaxSpeed() const
+//{
+//	float MaxSpeed = Super::GetMaxSpeed();
+//
+//	return MaxSpeed;
+//}

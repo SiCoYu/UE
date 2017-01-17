@@ -4,6 +4,7 @@
 #include "UIFormId.h"
 #include "UITestCanvas.h"
 #include "MyAnimInstanceBase.h"
+#include "MyFlyAnimInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMyCharacter
@@ -175,7 +176,7 @@ const UMyAnimInstanceBase* const AMyCharacter::GetAnimInstance()
 
 	if (nullptr != GetMesh())
 	{
-		AnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+		AnimInstance = Cast<UMyAnimInstanceBase>(GetMesh()->GetAnimInstance());
 	}
 
 	return AnimInstance;

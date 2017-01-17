@@ -11,10 +11,9 @@ UMyFlyCharacterMovementComponent::UMyFlyCharacterMovementComponent(const FObject
 	this->bOrientRotationToMovement = true;
 }
 
-
-float UMyFlyCharacterMovementComponent::GetMaxSpeed() const
-{
-	float MaxSpeed = Super::GetMaxSpeed();
-
-	return MaxSpeed;
-}
+//float UMyFlyCharacterMovementComponent::GetMaxSpeed() const
+//{
+//	float MaxSpeed = Super::GetMaxSpeed();
+//
+//	return MaxSpeed;
+//}

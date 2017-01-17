@@ -10,4 +10,3 @@ class UMyCharacterMovementComponentBase : public UCharacterMovementComponent
 
 	virtual float GetMaxSpeed() const override;
 };
-

@@ -14,7 +14,7 @@ class UMyTPSaveGame : public UMySaveGameBase
 
 public:
 	/** Loads user persistence data if it exists, creates an empty record otherwise. */
-	static UMyPersistentUser* LoadPersistentUser(FString SlotName, const int32 UserIndex);
+	static UMyTPSaveGame* LoadPersistentUser(FString SlotName, const int32 UserIndex);
 
 private:
 	/** The string identifier used to save/load this persistent user. */
