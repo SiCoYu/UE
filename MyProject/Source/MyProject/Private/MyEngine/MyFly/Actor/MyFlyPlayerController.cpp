@@ -5,7 +5,7 @@
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
 #include "Blueprint/UserWidget.h"	// UUserWidget
-#include "MyPlayerCameraManager.h"
+#include "MyFlyPlayerCameraManager.h"
 #include "Common.h"
 #include "UITestCanvas.h"	// UUITestCanvas
 

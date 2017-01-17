@@ -4,6 +4,7 @@
 #include "UIFormId.h"
 #include "UITestCanvas.h"
 #include "MyAnimInstanceBase.h"
+#include "MyTPAnimInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMyCharacter
@@ -169,13 +170,13 @@ AMyTPCharacter::AMyTPCharacter(const FObjectInitializer& ObjectInitializer)
 //	return true;
 //}
 
-const UMyAnimInstanceBase* const AMyCharacter::GetAnimInstance()
+const UMyAnimInstanceBase* const AMyTPCharacter::GetAnimInstance()
 {
-	UMyAnimInstance* AnimInstance = nullptr;
+	UMyTPAnimInstance* AnimInstance = nullptr;
 
 	if (nullptr != GetMesh())
 	{
-		AnimInstance = Cast<UMyAnimInstanceBase>(GetMesh()->GetAnimInstance());
+		AnimInstance = Cast<UMyTPAnimInstance>(GetMesh()->GetAnimInstance());
 	}
 
 	return AnimInstance;

@@ -5,7 +5,7 @@
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
 #include "Blueprint/UserWidget.h"	// UUserWidget
-#include "MyPlayerCameraManager.h"
+#include "MyTPPlayerCameraManager.h"
 #include "Common.h"
 #include "UITestCanvas.h"	// UUITestCanvas
 
@@ -17,9 +17,9 @@ AMyTPPlayerController::AMyTPPlayerController(const FObjectInitializer& ObjectIni
 	//PawnToUseB = NULL;
 
 	/* Make sure the PawnClass is Replicated */
-	bReplicates = true;
+	this->bReplicates = true;
 
-	PlayerCameraManagerClass = AMyPlayerCameraManager::StaticClass();
+	this->PlayerCameraManagerClass = AMyTPPlayerCameraManager::StaticClass();
 }
 
 //void AMyPlayerController::BeginPlay()

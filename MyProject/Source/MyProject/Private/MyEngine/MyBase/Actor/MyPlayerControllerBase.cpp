@@ -102,7 +102,7 @@ void AMyPlayerControllerBase::ServerSetPawn_Implementation(TSubclassOf<APawn> In
 // Replication
 void AMyPlayerControllerBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
-	DOREPLIFETIME(AMyPlayerController, MyPawnClass);
+	DOREPLIFETIME(AMyPlayerControllerBase, MyPawnClass);
 }
 
 bool AMyPlayerControllerBase::IsActorWithinTheBoundsOfStreamedInLeve()
@@ -156,7 +156,7 @@ void AMyPlayerControllerBase::ServerTaunt_Implementation()
 		if (!ISTIMERACTIVE(TimerHandle_Taunt))
 		{
 			// Delay the Taunt attempt a random amount to prevent trolling.
-			SETTIMERH(TimerHandle_Taunt, AMyPlayerController::TauntTimer, FMath::FRandRange(1.5f, 3.0f), false);
+			SETTIMERH(TimerHandle_Taunt, AMyPlayerControllerBase::TauntTimer, FMath::FRandRange(1.5f, 3.0f), false);
 		}
 	}
 }
@@ -333,6 +333,6 @@ void AMyPlayerControllerBase::StartThreadTest()
 	//Start a timer to check when all the threads are done!
 	//GetWorldTimerManager().SetTimer(this,
 	//	&AMyPlayerController::VictoryCheckAllThreadsDone, 1, true);
-	FTimerDelegate TimerDelegate = FTimerDelegate::CreateUObject(this, &AMyPlayerController::VictoryCheckAllThreadsDone);
+	FTimerDelegate TimerDelegate = FTimerDelegate::CreateUObject(this, &AMyPlayerControllerBase::VictoryCheckAllThreadsDone);
 	EngineApi::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 1, true);
 }

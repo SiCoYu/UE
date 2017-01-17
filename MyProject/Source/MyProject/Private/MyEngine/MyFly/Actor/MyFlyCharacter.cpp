@@ -170,13 +170,13 @@ AMyFlyCharacter::AMyFlyCharacter(const FObjectInitializer& ObjectInitializer)
 //	return true;
 //}
 
-const UMyAnimInstanceBase* const AMyCharacter::GetAnimInstance()
+const UMyAnimInstanceBase* const AMyFlyCharacter::GetAnimInstance()
 {
-	UMyAnimInstanceBase* AnimInstance = nullptr;
+	UMyFlyAnimInstance* AnimInstance = nullptr;
 
 	if (nullptr != GetMesh())
 	{
-		AnimInstance = Cast<UMyAnimInstanceBase>(GetMesh()->GetAnimInstance());
+		AnimInstance = Cast<UMyFlyAnimInstance>(GetMesh()->GetAnimInstance());
 	}
 
 	return AnimInstance;

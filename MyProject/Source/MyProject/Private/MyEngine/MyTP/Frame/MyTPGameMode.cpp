@@ -40,7 +40,7 @@ AMyTPGameMode::AMyTPGameMode(const FObjectInitializer& ObjectInitializer)
 	//}
 
 	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Players_in_Multiplayer
-	this->PlayerControllerClass = AMyPlayerController::StaticClass();
+	this->PlayerControllerClass = AMyTPPlayerController::StaticClass();
 
 	this->GameStateClass = AMyGameState::StaticClass();
 
@@ -63,7 +63,7 @@ AMyTPGameMode::AMyTPGameMode(const FObjectInitializer& ObjectInitializer)
 
 UClass* AMyTPGameMode::GetDefaultPawnClassForController(AController* InController)
 {
-	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(InController);
+	AMyTPPlayerController* PlayerController = Cast<AMyTPPlayerController>(InController);
 
 	UClass* PawnClass = PawnTypes.Find(PlayerController->CurrentPawnData.Type);
 
@@ -95,7 +95,7 @@ void AMyTPGameMode::RestartPlayer(class AController* NewPlayer)
 	FRotator StartRotation = FRotator::ZeroRotator;
 	for (FConstPawnIterator It = GetWorld()->GetPawnIterator(); It; It++)
 	{
-		AMyCharacter* MyCharacter = Cast<AMyCharacter>(*It);
+		AMyTPCharacter* MyCharacter = Cast<AMyTPCharacter>(*It);
 		if (MyCharacter && MyCharacter->IsAlive())
 		{
 			/* Get the origin of the first player we can find */

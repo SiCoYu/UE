@@ -85,7 +85,7 @@ void FMultiThreadWorker::Stop()
 	StopTaskCounter.Increment();
 }
 
-FMultiThreadWorker* FMultiThreadWorker::JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, MyPlayerControllerBase* IN_PC)
+FMultiThreadWorker* FMultiThreadWorker::JoyInit(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyPlayerControllerBase* IN_PC)
 {
 	//Create new instance of thread if it does not exist
 	//		and the platform supports multi threading!

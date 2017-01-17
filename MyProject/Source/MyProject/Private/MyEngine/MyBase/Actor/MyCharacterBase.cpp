@@ -55,20 +55,20 @@ void AMyCharacterBase::SetupPlayerInputComponent(class UInputComponent* InputCom
 	InputComponentParam->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponentParam->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	InputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
-	InputComponentParam->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
+	InputComponent->BindAxis("MoveForward", this, &AMyCharacterBase::MoveForward);
+	InputComponentParam->BindAxis("MoveRight", this, &AMyCharacterBase::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
 	InputComponentParam->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	InputComponentParam->BindAxis("TurnRate", this, &AMyCharacter::TurnAtRate);
+	InputComponentParam->BindAxis("TurnRate", this, &AMyCharacterBase::TurnAtRate);
 	InputComponentParam->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	InputComponentParam->BindAxis("LookUpRate", this, &AMyCharacter::LookUpAtRate);
+	InputComponentParam->BindAxis("LookUpRate", this, &AMyCharacterBase::LookUpAtRate);
 
 	// handle touch devices
-	InputComponentParam->BindTouch(IE_Pressed, this, &AMyCharacter::TouchStarted);
-	InputComponentParam->BindTouch(IE_Released, this, &AMyCharacter::TouchStopped);
+	InputComponentParam->BindTouch(IE_Pressed, this, &AMyCharacterBase::TouchStarted);
+	InputComponentParam->BindTouch(IE_Released, this, &AMyCharacterBase::TouchStopped);
 }
 
 void AMyCharacterBase::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
@@ -156,7 +156,7 @@ void AMyCharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	for (TObjectIterator<UMyAnimInstance> Anim; Anim; ++Anim)
+	for (TObjectIterator<UMyAnimInstanceBase> Anim; Anim; ++Anim)
 	{
 		const FRotator Rotation = GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Pitch, 0);

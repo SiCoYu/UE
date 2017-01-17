@@ -11,13 +11,13 @@
 
 #include "Async/TaskGraphInterfaces.h"		// FGraphEventArray
 #include "Containers/Array.h"				// TArray
-#include "MyPlayerController.h"
+#include "MyPlayerControllerBase.h"
 
 //Multi thread Test, finding prime number
 namespace VictoryMultiThreadTest
 {
 	//Multi-threaded link to UObjects, do not create,modify,destroy UObjects / AActors via this link!
-	AMyPlayerController* ThePC;
+	AMyPlayerControllerBase* ThePC;
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~
