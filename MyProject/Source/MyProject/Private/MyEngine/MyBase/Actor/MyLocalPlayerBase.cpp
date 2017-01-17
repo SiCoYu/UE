@@ -1,6 +1,7 @@
 #include "MyProject.h"
 #include "MyLocalPlayerBase.h"
 //#include "MyGameInstanceBase.h"
+#include "MySaveGameBase.h"
 
 UMyLocalPlayerBase::UMyLocalPlayerBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -12,7 +13,7 @@ void UMyLocalPlayerBase::SetControllerId(int32 NewControllerId)
 	Super::SetControllerId(NewControllerId);
 }
 
-UMyPersistentUser* UMyLocalPlayerBase::GetPersistentUser() const
+UMySaveGameBase* UMyLocalPlayerBase::GetPersistentUser() const
 {
 	// if persistent data isn't loaded yet, load it
 	if (PersistentUser == nullptr)

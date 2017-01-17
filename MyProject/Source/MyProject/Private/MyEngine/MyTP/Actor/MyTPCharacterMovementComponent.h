@@ -4,7 +4,7 @@
 #include "MyTPCharacterMovementComponent.generated.h"
 
 UCLASS()
-class UMyTPCharacterMovementComponent : public MyCharacterMovementComponentBase
+class UMyTPCharacterMovementComponent : public UMyCharacterMovementComponentBase
 {
 	GENERATED_UCLASS_BODY()
 

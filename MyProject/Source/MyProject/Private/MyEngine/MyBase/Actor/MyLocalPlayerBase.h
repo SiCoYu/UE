@@ -6,6 +6,8 @@
 #include "Engine/LocalPlayer.h"
 #include "MyLocalPlayerBase.generated.h"
 
+class UMySaveGameBase;
+
 /**
  @brief 
  在这里设置
@@ -34,5 +36,5 @@ public:
 private:
 	/** Persistent user data stored between sessions (i.e. the user's savegame) */
 	UPROPERTY()
-	class UMyPersistentUser* PersistentUser;
+	class UMySaveGameBase* PersistentUser;
 };
