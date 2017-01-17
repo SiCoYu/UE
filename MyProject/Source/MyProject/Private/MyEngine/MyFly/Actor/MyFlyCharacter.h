@@ -1,13 +1,14 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "MyCharacter.generated.h"
+#include "MyFlyCharacter.generated.h"
 
 /**
  AMyCharacter 这个必须保存，基本所有全局对象都是根据 AMyCharacter 从 UGameplayStatics 中获取的
  */
 
-class UMyAnimInstance;
+class UMyAnimInstanceBase;
+class UMyFlyAnimInstance;
 
 //UCLASS(config=Game, Abstract)
 UCLASS(config=Game)
@@ -78,5 +79,5 @@ public:
 //public:
 //	bool IsAlive();
 
-	virtual const UMyAnimInstance* const GetAnimInstance() override;
+	virtual const UMyAnimInstanceBase* const GetAnimInstance() override;
 };

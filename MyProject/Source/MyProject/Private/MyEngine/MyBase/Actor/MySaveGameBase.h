@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameFramework/SaveGame.h"
-#include "MyPersistentUserBase.generated.h"
+#include "MySaveGameBase.generated.h"
 
 /**
  * @url https://docs.unrealengine.com/latest/INT/Gameplay/SaveGame/Code/index.html

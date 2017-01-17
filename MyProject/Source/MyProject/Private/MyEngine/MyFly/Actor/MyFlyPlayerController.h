@@ -5,7 +5,7 @@
 #include "MyPawn.h"
 #include "Engine/EngineTypes.h"	// FTimerHandle
 #include "MyPlayerControllerBase.h"
-#include "MyPlayerController.generated.h"
+#include "MyFlyPlayerController.generated.h"
 
 /**
  APlayerController BeginPlayer 就说明可以运行了
