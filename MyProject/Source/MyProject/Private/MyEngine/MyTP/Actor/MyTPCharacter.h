@@ -5,6 +5,8 @@
 
 /**
  AMyCharacter 这个必须保存，基本所有全局对象都是根据 AMyCharacter 从 UGameplayStatics 中获取的
+ @brief 如果在 Blueprint 中已经使用 AMyCharacter 作为 Parent 类，这时候重新将 AMyCharacter 类命名为 AMyTPCharacter ，需要在 MyProject\Config\DefaultEngine.ini 文件中添加
+ +ActiveClassRedirects=(OldClassName="MyCharacter",NewClassName="MyTPCharacter")
  */
 
 class UMyAnimInstanceBase;
