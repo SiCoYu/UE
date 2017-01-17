@@ -15,6 +15,11 @@
  (3)
  UWorld 创建 Level
  UWorld 创建 ULocalPlayer 和 APlayerController
+
+ 在这里设置
+ DefaultEngine.ini
+ [/Script/EngineSettings.GameMapsSettings]
+ GameEngine=/Script/MyProject.MyTPGameEngine
  */
 
 UCLASS()

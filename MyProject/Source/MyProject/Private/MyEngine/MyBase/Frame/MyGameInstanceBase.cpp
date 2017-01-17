@@ -23,15 +23,16 @@ void UMyGameInstanceBase::Init()
 	Super::Init();
 
 	// UGameEngine 创建后，就创建 UGameInstance，这个是除 UGameEngine 外最早初始化的地方
-	mAppFrame = new AppFrame();
-	mAppFrame->initApp();
+	this->mAppFrame = new AppFrame();
+	this->mAppFrame->initApp();
 }
 
 void UMyGameInstanceBase::Shutdown()
 {
 	Super::Shutdown();
 
-	mAppFrame->quitApp();
+	this->mAppFrame->quitApp();
+	this->mAppFrame = nullptr;
 }
 
 void UMyGameInstanceBase::FinishDestroy()

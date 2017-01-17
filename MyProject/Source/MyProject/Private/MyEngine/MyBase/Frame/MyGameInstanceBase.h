@@ -11,7 +11,7 @@ class AppFrame;
  https://wiki.unrealengine.com/Game_Instance,_Custom_Game_Instance_For_Inter-Level_Persistent_Data_Storage#Overview
  DefaultEngine.ini
  [/Script/EngineSettings.GameMapsSettings]
- GameInstanceClass=/Script/Solus.SolusGameInstance
+ GameInstanceClass=/Script/MyProject.MyTPGameInstance
  */
 
 UCLASS(config=Game)

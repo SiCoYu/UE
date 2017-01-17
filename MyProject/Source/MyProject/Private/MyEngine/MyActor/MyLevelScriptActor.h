@@ -6,6 +6,10 @@
 
 /**
  * @brief https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
+ 在这里设置
+ DefaultEngine.ini
+ [/Script/EngineSettings.GameMapsSettings]
+ GameSingletonClassName=/Game/MyAsset/Persist/MyTestDataStorage.MyTestDataStorage_C    ; 一定要添加 "_C"
  */
 
 UCLASS()

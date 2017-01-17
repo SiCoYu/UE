@@ -7,8 +7,16 @@
 //#include "Input/Events.h"
 #include "MyGameViewportClientBase.generated.h"
 
-// https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Classes/Specifiers/Within/index.html
-// https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Classes/Specifiers/Config/index.html
+/**
+ * @url https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Classes/Specifiers/Within/index.html
+ * @url https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Reference/Classes/Specifiers/Config/index.html
+ * @brief
+ 在这里设置
+ DefaultEngine.ini
+ [/Script/EngineSettings.GameMapsSettings]
+ GameViewportClientClassName=/Script/MyProject.MyTPGameViewportClient
+ */
+
 UCLASS(Within=Engine, transient, config=Engine)
 class UMyGameViewportClientBase : public UGameViewportClient
 {

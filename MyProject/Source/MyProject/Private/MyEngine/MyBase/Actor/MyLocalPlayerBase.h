@@ -6,6 +6,14 @@
 #include "Engine/LocalPlayer.h"
 #include "MyLocalPlayerBase.generated.h"
 
+/**
+ @brief 
+ 在这里设置
+ DefaultEngine.ini
+ [/Script/EngineSettings.GameMapsSettings]
+ LocalPlayerClassName=/Script/MyProject.MyTPLocalPlayer
+ */
+
 //UCLASS(config=Engine, transient)
 UCLASS()
 class UMyLocalPlayerBase : public ULocalPlayer
