@@ -22,3 +22,36 @@ The original source for this tutorial is here.
 
 https://crussel.net/2016/06/05/neatly-replacing-navmesh-with-a-in-ue4/
 
+===================
+虚幻4 捏脸和换装系统实现
+http://www.chinaar.com/UE4/1817.html
+
+Demo下载 链接：http://pan.baidu.com/s/1eQRwhGI 密码：5ji2
+File:CharacterCreator.rar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
