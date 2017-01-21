@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "MyPawnBase.h"
+#include "Common.h"
 
 AMyPawnBase::AMyPawnBase()
 {

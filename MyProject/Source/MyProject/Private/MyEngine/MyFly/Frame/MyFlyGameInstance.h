@@ -1,6 +1,7 @@
 #pragma once
 
-#include "MyProject.h"
+#include "GameFramework/OnlineSession.h"	// UOnlineSession
+#include "MyGameInstanceBase.h"
 #include "MyFlyGameInstance.generated.h"
 
 /**
@@ -9,11 +10,11 @@
  https://wiki.unrealengine.com/Game_Instance,_Custom_Game_Instance_For_Inter-Level_Persistent_Data_Storage#Overview
  DefaultEngine.ini
  [/Script/EngineSettings.GameMapsSettings]
- GameInstanceClass=/Script/Solus.SolusGameInstance
+ GameInstanceClass=/Script/MyProject.MyFlyGameInstance
  */
 
 UCLASS(config=Game)
-class UMyFlyGameInstance : public UGameInstance
+class UMyFlyGameInstance : public UMyGameInstanceBase
 {
 public:
 	GENERATED_UCLASS_BODY()

@@ -582,7 +582,7 @@ bool EngineApi::ServerTravel(const FString& InURL, bool bAbsolute, bool bShouldS
 
 UMyLocalPlayerBase* EngineApi::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId)
 {
-	return GEngine->GetLocalPlayerFromControllerId(InViewport, ControllerId);
+	return Cast<UMyLocalPlayerBase>(GEngine->GetLocalPlayerFromControllerId(InViewport, ControllerId));
 }
 
 int EngineApi::GetNumLocalPlayers()
@@ -590,7 +590,8 @@ int EngineApi::GetNumLocalPlayers()
 	return EngineApi::GetGameInstance()->GetNumLocalPlayers();
 }
 
-void EngineApi::SetGameDefaultMap(const FString& NewMap)
+void EngineApi::SetGameDefaultMap(const std::string& NewMap)
 {
-	UGameMapsSettings::SetGameDefaultMap(const FString& NewMap);
+	FString param = UtilStr::ConvStdStr2FString(const_cast<std::string&>(NewMap));
+	UGameMapsSettings::SetGameDefaultMap(param);
 }

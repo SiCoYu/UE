@@ -177,7 +177,8 @@ public class MyProject : ModuleRules
             new string[] { 
                 "Core", 
                 "CoreUObject", 
-                "Engine", 
+                "Engine",
+                "EngineSettings",   // UGameMapsSettings
                 "OnlineSubsystem",
 				"OnlineSubsystemUtils",
                 "Sockets",

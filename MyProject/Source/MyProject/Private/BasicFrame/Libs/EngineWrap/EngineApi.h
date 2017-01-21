@@ -17,6 +17,7 @@
 #include "Templates/SubclassOf.h"	// TSubclassOf
 #include "UObject/UObjectGlobals.h"	// DuplicateObject
 #include "AudioDevice.h"		// FAudioDevice
+#include <string>	// string
 
 class UMyGameEngineBase;
 class UMyGameInstanceBase;
@@ -333,7 +334,7 @@ public:
 
 	static int GetNumLocalPlayers();
 
-	static void SetGameDefaultMap(const FString& NewMap);
+	static void SetGameDefaultMap(const std::string& NewMap);
 };
 
 #include "EngineApi.inl"
