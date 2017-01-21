@@ -10,4 +10,5 @@ class AMyPawnBase : public APawn
 
 public:
 	AMyPawnBase();
+	virtual void BeginPlay() override;
 };

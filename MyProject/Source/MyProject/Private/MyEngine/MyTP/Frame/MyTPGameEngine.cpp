@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "MyTPPhysicsCollisionHandler.h"
 #include "MyTPAvoidanceManager.h"
-#include "MyTpLocalPlayer.h"
+#include "MyTPLocalPlayer.h"
 
 UMyTPGameEngine::UMyTPGameEngine(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -12,7 +12,7 @@ UMyTPGameEngine::UMyTPGameEngine(const FObjectInitializer& ObjectInitializer)
 	this->PhysicsCollisionHandlerClass = UMyTPPhysicsCollisionHandler::StaticClass();
 	this->AvoidanceManagerClass = UMyTPAvoidanceManager::StaticClass();
 	// 等价于 MyProject\Config\DefaultEngine.ini 配置文件中的 LocalPlayerClassName 设置
-	this->LocalPlayerClass = UMyTpLocalPlayer::StaticClass();
+	this->LocalPlayerClass = UMyTPLocalPlayer::StaticClass();
 }
 
 void UMyTPGameEngine::Init(IEngineLoop* InEngineLoop)

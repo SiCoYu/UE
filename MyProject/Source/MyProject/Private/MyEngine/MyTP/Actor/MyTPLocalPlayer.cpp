@@ -1,18 +1,18 @@
 #include "MyProject.h"
-#include "MyTpLocalPlayer.h"
+#include "MyTPLocalPlayer.h"
 //#include "MyGameInstanceBase.h"
 
-UMyTpLocalPlayer::UMyTpLocalPlayer(const FObjectInitializer& ObjectInitializer)
+UMyTPLocalPlayer::UMyTPLocalPlayer(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }
 
-//void UMyLocalPlayer::SetControllerId(int32 NewControllerId)
+//void UMyTPLocalPlayer::SetControllerId(int32 NewControllerId)
 //{
 //	Super::SetControllerId(NewControllerId);
 //}
 //
-//UMyPersistentUser* UMyLocalPlayer::GetPersistentUser() const
+//UMyPersistentUser* UMyTPLocalPlayer::GetPersistentUser() const
 //{
 //	// if persistent data isn't loaded yet, load it
 //	if (PersistentUser == nullptr)
@@ -24,12 +24,12 @@ UMyTpLocalPlayer::UMyTpLocalPlayer(const FObjectInitializer& ObjectInitializer)
 //	return PersistentUser;
 //}
 //
-//void UMyLocalPlayer::LoadPersistentUser()
+//void UMyTPLocalPlayer::LoadPersistentUser()
 //{
 //	FString SaveGameName = GetNickname();
 //}
 //
-//FString UMyLocalPlayer::GetNickname() const
+//FString UMyTPLocalPlayer::GetNickname() const
 //{
 //	FString UserNickName = Super::GetNickname();
 //
