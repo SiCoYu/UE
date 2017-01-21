@@ -60,7 +60,7 @@ void UUITestCanvas::loadCanvasWithNoCanvas()
 	UUserWidget* parentWidget = nullptr;
 	if (nullptr != widgetClass)
 	{
-		parentWidget = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
+		parentWidget = NewObject<UUserWidget>(EngineApi::GetGameInstance(), widgetClass);
 		parentWidget->AddToViewport();
 	}
 
@@ -69,7 +69,7 @@ void UUITestCanvas::loadCanvasWithNoCanvas()
 	widgetClass = StaticLoadClass(UUserWidget::StaticClass(), NULL, TEXT("/Game/UMG/UITestCanvas_NoCanvas.UITestCanvas_NoCanvas_C"));
 	if (nullptr != widgetClass)
 	{
-		childWidget = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
+		childWidget = NewObject<UUserWidget>(EngineApi::GetGameInstance(), widgetClass);
 	}
 
 	if (nullptr != parentWidget && nullptr != childWidget)

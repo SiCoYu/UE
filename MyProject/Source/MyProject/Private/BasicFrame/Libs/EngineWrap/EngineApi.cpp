@@ -19,7 +19,7 @@
 
 DEFINE_LOG_CATEGORY(MyLog);
 
-UMyGameInstanceBase* EngineApi::getGameInstance()
+UMyGameInstanceBase* EngineApi::GetGameInstance()
 {
 	return Cast<UMyGameInstanceBase>(UGameplayStatics::GetGameInstance(GEngineData->getMainActor()));
 }
@@ -96,7 +96,7 @@ AMyPlayerControllerBase* EngineApi::GetPlayerController()
 
 FWorldContext* EngineApi::GetWorldContextByGameInstance()
 {
-	UMyGameInstanceBase* GameInstance = EngineApi::getGameInstance();
+	UMyGameInstanceBase* GameInstance = EngineApi::GetGameInstance();
 	FWorldContext* const PieWorldContext = GameInstance->GetWorldContext();
 	return PieWorldContext;
 }
@@ -503,14 +503,14 @@ FString EngineApi::GetPathName(const UObject* curObj, const UObject* StopOuter/*
 
 UMyGameViewportClientBase* const EngineApi::GetGameViewportClient()
 {
-	UMyGameInstanceBase* GameInstance = EngineApi::getGameInstance();
+	UMyGameInstanceBase* GameInstance = EngineApi::GetGameInstance();
 	UMyGameViewportClientBase* const GameViewport = Cast<UMyGameViewportClientBase>(GameInstance->GetGameViewportClient());
 	return GameViewport;
 }
 
 FViewport* const EngineApi::GetViewport()
 {
-	UMyGameInstanceBase* GameInstance = EngineApi::getGameInstance();
+	UMyGameInstanceBase* GameInstance = EngineApi::GetGameInstance();
 	UMyGameViewportClientBase* const GameViewport = Cast<UMyGameViewportClientBase>(GameInstance->GetGameViewportClient());
 	if (GameViewport != NULL && GameViewport->Viewport != NULL)
 	{
@@ -567,7 +567,7 @@ void EngineApi::LoadStreamLevel(const UObject* WorldContextObject, FName LevelNa
 
 APlayerController* EngineApi::GetPrimaryPlayerController()
 {
-	return EngineApi::getGameInstance()->GetPrimaryPlayerController();
+	return EngineApi::GetGameInstance()->GetPrimaryPlayerController();
 }
 
 void EngineApi::SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType)
@@ -578,4 +578,19 @@ void EngineApi::SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelTy
 bool EngineApi::ServerTravel(const FString& InURL, bool bAbsolute, bool bShouldSkipGameNotify)
 {
 	return EngineApi::GetWorld()->ServerTravel(InURL, bAbsolute, bShouldSkipGameNotify);
+}
+
+UMyLocalPlayerBase* EngineApi::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId)
+{
+	return GEngine->GetLocalPlayerFromControllerId(InViewport, ControllerId);
+}
+
+int EngineApi::GetNumLocalPlayers()
+{
+	return EngineApi::GetGameInstance()->GetNumLocalPlayers();
+}
+
+void EngineApi::SetGameDefaultMap(const FString& NewMap)
+{
+	UGameMapsSettings::SetGameDefaultMap(const FString& NewMap);
 }

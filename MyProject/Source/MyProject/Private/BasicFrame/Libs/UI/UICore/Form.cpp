@@ -21,7 +21,7 @@ void UForm::loadUWidget(const TCHAR* name)
 		// NewObject<UUserWidget>();
 		// 构造一个类的子类，最新的 api 如下就可以了
 		//mGuiWin->mUiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
-		mGuiWin->mUiRoot = NewObject<UUMGWidget>(EngineApi::getGameInstance(), widgetClass);
+		mGuiWin->mUiRoot = NewObject<UUMGWidget>(EngineApi::GetGameInstance(), widgetClass);
 	}
 }
 

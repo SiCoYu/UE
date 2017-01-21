@@ -55,7 +55,7 @@ DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
 class EngineApi
 {
 public:
-	static UMyGameInstanceBase* getGameInstance();
+	static UMyGameInstanceBase* GetGameInstance();
 	static UWorld* GetWorld();
 	static void showCursor();
 	static UMyGameEngineBase* getEngine();
@@ -328,6 +328,12 @@ public:
 	// TickWorldTravel 的时候会执行设置的地图
 	static void SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType);
 	static bool ServerTravel(const FString& InURL, bool bAbsolute = false, bool bShouldSkipGameNotify = false);
+
+	static UMyLocalPlayerBase* EngineApi::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId);
+
+	static int GetNumLocalPlayers();
+
+	static void SetGameDefaultMap(const FString& NewMap);
 };
 
 #include "EngineApi.inl"

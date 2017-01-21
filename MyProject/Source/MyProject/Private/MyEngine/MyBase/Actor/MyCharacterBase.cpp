@@ -180,3 +180,13 @@ const UMyAnimInstanceBase* const AMyCharacterBase::GetAnimInstance()
 
 	return AnimInstance;
 }
+
+void AMyCharacterBase::EnableInput(class APlayerController* PlayerController)
+{
+	Super::EnableInput(PlayerController);
+}
+
+void AMyCharacterBase::DisableInput(class APlayerController* PlayerController)
+{
+	Super::DisableInput(PlayerController);
+}
