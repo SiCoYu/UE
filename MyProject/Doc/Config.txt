@@ -1,0 +1,39 @@
+Config
+
+===============
+UE4 安卓下找不到蓝图资源 
+http://blog.csdn.net/lzt20007/article/details/50945629
+
+解决方案：
+一：修改配置
+修改DefaultEditor.ini中bDontLoadBlueprintOutsideEditor的值，true->false
+二：修改代码
+static ConstructorHelpers::FObjectFinder<UBlueprint> tankGameBPAsset(TEXT("Blueprint'/Game/Blueprints/tankGameBP.tankGameBP'"));
+if (tankGameBPAsset.Object != NULL)
+{
+	DefaultPawnClass = (UClass*)tankGameBPAsset.Object->GeneratedClass;
+}
+改为：
+static ConstructorHelpers::FObjectFinder<UClass> tankGameBPAsset(TEXT("Class'/Game/Blueprints/tankGameBP.tankGameBP_C'"));
+if (tankGameBPAsset.Object != NULL)
+{
+DefaultPawnClass = (UClass*)tankGameBPAsset.Object;
+}
+参考：
+https://answers.unrealengine.com/questions/127212/bdontloadblueprintoutsideeditortrue-by-default.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
