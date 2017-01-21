@@ -134,28 +134,16 @@ T* EngineApi::FindSceneObject(const TCHAR* Name)
 	return retObject;
 }
 
-double EngineApi::Seconds()
+template<class T>
+T* EngineApi::FindActor(FString name)
 {
-	double StartTime = FPlatformTime::Seconds();
-	return StartTime;
-}
-
-FWorldContext* EngineApi::GetWorldContextFromPIEInstance(const int32 PIEInstance)
-{
-	FWorldContext* worldContext = GEngine->GetWorldContextFromPIEInstance(PIEInstance);
-	return worldContext;
-}
-
-UWorld* EngineApi::GetGlobalWorld()
-{
-	return GWorld;
-}
-
-void EngineApi::SetTransientMasterVolume(float size)
-{
-	UWorld* GameInstanceWorld = EngineApi::GetGlobalWorld();
-	if (FAudioDevice* GameInstanceAudioDevice = GameInstanceWorld->GetAudioDevice())
+	for (TActorIterator<T> It(GetWorld()); It; ++It)
 	{
-		GameInstanceAudioDevice->SetTransientMasterVolume(0.0f);
+		if (It->GetName() == name)
+		{
+			T* actor = Cast<T>(*It);
+			return actor;
+		}
 	}
+	return nullptr;
 }

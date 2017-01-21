@@ -335,6 +335,10 @@ public:
 	static int GetNumLocalPlayers();
 
 	static void SetGameDefaultMap(const std::string& NewMap);
+
+	// http://www.cnblogs.com/zhouxin/p/5454077.html
+	template<class T>
+	T* FindActor(FString name);
 };
 
 #include "EngineApi.inl"

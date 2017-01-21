@@ -595,3 +595,29 @@ void EngineApi::SetGameDefaultMap(const std::string& NewMap)
 	FString param = UtilStr::ConvStdStr2FString(const_cast<std::string&>(NewMap));
 	UGameMapsSettings::SetGameDefaultMap(param);
 }
+
+double EngineApi::Seconds()
+{
+	double StartTime = FPlatformTime::Seconds();
+	return StartTime;
+}
+
+FWorldContext* EngineApi::GetWorldContextFromPIEInstance(const int32 PIEInstance)
+{
+	FWorldContext* worldContext = GEngine->GetWorldContextFromPIEInstance(PIEInstance);
+	return worldContext;
+}
+
+UWorld* EngineApi::GetGlobalWorld()
+{
+	return GWorld;
+}
+
+void EngineApi::SetTransientMasterVolume(float size)
+{
+	UWorld* GameInstanceWorld = EngineApi::GetGlobalWorld();
+	if (FAudioDevice* GameInstanceAudioDevice = GameInstanceWorld->GetAudioDevice())
+	{
+		GameInstanceAudioDevice->SetTransientMasterVolume(0.0f);
+	}
+}
