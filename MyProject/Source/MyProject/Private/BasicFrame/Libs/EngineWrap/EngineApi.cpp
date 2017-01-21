@@ -621,3 +621,15 @@ void EngineApi::SetTransientMasterVolume(float size)
 		GameInstanceAudioDevice->SetTransientMasterVolume(0.0f);
 	}
 }
+
+FVector2D EngineApi::getScreenSize()
+{
+	FVector2D screenSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+	return screenSize;
+}
+
+FVector2D EngineApi::getSystemResolution()
+{
+	FVector2D Result = FVector2D(GSystemResolution.ResX, GSystemResolution.ResY);
+	return Result;
+}

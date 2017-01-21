@@ -339,6 +339,12 @@ public:
 	// http://www.cnblogs.com/zhouxin/p/5454077.html
 	template<class T>
 	T* FindActor(FString name);
+
+	// UE4 技巧总结: http://blog.csdn.net/lzt20007/article/details/51058598
+	static FVector2D getScreenSize();
+
+	// UE4：GetViewportSize和GSystemResolution: http://blog.csdn.net/lzt20007/article/details/51141328
+	static FVector2D getSystemResolution();
 };
 
 #include "EngineApi.inl"
