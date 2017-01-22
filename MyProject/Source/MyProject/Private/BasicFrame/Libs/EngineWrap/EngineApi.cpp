@@ -16,6 +16,8 @@
 #include "MyPlayerControllerBase.h"	// AMyPlayerController
 #include "UObject/UObjectGlobals.h"	// NewObject
 #include "MyGameViewportClientBase.h"
+#include "Materials/MaterialInstance.h"	// UMaterialInstance
+#include "Components/MeshComponent.h"	// UMeshComponent
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -632,4 +634,9 @@ FVector2D EngineApi::getSystemResolution()
 {
 	FVector2D Result = FVector2D(GSystemResolution.ResX, GSystemResolution.ResY);
 	return Result;
+}
+
+void EngineApi::SetMaterial(UMeshComponent* meshComponent, int32 ElementIndex, UMaterialInterface* Material)
+{
+	meshComponent->SetMaterial(ElementIndex, Material);
 }

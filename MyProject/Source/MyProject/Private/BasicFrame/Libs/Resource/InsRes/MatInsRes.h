@@ -22,8 +22,8 @@ protected:
 	//FMaterial* mMat;
 	// Engine\Source\Runtime\CoreUObject\Public\UObject\UObjectGlobals.h
 	// #define TSubobjectPtr \
-		EMIT_DEPRECATED_WARNING_MESSAGE("TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.") \
-	TSubobjectPtrDeprecated
+	//	EMIT_DEPRECATED_WARNING_MESSAGE("TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.") \
+	// TSubobjectPtrDeprecated
 	//TSubobjectPtr<FMaterial> mMat;
 	UMaterialInstance* mMatIns;
 	UMaterialInstanceDynamic* mMatDyn;

@@ -82,4 +82,10 @@
 #include "HAL/ThreadSafeCounter.h"	// FThreadSafeCounter
 #include "MaterialShared.h"	// FMaterial
 
+#include "Materials/MaterialInstanceDynamic.h"	// UMaterialInstanceDynamic
+#include "Materials/MaterialInterface.h"	// UMaterialInterface
+#include "Materials/MaterialInstance.h"	// UMaterialInstance, class UMaterialInstance : public UMaterialInterface
+#include "Materials/Material.h"	// UMaterial, class UMaterial : public UMaterialInterface
+#include "Components/MeshComponent.h"	// UMeshComponent
+
 #endif

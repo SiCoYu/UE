@@ -28,6 +28,8 @@ class UWorld;
 class AMyPlayerControllerBase;
 class UMyLocalPlayerBase;
 class UMyGameViewportClientBase;
+class UMeshComponent;
+class UMaterialInterface;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -345,6 +347,9 @@ public:
 
 	// UE4£ºGetViewportSizeºÍGSystemResolution: http://blog.csdn.net/lzt20007/article/details/51141328
 	static FVector2D getSystemResolution();
+
+	// Engine\Source\Runtime\Engine\Private\Components\MeshComponent.cpp
+	static void SetMaterial(UMeshComponent* meshComponent, int32 ElementIndex, UMaterialInterface* Material);
 };
 
 #include "EngineApi.inl"
