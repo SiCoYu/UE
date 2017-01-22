@@ -11,10 +11,12 @@ http://blog.csdn.net/lzt20007/article/details/51285926
 */
 
 // class FMaterial;
+class UMaterialInterface;
 class UMaterial;
+class UMaterialInstance;
 class UMaterialInstanceDynamic;
 
-class MatInsRes : InsResBase
+class MatInsRes : public InsResBase
 {
 	typedef InsResBase Super;
 
@@ -25,14 +27,14 @@ protected:
 	//	EMIT_DEPRECATED_WARNING_MESSAGE("TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.") \
 	// TSubobjectPtrDeprecated
 	//TSubobjectPtr<FMaterial> mMat;
-	UMaterialInstance* mMatIns;
+	UMaterialInterface* mMat;	// UMaterial \ UMaterialInstance
 	UMaterialInstanceDynamic* mMatDyn;
 
 public:
 	MatInsRes();
 
 public:
-	UMaterial* getMat();
+	UMaterialInterface* getMat();
 
 protected:
 	virtual void initImpl(ResItem* res) override;

@@ -6,7 +6,7 @@
 
 class MatInsRes;
 
-class MatInsResMgr : InsResMgrBase
+class MatInsResMgr : public InsResMgrBase
 {
 	typedef InsResMgrBase Super;
 
