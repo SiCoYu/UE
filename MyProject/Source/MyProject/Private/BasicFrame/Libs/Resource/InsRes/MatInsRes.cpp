@@ -1,42 +1,41 @@
-﻿using UnityEngine;
+﻿#include "MyProject.h"
+#include "MatInsRes.h"
+#include "ResItem.h"
+#include "Materials/MaterialInstanceDynamic.h"	// UMaterialInstanceDynamic
+#include "Materials/MaterialInterface.h"	// UMaterialInterface
+#include "Materials/MaterialInstance.h"	// UMaterialInstance, class UMaterialInstance : public UMaterialInterface
+#include "Materials/Material.h"	// UMaterial, class UMaterial : public UMaterialInterface
 
-namespace SDK.Lib
+MatInsRes::MatInsRes()
 {
-    public class MatRes : InsResBase
-    {
-        protected Material m_mat;
 
-        public MatRes()
-        {
+}
 
-        }
+FMaterial* MatInsRes::getMat()
+{
+	return this->mMatIns;
+}
 
-        public Material getMat()
-        {
-            return m_mat;
-        }
+void MatInsRes::initImpl(ResItem* res)
+{
+	// 获取资源单独保存
+	this->mMatIns = Cast<FMaterial>(res->getObject(res->getPrefabName()));
+	this->mMatDyn = UMaterialInstanceDynamic::Create(this->mMatIns, nullptr);
 
-        override protected void initImpl(ResItem res)
-        {
-            // 获取资源单独保存
-            m_mat = res.getObject(res.getPrefabName()) as Material;
+	Super::initImpl(res);
+}
 
-            base.initImpl(res);
-        }
+void MatInsRes::unload()
+{
+	if (this->mMatIns != nullptr)
+	{
+		// 这个接口不知道行不行
+		//UtilApi::UnloadAsset(this->mMat);
+		this->mMatIns = nullptr;
 
-        public override void unload()
-        {
-            if (m_mat != null)
-            {
-                // 这个接口不知道行不行
-                UtilApi.UnloadAsset(m_mat);
-                m_mat = null;
+		// 这个接口肯定可以
+		//UtilApi.UnloadUnusedAssets();
+	}
 
-                // 这个接口肯定可以
-                //UtilApi.UnloadUnusedAssets();
-            }
-
-            base.unload();
-        }
-    }
+	Super::unload();
 }

@@ -1,42 +1,38 @@
-﻿using UnityEngine;
+﻿#include "MyProject.h"
+#include "MatRes.h"
+#include "Materials/MaterialInstanceDynamic.h"	// UMaterialInstanceDynamic
+#include "Materials/Material.h"	// UMaterial, class UMaterial : public UMaterialInterface
 
-namespace SDK.Lib
+MatRes::MatRes()
 {
-    public class MatRes : InsResBase
+
+}
+
+FMaterial* MatRes::getMat()
+{
+    return this->mMat;
+}
+
+void MatRes::initImpl(ResItem* res)
+{
+    // 获取资源单独保存
+	this->mMat = Cast<FMaterial>(res->getObject(res->getPrefabName()));
+	this->mMatDyn = UMaterialInstanceDynamic::Create(this->mMatIns, nullptr);
+
+    base.initImpl(res);
+}
+
+void MatRes::unload()
+{
+    if (this->mMat != nullptr)
     {
-        protected Material m_mat;
+        // 这个接口不知道行不行
+        //UtilApi::UnloadAsset(m_mat);
+		this->mMat = nullptr;
 
-        public MatRes()
-        {
-
-        }
-
-        public Material getMat()
-        {
-            return m_mat;
-        }
-
-        override protected void initImpl(ResItem res)
-        {
-            // 获取资源单独保存
-            m_mat = res.getObject(res.getPrefabName()) as Material;
-
-            base.initImpl(res);
-        }
-
-        public override void unload()
-        {
-            if (m_mat != null)
-            {
-                // 这个接口不知道行不行
-                UtilApi.UnloadAsset(m_mat);
-                m_mat = null;
-
-                // 这个接口肯定可以
-                //UtilApi.UnloadUnusedAssets();
-            }
-
-            base.unload();
-        }
+        // 这个接口肯定可以
+        //UtilApi.UnloadUnusedAssets();
     }
+
+	Super::unload();
 }

@@ -1,51 +1,38 @@
 ﻿#pragma once
 
+//#include "UObject/UObjectGlobals.h"	// TSubobjectPtr
 #include "MaterialShared.h"	// FMaterial
 #include "InsResBase.h"
 
 /**
  * @brief 
- UE4:C++中使用材质
- http://blog.csdn.net/lzt20007/article/details/51285926
+  UE4:C++中使用材质
+  http://blog.csdn.net/lzt20007/article/details/51285926
  */
+
+class UMaterial;
 
 class MatRes : InsResBase
 {
+	typedef InsResBase Super;
+
 protected:
 	//FMaterial* mMat;
-	TSubobjectPtr<FMaterial> mMat;
+	// Engine\Source\Runtime\CoreUObject\Public\UObject\UObjectGlobals.h
+	// #define TSubobjectPtr \
+	EMIT_DEPRECATED_WARNING_MESSAGE("TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.") \
+	TSubobjectPtrDeprecated
+	//TSubobjectPtr<FMaterial> mMat;
+	UMaterial* mMat;
 
 public:
-    MatRes()
-    {
+	MatRes();
+public:
+	UMaterial* getMat();
 
-    }
+protected:
+	virtual void initImpl(ResItem* res) override;
 
-    public Material getMat()
-    {
-        return m_mat;
-    }
-
-    override protected void initImpl(ResItem res)
-    {
-        // 获取资源单独保存
-        m_mat = res.getObject(res.getPrefabName()) as Material;
-
-        base.initImpl(res);
-    }
-
-    public override void unload()
-    {
-        if (m_mat != null)
-        {
-            // 这个接口不知道行不行
-            UtilApi.UnloadAsset(m_mat);
-            m_mat = null;
-
-            // 这个接口肯定可以
-            //UtilApi.UnloadUnusedAssets();
-        }
-
-        base.unload();
-    }
+public:
+	virtual void unload() override;
 };

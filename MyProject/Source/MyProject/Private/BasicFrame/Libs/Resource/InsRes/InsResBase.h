@@ -25,7 +25,7 @@ public:
 	void init(ResItem* res);
 
 protected:
-    // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重在了
+    // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重载了
 	virtual void initImpl(ResItem* res);
 
 public:
