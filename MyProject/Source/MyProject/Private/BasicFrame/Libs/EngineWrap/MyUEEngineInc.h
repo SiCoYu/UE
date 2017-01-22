@@ -80,5 +80,6 @@
 #include "AI/Navigation/AvoidanceManager.h"		// UAvoidanceManager
 #include "Engine/World.h"		// InitializationValues
 #include "HAL/ThreadSafeCounter.h"	// FThreadSafeCounter
+#include "MaterialShared.h"	// FMaterial
 
 #endif
