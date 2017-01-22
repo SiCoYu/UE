@@ -22,10 +22,13 @@ public:
 	FRotator NeckSpring;
 
 public:
+	UMyAnimInstanceBase();
+
+public:
 	void testA();
 
 public:
-	APawn * OwningPawn;
+	AActor* mOwnerActor;
 
 	/** Is Moving */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement)
@@ -35,4 +38,20 @@ public:
 public:
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaTimeX) override;
+
+	// http://blog.csdn.net/yangxuan0261/article/details/52097917
+	// 首先，animation bp必须是继承自定义的AnimInstance
+	// 然后新建两个通知AnimNotify_Begin和AnimNotify_End
+	// 方法的命名规则必须是AnimNotify_XXX，因为引擎里的代码就是这样匹配的
+public:
+	UFUNCTION(BlueprintCallable, Category = "MyAnim")
+	bool IsInMoving();
+
+	UFUNCTION(BlueprintCallable, Category = "MyAnim")
+	AActor* GetOwnerActor();
+
+	UFUNCTION(BlueprintCallable, Category = "MyAnim")
+	void AnimNotify_Begin(UAnimNotify* Notify);
+	UFUNCTION(BlueprintCallable, Category = "MyAnim")
+	void AnimNotify_End(UAnimNotify* Notify);
 };
