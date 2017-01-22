@@ -2,6 +2,7 @@
 
 //#include "UObject/UObjectGlobals.h"	// TSubobjectPtr
 //#include "MaterialShared.h"	// FMaterial
+#include "BaseClassDef.h"
 #include "InsResBase.h"
 
 /**
@@ -18,7 +19,7 @@ class UMaterialInstanceDynamic;
 
 class MatInsRes : public InsResBase
 {
-	typedef InsResBase Super;
+	M_DECLARE_SUPER_KW(InsResBase);
 
 protected:
 	//FMaterial* mMat;

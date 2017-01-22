@@ -91,6 +91,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Core/Rtti",
                 "MyProject/Private/BasicFrame/Libs/Core/Platform",
                 "MyProject/Private/BasicFrame/Libs/Core/Memory",
+                "MyProject/Private/BasicFrame/Libs/Core/Tools",
 
                 "MyProject/Private/BasicFrame/Libs/LuaBind",
                 "MyProject/Private/BasicFrame/Libs/LuaCppInterface",
