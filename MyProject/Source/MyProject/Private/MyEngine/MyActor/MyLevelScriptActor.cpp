@@ -8,7 +8,7 @@ AMyLevelScriptActor::AMyLevelScriptActor(const class FObjectInitializer& PCIP) :
 
 bool AMyLevelScriptActor::RemoteEvent(FName EventName)
 {
-	Super::RemoteEvent(EventName);
+	return Super::RemoteEvent(EventName);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~

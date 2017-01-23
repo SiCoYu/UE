@@ -196,6 +196,7 @@ public class MyProject : ModuleRules
         PrivateDependencyModuleNames.AddRange(
             new string[] {
                 "Core",
+                "CoreUObject",  // CoreUObject\Private\Serialization\AsyncLoadingThread.h
                 "InputCore",
 				"Slate",
 				"SlateCore",
