@@ -11,6 +11,3 @@ class AMyFlyGameMode : public AMyGameModeBase
 public:
 	AMyFlyGameMode();
 };
-
-
-

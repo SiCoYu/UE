@@ -1,9 +1,9 @@
 #include "MyProject.h"
 #include "EditorWinLog.h"
 
-DEFINE_LOG_CATEGORY(ComLog);
-DEFINE_LOG_CATEGORY(ComWarning);
-DEFINE_LOG_CATEGORY(ComError);
+//DEFINE_LOG_CATEGORY(ComLog);
+//DEFINE_LOG_CATEGORY(ComWarning);
+//DEFINE_LOG_CATEGORY(ComError);
 
 DEFINE_LOG_CATEGORY(MLogMacro_LogCategory);
 

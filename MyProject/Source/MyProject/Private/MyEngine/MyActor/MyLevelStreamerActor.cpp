@@ -1,45 +1,37 @@
 #include "MyProject.h"
-#include "MyGameState.h"
-#include "MyTimeOfDayActor.h"
+#include "MyLevelStreamerActor.h"
+#include "Kismet/GameplayStatics.h"
 
-AMyTimeOfDayActor::AMyTimeOfDayActor(const class FObjectInitializer& PCIP)
-	: Super(PCIP)
+// Sets default values
+AMyLevelStreamerActor::AMyLevelStreamerActor()
 {
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
 
+	OverlapVolume = CreateDefaultSubobject<UBoxComponent>(TEXT("OverlapVolume"));
+	RootComponent = OverlapVolume;
+
+	OverlapVolume->OnComponentBeginOverlap.AddUniqueDynamic(this, &AMyLevelStreamerActor::OverlapBegins);
 }
 
-void AMyTimeOfDayActor::Tick(float DeltaSeconds)
+// Called when the game starts or when spawned
+void AMyLevelStreamerActor::BeginPlay()
 {
-	Super::Tick(DeltaSeconds);
+	Super::BeginPlay();
+}
 
-	AMyGameState* MyGameState = Cast<AMyGameState>(GetWorld()->GetGameState());
-	if (MyGameState)
+// Called every frame
+void AMyLevelStreamerActor::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+void AMyLevelStreamerActor::OverlapBegins(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+{
+	ACharacter* MyCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
+	if (OtherActor == MyCharacter && LevelToLoad != "")
 	{
-		///* Update the position of the sun. */
-		//if (PrimarySunLight)
-		//{
-		//	if (LastTimeOfDay == MyGameState->ElapsedGameMinutes)
-		//	{
-		//		TimeSinceLastIncrement += DeltaSeconds;
-		//	}
-		//	else
-		//	{
-		//		/* Reset prediction */
-		//		TimeSinceLastIncrement = 0;
-		//	}
-
-		//	/* Predict the movement of the sun to smooth out the rotations between replication updates of the actual time of day */
-		//	const float PredictedIncrement = MyGameState->GetTimeOfDayIncrement() * TimeSinceLastIncrement;
-
-		//	/* TimeOfDay is expressed in minutes, we need to convert this into a pitch rotation */
-		//	const float MinutesInDay = 24 * 60;
-		//	const float PitchOffset = 90; /* The offset to account for time of day 0 should equal midnight */
-		//	const float PitchRotation = 360 * ((MyGameState->ElapsedGameMinutes + PredictedIncrement) / MinutesInDay);
-
-		//	FRotator NewSunRotation = FRotator(PitchRotation + PitchOffset, 45.0f, 0);
-		//	PrimarySunLight->SetActorRelativeRotation(NewSunRotation);
-
-		//	LastTimeOfDay = MyGameState->ElapsedGameMinutes;
-		//}
+		FLatentActionInfo LatentInfo;
+		UGameplayStatics::LoadStreamLevel(this, LevelToLoad, true, true, LatentInfo);
 	}
 }

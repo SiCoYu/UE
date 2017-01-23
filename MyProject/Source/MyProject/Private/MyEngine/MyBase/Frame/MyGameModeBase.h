@@ -15,6 +15,3 @@ public:
 	AMyGameModeBase();
 	AMyGameModeBase(const FObjectInitializer& ObjectInitializer);
 };
-
-
-
