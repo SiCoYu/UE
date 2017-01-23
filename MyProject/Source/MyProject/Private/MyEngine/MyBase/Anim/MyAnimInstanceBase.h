@@ -54,4 +54,7 @@ public:
 	void AnimNotify_Begin(UAnimNotify* Notify);
 	UFUNCTION(BlueprintCallable, Category = "MyAnim")
 	void AnimNotify_End(UAnimNotify* Notify);
+
+	// Engine\Source\Runtime\Engine\Classes\Animation\AnimInstance.h
+	// void TriggerSingleAnimNotify(const FAnimNotifyEvent* AnimNotifyEvent);
 };
