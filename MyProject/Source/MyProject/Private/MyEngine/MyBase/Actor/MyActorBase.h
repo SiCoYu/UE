@@ -8,6 +8,16 @@ class AMyActorBase : public AActor
 {
 	GENERATED_BODY()
 
+private:
+	FString mName;
+
 public:
 	AMyActorBase();
+	virtual ~AMyActorBase();
+
+	void SetInfo(FString name);
+
+	// ue4-控制台执行方法: http://blog.csdn.net/yangxuan0261/article/details/53969564
+	UFUNCTION(Exec)
+	void execInConsole();
 };

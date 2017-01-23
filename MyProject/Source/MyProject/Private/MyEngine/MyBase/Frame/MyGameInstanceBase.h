@@ -29,4 +29,7 @@ public:
 	virtual void FinishDestroy() override;
 
 	virtual TSubclassOf<UOnlineSession> GetOnlineSessionClass() override;
+
+	// ue4-控制台执行方法: http://blog.csdn.net/yangxuan0261/article/details/53969564
+	virtual bool ProcessConsoleExec(const TCHAR* Cmd, FOutputDevice& Ar, UObject* Executor) override;
 };

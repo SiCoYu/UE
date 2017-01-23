@@ -5,6 +5,8 @@
 //#include "Ctx.h"
 #include "UtilStr.h"
 #include "MyOnlineSessionBase.h"
+#include "LogCategoryDef.h"
+#include "MyActorBase.h"
 
 UMyGameInstanceBase::UMyGameInstanceBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -43,4 +45,21 @@ void UMyGameInstanceBase::FinishDestroy()
 TSubclassOf<UOnlineSession> UMyGameInstanceBase::GetOnlineSessionClass()
 {
 	return UMyOnlineSessionBase::StaticClass();
+}
+
+bool UMyGameInstance::ProcessConsoleExec(const TCHAR* Cmd, FOutputDevice& Ar, UObject* Executor)
+{
+	bool ret = Super::ProcessConsoleExec(Cmd, Ar, Executor);
+
+	if (!ret)
+	{
+		//for (AMyActorBase* actor : mActorVec)
+		//{
+		//	ret = actor->ProcessConsoleExec(Cmd, Ar, Executor);
+		//}
+	}
+
+	UE_LOG(ComWarning, Warning, TEXT("--- Cmd:%s exec:%d"), Cmd, (int32)ret);
+
+	return ret;
 }
