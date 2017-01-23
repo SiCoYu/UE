@@ -3,6 +3,7 @@
 #include "UtilStr.h"
 #include <string>
 #include "MyStreamableManager.h"
+#include "Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread
 
 FMyStreamableManager::FMyStreamableManager()
 {
@@ -49,4 +50,10 @@ void FMyStreamableManager::RequestAsyncLoad(const std::string& TargetToStream, F
 void FMyStreamableManager::RequestAsyncLoad(const FStringAssetReference& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority)
 {
 	mStreamableManager.RequestAsyncLoad(TargetToStream, DelegateToCall, Priority);
+}
+
+bool FMyStreamableManager::IsMultithreaded()
+{
+	const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
+	return bIsMultithreaded;
 }
