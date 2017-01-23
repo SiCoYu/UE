@@ -88,4 +88,7 @@
 #include "Materials/Material.h"	// UMaterial, class UMaterial : public UMaterialInterface
 #include "Components/MeshComponent.h"	// UMeshComponent
 
+//#include "Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread ,这个目录是错误的，需要如下目录
+#include "Private/Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread
+
 #endif
