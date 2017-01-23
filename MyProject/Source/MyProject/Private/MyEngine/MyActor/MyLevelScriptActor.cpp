@@ -6,6 +6,11 @@ AMyLevelScriptActor::AMyLevelScriptActor(const class FObjectInitializer& PCIP) :
 	SolusLevelName = NAME_None;
 }
 
+bool AMyLevelScriptActor::RemoteEvent(FName EventName)
+{
+	Super::RemoteEvent(EventName);
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //				Solus Level Begin Play
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,8 +23,6 @@ void AMyLevelScriptActor::ReceiveBeginPlay()
 
 	//UE_LOG(YourLog,Error,TEXT("STREAMING LEVEL BEGIN PLAY %s"), *GetName());
 }
-
-
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //		 			Solus Level End Play

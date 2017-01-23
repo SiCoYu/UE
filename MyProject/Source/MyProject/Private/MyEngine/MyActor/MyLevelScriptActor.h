@@ -17,9 +17,13 @@ class AMyLevelScriptActor : public ALevelScriptActor
 {
 	GENERATED_UCLASS_BODY()
 
+protected:
 	/** A Custom name for each Solus Level, specified in Level BP Default Properties! */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = SolusLevel)
 	FName SolusLevelName;
+
+public:
+	virtual bool RemoteEvent(FName EventName) override;
 
 	//===========
 	// BP Nodes
