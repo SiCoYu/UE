@@ -350,6 +350,12 @@ public:
 
 	// Engine\Source\Runtime\Engine\Private\Components\MeshComponent.cpp
 	static void SetMaterial(UMeshComponent* meshComponent, int32 ElementIndex, UMaterialInterface* Material);
+
+	// ue4-数据二进制存取: http://blog.csdn.net/yangxuan0261/article/details/54406581 , 官网地址: Read%26_Write_Any_Data_to_Compressed_Binary_Files” , https://wiki.unrealengine.com/Save_System,Read%26_Write_Any_Data_to_Compressed_Binary_Files
+	void TestFileWriteCompressed(FString _path);
+	void TestFileReadCompressed(FString _path);
+	void TestFileWriteUnCompressed(FString _path);
+	void TestFileReadUnCompressed(FString _path);
 };
 
 #include "EngineApi.inl"

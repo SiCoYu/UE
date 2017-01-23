@@ -47,7 +47,7 @@ TSubclassOf<UOnlineSession> UMyGameInstanceBase::GetOnlineSessionClass()
 	return UMyOnlineSessionBase::StaticClass();
 }
 
-bool UMyGameInstance::ProcessConsoleExec(const TCHAR* Cmd, FOutputDevice& Ar, UObject* Executor)
+bool UMyGameInstanceBase::ProcessConsoleExec(const TCHAR* Cmd, FOutputDevice& Ar, UObject* Executor)
 {
 	bool ret = Super::ProcessConsoleExec(Cmd, Ar, Executor);
 
