@@ -51,7 +51,6 @@ public:
 	virtual uint8* getBytes(std::string resName);            // 获取字节数据
 	virtual std::string getText(std::string resName);
 	void copyFrom(ResItem* rhv);
-	virtual std::string getLogicPath();
 
 	bool hasSuccessLoaded();
 	bool hasFailed();

@@ -33,6 +33,10 @@ public:
 	virtual void unload();
 	RefCountResLoadResultNotify* getRefCountResLoadResultNotify();
 	void setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value);
+
+	bool hasSuccessLoaded();
+	bool hasFailed();
+	virtual std::string getLogicPath();
 };
 
 #endif

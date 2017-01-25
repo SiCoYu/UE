@@ -21,6 +21,7 @@ public:
 	virtual void dispose() override;
 
 	ObjectAssetInsRes* getAndSyncLoadRes(std::string path, EventDispatchDelegate evtHandle);
+	ObjectAssetInsRes* getAndAsyncLoadRes(std::string path, EventDispatchDelegate evtHandle);
 };
 
 #endif

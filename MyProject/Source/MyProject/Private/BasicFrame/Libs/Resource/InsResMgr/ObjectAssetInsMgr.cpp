@@ -21,3 +21,8 @@ ObjectAssetInsRes* ObjectAssetInsMgr::getAndSyncLoadRes(std::string path, EventD
 {
 	return Super::getAndSyncLoad<ObjectAssetInsRes>(path, evtHandle);
 }
+
+ObjectAssetInsRes* getAndAsyncLoadRes(std::string path, EventDispatchDelegate evtHandle)
+{
+	return Super::getAndAsyncLoad<ObjectAssetInsRes>(path, evtHandle);
+}

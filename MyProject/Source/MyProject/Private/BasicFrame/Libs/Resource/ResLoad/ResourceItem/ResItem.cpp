@@ -140,11 +140,6 @@ void ResItem::copyFrom(ResItem* rhv)
 	mRefCountResLoadResultNotify->copyFrom(rhv->getRefCountResLoadResultNotify());
 }
 
-std::string ResItem::getLogicPath()
-{
-	return "";
-}
-
 bool ResItem::hasSuccessLoaded()
 {
 	return this->mRefCountResLoadResultNotify->getResLoadState()->hasSuccessLoaded();

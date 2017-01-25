@@ -95,11 +95,11 @@ namespace MyNS
 
 		if (this->isInvalid())
 		{
-			this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(path, AuxPrefabLoader::onPrefabLoaded);
+			this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(path, EventDispatchDelegate(this, AuxMObjectLoader::onPrefabLoaded));
 		}
-		else if (this.hasLoadEnd())
+		else if (this->hasLoadEnd())
 		{
-			this.onPrefabLoaded(this.mPrefabRes);
+			this->onPrefabLoaded(this->mPrefabRes);
 		}
 	}
 
@@ -108,7 +108,7 @@ namespace MyNS
 		if (nullptr != dispObj)
 		{
 			// 一定要从这里再次取值，因为如果这个资源已经加载，可能在返回之前就先调用这个函数，因此这个时候 mPrefabRes 还是空值
-			this->mPrefabRes = (PrefabRes*)dispObj;
+			this->mPrefabRes = (ObjectAssetInsRes*)dispObj;
 
 			if (this->mPrefabRes->hasSuccessLoaded())
 			{
@@ -119,7 +119,7 @@ namespace MyNS
 					if (this->mIsInsNeedCoroutine)
 					{
 						this->mResInsEventDispatch = new ResInsEventDispatch();
-						this->mResInsEventDispatch->addEventHandle(nullptr, onPrefabIns);
+						this->mResInsEventDispatch->addEventHandle(EventDispatchDelegate(this, &AuxMObjectLoader::onPrefabIns));
 
 						if (this->mIsSetFakePos)
 						{
@@ -153,7 +153,7 @@ namespace MyNS
 			{
 				this->mResLoadState->setFailed();
 
-				GObjectAssetInsMg->unload(this->mPrefabRes->getResUniqueId(), AuxPrefabLoader::onPrefabLoaded);
+				GObjectAssetInsMg->unload(this->mPrefabRes->getResUniqueId(), EventDispatchDelegate(this, &AuxPrefabLoader::onPrefabLoaded));
 				this->mPrefabRes = nullptr;
 
 				if (this->mEvtHandle != nullptr)

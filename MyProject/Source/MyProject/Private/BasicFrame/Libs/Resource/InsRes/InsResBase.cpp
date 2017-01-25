@@ -47,7 +47,7 @@ void InsResBase::initImpl(ResItem* res)
 void InsResBase::failed(ResItem* res)
 {
 	unload();
-	mRefCountResLoadResultNotify->onLoadEventHandle(this);
+	this->mRefCountResLoadResultNotify->onLoadEventHandle(this);
 }
 
 void InsResBase::unload()
@@ -57,10 +57,25 @@ void InsResBase::unload()
 
 RefCountResLoadResultNotify* InsResBase::getRefCountResLoadResultNotify()
 {
-	return mRefCountResLoadResultNotify;
+	return this->mRefCountResLoadResultNotify;
 }
 
 void InsResBase::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value)
 {
-	mRefCountResLoadResultNotify = value;
+	this->mRefCountResLoadResultNotify = value;
+}
+
+std::string InsResBase::getLogicPath()
+{
+	return "";
+}
+
+bool InsResBase::hasSuccessLoaded()
+{
+	return this->mRefCountResLoadResultNotify->getResLoadState()->hasSuccessLoaded();
+}
+
+bool InsResBase::hasFailed()
+{
+	return this->mRefCountResLoadResultNotify->getResLoadState()->hasFailed();
 }
