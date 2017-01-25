@@ -5,7 +5,7 @@
 #include "EventDispatchDelegate.h"
 #include "BaseClassDef.h"
 
-class ObjectAssetLoadItem;
+class ObjectAssetResItem;
 class ResInsEventDispatch;
 
 namespace MyNS
@@ -19,7 +19,7 @@ namespace MyNS
 
 	protected:
 		UObject* mSelfGo;                       // 加载的 GameObject
-        ObjectAssetLoadItem* mPrefabRes;                     // 预制资源
+		ObjectAssetResItem* mPrefabRes;                     // 预制资源
         ResInsEventDispatch* mResInsEventDispatch; // 实例化的时候使用的分发器
         bool mIsInsNeedCoroutine; // 实例化是否需要协程
         bool mIsDestroySelf;      // 是否释放自己
@@ -40,7 +40,7 @@ namespace MyNS
 		void setSelfGo(UObject* value);
 		bool isDestroySelf();
 		void setDestroySelf(bool value);
-		virtual public std::string getLogicPath() override;
+		virtual std::string getLogicPath() override;
 
 		virtual void syncLoad(std::string path, EventDispatchDelegate evtHandle = nullptr) override;
         // 异步加载对象

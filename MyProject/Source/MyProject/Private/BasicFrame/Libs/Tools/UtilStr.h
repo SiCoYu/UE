@@ -14,7 +14,7 @@ public:
 
 public:
 	static std::string Format(const char * format, ...);
-	static bool IsNullOrEmpty(std::string&& value);
+	static bool IsNullOrEmpty(std::string& value);
 
 	// 查找自字符串出现的位置
 	static int IndexOf(std::string& srcStr, std::string subStr);
