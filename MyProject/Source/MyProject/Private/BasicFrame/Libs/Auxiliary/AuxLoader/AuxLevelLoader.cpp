@@ -25,7 +25,7 @@ namespace MyNS
 			LoadParam* param;
 			param = GPoolSys->newObject<LoadParam>();
 			param->setPath(mPath);
-			param->mLoadEventHandle = onLevelLoaded;
+			param->mLoadEventHandle = EventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded);
 			param->mResNeedCoroutine = false;
 			param->mLoadNeedCoroutine = false;
 			GResLoadMgr->loadAsset(param);

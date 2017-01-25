@@ -77,7 +77,7 @@ namespace MyNS
 
 		if (this->isInvalid())
 		{
-			this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, nullptr);
+			this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
 			this->onPrefabLoaded(mPrefabRes);
 		}
 		else if (this->hasLoadEnd())

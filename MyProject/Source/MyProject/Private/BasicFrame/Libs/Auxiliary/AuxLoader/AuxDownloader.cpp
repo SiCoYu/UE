@@ -25,10 +25,10 @@ namespace MyNS
 			DownloadParam* param = new DownloadParam();
 
 			param->setPath(origPath);
-			param->mLoadEventHandle = this.onDownloaded;
+			param->mLoadEventHandle = EventDispatchDelegate(this, &AuxDownloader::onDownloaded);
 			param->mFileLen = fileLen;
 			param->mIsWriteFile = isWriteFile;
-			param->mDownloadType = downloadType;
+			param->mDownloadType = (DownloadType)downloadType;
 
 			GDownloadMgr->download(param);
 		}

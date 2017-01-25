@@ -139,3 +139,8 @@ void ResItem::copyFrom(ResItem* rhv)
 	mIsResNeedCoroutine = rhv->mIsResNeedCoroutine;
 	mRefCountResLoadResultNotify->copyFrom(rhv->getRefCountResLoadResultNotify());
 }
+
+std::string ResItem::getLogicPath()
+{
+	return "";
+}
