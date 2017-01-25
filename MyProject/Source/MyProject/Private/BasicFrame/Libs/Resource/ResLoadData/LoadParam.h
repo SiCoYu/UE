@@ -36,6 +36,7 @@ public:
 
 	ResItem* mLoadRes;
 	InsResBase* mLoadInsRes;
+	std::string mResUniqueId;
 
 public:
 	std::string getPrefabName();

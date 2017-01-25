@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "ObjectAssetInsMgr.h"
-#include "ObjectAssetResItem.h"
+#include "ObjectAssetInsRes.h"
 
 ObjectAssetInsMgr::ObjectAssetInsMgr()
 {
@@ -17,7 +17,7 @@ void ObjectAssetInsMgr::dispose()
 
 }
 
-ObjectAssetResItem* ObjectAssetInsMgr::getAndSyncLoadRes(std::string path, EventDispatchDelegate evtHandle)
+ObjectAssetInsRes* ObjectAssetInsMgr::getAndSyncLoadRes(std::string path, EventDispatchDelegate evtHandle)
 {
-	return Super::getAndSyncLoad<ObjectAssetResItem>(path, evtHandle);
+	return Super::getAndSyncLoad<ObjectAssetInsRes>(path, evtHandle);
 }

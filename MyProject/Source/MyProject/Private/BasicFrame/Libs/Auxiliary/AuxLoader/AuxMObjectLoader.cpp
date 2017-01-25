@@ -2,8 +2,9 @@
 #include "AuxMObjectLoader.h"
 #include "UtilMath.h"
 #include "UtilApi.h"
-#include "ObjectAssetResItem.h"
+#include "ObjectAssetInsRes.h"
 #include "Common.h"
+#include "ResInsEventDispatch.h"
 
 namespace MyNS
 {

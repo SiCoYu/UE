@@ -2,9 +2,10 @@
 #define __ObjectAssetInsMgr_H
 
 #include "InsResMgrBase.h"
+#include "EventDispatchDelegate.h"
 #include "BaseClassDef.h"
 
-class ObjectAssetResItem;
+class ObjectAssetInsRes;
 
 /**
  * @brief 资源管理器
@@ -19,7 +20,7 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 
-	ObjectAssetResItem* getAndSyncLoadRes(std::string path, EventDispatchDelegate evtHandle);
+	ObjectAssetInsRes* getAndSyncLoadRes(std::string path, EventDispatchDelegate evtHandle);
 };
 
 #endif
