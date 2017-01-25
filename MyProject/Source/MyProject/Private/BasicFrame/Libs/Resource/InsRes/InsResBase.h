@@ -37,6 +37,7 @@ public:
 	bool hasSuccessLoaded();
 	bool hasFailed();
 	virtual std::string getLogicPath();
+	virtual std::string getResUniqueId();
 };
 
 #endif

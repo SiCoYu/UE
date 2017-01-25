@@ -149,3 +149,8 @@ bool ResItem::hasFailed()
 {
 	return this->mRefCountResLoadResultNotify->getResLoadState()->hasFailed();
 }
+
+std::string ResItem::getResUniqueId()
+{
+	return "";
+}

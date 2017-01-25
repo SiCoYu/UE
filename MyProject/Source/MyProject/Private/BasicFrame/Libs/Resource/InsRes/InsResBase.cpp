@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "InsResBase.h"
 #include "RefCountResLoadResultNotify.h"
+#include "ResLoadState.h"
 
 InsResBase::InsResBase()
 {
@@ -78,4 +79,9 @@ bool InsResBase::hasSuccessLoaded()
 bool InsResBase::hasFailed()
 {
 	return this->mRefCountResLoadResultNotify->getResLoadState()->hasFailed();
+}
+
+std::string InsResBase::getResUniqueId()
+{
+	return "";
 }

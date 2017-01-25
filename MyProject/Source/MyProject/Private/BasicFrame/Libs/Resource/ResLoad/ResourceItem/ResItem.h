@@ -54,6 +54,8 @@ public:
 
 	bool hasSuccessLoaded();
 	bool hasFailed();
+
+	virtual std::string getResUniqueId();
 };
 
 #endif
