@@ -1,5 +1,7 @@
 ﻿#include "MyProject.h"
 #include "AuxDownloader.h"
+#include "DownloadItem.h"
+#include "Common.h"
 
 char* AuxDownloader::getBytes()
 {

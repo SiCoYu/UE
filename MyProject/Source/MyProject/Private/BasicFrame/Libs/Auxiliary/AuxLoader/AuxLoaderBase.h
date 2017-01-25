@@ -5,6 +5,7 @@
 #include <string>
 #include "EventDispatchDelegate.h"
 #include "DownloadParam.h"
+#include "BaseClassDef.h"
 
 class ResLoadState;
 class ResEventDispatch;
@@ -14,8 +15,10 @@ namespace MyNS
     /**
      * @brief 资源加载器
      */
-    class AuxLoaderBase : GObject, IDispatchObject
+    class AuxLoaderBase : public GObject, public IDispatchObject
     {
+		M_DECLARE_SUPER_KW(GObject)
+
 	protected:
 		ResLoadState* mResLoadState;      // 资源加载状态
         std::string mPrePath;      // 之前加载的资源目录
@@ -47,7 +50,7 @@ namespace MyNS
 		void addEventHandle(EventDispatchDelegate evtHandle = nullptr);
 		virtual void syncLoad(std::string path, EventDispatchDelegate evtHandle = nullptr);
 		virtual void asyncLoad(std::string path, EventDispatchDelegate evtHandle);
-		virtual void download(std::string origPath, EventDispatchDelegate  dispObj = nullptr, long fileLen = 0, bool isWriteFile = true, int downloadType = (int)DownloadType.eHttpWeb);
+		virtual void download(std::string origPath, EventDispatchDelegate  dispObj = nullptr, long fileLen = 0, bool isWriteFile = true, int downloadType = (int)eHttpWeb);
 		virtual void unload();
 	};
 }

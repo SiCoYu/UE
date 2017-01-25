@@ -5,15 +5,18 @@
 #include "DownloadParam.h"
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
+#include "BaseClassDef.h"
+
+class DownloadItem;
 
 namespace MyNS
 {
     /**
      * @brief 下载
      */
-    class AuxDownloader : AuxLoaderBase
+    class AuxDownloader : public AuxLoaderBase
     {
-		typedef AuxLoaderBase Super;
+		M_DECLARE_SUPER_KW(AuxLoaderBase)
 
 	protected:
 		DownloadItem* mDownloadItem;

@@ -12,7 +12,7 @@ namespace MyNS
     /**
      * @brief 关卡加载
      */
-    class AuxLevelLoader : AuxLoaderBase
+    class AuxLevelLoader : public AuxLoaderBase
     {
 		M_DECLARE_SUPER_KW(AuxLoaderBase)
 

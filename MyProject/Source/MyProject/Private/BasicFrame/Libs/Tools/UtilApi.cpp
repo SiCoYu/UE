@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "UtilApi.h"
 
+FVector UtilApi::FAKE_POS = FVector(-1000, 0, -1000);
+
 TScriptDelegate<FWeakObjectPtr> UtilApi::addUObjectButtonClickHandle(UUserWidget* widget, const FName& buttonName, UObject* pThis, const FName& functionName)
 {
 	TScriptDelegate<FWeakObjectPtr> handle;

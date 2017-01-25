@@ -90,5 +90,7 @@
 
 //#include "Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread ,这个目录是错误的，需要如下目录
 #include "Private/Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread
+#include "Math/Vector.h"	// FVector
+#include "Math/Vector.h"	// FVector
 
 #endif

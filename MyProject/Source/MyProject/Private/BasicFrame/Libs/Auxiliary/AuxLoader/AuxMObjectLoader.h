@@ -3,6 +3,7 @@
 #include "AuxLoaderBase.h"
 #include <string>
 #include "EventDispatchDelegate.h"
+#include "BaseClassDef.h"
 
 class ObjectAssetLoadItem;
 class ResInsEventDispatch;
@@ -12,8 +13,10 @@ namespace MyNS
     /**
      * @brief 预制
      */
-    class AuxMObjectLoader : AuxLoaderBase
+    class AuxMObjectLoader : public AuxLoaderBase
     {
+		M_DECLARE_SUPER_KW(AuxLoaderBase)
+
 	protected:
 		UObject* mSelfGo;                       // 加载的 GameObject
         ObjectAssetLoadItem* mPrefabRes;                     // 预制资源
@@ -27,11 +30,11 @@ namespace MyNS
         ResInsEventDispatch* mInsEventDispatch;
 
 	public:
-		AuxPrefabLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
-		public void setIsInitOrientPos(bool isSet);
-		public void setIsFakePos(bool isSet);
+		AuxMObjectLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
+		void setIsInitOrientPos(bool isSet);
+		void setIsFakePos(bool isSet);
 
-		virtual public void dispose() override;
+		virtual void dispose() override;
 
 		UObject* getSelfGo();
 		void setSelfGo(UObject* value);
@@ -39,7 +42,7 @@ namespace MyNS
 		void setDestroySelf(bool value);
 		virtual public std::string getLogicPath() override;
 
-		virtual void syncLoad(std::string path, MAction<IDispatchObject> evtHandle = nullptr) override;
+		virtual void syncLoad(std::string path, EventDispatchDelegate evtHandle = nullptr) override;
         // 异步加载对象
 		virtual void asyncLoad(std::string path, EventDispatchDelegate evtHandle) override;
 		void onPrefabLoaded(IDispatchObject* dispObj);
