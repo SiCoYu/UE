@@ -144,3 +144,13 @@ std::string ResItem::getLogicPath()
 {
 	return "";
 }
+
+bool ResItem::hasSuccessLoaded()
+{
+	return this->mRefCountResLoadResultNotify->getResLoadState()->hasSuccessLoaded();
+}
+
+bool ResItem::hasFailed()
+{
+	return this->mRefCountResLoadResultNotify->getResLoadState()->hasFailed();
+}

@@ -52,6 +52,9 @@ public:
 	virtual std::string getText(std::string resName);
 	void copyFrom(ResItem* rhv);
 	virtual std::string getLogicPath();
+
+	bool hasSuccessLoaded();
+	bool hasFailed();
 };
 
 #endif

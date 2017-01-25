@@ -1,50 +1,39 @@
-﻿using UnityEngine;
+﻿#include "MyProject.h"
+#include "ResInsEventDispatch.h"
 
-namespace SDK.Lib
+ResInsEventDispatch::ResInsEventDispatch()
 {
-    /**
-     * @brief 资源实例化事件分发器
-     */
-    public class ResInsEventDispatch : EventDispatch, IDispatchObject
-    {
-        protected bool mIsValid;
-        protected GameObject mInsGO;
+	this->mIsValid = true;
+}
 
-        public ResInsEventDispatch()
-        {
-            mIsValid = true;
-        }
+void ResInsEventDispatch::setIsValid(bool value)
+{
+	this->mIsValid = value;
+}
 
-        public void setIsValid(bool value)
-        {
-            mIsValid = value;
-        }
+bool ResInsEventDispatch::getIsValid()
+{
+	return this->mIsValid;
+}
 
-        public bool getIsValid()
-        {
-            return mIsValid;
-        }
+void ResInsEventDispatch::setInsGO(UObject* go)
+{
+	this->mInsGO = go;
+}
 
-        public void setInsGO(GameObject go)
-        {
-            mInsGO = go;
-        }
+UObject* ResInsEventDispatch::getInsGO()
+{
+	return this->mInsGO;
+}
 
-        public GameObject getInsGO()
-        {
-            return mInsGO;
-        }
-
-        override public void dispatchEvent(IDispatchObject dispatchObject)
-        {
-            if(mIsValid)
-            {
-                base.dispatchEvent(dispatchObject);
-            }
-            else
-            {
-                UtilApi.Destroy(mInsGO);
-            }
-        }
-    }
+void ResInsEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
+{
+	if (mIsValid)
+	{
+		Super::dispatchEvent(dispatchObject);
+	}
+	else
+	{
+		//UtilApi.Destroy(mInsGO);
+	}
 }

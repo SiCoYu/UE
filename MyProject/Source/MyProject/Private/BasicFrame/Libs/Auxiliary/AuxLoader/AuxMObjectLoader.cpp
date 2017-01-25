@@ -5,6 +5,7 @@
 #include "ObjectAssetInsRes.h"
 #include "Common.h"
 #include "ResInsEventDispatch.h"
+#include "ResLoadState.h"
 
 namespace MyNS
 {

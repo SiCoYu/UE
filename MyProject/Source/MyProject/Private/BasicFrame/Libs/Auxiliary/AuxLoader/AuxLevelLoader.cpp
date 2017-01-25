@@ -2,6 +2,7 @@
 #include "AuxLevelLoader.h"
 #include "LoadParam.h"
 #include "Common.h"
+#include "LevelResItem.h"
 
 namespace MyNS
 {
