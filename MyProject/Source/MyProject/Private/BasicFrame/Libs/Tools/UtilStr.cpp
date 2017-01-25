@@ -8,7 +8,7 @@ std::string UtilStr::Format(const char * format, ...)
 	return "";
 }
 
-bool UtilStr::IsNullOrEmpty(std::string value)
+bool UtilStr::IsNullOrEmpty(std::string&& value)
 {
 	if (value == "")
 	{
