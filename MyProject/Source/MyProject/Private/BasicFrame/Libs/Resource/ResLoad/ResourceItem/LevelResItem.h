@@ -8,7 +8,7 @@ class LoadItem;
 class LevelResItem : public ResItem
 {
 protected:
-    std::string m_localPath;
+    std::string mLocalPath;
 
 public:
 	virtual void init(LoadItem* item) override;
