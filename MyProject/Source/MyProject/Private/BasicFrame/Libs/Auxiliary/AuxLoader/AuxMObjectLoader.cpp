@@ -1,361 +1,308 @@
-﻿using LuaInterface;
-using UnityEngine;
+﻿#include "MyProject.h"
+#include "AuxPrefabLoader.h"
 
-namespace SDK.Lib
+AuxPrefabLoader::AuxPrefabLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
+	: Super(path)
 {
-    /**
-     * @brief 预制
-     */
-    public class AuxPrefabLoader : AuxLoaderBase
-    {
-        protected GameObject mSelfGo;                       // 加载的 GameObject
-        protected PrefabRes mPrefabRes;                     // 预制资源
-        protected ResInsEventDispatch mResInsEventDispatch; // 实例化的时候使用的分发器
-        protected bool mIsInsNeedCoroutine; // 实例化是否需要协程
-        protected bool mIsDestroySelf;      // 是否释放自己
-        protected bool mIsNeedInsPrefab;    // 是否需要实例化预制
+	this->mIsInsNeedCoroutine = isInsNeedCoroutine;
+	this->mIsDestroySelf = true;
+	this->mIsNeedInsPrefab = isNeedInsPrefab;
 
-        protected bool mIsSetFakePos;       // 是否初始化的时候设置到很远的位置
-        protected bool mIsSetInitOrientPos; // 是否 Instantiate 的时候，设置初始化方向位置信息， UI 是不需要的，UI 的初始化信息都保存在 Prefab 里面，直接从 Prefab 里面读取就行了，如果设置了不对的位置信息，可能位置就不对了
-        protected ResInsEventDispatch mInsEventDispatch;
+	this->mIsSetInitOrientPos = false;
+	this->mIsSetFakePos = false;
+}
 
-        public AuxPrefabLoader(string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true)
-            : base(path)
-        {
-            this.mTypeId = "AuxPrefabLoader";
+void AuxPrefabLoader::setIsInitOrientPos(bool isSet)
+{
+	this->mIsSetInitOrientPos = isSet;
+}
 
-            this.mIsInsNeedCoroutine = isInsNeedCoroutine;
-            this.mIsDestroySelf = true;
-            this.mIsNeedInsPrefab = isNeedInsPrefab;
+void AuxPrefabLoader::setIsFakePos(bool isSet)
+{
+	this->mIsSetFakePos = isSet;
+}
 
-            this.mIsSetInitOrientPos = false;
-            this.mIsSetFakePos = false;
-        }
+void AuxPrefabLoader::dispose()
+{
+	if (this->mIsDestroySelf)
+	{
+		if (this->mSelfGo != null)
+		{
+			//UtilApi.DestroyImmediate(this.mSelfGo);
+		}
+	}
 
-        public void setIsInitOrientPos(bool isSet)
-        {
-            this.mIsSetInitOrientPos = isSet;
-        }
+	Super::dispose();
+}
 
-        public void setIsFakePos(bool isSet)
-        {
-            this.mIsSetFakePos = isSet;
-        }
+UObject* AuxPrefabLoader::getSelfGo()
+{
+	return this->mSelfGo;
+}
 
-        override public void dispose()
-        {
-            if (this.mIsDestroySelf)
-            {
-                if (this.mSelfGo != null)
-                {
-                    UtilApi.DestroyImmediate(this.mSelfGo);
-                }
-            }
+void AuxPrefabLoader::setSelfGo(UObject* value)
+{
+	this->mSelfGo = value;
+}
 
-            base.dispose();
-        }
+bool AuxPrefabLoader::isDestroySelf()
+{
+	return this->mIsDestroySelf;
+}
 
-        public GameObject selfGo
-        {
-            get
-            {
-                return this.mSelfGo;
-            }
-            set
-            {
-                this.mSelfGo = value;
-            }
-        }
+void AuxPrefabLoader::setDestroySelf(bool value)
+{
+	this->mIsDestroySelf = value;
+}
 
-        public bool isDestroySelf()
-        {
-            return this.mIsDestroySelf;
-        }
+std::string AuxPrefabLoader::getLogicPath()
+{
+	if (this->mPrefabRes != nullptr)
+	{
+		return this->mPrefabRes->getLogicPath();
+	}
 
-        public void setDestroySelf(bool value)
-        {
-            this.mIsDestroySelf = value;
-        }
+	return this->mPath;
+}
 
-        override public string getLogicPath()
-        {
-            if (this.mPrefabRes != null)
-            {
-                return this.mPrefabRes.getLogicPath();
-            }
+void AuxPrefabLoader::syncLoad(std::string path, MAction<IDispatchObject> evtHandle)
+{
+	Super::syncLoad(path, evtHandle);
 
-            return this.mPath;
-        }
+	if (this->isInvalid())
+	{
+		this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, nullptr);
+		this->onPrefabLoaded(mPrefabRes);
+	}
+	else if (this->hasLoadEnd())
+	{
+		this->onPrefabLoaded(mPrefabRes);
+	}
+}
 
-        override public void syncLoad(string path, MAction<IDispatchObject> evtHandle = null)
-        {
-            base.syncLoad(path, evtHandle);
+// 异步加载对象
+void AuxPrefabLoader::asyncLoad(std::string path, EventDispatchDelegate evtHandle)
+{
+	Super::asyncLoad(path, evtHandle);
 
-            if (this.isInvalid())
-            {
-                this.mPrefabRes = Ctx.mInstance.mPrefabMgr.getAndSyncLoadRes(path, null);
-                this.onPrefabLoaded(mPrefabRes);
-            }
-            else if (this.hasLoadEnd())
-            {
-                this.onPrefabLoaded(mPrefabRes);
-            }
-        }
+	if (this->isInvalid())
+	{
+		this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(path, AuxPrefabLoader::onPrefabLoaded);
+	}
+	else if (this.hasLoadEnd())
+	{
+		this.onPrefabLoaded(this.mPrefabRes);
+	}
+}
 
-        override public void syncLoad(string path, LuaTable luaTable, LuaFunction luaFunction)
-        {
-            base.syncLoad(path, luaTable, luaFunction);
+void AuxPrefabLoader::onPrefabLoaded(IDispatchObject* dispObj)
+{
+	if (nullptr != dispObj)
+	{
+		// 一定要从这里再次取值，因为如果这个资源已经加载，可能在返回之前就先调用这个函数，因此这个时候 mPrefabRes 还是空值
+		this->mPrefabRes = (PrefabRes*)dispObj;
 
-            if (this.isInvalid())
-            {
-                this.mPrefabRes = Ctx.mInstance.mPrefabMgr.getAndSyncLoadRes(path, null);
-                this.onPrefabLoaded(this.mPrefabRes);
-            }
-            else if (this.hasLoadEnd())
-            {
-                this.onPrefabLoaded(this.mPrefabRes);
-            }
-        }
+		if (this->mPrefabRes->hasSuccessLoaded())
+		{
+			this->mResLoadState->setSuccessLoaded();
 
-        // 异步加载对象
-        override public void asyncLoad(string path, MAction<IDispatchObject> evtHandle)
-        {
-            base.asyncLoad(path, evtHandle);
+			if (this->mIsNeedInsPrefab)
+			{
+				if (this->mIsInsNeedCoroutine)
+				{
+					this->mResInsEventDispatch = new ResInsEventDispatch();
+					this->mResInsEventDispatch->addEventHandle(nullptr, onPrefabIns);
 
-            if (this.isInvalid())
-            {
-                this.mPrefabRes = Ctx.mInstance.mPrefabMgr.getAndAsyncLoadRes(path, this.onPrefabLoaded);
-            }
-            else if (this.hasLoadEnd())
-            {
-                this.onPrefabLoaded(this.mPrefabRes);
-            }
-        }
+					if (this->mIsSetFakePos)
+					{
+						this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi.FAKE_POS, UtilMath.UnitQuat, this->mResInsEventDispatch);
+					}
+					else
+					{
+						this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath.ZeroVec3, UtilMath.UnitQuat, this->mResInsEventDispatch);
+					}
+				}
+				else
+				{
+					if (this->mIsSetFakePos)
+					{
+						this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi.FAKE_POS, UtilMath.UnitQuat));
+					}
+					else
+					{
+						this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath.ZeroVec3, UtilMath.UnitQuat));
+					}
 
-        override public void asyncLoad(string path, LuaTable luaTable, LuaFunction luaFunction)
-        {
-            base.asyncLoad(path, luaTable, luaFunction);
+					this->onAllFinish();
+				}
+			}
+			else
+			{
+				this->onAllFinish();
+			}
+		}
+		else if (this->mPrefabRes->hasFailed())
+		{
+			this->mResLoadState->setFailed();
 
-            if (this.isInvalid())
-            {
-                this.mPrefabRes = Ctx.mInstance.mPrefabMgr.getAndAsyncLoadRes(path, this.onPrefabLoaded);
-            }
-            else if (this.hasLoadEnd())
-            {
-                this.onPrefabLoaded(this.mPrefabRes);
-            }
-        }
+			GObjectAssetInsMg->unload(this->mPrefabRes->getResUniqueId(), AuxPrefabLoader::onPrefabLoaded);
+			this->mPrefabRes = nullptr;
 
-        public void onPrefabLoaded(IDispatchObject dispObj)
-        {
-            if (null != dispObj)
-            {
-                // 一定要从这里再次取值，因为如果这个资源已经加载，可能在返回之前就先调用这个函数，因此这个时候 mPrefabRes 还是空值
-                this.mPrefabRes = dispObj as PrefabRes;
+			if (this->mEvtHandle != nullptr)
+			{
+				this->mEvtHandle->dispatchEvent(this);
+			}
+		}
+	}
+	else
+	{
+		if (this->mEvtHandle != nullptr)
+		{
+			this->mEvtHandle->dispatchEvent(this);
+		}
+	}
+}
 
-                if (this.mPrefabRes.hasSuccessLoaded())
-                {
-                    this.mResLoadState.setSuccessLoaded();
+void AuxPrefabLoader::onPrefabIns(IDispatchObject* dispObj)
+{
+	this->mResInsEventDispatch = (ResInsEventDispatch*)dispObj;
+	this->setSelfGo(this->mResInsEventDispatch->getInsGO());
+	this->onAllFinish();
+}
 
-                    if (this.mIsNeedInsPrefab)
-                    {
-                        if (this.mIsInsNeedCoroutine)
-                        {
-                            this.mResInsEventDispatch = new ResInsEventDispatch();
-                            this.mResInsEventDispatch.addEventHandle(null, onPrefabIns);
+// 所有的资源都加载完成
+void AuxPrefabLoader::onAllFinish()
+{
+	if (this->mIsNeedInsPrefab)
+	{
+		if (this->selfGo != nullptr)
+		{
+			this->mResLoadState->setSuccessLoaded();
+		}
+		else
+		{
+			this->mResLoadState->setFailed();
+		}
+	}
+	else
+	{
+		if (nullptr != this->mPrefabRes && this->mPrefabRes->hasSuccessLoaded())
+		{
+			this->mResLoadState->setSuccessLoaded();
+		}
+		else
+		{
+			this->mResLoadState->setFailed();
+		}
+	}
 
-                            if (this.mIsSetFakePos)
-                            {
-                                this.mPrefabRes.InstantiateObject(this.mPrefabRes.getPrefabName(), this.mIsSetInitOrientPos, UtilApi.FAKE_POS, UtilMath.UnitQuat, this.mResInsEventDispatch);
-                            }
-                            else
-                            {
-                                this.mPrefabRes.InstantiateObject(this.mPrefabRes.getPrefabName(), this.mIsSetInitOrientPos, UtilMath.ZeroVec3, UtilMath.UnitQuat, this.mResInsEventDispatch);
-                            }
-                        }
-                        else
-                        {
-                            if (this.mIsSetFakePos)
-                            {
-                                this.selfGo = this.mPrefabRes.InstantiateObject(this.mPrefabRes.getPrefabName(), this.mIsSetInitOrientPos, UtilApi.FAKE_POS, UtilMath.UnitQuat);
-                            }
-                            else
-                            {
-                                this.selfGo = this.mPrefabRes.InstantiateObject(this.mPrefabRes.getPrefabName(), this.mIsSetInitOrientPos, UtilMath.ZeroVec3, UtilMath.UnitQuat);
-                            }
+	if (this->mEvtHandle != nullptr)
+	{
+		this->mEvtHandle->dispatchEvent(this);
+	}
+}
 
-                            this.onAllFinish();
-                        }
-                    }
-                    else
-                    {
-                        this.onAllFinish();
-                    }
-                }
-                else if (this.mPrefabRes.hasFailed())
-                {
-                    this.mResLoadState.setFailed();
+void AuxPrefabLoader::unload()
+{
+	if (this->mPrefabRes != nullptr)
+	{
+		GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), AuxPrefabLoader::onPrefabLoaded);
+		this->mPrefabRes = nullptr;
+	}
 
-                    Ctx.mInstance.mPrefabMgr.unload(this.mPrefabRes.getResUniqueId(), this.onPrefabLoaded);
-                    this.mPrefabRes = null;
+	if (this->mResInsEventDispatch != nullptr)
+	{
+		this->mResInsEventDispatch->setIsValid(false);
+		this->mResInsEventDispatch = nullptr;
+	}
 
-                    if (this.mEvtHandle != null)
-                    {
-                        this.mEvtHandle.dispatchEvent(this);
-                    }
-                }
-            }
-            else
-            {
-                if (this.mEvtHandle != null)
-                {
-                    this.mEvtHandle.dispatchEvent(this);
-                }
-            }
-        }
+	if (this->mEvtHandle != nullptr)
+	{
+		this->mEvtHandle.clearEventHandle();
+		this->mEvtHandle = nullptr;
+	}
+}
 
-        public void onPrefabIns(IDispatchObject dispObj)
-        {
-            this.mResInsEventDispatch = dispObj as ResInsEventDispatch;
-            this.selfGo = this.mResInsEventDispatch.getInsGO();
-            this.onAllFinish();
-        }
+UObject* AuxPrefabLoader::getGameObject()
+{
+	return this->mSelfGo;
+}
 
-        // 所有的资源都加载完成
-        public void onAllFinish()
-        {
-            if (this.mIsNeedInsPrefab)
-            {
-                if (this.selfGo != null)
-                {
-                    this.mResLoadState.setSuccessLoaded();
-                }
-                else
-                {
-                    this.mResLoadState.setFailed();
-                }
-            }
-            else
-            {
-                if(null != mPrefabRes && mPrefabRes.hasSuccessLoaded())
-                {
-                    this.mResLoadState.setSuccessLoaded();
-                }
-                else
-                {
-                    this.mResLoadState.setFailed();
-                }
-            }
+// 获取预制模板
+UObject* AuxPrefabLoader::getPrefabTmpl()
+{
+	UObject* ret = nullptr;
+	if (nullptr != this->mPrefabRes)
+	{
+		ret = this->mPrefabRes->getObject();
+	}
+	return ret;
+}
 
-            if (this.mEvtHandle != null)
-            {
-                this.mEvtHandle.dispatchEvent(this);
-            }
-        }
+void AuxPrefabLoader::setClientDispose(bool isDispose)
+{
 
-        override public void unload()
-        {
-            if(this.mPrefabRes != null)
-            {
-                Ctx.mInstance.mPrefabMgr.unload(this.mPrefabRes.getResUniqueId(), this.onPrefabLoaded);
-                this.mPrefabRes = null;
-            }
+}
 
-            if(this.mResInsEventDispatch != null)
-            {
-                this.mResInsEventDispatch.setIsValid(false);
-                this.mResInsEventDispatch = null;
-            }
+bool AuxPrefabLoader::isClientDispose()
+{
+	return false;
+}
 
-            if (this.mEvtHandle != null)
-            {
-                this.mEvtHandle.clearEventHandle();
-                this.mEvtHandle = null;
-            }
-        }
+UObject* AuxPrefabLoader::InstantiateObject(EventDispatchDelegate insHandle)
+{
+	if (nullptr == this->mInsEventDispatch && nullptr != insHandle)
+	{
+		this->mInsEventDispatch = new ResInsEventDispatch();
+	}
+	if (nullptr != insHandle)
+	{
+		this->mInsEventDispatch->addEventHandle(nullptr, insHandle);
+	}
 
-        public GameObject getGameObject()
-        {
-            return this.mSelfGo;
-        }
+	if (this->mIsInsNeedCoroutine)
+	{
+		if (nullptr == this->mResInsEventDispatch)
+		{
+			this->mResInsEventDispatch = new ResInsEventDispatch();
+		}
+		this->mResInsEventDispatch->addEventHandle(nullptr, AuxPrefabLoader::onInstantiateObjectFinish);
 
-        // 获取预制模板
-        public GameObject getPrefabTmpl()
-        {
-            GameObject ret = null;
-            if(null != this.mPrefabRes)
-            {
-                ret = this.mPrefabRes.getObject();
-            }
-            return ret;
-        }
+		if (this->mIsSetFakePos)
+		{
+			this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi.FAKE_POS, UtilMath.UnitQuat, this->mResInsEventDispatch);
+		}
+		else
+		{
+			this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath.ZeroVec3, UtilMath.UnitQuat, this->mResInsEventDispatch);
+		}
+	}
+	else
+	{
+		if (this->mIsSetFakePos)
+		{
+			this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi.FAKE_POS, UtilMath.UnitQuat));
+		}
+		else
+		{
+			this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath.ZeroVec3, UtilMath.UnitQuat));
+		}
 
-        public void setClientDispose(bool isDispose)
-        {
+		this->onInstantiateObjectFinish();
+	}
 
-        }
+	return this->mSelfGo;
+}
 
-        public bool isClientDispose()
-        {
-            return false;
-        }
+void AuxPrefabLoader::onInstantiateObjectFinish(IDispatchObject* dispObj)
+{
+	if (nullptr != dispObj)
+	{
+		this->setSelfGo(this->mResInsEventDispatch->getInsGO());
+	}
 
-        public UnityEngine.GameObject InstantiateObject(MAction<IDispatchObject> insHandle = null)
-        {
-            if(null == this.mInsEventDispatch && null != insHandle)
-            {
-                this.mInsEventDispatch = new ResInsEventDispatch();
-            }
-            if(null != insHandle)
-            {
-                this.mInsEventDispatch.addEventHandle(null, insHandle);
-            }
-
-            if (this.mIsInsNeedCoroutine)
-            {
-                if (null == this.mResInsEventDispatch)
-                {
-                    this.mResInsEventDispatch = new ResInsEventDispatch();
-                }
-                this.mResInsEventDispatch.addEventHandle(null, onInstantiateObjectFinish);
-
-                if (this.mIsSetFakePos)
-                {
-                    this.mPrefabRes.InstantiateObject(this.mPrefabRes.getPrefabName(), this.mIsSetInitOrientPos, UtilApi.FAKE_POS, UtilMath.UnitQuat, this.mResInsEventDispatch);
-                }
-                else
-                {
-                    this.mPrefabRes.InstantiateObject(this.mPrefabRes.getPrefabName(), this.mIsSetInitOrientPos, UtilMath.ZeroVec3, UtilMath.UnitQuat, this.mResInsEventDispatch);
-                }
-            }
-            else
-            {
-                if (this.mIsSetFakePos)
-                {
-                    this.selfGo = this.mPrefabRes.InstantiateObject(this.mPrefabRes.getPrefabName(), this.mIsSetInitOrientPos, UtilApi.FAKE_POS, UtilMath.UnitQuat);
-                }
-                else
-                {
-                    this.selfGo = this.mPrefabRes.InstantiateObject(this.mPrefabRes.getPrefabName(), this.mIsSetInitOrientPos, UtilMath.ZeroVec3, UtilMath.UnitQuat);
-                }
-
-                this.onInstantiateObjectFinish();
-            }
-
-            return this.selfGo;
-        }
-
-        public void onInstantiateObjectFinish(IDispatchObject dispObj = null)
-        {
-            if(null != dispObj)
-            {
-                this.selfGo = this.mResInsEventDispatch.getInsGO();
-            }
-
-            if (null != this.mInsEventDispatch)
-            {
-                this.mInsEventDispatch.dispatchEvent(this);
-            }
-        }
-    }
+	if (nullptr != this->mInsEventDispatch)
+	{
+		this->mInsEventDispatch->dispatchEvent(this);
+	}
 }

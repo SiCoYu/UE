@@ -1,67 +1,59 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "AuxDownloader.h"
+
+char* AuxDownloader::getBytes()
 {
-    /**
-     * @brief 下载
-     */
-    public class AuxDownloader : AuxLoaderBase
-    {
-        protected DownloadItem mDownloadItem;
+	if (this->mDownloadItem != nullptr)
+	{
+		return this->mDownloadItem->getBytes();
+	}
 
-        public byte[] getBytes()
-        {
-            if (this.mDownloadItem != null)
-            {
-                return this.mDownloadItem.getBytes();
-            }
+	return nullptr;
+}
 
-            return null;
-        }
+// 下载一个资源
+void AuxDownloader::download(std::string origPath, EventDispatchDelegate dispObj, long fileLen, bool isWriteFile, int downloadType)
+{
+	Super::download(origPath, dispObj, fileLen, isWriteFile, downloadType);
 
-        // 下载一个资源
-        override public void download(string origPath, MAction<IDispatchObject> dispObj = null, long fileLen = 0, bool isWriteFile = true, int downloadType = (int)DownloadType.eHttpWeb)
-        {
-            base.download(origPath, dispObj, fileLen, isWriteFile, downloadType);
+	if (this->isInvalid())
+	{
+		DownloadParam* param = new DownloadParam();
 
-            if (this.isInvalid())
-            {
-                DownloadParam param = new DownloadParam();
+		param->setPath(origPath);
+		param->mLoadEventHandle = this.onDownloaded;
+		param->mFileLen = fileLen;
+		param->mIsWriteFile = isWriteFile;
+		param->mDownloadType = downloadType;
 
-                param.setPath(origPath);
-                param.mLoadEventHandle = this.onDownloaded;
-                param.mFileLen = fileLen;
-                param.mIsWriteFile = isWriteFile;
-                param.mDownloadType = (DownloadType)downloadType;
+		GDownloadMgr->download(param);
+	}
+	else if (this->hasLoadEnd())
+	{
+		this->onDownloaded(this->mDownloadItem);
+	}
+}
 
-                Ctx.mInstance.mDownloadMgr.download(param);
-            }
-            else if (this.hasLoadEnd())
-            {
-                this.onDownloaded(this.mDownloadItem);
-            }
-        }
+// 下载完成
+void AuxDownloader::onDownloaded(IDispatchObject* dispObj)
+{
+	if (nullptr != dispObj)
+	{
+		this->mDownloadItem = (DownloadItem*)dispObj;
 
-        // 下载完成
-        public void onDownloaded(IDispatchObject dispObj)
-        {
-            if (null != dispObj)
-            {
-                this.mDownloadItem = dispObj as DownloadItem;
+		if (this->mDownloadItem->hasSuccessLoaded())
+		{
+			this->mResLoadState->setSuccessLoaded();
+		}
+		else if (this->mDownloadItem->hasFailed())
+		{
+			this->mResLoadState->setFailed();
+			this->mDownloadItem = nullptr;
+		}
+	}
 
-                if (this.mDownloadItem.hasSuccessLoaded())
-                {
-                    this.mResLoadState.setSuccessLoaded();
-                }
-                else if (this.mDownloadItem.hasFailed())
-                {
-                    this.mResLoadState.setFailed();
-                    this.mDownloadItem = null;
-                }
-            }
-
-            if (this.mEvtHandle != null)
-            {
-                this.mEvtHandle.dispatchEvent(this);
-            }
-        }
-    }
+	if (this->mEvtHandle != nullptr)
+	{
+		this->mEvtHandle->dispatchEvent(this);
+	}
 }
