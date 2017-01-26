@@ -32,7 +32,7 @@ bool SceneSys::isSceneLoaded()
 {
 	if (nullptr != this->mScene)
 	{
-		return this.mScene.isSceneLoaded();
+		return this->mScene->isSceneLoaded();
 	}
 
 	return false;
@@ -62,7 +62,7 @@ void SceneSys::unloadScene()
 	}
 	if (nullptr != this->mAuxLevelLoader)
 	{
-		this->mAuxLevelLoader.unload();
+		this->mAuxLevelLoader->unload();
 		this->mAuxLevelLoader = nullptr;
 	}
 }
@@ -76,7 +76,7 @@ void SceneSys::loadSceneRes(std::string filename)
 		this.mAuxLevelLoader = new AuxLevelLoader();
 	}
 
-	this->mAuxLevelLoader.asyncLoad(filename, onSceneResLoadded);
+	this->mAuxLevelLoader->asyncLoad(filename, onSceneResLoadded);
 }
 
 void SceneSys::onSceneResLoadded(IDispatchObject* dispObj)
@@ -84,7 +84,7 @@ void SceneSys::onSceneResLoadded(IDispatchObject* dispObj)
 	//ResItem res = dispObj as ResItem;
 	this->mOnSceneLoadedDispatch->dispatchEvent(mScene);
 
-	Ctx.mInstance.mNetCmdNotify.isStopNetHandle = false;        // 加载场景完成需要处理处理消息
+	//Ctx.mInstance.mNetCmdNotify.isStopNetHandle = false;        // 加载场景完成需要处理处理消息
 
 	this->mAuxLevelLoader->unload();
 

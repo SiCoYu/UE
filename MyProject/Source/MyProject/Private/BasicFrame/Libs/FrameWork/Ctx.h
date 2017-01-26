@@ -34,7 +34,7 @@ class SystemSetting;
 class LuaSystem;
 class ISceneEventCB;
 class MyLatentActionManager;
-class SceneSys
+class SceneSys;
 
 class Ctx : public Singleton<Ctx>
 {
