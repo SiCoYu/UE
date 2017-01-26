@@ -3,6 +3,8 @@
 #include "UMGForm.h"
 #include "UIFunctionBar.generated.h"
 
+class IDispatchObject;
+
 UCLASS(config = Game)
 class UUIFunctionBar : public UUMGForm
 {
@@ -21,4 +23,7 @@ public:
 	void onTestButtonTouch();
 	UFUNCTION(BlueprintCallable, Category = "MyButton")
 	void onLevelLoaded();
+
+public:
+	void onLevelLoadedDispatch(IDispatchObject* dispObj);
 };
