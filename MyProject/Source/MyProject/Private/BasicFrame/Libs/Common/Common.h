@@ -26,5 +26,6 @@
 #include "LuaSystem.h"
 #include "GameSceneEventCB.h"
 #include "MyLatentActionManager.h"
+#include "SceneSys.h"
 
 #endif
