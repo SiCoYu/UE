@@ -1,6 +1,11 @@
 using UnrealBuildTool;
 using System.IO; //路径获取需要用到IO
 
+/**
+ * @brief 需要在 MyProject\MyProject.uproject 工程文件中添加如下，才能编译 Plugin
+ "AdditionalPluginDirectories": [
+ "/MyProject/Plugins"
+ */
 // http://www.cnblogs.com/UnrealEngine4/p/3729720.html
 // UnrealEngine\Engine\Plugins\Tests\RuntimeTests 这是一个插件模板，可以从这里拷贝基本插件框架
 // http://blog.csdn.net/yangxuan0261/article/details/52098104
