@@ -19,4 +19,16 @@ class UMyDelegateBase : public UObject
 
 public:
 	FMyDelegateDef::MyDelegateBaseHandle mMyDelegateBaseHandle;
+
+	FMyDelegateDef::MyDelegateThreeParamsTestEvent mMyDelegateThreeParamsTestHandle;
+
+	FMyDelegateDef::MyDelegateMultiThreeParamsTestEvent mMyDelegateMultiThreeParamsTestEvent
+	FMyDelegateDef::MyDelegateMultiThreeParamsTestEvent::FDelegate mOnMultiThreeParamsTestDelegate;
+	FDelegateHandle mOnMultiThreeParamsTestDelegateHandle;
+
+public:
+	void testOneDelegate();
+	void testMultiDelegate();
+	void handle(int aaa, int bbb, bool ccc);
+	void multiHandle(int aaa, int bbb, bool ccc);
 };
