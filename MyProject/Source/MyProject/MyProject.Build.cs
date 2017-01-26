@@ -101,6 +101,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Module",
                 "MyProject/Private/BasicFrame/Libs/Scene",
 
+                "MyProject/Private/BasicFrame/Libs/Auxiliary/AuxLoader",
+
                 "MyProject/Private/BasicFrame/Module",
                 "MyProject/Private/BasicFrame/Module/Game",
                 "MyProject/Private/BasicFrame/Module/Game/EventCB",
