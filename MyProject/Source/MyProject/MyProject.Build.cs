@@ -99,6 +99,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/LuaCppInterface",
                 "MyProject/Private/BasicFrame/Libs/LuaCBridge",
                 "MyProject/Private/BasicFrame/Libs/Module",
+                "MyProject/Private/BasicFrame/Libs/Scene",
 
                 "MyProject/Private/BasicFrame/Module",
                 "MyProject/Private/BasicFrame/Module/Game",
