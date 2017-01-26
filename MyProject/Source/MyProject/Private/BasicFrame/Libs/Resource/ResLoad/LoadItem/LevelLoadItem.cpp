@@ -8,6 +8,7 @@
 #include "ResEventDispatch.h"
 #include "NonRefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
+#include "MyDelegateLevelLoad.h"
 
 LevelLoadItem::LevelLoadItem()
 {
@@ -37,7 +38,7 @@ void LevelLoadItem::reset()
 	//if (nullptr != this->mOnLevelLoadDelegate)
 	{
 		//this->mOnLevelLoadDelegate.Remove(this->mOnLevelLoadDelegateHandle);
-		this->mMyDelegateLevelLoad.Unbind();
+		this->mMyDelegateLevelLoad->mMyDelegateBaseHandle.Unbind();
 	}
 }
 
@@ -48,6 +49,7 @@ void LevelLoadItem::load()
 	if (nullptr == this->mMyDelegateLevelLoad)
 	{
 		this->mMyDelegateLevelLoad = EngineApi::NewObject<UMyDelegateLevelLoad>();
+		this->mMyDelegateLevelLoad->Add
 	}
 
 	//this->mOnLevelLoadDelegate = FMyDelegateDef::MyDelegateBaseHandle::CreateRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);

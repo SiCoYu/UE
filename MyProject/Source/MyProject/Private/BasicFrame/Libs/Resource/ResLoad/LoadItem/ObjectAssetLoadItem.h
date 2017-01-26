@@ -2,15 +2,18 @@
 #define __ObjectAssetLoadItem_H
 
 #include "LoadItem.h"
-#include "CoreUObject.h"	// Class 
+#include "CoreUObject.h"	// UClass 
+#include "BaseClassDef.h"	// M_DECLARE_SUPER_KW
 
 /**
  * @brief 从 uasset 扩展名的本地 Package 中加载资源
  */
 class ObjectAssetLoadItem : public LoadItem
 {
+	M_DECLARE_SUPER_KW(LoadItem)
+
 protected:
-	UClass* mResObj = nullptr;		// uasset 类型的资源
+	UClass* mResObj;		// uasset 类型的资源
 
 protected:
 	//void loadFromDefaultAssetBundle()

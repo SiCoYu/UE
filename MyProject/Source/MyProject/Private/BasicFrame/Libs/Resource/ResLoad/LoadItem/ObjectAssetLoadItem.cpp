@@ -3,25 +3,25 @@
 
 ObjectAssetLoadItem::ObjectAssetLoadItem()
 {
-
+	this->mResObj = nullptr;
 }
 
 UClass* ObjectAssetLoadItem::getResObj()
 {
-	return mResObj;
+	return this->mResObj;
 }
 
 void ObjectAssetLoadItem::setResObj(UClass* value)
 {
-	mResObj = value;
+	this->mResObj = value;
 }
 
 void ObjectAssetLoadItem::load()
 {
-	LoadItem::load();
+	Super::load();
 }
 
 void ObjectAssetLoadItem::unload()
 {
-	LoadItem::unload();
+	Super::unload();
 }
