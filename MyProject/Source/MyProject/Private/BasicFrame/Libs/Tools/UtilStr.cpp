@@ -38,6 +38,12 @@ std::string UtilStr::Substring(std::string& srcStr, int startIndex, int length)
 	return srcStr.substr(startIndex, length);
 }
 
+FName UtilStr::ConvStdStr2FName(std::string& stdStr)
+{
+	FName ConvertedFString = FName(stdStr.c_str());
+	return ConvertedFString;
+}
+
 FName UtilStr::ConvFString2FName(FString& fStr)
 {
 	FName ConvertedFString = FName(*fStr);

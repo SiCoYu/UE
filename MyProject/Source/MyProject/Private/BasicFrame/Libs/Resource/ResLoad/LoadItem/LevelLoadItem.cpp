@@ -133,5 +133,5 @@ void LevelLoadItem::assetAssetBundlesLevelLoaded(IDispatchObject* dispObj)
 		this->mNonRefCountResLoadResultNotify->getResLoadState()->setFailed();
 	}
 
-	this->mNonRefCountResLoadResultNotify->loadResEventDispatch->dispatchEvent(this);
+	this->mNonRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }

@@ -39,7 +39,7 @@ public:
 protected:
 	void loadFromAssetBundleByCoroutine();
 	void loadFromAssetBundle();
-	void assetAssetBundlesLevelLoaded();
+	void assetAssetBundlesLevelLoaded(IDispatchObject* dispObj);
 };
 
 #endif

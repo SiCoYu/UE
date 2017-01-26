@@ -562,9 +562,10 @@ const FWorldContext* EngineApi::GetWorldContextFromGameViewport(const UGameViewp
 	return GEngine->GetWorldContextFromGameViewport(InViewport);
 }
 
-void EngineApi::LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
+void EngineApi::LoadStreamLevel(const UObject* WorldContextObject, std::string LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
 {
-	return UGameplayStatics::LoadStreamLevel(WorldContextObject, LevelName, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
+	FName name = UtilStr::ConvStdStr2FName(LevelName);
+	return UGameplayStatics::LoadStreamLevel(WorldContextObject, name, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
 }
 
 APlayerController* EngineApi::GetPrimaryPlayerController()

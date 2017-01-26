@@ -28,6 +28,7 @@ public:
 	// atoi64(string to int64)
 	// Atod(string to double precision float)
 public:
+	static FName ConvStdStr2FName(std::string& stdStr);
 	static FName ConvFString2FName(FString& fStr);
 	static FString ConvStdStr2FString(std::string& stdStr);
 	static std::string ConvFString2StdStr(FString& fStr);
