@@ -18,11 +18,11 @@ class UMyDelegateBase : public UObject
 	GENERATED_UCLASS_BODY()
 
 public:
-	FMyDelegateDef::MyDelegateBaseHandle mMyDelegateBaseHandle;
+	FMyDelegateDef::MyDelegateBaseEvent mMyDelegateBaseEvent;
 
-	FMyDelegateDef::MyDelegateThreeParamsTestEvent mMyDelegateThreeParamsTestHandle;
+	FMyDelegateDef::MyDelegateThreeParamsTestEvent mMyDelegateThreeParamsTestEvent;
 
-	FMyDelegateDef::MyDelegateMultiThreeParamsTestEvent mMyDelegateMultiThreeParamsTestEvent
+	FMyDelegateDef::MyDelegateMultiThreeParamsTestEvent mMyDelegateMultiThreeParamsTestEvent;
 	FMyDelegateDef::MyDelegateMultiThreeParamsTestEvent::FDelegate mOnMultiThreeParamsTestDelegate;
 	FDelegateHandle mOnMultiThreeParamsTestDelegateHandle;
 

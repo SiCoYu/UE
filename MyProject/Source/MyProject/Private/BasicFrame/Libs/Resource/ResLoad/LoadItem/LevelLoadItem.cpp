@@ -38,7 +38,7 @@ void LevelLoadItem::reset()
 	//if (nullptr != this->mOnLevelLoadDelegate)
 	{
 		//this->mOnLevelLoadDelegate.Remove(this->mOnLevelLoadDelegateHandle);
-		this->mMyDelegateLevelLoad->mMyDelegateBaseHandle.Unbind();
+		this->mMyDelegateLevelLoad->mMyDelegateBaseEvent.Unbind();
 	}
 }
 
@@ -54,7 +54,7 @@ void LevelLoadItem::load()
 
 	//this->mOnLevelLoadDelegate = FMyDelegateDef::MyDelegateBaseHandle::CreateRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
 	//this->mOnLevelLoadDelegateHandle = this->mOnLevelLoadDelegate.Add(this->mOnLevelLoadDelegate);
-	this->mMyDelegateLevelLoad->mMyDelegateBaseHandle.BindRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
+	this->mMyDelegateLevelLoad->mMyDelegateBaseEvent.BindRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
 
 	if (eLoadResource == this->mResLoadType)
 	{

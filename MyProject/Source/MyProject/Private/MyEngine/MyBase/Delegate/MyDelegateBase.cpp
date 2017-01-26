@@ -9,10 +9,10 @@ UMyDelegateBase::UMyDelegateBase(const class FObjectInitializer& PCIP)
 
 void UMyDelegateBase::testOneDelegate()
 {
-	this->mMyDelegateThreeParamsTestHandle.BindUObject(this, &UMyDelegateBase::handle);
+	this->mMyDelegateThreeParamsTestEvent.BindUObject(this, &UMyDelegateBase::handle);
 	//this->mMyDelegateThreeParamsTestHandle.BindRaw(this, &UMyDelegateBase::handle);
-	this->mMyDelegateThreeParamsTestHandle.Execute(10, 10, true);
-	this->mMyDelegateThreeParamsTestHandle.Unbind();
+	this->mMyDelegateThreeParamsTestEvent.Execute(10, 10, true);
+	this->mMyDelegateThreeParamsTestEvent.Unbind();
 }
 
 void UMyDelegateBase::testMultiDelegate()
