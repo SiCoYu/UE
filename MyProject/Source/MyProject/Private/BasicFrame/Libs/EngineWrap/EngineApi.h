@@ -356,6 +356,9 @@ public:
 	void TestFileReadCompressed(FString _path);
 	void TestFileWriteUnCompressed(FString _path);
 	void TestFileReadUnCompressed(FString _path);
+
+	static bool IsPendingKill(AActor* actor);
+	static void Destroy(AActor* actor);
 };
 
 #include "EngineApi.inl"

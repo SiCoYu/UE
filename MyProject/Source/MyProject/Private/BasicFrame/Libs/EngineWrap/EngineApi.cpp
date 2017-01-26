@@ -883,3 +883,13 @@ void EngineApi::TestFileReadUnCompressed(FString _path)
 	}
 	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Yellow, str2 + str3 + str4);
 }
+
+bool EngineApi::IsPendingKill(AActor* actor)
+{
+	return actor->IsPendingKill();
+}
+
+void EngineApi::Destroy(AActor* actor)
+{
+	actor->Destroy();
+}

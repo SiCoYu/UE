@@ -34,6 +34,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyBase/AI",
                 "MyProject/Private/MyEngine/MyBase/Anim",
                 "MyProject/Private/MyEngine/MyBase/Delegate",
+                "MyProject/Private/MyEngine/MyBase/Misc",
 
                 "MyProject/Private/MyEngine/MyFly",
                 "MyProject/Private/MyEngine/MyFly/Actor",

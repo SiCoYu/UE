@@ -49,12 +49,12 @@ void LevelLoadItem::load()
 	if (nullptr == this->mMyDelegateLevelLoad)
 	{
 		this->mMyDelegateLevelLoad = EngineApi::NewObject<UMyDelegateLevelLoad>();
-		this->mMyDelegateLevelLoad->Add
+		//this->mMyDelegateLevelLoad->Add
 	}
 
 	//this->mOnLevelLoadDelegate = FMyDelegateDef::MyDelegateBaseHandle::CreateRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
 	//this->mOnLevelLoadDelegateHandle = this->mOnLevelLoadDelegate.Add(this->mOnLevelLoadDelegate);
-	this->mMyDelegateLevelLoad->BindRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
+	this->mMyDelegateLevelLoad->mMyDelegateBaseHandle.BindRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
 
 	if (eLoadResource == this->mResLoadType)
 	{
