@@ -11,8 +11,8 @@ enum ResLoadType
 	eLoadDicWeb,    // 从本地磁盘加载，但是使用 www Web 接口
 	eLoadWeb,       // 从 Web 加载
 
-	eStreamingAssets,   // 从 StreamingAssets 加载
-	ePersistentData,
+	eLoadStreamingAssets,   // 从 StreamingAssets 加载
+	eLoadPersistentData,
 	eLoadNum
 };
 
