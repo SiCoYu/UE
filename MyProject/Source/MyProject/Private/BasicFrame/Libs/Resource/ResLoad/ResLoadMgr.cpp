@@ -87,11 +87,11 @@ void ResLoadMgr::loadData(LoadParam* param)
 	// 链接不过
 	param->mResPackType = eDataType;
 
-	if (eStreamingAssets == param->mResLoadType)
+	if (eLoadStreamingAssets == param->mResLoadType)
 	{
 		param->mPath = UtilPath::Combine(GFileSys->getLocalReadDir(), param->mPath);
 	}
-	else if (ePersistentData == param->mResLoadType)
+	else if (eLoadPersistentData == param->mResLoadType)
 	{
 		param->mPath = UtilPath::Combine(GFileSys->getLocalWriteDir(), param->mPath);
 	}

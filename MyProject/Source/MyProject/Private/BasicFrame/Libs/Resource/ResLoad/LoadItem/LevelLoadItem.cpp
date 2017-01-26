@@ -5,12 +5,15 @@
 #include "Common.h"
 #include "EngineApi.h"
 #include "MyDelegateDef.h"
+#include "ResEventDispatch.h"
+#include "NonRefCountResLoadResultNotify.h"
+#include "ResLoadState.h"
 
 LevelLoadItem::LevelLoadItem()
 {
 	this->mMyDelegateLevelLoad = nullptr;
-	this->mOnLevelLoadDelegate = nullptr;
-	this->mOnLevelLoadDelegateHandle = nullptr;
+	//this->mOnLevelLoadDelegate = nullptr;
+	//this->mOnLevelLoadDelegateHandle = nullptr;
 }
 
 LevelLoadItem::~LevelLoadItem()
@@ -30,9 +33,11 @@ std::string LevelLoadItem::getLevelName()
 
 void LevelLoadItem::reset()
 {
-	if (nullptr != this->mOnLevelLoadDelegate && nullptr != this->mOnLevelLoadDelegateHandle)
+	//if (nullptr != this->mOnLevelLoadDelegate && nullptr != this->mOnLevelLoadDelegateHandle)
+	//if (nullptr != this->mOnLevelLoadDelegate)
 	{
-		this->mOnLevelLoadDelegate.Remove(this->mOnLevelLoadDelegateHandle);
+		//this->mOnLevelLoadDelegate.Remove(this->mOnLevelLoadDelegateHandle);
+		this->mMyDelegateLevelLoad.Unbind();
 	}
 }
 
@@ -45,16 +50,17 @@ void LevelLoadItem::load()
 		this->mMyDelegateLevelLoad = EngineApi::NewObject<UMyDelegateLevelLoad>();
 	}
 
-	this->mOnLevelLoadDelegate = FMyDelegateDef::MyDelegateBaseHandle::FDelegate::CreateUObject(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
-	this->mOnLevelLoadDelegateHandle = this->mOnLevelLoadDelegate.Add(this->mOnLevelLoadDelegate);
+	//this->mOnLevelLoadDelegate = FMyDelegateDef::MyDelegateBaseHandle::CreateRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
+	//this->mOnLevelLoadDelegateHandle = this->mOnLevelLoadDelegate.Add(this->mOnLevelLoadDelegate);
+	this->mMyDelegateLevelLoad->BindRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
 
 	if (eLoadResource == this->mResLoadType)
 	{
 		this->mNonRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
-		this->mNonRefCountResLoadResultNotify->loadResEventDispatch()->dispatchEvent(this);
+		this->mNonRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 	}
 	else if (eLoadStreamingAssets == mResLoadType ||
-		eLoadLocalPersistentData == mResLoadType)
+		eLoadPersistentData == mResLoadType)
 	{
 		// 需要加载 AssetBundles 加载
 		if (this->mIsLoadNeedCoroutine)

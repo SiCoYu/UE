@@ -21,8 +21,8 @@ protected:
 	std::string mLevelName;
 	UMyDelegateLevelLoad* mMyDelegateLevelLoad;
 
-	FMyDelegateDef::MyDelegateBaseHandle::FDelegate mOnLevelLoadDelegate;
-	FDelegateHandle mOnLevelLoadDelegateHandle;
+	//FMyDelegateDef::MyDelegateBaseHandle mOnLevelLoadDelegate;
+	//FDelegateHandle mOnLevelLoadDelegateHandle;
 
 public:
 	LevelLoadItem();

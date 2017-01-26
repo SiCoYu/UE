@@ -9,5 +9,5 @@ UMyDelegateLevelLoad::UMyDelegateLevelLoad(const class FObjectInitializer& PCIP)
 
 void UMyDelegateLevelLoad::onLevelLoaded()
 {
-	this->mMyDelegateBaseHandle.Broadcast(null);
+	this->mMyDelegateBaseHandle.Execute(nullptr);
 }

@@ -4,6 +4,8 @@
 #include "Delegates/DelegateCombinations.h"		// DECLARE_DELEGATE_OneParams
 #include "IDispatchObject.h"
 #include "MyDelegateDef.h"
+#include "Delegates/Delegate.h"
+//#include "Delegates/DelegateSignatureImpl.inl"
 #include "MyDelegateBase.generated.h"
 
 /**
