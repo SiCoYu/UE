@@ -2,10 +2,10 @@
 
 #include "EventDispatchDelegate.h"
 #include <string>
+#include "AuxLevelLoader.h"	// AuxLevelLoader, Namespace 必须包含
 
 class AddOnceAndCallOnceEventDispatch;
 class Scene;
-class AuxLevelLoader;
 class IDispatchObject;
 
 /**
@@ -17,7 +17,7 @@ class SceneSys
 protected:
 	AddOnceAndCallOnceEventDispatch* mOnSceneLoadedDispatch;
     Scene* mScene;
-    AuxLevelLoader* mAuxLevelLoader;
+	MyNS::AuxLevelLoader* mAuxLevelLoader;
 
 public:
 	SceneSys();

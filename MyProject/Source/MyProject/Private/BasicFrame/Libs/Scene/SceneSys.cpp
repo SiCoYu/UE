@@ -14,7 +14,7 @@ SceneSys::SceneSys()
 void SceneSys::init()
 {
 	this->mOnSceneLoadedDispatch = SAFE_NEW AddOnceAndCallOnceEventDispatch();
-	this->mAuxLevelLoader = SAFE_NEW AuxLevelLoader();
+	this->mAuxLevelLoader = SAFE_NEW MyNS::AuxLevelLoader();
 }
 
 void SceneSys::dispose()
@@ -47,7 +47,7 @@ void SceneSys::loadScene(std::string filename, EventDispatchDelegate func)
 	this->mScene = new Scene();
 	if (func != nullptr)
 	{
-		this->mOnSceneLoadedDispatch.addEventHandle(func);
+		this->mOnSceneLoadedDispatch->addEventHandle(func);
 	}
 
 	this->loadSceneRes(filename);
@@ -57,7 +57,7 @@ void SceneSys::unloadScene()
 {
 	if (nullptr != this->mScene)
 	{
-		this->mScene.dispose();
+		this->mScene->dispose();
 		this->mScene = nullptr;
 	}
 	if (nullptr != this->mAuxLevelLoader)
@@ -69,14 +69,14 @@ void SceneSys::unloadScene()
 
 void SceneSys::loadSceneRes(std::string filename)
 {
-	Ctx.mInstance.mNetCmdNotify.isStopNetHandle = true;        // 加载场景需要停止处理消息，因为很多资源都要等到场景加载完成才初始化
+	//Ctx.mInstance.mNetCmdNotify.isStopNetHandle = true;        // 加载场景需要停止处理消息，因为很多资源都要等到场景加载完成才初始化
 
-	if (nullptr == this.mAuxLevelLoader)
+	if (nullptr == this->mAuxLevelLoader)
 	{
-		this.mAuxLevelLoader = new AuxLevelLoader();
+		this->mAuxLevelLoader = new MyNS::AuxLevelLoader();
 	}
 
-	this->mAuxLevelLoader->asyncLoad(filename, onSceneResLoadded);
+	this->mAuxLevelLoader->asyncLoad(filename, EventDispatchDelegate(this, &SceneSys::onSceneResLoadded));
 }
 
 void SceneSys::onSceneResLoadded(IDispatchObject* dispObj)
