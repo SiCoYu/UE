@@ -1,3 +1,8 @@
+#ifndef __EngineApi_H
+#error "EngineApi.inl file can only include in EngineApi.h"
+#endif
+
+
 template< class T >
 T EngineApi::Max(const TArray<T>& Values, int32* MaxIndex)
 {

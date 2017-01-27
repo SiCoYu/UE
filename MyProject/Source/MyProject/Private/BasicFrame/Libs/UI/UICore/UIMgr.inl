@@ -1,3 +1,7 @@
+#ifndef __UIMgr_H
+#error "UIMgr.inl file can only include in UIMgr.h"
+#endif
+
 #include "EngineApi.h"
 #include "ClassAssetInsRes.h"
 #include "Common.h"

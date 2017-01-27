@@ -1,3 +1,7 @@
+#ifndef __UtilContainers_H
+#error "UtilContainers.inl file can only include in UtilContainers.h"
+#endif
+
 //==================== vector ÇøÓò ===================
 template<class T>
 int UtilVector::IndexOf(std::vector<T>& vec, T& item)
