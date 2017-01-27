@@ -1,5 +1,5 @@
-#ifndef __UtilPath_H_
-#define __UtilPath_H_
+#ifndef __UtilPath_H
+#define __UtilPath_H
 
 #include <string>
 #include <sstream>

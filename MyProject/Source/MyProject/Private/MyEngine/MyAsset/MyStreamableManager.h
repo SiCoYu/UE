@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef __MyStreamableManager_H
+#define __MyStreamableManager_H
+
 #include <string>
 #include "Engine/StreamableManager.h"	 // FStreamableManager
 
@@ -39,3 +42,5 @@ protected:
 };
 
 #include "MyStreamableManager.inl"
+
+#endif
