@@ -12,6 +12,11 @@ AMyActorBase::~AMyActorBase()
 
 }
 
+void AMyActorBase::NotifyActorOnClicked(FKey ButtonPressed)
+{
+	Super::NotifyActorOnClicked(ButtonPressed);
+}
+
 void AMyActorBase::SetInfo(FString name)
 {
 	this->mName = name;

@@ -20,3 +20,19 @@ TScriptDelegate<FWeakObjectPtr> UtilApi::addUObjectButtonClickHandle(UUserWidget
 
 	return handle;
 }
+
+void UtilApi::Destroy(AActor* actor, bool bNetForce, bool bShouldModifyLevel)
+{
+	if (nullptr != actor)
+	{
+		actor->Destroy(bNetForce, bShouldModifyLevel);
+	}
+}
+
+void UtilApi::DestroyImmediate(AActor* actor, bool bNetForce, bool bShouldModifyLevel)
+{
+	if (nullptr != actor)
+	{
+		actor->Destroy(bNetForce, bShouldModifyLevel);
+	}
+}

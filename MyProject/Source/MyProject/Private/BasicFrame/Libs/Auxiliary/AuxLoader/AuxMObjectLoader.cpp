@@ -36,19 +36,19 @@ namespace MyNS
 		{
 			if (this->mSelfGo != nullptr)
 			{
-				//UtilApi.DestroyImmediate(this.mSelfGo);
+				UtilApi::DestroyImmediate(this.mSelfGo);
 			}
 		}
 
 		Super::dispose();
 	}
 
-	UObject* AuxMObjectLoader::getSelfGo()
+	AActor* AuxMObjectLoader::getSelfGo()
 	{
 		return this->mSelfGo;
 	}
 
-	void AuxMObjectLoader::setSelfGo(UObject* value)
+	void AuxMObjectLoader::setSelfGo(AActor* value)
 	{
 		this->mSelfGo = value;
 	}
@@ -231,18 +231,18 @@ namespace MyNS
 		}
 	}
 
-	UObject* AuxMObjectLoader::getGameObject()
+	AActor* AuxMObjectLoader::getGameObject()
 	{
 		return this->mSelfGo;
 	}
 
 	// 获取预制模板
-	UObject* AuxMObjectLoader::getPrefabTmpl()
+	AActor* AuxMObjectLoader::getPrefabTmpl()
 	{
-		UObject* ret = nullptr;
+		AActor* ret = nullptr;
 		if (nullptr != this->mPrefabRes)
 		{
-			ret = this->mPrefabRes->getObject();
+			ret = Case<AActor>(this->mPrefabRes->getObject());
 		}
 		return ret;
 	}
@@ -257,7 +257,7 @@ namespace MyNS
 		return false;
 	}
 
-	UObject* AuxMObjectLoader::InstantiateObject(EventDispatchDelegate insHandle)
+	AActor* AuxMObjectLoader::InstantiateObject(EventDispatchDelegate insHandle)
 	{
 		if (nullptr == this->mInsEventDispatch && nullptr != insHandle)
 		{
