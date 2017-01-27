@@ -54,6 +54,8 @@ namespace MyNS
 			param->setLoadEventHandle(EventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
 			param->setIsResNeedCoroutine(true);
 			param->setIsLoadNeedCoroutine(true);
+			param->setResPackType(eLevelType);
+			param->setResLoadType(eLoadResource);
 			GResLoadMgr->loadAsset(param);
 			GPoolSys->deleteObj(param);
 		}
