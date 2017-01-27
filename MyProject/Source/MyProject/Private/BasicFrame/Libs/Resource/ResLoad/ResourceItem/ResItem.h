@@ -10,6 +10,7 @@
 class RefCountResLoadResultNotify;
 class LoadItem;
 class UObject;
+class LoadParam;
 
 class ResItem : public IDispatchObject
 {
@@ -56,6 +57,7 @@ public:
 	bool hasFailed();
 
 	virtual std::string getResUniqueId();
+	void setLoadParam(LoadParam* param);
 };
 
 #endif

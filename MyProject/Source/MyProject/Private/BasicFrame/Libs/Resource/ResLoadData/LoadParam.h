@@ -46,6 +46,9 @@ public:
 	void setPath(std::string value);
 	std::string getPath();
 
+	void setResUniqueId(std::string value);
+	std::string getResUniqueId();
+
 	void setOrigPath(std::string value);
 	std::string getOrigPath();
 
@@ -67,11 +70,11 @@ public:
 	void setLoadEventHandle(EventDispatchDelegate value);
 	EventDispatchDelegate getLoadEventHandle();
 
-	std::string setPrefabName(std::string value);
+	void setPrefabName(std::string value);
 	std::string getPrefabName();
-	std::string setExtName(std::string value);
+	void setExtName(std::string value);
 	std::string getExtName();
-	std::string setLvlName(std::string value);
+	void setLvlName(std::string value);
 	std::string getLvlName();
 
 	void resetDefault();          // 将数据清空，有时候上一次调用的时候的参数 m_loaded 还在，结果被认为是这一次的回调了

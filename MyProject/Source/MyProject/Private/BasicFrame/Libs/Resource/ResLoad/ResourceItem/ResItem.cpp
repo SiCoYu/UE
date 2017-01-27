@@ -4,6 +4,7 @@
 #include "ResLoadState.h"
 #include "ResEventDispatch.h"
 #include "RefCount.h"
+#include "LoadParam.h"
 
 ResItem::ResItem()
 {
@@ -153,4 +154,14 @@ bool ResItem::hasFailed()
 std::string ResItem::getResUniqueId()
 {
 	return "";
+}
+
+void ResItem::setLoadParam(LoadParam* param)
+{
+	this->setResNeedCoroutine(param->getIsResNeedCoroutine());
+	this->setResPackType(param->getResPackType());
+	this->setResLoadType(param->getResLoadType());
+	this->setPath(param->getPath());
+	this->setPathNoExt(param->getPathNoExt());
+	this->setExtName(param->getExtName());
 }

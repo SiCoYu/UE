@@ -48,8 +48,8 @@ void ResLoadMgr::dispose()
 // 重置加载设置
 void ResLoadMgr::resetLoadParam(LoadParam* loadParam)
 {
-	loadParam->mIsLoadNeedCoroutine = true;
-	loadParam->mIsResNeedCoroutine = true;
+	loadParam->setIsLoadNeedCoroutine(true);
+	loadParam->setIsResNeedCoroutine(true);
 }
 
 void ResLoadMgr::loadAsset(LoadParam* param)
@@ -85,19 +85,19 @@ LoadItem* ResLoadMgr::getLoadItem(std::string path)
 void ResLoadMgr::loadData(LoadParam* param)
 {
 	// 链接不过
-	param->mResPackType = eDataType;
+	param->setResPackType(eDataType);
 
-	if (eLoadStreamingAssets == param->mResLoadType)
+	if (eLoadStreamingAssets == param->getResLoadType())
 	{
-		param->mPath = UtilPath::Combine(GFileSys->getLocalReadDir(), param->mPath);
+		param->setPath(UtilPath::Combine(GFileSys->getLocalReadDir(), param->getPath()));
 	}
-	else if (eLoadPersistentData == param->mResLoadType)
+	else if (eLoadPersistentData == param->getResLoadType())
 	{
-		param->mPath = UtilPath::Combine(GFileSys->getLocalWriteDir(), param->mPath);
+		param->setPath(UtilPath::Combine(GFileSys->getLocalWriteDir(), param->getPath()));
 	}
-	else if (eLoadWeb == param->mResLoadType)
+	else if (eLoadWeb == param->getResLoadType())
 	{
-		param->mPath = UtilPath::Combine(GCfg->mWebIP, param->mPath);
+		param->setPath(UtilPath::Combine(GCfg->mWebIP, param->getPath()));
 	}
 	//if (!string.IsNullOrEmpty(param.mVersion))
 	//{
@@ -109,8 +109,8 @@ void ResLoadMgr::loadData(LoadParam* param)
 // eBundleType 打包类型资源加载
 void ResLoadMgr::loadBundle(LoadParam* param)
 {
-	param->mResPackType = eBundleType;
-	param->mResLoadType = GCfg->mResLoadType;
+	param->setResPackType(eBundleType);
+	param->setResLoadType(GCfg->mResLoadType);
 
 	load(param);
 }
@@ -129,8 +129,8 @@ void ResLoadMgr::loadLevel(LoadParam* param)
 	param.mResLoadType = ResLoadType.eStreamingAssets;
 	load(param);
 #else
-	param->mResPackType = eLevelType;
-	param->mResLoadType = GCfg->mResLoadType;
+	param->setResPackType(eLevelType);
+	param->setResLoadType(GCfg->mResLoadType);
 	load(param);
 #endif
 }
@@ -156,17 +156,17 @@ void ResLoadMgr::loadResources(LoadParam* param)
 	param.mResLoadType = ResLoadType.eStreamingAssets;
 	return load(param);
 #else
-	param->mResPackType = eResourcesType;
-	param->mResLoadType = eLoadResource;
+	param->setResPackType(eResourcesType);
+	param->setResLoadType(eLoadResource);
 	load(param);
 #endif
 }
 
 ResItem* ResLoadMgr::createResItem(LoadParam* param)
 {
-	ResItem* resItem = findResFormPool(param->mResPackType);
+	ResItem* resItem = findResFormPool(param->getResPackType());
 
-	if (eClassType == param->mResPackType)
+	if (eClassType == param->getResPackType())
 	{
 		if (nullptr == resItem)
 		{
@@ -191,7 +191,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	//		resItem = new BundleResItem();
 	//	}
 	//}
-	else if (eLevelType == param->mResPackType)
+	else if (eLevelType == param->getResPackType())
 	{
 		if (nullptr == resItem)
 		{
@@ -199,7 +199,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 		}
 		((LevelResItem*)resItem)->setLevelName(param->getLvlName());
 	}
-	else if (eDataType == param->mResPackType)
+	else if (eDataType == param->getResPackType())
 	{
 		if (nullptr == resItem)
 		{
@@ -208,16 +208,11 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	}
 
 	resItem->getRefCountResLoadResultNotify()->getRefCount()->incRef();
-	resItem->setResNeedCoroutine(param->mIsResNeedCoroutine);
-	resItem->setResPackType(param->mResPackType);
-	resItem->setResLoadType(param->mResLoadType);
-	resItem->setPath(param->mPath);
-	resItem->setPathNoExt(param->mPathNoExt);
-	resItem->setExtName(param->getExtName());
+	resItem->setLoadParam(param);
 
-	if (nullptr != param->mLoadEventHandle)
+	if (nullptr != param->getLoadEventHandle())
 	{
-		resItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
+		resItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 	}
 
 	return resItem;

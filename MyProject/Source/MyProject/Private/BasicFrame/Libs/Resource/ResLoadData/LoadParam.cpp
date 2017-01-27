@@ -24,6 +24,16 @@ std::string LoadParam::getPath()
 	return this->mPath;
 }
 
+void LoadParam::setResUniqueId(std::string value)
+{
+	this->mResUniqueId = value;
+}
+
+std::string LoadParam::getResUniqueId()
+{
+	return this->mResUniqueId;
+}
+
 void LoadParam::setOrigPath(std::string value)
 {
 	this->mOrigPath = value;
@@ -94,7 +104,7 @@ EventDispatchDelegate LoadParam::getLoadEventHandle()
 	return this->mLoadEventHandle;
 }
 
-std::string LoadParam::setPrefabName(std::string value)
+void LoadParam::setPrefabName(std::string value)
 {
 	this->mPrefabName = value;
 }
@@ -104,7 +114,7 @@ std::string LoadParam::getPrefabName()
 	return this->mPrefabName;
 }
 
-std::string LoadParam::setExtName(std::string value)
+void LoadParam::setExtName(std::string value)
 {
 	this->mExtName = value;
 }
@@ -114,7 +124,7 @@ std::string LoadParam::getExtName()
 	return this->mExtName;
 }
 
-std::string setLvlName(std::string value)
+void LoadParam::setLvlName(std::string value)
 {
 	this->mLvlName = value;
 }

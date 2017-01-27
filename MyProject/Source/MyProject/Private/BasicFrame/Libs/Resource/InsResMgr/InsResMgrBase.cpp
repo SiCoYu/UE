@@ -20,19 +20,19 @@ void InsResMgrBase::dispose()
 
 void InsResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 {
-	mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
-	if (mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
+	mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+	if (mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
 		if (!param->mLoadEventHandle.empty())
 		{
-			param->mLoadEventHandle(mPath2ResDic[param->mPath]);        // 直接通知上层完成加载
+			param->mLoadEventHandle(mPath2ResDic[param->getPath()]);        // 直接通知上层完成加载
 		}
 	}
 	else
 	{
-		if (!param->mLoadEventHandle.empty())
+		if (!param->getLoadEventHandle().empty())
 		{
-			mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
+			mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 		}
 	}
 }

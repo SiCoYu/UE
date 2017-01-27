@@ -26,12 +26,13 @@ namespace MyNS
 			LoadParam* param;
 			param = GPoolSys->newObject<LoadParam>();
 			param->setPath(mPath);
-			param->setLoadEventHandle(EventDispatchDelegate(this, &AuxLevelLoader::onLevelLo(false);
+			param->setLoadEventHandle(EventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
+			param->setIsResNeedCoroutine(false);
 			param->setIsLoadNeedCoroutine(false);
 			GResLoadMgr->loadAsset(param);
 			GPoolSys->deleteObj(param);
 
-			this->mLevelResItem = (LevelResItem*)(GResLoadMgr->getResource(param->mResUniqueId));
+			this->mLevelResItem = (LevelResItem*)(GResLoadMgr->getResource(param->getResUniqueId()));
 			this->onLevelLoaded(this->mLevelResItem);
 		}
 		else if (this->hasLoadEnd())
