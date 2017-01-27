@@ -123,7 +123,7 @@ namespace MyNS
 
 						if (this->mIsSetFakePos)
 						{
-							//this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
+							this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
 						}
 						else
 						{

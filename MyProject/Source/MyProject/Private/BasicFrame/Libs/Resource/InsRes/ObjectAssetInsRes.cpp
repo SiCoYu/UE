@@ -1,8 +1,9 @@
 ﻿#include "MyProject.h"
+#include "ObjectAssetInsRes.h"
 #include "ResItem.h"
 #include "EngineApi.h"
 #include "Common.h"
-#include "ObjectAssetInsRes.h"
+#include "ResInsEventDispatch.h"
 
 ObjectAssetInsRes::ObjectAssetInsRes()
 {
@@ -15,7 +16,7 @@ void ObjectAssetInsRes::initImpl(ResItem* res)
 	//base.initImpl(res);
 }
 
-UObject* ObjectAssetInsRes::InstantiateObject(std::string resName)
+UObject* ObjectAssetInsRes::InstantiateObject(std::string resName, bool isSetInitOrientPos, FVector position, FQuat rotation, ResInsEventDispatch* evtHandle)
 {
 	mRetGO = nullptr;
 
@@ -25,7 +26,8 @@ UObject* ObjectAssetInsRes::InstantiateObject(std::string resName)
 	}
 	else
 	{
-		// mRetGO = GameObject.Instantiate(mGo) as GameObject;
+		mRetGO = EngineApi::NewObject<UObject>(EngineApi::GetGameInstance(), mGo);
+
 		if (nullptr == mRetGO)
 		{
 			GLogSys->log("Can not instance data");
