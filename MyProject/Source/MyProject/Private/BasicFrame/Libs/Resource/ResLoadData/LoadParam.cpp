@@ -5,12 +5,37 @@
 
 LoadParam::LoadParam()
 {
-
+	this->init();
 }
 
 LoadParam::~LoadParam()
 {
 
+}
+
+void LoadParam::init()
+{
+	this->mPath = "";
+	this->mOrigPath = "";
+	this->mResUniqueId = "";
+	this->mPathNoExt = "";
+
+	this->mExtName = "prefab";
+	this->mPrefabName = "";
+	this->mLvlName = "";
+	this->mSubPath = "";
+
+	this->mVersion = "";
+	this->mPakPath = "";
+	this->mLoadRes = nullptr;
+	this->mLoadInsRes = nullptr;
+
+	this->mIsResNeedCoroutine = false;
+	this->mIsLoadNeedCoroutine = false;
+	this->mLoadEventHandle = nullptr;
+	this->mResPackType = eNoneType;
+
+	this->mResLoadType = eLoadNum;
 }
 
 void LoadParam::setPath(std::string path)
@@ -156,13 +181,15 @@ InsResBase* LoadParam::getLoadInsRes()
 
 void LoadParam::resetDefault()          // 将数据清空，有时候上一次调用的时候的参数 m_loaded 还在，结果被认为是这一次的回调了
 {
-	this->mLoadEventHandle = nullptr;
-	this->mVersion = "";
-	this->mExtName = "prefab";
-	this->mOrigPath = "";
+	//this->mLoadEventHandle = nullptr;
+	//this->mVersion = "";
+	//this->mExtName = "prefab";
+	//this->mOrigPath = "";
 
-	this->mLoadRes = nullptr;
-	this->mLoadInsRes = nullptr;
+	//this->mLoadRes = nullptr;
+	//this->mLoadInsRes = nullptr;
+
+	this->init();
 }
 
 // 解析目录

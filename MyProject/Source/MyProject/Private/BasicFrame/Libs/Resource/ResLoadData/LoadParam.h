@@ -46,6 +46,8 @@ public:
 	~LoadParam();
 
 public:
+	void init();
+
 	void setPath(std::string value);
 	std::string getPath();
 
