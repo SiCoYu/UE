@@ -9,7 +9,7 @@ namespace MyNS
 	AuxLevelLoader::AuxLevelLoader(std::string path)
 		: Super(path)
 	{
-
+		this->mLevelResItem = nullptr;
 	}
 
 	void AuxLevelLoader::dispose()

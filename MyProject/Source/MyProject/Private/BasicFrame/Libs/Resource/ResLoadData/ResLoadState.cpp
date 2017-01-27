@@ -3,61 +3,61 @@
 
 ResLoadState::ResLoadState()
 {
-    mResLoadState = eNotLoad;
+    this->mResLoadState = eNotLoad;
 }
 
 CVResLoadState ResLoadState::getResLoadState()
 {
-	return mResLoadState;
+	return this->mResLoadState;
 }
 void ResLoadState::setResLoadState(CVResLoadState value)
 {
-	mResLoadState = value;
+	this->mResLoadState = value;
 }
 
 void ResLoadState::reset()
 {
-    mResLoadState = eNotLoad;
+	this->mResLoadState = eNotLoad;
 }
 
 // 是否加载完成，可能成功可能失败
 bool ResLoadState::hasLoaded()
 {
-    return mResLoadState == eFailed || mResLoadState == eLoaded;
+    return this->mResLoadState == eFailed || this->mResLoadState == eLoaded;
 }
 
 bool ResLoadState::hasSuccessLoaded()
 {
-    return mResLoadState == eLoaded;
+    return this->mResLoadState == eLoaded;
 }
 
 bool ResLoadState::hasFailed()
 {
-    return mResLoadState == eFailed;
+    return this->mResLoadState == eFailed;
 }
 
 // 没有加载或者正在加载中
 bool ResLoadState::hasNotLoadOrLoading()
 {
-    return (mResLoadState == eLoading || mResLoadState == eNotLoad);
+    return (this->mResLoadState == eLoading || this->mResLoadState == eNotLoad);
 }
 
 void ResLoadState::setSuccessLoaded()
 {
-    mResLoadState = eLoaded;
+	this->mResLoadState = eLoaded;
 }
 
 void ResLoadState::setFailed()
 {
-    mResLoadState = eFailed;
+	this->mResLoadState = eFailed;
 }
 
 void ResLoadState::setLoading()
 {
-    mResLoadState = eLoading;
+	this->mResLoadState = eLoading;
 }
 
 void ResLoadState::copyFrom(ResLoadState* rhv)
 {
-    mResLoadState = rhv->getResLoadState();
+	this->mResLoadState = rhv->getResLoadState();
 }

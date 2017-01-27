@@ -7,6 +7,7 @@ namespace MyNS
 {
 	AuxLoaderBase::AuxLoaderBase(std::string path)
 	{
+		this->mEvtHandle = nullptr;
 		this->mInitPath = path;
 		this->mResLoadState = new ResLoadState();
 
@@ -50,7 +51,7 @@ namespace MyNS
 
 	void AuxLoaderBase::setPath(std::string path)
 	{
-		this->mPrePath = mPath;
+		this->mPrePath = this->mPath;
 		this->mPath = path;
 
 		if (this->mPrePath != this->mPath && !UtilStr::IsNullOrEmpty(this->mPath))

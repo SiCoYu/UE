@@ -8,13 +8,17 @@
 
 SceneSys::SceneSys()
 {
-	this->init();
+	this->mOnSceneLoadedDispatch = SAFE_NEW AddOnceAndCallOnceEventDispatch();
+	this->mAuxLevelLoader = nullptr;
+	this->mScene = nullptr;
+
+	//this->init();
 }
 
 void SceneSys::init()
 {
-	this->mOnSceneLoadedDispatch = SAFE_NEW AddOnceAndCallOnceEventDispatch();
-	this->mAuxLevelLoader = SAFE_NEW MyNS::AuxLevelLoader();
+	//this->mOnSceneLoadedDispatch = SAFE_NEW AddOnceAndCallOnceEventDispatch();
+	//this->mAuxLevelLoader = SAFE_NEW MyNS::AuxLevelLoader();
 }
 
 void SceneSys::dispose()
