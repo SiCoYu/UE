@@ -32,7 +32,7 @@ void InsResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 	{
 		if (!param->getLoadEventHandle().empty())
 		{
-			mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
+			mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 		}
 	}
 }

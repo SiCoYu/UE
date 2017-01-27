@@ -104,8 +104,8 @@ protected:
 	template<class T>
 	void loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
 	{
-		mPath2ResDic[param->mPath] = resItem;
-		mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
+		mPath2ResDic[param->getPath()] = resItem;
+		mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
 		param->mLoadEventHandle = EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle);
 		GResLoadMgr->loadAsset(param);
 	}
@@ -124,7 +124,7 @@ public:
 	void load(LoadParam* param)
 	{
 		++mLoadingDepth;
-		if (UtilMap::ContainsKey(mPath2ResDic, param->getPath()))
+		if (UtilMap::ContainsKey(mPath2ResDic, param->mPath))
 		{
 			loadWithResCreatedAndLoad(param);
 		}

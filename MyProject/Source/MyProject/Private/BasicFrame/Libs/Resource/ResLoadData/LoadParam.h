@@ -12,10 +12,13 @@ class InsResBase;
 
 class LoadParam : public IRecycle
 {
+public:
+	std::string mPath;                  // 资源路径，传递进来都是完成的路径，都是相对 Prefabs\Resources 开始的，例如 Table\CardBase_client.txt，然后内部解析后
+
 protected:
 	std::string mOrigPath;                   // 原始资源加载目录，主要是打包的时候使用
 	std::string mResUniqueId;
-	std::string mPath;                  // 资源路径，传递进来都是完成的路径，都是相对 Prefabs\Resources 开始的，例如 Table\CardBase_client.txt，然后内部解析后
+	//std::string mPath;                  // 资源路径，传递进来都是完成的路径，都是相对 Prefabs\Resources 开始的，例如 Table\CardBase_client.txt，然后内部解析后
 
 	std::string mPathNoExt;             // 这个数据变成了从 Resources 目录开始，没有扩展名字，打包的包名字在包加载的时候判断
 	std::string mExtName;      // 加载的资源的扩展名字
@@ -76,6 +79,12 @@ public:
 	std::string getExtName();
 	void setLvlName(std::string value);
 	std::string getLvlName();
+
+	void setLoadRes(ResItem* value);
+	ResItem* getLoadRes();
+
+	void setLoadInsRes(InsResBase* value);
+	InsResBase* getLoadInsRes();
 
 	void resetDefault();          // 将数据清空，有时候上一次调用的时候的参数 m_loaded 还在，结果被认为是这一次的回调了
     // 解析目录

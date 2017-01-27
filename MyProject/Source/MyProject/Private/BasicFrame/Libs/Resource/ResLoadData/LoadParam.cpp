@@ -134,6 +134,26 @@ std::string LoadParam::getLvlName()
 	return this->mLvlName;
 }
 
+void LoadParam::setLoadRes(ResItem* value)
+{
+	this->mLoadRes = value;
+}
+
+ResItem* LoadParam::getLoadRes()
+{
+	return this->mLoadRes;
+}
+
+void LoadParam::setLoadInsRes(InsResBase* value)
+{
+	this->mLoadInsRes = value;
+}
+
+InsResBase* LoadParam::getLoadInsRes()
+{
+	return this->mLoadInsRes;
+}
+
 void LoadParam::resetDefault()          // 将数据清空，有时候上一次调用的时候的参数 m_loaded 还在，结果被认为是这一次的回调了
 {
 	this->mLoadEventHandle = nullptr;
