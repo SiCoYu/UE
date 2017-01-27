@@ -3,12 +3,15 @@
 
 #include "LoadItem.h"
 #include "CoreUObject.h"	// UClass \ UObject
+#include "BaseClassDef.h"
 
 /**
  * @brief 从 uasset 扩展名的本地 Package 中加载资源 Class Blueprint 类型
  */
 class ClassAssetLoadItem : public LoadItem
 {
+	M_DECLARE_SUPER_KW(LoadItem)
+
 protected:
 	UClass* mResObj;		// uasset 类型的资源
 	FStringAssetReference mAssetRef;	// 异步加载需要的

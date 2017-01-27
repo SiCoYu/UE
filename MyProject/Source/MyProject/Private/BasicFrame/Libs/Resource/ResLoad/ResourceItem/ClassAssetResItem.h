@@ -2,12 +2,15 @@
 #define __ClassAssetResItem_H
 
 #include "ResItem.h"
+#include "BaseClassDef.h"
 
 /**
  * @brief uasset 类型的资源
  */
 class ClassAssetResItem : public ResItem
 {
+	M_DECLARE_SUPER_KW(ResItem)
+
 protected:
 	UClass* mResObj;		// uasset 类型的资源
 

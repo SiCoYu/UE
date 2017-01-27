@@ -66,7 +66,7 @@ void ClassAssetLoadItem::onAsyncLoaded()
 
 void ClassAssetLoadItem::load()
 {
-	LoadItem::load();
+	Super::load();
 
 	if (!this->getLoadNeedCoroutine())
 	{
@@ -80,5 +80,5 @@ void ClassAssetLoadItem::load()
 
 void ClassAssetLoadItem::unload()
 {
-	LoadItem::unload();
+	Super::unload();
 }

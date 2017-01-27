@@ -9,7 +9,7 @@ ObjectAssetResItem::ObjectAssetResItem()
 
 void ObjectAssetResItem::init(LoadItem* item)
 {
-	ResItem::init(item);
+	Super::init(item);
 }
 
 void ObjectAssetResItem::unload()
