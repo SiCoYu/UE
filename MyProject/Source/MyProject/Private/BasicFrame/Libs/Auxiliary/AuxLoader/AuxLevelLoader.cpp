@@ -26,9 +26,8 @@ namespace MyNS
 			LoadParam* param;
 			param = GPoolSys->newObject<LoadParam>();
 			param->setPath(mPath);
-			param->mLoadEventHandle = EventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded);
-			param->mIsResNeedCoroutine = false;
-			param->mIsLoadNeedCoroutine = false;
+			param->setLoadEventHandle(EventDispatchDelegate(this, &AuxLevelLoader::onLevelLo(false);
+			param->setIsLoadNeedCoroutine(false);
 			GResLoadMgr->loadAsset(param);
 			GPoolSys->deleteObj(param);
 
@@ -51,9 +50,9 @@ namespace MyNS
 			LoadParam* param;
 			param = GPoolSys->newObject<LoadParam>();
 			param->setPath(mPath);
-			param->mLoadEventHandle = EventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded);
-			param->mIsResNeedCoroutine = true;
-			param->mIsLoadNeedCoroutine = true;
+			param->setLoadEventHandle(EventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
+			param->setIsResNeedCoroutine(true);
+			param->setIsLoadNeedCoroutine(true);
 			GResLoadMgr->loadAsset(param);
 			GPoolSys->deleteObj(param);
 		}

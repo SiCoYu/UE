@@ -56,12 +56,8 @@ void LevelLoadItem::load()
 	//this->mOnLevelLoadDelegateHandle = this->mOnLevelLoadDelegate.Add(this->mOnLevelLoadDelegate);
 	this->mMyDelegateLevelLoad->mMyDelegateBaseEvent.BindRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
 
-	if (eLoadResource == this->mResLoadType)
-	{
-		this->mNonRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
-		this->mNonRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
-	}
-	else if (eLoadStreamingAssets == mResLoadType ||
+	if (eLoadResource == this->mResLoadType ||
+		eLoadStreamingAssets == mResLoadType ||
 		eLoadPersistentData == mResLoadType)
 	{
 		// 需要加载 AssetBundles 加载
