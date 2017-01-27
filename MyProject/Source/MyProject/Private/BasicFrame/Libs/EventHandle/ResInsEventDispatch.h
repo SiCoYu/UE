@@ -4,7 +4,7 @@
 #include "IDispatchObject.h"
 #include "BaseClassDef.h"
 
-class UObject;
+class AActor;
 class IDispatchObject;
 
 /**
@@ -17,14 +17,14 @@ class ResInsEventDispatch : public EventDispatch, public IDispatchObject
 
 protected:
 	bool mIsValid;
-    UObject* mInsGO;
+	AActor* mInsGO;
 
 public:
 	ResInsEventDispatch();
 public:
 	void setIsValid(bool value);
 	bool getIsValid();
-	void setInsGO(UObject* go);
-	UObject* getInsGO();
+	void setInsGO(AActor* go);
+	AActor* getInsGO();
 	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;
 };

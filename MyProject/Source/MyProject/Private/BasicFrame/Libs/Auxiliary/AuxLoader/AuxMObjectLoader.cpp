@@ -36,7 +36,7 @@ namespace MyNS
 		{
 			if (this->mSelfGo != nullptr)
 			{
-				UtilApi::DestroyImmediate(this.mSelfGo);
+				UtilApi::DestroyImmediate(this->mSelfGo);
 			}
 		}
 
@@ -242,7 +242,7 @@ namespace MyNS
 		AActor* ret = nullptr;
 		if (nullptr != this->mPrefabRes)
 		{
-			ret = Case<AActor>(this->mPrefabRes->getObject());
+			ret = Cast<AActor>(this->mPrefabRes->getObject());
 		}
 		return ret;
 	}

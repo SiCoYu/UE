@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "ResInsEventDispatch.h"
+#include "UtilApi.h"
 
 ResInsEventDispatch::ResInsEventDispatch()
 {
@@ -16,12 +17,12 @@ bool ResInsEventDispatch::getIsValid()
 	return this->mIsValid;
 }
 
-void ResInsEventDispatch::setInsGO(UObject* go)
+void ResInsEventDispatch::setInsGO(AActor* go)
 {
 	this->mInsGO = go;
 }
 
-UObject* ResInsEventDispatch::getInsGO()
+AActor* ResInsEventDispatch::getInsGO()
 {
 	return this->mInsGO;
 }
@@ -34,6 +35,6 @@ void ResInsEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 	}
 	else
 	{
-		//UtilApi.Destroy(mInsGO);
+		UtilApi::Destroy(this->mInsGO);
 	}
 }
