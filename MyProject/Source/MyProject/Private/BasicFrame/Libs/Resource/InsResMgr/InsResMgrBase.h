@@ -124,13 +124,13 @@ public:
 	void load(LoadParam* param)
 	{
 		++mLoadingDepth;
-		if (UtilMap::ContainsKey(mPath2ResDic, param->mPath))
+		if (UtilMap::ContainsKey(mPath2ResDic, param->getPath()))
 		{
 			loadWithResCreatedAndLoad(param);
 		}
-		else if (param->mLoadInsRes != nullptr)
+		else if (param->getLoadInsRes() != nullptr)
 		{
-			loadWithResCreatedAndNotLoad<T>(param, (T*)(param->mLoadInsRes));
+			loadWithResCreatedAndNotLoad<T>(param, (T*)(param->getLoadInsRes()));
 		}
 		else
 		{

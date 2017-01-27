@@ -2,6 +2,7 @@
 #include "LoadItem.h"
 #include "NonRefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
+#include "LoadParam.h"
 
 LoadItem::LoadItem()
 {
@@ -103,4 +104,14 @@ void LoadItem::reset()
 {
 	this->mPath = "";
 	this->mIsLoadNeedCoroutine = false;
+}
+
+void LoadItem::setLoadParam(LoadParam* param)
+{
+	this->setResPackType(param->getResPackType());
+	this->setResLoadType(param->getResLoadType());
+	this->setPath(param->getPath());
+	this->setPathNoExt(param->getPathNoExt());
+	this->setExtName(param->getExtName());
+	this->setLoadNeedCoroutine(param->getIsLoadNeedCoroutine());
 }

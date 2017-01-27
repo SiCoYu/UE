@@ -7,6 +7,7 @@
 #include <string>
 
 class NonRefCountResLoadResultNotify;
+class LoadParam;
 
 class LoadItem : public IDispatchObject
 {
@@ -53,6 +54,8 @@ public:
     // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
 	virtual void unload();
 	virtual void reset();
+
+	void setLoadParam(LoadParam* param);
 };
 
 #endif

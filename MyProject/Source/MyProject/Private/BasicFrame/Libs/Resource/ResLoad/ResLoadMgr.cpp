@@ -220,9 +220,9 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 
 LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 {
-	LoadItem* loadItem = findLoadItemFormPool(param->mResPackType);
+	LoadItem* loadItem = findLoadItemFormPool(param->getResPackType());
 
-	if (eClassType == param->mResPackType)        // 默认 Bundle 中资源
+	if (eClassType == param->getResPackType())        // 默认 Bundle 中资源
 	{
 		if (nullptr == loadItem)
 		{
@@ -243,7 +243,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	//		loadItem = new UBinaryLoadItem();
 	//	}
 	//}
-	else if (eLevelType == param->mResPackType)
+	else if (eLevelType == param->getResPackType())
 	{
 		if (nullptr == loadItem)
 		{
@@ -252,7 +252,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 
 		((LevelLoadItem*)loadItem)->setLevelName(param->getLvlName());
 	}
-	else if (eDataType == param->mResPackType)
+	else if (eDataType == param->getResPackType())
 	{
 		if (nullptr == loadItem)
 		{
@@ -260,12 +260,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 		}
 	}
 
-	loadItem->setResPackType(param->mResPackType);
-	loadItem->setResLoadType(param->mResLoadType);
-	loadItem->setPath(param->mPath);
-	loadItem->setPathNoExt(param->mPathNoExt);
-	loadItem->setExtName(param->getExtName());
-	loadItem->setLoadNeedCoroutine(param->mIsLoadNeedCoroutine);
+	loadItem->setLoadParam(param-);
 	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 
 	return loadItem;
