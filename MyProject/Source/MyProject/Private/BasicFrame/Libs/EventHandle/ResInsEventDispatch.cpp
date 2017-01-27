@@ -28,7 +28,7 @@ UObject* ResInsEventDispatch::getInsGO()
 
 void ResInsEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 {
-	if (mIsValid)
+	if (this->mIsValid)
 	{
 		Super::dispatchEvent(dispatchObject);
 	}

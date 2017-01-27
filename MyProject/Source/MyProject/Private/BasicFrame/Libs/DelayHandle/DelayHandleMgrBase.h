@@ -34,7 +34,7 @@ public:
 	virtual void delObject(IDelayHandleItem* delayObject);
 	void incDepth();
 	void decDepth();
-	bool bInDepth();
+	bool isInDepth();
 };
 
 #endif

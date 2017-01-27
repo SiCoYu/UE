@@ -4,6 +4,7 @@
 #include "DelayHandleMgrBase.h"
 #include "MList.h"
 #include "EventDispatchDelegate.h"
+#include "BaseClassDef.h"
 
 class EventDispatchFunctionObject;
 
@@ -13,6 +14,8 @@ class EventDispatchFunctionObject;
  */
 class EventDispatch : public DelayHandleMgrBase
 {
+	M_DECLARE_SUPER_KW(DelayHandleMgrBase)
+
 protected :
 	int mEventId;
     MList<EventDispatchFunctionObject*> mHandleList;

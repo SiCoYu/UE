@@ -9,6 +9,6 @@ ResEventDispatch::ResEventDispatch()
 
 void ResEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 {
-	EventDispatch::dispatchEvent(dispatchObject);
-	clearEventHandle();
+	Super::dispatchEvent(dispatchObject);
+	this->clearEventHandle();
 }

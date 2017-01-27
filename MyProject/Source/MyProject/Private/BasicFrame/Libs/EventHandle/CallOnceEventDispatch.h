@@ -2,6 +2,7 @@
 #define __CallOnceEventDispatch_H
 
 #include "EventDispatch.h"
+#include "BaseClassDef.h"
 
 class IDispatchObject;
 
@@ -10,6 +11,8 @@ class IDispatchObject;
  */
 class CallOnceEventDispatch : public EventDispatch
 {
+	M_DECLARE_SUPER_KW(EventDispatch)
+
 public:
 	CallOnceEventDispatch();
 	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;

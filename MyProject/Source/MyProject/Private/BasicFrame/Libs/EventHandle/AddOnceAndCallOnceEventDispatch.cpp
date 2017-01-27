@@ -3,14 +3,14 @@
 
 void AddOnceAndCallOnceEventDispatch::addEventHandle(EventDispatchDelegate handle)
 {
-	if (!isExistEventHandle(handle))
+	if (!this->isExistEventHandle(handle))
 	{
-		EventDispatch::addEventHandle(handle);
+		Super::addEventHandle(handle);
 	}
 }
 
 void AddOnceAndCallOnceEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 {
-	EventDispatch::dispatchEvent(dispatchObject);
-	clearEventHandle();
+	Super::dispatchEvent(dispatchObject);
+	this->clearEventHandle();
 }

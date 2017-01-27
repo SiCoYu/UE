@@ -3,15 +3,15 @@
 
 EventDispatchFunctionObject::EventDispatchFunctionObject()
 {
-	mIsClientDispose = false;
+	this->mIsClientDispose = false;
 }
 
 void EventDispatchFunctionObject::setClientDispose()
 {
-	mIsClientDispose = true;
+	this->mIsClientDispose = true;
 }
 
 bool EventDispatchFunctionObject::isClientDispose()
 {
-	return mIsClientDispose;
+	return this->mIsClientDispose;
 }

@@ -5,18 +5,18 @@
 
 EventDispatch::EventDispatch(int eventId_)
 {
-	mEventId = eventId_;
+	this->mEventId = eventId_;
 }
 
 int EventDispatch::getUniqueId()
 {
-	return mUniqueId;
+	return this->mUniqueId;
 }
 
 void EventDispatch::setUniqueId(int value)
 {
-	mUniqueId = value;
-	mHandleList.setUniqueId(mUniqueId);
+	this->mUniqueId = value;
+	this->mHandleList.setUniqueId(mUniqueId);
 }
 
 //public LuaCSBridgeDispatch luaCSBridgeDispatch
@@ -38,7 +38,7 @@ void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 	funcObject->mHandle = handle;
 	if (nullptr != handle)
 	{
-		addObject(funcObject);
+		this->addObject(funcObject);
 	}
 	else
 	{
@@ -48,14 +48,14 @@ void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 
 void EventDispatch::addObject(IDelayHandleItem* delayObject, float priority)
 {
-	if (bInDepth())
+	if (this->isInDepth())
 	{
-		DelayHandleMgrBase::addObject(delayObject, priority);
+		Super::addObject(delayObject, priority);
 	}
 	else
 	{
 		// 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-		mHandleList.Add((EventDispatchFunctionObject*)delayObject);
+		this->mHandleList.Add((EventDispatchFunctionObject*)delayObject);
 	}
 }
 
@@ -64,14 +64,14 @@ void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 	int idx = 0;
 	for (idx = 0; idx < mHandleList.Count(); ++idx)
 	{
-		if (mHandleList[idx]->mHandle, handle)
+		if (this->mHandleList[idx]->mHandle, handle)
 		{
 			break;
 		}
 	}
-	if (idx < mHandleList.Count())
+	if (idx < this->mHandleList.Count())
 	{
-		delObject(mHandleList[idx]);
+		this->delObject(this->mHandleList[idx]);
 	}
 	else
 	{
@@ -81,13 +81,13 @@ void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 
 void EventDispatch::delObject(IDelayHandleItem* delayObject)
 {
-	if (bInDepth())
+	if (this->isInDepth())
 	{
-		DelayHandleMgrBase::delObject(delayObject);
+		Super::delObject(delayObject);
 	}
 	else
 	{
-		if (!mHandleList.Remove((EventDispatchFunctionObject*)delayObject))
+		if (!this->mHandleList.Remove((EventDispatchFunctionObject*)delayObject))
 		{
 			GLogSys->log("Event Handle not exist");
 		}
@@ -98,9 +98,9 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 {
 	//try
 	//{
-	incDepth();
+	this->incDepth();
 
-	for(auto handle : mHandleList.getList())
+	for(auto handle : this->mHandleList.getList())
 	{
 		if (!handle->mIsClientDispose)
 		{
@@ -123,16 +123,16 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 
 void EventDispatch::clearEventHandle()
 {
-	if (bInDepth())
+	if (this->isInDepth())
 	{
 		for(auto item : mHandleList.getList())
 		{
-			delObject(item);
+			this->delObject(item);
 		}
 	}
 	else
 	{
-		mHandleList.Clear();
+		this->mHandleList.Clear();
 	}
 }
 
@@ -140,7 +140,7 @@ void EventDispatch::clearEventHandle()
 bool EventDispatch::isExistEventHandle(EventDispatchDelegate handle)
 {
 	bool bFinded = false;
-	for(auto item : mHandleList.getList())
+	for(auto item : this->mHandleList.getList())
 	{
 		if (item->mHandle == handle)
 		{
@@ -156,11 +156,11 @@ void EventDispatch::copyFrom(EventDispatch& rhv)
 {
 	for(auto handle : rhv.getHandleList().getList())
 	{
-		mHandleList.Add(handle);
+		this->mHandleList.Add(handle);
 	}
 }
 
 MList<EventDispatchFunctionObject*>& EventDispatch::getHandleList()
 {
-	return mHandleList;
+	return this->mHandleList;
 }

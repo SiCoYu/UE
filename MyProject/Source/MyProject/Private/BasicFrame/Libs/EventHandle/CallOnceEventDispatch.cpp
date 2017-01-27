@@ -9,6 +9,6 @@ CallOnceEventDispatch::CallOnceEventDispatch()
 
 void CallOnceEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 {
-	EventDispatch::dispatchEvent(dispatchObject);
-	clearEventHandle();
+	Super::dispatchEvent(dispatchObject);
+	this->clearEventHandle();
 }

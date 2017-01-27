@@ -16,7 +16,7 @@ void TickMgr::addTick(ITickedObject* tickObj, float priority)
 
 void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
-	if (bInDepth())
+	if (isInDepth())
 	{
 		DelayHandleMgrBase::addObject(delayObject, priority);
 	}
@@ -57,7 +57,7 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 
 void TickMgr::delObject(IDelayHandleItem* delayObject)
 {
-	if (bInDepth())
+	if (isInDepth())
 	{
 		DelayHandleMgrBase::delObject(delayObject);
 	}

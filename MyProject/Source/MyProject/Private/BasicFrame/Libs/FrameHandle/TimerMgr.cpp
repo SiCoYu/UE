@@ -14,7 +14,7 @@ void TimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 	TimerItemBase* timerItemBase = (TimerItemBase*)delayObject;
 	if (UtilVector::IndexOf(mTimerList.getList(), timerItemBase) == -1)
 	{
-		if (bInDepth())
+		if (isInDepth())
 		{
 			DelayHandleMgrBase::addObject(delayObject, priority);
 		}
@@ -32,7 +32,7 @@ void TimerMgr::delObject(IDelayHandleItem* delayObject)
 	if (UtilVector::IndexOf(mTimerList.getList(), timerItemBase) != -1)
 	{
 		((TimerItemBase*)delayObject)->mIsDisposed = true;
-		if (bInDepth())
+		if (isInDepth())
 		{
 			DelayHandleMgrBase::delObject(delayObject);
 		}

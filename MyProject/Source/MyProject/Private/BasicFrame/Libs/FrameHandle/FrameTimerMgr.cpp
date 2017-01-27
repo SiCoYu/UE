@@ -15,7 +15,7 @@ void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
 	if (UtilVector::IndexOf(mTimerList, frameTimerItem) == -1)
 	{
-		if (bInDepth())
+		if (isInDepth())
 		{
 			DelayHandleMgrBase::addObject(delayObject, priority);
 		}
@@ -33,7 +33,7 @@ void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
 	if (UtilVector::IndexOf(mTimerList, frameTimerItem) != -1)
 	{
 		((FrameTimerItem*)delayObject)->mIsDisposed = true;
-		if (bInDepth())
+		if (isInDepth())
 		{
 			DelayHandleMgrBase::addObject(delayObject);
 		}

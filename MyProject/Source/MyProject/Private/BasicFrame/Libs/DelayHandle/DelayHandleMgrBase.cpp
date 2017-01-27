@@ -142,7 +142,7 @@ void DelayHandleMgrBase::decDepth()
 	processDelayObjects();
 }
 
-bool DelayHandleMgrBase::bInDepth()
+bool DelayHandleMgrBase::isInDepth()
 {
 	return mLoopDepth > 0;
 }
