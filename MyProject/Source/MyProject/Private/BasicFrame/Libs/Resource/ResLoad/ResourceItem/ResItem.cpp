@@ -7,77 +7,77 @@
 
 ResItem::ResItem()
 {
-	mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
+	this->mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
 }
 
 ResPackType ResItem::getResPackType()
 {
-	return mResPackType;
+	return this->mResPackType;
 }
 
 void ResItem::setResPackType(ResPackType value)
 {
-	mResPackType = value;
+	this->mResPackType = value;
 }
 
 std::string ResItem::getPath()
 {
-	return mPath;
+	return this->mPath;
 }
 
 void ResItem::setPath(std::string value)
 {
-	mPath = value;
+	this->mPath = value;
 }
 
 std::string ResItem::getPathNoExt()
 {
-	return mPathNoExt;
+	return this->mPathNoExt;
 }
 
 void ResItem::setPathNoExt(std::string value)
 {
-	mPathNoExt = value;
+	this->mPathNoExt = value;
 }
 
 std::string ResItem::getExtName()
 {
-	return mExtName;
+	return this->mExtName;
 }
 
 void ResItem::setExtName(std::string value)
 {
-	mExtName = value;
+	this->mExtName = value;
 }
 
 bool ResItem::getResNeedCoroutine()
 {
-	return mIsResNeedCoroutine;
+	return this->mIsResNeedCoroutine;
 }
 
 void ResItem::setResNeedCoroutine(bool value)
 {
-	mIsResNeedCoroutine = value;
+	this->mIsResNeedCoroutine = value;
 }
 
 ResLoadType ResItem::getResLoadType()
 {
-	return mResLoadType;
+	return this->mResLoadType;
 }
 
 void ResItem::setResLoadType(ResLoadType value)
 {
-	mResLoadType = value;
+	this->mResLoadType = value;
 }
 
 RefCountResLoadResultNotify* ResItem::getRefCountResLoadResultNotify()
 {
-	return mRefCountResLoadResultNotify;
+	return this->mRefCountResLoadResultNotify;
 }
 
 void ResItem::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value)
 {
-	mRefCountResLoadResultNotify = value;
+	this->mRefCountResLoadResultNotify = value;
 }
 
 std::string ResItem::getPrefabName()         // 只有 Prefab 资源才实现这个函数
@@ -87,20 +87,20 @@ std::string ResItem::getPrefabName()         // 只有 Prefab 资源才实现这
 
 void ResItem::init(LoadItem* item)
 {
-	mRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
+	this->mRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
 }
 
 void ResItem::failed(LoadItem* item)
 {
-	mRefCountResLoadResultNotify->getResLoadState()->setFailed();
-	mRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
+	this->mRefCountResLoadResultNotify->getResLoadState()->setFailed();
+	this->mRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }
 
 void ResItem::reset()
 {
-	mPath = "";
-	mRefCountResLoadResultNotify->getResLoadState()->reset();
-	mRefCountResLoadResultNotify->getRefCount()->setRefNum(0);
+	this->mPath = "";
+	this->mRefCountResLoadResultNotify->getResLoadState()->reset();
+	this->mRefCountResLoadResultNotify->getRefCount()->setRefNum(0);
 }
 
 // 卸载
@@ -131,13 +131,13 @@ std::string ResItem::getText(std::string resName)
 
 void ResItem::copyFrom(ResItem* rhv)
 {
-	mResPackType = rhv->mResPackType;
-	mResLoadType = rhv->mResLoadType;
-	mPath = rhv->mPath;
-	mPathNoExt = rhv->mPathNoExt;
-	mExtName = rhv->mExtName;
-	mIsResNeedCoroutine = rhv->mIsResNeedCoroutine;
-	mRefCountResLoadResultNotify->copyFrom(rhv->getRefCountResLoadResultNotify());
+	this->mResPackType = rhv->mResPackType;
+	this->mResLoadType = rhv->mResLoadType;
+	this->mPath = rhv->mPath;
+	this->mPathNoExt = rhv->mPathNoExt;
+	this->mExtName = rhv->mExtName;
+	this->mIsResNeedCoroutine = rhv->mIsResNeedCoroutine;
+	this->mRefCountResLoadResultNotify->copyFrom(rhv->getRefCountResLoadResultNotify());
 }
 
 bool ResItem::hasSuccessLoaded()

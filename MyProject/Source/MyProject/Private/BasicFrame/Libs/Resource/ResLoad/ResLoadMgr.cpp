@@ -175,21 +175,6 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 
 		((ClassAssetResItem*)resItem)->setPrefabName(param->getPrefabName());
 	}
-	//else if (eLevelType == param->mResPackType)
-	//{
-	//	if (nullptr == resItem)
-	//	{
-	//		resItem = new LevelResItem();
-	//	}
-	//	((LevelResItem*)resItem)->setLevelName(param->getLvlName());
-	//}
-	//else if (eBundleType == param->mResPackType)
-	//{
-	//	if (resItem == nullptr)
-	//	{
-	//		resItem = new BundleResItem();
-	//	}
-	//}
 	//else if (eResourcesType == param->mResPackType)
 	//{
 	//	if (nullptr == resItem)
@@ -199,6 +184,21 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 
 	//	((AssetResItem*)resItem)->setPrefabName(param->getPrefabName());
 	//}
+	//else if (eBundleType == param->mResPackType)
+	//{
+	//	if (resItem == nullptr)
+	//	{
+	//		resItem = new BundleResItem();
+	//	}
+	//}
+	else if (eLevelType == param->mResPackType)
+	{
+		if (nullptr == resItem)
+		{
+			resItem = new LevelResItem();
+		}
+		((LevelResItem*)resItem)->setLevelName(param->getLvlName());
+	}
 	else if (eDataType == param->mResPackType)
 	{
 		if (nullptr == resItem)
@@ -248,15 +248,15 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	//		loadItem = new UBinaryLoadItem();
 	//	}
 	//}
-	//else if (eLevelType == param->mResPackType)
-	//{
-	//	if (nullptr == loadItem)
-	//	{
-	//		loadItem = new LevelLoadItem();
-	//	}
+	else if (eLevelType == param->mResPackType)
+	{
+		if (nullptr == loadItem)
+		{
+			loadItem = new LevelLoadItem();
+		}
 
-	//	((LevelLoadItem*)loadItem)->setLevelName(param->getLvlName());
-	//}
+		((LevelLoadItem*)loadItem)->setLevelName(param->getLvlName());
+	}
 	else if (eDataType == param->mResPackType)
 	{
 		if (nullptr == loadItem)
