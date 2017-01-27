@@ -40,109 +40,35 @@ public:
 	virtual void dispose();
 
 	template<class T>
-	T* getAndSyncLoad(std::string path, EventDispatchDelegate handle = nullptr)
-	{
-		syncLoad<T>(path, handle);
-		return (T*)getRes(path);
-	}
+	T* getAndSyncLoad(std::string path, EventDispatchDelegate handle = nullptr);
 
 	template<class T>
-	T* getAndAsyncLoad(std::string path, EventDispatchDelegate handle)
-	{
-		T* ret = nullptr;
-		LoadParam* param = GPoolSys->newObject<LoadParam>();
-		//LocalFileSys.modifyLoadParam(path, param);
-		param->setPath(path);
-		param->setIsLoadNeedCoroutine(true);
-		param->setIsResNeedCoroutine(true);
-		param->setLoadEventHandle(handle);
-		param->setResPackType(eClassType);
-		ret = getAndLoad<T>(param);
-		GPoolSys->deleteObj(param);
-
-		return ret;
-	}
+	T* getAndAsyncLoad(std::string path, EventDispatchDelegate handle);
 
 	template<class T>
-	T* getAndLoad(LoadParam* param)
-	{
-		load<T>(param);
-		return (T*)getRes(param->getPath());
-	}
+	T* getAndLoad(LoadParam* param);
 
 	// 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能和异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
 	template<class T>
-	void syncLoad(std::string path, EventDispatchDelegate handle = nullptr)
-	{
-		LoadParam* param;
-		param = GPoolSys->newObject<LoadParam>();
-		param->setPath(path);
-		// param->mLoadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.mLoadEventHandle = onLoadEventHandle ，内部会自动调用
-		param->setLoadEventHandle(handle);
-		param->setIsLoadNeedCoroutine(false);
-		param->setIsResNeedCoroutine(false);
-		param->setResPackType(eClassType);
-		load<T>(param);
-		GPoolSys->deleteObj(param);
-	}
+	void syncLoad(std::string path, EventDispatchDelegate handle = nullptr);
 
 	template<class T>
-	T* createResItem(LoadParam* param)
-	{
-		T* ret = new T();
-		ret->getRefCountResLoadResultNotify()->getRefCount()->incRef();
-		ret->mPath = param->mPath;
-
-		ret->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
-
-		return ret;
-	}
+	T* createResItem(LoadParam* param);
 
 protected:
 	void loadWithResCreatedAndLoad(LoadParam* param);
 
 	template<class T>
-	void loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
-	{
-		mPath2ResDic[param->getPath()] = resItem;
-		mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
-		param->mLoadEventHandle = EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle);
-		GResLoadMgr->loadAsset(param);
-	}
+	void loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem);
 
 	template<class T>
-	void loadWithNotResCreatedAndNotLoad(LoadParam* param)
-	{
-		T* resItem = createResItem<T>(param);
-		loadWithResCreatedAndNotLoad<T>(param, resItem);
-	}
+	void loadWithNotResCreatedAndNotLoad(LoadParam* param);
 
 public:
 	// TODO:
 	//virtual void load(LoadParam* param);	// 模板函数不能使虚函数
 	template<class T>
-	void load(LoadParam* param)
-	{
-		++mLoadingDepth;
-		if (UtilMap::ContainsKey(mPath2ResDic, param->mPath))
-		{
-			loadWithResCreatedAndLoad(param);
-		}
-		else if (param->getLoadInsRes() != nullptr)
-		{
-			loadWithResCreatedAndNotLoad<T>(param, (T*)(param->getLoadInsRes()));
-		}
-		else
-		{
-			loadWithNotResCreatedAndNotLoad<T>(param);
-		}
-		--mLoadingDepth;
-
-		if (mLoadingDepth == 0)
-		{
-			unloadNoRefResFromList();
-		}
-	}
+	void load(LoadParam* param);
 
 	virtual void unload(std::string path, EventDispatchDelegate loadEventHandle);
 
@@ -159,5 +85,7 @@ public:
     // 卸载所有的资源
 	void unloadAll();
 };
+
+#include "InsResMgrBase.inl"
 
 #endif
