@@ -23,9 +23,9 @@ void InsResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 	mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
 	if (mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
-		if (!param->mLoadEventHandle.empty())
+		if (!param->getLoadEventHandle().empty())
 		{
-			param->mLoadEventHandle(mPath2ResDic[param->getPath()]);        // 直接通知上层完成加载
+			param->getLoadEventHandle()(this->mPath2ResDic[param->getPath()]);        // 直接通知上层完成加载
 		}
 	}
 	else

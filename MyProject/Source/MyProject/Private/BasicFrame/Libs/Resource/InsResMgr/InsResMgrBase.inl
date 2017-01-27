@@ -3,7 +3,7 @@
 #endif
 
 template<class T>
-T* InsResMgrBase::getAndSyncLoad(std::string path, EventDispatchDelegate handle = nullptr)
+T* InsResMgrBase::getAndSyncLoad(std::string path, EventDispatchDelegate handle)
 {
 	this->syncLoad<T>(path, handle);
 	return (T*)this->getRes(path);
@@ -35,7 +35,7 @@ T* InsResMgrBase::getAndLoad(LoadParam* param)
 
 // 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能和异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
 template<class T>
-void InsResMgrBase::syncLoad(std::string path, EventDispatchDelegate handle = nullptr)
+void InsResMgrBase::syncLoad(std::string path, EventDispatchDelegate handle)
 {
 	LoadParam* param;
 	param = GPoolSys->newObject<LoadParam>();
@@ -56,7 +56,7 @@ T* InsResMgrBase::createResItem(LoadParam* param)
 	ret->getRefCountResLoadResultNotify()->getRefCount()->incRef();
 	ret->mPath = param->mPath;
 
-	ret->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
+	ret->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 
 	return ret;
 }
@@ -66,7 +66,7 @@ void InsResMgrBase::loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
 {
 	this->mPath2ResDic[param->getPath()] = resItem;
 	this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
-	param->mLoadEventHandle = EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle);
+	param->setLoadEventHandle(EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
 	GResLoadMgr->loadAsset(param);
 }
 
