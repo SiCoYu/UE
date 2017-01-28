@@ -8,6 +8,7 @@
 #include "BaseClassDef.h"
 
 class UObject;
+class UClass;
 class ResInsEventDispatch;
 
 class ObjectAssetInsResBase : public InsResBase
@@ -26,6 +27,7 @@ protected:
 public:
 	UObject* InstantiateObject(std::string resName, bool isSetInitOrientPos = false, FVector position = FVector::ZeroVector, FQuat rotation = FQuat::Identity, ResInsEventDispatch* evtHandle = nullptr);
 	UObject* getObject();
+	UClass* getClass();
 	virtual void unload() override;
 };
 

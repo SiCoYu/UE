@@ -6,7 +6,7 @@
 
 class ClassAssetInsRes : public ObjectAssetInsResBase
 {
-	M_DECLARE_SUPER_KW(InsResBase)
+	M_DECLARE_SUPER_KW(ObjectAssetInsResBase)
 
 public:
 	ClassAssetInsRes();

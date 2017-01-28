@@ -50,6 +50,11 @@ UObject* ObjectAssetInsResBase::getObject()
 	return this->mGo;
 }
 
+UClass* ObjectAssetInsResBase::getClass()
+{
+	return Cast<UClass>(this->mGo);
+}
+
 void ObjectAssetInsResBase::unload()
 {
 	if (this->mGo != nullptr)

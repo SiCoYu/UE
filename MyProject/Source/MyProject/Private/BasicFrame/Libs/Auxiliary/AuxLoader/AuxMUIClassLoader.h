@@ -8,11 +8,11 @@ namespace MyNS
     /**
      * @brief 预制
      */
-    class AuxMClassLoader : public AuxMObjectLoaderBase
+    class AuxMUIClassLoader : public AuxMObjectLoaderBase
     {
 		M_DECLARE_SUPER_KW(AuxMObjectLoaderBase)
 
 	public:
-		AuxMClassLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
+		AuxMUIClassLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
 	};
 }

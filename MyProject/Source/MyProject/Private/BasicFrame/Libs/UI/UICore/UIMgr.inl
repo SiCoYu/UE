@@ -58,7 +58,7 @@ T* UIMgr::loadForm(UIFormId formId)
 		//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 
 		ClassAssetInsRes* asset = GClassAssetInsMgr->getAndSyncLoadClass(attrItem->mWidgetPath);
-		UClass* WidgetClass = asset->getObject();
+		UClass* WidgetClass = asset->getClass();
 
 		UUMGWidget* WidgetObject = nullptr;
 
