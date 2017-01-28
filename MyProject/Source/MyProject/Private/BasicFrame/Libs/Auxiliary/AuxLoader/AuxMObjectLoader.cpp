@@ -36,19 +36,19 @@ namespace MyNS
 		{
 			if (this->mSelfGo != nullptr)
 			{
-				UtilApi::DestroyImmediate(this->mSelfGo);
+				UtilApi::DestroyImmediate(Cast<AActor>(this->mSelfGo));
 			}
 		}
 
 		Super::dispose();
 	}
 
-	AActor* AuxMObjectLoader::getSelfGo()
+	UObject* AuxMObjectLoader::getSelfGo()
 	{
 		return this->mSelfGo;
 	}
 
-	void AuxMObjectLoader::setSelfGo(AActor* value)
+	void AuxMObjectLoader::setSelfGo(UObject* value)
 	{
 		this->mSelfGo = value;
 	}
@@ -127,18 +127,18 @@ namespace MyNS
 						}
 						else
 						{
-							//this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
+							this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
 						}
 					}
 					else
 					{
 						if (this->mIsSetFakePos)
 						{
-							//this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat));
+							this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat));
 						}
 						else
 						{
-							//this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
+							this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
 						}
 
 						this->onAllFinish();
@@ -231,18 +231,18 @@ namespace MyNS
 		}
 	}
 
-	AActor* AuxMObjectLoader::getGameObject()
+	UObject* AuxMObjectLoader::getGameObject()
 	{
 		return this->mSelfGo;
 	}
 
 	// 获取预制模板
-	AActor* AuxMObjectLoader::getPrefabTmpl()
+	UObject* AuxMObjectLoader::getPrefabTmpl()
 	{
-		AActor* ret = nullptr;
+		UObject* ret = nullptr;
 		if (nullptr != this->mPrefabRes)
 		{
-			ret = Cast<AActor>(this->mPrefabRes->getObject());
+			ret = Cast<UObject>(this->mPrefabRes->getObject());
 		}
 		return ret;
 	}
@@ -257,7 +257,7 @@ namespace MyNS
 		return false;
 	}
 
-	AActor* AuxMObjectLoader::InstantiateObject(EventDispatchDelegate insHandle)
+	UObject* AuxMObjectLoader::InstantiateObject(EventDispatchDelegate insHandle)
 	{
 		if (nullptr == this->mInsEventDispatch && nullptr != insHandle)
 		{
@@ -278,22 +278,22 @@ namespace MyNS
 
 			if (this->mIsSetFakePos)
 			{
-				//this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
+				this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
 			}
 			else
 			{
-				//this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
+				this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
 			}
 		}
 		else
 		{
 			if (this->mIsSetFakePos)
 			{
-				//this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat));
+				this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat));
 			}
 			else
 			{
-				//this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
+				this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
 			}
 
 			this->onInstantiateObjectFinish();

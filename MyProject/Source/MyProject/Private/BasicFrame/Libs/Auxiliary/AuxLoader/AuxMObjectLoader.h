@@ -5,6 +5,8 @@
 #include "EventDispatchDelegate.h"
 #include "BaseClassDef.h"
 #include "GameFramework/Actor.h"	// AActor
+#include "UObject/Object.h"	// UObject
+
 
 class ObjectAssetInsRes;
 class ResInsEventDispatch;
@@ -19,7 +21,7 @@ namespace MyNS
 		M_DECLARE_SUPER_KW(AuxLoaderBase)
 
 	protected:
-		AActor* mSelfGo;                       // 加载的 GameObject
+		UObject* mSelfGo;                       // 加载的 GameObject
 		ObjectAssetInsRes* mPrefabRes;                     // 预制资源
         ResInsEventDispatch* mResInsEventDispatch; // 实例化的时候使用的分发器
         bool mIsInsNeedCoroutine; // 实例化是否需要协程
@@ -37,8 +39,8 @@ namespace MyNS
 
 		virtual void dispose() override;
 
-		AActor* getSelfGo();
-		void setSelfGo(AActor* value);
+		UObject* getSelfGo();
+		void setSelfGo(UObject* value);
 		bool isDestroySelf();
 		void setDestroySelf(bool value);
 		virtual std::string getLogicPath() override;
@@ -51,13 +53,13 @@ namespace MyNS
         // 所有的资源都加载完成
 		void onAllFinish();
 		virtual void unload() override;
-		AActor* getGameObject();
+		UObject* getGameObject();
 
         // 获取预制模板
-		AActor* getPrefabTmpl();
+		UObject* getPrefabTmpl();
 		void setClientDispose(bool isDispose);
 		bool isClientDispose();
-		AActor* InstantiateObject(EventDispatchDelegate insHandle = nullptr);
+		UObject* InstantiateObject(EventDispatchDelegate insHandle = nullptr);
 		void onInstantiateObjectFinish(IDispatchObject* dispObj = nullptr);
 	};
 }
