@@ -35,6 +35,10 @@ class LuaSystem;
 class ISceneEventCB;
 class MyLatentActionManager;
 class SceneSys;
+class SystemTimeData;
+class SystemFrameData;
+class ProcessSys;
+class EngineLoop;
 
 class Ctx : public Singleton<Ctx>
 {
@@ -61,7 +65,12 @@ protected:
 	MySharedPtr<LuaSystem> mLuaSystem;
 	MySharedPtr<ISceneEventCB> mSceneEventCB;
 	MySharedPtr<MyLatentActionManager> mMyLatentActionManager;
+
 	MySharedPtr<SceneSys> mSceneSys;
+	MySharedPtr<SystemTimeData> mSystemTimeData;
+	MySharedPtr<SystemFrameData> mSystemFrameData;
+	MySharedPtr<ProcessSys> mProcessSys;
+	MySharedPtr<EngineLoop> mEngineLoop;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -75,6 +84,7 @@ public:
 	void init();
 	void dispose();
 	void beginPlay();
+	void mainLoop();
 
 	void setUiMgr(UIMgr* uiMgr);
 	MySharedPtr<UIMgr> getUIMgr();
@@ -101,7 +111,12 @@ public:
 	MySharedPtr<LuaSystem> getLuaSystem();
 	MySharedPtr<ISceneEventCB> getSceneEventCB();
 	MySharedPtr<MyLatentActionManager> getMyLatentActionManager();
+
 	MySharedPtr<SceneSys> getSceneSys();
+	MySharedPtr<SystemTimeData> getSystemTimeData();
+	MySharedPtr<SystemFrameData> getSystemFrameData();
+	MySharedPtr<ProcessSys> getProcessSys();
+	MySharedPtr<EngineLoop> getEngineLoop();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -139,5 +154,9 @@ public:
 #define GMyLatentActionManager GCtx->getMyLatentActionManager()
 
 #define GSceneSys GCtx->getSceneSys()
+#define GSystemTimeData GCtx->getSystemTimeData()
+#define GSystemFrameData GCtx->getSystemFrameData()
+#define GProcessSys GCtx->getProcessSys()
+#define GEngineLoop GCtx->getEngineLoop()
 
 #endif				// __CTX_H

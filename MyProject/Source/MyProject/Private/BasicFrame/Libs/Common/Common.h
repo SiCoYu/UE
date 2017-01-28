@@ -26,6 +26,11 @@
 #include "LuaSystem.h"
 #include "GameSceneEventCB.h"
 #include "MyLatentActionManager.h"
+
 #include "SceneSys.h"
+#include "SystemTimeData.h"
+#include "SystemFrameData.h"
+#include "ProcessSys.h"
+#include "EngineLoop.h"
 
 #endif

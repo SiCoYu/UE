@@ -11,6 +11,13 @@ protected:
     float mCurTime;          // 当前一秒内时间
     int mFps;                // 帧率
 
+public:
+	SystemFrameData();
+
+public:
+	void init();
+	void dispose();
+
 	void nextFrame(float delta);
 };
 

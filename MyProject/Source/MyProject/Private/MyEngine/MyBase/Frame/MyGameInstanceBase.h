@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MyProject.h"
+#include "Engine/GameInstance.h"
 #include "MyGameInstanceBase.generated.h"
 
 class AppFrame;
@@ -24,6 +24,8 @@ protected:
 	AppFrame* mAppFrame;
 
 public:
+	virtual void Tick(float DeltaSeconds) override;
+
 	virtual void Init() override;
 	virtual void Shutdown() override;
 	virtual void FinishDestroy() override;

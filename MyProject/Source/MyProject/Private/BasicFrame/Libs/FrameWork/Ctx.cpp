@@ -1,4 +1,6 @@
 #include "MyProject.h"
+#include "Ctx.h"
+
 #include "EngineData.h"
 #include "INetMgr.h"
 #include "UIMgr.h"
@@ -21,9 +23,12 @@
 #include "LuaSystem.h"
 #include "GameSceneEventCB.h"
 #include "MyLatentActionManager.h"
-#include "SceneSys.h"
 
-#include "Ctx.h"
+#include "SceneSys.h"
+#include "SystemTimeData"
+#include "SystemFrameData"
+#include "ProcessSys.h"
+#include "EngineLoop.h"
 
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
@@ -59,6 +64,10 @@ Ctx::Ctx()
 	this->mMyLatentActionManager = nullptr;
 
 	this->mSceneSys = nullptr;
+	this->mSystemTimeData = nullptr;
+	this->mSystemFrameData = nullptr;
+	this->mProcessSys = nullptr;
+	this->mEngineLoop = nullptr;
 }
 
 Ctx::~Ctx()
@@ -101,6 +110,10 @@ void Ctx::construct()
 	this->mMyLatentActionManager = MySharedPtr<MyLatentActionManager>(SAFE_NEW MyLatentActionManager());
 
 	this->mSceneSys = MySharedPtr<SceneSys>(SAFE_NEW SceneSys());
+	this->mSystemTimeData = MySharedPtr<SystemTimeData>(SAFE_NEW SystemTimeData());
+	this->mSystemFrameData = MySharedPtr<SystemFrameData>(SAFE_NEW SystemFrameData());
+	this->mProcessSys = MySharedPtr<ProcessSys>(SAFE_NEW ProcessSys());
+	this->mEngineLoop = MySharedPtr<EngineLoop>(SAFE_NEW EngineLoop());
 }
 
 void Ctx::init()
@@ -120,6 +133,10 @@ void Ctx::init()
 	this->mMyLatentActionManager->init();
 
 	this->mSceneSys->init();
+	this->mSystemTimeData->init();
+	this->mSystemFrameData->init();
+	this->mProcessSys->init();
+	this->mEngineLoop->init();
 
 	// 挂在目录
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
@@ -153,6 +170,10 @@ void Ctx::dispose()
 	this->mMyLatentActionManager->dispose();
 
 	this->mSceneSys->dispose();
+	this->mSystemTimeData->dispose();
+	this->mSystemFrameData->dispose();
+	this->mProcessSys->dispose();
+	this->mEngineLoop->dispose();
 
 	this->mUiMgr = nullptr;
 	this->mEngineData = nullptr;
@@ -182,6 +203,10 @@ void Ctx::dispose()
 	this->mMyLatentActionManager = nullptr;
 
 	this->mSceneSys = nullptr;
+	this->mSystemTimeData = nullptr;
+	this->mSystemFrameData = nullptr;
+	this->mProcessSys = nullptr;
+	this->mEngineLoop = nullptr;
 }
 
 void Ctx::beginPlay()
@@ -200,6 +225,14 @@ void Ctx::beginPlay()
 		// test
 		//GUiMgr->loadForm(eUIPack);
 		//GNetMgr->openSocket("192.168.124.26", 10002);
+	}
+}
+
+void Ctx::mainLoop()
+{
+	if (this->mIsInit)
+	{
+		GEngineLoop->MainLoop();
 	}
 }
 
@@ -323,6 +356,26 @@ MySharedPtr<MyLatentActionManager> Ctx::getMyLatentActionManager()
 MySharedPtr<SceneSys> Ctx::getSceneSys()
 {
 	return mSceneSys;
+}
+
+MySharedPtr<SystemTimeData> Ctx::getSystemTimeData()
+{
+	return mSystemTimeData;
+}
+
+MySharedPtr<SystemFrameData> Ctx::getSystemFrameData()
+{
+	return mSystemFrameData;
+}
+
+MySharedPtr<ProcessSys> Ctx::getProcessSys()
+{
+	return mProcessSys;
+}
+
+MySharedPtr<EngineLoop> Ctx::getEngineLoop()
+{
+	return mEngineLoop;
 }
 
 void Ctx::testApi()

@@ -4,40 +4,52 @@
 
 SystemTimeData::SystemTimeData()
 {
-	mPreTime = 0;
-	mCurTime = 0;
-	mDeltaSec = 0.0f;
+	this->mPreTime = 0;
+	this->mCurTime = 0;
+	this->mDeltaSec = 0.0f;
+}
+
+void SystemTimeData::init()
+{
+
+}
+
+void SystemTimeData::dispose()
+{
+
 }
 
 float SystemTimeData::getDeltaSec()
 {
-	return mDeltaSec;
+	return this->mDeltaSec;
 }
 
 void SystemTimeData::setDeltaSec(float value)
 {
-	mDeltaSec = value;
+	this->mDeltaSec = value;
 }
 
 long SystemTimeData::getCurTime()
 {
-	return mCurTime;
+	return this->mCurTime;
 }
 void SystemTimeData::setCurTime(long value)
 {
-	mCurTime = value;
+	this->mCurTime = value;
 }
 
 void SystemTimeData::nextFrame()
 {
-	mCurTime = EngineApi::getUTCSec();
-	if (mPreTime != 0.0f)     // 第一帧跳过，因为这一帧不好计算间隔
+	this->mCurTime = EngineApi::getUTCSec();
+
+	if (this->mPreTime != 0.0f)     // 第一帧跳过，因为这一帧不好计算间隔
 	{
-		mDeltaSec = mCurTime - mPreTime;
+		this->mDeltaSec = this->mCurTime - this->mPreTime;
 	}
 	else
 	{
-		mDeltaSec = 1 / 24;        // 每秒 24 帧
+		this->mDeltaSec = 1 / 24;        // 每秒 24 帧
 	}
-	mPreTime = mCurTime;
+
+	this->mPreTime = this->mCurTime;
 }

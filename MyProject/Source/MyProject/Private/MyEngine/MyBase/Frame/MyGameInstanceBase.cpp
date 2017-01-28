@@ -42,6 +42,11 @@ void UMyGameInstanceBase::FinishDestroy()
 	Super::FinishDestroy();
 }
 
+void UMyGameInstanceBase::Tick(float DeltaSeconds)
+{
+
+}
+
 TSubclassOf<UOnlineSession> UMyGameInstanceBase::GetOnlineSessionClass()
 {
 	return UMyOnlineSessionBase::StaticClass();

@@ -10,6 +10,11 @@ protected:
 
 public:
 	SystemTimeData();
+
+public:
+	void init();
+	void dispose();
+
 	float getDeltaSec();
 	void setDeltaSec(float value);
 	long getCurTime();
