@@ -146,7 +146,8 @@ void UForm::onReady()
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_READY);
 	//}
 
-	mIsReady = true;
+	this->mIsReady = true;
+
 	if (mIsHandleExitBtn)
 	{
 		//UtilApi.addEventHandle(mGuiWin.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
@@ -156,6 +157,8 @@ void UForm::onReady()
 // 每一次显示都会调用一次
 void UForm::onShow()
 {
+	this->mIsVisible = true;
+
 	//if (m_luaCSBridgeForm != null)
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_SHOW);
@@ -171,6 +174,8 @@ void UForm::onShow()
 // 每一次隐藏都会调用一次
 void UForm::onHide()
 {
+	this->mIsVisible = false;
+
 	//if (m_luaCSBridgeForm != null)
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_HIDE);
@@ -185,6 +190,9 @@ void UForm::onHide()
 // 每一次关闭都会调用一次
 void UForm::onExit()
 {
+	this->mIsVisible = false;
+	this->mIsReady = false;
+
 	//if (m_luaCSBridgeForm != null)
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_EXIT);
