@@ -47,7 +47,7 @@ namespace MyNS
 		virtual void syncLoad(std::string path, EventDispatchDelegate evtHandle = nullptr) override;
         // 异步加载对象
 		virtual void asyncLoad(std::string path, EventDispatchDelegate evtHandle) override;
-		void onPrefabLoaded(IDispatchObject* dispObj);
+		virtual void onPrefabLoaded(IDispatchObject* dispObj);
 		void onPrefabIns(IDispatchObject* dispObj);
         // 所有的资源都加载完成
 		void onAllFinish();

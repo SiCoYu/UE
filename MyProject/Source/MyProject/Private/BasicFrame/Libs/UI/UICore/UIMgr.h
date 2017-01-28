@@ -12,6 +12,7 @@
 #include "Form.h"
 
 using namespace NSFormId;
+using namespace MyNS;
 
 class UForm;
 class UICanvas;
@@ -76,6 +77,8 @@ public:
 	void onCodeloadedByRes(ClassAssetInsRes* res);
 	void onCodeLoadedByForm(UForm* form);
 	void onWidgetloadedByRes(ClassAssetInsRes* res);
+	void onWidgetAuxUIClassloadedByRes(IDispatchObject* res);
+
 	void onResize(int viewWidth, int viewHeight);
 
 	void exitAllWin();

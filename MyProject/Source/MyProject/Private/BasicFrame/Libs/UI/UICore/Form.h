@@ -5,10 +5,12 @@
 #include <string>
 #include "UIFormId.h"
 #include "PointF.h"
+#include "AuxMUIClassLoader.h"
 
 #include "Form.generated.h"
 
 using namespace NSFormId;
+using namespace MyNS;
 
 class UUserWidget;
 class PointF;
@@ -35,6 +37,7 @@ protected:
 	std::string mFormName;            // 这个是 Lua 中传的标识符，会传给 Lua 使用，客户端自己不用
 	//std::map<GameObject, GoExtraInfo> mGo2Path;
 	bool mIsVisible;
+	AuxMUIClassLoader* mAuxMUIClassLoader;
 
 public:
 	UForm(const FObjectInitializer& ObjectInitializer);
@@ -83,4 +86,6 @@ public:
 	//void onBtnClk(GameObject go_);
 	//void addClick(GameObject go, string path);
 	//void removeClick(GameObject go, string path);
+	AuxMUIClassLoader* getAuxMUIClassLoader();
+	void setAuxMUIClassLoader(AuxMUIClassLoader* value);
 };

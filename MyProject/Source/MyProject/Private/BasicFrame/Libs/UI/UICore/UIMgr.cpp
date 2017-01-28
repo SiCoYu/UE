@@ -1,4 +1,5 @@
 #include "MyProject.h"
+#include "UIMgr.h"
 #include "Form.h"
 #include "UIAttrSystem.h"
 #include "NotDestroyPath.h"
@@ -15,7 +16,8 @@
 #include "UtilStr.h"				// UtilStr
 #include "UMGWidget.h"				// UUMGWidget
 #include "ClassAssetInsRes.h"
-#include "UIMgr.h"
+#include "AuxMUIClassLoader.h"
+#include "SafePointer.h"
 
 UIMgr::UIMgr()
 {
@@ -196,7 +198,13 @@ void UIMgr::loadWidgetRes(UIFormId formId)
 		this->mId2WidgetLoadingItemDic[formId] = new UILoadingItem();
 		this->mId2WidgetLoadingItemDic[formId]->mId = formId;
 
-		this->loadFromFile(attrItem->mWidgetPath, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
+		//this->loadFromFile(attrItem->mWidgetPath, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
+
+		AuxMUIClassLoader* uiLoader = SAFE_NEW AuxMUIClassLoader();
+		this->mId2WidgetLoadingItemDic[formId]->setAuxMUIClassLoader(uiLoader);
+
+		uiLoader->setUMGOuterType(attrItem->mUMGOuterType);
+		uiLoader->asyncLoad(attrItem->mWidgetPath, EventDispatchDelegate(this, &UIMgr::onWidgetAuxUIClassloadedByRes));
 	}
 }
 
@@ -331,6 +339,29 @@ void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//		Ctx.m_instance.m_cbUIEvent.onWidgetLoaded(mId2FormDic[formId]);  // 资源加载完成
 	//	}
 	//}
+
+	// 卸载资源
+	//GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
+}
+
+void UIMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
+{
+	AuxMUIClassLoader* res = (AuxMUIClassLoader*)dispObj;
+
+	std::string path = res->GetPath();
+	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
+	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
+	UIAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
+
+	UUMGWidget* WidgetObject = res->getWidgetObject();
+	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
+	this->mId2FormDic[formId]->mGuiWin->mUiRoot = WidgetObject;
+	EngineApi::SetActive(mId2FormDic[formId]->mGuiWin->mUiRoot, false);      // 出发 onShow 事件
+
+	if (this->mId2FormDic[formId]->isVisible())
+	{
+		this->showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
+	}
 
 	// 卸载资源
 	//GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
