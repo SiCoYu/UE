@@ -60,7 +60,7 @@ void EngineLoop::MainLoop()
 	//Ctx.mInstance.mMKBEMainEntry.FixedUpdate();
 
 	// 每一帧的游戏逻辑处理
-	GProcessSys.ProcessNextFrame();
+	GProcessSys->ProcessNextFrame();
 	// 日志处理
 	//Ctx.mInstance.mLogSys.updateLog();
 }
