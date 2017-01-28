@@ -81,6 +81,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Resource/InsResMgr",
                 "MyProject/Private/BasicFrame/Libs/Resource/InsRes",
                 "MyProject/Private/BasicFrame/Libs/Resource/Download",
+                "MyProject/Private/BasicFrame/Libs/Resource/DelayLoad",
 
                 "MyProject/Private/BasicFrame/Libs/ObjectPool",
                 "MyProject/Private/BasicFrame/Libs/MsgRoute",

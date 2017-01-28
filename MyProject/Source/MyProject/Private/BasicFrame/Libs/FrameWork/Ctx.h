@@ -34,11 +34,13 @@ class SystemSetting;
 class LuaSystem;
 class ISceneEventCB;
 class MyLatentActionManager;
+
 class SceneSys;
 class SystemTimeData;
 class SystemFrameData;
 class ProcessSys;
 class EngineLoop;
+class DelayLoadMgr
 
 class Ctx : public Singleton<Ctx>
 {
@@ -71,6 +73,7 @@ protected:
 	MySharedPtr<SystemFrameData> mSystemFrameData;
 	MySharedPtr<ProcessSys> mProcessSys;
 	MySharedPtr<EngineLoop> mEngineLoop;
+	MySharedPtr<DelayLoadMgr> mDelayLoadMgr;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -117,6 +120,7 @@ public:
 	MySharedPtr<SystemFrameData> getSystemFrameData();
 	MySharedPtr<ProcessSys> getProcessSys();
 	MySharedPtr<EngineLoop> getEngineLoop();
+	MySharedPtr<DelayLoadMgr> getDelayLoadMgr();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -158,5 +162,6 @@ public:
 #define GSystemFrameData GCtx->getSystemFrameData()
 #define GProcessSys GCtx->getProcessSys()
 #define GEngineLoop GCtx->getEngineLoop()
+#define GDelayLoadMgr GCtx->getDelayLoadMgr()
 
 #endif				// __CTX_H

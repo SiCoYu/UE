@@ -32,5 +32,6 @@
 #include "SystemFrameData.h"
 #include "ProcessSys.h"
 #include "EngineLoop.h"
+#include "DelayLoadMgr.h"
 
 #endif

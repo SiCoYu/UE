@@ -29,6 +29,7 @@
 #include "SystemFrameData.h"
 #include "ProcessSys.h"
 #include "EngineLoop.h"
+#include "DelayLoadMgr.h"
 
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
@@ -68,6 +69,7 @@ Ctx::Ctx()
 	this->mSystemFrameData = nullptr;
 	this->mProcessSys = nullptr;
 	this->mEngineLoop = nullptr;
+	this->mDelayLoadMgr = nullptr;
 }
 
 Ctx::~Ctx()
@@ -114,6 +116,7 @@ void Ctx::construct()
 	this->mSystemFrameData = MySharedPtr<SystemFrameData>(SAFE_NEW SystemFrameData());
 	this->mProcessSys = MySharedPtr<ProcessSys>(SAFE_NEW ProcessSys());
 	this->mEngineLoop = MySharedPtr<EngineLoop>(SAFE_NEW EngineLoop());
+	this->mDelayLoadMgr = MySharedPtr<DelayLoadMgr>(SAFE_NEW DelayLoadMgr());
 }
 
 void Ctx::init()
@@ -137,6 +140,7 @@ void Ctx::init()
 	this->mSystemFrameData->init();
 	this->mProcessSys->init();
 	this->mEngineLoop->init();
+	this->mDelayLoadMgr->init();
 
 	// 挂在目录
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
@@ -174,6 +178,7 @@ void Ctx::dispose()
 	this->mSystemFrameData->dispose();
 	this->mProcessSys->dispose();
 	this->mEngineLoop->dispose();
+	this->mDelayLoadMgr->dispose();
 
 	this->mUiMgr = nullptr;
 	this->mEngineData = nullptr;
@@ -207,6 +212,7 @@ void Ctx::dispose()
 	this->mSystemFrameData = nullptr;
 	this->mProcessSys = nullptr;
 	this->mEngineLoop = nullptr;
+	this->mDelayLoadMgr = nullptr;
 }
 
 void Ctx::beginPlay()
@@ -376,6 +382,11 @@ MySharedPtr<ProcessSys> Ctx::getProcessSys()
 MySharedPtr<EngineLoop> Ctx::getEngineLoop()
 {
 	return mEngineLoop;
+}
+
+MySharedPtr<DelayLoadMgr> Ctx::getDelayLoadMgr()
+{
+	return mDelayLoadMgr;
 }
 
 void Ctx::testApi()
