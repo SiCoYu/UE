@@ -4,10 +4,12 @@
 #include "EngineApi.h"
 #include "Common.h"
 #include "ResInsEventDispatch.h"
+#include "MyGameInstanceBase.h"
 
 ObjectAssetInsRes::ObjectAssetInsRes()
 {
-
+	this->mGo = nullptr;
+	this->mRetGO = nullptr;
 }
 
 void ObjectAssetInsRes::initImpl(ResItem* res)
@@ -18,38 +20,46 @@ void ObjectAssetInsRes::initImpl(ResItem* res)
 
 UObject* ObjectAssetInsRes::InstantiateObject(std::string resName, bool isSetInitOrientPos, FVector position, FQuat rotation, ResInsEventDispatch* evtHandle)
 {
-	mRetGO = nullptr;
+	this->mRetGO = nullptr;
 
-	if (nullptr == mGo)
+	if (nullptr == this->mGo)
 	{
-		GLogSys->log("Prefab is null");
+		GLogSys->log("ObjectAssetInsRes::InstantiateObject, Prefab is null");
 	}
 	else
 	{
-		mRetGO = EngineApi::NewObject<UObject>(EngineApi::GetGameInstance(), mGo);
+		this->mRetGO = EngineApi::NewObject<UObject>(EngineApi::GetGameInstance(), Cast<UClass>(this->mGo));
 
 		if (nullptr == mRetGO)
 		{
-			GLogSys->log("Can not instance data");
+			GLogSys->log("ObjectAssetInsRes::InstantiateObject, Can not instance data");
 		}
 	}
-	return mRetGO;
+
+	if (nullptr != evtHandle)
+	{
+		evtHandle->dispatchEvent(nullptr);
+	}
+
+	return this->mRetGO;
 }
 
 UObject* ObjectAssetInsRes::getObject()
 {
-	return mGo;
+	return this->mGo;
 }
 
 void ObjectAssetInsRes::unload()
 {
-	if (mGo != nullptr)
+	if (this->mGo != nullptr)
 	{
 		//UtilApi.UnloadAsset(mGo);      // 强制卸载资源数据
 		//UtilApi.DestroyImmediate(mGo, true);
 		EngineApi::UnloadUnusedAssets();
-		mGo = nullptr;
+		this->mGo = nullptr;
 	}
-	mRetGO = nullptr;
-	InsResBase::unload();
+
+	this->mRetGO = nullptr;
+
+	Super::unload();
 }

@@ -5,7 +5,7 @@
 
 InsResMgrBase::InsResMgrBase()
 {
-	mLoadingDepth = 0;
+	this->mLoadingDepth = 0;
 }
 
 void InsResMgrBase::init()
@@ -20,8 +20,8 @@ void InsResMgrBase::dispose()
 
 void InsResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 {
-	mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
-	if (mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
+	this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+	if (this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
 		if (!param->getLoadEventHandle().empty())
 		{
@@ -32,26 +32,26 @@ void InsResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 	{
 		if (!param->getLoadEventHandle().empty())
 		{
-			mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
+			this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 		}
 	}
 }
 
 void InsResMgrBase::unload(std::string path, EventDispatchDelegate loadEventHandle)
 {
-	if (UtilMap::ContainsKey(mPath2ResDic, path))
+	if (UtilMap::ContainsKey(this->mPath2ResDic, path))
 	{
-		mPath2ResDic[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
-		mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
-		if (mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
+		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
+		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
+		if (this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
-			if (mLoadingDepth != 0)       // 如果加载深度不是 0 的，说明正在加载，不能卸载对象
+			if (this->mLoadingDepth != 0)       // 如果加载深度不是 0 的，说明正在加载，不能卸载对象
 			{
-				addNoRefResID2List(path);
+				this->addNoRefResID2List(path);
 			}
 			else
 			{
-				unloadNoRef(path);
+				this->unloadNoRef(path);
 			}
 		}
 	}
@@ -60,28 +60,28 @@ void InsResMgrBase::unload(std::string path, EventDispatchDelegate loadEventHand
 // 添加无引用资源到 List
 void InsResMgrBase::addNoRefResID2List(std::string path)
 {
-	mZeroRefResIDList.Add(path);
+	this->mZeroRefResIDList.Add(path);
 }
 
 // 卸载没有引用的资源列表中的资源
 void InsResMgrBase::unloadNoRefResFromList()
 {
-	for(std::string path : mZeroRefResIDList.getList())
+	for(std::string path : this->mZeroRefResIDList.getList())
 	{
-		if (mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
+		if (this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
-			unloadNoRef(path);
+			this->unloadNoRef(path);
 		}
 	}
-	mZeroRefResIDList.Clear();
+	this->mZeroRefResIDList.Clear();
 }
 
 void InsResMgrBase::unloadNoRef(std::string path)
 {
-	mPath2ResDic[path]->unload();
+	this->mPath2ResDic[path]->unload();
 	// 卸载加载的原始资源
 	GResLoadMgr->unload(path, EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
-	UtilMap::Remove(mPath2ResDic, path);
+	UtilMap::Remove(this->mPath2ResDic, path);
 	//UtilApi.UnloadUnusedAssets();           // 异步卸载共用资源
 }
 
@@ -90,13 +90,13 @@ void InsResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 	ResItem* res = (ResItem*)dispObj;
 	std::string path = res->getPath();
 
-	if (UtilMap::ContainsKey(mPath2ResDic, path))
+	if (UtilMap::ContainsKey(this->mPath2ResDic, path))
 	{
-		mPath2ResDic[path]->getRefCountResLoadResultNotify()->getResLoadState()->copyFrom(res->getRefCountResLoadResultNotify()->getResLoadState());
+		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getResLoadState()->copyFrom(res->getRefCountResLoadResultNotify()->getResLoadState());
 		if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 		{
-			mPath2ResDic[path]->init(res);
-			if (mPath2ResDic[path]->getIsOrigResNeedImmeUnload())
+			this->mPath2ResDic[path]->init(res);
+			if (this->mPath2ResDic[path]->getIsOrigResNeedImmeUnload())
 			{
 				// 卸载资源
 				GResLoadMgr->unload(path, EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
@@ -104,7 +104,7 @@ void InsResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 		}
 		else
 		{
-			mPath2ResDic[path]->failed(res);
+			this->mPath2ResDic[path]->failed(res);
 			GResLoadMgr->unload(path, EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
 		}
 	}
@@ -117,7 +117,7 @@ void InsResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 
 InsResBase* InsResMgrBase::getRes(std::string path)
 {
-	return mPath2ResDic[path];
+	return this->mPath2ResDic[path];
 }
 
 // 卸载所有的资源
@@ -125,7 +125,7 @@ void InsResMgrBase::unloadAll()
 {
 	// 卸载资源的时候保存的路径列表
 	MList<std::string> pathList;
-	for(std::pair<std::string, InsResBase*> kv : mPath2ResDic)
+	for(std::pair<std::string, InsResBase*> kv : this->mPath2ResDic)
 	{
 		kv.second->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->clearEventHandle();
 		pathList.Add(kv.first);
@@ -133,7 +133,7 @@ void InsResMgrBase::unloadAll()
 
 	for(std::string path : pathList.getList())
 	{
-		unload(path, EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
+		this->unload(path, EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
 	}
 
 	pathList.Clear();
