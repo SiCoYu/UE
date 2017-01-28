@@ -40,7 +40,7 @@ class SystemTimeData;
 class SystemFrameData;
 class ProcessSys;
 class EngineLoop;
-class DelayLoadMgr
+class DelayLoadMgr;
 
 class Ctx : public Singleton<Ctx>
 {
