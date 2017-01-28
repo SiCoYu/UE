@@ -13,6 +13,6 @@ namespace MyNS
 		M_DECLARE_SUPER_KW(AuxMObjectLoaderBase)
 
 	public:
-		AuxMObjectLoader::AuxMObjectLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
+		AuxMObjectLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine);
 	};
 }

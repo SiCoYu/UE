@@ -95,7 +95,7 @@ namespace MyNS
 
 		if (this->isInvalid())
 		{
-			this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(path, EventDispatchDelegate(this, &AuxMObjectLoader::onPrefabLoaded));
+			this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(path, EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 		}
 		else if (this->hasLoadEnd())
 		{
@@ -119,7 +119,7 @@ namespace MyNS
 					if (this->mIsInsNeedCoroutine)
 					{
 						this->mResInsEventDispatch = new ResInsEventDispatch();
-						this->mResInsEventDispatch->addEventHandle(EventDispatchDelegate(this, &AuxMObjectLoader::onPrefabIns));
+						this->mResInsEventDispatch->addEventHandle(EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabIns));
 
 						if (this->mIsSetFakePos)
 						{
@@ -153,7 +153,7 @@ namespace MyNS
 			{
 				this->mResLoadState->setFailed();
 
-				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), EventDispatchDelegate(this, &AuxMObjectLoader::onPrefabLoaded));
+				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 				this->mPrefabRes = nullptr;
 
 				if (this->mEvtHandle != nullptr)
@@ -214,7 +214,7 @@ namespace MyNS
 	{
 		if (this->mPrefabRes != nullptr)
 		{
-			GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), EventDispatchDelegate(this, &AuxMObjectLoader::onPrefabLoaded));
+			GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 			this->mPrefabRes = nullptr;
 		}
 
@@ -274,7 +274,7 @@ namespace MyNS
 			{
 				this->mResInsEventDispatch = new ResInsEventDispatch();
 			}
-			this->mResInsEventDispatch->addEventHandle(EventDispatchDelegate(this,&AuxMObjectLoader::onInstantiateObjectFinish));
+			this->mResInsEventDispatch->addEventHandle(EventDispatchDelegate(this,&AuxMObjectLoaderBase::onInstantiateObjectFinish));
 
 			if (this->mIsSetFakePos)
 			{
