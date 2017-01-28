@@ -5,6 +5,8 @@
 #include "MySharedPointer.h"
 #include "UIFunctionBar.generated.h"
 
+using namespace MyNS;
+
 class IDispatchObject;
 
 UCLASS(config = Game)

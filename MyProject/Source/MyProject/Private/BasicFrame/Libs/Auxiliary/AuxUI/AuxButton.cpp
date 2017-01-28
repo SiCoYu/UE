@@ -7,7 +7,7 @@ namespace MyNS
 	AuxButton::AuxButton()
 	{
 		this->mNativeButton = nullptr;
-		this->mScriptDelegate = nullptr;
+		//this->mScriptDelegate = nullptr;
 	}
 
 	AuxButton::~AuxButton()
@@ -20,7 +20,7 @@ namespace MyNS
 		if (nullptr != widget && nullptr != pThis)
 		{
 			this->mNativeButton = Cast<UButton>(widget->GetWidgetFromName(buttonName));
-			if (nullptr != button)
+			if (nullptr != this->mNativeButton)
 			{
 				this->mScriptDelegate.BindUFunction(pThis, functionName);
 				this->mNativeButton->OnClicked.Add(this->mScriptDelegate);
