@@ -318,7 +318,8 @@ void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//{
 	//    UtilApi.SetActive(mId2FormDic[formId].mGuiWin.mUiRoot, false);
 	//}
-	if (!this->mId2FormDic[formId]->getHideOnCreate())
+	//if (!this->mId2FormDic[formId]->getHideOnCreate())
+	if(this->mId2FormDic[formId]->isVisible())
 	{
 		this->showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
 	}
@@ -332,7 +333,7 @@ void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//}
 
 	// 卸载资源
-	GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
+	//GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 }
 
 // 大小发生变化后，调用此函数
