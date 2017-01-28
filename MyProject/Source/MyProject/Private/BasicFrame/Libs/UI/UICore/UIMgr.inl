@@ -89,7 +89,7 @@ T* UIMgr::loadForm(UIFormId formId)
 
 			form->mGuiWin->mUiRoot = WidgetObject;
 
-			addFormNoReady(form);           // 仅仅是创建数据，资源还没有加载完成
+			this->addFormNoReady(form);           // 仅仅是创建数据，资源还没有加载完成
 			//onCodeLoadedByForm(form);
 		}
 	}

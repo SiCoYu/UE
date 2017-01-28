@@ -28,69 +28,69 @@ void UForm::loadUWidget(const TCHAR* name)
 UForm::UForm(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	mIsExitMode = true;
-	mIsHideOnCreate = false;
-	mIsLoadWidgetRes = false;
-	mIsReady = false;
-	mIsBlurBg = false;
-	mIsHandleExitBtn = false;
-	mAlignVertial = (int)CENTER;
-	mAlignHorizontal = (int)CENTER;
+	this->mIsExitMode = true;
+	this->mIsHideOnCreate = false;
+	this->mIsLoadWidgetRes = false;
+	this->mIsReady = false;
+	this->mIsBlurBg = false;
+	this->mIsHandleExitBtn = false;
+	this->mAlignVertial = (int)CENTER;
+	this->mAlignHorizontal = (int)CENTER;
 }
 
 UIFormId UForm::getId()
 {
-	return mId;
+	return this->mId;
 }
 
 void UForm::setId(UIFormId value)
 {
-	mId = value;
+	this->mId = value;
 }
 
 bool UForm::getHideOnCreate()
 {
-	return mIsHideOnCreate;
+	return this->mIsHideOnCreate;
 }
 
 void UForm::setHideOnCreate(bool value)
 {
-	mIsHideOnCreate = value;
+	this->mIsHideOnCreate = value;
 }
 
 bool UForm::getExitMode()
 {
-	return mIsExitMode;
+	return this->mIsExitMode;
 }
 
 void UForm::setExitMode(bool value)
 {
-	mIsExitMode = value;
+	this->mIsExitMode = value;
 }
 
 bool UForm::getIsLoadWidgetRes()
 {
-	return mIsLoadWidgetRes;
+	return this->mIsLoadWidgetRes;
 }
 
 void UForm::setIsLoadWidgetRes(bool value)
 {
-	mIsLoadWidgetRes = true;
+	this->mIsLoadWidgetRes = true;
 }
 
 bool UForm::getBReady()
 {
-	return mIsReady;
+	return this->mIsReady;
 }
 
 std::string UForm::getFormName()
 {
-	return mFormName;
+	return this->mFormName;
 }
 
 void UForm::setFormName(std::string value)
 {
-	mFormName = value;
+	this->mFormName = value;
 }
 
 //LuaCSBridgeForm* UForm::getLuaCSBridgeForm()
@@ -105,7 +105,7 @@ void UForm::setFormName(std::string value)
 
 void UForm::init()
 {
-	onInit();
+	this->onInit();
 }
 
 void UForm::show()
@@ -160,7 +160,7 @@ void UForm::onShow()
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_SHOW);
 	//}
 
-	if (mIsBlurBg)
+	if (this->mIsBlurBg)
 	{
 		//GUiMgr->showForm(eUIBlurBg);        // 显示模糊背景界面
 	}
@@ -206,7 +206,7 @@ bool UForm::isVisible()
 */
 void UForm::onStageReSize()
 {
-	adjustPosWithAlign();
+	this->adjustPosWithAlign();
 }
 
 void UForm::adjustPosWithAlign()
@@ -252,7 +252,7 @@ PointF* UForm::computeAdjustPosWithAlign()
 // 按钮点击关闭
 void UForm::onExitBtnClick()
 {
-	exit();
+	this->exit();
 }
 
 //void UForm::registerBtnClickEventByList(string[] btnList)
@@ -320,5 +320,5 @@ void UForm::onExitBtnClick()
 
 bool UForm::getIsReady()
 {
-	return mIsReady;
+	return this->mIsReady;
 }

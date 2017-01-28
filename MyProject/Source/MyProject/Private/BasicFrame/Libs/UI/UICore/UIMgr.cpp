@@ -45,11 +45,11 @@ void UIMgr::createCanvas()
 	int idx = 0;
 	for (idx = 0; idx < (int)eCanvas_Total; ++idx)
 	{
-		mCanvasList.push_back(new UICanvas((UICanvasId)idx));
+		this->mCanvasList.push_back(new UICanvas((UICanvasId)idx));
 	}
 
-	mCanvasList[(int)eCanvas_50]->setGoName(NotDestroyPath::ND_CV_UICanvas_50);
-	mCanvasList[(int)eCanvas_100]->setGoName(NotDestroyPath::ND_CV_UICanvas_100);
+	this->mCanvasList[(int)eCanvas_50]->setGoName(NotDestroyPath::ND_CV_UICanvas_50);
+	this->mCanvasList[(int)eCanvas_100]->setGoName(NotDestroyPath::ND_CV_UICanvas_100);
 }
 
 // 关联每一层的对象
@@ -58,7 +58,7 @@ void UIMgr::findCanvasGO()
 	int idx = 0;
 	for (idx = 0; idx < (int)eCanvas_Total; ++idx)
 	{
-		mCanvasList[idx]->findCanvasGO();
+		this->mCanvasList[idx]->findCanvasGO();
 	}
 }
 
@@ -67,13 +67,14 @@ void UIMgr::showForm(UIFormId formId)
 {
 	if (hasForm(formId))
 	{
-		showFormInternal(formId);
+		this->showFormInternal(formId);
 	}
 }
 
 void UIMgr::showFormInternal(UIFormId formId)
 {
 	UForm* win = getForm<UForm>(formId);
+
 	if (win != nullptr)
 	{
 		if (!win->getIsReady())
@@ -111,11 +112,11 @@ void UIMgr::exitForm(UIFormId formId, bool bForce)
 	{
 		if (win->getExitMode() || bForce)
 		{
-			exitFormInternal(formId);
+			this->exitFormInternal(formId);
 		}
 		else
 		{
-			hideFormInternal(formId);
+			this->hideFormInternal(formId);
 		}
 	}
 }
@@ -147,7 +148,7 @@ void UIMgr::exitFormInternal(UIFormId formId)
 
 void UIMgr::addForm(UForm* form)
 {
-	addFormNoReady(form);
+	this->addFormNoReady(form);
 	form->onInit();
 }
 
@@ -159,7 +160,7 @@ UILayer* UIMgr::getLayer(UICanvasId canvasID, UILayerId layerID)
 	{
 		if (eBtmLayer <= layerID && layerID <= eTopLayer)
 		{
-			layer = mCanvasList[(int)canvasID]->getLayerList()[(int)layerID];
+			layer = this->mCanvasList[(int)canvasID]->getLayerList()[(int)layerID];
 		}
 	}
 
@@ -173,7 +174,7 @@ void UIMgr::addFormNoReady(UForm* form)
 	//form->setUiLayer(layer);
 	//layer->addForm(form);
 
-	mId2FormDic[form->getId()] = form;
+	this->mId2FormDic[form->getId()] = form;
 	form->init();        // 初始化
 }
 
@@ -185,39 +186,40 @@ bool UIMgr::hasForm(UIFormId formId)
 // 加载窗口控件资源，窗口资源都是从文件加载
 void UIMgr::loadWidgetRes(UIFormId formId)
 {
-	UIAttrItem* attrItem = mUiAttrSystem->mId2AttrDic[formId];
-	if (!UtilMap::ContainsKey(mId2WidgetLoadingItemDic, formId))                       // 如果什么都没有创建，第一次加载
+	UIAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
+	if (!UtilMap::ContainsKey(this->mId2WidgetLoadingItemDic, formId))                       // 如果什么都没有创建，第一次加载
 	{
-		mId2WidgetLoadingItemDic[formId] = new UILoadingItem();
-		mId2WidgetLoadingItemDic[formId]->mId = formId;
+		this->mId2WidgetLoadingItemDic[formId] = new UILoadingItem();
+		this->mId2WidgetLoadingItemDic[formId]->mId = formId;
 
-		loadFromFile(attrItem->mWidgetPath, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
+		this->loadFromFile(attrItem->mWidgetPath, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 	}
 }
 
 // 从本地磁盘或者网络加载资源
-void UIMgr::loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle)
+void UIMgr::loadFromFile(std::string resPath, EventDispatchDelegate onLoadEventHandle)
 {
 	// TODO:
 	//LoadParam* param = GPoolSys->newObject<LoadParam>();
-	//LocalFileSys::modifyLoadParam(reaPath, param);
+	//LocalFileSys::modifyLoadParam(resPath, param);
 	//param->mIsLoadNeedCoroutine = false;
 	//param->mIsResNeedCoroutine = false;
 	//param->mLoadEventHandle = onLoadEventHandle;
 	//GClassAssetInsMgr->load<ClassAssetInsRes>(param);
 	//GPoolSys->deleteObj(param);
 
-	//GClassAssetInsMgr->getAndSyncLoadClass(reaPath, onLoadEventHandle);
-	GClassAssetInsMgr->getAndAsyncLoadClass(reaPath, onLoadEventHandle);
+	//GClassAssetInsMgr->getAndSyncLoadClass(resPath, onLoadEventHandle);
+	GClassAssetInsMgr->getAndAsyncLoadClass(resPath, onLoadEventHandle);
 }
 
 // 代码资源加载处理
 void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 {
 	ClassAssetInsRes* res = (ClassAssetInsRes*)dispObj;
+
 	if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
-		onCodeloadedByRes(res);
+		this->onCodeloadedByRes(res);
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
@@ -230,13 +232,14 @@ void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 {
 	ClassAssetInsRes* res = (ClassAssetInsRes*)dispObj;
+
 	if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
-		onWidgetloadedByRes(res);
+		this->onWidgetloadedByRes(res);
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormId formId = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormId
+		UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormId
 		UtilMap::Remove(mId2WidgetLoadingItemDic, formId);
 		GLogSys->log("UIFormId =  ， Failed Prefab");
 	}
@@ -245,10 +248,10 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 // 代码资源加载完成处理
 void UIMgr::onCodeloadedByRes(ClassAssetInsRes* res)
 {
-	UIFormId formId = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
-	UtilMap::Remove(mId2CodeLoadingItemDic, formId);
-	addFormNoReady(mId2FormDic[formId]);
-	onCodeLoadedByForm(mId2FormDic[formId]);
+	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
+	UtilMap::Remove(this->mId2CodeLoadingItemDic, formId);
+	this->addFormNoReady(this->mId2FormDic[formId]);
+	this->onCodeLoadedByForm(this->mId2FormDic[formId]);
 }
 
 void UIMgr::onCodeLoadedByForm(UForm* form)
@@ -263,13 +266,13 @@ void UIMgr::onCodeLoadedByForm(UForm* form)
 void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 {
 	std::string path = res->GetPath();
-	UIFormId formId = mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
-	UtilMap::Remove(mId2WidgetLoadingItemDic, formId);
+	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
+	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
 
-	UIAttrItem* attrItem = mUiAttrSystem->mId2AttrDic[formId];
-	mId2FormDic[formId]->setIsLoadWidgetRes(true);
+	UIAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
+	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
 	//mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->mWidgetPath));
-	mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
+	this->mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
 	//if (attrItem.m_bNeedLua)
 	//{
 	//	mId2FormDic[formId].luaCSBridgeForm.gameObject = mId2FormDic[formId].mGuiWin.mUiRoot;
@@ -286,9 +289,9 @@ void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//{
 	//    UtilApi.SetActive(mId2FormDic[formId].mGuiWin.mUiRoot, false);
 	//}
-	if (!mId2FormDic[formId]->getHideOnCreate())
+	if (!this->mId2FormDic[formId]->getHideOnCreate())
 	{
-		showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
+		this->showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
 	}
 
 	//if (null != Ctx.m_instance.m_cbUIEvent)
@@ -312,7 +315,7 @@ void UIMgr::onResize(int viewWidth, int viewHeight)
 	{
 		for (layerIdx = 0; layerIdx <= (int)eMaxLayer; ++layerIdx)
 		{
-			mCanvasList[canvasIdx]->getLayerList()[layerIdx]->onStageReSize();
+			this->mCanvasList[canvasIdx]->getLayerList()[layerIdx]->onStageReSize();
 		}
 	}
 }
@@ -320,16 +323,16 @@ void UIMgr::onResize(int viewWidth, int viewHeight)
 // 关闭所有显示的窗口
 void UIMgr::exitAllWin()
 {
-	for(std::pair<UIFormId, UForm*> keyValue : mId2FormDic)
+	for(std::pair<UIFormId, UForm*> keyValue : this->mId2FormDic)
 	{
-		mTmpList.Add(keyValue.first);
+		this->mTmpList.Add(keyValue.first);
 	}
 
-	for(UIFormId formId : mTmpList.getList())
+	for(UIFormId formId : this->mTmpList.getList())
 	{
-		exitForm(formId);
+		this->exitForm(formId);
 	}
-	mTmpList.Clear();
+	this->mTmpList.Clear();
 }
 
 void UIMgr::findSceneUIRootGo()
