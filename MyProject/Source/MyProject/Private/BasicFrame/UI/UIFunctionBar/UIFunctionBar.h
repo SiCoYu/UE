@@ -1,6 +1,8 @@
 #pragma once
 
 #include "UMGForm.h"
+#include "AuxButton.h"
+#include "MySharedPointer.h"
 #include "UIFunctionBar.generated.h"
 
 class IDispatchObject;
@@ -9,6 +11,9 @@ UCLASS(config = Game)
 class UUIFunctionBar : public UUMGForm
 {
 	GENERATED_BODY()
+
+protected:
+	MySharedPtr<AuxButton> mTestButton;
 
 public:
 	UUIFunctionBar(const FObjectInitializer& ObjectInitializer);

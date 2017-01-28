@@ -5,6 +5,8 @@
 #include "UObject/WeakObjectPtr.h"	// FWeakObjectPtr
 #include "Math/Vector.h"	// FVector
 #include "GameFramework/Actor.h"	// AActor
+#include "UObject/Object.h"		// UObject
+#include "Blueprint/UserWidget.h"	// UUserWidget
 
 class UUserWidget;
 class UObject;

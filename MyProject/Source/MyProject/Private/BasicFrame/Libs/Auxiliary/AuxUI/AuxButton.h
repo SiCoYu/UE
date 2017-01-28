@@ -1,8 +1,11 @@
 #pragma once
 
 #include "AuxWindow.h"
+#include "UObject/ScriptDelegates.h"	// TScriptDelegate
+#include "UObject/WeakObjectPtr.h"	// FWeakObjectPtr
+#include "UObject/Object.h"		// UObject
+#include "Blueprint/UserWidget.h"	// UUserWidget
 
-class AddOnceEventDispatch;
 class UButton;
 
 namespace MyNS
@@ -11,6 +14,13 @@ namespace MyNS
 	{
 	protected:
 		UButton* mNativeButton;
-		AddOnceEventDispatch* mClickEventDispatch;      // 点击事件分发
+		TScriptDelegate<FWeakObjectPtr> mScriptDelegate;
+
+	public:
+		AuxButton();
+		~AuxButton();
+
+	public:
+		TScriptDelegate<FWeakObjectPtr> addUObjectButtonClickHandle(UUserWidget* widget, const FName& buttonName, UObject* pThis, const FName& functionName);
 	};
 }

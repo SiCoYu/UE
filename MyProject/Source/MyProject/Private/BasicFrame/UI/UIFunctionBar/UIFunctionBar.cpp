@@ -7,18 +7,20 @@
 #include "Engine/LatentActionManager.h"
 #include "IDispatchObject.h"
 #include "EventDispatchDelegate.h"
+#include "SafePointer.h"
 
 UUIFunctionBar::UUIFunctionBar(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-
+	mTestButton = MySharedPtr<AuxButton>(SAFE_NEW AuxButton());
 }
 
 void UUIFunctionBar::onReady()
 {
 	Super::onReady();
 
-	UtilApi::addUObjectButtonClickHandle(mGuiWin->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
+	//UtilApi::addUObjectButtonClickHandle(mGuiWin->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
+	mTestButton->addUObjectButtonClickHandle(mGuiWin->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 }
 
 void UUIFunctionBar::onTestButtonTouch()
