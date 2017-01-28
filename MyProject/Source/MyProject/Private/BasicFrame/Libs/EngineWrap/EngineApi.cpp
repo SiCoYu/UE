@@ -189,13 +189,22 @@ FString EngineApi::GameUserDir()
 
 void EngineApi::SetActive(UWidget* target, bool bshow)
 {
-	if (bshow)
+	if (nullptr != target)
 	{
-		target->SetVisibility(ESlateVisibility::Visible);
-	}
-	else
-	{
-		target->SetVisibility(ESlateVisibility::Hidden);
+		if (bshow)
+		{
+			if (!target->IsVisible())
+			{
+				target->SetVisibility(ESlateVisibility::Visible);
+			}
+		}
+		else
+		{
+			if (target->IsVisible())
+			{
+				target->SetVisibility(ESlateVisibility::Hidden);
+			}
+		}
 	}
 }
 

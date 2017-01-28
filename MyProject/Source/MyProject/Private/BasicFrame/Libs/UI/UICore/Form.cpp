@@ -36,6 +36,7 @@ UForm::UForm(const FObjectInitializer& ObjectInitializer)
 	this->mIsHandleExitBtn = false;
 	this->mAlignVertial = (int)CENTER;
 	this->mAlignHorizontal = (int)CENTER;
+	this->mIsVisible = false;
 }
 
 UIFormId UForm::getId()
@@ -78,7 +79,7 @@ void UForm::setIsLoadWidgetRes(bool value)
 	this->mIsLoadWidgetRes = true;
 }
 
-bool UForm::getBReady()
+bool UForm::getIsReady()
 {
 	return this->mIsReady;
 }
@@ -130,11 +131,11 @@ void UForm::onInit()
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_INIT);
 	//}
-	//if (mIsLoadWidgetRes)
-	//{
-	// 默认会继续加载资源
-	//GUiMgr->loadWidgetRes(this->getId());
-	//}
+	if (!mIsLoadWidgetRes)
+	{
+		// 默认会继续加载资源
+		GUiMgr->loadWidgetRes(this->getId());
+	}
 }
 
 // 第一次显示之前会调用一次
@@ -198,7 +199,7 @@ void UForm::onExit()
 bool UForm::isVisible()
 {
 	//return mGuiWin->mUiRoot->activeSelf;        // 仅仅是自己是否可见
-	return true;
+	return this->mIsVisible;
 }
 
 /*
@@ -317,8 +318,3 @@ void UForm::onExitBtnClick()
 //		}
 //	}
 //}
-
-bool UForm::getIsReady()
-{
-	return this->mIsReady;
-}

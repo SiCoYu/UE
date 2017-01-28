@@ -77,7 +77,7 @@ void UIMgr::showFormInternal(UIFormId formId)
 
 	if (win != nullptr)
 	{
-		if (!win->getIsReady())
+		if (!win->getIsReady() && win->getIsLoadWidgetRes())
 		{
 			win->onReady();
 		}
@@ -85,6 +85,10 @@ void UIMgr::showFormInternal(UIFormId formId)
 		{
 			EngineApi::SetActive(win->mGuiWin->mUiRoot, true);
 			win->onShow();
+		}
+		else
+		{
+			EngineApi::SetActive(win->mGuiWin->mUiRoot, true);
 		}
 	}
 }
@@ -270,9 +274,34 @@ void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
 
 	UIAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
+
+
+	UClass* WidgetClass = res->getClass();
+
+	UUMGWidget* WidgetObject = nullptr;
+
+	if (NSFormType::eWorld == attrItem->mUMGOuterType)
+	{
+
+	}
+	else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
+	{
+		WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+	}
+	else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
+	{
+
+	}
+
+	WidgetObject->AddToViewport();
+
+
 	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
 	//mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->mWidgetPath));
-	this->mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
+	//this->mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
+
+	this->mId2FormDic[formId]->mGuiWin->mUiRoot = WidgetObject;
+
 	//if (attrItem.m_bNeedLua)
 	//{
 	//	mId2FormDic[formId].luaCSBridgeForm.gameObject = mId2FormDic[formId].mGuiWin.mUiRoot;

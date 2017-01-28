@@ -57,25 +57,25 @@ T* UIMgr::loadForm(UIFormId formId)
 
 		//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 
-		ClassAssetInsRes* asset = GClassAssetInsMgr->getAndSyncLoadClass(attrItem->mWidgetPath);
-		UClass* WidgetClass = asset->getClass();
+		//ClassAssetInsRes* asset = GClassAssetInsMgr->getAndSyncLoadClass(attrItem->mWidgetPath);
+		//UClass* WidgetClass = asset->getClass();
 
-		UUMGWidget* WidgetObject = nullptr;
+		//UUMGWidget* WidgetObject = nullptr;
 
-		if (NSFormType::eWorld == attrItem->mUMGOuterType)
-		{
+		//if (NSFormType::eWorld == attrItem->mUMGOuterType)
+		//{
 
-		}
-		else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
-		{
-			WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
-		}
-		else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
-		{
+		//}
+		//else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
+		//{
+		//	WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+		//}
+		//else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
+		//{
 
-		}
+		//}
 
-		WidgetObject->AddToViewport();
+		//WidgetObject->AddToViewport();
 		form = EngineApi::NewObject<T>();
 
 		if (nullptr != form)                   // 如果代码已经在本地
@@ -87,7 +87,7 @@ T* UIMgr::loadForm(UIFormId formId)
 			//	form.luaCSBridgeForm.DoFile(attrItem.m_luaScriptPath);
 			//}
 
-			form->mGuiWin->mUiRoot = WidgetObject;
+			//form->mGuiWin->mUiRoot = WidgetObject;
 
 			this->addFormNoReady(form);           // 仅仅是创建数据，资源还没有加载完成
 			//onCodeLoadedByForm(form);
