@@ -6,6 +6,7 @@
 #include "Math/Vector.h"	// FVector
 #include "Math/Quat.h"	// FQuat
 #include "BaseClassDef.h"
+#include "ResPackType.h"
 
 class UObject;
 class UClass;
@@ -15,12 +16,14 @@ class ObjectAssetInsResBase : public InsResBase
 {
 	M_DECLARE_SUPER_KW(InsResBase)
 
-public:
+protected:
 	UObject* mGo;
 	UObject* mRetGO;
+	ResPackType mResPackType;    // 资源打包类型
 
 public:
 	ObjectAssetInsResBase();
+
 protected:
 	virtual void initImpl(ResItem* res) override;
 

@@ -2,6 +2,7 @@
 
 #include "AuxMObjectLoaderBase.h"
 #include "BaseClassDef.h"
+#include "ResPackType.h"
 
 namespace MyNS
 {

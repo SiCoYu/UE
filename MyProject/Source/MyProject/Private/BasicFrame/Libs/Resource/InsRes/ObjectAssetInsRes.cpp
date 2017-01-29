@@ -4,5 +4,5 @@
 ObjectAssetInsRes::ObjectAssetInsRes()
 	: Super()
 {
-	
+	this->mResPackType = eObjectType;
 }

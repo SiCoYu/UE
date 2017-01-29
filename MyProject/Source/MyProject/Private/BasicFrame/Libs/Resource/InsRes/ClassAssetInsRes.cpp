@@ -4,5 +4,5 @@
 ClassAssetInsRes::ClassAssetInsRes()
 	: Super()
 {
-	
+	this->mResPackType = eClassType;
 }

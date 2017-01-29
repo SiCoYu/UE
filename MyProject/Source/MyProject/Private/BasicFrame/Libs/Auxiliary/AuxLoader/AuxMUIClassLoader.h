@@ -3,6 +3,7 @@
 #include "AuxMObjectLoaderBase.h"
 #include "BaseClassDef.h"
 #include "FormType.h"
+#include "ResPackType.h"
 
 using namespace NSFormType;
 
