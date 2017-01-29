@@ -6,6 +6,7 @@
 #include "EventDispatchDelegate.h"
 #include "DownloadParam.h"
 #include "BaseClassDef.h"
+#include "CoreInc.h"
 
 class ResLoadState;
 class ResEventDispatch;
@@ -18,6 +19,7 @@ namespace MyNS
     class AuxLoaderBase : public GObject, public IDispatchObject
     {
 		M_DECLARE_SUPER_KW(GObject)
+		M_DECLARE_CLASS(AuxLoaderBase)
 
 	protected:
 		ResLoadState* mResLoadState;      // 资源加载状态

@@ -4,6 +4,7 @@
 #include "BaseClassDef.h"
 #include "FormType.h"
 #include "ResPackType.h"
+#include "CoreInc.h"
 
 using namespace NSFormType;
 
@@ -18,6 +19,7 @@ namespace MyNS
     class AuxMUIClassLoader : public AuxMObjectLoaderBase
     {
 		M_DECLARE_SUPER_KW(AuxMObjectLoaderBase)
+		M_DECLARE_CLASS(AuxMUIClassLoader)
 
 	protected:
 		UMGOuterType mUMGOuterType;

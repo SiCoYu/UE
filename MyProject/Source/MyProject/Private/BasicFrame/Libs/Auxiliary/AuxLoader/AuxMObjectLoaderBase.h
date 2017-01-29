@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"	// AActor
 #include "UObject/Object.h"	// UObject
 #include "ResPackType.h"
+#include "CoreInc.h"
 
 class ObjectAssetInsResBase;
 class ResInsEventDispatch;
@@ -19,6 +20,7 @@ namespace MyNS
     class AuxMObjectLoaderBase : public AuxLoaderBase
     {
 		M_DECLARE_SUPER_KW(AuxLoaderBase)
+		M_DECLARE_CLASS(AuxMObjectLoaderBase)
 
 	protected:
 		UObject* mSelfGo;                       // 加载的 GameObject

@@ -7,6 +7,9 @@
 
 namespace MyNS
 {
+	M_IMPLEMENT_CLASS(AuxMUIClassLoader, AuxMObjectLoaderBase)
+	M_REGISTER_CLASS(AuxMUIClassLoader)
+
 	AuxMUIClassLoader::AuxMUIClassLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
 		: Super(path, isNeedInsPrefab, isInsNeedCoroutine)
 	{

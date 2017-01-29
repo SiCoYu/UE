@@ -13,8 +13,6 @@ public:
 	GObject();
 
 public:
-	std::string getTypeId();
-
 	int GetRefCount() const;
 	void AddRef();
 	void Release();

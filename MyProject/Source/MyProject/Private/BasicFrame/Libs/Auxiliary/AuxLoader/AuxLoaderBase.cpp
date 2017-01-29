@@ -5,6 +5,9 @@
 
 namespace MyNS
 {
+	M_IMPLEMENT_CLASS(AuxLoaderBase, GObject)
+	M_REGISTER_CLASS(AuxLoaderBase)
+
 	AuxLoaderBase::AuxLoaderBase(std::string path)
 	{
 		this->mEvtHandle = nullptr;
