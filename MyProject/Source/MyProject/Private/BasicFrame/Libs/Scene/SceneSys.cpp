@@ -90,7 +90,7 @@ void SceneSys::onSceneResLoadded(IDispatchObject* dispObj)
 
 	//Ctx.mInstance.mNetCmdNotify.isStopNetHandle = false;        // 加载场景完成需要处理处理消息
 
-	this->mAuxLevelLoader->unload();
+	//this->mAuxLevelLoader->unload();
 
 	this->mScene->init();
 }
