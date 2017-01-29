@@ -8,6 +8,16 @@ TimerMgr::TimerMgr()
 
 }
 
+void TimerMgr::init()
+{
+	Super::init();
+}
+
+void TimerMgr::dispose()
+{
+	Super::dispose();
+}
+
 void TimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	// 检查当前是否已经在队列中

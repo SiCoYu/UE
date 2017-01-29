@@ -6,6 +6,16 @@
 #include "IDelayHandleItem.h"
 #include "UtilContainers.h"
 
+void DelayHandleMgrBase::init()
+{
+
+}
+
+void DelayHandleMgrBase::dispose()
+{
+
+}
+
 // 只有没有添加到列表中的才能添加
 bool DelayHandleMgrBase::existAddList(IDelayHandleItem* delayObject)
 {

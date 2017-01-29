@@ -9,6 +9,16 @@ TickMgr::TickMgr()
 
 }
 
+void TickMgr::init()
+{
+	Super::init();
+}
+
+void TickMgr::dispose()
+{
+	Super::dispose();
+}
+
 void TickMgr::addTick(ITickedObject* tickObj, float priority)
 {
 	addObject((IDelayHandleItem*)tickObj, priority);

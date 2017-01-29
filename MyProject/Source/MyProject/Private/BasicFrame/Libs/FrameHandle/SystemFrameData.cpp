@@ -6,7 +6,7 @@ SystemFrameData::SystemFrameData()
 
 }
 
-uint SystemFrameData::getTotalFrameCount()
+uint32 SystemFrameData::getTotalFrameCount()
 {
 	return this->mTotalFrameCount;
 }

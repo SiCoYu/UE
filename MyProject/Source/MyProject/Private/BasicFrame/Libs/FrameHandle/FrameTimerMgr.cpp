@@ -9,6 +9,16 @@ FrameTimerMgr::FrameTimerMgr()
 
 }
 
+void FrameTimerMgr::init()
+{
+	Super::init();
+}
+
+void FrameTimerMgr::dispose()
+{
+	Super::dispose();
+}
+
 void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	// 检查当前是否已经在队列中

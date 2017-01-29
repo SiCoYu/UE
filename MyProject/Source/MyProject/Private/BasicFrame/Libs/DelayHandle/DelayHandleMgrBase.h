@@ -30,6 +30,10 @@ protected:
 
 public:
 	DelayHandleMgrBase();
+
+	virtual void init();
+	virtual void dispose();
+
 	virtual void addObject(IDelayHandleItem* delayObject, float priority = 0.0f);
 	virtual void delObject(IDelayHandleItem* delayObject);
 	void incDepth();

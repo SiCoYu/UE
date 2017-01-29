@@ -3,6 +3,7 @@
 
 #include "DelayHandleMgrBase.h"
 #include "MList.h"
+#include "BaseClassDef.h"
 
 class TimerItemBase;
 class IDelayHandleItem;
@@ -12,11 +13,18 @@ class IDelayHandleItem;
 */
 class TimerMgr : DelayHandleMgrBase
 {
+	M_DECLARE_SUPER_KW(DelayHandleMgrBase)
+
 protected:
 	MList<TimerItemBase*> mTimerList;     // 当前所有的定时器列表
 
 public:
 	TimerMgr();
+
+public:
+	virtual void init();
+	virtual void dispose();
+
 	virtual void addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
 	virtual void delObject(IDelayHandleItem* delayObject) override;
 	void Advance(float delta);

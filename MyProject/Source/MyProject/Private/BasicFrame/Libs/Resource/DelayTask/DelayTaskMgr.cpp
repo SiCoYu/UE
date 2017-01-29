@@ -34,6 +34,8 @@ void DelayTaskMgr::onTick(float delta)
 	{
 		this->mPreFrame = this->mCurFrame;
 		this->mCurTaskNum = 0;
+
+		this->execTask();
 	}
 }
 
@@ -46,6 +48,23 @@ void DelayTaskMgr::addTask(IDelayTask* task)
 	}
 	else
 	{
+		this->mDelayTaskList.push_back(task);
+	}
+}
 
+void DelayTaskMgr::execTask()
+{
+	IDelayTask* task = nullptr;
+
+	while (this->mCurTaskNum < this->mTaskNumPerFrameInterval)
+	{
+		if (this->mDelayTaskList.size() > 0)
+		{
+			task = this->mDelayTaskList.front();
+			this->mDelayTaskList.pop_front();
+			task->delayExec();
+		}
+
+		++this->mCurTaskNum;
 	}
 }
