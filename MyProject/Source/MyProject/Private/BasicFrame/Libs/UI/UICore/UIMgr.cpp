@@ -224,8 +224,8 @@ void UIMgr::loadFromFile(std::string resPath, EventDispatchDelegate onLoadEventH
 	//GClassAssetInsMgr->load<ClassAssetInsRes>(param);
 	//GPoolSys->deleteObj(param);
 
-	//GClassAssetInsMgr->getAndSyncLoadClass(resPath, onLoadEventHandle);
-	GClassAssetInsMgr->getAndAsyncLoadClass(resPath, onLoadEventHandle);
+	//GClassAssetInsMgr->getAndSyncLoadRes(resPath, onLoadEventHandle);
+	GClassAssetInsMgr->getAndAsyncLoadRes(resPath, onLoadEventHandle);
 }
 
 // 代码资源加载处理
