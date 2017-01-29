@@ -433,7 +433,7 @@ MySharedPtr<FrameTimerMgr> Ctx::getFrameTimerMgr()
 
 void Ctx::addEventHandle()
 {
-	this->mTickMgr->addTick(this->mDelayTaskMgr, TickPriority::eTPDelayTaskMgr);
+	this->mTickMgr->addTick(this->mDelayTaskMgr.get(), TickPriority::eTPDelayTaskMgr);
 }
 
 void Ctx::testApi()
