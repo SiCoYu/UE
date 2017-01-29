@@ -17,12 +17,12 @@ void ClassAssetInsMgr::dispose()
 
 }
 
-ClassAssetInsRes* ClassAssetInsMgr::getAndSyncLoadClass(std::string path, EventDispatchDelegate handle)
+ClassAssetInsRes* ClassAssetInsMgr::getAndSyncLoadRes(std::string path, EventDispatchDelegate handle)
 {
 	return this->getAndSyncLoad<ClassAssetInsRes>(path, handle);
 }
 
-ClassAssetInsRes* ClassAssetInsMgr::getAndAsyncLoadClass(std::string path, EventDispatchDelegate handle)
+ClassAssetInsRes* ClassAssetInsMgr::getAndAsyncLoadRes(std::string path, EventDispatchDelegate handle)
 {
 	return this->getAndAsyncLoad<ClassAssetInsRes>(path, handle);
 }

@@ -79,7 +79,14 @@ namespace MyNS
 
 		if (this->isInvalid())
 		{
-			this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
+			if (eClassType == this->mResPackType)
+			{
+				this->mPrefabRes = GClassAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
+			}
+			else if (eObjectType == this->mResPackType)
+			{
+				this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
+			}
 			this->onPrefabLoaded(mPrefabRes);
 		}
 		else if (this->hasLoadEnd())
@@ -95,7 +102,14 @@ namespace MyNS
 
 		if (this->isInvalid())
 		{
-			this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(path, EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+			if (eClassType == this->mResPackType)
+			{
+				this->mPrefabRes = GClassAssetInsMgr->getAndAsyncLoadRes(path, EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+			}
+			else if (eObjectType == this->mResPackType)
+			{
+				this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(path, EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+			}
 		}
 		else if (this->hasLoadEnd())
 		{
