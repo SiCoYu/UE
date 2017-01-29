@@ -19,6 +19,8 @@
 #include "AuxMUIClassLoader.h"
 #include "SafePointer.h"
 
+using namespace MyNS;
+
 UIMgr::UIMgr()
 {
 	this->mUiAttrSystem = new UIAttrSystem();
@@ -201,7 +203,9 @@ void UIMgr::loadWidgetRes(UIFormId formId)
 		//this->loadFromFile(attrItem->mWidgetPath, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 
 		AuxMUIClassLoader* uiLoader = SAFE_NEW AuxMUIClassLoader();
-		this->mId2WidgetLoadingItemDic[formId]->setAuxMUIClassLoader(uiLoader);
+
+		UForm* form = this->getForm<UForm>(formId);
+		form->setAuxMUIClassLoader(uiLoader);
 
 		uiLoader->setUMGOuterType(attrItem->mUMGOuterType);
 		uiLoader->asyncLoad(attrItem->mWidgetPath, EventDispatchDelegate(this, &UIMgr::onWidgetAuxUIClassloadedByRes));
@@ -348,7 +352,7 @@ void UIMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 {
 	AuxMUIClassLoader* res = (AuxMUIClassLoader*)dispObj;
 
-	std::string path = res->GetPath();
+	std::string path = res->getLogicPath();
 	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // »ñÈ¡ FormId
 	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
 	UIAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];

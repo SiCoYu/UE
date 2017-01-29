@@ -332,7 +332,7 @@ AuxMUIClassLoader* UForm::getAuxMUIClassLoader()
 	return this->mAuxMUIClassLoader;
 }
 
-void UForm::setAuxMUIClassLoader(AuxMUIClassLoader* value);
+void UForm::setAuxMUIClassLoader(AuxMUIClassLoader* value)
 {
 	this->mAuxMUIClassLoader = value;
 }

@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"	// AActor
 #include "UObject/Object.h"	// UObject
 
-class ObjectAssetInsRes;
+class ObjectAssetInsResBase;
 class ResInsEventDispatch;
 
 namespace MyNS
@@ -21,7 +21,7 @@ namespace MyNS
 
 	protected:
 		UObject* mSelfGo;                       // 加载的 GameObject
-		ObjectAssetInsRes* mPrefabRes;                     // 预制资源
+		ObjectAssetInsResBase* mPrefabRes;                     // 预制资源
         ResInsEventDispatch* mResInsEventDispatch; // 实例化的时候使用的分发器
         bool mIsInsNeedCoroutine; // 实例化是否需要协程
         bool mIsDestroySelf;      // 是否释放自己

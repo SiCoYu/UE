@@ -4,6 +4,8 @@
 #include "BaseClassDef.h"
 #include "FormType.h"
 
+using namespace NSFormType;
+
 class UClass;
 class UUMGWidget;
 

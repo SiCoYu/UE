@@ -1,5 +1,9 @@
 ﻿#include "MyProject.h"
 #include "AuxMUIClassLoader.h"
+#include "ObjectAssetInsResBase.h"
+#include "EngineApi.h"
+#include "UMGWidget.h"
+#include "Common.h"
 
 namespace MyNS
 {
@@ -45,7 +49,7 @@ namespace MyNS
 		if (nullptr != dispObj)
 		{
 			// 一定要从这里再次取值，因为如果这个资源已经加载，可能在返回之前就先调用这个函数，因此这个时候 mPrefabRes 还是空值
-			this->mPrefabRes = (ObjectAssetInsRes*)dispObj;
+			this->mPrefabRes = (ObjectAssetInsResBase*)dispObj;
 
 			if (this->mPrefabRes->hasSuccessLoaded())
 			{
