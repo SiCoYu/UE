@@ -68,7 +68,7 @@ void InsResBase::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* val
 
 std::string InsResBase::getLogicPath()
 {
-	return "";
+	return this->mPath;
 }
 
 bool InsResBase::hasSuccessLoaded()
