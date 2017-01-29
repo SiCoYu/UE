@@ -40,7 +40,11 @@ class SystemTimeData;
 class SystemFrameData;
 class ProcessSys;
 class EngineLoop;
-class DelayLoadMgr;
+class DelayTaskMgr;
+
+class TickMgr;
+class TimerMgr;
+class FrameTimerMgr;
 
 class Ctx : public Singleton<Ctx>
 {
@@ -73,7 +77,11 @@ protected:
 	MySharedPtr<SystemFrameData> mSystemFrameData;
 	MySharedPtr<ProcessSys> mProcessSys;
 	MySharedPtr<EngineLoop> mEngineLoop;
-	MySharedPtr<DelayLoadMgr> mDelayLoadMgr;
+	MySharedPtr<DelayTaskMgr> mDelayTaskMgr;
+
+	MySharedPtr<TickMgr> mTickMgr;
+	MySharedPtr<TimerMgr> mTimerMgr;
+	MySharedPtr<FrameTimerMgr> mFrameTimerMgr;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -88,6 +96,7 @@ public:
 	void dispose();
 	void beginPlay();
 	void mainLoop();
+	void addEventHandle();
 
 	void setUiMgr(UIMgr* uiMgr);
 	MySharedPtr<UIMgr> getUIMgr();
@@ -120,7 +129,11 @@ public:
 	MySharedPtr<SystemFrameData> getSystemFrameData();
 	MySharedPtr<ProcessSys> getProcessSys();
 	MySharedPtr<EngineLoop> getEngineLoop();
-	MySharedPtr<DelayLoadMgr> getDelayLoadMgr();
+	MySharedPtr<DelayTaskMgr> getDelayTaskMgr();
+
+	MySharedPtr<TickMgr> getTickMgr();
+	MySharedPtr<TimerMgr> getTimerMgr();
+	MySharedPtr<FrameTimerMgr> getFrameTimerMgr();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -162,6 +175,10 @@ public:
 #define GSystemFrameData GCtx->getSystemFrameData()
 #define GProcessSys GCtx->getProcessSys()
 #define GEngineLoop GCtx->getEngineLoop()
-#define GDelayLoadMgr GCtx->getDelayLoadMgr()
+#define GDelayTaskMgr GCtx->getDelayTaskMgr()
+
+#define GTickMgr GCtx->getTickMgr()
+#define GTimerMgr GCtx->getTimerMgr()
+#define GFrameTimerMgr GCtx->getFrameTimerMgr()
 
 #endif				// __CTX_H

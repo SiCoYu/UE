@@ -18,6 +18,7 @@ public:
 	void init();
 	void dispose();
 
+	uint getTotalFrameCount();
 	void nextFrame(float delta);
 };
 

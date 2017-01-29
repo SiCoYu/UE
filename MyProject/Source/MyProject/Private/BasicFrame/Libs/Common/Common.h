@@ -32,6 +32,10 @@
 #include "SystemFrameData.h"
 #include "ProcessSys.h"
 #include "EngineLoop.h"
-#include "DelayLoadMgr.h"
+#include "DelayTaskMgr.h"
+
+#include "TickMgr.h"
+#include "TimerMgr.h"
+#include "FrameTimerMgr.h"
 
 #endif

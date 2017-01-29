@@ -6,6 +6,11 @@ SystemFrameData::SystemFrameData()
 
 }
 
+uint SystemFrameData::getTotalFrameCount()
+{
+	return this->mTotalFrameCount;
+}
+
 void SystemFrameData::nextFrame(float delta)
 {
 	++this->mTotalFrameCount;

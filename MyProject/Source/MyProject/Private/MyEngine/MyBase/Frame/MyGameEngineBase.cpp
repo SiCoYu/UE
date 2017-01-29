@@ -17,3 +17,8 @@ void UMyGameEngineBase::Init(IEngineLoop* InEngineLoop)
 	// 最早初始化的地方
 	GEngineData->setMyEngine(this);
 }
+
+void UMyGameEngineBase::Tick(float DeltaSeconds, bool bIdleMode)
+{
+
+}

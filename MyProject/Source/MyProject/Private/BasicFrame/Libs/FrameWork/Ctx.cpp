@@ -29,7 +29,12 @@
 #include "SystemFrameData.h"
 #include "ProcessSys.h"
 #include "EngineLoop.h"
-#include "DelayLoadMgr.h"
+#include "DelayTaskMgr.h"
+
+#include "TickMgr.h"
+#include "TimerMgr.h"
+#include "FrameTimerMgr.h"
+#include "TickPriority.h"
 
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
@@ -69,7 +74,11 @@ Ctx::Ctx()
 	this->mSystemFrameData = nullptr;
 	this->mProcessSys = nullptr;
 	this->mEngineLoop = nullptr;
-	this->mDelayLoadMgr = nullptr;
+	this->mDelayTaskMgr = nullptr;
+
+	this->mTickMgr = nullptr;
+	this->mTimerMgr = nullptr;
+	this->mFrameTimerMgr = nullptr;
 }
 
 Ctx::~Ctx()
@@ -116,7 +125,11 @@ void Ctx::construct()
 	this->mSystemFrameData = MySharedPtr<SystemFrameData>(SAFE_NEW SystemFrameData());
 	this->mProcessSys = MySharedPtr<ProcessSys>(SAFE_NEW ProcessSys());
 	this->mEngineLoop = MySharedPtr<EngineLoop>(SAFE_NEW EngineLoop());
-	this->mDelayLoadMgr = MySharedPtr<DelayLoadMgr>(SAFE_NEW DelayLoadMgr());
+	this->mDelayTaskMgr = MySharedPtr<DelayTaskMgr>(SAFE_NEW DelayTaskMgr());
+
+	this->mTickMgr = MySharedPtr<TickMgr>(SAFE_NEW TickMgr());
+	this->mTimerMgr = MySharedPtr<TimerMgr>(SAFE_NEW TimerMgr());
+	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(SAFE_NEW FrameTimerMgr());
 }
 
 void Ctx::init()
@@ -140,7 +153,13 @@ void Ctx::init()
 	this->mSystemFrameData->init();
 	this->mProcessSys->init();
 	this->mEngineLoop->init();
-	this->mDelayLoadMgr->init();
+	this->mDelayTaskMgr->init();
+
+	this->mTickMgr->init();
+	this->mTimerMgr->init();
+	this->mFrameTimerMgr->init();
+
+	this->addEventHandle();
 
 	// 挂在目录
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
@@ -178,7 +197,11 @@ void Ctx::dispose()
 	this->mSystemFrameData->dispose();
 	this->mProcessSys->dispose();
 	this->mEngineLoop->dispose();
-	this->mDelayLoadMgr->dispose();
+	this->mDelayTaskMgr->dispose();
+
+	this->mTickMgr->dispose();
+	this->mTimerMgr->dispose();
+	this->mFrameTimerMgr->dispose();
 
 	this->mUiMgr = nullptr;
 	this->mEngineData = nullptr;
@@ -212,7 +235,11 @@ void Ctx::dispose()
 	this->mSystemFrameData = nullptr;
 	this->mProcessSys = nullptr;
 	this->mEngineLoop = nullptr;
-	this->mDelayLoadMgr = nullptr;
+	this->mDelayTaskMgr = nullptr;
+
+	this->mTickMgr = nullptr;
+	this->mTimerMgr = nullptr;
+	this->mFrameTimerMgr = nullptr;
 }
 
 void Ctx::beginPlay()
@@ -384,9 +411,29 @@ MySharedPtr<EngineLoop> Ctx::getEngineLoop()
 	return mEngineLoop;
 }
 
-MySharedPtr<DelayLoadMgr> Ctx::getDelayLoadMgr()
+MySharedPtr<DelayTaskMgr> Ctx::getDelayTaskMgr()
 {
-	return mDelayLoadMgr;
+	return mDelayTaskMgr;
+}
+
+MySharedPtr<TickMgr> Ctx::getTickMgr()
+{
+	return mTickMgr;
+}
+
+MySharedPtr<TimerMgr> Ctx::getTimerMgr()
+{
+	return mTimerMgr;
+}
+
+MySharedPtr<FrameTimerMgr> Ctx::getFrameTimerMgr()
+{
+	return mFrameTimerMgr;
+}
+
+void Ctx::addEventHandle()
+{
+	this->mTickMgr->addTick(this->mDelayTaskMgr, TickPriority::eTPDelayTaskMgr);
 }
 
 void Ctx::testApi()

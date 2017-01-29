@@ -29,7 +29,7 @@ void ProcessSys::Advance(float delta)
 	//Ctx.mInstance.mFrameCollideMgr.clear();
 	GSystemFrameData->nextFrame(delta);
 	//Ctx.mInstance.mLuaSystem.advance(delta);        // lua 脚本 Advance
-	//Ctx.mInstance.mTickMgr.Advance(delta);            // 心跳
-	//Ctx.mInstance.mTimerMgr.Advance(delta);           // 定时器
-	//Ctx.mInstance.mFrameTimerMgr.Advance(delta);      // 帧定时器
+	GTickMgr->Advance(delta);            // 心跳
+	GTimerMgr->Advance(delta);           // 定时器
+	GFrameTimerMgr->Advance(delta);      // 帧定时器
 }

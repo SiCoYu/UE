@@ -27,6 +27,8 @@ class UMyGameEngineBase : public UGameEngine
 {
 	GENERATED_UCLASS_BODY()
 
+public:
 	/* Hook up specific callbacks */
-	virtual void Init(IEngineLoop* InEngineLoop);
+	virtual void Init(IEngineLoop* InEngineLoop) override;
+	virtual void Tick(float DeltaSeconds, bool bIdleMode) override;
 };
