@@ -11,13 +11,22 @@ source_group("Src\\Traits" FILES ${SRCS_Traits_FILES})
 file(GLOB SRCS_App_FILES Src/App/*.h Src/App/*.cpp)
 source_group("Src\\App" FILES ${SRCS_App_FILES})
 
-file(GLOB SRCS_Test_FILES Src/Test/*.h Src/Test/*.cpp)
-source_group("Src\\Test" FILES ${SRCS_Test_FILES})
+file(GLOB SRCS_App_FILES Src/App/*.h Src/App/*.cpp)
+source_group("Src\\App" FILES ${SRCS_App_FILES})
+
+file(GLOB SRCS_GenericPlatform_FILES Src/GenericPlatform/*.h Src/GenericPlatform/*.cpp)
+source_group("Src\\GenericPlatform" FILES ${SRCS_GenericPlatform_FILES})
+
+file(GLOB SRCS_HAL_FILES Src/HAL/*.h Src/HAL/*.cpp)
+source_group("Src\\HAL" FILES ${SRCS_HAL_FILES})
+
+file(GLOB SRCS_Math_FILES Src/Math/*.h Src/Math/*.cpp)
+source_group("Src\\Math" FILES ${SRCS_Math_FILES})
 
 include_directories(Src Src/Templates Src/Traits Src/App Src/Test)
-set(ALLSRCS ${SRCS_Templates_FILES} ${SRCS_Traits_FILES} ${SRCS_App_FILES} ${SRCS_Test_FILES})
+set(ALL_SRCS ${SRCS_Templates_FILES} ${SRCS_Traits_FILES} ${SRCS_App_FILES} ${SRCS_Test_FILES} ${SRCS_GenericPlatform_FILES} ${SRCS_HAL_FILES} ${SRCS_Math_FILES})
 
-ADD_EXECUTABLE(${PROJECT_NAME} WIN32 ${ALLSRCS})
+ADD_EXECUTABLE(${PROJECT_NAME} WIN32 ${ALL_SRCS})
 
 #SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE C)
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX LINK_FLAGS "/SUBSYSTEM:\"CONSOLE\"")
