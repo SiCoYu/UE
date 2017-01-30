@@ -1,11 +1,14 @@
 #include "TestApp.h"
 
-TestApp::TestApp()
+namespace MyNS
 {
+	TestApp::TestApp()
+	{
 
-}
+	}
 
-TestApp::~TestApp()
-{
+	TestApp::~TestApp()
+	{
 
+	}
 }

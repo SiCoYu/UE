@@ -1,8 +1,11 @@
 #pragma once
 
-class TestApp
+namespace MyNS
 {
-public:
-	TestApp();
-	~TestApp();
-};
+	class TestApp
+	{
+	public:
+		TestApp();
+		~TestApp();
+	};
+}
