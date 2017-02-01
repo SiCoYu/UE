@@ -36,6 +36,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyBase/Delegate",
                 "MyProject/Private/MyEngine/MyBase/Misc",
 				"MyProject/Private/MyEngine/MyBase/HAL",
+				"MyProject/Private/MyEngine/MyBase/Tick",
 
                 "MyProject/Private/MyEngine/MyFly",
                 "MyProject/Private/MyEngine/MyFly/Actor",
