@@ -196,6 +196,8 @@ public class MyProject : ModuleRules
                 "APEX",     // PhysX
                 "SandboxFile",  // IPlatformFileSandboxWrapper.h，否则链接不过
                 //"DesktopPlatform", // IDesktopPlatform.h，注意移动平台需要注释掉
+
+                //"UnrealEd", // UUnrealEdEngine \ UEditorEngine
             }
         );
 

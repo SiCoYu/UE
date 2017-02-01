@@ -11,6 +11,7 @@ public class MyProjectEditor : ModuleRules
                 // Main area
                 "MyProjectEditor/Private/MyEngine",
                 "MyProjectEditor/Private/MyEngine/Animation",
+                "MyProjectEditor/Private/MyBase",
 
                 // Example area
                 "MyProjectEditor/Private/MyEngine/AnimNode",
@@ -35,7 +36,7 @@ public class MyProjectEditor : ModuleRules
 
                 "AnimGraph",
 
-                "UnrealEd",
+                "UnrealEd", // UUnrealEdEngine \ UEditorEngine
                 "BlueprintGraph",
                 "GraphEditor",
                 "PropertyEditor",
@@ -60,7 +61,7 @@ public class MyProjectEditor : ModuleRules
                 "Engine",
                 "InputCore",
 
-                "UnrealEd",
+                "UnrealEd", // UUnrealEdEngine \ UEditorEngine
                 "BlueprintGraph",
                 "AnimGraph",
 
