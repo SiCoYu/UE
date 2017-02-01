@@ -24,4 +24,11 @@
 #define MSG_COMPRESS
 #undef MSG_COMPRESS
 
+// ±à¼­Æ÷¶¨Òå
+#ifdef WITH_EDITOR
+	#define	MY_WITH_EDITOR
+#else
+	#undef	MY_WITH_EDITOR
+#endif
+
 #endif
