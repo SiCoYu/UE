@@ -359,6 +359,10 @@ public:
 
 	static bool IsPendingKill(AActor* actor);
 	static void Destroy(AActor* actor);
+	
+	// Engine\Source\Runtime\Core\Private\Misc\Core.cpp	\ GFrameNumber \ GFrameNumberRenderThread
+	static uint32 getFrameNumber();
+	static uint32 getFrameNumberRenderThread();
 };
 
 #include "EngineApi.inl"

@@ -903,3 +903,13 @@ void EngineApi::Destroy(AActor* actor)
 {
 	actor->Destroy();
 }
+
+uint32 EngineApi::getFrameNumber()
+{
+	return GFrameNumber;
+}
+
+uint32 EngineApi::getFrameNumberRenderThread()
+{
+	return GFrameNumberRenderThread;
+}
