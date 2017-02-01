@@ -31,4 +31,16 @@
 	#undef	MY_WITH_EDITOR
 #endif
 
+#ifdef UE_BUILD_SHIPPING
+	#define	MY_UE_BUILD_SHIPPING
+#else
+	#undef	MY_UE_BUILD_SHIPPING
+#endif
+
+#ifdef UE_BUILD_TEST
+	#define	MY_UE_BUILD_TEST
+#else
+	#undef	MY_UE_BUILD_TEST
+#endif
+
 #endif
