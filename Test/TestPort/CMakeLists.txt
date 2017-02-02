@@ -32,8 +32,28 @@ source_group("Src\\Misc" FILES ${SRCS_Misc_FILES})
 file(GLOB SRCS_Containers_FILES Src/Containers/*.h Src/Containers/*.cpp)
 source_group("Src\\Containers" FILES ${SRCS_Containers_FILES})
 
+IF(WIN32)
+	file(GLOB SRCS_PlatformDepend_FILES Src/Windows/*.h Src/Windows/*.cpp)
+	source_group("Src\\Windows" FILES ${SRCS_PlatformDepend_FILES})
+	
+	add_definitions(-DPLATFORM_WINDOWS)
+ELSEIF(APPLE)
+
+ELSEIF(UNIX)
+
+ELSEIF(LINUX)
+
+ENDIF()
+
 include_directories(Src Src/Templates Src/Traits Src/App Src/Test Src/GenericPlatform Src/HAL Src/Math Src/Logging Src/Misc Src/Containers)
-set(ALL_SRCS ${SRCS_Templates_FILES} ${SRCS_Traits_FILES} ${SRCS_App_FILES} ${SRCS_Test_FILES} ${SRCS_GenericPlatform_FILES} ${SRCS_HAL_FILES} ${SRCS_Math_FILES} ${SRCS_Logging_FILES} ${SRCS_Misc_FILES} ${SRCS_Containers_FILES})
+
+IF(DEBUG_mode)
+    add_definitions(-DDEBUG)
+ENDIF()
+
+#ADD_DEFINITIONS(-DTEST)
+
+set(ALL_SRCS ${SRCS_Templates_FILES} ${SRCS_Traits_FILES} ${SRCS_App_FILES} ${SRCS_Test_FILES} ${SRCS_GenericPlatform_FILES} ${SRCS_HAL_FILES} ${SRCS_Math_FILES} ${SRCS_Logging_FILES} ${SRCS_Misc_FILES} ${SRCS_Containers_FILES} ${SRCS_PlatformDepend_FILES})
 
 ADD_EXECUTABLE(${PROJECT_NAME} WIN32 ${ALL_SRCS})
 
