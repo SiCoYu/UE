@@ -1,0 +1,33 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (opensteer.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  OpenSteerDemo.cpp
+  main.cpp
+  Soccer.cpp
+  Pedestrian.cpp
+  OneTurning.cpp
+  MultiplePursuit.cpp
+  MapDrive.cpp
+  LowSpeedTurn.cpp
+  CaptureTheFlag.cpp
+  Boids.cpp
+  Generating Code...
+Boids.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+opensteer.lib(Camera.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(Camera.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(Clock.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(Clock.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(Color.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(Color.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(Draw.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(Draw.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(lq.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(lq.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(Obstacle.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(Obstacle.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(Path.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(Path.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(Pathway.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(Pathway.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(PlugIn.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(PlugIn.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(PolylineSegmentedPath.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(PolylineSegmentedPath.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(PolylineSegmentedPathwaySegmentRadii.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(PolylineSegmentedPathwaySegmentRadii.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(PolylineSegmentedPathwaySingleRadius.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(PolylineSegmentedPathwaySingleRadius.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(SegmentedPath.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(SegmentedPath.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(SegmentedPathway.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(SegmentedPathway.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(SimpleVehicle.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(SimpleVehicle.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+opensteer.lib(Vec3.obj) : warning LNK4099: PDB 'opensteer.pdb' was not found with 'opensteer.lib(Vec3.obj)' or at 'F:\File\opensource\opensteer-code-svn\win32\Debug\opensteer.pdb'; linking object as if no debug info
+  steertest.vcxproj -> F:\File\opensource\opensteer-code-svn\win32\Debug\OpenSteerDemo.exe
+  steertest.vcxproj -> Debug\OpenSteerDemo.pdb (Full PDB)
+  子目录或文件 F:\File\opensource\opensteer-code-svn\win32\\bin 已经存在。
+  已复制         1 个文件。

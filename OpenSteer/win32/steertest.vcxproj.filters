@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{f9aee748-39ec-4f25-850a-c5ecba7367d0}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{9f8b7f28-785e-401a-bc25-4c49d44e77ac}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="plugins">
+      <UniqueIdentifier>{daf452dd-235a-4db8-a04d-1eea1a42e0b0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OpenSteerDemo.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugins\Boids.cpp">
+      <Filter>plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugins\CaptureTheFlag.cpp">
+      <Filter>plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugins\LowSpeedTurn.cpp">
+      <Filter>plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugins\MapDrive.cpp">
+      <Filter>plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugins\MultiplePursuit.cpp">
+      <Filter>plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugins\OneTurning.cpp">
+      <Filter>plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugins\Pedestrian.cpp">
+      <Filter>plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugins\Soccer.cpp">
+      <Filter>plugins</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\OpenSteer\OpenSteerDemo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="OpenSteerDemo.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SteerTest.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
