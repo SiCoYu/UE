@@ -1,4 +1,5 @@
-echo off
+::echo off
+echo on
 
 set BASE_DIR=%~dp0
 set DRIVER=%BASE_DIR:~0,2%

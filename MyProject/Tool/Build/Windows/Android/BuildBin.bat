@@ -18,7 +18,7 @@ if not defined BuildParam (
 	)
 )
 
-if exist BuildParam.bat (
+if exist BuildMkDir.bat (
 	call BuildMkDir.bat
 )
 
