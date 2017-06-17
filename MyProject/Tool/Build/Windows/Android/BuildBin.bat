@@ -22,7 +22,11 @@ if exist BuildParam.bat (
 	call BuildMkDir.bat
 )
 
+cd %RUNUAT_PATH_NO_FILE_NAME%
+
 %RUNUAT_PATH% BuildCookRun -project=%PROJECT_CONFIG_PATH% -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -cook -allmaps -build -stage -pak -archive -archivedirectory=%APK_FULL_PATH_NO_FILE_NAME%
+
+cd %BASE_DIR%
 
 if not exist %APK_ORIG_FULL_PATH% (
 	echo "%APK_ORIG_FULL_PATH% is not exist"

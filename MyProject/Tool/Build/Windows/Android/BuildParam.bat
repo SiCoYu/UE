@@ -1,3 +1,5 @@
+echo off
+
 set BASE_DIR=%~dp0
 set DRIVER=%BASE_DIR:~0,2%
 
@@ -15,6 +17,9 @@ echo "UE4_ROOT_PATH="%UE4_ROOT_PATH%
 
 set UE4_PATH="%UE4_ROOT_PATH%\Engine\Binaries\Win64\UnrealFrontend-Win64-Debug.exe"
 echo "UE4_PATH="%UE4_PATH%
+
+set RUNUAT_PATH_NO_FILE_NAME="%UE4_ROOT_PATH%\Engine\Build\BatchFiles"
+echo "RUNUAT_PATH_NO_FILE_NAME="%RUNUAT_PATH_NO_FILE_NAME%
 
 set RUNUAT_PATH="%UE4_ROOT_PATH%\Engine\Build\BatchFiles\RunUAT.bat"
 echo "RUNUAT_PATH="%RUNUAT_PATH%
