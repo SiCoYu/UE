@@ -11,7 +11,6 @@ echo "DRIVER="%DRIVER%
 %DRIVER%
 cd %BASE_DIR%
 
-SETLOCAL ENABLEEXTENSIONS
 if not defined BuildParam (
 	if exist BuildParam.bat (
 		call BuildParam.bat
