@@ -4,6 +4,10 @@ using System.Text;
 
 namespace ToolKit
 {
+    /**
+     * @ref UE4资源热更新 
+     * @url http://blog.csdn.net/liulong1567/article/details/71597892
+     */
     public class BuildPak
     {
 
