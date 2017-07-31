@@ -1,0 +1,9 @@
+..\..\..\Engine\Content\Editor\Slate\*.*
+..\..\..\Engine\Content\Localization\*.*
+..\..\..\Engine\Shaders\*.*
+..\..\..\Engine\config\*.*
+PathToYourProject\*.uproject
+PathToYourProject\Config\*.*
+PathToYourProject\Content\Localization\*.*
+PathToYourProject\Saved\Sandboxes\Cooked-WindowsNoEditor\Engine\*.* ..\..\..\Engine\*.*
+PathToYourProject\Saved\Sandboxes\Cooked-WindowsNoEditor\ProjectName\*.* ..\..\..\ProjectName\*.*
