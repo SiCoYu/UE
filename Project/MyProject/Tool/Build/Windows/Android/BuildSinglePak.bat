@@ -23,8 +23,8 @@ echo "DRIVER="%DRIVER%
 %DRIVER%
 cd %BASE_DIR%
 
-set OUTPUT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client\Content\Character\HeroFPP.uasset"
-set INPUT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git"
+set INPUT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client\Content\Character\HeroFPP.uasset"
+set OUTPUT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git\OutPak.Pak"
 
 %UNREALPAK_APP_FULL_PATH% %OUTPUT_FULL_PATH% %INPUT_FULL_PATH%
 

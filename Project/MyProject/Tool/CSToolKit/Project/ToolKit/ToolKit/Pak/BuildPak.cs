@@ -10,7 +10,6 @@ namespace ToolKit
      */
     public class BuildPak
     {
-
         private void Btn_MultipleBuild_Click(object sender, EventArgs e)
         {
             //sb,sw,textWirter均是为了生成Json字符串而使用的  
