@@ -28,4 +28,4 @@ set INPUT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git"
 
 %UNREALPAK_APP_FULL_PATH% %OUTPUT_FULL_PATH% %INPUT_FULL_PATH%
 
-rem pause
+pause
