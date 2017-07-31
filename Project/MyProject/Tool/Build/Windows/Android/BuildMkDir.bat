@@ -39,3 +39,5 @@ if not exist %CUR_PATH% (
 ) else (
 	echo "%CUR_PATH% is exist"
 )
+
+rem pause
