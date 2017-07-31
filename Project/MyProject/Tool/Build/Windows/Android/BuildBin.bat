@@ -2,15 +2,6 @@
 
 echo off
 
-set BASE_DIR=%~dp0
-set DRIVER=%BASE_DIR:~0,2%
-
-echo "BASE_DIR="%BASE_DIR%
-echo "DRIVER="%DRIVER%
-
-%DRIVER%
-cd %BASE_DIR%
-
 if not defined BuildParam (
 	if exist BuildParam.bat (
 		call BuildParam.bat
@@ -21,9 +12,18 @@ if exist BuildMkDir.bat (
 	call BuildMkDir.bat
 )
 
-cd %RUNUAT_PATH_NO_FILE_NAME%
+set BASE_DIR=%~dp0
+echo "BASE_DIR="%BASE_DIR%
 
-%RUNUAT_PATH% BuildCookRun -project=%PROJECT_CONFIG_PATH% -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -cook -allmaps -build -stage -pak -archive -archivedirectory=%APK_FULL_PATH_NO_FILE_NAME%
+set DRIVER=%BASE_DIR:~0,2%
+echo "DRIVER="%DRIVER%
+
+%DRIVER%
+cd %BASE_DIR%
+
+cd %UE4_BATCH_FILES_FULL_PATH%
+
+%RUNUAT_APP_FULL_PATH% BuildCookRun -project=%MYPROJECT_CONFIG_FULL_PATH% -noP4 -platform=Win64 -clientconfig=Development -serverconfig=Development -cook -allmaps -build -stage -pak -archive -archivedirectory=%BIN_OUT_FULL_PATH%
 
 cd %BASE_DIR%
 
