@@ -27,9 +27,11 @@ cd %UE4_BATCH_FILES_FULL_PATH%
 ::@url https://docs.unrealengine.com/latest/INT/Programming/Development/BuildConfigurations/index.html
 ::%RUNUAT_APP_FULL_PATH% BuildCookRun -project=%MYPROJECT_CONFIG_FULL_PATH% -noP4 -platform=%BIN_APP_PLATFORM% -clientconfig=Debug -serverconfig=Debug -cook -allmaps -build -stage -pak -archive -archivedirectory=%BIN_PLATFORM_OUT_FULL_PATH%
 
+%RUNUAT_APP_FULL_PATH% BuildCookRun -project=%MYPROJECT_CONFIG_FULL_PATH% -noP4 -platform=%BIN_APP_PLATFORM% -cook -allmaps -build -stage -pak -archive -archivedirectory=%BIN_PLATFORM_OUT_FULL_PATH%
+
 ::RunUAT.bat -list
 ::RunUAT.bat -help BuildCookRun
-%RUNUAT_APP_FULL_PATH% BuildCookRun -project=%MYPROJECT_CONFIG_FULL_PATH% -noP4 -platform=%BIN_APP_PLATFORM% -cook -map=%BIN_APP_START_MAP% -build -stage -pak -package -CookAll -SkipCookingEditorContent -archive -archivedirectory=%BIN_PLATFORM_OUT_FULL_PATH%
+::%RUNUAT_APP_FULL_PATH% BuildCookRun -project=%MYPROJECT_CONFIG_FULL_PATH% -noP4 -platform=%BIN_APP_PLATFORM% -clientconfig=Debug -serverconfig=Debug -cook -map=%BIN_APP_START_MAP% -build -stage -pak -package -CookAll -SkipCookingEditorContent -archive -archivedirectory=%BIN_PLATFORM_OUT_FULL_PATH%
 
 cd %BASE_DIR%
 
