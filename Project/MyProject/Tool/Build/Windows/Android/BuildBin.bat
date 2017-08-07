@@ -33,6 +33,8 @@ cd %UE4_BATCH_FILES_FULL_PATH%
 ::RunUAT.bat -help BuildCookRun
 ::%RUNUAT_APP_FULL_PATH% BuildCookRun -project=%MYPROJECT_CONFIG_FULL_PATH% -noP4 -platform=%BIN_APP_PLATFORM% -clientconfig=Debug -serverconfig=Debug -cook -map=%BIN_APP_START_MAP% -build -stage -pak -package -CookAll -SkipCookingEditorContent -archive -archivedirectory=%BIN_PLATFORM_OUT_FULL_PATH%
 
+::BuildCookRun -targetplatform=Android+Win64 -NoP4 -UTF8Output -cook -build -stage -pak -package -project=F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client\InventoryUIwithUMG.uproject -cookdir=F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP -archive -archivedirectory=F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP -ue4exe=UE4Editor-Win64-Debug.exe -clientconfig=Debug -NoCompileEditor
+
 cd %BASE_DIR%
 
 if not exist %Bin_APP_ORIG_FULL_PATH% (
