@@ -17,12 +17,19 @@ set BuildParam=""
 set UE4_PLATFORM="Win64"
 set UE4_BUILD_CONFIGURATION="Debug"
 
+::Android environment variable
 ::Engine\Source\Programs\UnrealBuildTool\Android\UEBuildAndroid.cs
 ::When set environment variable, must restart visual studios
 set ANDROID_HOME=D:\ProgramFiles\Android\sdk
 set NDKROOT=D:\ProgramFiles\Android\android-ndk-r14b
 set ANT_HOME=G:\ProgramFiles\apache-ant-1.9.7
 set JAVA_HOME=D:\ProgramFiles\Java\jdk1.8.0_31
+
+::UE4 environment variable
+::Engine\Source\Programs\AutomationTool\AutomationUtils\Utils.cs
+::set uebp_UATMutexNoWait=0
+::Engine\Source\Programs\AutomationTool\AutomationUtils\Automation.cs
+::set uebp_LOCAL_ROOT=1
 
 set UE4_CODE_ROOT_PATH="H:\Self\Self\unreal\UnrealEngine-git\UnrealEngine"
 echo "UE4_CODE_ROOT_PATH="%UE4_CODE_ROOT_PATH%
