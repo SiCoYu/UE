@@ -18,6 +18,7 @@ set UE4_PLATFORM="Win64"
 set UE4_BUILD_CONFIGURATION="Debug"
 
 ::Engine\Source\Programs\UnrealBuildTool\Android\UEBuildAndroid.cs
+::When set environment variable, must restart visual studios
 set ANDROID_HOME=D:\ProgramFiles\Android\sdk
 set NDKROOT=D:\ProgramFiles\Android\android-ndk-r14b
 set ANT_HOME=G:\ProgramFiles\apache-ant-1.9.7
