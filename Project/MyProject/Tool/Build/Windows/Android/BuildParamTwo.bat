@@ -17,6 +17,12 @@ set BuildParam=""
 set UE4_PLATFORM="Win64"
 set UE4_BUILD_CONFIGURATION="Debug"
 
+::Engine\Source\Programs\UnrealBuildTool\Android\UEBuildAndroid.cs
+set ANDROID_HOME=D:\ProgramFiles\Android\sdk
+set NDKROOT=D:\ProgramFiles\Android\android-ndk-r14b
+set ANT_HOME=G:\ProgramFiles\apache-ant-1.9.7
+set JAVA_HOME=D:\ProgramFiles\Java\jdk1.8.0_31
+
 set UE4_CODE_ROOT_PATH="F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git"
 echo "UE4_CODE_ROOT_PATH="%UE4_CODE_ROOT_PATH%
 
