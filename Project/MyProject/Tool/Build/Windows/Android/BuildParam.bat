@@ -58,7 +58,8 @@ echo "UNREALPAK_APP_FULL_PATH="%UNREALPAK_APP_FULL_PATH%
 
 :: My App start
 ::set MYPROJECT_ROOT_FULL_PATH=%BASE_DIR%"..\..\..\..\MyProject"
-set MYPROJECT_ROOT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client"
+::set MYPROJECT_ROOT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client"
+set MYPROJECT_ROOT_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client"
 echo "MYPROJECT_ROOT_FULL_PATH="%MYPROJECT_ROOT_FULL_PATH%
 
 ::set MYPROJECT_CONFIG_FULL_PATH=%MYPROJECT_ROOT_FULL_PATH%"\MyProject.uproject"
