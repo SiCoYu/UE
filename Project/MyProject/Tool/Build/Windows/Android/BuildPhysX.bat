@@ -25,21 +25,4 @@ cd %UE4_BATCH_FILES_FULL_PATH%
 
 %RUNUAT_APP_FULL_PATH% BuildPhysX TargetLibs=PhysX+APEX TargetPlatforms=Android TargetConfigs=profile+debug+checked
 
-cd %BASE_DIR%
-
-if not exist %Bin_APP_ORIG_FULL_PATH% (
-	echo "%Bin_APP_ORIG_FULL_PATH% is not exist"
-) else (
-	REM delete APP
-	if exist %Bin_APP_ORIG_FULL_PATH% (
-		echo "delete apk %Bin_APP_ORIG_FULL_PATH%"
-		del %Bin_APP_ORIG_FULL_PATH%
-	) else (
-		echo "apk output path=%Bin_APP_ORIG_FULL_PATH%"
-	)
-	
-	echo "%Bin_APP_ORIG_FULL_PATH% is exist"
-	ren %Bin_APP_ORIG_FULL_PATH% Plane.apk
-)
-
-rem pause
+pause
