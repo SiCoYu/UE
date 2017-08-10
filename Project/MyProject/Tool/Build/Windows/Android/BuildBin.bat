@@ -39,7 +39,9 @@ cd %UE4_BATCH_FILES_FULL_PATH%
 
 ::BuildCookRun -targetplatform=Android -NoP4 -UTF8Output -cook -build -stage -pak -package -project=F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client\InventoryUIwithUMG.uproject -cookdir=F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client -archive -archivedirectory=F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client -ue4exe=UE4Editor-Win64-Debug.exe -clientconfig=Debug -NoCompileEditor -deploy
 
-%RUNUAT_APP_FULL_PATH% BuildCookRun -targetplatform=Android -NoP4 -UTF8Output -cook -build -stage -pak -package -project=%MYPROJECT_CONFIG_FULL_PATH% -cookdir=%BIN_PLATFORM_OUT_FULL_PATH% -archive -archivedirectory=%BIN_PLATFORM_OUT_FULL_PATH% -ue4exe=UE4Editor-Win64-Debug.exe -clientconfig=Debug -NoCompileEditor -deploy
+::%RUNUAT_APP_FULL_PATH% BuildCookRun -targetplatform=Android -NoP4 -UTF8Output -cook -build -stage -pak -package -project=%MYPROJECT_CONFIG_FULL_PATH% -cookdir=%BIN_PLATFORM_OUT_FULL_PATH% -archive -archivedirectory=%BIN_PLATFORM_OUT_FULL_PATH% -ue4exe=UE4Editor-Win64-Debug.exe -clientconfig=Debug -NoCompileEditor -deploy
+
+%RUNUAT_APP_FULL_PATH% BuildCookRun -targetplatform=Android -NoP4 -UTF8Output -cook -build -stage -pak -package -project=%MYPROJECT_CONFIG_FULL_PATH% -cookdir=%BIN_PLATFORM_OUT_FULL_PATH% -archive -archivedirectory=%BIN_PLATFORM_OUT_FULL_PATH% -ue4exe=UE4Editor-Win64-Debug.exe -clientconfig=Development -NoCompileEditor -deploy
 
 cd %BASE_DIR%
 
