@@ -28,7 +28,6 @@ cd %BASE_DIR%
 
 set INPUT_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client\Content\Character\HeroFPP.uasset"
 set OUTPUT_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client\OutPak.Pak"
-set OUTPUT_DEP_FILE_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client\OutPak-dep.txt"
 
 %UNREALPAK_APP_FULL_PATH% %OUTPUT_FULL_PATH% %INPUT_FULL_PATH%
 
