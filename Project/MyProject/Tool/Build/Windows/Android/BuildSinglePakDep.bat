@@ -26,7 +26,7 @@ cd %BASE_DIR%
 ::set OUTPUT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git\OutPak.Pak"
 
 set OUTPUT_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client\OutPak.Pak"
-set OUTPUT_DEP_FILE_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client\OutPak-dep.txt"
+set OUTPUT_DEP_FILE_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client\OutPak-dep"
 
 %UNREALPAK_APP_FULL_PATH% %OUTPUT_FULL_PATH% -ExportDependencies=%OUTPUT_DEP_FILE_FULL_PATH% -NoAssetRegistryCache -ForceDependsGathering
 
