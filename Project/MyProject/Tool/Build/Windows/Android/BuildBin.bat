@@ -60,4 +60,4 @@ if not exist %Bin_APP_ORIG_FULL_PATH% (
 	ren %Bin_APP_ORIG_FULL_PATH% Plane.apk
 )
 
-rem pause
+pause
