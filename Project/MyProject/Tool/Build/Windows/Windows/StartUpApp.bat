@@ -23,8 +23,13 @@ cd %BASE_DIR%
 
 cd %UE4_BATCH_FILES_FULL_PATH%
 
-:: brief game Tells the engine what GameInfo class to use (overriding default).
-:: ref https://docs.unrealengine.com/latest/INT/Programming/Basics/CommandLineArguments/index.html
+:: @brief : game Tells the engine what GameInfo class to use (overriding default).
+:: @ref : https://docs.unrealengine.com/latest/INT/Programming/Basics/CommandLineArguments/index.html
 %UE4_BIN_APP_FULL_PATH% %MYPROJECT_CONFIG_FULL_PATH% %BIN_APP_START_MAP%?game=MyGameInfo -silent LOG=MyLog.txt -game
+
+:: @brief : Console Variables in C++
+:: @ref : https://docs.unrealengine.com/latest/INT/Programming/Development/Tools/ConsoleManager/index.html
+::UE4Editor.exe GAMENAME -ExecCmds="r.BloomQuality 12;vis 21;Quit"
+%UE4_BIN_APP_FULL_PATH% %MYPROJECT_CONFIG_FULL_PATH% %BIN_APP_START_MAP%?game=MyGameInfo -silent LOG=MyLog.txt -game -ExecCmds="r.BloomQuality 12;vis 21;Quit"
 
 pause
