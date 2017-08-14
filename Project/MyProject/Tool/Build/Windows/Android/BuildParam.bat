@@ -31,8 +31,9 @@ set JAVA_HOME=D:\ProgramFiles\Java\jdk1.8.0_31
 ::Engine\Source\Programs\AutomationTool\AutomationUtils\Automation.cs
 ::set uebp_LOCAL_ROOT=1
 
-set UE4_CODE_ROOT_PATH="H:\Self\Self\unreal\UnrealEngine-git\UnrealEngine"
+::set UE4_CODE_ROOT_PATH="H:\Self\Self\unreal\UnrealEngine-git\UnrealEngine"
 ::set UE4_CODE_ROOT_PATH="F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git"
+set UE4_CODE_ROOT_PATH="D:\ProgramFiles\Epic Games\UE_4.16"
 echo "UE4_CODE_ROOT_PATH="%UE4_CODE_ROOT_PATH%
 
 set UE4_BIN_FULL_PATH=%UE4_CODE_ROOT_PATH%\Engine\Binaries\%UE4_PLATFORM%
