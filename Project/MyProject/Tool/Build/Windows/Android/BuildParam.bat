@@ -20,10 +20,14 @@ set UE4_BUILD_CONFIGURATION="Debug"
 ::Android environment variable
 ::Engine\Source\Programs\UnrealBuildTool\Android\UEBuildAndroid.cs
 ::When set environment variable, must restart visual studios
-set ANDROID_HOME=D:\ProgramFiles\Android\sdk
-set NDKROOT=D:\ProgramFiles\Android\android-ndk-r14b
-set ANT_HOME=G:\ProgramFiles\apache-ant-1.9.7
-set JAVA_HOME=D:\ProgramFiles\Java\jdk1.8.0_31
+::set ANDROID_HOME=D:\ProgramFiles\Android\sdk
+set ANDROID_HOME=D:\ProgramFiles\NVPACK\android-sdk-windows
+::set NDKROOT=D:\ProgramFiles\Android\android-ndk-r14b
+set NDKROOT=D:\ProgramFiles\NVPACK\android-ndk-r12b
+::set ANT_HOME=G:\ProgramFiles\apache-ant-1.9.7
+set ANT_HOME=D:\ProgramFiles\NVPACK\apache-ant-1.8.2
+::set JAVA_HOME=D:\ProgramFiles\Java\jdk1.8.0_31
+set JAVA_HOME=D:\ProgramFiles\NVPACK\jdk1.8.0_77
 
 ::UE4 environment variable
 ::Engine\Source\Programs\AutomationTool\AutomationUtils\Utils.cs
