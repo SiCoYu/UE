@@ -26,6 +26,7 @@ cd %UE4_BATCH_FILES_FULL_PATH%
 :: ref VS IDE [Solution Configurations] -- Debug Editor, [Solution Platforms] -- Win64
 :: UE4Editor : UE4 + Editor
 ::..\..\Build\BatchFiles\Rebuild.bat UE4Editor Win64 Debug -waitmutex
-%REBUILD_APP_FULL_PATH% UE4Game Android Debug -waitmutex
+::%REBUILD_APP_FULL_PATH% UE4Game Android Shipping -waitmutex
+%REBUILD_APP_FULL_PATH% UE4 Android Debug -waitmutex
 
 pause
