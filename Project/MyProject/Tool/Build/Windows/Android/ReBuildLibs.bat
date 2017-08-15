@@ -27,6 +27,8 @@ cd %UE4_BATCH_FILES_FULL_PATH%
 :: UE4Editor : UE4 + Editor
 ::..\..\Build\BatchFiles\Rebuild.bat UE4Editor Win64 Debug -waitmutex
 ::%REBUILD_APP_FULL_PATH% UE4Game Android Shipping -waitmutex
-%REBUILD_APP_FULL_PATH% UE4 Android Debug -waitmutex
+::%REBUILD_APP_FULL_PATH% UE4Client Android Debug -waitmutex -log=ReBuildLibs-log.txt -project=F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client\InventoryUIwithUMG.uproject -Clean -Deploy -cmakefile -progress -verbose -NoHotReload
+::%REBUILD_APP_FULL_PATH% UE4Game Android Debug -waitmutex -log=ReBuildLibs-log.txt -Clean -Deploy -cmakefile -progress -verbose -NoHotReload
+%REBUILD_APP_FULL_PATH% UE4Game Android Debug -waitmutex
 
 pause
