@@ -4,8 +4,9 @@ using UnrealBuildTool;
 
 public class MyPluginWin : ModuleRules
 {
-	public MyPluginWin(TargetInfo Target)
-	{
+    //public MyPluginWin(TargetInfo Target)
+    public MyPluginWin(ReadOnlyTargetRules Target) : base(Target)
+    {
 		
 		PublicIncludePaths.AddRange(
 			new string[] {

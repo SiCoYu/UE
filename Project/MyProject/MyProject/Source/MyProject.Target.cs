@@ -5,8 +5,9 @@ using System.Collections.Generic;
 
 public class MyProjectTarget : TargetRules
 {
-	public MyProjectTarget(TargetInfo Target)
-	{
+    //public MyProjectTarget(TargetInfo Target)
+    public MyProjectTarget(TargetInfo Target) : base(Target)
+    {
 		Type = TargetType.Game;
 	}
 
@@ -36,8 +37,10 @@ public class MyProjectTarget : TargetRules
         ref CPPEnvironmentConfiguration OutCPPEnvironmentConfiguration
         )
     {
-        OutCPPEnvironmentConfiguration.CLRMode = CPPCLRMode.CLRDisabled;
-        OutCPPEnvironmentConfiguration.bUseRTTI = true;
+        // 4.17 Error
+        //OutCPPEnvironmentConfiguration.CLRMode = CPPCLRMode.CLRDisabled;
+        //OutCPPEnvironmentConfiguration.bUseRTTI = true;
+
         //OutCPPEnvironmentConfiguration.bUseStaticCRT = false;
 
         //OutCPPEnvironmentConfiguration.Target.Configuration = CPPTargetConfiguration.Debug;

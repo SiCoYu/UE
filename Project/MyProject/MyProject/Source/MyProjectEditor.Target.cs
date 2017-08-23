@@ -9,8 +9,9 @@ using System.Collections.Generic;
 // 终于明白了 MyProjectEditor 在 sln 中是不会被编译的，只有启动 Editor 的时候，才会查找 MyProjectEditor 模块，如果没有才会重新编译，或者 OutExtraModuleNames.Add("MyProjectEditor"); 强制编译
 public class MyProjectEditorTarget : TargetRules
 {
-	public MyProjectEditorTarget(TargetInfo Target)
-	{
+    //public MyProjectEditorTarget(TargetInfo Target)
+    public MyProjectEditorTarget(TargetInfo Target) : base(Target)
+    {
 		Type = TargetType.Editor;
 
         // UnrealEngine\Engine\Source\Programs\UnrealBuildTool\System\RulesCompiler.cs

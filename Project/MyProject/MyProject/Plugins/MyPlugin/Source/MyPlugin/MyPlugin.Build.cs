@@ -38,7 +38,9 @@ public class MyPlugin : ModuleRules
         }
     }
 
-    public MyPlugin(TargetInfo Target)
+    //public MyPlugin(TargetInfo Target)
+    // 4.17
+    public MyPlugin(ReadOnlyTargetRules Target) : base(Target)
     {
         PublicIncludePaths.AddRange( //公有文件搜索路径
             new string[] 

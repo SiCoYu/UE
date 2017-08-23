@@ -2,7 +2,9 @@ using UnrealBuildTool;
  
 public class MyProjectEditor : ModuleRules
 {
-    public MyProjectEditor(TargetInfo Target)
+    //public MyProjectEditor(TargetInfo Target)
+    // 4.17
+    public MyProjectEditor(ReadOnlyTargetRules Target) : base(Target)
     {
         //PrivateIncludePaths.Add("MyProjectEditor/Private");
 		PrivateIncludePaths.AddRange(

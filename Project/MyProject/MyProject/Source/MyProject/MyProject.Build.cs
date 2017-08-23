@@ -9,8 +9,10 @@ using System.IO;
 
 public class MyProject : ModuleRules
 {
-	public MyProject(TargetInfo Target)
-	{
+    //public MyProject(TargetInfo Target)
+    // 4.17
+    public MyProject(ReadOnlyTargetRules Target) : base(Target)
+    {
         // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
         // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs
         PrivateIncludePaths.AddRange(
@@ -351,7 +353,9 @@ public class MyProject : ModuleRules
     }
 
     // https://wiki.unrealengine.com/Linking_Static_Libraries_Using_The_Build_System
-    private bool LoadSockets_bak(TargetInfo Target)
+    //private bool LoadSockets_bak(TargetInfo Target)
+    // 4.17
+    private bool LoadSockets_bak(ReadOnlyTargetRules Target)
     {
         // https://wiki.unrealengine.com/Integrating_OpenCV_Into_Unreal_Engine_4
         bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && BuildConfiguration.bDebugBuildsActuallyUseDebugCRT;
@@ -409,7 +413,9 @@ public class MyProject : ModuleRules
         return false;
     }
 
-    private bool LoadSockets(TargetInfo Target)
+    //private bool LoadSockets(TargetInfo Target)
+    // 4.17
+    private bool LoadSockets(ReadOnlyTargetRules Target)
     {
         string LibrariesPath;
 
@@ -419,7 +425,9 @@ public class MyProject : ModuleRules
         return true;
     }
 
-    private bool LoadTestExtern(TargetInfo Target)
+    //private bool LoadTestExtern(TargetInfo Target)
+    // 4.17
+    private bool LoadTestExtern(ReadOnlyTargetRules Target)
     {
         string LibrariesPath;
         LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "TestStaticLib_d.lib");
@@ -429,7 +437,9 @@ public class MyProject : ModuleRules
         return true;
     }
 
-    private bool LoadGtest(TargetInfo Target)
+    //private bool LoadGtest(TargetInfo Target)
+    // 4.17
+    private bool LoadGtest(ReadOnlyTargetRules Target)
     {
         string LibrariesPath;
 
@@ -440,7 +450,9 @@ public class MyProject : ModuleRules
     }
 
     // 加载 Lua
-    private bool LoadLua(TargetInfo Target)
+    //private bool LoadLua(TargetInfo Target)
+    // 4.17
+    private bool LoadLua(ReadOnlyTargetRules Target)
     {
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
@@ -460,7 +472,9 @@ public class MyProject : ModuleRules
         return true;
     }
 
-    private bool LoadLuaSocket(TargetInfo Target)
+    //private bool LoadLuaSocket(TargetInfo Target)
+    // 4.17
+    private bool LoadLuaSocket(ReadOnlyTargetRules Target)
     {
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
@@ -481,7 +495,9 @@ public class MyProject : ModuleRules
     }
 
     // 加载 ProjectEditor
-    private bool LoadMyProjectEditor(TargetInfo Target)
+    //private bool LoadMyProjectEditor(TargetInfo Target)
+    // 4.17
+    private bool LoadMyProjectEditor(ReadOnlyTargetRules Target)
     {
         if (UEBuildConfiguration.bBuildEditor == true)
         {
