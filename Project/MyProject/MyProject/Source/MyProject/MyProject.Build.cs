@@ -277,6 +277,7 @@ public class MyProject : ModuleRules
         //    "PhysX",
         //    "APEX"
         //    );
+		// 4.17 需要新的接口
 		AddEngineThirdPartyPrivateStaticDependencies(Target, "PhysX");
 		AddEngineThirdPartyPrivateStaticDependencies(Target, "APEX");
 		
