@@ -272,10 +272,14 @@ public class MyProject : ModuleRules
         //);
 
         // 添加对第三方库 PhysX_3.4 的引用头文件
-        AddEngineThirdPartyPrivateStaticDependencies(Target,
-            "PhysX",
-            "APEX"
-            );
+		// 现在接口参数修改了
+        //AddEngineThirdPartyPrivateStaticDependencies(Target,
+        //    "PhysX",
+        //    "APEX"
+        //    );
+		AddEngineThirdPartyPrivateStaticDependencies(Target, "PhysX");
+		AddEngineThirdPartyPrivateStaticDependencies(Target, "APEX");
+		
         //PublicSystemIncludePaths.Add("ThirdParty/hlslcc/hlslcc/src/hlslcc_lib");
         //RuntimeDependencies.Add(new RuntimeDependency("$(EngineDir)/Binaries/ThirdParty/ARM/Win32/astcenc.exe"));
         //string APEXDir = UEBuildConfiguration.UEThirdPartySourceDirectory + "PhysX/" + ApexVersion + "/";
