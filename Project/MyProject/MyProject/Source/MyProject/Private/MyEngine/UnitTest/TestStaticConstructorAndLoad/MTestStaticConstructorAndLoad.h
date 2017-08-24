@@ -1,6 +1,7 @@
 #pragma once
 
-#include "MyActor.generated.h"
+#include "GameFramework/Actor.h"
+#include "MTestStaticConstructorAndLoad.generated.h"
 
 /**
  * @brief Creating component subobjects and attaching them to the actor's hierarchy can also be done inside of the constructor. When spawning an actor, its components will be cloned from the CDO. In order to ensure that components are always created, destroyed, and properly garbage-collected, a pointer to every component created in the constructor should be stored in a UPROPERTY of the owning class. 
@@ -8,10 +9,11 @@
  */
 
 UCLASS()
-class AMTestUProperty : public AActor
+class AMTestStaticConstructorAndLoad : public AActor
 {
     GENERATED_BODY()
-    public:
+
+public:
     UPROPERTY()
     UDrawSphereComponent* StaticMesh ;
 };
