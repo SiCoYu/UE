@@ -9,18 +9,8 @@ public class MyProjectTarget : TargetRules
     public MyProjectTarget(TargetInfo Target) : base(Target)
     {
 		Type = TargetType.Game;
-	}
 
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
+        // warning : SetupBinaries() is deprecated in the 4.16 release. From the constructor in your .target.cs file, use ExtraModuleNames.Add("Foo") to add modules to your target, or set LaunchModuleName = "Foo" to override the name of the launch module for program targets.
         // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
         OutExtraModuleNames.Add("MyProject");
 
@@ -30,6 +20,26 @@ public class MyProjectTarget : TargetRules
             OutExtraModuleNames.Add("MyProjectEditor");
         }
     }
+
+    //
+    // TargetRules interface.
+    //
+    // warning : SetupBinaries() is deprecated in the 4.16 release. From the constructor in your .target.cs file, use ExtraModuleNames.Add("Foo") to add modules to your target, or set LaunchModuleName = "Foo" to override the name of the launch module for program targets.
+ //   public override void SetupBinaries(
+	//	TargetInfo Target,
+	//	ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
+	//	ref List<string> OutExtraModuleNames
+	//	)
+	//{
+ //       // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
+ //       OutExtraModuleNames.Add("MyProject");
+
+ //       // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
+ //       if (UEBuildConfiguration.bBuildEditor)
+ //       {
+ //           OutExtraModuleNames.Add("MyProjectEditor");
+ //       }
+ //   }
 
     public override void SetupGlobalEnvironment(
         TargetInfo Target,
