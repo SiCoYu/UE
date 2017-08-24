@@ -1,4 +1,7 @@
-static TAutoConsoleVariable<int32> MConsoleSys::CVarRefractionQuality(
+#include "MyProject.h"
+#include "MConsoleSys.h"
+
+static TAutoConsoleVariable<int32> UMConsoleSys::CVarRefractionQuality(
     TEXT("r.RefractionQuality"),
     2,
     TEXT("Defines the distortion/refraction quality, adjust for quality or performance.\n")
@@ -8,7 +11,13 @@ static TAutoConsoleVariable<int32> MConsoleSys::CVarRefractionQuality(
     TEXT("  3: high quality (e.g. color fringe, not yet implemented)"),
     ECVF_Scalability | ECVF_RenderThreadSafe);
 
-void MConsoleSys::registerConsoleVariable()
+UMConsoleSys::UMConsoleSys(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+
+}
+
+void UMConsoleSys::registerConsoleVariable()
 {
 	IConsoleManager::Get().RegisterConsoleVariable(TEXT("r.RefractionQuality"),
 	   2,
@@ -20,7 +29,7 @@ void MConsoleSys::registerConsoleVariable()
 	   ECVF_Scalability | ECVF_RenderThreadSafe);
 }
 
-void MConsoleSys::unregisterConsoleVariable()
+void UMConsoleSys::unregisterConsoleVariable()
 {
 	IConsoleManager::Get().UnregisterConsoleVariable(TEXT("r.RefractionQuality"));
 }

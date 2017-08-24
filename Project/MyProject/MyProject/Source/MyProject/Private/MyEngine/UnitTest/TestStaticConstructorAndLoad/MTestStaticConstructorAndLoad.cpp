@@ -1,13 +1,4 @@
-#include "MyProject.h"
-#include "MTestStaticConstructorAndLoad.h"
-
-AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad(const class FObjectInitializer& PCIP)
-	: Super(PCIP)
-{
-
-}
-
-AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad()
+AMTestUProperty::AMTestUProperty()
 {
 	// Structure to hold one-time initialization
     static FClassFinder<UNavigationMeshBase> ClassFinder(TEXT("class'Engine.NavigationMeshBase'"));
