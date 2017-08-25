@@ -35,7 +35,7 @@ public class MyProjectEditorTarget : TargetRules
         // warning : SetupBinaries() is deprecated in the 4.16 release. From the constructor in your .target.cs file, use ExtraModuleNames.Add("Foo") to add modules to your target, or set LaunchModuleName = "Foo" to override the name of the launch module for program targets.
         // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
         // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
-        OutExtraModuleNames.Add("MyProject");
+        ExtraModuleNames.Add("MyProject");
         //OutExtraModuleNames.Add("MyProjectEditor");
     }
 
