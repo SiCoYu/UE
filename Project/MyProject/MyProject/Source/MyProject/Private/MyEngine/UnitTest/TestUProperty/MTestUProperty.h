@@ -14,9 +14,9 @@ class AMTestUProperty : public AActor
     GENERATED_BODY()
     public:
 
-    UPROPERTY()
-    UWindPointSourceComponent* WindPointSource;
+    //UPROPERTY()
+    //UWindPointSourceComponent* WindPointSource;
 
-    UPROPERTY()
-    UDrawSphereComponent* DisplaySphere;
+    //UPROPERTY()
+    //UDrawSphereComponent* DisplaySphere;
 };

@@ -11,5 +11,5 @@ class UMyMountPak : public UObject
 {
 	GENERATED_UCLASS_BODY()
 
-	void LoadPakComplete()
+	void LoadPakComplete();
 };
