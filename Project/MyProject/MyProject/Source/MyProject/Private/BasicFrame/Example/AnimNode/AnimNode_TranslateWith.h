@@ -9,7 +9,9 @@
  * @brief https://wiki.unrealengine.com/Animation_Node,_Translate_With_Complete_Source_Code_and_Instructions
  */
 
- // https://answers.unrealengine.com/questions/675941/issue-with-new-stricter-uht-and-ustructs.html
+// UE4 4.17
+// Issue with new stricter UHT and USTRUCTs
+// https://answers.unrealengine.com/questions/675941/issue-with-new-stricter-uht-and-ustructs.html
 //USTRUCT()
 USTRUCT(BlueprintInternalUseOnly)
 struct FAnimNode_TranslateWith : public  FAnimNode_Base

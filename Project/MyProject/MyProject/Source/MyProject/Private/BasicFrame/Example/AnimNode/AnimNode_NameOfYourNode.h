@@ -10,6 +10,8 @@
  * @brief https://wiki.unrealengine.com/Animation_Nodes,_Code_for_How_to_Create_Your_Own
  */
 
+// UE4 4.17
+// Issue with new stricter UHT and USTRUCTs
 // https://answers.unrealengine.com/questions/675941/issue-with-new-stricter-uht-and-ustructs.html
 //USTRUCT()
 USTRUCT(BlueprintInternalUseOnly)
