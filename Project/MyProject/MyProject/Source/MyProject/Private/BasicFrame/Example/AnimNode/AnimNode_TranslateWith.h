@@ -9,7 +9,9 @@
  * @brief https://wiki.unrealengine.com/Animation_Node,_Translate_With_Complete_Source_Code_and_Instructions
  */
 
-USTRUCT()
+ // https://answers.unrealengine.com/questions/675941/issue-with-new-stricter-uht-and-ustructs.html
+//USTRUCT()
+USTRUCT(BlueprintInternalUseOnly)
 struct FAnimNode_TranslateWith : public  FAnimNode_Base
 {
 	GENERATED_USTRUCT_BODY()
@@ -18,12 +20,14 @@ struct FAnimNode_TranslateWith : public  FAnimNode_Base
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links)
 	FComponentSpacePoseLink ComponentPose;
 
+	// LogCompile: Error: Type 'FBoneReference' is not supported by blueprint. AnimNode_TranslateWith.TargetBone
 	/** Name of bone to control **/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl)
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl)
 	FBoneReference TargetBone;
 
+	// LogCompile: Error: Type 'FBoneReference' is not supported by blueprint. AnimNode_TranslateWith.SourceBone
 	/** Source Bone Name to get transform from **/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl)
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl)
 	FBoneReference SourceBone;
 
 	/** This is typically the FORWARD Axis, and is false by default **/

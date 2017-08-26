@@ -16,7 +16,9 @@ Here is how you can determine if your node is running in the Editor preview or i
 WorldIsGame = (TheWorld->WorldType == EWorldType::Game);
  */
 
-USTRUCT()
+ // https://answers.unrealengine.com/questions/675941/issue-with-new-stricter-uht-and-ustructs.html
+//USTRUCT()
+USTRUCT(BlueprintInternalUseOnly)
 struct FAnimNode_VictoryTurnInPlace : public FAnimNode_Base
 {
 	GENERATED_USTRUCT_BODY()
