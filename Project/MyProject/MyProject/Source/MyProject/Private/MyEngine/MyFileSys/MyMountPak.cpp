@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyMountPak.h"
 
-UMyMountPak::MyMountPak(const FObjectInitializer& ObjectInitializer)
+UMyMountPak::UMyMountPak(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 
