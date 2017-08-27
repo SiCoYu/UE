@@ -65,7 +65,9 @@ void AMyFlyPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Othe
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 
 	// Deflect along the surface when we collide.
-	FRotator CurrentRotation = GetActorRotation(RootComponent);
+	// UE4 4.17: error C2660: 'AActor::GetActorRotation': function does not take 1 arguments
+	//FRotator CurrentRotation = GetActorRotation(RootComponent);
+	FRotator CurrentRotation = GetActorRotation();
 	SetActorRotation(FQuat::Slerp(CurrentRotation.Quaternion(), HitNormal.ToOrientationQuat(), 0.025f));
 }
 
