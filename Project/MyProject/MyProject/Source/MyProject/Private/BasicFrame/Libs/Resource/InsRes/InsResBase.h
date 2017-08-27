@@ -18,6 +18,8 @@ public:
 
 public:
 	InsResBase();
+	// warning C4265: 'InsResBase': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
+	virtual ~InsResBase();
 	bool getIsOrigResNeedImmeUnload();
 	void setIsOrigResNeedImmeUnload(bool value);
 	std::string GetPath();

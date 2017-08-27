@@ -5,6 +5,16 @@
 #include "UtilStr.h"
 #include "Common.h"
 
+MsgRouteHandleBase()
+{
+	
+}
+
+MsgRouteHandleBase::~MsgRouteHandleBase()
+{
+	
+}
+
 void MsgRouteHandleBase::handleMsg(MsgRouteBase* msg)
 {
 	int key = ((int)msg->m_msgID);

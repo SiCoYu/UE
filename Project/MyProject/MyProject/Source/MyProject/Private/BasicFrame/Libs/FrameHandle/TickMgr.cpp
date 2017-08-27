@@ -9,6 +9,11 @@ TickMgr::TickMgr()
 
 }
 
+TickMgr::~TickMgr()
+{
+
+}
+
 void TickMgr::init()
 {
 	Super::init();

@@ -8,6 +8,11 @@ InsResMgrBase::InsResMgrBase()
 	this->mLoadingDepth = 0;
 }
 
+InsResMgrBase::~InsResMgrBase()
+{
+	
+}
+
 void InsResMgrBase::init()
 {
 

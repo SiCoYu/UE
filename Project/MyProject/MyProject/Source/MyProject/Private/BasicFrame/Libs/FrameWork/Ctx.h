@@ -164,7 +164,7 @@ public:
 #define GMyStreamableManager GCtx->getMyStreamableManager()
 #define GDownloadMgr GCtx->getDownloadMgr()
 #define GFileSys GCtx->getFileSys()
-#define GSandboxPlatformFile GCtx->getFileSys()->getSandboxPlatformFile()
+#define GFileSysSandboxPlatformFile GCtx->getFileSys()->getSandboxPlatformFile()
 #define GSystemSetting GCtx->getSystemSetting()
 #define GLuaSystem GCtx->getLuaSystem()
 #define GSceneEventCB GCtx->getSceneEventCB()

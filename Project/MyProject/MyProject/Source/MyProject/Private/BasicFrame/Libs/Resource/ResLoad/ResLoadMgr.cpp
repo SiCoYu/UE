@@ -33,6 +33,11 @@ ResLoadMgr::ResLoadMgr()
 	this->mLoadingDepth = 0;
 }
 
+ResLoadMgr::~ResLoadMgr()
+{
+	
+}
+
 void ResLoadMgr::init()
 {
 	// 游戏逻辑处理

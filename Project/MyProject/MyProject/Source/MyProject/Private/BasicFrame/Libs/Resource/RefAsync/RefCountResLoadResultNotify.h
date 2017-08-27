@@ -15,7 +15,7 @@ protected:
 
 public:
 	RefCountResLoadResultNotify();
-	~RefCountResLoadResultNotify();
+	virtual ~RefCountResLoadResultNotify();
 
 	RefCount* getRefCount();
 	void setRefCount(RefCount* value);

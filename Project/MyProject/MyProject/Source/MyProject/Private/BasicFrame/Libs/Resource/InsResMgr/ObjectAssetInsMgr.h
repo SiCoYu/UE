@@ -16,6 +16,7 @@ class ObjectAssetInsMgr : public InsResMgrBase
 
 public:
 	ObjectAssetInsMgr();
+	virtual ~ObjectAssetInsMgr();
 
 	virtual void init() override;
 	virtual void dispose() override;

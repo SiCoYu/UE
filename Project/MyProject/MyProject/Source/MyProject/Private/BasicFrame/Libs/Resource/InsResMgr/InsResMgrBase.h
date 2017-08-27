@@ -35,6 +35,7 @@ protected:
 
 public:
 	InsResMgrBase();
+	virtual ~InsResMgrBase();
 
 	virtual void init();
 	virtual void dispose();

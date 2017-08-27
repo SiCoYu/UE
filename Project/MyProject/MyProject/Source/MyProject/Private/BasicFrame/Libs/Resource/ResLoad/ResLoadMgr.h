@@ -28,6 +28,7 @@ protected:
 
 public:
 	ResLoadMgr();
+	virtual ~ResLoadMgr();
 	void init();
 	void dispose();
 

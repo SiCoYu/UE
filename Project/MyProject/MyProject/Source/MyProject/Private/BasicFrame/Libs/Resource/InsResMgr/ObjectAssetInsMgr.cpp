@@ -7,6 +7,11 @@ ObjectAssetInsMgr::ObjectAssetInsMgr()
 
 }
 
+ObjectAssetInsMgr::~ObjectAssetInsMgr()
+{
+	
+}
+
 void ObjectAssetInsMgr::init()
 {
 

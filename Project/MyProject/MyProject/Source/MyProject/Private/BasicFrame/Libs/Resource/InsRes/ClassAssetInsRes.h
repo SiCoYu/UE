@@ -10,6 +10,8 @@ class ClassAssetInsRes : public ObjectAssetInsResBase
 
 public:
 	ClassAssetInsRes();
+	// warning C4265: 'ClassAssetInsRes': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
+	virtual ~ClassAssetInsRes();
 };
 
 #endif

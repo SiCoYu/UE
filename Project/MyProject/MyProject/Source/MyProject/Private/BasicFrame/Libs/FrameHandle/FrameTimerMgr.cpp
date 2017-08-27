@@ -9,6 +9,11 @@ FrameTimerMgr::FrameTimerMgr()
 
 }
 
+FrameTimerMgr::~FrameTimerMgr()
+{
+
+}
+
 void FrameTimerMgr::init()
 {
 	Super::init();

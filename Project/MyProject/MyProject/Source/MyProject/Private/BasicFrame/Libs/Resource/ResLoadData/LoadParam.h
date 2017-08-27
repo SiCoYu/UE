@@ -43,7 +43,7 @@ protected:
 
 public:
 	LoadParam();
-	~LoadParam();
+	virtual ~LoadParam();
 
 public:
 	void init();

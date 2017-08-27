@@ -17,7 +17,7 @@ protected:
 
 public:
 	DelayTaskMgr();
-	~DelayTaskMgr();
+	virtual ~DelayTaskMgr();
 
 public:
 	void init();

@@ -20,6 +20,7 @@ protected:
 
 public:
 	TickMgr();
+	virtual ~TickMgr();
 
 public:
 	virtual void init();

@@ -12,6 +12,11 @@ ObjectAssetInsResBase::ObjectAssetInsResBase()
 	this->mRetGO = nullptr;
 }
 
+ObjectAssetInsResBase::~ObjectAssetInsResBase()
+{
+	
+}
+
 void ObjectAssetInsResBase::initImpl(ResItem* res)
 {
 	this->mGo = Cast<UClass>(res->getObject(res->getPrefabName()));

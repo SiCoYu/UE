@@ -16,7 +16,7 @@ protected:
 
 public:
 	ResLoadResultNotify();
-	~ResLoadResultNotify();
+	virtual ~ResLoadResultNotify();
 
 	ResLoadState* getResLoadState();
 	void setResLoadState(ResLoadState* value);

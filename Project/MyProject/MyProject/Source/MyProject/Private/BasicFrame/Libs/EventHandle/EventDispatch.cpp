@@ -8,6 +8,11 @@ EventDispatch::EventDispatch(int eventId_)
 	this->mEventId = eventId_;
 }
 
+EventDispatch::~EventDispatch()
+{
+	
+}
+
 int EventDispatch::getUniqueId()
 {
 	return this->mUniqueId;

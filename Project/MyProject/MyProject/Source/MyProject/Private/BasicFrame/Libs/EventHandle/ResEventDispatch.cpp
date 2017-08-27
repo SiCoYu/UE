@@ -7,6 +7,11 @@ ResEventDispatch::ResEventDispatch()
 
 }
 
+ResEventDispatch::~ResEventDispatch()
+{
+
+}
+
 void ResEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 {
 	Super::dispatchEvent(dispatchObject);

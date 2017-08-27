@@ -13,6 +13,11 @@ InsResBase::InsResBase()
 	this->mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
 }
 
+InsResBase::~InsResBase()
+{
+	
+}
+
 bool InsResBase::getIsOrigResNeedImmeUnload()
 {
 	return this->mIsOrigResNeedImmeUnload;

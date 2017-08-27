@@ -20,6 +20,7 @@ protected:
 
 public:
 	TimerMgr();
+	virtual ~TimerMgr();
 
 public:
 	virtual void init();

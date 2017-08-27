@@ -29,7 +29,8 @@ protected:
 private:
 	volatile int mRefCount;
 
-#if My_DEBUG
+// warning C4668: 'My_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+#ifdef My_DEBUG
 protected:
 	static bool mIsInCreate;
 	static MMutex mCriticalSection;

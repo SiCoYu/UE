@@ -8,6 +8,11 @@ TimerMgr::TimerMgr()
 
 }
 
+TimerMgr::~TimerMgr()
+{
+
+}
+
 void TimerMgr::init()
 {
 	Super::init();

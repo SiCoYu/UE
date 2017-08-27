@@ -20,6 +20,7 @@ protected:
 
 public:
 	FrameTimerMgr();
+	virtual ~FrameTimerMgr();
 
 public:
 	virtual void init();

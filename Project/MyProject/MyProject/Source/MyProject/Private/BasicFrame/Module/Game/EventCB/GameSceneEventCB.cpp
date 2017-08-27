@@ -8,6 +8,16 @@
 	#include "TestMain.h"
 #endif
 
+GameSceneEventCB::GameSceneEventCB()
+{
+	
+}
+
+GameSceneEventCB::~GameSceneEventCB()
+{
+	
+}
+
 // 场景加载完成处理事件
 void GameSceneEventCB::onLevelLoaded()
 {

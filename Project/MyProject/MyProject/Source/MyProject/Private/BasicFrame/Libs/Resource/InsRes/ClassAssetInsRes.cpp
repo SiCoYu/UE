@@ -6,3 +6,8 @@ ClassAssetInsRes::ClassAssetInsRes()
 {
 	this->mResPackType = eClassType;
 }
+
+ClassAssetInsRes::~ClassAssetInsRes()
+{
+	
+}

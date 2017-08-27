@@ -12,6 +12,7 @@ class ResEventDispatch : public EventDispatch
 
 public:
 	ResEventDispatch();
+	virtual ~ResEventDispatch();
 	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;
 };
 

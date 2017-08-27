@@ -23,6 +23,8 @@ protected:
 
 public:
 	ObjectAssetInsResBase();
+	// warning C4265: 'ObjectAssetInsResBase': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
+	virtual ~ObjectAssetInsResBase();
 
 protected:
 	virtual void initImpl(ResItem* res) override;

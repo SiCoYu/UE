@@ -13,6 +13,7 @@ class ClassAssetInsMgr : public InsResMgrBase
 {
 public:
 	ClassAssetInsMgr();
+	virtual ~ClassAssetInsMgr();
 
 public:
 	virtual void init() override;

@@ -30,6 +30,7 @@ protected:
 
 public:
 	DelayHandleMgrBase();
+	virtual ~DelayHandleMgrBase();
 
 	virtual void init();
 	virtual void dispose();

@@ -6,6 +6,16 @@
 #include "IDelayHandleItem.h"
 #include "UtilContainers.h"
 
+DelayHandleMgrBase::DelayHandleMgrBase()
+{
+	mLoopDepth = 0;
+}
+
+DelayHandleMgrBase::~DelayHandleMgrBase()
+{
+	
+}
+
 void DelayHandleMgrBase::init()
 {
 
@@ -92,11 +102,6 @@ void DelayHandleMgrBase::processDelayObjects()
 			mDeferredDelQueue.Clear();
 		}
 	}
-}
-
-DelayHandleMgrBase::DelayHandleMgrBase()
-{
-	mLoopDepth = 0;
 }
 
 void DelayHandleMgrBase::addObject(IDelayHandleItem* delayObject, float priority)

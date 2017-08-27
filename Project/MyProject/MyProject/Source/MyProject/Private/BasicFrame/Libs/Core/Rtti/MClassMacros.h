@@ -28,8 +28,8 @@ private:
 #define M_REGISTER_CLASS(type) \
     static const bool type##_registered = type::RegisterWithFactory(); \
 
-
-#if MY_DEBUG
+//  warning C4668: 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+#ifdef MY_DEBUG
 #define M_IMPLEMENT_CLASS(type, baseType) \
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, &baseType::CLASS_INFO, sizeof(type)); \
     MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
@@ -76,7 +76,8 @@ private:
     MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; }
 
 
-#if MY_DEBUG
+// warning C4668: 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+#ifdef MY_DEBUG
 #define M_IMPLEMENT_ROOT_CLASS(type) \
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, 0, sizeof(type)); \
     MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \

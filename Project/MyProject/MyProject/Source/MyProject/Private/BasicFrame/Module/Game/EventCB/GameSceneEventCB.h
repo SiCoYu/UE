@@ -16,6 +16,9 @@ protected:
 #endif
 
 public:
+	GameSceneEventCB();
+	virtual ~GameSceneEventCB();
+
     // 场景加载完成处理事件
 	virtual void onLevelLoaded() override;
 	virtual void init() override;

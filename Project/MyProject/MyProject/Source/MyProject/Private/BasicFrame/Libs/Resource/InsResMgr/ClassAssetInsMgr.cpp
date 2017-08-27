@@ -7,6 +7,11 @@ ClassAssetInsMgr::ClassAssetInsMgr()
 
 }
 
+ClassAssetInsMgr::~ClassAssetInsMgr()
+{
+	
+}
+
 void ClassAssetInsMgr::init()
 {
 
