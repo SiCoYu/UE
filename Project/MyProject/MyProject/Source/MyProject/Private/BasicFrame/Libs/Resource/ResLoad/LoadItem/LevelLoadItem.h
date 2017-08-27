@@ -26,7 +26,7 @@ protected:
 
 public:
 	LevelLoadItem();
-	~LevelLoadItem();
+	virtual ~LevelLoadItem();
 
 public:
 	void setLevelName(std::string levelName);

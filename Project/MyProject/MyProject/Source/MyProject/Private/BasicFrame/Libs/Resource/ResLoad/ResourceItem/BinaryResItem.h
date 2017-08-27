@@ -10,7 +10,7 @@ class BinaryResItem : public ResItem
 {
 public:
 	BinaryResItem();
-	~BinaryResItem();
+	virtual ~BinaryResItem();
 };
 
 #endif

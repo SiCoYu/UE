@@ -11,6 +11,11 @@ ResItem::ResItem()
 	this->mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
 }
 
+ResItem::~ResItem()
+{
+	
+}
+
 ResPackType ResItem::getResPackType()
 {
 	return this->mResPackType;

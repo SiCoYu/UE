@@ -5,7 +5,7 @@
 #include "UtilStr.h"
 #include "Common.h"
 
-MsgRouteHandleBase()
+MsgRouteHandleBase::MsgRouteHandleBase()
 {
 	
 }

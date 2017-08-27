@@ -29,7 +29,7 @@ void UUIFunctionBar::onTestButtonTouch()
 	//info.ExecutionFunction = "onLevelLoaded";
 	//info.CallbackTarget = this;
 	//info.UUID = 0;
-	//// Linkage Ò»¶¨ÒªÓĞÖµ£¬¾ßÌå²Î¿¼
+	//// Linkage ä¸€å®šè¦æœ‰å€¼ï¼Œå…·ä½“å‚è€ƒ
 	//// Engine\Source\Runtime\Engine\Private\LevelStreaming.cpp
 	//// Response.FinishAndTriggerIf(bIsOperationFinished, LatentInfo.ExecutionFunction, LatentInfo.Linkage, LatentInfo.CallbackTarget);
 	//// Engine\Source\Runtime\Engine\Private\LatentActionManager.cpp

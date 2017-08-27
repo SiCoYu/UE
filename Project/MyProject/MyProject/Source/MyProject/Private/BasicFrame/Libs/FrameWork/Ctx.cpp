@@ -36,7 +36,7 @@
 #include "FrameTimerMgr.h"
 #include "TickPriority.h"
 
-// Æ«ÌØ»¯
+// åç‰¹åŒ–
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
 
 Ctx::Ctx()
@@ -161,7 +161,7 @@ void Ctx::init()
 
 	this->addEventHandle();
 
-	// ¹ÒÔÚÄ¿Â¼
+	// æŒ‚åœ¨ç›®å½•
 	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
 }
 

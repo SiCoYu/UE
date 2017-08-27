@@ -98,7 +98,7 @@ void UENetClient::testSendData()
 	}
 }
 
-// ·¢ËÍÏûÏ¢
+// å‘é€æ¶ˆæ¯
 void UENetClient::Send()
 {
 	MLock mlock(mSendMutex);
@@ -108,40 +108,40 @@ void UENetClient::Send()
 		return;
 	}
 
-	if (mClientBuffer->getSendBuffer()->getBytesAvailable() == 0)     // Èç¹û·¢ËÍ»º³åÇøÃ»ÓÐÒª·¢ËÍµÄÊý¾Ý
+	if (mClientBuffer->getSendBuffer()->getBytesAvailable() == 0)     // å¦‚æžœå‘é€ç¼“å†²åŒºæ²¡æœ‰è¦å‘é€çš„æ•°æ®
 	{
-		if (mClientBuffer->getSendTmpBuffer()->getCircularBuffer()->getSize() > 0)      // Èç¹û·¢ËÍÁÙÊ±»º³åÇøÓÐÊý¾ÝÒª·¢
+		if (mClientBuffer->getSendTmpBuffer()->getCircularBuffer()->getSize() > 0)      // å¦‚æžœå‘é€ä¸´æ—¶ç¼“å†²åŒºæœ‰æ•°æ®è¦å‘
 		{
 			mClientBuffer->getSendData();
 		}
 
-		if (mClientBuffer->getSendBuffer()->getBytesAvailable() == 0)        // Èç¹û·¢ËÍ»º³åÇøÖÐÈ·ÊµÃ»ÓÐÊý¾Ý
+		if (mClientBuffer->getSendBuffer()->getBytesAvailable() == 0)        // å¦‚æžœå‘é€ç¼“å†²åŒºä¸­ç¡®å®žæ²¡æœ‰æ•°æ®
 		{
-			mMsgSendEndEvent->Set();        // Í¨ÖªµÈ´ýÏß³Ì£¬ËùÓÐÊý¾Ý¶¼·¢ËÍÍê³É
+			mMsgSendEndEvent->Set();        // é€šçŸ¥ç­‰å¾…çº¿ç¨‹ï¼Œæ‰€æœ‰æ•°æ®éƒ½å‘é€å®Œæˆ
 			return;
 		}
 	}
 
-	GLogSys->log(UtilStr::Format("¿ªÊ¼·¢ËÍ×Ö½ÚÊý {0} ", mClientBuffer->getSendBuffer()->getBytesAvailable()));
+	GLogSys->log(UtilStr::Format("å¼€å§‹å‘é€å­—èŠ‚æ•° {0} ", mClientBuffer->getSendBuffer()->getBytesAvailable()));
 
 	bool ret = true;
 	int bytesSent = 0;
 	ret = mSocket->Send((uint8*)(mClientBuffer->getSendBuffer()->getDynBuffer()->getBuffer() + mClientBuffer->getSendBuffer()->getPos()), mClientBuffer->getSendBuffer()->getBytesAvailable(), bytesSent);
 	
-	if (!ret)		// Èç¹û·¢ËÍÊ§°Ü
+	if (!ret)		// å¦‚æžœå‘é€å¤±è´¥
 	{
-		mMsgSendEndEvent->Set();        // ·¢ÉúÒì³££¬Í¨ÖªµÈ´ýÏß³Ì£¬ËùÓÐÊý¾Ý¶¼·¢ËÍÍê³É£¬·ÀÖ¹µÈ´ýÏß³Ì²»ÄÜ½âËø
-		// Êä³öÈÕÖ¾
-		GLogSys->error("·¢ËÍÊ§°Ü");
+		mMsgSendEndEvent->Set();        // å‘ç”Ÿå¼‚å¸¸ï¼Œé€šçŸ¥ç­‰å¾…çº¿ç¨‹ï¼Œæ‰€æœ‰æ•°æ®éƒ½å‘é€å®Œæˆï¼Œé˜²æ­¢ç­‰å¾…çº¿ç¨‹ä¸èƒ½è§£é”
+		// è¾“å‡ºæ—¥å¿—
+		GLogSys->error("å‘é€å¤±è´¥");
 		//Disconnect(0);
 	}
 	else
 	{
-		GLogSys->log(UtilStr::Format("½áÊø·¢ËÍ×Ö½ÚÊý {0} ", bytesSent));
+		GLogSys->log(UtilStr::Format("ç»“æŸå‘é€å­—èŠ‚æ•° {0} ", bytesSent));
 
 		if (mClientBuffer->getSendBuffer()->getLength() < mClientBuffer->getSendBuffer()->getPos() + bytesSent)
 		{
-			GLogSys->log(UtilStr::Format("½áÊø·¢ËÍ×Ö½ÚÊý´íÎó {0}", bytesSent));
+			GLogSys->log(UtilStr::Format("ç»“æŸå‘é€å­—èŠ‚æ•°é”™è¯¯ {0}", bytesSent));
 			mClientBuffer->getSendBuffer()->setPos(mClientBuffer->getSendBuffer()->getLength());
 		}
 		else
@@ -149,46 +149,46 @@ void UENetClient::Send()
 			mClientBuffer->getSendBuffer()->setPos(mClientBuffer->getSendBuffer()->getPos() + bytesSent);
 		}
 
-		if (mClientBuffer->getSendBuffer()->getBytesAvailable() > 0)     // Èç¹ûÉÏÒ»´Î·¢ËÍµÄÊý¾Ý»¹Ã»·¢ËÍÍê³É£¬¼ÌÐø·¢ËÍ
+		if (mClientBuffer->getSendBuffer()->getBytesAvailable() > 0)     // å¦‚æžœä¸Šä¸€æ¬¡å‘é€çš„æ•°æ®è¿˜æ²¡å‘é€å®Œæˆï¼Œç»§ç»­å‘é€
 		{
-			Send();                 // ¼ÌÐø·¢ËÍÊý¾Ý
+			Send();                 // ç»§ç»­å‘é€æ•°æ®
 		}
 	}
 }
 
-// ½ÓÊÜÊý¾Ý
+// æŽ¥å—æ•°æ®
 void UENetClient::Receive()
 {
-	// Ö»ÓÐ socket Á¬½ÓµÄÊ±ºò²Å¼ÌÐø½ÓÊÕÊý¾Ý
+	// åªæœ‰ socket è¿žæŽ¥çš„æ—¶å€™æ‰ç»§ç»­æŽ¥æ”¶æ•°æ®
 	if (!mIsConnected)
 	{
-		// ½ÓÊÕ´Ó·þÎñÆ÷·µ»ØµÄÐÅÏ¢
-		bool ret = true;	// Ä¬ÈÏÊÇ½ÓÊÕµÄ
-		int32 bytesRead = 0;	// ¶ÁÈ¡µÄ×ÜµÄ×Ö½ÚÊý
+		// æŽ¥æ”¶ä»ŽæœåŠ¡å™¨è¿”å›žçš„ä¿¡æ¯
+		bool ret = true;	// é»˜è®¤æ˜¯æŽ¥æ”¶çš„
+		int32 bytesRead = 0;	// è¯»å–çš„æ€»çš„å­—èŠ‚æ•°
 		ret = mSocket->Recv((uint8*)(mClientBuffer->getDynBuffer()->getBuffer()), (int)mClientBuffer->getDynBuffer()->getCapacity(), bytesRead, ESocketReceiveFlags::None);
 
 		if (!ret)
 		{
-			GLogSys->error("½ÓÊÕÊý¾Ý³ö´í");
+			GLogSys->error("æŽ¥æ”¶æ•°æ®å‡ºé”™");
 		}
 		else
 		{
 			if (bytesRead > 0)
 			{
-				GLogSys->log(UtilStr::Format("½ÓÊÕµ½Êý¾Ý {0}", bytesRead));
-				mClientBuffer->getDynBuffer()->setSize(bytesRead);	// ÉèÖÃ¶ÁÈ¡´óÐ¡
-				mClientBuffer->moveDyn2Raw();             // ½«½ÓÊÕµ½µÄÊý¾Ý·Åµ½Ô­Ê¼Êý¾Ý¶ÓÁÐ
-				mClientBuffer->moveRaw2Msg();             // ½«ÍêÕûµÄÏûÏ¢ÒÆ¶¯µ½ÏûÏ¢»º³åÇø
-				Receive();                  // ¼ÌÐø½ÓÊÕ
+				GLogSys->log(UtilStr::Format("æŽ¥æ”¶åˆ°æ•°æ® {0}", bytesRead));
+				mClientBuffer->getDynBuffer()->setSize(bytesRead);	// è®¾ç½®è¯»å–å¤§å°
+				mClientBuffer->moveDyn2Raw();             // å°†æŽ¥æ”¶åˆ°çš„æ•°æ®æ”¾åˆ°åŽŸå§‹æ•°æ®é˜Ÿåˆ—
+				mClientBuffer->moveRaw2Msg();             // å°†å®Œæ•´çš„æ¶ˆæ¯ç§»åŠ¨åˆ°æ¶ˆæ¯ç¼“å†²åŒº
+				Receive();                  // ç»§ç»­æŽ¥æ”¶
 			}
 		}
 	}
 }
 
-// ¼ì²é²¢ÇÒ¸üÐÂÁ¬½Ó×´Ì¬
+// æ£€æŸ¥å¹¶ä¸”æ›´æ–°è¿žæŽ¥çŠ¶æ€
 bool UENetClient::checkAndUpdateConnect()
 {
-	if (mSocket != nullptr && mSocket->GetConnectionState() != SCS_Connected)	// Èç¹û²»ÊÇÁ¬½Ó×´Ì¬
+	if (mSocket != nullptr && mSocket->GetConnectionState() != SCS_Connected)	// å¦‚æžœä¸æ˜¯è¿žæŽ¥çŠ¶æ€
 	{
 		//if (mIsConnected)
 		//{
@@ -218,6 +218,6 @@ bool UENetClient::canSendNewData()
 void UENetClient::SetRevBufferSize(int size)
 {
 	int retSize = 0;
-	mSocket->SetSendBufferSize(size, retSize);      // ReceiveBufferSize Ä¬ÈÏ 8096 ×Ö½Ú
+	mSocket->SetSendBufferSize(size, retSize);      // ReceiveBufferSize é»˜è®¤ 8096 å­—èŠ‚
 	mClientBuffer->SetRevBufferSize(size);
 }

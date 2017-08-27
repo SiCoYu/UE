@@ -11,6 +11,11 @@ ClassAssetResItem::ClassAssetResItem()
 	this->mResObj = nullptr;
 }
 
+ClassAssetResItem::~ClassAssetResItem()
+{
+	
+}
+
 void ClassAssetResItem::init(LoadItem* item)
 {
 	Super::init(item);

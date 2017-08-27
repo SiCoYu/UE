@@ -6,6 +6,11 @@ ObjectAssetLoadItem::ObjectAssetLoadItem()
 	this->mResObj = nullptr;
 }
 
+ObjectAssetLoadItem::~ObjectAssetLoadItem()
+{
+	
+}
+
 UClass* ObjectAssetLoadItem::getResObj()
 {
 	return this->mResObj;

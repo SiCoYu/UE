@@ -7,6 +7,11 @@ HttpWebDownloadItem::HttpWebDownloadItem()
 
 }
 
+HttpWebDownloadItem::~HttpWebDownloadItem()
+{
+
+}
+
 void HttpWebDownloadItem::load()
 {
 	Super::load();

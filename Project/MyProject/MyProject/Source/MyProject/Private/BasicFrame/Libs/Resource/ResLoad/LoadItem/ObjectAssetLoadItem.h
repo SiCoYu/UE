@@ -51,6 +51,7 @@ protected:
 
 public:
 	ObjectAssetLoadItem();
+	virtual ~ObjectAssetLoadItem();
 
 public:
 	UClass* getResObj();

@@ -9,6 +9,11 @@ DownloadItem::DownloadItem()
     mAllLoadResEventDispatch = new ResEventDispatch();
 }
 
+DownloadItem::~DownloadItem()
+{
+	
+}
+
 RefCountResLoadResultNotify* DownloadItem::getRefCountResLoadResultNotify()
 {
 	return this->mRefCountResLoadResultNotify;

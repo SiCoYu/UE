@@ -31,7 +31,7 @@ protected:
 	MMutex* mReadMutex;				// ¶Á»¥³â
 	MMutex* mWriteMutex;				// Ð´»¥³â
 
-#if MSG_ENCRIPT
+#ifdef MSG_ENCRIPT
 	CryptContext* mCryptContext;
 #endif
 
@@ -44,7 +44,7 @@ public:
 	ByteBuffer* getSendBuffer();
 	ByteBuffer* getSendData();
 
-#if MSG_ENCRIPT
+#ifdef MSG_ENCRIPT
 	void setCryptKey(byte[] encrypt)
 	void checkDES()
 #endif

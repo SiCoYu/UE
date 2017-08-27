@@ -13,6 +13,6 @@ void AMyPawnBase::BeginPlay()
 
 	GEngineData->setMainActor(this);
 
-	// ¸³Öµ¿ØÖÆ Player £¬Âß¼­¿ªÊ¼ÔËÐÐ
+	// èµ‹å€¼æŽ§åˆ¶ Player ï¼Œé€»è¾‘å¼€å§‹è¿è¡Œ
 	GCtx->beginPlay();
 }

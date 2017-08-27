@@ -189,7 +189,7 @@ void NetMgr::startThread()
 	//m_pRenderingThread = FRunnableThread::Create(mNetThread, TEXT("NetThread"), 0, TPri_Normal, FPlatformAffinity::GetNoAffinityMask());
 	//mNetThread->m_pTaskGraphBoundSyncEvent->Wait();
 
-	// º¯Êý FRunnableThread::Create µÚ¶þ¸ö²ÎÊýÒ»¶¨ÊÇ¿í×Ö½Ú×Ö·û´®£¬Èç¹ûÊÇ¶à×Ö½Ú¾Í»á±àÒë±¨´í
+	// å‡½æ•° FRunnableThread::Create ç¬¬äºŒä¸ªå‚æ•°ä¸€å®šæ˜¯å®½å­—èŠ‚å­—ç¬¦ä¸²ï¼Œå¦‚æžœæ˜¯å¤šå­—èŠ‚å°±ä¼šç¼–è¯‘æŠ¥é”™
 	mNetThread = new UENetThread(this, "NetThread");
 	mNetThread->start();
 	mNetThread->getSyncEventPtr()->Wait();
@@ -209,11 +209,11 @@ void NetMgr::closeSocket(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string key = strStream.str();
-	if (UtilMap::ContainsKey(mId2ClientDic, key))	// Èç¹ûÃ»ÓÐÕâ¸ö NetClient
+	if (UtilMap::ContainsKey(mId2ClientDic, key))	// å¦‚æžœæ²¡æœ‰è¿™ä¸ª NetClient
 	{
-		// ¹Ø±Õ socket Ö®Ç°ÒªµÈ´ýËùÓÐµÄÊý¾Ý¶¼·¢ËÍÍê³É£¬Èç¹û·¢ËÍÒ»Ö±³¬Ê±£¬¿ÉÄÜ¾Í¿¨ÔÚÕâºÜ³¤Ê±¼ä
-		mId2ClientDic[key]->getMsgSendEndEvent()->Reset();        // ÖØÖÃÐÅºÅ
-		mId2ClientDic[key]->getMsgSendEndEvent()->WaitOne();      // ×èÈûµÈ´ýÊý¾ÝÈ«²¿·¢ËÍÍê³É
+		// å…³é—­ socket ä¹‹å‰è¦ç­‰å¾…æ‰€æœ‰çš„æ•°æ®éƒ½å‘é€å®Œæˆï¼Œå¦‚æžœå‘é€ä¸€ç›´è¶…æ—¶ï¼Œå¯èƒ½å°±å¡åœ¨è¿™å¾ˆé•¿æ—¶é—´
+		mId2ClientDic[key]->getMsgSendEndEvent()->Reset();        // é‡ç½®ä¿¡å·
+		mId2ClientDic[key]->getMsgSendEndEvent()->WaitOne();      // é˜»å¡žç­‰å¾…æ•°æ®å…¨éƒ¨å‘é€å®Œæˆ
 
 		mVisitMutex->Lock();
 		{
@@ -278,7 +278,7 @@ void NetMgr::openSocket_Inter(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string ipId = strStream.str();
-	if (!UtilMap::ContainsKey(mId2ClientDic, ipId))	// Èç¹ûÃ»ÓÐÕâ¸ö NetClient
+	if (!UtilMap::ContainsKey(mId2ClientDic, ipId))	// å¦‚æžœæ²¡æœ‰è¿™ä¸ª NetClient
 	{
 		mCurClient = new UENetClient();
 		mId2ClientDic[ipId] = mCurClient;
@@ -307,9 +307,9 @@ void NetMgr::recAndSendMsg_Extern()
 	const std::map<SOCKET, Socket *>& allSockets = this->AllSockets();
 	for (socket_m::iterator it = m_sockets.begin(); it != m_sockets.end(); ++it)
 	{
-		// ´¦Àí½ÓÊÕµ½µÄÊý¾Ý
+		// å¤„ç†æŽ¥æ”¶åˆ°çš„æ•°æ®
 		((NetClient*)(it->second))->getNetClientBuffer()->moveRecvSocket2RecvClient();
-		// ´¦Àí·¢ËÍÊý¾Ý
+		// å¤„ç†å‘é€æ•°æ®
 		((NetClient*)(it->second))->sendMsg();
 	}
 
@@ -349,13 +349,13 @@ void NetMgr::closeCurSocket()
 		strStream << ip << "&" << port;
 		std::string key = strStream.str();
 
-		// ¹Ø±Õ socket Ö®Ç°ÒªµÈ´ýËùÓÐµÄÊý¾Ý¶¼·¢ËÍÍê³É
-		//m_id2SocketDic[key].msgSendEndEvent.Reset();        // ÖØÖÃÐÅºÅ
-		//m_id2SocketDic[key].msgSendEndEvent.WaitOne();      // ×èÈûµÈ´ýÊý¾ÝÈ«²¿·¢ËÍÍê³É
+		// å…³é—­ socket ä¹‹å‰è¦ç­‰å¾…æ‰€æœ‰çš„æ•°æ®éƒ½å‘é€å®Œæˆ
+		//m_id2SocketDic[key].msgSendEndEvent.Reset();        // é‡ç½®ä¿¡å·
+		//m_id2SocketDic[key].msgSendEndEvent.WaitOne();      // é˜»å¡žç­‰å¾…æ•°æ®å…¨éƒ¨å‘é€å®Œæˆ
 
 		if (UtilMap::ContainsKey(mId2ClientDic, key))
 		{
-#if NET_MULTHREAD
+#ifdef NET_MULTHREAD
 			using (MLock mlock = new MLock(mVisitMutex))
 #endif
 			{
@@ -388,7 +388,7 @@ ByteBuffer* NetMgr::getSendBA()
 	return nullptr;
 }
 
-// ×¢ÒâÕâ¸ö½ö½öÊÇ·ÅÈë»º³åÇø³å£¬ÕæÕý·¢ËÍÔÚ×ÓÏß³ÌÖÐ·¢ËÍ
+// æ³¨æ„è¿™ä¸ªä»…ä»…æ˜¯æ”¾å…¥ç¼“å†²åŒºå†²ï¼ŒçœŸæ­£å‘é€åœ¨å­çº¿ç¨‹ä¸­å‘é€
 void NetMgr::send(bool bnet)
 {
 	if (mCurClient != nullptr)
@@ -401,11 +401,11 @@ void NetMgr::send(bool bnet)
 	}
 }
 
-// ¹Ø±Õ App £¬ÐèÒªµÈ´ý×ÓÏß³Ì½áÊø
+// å…³é—­ App ï¼Œéœ€è¦ç­‰å¾…å­çº¿ç¨‹ç»“æŸ
 void NetMgr::quipNet()
 {
-	mNetThread->Shutdown();        // ÉèÖÃÍË³ö±êÖ¾
-	// TODO:ÕâÀï»áå´»ú£¬Ô­À´ÊÇÒòÎª mCurClient Ã»ÓÐ³õÊ¼»¯
+	mNetThread->Shutdown();        // è®¾ç½®é€€å‡ºæ ‡å¿—
+	// TODO:è¿™é‡Œä¼šå®•æœºï¼ŒåŽŸæ¥æ˜¯å› ä¸º mCurClient æ²¡æœ‰åˆå§‹åŒ–
 	closeCurSocket();
 }
 
@@ -413,7 +413,7 @@ void NetMgr::sendAndRecData()
 {
 	MLock mlock(mVisitMutex);
 	{
-		// ´ÓÔ­Ê¼»º³åÇøÈ¡Êý¾Ý£¬È»ºó·Åµ½½âÑ¹ºÍ½âÃÜºóµÄÏûÏ¢»º³åÇøÖÐ
+		// ä»ŽåŽŸå§‹ç¼“å†²åŒºå–æ•°æ®ï¼Œç„¶åŽæ”¾åˆ°è§£åŽ‹å’Œè§£å¯†åŽçš„æ¶ˆæ¯ç¼“å†²åŒºä¸­
 		ClientMapIte _beginIte;
 		ClientMapIte _endIte;
 		_beginIte = mId2ClientDic.begin();
@@ -426,10 +426,10 @@ void NetMgr::sendAndRecData()
 				_beginIte->second->Receive();
 			}
 
-			// ´¦Àí½ÓÊÕµ½µÄÊý¾Ý
+			// å¤„ç†æŽ¥æ”¶åˆ°çš„æ•°æ®
 			//socket.dataBuffer.moveRaw2Msg();
-			// ´¦Àí·¢ËÍÊý¾Ý
-			if (_beginIte->second->canSendNewData())        // Ö»ÓÐÉÏÒ»´Î·¢ËÍµÄÊý¾ÝÈ«²¿·¢ËÍ³öÈ¥ºó£¬²ÅÄÜ¼ÌÐø·¢ËÍÐÂµÄÊý¾Ý
+			// å¤„ç†å‘é€æ•°æ®
+			if (_beginIte->second->canSendNewData())        // åªæœ‰ä¸Šä¸€æ¬¡å‘é€çš„æ•°æ®å…¨éƒ¨å‘é€å‡ºåŽ»åŽï¼Œæ‰èƒ½ç»§ç»­å‘é€æ–°çš„æ•°æ®
 			{
 				_beginIte->second->Send();
 			}
@@ -437,7 +437,7 @@ void NetMgr::sendAndRecData()
 	}
 }
 
-#if MSG_ENCRIPT
+#ifdef MSG_ENCRIPT
 void NetMgr::setCryptKey(byte[] encrypt)
 {
 	mCurClient.dataBuffer.setCryptKey(encrypt);

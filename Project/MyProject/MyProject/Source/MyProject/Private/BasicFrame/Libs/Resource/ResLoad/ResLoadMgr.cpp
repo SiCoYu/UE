@@ -125,11 +125,12 @@ void ResLoadMgr::loadLevel(LoadParam* param)
 {
 	param->resolveLevel();
 
-#if PKG_RES_LOAD
+// warning C4668: 'PKG_RES_LOAD' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+#ifdef PKG_RES_LOAD
 	param.mResPackType = ResPackType.ePakLevelType;
 	param.resolvePath();
 	load(param);
-#elif UnPKG_RES_LOAD
+#elif defined UnPKG_RES_LOAD
 	param.mResPackType = ResPackType.eUnPakLevelType;
 	param.mResLoadType = ResLoadType.eStreamingAssets;
 	load(param);
@@ -145,7 +146,7 @@ void ResLoadMgr::loadResources(LoadParam* param)
 {
 	param->resolvePath();
 
-#if PKG_RES_LOAD
+#ifdef PKG_RES_LOAD
 	if (param.mPath.IndexOf(PakSys.PAK_EXT) != -1)     // 如果加载的是打包文件
 	{
 		param.mResPackType = ResPackType.ePakType;
@@ -155,7 +156,7 @@ void ResLoadMgr::loadResources(LoadParam* param)
 		param.mResPackType = ResPackType.eUnPakType;
 	}
 	load(param);
-#elif UnPKG_RES_LOAD
+#elif defined UnPKG_RES_LOAD
 	// 判断资源所在的目录，是在 StreamingAssets 目录还是在 persistentData 目录下，目前由于没有完成，只能从 StreamingAssets 目录下加载
 	param.mResPackType = ResPackType.eUnPakType;
 	param.mResLoadType = ResLoadType.eStreamingAssets;

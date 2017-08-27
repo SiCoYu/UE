@@ -6,6 +6,16 @@
 #include "UtilStr.h"
 #include "NetCmdHandleBase.h"
 
+NetDispHandle::NetDispHandle()
+{
+	
+}
+
+NetDispHandle::~NetDispHandle()
+{
+	
+}
+
 void NetDispHandle::handleMsg(ByteBuffer* msg)
 {
     uint8 byCmd = 0;

@@ -18,6 +18,7 @@ protected:
 
 public:
 	ClassAssetLoadItem();
+	virtual ~ClassAssetLoadItem();
 
 protected:
 	void syncLoad();

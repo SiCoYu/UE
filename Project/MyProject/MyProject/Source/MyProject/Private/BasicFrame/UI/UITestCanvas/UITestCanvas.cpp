@@ -40,10 +40,10 @@ void UUITestCanvas::loadCanvas()
 	UButton* pButton = (UButton*)(mGuiWin->mUiRoot->GetWidgetFromName("Button_32"));
 	UButtonSlot* pBtnSlot = Cast<UButtonSlot>(pButton->GetContentSlot());
 
-	// ²âÊÔÒÆ¶¯Î»ÖÃ
+	// æµ‹è¯•ç§»åŠ¨ä½ç½®
 	//testMove(pButton);
 
-	// ²âÊÔÒþ²Ø¿Ø¼þ
+	// æµ‹è¯•éšè—æŽ§ä»¶
 	//testHide(pButton);
 }
 
@@ -82,8 +82,8 @@ void UUITestCanvas::loadNamedSlot()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestNamedSlot.UITestNamedSlot_C"));
 	//loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
-	mGuiWin->mUiRoot->AddToViewport();	// Ò»¶¨ÒªÏÈ AddToViewport £¬È»ºóÔÙ»ñÈ¡¿Ø¼þ£¬·ñÔò GetWidgetFromName µÄÊ±ºò»á±¨´í
-	// Ä¿Ç°ÒÑ¾­ÓÐµã NamedSlot ÊÇ "NamedSlot_28"
+	mGuiWin->mUiRoot->AddToViewport();	// ä¸€å®šè¦å…ˆ AddToViewport ï¼Œç„¶åŽå†èŽ·å–æŽ§ä»¶ï¼Œå¦åˆ™ GetWidgetFromName çš„æ—¶å€™ä¼šæŠ¥é”™
+	// ç›®å‰å·²ç»æœ‰ç‚¹ NamedSlot æ˜¯ "NamedSlot_28"
 	mGuiWin->mUiRoot->GetSlotNames(m_namedSlotArr);
 	m_namedSlot = (UNamedSlot*)(mGuiWin->mUiRoot->GetWidgetFromName("NamedSlot_28"));
 	//UWidget* widget = m_umgWidget->GetWidgetFromName("Button_16");
@@ -93,7 +93,7 @@ void UUITestCanvas::loadOverlay()
 {
 	loadUWidget(TEXT("/Game/UMG/UITestOveray.UITestOveray_C"));
 	mGuiWin->mUiRoot->AddToViewport();
-	// Overlay_17 ÒÑ¾­ÓÐµÄ Overlay 
+	// Overlay_17 å·²ç»æœ‰çš„ Overlay 
 	m_overlay = (UOverlay*)(mGuiWin->mUiRoot->GetWidgetFromName("Overlay_17"));
 	UWidget* widget = mGuiWin->mUiRoot->GetWidgetFromName("Button_32");
 }
@@ -106,13 +106,13 @@ void UUITestCanvas::unloadCanvas()
 
 void UUITestCanvas::testMove(UWidget* ptr)
 {
-	UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(ptr->Slot);	// ÖÕÓÚÕÒµ½ UButton µÄ UCanvasPanelSlot ÔªËØÁË
+	UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(ptr->Slot);	// ç»ˆäºŽæ‰¾åˆ° UButton çš„ UCanvasPanelSlot å…ƒç´ äº†
 	//UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(pButton->GetContentSlot());
 	pPanelSlot->SetPosition(FVector2D(700, 600));
 
-	// »ñÈ¡ CanvasPanel 
+	// èŽ·å– CanvasPanel 
 	//UCanvasPanel* pCanvasPanel = (UCanvasPanel*)(m_umgWidget->GetWidgetFromName("UCanvasPanel"));
-	// UCanvasPanel ÊÇÃ»ÓÐ UPanelSlot µÄ£¬ÒòÎª UCanvasPanel ¼Ì³Ð UPanelWidget£¬¶ø UButton ¼Ì³Ð UContentWidget £¬¶ø GetContentSlot ÊÇÔÚ UContentWidget ÖÐµÄ
+	// UCanvasPanel æ˜¯æ²¡æœ‰ UPanelSlot çš„ï¼Œå› ä¸º UCanvasPanel ç»§æ‰¿ UPanelWidgetï¼Œè€Œ UButton ç»§æ‰¿ UContentWidget ï¼Œè€Œ GetContentSlot æ˜¯åœ¨ UContentWidget ä¸­çš„
 	//UCanvasPanelSlot* pPanelSlot = Cast<UCanvasPanelSlot>(pCanvasPanel->GetContentSlot());
 }
 

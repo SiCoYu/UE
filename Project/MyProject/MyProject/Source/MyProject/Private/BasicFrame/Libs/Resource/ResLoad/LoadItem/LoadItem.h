@@ -25,6 +25,7 @@ protected:
 
 public:
 	LoadItem();
+	virtual ~LoadItem();
 
 	ResPackType getResPackType();
 	void setResPackType(ResPackType value);

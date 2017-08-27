@@ -7,6 +7,11 @@ ObjectAssetResItem::ObjectAssetResItem()
 
 }
 
+ObjectAssetResItem::~ObjectAssetResItem()
+{
+	
+}
+
 void ObjectAssetResItem::init(LoadItem* item)
 {
 	Super::init(item);

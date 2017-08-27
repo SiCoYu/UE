@@ -14,6 +14,9 @@ public:
     //LuaCSBridgeNetDispHandle m_luaCSBridgeNetDispHandle;     // Lua 网络事件处理器
 
 public:
+	NetDispHandle();
+	virtual ~NetDispHandle();
+
 	virtual void handleMsg(ByteBuffer* msg);
 };
 

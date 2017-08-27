@@ -7,6 +7,16 @@
 #include "UtilStr.h"
 #include "MsgRouteHandleBase.h"
 
+MsgRouteDispHandle::MsgRouteDispHandle()
+{
+	
+}
+
+MsgRouteDispHandle::~MsgRouteDispHandle()
+{
+	
+}
+
 void MsgRouteDispHandle::handleMsg(MsgRouteBase* msg)
 {
 	std::string textStr = "";

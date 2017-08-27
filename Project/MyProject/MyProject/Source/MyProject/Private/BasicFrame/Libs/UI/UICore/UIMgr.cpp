@@ -56,7 +56,7 @@ void UIMgr::createCanvas()
 	this->mCanvasList[(int)eCanvas_100]->setGoName(NotDestroyPath::ND_CV_UICanvas_100);
 }
 
-// ¹ØÁªÃ¿Ò»²ãµÄ¶ÔÏó
+// å…³è”æ¯ä¸€å±‚çš„å¯¹è±¡
 void UIMgr::findCanvasGO()
 {
 	int idx = 0;
@@ -66,7 +66,7 @@ void UIMgr::findCanvasGO()
 	}
 }
 
-// ÏÔÊ¾Ò»¸ö UI
+// æ˜¾ç¤ºä¸€ä¸ª UI
 void UIMgr::showForm(UIFormId formId)
 {
 	if (hasForm(formId))
@@ -97,7 +97,7 @@ void UIMgr::showFormInternal(UIFormId formId)
 	}
 }
 
-// Òş²ØÒ»¸ö UI
+// éšè—ä¸€ä¸ª UI
 void UIMgr::hideFormInternal(UIFormId formId)
 {
 	UForm* win = getForm<UForm>(formId);
@@ -111,7 +111,7 @@ void UIMgr::hideFormInternal(UIFormId formId)
 	}
 }
 
-// ÍË³öÒ»¸ö UI
+// é€€å‡ºä¸€ä¸ª UI
 void UIMgr::exitForm(UIFormId formId, bool bForce)
 {
 	UForm* win = getForm<UForm>(formId);
@@ -135,20 +135,20 @@ void UIMgr::exitFormInternal(UIFormId formId)
 
 	if (win != nullptr)
 	{
-		// ÇåÀíÁĞ±í
+		// æ¸…ç†åˆ—è¡¨
 		UILayer* layer = win->getUiLayer();
 		UtilMap::Remove(layer->getWinDic(), formId);
-		// ÊÍ·Å½çÃæ×ÊÔ´
+		// é‡Šæ”¾ç•Œé¢èµ„æº
 		win->onExit();
 		EngineApi::Destroy(win->mGuiWin->mUiRoot);
 		win->mGuiWin->mUiRoot = nullptr;
-		// ÊÍ·Å¼ÓÔØµÄ×ÊÔ´
+		// é‡Šæ”¾åŠ è½½çš„èµ„æº
 		//string path = mUiAttrSystem.getPath(formId);
 		//if (path != null)
 		//{
 		//    Ctx.m_instance.mResLoadMgr.unload(path);
 		//}
-		EngineApi::UnloadUnusedAssets();       // Òì²½Ğ¶ÔØ¹²ÓÃ×ÊÔ´
+		EngineApi::UnloadUnusedAssets();       // å¼‚æ­¥å¸è½½å…±ç”¨èµ„æº
 		UtilMap::Remove(mId2FormDic, formId);
 		win = nullptr;
 	}
@@ -175,7 +175,7 @@ UILayer* UIMgr::getLayer(UICanvasId canvasID, UILayerId layerID)
 	return layer;
 }
 
-// ÄÚ²¿½Ó¿Ú
+// å†…éƒ¨æ¥å£
 void UIMgr::addFormNoReady(UForm* form)
 {
 	//UILayer* layer = getLayer(mUiAttrSystem->mId2AttrDic[form->getId()]->mCanvasId, mUiAttrSystem->mId2AttrDic[form->getId()]->mLayerId);
@@ -183,7 +183,7 @@ void UIMgr::addFormNoReady(UForm* form)
 	//layer->addForm(form);
 
 	this->mId2FormDic[form->getId()] = form;
-	form->init();        // ³õÊ¼»¯
+	form->init();        // åˆå§‹åŒ–
 }
 
 bool UIMgr::hasForm(UIFormId formId)
@@ -191,11 +191,11 @@ bool UIMgr::hasForm(UIFormId formId)
 	return UtilMap::ContainsKey(mId2FormDic, formId);
 }
 
-// ¼ÓÔØ´°¿Ú¿Ø¼ş×ÊÔ´£¬´°¿Ú×ÊÔ´¶¼ÊÇ´ÓÎÄ¼ş¼ÓÔØ
+// åŠ è½½çª—å£æ§ä»¶èµ„æºï¼Œçª—å£èµ„æºéƒ½æ˜¯ä»æ–‡ä»¶åŠ è½½
 void UIMgr::loadWidgetRes(UIFormId formId)
 {
 	UIAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
-	if (!UtilMap::ContainsKey(this->mId2WidgetLoadingItemDic, formId))                       // Èç¹ûÊ²Ã´¶¼Ã»ÓĞ´´½¨£¬µÚÒ»´Î¼ÓÔØ
+	if (!UtilMap::ContainsKey(this->mId2WidgetLoadingItemDic, formId))                       // å¦‚æœä»€ä¹ˆéƒ½æ²¡æœ‰åˆ›å»ºï¼Œç¬¬ä¸€æ¬¡åŠ è½½
 	{
 		this->mId2WidgetLoadingItemDic[formId] = new UILoadingItem();
 		this->mId2WidgetLoadingItemDic[formId]->mId = formId;
@@ -212,7 +212,7 @@ void UIMgr::loadWidgetRes(UIFormId formId)
 	}
 }
 
-// ´Ó±¾µØ´ÅÅÌ»òÕßÍøÂç¼ÓÔØ×ÊÔ´
+// ä»æœ¬åœ°ç£ç›˜æˆ–è€…ç½‘ç»œåŠ è½½èµ„æº
 void UIMgr::loadFromFile(std::string resPath, EventDispatchDelegate onLoadEventHandle)
 {
 	// TODO:
@@ -228,7 +228,7 @@ void UIMgr::loadFromFile(std::string resPath, EventDispatchDelegate onLoadEventH
 	GClassAssetInsMgr->getAndAsyncLoadRes(resPath, onLoadEventHandle);
 }
 
-// ´úÂë×ÊÔ´¼ÓÔØ´¦Àí
+// ä»£ç èµ„æºåŠ è½½å¤„ç†
 void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 {
 	ClassAssetInsRes* res = (ClassAssetInsRes*)dispObj;
@@ -239,12 +239,12 @@ void UIMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormId formId = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // »ñÈ¡ FormId
+		UIFormId formId = mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // è·å– FormId
 		UtilMap::Remove(mId2CodeLoadingItemDic, formId);
 	}
 }
 
-// ´°¿Ú¿Ø¼ş×ÊÔ´¼ÓÔØ´¦Àí
+// çª—å£æ§ä»¶èµ„æºåŠ è½½å¤„ç†
 void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 {
 	ClassAssetInsRes* res = (ClassAssetInsRes*)dispObj;
@@ -255,16 +255,16 @@ void UIMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathComUI);  // »ñÈ¡ FormId
+		UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathComUI);  // è·å– FormId
 		UtilMap::Remove(mId2WidgetLoadingItemDic, formId);
-		GLogSys->log("UIFormId =  £¬ Failed Prefab");
+		GLogSys->log("UIFormId =  ï¼Œ Failed Prefab");
 	}
 }
 
-// ´úÂë×ÊÔ´¼ÓÔØÍê³É´¦Àí
+// ä»£ç èµ„æºåŠ è½½å®Œæˆå¤„ç†
 void UIMgr::onCodeloadedByRes(ClassAssetInsRes* res)
 {
-	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // »ñÈ¡ FormId
+	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // è·å– FormId
 	UtilMap::Remove(this->mId2CodeLoadingItemDic, formId);
 	this->addFormNoReady(this->mId2FormDic[formId]);
 	this->onCodeLoadedByForm(this->mId2FormDic[formId]);
@@ -274,15 +274,15 @@ void UIMgr::onCodeLoadedByForm(UForm* form)
 {
 	//if (null != Ctx.m_instance.m_cbUIEvent)
 	//{
-	//	Ctx.m_instance.m_cbUIEvent.onCodeFormLoaded(form);  // ×ÊÔ´¼ÓÔØÍê³É
+	//	Ctx.m_instance.m_cbUIEvent.onCodeFormLoaded(form);  // èµ„æºåŠ è½½å®Œæˆ
 	//}
 }
 
-// ´°¿Ú¿Ø¼ş×ÊÔ´¼ÓÔØÍê³É´¦Àí
+// çª—å£æ§ä»¶èµ„æºåŠ è½½å®Œæˆå¤„ç†
 void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 {
 	std::string path = res->GetPath();
-	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // »ñÈ¡ FormId
+	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // è·å– FormId
 	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
 
 	UIAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
@@ -320,12 +320,12 @@ void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//	mId2FormDic[formId].luaCSBridgeForm.init();
 	//}
 
-	// ÉèÖÃÎ»ÖÃ
+	// è®¾ç½®ä½ç½®
 	//EngineApi::SetParent(mId2FormDic[formId]->mGuiWin->mUiRoot.transform, mCanvasList[(int)(attrItem->mCanvasId)]->getLayerList()[(int)(attrItem->mLayerId)]->getLayerTrans(), false);
 
-	// ÏÈÉèÖÃÔÙÉèÖÃËõ·Å£¬·ñÔòÎŞĞ§
-	//mId2FormDic[formId]->mGuiWin->mUiRoot.transform.SetAsLastSibling();               // ·ÅÔÚ×îºó
-	EngineApi::SetActive(mId2FormDic[formId]->mGuiWin->mUiRoot, false);      // ³ö·¢ onShow ÊÂ¼ş
+	// å…ˆè®¾ç½®å†è®¾ç½®ç¼©æ”¾ï¼Œå¦åˆ™æ— æ•ˆ
+	//mId2FormDic[formId]->mGuiWin->mUiRoot.transform.SetAsLastSibling();               // æ”¾åœ¨æœ€å
+	EngineApi::SetActive(mId2FormDic[formId]->mGuiWin->mUiRoot, false);      // å‡ºå‘ onShow äº‹ä»¶
 	//if (mId2FormDic[formId].hideOnCreate)
 	//{
 	//    UtilApi.SetActive(mId2FormDic[formId].mGuiWin.mUiRoot, false);
@@ -333,18 +333,18 @@ void UIMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//if (!this->mId2FormDic[formId]->getHideOnCreate())
 	if(this->mId2FormDic[formId]->isVisible())
 	{
-		this->showFormInternal(formId);   // Èç¹û onShow ÖĞµ÷ÓÃ exit º¯Êı£¬¾Í»áÇåµô mId2FormDic ÖĞµÄÄÚÈİ¡£Èç¹ûÉèÖÃÁË exitMode = false£¬¾Í²»»áÇåµô mId2FormDic £¬¾Í²»»áÓĞÎÊÌâ
+		this->showFormInternal(formId);   // å¦‚æœ onShow ä¸­è°ƒç”¨ exit å‡½æ•°ï¼Œå°±ä¼šæ¸…æ‰ mId2FormDic ä¸­çš„å†…å®¹ã€‚å¦‚æœè®¾ç½®äº† exitMode = falseï¼Œå°±ä¸ä¼šæ¸…æ‰ mId2FormDic ï¼Œå°±ä¸ä¼šæœ‰é—®é¢˜
 	}
 
 	//if (null != Ctx.m_instance.m_cbUIEvent)
 	//{
-	//	if (mId2FormDic.ContainsKey(formId))      // Èç¹û onShow ÖĞµ÷ÓÃ exit º¯Êı£¬²¢ÇÒÃ»ÓĞÉèÖÃ exitMode = false £¬¾Í»áÇå³ı mId2FormDic£¬ Õâ¸öÊ±ºòÔÙµ÷ÓÃÕâ¸öº¯Êı£¬¾Í»áÓĞÎÊÌâ£¬ÊÇ²»ÊÇÌí¼ÓÑÓ³ÙĞ¶ÔØ
+	//	if (mId2FormDic.ContainsKey(formId))      // å¦‚æœ onShow ä¸­è°ƒç”¨ exit å‡½æ•°ï¼Œå¹¶ä¸”æ²¡æœ‰è®¾ç½® exitMode = false ï¼Œå°±ä¼šæ¸…é™¤ mId2FormDicï¼Œ è¿™ä¸ªæ—¶å€™å†è°ƒç”¨è¿™ä¸ªå‡½æ•°ï¼Œå°±ä¼šæœ‰é—®é¢˜ï¼Œæ˜¯ä¸æ˜¯æ·»åŠ å»¶è¿Ÿå¸è½½
 	//	{
-	//		Ctx.m_instance.m_cbUIEvent.onWidgetLoaded(mId2FormDic[formId]);  // ×ÊÔ´¼ÓÔØÍê³É
+	//		Ctx.m_instance.m_cbUIEvent.onWidgetLoaded(mId2FormDic[formId]);  // èµ„æºåŠ è½½å®Œæˆ
 	//	}
 	//}
 
-	// Ğ¶ÔØ×ÊÔ´
+	// å¸è½½èµ„æº
 	//GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 }
 
@@ -353,25 +353,25 @@ void UIMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 	AuxMUIClassLoader* res = (AuxMUIClassLoader*)dispObj;
 
 	std::string path = res->getLogicPath();
-	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // »ñÈ¡ FormId
+	UIFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // è·å– FormId
 	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
 	UIAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
 
 	UUMGWidget* WidgetObject = res->getWidgetObject();
 	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
 	this->mId2FormDic[formId]->mGuiWin->mUiRoot = WidgetObject;
-	EngineApi::SetActive(mId2FormDic[formId]->mGuiWin->mUiRoot, false);      // ³ö·¢ onShow ÊÂ¼ş
+	EngineApi::SetActive(mId2FormDic[formId]->mGuiWin->mUiRoot, false);      // å‡ºå‘ onShow äº‹ä»¶
 
 	if (this->mId2FormDic[formId]->isVisible())
 	{
-		this->showFormInternal(formId);   // Èç¹û onShow ÖĞµ÷ÓÃ exit º¯Êı£¬¾Í»áÇåµô mId2FormDic ÖĞµÄÄÚÈİ¡£Èç¹ûÉèÖÃÁË exitMode = false£¬¾Í²»»áÇåµô mId2FormDic £¬¾Í²»»áÓĞÎÊÌâ
+		this->showFormInternal(formId);   // å¦‚æœ onShow ä¸­è°ƒç”¨ exit å‡½æ•°ï¼Œå°±ä¼šæ¸…æ‰ mId2FormDic ä¸­çš„å†…å®¹ã€‚å¦‚æœè®¾ç½®äº† exitMode = falseï¼Œå°±ä¸ä¼šæ¸…æ‰ mId2FormDic ï¼Œå°±ä¸ä¼šæœ‰é—®é¢˜
 	}
 
-	// Ğ¶ÔØ×ÊÔ´
+	// å¸è½½èµ„æº
 	//GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
 }
 
-// ´óĞ¡·¢Éú±ä»¯ºó£¬µ÷ÓÃ´Ëº¯Êı
+// å¤§å°å‘ç”Ÿå˜åŒ–åï¼Œè°ƒç”¨æ­¤å‡½æ•°
 void UIMgr::onResize(int viewWidth, int viewHeight)
 {
 	int canvasIdx = 0;
@@ -385,7 +385,7 @@ void UIMgr::onResize(int viewWidth, int viewHeight)
 	}
 }
 
-// ¹Ø±ÕËùÓĞÏÔÊ¾µÄ´°¿Ú
+// å…³é—­æ‰€æœ‰æ˜¾ç¤ºçš„çª—å£
 void UIMgr::exitAllWin()
 {
 	for(std::pair<UIFormId, UForm*> keyValue : this->mId2FormDic)
@@ -405,7 +405,7 @@ void UIMgr::findSceneUIRootGo()
 	//mSceneUIRootGo = UtilApi.GoFindChildByPObjAndName("SceneUIRootGo");
 }
 
-// ¸ù¾İ³¡¾°ÀàĞÍĞ¶ÔØ UI£¬Ç¿ÖÆĞ¶ÔØ
+// æ ¹æ®åœºæ™¯ç±»å‹å¸è½½ UIï¼Œå¼ºåˆ¶å¸è½½
 //void UIMgr::unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe)
 //{
 //	foreach(UIFormId id in mId2FormDic.Keys)

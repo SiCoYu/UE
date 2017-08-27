@@ -14,7 +14,7 @@ void UMyGameEngineBase::Init(IEngineLoop* InEngineLoop)
 	// creating the renderer.
 	Super::Init(InEngineLoop);
 
-	// ×îÔç³õÊ¼»¯µÄµØ·½
+	// æœ€æ—©åˆå§‹åŒ–çš„åœ°æ–¹
 	GEngineData->setMyEngine(this);
 }
 

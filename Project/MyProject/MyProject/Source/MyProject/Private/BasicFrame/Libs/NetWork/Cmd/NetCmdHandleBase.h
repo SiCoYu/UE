@@ -17,6 +17,9 @@ public:
 	std::map<uint8, HandleDelegate*> mId2HandleDic;
 
 public:
+	NetCmdHandleBase();
+	virtual ~NetCmdHandleBase();
+
 	virtual void handleMsg(ByteBuffer* bu, uint8 byCmd, uint8 byParam);
 };
 

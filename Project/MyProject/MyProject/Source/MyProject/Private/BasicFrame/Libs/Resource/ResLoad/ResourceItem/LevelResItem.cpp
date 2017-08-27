@@ -4,6 +4,16 @@
 #include "RefCountResLoadResultNotify.h"
 #include "ResEventDispatch.h"
 
+LevelResItem::LevelResItem()
+{
+	
+}
+	
+LevelResItem::~LevelResItem()
+{
+	
+}
+
 void LevelResItem::init(LoadItem* item)
 {
 	ResItem::init(item);

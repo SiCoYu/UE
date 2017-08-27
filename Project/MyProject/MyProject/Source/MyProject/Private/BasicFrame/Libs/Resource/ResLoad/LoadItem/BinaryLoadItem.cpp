@@ -8,6 +8,16 @@
 //
 //}
 
+UBinaryLoadItem::UBinaryLoadItem()
+{
+	
+}
+
+UBinaryLoadItem::~UBinaryLoadItem()
+{
+	
+}
+
 void UBinaryLoadItem::loadFile(const FString& Filename)
 {
 	// if the file has some data in it, read it in

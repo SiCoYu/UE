@@ -39,6 +39,7 @@ protected:
 
 public:
 	DownloadItem();
+	virtual ~DownloadItem();
 
 	RefCountResLoadResultNotify* getRefCountResLoadResultNotify();
 	void setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value);

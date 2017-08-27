@@ -14,6 +14,9 @@ public:
     int mColor;
 	std::string mObjResName;
 
+	TableObjectItemBody();
+	virtual ~TableObjectItemBody();
+
 	virtual void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
 };
 

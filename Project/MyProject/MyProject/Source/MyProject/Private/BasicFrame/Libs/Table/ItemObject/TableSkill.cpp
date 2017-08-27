@@ -3,6 +3,16 @@
 #include "ByteBuffer.h"
 #include "UtilTable.h"
 
+TableSkillItemBody::TableSkillItemBody()
+{
+	
+}
+
+TableSkillItemBody::~TableSkillItemBody()
+{
+	
+}
+
 void TableSkillItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
 {
     bytes->setPos(offset);

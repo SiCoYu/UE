@@ -27,6 +27,8 @@ protected :
 
 public:
 	ResItem();
+	virtual ~ResItem();
+
 	ResPackType getResPackType();
 	void setResPackType(ResPackType value);
 	std::string getPath();

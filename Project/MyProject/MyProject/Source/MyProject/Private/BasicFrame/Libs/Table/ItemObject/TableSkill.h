@@ -18,6 +18,9 @@ public:
 	float mEffectMoveTime;      // 移动
 	int32 mIsNeedMove;             // 是否弹道特效, 0 不需要 1 需要
 
+	TableSkillItemBody();
+	virtual ~TableSkillItemBody();
+
 	virtual void TableSkillItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
 };
 

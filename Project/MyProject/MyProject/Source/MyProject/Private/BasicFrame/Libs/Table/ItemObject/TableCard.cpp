@@ -4,6 +4,16 @@
 #include "ByteBuffer.h"
 #include "UtilTable.h"
 
+TableCardItemBody::TableCardItemBody()
+{
+	
+}
+
+TableCardItemBody::~TableCardItemBody()
+{
+	
+}
+
 void TableCardItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
 {
     bytes->setPos(offset);

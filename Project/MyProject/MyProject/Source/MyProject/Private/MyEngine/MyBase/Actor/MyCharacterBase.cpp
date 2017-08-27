@@ -135,19 +135,19 @@ void AMyCharacterBase::BeginPlay()
 
 	GEngineData->setMainActor(this);
 
-	// ¸÷ÖÖ³õÊ¼»¯
+	// å„ç§åˆå§‹åŒ–
 	//EngineApi::showCursor();
 
-	// ¸÷ÖÖ UI ²âÊÔ
+	// å„ç§ UI æµ‹è¯•
 	//TestUI();
 
-	// ¸³Öµ¿ØÖÆ Player £¬Âß¼­¿ªÊ¼ÔËÐÐ
+	// èµ‹å€¼æŽ§åˆ¶ Player ï¼Œé€»è¾‘å¼€å§‹è¿è¡Œ
 	GCtx->beginPlay();
 }
 
 void AMyCharacterBase::TestUI()
 {
-	// Test ¼ÓÔØ UIPack
+	// Test åŠ è½½ UIPack
 	//GUiMgr->loadForm<UUIPack>(eUIPack);
 	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 }

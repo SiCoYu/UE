@@ -60,7 +60,7 @@ FString UtilPath::ConvertToSandboxPath(FString FullFilename)
 {
 	//const FString ThePath = FPaths::ConvertToSandboxPath(FPaths::GameLogDir());
 	//IFileManager& FileManager = IFileManager::Get();
-	FString DiskFilename = GSandboxPlatformFile->ConvertToSandboxPath(*FullFilename);
+	FString DiskFilename = GFileSysSandboxPlatformFile->ConvertToSandboxPath(*FullFilename);
 	return DiskFilename;
 }
 

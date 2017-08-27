@@ -7,7 +7,7 @@ void TestClassBind::bind(lua_State* L)
 {
 	luabridge::getGlobalNamespace(L)
 		.beginClass<TestClass>("TestClass")
-		//.addConstructor<void(*)(void)>()  // Èç¹ûÓĞ¶à¸ö¹¹Ôìº¯Êı,ÔòÖ»ÄÜµ¼³öÒ»¸ö
+		//.addConstructor<void(*)(void)>()  // å¦‚æœæœ‰å¤šä¸ªæ„é€ å‡½æ•°,åˆ™åªèƒ½å¯¼å‡ºä¸€ä¸ª
 		.addConstructor<void(*)(const std::string&)>()
 		.addFunction("getLength", &TestClass::Length)
 		.addFunction("startWith", &TestClass::StartWith)

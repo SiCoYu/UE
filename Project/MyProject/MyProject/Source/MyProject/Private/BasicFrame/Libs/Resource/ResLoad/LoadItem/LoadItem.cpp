@@ -9,6 +9,11 @@ LoadItem::LoadItem()
 	this->mNonRefCountResLoadResultNotify = new NonRefCountResLoadResultNotify();
 }
 
+LoadItem::~LoadItem()
+{
+	
+}
+
 ResPackType LoadItem::getResPackType()
 {
 	return this->mResPackType;

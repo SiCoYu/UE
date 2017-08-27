@@ -20,12 +20,12 @@ AMyTPGameMode::AMyTPGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// set default pawn class to our Blueprinted character
-	// ×îĞÂµÄ ThirdPerson ×ÊÔ´´æ·ÅÎÄ¼ş¼ĞÓÖ¸ÄÁË
-	// ThirdPerson Cpp ×ÊÔ´¼ÓÔØ
+	// æœ€æ–°çš„ ThirdPerson èµ„æºå­˜æ”¾æ–‡ä»¶å¤¹åˆæ”¹äº†
+	// ThirdPerson Cpp èµ„æºåŠ è½½
 	// static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter"));
 
-	// Í¨¹ı BP ×ÊÔ´ÉèÖÃ
-	// ThirdPerson Blueprint ×ÊÔ´¼ÓÔØ
+	// é€šè¿‡ BP èµ„æºè®¾ç½®
+	// ThirdPerson Blueprint èµ„æºåŠ è½½
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("Blueprint'/Game/MyAsset/MyTP/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter_C'"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
@@ -73,16 +73,16 @@ UClass* AMyTPGameMode::GetDefaultPawnClassForController(AController* InControlle
 void AMyTPGameMode::StartPlay()
 {
 	Super::StartPlay();
-	// ¸÷ÖÖ³õÊ¼»¯
+	// å„ç§åˆå§‹åŒ–
 	//EngineApi::showCursor();
 
-	// ¸÷ÖÖ UI ²âÊÔ
+	// å„ç§ UI æµ‹è¯•
 	//TestUI();
 }
 
 void AMyTPGameMode::TestUI()
 {
-	// Test ¼ÓÔØ UIPack
+	// Test åŠ è½½ UIPack
 	//GUiMgr->loadForm<UUIPack>(eUIPack);
 	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 }

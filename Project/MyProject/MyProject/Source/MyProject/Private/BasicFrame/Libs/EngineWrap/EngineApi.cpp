@@ -176,7 +176,7 @@ bool EngineApi::FileExists(const FString& InPath)
 
 bool EngineApi::PackageExists(const FString& InPackageFilename)
 {
-	//FString fileName = FPackageName::LongPackageNameToFilename(InPackageFilename);	// ×ª»»°üµÄÃû×Öµ½Ïà¶Ôµ±Ç°¹¤×÷Ä¿Â¼µÄÄ¿Â¼
+	//FString fileName = FPackageName::LongPackageNameToFilename(InPackageFilename);	// è½¬æ¢åŒ…çš„åå­—åˆ°ç›¸å¯¹å½“å‰å·¥ä½œç›®å½•çš„ç›®å½•
 	//FString OutFilename;
 	//return FPackageName::FindPackageFileWithoutExtension(fileName, OutFilename);
 	return FPackageName::DoesPackageExist(InPackageFilename);
@@ -351,7 +351,7 @@ void EngineApi::ClientMessage(FString str)
 // FText::Format
 void EngineApi::Format()
 {
-	// {key} Í¨¹ı key ²éÕÒÖµ
+	// {key} é€šè¿‡ key æŸ¥æ‰¾å€¼
 	//Set Formatted FTEXT from variable data.
 	FFormatNamedArguments Args;
 	//Args.Add("DayCount", SaveDetails.DayCount);    	//int32 
@@ -371,7 +371,7 @@ void EngineApi::Format()
 
 	const FText ViewportName = FText::Format(NSLOCTEXT("UnrealEd", "PlayInEditor_RHI_F", "{GameName} Game Preview {NetMode} ({PlatformBits}-bit/{RHIName})"), Args);
 
-	// {key} Í¨¹ı key ²éÕÒÖµ
+	// {key} é€šè¿‡ key æŸ¥æ‰¾å€¼
 	FFormatOrderedArguments orderArgs;
 	orderArgs.Empty();
 	//Args.Add(SaveDetails.DayCount);    	//int32 

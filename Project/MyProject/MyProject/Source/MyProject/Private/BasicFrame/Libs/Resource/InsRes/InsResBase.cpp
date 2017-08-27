@@ -5,7 +5,7 @@
 
 InsResBase::InsResBase()
 {
-#if PKG_RES_LOAD
+#ifdef PKG_RES_LOAD
 	this->mIsOrigResNeedImmeUnload = false;
 #else
 	this->mIsOrigResNeedImmeUnload = true;

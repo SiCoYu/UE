@@ -16,6 +16,7 @@ protected:
 
 public:
 	ClassAssetResItem();
+	virtual ~ClassAssetResItem();
 
 public:
 	void setPrefabName(std::string prefabName);

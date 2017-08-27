@@ -13,6 +13,7 @@ class ObjectAssetResItem : public ResItem
 
 public:
 	ObjectAssetResItem();
+	virtual ~ObjectAssetResItem();
 
 public:
 	virtual void init(LoadItem* item) override;

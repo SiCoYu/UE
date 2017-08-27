@@ -17,9 +17,9 @@ void UForm::loadUWidget(const TCHAR* name)
 
 		// warning C4996: 'StaticConstructObject': StaticConstructObject is deprecated, please use NewObject instead. For internal CoreUObject module usage, please use StaticConstructObject_Internal. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 		//m_umgWidget = Cast<UUserWidget>(StaticConstructObject(widgetClass, Ctx::getSingletonPtr()->getEngineApi()->getGameInstance()));
-		// Ö±½Ó¹¹ÔìÒ»¸ö³éÏóÀàÊÇ±¨´íÎóµÄ
+		// ç›´æ¥æ„é€ ä¸€ä¸ªæŠ½è±¡ç±»æ˜¯æŠ¥é”™è¯¯çš„
 		// NewObject<UUserWidget>();
-		// ¹¹ÔìÒ»¸öÀàµÄ×ÓÀà£¬×îĞÂµÄ api ÈçÏÂ¾Í¿ÉÒÔÁË
+		// æ„é€ ä¸€ä¸ªç±»çš„å­ç±»ï¼Œæœ€æ–°çš„ api å¦‚ä¸‹å°±å¯ä»¥äº†
 		//mGuiWin->mUiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
 		mGuiWin->mUiRoot = NewObject<UUMGWidget>(EngineApi::GetGameInstance(), widgetClass);
 	}
@@ -124,7 +124,7 @@ void UForm::exit()
 	GUiMgr->exitForm(mId);
 }
 
-// ½çÃæ´úÂë´´½¨ºó¾Íµ÷ÓÃ
+// ç•Œé¢ä»£ç åˆ›å»ºåå°±è°ƒç”¨
 void UForm::onInit()
 {
 	//if (m_luaCSBridgeForm != null)
@@ -133,12 +133,12 @@ void UForm::onInit()
 	//}
 	if (!mIsLoadWidgetRes)
 	{
-		// Ä¬ÈÏ»á¼ÌĞø¼ÓÔØ×ÊÔ´
+		// é»˜è®¤ä¼šç»§ç»­åŠ è½½èµ„æº
 		GUiMgr->loadWidgetRes(this->getId());
 	}
 }
 
-// µÚÒ»´ÎÏÔÊ¾Ö®Ç°»áµ÷ÓÃÒ»´Î
+// ç¬¬ä¸€æ¬¡æ˜¾ç¤ºä¹‹å‰ä¼šè°ƒç”¨ä¸€æ¬¡
 void UForm::onReady()
 {
 	//if (m_luaCSBridgeForm != null)
@@ -150,11 +150,11 @@ void UForm::onReady()
 
 	if (mIsHandleExitBtn)
 	{
-		//UtilApi.addEventHandle(mGuiWin.mUiRoot, "BtnClose", onExitBtnClick); // ¹Ø±ÕÊÂ¼ş
+		//UtilApi.addEventHandle(mGuiWin.mUiRoot, "BtnClose", onExitBtnClick); // å…³é—­äº‹ä»¶
 	}
 }
 
-// Ã¿Ò»´ÎÏÔÊ¾¶¼»áµ÷ÓÃÒ»´Î
+// æ¯ä¸€æ¬¡æ˜¾ç¤ºéƒ½ä¼šè°ƒç”¨ä¸€æ¬¡
 void UForm::onShow()
 {
 	this->mIsVisible = true;
@@ -166,12 +166,12 @@ void UForm::onShow()
 
 	if (this->mIsBlurBg)
 	{
-		//GUiMgr->showForm(eUIBlurBg);        // ÏÔÊ¾Ä£ºı±³¾°½çÃæ
+		//GUiMgr->showForm(eUIBlurBg);        // æ˜¾ç¤ºæ¨¡ç³ŠèƒŒæ™¯ç•Œé¢
 	}
 	//adjustPosWithAlign();
 }
 
-// Ã¿Ò»´ÎÒş²Ø¶¼»áµ÷ÓÃÒ»´Î
+// æ¯ä¸€æ¬¡éšè—éƒ½ä¼šè°ƒç”¨ä¸€æ¬¡
 void UForm::onHide()
 {
 	this->mIsVisible = false;
@@ -187,7 +187,7 @@ void UForm::onHide()
 	//}
 }
 
-// Ã¿Ò»´Î¹Ø±Õ¶¼»áµ÷ÓÃÒ»´Î
+// æ¯ä¸€æ¬¡å…³é—­éƒ½ä¼šè°ƒç”¨ä¸€æ¬¡
 void UForm::onExit()
 {
 	this->mIsVisible = false;
@@ -206,12 +206,12 @@ void UForm::onExit()
 
 bool UForm::isVisible()
 {
-	//return mGuiWin->mUiRoot->activeSelf;        // ½ö½öÊÇ×Ô¼ºÊÇ·ñ¿É¼û
+	//return mGuiWin->mUiRoot->activeSelf;        // ä»…ä»…æ˜¯è‡ªå·±æ˜¯å¦å¯è§
 	return this->mIsVisible;
 }
 
 /*
-* stageµÄ´óĞ¡·¢Éú±ä»¯ºó£¬Õâ¸öº¯Êı»á±»µ÷ÓÃ¡£×ÓÀà¿ÉÖØÔØÕâ¸öº¯Êı
+* stageçš„å¤§å°å‘ç”Ÿå˜åŒ–åï¼Œè¿™ä¸ªå‡½æ•°ä¼šè¢«è°ƒç”¨ã€‚å­ç±»å¯é‡è½½è¿™ä¸ªå‡½æ•°
 */
 void UForm::onStageReSize()
 {
@@ -258,7 +258,7 @@ PointF* UForm::computeAdjustPosWithAlign()
 	return ret;
 }
 
-// °´Å¥µã»÷¹Ø±Õ
+// æŒ‰é’®ç‚¹å‡»å…³é—­
 void UForm::onExitBtnClick()
 {
 	this->exit();
@@ -296,7 +296,7 @@ void UForm::onExitBtnClick()
 //		}
 //	}
 //
-//	// ²âÊÔÈ«¾Ö·Ö·¢ÊÂ¼ş
+//	// æµ‹è¯•å…¨å±€åˆ†å‘äº‹ä»¶
 //	// Ctx.m_instance.m_globalEventMgr.eventDispatchGroup.dispatchEvent((int)eGlobalEventType.eGlobalTest, null);
 //}
 

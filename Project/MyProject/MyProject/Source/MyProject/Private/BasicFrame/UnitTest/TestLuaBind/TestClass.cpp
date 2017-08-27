@@ -72,33 +72,33 @@ bool TestClass::StartWith(const std::string& str, bool ignore_spaces, int* off)
 // Lua CFunction wrapper for StartWith.
 int TestClass::Lua_StartWith(lua_State* L)
 {
-	// »ñÈ¡²ÎÊı¸öÊı
+	// è·å–å‚æ•°ä¸ªæ•°
 	int n = lua_gettop(L);
 
-	// ÑéÖ¤²ÎÊı¸öÊı
+	// éªŒè¯å‚æ•°ä¸ªæ•°
 	if (n != 3)
 	{
 		luaL_error(L, "incorrect argument number");
 	}
 
-	// ÑéÖ¤²ÎÊıÀàĞÍ
+	// éªŒè¯å‚æ•°ç±»å‹
 	if (!lua_isstring(L, 2) || !lua_isboolean(L, 3))
 	{
 		luaL_error(L, "incorrect argument type");
 	}
 
-	// »ñÈ¡²ÎÊı
+	// è·å–å‚æ•°
 	std::string str(lua_tostring(L, 2));
 	bool ignore_spaces = lua_toboolean(L, 3) != 0;
 
-	// ×ªµ÷ StartWith
+	// è½¬è°ƒ StartWith
 	int off = 0;
 	bool result = StartWith(str, ignore_spaces, &off);
 
-	// ·µ»Ø½á¹û
+	// è¿”å›ç»“æœ
 	luabridge::push(L, result);
 	luabridge::push(L, off);
-	return 2;  // ·µ»ØÖµÓĞÁ½¸ö
+	return 2;  // è¿”å›å€¼æœ‰ä¸¤ä¸ª
 }
 
 //int Line::Lua_StartWith(lua_State* L) 
@@ -120,7 +120,7 @@ int TestClass::Lua_StartWith(lua_State* L)
 //	bool result = false;
 //	int off = 0;
 //
-//	// Öğ¸ö±È½Ï×Ö·û´®±ä²Î£¬Ò»µ©Æ¥Åä¾ÍÌø³öÑ­»·¡£
+//	// é€ä¸ªæ¯”è¾ƒå­—ç¬¦ä¸²å˜å‚ï¼Œä¸€æ—¦åŒ¹é…å°±è·³å‡ºå¾ªç¯ã€‚
 //	for (int i = 3; i <= n; ++i) 
 //	{
 //		if (!lua_isstring(L, i)) 

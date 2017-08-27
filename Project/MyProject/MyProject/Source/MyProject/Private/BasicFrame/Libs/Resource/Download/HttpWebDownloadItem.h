@@ -16,6 +16,7 @@ protected:
 
 public:
 	HttpWebDownloadItem();
+	virtual ~HttpWebDownloadItem();
 
 public:
 	virtual void load() override;

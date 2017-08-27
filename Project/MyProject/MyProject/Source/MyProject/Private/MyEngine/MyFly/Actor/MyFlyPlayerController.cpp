@@ -30,15 +30,15 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //
 //	BeginPlay_UMGWidgets();
 //
-//	// ¸÷ÖÖ³õÊ¼»¯
+//	// å„ç§åˆå§‹åŒ–
 //	//EngineApi::showCursor();
 //
-//	// ¸÷ÖÖ UI ²âÊÔ
+//	// å„ç§ UI æµ‹è¯•
 //	//TestUI();
 //
 //	GEngineData->setMainPlayerController(this);
 //
-//	// Âß¼­¿ªÊ¼ÔËÐÐ
+//	// é€»è¾‘å¼€å§‹è¿è¡Œ
 //	//GCtx->beginPlay();
 //}
 //
@@ -46,13 +46,13 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //{
 //	Super::ReceivedPlayer();
 //
-//	// ¸³Öµ¿ØÖÆ Player £¬Âß¼­¿ªÊ¼ÔËÐÐ
+//	// èµ‹å€¼æŽ§åˆ¶ Player ï¼Œé€»è¾‘å¼€å§‹è¿è¡Œ
 //	//GCtx->beginPlay();
 //}
 //
 //void AMyPlayerController::TestUI()
 //{
-//	// Test ¼ÓÔØ UIPack
+//	// Test åŠ è½½ UIPack
 //	//GUiMgr->loadForm<UUIPack>(eUIPack);
 //	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
 //}

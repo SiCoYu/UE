@@ -8,5 +8,8 @@
 class UBinaryLoadItem : public LoadItem
 {
 public:
+	UBinaryLoadItem();
+	virtual ~UBinaryLoadItem();
+
 	void loadFile(const FString& Filename);
 };

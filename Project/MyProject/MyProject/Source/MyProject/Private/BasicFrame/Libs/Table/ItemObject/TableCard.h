@@ -66,6 +66,9 @@ public:
 	std::string mDzCardHeader;         // 卡牌头像贴图路径，对战中卡牌图像
 	uint32 mSkillPrepareEffect;     // 技能攻击准备特效
 
+	TableCardItemBody();
+	virtual ~TableCardItemBody();
+
 	virtual void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
 };
 

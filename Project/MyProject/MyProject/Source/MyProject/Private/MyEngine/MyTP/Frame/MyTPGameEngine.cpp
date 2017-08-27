@@ -8,10 +8,10 @@
 UMyTPGameEngine::UMyTPGameEngine(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	// È«¾ÖÎïÀíÅö×²´¦Àí
+	// å…¨å±€ç‰©ç†ç¢°æ’žå¤„ç†
 	this->PhysicsCollisionHandlerClass = UMyTPPhysicsCollisionHandler::StaticClass();
 	this->AvoidanceManagerClass = UMyTPAvoidanceManager::StaticClass();
-	// µÈ¼ÛÓÚ MyProject\Config\DefaultEngine.ini ÅäÖÃÎÄ¼þÖÐµÄ LocalPlayerClassName ÉèÖÃ
+	// ç­‰ä»·äºŽ MyProject\Config\DefaultEngine.ini é…ç½®æ–‡ä»¶ä¸­çš„ LocalPlayerClassName è®¾ç½®
 	this->LocalPlayerClass = UMyTPLocalPlayer::StaticClass();
 }
 
