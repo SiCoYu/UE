@@ -12,6 +12,9 @@ public:
 	std::map<int, MsgRouteHandleBase*> mId2DispDic;
 
 public:
+	MsgRouteDispHandle();
+	virtual ~MsgRouteDispHandle();
+
 	virtual void handleMsg(MsgRouteBase* msg);
 };
 
