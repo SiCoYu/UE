@@ -13,7 +13,7 @@ void* BufferUtil::memSwap(void* dest, void* source, std::size_t count)
 	tmp_source = (char *)source;
 	tmp_dest = (char *)dest;
 
-	// 如果没有重叠区域
+	// 濡傛灉娌℃湁閲嶅彔鍖哄煙
 	while (count--)
 	{
 		tmpChar = *tmp_dest;

@@ -15,11 +15,11 @@ LuaSystem::~LuaSystem()
 
 void LuaSystem::init()
 {
-	// ´ò¿ª»ù±¾¿â
+	// æ‰“å¼€åŸºæœ¬åº“
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
-	// ´ò¿ª Socket
+	// æ‰“å¼€ Socket
 	lua_getglobal(L, "package");
 	lua_getfield(L, -1, "preload");
 
@@ -33,11 +33,11 @@ void LuaSystem::init()
 
 	lua_settop(L, 0);
 
-	// °ó¶¨×Ô¶¨Òå¼ÓÔØÆ÷
+	// ç»‘å®šè‡ªå®šä¹‰åŠ è½½å™¨
 	//addCClosureLualoader(L);
 	addCFunctionLualoader(L);
 
-	// °ó¶¨Íâ²¿¿â
+	// ç»‘å®šå¤–éƒ¨åº“
 	LuaCppBind::bind(L);
 }
 
