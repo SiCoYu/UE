@@ -21,7 +21,7 @@ void MClassInfo::Construct(const char* className, Creator creatorFunc, const MCl
 		{
 			MClassFactory::Instance()->Register(this, this->mName);
 		}
-#if MY_DEBUG
+#ifdef MY_DEBUG
 		else
 		{
 			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetClassInfo(this->mName);
@@ -80,7 +80,7 @@ bool MClassInfo::IsDerivedFrom(const std::string& otherClassName) const
 
 void* MClassInfo::AllocInstanceMemory()
 {
-#if MY_OBJECTS_USE_MEMORYPOOL
+#ifdef MY_OBJECTS_USE_MEMORYPOOL
 	//void* ptr = Memory::ObjectPoolAllocator->Alloc(this->instanceSize);
 #else
 	//void* ptr = Memory::Alloc(Memory::ObjectHeap, this->instanceSize);
@@ -91,7 +91,7 @@ void* MClassInfo::AllocInstanceMemory()
 
 void MClassInfo::FreeInstanceMemory(void* ptr)
 {
-#if MY_OBJECTS_USE_MEMORYPOOL
+#ifdef MY_OBJECTS_USE_MEMORYPOOL
 	//Memory::ObjectPoolAllocator->Free(ptr, this->instanceSize);
 #else
 	//Memory::Free(Memory::ObjectHeap, ptr);

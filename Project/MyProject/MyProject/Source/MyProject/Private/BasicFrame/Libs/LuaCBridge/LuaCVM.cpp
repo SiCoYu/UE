@@ -35,7 +35,7 @@ void LuaCVM::closeLua()
 void LuaCVM::doString(std::string value)
 {
 	int ret = luaL_dostring(L, value.c_str());
-	if (LUA_OK == ret)	// Ö´ĞĞ³É¹¦
+	if (LUA_OK == ret)	// æ‰§è¡ŒæˆåŠŸ
 	{
 
 	}
@@ -98,7 +98,7 @@ void LuaCVM::setLuaObject(std::string fullPath, LuaCObject* value)
 
 		if (type == LUA_TNIL)
 		{
-			// Êä³öÈÕÖ¾
+			// è¾“å‡ºæ—¥å¿—
 			lua_settop(L, oldTop);
 			return;
 		}
@@ -124,7 +124,7 @@ LuaCObject* LuaCVM::getObject(std::vector<std::string>& remainingPath)
 	return returnValue;
 }
 
-//×¢Òâ£ºµ±×Ö·û´®Îª¿ÕÊ±£¬Ò²»á·µ»ØÒ»¸ö¿Õ×Ö·û´®  
+//æ³¨æ„ï¼šå½“å­—ç¬¦ä¸²ä¸ºç©ºæ—¶ï¼Œä¹Ÿä¼šè¿”å›ä¸€ä¸ªç©ºå­—ç¬¦ä¸²  
 void LuaCVM::split(std::string& s, std::string& delim, std::vector<std::string>* ret)
 {
 	size_t last = 0;
@@ -151,7 +151,7 @@ void LuaCVM::setObject(std::vector<std::string>& remainingPath, LuaCObject* val)
 
 	lua_pushstring(L, remainingPath[remainingPath.size() - 1].c_str());
 
-	//¿ÉÒÔÊÍ·ÅÏÈ
+	//å¯ä»¥é‡Šæ”¾å…ˆ
 	//if (val == null)
 	//{
 	//    LuaDLL.lua_gettable(L, -2);               
@@ -279,7 +279,7 @@ void LuaCVM::setObject(int reference, LuaCObject* field, LuaCObject* val)
 	lua_settop(L, oldTop);
 }
 
-// ×¢²áÒ»¸öº¯Êı
+// æ³¨å†Œä¸€ä¸ªå‡½æ•°
 LuaCFunction* LuaCVM::RegisterFunction(std::string fullPath, lua_CFunction function)
 {
 	// We leave nothing on the stack when we are done
@@ -289,7 +289,7 @@ LuaCFunction* LuaCVM::RegisterFunction(std::string fullPath, lua_CFunction funct
 	std::string delim = ".";
 	LuaCVM::split(fullPath, delim, &path);
 
-	// ×¢²áµ½±íÖĞ
+	// æ³¨å†Œåˆ°è¡¨ä¸­
 	if (path.size() > 1)
 	{
 		int dotIdx = fullPath.find_last_of(".");
@@ -298,9 +298,9 @@ LuaCFunction* LuaCVM::RegisterFunction(std::string fullPath, lua_CFunction funct
 		LuaCTable* pLuaCTable = m_pLuaCScriptMgr->GetLuaTable(tablePath);
 		pLuaCTable->setLuaFunction(lastPath, function);
 	}
-	else	// ×¢²áµ½È«¾Ö±íÖĞ
+	else	// æ³¨å†Œåˆ°å…¨å±€è¡¨ä¸­
 	{
-		lua_register(L, path[path.size() - 1].c_str(), function);	// È«¾Ö×¢²áº¯ÊıÇëÊ¹ÓÃÕâ¸ö
+		lua_register(L, path[path.size() - 1].c_str(), function);	// å…¨å±€æ³¨å†Œå‡½æ•°è¯·ä½¿ç”¨è¿™ä¸ª
 	}
 	lua_settop(L, oldTop);
 

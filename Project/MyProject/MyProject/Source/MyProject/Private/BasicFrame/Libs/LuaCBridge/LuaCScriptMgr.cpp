@@ -12,7 +12,7 @@
 
 LuaCScriptMgr* LuaCScriptMgr::Instance = nullptr;
 LuaCObjectTranslator* LuaCScriptMgr::_translator = nullptr;
-#if MULTI_STATE
+#ifdef MULTI_STATE
 List<LuaScriptMgr*> LuaCScriptMgr::mgrList;
 int LuaCScriptMgr::mgrPos = 0;
 #else
@@ -159,7 +159,7 @@ LuaCScriptMgr::LuaCScriptMgr()
 
 	//Bind();
 
-#if MULTI_STATE
+#ifdef MULTI_STATE
 	mgrList.Add(this);
 	LuaDLL.lua_pushnumber(lua.L, mgrPos);
 	LuaDLL.lua_setglobal(lua.L, "_LuaScriptMgr");
@@ -252,7 +252,7 @@ void LuaCScriptMgr::CheckArgsCount(lua_State* L, int count)
 	}
 }
 
-//¶ÁÈ¡objectÀàĞÍ£¬objectÎªÍòÓÃÀàĞÍ, ÄÜ¶ÁÈ¡ËùÓĞ´Ólua´«µİµÄ²ÎÊı
+//è¯»å–objectç±»å‹ï¼Œobjectä¸ºä¸‡ç”¨ç±»å‹, èƒ½è¯»å–æ‰€æœ‰ä»luaä¼ é€’çš„å‚æ•°
 LuaCObject* LuaCScriptMgr::GetVarObject(lua_State* L, int stackPos)
 {
 	LuaCObject* ret = nullptr;
@@ -355,7 +355,7 @@ LuaCObject* LuaCScriptMgr::GetVarTable(lua_State* L, int stackPos)
 
 LuaCObjectTranslator* LuaCScriptMgr::GetTranslator(lua_State* L)
 {
-#if MULTI_STATE
+#ifdef MULTI_STATE
 	return LuaCObjectTranslator.FromState(L);
 #else            
 	if (_translator == nullptr)
@@ -367,7 +367,7 @@ LuaCObjectTranslator* LuaCScriptMgr::GetTranslator(lua_State* L)
 #endif        
 }
 
-//Ñ¹ÈëÒ»¸öobject±äÁ¿
+//å‹å…¥ä¸€ä¸ªobjectå˜é‡
 void LuaCScriptMgr::PushVarObject(lua_State* L, LuaCObject* o)
 {
 	if (o == nullptr)
@@ -544,7 +544,7 @@ void LuaCScriptMgr::PushVarObject(lua_State* L, LuaCObject* o)
 	//}
 }
 
-//²»»º´æLuaFunction
+//ä¸ç¼“å­˜LuaFunction
 std::vector<LuaCObject*> LuaCScriptMgr::CallLuaFunction(std::string name, std::vector<LuaCObject*>& args)
 {
 	std::vector<LuaCObject*> objs;
@@ -577,7 +577,7 @@ std::vector<LuaCObject*> LuaCScriptMgr::CallLuaFunction(std::string name, std::v
 	}
 }
 
-//»á»º´æLuaFunction
+//ä¼šç¼“å­˜LuaFunction
 LuaCFunction* LuaCScriptMgr::GetLuaFunction(std::string name)
 {
 	LuaCBase* func = nullptr;
@@ -687,7 +687,7 @@ bool LuaCScriptMgr::PushLuaFunction(lua_State* L, std::string fullPath)
 
 void LuaCScriptMgr::PushTraceBack(lua_State* L)
 {
-#if !MULTI_STATE
+#if !defined MULTI_STATE
 	if (traceback == nullptr)
 	{
 		lua_getglobal(L, "traceback");
@@ -747,7 +747,7 @@ bool LuaCScriptMgr::PushLuaTable(lua_State* L, std::string fullPath)
 	return true;
 }
 
-////Ñ¹ÈëÒ»¸ö´ÓobjectÅÉÉúµÄ±äÁ¿
+////å‹å…¥ä¸€ä¸ªä»objectæ´¾ç”Ÿçš„å˜é‡
 //void LuaCScriptMgr::PushObject(lua_State* L, object o)
 //{
 //	GetTranslator(L).pushObject(L, o, "luaNet_metatable");
@@ -959,7 +959,7 @@ void LuaCScriptMgr::RegisterLib(lua_State* L, std::string libName, std::string c
 	//checkBaseType.Remove(t);
 }
 
-//×¢²áÒ»¸öÃ¶¾ÙÀàĞÍ
+//æ³¨å†Œä¸€ä¸ªæšä¸¾ç±»å‹
 void LuaCScriptMgr::RegisterLib(lua_State* L, std::string libName, std::string className, std::vector<LuaMethod*> regs)
 {
 	CreateTable(L, libName);
@@ -1032,7 +1032,7 @@ void LuaCScriptMgr::ThrowLuaException(lua_State* L)
 
 LuaCScriptMgr* LuaCScriptMgr::GetMgrFromLuaState(lua_State* L)
 {
-#if MULTI_STATE      
+#ifdef MULTI_STATE      
 
 	LuaDLL.lua_getglobal(L, "_LuaScriptMgr");
 	int pos = (int)GetNumber(L, -1);
@@ -1145,7 +1145,7 @@ LuaCFunction* LuaCScriptMgr::GetLuaFunction(lua_State* L, int stackPos)
 	return func;
 }
 
-// ×Ô¼ºÌí¼ÓµÄº¯Êı
+// è‡ªå·±æ·»åŠ çš„å‡½æ•°
 //public static LuaTable SelfToLuaTable(IntPtr L, int stackPos)
 //{
 //    LuaDLL.lua_pushvalue(L, stackPos);
@@ -1184,7 +1184,7 @@ LuaCTable* LuaCScriptMgr::GetLuaTable(lua_State* L, int stackPos)
 	return table;
 }
 
-//×¢²áµ½luaÖĞµÄobjectÀàĞÍ¶ÔÏó, ´æ·ÅÔÚObjectTranslator objects ³ØÖĞ
+//æ³¨å†Œåˆ°luaä¸­çš„objectç±»å‹å¯¹è±¡, å­˜æ”¾åœ¨ObjectTranslator objects æ± ä¸­
 LuaCObject* LuaCScriptMgr::GetLuaObject(lua_State* L, int stackPos)
 {
 	//return GetTranslator(L)->getRawNetObject(L, stackPos);

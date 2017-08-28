@@ -21,7 +21,7 @@ class LuaCScriptMgr
 public:
 	static LuaCScriptMgr* Instance;
 	static LuaCObjectTranslator* _translator;
-#if MULTI_STATE
+#ifdef MULTI_STATE
 	static List<LuaScriptMgr*> mgrList;
 	static int mgrPos = 0;
 #else

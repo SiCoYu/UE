@@ -22,7 +22,7 @@ ADeferAttachToSocketActor::ADeferAttachToSocketActor(const class FObjectInitiali
 
 	//Deferred Attachment (Ty Nick W.! Actual attach gets done after blueprint stuff)
 	//JoyfulControl->AttachParent = Mesh;
-	// ACharacter ²ÅÓÐ class USkeletalMeshComponent* Mesh;
+	// ACharacter æ‰æœ‰ class USkeletalMeshComponent* Mesh;
     // F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Runtime\Engine\Private\Components\SceneComponent.cpp
 	// AttachToComponent when called from a constructor is only setting up attachment and will always be treated as KeepRelative. Consider calling SetupAttachment directly instead.
 	//JoyfulControl->AttachToComponent(this->GetMesh(), FAttachmentTransformRules::KeepWorldTransform, "JoyControl");

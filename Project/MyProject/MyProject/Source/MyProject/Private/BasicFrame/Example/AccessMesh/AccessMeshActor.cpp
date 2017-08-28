@@ -3,7 +3,7 @@
 #include "PhysicsPublic.h"
 #include "PhysXIncludes.h"
 
-// Physics3.4 PxSimpleTypes.h ÄÚÈİ²¢Èëµ½ PxTriangleMesh.h
+// Physics3.4 PxSimpleTypes.h å†…å®¹å¹¶å…¥åˆ° PxTriangleMesh.h
 #include "ThirdParty/PhysX/PhysX_3.4/Include/geometry/PxTriangleMesh.h"
 //#include "ThirdParty/PhysX/PhysX_3.4/Include/foundation/PxSimpleTypes.h"
 
@@ -20,7 +20,7 @@ AAccessMeshActor::AAccessMeshActor(const class FObjectInitializer& PCIP)
 
 void AAccessMeshActor::AccessData()
 {
-	// GetComponentsByClass »ñÈ¡ËùÓĞµÄ×é¼ş
+	// GetComponentsByClass è·å–æ‰€æœ‰çš„ç»„ä»¶
 	//MyStaticMesh = Cast<UStaticMeshComponent>(this->GetComponentsByClass(UStaticMeshComponent::StaticClass()));
 	MyStaticMesh = Cast<UStaticMeshComponent>(this->GetComponentByClass(UStaticMeshComponent::StaticClass()));
 
@@ -44,7 +44,7 @@ void AAccessMeshActor::AccessData()
 	for (int32 TriIndex = 0; TriIndex < TriNumber; ++TriIndex)
 	{
 		// f:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\ThirdParty\PhysX\PhysX_3.4\Include\geometry\PxTriangleMesh.h
-		// PhysX_3.4 ÖĞ PxTriangleMeshFlag::eHAS_16BIT_TRIANGLE_INDICES ¸Ä³É PxTriangleMeshFlag::e16_BIT_INDICES
+		// PhysX_3.4 ä¸­ PxTriangleMeshFlag::eHAS_16BIT_TRIANGLE_INDICES æ”¹æˆ PxTriangleMeshFlag::e16_BIT_INDICES
 		//if (TempTriMesh->getTriangleMeshFlags() & PxTriangleMeshFlag::eHAS_16BIT_TRIANGLE_INDICES)
 		if (TempTriMesh->getTriangleMeshFlags() & PxTriangleMeshFlag::e16_BIT_INDICES)
 		{

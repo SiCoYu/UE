@@ -7,14 +7,14 @@ void Array::Copy(void* src, long srcIndex, void* dest, long destIndex, long leng
 	tmp_source = (char *)src + srcIndex;
 	tmp_dest = (char *)dest + destIndex;
 
-	// º¯Êýmemcpy()   ´Ósource  Ö¸ÏòµÄÇøÓòÏòdestÖ¸ÏòµÄÇøÓò¸´ÖÆcount¸ö×Ö·û£¬Èç¹ûÁ½Êý×éÖØµþ£¬²»¶¨Òå¸Ãº¯ÊýµÄÐÐÎª¡£¶ømemmove(), Èç¹ûÁ½º¯ÊýÖØµþ£¬¸³ÖµÈÔÕýÈ·½øÐÐ¡£memcpyº¯Êý¼ÙÉèÒª¸´ÖÆµÄÄÚ´æÇøÓò²»´æÔÚÖØµþ£¬Èç¹ûÄãÄÜÈ·±£Äã½øÐÐ¸´ÖÆ²Ù×÷µÄµÄÄÚ´æÇøÓòÃ»ÓÐÈÎºÎÖØµþ£¬¿ÉÒÔÖ±½ÓÓÃmemcpy£»Èç¹ûÄã²»ÄÜ±£Ö¤ÊÇ·ñÓÐÖØµþ£¬ÎªÁËÈ·±£¸´ÖÆµÄÕýÈ·ÐÔ£¬Äã±ØÐëÓÃmemmove¡£memcpyµÄÐ§ÂÊ»á±Èmemmove¸ßÒ»Ð©£¬Èç¹û»¹²»Ã÷°×µÄ»°¿ÉÒÔ¿´Ò»Ð©Á½ÕßµÄÊµÏÖ£º º¯Êýmemcpy()   ´Ósource  Ö¸ÏòµÄÇøÓòÏòdestÖ¸ÏòµÄÇøÓò¸´ÖÆcount¸ö×Ö·û£¬Èç¹ûÁ½Êý×éÖØµþ£¬²»¶¨Òå¸Ãº¯ÊýµÄÐÐÎª¡£¶ømemmove(), Èç¹ûÁ½º¯ÊýÖØµþ£¬¸³ÖµÈÔÕýÈ·½øÐÐ¡£	memcpyº¯Êý¼ÙÉèÒª¸´ÖÆµÄÄÚ´æÇøÓò²»´æÔÚÖØµþ£¬Èç¹ûÄãÄÜÈ·±£Äã½øÐÐ¸´ÖÆ²Ù×÷µÄµÄÄÚ´æÇøÓòÃ»ÓÐÈÎºÎÖØµþ£¬¿ÉÒÔÖ±½ÓÓÃmemcpy£»Èç¹ûÄã²»ÄÜ±£Ö¤ÊÇ·ñÓÐÖØµþ£¬ÎªÁËÈ·±£¸´ÖÆµÄÕýÈ·ÐÔ£¬Äã±ØÐëÓÃmemmove¡£memcpyµÄÐ§ÂÊ»á±Èmemmove¸ßÒ»Ð©
-	// ²»ÓÃµ÷Õû´Ó 0 ¿ªÊ¼´æ´¢Êý¾Ý£¬Ö»ÒªÊÇÏßÐÔ¾Í¿ÉÒÔÁË
+	// å‡½æ•°memcpy()   ä»Žsource  æŒ‡å‘çš„åŒºåŸŸå‘destæŒ‡å‘çš„åŒºåŸŸå¤åˆ¶countä¸ªå­—ç¬¦ï¼Œå¦‚æžœä¸¤æ•°ç»„é‡å ï¼Œä¸å®šä¹‰è¯¥å‡½æ•°çš„è¡Œä¸ºã€‚è€Œmemmove(), å¦‚æžœä¸¤å‡½æ•°é‡å ï¼Œèµ‹å€¼ä»æ­£ç¡®è¿›è¡Œã€‚memcpyå‡½æ•°å‡è®¾è¦å¤åˆ¶çš„å†…å­˜åŒºåŸŸä¸å­˜åœ¨é‡å ï¼Œå¦‚æžœä½ èƒ½ç¡®ä¿ä½ è¿›è¡Œå¤åˆ¶æ“ä½œçš„çš„å†…å­˜åŒºåŸŸæ²¡æœ‰ä»»ä½•é‡å ï¼Œå¯ä»¥ç›´æŽ¥ç”¨memcpyï¼›å¦‚æžœä½ ä¸èƒ½ä¿è¯æ˜¯å¦æœ‰é‡å ï¼Œä¸ºäº†ç¡®ä¿å¤åˆ¶çš„æ­£ç¡®æ€§ï¼Œä½ å¿…é¡»ç”¨memmoveã€‚memcpyçš„æ•ˆçŽ‡ä¼šæ¯”memmoveé«˜ä¸€äº›ï¼Œå¦‚æžœè¿˜ä¸æ˜Žç™½çš„è¯å¯ä»¥çœ‹ä¸€äº›ä¸¤è€…çš„å®žçŽ°ï¼š å‡½æ•°memcpy()   ä»Žsource  æŒ‡å‘çš„åŒºåŸŸå‘destæŒ‡å‘çš„åŒºåŸŸå¤åˆ¶countä¸ªå­—ç¬¦ï¼Œå¦‚æžœä¸¤æ•°ç»„é‡å ï¼Œä¸å®šä¹‰è¯¥å‡½æ•°çš„è¡Œä¸ºã€‚è€Œmemmove(), å¦‚æžœä¸¤å‡½æ•°é‡å ï¼Œèµ‹å€¼ä»æ­£ç¡®è¿›è¡Œã€‚	memcpyå‡½æ•°å‡è®¾è¦å¤åˆ¶çš„å†…å­˜åŒºåŸŸä¸å­˜åœ¨é‡å ï¼Œå¦‚æžœä½ èƒ½ç¡®ä¿ä½ è¿›è¡Œå¤åˆ¶æ“ä½œçš„çš„å†…å­˜åŒºåŸŸæ²¡æœ‰ä»»ä½•é‡å ï¼Œå¯ä»¥ç›´æŽ¥ç”¨memcpyï¼›å¦‚æžœä½ ä¸èƒ½ä¿è¯æ˜¯å¦æœ‰é‡å ï¼Œä¸ºäº†ç¡®ä¿å¤åˆ¶çš„æ­£ç¡®æ€§ï¼Œä½ å¿…é¡»ç”¨memmoveã€‚memcpyçš„æ•ˆçŽ‡ä¼šæ¯”memmoveé«˜ä¸€äº›
+	// ä¸ç”¨è°ƒæ•´ä»Ž 0 å¼€å§‹å­˜å‚¨æ•°æ®ï¼Œåªè¦æ˜¯çº¿æ€§å°±å¯ä»¥äº†
 	memmove(tmp_dest, tmp_source, length);
 }
 
 void Array::Reverse(char* buff, int index, int length)
 {
-	// Èç¹ûÊÇ length 0 »òÕß 1 Ö±½Ó·µ»Ø
+	// å¦‚æžœæ˜¯ length 0 æˆ–è€… 1 ç›´æŽ¥è¿”å›ž
 	if (length <= 1)
 	{
 		return;
@@ -24,7 +24,7 @@ void Array::Reverse(char* buff, int index, int length)
 	char* tmp_dest = buff + index + (length - 1);
 	char tmpChar;
 
-	while (tmp_source < tmp_dest)	// Ö»ÓÐÆðÊ¼µØÖ·Ã»ÓÐ³¬¹ýÄ¿µÄµØÖ·²Å½»»»
+	while (tmp_source < tmp_dest)	// åªæœ‰èµ·å§‹åœ°å€æ²¡æœ‰è¶…è¿‡ç›®çš„åœ°å€æ‰äº¤æ¢
 	{
 		tmpChar = *tmp_dest;
 		*tmp_dest = *tmp_source;

@@ -7,7 +7,9 @@
 M_IMPLEMENT_ROOT_CLASS(GObject)
 M_REGISTER_CLASS(GObject)
 
-#if MY_DEBUG
+// warning C4668 : 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+//#if MY_DEBUG
+#ifdef MY_DEBUG
 MMutex GObject::mCriticalSection;
 bool GObject::mIsInCreate = false;
 #endif

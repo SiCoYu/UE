@@ -3,7 +3,7 @@
 #include "UtilStr.h"
 #include <string>
 #include "MyStreamableManager.h"
-//#include "Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread ,Õâ¸öÄ¿Â¼ÊÇ´íÎóµÄ£¬ĞèÒªÈçÏÂÄ¿Â¼
+//#include "Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread ,è¿™ä¸ªç›®å½•æ˜¯é”™è¯¯çš„ï¼Œéœ€è¦å¦‚ä¸‹ç›®å½•
 #include "Private/Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread
 
 FMyStreamableManager::FMyStreamableManager()
@@ -30,7 +30,7 @@ void FMyStreamableManager::dispose()
 //{
 //	FStringAssetReference assetRef;
 //	assetRef.SetPath(UtilStr::ConvStdStr2FString(const_cast<std::string&>(InTargetName)));
-//  StreamableManager::GetStreamed Ë½ÓĞº¯Êı£¬²»ÄÜµ÷ÓÃ
+//  StreamableManager::GetStreamed ç§æœ‰å‡½æ•°ï¼Œä¸èƒ½è°ƒç”¨
 //	return mStreamableManager.GetStreamed(assetRef);
 //}
 

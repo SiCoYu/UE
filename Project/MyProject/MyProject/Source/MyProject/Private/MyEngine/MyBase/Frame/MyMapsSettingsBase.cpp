@@ -4,6 +4,6 @@
 //UMyMapsSettings::UMyMapsSettings(const FObjectInitializer& ObjectInitializer)
 //	: Super(ObjectInitializer)
 //{
-//	// 每一个地图单独的 GameInstance 配置
+//	// 姣忎竴涓湴鍥惧崟鐙殑 GameInstance 閰嶇疆
 //	GameInstanceClass = UMyGameInstance::StaticClass();
 //}

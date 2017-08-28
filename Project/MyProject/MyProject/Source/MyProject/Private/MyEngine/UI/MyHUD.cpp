@@ -62,7 +62,7 @@ void AMyHUD::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	// ÔÝÊ±ÆÁ±ÎÏÔÊ¾½çÃæ
+	// æš‚æ—¶å±è”½æ˜¾ç¤ºç•Œé¢
 	//if (GEngine && GEngine->GameViewport) // make sure our screen is ready for the widget
 	//{
 	//	SAssignNew(MyUIWidget, SMyChatWidget).OwnerHUD(this); // add the widget and assign it to the var
@@ -104,9 +104,9 @@ void AMyHUD::AddMessageBP(const int32 Type, const FString& Username, const FStri
 
 void AMyHUD::BeginPlay()
 {
-	// ÔÝÊ±ÆÁ±Î
+	// æš‚æ—¶å±è”½
 	// this->BeginPlay_LoadStyleWidget();
-	// ÔÝÊ±ÆÁ±Î
+	// æš‚æ—¶å±è”½
 	//this->BeginPlay_SlateTab();
 }
 

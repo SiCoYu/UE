@@ -38,7 +38,7 @@ std::string UIAttrSystem::getPath(UIFormId id)
 	return "";
 }
 
-// Í¨¹ıÂ·¾¶»ñÈ¡
+// é€šè¿‡è·¯å¾„è·å–
 UIFormId UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
 {
 	for(auto keyValue : mId2AttrDic)
@@ -59,7 +59,7 @@ UIFormId UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType
 		}
 	}
 
-	return (UIFormId)0;       // Ä¬ÈÏ·µ»Ø×î´óÖµ
+	return (UIFormId)0;       // é»˜è®¤è¿”å›æœ€å¤§å€¼
 }
 
 void UIAttrSystem::addItem(UIFormId formId, std::string widgetPath, FormType formType, UMGOuterType outerType)

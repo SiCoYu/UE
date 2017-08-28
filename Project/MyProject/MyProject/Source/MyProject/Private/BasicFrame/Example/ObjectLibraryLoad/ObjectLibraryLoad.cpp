@@ -7,7 +7,7 @@ UObjectLibraryLoad::UObjectLibraryLoad(const class FObjectInitializer& PCIP)
 	
 }
 
-// UClass ²»ÊÇ Class
+// UClass ä¸æ˜¯ Class
 void UObjectLibraryLoad::LoadAssetDataFromPath(UClass* BaseClass, bool bFullyLoad)
 {
 	if (!ObjectLibrary)
@@ -32,9 +32,9 @@ FAssetData UObjectLibraryLoad::GetAssetDataFromPath()
 	{
 		FAssetData& AssetData = AssetDatas[i];
 
-		// ÕâÒ»ÐÐÔ­À´ÊÇÕâÑùµÄ£¬µ«ÊÇ²»ÖªµÀÕâÃ´ÐÞ¸Ä£¬ UAssetObject ÊÇÒ»¸öÀàÐÍ£¬ TypeName ÊÇÀàÐÍÖÐµÄÒ»¸öÊôÐÔ
+		// è¿™ä¸€è¡ŒåŽŸæ¥æ˜¯è¿™æ ·çš„ï¼Œä½†æ˜¯ä¸çŸ¥é“è¿™ä¹ˆä¿®æ”¹ï¼Œ UAssetObject æ˜¯ä¸€ä¸ªç±»åž‹ï¼Œ TypeName æ˜¯ç±»åž‹ä¸­çš„ä¸€ä¸ªå±žæ€§
 		//const FString* FoundTypeNameString = AssetData.TagsAndValues.Find(GET_MEMBER_NAME_CHECKED(UAssetObject, TypeName));
-		// ¾²Ì¬³ÉÔ±¼ì²é
+		// é™æ€æˆå‘˜æ£€æŸ¥
 		const FString* FoundTypeNameString = AssetData.TagsAndValues.Find(GET_MEMBER_NAME_CHECKED(UStaticMesh, bAutoComputeLODScreenSize));
 
 		if (FoundTypeNameString && FoundTypeNameString->Contains(TEXT("FooType")))

@@ -4,9 +4,9 @@
 UMyObjectDelegate::UMyObjectDelegate(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
-	// ·½·¨Ò»: Ìí¼ÓÊÂ¼ş
+	// æ–¹æ³•ä¸€: æ·»åŠ äº‹ä»¶
 	//MyObjectCommonDelegate = UMyObjectCommonDelegate::CreateUObject(this, &UMyObjectDelegate::handle);
-	// ·½·¨¶ş: Ìí¼ÓÊÂ¼ş
+	// æ–¹æ³•äºŒ: æ·»åŠ äº‹ä»¶
 	MyObjectCommonDelegate.BindUObject(this, &UMyObjectDelegate::handle);
 	MyObjectCommonDelegate.Execute(10, 10, true);
 }
@@ -18,12 +18,12 @@ void UMyObjectDelegate::handle(int aaa, int bbb, bool ccc)
 
 void UMyObjectDelegate::addWorldHandle()
 {
-	// ·½·¨Ò»
+	// æ–¹æ³•ä¸€
 	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
 	FWorldDelegates::OnPreWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
 	FWorldDelegates::OnPostWorldInitialization.AddUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
 
-	// ·½·¨¶ş
+	// æ–¹æ³•äºŒ
 	// Engine\Source\Runtime\Engine\Private\PhysicsEngine2D\Box2DIntegration.cpp
 	OnWorldCreatedDelegate = FWorldDelegates::FWorldInitializationEvent::FDelegate::CreateUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
 	OnWorldDestroyedDelegate = FWorldDelegates::FWorldInitializationEvent::FDelegate::CreateUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
@@ -34,11 +34,11 @@ void UMyObjectDelegate::addWorldHandle()
 
 void UMyObjectDelegate::removeWorldHandle()
 {
-	// ·½·¨Ò»£¬ÕâÖÖ×¢²áµÄÊÂ¼ş²»ÄÜÒÆ³ı
+	// æ–¹æ³•ä¸€ï¼Œè¿™ç§æ³¨å†Œçš„äº‹ä»¶ä¸èƒ½ç§»é™¤
 	//FWorldDelegates::OnPreWorldInitialization.RemoveUObject(this, &UMyObjectDelegate::OnPreWorldInitialization);
 	//FWorldDelegates::OnPostWorldInitialization.RemoveUObject(this, &UMyObjectDelegate::OnPostWorldInitialization);
 
-	// ·½·¨¶ş
+	// æ–¹æ³•äºŒ
 	FWorldDelegates::OnPreWorldInitialization.Remove(OnWorldCreatedDelegateHandle);
 	FWorldDelegates::OnPreWorldFinishDestroy.Remove(OnWorldDestroyedDelegateHandle);
 }

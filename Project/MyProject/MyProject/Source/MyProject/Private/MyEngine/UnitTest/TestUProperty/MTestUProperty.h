@@ -13,7 +13,7 @@ class AMTestUProperty : public AActor
 {
     GENERATED_BODY()
     public:
-
+	AMTestUProperty();
     //UPROPERTY()
     //UWindPointSourceComponent* WindPointSource;
 

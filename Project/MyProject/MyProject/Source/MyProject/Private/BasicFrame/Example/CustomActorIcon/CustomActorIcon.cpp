@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "CustomActorIcon.h"
 
-// FPostConstructInitializeProperties ±‰≥… FObjectInitializer
+// FPostConstructInitializeProperties ÂèòÊàê FObjectInitializer
 ACustomActorIcon::ACustomActorIcon(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {

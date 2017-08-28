@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "DynBufResizePolicy.h"
 
-// 获取一个最近的大小
+// 鑾峰彇涓�涓渶杩戠殑澶у皬
 uint32 DynBufResizePolicy::getCloseSize(uint32 needSize, uint32 capacity, uint32 maxCapacity)
 {
 	uint32 ret = 0;
@@ -26,9 +26,9 @@ uint32 DynBufResizePolicy::getCloseSize(uint32 needSize, uint32 capacity, uint32
 			}
 		}
 	}
-	else	// 需要的数据比允许最大允许分配的大小还大
+	else	// 闇�瑕佺殑鏁版嵁姣斿厑璁告渶澶у厑璁稿垎閰嶇殑澶у皬杩樺ぇ
 	{
-		// 日志，需要的存储空间太大
+		// 鏃ュ織锛岄渶瑕佺殑瀛樺偍绌洪棿澶ぇ
 	}
 
 	return ret;

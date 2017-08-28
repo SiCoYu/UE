@@ -8,14 +8,16 @@
 //
 //}
 
-// 客户端过地图
+// 瀹㈡埛绔繃鍦板浘
 APlayerController* AClearWidgetsGameMode::ProcessClientTravel(FString& FURL, FGuid NextMapGuid, bool bSeamless, bool bAbsolute)
 {
 	// We call PreClientTravel directly on any local PlayerPawns (ie listen server)
 	APlayerController* LocalPlayerController = NULL;
 	for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
 	{
-		APlayerController* PlayerController = *Iterator;
+		// UE4 4.17 warning C4996: 'TAutoWeakObjectPtr<APlayerController>::operator T': Implicit conversion from TAutoWeakObjectPtr to the pointer type has been deprecated - use Get() instead Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//APlayerController* PlayerController = *Iterator;
+		APlayerController* PlayerController = Iterator->get();
 		if (Cast<UNetConnection>(PlayerController->Player) != NULL)
 		{
 			/* Check if we're using our Custom Controller */

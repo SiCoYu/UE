@@ -5,7 +5,7 @@
 #include "ByteBuffer.h"
 
 /**
- * @brief ¹¹Ôìº¯Êı
+ * @brief æ„é€ å‡½æ•°
  */
 MCircularBuffer::MCircularBuffer(size_t initCapacity, size_t maxCapacity)
 {
@@ -82,7 +82,7 @@ void MCircularBuffer::clear()
 
 void MCircularBuffer::linearize()
 {
-	if (this->empty())        // Ã»ÓĞÊı¾İ
+	if (this->empty())        // æ²¡æœ‰æ•°æ®
 	{
 		return;
 	}
@@ -92,11 +92,11 @@ void MCircularBuffer::linearize()
 	}
 	else
 	{
-		// Êı¾İÔÚÁ½¸ö²»Á¬ĞøµÄÄÚ´æ¿Õ¼äÖĞ
+		// æ•°æ®åœ¨ä¸¤ä¸ªä¸è¿ç»­çš„å†…å­˜ç©ºé—´ä¸­
 		char* tmp = new char[mLast];
-		Array::Copy(mDynBuffer->mBuffer, 0, tmp, 0, mLast);  // ¿½±´Ò»¶ÎÄÚ´æ¿Õ¼äÖĞµÄÊı¾İµ½ tmp
-		Array::Copy(mDynBuffer->mBuffer, mFirst, mDynBuffer->mBuffer, 0, mDynBuffer->mCapacity - mFirst);  // ¿½±´µÚÒ»¶ÎÊı¾İµ½ 0 Ë÷ÒıÎ»ÖÃ
-		Array::Copy(tmp, 0, mDynBuffer->mBuffer, mDynBuffer->mCapacity - mFirst, mLast);      // ¿½±´µÚ¶ş¶ÎÊı¾İµ½»º³åÇø
+		Array::Copy(mDynBuffer->mBuffer, 0, tmp, 0, mLast);  // æ‹·è´ä¸€æ®µå†…å­˜ç©ºé—´ä¸­çš„æ•°æ®åˆ° tmp
+		Array::Copy(mDynBuffer->mBuffer, mFirst, mDynBuffer->mBuffer, 0, mDynBuffer->mCapacity - mFirst);  // æ‹·è´ç¬¬ä¸€æ®µæ•°æ®åˆ° 0 ç´¢å¼•ä½ç½®
+		Array::Copy(tmp, 0, mDynBuffer->mBuffer, mDynBuffer->mCapacity - mFirst, mLast);      // æ‹·è´ç¬¬äºŒæ®µæ•°æ®åˆ°ç¼“å†²åŒº
 
 		delete tmp;
 
@@ -111,17 +111,17 @@ void MCircularBuffer::setCapacity(std::size_t newCapacity)
 	{
 		return;
 	}
-	if (newCapacity < this->getSize())       // ²»ÄÜ·ÖÅä±Èµ±Ç°ÒÑ¾­Õ¼ÓĞµÄ¿Õ¼ä»¹Ğ¡µÄ¿Õ¼ä
+	if (newCapacity < this->getSize())       // ä¸èƒ½åˆ†é…æ¯”å½“å‰å·²ç»å æœ‰çš„ç©ºé—´è¿˜å°çš„ç©ºé—´
 	{
 		return;
 	}
-	char* tmpbuff = new char[newCapacity];   // ·ÖÅäĞÂµÄ¿Õ¼ä
-	if (isLinearized()) // Èç¹ûÊÇÔÚÒ»¶ÎÄÚ´æ¿Õ¼ä
+	char* tmpbuff = new char[newCapacity];   // åˆ†é…æ–°çš„ç©ºé—´
+	if (isLinearized()) // å¦‚æœæ˜¯åœ¨ä¸€æ®µå†…å­˜ç©ºé—´
 	{
-		// ÒÑ¾­ÊÇÏßĞÔ¿Õ¼äÁËÈÔÈ»½«Êı¾İÒÆ¶¯µ½Ë÷Òı 0 µÄÎ»ÖÃ
+		// å·²ç»æ˜¯çº¿æ€§ç©ºé—´äº†ä»ç„¶å°†æ•°æ®ç§»åŠ¨åˆ°ç´¢å¼• 0 çš„ä½ç½®
 		Array::Copy(mDynBuffer->mBuffer, mFirst, tmpbuff, 0, mDynBuffer->mSize);
 	}
-	else    // Èç¹ûÔÚÁ½¶ËÄÚ´æ¿Õ¼ä
+	else    // å¦‚æœåœ¨ä¸¤ç«¯å†…å­˜ç©ºé—´
 	{
 		Array::Copy(mDynBuffer->mBuffer, mFirst, tmpbuff, 0, mDynBuffer->mCapacity - mFirst);
 		Array::Copy(mDynBuffer->mBuffer, 0, tmpbuff, mDynBuffer->mCapacity - mFirst, mLast);
@@ -135,11 +135,11 @@ void MCircularBuffer::setCapacity(std::size_t newCapacity)
 }
 
 /**
-*@brief ÄÜ·ñÌí¼Ó num ³¤¶ÈµÄÊı¾İ
+*@brief èƒ½å¦æ·»åŠ  num é•¿åº¦çš„æ•°æ®
 */
 bool MCircularBuffer::canAddData(uint32 num)
 {
-	if (mDynBuffer->mCapacity - mDynBuffer->mSize > num) // ÀË·ÑÒ»¸ö×Ö½Ú£¬²»ÓÃ >= £¬Ê¹ÓÃ > 
+	if (mDynBuffer->mCapacity - mDynBuffer->mSize > num) // æµªè´¹ä¸€ä¸ªå­—èŠ‚ï¼Œä¸ç”¨ >= ï¼Œä½¿ç”¨ > 
 	{
 		return true;
 	}
@@ -148,11 +148,11 @@ bool MCircularBuffer::canAddData(uint32 num)
 }
 
 /**
-*@brief Ïò´æ´¢¿ÕÎ²²¿Ìí¼ÓÒ»¶ÎÄÚÈİ
+*@brief å‘å­˜å‚¨ç©ºå°¾éƒ¨æ·»åŠ ä¸€æ®µå†…å®¹
 */
 void MCircularBuffer::pushBackArr(char* items, uint32 start, std::size_t len)
 {
-	if (!canAddData(len)) // ´æ´¢¿Õ¼ä±ØĞëÒª±ÈÊµ¼ÊÊı¾İÖÁÉÙ¶à 1
+	if (!canAddData(len)) // å­˜å‚¨ç©ºé—´å¿…é¡»è¦æ¯”å®é™…æ•°æ®è‡³å°‘å¤š 1
 	{
 		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + mDynBuffer->mSize, mDynBuffer->mCapacity, mDynBuffer->mMaxCapacity);
 		setCapacity(closeSize);
@@ -188,11 +188,11 @@ void MCircularBuffer::pushBackBA(ByteBuffer* bu)
 }
 
 /**
-*@brief Ïò´æ´¢¿ÕÍ·²¿Ìí¼ÓÒ»¶ÎÄÚÈİ
+*@brief å‘å­˜å‚¨ç©ºå¤´éƒ¨æ·»åŠ ä¸€æ®µå†…å®¹
 */
 void MCircularBuffer::pushFrontArr(char* items, std::size_t len)
 {
-	if (!canAddData(len)) // ´æ´¢¿Õ¼ä±ØĞëÒª±ÈÊµ¼ÊÊı¾İÖÁÉÙ¶à 1
+	if (!canAddData(len)) // å­˜å‚¨ç©ºé—´å¿…é¡»è¦æ¯”å®é™…æ•°æ®è‡³å°‘å¤š 1
 	{
 		uint32 closeSize = DynBufResizePolicy::getCloseSize(len + mDynBuffer->mSize, mDynBuffer->mCapacity, mDynBuffer->mMaxCapacity);
 		setCapacity(closeSize);
@@ -227,7 +227,7 @@ void MCircularBuffer::pushFrontArr(char* items, std::size_t len)
 }
 
 /**
-* @brief ´Ó CB ÖĞ¶ÁÈ¡ÄÚÈİ£¬²¢ÇÒ½«Êı¾İÉ¾³ı
+* @brief ä» CB ä¸­è¯»å–å†…å®¹ï¼Œå¹¶ä¸”å°†æ•°æ®åˆ é™¤
 */
 void MCircularBuffer::popFrontBA(ByteBuffer* bytearray, std::size_t len)
 {
@@ -235,13 +235,13 @@ void MCircularBuffer::popFrontBA(ByteBuffer* bytearray, std::size_t len)
 	popFrontLen(len);
 }
 
-// ½ö½öÊÇ»ñÈ¡Êı¾İ£¬²¢²»É¾³ı
+// ä»…ä»…æ˜¯è·å–æ•°æ®ï¼Œå¹¶ä¸åˆ é™¤
 void MCircularBuffer::frontBA(ByteBuffer* bytearray, std::size_t len)
 {
-	bytearray->clear();          // ÉèÖÃÊı¾İÎª³õÊ¼Öµ
-	if (mDynBuffer->mSize >= len)          // Í·²¿Õ¼¾İ 4 ¸ö×Ö½Ú
+	bytearray->clear();          // è®¾ç½®æ•°æ®ä¸ºåˆå§‹å€¼
+	if (mDynBuffer->mSize >= len)          // å¤´éƒ¨å æ® 4 ä¸ªå­—èŠ‚
 	{
-		if (isLinearized())      // ÔÚÒ»¶ÎÁ¬ĞøµÄÄÚ´æ
+		if (isLinearized())      // åœ¨ä¸€æ®µè¿ç»­çš„å†…å­˜
 		{
 			bytearray->writeBytes(mDynBuffer->mBuffer, mFirst, len);
 		}
@@ -256,15 +256,15 @@ void MCircularBuffer::frontBA(ByteBuffer* bytearray, std::size_t len)
 		}
 	}
 
-	bytearray->setPos(0);        // ÉèÖÃÊı¾İ¶ÁÈ¡ÆğÊ¼Î»ÖÃ
+	bytearray->setPos(0);        // è®¾ç½®æ•°æ®è¯»å–èµ·å§‹ä½ç½®
 }
 
 /**
-* @brief ´Ó CB Í·²¿É¾³ıÊı¾İ
+* @brief ä» CB å¤´éƒ¨åˆ é™¤æ•°æ®
 */
 void MCircularBuffer::popFrontLen(uint32 len)
 {
-	if (isLinearized())  // ÔÚÒ»¶ÎÁ¬ĞøµÄÄÚ´æ
+	if (isLinearized())  // åœ¨ä¸€æ®µè¿ç»­çš„å†…å­˜
 	{
 		mFirst += len;
 	}
@@ -280,7 +280,7 @@ void MCircularBuffer::popFrontLen(uint32 len)
 	mDynBuffer->mSize -= len;
 }
 
-// Ïò×Ô¼ºÎ²²¿Ìí¼ÓÒ»¸ö CirculeBuffer 
+// å‘è‡ªå·±å°¾éƒ¨æ·»åŠ ä¸€ä¸ª CirculeBuffer 
 void MCircularBuffer::pushBackCB(MCircularBuffer* rhv)
 {
 	if (mDynBuffer->mCapacity - mDynBuffer->mSize < rhv->getSize())
@@ -295,11 +295,11 @@ void MCircularBuffer::pushBackCB(MCircularBuffer* rhv)
 	rhv->frontBA(mTmpBA, rhv->getSize());
 	pushBackBA(mTmpBA);
 
-	//if (rhv.isLinearized()) // Èç¹ûÊÇÔÚÒ»¶ÎÄÚ´æ¿Õ¼ä
+	//if (rhv.isLinearized()) // å¦‚æœæ˜¯åœ¨ä¸€æ®µå†…å­˜ç©ºé—´
 	//{
 	//    Array.Copy(rhv.buff, rhv.first, mBuffer, 0, rhv.size);
 	//}
-	//else    // Èç¹ûÔÚÁ½¶ËÄÚ´æ¿Õ¼ä
+	//else    // å¦‚æœåœ¨ä¸¤ç«¯å†…å­˜ç©ºé—´
 	//{
 	//    Array.Copy(rhv.buff, rhv.first, mBuffer, 0, rhv.capacity() - rhv.first);
 	//    Array.Copy(mBuffer, 0, mBuffer, rhv.capacity() - rhv.first, rhv.last);

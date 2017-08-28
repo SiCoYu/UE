@@ -6,7 +6,7 @@
 AMyTPWorldSettings::AMyTPWorldSettings(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	// Ã¿Ò»¸ö¹Ø¿¨ÎïÀíÅö×²´¦Àí
+	// æ¯ä¸€ä¸ªå…³å¡ç‰©ç†ç¢°æ’žå¤„ç†
 	this->PhysicsCollisionHandlerClass = UMyTPPhysicsCollisionHandler::StaticClass();
-	this->DefaultGameMode = AMyTPGameMode::StaticClass();	// Èç¹ûÃ»ÓÐÉèÖÃ£¬¾ÍÊÇÓÃÒýÇæÉèÖÃµÄ
+	this->DefaultGameMode = AMyTPGameMode::StaticClass();	// å¦‚æžœæ²¡æœ‰è®¾ç½®ï¼Œå°±æ˜¯ç”¨å¼•æ“Žè®¾ç½®çš„
 }

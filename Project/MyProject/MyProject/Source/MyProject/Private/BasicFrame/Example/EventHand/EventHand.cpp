@@ -23,6 +23,6 @@ void AEventHand::addEventHandle()
 	//this->OnActorBeginOverlap.AddDynamic(this, &AEventHand::OnOverlap);
 	//AddDynamic(this, &AEventHand::OnOverlap);
 	//this->OnActorBeginOverlap.AddUnique
-	// AddDynamic Ìí¼ÓµÄ»Øµ÷º¯ÊýÐèÒªÁ½¸ö²ÎÊý
+	// AddDynamic æ·»åŠ çš„å›žè°ƒå‡½æ•°éœ€è¦ä¸¤ä¸ªå‚æ•°
 	this->OnActorBeginOverlap.AddDynamic(this, &AEventHand::OnOverlapTwo);
 }

@@ -17,10 +17,10 @@ void UMyDelegateBase::testOneDelegate()
 
 void UMyDelegateBase::testMultiDelegate()
 {
-	// ²»ÄÜÒÆ³ýÊÂ¼þ
+	// ä¸èƒ½ç§»é™¤äº‹ä»¶
 	//this->mMyDelegateMultiThreeParamsTestEvent.AddUObject(this, &UMyDelegateBase::multiHandle);
 
-	// ¿ÉÒÔÒÆ³ýÊÂ¼þ
+	// å¯ä»¥ç§»é™¤äº‹ä»¶
 	this->mOnMultiThreeParamsTestDelegate = FMyDelegateDef::MyDelegateMultiThreeParamsTestEvent::FDelegate::CreateUObject(this, &UMyDelegateBase::multiHandle);
 
 	this->mOnMultiThreeParamsTestDelegateHandle = this->mMyDelegateMultiThreeParamsTestEvent.Add(this->mOnMultiThreeParamsTestDelegate);
