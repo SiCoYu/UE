@@ -270,8 +270,8 @@ FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
 {
 	// UE4 4.17
 	// warning C4996: 'USceneComponent::ComponentToWorld': ComponentToWorld will be made private, use GetComponentTransform() instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-	//return pUSceneComponent->ComponentToWorld;
-	return pUSceneComponent->GetComponentTransform();
+	return pUSceneComponent->ComponentToWorld;
+	//return pUSceneComponent->GetComponentTransform();
 }
 
 void EngineApi::LaunchURL(FString url)

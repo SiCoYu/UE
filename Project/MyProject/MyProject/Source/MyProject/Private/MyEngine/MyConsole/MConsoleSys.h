@@ -12,7 +12,7 @@ class UMConsoleSys : public UObject
 {
 	GENERATED_UCLASS_BODY()
 
-	static TAutoConsoleVariable<int32> CVarRefractionQuality;
+	//static TAutoConsoleVariable<int32> CVarRefractionQuality;
 public:
 	void init();
 	void dispose();
