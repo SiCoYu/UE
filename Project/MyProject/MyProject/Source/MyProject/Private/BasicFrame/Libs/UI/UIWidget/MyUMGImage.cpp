@@ -49,6 +49,7 @@ void UMyUMGImage::SynchronizeProperties()
 	//Thickness non-delegate version
 	MyImage->SetThickness(Thickness);
 
+	// ue4 4.17 warning C4996: OPTIONAL_BINDING macro is deprecated.  Please use PROPERTY_BINDING in place and you'll need to define a PROPERTY_BINDING_IMPLEMENTATION in your header instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//Color and Opacity
 	TAttribute<FSlateColor> ColorAndOpacityBinding = OPTIONAL_BINDING(FSlateColor, ColorAndOpacity);
 	MyImage->SetColorAndOpacity(ColorAndOpacityBinding);
