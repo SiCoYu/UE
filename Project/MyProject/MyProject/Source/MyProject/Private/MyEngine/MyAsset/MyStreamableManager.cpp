@@ -4,7 +4,9 @@
 #include <string>
 #include "MyStreamableManager.h"
 //#include "Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread ,这个目录是错误的，需要如下目录
-#include "Private/Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread
+// UE4 4.17 这个会导致链接错误
+// error LNK2001: unresolved external symbol "private: static bool FAsyncLoadingThread::bThreadStarted" (?bThreadStarted@FAsyncLoadingThread@@0_NA)
+// #include "Private/Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread
 
 FMyStreamableManager::FMyStreamableManager()
 {
@@ -55,6 +57,9 @@ void FMyStreamableManager::RequestAsyncLoad(const FStringAssetReference& TargetT
 
 bool FMyStreamableManager::IsMultithreaded()
 {
-	const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
-	return bIsMultithreaded;
+	// UE4 4.17 这个会导致链接错误
+	// error LNK2001: unresolved external symbol "private: static bool FAsyncLoadingThread::bThreadStarted" (?bThreadStarted@FAsyncLoadingThread@@0_NA)
+	//const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
+	//return bIsMultithreaded;
+	return true;
 }
