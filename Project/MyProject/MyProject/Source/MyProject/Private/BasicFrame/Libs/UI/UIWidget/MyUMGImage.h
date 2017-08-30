@@ -120,4 +120,6 @@ protected:
 	const FSlateBrush* ConvertImage(TAttribute<FSlateBrush> InImageAsset) const;
 
 	FReply HandleMouseButtonDown(const FGeometry& Geometry, const FPointerEvent& MouseEvent);
+
+	PROPERTY_BINDING_IMPLEMENTATION(FSlateColor, ColorAndOpacity);
 };
