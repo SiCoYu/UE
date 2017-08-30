@@ -8,6 +8,11 @@
       "Name": "MyProject",
       "Type": "Runtime",
       "LoadingPhase": "Default"
+    },
+    {
+        "Name": "MyProjectEditor",
+        "Type": "Editor",
+        "LoadingPhase": "Default"
     }
 	],
 	"AdditionalPluginDirectories": [
