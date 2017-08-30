@@ -71,19 +71,24 @@ int32 SMySlateImage::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGe
 			//	FinalColorAndOpacity 	//Color and Opacity
 			//);
 
-			FSlateDrawElement::PushClip(OutDrawElements);
+			// ref : UnrealEngine\Engine\Source\Editor\Sequencer\Private\SSequencerSection.cpp
+			// ref: int32 SSequencerSection::OnPaint( const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled ) const
+
+			// ref: UnrealEngine\Engine\Source\Developer\TreeMap\STreeMap.cpp
+			// ref: int32 STreeMap::OnPaint( const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled ) const
+			FSlateClippingZone ClippingZone(MyClippingRect);
+			OutDrawElements.PushClip(ClippingZone);
 
 			FSlateDrawElement::MakeBox(
 				OutDrawElements, 	//Out
 				LayerId,
 				PaintGeom, 		//Paint Geom
 				ImageBrush, 		//Brush
-				MyClippingRect, 		//Clip
 				(ESlateDrawEffect)DrawEffects,
 				FinalColorAndOpacity 	//Color and Opacity
 			);
 
-			FSlateDrawElement::PushClip();
+			OutDrawElements.PopClip();
 
 		} //For loop
 	}

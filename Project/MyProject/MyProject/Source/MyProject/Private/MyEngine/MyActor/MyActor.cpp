@@ -70,7 +70,7 @@ void AMyActor::StrongReferenceLoadAsset()
 	AssetToLoad = MyItem.ToStringReference();
 	// UE$ 4.17: warning C4996: 'FStreamableManager::SimpleAsyncLoad': Call RequestAsyncLoad with bManageActiveHandle=true instead if you want the manager to keep the handle alive Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//AssetLoader.SimpleAsyncLoad(AssetToLoad);
-	AssetLoader.RequestAsyncLoad(AssetToLoad, true);
+	AssetLoader.RequestAsyncLoad(AssetToLoad, FStreamableDelegate::CreateUObject(this, &AMyActor::MyFunctionToBeCalledAfterAssetsAreLoaded));
 }
 
 void AMyActor::StrongReferenceUnloadAsset()
