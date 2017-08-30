@@ -2,7 +2,8 @@
 
 #include "MyProjectEditor.h"
 #include "AnimationRuntime.h"
-#include "Editor/AnimGraph/Private/AnimGraphPrivatePCH.h"
+// UE4 4.17 : fatal error C1083: Cannot open include file: 'Editor/AnimGraph/Private/AnimGraphPrivatePCH.h': No such file or directory
+//#include "Editor/AnimGraph/Private/AnimGraphPrivatePCH.h"
 #include "AnimationGraphSchema.h"
 #include "AnimGraphNode_TranslateWith.h"
 

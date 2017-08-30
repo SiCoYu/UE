@@ -51,7 +51,8 @@ public class MyProjectEditor : ModuleRules
                 "AnimGraphRuntime",
                 "MyProject",
                 "AnimationEditor",
-                "GeometryMode"
+                "GeometryMode",
+                "MyProject"
             }
         );
  
@@ -77,7 +78,8 @@ public class MyProjectEditor : ModuleRules
 
                 "AnimGraphRuntime",
                 "MyProject",
-                "GeometryMode"
+                "GeometryMode",
+                "MyProject"
             }
         );
 

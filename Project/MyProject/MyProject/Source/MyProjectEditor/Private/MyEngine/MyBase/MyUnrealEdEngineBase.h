@@ -1,6 +1,7 @@
 #pragma once
 
-#include "PlatformDefine.h"
+//fatal error C1083: Cannot open include file: 'PlatformDefine.h': No such file or directory
+//#include "PlatformDefine.h"
 
 // UE4 4.17: error : UCLASS inside this preprocessor block will be skipped
 // #ifdef MY_WITH_EDITOR

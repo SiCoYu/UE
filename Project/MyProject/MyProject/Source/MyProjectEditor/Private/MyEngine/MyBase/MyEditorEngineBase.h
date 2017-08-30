@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PlatformDefine.h"
+//#include "PlatformDefine.h"
 
 // UE4 4.17: error : UCLASS inside this preprocessor block will be skipped
 //#ifdef MY_WITH_EDITOR
