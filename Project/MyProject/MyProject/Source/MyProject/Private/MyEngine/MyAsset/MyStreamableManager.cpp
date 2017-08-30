@@ -40,7 +40,9 @@ UObject* FMyStreamableManager::SynchronousLoad(std::string& path)
 {
 	FStringAssetReference assetRef;
 	assetRef.SetPath(UtilStr::ConvStdStr2FString(path));
-	return mStreamableManager.SynchronousLoad(assetRef);
+	// UE4 4.17 : warning C4996: 'FStreamableManager::SynchronousLoad': Call LoadSynchronous with bManageActiveHandle=true instead if you want the manager to keep the handle alive Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//return mStreamableManager.SynchronousLoad(assetRef);
+	return mStreamableManager.LoadSynchronous(assetRef, true);
 }
 
 void FMyStreamableManager::RequestAsyncLoad(const std::string& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority)

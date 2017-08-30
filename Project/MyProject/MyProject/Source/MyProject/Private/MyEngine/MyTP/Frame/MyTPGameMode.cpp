@@ -116,7 +116,14 @@ void AMyTPGameMode::RestartPlayer(class AController* NewPlayer)
 	// DEPRECATED(4.8, "GetRandomPointInRadius is deprecated, please use GetRandomReachablePointInRadius")
 	/* Get a point on the nav mesh near the other player */
 	//FVector StartLocation = UNavigationSystem::GetRandomPointInRadius(NewPlayer, SpawnOrigin, 250.0f);
-	FVector StartLocation = UNavigationSystem::GetRandomReachablePointInRadius(NewPlayer, SpawnOrigin, 250.0f);
+	// UE4 4.17: warning C4996: 'UNavigationSystem::GetRandomReachablePointInRadius': This version of GetRandomReachablePointInRadius is deprecated. Please use the new version Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//FVector StartLocation = UNavigationSystem::GetRandomReachablePointInRadius(NewPlayer, SpawnOrigin, 250.0f);
+	// ref: UnrealEngine\Engine\Source\Runtime\Engine\Private\AI\Navigation\NavigationSystem.cpp
+	// FVector UNavigationSystem::GetRandomReachablePointInRadius(UObject* WorldContextObject, const FVector& Origin, float Radius, ANavigationData* NavData, TSubclassOf<UNavigationQueryFilter> FilterClass)
+	UWorld* World = GEngine->GetWorldFromContextObject(NewPlayer, EGetWorldErrorMode::LogAndReturnNull);
+	UNavigationSystem* NavSys = UNavigationSystem::GetCurrent(World);
+	FNavLocation StartLocation;
+	bool ret = NavSys->GetRandomReachablePointInRadius(SpawnOrigin, 250.0f, StartLocation);
 
 	// Try to create a pawn to use of the default class for this player
 	if (NewPlayer->GetPawn() == nullptr && GetDefaultPawnClassForController(NewPlayer) != nullptr)

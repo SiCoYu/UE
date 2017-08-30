@@ -59,7 +59,20 @@ int32 SMySlateImage::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGe
 					1			//Local Scale
 				);
 
+			// warning C4996: 'FSlateDrawElement::MakeBox': ClippingRects are no longer supplied for individual draw element calls.  If you require a specialized clipping rect, use PushClip / PopClip on the WindowElementList, otherwise, just remove the parameter. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 			// error C2665: 'FSlateDrawElement::MakeBox': none of the 4 overloads could convert all the argument types
+			//FSlateDrawElement::MakeBox(
+			//	OutDrawElements, 	//Out
+			//	LayerId,
+			//	PaintGeom, 		//Paint Geom
+			//	ImageBrush, 		//Brush
+			//	MyClippingRect, 		//Clip
+			//	(ESlateDrawEffect)DrawEffects,
+			//	FinalColorAndOpacity 	//Color and Opacity
+			//);
+
+			FSlateDrawElement::PushClip(OutDrawElements);
+
 			FSlateDrawElement::MakeBox(
 				OutDrawElements, 	//Out
 				LayerId,
@@ -69,6 +82,8 @@ int32 SMySlateImage::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGe
 				(ESlateDrawEffect)DrawEffects,
 				FinalColorAndOpacity 	//Color and Opacity
 			);
+
+			FSlateDrawElement::PushClip();
 
 		} //For loop
 	}
