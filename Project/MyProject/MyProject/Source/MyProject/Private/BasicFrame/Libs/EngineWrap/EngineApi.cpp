@@ -31,7 +31,7 @@ UWorld* EngineApi::GetWorld()
 	// UE4 4.17
 	// warning C4996: 'UEngine::GetWorldFromContextObject': GetWorldFromContextObject(Object) and GetWorldFromContextObject(Object, boolean) are replaced by GetWorldFromContextObject(Object, Enum) or GetWorldFromContextObjectChecked(Object) Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//UWorld* World = GEngine->GetWorldFromContextObject(GEngineData->getMainActor());
-	UWorld* World = GEngine->GetWorldFromContextObject(GEngineData->getMainActor());
+	UWorld* World = GEngine->GetWorldFromContextObject(GEngineData->getMainActor(), EGetWorldErrorMode::LogAndReturnNull);
 	return World;
 }
 
@@ -270,8 +270,8 @@ FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
 {
 	// UE4 4.17
 	// warning C4996: 'USceneComponent::ComponentToWorld': ComponentToWorld will be made private, use GetComponentTransform() instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-	return pUSceneComponent->ComponentToWorld;
-	//return pUSceneComponent->GetComponentTransform();
+	//return pUSceneComponent->ComponentToWorld;
+	return (FTransform&)pUSceneComponent->GetComponentTransform();
 }
 
 void EngineApi::LaunchURL(FString url)
