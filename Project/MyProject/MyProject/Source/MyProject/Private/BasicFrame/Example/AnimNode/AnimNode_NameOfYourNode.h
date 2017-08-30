@@ -46,10 +46,18 @@ public:
 	//virtual void CacheBones(const FAnimationCacheBonesContext & Context) OVERRIDE;
 	//virtual void Update(const FAnimationUpdateContext & Context) OVERRIDE;
 	//virtual void Evaluate(FPoseContext& Output) OVERRIDE;
-	virtual void Initialize(const FAnimationInitializeContext& Context) override;
-	virtual void CacheBones(const FAnimationCacheBonesContext & Context) override;
-	virtual void Update(const FAnimationUpdateContext & Context) override;
-	virtual void Evaluate(FPoseContext& Output) override;
+	// UE4 4.17: warning C4996: 'FAnimNode_Base::Initialize': Please use Initialize_AnyThread instead Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//virtual void Initialize(const FAnimationInitializeContext& Context) override;
+	virtual void Initialize_AnyThread(const FAnimationInitializeContext& Context) override;
+	// UE4 4.17: warning C4996: 'FAnimNode_Base::CacheBones': Please use CacheBones_AnyThread instead Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//virtual void CacheBones(const FAnimationCacheBonesContext & Context) override;
+	virtual void CacheBones_AnyThread(const FAnimationCacheBonesContext & Context) override;
+	// UE4 4.17: warning C4996: 'FAnimNode_Base::Update': Please use Update_AnyThread instead Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//virtual void Update(const FAnimationUpdateContext & Context) override;
+	virtual void Update_AnyThread(const FAnimationUpdateContext & Context) override;
+	// UE4 4.17 warning C4996: 'FAnimNode_Base::Evaluate': Please use Evaluate_AnyThread instead Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//virtual void Evaluate(FPoseContext& Output) override;
+	virtual void Evaluate_AnyThread(FPoseContext& Output) override;
 	// End of FAnimNode_Base interface
 
 	// Constructor 

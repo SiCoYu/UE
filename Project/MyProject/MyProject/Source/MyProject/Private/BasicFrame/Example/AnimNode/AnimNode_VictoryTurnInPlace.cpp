@@ -25,7 +25,7 @@ FAnimNode_VictoryTurnInPlace::FAnimNode_VictoryTurnInPlace()
 	ShowTurnRotationChangePerTick = false;
 }
 
-void FAnimNode_VictoryTurnInPlace::Initialize(const FAnimationInitializeContext & Context)
+void FAnimNode_VictoryTurnInPlace::Initialize_AnyThread(const FAnimationInitializeContext & Context)
 {
 	//Init the Inputs
 	BasePose.Initialize(Context);
@@ -109,7 +109,7 @@ void FAnimNode_VictoryTurnInPlace::UpdateBlendAlpha()
 		else BlendAlpha -= InternalBlendDuration;
 	}
 }
-void FAnimNode_VictoryTurnInPlace::Update(const FAnimationUpdateContext & Context)
+void FAnimNode_VictoryTurnInPlace::Update_AnyThread(const FAnimationUpdateContext & Context)
 {
 	//EDITOR
 	//Editor mode? just use the base pose
@@ -169,7 +169,7 @@ void FAnimNode_VictoryTurnInPlace::Update(const FAnimationUpdateContext & Contex
 	//***************************************
 }
 
-void FAnimNode_VictoryTurnInPlace::Evaluate(FPoseContext & Output)
+void FAnimNode_VictoryTurnInPlace::Evaluate_AnyThread(FPoseContext & Output)
 {
 	//~~~ Fully In Base Pose ~~~
 	if (BlendAlpha <= 0) BasePose.Evaluate(Output);

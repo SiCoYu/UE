@@ -14,7 +14,7 @@ FAnimNode_NameOfYourNode::FAnimNode_NameOfYourNode()
 	WorldIsGame = false;
 }
 
-void FAnimNode_NameOfYourNode::Initialize(const FAnimationInitializeContext & Context)
+void FAnimNode_NameOfYourNode::Initialize_AnyThread(const FAnimationInitializeContext & Context)
 {
 	//Init the Inputs
 	BasePose.Initialize(Context);
@@ -35,12 +35,12 @@ void FAnimNode_NameOfYourNode::Initialize(const FAnimationInitializeContext & Co
 	WorldIsGame = (TheWorld->WorldType == EWorldType::Game);
 }
 
-void FAnimNode_NameOfYourNode::CacheBones(const FAnimationCacheBonesContext & Context)
+void FAnimNode_NameOfYourNode::CacheBones_AnyThread(const FAnimationCacheBonesContext & Context)
 {
 	BasePose.CacheBones(Context);
 	OtherPose.CacheBones(Context);
 }
-void FAnimNode_NameOfYourNode::Update(const FAnimationUpdateContext & Context)
+void FAnimNode_NameOfYourNode::Update_AnyThread(const FAnimationUpdateContext & Context)
 {
 	//***************************************
 	// Evaluate Graph, see AnimNode_Base, AnimNodeBase.h
@@ -90,7 +90,7 @@ void FAnimNode_NameOfYourNode::Update(const FAnimationUpdateContext & Context)
 	BasePose.Update(Context);
 }
 
-void FAnimNode_NameOfYourNode::Evaluate(FPoseContext & Output)
+void FAnimNode_NameOfYourNode::Evaluate_AnyThread(FPoseContext & Output)
 {
 	// Return Base Pose, Un Modified 
 	BasePose.Evaluate(Output);

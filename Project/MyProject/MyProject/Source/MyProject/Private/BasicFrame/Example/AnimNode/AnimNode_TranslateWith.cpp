@@ -24,17 +24,17 @@ FAnimNode_TranslateWith::FAnimNode_TranslateWith()
 	CurrentAddedOffset.Z = NULL;
 }
 
-void FAnimNode_TranslateWith::Initialize(const FAnimationInitializeContext& Context)
+void FAnimNode_TranslateWith::Initialize_AnyThread(const FAnimationInitializeContext& Context)
 {
 	ComponentPose.Initialize(Context);
 }
 
-void FAnimNode_TranslateWith::Update(const FAnimationUpdateContext& Context)
+void FAnimNode_TranslateWith::Update_AnyThread(const FAnimationUpdateContext& Context)
 {
 	ComponentPose.Update(Context);
 }
 
-void FAnimNode_TranslateWith::CacheBones(const FAnimationCacheBonesContext & Context)
+void FAnimNode_TranslateWith::CacheBones_AnyThread(const FAnimationCacheBonesContext & Context)
 {
 	// 'FAnimationBaseContext::AnimInstance': Please use AnimInstanceProxy Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InitializeBoneReferences(Context.AnimInstance->RequiredBones);
@@ -61,7 +61,7 @@ void FAnimNode_TranslateWith::InitializeBoneReferences(const FBoneContainer & Re
 }
 
 //This Checks for Updates, if no Axis is checked, returns Base Pose and moves on
-void FAnimNode_TranslateWith::EvaluateComponentSpace(FComponentSpacePoseContext& Output)
+void FAnimNode_TranslateWith::EvaluateComponentSpace_AnyThread(FComponentSpacePoseContext& Output)
 {
 	// Evaluate the input
 	ComponentPose.EvaluateComponentSpace(Output);
@@ -105,7 +105,9 @@ void FAnimNode_TranslateWith::EvaluateBoneTransforms(USkeletalMeshComponent* Ske
 	// If any changes have occured, add them, and reset offset
 	if (!(CurrentAddedOffset == AddtoOffset))
 	{
-		CurrentAddedOffset = SkelComp->ComponentToWorld.InverseTransformPosition(AddtoOffset);
+		// UE4 4.17 warning C4996: 'USceneComponent::ComponentToWorld': ComponentToWorld will be made private, use GetComponentTransform() instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//CurrentAddedOffset = SkelComp->ComponentToWorld.InverseTransformPosition(AddtoOffset);
+		CurrentAddedOffset = SkelComp->GetComponentTransform().InverseTransformPosition(AddtoOffset);
 		JointOffset.Set((NULL), (NULL), (NULL));
 	}
 
@@ -153,6 +155,8 @@ void FAnimNode_TranslateWith::EvaluateBoneTransforms(USkeletalMeshComponent* Ske
 // Makes sure that both bones are valid
 bool FAnimNode_TranslateWith::IsValidToEvaluate(const USkeleton * Skeleton, const FBoneContainer & RequiredBones)
 {
+	// UE4 4.17 warning C4996: 'FBoneReference::IsValid': Please use IsValidToEvaluate instead Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	// if both bones are valid
-	return (TargetBone.IsValid(RequiredBones) && (SourceBone.IsValid(RequiredBones)));
+	//return (TargetBone.IsValid(RequiredBones) && (SourceBone.IsValid(RequiredBones)));
+	return (TargetBone.IsValidToEvaluate(RequiredBones) && (SourceBone.IsValidToEvaluate(RequiredBones)));
 }
