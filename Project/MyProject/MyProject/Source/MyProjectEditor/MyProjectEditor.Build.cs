@@ -6,8 +6,10 @@ public class MyProjectEditor : ModuleRules
     // 4.17
     public MyProjectEditor(ReadOnlyTargetRules Target) : base(Target)
     {
+        this.Definitions.Add("MY_WITH_EDITOR");
+
         //PrivateIncludePaths.Add("MyProjectEditor/Private");
-		PrivateIncludePaths.AddRange(
+        PrivateIncludePaths.AddRange(
 			new string[] 
             {
                 // Main area

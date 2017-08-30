@@ -8,7 +8,9 @@ public class MyProjectTarget : TargetRules
     //public MyProjectTarget(TargetInfo Target)
     public MyProjectTarget(TargetInfo Target) : base(Target)
     {
-		Type = TargetType.Game;
+		this.Type = TargetType.Game;
+        // UE4 4.17
+        this.bUseStaticCRT = false;
 
         // warning : SetupBinaries() is deprecated in the 4.16 release. From the constructor in your .target.cs file, use ExtraModuleNames.Add("Foo") to add modules to your target, or set LaunchModuleName = "Foo" to override the name of the launch module for program targets.
         // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译

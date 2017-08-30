@@ -13,6 +13,9 @@ public class MyProject : ModuleRules
     // 4.17
     public MyProject(ReadOnlyTargetRules Target) : base(Target)
     {
+        // UE4 4.17
+        this.bUseRTTI = true;
+
         // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
         // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs
         PrivateIncludePaths.AddRange(
@@ -217,6 +220,11 @@ public class MyProject : ModuleRules
                 "HTTP",
             }
         );
+
+        if (UEBuildConfiguration.bBuildEditor == true)
+        {
+            PrivateDependencyModuleNames.Add("UnrealEd");
+        }
 
         // AnimGraphRuntime 模块的包含目录需要这样导入，参考 Engine.Build.cs
         DynamicallyLoadedModuleNames.Add("AnimGraphRuntime");
