@@ -2,7 +2,8 @@
 
 #include "PlatformDefine.h"
 
-#ifdef MY_WITH_EDITOR
+// UE4 4.17: error : UCLASS inside this preprocessor block will be skipped
+// #ifdef MY_WITH_EDITOR
 
 #include "Editor/UnrealEdEngine.h"		// class UNREALED_API UUnrealEdEngine : public UEditorEngine, public FNotifyHook
 #include "MyUnrealEdEngineBase.generated.h"
@@ -17,4 +18,4 @@ public:
 	UMyUnrealEdEngineBase(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 };
 
-#endif
+//#endif
