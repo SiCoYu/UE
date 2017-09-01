@@ -1,3 +1,3 @@
-#include "MyProjectEditor.h"
-#include "GAAttributePin.h"
+//#include "MyProjectEditor.h"
 #include "GAAttributePanelGraphPinFactory.h"
+#include "GAAttributePin.h"

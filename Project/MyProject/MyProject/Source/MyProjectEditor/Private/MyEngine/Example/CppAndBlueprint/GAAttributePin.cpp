@@ -1,11 +1,11 @@
-#include "MyProjectEditor.h"
+//#include "MyProjectEditor.h"
+#include "GAAttributePin.h"
 #include "KismetEditorUtilities.h"
 
 #include "Widgets/Input/STextComboBox.h"
 //#include "STextComboBox.h"
 #include "EdGraph/EdGraphPin.h"
 #include "EdGraph/EdGraphSchema.h"
-#include "GAAttributePin.h"
 
 void SGAAttributePin::Construct(const FArguments& InArgs, UEdGraphPin* InGraphPinObj)
 {

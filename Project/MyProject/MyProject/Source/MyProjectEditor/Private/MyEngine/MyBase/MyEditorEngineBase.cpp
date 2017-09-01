@@ -1,4 +1,4 @@
-#include "MyProjectEditor.h"
+//#include "MyProjectEditor.h"
 #include "MyEditorEngineBase.h"
 
 UMyEditorEngineBase::UMyEditorEngineBase(const class FObjectInitializer& PCIP)

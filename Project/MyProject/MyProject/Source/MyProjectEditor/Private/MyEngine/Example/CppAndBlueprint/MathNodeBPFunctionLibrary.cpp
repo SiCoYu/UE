@@ -1,6 +1,7 @@
-#include "MyProjectEditor.h" //Change this to your project's header file (Its the file thats got the same name as your project and ends with .h)
-#include "UnrealMathVectorCommon.h"
+// UE4 4.17 : error : Expected MathNodeBPFunctionLibrary.h to be first header included.
+//#include "MyProjectEditor.h" //Change this to your project's header file (Its the file thats got the same name as your project and ends with .h)
 #include "MathNodeBPFunctionLibrary.h"
+#include "UnrealMathVectorCommon.h"
 
 #define SMALL_NUMBER		(1.e-8f)
 

@@ -1,6 +1,6 @@
 // Copyright 1998-2013 Epic Games, Inc. All Rights Reserved.
 
-#include "MyProjectEditor.h"
+//#include "MyProjectEditor.h"
 #include "AnimGraphNode_NameOfYourNode.h"
 //#include "UtilStr.h"
 

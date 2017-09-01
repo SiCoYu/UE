@@ -1,6 +1,7 @@
 // Copyright 1998-2013 Epic Games, Inc. All Rights Reserved.
 
-#include "MyProjectEditor.h"
+//UE4 4.17 : error : Expected AnimGraphNode_VictoryTurnInPlace.h to be first header included.
+//#include "MyProjectEditor.h"
 #include "AnimGraphNode_VictoryTurnInPlace.h"
 //#include "UtilStr.h"
 

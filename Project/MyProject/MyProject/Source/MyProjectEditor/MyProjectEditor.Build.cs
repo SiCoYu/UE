@@ -51,10 +51,9 @@ public class MyProjectEditor : ModuleRules
                 "KismetCompiler",
 
                 "AnimGraphRuntime",
-                "MyProject",
                 "AnimationEditor",
                 "GeometryMode",
-                "MyProject"
+                //"MyProject"
             }
         );
  
@@ -79,9 +78,8 @@ public class MyProjectEditor : ModuleRules
                 "KismetCompiler",
 
                 "AnimGraphRuntime",
-                "MyProject",
                 "GeometryMode",
-                "MyProject"
+                //"MyProject"
             }
         );
 

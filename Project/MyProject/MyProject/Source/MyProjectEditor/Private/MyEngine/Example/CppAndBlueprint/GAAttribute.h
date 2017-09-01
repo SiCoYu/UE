@@ -16,7 +16,9 @@ struct FGAAttribute
 {
 	GENERATED_USTRUCT_BODY()
 public:
+	// UE4 4.17 : Error: An explicit Category specifier is required for any property exposed to the editor or Blueprints in an Engine module.
 	//It's important to mark property as UPROPERTY(), it doesn't need to have any specifiers though.
-	UPROPERTY(BlueprintReadOnly)
+	//UPROPERTY(BlueprintReadOnly)
+	UPROPERTY()
 	FName AttributeName;
 };
