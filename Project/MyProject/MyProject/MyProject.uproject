@@ -5,15 +5,15 @@
 	"Description": "",
   "Modules": [
     {
-			"Name": "MyProjectEditor",
-			"Type": "Editor",
-			"LoadingPhase": "Default"
-		},
-    {
       "Name": "MyProject",
       "Type": "Runtime",
       "LoadingPhase": "Default"
-    }
+    },
+    {
+			"Name": "MyProjectEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
   ],
 	"AdditionalPluginDirectories": [
 		"/MyProject/Plugins"
