@@ -13,6 +13,9 @@ public class MyProject : ModuleRules
     // 4.17
     public MyProject(ReadOnlyTargetRules Target) : base(Target)
     {
+        // To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
+        //this.PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
         // UE4 4.17
         this.bUseRTTI = true;
 

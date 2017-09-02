@@ -8,9 +8,6 @@ public class MyProjectTarget : TargetRules
     //public MyProjectTarget(TargetInfo Target)
     public MyProjectTarget(TargetInfo Target) : base(Target)
     {
-        // To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
-        // PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-
         this.Type = TargetType.Game;
         // UE4 4.17
         this.bUseStaticCRT = false;
