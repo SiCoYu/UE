@@ -57,6 +57,6 @@ public class MyProjectTarget : TargetRules
 
         //OutCPPEnvironmentConfiguration.Target.Configuration = CPPTargetConfiguration.Debug;
         //BuildConfiguration.bDebugBuildsActuallyUseDebugCRT = true;
-        UEBuildConfiguration.bBuildEditor = true;   // 开启是否编辑 MyProjectEditor，但是即使开始，如果不设置文件 MyProject\Source\MyProjectEditor.Target.cs 中的 OutExtraModuleNames.Add("MyProjectEditor"); 也不会编译 MyProjectEditor
+        UEBuildConfiguration.bBuildEditor = false;   // 开启是否编辑 MyProjectEditor，但是即使开始，如果不设置文件 MyProject\Source\MyProjectEditor.Target.cs 中的 OutExtraModuleNames.Add("MyProjectEditor"); 也不会编译 MyProjectEditor
     }
 }
