@@ -5,13 +5,13 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "MyProjectEditor",
-			"Type": "Editor",
+			"Name": "MyProject",
+			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		},
 		{
-			"Name": "MyProject",
-			"Type": "Runtime",
+			"Name": "MyProjectEditor",
+			"Type": "Editor",
 			"LoadingPhase": "Default"
 		}
 	],
