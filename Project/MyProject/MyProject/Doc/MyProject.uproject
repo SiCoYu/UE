@@ -1,0 +1,21 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{0E34D0EB-4EF0-A0E2-2BA3-C2877067F7A2}",
+	"Category": "",
+	"Description": "",
+  "Modules": [
+    {
+      "Name": "MyProject",
+      "Type": "Runtime",
+      "LoadingPhase": "Default" 	// 定义 Engine\Source\Runtime\Projects\Public\ModuleDescriptor.h
+    },
+	{
+		"Name": "MyProjectEditor",
+		"Type": "Editor",
+		"LoadingPhase": "Default"
+	}
+  ],
+	"AdditionalPluginDirectories": [
+		"/MyProject/Plugins"
+	]
+}
