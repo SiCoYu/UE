@@ -83,6 +83,32 @@ cd %BASE_DIR%
 :: Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp
 :: LOG
 :: Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp
+:: dllerrors
+:: Engine\Source\Runtime\Core\Private\Windows\WindowsPlatformProcess.cpp
+:: NoLoadStartupPackages
+:: Engine\Source\Runtime\CoreUObject\Private\Misc\StartupPackages.cpp
+:: DUMPMOVIE
+:: Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp
+:: -MATINEESSCAPTURE=
+:: Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp
+:: NOSCREENMESSAGES
+:: Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp
+:: NOINI
+:: Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp
+:: nosound
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: enablesound
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: noailogging
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: enableailogging
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: SECONDS=
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: BENCHMARKSECONDS=
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: FPS=
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
 %UE4_BIN_APP_FULL_PATH% crashreports noinnerexception useautoreporter -cmd UTF8Output LLM NOLLM
 
 pause
