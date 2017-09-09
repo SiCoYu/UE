@@ -109,6 +109,30 @@ cd %BASE_DIR%
 :: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
 :: FPS=
 :: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: DEFAULTMAP=
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: virtmemkb=
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: EXEC=
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: ExecCmds=
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: vsync
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: novsync
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: ForceLauncher
+:: Engine\Source\Editor\UnrealEd\Private\EditorEngine.cpp
+:: ExecCmds
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: ExecCmds
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: ExecCmds
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: ExecCmds
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: ExecCmds
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
 %UE4_BIN_APP_FULL_PATH% crashreports noinnerexception useautoreporter -cmd UTF8Output LLM NOLLM
 
 pause
