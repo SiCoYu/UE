@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "MyMountPak.h"
 #include "IPlatformFilePak.h"
+#include "HAL/PlatformFilemanager.h"
+#include "GenericPlatformFile.h"
 
 UMyMountPak::UMyMountPak(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

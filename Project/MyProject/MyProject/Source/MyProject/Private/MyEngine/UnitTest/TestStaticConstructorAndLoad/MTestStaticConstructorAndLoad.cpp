@@ -1,5 +1,7 @@
 #include "MyProject.h"
 #include "MTestStaticConstructorAndLoad.h"
+#include "ConstructorHelpers.h"
+#include "GameFramework/NavMovementComponent.h"
 
 AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad(const FObjectInitializer& PCIP)
 	: Super(PCIP)
@@ -10,7 +12,7 @@ AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad(const FObjectInit
 AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad()
 {
 	// Structure to hold one-time initialization
-    static FClassFinder<UNavigationMeshBase> ClassFinder(TEXT("class'Engine.NavigationMeshBase'"));
+    static FClassFinder<UNavMovementComponent> ClassFinder(TEXT("class'Engine.UNavMovementComponent'"));
     if (ClassFinder.Succeeded())
     {
         NavMeshClass = ClassFinder.Class;
@@ -21,7 +23,7 @@ AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad()
     }
 	
 	// In many cases, you can just use USomeClass::StaticClass() and skip the complexity of the ClassFinder altogether. For example, you can use the method below in most circumstances: 
-	NavMeshClass = UNavigationMeshBase::StaticClass();
+	NavMeshClass = UNavMovementComponent::StaticClass();
 	
     // Structure to hold one-time initialization
     struct FConstructorStatics
@@ -32,6 +34,7 @@ AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad()
         {
         }
     };
+
     static FConstructorStatics ConstructorStatics;
 
     // Property initialization

@@ -202,6 +202,7 @@ public class MyProject : ModuleRules
                 "Sockets",
                 "Networking",
                 "UMG",
+                "PakFile",
                 "PhysX",    // PhysX
                 "APEX",     // PhysX
                 "SandboxFile",  // IPlatformFileSandboxWrapper.h，否则链接不过
@@ -221,6 +222,7 @@ public class MyProject : ModuleRules
 				"SlateCore",
                 "UMG",
                 "HTTP",
+                "PakFile",
             }
         );
 
