@@ -1,6 +1,8 @@
 #pragma once
 
-#include "MConsoleSys.generated.h"
+#include "IConsoleManager.h"
+
+#include "MConsoleManager.generated.h"
 
 /**
  * @brief On engine startup, the state of console variables can be loaded from the file Engine/Config/ConsoleVariables.ini.
@@ -8,14 +10,19 @@
  * @ref https://docs.unrealengine.com/latest/INT/Programming/Development/Tools/ConsoleManager/index.html
  */
 UCLASS()
-class UMConsoleSys : public UObject
+class UMConsoleManager : public UObject
 {
 	GENERATED_UCLASS_BODY()
 
-	//static TAutoConsoleVariable<int32> CVarRefractionQuality;
+protected:
+	static TAutoConsoleVariable<int32> CVarTestCmd;
+	IConsoleCommand* mTestCmd;
+
 public:
 	void init();
 	void dispose();
 	void registerConsoleVariable();
 	void unregisterConsoleVariable();
+
+	void myCmdHandle();
 };
