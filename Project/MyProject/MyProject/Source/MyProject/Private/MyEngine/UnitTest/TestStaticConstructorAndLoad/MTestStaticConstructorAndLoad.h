@@ -16,5 +16,5 @@ class AMTestStaticConstructorAndLoad : public AActor
 public:
 	AMTestStaticConstructorAndLoad();
     UPROPERTY()
-    UDrawSphereComponent* StaticMesh ;
+    UDrawSphereComponent* StaticMesh;
 };

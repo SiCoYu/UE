@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "MyMountPak.h"
+#include "IPlatformFilePak.h"
 
 UMyMountPak::UMyMountPak(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

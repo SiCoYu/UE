@@ -38,7 +38,7 @@ void UMConsoleManager::registerConsoleVariable()
 		TEXT("  3: end"),
 		// error C2338: You cannot use raw method delegates with UObjects.
 		//FConsoleCommandDelegate::CreateRaw(this, &UMConsoleSys::myCmdHandle),
-		FConsoleCommandDelegate::CreateRaw(this, &UMConsoleSys::myCmdHandle),
+		FConsoleCommandDelegate::Create
 	   ECVF_Scalability | ECVF_RenderThreadSafe);
 }
 
