@@ -1,8 +1,9 @@
 #include "MyProject.h"
 #include "MTestStaticConstructorAndLoad.h"
 #include "ConstructorHelpers.h"
-#include "GameFramework/NavMovementComponent.h"
 
+// warning C4828: The file contains a character starting at offset 0x168 that is illegal in the current source character set (codepage 65001).
+// 转换成 UTF-8 Without BOM
 AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad(const FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
@@ -11,8 +12,11 @@ AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad(const FObjectInit
 
 AMTestStaticConstructorAndLoad::AMTestStaticConstructorAndLoad()
 {
+	// FClassFinder 是类的内部类，一定要加外部类，否则编译不过
 	// Structure to hold one-time initialization
-    static FClassFinder<UNavMovementComponent> ClassFinder(TEXT("class'Engine.UNavMovementComponent'"));
+    //static FClassFinder<UNavMovementComponent> ClassFinder(TEXT("class'Engine.UNavMovementComponent'"));
+	static ConstructorHelpers::FClassFinder<UNavMovementComponent> ClassFinder(TEXT("class'Engine.UNavMovementComponent'"));
+
     if (ClassFinder.Succeeded())
     {
         NavMeshClass = ClassFinder.Class;

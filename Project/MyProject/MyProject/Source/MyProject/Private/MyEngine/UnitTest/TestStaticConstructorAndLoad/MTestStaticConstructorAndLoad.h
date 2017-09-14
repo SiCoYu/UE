@@ -1,10 +1,11 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Templates/SubclassOf.h"
+#include "GameFramework/NavMovementComponent.h"
 #include "MTestStaticConstructorAndLoad.generated.h"
 
-class UNavMovementComponent;
-class UDrawSphereComponent;
+class UStaticMesh;
 
 /**
  * @brief Creating component subobjects and attaching them to the actor's hierarchy can also be done inside of the constructor. When spawning an actor, its components will be cloned from the CDO. In order to ensure that components are always created, destroyed, and properly garbage-collected, a pointer to every component created in the constructor should be stored in a UPROPERTY of the owning class. 
@@ -21,8 +22,8 @@ public:
 	AMTestStaticConstructorAndLoad(const FObjectInitializer& PCIP = FObjectInitializer::Get());
 
 	UPROPERTY()
-	UNavMovementComponent* NavMeshClass;
+	TSubclassOf<UNavMovementComponent> NavMeshClass;
 
     UPROPERTY()
-    UDrawSphereComponent* StaticMesh;
+	UStaticMesh* StaticMesh;
 };

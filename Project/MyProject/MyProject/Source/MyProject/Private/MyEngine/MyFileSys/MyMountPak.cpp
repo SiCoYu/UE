@@ -23,8 +23,12 @@ void UMyMountPak::LoadPakComplete()
     PakPlatformFile->Initialize(&PlatformFile, TEXT(""));
     FPlatformFileManager::Get().SetPlatformFile(*PakPlatformFile);
 
+	// error C2661: 'FPakFile::FPakFile': no overloaded function takes 2 arguments
+	// #if IS_PROGRAM
+	// Engine\Source\Runtime\PakFile\Public\IPlatformFilePak.h
     //获取Pak文件
-    FPakFile PakFile(*SaveContentDir, false);
+    //FPakFile PakFile(*SaveContentDir, false);
+	FPakFile PakFile(&PlatformFile, *SaveContentDir, false);
 	UE_LOG(LogClass, Log, TEXT("get PakFile..."));
 
     //设置pak文件的Mount点.
@@ -51,13 +55,15 @@ void UMyMountPak::LoadPakComplete()
 
         FStringAssetReference reference = AssetName;
 
+		// warning C4996: 'FStreamableManager::SynchronousLoad': Call LoadSynchronous with bManageActiveHandle=true instead if you want the manager to keep the handle alive Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
         //加载UObject
-        UObject* LoadObject = StreamableManager.SynchronousLoad(reference);
+        //UObject* LoadObject = StreamableManager.SynchronousLoad(reference);
+		UObject* LoadObject = StreamableManager.LoadSynchronous(reference, true);
 
         if (LoadObject != nullptr)
         {
 			UE_LOG(LogClass, Log, TEXT("Object Load Success..."));
-            TheLoadObject = LoadObject;
+            //TheLoadObject = LoadObject;
         }
         else
         {
