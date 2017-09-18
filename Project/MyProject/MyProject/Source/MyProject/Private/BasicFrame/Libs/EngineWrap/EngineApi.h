@@ -363,6 +363,9 @@ public:
 	// Engine\Source\Runtime\Core\Private\Misc\Core.cpp	\ GFrameNumber \ GFrameNumberRenderThread
 	static uint32 getFrameNumber();
 	static uint32 getFrameNumberRenderThread();
+
+	// 判断是否是多线程
+	static bool isMultithreaded();
 };
 
 #include "EngineApi.inl"

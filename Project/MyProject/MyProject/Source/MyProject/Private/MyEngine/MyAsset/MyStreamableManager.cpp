@@ -2,6 +2,7 @@
 #include "Misc/StringAssetReference.h"	// FStringAssetReference
 #include "UtilStr.h"
 #include <string>
+#include "EngineApi.h"	// isMultithreaded
 #include "MyStreamableManager.h"
 //#include "Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread ,这个目录是错误的，需要如下目录
 // UE4 4.17 这个会导致链接错误
@@ -63,6 +64,6 @@ bool FMyStreamableManager::IsMultithreaded()
 	// error LNK2001: unresolved external symbol "private: static bool FAsyncLoadingThread::bThreadStarted" (?bThreadStarted@FAsyncLoadingThread@@0_NA)
 	//const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
 	//return bIsMultithreaded;
-	const bool bIsMultithreaded = FPlatformProcess::SupportsMultithreading();
-	return bIsMultithreaded;
+	
+	return EngineApi::isMultithreaded();
 }

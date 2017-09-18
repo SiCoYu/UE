@@ -919,3 +919,9 @@ uint32 EngineApi::getFrameNumberRenderThread()
 {
 	return GFrameNumberRenderThread;
 }
+
+bool EngineApi::isMultithreaded()
+{
+	const bool bIsMultithreaded = FPlatformProcess::SupportsMultithreading();
+	return bIsMultithreaded;
+}
