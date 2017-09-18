@@ -63,5 +63,6 @@ bool FMyStreamableManager::IsMultithreaded()
 	// error LNK2001: unresolved external symbol "private: static bool FAsyncLoadingThread::bThreadStarted" (?bThreadStarted@FAsyncLoadingThread@@0_NA)
 	//const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
 	//return bIsMultithreaded;
-	return true;
+	const bool bIsMultithreaded = FPlatformProcess::SupportsMultithreading();
+	return bIsMultithreaded;
 }
