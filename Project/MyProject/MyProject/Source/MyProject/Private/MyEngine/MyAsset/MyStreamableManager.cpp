@@ -65,5 +65,6 @@ bool FMyStreamableManager::IsMultithreaded()
 	//const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
 	//return bIsMultithreaded;
 	
-	return EngineApi::isMultithreaded();
+	//return EngineApi::isMultithreaded();
+	return EngineApi::isInAsyncLoadingThread();
 }

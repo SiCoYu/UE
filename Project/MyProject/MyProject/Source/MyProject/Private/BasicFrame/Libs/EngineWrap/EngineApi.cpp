@@ -18,6 +18,7 @@
 #include "MyGameViewportClientBase.h"
 #include "Materials/MaterialInstance.h"	// UMaterialInstance
 #include "Components/MeshComponent.h"	// UMeshComponent
+#include "CoreGlobals.h"	// IsInAsyncLoadingThread
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -924,4 +925,9 @@ bool EngineApi::isMultithreaded()
 {
 	const bool bIsMultithreaded = FPlatformProcess::SupportsMultithreading();
 	return bIsMultithreaded;
+}
+
+bool isInAsyncLoadingThread()
+{
+	return IsInAsyncLoadingThread();
 }

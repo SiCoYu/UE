@@ -366,6 +366,8 @@ public:
 
 	// 判断是否是多线程
 	static bool isMultithreaded();
+	// 是否加载支持多线程
+	static bool isInAsyncLoadingThread();
 };
 
 #include "EngineApi.inl"
