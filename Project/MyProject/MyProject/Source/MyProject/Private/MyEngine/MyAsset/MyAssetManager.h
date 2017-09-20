@@ -13,7 +13,7 @@
  */
 
 UCLASS()
-class UMyAssetManager : UAssetManager
+class UMyAssetManager : public UAssetManager
 {
 	GENERATED_BODY()
 
