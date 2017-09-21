@@ -16,7 +16,6 @@ class UMyGameUserSettingsBase : public UGameUserSettings
 {
 	GENERATED_UCLASS_BODY()
 
-
 	// interface UGameUserSettings
 	virtual void SetToDefaults() override;
 };
