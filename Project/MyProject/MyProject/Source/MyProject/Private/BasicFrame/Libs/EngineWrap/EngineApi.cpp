@@ -929,5 +929,6 @@ bool EngineApi::isMultithreaded()
 
 bool EngineApi::isInAsyncLoadingThread()
 {
-	return IsInAsyncLoadingThread();
+	bool ret = IsInAsyncLoadingThread();
+	return ret;
 }
