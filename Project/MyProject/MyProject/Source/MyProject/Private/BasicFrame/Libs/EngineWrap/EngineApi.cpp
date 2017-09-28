@@ -932,3 +932,9 @@ bool EngineApi::isInAsyncLoadingThread()
 	bool ret = IsInAsyncLoadingThread();
 	return ret;
 }
+
+bool EngineApi::requiresCookedData()
+{
+	bool ret = FPlatformProperties::RequiresCookedData();
+	return ret;
+}

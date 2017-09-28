@@ -368,6 +368,8 @@ public:
 	static bool isMultithreaded();
 	// 是否加载支持多线程
 	static bool isInAsyncLoadingThread();
+	// 是否需要 Cook 数据
+	static bool requiresCookedData();
 };
 
 #include "EngineApi.inl"
