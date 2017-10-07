@@ -1,10 +1,43 @@
+UE4 å­¦ä¹ æ–‡æ¡£
+
+==================
 (1)
-×ÊÔ´:
-·¿ÑàÁ¼-Ğé»Ã4äÖÈ¾ÏµÍ³¼Ü¹¹½âÎö.pdf
-À´Ô´:
-Ğé»Ã4äÖÈ¾ÏµÍ³½á¹¹½âÎö 
+èµ„æº:
+æˆ¿ç‡•è‰¯-è™šå¹»4æ¸²æŸ“ç³»ç»Ÿæ¶æ„è§£æ.pdf
+æ¥æº:
+è™šå¹»4æ¸²æŸ“ç³»ç»Ÿç»“æ„è§£æ 
 http://blog.csdn.net/pizi0475/article/details/52876062
 
-±¾ÎÄ¸ù¾İĞ¡Ã×»¥Óé VR ¼¼Êõ×¨¼Ò ·¿ÑàÁ¼ÔÚ MDCC 2016 ÒÆ¶¯¿ª·¢Õß´ó»áÉÏµÄÑİ½²ÕûÀí¶ø³É
-PPT ÏÂÔØµØÖ·£ºhttp://download.csdn.NET/detail/sinat_14921509/9639244¡£
+æœ¬æ–‡æ ¹æ®å°ç±³äº’å¨± VR æŠ€æœ¯ä¸“å®¶ æˆ¿ç‡•è‰¯åœ¨ MDCC 2016 ç§»åŠ¨å¼€å‘è€…å¤§ä¼šä¸Šçš„æ¼”è®²æ•´ç†è€Œæˆ
+PPT ä¸‹è½½åœ°å€ï¼šhttp://download.csdn.NET/detail/sinat_14921509/9639244ã€‚
+
+========================
+è¯¦ç»†ä»‹ç»äº† Trowbridge-Reitz (GGX)
+Implementation of GTR BRDF in V-Ray 3.10
+http://help.chaosgroup.com/vray/images/stuff/gtr_tests/gtr_render.html
+
+This page shows some results from the implementation in V-Ray 3.10 of the Generalized-Trowbridge-Reitz BRDF as described in the paper "Physically-Based Shading at Disney". It is an extended version of the GGX BRDF and in addition to the glossiness value, it has another parameter which allows finer control of the hilight shape.
+
+http://disney-animation.s3.amazonaws.com/library/s2012_pbs_disney_brdf_notes_v2.pdf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
