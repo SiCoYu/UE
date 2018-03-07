@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "MyDestructibleActor.h"
+// UE 4.18
 #include "DestructibleComponent.h"
 
 AMyDestructibleActor::AMyDestructibleActor(const class FObjectInitializer& PCIP)
