@@ -234,7 +234,9 @@ public class MyProject : ModuleRules
             }
         );
 
-        if (UEBuildConfiguration.bBuildEditor == true)
+        // warning CS0618: “UnrealBuildTool.ModuleRules.UEBuildConfiguration”已过时:“The UEBuildConfiguration alias is deprecated in 4.18. Set the same properties on the ReadOnlyTargetRules instance passed into the ModuleRules constructor instead.”
+        //if (UEBuildConfiguration.bBuildEditor == true)
+        if (Target.bBuildEditor == true)
         {
             PrivateDependencyModuleNames.Add("UnrealEd");
         }
@@ -520,7 +522,9 @@ public class MyProject : ModuleRules
     // 4.17
     private bool LoadMyProjectEditor(ReadOnlyTargetRules Target)
     {
-        if (UEBuildConfiguration.bBuildEditor == true)
+        // warning CS0618: “UnrealBuildTool.ModuleRules.BuildConfiguration”已过时:“The BuildConfiguration alias is deprecated in 4.18. Set the same properties on the ReadOnlyTargetRules instance passed into the ModuleRules constructor instead.”
+        //if (UEBuildConfiguration.bBuildEditor == true)
+        if (Target.bBuildEditor == true)
         {
             PublicDependencyModuleNames.AddRange(
                 new string[] {

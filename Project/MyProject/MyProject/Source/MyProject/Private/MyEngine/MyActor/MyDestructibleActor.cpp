@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "MyDestructibleActor.h"
+#include "DestructibleComponent.h"
 
 AMyDestructibleActor::AMyDestructibleActor(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
