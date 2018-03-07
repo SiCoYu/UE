@@ -1,6 +1,10 @@
 #pragma once
 
-#include "PhysicsEngine/DestructibleActor.h"
+//#include "PhysicsEngine/DestructibleActor.h"
+// Engine\Plugins\Runtime\ApexDestruction\Config\BaseApexDestruction.ini
+// #include "ApexDestruction/DestructibleActor.h"
+// D:\File\Self\UE\UE\Project\MyProject\MyProject\Source\MyProject\MyProject.Build.cs, ../../../../../ApexDestruction/Public
+#include "DestructibleActor.h"
 
 //PhysX 
 #include "PhysXIncludes.h"

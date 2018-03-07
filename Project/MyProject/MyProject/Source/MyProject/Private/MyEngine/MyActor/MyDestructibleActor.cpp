@@ -41,19 +41,19 @@ void AMyDestructibleActor::Tick(float DeltaTime)
 	/* PRE 4.8 Version
 	for(FDestructibleChunkInfo& Each : DestructibleComponent->ChunkInfos)
 	{
-	physx::PxRigidDynamic* Actor = Each.Actor;
+		physx::PxRigidDynamic* Actor = Each.Actor;
 
-	if(Actor)
-	{
-	PxTransform Trans = Actor->getGlobalPose();
-	PxVec3& PxLoc = Trans.p;
+		if(Actor)
+		{
+			PxTransform Trans = Actor->getGlobalPose();
+			PxVec3& PxLoc = Trans.p;
 
-	FVector Location(PxLoc.x,PxLoc.y,PxLoc.z);
+			FVector Location(PxLoc.x,PxLoc.y,PxLoc.z);
 
-	DrawPoint(Location);
+			DrawPoint(Location);
 
-	ScreenMsg("physx loc", Location.ToString());
-	}
+			ScreenMsg("physx loc", Location.ToString());
+		}
 	}
 	*/
 #endif // WITH_PHYSX 

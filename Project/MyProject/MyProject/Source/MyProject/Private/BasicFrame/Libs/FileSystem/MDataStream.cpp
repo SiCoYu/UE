@@ -167,7 +167,9 @@ unsigned char* MDataStream::readByte(int offset, int count)
 void MDataStream::writeText(std::string text, GkEncode gkEncode)
 {
 	//Encoding encode = UtilApi.convGkEncode2EncodingEncoding(gkEncode);
-	FFileHelper::EEncodingOptions::Type encode = FFileHelper::EEncodingOptions::ForceUTF8;
+	//FFileHelper::EEncodingOptions::Type encode = FFileHelper::EEncodingOptions::ForceUTF8;
+	// UE 4.18
+	FFileHelper::EEncodingOptions encode = FFileHelper::EEncodingOptions::ForceUTF8;
 	checkAndOpen();
 	FFileHelper::SaveStringToFile(UtilStr::ConvStdStr2FString(text), UtilStr::convStdStr2TCHAR(mFilePath), encode);
 }

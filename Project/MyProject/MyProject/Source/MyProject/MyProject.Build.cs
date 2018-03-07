@@ -18,6 +18,9 @@ public class MyProject : ModuleRules
 
         // UE4 4.17
         this.bUseRTTI = true;
+        // warning CS0618: “UnrealBuildTool.ModuleRules.UEBuildConfiguration”已过时:“The UEBuildConfiguration alias is deprecated in 4.18. Set the same properties on the ReadOnlyTargetRules instance passed into the ModuleRules constructor instead.”
+        // UE 4.18
+
 
         // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
         // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs
@@ -187,6 +190,9 @@ public class MyProject : ModuleRules
                 "MyProject/Public/MyEngine/Player",
                 "MyProject/Public/MyEngine/UI",
                 "MyProject/Public/MyEngine/Persist",
+                // Relative to Engine\Plugins\Runtime\ApexDestruction\Source , 包含插件头文件
+                // DestructibleActor.h 包含目录
+			    "../../../../../ApexDestruction/Public",
             }
         );
 
@@ -217,6 +223,8 @@ public class MyProject : ModuleRules
             new string[] {
                 "Core",
                 "CoreUObject",  // CoreUObject\Private\Serialization\AsyncLoadingThread.h
+                "ApexDestruction",  // Engine\Plugins\Runtime\ApexDestruction\Source\ApexDestructionEditor\ApexDestructionEditor.Build.cs
+                "ApexDestructionLib", // Engine\Plugins\Runtime\ApexDestruction\Source\ApexDestructionEditor\ApexDestructionEditor.Build.cs
                 "InputCore",
 				"Slate",
 				"SlateCore",
