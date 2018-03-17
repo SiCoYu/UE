@@ -7,21 +7,102 @@ Backtick -- stat GPU
 GPU Profiling
 https://docs.unrealengine.com/en-us/Engine/Performance/GPU
 
+===============
+ProfileGPU -- Ctrl + Shift + ,) 
 
+Performance Guidelines for Artists and Designers
+https://docs.unrealengine.com/en-us/Engine/Performance/Guidelines
 
+======================
+Console Variable
 
+Description
 
+r.SetRes
+To change the screen/window resolution.
 
+r.VSync
+To enabled/disable VSync (might depend on native fullscreen).
 
+r.ScreenPercentage
+To reduce the internal render resolution, the image gets upsamples in another pass, see above.
 
+r.AllowOcclusionQueries
+To disable occlusion (can make scenes slower).
 
+r.TiledDeferredShading
+Allows to turn off the tile based deferred lighting technique (GPU particle lights do not have a fallback).
 
+r.TiledDeferredShading.MinimumCount
+Adjust how many lights we need to activate the tile based deferred lighting technique (no visual difference but can be a performance difference).
 
+Pause
+Stop the game or matinee (much more reliable profiling but disables updates/ticks).
 
+Slomo
+Allows to slow down or accelerate time.
 
+r.VisualizeOccludedPrimitives
+Displays the bounding boxes of occluded primitives.
 
+StartFPSChart StopFPSChart
 
+See below.
 
+r.SeparateTranslucency
+The feature fixes translucency with depth of field, can be disabled if not needed, has other implications (reading SceneColor).
+
+r.Tonemapper.GrainQuantization
+To disable the noise we add in the tonemapper to avoid color banding because of 8bit quantization, minor quality improvement, not needed when we output in 10:10:10.
+
+r.SceneColorFormat
+Allows to use a different scenecolor format (default is 64bit for best quality and to support screenspace subsurface scattering).
+FX.AllowGPUSorting
+
+To disable particle sorting (pays off when used for a lot of particles).
+FX.FreezeParticleSimulation
+
+To disable the particle updates.
+r.SSR.MaxRoughness
+
+Adjust the max roughness of Screen Space Reflections, to override the postprocess settings, see Show Flag VisualizeSSR.
+Command Line Options
+
+Certain features can be disabled on the command line e.g. **UE4.exe -NoSound**The most useful ones for profiling:
+
+Commandline Option
+
+Description
+
+-NoSound
+To disable the sound and music system.
+
+-NoTextureStreaming
+To disable texture streaming (good to isolate where hitches are coming from).
+
+-NoVerifyGC
+Otherwise expect massive hitching in Release builds at least every 30 seconds or so.
+
+-NoVSync
+Gives faster rendering but can result in image tearing, especially important with high FPS.
+
+-Streaming
+Useful with StartFPSChart/StopFPSChart to get the data from a non windows device to the cooking PC for further investigations (assuming we use cook on the fly).
+
+https://docs.unrealengine.com/en-us/Engine/Performance/Options
+
+=============
+²é¿´Ö¡Êý
+stat unit
+
+https://docs.unrealengine.com/en-us/Engine/Performance/Overview
+
+===============
+Content Cooking
+UE4Editor.exe <GameName or uproject> -run=cook -targetplatform=<Plat1>+<Plat2> [-cookonthefly] [-iterate] [-map=<Map1>+<Map2>]
+Or
+UE4Editor-Cmd.exe <GameName> -run=cook -targetplatform=<Plat1>+<Plat2> [-cookonthefly] [-iterate] [-map=<Map1>+<Map2>]
+https://docs.unrealengine.com/en-us/Engine/Deployment/Cooking
 
 
 
