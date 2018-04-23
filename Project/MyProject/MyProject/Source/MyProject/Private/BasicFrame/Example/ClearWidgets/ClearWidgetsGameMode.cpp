@@ -16,8 +16,11 @@ APlayerController* AClearWidgetsGameMode::ProcessClientTravel(FString& FURL, FGu
 	for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
 	{
 		// UE4 4.17 warning C4996: 'TAutoWeakObjectPtr<APlayerController>::operator T': Implicit conversion from TAutoWeakObjectPtr to the pointer type has been deprecated - use Get() instead Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-		APlayerController* PlayerController = *Iterator;
 		//APlayerController* PlayerController = Iterator.get();
+		// UE4.19.1 error C2440: 'initializing': cannot convert from 'const TWeakObjectPtr<APlayerController,FWeakObjectPtr>' to 'APlayerController *'
+		//APlayerController* PlayerController = *Iterator;
+		APlayerController* PlayerController = Iterator.Get();
+
 		if (Cast<UNetConnection>(PlayerController->Player) != NULL)
 		{
 			/* Check if we're using our Custom Controller */
