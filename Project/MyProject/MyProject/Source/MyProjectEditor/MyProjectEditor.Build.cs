@@ -9,8 +9,10 @@ public class MyProjectEditor : ModuleRules
 		// To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
 		// UE4 4.17 之前没加这一行，结果总是不能生成 UE4Editor-MyProjectEditor-Win64-Debug.dll ，添加这一行就可以生成 UE4Editor-MyProjectEditor-Win64-Debug.dll 了
         this.PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-		
-        this.Definitions.Add("MY_WITH_EDITOR");
+
+        // warning CS0618: “UnrealBuildTool.ModuleRules.Definitions”已过时:“The 'Definitions' property has been deprecated. Please use 'PublicDefinitions' instead.”
+        //this.Definitions.Add("MY_WITH_EDITOR");
+        this.PublicDefinitions.Add("MY_WITH_EDITOR");
 
         //PrivateIncludePaths.Add("MyProjectEditor/Private");
         PrivateIncludePaths.AddRange(

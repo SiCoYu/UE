@@ -253,8 +253,11 @@ public class MyProject : ModuleRules
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
-            Definitions.Add("_CRT_SECURE_NO_WARNINGS");
-            Definitions.Add("__WIN32__");
+            // UE 4.9.1 warning CS0618: “UnrealBuildTool.ModuleRules.Definitions”已过时:“The 'Definitions' property has been deprecated. Please use 'PublicDefinitions' instead.”
+            //Definitions.Add("_CRT_SECURE_NO_WARNINGS");
+            //Definitions.Add("__WIN32__");
+            PublicDefinitions.Add("_CRT_SECURE_NO_WARNINGS");
+            PublicDefinitions.Add("__WIN32__");
         }
         //Definitions.Add("WIN32_LEAN_AND_MEAN");
         //Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
@@ -381,7 +384,9 @@ public class MyProject : ModuleRules
     private bool LoadSockets_bak(ReadOnlyTargetRules Target)
     {
         // https://wiki.unrealengine.com/Integrating_OpenCV_Into_Unreal_Engine_4
-        bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && BuildConfiguration.bDebugBuildsActuallyUseDebugCRT;
+        // UE4.9.1 error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
+        //bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && BuildConfiguration.bDebugBuildsActuallyUseDebugCRT;
+        bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && Target.bDebugBuildsActuallyUseDebugCRT;
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
@@ -485,9 +490,13 @@ public class MyProject : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Android)
         {
-            string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+            // UE4.19.1 error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
+            //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+            string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
 
-            AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+            // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
+            //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+            RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
 
             PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLua.so");
         }
@@ -507,9 +516,13 @@ public class MyProject : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Android)
         {
-            string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+            // error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
+            // string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+            string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
 
-            AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+            // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
+            //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+            RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
 
             PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLuaSocket.so");
         }

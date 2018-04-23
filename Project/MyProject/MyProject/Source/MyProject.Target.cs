@@ -27,28 +27,29 @@ public class MyProjectTarget : TargetRules
     // TargetRules interface.
     //
     // warning : SetupBinaries() is deprecated in the 4.16 release. From the constructor in your .target.cs file, use ExtraModuleNames.Add("Foo") to add modules to your target, or set LaunchModuleName = "Foo" to override the name of the launch module for program targets.
- //   public override void SetupBinaries(
-	//	TargetInfo Target,
-	//	ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-	//	ref List<string> OutExtraModuleNames
-	//	)
-	//{
- //       // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
- //       OutExtraModuleNames.Add("MyProject");
+    //   public override void SetupBinaries(
+    //	TargetInfo Target,
+    //	ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
+    //	ref List<string> OutExtraModuleNames
+    //	)
+    //{
+    //       // 这个字段决定是否编译当前工程，之前写成 "MyProject" ，结果 "MyProjectEditor" 没有编译
+    //       OutExtraModuleNames.Add("MyProject");
 
- //       // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
- //       if (UEBuildConfiguration.bBuildEditor)
- //       {
- //           OutExtraModuleNames.Add("MyProjectEditor");
- //       }
- //   }
+    //       // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
+    //       if (UEBuildConfiguration.bBuildEditor)
+    //       {
+    //           OutExtraModuleNames.Add("MyProjectEditor");
+    //       }
+    //   }
 
-    public override void SetupGlobalEnvironment(
-        TargetInfo Target,
-        ref LinkEnvironmentConfiguration OutLinkEnvironmentConfiguration,
-        ref CPPEnvironmentConfiguration OutCPPEnvironmentConfiguration
-        )
-    {
+    // UE 4.19.1 warning: SetupGlobalEnvironment() has been deprecated in the 4.19 release. Please set options from the constructor instead.
+    //public override void SetupGlobalEnvironment(
+    //    TargetInfo Target,
+    //    ref LinkEnvironmentConfiguration OutLinkEnvironmentConfiguration,
+    //    ref CPPEnvironmentConfiguration OutCPPEnvironmentConfiguration
+    //    )
+    //{
         // 4.17 Error
         //OutCPPEnvironmentConfiguration.CLRMode = CPPCLRMode.CLRDisabled;
         //OutCPPEnvironmentConfiguration.bUseRTTI = true;
@@ -58,5 +59,5 @@ public class MyProjectTarget : TargetRules
         //OutCPPEnvironmentConfiguration.Target.Configuration = CPPTargetConfiguration.Debug;
         //BuildConfiguration.bDebugBuildsActuallyUseDebugCRT = true;
         //UEBuildConfiguration.bBuildEditor = false;   // 开启是否编辑 MyProjectEditor，但是即使开始，如果不设置文件 MyProject\Source\MyProjectEditor.Target.cs 中的 OutExtraModuleNames.Add("MyProjectEditor"); 也不会编译 MyProjectEditor
-    }
+    //}
 }
