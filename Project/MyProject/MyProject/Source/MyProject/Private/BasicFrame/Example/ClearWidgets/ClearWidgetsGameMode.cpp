@@ -19,7 +19,7 @@ APlayerController* AClearWidgetsGameMode::ProcessClientTravel(FString& FURL, FGu
 		//APlayerController* PlayerController = Iterator.get();
 		// UE4.19.1 error C2440: 'initializing': cannot convert from 'const TWeakObjectPtr<APlayerController,FWeakObjectPtr>' to 'APlayerController *'
 		//APlayerController* PlayerController = *Iterator;
-		APlayerController* PlayerController = Iterator.Get();
+		APlayerController* PlayerController = Cast<APlayerController>(Iterator->Get());
 
 		if (Cast<UNetConnection>(PlayerController->Player) != NULL)
 		{
