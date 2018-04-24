@@ -17,6 +17,9 @@ public:
 	bool UAnimateVertexPositionsBPFunctionLibrary::AnimatedVertex__GetAnimatedVertexLocations(
 		USkeletalMeshComponent* Mesh,
 		TArray<FVector>& Locations,
+		TArray<FMatrix>& CachedRefToLocals,
+		const FSkeletalMeshLODRenderData& Model,
+		FSkinWeightVertexBuffer& SkinWeightBuffer,
 		bool PerformPawnVelocityCorrection
 		);
 };

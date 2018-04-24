@@ -9,7 +9,10 @@ UAnimateVertexPositionsBPFunctionLibrary::UAnimateVertexPositionsBPFunctionLibra
 
 bool UAnimateVertexPositionsBPFunctionLibrary::AnimatedVertex__GetAnimatedVertexLocations(
 	USkeletalMeshComponent* Mesh,
-	TArray<FVector>& Locations,
+	TArray<FVector>& Locations, 
+	TArray<FMatrix>& CachedRefToLocals, 
+	const FSkeletalMeshLODRenderData& Model, 
+	FSkinWeightVertexBuffer& SkinWeightBuffer, 
 	bool PerformPawnVelocityCorrection
 	) {
 	if (!Mesh || !Mesh->SkeletalMesh)
@@ -21,7 +24,9 @@ bool UAnimateVertexPositionsBPFunctionLibrary::AnimatedVertex__GetAnimatedVertex
 	Locations.Empty();
 	//~~~~~~~~~~~~~
 
-	Mesh->ComputeSkinnedPositions(Locations);
+	// UE 4.19.1 error C2660: 'USkeletalMeshComponent::ComputeSkinnedPositions': function does not take 1 arguments
+	//Mesh->ComputeSkinnedPositions(Locations);
+	USkeletalMeshComponent::ComputeSkinnedPositions(Mesh, Locations, CachedRefToLocals, Model, SkinWeightBuffer);
 
 	FTransform ToWorld = Mesh->GetComponentTransform();
 	FVector WorldLocation = ToWorld.GetLocation();

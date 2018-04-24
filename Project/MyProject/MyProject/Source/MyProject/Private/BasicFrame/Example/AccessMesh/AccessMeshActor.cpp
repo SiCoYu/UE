@@ -4,7 +4,9 @@
 #include "PhysXIncludes.h"
 
 // Physics3.4 PxSimpleTypes.h 内容并入到 PxTriangleMesh.h
-#include "ThirdParty/PhysX/PhysX_3.4/Include/geometry/PxTriangleMesh.h"
+// UE 4.19.1 fatal error C1083: Cannot open include file: 'ThirdParty/PhysX/PhysX_3.4/Include/geometry/PxTriangleMesh.h': No such file or directory
+// #include "ThirdParty/PhysX/PhysX_3.4/Include/geometry/PxTriangleMesh.h"
+#include "ThirdParty/PhysX3/PhysX_3.4/Include/geometry/PxTriangleMesh.h"
 //#include "ThirdParty/PhysX/PhysX_3.4/Include/foundation/PxSimpleTypes.h"
 
 #include "PhysicsEngine/BodySetup.h"	// UBodySetup
