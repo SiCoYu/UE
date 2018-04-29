@@ -61,7 +61,9 @@ void AMyActor::LoadAsset()
 
 	// Call ToStringReference() to return the StringAssetReference of the asset you wish to load
 	// More on this below
-	MyAssetPointer.ToStringReference();
+	// UE 4.19.1 warning C4996: 'TSoftObjectPtr<AActor>::ToStringReference': ToStringReference was renamed to ToSoftObjectPath Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//MyAssetPointer.ToStringReference();
+	MyAssetPointer.ToSoftObjectPath();
 }
 
 void AMyActor::StrongReferenceLoadAsset()
