@@ -67,7 +67,9 @@ void AMyActor::LoadAsset()
 void AMyActor::StrongReferenceLoadAsset()
 {
 	FStringAssetReference AssetToLoad;
-	AssetToLoad = MyItem.ToStringReference();
+	// UE 4.19.1 warning C4996: 'TSoftObjectPtr<AActor>::ToStringReference': ToStringReference was renamed to ToSoftObjectPath Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//AssetToLoad = MyItem.ToStringReference();
+	AssetToLoad = MyItem.ToSoftObjectPath();
 	// UE4 4.17: warning C4996: 'FStreamableManager::SimpleAsyncLoad': Call RequestAsyncLoad with bManageActiveHandle=true instead if you want the manager to keep the handle alive Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//AssetLoader.SimpleAsyncLoad(AssetToLoad);
 	AssetLoader.RequestAsyncLoad(AssetToLoad, FStreamableDelegate::CreateUObject(this, &AMyActor::MyFunctionToBeCalledAfterAssetsAreLoaded));
@@ -76,7 +78,9 @@ void AMyActor::StrongReferenceLoadAsset()
 void AMyActor::StrongReferenceUnloadAsset()
 {
 	FStringAssetReference AssetToLoad;
-	AssetToLoad = MyItem.ToStringReference();
+	// UE 4.19.1 warning C4996: 'TSoftObjectPtr<AActor>::ToStringReference': ToStringReference was renamed to ToSoftObjectPath Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//AssetToLoad = MyItem.ToStringReference();
+	AssetToLoad = MyItem.ToSoftObjectPath();
 	AssetLoader.Unload(AssetToLoad);
 }
 
@@ -86,7 +90,9 @@ void AMyActor::StrongReferenceLoadAllAsset()
 	//for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
 	for (TAssetPtr<AActor>& AssetPtr : MyItems) // C++11 ranged loop
 	{
-		AssetsToLoad.AddUnique(AssetPtr.ToStringReference());
+		// UE 4.19.1 warning C4996: 'TSoftObjectPtr<AActor>::ToStringReference': ToStringReference was renamed to ToSoftObjectPath Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//AssetsToLoad.AddUnique(AssetPtr.ToStringReference());
+		AssetsToLoad.AddUnique(AssetPtr.ToSoftObjectPath());
 	}
 	AssetLoader.RequestAsyncLoad(AssetsToLoad, FStreamableDelegate::CreateUObject(this, &AMyActor::MyFunctionToBeCalledAfterAssetsAreLoaded));
 }
@@ -97,7 +103,9 @@ void AMyActor::StrongReferenceUnloadAllAsset()
 	//for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
 	for (TAssetPtr<AActor>& AssetPtr : MyItems) // C++11 ranged loop
 	{
-		AssetLoader.Unload(AssetPtr.ToStringReference());
+		// UE 4.19.1  warning C4996: 'TSoftObjectPtr<AActor>::ToStringReference': ToStringReference was renamed to ToSoftObjectPath Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//AssetLoader.Unload(AssetPtr.ToStringReference());
+		AssetLoader.Unload(AssetPtr.ToSoftObjectPath());
 	}
 }
 

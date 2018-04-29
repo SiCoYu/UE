@@ -9,7 +9,9 @@
 TSharedPtr<ISlateStyle> CreateStyle()
 {
 	TSharedPtr<FSlateStyleSet> Style = MakeShareable(new FSlateStyleSet("PreloadStyle"));
-	Style->SetContentRoot(FPaths::GameContentDir() / "Slate");
+	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//Style->SetContentRoot(FPaths::GameContentDir() / "Slate");
+	Style->SetContentRoot(FPaths::ProjectContentDir() / "Slate");
 
 	Style->Set("tab_normal", new IMAGE_BRUSH("tab_normal", FVector2D(256, 64)));
 	Style->Set("tab_active", new IMAGE_BRUSH("tab_active", FVector2D(256, 64)));
