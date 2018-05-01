@@ -22,7 +22,82 @@ DefaultPawnClass = (UClass*)tankGameBPAsset.Object;
 参考：
 https://answers.unrealengine.com/questions/127212/bdontloadblueprintoutsideeditortrue-by-default.html
 
+=============
+UE 4.19.1 启动报错
+无法启动此程序，因为计算机中丢失
+UE4Editor-ApexDestruction-Win64-Debug.dll
+尝试重新安装该程序以解决此问题
 
+原因
+https://github.com/UE4-OceanProject/OceanProject/issues/49
+Epic changed how ApexDestruction works in the engine (it's now a separate plugin).
+
+I've added it as a plugin dependency on 6e54a16. It works here, but I"m not sure yet if it will work on every system. Can you, please, test and report back?
+
+Thank you very much!
+
+https://github.com/UE4-OceanProject/OceanProject/issues/49
+https://github.com/UE4-OceanProject/OceanProject/commit/6e54a1655242c6fd9d411b0e77c31fc77b5ba12f
+
+{
+    "FileVersion" : 3,
+    "FriendlyName" : "Ocean Project Plugin",
+    "Version" : 12,
+    "VersionName": "1.2",
+    "Description" : "Provides the code base classes for the ocean system.",
+    "Category" : "Ocean",
+    "CreatedBy" : "DotCam",
+    "CreatedByURL" : "https://forums.unrealengine.com/showthread.php?42092-Community-Project-WIP-Weather-amp-Ocean-Water-Shader",
+    "CanContainContent" : "true",
+    "EnabledByDefault" : true,
+
+    "Modules" :
+    [
+        {
+            "Name" : "OceanPlugin",
+            "Type" : "Runtime"
+        } 
+    ],
+	
+	"Plugins":
+	[
+		{
+			"Name": "ApexDestruction",
+			"Enabled": true
+		}
+	]
+}
+
+I can confirm that upgrading from VS Community 2017 15.2 to 15.4.1 allowed for successful rebuilding of the two problem dlls, and everything is working fine now. Thanks!
+
+Hello,
+
+I had the same issue @ibrews ,
+I got a popup saying that I was missing the two dll's or that they are compiled with a different engine version.
+Here's how I solved it:
+
+Install the Windows v8.1 SDK (this is just the sdk not windows itself)
+Link: https://developer.microsoft.com/en-us/windows/downloads/windows-8-1-sdk
+Run cmd with this command:
+"(Your drive letter):/Program Files/Epic Games/UE_4.18/Engine/Binaries/DotNET/UnrealBuildTool.exe" OceanProject Development Win64 -project="(drive letter):/(User Profile)/Documents/Unreal Projects/(Project)/OceanProject.uproject" -editorrecompile -progress"
+Wait for cmd to finish.
+Startup the project (I have copied all the files from the github folder OceanProject-Master to my own created project then running the unreal project .exe that you have copied from the github project folder) I have run it with engine version 4.18. In my case it needs to compile some shaders, but after that no problems acure as far as I have tested it when there are problems I will post a new command with the fix for it.
+
+Hope this helps for people that are still looking for a solution.
+
+解决方法
+在工程文件
+G:\UE\Project\MyProject\MyProject\MyProject.uproject
+最后添加
+"Plugins":
+[
+	{
+		"Name": "ApexDestruction",
+		"Enabled": true
+	}
+]
+
+然后升级 VS 到最新版本，可能 UE4 的系统库编译使用的是 VS 的最新版本
 
 
 
