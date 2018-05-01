@@ -258,6 +258,10 @@ void Ctx::beginPlay()
 		// test
 		//GUiMgr->loadForm(eUIPack);
 		//GNetMgr->openSocket("192.168.124.26", 10002);
+
+		FString cmd = FString::Printf(TEXT("GlobalEventCmd onInit"));
+		FOutputDeviceDebug device;
+		this->mEngineData->getMainActor()->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
 	}
 }
 
