@@ -13,7 +13,8 @@ UMySingletonBP* UMySingletonBP::getSingleton()
 {
 	if (!UMySingletonBP::isValid() || !IsValid(UMySingletonBP::msSingleton))
 	{
-		UClass *SingletonClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx"), NULL, LOAD_None, NULL);
+		// 一定要添加 "_C"
+		UClass *SingletonClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx_C"), NULL, LOAD_None, NULL);
 		//UMySingletonBP::msSingleton = (UMySingletonBP*)ConstructObject<UObject>(SingletonClass);
 		//UMySingletonBP::msSingleton = Cast<UMySingletonBP>(StaticConstructObject(SingletonClass, nullptr));
 		//UMySingletonBP::msSingleton = LoadObject<UMySingletonBP>(nullptr, TEXT("/Game/Table/ObjectBase_client"));
