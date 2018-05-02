@@ -22,3 +22,9 @@ UMySingletonBP* UMySingletonBP::getSingleton()
 
 	return UMySingletonBP::msSingleton;
 }
+
+UMySingletonBP::UMySingletonBP(const class FObjectInitializer& PCIP)
+	: Super(PCIP)
+{
+
+}

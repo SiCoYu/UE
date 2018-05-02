@@ -11,7 +11,9 @@
 UCLASS(Blueprintable)
 class UMySingletonBP : public UObject
 {
-	GENERATED_UCLASS_BODY()
+	// Á´½Ó´íÎó
+	//GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
 
 protected:
 	static UMySingletonBP* msSingleton;
@@ -22,4 +24,7 @@ public:
 	* Singleton access
 	*/
 	static UMySingletonBP* getSingleton();
+
+public:
+	UMySingletonBP(const FObjectInitializer& PCIP);
 };
