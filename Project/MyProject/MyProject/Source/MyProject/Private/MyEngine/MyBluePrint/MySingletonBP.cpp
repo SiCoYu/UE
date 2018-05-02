@@ -28,3 +28,10 @@ UMySingletonBP::UMySingletonBP(const class FObjectInitializer& PCIP)
 {
 
 }
+
+void UMySingletonBP::init()
+{
+	FString cmd = FString::Printf(TEXT("Ctx init"));
+	FOutputDeviceDebug device;
+	this->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
+}

@@ -35,6 +35,7 @@
 #include "TimerMgr.h"
 #include "FrameTimerMgr.h"
 #include "TickPriority.h"
+#include "MySingletonBP.h"
 
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
@@ -259,9 +260,12 @@ void Ctx::beginPlay()
 		//GUiMgr->loadForm(eUIPack);
 		//GNetMgr->openSocket("192.168.124.26", 10002);
 
-		FString cmd = FString::Printf(TEXT("GlobalEventCmd onInit"));
-		FOutputDeviceDebug device;
-		this->mEngineData->getMainActor()->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
+		//FString cmd = FString::Printf(TEXT("GlobalEventCmd onInit"));
+		//FOutputDeviceDebug device;
+		//this->mEngineData->getMainActor()->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
+
+		// 初始化 BP
+		UMySingletonBP::getSingleton()->init();
 	}
 }
 

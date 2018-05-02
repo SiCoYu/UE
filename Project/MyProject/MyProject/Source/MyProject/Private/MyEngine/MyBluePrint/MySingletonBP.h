@@ -27,4 +27,5 @@ public:
 
 public:
 	UMySingletonBP(const FObjectInitializer& PCIP);
+	void init();
 };
