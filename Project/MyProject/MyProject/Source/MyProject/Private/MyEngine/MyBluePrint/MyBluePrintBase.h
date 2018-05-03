@@ -10,4 +10,6 @@ class UMyBluePrintBase : public UObject
 
 public:
 	UMyBluePrintBase(const FObjectInitializer& PCIP);
+	void init();
+	void dispose();
 };

@@ -35,7 +35,8 @@
 #include "TimerMgr.h"
 #include "FrameTimerMgr.h"
 #include "TickPriority.h"
-#include "MySingletonBP.h"
+//#include "MySingletonBP.h"
+#include "MyBluePrintBase.h"
 
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
@@ -80,6 +81,7 @@ Ctx::Ctx()
 	this->mTickMgr = nullptr;
 	this->mTimerMgr = nullptr;
 	this->mFrameTimerMgr = nullptr;
+	this->mBPCtx = nullptr;
 }
 
 Ctx::~Ctx()
@@ -131,6 +133,14 @@ void Ctx::construct()
 	this->mTickMgr = MySharedPtr<TickMgr>(SAFE_NEW TickMgr());
 	this->mTimerMgr = MySharedPtr<TimerMgr>(SAFE_NEW TimerMgr());
 	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(SAFE_NEW FrameTimerMgr());
+
+	// 最后初始化 BluePrint 数据
+	UClass *bpCtxClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx_C"), NULL, LOAD_None, NULL);
+	UGameInstance* pGameIns = (UGameInstance*)EngineApi::GetGameInstance();
+	this->mBPCtx = MySharedPtr<UMyBluePrintBase>(::NewObject<UMyBluePrintBase>(pGameIns, bpCtxClass, FName("UMySingletonBP")));
+	FString cmd = TEXT("init");
+	FOutputDeviceDebug device;
+	this->mBPCtx->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
 }
 
 void Ctx::init()
@@ -159,6 +169,7 @@ void Ctx::init()
 	this->mTickMgr->init();
 	this->mTimerMgr->init();
 	this->mFrameTimerMgr->init();
+	this->mBPCtx->init();
 
 	this->addEventHandle();
 
@@ -203,6 +214,7 @@ void Ctx::dispose()
 	this->mTickMgr->dispose();
 	this->mTimerMgr->dispose();
 	this->mFrameTimerMgr->dispose();
+	this->mBPCtx->dispose();
 
 	this->mUiMgr = nullptr;
 	this->mEngineData = nullptr;
@@ -241,6 +253,7 @@ void Ctx::dispose()
 	this->mTickMgr = nullptr;
 	this->mTimerMgr = nullptr;
 	this->mFrameTimerMgr = nullptr;
+	this->mBPCtx = nullptr;
 }
 
 void Ctx::beginPlay()
@@ -265,7 +278,7 @@ void Ctx::beginPlay()
 		//this->mEngineData->getMainActor()->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
 
 		// 初始化 BP
-		UMySingletonBP::getSingleton()->init();
+		//UMySingletonBP::getSingleton()->init();
 	}
 }
 
@@ -376,32 +389,32 @@ MySharedPtr<MFileSys> Ctx::getFileSys()
 
 MySharedPtr<SystemSetting> Ctx::getSystemSetting()
 {
-	return mSystemSetting;
+	return this->mSystemSetting;
 }
 
 MySharedPtr<LuaSystem> Ctx::getLuaSystem()
 {
-	return mLuaSystem;
+	return this->mLuaSystem;
 }
 
 MySharedPtr<ISceneEventCB> Ctx::getSceneEventCB()
 {
-	return mSceneEventCB;
+	return this->mSceneEventCB;
 }
 
 MySharedPtr<MyLatentActionManager> Ctx::getMyLatentActionManager()
 {
-	return mMyLatentActionManager;
+	return this->mMyLatentActionManager;
 }
 
 MySharedPtr<SceneSys> Ctx::getSceneSys()
 {
-	return mSceneSys;
+	return this->mSceneSys;
 }
 
 MySharedPtr<SystemTimeData> Ctx::getSystemTimeData()
 {
-	return mSystemTimeData;
+	return this->mSystemTimeData;
 }
 
 MySharedPtr<SystemFrameData> Ctx::getSystemFrameData()
@@ -411,32 +424,37 @@ MySharedPtr<SystemFrameData> Ctx::getSystemFrameData()
 
 MySharedPtr<ProcessSys> Ctx::getProcessSys()
 {
-	return mProcessSys;
+	return this->mProcessSys;
 }
 
 MySharedPtr<EngineLoop> Ctx::getEngineLoop()
 {
-	return mEngineLoop;
+	return this->mEngineLoop;
 }
 
 MySharedPtr<DelayTaskMgr> Ctx::getDelayTaskMgr()
 {
-	return mDelayTaskMgr;
+	return this->mDelayTaskMgr;
 }
 
 MySharedPtr<TickMgr> Ctx::getTickMgr()
 {
-	return mTickMgr;
+	return this->mTickMgr;
 }
 
 MySharedPtr<TimerMgr> Ctx::getTimerMgr()
 {
-	return mTimerMgr;
+	return this->mTimerMgr;
 }
 
 MySharedPtr<FrameTimerMgr> Ctx::getFrameTimerMgr()
 {
-	return mFrameTimerMgr;
+	return this->mFrameTimerMgr;
+}
+
+MySharedPtr<UMyBluePrintBase> Ctx::getBPCtx()
+{
+	return this->mBPCtx;
 }
 
 void Ctx::addEventHandle()

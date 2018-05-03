@@ -6,3 +6,13 @@ UMyBluePrintBase::UMyBluePrintBase(const class FObjectInitializer& PCIP)
 {
 	
 }
+
+void UMyBluePrintBase::init()
+{
+
+}
+
+void UMyBluePrintBase::dispose()
+{
+
+}

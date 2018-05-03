@@ -45,6 +45,7 @@ class DelayTaskMgr;
 class TickMgr;
 class TimerMgr;
 class FrameTimerMgr;
+class UMyBluePrintBase;
 
 class Ctx : public Singleton<Ctx>
 {
@@ -82,6 +83,7 @@ protected:
 	MySharedPtr<TickMgr> mTickMgr;
 	MySharedPtr<TimerMgr> mTimerMgr;
 	MySharedPtr<FrameTimerMgr> mFrameTimerMgr;
+	MySharedPtr<UMyBluePrintBase> mBPCtx;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -134,6 +136,7 @@ public:
 	MySharedPtr<TickMgr> getTickMgr();
 	MySharedPtr<TimerMgr> getTimerMgr();
 	MySharedPtr<FrameTimerMgr> getFrameTimerMgr();
+	MySharedPtr<UMyBluePrintBase> getBPCtx();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
@@ -180,5 +183,6 @@ public:
 #define GTickMgr GCtx->getTickMgr()
 #define GTimerMgr GCtx->getTimerMgr()
 #define GFrameTimerMgr GCtx->getFrameTimerMgr()
+#define GBPCtx GCtx->getBPCtx()
 
 #endif				// __CTX_H

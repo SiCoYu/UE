@@ -1,5 +1,7 @@
 #include "MyProject.h"
 #include "MyFunctionLibrary.h"
+#include "MyBluePrintBase.h"
+#include "Ctx.h"
 
 UMyFunctionLibrary::UMyFunctionLibrary(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -17,4 +19,9 @@ UMyDataStorage* UMyFunctionLibrary::GetSolusData(bool& IsValid)
 
 	IsValid = true;
 	return DataInstance;
+}
+
+UMyBluePrintBase* UMyFunctionLibrary::getBPCtx()
+{
+	return GBPCtx.get();
 }

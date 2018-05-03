@@ -70,7 +70,9 @@ void AMyPlayerControllerBase::DeterminePawnClass_Implementation()
 		/* Load Text File Into String Array */
 		TArray<FString> TextStrings;
 		TextStrings.Add("PawnA");
-		const FString FilePath = FPaths::GameDir() + "Textfiles/PlayerSettings.txt";
+		// UE 4.19.1 warning C4996: 'FPaths::GameDir': FPaths::GameDir() has been superseded by FPaths::ProjectDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//const FString FilePath = FPaths::GameDir() + "Textfiles/PlayerSettings.txt";
+		const FString FilePath = FPaths::ProjectDir() + "Textfiles/PlayerSettings.txt";
 
 		/* Use PawnA if the Text File tells us to */
 		if (TextStrings[0] == "PawnA")

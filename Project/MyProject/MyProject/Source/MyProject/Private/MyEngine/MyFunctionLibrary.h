@@ -4,6 +4,8 @@
 #include "MyDataStorage.h"
 #include "MyFunctionLibrary.generated.h"
 
+class UMyBluePrintBase;
+
 UCLASS()
 class UMyFunctionLibrary : public UBlueprintFunctionLibrary
 {
@@ -25,7 +27,8 @@ public:
 		FHitResult& HitOut,
 		ECollisionChannel CollisionChannel = ECC_Pawn,
 		bool ReturnPhysMat = false
-		) {
+		)
+	{
 		if (!World)
 		{
 			return false;
@@ -73,7 +76,8 @@ public:
 		FHitResult& HitOut,
 		ECollisionChannel CollisionChannel = ECC_Pawn,
 		bool ReturnPhysMat = false
-		) {
+		)
+	{
 		if (!World)
 		{
 			return false;
@@ -116,7 +120,8 @@ public:
 		const FVector& Start,
 		const FVector& End,
 		FHitResult& HitOut
-		) {
+		)
+	{
 		if (!TheComp) return false;
 		if (!TheComp->IsValidLowLevel()) return false;
 		//~~~~~~~~~~~~~~~~~~~~~
@@ -139,4 +144,7 @@ public:
 			TraceParams
 			);
 	}
+
+	UFUNCTION(BlueprintPure, Category = "Get BluePrint Ctx")
+	static UMyBluePrintBase* getBPCtx();
 };
