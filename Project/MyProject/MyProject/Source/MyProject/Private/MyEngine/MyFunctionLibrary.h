@@ -114,6 +114,7 @@ public:
 		return (HitOut.GetActor() != NULL);
 	}
 
+	// 内联函数，必须在声明的时候进行定义
 	//Component-level trace, do a trace against just 1 component
 	static FORCEINLINE bool TraceComponent(
 		UPrimitiveComponent* TheComp,
@@ -144,7 +145,4 @@ public:
 			TraceParams
 			);
 	}
-
-	UFUNCTION(BlueprintPure, Category = "Get BluePrint Ctx")
-	static UMyBluePrintBase* getBPCtx();
 };

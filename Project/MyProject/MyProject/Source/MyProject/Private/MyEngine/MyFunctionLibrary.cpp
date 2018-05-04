@@ -20,8 +20,3 @@ UMyDataStorage* UMyFunctionLibrary::GetSolusData(bool& IsValid)
 	IsValid = true;
 	return DataInstance;
 }
-
-UMyBluePrintBase* UMyFunctionLibrary::getBPCtx()
-{
-	return GBPCtx.get();
-}
