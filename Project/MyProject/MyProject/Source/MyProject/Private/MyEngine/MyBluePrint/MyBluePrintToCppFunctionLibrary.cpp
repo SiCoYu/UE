@@ -24,3 +24,12 @@ AMyPlayerControllerBase* UMyBluePrintToCppFunctionLibrary::GetPlayerController()
 {
 	return EngineApi::GetPlayerController();
 }
+
+UUMGWidget* UMyBluePrintToCppFunctionLibrary::createWidget(UClass* WidgetClass);
+{
+	UUMGWidget* WidgetObject = nullptr;
+
+	WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+
+	return WidgetObject;
+}

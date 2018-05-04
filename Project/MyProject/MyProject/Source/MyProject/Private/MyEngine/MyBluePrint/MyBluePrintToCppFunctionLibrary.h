@@ -1,7 +1,6 @@
 #pragma once
 
 #include "MyProject.h"
-#include "MyDataStorage.h"
 #include "MyBluePrintToCppFunctionLibrary.generated.h"
 
 class UMyBluePrintBase;
@@ -26,4 +25,7 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "MyBluePrintToCppFunctionLibrary")
 	static AMyPlayerControllerBase* GetPlayerController();
+
+	UFUNCTION(BlueprintPure, Category = "MyBluePrintToCppFunctionLibrary")
+	static UUMGWidget* createWidget(UClass* WidgetClass);
 };
