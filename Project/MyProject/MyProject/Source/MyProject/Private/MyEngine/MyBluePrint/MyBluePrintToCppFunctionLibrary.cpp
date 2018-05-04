@@ -35,3 +35,11 @@ UUMGWidget* UMyBluePrintToCppFunctionLibrary::createWidget(UClass* WidgetClass)
 
 	return WidgetObject;
 }
+
+UObject* UMyBluePrintToCppFunctionLibrary::newObjectFromBlueprint(UClass* cls)
+{
+	APlayerController* playerController = (APlayerController*)EngineApi::GetPlayerController();
+	UObject* tempObject = NewObject<UObject>(playerController, cls);
+
+	return tempObject;
+}

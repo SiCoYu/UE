@@ -28,4 +28,7 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "MyBluePrintToCppFunctionLibrary")
 	static UUMGWidget* createWidget(UClass* WidgetClass);
+
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "Create Object From Blueprint", CompactNodeTitle = "Create", Keywords = "new create blueprint"), Category = "MyBluePrintToCppFunctionLibrary")
+	static UObject* newObjectFromBlueprint(UClass* cls);
 };
