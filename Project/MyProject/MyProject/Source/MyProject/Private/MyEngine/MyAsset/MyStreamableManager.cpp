@@ -1,5 +1,7 @@
 #include "MyProject.h"
-#include "Misc/StringAssetReference.h"	// FStringAssetReference
+// UE 4.19.1  warning : FStringAssetReference has been renamed to FSoftObjectPath, change to #include "UObject/SoftObjectPath.h" and rename references
+//#include "Misc/StringAssetReference.h"	// FStringAssetReference
+#include "UObject/SoftObjectPath.h"	// FStringAssetReference
 #include "UtilStr.h"
 #include <string>
 #include "EngineApi.h"	// isMultithreaded
@@ -39,7 +41,9 @@ void FMyStreamableManager::dispose()
 
 UObject* FMyStreamableManager::SynchronousLoad(std::string& path)
 {
-	FStringAssetReference assetRef;
+	// UE 4.19.1  warning : FStringAssetReference has been renamed to FSoftObjectPath, change to #include "UObject/SoftObjectPath.h" and rename references
+	//FStringAssetReference assetRef;
+	FSoftObjectPath assetRef;
 	assetRef.SetPath(UtilStr::ConvStdStr2FString(path));
 	// UE4 4.17 : warning C4996: 'FStreamableManager::SynchronousLoad': Call LoadSynchronous with bManageActiveHandle=true instead if you want the manager to keep the handle alive Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//return mStreamableManager.SynchronousLoad(assetRef);

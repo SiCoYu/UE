@@ -79,7 +79,9 @@ void TableSys::loadOneTable(TableID::TableID tableID)
 	mArrayBuffer.Empty();
 	TableBase* table = mDicTable[tableID];
 
-	FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/MyAsset/Table/"), ANSI_TO_TCHAR(table->mTableName.c_str()), TEXT(".txt"));
+	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/MyAsset/Table/"), ANSI_TO_TCHAR(table->mTableName.c_str()), TEXT(".txt"));
+	FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::ProjectContentDir(), TEXT("/MyAsset/Table/"), ANSI_TO_TCHAR(table->mTableName.c_str()), TEXT(".txt"));
 
 	if (FFileHelper::LoadFileToArray(mArrayBuffer, *Filename))
 	{
