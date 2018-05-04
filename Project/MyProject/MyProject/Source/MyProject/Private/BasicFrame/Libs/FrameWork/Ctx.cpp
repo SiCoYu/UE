@@ -135,12 +135,13 @@ void Ctx::construct()
 	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(SAFE_NEW FrameTimerMgr());
 
 	// 最后初始化 BluePrint 数据
-	UClass *bpCtxClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx_C"), NULL, LOAD_None, NULL);
-	UGameInstance* pGameIns = (UGameInstance*)EngineApi::GetGameInstance();
-	this->mBPCtx = MySharedPtr<UMyBluePrintBase>(::NewObject<UMyBluePrintBase>(pGameIns, bpCtxClass, FName("UMySingletonBP")));
-	FString cmd = TEXT("init");
-	FOutputDeviceDebug device;
-	this->mBPCtx->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
+	// 这个时候还没有获取 GEngineData->getMainActor() ，使用会报错
+	//UClass *bpCtxClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx_C"), NULL, LOAD_None, NULL);
+	//UGameInstance* pGameIns = (UGameInstance*)EngineApi::GetGameInstance();
+	//this->mBPCtx = MySharedPtr<UMyBluePrintBase>(::NewObject<UMyBluePrintBase>(pGameIns, bpCtxClass, FName("UMySingletonBP")));
+	//FString cmd = TEXT("init");
+	//FOutputDeviceDebug device;
+	//this->mBPCtx->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
 }
 
 void Ctx::init()
@@ -279,6 +280,14 @@ void Ctx::beginPlay()
 
 		// 初始化 BP
 		//UMySingletonBP::getSingleton()->init();
+
+		// 最后初始化 BluePrint 数据
+		UClass *bpCtxClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx_C"), NULL, LOAD_None, NULL);
+		UGameInstance* pGameIns = (UGameInstance*)EngineApi::GetGameInstance();
+		this->mBPCtx = MySharedPtr<UMyBluePrintBase>(::NewObject<UMyBluePrintBase>(pGameIns, bpCtxClass, FName("UMySingletonBP")));
+		FString cmd = TEXT("init");
+		FOutputDeviceDebug device;
+		this->mBPCtx->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
 	}
 }
 
