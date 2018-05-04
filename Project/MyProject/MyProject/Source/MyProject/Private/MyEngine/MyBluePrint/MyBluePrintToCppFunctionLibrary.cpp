@@ -3,6 +3,8 @@
 #include "MyBluePrintBase.h"
 #include "Ctx.h"
 #include "EngineApi.h"
+#include "EngineData.h"
+#include "UMGWidget.h"				// UUMGWidget
 
 UMyBluePrintToCppFunctionLibrary::UMyBluePrintToCppFunctionLibrary(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -25,7 +27,7 @@ AMyPlayerControllerBase* UMyBluePrintToCppFunctionLibrary::GetPlayerController()
 	return EngineApi::GetPlayerController();
 }
 
-UUMGWidget* UMyBluePrintToCppFunctionLibrary::createWidget(UClass* WidgetClass);
+UUMGWidget* UMyBluePrintToCppFunctionLibrary::createWidget(UClass* WidgetClass)
 {
 	UUMGWidget* WidgetObject = nullptr;
 
