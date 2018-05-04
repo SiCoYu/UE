@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{1783AB28-454F-783F-FA47-9F810A5BD003}",
+	"EngineAssociation": "{337DB1FC-44EA-9340-3680-CE8A6C118E16}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -15,14 +15,13 @@
 			"LoadingPhase": "Default"
 		}
 	],
-	"AdditionalPluginDirectories": [
-		"../../../../../../../../MyProject/Plugins"
-	],
-	"Plugins":
-	[
+	"Plugins": [
 		{
 			"Name": "ApexDestruction",
 			"Enabled": true
 		}
+	],
+	"AdditionalPluginDirectories": [
+		"../../../../../../../../MyProject/Plugins"
 	]
 }
