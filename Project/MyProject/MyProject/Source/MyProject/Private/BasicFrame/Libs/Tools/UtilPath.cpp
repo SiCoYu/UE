@@ -23,29 +23,37 @@ FString UtilPath::RootDir()
 
 FString UtilPath::GameDir()
 {
+	// UE 4.19.1 warning C4996: 'FPaths::GameDir': FPaths::GameDir() has been superseded by FPaths::ProjectDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameDir());
+	//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameDir());
+	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
 	return ThePath;
 }
 
 FString UtilPath::GameContentDir()
 {
+	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Content
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameContentDir());
+	//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameContentDir());
+	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectContentDir());
 	return ThePath;
 }
 
 FString UtilPath::GameSavedDir()
 {
+	// UE 4.19.1 warning C4996: 'FPaths::GameSavedDir': FPaths::GameSavedDir() has been superseded by FPaths::ProjectSavedDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Saved
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameSavedDir());
+	//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameSavedDir());
+	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir());
 	return ThePath;
 }
 
 FString UtilPath::GameLogDir()
 {
+	// UE 4.19.1 warning C4996: 'FPaths::GameLogDir': FPaths::GameLogDir() has been superseded by FPaths::ProjectLogDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Saved/Logs
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameLogDir());
+	//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameLogDir());
+	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectLogDir());
 	return ThePath;
 }
 
