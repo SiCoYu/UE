@@ -16,9 +16,14 @@ SmoothedFrameRateRange=(LowerBound=(Type="ERangeBoundTypes::Inclusive",Value=5),
 一种是改动编辑器偏好设置->Show Frame Rate and Memory，这样的方法的优点是。是全局的，重新启动后，编辑器会记住。
 一种是在控制台命令中。输入stat fps，这样会在游戏界面上显示当前的fps。这个编辑器重新启动后。须要又一次开启。
 
+==============
+首先这里 Project 里面设置
+MyProject\Config\DefaultEngine.ini
+[/Script/UnrealEd.EditorEngine]
+SmoothedFrameRateRange=(LowerBound=(Type="ERangeBoundTypes::Inclusive",Value=5),UpperBound=(Type="ERangeBoundTypes::Inclusive",Value=24))
 
-
-
+然后引擎 BaseEngine.ini 里面设置
+SmoothedFrameRateRange=(LowerBound=(Type="ERangeBoundTypes::Inclusive",Value=5),UpperBound=(Type="ERangeBoundTypes::Inclusive",Value=50))
 
 
 
