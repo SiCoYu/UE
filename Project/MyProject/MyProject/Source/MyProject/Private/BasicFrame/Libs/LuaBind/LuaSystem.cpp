@@ -5,7 +5,7 @@
 
 LuaSystem::LuaSystem()
 {
-	this.L = nullptr;
+	this->L = nullptr;
 }
 
 LuaSystem::~LuaSystem()
@@ -16,34 +16,34 @@ LuaSystem::~LuaSystem()
 void LuaSystem::init()
 {
 	// 打开基本库
-	L = luaL_newstate();
-	luaL_openlibs(L);
+	this->L = luaL_newstate();
+	luaL_openlibs(this->L);
 
 	// 打开 Socket
-	lua_getglobal(L, "package");
-	lua_getfield(L, -1, "preload");
+	lua_getglobal(this->L, "package");
+	lua_getfield(this->L, -1, "preload");
 
-	lua_pushcfunction(L, luaopen_socket_core);
-	lua_setfield(L, -2, "socket.core");
+	lua_pushcfunction(this->L, luaopen_socket_core);
+	lua_setfield(this->L, -2, "socket.core");
 
-	lua_pushcfunction(L, luaopen_mime_core);
-	lua_setfield(L, -2, "mime.core");
+	lua_pushcfunction(this->L, luaopen_mime_core);
+	lua_setfield(this->L, -2, "mime.core");
 
-	lua_pop(L, 2);
+	lua_pop(this->L, 2);
 
-	lua_settop(L, 0);
+	lua_settop(this->L, 0);
 
 	// 绑定自定义加载器
-	//addCClosureLualoader(L);
-	addCFunctionLualoader(L);
+	//addCClosureLualoader(this->L);
+	addCFunctionLualoader(this->L);
 
 	// 绑定外部库
-	LuaCppBind::bind(L);
+	LuaCppBind::bind(this->L);
 }
 
 void LuaSystem::dispose()
 {
-	if (nullptr != this.L)
+	if (nullptr != this->L)
 	{
 		lua_close(L);
 	}
@@ -51,10 +51,10 @@ void LuaSystem::dispose()
 
 lua_State* LuaSystem::getLuaVM()
 {
-	return L;
+	return this->L;
 }
 
 void LuaSystem::doString(std::string str)
 {
-	luaL_dostring(L, str.c_str());
+	luaL_dostring(this->L, str.c_str());
 }
