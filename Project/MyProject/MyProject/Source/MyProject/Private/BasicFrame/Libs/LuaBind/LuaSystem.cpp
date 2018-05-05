@@ -5,7 +5,7 @@
 
 LuaSystem::LuaSystem()
 {
-
+	this.L = nullptr;
 }
 
 LuaSystem::~LuaSystem()
@@ -43,7 +43,10 @@ void LuaSystem::init()
 
 void LuaSystem::dispose()
 {
-	lua_close(L);
+	if (nullptr != this.L)
+	{
+		lua_close(L);
+	}
 }
 
 lua_State* LuaSystem::getLuaVM()
