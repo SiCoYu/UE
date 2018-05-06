@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "ResInsEventDispatch.h"
-#include "UtilApi.h"
+#include "UtilSysLibWrap.h"
 
 ResInsEventDispatch::ResInsEventDispatch()
 {
@@ -35,6 +35,6 @@ void ResInsEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 	}
 	else
 	{
-		UtilApi::Destroy(this->mInsGO);
+		UtilSysLibWrap::Destroy(this->mInsGO);
 	}
 }

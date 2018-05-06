@@ -30,11 +30,11 @@ void MatInsRes::unload()
 	if (this->mMat != nullptr)
 	{
 		// 这个接口不知道行不行
-		//UtilApi::UnloadAsset(this->mMat);
+		//UtilSysLibWrap::UnloadAsset(this->mMat);
 		this->mMat = nullptr;
 
 		// 这个接口肯定可以
-		//UtilApi.UnloadUnusedAssets();
+		//UtilSysLibWrap.UnloadUnusedAssets();
 	}
 
 	Super::unload();

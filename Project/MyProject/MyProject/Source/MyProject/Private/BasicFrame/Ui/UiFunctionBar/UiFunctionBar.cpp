@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "UiFunctionBar.h"
-#include "UtilApi.h"
+#include "UtilSysLibWrap.h"
 #include "FunctionBarCV.h"
 #include "UtilEngineWrap.h"
 #include "Common.h"
@@ -19,7 +19,7 @@ void UUiFunctionBar::onReady()
 {
 	Super::onReady();
 
-	//UtilApi::addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
+	//UtilSysLibWrap::addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 	mTestButton->addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 }
 

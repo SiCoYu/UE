@@ -11,7 +11,7 @@
 class UUserWidget;
 class UObject;
 
-class UtilApi
+class UtilSysLibWrap
 {
 public:
 	static FVector FAKE_POS;

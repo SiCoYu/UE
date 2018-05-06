@@ -150,7 +150,7 @@ void UForm::onReady()
 
 	if (mIsHandleExitBtn)
 	{
-		//UtilApi.addEventHandle(mWinRender.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
+		//UtilSysLibWrap.addEventHandle(mWinRender.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
 	}
 }
 
@@ -302,8 +302,8 @@ void UForm::onExitBtnClick()
 
 //void UForm::addClick(GameObject go, string path)
 //{
-//	UtilApi.addEventHandle(go, path, onBtnClk);
-//	GameObject btnGo = UtilApi.TransFindChildByPObjAndPath(go, path);
+//	UtilSysLibWrap.addEventHandle(go, path, onBtnClk);
+//	GameObject btnGo = UtilSysLibWrap.TransFindChildByPObjAndPath(go, path);
 //	if (btnGo = null)
 //	{
 //		if (!m_go2Path.ContainsKey(btnGo))
@@ -316,8 +316,8 @@ void UForm::onExitBtnClick()
 
 //void UForm::removeClick(GameObject go, string path)
 //{
-//	UtilApi.removeEventHandle(go, path);
-//	GameObject btnGo = UtilApi.TransFindChildByPObjAndPath(go, path);
+//	UtilSysLibWrap.removeEventHandle(go, path);
+//	GameObject btnGo = UtilSysLibWrap.TransFindChildByPObjAndPath(go, path);
 //	if (btnGo != null)
 //	{
 //		if (m_go2Path.ContainsKey(btnGo))

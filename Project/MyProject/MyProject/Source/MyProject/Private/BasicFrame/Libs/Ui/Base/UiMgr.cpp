@@ -328,7 +328,7 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	UtilEngineWrap::SetActive(mId2FormDic[formId]->mWinRender->mUiRoot, false);      // 出发 onShow 事件
 	//if (mId2FormDic[formId].hideOnCreate)
 	//{
-	//    UtilApi.SetActive(mId2FormDic[formId].mWinRender.mUiRoot, false);
+	//    UtilSysLibWrap.SetActive(mId2FormDic[formId].mWinRender.mUiRoot, false);
 	//}
 	//if (!this->mId2FormDic[formId]->getHideOnCreate())
 	if(this->mId2FormDic[formId]->isVisible())
@@ -402,7 +402,7 @@ void UiMgr::exitAllWin()
 
 void UiMgr::findSceneUIRootGo()
 {
-	//mSceneUIRootGo = UtilApi.GoFindChildByPObjAndName("SceneUIRootGo");
+	//mSceneUIRootGo = UtilSysLibWrap.GoFindChildByPObjAndName("SceneUIRootGo");
 }
 
 // 根据场景类型卸载 UI，强制卸载

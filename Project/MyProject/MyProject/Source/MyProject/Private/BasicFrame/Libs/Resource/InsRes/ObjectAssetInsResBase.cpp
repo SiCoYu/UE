@@ -64,8 +64,8 @@ void ObjectAssetInsResBase::unload()
 {
 	if (this->mGo != nullptr)
 	{
-		//UtilApi.UnloadAsset(mGo);      // 强制卸载资源数据
-		//UtilApi.DestroyImmediate(mGo, true);
+		//UtilSysLibWrap.UnloadAsset(mGo);      // 强制卸载资源数据
+		//UtilSysLibWrap.DestroyImmediate(mGo, true);
 		UtilEngineWrap::UnloadUnusedAssets();
 		this->mGo = nullptr;
 	}

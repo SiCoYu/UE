@@ -87,7 +87,7 @@ void InsResMgrBase::unloadNoRef(std::string path)
 	// 卸载加载的原始资源
 	GResLoadMgr->unload(path, EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
 	UtilMap::Remove(this->mPath2ResDic, path);
-	//UtilApi.UnloadUnusedAssets();           // 异步卸载共用资源
+	//UtilSysLibWrap.UnloadUnusedAssets();           // 异步卸载共用资源
 }
 
 void InsResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)

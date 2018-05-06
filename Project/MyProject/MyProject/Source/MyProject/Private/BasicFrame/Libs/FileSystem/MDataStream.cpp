@@ -166,7 +166,7 @@ unsigned char* MDataStream::readByte(int offset, int count)
 
 void MDataStream::writeText(std::string text, GkEncode gkEncode)
 {
-	//Encoding encode = UtilApi.convGkEncode2EncodingEncoding(gkEncode);
+	//Encoding encode = UtilSysLibWrap.convGkEncode2EncodingEncoding(gkEncode);
 	//FFileHelper::EEncodingOptions::Type encode = FFileHelper::EEncodingOptions::ForceUTF8;
 	// UE 4.18
 	FFileHelper::EEncodingOptions encode = FFileHelper::EEncodingOptions::ForceUTF8;
@@ -182,6 +182,6 @@ void MDataStream::writeByte(unsigned char* bytes, int offset, int count)
 
 void MDataStream::writeLine(std::string text, GkEncode gkEncode)
 {
-	//text = text + UtilApi.CR_LF;
+	//text = text + UtilSysLibWrap.CR_LF;
 	writeText(text, gkEncode);
 }

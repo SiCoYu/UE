@@ -1,9 +1,9 @@
 #include "MyProject.h"
-#include "UtilApi.h"
+#include "UtilSysLibWrap.h"
 
-FVector UtilApi::FAKE_POS = FVector(-1000, 0, -1000);
+FVector UtilSysLibWrap::FAKE_POS = FVector(-1000, 0, -1000);
 
-TScriptDelegate<FWeakObjectPtr> UtilApi::addUObjectButtonClickHandle(UUserWidget* widget, const FName& buttonName, UObject* pThis, const FName& functionName)
+TScriptDelegate<FWeakObjectPtr> UtilSysLibWrap::addUObjectButtonClickHandle(UUserWidget* widget, const FName& buttonName, UObject* pThis, const FName& functionName)
 {
 	TScriptDelegate<FWeakObjectPtr> handle;
 
@@ -21,7 +21,7 @@ TScriptDelegate<FWeakObjectPtr> UtilApi::addUObjectButtonClickHandle(UUserWidget
 	return handle;
 }
 
-void UtilApi::Destroy(AActor* actor, bool bNetForce, bool bShouldModifyLevel)
+void UtilSysLibWrap::Destroy(AActor* actor, bool bNetForce, bool bShouldModifyLevel)
 {
 	if (nullptr != actor)
 	{
@@ -29,7 +29,7 @@ void UtilApi::Destroy(AActor* actor, bool bNetForce, bool bShouldModifyLevel)
 	}
 }
 
-void UtilApi::DestroyImmediate(AActor* actor, bool bNetForce, bool bShouldModifyLevel)
+void UtilSysLibWrap::DestroyImmediate(AActor* actor, bool bNetForce, bool bShouldModifyLevel)
 {
 	if (nullptr != actor)
 	{
