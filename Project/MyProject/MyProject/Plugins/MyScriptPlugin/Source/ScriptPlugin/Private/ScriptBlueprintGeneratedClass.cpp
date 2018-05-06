@@ -2,6 +2,9 @@
 
 #include "ScriptBlueprintGeneratedClass.h"
 #include "ScriptPluginLog.h"
+
+#define WITH_LUA
+
 #if WITH_LUA
 #include "LuaIntegration.h"
 #endif
