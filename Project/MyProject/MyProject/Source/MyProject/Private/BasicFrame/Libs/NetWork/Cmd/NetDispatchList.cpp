@@ -1,11 +1,11 @@
 ﻿#include "MyProject.h"
-#include "NetDispList.h"
+#include "NetDispatchList.h"
 #include "UtilContainers.h"
 #include "Common.h"
 #include "UtilStr.h"
-#include "NetDispHandle.h"
+#include "NetDispatchHandle.h"
 
-NetDispList::NetDispList()
+NetDispatchList::NetDispatchList()
 	: mRevMsgCnt(0),
 	  mHandleMsgCnt(0),
 	  mIsStopNetHandle(false)
@@ -13,32 +13,32 @@ NetDispList::NetDispList()
 
 }
 
-NetDispList::~NetDispList()
+NetDispatchList::~NetDispatchList()
 {
 
 }
 
-void NetDispList::init()
+void NetDispatchList::init()
 {
 
 }
 
-void NetDispList::dispose()
+void NetDispatchList::dispose()
 {
 
 }
 
-bool NetDispList::getBStopNetHandle()
+bool NetDispatchList::getBStopNetHandle()
 {
 	return mIsStopNetHandle;
 }
 
-void NetDispList::setBStopNetHandle(bool value)
+void NetDispatchList::setBStopNetHandle(bool value)
 {
 	mIsStopNetHandle = value;
 }
 
-void NetDispList::addOneDispatch(NetDispHandle* disp)
+void NetDispatchList::addOneDispatch(NetDispatchHandle* disp)
 {
 	if (UtilVector::IndexOf(mNetDispList, disp) == -1)
     {
@@ -46,7 +46,7 @@ void NetDispList::addOneDispatch(NetDispHandle* disp)
     }
 }
 
-void NetDispList::removeOneDispatch(NetDispHandle* disp)
+void NetDispatchList::removeOneDispatch(NetDispatchHandle* disp)
 {
 	if (UtilVector::IndexOf(mNetDispList, disp) != -1)
     {
@@ -54,7 +54,7 @@ void NetDispList::removeOneDispatch(NetDispHandle* disp)
     }
 }
 
-void NetDispList::handleMsg(ByteBuffer* msg)
+void NetDispatchList::handleMsg(ByteBuffer* msg)
 {
     //if (false == mIsStopNetHandle)  // 如果没有停止网络处理
     //{
@@ -65,27 +65,27 @@ void NetDispList::handleMsg(ByteBuffer* msg)
     //}
 }
 
-void NetDispList::addOneRevMsg()
+void NetDispatchList::addOneRevMsg()
 {
     ++mRevMsgCnt;
 
 	GLogSys->log(UtilStr::Format("接收到消息数量 {0}", mRevMsgCnt));
 }
 
-void NetDispList::addOneHandleMsg()
+void NetDispatchList::addOneHandleMsg()
 {
     ++mHandleMsgCnt;
 
 	GLogSys->log(UtilStr::Format("处理消息数量 {0}", mHandleMsgCnt));
 }
 
-void NetDispList::clearOneRevMsg()
+void NetDispatchList::clearOneRevMsg()
 {
     mRevMsgCnt = 0;
 	GLogSys->log("清理接收消息数量");
 }
 
-void NetDispList::clearOneHandleMsg()
+void NetDispatchList::clearOneHandleMsg()
 {
     mHandleMsgCnt = 0;
 	GLogSys->log("清理处理消息数量");

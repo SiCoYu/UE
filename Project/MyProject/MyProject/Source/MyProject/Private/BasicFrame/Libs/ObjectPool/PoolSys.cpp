@@ -4,7 +4,7 @@
 
 PoolSys::PoolSys()
 {
-	mPoolList = new LockList<IRecycle*>("PoolList");
+	this->mPoolList = new LockList<IRecycle*>("PoolList");
 }
 
 void PoolSys::init()
@@ -19,8 +19,8 @@ void PoolSys::dispose()
 
 void PoolSys::deleteObj(IRecycle* obj)
 {
-	//if (mPoolList.IndexOf(obj) == -1)
+	//if (this->mPoolList.IndexOf(obj) == -1)
 	//{
-	//    mPoolList.Add(obj);
+	//    this->mPoolList.Add(obj);
 	//}
 }

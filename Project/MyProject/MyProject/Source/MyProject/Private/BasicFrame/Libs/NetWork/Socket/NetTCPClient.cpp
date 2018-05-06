@@ -7,22 +7,22 @@
 NetTCPClient::NetTCPClient(ISocketHandler& h)
 	: TcpSocket(h) 
 {
-	mClientBuffer = new ClientBuffer();
+	this->mClientBuffer = new ClientBuffer();
 }
 
 NetTCPClient::~NetTCPClient()
 {
-	delete mClientBuffer;
+	delete this->mClientBuffer;
 }
 
 void NetTCPClient::OnConnect()
 {
-	Send("quit\n");
+	this->Send("quit\n");
 }
 
 void NetTCPClient::OnConnectFailed()
 {
-	SetCloseAndDelete();
+	this->SetCloseAndDelete();
 }
 
 void NetTCPClient::OnDelete()
@@ -37,7 +37,7 @@ void NetTCPClient::OnRawData(const char *buf, size_t len)
 
 ClientBuffer* NetTCPClient::getClientBuffer()
 {
-	return mClientBuffer;
+	return this->mClientBuffer;
 }
 
 void NetTCPClient::sendMsg()

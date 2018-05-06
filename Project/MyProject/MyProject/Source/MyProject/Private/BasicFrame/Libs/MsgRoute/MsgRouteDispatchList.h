@@ -3,17 +3,17 @@
 
 #include "MList.h"
 
-class MsgRouteDispHandle;
+class MsgRouteDispatchHandle;
 class MsgRouteBase;
 
 class MsgRouteDispatchList
 {
 protected:
-	MList<MsgRouteDispHandle*> mDispList;
+	MList<MsgRouteDispatchHandle*> mDispList;
 
 public:
-	void addOneDispatch(MsgRouteDispHandle* disp);
-	void removeOneDispatch(MsgRouteDispHandle* disp);
+	void addOneDispatch(MsgRouteDispatchHandle* disp);
+	void removeOneDispatch(MsgRouteDispatchHandle* disp);
 	void handleMsg(MsgRouteBase* msg);
 };
 

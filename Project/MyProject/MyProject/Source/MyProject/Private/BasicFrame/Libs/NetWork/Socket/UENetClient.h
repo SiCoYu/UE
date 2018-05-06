@@ -15,7 +15,7 @@ class MMutex;
 class UENetClient
 {
 protected:
-	FString	m_strDesc;
+	FString	mStrDesc;
 	FIPv4Endpoint mBoundEndpoint;
 
 	FSocket* mSocket;

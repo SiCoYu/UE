@@ -25,22 +25,22 @@ NetThread::NetThread(SocketHandler *p)
 
 NetThread::~NetThread()
 {
-	if (IsRunning())
+	if (this->IsRunning())
 	{
-		SetRelease(true);
-		SetRunning(false);
+		this->SetRelease(true);
+		this->SetRunning(false);
 		Utility::Sleep(5);
 	}
 }
 
 void NetThread::Run()
 {
-	while (!mIsExitFlag)
+	while (!this->mIsExitFlag)
 	{
-		if (mH->GetCount() > 1 && IsRunning())
+		if (this->mH->GetCount() > 1 && this->IsRunning())
 		{
-			mH->Select(0, 500000);
-			((INetMgr*)mH)->recAndSendMsg();
+			this->mH->Select(0, 500000);
+			((INetMgr*)this->mH)->recAndSendMsg();
 		}
 
 		Utility::Sleep(1000);
@@ -49,12 +49,12 @@ void NetThread::Run()
 	//  (a socket can only be detached if DeleteByHandler() is true)
 	// yeah oops mSocket delete its socket thread, that means this
 	// so Socket will no longer delete its socket thread, instead we do this:
-	SetDeleteOnExit();
+	this->SetDeleteOnExit();
 }
 
 void NetThread::setExitFlag(bool exit)
 {
-	mIsExitFlag = exit;
+	this->mIsExitFlag = exit;
 }
 
 #ifdef SOCKETS_NAMESPACE

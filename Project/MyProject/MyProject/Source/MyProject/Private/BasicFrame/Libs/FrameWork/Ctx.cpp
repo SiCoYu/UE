@@ -8,7 +8,7 @@
 #include "UtilEngineWrap.h"
 #include "TableSys.h"
 #include "ShareData.h"
-#include "NetDispList.h"
+#include "NetDispatchList.h"
 #include "LogSys.h"
 #include "Config.h"
 #include "MFileSys.h"
@@ -92,7 +92,7 @@ Ctx::~Ctx()
 void Ctx::construct()
 {
 	this->mShareData = MySharedPtr<ShareData>(SAFE_NEW ShareData());
-	this->mNetDispList = MySharedPtr<NetDispList>(SAFE_NEW NetDispList());
+	this->mNetDispList = MySharedPtr<NetDispatchList>(SAFE_NEW NetDispatchList());
 	this->mLogSys = MySharedPtr<LogSys>(SAFE_NEW LogSys());
 	this->mEngineData = MySharedPtr<EngineData>(SAFE_NEW EngineData());
 
@@ -346,7 +346,7 @@ MySharedPtr<ShareData> Ctx::getShareData()
 	return this->mShareData;
 }
 
-MySharedPtr<NetDispList> Ctx::getNetDispList()
+MySharedPtr<NetDispatchList> Ctx::getNetDispList()
 {
 	return this->mNetDispList;
 }

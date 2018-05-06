@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "NetDispHandle.h"
+#include "NetDispatchHandle.h"
 #include "ByteBuffer.h"
 #include "UtilContainers.h"
 #include "Common.h"

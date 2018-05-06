@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "MsgRouteDispHandle.h"
+#include "MsgRouteDispatchHandle.h"
 #include "MsgRouteBase.h"
 #include <string>
 #include "UtilContainers.h"
@@ -7,17 +7,17 @@
 #include "UtilStr.h"
 #include "MsgRouteHandleBase.h"
 
-MsgRouteDispHandle::MsgRouteDispHandle()
+MsgRouteDispatchHandle::MsgRouteDispatchHandle()
 {
 	
 }
 
-MsgRouteDispHandle::~MsgRouteDispHandle()
+MsgRouteDispatchHandle::~MsgRouteDispatchHandle()
 {
 	
 }
 
-void MsgRouteDispHandle::handleMsg(MsgRouteBase* msg)
+void MsgRouteDispatchHandle::handleMsg(MsgRouteBase* msg)
 {
 	std::string textStr = "";
 	int key = 0;

@@ -1,23 +1,23 @@
-﻿#ifndef __NetDispList_H
-#define __NetDispList_H
+﻿#ifndef __NetDispatchList_H
+#define __NetDispatchList_H
 
 #include <vector>
 
-class NetDispHandle;
+class NetDispatchHandle;
 class ByteBuffer;
 
-class NetDispList
+class NetDispatchList
 {
 protected:
     int mRevMsgCnt;      // 接收到消息的数量
     int mHandleMsgCnt;   // 处理的消息的数量
 
-    std::vector<NetDispHandle*> mNetDispList;
+    std::vector<NetDispatchHandle*> mNetDispList;
     bool mIsStopNetHandle;       // 是否停止网络消息处理
 
 public:
-	NetDispList();
-	~NetDispList();
+	NetDispatchList();
+	~NetDispatchList();
 
 public:
 	void init();
@@ -26,8 +26,8 @@ public:
 	bool getBStopNetHandle();
 	void setBStopNetHandle(bool value);
 
-	void addOneDispatch(NetDispHandle* disp);
-	void removeOneDispatch(NetDispHandle* disp);
+	void addOneDispatch(NetDispatchHandle* disp);
+	void removeOneDispatch(NetDispatchHandle* disp);
 	void handleMsg(ByteBuffer* msg);
 	void addOneRevMsg();
 

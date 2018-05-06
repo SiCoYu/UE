@@ -1,9 +1,9 @@
 ﻿#include "MyProject.h"
 #include "MsgRouteDispatchList.h"
 #include "MsgRouteBase.h"
-#include "MsgRouteDispHandle.h"
+#include "MsgRouteDispatchHandle.h"
 
-void MsgRouteDispatchList::addOneDispatch(MsgRouteDispHandle* disp)
+void MsgRouteDispatchList::addOneDispatch(MsgRouteDispatchHandle* disp)
 {
 	if (this->mDispList.IndexOf(disp) == -1)
 	{
@@ -11,7 +11,7 @@ void MsgRouteDispatchList::addOneDispatch(MsgRouteDispHandle* disp)
 	}
 }
 
-void MsgRouteDispatchList::removeOneDispatch(MsgRouteDispHandle* disp)
+void MsgRouteDispatchList::removeOneDispatch(MsgRouteDispatchHandle* disp)
 {
 	if (this->mDispList.IndexOf(disp) != -1)
 	{

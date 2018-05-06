@@ -12,7 +12,7 @@
 #include "NetMgr.h"
 #include "LogSys.h"
 #include "ShareData.h"
-#include "NetDispList.h"
+#include "NetDispatchList.h"
 #include "Config.h"
 #include "PoolSys.h"
 

@@ -19,7 +19,7 @@ class INetMgr;
 class TableSys;
 class LogSys;
 class ShareData;
-class NetDispList;
+class NetDispatchList;
 class Config;
 class LocalFileSys;
 class PoolSys;
@@ -57,7 +57,7 @@ protected:
 	MySharedPtr<TableSys> mTableSys;
 	MySharedPtr<LogSys> mLogSys;
 	MySharedPtr<ShareData> mShareData;
-	MySharedPtr<NetDispList> mNetDispList;
+	MySharedPtr<NetDispatchList> mNetDispList;
 	MySharedPtr<Config> mConfig;
 	MySharedPtr<LocalFileSys> mLocalFileSys;
 	MySharedPtr<PoolSys> mPoolSys;
@@ -109,7 +109,7 @@ public:
 	MySharedPtr<TableSys> getTableSys();
 	MySharedPtr<LogSys> getLogSys();
 	MySharedPtr<ShareData> getShareData();
-	MySharedPtr<NetDispList> getNetDispList();
+	MySharedPtr<NetDispatchList> getNetDispList();
 	MySharedPtr<Config> getConfig();
 	MySharedPtr<LocalFileSys> getLocalFileSys();
 	MySharedPtr<PoolSys> getPoolSys();
