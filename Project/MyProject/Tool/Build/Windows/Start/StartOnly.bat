@@ -133,6 +133,14 @@ cd %BASE_DIR%
 :: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
 :: ExecCmds
 :: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: immersive : MaximizeWindow
+:: Engine\Source\Editor\UnrealEd\Private\UnrealEdGlobals.cpp
+:: VREditor
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: ForceVREditor
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
+:: AutomatedMapBuild
+:: Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp
 %UE4_BIN_APP_FULL_PATH% crashreports noinnerexception useautoreporter -cmd UTF8Output LLM NOLLM
 
 pause
