@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
-#include "UILoadingItem.h"
+#include "UiLoadingItem.h"
 
-UILoadingItem::UILoadingItem()
+UiLoadingItem::UiLoadingItem()
 	: mResPath("")
 {
 

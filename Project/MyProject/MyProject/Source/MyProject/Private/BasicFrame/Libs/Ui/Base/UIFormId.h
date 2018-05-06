@@ -3,7 +3,7 @@
 
 namespace NSFormId
 {
-	enum UIFormId
+	enum UiFormId
 	{
 		eUIPack,		// ±³°ü
 		eUILog,			// ÈÕÖ¾

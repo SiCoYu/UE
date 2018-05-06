@@ -76,7 +76,7 @@ protected:
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Reference to SCompoundWidget
-	TSharedPtr<class SMyUILoadStyleWidget> mMyUILoadStyleWidget;
+	TSharedPtr<class SMyUiLoadStyleWidget> mMyUILoadStyleWidget;
 
 	// https://wiki.unrealengine.com/Slate,_Edit_Text_Widget,_Custom_Rendering_%26_Any_TrueTypeFont
 	// error : BlueprintReadOnly should not be used on private members

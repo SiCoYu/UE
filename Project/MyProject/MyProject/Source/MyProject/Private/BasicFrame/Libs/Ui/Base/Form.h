@@ -3,7 +3,7 @@
 #include "MyProject.h"
 #include "Window.h"
 #include <string>
-#include "UIFormId.h"
+#include "UiFormId.h"
 #include "PointF.h"
 #include "AuxMUIClassLoader.h"
 
@@ -26,7 +26,7 @@ protected:
 
 	bool mIsExitMode;               // 关闭退出模式
 	bool mIsHideOnCreate;         // 创建后是否隐藏
-	UIFormId mId;
+	UiFormId mId;
 	bool mIsLoadWidgetRes;                // 是否应该加载窗口资源
 	bool mIsReady;            // 是否准备就绪
 
@@ -35,7 +35,7 @@ protected:
 
 	// LuaCSBridgeForm mLuaCSBridgeForm;
 	std::string mFormName;            // 这个是 Lua 中传的标识符，会传给 Lua 使用，客户端自己不用
-	//std::map<GameObject, GoExtraInfo> mGo2Path;
+	//std::map<GameObject, ActorExtraInfo> mGo2Path;
 	bool mIsVisible;
 	AuxMUIClassLoader* mAuxMUIClassLoader;
 
@@ -43,8 +43,8 @@ public:
 	UForm(const FObjectInitializer& ObjectInitializer);
 
 	void loadUWidget(const TCHAR* name);
-	UIFormId getId();
-	void setId(UIFormId value);
+	UiFormId getId();
+	void setId(UiFormId value);
 	bool getHideOnCreate();
 	void setHideOnCreate(bool value);
 	bool getExitMode();

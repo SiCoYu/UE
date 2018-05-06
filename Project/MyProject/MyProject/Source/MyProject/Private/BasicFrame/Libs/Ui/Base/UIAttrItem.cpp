@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "UIAttrItem.h"
+#include "UiAttrItem.h"
 
-UIAttrItem::UIAttrItem()
+UiAttrItem::UiAttrItem()
 {
 
 }

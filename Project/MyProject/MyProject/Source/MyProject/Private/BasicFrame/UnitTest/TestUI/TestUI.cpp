@@ -1,10 +1,10 @@
 #include "MyProject.h"
 #include "Common.h"
-#include "UIFormId.h"
-#include "UITestUMG.h"
+#include "UiFormId.h"
+#include "UiTestUMG.h"
 #include "TestUI.h"
 
 void TestUI::run()
 {
-	GUiMgr->loadAndShow<UUITestUMG>(NSFormId::eUITestUMG);
+	GUiMgr->loadAndShow<UUiTestUMG>(NSFormId::eUITestUMG);
 }

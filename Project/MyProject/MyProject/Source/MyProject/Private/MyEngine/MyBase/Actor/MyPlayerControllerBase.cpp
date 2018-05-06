@@ -7,7 +7,7 @@
 #include "Blueprint/UserWidget.h"	// UUserWidget
 //#include "MyPlayerCameraManager.h"
 #include "Common.h"
-#include "UITestCanvas.h"	// UUITestCanvas
+#include "UiTestCanvas.h"	// UUiTestCanvas
 
 AMyPlayerControllerBase::AMyPlayerControllerBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -53,8 +53,8 @@ void AMyPlayerControllerBase::ReceivedPlayer()
 void AMyPlayerControllerBase::TestUI()
 {
 	// Test 加载 UIPack
-	//GUiMgr->loadForm<UUIPack>(eUIPack);
-	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
+	//GUiMgr->loadForm<UUiPack>(eUIPack);
+	GUiMgr->loadForm<UUiTestCanvas>(eUITestCanvas);
 }
 
 void AMyPlayerControllerBase::BeginPlay_PawnClass()

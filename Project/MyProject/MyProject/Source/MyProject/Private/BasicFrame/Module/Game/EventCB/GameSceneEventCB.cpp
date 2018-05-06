@@ -1,8 +1,8 @@
 ﻿#include "MyProject.h"
 #include "GameSceneEventCB.h"
 #include "Common.h"
-#include "UIFunctionBar.h"
-#include "UIFormId.h"
+#include "UiFunctionBar.h"
+#include "UiFormId.h"
 
 #ifdef ENABLE_UNIT_TEST
 	#include "TestMain.h"

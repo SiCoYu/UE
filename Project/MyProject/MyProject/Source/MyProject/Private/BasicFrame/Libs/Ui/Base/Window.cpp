@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "Window.h"
-#include "UILayer.h"
+#include "UiLayer.h"
 
 UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -11,7 +11,7 @@ UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	mAlignHorizontal = 0;
 	mIsResReady = false;
 
-	mGuiWin = new GuiWin();
+	mGuiWin = new WinRender();
 }
 
 int UWindow::getPosX()
@@ -34,12 +34,12 @@ void UWindow::setPosY(int posY)
 
 }
 
-UILayer* UWindow::getUiLayer()
+UiLayer* UWindow::getUiLayer()
 {
 	return mUiLayer;
 }
 
-void UWindow::setUiLayer(UILayer* layer)
+void UWindow::setUiLayer(UiLayer* layer)
 {
 	mUiLayer = layer;
 }
@@ -59,7 +59,7 @@ void UWindow::setIsResReady(bool value)
 	mIsResReady = value;
 }
 
-GuiWin* UWindow::getGuiWin()
+WinRender* UWindow::getGuiWin()
 {
 	return mGuiWin;
 }

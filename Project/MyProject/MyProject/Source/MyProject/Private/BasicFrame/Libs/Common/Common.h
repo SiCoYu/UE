@@ -7,7 +7,7 @@
 #include "Ctx.h"
 #include "EngineData.h"
 #include "INetMgr.h"
-#include "UIMgr.h"
+#include "UiMgr.h"
 #include "EngineApi.h"
 #include "NetMgr.h"
 #include "LogSys.h"

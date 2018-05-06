@@ -70,9 +70,9 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/NetWork/Cmd",
                 "MyProject/Private/BasicFrame/Libs/NetWork/Web",
 
-                "MyProject/Private/BasicFrame/Libs/UI/UICore",
-                "MyProject/Private/BasicFrame/Libs/UI/UIWidget",
-                "MyProject/Private/BasicFrame/Libs/UI/UIWidget/TreeWidget",
+                "MyProject/Private/BasicFrame/Libs/Ui/Base",
+                "MyProject/Private/BasicFrame/Libs/Ui/Widget",
+                "MyProject/Private/BasicFrame/Libs/Ui/Widget/TreeWidget",
 
                 "MyProject/Private/BasicFrame/Libs/Log",
                 "MyProject/Private/BasicFrame/Libs/Table",
@@ -123,17 +123,17 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Module/Game/EventCB",
 
                 // UI 区域
-                "MyProject/Private/BasicFrame/UI/UIPack",
-                "MyProject/Private/BasicFrame/UI/UITestCanvas",
-                "MyProject/Private/BasicFrame/UI/UICustomButton",
-                "MyProject/Private/BasicFrame/UI/UILoadStyles",
-                "MyProject/Private/BasicFrame/UI/UIChat",
-                "MyProject/Private/BasicFrame/UI/UILog",
-                "MyProject/Private/BasicFrame/UI/UIEditText",
-                "MyProject/Private/BasicFrame/UI/UISlateTab",
-                "MyProject/Private/BasicFrame/UI/UISlateStyleSet",
-                "MyProject/Private/BasicFrame/UI/UITestUMG",
-                "MyProject/Private/BasicFrame/UI/UIFunctionBar",
+                "MyProject/Private/BasicFrame/Ui/UiPack",
+                "MyProject/Private/BasicFrame/Ui/UiTestCanvas",
+                "MyProject/Private/BasicFrame/Ui/UiCustomButton",
+                "MyProject/Private/BasicFrame/Ui/UiLoadStyles",
+                "MyProject/Private/BasicFrame/Ui/UiChat",
+                "MyProject/Private/BasicFrame/Ui/UiLog",
+                "MyProject/Private/BasicFrame/Ui/UiEditText",
+                "MyProject/Private/BasicFrame/Ui/UiSlateTab",
+                "MyProject/Private/BasicFrame/Ui/UiSlateStyleSet",
+                "MyProject/Private/BasicFrame/Ui/UiTestUMG",
+                "MyProject/Private/BasicFrame/Ui/UiFunctionBar",
 
                 // Test 区域
                 "MyProject/Private/BasicFrame/UnitTest",
@@ -188,7 +188,7 @@ public class MyProject : ModuleRules
             new string[] {
                 "MyProject/Public/MyEngine",
                 "MyProject/Public/MyEngine/Player",
-                "MyProject/Public/MyEngine/UI",
+                "MyProject/Public/MyEngine/Ui",
                 "MyProject/Public/MyEngine/Persist",
                 // Relative to Engine\Plugins\Runtime\ApexDestruction\Source , 包含插件头文件
                 // DestructibleActor.h 包含目录

@@ -39,12 +39,12 @@ UForm::UForm(const FObjectInitializer& ObjectInitializer)
 	this->mIsVisible = false;
 }
 
-UIFormId UForm::getId()
+UiFormId UForm::getId()
 {
 	return this->mId;
 }
 
-void UForm::setId(UIFormId value)
+void UForm::setId(UiFormId value)
 {
 	this->mId = value;
 }
@@ -183,7 +183,7 @@ void UForm::onHide()
 
 	//if (mIsBlurBg)
 	//{
-	//	GUiMgr->exitForm(UIFormId.eUIBlurBg);
+	//	GUiMgr->exitForm(UiFormId.eUIBlurBg);
 	//}
 }
 
@@ -200,7 +200,7 @@ void UForm::onExit()
 
 	//if (mIsBlurBg)
 	//{
-	//	GUiMgr->exitForm(UIFormId.eUIBlurBg);
+	//	GUiMgr->exitForm(UiFormId.eUIBlurBg);
 	//}
 }
 
@@ -308,7 +308,7 @@ void UForm::onExitBtnClick()
 //	{
 //		if (!m_go2Path.ContainsKey(btnGo))
 //		{
-//			m_go2Path[btnGo] = new GoExtraInfo();
+//			m_go2Path[btnGo] = new ActorExtraInfo();
 //			m_go2Path[btnGo].mPath = path;
 //		}
 //	}

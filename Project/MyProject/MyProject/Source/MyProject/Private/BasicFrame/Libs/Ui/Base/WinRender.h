@@ -1,11 +1,11 @@
-﻿#ifndef __GuiWin_H
-#define __GuiWin_H
+﻿#ifndef __WinRender_H
+#define __WinRender_H
 
 //#include "UMG.h"
 #include "SlateWidget.h"
 #include "UMGWidget.h"
 
-class GuiWin
+class WinRender
 {
 public:
 	//UUserWidget* m_umgWidget;

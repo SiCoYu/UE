@@ -3,7 +3,7 @@
 
 #include "EngineData.h"
 #include "INetMgr.h"
-#include "UIMgr.h"
+#include "UiMgr.h"
 #include "NetMgr.h"
 #include "EngineApi.h"
 #include "TableSys.h"
@@ -105,7 +105,7 @@ void Ctx::construct()
 	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(SAFE_NEW ClassAssetInsMgr());
 	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(SAFE_NEW ObjectAssetInsMgr());
 
-	this->mUiMgr = MySharedPtr<UIMgr>(SAFE_NEW UIMgr());
+	this->mUiMgr = MySharedPtr<UiMgr>(SAFE_NEW UiMgr());
 	this->mTableSys = MySharedPtr<TableSys>(SAFE_NEW TableSys());
 	this->mConfig = MySharedPtr<Config>(SAFE_NEW Config());
 
@@ -299,12 +299,12 @@ void Ctx::mainLoop()
 	}
 }
 
-void Ctx::setUiMgr(UIMgr* uiMgr)
+void Ctx::setUiMgr(UiMgr* uiMgr)
 {
 	this->mUiMgr.reset(uiMgr);
 }
 
-MySharedPtr<UIMgr> Ctx::getUIMgr()
+MySharedPtr<UiMgr> Ctx::getUIMgr()
 {
 	return this->mUiMgr;
 }

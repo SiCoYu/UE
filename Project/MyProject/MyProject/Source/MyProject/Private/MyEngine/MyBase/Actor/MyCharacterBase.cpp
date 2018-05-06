@@ -1,8 +1,8 @@
 #include "MyProject.h"
 #include "MyCharacterBase.h"
 #include "Common.h"
-#include "UIFormId.h"
-#include "UITestCanvas.h"
+#include "UiFormId.h"
+#include "UiTestCanvas.h"
 #include "MyAnimInstanceBase.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -148,8 +148,8 @@ void AMyCharacterBase::BeginPlay()
 void AMyCharacterBase::TestUI()
 {
 	// Test 加载 UIPack
-	//GUiMgr->loadForm<UUIPack>(eUIPack);
-	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
+	//GUiMgr->loadForm<UUiPack>(eUIPack);
+	GUiMgr->loadForm<UUiTestCanvas>(eUITestCanvas);
 }
 
 void AMyCharacterBase::Tick(float DeltaTime)

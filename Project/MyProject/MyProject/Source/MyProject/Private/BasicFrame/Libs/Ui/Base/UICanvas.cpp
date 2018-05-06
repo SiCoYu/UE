@@ -1,14 +1,14 @@
 #include "MyProject.h"
-#include "UICanvas.h"
+#include "UiCanvas.h"
 
-UICanvas::UICanvas(UICanvasId canvasID)
+UiCanvas::UiCanvas(UiCanvasId canvasID)
 {
 	mCanvasId = canvasID;
 
 	int idx = 0;
 	for (idx = 0; idx < (int)eMaxLayer; ++idx)
 	{
-		mLayerList.push_back(new UILayer((UILayerId)idx));
+		mLayerList.push_back(new UiLayer((UiLayerId)idx));
 	}
 
 	//if (eCanvas_50 == mCanvasId)
@@ -31,17 +31,17 @@ UICanvas::UICanvas(UICanvasId canvasID)
 	//}
 }
 
-void UICanvas::setGoName(std::string& rhv)
+void UiCanvas::setGoName(std::string& rhv)
 {
 	mGoName = rhv;
 }
 
-std::vector<UILayer*>& UICanvas::getLayerList()
+std::vector<UiLayer*>& UiCanvas::getLayerList()
 {
 	return mLayerList;
 }
 
-void UICanvas::findCanvasGO()
+void UiCanvas::findCanvasGO()
 {
 	//int idx = 0;
 	//for (idx = 0; idx < (int)eMaxLayer; ++idx)

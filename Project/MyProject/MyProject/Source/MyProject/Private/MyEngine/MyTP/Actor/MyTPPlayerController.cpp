@@ -7,7 +7,7 @@
 #include "Blueprint/UserWidget.h"	// UUserWidget
 #include "MyTPPlayerCameraManager.h"
 #include "Common.h"
-#include "UITestCanvas.h"	// UUITestCanvas
+#include "UiTestCanvas.h"	// UUiTestCanvas
 
 AMyTPPlayerController::AMyTPPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -53,8 +53,8 @@ AMyTPPlayerController::AMyTPPlayerController(const FObjectInitializer& ObjectIni
 //void AMyPlayerController::TestUI()
 //{
 //	// Test 加载 UIPack
-//	//GUiMgr->loadForm<UUIPack>(eUIPack);
-//	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
+//	//GUiMgr->loadForm<UUiPack>(eUIPack);
+//	GUiMgr->loadForm<UUiTestCanvas>(eUITestCanvas);
 //}
 //
 //void AMyPlayerController::BeginPlay_PawnClass()

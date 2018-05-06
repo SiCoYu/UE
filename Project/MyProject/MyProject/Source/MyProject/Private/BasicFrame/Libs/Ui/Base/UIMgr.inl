@@ -1,5 +1,5 @@
 #ifndef __UIMgr_H
-#error "UIMgr.inl file can only include in UIMgr.h"
+#error "UiMgr.inl file can only include in UiMgr.h"
 #endif
 
 #include "EngineApi.h"
@@ -7,7 +7,7 @@
 #include "Common.h"
 
 //template <class T>
-//T* UIMgr::loadForm(UIFormId formID)
+//T* UiMgr::loadForm(UiFormId formID)
 //{
 //	if (nullptr == this->mId2FormDic[formID])
 //	{
@@ -25,9 +25,9 @@
 
 // 这个事加载界面需要的代码
 template <class T>
-T* UIMgr::loadForm(UIFormId formId)
+T* UiMgr::loadForm(UiFormId formId)
 {
-	UIAttrItem* attrItem = mUiAttrSystem->mId2AttrDic[formId];
+	UiAttrItem* attrItem = mUiAttrSystem->mId2AttrDic[formId];
 	UForm* form = getForm<UForm>(formId);
 
 	if (nullptr != form)     // 本地已经创建了这个窗口，
@@ -55,7 +55,7 @@ T* UIMgr::loadForm(UIFormId formId)
 		//UClass* WidgetClass = EngineApi::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
 		//UClass* WidgetClass = GMyStreamableManager->SynchronousLoadType<UClass>(attrItem->mWidgetPath);
 
-		//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", EventDispatchDelegate(this, &UIMgr::onWidgetLoadEventHandle));
+		//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", EventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
 
 		//ClassAssetInsRes* asset = GClassAssetInsMgr->getAndSyncLoadClass(attrItem->mWidgetPath);
 		//UClass* WidgetClass = asset->getClass();
@@ -98,7 +98,7 @@ T* UIMgr::loadForm(UIFormId formId)
 }
 
 template <class T>
-T* UIMgr::getForm(UIFormId formId)
+T* UiMgr::getForm(UiFormId formId)
 {
 	if (UtilMap::ContainsKey(mId2FormDic, formId))
 	{
@@ -111,7 +111,7 @@ T* UIMgr::getForm(UIFormId formId)
 }
 
 template <class T>
-T*  UIMgr::loadAndShow(UIFormId formId)
+T*  UiMgr::loadAndShow(UiFormId formId)
 {
 	T* retForm = nullptr;
 

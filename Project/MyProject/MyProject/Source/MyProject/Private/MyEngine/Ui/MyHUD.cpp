@@ -114,7 +114,7 @@ void AMyHUD::BeginPlay_LoadStyleWidget()
 {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Create a SMyUIWidget on heap referenced by MyUIWidget pointer member
-	SAssignNew(mMyUILoadStyleWidget, SMyUILoadStyleWidget).OwnerHUD(this);
+	SAssignNew(mMyUILoadStyleWidget, SMyUiLoadStyleWidget).OwnerHUD(this);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////Pass our viewport a weak reference to our widget, will not increment refcount

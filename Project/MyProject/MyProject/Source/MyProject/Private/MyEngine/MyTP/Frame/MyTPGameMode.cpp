@@ -4,10 +4,10 @@
 #include "GameFramework/HUD.h"
 #include "MyHUD.h"
 #include "Common.h"
-#include "UIFormId.h"
-#include "UIPack.h"
+#include "UiFormId.h"
+#include "UiPack.h"
 #include "MyTPPlayerController.h"
-#include "UITestCanvas.h"
+#include "UiTestCanvas.h"
 #include "GameFramework/PlayerStart.h"
 #include "MyTPPlayerStart.h"
 #include "MyTPCharacter.h"
@@ -83,8 +83,8 @@ void AMyTPGameMode::StartPlay()
 void AMyTPGameMode::TestUI()
 {
 	// Test 加载 UIPack
-	//GUiMgr->loadForm<UUIPack>(eUIPack);
-	GUiMgr->loadForm<UUITestCanvas>(eUITestCanvas);
+	//GUiMgr->loadForm<UUiPack>(eUIPack);
+	GUiMgr->loadForm<UUiTestCanvas>(eUITestCanvas);
 }
 
 // https://wiki.unrealengine.com/Survival_Sample_Game:_Section_4

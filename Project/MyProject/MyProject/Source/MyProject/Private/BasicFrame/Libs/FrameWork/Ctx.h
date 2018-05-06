@@ -12,7 +12,7 @@
 #include "IPlatformFileSandboxWrapper.h"
 #include "CoreInc.h"
 
-class UIMgr;
+class UiMgr;
 class UGameInstance;
 class EngineData;
 class INetMgr;
@@ -51,7 +51,7 @@ class Ctx : public Singleton<Ctx>
 {
 protected:
 	bool mIsInit;
-	MySharedPtr<UIMgr> mUiMgr;
+	MySharedPtr<UiMgr> mUiMgr;
 	MySharedPtr<EngineData> mEngineData;
 	MySharedPtr<INetMgr> mNetMgr;
 	MySharedPtr<TableSys> mTableSys;
@@ -100,8 +100,8 @@ public:
 	void mainLoop();
 	void addEventHandle();
 
-	void setUiMgr(UIMgr* uiMgr);
-	MySharedPtr<UIMgr> getUIMgr();
+	void setUiMgr(UiMgr* uiMgr);
+	MySharedPtr<UiMgr> getUIMgr();
 
 	MySharedPtr<EngineData> getEngineData();
 	void setNetMgr(INetMgr* pINetMgr);

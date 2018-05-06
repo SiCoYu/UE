@@ -1,14 +1,14 @@
 #pragma once
 
 #include "MyProject.h"
-#include "UIFormId.h"
-#include "GuiWin.h"
+#include "UiFormId.h"
+#include "WinRender.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
 #include "Window.generated.h"
 
 using namespace NSFormId;
 
-class UILayer;
+class UiLayer;
 
 /**
  * @brief https://wiki.unrealengine.com/UMG,_How_to_extend_a_UUserWidget::_for_UMG_in_C%2B%2B.
@@ -24,9 +24,9 @@ class UWindow : public UObject
 	GENERATED_BODY()
 
 protected:
-	UIFormId mId;
+	UiFormId mId;
 public:
-	GuiWin* mGuiWin;      // 控件数据
+	WinRender* mGuiWin;      // 控件数据
 protected:
 	bool mIsDraggable;
 
@@ -41,7 +41,7 @@ protected:
 
 	int mWidth;
 	int mHeight;
-	UILayer* mUiLayer;
+	UiLayer* mUiLayer;
 	bool mIsResReady;            // 资源是否已经加载并初始化
 
 public:
@@ -51,12 +51,12 @@ public:
 	virtual void setPosX(int posX);
 	virtual int getPosY();
 	virtual void setPosY(int posY);
-	UILayer* getUiLayer();
-	void setUiLayer(UILayer* layer);
+	UiLayer* getUiLayer();
+	void setUiLayer(UiLayer* layer);
 	bool IsVisible();
 	bool getIsResReady();
 	void setIsResReady(bool value);
-	GuiWin* getGuiWin();
+	WinRender* getGuiWin();
 
 	virtual bool getIsReady();
 };

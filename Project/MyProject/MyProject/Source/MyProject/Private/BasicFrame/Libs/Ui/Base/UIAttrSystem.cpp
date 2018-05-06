@@ -1,15 +1,15 @@
 #include "MyProject.h"
-#include "UIAttrItem.h"
+#include "UiAttrItem.h"
 #include "UtilContainers.h"
-#include "UIFormId.h"
-#include "UIAttrSystem.h"
+#include "UiFormId.h"
+#include "UiAttrSystem.h"
 
-UIAttrSystem::UIAttrSystem()
+UiAttrSystem::UiAttrSystem()
 {
 
 }
 
-void UIAttrSystem::init()
+void UiAttrSystem::init()
 {
 	this->addItem(
 		NSFormId::eUITestUMG, 
@@ -23,12 +23,12 @@ void UIAttrSystem::init()
 		NSFormType::ePlayerController);
 }
 
-void UIAttrSystem::dispose()
+void UiAttrSystem::dispose()
 {
 
 }
 
-std::string UIAttrSystem::getPath(UIFormId id)
+std::string UiAttrSystem::getPath(UiFormId id)
 {
 	if (UtilMap::ContainsKey(mId2AttrDic, id))
 	{
@@ -39,7 +39,7 @@ std::string UIAttrSystem::getPath(UIFormId id)
 }
 
 // 通过路径获取
-UIFormId UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
+UiFormId UiAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
 {
 	for(auto keyValue : mId2AttrDic)
 	{
@@ -59,14 +59,14 @@ UIFormId UIAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType
 		}
 	}
 
-	return (UIFormId)0;       // 默认返回最大值
+	return (UiFormId)0;       // 默认返回最大值
 }
 
-void UIAttrSystem::addItem(UIFormId formId, std::string widgetPath, FormType formType, UMGOuterType outerType)
+void UiAttrSystem::addItem(UiFormId formId, std::string widgetPath, FormType formType, UMGOuterType outerType)
 {
-	UIAttrItem* item = nullptr;
+	UiAttrItem* item = nullptr;
 
-	item = new UIAttrItem();
+	item = new UiAttrItem();
 	mId2AttrDic[formId] = item;
 	item->mWidgetPath = widgetPath;
 	item->mFormType = formType;
