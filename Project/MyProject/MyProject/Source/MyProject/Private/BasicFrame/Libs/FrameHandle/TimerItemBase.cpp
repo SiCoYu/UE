@@ -3,69 +3,70 @@
 
 TimerItemBase::TimerItemBase()
 {
-	mInternal = 1;
-	mTotalTime = 1;
-	mCurTime = 0;
-	mIsInfineLoop = false;
-	mCurLeftTimer = 0;
-	mTimerDisp = nullptr;
-	mIsDisposed = false;
+	this->mInternal = 1;
+	this->mTotalTime = 1;
+	this->mCurTime = 0;
+	this->mIsInfineLoop = false;
+	this->mCurLeftTimer = 0;
+	this->mTimerDispatch = nullptr;
+	this->mIsDisposed = false;
 }
 
 void TimerItemBase::OnTimer(float delta)
 {
-	if (mIsDisposed)
+	if (this->mIsDisposed)
 	{
 		return;
 	}
 
-	mCurTime += delta;
-	mCurLeftTimer += delta;
+	this->mCurTime += delta;
+	this->mCurLeftTimer += delta;
 
-	if (mIsInfineLoop)
+	if (this->mIsInfineLoop)
 	{
-		checkAndDisp();
+		this->checkAndDisp();
 	}
 	else
 	{
-		if (mCurTime >= mTotalTime)
+		if (this->mCurTime >= this->mTotalTime)
 		{
-			disposeAndDisp();
+			this->disposeAndDisp();
 		}
 		else
 		{
-			checkAndDisp();
+			this->checkAndDisp();
 		}
 	}
 }
 
 void TimerItemBase::disposeAndDisp()
 {
-	mIsDisposed = true;
-	if (!mTimerDisp.empty())
+	this->mIsDisposed = true;
+
+	if (!this->mTimerDispatch.empty())
 	{
-		mTimerDisp(this);
+		this->mTimerDispatch(this);
 	}
 }
 
 void TimerItemBase::checkAndDisp()
 {
-	if (mCurLeftTimer >= mInternal)
+	if (this->mCurLeftTimer >= this->mInternal)
 	{
-		mCurLeftTimer = mCurLeftTimer - mInternal;
+		this->mCurLeftTimer = this->mCurLeftTimer - mInternal;
 
-		if (!mTimerDisp.empty())
+		if (!this->mTimerDispatch.empty())
 		{
-			mTimerDisp(this);
+			this->mTimerDispatch(this);
 		}
 	}
 }
 
 void TimerItemBase::reset()
 {
-	mCurTime = 0;
-	mCurLeftTimer = 0;
-	mIsDisposed = false;
+	this->mCurTime = 0;
+	this->mCurLeftTimer = 0;
+	this->mIsDisposed = false;
 }
 
 void TimerItemBase::setClientDispose()

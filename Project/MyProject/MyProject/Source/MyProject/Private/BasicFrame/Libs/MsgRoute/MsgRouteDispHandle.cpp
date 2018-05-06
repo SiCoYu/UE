@@ -21,16 +21,17 @@ void MsgRouteDispHandle::handleMsg(MsgRouteBase* msg)
 {
 	std::string textStr = "";
 	int key = 0;
-	key = (int)msg->m_msgType;
-	if (UtilMap::ContainsKey(mId2DispDic, key))
+	key = (int)msg->mMsgType;
+
+	if (UtilMap::ContainsKey(this->mId2DispDic, key))
 	{
 		//textStr = Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem2);
-		GLogSys->log(UtilStr::Format(textStr.c_str(), (int)msg->m_msgType));
-		mId2DispDic[key]->handleMsg(msg);
+		GLogSys->log(UtilStr::Format(textStr.c_str(), (int)msg->mMsgType));
+		this->mId2DispDic[key]->handleMsg(msg);
 	}
 	else
 	{
 		//textStr = Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem3);
-		GLogSys->log(UtilStr::Format(textStr.c_str(), (int)msg->m_msgID));
+		GLogSys->log(UtilStr::Format(textStr.c_str(), (int)msg->mMsgId));
 	}
 }

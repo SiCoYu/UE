@@ -15,7 +15,7 @@ public:
     int mCurFrame;              // 当前已经调用的定时器的时间
     int mCurLeftFrame;          // 剩余帧数
     bool mIsInfineLoop;      // 是否是无限循环
-	FrameTimerDelegate mTimerDisp;       // 定时器分发
+	FrameTimerDelegate mTimerDispatch;       // 定时器分发
     bool mIsDisposed;             // 是否已经被释放
 
     //int m_preFrame = 0;

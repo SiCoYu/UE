@@ -8,8 +8,8 @@ MsgRouteBase::MsgRouteBase()
 
 MsgRouteBase::MsgRouteBase(MsgRouteID id)
 {
-	m_msgType = eMRT_BASIC;
-	m_msgID = id;
+	this->mMsgType = eMRT_BASIC;
+	this->mMsgId = id;
 }
 
 void MsgRouteBase::resetDefault()

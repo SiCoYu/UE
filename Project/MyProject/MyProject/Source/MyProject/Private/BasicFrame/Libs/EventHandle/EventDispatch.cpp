@@ -24,18 +24,6 @@ void EventDispatch::setUniqueId(int value)
 	this->mHandleList.setUniqueId(mUniqueId);
 }
 
-//public LuaCSBridgeDispatch luaCSBridgeDispatch
-//{
-//    get
-//    {
-//        return m_luaCSBridgeDispatch;
-//    }
-//    set
-//    {
-//        m_luaCSBridgeDispatch = value;
-//    }
-//}
-
 // 相同的函数只能增加一次
 void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 {
@@ -67,6 +55,7 @@ void EventDispatch::addObject(IDelayHandleItem* delayObject, float priority)
 void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 {
 	int idx = 0;
+
 	for (idx = 0; idx < mHandleList.Count(); ++idx)
 	{
 		if (this->mHandleList[idx]->mHandle, handle)
@@ -118,7 +107,7 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 	//	m_luaCSBridgeDispatch.handleGlobalEvent(mEventId, dispatchObject);
 	//}
 
-	decDepth();
+	this->decDepth();
 	//}
 	//catch (Exception ex)
 	//{
@@ -145,6 +134,7 @@ void EventDispatch::clearEventHandle()
 bool EventDispatch::isExistEventHandle(EventDispatchDelegate handle)
 {
 	bool bFinded = false;
+
 	for(auto item : this->mHandleList.getList())
 	{
 		if (item->mHandle == handle)

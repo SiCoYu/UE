@@ -33,6 +33,7 @@ long SystemTimeData::getCurTime()
 {
 	return this->mCurTime;
 }
+
 void SystemTimeData::setCurTime(long value)
 {
 	this->mCurTime = value;

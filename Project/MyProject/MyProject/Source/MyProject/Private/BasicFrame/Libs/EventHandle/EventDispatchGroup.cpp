@@ -38,6 +38,7 @@ void EventDispatchGroup::removeEventHandle(int groupID, EventDispatchDelegate ha
 void EventDispatchGroup::dispatchEvent(int groupID, IDispatchObject* dispatchObject)
 {
 	this->mIsInLoop = true;
+
 	if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupID))
 	{
 		this->mGroupID2DispatchDic[groupID]->dispatchEvent(dispatchObject);
@@ -46,6 +47,7 @@ void EventDispatchGroup::dispatchEvent(int groupID, IDispatchObject* dispatchObj
 	{
 		GLogSys->log("Event Dispatch Group not exist");
 	}
+
 	this->mIsInLoop = false;
 }
 

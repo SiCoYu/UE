@@ -19,8 +19,8 @@ enum MsgRouteID
 class MsgRouteBase : public IRecycle
 {
 public:
-	MsgRouteType m_msgType;
-    MsgRouteID m_msgID;          // 只需要一个 ID 就行了
+	MsgRouteType mMsgType;
+    MsgRouteID mMsgId;          // 只需要一个 ID 就行了
 
 public:
 	MsgRouteBase();

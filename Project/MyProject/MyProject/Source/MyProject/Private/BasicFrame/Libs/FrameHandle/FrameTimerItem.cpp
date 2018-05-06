@@ -3,62 +3,57 @@
 
 FrameTimerItem::FrameTimerItem()
 {
-	mInternal = 1;
-	mTotalFrameCount = 1;
-	mCurFrame = 0;
-	mCurLeftFrame = 0;
-	mIsInfineLoop = false;
-	mTimerDisp = nullptr;
-	mIsDisposed = false;
+	this->mInternal = 1;
+	this->mTotalFrameCount = 1;
+	this->mCurFrame = 0;
+	this->mCurLeftFrame = 0;
+	this->mIsInfineLoop = false;
+	this->mTimerDispatch = nullptr;
+	this->mIsDisposed = false;
 }
 
 void FrameTimerItem::OnFrameTimer()
 {
-	if (mIsDisposed)
+	if (this->mIsDisposed)
 	{
 		return;
 	}
 
-	++mCurFrame;
-	++mCurLeftFrame;
+	++this->mCurFrame;
+	++this->mCurLeftFrame;
 
-	//if (m_preFrame == mCurFrame)
-	//{
-	//    Ctx.m_instance.m_logSys.log("aaaaaaaafadfsasdf");
-	//}
-
-	//mCurFrame = m_preFrame;
-
-	if (mIsInfineLoop)
+	if (this->mIsInfineLoop)
 	{
-		if (mCurLeftFrame == mInternal)
+		if (this->mCurLeftFrame == mInternal)
 		{
-			mCurLeftFrame = 0;
+			this->mCurLeftFrame = 0;
 
-			if (!mTimerDisp.empty())
+			if (!mTimerDispatch.empty())
 			{
-				mTimerDisp(this);
+				this->mTimerDispatch(this);
 			}
 		}
 	}
 	else
 	{
-		if (mCurFrame == mTotalFrameCount)
+		if (this->mCurFrame == this->mTotalFrameCount)
 		{
-			mIsDisposed = true;
-			if (!mTimerDisp.empty())
+			this->mIsDisposed = true;
+
+			if (!this->mTimerDispatch.empty())
 			{
-				mTimerDisp(this);
+				this->mTimerDispatch(this);
 			}
 		}
 		else
 		{
-			if (mCurLeftFrame == mInternal)
+			if (this->mCurLeftFrame == this->mInternal)
 			{
-				mCurLeftFrame = 0;
-				if (!mTimerDisp.empty())
+				this->mCurLeftFrame = 0;
+
+				if (!this->mTimerDispatch.empty())
 				{
-					mTimerDisp(this);
+					this->mTimerDispatch(this);
 				}
 			}
 		}
@@ -67,9 +62,9 @@ void FrameTimerItem::OnFrameTimer()
 
 void FrameTimerItem::reset()
 {
-	mCurFrame = 0;
-	mCurLeftFrame = 0;
-	mIsDisposed = false;
+	this->mCurFrame = 0;
+	this->mCurLeftFrame = 0;
+	this->mIsDisposed = false;
 }
 
 void FrameTimerItem::setClientDispose()

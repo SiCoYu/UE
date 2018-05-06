@@ -36,7 +36,7 @@ void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 		}
 		else
 		{
-			mTimerList.push_back((FrameTimerItem*)delayObject);
+			this->mTimerList.push_back((FrameTimerItem*)delayObject);
 		}
 	}
 }
@@ -54,11 +54,11 @@ void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
 		}
 		else
 		{
-			for(FrameTimerItem* item : mTimerList)
+			for(FrameTimerItem* item : this->mTimerList)
 			{
 				if (item == delayObject)
 				{
-					UtilVector::Remove(mTimerList, item);
+					UtilVector::Remove(this->mTimerList, item);
 					break;
 				}
 			}
@@ -68,9 +68,9 @@ void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
 
 void FrameTimerMgr::Advance(float delta)
 {
-	incDepth();
+	this->incDepth();
 
-	for(FrameTimerItem* timerItem : mTimerList)
+	for(FrameTimerItem* timerItem : this->mTimerList)
 	{
 		if (!timerItem->isClientDispose())
 		{
@@ -82,5 +82,5 @@ void FrameTimerMgr::Advance(float delta)
 		}
 	}
 
-	decDepth();
+	this->decDepth();
 }

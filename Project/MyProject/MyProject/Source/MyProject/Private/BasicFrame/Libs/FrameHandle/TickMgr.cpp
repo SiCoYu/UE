@@ -26,29 +26,30 @@ void TickMgr::dispose()
 
 void TickMgr::addTick(ITickedObject* tickObj, float priority)
 {
-	addObject((IDelayHandleItem*)tickObj, priority);
+	this->addObject((IDelayHandleItem*)tickObj, priority);
 }
 
 void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
-	if (isInDepth())
+	if (this->isInDepth())
 	{
 		DelayHandleMgrBase::addObject(delayObject, priority);
 	}
 	else
 	{
 		int position = -1;
+
 		for (int i = 0; i < mTickList.Count(); i++)
 		{
-			if (mTickList[i] == nullptr)
+			if (this->mTickList[i] == nullptr)
 				continue;
 
-			if (mTickList[i]->mTickObject == (ITickedObject*)delayObject)
+			if (this->mTickList[i]->mTickObject == (ITickedObject*)delayObject)
 			{
 				return;
 			}
 
-			if (mTickList[i]->mPriority < priority)
+			if (this->mTickList[i]->mPriority < priority)
 			{
 				position = i;
 				break;
@@ -61,28 +62,28 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 
 		if (position < 0 || position >= mTickList.Count())
 		{
-			mTickList.Add(processObject);
+			this->mTickList.Add(processObject);
 		}
 		else
 		{
-			mTickList.Insert(position, processObject);
+			this->mTickList.Insert(position, processObject);
 		}
 	}
 }
 
 void TickMgr::delObject(IDelayHandleItem* delayObject)
 {
-	if (isInDepth())
+	if (this->isInDepth())
 	{
 		DelayHandleMgrBase::delObject(delayObject);
 	}
 	else
 	{
-		for(TickProcessObject* item : mTickList.getList())
+		for(TickProcessObject* item : this->mTickList.getList())
 		{
 			if (item->mTickObject == (ITickedObject*)delayObject)
 			{
-				mTickList.Remove(item);
+				this->mTickList.Remove(item);
 				break;
 			}
 		}
@@ -91,9 +92,9 @@ void TickMgr::delObject(IDelayHandleItem* delayObject)
 
 void TickMgr::Advance(float delta)
 {
-	incDepth();
+	this->incDepth();
 
-	for(TickProcessObject* tk : mTickList.getList())
+	for(TickProcessObject* tk : this->mTickList.getList())
 	{
 		if (!((IDelayHandleItem*)(tk->mTickObject))->isClientDispose())
 		{
@@ -101,5 +102,5 @@ void TickMgr::Advance(float delta)
 		}
 	}
 
-	decDepth();
+	this->decDepth();
 }

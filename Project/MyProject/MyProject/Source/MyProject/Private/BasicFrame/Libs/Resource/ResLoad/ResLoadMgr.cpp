@@ -42,7 +42,7 @@ void ResLoadMgr::init()
 {
 	// 游戏逻辑处理
 	//mResMsgRouteCB = new ResMsgRouteCB();
-	//Ctx.m_instance.m_msgRouteList.addOneDisp(mResMsgRouteCB);
+	//Ctx.m_instance.m_msgRouteList.addOneDispatch(mResMsgRouteCB);
 }
 
 void ResLoadMgr::dispose()

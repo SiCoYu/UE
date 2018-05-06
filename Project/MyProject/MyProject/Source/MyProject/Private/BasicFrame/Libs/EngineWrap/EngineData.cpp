@@ -23,12 +23,12 @@ void EngineData::dispose()
 
 void EngineData::setMainActor(AActor* actor)
 {
-	mMainActor = actor;
+	this->mMainActor = actor;
 }
 
 AActor* EngineData::getMainActor()
 {
-	return mMainActor;
+	return this->mMainActor;
 }
 
 APlayerController* EngineData::getMainPlayerController()
@@ -43,10 +43,10 @@ void EngineData::setMainPlayerController(APlayerController* playerController)
 
 UMyGameEngineBase* EngineData::getMyEngine()
 {
-	return mMyEngine;
+	return this->mMyEngine;
 }
 
 void EngineData::setMyEngine(UMyGameEngineBase* myEngine)
 {
-	mMyEngine = myEngine;
+	this->mMyEngine = myEngine;
 }

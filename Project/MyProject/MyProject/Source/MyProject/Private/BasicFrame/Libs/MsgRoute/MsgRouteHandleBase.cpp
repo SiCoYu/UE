@@ -17,13 +17,14 @@ MsgRouteHandleBase::~MsgRouteHandleBase()
 
 void MsgRouteHandleBase::handleMsg(MsgRouteBase* msg)
 {
-	int key = ((int)msg->m_msgID);
+	int key = ((int)msg->mMsgId);
+
 	if (UtilMap::ContainsKey(mId2HandleDic, key))
 	{
-		mId2HandleDic[key](msg);
+		this->mId2HandleDic[key](msg);
 	}
 	else
 	{
-		//GLogSys->log(UtilStr::Format(Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem1), (int)msg.m_msgID));
+		//GLogSys->log(UtilStr::Format(Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem1), (int)msg.mMsgId));
 	}
 }

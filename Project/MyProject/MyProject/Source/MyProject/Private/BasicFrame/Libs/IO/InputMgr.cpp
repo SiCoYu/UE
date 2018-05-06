@@ -54,9 +54,9 @@ InputMgr::InputMgr()
 	cancelKey0 = EKeys::Escape;
 	cancelKey1 = EKeys::Gamepad_RightThumbstick;
 
-	mTooltip = nullptr;
-	mTooltipTime = 0;
-	mNextRaycast = 0;
+	this->mTooltip = nullptr;
+	this->mTooltipTime = 0;
+	this->mNextRaycast = 0;
 }
 
 bool InputMgr::getStickyPress()

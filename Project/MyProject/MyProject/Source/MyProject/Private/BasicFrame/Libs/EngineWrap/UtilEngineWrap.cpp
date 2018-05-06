@@ -41,10 +41,12 @@ UWorld* UtilEngineWrap::GetWorld()
 void UtilEngineWrap::showCursor()
 {
 	UWorld* World = GetWorld();
+
 	if (World)
 	{
 		World->GetFirstPlayerController()->bShowMouseCursor = true;
 	}
+
 	FSlateApplication::Get().GetPlatformApplication()->Cursor->Show(true);
 }
 
@@ -84,6 +86,7 @@ ACharacter* UtilEngineWrap::getFirstCharacter()
 	ACharacter* Character = nullptr;
 	APlayerController* PC = nullptr;
 	UWorld* World = GetWorld();
+
 	if (World)
 	{
 		PC = World->GetFirstPlayerController();
@@ -351,6 +354,7 @@ bool UtilEngineWrap::IsTextValid(FText MyText)
 	{
 		return true;
 	}
+
 	return false;
 }
 

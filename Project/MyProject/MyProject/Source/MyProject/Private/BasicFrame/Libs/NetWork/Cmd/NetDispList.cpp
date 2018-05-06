@@ -38,7 +38,7 @@ void NetDispList::setBStopNetHandle(bool value)
 	mIsStopNetHandle = value;
 }
 
-void NetDispList::addOneDisp(NetDispHandle* disp)
+void NetDispList::addOneDispatch(NetDispHandle* disp)
 {
 	if (UtilVector::IndexOf(mNetDispList, disp) == -1)
     {
@@ -46,7 +46,7 @@ void NetDispList::addOneDisp(NetDispHandle* disp)
     }
 }
 
-void NetDispList::removeOneDisp(NetDispHandle* disp)
+void NetDispList::removeOneDispatch(NetDispHandle* disp)
 {
 	if (UtilVector::IndexOf(mNetDispList, disp) != -1)
     {

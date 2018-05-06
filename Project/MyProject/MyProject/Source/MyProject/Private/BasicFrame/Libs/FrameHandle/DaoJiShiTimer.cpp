@@ -3,34 +3,34 @@
 
 void DaoJiShiTimer::OnTimer(float delta)
 {
-	if (mIsDisposed)
+	if (this->mIsDisposed)
 	{
 		return;
 	}
 
-	mCurTime -= delta;
-	mCurLeftTimer += delta;
+	this->mCurTime -= delta;
+	this->mCurLeftTimer += delta;
 
-	if (mIsInfineLoop)
+	if (this->mIsInfineLoop)
 	{
-		checkAndDisp();
+		this->checkAndDisp();
 	}
 	else
 	{
-		if (mCurTime <= 0)
+		if (this->mCurTime <= 0)
 		{
-			disposeAndDisp();
+			this->disposeAndDisp();
 		}
 		else
 		{
-			checkAndDisp();
+			this->checkAndDisp();
 		}
 	}
 }
 
 void DaoJiShiTimer::reset()
 {
-	mCurTime = mTotalTime;
-	mCurLeftTimer = 0;
-	mIsDisposed = false;
+	this->mCurTime = this->mTotalTime;
+	this->mCurLeftTimer = 0;
+	this->mIsDisposed = false;
 }

@@ -15,7 +15,7 @@ public:
     float mCurTime;        // 当前已经调用的定时器的时间
     bool mIsInfineLoop;  // 是否是无限循环
     float mCurLeftTimer;    // 当前定时器剩余的次数
-	TimerDelegate mTimerDisp;       // 定时器分发
+	TimerDelegate mTimerDispatch;       // 定时器分发
     bool mIsDisposed;             // 是否已经被释放
 
 public:

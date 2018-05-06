@@ -8,57 +8,57 @@
 
 MDataStream::MDataStream(std::string filePath, EventDispatchDelegate openedDisp, MFileMode mode, MFileAccess access, bool isSyncMode)
 {
-    mFilePath = filePath;
-	mMode = mode;
-	mAccess = access;
-    mFileOpState = eNoOp;
-    mIsSyncMode = isSyncMode;
+	this->mFilePath = filePath;
+	this->mMode = mode;
+	this->mAccess = access;
+	this->mFileOpState = eNoOp;
+	this->mIsSyncMode = isSyncMode;
 
-    checkAndOpen(openedDisp);
+	this->checkAndOpen(openedDisp);
 }
 
 void MDataStream::seek(long offset, MSeekOrigin origin)
 {
-    if(mFileOpState == eOpenSuccess)
+    if(this->mFileOpState == eOpenSuccess)
     {
-         mFileStream->Seek(offset);
+		this->mFileStream->Seek(offset);
     }
 }
 
 void MDataStream::addOpenedHandle(EventDispatchDelegate openedDisp)
 {
-    if (mOpenedEvtDisp == nullptr)
+    if (this->mOpenedEvtDisp == nullptr)
     {
-        mOpenedEvtDisp = new AddOnceAndCallOnceEventDispatch();
+		this->mOpenedEvtDisp = new AddOnceAndCallOnceEventDispatch();
     }
 
-    mOpenedEvtDisp->addEventHandle(openedDisp);
+	this->mOpenedEvtDisp->addEventHandle(openedDisp);
 }
 
 void MDataStream::dispose()
 {
-    close();
+	this->close();
 }
 
 void MDataStream::syncOpenFileStream()
 {
-	if (mFileOpState == eNoOp)
+	if (this->mFileOpState == eNoOp)
 	{
-		mFileOpState = eOpening;
+		this->mFileOpState = eOpening;
 		//try
 		//{
-		FString path = UtilStr::ConvStdStr2FString(mFilePath);
+		FString path = UtilStr::ConvStdStr2FString(this->mFilePath);
 
-		if (eRead == mAccess)
+		if (eRead == this->mAccess)
 		{
-			mFileStream = IFileManager::Get().CreateFileReader(*path);
+			this->mFileStream = IFileManager::Get().CreateFileReader(*path);
 		}
 		else
 		{
-			mFileStream = IFileManager::Get().CreateFileWriter(*path);
+			this->mFileStream = IFileManager::Get().CreateFileWriter(*path);
 		}
 
-		mFileOpState = eOpenSuccess;
+		this->mFileOpState = eOpenSuccess;
 		//}
 		//catch (Exception exp)
 		//{
@@ -72,9 +72,9 @@ void MDataStream::syncOpenFileStream()
 // 异步打开结束
 void MDataStream::onAsyncOpened()
 {
-	if (mOpenedEvtDisp != nullptr)
+	if (this->mOpenedEvtDisp != nullptr)
 	{
-		mOpenedEvtDisp->dispatchEvent(this);
+		this->mOpenedEvtDisp->dispatchEvent(this);
 	}
 }
 
@@ -85,9 +85,9 @@ void MDataStream::checkAndOpen(EventDispatchDelegate openedDisp)
 		this->addOpenedHandle(openedDisp);
 	}
 
-	if (mFileOpState == eNoOp)
+	if (this->mFileOpState == eNoOp)
 	{
-		syncOpenFileStream();
+		this->syncOpenFileStream();
 	}
 }
 
@@ -100,11 +100,11 @@ bool MDataStream::isValid()
 int MDataStream::getLength()
 {
 	int len = 0;
-	if (mFileOpState == eOpenSuccess)
+	if (this->mFileOpState == eOpenSuccess)
 	{
-		if (mFileStream != nullptr)
+		if (this->mFileStream != nullptr)
 		{
-			len = (int)mFileStream->TotalSize();
+			len = (int)this->mFileStream->TotalSize();
 		}
 	}
 
@@ -113,24 +113,25 @@ int MDataStream::getLength()
 
 void MDataStream::close()
 {
-	if (mFileOpState == eOpenSuccess)
+	if (this->mFileOpState == eOpenSuccess)
 	{
 		bool Success = false;
-		if (mFileStream != nullptr)
+
+		if (this->mFileStream != nullptr)
 		{
-			Success = mFileStream->Close();
-			delete mFileStream;
-			mFileStream = nullptr;
+			Success = this->mFileStream->Close();
+			delete this->mFileStream;
+			this->mFileStream = nullptr;
 		}
 
 		if (Success)
 		{
-			mFileOpState = eOpenClose;
-			mFileOpState = eNoOp;
+			this->mFileOpState = eOpenClose;
+			this->mFileOpState = eNoOp;
 		}
 		else
 		{
-			mFileOpState = eOpenFail;
+			this->mFileOpState = eOpenFail;
 		}
 	}
 }
@@ -139,6 +140,7 @@ std::string MDataStream::readText(int offset, int count, GkEncode encode)
 {
 	std::string retStr = "";
 	FString fStr;
+
 	if (FFileHelper::LoadFileToString(fStr, UtilStr::convStdStr2TCHAR(mFilePath)))
 	{
 		retStr = UtilStr::ConvFString2StdStr(fStr);
@@ -183,5 +185,5 @@ void MDataStream::writeByte(unsigned char* bytes, int offset, int count)
 void MDataStream::writeLine(std::string text, GkEncode gkEncode)
 {
 	//text = text + UtilSysLibWrap.CR_LF;
-	writeText(text, gkEncode);
+	this->writeText(text, gkEncode);
 }

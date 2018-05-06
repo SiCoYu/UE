@@ -7,36 +7,36 @@ std::string Config::UIModelLayer = "UIModel";
 
 Config::Config()
 {
-	mIp = "192.168.122.253";
-	mPort = 10002;
-	mZone = 30;
+	this->mIp = "192.168.122.253";
+	this->mPort = 10002;
+	this->mZone = 30;
 
-	mWebIP = "http://127.0.0.1/UnityServer/";
-	mWebPort = 80;
-	mNetLogPhp = "/netlog/NetLog.php";
+	this->mWebIP = "http://127.0.0.1/UnityServer/";
+	this->mWebPort = 80;
+	this->mNetLogPhp = "/netlog/NetLog.php";
 
-	mResLoadType = eLoadDisc;
-	mPathList[(int)ePathScene] = "Scenes/";
-	mPathList[(int)ePathSceneXml] = "Scenes/Xml/";
-	mPathList[(int)ePathModule] = "Module/";
-	mPathList[(int)ePathComUI] = "UI/";
-	mPathList[(int)ePathComUIScene] = "UIScene/";
-	mPathList[(int)ePathBeingPath] = "Being/";
-	mPathList[(int)ePathAIPath] = "AI/";
-	mPathList[(int)ePathTablePath] = "Table/";
-	mPathList[(int)ePathLangXml] = "Languages/";
-	mPathList[(int)ePathXmlCfg] = "XmlConfig/";
-	mPathList[(int)ePathModel] = "Model/";
-	mPathList[(int)ePathMaterial] = "Model/Materials/";
-	mPathList[(int)ePathBuildImage] = "Image/Build/";
-	mPathList[(int)ePathCardImage] = "Image/Card/";
-	mPathList[(int)ePathWord] = "Word/";
-	mPathList[(int)ePathAudio] = "Sound/";
-	mPathList[(int)ePathAtlas] = "Atlas/";
-	mPathList[(int)ePathSpriteAni] = "Effect/SpriteEffect/";
-	mPathList[(int)ePathSceneAnimatorController] = "Animation/Scene/";
-	mPathList[(int)ePathLuaScript] = "LuaScript/";
-	mPathList[(int)ePathSkillAction] = "SkillAction/";
+	this->mResLoadType = eLoadDisc;
+	this->mPathList[(int)ePathScene] = "Scenes/";
+	this->mPathList[(int)ePathSceneXml] = "Scenes/Xml/";
+	this->mPathList[(int)ePathModule] = "Module/";
+	this->mPathList[(int)ePathComUI] = "UI/";
+	this->mPathList[(int)ePathComUIScene] = "UIScene/";
+	this->mPathList[(int)ePathBeingPath] = "Being/";
+	this->mPathList[(int)ePathAIPath] = "AI/";
+	this->mPathList[(int)ePathTablePath] = "Table/";
+	this->mPathList[(int)ePathLangXml] = "Languages/";
+	this->mPathList[(int)ePathXmlCfg] = "XmlConfig/";
+	this->mPathList[(int)ePathModel] = "Model/";
+	this->mPathList[(int)ePathMaterial] = "Model/Materials/";
+	this->mPathList[(int)ePathBuildImage] = "Image/Build/";
+	this->mPathList[(int)ePathCardImage] = "Image/Card/";
+	this->mPathList[(int)ePathWord] = "Word/";
+	this->mPathList[(int)ePathAudio] = "Sound/";
+	this->mPathList[(int)ePathAtlas] = "Atlas/";
+	this->mPathList[(int)ePathSpriteAni] = "Effect/SpriteEffect/";
+	this->mPathList[(int)ePathSceneAnimatorController] = "Animation/Scene/";
+	this->mPathList[(int)ePathLuaScript] = "LuaScript/";
+	this->mPathList[(int)ePathSkillAction] = "SkillAction/";
 
 	std::string value;
 	value = std::string("prefab");

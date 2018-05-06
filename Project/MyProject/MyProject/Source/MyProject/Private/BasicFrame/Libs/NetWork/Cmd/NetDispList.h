@@ -26,8 +26,8 @@ public:
 	bool getBStopNetHandle();
 	void setBStopNetHandle(bool value);
 
-	void addOneDisp(NetDispHandle* disp);
-	void removeOneDisp(NetDispHandle* disp);
+	void addOneDispatch(NetDispHandle* disp);
+	void removeOneDispatch(NetDispHandle* disp);
 	void handleMsg(ByteBuffer* msg);
 	void addOneRevMsg();
 
