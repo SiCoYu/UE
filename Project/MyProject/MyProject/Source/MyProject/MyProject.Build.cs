@@ -215,6 +215,7 @@ public class MyProject : ModuleRules
                 //"DesktopPlatform", // IDesktopPlatform.h，注意移动平台需要注释掉
 
                 //"UnrealEd", // UUnrealEdEngine \ UEditorEngine
+                "ApplicationCore",  // "HAL/PlatformApplicationMisc.h" 中的 FPlatformApplicationMisc::ClipboardCopy
             }
         );
 
@@ -231,6 +232,7 @@ public class MyProject : ModuleRules
                 "UMG",
                 "HTTP",
                 "PakFile",
+                "ApplicationCore",  // "HAL/PlatformApplicationMisc.h" 中的 FPlatformApplicationMisc::ClipboardCopy
             }
         );
 
