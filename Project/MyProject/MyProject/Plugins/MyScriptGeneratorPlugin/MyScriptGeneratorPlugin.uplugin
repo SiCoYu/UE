@@ -4,7 +4,7 @@
 	"VersionName" : "1.0",
 	"FriendlyName" : "My Script Generator Plugin",
 	"Description" : "An example of a script plugin. This can be used as a starting point when creating your own plugin.",
-	"Category" : "My Script Plugins",
+	"Category" : "My Script Generator Plugin",
 	"CreatedBy" : "Epic Games, Inc.",
 	"CreatedByURL" : "http://epicgames.com",
 	"DocsURL" : "",
