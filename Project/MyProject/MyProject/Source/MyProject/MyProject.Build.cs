@@ -66,6 +66,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/DataStruct",
                 "MyProject/Private/BasicFrame/Libs/EngineWrap",
                 "MyProject/Private/BasicFrame/Libs/FrameWork",
+                "MyProject/Private/BasicFrame/Libs/FrameWork/Layer",
                 "MyProject/Private/BasicFrame/Libs/NetWork/Socket",
                 "MyProject/Private/BasicFrame/Libs/NetWork/Cmd",
                 "MyProject/Private/BasicFrame/Libs/NetWork/Web",

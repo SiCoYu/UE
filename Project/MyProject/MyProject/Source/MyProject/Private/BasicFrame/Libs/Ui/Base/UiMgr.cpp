@@ -2,7 +2,7 @@
 #include "UiMgr.h"
 #include "Form.h"
 #include "UiAttrSystem.h"
-#include "NotDestroyPath.h"
+#include "LayerPath.h"
 #include "UtilEngineWrap.h"
 #include "UtilContainers.h"
 #include "UiLoadingItem.h"
@@ -52,8 +52,8 @@ void UiMgr::createCanvas()
 		this->mCanvasList.push_back(new UiCanvas((UiCanvasId)idx));
 	}
 
-	this->mCanvasList[(int)eCanvas_50]->setActorName(NotDestroyPath::ND_CV_UICanvas_50);
-	this->mCanvasList[(int)eCanvas_100]->setActorName(NotDestroyPath::ND_CV_UICanvas_100);
+	this->mCanvasList[(int)eCanvas_50]->setActorName(LayerPath::ND_CV_UICanvas_50);
+	this->mCanvasList[(int)eCanvas_100]->setActorName(LayerPath::ND_CV_UICanvas_100);
 }
 
 // 关联每一层的对象

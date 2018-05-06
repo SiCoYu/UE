@@ -13,21 +13,21 @@ UiCanvas::UiCanvas(UiCanvasId canvasID)
 
 	//if (eCanvas_50 == mCanvasId)
 	//{
-	//	mLayerList[(int)eBtmLayer].goName = NotDestroyPath.ND_CV_UIBtmLayer_Canvas_50;
-	//	mLayerList[(int)eFirstLayer].goName = NotDestroyPath.ND_CV_UIFirstLayer_Canvas_50;
-	//	mLayerList[(int)eSecondLayer].goName = NotDestroyPath.ND_CV_UISecondLayer_Canvas_50;
-	//	mLayerList[(int)eThirdLayer].goName = NotDestroyPath.ND_CV_UIThirdLayer_Canvas_50;
-	//	mLayerList[(int)eForthLayer].goName = NotDestroyPath.ND_CV_UIForthLayer_Canvas_50;
-	//	mLayerList[(int)eTopLayer].goName = NotDestroyPath.ND_CV_UITopLayer_Canvas_50;
+	//	this->mLayerList[(int)eBtmLayer].goName = LayerPath.ND_CV_UIBtmLayer_Canvas_50;
+	//	this->mLayerList[(int)eFirstLayer].goName = LayerPath.ND_CV_UIFirstLayer_Canvas_50;
+	//	this->mLayerList[(int)eSecondLayer].goName = LayerPath.ND_CV_UISecondLayer_Canvas_50;
+	//	this->mLayerList[(int)eThirdLayer].goName = LayerPath.ND_CV_UIThirdLayer_Canvas_50;
+	//	this->mLayerList[(int)eForthLayer].goName = LayerPath.ND_CV_UIForthLayer_Canvas_50;
+	//	this->mLayerList[(int)eTopLayer].goName = LayerPath.ND_CV_UITopLayer_Canvas_50;
 	//}
 	//else if (eCanvas_100 == mCanvasId)
 	//{
-	//	mLayerList[(int)eBtmLayer].goName = NotDestroyPath.ND_CV_UIBtmLayer_Canvas_100;
-	//	mLayerList[(int)eFirstLayer].goName = NotDestroyPath.ND_CV_UIFirstLayer_Canvas_100;
-	//	mLayerList[(int)eSecondLayer].goName = NotDestroyPath.ND_CV_UISecondLayer_Canvas_100;
-	//	mLayerList[(int)eThirdLayer].goName = NotDestroyPath.ND_CV_UIThirdLayer_Canvas_100;
-	//	mLayerList[(int)eForthLayer].goName = NotDestroyPath.ND_CV_UIForthLayer_Canvas_100;
-	//	mLayerList[(int)eTopLayer].goName = NotDestroyPath.ND_CV_UITopLayer_Canvas_100;
+	//	this->mLayerList[(int)eBtmLayer].goName = LayerPath.ND_CV_UIBtmLayer_Canvas_100;
+	//	this->mLayerList[(int)eFirstLayer].goName = LayerPath.ND_CV_UIFirstLayer_Canvas_100;
+	//	this->mLayerList[(int)eSecondLayer].goName = LayerPath.ND_CV_UISecondLayer_Canvas_100;
+	//	this->mLayerList[(int)eThirdLayer].goName = LayerPath.ND_CV_UIThirdLayer_Canvas_100;
+	//	this->mLayerList[(int)eForthLayer].goName = LayerPath.ND_CV_UIForthLayer_Canvas_100;
+	//	this->mLayerList[(int)eTopLayer].goName = LayerPath.ND_CV_UITopLayer_Canvas_100;
 	//}
 }
 

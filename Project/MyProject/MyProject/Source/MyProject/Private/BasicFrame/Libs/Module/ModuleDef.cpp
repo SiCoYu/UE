@@ -1,9 +1,9 @@
 ﻿#include "MyProject.h"
 #include "ModuleDef.h"
-#include "NotDestroyPath.h"
+#include "LayerPath.h"
 
 std::string ModulePath::LOGINMN = "RootLayer/Login";
-std::string ModulePath::GAMEMN = NotDestroyPath::ND_CV_Game;
+std::string ModulePath::GAMEMN = LayerPath::ND_CV_Game;
 std::string ModulePath::AUTOUPDATEMN = "RootLayer/AutoUpdate";
 
 std::string ModuleName::LOGINMN = "Login";

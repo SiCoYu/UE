@@ -1,12 +1,12 @@
-﻿#ifndef __NotDestroyPath_H
-#define __NotDestroyPath_H
+﻿#ifndef __LayerPath_H
+#define __LayerPath_H
 
 #include <string>
 
 /**
- * @brief 不释放的路径
+ * @brief 分层路径
  */
-class NotDestroyPath
+class LayerPath
 {
 public:
 	static std::string ND_CV_Root;
