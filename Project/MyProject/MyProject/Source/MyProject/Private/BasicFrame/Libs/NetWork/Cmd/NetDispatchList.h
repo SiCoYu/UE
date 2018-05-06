@@ -12,7 +12,7 @@ protected:
     int mRevMsgCnt;      // 接收到消息的数量
     int mHandleMsgCnt;   // 处理的消息的数量
 
-    std::vector<NetDispatchHandle*> mNetDispList;
+    std::vector<NetDispatchHandle*> mNetDispatchList;
     bool mIsStopNetHandle;       // 是否停止网络消息处理
 
 public:

@@ -40,17 +40,17 @@ void NetDispatchList::setBStopNetHandle(bool value)
 
 void NetDispatchList::addOneDispatch(NetDispatchHandle* disp)
 {
-	if (UtilVector::IndexOf(mNetDispList, disp) == -1)
+	if (UtilVector::IndexOf(mNetDispatchList, disp) == -1)
     {
-        mNetDispList.push_back(disp);
+        mNetDispatchList.push_back(disp);
     }
 }
 
 void NetDispatchList::removeOneDispatch(NetDispatchHandle* disp)
 {
-	if (UtilVector::IndexOf(mNetDispList, disp) != -1)
+	if (UtilVector::IndexOf(mNetDispatchList, disp) != -1)
     {
-		UtilVector::Remove(mNetDispList, disp);
+		UtilVector::Remove(mNetDispatchList, disp);
     }
 }
 
@@ -58,7 +58,7 @@ void NetDispatchList::handleMsg(ByteBuffer* msg)
 {
     //if (false == mIsStopNetHandle)  // 如果没有停止网络处理
     //{
-        for (auto item : mNetDispList)
+        for (auto item : mNetDispatchList)
         {
             item->handleMsg(msg);
         }

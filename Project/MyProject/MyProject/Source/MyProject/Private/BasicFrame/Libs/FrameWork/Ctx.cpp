@@ -54,7 +54,7 @@ Ctx::Ctx()
 #endif
 
 	this->mLogSys = nullptr;
-	this->mNetDispList = nullptr;
+	this->mNetDispatchList = nullptr;
 	this->mShareData = nullptr;
 	this->mConfig = nullptr;
 
@@ -92,7 +92,7 @@ Ctx::~Ctx()
 void Ctx::construct()
 {
 	this->mShareData = MySharedPtr<ShareData>(SAFE_NEW ShareData());
-	this->mNetDispList = MySharedPtr<NetDispatchList>(SAFE_NEW NetDispatchList());
+	this->mNetDispatchList = MySharedPtr<NetDispatchList>(SAFE_NEW NetDispatchList());
 	this->mLogSys = MySharedPtr<LogSys>(SAFE_NEW LogSys());
 	this->mEngineData = MySharedPtr<EngineData>(SAFE_NEW EngineData());
 
@@ -188,7 +188,7 @@ void Ctx::dispose()
 	this->mTableSys->dispose();
 
 	this->mLogSys->dispose();
-	this->mNetDispList->dispose();
+	this->mNetDispatchList->dispose();
 	this->mShareData->dispose();
 	this->mConfig->dispose();
 
@@ -227,7 +227,7 @@ void Ctx::dispose()
 #endif
 
 	this->mLogSys = nullptr;
-	this->mNetDispList = nullptr;
+	this->mNetDispatchList = nullptr;
 	this->mShareData = nullptr;
 	this->mConfig = nullptr;
 
@@ -346,9 +346,9 @@ MySharedPtr<ShareData> Ctx::getShareData()
 	return this->mShareData;
 }
 
-MySharedPtr<NetDispatchList> Ctx::getNetDispList()
+MySharedPtr<NetDispatchList> Ctx::getNetDispatchList()
 {
-	return this->mNetDispList;
+	return this->mNetDispatchList;
 }
 
 MySharedPtr<Config> Ctx::getConfig()

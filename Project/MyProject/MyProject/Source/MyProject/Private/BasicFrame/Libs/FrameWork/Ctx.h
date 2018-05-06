@@ -57,7 +57,7 @@ protected:
 	MySharedPtr<TableSys> mTableSys;
 	MySharedPtr<LogSys> mLogSys;
 	MySharedPtr<ShareData> mShareData;
-	MySharedPtr<NetDispatchList> mNetDispList;
+	MySharedPtr<NetDispatchList> mNetDispatchList;
 	MySharedPtr<Config> mConfig;
 	MySharedPtr<LocalFileSys> mLocalFileSys;
 	MySharedPtr<PoolSys> mPoolSys;
@@ -109,7 +109,7 @@ public:
 	MySharedPtr<TableSys> getTableSys();
 	MySharedPtr<LogSys> getLogSys();
 	MySharedPtr<ShareData> getShareData();
-	MySharedPtr<NetDispatchList> getNetDispList();
+	MySharedPtr<NetDispatchList> getNetDispatchList();
 	MySharedPtr<Config> getConfig();
 	MySharedPtr<LocalFileSys> getLocalFileSys();
 	MySharedPtr<PoolSys> getPoolSys();
@@ -155,7 +155,7 @@ public:
 #define GLogSys GCtx->getLogSys()
 #define GEngineData GCtx->getEngineData()
 #define GShareData GCtx->getShareData()
-#define GNetDispList GCtx->getNetDispList()
+#define GNetDispList GCtx->getNetDispatchList()
 #define GCfg GCtx->getConfig()
 #define GPoolSys GCtx->getPoolSys()
 #define GResLoadMgr GCtx->getResLoadMgr()

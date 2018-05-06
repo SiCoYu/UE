@@ -36,7 +36,7 @@ void UWindow::setPosY(int posY)
 
 UiLayer* UWindow::getUiLayer()
 {
-	returnthis->mUiLayer;
+	return this->mUiLayer;
 }
 
 void UWindow::setUiLayer(UiLayer* layer)
