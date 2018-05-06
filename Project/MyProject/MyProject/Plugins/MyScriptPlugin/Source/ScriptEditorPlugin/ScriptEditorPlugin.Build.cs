@@ -6,6 +6,7 @@ namespace UnrealBuildTool.Rules
 	{
 		public ScriptEditorPlugin(ReadOnlyTargetRules Target) : base(Target)
 		{
+            PublicDefinitions.Add("WITH_LUA=1");
             // error : All source files in module "ScriptPlugin" must include the same precompiled header first.
             // To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to ScriptEditorPlugin.build.cs.
             PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
