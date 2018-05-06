@@ -8,7 +8,7 @@
 #include "Blueprint/UserWidget.h"	// UUserWidget
 // warning C4996: 'FGenericPlatformMisc::ClipboardPaste': FPlatformMisc::ClipboardPaste() has been superseded by FPlatformApplicationMisc::ClipboardPaste() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 //#include "GenericPlatform/GenericPlatformMisc.h"	//	ClipboardCopy
-#include "GenericPlatform/GenericPlatformApplicationMisc.h.h"	//	ClipboardCopy
+#include "HAL/PlatformApplicationMisc.h"	//	ClipboardCopy
 #include "Widgets/SWindow.h"	// SWindow
 #include "Framework/Application/SlateApplication.h"		// FSlateApplication
 #include "Application/SlateWindowHelper.h"	// FSlateWindowHelper

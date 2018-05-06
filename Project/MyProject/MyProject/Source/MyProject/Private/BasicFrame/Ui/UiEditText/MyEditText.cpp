@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyEditText.h"
 // warning C4996: 'FGenericPlatformMisc::ClipboardPaste': FPlatformMisc::ClipboardPaste() has been superseded by FPlatformApplicationMisc::ClipboardPaste() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-#include "GenericPlatform/GenericPlatformApplicationMisc.h.h"	//	ClipboardCopy
+#include "HAL/PlatformApplicationMisc.h"	//	ClipboardCopy
 
 void SMyEditText::Construct(const FArguments& InArgs)
 {

@@ -38,7 +38,7 @@ void SUiCustomButton::Construct(const FArguments& InArgs)
 			//~~~ Clear Button / Trash Can ~~~
 			SAssignNew(ClearTileButton, SButton)
 			.ButtonStyle(FCoreStyle::Get(), "NoBorder")
-		.OnClicked(this, &SUICustomButton::ClearButtonPressed)
+		.OnClicked(this, &SUiCustomButton::ClearButtonPressed)
 		.HAlign(HAlign_Center)
 		.VAlign(VAlign_Center)
 		.ForegroundColor(FSlateColor::UseForeground())
