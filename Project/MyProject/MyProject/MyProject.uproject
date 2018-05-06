@@ -21,6 +21,14 @@
 			"Enabled": true
 		},
 		{
+			"Name": "MyPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "MyPluginWin",
+			"Enabled": true
+		},
+		{
 			"Name": "MyScriptPlugin",
 			"Enabled": true
 		}
