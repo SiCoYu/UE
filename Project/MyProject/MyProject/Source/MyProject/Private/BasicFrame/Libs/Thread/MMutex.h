@@ -1,5 +1,5 @@
-﻿#ifndef __MMUTEX_H
-#define __MMUTEX_H
+﻿#ifndef __MMutex_H
+#define __MMutex_H
 
 #include "MyProject.h"
 #include "PlatformDefine.h"

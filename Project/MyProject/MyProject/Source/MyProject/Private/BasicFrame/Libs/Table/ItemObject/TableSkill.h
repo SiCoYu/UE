@@ -1,5 +1,5 @@
-﻿#ifndef __TableSkill_H_
-#define __TableSkill_H_
+﻿#ifndef __TableSkill_H
+#define __TableSkill_H
 
 #include <string>
 #include "HAL/Platform.h"

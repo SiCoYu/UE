@@ -14,9 +14,9 @@
 
 TableSys::TableSys()
 {
-    mDicTable[TableID::TABLE_OBJECT] = new TableBase("ObjectBase_client.bytes", "ObjectBase_client");
-    mDicTable[TableID::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
-    mDicTable[TableID::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
+    mDicTable[TableId::TABLE_OBJECT] = new TableBase("ObjectBase_client.bytes", "ObjectBase_client");
+    mDicTable[TableId::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
+    mDicTable[TableId::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
 
 	mByteBuffer = new ByteBuffer();
 }
@@ -37,7 +37,7 @@ void TableSys::dispose()
 }
 
 // 返回一个表
-std::vector<TableItemBase*>* TableSys::getTable(TableID::TableID tableID)
+std::vector<TableItemBase*>* TableSys::getTable(TableId::TableId tableID)
 {
 	TableBase* table = mDicTable[tableID];
 	if (nullptr == table)
@@ -49,7 +49,7 @@ std::vector<TableItemBase*>* TableSys::getTable(TableID::TableID tableID)
 }
 		
 // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
-TableItemBase* TableSys::getItem(TableID::TableID tableID, uint32 itemID)
+TableItemBase* TableSys::getItem(TableId::TableId tableID, uint32 itemID)
 {
     TableBase* table = mDicTable[tableID];
 	if (nullptr == table->mByteBuffer)
@@ -73,7 +73,7 @@ TableItemBase* TableSys::getItem(TableID::TableID tableID, uint32 itemID)
 }
 		
 // 加载一个表
-void TableSys::loadOneTable(TableID::TableID tableID)
+void TableSys::loadOneTable(TableId::TableId tableID)
 {
 	mByteBuffer->clear();
 	mArrayBuffer.Empty();
@@ -93,7 +93,7 @@ void TableSys::loadOneTable(TableID::TableID tableID)
 }
 
 // 根据路径查找表的 ID
-TableID::TableID TableSys::getTableIDByPath(std::string& path)
+TableId::TableId TableSys::getTableIDByPath(std::string& path)
 {
 	TableMapIte beginIte = mDicTable.begin();
 	TableMapIte endIte = mDicTable.end();
@@ -105,28 +105,28 @@ TableID::TableID TableSys::getTableIDByPath(std::string& path)
         }
     }
 
-	return (TableID::TableID)0;
+	return (TableId::TableId)0;
 }
 
 // 加载一个表中一项的所有内容
-void TableSys::loadOneTableOneItemAll(TableID::TableID tableID, TableBase* table, TableItemBase* itemBase)
+void TableSys::loadOneTableOneItemAll(TableId::TableId tableID, TableBase* table, TableItemBase* itemBase)
 {
-    if (TableID::TABLE_OBJECT == tableID)
+    if (TableId::TABLE_OBJECT == tableID)
     {
 		itemBase->parseBodyByteBuffer<TableObjectItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
-    else if (TableID::TABLE_CARD == tableID)
+    else if (TableId::TABLE_CARD == tableID)
     {
 		itemBase->parseBodyByteBuffer<TableCardItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
-	else if (TableID::TABLE_SKILL == tableID)  // 添加一个表的步骤四
+	else if (TableId::TABLE_SKILL == tableID)  // 添加一个表的步骤四
     {
 		itemBase->parseBodyByteBuffer<TableSkillItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
 }
 		
 // 获取一个表的名字
-std::string& TableSys::getTableName(TableID::TableID tableID)
+std::string& TableSys::getTableName(TableId::TableId tableID)
 {
 	TableBase* table = mDicTable[tableID];
 	if (nullptr != table)
@@ -137,7 +137,7 @@ std::string& TableSys::getTableName(TableID::TableID tableID)
 }
 
 // 读取一个表，仅仅读取表头
-void TableSys::readTable(TableID::TableID tableID, ByteBuffer* bytes)
+void TableSys::readTable(TableId::TableId tableID, ByteBuffer* bytes)
 {
     TableBase* table = mDicTable[tableID];
 	table->mByteBuffer = bytes;
@@ -149,7 +149,7 @@ void TableSys::readTable(TableID::TableID tableID, ByteBuffer* bytes)
     TableItemBase* item = nullptr;
     for (i = 0; i < len; i++)
     {
-        //if (TableID.TABLE_OBJECT == tableID)
+        //if (TableId.TABLE_OBJECT == tableID)
         //{
         //    item = new TableItemObject();
         //}
@@ -157,7 +157,7 @@ void TableSys::readTable(TableID::TableID tableID, ByteBuffer* bytes)
         item->parseHeaderByteBuffer(bytes);
         // 加载完整数据
         //loadOneTableOneItemAll(tableID, table, item);
-        //if (TableID.TABLE_OBJECT == tableID)
+        //if (TableId.TABLE_OBJECT == tableID)
         //{
             //item.parseAllByteArray<TableObjectItemBody>(bytes);
         //}

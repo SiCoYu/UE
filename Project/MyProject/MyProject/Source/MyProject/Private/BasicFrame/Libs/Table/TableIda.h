@@ -1,9 +1,9 @@
-﻿#ifndef __TableID_H_
-#define __TableID_H_
+﻿#ifndef __TableId_H
+#define __TableId_H
 
-namespace TableID
+namespace TableId
 {
-	enum TableID
+	enum TableId
 	{
 		TABLE_OBJECT,           // 道具基本表
 		TABLE_CARD,             // 卡牌基本表

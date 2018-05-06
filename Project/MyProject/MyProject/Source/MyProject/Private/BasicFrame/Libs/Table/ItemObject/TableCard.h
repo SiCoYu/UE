@@ -1,5 +1,5 @@
-﻿#ifndef __TableCard_H_
-#define __TableCard_H_
+﻿#ifndef __TableCard_H
+#define __TableCard_H
 
 #include <string>
 

@@ -26,7 +26,7 @@ void UUiTestCanvas::onReady()
 
 void UUiTestCanvas::OnConfirmGeneric()
 {
-	//GTableSys->getItem(TableID::TABLE_OBJECT, 100);
+	//GTableSys->getItem(TableId::TABLE_OBJECT, 100);
 
 	//UPackage* tblPkg = CreatePackage(NULL, TEXT("/Game/Table/ObjectBase_client"));
 	//UDataAssetLoadItem* ObjectPtr = LoadObject<UDataAssetLoadItem>(tblPkg, TEXT("/Game/Table/ObjectBase_client"));

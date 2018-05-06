@@ -1,5 +1,5 @@
-﻿#ifndef __TableItemBodyBase_H_
-#define __TableItemBodyBase_H_
+﻿#ifndef __TableItemBodyBase_H
+#define __TableItemBodyBase_H
 
 #include "MyProject.h"
 

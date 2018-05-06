@@ -1,5 +1,5 @@
-﻿#ifndef __TableObject_H_
-#define __TableObject_H_
+﻿#ifndef __TableObject_H
+#define __TableObject_H
 
 #include <string>
 #include "HAL/Platform.h"

@@ -1,5 +1,5 @@
-﻿#ifndef __TableItemHeader_H_
-#define __TableItemHeader_H_
+﻿#ifndef __TableItemHeader_H
+#define __TableItemHeader_H
 
 #include "MyProject.h"
 

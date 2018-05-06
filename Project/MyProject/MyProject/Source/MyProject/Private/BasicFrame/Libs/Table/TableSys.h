@@ -1,11 +1,11 @@
-#ifndef __TableSys_H_
-#define __TableSys_H_
+#ifndef __TableSys_H
+#define __TableSys_H
 
 #include <map>
 #include <vector>
 #include <string>
 #include "HAL/Platform.h"
-#include "TableID.h"
+#include "TableId.h"
 
 class TableBase;
 class TableItemBase;
@@ -20,10 +20,10 @@ class ByteBuffer;
     */
 class TableSys
 {
-	typedef std::map<TableID::TableID, TableBase*>::iterator TableMapIte;
+	typedef std::map<TableId::TableId, TableBase*>::iterator TableMapIte;
 
 private:
-	std::map<TableID::TableID, TableBase*> mDicTable;
+	std::map<TableId::TableId, TableBase*> mDicTable;
 	ByteBuffer* mByteBuffer;
 	TArray<uint8> mArrayBuffer;
 
@@ -36,21 +36,21 @@ public:
 	void dispose();
 
     // 返回一个表
-	std::vector<TableItemBase*>* getTable(TableID::TableID tableID);
+	std::vector<TableItemBase*>* getTable(TableId::TableId tableID);
     // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
-	TableItemBase* getItem(TableID::TableID tableID, uint32 itemID);
+	TableItemBase* getItem(TableId::TableId tableID, uint32 itemID);
     // 加载一个表
-	void loadOneTable(TableID::TableID tableID);
+	void loadOneTable(TableId::TableId tableID);
     // 加载一个表完成
 	//void onloaded(IDispatchObject resEvt);
     // 根据路径查找表的 ID
-	TableID::TableID getTableIDByPath(std::string& path);
+	TableId::TableId getTableIDByPath(std::string& path);
     // 加载一个表中一项的所有内容
-	void loadOneTableOneItemAll(TableID::TableID tableID, TableBase* table, TableItemBase* itemBase);
+	void loadOneTableOneItemAll(TableId::TableId tableID, TableBase* table, TableItemBase* itemBase);
     // 获取一个表的名字
-	std::string& getTableName(TableID::TableID tableID);
+	std::string& getTableName(TableId::TableId tableID);
     // 读取一个表，仅仅读取表头
-	void readTable(TableID::TableID tableID, ByteBuffer* bytes);
+	void readTable(TableId::TableId tableID, ByteBuffer* bytes);
     // 查找表中的一项
 	static TableItemBase* findDataItem(TableBase* table, uint32 id);
 };

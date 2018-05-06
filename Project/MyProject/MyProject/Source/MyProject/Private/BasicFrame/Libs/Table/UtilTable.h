@@ -1,5 +1,5 @@
-﻿#ifndef __UtilTable_H_
-#define __UtilTable_H_
+﻿#ifndef __UtilTable_H
+#define __UtilTable_H
 
 #include "MyProject.h"
 #include "string"

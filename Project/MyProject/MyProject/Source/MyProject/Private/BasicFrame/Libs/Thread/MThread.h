@@ -1,5 +1,5 @@
-﻿#ifndef __MTHREAD_H
-#define __MTHREAD_H
+﻿#ifndef __MThread_H
+#define __MThread_H
 
 #include "MyProject.h"
 #include <string>
