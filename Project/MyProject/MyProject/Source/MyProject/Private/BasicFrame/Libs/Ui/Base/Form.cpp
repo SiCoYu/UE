@@ -21,7 +21,7 @@ void UForm::loadUWidget(const TCHAR* name)
 		// NewObject<UUserWidget>();
 		// 构造一个类的子类，最新的 api 如下就可以了
 		//mWinRender->mUiRoot = NewObject<UUserWidget>(UtilEngineWrap::getGameInstance(), widgetClass);
-		mWinRender->mUiRoot = NewObject<UUMGWidget>(UtilEngineWrap::GetGameInstance(), widgetClass);
+		this->mWinRender->mUiRoot = NewObject<UUMGWidget>(UtilEngineWrap::GetGameInstance(), widgetClass);
 	}
 }
 
@@ -131,7 +131,7 @@ void UForm::onInit()
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_INIT);
 	//}
-	if (!mIsLoadWidgetRes)
+	if (!this->mIsLoadWidgetRes)
 	{
 		// 默认会继续加载资源
 		GUiMgr->loadWidgetRes(this->getId());
@@ -148,7 +148,7 @@ void UForm::onReady()
 
 	this->mIsReady = true;
 
-	if (mIsHandleExitBtn)
+	if (this->mIsHandleExitBtn)
 	{
 		//UtilSysLibWrap.addEventHandle(mWinRender.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
 	}
@@ -220,7 +220,7 @@ void UForm::onStageReSize()
 
 void UForm::adjustPosWithAlign()
 {
-	PointF* pos = computeAdjustPosWithAlign();
+	PointF* pos = this->computeAdjustPosWithAlign();
 	this->setPosX(pos->getX());
 	this->setPosY(pos->getY());
 }

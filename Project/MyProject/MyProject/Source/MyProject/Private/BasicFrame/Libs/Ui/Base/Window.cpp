@@ -5,13 +5,13 @@
 UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	mIsDraggable = true;
-	mHitYMax = 30;
-	mAlignVertial = 0;
-	mAlignHorizontal = 0;
-	mIsResReady = false;
+	this->mIsDraggable = true;
+	this->mHitYMax = 30;
+	this->mAlignVertial = 0;
+	this->mAlignHorizontal = 0;
+	this->mIsResReady = false;
 
-	mWinRender = new WinRender();
+	this->mWinRender = new WinRender();
 }
 
 int UWindow::getPosX()
@@ -36,12 +36,12 @@ void UWindow::setPosY(int posY)
 
 UiLayer* UWindow::getUiLayer()
 {
-	return mUiLayer;
+	returnthis->mUiLayer;
 }
 
 void UWindow::setUiLayer(UiLayer* layer)
 {
-	mUiLayer = layer;
+	this->mUiLayer = layer;
 }
 
 bool UWindow::IsVisible()
@@ -51,17 +51,17 @@ bool UWindow::IsVisible()
 
 bool UWindow::getIsResReady()
 {
-	return mIsResReady;
+	return this->mIsResReady;
 }
 
 void UWindow::setIsResReady(bool value)
 {
-	mIsResReady = value;
+	this->mIsResReady = value;
 }
 
 WinRender* UWindow::getGuiWin()
 {
-	return mWinRender;
+	return this->mWinRender;
 }
 
 bool UWindow::getIsReady()

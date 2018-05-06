@@ -15,5 +15,5 @@ void UUMGWidget::OnSynchronizeProperties_Implementation()
 void UUMGWidget::SynchronizeProperties()
 {
 	Super::SynchronizeProperties();
-	OnSynchronizeProperties();
+	this->OnSynchronizeProperties();
 }

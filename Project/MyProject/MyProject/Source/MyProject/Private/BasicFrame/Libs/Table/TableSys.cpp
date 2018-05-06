@@ -14,11 +14,11 @@
 
 TableSys::TableSys()
 {
-    mDicTable[TableId::TABLE_OBJECT] = new TableBase("ObjectBase_client.bytes", "ObjectBase_client");
-    mDicTable[TableId::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
-    mDicTable[TableId::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
+	this->mDicTable[TableId::TABLE_OBJECT] = new TableBase("ObjectBase_client.bytes", "ObjectBase_client");
+	this->mDicTable[TableId::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
+	this->mDicTable[TableId::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
 
-	mByteBuffer = new ByteBuffer();
+	this->mByteBuffer = new ByteBuffer();
 }
 
 TableSys::~TableSys()
@@ -39,29 +39,33 @@ void TableSys::dispose()
 // 返回一个表
 std::vector<TableItemBase*>* TableSys::getTable(TableId::TableId tableID)
 {
-	TableBase* table = mDicTable[tableID];
+	TableBase* table = this->mDicTable[tableID];
+
 	if (nullptr == table)
 	{
-		loadOneTable(tableID);
-		table = mDicTable[tableID];
+		this->loadOneTable(tableID);
+		table = this->mDicTable[tableID];
 	}
+
 	return table->mList;
 }
 		
 // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
 TableItemBase* TableSys::getItem(TableId::TableId tableID, uint32 itemID)
 {
-    TableBase* table = mDicTable[tableID];
+    TableBase* table = this->mDicTable[tableID];
+
 	if (nullptr == table->mByteBuffer)
 	{
-		loadOneTable(tableID);
-		table = mDicTable[tableID];
+		this->loadOneTable(tableID);
+		table = this->mDicTable[tableID];
 	}
+
     TableItemBase* ret = TableSys::findDataItem(table, itemID);
 
 	if (nullptr != ret && nullptr == ret->mItemBody)
     {
-        loadOneTableOneItemAll(tableID, table, ret);
+		this->loadOneTableOneItemAll(tableID, table, ret);
     }
 
     if (nullptr == ret)
@@ -75,9 +79,9 @@ TableItemBase* TableSys::getItem(TableId::TableId tableID, uint32 itemID)
 // 加载一个表
 void TableSys::loadOneTable(TableId::TableId tableID)
 {
-	mByteBuffer->clear();
-	mArrayBuffer.Empty();
-	TableBase* table = mDicTable[tableID];
+	this->mByteBuffer->clear();
+	this->mArrayBuffer.Empty();
+	TableBase* table = this->mDicTable[tableID];
 
 	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/MyAsset/Table/"), ANSI_TO_TCHAR(table->mTableName.c_str()), TEXT(".txt"));
@@ -85,18 +89,19 @@ void TableSys::loadOneTable(TableId::TableId tableID)
 
 	if (FFileHelper::LoadFileToArray(mArrayBuffer, *Filename))
 	{
-		mByteBuffer->setLength(mArrayBuffer.GetAllocatedSize());
-		mByteBuffer->writeBytes((char*)(mArrayBuffer.GetData()), 0, mArrayBuffer.GetAllocatedSize());
-		mByteBuffer->setPos(0);
-		readTable(tableID, mByteBuffer);
+		this->mByteBuffer->setLength(mArrayBuffer.GetAllocatedSize());
+		this->mByteBuffer->writeBytes((char*)(this->mArrayBuffer.GetData()), 0, this->mArrayBuffer.GetAllocatedSize());
+		this->mByteBuffer->setPos(0);
+		this->readTable(tableID, mByteBuffer);
 	}
 }
 
 // 根据路径查找表的 ID
 TableId::TableId TableSys::getTableIDByPath(std::string& path)
 {
-	TableMapIte beginIte = mDicTable.begin();
-	TableMapIte endIte = mDicTable.end();
+	TableMapIte beginIte = this->mDicTable.begin();
+	TableMapIte endIte = this->mDicTable.end();
+
 	for(; beginIte != endIte; ++beginIte)
     {
 		if (beginIte->second->mResName == path)
@@ -128,18 +133,20 @@ void TableSys::loadOneTableOneItemAll(TableId::TableId tableID, TableBase* table
 // 获取一个表的名字
 std::string& TableSys::getTableName(TableId::TableId tableID)
 {
-	TableBase* table = mDicTable[tableID];
+	TableBase* table = this->mDicTable[tableID];
+
 	if (nullptr != table)
 	{
 		return table->mTableName;
 	}			
+
 	return UtilStr::msDefaultStr;
 }
 
 // 读取一个表，仅仅读取表头
 void TableSys::readTable(TableId::TableId tableID, ByteBuffer* bytes)
 {
-    TableBase* table = mDicTable[tableID];
+    TableBase* table = this->mDicTable[tableID];
 	table->mByteBuffer = bytes;
 
 	bytes->setEndian(eLITTLE_ENDIAN);
@@ -147,6 +154,7 @@ void TableSys::readTable(TableId::TableId tableID, ByteBuffer* bytes)
 	bytes->readUnsignedInt32(len);
     uint32 i = 0;
     TableItemBase* item = nullptr;
+
     for (i = 0; i < len; i++)
     {
         //if (TableId.TABLE_OBJECT == tableID)
@@ -178,10 +186,12 @@ TableItemBase* TableSys::findDataItem(TableBase* table, uint32 id)
 	{
 		middle = (low + high) / 2;
         idCur = (*(table->mList))[middle]->mItemHeader->mId;
+
 		if (idCur == id)
 		{
 			break;
 		}
+
 		if (id < idCur)
 		{
 			high = middle - 1;
@@ -196,5 +206,6 @@ TableItemBase* TableSys::findDataItem(TableBase* table, uint32 id)
 	{
         return (*(table->mList))[middle];
 	}
+
 	return nullptr;
 }

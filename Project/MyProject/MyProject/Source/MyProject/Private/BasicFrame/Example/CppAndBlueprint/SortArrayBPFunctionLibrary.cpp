@@ -68,7 +68,7 @@ struct FArraySortByFieldPredicate
 				Cast<UTextProperty>(targetProperty)->GetPropertyValue_InContainer(Aa).ToString() <
 				Cast<UTextProperty>(targetProperty)->GetPropertyValue_InContainer(Bb).ToString();
 		}
-		// fall back, just let diff type win:
+		// fall back, just let diff type form:
 		else
 			return false;
 	}

@@ -30,7 +30,7 @@ void UiAttrSystem::dispose()
 
 std::string UiAttrSystem::getPath(UiFormId id)
 {
-	if (UtilMap::ContainsKey(mId2AttrDic, id))
+	if (UtilMap::ContainsKey(this->mId2AttrDic, id))
 	{
 		return mId2AttrDic[id]->mWidgetPath;
 	}
@@ -41,18 +41,18 @@ std::string UiAttrSystem::getPath(UiFormId id)
 // 通过路径获取
 UiFormId UiAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
 {
-	for(auto keyValue : mId2AttrDic)
+	for(auto keyValue : this->mId2AttrDic)
 	{
 		if (ePathComUI == pathType)
 		{
-			if (mId2AttrDic[keyValue.first]->mWidgetPath == resPath)
+			if (this->mId2AttrDic[keyValue.first]->mWidgetPath == resPath)
 			{
 				return keyValue.first;
 			}
 		}
 		else if (ePathCodePath == pathType)
 		{
-			if (mId2AttrDic[keyValue.first]->mCodePath == resPath)
+			if (this->mId2AttrDic[keyValue.first]->mCodePath == resPath)
 			{
 				return keyValue.first;
 			}
@@ -67,7 +67,7 @@ void UiAttrSystem::addItem(UiFormId formId, std::string widgetPath, FormType for
 	UiAttrItem* item = nullptr;
 
 	item = new UiAttrItem();
-	mId2AttrDic[formId] = item;
+	this->mId2AttrDic[formId] = item;
 	item->mWidgetPath = widgetPath;
 	item->mFormType = formType;
 	item->mUMGOuterType = outerType;

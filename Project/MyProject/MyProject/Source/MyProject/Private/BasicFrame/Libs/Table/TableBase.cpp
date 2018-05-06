@@ -3,9 +3,9 @@
 
 TableBase::TableBase(std::string resname, std::string tablename)
 {
-    mResName = resname;
-    mTableName = tablename;
+	this->mResName = resname;
+	this->mTableName = tablename;
 
-	mList = new std::vector<TableItemBase*>();
-	mByteBuffer = nullptr;
+	this->mList = new std::vector<TableItemBase*>();
+	this->mByteBuffer = nullptr;
 }

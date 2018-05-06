@@ -18,13 +18,13 @@ enum UiCanvasId
 class UiCanvas
 {
 protected:
-	std::string mGoName;				// GameObject 的名字
+	std::string mActorName;				// GameObject 的名字
 	UiCanvasId mCanvasId;				// CanvasID
 	std::vector<UiLayer*> mLayerList;   // Canvas 中的 Layer
 
 public:
 	UiCanvas(UiCanvasId canvasID);
-	void setGoName(std::string& rhv);
+	void setActorName(std::string& rhv);
 	std::vector<UiLayer*>& getLayerList();
 	void findCanvasGO();
 };

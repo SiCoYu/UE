@@ -52,8 +52,8 @@ void UiMgr::createCanvas()
 		this->mCanvasList.push_back(new UiCanvas((UiCanvasId)idx));
 	}
 
-	this->mCanvasList[(int)eCanvas_50]->setGoName(NotDestroyPath::ND_CV_UICanvas_50);
-	this->mCanvasList[(int)eCanvas_100]->setGoName(NotDestroyPath::ND_CV_UICanvas_100);
+	this->mCanvasList[(int)eCanvas_50]->setActorName(NotDestroyPath::ND_CV_UICanvas_50);
+	this->mCanvasList[(int)eCanvas_100]->setActorName(NotDestroyPath::ND_CV_UICanvas_100);
 }
 
 // 关联每一层的对象
@@ -77,22 +77,22 @@ void UiMgr::showForm(UiFormId formId)
 
 void UiMgr::showFormInternal(UiFormId formId)
 {
-	UForm* win = getForm<UForm>(formId);
+	UForm* form = getForm<UForm>(formId);
 
-	if (win != nullptr)
+	if (form != nullptr)
 	{
-		if (!win->getIsReady() && win->getIsLoadWidgetRes())
+		if (!form->getIsReady() && form->getIsLoadWidgetRes())
 		{
-			win->onReady();
+			form->onReady();
 		}
-		if (!win->IsVisible())
+		if (!form->IsVisible())
 		{
-			UtilEngineWrap::SetActive(win->mWinRender->mUiRoot, true);
-			win->onShow();
+			UtilEngineWrap::SetActive(form->mWinRender->mUiRoot, true);
+			form->onShow();
 		}
 		else
 		{
-			UtilEngineWrap::SetActive(win->mWinRender->mUiRoot, true);
+			UtilEngineWrap::SetActive(form->mWinRender->mUiRoot, true);
 		}
 	}
 }
@@ -100,13 +100,13 @@ void UiMgr::showFormInternal(UiFormId formId)
 // 隐藏一个 UI
 void UiMgr::hideFormInternal(UiFormId formId)
 {
-	UForm* win = getForm<UForm>(formId);
-	if (win != nullptr)
+	UForm* form = getForm<UForm>(formId);
+	if (form != nullptr)
 	{
-		if (win->IsVisible())
+		if (form->IsVisible())
 		{
-			UtilEngineWrap::SetActive(win->mWinRender->mUiRoot, false);
-			win->onHide();
+			UtilEngineWrap::SetActive(form->mWinRender->mUiRoot, false);
+			form->onHide();
 		}
 	}
 }
@@ -114,11 +114,11 @@ void UiMgr::hideFormInternal(UiFormId formId)
 // 退出一个 UI
 void UiMgr::exitForm(UiFormId formId, bool bForce)
 {
-	UForm* win = getForm<UForm>(formId);
+	UForm* form = getForm<UForm>(formId);
 
-	if (win != nullptr)
+	if (form != nullptr)
 	{
-		if (win->getExitMode() || bForce)
+		if (form->getExitMode() || bForce)
 		{
 			this->exitFormInternal(formId);
 		}
@@ -131,17 +131,17 @@ void UiMgr::exitForm(UiFormId formId, bool bForce)
 
 void UiMgr::exitFormInternal(UiFormId formId)
 {
-	UForm* win = getForm<UForm>(formId);
+	UForm* form = getForm<UForm>(formId);
 
-	if (win != nullptr)
+	if (form != nullptr)
 	{
 		// 清理列表
-		UiLayer* layer = win->getUiLayer();
+		UiLayer* layer = form->getUiLayer();
 		UtilMap::Remove(layer->getWinDic(), formId);
 		// 释放界面资源
-		win->onExit();
-		UtilEngineWrap::Destroy(win->mWinRender->mUiRoot);
-		win->mWinRender->mUiRoot = nullptr;
+		form->onExit();
+		UtilEngineWrap::Destroy(form->mWinRender->mUiRoot);
+		form->mWinRender->mUiRoot = nullptr;
 		// 释放加载的资源
 		//string path = mUiAttrSystem.getPath(formId);
 		//if (path != null)
@@ -150,7 +150,7 @@ void UiMgr::exitFormInternal(UiFormId formId)
 		//}
 		UtilEngineWrap::UnloadUnusedAssets();       // 异步卸载共用资源
 		UtilMap::Remove(mId2FormDic, formId);
-		win = nullptr;
+		form = nullptr;
 	}
 }
 

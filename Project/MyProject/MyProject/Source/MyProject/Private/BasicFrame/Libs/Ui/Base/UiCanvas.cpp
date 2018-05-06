@@ -3,12 +3,12 @@
 
 UiCanvas::UiCanvas(UiCanvasId canvasID)
 {
-	mCanvasId = canvasID;
+	this->mCanvasId = canvasID;
 
 	int idx = 0;
 	for (idx = 0; idx < (int)eMaxLayer; ++idx)
 	{
-		mLayerList.push_back(new UiLayer((UiLayerId)idx));
+		this->mLayerList.push_back(new UiLayer((UiLayerId)idx));
 	}
 
 	//if (eCanvas_50 == mCanvasId)
@@ -31,14 +31,14 @@ UiCanvas::UiCanvas(UiCanvasId canvasID)
 	//}
 }
 
-void UiCanvas::setGoName(std::string& rhv)
+void UiCanvas::setActorName(std::string& rhv)
 {
-	mGoName = rhv;
+	this->mActorName = rhv;
 }
 
 std::vector<UiLayer*>& UiCanvas::getLayerList()
 {
-	return mLayerList;
+	return this->mLayerList;
 }
 
 void UiCanvas::findCanvasGO()

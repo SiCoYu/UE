@@ -13,7 +13,8 @@ void TableItemBase::parseHeaderByteBuffer(ByteBuffer* bytes)
 {
     if (nullptr == mItemHeader)
     {
-        mItemHeader = new TableItemHeader();
+		this->mItemHeader = new TableItemHeader();
     }
-    mItemHeader->parseHeaderByteBuffer(bytes);
+
+	this->mItemHeader->parseHeaderByteBuffer(bytes);
 }
