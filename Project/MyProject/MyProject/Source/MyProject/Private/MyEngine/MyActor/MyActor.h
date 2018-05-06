@@ -10,7 +10,9 @@
 #include "Components/TimelineComponent.h"	// TimelineComponent
 #include "Curves/CurveFloat.h"	// CurveFloat
 #include "Curves/CurveVector.h"	// CurveVector
-#include "UObject/AssetPtr.h"	// TAssetPtr
+// UE 4.19.1 warning : TAssetPtr has been renamed to TSoftObjectPtr, change to #include "UObject/SoftObjectPtr.h" and rename references
+//#include "UObject/AssetPtr.h"	// TAssetPtr
+#include "UObject/SoftObjectPtr.h"	// TAssetPtr
 #include "MyActor.generated.h"
 
 UCLASS(config = Game)
@@ -53,9 +55,11 @@ public:
 
 	// https://wiki.unrealengine.com/TAssetPtr_and_Asynchronous_Asset_Loading
 public:
+	// UE 4.19.1 warning : TAssetPtr has been renamed to TSoftObjectPtr, change to #include "UObject/SoftObjectPtr.h" and rename references
 	/** Define the Asset Pointer. Don't forget to set a UPROPERTY */
 	UPROPERTY(EditAnywhere)
-	TAssetPtr<AActor> MyAssetPointer;
+	//TAssetPtr<AActor> MyAssetPointer;
+	TSoftObjectPtr<AActor> MyAssetPointer;
 
 	/** Define a subclass version. This will only allow you to select subclasses of the defined type. */
 	UPROPERTY(EditAnywhere)

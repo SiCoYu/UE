@@ -6,5 +6,5 @@
 
 void TestUI::run()
 {
-	GUiMgr->loadAndShow<UUiTestUMG>(NSFormId::eUITestUMG);
+	GUiMgr->loadAndShow<UUiTestUMG>(NSFormId::eUiTestUMG);
 }

@@ -14,7 +14,9 @@ void UMyMountPak::LoadPakComplete()
 {       
 	//如果你想直接加载本地的pak的话,方法的参数列表删掉,然后把SaveArrayToFile这句话也删了,SaveContentDir填写你要加载的路径就可以了...
     //1.把下载好的文件保存起来
-    FString SaveContentDir = FPaths::GameContentDir() + TEXT("OutPak.pak");
+	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+    //FString SaveContentDir = FPaths::GameContentDir() + TEXT("OutPak.pak");
+	FString SaveContentDir = FPaths::ProjectContentDir() + TEXT("OutPak.pak");
     //2.加载刚才保存的文件
     //获取当前使用的平台,这里使用的是WIN64平台
     IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();

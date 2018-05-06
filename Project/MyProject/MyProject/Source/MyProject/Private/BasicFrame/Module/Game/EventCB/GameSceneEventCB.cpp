@@ -21,7 +21,7 @@ GameSceneEventCB::~GameSceneEventCB()
 // 场景加载完成处理事件
 void GameSceneEventCB::onLevelLoaded()
 {
-	GUiMgr->loadAndShow<UUIFunctionBar>(NSFormId::eUIFunctionBar);
+	GUiMgr->loadAndShow<UUiFunctionBar>(NSFormId::eUiFunctionBar);
 
     this->runTest();
 }

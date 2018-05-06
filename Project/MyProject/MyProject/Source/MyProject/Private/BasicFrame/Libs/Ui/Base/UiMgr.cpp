@@ -87,12 +87,12 @@ void UiMgr::showFormInternal(UiFormId formId)
 		}
 		if (!win->IsVisible())
 		{
-			EngineApi::SetActive(win->mGuiWin->mUiRoot, true);
+			EngineApi::SetActive(win->mWinRender->mUiRoot, true);
 			win->onShow();
 		}
 		else
 		{
-			EngineApi::SetActive(win->mGuiWin->mUiRoot, true);
+			EngineApi::SetActive(win->mWinRender->mUiRoot, true);
 		}
 	}
 }
@@ -105,7 +105,7 @@ void UiMgr::hideFormInternal(UiFormId formId)
 	{
 		if (win->IsVisible())
 		{
-			EngineApi::SetActive(win->mGuiWin->mUiRoot, false);
+			EngineApi::SetActive(win->mWinRender->mUiRoot, false);
 			win->onHide();
 		}
 	}
@@ -140,8 +140,8 @@ void UiMgr::exitFormInternal(UiFormId formId)
 		UtilMap::Remove(layer->getWinDic(), formId);
 		// 释放界面资源
 		win->onExit();
-		EngineApi::Destroy(win->mGuiWin->mUiRoot);
-		win->mGuiWin->mUiRoot = nullptr;
+		EngineApi::Destroy(win->mWinRender->mUiRoot);
+		win->mWinRender->mUiRoot = nullptr;
 		// 释放加载的资源
 		//string path = mUiAttrSystem.getPath(formId);
 		//if (path != null)
@@ -309,26 +309,26 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 
 
 	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
-	//mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->mWidgetPath));
-	//this->mId2FormDic[formId]->mGuiWin->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
+	//mId2FormDic[formId]->mWinRender->mUiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->mWidgetPath));
+	//this->mId2FormDic[formId]->mWinRender->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
 
-	this->mId2FormDic[formId]->mGuiWin->mUiRoot = WidgetObject;
+	this->mId2FormDic[formId]->mWinRender->mUiRoot = WidgetObject;
 
 	//if (attrItem.m_bNeedLua)
 	//{
-	//	mId2FormDic[formId].luaCSBridgeForm.gameObject = mId2FormDic[formId].mGuiWin.mUiRoot;
+	//	mId2FormDic[formId].luaCSBridgeForm.gameObject = mId2FormDic[formId].mWinRender.mUiRoot;
 	//	mId2FormDic[formId].luaCSBridgeForm.init();
 	//}
 
 	// 设置位置
-	//EngineApi::SetParent(mId2FormDic[formId]->mGuiWin->mUiRoot.transform, mCanvasList[(int)(attrItem->mCanvasId)]->getLayerList()[(int)(attrItem->mLayerId)]->getLayerTrans(), false);
+	//EngineApi::SetParent(mId2FormDic[formId]->mWinRender->mUiRoot.transform, mCanvasList[(int)(attrItem->mCanvasId)]->getLayerList()[(int)(attrItem->mLayerId)]->getLayerTrans(), false);
 
 	// 先设置再设置缩放，否则无效
-	//mId2FormDic[formId]->mGuiWin->mUiRoot.transform.SetAsLastSibling();               // 放在最后
-	EngineApi::SetActive(mId2FormDic[formId]->mGuiWin->mUiRoot, false);      // 出发 onShow 事件
+	//mId2FormDic[formId]->mWinRender->mUiRoot.transform.SetAsLastSibling();               // 放在最后
+	EngineApi::SetActive(mId2FormDic[formId]->mWinRender->mUiRoot, false);      // 出发 onShow 事件
 	//if (mId2FormDic[formId].hideOnCreate)
 	//{
-	//    UtilApi.SetActive(mId2FormDic[formId].mGuiWin.mUiRoot, false);
+	//    UtilApi.SetActive(mId2FormDic[formId].mWinRender.mUiRoot, false);
 	//}
 	//if (!this->mId2FormDic[formId]->getHideOnCreate())
 	if(this->mId2FormDic[formId]->isVisible())
@@ -359,8 +359,8 @@ void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 
 	UUMGWidget* WidgetObject = res->getWidgetObject();
 	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
-	this->mId2FormDic[formId]->mGuiWin->mUiRoot = WidgetObject;
-	EngineApi::SetActive(mId2FormDic[formId]->mGuiWin->mUiRoot, false);      // 出发 onShow 事件
+	this->mId2FormDic[formId]->mWinRender->mUiRoot = WidgetObject;
+	EngineApi::SetActive(mId2FormDic[formId]->mWinRender->mUiRoot, false);      // 出发 onShow 事件
 
 	if (this->mId2FormDic[formId]->isVisible())
 	{

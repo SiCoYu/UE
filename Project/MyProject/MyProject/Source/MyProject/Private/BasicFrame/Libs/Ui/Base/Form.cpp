@@ -20,8 +20,8 @@ void UForm::loadUWidget(const TCHAR* name)
 		// 直接构造一个抽象类是报错误的
 		// NewObject<UUserWidget>();
 		// 构造一个类的子类，最新的 api 如下就可以了
-		//mGuiWin->mUiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
-		mGuiWin->mUiRoot = NewObject<UUMGWidget>(EngineApi::GetGameInstance(), widgetClass);
+		//mWinRender->mUiRoot = NewObject<UUserWidget>(EngineApi::getGameInstance(), widgetClass);
+		mWinRender->mUiRoot = NewObject<UUMGWidget>(EngineApi::GetGameInstance(), widgetClass);
 	}
 }
 
@@ -150,7 +150,7 @@ void UForm::onReady()
 
 	if (mIsHandleExitBtn)
 	{
-		//UtilApi.addEventHandle(mGuiWin.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
+		//UtilApi.addEventHandle(mWinRender.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
 	}
 }
 
@@ -206,7 +206,7 @@ void UForm::onExit()
 
 bool UForm::isVisible()
 {
-	//return mGuiWin->mUiRoot->activeSelf;        // 仅仅是自己是否可见
+	//return mWinRender->mUiRoot->activeSelf;        // 仅仅是自己是否可见
 	return this->mIsVisible;
 }
 
@@ -268,7 +268,7 @@ void UForm::onExitBtnClick()
 //{
 //	foreach(var path in btnList)
 //	{
-//		addClick(mGuiWin.mUiRoot, path);
+//		addClick(mWinRender.mUiRoot, path);
 //	}
 //}
 //
@@ -282,7 +282,7 @@ void UForm::onExitBtnClick()
 //	string[] pathArr = m_luaCSBridgeForm.getTable2StrArray("BtnClickTable");
 //	foreach(var path in pathArr)
 //	{
-//		addClick(mGuiWin.mUiRoot, path);
+//		addClick(mWinRender.mUiRoot, path);
 //	}
 //}
 

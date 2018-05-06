@@ -1,5 +1,7 @@
 #include "MyProject.h"
 #include "MyEditText.h"
+// warning C4996: 'FGenericPlatformMisc::ClipboardPaste': FPlatformMisc::ClipboardPaste() has been superseded by FPlatformApplicationMisc::ClipboardPaste() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+#include "GenericPlatform/GenericPlatformApplicationMisc.h.h"	//	ClipboardCopy
 
 void SMyEditText::Construct(const FArguments& InArgs)
 {
@@ -108,8 +110,10 @@ FReply SMyEditText::OnKeyDown(const FGeometry& MyGeometry, const FKeyEvent& InKe
 		//CTRL + C = Copy
 		if (VKey == EKeys::C)
 		{
+			// UE 4.19.1 warning C4996: 'FGenericPlatformMisc::ClipboardCopy': FPlatformMisc::ClipboardCopy() has been superseded by FPlatformApplicationMisc::ClipboardCopy() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 			//Copy All
-			FWindowsPlatformMisc::ClipboardCopy(*ChatInput->GetText().ToString());
+			//FWindowsPlatformMisc::ClipboardCopy(*ChatInput->GetText().ToString());
+			FPlatformApplicationMisc::ClipboardCopy(*ChatInput->GetText().ToString());
 
 			//or you can use the highlighting of text method
 			//CopyToClipboard();

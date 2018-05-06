@@ -5,7 +5,7 @@
 #include "TableSys.h"
 #include "DataAssetLoadItem.h"
 
-UUIPack::UUIPack(const FObjectInitializer& ObjectInitializer)
+UUiPack::UUiPack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	//loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
@@ -22,14 +22,14 @@ UUIPack::UUIPack(const FObjectInitializer& ObjectInitializer)
 	//ccc->OnClicked.Add(ddd);
 }
 
-void UUIPack::onReady()
+void UUiPack::onReady()
 {
 	loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
-	mGuiWin->mUiRoot->AddToViewport();
-	EngineApi::addEventHandle((UButton*)mGuiWin->mUiRoot->GetWidgetFromName("Button_16"), (UObject*)this, "OnConfirmGeneric");
+	mWinRender->mUiRoot->AddToViewport();
+	EngineApi::addEventHandle((UButton*)mWinRender->mUiRoot->GetWidgetFromName("Button_16"), (UObject*)this, "OnConfirmGeneric");
 }
 
-void UUIPack::OnConfirmGeneric()
+void UUiPack::OnConfirmGeneric()
 {
 	////UBinaryLoadItem* pBinaryLoadItem = LoadObject<UBinaryLoadItem>(NULL, TEXT("/Game/Table/aaa"), NULL, LOAD_None, NULL);
 	//FString Filename = FString::Printf(TEXT("%s%s"), *FPaths::GameContentDir(), TEXT("/Table/aaa.tbl"));

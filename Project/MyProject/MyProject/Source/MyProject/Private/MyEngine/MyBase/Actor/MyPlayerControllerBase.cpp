@@ -53,8 +53,8 @@ void AMyPlayerControllerBase::ReceivedPlayer()
 void AMyPlayerControllerBase::TestUI()
 {
 	// Test 加载 UIPack
-	//GUiMgr->loadForm<UUiPack>(eUIPack);
-	GUiMgr->loadForm<UUiTestCanvas>(eUITestCanvas);
+	//GUiMgr->loadForm<UUiPack>(eUiPack);
+	GUiMgr->loadForm<UUiTestCanvas>(eUiTestCanvas);
 }
 
 void AMyPlayerControllerBase::BeginPlay_PawnClass()

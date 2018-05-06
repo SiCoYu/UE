@@ -271,7 +271,7 @@ void Ctx::beginPlay()
 		//GCtx->setNetMgr(new NetMgr(Ctx::getSingletonPtr()->getStdLog()));
 
 		// test
-		//GUiMgr->loadForm(eUIPack);
+		//GUiMgr->loadForm(eUiPack);
 		//GNetMgr->openSocket("192.168.124.26", 10002);
 
 		//FString cmd = FString::Printf(TEXT("GlobalEventCmd onInit"));

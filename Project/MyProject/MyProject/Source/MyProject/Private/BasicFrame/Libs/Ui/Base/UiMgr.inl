@@ -1,4 +1,4 @@
-#ifndef __UIMgr_H
+#ifndef __UiMgr_H
 #error "UiMgr.inl file can only include in UiMgr.h"
 #endif
 
@@ -87,7 +87,7 @@ T* UiMgr::loadForm(UiFormId formId)
 			//	form.luaCSBridgeForm.DoFile(attrItem.m_luaScriptPath);
 			//}
 
-			//form->mGuiWin->mUiRoot = WidgetObject;
+			//form->mWinRender->mUiRoot = WidgetObject;
 
 			this->addFormNoReady(form);           // 仅仅是创建数据，资源还没有加载完成
 			//onCodeLoadedByForm(form);

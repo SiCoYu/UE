@@ -108,7 +108,9 @@ void AMyActor::StrongReferenceUnloadAllAsset()
 {
 	TArray<FStringAssetReference> AssetsToLoad;
 	//for (TAssetPtr<ABaseItem>& AssetPtr : MyItems) // C++11 ranged loop
-	for (TAssetPtr<AActor>& AssetPtr : MyItems) // C++11 ranged loop
+	// UE 4.19.1 warning : TAssetPtr has been renamed to TSoftObjectPtr, change to #include "UObject/SoftObjectPtr.h" and rename references
+	//for (TAssetPtr<AActor>& AssetPtr : MyItems) // C++11 ranged loop
+	for (TSoftObjectPtr<AActor>& AssetPtr : MyItems) // C++11 ranged loop
 	{
 		// UE 4.19.1  warning C4996: 'TSoftObjectPtr<AActor>::ToStringReference': ToStringReference was renamed to ToSoftObjectPath Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 		//AssetLoader.Unload(AssetPtr.ToStringReference());

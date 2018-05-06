@@ -1,12 +1,12 @@
 #include "MyProject.h"
 #include "UiCustomButton.h"
 
-void SUICustomButton::Construct(const FArguments& InArgs)
+void SUiCustomButton::Construct(const FArguments& InArgs)
 {
 	//The button!
 	SAssignNew(RefreshButton, SButton)
 		.ButtonStyle(FCoreStyle::Get(), "NoBorder")
-		.OnClicked(this, &SUICustomButton::RefreshButtonPressed)
+		.OnClicked(this, &SUiCustomButton::RefreshButtonPressed)
 		.HAlign(HAlign_Center)
 		.VAlign(VAlign_Center)
 		.ForegroundColor(FSlateColor::UseForeground())
@@ -51,7 +51,7 @@ void SUICustomButton::Construct(const FArguments& InArgs)
 		];
 }
 
-void SUICustomButton::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
+void SUiCustomButton::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
 {
 	// Call parent implementation
 	SCompoundWidget::Tick(AllottedGeometry, InCurrentTime, InDeltaTime);
@@ -74,14 +74,14 @@ void SUICustomButton::Tick(const FGeometry& AllottedGeometry, const double InCur
 	}
 }
 
-void SUICustomButton::SetCursor()
+void SUiCustomButton::SetCursor()
 {
 	//Set Cursors
 	ClearTileButton->SetCursor(EMouseCursor::SlashedCircle);
 	RefreshButton->SetCursor(EMouseCursor::Hand);
 }
 
-void SUICustomButton::SetToolTip()
+void SUiCustomButton::SetToolTip()
 {
 	ClearTileButton->SetToolTip(
 		SNew(SToolTip)
@@ -110,12 +110,12 @@ void SUICustomButton::SetToolTip()
 	);
 }
 
-FReply SUICustomButton::RefreshButtonPressed()
+FReply SUiCustomButton::RefreshButtonPressed()
 {
 	return FReply::Handled();
 }
 
-FReply SUICustomButton::ClearButtonPressed()
+FReply SUiCustomButton::ClearButtonPressed()
 {
 	return FReply::Handled();
 }

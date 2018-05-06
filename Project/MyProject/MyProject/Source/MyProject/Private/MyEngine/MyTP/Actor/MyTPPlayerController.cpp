@@ -53,8 +53,8 @@ AMyTPPlayerController::AMyTPPlayerController(const FObjectInitializer& ObjectIni
 //void AMyPlayerController::TestUI()
 //{
 //	// Test 加载 UIPack
-//	//GUiMgr->loadForm<UUiPack>(eUIPack);
-//	GUiMgr->loadForm<UUiTestCanvas>(eUITestCanvas);
+//	//GUiMgr->loadForm<UUiPack>(eUiPack);
+//	GUiMgr->loadForm<UUiTestCanvas>(eUiTestCanvas);
 //}
 //
 //void AMyPlayerController::BeginPlay_PawnClass()

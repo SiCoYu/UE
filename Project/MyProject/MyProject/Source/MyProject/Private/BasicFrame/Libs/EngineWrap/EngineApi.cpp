@@ -6,7 +6,9 @@
 #include "Internationalization/Text.h"	// FFormatOrderedArguments
 #include "MyGameInstanceBase.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
-#include "GenericPlatform/GenericPlatformMisc.h"	//	ClipboardCopy
+// warning C4996: 'FGenericPlatformMisc::ClipboardPaste': FPlatformMisc::ClipboardPaste() has been superseded by FPlatformApplicationMisc::ClipboardPaste() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+//#include "GenericPlatform/GenericPlatformMisc.h"	//	ClipboardCopy
+#include "GenericPlatform/GenericPlatformApplicationMisc.h.h"	//	ClipboardCopy
 #include "Widgets/SWindow.h"	// SWindow
 #include "Framework/Application/SlateApplication.h"		// FSlateApplication
 #include "Application/SlateWindowHelper.h"	// FSlateWindowHelper
@@ -188,7 +190,9 @@ bool EngineApi::PackageExists(const FString& InPackageFilename)
 
 FString EngineApi::GameUserDir()
 {
-	return FPaths::GameUserDir();
+	// warning C4996: 'FPaths::GameUserDir': FPaths::GameUserDir() has been superseded by FPaths::ProjectUserDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//return FPaths::GameUserDir();
+	return FPaths::ProjectUserDir();
 }
 
 void EngineApi::SetActive(UWidget* target, bool bshow)
@@ -433,12 +437,16 @@ void EngineApi::AddToViewport(UUserWidget* userWidget)
 
 void EngineApi::ClipboardCopy(const TCHAR* Str)
 {
-	FPlatformMisc::ClipboardCopy(Str);
+	// UE 4.19.1 warning C4996: 'FGenericPlatformMisc::ClipboardCopy': FPlatformMisc::ClipboardCopy() has been superseded by FPlatformApplicationMisc::ClipboardCopy() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//FPlatformMisc::ClipboardCopy(Str);
+	FPlatformApplicationMisc::ClipboardCopy(Str);
 }
 
 void EngineApi::ClipboardPaste(class FString& Dest)
 {
-	FPlatformMisc::ClipboardPaste(Dest);
+	// UE 4.19.1 warning C4996: 'FGenericPlatformMisc::ClipboardPaste': FPlatformMisc::ClipboardPaste() has been superseded by FPlatformApplicationMisc::ClipboardPaste() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//FPlatformMisc::ClipboardPaste(Dest);
+	FPlatformApplicationMisc::ClipboardPaste(Dest);
 }
 
 TArray< TSharedRef<class SWindow> > EngineApi::GetInteractiveTopLevelWindows()

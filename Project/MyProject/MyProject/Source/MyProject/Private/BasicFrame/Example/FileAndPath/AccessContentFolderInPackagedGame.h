@@ -17,7 +17,9 @@ class UAccessContentFolderInPackagedGame : public UBlueprintFunctionLibrary
 
 	static FORCEINLINE void GetContentPath()
 	{
+		// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 		//InstallDir/WindowsNoEditor/GameName/Content
-		const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameContentDir());
+		//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameContentDir());
+		const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectContentDir());
 	}
 };

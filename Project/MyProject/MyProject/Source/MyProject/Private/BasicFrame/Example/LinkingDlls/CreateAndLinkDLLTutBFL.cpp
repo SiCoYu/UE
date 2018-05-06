@@ -21,7 +21,9 @@ void *v_dllHandle;
 // Method to import a DLL.
 bool UCreateAndLinkDLLTutBFL::importDLL(FString folder, FString name)
 {
-	FString filePath = *FPaths::GamePluginsDir() + folder + "/" + name;
+	// UE 4.19.1 warning C4996: 'FPaths::GamePluginsDir': FPaths::GamePluginsDir() has been superseded by FPaths::ProjectPluginsDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//FString filePath = *FPaths::GamePluginsDir() + folder + "/" + name;
+	FString filePath = *FPaths::ProjectPluginsDir() + folder + "/" + name;
 	
 	if (FPaths::FileExists(filePath))
 	{

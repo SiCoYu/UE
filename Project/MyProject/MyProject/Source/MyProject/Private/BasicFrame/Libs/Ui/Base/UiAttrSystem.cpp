@@ -12,12 +12,12 @@ UiAttrSystem::UiAttrSystem()
 void UiAttrSystem::init()
 {
 	this->addItem(
-		NSFormId::eUITestUMG, 
+		NSFormId::eUiTestUMG, 
 		"WidgetBlueprint'/Game/MyAsset/Ui/UiTestUMG/UiTestUMG.UiTestUMG_C'", 
 		NSFormType::eUMG,
 		NSFormType::ePlayerController);
 	this->addItem(
-		NSFormId::eUIFunctionBar,
+		NSFormId::eUiFunctionBar,
 		"WidgetBlueprint'/Game/MyAsset/Ui/UiFunctionBar/UiFunctionBar.UiFunctionBar_C'",
 		NSFormType::eUMG,
 		NSFormType::ePlayerController);

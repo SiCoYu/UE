@@ -26,7 +26,7 @@ class UWindow : public UObject
 protected:
 	UiFormId mId;
 public:
-	WinRender* mGuiWin;      // 控件数据
+	WinRender* mWinRender;      // 控件数据
 protected:
 	bool mIsDraggable;
 
