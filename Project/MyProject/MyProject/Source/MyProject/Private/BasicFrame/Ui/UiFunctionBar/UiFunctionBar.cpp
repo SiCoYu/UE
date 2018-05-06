@@ -40,7 +40,20 @@ void UUiFunctionBar::onTestButtonTouch()
 	////UtilEngineWrap::SetClientTravel(UtilEngineWrap::GetWorld(), TEXT("/Game/MyAsset/Map/TestMap2"), TRAVEL_Absolute);
 	////UtilEngineWrap::ServerTravel(TEXT("/Game/MyAsset/Map/TestMap2?game=TDM?listen"));
 
-	GSceneSys->loadScene("/Game/MyAsset/Map/TestMap2", EventDispatchDelegate(this, &UUiFunctionBar::onLevelLoadedDispatch));
+	GSceneSys->loadScene(
+		"/Game/MyAsset/Map/TestMap2", 
+		EventDispatchDelegate(
+			this, 
+			&UUiFunctionBar::onLevelLoadedDispatch
+		)
+	);
+
+	//FScriptGeneratorPlugin& scriptGeneratorPlugin = FModuleManager::GetModuleChecked<FScriptGeneratorPlugin>("ScriptGeneratorPlugin");
+
+	//if (FScriptGeneratorPlugin.IsValid())
+	//{
+	//	scriptGeneratorPlugin.FinishExport();
+	//}
 }
 
 void UUiFunctionBar::onLevelLoaded()
