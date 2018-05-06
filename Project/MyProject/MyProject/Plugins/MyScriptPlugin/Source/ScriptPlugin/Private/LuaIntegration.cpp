@@ -4,8 +4,6 @@
 #include "ScriptPluginLog.h"
 #include "ScriptObjectReferencer.h"
 
-#define WITH_LUA
-
 #if WITH_LUA
 
 // Forward declaration - definition is in generated inl function.

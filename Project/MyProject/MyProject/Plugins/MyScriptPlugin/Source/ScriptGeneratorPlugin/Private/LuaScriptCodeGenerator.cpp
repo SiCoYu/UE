@@ -4,6 +4,9 @@
 #include "ScriptGeneratorLog.h"
 #include "UObject/ErrorException.h"
 
+// error C2027: use of undefined type 'UProperty'
+#include "UObject/UnrealType.h"		// UProperty
+
 // Supported structs
 static FName Name_Vector2D("Vector2D");
 static FName Name_Vector("Vector");

@@ -4,6 +4,9 @@
 #include "Misc/FileHelper.h"
 #include "ScriptGeneratorLog.h"
 
+// error C2027: use of undefined type 'UProperty'
+#include "UObject/UnrealType.h"		// UProperty
+
 FScriptCodeGeneratorBase::FScriptCodeGeneratorBase(const FString& InRootLocalPath, const FString& InRootBuildPath, const FString& InOutputDirectory, const FString& InIncludeBase)
 {
 	GeneratedCodePath = InOutputDirectory;

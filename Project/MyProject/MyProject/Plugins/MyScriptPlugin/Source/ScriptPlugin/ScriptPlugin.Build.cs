@@ -8,7 +8,12 @@ namespace UnrealBuildTool.Rules
 	{
 		public ScriptPlugin(ReadOnlyTargetRules Target) : base(Target)
 		{
-			PublicIncludePaths.AddRange(
+            PublicDefinitions.Add("WITH_LUA=1");
+            // error : All source files in module "ScriptPlugin" must include the same precompiled header first.
+            // To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to ScriptPlugin.build.cs.
+            PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+
+            PublicIncludePaths.AddRange(
 				new string[] {					
 					//"Programs/UnrealHeaderTool/Public",
 					// ... add other public include paths required here ...
