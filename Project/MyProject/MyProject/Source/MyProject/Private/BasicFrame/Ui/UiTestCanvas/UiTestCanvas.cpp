@@ -20,7 +20,7 @@ void UUiTestCanvas::onReady()
 	//loadNamedSlot();
 	//loadOverlay();
 	//loadCanvasWithNoCanvas();
-	//EngineApi::addEventHandle((UButton*)m_umgWidget->GetWidgetFromName("Button_32"), (UObject*)this, "OnConfirmGeneric");
+	//UtilEngineWrap::addEventHandle((UButton*)m_umgWidget->GetWidgetFromName("Button_32"), (UObject*)this, "OnConfirmGeneric");
 	//unloadCanvas();
 }
 
@@ -60,7 +60,7 @@ void UUiTestCanvas::loadCanvasWithNoCanvas()
 	UUserWidget* parentWidget = nullptr;
 	if (nullptr != widgetClass)
 	{
-		parentWidget = NewObject<UUserWidget>(EngineApi::GetGameInstance(), widgetClass);
+		parentWidget = NewObject<UUserWidget>(UtilEngineWrap::GetGameInstance(), widgetClass);
 		parentWidget->AddToViewport();
 	}
 
@@ -69,7 +69,7 @@ void UUiTestCanvas::loadCanvasWithNoCanvas()
 	widgetClass = StaticLoadClass(UUserWidget::StaticClass(), NULL, TEXT("/Game/UMG/UITestCanvas_NoCanvas.UITestCanvas_NoCanvas_C"));
 	if (nullptr != widgetClass)
 	{
-		childWidget = NewObject<UUserWidget>(EngineApi::GetGameInstance(), widgetClass);
+		childWidget = NewObject<UUserWidget>(UtilEngineWrap::GetGameInstance(), widgetClass);
 	}
 
 	if (nullptr != parentWidget && nullptr != childWidget)

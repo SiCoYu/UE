@@ -60,7 +60,7 @@ public:
 		mCompletionEvents.Add(TGraphTask<T>::CreateTask(NULL, ENamedThreads::GameThread).ConstructAndDispatchWhenReady());
 
 		mTimerDelegate = FTimerDelegate::CreateRaw(this, &MUe4Task<T>::onTaskDone);
-		EngineApi::GetWorldTimerManager().SetTimer(mOneSecTimerHandle, mTimerDelegate, 1, true);
+		UtilEngineWrap::GetWorldTimerManager().SetTimer(mOneSecTimerHandle, mTimerDelegate, 1, true);
 	}
 
 	void onTaskDone()

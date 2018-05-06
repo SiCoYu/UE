@@ -3,7 +3,7 @@
 #include "Form.h"
 #include "UiAttrSystem.h"
 #include "NotDestroyPath.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "UtilContainers.h"
 #include "UiLoadingItem.h"
 #include "Common.h"
@@ -87,12 +87,12 @@ void UiMgr::showFormInternal(UiFormId formId)
 		}
 		if (!win->IsVisible())
 		{
-			EngineApi::SetActive(win->mWinRender->mUiRoot, true);
+			UtilEngineWrap::SetActive(win->mWinRender->mUiRoot, true);
 			win->onShow();
 		}
 		else
 		{
-			EngineApi::SetActive(win->mWinRender->mUiRoot, true);
+			UtilEngineWrap::SetActive(win->mWinRender->mUiRoot, true);
 		}
 	}
 }
@@ -105,7 +105,7 @@ void UiMgr::hideFormInternal(UiFormId formId)
 	{
 		if (win->IsVisible())
 		{
-			EngineApi::SetActive(win->mWinRender->mUiRoot, false);
+			UtilEngineWrap::SetActive(win->mWinRender->mUiRoot, false);
 			win->onHide();
 		}
 	}
@@ -140,7 +140,7 @@ void UiMgr::exitFormInternal(UiFormId formId)
 		UtilMap::Remove(layer->getWinDic(), formId);
 		// 释放界面资源
 		win->onExit();
-		EngineApi::Destroy(win->mWinRender->mUiRoot);
+		UtilEngineWrap::Destroy(win->mWinRender->mUiRoot);
 		win->mWinRender->mUiRoot = nullptr;
 		// 释放加载的资源
 		//string path = mUiAttrSystem.getPath(formId);
@@ -148,7 +148,7 @@ void UiMgr::exitFormInternal(UiFormId formId)
 		//{
 		//    Ctx.m_instance.mResLoadMgr.unload(path);
 		//}
-		EngineApi::UnloadUnusedAssets();       // 异步卸载共用资源
+		UtilEngineWrap::UnloadUnusedAssets();       // 异步卸载共用资源
 		UtilMap::Remove(mId2FormDic, formId);
 		win = nullptr;
 	}
@@ -298,7 +298,7 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	}
 	else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
 	{
-		WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+		WidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
 	}
 	else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
 	{
@@ -321,11 +321,11 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//}
 
 	// 设置位置
-	//EngineApi::SetParent(mId2FormDic[formId]->mWinRender->mUiRoot.transform, mCanvasList[(int)(attrItem->mCanvasId)]->getLayerList()[(int)(attrItem->mLayerId)]->getLayerTrans(), false);
+	//UtilEngineWrap::SetParent(mId2FormDic[formId]->mWinRender->mUiRoot.transform, mCanvasList[(int)(attrItem->mCanvasId)]->getLayerList()[(int)(attrItem->mLayerId)]->getLayerTrans(), false);
 
 	// 先设置再设置缩放，否则无效
 	//mId2FormDic[formId]->mWinRender->mUiRoot.transform.SetAsLastSibling();               // 放在最后
-	EngineApi::SetActive(mId2FormDic[formId]->mWinRender->mUiRoot, false);      // 出发 onShow 事件
+	UtilEngineWrap::SetActive(mId2FormDic[formId]->mWinRender->mUiRoot, false);      // 出发 onShow 事件
 	//if (mId2FormDic[formId].hideOnCreate)
 	//{
 	//    UtilApi.SetActive(mId2FormDic[formId].mWinRender.mUiRoot, false);
@@ -360,7 +360,7 @@ void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 	UUMGWidget* WidgetObject = res->getWidgetObject();
 	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
 	this->mId2FormDic[formId]->mWinRender->mUiRoot = WidgetObject;
-	EngineApi::SetActive(mId2FormDic[formId]->mWinRender->mUiRoot, false);      // 出发 onShow 事件
+	UtilEngineWrap::SetActive(mId2FormDic[formId]->mWinRender->mUiRoot, false);      // 出发 onShow 事件
 
 	if (this->mId2FormDic[formId]->isVisible())
 	{

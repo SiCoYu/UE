@@ -1,9 +1,9 @@
 ﻿#include "MyProject.h"
 #include "LevelLoadItem.h"
 #include "ResLoadType.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "Common.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "MyDelegateDef.h"
 #include "ResEventDispatch.h"
 #include "NonRefCountResLoadResultNotify.h"
@@ -48,7 +48,7 @@ void LevelLoadItem::load()
 
 	if (nullptr == this->mMyDelegateLevelLoad)
 	{
-		this->mMyDelegateLevelLoad = EngineApi::NewObject<UMyDelegateLevelLoad>();
+		this->mMyDelegateLevelLoad = UtilEngineWrap::NewObject<UMyDelegateLevelLoad>();
 		//this->mMyDelegateLevelLoad->Add
 	}
 
@@ -94,9 +94,9 @@ void LevelLoadItem::loadFromAssetBundleByCoroutine()
 	// if (LinkInfo.LinkID != INDEX_NONE)
 	info.Linkage = 0;
 
-	EngineApi::LoadStreamLevel(GEngineData->getMainActor(), this->mLevelName, true, false, info);
-	//EngineApi::SetClientTravel(EngineApi::GetWorld(), TEXT("/Game/MyAsset/Map/TestMap2"), TRAVEL_Absolute);
-	//EngineApi::ServerTravel(TEXT("/Game/MyAsset/Map/TestMap2?game=TDM?listen"));
+	UtilEngineWrap::LoadStreamLevel(GEngineData->getMainActor(), this->mLevelName, true, false, info);
+	//UtilEngineWrap::SetClientTravel(UtilEngineWrap::GetWorld(), TEXT("/Game/MyAsset/Map/TestMap2"), TRAVEL_Absolute);
+	//UtilEngineWrap::ServerTravel(TEXT("/Game/MyAsset/Map/TestMap2?game=TDM?listen"));
 }
 
 void LevelLoadItem::loadFromAssetBundle()
@@ -112,9 +112,9 @@ void LevelLoadItem::loadFromAssetBundle()
 	// if (LinkInfo.LinkID != INDEX_NONE)
 	info.Linkage = 0;
 
-	EngineApi::LoadStreamLevel(GEngineData->getMainActor(), this->mLevelName, true, true, info);
-	//EngineApi::SetClientTravel(EngineApi::GetWorld(), TEXT("/Game/MyAsset/Map/TestMap2"), TRAVEL_Absolute);
-	//EngineApi::ServerTravel(TEXT("/Game/MyAsset/Map/TestMap2?game=TDM?listen"));
+	UtilEngineWrap::LoadStreamLevel(GEngineData->getMainActor(), this->mLevelName, true, true, info);
+	//UtilEngineWrap::SetClientTravel(UtilEngineWrap::GetWorld(), TEXT("/Game/MyAsset/Map/TestMap2"), TRAVEL_Absolute);
+	//UtilEngineWrap::ServerTravel(TEXT("/Game/MyAsset/Map/TestMap2?game=TDM?listen"));
 }
 
 void LevelLoadItem::assetAssetBundlesLevelLoaded(IDispatchObject* dispObj)

@@ -1,5 +1,5 @@
-#ifndef __EngineApi_H
-#define __EngineApi_H
+#ifndef __UtilEngineWrap_H
+#define __UtilEngineWrap_H
 
 // #include "Platform.h"
 #include "Core.h"		// "Platform.h" 已经包含在 "Core.h" 中了
@@ -55,7 +55,7 @@ DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
 #define GETTIMERELAPSED(handle) (GetWorldTimerManager().GetTimerElapsed(handle))
 
 
-class EngineApi
+class UtilEngineWrap
 {
 public:
 	static UMyGameInstanceBase* GetGameInstance();
@@ -332,7 +332,7 @@ public:
 	static void SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType);
 	static bool ServerTravel(const FString& InURL, bool bAbsolute = false, bool bShouldSkipGameNotify = false);
 
-	static UMyLocalPlayerBase* EngineApi::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId);
+	static UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId);
 
 	static int GetNumLocalPlayers();
 
@@ -372,6 +372,6 @@ public:
 	static bool requiresCookedData();
 };
 
-#include "EngineApi.inl"
+#include "UtilEngineWrap.inl"
 
 #endif				// __ENGINEAPI_H

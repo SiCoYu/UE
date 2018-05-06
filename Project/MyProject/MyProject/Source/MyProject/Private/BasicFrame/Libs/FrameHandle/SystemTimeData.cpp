@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "SystemTimeData.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 
 SystemTimeData::SystemTimeData()
 {
@@ -40,7 +40,7 @@ void SystemTimeData::setCurTime(long value)
 
 void SystemTimeData::nextFrame()
 {
-	this->mCurTime = EngineApi::getUTCSec();
+	this->mCurTime = UtilEngineWrap::getUTCSec();
 
 	if (this->mPreTime != 0.0f)     // 第一帧跳过，因为这一帧不好计算间隔
 	{

@@ -136,7 +136,7 @@ void AMyCharacterBase::BeginPlay()
 	GEngineData->setMainActor(this);
 
 	// 各种初始化
-	//EngineApi::showCursor();
+	//UtilEngineWrap::showCursor();
 
 	// 各种 UI 测试
 	//TestUI();

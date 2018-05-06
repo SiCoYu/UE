@@ -4,7 +4,7 @@
 #include "UObject/SoftObjectPath.h"	// FStringAssetReference
 #include "UtilStr.h"
 #include <string>
-#include "EngineApi.h"	// isMultithreaded
+#include "UtilEngineWrap.h"	// isMultithreaded
 #include "MyStreamableManager.h"
 //#include "Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread ,这个目录是错误的，需要如下目录
 // UE4 4.17 这个会导致链接错误
@@ -69,6 +69,6 @@ bool FMyStreamableManager::IsMultithreaded()
 	//const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
 	//return bIsMultithreaded;
 	
-	//return EngineApi::isMultithreaded();
-	return EngineApi::isInAsyncLoadingThread();
+	//return UtilEngineWrap::isMultithreaded();
+	return UtilEngineWrap::isInAsyncLoadingThread();
 }

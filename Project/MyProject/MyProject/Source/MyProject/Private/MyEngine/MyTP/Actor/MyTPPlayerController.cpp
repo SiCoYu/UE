@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "MyTPPlayerController.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "MyFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
@@ -31,7 +31,7 @@ AMyTPPlayerController::AMyTPPlayerController(const FObjectInitializer& ObjectIni
 //	BeginPlay_UMGWidgets();
 //
 //	// 各种初始化
-//	//EngineApi::showCursor();
+//	//UtilEngineWrap::showCursor();
 //
 //	// 各种 UI 测试
 //	//TestUI();
@@ -334,5 +334,5 @@ AMyTPPlayerController::AMyTPPlayerController(const FObjectInitializer& ObjectIni
 //	//GetWorldTimerManager().SetTimer(this,
 //	//	&AMyPlayerController::VictoryCheckAllThreadsDone, 1, true);
 //	FTimerDelegate TimerDelegate = FTimerDelegate::CreateUObject(this, &AMyPlayerController::VictoryCheckAllThreadsDone);
-//	EngineApi::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 1, true);
+//	UtilEngineWrap::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 1, true);
 //}

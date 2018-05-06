@@ -1,13 +1,13 @@
 #include "MyProject.h"
 #include "stNullUserCmd.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "ByteBuffer.h"
 
 void stNullUserCmd::serialize(ByteBuffer* bu)
 {
 	bu->writeUnsignedInt8(byCmd);
 	bu->writeUnsignedInt8(byParam);
-	dwTimestamp = EngineApi::getUTCSec();
+	dwTimestamp = UtilEngineWrap::getUTCSec();
 	bu->writeUnsignedInt32(dwTimestamp);
 }
 

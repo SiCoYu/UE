@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "ObjectAssetInsResBase.h"
 #include "ResItem.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "Common.h"
 #include "ResInsEventDispatch.h"
 #include "MyGameInstanceBase.h"
@@ -34,7 +34,7 @@ UObject* ObjectAssetInsResBase::InstantiateObject(std::string resName, bool isSe
 	}
 	else
 	{
-		this->mRetGO = EngineApi::NewObject<UObject>(EngineApi::GetGameInstance(), Cast<UClass>(this->mGo));
+		this->mRetGO = UtilEngineWrap::NewObject<UObject>(UtilEngineWrap::GetGameInstance(), Cast<UClass>(this->mGo));
 
 		if (nullptr == mRetGO)
 		{
@@ -66,7 +66,7 @@ void ObjectAssetInsResBase::unload()
 	{
 		//UtilApi.UnloadAsset(mGo);      // 强制卸载资源数据
 		//UtilApi.DestroyImmediate(mGo, true);
-		EngineApi::UnloadUnusedAssets();
+		UtilEngineWrap::UnloadUnusedAssets();
 		this->mGo = nullptr;
 	}
 

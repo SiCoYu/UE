@@ -5,7 +5,7 @@
 
 #include "Logging/LogMacros.h"
 #include "EngineGlobals.h"	// GEngine
-#include "EngineApi.h"		// GetWorld
+#include "UtilEngineWrap.h"		// GetWorld
 #include "Engine/EngineBaseTypes.h"	// NM_Client
 #include "UnrealString.h"		// FString
 #include "Math/Color.h"	// FColor::White
@@ -58,10 +58,10 @@
  * @brief https://wiki.unrealengine.com/Logs,_Printing_the_Class_Name,_Function_Name,_Line_Number_of_your_Calling_Code!
  */
 
-#define MLogMacro_NETMODE_WORLD (((GEngine == nullptr) || (EngineApi::GetWorld() == nullptr)) ? TEXT("") \
-        : (GEngine->GetNetMode(EngineApi::GetWorld()) == NM_Client) ? TEXT("[Client] ") \
-        : (GEngine->GetNetMode(EngineApi::GetWorld()) == NM_ListenServer) ? TEXT("[ListenServer] ") \
-        : (GEngine->GetNetMode(EngineApi::GetWorld()) == NM_DedicatedServer) ? TEXT("[DedicatedServer] ") \
+#define MLogMacro_NETMODE_WORLD (((GEngine == nullptr) || (UtilEngineWrap::GetWorld() == nullptr)) ? TEXT("") \
+        : (GEngine->GetNetMode(UtilEngineWrap::GetWorld()) == NM_Client) ? TEXT("[Client] ") \
+        : (GEngine->GetNetMode(UtilEngineWrap::GetWorld()) == NM_ListenServer) ? TEXT("[ListenServer] ") \
+        : (GEngine->GetNetMode(UtilEngineWrap::GetWorld()) == NM_DedicatedServer) ? TEXT("[DedicatedServer] ") \
         : TEXT("[Standalone] "))
 
 #if _MSC_VER

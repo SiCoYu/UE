@@ -5,7 +5,7 @@
 #include "INetMgr.h"
 #include "UiMgr.h"
 #include "NetMgr.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "TableSys.h"
 #include "ShareData.h"
 #include "NetDispList.h"
@@ -137,7 +137,7 @@ void Ctx::construct()
 	// 最后初始化 BluePrint 数据
 	// 这个时候还没有获取 GEngineData->getMainActor() ，使用会报错
 	//UClass *bpCtxClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx_C"), NULL, LOAD_None, NULL);
-	//UGameInstance* pGameIns = (UGameInstance*)EngineApi::GetGameInstance();
+	//UGameInstance* pGameIns = (UGameInstance*)UtilEngineWrap::GetGameInstance();
 	//this->mBPCtx = MySharedPtr<UMyBluePrintBase>(::NewObject<UMyBluePrintBase>(pGameIns, bpCtxClass, FName("UMySingletonBP")));
 	//FString cmd = TEXT("init");
 	//FOutputDeviceDebug device;
@@ -175,7 +175,7 @@ void Ctx::init()
 	this->addEventHandle();
 
 	// 挂在目录
-	EngineApi::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
+	UtilEngineWrap::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
 }
 
 void Ctx::dispose()
@@ -267,7 +267,7 @@ void Ctx::beginPlay()
 		//testApi();
 
 		//GCtx->setUiMgr(new UIManager());
-		//GCtx->setEngineApi(new EngineApi());
+		//GCtx->setEngineApi(new UtilEngineWrap());
 		//GCtx->setNetMgr(new NetMgr(Ctx::getSingletonPtr()->getStdLog()));
 
 		// test
@@ -283,7 +283,7 @@ void Ctx::beginPlay()
 
 		// 最后初始化 BluePrint 数据
 		UClass *bpCtxClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx_C"), NULL, LOAD_None, NULL);
-		UGameInstance* pGameIns = (UGameInstance*)EngineApi::GetGameInstance();
+		UGameInstance* pGameIns = (UGameInstance*)UtilEngineWrap::GetGameInstance();
 		this->mBPCtx = MySharedPtr<UMyBluePrintBase>(::NewObject<UMyBluePrintBase>(pGameIns, bpCtxClass, FName("UMyBluePrintBase")));
 		FString cmd = TEXT("init");
 		FOutputDeviceDebug device;
@@ -473,5 +473,5 @@ void Ctx::addEventHandle()
 
 void Ctx::testApi()
 {
-	EngineApi::GameUserDir();
+	UtilEngineWrap::GameUserDir();
 }

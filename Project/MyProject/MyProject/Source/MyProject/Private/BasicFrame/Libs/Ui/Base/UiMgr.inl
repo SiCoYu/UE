@@ -2,7 +2,7 @@
 #error "UiMgr.inl file can only include in UiMgr.h"
 #endif
 
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "ClassAssetInsRes.h"
 #include "Common.h"
 
@@ -15,7 +15,7 @@
 //		//m_id2Form[formID] = Cast<UFormBase>(StaticConstructObject(T::StaticClass()));
 //		//mId2FormDic[formID] = Cast<UForm>(NewObject<T>());
 //
-//		this->mId2FormDic[formID] = EngineApi::MNewObject<T>();
+//		this->mId2FormDic[formID] = UtilEngineWrap::MNewObject<T>();
 //	}
 //
 //	this->mId2FormDic[formID]->onReady();
@@ -51,8 +51,8 @@ T* UiMgr::loadForm(UiFormId formId)
 		//	form = Ctx.m_instance.m_scriptDynLoad.getScriptObject(attrItem.m_scriptTypeName) as Form;
 		//}
 
-		//TSubclassOf<UUMGWidget> WidgetClass = EngineApi::FindClass<UUMGWidget>(*UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
-		//UClass* WidgetClass = EngineApi::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
+		//TSubclassOf<UUMGWidget> WidgetClass = UtilEngineWrap::FindClass<UUMGWidget>(*UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
+		//UClass* WidgetClass = UtilEngineWrap::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
 		//UClass* WidgetClass = GMyStreamableManager->SynchronousLoadType<UClass>(attrItem->mWidgetPath);
 
 		//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", EventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
@@ -68,7 +68,7 @@ T* UiMgr::loadForm(UiFormId formId)
 		//}
 		//else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
 		//{
-		//	WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+		//	WidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
 		//}
 		//else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
 		//{
@@ -76,7 +76,7 @@ T* UiMgr::loadForm(UiFormId formId)
 		//}
 
 		//WidgetObject->AddToViewport();
-		form = EngineApi::NewObject<T>();
+		form = UtilEngineWrap::NewObject<T>();
 
 		if (nullptr != form)                   // 如果代码已经在本地
 		{

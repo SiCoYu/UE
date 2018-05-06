@@ -2,7 +2,7 @@
 #include "UiFunctionBar.h"
 #include "UtilApi.h"
 #include "FunctionBarCV.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "Common.h"
 #include "Engine/LatentActionManager.h"
 #include "IDispatchObject.h"
@@ -36,9 +36,9 @@ void UUiFunctionBar::onTestButtonTouch()
 	//// if (LinkInfo.LinkID != INDEX_NONE)
 	//info.Linkage = 0;
 
-	//EngineApi::LoadStreamLevel(GEngineData->getMainActor(), "/Game/MyAsset/Map/TestMap2", true, true, info);
-	////EngineApi::SetClientTravel(EngineApi::GetWorld(), TEXT("/Game/MyAsset/Map/TestMap2"), TRAVEL_Absolute);
-	////EngineApi::ServerTravel(TEXT("/Game/MyAsset/Map/TestMap2?game=TDM?listen"));
+	//UtilEngineWrap::LoadStreamLevel(GEngineData->getMainActor(), "/Game/MyAsset/Map/TestMap2", true, true, info);
+	////UtilEngineWrap::SetClientTravel(UtilEngineWrap::GetWorld(), TEXT("/Game/MyAsset/Map/TestMap2"), TRAVEL_Absolute);
+	////UtilEngineWrap::ServerTravel(TEXT("/Game/MyAsset/Map/TestMap2?game=TDM?listen"));
 
 	GSceneSys->loadScene("/Game/MyAsset/Map/TestMap2", EventDispatchDelegate(this, &UUiFunctionBar::onLevelLoadedDispatch));
 }

@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "Common.h"
 #include "EngineData.h"
 #include "MyGameEngineBase.h"
@@ -24,12 +24,12 @@
 
 DEFINE_LOG_CATEGORY(MyLog);
 
-UMyGameInstanceBase* EngineApi::GetGameInstance()
+UMyGameInstanceBase* UtilEngineWrap::GetGameInstance()
 {
 	return Cast<UMyGameInstanceBase>(UGameplayStatics::GetGameInstance(GEngineData->getMainActor()));
 }
 
-UWorld* EngineApi::GetWorld()
+UWorld* UtilEngineWrap::GetWorld()
 {
 	// UE4 4.17
 	// warning C4996: 'UEngine::GetWorldFromContextObject': GetWorldFromContextObject(Object) and GetWorldFromContextObject(Object, boolean) are replaced by GetWorldFromContextObject(Object, Enum) or GetWorldFromContextObjectChecked(Object) Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
@@ -38,7 +38,7 @@ UWorld* EngineApi::GetWorld()
 	return World;
 }
 
-void EngineApi::showCursor()
+void UtilEngineWrap::showCursor()
 {
 	UWorld* World = GetWorld();
 	if (World)
@@ -48,38 +48,38 @@ void EngineApi::showCursor()
 	FSlateApplication::Get().GetPlatformApplication()->Cursor->Show(true);
 }
 
-void EngineApi::addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName)
+void UtilEngineWrap::addEventHandle(UButton* pBtn, UObject* pFuncObj, FName funcName)
 {
 	TScriptDelegate<FWeakObjectPtr> ptrDelegate;
 	ptrDelegate.BindUFunction(pFuncObj, funcName);
 	pBtn->OnClicked.Add(ptrDelegate);
 }
 
-UMyGameEngineBase* EngineApi::getEngine()
+UMyGameEngineBase* UtilEngineWrap::getEngine()
 {
 	return Cast<UMyGameEngineBase>(GEngine);
 }
 
-UMyGameInstanceBase* EngineApi::getMyGameInstanceByEngine()
+UMyGameInstanceBase* UtilEngineWrap::getMyGameInstanceByEngine()
 {
 	UMyGameEngineBase* pUMyEngine = Cast<UMyGameEngineBase>(GEngine);
 	UMyGameInstanceBase* const GI = Cast<UMyGameInstanceBase>(pUMyEngine->GameInstance);
 	return GI;
 }
 
-UWorld* EngineApi::getWorldByEngine()
+UWorld* UtilEngineWrap::getWorldByEngine()
 {
 	UMyGameInstanceBase* pUMyProjectGameInstance = getMyGameInstanceByEngine();
 	UWorld* const World = pUMyProjectGameInstance->GetWorld();
 	return World;
 }
 
-UMyGameInstanceBase* EngineApi::getMyGameInstanceByController()
+UMyGameInstanceBase* UtilEngineWrap::getMyGameInstanceByController()
 {
 	return Cast<UMyGameInstanceBase>(GEngineData->getMainPlayerController()->GetGameInstance());
 }
 
-ACharacter* EngineApi::getFirstCharacter()
+ACharacter* UtilEngineWrap::getFirstCharacter()
 {
 	ACharacter* Character = nullptr;
 	APlayerController* PC = nullptr;
@@ -96,91 +96,91 @@ ACharacter* EngineApi::getFirstCharacter()
 	return Character;
 }
 
-AMyPlayerControllerBase* EngineApi::GetPlayerController()
+AMyPlayerControllerBase* UtilEngineWrap::GetPlayerController()
 {
 	AMyPlayerControllerBase* TargetPC = Cast<AMyPlayerControllerBase>(UGameplayStatics::GetPlayerController(GEngineData->getMainActor(), 0));
 	return TargetPC;
 }
 
-FWorldContext* EngineApi::GetWorldContextByGameInstance()
+FWorldContext* UtilEngineWrap::GetWorldContextByGameInstance()
 {
-	UMyGameInstanceBase* GameInstance = EngineApi::GetGameInstance();
+	UMyGameInstanceBase* GameInstance = UtilEngineWrap::GetGameInstance();
 	FWorldContext* const PieWorldContext = GameInstance->GetWorldContext();
 	return PieWorldContext;
 }
 
-UWorld* EngineApi::GetWorldByWorldContext()
+UWorld* UtilEngineWrap::GetWorldByWorldContext()
 {
-	FWorldContext* PieWorldContext = EngineApi::GetWorldContextByGameInstance();
+	FWorldContext* PieWorldContext = UtilEngineWrap::GetWorldContextByGameInstance();
 	UWorld* PlayWorld = PieWorldContext->World();
 	return PlayWorld;
 }
 
-UMyGameInstanceBase* EngineApi::GetGameInstanceByWorld()
+UMyGameInstanceBase* UtilEngineWrap::GetGameInstanceByWorld()
 {
-	UWorld* NewWorld = EngineApi::GetWorld();
+	UWorld* NewWorld = UtilEngineWrap::GetWorld();
 	UMyGameInstanceBase* GameInstance = Cast<UMyGameInstanceBase>(NewWorld->GetGameInstance());
 	return GameInstance;
 }
 
-UMyLocalPlayerBase* EngineApi::GetLocalPlayerByPlayerController()
+UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerByPlayerController()
 {
-	AMyPlayerControllerBase* Controller = EngineApi::GetPlayerController();
+	AMyPlayerControllerBase* Controller = UtilEngineWrap::GetPlayerController();
 	UMyLocalPlayerBase* Player = Cast<UMyLocalPlayerBase>(Controller->Player);
 	return Player;
 }
 
-ULevel* EngineApi::getCurrentLevelFromWorld()
+ULevel* UtilEngineWrap::getCurrentLevelFromWorld()
 {
-	UWorld* world = EngineApi::GetWorld();
+	UWorld* world = UtilEngineWrap::GetWorld();
 	ULevel* currentLevel = world->GetCurrentLevel();
 	return currentLevel;
 }
 
-ULevel* EngineApi::getPersistentLevelFromWorld()
+ULevel* UtilEngineWrap::getPersistentLevelFromWorld()
 {
-	UWorld* world = EngineApi::GetWorld();
+	UWorld* world = UtilEngineWrap::GetWorld();
 	//ULevel* persistentLevel = world->GetPersistentLevel();
 	ULevel* persistentLevel = nullptr;
 	return persistentLevel;
 }
 
-UGameInstance* EngineApi::getGameInstanceFromWorld()
+UGameInstance* UtilEngineWrap::getGameInstanceFromWorld()
 {
-	UWorld* world = EngineApi::GetWorld();
+	UWorld* world = UtilEngineWrap::GetWorld();
 	UGameInstance* gameInstance = world->GetGameInstance();
 	return gameInstance;
 }
 
-TArray<AActor*>& EngineApi::getActorArrayFromCurrentLevel()
+TArray<AActor*>& UtilEngineWrap::getActorArrayFromCurrentLevel()
 {
-	ULevel* currentLevel = EngineApi::getCurrentLevelFromWorld();
+	ULevel* currentLevel = UtilEngineWrap::getCurrentLevelFromWorld();
 	TArray<AActor*>& actors = currentLevel->Actors;
 	return actors;
 }
 
-float EngineApi::getUTCSec()
+float UtilEngineWrap::getUTCSec()
 {
 	//return g_pEngineApi->getWorld()->GetRealTimeSeconds();
-	return EngineApi::GetWorld()->GetTimeSeconds();
+	return UtilEngineWrap::GetWorld()->GetTimeSeconds();
 }
 
-float EngineApi::GetRealTimeSeconds()
+float UtilEngineWrap::GetRealTimeSeconds()
 {
-	return EngineApi::GetWorld()->GetRealTimeSeconds();
+	return UtilEngineWrap::GetWorld()->GetRealTimeSeconds();
 }
 
-void EngineApi::InsertMountPoint(const FString& RootPath, const FString& ContentPath)
+void UtilEngineWrap::InsertMountPoint(const FString& RootPath, const FString& ContentPath)
 {
 	FPackageName::RegisterMountPoint(RootPath, ContentPath);
 }
 
-bool EngineApi::FileExists(const FString& InPath)
+bool UtilEngineWrap::FileExists(const FString& InPath)
 {
 	return FPaths::FileExists(InPath);
 }
 
-bool EngineApi::PackageExists(const FString& InPackageFilename)
+bool UtilEngineWrap::PackageExists(const FString& InPackageFilename)
 {
 	//FString fileName = FPackageName::LongPackageNameToFilename(InPackageFilename);	// 转换包的名字到相对当前工作目录的目录
 	//FString OutFilename;
@@ -188,14 +188,14 @@ bool EngineApi::PackageExists(const FString& InPackageFilename)
 	return FPackageName::DoesPackageExist(InPackageFilename);
 }
 
-FString EngineApi::GameUserDir()
+FString UtilEngineWrap::GameUserDir()
 {
 	// warning C4996: 'FPaths::GameUserDir': FPaths::GameUserDir() has been superseded by FPaths::ProjectUserDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//return FPaths::GameUserDir();
 	return FPaths::ProjectUserDir();
 }
 
-void EngineApi::SetActive(UWidget* target, bool bshow)
+void UtilEngineWrap::SetActive(UWidget* target, bool bshow)
 {
 	if (nullptr != target)
 	{
@@ -216,62 +216,62 @@ void EngineApi::SetActive(UWidget* target, bool bshow)
 	}
 }
 
-void EngineApi::Destroy(UWidget* obj)
+void UtilEngineWrap::Destroy(UWidget* obj)
 {
 
 }
 
-void EngineApi::UnloadUnusedAssets()
+void UtilEngineWrap::UnloadUnusedAssets()
 {
 
 }
 
-void EngineApi::SetParent(UWidget*child, UPanelWidget* parent, bool worldPositionStays)
+void UtilEngineWrap::SetParent(UWidget*child, UPanelWidget* parent, bool worldPositionStays)
 {
 	parent->AddChild(child);
 }
 
-void EngineApi::SetContentForSlot(UUserWidget* userWidget, FName SlotName, UWidget* Content)
+void UtilEngineWrap::SetContentForSlot(UUserWidget* userWidget, FName SlotName, UWidget* Content)
 {
 	userWidget->SetContentForSlot(SlotName, Content);
 }
 
-//void EngineApi::ConvertString(const FString& Source, icu::UnicodeString& Destination, const bool ShouldNullTerminate)
+//void UtilEngineWrap::ConvertString(const FString& Source, icu::UnicodeString& Destination, const bool ShouldNullTerminate)
 //{
 //	ICUUtilities::ConvertString(Source, Destination, ShouldNullTerminate);
 //}
 
-bool EngineApi::LineTraceSingleByChannel(UWorld* World, struct FHitResult& OutHit, const FVector& Start, const FVector& End, ECollisionChannel TraceChannel, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
+bool UtilEngineWrap::LineTraceSingleByChannel(UWorld* World, struct FHitResult& OutHit, const FVector& Start, const FVector& End, ECollisionChannel TraceChannel, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
 {
 	return World->LineTraceSingleByChannel(OutHit, Start, End, TraceChannel, Params, ResponseParam);
 }
 
-bool EngineApi::SweepTestByChannel(UWorld* World, const FVector& Start, const FVector& End, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
+bool UtilEngineWrap::SweepTestByChannel(UWorld* World, const FVector& Start, const FVector& End, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
 {
 	return World->SweepTestByChannel(Start, End, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
 }
 
-bool EngineApi::OverlapBlockingTestByChannel(UWorld* World, const FVector& Pos, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
+bool UtilEngineWrap::OverlapBlockingTestByChannel(UWorld* World, const FVector& Pos, const FQuat& Rot, ECollisionChannel TraceChannel, const FCollisionShape& CollisionShape, const FCollisionQueryParams& Params, const FCollisionResponseParams& ResponseParam)
 {
 	return World->OverlapBlockingTestByChannel(Pos, Rot, TraceChannel, CollisionShape, Params, ResponseParam);
 }
 
-float EngineApi::GetAxisValue(UInputComponent* pUInputComponent, const FName AxisName)
+float UtilEngineWrap::GetAxisValue(UInputComponent* pUInputComponent, const FName AxisName)
 {
 	return pUInputComponent->GetAxisValue(AxisName);
 }
 
-float EngineApi::GetInputAxisValue(AActor* pAActor, const FName InputAxisName)
+float UtilEngineWrap::GetInputAxisValue(AActor* pAActor, const FName InputAxisName)
 {
 	return pAActor->GetInputAxisValue(InputAxisName);
 }
 
-float EngineApi::GetInputAxisValue(const FName InputAxisName)
+float UtilEngineWrap::GetInputAxisValue(const FName InputAxisName)
 {
 	return GEngineData->getMainActor()->GetInputAxisValue(InputAxisName);
 }
 
-FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
+FTransform& UtilEngineWrap::getTransform(USceneComponent* pUSceneComponent)
 {
 	// UE4 4.17
 	// warning C4996: 'USceneComponent::ComponentToWorld': ComponentToWorld will be made private, use GetComponentTransform() instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
@@ -279,13 +279,13 @@ FTransform& EngineApi::getTransform(USceneComponent* pUSceneComponent)
 	return (FTransform&)pUSceneComponent->GetComponentTransform();
 }
 
-void EngineApi::LaunchURL(FString url)
+void UtilEngineWrap::LaunchURL(FString url)
 {
 	FString TheURL = "http://www.google.com/";
 	FPlatformProcess::LaunchURL(*TheURL, nullptr, nullptr);
 }
 
-bool EngineApi::isValid(UObject* pObj)
+bool UtilEngineWrap::isValid(UObject* pObj)
 {
 	if (pObj && pObj->IsValidLowLevel())
 	{
@@ -295,7 +295,7 @@ bool EngineApi::isValid(UObject* pObj)
 	return false;
 }
 
-float EngineApi::DistanceOfActorToThisMeshSurface(UStaticMeshComponent* StaticMeshComponent, AActor* TestActor, FVector& ClosestSurfacePoint) const
+float UtilEngineWrap::DistanceOfActorToThisMeshSurface(UStaticMeshComponent* StaticMeshComponent, AActor* TestActor, FVector& ClosestSurfacePoint) const
 {
 	if (!TestActor) return 0;
 	if (!TestActor->IsValidLowLevel()) return 0;
@@ -307,7 +307,7 @@ float EngineApi::DistanceOfActorToThisMeshSurface(UStaticMeshComponent* StaticMe
 		);
 }
 
-void EngineApi::SetMassScale(UStaticMeshComponent* StaticMeshComponent, const float& NewScale)
+void UtilEngineWrap::SetMassScale(UStaticMeshComponent* StaticMeshComponent, const float& NewScale)
 {
 	if (!StaticMeshComponent) return;
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -324,12 +324,12 @@ void EngineApi::SetMassScale(UStaticMeshComponent* StaticMeshComponent, const fl
 	BodyInst->UpdateMassProperties();
 }
 
-ALevelScriptActor* EngineApi::GetLevelScriptActor(ULevel* OwnerLevel) const
+ALevelScriptActor* UtilEngineWrap::GetLevelScriptActor(ULevel* OwnerLevel) const
 {
 	return GetWorld()->GetLevelScriptActor(OwnerLevel);
 }
 
-void EngineApi::GetDisplayAdapterScreenResolutions(FScreenResolutionArray& Resolutions)
+void UtilEngineWrap::GetDisplayAdapterScreenResolutions(FScreenResolutionArray& Resolutions)
 {
 	if (RHIGetAvailableResolutions(Resolutions, false))
 	{
@@ -345,7 +345,7 @@ void EngineApi::GetDisplayAdapterScreenResolutions(FScreenResolutionArray& Resol
 	}
 }
 
-bool EngineApi::IsTextValid(FText MyText)
+bool UtilEngineWrap::IsTextValid(FText MyText)
 {
 	if (MyText.IsEmpty())
 	{
@@ -354,13 +354,13 @@ bool EngineApi::IsTextValid(FText MyText)
 	return false;
 }
 
-void EngineApi::ClientMessage(FString str)
+void UtilEngineWrap::ClientMessage(FString str)
 {
 	GEngineData->getMainPlayerController()->ClientMessage(str);
 }
 
 // FText::Format
-void EngineApi::Format()
+void UtilEngineWrap::Format()
 {
 	// {key} 通过 key 查找值
 	//Set Formatted FTEXT from variable data.
@@ -393,41 +393,41 @@ void EngineApi::Format()
 	const FText OrderHealth = FText::Format(NSLOCTEXT("Solus","HP","HP {1}"),  Args);
 }
 
-FString EngineApi::GetWorldAssetPackageName(ULevelStreaming* StreamedLevel)
+FString UtilEngineWrap::GetWorldAssetPackageName(ULevelStreaming* StreamedLevel)
 {
 	return StreamedLevel->GetWorldAssetPackageName();
 }
 
-float EngineApi::GetTimeSeconds()
+float UtilEngineWrap::GetTimeSeconds()
 {
 	return GetWorld()->GetTimeSeconds();
 }
 
-FTimerManager& EngineApi::GetWorldTimerManager()
+FTimerManager& UtilEngineWrap::GetWorldTimerManager()
 {
 	return GetWorld()->GetTimerManager();
 }
 
-void EngineApi::AddReferencedObjects(UObject* InThis, FReferenceCollector& Collector)
+void UtilEngineWrap::AddReferencedObjects(UObject* InThis, FReferenceCollector& Collector)
 {
 	AActor::AddReferencedObjects(InThis, Collector);
 }
 
-ULevel* EngineApi::GetLevel(AActor* actor)
+ULevel* UtilEngineWrap::GetLevel(AActor* actor)
 { 
 	return Cast<ULevel>(actor->GetOuter());
 }
 
-void EngineApi::ExecuteConsoleCommand(const FString& Command)
+void UtilEngineWrap::ExecuteConsoleCommand(const FString& Command)
 {
-	APlayerController* TargetPC = EngineApi::GetPlayerController();
+	APlayerController* TargetPC = UtilEngineWrap::GetPlayerController();
 	if (TargetPC)
 	{
 		TargetPC->ConsoleCommand(Command, true);
 	}
 }
 
-void EngineApi::AddToViewport(UUserWidget* userWidget)
+void UtilEngineWrap::AddToViewport(UUserWidget* userWidget)
 {
 	if (nullptr != userWidget)
 	{
@@ -435,57 +435,57 @@ void EngineApi::AddToViewport(UUserWidget* userWidget)
 	}
 }
 
-void EngineApi::ClipboardCopy(const TCHAR* Str)
+void UtilEngineWrap::ClipboardCopy(const TCHAR* Str)
 {
 	// UE 4.19.1 warning C4996: 'FGenericPlatformMisc::ClipboardCopy': FPlatformMisc::ClipboardCopy() has been superseded by FPlatformApplicationMisc::ClipboardCopy() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//FPlatformMisc::ClipboardCopy(Str);
 	FPlatformApplicationMisc::ClipboardCopy(Str);
 }
 
-void EngineApi::ClipboardPaste(class FString& Dest)
+void UtilEngineWrap::ClipboardPaste(class FString& Dest)
 {
 	// UE 4.19.1 warning C4996: 'FGenericPlatformMisc::ClipboardPaste': FPlatformMisc::ClipboardPaste() has been superseded by FPlatformApplicationMisc::ClipboardPaste() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//FPlatformMisc::ClipboardPaste(Dest);
 	FPlatformApplicationMisc::ClipboardPaste(Dest);
 }
 
-TArray< TSharedRef<class SWindow> > EngineApi::GetInteractiveTopLevelWindows()
+TArray< TSharedRef<class SWindow> > UtilEngineWrap::GetInteractiveTopLevelWindows()
 {
 	return FSlateApplication::Get().GetInteractiveTopLevelWindows();
 }
 
-bool EngineApi::FindPathToWidget(TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter)
+bool UtilEngineWrap::FindPathToWidget(TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter)
 {
 	return FSlateApplication::Get().FindPathToWidget(InWidget, OutWidgetPath, VisibilityFilter);
 }
 
-bool EngineApi::FindPathToWidget(const TArray<TSharedRef<SWindow>>& WindowsToSearch, TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter)
+bool UtilEngineWrap::FindPathToWidget(const TArray<TSharedRef<SWindow>>& WindowsToSearch, TSharedRef<const SWidget> InWidget, FWidgetPath& OutWidgetPath, EVisibility VisibilityFilter)
 {
-	return FSlateWindowHelper::FindPathToWidget(EngineApi::GetInteractiveTopLevelWindows(), InWidget, OutWidgetPath, VisibilityFilter);
+	return FSlateWindowHelper::FindPathToWidget(UtilEngineWrap::GetInteractiveTopLevelWindows(), InWidget, OutWidgetPath, VisibilityFilter);
 }
 
-bool EngineApi::SetKeyboardFocus(const TSharedPtr<SWidget>& OptionalWidgetToFocus, EFocusCause ReasonFocusIsChanging)
+bool UtilEngineWrap::SetKeyboardFocus(const TSharedPtr<SWidget>& OptionalWidgetToFocus, EFocusCause ReasonFocusIsChanging)
 {
 	return FSlateApplication::Get().SetKeyboardFocus(OptionalWidgetToFocus, ReasonFocusIsChanging);
 }
 
-void EngineApi::SetUserFocusToGameViewport(uint32 UserIndex, EFocusCause ReasonFocusIsChanging)
+void UtilEngineWrap::SetUserFocusToGameViewport(uint32 UserIndex, EFocusCause ReasonFocusIsChanging)
 {
 	FSlateApplication::Get().SetUserFocusToGameViewport(UserIndex, ReasonFocusIsChanging);
 }
 
-int32 EngineApi::GetUserIndexForKeyboard()
+int32 UtilEngineWrap::GetUserIndexForKeyboard()
 {
 	return FSlateApplication::Get().GetUserIndexForKeyboard();
 }
 
-FString EngineApi::UrlEncode(const FString& UnencodedString)
+FString UtilEngineWrap::UrlEncode(const FString& UnencodedString)
 {
 	//return FPlatformHttp::UrlEncode(UnencodedString);
 	return "";
 }
 
-//bool EngineApi::OpenLauncher(const FOpenLauncherOptions& Options)
+//bool UtilEngineWrap::OpenLauncher(const FOpenLauncherOptions& Options)
 //{
 //	FString CrashedAppPathUri;
 //	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
@@ -494,12 +494,12 @@ FString EngineApi::UrlEncode(const FString& UnencodedString)
 //	DesktopPlatform->OpenLauncher(OpenOptions);
 //}
 
-FProcHandle EngineApi::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild)
+FProcHandle UtilEngineWrap::CreateProc(const TCHAR* URL, const TCHAR* Parms, bool bLaunchDetached, bool bLaunchHidden, bool bLaunchReallyHidden, uint32* OutProcessID, int32 PriorityModifier, const TCHAR* OptionalWorkingDirectory, void* PipeWriteChild, void * PipeReadChild)
 {
 	return FPlatformProcess::CreateProc(URL, Parms, bLaunchDetached, bLaunchHidden, bLaunchReallyHidden, OutProcessID, PriorityModifier, OptionalWorkingDirectory, PipeWriteChild, PipeReadChild);
 }
 
-UObject* EngineApi::StaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox, bool bAllowObjectReconciliation)
+UObject* UtilEngineWrap::StaticLoadObject(UClass* Class, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox, bool bAllowObjectReconciliation)
 {
 	Class->GetDefaultObject(); // force the CDO to be created if it hasn't already
 	UObject* ObjectPtr = ::StaticLoadObject(Class, InOuter, Name, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation);
@@ -510,7 +510,7 @@ UObject* EngineApi::StaticLoadObject(UClass* Class, UObject* InOuter, const TCHA
 	return ObjectPtr;
 }
 
-UClass* EngineApi::StaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
+UClass* UtilEngineWrap::StaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
 {
 	UClass* LoadedClass = ::StaticLoadClass(BaseClass, InOuter, Name, Filename, LoadFlags, Sandbox);
 	if (LoadedClass)
@@ -520,23 +520,23 @@ UClass* EngineApi::StaticLoadClass(UClass* BaseClass, UObject* InOuter, const TC
 	return LoadedClass;
 }
 
-FString EngineApi::GetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/)
+FString UtilEngineWrap::GetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/)
 {
 	FString Result;
 	Result = curObj->GetPathName(StopOuter);
 	return Result;
 }
 
-UMyGameViewportClientBase* const EngineApi::GetGameViewportClient()
+UMyGameViewportClientBase* const UtilEngineWrap::GetGameViewportClient()
 {
-	UMyGameInstanceBase* GameInstance = EngineApi::GetGameInstance();
+	UMyGameInstanceBase* GameInstance = UtilEngineWrap::GetGameInstance();
 	UMyGameViewportClientBase* const GameViewport = Cast<UMyGameViewportClientBase>(GameInstance->GetGameViewportClient());
 	return GameViewport;
 }
 
-FViewport* const EngineApi::GetViewport()
+FViewport* const UtilEngineWrap::GetViewport()
 {
-	UMyGameInstanceBase* GameInstance = EngineApi::GetGameInstance();
+	UMyGameInstanceBase* GameInstance = UtilEngineWrap::GetGameInstance();
 	UMyGameViewportClientBase* const GameViewport = Cast<UMyGameViewportClientBase>(GameInstance->GetGameViewportClient());
 	if (GameViewport != NULL && GameViewport->Viewport != NULL)
 	{
@@ -546,127 +546,127 @@ FViewport* const EngineApi::GetViewport()
 	return nullptr;
 }
 
-void EngineApi::EnableScreenSaver(bool bEnable)
+void UtilEngineWrap::EnableScreenSaver(bool bEnable)
 {
 	GEngine->EnableScreenSaver(bEnable);
 }
 
-int32 EngineApi::LoadPackageAsync(const FString& InName, FLoadPackageAsyncDelegate InCompletionDelegate, TAsyncLoadPriority InPackagePriority, EPackageFlags InPackageFlags)
+int32 UtilEngineWrap::LoadPackageAsync(const FString& InName, FLoadPackageAsyncDelegate InCompletionDelegate, TAsyncLoadPriority InPackagePriority, EPackageFlags InPackageFlags)
 {
 	return ::LoadPackageAsync(InName, InCompletionDelegate, InPackagePriority, InPackageFlags);
 }
 
-void EngineApi::CancelAsyncLoading()
+void UtilEngineWrap::CancelAsyncLoading()
 {
 	::CancelAsyncLoading();
 }
 
-float EngineApi::GetAsyncLoadPercentage(const FName& PackageName)
+float UtilEngineWrap::GetAsyncLoadPercentage(const FName& PackageName)
 {
 	return ::GetAsyncLoadPercentage(PackageName);
 }
 
-bool EngineApi::IsGarbageCollecting()
+bool UtilEngineWrap::IsGarbageCollecting()
 {
 	return ::IsGarbageCollecting();
 }
 
-void EngineApi::CollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
+void UtilEngineWrap::CollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
 {
 	::CollectGarbage(KeepFlags, bPerformFullPurge);
 }
 
-bool EngineApi::TryCollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
+bool UtilEngineWrap::TryCollectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
 {
 	return ::TryCollectGarbage(KeepFlags, bPerformFullPurge);
 }
 
-const FWorldContext* EngineApi::GetWorldContextFromGameViewport(const UGameViewportClient *InViewport)
+const FWorldContext* UtilEngineWrap::GetWorldContextFromGameViewport(const UGameViewportClient *InViewport)
 {
 	return GEngine->GetWorldContextFromGameViewport(InViewport);
 }
 
-void EngineApi::LoadStreamLevel(const UObject* WorldContextObject, std::string LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
+void UtilEngineWrap::LoadStreamLevel(const UObject* WorldContextObject, std::string LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
 {
 	FName name = UtilStr::ConvStdStr2FName(LevelName);
 	return UGameplayStatics::LoadStreamLevel(WorldContextObject, name, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
 }
 
-APlayerController* EngineApi::GetPrimaryPlayerController()
+APlayerController* UtilEngineWrap::GetPrimaryPlayerController()
 {
-	return EngineApi::GetGameInstance()->GetPrimaryPlayerController();
+	return UtilEngineWrap::GetGameInstance()->GetPrimaryPlayerController();
 }
 
-void EngineApi::SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType)
+void UtilEngineWrap::SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType)
 {
 	GEngine->SetClientTravel(InWorld, NextURL, InTravelType);
 }
 
-bool EngineApi::ServerTravel(const FString& InURL, bool bAbsolute, bool bShouldSkipGameNotify)
+bool UtilEngineWrap::ServerTravel(const FString& InURL, bool bAbsolute, bool bShouldSkipGameNotify)
 {
-	return EngineApi::GetWorld()->ServerTravel(InURL, bAbsolute, bShouldSkipGameNotify);
+	return UtilEngineWrap::GetWorld()->ServerTravel(InURL, bAbsolute, bShouldSkipGameNotify);
 }
 
-UMyLocalPlayerBase* EngineApi::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId)
+UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId)
 {
 	return Cast<UMyLocalPlayerBase>(GEngine->GetLocalPlayerFromControllerId(InViewport, ControllerId));
 }
 
-int EngineApi::GetNumLocalPlayers()
+int UtilEngineWrap::GetNumLocalPlayers()
 {
-	return EngineApi::GetGameInstance()->GetNumLocalPlayers();
+	return UtilEngineWrap::GetGameInstance()->GetNumLocalPlayers();
 }
 
-void EngineApi::SetGameDefaultMap(const std::string& NewMap)
+void UtilEngineWrap::SetGameDefaultMap(const std::string& NewMap)
 {
 	FString param = UtilStr::ConvStdStr2FString(const_cast<std::string&>(NewMap));
 	UGameMapsSettings::SetGameDefaultMap(param);
 }
 
-double EngineApi::Seconds()
+double UtilEngineWrap::Seconds()
 {
 	double StartTime = FPlatformTime::Seconds();
 	return StartTime;
 }
 
-FWorldContext* EngineApi::GetWorldContextFromPIEInstance(const int32 PIEInstance)
+FWorldContext* UtilEngineWrap::GetWorldContextFromPIEInstance(const int32 PIEInstance)
 {
 	FWorldContext* worldContext = GEngine->GetWorldContextFromPIEInstance(PIEInstance);
 	return worldContext;
 }
 
-UWorld* EngineApi::GetGlobalWorld()
+UWorld* UtilEngineWrap::GetGlobalWorld()
 {
 	return GWorld;
 }
 
-void EngineApi::SetTransientMasterVolume(float size)
+void UtilEngineWrap::SetTransientMasterVolume(float size)
 {
-	UWorld* GameInstanceWorld = EngineApi::GetGlobalWorld();
+	UWorld* GameInstanceWorld = UtilEngineWrap::GetGlobalWorld();
 	if (FAudioDevice* GameInstanceAudioDevice = GameInstanceWorld->GetAudioDevice())
 	{
 		GameInstanceAudioDevice->SetTransientMasterVolume(0.0f);
 	}
 }
 
-FVector2D EngineApi::getScreenSize()
+FVector2D UtilEngineWrap::getScreenSize()
 {
 	FVector2D screenSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
 	return screenSize;
 }
 
-FVector2D EngineApi::getSystemResolution()
+FVector2D UtilEngineWrap::getSystemResolution()
 {
 	FVector2D Result = FVector2D(GSystemResolution.ResX, GSystemResolution.ResY);
 	return Result;
 }
 
-void EngineApi::SetMaterial(UMeshComponent* meshComponent, int32 ElementIndex, UMaterialInterface* Material)
+void UtilEngineWrap::SetMaterial(UMeshComponent* meshComponent, int32 ElementIndex, UMaterialInterface* Material)
 {
 	meshComponent->SetMaterial(ElementIndex, Material);
 }
 
-void EngineApi::TestFileWriteCompressed(FString _path)
+void UtilEngineWrap::TestFileWriteCompressed(FString _path)
 {
 	//FPlatformFileManager::Get().SetPlatformFile(*CurrentPlatformFile);
 	//Step 1: Variable Data -> Binary
@@ -739,7 +739,7 @@ void EngineApi::TestFileWriteCompressed(FString _path)
 	}
 }
 
-void EngineApi::TestFileReadCompressed(FString _path)
+void UtilEngineWrap::TestFileReadCompressed(FString _path)
 {
 	//Load the Compressed data array
 	TArray<uint8> CompressedData;
@@ -805,7 +805,7 @@ void EngineApi::TestFileReadCompressed(FString _path)
 	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Yellow, str2 + str3 + str4);
 }
 
-void EngineApi::TestFileWriteUnCompressed(FString _path)
+void UtilEngineWrap::TestFileWriteUnCompressed(FString _path)
 {
 	//FPlatformFileManager::Get().SetPlatformFile(*CurrentPlatformFile);
 	//Step 1: Variable Data -> Binary
@@ -849,7 +849,7 @@ void EngineApi::TestFileWriteUnCompressed(FString _path)
 	ToBinary.Empty();
 }
 
-void EngineApi::TestFileReadUnCompressed(FString _path)
+void UtilEngineWrap::TestFileReadUnCompressed(FString _path)
 {
 	//Load the data array,
 	//  you do not need to pre-initialize this array,
@@ -909,39 +909,39 @@ void EngineApi::TestFileReadUnCompressed(FString _path)
 	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Yellow, str2 + str3 + str4);
 }
 
-bool EngineApi::IsPendingKill(AActor* actor)
+bool UtilEngineWrap::IsPendingKill(AActor* actor)
 {
 	return actor->IsPendingKill();
 }
 
-void EngineApi::Destroy(AActor* actor)
+void UtilEngineWrap::Destroy(AActor* actor)
 {
 	actor->Destroy();
 }
 
-uint32 EngineApi::getFrameNumber()
+uint32 UtilEngineWrap::getFrameNumber()
 {
 	return GFrameNumber;
 }
 
-uint32 EngineApi::getFrameNumberRenderThread()
+uint32 UtilEngineWrap::getFrameNumberRenderThread()
 {
 	return GFrameNumberRenderThread;
 }
 
-bool EngineApi::isMultithreaded()
+bool UtilEngineWrap::isMultithreaded()
 {
 	const bool bIsMultithreaded = FPlatformProcess::SupportsMultithreading();
 	return bIsMultithreaded;
 }
 
-bool EngineApi::isInAsyncLoadingThread()
+bool UtilEngineWrap::isInAsyncLoadingThread()
 {
 	bool ret = IsInAsyncLoadingThread();
 	return ret;
 }
 
-bool EngineApi::requiresCookedData()
+bool UtilEngineWrap::requiresCookedData()
 {
 	bool ret = FPlatformProperties::RequiresCookedData();
 	return ret;

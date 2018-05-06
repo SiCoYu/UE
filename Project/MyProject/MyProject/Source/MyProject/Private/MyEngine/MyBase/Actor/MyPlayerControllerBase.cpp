@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "MyPlayerControllerBase.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "MyFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
@@ -31,7 +31,7 @@ void AMyPlayerControllerBase::BeginPlay()
 	BeginPlay_UMGWidgets();
 
 	// 各种初始化
-	//EngineApi::showCursor();
+	//UtilEngineWrap::showCursor();
 
 	// 各种 UI 测试
 	//TestUI();
@@ -336,5 +336,5 @@ void AMyPlayerControllerBase::StartThreadTest()
 	//GetWorldTimerManager().SetTimer(this,
 	//	&AMyPlayerController::VictoryCheckAllThreadsDone, 1, true);
 	FTimerDelegate TimerDelegate = FTimerDelegate::CreateUObject(this, &AMyPlayerControllerBase::VictoryCheckAllThreadsDone);
-	EngineApi::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 1, true);
+	UtilEngineWrap::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 1, true);
 }

@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include <string>
 #include "Templates/SharedPointer.h"
 #include "SocketSubsystem.h"
@@ -37,7 +37,7 @@ bool MyTCPSocket::StartTCPReceiver(
 	//Start the Listener! //thread this eventually
 	// Engine\Plugins\Online\OnlineFramework\Source\Lobby\Private\LobbyBeaconState.cpp
 	FTimerDelegate TimerDelegate = FTimerDelegate::CreateUObject(this, &MyTCPSocket::TCPConnectionListener);
-	EngineApi::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 0.01, true);
+	UtilEngineWrap::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 0.01, true);
 
 	return true;
 }
@@ -127,7 +127,7 @@ void MyTCPSocket::TCPConnectionListener()
 			//can thread this too
 			FTimerDelegate TimerDelegate;
 			TimerDelegate.BindUObject(this, &MyTCPSocket::TCPSocketListener);
-			EngineApi::GetWorldTimerManager().SetTimer(CancelRPCFailsafe, TimerDelegate, 0.01, true);
+			UtilEngineWrap::GetWorldTimerManager().SetTimer(CancelRPCFailsafe, TimerDelegate, 0.01, true);
 		}
 	}
 }

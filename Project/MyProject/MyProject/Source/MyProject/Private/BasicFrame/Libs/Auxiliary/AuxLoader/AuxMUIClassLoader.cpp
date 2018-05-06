@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "AuxMUIClassLoader.h"
 #include "ObjectAssetInsResBase.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "UMGWidget.h"
 #include "Common.h"
 
@@ -38,7 +38,7 @@ namespace MyNS
 		}
 		else if (NSFormType::ePlayerController == this->mUMGOuterType)
 		{
-			this->mWidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), this->mWidgetClass);
+			this->mWidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), this->mWidgetClass);
 		}
 		else if (NSFormType::eGameInstance == this->mUMGOuterType)
 		{

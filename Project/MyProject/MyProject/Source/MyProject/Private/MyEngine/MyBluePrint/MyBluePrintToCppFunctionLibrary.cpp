@@ -2,7 +2,7 @@
 #include "MyBluePrintToCppFunctionLibrary.h"
 #include "MyBluePrintBase.h"
 #include "Ctx.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "EngineData.h"
 #include "UMGWidget.h"				// UUMGWidget
 
@@ -19,26 +19,26 @@ UMyBluePrintBase* UMyBluePrintToCppFunctionLibrary::getBPCtx()
 
 ACharacter* UMyBluePrintToCppFunctionLibrary::getFirstCharacter()
 {
-	return EngineApi::getFirstCharacter();
+	return UtilEngineWrap::getFirstCharacter();
 }
 
 AMyPlayerControllerBase* UMyBluePrintToCppFunctionLibrary::GetPlayerController()
 {
-	return EngineApi::GetPlayerController();
+	return UtilEngineWrap::GetPlayerController();
 }
 
 UUMGWidget* UMyBluePrintToCppFunctionLibrary::createWidget(UClass* WidgetClass)
 {
 	UUMGWidget* WidgetObject = nullptr;
 
-	WidgetObject = EngineApi::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+	WidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
 
 	return WidgetObject;
 }
 
 UObject* UMyBluePrintToCppFunctionLibrary::newObjectFromBlueprint(UClass* cls)
 {
-	APlayerController* playerController = (APlayerController*)EngineApi::GetPlayerController();
+	APlayerController* playerController = (APlayerController*)UtilEngineWrap::GetPlayerController();
 	UObject* tempObject = NewObject<UObject>(playerController, cls);
 
 	return tempObject;

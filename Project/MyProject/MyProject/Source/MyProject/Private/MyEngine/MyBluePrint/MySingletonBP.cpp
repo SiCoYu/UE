@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "MySingletonBP.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 
 UMySingletonBP* UMySingletonBP::msSingleton;
 
@@ -23,7 +23,7 @@ UMySingletonBP* UMySingletonBP::getSingleton()
 		// Engine\Source\Runtime\CoreUObject\Private\UObject\UObjectGlobals.cpp
 		// UE_LOG(LogUObjectGlobals, Fatal, TEXT("%s"), *FString::Printf( TEXT("Object is not packaged: %s %s"), *InClass->GetName(), *InName.ToString()) );
 		// UMySingletonBP::msSingleton = NewObject<UMySingletonBP>(nullptr, SingletonClass);
-		UGameInstance* pGameIns = (UGameInstance*)EngineApi::GetGameInstance();
+		UGameInstance* pGameIns = (UGameInstance*)UtilEngineWrap::GetGameInstance();
 		UMySingletonBP::msSingleton = ::NewObject<UMySingletonBP>(pGameIns, SingletonClass, FName("UMySingletonBP"));
 	}
 

@@ -4,7 +4,7 @@
 #include "EngineUtils.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/StaticMeshActor.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 
 void ObjectIterators::IteratorAllComponent()
 {
@@ -16,7 +16,7 @@ void ObjectIterators::IteratorAllComponent()
 
 void ObjectIterators::IteratorAllActor()
 {
-	for (TActorIterator<AStaticMeshActor> ActorItr(EngineApi::GetWorld()); ActorItr; ++ActorItr)
+	for (TActorIterator<AStaticMeshActor> ActorItr(UtilEngineWrap::GetWorld()); ActorItr; ++ActorItr)
 	{
 		// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
 		AStaticMeshActor *Mesh = *ActorItr;

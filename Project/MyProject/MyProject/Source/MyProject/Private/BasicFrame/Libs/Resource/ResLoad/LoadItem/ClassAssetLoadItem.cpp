@@ -2,7 +2,7 @@
 #include "Common.h"
 #include "UObject/Class.h"	// UClass
 #include "NonRefCountResLoadResultNotify.h"		// NonRefCountResLoadResultNotify
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "ClassAssetLoadItem.h"
 
 ClassAssetLoadItem::ClassAssetLoadItem()
@@ -54,7 +54,7 @@ void ClassAssetLoadItem::onAsyncLoaded()
 	//this->mResObj = Cast<UClass>(mAssetRef.ResolveObject());
 	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
 	// OnGameplayCueNotifyAsyncLoadComplete
-	this->mResObj = EngineApi::FindObject<UClass>(nullptr, *mAssetRef.ToString());
+	this->mResObj = UtilEngineWrap::FindObject<UClass>(nullptr, *mAssetRef.ToString());
 
 	//if (nullptr != mResObj)
 	if (ensure(this->mResObj))

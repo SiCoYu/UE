@@ -3,7 +3,7 @@
 
 #include "MyProject.h"
 #include "MCamera.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "FastDelegate.h"
 #include <string>
 #include <map>
@@ -64,7 +64,7 @@ public:
 
 	float getDeltaTime()
 	{
-		//return touchBegan ? EngineApi::GetRealTimeSeconds() - pressTime : 0;
+		//return touchBegan ? UtilEngineWrap::GetRealTimeSeconds() - pressTime : 0;
 		return 0;
 	}
 

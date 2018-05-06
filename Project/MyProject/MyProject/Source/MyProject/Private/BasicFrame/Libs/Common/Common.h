@@ -8,7 +8,7 @@
 #include "EngineData.h"
 #include "INetMgr.h"
 #include "UiMgr.h"
-#include "EngineApi.h"
+#include "UtilEngineWrap.h"
 #include "NetMgr.h"
 #include "LogSys.h"
 #include "ShareData.h"

@@ -10,7 +10,7 @@ UUiPack::UUiPack(const FObjectInitializer& ObjectInitializer)
 {
 	//loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
 	//m_umgWidget->AddToViewport();
-	//EngineApi::addEventHandle((UButton*)m_umgWidget->GetWidgetFromName("Button_16"), (UObject*)this, "OnConfirmGeneric");
+	//UtilEngineWrap::addEventHandle((UButton*)m_umgWidget->GetWidgetFromName("Button_16"), (UObject*)this, "OnConfirmGeneric");
 
 	//TSharedPtr<SWidget> m_outUserSlateWidget;
 	//TSharedRef<SWidget> m_rootWidget = m_umgWidget->MakeViewportWidget(m_outUserSlateWidget);
@@ -26,7 +26,7 @@ void UUiPack::onReady()
 {
 	loadUWidget(TEXT("/Game/Blueprints/NewWidgetBlueprint.NewWidgetBlueprint_C"));
 	mWinRender->mUiRoot->AddToViewport();
-	EngineApi::addEventHandle((UButton*)mWinRender->mUiRoot->GetWidgetFromName("Button_16"), (UObject*)this, "OnConfirmGeneric");
+	UtilEngineWrap::addEventHandle((UButton*)mWinRender->mUiRoot->GetWidgetFromName("Button_16"), (UObject*)this, "OnConfirmGeneric");
 }
 
 void UUiPack::OnConfirmGeneric()
