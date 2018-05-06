@@ -39,7 +39,7 @@ namespace MyNS
 		{
 			if (this->mSelfGo != nullptr)
 			{
-				UtilApi::DestroyImmediate(Cast<AActor>(this->mSelfGo));
+				UtilSysLibWrap::DestroyImmediate(Cast<AActor>(this->mSelfGo));
 			}
 		}
 
@@ -140,7 +140,7 @@ namespace MyNS
 
 						if (this->mIsSetFakePos)
 						{
-							this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
+							this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
 						}
 						else
 						{
@@ -151,7 +151,7 @@ namespace MyNS
 					{
 						if (this->mIsSetFakePos)
 						{
-							this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat));
+							this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
 						}
 						else
 						{
@@ -295,7 +295,7 @@ namespace MyNS
 
 			if (this->mIsSetFakePos)
 			{
-				this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
+				this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
 			}
 			else
 			{
@@ -306,7 +306,7 @@ namespace MyNS
 		{
 			if (this->mIsSetFakePos)
 			{
-				this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilApi::FAKE_POS, UtilMath::UnitQuat));
+				this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
 			}
 			else
 			{
