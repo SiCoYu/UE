@@ -2,7 +2,8 @@
 #include "TestExtern.h"
 #include "Templates/Casts.h"
 
-#define dynamic_cast aaa
+// UE 4.19.1 warning C4005 : 'dynamic_cast' : macro redefinition , engine\source\runtime\coreuobject\public\Templates / Casts.h(417) : note: see previous definition of 'dynamic_cast'
+//#define dynamic_cast aaa
 
 TestExtern::TestExtern()
 {
@@ -12,9 +13,9 @@ TestExtern::TestExtern()
 	//mTestStaticLibA = dynamic_cast<TestStaticLibA*>(mTestStaticLibB);
 	//mTestStaticLibA->testFunc("aaaaaaa");
 
-	mTestStaticLibA = new TestStaticLibB();
-	mTestStaticLibA->testFunc("aaaaaaa");
+	this->mTestStaticLibA = new TestStaticLibB();
+	this->mTestStaticLibA->testFunc("aaaaaaa");
 
-	mTestStaticLibB = (TestStaticLibB*)mTestStaticLibA;
-	mTestStaticLibA->testFunc("aaaaaaa");
+	this->mTestStaticLibB = (TestStaticLibB*)mTestStaticLibA;
+	this->mTestStaticLibA->testFunc("aaaaaaa");
 }

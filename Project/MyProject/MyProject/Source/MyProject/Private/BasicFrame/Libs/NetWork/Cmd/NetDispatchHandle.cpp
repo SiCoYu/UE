@@ -6,17 +6,17 @@
 #include "UtilStr.h"
 #include "NetCmdHandleBase.h"
 
-NetDispHandle::NetDispHandle()
+NetDispatchHandle::NetDispatchHandle()
 {
 	
 }
 
-NetDispHandle::~NetDispHandle()
+NetDispatchHandle::~NetDispatchHandle()
 {
 	
 }
 
-void NetDispHandle::handleMsg(ByteBuffer* msg)
+void NetDispatchHandle::handleMsg(ByteBuffer* msg)
 {
     uint8 byCmd = 0;
     msg->readUnsignedInt8(byCmd);
