@@ -29,7 +29,19 @@
 			"Enabled": true
 		},
 		{
-			"Name": "MyScriptPlugin",
+			"Name": "ScriptGeneratorPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "ScriptPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "ScriptEditorPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "MyScriptGeneratorPlugin",
 			"Enabled": true
 		}
 	],
