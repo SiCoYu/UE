@@ -28,6 +28,13 @@ public class MyProjectEditorTarget : TargetRules
         //    BuildPlugins = new List<PluginInfo>(EnabledPlugins);
         //}
 
+        /**
+         * ue4 plugin的编译加载
+         * https://www.cnblogs.com/wellbye/p/5871359.html
+         * 另外，在这里也定义该插件是否默认启用【PluginDescriptor.bEnabledByDefault】，如启用的话就会自动包含在任何项目构建中。
+         * 而每个项目也可以明确定义了自己需要或屏蔽的插件【ProjectDescriptor.Plugins】，优先级高于前者。
+         * 再有就是项目里的每个Target还可以强制指定包含所有插件【TargetRules.bBuildAllPlugins】，优先级又高于前者。比如UE4Editor就强制启用了所有插件。
+         */
         // UnrealEngine\Engine\Source\UE4Editor.Target.cs
         // 奇怪这个设置后，MyProject\Plugins\MyPlugin 才会编译
         this.bBuildAllPlugins = true;

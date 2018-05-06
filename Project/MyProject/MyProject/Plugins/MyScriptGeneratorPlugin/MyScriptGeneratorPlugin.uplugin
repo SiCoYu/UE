@@ -19,27 +19,9 @@
 	"Modules" :
 	[
 		{
-			"Name" : "ScriptGeneratorPlugin",
+			"Name" : "MyScriptGeneratorPlugin",
 			"Type" : "Program",
 			"LoadingPhase" : "PostConfigInit"
-		},
-		{
-			"Name" : "ScriptPlugin",
-			"Type" : "Runtime",
-			"LoadingPhase" : "PreDefault",
-			"BlacklistPlatforms" :
-			[
-				"Linux"
-			]
-		},
-		{
-			"Name" : "ScriptEditorPlugin",
-			"Type" : "Editor",
-			"LoadingPhase" : "Default",
-			"BlacklistPlatforms" :
-			[
-				"Linux"
-			]
 		}
 	]
 }
