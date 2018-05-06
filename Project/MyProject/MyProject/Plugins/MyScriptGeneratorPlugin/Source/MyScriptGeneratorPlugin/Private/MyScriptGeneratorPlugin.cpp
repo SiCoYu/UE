@@ -6,13 +6,10 @@
 #include "UniquePtr.h"
 #include "ProjectDescriptor.h"
 
-DEFINE_LOG_CATEGORY(LogScriptGenerator);
+DEFINE_LOG_CATEGORY(MyScriptGeneratorPlugin);
 
 class FMyScriptGeneratorPlugin : public IScriptGeneratorPlugin
 {
-	/** Specialized script code generator */
-	TUniquePtr<FScriptCodeGeneratorBase> CodeGenerator;
-
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
@@ -27,7 +24,7 @@ class FMyScriptGeneratorPlugin : public IScriptGeneratorPlugin
 	virtual FString GetGeneratorName() const override;
 };
 
-IMPLEMENT_MODULE( FScriptGeneratorPlugin, ScriptGeneratorPlugin )
+IMPLEMENT_MODULE(FMyScriptGeneratorPlugin, MyScriptGeneratorPlugin)
 
 
 void FMyScriptGeneratorPlugin::StartupModule()
