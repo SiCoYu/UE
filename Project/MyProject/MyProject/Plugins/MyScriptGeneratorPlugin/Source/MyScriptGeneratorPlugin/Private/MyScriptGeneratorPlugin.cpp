@@ -30,15 +30,13 @@ IMPLEMENT_MODULE(FMyScriptGeneratorPlugin, MyScriptGeneratorPlugin)
 void FMyScriptGeneratorPlugin::StartupModule()
 {
 	// Register ourselves as an editor feature
-	IModularFeatures::Get().RegisterModularFeature(TEXT("MyScriptGeneratorPlugin"), this);
+	IModularFeatures::Get().RegisterModularFeature(TEXT("ScriptGenerator"), this);
 }
 
 void FMyScriptGeneratorPlugin::ShutdownModule()
 {
-	CodeGenerator.Reset();
-
 	// Unregister our feature
-	IModularFeatures::Get().UnregisterModularFeature(TEXT("MyScriptGeneratorPlugin"), this);
+	IModularFeatures::Get().UnregisterModularFeature(TEXT("ScriptGenerator"), this);
 }
 
 FString FMyScriptGeneratorPlugin::GetGeneratorName() const
@@ -72,12 +70,12 @@ bool FMyScriptGeneratorPlugin::ShouldExportClassesForModule(const FString& Modul
 
 void FMyScriptGeneratorPlugin::ExportClass(UClass* Class, const FString& SourceHeaderFilename, const FString& GeneratedHeaderFilename, bool bHasChanged)
 {
-	CodeGenerator->ExportClass(Class, SourceHeaderFilename, GeneratedHeaderFilename, bHasChanged);
+	
 }
 
 void FMyScriptGeneratorPlugin::FinishExport()
 {
-	CodeGenerator->FinishExport();
+	
 }
 
 bool FMyScriptGeneratorPlugin::SupportsTarget(const FString& TargetName) const
