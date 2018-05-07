@@ -268,6 +268,8 @@ public class MyProject : ModuleRules
         //Definitions.Add("ENABLE_EXCEPTIONS");
         //Definitions.Add("ENABLE_DETACH");
 
+        // https://docs.unrealengine.com/en-us/Programming/UnrealBuildSystem/Configuration
+        // http://api.unrealengine.com/CHN/Programming/UnrealBuildSystem/Configuration/
         MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;
 
@@ -334,7 +336,19 @@ public class MyProject : ModuleRules
 
         //LoadMyProjectEditor(Target);
 
-        //BuildConfiguration.bForceDebugUnrealHeaderTool = true;
+        /**
+         * @url https://docs.unrealengine.com/en-us/Programming/UnrealBuildSystem/Configuration
+         * UnrealBuildTool reads settings from XML configuration files in the following locations:
+         * Engine/Saved/UnrealBuildTool/BuildConfiguration.xml
+         * User Folder/AppData/Roaming/Unreal Engine/UnrealBuildTool/BuildConfiguration.xml
+         * My Documents / Unreal Engine / UnrealBuildTool / BuildConfiguration.xml
+         * These files are added to the generated UE4 project under the Config/UnrealBuildTool folder.
+         * 
+         * @brief 自己新加的配置文件
+         * MyProject\Config\UnrealBuildTool\BuildConfiguration.xml
+         */
+        // 
+        //UEBuildConfiguration.BuildConfiguration.bForceDebugUnrealHeaderTool = true;
 
         loadThirdPartyInclude();
         //LoadSockets(Target);
