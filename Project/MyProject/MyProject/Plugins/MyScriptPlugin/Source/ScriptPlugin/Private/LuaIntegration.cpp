@@ -6,6 +6,8 @@
 
 #if WITH_LUA
 
+#include "GeneratedScriptLibraries.inl"
+
 // Forward declaration - definition is in generated inl function.
 void LuaRegisterExportedClasses(lua_State* InScriptContext);
 
