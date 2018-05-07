@@ -443,6 +443,8 @@ public class MyProject : ModuleRules
 
             if (Target.Configuration == UnrealTargetConfiguration.Debug)
             {
+                // Ìí¼Ó¿âÄ¿Â¼
+                // PublicLibraryPaths.Add(LuaLibDirectory);
                 PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets.lib"));
 
                 //Add Dynamic Libraries (Debug Version)

@@ -3,6 +3,8 @@
 
 #if WITH_LUA
 
+#include "ScriptBlueprintGeneratedClass.h"
+
 extern "C"
 {
 #define LUA_COMPAT_APIINTCASTS 1
