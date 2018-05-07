@@ -311,7 +311,7 @@ public class MyProject : ModuleRules
 		// 4.17 需要新的接口
 		AddEngineThirdPartyPrivateStaticDependencies(Target, "PhysX");
 		AddEngineThirdPartyPrivateStaticDependencies(Target, "APEX");
-		
+
         //PublicSystemIncludePaths.Add("ThirdParty/hlslcc/hlslcc/src/hlslcc_lib");
         //RuntimeDependencies.Add(new RuntimeDependency("$(EngineDir)/Binaries/ThirdParty/ARM/Win32/astcenc.exe"));
         //string APEXDir = UEBuildConfiguration.UEThirdPartySourceDirectory + "PhysX/" + ApexVersion + "/";
@@ -333,6 +333,8 @@ public class MyProject : ModuleRules
         //}
 
         //LoadMyProjectEditor(Target);
+
+        //BuildConfiguration.bForceDebugUnrealHeaderTool = true;
 
         loadThirdPartyInclude();
         //LoadSockets(Target);

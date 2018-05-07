@@ -111,7 +111,7 @@ bool FScriptGeneratorPlugin::SupportsTarget(const FString& TargetName) const
 			for (auto& PluginDescriptor : ProjectDescriptor.Plugins)
 			{
 				// For your own script plugin you might want to change the hardcoded name here to something else
-				if (PluginDescriptor.bEnabled && PluginDescriptor.Name == TEXT("ScriptPlugin"))
+				if (PluginDescriptor.bEnabled && PluginDescriptor.Name == TEXT("MyScriptPlugin"))
 				{
 					bSupportsTarget = true;
 					break;
