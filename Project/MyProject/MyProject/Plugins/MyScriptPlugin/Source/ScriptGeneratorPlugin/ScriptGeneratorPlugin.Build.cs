@@ -68,7 +68,7 @@ namespace UnrealBuildTool.Rules
             //}
 
             Log.TraceVerbose("ScriptGenerator LUA Integration enabled");
-            PublicDefinitions.Add("WITH_LUA=1");
+            PublicDefinitions.Add("WITH_LUA=0");
 
             loadThirdPartyInclude();
             LoadLua(Target);

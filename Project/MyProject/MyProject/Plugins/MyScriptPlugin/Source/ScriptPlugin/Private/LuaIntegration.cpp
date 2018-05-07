@@ -6,6 +6,7 @@
 
 #if WITH_LUA
 
+// MyProject\Plugins\MyScriptPlugin\Intermediate\Build\Win64\UE4Editor\Inc\ScriptPlugin\GeneratedScriptLibraries.inl
 #include "GeneratedScriptLibraries.inl"
 
 // Forward declaration - definition is in generated inl function.
