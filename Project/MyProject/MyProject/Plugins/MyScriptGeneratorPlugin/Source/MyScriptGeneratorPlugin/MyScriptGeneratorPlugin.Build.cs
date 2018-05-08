@@ -2,6 +2,9 @@
 
 using UnrealBuildTool;
 
+/**
+ * @brief 自己手工拷贝已经有的插件，然后改名字为 MyScriptGeneratorPlugin ，编译总是报错，说找不到插件 MyScriptGeneratorPlugin ，然后自己通过 UE4Editor -- Editor -- Plugins -- 创建一个同样名字的插件，然后将原来的 MyScriptGeneratorPlugin 内容拷贝过来，结果就编译通过了，奇怪啊
+ */
 public class MyScriptGeneratorPlugin : ModuleRules
 {
 	public MyScriptGeneratorPlugin(ReadOnlyTargetRules Target) : base(Target)
