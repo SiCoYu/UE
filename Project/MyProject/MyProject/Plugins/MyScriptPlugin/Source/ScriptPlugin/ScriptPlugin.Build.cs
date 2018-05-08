@@ -85,7 +85,7 @@ namespace UnrealBuildTool.Rules
             //}
 
             string IncludePath = Path.Combine(ThirdPartyPath, "Inc", "Lua");
-            PublicDefinitions.Add("WITH_LUA=0");
+            PublicDefinitions.Add("WITH_LUA=1");
             Log.TraceVerbose("LUA Integration enabled: {0}", IncludePath);
 
             loadThirdPartyInclude();

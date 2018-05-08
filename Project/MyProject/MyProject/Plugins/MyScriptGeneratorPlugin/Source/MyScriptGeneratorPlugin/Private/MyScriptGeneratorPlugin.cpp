@@ -1,12 +1,13 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
 #include "CoreMinimal.h"
+#include "MyScriptGeneratorLog.h"
 #include "IProjectManager.h"
 #include "Features/IModularFeatures.h"
 #include "UniquePtr.h"
 #include "ProjectDescriptor.h"
 
-DEFINE_LOG_CATEGORY(MyScriptGeneratorPlugin);
+DEFINE_LOG_CATEGORY(LogMyScriptGenerator);
 
 class FMyScriptGeneratorPlugin : public IScriptGeneratorPlugin
 {
