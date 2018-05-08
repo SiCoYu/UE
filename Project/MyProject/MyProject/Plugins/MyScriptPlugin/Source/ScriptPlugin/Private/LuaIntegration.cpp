@@ -6,6 +6,13 @@
 
 #if WITH_LUA
 
+#include "UObject/UnrealType.h"
+#include "UObject/Class.h"
+#include "UObject/NameTypes.h"
+
+// MyProject\MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\ScriptPlugin.cpp
+UProperty* FindScriptPropertyHelper(UClass* Class, FName PropertyName);
+
 // MyProject\Plugins\MyScriptPlugin\Intermediate\Build\Win64\UE4Editor\Inc\ScriptPlugin\GeneratedScriptLibraries.inl
 #include "GeneratedScriptLibraries.inl"
 
