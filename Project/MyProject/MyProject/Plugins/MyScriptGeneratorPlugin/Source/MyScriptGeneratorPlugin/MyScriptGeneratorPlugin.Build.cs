@@ -10,7 +10,8 @@ public class MyScriptGeneratorPlugin : ModuleRules
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				"MyScriptGeneratorPlugin/Public"
+				"MyScriptGeneratorPlugin/Public",
+                "Programs/UnrealHeaderTool/Public",     // IScriptGeneratorPluginInterface
 				// ... add public include paths required here ...
 			}
 			);
@@ -19,6 +20,7 @@ public class MyScriptGeneratorPlugin : ModuleRules
 		PrivateIncludePaths.AddRange(
 			new string[] {
 				"MyScriptGeneratorPlugin/Private",
+                "Developer/ScriptGeneratorPlugin/Private",
 				// ... add other private include paths required here ...
 			}
 			);
@@ -28,6 +30,7 @@ public class MyScriptGeneratorPlugin : ModuleRules
 			new string[]
 			{
 				"Core",
+                "CoreUObject",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -40,6 +43,7 @@ public class MyScriptGeneratorPlugin : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+                "Projects",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

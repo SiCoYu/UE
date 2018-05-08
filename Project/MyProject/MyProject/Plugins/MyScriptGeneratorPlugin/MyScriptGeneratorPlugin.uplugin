@@ -1,23 +1,27 @@
 {
-	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.0",
-	"FriendlyName": "MyScriptGeneratorPlugin",
-	"Description": "",
-	"Category": "Other",
-	"CreatedBy": "",
-	"CreatedByURL": "",
-	"DocsURL": "",
-	"MarketplaceURL": "",
-	"SupportURL": "",
-	"CanContainContent": true,
-	"IsBetaVersion": false,
-	"Installed": false,
-	"Modules": [
+	"FileVersion" : 3,
+	"Version" : 1,
+	"VersionName" : "1.0",
+	"FriendlyName" : "My Script Generator Plugin",
+	"Description" : "An example of a script plugin. This can be used as a starting point when creating your own plugin.",
+	"Category" : "My Script Generator Plugin",
+	"CreatedBy" : "Epic Games, Inc.",
+	"CreatedByURL" : "http://epicgames.com",
+	"DocsURL" : "",
+	"MarketplaceURL" : "",
+	"SupportURL" : "",
+	"EnabledByDefault" : false,
+	"CanContainContent" : false,
+	"IsBetaVersion" : false,
+	"Installed" : false,
+	"CanBeUsedWithUnrealHeaderTool" : true,
+	
+	"Modules" :
+	[
 		{
-			"Name": "MyScriptGeneratorPlugin",
-			"Type": "Developer",
-			"LoadingPhase": "Default"
+			"Name" : "MyScriptGeneratorPlugin",
+			"Type" : "Program",
+			"LoadingPhase" : "PostConfigInit"
 		}
 	]
 }
