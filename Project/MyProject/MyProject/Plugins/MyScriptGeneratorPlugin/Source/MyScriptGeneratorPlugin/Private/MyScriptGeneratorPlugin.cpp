@@ -9,7 +9,7 @@
 
 DEFINE_LOG_CATEGORY(LogMyScriptGenerator);
 
-class FMyScriptGeneratorPlugin : public IScriptGeneratorPlugin
+class FMyScriptGeneratorPlugin : public IMyScriptGeneratorPlugin
 {
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
@@ -25,7 +25,7 @@ class FMyScriptGeneratorPlugin : public IScriptGeneratorPlugin
 	virtual FString GetGeneratorName() const override;
 };
 
-IMPLEMENT_MODULE(FMyScriptGeneratorPlugin, MyScriptGeneratorPlugin)
+IMPLEMENT_MODULE( FMyScriptGeneratorPlugin, MyScriptGeneratorPlugin)
 
 
 void FMyScriptGeneratorPlugin::StartupModule()
@@ -42,12 +42,12 @@ void FMyScriptGeneratorPlugin::ShutdownModule()
 
 FString FMyScriptGeneratorPlugin::GetGeneratorName() const
 {
-	
+
 }
 
-void FScriptGeneratorPlugin::Initialize(const FString& RootLocalPath, const FString& RootBuildPath, const FString& OutputDirectory, const FString& IncludeBase)
+void FMyScriptGeneratorPlugin::Initialize(const FString& RootLocalPath, const FString& RootBuildPath, const FString& OutputDirectory, const FString& IncludeBase)
 {
-	UE_LOG(LogScriptGenerator, Log, TEXT("Output directory: %s"), *OutputDirectory);
+	UE_LOG(LogMyScriptGenerator, Log, TEXT("Output directory: %s"), *OutputDirectory);
 }
 
 bool FMyScriptGeneratorPlugin::ShouldExportClassesForModule(const FString& ModuleName, EBuildModuleType::Type ModuleType, const FString& ModuleGeneratedIncludeDirectory) const

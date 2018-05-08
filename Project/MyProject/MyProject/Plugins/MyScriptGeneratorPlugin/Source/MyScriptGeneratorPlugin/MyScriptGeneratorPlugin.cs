@@ -7,16 +7,16 @@ namespace UnrealBuildTool.Rules
     /**
      * @note An Introduction to UE4 Plugins
      * @url https://wiki.unrealengine.com/An_Introduction_to_UE4_Plugins
-	 * UE4å¼•æ“è‡ªå®šä¹‰æ’ä»¶å¯¼å‡ºç±»å®šä¹‰çš„ç®€å•æµç¨‹
+	 * UE4ÒıÇæ×Ô¶¨Òå²å¼şµ¼³öÀà¶¨ÒåµÄ¼òµ¥Á÷³Ì
 	 * https://blog.csdn.net/albertsh/article/details/73512880
-	 * ä»Šå¤©å­¦ä¹ äº†ä¸€ä¸‹ä½¿ç”¨UE4å¼•æ“å¯¼å‡ºç±»å®šä¹‰çš„æµç¨‹ï¼Œç›®çš„æ˜¯ä½¿ç”¨å°†C++ä»£ç å¯¼å‡ºåˆ°Luaæ–‡ä»¶ä¸­ï¼Œæ–¹ä¾¿C++å’ŒLuaä»£ç ç›¸äº’è°ƒç”¨ï¼Œè·Ÿè¸ªäº†ä¸€ä¸‹ä»£ç å‘ç°ï¼Œäº§ç”ŸLuaå¯ç”¨çš„C++å‡½æ•°çš„å¯åŠ¨ä»£ç å®é™…ä¸Šåœ¨UnrealHeaderToolå·¥å…·ä¸­ï¼ŒåŸæ¥å’Œç”ŸæˆXXX..generated.hçš„å·¥å…·æ˜¯åŒä¸€ä¸ªï¼Œå¦‚æœUnrealHeaderToolå·¥å…·æ£€æµ‹åˆ°å·²ç»åŠ è½½çš„æ’ä»¶ç»§æ‰¿äº†IScriptGeneratorPluginInterfaceï¼Œé‚£ä¹ˆå®ƒå°±ä¼šè°ƒç”¨è¯¥æ’ä»¶çš„ExportClassæ–¹æ³•ï¼ŒæŒ‰ç…§è§„å®šçš„æ–¹å¼å°†C++å®šä¹‰å¯¼å‡ºæˆLuaå¯ç”¨çš„å…¨å±€å‡½æ•°
+	 * ½ñÌìÑ§Ï°ÁËÒ»ÏÂÊ¹ÓÃUE4ÒıÇæµ¼³öÀà¶¨ÒåµÄÁ÷³Ì£¬Ä¿µÄÊÇÊ¹ÓÃ½«C++´úÂëµ¼³öµ½LuaÎÄ¼şÖĞ£¬·½±ãC++ºÍLua´úÂëÏà»¥µ÷ÓÃ£¬¸ú×ÙÁËÒ»ÏÂ´úÂë·¢ÏÖ£¬²úÉúLua¿ÉÓÃµÄC++º¯ÊıµÄÆô¶¯´úÂëÊµ¼ÊÉÏÔÚUnrealHeaderTool¹¤¾ßÖĞ£¬Ô­À´ºÍÉú³ÉXXX..generated.hµÄ¹¤¾ßÊÇÍ¬Ò»¸ö£¬Èç¹ûUnrealHeaderTool¹¤¾ß¼ì²âµ½ÒÑ¾­¼ÓÔØµÄ²å¼ş¼Ì³ĞÁËIScriptGeneratorPluginInterface£¬ÄÇÃ´Ëü¾Í»áµ÷ÓÃ¸Ã²å¼şµÄExportClass·½·¨£¬°´ÕÕ¹æ¶¨µÄ·½Ê½½«C++¶¨Òåµ¼³ö³ÉLua¿ÉÓÃµÄÈ«¾Öº¯Êı
 	 */
     public class MyScriptGeneratorPlugin : ModuleRules
 	{
 		public MyScriptGeneratorPlugin(ReadOnlyTargetRules Target) : base(Target)
 		{
             // error : All source files in module "ScriptPlugin" must include the same precompiled header first.
-            // To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyScriptGeneratorPlugin.build.cs.
+            // To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to ScriptGeneratorPlugin.build.cs.
             PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
             PublicIncludePaths.AddRange(
@@ -57,5 +57,5 @@ namespace UnrealBuildTool.Rules
 				}
 				);
 		}
-	}
+    }
 }
