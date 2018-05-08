@@ -10,10 +10,12 @@
 #include "UObject/Class.h"
 #include "UObject/NameTypes.h"
 
+// 声明必须放在 #include "GeneratedScriptLibraries.inl" 包含文件前面，因为 #include "GeneratedScriptLibraries.inl" 中包含的其它文件需要使用这个接口
 // MyProject\MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\ScriptPlugin.cpp
 UProperty* FindScriptPropertyHelper(UClass* Class, FName PropertyName);
 
 // MyProject\Plugins\MyScriptPlugin\Intermediate\Build\Win64\UE4Editor\Inc\ScriptPlugin\GeneratedScriptLibraries.inl
+// LuaRegisterExportedClasses
 #include "GeneratedScriptLibraries.inl"
 
 // Forward declaration - definition is in generated inl function.

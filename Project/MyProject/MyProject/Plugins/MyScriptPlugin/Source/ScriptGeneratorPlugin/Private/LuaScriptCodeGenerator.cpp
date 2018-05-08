@@ -32,9 +32,11 @@ FString FLuaScriptCodeGenerator::GenerateWrapperFunctionDeclaration(const FStrin
 }
 
 FString FLuaScriptCodeGenerator::InitializeFunctionDispatchParam(UFunction* Function, UProperty* Param, int32 ParamIndex)
-{	
+{
 	if (!(Param->GetPropertyFlags() & CPF_ReturnParm))
 	{
+		bool isLinearColorToColor = false;
+
 		FString Initializer;
 		// In Lua, the first param index on the stack is 1 and it's the object we're invoking the function on
 		ParamIndex += 2;
@@ -84,7 +86,11 @@ FString FLuaScriptCodeGenerator::InitializeFunctionDispatchParam(UFunction* Func
 			}
 			else if (StructProp->Struct->GetFName() == Name_Color)
 			{
-				Initializer = TEXT("FColor(FLuaLinearColor::Get");
+				// Engine\Source\Runtime\Core\Public\Math\Color.h
+				// FLinearColor::ToFColor(true) 
+				//Initializer = TEXT("FColor(FLuaLinearColor::Get");
+				Initializer = TEXT("FLuaLinearColor::Get");
+				isLinearColorToColor = true;
 			}
 			else if (StructProp->Struct->GetFName() == Name_Transform)
 			{
@@ -108,7 +114,14 @@ FString FLuaScriptCodeGenerator::InitializeFunctionDispatchParam(UFunction* Func
 			FError::Throwf(TEXT("Unsupported function param type: %s"), *Param->GetClass()->GetName());
 		}
 
-		return FString::Printf(TEXT("%s(InScriptContext, %d))"), *Initializer, ParamIndex);
+		if (false == isLinearColorToColor)
+		{
+			return FString::Printf(TEXT("%s(InScriptContext, %d))"), *Initializer, ParamIndex);
+		}
+		else
+		{
+			return FString::Printf(TEXT("%s(InScriptContext, %d).ToFColor(true)"), *Initializer, ParamIndex);
+		}
 	}
 	else
 	{

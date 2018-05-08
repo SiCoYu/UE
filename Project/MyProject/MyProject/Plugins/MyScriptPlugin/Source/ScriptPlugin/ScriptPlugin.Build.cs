@@ -38,12 +38,13 @@ namespace UnrealBuildTool.Rules
 					"InputCore",
 					"SlateCore",
 					// ... add other public dependencies that you statically link with here ...
-				}
+                    // error LNK2019: unresolved external symbol "__declspec(dllimport) public: static class UClass * __cdecl UClothingSimulationFactory::StaticClass(void)" (__imp_?StaticClass@UClothingSimulationFactory@@SAPEAVUClass@@XZ) referenced in function "int __cdecl SkeletalMeshComponent_Get_ClothingSimulationFactory(struct lua_State *)" (?SkeletalMeshComponent_Get_ClothingSimulationFactory@@YAHPEAUlua_State@@@Z)
+                    "ClothingSystemRuntimeInterface",
+                }
 				);
 
 			if (Target.bBuildEditor == true)
 			{
-
 				PublicDependencyModuleNames.AddRange(
 					new string[] 
 					{
@@ -52,7 +53,6 @@ namespace UnrealBuildTool.Rules
 				);
 
 			}
-
 
 			DynamicallyLoadedModuleNames.AddRange(
 				new string[]
