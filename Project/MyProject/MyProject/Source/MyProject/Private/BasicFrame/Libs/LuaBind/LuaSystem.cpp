@@ -8,9 +8,9 @@
 //#include "LuaIntegration.h"
 
 // "ScriptPlugin/Private/LuaIntegration.cpp"
-static void LuaRegisterUnrealUtilities(lua_State* LuaState);
+extern void LuaRegisterUnrealUtilities(lua_State* LuaState);
 // "GeneratedScriptLibraries.inl"
-void LuaRegisterExportedClasses(lua_State* InScriptContext);
+extern void LuaRegisterExportedClasses(lua_State* InScriptContext);
 
 LuaSystem::LuaSystem()
 {
