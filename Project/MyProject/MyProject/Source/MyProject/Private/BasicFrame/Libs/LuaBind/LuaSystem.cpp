@@ -3,7 +3,14 @@
 #include "LuaCppBind.h"
 #include "MyLuaLoader.h"
 
-#include "LuaIntegration.h"
+//#include "MyScriptPlugin/Source/ScriptPlugin/Private/LuaIntegration.h"
+#include "ScriptPlugin/Private/LuaIntegration.h"
+//#include "LuaIntegration.h"
+
+// "ScriptPlugin/Private/LuaIntegration.cpp"
+static void LuaRegisterUnrealUtilities(lua_State* LuaState);
+// "GeneratedScriptLibraries.inl"
+void LuaRegisterExportedClasses(lua_State* InScriptContext);
 
 LuaSystem::LuaSystem()
 {
