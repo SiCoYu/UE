@@ -38,7 +38,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyAsset",
                 "MyProject/Private/MyEngine/AI",
                 "MyProject/Private/MyEngine/MyBluePrint",
-                
+
                 "MyProject/Private/MyEngine/MyBase",
                 "MyProject/Private/MyEngine/MyBase/Actor",
                 "MyProject/Private/MyEngine/MyBase/Frame",
@@ -46,8 +46,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyBase/Anim",
                 "MyProject/Private/MyEngine/MyBase/Delegate",
                 "MyProject/Private/MyEngine/MyBase/Misc",
-				"MyProject/Private/MyEngine/MyBase/HAL",
-				"MyProject/Private/MyEngine/MyBase/Tick",
+                "MyProject/Private/MyEngine/MyBase/HAL",
+                "MyProject/Private/MyEngine/MyBase/Tick",
 
                 "MyProject/Private/MyEngine/MyFly",
                 "MyProject/Private/MyEngine/MyFly/Actor",
