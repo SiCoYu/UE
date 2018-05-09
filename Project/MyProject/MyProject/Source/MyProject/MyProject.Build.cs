@@ -241,7 +241,8 @@ public class MyProject : ModuleRules
                 "PakFile",
                 "ApplicationCore",  // "HAL/PlatformApplicationMisc.h" 中的 FPlatformApplicationMisc::ClipboardCopy
                 "ScriptPlugin",     // ScriptPlugin 插件
-                "MyScriptPlugin",     // ScriptPlugin 插件
+                // error : Could not find definition for module 'MyScriptPlugin' (referenced via Target -> MyProject.Build.cs)
+                //"MyScriptPlugin",     // ScriptPlugin 插件
             }
         );
 
