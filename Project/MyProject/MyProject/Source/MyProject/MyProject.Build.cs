@@ -26,6 +26,11 @@ public class MyProject : ModuleRules
         // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs
         PrivateIncludePaths.AddRange(
             new string[] {
+                // Relative to MyProject/Plugins/MyScriptPlugin/Source , 包含插件头文件， MyProject\MyProject.uproject 包含插件根目录 AdditionalPluginDirectories
+                // ScriptPlugin 包含目录
+			    "ScriptPlugin/Classes",
+                "ScriptPlugin/Private",
+
                 // Player 区域
                 "MyProject/Private/MyEngine",
                 "MyProject/Private/MyEngine/UI/Widgets",
@@ -191,6 +196,7 @@ public class MyProject : ModuleRules
                 "MyProject/Public/MyEngine/Player",
                 "MyProject/Public/MyEngine/Ui",
                 "MyProject/Public/MyEngine/Persist",
+                // Plugin 需要单独包含头文件
                 // Relative to Engine\Plugins\Runtime\ApexDestruction\Source , 包含插件头文件
                 // DestructibleActor.h 包含目录
 			    "../../../../../ApexDestruction/Public",
@@ -234,6 +240,7 @@ public class MyProject : ModuleRules
                 "HTTP",
                 "PakFile",
                 "ApplicationCore",  // "HAL/PlatformApplicationMisc.h" 中的 FPlatformApplicationMisc::ClipboardCopy
+                "ScriptPlugin",     // ScriptPlugin 插件
             }
         );
 

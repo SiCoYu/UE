@@ -3,6 +3,8 @@
 #include "LuaCppBind.h"
 #include "MyLuaLoader.h"
 
+#include "LuaIntegration.h"
+
 LuaSystem::LuaSystem()
 {
 	this->L = nullptr;
@@ -18,6 +20,12 @@ void LuaSystem::init()
 	// 打开基本库
 	this->L = luaL_newstate();
 	luaL_openlibs(this->L);
+
+	// 导入 UE4 自己的类
+	// 参考 MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\LuaIntegration.cpp
+	// bool FLuaContext::Initialize(const FString& Code, UObject* Owner)
+	LuaRegisterExportedClasses(this->L);
+	LuaRegisterUnrealUtilities(this->L);
 
 	// 打开 Socket
 	lua_getglobal(this->L, "package");
