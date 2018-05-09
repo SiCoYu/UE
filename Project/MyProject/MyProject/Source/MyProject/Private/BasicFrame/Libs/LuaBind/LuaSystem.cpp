@@ -4,6 +4,7 @@
 #include "MyLuaLoader.h"
 
 //#include "MyScriptPlugin/Source/ScriptPlugin/Private/LuaIntegration.h"
+// 相对于 MyProject\Plugins\MyScriptPlugin\Source
 #include "ScriptPlugin/Private/LuaIntegration.h"
 //#include "LuaIntegration.h"
 
