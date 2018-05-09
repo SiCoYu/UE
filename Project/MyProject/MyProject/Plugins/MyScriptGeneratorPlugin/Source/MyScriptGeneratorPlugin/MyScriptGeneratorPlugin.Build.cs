@@ -13,7 +13,7 @@ public class MyScriptGeneratorPlugin : ModuleRules
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				"MyScriptGeneratorPlugin/Public",
+                "MyScriptGeneratorPlugin/Public",
                 "Programs/UnrealHeaderTool/Public",     // IScriptGeneratorPluginInterface
 				// ... add public include paths required here ...
 			}
