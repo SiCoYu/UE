@@ -223,6 +223,7 @@ public class MyProject : ModuleRules
 
                 //"UnrealEd", // UUnrealEdEngine \ UEditorEngine
                 "ApplicationCore",  // "HAL/PlatformApplicationMisc.h" 中的 FPlatformApplicationMisc::ClipboardCopy
+                "ScriptPlugin",     // ScriptPlugin 插件
             }
         );
 
@@ -255,6 +256,8 @@ public class MyProject : ModuleRules
 
         // AnimGraphRuntime 模块的包含目录需要这样导入，参考 Engine.Build.cs
         DynamicallyLoadedModuleNames.Add("AnimGraphRuntime");
+        // error: Module rules for 'MyProject' should not be dependent on modules which are also dynamically loaded: ScriptPlugin
+        //DynamicallyLoadedModuleNames.Add("ScriptPlugin");
 
         // 包含 Private 模块中的头文件目录
         //PrivateIncludePathModuleNames.AddRange(
