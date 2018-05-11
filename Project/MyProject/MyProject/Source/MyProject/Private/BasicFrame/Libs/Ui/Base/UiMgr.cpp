@@ -200,7 +200,7 @@ void UiMgr::loadWidgetRes(UiFormId formId)
 		this->mId2WidgetLoadingItemDic[formId] = new UiLoadingItem();
 		this->mId2WidgetLoadingItemDic[formId]->mId = formId;
 
-		//this->loadFromFile(attrItem->mWidgetPath, EventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
+		//this->loadFromFile(attrItem->mWidgetPath, MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
 
 		AuxMUIClassLoader* uiLoader = SAFE_NEW AuxMUIClassLoader();
 
@@ -208,7 +208,7 @@ void UiMgr::loadWidgetRes(UiFormId formId)
 		form->setAuxMUIClassLoader(uiLoader);
 
 		uiLoader->setUMGOuterType(attrItem->mUMGOuterType);
-		uiLoader->asyncLoad(attrItem->mWidgetPath, EventDispatchDelegate(this, &UiMgr::onWidgetAuxUIClassloadedByRes));
+		uiLoader->asyncLoad(attrItem->mWidgetPath, MakeEventDispatchDelegate(this, &UiMgr::onWidgetAuxUIClassloadedByRes));
 	}
 }
 
@@ -345,7 +345,7 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//}
 
 	// 卸载资源
-	//GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
+	//GClassAssetInsMgr->unload(path, MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
 }
 
 void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
@@ -368,7 +368,7 @@ void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 	}
 
 	// 卸载资源
-	//GClassAssetInsMgr->unload(path, EventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
+	//GClassAssetInsMgr->unload(path, MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
 }
 
 // 大小发生变化后，调用此函数

@@ -30,6 +30,7 @@ class UMyLocalPlayerBase;
 class UMyGameViewportClientBase;
 class UMeshComponent;
 class UMaterialInterface;
+class UWidget;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -370,6 +371,9 @@ public:
 	static bool isInAsyncLoadingThread();
 	// 是否需要 Cook 数据
 	static bool requiresCookedData();
+	// 窗口是否可见
+	static bool isWidgetVisible(UWidget* widget);
+	static void setWidgetVisible(UWidget* widget, bool isVisible);
 };
 
 #include "UtilEngineWrap.inl"

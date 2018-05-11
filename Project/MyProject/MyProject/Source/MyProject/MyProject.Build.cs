@@ -86,7 +86,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Util",
 
                 "MyProject/Private/BasicFrame/Libs/Thread",
-                "MyProject/Private/BasicFrame/Libs/FastDelegate",
+                "MyProject/Private/BasicFrame/Libs/SimpleDelegate",
                 "MyProject/Private/BasicFrame/Libs/Tools",
                 "MyProject/Private/BasicFrame/Libs/DelayHandle",
                 "MyProject/Private/BasicFrame/Libs/EventHandle",

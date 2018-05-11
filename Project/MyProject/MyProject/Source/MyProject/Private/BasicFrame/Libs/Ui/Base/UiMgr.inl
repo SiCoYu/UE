@@ -55,7 +55,7 @@ T* UiMgr::loadForm(UiFormId formId)
 		//UClass* WidgetClass = UtilEngineWrap::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
 		//UClass* WidgetClass = GMyStreamableManager->SynchronousLoadType<UClass>(attrItem->mWidgetPath);
 
-		//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", EventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
+		//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
 
 		//ClassAssetInsRes* asset = GClassAssetInsMgr->getAndSyncLoadClass(attrItem->mWidgetPath);
 		//UClass* WidgetClass = asset->getClass();

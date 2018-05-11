@@ -134,7 +134,12 @@ DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
         }
     }
     loadItem->setLoadParam(param);
-    loadItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, &DownloadMgr::onLoadEventHandle));
+    loadItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(
+		MakeEventDispatchDelegate(
+			this, 
+			&DownloadMgr::onLoadEventHandle
+		)
+	);
     loadItem->getAllLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
 
     return loadItem;
@@ -308,7 +313,13 @@ void DownloadMgr::removeWillLoadItem(std::string resUniqueId)
 void DownloadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 {
     DownloadItem* item = (DownloadItem*)dispObj;
-    item->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, &DownloadMgr::onLoadEventHandle));
+    item->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(
+		MakeEventDispatchDelegate(
+			this, 
+			&DownloadMgr::onLoadEventHandle
+		)
+	);
+
     if (item->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
     {
         onLoaded(item);
@@ -328,6 +339,7 @@ void DownloadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 void DownloadMgr::onLoaded(DownloadItem* item)
 {
 	std::string resUniqueId = item->getResUniqueId();
+
     if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
     {
         mLoadData->mPath2LDItem[item->getResUniqueId()]->init();

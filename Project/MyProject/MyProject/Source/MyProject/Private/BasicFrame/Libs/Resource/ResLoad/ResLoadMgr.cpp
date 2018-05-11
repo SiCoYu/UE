@@ -267,7 +267,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	}
 
 	loadItem->setLoadParam(param);
-	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
+	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(MakeEventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 
 	return loadItem;
 }
@@ -318,7 +318,7 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 	}
 	else
 	{
-		loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
+		loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(MakeEventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 	}
 
 	this->resetLoadParam(param);
@@ -421,7 +421,7 @@ void ResLoadMgr::unloadNoRef(std::string path)
 void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 {
 	LoadItem* item = (LoadItem*)dispObj;
-	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(EventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
+	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(MakeEventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
 	if (item->getNonRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
 		this->onLoaded(item);

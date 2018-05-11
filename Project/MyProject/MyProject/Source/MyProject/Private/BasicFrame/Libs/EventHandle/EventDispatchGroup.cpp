@@ -10,24 +10,24 @@ EventDispatchGroup::EventDispatchGroup()
 }
 
 // 添加分发器
-void EventDispatchGroup::addEventDispatch(int groupID, EventDispatch* disp)
+void EventDispatchGroup::addEventDispatch(int groupId, EventDispatch* disp)
 {
-	if (!UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupID))
+	if (!UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupId))
 	{
-		this->mGroupID2DispatchDic[groupID] = disp;
+		this->mGroupID2DispatchDic[groupId] = disp;
 	}
 }
 
-void EventDispatchGroup::addEventHandle(int groupID, EventDispatchDelegate handle)
+void EventDispatchGroup::addEventHandle(int groupId, EventDispatchDelegate handle)
 {
-	this->mGroupID2DispatchDic[groupID]->addEventHandle(handle);
+	this->mGroupID2DispatchDic[groupId]->addEventHandle(handle);
 }
 
-void EventDispatchGroup::removeEventHandle(int groupID, EventDispatchDelegate handle)
+void EventDispatchGroup::removeEventHandle(int groupId, EventDispatchDelegate handle)
 {
-	if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupID))
+	if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupId))
 	{
-		this->mGroupID2DispatchDic[groupID]->removeEventHandle(handle);
+		this->mGroupID2DispatchDic[groupId]->removeEventHandle(handle);
 	}
 	else
 	{
@@ -35,13 +35,13 @@ void EventDispatchGroup::removeEventHandle(int groupID, EventDispatchDelegate ha
 	}
 }
 
-void EventDispatchGroup::dispatchEvent(int groupID, IDispatchObject* dispatchObject)
+void EventDispatchGroup::dispatchEvent(int groupId, IDispatchObject* dispatchObject)
 {
 	this->mIsInLoop = true;
 
-	if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupID))
+	if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupId))
 	{
-		this->mGroupID2DispatchDic[groupID]->dispatchEvent(dispatchObject);
+		this->mGroupID2DispatchDic[groupId]->dispatchEvent(dispatchObject);
 	}
 	else
 	{
@@ -69,14 +69,14 @@ void EventDispatchGroup::clearAllEventHandle()
 	}
 }
 
-void EventDispatchGroup::clearGroupEventHandle(int groupID)
+void EventDispatchGroup::clearGroupEventHandle(int groupId)
 {
 	if (!this->mIsInLoop)
 	{
-		if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupID))
+		if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupId))
 		{
-			this->mGroupID2DispatchDic[groupID]->clearEventHandle();
-			UtilMap::Remove(mGroupID2DispatchDic, groupID);
+			this->mGroupID2DispatchDic[groupId]->clearEventHandle();
+			UtilMap::Remove(mGroupID2DispatchDic, groupId);
 		}
 		else
 		{

@@ -2,16 +2,20 @@
 #include "LuaSystem.h"
 #include "LuaCppBind.h"
 #include "MyLuaLoader.h"
+#include "UtilEngineWrap.h"
 
 //#include "MyScriptPlugin/Source/ScriptPlugin/Private/LuaIntegration.h"
 // 相对于 MyProject\Plugins\MyScriptPlugin\Source
-#include "ScriptPlugin/Private/LuaIntegration.h"
+//#include "ScriptPlugin/Private/LuaIntegration.h"
+//#include "ScriptPlugin/Classes/ScriptContext.h"
+#include "ScriptPlugin/Classes/ScriptPluginExport.h"
 //#include "LuaIntegration.h"
 
+// 这两个接口不能导出来
 // "ScriptPlugin/Private/LuaIntegration.cpp"
-extern void LuaRegisterUnrealUtilities(lua_State* LuaState);
+//extern void LuaRegisterUnrealUtilities(lua_State* LuaState);
 // "GeneratedScriptLibraries.inl"
-extern void LuaRegisterExportedClasses(lua_State* InScriptContext);
+//extern void LuaRegisterExportedClasses(lua_State* InScriptContext);
 
 LuaSystem::LuaSystem()
 {
@@ -32,8 +36,10 @@ void LuaSystem::init()
 	// 导入 UE4 自己的类
 	// 参考 MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\LuaIntegration.cpp
 	// bool FLuaContext::Initialize(const FString& Code, UObject* Owner)
-	LuaRegisterExportedClasses(this->L);
-	LuaRegisterUnrealUtilities(this->L);
+	//LuaRegisterExportedClasses(this->L);
+	//LuaRegisterUnrealUtilities(this->L);
+	//UScriptContext* a = UtilEngineWrap::NewObject<UScriptContext>();
+	UScriptPluginExport::initPlugin(this->L);
 
 	// 打开 Socket
 	lua_getglobal(this->L, "package");
