@@ -83,7 +83,7 @@ namespace MyNS
 			{
 				this->mResLoadState->setFailed();
 
-				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 				this->mPrefabRes = nullptr;
 
 				if (this->mEvtHandle != nullptr)

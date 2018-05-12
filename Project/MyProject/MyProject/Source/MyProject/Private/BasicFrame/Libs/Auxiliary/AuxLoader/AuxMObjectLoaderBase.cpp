@@ -107,11 +107,17 @@ namespace MyNS
 		{
 			if (eClassType == this->mResPackType)
 			{
-				this->mPrefabRes = GClassAssetInsMgr->getAndAsyncLoadRes(path, EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+				this->mPrefabRes = GClassAssetInsMgr->getAndAsyncLoadRes(path, MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 			}
 			else if (eObjectType == this->mResPackType)
 			{
-				this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(path, EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+				this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(
+					path, 
+					MakeEventDispatchDelegate(
+						this, 
+						&AuxMObjectLoaderBase::onPrefabLoaded
+					)
+				);
 			}
 		}
 		else if (this->hasLoadEnd())
@@ -136,7 +142,7 @@ namespace MyNS
 					if (this->mIsInsNeedCoroutine)
 					{
 						this->mResInsEventDispatch = new ResInsEventDispatch();
-						this->mResInsEventDispatch->addEventHandle(EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabIns));
+						this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabIns));
 
 						if (this->mIsSetFakePos)
 						{
@@ -170,7 +176,7 @@ namespace MyNS
 			{
 				this->mResLoadState->setFailed();
 
-				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 				this->mPrefabRes = nullptr;
 
 				if (this->mEvtHandle != nullptr)
@@ -231,7 +237,7 @@ namespace MyNS
 	{
 		if (this->mPrefabRes != nullptr)
 		{
-			GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), EventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+			GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 			this->mPrefabRes = nullptr;
 		}
 
@@ -291,7 +297,7 @@ namespace MyNS
 			{
 				this->mResInsEventDispatch = new ResInsEventDispatch();
 			}
-			this->mResInsEventDispatch->addEventHandle(EventDispatchDelegate(this,&AuxMObjectLoaderBase::onInstantiateObjectFinish));
+			this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this,&AuxMObjectLoaderBase::onInstantiateObjectFinish));
 
 			if (this->mIsSetFakePos)
 			{

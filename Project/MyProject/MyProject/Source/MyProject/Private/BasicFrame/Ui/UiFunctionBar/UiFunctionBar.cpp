@@ -42,7 +42,7 @@ void UUiFunctionBar::onTestButtonTouch()
 
 	GSceneSys->loadScene(
 		"/Game/MyAsset/Map/TestMap2", 
-		EventDispatchDelegate(
+		MakeEventDispatchDelegate(
 			this, 
 			&UUiFunctionBar::onLevelLoadedDispatch
 		)

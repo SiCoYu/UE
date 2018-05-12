@@ -21,6 +21,7 @@
 #include "Materials/MaterialInstance.h"	// UMaterialInstance
 #include "Components/MeshComponent.h"	// UMeshComponent
 #include "CoreGlobals.h"	// IsInAsyncLoadingThread
+#include "Components/Widget.h"	// UWidget
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -290,12 +291,14 @@ void UtilEngineWrap::LaunchURL(FString url)
 
 bool UtilEngineWrap::isValid(UObject* pObj)
 {
+	bool ret = false;
+
 	if (pObj && pObj->IsValidLowLevel())
 	{
-		return true;
+		ret = true;
 	}
 
-	return false;
+	return ret;
 }
 
 float UtilEngineWrap::DistanceOfActorToThisMeshSurface(UStaticMeshComponent* StaticMeshComponent, AActor* TestActor, FVector& ClosestSurfacePoint) const
@@ -312,12 +315,18 @@ float UtilEngineWrap::DistanceOfActorToThisMeshSurface(UStaticMeshComponent* Sta
 
 void UtilEngineWrap::SetMassScale(UStaticMeshComponent* StaticMeshComponent, const float& NewScale)
 {
-	if (!StaticMeshComponent) return;
+	if (!StaticMeshComponent)
+	{
+		return;
+	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	FBodyInstance* BodyInst = StaticMeshComponent->GetBodyInstance();
 
-	if (!BodyInst) return;
+	if (!BodyInst)
+	{
+		return;
+	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// New Scale 
@@ -350,12 +359,14 @@ void UtilEngineWrap::GetDisplayAdapterScreenResolutions(FScreenResolutionArray& 
 
 bool UtilEngineWrap::IsTextValid(FText MyText)
 {
+	bool ret = false;
+
 	if (MyText.IsEmpty())
 	{
-		return true;
+		ret = true;
 	}
 
-	return false;
+	return ret;
 }
 
 void UtilEngineWrap::ClientMessage(FString str)
@@ -425,6 +436,7 @@ ULevel* UtilEngineWrap::GetLevel(AActor* actor)
 void UtilEngineWrap::ExecuteConsoleCommand(const FString& Command)
 {
 	APlayerController* TargetPC = UtilEngineWrap::GetPlayerController();
+
 	if (TargetPC)
 	{
 		TargetPC->ConsoleCommand(Command, true);
@@ -507,27 +519,35 @@ UObject* UtilEngineWrap::StaticLoadObject(UClass* Class, UObject* InOuter, const
 {
 	Class->GetDefaultObject(); // force the CDO to be created if it hasn't already
 	UObject* ObjectPtr = ::StaticLoadObject(Class, InOuter, Name, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation);
+
 	if (ObjectPtr)
 	{
 		ObjectPtr->AddToRoot();
 	}
+
 	return ObjectPtr;
 }
 
 UClass* UtilEngineWrap::StaticLoadClass(UClass* BaseClass, UObject* InOuter, const TCHAR* Name, const TCHAR* Filename, uint32 LoadFlags, UPackageMap* Sandbox)
 {
 	UClass* LoadedClass = ::StaticLoadClass(BaseClass, InOuter, Name, Filename, LoadFlags, Sandbox);
+
 	if (LoadedClass)
 	{
 		LoadedClass->AddToRoot();
 	}
+
 	return LoadedClass;
 }
 
 FString UtilEngineWrap::GetPathName(const UObject* curObj, const UObject* StopOuter/*=NULL*/)
 {
 	FString Result;
-	Result = curObj->GetPathName(StopOuter);
+
+	if (nullptr != curObj)
+	{
+		Result = curObj->GetPathName(StopOuter);
+	}
 	return Result;
 }
 
@@ -535,6 +555,7 @@ UMyGameViewportClientBase* const UtilEngineWrap::GetGameViewportClient()
 {
 	UMyGameInstanceBase* GameInstance = UtilEngineWrap::GetGameInstance();
 	UMyGameViewportClientBase* const GameViewport = Cast<UMyGameViewportClientBase>(GameInstance->GetGameViewportClient());
+
 	return GameViewport;
 }
 
@@ -647,6 +668,7 @@ UWorld* UtilEngineWrap::GetGlobalWorld()
 void UtilEngineWrap::SetTransientMasterVolume(float size)
 {
 	UWorld* GameInstanceWorld = UtilEngineWrap::GetGlobalWorld();
+
 	if (FAudioDevice* GameInstanceAudioDevice = GameInstanceWorld->GetAudioDevice())
 	{
 		GameInstanceAudioDevice->SetTransientMasterVolume(0.0f);
@@ -910,17 +932,28 @@ void UtilEngineWrap::TestFileReadUnCompressed(FString _path)
 		FString tmp = FString::Printf(TEXT("--- rotator Pitch:%f, Yaw:%f, Roll:%f\n"), rot.Pitch, rot.Yaw, rot.Roll);
 		str4.Append(tmp);
 	}
+
 	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Yellow, str2 + str3 + str4);
 }
 
 bool UtilEngineWrap::IsPendingKill(AActor* actor)
 {
-	return actor->IsPendingKill();
+	bool ret = false;
+
+	if (nullptr != actor)
+	{
+		ret = actor->IsPendingKill();
+	}
+
+	return ret;
 }
 
 void UtilEngineWrap::Destroy(AActor* actor)
 {
-	actor->Destroy();
+	if (nullptr != actor)
+	{
+		actor->Destroy();
+	}
 }
 
 uint32 UtilEngineWrap::getFrameNumber()
@@ -949,4 +982,25 @@ bool UtilEngineWrap::requiresCookedData()
 {
 	bool ret = FPlatformProperties::RequiresCookedData();
 	return ret;
+}
+
+bool UtilEngineWrap::isWidgetVisible(UWidget* widget)
+{
+	bool ret = false;
+
+	if (nullptr != widget)
+	{
+		//ret = widget->IsVisible();
+		ret = (ESlateVisibility::Visible == widget->GetVisibility());
+	}
+
+	return ret;
+}
+
+void UtilEngineWrap::setWidgetVisible(UWidget* widget, bool isVisible)
+{
+	if (nullptr != widget)
+	{
+		widget->SetVisibility(ESlateVisibility::Visible);
+	}
 }

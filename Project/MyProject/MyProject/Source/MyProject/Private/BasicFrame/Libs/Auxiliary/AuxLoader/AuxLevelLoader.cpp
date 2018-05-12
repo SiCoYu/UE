@@ -26,7 +26,7 @@ namespace MyNS
 			LoadParam* param;
 			param = GPoolSys->newObject<LoadParam>();
 			param->setPath(mPath);
-			param->setLoadEventHandle(EventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
+			param->setLoadEventHandle(MakeEventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
 			param->setIsResNeedCoroutine(false);
 			param->setIsLoadNeedCoroutine(false);
 			GResLoadMgr->loadAsset(param);
@@ -51,7 +51,7 @@ namespace MyNS
 			LoadParam* param;
 			param = GPoolSys->newObject<LoadParam>();
 			param->setPath(mPath);
-			param->setLoadEventHandle(EventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
+			param->setLoadEventHandle(MakeEventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
 			param->setIsResNeedCoroutine(true);
 			param->setIsLoadNeedCoroutine(true);
 			param->setResPackType(eLevelType);

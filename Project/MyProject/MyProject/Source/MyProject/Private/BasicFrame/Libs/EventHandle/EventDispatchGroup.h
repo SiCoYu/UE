@@ -15,12 +15,12 @@ protected:
 public:
 	EventDispatchGroup();
     // 添加分发器
-	void addEventDispatch(int groupID, EventDispatch* disp);
-	void addEventHandle(int groupID, EventDispatchDelegate handle);
-	void removeEventHandle(int groupID, EventDispatchDelegate handle);
-	void dispatchEvent(int groupID, IDispatchObject* dispatchObject);
+	void addEventDispatch(int groupId, EventDispatch* disp);
+	void addEventHandle(int groupId, EventDispatchDelegate handle);
+	void removeEventHandle(int groupId, EventDispatchDelegate handle);
+	void dispatchEvent(int groupId, IDispatchObject* dispatchObject);
 	void clearAllEventHandle();
-	void clearGroupEventHandle(int groupID);
+	void clearGroupEventHandle(int groupId);
 };
 
 #endif

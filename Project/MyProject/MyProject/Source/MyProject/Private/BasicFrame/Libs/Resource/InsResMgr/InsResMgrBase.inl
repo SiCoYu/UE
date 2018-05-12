@@ -66,7 +66,7 @@ void InsResMgrBase::loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
 {
 	this->mPath2ResDic[param->getPath()] = resItem;
 	this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
-	param->setLoadEventHandle(EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
+	param->setLoadEventHandle(MakeEventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
 	GResLoadMgr->loadAsset(param);
 }
 

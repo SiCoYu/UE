@@ -86,7 +86,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Util",
 
                 "MyProject/Private/BasicFrame/Libs/Thread",
-                "MyProject/Private/BasicFrame/Libs/FastDelegate",
+                "MyProject/Private/BasicFrame/Libs/SimpleDelegate",
                 "MyProject/Private/BasicFrame/Libs/Tools",
                 "MyProject/Private/BasicFrame/Libs/DelayHandle",
                 "MyProject/Private/BasicFrame/Libs/EventHandle",
@@ -362,6 +362,10 @@ public class MyProject : ModuleRules
         // 
         //UEBuildConfiguration.BuildConfiguration.bForceDebugUnrealHeaderTool = true;
 
+        // 添加 ScriptPlugin 目录
+        //string path = Path.Combine(ProjectPluginsPath, "MyScriptPlugin/Source/ScriptPlugin");
+        //PublicLibraryPaths.Add(path);
+
         loadThirdPartyInclude();
         //LoadSockets(Target);
         LoadTestExtern(Target);
@@ -381,6 +385,14 @@ public class MyProject : ModuleRules
             //return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name));
             //return Path.GetDirectoryName(ModuleDirectory);    // 不是这样获取
             return ModuleDirectory;      // 参照 Engine\Plugins\Runtime\Nvidia\Ansel\Source\Ansel\Ansel.Build.cs 实现
+        }
+    }
+
+    protected string ProjectPluginsPath
+    {
+        get
+        {
+            return Path.GetFullPath(Path.Combine(ModulePath, "../..", "Plugins"));
         }
     }
 

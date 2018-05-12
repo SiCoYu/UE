@@ -25,7 +25,7 @@ namespace MyNS
 			DownloadParam* param = new DownloadParam();
 
 			param->setPath(origPath);
-			param->mLoadEventHandle = EventDispatchDelegate(this, &AuxDownloader::onDownloaded);
+			param->mLoadEventHandle = MakeEventDispatchDelegate(this, &AuxDownloader::onDownloaded);
 			param->mFileLen = fileLen;
 			param->mIsWriteFile = isWriteFile;
 			param->mDownloadType = (DownloadType)downloadType;
