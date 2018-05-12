@@ -2,10 +2,10 @@
 
 namespace MyNS
 {
-	class TestApp
+	class AppFrame
 	{
 	public:
-		TestApp();
-		~TestApp();
+		AppFrame();
+		~AppFrame();
 	};
 }

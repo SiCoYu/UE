@@ -8,6 +8,9 @@ source_group("Src\\App" FILES ${SRCS_App_FILES})
 file(GLOB SRCS_MyDelegate_FILES Src/MyDelegate/*.h Src/MyDelegate/*.cpp)
 source_group("Src\\MyDelegate" FILES ${SRCS_MyDelegate_FILES})
 
+file(GLOB SRCS_Templates_FILES Src/Templates/*.h Src/Templates/*.cpp)
+source_group("Src\\Templates" FILES ${SRCS_Templates_FILES})
+
 IF(WIN32)
 	add_definitions(-DPLATFORM_WINDOWS)
 ELSEIF(APPLE)
@@ -26,7 +29,7 @@ ENDIF()
 
 #ADD_DEFINITIONS(-DTEST)
 
-set(ALL_SRCS ${SRCS_App_FILES} ${SRCS_MyDelegate_FILES})
+set(ALL_SRCS ${SRCS_App_FILES} ${SRCS_MyDelegate_FILES} ${SRCS_Templates_FILES})
 
 ADD_EXECUTABLE(${PROJECT_NAME} WIN32 ${ALL_SRCS})
 

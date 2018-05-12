@@ -1,13 +1,13 @@
-#include "TestApp.h"
+#include "AppFrame.h"
 
 namespace MyNS
 {
-	TestApp::TestApp()
+	AppFrame::AppFrame()
 	{
 
 	}
 
-	TestApp::~TestApp()
+	AppFrame::~AppFrame()
 	{
 
 	}
