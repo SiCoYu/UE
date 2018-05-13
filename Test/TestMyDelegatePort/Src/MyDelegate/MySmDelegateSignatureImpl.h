@@ -82,6 +82,24 @@ namespace MyNS
 		{
 		}
 
+		template <typename... VarTypes>
+		inline MySmBaseDelegate(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
+		{
+			this->BindStatic(InFunc, Vars);
+		}
+
+		template <typename UserClass, typename... VarTypes>
+		inline MySmBaseDelegate(UserClass* InUserObject, typename TMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+		{
+			this->BindRaw(InUserObject, InFunc, Vars...);
+		}
+
+		template <typename UserClass, typename... VarTypes>
+		inline MySmBaseDelegate(UserClass* InUserObject, typename TMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+		{
+			this->BindRaw(InUserObject, InFunc, Vars...);
+		}
+
 		inline ~MySmBaseDelegate()
 		{
 			this->unbind();
