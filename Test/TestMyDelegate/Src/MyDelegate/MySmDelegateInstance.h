@@ -1,5 +1,7 @@
-#ifndef __MySmDelegate_H
-#define __MySmDelegate_H
+#ifndef __MySmDelegateInstance_H
+#define __MySmDelegateInstance_H
+
+using namespace MyNS;
 
 namespace MyNS
 {

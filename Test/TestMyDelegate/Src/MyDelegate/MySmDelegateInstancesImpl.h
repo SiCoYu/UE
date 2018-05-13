@@ -3,6 +3,8 @@
 #include <cassert>
 #include "MySmDelegateInstanceInterface.h"
 
+using namespace MyNS;
+
 namespace MyNS
 {
 	/**

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "IMySmDelegateInstance.h"
+#include "MySmDelegateBase.h"
+
 namespace MyNS
 {
 	class IMySmDelegateInstance;

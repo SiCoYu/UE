@@ -1,6 +1,8 @@
 #pragma once
 
-#include "IMySmDelegateInstance.h"
+#include "MySmDelegateInstanceInterface.h"
+
+using namespace MyNS;
 
 namespace MyNS
 {
@@ -10,7 +12,6 @@ namespace MyNS
 	class MySmDelegateBase
 	{
 	public:
-
 		/**
 		* Creates and initializes a new instance.
 		*
