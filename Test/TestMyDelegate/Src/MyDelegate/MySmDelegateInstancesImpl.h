@@ -56,10 +56,13 @@ namespace MyNS
 	public:
 
 		// IBaseDelegateInstance interface
-
+		// 创建拷贝，全部都是拷贝，不是直接引用
 		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
-			new UnwrappedThisType(*(UnwrappedThisType*)this);
+			// TODO: UE4 是
+			//new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
+			UnwrappedThisType* instance = new UnwrappedThisType(*(UnwrappedThisType*)this);
+			Base.setDelegateInstance(instance);
 		}
 
 		virtual RetValType Execute(ParamTypes... Params) const override final
@@ -89,6 +92,8 @@ namespace MyNS
 		*/
 		FORCEINLINE static void Create(MySmDelegateBase& Base, UserClass* InUserObject, FMethodPtr InFunc, VarTypes... Vars)
 		{
+			// TODO: UE4 是
+			//new (Base) UnwrappedThisType(InUserObject, InFunc, Vars...);
 			UnwrappedThisType* instance = new UnwrappedThisType(InUserObject, InFunc, Vars...);
 			Base.setDelegateInstance(instance);
 		}

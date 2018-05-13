@@ -103,7 +103,7 @@ namespace MyNS
 		*/
 		inline ~MySmBaseDelegate()
 		{
-			Unbind();
+			this->Unbind();
 		}
 
 		/**
@@ -163,6 +163,7 @@ namespace MyNS
 		{
 			*this = this->CreateRaw(InUserObject, InFunc, Vars...);
 		}
+
 		template <typename UserClass, typename... VarTypes>
 		inline void BindRaw(UserClass* InUserObject, typename TMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
@@ -194,8 +195,7 @@ namespace MyNS
 		*/
 		FORCEINLINE MySmDelegateInstanceInterface* GetDelegateInstanceProtected() const
 		{
-			//return (MySmDelegateInstanceInterface*)mDelegateInstance;
-			return nullptr;
+			return (MySmDelegateInstanceInterface*)mDelegateInstance;
 		}
 	};
 
