@@ -130,7 +130,7 @@ namespace MyNS
 	* Implements a delegate binding for regular C++ functions.
 	*/
 	template <typename FuncType, typename... VarTypes>
-	class TMySmBaseStaticDelegateInstance;
+	class MySmBaseStaticDelegateInstance;
 
 	template <typename WrappedRetValType, typename... ParamTypes, typename... VarTypes>
 	class MySmBaseStaticDelegateInstance<WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
@@ -169,7 +169,7 @@ namespace MyNS
 
 		// IBaseDelegateInstance interface
 
-		virtual void CreateCopy(FDelegateBase& Base) override final
+		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
 			new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
 		}
@@ -190,7 +190,7 @@ namespace MyNS
 		* @param InFunc Static function pointer.
 		* @return The new delegate.
 		*/
-		FORCEINLINE static void Create(FDelegateBase& Base, FFuncPtr InFunc, VarTypes... Vars)
+		FORCEINLINE static void Create(MySmDelegateBase& Base, FFuncPtr InFunc, VarTypes... Vars)
 		{
 			new (Base) UnwrappedThisType(InFunc, Vars...);
 		}
@@ -204,7 +204,7 @@ namespace MyNS
 	template <typename... ParamTypes, typename... VarTypes>
 	class MySmBaseStaticDelegateInstance<void(ParamTypes...), VarTypes...> : public MySmBaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...>
 	{
-		typedef BaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
+		typedef MySmBaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
 
 	public:
 		/**
