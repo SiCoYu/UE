@@ -17,12 +17,12 @@ namespace MyNS
 	struct IMySmBaseDelegateInstanceCommon<RetType(ArgTypes...)> : public IMySmDelegateInstance
 	{
 		/**
-		* Emplaces a copy of the delegate instance into the FDelegateBase.
+		* …Ó∂»øΩ±¥
 		*/
 		virtual void CreateCopy(MySmDelegateBase& Base) = 0;
 
 		/**
-		* Execute the delegate.  If the function pointer is not valid, an error will occur.
+		* ÷¥––
 		*/
 		virtual RetType Execute(ArgTypes...) const = 0;
 	};

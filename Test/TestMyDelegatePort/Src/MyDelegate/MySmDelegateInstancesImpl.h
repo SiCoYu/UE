@@ -7,9 +7,6 @@ using namespace MyNS;
 
 namespace MyNS
 {
-	/**
-	* Implements a delegate binding for C++ member functions.
-	*/
 	template <bool bConst, class UserClass, typename FuncType, typename... VarTypes>
 	class MySmBaseRawMethodDelegateInstance;
 
@@ -26,36 +23,25 @@ namespace MyNS
 	public:
 		typedef typename TMemFunPtrType<bConst, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type FMethodPtr;
 
-		/**
-		* Creates and initializes a new instance.
-		*
-		* @param InUserObject An arbitrary object (templated) that hosts the member function.
-		* @param InMethodPtr C++ member function pointer for the method to bind.
-		*/
 		MySmBaseRawMethodDelegateInstance(UserClass* InUserObject, FMethodPtr InMethodPtr, VarTypes... Vars)
 			: UserObject(InUserObject)
 			, MethodPtr(InMethodPtr)
 		{
-			// Non-expirable delegates must always have a non-null object pointer on creation (otherwise they could never execute.)
 			assert(InUserObject != nullptr && MethodPtr != nullptr);
 		}
 
 		// Deprecated
-		virtual bool HasSameObject(const void* InUserObject) const override final
+		virtual bool hasSameObject(const void* InUserObject) const override final
 		{
 			return UserObject == InUserObject;
 		}
 
-		virtual bool IsSafeToExecute() const override final
+		virtual bool isValid() const override final
 		{
-			// We never know whether or not it is safe to deference a C++ pointer, but we have to
-			// trust the user in this case.  Prefer using a shared-pointer based delegate type instead!
 			return true;
 		}
 
 	public:
-
-		// IBaseDelegateInstance interface
 		// 创建拷贝，全部都是拷贝，不是直接引用
 		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
@@ -69,27 +55,15 @@ namespace MyNS
 		{
 			typedef typename TRemoveConst<UserClass>::Type MutableUserClass;
 
-			// Safely remove const to work around a compiler issue with instantiating template permutations for 
-			// overloaded functions that take a function pointer typedef as a member of a templated class.  In
-			// all cases where this code is actually invoked, the UserClass will already be a const pointer.
+			// 通常会直接传入 UserObject 是 this， 这个是 const T ，如果不去掉 const ，直接调用，编译器会报错
 			MutableUserClass* MutableUserObject = const_cast<MutableUserClass*>(UserObject);
 
-			// Call the member function on the user's object.  And yes, this is the correct C++ syntax for calling a
-			// pointer-to-member function.
 			assert(MethodPtr != nullptr);
 
 			return (MutableUserObject->*MethodPtr)(Params...);
 		}
 
 	public:
-
-		/**
-		* Creates a new raw method delegate binding for the given user object and function pointer.
-		*
-		* @param InUserObject User's object that contains the class method.
-		* @param InFunc Member function pointer to your class method.
-		* @return The new delegate.
-		*/
 		FORCEINLINE static void Create(MySmDelegateBase& Base, UserClass* InUserObject, FMethodPtr InFunc, VarTypes... Vars)
 		{
 			// TODO: UE4 是
@@ -99,11 +73,7 @@ namespace MyNS
 		}
 
 	protected:
-
-		// Pointer to the user's class which contains a method we would like to call.
 		UserClass* UserObject;
-
-		// C++ member function pointer.
 		FMethodPtr MethodPtr;
 	};
 
@@ -113,12 +83,6 @@ namespace MyNS
 		typedef MySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
 
 	public:
-		/**
-		* Creates and initializes a new instance.
-		*
-		* @param InUserObject An arbitrary object (templated) that hosts the member function.
-		* @param InMethodPtr C++ member function pointer for the method to bind.
-		*/
 		MySmBaseRawMethodDelegateInstance(UserClass* InUserObject, typename Super::FMethodPtr InMethodPtr, VarTypes... Vars)
 			: Super(InUserObject, InMethodPtr, Vars...)
 		{
@@ -126,17 +90,12 @@ namespace MyNS
 
 		virtual bool ExecuteIfSafe(ParamTypes... Params) const override final
 		{
-			// We never know whether or not it is safe to deference a C++ pointer, but we have to
-			// trust the user in this case.  Prefer using a shared-pointer based delegate type instead!
 			Super::Execute(Params...);
 
 			return true;
 		}
 	};
 
-	/**
-	* Implements a delegate binding for regular C++ functions.
-	*/
 	template <typename FuncType, typename... VarTypes>
 	class MySmBaseStaticDelegateInstance;
 
@@ -160,52 +119,41 @@ namespace MyNS
 			assert(StaticFuncPtr != nullptr);
 		}
 
-		// Deprecated
-		virtual bool HasSameObject(const void* UserObject) const override final
+		virtual bool hasSameObject(const void* UserObject) const override final
 		{
-			// Raw Delegates aren't bound to an object so they can never match
 			return false;
 		}
 
-		virtual bool IsSafeToExecute() const override final
+		virtual bool isValid() const override final
 		{
-			// Static functions are always safe to execute!
 			return true;
 		}
 
 	public:
-
-		// IBaseDelegateInstance interface
-
 		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
-			new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
+			//new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
+			UnwrappedThisType pInstance = new UnwrappedThisType(*(UnwrappedThisType*)this);
+			Base.setDelegateInstance(pInstance);
 		}
 
 		virtual RetValType Execute(ParamTypes... Params) const override final
 		{
-			// Call the static function
 			assert(StaticFuncPtr != nullptr);
 
-			return Payload.ApplyAfter(StaticFuncPtr, Params...);
+			return StaticFuncPtr(Params...);
 		}
 
 	public:
 
-		/**
-		* Creates a new static function delegate binding for the given function pointer.
-		*
-		* @param InFunc Static function pointer.
-		* @return The new delegate.
-		*/
 		FORCEINLINE static void Create(MySmDelegateBase& Base, FFuncPtr InFunc, VarTypes... Vars)
 		{
-			new (Base) UnwrappedThisType(InFunc, Vars...);
+			//new (Base) UnwrappedThisType(InFunc, Vars...);
+			UnwrappedThisType pInstance = new UnwrappedThisType(InFunc, Vars...);
+			Base.setDelegateInstance(pInstance);
 		}
 
 	private:
-
-		// C++ function pointer.
 		FFuncPtr StaticFuncPtr;
 	};
 
@@ -215,11 +163,6 @@ namespace MyNS
 		typedef MySmBaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
 
 	public:
-		/**
-		* Creates and initializes a new instance.
-		*
-		* @param InStaticFuncPtr C++ function pointer.
-		*/
 		MySmBaseStaticDelegateInstance(typename Super::FFuncPtr InStaticFuncPtr, VarTypes... Vars)
 			: Super(InStaticFuncPtr, Vars...)
 		{

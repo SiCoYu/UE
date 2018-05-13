@@ -6,18 +6,17 @@ using namespace MyNS;
 namespace MyNS
 {
 	/**
-	 * non specialized template declaration for delegate
+	 * @brief 非偏特化
 	 */
 	template <typename T>
 	class MySmDelegate;
 
 	/**
-	 * specialization for member functions
+	 * 偏特化
 	 *
-	 * \tparam T            class-type of the object who's member function to call
-	 * \tparam R            return type of the function that gets captured
-	 * \tparam params       variadic template list for possible arguments
-	 *                      of the captured function
+	 * \tparam T            类类型
+	 * \tparam R            函数返回值类型
+	 * \tparam params       函数参数列表
 	 */
 	template <typename T, typename R, typename... Params>
 	class MySmDelegate<R (T::*)(Params...)>
@@ -50,7 +49,7 @@ namespace MyNS
 	};
 
 	/**
-	 * specialization for const member functions
+	 * 偏特化
 	 */
 	template <typename T, typename R, typename... Params>
 	class MySmDelegate<R (T::*)(Params...) const>
@@ -83,11 +82,10 @@ namespace MyNS
 	};
 
 	/**
-	 * specialization for free functions
+	 * 偏特化
 	 *
-	 * \tparam R            return type of the function that gets captured
-	 * \tparam params       variadic template list for possible arguments
-	 *                      of the captured function
+	 * \tparam R            函数返回类型
+	 * \tparam params       函数参数列表
 	 */
 	template <typename R, typename... Params>
 	class MySmDelegate<R (*)(Params...)>
@@ -118,7 +116,7 @@ namespace MyNS
 	};
 
 	/**
-	 * function to deduce template parameters from call-context
+	 * 简化接口
 	 */
 	template <typename F, typename T>
 	MySmDelegate<F> make_delegate(F func, T& obj)
@@ -133,7 +131,7 @@ namespace MyNS
 	}
 
 	/**
-	 * function to deduce template parameters from call-context
+	 * 简化接口
 	 */
 	template <typename F, typename T>
 	delegate<F> make_delegate(F func, T& obj)
@@ -153,9 +151,6 @@ namespace MyNS
 	{
 		return MySmDelegate<T>(func);
 	}
-
-	#endif
-
 }
 
 #endif

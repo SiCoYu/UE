@@ -80,6 +80,6 @@ namespace MyNS
 	{
 		return MySmClosure2<F>(func, obj, b1, b2);
 	}
-}	// namespace MyNS
+}
 
-#endif /* __MySmClosure_H */
+#endif

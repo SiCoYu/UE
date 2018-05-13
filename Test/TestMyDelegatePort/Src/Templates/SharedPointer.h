@@ -1101,7 +1101,7 @@ public:
 	/**
 	 * Returns true if the object this weak pointer points to is the same as the specified object pointer.
 	 */
-	FORCEINLINE bool HasSameObject( const void* InOtherPtr ) const
+	FORCEINLINE bool hasSameObject( const void* InOtherPtr ) const
 	{
 		return Pin().Get() == InOtherPtr;
 	}

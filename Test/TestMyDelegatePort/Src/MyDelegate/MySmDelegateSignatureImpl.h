@@ -13,21 +13,17 @@ template <typename FuncType> struct IMySmBaseDelegateInstance;
 namespace MyNS
 {
 	/**
-	* Unicast delegate base object.
-	*
-	* Use the various DECLARE_DELEGATE macros to create the actual delegate type, templated to
-	* the function signature the delegate is compatible with. Then, you can create an instance
-	* of that class when you want to bind a function to the delegate.
+	* @brief 使用 DECLARE_DELEGATE 宏创建, 
 	*/
 	template <typename WrappedRetValType, typename... ParamTypes>
 	class MySmBaseDelegate : public MySmDelegateBase
 	{
 	public:
-		/** Type definition for return value type. */
+		/** 定义返回类型 */
 		typedef typename TUnwrapType<WrappedRetValType>::Type RetValType;
 		typedef RetValType TFuncType(ParamTypes...);
 
-		/** Type definition for the shared interface of delegate instance types compatible with this delegate class. */
+		/** 定义 Instance 类型 */
 		typedef IMySmBaseDelegateInstance<TFuncType> MySmDelegateInstanceInterface;
 
 		/** Declare the user's C++ pointer-based delegate instance types. */
@@ -61,12 +57,6 @@ namespace MyNS
 			return Result;
 		}
 
-		/**
-		* Static: Creates a raw C++ pointer member function delegate.
-		*
-		* Raw pointer doesn't use any sort of reference, so may be unsafe to call if the object was
-		* deleted out from underneath your delegate. Be careful when calling Execute()!
-		*/
 		template <typename UserClass, typename... VarTypes>
 		inline static MySmBaseDelegate<RetValType, ParamTypes...> CreateRaw(UserClass* InUserObject, typename TMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
@@ -74,6 +64,7 @@ namespace MyNS
 			MySmBaseRawMethodDelegateInstance<false, UserClass, TFuncType, VarTypes...>::Create(Result, InUserObject, InFunc, Vars...);
 			return Result;
 		}
+
 		template <typename UserClass, typename... VarTypes>
 		inline static MySmBaseDelegate<RetValType, ParamTypes...> CreateRaw(UserClass* InUserObject, typename TMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
@@ -83,49 +74,31 @@ namespace MyNS
 		}
 
 	public:
-
-		/**
-		* Default constructor
-		*/
 		inline MySmBaseDelegate()
 		{
 		}
 
 		/**
-		* 'Null' constructor
+		* 'Null' 构造
 		*/
 		inline MySmBaseDelegate(TYPE_OF_NULLPTR)
 		{
 		}
 
-		/**
-		* Destructor.
-		*/
 		inline ~MySmBaseDelegate()
 		{
-			this->Unbind();
+			this->unbind();
 		}
 
-		/**
-		* Creates and initializes a new instance from an existing delegate object.
-		*
-		* @param Other The delegate object to copy from.
-		*/
 		inline MySmBaseDelegate(const MySmBaseDelegate& Other)
 		{
 			*this = Other;
 		}
 
-		/**
-		* Assignment operator.
-		*
-		* @param	OtherDelegate	Delegate object to copy from
-		*/
 		inline MySmBaseDelegate& operator=(const MySmBaseDelegate& Other)
 		{
 			if (&Other != this)
 			{
-				// this down-cast is OK! allows for managing invocation list in the base class without requiring virtual functions
 				MySmDelegateInstanceInterface* OtherInstance = Other.GetDelegateInstanceProtected();
 
 				if (OtherInstance != nullptr)
@@ -134,7 +107,7 @@ namespace MyNS
 				}
 				else
 				{
-					this->Unbind();
+					this->unbind();
 				}
 			}
 
@@ -142,22 +115,12 @@ namespace MyNS
 		}
 
 	public:
-
-		/**
-		* Binds a raw C++ pointer global function delegate
-		*/
 		template <typename... VarTypes>
 		inline void BindStatic(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
 		{
 			*this = CreateStatic(InFunc, Vars...);
 		}
 
-		/**
-		* Binds a raw C++ pointer delegate.
-		*
-		* Raw pointer doesn't use any sort of reference, so may be unsafe to call if the object was
-		* deleted out from underneath your delegate. Be careful when calling Execute()!
-		*/
 		template <typename UserClass, typename... VarTypes>
 		inline void BindRaw(UserClass* InUserObject, typename TMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
@@ -171,28 +134,15 @@ namespace MyNS
 		}
 
 	public:
-		/**
-		* Execute the delegate.
-		*
-		* If the function pointer is not valid, an error will occur. Check IsBound() before
-		* calling this method or use ExecuteIfBound() instead.
-		*
-		* @see ExecuteIfBound
-		*/
 		FORCEINLINE RetValType Execute(ParamTypes... Params) const
 		{
 			MySmDelegateInstanceInterface* LocalDelegateInstance = GetDelegateInstanceProtected();
 
-			// If this assert goes off, Execute() was called before a function was bound to the delegate.
-			// Consider using ExecuteIfSafe() instead.
 			assert(LocalDelegateInstance != nullptr);
 
 			return LocalDelegateInstance->Execute(Params...);
 		}
 
-		/**
-		* Returns a pointer to the correctly-typed delegate instance.
-		*/
 		FORCEINLINE MySmDelegateInstanceInterface* GetDelegateInstanceProtected() const
 		{
 			return (MySmDelegateInstanceInterface*)mDelegateInstance;
@@ -207,51 +157,32 @@ namespace MyNS
 	public:
 		typedef typename Super::MySmDelegateInstanceInterface MySmDelegateInstanceInterface;
 
-		/**
-		* Default constructor
-		*/
 		MySmBaseDelegate()
 		{
 		}
 
 		/**
-		* 'Null' constructor
+		* 'Null' 构造
 		*/
 		FORCEINLINE MySmBaseDelegate(TYPE_OF_NULLPTR)
 			: Super(nullptr)
 		{
 		}
 
-		/**
-		* Creates and initializes a new instance from an existing delegate object.
-		*
-		* @param Other The delegate object to copy from.
-		*/
 		FORCEINLINE MySmBaseDelegate(const MySmBaseDelegate& Other)
 			: Super(Other)
 		{
 		}
 
-		/**
-		* Assignment operator.
-		*
-		* @param	OtherDelegate	Delegate object to copy from
-		*/
 		inline MySmBaseDelegate& operator=(const MySmBaseDelegate& Other)
 		{
 			(Super&)*this = (Super&)Other;
 			return *this;
 		}
 
-		/**
-		* Execute the delegate, but only if the function pointer is still valid
-		*
-		* @return  Returns true if the function was executed
-		*/
-		// NOTE: Currently only delegates with no return value support ExecuteIfBound() 
 		inline bool ExecuteIfBound(ParamTypes... Params) const
 		{
-			if (Super::IsBound())
+			if (Super::isValid())
 			{
 				return Super::GetDelegateInstanceProtected()->ExecuteIfSafe(Params...);
 			}
