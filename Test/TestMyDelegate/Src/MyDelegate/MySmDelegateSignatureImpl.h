@@ -126,7 +126,7 @@ namespace MyNS
 			if (&Other != this)
 			{
 				// this down-cast is OK! allows for managing invocation list in the base class without requiring virtual functions
-				TDelegateInstanceInterface* OtherInstance = Other.GetDelegateInstanceProtected();
+				MySmDelegateInstanceInterface* OtherInstance = Other.GetDelegateInstanceProtected();
 
 				if (OtherInstance != nullptr)
 				{
@@ -134,7 +134,7 @@ namespace MyNS
 				}
 				else
 				{
-					Unbind();
+					this->Unbind();
 				}
 			}
 
@@ -147,7 +147,7 @@ namespace MyNS
 		* Binds a raw C++ pointer global function delegate
 		*/
 		template <typename... VarTypes>
-		inline void BindStatic(typename TBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
+		inline void BindStatic(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
 		{
 			*this = CreateStatic(InFunc, Vars...);
 		}
@@ -161,7 +161,7 @@ namespace MyNS
 		template <typename UserClass, typename... VarTypes>
 		inline void BindRaw(UserClass* InUserObject, typename TMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
-			*this = CreateRaw(InUserObject, InFunc, Vars...);
+			*this = this->CreateRaw(InUserObject, InFunc, Vars...);
 		}
 		template <typename UserClass, typename... VarTypes>
 		inline void BindRaw(UserClass* InUserObject, typename TMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)

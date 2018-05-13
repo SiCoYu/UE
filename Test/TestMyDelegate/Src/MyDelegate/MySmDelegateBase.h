@@ -19,11 +19,12 @@ namespace MyNS
 		*/
 		explicit MySmDelegateBase()
 		{
+			this->mDelegateInstance = nullptr;
 		}
 
 		~MySmDelegateBase()
 		{
-			Unbind();
+			this->Unbind();
 		}
 
 		/**
@@ -39,9 +40,14 @@ namespace MyNS
 		*/
 		MySmDelegateBase& operator=(MySmDelegateBase& Other)
 		{
-			Unbind();
+			this->Unbind();
 
 			return *this;
+		}
+
+		void setDelegateInstance(IMySmDelegateInstance* value)
+		{
+			this->mDelegateInstance = value;
 		}
 
 		/**
@@ -51,7 +57,7 @@ namespace MyNS
 		*/
 		inline bool IsBound() const
 		{
-			return mDelegateInstance && mDelegateInstance->IsSafeToExecute();
+			return this->mDelegateInstance && this->mDelegateInstance->IsSafeToExecute();
 		}
 
 		/**
@@ -66,7 +72,7 @@ namespace MyNS
 				return false;
 			}
 
-			return mDelegateInstance && mDelegateInstance->HasSameObject(InUserObject);
+			return this->mDelegateInstance && this->mDelegateInstance->HasSameObject(InUserObject);
 		}
 
 		/**
@@ -74,7 +80,10 @@ namespace MyNS
 		*/
 		inline void Unbind()
 		{
-			mDelegateInstance->~IMySmDelegateInstance();
+			if (nullptr != this->mDelegateInstance)
+			{
+				this->mDelegateInstance->~IMySmDelegateInstance();
+			}
 		}
 
 	protected:

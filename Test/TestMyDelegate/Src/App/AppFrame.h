@@ -15,6 +15,9 @@ namespace MyNS
 		AppFrame();
 		~AppFrame();
 
+		void init();
+		void dispose();
+
 		void handle(int aaa, int bbb, bool ccc);
 	};
 }

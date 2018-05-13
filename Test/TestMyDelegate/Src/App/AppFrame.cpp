@@ -4,11 +4,21 @@ namespace MyNS
 {
 	AppFrame::AppFrame()
 	{
-		mCommonDelegate.BindRaw(this, &AppFrame::handle);
-		mCommonDelegate.Execute(10, 10, true);
+		
 	}
 
 	AppFrame::~AppFrame()
+	{
+
+	}
+
+	void AppFrame::init()
+	{
+		this->mCommonDelegate.BindRaw(this, &AppFrame::handle);
+		this->mCommonDelegate.Execute(10, 10, true);
+	}
+
+	void AppFrame::dispose()
 	{
 
 	}

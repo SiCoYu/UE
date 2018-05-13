@@ -1,11 +1,11 @@
 #pragma once
 
 #include "IMySmDelegateInstance.h"
-#include "MySmDelegateBase.h"
 
 namespace MyNS
 {
 	class IMySmDelegateInstance;
+	class MySmDelegateBase;
 
 	template <typename FuncType>
 	struct IMySmBaseDelegateInstance;

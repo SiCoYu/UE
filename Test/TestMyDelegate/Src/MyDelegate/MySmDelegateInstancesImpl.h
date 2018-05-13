@@ -59,7 +59,7 @@ namespace MyNS
 
 		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
-			new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
+			new UnwrappedThisType(*(UnwrappedThisType*)this);
 		}
 
 		virtual RetValType Execute(ParamTypes... Params) const override final
@@ -75,7 +75,7 @@ namespace MyNS
 			// pointer-to-member function.
 			assert(MethodPtr != nullptr);
 
-			return (UserObject.*MethodPtr)(args...);
+			return (MutableUserObject->*MethodPtr)(Params...);
 		}
 
 	public:
@@ -89,7 +89,8 @@ namespace MyNS
 		*/
 		FORCEINLINE static void Create(MySmDelegateBase& Base, UserClass* InUserObject, FMethodPtr InFunc, VarTypes... Vars)
 		{
-			new (Base) UnwrappedThisType(InUserObject, InFunc, Vars...);
+			UnwrappedThisType* instance = new UnwrappedThisType(InUserObject, InFunc, Vars...);
+			Base.setDelegateInstance(instance);
 		}
 
 	protected:
@@ -151,7 +152,7 @@ namespace MyNS
 			, Payload(Vars...)
 			, Handle(FDelegateHandle::GenerateNewHandle)
 		{
-			check(StaticFuncPtr != nullptr);
+			assert(StaticFuncPtr != nullptr);
 		}
 
 		// Deprecated
@@ -179,7 +180,7 @@ namespace MyNS
 		virtual RetValType Execute(ParamTypes... Params) const override final
 		{
 			// Call the static function
-			checkSlow(StaticFuncPtr != nullptr);
+			assert(StaticFuncPtr != nullptr);
 
 			return Payload.ApplyAfter(StaticFuncPtr, Params...);
 		}
