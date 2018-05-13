@@ -11,6 +11,9 @@ source_group("Src\\MyDelegate" FILES ${SRCS_MyDelegate_FILES})
 file(GLOB SRCS_Templates_FILES Src/Templates/*.h Src/Templates/*.cpp)
 source_group("Src\\Templates" FILES ${SRCS_Templates_FILES})
 
+file(GLOB SRCS_HAL_FILES Src/HAL/*.h Src/HAL/*.cpp)
+source_group("Src\\HAL" FILES ${SRCS_HAL_FILES})
+
 IF(WIN32)
 	add_definitions(-DPLATFORM_WINDOWS)
 ELSEIF(APPLE)
@@ -21,7 +24,7 @@ ELSEIF(LINUX)
 
 ENDIF()
 
-include_directories(Src Src/App Src/MyDelegate)
+include_directories(Src Src/App Src/MyDelegate Src/Templates Src/HAL)
 
 IF(DEBUG_mode)
     add_definitions(-DDEBUG)
@@ -29,7 +32,7 @@ ENDIF()
 
 #ADD_DEFINITIONS(-DTEST)
 
-set(ALL_SRCS ${SRCS_App_FILES} ${SRCS_MyDelegate_FILES} ${SRCS_Templates_FILES})
+set(ALL_SRCS ${SRCS_App_FILES} ${SRCS_MyDelegate_FILES} ${SRCS_Templates_FILES} ${SRCS_HAL_FILES})
 
 ADD_EXECUTABLE(${PROJECT_NAME} WIN32 ${ALL_SRCS})
 

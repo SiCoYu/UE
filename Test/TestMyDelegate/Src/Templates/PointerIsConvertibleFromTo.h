@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include "stdarg.h"
+#include "Platform.h"
+
 /**
  * Tests if a From* is convertible to a To*
  **/
@@ -9,6 +12,7 @@ template <typename From, typename To>
 struct TPointerIsConvertibleFromTo
 {
 private:
+	// ±¨´í
 	static uint8  Test(...);
 	static uint16 Test(To*);
 
