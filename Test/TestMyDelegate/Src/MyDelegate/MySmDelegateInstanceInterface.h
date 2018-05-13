@@ -16,7 +16,7 @@ namespace MyNS
 		/**
 		* Emplaces a copy of the delegate instance into the FDelegateBase.
 		*/
-		virtual void CreateCopy(FDelegateBase& Base) = 0;
+		virtual void CreateCopy(MySmDelegateBase& Base) = 0;
 
 		/**
 		* Execute the delegate.  If the function pointer is not valid, an error will occur.

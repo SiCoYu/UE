@@ -19,7 +19,7 @@ namespace MyNS
 
 	private:
 		typedef IMySmBaseDelegateInstance<RetValType(ParamTypes...)>                                          Super;
-		typedef TMySmBaseRawMethodDelegateInstance<bConst, UserClass, RetValType(ParamTypes...), VarTypes...> UnwrappedThisType;
+		typedef MySmBaseRawMethodDelegateInstance<bConst, UserClass, RetValType(ParamTypes...), VarTypes...> UnwrappedThisType;
 
 	public:
 		typedef typename TMemFunPtrType<bConst, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type FMethodPtr;
@@ -55,7 +55,7 @@ namespace MyNS
 
 		// IBaseDelegateInstance interface
 
-		virtual void CreateCopy(FDelegateBase& Base) override final
+		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
 			new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
 		}
@@ -85,7 +85,7 @@ namespace MyNS
 		* @param InFunc Member function pointer to your class method.
 		* @return The new delegate.
 		*/
-		FORCEINLINE static void Create(FDelegateBase& Base, UserClass* InUserObject, FMethodPtr InFunc, VarTypes... Vars)
+		FORCEINLINE static void Create(MySmDelegateBase& Base, UserClass* InUserObject, FMethodPtr InFunc, VarTypes... Vars)
 		{
 			new (Base) UnwrappedThisType(InUserObject, InFunc, Vars...);
 		}
@@ -102,7 +102,7 @@ namespace MyNS
 	template <bool bConst, class UserClass, typename... ParamTypes, typename... VarTypes>
 	class MySmBaseRawMethodDelegateInstance<bConst, UserClass, void(ParamTypes...), VarTypes...> : public MySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...>
 	{
-		typedef TMySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
+		typedef MySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
 
 	public:
 		/**
@@ -133,7 +133,7 @@ namespace MyNS
 	class TMySmBaseStaticDelegateInstance;
 
 	template <typename WrappedRetValType, typename... ParamTypes, typename... VarTypes>
-	class MySmMySmBaseStaticDelegateInstance<WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
+	class MySmBaseStaticDelegateInstance<WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
 	{
 	public:
 		typedef typename TUnwrapType<WrappedRetValType>::Type RetValType;

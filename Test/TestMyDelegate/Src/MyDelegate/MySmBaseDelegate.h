@@ -3,6 +3,8 @@
 #include "Templates/TypeWrapper.h"
 #include "Templates/RemoveReference.h"
 #include "Templates/UnrealTemplate.h"
+#include "MySmDelegateBase.h"
+#include "MySmDelegateInstancesImpl.h"
 
 class MySmDelegateBase;
 class IMySmDelegateInstance;
@@ -183,7 +185,7 @@ namespace MyNS
 
 			// If this assert goes off, Execute() was called before a function was bound to the delegate.
 			// Consider using ExecuteIfSafe() instead.
-			checkSlow(LocalDelegateInstance != nullptr);
+			assert(LocalDelegateInstance != nullptr);
 
 			return LocalDelegateInstance->Execute(Params...);
 		}
@@ -193,7 +195,7 @@ namespace MyNS
 		*/
 		FORCEINLINE MySmDelegateInstanceInterface* GetDelegateInstanceProtected() const
 		{
-			return (MySmDelegateInstanceInterface*)FDelegateBase::GetDelegateInstanceProtected();
+			return (MySmDelegateInstanceInterface*)mDelegateInstance;
 		}
 	};
 
