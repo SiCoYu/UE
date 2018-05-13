@@ -10,6 +10,11 @@ namespace MyNS
 		virtual bool isValid() const = 0;
 
 	public:
+		IMySmDelegateInstance()
+		{
+
+		}
+
 		virtual ~IMySmDelegateInstance()
 		{
 			

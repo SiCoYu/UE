@@ -45,7 +45,6 @@ namespace MyNS
 		// 创建拷贝，全部都是拷贝，不是直接引用
 		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
-			// TODO: UE4 是
 			//new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
 			UnwrappedThisType* instance = new UnwrappedThisType(*(UnwrappedThisType*)this);
 			Base.setDelegateInstance(instance);
@@ -66,7 +65,6 @@ namespace MyNS
 	public:
 		FORCEINLINE static void Create(MySmDelegateBase& Base, UserClass* InUserObject, FMethodPtr InFunc, VarTypes... Vars)
 		{
-			// TODO: UE4 是
 			//new (Base) UnwrappedThisType(InUserObject, InFunc, Vars...);
 			UnwrappedThisType* instance = new UnwrappedThisType(InUserObject, InFunc, Vars...);
 			Base.setDelegateInstance(instance);
