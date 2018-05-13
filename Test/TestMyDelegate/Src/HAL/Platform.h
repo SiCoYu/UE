@@ -2,6 +2,45 @@
 
 #pragma once
 
+// Backwater of the spec. All compilers support this except microsoft, and they will soon
+#ifndef TYPENAME_OUTSIDE_TEMPLATE
+#define TYPENAME_OUTSIDE_TEMPLATE	typename
+#endif
+
+// Method modifiers
+#ifndef ABSTRACT
+#define ABSTRACT
+#endif
+#ifndef CONSTEXPR
+#define CONSTEXPR constexpr
+#endif
+
+// String constants
+#ifndef LINE_TERMINATOR
+#define LINE_TERMINATOR TEXT("\n")
+#endif
+#ifndef LINE_TERMINATOR_ANSI
+#define LINE_TERMINATOR_ANSI "\n"
+#endif
+
+template<typename T32BITS, typename T64BITS, int PointerSize>
+struct SelectIntPointerType
+{
+	// nothing here are is it an error if the partial specializations fail
+};
+
+template<typename T32BITS, typename T64BITS>
+struct SelectIntPointerType<T32BITS, T64BITS, 8>
+{
+	typedef T64BITS TIntPointer; // select the 64 bit type
+};
+
+template<typename T32BITS, typename T64BITS>
+struct SelectIntPointerType<T32BITS, T64BITS, 4>
+{
+	typedef T32BITS TIntPointer; // select the 32 bit type
+};
+
 //~ Unsigned base types.
 /// An 8-bit unsigned integer.
 typedef unsigned char		uint8;
@@ -10,17 +49,26 @@ typedef unsigned short		uint16;
 /// A 32-bit unsigned integer.
 typedef unsigned int		uint32;
 /// A 64-bit unsigned integer.
-typedef unsigned __int64		uint64;
+typedef unsigned long long		uint64;
 
 //~ Signed base types.
 /// An 8-bit signed integer.
-typedef	char		int8;
+typedef	signed char		int8;
 /// A 16-bit signed integer.
-typedef short		int16;
+typedef signed short		int16;
 /// A 32-bit signed integer.
-typedef int		int32;
+typedef signed int		int32;
 /// A 64-bit signed integer.
-typedef __int64		int64;
+typedef signed long long		int64;
+
+typedef char	ANSICHAR;
+typedef wchar_t	WIDECHAR;
+typedef wchar_t TCHAR;
+
+typedef SelectIntPointerType<uint32, uint64, sizeof(void*)>::TIntPointer UPTRINT;	// unsigned int the same size as a pointer
+typedef SelectIntPointerType<int32, int64, sizeof(void*)>::TIntPointer PTRINT;		// signed int the same size as a pointer
+
+#define FORCEINLINE __forceinline
 
 //------------------------------------------------------------------
 // Test the global types
@@ -63,5 +111,9 @@ namespace TypeTests
 
 	static_assert(sizeof(int64) == 8, "SQWORD type size test failed.");
 	static_assert(int64(-1) < int64(0), "SQWORD type sign test failed.");
-
 }
+
+#if !defined(TEXT)
+#define TEXT_PASTE(x) L ## x
+#define TEXT(x) TEXT_PASTE(x)
+#endif

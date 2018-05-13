@@ -20,9 +20,6 @@
 #include "IsTriviallyCopyAssignable.h"
 #include "IsTriviallyCopyConstructible.h"
 
-#include "AssertionMacros.h"
-#include "Misc/OutputDevice.h"
-
 /*-----------------------------------------------------------------------------
  * Macros to abstract the presence of certain compiler intrinsic type traits 
  -----------------------------------------------------------------------------*/
@@ -73,7 +70,6 @@ template<typename T>				struct TIsSame<T, T>	{ enum { Value = true	}; };
  */
 template<typename T> struct TIsCharType           { enum { Value = false }; };
 template<>           struct TIsCharType<ANSICHAR> { enum { Value = true  }; };
-template<>           struct TIsCharType<UCS2CHAR> { enum { Value = true  }; };
 template<>           struct TIsCharType<WIDECHAR> { enum { Value = true  }; };
 
 /**

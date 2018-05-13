@@ -7,12 +7,10 @@
 #include "TypeWrapper.h"
 #include "HAL/Platform.h"
 #include "Templates/UnrealTypeTraits.h"
-#include "UnrealMemory.h"
 #include "AlignmentTemplates.h"
 #include "AndOrNot.h"
 #include "Templates/RemoveReference.h"
 #include "Templates/TypeCompatibleBytes.h"
-#include "Traits/IsContiguousContainer.h"
 #include <initializer_list>
 
 /*-----------------------------------------------------------------------------
@@ -76,48 +74,6 @@ FORCEINLINE void Move(T& A,typename TMoveSupportTraits<T>::Move B)
 
 	// Use placement new and a copy constructor so types with const members will work.
 	new(&A) T(MoveTemp(B));
-}
-
-/**
- * Generically gets the data pointer of a contiguous container
- */
-template<typename T, typename = typename TEnableIf<TIsContiguousContainer<T>::Value>::Type>
-auto GetData(T&& Container) -> decltype(Container.GetData())
-{
-	return Container.GetData();
-}
-
-template <typename T, SIZE_T N>
-CONSTEXPR T* GetData(T (&Container)[N])
-{
-	return Container;
-}
-
-template <typename T>
-CONSTEXPR T* GetData(std::initializer_list<T> List)
-{
-	return List.begin();
-}
-
-/**
-* Generically gets the number of items in a contiguous container
-*/
-template<typename T, typename = typename TEnableIf<TIsContiguousContainer<T>::Value>::Type>
-SIZE_T GetNum(T&& Container)
-{
-	return (SIZE_T)Container.Num();
-}
-
-template <typename T, SIZE_T N>
-CONSTEXPR SIZE_T GetNum(T (&Container)[N])
-{
-	return N;
-}
-
-template <typename T>
-CONSTEXPR SIZE_T GetNum(std::initializer_list<T> List)
-{
-	return List.size();
 }
 
 /*----------------------------------------------------------------------------
