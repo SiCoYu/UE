@@ -2,7 +2,7 @@
 
 #include "Templates/TypeWrapper.h"
 #include "Templates/RemoveReference.h"
-#include "Templates/UnrealTemplate.h"
+#include "Templates/MyBaseTemplate.h"
 #include "MySmDelegateBase.h"
 #include "MySmDelegateInstancesImpl.h"
 

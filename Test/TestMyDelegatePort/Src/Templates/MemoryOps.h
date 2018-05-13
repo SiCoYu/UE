@@ -6,8 +6,8 @@
 
 #include "UnrealMemory.h"
 #include "Platform.h"
-#include "UnrealTemplate.h"
-#include "UnrealTypeTraits.h"
+#include "MyBaseTemplate.h"
+#include "MyBaseTypeTraits.h"
 #include "AndOrNot.h"
 #include "IsTriviallyCopyAssignable.h"
 #include "IsTriviallyCopyConstructible.h"

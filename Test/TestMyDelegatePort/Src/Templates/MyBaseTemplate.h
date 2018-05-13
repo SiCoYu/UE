@@ -6,7 +6,7 @@
 #include "PointerIsConvertibleFromTo.h"
 #include "TypeWrapper.h"
 #include "HAL/Platform.h"
-#include "Templates/UnrealTypeTraits.h"
+#include "Templates/MyBaseTypeTraits.h"
 #include "AlignmentTemplates.h"
 #include "AndOrNot.h"
 #include "Templates/RemoveReference.h"

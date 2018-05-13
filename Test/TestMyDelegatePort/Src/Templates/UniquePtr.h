@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "UnrealTemplate.h"
+#include "MyBaseTemplate.h"
 #include "Templates/EnableIf.h"
 #include "Templates/IsArray.h"
 #include "Templates/PointerIsConvertibleFromTo.h"

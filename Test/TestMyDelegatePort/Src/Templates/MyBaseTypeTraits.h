@@ -1,7 +1,7 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 /*=============================================================================
-	UnrealTypeTraits.h: Unreal type traits definitions.
+	MyBaseTypeTraits.h: Unreal type traits definitions.
 	Note: Boost does a much better job of limiting instantiations.
 	We require VC8 so a lot of potential version checks are omitted.
 =============================================================================*/
