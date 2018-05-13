@@ -23,11 +23,11 @@ namespace MyNS
 		//this->mCommonDelegate.BindStatic(&MyNS::staticHandle);
 		//this->mCommonDelegate.Execute(10, 10, true);
 
-		this->mCommonDelegate = MyCommonDelegate(this, &AppFrame::handle);
-		this->mCommonDelegate.Execute(10, 10, true);
-
-		//this->mCommonDelegate.BindStatic(&MyNS::handle);
+		//this->mCommonDelegate = MyCommonDelegate(this, &AppFrame::handle);
 		//this->mCommonDelegate.Execute(10, 10, true);
+
+		this->mCommonDelegate = MyNS::MySmBaseDelegate<int, int, bool>(&MyNS::handle);
+		this->mCommonDelegate.Execute(10, 10, true);
 
 		//this->mCommonDelegate.BindStatic(&MyNS::staticHandle);
 		//this->mCommonDelegate.Execute(10, 10, true);
