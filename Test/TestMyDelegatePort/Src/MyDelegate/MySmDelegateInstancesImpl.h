@@ -46,8 +46,8 @@ namespace MyNS
 		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
 			//new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
-			UnwrappedThisType* instance = new UnwrappedThisType(*(UnwrappedThisType*)this);
-			Base.setDelegateInstance(instance);
+			UnwrappedThisType* pInstance = new UnwrappedThisType(*(UnwrappedThisType*)this);
+			Base.setDelegateInstance(pInstance);
 		}
 
 		virtual RetValType Execute(ParamTypes... Params) const override final
@@ -111,8 +111,6 @@ namespace MyNS
 
 		MySmBaseStaticDelegateInstance(FFuncPtr InStaticFuncPtr, VarTypes... Vars)
 			: StaticFuncPtr(InStaticFuncPtr)
-			, Payload(Vars...)
-			, Handle(FDelegateHandle::GenerateNewHandle)
 		{
 			assert(StaticFuncPtr != nullptr);
 		}
@@ -131,7 +129,7 @@ namespace MyNS
 		virtual void CreateCopy(MySmDelegateBase& Base) override final
 		{
 			//new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
-			UnwrappedThisType pInstance = new UnwrappedThisType(*(UnwrappedThisType*)this);
+			UnwrappedThisType* pInstance = new UnwrappedThisType(*(UnwrappedThisType*)this);
 			Base.setDelegateInstance(pInstance);
 		}
 
@@ -147,7 +145,7 @@ namespace MyNS
 		FORCEINLINE static void Create(MySmDelegateBase& Base, FFuncPtr InFunc, VarTypes... Vars)
 		{
 			//new (Base) UnwrappedThisType(InFunc, Vars...);
-			UnwrappedThisType pInstance = new UnwrappedThisType(InFunc, Vars...);
+			UnwrappedThisType* pInstance = new UnwrappedThisType(InFunc, Vars...);
 			Base.setDelegateInstance(pInstance);
 		}
 

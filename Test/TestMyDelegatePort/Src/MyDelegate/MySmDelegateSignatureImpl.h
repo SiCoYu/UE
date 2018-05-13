@@ -52,8 +52,8 @@ namespace MyNS
 		template <typename... VarTypes>
 		inline static MySmBaseDelegate<RetValType, ParamTypes...> CreateStatic(typename TIdentity<RetValType(*)(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
-			TBaseDelegate<RetValType, ParamTypes...> Result;
-			TBaseStaticDelegateInstance<TFuncType, VarTypes...>::Create(Result, InFunc, Vars...);
+			MySmBaseDelegate<RetValType, ParamTypes...> Result;
+			MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::Create(Result, InFunc, Vars...);
 			return Result;
 		}
 

@@ -20,4 +20,7 @@ namespace MyNS
 
 		void handle(int aaa, int bbb, bool ccc);
 	};
+
+	void handle(int aaa, int bbb, bool ccc);
+	static void staticHandle(int aaa, int bbb, bool ccc);
 }
