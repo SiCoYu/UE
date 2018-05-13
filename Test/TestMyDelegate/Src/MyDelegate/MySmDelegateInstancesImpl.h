@@ -9,10 +9,10 @@ namespace MyNS
 	* Implements a delegate binding for C++ member functions.
 	*/
 	template <bool bConst, class UserClass, typename FuncType, typename... VarTypes>
-	class TMySmBaseRawMethodDelegateInstance;
+	class MySmBaseRawMethodDelegateInstance;
 
 	template <bool bConst, class UserClass, typename WrappedRetValType, typename... ParamTypes, typename... VarTypes>
-	class TMySmBaseRawMethodDelegateInstance<bConst, UserClass, WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
+	class MySmBaseRawMethodDelegateInstance<bConst, UserClass, WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
 	{
 	public:
 		typedef typename TUnwrapType<WrappedRetValType>::Type RetValType;
@@ -30,7 +30,7 @@ namespace MyNS
 		* @param InUserObject An arbitrary object (templated) that hosts the member function.
 		* @param InMethodPtr C++ member function pointer for the method to bind.
 		*/
-		TMySmBaseRawMethodDelegateInstance(UserClass* InUserObject, FMethodPtr InMethodPtr, VarTypes... Vars)
+		MySmBaseRawMethodDelegateInstance(UserClass* InUserObject, FMethodPtr InMethodPtr, VarTypes... Vars)
 			: UserObject(InUserObject)
 			, MethodPtr(InMethodPtr)
 		{
@@ -100,7 +100,7 @@ namespace MyNS
 	};
 
 	template <bool bConst, class UserClass, typename... ParamTypes, typename... VarTypes>
-	class TMySmBaseRawMethodDelegateInstance<bConst, UserClass, void(ParamTypes...), VarTypes...> : public TMySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...>
+	class MySmBaseRawMethodDelegateInstance<bConst, UserClass, void(ParamTypes...), VarTypes...> : public MySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...>
 	{
 		typedef TMySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
 
@@ -111,7 +111,7 @@ namespace MyNS
 		* @param InUserObject An arbitrary object (templated) that hosts the member function.
 		* @param InMethodPtr C++ member function pointer for the method to bind.
 		*/
-		TMySmBaseRawMethodDelegateInstance(UserClass* InUserObject, typename Super::FMethodPtr InMethodPtr, VarTypes... Vars)
+		MySmBaseRawMethodDelegateInstance(UserClass* InUserObject, typename Super::FMethodPtr InMethodPtr, VarTypes... Vars)
 			: Super(InUserObject, InMethodPtr, Vars...)
 		{
 		}
@@ -133,18 +133,18 @@ namespace MyNS
 	class TMySmBaseStaticDelegateInstance;
 
 	template <typename WrappedRetValType, typename... ParamTypes, typename... VarTypes>
-	class TMySmMySmBaseStaticDelegateInstance<WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
+	class MySmMySmBaseStaticDelegateInstance<WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
 	{
 	public:
 		typedef typename TUnwrapType<WrappedRetValType>::Type RetValType;
 
-		typedef IBaseDelegateInstance<RetValType(ParamTypes...)>                    Super;
-		typedef TBaseStaticDelegateInstance<RetValType(ParamTypes...), VarTypes...> UnwrappedThisType;
+		typedef IMySmBaseDelegateInstance<RetValType(ParamTypes...)>                    Super;
+		typedef MySmBaseStaticDelegateInstance<RetValType(ParamTypes...), VarTypes...> UnwrappedThisType;
 
 	public:
 		typedef RetValType(*FFuncPtr)(ParamTypes..., VarTypes...);
 
-		TMySmBaseStaticDelegateInstance(FFuncPtr InStaticFuncPtr, VarTypes... Vars)
+		MySmBaseStaticDelegateInstance(FFuncPtr InStaticFuncPtr, VarTypes... Vars)
 			: StaticFuncPtr(InStaticFuncPtr)
 			, Payload(Vars...)
 			, Handle(FDelegateHandle::GenerateNewHandle)
@@ -202,9 +202,9 @@ namespace MyNS
 	};
 
 	template <typename... ParamTypes, typename... VarTypes>
-	class TMySmBaseStaticDelegateInstance<void(ParamTypes...), VarTypes...> : public TMySmBaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...>
+	class MySmBaseStaticDelegateInstance<void(ParamTypes...), VarTypes...> : public MySmBaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...>
 	{
-		typedef TBaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
+		typedef BaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
 
 	public:
 		/**
@@ -212,7 +212,7 @@ namespace MyNS
 		*
 		* @param InStaticFuncPtr C++ function pointer.
 		*/
-		TMySmBaseStaticDelegateInstance(typename Super::FFuncPtr InStaticFuncPtr, VarTypes... Vars)
+		MySmBaseStaticDelegateInstance(typename Super::FFuncPtr InStaticFuncPtr, VarTypes... Vars)
 			: Super(InStaticFuncPtr, Vars...)
 		{
 		}

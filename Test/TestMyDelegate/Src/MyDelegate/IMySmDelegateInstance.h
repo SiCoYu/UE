@@ -1,5 +1,5 @@
-#ifndef __IMySmDelegate_H
-#define __IMySmDelegate_H
+#ifndef __IMySmDelegateInstance_H
+#define __IMySmDelegateInstance_H
 
 namespace MyNS
 {
