@@ -280,6 +280,17 @@ public:
         , func_(func)
     {}
 
+	delegate(delegate& rhv)
+		: callee_(rhv.callee)
+		, func_(rhv.func)
+	{}
+
+	void operator=(delegate& rhv) const
+	{
+		callee_ = rhv.callee;
+		func_ = rhv.func;
+	}
+
     R operator()(P arg) const
     {
         return (callee_.*func_)(arg);
@@ -424,7 +435,7 @@ delegate<F> make_delegate(F func, T& obj)
 }
 
 // TODO:
-template <typename T, typename F>
+template <typename F, typename T>
 delegate<F> make_delegate(T& obj, F func)
 {
 	return delegate<F>(func, obj);

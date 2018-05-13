@@ -91,7 +91,10 @@ namespace MyNS
 	{
 		if (this->mLevelResItem != nullptr)
 		{
-			GResLoadMgr->unload(this->mLevelResItem->getResUniqueId(), nullptr);
+			GResLoadMgr->unload(
+				this->mLevelResItem->getResUniqueId(), 
+				nullptr
+			);
 			Super::unload();
 		}
 	}
