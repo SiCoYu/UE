@@ -7,18 +7,18 @@
 =============================================================================*/
 
 #pragma once
-#include "AndOrNot.h"
-#include "AreTypesEqual.h"
-#include "RemoveCV.h"
+#include "MyAndOrNot.h"
+#include "MyAreTypesEqual.h"
+#include "MyRemoveCV.h"
 
-#include "IsArithmetic.h"
-#include "IsFloatingPoint.h"
-#include "IsIntegral.h"
-#include "IsPODType.h"
-#include "IsPointer.h"
-#include "IsSigned.h"
-#include "IsTriviallyCopyAssignable.h"
-#include "IsTriviallyCopyConstructible.h"
+#include "MyIsArithmetic.h"
+#include "MyIsFloatingPoint.h"
+#include "MyIsIntegral.h"
+#include "MyIsPODType.h"
+#include "MyIsPointer.h"
+#include "MyIsSigned.h"
+#include "MyIsTriviallyCopyAssignable.h"
+#include "MyIsTriviallyCopyConstructible.h"
 
 /*-----------------------------------------------------------------------------
  * Macros to abstract the presence of certain compiler intrinsic type traits 
@@ -347,7 +347,7 @@ public:
 
 /**
  * Helper for array traits. Provides a common base to more easily refine a portion of the traits
- * when specializing. Mainly used by MemoryOps.h which is used by the contiguous storage containers like TArray.
+ * when specializing. Mainly used by MyMemoryOps.h which is used by the contiguous storage containers like TArray.
  */
 template<typename T> struct TTypeTraitsBase
 {

@@ -2,15 +2,15 @@
 
 #pragma once
 
-#include "EnableIf.h"
-#include "PointerIsConvertibleFromTo.h"
-#include "TypeWrapper.h"
+#include "MyEnableIf.h"
+#include "MyPointerIsConvertibleFromTo.h"
+#include "MyTypeWrapper.h"
 #include "HAL/Platform.h"
 #include "Templates/MyBaseTypeTraits.h"
-#include "AlignmentTemplates.h"
-#include "AndOrNot.h"
-#include "Templates/RemoveReference.h"
-#include "Templates/TypeCompatibleBytes.h"
+#include "MyAlignmentTemplates.h"
+#include "MyAndOrNot.h"
+#include "Templates/MyRemoveReference.h"
+#include "Templates/MyTypeCompatibleBytes.h"
 #include <initializer_list>
 
 /*-----------------------------------------------------------------------------

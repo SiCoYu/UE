@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Templates/TypeWrapper.h"
-#include "Templates/RemoveReference.h"
+#include "Templates/MyTypeWrapper.h"
+#include "Templates/MyRemoveReference.h"
 #include "Templates/MyBaseTemplate.h"
 #include "MySmDelegateBase.h"
 #include "MySmDelegateInstancesImpl.h"
