@@ -4,7 +4,7 @@
 
 #include <new>
 
-#include "Platform.h"
+#include "MPlatform.h"
 #include "MyBaseTemplate.h"
 #include "MyBaseTypeTraits.h"
 #include "MyAndOrNot.h"

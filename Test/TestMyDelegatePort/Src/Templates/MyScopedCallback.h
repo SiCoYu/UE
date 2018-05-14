@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "HAL/Platform.h"
+#include "HAL/MPlatform.h"
 
 namespace MyNS
 {

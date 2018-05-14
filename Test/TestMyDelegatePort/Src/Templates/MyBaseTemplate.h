@@ -5,7 +5,7 @@
 #include "MyEnableIf.h"
 #include "MyPointerIsConvertibleFromTo.h"
 #include "MyTypeWrapper.h"
-#include "HAL/Platform.h"
+#include "HAL/MPlatform.h"
 #include "Templates/MyBaseTypeTraits.h"
 #include "MyAlignmentTemplates.h"
 #include "MyAndOrNot.h"

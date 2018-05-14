@@ -3,7 +3,7 @@
 #pragma once
 
 #include "stdarg.h"
-#include "Platform.h"	// uint8 \ uint16 其实可以在包含这个头文件前包含这个头文件就可以了，暂时写在这里
+#include "MPlatform.h"	// uint8 \ uint16 其实可以在包含这个头文件前包含这个头文件就可以了，暂时写在这里
 
 namespace MyNS
 {
