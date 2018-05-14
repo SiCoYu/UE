@@ -107,7 +107,13 @@ namespace MyNS
 		{
 			if (eClassType == this->mResPackType)
 			{
-				this->mPrefabRes = GClassAssetInsMgr->getAndAsyncLoadRes(path, MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+				this->mPrefabRes = GClassAssetInsMgr->getAndAsyncLoadRes(
+					path, 
+					MakeEventDispatchDelegate(
+						this, 
+						&AuxMObjectLoaderBase::onPrefabLoaded
+					)
+				);
 			}
 			else if (eObjectType == this->mResPackType)
 			{

@@ -122,7 +122,11 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Scene",
 
                 "MyProject/Private/BasicFrame/Libs/Auxiliary/AuxLoader",
-                "MyProject/Private/BasicFrame/Libs/Auxiliary/AuxUI",
+                "MyProject/Private/BasicFrame/Libs/Auxiliary/AuxUi",
+
+                "MyProject/Private/BasicFrame/Libs/Engine/HAL",
+                "MyProject/Private/BasicFrame/Libs/Engine/MyDelegate",
+                "MyProject/Private/BasicFrame/Libs/Engine/Templates",
 
                 "MyProject/Private/BasicFrame/Module",
                 "MyProject/Private/BasicFrame/Module/Game",
