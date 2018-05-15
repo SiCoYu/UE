@@ -87,11 +87,11 @@ namespace MyNS
 		//{
 		//}
 
-		template <typename... VarTypes>
-		inline MySmBaseDelegate(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
-		{
-			this->BindStatic(InFunc, Vars...);
-		}
+		//template <typename... VarTypes>
+		//inline MySmBaseDelegate(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
+		//{
+		//	this->BindStatic(InFunc, Vars...);
+		//}
 
 		template <typename UserClass, typename... VarTypes>
 		inline MySmBaseDelegate(UserClass* InUserObject, typename MyTMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
@@ -138,7 +138,7 @@ namespace MyNS
 		template <typename... VarTypes>
 		inline void BindStatic(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
 		{
-			*this = CreateStatic(InFunc, Vars...);
+			*this = this->CreateStatic(InFunc, Vars...);
 		}
 
 		template <typename UserClass, typename... VarTypes>
@@ -150,7 +150,7 @@ namespace MyNS
 		template <typename UserClass, typename... VarTypes>
 		inline void BindRaw(UserClass* InUserObject, typename MyTMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
-			*this = CreateRaw(InUserObject, InFunc, Vars...);
+			*this = this->CreateRaw(InUserObject, InFunc, Vars...);
 		}
 
 	public:
@@ -201,12 +201,13 @@ namespace MyNS
 		//	
 		//}
 
-		template <typename... VarTypes>
-		inline MySmBaseDelegate(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
-			: Super(InFunc, Vars...)
-		{
+		// 直接 MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(this, &Class::handle) 这样写会编译报错
+		//template <typename... VarTypes>
+		//inline MySmBaseDelegate(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
+		//	: Super(InFunc, Vars...)
+		//{
 
-		}
+		//}
 
 		template <typename UserClass, typename... VarTypes>
 		inline MySmBaseDelegate(UserClass* InUserObject, typename MyTMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)

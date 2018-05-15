@@ -4,6 +4,7 @@
 
 #include "MPlatform.h"
 #include "Templates/MyRemoveReference.h"
+#include "Templates/MyBaseTypeTraits.h"
 
 namespace MyNS
 {

@@ -52,7 +52,7 @@ namespace MyNS
 
 		virtual RetValType Execute(ParamTypes... Params) const override final
 		{
-			typedef typename TRemoveConst<UserClass>::Type MutableUserClass;
+			typedef typename MyTRemoveConst<UserClass>::Type MutableUserClass;
 
 			// 通常会直接传入 UserObject 是 this， 这个是 const T ，如果不去掉 const ，直接调用，编译器会报错
 			MutableUserClass* MutableUserObject = const_cast<MutableUserClass*>(UserObject);
