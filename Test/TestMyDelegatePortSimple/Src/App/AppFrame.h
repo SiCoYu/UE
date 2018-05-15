@@ -2,7 +2,7 @@
 
 #include "MySmDelegateCombinations.h"
 
-DECLARE_DELEGATE_ThreeParams(MyCommonDelegate, int, int, bool);
+MY_DECLARE_DELEGATE_ThreeParams(MyCommonDelegate, int, int, bool);
 
 namespace MyNS
 {
