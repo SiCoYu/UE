@@ -2,7 +2,7 @@
 
 #pragma once
 
-#define USING_UE4_API 1
+#define USING_UE4_API 0
 
 #if USING_UE4_API
 #include "HAL/Platform.h"

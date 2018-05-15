@@ -5,9 +5,9 @@
 namespace MyNS
 {
 	/**
-	 * TRemoveReference<type> will remove any references from a type.
+	 * MyTRemoveReference<type> will remove any references from a type.
 	 */
-	template <typename T> struct TRemoveReference { typedef T Type; };
-	template <typename T> struct TRemoveReference<T& > { typedef T Type; };
-	template <typename T> struct TRemoveReference<T&&> { typedef T Type; };
+	template <typename T> struct MyTRemoveReference { typedef T Type; };
+	template <typename T> struct MyTRemoveReference<T& > { typedef T Type; };
+	template <typename T> struct MyTRemoveReference<T&&> { typedef T Type; };
 }
