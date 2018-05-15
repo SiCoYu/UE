@@ -55,7 +55,7 @@ namespace MyNS
 		}
 
 		template <typename UserClass, typename... VarTypes>
-		inline static MySmBaseDelegate<RetValType, ParamTypes...> CreateRaw(UserClass* InUserObject, typename TMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+		inline static MySmBaseDelegate<RetValType, ParamTypes...> CreateRaw(UserClass* InUserObject, typename MyTMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
 			MySmBaseDelegate<RetValType, ParamTypes...> Result;
 			MySmBaseRawMethodDelegateInstance<false, UserClass, TFuncType, VarTypes...>::Create(Result, InUserObject, InFunc, Vars...);
@@ -63,7 +63,7 @@ namespace MyNS
 		}
 
 		template <typename UserClass, typename... VarTypes>
-		inline static MySmBaseDelegate<RetValType, ParamTypes...> CreateRaw(UserClass* InUserObject, typename TMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+		inline static MySmBaseDelegate<RetValType, ParamTypes...> CreateRaw(UserClass* InUserObject, typename MyTMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
 			MySmBaseDelegate<RetValType, ParamTypes...> Result;
 			MySmBaseRawMethodDelegateInstance<true, UserClass, TFuncType, VarTypes...>::Create(Result, InUserObject, InFunc, Vars...);
@@ -78,24 +78,29 @@ namespace MyNS
 		/**
 		* 'Null' 构造
 		*/
-		inline MySmBaseDelegate(TYPE_OF_NULLPTR)
-		{
-		}
+		//inline MySmBaseDelegate(TYPE_OF_NULLPTR)
+		//{
+		//}
+
+		//template <typename T>
+		//inline MySmBaseDelegate(T param)
+		//{
+		//}
 
 		template <typename... VarTypes>
 		inline MySmBaseDelegate(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
 		{
-			this->BindStatic(InFunc, Vars);
+			this->BindStatic(InFunc, Vars...);
 		}
 
 		template <typename UserClass, typename... VarTypes>
-		inline MySmBaseDelegate(UserClass* InUserObject, typename TMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+		inline MySmBaseDelegate(UserClass* InUserObject, typename MyTMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
 			this->BindRaw(InUserObject, InFunc, Vars...);
 		}
 
 		template <typename UserClass, typename... VarTypes>
-		inline MySmBaseDelegate(UserClass* InUserObject, typename TMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+		inline MySmBaseDelegate(UserClass* InUserObject, typename MyTMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
 			this->BindRaw(InUserObject, InFunc, Vars...);
 		}
@@ -137,13 +142,13 @@ namespace MyNS
 		}
 
 		template <typename UserClass, typename... VarTypes>
-		inline void BindRaw(UserClass* InUserObject, typename TMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+		inline void BindRaw(UserClass* InUserObject, typename MyTMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
 			*this = this->CreateRaw(InUserObject, InFunc, Vars...);
 		}
 
 		template <typename UserClass, typename... VarTypes>
-		inline void BindRaw(UserClass* InUserObject, typename TMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+		inline void BindRaw(UserClass* InUserObject, typename MyTMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
 		{
 			*this = CreateRaw(InUserObject, InFunc, Vars...);
 		}
@@ -179,14 +184,42 @@ namespace MyNS
 		/**
 		* 'Null' 构造
 		*/
-		FORCEINLINE MySmBaseDelegate(TYPE_OF_NULLPTR)
-			: Super(nullptr)
-		{
-		}
+		//FORCEINLINE MySmBaseDelegate(TYPE_OF_NULLPTR)
+		//	: Super(nullptr)
+		//{
+		//}
 
 		FORCEINLINE MySmBaseDelegate(const MySmBaseDelegate& Other)
 			: Super(Other)
 		{
+		}
+
+		//template <typename T>
+		//inline MySmBaseDelegate(T param)
+		//	: Super(param)
+		//{
+		//	
+		//}
+
+		template <typename... VarTypes>
+		inline MySmBaseDelegate(typename MySmBaseStaticDelegateInstance<TFuncType, VarTypes...>::FFuncPtr InFunc, VarTypes... Vars)
+			: Super(InFunc, Vars...)
+		{
+
+		}
+
+		template <typename UserClass, typename... VarTypes>
+		inline MySmBaseDelegate(UserClass* InUserObject, typename MyTMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+			: Super(InUserObject, InFunc, Vars...)
+		{
+			
+		}
+
+		template <typename UserClass, typename... VarTypes>
+		inline MySmBaseDelegate(UserClass* InUserObject, typename MyTMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type InFunc, VarTypes... Vars)
+			: Super(InUserObject, InFunc, Vars...)
+		{
+			
 		}
 
 		inline MySmBaseDelegate& operator=(const MySmBaseDelegate& Other)

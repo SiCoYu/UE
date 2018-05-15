@@ -45,16 +45,16 @@ namespace MyNS
 	};
 
 	template <bool Const, typename Class, typename FuncType>
-	struct TMemFunPtrType;
+	struct MyTMemFunPtrType;
 
 	template <typename Class, typename RetType, typename... ArgTypes>
-	struct TMemFunPtrType<false, Class, RetType(ArgTypes...)>
+	struct MyTMemFunPtrType<false, Class, RetType(ArgTypes...)>
 	{
 		typedef RetType(Class::* Type)(ArgTypes...);
 	};
 
 	template <typename Class, typename RetType, typename... ArgTypes>
-	struct TMemFunPtrType<true, Class, RetType(ArgTypes...)>
+	struct MyTMemFunPtrType<true, Class, RetType(ArgTypes...)>
 	{
 		typedef RetType(Class::* Type)(ArgTypes...) const;
 	};

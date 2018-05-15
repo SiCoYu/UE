@@ -24,16 +24,20 @@ namespace MyNS
 		//this->mCommonDelegate.Execute(10, 10, true);
 
 		//this->mCommonDelegate = MyCommonDelegate(this, &AppFrame::handle);
+		this->mCommonDelegate = MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(this, &AppFrame::handle);
 		//MyCommonDelegate().BindRaw(this, &AppFrame::handle);
 		//this->mCommonDelegate.Execute(10, 10, true);
 
-		//this->mCommonDelegate = MyNS::MySmBaseDelegate<int, int, bool>(&MyNS::handle);
+		//this->mCommonDelegate = MyCommonDelegate(&MyNS::handle);
+		//this->mCommonDelegate = MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(&MyNS::handle);
 		//MyCommonDelegate().BindStatic(&MyNS::handle);
 		//this->mCommonDelegate.Execute(10, 10, true);
 
 		//this->mCommonDelegate.BindStatic(&MyNS::staticHandle);
 		//MyCommonDelegate().BindStatic(&MyNS::staticHandle);
 		//this->mCommonDelegate.Execute(10, 10, true);
+
+		//this->mCommonDelegate = MySmBaseDelegate<int, int, bool>::MySmBaseDelegate(10);
 	}
 
 	void AppFrame::dispose()
