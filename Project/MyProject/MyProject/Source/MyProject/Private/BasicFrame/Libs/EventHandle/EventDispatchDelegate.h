@@ -3,11 +3,7 @@
 
 //#include "FastDelegate.h"
 
-/**
- * @url https://github.com/marcmo/delegates
- */
-#include "MiniClosure.h"
-#include "MiniDelegate.h"
+#include "MySmDelegateCombinations.h"
 
 class IDispatchObject;
 
@@ -16,9 +12,9 @@ class IDispatchObject;
 
 //#define MakeEventDispatchDelegate EventDispatchDelegate
 
-typedef dlgt::delegate<IDispatchObject*> EventDispatchDelegate;
-typedef dlgt::delegate<IDispatchObject*>* EventDispatchDelegatePtr;
+DECLARE_DELEGATE_OneParam(EventDispatchDelegate, IDispatchObject*);
+typedef EventDispatchDelegate* EventDispatchDelegatePtr;
 
-#define MakeEventDispatchDelegate make_delegate
+#define MakeEventDispatchDelegate EventDispatchDelegate().BindRaw
 
 #endif
