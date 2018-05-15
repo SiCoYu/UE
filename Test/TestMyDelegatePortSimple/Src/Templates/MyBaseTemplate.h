@@ -26,7 +26,7 @@ namespace MyNS
 	 * Metafunction which returns the specified boolean value.
 	 */
 	template <bool bValue>
-	struct TBoolConstant
+	struct MyTBoolConstant
 	{
 		enum { Value = bValue };
 	};
