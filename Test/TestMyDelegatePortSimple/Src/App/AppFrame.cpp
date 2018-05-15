@@ -1,4 +1,5 @@
 #include "AppFrame.h"
+#include "MyDelegateType.h"
 
 namespace MyNS
 {
@@ -25,14 +26,16 @@ namespace MyNS
 
 		// 类模板中模板构造函数调用这样调用会报错，需要如下 this->mCommonDelegate = MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(this, &AppFrame::handle); 调用才行
 		//this->mCommonDelegate = MyCommonDelegate(this, &AppFrame::handle);
-		this->mCommonDelegate = MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(this, &AppFrame::handle);
+		//this->mCommonDelegate = MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(this, &AppFrame::handle);
+		this->mCommonDelegate = MakeMemFunDelegate(this, &AppFrame::handle);
 		//MyCommonDelegate().BindRaw(this, &AppFrame::handle);
 		this->mCommonDelegate.Execute(10, 10, true);
 
 		//this->mCommonDelegate = MyCommonDelegate(&MyNS::handle);
-		//this->mCommonDelegate = MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(&MyNS::handle);
+		//this->mCommonDelegate = MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(0, &MyNS::handle);
+		this->mCommonDelegate = MakeStaticFunDelegate(&MyNS::handle);
 		//MyCommonDelegate().BindStatic(&MyNS::handle);
-		//this->mCommonDelegate.Execute(10, 10, true);
+		this->mCommonDelegate.Execute(10, 10, true);
 
 		//this->mCommonDelegate.BindStatic(&MyNS::staticHandle);
 		//MyCommonDelegate().BindStatic(&MyNS::staticHandle);
