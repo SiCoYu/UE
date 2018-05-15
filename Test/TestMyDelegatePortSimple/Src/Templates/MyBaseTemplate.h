@@ -37,5 +37,5 @@ namespace MyNS
 	 * Note that this function is unimplemented, and is only intended to be used in unevaluated contexts, like sizeof and trait expressions.
 	 */
 	template <typename T>
-	T&& DeclVal();
+	T&& MyDeclVal();
 }
