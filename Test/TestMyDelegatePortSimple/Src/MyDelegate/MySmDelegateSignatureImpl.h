@@ -20,7 +20,7 @@ namespace MyNS
 	{
 	public:
 		/** 定义返回类型 */
-		typedef typename TUnwrapType<WrappedRetValType>::Type RetValType;
+		typedef typename MyTUnwrapType<WrappedRetValType>::Type RetValType;
 		typedef RetValType TFuncType(ParamTypes...);
 
 		/** 定义 Instance 类型 */
@@ -165,9 +165,9 @@ namespace MyNS
 	};
 
 	template <typename... ParamTypes>
-	class MySmBaseDelegate<void, ParamTypes...> : public MySmBaseDelegate<TTypeWrapper<void>, ParamTypes...>
+	class MySmBaseDelegate<void, ParamTypes...> : public MySmBaseDelegate<MyTTypeWrapper<void>, ParamTypes...>
 	{
-		typedef MySmBaseDelegate<TTypeWrapper<void>, ParamTypes...> Super;
+		typedef MySmBaseDelegate<MyTTypeWrapper<void>, ParamTypes...> Super;
 
 	public:
 		typedef typename Super::MySmDelegateInstanceInterface MySmDelegateInstanceInterface;

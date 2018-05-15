@@ -36,7 +36,7 @@ namespace MyNS
 	 * template <typename T>
 	 * struct TThing
 	 * {
-	 *     typedef typename TUnwrapType<T>::Type RealT;
+	 *     typedef typename MyTUnwrapType<T>::Type RealT;
 	 *
 	 *     void f(RealT t)
 	 *     {
@@ -50,21 +50,21 @@ namespace MyNS
 	 *     void f(int t)
 	 *     {
 	 *         DoSomethingElseFirst(t);
-	 *         TThing<TTypeWrapper<int>>::f(t); // works
+	 *         TThing<MyTTypeWrapper<int>>::f(t); // works
 	 *     }
 	 * };
 	 */
 	template <typename T>
-	struct TTypeWrapper;
+	struct MyTTypeWrapper;
 
 	template <typename T>
-	struct TUnwrapType
+	struct MyTUnwrapType
 	{
 		typedef T Type;
 	};
 
 	template <typename T>
-	struct TUnwrapType<TTypeWrapper<T>>
+	struct MyTUnwrapType<MyTTypeWrapper<T>>
 	{
 		typedef T Type;
 	};

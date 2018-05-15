@@ -11,10 +11,10 @@ namespace MyNS
 	class MySmBaseRawMethodDelegateInstance;
 
 	template <bool bConst, class UserClass, typename WrappedRetValType, typename... ParamTypes, typename... VarTypes>
-	class MySmBaseRawMethodDelegateInstance<bConst, UserClass, WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
+	class MySmBaseRawMethodDelegateInstance<bConst, UserClass, WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename MyTUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
 	{
 	public:
-		typedef typename TUnwrapType<WrappedRetValType>::Type RetValType;
+		typedef typename MyTUnwrapType<WrappedRetValType>::Type RetValType;
 
 	private:
 		typedef IMySmBaseDelegateInstance<RetValType(ParamTypes...)>                                          Super;
@@ -76,9 +76,9 @@ namespace MyNS
 	};
 
 	template <bool bConst, class UserClass, typename... ParamTypes, typename... VarTypes>
-	class MySmBaseRawMethodDelegateInstance<bConst, UserClass, void(ParamTypes...), VarTypes...> : public MySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...>
+	class MySmBaseRawMethodDelegateInstance<bConst, UserClass, void(ParamTypes...), VarTypes...> : public MySmBaseRawMethodDelegateInstance<bConst, UserClass, MyTTypeWrapper<void>(ParamTypes...), VarTypes...>
 	{
-		typedef MySmBaseRawMethodDelegateInstance<bConst, UserClass, TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
+		typedef MySmBaseRawMethodDelegateInstance<bConst, UserClass, MyTTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
 
 	public:
 		MySmBaseRawMethodDelegateInstance(UserClass* InUserObject, typename Super::FMethodPtr InMethodPtr, VarTypes... Vars)
@@ -98,10 +98,10 @@ namespace MyNS
 	class MySmBaseStaticDelegateInstance;
 
 	template <typename WrappedRetValType, typename... ParamTypes, typename... VarTypes>
-	class MySmBaseStaticDelegateInstance<WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
+	class MySmBaseStaticDelegateInstance<WrappedRetValType(ParamTypes...), VarTypes...> : public IMySmBaseDelegateInstance<typename MyTUnwrapType<WrappedRetValType>::Type(ParamTypes...)>
 	{
 	public:
-		typedef typename TUnwrapType<WrappedRetValType>::Type RetValType;
+		typedef typename MyTUnwrapType<WrappedRetValType>::Type RetValType;
 
 		typedef IMySmBaseDelegateInstance<RetValType(ParamTypes...)>                    Super;
 		typedef MySmBaseStaticDelegateInstance<RetValType(ParamTypes...), VarTypes...> UnwrappedThisType;
@@ -154,9 +154,9 @@ namespace MyNS
 	};
 
 	template <typename... ParamTypes, typename... VarTypes>
-	class MySmBaseStaticDelegateInstance<void(ParamTypes...), VarTypes...> : public MySmBaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...>
+	class MySmBaseStaticDelegateInstance<void(ParamTypes...), VarTypes...> : public MySmBaseStaticDelegateInstance<MyTTypeWrapper<void>(ParamTypes...), VarTypes...>
 	{
-		typedef MySmBaseStaticDelegateInstance<TTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
+		typedef MySmBaseStaticDelegateInstance<MyTTypeWrapper<void>(ParamTypes...), VarTypes...> Super;
 
 	public:
 		MySmBaseStaticDelegateInstance(typename Super::FFuncPtr InStaticFuncPtr, VarTypes... Vars)
