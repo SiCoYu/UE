@@ -2,178 +2,11 @@
 
 #pragma once
 
-#include "MyEnableIf.h"
-#include "MyPointerIsConvertibleFromTo.h"
-#include "MyTypeWrapper.h"
-#include "HAL/MPlatform.h"
-#include "Templates/MyBaseTypeTraits.h"
-#include "MyAlignmentTemplates.h"
-#include "MyAndOrNot.h"
+#include "MPlatform.h"
 #include "Templates/MyRemoveReference.h"
-#include "Templates/MyTypeCompatibleBytes.h"
-#include <initializer_list>
 
 namespace MyNS
 {
-	/*-----------------------------------------------------------------------------
-		Standard templates.
-	-----------------------------------------------------------------------------*/
-
-	/**
-	 * Chooses between the two parameters based on whether the first is nullptr or not.
-	 * @return If the first parameter provided is non-nullptr, it is returned; otherwise the second parameter is returned.
-	 */
-	template<typename ReferencedType>
-	FORCEINLINE ReferencedType* IfAThenAElseB(ReferencedType* A, ReferencedType* B)
-	{
-		const PTRINT IntA = reinterpret_cast<PTRINT>(A);
-		const PTRINT IntB = reinterpret_cast<PTRINT>(B);
-
-		// Compute a mask which has all bits set if IntA is zero, and no bits set if it's non-zero.
-		const PTRINT MaskB = -(!IntA);
-
-		return reinterpret_cast<ReferencedType*>(IntA | (MaskB & IntB));
-	}
-
-	/** branchless pointer selection based on predicate
-	* return PTRINT(Predicate) ? A : B;
-	**/
-	template<typename PredicateType, typename ReferencedType>
-	FORCEINLINE ReferencedType* IfPThenAElseB(PredicateType Predicate, ReferencedType* A, ReferencedType* B)
-	{
-		const PTRINT IntA = reinterpret_cast<PTRINT>(A);
-		const PTRINT IntB = reinterpret_cast<PTRINT>(B);
-
-		// Compute a mask which has all bits set if Predicate is zero, and no bits set if it's non-zero.
-		const PTRINT MaskB = -(!PTRINT(Predicate));
-
-		return reinterpret_cast<ReferencedType*>((IntA & ~MaskB) | (IntB & MaskB));
-	}
-
-	/** A logical exclusive or function. */
-	inline bool XOR(bool A, bool B)
-	{
-		return A != B;
-	}
-
-	/** This is used to provide type specific behavior for a copy which cannot change the value of B. */
-	template<typename T>
-	FORCEINLINE void Move(T& A, typename TMoveSupportTraits<T>::Copy B)
-	{
-		// Destruct the previous value of A.
-		A.~T();
-
-		// Use placement new and a copy constructor so types with const members will work.
-		new(&A) T(B);
-	}
-
-	/** This is used to provide type specific behavior for a move which may change the value of B. */
-	template<typename T>
-	FORCEINLINE void Move(T& A, typename TMoveSupportTraits<T>::Move B)
-	{
-		// Destruct the previous value of A.
-		A.~T();
-
-		// Use placement new and a copy constructor so types with const members will work.
-		new(&A) T(MoveTemp(B));
-	}
-
-	/*----------------------------------------------------------------------------
-		Standard macros.
-	----------------------------------------------------------------------------*/
-
-	template <typename T, uint32 N>
-	char(&ArrayCountHelper(const T(&)[N]))[N];
-
-	// Number of elements in an array.
-#define ARRAY_COUNT( array ) (sizeof(ArrayCountHelper(array))+0)
-
-// Offset of a struct member.
-#ifndef UNREAL_CODE_ANALYZER
-// UCA uses clang on Windows. According to C++11 standard, (which in this case clang follows and msvc doesn't)
-// forbids using reinterpret_cast in constant expressions. msvc uses reinterpret_cast in offsetof macro,
-// while clang uses compiler intrinsic. Calling static_assert(STRUCT_OFFSET(x, y) == SomeValue) causes compiler
-// error when using clang on Windows (while including windows headers).
-#define STRUCT_OFFSET( struc, member )	offsetof(struc, member)
-#else
-#define STRUCT_OFFSET( struc, member )	__builtin_offsetof(struc, member)
-#endif
-
-#if PLATFORM_VTABLE_AT_END_OF_CLASS
-#error need implementation
-#else
-#define VTABLE_OFFSET( Class, MultipleInheritenceParent )	( ((PTRINT) static_cast<MultipleInheritenceParent*>((Class*)1)) - 1)
-#endif
-
-
-/**
- * works just like std::min_element.
- */
-	template<class ForwardIt> inline
-		ForwardIt MinElement(ForwardIt First, ForwardIt Last)
-	{
-		ForwardIt Result = First;
-		for (; ++First != Last; )
-		{
-			if (*First < *Result)
-			{
-				Result = First;
-			}
-		}
-		return Result;
-	}
-
-	/**
-	 * works just like std::min_element.
-	 */
-	template<class ForwardIt, class PredicateType> inline
-		ForwardIt MinElement(ForwardIt First, ForwardIt Last, PredicateType Predicate)
-	{
-		ForwardIt Result = First;
-		for (; ++First != Last; )
-		{
-			if (Predicate(*First, *Result))
-			{
-				Result = First;
-			}
-		}
-		return Result;
-	}
-
-	/**
-	* works just like std::max_element.
-	*/
-	template<class ForwardIt> inline
-		ForwardIt MaxElement(ForwardIt First, ForwardIt Last)
-	{
-		ForwardIt Result = First;
-		for (; ++First != Last; )
-		{
-			if (*Result < *First)
-			{
-				Result = First;
-			}
-		}
-		return Result;
-	}
-
-	/**
-	* works just like std::max_element.
-	*/
-	template<class ForwardIt, class PredicateType> inline
-		ForwardIt MaxElement(ForwardIt First, ForwardIt Last, PredicateType Predicate)
-	{
-		ForwardIt Result = First;
-		for (; ++First != Last; )
-		{
-			if (Predicate(*Result, *First))
-			{
-				Result = First;
-			}
-		}
-		return Result;
-	}
-
 	/**
 	 * utility template for a class that should not be copyable.
 	 * Derive from this class to make your class non-copyable
@@ -285,16 +118,6 @@ namespace MyNS
 	template <typename T> struct TRemovePointer<T*> { typedef T Type; };
 
 	/**
-	 * MoveTemp will cast a reference to an rvalue reference.
-	 * This is UE's equivalent of std::move.
-	 */
-	template <typename T>
-	FORCEINLINE typename TRemoveReference<T>::Type&& MoveTemp(T&& Obj)
-	{
-		return (typename TRemoveReference<T>::Type&&)Obj;
-	}
-
-	/**
 	 * CopyTemp will enforce the creation of an rvalue which can bind to rvalue reference parameters.
 	 * Unlike MoveTemp, the source object will never be modifed. (i.e. a copy will be made)
 	 * There is no std:: equivalent.
@@ -344,33 +167,6 @@ namespace MyNS
 		enum { Value = !TOrValue<__is_enum(T), TIsPointer<T>, TIsArithmetic<T>>::Value };
 	};
 
-
-	/**
-	 * Swap two values.  Assumes the types are trivially relocatable.
-	 */
-	template <typename T>
-	inline typename TEnableIf<TUseBitwiseSwap<T>::Value>::Type Swap(T& A, T& B)
-	{
-		TTypeCompatibleBytes<T> Temp;
-		FMemory::Memcpy(&Temp, &A, sizeof(T));
-		FMemory::Memcpy(&A, &B, sizeof(T));
-		FMemory::Memcpy(&B, &Temp, sizeof(T));
-	}
-
-	template <typename T>
-	inline typename TEnableIf<!TUseBitwiseSwap<T>::Value>::Type Swap(T& A, T& B)
-	{
-		T Temp = MoveTemp(A);
-		A = MoveTemp(B);
-		B = MoveTemp(Temp);
-	}
-
-	template <typename T>
-	inline void Exchange(T& A, T& B)
-	{
-		Swap(A, B);
-	}
-
 	/**
 	 * This exists to avoid a Visual Studio bug where using a cast to forward an rvalue reference array argument
 	 * to a pointer parameter will cause bad code generation.  Wrapping the cast in a function causes the correct
@@ -387,24 +183,6 @@ namespace MyNS
 	 */
 	template <typename T> struct TRValueToLValueReference { typedef T  Type; };
 	template <typename T> struct TRValueToLValueReference<T&&> { typedef T& Type; };
-
-	/**
-	 * Reverses the order of the bits of a value.
-	 * This is an TEnableIf'd template to ensure that no undesirable conversions occur.  Overloads for other types can be added in the same way.
-	 *
-	 * @param Bits - The value to bit-swap.
-	 * @return The bit-swapped value.
-	 */
-	template <typename T>
-	FORCEINLINE typename TEnableIf<TAreTypesEqual<T, uint32>::Value, T>::Type ReverseBits(T Bits)
-	{
-		Bits = (Bits << 16) | (Bits >> 16);
-		Bits = ((Bits & 0x00ff00ff) << 8) | ((Bits & 0xff00ff00) >> 8);
-		Bits = ((Bits & 0x0f0f0f0f) << 4) | ((Bits & 0xf0f0f0f0) >> 4);
-		Bits = ((Bits & 0x33333333) << 2) | ((Bits & 0xcccccccc) >> 2);
-		Bits = ((Bits & 0x55555555) << 1) | ((Bits & 0xaaaaaaaa) >> 1);
-		return Bits;
-	}
 
 	/** Template for initializing a singleton at the boot. */
 	template< class T >

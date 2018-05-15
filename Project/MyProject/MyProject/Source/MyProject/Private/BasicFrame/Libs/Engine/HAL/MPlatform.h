@@ -2,6 +2,11 @@
 
 #pragma once
 
+#define USING_UE4_API 1
+
+#if USING_UE4_API
+#include "HAL/Platform.h"
+#else
 // Backwater of the spec. All compilers support this except microsoft, and they will soon
 #ifndef TYPENAME_OUTSIDE_TEMPLATE
 #define TYPENAME_OUTSIDE_TEMPLATE	typename
@@ -119,4 +124,5 @@ namespace TypeTests
 #if !defined(TEXT)
 #define TEXT_PASTE(x) L ## x
 #define TEXT(x) TEXT_PASTE(x)
+#endif
 #endif
