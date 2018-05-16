@@ -21,7 +21,7 @@ namespace MyNS
 		typedef MySmBaseRawMethodDelegateInstance<bConst, UserClass, RetValType(ParamTypes...), VarTypes...> UnwrappedThisType;
 
 	public:
-		typedef typename TMemFunPtrType<bConst, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type FMethodPtr;
+		typedef typename MyTMemFunPtrType<bConst, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type FMethodPtr;
 
 		MySmBaseRawMethodDelegateInstance(UserClass* InUserObject, FMethodPtr InMethodPtr, VarTypes... Vars)
 			: UserObject(InUserObject)
@@ -52,7 +52,7 @@ namespace MyNS
 
 		virtual RetValType Execute(ParamTypes... Params) const override final
 		{
-			typedef typename TRemoveConst<UserClass>::Type MutableUserClass;
+			typedef typename MyTRemoveConst<UserClass>::Type MutableUserClass;
 
 			// 通常会直接传入 UserObject 是 this， 这个是 const T ，如果不去掉 const ，直接调用，编译器会报错
 			MutableUserClass* MutableUserObject = const_cast<MutableUserClass*>(UserObject);

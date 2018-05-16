@@ -3,7 +3,7 @@
 
 //#include "FastDelegate.h"
 
-#include "MySmDelegateCombinations.h"
+#include "MyDelegate/MySmDelegateCombinations.h"
 
 class IDispatchObject;
 
@@ -12,9 +12,17 @@ class IDispatchObject;
 
 //#define MakeEventDispatchDelegate EventDispatchDelegate
 
-DECLARE_DELEGATE_OneParam(EventDispatchDelegate, IDispatchObject*);
-typedef EventDispatchDelegate* EventDispatchDelegatePtr;
+//MY_DECLARE_DELEGATE_OneParam(EventDispatchDelegate, IDispatchObject*);
+//typedef EventDispatchDelegate* EventDispatchDelegatePtr;
 
-#define MakeEventDispatchDelegate EventDispatchDelegate().BindRaw
+//#define MakeEventDispatchDelegate EventDispatchDelegate().BindRaw
+
+typedef MySmBaseDelegate<void, IDispatchObject*> EventDispatchDelegate;
+typedef MySmBaseDelegate<void, IDispatchObject*>* EventDispatchDelegatePtr;
+
+#define MakeMemFunDelegate(pThis, handle) MySmBaseDelegate<void, IDispatchObject*>::MySmBaseDelegate(pThis, handle)
+#define MakeStaticFunDelegate(handle) MySmBaseDelegate<void, IDispatchObject*>::MySmBaseDelegate(0, handle)
+
+#define MakeEventDispatchDelegate(pThis, handle) MakeMemFunDelegate(pThis, handle)
 
 #endif
