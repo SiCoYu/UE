@@ -330,6 +330,21 @@ public:
 	// InTravelType = TRAVEL_Absolute
 	// void UEngine::TickWorldTravel(FWorldContext& Context, float DeltaSeconds)
 	// TickWorldTravel 的时候会执行设置的地图
+	/**
+	 * @brief [UE4]ServerTravel和ClientTravel区别 
+	 * @url http://www.dawnarc.com/2017/06/ue4servertravel%E5%92%8Cclienttravel%E5%8C%BA%E5%88%AB/
+	 * Browse, LoadMap, ServerTravel and ClientTravel?
+	 * https://answers.unrealengine.com/questions/122565/browse-servertravel-and-clienttravel.html
+	 * What’s the different between absolute travel and relative travel?
+	 * https://answers.unrealengine.com/questions/101284/what-the-different-between-absolute-travel-and-rel.html
+	 * What is the difference between ServerTravel and OpenLevel?
+	 * https://answers.unrealengine.com/questions/55477/the-difference-of-the-two-functions.html
+	 * PlayerController->ClientTravel()连接远程服务器
+	 * https://answers.unrealengine.com/questions/29017/gamemode-multiplayer-c.html
+	 * Seamless and non-seamless travel
+	 * https://docs.unrealengine.com/latest/INT/Gameplay/Networking/Travelling
+	 * 另外，可以参加官方ShooterGame的APlayerController->ClientTravel()用法。
+	 */
 	static void SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType);
 	static bool ServerTravel(const FString& InURL, bool bAbsolute = false, bool bShouldSkipGameNotify = false);
 
@@ -374,6 +389,31 @@ public:
 	// 窗口是否可见
 	static bool isWidgetVisible(UWidget* widget);
 	static void setWidgetVisible(UWidget* widget, bool isVisible);
+
+	static FColor convLineColorToColor(FLinearColor lineColor);
+	static FLinearColor convColorToLineColor(FColor color);
+
+	static void setActorPos(AActor* actor);
+	static void setActorRotate(AActor* actor);
+	static void setActorScale(AActor* actor);
+
+	static FVector getActorPos(AActor* actor, FVector NewLocation);
+	static FRotator getActorRotate(AActor* actor, FRotator NewRotation);
+	static FVector getActorScale(AActor* actor, FVector NewScale3D);
+
+	static FTransform getActorTransform(AActor* actor);
+
+	static USceneComponent* getActorRootComponent(AActor* actor);
+	static FVector getActorPivotOffset(AActor* actor);
+	static void setActorVisible(AActor* actor, bool isVisible);
+	static void setActorEnableCollision(AActor* actor, bool isEnable);
+
+	static void AttachToComponent(AActor* actor, USceneComponent* Parent, const FAttachmentTransformRules& AttachmentRules, FName SocketName = NAME_None);
+	static void AttachToActor(AActor* actor, AActor* ParentActor, const FAttachmentTransformRules& AttachmentRules, FName SocketName = NAME_None);
+
+	static void setActorComponentActive(UActorComponent* actorComponent, bool isActive);
+	static AActor* getActorComponentOwner(UActorComponent* actorComponent);
+	static UWorld* getWorldByActorComponent(UActorComponent* actorComponent);
 };
 
 #include "UtilEngineWrap.inl"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameFramework/Actor.h"
+#include "GameFramework/Actor.h"	// AActor
 
 #include "PhysicsEngine/PhysicsConstraintActor.h"
 #include "PhysicsEngine/ConstraintInstance.h"	// FConstraintInstance

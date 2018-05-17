@@ -1004,3 +1004,93 @@ void UtilEngineWrap::setWidgetVisible(UWidget* widget, bool isVisible)
 		widget->SetVisibility(ESlateVisibility::Visible);
 	}
 }
+
+FColor UtilEngineWrap::convLineColorToColor(FLinearColor lineColor)
+{
+	return lineColor.ToRGBE();
+}
+
+FLinearColor UtilEngineWrap::convColorToLineColor(FColor color)
+{
+	return lineColor.FromSRGBColor(color);
+}
+
+void UtilEngineWrap::setActorPos(AActor* actor, FVector NewLocation)
+{
+	actor->SetActorLocation(NewLocation);
+}
+
+void UtilEngineWrap::setActorRotate(AActor* actor, FRotator NewRotation)
+{
+	actor->SetActorRotation(NewRotation);
+}
+
+void UtilEngineWrap::setActorScale(AActor* actor, FVector NewScale3D)
+{
+	actor->SetActorScale3D(NewScale3D);
+}
+
+FVector UtilEngineWrap::getActorPos(AActor* actor)
+{
+	return actor->GetActorLocation();
+}
+
+FRotator UtilEngineWrap::getActorRotate(AActor* actor)
+{
+	return actor->GetActorRotation();
+}
+
+FVector UtilEngineWrap::getActorScale(AActor* actor)
+{
+	return actor->GetActorScale();
+}
+
+FTransform UtilEngineWrap::getActorTransform(AActor* actor)
+{
+	return actor->GetActorTransform();
+}
+
+USceneComponent* UtilEngineWrap::getActorRootComponent(AActor* actor)
+{
+	return actor->GetRootComponent();
+}
+
+FVector UtilEngineWrap::getActorPivotOffset(AActor* actor)
+{
+	return actor->GetPivotOffset();
+}
+
+void UtilEngineWrap::setActorVisible(AActor* actor, bool isVisible)
+{
+	actor->SetActorHiddenInGame(isVisible);
+}
+
+void UtilEngineWrap::setActorEnableCollision(AActor* actor, bool isEnable)
+{
+	actor->SetActorEnableCollision(isEnable);
+}
+
+void UtilEngineWrap::AttachToComponent(AActor* actor, USceneComponent* Parent, const FAttachmentTransformRules& AttachmentRules, FName SocketName = NAME_None)
+{
+	actor->AttachToComponent(Parent, AttachmentRules, SocketName);
+}
+
+void UtilEngineWrap::AttachToActor(AActor* actor, AActor* ParentActor, const FAttachmentTransformRules& AttachmentRules, FName SocketName = NAME_None)
+{
+	actor->AttachToActor(ParentActor, AttachmentRules, SocketName);
+}
+
+void UtilEngineWrap::setActorComponentActive(UActorComponent* actorComponent, bool isActive)
+{
+	actorComponen->bIsActive = isActive;
+}
+
+AActor* UtilEngineWrap::getActorComponentOwner(UActorComponent* actorComponent)
+{
+	return actorComponent->GetOwner();
+}
+
+UWorld* UtilEngineWrap::getWorldByActorComponent(UActorComponent* actorComponent);
+{
+	return actorComponent->GetWorld();
+}
