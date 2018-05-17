@@ -5,7 +5,6 @@
 #include "Templates/MyBaseTemplate.h"
 #include "MySmDelegateBase.h"
 #include "MySmDelegateInstancesImpl.h"
-#include "MyDelegateType.h"
 
 class MySmDelegateBase;
 class IMySmDelegateInstance;
@@ -79,9 +78,9 @@ namespace MyNS
 		/**
 		* 'Null' 构造
 		*/
-		//inline MySmBaseDelegate(TYPE_OF_NULLPTR)
-		//{
-		//}
+		inline MySmBaseDelegate(TYPE_OF_NULLPTR)
+		{
+		}
 
 		//template <typename T>
 		//inline MySmBaseDelegate(T param)
@@ -185,10 +184,10 @@ namespace MyNS
 		/**
 		* 'Null' 构造
 		*/
-		//FORCEINLINE MySmBaseDelegate(TYPE_OF_NULLPTR)
-		//	: Super(nullptr)
-		//{
-		//}
+		FORCEINLINE MySmBaseDelegate(TYPE_OF_NULLPTR)
+			: Super(nullptr)
+		{
+		}
 
 		FORCEINLINE MySmBaseDelegate(const MySmBaseDelegate& Other)
 			: Super(Other)
