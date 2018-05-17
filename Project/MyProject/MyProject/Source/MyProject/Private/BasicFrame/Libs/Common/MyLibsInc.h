@@ -9,5 +9,6 @@
 #include "UObject/ObjectMacros.h"
 #include "UObject/UObjectBaseUtility.h"
 #include "UObject/Object.h"
+#include "Misc/EngineVersion.h"
 
 #endif

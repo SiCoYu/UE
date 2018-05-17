@@ -632,6 +632,16 @@ bool UtilEngineWrap::ServerTravel(const FString& InURL, bool bAbsolute, bool bSh
 	return UtilEngineWrap::GetWorld()->ServerTravel(InURL, bAbsolute, bShouldSkipGameNotify);
 }
 
+bool UtilEngineWrap::OpenLevel(const UObject* WorldContextObject, FName LevelName, bool bAbsolute, FString Options)
+{
+	UGameplayStatics::OpenLevel(WorldContextObject, LevelName, bAbsolute, Options);
+}
+
+void UtilEngineWrap::LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
+{
+	UGameplayStatics::LoadStreamLevel(WorldContextObject, LevelName, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
+}
+
 UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId)
 {
 	return Cast<UMyLocalPlayerBase>(GEngine->GetLocalPlayerFromControllerId(InViewport, ControllerId));

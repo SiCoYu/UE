@@ -348,6 +348,14 @@ public:
 	static void SetClientTravel(UWorld *InWorld, const TCHAR* NextURL, ETravelType InTravelType);
 	static bool ServerTravel(const FString& InURL, bool bAbsolute = false, bool bShouldSkipGameNotify = false);
 
+	/**
+	 * @brief 虚幻4动态加载画面（后台加载关卡）的实现
+	 * @url https://blog.csdn.net/sinat_27456831/article/details/49933285
+	 * 我们知道虚幻里要加载新的关卡一般是通过Open Level函数实现，如下所示。但是，load level函数会阻塞进程，如果之前有加载动画在播放的话，当执行load level函数时，所有进程都停止，动画将会停止。如下为验证蓝图。 在任一子关卡上右击，弹出对话框，如下。在“Change Streaming Method”下可以选择当前关卡是“总是加载”还是通过“蓝图”控制。选择“蓝图”，在启动当前关卡（比如开始的游戏UI界面）时就不会加载子关卡，通过load stream level就可以在后台加载子关卡而不会影响当前其他进程（如正在进行的动态加载画面）。 
+	 */
+	static bool OpenLevel(const UObject* WorldContextObject, FName LevelName, bool bAbsolute, FString Options);
+	static void LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
+
 	static UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId);
 
 	static int GetNumLocalPlayers();
