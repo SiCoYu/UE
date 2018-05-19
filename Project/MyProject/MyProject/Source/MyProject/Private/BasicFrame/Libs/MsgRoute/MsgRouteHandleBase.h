@@ -2,8 +2,7 @@
 #define __MsgRouteHandleBase_H
 
 #include "MDictionary.h"
-#include "MsgRouteDelegate.h"
-#include "MsgRouteBase.h"
+#include "MsgRouteId.h"
 #include "EventDispatchDelegate.h"
 
 class AddOnceEventDispatch;

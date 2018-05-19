@@ -3,6 +3,8 @@
 
 #include "IRecycle.h"
 #include "IDispatchObject.h"
+#include "MsgRouteType.h"
+#include "MsgRouteId.h"
 
 class MsgRouteBase : public IRecycle, public IDispatchObject
 {

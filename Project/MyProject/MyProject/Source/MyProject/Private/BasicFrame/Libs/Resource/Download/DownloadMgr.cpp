@@ -21,7 +21,7 @@ void DownloadMgr::init()
 {
     // 游戏逻辑处理
     //mResMsgRouteCB = new ResMsgRouteCB();
-    //Ctx.mInstance.mMsgRouteNotify.addOneDispatch(mResMsgRouteCB);
+    //Ctx.mInstance.mMsgRouteNotify.addOneNotify(mResMsgRouteCB);
 }
 
 void DownloadMgr::dispose()
