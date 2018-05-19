@@ -7,7 +7,7 @@ class IDispatchObject;
 
 class GameTimeCmdHandle : public NetCmdDispatchHandle
 {
-	M_DECLARE_SUPER_KW(GameTimeCmdHandle)
+	M_DECLARE_SUPER_KW(NetCmdDispatchHandle)
 
 public:
 	GameTimeCmdHandle();

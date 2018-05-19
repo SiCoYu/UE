@@ -83,7 +83,7 @@ void MDictionary<TKey, TValue>::add(TKey key, TValue value)
 template <class TKey, class TValue>
 void MDictionary<TKey, TValue>::remove(TKey key)
 {
-	UtilMap::Remove(this->mData, key)
+	UtilMap::Remove(this->mData, key);
 }
 
 template <class TKey, class TValue>
