@@ -7,6 +7,8 @@
 
 class IDispatchObject;
 
+// EventDispatchDelegate.h
+
 typedef fastdelegate::FastDelegate1<IDispatchObject*> EventDispatchDelegate;
 typedef fastdelegate::FastDelegate1<IDispatchObject*>* EventDispatchDelegatePtr;
 

@@ -3,6 +3,8 @@
 
 #include "MDcitionary.h"
 #include "MsgRouteDelegate.h"
+#include "MsgRouteBase.h"
+#include "EventDispatchDelegate.h"
 
 class MsgRouteBase;
 
@@ -15,7 +17,10 @@ public:
 	MsgRouteHandleBase();
 	// warning C4265: 'MsgRouteHandleBase': class has virtual functions, but destructor is not virtual
 	virtual ~MsgRouteHandleBase();
-	virtual void handleMsg(MsgRouteBase* msg);
+
+	void addMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle);
+	void removeMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle);
+	virtual void handleMsg(IDispatchObject dispObj, uint uniqueId);
 };
 
 #endif

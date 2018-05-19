@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "GameTimeCmdHandle.h"
+#include "EventDispatchDelegate.h"
 
 GameTimeCmdHandle::GameTimeCmdHandle()
 {
@@ -10,14 +11,29 @@ void GameTimeCmdHandle::init()
 {
     Super::init();
 
-    this->addParamHandle(stTimerUserCmd.GAMETIME_TIMER_USERCMD_PARA, Ctx.msInstance.mTimerMsgHandle.receiveMsg7f);
-    this->addParamHandle(stTimerUserCmd.REQUESTUSERGAMETIME_TIMER_USERCMD_PARA, Ctx.msInstance.mTimerMsgHandle.receiveMsg8f);
+    this->addParamHandle(
+		0, 
+		MakeEventDispatchDelegate(
+			this, 
+			&GameTimeCmdHandle::onParamHandle
+		)
+	);
 }
 
 void GameTimeCmdHandle::dispose()
 {
-    this.removeParamHandle(stTimerUserCmd.GAMETIME_TIMER_USERCMD_PARA, Ctx.msInstance.mTimerMsgHandle.receiveMsg7f);
-    this.removeParamHandle(stTimerUserCmd.REQUESTUSERGAMETIME_TIMER_USERCMD_PARA, Ctx.msInstance.mTimerMsgHandle.receiveMsg8f);
+    this.removeParamHandle(
+		0, 
+		MakeEventDispatchDelegate(
+			this, 
+			&GameTimeCmdHandle::onParamHandle
+		)
+	);
 
 	Super::dispose();
+}
+
+void GameTimeCmdHandle::onParamHandle(IDispatchObject* dispObj, uint uniqueId)
+{
+
 }

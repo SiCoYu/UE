@@ -15,11 +15,31 @@ MsgRouteHandleBase::~MsgRouteHandleBase()
 	
 }
 
-void MsgRouteHandleBase::handleMsg(MsgRouteBase* msg)
+void MsgRouteHandleBase::addMsgRouteHandle(MsgRouteId msgRouteId, MEventDispatchAction<IDispatchObject> handle)
 {
+	if (!this->mId2HandleDic.containsKey((int)msgRouteId))
+	{
+		this->mId2HandleDic[(int)msgRouteId] = new AddOnceEventDispatch();
+	}
+
+	this->mId2HandleDic[(int)msgRouteId].addEventHandle(handle);
+}
+
+void MsgRouteHandleBase::removeMsgRouteHandle(MsgRouteId msgRouteId, MEventDispatchAction<IDispatchObject> handle)
+{
+	if (this->mId2HandleDic.containsKey((int)msgRouteId))
+	{
+		this->mId2HandleDic[(int)msgRouteId].removeEventHandle(handle);
+	}
+}
+
+void MsgRouteHandleBase::handleMsg(IDispatchObject* dispObj, uint uniqueId)
+{
+	MsgRouteBase* msg = (MsgRouteBase*)dispObj;
+
 	int key = ((int)msg->mMsgId);
 
-	if (UtilMap::ContainsKey(mId2HandleDic, key))
+	if (this.mId2HandleDic.containsKey((int)msg->mMsgId))
 	{
 		this->mId2HandleDic[key](msg);
 	}

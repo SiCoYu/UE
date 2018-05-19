@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "GameRouteHandle.h"
 #include "MsgRouteId.h"
+#include "EventDispatchDelegate.h"
 
 GameRouteHandle::GameRouteHandle()
 {
@@ -11,8 +12,8 @@ void GameRouteHandle::init()
 {
     Super::init();
 
-    this->addMsgRouteHandle(MsgRouteId.eMRID_ThreadLog, threadLog);
-    this->addMsgRouteHandle(MsgRouteId.eMRID_SocketOpened, onSocketOpened);
+    this->addMsgRouteHandle(MsgRouteId.eMRID_ThreadLog, MakeEventDispatchDelegate(this, &GameRouteHandle::threadLog));
+    this->addMsgRouteHandle(MsgRouteId.eMRID_SocketOpened, MakeEventDispatchDelegate(this, &GameRouteHandle::onSocketOpened));
 }
 
 void GameRouteHandle::dispose()
@@ -23,12 +24,12 @@ void GameRouteHandle::dispose()
 	Super::dispose();
 }
 
-protected void threadLog(IDispatchObject* dispObj, uint uniqueId)
+void GameRouteHandle::threadLog(IDispatchObject* dispObj, uint uniqueId)
 {
     MsgRouteBase* msg = (MsgRouteBase*)dispObj;
 }
 
-protected void onSocketOpened(IDispatchObject* dispObj, uint uniqueId)
+void GameRouteHandle::onSocketOpened(IDispatchObject* dispObj, uint uniqueId)
 {
     
 }
