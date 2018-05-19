@@ -131,7 +131,7 @@ public class MyProject : ModuleRules
 
                 "MyProject/Private/BasicFrame/Module",
                 "MyProject/Private/BasicFrame/Module/Game",
-                "MyProject/Private/BasicFrame/Module/Game/EventCB",
+                "MyProject/Private/BasicFrame/Module/Game/EventNotify",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/Ui/UiPack",
