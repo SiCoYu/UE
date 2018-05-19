@@ -4,7 +4,7 @@
 #include "BufferCV.h"
 
 class MCircularBuffer;
-class ByteBuffer;
+class MByteBuffer;
 
 /**
  * @brief 消息缓冲区
@@ -16,8 +16,8 @@ class MsgBuffer
 protected:
 	MCircularBuffer* mCircularBuffer;    // 环形缓冲区
 
-	ByteBuffer* mHeaderBA;     // 主要是用来分析头的大小
-	ByteBuffer* mMsgBodyBA;        // 返回的字节数组
+	MByteBuffer* mHeaderBA;     // 主要是用来分析头的大小
+	MByteBuffer* mMsgBodyBA;        // 返回的字节数组
 
 protected:
 	/**
@@ -29,8 +29,8 @@ public:
 	MsgBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY);
 	~MsgBuffer();
 
-	ByteBuffer* getHeaderBA();
-	ByteBuffer* getMsgBodyBA();
+	MByteBuffer* getHeaderBA();
+	MByteBuffer* getMsgBodyBA();
 	MCircularBuffer* getCircularBuffer();
 
 	/**

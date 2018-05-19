@@ -3,7 +3,7 @@
 
 #include "Platform.h"		// int8
 
-class ByteBuffer;
+class MByteBuffer;
 
 /**
  * @brief 
@@ -27,8 +27,8 @@ public:
     uint32 dwTimestamp;
 
 public:
-	virtual void serialize(ByteBuffer* bu);
-	virtual void derialize(ByteBuffer* bu);
+	virtual void serialize(MByteBuffer* bu);
+	virtual void derialize(MByteBuffer* bu);
 };
 
 

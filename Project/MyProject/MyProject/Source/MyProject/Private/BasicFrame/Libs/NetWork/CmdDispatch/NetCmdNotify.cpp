@@ -6,11 +6,12 @@
 #include "NetModuleDispatchHandle.h"
 #include "CmdDispatchInfo.h"
 #include "SafePointer.h"
+#include "MByteBuffer.h"
 
 NetCmdNotify::NetCmdNotify()
-	: this->mRevMsgCnt(0),
-	  this->mHandleMsgCnt(0),
-	  this->mIsStopNetHandle(false)
+	: mRevMsgCnt(0),
+	  mHandleMsgCnt(0),
+	  mIsStopNetHandle(false)
 {
 	this->mCmdDispInfo = SAFE_NEW CmdDispatchInfo();
 }
@@ -56,7 +57,7 @@ void NetCmdNotify::removeOneNotify(NetModuleDispatchHandle* disp)
     }
 }
 
-void NetCmdNotify::handleMsg(ByteBuffer* msg)
+void NetCmdNotify::handleMsg(MByteBuffer* msg)
 {
     //if (false == mIsStopNetHandle)  // 如果没有停止网络处理
     //{

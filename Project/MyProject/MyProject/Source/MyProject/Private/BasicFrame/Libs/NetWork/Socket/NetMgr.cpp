@@ -5,7 +5,7 @@
 #include <sstream>
 #include "MMutex.h"
 #include "UtilContainers.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "MLock.h"
 #include "Common.h"
 #include "MEvent.h"
@@ -367,7 +367,7 @@ void NetMgr::closeCurSocket()
 	}
 }
 
-ByteBuffer* NetMgr::getMsg()
+MByteBuffer* NetMgr::getMsg()
 {
 	if (mCurClient != nullptr)
 	{
@@ -377,7 +377,7 @@ ByteBuffer* NetMgr::getMsg()
 	return nullptr;
 }
 
-ByteBuffer* NetMgr::getSendBA()
+MByteBuffer* NetMgr::getSendBA()
 {
 	if (mCurClient != nullptr)
 	{

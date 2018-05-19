@@ -3,13 +3,13 @@
 
 #include "MyProject.h"
 
-class ByteBuffer;
+class MByteBuffer;
 
 class TableItemBodyBase
 {
 public:
     // 解析主要数据部分
-	virtual void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
+	virtual void parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
 };
 
 #endif

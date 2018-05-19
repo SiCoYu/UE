@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "TableCard.h"
 
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "UtilTable.h"
 
 TableCardItemBody::TableCardItemBody()
@@ -14,7 +14,7 @@ TableCardItemBody::~TableCardItemBody()
 	
 }
 
-void TableCardItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
+void TableCardItemBody::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset)
 {
     bytes->setPos(offset);
 	UtilTable::readString(bytes, mName);

@@ -6,7 +6,7 @@
 #include "MDictionary.h"
 #include "EventDispatchDelegate.h"	// FastDelegate1
 
-class ByteBuffer;
+class MByteBuffer;
 class AddOnceEventDispatch;
 
 class NetCmdDispatchHandle

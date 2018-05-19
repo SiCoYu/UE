@@ -1,9 +1,9 @@
 #include "MyProject.h"
 #include "stNullUserCmd.h"
 #include "UtilEngineWrap.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 
-void stNullUserCmd::serialize(ByteBuffer* bu)
+void stNullUserCmd::serialize(MByteBuffer* bu)
 {
 	bu->writeUnsignedInt8(byCmd);
 	bu->writeUnsignedInt8(byParam);
@@ -11,7 +11,7 @@ void stNullUserCmd::serialize(ByteBuffer* bu)
 	bu->writeUnsignedInt32(dwTimestamp);
 }
 
-void stNullUserCmd::derialize(ByteBuffer* bu)
+void stNullUserCmd::derialize(MByteBuffer* bu)
 {
 	bu->readUnsignedInt8(byCmd);
 	bu->readUnsignedInt8(byParam);

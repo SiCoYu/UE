@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "TableItemBase.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "TableItemHeader.h"
 
 TableItemBase::TableItemBase()
@@ -9,7 +9,7 @@ TableItemBase::TableItemBase()
 
 }
 
-void TableItemBase::parseHeaderByteBuffer(ByteBuffer* bytes)
+void TableItemBase::parseHeaderByteBuffer(MByteBuffer* bytes)
 {
     if (nullptr == mItemHeader)
     {

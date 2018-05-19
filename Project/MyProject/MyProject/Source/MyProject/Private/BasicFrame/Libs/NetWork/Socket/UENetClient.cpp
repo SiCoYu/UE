@@ -8,7 +8,7 @@
 #include "MLock.h"
 #include "Common.h"
 #include "UtilStr.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "MsgBuffer.h"
 #include "UtilStr.h"
 #include "MCircularBuffer.h"

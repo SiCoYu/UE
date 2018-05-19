@@ -33,7 +33,7 @@
 #endif
 
 class MMutex;
-class ByteBuffer;
+class MByteBuffer;
 
 #ifdef USE_EXTERN_THREAD
 class NetMgr : public SocketHandler, public INetMgr
@@ -90,9 +90,9 @@ public:
 	* @brief 关闭当前 socket
 	*/
 	void closeCurSocket();
-	ByteBuffer* getMsg();
+	MByteBuffer* getMsg();
 	// 获取发送消息缓冲区
-	virtual ByteBuffer* getSendBA();
+	virtual MByteBuffer* getSendBA();
 	// 注意这个仅仅是放入缓冲区冲，真正发送在子线程中发送
 	virtual void send(bool bnet = true);
 	// 关闭网络 ，需要等待子线程结束

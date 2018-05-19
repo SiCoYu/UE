@@ -9,7 +9,7 @@
 #include "TableSkill.h"
 #include "TableItemHeader.h"
 #include "TableItemBodyBase.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "Common.h"
 
 TableSys::TableSys()
@@ -18,7 +18,7 @@ TableSys::TableSys()
 	this->mDicTable[TableId::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
 	this->mDicTable[TableId::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
 
-	this->mByteBuffer = new ByteBuffer();
+	this->mByteBuffer = new MByteBuffer();
 }
 
 TableSys::~TableSys()
@@ -144,7 +144,7 @@ std::string& TableSys::getTableName(TableId::TableId tableID)
 }
 
 // 读取一个表，仅仅读取表头
-void TableSys::readTable(TableId::TableId tableID, ByteBuffer* bytes)
+void TableSys::readTable(TableId::TableId tableID, MByteBuffer* bytes)
 {
     TableBase* table = this->mDicTable[tableID];
 	table->mByteBuffer = bytes;

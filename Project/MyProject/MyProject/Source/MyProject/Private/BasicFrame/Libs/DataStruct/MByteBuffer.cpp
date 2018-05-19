@@ -1,58 +1,58 @@
 #include "MyProject.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 
 //#include <sstream>
 #include "DynBufResizePolicy.h"
 #include "BitConverter.h"
 #include "Array.h"
 
-ByteBuffer::ByteBuffer(uint32 initCapacity, uint32 maxCapacity, EEndian endian)
+MByteBuffer::MByteBuffer(uint32 initCapacity, uint32 maxCapacity, EEndian endian)
 {
 	mEndian = endian;        // 缓冲区默认是小端的数据，因为服务器是 linux 的
 	mDynBuffer = new DynBuffer<char>(initCapacity, maxCapacity);
 }
 
-DynBuffer<char>* ByteBuffer::getDynBuffer()
+DynBuffer<char>* MByteBuffer::getDynBuffer()
 {
 	return mDynBuffer;
 }
 
-uint32 ByteBuffer::getBytesAvailable()
+uint32 MByteBuffer::getBytesAvailable()
 {
 	//check();
 	return (mDynBuffer->getSize() - mPos);
 }
 
-EEndian ByteBuffer::getEndian()
+EEndian MByteBuffer::getEndian()
 {
 	return mEndian;
 }
 
-void ByteBuffer::setEndian(EEndian value)
+void MByteBuffer::setEndian(EEndian value)
 {
 	mEndian = value;
 }
 
-uint32 ByteBuffer::getLength()
+uint32 MByteBuffer::getLength()
 {
 	return mDynBuffer->getSize();
 }
 
-void ByteBuffer::setLength(uint32 value)
+void MByteBuffer::setLength(uint32 value)
 {
 	mDynBuffer->setSize(value);
 
 	//check();
 }
 
-void ByteBuffer::setPos(uint32 pos)
+void MByteBuffer::setPos(uint32 pos)
 {
 	mPos = pos;
 
 	//check();
 }
 
-uint32 ByteBuffer::getPos()
+uint32 MByteBuffer::getPos()
 {
 	return mPos;
 }
@@ -67,7 +67,7 @@ uint32 ByteBuffer::getPos()
 //	m_luaCSBridgeByteBuffer = value;
 //}
 
-void ByteBuffer::clear()
+void MByteBuffer::clear()
 {
 	//check();
 
@@ -76,7 +76,7 @@ void ByteBuffer::clear()
 }
 
 // 检查是否有足够的大小可以扩展
-bool ByteBuffer::canWrite(uint32 delta)
+bool MByteBuffer::canWrite(uint32 delta)
 {
 	if (mDynBuffer->getSize() + delta > mDynBuffer->getCapacity())
 	{
@@ -91,7 +91,7 @@ bool ByteBuffer::canWrite(uint32 delta)
 }
 
 // 读取检查
-bool ByteBuffer::canRead(uint32 delta)
+bool MByteBuffer::canRead(uint32 delta)
 {
 	if (mPos + delta > mDynBuffer->getSize())
 	{
@@ -105,21 +105,21 @@ bool ByteBuffer::canRead(uint32 delta)
 	return true;
 }
 
-void ByteBuffer::extendDeltaCapicity(uint32 delta)
+void MByteBuffer::extendDeltaCapicity(uint32 delta)
 {
 	mDynBuffer->extendDeltaCapicity(delta);
 
 	//check();
 }
 
-void ByteBuffer::advPos(uint32 num)
+void MByteBuffer::advPos(uint32 num)
 {
 	mPos += num;
 
 	//check();
 }
 
-void ByteBuffer::advPosAndLen(uint32 num)
+void MByteBuffer::advPosAndLen(uint32 num)
 {
 	mPos += num;
 	setLength(mPos);
@@ -127,22 +127,22 @@ void ByteBuffer::advPosAndLen(uint32 num)
 	//check();
 }
 
-void ByteBuffer::incPosDelta(int delta)        // 添加 pos delta 数量
+void MByteBuffer::incPosDelta(int delta)        // 添加 pos delta 数量
 {
 	mPos += (uint32)delta;
 }
 
-void ByteBuffer::decPosDelta(int delta)     // 减少 pos delta 数量
+void MByteBuffer::decPosDelta(int delta)     // 减少 pos delta 数量
 {
 	mPos -= (uint32)delta;
 }
 
-void ByteBuffer::incLenDelta(int delta)
+void MByteBuffer::incLenDelta(int delta)
 {
 	setLength(getLength() + (uint32)delta);
 }
 
-void ByteBuffer::decLenDelta(int delta)
+void MByteBuffer::decLenDelta(int delta)
 {
 	setLength(getLength() - (uint32)delta);
 }
@@ -258,7 +258,7 @@ void ByteBuffer::decLenDelta(int delta)
 //	//check();
 //}
 //
-//ByteBuffer MByteBuffer::readBoolean(ref bool tmpBool)
+//MByteBuffer MByteBuffer::readBoolean(ref bool tmpBool)
 //{
 //	if (canRead(sizeof(bool)))
 //	{
@@ -271,7 +271,7 @@ void ByteBuffer::decLenDelta(int delta)
 //	return this;
 //}
 
-ByteBuffer& ByteBuffer::readInt8(int8& tmpByte)
+MByteBuffer& MByteBuffer::readInt8(int8& tmpByte)
 {
 	if (canRead(sizeof(char)))
 	{
@@ -284,7 +284,7 @@ ByteBuffer& ByteBuffer::readInt8(int8& tmpByte)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readUnsignedInt8(uint8& tmpByte)
+MByteBuffer& MByteBuffer::readUnsignedInt8(uint8& tmpByte)
 {
 	if (canRead(sizeof(uint8)))
 	{
@@ -297,7 +297,7 @@ ByteBuffer& ByteBuffer::readUnsignedInt8(uint8& tmpByte)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readInt16(int16& tmpShort)
+MByteBuffer& MByteBuffer::readInt16(int16& tmpShort)
 {
 	if (canRead(sizeof(int16)))
 	{
@@ -315,7 +315,7 @@ ByteBuffer& ByteBuffer::readInt16(int16& tmpShort)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readUnsignedInt16(uint16& tmpUshort)
+MByteBuffer& MByteBuffer::readUnsignedInt16(uint16& tmpUshort)
 {
 	if (canRead(sizeof(uint16)))
 	{
@@ -333,7 +333,7 @@ ByteBuffer& ByteBuffer::readUnsignedInt16(uint16& tmpUshort)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readInt32(int32& tmpInt)
+MByteBuffer& MByteBuffer::readInt32(int32& tmpInt)
 {
 	if (canRead(sizeof(int32)))
 	{
@@ -351,7 +351,7 @@ ByteBuffer& ByteBuffer::readInt32(int32& tmpInt)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readUnsignedInt32(uint32& tmpUint)
+MByteBuffer& MByteBuffer::readUnsignedInt32(uint32& tmpUint)
 {
 	if (canRead(sizeof(uint32)))
 	{
@@ -369,7 +369,7 @@ ByteBuffer& ByteBuffer::readUnsignedInt32(uint32& tmpUint)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readInt64(int64& tmpLong)
+MByteBuffer& MByteBuffer::readInt64(int64& tmpLong)
 {
 	if (canRead(sizeof(int64)))
 	{
@@ -387,7 +387,7 @@ ByteBuffer& ByteBuffer::readInt64(int64& tmpLong)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readUnsignedInt64(uint64& tmpUlong)
+MByteBuffer& MByteBuffer::readUnsignedInt64(uint64& tmpUlong)
 {
 	if (canRead(sizeof(uint64)))
 	{
@@ -405,7 +405,7 @@ ByteBuffer& ByteBuffer::readUnsignedInt64(uint64& tmpUlong)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readFloat(float& tmpFloat)
+MByteBuffer& MByteBuffer::readFloat(float& tmpFloat)
 {
 	if (canRead(sizeof(float)))
 	{
@@ -423,7 +423,7 @@ ByteBuffer& ByteBuffer::readFloat(float& tmpFloat)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readDouble(double& tmpDouble)
+MByteBuffer& MByteBuffer::readDouble(double& tmpDouble)
 {
 	if (canRead(sizeof(double)))
 	{
@@ -441,7 +441,7 @@ ByteBuffer& ByteBuffer::readDouble(double& tmpDouble)
 	return *this;
 }
 
-ByteBuffer& ByteBuffer::readMultiByte(std::string& tmpStr, uint32 len, MEncode charSet)
+MByteBuffer& MByteBuffer::readMultiByte(std::string& tmpStr, uint32 len, MEncode charSet)
 {
 	// 如果是 unicode ，需要大小端判断
 	if (canRead(len))
@@ -456,7 +456,7 @@ ByteBuffer& ByteBuffer::readMultiByte(std::string& tmpStr, uint32 len, MEncode c
 }
 
 // 这个是字节读取，没有大小端的区别
-ByteBuffer& ByteBuffer::readBytes(char* tmpBytes, uint32 len)
+MByteBuffer& MByteBuffer::readBytes(char* tmpBytes, uint32 len)
 {
 	if (canRead(len))
 	{
@@ -470,7 +470,7 @@ ByteBuffer& ByteBuffer::readBytes(char* tmpBytes, uint32 len)
 }
 
 // 如果要使用 writeInt8 ，直接使用 writeMultiByte 这个函数
-void ByteBuffer::writeInt8(int8 value)
+void MByteBuffer::writeInt8(int8 value)
 {
 	if (!canWrite(sizeof(int8)))
 	{
@@ -482,7 +482,7 @@ void ByteBuffer::writeInt8(int8 value)
 	//check();
 }
 
-void ByteBuffer::writeUnsignedInt8(uint8 value)
+void MByteBuffer::writeUnsignedInt8(uint8 value)
 {
 	if (!canWrite(sizeof(uint8)))
 	{
@@ -494,7 +494,7 @@ void ByteBuffer::writeUnsignedInt8(uint8 value)
 	//check();
 }
 
-void ByteBuffer::writeInt16(int16 value)
+void MByteBuffer::writeInt16(int16 value)
 {
 	if (!canWrite(sizeof(int16)))
 	{
@@ -512,7 +512,7 @@ void ByteBuffer::writeInt16(int16 value)
 	//check();
 }
 
-void ByteBuffer::writeUnsignedInt16(uint16 value)
+void MByteBuffer::writeUnsignedInt16(uint16 value)
 {
 	if (!canWrite(sizeof(uint16)))
 	{
@@ -530,7 +530,7 @@ void ByteBuffer::writeUnsignedInt16(uint16 value)
 	//check();
 }
 
-void ByteBuffer::writeInt32(int value)
+void MByteBuffer::writeInt32(int value)
 {
 	if (!canWrite(sizeof(int)))
 	{
@@ -548,7 +548,7 @@ void ByteBuffer::writeInt32(int value)
 	//check();
 }
 
-void ByteBuffer::writeUnsignedInt32(uint32 value, bool bchangeLen)
+void MByteBuffer::writeUnsignedInt32(uint32 value, bool bchangeLen)
 {
 	if (!canWrite(sizeof(uint32)))
 	{
@@ -573,7 +573,7 @@ void ByteBuffer::writeUnsignedInt32(uint32 value, bool bchangeLen)
 	//check();
 }
 
-void ByteBuffer::writeInt64(int64 value)
+void MByteBuffer::writeInt64(int64 value)
 {
 	if (!canWrite(sizeof(int64)))
 	{
@@ -591,7 +591,7 @@ void ByteBuffer::writeInt64(int64 value)
 	//check();
 }
 
-void ByteBuffer::writeUnsignedInt64(uint64 value)
+void MByteBuffer::writeUnsignedInt64(uint64 value)
 {
 	if (!canWrite(sizeof(uint64)))
 	{
@@ -609,7 +609,7 @@ void ByteBuffer::writeUnsignedInt64(uint64 value)
 	//check();
 }
 
-void ByteBuffer::writeFloat(float value)
+void MByteBuffer::writeFloat(float value)
 {
 	if (!canWrite(sizeof(float)))
 	{
@@ -627,7 +627,7 @@ void ByteBuffer::writeFloat(float value)
 	//check();
 }
 
-void ByteBuffer::writeDouble(double value)
+void MByteBuffer::writeDouble(double value)
 {
 	if (!canWrite(sizeof(double)))
 	{
@@ -646,7 +646,7 @@ void ByteBuffer::writeDouble(double value)
 }
 
 // 写入字节， bchangeLen 是否改变长度
-void ByteBuffer::writeBytes(char* value, uint32 start, uint32 len, bool bchangeLen)
+void MByteBuffer::writeBytes(char* value, uint32 start, uint32 len, bool bchangeLen)
 {
 	if (len > 0)            // 如果有长度才写入
 	{
@@ -669,7 +669,7 @@ void ByteBuffer::writeBytes(char* value, uint32 start, uint32 len, bool bchangeL
 }
 
 // 写入字符串
-void ByteBuffer::writeMultiByte(std::string& value, MEncode charSet, int len)
+void MByteBuffer::writeMultiByte(std::string& value, MEncode charSet, int len)
 {
 	//int num = 0;
 
@@ -714,7 +714,7 @@ void ByteBuffer::writeMultiByte(std::string& value, MEncode charSet, int len)
 }
 
 // 替换已经有的一段数据
-void ByteBuffer::replace(char* srcBytes, uint32 srcStartPos, uint32 srclen_, uint32 destStartPos, uint32 destlen_)
+void MByteBuffer::replace(char* srcBytes, uint32 srcStartPos, uint32 srclen_, uint32 destStartPos, uint32 destlen_)
 {
 	uint32 lastLeft = this->getLength() - destStartPos - destlen_;        // 最后一段的长度
 	this->setLength(destStartPos + srclen_ + lastLeft);      // 设置大小，保证足够大小空间
@@ -730,14 +730,14 @@ void ByteBuffer::replace(char* srcBytes, uint32 srcStartPos, uint32 srclen_, uin
 	//check();
 }
 
-void ByteBuffer::insertUnsignedInt32(uint32 value)
+void MByteBuffer::insertUnsignedInt32(uint32 value)
 {
 	incLenDelta(sizeof(uint32));       // 扩大长度
 	writeUnsignedInt32(value);     // 写入
 	//check();
 }
 
-ByteBuffer& ByteBuffer::readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset)
+MByteBuffer& MByteBuffer::readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset)
 {
 	this->setPos(offset);
 	readUnsignedInt64(tmpUlong);

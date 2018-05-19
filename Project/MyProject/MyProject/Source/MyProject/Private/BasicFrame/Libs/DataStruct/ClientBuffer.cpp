@@ -2,7 +2,7 @@
 #include "ClientBuffer.h"
 #include "MsgBuffer.h"
 #include "DynBuffer.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "MCircularBuffer.h"
 #include "MMutex.h"
 #include "MLock.h"
@@ -14,16 +14,16 @@ ClientBuffer::ClientBuffer()
 {
 	mRawBuffer = new MsgBuffer();
 	mMsgBuffer = new MsgBuffer();
-	//mSendTmpBA = new ByteBuffer();
+	//mSendTmpBA = new MByteBuffer();
 	mSendTmpBuffer = new MsgBuffer();
-	mSocketSendBA = new ByteBuffer();
+	mSocketSendBA = new MByteBuffer();
 	//mSocketSendBA.mId = 1000;
 
 	//mDynBuffer = new DynamicBuffer<byte>(8096);
-	mUnCompressHeaderBA = new ByteBuffer();
-	mSendData = new ByteBuffer();
-	mTmpData = new ByteBuffer(4);
-	mTmp1fData = new ByteBuffer(4);
+	mUnCompressHeaderBA = new MByteBuffer();
+	mSendData = new MByteBuffer();
+	mTmpData = new MByteBuffer(4);
+	mTmp1fData = new MByteBuffer(4);
 
 	mReadMutex = new MMutex();
 	mWriteMutex = new MMutex();
@@ -63,12 +63,12 @@ MsgBuffer* ClientBuffer::getSendTmpBuffer()
 	return mSendTmpBuffer;
 }
 
-ByteBuffer* ClientBuffer::getSendBuffer()
+MByteBuffer* ClientBuffer::getSendBuffer()
 {
 	return mSocketSendBA;
 }
 
-ByteBuffer* ClientBuffer::getSendData()
+MByteBuffer* ClientBuffer::getSendData()
 {
 	return mSendData;
 }
@@ -158,7 +158,7 @@ void ClientBuffer::send(bool bnet)
 	}
 }
 
-ByteBuffer* ClientBuffer::getMsg()
+MByteBuffer* ClientBuffer::getMsg()
 {
 	MLock mlock(mReadMutex);
 	{
@@ -392,7 +392,7 @@ void ClientBuffer::UnCompressAndDecryptEveryOne()
 		GNetDispList->addOneRevMsg();
 
 		// Test 读取消息头
-		// ByteBuffer buff = getMsg();
+		// MByteBuffer buff = getMsg();
 		// stNullUserCmd cmd = new stNullUserCmd();
 		// cmd.derialize(buff);
 		// Ctx.m_instance.m_logSys.log(string.Format("测试打印消息: byCmd = {0}, byParam = {1}", cmd.byCmd, cmd.byParam));

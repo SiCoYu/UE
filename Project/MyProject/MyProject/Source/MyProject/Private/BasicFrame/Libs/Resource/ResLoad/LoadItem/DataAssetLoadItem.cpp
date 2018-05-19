@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "DataAssetLoadItem.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 
 //UDataAssetLoadItem::UDataAssetLoadItem(const FObjectInitializer& ObjectInitializer)
 //	: Super(ObjectInitializer)
@@ -16,14 +16,14 @@ void UDataAssetLoadItem::loadFile(const FString& Filename)
 		/*FString Text;
 		if (FFileHelper::LoadFileToString(Text, *Filename))
 		{
-			ByteBuffer* fileBU = new ByteBuffer(Text.GetAllocatedSize());
+			MByteBuffer* fileBU = new MByteBuffer(Text.GetAllocatedSize());
 			fileBU->writeBytes(TCHAR_TO_ANSI(Text.GetCharArray().GetData()), 0, Text.GetAllocatedSize());
 		}*/
 
 		TArray<uint8> arrayBuffer;
 		if (FFileHelper::LoadFileToArray(arrayBuffer, *Filename))
 		{
-			ByteBuffer* fileBU = new ByteBuffer(arrayBuffer.GetAllocatedSize());
+			MByteBuffer* fileBU = new MByteBuffer(arrayBuffer.GetAllocatedSize());
 			fileBU->writeBytes((char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
 		}
 	}

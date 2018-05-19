@@ -9,7 +9,7 @@
 
 class TableBase;
 class TableItemBase;
-class ByteBuffer;
+class MByteBuffer;
 
 /**
     * @brief 添加一个表的步骤总共分 4 步
@@ -24,7 +24,7 @@ class TableSys
 
 private:
 	std::map<TableId::TableId, TableBase*> mDicTable;
-	ByteBuffer* mByteBuffer;
+	MByteBuffer* mByteBuffer;
 	TArray<uint8> mArrayBuffer;
 
 public:
@@ -50,7 +50,7 @@ public:
     // 获取一个表的名字
 	std::string& getTableName(TableId::TableId tableID);
     // 读取一个表，仅仅读取表头
-	void readTable(TableId::TableId tableID, ByteBuffer* bytes);
+	void readTable(TableId::TableId tableID, MByteBuffer* bytes);
     // 查找表中的一项
 	static TableItemBase* findDataItem(TableBase* table, uint32 id);
 };

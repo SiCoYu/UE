@@ -1,11 +1,12 @@
 ﻿#include "MyProject.h"
 #include "NetModuleDispatchHandle.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "UtilContainers.h"
 #include "Common.h"
 #include "UtilStr.h"
 #include "NetCmdDispatchHandle.h"
 #include "AddOnceEventDispatch.h"
+#include "CmdDispatchInfo.h"
 
 NetModuleDispatchHandle::NetModuleDispatchHandle()
 {
@@ -34,14 +35,14 @@ void NetModuleDispatchHandle::addCmdHandle(int cmdId, EventDispatchDelegate hand
 		this->mId2DispatchDic[cmdId] = new AddOnceEventDispatch();
 	}
 
-	this->mId2DispatchDic[cmdId].addEventHandle(handle);
+	this->mId2DispatchDic[cmdId]->addEventHandle(handle);
 }
 
 void NetModuleDispatchHandle::removeCmdHandle(int cmdId, EventDispatchDelegate handle)
 {
 	if (this->mId2DispatchDic.containsKey(cmdId))
 	{
-		this->mId2DispatchDic[cmdId].removeEventHandle(handle);
+		this->mId2DispatchDic[cmdId]->removeEventHandle(handle);
 	}
 	else
 	{
@@ -51,7 +52,7 @@ void NetModuleDispatchHandle::removeCmdHandle(int cmdId, EventDispatchDelegate h
 
 void NetModuleDispatchHandle::handleMsg(CmdDispatchInfo* cmdDispInfo)
 {
-	if (UtilMap::ContainsKey(this->mId2DispatchDic, cmdDispInfo->byCmd))
+	if (this->mId2DispatchDic.containsKey(cmdDispInfo->byCmd))
     {
 		GLogSys->log(UtilStr::Format("处理消息: byCmd = {0},  byParam = {1}", cmdDispInfo->byCmd, cmdDispInfo->byParam));
 		this->mId2DispatchDic[cmdDispInfo->byCmd]->dispatchEvent(cmdDispInfo);

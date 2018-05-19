@@ -21,7 +21,7 @@ public:
 	TableSkillItemBody();
 	virtual ~TableSkillItemBody();
 
-	virtual void TableSkillItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
+	virtual void TableSkillItemBody::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
 };
 
 #endif

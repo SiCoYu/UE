@@ -3,7 +3,7 @@
 
 #include "MyProject.h"
 
-class ByteBuffer;
+class MByteBuffer;
 
 class TableItemHeader
 {
@@ -12,7 +12,7 @@ public:
     uint32 mOffset;           // 这一项在文件中的偏移
 
     // 解析头部
-	virtual void parseHeaderByteBuffer(ByteBuffer* bytes);
+	virtual void parseHeaderByteBuffer(MByteBuffer* bytes);
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 class TableItemHeader;
 class TableItemBodyBase;
-class ByteBuffer;
+class MByteBuffer;
 
 class TableItemBase
 {
@@ -15,17 +15,17 @@ public:
 
 public:
 	TableItemBase();
-	virtual void parseHeaderByteBuffer(ByteBuffer* bytes);
+	virtual void parseHeaderByteBuffer(MByteBuffer* bytes);
 
 	template <class T>
-	void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
+	void parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
 
 	template <class T>
-	void parseAllByteBuffer(ByteBuffer* bytes);
+	void parseAllByteBuffer(MByteBuffer* bytes);
 };
 
 template <class T>
-void TableItemBase::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
+void TableItemBase::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset)
 {
 	if (nullptr == mItemBody)
 	{
@@ -36,7 +36,7 @@ void TableItemBase::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
 }
 
 template <class T>
-void TableItemBase::parseAllByteBuffer(ByteBuffer* bytes)
+void TableItemBase::parseAllByteBuffer(MByteBuffer* bytes)
 {
 	// 解析头
 	parseHeaderByteBuffer(bytes);

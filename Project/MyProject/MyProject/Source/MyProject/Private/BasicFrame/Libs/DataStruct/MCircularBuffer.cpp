@@ -2,7 +2,7 @@
 #include "MCircularBuffer.h"
 #include "DynBufResizePolicy.h"
 #include "Array.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 
 /**
  * @brief 构造函数
@@ -14,7 +14,7 @@ MCircularBuffer::MCircularBuffer(size_t initCapacity, size_t maxCapacity)
 	mFirst = 0;
 	mLast = 0;
 
-	mTmpBA = new ByteBuffer();
+	mTmpBA = new MByteBuffer();
 }
 
 MCircularBuffer::~MCircularBuffer()
@@ -181,7 +181,7 @@ void MCircularBuffer::pushBackArr(char* items, uint32 start, std::size_t len)
 	mDynBuffer->mSize += len;
 }
 
-void MCircularBuffer::pushBackBA(ByteBuffer* bu)
+void MCircularBuffer::pushBackBA(MByteBuffer* bu)
 {
 	//pushBack(bu.dynBuff.buff, bu.position, bu.bytesAvailable);
 	pushBackArr(bu->getDynBuffer()->getBuffer(), 0, bu->getLength());
@@ -229,14 +229,14 @@ void MCircularBuffer::pushFrontArr(char* items, std::size_t len)
 /**
 * @brief 从 CB 中读取内容，并且将数据删除
 */
-void MCircularBuffer::popFrontBA(ByteBuffer* bytearray, std::size_t len)
+void MCircularBuffer::popFrontBA(MByteBuffer* bytearray, std::size_t len)
 {
 	frontBA(bytearray, len);
 	popFrontLen(len);
 }
 
 // 仅仅是获取数据，并不删除
-void MCircularBuffer::frontBA(ByteBuffer* bytearray, std::size_t len)
+void MCircularBuffer::frontBA(MByteBuffer* bytearray, std::size_t len)
 {
 	bytearray->clear();          // 设置数据为初始值
 	if (mDynBuffer->mSize >= len)          // 头部占据 4 个字节

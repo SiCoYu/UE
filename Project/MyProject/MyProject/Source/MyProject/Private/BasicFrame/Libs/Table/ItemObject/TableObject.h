@@ -17,7 +17,7 @@ public:
 	TableObjectItemBody();
 	virtual ~TableObjectItemBody();
 
-	virtual void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
+	virtual void parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
 };
 
 #endif

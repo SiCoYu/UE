@@ -1,5 +1,5 @@
-#ifndef __ByteBuffer_H
-#define __ByteBuffer_H
+#ifndef __MByteBuffer_H
+#define __MByteBuffer_H
 
 #include <vector>
 #include <list>
@@ -15,7 +15,7 @@
 
 template <class T> class DynBuffer;
 
-class ByteBuffer
+class MByteBuffer
 {
 public:
 	// int mId;        // 测试使用
@@ -31,7 +31,7 @@ protected:
 	//LuaCSBridgeByteBuffer m_luaCSBridgeByteBuffer;        // Lua 中的缓冲区
 
 public:
-	ByteBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY, EEndian endian = eLITTLE_ENDIAN);
+	MByteBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY, EEndian endian = eLITTLE_ENDIAN);
 	DynBuffer<char>* getDynBuffer();
 	uint32 getBytesAvailable();
 	EEndian getEndian();
@@ -67,20 +67,20 @@ public:
 	//uint encrypt(CryptContext cryptContext, uint len_ = 0);
 	// 解密，现在必须 8 字节对齐解密
 	//void decrypt(CryptContext cryptContext, uint len_ = 0);
-	ByteBuffer& readBoolean(bool& tmpBool);
-	ByteBuffer& readInt8(int8& tmpByte);
-	ByteBuffer& readUnsignedInt8(uint8& tmpByte);
-	ByteBuffer& readInt16(int16& tmpShort);
-	ByteBuffer& readUnsignedInt16(uint16& tmpUshort);
-	ByteBuffer& readInt32(int32& tmpInt);
-	ByteBuffer& readUnsignedInt32(uint32& tmpUint);
-	ByteBuffer& readInt64(int64& tmpLong);
-	ByteBuffer& readUnsignedInt64(uint64& tmpUlong);
-	ByteBuffer& readFloat(float& tmpFloat);
-	ByteBuffer& readDouble(double& tmpDouble);
-	ByteBuffer& readMultiByte(std::string& tmpStr, uint32 len, MEncode charSet);
+	MByteBuffer& readBoolean(bool& tmpBool);
+	MByteBuffer& readInt8(int8& tmpByte);
+	MByteBuffer& readUnsignedInt8(uint8& tmpByte);
+	MByteBuffer& readInt16(int16& tmpShort);
+	MByteBuffer& readUnsignedInt16(uint16& tmpUshort);
+	MByteBuffer& readInt32(int32& tmpInt);
+	MByteBuffer& readUnsignedInt32(uint32& tmpUint);
+	MByteBuffer& readInt64(int64& tmpLong);
+	MByteBuffer& readUnsignedInt64(uint64& tmpUlong);
+	MByteBuffer& readFloat(float& tmpFloat);
+	MByteBuffer& readDouble(double& tmpDouble);
+	MByteBuffer& readMultiByte(std::string& tmpStr, uint32 len, MEncode charSet);
 	// 这个是字节读取，没有大小端的区别
-	ByteBuffer& readBytes(char* tmpBytes, uint32 len);
+	MByteBuffer& readBytes(char* tmpBytes, uint32 len);
 	// 如果要使用 writeInt8 ，直接使用 writeMultiByte 这个函数
 	void writeInt8(int8 value);
 	void writeUnsignedInt8(uint8 value);
@@ -103,7 +103,7 @@ protected:
 
 public:
 	void insertUnsignedInt32(uint32 value);
-	ByteBuffer& readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset);
+	MByteBuffer& readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset);
 	//bool check();
 };
 

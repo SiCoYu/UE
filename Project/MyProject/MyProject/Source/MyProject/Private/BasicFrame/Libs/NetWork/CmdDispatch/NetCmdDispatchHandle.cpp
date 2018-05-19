@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "UtilContainers.h"
 #include "UtilStr.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 
 NetCmdDispatchHandle::NetCmdDispatchHandle()
 {

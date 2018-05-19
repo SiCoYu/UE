@@ -7,7 +7,8 @@ class MByteBuffer;
 
 class CmdDispatchInfo : public IDispatchObject
 {
-    public MByteBuffer* bu;
-    public uint8 byCmd;
-    public uint8 byParam;
+public:
+	MByteBuffer* bu;
+    uint8 byCmd;
+    uint8 byParam;
 };

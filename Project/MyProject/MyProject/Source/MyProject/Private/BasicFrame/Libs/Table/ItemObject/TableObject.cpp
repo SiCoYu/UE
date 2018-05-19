@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "TableObject.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "UtilTable.h"
 
 TableObjectItemBody::TableObjectItemBody()
@@ -13,7 +13,7 @@ TableObjectItemBody::~TableObjectItemBody()
 	
 }
 
-void TableObjectItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
+void TableObjectItemBody::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset)
 {
 	bytes->setPos(offset);  // 从偏移处继续读取真正的内容
 	UtilTable::readString(bytes, mName);

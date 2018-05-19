@@ -1,14 +1,14 @@
 #include "MyProject.h"
 #include "MsgBuffer.h"
 #include "MCircularBuffer.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "MsgCV.h"
 
 MsgBuffer::MsgBuffer(uint32 initCapacity, uint32 maxCapacity)
 {
 	mCircularBuffer = new MCircularBuffer(initCapacity, maxCapacity);
-	mHeaderBA = new ByteBuffer();
-	mMsgBodyBA = new ByteBuffer();
+	mHeaderBA = new MByteBuffer();
+	mMsgBodyBA = new MByteBuffer();
 }
 
 MsgBuffer::~MsgBuffer()
@@ -18,12 +18,12 @@ MsgBuffer::~MsgBuffer()
 	delete mMsgBodyBA;
 }
 
-ByteBuffer* MsgBuffer::getHeaderBA()
+MByteBuffer* MsgBuffer::getHeaderBA()
 {
 	return mHeaderBA;
 }
 
-ByteBuffer* MsgBuffer::getMsgBodyBA()
+MByteBuffer* MsgBuffer::getMsgBodyBA()
 {
 	return mMsgBodyBA;
 }

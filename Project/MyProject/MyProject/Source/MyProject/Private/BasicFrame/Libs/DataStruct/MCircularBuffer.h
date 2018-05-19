@@ -9,7 +9,7 @@
 #include "DynBuffer.h"
 
 //template <class T> class DynBuffer<char>;
-class ByteBuffer;
+class MByteBuffer;
 
 /**
  *@brief 浪费一个自己，这样判断也好判断，并且索引也不用减 1 ，因此浪费一个字节
@@ -20,7 +20,7 @@ protected:
 	DynBuffer<char>* mDynBuffer;
 	uint32 mFirst;             // 当前缓冲区数据的第一个索引
 	uint32 mLast;              // 当前缓冲区数据的最后一个索引的后面一个索引，浪费一个字节
-	ByteBuffer* mTmpBA;        // 临时数据
+	MByteBuffer* mTmpBA;        // 临时数据
 
 protected:
 	bool canAddData(uint32 num);
@@ -46,10 +46,10 @@ public:
 
 	// 添加和获取数据
 	void pushBackArr(char* items, uint32 start, std::size_t len);
-	void pushBackBA(ByteBuffer* bu);
+	void pushBackBA(MByteBuffer* bu);
 	void pushFrontArr(char* items, std::size_t len);
-	void popFrontBA(ByteBuffer* bytearray, std::size_t len);
-	void frontBA(ByteBuffer* bytearray, std::size_t len);
+	void popFrontBA(MByteBuffer* bytearray, std::size_t len);
+	void frontBA(MByteBuffer* bytearray, std::size_t len);
 	void popFrontLen(uint32 len);
 	void pushBackCB(MCircularBuffer* rhv);
 };

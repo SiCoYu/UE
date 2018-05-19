@@ -6,7 +6,7 @@
 
 class MsgBuffer;
 template <class T> class DynBuffer;
-class ByteBuffer;
+class MByteBuffer;
 class MCircularBuffer;
 class MMutex;
 
@@ -18,15 +18,15 @@ class ClientBuffer
 protected:
 	MsgBuffer* mRawBuffer;			// 直接从服务器接收到的原始的数据，可能压缩和加密过
 	MsgBuffer* mMsgBuffer;			// 可以使用的缓冲区
-	//ByteBuffer* mSendTmpBA;		// 发送临时缓冲区，发送的数据都暂时放在这里
+	//MByteBuffer* mSendTmpBA;		// 发送临时缓冲区，发送的数据都暂时放在这里
 	MsgBuffer* mSendTmpBuffer;		// 发送临时缓冲区，发送的数据都暂时放在这里
-	ByteBuffer* mSocketSendBA;     // 真正发送缓冲区
+	MByteBuffer* mSocketSendBA;     // 真正发送缓冲区
 
 	DynBuffer<char>* mDynBuffer;				// 接收到的临时数据，将要放到 mRawBuffer 中去
-	ByteBuffer* mUnCompressHeaderBA;	// 存放解压后的头的长度
-	ByteBuffer* mSendData;				// 存放将要发送的数据，将要放到 m_sendBuffer 中去
-	ByteBuffer* mTmpData;				// 临时需要转换的数据放在这里
-	ByteBuffer* mTmp1fData;			// 临时需要转换的数据放在这里
+	MByteBuffer* mUnCompressHeaderBA;	// 存放解压后的头的长度
+	MByteBuffer* mSendData;				// 存放将要发送的数据，将要放到 m_sendBuffer 中去
+	MByteBuffer* mTmpData;				// 临时需要转换的数据放在这里
+	MByteBuffer* mTmp1fData;			// 临时需要转换的数据放在这里
 
 	MMutex* mReadMutex;				// 读互斥
 	MMutex* mWriteMutex;				// 写互斥
@@ -41,8 +41,8 @@ public:
 
 	DynBuffer<char>* getDynBuffer();
 	MsgBuffer* getSendTmpBuffer();
-	ByteBuffer* getSendBuffer();
-	ByteBuffer* getSendData();
+	MByteBuffer* getSendBuffer();
+	MByteBuffer* getSendData();
 
 #ifdef MSG_ENCRIPT
 	void setCryptKey(byte[] encrypt)
@@ -54,7 +54,7 @@ public:
 	void moveDyn2Raw();
 	void moveRaw2Msg();
 	void send(bool bnet = true);
-	ByteBuffer* getMsg();
+	MByteBuffer* getMsg();
 	// 获取数据，然后压缩加密
 	void getSocketSendData();
 

@@ -6,7 +6,7 @@
 #include "EventDispatchDelegate.h"
 
 class NetCmdDispatchHandle;
-class ByteBuffer;
+class MByteBuffer;
 class AddOnceEventDispatch;
 class CmdDispatchInfo;
 

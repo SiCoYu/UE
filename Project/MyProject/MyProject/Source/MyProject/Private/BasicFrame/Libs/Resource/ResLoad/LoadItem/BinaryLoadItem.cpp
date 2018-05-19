@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "BinaryLoadItem.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 
 //UBinaryLoadItem::UBinaryLoadItem(const FObjectInitializer& ObjectInitializer)
 //	: Super(ObjectInitializer)
@@ -26,14 +26,14 @@ void UBinaryLoadItem::loadFile(const FString& Filename)
 		/*FString Text;
 		if (FFileHelper::LoadFileToString(Text, *Filename))
 		{
-			ByteBuffer* fileBU = new ByteBuffer(Text.GetAllocatedSize());
+			MByteBuffer* fileBU = new MByteBuffer(Text.GetAllocatedSize());
 			fileBU->writeBytes(TCHAR_TO_ANSI(Text.GetCharArray().GetData()), 0, Text.GetAllocatedSize());
 		}*/
 
 		TArray<uint8> arrayBuffer;
 		if (FFileHelper::LoadFileToArray(arrayBuffer, *Filename))
 		{
-			ByteBuffer* pFileBU = new ByteBuffer(arrayBuffer.GetAllocatedSize());
+			MByteBuffer* pFileBU = new MByteBuffer(arrayBuffer.GetAllocatedSize());
 			pFileBU->writeBytes((char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
 			delete pFileBU;
 		}

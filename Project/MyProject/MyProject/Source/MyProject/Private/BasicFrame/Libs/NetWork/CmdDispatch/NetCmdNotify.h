@@ -4,7 +4,7 @@
 #include <vector>
 
 class NetModuleDispatchHandle;
-class ByteBuffer;
+class MByteBuffer;
 class CmdDispatchInfo;
 
 class NetCmdNotify
@@ -30,7 +30,7 @@ public:
 
 	void addOneNofity(NetModuleDispatchHandle* disp);
 	void removeOneNotify(NetModuleDispatchHandle* disp);
-	void handleMsg(ByteBuffer* msg);
+	void handleMsg(MByteBuffer* msg);
 	void addOneRevMsg();
 
 	void addOneHandleMsg();

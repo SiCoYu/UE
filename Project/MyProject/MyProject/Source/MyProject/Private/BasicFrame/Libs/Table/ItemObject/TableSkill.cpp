@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "TableSkill.h"
-#include "ByteBuffer.h"
+#include "MByteBuffer.h"
 #include "UtilTable.h"
 
 TableSkillItemBody::TableSkillItemBody()
@@ -13,7 +13,7 @@ TableSkillItemBody::~TableSkillItemBody()
 	
 }
 
-void TableSkillItemBody::parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset)
+void TableSkillItemBody::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset)
 {
     bytes->setPos(offset);
 	UtilTable::readString(bytes, mName);

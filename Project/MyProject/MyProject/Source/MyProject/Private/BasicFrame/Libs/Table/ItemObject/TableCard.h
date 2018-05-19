@@ -27,7 +27,7 @@ public:
 #include "MyProject.h"
 #include "TableItemBodyBase.h"
 
-class ByteBuffer;
+class MByteBuffer;
 
 /**
     * @brief 卡牌基本表
@@ -69,7 +69,7 @@ public:
 	TableCardItemBody();
 	virtual ~TableCardItemBody();
 
-	virtual void parseBodyByteBuffer(ByteBuffer* bytes, uint32 offset);
+	virtual void parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
 };
 
 #endif
