@@ -155,7 +155,9 @@ void SMyChatWidget::OnChatTextCommitted(const FText& InText, ETextCommit::Type C
 			{
 				// Insert code here if you wish to have / commands
 				FSChatMsg newmessage; // make a new struct to send for replication
-				newmessage.Init(1, FText::FromString(MyPS->PlayerName), NFText); // initialize the message struct for replication
+				// UE 4.19.2 warning C4996: 'APlayerState::PlayerName': This property is now deprecated, please use GetPlayerName and SetPlayerName/SetPlayerNameInternal functions instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+				//newmessage.Init(1, FText::FromString(MyPS->PlayerName), NFText); // initialize the message struct for replication
+				newmessage.Init(1, FText::FromString(MyPS->GetPlayerName()), NFText); // initialize the message struct for replication
 				if (newmessage.Type > 0)
 					MyPS->UserChatRPC(newmessage); // Send the complete chat message to the PlayerState so it can be replicated then displayed
 			}

@@ -15,17 +15,17 @@
 
 TestMain::TestMain()
 {
-	mTestExtern = new TestExtern();
+	this->mTestExtern = new TestExtern();
 
 #ifdef USE_EXTERN_THREAD
 
-	mTestSocket = new TestSocket();
+	this->mTestSocket = new TestSocket();
 
 #endif	// USE_EXTERN_THREAD
 
-	mTestUI = new TestUI();
-	mTestDownload = new TestDownload();
-	mTestLuaBind = new TestLuaBind();
+	this->mTestUI = new TestUi();
+	this->mTestDownload = new TestDownload();
+	this->mTestLuaBind = new TestLuaBind();
 }
 
 TestMain::~TestMain()
@@ -56,7 +56,7 @@ void TestMain::runTest()
 	////testing::InitGoogleTest(__argc, __argv);
 	//RUN_ALL_TESTS();
 
-	//mTestUI->run()
-	//mTestDownload->run();
-	//mTestLuaBind->run();
+	//this->mTestUI->run()
+	//this->mTestDownload->run();
+	//this->mTestLuaBind->run();
 }

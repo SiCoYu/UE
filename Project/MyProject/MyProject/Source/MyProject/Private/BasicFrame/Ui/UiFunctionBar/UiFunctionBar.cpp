@@ -12,7 +12,7 @@
 UUiFunctionBar::UUiFunctionBar(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	mTestButton = MySharedPtr<AuxButton>(SAFE_NEW AuxButton());
+	this->mTestButton = MySharedPtr<AuxButton>(SAFE_NEW AuxButton());
 }
 
 void UUiFunctionBar::onReady()
@@ -20,7 +20,7 @@ void UUiFunctionBar::onReady()
 	Super::onReady();
 
 	//UtilSysLibWrap::addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
-	mTestButton->addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
+	this->mTestButton->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 }
 
 void UUiFunctionBar::onTestButtonTouch()
