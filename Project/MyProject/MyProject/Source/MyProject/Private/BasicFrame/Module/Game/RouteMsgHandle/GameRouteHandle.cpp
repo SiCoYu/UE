@@ -12,14 +12,38 @@ void GameRouteHandle::init()
 {
     Super::init();
 
-    this->addMsgRouteHandle(MsgRouteId.eMRID_ThreadLog, MakeEventDispatchDelegate(this, &GameRouteHandle::threadLog));
-    this->addMsgRouteHandle(MsgRouteId.eMRID_SocketOpened, MakeEventDispatchDelegate(this, &GameRouteHandle::onSocketOpened));
+    this->addMsgRouteHandle(
+		MsgRouteId::eMRID_ThreadLog, 
+		MakeEventDispatchDelegate(
+			this, 
+			&GameRouteHandle::threadLog
+		)
+	);
+    this->addMsgRouteHandle(
+		MsgRouteId::eMRID_SocketOpened, 
+		MakeEventDispatchDelegate(
+			this, 
+			&GameRouteHandle::onSocketOpened
+		)
+	);
 }
 
 void GameRouteHandle::dispose()
 {
-    this->removeMsgRouteHandle(MsgRouteId.eMRID_ThreadLog, threadLog);
-    this->removeMsgRouteHandle(MsgRouteId.eMRID_SocketOpened, onSocketOpened);
+    this->removeMsgRouteHandle(
+		MsgRouteId::eMRID_ThreadLog, 
+		MakeEventDispatchDelegate(
+			this, 
+			&GameRouteHandle::threadLog
+		)
+	);
+    this->removeMsgRouteHandle(
+		MsgRouteId::eMRID_SocketOpened, 
+		MakeEventDispatchDelegate(
+			this,
+			&GameRouteHandle::onSocketOpened
+		)
+	);
 
 	Super::dispose();
 }

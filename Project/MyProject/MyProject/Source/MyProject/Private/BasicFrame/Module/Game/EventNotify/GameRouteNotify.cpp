@@ -21,10 +21,10 @@ void GameRouteNotify::dispose()
     if(nullptr != this->mGameRouteHandle)
     {
         this->removeRouteHandle(
-			(int)MsgRouteType.eMRT_BASIC, 
+			(int)MsgRouteType::eMRT_BASIC, 
 			MakeEventDispatchDelegate(
 				this->mGameRouteHandle, 
-				this->mGameRouteHandle->handleMsg
+				&GameRouteHandle::handleMsg
 			)
 		);
         this->mGameRouteHandle->dispose();

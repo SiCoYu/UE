@@ -8,15 +8,10 @@ class MByteBuffer;
 /**
  * @brief 
  */
-enum class EnstNullUserCmd
+enum class NullUserCmdCV
 {
 	TIME_USERCMD = 2,
 	DATA_USERCMD = 3,
-	PROPERTY_USERCMD = 4,
-	CHAT_USERCMD = 14,
-	SELECT_USERCMD = 24,
-	LOGON_USERCMD = 104,
-	HERO_CARD_USERCMD = 162,
 };
 
 class stNullUserCmd

@@ -8,6 +8,7 @@
 
 class MByteBuffer;
 class AddOnceEventDispatch;
+class CmdDispatchInfo;
 
 class NetCmdDispatchHandle
 {
