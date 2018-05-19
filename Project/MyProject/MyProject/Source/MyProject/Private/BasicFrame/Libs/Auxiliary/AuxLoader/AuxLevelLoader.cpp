@@ -35,6 +35,8 @@ namespace MyNS
 			);
 			param->setIsResNeedCoroutine(false);
 			param->setIsLoadNeedCoroutine(false);
+			param->setResPackType(eLevelType);
+			param->setResLoadType(eLoadResource);
 
 			GResLoadMgr->loadAsset(param);
 
