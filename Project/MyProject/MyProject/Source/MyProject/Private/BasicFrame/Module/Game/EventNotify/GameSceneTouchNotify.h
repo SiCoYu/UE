@@ -2,7 +2,9 @@
 
 #include "ISceneTouchNotify.h"
 
-class FKey;
+// error C4099: 'FKey': type name first seen using 'struct' now seen using 'class'
+// class FKey;
+struct FKey;
 
 class GameSceneLogicNotify : public ISceneTouchNotify
 {

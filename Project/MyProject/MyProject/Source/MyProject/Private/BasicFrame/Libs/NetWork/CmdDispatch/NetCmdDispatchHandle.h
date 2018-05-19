@@ -1,9 +1,9 @@
-﻿#ifndef __NetCmdHandleBase_H
-#define __NetCmdHandleBase_H
+﻿#ifndef __NetCmdDispatchHandle_H
+#define __NetCmdDispatchHandle_H
 
 #include "Platform.h"		// uint8
 // #include "Map.h"			// UE4 自己的 Tmap
-#include "MDictionary"
+#include "MDictionary.h"
 #include "EventDispatchDelegate.h"	// FastDelegate1
 
 class ByteBuffer;

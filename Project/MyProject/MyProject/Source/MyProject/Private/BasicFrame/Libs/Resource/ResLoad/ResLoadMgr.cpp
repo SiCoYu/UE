@@ -393,20 +393,20 @@ void ResLoadMgr::unload(std::string path, EventDispatchDelegate loadEventHandle)
 // 添加无引用资源到 List
 void ResLoadMgr::addNoRefResID2List(std::string path)
 {
-	this->mZeroRefResIDList.Add(path);
+	this->mZeroRefResIdList.add(path);
 }
 
 // 卸载没有引用的资源列表中的资源
 void ResLoadMgr::unloadNoRefResFromList()
 {
-	for(std::string path : this->mZeroRefResIDList.getList())
+	for(std::string path : this->mZeroRefResIdList.getList())
 	{
 		if (this->mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			this->unloadNoRef(path);
 		}
 	}
-	this->mZeroRefResIDList.Clear();
+	this->mZeroRefResIdList.clear();
 }
 
 // 不考虑引用计数，直接卸载

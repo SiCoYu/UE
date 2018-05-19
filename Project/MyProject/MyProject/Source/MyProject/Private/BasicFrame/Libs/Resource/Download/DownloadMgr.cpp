@@ -14,7 +14,7 @@ DownloadMgr::DownloadMgr()
     mLoadData = new DownloadData();
     mLoadingDepth = 0;
 
-    //this.addMsgRouteHandle(MsgRouteID.eMRIDLoadedWebRes, onMsgRouteResLoad);
+    //this.addMsgRouteHandle(MsgRouteId.eMRIDLoadedWebRes, onMsgRouteResLoad);
 }
 
 void DownloadMgr::init()
@@ -246,37 +246,37 @@ void DownloadMgr::unloadAll()
     for(DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
     {
 		resUniqueId = kvValue.first;
-        resUniqueIdList.Add(resUniqueId);
+        resUniqueIdList.add(resUniqueId);
     }
 
     int idx = 0;
-    int len = resUniqueIdList.Count();
+    int len = resUniqueIdList.count();
     while (idx < len)
     {
         this->unloadNoRef(resUniqueIdList[idx]);
         ++idx;
     }
 
-    resUniqueIdList.Clear();
+    resUniqueIdList.clear();
 }
 
 // 添加无引用资源到 List
 void DownloadMgr::addNoRefResID2List(std::string resUniqueId)
 {
-    mZeroRefResIDList.Add(resUniqueId);
+    mZeroRefResIdList.add(resUniqueId);
 }
 
 // 卸载没有引用的资源列表中的资源
 void DownloadMgr::unloadNoRefResFromList()
 {
-    for (std::string path : mZeroRefResIDList.getList())
+    for (std::string path : mZeroRefResIdList.getList())
     {
         if (mLoadData->mPath2LDItem[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
         {
             unloadNoRef(path);
         }
     }
-    mZeroRefResIDList.Clear();
+    mZeroRefResIdList.clear();
 }
 
 // 不考虑引用计数，直接卸载

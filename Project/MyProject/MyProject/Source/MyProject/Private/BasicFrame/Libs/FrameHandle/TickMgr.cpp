@@ -39,7 +39,7 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 	{
 		int position = -1;
 
-		for (int i = 0; i < mTickList.Count(); i++)
+		for (int i = 0; i < mTickList.count(); i++)
 		{
 			if (this->mTickList[i] == nullptr)
 				continue;
@@ -60,13 +60,13 @@ void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
 		processObject->mTickObject = (ITickedObject*)delayObject;
 		processObject->mPriority = priority;
 
-		if (position < 0 || position >= mTickList.Count())
+		if (position < 0 || position >= mTickList.count())
 		{
-			this->mTickList.Add(processObject);
+			this->mTickList.add(processObject);
 		}
 		else
 		{
-			this->mTickList.Insert(position, processObject);
+			this->mTickList.insert(position, processObject);
 		}
 	}
 }
@@ -83,7 +83,7 @@ void TickMgr::delObject(IDelayHandleItem* delayObject)
 		{
 			if (item->mTickObject == (ITickedObject*)delayObject)
 			{
-				this->mTickList.Remove(item);
+				this->mTickList.remove(item);
 				break;
 			}
 		}

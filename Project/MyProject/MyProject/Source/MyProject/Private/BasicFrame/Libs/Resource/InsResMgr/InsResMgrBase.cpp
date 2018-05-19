@@ -65,20 +65,20 @@ void InsResMgrBase::unload(std::string path, EventDispatchDelegate loadEventHand
 // 添加无引用资源到 List
 void InsResMgrBase::addNoRefResID2List(std::string path)
 {
-	this->mZeroRefResIDList.Add(path);
+	this->mZeroRefResIdList.add(path);
 }
 
 // 卸载没有引用的资源列表中的资源
 void InsResMgrBase::unloadNoRefResFromList()
 {
-	for(std::string path : this->mZeroRefResIDList.getList())
+	for(std::string path : this->mZeroRefResIdList.getList())
 	{
 		if (this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			this->unloadNoRef(path);
 		}
 	}
-	this->mZeroRefResIDList.Clear();
+	this->mZeroRefResIdList.clear();
 }
 
 void InsResMgrBase::unloadNoRef(std::string path)
@@ -139,7 +139,7 @@ void InsResMgrBase::unloadAll()
 	for(std::pair<std::string, InsResBase*> kv : this->mPath2ResDic)
 	{
 		kv.second->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->clearEventHandle();
-		pathList.Add(kv.first);
+		pathList.add(kv.first);
 	}
 
 	for(std::string path : pathList.getList())
@@ -147,5 +147,5 @@ void InsResMgrBase::unloadAll()
 		this->unload(path, MakeEventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
 	}
 
-	pathList.Clear();
+	pathList.clear();
 }

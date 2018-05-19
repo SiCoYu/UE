@@ -36,7 +36,7 @@ void TimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 		}
 		else
 		{
-			this->mTimerList.Add((TimerItemBase*)delayObject);
+			this->mTimerList.add((TimerItemBase*)delayObject);
 		}
 	}
 }

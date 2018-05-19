@@ -1,12 +1,12 @@
 ﻿#ifndef __MsgRouteBase_H
 #define __MsgRouteBase_H
 
-enum MsgRouteType
+enum class MsgRouteType
 {
 	eMRT_BASIC,      // 基本类型
 };
 
-enum MsgRouteID
+enum class MsgRouteId
 {
 	eMRIDSocketOpened,      // socket Opened
 	eMRIDSocketClosed,      // socket Opened
@@ -20,11 +20,11 @@ class MsgRouteBase : public IRecycle
 {
 public:
 	MsgRouteType mMsgType;
-    MsgRouteID mMsgId;          // 只需要一个 Id 就行了
+    MsgRouteId mMsgId;          // 只需要一个 Id 就行了
 
 public:
 	MsgRouteBase();
-	MsgRouteBase(MsgRouteID id);
+	MsgRouteBase(MsgRouteId id);
 	virtual void resetDefault();
 };
 

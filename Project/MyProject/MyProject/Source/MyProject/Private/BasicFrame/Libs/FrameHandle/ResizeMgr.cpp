@@ -4,7 +4,7 @@
 
 void ResizeMgr::addResizeObject(IResizeObject* obj)
 {
-	this->mResizeList.Add(obj);
+	this->mResizeList.add(obj);
 }
 
 void ResizeMgr::onResize(int viewWidth, int viewHeight)

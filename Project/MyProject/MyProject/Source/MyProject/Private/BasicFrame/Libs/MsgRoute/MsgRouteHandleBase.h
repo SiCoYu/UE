@@ -1,7 +1,7 @@
 ﻿#ifndef __MsgRouteHandleBase_H
 #define __MsgRouteHandleBase_H
 
-#include <map>
+#include "MDcitionary.h"
 #include "MsgRouteDelegate.h"
 
 class MsgRouteBase;
@@ -9,7 +9,7 @@ class MsgRouteBase;
 class MsgRouteHandleBase
 {
 public:
-	std::map<int, MsgRouteDelegate> mId2HandleDic;
+	MDcitionary<int, MsgRouteDelegate> mId2HandleDic;
 
 public:
 	MsgRouteHandleBase();

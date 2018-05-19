@@ -6,7 +6,7 @@ MsgRouteBase::MsgRouteBase()
 
 }
 
-MsgRouteBase::MsgRouteBase(MsgRouteID id)
+MsgRouteBase::MsgRouteBase(MsgRouteId id)
 {
 	this->mMsgType = eMRT_BASIC;
 	this->mMsgId = id;

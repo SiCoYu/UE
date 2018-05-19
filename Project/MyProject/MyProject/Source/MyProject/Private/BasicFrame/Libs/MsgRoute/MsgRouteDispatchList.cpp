@@ -5,23 +5,23 @@
 
 void MsgRouteDispatchList::addOneDispatch(MsgRouteDispatchHandle* disp)
 {
-	if (this->mDispList.IndexOf(disp) == -1)
+	if (this->mDispatchList.indexOf(disp) == -1)
 	{
-		this->mDispList.Add(disp);
+		this->mDispatchList.add(disp);
 	}
 }
 
 void MsgRouteDispatchList::removeOneDispatch(MsgRouteDispatchHandle* disp)
 {
-	if (this->mDispList.IndexOf(disp) != -1)
+	if (this->mDispatchList.IndexOf(disp) != -1)
 	{
-		this->mDispList.Remove(disp);
+		this->mDispatchList.Remove(disp);
 	}
 }
 
 void MsgRouteDispatchList::handleMsg(MsgRouteBase* msg)
 {
-	for (auto item : this->mDispList.getList())
+	for (auto item : this->mDispatchList.getList())
 	{
 		item->handleMsg(msg);
 	}

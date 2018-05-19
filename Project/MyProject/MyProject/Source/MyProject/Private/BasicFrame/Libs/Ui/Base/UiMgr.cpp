@@ -390,14 +390,14 @@ void UiMgr::exitAllWin()
 {
 	for(std::pair<UiFormId, UForm*> keyValue : this->mId2FormDic)
 	{
-		this->mTmpList.Add(keyValue.first);
+		this->mTmpList.add(keyValue.first);
 	}
 
 	for(UiFormId formId : this->mTmpList.getList())
 	{
 		this->exitForm(formId);
 	}
-	this->mTmpList.Clear();
+	this->mTmpList.clear();
 }
 
 void UiMgr::findSceneUIRootActor()

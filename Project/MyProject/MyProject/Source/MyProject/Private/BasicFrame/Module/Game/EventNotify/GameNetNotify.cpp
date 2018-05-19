@@ -29,7 +29,7 @@ void GameNetNotify::dispose()
 			this.mNetCmdDispatchHandle, 
 			this.mNetCmdDispatchHandle.call);
 		this->mNetCmdDispatchHandle.dispose();
-		this->mNetCmdDispatchHandle = null;
+		this->mNetCmdDispatchHandle = nullptr;
     }
 
     Super::dispose();

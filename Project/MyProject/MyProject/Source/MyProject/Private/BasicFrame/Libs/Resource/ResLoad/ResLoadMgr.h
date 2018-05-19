@@ -23,7 +23,7 @@ protected:
     LoadItem* mRetLoadItem;
     ResItem* mRetResItem;
     //ResMsgRouteCB mResMsgRouteCB;
-    MList<std::string> mZeroRefResIDList;      // 没有引用的资源 Id 列表
+    MList<std::string> mZeroRefResIdList;      // 没有引用的资源 Id 列表
     int mLoadingDepth;      // 加载深度
 
 public:

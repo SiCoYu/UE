@@ -48,7 +48,7 @@ void EventDispatch::addObject(IDelayHandleItem* delayObject, float priority)
 	else
 	{
 		// 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-		this->mHandleList.Add((EventDispatchFunctionObject*)delayObject);
+		this->mHandleList.add((EventDispatchFunctionObject*)delayObject);
 	}
 }
 
@@ -56,14 +56,14 @@ void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 {
 	int idx = 0;
 
-	for (idx = 0; idx < mHandleList.Count(); ++idx)
+	for (idx = 0; idx < mHandleList.count(); ++idx)
 	{
 		if (this->mHandleList[idx]->mHandle, handle)
 		{
 			break;
 		}
 	}
-	if (idx < this->mHandleList.Count())
+	if (idx < this->mHandleList.count())
 	{
 		this->delObject(this->mHandleList[idx]);
 	}
@@ -81,7 +81,7 @@ void EventDispatch::delObject(IDelayHandleItem* delayObject)
 	}
 	else
 	{
-		if (!this->mHandleList.Remove((EventDispatchFunctionObject*)delayObject))
+		if (!this->mHandleList.remove((EventDispatchFunctionObject*)delayObject))
 		{
 			GLogSys->log("Event Handle not exist");
 		}
@@ -126,7 +126,7 @@ void EventDispatch::clearEventHandle()
 	}
 	else
 	{
-		this->mHandleList.Clear();
+		this->mHandleList.clear();
 	}
 }
 
@@ -151,7 +151,7 @@ void EventDispatch::copyFrom(EventDispatch& rhv)
 {
 	for(auto handle : rhv.getHandleList().getList())
 	{
-		this->mHandleList.Add(handle);
+		this->mHandleList.add(handle);
 	}
 }
 

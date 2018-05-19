@@ -9,7 +9,7 @@ class MsgRouteBase;
 class MsgRouteDispatchList
 {
 protected:
-	MList<MsgRouteDispatchHandle*> mDispList;
+	MList<MsgRouteDispatchHandle*> mDispatchList;
 
 public:
 	void addOneDispatch(MsgRouteDispatchHandle* disp);

@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "GameSceneTouchNotify.h"
 
-public GameSceneLogicNotify::GameSceneLogicNotify()
+GameSceneLogicNotify::GameSceneLogicNotify()
 {
             
 }

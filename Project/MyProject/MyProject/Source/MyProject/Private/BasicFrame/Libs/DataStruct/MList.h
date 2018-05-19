@@ -71,11 +71,6 @@ public:
 		return mList[index];
 	}
 
-	void operator [] (int index, T& value)
-	{
-		mList[index] = value;
-	}
-
 	void clear()
 	{
 		mList.clear();

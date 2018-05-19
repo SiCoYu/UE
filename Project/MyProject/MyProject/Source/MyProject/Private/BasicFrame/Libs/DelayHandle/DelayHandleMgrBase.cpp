@@ -82,24 +82,24 @@ void DelayHandleMgrBase::processDelayObjects()
 {
 	if (0 == mLoopDepth)       // 只有全部退出循环后，才能处理添加删除
 	{
-		if (mDeferredAddQueue.Count() > 0)
+		if (mDeferredAddQueue.count() > 0)
 		{
-			for (int idx = 0; idx < mDeferredAddQueue.Count(); idx++)
+			for (int idx = 0; idx < mDeferredAddQueue.count(); idx++)
 			{
 				addObject(mDeferredAddQueue[idx]->mDelayObject, ((DelayAddParam*)(mDeferredAddQueue[idx]->mDelayParam))->mPriority);
 			}
 
-			mDeferredAddQueue.Clear();
+			mDeferredAddQueue.clear();
 		}
 
-		if (mDeferredDelQueue.Count() > 0)
+		if (mDeferredDelQueue.count() > 0)
 		{
 			for (int idx = 0; idx < mDeferredDelQueue.Count(); idx++)
 			{
 				delObject(mDeferredDelQueue[idx]->mDelayObject);
 			}
 
-			mDeferredDelQueue.Clear();
+			mDeferredDelQueue.clear();
 		}
 	}
 }
@@ -117,7 +117,7 @@ void DelayHandleMgrBase::addObject(IDelayHandleItem* delayObject, float priority
 
 			DelayHandleObject* delayHandleObject = new DelayHandleObject();
 			delayHandleObject->mDelayParam = new DelayAddParam();
-			mDeferredAddQueue.Add(delayHandleObject);
+			mDeferredAddQueue.add(delayHandleObject);
 
 			delayHandleObject->mDelayObject = delayObject;
 			((DelayAddParam*)(delayHandleObject->mDelayParam))->mPriority = priority;
@@ -140,7 +140,7 @@ void DelayHandleMgrBase::delObject(IDelayHandleItem* delayObject)
 
 			DelayHandleObject* delayHandleObject = new DelayHandleObject();
 			delayHandleObject->mDelayParam = new DelayDelParam();
-			mDeferredDelQueue.Add(delayHandleObject);
+			mDeferredDelQueue.add(delayHandleObject);
 			delayHandleObject->mDelayObject = delayObject;
 		}
 	}

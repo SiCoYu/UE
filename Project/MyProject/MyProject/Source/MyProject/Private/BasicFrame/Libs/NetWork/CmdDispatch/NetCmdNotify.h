@@ -1,5 +1,5 @@
-﻿#ifndef __NetDispatchList_H
-#define __NetDispatchList_H
+﻿#ifndef __NetCmdNotify_H
+#define __NetCmdNotify_H
 
 #include <vector>
 
