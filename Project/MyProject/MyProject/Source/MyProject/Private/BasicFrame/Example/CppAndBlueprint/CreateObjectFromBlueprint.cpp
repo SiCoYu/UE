@@ -10,7 +10,7 @@ UObject* UCreateObjectFromBlueprint::NewObjectFromBlueprint(UObject* WorldContex
 	//UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject);
 	UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull);
 
-	// 只传递一个参数会宕机，因为模板是要生成的类，第一个参数是外部容器，如果使用请参照 UMyBluePrintToCppFunctionLibrary::newObjectFromBlueprint
+	// 鍙紶閫掍竴涓弬鏁颁細瀹曟満锛屽洜涓烘ā鏉挎槸瑕佺敓鎴愮殑绫伙紝绗竴涓弬鏁版槸澶栭儴瀹瑰櫒锛屽鏋滀娇鐢ㄨ鍙傜収 UMyBluePrintToCppFunctionLibrary::newObjectFromBlueprint
 	UObject* tempObject = NewObject<UObject>(UC);
 
 	return tempObject;

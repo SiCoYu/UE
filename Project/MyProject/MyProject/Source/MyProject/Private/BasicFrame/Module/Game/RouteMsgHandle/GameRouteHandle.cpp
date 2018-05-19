@@ -24,12 +24,12 @@ void GameRouteHandle::dispose()
 	Super::dispose();
 }
 
-void GameRouteHandle::threadLog(IDispatchObject* dispObj, uint uniqueId)
+void GameRouteHandle::threadLog(IDispatchObject* dispObj)
 {
     MsgRouteBase* msg = (MsgRouteBase*)dispObj;
 }
 
-void GameRouteHandle::onSocketOpened(IDispatchObject* dispObj, uint uniqueId)
+void GameRouteHandle::onSocketOpened(IDispatchObject* dispObj)
 {
     
 }
