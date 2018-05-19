@@ -16,10 +16,10 @@ namespace MyNS
     /**
      * @brief 预制
      */
-    class AuxMUIClassLoader : public AuxMObjectLoaderBase
+    class AuxMUiClassLoader : public AuxMObjectLoaderBase
     {
 		M_DECLARE_SUPER_KW(AuxMObjectLoaderBase)
-		M_DECLARE_CLASS(AuxMUIClassLoader)
+		M_DECLARE_CLASS(AuxMUiClassLoader)
 
 	protected:
 		UMGOuterType mUMGOuterType;
@@ -27,7 +27,7 @@ namespace MyNS
 		UUMGWidget* mWidgetObject;
 
 	public:
-		AuxMUIClassLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
+		AuxMUiClassLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
 
 	public:
 		virtual void onPrefabLoaded(IDispatchObject* dispObj) override;

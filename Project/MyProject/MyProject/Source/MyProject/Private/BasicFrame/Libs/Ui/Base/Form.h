@@ -5,7 +5,7 @@
 #include <string>
 #include "UiFormId.h"
 #include "PointF.h"
-#include "AuxMUIClassLoader.h"
+#include "AuxMUiClassLoader.h"
 
 #include "Form.generated.h"
 
@@ -37,7 +37,7 @@ protected:
 	std::string mFormName;            // 这个是 Lua 中传的标识符，会传给 Lua 使用，客户端自己不用
 	//std::map<GameObject, ActorExtraInfo> mGo2Path;
 	bool mIsVisible;
-	AuxMUIClassLoader* mAuxMUIClassLoader;
+	AuxMUiClassLoader* mAuxMUIClassLoader;
 
 public:
 	UForm(const FObjectInitializer& ObjectInitializer);
@@ -86,6 +86,6 @@ public:
 	//void onBtnClk(GameObject go_);
 	//void addClick(GameObject go, string path);
 	//void removeClick(GameObject go, string path);
-	AuxMUIClassLoader* getAuxMUIClassLoader();
-	void setAuxMUIClassLoader(AuxMUIClassLoader* value);
+	AuxMUiClassLoader* getAuxMUIClassLoader();
+	void setAuxMUIClassLoader(AuxMUiClassLoader* value);
 };

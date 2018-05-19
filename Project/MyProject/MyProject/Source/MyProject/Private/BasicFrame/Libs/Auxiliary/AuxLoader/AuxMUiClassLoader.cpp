@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "AuxMUIClassLoader.h"
+#include "AuxMUiClassLoader.h"
 #include "ObjectAssetInsResBase.h"
 #include "UtilEngineWrap.h"
 #include "UMGWidget.h"
@@ -7,10 +7,10 @@
 
 namespace MyNS
 {
-	M_IMPLEMENT_CLASS(AuxMUIClassLoader, AuxMObjectLoaderBase)
-	M_REGISTER_CLASS(AuxMUIClassLoader)
+	M_IMPLEMENT_CLASS(AuxMUiClassLoader, AuxMObjectLoaderBase)
+	M_REGISTER_CLASS(AuxMUiClassLoader)
 
-	AuxMUIClassLoader::AuxMUIClassLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
+	AuxMUiClassLoader::AuxMUiClassLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
 		: Super(path, isNeedInsPrefab, isInsNeedCoroutine)
 	{
 		this->mResPackType = eClassType;
@@ -18,17 +18,17 @@ namespace MyNS
 		this->mWidgetObject = nullptr;
 	}
 
-	void AuxMUIClassLoader::setUMGOuterType(UMGOuterType value)
+	void AuxMUiClassLoader::setUMGOuterType(UMGOuterType value)
 	{
 		this->mUMGOuterType = value;
 	}
 
-	UUMGWidget* AuxMUIClassLoader::getWidgetObject()
+	UUMGWidget* AuxMUiClassLoader::getWidgetObject()
 	{
 		return this->mWidgetObject;
 	}
 
-	void AuxMUIClassLoader::insPrefab()
+	void AuxMUiClassLoader::insPrefab()
 	{
 		this->mWidgetClass = this->mPrefabRes->getClass();
 
@@ -48,7 +48,7 @@ namespace MyNS
 		this->mWidgetObject->AddToViewport();
 	}
 
-	void AuxMUIClassLoader::onPrefabLoaded(IDispatchObject* dispObj)
+	void AuxMUiClassLoader::onPrefabLoaded(IDispatchObject* dispObj)
 	{
 		if (nullptr != dispObj)
 		{

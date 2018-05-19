@@ -16,7 +16,7 @@
 #include "UtilStr.h"				// UtilStr
 #include "UMGWidget.h"				// UUMGWidget
 #include "ClassAssetInsRes.h"
-#include "AuxMUIClassLoader.h"
+#include "AuxMUiClassLoader.h"
 #include "SafePointer.h"
 
 using namespace MyNS;
@@ -202,7 +202,7 @@ void UiMgr::loadWidgetRes(UiFormId formId)
 
 		//this->loadFromFile(attrItem->mWidgetPath, MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
 
-		AuxMUIClassLoader* uiLoader = SAFE_NEW AuxMUIClassLoader();
+		AuxMUiClassLoader* uiLoader = SAFE_NEW AuxMUiClassLoader();
 
 		UForm* form = this->getForm<UForm>(formId);
 		form->setAuxMUIClassLoader(uiLoader);
@@ -350,7 +350,7 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 
 void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 {
-	AuxMUIClassLoader* res = (AuxMUIClassLoader*)dispObj;
+	AuxMUiClassLoader* res = (AuxMUiClassLoader*)dispObj;
 
 	std::string path = res->getLogicPath();
 	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId

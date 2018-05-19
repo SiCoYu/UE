@@ -327,12 +327,12 @@ void UForm::onExitBtnClick()
 //	}
 //}
 
-AuxMUIClassLoader* UForm::getAuxMUIClassLoader()
+AuxMUiClassLoader* UForm::getAuxMUIClassLoader()
 {
 	return this->mAuxMUIClassLoader;
 }
 
-void UForm::setAuxMUIClassLoader(AuxMUIClassLoader* value)
+void UForm::setAuxMUIClassLoader(AuxMUiClassLoader* value)
 {
 	this->mAuxMUIClassLoader = value;
 }
