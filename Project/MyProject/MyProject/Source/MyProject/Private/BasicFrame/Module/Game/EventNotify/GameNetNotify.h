@@ -11,7 +11,7 @@
 class GameNetNotify : public NetModuleDispatchHandle
 {
 	M_DECLARE_SUPER_KW(NetModuleDispatchHandle)
-	M_DECLARE_CLASS(GameNetNotify)
+	//M_DECLARE_CLASS(GameNetNotify)
 
 protected:
 	NetCmdDispatchHandle* mNetCmdDispatchHandle;

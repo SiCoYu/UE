@@ -29,3 +29,8 @@ ThreadLogMR::ThreadLogMR()
 {
 
 }
+
+ThreadLogMR::~ThreadLogMR()
+{
+
+}
