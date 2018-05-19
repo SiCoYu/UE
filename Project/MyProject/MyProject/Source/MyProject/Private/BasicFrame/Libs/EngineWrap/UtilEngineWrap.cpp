@@ -611,12 +611,6 @@ const FWorldContext* UtilEngineWrap::GetWorldContextFromGameViewport(const UGame
 	return GEngine->GetWorldContextFromGameViewport(InViewport);
 }
 
-void UtilEngineWrap::LoadStreamLevel(const UObject* WorldContextObject, std::string LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
-{
-	FName name = UtilStr::ConvStdStr2FName(LevelName);
-	return UGameplayStatics::LoadStreamLevel(WorldContextObject, name, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
-}
-
 APlayerController* UtilEngineWrap::GetPrimaryPlayerController()
 {
 	return UtilEngineWrap::GetGameInstance()->GetPrimaryPlayerController();
@@ -640,6 +634,12 @@ void UtilEngineWrap::OpenLevel(const UObject* WorldContextObject, FName LevelNam
 void UtilEngineWrap::LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
 {
 	UGameplayStatics::LoadStreamLevel(WorldContextObject, LevelName, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
+}
+
+void UtilEngineWrap::LoadStreamLevel(const UObject* WorldContextObject, std::string LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
+{
+	FName name = UtilStr::ConvStdStr2FName(LevelName);
+	UGameplayStatics::LoadStreamLevel(WorldContextObject, name, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
 }
 
 UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId)

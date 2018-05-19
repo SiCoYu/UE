@@ -424,6 +424,7 @@ void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 {
 	LoadItem* item = (LoadItem*)dispObj;
 	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(MakeEventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
+
 	if (item->getNonRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{
 		this->onLoaded(item);
