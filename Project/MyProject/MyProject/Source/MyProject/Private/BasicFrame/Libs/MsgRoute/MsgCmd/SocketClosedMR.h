@@ -1,10 +1,9 @@
 #pragma once
 
 #include "MsgRouteBase.h"
-#include <string>
 
-class SocketCloseedMR : public MsgRouteBase
+class SocketClosedMR : public MsgRouteBase
 {
 public:
-	SocketCloseedMR();
+	SocketClosedMR();
 };
