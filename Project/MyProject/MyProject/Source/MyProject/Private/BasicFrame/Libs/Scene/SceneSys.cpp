@@ -80,7 +80,21 @@ void SceneSys::loadSceneRes(std::string filename)
 		this->mAuxLevelLoader = new MyNS::AuxLevelLoader();
 	}
 
-	this->mAuxLevelLoader->asyncLoad(filename, MakeEventDispatchDelegate(this, &SceneSys::onSceneResLoadded));
+	/*this->mAuxLevelLoader->asyncLoad(
+		filename, 
+		MakeEventDispatchDelegate(
+			this, 
+			&SceneSys::onSceneResLoadded
+		)
+	);*/
+
+	this->mAuxLevelLoader->syncLoad(
+		filename,
+		MakeEventDispatchDelegate(
+			this,
+			&SceneSys::onSceneResLoadded
+		)
+	);
 }
 
 void SceneSys::onSceneResLoadded(IDispatchObject* dispObj)

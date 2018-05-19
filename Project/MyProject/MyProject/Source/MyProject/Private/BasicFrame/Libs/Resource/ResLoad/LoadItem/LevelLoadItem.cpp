@@ -93,6 +93,8 @@ void LevelLoadItem::loadFromAssetBundleByCoroutine()
 	// Response.FinishAndTriggerIf(bIsOperationFinished, LatentInfo.ExecutionFunction, LatentInfo.Linkage, LatentInfo.CallbackTarget);
 	// Engine\Source\Runtime\Engine\Private\LatentActionManager.cpp
 	// if (LinkInfo.LinkID != INDEX_NONE)
+	// LoadStreamLevel ignores LatentActionInfo
+	// https://answers.unrealengine.com/questions/241954/loadstreamlevel-ignores-latentactioninfo.html
 	info.Linkage = 0;
 
 	UtilEngineWrap::LoadStreamLevel(GEngineData->getMainActor(), this->mLevelName, true, false, info);

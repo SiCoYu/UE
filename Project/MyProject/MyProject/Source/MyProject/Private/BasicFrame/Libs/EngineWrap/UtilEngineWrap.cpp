@@ -631,6 +631,12 @@ void UtilEngineWrap::OpenLevel(const UObject* WorldContextObject, FName LevelNam
 	UGameplayStatics::OpenLevel(WorldContextObject, LevelName, bAbsolute, Options);
 }
 
+void UtilEngineWrap::OpenLevel(const UObject* WorldContextObject, std::string LevelName, bool bAbsolute, FString Options)
+{
+	FName name = UtilStr::ConvStdStr2FName(LevelName);
+	UGameplayStatics::OpenLevel(WorldContextObject, name, bAbsolute, Options);
+}
+
 void UtilEngineWrap::LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo)
 {
 	UGameplayStatics::LoadStreamLevel(WorldContextObject, LevelName, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
@@ -640,6 +646,11 @@ void UtilEngineWrap::LoadStreamLevel(const UObject* WorldContextObject, std::str
 {
 	FName name = UtilStr::ConvStdStr2FName(LevelName);
 	UGameplayStatics::LoadStreamLevel(WorldContextObject, name, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
+}
+
+void UtilEngineWrap::UnloadStreamLevel(const UObject* WorldContextObject, FName LevelName, FLatentActionInfo LatentInfo)
+{
+	UGameplayStatics::UnloadStreamLevel(WorldContextObject, LevelName, LatentInfo);
 }
 
 UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId)
