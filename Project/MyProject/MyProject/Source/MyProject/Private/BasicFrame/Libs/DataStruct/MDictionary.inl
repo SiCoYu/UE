@@ -38,8 +38,8 @@ int MDictionary<TKey, TValue>::getCount()
 template <class TKey, class TValue>
 TValue& MDictionary<TKey, TValue>::operator[] (TKey key)
 {
-	//return this->mData[key];
-    return this->value(key);
+	return this->mData[key];
+    //return this->value(key);
 }
 
 template <class TKey, class TValue>

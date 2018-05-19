@@ -6,7 +6,7 @@ MsgRouteBase::MsgRouteBase()
 
 }
 
-MsgRouteBase::~ThreadLogMR()
+MsgRouteBase::~MsgRouteBase()
 {
 
 }

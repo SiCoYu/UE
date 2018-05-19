@@ -4,6 +4,7 @@
 #include "GameRouteHandle.h"
 #include "MsgRouteBase.h"
 #include "EventDispatchDelegate.h"
+#include "MsgRouteHandleBase.h"
 
 GameRouteNotify::GameRouteNotify()
 {
@@ -24,7 +25,7 @@ void GameRouteNotify::dispose()
 			(int)MsgRouteType::eMRT_BASIC, 
 			MakeEventDispatchDelegate(
 				this->mGameRouteHandle, 
-				&GameRouteHandle::handleMsg
+				&MsgRouteHandleBase::handleMsg
 			)
 		);
         this->mGameRouteHandle->dispose();

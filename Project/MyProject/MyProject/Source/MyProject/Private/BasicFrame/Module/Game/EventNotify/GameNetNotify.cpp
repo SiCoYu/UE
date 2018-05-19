@@ -3,6 +3,7 @@
 #include "SafePointer.h"		// SAFE_NEW
 #include "GameTimeCmdHandle.h"
 #include "EventDispatchDelegate.h"
+#include "stNullUserCmd.h"
 
 GameNetNotify::GameNetNotify()
 {
@@ -14,9 +15,10 @@ void GameNetNotify::init()
     Super::init();
 
     this->mNetCmdDispatchHandle = SAFE_NEW GameTimeCmdHandle();
+
 	this->mNetCmdDispatchHandle->init();
 	this->addCmdHandle(
-		NullUserCmdCV::TIME_USERCMD, 
+		NullUserCmdCV::TIME_USERCMD,
 		MakeEventDispatchDelegate(
 			this->mNetCmdDispatchHandle, 
 			&NetCmdDispatchHandle::handleMsg
@@ -26,12 +28,12 @@ void GameNetNotify::init()
 
 void GameNetNotify::dispose()
 {
-	if (nullptr != this.mNetCmdDispatchHandle)
+	if (nullptr != this->mNetCmdDispatchHandle)
 	{
 		this->removeCmdHandle(
 			NullUserCmdCV::TIME_USERCMD,
 			MakeEventDispatchDelegate(
-				this.mNetCmdDispatchHandle,
+				this->mNetCmdDispatchHandle,
 				&NetCmdDispatchHandle::handleMsg
 			)
 		);

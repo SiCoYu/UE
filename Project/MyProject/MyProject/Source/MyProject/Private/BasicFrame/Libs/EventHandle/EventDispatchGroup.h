@@ -1,7 +1,7 @@
 ﻿#ifndef __EventDispatchGroup_H
 #define __EventDispatchGroup_H
 
-#include <map>
+#include "MDictionary.h"
 #include "EventDispatchDelegate.h"
 
 class EventDispatch;
@@ -9,7 +9,7 @@ class EventDispatch;
 class EventDispatchGroup
 {
 protected:
-	std::map<int, EventDispatch*> mGroupID2DispatchDic;
+	MDictionary<int, EventDispatch*> mGroupID2DispatchDic;
     bool mIsInLoop;       // 是否是在循环遍历中
 
 public:
@@ -21,6 +21,7 @@ public:
 	void dispatchEvent(int groupId, IDispatchObject* dispatchObject);
 	void clearAllEventHandle();
 	void clearGroupEventHandle(int groupId);
+	bool hasEventHandle(int groupId);
 };
 
 #endif

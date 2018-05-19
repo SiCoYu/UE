@@ -4,6 +4,8 @@
 #include "UtilContainers.h"
 #include "UtilStr.h"
 #include "MByteBuffer.h"
+#include "AddOnceEventDispatch.h"
+#include "CmdDispatchInfo.h"
 
 NetCmdDispatchHandle::NetCmdDispatchHandle()
 {
@@ -29,21 +31,21 @@ void NetCmdDispatchHandle::addParamHandle(int paramId, EventDispatchDelegate han
 {
 	if (!this->mId2HandleDic.containsKey(paramId))
 	{
-		this.mId2HandleDic[paramId] = new AddOnceEventDispatch();
+		this->mId2HandleDic[paramId] = new AddOnceEventDispatch();
 	}
 	else
 	{
 		// 日志
 	}
 
-	this.mId2HandleDic[paramId].addEventHandle(handle);
+	this->mId2HandleDic[paramId]->addEventHandle(handle);
 }
 
 void NetCmdDispatchHandle::removeParamHandle(int paramId, EventDispatchDelegate handle)
 {
 	if (this->mId2HandleDic.containsKey(paramId))
 	{
-		this->mId2HandleDic[paramId].removeEventHandle(handle);
+		this->mId2HandleDic[paramId]->removeEventHandle(handle);
 	}
 	else
 	{
@@ -53,9 +55,9 @@ void NetCmdDispatchHandle::removeParamHandle(int paramId, EventDispatchDelegate 
 
 void NetCmdDispatchHandle::handleMsg(CmdDispatchInfo* cmd)
 {
-	if (this->mId2HandleDic.containsKey(cmd.byParam))
+	if (this->mId2HandleDic.containsKey(cmd->byParam))
 	{
-		this->mId2HandleDic[cmd->byParam].dispatchEvent(cmd->bu);
+		this->mId2HandleDic[cmd->byParam]->dispatchEvent(cmd->bu);
 	}
 	else
 	{

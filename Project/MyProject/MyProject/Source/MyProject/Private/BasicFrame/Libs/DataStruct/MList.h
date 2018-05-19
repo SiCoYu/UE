@@ -93,13 +93,13 @@ public:
 
 	void insert(int index, T item)
 	{
-		if (index <= Count())
+		if (index <= count())
 		{
 			UtilVector::Insert(mList, index, item);
 		}
 		else
 		{
-			GLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, Count()));
+			GLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, count()));
 		}
 	}
 

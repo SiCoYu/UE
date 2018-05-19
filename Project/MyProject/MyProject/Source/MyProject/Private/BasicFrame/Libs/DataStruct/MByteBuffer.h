@@ -12,10 +12,11 @@
 #include "DynBuffer.h"
 #include "MEncode.h"
 #include "BufferCV.h"
+#include "IDispatchObject.h"
 
 template <class T> class DynBuffer;
 
-class MByteBuffer
+class MByteBuffer : public IDispatchObject
 {
 public:
 	// int mId;        // ≤‚ ‘ π”√

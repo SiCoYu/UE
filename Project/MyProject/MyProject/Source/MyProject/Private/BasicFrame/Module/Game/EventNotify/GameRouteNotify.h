@@ -4,6 +4,7 @@
 #include "MsgRouteDispatchHandle.h"
 #include "BaseClassDef.h"	// M_DECLARE_SUPER_KW
 #include "MClassMacros.h"	// M_DECLARE_CLASS
+#include "MClassInfo.h"		// MClassInfo
 
 class GameRouteHandle;
 

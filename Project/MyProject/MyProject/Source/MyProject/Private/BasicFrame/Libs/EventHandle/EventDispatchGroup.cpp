@@ -88,3 +88,15 @@ void EventDispatchGroup::clearGroupEventHandle(int groupId)
 		GLogSys->log("looping cannot delete element");
 	}
 }
+
+bool EventDispatchGroup::hasEventHandle(int groupId)
+{
+	bool ret = false;
+
+	if (this->mGroupId2DispatchDic.containsKey(groupId))
+	{
+		ret = this->mGroupId2DispatchDic[groupId]->hasEventHandle();
+	}
+
+	return ret;
+}

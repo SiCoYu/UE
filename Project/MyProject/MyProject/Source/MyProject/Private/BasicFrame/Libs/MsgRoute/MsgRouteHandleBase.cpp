@@ -4,6 +4,7 @@
 #include "UtilContainers.h"
 #include "UtilStr.h"
 #include "Common.h"
+#include "AddOnceEventDispatch.h"
 
 MsgRouteHandleBase::MsgRouteHandleBase()
 {
@@ -32,14 +33,14 @@ void MsgRouteHandleBase::addMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchD
 		this->mId2HandleDic[(int)msgRouteId] = new AddOnceEventDispatch();
 	}
 
-	this->mId2HandleDic[(int)msgRouteId].addEventHandle(handle);
+	this->mId2HandleDic[(int)msgRouteId]->addEventHandle(handle);
 }
 
 void MsgRouteHandleBase::removeMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle)
 {
 	if (this->mId2HandleDic.containsKey((int)msgRouteId))
 	{
-		this->mId2HandleDic[(int)msgRouteId].removeEventHandle(handle);
+		this->mId2HandleDic[(int)msgRouteId]->removeEventHandle(handle);
 	}
 }
 
@@ -49,9 +50,9 @@ void MsgRouteHandleBase::handleMsg(IDispatchObject* dispObj, uint uniqueId)
 
 	int key = ((int)msg->mMsgId);
 
-	if (this.mId2HandleDic.containsKey((int)msg->mMsgId))
+	if (this->mId2HandleDic.containsKey((int)msg->mMsgId))
 	{
-		this->mId2HandleDic[key](msg);
+		this->mId2HandleDic[key]->dispatchEvent(msg);
 	}
 	else
 	{

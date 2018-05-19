@@ -8,10 +8,10 @@ enum class MsgRouteType
 
 enum class MsgRouteId
 {
-	eMRIDSocketOpened,      // socket Opened
-	eMRIDSocketClosed,      // socket Opened
-	eMRIDLoadedWebRes,      // web 资源加载完成
-	eMRIDThreadLog,      // 线程打日志
+	eMRID_SocketOpened,      // socket Opened
+	eMRID_SocketClosed,      // socket Opened
+	eMRID_LoadedWebRes,      // web 资源加载完成
+	eMRID_ThreadLog,			// 线程打日志
 };
 
 #include "IRecycle.h"
@@ -26,6 +26,8 @@ public:
 public:
 	MsgRouteBase();
 	MsgRouteBase(MsgRouteId id);
+	// warning C4265: 'MsgRouteBase': class has virtual functions, but destructor is not virtual
+	virtual ~MsgRouteBase();
 	virtual void resetDefault();
 };
 

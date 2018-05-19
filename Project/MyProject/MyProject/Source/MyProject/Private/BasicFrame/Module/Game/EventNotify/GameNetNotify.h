@@ -3,6 +3,7 @@
 #include "NetModuleDispatchHandle.h"
 #include "BaseClassDef.h"	// M_DECLARE_SUPER_KW
 #include "MClassMacros.h"	// M_DECLARE_CLASS
+#include "MClassInfo.h"		// MClassInfo
 
 /**
     * @brief 游戏网络处理
@@ -20,4 +21,4 @@ public:
 
 	virtual void init() override;
 	virtual void dispose() override;
-}
+};

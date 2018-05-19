@@ -3,6 +3,8 @@
 #include "MsgRouteHandleBase.h"
 #include "BaseClassDef.h"
 
+class IDispatchObject;
+
 class GameRouteHandle : public MsgRouteHandleBase
 {
 	M_DECLARE_SUPER_KW(MsgRouteHandleBase)
