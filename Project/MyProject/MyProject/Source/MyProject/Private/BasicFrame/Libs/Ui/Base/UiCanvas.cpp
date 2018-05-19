@@ -41,7 +41,7 @@ std::vector<UiLayer*>& UiCanvas::getLayerList()
 	return this->mLayerList;
 }
 
-void UiCanvas::findCanvasGO()
+void UiCanvas::findCanvasActor()
 {
 	//int idx = 0;
 	//for (idx = 0; idx < (int)eMaxLayer; ++idx)

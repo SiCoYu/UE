@@ -77,10 +77,10 @@ void AMyTPGameMode::StartPlay()
 	//UtilEngineWrap::showCursor();
 
 	// 各种 UI 测试
-	//TestUI();
+	//TestUi();
 }
 
-void AMyTPGameMode::TestUI()
+void AMyTPGameMode::TestUi()
 {
 	// Test 加载 UIPack
 	//GUiMgr->loadForm<UUiPack>(eUiPack);

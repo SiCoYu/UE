@@ -12,7 +12,7 @@ using namespace NSFormId;
 class UiLoadingItem
 {
 public:
-	UiFormId mId;               // Form ID
+	UiFormId mId;               // Form formId
     std::string mResPath;            // 拖放的控件 path 
 
 public:

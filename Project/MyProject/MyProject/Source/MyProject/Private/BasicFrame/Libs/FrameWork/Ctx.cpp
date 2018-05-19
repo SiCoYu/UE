@@ -21,7 +21,7 @@
 #include "DownloadMgr.h"
 #include "SystemSetting.h"
 #include "LuaSystem.h"
-#include "GameSceneEventCB.h"
+#include "GameSceneEventNotify.h"
 #include "MyLatentActionManager.h"
 
 #include "SceneSys.h"
@@ -120,7 +120,7 @@ void Ctx::construct()
 	this->mFileSys = MySharedPtr<MFileSys>(SAFE_NEW MFileSys());
 	this->mSystemSetting = MySharedPtr<SystemSetting>(SAFE_NEW SystemSetting());
 	this->mLuaSystem = MySharedPtr<LuaSystem>(SAFE_NEW LuaSystem());
-	this->mSceneEventCB = MySharedPtr<ISceneEventCB>(SAFE_NEW GameSceneEventCB());
+	this->mSceneEventCB = MySharedPtr<ISceneEventNotify>(SAFE_NEW GameSceneEventNotify());
 	this->mMyLatentActionManager = MySharedPtr<MyLatentActionManager>(SAFE_NEW MyLatentActionManager());
 
 	this->mSceneSys = MySharedPtr<SceneSys>(SAFE_NEW SceneSys());
@@ -406,7 +406,7 @@ MySharedPtr<LuaSystem> Ctx::getLuaSystem()
 	return this->mLuaSystem;
 }
 
-MySharedPtr<ISceneEventCB> Ctx::getSceneEventCB()
+MySharedPtr<ISceneEventNotify> Ctx::getSceneEventCB()
 {
 	return this->mSceneEventCB;
 }

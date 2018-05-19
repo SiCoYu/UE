@@ -34,7 +34,7 @@ AMyTPPlayerController::AMyTPPlayerController(const FObjectInitializer& ObjectIni
 //	//UtilEngineWrap::showCursor();
 //
 //	// 各种 UI 测试
-//	//TestUI();
+//	//TestUi();
 //
 //	GEngineData->setMainPlayerController(this);
 //
@@ -50,7 +50,7 @@ AMyTPPlayerController::AMyTPPlayerController(const FObjectInitializer& ObjectIni
 //	//GCtx->beginPlay();
 //}
 //
-//void AMyPlayerController::TestUI()
+//void AMyPlayerController::TestUi()
 //{
 //	// Test 加载 UIPack
 //	//GUiMgr->loadForm<UUiPack>(eUiPack);

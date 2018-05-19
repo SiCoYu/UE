@@ -57,12 +57,12 @@ void UiMgr::createCanvas()
 }
 
 // 关联每一层的对象
-void UiMgr::findCanvasGO()
+void UiMgr::findCanvasActor()
 {
 	int idx = 0;
 	for (idx = 0; idx < (int)eCanvas_Total; ++idx)
 	{
-		this->mCanvasList[idx]->findCanvasGO();
+		this->mCanvasList[idx]->findCanvasActor();
 	}
 }
 
@@ -71,11 +71,11 @@ void UiMgr::showForm(UiFormId formId)
 {
 	if (hasForm(formId))
 	{
-		this->showFormInternal(formId);
+		this->_showFormInternal(formId);
 	}
 }
 
-void UiMgr::showFormInternal(UiFormId formId)
+void UiMgr::_showFormInternal(UiFormId formId)
 {
 	UForm* form = getForm<UForm>(formId);
 
@@ -98,7 +98,7 @@ void UiMgr::showFormInternal(UiFormId formId)
 }
 
 // 隐藏一个 UI
-void UiMgr::hideFormInternal(UiFormId formId)
+void UiMgr::_hideFormInternal(UiFormId formId)
 {
 	UForm* form = getForm<UForm>(formId);
 	if (form != nullptr)
@@ -124,7 +124,7 @@ void UiMgr::exitForm(UiFormId formId, bool bForce)
 		}
 		else
 		{
-			this->hideFormInternal(formId);
+			this->_hideFormInternal(formId);
 		}
 	}
 }
@@ -333,7 +333,7 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//if (!this->mId2FormDic[formId]->getHideOnCreate())
 	if(this->mId2FormDic[formId]->isVisible())
 	{
-		this->showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
+		this->_showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
 	}
 
 	//if (null != Ctx.m_instance.m_cbUIEvent)
@@ -364,7 +364,7 @@ void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 
 	if (this->mId2FormDic[formId]->isVisible())
 	{
-		this->showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
+		this->_showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
 	}
 
 	// 卸载资源
@@ -400,7 +400,7 @@ void UiMgr::exitAllWin()
 	this->mTmpList.Clear();
 }
 
-void UiMgr::findSceneUIRootGo()
+void UiMgr::findSceneUIRootActor()
 {
 	//mSceneUIRootGo = UtilSysLibWrap.GoFindChildByPObjAndName("SceneUIRootGo");
 }

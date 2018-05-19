@@ -23,7 +23,7 @@ class ClassAssetInsRes;
 
 /**
  * @brief 所有 UI 管理
- * 1. 对于新创建的Form对象，其所属的层是由其ID决定的
+ * 1. 对于新创建的Form对象，其所属的层是由其formId决定的
  * 2. UI 设计原则，主要界面是资源创建完成才运行逻辑，小的共享界面是逻辑和资源同时运行，因为 MVC 结构实在是要写很多代码，因此主要界面不适用 MVC 结构
  */
 class UiMgr
@@ -46,30 +46,30 @@ public:
 	void dispose();
 
 	template <class T>
-	T* loadForm(UiFormId formID);
+	T* loadForm(UiFormId formId);
 
 	template <class T>
-	T* getForm(UiFormId formID);
+	T* getForm(UiFormId formId);
 
 	template <class T>
-	T* loadAndShow(UiFormId ID);
+	T* loadAndShow(UiFormId formId);
 
 	void createCanvas();
-	void findCanvasGO();
+	void findCanvasActor();
 
-	void showForm(UiFormId ID);
-	void showFormInternal(UiFormId ID);
-	void hideFormInternal(UiFormId ID);
-	void exitForm(UiFormId ID, bool bForce = false);
-	void exitFormInternal(UiFormId ID);
+	void showForm(UiFormId formId);
+	void _showFormInternal(UiFormId formId);
+	void _hideFormInternal(UiFormId formId);
+	void exitForm(UiFormId formId, bool bForce = false);
+	void exitFormInternal(UiFormId formId);
 	void addForm(UForm* form);
 
 	UiLayer* getLayer(UiCanvasId canvasID, UiLayerId layerID);
 
 	void addFormNoReady(UForm* form);
-	bool hasForm(UiFormId ID);
+	bool hasForm(UiFormId formId);
 
-	void loadWidgetRes(UiFormId ID);
+	void loadWidgetRes(UiFormId formId);
 	void loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle);
 
 	void onCodeLoadEventHandle(IDispatchObject* dispObj);
@@ -82,7 +82,7 @@ public:
 	void onResize(int viewWidth, int viewHeight);
 
 	void exitAllWin();
-	void findSceneUIRootGo();
+	void findSceneUIRootActor();
 	//void unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe);
 };
 

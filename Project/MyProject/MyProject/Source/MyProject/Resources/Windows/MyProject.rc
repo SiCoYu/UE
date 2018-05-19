@@ -63,7 +63,7 @@ END
 // Icon
 //
 
-// Icon with lowest ID value placed first to ensure application icon
+// Icon with lowest formId value placed first to ensure application icon
 // remains consistent on all systems.
 IDICON_UE4Game          ICON                    "../../../../Build/Windows/Application.ico"
 

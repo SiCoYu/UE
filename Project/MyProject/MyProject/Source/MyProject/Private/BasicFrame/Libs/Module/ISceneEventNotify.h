@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class ISceneEventCB
+class ISceneEventNotify
 {
 public:
     virtual void onLevelLoaded() = 0;

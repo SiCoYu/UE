@@ -34,7 +34,7 @@ void AMyPlayerControllerBase::BeginPlay()
 	//UtilEngineWrap::showCursor();
 
 	// 各种 UI 测试
-	//TestUI();
+	//TestUi();
 
 	GEngineData->setMainPlayerController(this);
 
@@ -50,7 +50,7 @@ void AMyPlayerControllerBase::ReceivedPlayer()
 	//GCtx->beginPlay();
 }
 
-void AMyPlayerControllerBase::TestUI()
+void AMyPlayerControllerBase::TestUi()
 {
 	// Test 加载 UIPack
 	//GUiMgr->loadForm<UUiPack>(eUiPack);

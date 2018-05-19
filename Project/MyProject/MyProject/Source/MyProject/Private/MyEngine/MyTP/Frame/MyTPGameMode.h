@@ -60,5 +60,5 @@ public:
 
 private:
 	virtual void StartPlay();
-	void TestUI();
+	void TestUi();
 };

@@ -20,7 +20,7 @@ class MsgRouteBase : public IRecycle
 {
 public:
 	MsgRouteType mMsgType;
-    MsgRouteID mMsgId;          // 只需要一个 ID 就行了
+    MsgRouteID mMsgId;          // 只需要一个 Id 就行了
 
 public:
 	MsgRouteBase();

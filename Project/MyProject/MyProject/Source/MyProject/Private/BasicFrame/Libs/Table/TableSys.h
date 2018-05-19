@@ -43,7 +43,7 @@ public:
 	void loadOneTable(TableId::TableId tableID);
     // 加载一个表完成
 	//void onloaded(IDispatchObject resEvt);
-    // 根据路径查找表的 ID
+    // 根据路径查找表的 Id
 	TableId::TableId getTableIDByPath(std::string& path);
     // 加载一个表中一项的所有内容
 	void loadOneTableOneItemAll(TableId::TableId tableID, TableBase* table, TableItemBase* itemBase);

@@ -140,13 +140,13 @@ AMyTPCharacter::AMyTPCharacter(const FObjectInitializer& ObjectInitializer)
 //	//UtilEngineWrap::showCursor();
 //
 //	// 各种 UI 测试
-//	//TestUI();
+//	//TestUi();
 //
 //	// 赋值控制 Player ，逻辑开始运行
 //	GCtx->beginPlay();
 //}
 //
-//void AMyCharacter::TestUI()
+//void AMyCharacter::TestUi()
 //{
 //	// Test 加载 UIPack
 //	//GUiMgr->loadForm<UUiPack>(eUiPack);

@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "GameSceneEventCB.h"
+#include "GameSceneEventNotify.h"
 #include "Common.h"
 #include "UiFunctionBar.h"
 #include "UiFormId.h"
@@ -8,30 +8,30 @@
 	#include "TestMain.h"
 #endif
 
-GameSceneEventCB::GameSceneEventCB()
+GameSceneEventNotify::GameSceneEventNotify()
 {
 	
 }
 
-GameSceneEventCB::~GameSceneEventCB()
+GameSceneEventNotify::~GameSceneEventNotify()
 {
 	
 }
 
 // 场景加载完成处理事件
-void GameSceneEventCB::onLevelLoaded()
+void GameSceneEventNotify::onLevelLoaded()
 {
 	GUiMgr->loadAndShow<UUiFunctionBar>(NSFormId::eUiFunctionBar);
 
     this->runTest();
 }
 
-void GameSceneEventCB::init()
+void GameSceneEventNotify::init()
 {
 
 }
 
-void GameSceneEventCB::dispose()
+void GameSceneEventNotify::dispose()
 {
 #ifdef ENABLE_UNIT_TEST
 	this->mTestMain->dispose();
@@ -42,7 +42,7 @@ void GameSceneEventCB::dispose()
 #endif
 }
 
-void GameSceneEventCB::runTest()
+void GameSceneEventNotify::runTest()
 {
 #ifdef ENABLE_UNIT_TEST
 	this->mTestMain = MySharedPtr<TestMain>(new TestMain());

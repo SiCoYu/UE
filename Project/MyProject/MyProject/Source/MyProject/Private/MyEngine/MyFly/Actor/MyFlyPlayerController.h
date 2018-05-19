@@ -29,7 +29,7 @@ class AMyFlyPlayerController : public AMyPlayerControllerBase
 //	virtual void ReceivedPlayer() override;
 //
 //protected:
-//	void TestUI();
+//	void TestUi();
 //
 //	// https://wiki.unrealengine.com/Spawn_Different_Pawns_For_Every_Player
 //public:

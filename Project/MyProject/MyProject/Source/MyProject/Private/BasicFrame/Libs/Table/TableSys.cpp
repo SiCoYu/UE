@@ -96,7 +96,7 @@ void TableSys::loadOneTable(TableId::TableId tableID)
 	}
 }
 
-// 根据路径查找表的 ID
+// 根据路径查找表的 Id
 TableId::TableId TableSys::getTableIDByPath(std::string& path)
 {
 	TableMapIte beginIte = this->mDicTable.begin();

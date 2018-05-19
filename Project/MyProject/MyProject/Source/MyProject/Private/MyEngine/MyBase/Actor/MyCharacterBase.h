@@ -37,7 +37,7 @@ public:
 	float BaseLookUpRate;
 
 private:
-	void TestUI();
+	void TestUi();
 
 protected:
 	/** Called for forwards/backward input */

@@ -26,5 +26,5 @@ public:
 	UiCanvas(UiCanvasId canvasID);
 	void setActorName(std::string& rhv);
 	std::vector<UiLayer*>& getLayerList();
-	void findCanvasGO();
+	void findCanvasActor();
 };

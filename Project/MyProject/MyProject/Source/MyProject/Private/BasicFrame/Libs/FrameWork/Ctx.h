@@ -32,7 +32,7 @@ class DownloadMgr;
 class MFileSys;
 class SystemSetting;
 class LuaSystem;
-class ISceneEventCB;
+class ISceneEventNotify;
 class MyLatentActionManager;
 
 class SceneSys;
@@ -70,7 +70,7 @@ protected:
 	MySharedPtr<MFileSys> mFileSys;
 	MySharedPtr<SystemSetting> mSystemSetting;
 	MySharedPtr<LuaSystem> mLuaSystem;
-	MySharedPtr<ISceneEventCB> mSceneEventCB;
+	MySharedPtr<ISceneEventNotify> mSceneEventCB;
 	MySharedPtr<MyLatentActionManager> mMyLatentActionManager;
 
 	MySharedPtr<SceneSys> mSceneSys;
@@ -123,7 +123,7 @@ public:
 	MySharedPtr<MFileSys> getFileSys();
 	MySharedPtr<SystemSetting> getSystemSetting();
 	MySharedPtr<LuaSystem> getLuaSystem();
-	MySharedPtr<ISceneEventCB> getSceneEventCB();
+	MySharedPtr<ISceneEventNotify> getSceneEventCB();
 	MySharedPtr<MyLatentActionManager> getMyLatentActionManager();
 
 	MySharedPtr<SceneSys> getSceneSys();

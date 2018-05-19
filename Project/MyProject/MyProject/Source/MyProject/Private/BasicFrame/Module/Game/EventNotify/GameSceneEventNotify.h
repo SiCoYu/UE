@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "ISceneEventCB.h"
+#include "ISceneEventNotify.h"
 #include "MySharedPointer.h"
 #include "PlatformDefine.h"
 
@@ -8,7 +8,7 @@
 	class TestMain;
 #endif
 
-class GameSceneEventCB : public ISceneEventCB
+class GameSceneEventNotify : public ISceneEventNotify
 {
 protected:
 #ifdef ENABLE_UNIT_TEST
@@ -16,8 +16,8 @@ protected:
 #endif
 
 public:
-	GameSceneEventCB();
-	virtual ~GameSceneEventCB();
+	GameSceneEventNotify();
+	virtual ~GameSceneEventNotify();
 
     // 场景加载完成处理事件
 	virtual void onLevelLoaded() override;
