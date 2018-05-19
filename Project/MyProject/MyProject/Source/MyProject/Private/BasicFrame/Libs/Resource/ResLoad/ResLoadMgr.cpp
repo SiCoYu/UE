@@ -170,7 +170,7 @@ void ResLoadMgr::loadResources(LoadParam* param)
 
 ResItem* ResLoadMgr::createResItem(LoadParam* param)
 {
-	ResItem* resItem = findResFormPool(param->getResPackType());
+	ResItem* resItem = this->findResFormPool(param->getResPackType());
 
 	if (eClassType == param->getResPackType())
 	{
@@ -309,7 +309,7 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 		{
 			this->mLoadData->mPath2LDItem[param->mPath] = loadItem;
 			this->mLoadData->mPath2LDItem[param->mPath]->load();
-			++this->mCurNum;
+			this->mCurNum += 1;
 		}
 		else
 		{
@@ -333,7 +333,8 @@ void ResLoadMgr::loadWithNotResCreatedAndNotLoad(LoadParam* param)
 // 通用类型，需要自己设置很多参数
 void ResLoadMgr::load(LoadParam* param)
 {
-	++this->mLoadingDepth;
+	this->mLoadingDepth += 1;
+
 	if (UtilMap::ContainsKey(this->mLoadData->mPath2Res, param->mPath))
 	{
 		this->loadWithResCreatedAndLoad(param);
@@ -346,7 +347,8 @@ void ResLoadMgr::load(LoadParam* param)
 	{
 		this->loadWithNotResCreatedAndNotLoad(param);
 	}
-	--this->mLoadingDepth;
+
+	this->mLoadingDepth -= 1;
 
 	if (this->mLoadingDepth == 0)
 	{
@@ -439,6 +441,7 @@ void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 void ResLoadMgr::onLoaded(LoadItem* item)
 {
 	std::string _path = item->getPath();
+
 	if (UtilMap::ContainsKey(this->mLoadData->mPath2Res, _path))
 	{
 		this->mLoadData->mPath2Res[item->getPath()]->init(this->mLoadData->mPath2LDItem[item->getPath()]);
@@ -452,6 +455,7 @@ void ResLoadMgr::onLoaded(LoadItem* item)
 void ResLoadMgr::onFailed(LoadItem* item)
 {
 	std::string path = item->getPath();
+
 	if (UtilMap::ContainsKey(this->mLoadData->mPath2Res, path))
 	{
 		this->mLoadData->mPath2Res[path]->failed(mLoadData->mPath2LDItem[path]);
@@ -474,6 +478,7 @@ void ResLoadMgr::loadNextItem()
 		{
 			std::string path = ((LoadItem*)(UtilList::At(this->mLoadData->mWillLDItem, 0)))->getPath();
 			mLoadData->mPath2LDItem[path] = (LoadItem*)(UtilList::At(this->mLoadData->mWillLDItem, 0));
+
 			UtilList::RemoveAt(this->mLoadData->mWillLDItem, 0);
 			this->mLoadData->mPath2LDItem[path]->load();
 
@@ -501,6 +506,7 @@ ResItem* ResLoadMgr::findResFormPool(ResPackType type)
 LoadItem* ResLoadMgr::findLoadItemFormPool(ResPackType type)
 {
 	this->mRetLoadItem = nullptr;
+
 	for(LoadItem* item : this->mLoadData->mNoUsedLDItem)
 	{
 		if (item->getResPackType() == type)

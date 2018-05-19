@@ -68,6 +68,7 @@ void LuaSystem::dispose()
 	if (nullptr != this->L)
 	{
 		lua_close(L);
+		this->L = nullptr;
 	}
 }
 

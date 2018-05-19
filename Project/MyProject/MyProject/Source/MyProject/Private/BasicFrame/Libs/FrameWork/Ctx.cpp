@@ -68,7 +68,7 @@ Ctx::Ctx()
 
 	this->mSystemSetting = nullptr;
 	this->mLuaSystem = nullptr;
-	this->mSceneEventCB = nullptr;
+	this->mSceneEventNotify = nullptr;
 	this->mMyLatentActionManager = nullptr;
 
 	this->mSceneSys = nullptr;
@@ -120,7 +120,7 @@ void Ctx::construct()
 	this->mFileSys = MySharedPtr<MFileSys>(SAFE_NEW MFileSys());
 	this->mSystemSetting = MySharedPtr<SystemSetting>(SAFE_NEW SystemSetting());
 	this->mLuaSystem = MySharedPtr<LuaSystem>(SAFE_NEW LuaSystem());
-	this->mSceneEventCB = MySharedPtr<ISceneEventNotify>(SAFE_NEW GameSceneEventNotify());
+	this->mSceneEventNotify = MySharedPtr<ISceneEventNotify>(SAFE_NEW GameSceneEventNotify());
 	this->mMyLatentActionManager = MySharedPtr<MyLatentActionManager>(SAFE_NEW MyLatentActionManager());
 
 	this->mSceneSys = MySharedPtr<SceneSys>(SAFE_NEW SceneSys());
@@ -157,7 +157,7 @@ void Ctx::init()
 	this->mFileSys->init();
 	this->mSystemSetting->init();
 	this->mLuaSystem->init();
-	this->mSceneEventCB->init();
+	this->mSceneEventNotify->init();
 	this->mMyLatentActionManager->init();
 
 	this->mSceneSys->init();
@@ -202,7 +202,7 @@ void Ctx::dispose()
 
 	this->mSystemSetting->dispose();
 	this->mLuaSystem->dispose();
-	this->mSceneEventCB->dispose();
+	this->mSceneEventNotify->dispose();
 	this->mMyLatentActionManager->dispose();
 
 	this->mSceneSys->dispose();
@@ -241,7 +241,7 @@ void Ctx::dispose()
 
 	this->mSystemSetting = nullptr;
 	this->mLuaSystem = nullptr;
-	this->mSceneEventCB = nullptr;
+	this->mSceneEventNotify = nullptr;
 	this->mMyLatentActionManager = nullptr;
 
 	this->mSceneSys = nullptr;
@@ -262,7 +262,7 @@ void Ctx::beginPlay()
 	if (!this->mIsInit)
 	{
 		this->init();
-		this->mSceneEventCB->onLevelLoaded();
+		this->mSceneEventNotify->onLevelLoaded();
 
 		//testApi();
 
@@ -408,7 +408,7 @@ MySharedPtr<LuaSystem> Ctx::getLuaSystem()
 
 MySharedPtr<ISceneEventNotify> Ctx::getSceneEventCB()
 {
-	return this->mSceneEventCB;
+	return this->mSceneEventNotify;
 }
 
 MySharedPtr<MyLatentActionManager> Ctx::getMyLatentActionManager()

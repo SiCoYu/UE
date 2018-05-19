@@ -70,7 +70,7 @@ protected:
 	MySharedPtr<MFileSys> mFileSys;
 	MySharedPtr<SystemSetting> mSystemSetting;
 	MySharedPtr<LuaSystem> mLuaSystem;
-	MySharedPtr<ISceneEventNotify> mSceneEventCB;
+	MySharedPtr<ISceneEventNotify> mSceneEventNotify;
 	MySharedPtr<MyLatentActionManager> mMyLatentActionManager;
 
 	MySharedPtr<SceneSys> mSceneSys;
