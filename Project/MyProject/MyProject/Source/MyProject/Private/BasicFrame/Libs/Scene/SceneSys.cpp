@@ -49,6 +49,7 @@ void SceneSys::loadScene(std::string filename, EventDispatchDelegate func)
 
 	// 加载新的场景
 	this->mScene = new Scene();
+
 	if (func != nullptr)
 	{
 		this->mOnSceneLoadedDispatch->addEventHandle(func);

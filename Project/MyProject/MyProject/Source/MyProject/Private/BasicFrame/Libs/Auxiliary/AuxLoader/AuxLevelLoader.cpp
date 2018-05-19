@@ -23,13 +23,21 @@ namespace MyNS
 
 		if (this->isInvalid())
 		{
-			LoadParam* param;
+			LoadParam* param = nullptr;
 			param = GPoolSys->newObject<LoadParam>();
-			param->setPath(mPath);
-			param->setLoadEventHandle(MakeEventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
+
+			param->setPath(this->mPath);
+			param->setLoadEventHandle(
+				MakeEventDispatchDelegate(
+					this, 
+					&AuxLevelLoader::onLevelLoaded
+				)
+			);
 			param->setIsResNeedCoroutine(false);
 			param->setIsLoadNeedCoroutine(false);
+
 			GResLoadMgr->loadAsset(param);
+
 			GPoolSys->deleteObj(param);
 
 			this->mLevelResItem = (LevelResItem*)(GResLoadMgr->getResource(param->getResUniqueId()));
@@ -48,15 +56,23 @@ namespace MyNS
 
 		if (this->isInvalid())
 		{
-			LoadParam* param;
+			LoadParam* param = nullptr;
 			param = GPoolSys->newObject<LoadParam>();
-			param->setPath(mPath);
-			param->setLoadEventHandle(MakeEventDispatchDelegate(this, &AuxLevelLoader::onLevelLoaded));
+
+			param->setPath(this->mPath);
+			param->setLoadEventHandle(
+				MakeEventDispatchDelegate(
+					this, 
+					&AuxLevelLoader::onLevelLoaded
+				)
+			);
 			param->setIsResNeedCoroutine(true);
 			param->setIsLoadNeedCoroutine(true);
 			param->setResPackType(eLevelType);
 			param->setResLoadType(eLoadResource);
+
 			GResLoadMgr->loadAsset(param);
+
 			GPoolSys->deleteObj(param);
 		}
 		else if (this->hasLoadEnd())
@@ -95,7 +111,8 @@ namespace MyNS
 				this->mLevelResItem->getResUniqueId(), 
 				nullptr
 			);
-			Super::unload();
 		}
+
+		Super::unload();
 	}
 }

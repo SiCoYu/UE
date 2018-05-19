@@ -203,6 +203,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 		{
 			resItem = new LevelResItem();
 		}
+
 		((LevelResItem*)resItem)->setLevelName(param->getLvlName());
 	}
 	else if (eDataType == param->getResPackType())
@@ -267,7 +268,12 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	}
 
 	loadItem->setLoadParam(param);
-	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(MakeEventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
+	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(
+		MakeEventDispatchDelegate(
+			this, 
+			&ResLoadMgr::onLoadEventHandle
+		)
+	);
 
 	return loadItem;
 }
