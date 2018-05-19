@@ -2,9 +2,9 @@
 #include "Common.h"
 #include "UiFormId.h"
 #include "UiTestUMG.h"
-#include "TestUI.h"
+#include "TestUi.h"
 
-void TestUI::run()
+void TestUi::run()
 {
 	GUiMgr->loadAndShow<UUiTestUMG>(NSFormId::eUiTestUMG);
 }

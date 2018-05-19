@@ -3,7 +3,7 @@
 
 class TestExtern;
 class TestSocket;
-class TestUI;
+class TestUi;
 class TestDownload;
 class TestLuaBind;
 
@@ -12,7 +12,7 @@ class TestMain
 public:
 	TestExtern* mTestExtern;
 	TestSocket* mTestSocket;
-	TestUI* mTestUI;
+	TestUi* mTestUI;
 	TestDownload* mTestDownload;
 	TestLuaBind* mTestLuaBind;
 

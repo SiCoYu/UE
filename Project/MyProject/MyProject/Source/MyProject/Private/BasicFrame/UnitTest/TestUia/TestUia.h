@@ -1,9 +1,9 @@
-#ifndef __TestUI_H
-#define __TestUI_H
+#ifndef __TestUi_H
+#define __TestUi_H
 
 #include "TestBase.h"
 
-class TestUI : public TestBase
+class TestUi : public TestBase
 {
 public:
 	virtual void run() override;
