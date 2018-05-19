@@ -632,7 +632,7 @@ bool UtilEngineWrap::ServerTravel(const FString& InURL, bool bAbsolute, bool bSh
 	return UtilEngineWrap::GetWorld()->ServerTravel(InURL, bAbsolute, bShouldSkipGameNotify);
 }
 
-bool UtilEngineWrap::OpenLevel(const UObject* WorldContextObject, FName LevelName, bool bAbsolute, FString Options)
+void UtilEngineWrap::OpenLevel(const UObject* WorldContextObject, FName LevelName, bool bAbsolute, FString Options)
 {
 	UGameplayStatics::OpenLevel(WorldContextObject, LevelName, bAbsolute, Options);
 }
@@ -1022,7 +1022,7 @@ FColor UtilEngineWrap::convLineColorToColor(FLinearColor lineColor)
 
 FLinearColor UtilEngineWrap::convColorToLineColor(FColor color)
 {
-	return lineColor.FromSRGBColor(color);
+	return FLinearColor::FromSRGBColor(color);
 }
 
 void UtilEngineWrap::setActorPos(AActor* actor, FVector NewLocation)
@@ -1080,19 +1080,19 @@ void UtilEngineWrap::setActorEnableCollision(AActor* actor, bool isEnable)
 	actor->SetActorEnableCollision(isEnable);
 }
 
-void UtilEngineWrap::AttachToComponent(AActor* actor, USceneComponent* Parent, const FAttachmentTransformRules& AttachmentRules, FName SocketName = NAME_None)
+void UtilEngineWrap::AttachToComponent(AActor* actor, USceneComponent* Parent, const FAttachmentTransformRules& AttachmentRules, FName SocketName)
 {
 	actor->AttachToComponent(Parent, AttachmentRules, SocketName);
 }
 
-void UtilEngineWrap::AttachToActor(AActor* actor, AActor* ParentActor, const FAttachmentTransformRules& AttachmentRules, FName SocketName = NAME_None)
+void UtilEngineWrap::AttachToActor(AActor* actor, AActor* ParentActor, const FAttachmentTransformRules& AttachmentRules, FName SocketName)
 {
 	actor->AttachToActor(ParentActor, AttachmentRules, SocketName);
 }
 
 void UtilEngineWrap::setActorComponentActive(UActorComponent* actorComponent, bool isActive)
 {
-	actorComponen->bIsActive = isActive;
+	actorComponent->bIsActive = isActive;
 }
 
 AActor* UtilEngineWrap::getActorComponentOwner(UActorComponent* actorComponent)
@@ -1100,7 +1100,7 @@ AActor* UtilEngineWrap::getActorComponentOwner(UActorComponent* actorComponent)
 	return actorComponent->GetOwner();
 }
 
-UWorld* UtilEngineWrap::getWorldByActorComponent(UActorComponent* actorComponent);
+UWorld* UtilEngineWrap::getWorldByActorComponent(UActorComponent* actorComponent)
 {
 	return actorComponent->GetWorld();
 }
