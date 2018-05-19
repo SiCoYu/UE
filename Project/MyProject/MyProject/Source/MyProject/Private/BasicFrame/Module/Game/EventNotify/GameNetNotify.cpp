@@ -17,26 +17,26 @@ void GameNetNotify::init()
     this->mNetCmdDispatchHandle = SAFE_NEW GameTimeCmdHandle();
 
 	this->mNetCmdDispatchHandle->init();
-	this->addCmdHandle(
-		NullUserCmdCV::TIME_USERCMD,
-		MakeEventDispatchDelegate(
-			this->mNetCmdDispatchHandle, 
-			&NetCmdDispatchHandle::handleMsg
-		)
-	);
+	//this->addCmdHandle(
+	//	NullUserCmdCV::TIME_USERCMD,
+	//	MakeEventDispatchDelegate(
+	//		this->mNetCmdDispatchHandle, 
+	//		&NetCmdDispatchHandle::handleMsg
+	//	)
+	//);
 }
 
 void GameNetNotify::dispose()
 {
 	if (nullptr != this->mNetCmdDispatchHandle)
 	{
-		this->removeCmdHandle(
-			NullUserCmdCV::TIME_USERCMD,
-			MakeEventDispatchDelegate(
-				this->mNetCmdDispatchHandle,
-				&NetCmdDispatchHandle::handleMsg
-			)
-		);
+		//this->removeCmdHandle(
+		//	NullUserCmdCV::TIME_USERCMD,
+		//	MakeEventDispatchDelegate(
+		//		this->mNetCmdDispatchHandle,
+		//		&NetCmdDispatchHandle::handleMsg
+		//	)
+		//);
 		this->mNetCmdDispatchHandle->dispose();
 		this->mNetCmdDispatchHandle = nullptr;
     }

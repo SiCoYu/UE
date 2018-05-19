@@ -9,7 +9,7 @@ class EventDispatch;
 class EventDispatchGroup
 {
 protected:
-	MDictionary<int, EventDispatch*> mGroupID2DispatchDic;
+	MDictionary<int, EventDispatch*> mGroupId2DispatchDic;
     bool mIsInLoop;       // 是否是在循环遍历中
 
 public:

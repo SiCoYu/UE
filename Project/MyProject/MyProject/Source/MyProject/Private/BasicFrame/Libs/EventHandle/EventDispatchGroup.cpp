@@ -12,22 +12,22 @@ EventDispatchGroup::EventDispatchGroup()
 // 添加分发器
 void EventDispatchGroup::addEventDispatch(int groupId, EventDispatch* disp)
 {
-	if (!UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupId))
+	if (!this->mGroupId2DispatchDic.containsKey(groupId))
 	{
-		this->mGroupID2DispatchDic[groupId] = disp;
+		this->mGroupId2DispatchDic[groupId] = disp;
 	}
 }
 
 void EventDispatchGroup::addEventHandle(int groupId, EventDispatchDelegate handle)
 {
-	this->mGroupID2DispatchDic[groupId]->addEventHandle(handle);
+	this->mGroupId2DispatchDic[groupId]->addEventHandle(handle);
 }
 
 void EventDispatchGroup::removeEventHandle(int groupId, EventDispatchDelegate handle)
 {
-	if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupId))
+	if (this->mGroupId2DispatchDic.containsKey(groupId))
 	{
-		this->mGroupID2DispatchDic[groupId]->removeEventHandle(handle);
+		this->mGroupId2DispatchDic[groupId]->removeEventHandle(handle);
 	}
 	else
 	{
@@ -39,9 +39,9 @@ void EventDispatchGroup::dispatchEvent(int groupId, IDispatchObject* dispatchObj
 {
 	this->mIsInLoop = true;
 
-	if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupId))
+	if (this->mGroupId2DispatchDic.containsKey(groupId))
 	{
-		this->mGroupID2DispatchDic[groupId]->dispatchEvent(dispatchObject);
+		this->mGroupId2DispatchDic[groupId]->dispatchEvent(dispatchObject);
 	}
 	else
 	{
@@ -56,12 +56,12 @@ void EventDispatchGroup::clearAllEventHandle()
 	if (!this->mIsInLoop)
 	{
 		// map for 语句
-		for(auto dispatch : this->mGroupID2DispatchDic)
+		for(auto dispatch : this->mGroupId2DispatchDic.getData())
 		{
 			dispatch.second->clearEventHandle();
 		}
 
-		this->mGroupID2DispatchDic.clear();
+		this->mGroupId2DispatchDic.clear();
 	}
 	else
 	{
@@ -73,10 +73,10 @@ void EventDispatchGroup::clearGroupEventHandle(int groupId)
 {
 	if (!this->mIsInLoop)
 	{
-		if (UtilMap::ContainsKey(this->mGroupID2DispatchDic, groupId))
+		if (this->mGroupId2DispatchDic.containsKey(groupId))
 		{
-			this->mGroupID2DispatchDic[groupId]->clearEventHandle();
-			UtilMap::Remove(mGroupID2DispatchDic, groupId);
+			this->mGroupId2DispatchDic[groupId]->clearEventHandle();
+			mGroupId2DispatchDic.remove(groupId);
 		}
 		else
 		{

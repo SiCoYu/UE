@@ -159,3 +159,13 @@ MList<EventDispatchFunctionObject*>& EventDispatch::getHandleList()
 {
 	return this->mHandleList;
 }
+
+bool EventDispatch::hasEventHandle()
+{
+	return this->mHandleList.count() > 0;
+}
+
+int EventDispatch::getEventHandleCount()
+{
+	return this->mHandleList.count();
+}
