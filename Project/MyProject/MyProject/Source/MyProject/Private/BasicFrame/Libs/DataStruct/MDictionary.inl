@@ -11,7 +11,7 @@ MDictionary<TKey, TValue>::MDictionary()
 }
 
 template <class TKey, class TValue>
-Dictionary MDictionary<TKey, TValue>::getData()
+typename MDictionary<TKey, TValue>::Dictionary MDictionary<TKey, TValue>::getData()
 {
     return this->mData;
 }
@@ -36,17 +36,10 @@ int MDictionary<TKey, TValue>::getCount()
 }
 
 template <class TKey, class TValue>
-TValue MDictionary<TKey, TValue>::operator[] (TKey key)
+TValue& MDictionary<TKey, TValue>::operator[] (TKey key)
 {
 	//return this->mData[key];
     return this->value(key);
-}
-
-template <class TKey, class TValue>
-TValue MDictionary<TKey, TValue>::operator[] (TKey key, TValue value)
-{
-	// this->mData[key] = value;
-    this->add(key, value);
 }
 
 template <class TKey, class TValue>
@@ -108,7 +101,7 @@ void MDictionary<TKey, TValue>::clear()
 }
 
 template <class TKey, class TValue>
-bool MDictionary<TKey, TValue>::tryGetValue(TKey key, out TValue value)
+bool MDictionary<TKey, TValue>::tryGetValue(TKey key, TValue& value)
 {
     return this->mData.TryGetValue(key, out value);
 }

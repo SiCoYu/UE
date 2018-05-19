@@ -2,12 +2,16 @@
 #define __MDictionary_H
 
 #include <map>
+#include "GContainerObject.h"
 
 template <class TKey, class TValue>
 class MDictionary : GContainerObject
 {
+public:
 	typedef std::map<TKey, TValue> Dictionary;
-	typedef std::map<TKey, TValue>::iterator Iterator;
+	// error C4346: 'iterator': dependent name is not a type
+	// typedef std::map<TKey, TValue>::iterator Iterator;
+	typedef typename std::map<TKey, TValue>::iterator Iterator;
 	typedef std::pair<TKey, TValue> ItemType;
 
 protected:
@@ -20,8 +24,7 @@ public:
 	void init();
 	void dispose();
 	int getCount();
-	TValue operator[] (TKey key);
-	TValue operator[] (TKey key, TValue value);
+	TValue& operator[] (TKey key);
 
 	TValue value(TKey key);
 	TKey key(TValue value);
@@ -30,7 +33,7 @@ public:
 	void remove(TKey key);
 	TValue getAndRemoveByKey(TKey key);
 	void clear();
-	bool tryGetValue(TKey key, out TValue value);
+	bool tryGetValue(TKey key, TValue& value);
 	bool containsKey(TKey key);
 	bool containsValue(TValue value);
 };

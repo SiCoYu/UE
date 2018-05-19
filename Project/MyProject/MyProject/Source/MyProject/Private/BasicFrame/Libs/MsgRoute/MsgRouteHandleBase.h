@@ -1,17 +1,17 @@
 ﻿#ifndef __MsgRouteHandleBase_H
 #define __MsgRouteHandleBase_H
 
-#include "MDcitionary.h"
+#include "MDictionary.h"
 #include "MsgRouteDelegate.h"
 #include "MsgRouteBase.h"
 #include "EventDispatchDelegate.h"
 
-class MsgRouteBase;
+class AddOnceEventDispatch;
 
 class MsgRouteHandleBase
 {
 public:
-	MDcitionary<int, MsgRouteDelegate> mId2HandleDic;
+	MDictionary<int, AddOnceEventDispatch*> mId2HandleDic;
 
 public:
 	MsgRouteHandleBase();
@@ -20,7 +20,7 @@ public:
 
 	void addMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle);
 	void removeMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle);
-	virtual void handleMsg(IDispatchObject dispObj, uint uniqueId);
+	virtual void handleMsg(IDispatchObject* dispObj, uint uniqueId);
 };
 
 #endif

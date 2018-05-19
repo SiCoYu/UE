@@ -27,21 +27,27 @@ void MsgRouteDispatchHandle::dispose()
 
 }
 
+void MsgRouteDispatchHandle::addRouteHandle(int groupId, EventDispatchDelegate handle)
+{
+	this.mEventDispatchGroup.addEventHandle(groupId, handle);
+}
+
+void MsgRouteDispatchHandle::removeRouteHandle(int groupId, EventDispatchDelegate handle)
+{
+	this.mEventDispatchGroup.removeEventHandle(groupId, handle);
+}
+
 void MsgRouteDispatchHandle::handleMsg(MsgRouteBase* msg)
 {
 	std::string textStr = "";
-	int key = 0;
-	key = (int)msg->mMsgType;
 
-	if (UtilMap::ContainsKey(this->mId2DispatchDic, key))
+	if (this->mEventDispatchGroup.hasEventHandle((int)msg->mMsgType))
 	{
-		//textStr = Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem2);
-		GLogSys->log(UtilStr::Format(textStr.c_str(), (int)msg->mMsgType));
-		this->mId2DispatchDic[key]->handleMsg(msg);
+		textStr = "bbb";
+		this->mEventDispatchGroup.dispatchEvent((int)msg->mMsgType, msg);
 	}
 	else
 	{
-		//textStr = Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem3);
-		GLogSys->log(UtilStr::Format(textStr.c_str(), (int)msg->mMsgId));
+		textStr = "aaaa";
 	}
 }

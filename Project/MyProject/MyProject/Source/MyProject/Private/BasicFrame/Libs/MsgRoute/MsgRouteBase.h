@@ -15,8 +15,9 @@ enum class MsgRouteId
 };
 
 #include "IRecycle.h"
+#include "IDispatchObject.h"
 
-class MsgRouteBase : public IRecycle
+class MsgRouteBase : public IRecycle, public IDispatchObject
 {
 public:
 	MsgRouteType mMsgType;

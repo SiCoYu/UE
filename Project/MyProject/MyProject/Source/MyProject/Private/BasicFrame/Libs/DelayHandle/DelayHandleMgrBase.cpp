@@ -94,7 +94,7 @@ void DelayHandleMgrBase::processDelayObjects()
 
 		if (mDeferredDelQueue.count() > 0)
 		{
-			for (int idx = 0; idx < mDeferredDelQueue.Count(); idx++)
+			for (int idx = 0; idx < mDeferredDelQueue.count(); idx++)
 			{
 				delObject(mDeferredDelQueue[idx]->mDelayObject);
 			}

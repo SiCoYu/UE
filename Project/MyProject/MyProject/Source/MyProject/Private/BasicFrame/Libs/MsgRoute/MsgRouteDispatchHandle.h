@@ -1,15 +1,13 @@
 ﻿#ifndef __MsgRouteDispatchHandle_H
 #define __MsgRouteDispatchHandle_H
 
-#include <map>
-
-class MsgRouteHandleBase;
-class MsgRouteBase;
+#include "EventDispatchGroup.h"
+#include "EventDispatchDelegate.h"
 
 class MsgRouteDispatchHandle
 {
-public:
-	std::map<int, MsgRouteHandleBase*> mId2DispatchDic;
+protected:
+	EventDispatchGroup mEventDispatchGroup;
 
 public:
 	MsgRouteDispatchHandle();
@@ -17,6 +15,9 @@ public:
 
 	virtual void init();
 	virtual void dispose();
+
+	void addRouteHandle(int groupId, EventDispatchDelegate handle);
+	void removeRouteHandle(int groupId, EventDispatchDelegate handle);
 
 	virtual void handleMsg(MsgRouteBase* msg);
 };
