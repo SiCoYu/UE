@@ -55,12 +55,12 @@ public:
 		mUniqueId = value;
 	}
 
-	void Add(T item)
+	void add(T item)
 	{
 		mList.push_back(item);
 	}
 
-	bool Remove(T item)
+	bool remove(T item)
 	{
 		UtilVector::Remove(mList, item);
 		return true;
@@ -71,27 +71,32 @@ public:
 		return mList[index];
 	}
 
-	void Clear()
+	void operator [] (int index, T& value)
+	{
+		mList[index] = value;
+	}
+
+	void clear()
 	{
 		mList.clear();
 	}
 
-	int Count()
+	int count()
 	{
 		return mList.size();
 	}
 
-	void RemoveAt(int index)
+	void removeAt(int index)
 	{
 		UtilVector::RemoveAt(mList, index);
 	}
 
-	int IndexOf(T item)
+	int indexOf(T item)
 	{
 		return UtilVector::IndexOf(mList, item);
 	}
 
-	void Insert(int index, T item)
+	void insert(int index, T item)
 	{
 		if (index <= Count())
 		{
@@ -103,9 +108,9 @@ public:
 		}
 	}
 
-	bool Contains(T item)
+	bool contains(T item)
 	{
-		return IndexOf(item) != -1;
+		return indexOf(item) != -1;
 	}
 };
 

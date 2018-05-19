@@ -17,17 +17,27 @@ MsgRouteDispatchHandle::~MsgRouteDispatchHandle()
 	
 }
 
+void MsgRouteDispatchHandle::init()
+{
+
+}
+
+void MsgRouteDispatchHandle::dispose()
+{
+
+}
+
 void MsgRouteDispatchHandle::handleMsg(MsgRouteBase* msg)
 {
 	std::string textStr = "";
 	int key = 0;
 	key = (int)msg->mMsgType;
 
-	if (UtilMap::ContainsKey(this->mId2DispDic, key))
+	if (UtilMap::ContainsKey(this->mId2DispatchDic, key))
 	{
 		//textStr = Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem2);
 		GLogSys->log(UtilStr::Format(textStr.c_str(), (int)msg->mMsgType));
-		this->mId2DispDic[key]->handleMsg(msg);
+		this->mId2DispatchDic[key]->handleMsg(msg);
 	}
 	else
 	{

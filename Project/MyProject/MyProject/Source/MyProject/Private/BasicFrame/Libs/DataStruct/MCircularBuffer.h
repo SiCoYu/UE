@@ -1,5 +1,5 @@
-#ifndef __CIRCULARBUFFER_H
-#define __CIRCULARBUFFER_H
+#ifndef __MCircularBuffer_H
+#define __MCircularBuffer_H
 
 #include "Platform.h"
 #include <cstddef>

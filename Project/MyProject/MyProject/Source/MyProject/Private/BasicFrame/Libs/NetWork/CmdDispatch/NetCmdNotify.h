@@ -3,21 +3,23 @@
 
 #include <vector>
 
-class NetDispatchHandle;
+class NetModuleDispatchHandle;
 class ByteBuffer;
+class CmdDispatchInfo;
 
-class NetDispatchList
+class NetCmdNotify
 {
 protected:
     int mRevMsgCnt;      // 接收到消息的数量
     int mHandleMsgCnt;   // 处理的消息的数量
 
-    std::vector<NetDispatchHandle*> mNetDispatchList;
+    std::vector<NetModuleDispatchHandle*> mNetDispatchList;
     bool mIsStopNetHandle;       // 是否停止网络消息处理
+	CmdDispatchInfo* mCmdDispInfo;
 
 public:
-	NetDispatchList();
-	~NetDispatchList();
+	NetCmdNotify();
+	~NetCmdNotify();
 
 public:
 	void init();
@@ -26,8 +28,8 @@ public:
 	bool getBStopNetHandle();
 	void setBStopNetHandle(bool value);
 
-	void addOneDispatch(NetDispatchHandle* disp);
-	void removeOneDispatch(NetDispatchHandle* disp);
+	void addOneNofity(NetModuleDispatchHandle* disp);
+	void removeOneNotify(NetModuleDispatchHandle* disp);
 	void handleMsg(ByteBuffer* msg);
 	void addOneRevMsg();
 
