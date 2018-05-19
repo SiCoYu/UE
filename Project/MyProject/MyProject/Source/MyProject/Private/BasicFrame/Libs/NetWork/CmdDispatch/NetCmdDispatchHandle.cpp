@@ -15,6 +15,16 @@ NetCmdDispatchHandle::~NetCmdDispatchHandle()
 	
 }
 
+void NetCmdDispatchHandle::init()
+{
+
+}
+
+void NetCmdDispatchHandle::dispose()
+{
+
+}
+
 void NetCmdDispatchHandle::addParamHandle(int paramId, EventDispatchDelegate handle)
 {
 	if (!this->mId2HandleDic.containsKey(paramId))

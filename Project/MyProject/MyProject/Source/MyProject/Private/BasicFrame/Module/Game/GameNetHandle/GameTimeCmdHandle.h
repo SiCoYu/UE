@@ -15,5 +15,5 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 
-	void onParamHandle(IDispatchObject* dispObj, uint uniqueId);
+	void onParamHandle(IDispatchObject* dispObj);
 };

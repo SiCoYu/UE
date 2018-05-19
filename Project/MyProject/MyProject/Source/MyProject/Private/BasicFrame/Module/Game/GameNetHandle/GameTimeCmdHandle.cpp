@@ -22,7 +22,7 @@ void GameTimeCmdHandle::init()
 
 void GameTimeCmdHandle::dispose()
 {
-    this.removeParamHandle(
+    this->removeParamHandle(
 		0, 
 		MakeEventDispatchDelegate(
 			this, 
@@ -33,7 +33,7 @@ void GameTimeCmdHandle::dispose()
 	Super::dispose();
 }
 
-void GameTimeCmdHandle::onParamHandle(IDispatchObject* dispObj, uint uniqueId)
+void GameTimeCmdHandle::onParamHandle(IDispatchObject* dispObj)
 {
 
 }

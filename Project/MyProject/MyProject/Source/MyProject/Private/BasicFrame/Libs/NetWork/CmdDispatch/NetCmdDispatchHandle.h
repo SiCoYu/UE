@@ -18,6 +18,9 @@ public:
 	NetCmdDispatchHandle();
 	virtual ~NetCmdDispatchHandle();
 
+	virtual void init();
+	virtual void dispose();
+
 	void addParamHandle(int paramId, EventDispatchDelegate handle);
 	void removeParamHandle(int paramId, EventDispatchDelegate handle);
 

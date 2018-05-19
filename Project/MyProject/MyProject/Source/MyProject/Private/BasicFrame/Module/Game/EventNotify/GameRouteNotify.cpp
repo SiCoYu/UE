@@ -1,6 +1,9 @@
 ﻿#include "MyProject.h"
 #include "GameRouteNotify.h"
 #include "SafePointer.h"		// SAFE_NEW
+#include "GameRouteHandle.h"
+#include "MsgRouteBase.h"
+#include "EventDispatchDelegate.h"
 
 GameRouteNotify::GameRouteNotify()
 {
@@ -17,7 +20,13 @@ void GameRouteNotify::dispose()
 {
     if(nullptr != this->mGameRouteHandle)
     {
-        this->removeRouteHandle((int)MsgRouteType.eMRT_BASIC, this->mGameRouteHandle, this.mGameRouteHandle->handleMsg, 0);
+        this->removeRouteHandle(
+			(int)MsgRouteType.eMRT_BASIC, 
+			MakeEventDispatchDelegate(
+				this->mGameRouteHandle, 
+				this->mGameRouteHandle->handleMsg
+			)
+		);
         this->mGameRouteHandle->dispose();
         this->mGameRouteHandle = nullptr;
     }
