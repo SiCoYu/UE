@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "MsgRouteDispatchHandle.h"
-#include "MsgRouteBase.h"
+#include "MsgRouteBase.h"	// MsgRouteBase
 #include <string>
 #include "UtilContainers.h"
 #include "Common.h"
@@ -29,12 +29,12 @@ void MsgRouteDispatchHandle::dispose()
 
 void MsgRouteDispatchHandle::addRouteHandle(int groupId, EventDispatchDelegate handle)
 {
-	this.mEventDispatchGroup.addEventHandle(groupId, handle);
+	this->mEventDispatchGroup.addEventHandle(groupId, handle);
 }
 
 void MsgRouteDispatchHandle::removeRouteHandle(int groupId, EventDispatchDelegate handle)
 {
-	this.mEventDispatchGroup.removeEventHandle(groupId, handle);
+	this->mEventDispatchGroup.removeEventHandle(groupId, handle);
 }
 
 void MsgRouteDispatchHandle::handleMsg(MsgRouteBase* msg)

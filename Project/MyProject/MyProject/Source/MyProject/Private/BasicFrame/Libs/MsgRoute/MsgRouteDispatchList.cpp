@@ -13,9 +13,9 @@ void MsgRouteDispatchList::addOneDispatch(MsgRouteDispatchHandle* disp)
 
 void MsgRouteDispatchList::removeOneDispatch(MsgRouteDispatchHandle* disp)
 {
-	if (this->mDispatchList.IndexOf(disp) != -1)
+	if (this->mDispatchList.indexOf(disp) != -1)
 	{
-		this->mDispatchList.Remove(disp);
+		this->mDispatchList.remove(disp);
 	}
 }
 

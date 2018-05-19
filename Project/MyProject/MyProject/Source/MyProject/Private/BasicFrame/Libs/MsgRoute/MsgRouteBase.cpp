@@ -6,9 +6,14 @@ MsgRouteBase::MsgRouteBase()
 
 }
 
+MsgRouteBase::~ThreadLogMR()
+{
+
+}
+
 MsgRouteBase::MsgRouteBase(MsgRouteId id)
 {
-	this->mMsgType = eMRT_BASIC;
+	this->mMsgType = MsgRouteType::eMRT_BASIC;
 	this->mMsgId = id;
 }
 

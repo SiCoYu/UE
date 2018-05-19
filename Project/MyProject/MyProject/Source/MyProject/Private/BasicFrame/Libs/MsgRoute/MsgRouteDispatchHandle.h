@@ -4,6 +4,8 @@
 #include "EventDispatchGroup.h"
 #include "EventDispatchDelegate.h"
 
+class MsgRouteBase;
+
 class MsgRouteDispatchHandle
 {
 protected:

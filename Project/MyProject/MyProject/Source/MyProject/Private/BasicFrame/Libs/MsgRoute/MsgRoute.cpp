@@ -2,19 +2,19 @@
 #include "MsgRoute.h"
 
 SocketOpenedMR::SocketOpenedMR()
-	: MsgRouteBase(eMRIDSocketOpened)
+	: MsgRouteBase(MsgRouteId::eMRIDSocketOpened)
 {
 
 }
 
 SocketCloseedMR::SocketCloseedMR()
-	: MsgRouteBase(eMRIDSocketClosed)
+	: MsgRouteBase(MsgRouteId::eMRIDSocketClosed)
 {
 
 }
 
 LoadedWebResMR::LoadedWebResMR()
-	: MsgRouteBase(eMRIDLoadedWebRes)
+	: MsgRouteBase(MsgRouteId::eMRIDLoadedWebRes)
 {
 
 }
@@ -25,7 +25,7 @@ void LoadedWebResMR::resetDefault()
 }
 
 ThreadLogMR::ThreadLogMR()
-	: MsgRouteBase(eMRIDThreadLog)
+	: MsgRouteBase(MsgRouteId::eMRIDThreadLog)
 {
 
 }

@@ -132,6 +132,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Module",
                 "MyProject/Private/BasicFrame/Module/Game",
                 "MyProject/Private/BasicFrame/Module/Game/EventNotify",
+                "MyProject/Private/BasicFrame/Module/Game/GameNetHandle",
+                "MyProject/Private/BasicFrame/Module/Game/RouteMsgHandle",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/Ui/UiPack",

@@ -33,6 +33,7 @@ public:
 
 public:
 	ThreadLogMR();
+	virtual ~ThreadLogMR();
 };
 
 #endif

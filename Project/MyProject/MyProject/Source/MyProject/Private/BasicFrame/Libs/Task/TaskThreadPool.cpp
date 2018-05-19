@@ -15,7 +15,7 @@ void TaskThreadPool::initThreadPool(int numThread, TaskQueue* taskQueue)
     int idx = 0;
     for(idx = 0; idx < numThread; ++idx)
     {
-        mList.Add(new TaskThread(UtilStr::Format("TaskThread%d", idx), taskQueue));
+        mList.ddd(new TaskThread(UtilStr::Format("TaskThread%d", idx), taskQueue));
         mList[idx]->start();
     }
 }

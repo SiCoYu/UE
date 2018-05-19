@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "GameRouteHandle.h"
-#include "MsgRouteId.h"
+#include "MsgRouteBase.h"
 #include "EventDispatchDelegate.h"
 
 GameRouteHandle::GameRouteHandle()

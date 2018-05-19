@@ -15,7 +15,17 @@ MsgRouteHandleBase::~MsgRouteHandleBase()
 	
 }
 
-void MsgRouteHandleBase::addMsgRouteHandle(MsgRouteId msgRouteId, MEventDispatchAction<IDispatchObject> handle)
+void MsgRouteHandleBase::init()
+{
+
+}
+
+void MsgRouteHandleBase::dispose()
+{
+
+}
+
+void MsgRouteHandleBase::addMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle)
 {
 	if (!this->mId2HandleDic.containsKey((int)msgRouteId))
 	{
@@ -25,7 +35,7 @@ void MsgRouteHandleBase::addMsgRouteHandle(MsgRouteId msgRouteId, MEventDispatch
 	this->mId2HandleDic[(int)msgRouteId].addEventHandle(handle);
 }
 
-void MsgRouteHandleBase::removeMsgRouteHandle(MsgRouteId msgRouteId, MEventDispatchAction<IDispatchObject> handle)
+void MsgRouteHandleBase::removeMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle)
 {
 	if (this->mId2HandleDic.containsKey((int)msgRouteId))
 	{

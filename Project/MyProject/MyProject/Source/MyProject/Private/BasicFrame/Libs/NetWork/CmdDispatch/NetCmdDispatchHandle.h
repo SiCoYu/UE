@@ -21,7 +21,7 @@ public:
 	void addParamHandle(int paramId, EventDispatchDelegate handle);
 	void removeParamHandle(int paramId, EventDispatchDelegate handle);
 
-	virtual void handleMsg(CmdDispatchInfo* cmd)
+	virtual void handleMsg(CmdDispatchInfo* cmd);
 };
 
 #endif
