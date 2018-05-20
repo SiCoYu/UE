@@ -7,6 +7,7 @@
 #include "DownloadParam.h"
 #include "BaseClassDef.h"
 #include "CoreInc.h"
+#include "ResLoadPriority.h"
 
 class ResLoadState;
 class ResEventDispatch;
@@ -28,6 +29,7 @@ namespace MyNS
         ResEventDispatch* mEvtHandle;              // 事件分发器
         bool mIsInvalid;      // 加载器是否无效
 		std::string mInitPath;     // 初始化目录
+		ResLoadPriority mResLoadPriority;
 
 	public:
 		AuxLoaderBase(std::string path = "");
@@ -75,7 +77,7 @@ namespace MyNS
 		);
 		virtual void download(
 			std::string origPath, 
-			EventDispatchDelegate dispObj = nullptr, 
+			EventDispatchDelegate handle = nullptr,
 			long fileLen = 0, 
 			bool isWriteFile = true, 
 			int downloadType = (int)eHttpWeb

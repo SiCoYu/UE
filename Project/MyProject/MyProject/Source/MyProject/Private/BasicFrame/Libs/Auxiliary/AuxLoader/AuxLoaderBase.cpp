@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "AuxLoaderBase.h"
 #include "ResLoadState.h"
+#include "ResLoadStateCV.h"
 #include "ResEventDispatch.h"
 
 namespace MyNS
@@ -13,6 +14,7 @@ namespace MyNS
 		this->mEvtHandle = nullptr;
 		this->mInitPath = path;
 		this->mResLoadState = new ResLoadState();
+		this->mResLoadPriority = ResLoadPriority::eRLP_Low_1000;
 
 		this->reset();
 	}
@@ -135,7 +137,11 @@ namespace MyNS
 		}
 	}
 
-	void AuxLoaderBase::syncLoad(std::string path, EventDispatchDelegate evtHandle)
+	void AuxLoaderBase::syncLoad(
+		std::string path, 
+		EventDispatchDelegate evtHandle,
+		EventDispatchDelegate progressHandle
+	)
 	{
 		this->mResLoadState->setLoading();
 
@@ -144,7 +150,10 @@ namespace MyNS
 		this->addEventHandle(evtHandle);
 	}
 
-	void AuxLoaderBase::asyncLoad(std::string path, EventDispatchDelegate evtHandle)
+	void AuxLoaderBase::asyncLoad(
+		std::string path, 
+		EventDispatchDelegate evtHandle,
+		EventDispatchDelegate progressHandle)
 	{
 		this->mResLoadState->setLoading();
 
@@ -153,7 +162,13 @@ namespace MyNS
 		this->addEventHandle(evtHandle);
 	}
 
-	void AuxLoaderBase::download(std::string origPath, EventDispatchDelegate  dispObj, long fileLen, bool isWriteFile, int downloadType)
+	void AuxLoaderBase::download(
+		std::string origPath, 
+		EventDispatchDelegate handle, 
+		long fileLen, 
+		bool isWriteFile, 
+		int downloadType
+	)
 	{
 		this->mResLoadState->setLoading();
 
