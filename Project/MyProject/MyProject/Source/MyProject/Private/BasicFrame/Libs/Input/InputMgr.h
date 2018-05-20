@@ -4,10 +4,11 @@
 #include "MyProject.h"
 #include "MCamera.h"
 #include "UtilEngineWrap.h"
-#include "FastDelegate.h"
+//#include "FastDelegate.h"
 #include <string>
 #include <map>
 #include "MRay.h"
+#include "IOEventDispatchDelegate.h"
 
 enum EMouseOrTouch
 {
@@ -97,14 +98,16 @@ public:
  */
 class InputMgr
 {
+	
+
 public:
 	//static BetterList<UICamera> list = new BetterList<UICamera>();
 
-	static fastdelegate::FastDelegate1<FKey, bool> GetKeyDown;
+	static  GetKeyDown;
 
-	static fastdelegate::FastDelegate1<FKey, bool> GetKeyUp;
+	static KeyEventDispatchDelegate GetKeyUp;
 
-	static fastdelegate::FastDelegate1<FKey, bool> GetKey;
+	static KeyEventDispatchDelegate GetKey;
 
 	static fastdelegate::FastDelegate1<const FName, float> GetAxis;
 
