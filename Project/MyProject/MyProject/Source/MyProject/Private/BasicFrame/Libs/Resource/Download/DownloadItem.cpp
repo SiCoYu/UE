@@ -82,16 +82,6 @@ bool DownloadItem::hasFailed()
     return this->mRefCountResLoadResultNotify->getResLoadState()->hasFailed();
 }
 
-void DownloadItem::setLogicPath(std::string value)
-{
-	this->mLogicPath = value;
-}
-
-std::string DownloadItem::getOrigPath()
-{
-    return this->mLogicPath;
-}
-
 void DownloadItem::setResUniqueId(std::string value)
 {
 	this->mResUniqueId = value;
@@ -138,7 +128,6 @@ void DownloadItem::setLoadParam(DownloadParam* param)
     this->mVersion = param->mVersion;
     this->mIsWriteFile = param->mIsWriteFile;
     this->mFileLen = param->mFileLen;
-    this->setLogicPath(param->mLogicPath);
     this->setResUniqueId(param->mResUniqueId);
 }
 

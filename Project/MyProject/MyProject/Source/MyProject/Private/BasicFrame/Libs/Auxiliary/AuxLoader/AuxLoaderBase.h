@@ -26,8 +26,8 @@ namespace MyNS
 		ResLoadState* mResLoadState;      // 资源加载状态
         std::string mPrePath;      // 之前加载的资源目录
 		std::string mPath;         // 加载的资源目录
-		ResEventDispatch* mResEventDispatch;
         ResEventDispatch* mResEventDispatch;              // 事件分发器
+		ResEventDispatch* mProgressEventDispatch;
         bool mIsInvalid;      // 加载器是否无效
 		std::string mInitPath;     // 初始化目录
 		ResLoadPriority mResLoadPriority;
@@ -64,6 +64,8 @@ namespace MyNS
 		// 实例化失败
 		void onInsFailed();
 
+		virtual void onProgressEventHandle(IDispatchObject* dispObj);
+
 	protected:
 		void addEventHandle(EventDispatchDelegate evtHandle = nullptr);
 		virtual void syncLoad(
@@ -84,6 +86,5 @@ namespace MyNS
 			int downloadType = (int)eHttpWeb
 		);
 		virtual void unload();
-		virtual void onProgressEventHandle(IDispatchObject* dispObj);
 	};
 }

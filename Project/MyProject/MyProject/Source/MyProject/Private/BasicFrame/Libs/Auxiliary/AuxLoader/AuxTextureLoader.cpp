@@ -142,7 +142,7 @@ namespace MyNS
 
         if (nullptr != this->mResEventDispatch)
         {
-            this->mResEventDispatch.dispatchEvent(this);
+            this->mResEventDispatch->dispatchEvent(this);
         }
     }
 

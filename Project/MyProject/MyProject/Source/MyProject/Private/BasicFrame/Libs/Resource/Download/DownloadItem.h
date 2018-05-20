@@ -22,7 +22,6 @@ protected:
 	std::string mLocalPath;            // 本地文件系统目录
 	std::string mLoadPath;             // 加载目录
 	std::string mOrigPath;             // 原始的加载目录
-	std::string mLogicPath;            // 逻辑获取的目录
 	std::string mResUniqueId;          // 资源 Unique Id
 	std::string mDownloadNoVerPath;         // 下载目录，没有版本号
 	std::string mDownloadVerPath;         // 下载目录，有版本号
@@ -59,8 +58,6 @@ public:
 	bool hasSuccessLoaded();
 	bool hasFailed();
 
-	void setLogicPath(std::string value);
-	std::string getOrigPath();
 	void setResUniqueId(std::string value);
 	std::string getResUniqueId();
     char* getBytes();

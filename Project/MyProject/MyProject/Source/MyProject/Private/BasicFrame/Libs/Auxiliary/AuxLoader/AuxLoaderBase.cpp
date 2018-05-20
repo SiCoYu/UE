@@ -174,7 +174,7 @@ namespace MyNS
 
 		this->updatePath(origPath);
 
-		this->addEventHandle(dispObj);
+		this->addEventHandle(handle);
 	}
 
 	void AuxLoaderBase::unload()
@@ -183,6 +183,12 @@ namespace MyNS
 		{
 			this->mResEventDispatch->clearEventHandle();
 			this->mResEventDispatch = nullptr;
+		}
+
+		if (this->mProgressEventDispatch != nullptr)
+		{
+			this->mProgressEventDispatch->clearEventHandle();
+			this->mProgressEventDispatch = nullptr;
 		}
 
 		this->reset();

@@ -1,5 +1,5 @@
-﻿#ifndef __LoadParam_H
-#define __LoadParam_H
+﻿#ifndef __ResLoadPriority_H
+#define __ResLoadPriority_H
 
 /**
  * @brief 资源加载优先级

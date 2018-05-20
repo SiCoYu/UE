@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "AuxLevelLoader.h"
+// error C2027: use of undefined type 'LoadParam' ，输出包含目录功能查看，自己头文件 #ifndef __ResLoadPriority_H 写成 #ifndef __LoadParam_H
 #include "LoadParam.h"
 #include "Prequisites.h"
 #include "LevelResItem.h"
@@ -17,9 +18,17 @@ namespace MyNS
 		Super::dispose();
 	}
 
-	void AuxLevelLoader::syncLoad(std::string path, EventDispatchDelegate evtHandle)
+	void AuxLevelLoader::syncLoad(
+		std::string path, 
+		EventDispatchDelegate evtHandle,
+		EventDispatchDelegate progressHandle
+	)
 	{
-		Super::syncLoad(path, evtHandle);
+		Super::syncLoad(
+			path, 
+			evtHandle,
+			progressHandle
+		);
 
 		if (this->isInvalid())
 		{
@@ -52,9 +61,17 @@ namespace MyNS
 	}
 
 	// 异步加载对象
-	void AuxLevelLoader::asyncLoad(std::string path, EventDispatchDelegate evtHandle)
+	void AuxLevelLoader::asyncLoad(
+		std::string path, 
+		EventDispatchDelegate evtHandle,
+		EventDispatchDelegate progressHandle
+	)
 	{
-		Super::asyncLoad(path, evtHandle);
+		Super::asyncLoad(
+			path, 
+			evtHandle, 
+			progressHandle
+		);
 
 		if (this->isInvalid())
 		{
