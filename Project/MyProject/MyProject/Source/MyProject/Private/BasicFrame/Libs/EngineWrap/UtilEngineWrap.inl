@@ -155,7 +155,7 @@ T* UtilEngineWrap::FindActor(FString name)
 }
 
 template<class T>
-static inline T* getComponentByClass(AActor* actor)
+T* UtilEngineWrap::getComponentByClass(AActor* actor)
 {
 	T* ret = nullptr;
 
