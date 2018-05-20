@@ -1,9 +1,9 @@
 ﻿#include "MyProject.h"
-#include "InsResBase.h"
+#include "ResInsBase.h"
 #include "RefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
 
-InsResBase::InsResBase()
+ResInsBase::ResInsBase()
 {
 #ifdef PKG_RES_LOAD
 	this->mIsOrigResNeedImmeUnload = false;
@@ -13,80 +13,80 @@ InsResBase::InsResBase()
 	this->mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
 }
 
-InsResBase::~InsResBase()
+ResInsBase::~ResInsBase()
 {
 	
 }
 
-bool InsResBase::getIsOrigResNeedImmeUnload()
+bool ResInsBase::getIsOrigResNeedImmeUnload()
 {
 	return this->mIsOrigResNeedImmeUnload;
 }
 
-void InsResBase::setIsOrigResNeedImmeUnload(bool value)
+void ResInsBase::setIsOrigResNeedImmeUnload(bool value)
 {
 	this->mIsOrigResNeedImmeUnload = value;
 }
 
-std::string InsResBase::GetPath()
+std::string ResInsBase::GetPath()
 {
 	return this->mPath;
 }
 
-std::string InsResBase::getPrefabName()         // 只有 Prefab 资源才实现这个函数
+std::string ResInsBase::getPrefabName()         // 只有 Prefab 资源才实现这个函数
 {
 	return "";
 }
 
-void InsResBase::init(ResItem* res)
+void ResInsBase::init(ResItem* res)
 {
 	this->initImpl(res);         // 内部初始化完成后，才分发事件
 	this->mRefCountResLoadResultNotify->onLoadEventHandle(this);
 }
 
 // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重在了
-void InsResBase::initImpl(ResItem* res)
+void ResInsBase::initImpl(ResItem* res)
 {
 
 }
 
-void InsResBase::failed(ResItem* res)
+void ResInsBase::failed(ResItem* res)
 {
 	this->unload();
 	this->mRefCountResLoadResultNotify->onLoadEventHandle(this);
 }
 
-void InsResBase::unload()
+void ResInsBase::unload()
 {
 
 }
 
-RefCountResLoadResultNotify* InsResBase::getRefCountResLoadResultNotify()
+RefCountResLoadResultNotify* ResInsBase::getRefCountResLoadResultNotify()
 {
 	return this->mRefCountResLoadResultNotify;
 }
 
-void InsResBase::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value)
+void ResInsBase::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value)
 {
 	this->mRefCountResLoadResultNotify = value;
 }
 
-std::string InsResBase::getOrigPath()
+std::string ResInsBase::getOrigPath()
 {
 	return this->mPath;
 }
 
-bool InsResBase::hasSuccessLoaded()
+bool ResInsBase::hasSuccessLoaded()
 {
 	return this->mRefCountResLoadResultNotify->getResLoadState()->hasSuccessLoaded();
 }
 
-bool InsResBase::hasFailed()
+bool ResInsBase::hasFailed()
 {
 	return this->mRefCountResLoadResultNotify->getResLoadState()->hasFailed();
 }
 
-std::string InsResBase::getResUniqueId()
+std::string ResInsBase::getResUniqueId()
 {
 	return "";
 }

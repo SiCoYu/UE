@@ -40,7 +40,7 @@ void ResInsMgrBase::syncLoad(std::string path, EventDispatchDelegate handle)
 	LoadParam* param;
 	param = GPoolSys->newObject<LoadParam>();
 	param->setPath(path);
-	// param->mLoadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， InsResBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.mLoadEventHandle = onLoadEventHandle ，内部会自动调用
+	// param->mLoadEventHandle = onLoadEventHandle;        // 这个地方是同步加载，因此不需要回调，如果写了，就会形成死循环， ResInsBase 中的 init 又会调用 onLoadEventHandle 这个函数，这个函数是外部回调的函数，由于同步加载，没有回调，因此不要设置这个 param.mLoadEventHandle = onLoadEventHandle ，内部会自动调用
 	param->setLoadEventHandle(handle);
 	param->setIsLoadNeedCoroutine(false);
 	param->setIsResNeedCoroutine(false);

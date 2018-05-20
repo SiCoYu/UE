@@ -1,13 +1,13 @@
 ﻿#pragma once
 
 #include "BaseClassDef.h"
-#include "InsResBase.h"
+#include "ResInsBase.h"
 
 class UTexture;
 
-class TextureInsRes : public InsResBase
+class TextureInsRes : public ResInsBase
 {
-	M_DECLARE_SUPER_KW(InsResBase);
+	M_DECLARE_SUPER_KW(ResInsBase);
 
 protected:
 	UTexture* mTexture;

@@ -1,7 +1,7 @@
 ﻿#ifndef __ObjectAssetInsResBase_H
 #define __ObjectAssetInsResBase_H
 
-#include "InsResBase.h"
+#include "ResInsBase.h"
 #include <string>
 #include "Math/Vector.h"	// FVector
 #include "Math/Quat.h"	// FQuat
@@ -12,9 +12,9 @@ class UObject;
 class UClass;
 class ResInsEventDispatch;
 
-class ObjectAssetInsResBase : public InsResBase
+class ObjectAssetInsResBase : public ResInsBase
 {
-	M_DECLARE_SUPER_KW(InsResBase)
+	M_DECLARE_SUPER_KW(ResInsBase)
 
 protected:
 	UObject* mGo;

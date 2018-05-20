@@ -169,12 +169,12 @@ ResItem* LoadParam::getLoadRes()
 	return this->mLoadRes;
 }
 
-void LoadParam::setLoadInsRes(InsResBase* value)
+void LoadParam::setLoadInsRes(ResInsBase* value)
 {
 	this->mLoadInsRes = value;
 }
 
-InsResBase* LoadParam::getLoadInsRes()
+ResInsBase* LoadParam::getLoadInsRes()
 {
 	return this->mLoadInsRes;
 }

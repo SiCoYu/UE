@@ -1,5 +1,5 @@
-﻿#ifndef __InsResBase_H
-#define __InsResBase_H
+﻿#ifndef __ResInsBase_H
+#define __ResInsBase_H
 
 #include "IDispatchObject.h"
 #include <string>
@@ -7,7 +7,7 @@
 class RefCountResLoadResultNotify;
 class ResItem;
 
-class InsResBase : public IDispatchObject
+class ResInsBase : public IDispatchObject
 {
 protected:
 	RefCountResLoadResultNotify* mRefCountResLoadResultNotify;
@@ -17,9 +17,9 @@ public:
     std::string mPath;
 
 public:
-	InsResBase();
-	// warning C4265: 'InsResBase': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
-	virtual ~InsResBase();
+	ResInsBase();
+	// warning C4265: 'ResInsBase': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
+	virtual ~ResInsBase();
 	bool getIsOrigResNeedImmeUnload();
 	void setIsOrigResNeedImmeUnload(bool value);
 	std::string GetPath();

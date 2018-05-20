@@ -9,7 +9,7 @@
 #include "UtilContainers.h"
 #include "RefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
-#include "InsResBase.h"
+#include "ResInsBase.h"
 #include "ResEventDispatch.h"
 #include "RefCount.h"
 //#include "Prequisites.h"	// TODO: 包含这个就导致 UIAssetMgr 报错 ResInsMgrBase 不能识别，因此只包含必要的头文件，递归包含导致的错误
@@ -18,7 +18,7 @@
 #include "PoolSys.h"
 #include "LogSys.h"
 
-class InsResBase;
+class ResInsBase;
 class IDispatchObject;
 
 /**
@@ -27,7 +27,7 @@ class IDispatchObject;
 class ResInsMgrBase
 {
 public:
-	std::map<std::string, InsResBase*> mPath2ResDic;
+	std::map<std::string, ResInsBase*> mPath2ResDic;
 
 protected:
 	MList<std::string> mZeroRefResIdList;      // 没有引用的资源 Id 列表
@@ -82,7 +82,7 @@ protected:
 
 public:
 	virtual void onLoadEventHandle(IDispatchObject* dispObj);
-	InsResBase* getRes(std::string path);
+	ResInsBase* getRes(std::string path);
     // 卸载所有的资源
 	void unloadAll();
 };

@@ -8,7 +8,7 @@
 #include "EventDispatchDelegate.h"
 
 class ResItem;
-class InsResBase;
+class ResInsBase;
 
 class LoadParam : public IRecycle
 {
@@ -39,7 +39,7 @@ protected:
 	std::string mPakPath;                   // 打包的资源目录，如果打包， mPakPath 应该就是 mPath
 
 	ResItem* mLoadRes;
-	InsResBase* mLoadInsRes;
+	ResInsBase* mLoadInsRes;
 
 public:
 	LoadParam();
@@ -85,8 +85,8 @@ public:
 	void setLoadRes(ResItem* value);
 	ResItem* getLoadRes();
 
-	void setLoadInsRes(InsResBase* value);
-	InsResBase* getLoadInsRes();
+	void setLoadInsRes(ResInsBase* value);
+	ResInsBase* getLoadInsRes();
 
 	void resetDefault();          // 将数据清空，有时候上一次调用的时候的参数 m_loaded 还在，结果被认为是这一次的回调了
     // 解析目录

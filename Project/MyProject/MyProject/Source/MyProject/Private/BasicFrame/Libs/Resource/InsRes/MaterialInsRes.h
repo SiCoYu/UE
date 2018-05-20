@@ -3,7 +3,7 @@
 //#include "UObject/UObjectGlobals.h"	// TSubobjectPtr
 //#include "MaterialShared.h"	// FMaterial
 #include "BaseClassDef.h"
-#include "InsResBase.h"
+#include "ResInsBase.h"
 
 /**
 * @brief
@@ -17,9 +17,9 @@ class UMaterial;
 class UMaterialInstance;
 class UMaterialInstanceDynamic;
 
-class MaterialInsRes : public InsResBase
+class MaterialInsRes : public ResInsBase
 {
-	M_DECLARE_SUPER_KW(InsResBase);
+	M_DECLARE_SUPER_KW(ResInsBase);
 
 protected:
 	//FMaterial* mMaterial;

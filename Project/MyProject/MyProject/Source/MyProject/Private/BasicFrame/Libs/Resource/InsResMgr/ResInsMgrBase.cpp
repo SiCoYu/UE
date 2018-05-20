@@ -127,7 +127,7 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 	}
 }
 
-InsResBase* ResInsMgrBase::getRes(std::string path)
+ResInsBase* ResInsMgrBase::getRes(std::string path)
 {
 	return this->mPath2ResDic[path];
 }
@@ -137,7 +137,7 @@ void ResInsMgrBase::unloadAll()
 {
 	// 卸载资源的时候保存的路径列表
 	MList<std::string> pathList;
-	for(std::pair<std::string, InsResBase*> kv : this->mPath2ResDic)
+	for(std::pair<std::string, ResInsBase*> kv : this->mPath2ResDic)
 	{
 		kv.second->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->clearEventHandle();
 		pathList.add(kv.first);
