@@ -12,8 +12,8 @@ public:
 	//static std::string TestChangeMaterialBtn;
 };
 
-#define FunctionBarCV::ButtonTest "ButtonTest";
-#define FunctionBarCV::TestComBtn "TestComBtn";
-#define FunctionBarCV::TestLoadTextureBtn "TestLoadTextureBtn";
-#define FunctionBarCV::TestLoadMaterialBtn "TestLoadMaterialBtn";
-#define FunctionBarCV::TestChangeMaterialBtn "TestChangeMaterialBtn";
+#define FunctionBarCV_ButtonTest "ButtonTest";
+#define FunctionBarCV_TestComBtn "TestComBtn";
+#define FunctionBarCV_TestLoadTextureBtn "TestLoadTextureBtn";
+#define FunctionBarCV_TestLoadMaterialBtn "TestLoadMaterialBtn";
+#define FunctionBarCV_TestChangeMaterialBtn "TestChangeMaterialBtn";
