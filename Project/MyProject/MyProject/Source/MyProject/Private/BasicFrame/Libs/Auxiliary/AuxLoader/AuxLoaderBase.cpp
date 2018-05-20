@@ -127,14 +127,12 @@ namespace MyNS
 
 	void AuxLoaderBase::addEventHandle(EventDispatchDelegate evtHandle)
 	{
-		if (nullptr != evtHandle)
+		if (nullptr == this->mResEventDispatch)
 		{
-			if (nullptr == this->mResEventDispatch)
-			{
-				this->mResEventDispatch = new ResEventDispatch();
-			}
-			this->mResEventDispatch->addEventHandle(evtHandle);
+			this->mResEventDispatch = new ResEventDispatch();
 		}
+
+		this->mResEventDispatch->addEventHandle(evtHandle);
 	}
 
 	void AuxLoaderBase::syncLoad(

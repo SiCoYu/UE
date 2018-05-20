@@ -23,6 +23,11 @@ void ResInsMgrBase::dispose()
 
 }
 
+ResPackType ResInsMgrBase::getResPackType()
+{
+	return eObjectType;
+}
+
 void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 {
 	this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
@@ -93,6 +98,7 @@ void ResInsMgrBase::unloadNoRef(std::string path)
 			&ResInsMgrBase::onLoadEventHandle
 		)
 	);
+
 	UtilMap::Remove(this->mPath2ResDic, path);
 	//UtilSysLibWrap.UnloadUnusedAssets();           // 异步卸载共用资源
 }

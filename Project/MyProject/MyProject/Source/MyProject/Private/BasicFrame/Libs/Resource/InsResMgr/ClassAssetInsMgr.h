@@ -2,6 +2,7 @@
 #define __ClassAssetInsMgr_H
 
 #include "ResInsMgrBase.h"
+#include "ResPackType.h"
 
 /**
  * @brief 类管理器， Blueprint
@@ -18,6 +19,7 @@ public:
 public:
 	virtual void init() override;
 	virtual void dispose() override;
+	virtual ResPackType getResPackType() override;
 
 	ClassAssetInsRes* getAndSyncLoadRes(std::string path, EventDispatchDelegate handle = nullptr);
 	ClassAssetInsRes* getAndAsyncLoadRes(std::string path, EventDispatchDelegate handle = nullptr);

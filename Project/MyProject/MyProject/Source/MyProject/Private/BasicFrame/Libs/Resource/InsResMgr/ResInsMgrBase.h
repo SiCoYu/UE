@@ -17,6 +17,7 @@
 #include "ResLoadMgr.h"
 #include "PoolSys.h"
 #include "LogSys.h"
+#include "ResPackType.h"
 
 class ResInsBase;
 class IDispatchObject;
@@ -39,6 +40,7 @@ public:
 
 	virtual void init();
 	virtual void dispose();
+	virtual ResPackType getResPackType();
 
 	template<class T>
 	T* getAndSyncLoad(std::string path, EventDispatchDelegate handle = nullptr);

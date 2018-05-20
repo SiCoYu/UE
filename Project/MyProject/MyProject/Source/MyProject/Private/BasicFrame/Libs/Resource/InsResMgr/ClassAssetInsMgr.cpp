@@ -22,6 +22,11 @@ void ClassAssetInsMgr::dispose()
 
 }
 
+ResPackType ClassAssetInsMgr::getResPackType()
+{
+	return eClassType;
+}
+
 ClassAssetInsRes* ClassAssetInsMgr::getAndSyncLoadRes(std::string path, EventDispatchDelegate handle)
 {
 	return this->getAndSyncLoad<ClassAssetInsRes>(path, handle);
