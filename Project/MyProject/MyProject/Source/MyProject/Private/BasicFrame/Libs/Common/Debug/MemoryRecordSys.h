@@ -8,4 +8,5 @@ class MemoryRecordSys
 
 };
 
+// 静态提前构造，可以在所有 new 之前生成
 static MemoryRecordSys GMemoryRecordSys;
