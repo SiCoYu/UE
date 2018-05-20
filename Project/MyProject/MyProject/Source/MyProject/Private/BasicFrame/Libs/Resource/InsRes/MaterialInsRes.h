@@ -17,25 +17,25 @@ class UMaterial;
 class UMaterialInstance;
 class UMaterialInstanceDynamic;
 
-class MatInsRes : public InsResBase
+class MaterialInsRes : public InsResBase
 {
 	M_DECLARE_SUPER_KW(InsResBase);
 
 protected:
-	//FMaterial* mMat;
+	//FMaterial* mMaterial;
 	// Engine\Source\Runtime\CoreUObject\Public\UObject\UObjectGlobals.h
 	// #define TSubobjectPtr \
 	//	EMIT_DEPRECATED_WARNING_MESSAGE("TSubobjectPtr is deprecated and should no longer be used. Please use pointers instead.") \
 	// TSubobjectPtrDeprecated
-	//TSubobjectPtr<FMaterial> mMat;
-	UMaterialInterface* mMat;	// UMaterial \ UMaterialInstance
-	UMaterialInstanceDynamic* mMatDyn;
+	//TSubobjectPtr<FMaterial> mMaterial;
+	UMaterialInterface* mMaterial;	// UMaterial \ UMaterialInstance
+	UMaterialInstanceDynamic* mMaterialDyn;
 
 public:
-	MatInsRes();
+	MaterialInsRes();
 
 public:
-	UMaterialInterface* getMat();
+	UMaterialInterface* getMaterial();
 
 protected:
 	virtual void initImpl(ResItem* res) override;

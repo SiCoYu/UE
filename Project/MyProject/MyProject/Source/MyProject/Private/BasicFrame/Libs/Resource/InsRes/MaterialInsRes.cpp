@@ -1,37 +1,37 @@
 ﻿#include "MyProject.h"
-#include "MatInsRes.h"
+#include "MaterialInsRes.h"
 #include "ResItem.h"
 #include "Materials/MaterialInstanceDynamic.h"	// UMaterialInstanceDynamic
 #include "Materials/MaterialInterface.h"	// UMaterialInterface
 #include "Materials/MaterialInstance.h"	// UMaterialInstance, class UMaterialInstance : public UMaterialInterface
 #include "Materials/Material.h"	// UMaterial, class UMaterial : public UMaterialInterface
 
-MatInsRes::MatInsRes()
+MaterialInsRes::MaterialInsRes()
 {
 
 }
 
-UMaterialInterface* MatInsRes::getMat()
+UMaterialInterface* MaterialInsRes::getMaterial()
 {
-	return this->mMat;
+	return this->mMaterial;
 }
 
-void MatInsRes::initImpl(ResItem* res)
+void MaterialInsRes::initImpl(ResItem* res)
 {
 	// 获取资源单独保存
-	this->mMat = Cast<UMaterialInterface>(res->getObject(res->getPrefabName()));
-	this->mMatDyn = UMaterialInstanceDynamic::Create(this->mMat, nullptr);
+	this->mMaterial = Cast<UMaterialInterface>(res->getObject(res->getPrefabName()));
+	this->mMaterialDyn = UMaterialInstanceDynamic::Create(this->mMaterial, nullptr);
 
 	Super::initImpl(res);
 }
 
-void MatInsRes::unload()
+void MaterialInsRes::unload()
 {
-	if (this->mMat != nullptr)
+	if (this->mMaterial != nullptr)
 	{
 		// 这个接口不知道行不行
-		//UtilSysLibWrap::UnloadAsset(this->mMat);
-		this->mMat = nullptr;
+		//UtilSysLibWrap::UnloadAsset(this->mMaterial);
+		this->mMaterial = nullptr;
 
 		// 这个接口肯定可以
 		//UtilSysLibWrap.UnloadUnusedAssets();
