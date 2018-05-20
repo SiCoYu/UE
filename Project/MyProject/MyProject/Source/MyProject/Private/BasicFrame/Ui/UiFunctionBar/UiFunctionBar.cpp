@@ -33,11 +33,11 @@ void UUiFunctionBar::onTestButtonTouch()
 	//info.ExecutionFunction = "onLevelLoaded";
 	//info.CallbackTarget = this;
 	//info.UUID = 0;
-	//// Linkage 一定要有值，具体参考
-	//// Engine\Source\Runtime\Engine\Private\LevelStreaming.cpp
-	//// Response.FinishAndTriggerIf(bIsOperationFinished, LatentInfo.ExecutionFunction, LatentInfo.Linkage, LatentInfo.CallbackTarget);
-	//// Engine\Source\Runtime\Engine\Private\LatentActionManager.cpp
-	//// if (LinkInfo.LinkID != INDEX_NONE)
+	// Linkage 一定要有值，具体参考
+	// Engine\Source\Runtime\Engine\Private\LevelStreaming.cpp
+	// Response.FinishAndTriggerIf(bIsOperationFinished, LatentInfo.ExecutionFunction, LatentInfo.Linkage, LatentInfo.CallbackTarget);
+	// Engine\Source\Runtime\Engine\Private\LatentActionManager.cpp
+	// if (LinkInfo.LinkID != INDEX_NONE)
 	//info.Linkage = 0;
 
 	//UtilEngineWrap::LoadStreamLevel(GEngineData->getMainActor(), "/Game/MyAsset/Map/TestMap2", true, true, info);
