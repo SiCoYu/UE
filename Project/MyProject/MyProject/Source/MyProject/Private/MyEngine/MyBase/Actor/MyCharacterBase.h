@@ -4,7 +4,8 @@
 #include "MyCharacterBase.generated.h"
 
 /**
- AMyCharacter 这个必须保存，基本所有全局对象都是根据 AMyCharacter 从 UGameplayStatics 中获取的
+ * @brief AMyCharacter 这个必须保存，基本所有全局对象都是根据 AMyCharacter 从 UGameplayStatics 中获取的
+ * @brief 继承于 ACharacter 会有基本的物理属性，例如在空中会下落
  */
 
 class UMyAnimInstanceBase;
