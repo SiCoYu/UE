@@ -8,8 +8,8 @@
 #include "MyFlyPlayerController.generated.h"
 
 /**
- APlayerController BeginPlayer 就说明可以运行了
- 逻辑控制基本获取 APlayerController就行了，不用必须在 Actor 中处理
+ * @brief APlayerController BeginPlayer 就说明可以运行了
+ * @brief 逻辑控制基本获取 APlayerController就行了，不用必须在 Actor 中处理
  */
 
 class UUserWidget;

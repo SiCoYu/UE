@@ -84,6 +84,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Table",
                 "MyProject/Private/BasicFrame/Libs/Table/ItemObject",
                 "MyProject/Private/BasicFrame/Libs/Util",
+                "MyProject/Private/BasicFrame/Libs/Input",
 
                 "MyProject/Private/BasicFrame/Libs/Thread",
                 "MyProject/Private/BasicFrame/Libs/SimpleDelegate",
