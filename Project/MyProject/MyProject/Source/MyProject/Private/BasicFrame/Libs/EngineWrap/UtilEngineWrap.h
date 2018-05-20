@@ -67,7 +67,9 @@ public:
 	static UMyGameInstanceBase* getMyGameInstanceByController();
 	static UWorld* getWorldByEngine();
 
-	static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
+	// 不能返回 ACharacter ，因为可能使用的是继承于 ACharacter 的，需要更多功能的，或者继承于 APawn 的，不需要更多功能
+	//static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
+	static APawn* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
 	static AMyPlayerControllerBase* GetPlayerController();
 	static FWorldContext* GetWorldContextByGameInstance();
 	static UWorld* GetWorldByWorldContext();

@@ -82,9 +82,9 @@ UMyGameInstanceBase* UtilEngineWrap::getMyGameInstanceByController()
 	return Cast<UMyGameInstanceBase>(GEngineData->getMainPlayerController()->GetGameInstance());
 }
 
-ACharacter* UtilEngineWrap::getFirstCharacter()
+APawn* UtilEngineWrap::getFirstCharacter()
 {
-	ACharacter* Character = nullptr;
+	APawn* Character = nullptr;
 	APlayerController* PC = nullptr;
 	UWorld* World = GetWorld();
 
@@ -93,7 +93,7 @@ ACharacter* UtilEngineWrap::getFirstCharacter()
 		PC = World->GetFirstPlayerController();
 		if (PC != nullptr)
 		{
-			Character = Cast<ACharacter>(PC->GetPawn());
+			Character = Cast<APawn>(PC->GetPawn());
 		}
 	}
 
