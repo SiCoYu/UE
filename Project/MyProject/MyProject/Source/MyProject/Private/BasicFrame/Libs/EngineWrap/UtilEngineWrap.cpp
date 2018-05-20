@@ -22,6 +22,7 @@
 #include "Components/MeshComponent.h"	// UMeshComponent
 #include "CoreGlobals.h"	// IsInAsyncLoadingThread
 #include "Components/Widget.h"	// UWidget
+#include "Components/PrimitiveComponent.h"		// UPrimitiveComponent
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -713,6 +714,19 @@ void UtilEngineWrap::SetMaterial(UMeshComponent* meshComponent, int32 ElementInd
 	meshComponent->SetMaterial(ElementIndex, Material);
 }
 
+// Engine\Source\Runtime\Engine\Private\Components\PrimitiveComponent.cpp
+UMaterialInstanceDynamic* UtilEngineWrap::SetMaterial(UPrimitiveComponent* primitiveComponent, int32 ElementIndex, UMaterialInterface* Material)	   // ; error C2761: 'SetMaterial': member function redeclaration not allowed ，因为最后多加了个分号
+{
+	UMaterialInstanceDynamic* ret = nullptr;
+
+	if (nullptr != primitiveComponent)
+	{
+		ret = primitiveComponent->CreateAndSetMaterialInstanceDynamicFromMaterial(ElementIndex, Material);
+	}
+
+	return ret;
+}
+
 void UtilEngineWrap::TestFileWriteCompressed(FString _path)
 {
 	//FPlatformFileManager::Get().SetPlatformFile(*CurrentPlatformFile);
@@ -1126,5 +1140,21 @@ const void UtilEngineWrap::destroyComponent(UActorComponent* actorComponent)
 	if (nullptr != actorComponent)
 	{
 		actorComponent->DestroyComponent();
+	}
+}
+
+void UtilEngineWrap::setScalarParameterValue(UMaterialInstanceDynamic* materialInstanceDynamic, FName ParameterName, float Value)
+{
+	if (nullptr != materialInstanceDynamic)
+	{
+		materialInstanceDynamic->SetScalarParameterValue(ParameterName, Value);
+	}
+}
+
+void UtilEngineWrap::setTextureParameterValue(UMaterialInstanceDynamic* materialInstanceDynamic, FName ParameterName, UTexture* Value)
+{
+	if (nullptr != materialInstanceDynamic)
+	{
+		materialInstanceDynamic->SetTextureParameterValue(ParameterName, Value);
 	}
 }

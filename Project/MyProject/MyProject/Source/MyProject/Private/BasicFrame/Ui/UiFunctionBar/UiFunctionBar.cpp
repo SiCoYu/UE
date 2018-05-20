@@ -7,12 +7,15 @@
 #include "Engine/LatentActionManager.h"
 #include "IDispatchObject.h"
 #include "EventDispatchDelegate.h"
-#include "SafePointer.h"
+#include "SafePointer.h"	// SAFE_NEW
+#include "MyFlyPawn.h"		// AMyFlyPawn
+#include "UtilEngineWrap.h"
 
 UUiFunctionBar::UUiFunctionBar(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	this->mTestButton = MySharedPtr<AuxButton>(SAFE_NEW AuxButton());
+	this->mTestComBtn = SAFE_NEW AuxButton();
 }
 
 void UUiFunctionBar::onReady()
@@ -21,6 +24,7 @@ void UUiFunctionBar::onReady()
 
 	//UtilSysLibWrap::addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 	this->mTestButton->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
+	this->mTestComBtn->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::TestComBtn.c_str(), this, "onTestComBtnTouch");
 }
 
 void UUiFunctionBar::onTestButtonTouch()
@@ -54,6 +58,12 @@ void UUiFunctionBar::onTestButtonTouch()
 	//{
 	//	scriptGeneratorPlugin.FinishExport();
 	//}
+}
+
+void UUiFunctionBar::onTestComBtnTouch()
+{
+	APawn* actor = UtilEngineWrap::getFirstCharacter();
+	UActorComponent* actorCom = UtilEngineWrap::getComponentByClass<UCameraComponent>(actor);
 }
 
 void UUiFunctionBar::onLevelLoaded()

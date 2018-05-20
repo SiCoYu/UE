@@ -31,6 +31,8 @@ class UMyGameViewportClientBase;
 class UMeshComponent;
 class UMaterialInterface;
 class UWidget;
+class UPrimitiveComponent;
+class UMaterialInstanceDynamic;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -382,6 +384,7 @@ public:
 
 	// Engine\Source\Runtime\Engine\Private\Components\MeshComponent.cpp
 	static void SetMaterial(UMeshComponent* meshComponent, int32 ElementIndex, UMaterialInterface* Material);
+	static UMaterialInstanceDynamic* SetMaterial(UPrimitiveComponent* primitiveComponent, int32 ElementIndex, UMaterialInterface* Material);
 
 	// ue4-数据二进制存取: http://blog.csdn.net/yangxuan0261/article/details/54406581 , 官网地址: Read%26_Write_Any_Data_to_Compressed_Binary_Files” , https://wiki.unrealengine.com/Save_System,Read%26_Write_Any_Data_to_Compressed_Binary_Files
 	void TestFileWriteCompressed(FString _path);
@@ -435,6 +438,10 @@ public:
 	static inline T* getComponentByClass(AActor* actor);
 	static const TSet<UActorComponent*>& getAllComponent(AActor* actor);
 	static const void destroyComponent(UActorComponent* actorComponent);
+	// Engine\Source\Runtime\Engine\Classes\Materials\MaterialInstanceDynamic.h
+	static void setScalarParameterValue(UMaterialInstanceDynamic* materialInstanceDynamic, FName ParameterName, float Value);
+	// Engine\Source\Runtime\Engine\Private\Materials\MaterialInstanceDynamic.cpp
+	static void setTextureParameterValue(UMaterialInstanceDynamic* materialInstanceDynamic, FName ParameterName, UTexture* Value);
 };
 
 #include "UtilEngineWrap.inl"

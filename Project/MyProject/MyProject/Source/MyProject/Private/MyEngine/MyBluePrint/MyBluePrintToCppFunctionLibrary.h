@@ -21,7 +21,7 @@ public:
 	static UMyBluePrintBase* getBPCtx();
 
 	UFUNCTION(BlueprintPure, Category = "MyBluePrintToCppFunctionLibrary")
-	static ACharacter* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
+	static APawn* getFirstCharacter();	// 获取第一个 ACharacter ，就是主角自己
 
 	UFUNCTION(BlueprintPure, Category = "MyBluePrintToCppFunctionLibrary")
 	static AMyPlayerControllerBase* GetPlayerController();

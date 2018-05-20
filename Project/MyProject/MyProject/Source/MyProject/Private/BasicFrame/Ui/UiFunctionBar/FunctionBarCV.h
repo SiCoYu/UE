@@ -6,4 +6,5 @@ class FunctionBarCV
 {
 public:
 	static std::string ButtonTest;
+	static std::string TestComBtn;
 };

@@ -17,7 +17,7 @@ UMyBluePrintBase* UMyBluePrintToCppFunctionLibrary::getBPCtx()
 	return GBPCtx.get();
 }
 
-ACharacter* UMyBluePrintToCppFunctionLibrary::getFirstCharacter()
+APawn* UMyBluePrintToCppFunctionLibrary::getFirstCharacter()
 {
 	return UtilEngineWrap::getFirstCharacter();
 }
