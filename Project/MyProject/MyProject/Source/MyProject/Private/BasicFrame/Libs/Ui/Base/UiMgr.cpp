@@ -352,7 +352,7 @@ void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 {
 	AuxMUiClassLoader* res = (AuxMUiClassLoader*)dispObj;
 
-	std::string path = res->getLogicPath();
+	std::string path = res->getOrigPath();
 	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
 	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
 	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
