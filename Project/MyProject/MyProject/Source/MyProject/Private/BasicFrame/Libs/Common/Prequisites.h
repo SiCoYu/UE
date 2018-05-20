@@ -21,6 +21,7 @@
 #include "ClassAssetInsMgr.h"
 #include "ObjectAssetInsMgr.h"
 #include "TextureInsResMgr.h"
+#include "MaterialInsResMgr.h"
 #include "MyStreamableManager.h"
 #include "DownloadMgr.h"
 #include "MFileSys.h"

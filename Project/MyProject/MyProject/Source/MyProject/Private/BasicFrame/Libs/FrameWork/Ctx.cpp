@@ -18,6 +18,7 @@
 #include "ClassAssetInsMgr.h"
 #include "ObjectAssetInsMgr.h"
 #include "TextureInsResMgr.h"
+#include "MaterialInsResMgr.h"
 #include "MyStreamableManager.h"
 #include "DownloadMgr.h"
 #include "SystemSetting.h"
@@ -63,6 +64,7 @@ Ctx::Ctx()
 	this->mClassAssetInsMgr = nullptr;
 	this->mObjectAssetInsMgr = nullptr;
 	this->mTextureInsResMgr = nullptr;
+	this->mMaterialInsResMgr = nullptr;
 
 	this->mMyStreamableManager = nullptr;
 	this->mPoolSys = nullptr;
@@ -107,6 +109,7 @@ void Ctx::construct()
 	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(SAFE_NEW ClassAssetInsMgr());
 	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(SAFE_NEW ObjectAssetInsMgr());
 	this->mTextureInsResMgr = MySharedPtr<TextureInsResMgr>(SAFE_NEW TextureInsResMgr());
+	this->mMaterialInsResMgr = MySharedPtr<MaterialInsResMgr>(SAFE_NEW MaterialInsResMgr());
 
 	this->mUiMgr = MySharedPtr<UiMgr>(SAFE_NEW UiMgr());
 	this->mTableSys = MySharedPtr<TableSys>(SAFE_NEW TableSys());
@@ -156,6 +159,7 @@ void Ctx::init()
 	this->mClassAssetInsMgr->init();
 	this->mObjectAssetInsMgr->init();
 	this->mTextureInsResMgr->init();
+	this->mMaterialInsResMgr->init();
 	this->mPoolSys->init();
 	this->mDownloadMgr->init();
 	this->mFileSys->init();
@@ -200,6 +204,7 @@ void Ctx::dispose()
 	this->mClassAssetInsMgr->dispose();
 	this->mObjectAssetInsMgr->dispose();
 	this->mTextureInsResMgr->dispose();
+	this->mMaterialInsResMgr->dispose();
 
 	this->mMyStreamableManager->dispose();
 	this->mPoolSys->dispose();
@@ -240,6 +245,7 @@ void Ctx::dispose()
 	this->mClassAssetInsMgr = nullptr;
 	this->mObjectAssetInsMgr = nullptr;
 	this->mTextureInsResMgr = nullptr;
+	this->mMaterialInsResMgr = nullptr;
 
 	this->mMyStreamableManager = nullptr;
 	this->mPoolSys = nullptr;
@@ -385,6 +391,11 @@ MySharedPtr<ObjectAssetInsMgr> Ctx::getObjectAssetInsMgr()
 MySharedPtr<TextureInsResMgr> Ctx::getTextureInsResMgr()
 {
 	return this->mTextureInsResMgr;
+}
+
+MySharedPtr<MaterialInsResMgr> Ctx::getMaterialInsResMgr()
+{
+	return this->mMaterialInsResMgr;
 }
 
 MySharedPtr<ResLoadMgr> Ctx::getResLoadMgr()

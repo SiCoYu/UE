@@ -28,6 +28,7 @@ class ResLoadMgr;
 class ClassAssetInsMgr;
 class ObjectAssetInsMgr;
 class TextureInsResMgr;
+class TextureInsResMgr;
 class FMyStreamableManager;
 class DownloadMgr;
 class MFileSys;
@@ -66,6 +67,7 @@ protected:
 	MySharedPtr<ClassAssetInsMgr> mClassAssetInsMgr;
 	MySharedPtr<ObjectAssetInsMgr> mObjectAssetInsMgr;
 	MySharedPtr<TextureInsResMgr> mTextureInsResMgr;
+	MySharedPtr<MaterialInsResMgr> mMaterialInsResMgr;
 
 	MySharedPtr<FMyStreamableManager> mMyStreamableManager;
 	MySharedPtr<DownloadMgr> mDownloadMgr;
@@ -120,6 +122,7 @@ public:
 	MySharedPtr<ClassAssetInsMgr> getClassAssetInsMgr();
 	MySharedPtr<ObjectAssetInsMgr> getObjectAssetInsMgr();
 	MySharedPtr<TextureInsResMgr> getTextureInsResMgr();
+	MySharedPtr<MaterialInsResMgr> getMaterialInsResMgr();
 
 	MySharedPtr<FMyStreamableManager> getMyStreamableManager();
 	MySharedPtr<DownloadMgr> getDownloadMgr();
@@ -166,6 +169,7 @@ public:
 #define GClassAssetInsMgr GCtx->getClassAssetInsMgr()
 #define GObjectAssetInsMgr GCtx->getObjectAssetInsMgr()
 #define GTextureInsResMgr GCtx->getTextureInsResMgr()
+#define GMaterialInsResMgr GCtx->getMaterialInsResMgr()
 
 #define GSandboxPlatformFile GCtx->getSandboxPlatformFile()
 #define GMyStreamableManager GCtx->getMyStreamableManager()
