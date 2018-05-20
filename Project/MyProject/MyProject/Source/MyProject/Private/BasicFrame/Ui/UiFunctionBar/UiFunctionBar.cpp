@@ -16,6 +16,9 @@ UUiFunctionBar::UUiFunctionBar(const FObjectInitializer& ObjectInitializer)
 {
 	this->mTestButton = MySharedPtr<AuxButton>(SAFE_NEW AuxButton());
 	this->mTestComBtn = SAFE_NEW AuxButton();
+	this->mTestLoadTextureBtn = SAFE_NEW AuxButton();
+	this->mTestLoadMaterialBtn = SAFE_NEW AuxButton();
+	this->mTestChangeMaterialBtn = SAFE_NEW AuxButton();
 }
 
 void UUiFunctionBar::onReady()
@@ -25,6 +28,9 @@ void UUiFunctionBar::onReady()
 	//UtilSysLibWrap::addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 	this->mTestButton->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 	this->mTestComBtn->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::TestComBtn.c_str(), this, "onTestComBtnTouch");
+	this->mTestComBtn->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::TestLoadTextureBtn.c_str(), this, "onTestLoadTextureBtnTouch");
+	this->mTestComBtn->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::TestLoadMaterialBtn.c_str(), this, "onTestLoadMaterialBtnTouch");
+	this->mTestComBtn->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::TestChangeMaterialBtn.c_str(), this, "onTestChangeMaterialBtnTouch");
 }
 
 void UUiFunctionBar::onTestButtonTouch()
@@ -64,6 +70,19 @@ void UUiFunctionBar::onTestComBtnTouch()
 {
 	APawn* actor = UtilEngineWrap::getFirstCharacter();
 	UActorComponent* actorCom = UtilEngineWrap::getComponentByClass<UCameraComponent>(actor);
+}
+
+void UUiFunctionBar::onTestLoadTextureBtnTouch()
+{
+}
+
+void UUiFunctionBar::onTestLoadMaterialBtnTouch()
+{
+}
+
+void UUiFunctionBar::onTestChangeMaterialBtnTouch()
+{
+
 }
 
 void UUiFunctionBar::onLevelLoaded()

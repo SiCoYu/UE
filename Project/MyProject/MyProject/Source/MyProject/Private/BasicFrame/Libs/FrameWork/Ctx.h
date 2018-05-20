@@ -28,7 +28,7 @@ class ResLoadMgr;
 class ClassAssetInsMgr;
 class ObjectAssetInsMgr;
 class TextureInsResMgr;
-class TextureInsResMgr;
+class MaterialInsResMgr;
 class FMyStreamableManager;
 class DownloadMgr;
 class MFileSys;

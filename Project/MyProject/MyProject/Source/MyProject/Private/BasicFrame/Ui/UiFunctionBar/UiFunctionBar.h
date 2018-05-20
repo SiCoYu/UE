@@ -17,6 +17,9 @@ class UUiFunctionBar : public UUMGForm
 protected:
 	MySharedPtr<AuxButton> mTestButton;
 	AuxButton* mTestComBtn;
+	AuxButton* mTestLoadTextureBtn;
+	AuxButton* mTestLoadMaterialBtn;
+	AuxButton* mTestChangeMaterialBtn;
 
 public:
 	UUiFunctionBar(const FObjectInitializer& ObjectInitializer);
@@ -31,6 +34,12 @@ public:
 	void onTestButtonTouch();
 	UFUNCTION(BlueprintCallable, Category = "MyButton")
 	void onTestComBtnTouch();
+	UFUNCTION(BlueprintCallable, Category = "MyButton")
+	void onTestLoadTextureBtnTouch();
+	UFUNCTION(BlueprintCallable, Category = "MyButton")
+	void onTestLoadMaterialBtnTouch();
+	UFUNCTION(BlueprintCallable, Category = "MyButton")
+	void onTestChangeMaterialBtnTouch();
 	UFUNCTION(BlueprintCallable, Category = "MyButton")
 	void onLevelLoaded();
 
