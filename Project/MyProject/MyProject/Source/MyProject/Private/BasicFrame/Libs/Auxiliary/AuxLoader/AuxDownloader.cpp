@@ -59,9 +59,9 @@ namespace MyNS
 			}
 		}
 
-		if (this->mEvtHandle != nullptr)
+		if (this->mResEventDispatch != nullptr)
 		{
-			this->mEvtHandle->dispatchEvent(this);
+			this->mResEventDispatch->dispatchEvent(this);
 		}
 	}
 }

@@ -26,7 +26,8 @@ namespace MyNS
 		ResLoadState* mResLoadState;      // 资源加载状态
         std::string mPrePath;      // 之前加载的资源目录
 		std::string mPath;         // 加载的资源目录
-        ResEventDispatch* mEvtHandle;              // 事件分发器
+		ResEventDispatch* mResEventDispatch;
+        ResEventDispatch* mResEventDispatch;              // 事件分发器
         bool mIsInvalid;      // 加载器是否无效
 		std::string mInitPath;     // 初始化目录
 		ResLoadPriority mResLoadPriority;

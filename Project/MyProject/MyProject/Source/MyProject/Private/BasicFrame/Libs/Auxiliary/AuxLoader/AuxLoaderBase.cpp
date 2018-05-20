@@ -11,7 +11,7 @@ namespace MyNS
 
 	AuxLoaderBase::AuxLoaderBase(std::string path)
 	{
-		this->mEvtHandle = nullptr;
+		this->mResEventDispatch = nullptr;
 		this->mInitPath = path;
 		this->mResLoadState = new ResLoadState();
 		this->mResLoadPriority = ResLoadPriority::eRLP_Low_1000;
@@ -129,11 +129,11 @@ namespace MyNS
 	{
 		if (nullptr != evtHandle)
 		{
-			if (nullptr == this->mEvtHandle)
+			if (nullptr == this->mResEventDispatch)
 			{
-				this->mEvtHandle = new ResEventDispatch();
+				this->mResEventDispatch = new ResEventDispatch();
 			}
-			this->mEvtHandle->addEventHandle(evtHandle);
+			this->mResEventDispatch->addEventHandle(evtHandle);
 		}
 	}
 
@@ -179,10 +179,10 @@ namespace MyNS
 
 	void AuxLoaderBase::unload()
 	{
-		if (this->mEvtHandle != nullptr)
+		if (this->mResEventDispatch != nullptr)
 		{
-			this->mEvtHandle->clearEventHandle();
-			this->mEvtHandle = nullptr;
+			this->mResEventDispatch->clearEventHandle();
+			this->mResEventDispatch = nullptr;
 		}
 
 		this->reset();

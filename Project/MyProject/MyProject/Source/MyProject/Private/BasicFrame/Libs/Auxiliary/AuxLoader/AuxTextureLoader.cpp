@@ -61,7 +61,7 @@ namespace MyNS
         else if (this->hasLoadEnd())
         {
             //this->onTextureLoaded(this->mTextureRes);
-            this->onTextureLoaded(nullptr, 0);
+            this->onTextureLoaded(nullptr);
         }
     }
 
@@ -90,17 +90,16 @@ namespace MyNS
 						this,
 						&AuxTextureLoader::onTextureLoaded
 					)
-				nullptr
                 );
             }
             else
             {
-                this.mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
+                this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
                     path,
 					EventDispatchDelegate(
 						this,
 						&AuxTextureLoader::onTextureLoaded
-					)
+					),
 					EventDispatchDelegate(
 						this,
 						&AuxLoaderBase::onProgressEventHandle
@@ -110,7 +109,7 @@ namespace MyNS
         }
         else if (this->hasLoadEnd())
         {
-            this->onTextureLoaded(null, 0);
+            this->onTextureLoaded(nullptr);
         }
     }
 
@@ -118,7 +117,7 @@ namespace MyNS
     {
         if (nullptr != dispObj)
         {
-            this->mTextureRes = (TextureRes*)dispObj;
+            this->mTextureRes = (TextureInsRes*)dispObj;
 
             if (this->mTextureRes->hasSuccessLoaded())
             {
@@ -128,14 +127,16 @@ namespace MyNS
             }
             else if (this->mTextureRes->hasFailed())
             {
-                this.onFailed();
+                this->onFailed();
 
-                Ctx.msInstance.mTextureResMgr.unload(
+				GTextureInsResMgr->unload(
                     this->mTextureRes->getResUniqueId(),
-                    nullptr,
-                    this->onTextureLoaded
-                    );
-                this->mTextureRes = null;
+					EventDispatchDelegate(
+						this,
+						&AuxTextureLoader::onTextureLoaded
+						)
+					);
+                this->mTextureRes = nullptr;
             }
         }
 
@@ -147,14 +148,16 @@ namespace MyNS
 
     void AuxTextureLoader::unload()
     {
-        if(null != this->mTextureRes)
+        if(nullptr != this->mTextureRes)
         {
-            Ctx.msInstance.mTextureResMgr.unload(
+			GTextureInsResMgr->unload(
                 this->mTextureRes->getResUniqueId(),
-                nullptr,
-                this->onTextureLoaded
+				EventDispatchDelegate(
+					this,
+					&AuxTextureLoader::onTextureLoaded
+					)
                 );
-            this->mTextureRes = null;
+            this->mTextureRes = nullptr;
         }
 
 		Super::unload();

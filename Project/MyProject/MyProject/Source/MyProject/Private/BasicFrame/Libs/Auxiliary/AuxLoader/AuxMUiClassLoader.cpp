@@ -86,17 +86,17 @@ namespace MyNS
 				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 				this->mPrefabRes = nullptr;
 
-				if (this->mEvtHandle != nullptr)
+				if (this->mResEventDispatch != nullptr)
 				{
-					this->mEvtHandle->dispatchEvent(this);
+					this->mResEventDispatch->dispatchEvent(this);
 				}
 			}
 		}
 		else
 		{
-			if (this->mEvtHandle != nullptr)
+			if (this->mResEventDispatch != nullptr)
 			{
-				this->mEvtHandle->dispatchEvent(this);
+				this->mResEventDispatch->dispatchEvent(this);
 			}
 		}
 	}

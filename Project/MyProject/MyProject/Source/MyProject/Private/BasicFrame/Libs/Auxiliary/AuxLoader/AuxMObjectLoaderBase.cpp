@@ -192,17 +192,17 @@ namespace MyNS
 				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
 				this->mPrefabRes = nullptr;
 
-				if (this->mEvtHandle != nullptr)
+				if (this->mResEventDispatch != nullptr)
 				{
-					this->mEvtHandle->dispatchEvent(this);
+					this->mResEventDispatch->dispatchEvent(this);
 				}
 			}
 		}
 		else
 		{
-			if (this->mEvtHandle != nullptr)
+			if (this->mResEventDispatch != nullptr)
 			{
-				this->mEvtHandle->dispatchEvent(this);
+				this->mResEventDispatch->dispatchEvent(this);
 			}
 		}
 	}
@@ -240,9 +240,9 @@ namespace MyNS
 			}
 		}
 
-		if (this->mEvtHandle != nullptr)
+		if (this->mResEventDispatch != nullptr)
 		{
-			this->mEvtHandle->dispatchEvent(this);
+			this->mResEventDispatch->dispatchEvent(this);
 		}
 	}
 
@@ -260,10 +260,10 @@ namespace MyNS
 			this->mResInsEventDispatch = nullptr;
 		}
 
-		if (this->mEvtHandle != nullptr)
+		if (this->mResEventDispatch != nullptr)
 		{
-			this->mEvtHandle->clearEventHandle();
-			this->mEvtHandle = nullptr;
+			this->mResEventDispatch->clearEventHandle();
+			this->mResEventDispatch = nullptr;
 		}
 	}
 
