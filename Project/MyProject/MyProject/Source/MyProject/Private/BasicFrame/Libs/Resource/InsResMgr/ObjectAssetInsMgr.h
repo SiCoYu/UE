@@ -1,7 +1,7 @@
 ﻿#ifndef __ObjectAssetInsMgr_H
 #define __ObjectAssetInsMgr_H
 
-#include "InsResMgrBase.h"
+#include "ResInsMgrBase.h"
 #include "EventDispatchDelegate.h"
 #include "BaseClassDef.h"
 
@@ -10,9 +10,9 @@ class ObjectAssetInsRes;
 /**
  * @brief 资源管理器
  */
-class ObjectAssetInsMgr : public InsResMgrBase
+class ObjectAssetInsMgr : public ResInsMgrBase
 {
-	M_DECLARE_SUPER_KW(InsResMgrBase)
+	M_DECLARE_SUPER_KW(ResInsMgrBase)
 
 public:
 	ObjectAssetInsMgr();

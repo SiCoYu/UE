@@ -1,16 +1,16 @@
-﻿#ifndef __InsResMgrBase_H
-#error "InsResMgrBase.inl file can only include in InsResMgrBase.h"
+﻿#ifndef __ResInsMgrBase_H
+#error "ResInsMgrBase.inl file can only include in ResInsMgrBase.h"
 #endif
 
 template<class T>
-T* InsResMgrBase::getAndSyncLoad(std::string path, EventDispatchDelegate handle)
+T* ResInsMgrBase::getAndSyncLoad(std::string path, EventDispatchDelegate handle)
 {
 	this->syncLoad<T>(path, handle);
 	return (T*)this->getRes(path);
 }
 
 template<class T>
-T* InsResMgrBase::getAndAsyncLoad(std::string path, EventDispatchDelegate handle)
+T* ResInsMgrBase::getAndAsyncLoad(std::string path, EventDispatchDelegate handle)
 {
 	T* ret = nullptr;
 	LoadParam* param = GPoolSys->newObject<LoadParam>();
@@ -27,7 +27,7 @@ T* InsResMgrBase::getAndAsyncLoad(std::string path, EventDispatchDelegate handle
 }
 
 template<class T>
-T* InsResMgrBase::getAndLoad(LoadParam* param)
+T* ResInsMgrBase::getAndLoad(LoadParam* param)
 {
 	this->load<T>(param);
 	return (T*)this->getRes(param->getPath());
@@ -35,7 +35,7 @@ T* InsResMgrBase::getAndLoad(LoadParam* param)
 
 // 同步加载，立马加载完成，并且返回加载的资源， syncLoad 同步加载资源不能和异步加载资源的接口同时去加载一个资源，如果异步加载一个资源，这个时候资源还没有加载完成，然后又同步加载一个资源，这个时候获取的资源是没有加载完成的，由于同步加载资源没有回调，因此即使同步加载的资源加载完成，也不可能获取加载完成事件
 template<class T>
-void InsResMgrBase::syncLoad(std::string path, EventDispatchDelegate handle)
+void ResInsMgrBase::syncLoad(std::string path, EventDispatchDelegate handle)
 {
 	LoadParam* param;
 	param = GPoolSys->newObject<LoadParam>();
@@ -50,7 +50,7 @@ void InsResMgrBase::syncLoad(std::string path, EventDispatchDelegate handle)
 }
 
 template<class T>
-T* InsResMgrBase::createResItem(LoadParam* param)
+T* ResInsMgrBase::createResItem(LoadParam* param)
 {
 	T* ret = new T();
 	ret->getRefCountResLoadResultNotify()->getRefCount()->incRef();
@@ -62,16 +62,16 @@ T* InsResMgrBase::createResItem(LoadParam* param)
 }
 
 template<class T>
-void InsResMgrBase::loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
+void ResInsMgrBase::loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
 {
 	this->mPath2ResDic[param->getPath()] = resItem;
 	this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
-	param->setLoadEventHandle(MakeEventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
+	param->setLoadEventHandle(MakeEventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
 	GResLoadMgr->loadAsset(param);
 }
 
 template<class T>
-void InsResMgrBase::loadWithNotResCreatedAndNotLoad(LoadParam* param)
+void ResInsMgrBase::loadWithNotResCreatedAndNotLoad(LoadParam* param)
 {
 	T* resItem = createResItem<T>(param);
 	this->loadWithResCreatedAndNotLoad<T>(param, resItem);
@@ -80,7 +80,7 @@ void InsResMgrBase::loadWithNotResCreatedAndNotLoad(LoadParam* param)
 // TODO:
 //virtual void load(LoadParam* param);	// 模板函数不能使虚函数
 template<class T>
-void InsResMgrBase::load(LoadParam* param)
+void ResInsMgrBase::load(LoadParam* param)
 {
 	++this->mLoadingDepth;
 	if (UtilMap::ContainsKey(this->mPath2ResDic, param->mPath))

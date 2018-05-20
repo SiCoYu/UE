@@ -1,5 +1,5 @@
-﻿#ifndef __InsResMgrBase_H
-#define __InsResMgrBase_H
+﻿#ifndef __ResInsMgrBase_H
+#define __ResInsMgrBase_H
 
 #include <map>
 #include <string>
@@ -12,7 +12,7 @@
 #include "InsResBase.h"
 #include "ResEventDispatch.h"
 #include "RefCount.h"
-//#include "Prequisites.h"	// TODO: 包含这个就导致 UIAssetMgr 报错 InsResMgrBase 不能识别，因此只包含必要的头文件，递归包含导致的错误
+//#include "Prequisites.h"	// TODO: 包含这个就导致 UIAssetMgr 报错 ResInsMgrBase 不能识别，因此只包含必要的头文件，递归包含导致的错误
 #include "Ctx.h"
 #include "ResLoadMgr.h"
 #include "PoolSys.h"
@@ -24,7 +24,7 @@ class IDispatchObject;
 /**
  * @brief 资源管理器，不包括资源加载
  */
-class InsResMgrBase
+class ResInsMgrBase
 {
 public:
 	std::map<std::string, InsResBase*> mPath2ResDic;
@@ -34,8 +34,8 @@ protected:
     int mLoadingDepth;          // 加载深度
 
 public:
-	InsResMgrBase();
-	virtual ~InsResMgrBase();
+	ResInsMgrBase();
+	virtual ~ResInsMgrBase();
 
 	virtual void init();
 	virtual void dispose();
@@ -87,6 +87,6 @@ public:
 	void unloadAll();
 };
 
-#include "InsResMgrBase.inl"
+#include "ResInsMgrBase.inl"
 
 #endif

@@ -3,14 +3,14 @@
 #include <string>
 #include "EventDispatchDelegate.h"
 #include "BaseClassDef.h"
-#include "InsResMgrBase.h"
+#include "ResInsMgrBase.h"
 #include "ResLoadPriority.h"
 
 class TextureInsRes;
 
-class TextureInsResMgr : public InsResMgrBase
+class TextureInsResMgr : public ResInsMgrBase
 {
-	M_DECLARE_SUPER_KW(InsResMgrBase);
+	M_DECLARE_SUPER_KW(ResInsMgrBase);
 
 public:
 	TextureInsResMgr();

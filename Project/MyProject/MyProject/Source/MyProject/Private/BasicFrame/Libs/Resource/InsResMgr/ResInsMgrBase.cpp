@@ -1,31 +1,32 @@
 ﻿#include "MyProject.h"
-#include "InsResMgrBase.h"
+#include "ResInsMgrBase.h"
 #include "UtilStr.h"
 #include "ResItem.h"
 
-InsResMgrBase::InsResMgrBase()
+ResInsMgrBase::ResInsMgrBase()
 {
 	this->mLoadingDepth = 0;
 }
 
-InsResMgrBase::~InsResMgrBase()
+ResInsMgrBase::~ResInsMgrBase()
 {
 	
 }
 
-void InsResMgrBase::init()
+void ResInsMgrBase::init()
 {
 
 }
 
-void InsResMgrBase::dispose()
+void ResInsMgrBase::dispose()
 {
 
 }
 
-void InsResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
+void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 {
 	this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+
 	if (this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
 		if (!param->getLoadEventHandle().empty())
@@ -42,7 +43,7 @@ void InsResMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 	}
 }
 
-void InsResMgrBase::unload(std::string path, EventDispatchDelegate loadEventHandle)
+void ResInsMgrBase::unload(std::string path, EventDispatchDelegate loadEventHandle)
 {
 	if (UtilMap::ContainsKey(this->mPath2ResDic, path))
 	{
@@ -63,13 +64,13 @@ void InsResMgrBase::unload(std::string path, EventDispatchDelegate loadEventHand
 }
 
 // 添加无引用资源到 List
-void InsResMgrBase::addNoRefResID2List(std::string path)
+void ResInsMgrBase::addNoRefResID2List(std::string path)
 {
 	this->mZeroRefResIdList.add(path);
 }
 
 // 卸载没有引用的资源列表中的资源
-void InsResMgrBase::unloadNoRefResFromList()
+void ResInsMgrBase::unloadNoRefResFromList()
 {
 	for(std::string path : this->mZeroRefResIdList.getList())
 	{
@@ -81,7 +82,7 @@ void InsResMgrBase::unloadNoRefResFromList()
 	this->mZeroRefResIdList.clear();
 }
 
-void InsResMgrBase::unloadNoRef(std::string path)
+void ResInsMgrBase::unloadNoRef(std::string path)
 {
 	this->mPath2ResDic[path]->unload();
 	// 卸载加载的原始资源
@@ -89,14 +90,14 @@ void InsResMgrBase::unloadNoRef(std::string path)
 		path, 
 		MakeEventDispatchDelegate(
 			this, 
-			&InsResMgrBase::onLoadEventHandle
+			&ResInsMgrBase::onLoadEventHandle
 		)
 	);
 	UtilMap::Remove(this->mPath2ResDic, path);
 	//UtilSysLibWrap.UnloadUnusedAssets();           // 异步卸载共用资源
 }
 
-void InsResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
+void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 {
 	ResItem* res = (ResItem*)dispObj;
 	std::string path = res->getPath();
@@ -110,29 +111,29 @@ void InsResMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 			if (this->mPath2ResDic[path]->getIsOrigResNeedImmeUnload())
 			{
 				// 卸载资源
-				GResLoadMgr->unload(path, MakeEventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
+				GResLoadMgr->unload(path, MakeEventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
 			}
 		}
 		else
 		{
 			this->mPath2ResDic[path]->failed(res);
-			GResLoadMgr->unload(path, EventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
+			GResLoadMgr->unload(path, EventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
 		}
 	}
 	else
 	{
 		GLogSys->log(UtilStr::Format("Path can not find {0}", path));
-		GResLoadMgr->unload(path, MakeEventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
+		GResLoadMgr->unload(path, MakeEventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
 	}
 }
 
-InsResBase* InsResMgrBase::getRes(std::string path)
+InsResBase* ResInsMgrBase::getRes(std::string path)
 {
 	return this->mPath2ResDic[path];
 }
 
 // 卸载所有的资源
-void InsResMgrBase::unloadAll()
+void ResInsMgrBase::unloadAll()
 {
 	// 卸载资源的时候保存的路径列表
 	MList<std::string> pathList;
@@ -144,7 +145,7 @@ void InsResMgrBase::unloadAll()
 
 	for(std::string path : pathList.getList())
 	{
-		this->unload(path, MakeEventDispatchDelegate(this, &InsResMgrBase::onLoadEventHandle));
+		this->unload(path, MakeEventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
 	}
 
 	pathList.clear();

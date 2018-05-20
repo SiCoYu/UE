@@ -1,7 +1,7 @@
 ﻿#ifndef __ClassAssetInsMgr_H
 #define __ClassAssetInsMgr_H
 
-#include "InsResMgrBase.h"
+#include "ResInsMgrBase.h"
 
 /**
  * @brief 类管理器， Blueprint
@@ -9,7 +9,7 @@
 
 class ClassAssetInsRes;
 
-class ClassAssetInsMgr : public InsResMgrBase
+class ClassAssetInsMgr : public ResInsMgrBase
 {
 public:
 	ClassAssetInsMgr();
