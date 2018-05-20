@@ -82,9 +82,45 @@ namespace MyNS
 		return this->mIsInvalid;
 	}
 
-	std::string AuxLoaderBase::getLogicPath()
+	std::string AuxLoaderBase::getOrigPath()
 	{
 		return this->mPath;
+	}
+
+	// 真正的开始加载
+	void AuxLoaderBase::onStartLoad()
+	{
+		this->mResLoadState->setLoading();
+	}
+
+	// 资源加载完成成功
+	void AuxLoaderBase::onLoaded()
+	{
+		this->mResLoadState->setSuccessLoaded();
+	}
+
+	// 加载失败
+	void AuxLoaderBase::onFailed()
+	{
+		this->mResLoadState->setFailed();
+	}
+
+	// 开始实例化
+	void AuxLoaderBase::onStartIns()
+	{
+		this->mResLoadState->setInsing();
+	}
+
+	// 实例化完成成功
+	void AuxLoaderBase::onSuccessIns()
+	{
+		this->mResLoadState->setSuccessIns();
+	}
+
+	// 实例化失败
+	void AuxLoaderBase::onInsFailed()
+	{
+		this->mResLoadState->setInsFailed();
 	}
 
 	void AuxLoaderBase::addEventHandle(EventDispatchDelegate evtHandle)

@@ -66,11 +66,11 @@ namespace MyNS
 		this->mIsDestroySelf = value;
 	}
 
-	std::string AuxMObjectLoaderBase::getLogicPath()
+	std::string AuxMObjectLoaderBase::getOrigPath()
 	{
 		if (this->mPrefabRes != nullptr)
 		{
-			return this->mPrefabRes->getLogicPath();
+			return this->mPrefabRes->getOrigPath();
 		}
 
 		return this->mPath;

@@ -46,13 +46,40 @@ namespace MyNS
 		void setPath(std::string path);
 		void updatePath(std::string path);
 		bool isInvalid();
-		virtual std::string getLogicPath();
+		virtual std::string getOrigPath();
+
+		// 真正的开始加载
+		void onStartLoad();
+		// 资源加载完成成功
+		void onLoaded();
+		// 加载失败
+		void onFailed();
+		// 开始实例化
+		void onStartIns();
+		// 实例化完成成功
+		void onSuccessIns();
+		// 实例化失败
+		void onInsFailed();
 
 	protected:
 		void addEventHandle(EventDispatchDelegate evtHandle = nullptr);
-		virtual void syncLoad(std::string path, EventDispatchDelegate evtHandle = nullptr);
-		virtual void asyncLoad(std::string path, EventDispatchDelegate evtHandle);
-		virtual void download(std::string origPath, EventDispatchDelegate  dispObj = nullptr, long fileLen = 0, bool isWriteFile = true, int downloadType = (int)eHttpWeb);
+		virtual void syncLoad(
+			std::string path, 
+			EventDispatchDelegate evtHandle = nullptr,
+			EventDispatchDelegate progressHandle = nullptr
+		);
+		virtual void asyncLoad(
+			std::string path, 
+			EventDispatchDelegate evtHandle,
+			EventDispatchDelegate progressHandle = nullptr
+		);
+		virtual void download(
+			std::string origPath, 
+			EventDispatchDelegate dispObj = nullptr, 
+			long fileLen = 0, 
+			bool isWriteFile = true, 
+			int downloadType = (int)eHttpWeb
+		);
 		virtual void unload();
 		virtual void onProgressEventHandle(IDispatchObject* dispObj);
 	};

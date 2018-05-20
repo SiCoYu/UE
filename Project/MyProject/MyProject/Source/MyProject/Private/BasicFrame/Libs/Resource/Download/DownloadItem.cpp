@@ -87,7 +87,7 @@ void DownloadItem::setLogicPath(std::string value)
 	this->mLogicPath = value;
 }
 
-std::string DownloadItem::getLogicPath()
+std::string DownloadItem::getOrigPath()
 {
     return this->mLogicPath;
 }

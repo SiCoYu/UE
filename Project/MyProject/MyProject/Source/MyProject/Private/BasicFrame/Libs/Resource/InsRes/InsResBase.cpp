@@ -71,7 +71,7 @@ void InsResBase::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* val
 	this->mRefCountResLoadResultNotify = value;
 }
 
-std::string InsResBase::getLogicPath()
+std::string InsResBase::getOrigPath()
 {
 	return this->mPath;
 }

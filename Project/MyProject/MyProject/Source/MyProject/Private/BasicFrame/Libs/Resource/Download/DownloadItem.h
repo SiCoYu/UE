@@ -60,7 +60,7 @@ public:
 	bool hasFailed();
 
 	void setLogicPath(std::string value);
-	std::string getLogicPath();
+	std::string getOrigPath();
 	void setResUniqueId(std::string value);
 	std::string getResUniqueId();
     char* getBytes();

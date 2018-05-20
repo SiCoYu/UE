@@ -46,11 +46,19 @@ namespace MyNS
 		void setSelfGo(UObject* value);
 		bool isDestroySelf();
 		void setDestroySelf(bool value);
-		virtual std::string getLogicPath() override;
+		virtual std::string getOrigPath() override;
 
-		virtual void syncLoad(std::string path, EventDispatchDelegate evtHandle = nullptr) override;
+		virtual void syncLoad(
+			std::string path, 
+			EventDispatchDelegate evtHandle = nullptr,
+			EventDispatchDelegate progressHandle = nullptr
+		) override;
         // 异步加载对象
-		virtual void asyncLoad(std::string path, EventDispatchDelegate evtHandle) override;
+		virtual void asyncLoad(
+			std::string path, 
+			EventDispatchDelegate evtHandle,
+			EventDispatchDelegate progressHandle = nullptr
+		) override;
 		virtual void onPrefabLoaded(IDispatchObject* dispObj);
 		void onPrefabIns(IDispatchObject* dispObj);
         // 所有的资源都加载完成
