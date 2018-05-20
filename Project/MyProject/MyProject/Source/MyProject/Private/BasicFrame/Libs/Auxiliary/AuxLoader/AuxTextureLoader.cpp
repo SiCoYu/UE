@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "AuxTextureLoader.h"
 #include "Engine/Texture.h"	// UTexture
+#include "TextureInsRes.h"
 
 namespace MyNS
 {
@@ -8,8 +9,8 @@ namespace MyNS
     {
 		Super();
 
-        this.mTextureRes = nullptr;
-        this.mTexture = nullptr;
+        this->mTextureRes = nullptr;
+        this->mTexture = nullptr;
     }
 
     void AuxTextureLoader::dispose()
@@ -33,16 +34,14 @@ namespace MyNS
     }
 
     void AuxTextureLoader::syncLoad(
-        string path,
+        std::string path,
 		EventDispatchDelegate evtHandle,
 		EventDispatchDelegate progressHandle
         )
     {
         Super::syncLoad(
             path,
-            pEvtThis,
             evtHandle,
-            pProgressThis,
             progressHandle
             );
 
@@ -69,7 +68,7 @@ namespace MyNS
 
     // 异步加载对象
     void AuxTextureLoader::asyncLoad(
-        string path,
+        std::string path,
 		EventDispatchDelegate evtHandle,
 		EventDispatchDelegate progressHandle
         )

@@ -22,9 +22,17 @@ namespace MyNS
 	public:
 		AuxLevelLoader(std::string path = "");
 		virtual void dispose() override;
-		virtual void syncLoad(std::string path, EventDispatchDelegate evtHandle = nullptr) override;
+		virtual void syncLoad(
+			std::string path, 
+			EventDispatchDelegate evtHandle = nullptr,
+			EventDispatchDelegate progressHandle = nullptr
+		) override;
         // 异步加载对象
-		virtual void asyncLoad(std::string path, EventDispatchDelegate evtHandle) override;
+		virtual void asyncLoad(
+			std::string path, 
+			EventDispatchDelegate evtHandle,
+			EventDispatchDelegate progressHandle = nullptr
+		) override;
 		void onLevelLoaded(IDispatchObject* dispObj);
 		virtual void unload() override;
 	};

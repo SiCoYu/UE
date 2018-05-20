@@ -1,24 +1,18 @@
 ﻿#ifndef __ResLoadState_H
 #define __ResLoadState_H
 
-enum CVResLoadState
-{
-	eNotLoad,       // 没有加载
-	eLoading,       // 正在加载
-	eLoaded,        // 加载成功
-	eFailed         // 加载失败
-};
+#include "ResLoadStateCV.h"
 
 class ResLoadState
 {
 protected:
-	CVResLoadState mResLoadState;
+	ResLoadStateCV mResLoadState;
 
 public:
 	ResLoadState();
 
-	CVResLoadState getResLoadState();
-	void setResLoadState(CVResLoadState value);
+	ResLoadStateCV getResLoadState();
+	void setResLoadState(ResLoadStateCV value);
 	void reset();
     // 是否加载完成，可能成功可能失败
 	bool hasLoaded();
@@ -29,6 +23,18 @@ public:
 	void setSuccessLoaded();
 	void setFailed();
 	void setLoading();
+	// 成功实例化
+	void setSuccessIns();
+	// 实例化失败
+	void setInsFailed();
+	// 正在实例化
+	void setInsing();
+	// 是否成功实例化
+	bool hasSuccessIns();
+	// 是否实例化失败
+	bool hasInsFailed();
+	// 是否正在实例化
+	bool hasInsing();
 	void copyFrom(ResLoadState* rhv);
 };
 
