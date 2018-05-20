@@ -1115,3 +1115,16 @@ UWorld* UtilEngineWrap::getWorldByActorComponent(UActorComponent* actorComponent
 {
 	return actorComponent->GetWorld();
 }
+
+const TSet<UActorComponent*>& UtilEngineWrap::getAllComponent(AActor* actor)
+{
+	return actor->GetComponents();
+}
+
+const void UtilEngineWrap::destroyComponent(UActorComponent* actorComponent)
+{
+	if (nullptr != actorComponent)
+	{
+		actorComponent->DestroyComponent();
+	}
+}

@@ -150,5 +150,19 @@ T* UtilEngineWrap::FindActor(FString name)
 			return actor;
 		}
 	}
+
 	return nullptr;
+}
+
+template<class T>
+static inline T* getComponentByClass(AActor* actor)
+{
+	T* ret = nullptr;
+
+	if (nullptr != actor)
+	{
+		ret = actor->FindComponentByClass<T>();
+	}
+
+	return ret;
 }

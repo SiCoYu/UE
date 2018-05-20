@@ -103,7 +103,7 @@ class InputMgr
 public:
 	//static BetterList<UICamera> list = new BetterList<UICamera>();
 
-	static  GetKeyDown;
+	static KeyEventDispatchDelegate GetKeyDown;
 
 	static KeyEventDispatchDelegate GetKeyUp;
 

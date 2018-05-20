@@ -428,6 +428,11 @@ public:
 	static void setActorComponentActive(UActorComponent* actorComponent, bool isActive);
 	static AActor* getActorComponentOwner(UActorComponent* actorComponent);
 	static UWorld* getWorldByActorComponent(UActorComponent* actorComponent);
+
+	template<class T>
+	static inline T* getComponentByClass(AActor* actor);
+	static const TSet<UActorComponent*>& getAllComponent(AActor* actor);
+	static const void destroyComponent(UActorComponent* actorComponent);
 };
 
 #include "UtilEngineWrap.inl"
