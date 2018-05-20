@@ -181,6 +181,15 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 
 		((ClassAssetResItem*)resItem)->setPrefabName(param->getPrefabName());
 	}
+	else if (eObjectType == param->getResPackType())
+	{
+		if (nullptr == resItem)
+		{
+			resItem = new ObjectAssetResItem();
+		}
+
+		((ObjectAssetResItem*)resItem)->setPrefabName(param->getPrefabName());
+	}
 	//else if (eResourcesType == param->mResPackType)
 	//{
 	//	if (nullptr == resItem)
@@ -229,11 +238,18 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 {
 	LoadItem* loadItem = this->findLoadItemFormPool(param->getResPackType());
 
-	if (eClassType == param->getResPackType())        // 默认 Bundle 中资源
+	if (eClassType == param->getResPackType())
 	{
 		if (nullptr == loadItem)
 		{
 			loadItem = new ClassAssetLoadItem();
+		}
+	}
+	else if (eObjectType == param->getResPackType())
+	{
+		if (nullptr == loadItem)
+		{
+			loadItem = new ObjectAssetLoadItem();
 		}
 	}
 	//if (eResourcesType == param->mResPackType)        // 默认 Bundle 中资源
