@@ -3,7 +3,7 @@
 #include "MsgRouteBase.h"
 #include "UtilContainers.h"
 #include "UtilStr.h"
-#include "Common.h"
+#include "Prequisites.h"
 #include "AddOnceEventDispatch.h"
 
 MsgRouteHandleBase::MsgRouteHandleBase()

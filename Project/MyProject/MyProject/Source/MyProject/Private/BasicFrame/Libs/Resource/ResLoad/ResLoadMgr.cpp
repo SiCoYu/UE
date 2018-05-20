@@ -4,7 +4,7 @@
 #include "UtilContainers.h"
 #include "LoadParam.h"
 #include "UtilStr.h"
-#include "Common.h"
+#include "Prequisites.h"
 #include "LoadItem.h"
 #include "ResItem.h"
 #include "NonRefCountResLoadResultNotify.h"

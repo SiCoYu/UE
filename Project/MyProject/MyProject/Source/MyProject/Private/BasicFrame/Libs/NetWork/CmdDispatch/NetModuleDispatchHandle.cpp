@@ -2,7 +2,7 @@
 #include "NetModuleDispatchHandle.h"
 #include "MByteBuffer.h"
 #include "UtilContainers.h"
-#include "Common.h"
+#include "Prequisites.h"
 #include "UtilStr.h"
 #include "NetCmdDispatchHandle.h"
 #include "AddOnceEventDispatch.h"

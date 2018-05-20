@@ -12,7 +12,7 @@
 #include "InsResBase.h"
 #include "ResEventDispatch.h"
 #include "RefCount.h"
-//#include "Common.h"	// TODO: 包含这个就导致 UIAssetMgr 报错 InsResMgrBase 不能识别，因此只包含必要的头文件，递归包含导致的错误
+//#include "Prequisites.h"	// TODO: 包含这个就导致 UIAssetMgr 报错 InsResMgrBase 不能识别，因此只包含必要的头文件，递归包含导致的错误
 #include "Ctx.h"
 #include "ResLoadMgr.h"
 #include "PoolSys.h"

@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "ProcessSys.h"
-#include "Common.h"
+#include "Prequisites.h"
 
 ProcessSys::ProcessSys()
 {

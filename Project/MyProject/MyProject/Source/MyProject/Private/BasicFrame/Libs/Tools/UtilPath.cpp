@@ -4,7 +4,7 @@
 #include "Core.h"
 #include "CoreGlobals.h"
 #include "HAL/FileManager.h"
-#include "Common.h"
+#include "Prequisites.h"
 #include "UtilPath.h"
 
 FString UtilPath::BaseDir()

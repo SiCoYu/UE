@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "AuxDownloader.h"
 #include "DownloadItem.h"
-#include "Common.h"
+#include "Prequisites.h"
 
 namespace MyNS
 {

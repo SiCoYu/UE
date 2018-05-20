@@ -1,8 +1,9 @@
-#ifndef __Common_H
-#define __Common_H
+#ifndef __Prequisites_H
+#define __Prequisites_H
 
 /**
  * @brief 全局变量需要的头文件
+ * @file Prequisites.h
  */
 #include "Ctx.h"
 #include "EngineData.h"
@@ -19,6 +20,7 @@
 #include "ResLoadMgr.h"
 #include "ClassAssetInsMgr.h"
 #include "ObjectAssetInsMgr.h"
+#include "TextureInsResMgr.h"
 #include "MyStreamableManager.h"
 #include "DownloadMgr.h"
 #include "MFileSys.h"

@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "EventDispatch.h"
-#include "Common.h"
+#include "Prequisites.h"
 #include "EventDispatchFunctionObject.h"
 
 EventDispatch::EventDispatch(int eventId_)

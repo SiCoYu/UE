@@ -3,7 +3,7 @@
 #include "UtilMath.h"
 #include "UtilSysLibWrap.h"
 #include "ObjectAssetInsRes.h"
-#include "Common.h"
+#include "Prequisites.h"
 #include "ResInsEventDispatch.h"
 #include "ResLoadState.h"
 
@@ -76,7 +76,11 @@ namespace MyNS
 		return this->mPath;
 	}
 
-	void AuxMObjectLoaderBase::syncLoad(std::string path, EventDispatchDelegate evtHandle)
+	void AuxMObjectLoaderBase::syncLoad(
+		std::string path, 
+		EventDispatchDelegate evtHandle,
+		EventDispatchDelegate progressHandle
+	)
 	{
 		Super::syncLoad(path, evtHandle);
 
@@ -99,7 +103,10 @@ namespace MyNS
 	}
 
 	// 异步加载对象
-	void AuxMObjectLoaderBase::asyncLoad(std::string path, EventDispatchDelegate evtHandle)
+	void AuxMObjectLoaderBase::asyncLoad(
+		std::string path, 
+		EventDispatchDelegate evtHandle,
+		EventDispatchDelegate progressHandle)
 	{
 		Super::asyncLoad(path, evtHandle);
 

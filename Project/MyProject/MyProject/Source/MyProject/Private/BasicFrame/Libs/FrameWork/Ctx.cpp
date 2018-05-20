@@ -17,6 +17,7 @@
 #include "ResLoadMgr.h"
 #include "ClassAssetInsMgr.h"
 #include "ObjectAssetInsMgr.h"
+#include "TextureInsResMgr.h"
 #include "MyStreamableManager.h"
 #include "DownloadMgr.h"
 #include "SystemSetting.h"
@@ -61,6 +62,7 @@ Ctx::Ctx()
 	this->mResLoadMgr = nullptr;
 	this->mClassAssetInsMgr = nullptr;
 	this->mObjectAssetInsMgr = nullptr;
+	this->mTextureInsResMgr = nullptr;
 
 	this->mMyStreamableManager = nullptr;
 	this->mPoolSys = nullptr;
@@ -104,6 +106,7 @@ void Ctx::construct()
 	this->mResLoadMgr = MySharedPtr<ResLoadMgr>(SAFE_NEW ResLoadMgr());
 	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(SAFE_NEW ClassAssetInsMgr());
 	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(SAFE_NEW ObjectAssetInsMgr());
+	this->mTextureInsResMgr = MySharedPtr<TextureInsResMgr>(SAFE_NEW TextureInsResMgr());
 
 	this->mUiMgr = MySharedPtr<UiMgr>(SAFE_NEW UiMgr());
 	this->mTableSys = MySharedPtr<TableSys>(SAFE_NEW TableSys());
@@ -152,6 +155,7 @@ void Ctx::init()
 	this->mResLoadMgr->init();
 	this->mClassAssetInsMgr->init();
 	this->mObjectAssetInsMgr->init();
+	this->mTextureInsResMgr->init();
 	this->mPoolSys->init();
 	this->mDownloadMgr->init();
 	this->mFileSys->init();
@@ -195,6 +199,7 @@ void Ctx::dispose()
 	this->mResLoadMgr->dispose();
 	this->mClassAssetInsMgr->dispose();
 	this->mObjectAssetInsMgr->dispose();
+	this->mTextureInsResMgr->dispose();
 
 	this->mMyStreamableManager->dispose();
 	this->mPoolSys->dispose();
@@ -234,6 +239,7 @@ void Ctx::dispose()
 	this->mResLoadMgr = nullptr;
 	this->mClassAssetInsMgr = nullptr;
 	this->mObjectAssetInsMgr = nullptr;
+	this->mTextureInsResMgr = nullptr;
 
 	this->mMyStreamableManager = nullptr;
 	this->mPoolSys = nullptr;
@@ -374,6 +380,11 @@ MySharedPtr<ClassAssetInsMgr> Ctx::getClassAssetInsMgr()
 MySharedPtr<ObjectAssetInsMgr> Ctx::getObjectAssetInsMgr()
 {
 	return this->mObjectAssetInsMgr;
+}
+
+MySharedPtr<TextureInsResMgr> Ctx::getTextureInsResMgr()
+{
+	return this->mTextureInsResMgr;
 }
 
 MySharedPtr<ResLoadMgr> Ctx::getResLoadMgr()

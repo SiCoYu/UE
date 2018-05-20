@@ -6,7 +6,7 @@
 #include "UtilEngineWrap.h"
 #include "UtilContainers.h"
 #include "UiLoadingItem.h"
-#include "Common.h"
+#include "Prequisites.h"
 #include "LoadParam.h"
 #include "UiAttrItem.h"
 #include "RefCountResLoadResultNotify.h"

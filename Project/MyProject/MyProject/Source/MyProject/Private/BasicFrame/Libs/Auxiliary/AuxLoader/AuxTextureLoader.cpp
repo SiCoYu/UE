@@ -2,6 +2,7 @@
 #include "AuxTextureLoader.h"
 #include "Engine/Texture.h"	// UTexture
 #include "TextureInsRes.h"
+#include "Prequisites.h"
 
 namespace MyNS
 {
@@ -49,10 +50,8 @@ namespace MyNS
         {
             this->onStartLoad();
 
-            this.mTextureRes = Ctx.msInstance.mTextureResMgr.getAndSyncLoadRes(
+            this->mTextureRes = GTextureInsResMgr->getAndSyncLoadRes(
                 path, 
-                nullptr, 
-				nullptr,
 				nullptr,
 				nullptr,
                 this.mResLoadPriority
@@ -85,7 +84,7 @@ namespace MyNS
 
             if (nullptr == progressHandle)
             {
-                this->mTextureRes = Ctx.msInstance.mTextureResMgr.getAndAsyncLoadRes(
+                this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
                     path,
 					EventDispatchDelegate(
 						this,
@@ -96,7 +95,7 @@ namespace MyNS
             }
             else
             {
-                this.mTextureRes = Ctx.msInstance.mTextureResMgr.getAndAsyncLoadRes(
+                this.mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
                     path,
 					EventDispatchDelegate(
 						this,

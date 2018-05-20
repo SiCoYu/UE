@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "luaconf.h"
-#include "Common.h"
+#include "Prequisites.h"
 
 void addCFunctionLualoader(lua_State *L)
 {

@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "UtilMsg.h"
-#include "Common.h"
+#include "Prequisites.h"
 #include "UtilStr.h"
 
 // 发送消息， bnet 如果 true 就直接发送到 socket ，否则直接进入输出消息队列

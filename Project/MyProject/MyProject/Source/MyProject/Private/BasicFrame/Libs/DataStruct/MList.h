@@ -3,7 +3,7 @@
 
 #include <vector>
 // TODO:
-//#include "Common.h"	// TODO: 添加了这一样包含文件，导致 UiMgr.h  TMList<UiFormId> mTmpList; 这一行编译错误，凡是使用 TMList 的都会报错，递归包含导致的错误
+//#include "Prequisites.h"	// TODO: 添加了这一样包含文件，导致 UiMgr.h  TMList<UiFormId> mTmpList; 这一行编译错误，凡是使用 TMList 的都会报错，递归包含导致的错误
 #include "Ctx.h"
 #include "LogSys.h"
 

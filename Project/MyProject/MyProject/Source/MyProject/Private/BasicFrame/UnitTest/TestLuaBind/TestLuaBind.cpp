@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "TestLuaBind.h"
-#include "Common.h"
+#include "Prequisites.h"
 
 void TestLuaBind::run()
 {
