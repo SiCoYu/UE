@@ -10,6 +10,8 @@
 #include "SafePointer.h"	// SAFE_NEW
 #include "MyFlyPawn.h"		// AMyFlyPawn
 #include "UtilEngineWrap.h"
+#include "AuxTextureLoader.h"
+#include "AuxMaterialLoader.h"
 
 UUiFunctionBar::UUiFunctionBar(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -104,10 +106,15 @@ void UUiFunctionBar::onTestComBtnTouch()
 
 void UUiFunctionBar::onTestLoadTextureBtnTouch()
 {
+	AuxTextureLoader auxTextureLoader;
+	auxTextureLoader.syncLoad("Texture2D'/Game/MyAsset/Textures/T_Fire_Tiled_D1.T_Fire_Tiled_D1'");
 }
 
 void UUiFunctionBar::onTestLoadMaterialBtnTouch()
 {
+	AuxMaterialLoader auxMaterialLoader;
+	auxMaterialLoader.syncLoad("Material'/Game/MyAsset/Materials/TestMaterial.TestMaterial'");
+	//auxMaterialLoader.syncLoad("MaterialInstanceConstant'/Game/MyAsset/Materials/TestMaterialInstanceConstant.TestMaterialInstanceConstant'");
 }
 
 void UUiFunctionBar::onTestChangeMaterialBtnTouch()
