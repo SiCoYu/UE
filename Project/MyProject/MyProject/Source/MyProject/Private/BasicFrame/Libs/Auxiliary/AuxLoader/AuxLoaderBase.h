@@ -54,5 +54,6 @@ namespace MyNS
 		virtual void asyncLoad(std::string path, EventDispatchDelegate evtHandle);
 		virtual void download(std::string origPath, EventDispatchDelegate  dispObj = nullptr, long fileLen = 0, bool isWriteFile = true, int downloadType = (int)eHttpWeb);
 		virtual void unload();
+		virtual void onProgressEventHandle(IDispatchObject* dispObj);
 	};
 }

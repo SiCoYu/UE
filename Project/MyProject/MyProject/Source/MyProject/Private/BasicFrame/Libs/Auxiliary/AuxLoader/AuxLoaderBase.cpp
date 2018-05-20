@@ -136,4 +136,12 @@ namespace MyNS
 
 		this->reset();
 	}
+
+	void AuxLoaderBase::onProgressEventHandle(IDispatchObject* dispObj)
+	{
+		if (nullptr != this->mProgressEventDispatch)
+		{
+			this->mProgressEventDispatch->dispatchEvent(dispObj);
+		}
+	}
 }
