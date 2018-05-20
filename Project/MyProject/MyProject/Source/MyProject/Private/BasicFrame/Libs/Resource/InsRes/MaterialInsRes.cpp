@@ -11,9 +11,14 @@ MaterialInsRes::MaterialInsRes()
 
 }
 
-UMaterialInterface* MaterialInsRes::getMaterial()
+UMaterialInterface* MaterialInsRes::getMaterialInterface()
 {
 	return this->mMaterial;
+}
+
+UMaterialInstanceDynamic* MaterialInsRes::getMaterialInterfaceDynamic()
+{
+	return this->mMaterialDyn;
 }
 
 void MaterialInsRes::initImpl(ResItem* res)

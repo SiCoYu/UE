@@ -10,6 +10,7 @@ using namespace MyNS;
 
 class MaterialInsRes;
 class UMaterialInstanceDynamic;
+class UMaterialInterface;
 class IDispatchObject;
 
 namespace MyNS
@@ -20,13 +21,16 @@ namespace MyNS
 
 	protected :
 		MaterialInsRes* mMaterialRes;		// 纹理资源
-		UMaterialInstanceDynamic* mMaterial;		// 纹理是 Asset-Object 资源，因此卸载这些资源都在 Ins 管理器处理
+		UMaterialInterface* mMaterial;
+		UMaterialInstanceDynamic* mMaterialDyn;		// 纹理是 Asset-Object 资源，因此卸载这些资源都在 Ins 管理器处理
 
 	public:
 		AuxMaterialLoader();
 		virtual void dispose() override;
-		UMaterialInstanceDynamic* getMaterial();
+
 		virtual std::string getOrigPath() override;
+		UMaterialInterface* getMaterialInterface();
+		UMaterialInstanceDynamic* getMaterialInterfaceDynamic();
 
 		virtual void syncLoad(
 			std::string path,

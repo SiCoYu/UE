@@ -19,10 +19,15 @@ namespace MyNS
 		Super::dispose();
     }
 
-	UMaterialInstanceDynamic* AuxMaterialLoader::getMaterial()
-    {
-        return this->mMaterial;
-    }
+	UMaterialInterface* AuxMaterialLoader::getMaterialInterface()
+	{
+		return this->mMaterialDyn;
+	}
+
+	UMaterialInstanceDynamic* AuxMaterialLoader::getMaterialInterfaceDynamic()
+	{
+		return this->mMaterialDyn;
+	}
 
     std::string AuxMaterialLoader::getOrigPath()
     {
@@ -123,7 +128,8 @@ namespace MyNS
             {
                 this->onLoaded();
 
-                this->mMaterial = this->mMaterialRes->getMaterial();
+                this->mMaterial = this->mMaterialRes->getMaterialInterface();
+				this->mMaterialDyn = this->mMaterialRes->getMaterialInterfaceDynamic();
             }
             else if (this->mMaterialRes->hasFailed())
             {

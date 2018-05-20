@@ -35,7 +35,8 @@ public:
 	MaterialInsRes();
 
 public:
-	UMaterialInterface* getMaterial();
+	UMaterialInterface* getMaterialInterface();
+	UMaterialInstanceDynamic* getMaterialInterfaceDynamic();
 
 protected:
 	virtual void initImpl(ResItem* res) override;
