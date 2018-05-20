@@ -19,7 +19,7 @@ namespace MyNS
 		Super::dispose();
     }
 
-	UTexture* AuxMaterialLoader::getMaterial()
+	UMaterialInstanceDynamic* AuxMaterialLoader::getMaterial()
     {
         return this->mMaterial;
     }
@@ -88,7 +88,7 @@ namespace MyNS
                     path,
 					EventDispatchDelegate(
 						this,
-						&AuxTextureLoader::onMaterialLoaded
+						&AuxMaterialLoader::onMaterialLoaded
 					)
                 );
             }
@@ -98,7 +98,7 @@ namespace MyNS
                     path,
 					EventDispatchDelegate(
 						this,
-						&AuxTextureLoader::onMaterialLoaded
+						&AuxMaterialLoader::onMaterialLoaded
 					),
 					EventDispatchDelegate(
 						this,
@@ -133,7 +133,7 @@ namespace MyNS
                     this->mMaterialRes->getResUniqueId(),
 					EventDispatchDelegate(
 						this,
-						&AuxTextureLoader::onMaterialLoaded
+						&AuxMaterialLoader::onMaterialLoaded
 						)
 					);
                 this->mMaterialRes = nullptr;
@@ -154,7 +154,7 @@ namespace MyNS
                 this->mMaterialRes->getResUniqueId(),
 				EventDispatchDelegate(
 					this,
-					&AuxTextureLoader::onMaterialLoaded
+					&AuxMaterialLoader::onMaterialLoaded
 					)
                 );
             this->mMaterialRes = nullptr;
