@@ -4,6 +4,7 @@
 #include "EventDispatchDelegate.h"
 #include "BaseClassDef.h"
 #include "InsResMgrBase.h"
+#include "ResLoadPriority.h"
 
 class TextureInsRes;
 
@@ -15,6 +16,16 @@ public:
 	TextureInsResMgr();
 
 public:
-	TextureInsRes* getAndSyncLoadRes(std::string path, EventDispatchDelegate handle);
-	TextureInsRes* getAndAsyncLoadRes(std::string path, EventDispatchDelegate handle);
+	TextureInsRes* getAndSyncLoadRes(
+		std::string path, 
+		EventDispatchDelegate handle, 
+		EventDispatchDelegate progressHandle = nullptr, 
+		ResLoadPriority priority = ResLoadPriority::eRLP_Middle_1000
+	);
+	TextureInsRes* getAndAsyncLoadRes(
+		std::string path, 
+		EventDispatchDelegate handle,
+		EventDispatchDelegate progressHandle = nullptr,
+		ResLoadPriority priority = ResLoadPriority::eRLP_Middle_1000
+	);
 };

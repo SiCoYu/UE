@@ -54,9 +54,9 @@ namespace MyNS
                 path, 
 				nullptr,
 				nullptr,
-                this.mResLoadPriority
+                this->mResLoadPriority
                 );
-            this->onTextureLoaded(this.mTextureRes, 0);
+            this->onTextureLoaded(this->mTextureRes);
         }
         else if (this->hasLoadEnd())
         {
