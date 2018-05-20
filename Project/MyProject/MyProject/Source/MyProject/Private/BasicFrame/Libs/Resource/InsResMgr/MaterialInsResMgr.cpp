@@ -9,10 +9,10 @@ MaterialInsResMgr::MaterialInsResMgr()
 
 MaterialInsRes* MaterialInsResMgr::getAndSyncLoadRes(std::string path, EventDispatchDelegate handle)
 {
-	return Super::getAndSyncLoad<MatInsRes>(path, handle);
+	return Super::getAndSyncLoad<MaterialInsRes>(path, handle);
 }
 
 MaterialInsRes* MaterialInsResMgr::getAndAsyncLoadRes(std::string path, EventDispatchDelegate handle)
 {
-	return Super::getAndAsyncLoad<MatInsRes>(path, handle);
+	return Super::getAndAsyncLoad<MaterialInsRes>(path, handle);
 }
