@@ -5,7 +5,7 @@
 
 /**
  * @brief AMyCharacter 这个必须保存，基本所有全局对象都是根据 AMyCharacter 从 UGameplayStatics 中获取的
- * @brief 继承于 ACharacter 会有基本的物理属性，例如在空中会下落
+ * @brief 继承于 ACharacter 会有基本的物理属性，例如在空中会下落，这个不是物理引擎实现的，是引擎自己实现的，因此也可以使用物理引擎实现，例如飞出去的抛物线子弹
  */
 
 class UMyAnimInstanceBase;
