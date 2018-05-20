@@ -13,7 +13,7 @@ class ClassAssetLoadItem : public LoadItem
 	M_DECLARE_SUPER_KW(LoadItem)
 
 protected:
-	UClass* mResObj;		// uasset 类型的资源
+	UClass* mResObject;		// uasset 类型的资源
 	FStringAssetReference mAssetRef;	// 异步加载需要的
 
 public:

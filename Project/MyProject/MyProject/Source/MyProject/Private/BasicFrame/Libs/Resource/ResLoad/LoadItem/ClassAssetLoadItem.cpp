@@ -7,7 +7,7 @@
 
 ClassAssetLoadItem::ClassAssetLoadItem()
 {
-	this->mResObj = nullptr;
+	this->mResObject = nullptr;
 }
 
 ClassAssetLoadItem::~ClassAssetLoadItem()
@@ -17,19 +17,19 @@ ClassAssetLoadItem::~ClassAssetLoadItem()
 
 UObject* ClassAssetLoadItem::getObject()
 {
-	return this->mResObj;
+	return this->mResObject;
 }
 
 void ClassAssetLoadItem::setObject(UObject* value)
 {
-	this->mResObj = Cast<UClass>(value);
+	this->mResObject = Cast<UClass>(value);
 }
 
 void ClassAssetLoadItem::syncLoad()
 {
-	this->mResObj = GMyStreamableManager->SynchronousLoadType<UClass>(this->mPath);
+	this->mResObject = GMyStreamableManager->SynchronousLoadType<UClass>(this->mPath);
 
-	if (nullptr != mResObj)
+	if (nullptr != mResObject)
 	{
 		this->mNonRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
 	}
@@ -43,21 +43,21 @@ void ClassAssetLoadItem::syncLoad()
 
 void ClassAssetLoadItem::asyncLoad()
 {
-	mAssetRef.SetPath(UtilStr::ConvStdStr2FString(const_cast<std::string&>(this->mPath)));
+	this->mAssetRef.SetPath(UtilStr::ConvStdStr2FString(const_cast<std::string&>(this->mPath)));
 
-	GMyStreamableManager->RequestAsyncLoad(mAssetRef, FStreamableDelegate::CreateRaw(this, &ClassAssetLoadItem::onAsyncLoaded));
+	GMyStreamableManager->RequestAsyncLoad(this->mAssetRef, FStreamableDelegate::CreateRaw(this, &ClassAssetLoadItem::onAsyncLoaded));
 }
 
 void ClassAssetLoadItem::onAsyncLoaded()
 {
-	//this->mResObj = Cast<UClass>GMyStreamableManager->GetStreamed(this->mPath);
-	//this->mResObj = Cast<UClass>(mAssetRef.ResolveObject());
+	//this->mResObject = Cast<UClass>GMyStreamableManager->GetStreamed(this->mPath);
+	//this->mResObject = Cast<UClass>(mAssetRef.ResolveObject());
 	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
 	// OnGameplayCueNotifyAsyncLoadComplete
-	this->mResObj = UtilEngineWrap::FindObject<UClass>(nullptr, *mAssetRef.ToString());
+	this->mResObject = UtilEngineWrap::FindObject<UClass>(nullptr, *this->mAssetRef.ToString());
 
-	//if (nullptr != mResObj)
-	if (ensure(this->mResObj))
+	//if (nullptr != this->mResObject)
+	if (ensure(this->mResObject))
 	{
 		this->mNonRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
 	}

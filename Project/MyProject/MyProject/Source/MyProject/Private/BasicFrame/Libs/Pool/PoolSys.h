@@ -3,7 +3,7 @@
 
 #include "LockList.h"
 
-class IRecycle;
+class IRecycleObject;
 
 /**
  * @brief 对象池
@@ -11,7 +11,7 @@ class IRecycle;
 class PoolSys
 {
 protected:
-	LockList<IRecycle*>* mPoolList;
+	LockList<IRecycleObject*>* mPoolList;
 
 public:
 	PoolSys();
@@ -44,7 +44,7 @@ public:
 		return retObj;
 	}
 
-	void deleteObj(IRecycle* obj);
+	void deleteObj(IRecycleObject* obj);
 };
 
 #endif

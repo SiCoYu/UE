@@ -12,7 +12,7 @@ class ClassAssetResItem : public ResItem
 	M_DECLARE_SUPER_KW(ResItem)
 
 protected:
-	UClass* mResObj;		// uasset 类型的资源
+	UClass* mResObject;		// uasset 类型的资源
 
 public:
 	ClassAssetResItem();

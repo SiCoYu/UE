@@ -2,7 +2,7 @@
 #define __ObjectAssetLoadItem_H
 
 #include "LoadItem.h"
-#include "CoreUObject.h"	// UClass 
+#include "CoreUObject.h"	// UObject 
 #include "BaseClassDef.h"	// M_DECLARE_SUPER_KW
 
 /**
@@ -13,7 +13,7 @@ class ObjectAssetLoadItem : public LoadItem
 	M_DECLARE_SUPER_KW(LoadItem)
 
 protected:
-	UClass* mResObj;		// uasset 类型的资源
+	UObject* mResObject;		// uasset 类型的资源
 
 protected:
 	//void loadFromDefaultAssetBundle()
@@ -48,14 +48,16 @@ protected:
 
 	//	nonRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
 	//}
+	void syncLoad();
+	void asyncLoad();
 
 public:
 	ObjectAssetLoadItem();
 	virtual ~ObjectAssetLoadItem();
 
 public:
-	UClass* getResObj();
-	void setResObj(UClass* value);
+	UClass* getObject();
+	void setObject(UObject* value);
 	virtual void load() override;
     // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
 	virtual void unload() override;

@@ -330,7 +330,7 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 		if (this->mCurNum < this->mMaxParral)
 		{
 			this->mLoadData->mPath2LDItem[param->mPath] = loadItem;
-			this->mLoadData->mPath2LDItem[param->mPath]->load();
+			loadItem->load();
 			this->mCurNum += 1;
 		}
 		else

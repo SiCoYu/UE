@@ -1,7 +1,7 @@
 ﻿#ifndef __LoadParam_H
 #define __LoadParam_H
 
-#include "IRecycle.h"
+#include "IRecycleObject.h"
 #include "ResPackType.h"
 #include "ResLoadType.h"
 #include <string>
@@ -10,7 +10,7 @@
 class ResItem;
 class ResInsBase;
 
-class LoadParam : public IRecycle
+class LoadParam : public IRecycleObject
 {
 public:
 	std::string mPath;                  // 资源路径，传递进来都是完成的路径，都是相对 Prefabs\Resources 开始的，例如 Table\CardBase_client.txt，然后内部解析后

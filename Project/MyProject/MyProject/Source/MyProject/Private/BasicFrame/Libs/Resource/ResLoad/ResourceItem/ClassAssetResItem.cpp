@@ -8,7 +8,7 @@
 
 ClassAssetResItem::ClassAssetResItem()
 {
-	this->mResObj = nullptr;
+	this->mResObject = nullptr;
 }
 
 ClassAssetResItem::~ClassAssetResItem()
@@ -20,9 +20,9 @@ void ClassAssetResItem::init(LoadItem* item)
 {
 	Super::init(item);
 
-	this->mResObj = Cast<UClass>(item->getObject());
+	this->mResObject = Cast<UClass>(item->getObject());
 
-	if (nullptr != this->mResObj)
+	if (nullptr != this->mResObject)
 	{
 		this->mRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
 	}
@@ -36,7 +36,7 @@ void ClassAssetResItem::init(LoadItem* item)
 
 UObject* ClassAssetResItem::getObject(std::string resName)
 {
-	return this->mResObj;
+	return this->mResObject;
 }
 
 void ClassAssetResItem::unload()
