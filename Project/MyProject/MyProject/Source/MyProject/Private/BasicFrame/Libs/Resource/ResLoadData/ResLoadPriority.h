@@ -6,10 +6,10 @@
  */
 enum class ResLoadPriority
 {
-    eRLP_Low_1000,          // 普通低
-    eRLP_Middle_1000,       // 普通权重
-    eRLP_High_1000,         // 普通高
-    eRLP_Total,             // 总
-}
+	eRLP_Low_1000,          // 普通低
+	eRLP_Middle_1000,       // 普通权重
+	eRLP_High_1000,         // 普通高
+	eRLP_Total,             // 总
+};
 
 #endif
