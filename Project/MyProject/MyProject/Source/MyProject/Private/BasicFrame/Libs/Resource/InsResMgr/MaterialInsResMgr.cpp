@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "MaterialInsResMgr.h"
-#include "MatInsRes.h"
+#include "MaterialInsRes.h"
 
 MaterialInsResMgr::MaterialInsResMgr()
 {

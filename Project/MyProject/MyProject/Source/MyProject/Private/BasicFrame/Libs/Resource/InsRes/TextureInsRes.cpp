@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "MaterialInsRes.h"
+#include "TextureInsRes.h"
 #include "ResItem.h"
 #include "Engine/Texture.h"	// UTexture
 
