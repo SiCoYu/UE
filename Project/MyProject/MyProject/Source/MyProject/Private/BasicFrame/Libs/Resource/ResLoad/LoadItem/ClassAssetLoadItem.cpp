@@ -29,7 +29,7 @@ void ClassAssetLoadItem::syncLoad()
 {
 	this->mResObject = GMyStreamableManager->SynchronousLoadType<UClass>(this->mPath);
 
-	if (nullptr != mResObject)
+	if (nullptr != this->mResObject)
 	{
 		this->mNonRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
 	}
