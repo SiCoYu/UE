@@ -51,7 +51,7 @@ void ObjectAssetLoadItem::asyncLoad()
 void ObjectAssetLoadItem::onAsyncLoaded()
 {
 	//this->mResObject = Cast<UClass>GMyStreamableManager->GetStreamed(this->mPath);
-	//this->mResObject = Cast<UClass>(mAssetRef.ResolveObject());
+	//this->mResObject = Cast<UClass>(this->mAssetRef.ResolveObject());
 	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
 	// OnGameplayCueNotifyAsyncLoadComplete
 	this->mResObject = UtilEngineWrap::FindObject<UObject>(nullptr, *this->mAssetRef.ToString());

@@ -1,10 +1,10 @@
 ﻿#include "MyProject.h"
+#include "ClassAssetResItem.h"
 #include "LoadItem.h"
 #include "UObject/Class.h"	// UClass
 #include "RefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
 #include "ResEventDispatch.h"
-#include "ClassAssetResItem.h"
 
 ClassAssetResItem::ClassAssetResItem()
 {
@@ -34,17 +34,17 @@ void ClassAssetResItem::init(LoadItem* item)
 	this->mRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }
 
+void ClassAssetResItem::setPrefabName(std::string prefabName)
+{
+
+}
+
 UObject* ClassAssetResItem::getObject(std::string resName)
 {
 	return this->mResObject;
 }
 
 void ClassAssetResItem::unload()
-{
-
-}
-
-void ClassAssetResItem::setPrefabName(std::string prefabName)
 {
 
 }
