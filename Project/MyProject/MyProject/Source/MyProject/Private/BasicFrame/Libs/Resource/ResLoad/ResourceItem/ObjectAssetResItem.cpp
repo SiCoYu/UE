@@ -39,7 +39,7 @@ void ObjectAssetResItem::setPrefabName(std::string prefabName)
 
 }
 
-UObject* ClassAssetResItem::getObject(std::string resName)
+UObject* ObjectAssetResItem::getObject(std::string resName)
 {
 	return this->mResObject;
 }
