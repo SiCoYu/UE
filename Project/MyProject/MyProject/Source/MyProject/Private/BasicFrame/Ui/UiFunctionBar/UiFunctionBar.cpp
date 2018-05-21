@@ -119,7 +119,12 @@ void UUiFunctionBar::onTestLoadMaterialBtnTouch()
 
 void UUiFunctionBar::onTestChangeMaterialBtnTouch()
 {
+	AuxMaterialLoader auxMaterialLoader;
+	auxMaterialLoader.syncLoad("Material'/Game/MyAsset/Materials/TestMaterial.TestMaterial'");
 
+	APawn* actor = UtilEngineWrap::getFirstCharacter();
+	UStaticMeshComponent* actorCom = UtilEngineWrap::getComponentByClass<UStaticMeshComponent>(actor);
+	UtilEngineWrap::SetMaterial(UStaticMeshComponent, 0, auxMaterialLoader.getMaterialInterface());
 }
 
 void UUiFunctionBar::onLevelLoaded()
