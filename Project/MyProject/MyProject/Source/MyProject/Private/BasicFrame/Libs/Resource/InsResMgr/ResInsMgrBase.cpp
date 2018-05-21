@@ -114,22 +114,41 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 		if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 		{
 			this->mPath2ResDic[path]->init(res);
+
 			if (this->mPath2ResDic[path]->getIsOrigResNeedImmeUnload())
 			{
 				// 卸载资源
-				GResLoadMgr->unload(path, MakeEventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
+				GResLoadMgr->unload(
+					path, 
+					MakeEventDispatchDelegate(
+						this, 
+						&ResInsMgrBase::onLoadEventHandle
+					)
+				);
 			}
 		}
 		else
 		{
 			this->mPath2ResDic[path]->failed(res);
-			GResLoadMgr->unload(path, EventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
+			GResLoadMgr->unload(
+				path, 
+				EventDispatchDelegate(
+					this, 
+					&ResInsMgrBase::onLoadEventHandle
+				)
+			);
 		}
 	}
 	else
 	{
 		GLogSys->log(UtilStr::Format("Path can not find {0}", path));
-		GResLoadMgr->unload(path, MakeEventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
+		GResLoadMgr->unload(
+			path, 
+			MakeEventDispatchDelegate(
+				this, 
+				&ResInsMgrBase::onLoadEventHandle
+			)
+		);
 	}
 }
 

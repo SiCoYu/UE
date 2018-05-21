@@ -45,19 +45,19 @@ void UUiFunctionBar::onReady()
 		this, 
 		"onTestComBtnTouch"
 	);
-	this->mTestComBtn->addUObjectButtonClickHandle(
+	this->mTestLoadTextureBtn->addUObjectButtonClickHandle(
 		this->mWinRender->mUiRoot, 
 		FunctionBarCV_TestLoadTextureBtn,
 		this, 
 		"onTestLoadTextureBtnTouch"
 	);
-	this->mTestComBtn->addUObjectButtonClickHandle(
+	this->mTestLoadMaterialBtn->addUObjectButtonClickHandle(
 		this->mWinRender->mUiRoot, 
 		FunctionBarCV_TestLoadMaterialBtn,
 		this, 
 		"onTestLoadMaterialBtnTouch"
 	);
-	this->mTestComBtn->addUObjectButtonClickHandle(
+	this->mTestChangeMaterialBtn->addUObjectButtonClickHandle(
 		this->mWinRender->mUiRoot, 
 		FunctionBarCV_TestChangeMaterialBtn,
 		this, 
