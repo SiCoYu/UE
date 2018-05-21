@@ -1,5 +1,9 @@
 ﻿#include "MyProject.h"
 #include "ObjectAssetLoadItem.h"
+#include "Prequisites.h"
+#include "CoreUObject.h"	// UObject
+#include "NonRefCountResLoadResultNotify.h"		// NonRefCountResLoadResultNotify
+#include "UtilEngineWrap.h"
 
 ObjectAssetLoadItem::ObjectAssetLoadItem()
 {
@@ -11,7 +15,7 @@ ObjectAssetLoadItem::~ObjectAssetLoadItem()
 	
 }
 
-UClass* ObjectAssetLoadItem::getObject()
+UObject* ObjectAssetLoadItem::getObject()
 {
 	return this->mResObject;
 }
@@ -41,7 +45,7 @@ void ObjectAssetLoadItem::asyncLoad()
 {
 	this->mAssetRef.SetPath(UtilStr::ConvStdStr2FString(const_cast<std::string&>(this->mPath)));
 
-	GMyStreamableManager->RequestAsyncLoad(this->mAssetRef, FStreamableDelegate::CreateRaw(this, &ClassAssetLoadItem::onAsyncLoaded));
+	GMyStreamableManager->RequestAsyncLoad(this->mAssetRef, FStreamableDelegate::CreateRaw(this, &ObjectAssetLoadItem::onAsyncLoaded));
 }
 
 void ObjectAssetLoadItem::onAsyncLoaded()

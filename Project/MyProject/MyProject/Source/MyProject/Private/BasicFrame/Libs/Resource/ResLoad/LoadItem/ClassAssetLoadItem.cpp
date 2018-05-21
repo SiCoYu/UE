@@ -1,9 +1,9 @@
 ﻿#include "MyProject.h"
+#include "ClassAssetLoadItem.h"
 #include "Prequisites.h"
 #include "UObject/Class.h"	// UClass
 #include "NonRefCountResLoadResultNotify.h"		// NonRefCountResLoadResultNotify
 #include "UtilEngineWrap.h"
-#include "ClassAssetLoadItem.h"
 
 ClassAssetLoadItem::ClassAssetLoadItem()
 {
