@@ -1,23 +1,23 @@
 ﻿#include "MyProject.h"
 #include "IRecycleObject.h"
-#include "PoolSys.h"
+#include "ObjectPoolGroup.h"
 
-PoolSys::PoolSys()
+ObjectPoolGroup::ObjectPoolGroup()
 {
 	this->mPoolList = new LockList<IRecycleObject*>("PoolList");
 }
 
-void PoolSys::init()
+void ObjectPoolGroup::init()
 {
 
 }
 
-void PoolSys::dispose()
+void ObjectPoolGroup::dispose()
 {
 
 }
 
-void PoolSys::deleteObj(IRecycleObject* obj)
+void ObjectPoolGroup::deleteObj(IRecycleObject* obj)
 {
 	//if (this->mPoolList.IndexOf(obj) == -1)
 	//{

@@ -1,5 +1,5 @@
-﻿#ifndef __PoolSys_H
-#define __PoolSys_H
+﻿#ifndef __ObjectPool_H
+#define __ObjectPool_H
 
 #include "LockList.h"
 
@@ -8,13 +8,13 @@ class IRecycleObject;
 /**
  * @brief 对象池
  */
-class PoolSys
+class ObjectPool
 {
 protected:
 	LockList<IRecycleObject*>* mPoolList;
 
 public:
-	PoolSys();
+	ObjectPool();
 
 	void init();
 	void dispose();
