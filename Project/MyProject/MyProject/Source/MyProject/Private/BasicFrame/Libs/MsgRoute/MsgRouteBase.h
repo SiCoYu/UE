@@ -1,12 +1,12 @@
 ﻿#ifndef __MsgRouteBase_H
 #define __MsgRouteBase_H
 
-#include "IRecycleObject.h"
+#include "IPoolObject.h"
 #include "IDispatchObject.h"
 #include "MsgRouteType.h"
 #include "MsgRouteId.h"
 
-class MsgRouteBase : public IRecycleObject, public IDispatchObject
+class MsgRouteBase : public IPoolObject, public IDispatchObject
 {
 public:
 	MsgRouteType mMsgType;

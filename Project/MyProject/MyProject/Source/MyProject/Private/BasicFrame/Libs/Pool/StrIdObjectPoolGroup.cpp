@@ -1,10 +1,10 @@
 ﻿#include "MyProject.h"
-#include "IRecycleObject.h"
+#include "IPoolObject.h"
 #include "StrIdObjectPoolGroup.h"
 
 StrIdObjectPoolGroup::StrIdObjectPoolGroup()
 {
-	this->mPoolList = new LockList<IRecycleObject*>("PoolList");
+	this->mPoolList = new LockList<IPoolObject*>("PoolList");
 }
 
 void StrIdObjectPoolGroup::init()
@@ -17,7 +17,7 @@ void StrIdObjectPoolGroup::dispose()
 
 }
 
-void StrIdObjectPoolGroup::deleteObj(IRecycleObject* obj)
+void StrIdObjectPoolGroup::deleteObj(IPoolObject* obj)
 {
 	//if (this->mPoolList.IndexOf(obj) == -1)
 	//{
