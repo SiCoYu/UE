@@ -30,7 +30,7 @@ namespace ToolKit
             //textWriter.WriteValue(fileMD5);
             //textWriter.WriteEndObject();
 
-            // 检查选中的引擎根目录,其目录下是否包含有UnralPak.exe文件  
+            // 检查选中的引擎根目录,其目录下是否包含有UnrealPak.exe文件  
             if (!File.Exists(TextBox_MultipleEnginePath.Text + @"\Engine\Binaries\Win64\UnrealPak.exe"))
             {
                 MessageBox.Show("打包失败，没有找到 UnrealPak.exe，引擎路径不存在！");
