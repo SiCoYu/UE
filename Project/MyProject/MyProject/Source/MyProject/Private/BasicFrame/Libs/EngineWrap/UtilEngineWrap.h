@@ -416,6 +416,9 @@ public:
 	static void setActorRotate(AActor* actor, FRotator NewRotation);
 	static void setActorScale(AActor* actor, FVector NewScale3D);
 
+	void AddActorLocalOffset(AActor* actor, FVector DeltaLocation, bool bSweep = false, FHitResult* OutSweepHitResult = nullptr, ETeleportType Teleport = ETeleportType::None);
+	void AddActorLocalRotation(AActor* actor, const FQuat& DeltaRotation, bool bSweep = false, FHitResult* OutSweepHitResult = nullptr, ETeleportType Teleport = ETeleportType::None);
+
 	static FVector getActorPos(AActor* actor);
 	static FRotator getActorRotate(AActor* actor);
 	static FVector getActorScale(AActor* actor);

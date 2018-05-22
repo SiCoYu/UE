@@ -1080,6 +1080,16 @@ FVector UtilEngineWrap::getActorScale(AActor* actor)
 	return actor->GetActorScale();
 }
 
+void AddActorLocalOffset(AActor* actor, FVector DeltaLocation, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport)
+{
+	actor->AddActorLocalOffset(DeltaLocation, bSweep, OutSweepHitResult, Teleport);
+}
+
+void AddActorLocalRotation(AActor* actor, const FQuat& DeltaRotation, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport)
+{
+	actor->AddActorLocalRotation(DeltaRotation, bSweep, OutSweepHitResult, Teleport);
+}
+
 FTransform UtilEngineWrap::getActorTransform(AActor* actor)
 {
 	return actor->GetActorTransform();
