@@ -124,7 +124,7 @@ void UUiFunctionBar::onTestChangeMaterialBtnTouch()
 
 	APawn* actor = UtilEngineWrap::getFirstCharacter();
 	UStaticMeshComponent* actorCom = UtilEngineWrap::getComponentByClass<UStaticMeshComponent>(actor);
-	UtilEngineWrap::SetMaterial(UStaticMeshComponent, 0, auxMaterialLoader.getMaterialInterface());
+	UtilEngineWrap::SetMaterial(actorCom, 0, auxMaterialLoader.getMaterialInterface());
 }
 
 void UUiFunctionBar::onLevelLoaded()
