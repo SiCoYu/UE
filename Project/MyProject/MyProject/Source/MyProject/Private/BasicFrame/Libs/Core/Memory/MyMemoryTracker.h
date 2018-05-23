@@ -20,40 +20,36 @@ protected:
 
 	void reportLeaks();
 
-	// protected ctor
 	MemoryTracker()
 		: mLeakFileName("OgreLeaks.log"), mDumpToStdOut(true),
 		mTotalAllocations(0), mRecordEnable(true)
 	{
 	}
-public:
 
-	/** Set the name of the report file that will be produced on exit. */
+public:
 	void setReportFileName(const std::string& name)
 	{
 		mLeakFileName = name;
 	}
-	/// Return the name of the file which will contain the report at exit
+
 	const std::string& getReportFileName() const
 	{
 		return mLeakFileName;
 	}
-	/// Sets whether the memory report should be sent to stdout
+
 	void setReportToStdOut(bool rep)
 	{
 		mDumpToStdOut = rep;
 	}
-	/// Gets whether the memory report should be sent to stdout
+
 	bool getReportToStdOut() const
 	{
 		return mDumpToStdOut;
 	}
 
 
-
-	/// Get the total amount of memory allocated currently.
 	size_t getTotalMemoryAllocated() const;
-	/// Get the amount of memory allocated in a given pool
+
 	size_t getMemoryAllocatedForPool(unsigned int pool) const;
 
 
