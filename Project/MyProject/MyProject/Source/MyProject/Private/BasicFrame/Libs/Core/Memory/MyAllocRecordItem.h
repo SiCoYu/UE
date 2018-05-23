@@ -1,25 +1,23 @@
 #pragma once
 
-#include <new>	// nothrow_t
-#include <stdlib.h>	// malloc, free
+#include <string>
 
-//#ifdef new
-//#undef new
-//#endif
-//
-//#ifdef delete
-//#undef delete
-//#endif
+struct MyAllocRecordItem
+{
+protected:
+	size_t bytes;
+	unsigned int pool;
+	std::string filename;
+	size_t line;
+	std::string function;
 
-// error C4595: 'operator new': non-member operator new or delete functions may not be declared inline
-//__forceinline void* operator new(size_t size);
-//__forceinline void* operator new(size_t size, const std::nothrow_t& noThrow);
-//__forceinline void* operator new[](size_t size);
-//__forceinline void* operator new[](size_t size, const std::nothrow_t& noThrow);
-//__forceinline void operator delete(void* ptr);
-//__forceinline void operator delete[](void* ptr);
-
-#define my_new(type) new type
-#define my_new_array(type,size) new type[size]
-#define my_delete(ptr) delete ptr
-#define my_delete_array(ptr) delete[] ptr
+public:
+	MyAllocRecordItem();
+	MyAllocRecordItem(
+		size_t sz, 
+		unsigned int p, 
+		const char* file, 
+		size_t ln, 
+		const char* func
+	);
+};

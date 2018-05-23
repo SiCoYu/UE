@@ -1,30 +1,13 @@
 #pragma once
 
+#include "MyAllocRecordItem.h"
+
 /**
  * @brief 检查并且记录内存使用，主要调试内存泄漏
  */
 class MyMemoryTracker
 {
-	// Allocation record
-	struct Alloc
-	{
-		size_t bytes;
-		unsigned int pool;
-		std::string filename;
-		size_t line;
-		std::string function;
-
-		Alloc() :bytes(0), line(0) {}
-		Alloc(size_t sz, unsigned int p, const char* file, size_t ln, const char* func)
-			:bytes(sz), pool(p), line(ln)
-		{
-			if (file)
-				filename = file;
-			if (func)
-				function = func;
-		}
-	};
-
+protected:
 	std::string mLeakFileName;
 	bool mDumpToStdOut;
 	typedef unordered_map<void*, Alloc>::type AllocationMap;

@@ -3,23 +3,69 @@
 #include <new>	// nothrow_t
 #include <stdlib.h>	// malloc, free
 
-//#ifdef new
-//#undef new
-//#endif
-//
-//#ifdef delete
-//#undef delete
-//#endif
+class _OgreExport AllocatedObject
+{
+public:
+	explicit AllocatedObject()
+	{ }
 
-// error C4595: 'operator new': non-member operator new or delete functions may not be declared inline
-//__forceinline void* operator new(size_t size);
-//__forceinline void* operator new(size_t size, const std::nothrow_t& noThrow);
-//__forceinline void* operator new[](size_t size);
-//__forceinline void* operator new[](size_t size, const std::nothrow_t& noThrow);
-//__forceinline void operator delete(void* ptr);
-//__forceinline void operator delete[](void* ptr);
+	~AllocatedObject()
+	{ }
 
-#define my_new(type) new type
-#define my_new_array(type,size) new type[size]
-#define my_delete(ptr) delete ptr
-#define my_delete_array(ptr) delete[] ptr
+	/// operator new, with debug line info
+	void* operator new(size_t sz, const char* file, int line, const char* func)
+	{
+		return Alloc::allocateBytes(sz, file, line, func);
+	}
+
+	void* operator new(size_t sz)
+	{
+		return Alloc::allocateBytes(sz);
+	}
+
+	/// placement operator new
+	void* operator new(size_t sz, void* ptr)
+	{
+		(void)sz;
+		return ptr;
+	}
+
+	/// array operator new, with debug line info
+	void* operator new[](size_t sz, const char* file, int line, const char* func)
+	{
+		return Alloc::allocateBytes(sz, file, line, func);
+	}
+
+		void* operator new[](size_t sz)
+	{
+		return Alloc::allocateBytes(sz);
+	}
+
+		void operator delete(void* ptr)
+	{
+		Alloc::deallocateBytes(ptr);
+	}
+
+	// Corresponding operator for placement delete (second param same as the first)
+	void operator delete(void* ptr, void*)
+	{
+		Alloc::deallocateBytes(ptr);
+	}
+
+	// only called if there is an exception in corresponding 'new'
+	void operator delete(void* ptr, const char*, int, const char*)
+	{
+		Alloc::deallocateBytes(ptr);
+	}
+
+	void operator delete[](void* ptr)
+	{
+		Alloc::deallocateBytes(ptr);
+	}
+
+
+		void operator delete[](void* ptr, const char*, int, const char*)
+	{
+		Alloc::deallocateBytes(ptr);
+	}
+};
