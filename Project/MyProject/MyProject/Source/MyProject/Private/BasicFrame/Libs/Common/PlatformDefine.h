@@ -43,4 +43,16 @@
 	#undef	MY_UE_BUILD_TEST
 #endif
 
+// 定义平台类型
+#define MY_PLATFORM_WIN32 0
+#define MY_PLATFORM_WINRT 1
+#define MY_PLATFORM_ANDROID 2
+#define MY_PLATFORM_MAC 3
+#define MY_PLATFORM_IOS 4
+
+#define MY_PLATFORM MY_PLATFORM_WIN32
+
+#define MY_DEBUG_MODE 1
+#define MY_MEMORY_TRACKER 1
+
 #endif

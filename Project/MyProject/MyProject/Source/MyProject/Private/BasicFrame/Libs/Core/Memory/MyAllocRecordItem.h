@@ -5,17 +5,15 @@
 struct MyAllocRecordItem
 {
 protected:
-	size_t bytes;
-	unsigned int pool;
-	std::string filename;
-	size_t line;
-	std::string function;
+	size_t mBytes;
+	std::string mFileName;
+	size_t mLine;
+	std::string mFunction;
 
 public:
 	MyAllocRecordItem();
 	MyAllocRecordItem(
-		size_t sz, 
-		unsigned int p, 
+		size_t sz,
 		const char* file, 
 		size_t ln, 
 		const char* func

@@ -2,14 +2,16 @@
 #include "MyMemoryTracker.h"
 
 #include <iostream>
+#include <sstream>
+#include <assert.h>
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32 || OGRE_PLATFORM == OGRE_PLATFORM_WINRT
+#if MY_PLATFORM == MY_PLATFORM_WIN32 || MY_PLATFORM == MY_PLATFORM_WINRT
 #   include <windows.h>
-#   define Ogre_OutputCString(str) ::OutputDebugStringA(str)
-#   define Ogre_OutputWString(str) ::OutputDebugStringW(str)
+#   define My_OutputCString(str) ::OutputDebugStringA(str)
+#   define My_OutputWString(str) ::OutputDebugStringW(str)
 #else
-#   define Ogre_OutputCString(str) std::cerr << str
-#   define Ogre_OutputWString(str) std::cerr << str
+#   define My_OutputCString(str) std::cerr << str
+#   define My_OutputWString(str) std::cerr << str
 #endif
 
 MyMemoryTracker& MyMemoryTracker::get()
@@ -18,73 +20,107 @@ MyMemoryTracker& MyMemoryTracker::get()
 	return GMemoryTracker;
 }
 
-void MemoryTracker::_recordAlloc(void* ptr, size_t sz, unsigned int pool,
-	const char* file, size_t ln, const char* func)
+MyMemoryTracker::MyMemoryTracker()
+	: mLeakFileName("MyLeaks.log"), mDumpToStdOut(true),
+	mTotalAllocations(0), mRecordEnable(true)
 {
-	if (mRecordEnable)
-	{
-		OGRE_LOCK_AUTO_MUTEX;
-
-		assert(mAllocations.find(ptr) == mAllocations.end() && "Double allocation with same address - "
-			"this probably means you have a mismatched allocation / deallocation style, "
-			"check if you're are using OGRE_ALLOC_T / OGRE_FREE and OGRE_NEW_T / OGRE_DELETE_T consistently");
-
-		mAllocations[ptr] = Alloc(sz, pool, file, ln, func);
-		if (pool >= mAllocationsByPool.size())
-			mAllocationsByPool.resize(pool + 1, 0);
-		mAllocationsByPool[pool] += sz;
-		mTotalAllocations += sz;
-	}
-
 }
 
-void MemoryTracker::_recordDealloc(void* ptr)
+MyMemoryTracker::~MyMemoryTracker()
+{
+	reportLeaks();
+
+	mRecordEnable = false;
+}
+
+void MyMemoryTracker::setReportFileName(const std::string& name)
+{
+	mLeakFileName = name;
+}
+
+const std::string& MyMemoryTracker::getReportFileName() const
+{
+	return mLeakFileName;
+}
+
+void MyMemoryTracker::setReportToStdOut(bool rep)
+{
+	mDumpToStdOut = rep;
+}
+
+bool MyMemoryTracker::getReportToStdOut() const
+{
+	return mDumpToStdOut;
+}
+
+void MyMemoryTracker::setRecordEnable(bool recordEnable)
+{
+	mRecordEnable = recordEnable;
+}
+
+bool MyMemoryTracker::getRecordEnable() const
+{
+	return mRecordEnable;
+}
+
+void MyMemoryTracker::_recordAlloc(
+	void* ptr, 
+	size_t sz,
+	const char* file,
+	size_t ln, 
+	const char* func
+)
 {
 	if (mRecordEnable)
 	{
-		// deal cleanly with null pointers
+		assert(mAllocations.find(ptr) == mAllocations.end() && "Double allocation with same address - ");
+
+		mAllocations[ptr] = MyAllocRecordItem(
+			sz, 
+			file, 
+			ln, 
+			func
+		);
+
+		mTotalAllocations += sz;
+	}
+}
+
+void MyMemoryTracker::_recordDealloc(void* ptr)
+{
+	if (mRecordEnable)
+	{
 		if (!ptr)
 			return;
 
-		OGRE_LOCK_AUTO_MUTEX;
-
 		AllocationMap::iterator i = mAllocations.find(ptr);
-		assert(i != mAllocations.end() && "Unable to locate allocation unit - "
-			"this probably means you have a mismatched allocation / deallocation style, "
-			"check if you're are using OGRE_ALLOC_T / OGRE_FREE and OGRE_NEW_T / OGRE_DELETE_T consistently");
-		// update category stats
-		mAllocationsByPool[i->second.pool] -= i->second.bytes;
-		// global stats
+		assert(i != mAllocations.end() && "Unable to locate allocation unit - ");
+
 		mTotalAllocations -= i->second.bytes;
 		mAllocations.erase(i);
 	}
 }
 
-size_t MemoryTracker::getTotalMemoryAllocated() const
+size_t MyMemoryTracker::getTotalMemoryAllocated() const
 {
 	return mTotalAllocations;
 }
 
-size_t MemoryTracker::getMemoryAllocatedForPool(unsigned int pool) const
-{
-	return mAllocationsByPool[pool];
-}
-
-void MemoryTracker::reportLeaks()
+void MyMemoryTracker::reportLeaks()
 {
 	if (mRecordEnable)
 	{
-		StringStream os;
+		std::stringstream os;
 
 		if (mAllocations.empty())
 		{
-			os << "Ogre Memory: No memory leaks" << std::endl;
+			os << "My Memory: No memory leaks" << std::endl;
 		}
 		else
 		{
-			os << "Ogre Memory: Detected memory leaks !!! " << std::endl;
-			os << "Ogre Memory: (" << mAllocations.size() << ") Allocation(s) with total " << mTotalAllocations << " bytes." << std::endl;
-			os << "Ogre Memory: Dumping allocations -> " << std::endl;
+			os << "My Memory: Detected memory leaks !!! " << std::endl;
+			os << "My Memory: (" << mAllocations.size() << ") Allocation(s) with total " << mTotalAllocations << " bytes." << std::endl;
+			os << "My Memory: Dumping allocations -> " << std::endl;
 
 
 			for (AllocationMap::const_iterator i = mAllocations.begin(); i != mAllocations.end(); ++i)
@@ -102,7 +138,7 @@ void MemoryTracker::reportLeaks()
 		}
 
 		if (mDumpToStdOut)
-			Ogre_OutputCString(os.str().c_str());
+			My_OutputCString(os.str().c_str());
 
 		std::ofstream of;
 		of.open(mLeakFileName.c_str());
