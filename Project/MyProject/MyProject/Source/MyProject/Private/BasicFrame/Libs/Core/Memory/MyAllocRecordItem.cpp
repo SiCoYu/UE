@@ -2,23 +2,22 @@
 #include "MyAllocRecordItem.h"
 
 MyAllocRecordItem::MyAllocRecordItem()
-	:bytes(0), 
-	line(0)
+	:mBytes(0),
+	 mLine(0)
 {
 
 }
 
 MyAllocRecordItem::MyAllocRecordItem(
 	size_t sz, 
-	unsigned int p, 
 	const char* file, 
 	size_t ln, 
 	const char* func
 )
-	:bytes(sz), pool(p), line(ln)
+	:mBytes(sz), mLine(ln)
 {
 	if (file)
-		filename = file;
+		mFileName = file;
 	if (func)
-		function = func;
+		mFunction = func;
 }

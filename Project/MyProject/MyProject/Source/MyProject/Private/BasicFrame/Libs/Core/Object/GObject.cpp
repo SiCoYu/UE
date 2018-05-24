@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "GObject.h"
 #include "TypeDef.h"
-#include "MyMemory.h"
+#include "MyMemoryAlloc.h"
 #include "MClassFactory.h"
 
 M_IMPLEMENT_ROOT_CLASS(GObject)

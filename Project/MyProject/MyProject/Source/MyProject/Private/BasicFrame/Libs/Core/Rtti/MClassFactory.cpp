@@ -2,7 +2,7 @@
 #include "MClassFactory.h"
 #include "GObject.h"
 #include "MClassInfo.h"
-#include "MyMemory.h"
+#include "MyMemoryAlloc.h"
 #include "TypeDef.h"
 
 MClassFactory* MClassFactory::Singleton = 0;

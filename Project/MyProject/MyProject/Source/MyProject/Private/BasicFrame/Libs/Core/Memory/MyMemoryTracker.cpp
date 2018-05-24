@@ -1,7 +1,8 @@
 #include "MyProject.h"
 #include "MyMemoryTracker.h"
 
-#include <iostream>
+//#include <iostream>
+#include <fstream>	// ofstream
 #include <sstream>
 #include <assert.h>
 
@@ -96,7 +97,7 @@ void MyMemoryTracker::_recordDealloc(void* ptr)
 		AllocationMap::iterator i = mAllocations.find(ptr);
 		assert(i != mAllocations.end() && "Unable to locate allocation unit - ");
 
-		mTotalAllocations -= i->second.bytes;
+		mTotalAllocations -= i->second.mBytes;
 		mAllocations.erase(i);
 	}
 }
@@ -122,16 +123,15 @@ void MyMemoryTracker::reportLeaks()
 			os << "My Memory: (" << mAllocations.size() << ") Allocation(s) with total " << mTotalAllocations << " bytes." << std::endl;
 			os << "My Memory: Dumping allocations -> " << std::endl;
 
-
 			for (AllocationMap::const_iterator i = mAllocations.begin(); i != mAllocations.end(); ++i)
 			{
-				const Alloc& alloc = i->second;
-				if (!alloc.filename.empty())
-					os << alloc.filename;
+				const MyAllocRecordItem& alloc = i->second;
+				if (!alloc.mFileName.empty())
+					os << alloc.mFileName;
 				else
 					os << "(unknown source):";
 
-				os << "(" << alloc.line << ") : {" << alloc.bytes << " bytes}" << " function: " << alloc.function << std::endl;
+				os << "(" << alloc.mLine << ") : {" << alloc.mBytes << " bytes}" << " function: " << alloc.mFunction << std::endl;
 
 			}
 			os << std::endl;

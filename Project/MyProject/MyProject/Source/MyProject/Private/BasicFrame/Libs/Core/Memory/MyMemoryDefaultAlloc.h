@@ -59,9 +59,8 @@ public:
         return std::numeric_limits<size_t>::max();
     }
 private:
-    NedAlignedAllocPolicy()
+	DefauleAlignedAllocPolicy()
     { }
 };
 
 #endif
-

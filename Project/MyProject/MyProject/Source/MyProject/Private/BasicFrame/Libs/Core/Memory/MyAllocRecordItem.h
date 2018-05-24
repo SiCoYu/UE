@@ -4,7 +4,7 @@
 
 struct MyAllocRecordItem
 {
-protected:
+public:
 	size_t mBytes;
 	std::string mFileName;
 	size_t mLine;
