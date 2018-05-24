@@ -1,12 +1,12 @@
 #include "MyProject.h"
 #include "MyMemoryAlloc.h"
 
-//void* operator new(size_t size)
-//{
-//	//return Memory::Alloc(Memory::ObjectHeap, size);
-//	void* ptr = malloc(size);
-//	return ptr;
-//}
+void* operator new(size_t size)
+{
+	//return Memory::Alloc(Memory::ObjectHeap, size);
+	void* ptr = malloc(size);
+	return ptr;
+}
 //
 //void* operator new(size_t size, const std::nothrow_t& noThrow)
 //{

@@ -4,23 +4,23 @@
 #include <stdlib.h>	// malloc, free
 #include "MyMemoryDefaultAlloc.h"
 
-class AllocatedObject
+class MyAllocatedObject
 {
 public:
-	explicit AllocatedObject()
+	explicit MyAllocatedObject()
 	{ }
 
-	~AllocatedObject()
+	~MyAllocatedObject()
 	{ }
 
 	void* operator new(size_t sz, const char* file, int line, const char* func)
 	{
-		return DefauleAllocPolicy::allocateBytes(sz, file, line, func);
+		return MyDefaultAllocPolicy::allocateBytes(sz, file, line, func);
 	}
 
 	void* operator new(size_t sz)
 	{
-		return DefauleAllocPolicy::allocateBytes(sz);
+		return MyDefaultAllocPolicy::allocateBytes(sz);
 	}
 
 	void* operator new(size_t sz, void* ptr)
@@ -31,36 +31,36 @@ public:
 
 	void* operator new[](size_t sz, const char* file, int line, const char* func)
 	{
-		return DefauleAllocPolicy::allocateBytes(sz, file, line, func);
+		return MyDefaultAllocPolicy::allocateBytes(sz, file, line, func);
 	}
 
 	void* operator new[](size_t sz)
 	{
-		return DefauleAllocPolicy::allocateBytes(sz);
+		return MyDefaultAllocPolicy::allocateBytes(sz);
 	}
 
 	void operator delete(void* ptr)
 	{
-		DefauleAllocPolicy::deallocateBytes(ptr);
+		MyDefaultAllocPolicy::deallocateBytes(ptr);
 	}
 
 	void operator delete(void* ptr, void*)
 	{
-		DefauleAllocPolicy::deallocateBytes(ptr);
+		MyDefaultAllocPolicy::deallocateBytes(ptr);
 	}
 
 	void operator delete(void* ptr, const char*, int, const char*)
 	{
-		DefauleAllocPolicy::deallocateBytes(ptr);
+		MyDefaultAllocPolicy::deallocateBytes(ptr);
 	}
 
 	void operator delete[](void* ptr)
 	{
-		DefauleAllocPolicy::deallocateBytes(ptr);
+		MyDefaultAllocPolicy::deallocateBytes(ptr);
 	}
 
 	void operator delete[](void* ptr, const char*, int, const char*)
 	{
-		DefauleAllocPolicy::deallocateBytes(ptr);
+		MyDefaultAllocPolicy::deallocateBytes(ptr);
 	}
 };
