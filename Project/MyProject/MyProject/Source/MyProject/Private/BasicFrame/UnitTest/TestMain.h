@@ -1,13 +1,15 @@
 #ifndef __TestMain_H
 #define __TestMain_H
 
+#include "GObject.h"
+
 class TestExtern;
 class TestSocket;
 class TestUi;
 class TestDownload;
 class TestLuaBind;
 
-class TestMain
+class TestMain : public GObject
 {
 public:
 	TestExtern* mTestExtern;
