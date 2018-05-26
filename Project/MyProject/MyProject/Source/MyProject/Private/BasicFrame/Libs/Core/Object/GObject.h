@@ -1,16 +1,16 @@
 ﻿#pragma once
 
 #include <string>
-#include "GObjectBase.h"
+#include "MyAllocatedObject.h"
 #include "MClassInfo.h"
 #include "MMutex.h"
 #include "MClassMacros.h"
 #include "BaseClassDef.h"
 
-class GObject : public GObjectBase
+class GObject : public MyAllocatedObject
 {
 	M_DECLARE_CLASS(GObject)
-	M_DECLARE_SUPER_KW(GObjectBase)
+	M_DECLARE_SUPER_KW(MyAllocatedObject)
 
 public:
 	GObject();

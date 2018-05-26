@@ -202,7 +202,7 @@ void UiMgr::loadWidgetRes(UiFormId formId)
 
 		//this->loadFromFile(attrItem->mWidgetPath, MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
 
-		AuxMUiClassLoader* uiLoader = SAFE_NEW AuxMUiClassLoader();
+		AuxMUiClassLoader* uiLoader = MY_NEW AuxMUiClassLoader();
 
 		UForm* form = this->getForm<UForm>(formId);
 		form->setAuxMUIClassLoader(uiLoader);

@@ -22,7 +22,7 @@ namespace MyNS
 
 		if (this->isInvalid())
 		{
-			DownloadParam* param = new DownloadParam();
+			DownloadParam* param = MY_NEW DownloadParam();
 
 			param->setPath(origPath);
 			param->mLoadEventHandle = MakeEventDispatchDelegate(

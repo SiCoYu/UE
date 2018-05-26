@@ -5,6 +5,9 @@
 #include "AuxLevelLoader.h"
 #include "IDispatchObject.h"
 #include "SafePointer.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 SceneSys::SceneSys()
 {
@@ -23,8 +26,8 @@ void SceneSys::init()
 
 void SceneSys::dispose()
 {
-	SAFE_DELETE(this->mOnSceneLoadedDispatch);
-	SAFE_DELETE(this->mAuxLevelLoader);
+	MY_DELETE this->mOnSceneLoadedDispatch;
+	MY_DELETE this->mAuxLevelLoader;
 }
 
 Scene* SceneSys::getCurScene()
@@ -78,7 +81,7 @@ void SceneSys::loadSceneRes(std::string filename)
 
 	if (nullptr == this->mAuxLevelLoader)
 	{
-		this->mAuxLevelLoader = new MyNS::AuxLevelLoader();
+		this->mAuxLevelLoader = MY_NEW MyNS::AuxLevelLoader();
 	}
 
 	/*this->mAuxLevelLoader->asyncLoad(

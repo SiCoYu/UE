@@ -1,5 +1,9 @@
 #include "MyProject.h"
 #include "MyAllocatedObject.h"
+#include "MClassFactory.h"
+
+M_IMPLEMENT_CLASS(MyAllocatedObject, GObjectBase)
+M_REGISTER_CLASS(MyAllocatedObject)
 
 void* MyAllocatedObject::operator new(size_t sz, const char* file, int line, const char* func, MyMemoryConstructorFlag constructorFlag)
 {
@@ -27,27 +31,27 @@ void* MyAllocatedObject::operator new[](size_t sz, MyMemoryConstructorFlag const
 	return MyDefaultAllocPolicy::allocateBytes(sz);
 }
 
-void MyAllocatedObject::operator delete(void* ptr, MyMemoryConstructorFlag constructorFlag)
+void MyAllocatedObject::operator delete(void* ptr)
 {
 	MyDefaultAllocPolicy::deallocateBytes(ptr);
 }
 
-void MyAllocatedObject::operator delete(void* ptr, void*, MyMemoryConstructorFlag constructorFlag)
+void MyAllocatedObject::operator delete(void* ptr, void*)
 {
 	MyDefaultAllocPolicy::deallocateBytes(ptr);
 }
 
-void MyAllocatedObject::operator delete(void* ptr, const char*, int, const char*, MyMemoryConstructorFlag constructorFlag)
+void MyAllocatedObject::operator delete(void* ptr, const char*, int, const char*)
 {
 	MyDefaultAllocPolicy::deallocateBytes(ptr);
 }
 
-void MyAllocatedObject::operator delete[](void* ptr, MyMemoryConstructorFlag constructorFlag)
+void MyAllocatedObject::operator delete[](void* ptr)
 {
 	MyDefaultAllocPolicy::deallocateBytes(ptr);
 }
 
-void MyAllocatedObject::operator delete[](void* ptr, const char*, int, const char*, MyMemoryConstructorFlag constructorFlag)
+void MyAllocatedObject::operator delete[](void* ptr, const char*, int, const char*)
 {
 	MyDefaultAllocPolicy::deallocateBytes(ptr);
 }

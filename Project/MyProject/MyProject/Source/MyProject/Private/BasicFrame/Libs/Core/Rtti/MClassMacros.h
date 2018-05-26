@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PlatformDefine.h"
+
 #define M_DECLARE_CLASS(type) \
 public: \
 	/* \
@@ -22,6 +24,28 @@ public: \
 private:
 
 
+#define M_DECLARE_ROOT_CLASS(type) \
+public: \
+	/* \
+	void* operator new(size_t size) \
+	{ \
+		return CLASS_INFO.AllocInstanceMemory(); \
+	}; \
+	void operator delete(void* p) \
+	{ \
+		CLASS_INFO.FreeInstanceMemory(p); \
+	}; \
+	*/ \
+    static MClassInfo CLASS_INFO; \
+	/* \
+	static GObject* FactoryCreator(); \
+	static type* Create(); \
+	*/ \
+    static bool RegisterWithFactory(); \
+    virtual MClassInfo* GetClassInfo() const; \
+private:
+
+
 #define M_DECLARE_ABSTRACT_CLASS(class_name) \
 public: \
     static MClassInfo CLASS_INFO; \
@@ -33,7 +57,7 @@ private:
     static const bool type##_registered = type::RegisterWithFactory(); \
 
 //  warning C4668: 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
-#ifdef MY_DEBUG
+#ifdef MY_DEBUG_MODE
 #define M_IMPLEMENT_CLASS(type, baseType) \
 	/* \
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, &baseType::CLASS_INFO, sizeof(type)); \

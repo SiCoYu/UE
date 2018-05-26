@@ -1,6 +1,5 @@
 #pragma once
 
-#include "MClassMacros.h"
 #include "MClassInfo.h"
 #include "MMutex.h"
 #include "MClassMacros.h"
