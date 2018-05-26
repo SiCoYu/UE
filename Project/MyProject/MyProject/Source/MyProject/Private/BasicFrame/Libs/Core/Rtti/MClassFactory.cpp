@@ -63,18 +63,18 @@ const MClassInfo* MClassFactory::GetClassInfo(const std::string& className) cons
 	return this->mNameTable.find(className)->second;
 }
 
-GObject* MClassFactory::Create(const std::string& className) const
-{
-	my_assert(className.length() > 0);
-    
-    if (!this->ClassExists(className))
-    {
-        return 0;
-    }
-	//const MClassInfo* classInfo = this->mNameTable[className];
-    const MClassInfo* classInfo = this->mNameTable.find(className)->second;
-
-    my_assert(0 != classInfo);
-	GObject* newObject = classInfo->Create();
-    return newObject;
-}
+//GObject* MClassFactory::Create(const std::string& className) const
+//{
+//	my_assert(className.length() > 0);
+//    
+//    if (!this->ClassExists(className))
+//    {
+//        return 0;
+//    }
+//	//const MClassInfo* classInfo = this->mNameTable[className];
+//    const MClassInfo* classInfo = this->mNameTable.find(className)->second;
+//
+//    my_assert(0 != classInfo);
+//	GObject* newObject = classInfo->Create();
+//    return newObject;
+//}

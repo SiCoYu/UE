@@ -4,14 +4,14 @@
 #include <string>
 
 class GObject;
-class MClassInfo;
 
 class MClassInfo
 {
 public:
-	typedef GObject* (*Creator)();
+	//typedef GObject* (*Creator)();
 
-	MClassInfo(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize);
+	//MClassInfo(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize);
+	MClassInfo(const char* className, const MClassInfo* parentClass, SizeT instSize);
 	bool operator==(const MClassInfo& rhs) const;
 	bool operator!=(const MClassInfo& rhs) const;
 	const std::string& GetName() const;
@@ -20,15 +20,16 @@ public:
 	GObject* Create() const;
 	bool IsDerivedFrom(const MClassInfo& other) const;
 	bool IsDerivedFrom(const std::string& otherClassName) const;
-	void* AllocInstanceMemory();
-	void FreeInstanceMemory(void* ptr);
+	//void* AllocInstanceMemory();
+	//void FreeInstanceMemory(void* ptr);
 
 private:
-	void Construct(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize);
+	//void Construct(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize);
+	void Construct(const char* className, const MClassInfo* parentClass, SizeT instSize);
 
 	std::string mName;
 	const MClassInfo* mParent;
-	Creator mCreator;
+	//Creator mCreator;
 	SizeT mInstanceSize;
 };
 

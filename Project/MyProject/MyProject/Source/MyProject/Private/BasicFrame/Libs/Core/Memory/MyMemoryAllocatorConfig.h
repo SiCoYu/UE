@@ -27,8 +27,8 @@ T* constructN(T* basePtr, size_t count)
 
 #   define MY_DELETE_ARRAY_T(ptr, T, count, category) if(ptr){for (size_t b = 0; b < count; ++b) { (ptr)[b].~T();} MyDefaultAllocPolicy::deallocateBytes((void*)ptr);}
 
-#   define OGRE_NEW new (__FILE__, __LINE__, __FUNCTION__)
-#   define OGRE_DELETE delete
+#   define MY_NEW new (__FILE__, __LINE__, __FUNCTION__)
+#   define MY_DELETE delete
 
 #else // !MY_DEBUG_MODE
 
@@ -46,8 +46,8 @@ T* constructN(T* basePtr, size_t count)
 
 #   define MY_DELETE_ARRAY_T(ptr, T, count, category) if(ptr){for (size_t b = 0; b < count; ++b) { (ptr)[b].~T();} MyDefaultAllocPolicy::deallocateBytes((void*)ptr);}
 
-#   define OGRE_NEW new 
-#   define OGRE_DELETE delete
+#   define MY_NEW new 
+#   define MY_DELETE delete
 
 template<typename T>
 void deletePtr(T* ptr)
