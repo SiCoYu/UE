@@ -1,9 +1,11 @@
 ﻿#pragma once
 
+#include "GObject.h"
+
 /**
  * @brief 系统循环
  */
-class ProcessSys
+class ProcessSys : public GObject
 {
 public:
 	ProcessSys();

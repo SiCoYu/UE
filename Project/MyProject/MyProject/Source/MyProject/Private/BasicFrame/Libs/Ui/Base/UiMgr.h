@@ -10,6 +10,7 @@
 #include "UiAttrItem.h"
 #include "UiAttrSystem.h"
 #include "Form.h"
+#include "GObject.h"
 
 using namespace NSFormId;
 using namespace MyNS;
@@ -26,7 +27,7 @@ class ClassAssetInsRes;
  * 1. 对于新创建的Form对象，其所属的层是由其formId决定的
  * 2. UI 设计原则，主要界面是资源创建完成才运行逻辑，小的共享界面是逻辑和资源同时运行，因为 MVC 结构实在是要写很多代码，因此主要界面不适用 MVC 结构
  */
-class UiMgr
+class UiMgr : public GObject
 {
 protected:
 	std::map<UiFormId, UForm*> mId2FormDic;

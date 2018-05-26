@@ -18,6 +18,7 @@
 #include "PoolSys.h"
 #include "LogSys.h"
 #include "ResPackType.h"
+#include "GObject.h"
 
 class ResInsBase;
 class IDispatchObject;
@@ -25,7 +26,7 @@ class IDispatchObject;
 /**
  * @brief 资源管理器，不包括资源加载
  */
-class ResInsMgrBase
+class ResInsMgrBase : public GObject
 {
 public:
 	std::map<std::string, ResInsBase*> mPath2ResDic;

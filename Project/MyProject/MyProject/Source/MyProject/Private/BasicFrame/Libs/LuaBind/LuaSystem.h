@@ -1,11 +1,12 @@
 #pragma once
 
 #include "LuaBridgeInc.h"
+#include "GObject.h"
 
 /**
 * @brief œµÕ≥…Ë÷√
 */
-class LuaSystem
+class LuaSystem : public GObject
 {
 protected:
 	lua_State* L;

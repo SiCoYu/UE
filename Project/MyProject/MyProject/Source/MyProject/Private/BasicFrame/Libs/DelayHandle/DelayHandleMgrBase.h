@@ -2,6 +2,7 @@
 #define __DelayHandleMgrBase_H
 
 #include "MList.h"
+#include "GObject.h"
 
 class DelayHandleObject;
 class IDelayHandleItem;
@@ -9,7 +10,7 @@ class IDelayHandleItem;
 /**
     * @brief 当需要管理的对象可能在遍历中间添加的时候，需要这个管理器
     */
-class DelayHandleMgrBase
+class DelayHandleMgrBase : public GObject
 {
 protected:
 	MList<DelayHandleObject*> mDeferredAddQueue;

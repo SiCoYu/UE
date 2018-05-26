@@ -5,13 +5,14 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "GObject.h"
 
 class IPoolObject;
 
 /**
  * @brief 对象池
  */
-class PoolSys
+class PoolSys : public GObject
 {
 protected:
 	LockList<IPoolObject*>* mPoolList;

@@ -8,6 +8,10 @@
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "MClassFactory.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
 
 M_IMPLEMENT_CLASS(GameRouteNotify, MsgRouteDispatchHandle)
 M_REGISTER_CLASS(GameRouteNotify)
@@ -19,7 +23,7 @@ GameRouteNotify::GameRouteNotify()
 
 void GameRouteNotify::init()
 {
-    this->mGameRouteHandle = SAFE_NEW GameRouteHandle();
+    this->mGameRouteHandle = MY_NEW GameRouteHandle();
     this->mGameRouteHandle->init();
 }
 

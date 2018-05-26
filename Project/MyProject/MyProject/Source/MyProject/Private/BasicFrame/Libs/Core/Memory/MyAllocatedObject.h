@@ -25,6 +25,8 @@ public:
 	void* operator new(size_t sz, void* ptr, MyMemoryConstructorFlag constructorFlag);
 	void* operator new[](size_t sz, const char* file, int line, const char* func, MyMemoryConstructorFlag constructorFlag);
 	void* operator new[](size_t sz, MyMemoryConstructorFlag constructorFlag);
+
+	// delete 没有重载的 MyMemoryConstructorFlag constructorFlag 参数
 	void operator delete(void* ptr);
 	void operator delete(void* ptr, void*);
 	void operator delete(void* ptr, const char*, int, const char*);

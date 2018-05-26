@@ -6,6 +6,7 @@
 #include <string>
 #include "HAL/Platform.h"
 #include "TableId.h"
+#include "GObject.h"
 
 class TableBase;
 class TableItemBase;
@@ -18,7 +19,7 @@ class MByteBuffer;
     * // 添加一个表的步骤三
     * // 添加一个表的步骤四
     */
-class TableSys
+class TableSys : public GObject
 {
 	typedef std::map<TableId::TableId, TableBase*>::iterator TableMapIte;
 

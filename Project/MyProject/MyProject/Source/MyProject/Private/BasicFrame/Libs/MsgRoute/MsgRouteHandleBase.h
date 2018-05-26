@@ -4,10 +4,11 @@
 #include "MDictionary.h"
 #include "MsgRouteId.h"
 #include "EventDispatchDelegate.h"
+#include "GObject.h"
 
 class AddOnceEventDispatch;
 
-class MsgRouteHandleBase
+class MsgRouteHandleBase : public GObject
 {
 public:
 	MDictionary<int, AddOnceEventDispatch*> mId2HandleDic;

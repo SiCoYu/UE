@@ -29,7 +29,7 @@ void MDataStream::addOpenedHandle(EventDispatchDelegate openedDisp)
 {
     if (this->mOpenedEvtDisp == nullptr)
     {
-		this->mOpenedEvtDisp = new AddOnceAndCallOnceEventDispatch();
+		this->mOpenedEvtDisp = MY_NEW AddOnceAndCallOnceEventDispatch();
     }
 
 	this->mOpenedEvtDisp->addEventHandle(openedDisp);

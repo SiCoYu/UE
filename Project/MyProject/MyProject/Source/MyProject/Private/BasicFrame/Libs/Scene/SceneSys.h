@@ -3,6 +3,7 @@
 #include "EventDispatchDelegate.h"
 #include <string>
 #include "AuxLevelLoader.h"	// AuxLevelLoader, Namespace 必须包含
+#include "GObject.h"
 
 class AddOnceAndCallOnceEventDispatch;
 class Scene;
@@ -12,7 +13,7 @@ class IDispatchObject;
  * @brief 同一时刻只能有一个场景存在
  */
 
-class SceneSys
+class SceneSys : public GObject
 {
 protected:
 	AddOnceAndCallOnceEventDispatch* mOnSceneLoadedDispatch;

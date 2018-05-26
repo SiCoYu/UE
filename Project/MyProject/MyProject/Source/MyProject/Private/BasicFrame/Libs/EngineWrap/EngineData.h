@@ -1,11 +1,13 @@
 #ifndef __EngineData_H
 #define __EngineData_H
 
+#include "GObject.h"
+
 class AActor;
 class APlayerController;
 class UMyGameEngineBase;
 
-class EngineData
+class EngineData : public GObject
 {
 protected:
 	AActor* mMainActor;

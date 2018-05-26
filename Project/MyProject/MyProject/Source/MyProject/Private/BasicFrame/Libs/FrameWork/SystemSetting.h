@@ -1,11 +1,12 @@
 ﻿#pragma once
 
 #include <string>
+#include "GObject.h"
 
 /**
  * @brief 系统设置
  */
-class SystemSetting
+class SystemSetting : public GObject
 {
 public:
     static std::string USERNAME;

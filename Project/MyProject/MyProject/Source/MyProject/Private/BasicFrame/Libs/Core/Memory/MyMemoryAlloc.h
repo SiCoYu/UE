@@ -35,12 +35,13 @@ void* operator new(size_t sz, void* ptr, MyMemoryConstructorFlag constructorFlag
 void* operator new[](size_t sz, const char* file, int line, const char* func, MyMemoryConstructorFlag constructorFlag);
 void* operator new[](size_t sz, MyMemoryConstructorFlag constructorFlag);
 
-void operator delete(void* ptr, MyMemoryConstructorFlag constructorFlag);
-void operator delete(void* ptr, void*, MyMemoryConstructorFlag constructorFlag);
+// delete 没有重载的 MyMemoryConstructorFlag constructorFlag 参数， UE4 已经重载 delete ，因此只能在类中重载
+//void operator delete(void* ptr);
+//void operator delete(void* ptr, void*);
 
-void operator delete(void* ptr, const char*, int, const char*, MyMemoryConstructorFlag constructorFlag);
-void operator delete[](void* ptr, MyMemoryConstructorFlag constructorFlag);
-void operator delete[](void* ptr, const char*, int, const char*, MyMemoryConstructorFlag constructorFlag);
+//void operator delete(void* ptr, const char*, int, const char*);
+//void operator delete[](void* ptr);
+//void operator delete[](void* ptr, const char*, int, const char*);
 
 //#define my_new(type) new type
 //#define my_new_array(type,size) new type[size]

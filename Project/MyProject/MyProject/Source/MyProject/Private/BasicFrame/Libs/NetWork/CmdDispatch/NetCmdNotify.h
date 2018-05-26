@@ -2,12 +2,13 @@
 #define __NetCmdNotify_H
 
 #include <vector>
+#include "GObject.h"
 
 class NetModuleDispatchHandle;
 class MByteBuffer;
 class CmdDispatchInfo;
 
-class NetCmdNotify
+class NetCmdNotify : public GObject
 {
 protected:
     int mRevMsgCnt;      // 接收到消息的数量

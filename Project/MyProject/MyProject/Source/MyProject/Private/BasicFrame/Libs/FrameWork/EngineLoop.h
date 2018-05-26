@@ -1,9 +1,11 @@
 ﻿#pragma once
 
+#include "GObject.h"
+
 /**
  * @brief 主循环
  */
-class EngineLoop
+class EngineLoop : public GObject
 {
 public:
 	EngineLoop();

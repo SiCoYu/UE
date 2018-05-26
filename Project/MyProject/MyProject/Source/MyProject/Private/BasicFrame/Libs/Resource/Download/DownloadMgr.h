@@ -4,6 +4,7 @@
 #include <list>
 #include "EventDispatchDelegate.h"
 #include "MList.h"
+#include "GObject.h"
 
 /**
  * @brief 数据下载管理器
@@ -14,7 +15,7 @@ class DownloadItem;
 class DownloadParam;
 
 //class DownloadMgr : MsgRouteHandleBase
-class DownloadMgr
+class DownloadMgr : public GObject
 {
 protected:
     unsigned int mMaxParral;                             // 最多同时加载的内容

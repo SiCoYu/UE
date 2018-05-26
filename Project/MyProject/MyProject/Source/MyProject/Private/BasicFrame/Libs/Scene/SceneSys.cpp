@@ -11,7 +11,7 @@
 
 SceneSys::SceneSys()
 {
-	this->mOnSceneLoadedDispatch = SAFE_NEW AddOnceAndCallOnceEventDispatch();
+	this->mOnSceneLoadedDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
 	this->mAuxLevelLoader = nullptr;
 	this->mScene = nullptr;
 

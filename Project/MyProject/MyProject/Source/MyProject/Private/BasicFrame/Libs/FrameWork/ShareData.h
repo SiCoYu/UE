@@ -2,13 +2,14 @@
 #define __ShareData_H
 
 #include <string>
+#include "GObject.h"
 
 class MByteBuffer;
 
 /**
  * @brief 共享内容，主要是数据
  */
-class ShareData
+class ShareData : public GObject
 {
 public:
 	std::string mTmpStr;		// 临时字符串缓冲区

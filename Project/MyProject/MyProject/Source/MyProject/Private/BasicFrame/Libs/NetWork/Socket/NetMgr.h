@@ -2,6 +2,7 @@
 #define __NETMGR_H
 
 #include "PlatformDefine.h"
+#include "GObject.h"
 
 #ifdef USE_EXTERN_THREAD
 
@@ -38,7 +39,7 @@ class MByteBuffer;
 #ifdef USE_EXTERN_THREAD
 class NetMgr : public SocketHandler, public INetMgr
 #else
-class NetMgr : public INetMgr
+class NetMgr : public GObject, public INetMgr
 #endif
 {
 public:

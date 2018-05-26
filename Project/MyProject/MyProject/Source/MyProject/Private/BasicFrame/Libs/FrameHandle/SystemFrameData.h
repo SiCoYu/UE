@@ -2,8 +2,9 @@
 #define __SystemFrameData_H
 
 #include "Platform.h"
+#include "GObject.h"
 
-class SystemFrameData
+class SystemFrameData : public GObject
 {
 protected:
 	uint32 mTotalFrameCount;       // 当前帧数

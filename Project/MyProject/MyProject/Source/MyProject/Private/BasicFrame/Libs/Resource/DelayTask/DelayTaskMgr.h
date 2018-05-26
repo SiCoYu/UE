@@ -3,8 +3,9 @@
 #include "ITickedObject.h"
 #include "IDelayTask.h"
 #include <list>
+#include "GObject.h"
 
-class DelayTaskMgr : public ITickedObject
+class DelayTaskMgr : public GObject, public ITickedObject
 {
 protected:
 	int mFrameInterval;	// Ö¡¼ä¸ô

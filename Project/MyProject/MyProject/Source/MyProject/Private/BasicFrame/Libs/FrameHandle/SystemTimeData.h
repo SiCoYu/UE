@@ -1,7 +1,9 @@
 ﻿#ifndef __SystemTimeData_H
 #define __SystemTimeData_H
 
-class SystemTimeData
+#include "GObject.h"
+
+class SystemTimeData : public GObject
 {
 protected:
 	long mPreTime;           // 上一次更新时的秒数

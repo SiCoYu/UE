@@ -11,7 +11,7 @@ class IDelayHandleItem;
 /**
 * @brief 定时器管理器
 */
-class TimerMgr : DelayHandleMgrBase
+class TimerMgr : public DelayHandleMgrBase
 {
 	M_DECLARE_SUPER_KW(DelayHandleMgrBase)
 

@@ -3,8 +3,9 @@
 
 #include "UnrealString.h"		// FString
 #include <string>
+#include "GObject.h"
 
-class LogSys
+class LogSys : public GObject
 {
 public:
 	LogSys();

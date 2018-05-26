@@ -6,6 +6,7 @@
 #include "Platform.h"
 #include "ResLoadType.h"
 #include "ResPathType.h"
+#include "GObject.h"
 
 /**
  * @brief 宏定义说明区域
@@ -15,7 +16,7 @@
 /**
  * @brief 基本的配置
  */
-class Config
+class Config : public GObject
 {
 public:
     static std::string StreamingAssets;
