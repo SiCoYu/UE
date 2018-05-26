@@ -21,7 +21,7 @@ class LogSys;
 class ShareData;
 class NetCmdNotify;
 class Config;
-class LocalFileSys;
+//class LocalFileSys;
 class PoolSys;
 
 class ResLoadMgr;
@@ -61,7 +61,7 @@ protected:
 	MySharedPtr<ShareData> mShareData;
 	MySharedPtr<NetCmdNotify> mNetDispatchList;
 	MySharedPtr<Config> mConfig;
-	MySharedPtr<LocalFileSys> mLocalFileSys;
+	//MySharedPtr<LocalFileSys> mLocalFileSys;
 	MySharedPtr<PoolSys> mPoolSys;
 	MySharedPtr<ResLoadMgr> mResLoadMgr;
 	MySharedPtr<ClassAssetInsMgr> mClassAssetInsMgr;
@@ -87,7 +87,8 @@ protected:
 	MySharedPtr<TickMgr> mTickMgr;
 	MySharedPtr<TimerMgr> mTimerMgr;
 	MySharedPtr<FrameTimerMgr> mFrameTimerMgr;
-	MySharedPtr<UMyBluePrintBase> mBPCtx;
+	//MySharedPtr<UMyBluePrintBase> mBPCtx;
+	UMyBluePrintBase* mBPCtx;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -115,7 +116,7 @@ public:
 	MySharedPtr<ShareData> getShareData();
 	MySharedPtr<NetCmdNotify> getNetDispatchList();
 	MySharedPtr<Config> getConfig();
-	MySharedPtr<LocalFileSys> getLocalFileSys();
+	//MySharedPtr<LocalFileSys> getLocalFileSys();
 	MySharedPtr<PoolSys> getPoolSys();
 	MySharedPtr<ResLoadMgr> getResLoadMgr();
 
@@ -142,7 +143,8 @@ public:
 	MySharedPtr<TickMgr> getTickMgr();
 	MySharedPtr<TimerMgr> getTimerMgr();
 	MySharedPtr<FrameTimerMgr> getFrameTimerMgr();
-	MySharedPtr<UMyBluePrintBase> getBPCtx();
+	//MySharedPtr<UMyBluePrintBase> getBPCtx();
+	UMyBluePrintBase* getBPCtx();
 
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去

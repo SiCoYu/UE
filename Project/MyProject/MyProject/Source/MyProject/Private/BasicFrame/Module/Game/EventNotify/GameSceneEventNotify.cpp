@@ -38,7 +38,7 @@ void GameSceneEventNotify::dispose()
 #endif
 
 #ifdef ENABLE_UNIT_TEST
-	this->mTestMain = nullptr;
+	this->mTestMain.setNull();
 #endif
 }
 

@@ -14,7 +14,8 @@ UMyBluePrintToCppFunctionLibrary::UMyBluePrintToCppFunctionLibrary(const FObject
 
 UMyBluePrintBase* UMyBluePrintToCppFunctionLibrary::getBPCtx()
 {
-	return GBPCtx.get();
+	//return GBPCtx.get();
+	return GBPCtx;
 }
 
 APawn* UMyBluePrintToCppFunctionLibrary::getFirstCharacter()

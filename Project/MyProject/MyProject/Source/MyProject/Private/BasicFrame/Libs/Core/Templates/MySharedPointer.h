@@ -14,6 +14,10 @@
 
 namespace MyNS
 {
+	/**
+	 * @error SharedPtr = nnullptr, 这样赋值是错误的，直接将 this->mRefPtr 设置为 nullptr ，导致内存泄漏，置空要是用 setNull 接口
+	 * @error UE4 Object 一定不能使用 SharedPtr ，因为 UE4 有自己一套内存分配策略
+	 */
 	template<class T> 
 	class SharedPtr
 	{
@@ -235,6 +239,7 @@ namespace MyNS
 		inline void destroy(void)
 		{
 			my_assert(this->mRefPtr && this->mRefInfo);
+			MY_DELETE this->mRefPtr;
 			MY_DELETE this->mRefInfo;
 		}
 

@@ -39,7 +39,7 @@ public:
 
 	~DynBuffer()
 	{
-		delete[] this->mBuffer;
+		MY_DELETE[] this->mBuffer;
 	}
 
 	T* getBuffer()

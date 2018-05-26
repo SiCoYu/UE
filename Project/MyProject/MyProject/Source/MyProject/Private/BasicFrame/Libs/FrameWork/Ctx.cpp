@@ -46,45 +46,45 @@ template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
 Ctx::Ctx()
 {
 	this->mIsInit = false;
-	this->mUiMgr = nullptr;
-	this->mEngineData = nullptr;
-	this->mNetMgr = nullptr;
-	this->mTableSys = nullptr;
+	this->mUiMgr.setNull();
+	this->mEngineData.setNull();
+	this->mNetMgr.setNull();
+	this->mTableSys.setNull();
 
 #ifdef USE_EXTERN_THREAD
-	this->mStdoutLog = nullptr;
+	this->mStdoutLog.setNull();
 #endif
 
-	this->mLogSys = nullptr;
-	this->mNetDispatchList = nullptr;
-	this->mShareData = nullptr;
-	this->mConfig = nullptr;
+	this->mLogSys.setNull();
+	this->mNetDispatchList.setNull();
+	this->mShareData.setNull();
+	this->mConfig.setNull();
 
-	this->mResLoadMgr = nullptr;
-	this->mClassAssetInsMgr = nullptr;
-	this->mObjectAssetInsMgr = nullptr;
-	this->mTextureInsResMgr = nullptr;
-	this->mMaterialInsResMgr = nullptr;
+	this->mResLoadMgr.setNull();
+	this->mClassAssetInsMgr.setNull();
+	this->mObjectAssetInsMgr.setNull();
+	this->mTextureInsResMgr.setNull();
+	this->mMaterialInsResMgr.setNull();
 
-	this->mMyStreamableManager = nullptr;
-	this->mPoolSys = nullptr;
-	this->mFileSys = nullptr;
+	this->mMyStreamableManager.setNull();
+	this->mPoolSys.setNull();
+	this->mFileSys.setNull();
 
-	this->mSystemSetting = nullptr;
-	this->mLuaSystem = nullptr;
-	this->mSceneEventNotify = nullptr;
-	this->mMyLatentActionManager = nullptr;
+	this->mSystemSetting.setNull();
+	this->mLuaSystem.setNull();
+	this->mSceneEventNotify.setNull();
+	this->mMyLatentActionManager.setNull();
 
-	this->mSceneSys = nullptr;
-	this->mSystemTimeData = nullptr;
-	this->mSystemFrameData = nullptr;
-	this->mProcessSys = nullptr;
-	this->mEngineLoop = nullptr;
-	this->mDelayTaskMgr = nullptr;
+	this->mSceneSys.setNull();
+	this->mSystemTimeData.setNull();
+	this->mSystemFrameData.setNull();
+	this->mProcessSys.setNull();
+	this->mEngineLoop.setNull();
+	this->mDelayTaskMgr.setNull();
 
-	this->mTickMgr = nullptr;
-	this->mTimerMgr = nullptr;
-	this->mFrameTimerMgr = nullptr;
+	this->mTickMgr.setNull();
+	this->mTimerMgr.setNull();
+	this->mFrameTimerMgr.setNull();
 	this->mBPCtx = nullptr;
 }
 
@@ -227,45 +227,45 @@ void Ctx::dispose()
 	this->mFrameTimerMgr->dispose();
 	this->mBPCtx->dispose();
 
-	this->mUiMgr = nullptr;
-	this->mEngineData = nullptr;
-	this->mNetMgr = nullptr;
-	this->mTableSys = nullptr;
+	this->mUiMgr.setNull();
+	this->mEngineData.setNull();
+	this->mNetMgr.setNull();
+	this->mTableSys.setNull();
 
 #ifdef USE_EXTERN_THREAD
-	this->mStdoutLog = nullptr;
+	this->mStdoutLog.setNull();
 #endif
 
-	this->mLogSys = nullptr;
-	this->mNetDispatchList = nullptr;
-	this->mShareData = nullptr;
-	this->mConfig = nullptr;
+	this->mLogSys.setNull();
+	this->mNetDispatchList.setNull();
+	this->mShareData.setNull();
+	this->mConfig.setNull();
 
-	this->mResLoadMgr = nullptr;
-	this->mClassAssetInsMgr = nullptr;
-	this->mObjectAssetInsMgr = nullptr;
-	this->mTextureInsResMgr = nullptr;
-	this->mMaterialInsResMgr = nullptr;
+	this->mResLoadMgr.setNull();
+	this->mClassAssetInsMgr.setNull();
+	this->mObjectAssetInsMgr.setNull();
+	this->mTextureInsResMgr.setNull();
+	this->mMaterialInsResMgr.setNull();
 
-	this->mMyStreamableManager = nullptr;
-	this->mPoolSys = nullptr;
-	this->mFileSys = nullptr;
+	this->mMyStreamableManager.setNull();
+	this->mPoolSys.setNull();
+	this->mFileSys.setNull();
 
-	this->mSystemSetting = nullptr;
-	this->mLuaSystem = nullptr;
-	this->mSceneEventNotify = nullptr;
-	this->mMyLatentActionManager = nullptr;
+	this->mSystemSetting.setNull();
+	this->mLuaSystem.setNull();
+	this->mSceneEventNotify.setNull();
+	this->mMyLatentActionManager.setNull();
 
-	this->mSceneSys = nullptr;
-	this->mSystemTimeData = nullptr;
-	this->mSystemFrameData = nullptr;
-	this->mProcessSys = nullptr;
-	this->mEngineLoop = nullptr;
-	this->mDelayTaskMgr = nullptr;
+	this->mSceneSys.setNull();
+	this->mSystemTimeData.setNull();
+	this->mSystemFrameData.setNull();
+	this->mProcessSys.setNull();
+	this->mEngineLoop.setNull();
+	this->mDelayTaskMgr.setNull();
 
-	this->mTickMgr = nullptr;
-	this->mTimerMgr = nullptr;
-	this->mFrameTimerMgr = nullptr;
+	this->mTickMgr.setNull();
+	this->mTimerMgr.setNull();
+	this->mFrameTimerMgr.setNull();
 	this->mBPCtx = nullptr;
 }
 
@@ -296,7 +296,7 @@ void Ctx::beginPlay()
 		// 最后初始化 BluePrint 数据
 		UClass *bpCtxClass = LoadClass<UObject>(NULL, TEXT("/Game/MyAsset/MyBlueprints/Lib/FrameWork/Ctx.Ctx_C"), NULL, LOAD_None, NULL);
 		UGameInstance* pGameIns = (UGameInstance*)UtilEngineWrap::GetGameInstance();
-		this->mBPCtx = MySharedPtr<UMyBluePrintBase>(::NewObject<UMyBluePrintBase>(pGameIns, bpCtxClass, FName("UMyBluePrintBase")));
+		this->mBPCtx = ::NewObject<UMyBluePrintBase>(pGameIns, bpCtxClass, FName("UMyBluePrintBase"));
 		FString cmd = TEXT("init");
 		FOutputDeviceDebug device;
 		this->mBPCtx->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
@@ -368,10 +368,10 @@ MySharedPtr<Config> Ctx::getConfig()
 	return this->mConfig;
 }
 
-MySharedPtr<LocalFileSys> Ctx::getLocalFileSys()
-{
-	return this->mLocalFileSys;
-}
+//MySharedPtr<LocalFileSys> Ctx::getLocalFileSys()
+//{
+//	return this->mLocalFileSys;
+//}
 
 MySharedPtr<PoolSys> Ctx::getPoolSys()
 {
@@ -483,7 +483,7 @@ MySharedPtr<FrameTimerMgr> Ctx::getFrameTimerMgr()
 	return this->mFrameTimerMgr;
 }
 
-MySharedPtr<UMyBluePrintBase> Ctx::getBPCtx()
+UMyBluePrintBase* Ctx::getBPCtx()
 {
 	return this->mBPCtx;
 }
