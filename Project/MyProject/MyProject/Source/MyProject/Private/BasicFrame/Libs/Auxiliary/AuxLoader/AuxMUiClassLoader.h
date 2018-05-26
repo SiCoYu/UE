@@ -18,8 +18,7 @@ namespace MyNS
      */
     class AuxMUiClassLoader : public AuxMObjectLoaderBase
     {
-		M_DECLARE_SUPER_KW(AuxMObjectLoaderBase)
-		M_DECLARE_CLASS(AuxMUiClassLoader)
+		M_DECLARE_CLASS(AuxMUiClassLoader, AuxMObjectLoaderBase)
 
 	protected:
 		UMGOuterType mUMGOuterType;

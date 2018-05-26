@@ -4,6 +4,17 @@
 #include "GameTimeCmdHandle.h"
 #include "EventDispatchDelegate.h"
 #include "stNullUserCmd.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "MClassFactory.h"
+
+
+M_IMPLEMENT_CLASS(GameNetNotify, NetModuleDispatchHandle)
+M_REGISTER_CLASS(GameNetNotify)
 
 GameNetNotify::GameNetNotify()
 {
@@ -14,7 +25,7 @@ void GameNetNotify::init()
 {
     Super::init();
 
-    this->mNetCmdDispatchHandle = SAFE_NEW GameTimeCmdHandle();
+    this->mNetCmdDispatchHandle = MY_NEW GameTimeCmdHandle();
 
 	this->mNetCmdDispatchHandle->init();
 	//this->addCmdHandle(

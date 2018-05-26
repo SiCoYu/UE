@@ -3,11 +3,13 @@
 
 #include "EventDispatchGroup.h"
 #include "EventDispatchDelegate.h"
+#include "GObject.h"
 
 class MsgRouteBase;
 
-class MsgRouteDispatchHandle
+class MsgRouteDispatchHandle : public GObject
 {
+	M_DECLARE_CLASS(MsgRouteDispatchHandle, GObject)
 protected:
 	EventDispatchGroup mEventDispatchGroup;
 

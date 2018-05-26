@@ -10,8 +10,7 @@ class GameRouteHandle;
 
 class GameRouteNotify : public MsgRouteDispatchHandle
 {
-	M_DECLARE_SUPER_KW(MsgRouteDispatchHandle)
-	//M_DECLARE_CLASS(GameRouteNotify)
+	M_DECLARE_CLASS(GameRouteNotify, MsgRouteDispatchHandle)
 
 public:
     GameRouteHandle* mGameRouteHandle;

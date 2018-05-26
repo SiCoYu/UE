@@ -5,7 +5,7 @@
 
 class GObjectBase
 {
-	M_DECLARE_CLASS(GObjectBase)
+	M_DECLARE_ROOT_CLASS(GObjectBase)
 
 public:
 	GObjectBase();

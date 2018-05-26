@@ -5,13 +5,16 @@
 // #include "Map.h"			// UE4 自己的 Tmap
 #include "MDictionary.h"
 #include "EventDispatchDelegate.h"	// FastDelegate1
+#include "GObject.h"
 
 class MByteBuffer;
 class AddOnceEventDispatch;
 class CmdDispatchInfo;
 
-class NetCmdDispatchHandle
+class NetCmdDispatchHandle : public GObject
 {
+	M_DECLARE_CLASS(NetCmdDispatchHandle, GObject)
+
 public:
 	MDictionary<uint8, AddOnceEventDispatch*> mId2HandleDic;
 

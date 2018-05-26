@@ -4,14 +4,17 @@
 #include "MDictionary.h"
 #include "Platform.h"		// uint8
 #include "EventDispatchDelegate.h"
+#include "GObject.h"
 
 class NetCmdDispatchHandle;
 class MByteBuffer;
 class AddOnceEventDispatch;
 class CmdDispatchInfo;
 
-class NetModuleDispatchHandle
+class NetModuleDispatchHandle : public GObject
 {
+	M_DECLARE_CLASS(NetModuleDispatchHandle, GObject)
+
 public:
 	MDictionary<uint8, AddOnceEventDispatch*> mId2DispatchDic;
     //LuaCSBridgeNetDispHandle mLuaCSBridgeNetDispHandle;     // Lua 网络事件处理器

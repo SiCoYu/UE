@@ -5,6 +5,12 @@
 #include "MsgRouteBase.h"
 #include "EventDispatchDelegate.h"
 #include "MsgRouteHandleBase.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "MClassFactory.h"
+
+M_IMPLEMENT_CLASS(GameRouteNotify, MsgRouteDispatchHandle)
+M_REGISTER_CLASS(GameRouteNotify)
 
 GameRouteNotify::GameRouteNotify()
 {

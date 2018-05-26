@@ -5,6 +5,10 @@
  * @brief 全局变量需要的头文件
  * @file Prequisites.h
  */
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "MClassFactory.h"
+
 #include "Ctx.h"
 #include "EngineData.h"
 #include "INetMgr.h"

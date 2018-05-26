@@ -11,8 +11,7 @@
 
 class MyAllocatedObject : public GObjectBase
 {
-	M_DECLARE_CLASS(MyAllocatedObject)
-	M_DECLARE_SUPER_KW(GObjectBase)
+	M_DECLARE_CLASS(MyAllocatedObject, GObjectBase)
 
 public:
 	explicit MyAllocatedObject()

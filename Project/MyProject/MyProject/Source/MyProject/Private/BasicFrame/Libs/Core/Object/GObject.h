@@ -9,8 +9,7 @@
 
 class GObject : public MyAllocatedObject
 {
-	M_DECLARE_CLASS(GObject)
-	M_DECLARE_SUPER_KW(MyAllocatedObject)
+	M_DECLARE_CLASS(GObject, MyAllocatedObject)
 
 public:
 	GObject();

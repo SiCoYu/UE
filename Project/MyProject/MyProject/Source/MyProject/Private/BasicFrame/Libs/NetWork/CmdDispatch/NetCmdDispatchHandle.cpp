@@ -6,6 +6,12 @@
 #include "MByteBuffer.h"
 #include "AddOnceEventDispatch.h"
 #include "CmdDispatchInfo.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "MClassFactory.h"
+
+M_IMPLEMENT_CLASS(NetCmdDispatchHandle, GObject)
+M_REGISTER_CLASS(NetCmdDispatchHandle)
 
 NetCmdDispatchHandle::NetCmdDispatchHandle()
 {

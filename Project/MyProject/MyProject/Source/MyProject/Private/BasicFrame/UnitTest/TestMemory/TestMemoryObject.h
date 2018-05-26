@@ -5,7 +5,7 @@
 
 class TestMemoryObject : public GObject
 {
-	M_DECLARE_CLASS(TestMemoryObject);
+	M_DECLARE_CLASS(TestMemoryObject, GObject);
 
 public:
 	void test();

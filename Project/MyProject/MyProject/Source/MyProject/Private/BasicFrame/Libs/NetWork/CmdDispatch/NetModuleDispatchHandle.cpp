@@ -7,6 +7,12 @@
 #include "NetCmdDispatchHandle.h"
 #include "AddOnceEventDispatch.h"
 #include "CmdDispatchInfo.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "MClassFactory.h"
+
+M_IMPLEMENT_CLASS(NetModuleDispatchHandle, GObject)
+M_REGISTER_CLASS(NetModuleDispatchHandle)
 
 NetModuleDispatchHandle::NetModuleDispatchHandle()
 {

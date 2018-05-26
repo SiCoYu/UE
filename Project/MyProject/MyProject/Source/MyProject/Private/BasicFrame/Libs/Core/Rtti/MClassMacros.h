@@ -2,7 +2,8 @@
 
 #include "PlatformDefine.h"
 
-#define M_DECLARE_CLASS(type) \
+#define M_DECLARE_CLASS(type, baseType) \
+	typedef baseType Super; \
 public: \
 	/* \
     void* operator new(size_t size) \

@@ -19,8 +19,7 @@ namespace MyNS
      */
     class AuxMObjectLoaderBase : public AuxLoaderBase
     {
-		M_DECLARE_SUPER_KW(AuxLoaderBase)
-		M_DECLARE_CLASS(AuxMObjectLoaderBase)
+		M_DECLARE_CLASS(AuxMObjectLoaderBase, AuxLoaderBase)
 
 	protected:
 		UObject* mSelfGo;                       // 加载的 GameObject

@@ -19,8 +19,7 @@ namespace MyNS
      */
     class AuxLoaderBase : public GObject, public IDispatchObject
     {
-		M_DECLARE_SUPER_KW(GObject)
-		M_DECLARE_CLASS(AuxLoaderBase)
+		M_DECLARE_CLASS(AuxLoaderBase, GObject)
 
 	protected:
 		ResLoadState* mResLoadState;      // 资源加载状态
