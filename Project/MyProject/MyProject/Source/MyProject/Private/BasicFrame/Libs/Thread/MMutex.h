@@ -1,9 +1,11 @@
 ﻿#ifndef __MMutex_H
 #define __MMutex_H
 
-//#include "MyProject.h"
-#include "PlatformDefine.h"
-//#include "GObject.h"
+#include "MyProject.h"
+//#include "PlatformDefine.h"
+// GObject 引用 MMutex ，而 MMutex 又引用 GObject ，因此基类使用 MyAllocatedObject
+#include "GObject.h"
+#include "MyAllocatedObject.h"
 
 // 如果使用外部线程
 //#ifdef USE_EXTERN_THREAD
@@ -22,8 +24,7 @@
 /**
  * @brief 互斥
  */
-//class MMutex : public GObject
-class MMutex
+class MMutex : public MyAllocatedObject
 {
 private:
 //#ifdef USE_EXTERN_THREAD

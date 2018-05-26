@@ -1,5 +1,5 @@
-﻿#ifndef __MLOCK_H
-#define __MLOCK_H
+﻿#ifndef __MLock_H
+#define __MLock_H
 
 #include "MyProject.h"
 #include "GObject.h"

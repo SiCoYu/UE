@@ -6,7 +6,6 @@
 #include "MyMemoryConstructorFlag.h"
 #include "GObjectBase.h"
 #include "MClassInfo.h"
-#include "MMutex.h"
 #include "MClassMacros.h"
 #include "BaseClassDef.h"
 

@@ -9,6 +9,10 @@
 #include "MLock.h"
 #include "Prequisites.h"
 #include "MEvent.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
 
 #ifdef USE_EXTERN_THREAD
 	#include "NetTCPClient.h"
@@ -158,14 +162,14 @@ void NetMgr::NetMgr_Extern()
 #ifndef USE_EXTERN_THREAD
 void NetMgr::NetMgr_Inter()
 {
-	mVisitMutex = new MMutex();
-	startThread();
+	this->mVisitMutex = MY_NEW MMutex();
+	this->startThread();
 }
 #endif
 
 NetMgr::~NetMgr() 
 {
-	mNetThread->setExitFlag(true);
+	this->mNetThread->setExitFlag(true);
 #ifdef USE_EXTERN_THREAD
 	this->Release();
 #endif
@@ -190,17 +194,17 @@ void NetMgr::startThread()
 	//mNetThread->m_pTaskGraphBoundSyncEvent->Wait();
 
 	// 函数 FRunnableThread::Create 第二个参数一定是宽字节字符串，如果是多字节就会编译报错
-	mNetThread = MY_NEW UENetThread(this, "NetThread");
-	mNetThread->start();
-	mNetThread->getSyncEventPtr()->Wait();
+	this->mNetThread = MY_NEW UENetThread(this, "NetThread");
+	this->mNetThread->start();
+	this->mNetThread->getSyncEventPtr()->Wait();
 }
 
 void NetMgr::openSocket(std::string ip, uint32 port)
 {
 #ifdef USE_EXTERN_THREAD
-	openSocket_Extern(ip, port);
+	this->openSocket_Extern(ip, port);
 #else
-	openSocket_Inter(ip, port);
+	this->openSocket_Inter(ip, port);
 #endif
 }
 
@@ -212,16 +216,16 @@ void NetMgr::closeSocket(std::string ip, uint32 port)
 	if (UtilMap::ContainsKey(mId2ClientDic, key))	// 如果没有这个 NetClient
 	{
 		// 关闭 socket 之前要等待所有的数据都发送完成，如果发送一直超时，可能就卡在这很长时间
-		mId2ClientDic[key]->getMsgSendEndEvent()->Reset();        // 重置信号
-		mId2ClientDic[key]->getMsgSendEndEvent()->WaitOne();      // 阻塞等待数据全部发送完成
+		this->mId2ClientDic[key]->getMsgSendEndEvent()->Reset();        // 重置信号
+		this->mId2ClientDic[key]->getMsgSendEndEvent()->WaitOne();      // 阻塞等待数据全部发送完成
 
-		mVisitMutex->Lock();
+		this->mVisitMutex->Lock();
 		{
-			mId2ClientDic[key]->Disconnect();
+			this->mId2ClientDic[key]->Disconnect();
 			UtilMap::Remove(mId2ClientDic, key);
 		}
-		mVisitMutex->Unlock();
-		mCurClient = nullptr;
+		this->mVisitMutex->Unlock();
+		this->mCurClient = nullptr;
 	}
 }
 
@@ -262,13 +266,13 @@ void NetMgr::openSocket_Extern(std::string ip, uint32 port)
 	NetClient* pClient = MY_NEW NetClient(*this);
 	bool success = pClient->Open(ip, port);
 
-	mMutex->Lock();
+	this->mMutex->Lock();
 
 	this->Add(pClient);
 	pClient->SetSlaveHandler(this);
 	pClient->OnDetached();
 
-	mMutex->Unlock();
+	this->mMutex->Unlock();
 }
 #endif
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "MClassInfo.h"
-#include "MMutex.h"
 #include "MClassMacros.h"
 
 class GObjectBase

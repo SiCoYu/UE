@@ -11,7 +11,7 @@
 
 MCondition::MCondition(std::string name)
 {
-    this->mMutex = new MMutex();
+    this->mMutex = MY_NEW MMutex();
 	this->mEvent = MY_NEW MEvent();
 	this->mCanEnterWait = true;      // 允许进入等待状态
 }

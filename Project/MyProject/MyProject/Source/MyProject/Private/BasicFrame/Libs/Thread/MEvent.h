@@ -1,5 +1,5 @@
-﻿#ifndef __MEVENT_H
-#define __MEVENT_H
+﻿#ifndef __MEvent_H
+#define __MEvent_H
 
 #include "GObject.h"
 
