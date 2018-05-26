@@ -2,6 +2,11 @@
 #include "RefCountResLoadResultNotify.h"
 #include "RefCount.h"
 
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
+
 RefCountResLoadResultNotify::RefCountResLoadResultNotify()
 {
 	this->mRefCount = MY_NEW RefCount();

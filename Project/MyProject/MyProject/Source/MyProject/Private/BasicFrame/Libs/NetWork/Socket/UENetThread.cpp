@@ -3,6 +3,11 @@
 #include "INetMgr.h"
 #include "MEvent.h"
 
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
+
 UENetThread::UENetThread(INetMgr* pNetMgr, std::string mThreadName)
 	: MThread(mThreadName)
 {

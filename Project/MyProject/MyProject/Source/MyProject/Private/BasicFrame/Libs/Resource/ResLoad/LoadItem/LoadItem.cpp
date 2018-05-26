@@ -4,6 +4,11 @@
 #include "ResLoadState.h"
 #include "LoadParam.h"
 
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
+
 LoadItem::LoadItem()
 {
 	this->mNonRefCountResLoadResultNotify = MY_NEW NonRefCountResLoadResultNotify();

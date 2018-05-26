@@ -9,6 +9,11 @@
 #include "TestDownload.h"
 #include "TestLuaBind.h"
 
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
+
 #include "Windows/AllowWindowsPlatformTypes.h"
 #include <shellapi.h>
 #include "Windows/HideWindowsPlatformTypes.h"

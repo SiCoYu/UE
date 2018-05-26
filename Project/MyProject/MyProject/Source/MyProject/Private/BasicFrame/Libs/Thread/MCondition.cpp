@@ -4,9 +4,14 @@
 #include "MEvent.h"
 #include "MLock.h"
 
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
+
 MCondition::MCondition(std::string name)
 {
-    this->mMutex = MY_NEW MMutex();
+    this->mMutex = new MMutex();
 	this->mEvent = MY_NEW MEvent();
 	this->mCanEnterWait = true;      // 允许进入等待状态
 }
