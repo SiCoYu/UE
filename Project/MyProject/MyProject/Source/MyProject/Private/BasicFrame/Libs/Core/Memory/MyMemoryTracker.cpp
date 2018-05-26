@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "MyMemoryTracker.h"
+#include "PlatformDefine.h"
 
 //#include <iostream>
 #include <fstream>	// ofstream

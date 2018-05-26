@@ -23,6 +23,6 @@ private:
 	MClassFactory();
     ~MClassFactory();
 
-    static MClassFactory* Singleton;
+    static MClassFactory* msSingleton;
 	UMap mNameTable;
 };

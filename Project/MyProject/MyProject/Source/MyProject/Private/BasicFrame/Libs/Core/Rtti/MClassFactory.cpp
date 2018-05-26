@@ -5,24 +5,25 @@
 #include "MyMemoryAlloc.h"
 #include "TypeDef.h"
 
-MClassFactory* MClassFactory::Singleton = 0;
+MClassFactory* MClassFactory::msSingleton = 0;
 
 MClassFactory* MClassFactory::Instance()
 {
-    if (0 == Singleton)
+    if (0 == msSingleton)
     {
-        Singleton = my_new(MClassFactory);
-        my_assert(0 != Singleton);
+		msSingleton = my_new(MClassFactory);
+        my_assert(0 != msSingleton);
     }
-    return Singleton;
+
+    return msSingleton;
 }
 
 void MClassFactory::Destroy()
 {
-    if (0 != Singleton)
+    if (0 != msSingleton)
     {
-		my_delete(Singleton);
-        Singleton = 0;
+		my_delete(msSingleton);
+		msSingleton = 0;
     }
 }
 
