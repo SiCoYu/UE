@@ -7,11 +7,7 @@
 #include "SafePointer.h"
 
 #include "MySharedPointer.h"
-
 #include "MyMemoryAlloc.h"
-#include "MyMemoryPool.h"
-#include "MyPoolArrayAllocator.h"
-
 #include "TypeDef.h"
 
 #include "MClassMacros.h"
