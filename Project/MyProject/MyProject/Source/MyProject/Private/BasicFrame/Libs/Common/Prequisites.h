@@ -41,4 +41,10 @@
 #include "TimerMgr.h"
 #include "FrameTimerMgr.h"
 
+
+// ÄÚ´æ
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+
 #endif

@@ -2,6 +2,7 @@
 #include "MyMemoryDefaultAlloc.h"
 #include <stdlib.h>	// malloc, free
 #include "MyMemoryTracker.h"
+#include "PlatformDefine.h"
 
 #define MY_MEMORY_TRACKER 1
 
