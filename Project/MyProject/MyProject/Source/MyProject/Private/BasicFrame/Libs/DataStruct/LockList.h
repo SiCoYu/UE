@@ -31,7 +31,7 @@ public:
 
 	~LockList()
 	{
-		delete this->mVisitMutex;
+		MY_DELETE this->mVisitMutex;
 	}
 
 	uint32 getCount()

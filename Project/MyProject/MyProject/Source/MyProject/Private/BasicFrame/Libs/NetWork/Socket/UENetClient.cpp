@@ -29,9 +29,9 @@ UENetClient::UENetClient()
 
 UENetClient::~UENetClient()
 {
-	delete this->mClientBuffer;
-	delete this->mMsgSendEndEvent;
-	delete this->mSendMutex;
+	MY_DELETE this->mClientBuffer;
+	MY_DELETE this->mMsgSendEndEvent;
+	MY_DELETE this->mSendMutex;
 }
 
 bool UENetClient::getRecvThreadStart()

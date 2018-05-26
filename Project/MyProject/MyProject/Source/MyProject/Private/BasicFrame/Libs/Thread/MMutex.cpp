@@ -13,9 +13,9 @@ MMutex::MMutex()
 MMutex::~MMutex()
 {
 #ifdef USE_EXTERN_THREAD
-	delete mMutex;
+	MY_DELETE mMutex;
 #else
-	delete mMutex;
+	MY_DELETE mMutex;
 #endif
 }
 

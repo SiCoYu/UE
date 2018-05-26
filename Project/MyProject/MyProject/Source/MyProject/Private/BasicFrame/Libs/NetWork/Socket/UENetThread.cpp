@@ -17,7 +17,7 @@ UENetThread::UENetThread(INetMgr* pNetMgr, std::string mThreadName)
 
 UENetThread::~UENetThread()
 {
-	delete this->mSyncEvent;
+	MY_DELETE this->mSyncEvent;
 }
 
 MEvent* UENetThread::getSyncEventPtr()

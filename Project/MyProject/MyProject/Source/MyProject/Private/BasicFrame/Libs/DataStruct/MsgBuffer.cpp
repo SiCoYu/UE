@@ -13,9 +13,9 @@ MsgBuffer::MsgBuffer(uint32 initCapacity, uint32 maxCapacity)
 
 MsgBuffer::~MsgBuffer()
 {
-	delete this->mCircularBuffer;
-	delete this->mHeaderBA;
-	delete this->mMsgBodyBA;
+	MY_DELETE this->mCircularBuffer;
+	MY_DELETE this->mHeaderBA;
+	MY_DELETE this->mMsgBodyBA;
 }
 
 MByteBuffer* MsgBuffer::getHeaderBA()

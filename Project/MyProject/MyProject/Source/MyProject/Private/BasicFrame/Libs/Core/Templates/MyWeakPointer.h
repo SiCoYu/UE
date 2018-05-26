@@ -224,7 +224,7 @@ namespace MyNS
 		inline void destroy(void)
 		{
 			assert(mRefPtr && mRefInfo);
-			delete mRefInfo;
+			MY_DELETE mRefInfo;
 		}
 
 		inline void swap(WeakPtr<T> &other)

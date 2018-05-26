@@ -235,7 +235,7 @@ namespace MyNS
 		inline void destroy(void)
 		{
 			my_assert(this->mRefPtr && this->mRefInfo);
-			delete this->mRefInfo;
+			MY_DELETE this->mRefInfo;
 		}
 
 		inline void swap(SharedPtr<T> &other)

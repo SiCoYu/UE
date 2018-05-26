@@ -26,8 +26,8 @@ MCircularBuffer::MCircularBuffer(
 
 MCircularBuffer::~MCircularBuffer()
 {
-	delete this->mDynBuffer;
-	delete this->mTmpBA;
+	MY_DELETE this->mDynBuffer;
+	MY_DELETE this->mTmpBA;
 }
 
 uint32 MCircularBuffer::getFirst()
@@ -105,7 +105,7 @@ void MCircularBuffer::linearize()
 		Array::Copy(this->mDynBuffer->mBuffer, this->mFirst, this->mDynBuffer->mBuffer, 0, this->mDynBuffer->mCapacity - mFirst);  // 拷贝第一段数据到 0 索引位置
 		Array::Copy(tmp, 0, this->mDynBuffer->mBuffer, this->mDynBuffer->mCapacity - this->mFirst, this->mLast);      // 拷贝第二段数据到缓冲区
 
-		delete tmp;
+		MY_DELETE tmp;
 
 		this->mFirst = 0;
 		this->mLast = this->getSize();
@@ -140,7 +140,7 @@ void MCircularBuffer::setCapacity(std::size_t newCapacity)
 	this->mLast = this->mDynBuffer->mSize;
 	this->mDynBuffer->mCapacity = newCapacity;
 
-	delete this->mDynBuffer->mBuffer;
+	MY_DELETE this->mDynBuffer->mBuffer;
 	this->mDynBuffer->mBuffer = tmpbuff;
 }
 

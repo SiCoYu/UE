@@ -12,7 +12,7 @@ NetTCPClient::NetTCPClient(ISocketHandler& h)
 
 NetTCPClient::~NetTCPClient()
 {
-	delete this->mClientBuffer;
+	MY_DELETE this->mClientBuffer;
 }
 
 void NetTCPClient::OnConnect()

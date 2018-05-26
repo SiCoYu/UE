@@ -174,7 +174,7 @@ NetMgr::~NetMgr()
 	this->Release();
 #endif
 
-	delete mVisitMutex;
+	MY_DELETE this->mVisitMutex;
 }
 
 void NetMgr::init()

@@ -8,5 +8,5 @@ void TestDownload::run()
 	DownloadParam* downloadParam = MY_NEW DownloadParam();
 	downloadParam->setPath("");
 	GDownloadMgr->download(downloadParam);
-	delete downloadParam;
+	MY_DELETE downloadParam;
 }

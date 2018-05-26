@@ -18,8 +18,8 @@ MCondition::MCondition(std::string name)
 
 MCondition::~MCondition()
 {
-	delete this->mMutex;
-	delete this->mEvent;
+	MY_DELETE this->mMutex;
+	MY_DELETE this->mEvent;
 }
 
 bool MCondition::getCanEnterWait()

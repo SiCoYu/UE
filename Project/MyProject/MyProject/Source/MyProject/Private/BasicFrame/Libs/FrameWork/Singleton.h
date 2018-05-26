@@ -10,20 +10,20 @@ private:
 public:
 	static T* getSingletonPtr()
 	{
-		if (nullptr == msSingleton)
+		if (nullptr == T::msSingleton)
 		{
-			msSingleton = new T();
+			T::msSingleton = new T();
 		}
 
-		return msSingleton;
+		return T::msSingleton;
 	}
 
 	static void deleteSingletonPtr()
 	{
-		if (nullptr != msSingleton)
+		if (nullptr != T::msSingleton)
 		{
-			delete msSingleton;
-			msSingleton = nullptr;
+			delete T::msSingleton;
+			T::msSingleton = nullptr;
 		}
 	}
 };

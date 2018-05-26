@@ -120,7 +120,7 @@ void MDataStream::close()
 		if (this->mFileStream != nullptr)
 		{
 			Success = this->mFileStream->Close();
-			delete this->mFileStream;
+			MY_DELETE this->mFileStream;
 			this->mFileStream = nullptr;
 		}
 

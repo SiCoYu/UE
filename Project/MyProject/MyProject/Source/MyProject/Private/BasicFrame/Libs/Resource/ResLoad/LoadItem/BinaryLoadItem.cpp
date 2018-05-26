@@ -35,7 +35,7 @@ void UBinaryLoadItem::loadFile(const FString& Filename)
 		{
 			MByteBuffer* pFileBU = MY_NEW MByteBuffer(arrayBuffer.GetAllocatedSize());
 			pFileBU->writeBytes((char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
-			delete pFileBU;
+			MY_DELETE pFileBU;
 		}
 	}
 }

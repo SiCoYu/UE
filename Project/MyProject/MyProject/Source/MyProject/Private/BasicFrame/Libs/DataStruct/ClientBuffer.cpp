@@ -35,20 +35,20 @@ ClientBuffer::ClientBuffer()
 
 ClientBuffer::~ClientBuffer()
 {
-	delete this->mRawBuffer;
-	delete this->mMsgBuffer;
-	delete this->mSendTmpBuffer;
+	MY_DELETE this->mRawBuffer;
+	MY_DELETE this->mMsgBuffer;
+	MY_DELETE this->mSendTmpBuffer;
 
-	delete this->mSocketSendBA;
-	delete this->mUnCompressHeaderBA;
-	delete this->mSendData;
-	delete this->mTmpData;
+	MY_DELETE this->mSocketSendBA;
+	MY_DELETE this->mUnCompressHeaderBA;
+	MY_DELETE this->mSendData;
+	MY_DELETE this->mTmpData;
 
-	delete this->mReadMutex;
-	delete this->mWriteMutex;
+	MY_DELETE this->mReadMutex;
+	MY_DELETE this->mWriteMutex;
 
 #ifdef MSG_ENCRIPT
-	delete this->mCryptContext;
+	MY_DELETE this->mCryptContext;
 #endif
 }
 

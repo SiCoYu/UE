@@ -14,7 +14,7 @@ RefCountResLoadResultNotify::RefCountResLoadResultNotify()
 
 RefCountResLoadResultNotify::~RefCountResLoadResultNotify()
 {
-	delete this->mRefCount;
+	MY_DELETE this->mRefCount;
 }
 
 RefCount* RefCountResLoadResultNotify::getRefCount()
