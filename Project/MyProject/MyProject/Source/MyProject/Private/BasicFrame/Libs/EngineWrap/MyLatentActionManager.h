@@ -1,8 +1,10 @@
 #pragma once
 
+#include "GObject.h"
+
 struct FLatentActionManager;
 
-class MyLatentActionManager
+class MyLatentActionManager : public GObject
 {
 protected:
 	FLatentActionManager* mLatentActionManager;

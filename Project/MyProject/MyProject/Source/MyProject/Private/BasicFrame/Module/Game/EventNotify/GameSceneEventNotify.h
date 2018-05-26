@@ -4,11 +4,13 @@
 #include "MySharedPointer.h"
 #include "PlatformDefine.h"
 
+#include "GObject.h"
+
 #ifdef ENABLE_UNIT_TEST
 	class TestMain;
 #endif
 
-class GameSceneEventNotify : public ISceneEventNotify
+class GameSceneEventNotify : public GObject, public ISceneEventNotify
 {
 protected:
 #ifdef ENABLE_UNIT_TEST
