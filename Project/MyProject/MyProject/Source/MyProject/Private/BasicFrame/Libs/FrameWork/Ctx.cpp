@@ -95,50 +95,50 @@ Ctx::~Ctx()
 
 void Ctx::construct()
 {
-	this->mShareData = MySharedPtr<ShareData>(SAFE_NEW ShareData());
-	this->mNetDispatchList = MySharedPtr<NetCmdNotify>(SAFE_NEW NetCmdNotify());
-	this->mLogSys = MySharedPtr<LogSys>(SAFE_NEW LogSys());
-	this->mEngineData = MySharedPtr<EngineData>(SAFE_NEW EngineData());
+	this->mShareData = MySharedPtr<ShareData>(MY_NEW ShareData());
+	this->mNetDispatchList = MySharedPtr<NetCmdNotify>(MY_NEW NetCmdNotify());
+	this->mLogSys = MySharedPtr<LogSys>(MY_NEW LogSys());
+	this->mEngineData = MySharedPtr<EngineData>(MY_NEW EngineData());
 
 #ifdef USE_EXTERN_THREAD
-	this->mStdoutLog = MySharedPtr<StdoutLog>(SAFE_NEW StdoutLog());
+	this->mStdoutLog = MySharedPtr<StdoutLog>(MY_NEW StdoutLog());
 #endif
 
-	this->mMyStreamableManager = MySharedPtr<FMyStreamableManager>(SAFE_NEW FMyStreamableManager());
-	this->mResLoadMgr = MySharedPtr<ResLoadMgr>(SAFE_NEW ResLoadMgr());
-	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(SAFE_NEW ClassAssetInsMgr());
-	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(SAFE_NEW ObjectAssetInsMgr());
-	this->mTextureInsResMgr = MySharedPtr<TextureInsResMgr>(SAFE_NEW TextureInsResMgr());
-	this->mMaterialInsResMgr = MySharedPtr<MaterialInsResMgr>(SAFE_NEW MaterialInsResMgr());
+	this->mMyStreamableManager = MySharedPtr<FMyStreamableManager>(MY_NEW FMyStreamableManager());
+	this->mResLoadMgr = MySharedPtr<ResLoadMgr>(MY_NEW ResLoadMgr());
+	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(MY_NEW ClassAssetInsMgr());
+	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(MY_NEW ObjectAssetInsMgr());
+	this->mTextureInsResMgr = MySharedPtr<TextureInsResMgr>(MY_NEW TextureInsResMgr());
+	this->mMaterialInsResMgr = MySharedPtr<MaterialInsResMgr>(MY_NEW MaterialInsResMgr());
 
-	this->mUiMgr = MySharedPtr<UiMgr>(SAFE_NEW UiMgr());
-	this->mTableSys = MySharedPtr<TableSys>(SAFE_NEW TableSys());
-	this->mConfig = MySharedPtr<Config>(SAFE_NEW Config());
+	this->mUiMgr = MySharedPtr<UiMgr>(MY_NEW UiMgr());
+	this->mTableSys = MySharedPtr<TableSys>(MY_NEW TableSys());
+	this->mConfig = MySharedPtr<Config>(MY_NEW Config());
 
 #ifdef	USE_EXTERN_THREAD
-	this->mNetMgr = MySharedPtr<NetMgr>(SAFE_NEW NetMgr(getStdLog());
+	this->mNetMgr = MySharedPtr<NetMgr>(MY_NEW NetMgr(getStdLog());
 #else
-	this->mNetMgr = MySharedPtr<NetMgr>(SAFE_NEW NetMgr());
+	this->mNetMgr = MySharedPtr<NetMgr>(MY_NEW NetMgr());
 #endif
 
-	this->mPoolSys = MySharedPtr<PoolSys>(SAFE_NEW PoolSys());
-	this->mDownloadMgr = MySharedPtr<DownloadMgr>(SAFE_NEW DownloadMgr());
-	this->mFileSys = MySharedPtr<MFileSys>(SAFE_NEW MFileSys());
-	this->mSystemSetting = MySharedPtr<SystemSetting>(SAFE_NEW SystemSetting());
-	this->mLuaSystem = MySharedPtr<LuaSystem>(SAFE_NEW LuaSystem());
-	this->mSceneEventNotify = MySharedPtr<ISceneEventNotify>(SAFE_NEW GameSceneEventNotify());
-	this->mMyLatentActionManager = MySharedPtr<MyLatentActionManager>(SAFE_NEW MyLatentActionManager());
+	this->mPoolSys = MySharedPtr<PoolSys>(MY_NEW PoolSys());
+	this->mDownloadMgr = MySharedPtr<DownloadMgr>(MY_NEW DownloadMgr());
+	this->mFileSys = MySharedPtr<MFileSys>(MY_NEW MFileSys());
+	this->mSystemSetting = MySharedPtr<SystemSetting>(MY_NEW SystemSetting());
+	this->mLuaSystem = MySharedPtr<LuaSystem>(MY_NEW LuaSystem());
+	this->mSceneEventNotify = MySharedPtr<ISceneEventNotify>(MY_NEW GameSceneEventNotify());
+	this->mMyLatentActionManager = MySharedPtr<MyLatentActionManager>(MY_NEW MyLatentActionManager());
 
-	this->mSceneSys = MySharedPtr<SceneSys>(SAFE_NEW SceneSys());
-	this->mSystemTimeData = MySharedPtr<SystemTimeData>(SAFE_NEW SystemTimeData());
-	this->mSystemFrameData = MySharedPtr<SystemFrameData>(SAFE_NEW SystemFrameData());
-	this->mProcessSys = MySharedPtr<ProcessSys>(SAFE_NEW ProcessSys());
-	this->mEngineLoop = MySharedPtr<EngineLoop>(SAFE_NEW EngineLoop());
-	this->mDelayTaskMgr = MySharedPtr<DelayTaskMgr>(SAFE_NEW DelayTaskMgr());
+	this->mSceneSys = MySharedPtr<SceneSys>(MY_NEW SceneSys());
+	this->mSystemTimeData = MySharedPtr<SystemTimeData>(MY_NEW SystemTimeData());
+	this->mSystemFrameData = MySharedPtr<SystemFrameData>(MY_NEW SystemFrameData());
+	this->mProcessSys = MySharedPtr<ProcessSys>(MY_NEW ProcessSys());
+	this->mEngineLoop = MySharedPtr<EngineLoop>(MY_NEW EngineLoop());
+	this->mDelayTaskMgr = MySharedPtr<DelayTaskMgr>(MY_NEW DelayTaskMgr());
 
-	this->mTickMgr = MySharedPtr<TickMgr>(SAFE_NEW TickMgr());
-	this->mTimerMgr = MySharedPtr<TimerMgr>(SAFE_NEW TimerMgr());
-	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(SAFE_NEW FrameTimerMgr());
+	this->mTickMgr = MySharedPtr<TickMgr>(MY_NEW TickMgr());
+	this->mTimerMgr = MySharedPtr<TimerMgr>(MY_NEW TimerMgr());
+	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(MY_NEW FrameTimerMgr());
 
 	// 最后初始化 BluePrint 数据
 	// 这个时候还没有获取 GEngineData->getMainActor() ，使用会报错

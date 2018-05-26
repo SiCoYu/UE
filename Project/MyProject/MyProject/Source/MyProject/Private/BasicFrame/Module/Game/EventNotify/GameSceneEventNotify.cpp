@@ -35,9 +35,6 @@ void GameSceneEventNotify::dispose()
 {
 #ifdef ENABLE_UNIT_TEST
 	this->mTestMain->dispose();
-#endif
-
-#ifdef ENABLE_UNIT_TEST
 	this->mTestMain.setNull();
 #endif
 }
@@ -45,7 +42,7 @@ void GameSceneEventNotify::dispose()
 void GameSceneEventNotify::runTest()
 {
 #ifdef ENABLE_UNIT_TEST
-	this->mTestMain = MySharedPtr<TestMain>(new TestMain());
+	this->mTestMain = MySharedPtr<TestMain>(MY_NEW TestMain());
 	this->mTestMain->runTest();
 #endif
 }
