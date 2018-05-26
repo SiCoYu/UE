@@ -6,7 +6,7 @@
 TaskQueue::TaskQueue(std::string name)
     : Super(name)
 {
-	mTaskThreadPool = new TaskThreadPool();
+	mTaskThreadPool = MY_NEW TaskThreadPool();
 }
 
 void TaskQueue::push(ITask* item)

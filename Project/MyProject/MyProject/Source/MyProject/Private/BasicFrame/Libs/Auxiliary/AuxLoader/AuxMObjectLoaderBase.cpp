@@ -154,7 +154,7 @@ namespace MyNS
 				{
 					if (this->mIsInsNeedCoroutine)
 					{
-						this->mResInsEventDispatch = new ResInsEventDispatch();
+						this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
 						this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabIns));
 
 						if (this->mIsSetFakePos)
@@ -297,7 +297,7 @@ namespace MyNS
 	{
 		if (nullptr == this->mInsEventDispatch && nullptr != insHandle)
 		{
-			this->mInsEventDispatch = new ResInsEventDispatch();
+			this->mInsEventDispatch = MY_NEW ResInsEventDispatch();
 		}
 		if (nullptr != insHandle)
 		{
@@ -308,7 +308,7 @@ namespace MyNS
 		{
 			if (nullptr == this->mResInsEventDispatch)
 			{
-				this->mResInsEventDispatch = new ResInsEventDispatch();
+				this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
 			}
 			this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this,&AuxMObjectLoaderBase::onInstantiateObjectFinish));
 

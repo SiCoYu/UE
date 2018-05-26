@@ -32,7 +32,7 @@ void NetModuleDispatchHandle::addCmdHandle(int cmdId, EventDispatchDelegate hand
 {
 	if (!this->mId2DispatchDic.containsKey(cmdId))
 	{
-		this->mId2DispatchDic[cmdId] = new AddOnceEventDispatch();
+		this->mId2DispatchDic[cmdId] = MY_NEW AddOnceEventDispatch();
 	}
 
 	this->mId2DispatchDic[cmdId]->addEventHandle(handle);

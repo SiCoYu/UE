@@ -2,6 +2,9 @@
 #include "ResInsBase.h"
 #include "RefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 ResInsBase::ResInsBase()
 {
@@ -10,7 +13,7 @@ ResInsBase::ResInsBase()
 #else
 	this->mIsOrigResNeedImmeUnload = true;
 #endif
-	this->mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
+	this->mRefCountResLoadResultNotify = MY_NEW RefCountResLoadResultNotify();
 }
 
 ResInsBase::~ResInsBase()

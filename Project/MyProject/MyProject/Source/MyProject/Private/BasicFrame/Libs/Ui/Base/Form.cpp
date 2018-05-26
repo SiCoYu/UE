@@ -227,7 +227,7 @@ void UForm::adjustPosWithAlign()
 
 PointF* UForm::computeAdjustPosWithAlign()
 {
-	PointF* ret = new PointF(0, 0);
+	PointF* ret = MY_NEW PointF(0, 0);
 	//int widthStage = 0;
 	//int heightStage = 0;
 	//if (mAlignVertial == (int)CENTER)

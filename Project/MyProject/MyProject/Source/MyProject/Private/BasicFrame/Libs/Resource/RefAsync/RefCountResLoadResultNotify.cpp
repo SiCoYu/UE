@@ -4,7 +4,7 @@
 
 RefCountResLoadResultNotify::RefCountResLoadResultNotify()
 {
-	this->mRefCount = new RefCount();
+	this->mRefCount = MY_NEW RefCount();
 }
 
 RefCountResLoadResultNotify::~RefCountResLoadResultNotify()

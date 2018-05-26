@@ -3,6 +3,7 @@
 
 #include "MyProject.h"
 #include "PlatformDefine.h"
+#include "GObject.h"
 
 // 如果使用外部线程
 #ifdef USE_EXTERN_THREAD
@@ -15,9 +16,9 @@
 
 
 /**
-    * @brief 互斥
-    */
-class MMutex
+ * @brief 互斥
+ */
+class MMutex : public GObject
 {
 private:
 #ifdef USE_EXTERN_THREAD

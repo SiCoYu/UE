@@ -21,7 +21,7 @@ namespace MyNS
 
 	public:
 		WeakPtr(T* rep) 
-			: mRefPtr(rep), mRefInfo(new PtrRefInfo)
+			: mRefPtr(rep), mRefInfo(MY_NEW PtrRefInfo)
 		{
 
 		}
@@ -150,7 +150,7 @@ namespace MyNS
 		void bind(T* rep) 
 		{
 			assert(!mRefPtr && !mRefInfo);
-			mRefInfo = new SharedPtrInfo;
+			mRefInfo = MY_NEW SharedPtrInfo;
 			mRefPtr = rep;
 		}
 

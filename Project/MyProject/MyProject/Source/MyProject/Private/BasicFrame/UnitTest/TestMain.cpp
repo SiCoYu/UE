@@ -15,17 +15,17 @@
 
 TestMain::TestMain()
 {
-	this->mTestExtern = new TestExtern();
+	this->mTestExtern = MY_NEW TestExtern();
 
 #ifdef USE_EXTERN_THREAD
 
-	this->mTestSocket = new TestSocket();
+	this->mTestSocket = MY_NEW TestSocket();
 
 #endif	// USE_EXTERN_THREAD
 
-	this->mTestUI = new TestUi();
-	this->mTestDownload = new TestDownload();
-	this->mTestLuaBind = new TestLuaBind();
+	this->mTestUI = MY_NEW TestUi();
+	this->mTestDownload = MY_NEW TestDownload();
+	this->mTestLuaBind = MY_NEW TestLuaBind();
 }
 
 TestMain::~TestMain()

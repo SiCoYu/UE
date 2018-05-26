@@ -23,46 +23,48 @@ MyMemoryTracker& MyMemoryTracker::get()
 }
 
 MyMemoryTracker::MyMemoryTracker()
-	: mLeakFileName("MyLeaks.log"), mDumpToStdOut(true),
-	mTotalAllocations(0), mRecordEnable(true)
+	: mLeakFileName("MyLeaks.log"), 
+	 mDumpToStdOut(true),
+	 mTotalAllocations(0), 
+	 mRecordEnable(true)
 {
 }
 
 MyMemoryTracker::~MyMemoryTracker()
 {
-	reportLeaks();
+	this->reportLeaks();
 
-	mRecordEnable = false;
+	this->mRecordEnable = false;
 }
 
 void MyMemoryTracker::setReportFileName(const std::string& name)
 {
-	mLeakFileName = name;
+	this->mLeakFileName = name;
 }
 
 const std::string& MyMemoryTracker::getReportFileName() const
 {
-	return mLeakFileName;
+	return this->mLeakFileName;
 }
 
 void MyMemoryTracker::setReportToStdOut(bool rep)
 {
-	mDumpToStdOut = rep;
+	this->mDumpToStdOut = rep;
 }
 
 bool MyMemoryTracker::getReportToStdOut() const
 {
-	return mDumpToStdOut;
+	return this->mDumpToStdOut;
 }
 
 void MyMemoryTracker::setRecordEnable(bool recordEnable)
 {
-	mRecordEnable = recordEnable;
+	this->mRecordEnable = recordEnable;
 }
 
 bool MyMemoryTracker::getRecordEnable() const
 {
-	return mRecordEnable;
+	return this->mRecordEnable;
 }
 
 void MyMemoryTracker::_recordAlloc(
@@ -73,58 +75,58 @@ void MyMemoryTracker::_recordAlloc(
 	const char* func
 )
 {
-	if (mRecordEnable)
+	if (this->mRecordEnable)
 	{
-		assert(mAllocations.find(ptr) == mAllocations.end() && "Double allocation with same address - ");
+		assert(this->mAllocations.find(ptr) == this->mAllocations.end() && "Double allocation with same address - ");
 
-		mAllocations[ptr] = MyAllocRecordItem(
+		this->mAllocations[ptr] = MyAllocRecordItem(
 			sz, 
 			file, 
 			ln, 
 			func
 		);
 
-		mTotalAllocations += sz;
+		this->mTotalAllocations += sz;
 	}
 }
 
 void MyMemoryTracker::_recordDealloc(void* ptr)
 {
-	if (mRecordEnable)
+	if (this->mRecordEnable)
 	{
 		if (!ptr)
 			return;
 
-		AllocationMap::iterator i = mAllocations.find(ptr);
-		assert(i != mAllocations.end() && "Unable to locate allocation unit - ");
+		AllocationMap::iterator i = this->mAllocations.find(ptr);
+		assert(i != this->mAllocations.end() && "Unable to locate allocation unit - ");
 
-		mTotalAllocations -= i->second.mBytes;
-		mAllocations.erase(i);
+		this->mTotalAllocations -= i->second.mBytes;
+		this->mAllocations.erase(i);
 	}
 }
 
 size_t MyMemoryTracker::getTotalMemoryAllocated() const
 {
-	return mTotalAllocations;
+	return this->mTotalAllocations;
 }
 
 void MyMemoryTracker::reportLeaks()
 {
-	if (mRecordEnable)
+	if (this->mRecordEnable)
 	{
 		std::stringstream os;
 
-		if (mAllocations.empty())
+		if (this->mAllocations.empty())
 		{
 			os << "My Memory: No memory leaks" << std::endl;
 		}
 		else
 		{
 			os << "My Memory: Detected memory leaks !!! " << std::endl;
-			os << "My Memory: (" << mAllocations.size() << ") Allocation(s) with total " << mTotalAllocations << " bytes." << std::endl;
+			os << "My Memory: (" << this->mAllocations.size() << ") Allocation(s) with total " << this->mTotalAllocations << " bytes." << std::endl;
 			os << "My Memory: Dumping allocations -> " << std::endl;
 
-			for (AllocationMap::const_iterator i = mAllocations.begin(); i != mAllocations.end(); ++i)
+			for (AllocationMap::const_iterator i = this->mAllocations.begin(); i != this->mAllocations.end(); ++i)
 			{
 				const MyAllocRecordItem& alloc = i->second;
 				if (!alloc.mFileName.empty())
@@ -138,11 +140,11 @@ void MyMemoryTracker::reportLeaks()
 			os << std::endl;
 		}
 
-		if (mDumpToStdOut)
+		if (this->mDumpToStdOut)
 			My_OutputCString(os.str().c_str());
 
 		std::ofstream of;
-		of.open(mLeakFileName.c_str());
+		of.open(this->mLeakFileName.c_str());
 		of << os.str();
 		of.close();
 	}

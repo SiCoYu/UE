@@ -4,7 +4,7 @@
 
 StrIdObjectPoolGroup::StrIdObjectPoolGroup()
 {
-	this->mPoolList = new LockList<IPoolObject*>("PoolList");
+	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");
 }
 
 void StrIdObjectPoolGroup::init()

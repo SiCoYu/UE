@@ -3,8 +3,9 @@
 
 #include "TestStaticLib/TestStaticLibA.h"
 #include "TestStaticLib/TestStaticLibB.h"
+#include "GObject.h"
 
-class TestExtern
+class TestExtern : public GObject 
 {
 public:
 	TestStaticLibA* mTestStaticLibA;

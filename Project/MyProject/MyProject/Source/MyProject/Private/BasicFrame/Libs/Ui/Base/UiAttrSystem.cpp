@@ -3,6 +3,9 @@
 #include "UtilContainers.h"
 #include "UiFormId.h"
 #include "UiAttrSystem.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 UiAttrSystem::UiAttrSystem()
 {
@@ -66,7 +69,7 @@ void UiAttrSystem::addItem(UiFormId formId, std::string widgetPath, FormType for
 {
 	UiAttrItem* item = nullptr;
 
-	item = new UiAttrItem();
+	item = MY_NEW UiAttrItem();
 	this->mId2AttrDic[formId] = item;
 	item->mWidgetPath = widgetPath;
 	item->mFormType = formType;

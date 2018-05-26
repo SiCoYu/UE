@@ -6,7 +6,7 @@
 TestSocket::TestSocket()
 {
 	SocketHandler aaa(NULL);
-	mTcpSocket = new TcpSocket(aaa);
+	mTcpSocket = MY_NEW TcpSocket(aaa);
 }
 
 #endif	// USE_EXTERN_THREAD

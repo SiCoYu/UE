@@ -40,7 +40,7 @@ public:
 		//    }
 		//}
 
-		T* retObj = new T();
+		T* retObj = MY_NEW T();
 		return retObj;
 	}
 

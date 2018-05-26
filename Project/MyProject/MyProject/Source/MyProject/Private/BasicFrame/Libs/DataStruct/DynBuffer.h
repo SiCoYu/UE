@@ -1,16 +1,21 @@
-﻿#ifndef __DYNBUFFER_H
-#define __DYNBUFFER_H
+﻿#ifndef __DynBuffer_H
+#define __DynBuffer_H
 
 #include "Platform.h"
 #include <cstddef>
 #include "BufferCV.h"
 #include "DynBufResizePolicy.h"
+#include "GObject.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
 
 /**
  * @brief 动态增长缓冲区，不分类型，就是 byte 缓冲区
  */
 template <class T>
-class DynBuffer
+class DynBuffer : public GObject
 {
 	friend class ClientBuffer;
 
@@ -21,42 +26,46 @@ public:
 	T* mBuffer;
 
 public:
-	DynBuffer(size_t initCapacity = BufferCV::INIT_CAPACITY, size_t maxCapacity = BufferCV::MAX_CAPACITY)
-		: mCapacity(initCapacity), mMaxCapacity(maxCapacity)
+	DynBuffer(
+		size_t initCapacity = BufferCV::INIT_CAPACITY, 
+		size_t maxCapacity = BufferCV::MAX_CAPACITY
+	)
+		: mCapacity(initCapacity), 
+		  mMaxCapacity(maxCapacity)
 	{
-		mSize = 0;
-		mBuffer = new T[mCapacity];
+		this->mSize = 0;
+		this->mBuffer = MY_NEW T[mCapacity];
 	}
 
 	~DynBuffer()
 	{
-		delete[] mBuffer;
+		delete[] this->mBuffer;
 	}
 
 	T* getBuffer()
 	{
-		return mBuffer;
+		return this->mBuffer;
 	}
 
 	void setBuffer(char* value, uint32 len)
 	{
-		mBuffer = value;
-		mCapacity = len;
+		this->mBuffer = value;
+		this->mCapacity = len;
 	}
 
 	std::size_t getMaxCapacity()
 	{
-		return mMaxCapacity;
+		return this->mMaxCapacity;
 	}
 
 	std::size_t getCapacity()
 	{
-		return mCapacity;
+		return this->mCapacity;
 	}
 
 	void setCapacity(std::size_t value)
 	{
-		if (value == mCapacity)
+		if (value == this->mCapacity)
 		{
 			return;
 		}
@@ -65,12 +74,12 @@ public:
 			return;
 		}
 
-		T* tmpbuff = new T[value];   // 分配新的空间
-		memcpy(tmpbuff, mBuffer, mCapacity);
+		T* tmpbuff = MY_NEW T[value];   // 分配新的空间
+		memcpy(tmpbuff, this->mBuffer, this->mCapacity);
 
-		delete[] mBuffer;
-		mBuffer = tmpbuff;
-		mCapacity = value;
+		delete[] this->mBuffer;
+		this->mBuffer = tmpbuff;
+		this->mCapacity = value;
 	}
 
 	std::size_t getSize()
@@ -80,12 +89,12 @@ public:
 
 	void setSize(std::size_t value)
 	{
-		if (mSize > this->getCapacity())
+		if (this->mSize > this->getCapacity())
 		{
-			extendDeltaCapicity(value - this->getSize());
+			this->extendDeltaCapicity(value - this->getSize());
 		}
 
-		mSize = value;
+		this->mSize = value;
 	}
 
 	void extendDeltaCapicity(uint32 delta)
@@ -107,7 +116,7 @@ public:
 
 	bool canAddData(uint32 num)
 	{
-		if (mCapacity - mSize >= num)
+		if (this->mCapacity - this->mSize >= num)
 		{
 			return true;
 		}

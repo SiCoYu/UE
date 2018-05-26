@@ -13,10 +13,11 @@
 #include "MEncode.h"
 #include "BufferCV.h"
 #include "IDispatchObject.h"
+#include "GObject.h"
 
 template <class T> class DynBuffer;
 
-class MByteBuffer : public IDispatchObject
+class MByteBuffer : public GObject, public IDispatchObject
 {
 public:
 	// int mId;        // 测试使用
@@ -32,7 +33,11 @@ protected:
 	//LuaCSBridgeByteBuffer m_luaCSBridgeByteBuffer;        // Lua 中的缓冲区
 
 public:
-	MByteBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY, EEndian endian = eLITTLE_ENDIAN);
+	MByteBuffer(
+		uint32 initCapacity = BufferCV::INIT_CAPACITY, 
+		uint32 maxCapacity = BufferCV::MAX_CAPACITY, 
+		EEndian endian = eLITTLE_ENDIAN
+	);
 	DynBuffer<char>* getDynBuffer();
 	uint32 getBytesAvailable();
 	EEndian getEndian();

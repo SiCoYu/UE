@@ -1,5 +1,5 @@
-#ifndef __ENDIAN_H
-#define __ENDIAN_H
+#ifndef __EEndian_H
+#define __EEndian_H
 
 /**
  * @brief 系统大小端定义
@@ -16,7 +16,7 @@ static union { char c[4]; unsigned long mylong; } endian_test = { { 'l', '?', '?
 class SystemEndian
 {
 public:
-	static EEndian m_sEndian;
+	static EEndian msEndian;
 };
 
 #endif

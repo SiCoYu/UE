@@ -1,12 +1,15 @@
 ﻿#include "MyProject.h"
 #include "DownloadItem.h"
 #include "ResLoadState.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 DownloadItem::DownloadItem()
 {
-    mResLoadType = eLoadWeb;
-    mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
-    mAllLoadResEventDispatch = new ResEventDispatch();
+	this->mResLoadType = eLoadWeb;
+	this->mRefCountResLoadResultNotify = MY_NEW RefCountResLoadResultNotify();
+	this->mAllLoadResEventDispatch = MY_NEW ResEventDispatch();
 }
 
 DownloadItem::~DownloadItem()
@@ -36,10 +39,10 @@ void DownloadItem::setAllLoadResEventDispatch(ResEventDispatch* value)
 
 void DownloadItem::reset()
 {
-    mLoadPath = "";
-    mDownloadType = eHttpWeb;
+	this->mLoadPath = "";
+	this->mDownloadType = eHttpWeb;
 
-    mBytes = nullptr;
+	this->mBytes = nullptr;
 }
 
 std::string DownloadItem::getLoadPath()

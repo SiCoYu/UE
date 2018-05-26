@@ -12,24 +12,24 @@
 
 ClientBuffer::ClientBuffer()
 {
-	mRawBuffer = new MsgBuffer();
-	mMsgBuffer = new MsgBuffer();
-	//mSendTmpBA = new MByteBuffer();
-	mSendTmpBuffer = new MsgBuffer();
-	mSocketSendBA = new MByteBuffer();
+	mRawBuffer = MY_NEW MsgBuffer();
+	mMsgBuffer = MY_NEW MsgBuffer();
+	//mSendTmpBA = MY_NEW MByteBuffer();
+	mSendTmpBuffer = MY_NEW MsgBuffer();
+	mSocketSendBA = MY_NEW MByteBuffer();
 	//mSocketSendBA.mId = 1000;
 
-	//mDynBuffer = new DynamicBuffer<byte>(8096);
-	mUnCompressHeaderBA = new MByteBuffer();
-	mSendData = new MByteBuffer();
-	mTmpData = new MByteBuffer(4);
-	mTmp1fData = new MByteBuffer(4);
+	//mDynBuffer = MY_NEW DynamicBuffer<byte>(8096);
+	mUnCompressHeaderBA = MY_NEW MByteBuffer();
+	mSendData = MY_NEW MByteBuffer();
+	mTmpData = MY_NEW MByteBuffer(4);
+	mTmp1fData = MY_NEW MByteBuffer(4);
 
-	mReadMutex = new MMutex();
-	mWriteMutex = new MMutex();
+	mReadMutex = MY_NEW MMutex();
+	mWriteMutex = MY_NEW MMutex();
 
 #ifdef MSG_ENCRIPT
-	mCryptContext = new CryptContext();
+	mCryptContext = MY_NEW CryptContext();
 #endif
 }
 
@@ -97,7 +97,7 @@ MsgBuffer* ClientBuffer::getRawBuffer()
 
 void ClientBuffer::SetRevBufferSize(int32 size)
 {
-	mDynBuffer = new DynBuffer<char>(size);
+	mDynBuffer = MY_NEW DynBuffer<char>(size);
 }
 
 void ClientBuffer::moveDyn2Raw()
@@ -133,7 +133,7 @@ void ClientBuffer::send(bool bnet)
 	if (bnet)       // 从 socket 发送出去
 	{
 #ifdef NET_MULTHREAD
-		using (MLock mlock = new MLock(mWriteMutex))
+		using (MLock mlock = MY_NEW MLock(mWriteMutex))
 #endif
 		{
 			//mSendTmpBA.writeUnsignedInt(mSendData.length);                            // 写入头部长度
@@ -180,7 +180,7 @@ void ClientBuffer::getSocketSendData()
 
 	// 获取完数据，就解锁
 #ifdef NET_MULTHREAD
-	using (MLock mlock = new MLock(mWriteMutex))
+	using (MLock mlock = MY_NEW MLock(mWriteMutex))
 #endif
 	{
 		//mSocketSendBA.writeBytes(mSendTmpBA.dynBuff.buff, 0, (uint)mSendTmpBA.length);
@@ -381,7 +381,7 @@ void ClientBuffer::UnCompressAndDecryptEveryOne()
 		mUnCompressHeaderBA->setPos(0);
 
 #ifdef NET_MULTHREAD
-		using (MLock mlock = new MLock(mReadMutex))
+		using (MLock mlock = MY_NEW MLock(mReadMutex))
 #endif
 		{
 			mMsgBuffer->getCircularBuffer()->pushBackBA(mUnCompressHeaderBA);             // 保存消息大小字段
@@ -420,7 +420,7 @@ void ClientBuffer::UnCompressAndDecryptAllInOne()
 	mUnCompressHeaderBA->setPos(0);
 #endif
 #ifdef NET_MULTHREAD
-	using (MLock mlock = new MLock(mReadMutex))
+	using (MLock mlock = MY_NEW MLock(mReadMutex))
 #endif
 	{
 #if !defined MSG_COMPRESS && !defined MSG_ENCRIPT

@@ -1,5 +1,5 @@
-#ifndef __MSGBUFFER_H
-#define __MSGBUFFER_H
+#ifndef __MsgBuffer_H
+#define __MsgBuffer_H
 
 #include "BufferCV.h"
 

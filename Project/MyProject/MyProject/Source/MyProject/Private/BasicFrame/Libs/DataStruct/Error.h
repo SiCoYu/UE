@@ -1,5 +1,5 @@
-﻿#ifndef __ERROR_H
-#define __ERROR_H
+﻿#ifndef __Error_H
+#define __Error_H
 
 #include <assert.h>
 

@@ -6,6 +6,9 @@
 #include "Platform.h"
 #include <string>
 #include "MLock.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 /**
  * @brief 线程安全列表， T 是 Object ，便于使用 Equal 比较地址
@@ -23,33 +26,33 @@ public:
 		: mDynamicBuffer(initCapacity, maxCapacity)
 	{
 		//mDynamicBuffer = new DynBuffer<T>(initCapacity, maxCapacity);
-		mVisitMutex = new MMutex();
+		this->mVisitMutex = MY_NEW MMutex();
 	}
 
 	~LockList()
 	{
-		delete mVisitMutex;
+		delete this->mVisitMutex;
 	}
 
 	uint32 getCount()
 	{
-		MLock mlock(mVisitMutex);
+		MLock mlock(this->mVisitMutex);
 		{
-			return mDynamicBuffer.mSize;
+			return this->mDynamicBuffer.mSize;
 		}
 	}
 
 	T& operator[](int index)
 	{
-		MLock mlock(mVisitMutex);
+		MLock mlock(this->mVisitMutex);
 		{
-			if (index < mDynamicBuffer.mSize)
+			if (index < this->mDynamicBuffer.mSize)
 			{
-				return mDynamicBuffer.mBuffer[index];
+				return this->mDynamicBuffer.mBuffer[index];
 			}
 			else
 			{
-				return mRetItem;
+				return this->mRetItem;
 			}
 		}
 	}
@@ -58,22 +61,22 @@ public:
 	{
 		MLock mlock(mVisitMutex);
 		{
-			if (mDynamicBuffer.mSize >= mDynamicBuffer.mCapacity)
+			if (this->mDynamicBuffer.mSize >= this->mDynamicBuffer.mCapacity)
 			{
-				mDynamicBuffer.extendDeltaCapicity(1);
+				this->mDynamicBuffer.extendDeltaCapicity(1);
 			}
 
-			mDynamicBuffer.mBuffer[mDynamicBuffer.mSize] = item;
-			++mDynamicBuffer.mSize;
+			this->mDynamicBuffer.mBuffer[mDynamicBuffer.mSize] = item;
+			++this->mDynamicBuffer.mSize;
 		}
 	}
 
 	bool Remove(T item)
 	{
-		MLock mlock(mVisitMutex);
+		MLock mlock(this->mVisitMutex);
 		{
 			int idx = 0;
-			foreach(var elem in mDynamicBuffer.mBuffer)
+			foreach(var elem in this->mDynamicBuffer.mBuffer)
 			{
 				if (item.Equals(elem))       // 地址比较
 				{
@@ -89,37 +92,38 @@ public:
 
 	T RemoveAt(int index)
 	{
-		MLock mlock(mVisitMutex);
+		MLock mlock(this->mVisitMutex);
 		{
-			if (index < mDynamicBuffer.mSize)
+			if (index < this->mDynamicBuffer.mSize)
 			{
-				mRetItem = mDynamicBuffer.mBuffer[index];
+				this->mRetItem = this->mDynamicBuffer.mBuffer[index];
 
-				if (index < mDynamicBuffer.mSize)
+				if (index < this->mDynamicBuffer.mSize)
 				{
-					if (index != mDynamicBuffer.mSize - 1 && 1 != mDynamicBuffer.mSize) // 如果删除不是最后一个元素或者总共就大于一个元素
+					if (index != this->mDynamicBuffer.mSize - 1 && 1 != this->mDynamicBuffer.mSize) // 如果删除不是最后一个元素或者总共就大于一个元素
 					{
-						Array::Copy(mDynamicBuffer.mBuffer, index + 1, mDynamicBuffer.mBuffer, index, mDynamicBuffer.mSize - 1 - index);
+						Array::Copy(this->mDynamicBuffer.mBuffer, index + 1, this->mDynamicBuffer.mBuffer, index, this->mDynamicBuffer.mSize - 1 - index);
 					}
 
-					--mDynamicBuffer.mSize;
+					--this->mDynamicBuffer.mSize;
 				}
 			}
 			else
 			{
-				mRetItem = nullptr;
+				this->mRetItem = nullptr;
 			}
 
-			return mRetItem;
+			return this->mRetItem;
 		}
 	}
 
 	int IndexOf(T item)
 	{
-		MLock mlock(mVisitMutex);
+		MLock mlock(this->mVisitMutex);
 		{
 			int idx = 0;
-			foreach(var elem in mDynamicBuffer.mBuffer)
+
+			foreach(var elem in this->mDynamicBuffer.mBuffer)
 			{
 				if (item.Equals(elem))       // 地址比较
 				{
@@ -129,6 +133,7 @@ public:
 
 				++idx;
 			}
+
 			return -1;
 		}
 	}

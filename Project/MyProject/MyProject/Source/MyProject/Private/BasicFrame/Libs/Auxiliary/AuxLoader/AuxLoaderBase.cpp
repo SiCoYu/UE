@@ -13,7 +13,7 @@ namespace MyNS
 	{
 		this->mResEventDispatch = nullptr;
 		this->mInitPath = path;
-		this->mResLoadState = new ResLoadState();
+		this->mResLoadState = MY_NEW ResLoadState();
 		this->mResLoadPriority = ResLoadPriority::eRLP_Low_1000;
 
 		this->reset();
@@ -129,7 +129,7 @@ namespace MyNS
 	{
 		if (nullptr == this->mResEventDispatch)
 		{
-			this->mResEventDispatch = new ResEventDispatch();
+			this->mResEventDispatch = MY_NEW ResEventDispatch();
 		}
 
 		this->mResEventDispatch->addEventHandle(evtHandle);

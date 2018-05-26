@@ -5,56 +5,64 @@
 #include "DynBufResizePolicy.h"
 #include "BitConverter.h"
 #include "Array.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
 
-MByteBuffer::MByteBuffer(uint32 initCapacity, uint32 maxCapacity, EEndian endian)
+MByteBuffer::MByteBuffer(
+	uint32 initCapacity, 
+	uint32 maxCapacity, 
+	EEndian endian
+)
 {
-	mEndian = endian;        // 缓冲区默认是小端的数据，因为服务器是 linux 的
-	mDynBuffer = new DynBuffer<char>(initCapacity, maxCapacity);
+	this->mEndian = endian;        // 缓冲区默认是小端的数据，因为服务器是 linux 的
+	this->mDynBuffer = MY_NEW DynBuffer<char>(initCapacity, maxCapacity);
 }
 
 DynBuffer<char>* MByteBuffer::getDynBuffer()
 {
-	return mDynBuffer;
+	return this->mDynBuffer;
 }
 
 uint32 MByteBuffer::getBytesAvailable()
 {
 	//check();
-	return (mDynBuffer->getSize() - mPos);
+	return (this->mDynBuffer->getSize() - mPos);
 }
 
 EEndian MByteBuffer::getEndian()
 {
-	return mEndian;
+	return this->mEndian;
 }
 
 void MByteBuffer::setEndian(EEndian value)
 {
-	mEndian = value;
+	this->mEndian = value;
 }
 
 uint32 MByteBuffer::getLength()
 {
-	return mDynBuffer->getSize();
+	return this->mDynBuffer->getSize();
 }
 
 void MByteBuffer::setLength(uint32 value)
 {
-	mDynBuffer->setSize(value);
+	this->mDynBuffer->setSize(value);
 
 	//check();
 }
 
 void MByteBuffer::setPos(uint32 pos)
 {
-	mPos = pos;
+	this->mPos = pos;
 
 	//check();
 }
 
 uint32 MByteBuffer::getPos()
 {
-	return mPos;
+	return this->mPos;
 }
 
 //LuaCSBridgeByteBuffer* MByteBuffer::getLuaCSBridgeByteBuffer()
@@ -71,14 +79,14 @@ void MByteBuffer::clear()
 {
 	//check();
 
-	mPos = 0;
-	mDynBuffer->setSize(0);
+	this->mPos = 0;
+	this->mDynBuffer->setSize(0);
 }
 
 // 检查是否有足够的大小可以扩展
 bool MByteBuffer::canWrite(uint32 delta)
 {
-	if (mDynBuffer->getSize() + delta > mDynBuffer->getCapacity())
+	if (this->mDynBuffer->getSize() + delta > this->mDynBuffer->getCapacity())
 	{
 		//check();
 
@@ -93,7 +101,7 @@ bool MByteBuffer::canWrite(uint32 delta)
 // 读取检查
 bool MByteBuffer::canRead(uint32 delta)
 {
-	if (mPos + delta > mDynBuffer->getSize())
+	if (this->mPos + delta > this->mDynBuffer->getSize())
 	{
 		//check();
 
@@ -107,44 +115,44 @@ bool MByteBuffer::canRead(uint32 delta)
 
 void MByteBuffer::extendDeltaCapicity(uint32 delta)
 {
-	mDynBuffer->extendDeltaCapicity(delta);
+	this->mDynBuffer->extendDeltaCapicity(delta);
 
 	//check();
 }
 
 void MByteBuffer::advPos(uint32 num)
 {
-	mPos += num;
+	this->mPos += num;
 
 	//check();
 }
 
 void MByteBuffer::advPosAndLen(uint32 num)
 {
-	mPos += num;
-	setLength(mPos);
+	this->mPos += num;
+	setLength(this->mPos);
 
 	//check();
 }
 
 void MByteBuffer::incPosDelta(int delta)        // 添加 pos delta 数量
 {
-	mPos += (uint32)delta;
+	this->mPos += (uint32)delta;
 }
 
 void MByteBuffer::decPosDelta(int delta)     // 减少 pos delta 数量
 {
-	mPos -= (uint32)delta;
+	this->mPos -= (uint32)delta;
 }
 
 void MByteBuffer::incLenDelta(int delta)
 {
-	setLength(getLength() + (uint32)delta);
+	this->setLength(this->getLength() + (uint32)delta);
 }
 
 void MByteBuffer::decLenDelta(int delta)
 {
-	setLength(getLength() - (uint32)delta);
+	this->setLength(this->getLength() - (uint32)delta);
 }
 
 //// 压缩
@@ -273,10 +281,10 @@ void MByteBuffer::decLenDelta(int delta)
 
 MByteBuffer& MByteBuffer::readInt8(int8& tmpByte)
 {
-	if (canRead(sizeof(char)))
+	if (this->canRead(sizeof(char)))
 	{
-		tmpByte = (char)BitConverter::ToChar(mDynBuffer->getBuffer(), (int)mPos);
-		advPos(sizeof(char));
+		tmpByte = (char)BitConverter::ToChar(this->mDynBuffer->getBuffer(), (int)this->mPos);
+		this->advPos(sizeof(char));
 	}
 
 	//check();
@@ -286,10 +294,10 @@ MByteBuffer& MByteBuffer::readInt8(int8& tmpByte)
 
 MByteBuffer& MByteBuffer::readUnsignedInt8(uint8& tmpByte)
 {
-	if (canRead(sizeof(uint8)))
+	if (this->canRead(sizeof(uint8)))
 	{
-		tmpByte = (uint8)BitConverter::ToChar(mDynBuffer->getBuffer(), (int)mPos);
-		advPos(sizeof(uint8));
+		tmpByte = (uint8)BitConverter::ToChar(this->mDynBuffer->getBuffer(), (int)this->mPos);
+		this->advPos(sizeof(uint8));
 	}
 
 	//check();
@@ -299,15 +307,15 @@ MByteBuffer& MByteBuffer::readUnsignedInt8(uint8& tmpByte)
 
 MByteBuffer& MByteBuffer::readInt16(int16& tmpShort)
 {
-	if (canRead(sizeof(int16)))
+	if (this->canRead(sizeof(int16)))
 	{
-		if (mEndian != SystemEndian::m_sEndian)
+		if (this->mEndian != SystemEndian::msEndian)
 		{
-			Array::Reverse(mDynBuffer->getBuffer(), (int)mPos, sizeof(short));
+			Array::Reverse(this->mDynBuffer->getBuffer(), (int)this->mPos, sizeof(short));
 		}
-		tmpShort = BitConverter::ToInt16(mDynBuffer->getBuffer(), (int)mPos);
+		tmpShort = BitConverter::ToInt16(this->mDynBuffer->getBuffer(), (int)this->mPos);
 
-		advPos(sizeof(int16));
+		this->advPos(sizeof(int16));
 	}
 
 	//check();
@@ -317,15 +325,15 @@ MByteBuffer& MByteBuffer::readInt16(int16& tmpShort)
 
 MByteBuffer& MByteBuffer::readUnsignedInt16(uint16& tmpUshort)
 {
-	if (canRead(sizeof(uint16)))
+	if (this->canRead(sizeof(uint16)))
 	{
-		if (mEndian != SystemEndian::m_sEndian)
+		if (this->mEndian != SystemEndian::msEndian)
 		{
-			Array::Reverse(mDynBuffer->getBuffer(), (int)mPos, sizeof(uint16));
+			Array::Reverse(this->mDynBuffer->getBuffer(), (int)this->mPos, sizeof(uint16));
 		}
-		tmpUshort = BitConverter::ToUInt16(mDynBuffer->getBuffer(), (int)mPos);
+		tmpUshort = BitConverter::ToUInt16(this->mDynBuffer->getBuffer(), (int)this->mPos);
 
-		advPos(sizeof(uint16));
+		this->advPos(sizeof(uint16));
 	}
 
 	//check();
@@ -335,13 +343,13 @@ MByteBuffer& MByteBuffer::readUnsignedInt16(uint16& tmpUshort)
 
 MByteBuffer& MByteBuffer::readInt32(int32& tmpInt)
 {
-	if (canRead(sizeof(int32)))
+	if (this->canRead(sizeof(int32)))
 	{
-		if (mEndian != SystemEndian::m_sEndian)
+		if (this->mEndian != SystemEndian::msEndian)
 		{
-			Array::Reverse(mDynBuffer->getBuffer(), (int)mPos, sizeof(int32));
+			Array::Reverse(this->mDynBuffer->getBuffer(), (int)this->mPos, sizeof(int32));
 		}
-		tmpInt = BitConverter::ToInt32(mDynBuffer->getBuffer(), (int)mPos);
+		tmpInt = BitConverter::ToInt32(this->mDynBuffer->getBuffer(), (int)this->mPos);
 
 		advPos(sizeof(int32));
 	}
@@ -353,15 +361,15 @@ MByteBuffer& MByteBuffer::readInt32(int32& tmpInt)
 
 MByteBuffer& MByteBuffer::readUnsignedInt32(uint32& tmpUint)
 {
-	if (canRead(sizeof(uint32)))
+	if (this->canRead(sizeof(uint32)))
 	{
-		if (mEndian != SystemEndian::m_sEndian)
+		if (mEndian != SystemEndian::msEndian)
 		{
-			Array::Reverse(mDynBuffer->getBuffer(), (int)mPos, sizeof(uint32));
+			Array::Reverse(this->mDynBuffer->getBuffer(), (int)this->mPos, sizeof(uint32));
 		}
-		tmpUint = BitConverter::ToUInt32(mDynBuffer->getBuffer(), (int)mPos);
+		tmpUint = BitConverter::ToUInt32(this->mDynBuffer->getBuffer(), (int)this->mPos);
 
-		advPos(sizeof(uint32));
+		this->advPos(sizeof(uint32));
 	}
 
 	//check();
@@ -371,15 +379,15 @@ MByteBuffer& MByteBuffer::readUnsignedInt32(uint32& tmpUint)
 
 MByteBuffer& MByteBuffer::readInt64(int64& tmpLong)
 {
-	if (canRead(sizeof(int64)))
+	if (this->canRead(sizeof(int64)))
 	{
-		if (mEndian != SystemEndian::m_sEndian)
+		if (this->mEndian != SystemEndian::msEndian)
 		{
-			Array::Reverse(mDynBuffer->getBuffer(), (int)mPos, sizeof(int64));
+			Array::Reverse(this->mDynBuffer->getBuffer(), (int)this->mPos, sizeof(int64));
 		}
-		tmpLong = BitConverter::ToInt64(mDynBuffer->getBuffer(), (int)mPos);
+		tmpLong = BitConverter::ToInt64(this->mDynBuffer->getBuffer(), (int)this->mPos);
 
-		advPos(sizeof(int64));
+		this->advPos(sizeof(int64));
 	}
 
 	//check();
@@ -389,15 +397,16 @@ MByteBuffer& MByteBuffer::readInt64(int64& tmpLong)
 
 MByteBuffer& MByteBuffer::readUnsignedInt64(uint64& tmpUlong)
 {
-	if (canRead(sizeof(uint64)))
+	if (this->canRead(sizeof(uint64)))
 	{
-		if (mEndian != SystemEndian::m_sEndian)
+		if (this->mEndian != SystemEndian::msEndian)
 		{
-			Array::Reverse(mDynBuffer->getBuffer(), (int)mPos, sizeof(uint64));
+			Array::Reverse(this->mDynBuffer->getBuffer(), (int)this->mPos, sizeof(uint64));
 		}
-		tmpUlong = BitConverter::ToUInt64(mDynBuffer->getBuffer(), (int)mPos);
 
-		advPos(sizeof(uint64));
+		tmpUlong = BitConverter::ToUInt64(this->mDynBuffer->getBuffer(), (int)this->mPos);
+
+		this->advPos(sizeof(uint64));
 	}
 
 	//check();
@@ -409,13 +418,13 @@ MByteBuffer& MByteBuffer::readFloat(float& tmpFloat)
 {
 	if (canRead(sizeof(float)))
 	{
-		if (mEndian != SystemEndian::m_sEndian)
+		if (this->mEndian != SystemEndian::msEndian)
 		{
-			Array::Reverse(mDynBuffer->getBuffer(), (int)mPos, sizeof(float));
+			Array::Reverse(this->mDynBuffer->getBuffer(), (int)this->mPos, sizeof(float));
 		}
-		tmpFloat = BitConverter::ToSingle(mDynBuffer->getBuffer(), (int)mPos);
+		tmpFloat = BitConverter::ToSingle(this->mDynBuffer->getBuffer(), (int)this->mPos);
 
-		advPos(sizeof(float));
+		this->advPos(sizeof(float));
 	}
 
 	//check();
@@ -427,13 +436,13 @@ MByteBuffer& MByteBuffer::readDouble(double& tmpDouble)
 {
 	if (canRead(sizeof(double)))
 	{
-		if (mEndian == SystemEndian::m_sEndian)
+		if (this->mEndian == SystemEndian::msEndian)
 		{
-			Array::Reverse(mDynBuffer->getBuffer(), (int)mPos, sizeof(double));
+			Array::Reverse(this->mDynBuffer->getBuffer(), (int)this->mPos, sizeof(double));
 		}
-		tmpDouble = BitConverter::ToDouble(mDynBuffer->getBuffer(), (int)mPos);
+		tmpDouble = BitConverter::ToDouble(mDynBuffer->getBuffer(), (int)this->mPos);
 
-		advPos(sizeof(double));
+		this->advPos(sizeof(double));
 	}
 
 	//check();
@@ -444,10 +453,10 @@ MByteBuffer& MByteBuffer::readDouble(double& tmpDouble)
 MByteBuffer& MByteBuffer::readMultiByte(std::string& tmpStr, uint32 len, MEncode charSet)
 {
 	// 如果是 unicode ，需要大小端判断
-	if (canRead(len))
+	if (this->canRead(len))
 	{
 		//tmpStr = charSet.GetString(mDynBuffer->getBuffer(), (int)mPos, (int)len);
-		advPos(len);
+		this->advPos(len);
 	}
 
 	//check();
@@ -458,10 +467,10 @@ MByteBuffer& MByteBuffer::readMultiByte(std::string& tmpStr, uint32 len, MEncode
 // 这个是字节读取，没有大小端的区别
 MByteBuffer& MByteBuffer::readBytes(char* tmpBytes, uint32 len)
 {
-	if (canRead(len))
+	if (this->canRead(len))
 	{
-		Array::Copy(mDynBuffer->getBuffer(), (int)mPos, tmpBytes, 0, (int)len);
-		advPos(len);
+		Array::Copy(this->mDynBuffer->getBuffer(), (int)this->mPos, tmpBytes, 0, (int)len);
+		this->advPos(len);
 	}
 
 	//check();
@@ -472,42 +481,44 @@ MByteBuffer& MByteBuffer::readBytes(char* tmpBytes, uint32 len)
 // 如果要使用 writeInt8 ，直接使用 writeMultiByte 这个函数
 void MByteBuffer::writeInt8(int8 value)
 {
-	if (!canWrite(sizeof(int8)))
+	if (!this->canWrite(sizeof(int8)))
 	{
-		extendDeltaCapicity(sizeof(int8));
+		this->extendDeltaCapicity(sizeof(int8));
 	}
-	mDynBuffer->getBuffer()[mPos] = (int8)value;
-	advPosAndLen(sizeof(int8));
+
+	this->mDynBuffer->getBuffer()[this->mPos] = (int8)value;
+	this->advPosAndLen(sizeof(int8));
 
 	//check();
 }
 
 void MByteBuffer::writeUnsignedInt8(uint8 value)
 {
-	if (!canWrite(sizeof(uint8)))
+	if (!this->canWrite(sizeof(uint8)))
 	{
-		extendDeltaCapicity(sizeof(uint8));
+		this->extendDeltaCapicity(sizeof(uint8));
 	}
-	mDynBuffer->getBuffer()[mPos] = value;
-	advPosAndLen(sizeof(uint8));
+
+	this->mDynBuffer->getBuffer()[this->mPos] = value;
+	this->advPosAndLen(sizeof(uint8));
 
 	//check();
 }
 
 void MByteBuffer::writeInt16(int16 value)
 {
-	if (!canWrite(sizeof(int16)))
+	if (!this->canWrite(sizeof(int16)))
 	{
-		extendDeltaCapicity(sizeof(int16));
+		this->extendDeltaCapicity(sizeof(int16));
 	}
 
-	if (mEndian != SystemEndian::m_sEndian)
+	if (this->mEndian != SystemEndian::msEndian)
 	{
 		Array::Reverse((char*)(&value), 0, sizeof(int16));
 	}
-	Array::Copy((char*)(&value), 0, mDynBuffer->getBuffer(), mPos, sizeof(int16));
+	Array::Copy((char*)(&value), 0, this->mDynBuffer->getBuffer(), this->mPos, sizeof(int16));
 
-	advPosAndLen(sizeof(short));
+	this->advPosAndLen(sizeof(short));
 
 	//check();
 }
@@ -519,55 +530,55 @@ void MByteBuffer::writeUnsignedInt16(uint16 value)
 		extendDeltaCapicity(sizeof(uint16));
 	}
 
-	if (mEndian != SystemEndian::m_sEndian)
+	if (this->mEndian != SystemEndian::msEndian)
 	{
 		Array::Reverse((char*)(&value), 0, sizeof(uint16));
 	}
-	Array::Copy((char*)(&value), 0, mDynBuffer->getBuffer(), mPos, sizeof(uint16));
+	Array::Copy((char*)(&value), 0, this->mDynBuffer->getBuffer(), this->mPos, sizeof(uint16));
 
-	advPosAndLen(sizeof(uint16));
+	this->advPosAndLen(sizeof(uint16));
 
 	//check();
 }
 
 void MByteBuffer::writeInt32(int value)
 {
-	if (!canWrite(sizeof(int)))
+	if (!this->canWrite(sizeof(int)))
 	{
-		extendDeltaCapicity(sizeof(int));
+		this->extendDeltaCapicity(sizeof(int));
 	}
 
-	if (mEndian != SystemEndian::m_sEndian)
+	if (this->mEndian != SystemEndian::msEndian)
 	{
 		Array::Reverse((char*)(&value), 0, sizeof(int32));
 	}
-	Array::Copy((char*)(&value), 0, mDynBuffer->getBuffer(), mPos, sizeof(int32));
+	Array::Copy((char*)(&value), 0, this->mDynBuffer->getBuffer(), this->mPos, sizeof(int32));
 
-	advPosAndLen(sizeof(int));
+	this->advPosAndLen(sizeof(int));
 
 	//check();
 }
 
 void MByteBuffer::writeUnsignedInt32(uint32 value, bool bchangeLen)
 {
-	if (!canWrite(sizeof(uint32)))
+	if (!this->canWrite(sizeof(uint32)))
 	{
-		extendDeltaCapicity(sizeof(uint32));
+		this->extendDeltaCapicity(sizeof(uint32));
 	}
 
-	if (mEndian != SystemEndian::m_sEndian)
+	if (mEndian != SystemEndian::msEndian)
 	{
 		Array::Reverse((char*)(&value), 0, sizeof(uint32));
 	}
-	Array::Copy((char*)(&value), 0, mDynBuffer->getBuffer(), mPos, sizeof(uint32));
+	Array::Copy((char*)(&value), 0, this->mDynBuffer->getBuffer(), this->mPos, sizeof(uint32));
 
 	if (bchangeLen)
 	{
-		advPosAndLen(sizeof(uint32));
+		this->advPosAndLen(sizeof(uint32));
 	}
 	else
 	{
-		advPos(sizeof(uint32));
+		this->advPos(sizeof(uint32));
 	}
 
 	//check();
@@ -575,72 +586,72 @@ void MByteBuffer::writeUnsignedInt32(uint32 value, bool bchangeLen)
 
 void MByteBuffer::writeInt64(int64 value)
 {
-	if (!canWrite(sizeof(int64)))
+	if (!this->canWrite(sizeof(int64)))
 	{
-		extendDeltaCapicity(sizeof(int64));
+		this->extendDeltaCapicity(sizeof(int64));
 	}
 
-	if (mEndian != SystemEndian::m_sEndian)
+	if (this->mEndian != SystemEndian::msEndian)
 	{
 		Array::Reverse((char*)(&value), 0, sizeof(int64));
 	}
-	Array::Copy((char*)(&value), 0, mDynBuffer->getBuffer(), mPos, sizeof(int64));
+	Array::Copy((char*)(&value), 0, this->mDynBuffer->getBuffer(), this->mPos, sizeof(int64));
 
-	advPosAndLen(sizeof(long));
+	this->advPosAndLen(sizeof(long));
 
 	//check();
 }
 
 void MByteBuffer::writeUnsignedInt64(uint64 value)
 {
-	if (!canWrite(sizeof(uint64)))
+	if (!this->canWrite(sizeof(uint64)))
 	{
-		extendDeltaCapicity(sizeof(uint64));
+		this->extendDeltaCapicity(sizeof(uint64));
 	}
 
-	if (mEndian != SystemEndian::m_sEndian)
+	if (this->mEndian != SystemEndian::msEndian)
 	{
 		Array::Reverse((char*)(&value), 0, sizeof(uint64));
 	}
-	Array::Copy((char*)(&value), 0, mDynBuffer->getBuffer(), mPos, sizeof(uint64));
+	Array::Copy((char*)(&value), 0, this->mDynBuffer->getBuffer(), this->mPos, sizeof(uint64));
 
-	advPosAndLen(sizeof(uint64));
+	this->advPosAndLen(sizeof(uint64));
 
 	//check();
 }
 
 void MByteBuffer::writeFloat(float value)
 {
-	if (!canWrite(sizeof(float)))
+	if (!this->canWrite(sizeof(float)))
 	{
-		extendDeltaCapicity(sizeof(float));
+		this->extendDeltaCapicity(sizeof(float));
 	}
 
-	if (mEndian != SystemEndian::m_sEndian)
+	if (this->mEndian != SystemEndian::msEndian)
 	{
 		Array::Reverse((char*)(&value), 0, sizeof(float));
 	}
-	Array::Copy((char*)(&value), 0, mDynBuffer->getBuffer(), mPos, sizeof(float));
+	Array::Copy((char*)(&value), 0, this->mDynBuffer->getBuffer(), this->mPos, sizeof(float));
 
-	advPosAndLen(sizeof(float));
+	this->advPosAndLen(sizeof(float));
 
 	//check();
 }
 
 void MByteBuffer::writeDouble(double value)
 {
-	if (!canWrite(sizeof(double)))
+	if (!this->canWrite(sizeof(double)))
 	{
-		extendDeltaCapicity(sizeof(double));
+		this->extendDeltaCapicity(sizeof(double));
 	}
 
-	if (mEndian != SystemEndian::m_sEndian)
+	if (this->mEndian != SystemEndian::msEndian)
 	{
 		Array::Reverse((char*)(&value), 0, sizeof(double));
 	}
-	Array::Copy((char*)(&value), 0, mDynBuffer->getBuffer(), mPos, sizeof(double));
+	Array::Copy((char*)(&value), 0, this->mDynBuffer->getBuffer(), this->mPos, sizeof(double));
 
-	advPosAndLen(sizeof(double));
+	this->advPosAndLen(sizeof(double));
 
 	//check();
 }
@@ -650,18 +661,18 @@ void MByteBuffer::writeBytes(char* value, uint32 start, uint32 len, bool bchange
 {
 	if (len > 0)            // 如果有长度才写入
 	{
-		if (!canWrite(len))
+		if (!this->canWrite(len))
 		{
-			extendDeltaCapicity(len);
+			this->extendDeltaCapicity(len);
 		}
-		Array::Copy(value, start, mDynBuffer->getBuffer(), mPos, len);
+		Array::Copy(value, start, this->mDynBuffer->getBuffer(), this->mPos, len);
 		if (bchangeLen)
 		{
-			advPosAndLen(len);
+			this->advPosAndLen(len);
 		}
 		else
 		{
-			advPos(len);
+			this->advPos(len);
 		}
 	}
 
@@ -722,25 +733,25 @@ void MByteBuffer::replace(char* srcBytes, uint32 srcStartPos, uint32 srclen_, ui
 	this->setPos(destStartPos + srclen_);
 	if (lastLeft > 0)
 	{
-		writeBytes(mDynBuffer->getBuffer(), destStartPos + destlen_, lastLeft, false);          // 这个地方自己区域覆盖自己区域，可以保证自己不覆盖自己区域
+		this->writeBytes(mDynBuffer->getBuffer(), destStartPos + destlen_, lastLeft, false);          // 这个地方自己区域覆盖自己区域，可以保证自己不覆盖自己区域
 	}
 
 	this->setPos(destStartPos);
-	writeBytes(srcBytes, srcStartPos, srclen_, false);
+	this->writeBytes(srcBytes, srcStartPos, srclen_, false);
 	//check();
 }
 
 void MByteBuffer::insertUnsignedInt32(uint32 value)
 {
-	incLenDelta(sizeof(uint32));       // 扩大长度
-	writeUnsignedInt32(value);     // 写入
+	this->incLenDelta(sizeof(uint32));       // 扩大长度
+	this->writeUnsignedInt32(value);     // 写入
 	//check();
 }
 
 MByteBuffer& MByteBuffer::readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset)
 {
 	this->setPos(offset);
-	readUnsignedInt64(tmpUlong);
+	this->readUnsignedInt64(tmpUlong);
 	//check();
 	return *this;
 }

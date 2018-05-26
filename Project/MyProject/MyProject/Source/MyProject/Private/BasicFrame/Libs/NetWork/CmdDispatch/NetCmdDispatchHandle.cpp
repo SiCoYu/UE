@@ -31,7 +31,7 @@ void NetCmdDispatchHandle::addParamHandle(int paramId, EventDispatchDelegate han
 {
 	if (!this->mId2HandleDic.containsKey(paramId))
 	{
-		this->mId2HandleDic[paramId] = new AddOnceEventDispatch();
+		this->mId2HandleDic[paramId] = MY_NEW AddOnceEventDispatch();
 	}
 	else
 	{

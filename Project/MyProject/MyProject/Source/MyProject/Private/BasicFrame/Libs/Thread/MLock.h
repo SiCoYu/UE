@@ -2,13 +2,14 @@
 #define __MLOCK_H
 
 #include "MyProject.h"
+#include "GObject.h"
 
 class MMutex;
 
 /**
  * @brief 锁操作
  */
-class MLock
+class MLock : public GObject
 {
 protected:
 	FScopeLock mLock;

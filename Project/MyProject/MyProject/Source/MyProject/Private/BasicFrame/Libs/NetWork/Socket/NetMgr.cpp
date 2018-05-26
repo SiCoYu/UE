@@ -190,7 +190,7 @@ void NetMgr::startThread()
 	//mNetThread->m_pTaskGraphBoundSyncEvent->Wait();
 
 	// 函数 FRunnableThread::Create 第二个参数一定是宽字节字符串，如果是多字节就会编译报错
-	mNetThread = new UENetThread(this, "NetThread");
+	mNetThread = MY_NEW UENetThread(this, "NetThread");
 	mNetThread->start();
 	mNetThread->getSyncEventPtr()->Wait();
 }
@@ -259,7 +259,7 @@ void NetMgr::openSocket_Extern(std::string ip, uint32 port)
 	//	std::cerr << e.what() << std::endl;
 	//}
 
-	NetClient* pClient = new NetClient(*this);
+	NetClient* pClient = MY_NEW NetClient(*this);
 	bool success = pClient->Open(ip, port);
 
 	mMutex->Lock();
@@ -280,7 +280,7 @@ void NetMgr::openSocket_Inter(std::string ip, uint32 port)
 	std::string ipId = strStream.str();
 	if (!UtilMap::ContainsKey(mId2ClientDic, ipId))	// 如果没有这个 NetClient
 	{
-		mCurClient = new UENetClient();
+		mCurClient = MY_NEW UENetClient();
 		mId2ClientDic[ipId] = mCurClient;
 
 		mCurClient->connect(ip.c_str(), port);
@@ -356,12 +356,13 @@ void NetMgr::closeCurSocket()
 		if (UtilMap::ContainsKey(mId2ClientDic, key))
 		{
 #ifdef NET_MULTHREAD
-			using (MLock mlock = new MLock(mVisitMutex))
+			using (MLock mlock = MY_NEW MLock(mVisitMutex))
 #endif
 			{
 				mId2ClientDic[key]->Disconnect();
 				UtilMap::ContainsKey(mId2ClientDic, key);
 			}
+
 			mCurClient = nullptr;
 		}
 	}

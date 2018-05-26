@@ -7,7 +7,7 @@
 NetTCPClient::NetTCPClient(ISocketHandler& h)
 	: TcpSocket(h) 
 {
-	this->mClientBuffer = new ClientBuffer();
+	this->mClientBuffer = MY_NEW ClientBuffer();
 }
 
 NetTCPClient::~NetTCPClient()

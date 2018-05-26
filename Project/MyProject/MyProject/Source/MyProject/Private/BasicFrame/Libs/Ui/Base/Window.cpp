@@ -1,6 +1,9 @@
 #include "MyProject.h"
 #include "Window.h"
 #include "UiLayer.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -11,7 +14,7 @@ UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	this->mAlignHorizontal = 0;
 	this->mIsResReady = false;
 
-	this->mWinRender = new WinRender();
+	this->mWinRender = MY_NEW WinRender();
 }
 
 int UWindow::getPosX()

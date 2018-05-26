@@ -46,5 +46,6 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryAlloc.h"
 
 #endif

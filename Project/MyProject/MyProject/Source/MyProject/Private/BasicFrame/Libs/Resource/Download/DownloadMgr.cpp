@@ -11,7 +11,7 @@ DownloadMgr::DownloadMgr()
 {
     mMaxParral = 8;
     mCurNum = 0;
-    mLoadData = new DownloadData();
+    mLoadData = MY_NEW DownloadData();
     mLoadingDepth = 0;
 
     //this.addMsgRouteHandle(MsgRouteId.eMRIDLoadedWebRes, onMsgRouteResLoad);
@@ -130,7 +130,7 @@ DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
     {
         if (param->mDownloadType == eHttpWeb)
         {
-            loadItem = new HttpWebDownloadItem();
+            loadItem = MY_NEW HttpWebDownloadItem();
         }
     }
     loadItem->setLoadParam(param);

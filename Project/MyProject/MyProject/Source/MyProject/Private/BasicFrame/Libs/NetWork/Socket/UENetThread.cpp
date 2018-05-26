@@ -7,7 +7,7 @@ UENetThread::UENetThread(INetMgr* pNetMgr, std::string mThreadName)
 	: MThread(mThreadName)
 {
 	this->mNetMgr = pNetMgr;
-	this->mSyncEvent = new MEvent();
+	this->mSyncEvent = MY_NEW MEvent();
 }
 
 UENetThread::~UENetThread()

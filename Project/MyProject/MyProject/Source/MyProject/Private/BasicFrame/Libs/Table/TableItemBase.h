@@ -2,6 +2,9 @@
 #define __TableItemBase_H
 
 #include "HAL/Platform.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 class TableItemHeader;
 class TableItemBodyBase;
@@ -27,23 +30,23 @@ public:
 template <class T>
 void TableItemBase::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset)
 {
-	if (nullptr == mItemBody)
+	if (nullptr == this->mItemBody)
 	{
-		mItemBody = (TableItemBodyBase *)new T();
+		this->mItemBody = (TableItemBodyBase *)MY_NEW T();
 	}
 
-	mItemBody->parseBodyByteBuffer(bytes, offset);
+	this->mItemBody->parseBodyByteBuffer(bytes, offset);
 }
 
 template <class T>
 void TableItemBase::parseAllByteBuffer(MByteBuffer* bytes)
 {
 	// 解析头
-	parseHeaderByteBuffer(bytes);
+	this->parseHeaderByteBuffer(bytes);
 	// 保存下一个 Item 的头位置
 	UtilTable::mPrePos = bytes->position;
 	// 解析内容
-	parseBodyByteBuffer<T>(bytes, mItemHeader->mOffset);
+	parseBodyByteBuffer<T>(bytes, this->mItemHeader->mOffset);
 	// 移动到下一个 Item 头位置
 	bytes->setPos(UtilTable::mPrePos);
 }

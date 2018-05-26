@@ -14,11 +14,11 @@
 
 TableSys::TableSys()
 {
-	this->mDicTable[TableId::TABLE_OBJECT] = new TableBase("ObjectBase_client.bytes", "ObjectBase_client");
-	this->mDicTable[TableId::TABLE_CARD] = new TableBase("CardBase_client.bytes", "CardBase_client");
-	this->mDicTable[TableId::TABLE_SKILL] = new TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
+	this->mDicTable[TableId::TABLE_OBJECT] = MY_NEW TableBase("ObjectBase_client.bytes", "ObjectBase_client");
+	this->mDicTable[TableId::TABLE_CARD] = MY_NEW TableBase("CardBase_client.bytes", "CardBase_client");
+	this->mDicTable[TableId::TABLE_SKILL] = MY_NEW TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
 
-	this->mByteBuffer = new MByteBuffer();
+	this->mByteBuffer = MY_NEW MByteBuffer();
 }
 
 TableSys::~TableSys()
@@ -161,7 +161,7 @@ void TableSys::readTable(TableId::TableId tableID, MByteBuffer* bytes)
         //{
         //    item = new TableItemObject();
         //}
-        item = new TableItemBase();
+        item = MY_NEW TableItemBase();
         item->parseHeaderByteBuffer(bytes);
         // 加载完整数据
         //loadOneTableOneItemAll(tableID, table, item);

@@ -30,7 +30,7 @@ void MsgRouteHandleBase::addMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchD
 {
 	if (!this->mId2HandleDic.containsKey((int)msgRouteId))
 	{
-		this->mId2HandleDic[(int)msgRouteId] = new AddOnceEventDispatch();
+		this->mId2HandleDic[(int)msgRouteId] = MY_NEW AddOnceEventDispatch();
 	}
 
 	this->mId2HandleDic[(int)msgRouteId]->addEventHandle(handle);

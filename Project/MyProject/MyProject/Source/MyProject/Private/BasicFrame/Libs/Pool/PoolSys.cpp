@@ -4,7 +4,7 @@
 
 PoolSys::PoolSys()
 {
-	this->mPoolList = new LockList<IPoolObject*>("PoolList");
+	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");
 }
 
 void PoolSys::init()

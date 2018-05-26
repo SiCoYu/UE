@@ -23,7 +23,7 @@ using namespace MyNS;
 
 UiMgr::UiMgr()
 {
-	this->mUiAttrSystem = new UiAttrSystem();
+	this->mUiAttrSystem = MY_NEW UiAttrSystem();
 	this->createCanvas();
 }
 
@@ -49,7 +49,7 @@ void UiMgr::createCanvas()
 	int idx = 0;
 	for (idx = 0; idx < (int)eCanvas_Total; ++idx)
 	{
-		this->mCanvasList.push_back(new UiCanvas((UiCanvasId)idx));
+		this->mCanvasList.push_back(MY_NEW UiCanvas((UiCanvasId)idx));
 	}
 
 	this->mCanvasList[(int)eCanvas_50]->setActorName(LayerPath::ND_CV_UICanvas_50);

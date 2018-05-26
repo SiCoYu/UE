@@ -8,7 +8,7 @@
 
 ResItem::ResItem()
 {
-	this->mRefCountResLoadResultNotify = new RefCountResLoadResultNotify();
+	this->mRefCountResLoadResultNotify = MY_NEW RefCountResLoadResultNotify();
 }
 
 ResItem::~ResItem()

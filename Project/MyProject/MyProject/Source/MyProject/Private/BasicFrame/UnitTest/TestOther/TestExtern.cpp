@@ -1,6 +1,9 @@
 #include "MyProject.h"
 #include "TestExtern.h"
 #include "Templates/Casts.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 // UE 4.19.1 warning C4005 : 'dynamic_cast' : macro redefinition , engine\source\runtime\coreuobject\public\Templates / Casts.h(417) : note: see previous definition of 'dynamic_cast'
 //#define dynamic_cast aaa

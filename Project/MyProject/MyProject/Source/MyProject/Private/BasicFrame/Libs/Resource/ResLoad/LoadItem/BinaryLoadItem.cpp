@@ -33,7 +33,7 @@ void UBinaryLoadItem::loadFile(const FString& Filename)
 		TArray<uint8> arrayBuffer;
 		if (FFileHelper::LoadFileToArray(arrayBuffer, *Filename))
 		{
-			MByteBuffer* pFileBU = new MByteBuffer(arrayBuffer.GetAllocatedSize());
+			MByteBuffer* pFileBU = MY_NEW MByteBuffer(arrayBuffer.GetAllocatedSize());
 			pFileBU->writeBytes((char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
 			delete pFileBU;
 		}

@@ -6,8 +6,12 @@
 
 #define MY_MEMORY_TRACKER 1
 
-void* MyDefaultAllocImpl::allocBytes(size_t count,
-    const char* file, int line, const char* func)
+void* MyDefaultAllocImpl::allocBytes(
+	size_t count,
+    const char* file, 
+	int line, const 
+	char* func
+)
 {
     void* ptr = malloc(count);
 #if MY_MEMORY_TRACKER

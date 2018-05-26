@@ -4,8 +4,9 @@
 //#include "UMG.h"
 #include "SlateWidget.h"
 #include "UMGWidget.h"
+#include "GObject.h"
 
-class WinRender
+class WinRender : public GObject
 {
 public:
 	//UUserWidget* m_umgWidget;

@@ -7,6 +7,7 @@
 #include <vector>
 #include "BufferCV.h"
 #include "DynBuffer.h"
+#include "GObject.h"
 
 //template <class T> class DynBuffer<char>;
 class MByteBuffer;
@@ -14,7 +15,7 @@ class MByteBuffer;
 /**
  *@brief 浪费一个自己，这样判断也好判断，并且索引也不用减 1 ，因此浪费一个字节
  */
-class MCircularBuffer
+class MCircularBuffer : public GObject
 {
 protected:
 	DynBuffer<char>* mDynBuffer;

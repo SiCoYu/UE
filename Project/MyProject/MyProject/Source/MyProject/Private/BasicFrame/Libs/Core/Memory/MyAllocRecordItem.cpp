@@ -14,10 +14,11 @@ MyAllocRecordItem::MyAllocRecordItem(
 	size_t ln, 
 	const char* func
 )
-	:mBytes(sz), mLine(ln)
+	:mBytes(sz), 
+	 mLine(ln)
 {
 	if (file)
-		mFileName = file;
+		this->mFileName = file;
 	if (func)
-		mFunction = func;
+		this->mFunction = func;
 }

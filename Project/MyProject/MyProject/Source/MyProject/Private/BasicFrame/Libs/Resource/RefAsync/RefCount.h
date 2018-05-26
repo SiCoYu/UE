@@ -2,11 +2,12 @@
 #define __RefCount_H
 
 #include "Platform.h"
+#include "GObject.h"
 
 /**
  * @brief 脚本引用计数
  */
-class RefCount
+class RefCount : public GObject
 {
 protected:
 	uint32 mRefNum;                // 引用计数

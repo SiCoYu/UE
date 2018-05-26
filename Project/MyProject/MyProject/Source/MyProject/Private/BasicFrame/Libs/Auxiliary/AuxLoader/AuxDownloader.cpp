@@ -16,9 +16,21 @@ namespace MyNS
 	}
 
 	// 下载一个资源
-	void AuxDownloader::download(std::string origPath, EventDispatchDelegate dispObj, long fileLen, bool isWriteFile, int downloadType)
+	void AuxDownloader::download(
+		std::string origPath, 
+		EventDispatchDelegate dispObj, 
+		long fileLen, 
+		bool isWriteFile, 
+		int downloadType
+	)
 	{
-		Super::download(origPath, dispObj, fileLen, isWriteFile, downloadType);
+		Super::download(
+			origPath, 
+			dispObj, 
+			fileLen, 
+			isWriteFile, 
+			downloadType
+		);
 
 		if (this->isInvalid())
 		{

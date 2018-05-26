@@ -1,9 +1,11 @@
 ﻿#ifndef __MEVENT_H
 #define __MEVENT_H
 
+#include "GObject.h"
+
 class FEvent;
 
-class MEvent
+class MEvent : public GObject
 {
 protected:
 	FEvent* mEvent;

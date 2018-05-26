@@ -1,5 +1,8 @@
 #include "MyProject.h"
 #include "UiCanvas.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 UiCanvas::UiCanvas(UiCanvasId canvasID)
 {
@@ -8,7 +11,7 @@ UiCanvas::UiCanvas(UiCanvasId canvasID)
 	int idx = 0;
 	for (idx = 0; idx < (int)eMaxLayer; ++idx)
 	{
-		this->mLayerList.push_back(new UiLayer((UiLayerId)idx));
+		this->mLayerList.push_back(MY_NEW UiLayer((UiLayerId)idx));
 	}
 
 	//if (eCanvas_50 == mCanvasId)

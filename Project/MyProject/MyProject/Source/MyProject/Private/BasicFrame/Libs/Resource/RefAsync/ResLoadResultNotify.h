@@ -1,6 +1,8 @@
 ﻿#ifndef __ResLoadResultNotify_H
 #define __ResLoadResultNotify_H
 
+#include "GObject.h"
+
 class ResLoadState;
 class ResEventDispatch;
 class IDispatchObject;
@@ -8,7 +10,7 @@ class IDispatchObject;
 /**
     * @brief 非引用计数资源加载结果通知
     */
-class ResLoadResultNotify
+class ResLoadResultNotify : public GObject
 {
 protected:
 	ResLoadState* mResLoadState;          // 资源加载状态

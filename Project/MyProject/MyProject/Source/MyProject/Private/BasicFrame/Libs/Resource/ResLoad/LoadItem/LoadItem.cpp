@@ -6,7 +6,7 @@
 
 LoadItem::LoadItem()
 {
-	this->mNonRefCountResLoadResultNotify = new NonRefCountResLoadResultNotify();
+	this->mNonRefCountResLoadResultNotify = MY_NEW NonRefCountResLoadResultNotify();
 }
 
 LoadItem::~LoadItem()

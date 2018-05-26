@@ -1,12 +1,16 @@
-#ifndef __DYNBUFRESIZEPOLICY_H
-#define __DYNBUFRESIZEPOLICY_H
+#ifndef __DynBufResizePolicy_H
+#define __DynBufResizePolicy_H
 
 
 class DynBufResizePolicy
 {
 public:
-	static uint32 getCloseSize(uint32 needSize, uint32 capacity, uint32 maxCapacity);
+	static uint32 getCloseSize(
+		uint32 needSize, 
+		uint32 capacity, 
+		uint32 maxCapacity
+	);
 };
 
 
-#endif			// __DYNBUFRESIZEPOLICY_H	
+#endif			// __DynBufResizePolicy_H	

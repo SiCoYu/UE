@@ -51,7 +51,7 @@ void SceneSys::loadScene(std::string filename, EventDispatchDelegate func)
 	this->unloadScene();
 
 	// 加载新的场景
-	this->mScene = new Scene();
+	this->mScene = MY_NEW Scene();
 
 	if (func != nullptr)
 	{

@@ -6,8 +6,8 @@
 
 ResLoadResultNotify::ResLoadResultNotify()
 {
-	this->mResLoadState = new ResLoadState();
-	this->mLoadResEventDispatch = new ResEventDispatch();
+	this->mResLoadState = MY_NEW ResLoadState();
+	this->mLoadResEventDispatch = MY_NEW ResEventDispatch();
 }
 
 ResLoadResultNotify::~ResLoadResultNotify()

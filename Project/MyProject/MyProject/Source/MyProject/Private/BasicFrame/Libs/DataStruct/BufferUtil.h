@@ -1,5 +1,5 @@
-#ifndef __BUFFERUTIL_H
-#define __BUFFERUTIL_H
+#ifndef __BufferUtil_H
+#define __BufferUtil_H
 
 class BufferUtil
 {

@@ -23,7 +23,13 @@ namespace MyNS
 
 		char* getBytes();
 		// 下载一个资源
-		virtual void download(std::string origPath, EventDispatchDelegate dispObj = nullptr, long fileLen = 0, bool isWriteFile = true, int downloadType = (int)eHttpWeb) override;
+		virtual void download(
+			std::string origPath, 
+			EventDispatchDelegate dispObj = nullptr, 
+			long fileLen = 0, 
+			bool isWriteFile = true, 
+			int downloadType = (int)eHttpWeb
+		) override;
         // 下载完成
 		void onDownloaded(IDispatchObject* dispObj);
 	};

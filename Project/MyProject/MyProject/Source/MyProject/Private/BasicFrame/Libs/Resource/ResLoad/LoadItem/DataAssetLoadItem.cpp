@@ -23,7 +23,7 @@ void UDataAssetLoadItem::loadFile(const FString& Filename)
 		TArray<uint8> arrayBuffer;
 		if (FFileHelper::LoadFileToArray(arrayBuffer, *Filename))
 		{
-			MByteBuffer* fileBU = new MByteBuffer(arrayBuffer.GetAllocatedSize());
+			MByteBuffer* fileBU = MY_NEW MByteBuffer(arrayBuffer.GetAllocatedSize());
 			fileBU->writeBytes((char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
 		}
 	}

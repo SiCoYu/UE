@@ -8,6 +8,9 @@
 
 #include "MyPtrRefInfo.h"
 #include "TypeDef.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 namespace MyNS
 {
@@ -18,19 +21,21 @@ namespace MyNS
 		friend class SharedPtr;
 
 	protected:
-		T*             mRefPtr;
+		T*          mRefPtr;
 		PtrRefInfo* mRefInfo;
 
 	public:
 		SharedPtr(T* rep) 
-			: mRefPtr(rep), mRefInfo(new PtrRefInfo)
+			: mRefPtr(rep), 
+			  mRefInfo(MY_NEW PtrRefInfo)
 		{
 
 		}
 
 	public:
 		SharedPtr() 
-			: mRefPtr(0), mRefInfo(0)
+			: mRefPtr(0), 
+			  mRefInfo(0)
 		{}
 
 	public:
@@ -45,15 +50,15 @@ namespace MyNS
 			: mRefPtr(r.mRefPtr)
 			, mRefInfo(r.mRefInfo)
 		{
-			if (mRefPtr)
+			if (this->mRefPtr)
 			{
-				mRefInfo->mRefCount.Increment();
+				this->mRefInfo->mRefCount.Increment();
 			}
 		}
 
 		SharedPtr& operator=(const SharedPtr& r)
 		{
-			if (mRefInfo == r.mRefInfo)
+			if (this->mRefInfo == r.mRefInfo)
 			{
 				return *this;
 			}
@@ -73,9 +78,9 @@ namespace MyNS
 			: mRefPtr(r.mRefPtr)
 			, mRefInfo(r.mRefInfo)
 		{
-			if (mRefPtr)
+			if (this->mRefPtr)
 			{
-				mRefInfo->mRefCount.Increment();
+				this->mRefInfo->mRefCount.Increment();
 			}
 		}
 
@@ -88,7 +93,7 @@ namespace MyNS
 	#endif
 		SharedPtr& operator=(const SharedPtr<Y>& r)
 		{
-			if (mRefInfo == r.mRefInfo)
+			if (this->mRefInfo == r.mRefInfo)
 			{
 				return *this;
 			}
@@ -100,16 +105,16 @@ namespace MyNS
 
 		~SharedPtr() 
 		{
-			release();
+			this->release();
 		}
 
 		template<typename Y>
 		SharedPtr<Y> staticCast() const
 		{
-			if (mRefPtr) 
+			if (this->mRefPtr)
 			{
-				mRefInfo->mRefCount.Increment();
-				return SharedPtr<Y>(static_cast<Y*>(mRefPtr), mRefInfo);
+				this->mRefInfo->mRefCount.Increment();
+				return SharedPtr<Y>(static_cast<Y*>(this->mRefPtr), this->mRefInfo);
 			}
 			else
 			{
@@ -120,11 +125,11 @@ namespace MyNS
 		template<typename Y>
 		SharedPtr<Y> dynamicCast() const
 		{
-			Y* rep = dynamic_cast<Y*>(mRefPtr);
+			Y* rep = dynamic_cast<Y*>(this->mRefPtr);
 			if (rep) 
 			{
-				mRefInfo->mRefCount.Increment();
-				return SharedPtr<Y>(rep, mRefInfo);
+				this->mRefInfo->mRefCount.Increment();
+				return SharedPtr<Y>(rep, this->mRefInfo);
 			}
 			else
 			{
@@ -134,48 +139,49 @@ namespace MyNS
 
 		inline T& operator*() const 
 		{ 
-			my_assert(mRefPtr);
-			return *mRefPtr; 
+			my_assert(this->mRefPtr);
+			return *this->mRefPtr;
 		}
 
 		inline T* operator->() const 
 		{ 
-			my_assert(mRefPtr);
-			return mRefPtr; 
+			my_assert(this->mRefPtr);
+			return this->mRefPtr;
 		}
 
 		inline T* get() const 
 		{ 
-			return mRefPtr; 
+			return this->mRefPtr;
 		}
 
 		void bind(T* rep) 
 		{
-			my_assert(!mRefPtr && !mRefInfo);
-			mRefInfo = new SharedPtrInfo;
-			mRefPtr = rep;
+			my_assert(!this->mRefPtr && !this->mRefInfo);
+			this->mRefInfo = MY_NEW SharedPtrInfo;
+			this->mRefPtr = rep;
 		}
 
 		inline bool unique() const 
 		{ 
-			my_assert(mRefInfo && mRefInfo->mRefCount.get());
-			return mRefInfo->mRefCount.get() == 1; 
+			my_assert(this->mRefInfo && this->mRefInfo->mRefCount.get());
+			return this->mRefInfo->mRefCount.get() == 1;
 		}
 
 		unsigned int getRefCount() const
 		{ 
-			my_assert(mRefInfo && mRefInfo->mRefCount.GetValue());
-			return mRefInfo->mRefCount.GetValue();
+			my_assert(this->mRefInfo && this->mRefInfo->mRefCount.GetValue());
+			return this->mRefInfo->mRefCount.GetValue();
 		}
 
 		void setUseCount(unsigned value)
 		{ 
-			my_assert(mRefInfo); mRefInfo->mRefCount.GetValue() = value;
+			my_assert(this->mRefInfo);
+			this->mRefInfo->mRefCount.GetValue() = value;
 		}
 
 		T* getPointer() const 
 		{ 
-			return mRefPtr; 
+			return this->mRefPtr;
 		}
 
 		static void unspecified_bool(SharedPtr***)
@@ -186,22 +192,22 @@ namespace MyNS
 
 		operator unspecified_bool_type() const
 		{
-			return mRefPtr == 0 ? 0 : unspecified_bool;
+			return this->mRefPtr == 0 ? 0 : unspecified_bool;
 		}
 
 		bool isNull(void) const 
 		{ 
-			return mRefPtr == 0; 
+			return this->mRefPtr == 0;
 		}
 
 		void setNull() 
 		{ 
-			reset(); 
+			this->reset();
 		}
 
 		void reset(void) 
 		{
-			release();
+			this->release();
 		}
 
 		void reset(T* rep) 
@@ -212,29 +218,30 @@ namespace MyNS
 	protected:
 		inline void release(void)
 		{
-			if (mRefPtr)
+			if (this->mRefPtr)
 			{
-				my_assert(mRefInfo);
-				if (mRefInfo->mRefCount.Decrement() == 0)
+				my_assert(this->mRefInfo);
+
+				if (this->mRefInfo->mRefCount.Decrement() == 0)
 				{
-					destroy();
+					this->destroy();
 				}
 			}
 
-			mRefPtr = 0;
-			mRefInfo = 0;
+			this->mRefPtr = 0;
+			this->mRefInfo = 0;
 		}
 
 		inline void destroy(void)
 		{
-			my_assert(mRefPtr && mRefInfo);
-			delete mRefInfo;
+			my_assert(this->mRefPtr && this->mRefInfo);
+			delete this->mRefInfo;
 		}
 
 		inline void swap(SharedPtr<T> &other)
 		{
-			std::swap(mRefPtr, other.mRefPtr);
-			std::swap(mRefInfo, other.mRefInfo);
+			std::swap(this->mRefPtr, other.mRefPtr);
+			std::swap(this->mRefInfo, other.mRefInfo);
 		}
 	};
 

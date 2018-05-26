@@ -18,12 +18,13 @@ enum UiLayerId
 #include <map>
 
 #include "UiFormId.h"
+#include "GObject.h"
 
 using namespace NSFormId;
 
 class UForm;
 
-class UiLayer
+class UiLayer : public GObject
 {
 protected:
 	UiLayerId mLayer;	                        // UiFormId.FirstLayer∂®“Â

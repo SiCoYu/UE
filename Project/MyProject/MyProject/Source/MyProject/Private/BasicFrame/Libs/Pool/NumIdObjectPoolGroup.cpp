@@ -1,10 +1,13 @@
 ﻿#include "MyProject.h"
 #include "IPoolObject.h"
 #include "NumIdObjectPoolGroup.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 NumIdObjectPoolGroup::NumIdObjectPoolGroup()
 {
-	this->mPoolList = new LockList<IPoolObject*>("PoolList");
+	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");
 }
 
 void NumIdObjectPoolGroup::init()

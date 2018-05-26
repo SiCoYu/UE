@@ -7,7 +7,7 @@ TaskThread::TaskThread(std::string name, TaskQueue* taskQueue)
     : Super(name)
 {
     mTaskQueue = taskQueue;
-    mCondition = new MCondition(name);
+    mCondition = MY_NEW MCondition(name);
 }
 
 /**

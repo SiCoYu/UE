@@ -2,6 +2,9 @@
 #define __PoolSys_H
 
 #include "LockList.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 class IPoolObject;
 
@@ -40,7 +43,7 @@ public:
 		//    }
 		//}
 
-		T* retObj = new T();
+		T* retObj = MY_NEW T();
 		return retObj;
 	}
 

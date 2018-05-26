@@ -58,7 +58,7 @@ void ResInsMgrBase::syncLoad(std::string path, EventDispatchDelegate handle)
 template<class T>
 T* ResInsMgrBase::createResItem(LoadParam* param)
 {
-	T* ret = new T();
+	T* ret = MY_NEW T();
 	ret->getRefCountResLoadResultNotify()->getRefCount()->incRef();
 	ret->mPath = param->mPath;
 

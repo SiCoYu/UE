@@ -19,12 +19,12 @@ UENetClient::UENetClient()
 	mIsConnected(false)
 {
 	this->mSocket = nullptr;
-	this->mClientBuffer = new ClientBuffer();
+	this->mClientBuffer = MY_NEW ClientBuffer();
 	this->mStrDesc = "";
 	//mBoundEndpoint(FIPv4Address::Any, 0);
 
-	this->mMsgSendEndEvent = new MEvent();
-	this->mSendMutex = new MMutex();
+	this->mMsgSendEndEvent = MY_NEW MEvent();
+	this->mSendMutex = MY_NEW MMutex();
 }
 
 UENetClient::~UENetClient()

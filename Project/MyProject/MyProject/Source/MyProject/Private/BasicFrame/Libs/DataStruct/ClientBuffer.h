@@ -1,5 +1,5 @@
-#ifndef __CLIENTBUFFER_H
-#define __CLIENTBUFFER_H
+#ifndef __ClientBuffer_H
+#define __ClientBuffer_H
 
 #include "MyProject.h"
 #include "PlatformDefine.h"

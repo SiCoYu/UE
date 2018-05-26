@@ -6,11 +6,12 @@
 #include "UiCanvas.h"
 #include "UiFormId.h"
 #include "FormType.h"
+#include "GObject.h"
 
 using namespace NSFormType;
 using namespace NSFormId;
 
-class UiAttrItem
+class UiAttrItem : public GObject
 {
 public:
 	UiFormId mFormId;

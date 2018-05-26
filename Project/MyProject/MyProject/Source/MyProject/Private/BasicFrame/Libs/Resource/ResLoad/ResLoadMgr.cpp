@@ -28,7 +28,7 @@ ResLoadMgr::ResLoadMgr()
 {
 	this->mMaxParral = 8;
 	this->mCurNum = 0;
-	this->mLoadData = new ResLoadData();
+	this->mLoadData = MY_NEW ResLoadData();
 	//mId2HandleDic[(int)eMRIDLoadedWebRes] = onMsgRouteResLoad;
 	this->mLoadingDepth = 0;
 }
@@ -176,7 +176,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	{
 		if (nullptr == resItem)
 		{
-			resItem = new ClassAssetResItem();
+			resItem = MY_NEW ClassAssetResItem();
 		}
 
 		((ClassAssetResItem*)resItem)->setPrefabName(param->getPrefabName());
@@ -185,7 +185,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	{
 		if (nullptr == resItem)
 		{
-			resItem = new ObjectAssetResItem();
+			resItem = MY_NEW ObjectAssetResItem();
 		}
 
 		((ObjectAssetResItem*)resItem)->setPrefabName(param->getPrefabName());
@@ -210,7 +210,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	{
 		if (nullptr == resItem)
 		{
-			resItem = new LevelResItem();
+			resItem = MY_NEW LevelResItem();
 		}
 
 		((LevelResItem*)resItem)->setLevelName(param->getLvlName());
@@ -219,7 +219,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	{
 		if (nullptr == resItem)
 		{
-			resItem = new BinaryResItem();
+			resItem = MY_NEW BinaryResItem();
 		}
 	}
 
@@ -242,14 +242,14 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	{
 		if (nullptr == loadItem)
 		{
-			loadItem = new ClassAssetLoadItem();
+			loadItem = MY_NEW ClassAssetLoadItem();
 		}
 	}
 	else if (eObjectType == param->getResPackType())
 	{
 		if (nullptr == loadItem)
 		{
-			loadItem = new ObjectAssetLoadItem();
+			loadItem = MY_NEW ObjectAssetLoadItem();
 		}
 	}
 	//if (eResourcesType == param->mResPackType)        // 默认 Bundle 中资源
@@ -270,7 +270,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	{
 		if (nullptr == loadItem)
 		{
-			loadItem = new LevelLoadItem();
+			loadItem = MY_NEW LevelLoadItem();
 		}
 
 		((LevelLoadItem*)loadItem)->setLevelName(param->getLvlName());
@@ -279,7 +279,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	{
 		if (nullptr == loadItem)
 		{
-			loadItem = new UBinaryLoadItem();
+			loadItem = MY_NEW UBinaryLoadItem();
 		}
 	}
 
