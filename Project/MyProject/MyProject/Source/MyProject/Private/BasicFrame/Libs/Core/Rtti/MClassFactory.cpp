@@ -16,7 +16,7 @@ MClassFactory* MClassFactory::Instance()
     if (0 == MClassFactory::msSingleton)
     {
 		MClassFactory::msSingleton = MY_NEW(MClassFactory);
-        my_assert(0 != msSingleton);
+        my_assert(0 != MClassFactory::msSingleton);
     }
 
     return MClassFactory::msSingleton;
