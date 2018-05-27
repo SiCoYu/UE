@@ -49,9 +49,9 @@ void operator delete[](void* ptr, const char*, int, const char*, MyMemoryConstru
 
 // 因为 UE4 重载 delete ，如果类型是基本类型，就不能在类中重载 delete ，这个时候如果删除基本类型数组 delete [] ptr ，就会到 UE4 dll 的堆中删除，会导致破坏堆，因此添加这个接口
 template<class T>
-void deleteBaseTypeArray(T* ptr, count)
+void deleteBaseTypeArray(T* ptr, int count)
 {
-	MyDefaultAllocPolicy::deallocateBytes((void*)ptr)
+	MyDefaultAllocPolicy::deallocateBytes((void*)ptr);
 }
 
 //#define my_new(type) new type

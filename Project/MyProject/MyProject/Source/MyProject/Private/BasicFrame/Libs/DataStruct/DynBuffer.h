@@ -24,6 +24,7 @@ public:
 	std::size_t mMaxCapacity;
 	std::size_t mSize;
 	T* mBuffer;
+	bool mIsPodType;
 
 public:
 	DynBuffer(
@@ -34,12 +35,30 @@ public:
 		  mMaxCapacity(maxCapacity)
 	{
 		this->mSize = 0;
-		this->mBuffer = MY_NEW T[mCapacity];
+		this->mBuffer = MY_NEW T[this->mCapacity];
+		this->mIsPodType = false;
 	}
 
 	~DynBuffer()
 	{
-		MY_DELETE[] this->mBuffer;
+		this->dispose();
+	}
+
+	void dispose()
+	{
+		if (this->mIsPodType)
+		{
+			MY_DELETE_BASE_TYPE_ARRAY(this->mBuffer, T, this->mCapacity);
+		}
+		else
+		{
+			MY_DELETE[] this->mBuffer;
+		}
+	}
+
+	void setPodType(bool value)
+	{
+		this->mIsPodType = value;
 	}
 
 	T* getBuffer()
@@ -84,7 +103,7 @@ public:
 
 	std::size_t getSize()
 	{
-		return mSize;
+		return this->mSize;
 	}
 
 	void setSize(std::size_t value)
@@ -99,7 +118,13 @@ public:
 
 	void extendDeltaCapicity(uint32 delta)
 	{
-		this->setCapacity(DynBufResizePolicy::getCloseSize(this->getSize() + delta, this->getCapacity(), this->getMaxCapacity()));
+		this->setCapacity(
+			DynBufResizePolicy::getCloseSize(
+				this->getSize() + delta, 
+				this->getCapacity(), 
+				this->getMaxCapacity()
+			)
+		);
 	}
 
 	//void push(char* pItem, std::size_t len)
@@ -116,13 +141,15 @@ public:
 
 	bool canAddData(uint32 num)
 	{
+		bool ret = false;
+
 		if (this->mCapacity - this->mSize >= num)
 		{
-			return true;
+			ret = true;
 		}
 
-		return false;
+		return ret;
 	}
 };
 
-#endif			// __DYNBUFFER_H
+#endif			// __DynBuffer_H

@@ -17,7 +17,11 @@ MByteBuffer::MByteBuffer(
 )
 {
 	this->mEndian = endian;        // 缓冲区默认是小端的数据，因为服务器是 linux 的
-	this->mDynBuffer = MY_NEW DynBuffer<char>(initCapacity, maxCapacity);
+	this->mDynBuffer = MY_NEW DynBuffer<char>(
+		initCapacity, 
+		maxCapacity
+		);
+	this->mDynBuffer->setPodType(true);
 }
 
 DynBuffer<char>* MByteBuffer::getDynBuffer()
@@ -28,7 +32,7 @@ DynBuffer<char>* MByteBuffer::getDynBuffer()
 uint32 MByteBuffer::getBytesAvailable()
 {
 	//check();
-	return (this->mDynBuffer->getSize() - mPos);
+	return (this->mDynBuffer->getSize() - this->mPos);
 }
 
 EEndian MByteBuffer::getEndian()
