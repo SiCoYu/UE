@@ -9,10 +9,10 @@
 
 DownloadMgr::DownloadMgr()
 {
-    mMaxParral = 8;
-    mCurNum = 0;
-    mLoadData = MY_NEW DownloadData();
-    mLoadingDepth = 0;
+    this->mMaxParral = 8;
+	this->mCurNum = 0;
+	this->mLoadData = MY_NEW DownloadData();
+	this->mLoadingDepth = 0;
 
     //this.addMsgRouteHandle(MsgRouteId.eMRIDLoadedWebRes, onMsgRouteResLoad);
 }
@@ -39,7 +39,7 @@ bool DownloadMgr::hasDownloadItem(std::string resUniqueId)
 {
 	DownloadItem* loadItemValue = nullptr;
 
-	for (DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
+	for (DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem)
     {
 		loadItemValue = kvValue.second;
 
@@ -49,7 +49,7 @@ bool DownloadMgr::hasDownloadItem(std::string resUniqueId)
         }
     }
 
-    for (DownloadItem* loadItem : mLoadData->mWillLDItem)
+    for (DownloadItem* loadItem : this->mLoadData->mWillLDItem)
     {
         if (loadItem->getResUniqueId() == resUniqueId)
         {
@@ -102,7 +102,7 @@ DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
 {
 	DownloadItem* loadItemValue = nullptr;
 
-    for (DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
+    for (DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem)
     {
 		loadItemValue = kvValue.second;
 
@@ -112,7 +112,7 @@ DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
         }
     }
 
-    for (DownloadItem* loadItem : mLoadData->mWillLDItem)
+    for (DownloadItem* loadItem : this->mLoadData->mWillLDItem)
     {
         if (loadItem->getResUniqueId() == resUniqueId)
         {
@@ -125,7 +125,7 @@ DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
 
 DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
 {
-    DownloadItem* loadItem = findDownloadItemFormPool();
+    DownloadItem* loadItem = this->findDownloadItemFormPool();
     if (loadItem == nullptr)
     {
         if (param->mDownloadType == eHttpWeb)
@@ -147,91 +147,93 @@ DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
 
 void DownloadMgr::downloadWithDownloading(DownloadParam* param)
 {
-    mLoadData->mPath2LDItem[param->mResUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
-    if (mLoadData->mPath2LDItem[param->mResUniqueId]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
+	this->mLoadData->mPath2LDItem[param->mResUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+    if (this->mLoadData->mPath2LDItem[param->mResUniqueId]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
     {
         if (param->mLoadEventHandle != nullptr)
         {
-            param->mLoadEventHandle(mLoadData->mPath2LDItem[param->mResUniqueId]);
+            param->mLoadEventHandle(this->mLoadData->mPath2LDItem[param->mResUniqueId]);
         }
     }
     else
     {
         if (param->mLoadEventHandle != nullptr)
         {
-            mLoadData->mPath2LDItem[param->mResUniqueId]->getAllLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
+			this->mLoadData->mPath2LDItem[param->mResUniqueId]->getAllLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
         }
     }
 
-    resetLoadParam(param);
+	this->resetLoadParam(param);
 }
 
 void DownloadMgr::downloadWithNotDownload(DownloadParam* param)
 {
-    if (!hasDownloadItem(param->mResUniqueId))
+    if (!this->hasDownloadItem(param->mResUniqueId))
     {
-        DownloadItem* loadItem = createDownloadItem(param);
+        DownloadItem* loadItem = this->createDownloadItem(param);
 
-        if (mCurNum < mMaxParral)
+        if (this->mCurNum < this->mMaxParral)
         {
             // 先增加，否则退出的时候可能是先减 1 ，导致越界出现很大的值
-            ++mCurNum;
-            mLoadData->mPath2LDItem[param->mResUniqueId] = loadItem;
-            mLoadData->mPath2LDItem[param->mResUniqueId]->load();
+            ++this->mCurNum;
+			this->mLoadData->mPath2LDItem[param->mResUniqueId] = loadItem;
+			this->mLoadData->mPath2LDItem[param->mResUniqueId]->load();
         }
         else
         {
-            UtilList::Add(mLoadData->mWillLDItem, loadItem);
+            UtilList::Add(this->mLoadData->mWillLDItem, loadItem);
         }
     }
 
-    resetLoadParam(param);
+	this->resetLoadParam(param);
 }
 
 // 通用类型，需要自己设置很多参数
 void DownloadMgr::download(DownloadParam* param)
 {
-    ++mLoadingDepth;
-    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, param->mResUniqueId))
+    ++this->mLoadingDepth;
+
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, param->mResUniqueId))
     {
-        downloadWithDownloading(param);
+		this->downloadWithDownloading(param);
     }
     else
     {
-        downloadWithNotDownload(param);
+		this->downloadWithNotDownload(param);
     }
-    --mLoadingDepth;
 
-    if (mLoadingDepth == 0)
+    --this->mLoadingDepth;
+
+    if (this->mLoadingDepth == 0)
     {
-        unloadNoRefResFromList();
+		this->unloadNoRefResFromList();
     }
 }
 
 DownloadItem* DownloadMgr::getAndDownload(DownloadParam* param)
 {
     //param.resolvePath();
-	download(param);
-    return getDownloadItem(param->mResUniqueId);
+	this->download(param);
+    return this->getDownloadItem(param->mResUniqueId);
 }
 
 // 这个卸载有引用计数，如果有引用计数就卸载不了
 void DownloadMgr::undownload(std::string resUniqueId, EventDispatchDelegate loadEventHandle)
 {
-    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, resUniqueId))
     {
         // 移除事件监听器，因为很有可能移除的时候，资源还没加载完成，这个时候事件监听器中的处理函数列表还没有清理
-        mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
-        mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
-        if (mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
+		this->mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
+		this->mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
+        if (this->mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
         {
-            if (mLoadingDepth != 0)
+            if (this->mLoadingDepth != 0)
             {
-                addNoRefResID2List(resUniqueId);
+				this->addNoRefResID2List(resUniqueId);
             }
             else
             {
-                unloadNoRef(resUniqueId);
+				this->unloadNoRef(resUniqueId);
             }
         }
     }
@@ -243,7 +245,7 @@ void DownloadMgr::unloadAll()
     MList<std::string> resUniqueIdList;
 	std::string resUniqueId;
 
-    for(DownloadData::KVPairs kvValue : mLoadData->mPath2LDItem)
+    for(DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem)
     {
 		resUniqueId = kvValue.first;
         resUniqueIdList.add(resUniqueId);
@@ -251,6 +253,7 @@ void DownloadMgr::unloadAll()
 
     int idx = 0;
     int len = resUniqueIdList.count();
+
     while (idx < len)
     {
         this->unloadNoRef(resUniqueIdList[idx]);
@@ -263,34 +266,35 @@ void DownloadMgr::unloadAll()
 // 添加无引用资源到 List
 void DownloadMgr::addNoRefResID2List(std::string resUniqueId)
 {
-    mZeroRefResIdList.add(resUniqueId);
+	this->mZeroRefResIdList.add(resUniqueId);
 }
 
 // 卸载没有引用的资源列表中的资源
 void DownloadMgr::unloadNoRefResFromList()
 {
-    for (std::string path : mZeroRefResIdList.getList())
+    for (std::string path : this->mZeroRefResIdList.getList())
     {
-        if (mLoadData->mPath2LDItem[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
+        if (this->mLoadData->mPath2LDItem[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
         {
-            unloadNoRef(path);
+			this->unloadNoRef(path);
         }
     }
-    mZeroRefResIdList.clear();
+
+	this->mZeroRefResIdList.clear();
 }
 
 // 不考虑引用计数，直接卸载
 void DownloadMgr::unloadNoRef(std::string resUniqueId)
 {
-    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, resUniqueId))
     {
-        mLoadData->mPath2LDItem[resUniqueId]->unload();
-        mLoadData->mPath2LDItem[resUniqueId]->reset();
-		UtilList::Add(mLoadData->mNoUsedLDItem, mLoadData->mPath2LDItem[resUniqueId]);
-		UtilMap::Remove(mLoadData->mPath2LDItem, resUniqueId);
+		this->mLoadData->mPath2LDItem[resUniqueId]->unload();
+		this->mLoadData->mPath2LDItem[resUniqueId]->reset();
+		UtilList::Add(this->mLoadData->mNoUsedLDItem, this->mLoadData->mPath2LDItem[resUniqueId]);
+		UtilMap::Remove(this->mLoadData->mPath2LDItem, resUniqueId);
 
         // 检查是否存在还没有执行的 LoadItem，如果存在就直接移除
-        removeWillLoadItem(resUniqueId);
+		this->removeWillLoadItem(resUniqueId);
     }
     else
     {
@@ -300,11 +304,11 @@ void DownloadMgr::unloadNoRef(std::string resUniqueId)
 
 void DownloadMgr::removeWillLoadItem(std::string resUniqueId)
 {
-    for (DownloadItem* loadItem : mLoadData->mWillLDItem)
+    for (DownloadItem* loadItem : this->mLoadData->mWillLDItem)
     {
         if (loadItem->getResUniqueId() == resUniqueId)
         {
-            releaseLoadItem(loadItem);      // 必然只有一个，如果有多个就是错误
+			this->releaseLoadItem(loadItem);      // 必然只有一个，如果有多个就是错误
             break;
         }
     }
@@ -322,27 +326,27 @@ void DownloadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 
     if (item->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
     {
-        onLoaded(item);
+		this->onLoaded(item);
     }
     else if (item->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
     {
-        onFailed(item);
+		this->onFailed(item);
     }
 
     item->getAllLoadResEventDispatch()->dispatchEvent(item);
 
-    releaseLoadItem(item);
-    --mCurNum;
-    loadNextItem();
+	this->releaseLoadItem(item);
+    --this->mCurNum;
+	this->loadNextItem();
 }
 
 void DownloadMgr::onLoaded(DownloadItem* item)
 {
 	std::string resUniqueId = item->getResUniqueId();
 
-    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, resUniqueId))
     {
-        mLoadData->mPath2LDItem[item->getResUniqueId()]->init();
+		this->mLoadData->mPath2LDItem[item->getResUniqueId()]->init();
     }
     else        // 如果资源已经没有使用的地方了
     {
@@ -353,9 +357,9 @@ void DownloadMgr::onLoaded(DownloadItem* item)
 void DownloadMgr::onFailed(DownloadItem* item)
 {
     std::string resUniqueId = item->getResUniqueId();
-    if (UtilMap::ContainsKey(mLoadData->mPath2LDItem, resUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, resUniqueId))
     {
-        mLoadData->mPath2LDItem[resUniqueId]->failed();
+		this->mLoadData->mPath2LDItem[resUniqueId]->failed();
     }
 }
 
@@ -370,31 +374,32 @@ void DownloadMgr::releaseLoadItem(DownloadItem* item)
 
 void DownloadMgr::loadNextItem()
 {
-    if (mCurNum < mMaxParral)
+    if (this->mCurNum < this->mMaxParral)
     {
-		if (UtilList::Count(mLoadData->mWillLDItem) > 0)
+		if (UtilList::Count(this->mLoadData->mWillLDItem) > 0)
         {
-            std::string resUniqueId = mLoadData->mWillLDItem.front()->getResUniqueId();
-            mLoadData->mPath2LDItem[resUniqueId] = mLoadData->mWillLDItem.front();
-			UtilList::RemoveAt(mLoadData->mWillLDItem, 0);
-            mLoadData->mPath2LDItem[resUniqueId]->load();
+            std::string resUniqueId = this->mLoadData->mWillLDItem.front()->getResUniqueId();
+			this->mLoadData->mPath2LDItem[resUniqueId] = this->mLoadData->mWillLDItem.front();
+			UtilList::RemoveAt(this->mLoadData->mWillLDItem, 0);
+			this->mLoadData->mPath2LDItem[resUniqueId]->load();
 
-            ++mCurNum;
+            ++this->mCurNum;
         }
     }
 }
 
 DownloadItem* DownloadMgr::findDownloadItemFormPool()
 {
-    mRetLoadItem = nullptr;
-    for (DownloadItem* item : mLoadData->mNoUsedLDItem)
+	this->mRetLoadItem = nullptr;
+
+    for (DownloadItem* item : this->mLoadData->mNoUsedLDItem)
     {
-        mRetLoadItem = item;
-		UtilList::Remove(mLoadData->mNoUsedLDItem, mRetLoadItem);
+		this->mRetLoadItem = item;
+		UtilList::Remove(this->mLoadData->mNoUsedLDItem, this->mRetLoadItem);
         break;
     }
 
-    return mRetLoadItem;
+    return this->mRetLoadItem;
 }
 
 // 资源加载完成，触发下一次加载

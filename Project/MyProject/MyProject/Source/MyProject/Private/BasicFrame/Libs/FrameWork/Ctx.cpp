@@ -208,6 +208,7 @@ void Ctx::dispose()
 	this->mMaterialInsResMgr->dispose();
 
 	this->mMyStreamableManager->dispose();
+	this->mDownloadMgr->dispose();
 	this->mPoolSys->dispose();
 	this->mFileSys->dispose();
 
@@ -249,6 +250,7 @@ void Ctx::dispose()
 	this->mMaterialInsResMgr.setNull();
 
 	this->mMyStreamableManager.setNull();
+	this->mDownloadMgr.setNull();
 	this->mPoolSys.setNull();
 	this->mFileSys.setNull();
 
