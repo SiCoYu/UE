@@ -57,6 +57,7 @@ private:
 #define M_REGISTER_CLASS(type) \
     static const bool type##_registered = type::RegisterWithFactory(); \
 
+
 //  warning C4668: 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
 #ifdef MY_DEBUG_MODE
 #define M_IMPLEMENT_CLASS(type, baseType) \
@@ -169,3 +170,18 @@ private:
         return true; \
     }
 #endif
+
+
+#define M_IMPLEMENT_AND_REGISTER_CLASS(type, baseType) \
+	M_IMPLEMENT_CLASS(type, baseType) \
+	M_REGISTER_CLASS(type)
+
+
+#define M_IMPLEMENT_AND_REGISTER_ABSTRACT_CLASS(type, baseType) \
+	M_IMPLEMENT_ABSTRACT_CLASS(type, baseType) \
+	M_REGISTER_CLASS(type)
+
+
+#define M_IMPLEMENT_AND_REGISTER_ROOT_CLASS(type) \
+	M_IMPLEMENT_ROOT_CLASS(type) \
+	M_REGISTER_CLASS(type)

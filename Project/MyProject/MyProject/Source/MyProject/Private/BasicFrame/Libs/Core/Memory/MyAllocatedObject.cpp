@@ -2,8 +2,7 @@
 #include "MyAllocatedObject.h"
 #include "MClassFactory.h"
 
-M_IMPLEMENT_CLASS(MyAllocatedObject, GObjectBase)
-M_REGISTER_CLASS(MyAllocatedObject)
+M_IMPLEMENT_AND_REGISTER_CLASS(MyAllocatedObject, GObjectBase)
 
 void* MyAllocatedObject::operator new(size_t sz, const char* file, int line, const char* func, MyMemoryConstructorFlag constructorFlag)
 {

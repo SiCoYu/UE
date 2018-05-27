@@ -9,8 +9,7 @@
 
 namespace MyNS
 {
-	M_IMPLEMENT_CLASS(AuxMObjectLoaderBase, AuxLoaderBase)
-	M_REGISTER_CLASS(AuxMObjectLoaderBase)
+	M_IMPLEMENT_AND_REGISTER_CLASS(AuxMObjectLoaderBase, AuxLoaderBase)
 
 	AuxMObjectLoaderBase::AuxMObjectLoaderBase(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
 		: Super(path)

@@ -1,10 +1,10 @@
 #include "MyProject.h"
 #include "AuxWindow.h"
+#include "MClassFactory.h"
 
 namespace MyNS
 {
-	M_IMPLEMENT_CLASS(AuxWindow, GObject)
-	M_REGISTER_CLASS(AuxWindow)
+	M_IMPLEMENT_AND_REGISTER_CLASS(AuxWindow, GObject)
 
 	void AuxWindow::init()
 	{

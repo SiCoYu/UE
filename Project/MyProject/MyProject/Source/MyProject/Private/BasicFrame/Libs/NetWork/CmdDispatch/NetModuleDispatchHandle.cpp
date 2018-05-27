@@ -11,8 +11,7 @@
 #include "MClassMacros.h"
 #include "MClassFactory.h"
 
-M_IMPLEMENT_CLASS(NetModuleDispatchHandle, GObject)
-M_REGISTER_CLASS(NetModuleDispatchHandle)
+M_IMPLEMENT_AND_REGISTER_CLASS(NetModuleDispatchHandle, GObject)
 
 NetModuleDispatchHandle::NetModuleDispatchHandle()
 {

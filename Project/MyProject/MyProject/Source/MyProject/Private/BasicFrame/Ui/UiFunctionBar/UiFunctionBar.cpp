@@ -70,27 +70,27 @@ void UUiFunctionBar::onExit()
 	this->mTestButton->dispose();
 	this->mTestButton.setNull();
 	
-	if (nullptr != this->mTestButton)
+	if (nullptr != this->mTestComBtn)
 	{
-		this->mTestButton->dispose();
-		MY_DELETE this->mTestButton;
-		this->mTestButton = nullptr;
+		this->mTestComBtn->dispose();
+		MY_DELETE this->mTestComBtn;
+		this->mTestComBtn = nullptr;
 	}
 	if (nullptr != this->mTestLoadTextureBtn)
 	{
-		this->mTestLoadTextureBtn.dispose();
+		this->mTestLoadTextureBtn->dispose();
 		MY_DELETE this->mTestLoadTextureBtn;
 		this->mTestLoadTextureBtn = nullptr;
 	}
 	if (nullptr != this->mTestLoadMaterialBtn)
 	{
-		this->mTestLoadMaterialBtn.dispose();
+		this->mTestLoadMaterialBtn->dispose();
 		MY_DELETE this->mTestLoadMaterialBtn;
 		this->mTestLoadMaterialBtn = nullptr;
 	}
 	if (nullptr != this->mTestChangeMaterialBtn)
 	{
-		this->mTestChangeMaterialBtn.dispose();
+		this->mTestChangeMaterialBtn->dispose();
 		MY_DELETE this->mTestChangeMaterialBtn;
 		this->mTestChangeMaterialBtn = nullptr;
 	}

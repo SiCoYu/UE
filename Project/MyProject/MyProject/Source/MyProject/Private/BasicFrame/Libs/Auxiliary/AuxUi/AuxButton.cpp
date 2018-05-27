@@ -1,11 +1,11 @@
 #include "MyProject.h"
 #include "AuxButton.h"
 #include "UtilSysLibWrap.h"
+#include "MClassFactory.h"
 
 namespace MyNS
 {
-	M_IMPLEMENT_CLASS(AuxButton, AuxWindow)
-	M_REGISTER_CLASS(AuxButton)
+	M_IMPLEMENT_AND_REGISTER_CLASS(AuxButton, AuxWindow)
 
 	AuxButton::AuxButton()
 	{

@@ -4,8 +4,7 @@
 #include "MyMemoryAlloc.h"
 #include "MClassFactory.h"
 
-M_IMPLEMENT_CLASS(GObject, GObjectBase)
-M_REGISTER_CLASS(GObject)
+M_IMPLEMENT_AND_REGISTER_CLASS(GObject, MyAllocatedObject)
 
 // warning C4668 : 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
 //#if MY_DEBUG

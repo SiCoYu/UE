@@ -12,9 +12,7 @@
 #include "MClassMacros.h"
 #include "MClassFactory.h"
 
-
-M_IMPLEMENT_CLASS(GameNetNotify, NetModuleDispatchHandle)
-M_REGISTER_CLASS(GameNetNotify)
+M_IMPLEMENT_AND_REGISTER_CLASS(GameNetNotify, NetModuleDispatchHandle)
 
 GameNetNotify::GameNetNotify()
 {

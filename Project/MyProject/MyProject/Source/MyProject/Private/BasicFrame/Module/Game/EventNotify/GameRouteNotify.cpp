@@ -13,8 +13,7 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
-M_IMPLEMENT_CLASS(GameRouteNotify, MsgRouteDispatchHandle)
-M_REGISTER_CLASS(GameRouteNotify)
+M_IMPLEMENT_AND_REGISTER_CLASS(GameRouteNotify, MsgRouteDispatchHandle)
 
 GameRouteNotify::GameRouteNotify()
 {

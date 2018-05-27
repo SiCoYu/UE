@@ -6,8 +6,7 @@
 
 namespace MyNS
 {
-	M_IMPLEMENT_CLASS(AuxLoaderBase, GObject)
-	M_REGISTER_CLASS(AuxLoaderBase)
+	M_IMPLEMENT_AND_REGISTER_CLASS(AuxLoaderBase, GObject)
 
 	AuxLoaderBase::AuxLoaderBase(std::string path)
 	{

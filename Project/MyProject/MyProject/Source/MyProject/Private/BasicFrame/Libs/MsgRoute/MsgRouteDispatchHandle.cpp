@@ -7,8 +7,7 @@
 #include "UtilStr.h"
 #include "MsgRouteHandleBase.h"
 
-M_IMPLEMENT_CLASS(MsgRouteDispatchHandle, GObject)
-M_REGISTER_CLASS(MsgRouteDispatchHandle)
+M_IMPLEMENT_AND_REGISTER_CLASS(MsgRouteDispatchHandle, GObject)
 
 MsgRouteDispatchHandle::MsgRouteDispatchHandle()
 {
