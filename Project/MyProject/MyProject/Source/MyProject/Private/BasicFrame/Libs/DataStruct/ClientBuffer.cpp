@@ -394,7 +394,7 @@ void ClientBuffer::UnCompressAndDecryptEveryOne()
 
 		// Test 读取消息头
 		// MByteBuffer buff = getMsg();
-		// stNullUserCmd cmd = new stNullUserCmd();
+		// NullUserCmd cmd = new NullUserCmd();
 		// cmd.derialize(buff);
 		// Ctx.m_instance.m_logSys.log(string.Format("测试打印消息: byCmd = {0}, byParam = {1}", cmd.byCmd, cmd.byParam));
 	}

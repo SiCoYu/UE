@@ -14,7 +14,7 @@ enum class NullUserCmdCV
 	DATA_USERCMD = 3,
 };
 
-class stNullUserCmd
+class NullUserCmd
 {
 public:
     uint8 byCmd;
@@ -25,6 +25,5 @@ public:
 	virtual void serialize(MByteBuffer* bu);
 	virtual void derialize(MByteBuffer* bu);
 };
-
 
 #endif

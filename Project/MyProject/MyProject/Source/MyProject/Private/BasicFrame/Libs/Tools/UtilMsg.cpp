@@ -4,7 +4,7 @@
 #include "UtilStr.h"
 
 // 发送消息， bnet 如果 true 就直接发送到 socket ，否则直接进入输出消息队列
-void UtilMsg::sendMsg(stNullUserCmd& msg, bool bnet)
+void UtilMsg::sendMsg(NullUserCmd& msg, bool bnet)
 {
 	GShareData->mTmpBA = GNetMgr->getSendBA();
 	if (GShareData->mTmpBA != nullptr)

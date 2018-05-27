@@ -3,7 +3,7 @@
 #include "SafePointer.h"		// SAFE_NEW
 #include "GameTimeCmdHandle.h"
 #include "EventDispatchDelegate.h"
-#include "stNullUserCmd.h"
+#include "NullUserCmd.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
