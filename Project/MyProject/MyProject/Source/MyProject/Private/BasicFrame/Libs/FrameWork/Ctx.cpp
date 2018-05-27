@@ -104,7 +104,7 @@ void Ctx::construct()
 	this->mStdoutLog = MySharedPtr<StdoutLog>(MY_NEW StdoutLog());
 #endif
 
-	this->mMyStreamableManager = MySharedPtr<MyStreamableManager>(MY_NEW FMyStreamableManager());
+	this->mMyStreamableManager = MySharedPtr<MyStreamableManager>(MY_NEW MyStreamableManager());
 	this->mResLoadMgr = MySharedPtr<ResLoadMgr>(MY_NEW ResLoadMgr());
 	this->mClassAssetInsMgr = MySharedPtr<ClassAssetInsMgr>(MY_NEW ClassAssetInsMgr());
 	this->mObjectAssetInsMgr = MySharedPtr<ObjectAssetInsMgr>(MY_NEW ObjectAssetInsMgr());
