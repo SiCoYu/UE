@@ -23,7 +23,6 @@ protected:
 
 protected:
 	MyMemoryTracker();
-	void reportLeaks();
 
 public:
 	~MyMemoryTracker();
@@ -47,6 +46,7 @@ public:
 	void recordDealloc(void* ptr);
 	void setRecordEnable(bool recordEnable);
 	bool getRecordEnable() const;
+	void reportLeaks();
 
 	FLowLevelMemTracker& getNativeMemTracker();
 

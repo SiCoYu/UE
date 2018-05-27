@@ -34,8 +34,6 @@ MyMemoryTracker::MyMemoryTracker()
 
 MyMemoryTracker::~MyMemoryTracker()
 {
-	this->reportLeaks();
-
 	this->mRecordEnable = false;
 }
 

@@ -1169,7 +1169,7 @@ void UtilEngineWrap::setTextureParameterValue(UMaterialInstanceDynamic* material
 	}
 }
 
-void UtilEngineWrap::conditionalCollectGarbage();
+void UtilEngineWrap::conditionalCollectGarbage()
 {
 	GEngine->ConditionalCollectGarbage();
 }
