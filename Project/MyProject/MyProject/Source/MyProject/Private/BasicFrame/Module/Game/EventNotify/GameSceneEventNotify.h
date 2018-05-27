@@ -10,7 +10,8 @@
 	class TestMain;
 #endif
 
-class GameSceneEventNotify : public GObject, public ISceneEventNotify
+//class GameSceneEventNotify : public GObject, public ISceneEventNotify
+class GameSceneEventNotify : public ISceneEventNotify
 {
 protected:
 #ifdef ENABLE_UNIT_TEST

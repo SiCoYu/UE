@@ -1,9 +1,22 @@
 ﻿#pragma once
 
-class ISceneEventNotify
+#include "GObject.h"
+
+class ISceneEventNotify : public GObject
 {
 public:
-    virtual void onLevelLoaded() = 0;
-	virtual void init() = 0;
-	virtual void dispose() = 0;
+	virtual void onLevelLoaded()
+	{
+
+	}
+
+	virtual void init()
+	{
+
+	}
+
+	virtual void dispose()
+	{
+
+	}
 };
