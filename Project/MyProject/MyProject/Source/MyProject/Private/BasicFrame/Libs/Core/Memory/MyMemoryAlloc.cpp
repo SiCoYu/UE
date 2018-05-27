@@ -27,37 +27,27 @@ void* operator new[](size_t sz, MyMemoryConstructorFlag constructorFlag)
 	return MyDefaultAllocPolicy::allocateBytes(sz);
 }
 
-//void operator delete(void* ptr)
-//{
-//	MyDefaultAllocPolicy::deallocateBytes(ptr);
-//}
-
-//void operator delete(void* ptr, void*)
-//{
-//	MyDefaultAllocPolicy::deallocateBytes(ptr);
-//}
-
-void operator delete(void* ptr, size_t _Size, MyMemoryConstructorFlag constructorFlag)
+void operator delete(void* ptr, MyMemoryConstructorFlag constructorFlag)
 {
 	MyDefaultAllocPolicy::deallocateBytes(ptr);
 }
 
-//void operator delete(void* ptr, const char*, int, const char*)
-//{
-//	MyDefaultAllocPolicy::deallocateBytes(ptr);
-//}
-
-//void operator delete[](void* ptr)
-//{
-//	MyDefaultAllocPolicy::deallocateBytes(ptr);
-//}
-
-void operator delete[](void* ptr, size_t _Size, MyMemoryConstructorFlag constructorFlag)
+void operator delete(void* ptr, void*, MyMemoryConstructorFlag constructorFlag)
 {
 	MyDefaultAllocPolicy::deallocateBytes(ptr);
 }
 
-//void operator delete[](void* ptr, const char*, int, const char*)
-//{
-//	MyDefaultAllocPolicy::deallocateBytes(ptr);
-//}
+void operator delete(void* ptr, const char*, int, const char*, MyMemoryConstructorFlag constructorFlag)
+{
+	MyDefaultAllocPolicy::deallocateBytes(ptr);
+}
+
+void operator delete[](void* ptr, MyMemoryConstructorFlag constructorFlag)
+{
+	MyDefaultAllocPolicy::deallocateBytes(ptr);
+}
+
+void operator delete[](void* ptr, const char*, int, const char*, MyMemoryConstructorFlag constructorFlag)
+{
+	MyDefaultAllocPolicy::deallocateBytes(ptr);
+}
