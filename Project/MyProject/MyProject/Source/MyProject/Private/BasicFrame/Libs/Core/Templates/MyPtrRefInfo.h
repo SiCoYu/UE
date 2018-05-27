@@ -1,11 +1,13 @@
 #pragma once
 
 #include "MThreadSafeCounter.h"
+#include "GObject.h"
 
 namespace MyNS
 {
-	struct PtrRefInfo
+	class PtrRefInfo : public GObject
 	{
+	public:
 		inline PtrRefInfo()
 			: mRefCount(1)
 		{

@@ -77,7 +77,7 @@ void MyMemoryTracker::_recordAlloc(
 {
 	if (this->mRecordEnable)
 	{
-		assert(this->mAllocations.find(ptr) == this->mAllocations.end() && "Double allocation with same address - ");
+		assert(this->mAllocations.find(ptr) == this->mAllocations.end() && "Double allocation with same address");
 
 		this->mAllocations[ptr] = MyAllocRecordItem(
 			sz, 
@@ -95,7 +95,9 @@ void MyMemoryTracker::_recordDealloc(void* ptr)
 	if (this->mRecordEnable)
 	{
 		if (!ptr)
+		{
 			return;
+		}
 
 		AllocationMap::iterator i = this->mAllocations.find(ptr);
 		assert(i != this->mAllocations.end() && "Unable to locate allocation unit - ");

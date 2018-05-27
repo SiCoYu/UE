@@ -18,7 +18,11 @@ MyAllocRecordItem::MyAllocRecordItem(
 	 mLine(ln)
 {
 	if (file)
+	{
 		this->mFileName = file;
+	}
 	if (func)
+	{
 		this->mFunction = func;
+	}
 }
