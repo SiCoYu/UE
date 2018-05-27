@@ -48,7 +48,7 @@ T* constructN(T* basePtr, size_t count)
 
 #   define MY_DELETE_ARRAY_T(ptr, T, count, category) if(ptr){for (size_t b = 0; b < count; ++b) { (ptr)[b].~T();} MyDefaultAllocPolicy::deallocateBytes((void*)ptr);}
 
-#   define MY_NEW new 
+#   define MY_NEW new (MMCF_PlaceMemoryConstructorFlag)
 #   define MY_DELETE delete
 
 template<typename T>
