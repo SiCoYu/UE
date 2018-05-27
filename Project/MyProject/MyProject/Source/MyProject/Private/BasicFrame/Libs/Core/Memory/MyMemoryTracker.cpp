@@ -7,6 +7,8 @@
 #include <sstream>
 #include <assert.h>
 
+#include "HAL/LowLevelMemTracker.h"
+
 #if MY_PLATFORM == MY_PLATFORM_WIN32 || MY_PLATFORM == MY_PLATFORM_WINRT
 #   include <windows.h>
 #   define My_OutputCString(str) ::OutputDebugStringA(str)
@@ -35,6 +37,11 @@ MyMemoryTracker::~MyMemoryTracker()
 	this->reportLeaks();
 
 	this->mRecordEnable = false;
+}
+
+void MyMemoryTracker::clear()
+{
+	this->mAllocations.clear();
 }
 
 void MyMemoryTracker::setReportFileName(const std::string& name)
@@ -67,7 +74,7 @@ bool MyMemoryTracker::getRecordEnable() const
 	return this->mRecordEnable;
 }
 
-void MyMemoryTracker::_recordAlloc(
+void MyMemoryTracker::recordAlloc(
 	void* ptr, 
 	size_t sz,
 	const char* file,
@@ -90,7 +97,7 @@ void MyMemoryTracker::_recordAlloc(
 	}
 }
 
-void MyMemoryTracker::_recordDealloc(void* ptr)
+void MyMemoryTracker::recordDealloc(void* ptr)
 {
 	if (this->mRecordEnable)
 	{
@@ -150,4 +157,9 @@ void MyMemoryTracker::reportLeaks()
 		of << os.str();
 		of.close();
 	}
+}
+
+FLowLevelMemTracker& MyMemoryTracker::getNativeMemTracker()
+{
+	return FLowLevelMemTracker::Get();
 }

@@ -39,6 +39,7 @@
 #include "TickPriority.h"
 //#include "MySingletonBP.h"
 #include "MyBluePrintBase.h"
+#include "MyMemoryTracker.h"
 
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
@@ -267,6 +268,10 @@ void Ctx::dispose()
 	this->mTimerMgr.setNull();
 	this->mFrameTimerMgr.setNull();
 	this->mBPCtx = nullptr;
+
+	// 静态全局变量的清理工作
+	MyMemoryTracker::get().reportLeaks();
+	MyMemoryTracker::get().clear();
 }
 
 void Ctx::beginPlay()

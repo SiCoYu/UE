@@ -15,7 +15,7 @@ void* MyDefaultAllocImpl::allocBytes(
 {
     void* ptr = malloc(count);
 #if MY_MEMORY_TRACKER
-	MyMemoryTracker::get()._recordAlloc(ptr, count, file, line, func);
+	MyMemoryTracker::get().recordAlloc(ptr, count, file, line, func);
 #endif
     return ptr;
 }
@@ -28,7 +28,7 @@ void MyDefaultAllocImpl::deallocBytes(void* ptr)
 	}
 
 #if MY_MEMORY_TRACKER
-	MyMemoryTracker::get()._recordDealloc(ptr);
+	MyMemoryTracker::get().recordDealloc(ptr);
 #endif
 
 	free(ptr);
@@ -40,7 +40,7 @@ void* MyDefaultAllocImpl::allocBytesAligned(size_t align, size_t count,
     void* ptr = _aligned_malloc(count, align);
 
 #if MY_MEMORY_TRACKER
-	MyMemoryTracker::get()._recordAlloc(ptr, count, file, line, func);
+	MyMemoryTracker::get().recordAlloc(ptr, count, file, line, func);
 #endif
 
     return ptr;
@@ -54,7 +54,7 @@ void MyDefaultAllocImpl::deallocBytesAligned(size_t align, void* ptr)
 	}
 
 #if MY_MEMORY_TRACKER
-	MyMemoryTracker::get()._recordDealloc(ptr);
+	MyMemoryTracker::get().recordDealloc(ptr);
 #endif
 
 	_aligned_free(ptr);

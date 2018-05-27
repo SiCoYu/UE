@@ -4,6 +4,8 @@
 #include <string>
 #include "MyAllocRecordItem.h"
 
+class FLowLevelMemTracker;
+
 /**
  * @brief 检查并且记录内存使用，主要调试内存泄漏
  */
@@ -26,6 +28,7 @@ protected:
 public:
 	~MyMemoryTracker();
 
+	void clear();
 	void setReportFileName(const std::string& name);
 	const std::string& getReportFileName() const;
 	void setReportToStdOut(bool rep);
@@ -33,7 +36,7 @@ public:
 	bool getReportToStdOut() const;
 	size_t getTotalMemoryAllocated() const;
 	size_t getMemoryAllocatedForPool(unsigned int pool) const;
-	void _recordAlloc(
+	void recordAlloc(
 		void* ptr, 
 		size_t sz,
 		const char* file = 0, 
@@ -41,9 +44,11 @@ public:
 		const char* func = 0
 	);
 
-	void _recordDealloc(void* ptr);
+	void recordDealloc(void* ptr);
 	void setRecordEnable(bool recordEnable);
 	bool getRecordEnable() const;
+
+	FLowLevelMemTracker& getNativeMemTracker();
 
 	static MyMemoryTracker& get();
 };
