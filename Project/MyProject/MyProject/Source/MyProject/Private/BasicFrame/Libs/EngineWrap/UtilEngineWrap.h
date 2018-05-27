@@ -445,6 +445,8 @@ public:
 	static void setScalarParameterValue(UMaterialInstanceDynamic* materialInstanceDynamic, FName ParameterName, float Value);
 	// Engine\Source\Runtime\Engine\Private\Materials\MaterialInstanceDynamic.cpp
 	static void setTextureParameterValue(UMaterialInstanceDynamic* materialInstanceDynamic, FName ParameterName, UTexture* Value);
+	// 进行垃圾回收，尽量不要手工调用，UE4 引擎自己已经调用了
+	static void conditionalCollectGarbage();
 };
 
 #include "UtilEngineWrap.inl"
