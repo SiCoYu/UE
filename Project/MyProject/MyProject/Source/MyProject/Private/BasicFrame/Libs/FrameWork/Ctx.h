@@ -29,7 +29,7 @@ class ClassAssetInsMgr;
 class ObjectAssetInsMgr;
 class TextureInsResMgr;
 class MaterialInsResMgr;
-class FMyStreamableManager;
+class MyStreamableManager;
 class DownloadMgr;
 class MFileSys;
 class SystemSetting;
@@ -69,7 +69,7 @@ protected:
 	MySharedPtr<TextureInsResMgr> mTextureInsResMgr;
 	MySharedPtr<MaterialInsResMgr> mMaterialInsResMgr;
 
-	MySharedPtr<FMyStreamableManager> mMyStreamableManager;
+	MySharedPtr<MyStreamableManager> mMyStreamableManager;
 	MySharedPtr<DownloadMgr> mDownloadMgr;
 	MySharedPtr<MFileSys> mFileSys;
 	MySharedPtr<SystemSetting> mSystemSetting;
@@ -125,7 +125,7 @@ public:
 	MySharedPtr<TextureInsResMgr> getTextureInsResMgr();
 	MySharedPtr<MaterialInsResMgr> getMaterialInsResMgr();
 
-	MySharedPtr<FMyStreamableManager> getMyStreamableManager();
+	MySharedPtr<MyStreamableManager> getMyStreamableManager();
 	MySharedPtr<DownloadMgr> getDownloadMgr();
 	MySharedPtr<MFileSys> getFileSys();
 	MySharedPtr<SystemSetting> getSystemSetting();

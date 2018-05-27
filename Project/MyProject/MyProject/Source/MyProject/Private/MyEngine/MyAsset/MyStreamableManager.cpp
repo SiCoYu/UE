@@ -11,27 +11,27 @@
 // error LNK2001: unresolved external symbol "private: static bool FAsyncLoadingThread::bThreadStarted" (?bThreadStarted@FAsyncLoadingThread@@0_NA)
 // #include "Private/Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread
 
-FMyStreamableManager::FMyStreamableManager()
+MyStreamableManager::MyStreamableManager()
 {
 	
 }
 
-FMyStreamableManager::~FMyStreamableManager()
+MyStreamableManager::~MyStreamableManager()
 {
 	
 }
 
-void FMyStreamableManager::init()
+void MyStreamableManager::init()
 {
 
 }
 
-void FMyStreamableManager::dispose()
+void MyStreamableManager::dispose()
 {
 
 }
 
-//UObject* FMyStreamableManager::GetStreamed(std::string const& InTargetName)
+//UObject* MyStreamableManager::GetStreamed(std::string const& InTargetName)
 //{
 //	FStringAssetReference assetRef;
 //	assetRef.SetPath(UtilStr::ConvStdStr2FString(const_cast<std::string&>(InTargetName)));
@@ -39,7 +39,7 @@ void FMyStreamableManager::dispose()
 //	return mStreamableManager.GetStreamed(assetRef);
 //}
 
-UObject* FMyStreamableManager::SynchronousLoad(std::string& path)
+UObject* MyStreamableManager::SynchronousLoad(std::string& path)
 {
 	// UE 4.19.1  warning : FStringAssetReference has been renamed to FSoftObjectPath, change to #include "UObject/SoftObjectPath.h" and rename references
 	//FStringAssetReference assetRef;
@@ -50,19 +50,19 @@ UObject* FMyStreamableManager::SynchronousLoad(std::string& path)
 	return mStreamableManager.LoadSynchronous(assetRef, true);
 }
 
-void FMyStreamableManager::RequestAsyncLoad(const std::string& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority)
+void MyStreamableManager::RequestAsyncLoad(const std::string& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority)
 {
 	FStringAssetReference assetRef;
 	assetRef.SetPath(UtilStr::ConvStdStr2FString(const_cast<std::string&>(TargetToStream)));
 	mStreamableManager.RequestAsyncLoad(assetRef, DelegateToCall, Priority);
 }
 
-void FMyStreamableManager::RequestAsyncLoad(const FStringAssetReference& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority)
+void MyStreamableManager::RequestAsyncLoad(const FStringAssetReference& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority)
 {
 	mStreamableManager.RequestAsyncLoad(TargetToStream, DelegateToCall, Priority);
 }
 
-bool FMyStreamableManager::IsMultithreaded()
+bool MyStreamableManager::IsMultithreaded()
 {
 	// UE4 4.17 这个会导致链接错误
 	// error LNK2001: unresolved external symbol "private: static bool FAsyncLoadingThread::bThreadStarted" (?bThreadStarted@FAsyncLoadingThread@@0_NA)

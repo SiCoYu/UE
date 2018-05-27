@@ -5,6 +5,7 @@
 
 #include <string>
 #include "Engine/StreamableManager.h"	 // FStreamableManager
+#include "GObject.h"
 
 /**
  * @brief http://blog.csdn.net/yangxuan0261/article/details/54408683
@@ -15,13 +16,13 @@
  const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
  */
 
-class FMyStreamableManager
+class MyStreamableManager : public GObject
 {
 public:
 	FStreamableManager mStreamableManager;
 
-	FMyStreamableManager();
-	~FMyStreamableManager();
+	MyStreamableManager();
+	~MyStreamableManager();
 
 	void init();
 	void dispose();
