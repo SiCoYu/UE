@@ -15,7 +15,7 @@
 //#include "IDesktopPlatform.h"	// FOpenLauncherOptions
 #include "UObject/ConstructorHelpers.h"		// ConstructorHelpers
 #include "Templates/SubclassOf.h"	// TSubclassOf
-#include "UObject/UObjectGlobals.h"	// DuplicateObject
+#include "UObject/UObjectGlobals.h"	// DuplicateObject, CollectGarbage
 #include "AudioDevice.h"		// FAudioDevice
 #include <string>	// string
 
@@ -447,6 +447,8 @@ public:
 	static void setTextureParameterValue(UMaterialInstanceDynamic* materialInstanceDynamic, FName ParameterName, UTexture* Value);
 	// 进行垃圾回收，尽量不要手工调用，UE4 引擎自己已经调用了
 	static void conditionalCollectGarbage();
+	// UObject\UObjectGlobals.h
+	static void collectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge = true);
 };
 
 #include "UtilEngineWrap.inl"

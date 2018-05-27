@@ -37,6 +37,8 @@ void UiMgr::init()
 
 void UiMgr::dispose()
 {
+	this->exitAllForm();
+
 	if (nullptr != this->mUiAttrSystem)
 	{
 		this->mUiAttrSystem->dispose();
@@ -149,7 +151,7 @@ void UiMgr::exitFormInternal(UiFormId formId)
 		//    Ctx.m_instance.mResLoadMgr.unload(path);
 		//}
 		UtilEngineWrap::UnloadUnusedAssets();       // 异步卸载共用资源
-		UtilMap::Remove(mId2FormDic, formId);
+		UtilMap::Remove(this->mId2FormDic, formId);
 		form = nullptr;
 	}
 }
@@ -386,7 +388,7 @@ void UiMgr::onResize(int viewWidth, int viewHeight)
 }
 
 // 关闭所有显示的窗口
-void UiMgr::exitAllWin()
+void UiMgr::exitAllForm()
 {
 	for(std::pair<UiFormId, UForm*> keyValue : this->mId2FormDic)
 	{
@@ -397,6 +399,7 @@ void UiMgr::exitAllWin()
 	{
 		this->exitForm(formId);
 	}
+
 	this->mTmpList.clear();
 }
 

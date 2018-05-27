@@ -1173,3 +1173,8 @@ void UtilEngineWrap::conditionalCollectGarbage()
 {
 	GEngine->ConditionalCollectGarbage();
 }
+
+void UtilEngineWrap::collectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge)
+{
+	::CollectGarbage(KeepFlags, bPerformFullPurge);
+}

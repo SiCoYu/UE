@@ -82,7 +82,7 @@ public:
 
 	void onResize(int viewWidth, int viewHeight);
 
-	void exitAllWin();
+	void exitAllForm();
 	void findSceneUIRootActor();
 	//void unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe);
 };

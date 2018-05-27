@@ -4,6 +4,9 @@
 
 namespace MyNS
 {
+	M_IMPLEMENT_CLASS(AuxButton, AuxWindow)
+	M_REGISTER_CLASS(AuxButton)
+
 	AuxButton::AuxButton()
 	{
 		this->mNativeButton = nullptr;
@@ -13,6 +16,16 @@ namespace MyNS
 	AuxButton::~AuxButton()
 	{
 
+	}
+
+	void AuxButton::init()
+	{
+		Super::init();
+	}
+
+	void AuxButton::dispose()
+	{
+		Super::dispose();
 	}
 
 	TScriptDelegate<FWeakObjectPtr> AuxButton::addUObjectButtonClickHandle(UUserWidget* widget, const FName& buttonName, UObject* pThis, const FName& functionName)

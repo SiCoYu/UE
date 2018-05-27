@@ -16,11 +16,11 @@
 UUiFunctionBar::UUiFunctionBar(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	this->mTestButton = MySharedPtr<AuxButton>(SAFE_NEW AuxButton());
-	this->mTestComBtn = SAFE_NEW AuxButton();
-	this->mTestLoadTextureBtn = SAFE_NEW AuxButton();
-	this->mTestLoadMaterialBtn = SAFE_NEW AuxButton();
-	this->mTestChangeMaterialBtn = SAFE_NEW AuxButton();
+	this->mTestButton = MySharedPtr<AuxButton>(MY_NEW AuxButton());
+	this->mTestComBtn = MY_NEW AuxButton();
+	this->mTestLoadTextureBtn = MY_NEW AuxButton();
+	this->mTestLoadMaterialBtn = MY_NEW AuxButton();
+	this->mTestChangeMaterialBtn = MY_NEW AuxButton();
 }
 
 void UUiFunctionBar::onReady()
@@ -63,6 +63,39 @@ void UUiFunctionBar::onReady()
 		this, 
 		"onTestChangeMaterialBtnTouch"
 	);
+}
+
+void UUiFunctionBar::onExit()
+{
+	this->mTestButton->dispose();
+	this->mTestButton.setNull();
+	
+	if (nullptr != this->mTestButton)
+	{
+		this->mTestButton->dispose();
+		MY_DELETE this->mTestButton;
+		this->mTestButton = nullptr;
+	}
+	if (nullptr != this->mTestLoadTextureBtn)
+	{
+		this->mTestLoadTextureBtn.dispose();
+		MY_DELETE this->mTestLoadTextureBtn;
+		this->mTestLoadTextureBtn = nullptr;
+	}
+	if (nullptr != this->mTestLoadMaterialBtn)
+	{
+		this->mTestLoadMaterialBtn.dispose();
+		MY_DELETE this->mTestLoadMaterialBtn;
+		this->mTestLoadMaterialBtn = nullptr;
+	}
+	if (nullptr != this->mTestChangeMaterialBtn)
+	{
+		this->mTestChangeMaterialBtn.dispose();
+		MY_DELETE this->mTestChangeMaterialBtn;
+		this->mTestChangeMaterialBtn = nullptr;
+	}
+
+	Super::onExit();
 }
 
 void UUiFunctionBar::onTestButtonTouch()

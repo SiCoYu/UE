@@ -12,6 +12,8 @@ namespace MyNS
 {
 	class AuxButton : public AuxWindow
 	{
+		M_DECLARE_CLASS(AuxButton, AuxWindow)
+
 	protected:
 		UButton* mNativeButton;
 		TScriptDelegate<FWeakObjectPtr> mScriptDelegate;
@@ -21,6 +23,9 @@ namespace MyNS
 		~AuxButton();
 
 	public:
+		virtual void init() override;
+		virtual void dispose() override;
+
 		TScriptDelegate<FWeakObjectPtr> addUObjectButtonClickHandle(UUserWidget* widget, const FName& buttonName, UObject* pThis, const FName& functionName);
 	};
 }

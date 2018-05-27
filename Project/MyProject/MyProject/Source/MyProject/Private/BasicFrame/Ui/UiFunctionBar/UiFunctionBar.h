@@ -26,6 +26,7 @@ public:
 
 public:
 	virtual void onReady() override;
+	virtual void onExit() override;
 
 public:
 	// UFunction* UObject::FindFunction( FName InName ) const

@@ -2,8 +2,8 @@
 
 #include <string>
 #include "MyAllocatedObject.h"
-#include "MClassInfo.h"
 #include "MMutex.h"
+#include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "BaseClassDef.h"
 
