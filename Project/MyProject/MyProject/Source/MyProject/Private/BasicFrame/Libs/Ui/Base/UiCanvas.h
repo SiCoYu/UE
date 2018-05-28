@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include "UiLayer.h"
+#include "UiLayerId.h"
+#include "UiCanvasId.h"
 
 /**
 * @brief ÃèÊöÒ»¸ö Canvas

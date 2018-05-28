@@ -7,6 +7,7 @@
 
 #include "UiFormId.h"
 #include "GObject.h"
+#include "UiLayerId.h"
 
 using namespace NSFormId;
 

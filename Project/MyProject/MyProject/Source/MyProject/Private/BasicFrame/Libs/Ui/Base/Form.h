@@ -35,7 +35,6 @@ protected:
 
 	// LuaCSBridgeForm mLuaCSBridgeForm;
 	std::string mFormName;            // 这个是 Lua 中传的标识符，会传给 Lua 使用，客户端自己不用
-	//std::map<GameObject, ActorExtraInfo> mGo2Path;
 	bool mIsVisible;
 	AuxMUiClassLoader* mAuxMUIClassLoader;
 

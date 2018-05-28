@@ -264,69 +264,6 @@ void UForm::onExitBtnClick()
 	this->exit();
 }
 
-//void UForm::registerBtnClickEventByList(string[] btnList)
-//{
-//	foreach(var path in btnList)
-//	{
-//		addClick(mWinRender.mUiRoot, path);
-//	}
-//}
-//
-//void UForm::registerImageClickEventByList(string[] imageList)
-//{
-//
-//}
-
-//void UForm::registerWidgetEvent()
-//{
-//	string[] pathArr = m_luaCSBridgeForm.getTable2StrArray("BtnClickTable");
-//	foreach(var path in pathArr)
-//	{
-//		addClick(mWinRender.mUiRoot, path);
-//	}
-//}
-
-//void UForm::onBtnClk(GameObject go_)
-//{
-//	if (m_luaCSBridgeForm != null)
-//	{
-//		if (m_go2Path.ContainsKey(go_))
-//		{
-//			m_luaCSBridgeForm.handleUIEvent("onBtnClk", mFormName, m_go2Path[go_].mPath);
-//		}
-//	}
-//
-//	// 测试全局分发事件
-//	// Ctx.m_instance.m_globalEventMgr.eventDispatchGroup.dispatchEvent((int)eGlobalEventType.eGlobalTest, null);
-//}
-
-//void UForm::addClick(GameObject go, string path)
-//{
-//	UtilSysLibWrap.addEventHandle(go, path, onBtnClk);
-//	GameObject btnGo = UtilSysLibWrap.TransFindChildByPObjAndPath(go, path);
-//	if (btnGo = null)
-//	{
-//		if (!m_go2Path.ContainsKey(btnGo))
-//		{
-//			m_go2Path[btnGo] = new ActorExtraInfo();
-//			m_go2Path[btnGo].mPath = path;
-//		}
-//	}
-//}
-
-//void UForm::removeClick(GameObject go, string path)
-//{
-//	UtilSysLibWrap.removeEventHandle(go, path);
-//	GameObject btnGo = UtilSysLibWrap.TransFindChildByPObjAndPath(go, path);
-//	if (btnGo != null)
-//	{
-//		if (m_go2Path.ContainsKey(btnGo))
-//		{
-//			m_go2Path.Remove(btnGo);
-//		}
-//	}
-//}
-
 AuxMUiClassLoader* UForm::getAuxMUIClassLoader()
 {
 	return this->mAuxMUIClassLoader;
