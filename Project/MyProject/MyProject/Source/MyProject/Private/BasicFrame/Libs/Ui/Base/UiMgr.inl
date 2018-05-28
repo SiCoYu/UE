@@ -27,8 +27,8 @@
 template <class T>
 T* UiMgr::loadForm(UiFormId formId)
 {
-	UiAttrItem* attrItem = mUiAttrSystem->mId2AttrDic[formId];
-	UForm* form = getForm<UForm>(formId);
+	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
+	UForm* form = this->getForm<UForm>(formId);
 
 	if (nullptr != form)     // 本地已经创建了这个窗口，
 	{
@@ -40,7 +40,7 @@ T* UiMgr::loadForm(UiFormId formId)
 			//}
 		}
 	}
-	else if (!UtilMap::ContainsKey(mId2CodeLoadingItemDic, formId))                       // 如果什么都没有创建，第一次加载
+	else if (!UtilMap::ContainsKey(this->mId2CodeLoadingItemDic, formId))                       // 如果什么都没有创建，第一次加载
 	{
 		//if (attrItem.m_bNeedLua)
 		//{
@@ -100,9 +100,9 @@ T* UiMgr::loadForm(UiFormId formId)
 template <class T>
 T* UiMgr::getForm(UiFormId formId)
 {
-	if (UtilMap::ContainsKey(mId2FormDic, formId))
+	if (UtilMap::ContainsKey(this->mId2FormDic, formId))
 	{
-		return Cast<T>(mId2FormDic[formId]);
+		return Cast<T>(this->mId2FormDic[formId]);
 	}
 	else
 	{

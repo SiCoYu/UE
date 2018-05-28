@@ -62,7 +62,7 @@ public:
 	void _showFormInternal(UiFormId formId);
 	void _hideFormInternal(UiFormId formId);
 	void exitForm(UiFormId formId, bool bForce = false);
-	void exitFormInternal(UiFormId formId);
+	void _exitFormInternal(UiFormId formId);
 	void addForm(UForm* form);
 
 	UiLayer* getLayer(UiCanvasId canvasID, UiLayerId layerID);
