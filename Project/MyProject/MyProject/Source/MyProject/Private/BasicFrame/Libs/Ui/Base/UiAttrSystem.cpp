@@ -65,7 +65,12 @@ UiFormId UiAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType
 	return (UiFormId)0;       // 默认返回最大值
 }
 
-void UiAttrSystem::addItem(UiFormId formId, std::string widgetPath, FormType formType, UMGOuterType outerType)
+void UiAttrSystem::addItem(
+	UiFormId formId, 
+	std::string widgetPath, 
+	FormType formType, 
+	UMGOuterType outerType
+)
 {
 	UiAttrItem* item = nullptr;
 

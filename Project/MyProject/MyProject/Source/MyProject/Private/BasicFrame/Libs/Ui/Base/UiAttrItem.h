@@ -20,7 +20,6 @@ public:
 
 	UiCanvasId mCanvasId;       // CanvasId
 	UiLayerId mLayerId;			// 所在的 Layer
-	uint8 mUiSceneType;			// 场景类型列表
 
 	FormType mFormType;			// UI 类型
 	UMGOuterType mUMGOuterType;	// UMG Outer

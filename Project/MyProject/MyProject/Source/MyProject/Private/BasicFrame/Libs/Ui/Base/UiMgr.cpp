@@ -180,9 +180,12 @@ UiLayer* UiMgr::getLayer(UiCanvasId canvasID, UiLayerId layerID)
 // 内部接口
 void UiMgr::addFormNoReady(UForm* form)
 {
-	//UiLayer* layer = getLayer(mUiAttrSystem->mId2AttrDic[form->getId()]->mCanvasId, mUiAttrSystem->mId2AttrDic[form->getId()]->mLayerId);
-	//form->setUiLayer(layer);
-	//layer->addForm(form);
+	UiLayer* layer = this->getLayer(
+		this->mUiAttrSystem->mId2AttrDic[form->getId()]->mCanvasId, 
+		this->mUiAttrSystem->mId2AttrDic[form->getId()]->mLayerId
+	);
+	form->setUiLayer(layer);
+	layer->addForm(form);
 
 	this->mId2FormDic[form->getId()] = form;
 	form->init();        // 初始化

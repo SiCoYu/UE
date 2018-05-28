@@ -26,7 +26,12 @@ public:
 	UiFormId GetFormIDByPath(std::string resPath, ResPathType pathType);
 
 protected:
-	void addItem(UiFormId formId, std::string widgetPath, FormType formType, UMGOuterType outerType);
+	void addItem(
+		UiFormId formId, 
+		std::string widgetPath, 
+		FormType formType, 
+		UMGOuterType outerType
+	);
 };
 
 #endif				// __FORMATTRSYSTEM_H

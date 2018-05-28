@@ -36,7 +36,7 @@ void UiLayer::removeForm(UForm* form)
 {
 	if (this->mWinDic[form->getId()] != nullptr)
 	{
-		//mWinDic.erase(form->getId());
+		this->mWinDic.erase(form->getId());
 	}
 }
 
@@ -55,6 +55,7 @@ void UiLayer::onStageReSize()
 	std::map<UiFormId, UForm*>::iterator itBegin, itEnd;
 	itBegin = this->mWinDic.begin();
 	itEnd = this->mWinDic.end();
+
 	for (; itBegin != itEnd; ++itBegin)
 	{
 		//itBegin->second->onStageReSize();
@@ -66,6 +67,7 @@ void UiLayer::closeAllForm()
 	std::map<UiFormId, UForm*>::iterator itBegin, itEnd;
 	itBegin = this->mWinDic.begin();
 	itEnd = this->mWinDic.end();
+
 	for (; itBegin != itEnd; ++itBegin)
 	{
 		//itBegin->second->exit();
