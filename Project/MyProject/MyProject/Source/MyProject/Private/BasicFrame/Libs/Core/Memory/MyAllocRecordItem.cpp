@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "MyAllocRecordItem.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MyAllocRecordItem::MyAllocRecordItem()
 	:mBytes(0),
 	 mLine(0)
@@ -26,3 +28,5 @@ MyAllocRecordItem::MyAllocRecordItem(
 		this->mFunction = func;
 	}
 }
+
+MY_END_NAMESPACE

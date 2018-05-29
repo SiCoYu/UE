@@ -4,6 +4,8 @@
 #include "MyMemoryAlloc.h"
 #include "MClassFactory.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 M_IMPLEMENT_AND_REGISTER_CLASS(GObject, MyAllocatedObject)
 
 // warning C4668 : 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
@@ -71,3 +73,5 @@ void GObject::DumpRefCountingLeaks()
 {
 
 }
+
+MY_END_NAMESPACE

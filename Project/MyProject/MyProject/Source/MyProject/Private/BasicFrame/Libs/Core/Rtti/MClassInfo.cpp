@@ -5,6 +5,8 @@
 #include "MClassFactory.h"
 #include <stdlib.h>
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 //void MClassInfo::Construct(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize)
 void MClassInfo::Construct(const char* className, const MClassInfo* parentClass, SizeT instSize)
 {
@@ -101,3 +103,5 @@ bool MClassInfo::IsDerivedFrom(const std::string& otherClassName) const
 //#endif
 //	free(ptr);
 //}
+
+MY_END_NAMESPACE

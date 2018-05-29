@@ -3,6 +3,8 @@
 
 #include <limits>	// std::numeric_limits
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 class MyDefaultAllocImpl
 {
 public:
@@ -62,5 +64,7 @@ private:
 	MyDefaultAlignedAllocPolicy()
     { }
 };
+
+MY_END_NAMESPACE
 
 #endif

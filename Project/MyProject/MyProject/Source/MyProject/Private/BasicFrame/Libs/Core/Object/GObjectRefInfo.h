@@ -2,22 +2,23 @@
 
 #include "MThreadSafeCounter.h"
 
-namespace MyNS
+MY_BEGIN_NAMESPACE(MyNS)
+
+struct GObjectRefInfo
 {
-	struct GObjectRefInfo
+	inline GObjectRefInfo()
+		: mRefCount(1)
 	{
-		inline GObjectRefInfo()
-			: mRefCount(1)
-		{
 			
-		}
+	}
 
-		virtual ~GObjectRefInfo()
-		{
+	virtual ~GObjectRefInfo()
+	{
 			
-		}
+	}
 
-		MThreadSafeCounter mRefCount;
-		MThreadSafeCounter mWeakRefCount;
-	};
-}
+	MThreadSafeCounter mRefCount;
+	MThreadSafeCounter mWeakRefCount;
+};
+
+MY_END_NAMESPACE

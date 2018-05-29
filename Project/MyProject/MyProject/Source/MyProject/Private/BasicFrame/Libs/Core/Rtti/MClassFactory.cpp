@@ -9,6 +9,8 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MClassFactory* MClassFactory::msSingleton = 0;
 
 MClassFactory* MClassFactory::Instance()
@@ -83,3 +85,5 @@ const MClassInfo* MClassFactory::GetClassInfo(const std::string& className) cons
 //	GObject* newObject = classInfo->Create();
 //    return newObject;
 //}
+
+MY_END_NAMESPACE

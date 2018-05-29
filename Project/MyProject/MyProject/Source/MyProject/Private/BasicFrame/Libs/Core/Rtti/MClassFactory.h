@@ -3,6 +3,8 @@
 #include <string>
 #include <unordered_map>
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 class GObject;
 class MClassInfo;
 
@@ -26,3 +28,5 @@ private:
     static MClassFactory* msSingleton;
 	UMap mNameTable;
 };
+
+MY_END_NAMESPACE

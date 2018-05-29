@@ -7,6 +7,8 @@
 #include "MClassMacros.h"
 #include "BaseClassDef.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 class GObject : public MyAllocatedObject
 {
 	M_DECLARE_CLASS(GObject, MyAllocatedObject)
@@ -38,3 +40,5 @@ protected:
 	static MMutex mCriticalSection;
 #endif
 };
+
+MY_END_NAMESPACE

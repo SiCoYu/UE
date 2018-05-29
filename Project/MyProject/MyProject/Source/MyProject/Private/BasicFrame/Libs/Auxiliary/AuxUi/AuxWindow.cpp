@@ -2,17 +2,18 @@
 #include "AuxWindow.h"
 #include "MClassFactory.h"
 
-namespace MyNS
+MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(AuxWindow, GObject)
+
+void AuxWindow::init()
 {
-	M_IMPLEMENT_AND_REGISTER_CLASS(AuxWindow, GObject)
 
-	void AuxWindow::init()
-	{
-
-	}
-
-	void AuxWindow::dispose()
-	{
-
-	}
 }
+
+void AuxWindow::dispose()
+{
+
+}
+
+MY_END_NAMESPACE

@@ -4,7 +4,7 @@
 #include "MyMemoryTracker.h"
 #include "PlatformDefine.h"
 
-#define MY_MEMORY_TRACKER 1
+MY_BEGIN_NAMESPACE(MyNS)
 
 void* MyDefaultAllocImpl::allocBytes(
 	size_t count,
@@ -59,3 +59,5 @@ void MyDefaultAllocImpl::deallocBytesAligned(size_t align, void* ptr)
 
 	_aligned_free(ptr);
 }
+
+MY_END_NAMESPACE

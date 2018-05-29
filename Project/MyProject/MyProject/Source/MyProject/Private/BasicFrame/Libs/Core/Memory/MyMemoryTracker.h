@@ -6,6 +6,8 @@
 
 class FLowLevelMemTracker;
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief 检查并且记录内存使用，主要调试内存泄漏
  */
@@ -52,3 +54,5 @@ public:
 
 	static MyMemoryTracker& get();
 };
+
+MY_END_NAMESPACE

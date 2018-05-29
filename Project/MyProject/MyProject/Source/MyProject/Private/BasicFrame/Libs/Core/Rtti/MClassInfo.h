@@ -3,6 +3,8 @@
 #include "TypeDef.h"
 #include <string>
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 class GObject;
 
 class MClassInfo
@@ -58,4 +60,6 @@ inline SizeT MClassInfo::GetInstanceSize() const
 	return this->mInstanceSize;
 }
 
-#include "MClassMacros.h"
+//#include "MClassMacros.h"
+
+MY_END_NAMESPACE

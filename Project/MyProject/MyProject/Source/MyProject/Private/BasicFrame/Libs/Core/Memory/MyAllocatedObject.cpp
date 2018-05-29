@@ -2,6 +2,8 @@
 #include "MyAllocatedObject.h"
 #include "MClassFactory.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 M_IMPLEMENT_AND_REGISTER_CLASS(MyAllocatedObject, GObjectBase)
 
 void* MyAllocatedObject::operator new(size_t sz, const char* file, int line, const char* func, MyMemoryConstructorFlag constructorFlag)
@@ -54,3 +56,5 @@ void MyAllocatedObject::operator delete[](void* ptr, const char*, int, const cha
 {
 	MyDefaultAllocPolicy::deallocateBytes(ptr);
 }
+
+MY_END_NAMESPACE

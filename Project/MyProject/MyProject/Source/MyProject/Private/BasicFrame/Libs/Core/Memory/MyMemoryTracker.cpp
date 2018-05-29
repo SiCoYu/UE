@@ -9,6 +9,8 @@
 
 #include "HAL/LowLevelMemTracker.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 #if MY_PLATFORM == MY_PLATFORM_WIN32 || MY_PLATFORM == MY_PLATFORM_WINRT
 #   include <windows.h>
 #   define My_OutputCString(str) ::OutputDebugStringA(str)
@@ -161,3 +163,5 @@ FLowLevelMemTracker& MyMemoryTracker::getNativeMemTracker()
 {
 	return FLowLevelMemTracker::Get();
 }
+
+MY_END_NAMESPACE

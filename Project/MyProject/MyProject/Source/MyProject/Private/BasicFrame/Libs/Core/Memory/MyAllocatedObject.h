@@ -9,6 +9,8 @@
 #include "MClassMacros.h"
 #include "BaseClassDef.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 class MyAllocatedObject : public GObjectBase
 {
 	M_DECLARE_CLASS(MyAllocatedObject, GObjectBase)
@@ -33,3 +35,5 @@ public:
 	void operator delete[](void* ptr);
 	void operator delete[](void* ptr, const char*, int, const char*);
 };
+
+MY_END_NAMESPACE

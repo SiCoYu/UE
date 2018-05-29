@@ -2,6 +2,8 @@
 
 #include <string>
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 struct MyAllocRecordItem
 {
 public:
@@ -19,3 +21,5 @@ public:
 		const char* func
 	);
 };
+
+MY_END_NAMESPACE
