@@ -2,6 +2,7 @@
 
 #include "TypeDef.h"
 #include <string>
+#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

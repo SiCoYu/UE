@@ -5,6 +5,9 @@
 #include "SlateWidget.h"
 #include "UMGWidget.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class WinRender : public GObject
 {
@@ -17,5 +20,7 @@ public:
 		UUMGWidget* mUiRoot;
 	};
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -5,6 +5,9 @@
 
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryConstructorFlag.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 //#ifdef new
 //#undef new

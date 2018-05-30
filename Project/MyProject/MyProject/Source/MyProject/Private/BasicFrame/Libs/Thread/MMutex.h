@@ -6,6 +6,7 @@
 // GObject 引用 MMutex ，而 MMutex 又引用 GObject ，因此基类使用 MyAllocatedObject
 #include "GObject.h"
 #include "MyAllocatedObject.h"
+#include "PlatformDefine.h"
 
 // 如果使用外部线程
 //#ifdef USE_EXTERN_THREAD
@@ -20,6 +21,8 @@
 // typedef FWindowsCriticalSection FCriticalSection;
 // Engine\Source\Runtime\Core\Public\Windows\WindowsCriticalSection.h
 //class FCriticalSection;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 互斥
@@ -46,5 +49,7 @@ public:
 	void Lock();
 	void Unlock();
 };
+
+MY_END_NAMESPACE
 
 #endif

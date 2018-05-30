@@ -6,7 +6,13 @@
 #include "Blueprint/UserWidget.h"	// UUserWidget
 #include "Window.generated.h"
 
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
+
 using namespace NSFormId;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class UiLayer;
 
@@ -60,3 +66,5 @@ public:
 
 	virtual bool getIsReady();
 };
+
+MY_END_NAMESPACE

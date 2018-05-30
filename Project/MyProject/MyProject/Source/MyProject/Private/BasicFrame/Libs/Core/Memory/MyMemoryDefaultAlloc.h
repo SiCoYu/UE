@@ -2,6 +2,7 @@
 #define __MyMemoryDefaultAlloc_H
 
 #include <limits>	// std::numeric_limits
+#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

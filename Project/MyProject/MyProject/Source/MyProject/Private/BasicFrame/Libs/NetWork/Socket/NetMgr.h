@@ -1,8 +1,11 @@
-#ifndef __NETMGR_H
-#define __NETMGR_H
+#ifndef __NetMgr_H
+#define __NetMgr_H
 
 #include "PlatformDefine.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 #ifdef USE_EXTERN_THREAD
 
@@ -32,6 +35,8 @@
 	#include <map>
 	#include <string>
 #endif
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MMutex;
 class MByteBuffer;
@@ -101,4 +106,6 @@ public:
 	void sendAndRecData();
 };
 
-#endif				// __NETMGR_H
+MY_END_NAMESPACE
+
+#endif				// __NetMgr_H
