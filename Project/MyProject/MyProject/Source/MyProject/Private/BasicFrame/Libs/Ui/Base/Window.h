@@ -4,11 +4,12 @@
 #include "UiFormId.h"
 #include "WinRender.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
-#include "PlatformDefine.h"
+//#include "PlatformDefine.h"
 #include "Window.generated.h"
 
-MY_USING_NAMESPACE(MyNS)
+//MY_USING_NAMESPACE(MyNS)
 
+using namespace MyNS;
 using namespace NSFormId;
 
 class UiLayer;
