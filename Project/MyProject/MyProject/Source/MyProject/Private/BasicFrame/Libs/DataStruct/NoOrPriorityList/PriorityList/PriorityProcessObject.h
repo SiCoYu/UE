@@ -1,5 +1,6 @@
 ﻿#pragma once.
 
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -7,53 +8,55 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 优先级队列对象
  */
-class PriorityProcessObject : GObject
+class PriorityProcessObject : public GObject
 {
-    public INoOrPriorityObject mPriorityObject;
-    public float mPriority;
+public:
+	INoOrPriorityObject mPriorityObject;
+    float mPriority;
 
-    public PriorityProcessObject()
+public:
+	PriorityProcessObject()
     {
         this.onPutInPool();
     }
 
-    public void putInPool()
+    void putInPool()
     {
         this.onPutInPool();
     }
 
-    public void getFromPool()
+    void getFromPool()
     {
         this.onGetFromPool();
     }
 
-    public void dispose()
+    void dispose()
     {
         this.onPutInPool();
     }
 
-    public void setIsUsePool(bool value)
+    void setIsUsePool(bool value)
     {
         this.mIsUsePool = value;
     }
 
-    public bool isUsePool()
+	bool isUsePool()
     {
         return this.mIsUsePool;
     }
 
-    public void onPutInPool()
+    void onPutInPool()
     {
         this.mPriorityObject = null;
         this.mPriority = 0.0f;
     }
 
-    public void onGetFromPool()
+    void onGetFromPool()
     {
 
     }
 
-    public int getBufferType()
+    int getBufferType()
     {
         return (int)BufferType.eBT_PriorityProcessObject;
     }

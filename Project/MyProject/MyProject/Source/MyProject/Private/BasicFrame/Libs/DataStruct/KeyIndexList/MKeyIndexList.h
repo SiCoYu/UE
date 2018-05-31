@@ -10,10 +10,12 @@ MY_BEGIN_NAMESPACE(MyNS)
 template <class TKey, class TValue>
 class MKeyIndexList
 {
-    protected MList<TValue> mList;              // 数据列表
-    protected MDictionary<TKey, TValue> mIndexDic;   // Key 字典
+protected:
+	MList<TValue> mList;              // 数据列表
+    MDictionary<TKey, TValue> mIndexDic;   // Key 字典
 
-    public MKeyIndexList()
+public:
+	MKeyIndexList()
     {
         this.mList = new MList<TValue>();
         this.mList.setIsSpeedUpFind(true);
@@ -22,28 +24,28 @@ class MKeyIndexList
         this.mIndexDic = new MDictionary<TKey, TValue>();
     }
 
-    public void clear()
+    void clear()
     {
         this.mList.clear();
         this.mIndexDic.clear();
     }
 
-    public MList<TValue> getList()
+    MList<TValue> getList()
     {
         return this.mList;
     }
 
-    public TValue get(int index)
+    TValue get(int index)
     {
         return this.mList.get(index);
     }
 
-    public MDictionary<TKey, TValue> getIndexDic()
+    MDictionary<TKey, TValue> getIndexDic()
     {
         return this.mIndexDic;
     }
 
-    public void add(TKey key, TValue value)
+    void add(TKey key, TValue value)
     {
         if(!this.mIndexDic.containsKey(key))
         {
@@ -52,19 +54,19 @@ class MKeyIndexList
         }
     }
 
-    public void addToFirst(TKey key, TValue value)
+    void addToFirst(TKey key, TValue value)
     {
         this.mList.insert(0, value);
         this.mIndexDic.add(key, value);
     }
 
-    public void addToSecond(TKey key, TValue value)
+    void addToSecond(TKey key, TValue value)
     {
         this.mList.insert(1, value);
         this.mIndexDic.add(key, value);
     }
 
-    public void remove(TKey key)
+    void remove(TKey key)
     {
         if(this.mIndexDic.containsKey(key))
         {
@@ -73,14 +75,14 @@ class MKeyIndexList
         }
     }
 
-    public TValue getAndRemoveByKey(TKey key)
+    TValue getAndRemoveByKey(TKey key)
     {
         TValue item = this.value(key);
         this.remove(key);
         return item;
     }
 
-    public TValue value(TKey key)
+    TValue value(TKey key)
     {
         TValue ret = null;
 
@@ -92,12 +94,12 @@ class MKeyIndexList
         return ret;
     }
 
-    public int count()
+    int count()
     {
         return this.mList.count();
     }
 
-    public bool containsKey(TKey key)
+    bool containsKey(TKey key)
     {
         return this.mIndexDic.containsKey(key);
     }

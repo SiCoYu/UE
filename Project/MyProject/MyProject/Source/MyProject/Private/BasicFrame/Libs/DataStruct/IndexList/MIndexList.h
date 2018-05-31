@@ -36,44 +36,31 @@ public:
         this.mIsOpKeepSort = value;
     }
 
-    T[] ToArray()
-    {
-        return this.mList.ToArray();
-    }
+    //T[] ToArray()
+    //{
+    //    return this.mList.ToArray();
+    //}
 
-    List<T> list()
+    MList<T> list()
     {
         return this.mList;
     }
 
-    int uniqueId
+    int getUniqueId()
     {
-        get
-        {
-            return this.mUniqueId;
-        }
-        set
-        {
-            this.mUniqueId = value;
-        }
+        return this.mUniqueId;
     }
 
-    List<T> buffer
+	void setUniqueId(int value)
     {
-        get
-        {
-            return this.mList;
-        }
+        this.mUniqueId = value;
     }
 
-    int size
+    int getSize()
     {
-        get
-        {
-            // 频繁获取这个字段比较耗时
-            //return this.mList.Count;
-            return this.mEleTotal;
-        }
+        // 频繁获取这个字段比较耗时
+        //return this.mList.Count;
+        return this.mEleTotal;
     }
 
     void add(T item)
@@ -116,16 +103,9 @@ public:
         return this._effectiveRemove(item);
     }
 
-    T this[int index]
+    T& operator this[int index]
     {
-        get
-        {
-            return this.mList[index];
-        }
-        set
-        {
-            this.set(index, value);
-        }
+        return this.mList[index];
     }
 
     T get(int index)

@@ -1,88 +1,91 @@
 ﻿#pragma once
 
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class MLinkedListNode : GObject
+public class MLinkedListNode : public GObject
 {
     // 一个节点可能在几个列表中，这个 list 字段主要是记录头和尾节点的，如果中间节点就在一个列表中，也可以设置这个字段
-    protected MLinkedList mLinkedList;
-    protected MLinkedListNode mPreNode;
-    protected MLinkedListNode mNextNode;
+protected:
+	MLinkedList mLinkedList;
+    MLinkedListNode mPreNode;
+    MLinkedListNode mNextNode;
 
-    public MLinkedListNode()
+public:
+	MLinkedListNode()
     {
         this.mLinkedList = null;
         this.mPreNode = null;
         this.mNextNode = null;
     }
 
-    public void init()
+    void init()
     {
         this.addToList();
     }
 
-    public void dispose()
+    void dispose()
     {
         this.removeFormList();
 
         this.onDestroy();
     }
 
-    public void onDestroy()
+    void onDestroy()
     {
         this.mLinkedList = null;
         this.mPreNode = null;
         this.mNextNode = null;
     }
 
-    public void clear()
+    void clear()
     {
         this.removeFormList();
 
         this.onClear();
     }
 
-    public void onClear()
+    void onClear()
     {
         this.mPreNode = null;
         this.mNextNode = null;
     }
 
     // 这个接口尽量不要在接口内部调用，这个接口和逻辑关联可能更大一点，逻辑决定是否设置
-    public void setLinkedList(MLinkedList list)
+    void setLinkedList(MLinkedList list)
     {
         this.mLinkedList = list;
     }
 
-    public MLinkedList getLinkedList()
+    MLinkedList getLinkedList()
     {
         return this.mLinkedList;
     }
 
-    public void setPreNode(MLinkedListNode node)
+    void setPreNode(MLinkedListNode node)
     {
         this.mPreNode = node;
     }
 
-    public MLinkedListNode getPreNode()
+    MLinkedListNode getPreNode()
     {
         return this.mPreNode;
     }
 
-    public void setNextNode(MLinkedListNode node)
+    void setNextNode(MLinkedListNode node)
     {
         this.mNextNode = node;
     }
 
-    public MLinkedListNode getNextNode()
+    MLinkedListNode getNextNode()
     {
         return this.mNextNode;
     }
 
     // 如果是在头结点之前插入，List 中头结点就会仍然记录之前的头结点，会错误，这种情况需要逻辑避免，因为一个节点可能在几个列表中
-    public void insertBefore(MLinkedListNode node)
+    void insertBefore(MLinkedListNode node)
     {
         if (null != this.mPreNode)
         {
@@ -98,7 +101,7 @@ public class MLinkedListNode : GObject
         this.mPreNode = node;
     }
 
-    public void insertAfter(MLinkedListNode node)
+    void insertAfter(MLinkedListNode node)
     {
         if (null != this.mNextNode)
         {
@@ -114,22 +117,22 @@ public class MLinkedListNode : GObject
         this.mNextNode = node;
     }
 
-    public bool isPreNodeExist()
+    bool isPreNodeExist()
     {
         return (null != this.mPreNode);
     }
 
-    public bool isNextNodeExist()
+    bool isNextNodeExist()
     {
         return (null != this.mNextNode);
     }
 
-    public bool isPreAndNextNodeExist()
+    bool isPreAndNextNodeExist()
     {
         return (null != this.mPreNode && null != this.mNextNode);
     }
 
-    public void removeFormList()
+    void removeFormList()
     {
         if (null != this.mLinkedList)
         {
@@ -138,7 +141,7 @@ public class MLinkedListNode : GObject
         }
     }
 
-    public void addToList()
+    void addToList()
     {
         if (null != this.mLinkedList)
         {
@@ -147,7 +150,7 @@ public class MLinkedListNode : GObject
     }
 
     // 获取当前节点到 Tail 数量
-    public int toTailCount()
+    int toTailCount()
     {
         MLinkedListNode nextNode = null;
         int count = 1;
@@ -164,7 +167,7 @@ public class MLinkedListNode : GObject
     }
 
     // 获取当前节点到 Head 数量
-    public int toHeadCount()
+    int toHeadCount()
     {
         MLinkedListNode preNode = null;
         int count = 1;
@@ -180,18 +183,18 @@ public class MLinkedListNode : GObject
         return count;
     }
 
-    virtual public string getStr()
+    virtual string getStr()
     {
         return "";
     }
 
-    public void reverse()
+    void reverse()
     {
         if (null != this.mLinkedList)
         {
             this.mLinkedList.reverse();
         }
     }
-}
+};
 
 MY_END_NAMESPACE

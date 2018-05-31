@@ -1,48 +1,52 @@
 ﻿#pragma once
 
+#include "GContainerObject.h"
+#include "MLinkedListNode.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class MLinkedList : GContainerObject
+class MLinkedList : public GContainerObject
 {
-    protected MLinkedListNode mHeadNode;
-    protected MLinkedListNode mTailNode;
+protected:
+	MLinkedListNode mHeadNode;
+    MLinkedListNode mTailNode;
 
-    public MLinkedList()
+public:
+	MLinkedList()
     {
         this.mHeadNode = null;
         this.mTailNode = null;
     }
 
-    public void init()
+    void init()
     {
 
     }
 
-    public void dispose()
-    {
-        this.mHeadNode = null;
-        this.mTailNode = null;
-    }
-
-    public void clear()
+    void dispose()
     {
         this.mHeadNode = null;
         this.mTailNode = null;
     }
 
-    public bool isHeadExist()
+    void clear()
+    {
+        this.mHeadNode = null;
+        this.mTailNode = null;
+    }
+
+    bool isHeadExist()
     {
         return (null != this.mHeadNode);
     }
 
-    public MLinkedListNode getHead()
+    MLinkedListNode getHead()
     {
         return this.mHeadNode;
     }
 
-    public void addHead(MLinkedListNode node)
+    void addHead(MLinkedListNode node)
     {
         if (null != this.mHeadNode)
         {
@@ -58,7 +62,7 @@ public class MLinkedList : GContainerObject
     }
 
     // 直接重新设置
-    public void setHead(MLinkedListNode node)
+    void setHead(MLinkedListNode node)
     {
         if (null != this.mHeadNode)
         {
@@ -78,28 +82,28 @@ public class MLinkedList : GContainerObject
         }
     }
 
-    public bool isTailExist()
+    bool isTailExist()
     {
         bool ret = (null != this.mTailNode);
         return ret;
     }
 
-    public bool isTailExistAndNoEqualHead()
+    bool isTailExistAndNoEqualHead()
     {
         return (null != this.mTailNode && this.mHeadNode != this.mTailNode);
     }
 
-    public bool isEmpty()
+    bool isEmpty()
     {
         return (null == this.mHeadNode && null == this.mTailNode);
     }
 
-    public MLinkedListNode getTail()
+    MLinkedListNode getTail()
     {
         return this.mTailNode;
     }
 
-    public void addTail(MLinkedListNode node)
+    void addTail(MLinkedListNode node)
     {
         if (null != this.mTailNode)
         {
@@ -115,7 +119,7 @@ public class MLinkedList : GContainerObject
     }
 
     // 直接重新设置
-    public void setTail(MLinkedListNode node)
+    void setTail(MLinkedListNode node)
     {
         if (null != this.mTailNode)
         {
@@ -135,7 +139,7 @@ public class MLinkedList : GContainerObject
         }
     }
 
-    public void insertAfterNode(MLinkedListNode preNode, MLinkedListNode node)
+    void insertAfterNode(MLinkedListNode preNode, MLinkedListNode node)
     {
         if (null != node)
         {
@@ -159,7 +163,7 @@ public class MLinkedList : GContainerObject
         }
     }
 
-    public void insertBeforeNode(MLinkedListNode nextNode, MLinkedListNode node)
+    void insertBeforeNode(MLinkedListNode nextNode, MLinkedListNode node)
     {
         if (null != node)
         {
@@ -183,12 +187,12 @@ public class MLinkedList : GContainerObject
         }
     }
 
-    public void add(MLinkedListNode node)
+    void add(MLinkedListNode node)
     {
         this.addTail(node);
     }
 
-    public int count()
+    int count()
     {
         MLinkedListNode tmpNode = null;
         tmpNode = this.mHeadNode;
@@ -203,7 +207,7 @@ public class MLinkedList : GContainerObject
         return count;
     }
 
-    public void reverse()
+    void reverse()
     {
         if (!this.isEmpty())
         {
@@ -231,7 +235,7 @@ public class MLinkedList : GContainerObject
         }
     }
 
-    public void remove(MLinkedListNode node)
+    void remove(MLinkedListNode node)
     {
         if (null != node.getPreNode())
         {
@@ -254,7 +258,7 @@ public class MLinkedList : GContainerObject
         node.onClear();
     }
 
-    public string getStr()
+    string getStr()
     {
         string str = "";
         MLinkedListNode tmpNode = null;
@@ -278,6 +282,6 @@ public class MLinkedList : GContainerObject
 
         return str;
     }
-}
+};
 
 MY_END_NAMESPACE

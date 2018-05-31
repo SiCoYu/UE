@@ -1,5 +1,10 @@
 ﻿#pragma once
 
+#include "GObject.h"
+#include "INoOrPriorityList.h"
+#include "MList.h"
+#include "PrioritySort.h"
+#include "MDictionary.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -7,16 +12,18 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 优先级队列，外部一定不能直接引用 PriorityProcessObject 类型的对象，内部会管理 PriorityProcessObject 的生命周期
  */
-class PriorityList : GObject, INoOrPriorityList
+class PriorityList : public GObject, public  INoOrPriorityList
 {
-    protected MList<PriorityProcessObject> mPriorityProcessObjectList;  // 优先级对象列表
-    protected PrioritySort mPrioritySort;   // 排序方式
+protected:
+	MList<PriorityProcessObject> mPriorityProcessObjectList;  // 优先级对象列表
+    PrioritySort mPrioritySort;   // 排序方式
 
-    protected MDictionary<INoOrPriorityObject, int> mDic;   // 查找字典
-    protected bool mIsSpeedUpFind;          // 是否开启查找
-    protected bool mIsOpKeepSort;           // 操作的时候是否保持排序
+    MDictionary<INoOrPriorityObject, int> mDic;   // 查找字典
+    bool mIsSpeedUpFind;          // 是否开启查找
+    bool mIsOpKeepSort;           // 操作的时候是否保持排序
 
-    public PriorityList()
+public:
+	PriorityList()
     {
         this.mPriorityProcessObjectList = new MList<PriorityProcessObject>();
         this.mPrioritySort = PrioritySort.ePS_Great;
@@ -24,12 +31,12 @@ class PriorityList : GObject, INoOrPriorityList
         this.mIsOpKeepSort = false;
     }
 
-    public void init()
+    void init()
     {
 
     }
 
-    public void dispose()
+    void dispose()
     {
         if(null != this.mPriorityProcessObjectList)
         {
@@ -43,7 +50,7 @@ class PriorityList : GObject, INoOrPriorityList
         }
     }
 
-    public void setIsSpeedUpFind(bool value)
+    void setIsSpeedUpFind(bool value)
     {
         this.mIsSpeedUpFind = value;
 
@@ -53,12 +60,12 @@ class PriorityList : GObject, INoOrPriorityList
         }
     }
 
-    public void setIsOpKeepSort(bool value)
+    void setIsOpKeepSort(bool value)
     {
         this.mIsOpKeepSort = value;
     }
 
-    public void clear()
+    void clear()
     {
         int index = 0;
         int listLen = this.count();
@@ -78,12 +85,12 @@ class PriorityList : GObject, INoOrPriorityList
         }
     }
 
-    public int count()
+    int count()
     {
         return this.mPriorityProcessObjectList.count();
     }
 
-    public INoOrPriorityObject get(int index)
+    INoOrPriorityObject get(int index)
     {
         INoOrPriorityObject ret = null;
 
@@ -95,7 +102,7 @@ class PriorityList : GObject, INoOrPriorityList
         return ret;
     }
 
-    public float getPriority(int index)
+    float getPriority(int index)
     {
         float ret = 0;
 
@@ -107,7 +114,7 @@ class PriorityList : GObject, INoOrPriorityList
         return ret;
     }
 
-    public bool contains(INoOrPriorityObject item)
+    bool contains(INoOrPriorityObject item)
     {
         bool ret = false;
 
@@ -145,14 +152,14 @@ class PriorityList : GObject, INoOrPriorityList
         return ret;
     }
 
-    public void removeAt(int index)
+    void removeAt(int index)
     {
         PriorityProcessObject priorityProcessObject = null;
         priorityProcessObject = this.mPriorityProcessObjectList.get(index);
 
         if (this.mIsSpeedUpFind)
         {
-            this.effectiveRemove(this.mPriorityProcessObjectList.get(index).mPriorityObject);
+            this._effectiveRemove(this.mPriorityProcessObjectList.get(index).mPriorityObject);
         }
         else
         {
@@ -166,7 +173,7 @@ class PriorityList : GObject, INoOrPriorityList
         }
     }
 
-    public int getIndexByPriority(float priority)
+    int getIndexByPriority(float priority)
     {
         int retIndex = -1;
 
@@ -198,7 +205,7 @@ class PriorityList : GObject, INoOrPriorityList
         return retIndex;
     }
 
-    public int getIndexByPriorityObject(INoOrPriorityObject priorityObject)
+    int getIndexByPriorityObject(INoOrPriorityObject priorityObject)
     {
         int retIndex = -1;
 
@@ -219,12 +226,12 @@ class PriorityList : GObject, INoOrPriorityList
         return retIndex;
     }
 
-    public int getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject)
+    int getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject)
     {
         return this.getIndexByPriorityObject(priorityObject);
     }
 
-    public void addPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f)
+    void addPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f)
     {
         if (null != priorityObject)
         {
@@ -266,7 +273,7 @@ class PriorityList : GObject, INoOrPriorityList
                         if (this.mIsSpeedUpFind)
                         {
                             this.mDic.add(priorityObject, index);
-                            this.updateIndex(index + 1);
+                            this._updateIndex(index + 1);
                         }
                     }
                 }
@@ -281,13 +288,13 @@ class PriorityList : GObject, INoOrPriorityList
         }
     }
 
-    public void removePriorityObject(INoOrPriorityObject priorityObject)
+    void removePriorityObject(INoOrPriorityObject priorityObject)
     {
         if (this.contains(priorityObject))
         {
             if (this.mIsSpeedUpFind)
             {
-                this.effectiveRemove(priorityObject);
+                this._effectiveRemove(priorityObject);
             }
             else
             {
@@ -306,13 +313,14 @@ class PriorityList : GObject, INoOrPriorityList
         this.addPriorityObject(noPriorityObject, priority);
     }
 
-    public void removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject)
+    void removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject)
     {
         this.removePriorityObject(noPriorityObject);
     }
 
     // 快速移除元素
-    protected bool effectiveRemove(INoOrPriorityObject item)
+protected:
+	bool _effectiveRemove(INoOrPriorityObject item)
     {
         bool ret = false;
 
@@ -339,7 +347,7 @@ class PriorityList : GObject, INoOrPriorityList
                 else
                 {
                     this.mPriorityProcessObjectList.removeAt(index);
-                    this.updateIndex(index);
+                    this._updateIndex(index);
                 }
             }
         }
@@ -347,7 +355,7 @@ class PriorityList : GObject, INoOrPriorityList
         return ret;
     }
 
-    protected void updateIndex(int index)
+    void _updateIndex(int index)
     {
         int listLen = this.mPriorityProcessObjectList.count();
 
