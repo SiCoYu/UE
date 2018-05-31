@@ -3,6 +3,9 @@
 
 #include <vector>
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class NetModuleDispatchHandle;
 class MByteBuffer;
@@ -38,5 +41,7 @@ public:
 	void clearOneRevMsg();
 	void clearOneHandleMsg();
 };
+
+MY_END_NAMESPACE
 
 #endif

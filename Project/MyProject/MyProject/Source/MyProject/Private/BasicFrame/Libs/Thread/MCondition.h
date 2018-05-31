@@ -2,6 +2,9 @@
 #define __MCondition_H
 
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MMutex;
 class MEvent;
@@ -24,5 +27,7 @@ public:
 	void wait();
 	void notifyAll();
 };
+
+MY_END_NAMESPACE
 
 #endif

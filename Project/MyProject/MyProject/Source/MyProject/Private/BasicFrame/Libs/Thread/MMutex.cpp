@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "MMutex.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MMutex::MMutex()
 {
 #ifdef USE_EXTERN_THREAD
@@ -45,3 +47,5 @@ void MMutex::Unlock()
 	mMutex->Unlock();
 #endif
 }
+
+MY_END_NAMESPACE

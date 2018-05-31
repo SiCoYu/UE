@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "MThreadSafeCounter.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MThreadSafeCounter::MThreadSafeCounter()
 	: mThreadSafeCounter()
 {
@@ -52,3 +54,5 @@ int MThreadSafeCounter::GetValue() const
 {
 	return mThreadSafeCounter.GetValue();
 }
+
+MY_END_NAMESPACE

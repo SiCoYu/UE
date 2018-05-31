@@ -2,6 +2,8 @@
 #include "MThread.h"
 #include "MEvent.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MThread::MThread(std::string threadName)
 	: mThreadName(threadName), mIsExitFlag(false)
 {
@@ -62,3 +64,5 @@ void MThread::Shutdown()
 {
 	this->EnsureCompletion();
 }
+
+MY_END_NAMESPACE

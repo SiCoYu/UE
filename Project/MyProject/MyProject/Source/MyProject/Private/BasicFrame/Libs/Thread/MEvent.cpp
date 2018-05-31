@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "MEvent.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MEvent::MEvent()
 {
 	mEvent = FPlatformProcess::GetSynchEventFromPool(true);
@@ -31,3 +33,5 @@ void MEvent::WaitOne()
 {
 	mEvent->Wait(MAX_uint32);
 }
+
+MY_END_NAMESPACE

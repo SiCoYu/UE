@@ -2,6 +2,9 @@
 #define __MEvent_H
 
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class FEvent;
 
@@ -19,5 +22,7 @@ public:
 	void Set();
 	void WaitOne();
 };
+
+MY_END_NAMESPACE
 
 #endif

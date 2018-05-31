@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+MY_END_NAMESPACE
 
 MY_BEGIN_NAMESPACE(MyNS)
 

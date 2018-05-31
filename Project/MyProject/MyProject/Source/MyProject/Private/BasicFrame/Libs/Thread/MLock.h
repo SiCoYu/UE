@@ -3,6 +3,9 @@
 
 #include "MyProject.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MMutex;
 
@@ -18,5 +21,7 @@ public:
 	MLock(MMutex* mutex);
 	~MLock();
 };
+
+MY_END_NAMESPACE
 
 #endif

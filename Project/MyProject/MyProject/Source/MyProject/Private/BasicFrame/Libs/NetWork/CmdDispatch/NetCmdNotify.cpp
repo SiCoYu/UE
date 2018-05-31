@@ -8,6 +8,8 @@
 #include "SafePointer.h"
 #include "MByteBuffer.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 NetCmdNotify::NetCmdNotify()
 	: mRevMsgCnt(0),
 	  mHandleMsgCnt(0),
@@ -103,3 +105,5 @@ void NetCmdNotify::clearOneHandleMsg()
     mHandleMsgCnt = 0;
 	GLogSys->log("清理处理消息数量");
 }
+
+MY_END_NAMESPACE

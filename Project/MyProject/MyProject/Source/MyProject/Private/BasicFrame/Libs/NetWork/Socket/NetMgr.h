@@ -3,9 +3,6 @@
 
 #include "PlatformDefine.h"
 #include "GObject.h"
-#include "PlatformDefine.h"
-
-MY_USING_NAMESPACE(MyNS)
 
 #ifdef USE_EXTERN_THREAD
 
@@ -30,10 +27,13 @@ MY_USING_NAMESPACE(MyNS)
 	#endif
 
 #else
-	class UENetThread;
-	class UENetClient;
 	#include <map>
 	#include <string>
+
+	MY_USING_NAMESPACE(MyNS)
+
+	class UENetThread;
+	class UENetClient;
 #endif
 
 MY_BEGIN_NAMESPACE(MyNS)

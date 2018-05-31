@@ -1,8 +1,11 @@
-#ifndef __INETMGR_H
-#define __INETMGR_H
+#ifndef __INetMgr_H
+#define __INetMgr_H
 
 #include "MyProject.h"
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 
@@ -18,4 +21,6 @@ public:
 	virtual void send(bool bnet = true) = 0;
 };
 
-#endif		// __INETMGR_H
+MY_END_NAMESPACE
+
+#endif		// __INetMgr_H

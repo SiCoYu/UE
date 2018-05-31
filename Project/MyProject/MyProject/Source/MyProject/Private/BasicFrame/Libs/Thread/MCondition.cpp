@@ -9,6 +9,8 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MCondition::MCondition(std::string name)
 {
     this->mMutex = MY_NEW MMutex();
@@ -54,3 +56,5 @@ void MCondition::notifyAll()
 		this->mEvent->Set();        // 唤醒线程
     }
 }
+
+MY_END_NAMESPACE

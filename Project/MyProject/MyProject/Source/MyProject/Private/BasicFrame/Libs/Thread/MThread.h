@@ -3,6 +3,9 @@
 
 #include "MyProject.h"
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MEvent;
 
@@ -37,5 +40,7 @@ public:
 	void EnsureCompletion();
 	void Shutdown();
 };
+
+MY_END_NAMESPACE
 
 #endif

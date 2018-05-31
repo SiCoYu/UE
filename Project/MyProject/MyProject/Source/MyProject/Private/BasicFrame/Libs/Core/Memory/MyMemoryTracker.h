@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <string>
 #include "MyAllocRecordItem.h"
+#include "PlatformDefine.h"
 
 class FLowLevelMemTracker;
 

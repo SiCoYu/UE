@@ -1,6 +1,9 @@
 #pragma once
 
 #include "HAL/ThreadSafeCounter.h"	// FThreadSafeCounter
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MThreadSafeCounter
 {
@@ -21,3 +24,5 @@ public:
 	int Reset();
 	int GetValue() const;
 };
+
+MY_END_NAMESPACE
