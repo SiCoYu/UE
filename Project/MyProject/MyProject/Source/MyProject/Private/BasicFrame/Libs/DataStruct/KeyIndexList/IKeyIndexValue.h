@@ -1,7 +1,6 @@
-﻿namespace SDK.Lib
+﻿#pragma once
+
+class IKeyIndexValue
 {
-    public interface IKeyIndexValue
-    {
         
-    }
-}
+};

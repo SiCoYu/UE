@@ -1,8 +1,7 @@
-﻿namespace SDK.Lib
+﻿#pragma once
+
+enum PrioritySort
 {
-    public enum PrioritySort
-    {
-        ePS_Less,       // 小于
-        ePS_Great,      // 大于
-    }
-}
+	ePS_Less,       // 小于
+	ePS_Great,      // 大于
+};

@@ -1,273 +1,270 @@
-﻿using System.Collections.Generic;
+﻿#pragma once
 
-namespace SDK.Lib
+#include "MList.h"
+
+/**
+ * @brief MIndexList ，元素是保存一个在列表中的索引的，减少 Key 比较，加快查找
+ */
+template <class T>
+class MIndexList
 {
-    /**
-     * @brief MIndexList ，元素是保存一个在列表中的索引的，减少 Key 比较，加快查找
-     */
-    public class MIndexList<T> where T : IndexItemBase, new()
+protected:
+	MList<T> mList;
+    int mUniqueId;       // 唯一 Id ，调试使用
+    int mEleTotal;       // 元素总数
+    bool mIsOpKeepSort;           // 操作的时候是否保持排序
+
+public:
+	MIndexList()
     {
-        protected List<T> mList;
-        protected int mUniqueId;       // 唯一 Id ，调试使用
-        protected int mEleTotal;       // 元素总数
-        protected bool mIsOpKeepSort;           // 操作的时候是否保持排序
+        this.mEleTotal = 0;
+        this.mList = new List<T>();
+        this.mIsOpKeepSort = false;
+    }
 
-        public MIndexList()
+    MIndexList(int capacity)
+    {
+        this.mList = new List<T>(capacity);
+        this.mEleTotal = capacity;
+    }
+
+    void setIsOpKeepSort(bool value)
+    {
+        this.mIsOpKeepSort = value;
+    }
+
+    T[] ToArray()
+    {
+        return this.mList.ToArray();
+    }
+
+    List<T> list()
+    {
+        return this.mList;
+    }
+
+    int uniqueId
+    {
+        get
         {
-            this.mEleTotal = 0;
-            this.mList = new List<T>();
-            this.mIsOpKeepSort = false;
+            return this.mUniqueId;
         }
-
-        public MIndexList(int capacity)
+        set
         {
-            this.mList = new List<T>(capacity);
-            this.mEleTotal = capacity;
+            this.mUniqueId = value;
         }
+    }
 
-        public void setIsOpKeepSort(bool value)
-        {
-            this.mIsOpKeepSort = value;
-        }
-
-        public T[] ToArray()
-        {
-            return this.mList.ToArray();
-        }
-
-        public List<T> list()
+    List<T> buffer
+    {
+        get
         {
             return this.mList;
         }
+    }
 
-        public int uniqueId
+    int size
+    {
+        get
         {
-            get
-            {
-                return this.mUniqueId;
-            }
-            set
-            {
-                this.mUniqueId = value;
-            }
+            // 频繁获取这个字段比较耗时
+            //return this.mList.Count;
+            return this.mEleTotal;
         }
+    }
 
-        public List<T> buffer
-        {
-            get
-            {
-                return this.mList;
-            }
-        }
+    void add(T item)
+    {
+        this.mList.Add(item);
+        this.mEleTotal += 1;
+    }
 
-        public int size
-        {
-            get
-            {
-                // 频繁获取这个字段比较耗时
-                //return this.mList.Count;
-                return this.mEleTotal;
-            }
-        }
+    // 主要是 Add 一个 float 类型的 Vector3
+    void add(T item_1, T item_2, T item_3)
+    {
+        this.add(item_1);
+        this.add(item_2);
+        this.add(item_3);
+    }
 
-        public void add(T item)
-        {
-            this.mList.Add(item);
-            this.mEleTotal += 1;
-        }
+    // 主要是 Add 一个 float 类型的 UV
+    void add(T item_1, T item_2)
+    {
+        this.add(item_1);
+        this.add(item_2);
+    }
 
-        // 主要是 Add 一个 float 类型的 Vector3
-        public void add(T item_1, T item_2, T item_3)
-        {
-            this.add(item_1);
-            this.add(item_2);
-            this.add(item_3);
-        }
+    // 主要是 Add 一个 byte 类型的 Color32
+    void add(T item_1, T item_2, T item_3, T item_4)
+    {
+        this.add(item_1);
+        this.add(item_2);
+        this.add(item_3);
+        this.add(item_4);
+    }
 
-        // 主要是 Add 一个 float 类型的 UV
-        public void add(T item_1, T item_2)
-        {
-            this.add(item_1);
-            this.add(item_2);
-        }
+    void push(T item)
+    {
+        this.add(item);
+    }
 
-        // 主要是 Add 一个 byte 类型的 Color32
-        public void add(T item_1, T item_2, T item_3, T item_4)
-        {
-            this.add(item_1);
-            this.add(item_2);
-            this.add(item_3);
-            this.add(item_4);
-        }
+    bool remove(T item)
+    {
+        return this._effectiveRemove(item);
+    }
 
-        public void push(T item)
-        {
-            this.add(item);
-        }
-
-        public bool remove(T item)
-        {
-            return this.effectiveRemove(item);
-        }
-
-        public T this[int index]
-        {
-            get
-            {
-                return this.mList[index];
-            }
-            set
-            {
-                this.set(index, value);
-            }
-        }
-
-        public T get(int index)
+    T this[int index]
+    {
+        get
         {
             return this.mList[index];
         }
-
-        public void set(int index, T value)
+        set
         {
-            if(null != this.mList[index])
+            this.set(index, value);
+        }
+    }
+
+    T get(int index)
+    {
+        return this.mList[index];
+    }
+
+    void set(int index, T value)
+    {
+        if(null != this.mList[index])
+        {
+            this.mList[index].resetIndex();
+        }
+
+        this.mList[index] = value;
+        this.mList[index].setIndex(index);
+    }
+
+    void clear()
+    {
+        int index = 0;
+        int listLen = this.mEleTotal;
+
+        while(index < listLen)
+        {
+            this.mList[index].resetIndex();
+
+            index += 1;
+        }
+
+        this.mList.Clear();
+        this.mEleTotal = 0;
+    }
+
+    int count()
+    {
+        //return this.mList.Count;
+        return this.mEleTotal;
+    }
+
+    void setLength(int value)
+    {
+        this.mList.Capacity = value;
+    }
+
+    void removeAt(int index)
+    {
+        if (index < this.count())
+        {
+            this.mList[index].resetIndex();
+            this.mList.RemoveAt(index);
+            this.mEleTotal -= 1;
+        }
+    }
+
+    int indexOf(T item)
+    {
+        if(item.getIndex() < this.count())
+        {
+            return item.getIndex();
+        }
+
+        return -1;
+    }
+
+    void insert(int index, T item)
+    {
+        if (index <= this.count())
+        {
+            this.mList.Insert(index, item);
+            item.setIndex(index);
+            this.mEleTotal += 1;
+            this._updateIndex(index + 1);
+        }
+    }
+
+    bool contains(T item)
+    {
+        return item.getIndex() != -1;
+    }
+
+    void sort(System.Comparison<T> comparer)
+    {
+        this.mList.Sort(comparer);
+    }
+
+    void merge(MList<T> appendList)
+    {
+        if(appendList != null)
+        {
+            foreach(T item in appendList.list())
             {
-                this.mList[index].resetIndex();
-            }
-
-            this.mList[index] = value;
-            this.mList[index].setIndex(index);
-        }
-
-        public void clear()
-        {
-            int index = 0;
-            int listLen = this.mEleTotal;
-
-            while(index < listLen)
-            {
-                this.mList[index].resetIndex();
-
-                index += 1;
-            }
-
-            this.mList.Clear();
-            this.mEleTotal = 0;
-        }
-
-        public int count()
-        {
-            //return this.mList.Count;
-            return this.mEleTotal;
-        }
-
-        public int length()
-        {
-            //return this.mList.Count;
-            return this.mEleTotal;
-        }
-
-        public void setLength(int value)
-        {
-            this.mList.Capacity = value;
-        }
-
-        public void removeAt(int index)
-        {
-            if (index < this.count())
-            {
-                this.mList[index].resetIndex();
-                this.mList.RemoveAt(index);
-                this.mEleTotal -= 1;
-            }
-        }
-
-        public int indexOf(T item)
-        {
-            if(item.getIndex() < this.count())
-            {
-                return item.getIndex();
-            }
-
-            return -1;
-        }
-
-        public void insert(int index, T item)
-        {
-            if (index <= this.count())
-            {
-                this.mList.Insert(index, item);
-                item.setIndex(index);
+                this.mList.Add(item);
+                item.setIndex(this.mEleTotal);
                 this.mEleTotal += 1;
-                this.updateIndex(index + 1);
-            }
-        }
-
-        public bool contains(T item)
-        {
-            return item.getIndex() != -1;
-        }
-
-        public void sort(System.Comparison<T> comparer)
-        {
-            this.mList.Sort(comparer);
-        }
-
-        public void merge(MList<T> appendList)
-        {
-            if(appendList != null)
-            {
-                foreach(T item in appendList.list())
-                {
-                    this.mList.Add(item);
-                    item.setIndex(this.mEleTotal);
-                    this.mEleTotal += 1;
-                }
-            }
-        }
-
-        // 快速移除元素
-        protected bool effectiveRemove(T item)
-        {
-            bool ret = false;
-
-            int idx = item.getIndex();
-
-            if (-1 != idx)
-            {
-                ret = true;
-
-                if (idx == this.count() - 1)    // 如果是最后一个元素，直接移除
-                {
-                    this.removeAt(idx);
-                }
-                else
-                {
-                    if (!this.mIsOpKeepSort)
-                    {
-                        this.mList[idx] = this.mList[this.count() - 1];
-                        this.removeAt(this.count() - 1);
-                    }
-                    else
-                    {
-                        this.removeAt(idx);
-                        this.updateIndex(idx);
-                    }
-                }
-            }
-
-            return ret;
-        }
-
-        protected void updateIndex(int idx)
-        {
-            int len = this.count();
-
-            while(idx < len)
-            {
-                this.mList[idx].setIndex(idx);
-
-                ++idx;
             }
         }
     }
-}
+
+    // 快速移除元素
+protected:
+	bool _effectiveRemove(T item)
+    {
+        bool ret = false;
+
+        int idx = item.getIndex();
+
+        if (-1 != idx)
+        {
+            ret = true;
+
+            if (idx == this.count() - 1)    // 如果是最后一个元素，直接移除
+            {
+                this.removeAt(idx);
+            }
+            else
+            {
+                if (!this.mIsOpKeepSort)
+                {
+                    this.mList[idx] = this.mList[this.count() - 1];
+                    this.removeAt(this.count() - 1);
+                }
+                else
+                {
+                    this.removeAt(idx);
+                    this._updateIndex(idx);
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    void _updateIndex(int idx)
+    {
+        int len = this.count();
+
+        while(idx < len)
+        {
+            this.mList[idx].setIndex(idx);
+
+            ++idx;
+        }
+    }
+};

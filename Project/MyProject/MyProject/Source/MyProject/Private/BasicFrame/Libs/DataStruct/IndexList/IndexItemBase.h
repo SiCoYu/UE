@@ -1,37 +1,40 @@
-﻿namespace SDK.Lib
+﻿#pragma once
+
+#include "GObject.h"
+
+class IndexItemBase : public GObject
 {
-    public class IndexItemBase : GObject
+protected:
+	int mIndex;   // 索引
+
+public:
+	IndexItemBase()
     {
-        protected int mIndex;   // 索引
-
-        public IndexItemBase()
-        {
-            this.mIndex = -1;
-        }
-
-        public void init()
-        {
-
-        }
-
-        public void dispose()
-        {
-
-        }
-
-        public int getIndex()
-        {
-            return this.mIndex;
-        }
-
-        public void setIndex(int value)
-        {
-            this.mIndex = value;
-        }
-
-        public void resetIndex()
-        {
-            this.mIndex = -1;
-        }
+        this.mIndex = -1;
     }
-}
+
+    void init()
+    {
+
+    }
+
+    void dispose()
+    {
+
+    }
+
+    int getIndex()
+    {
+        return this.mIndex;
+    }
+
+    void setIndex(int value)
+    {
+        this.mIndex = value;
+    }
+
+    void resetIndex()
+    {
+        this.mIndex = -1;
+    }
+};
