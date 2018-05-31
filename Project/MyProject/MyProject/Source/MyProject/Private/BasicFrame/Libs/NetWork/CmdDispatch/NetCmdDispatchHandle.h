@@ -6,6 +6,9 @@
 #include "MDictionary.h"
 #include "EventDispatchDelegate.h"	// FastDelegate1
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 class AddOnceEventDispatch;
@@ -30,5 +33,7 @@ public:
 
 	virtual void handleMsg(CmdDispatchInfo* cmd);
 };
+
+MY_END_NAMESPACE
 
 #endif

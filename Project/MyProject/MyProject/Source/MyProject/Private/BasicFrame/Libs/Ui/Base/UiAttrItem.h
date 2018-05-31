@@ -7,6 +7,9 @@
 #include "UiFormId.h"
 #include "FormType.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 using namespace NSFormType;
 using namespace NSFormId;
@@ -28,4 +31,6 @@ public:
 	UiAttrItem();
 };
 
-#endif				// __FORMATTRITEM_H
+MY_END_NAMESPACE
+
+#endif				// __UiAttrItem_H

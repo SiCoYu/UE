@@ -3,6 +3,8 @@
 #include "ResItem.h"
 #include "Engine/Texture.h"	// UTexture
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TextureInsRes::TextureInsRes()
 {
 
@@ -35,3 +37,5 @@ void TextureInsRes::unload()
 
 	Super::unload();
 }
+
+MY_END_NAMESPACE

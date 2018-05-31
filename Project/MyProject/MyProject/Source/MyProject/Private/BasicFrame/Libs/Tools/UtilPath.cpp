@@ -7,6 +7,8 @@
 #include "Prequisites.h"
 #include "UtilPath.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 FString UtilPath::BaseDir()
 {
 	//InstallDir/WindowsNoEditor/GameName/Binaries/Win64
@@ -87,3 +89,5 @@ bool UtilPath::FileExists(const std::string& InPath)
 	FString convPath = UtilStr::ConvStdStr2FString(const_cast<std::string&>(InPath));
 	return FPaths::FileExists(convPath);
 }
+
+MY_END_NAMESPACE

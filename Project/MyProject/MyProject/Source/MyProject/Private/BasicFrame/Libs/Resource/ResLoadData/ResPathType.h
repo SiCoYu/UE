@@ -1,6 +1,10 @@
 ﻿#ifndef __ResPathType_H
 #define __ResPathType_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief 资源路径类型
  */
@@ -31,5 +35,7 @@ enum ResPathType
 
 	eTotal          // 总数
 };
+
+MY_END_NAMESPACE
 
 #endif

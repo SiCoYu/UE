@@ -2,6 +2,8 @@
 #include "HttpWebDownloadItem.h"
 #include "HttpWeb.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 HttpWebDownloadItem::HttpWebDownloadItem()
 {
 
@@ -388,3 +390,5 @@ void HttpWebDownloadItem::handleResult()
 {
     //mRefCountResLoadResultNotify.loadResEventDispatch.dispatchEvent(this);
 }
+
+MY_END_NAMESPACE

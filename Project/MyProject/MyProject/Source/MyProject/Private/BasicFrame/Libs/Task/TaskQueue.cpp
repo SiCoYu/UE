@@ -3,6 +3,8 @@
 #include "ITask.h"
 #include "TaskThreadPool.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TaskQueue::TaskQueue(std::string name)
     : Super(name)
 {
@@ -16,3 +18,5 @@ void TaskQueue::push(ITask* item)
     // 检查是否有线程空闲，如果有就唤醒
     mTaskThreadPool->notifyIdleThread();
 }
+
+MY_END_NAMESPACE

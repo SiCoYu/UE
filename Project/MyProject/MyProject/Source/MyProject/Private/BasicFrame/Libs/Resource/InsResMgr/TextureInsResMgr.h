@@ -5,6 +5,9 @@
 #include "BaseClassDef.h"
 #include "ResInsMgrBase.h"
 #include "ResLoadPriority.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TextureInsRes;
 
@@ -29,3 +32,5 @@ public:
 		ResLoadPriority priority = ResLoadPriority::eRLP_Middle_1000
 	);
 };
+
+MY_END_NAMESPACE

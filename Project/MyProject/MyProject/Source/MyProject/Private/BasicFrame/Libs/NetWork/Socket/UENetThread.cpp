@@ -8,6 +8,8 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 UENetThread::UENetThread(INetMgr* pNetMgr, std::string mThreadName)
 	: MThread(mThreadName)
 {
@@ -50,3 +52,5 @@ uint32 UENetThread::Run(void)
 
 	return 0;
 }
+
+MY_END_NAMESPACE

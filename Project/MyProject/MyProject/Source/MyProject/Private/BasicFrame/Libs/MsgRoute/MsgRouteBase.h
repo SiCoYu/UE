@@ -5,6 +5,9 @@
 #include "IDispatchObject.h"
 #include "MsgRouteType.h"
 #include "MsgRouteId.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MsgRouteBase : public IPoolObject, public IDispatchObject
 {
@@ -19,5 +22,7 @@ public:
 	virtual ~MsgRouteBase();
 	virtual void resetDefault();
 };
+
+MY_END_NAMESPACE
 
 #endif

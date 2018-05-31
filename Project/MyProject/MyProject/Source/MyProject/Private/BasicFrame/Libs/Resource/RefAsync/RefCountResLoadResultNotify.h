@@ -2,6 +2,9 @@
 #define __RefCountResLoadResultNotify_H
 
 #include "ResLoadResultNotify.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class RefCount;
 
@@ -21,5 +24,7 @@ public:
 	void setRefCount(RefCount* value);
 	virtual void copyFrom(ResLoadResultNotify* rhv) override;
 };
+
+MY_END_NAMESPACE
 
 #endif

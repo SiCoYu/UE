@@ -14,6 +14,8 @@
 #include "MCircularBuffer.h"
 #include "DynBuffer.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 UENetClient::UENetClient()
 	: mBoundEndpoint(FIPv4Address::Any, 0),
 	mIsConnected(false)
@@ -224,3 +226,5 @@ void UENetClient::SetRevBufferSize(int size)
 	this->mSocket->SetSendBufferSize(size, retSize);      // ReceiveBufferSize 默认 8096 字节
 	this->mClientBuffer->SetRevBufferSize(size);
 }
+
+MY_END_NAMESPACE

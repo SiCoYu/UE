@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "ResLoadState.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ResLoadState::ResLoadState()
 {
     this->mResLoadState = ResLoadStateCV::eNotLoad;
@@ -99,3 +101,5 @@ void ResLoadState::copyFrom(ResLoadState* rhv)
 {
 	this->mResLoadState = rhv->getResLoadState();
 }
+
+MY_END_NAMESPACE

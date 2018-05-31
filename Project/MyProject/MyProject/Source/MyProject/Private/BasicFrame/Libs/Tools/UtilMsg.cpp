@@ -3,6 +3,8 @@
 #include "Prequisites.h"
 #include "UtilStr.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 // 发送消息， bnet 如果 true 就直接发送到 socket ，否则直接进入输出消息队列
 void UtilMsg::sendMsg(NullUserCmd& msg, bool bnet)
 {
@@ -54,3 +56,5 @@ void UtilMsg::formatBytes2Array(char* bytes, uint32 len)
 
 	GLogSys->log(str);
 }
+
+MY_END_NAMESPACE

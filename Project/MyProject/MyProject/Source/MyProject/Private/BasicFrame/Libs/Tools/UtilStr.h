@@ -6,6 +6,9 @@
 #include "NameTypes.h"		// FName
 #include "Internationalization/Text.h"	// FText
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class UtilStr
 {
@@ -49,5 +52,7 @@ public:
 	static std::string& replaceAll(std::string& str, const  std::string& old_value, const std::string& new_value);
 	static std::string& replaceAllDistinct(std::string& str, const  std::string& old_value, const std::string& new_value);
 };
+
+MY_END_NAMESPACE
 
 #endif

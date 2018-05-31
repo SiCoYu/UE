@@ -5,6 +5,9 @@
 #include "EventDispatchDelegate.h"
 #include "MList.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 数据下载管理器
@@ -85,3 +88,5 @@ protected:
     // 资源加载完成，触发下一次加载
 	void onMsgRouteResLoad(IDispatchObject* dispObj);
 };
+
+MY_END_NAMESPACE

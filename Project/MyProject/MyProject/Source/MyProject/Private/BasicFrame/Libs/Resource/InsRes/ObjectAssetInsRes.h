@@ -3,6 +3,9 @@
 
 #include "ObjectAssetInsResBase.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class ObjectAssetInsRes : public ObjectAssetInsResBase
 {
@@ -11,5 +14,7 @@ class ObjectAssetInsRes : public ObjectAssetInsResBase
 public:
 	ObjectAssetInsRes();
 };
+
+MY_END_NAMESPACE
 
 #endif

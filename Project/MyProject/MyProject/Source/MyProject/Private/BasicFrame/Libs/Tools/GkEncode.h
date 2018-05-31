@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 namespace NSEncode
 {
 	enum GkEncode
@@ -10,3 +14,5 @@ namespace NSEncode
 		eDefault = 3,
 	};
 }
+
+MY_END_NAMESPACE

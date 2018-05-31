@@ -7,9 +7,13 @@
 #include "Math/Quat.h"	// FQuat
 #include "BaseClassDef.h"
 #include "ResPackType.h"
+#include "PlatformDefine.h"
 
 class UObject;
 class UClass;
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 class ResInsEventDispatch;
 
 class ObjectAssetInsResBase : public ResInsBase
@@ -35,5 +39,7 @@ public:
 	UClass* getClass();
 	virtual void unload() override;
 };
+
+MY_END_NAMESPACE
 
 #endif

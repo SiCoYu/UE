@@ -6,6 +6,9 @@
 #include "FormType.h"
 #include <string>
 #include "ResPathType.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 using namespace NSFormType;
 
@@ -34,4 +37,6 @@ protected:
 	);
 };
 
-#endif				// __FORMATTRSYSTEM_H
+MY_END_NAMESPACE
+
+#endif				// __UiAttrSystem_H

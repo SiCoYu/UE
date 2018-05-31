@@ -8,6 +8,9 @@
 #include "UiFormId.h"
 #include "GObject.h"
 #include "UiLayerId.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 using namespace NSFormId;
 
@@ -34,3 +37,5 @@ public:
 	void closeAllForm();
 	void findLayerGOAndTrans();
 };
+
+MY_END_NAMESPACE

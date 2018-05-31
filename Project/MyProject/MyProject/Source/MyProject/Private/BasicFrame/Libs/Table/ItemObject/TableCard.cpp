@@ -4,6 +4,8 @@
 #include "MByteBuffer.h"
 #include "UtilTable.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TableCardItemBody::TableCardItemBody()
 {
 	
@@ -44,3 +46,5 @@ void TableCardItemBody::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset)
 	UtilTable::readString(bytes, mCardHeader);
 	bytes->readUnsignedInt32(mSkillPrepareEffect);
 }
+
+MY_END_NAMESPACE

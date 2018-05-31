@@ -4,6 +4,8 @@
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 GameRouteHandle::GameRouteHandle()
 {
 
@@ -58,3 +60,5 @@ void GameRouteHandle::onSocketOpened(IDispatchObject* dispObj)
 {
     
 }
+
+MY_END_NAMESPACE

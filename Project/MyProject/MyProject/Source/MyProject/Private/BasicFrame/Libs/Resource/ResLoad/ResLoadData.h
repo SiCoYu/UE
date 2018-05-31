@@ -4,6 +4,9 @@
 #include <map>
 #include <string>
 #include <list>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class LoadItem;
 class ResItem;
@@ -21,5 +24,7 @@ public:
 public:
 	ResLoadData();
 };
+
+MY_END_NAMESPACE
 
 #endif

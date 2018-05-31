@@ -2,6 +2,8 @@
 #include "BinaryLoadItem.h"
 #include "MByteBuffer.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 //UBinaryLoadItem::UBinaryLoadItem(const FObjectInitializer& ObjectInitializer)
 //	: Super(ObjectInitializer)
 //{
@@ -39,3 +41,5 @@ void UBinaryLoadItem::loadFile(const FString& Filename)
 		}
 	}
 }
+
+MY_END_NAMESPACE

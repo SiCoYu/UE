@@ -1,6 +1,10 @@
 ﻿#ifndef __TableId_H
 #define __TableId_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 namespace TableId
 {
 	enum TableId
@@ -12,5 +16,7 @@ namespace TableId
 		eTableTotal             // 表的总数
 	};
 }
+
+MY_END_NAMESPACE
 
 #endif

@@ -19,7 +19,7 @@
 #include "AuxMUiClassLoader.h"
 #include "SafePointer.h"
 
-using namespace MyNS;
+MY_BEGIN_NAMESPACE(MyNS)
 
 UiMgr::UiMgr()
 {
@@ -446,3 +446,5 @@ void UiMgr::findSceneUIRootActor()
 //	}
 //	mTmpList.Clear();
 //}
+
+MY_END_NAMESPACE

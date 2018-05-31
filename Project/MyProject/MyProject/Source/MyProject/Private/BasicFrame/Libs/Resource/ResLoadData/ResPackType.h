@@ -1,6 +1,10 @@
 ﻿#ifndef __ResPackType_H
 #define __ResPackType_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief 资源包的类型
  */
@@ -21,5 +25,7 @@ enum ResPackType
 
 	eNoneType       // 默认类型
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -7,6 +7,8 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 UiAttrSystem::UiAttrSystem()
 {
 
@@ -80,3 +82,5 @@ void UiAttrSystem::addItem(
 	item->mFormType = formType;
 	item->mUMGOuterType = outerType;
 }
+
+MY_END_NAMESPACE

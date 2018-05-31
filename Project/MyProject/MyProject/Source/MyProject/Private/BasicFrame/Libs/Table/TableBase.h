@@ -3,6 +3,9 @@
 
 #include "string"
 #include "vector"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TableItemBase;
 class MByteBuffer;
@@ -19,5 +22,7 @@ public:
 public:
 	TableBase(std::string resname, std::string tablename);
 };
+
+MY_END_NAMESPACE
 
 #endif

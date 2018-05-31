@@ -2,6 +2,8 @@
 #include "TextureInsResMgr.h"
 #include "TextureInsRes.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TextureInsResMgr::TextureInsResMgr()
 {
 
@@ -32,3 +34,5 @@ TextureInsRes* TextureInsResMgr::getAndAsyncLoadRes(
 		handle
 		);
 }
+
+MY_END_NAMESPACE

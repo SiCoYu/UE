@@ -2,8 +2,11 @@
 
 #include "BaseClassDef.h"
 #include "ResInsBase.h"
+#include "PlatformDefine.h"
 
 class UTexture;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TextureInsRes : public ResInsBase
 {
@@ -24,3 +27,5 @@ protected:
 public:
 	virtual void unload() override;
 };
+
+MY_END_NAMESPACE

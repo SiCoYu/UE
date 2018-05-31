@@ -2,6 +2,9 @@
 #define __MRay_H
 
 #include "Core.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MRay
 {

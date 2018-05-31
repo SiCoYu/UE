@@ -4,6 +4,9 @@
 #include <string>
 #include "HAL/Platform.h"
 #include "TableItemBodyBase.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
     * @brief 技能基本表
@@ -23,5 +26,7 @@ public:
 
 	virtual void TableSkillItemBody::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
 };
+
+MY_END_NAMESPACE
 
 #endif

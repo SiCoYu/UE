@@ -3,6 +3,9 @@
 
 #include "MThread.h"
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class INetMgr;
 class MEvent;
@@ -25,5 +28,7 @@ public:
 	virtual void Exit(void) override;
 	virtual uint32 Run(void) override;
 };
+
+MY_END_NAMESPACE
 
 #endif

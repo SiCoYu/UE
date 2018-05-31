@@ -5,6 +5,9 @@
 #include "ResPackType.h"
 #include "ResLoadType.h"
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class NonRefCountResLoadResultNotify;
 class LoadParam;
@@ -58,5 +61,7 @@ public:
 
 	void setLoadParam(LoadParam* param);
 };
+
+MY_END_NAMESPACE
 
 #endif

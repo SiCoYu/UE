@@ -3,6 +3,10 @@
 
 #include "LockList.h"
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 class IPoolObject;
 
 /**
@@ -46,5 +50,7 @@ public:
 
 	void deleteObj(IPoolObject* obj);
 };
+
+MY_END_NAMESPACE
 
 #endif

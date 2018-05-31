@@ -5,6 +5,9 @@
 #include "Platform.h"		// uint8
 #include "EventDispatchDelegate.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class NetCmdDispatchHandle;
 class MByteBuffer;
@@ -31,5 +34,7 @@ public:
 
 	virtual void handleMsg(CmdDispatchInfo* cmdDispInfo);
 };
+
+MY_END_NAMESPACE
 
 #endif

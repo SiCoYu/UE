@@ -2,6 +2,9 @@
 
 #include "IDispatchObject.h"
 #include "HAL/Platform.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 
@@ -12,3 +15,5 @@ public:
     uint8 byCmd;
     uint8 byParam;
 };
+
+MY_END_NAMESPACE

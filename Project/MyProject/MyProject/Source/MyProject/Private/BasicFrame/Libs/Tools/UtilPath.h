@@ -5,6 +5,9 @@
 #include <sstream>
 #include "Containers/UnrealString.h"
 #include "IPlatformFileSandboxWrapper.h"	// FSandboxPlatformFile
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class UtilPath
 {
@@ -42,5 +45,7 @@ public:
 //
 //	return strStream.str();
 //}
+
+MY_END_NAMESPACE
 
 #endif

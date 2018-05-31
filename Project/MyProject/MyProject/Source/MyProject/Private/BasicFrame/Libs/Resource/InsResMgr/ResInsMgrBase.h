@@ -19,6 +19,9 @@
 #include "LogSys.h"
 #include "ResPackType.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class ResInsBase;
 class IDispatchObject;
@@ -91,5 +94,7 @@ public:
 };
 
 #include "ResInsMgrBase.inl"
+
+MY_END_NAMESPACE
 
 #endif

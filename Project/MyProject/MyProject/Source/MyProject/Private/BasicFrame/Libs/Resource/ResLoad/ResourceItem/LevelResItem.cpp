@@ -4,6 +4,8 @@
 #include "RefCountResLoadResultNotify.h"
 #include "ResEventDispatch.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 LevelResItem::LevelResItem()
 {
 	
@@ -24,3 +26,5 @@ void LevelResItem::setLevelName(std::string lvlName)
 {
 
 }
+
+MY_END_NAMESPACE

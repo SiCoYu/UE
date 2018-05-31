@@ -4,6 +4,9 @@
 #include "LoadItem.h"
 #include "CoreUObject.h"	// UObject 
 #include "BaseClassDef.h"	// M_DECLARE_SUPER_KW
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 从 uasset 扩展名的本地 Package 中加载资源
@@ -32,5 +35,7 @@ public:
     // 这个是卸载，因为有时候资源加载进来可能已经不用了，需要直接卸载掉
 	virtual void unload() override;
 };
+
+MY_END_NAMESPACE
 
 #endif

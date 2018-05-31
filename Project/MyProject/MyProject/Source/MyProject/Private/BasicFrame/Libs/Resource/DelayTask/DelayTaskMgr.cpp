@@ -2,6 +2,8 @@
 #include "DelayTaskMgr.h"
 #include "Prequisites.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 DelayTaskMgr::DelayTaskMgr()
 {
 	this->mFrameInterval = 1;
@@ -68,3 +70,5 @@ void DelayTaskMgr::execTask()
 		++this->mCurTaskNum;
 	}
 }
+
+MY_END_NAMESPACE

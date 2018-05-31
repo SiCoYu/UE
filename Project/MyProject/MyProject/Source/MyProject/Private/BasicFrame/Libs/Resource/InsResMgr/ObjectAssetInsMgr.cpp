@@ -2,6 +2,8 @@
 #include "ObjectAssetInsMgr.h"
 #include "ObjectAssetInsRes.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ObjectAssetInsMgr::ObjectAssetInsMgr()
 {
 
@@ -31,3 +33,5 @@ ObjectAssetInsRes* ObjectAssetInsMgr::getAndAsyncLoadRes(std::string path, Event
 {
 	return Super::getAndAsyncLoad<ObjectAssetInsRes>(path, evtHandle);
 }
+
+MY_END_NAMESPACE

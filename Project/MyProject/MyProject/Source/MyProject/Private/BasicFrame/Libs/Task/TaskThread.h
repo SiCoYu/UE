@@ -2,6 +2,9 @@
 
 #include "MThread.h"
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TaskQueue;
 class MCondition;
@@ -26,3 +29,5 @@ public:
 	virtual uint32 Run(void) override;
 	bool notifySelf();
 };
+
+MY_END_NAMESPACE

@@ -1,5 +1,9 @@
 #pragma once
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 enum class MsgRouteId
 {
 	eMRID_SocketOpened,      // socket Opened
@@ -7,3 +11,5 @@ enum class MsgRouteId
 	eMRID_LoadedWebRes,      // web 资源加载完成
 	eMRID_ThreadLog,			// 线程打日志
 };
+
+MY_END_NAMESPACE

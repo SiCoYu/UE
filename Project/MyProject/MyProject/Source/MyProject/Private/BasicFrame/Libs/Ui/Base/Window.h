@@ -5,8 +5,10 @@
 #include "WinRender.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
 //#include "PlatformDefine.h"
+#include "PlatformDefine.h"
 #include "Window.generated.h"
 
+// 不能使用宏定义，会编译报错
 //MY_USING_NAMESPACE(MyNS)
 
 using namespace MyNS;

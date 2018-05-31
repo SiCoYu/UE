@@ -3,6 +3,8 @@
 #include "UtilStr.h"
 #include "ResItem.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ResInsMgrBase::ResInsMgrBase()
 {
 	this->mLoadingDepth = 0;
@@ -175,3 +177,5 @@ void ResInsMgrBase::unloadAll()
 
 	pathList.clear();
 }
+
+MY_END_NAMESPACE

@@ -3,6 +3,8 @@
 #include "MCondition.h"
 #include "TaskQueue.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TaskThread::TaskThread(std::string name, TaskQueue* taskQueue)
     : Super(name)
 {
@@ -41,3 +43,5 @@ bool TaskThread::notifySelf()
 
     return false;
 }
+
+MY_END_NAMESPACE

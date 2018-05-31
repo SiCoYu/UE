@@ -2,6 +2,9 @@
 #define __TableCard_H
 
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 卡表中的属性名字
@@ -71,5 +74,7 @@ public:
 
 	virtual void parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -3,6 +3,8 @@
 #include "UtilEngineWrap.h"
 #include "MByteBuffer.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void NullUserCmd::serialize(MByteBuffer* bu)
 {
 	bu->writeUnsignedInt8(byCmd);
@@ -17,3 +19,5 @@ void NullUserCmd::derialize(MByteBuffer* bu)
 	bu->readUnsignedInt8(byParam);
 	bu->readUnsignedInt32(dwTimestamp);
 }
+
+MY_END_NAMESPACE

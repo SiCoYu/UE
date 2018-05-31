@@ -1,5 +1,8 @@
 #ifndef __UiFormId_H
 #define __UiFormId_H
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 namespace NSFormId
 {
@@ -14,4 +17,6 @@ namespace NSFormId
 	};
 }
 
-#endif				// __FORMID_H
+MY_END_NAMESPACE
+
+#endif				// __UiFormId_H

@@ -2,6 +2,8 @@
 #include "MaterialInsResMgr.h"
 #include "MaterialInsRes.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MaterialInsResMgr::MaterialInsResMgr()
 {
 
@@ -32,3 +34,5 @@ MaterialInsRes* MaterialInsResMgr::getAndAsyncLoadRes(
 		handle
 		);
 }
+
+MY_END_NAMESPACE

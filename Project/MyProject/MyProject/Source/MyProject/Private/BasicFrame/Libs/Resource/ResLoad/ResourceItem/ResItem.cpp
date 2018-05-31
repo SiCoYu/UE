@@ -6,6 +6,8 @@
 #include "RefCount.h"
 #include "LoadParam.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ResItem::ResItem()
 {
 	this->mRefCountResLoadResultNotify = MY_NEW RefCountResLoadResultNotify();
@@ -170,3 +172,5 @@ void ResItem::setLoadParam(LoadParam* param)
 	this->setPathNoExt(param->getPathNoExt());
 	this->setExtName(param->getExtName());
 }
+
+MY_END_NAMESPACE

@@ -3,6 +3,9 @@
 
 #include "Platform.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 脚本引用计数
@@ -22,5 +25,7 @@ public:
 	bool isNoRef();
     void copyFrom(RefCount* rhv);
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -2,6 +2,8 @@
 #include "UtilLogic.h"
 #include "UtilStr.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 std::string UtilLogic::convScenePath2LevelName(std::string& path)
 {
 	int slashIdx = UtilStr::LastIndexOf(path, "/");
@@ -25,3 +27,5 @@ std::string UtilLogic::convScenePath2LevelName(std::string& path)
 
 	return retLevelName;
 }
+
+MY_END_NAMESPACE

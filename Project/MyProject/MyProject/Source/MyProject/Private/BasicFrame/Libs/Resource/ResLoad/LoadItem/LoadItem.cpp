@@ -9,6 +9,8 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 LoadItem::LoadItem()
 {
 	this->mNonRefCountResLoadResultNotify = MY_NEW NonRefCountResLoadResultNotify();
@@ -125,3 +127,5 @@ void LoadItem::setLoadParam(LoadParam* param)
 	this->setExtName(param->getExtName());
 	this->setLoadNeedCoroutine(param->getIsLoadNeedCoroutine());
 }
+
+MY_END_NAMESPACE

@@ -3,6 +3,9 @@
 #include <map>
 #include <string>
 #include <list>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 下载数据
@@ -23,3 +26,5 @@ public:
 public:
 	DownloadData();
 };
+
+MY_END_NAMESPACE

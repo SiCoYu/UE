@@ -1,6 +1,9 @@
 #pragma once
 
 #include "MsgRouteBase.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class LoadedWebResMR : MsgRouteBase
 {
@@ -10,3 +13,5 @@ public:
 	LoadedWebResMR();
 	virtual void resetDefault() override;
 };
+
+MY_END_NAMESPACE

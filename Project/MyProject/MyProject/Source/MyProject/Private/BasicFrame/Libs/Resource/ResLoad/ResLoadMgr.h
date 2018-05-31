@@ -8,6 +8,9 @@
 #include "ResPackType.h"
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class ResLoadData;
 class LoadItem;
@@ -86,5 +89,7 @@ protected:
     // 资源加载完成，触发下一次加载
 	//void onMsgRouteResLoad(MsgRouteBase msg);
 };
+
+MY_END_NAMESPACE
 
 #endif

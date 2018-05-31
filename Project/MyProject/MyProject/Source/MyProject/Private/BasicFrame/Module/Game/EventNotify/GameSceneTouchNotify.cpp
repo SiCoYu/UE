@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "GameSceneTouchNotify.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 GameSceneLogicNotify::GameSceneLogicNotify()
 {
             
@@ -25,3 +27,5 @@ void GameSceneLogicNotify::onMouseUp()
 {
             
 }
+
+MY_END_NAMESPACE

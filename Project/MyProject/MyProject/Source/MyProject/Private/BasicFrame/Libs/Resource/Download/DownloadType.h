@@ -1,12 +1,13 @@
-﻿#pragma once
+#pragma once
 
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class ISceneTouchNotify
+enum DownloadType
 {
-
+	eHttpWeb,
+	eDownloadTypeTotal
 };
 
 MY_END_NAMESPACE

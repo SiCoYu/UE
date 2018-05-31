@@ -5,6 +5,8 @@
 #include "NonRefCountResLoadResultNotify.h"		// NonRefCountResLoadResultNotify
 #include "UtilEngineWrap.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ObjectAssetLoadItem::ObjectAssetLoadItem()
 {
 	this->mResObject = nullptr;
@@ -87,3 +89,5 @@ void ObjectAssetLoadItem::unload()
 {
 	Super::unload();
 }
+
+MY_END_NAMESPACE

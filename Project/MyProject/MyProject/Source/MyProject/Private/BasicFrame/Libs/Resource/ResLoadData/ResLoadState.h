@@ -2,6 +2,9 @@
 #define __ResLoadState_H
 
 #include "ResLoadStateCV.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class ResLoadState
 {
@@ -37,5 +40,7 @@ public:
 	bool hasInsing();
 	void copyFrom(ResLoadState* rhv);
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -6,6 +6,8 @@
 #include "ResLoadState.h"
 #include "ResEventDispatch.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ClassAssetResItem::ClassAssetResItem()
 {
 	this->mResObject = nullptr;
@@ -48,3 +50,5 @@ void ClassAssetResItem::unload()
 {
 
 }
+
+MY_END_NAMESPACE

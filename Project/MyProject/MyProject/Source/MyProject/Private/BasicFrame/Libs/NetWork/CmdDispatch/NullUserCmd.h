@@ -2,6 +2,9 @@
 #define __stNullUserCmd_H
 
 #include "Platform.h"		// int8
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 
@@ -25,5 +28,7 @@ public:
 	virtual void serialize(MByteBuffer* bu);
 	virtual void derialize(MByteBuffer* bu);
 };
+
+MY_END_NAMESPACE
 
 #endif

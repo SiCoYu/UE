@@ -6,6 +6,9 @@
 #include "ResLoadType.h"
 #include <string>
 #include "EventDispatchDelegate.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class ResItem;
 class ResInsBase;
@@ -93,5 +96,7 @@ public:
 	void resolvePath();
 	void resolveLevel();
 };
+
+MY_END_NAMESPACE
 
 #endif

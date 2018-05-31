@@ -3,8 +3,9 @@
 #include "ISceneEventNotify.h"
 #include "MySharedPointer.h"
 #include "PlatformDefine.h"
-
 #include "GObject.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 #ifdef ENABLE_UNIT_TEST
 	class TestMain;
@@ -30,3 +31,5 @@ public:
 protected:
 	void runTest();
 };
+
+MY_END_NAMESPACE

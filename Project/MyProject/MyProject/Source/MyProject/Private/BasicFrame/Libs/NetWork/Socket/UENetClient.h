@@ -6,8 +6,12 @@
 //#include "IPv4Endpoint.h"		// 只包含 IPv4Endpoint.h 会编译不过 // FIPv4Endpoint
 #include "Networking.h"			// 网络一次性全包括，防止只包含部分导致编译不过
 #include <string>
+#include "PlatformDefine.h"
 
 class FSocket;
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 class ClientBuffer;
 class MEvent;
 class MMutex;
@@ -59,5 +63,7 @@ public:
 	bool checkAndUpdateConnect();
 	void Disconnect();
 };
+
+MY_END_NAMESPACE
 
 #endif

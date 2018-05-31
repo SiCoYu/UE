@@ -9,6 +9,8 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 SceneSys::SceneSys()
 {
 	this->mOnSceneLoadedDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
@@ -118,3 +120,5 @@ void SceneSys::unloadAll()
 {
 	this->unloadScene();
 }
+
+MY_END_NAMESPACE

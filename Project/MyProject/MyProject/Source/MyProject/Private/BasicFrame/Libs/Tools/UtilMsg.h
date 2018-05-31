@@ -4,6 +4,9 @@
 #include "Platform.h"		// uint32
 #include <string>
 #include "NullUserCmd.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 处理消息工具
@@ -17,5 +20,7 @@ public:
 	// 格式化消息数据到数组形式
 	static void formatBytes2Array(char* bytes, uint32 len);
 };
+
+MY_END_NAMESPACE
 
 #endif

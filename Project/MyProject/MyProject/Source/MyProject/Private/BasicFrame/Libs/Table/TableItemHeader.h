@@ -2,6 +2,9 @@
 #define __TableItemHeader_H
 
 #include "MyProject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 
@@ -14,5 +17,7 @@ public:
     // 解析头部
 	virtual void parseHeaderByteBuffer(MByteBuffer* bytes);
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -6,6 +6,8 @@
 #include "Prequisites.h"
 #include "AddOnceEventDispatch.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MsgRouteHandleBase::MsgRouteHandleBase()
 {
 	
@@ -59,3 +61,5 @@ void MsgRouteHandleBase::handleMsg(IDispatchObject* dispObj, uint uniqueId)
 		//GLogSys->log(UtilStr::Format(Ctx.m_instance.m_langMgr.getText(LangTypeId.eMsgRoute1, LangItemID.eItem1), (int)msg.mMsgId));
 	}
 }
+
+MY_END_NAMESPACE

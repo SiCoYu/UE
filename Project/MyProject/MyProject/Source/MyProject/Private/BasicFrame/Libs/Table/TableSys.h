@@ -7,6 +7,9 @@
 #include "HAL/Platform.h"
 #include "TableId.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TableBase;
 class TableItemBase;
@@ -55,5 +58,7 @@ public:
     // 查找表中的一项
 	static TableItemBase* findDataItem(TableBase* table, uint32 id);
 };
+
+MY_END_NAMESPACE
 
 #endif

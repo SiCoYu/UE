@@ -4,6 +4,8 @@
 #include "ResEventDispatch.h"
 #include "IDispatchObject.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ResLoadResultNotify::ResLoadResultNotify()
 {
 	this->mResLoadState = MY_NEW ResLoadState();
@@ -47,3 +49,5 @@ void ResLoadResultNotify::copyFrom(ResLoadResultNotify* rhv)
 	this->mResLoadState->copyFrom(rhv->getResLoadState());
 	this->mLoadResEventDispatch = rhv->getLoadResEventDispatch();
 }
+
+MY_END_NAMESPACE

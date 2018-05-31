@@ -10,6 +10,8 @@
 #include "MClassMacros.h"
 #include "MClassFactory.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 M_IMPLEMENT_AND_REGISTER_CLASS(NetCmdDispatchHandle, GObject)
 
 NetCmdDispatchHandle::NetCmdDispatchHandle()
@@ -69,3 +71,5 @@ void NetCmdDispatchHandle::handleMsg(CmdDispatchInfo* cmd)
 		GLogSys->log(UtilStr::Format("消息没有处理: byCmd = {0},  byParam = {1}", cmd->byCmd, cmd->byParam));
 	}
 }
+
+MY_END_NAMESPACE

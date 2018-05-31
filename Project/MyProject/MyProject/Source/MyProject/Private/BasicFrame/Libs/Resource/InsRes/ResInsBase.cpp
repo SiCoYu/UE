@@ -6,6 +6,8 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ResInsBase::ResInsBase()
 {
 #ifdef PKG_RES_LOAD
@@ -93,3 +95,5 @@ std::string ResInsBase::getResUniqueId()
 {
 	return "";
 }
+
+MY_END_NAMESPACE

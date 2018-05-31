@@ -5,6 +5,9 @@
 #include "MsgRouteId.h"
 #include "EventDispatchDelegate.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class AddOnceEventDispatch;
 
@@ -25,5 +28,7 @@ public:
 	void removeMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle);
 	virtual void handleMsg(IDispatchObject* dispObj, uint uniqueId);
 };
+
+MY_END_NAMESPACE
 
 #endif

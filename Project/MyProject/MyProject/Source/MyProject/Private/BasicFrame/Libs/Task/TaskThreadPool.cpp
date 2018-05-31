@@ -4,6 +4,8 @@
 #include "TaskThread.h"
 #include "TaskQueue.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TaskThreadPool::TaskThreadPool()
 {
 
@@ -30,3 +32,5 @@ void TaskThreadPool::notifyIdleThread()
         }
     }
 }
+
+MY_END_NAMESPACE

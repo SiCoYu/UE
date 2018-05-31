@@ -10,6 +10,8 @@
 #include "ResLoadState.h"
 #include "MyDelegateLevelLoad.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 LevelLoadItem::LevelLoadItem()
 {
 	this->mMyDelegateLevelLoad = nullptr;
@@ -121,3 +123,5 @@ void LevelLoadItem::assetAssetBundlesLevelLoaded(IDispatchObject* dispObj)
 
 	this->mNonRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }
+
+MY_END_NAMESPACE

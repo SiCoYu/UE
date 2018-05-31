@@ -6,10 +6,14 @@
 #include "ResLoadType.h"
 #include <string>
 #include "Platform.h"
+#include "PlatformDefine.h"
+
+class UObject;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class RefCountResLoadResultNotify;
 class LoadItem;
-class UObject;
 class LoadParam;
 
 class ResItem : public IDispatchObject
@@ -61,5 +65,7 @@ public:
 	virtual std::string getResUniqueId();
 	void setLoadParam(LoadParam* param);
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -3,6 +3,9 @@
 
 #include <string>
 #include "UiFormId.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 using namespace NSFormId;
 
@@ -18,5 +21,7 @@ public:
 public:
 	UiLoadingItem();
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -4,6 +4,9 @@
 #include "ResInsMgrBase.h"
 #include "EventDispatchDelegate.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class ObjectAssetInsRes;
 
@@ -24,5 +27,7 @@ public:
 	ObjectAssetInsRes* getAndSyncLoadRes(std::string path, EventDispatchDelegate evtHandle);
 	ObjectAssetInsRes* getAndAsyncLoadRes(std::string path, EventDispatchDelegate evtHandle);
 };
+
+MY_END_NAMESPACE
 
 #endif

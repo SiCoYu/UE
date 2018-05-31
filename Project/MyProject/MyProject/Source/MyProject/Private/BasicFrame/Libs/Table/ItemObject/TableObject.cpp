@@ -3,6 +3,8 @@
 #include "MByteBuffer.h"
 #include "UtilTable.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TableObjectItemBody::TableObjectItemBody()
 {
 	
@@ -22,3 +24,5 @@ void TableObjectItemBody::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset)
 	bytes->readInt32(mColor);
 	UtilTable::readString(bytes, mObjResName);
 }
+
+MY_END_NAMESPACE

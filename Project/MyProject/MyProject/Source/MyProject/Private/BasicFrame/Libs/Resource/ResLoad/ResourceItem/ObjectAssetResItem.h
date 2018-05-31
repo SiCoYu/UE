@@ -3,8 +3,11 @@
 
 #include "ResItem.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
 
 class UObject;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief uasset 类型的资源
@@ -26,5 +29,7 @@ public:
 	virtual void init(LoadItem* item) override;
 	virtual void unload() override;
 };
+
+MY_END_NAMESPACE
 
 #endif

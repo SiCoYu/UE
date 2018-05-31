@@ -41,6 +41,8 @@
 
 #include "Core.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 #ifdef USE_EXTERN_THREAD
 
 	#ifdef SOCKETS_NAMESPACE
@@ -448,3 +450,5 @@ void NetMgr::setCryptKey(byte[] encrypt)
 	mCurClient.dataBuffer.setCryptKey(encrypt);
 }
 #endif
+
+MY_END_NAMESPACE

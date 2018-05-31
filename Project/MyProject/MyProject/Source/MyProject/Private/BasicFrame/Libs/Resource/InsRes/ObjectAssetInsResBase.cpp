@@ -6,6 +6,8 @@
 #include "ResInsEventDispatch.h"
 #include "MyGameInstanceBase.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ObjectAssetInsResBase::ObjectAssetInsResBase()
 {
 	this->mGo = nullptr;
@@ -74,3 +76,5 @@ void ObjectAssetInsResBase::unload()
 
 	Super::unload();
 }
+
+MY_END_NAMESPACE

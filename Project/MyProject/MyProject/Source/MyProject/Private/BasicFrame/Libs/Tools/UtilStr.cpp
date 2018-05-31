@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "UtilStr.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 std::string UtilStr::msDefaultStr = "";
 
 std::string UtilStr::Format(const char * format, ...)
@@ -167,3 +169,5 @@ std::string& UtilStr::replaceAllDistinct(std::string& str, const  std::string& o
 
 	return str;
 }
+
+MY_END_NAMESPACE

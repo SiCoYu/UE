@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "ClassAssetInsRes.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ClassAssetInsRes::ClassAssetInsRes()
 	: Super()
 {
@@ -11,3 +13,5 @@ ClassAssetInsRes::~ClassAssetInsRes()
 {
 	
 }
+
+MY_END_NAMESPACE

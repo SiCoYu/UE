@@ -13,6 +13,8 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 M_IMPLEMENT_AND_REGISTER_CLASS(GameRouteNotify, MsgRouteDispatchHandle)
 
 GameRouteNotify::GameRouteNotify()
@@ -41,3 +43,5 @@ void GameRouteNotify::dispose()
         this->mGameRouteHandle = nullptr;
     }
 }
+
+MY_END_NAMESPACE

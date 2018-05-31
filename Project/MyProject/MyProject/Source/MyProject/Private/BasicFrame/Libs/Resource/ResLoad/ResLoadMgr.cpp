@@ -24,6 +24,8 @@
 #include "LevelResItem.h"
 #include "UtilPath.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ResLoadMgr::ResLoadMgr()
 {
 	this->mMaxParral = 8;
@@ -549,3 +551,5 @@ LoadItem* ResLoadMgr::findLoadItemFormPool(ResPackType type)
 //	DataLoadItem loadItem = (msg as LoadedWebResMR).m_task as DataLoadItem;
 //	loadItem.handleResult();
 //}
+
+MY_END_NAMESPACE

@@ -6,6 +6,8 @@
 #include "Materials/MaterialInstance.h"	// UMaterialInstance, class UMaterialInstance : public UMaterialInterface
 #include "Materials/Material.h"	// UMaterial, class UMaterial : public UMaterialInterface
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MaterialInsRes::MaterialInsRes()
 {
 
@@ -44,3 +46,5 @@ void MaterialInsRes::unload()
 
 	Super::unload();
 }
+
+MY_END_NAMESPACE

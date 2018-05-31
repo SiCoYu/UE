@@ -1,6 +1,10 @@
 ﻿#ifndef __ProtoCV_H_
 #define __ProtoCV_H_
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 enum class ProtoCV
 {
 	GAME_VERSION = 1999,
@@ -38,5 +42,7 @@ enum class ERetResult
 	LOGIN_RETURN_NEWUSER_OLDZONE,      ///新账号不允许登入旧的游戏区 
 	LOGIN_RETURN_CHARNAME_FORBID = 36,
 };
+
+MY_END_NAMESPACE
 
 #endif

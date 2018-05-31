@@ -1,6 +1,10 @@
 ﻿#ifndef __PointF_H
 #define __PointF_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 class PointF
 {
 protected:

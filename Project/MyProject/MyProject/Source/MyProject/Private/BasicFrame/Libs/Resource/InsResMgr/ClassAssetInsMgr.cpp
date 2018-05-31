@@ -2,6 +2,8 @@
 #include "ClassAssetInsRes.h"
 #include "ClassAssetInsMgr.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ClassAssetInsMgr::ClassAssetInsMgr()
 {
 
@@ -36,3 +38,5 @@ ClassAssetInsRes* ClassAssetInsMgr::getAndAsyncLoadRes(std::string path, EventDi
 {
 	return this->getAndAsyncLoad<ClassAssetInsRes>(path, handle);
 }
+
+MY_END_NAMESPACE

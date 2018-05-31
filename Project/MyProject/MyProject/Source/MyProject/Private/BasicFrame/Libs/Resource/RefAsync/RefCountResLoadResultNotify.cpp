@@ -7,6 +7,8 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 RefCountResLoadResultNotify::RefCountResLoadResultNotify()
 {
 	this->mRefCount = MY_NEW RefCount();
@@ -32,3 +34,5 @@ void RefCountResLoadResultNotify::copyFrom(ResLoadResultNotify* rhv)
 	ResLoadResultNotify::copyFrom(rhv);
 	this->mRefCount->copyFrom(((RefCountResLoadResultNotify*)(rhv))->getRefCount());
 }
+
+MY_END_NAMESPACE

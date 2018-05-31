@@ -5,6 +5,9 @@
 #include "BaseClassDef.h"	// M_DECLARE_SUPER_KW
 #include "MClassMacros.h"	// M_DECLARE_CLASS
 #include "MClassInfo.h"		// MClassInfo
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class GameRouteHandle;
 
@@ -20,3 +23,5 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 };
+
+MY_END_NAMESPACE

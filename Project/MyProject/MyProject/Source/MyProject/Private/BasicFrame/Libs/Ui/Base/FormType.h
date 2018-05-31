@@ -1,6 +1,10 @@
 #ifndef __FormType_H
 #define __FormType_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 namespace NSFormType
 {
 	enum FormType
@@ -16,5 +20,7 @@ namespace NSFormType
 		eGameInstance,
 	};
 }
+
+MY_END_NAMESPACE
 
 #endif

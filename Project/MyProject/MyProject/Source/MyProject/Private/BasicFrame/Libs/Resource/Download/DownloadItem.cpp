@@ -5,6 +5,8 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 DownloadItem::DownloadItem()
 {
 	this->mResLoadType = eLoadWeb;
@@ -154,3 +156,5 @@ void DownloadItem::writeFile()
 {
     
 }
+
+MY_END_NAMESPACE

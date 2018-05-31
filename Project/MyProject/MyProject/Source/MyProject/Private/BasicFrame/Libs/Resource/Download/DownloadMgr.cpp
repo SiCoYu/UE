@@ -7,6 +7,8 @@
 #include "HttpWebDownloadItem.h"
 #include "RefCount.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 DownloadMgr::DownloadMgr()
 {
     this->mMaxParral = 8;
@@ -409,3 +411,5 @@ void DownloadMgr::onMsgRouteResLoad(IDispatchObject* dispObj)
     DownloadItem loadItem = (msg as LoadedWebResMR).m_task as DownloadItem;
     loadItem.handleResult();*/
 }
+
+MY_END_NAMESPACE

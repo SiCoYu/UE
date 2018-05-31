@@ -2,6 +2,8 @@
 #include "IPoolObject.h"
 #include "StrIdObjectPoolGroup.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 StrIdObjectPoolGroup::StrIdObjectPoolGroup()
 {
 	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");

@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "PointF.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 PointF::PointF(float x, float y)
 {
 	m_x = x;

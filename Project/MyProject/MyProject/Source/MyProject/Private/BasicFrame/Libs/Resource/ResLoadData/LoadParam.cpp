@@ -3,6 +3,8 @@
 #include "UtilStr.h"
 #include "UtilLogic.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 LoadParam::LoadParam()
 {
 	this->init();
@@ -250,3 +252,5 @@ void LoadParam::resolveLevel()
 		this->mLvlName = UtilLogic::convScenePath2LevelName(this->mOrigPath);
 	}
 }
+
+MY_END_NAMESPACE

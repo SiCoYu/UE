@@ -2,6 +2,8 @@
 #include "UiLayer.h"
 #include "Form.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 UiLayer::UiLayer(UiLayerId layerID)
 {
 
@@ -78,3 +80,5 @@ void UiLayer::findLayerGOAndTrans()
 {
 	//mLayerTrans = Ctx.m_instance.m_layerMgr.m_path2Go[mActorName].transform;
 }
+
+MY_END_NAMESPACE

@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "MRay.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 FVector& MRay::getRayOrigin()
 {
 	return m_rayOrigin;

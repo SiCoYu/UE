@@ -1,8 +1,11 @@
 ﻿#pragma once
 
 #include "DownloadItem.h"
+#include "PlatformDefine.h"
 
 class HttpWeb;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 使用 HttpWeb 从网络下载数据
@@ -35,3 +38,5 @@ public:
     // 处理结果在这回调，然后分发给资源处理器，如果资源提前释放，就自动断开资源和加载器的事件分发就行了，不用在线程中处理了
 	virtual void handleResult() override;
 };
+
+MY_END_NAMESPACE

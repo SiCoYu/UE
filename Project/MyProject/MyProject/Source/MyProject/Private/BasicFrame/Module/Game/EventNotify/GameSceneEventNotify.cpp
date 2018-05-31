@@ -8,6 +8,8 @@
 	#include "TestMain.h"
 #endif
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 GameSceneEventNotify::GameSceneEventNotify()
 {
 	
@@ -46,3 +48,5 @@ void GameSceneEventNotify::runTest()
 	this->mTestMain->runTest();
 #endif
 }
+
+MY_END_NAMESPACE

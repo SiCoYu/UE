@@ -2,6 +2,9 @@
 #define __MsgRouteNotify_H
 
 #include "MList.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MsgRouteDispatchHandle;
 class MsgRouteBase;
@@ -16,5 +19,7 @@ public:
 	void removeOneNotify(MsgRouteDispatchHandle* disp);
 	void handleMsg(MsgRouteBase* msg);
 };
+
+MY_END_NAMESPACE
 
 #endif

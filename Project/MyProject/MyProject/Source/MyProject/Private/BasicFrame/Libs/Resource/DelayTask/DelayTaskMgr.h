@@ -4,6 +4,9 @@
 #include "IDelayTask.h"
 #include <list>
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class DelayTaskMgr : public GObject, public ITickedObject
 {
@@ -28,3 +31,5 @@ public:
 	void addTask(IDelayTask* task);
 	void execTask();
 };
+
+MY_END_NAMESPACE

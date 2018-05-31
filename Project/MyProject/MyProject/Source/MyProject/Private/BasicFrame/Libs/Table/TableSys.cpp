@@ -12,6 +12,8 @@
 #include "MByteBuffer.h"
 #include "Prequisites.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TableSys::TableSys()
 {
 	this->mDicTable[TableId::TABLE_OBJECT] = MY_NEW TableBase("ObjectBase_client.bytes", "ObjectBase_client");
@@ -209,3 +211,5 @@ TableItemBase* TableSys::findDataItem(TableBase* table, uint32 id)
 
 	return nullptr;
 }
+
+MY_END_NAMESPACE

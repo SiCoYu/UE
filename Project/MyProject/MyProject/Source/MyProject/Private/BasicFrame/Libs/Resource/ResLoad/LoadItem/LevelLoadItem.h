@@ -7,8 +7,11 @@
 #include "MyDelegateDef.h"
 #include "IDispatchObject.h"
 #include "Delegates/IDelegateInstance.h"	// FDelegateHandle
+#include "PlatformDefine.h"
 
 class UMyDelegateLevelLoad;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
 * @brief 从本地磁盘加载 umap 扩展类型的资源
@@ -41,5 +44,7 @@ protected:
 	void loadFromAssetBundle();
 	void assetAssetBundlesLevelLoaded(IDispatchObject* dispObj);
 };
+
+MY_END_NAMESPACE
 
 #endif

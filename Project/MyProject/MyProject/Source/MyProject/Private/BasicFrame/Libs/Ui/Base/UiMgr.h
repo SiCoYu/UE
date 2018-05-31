@@ -11,11 +11,14 @@
 #include "UiAttrSystem.h"
 #include "Form.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
 
 using namespace NSFormId;
-using namespace MyNS;
 
 class UForm;
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 class UiCanvas;
 class UiAttrSystem;
 class UiLoadingItem;
@@ -89,4 +92,6 @@ public:
 
 #include "UiMgr.inl"			// 模板具体的实现
 
-#endif				// __UIMANAGER_H
+MY_END_NAMESPACE
+
+#endif				// __UiMgr_H

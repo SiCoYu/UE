@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Async/TaskGraphInterfaces.h"		// FGraphEventArray
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 template <class T>
 class MUe4Task
@@ -71,3 +74,5 @@ public:
 		}
 	}
 };
+
+MY_END_NAMESPACE

@@ -3,6 +3,9 @@
 
 #include "IDispatchObject.h"
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class RefCountResLoadResultNotify;
 class ResItem;
@@ -41,5 +44,7 @@ public:
 	virtual std::string getOrigPath();
 	virtual std::string getResUniqueId();
 };
+
+MY_END_NAMESPACE
 
 #endif

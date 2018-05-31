@@ -7,6 +7,8 @@
 #include "UtilStr.h"
 #include "MsgRouteHandleBase.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 M_IMPLEMENT_AND_REGISTER_CLASS(MsgRouteDispatchHandle, GObject)
 
 MsgRouteDispatchHandle::MsgRouteDispatchHandle()
@@ -53,3 +55,5 @@ void MsgRouteDispatchHandle::handleMsg(MsgRouteBase* msg)
 		textStr = "aaaa";
 	}
 }
+
+MY_END_NAMESPACE

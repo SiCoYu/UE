@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "DownloadParam.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 DownloadParam::DownloadParam()
 {
     reset();
@@ -34,3 +36,5 @@ void DownloadParam::setPath(std::string origPath)
     //    mResPackType = eDataType;
     //}
 }
+
+MY_END_NAMESPACE

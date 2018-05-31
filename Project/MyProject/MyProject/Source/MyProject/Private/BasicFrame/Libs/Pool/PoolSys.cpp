@@ -2,6 +2,8 @@
 #include "IPoolObject.h"
 #include "PoolSys.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 PoolSys::PoolSys()
 {
 	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");

@@ -5,6 +5,10 @@
 
 #include <vector>
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  *@brief 主要是一些容器辅助功能
  */
@@ -81,5 +85,6 @@ public:
 //================== 实现区域 ====================
 #include "UtilContainers.inl"
 
+MY_END_NAMESPACE
 
 #endif

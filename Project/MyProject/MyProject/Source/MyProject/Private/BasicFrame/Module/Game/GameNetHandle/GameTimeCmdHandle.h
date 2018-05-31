@@ -2,6 +2,9 @@
 
 #include "NetCmdDispatchHandle.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class IDispatchObject;
 
@@ -17,3 +20,5 @@ public:
 
 	void onParamHandle(IDispatchObject* dispObj);
 };
+
+MY_END_NAMESPACE

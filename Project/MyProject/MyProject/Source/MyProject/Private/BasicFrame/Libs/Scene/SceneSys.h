@@ -4,6 +4,9 @@
 #include <string>
 #include "AuxLevelLoader.h"	// AuxLevelLoader, Namespace 必须包含
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class AddOnceAndCallOnceEventDispatch;
 class Scene;
@@ -36,3 +39,5 @@ public:
     // 卸载多有的场景
 	void unloadAll();
 };
+
+MY_END_NAMESPACE

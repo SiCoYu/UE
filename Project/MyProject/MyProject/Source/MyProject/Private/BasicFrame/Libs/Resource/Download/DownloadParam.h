@@ -1,15 +1,12 @@
 ﻿#pragma once
 
-enum DownloadType
-{
-	eHttpWeb,
-	eDownloadTypeTotal
-};
-
 #include <string>
 #include "EventDispatchDelegate.h"
 #include "ResLoadType.h"
 #include "ResPackType.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 下载参数
@@ -38,3 +35,5 @@ public:
 	void reset();
 	void setPath(std::string origPath);
 };
+
+MY_END_NAMESPACE

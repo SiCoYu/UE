@@ -1,6 +1,10 @@
 ﻿#ifndef __ResLoadType_H
 #define __ResLoadType_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief 资源加载类型，主要是从哪里加载
  */
@@ -33,5 +37,7 @@ enum ResLoadPoint
 	eConstruct,		// 同步
 	eOther,		// 异步
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -4,6 +4,9 @@
 //#include "MaterialShared.h"	// FMaterial
 #include "BaseClassDef.h"
 #include "ResInsBase.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
 * @brief
@@ -44,3 +47,5 @@ protected:
 public:
 	virtual void unload() override;
 };
+
+MY_END_NAMESPACE

@@ -3,6 +3,8 @@
 #include "MsgRouteBase.h"
 #include "MsgRouteDispatchHandle.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void MsgRouteNotify::addOneNotify(MsgRouteDispatchHandle* disp)
 {
 	if (this->mDispatchList.contains(disp))
@@ -28,3 +30,5 @@ void MsgRouteNotify::handleMsg(MsgRouteBase* msg)
 
 	//Ctx.m_instance.mPoolSys.deleteObj(msg);
 }
+
+MY_END_NAMESPACE

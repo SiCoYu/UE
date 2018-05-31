@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "RefCount.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 RefCount::RefCount()
 {
 	this->mRefNum = 0;       // 引用计数从 1 改成 0 
@@ -39,3 +41,5 @@ void RefCount::copyFrom(RefCount* rhv)
 {
 	this->mRefNum = rhv->getRefNum();
 }
+
+MY_END_NAMESPACE

@@ -5,6 +5,9 @@
 #include "UiLayer.h"
 #include "UiLayerId.h"
 #include "UiCanvasId.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
 * @brief ÃèÊöÒ»¸ö Canvas
@@ -22,3 +25,5 @@ public:
 	std::vector<UiLayer*>& getLayerList();
 	void findCanvasActor();
 };
+
+MY_END_NAMESPACE

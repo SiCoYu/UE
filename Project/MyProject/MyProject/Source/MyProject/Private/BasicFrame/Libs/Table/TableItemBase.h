@@ -5,6 +5,9 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TableItemHeader;
 class TableItemBodyBase;
@@ -50,5 +53,7 @@ void TableItemBase::parseAllByteBuffer(MByteBuffer* bytes)
 	// 移动到下一个 Item 头位置
 	bytes->setPos(UtilTable::mPrePos);
 }
+
+MY_END_NAMESPACE
 
 #endif

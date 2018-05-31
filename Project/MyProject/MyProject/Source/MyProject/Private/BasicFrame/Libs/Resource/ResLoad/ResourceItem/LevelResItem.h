@@ -2,6 +2,9 @@
 #define __LevelResItem_H
 
 #include "ResItem.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class LoadItem;
 
@@ -17,5 +20,7 @@ public:
 	virtual void init(LoadItem* item) override;
 	void setLevelName(std::string lvlName);
 };
+
+MY_END_NAMESPACE
 
 #endif

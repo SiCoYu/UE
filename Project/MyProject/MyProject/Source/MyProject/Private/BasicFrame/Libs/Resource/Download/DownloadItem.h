@@ -8,6 +8,9 @@
 #include "RefCountResLoadResultNotify.h"
 #include "ResEventDispatch.h"
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 从网络下载数据
@@ -75,3 +78,5 @@ public:
     // 加载完成写入本地文件系统
     virtual void writeFile();
 };
+
+MY_END_NAMESPACE

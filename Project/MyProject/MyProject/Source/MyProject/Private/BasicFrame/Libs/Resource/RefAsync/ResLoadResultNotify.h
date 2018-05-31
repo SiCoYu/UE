@@ -2,6 +2,9 @@
 #define __ResLoadResultNotify_H
 
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class ResLoadState;
 class ResEventDispatch;
@@ -27,5 +30,7 @@ public:
 	void onLoadEventHandle(IDispatchObject* dispObj);
 	virtual void copyFrom(ResLoadResultNotify* rhv);
 };
+
+MY_END_NAMESPACE
 
 #endif

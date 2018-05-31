@@ -4,6 +4,9 @@
 #include "EventDispatchGroup.h"
 #include "EventDispatchDelegate.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MsgRouteBase;
 
@@ -25,5 +28,7 @@ public:
 
 	virtual void handleMsg(MsgRouteBase* msg);
 };
+
+MY_END_NAMESPACE
 
 #endif

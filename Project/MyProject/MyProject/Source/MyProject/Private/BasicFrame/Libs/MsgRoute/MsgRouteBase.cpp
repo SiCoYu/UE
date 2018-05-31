@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "MsgRouteBase.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MsgRouteBase::MsgRouteBase()
 {
 
@@ -21,3 +23,5 @@ void MsgRouteBase::resetDefault()
 {
 
 }
+
+MY_END_NAMESPACE

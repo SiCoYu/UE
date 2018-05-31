@@ -2,6 +2,8 @@
 #include "GameTimeCmdHandle.h"
 #include "EventDispatchDelegate.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 GameTimeCmdHandle::GameTimeCmdHandle()
 {
 
@@ -37,3 +39,5 @@ void GameTimeCmdHandle::onParamHandle(IDispatchObject* dispObj)
 {
 
 }
+
+MY_END_NAMESPACE

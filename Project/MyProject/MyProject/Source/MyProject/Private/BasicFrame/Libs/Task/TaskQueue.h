@@ -3,6 +3,9 @@
 #include "LockQueue.h"
 #include "ITask.h"
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TaskThreadPool;
 
@@ -19,3 +22,5 @@ public:
 public:
 	void push(ITask* item);
 };
+
+MY_END_NAMESPACE

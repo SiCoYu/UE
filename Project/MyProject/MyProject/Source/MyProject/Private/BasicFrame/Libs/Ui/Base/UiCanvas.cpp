@@ -4,6 +4,8 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 UiCanvas::UiCanvas(UiCanvasId canvasID)
 {
 	this->mCanvasId = canvasID;
@@ -52,3 +54,5 @@ void UiCanvas::findCanvasActor()
 	//	mLayerList[idx].findLayerGOAndTrans();
 	//}
 }
+
+MY_END_NAMESPACE

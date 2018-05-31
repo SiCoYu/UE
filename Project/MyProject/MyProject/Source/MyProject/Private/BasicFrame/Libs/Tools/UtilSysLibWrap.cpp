@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "UtilSysLibWrap.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 FVector UtilSysLibWrap::FAKE_POS = FVector(-1000, 0, -1000);
 
 TScriptDelegate<FWeakObjectPtr> UtilSysLibWrap::addUObjectButtonClickHandle(UUserWidget* widget, const FName& buttonName, UObject* pThis, const FName& functionName)
@@ -36,3 +38,5 @@ void UtilSysLibWrap::DestroyImmediate(AActor* actor, bool bNetForce, bool bShoul
 		actor->Destroy(bNetForce, bShouldModifyLevel);
 	}
 }
+
+MY_END_NAMESPACE

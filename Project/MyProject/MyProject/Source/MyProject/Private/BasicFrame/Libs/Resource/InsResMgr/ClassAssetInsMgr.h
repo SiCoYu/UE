@@ -3,6 +3,9 @@
 
 #include "ResInsMgrBase.h"
 #include "ResPackType.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 类管理器， Blueprint
@@ -24,5 +27,7 @@ public:
 	ClassAssetInsRes* getAndSyncLoadRes(std::string path, EventDispatchDelegate handle = nullptr);
 	ClassAssetInsRes* getAndAsyncLoadRes(std::string path, EventDispatchDelegate handle = nullptr);
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -3,6 +3,8 @@
 #include "MByteBuffer.h"
 #include "TableItemHeader.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TableItemBase::TableItemBase()
 	: mItemHeader(nullptr), mItemBody(nullptr)
 {
@@ -18,3 +20,5 @@ void TableItemBase::parseHeaderByteBuffer(MByteBuffer* bytes)
 
 	this->mItemHeader->parseHeaderByteBuffer(bytes);
 }
+
+MY_END_NAMESPACE

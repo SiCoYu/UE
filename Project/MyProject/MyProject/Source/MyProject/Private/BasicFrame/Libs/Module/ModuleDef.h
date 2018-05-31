@@ -1,6 +1,9 @@
 ﻿#pragma once
 
 #include <string>
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class ModulePath
 {
@@ -24,3 +27,5 @@ enum ModuleId
 	GAMEMN,
 	AUTOUPDATEMN,
 };
+
+MY_END_NAMESPACE

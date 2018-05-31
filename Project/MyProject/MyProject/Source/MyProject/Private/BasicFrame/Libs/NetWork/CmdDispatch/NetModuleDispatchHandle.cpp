@@ -11,6 +11,8 @@
 #include "MClassMacros.h"
 #include "MClassFactory.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 M_IMPLEMENT_AND_REGISTER_CLASS(NetModuleDispatchHandle, GObject)
 
 NetModuleDispatchHandle::NetModuleDispatchHandle()
@@ -72,3 +74,5 @@ void NetModuleDispatchHandle::handleMsg(CmdDispatchInfo* cmdDispInfo)
     //    mLuaCSBridgeNetDispHandle.handleMsg(msg, byCmd, byParam);
     //}
 }
+
+MY_END_NAMESPACE
