@@ -4,6 +4,9 @@
 #include "DelayHandleMgrBase.h"
 #include "MList.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TickProcessObject;
 class ITickedObject;
@@ -31,5 +34,7 @@ public:
 	virtual void delObject(IDelayHandleItem* delayObject) override;
 	void Advance(float delta);
 };
+
+MY_END_NAMESPACE
 
 #endif

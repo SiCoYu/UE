@@ -2,6 +2,8 @@
 #include "EngineLoop.h"
 #include "Prequisites.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 EngineLoop::EngineLoop()
 {
 
@@ -75,3 +77,5 @@ void EngineLoop::postUpdate()
 {
 	//Ctx.mInstance.mPlayerMgr.postUpdate();
 }
+
+MY_END_NAMESPACE

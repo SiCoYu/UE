@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "SystemFrameData.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 SystemFrameData::SystemFrameData()
 {
 
@@ -36,3 +38,5 @@ void SystemFrameData::dispose()
 {
 
 }
+
+MY_END_NAMESPACE

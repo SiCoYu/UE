@@ -3,6 +3,8 @@
 #include "Prequisites.h"
 #include "EventDispatchFunctionObject.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 EventDispatch::EventDispatch(int eventId_)
 {
 	this->mEventId = eventId_;
@@ -169,3 +171,5 @@ int EventDispatch::getEventHandleCount()
 {
 	return this->mHandleList.count();
 }
+
+MY_END_NAMESPACE

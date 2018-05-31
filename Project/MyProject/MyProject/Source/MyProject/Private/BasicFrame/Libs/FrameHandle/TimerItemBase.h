@@ -1,6 +1,10 @@
 ﻿#ifndef __TimerItemBase_H
 #define __TimerItemBase_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 #include "IDelayHandleItem.h"
 #include "TimerDelegate.h"
 
@@ -27,5 +31,7 @@ public:
 	void setClientDispose();
 	bool isClientDispose();
 };
+
+MY_END_NAMESPACE
 
 #endif

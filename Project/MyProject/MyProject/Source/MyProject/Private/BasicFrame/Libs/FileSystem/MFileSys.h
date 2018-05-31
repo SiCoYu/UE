@@ -4,9 +4,13 @@
 #include <string>
 #include <vector>
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+class FSandboxPlatformFile;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class LoadParam;
-class FSandboxPlatformFile;
 
 /**
  * @brief 本地文件系统
@@ -63,5 +67,7 @@ public:
 
 	void addSearchPath(std::string path);
 };
+
+MY_END_NAMESPACE
 
 #endif

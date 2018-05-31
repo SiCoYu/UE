@@ -2,6 +2,9 @@
 
 #include <string>
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 系统设置
@@ -19,3 +22,5 @@ public:
 	void setString(std::string key, std::string value);
 	std::string getString(std::string key);
 };
+
+MY_END_NAMESPACE

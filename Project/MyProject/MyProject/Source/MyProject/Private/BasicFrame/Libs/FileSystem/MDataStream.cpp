@@ -6,6 +6,8 @@
 #include "Misc/FileHelper.h"		// FFileHelper
 #include "AddOnceAndCallOnceEventDispatch.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MDataStream::MDataStream(std::string filePath, EventDispatchDelegate openedDisp, MFileMode mode, MFileAccess access, bool isSyncMode)
 {
 	this->mFilePath = filePath;
@@ -187,3 +189,5 @@ void MDataStream::writeLine(std::string text, GkEncode gkEncode)
 	//text = text + UtilSysLibWrap.CR_LF;
 	this->writeText(text, gkEncode);
 }
+
+MY_END_NAMESPACE

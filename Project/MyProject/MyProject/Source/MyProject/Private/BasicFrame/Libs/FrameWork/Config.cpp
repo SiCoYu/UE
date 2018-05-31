@@ -2,6 +2,8 @@
 #include "Config.h"
 #include "UtilContainers.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 std::string Config::StreamingAssets = "StreamingAssets/";
 std::string Config::UIModelLayer = "UIModel";
 

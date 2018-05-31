@@ -2,6 +2,8 @@
 #include "ProcessSys.h"
 #include "Prequisites.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ProcessSys::ProcessSys()
 {
 
@@ -33,3 +35,5 @@ void ProcessSys::Advance(float delta)
 	GTimerMgr->Advance(delta);           // 定时器
 	GFrameTimerMgr->Advance(delta);      // 帧定时器
 }
+
+MY_END_NAMESPACE

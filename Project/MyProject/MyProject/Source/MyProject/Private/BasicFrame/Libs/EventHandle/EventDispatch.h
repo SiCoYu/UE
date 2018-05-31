@@ -5,6 +5,9 @@
 #include "MList.h"
 #include "EventDispatchDelegate.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class EventDispatchFunctionObject;
 
@@ -44,5 +47,7 @@ public:
 	bool hasEventHandle();
 	int getEventHandleCount();
 };
+
+MY_END_NAMESPACE
 
 #endif

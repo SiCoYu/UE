@@ -2,6 +2,9 @@
 #define __SystemTimeData_H
 
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class SystemTimeData : public GObject
 {
@@ -23,5 +26,7 @@ public:
 	void setCurTime(long value);
 	void nextFrame();
 };
+
+MY_END_NAMESPACE
 
 #endif

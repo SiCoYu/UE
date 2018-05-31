@@ -3,8 +3,12 @@
 #include "EventDispatch.h"
 #include "IDispatchObject.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
 
 class AActor;
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 class IDispatchObject;
 
 /**
@@ -28,3 +32,5 @@ public:
 	AActor* getInsGO();
 	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;
 };
+
+MY_END_NAMESPACE

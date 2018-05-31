@@ -11,6 +11,9 @@
 #include "Containers/UnrealString.h"
 #include "IPlatformFileSandboxWrapper.h"
 #include "CoreInc.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 class UiMgr;
 class UGameInstance;

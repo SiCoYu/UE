@@ -6,6 +6,8 @@
 #include "UtilStr.h"
 #include "UtilPath.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 std::string MFileSys::msPersistentDataPath = "";
 std::string MFileSys::msStreamingAssetsPath = "";
 
@@ -112,3 +114,5 @@ void MFileSys::addSearchPath(std::string path)
 {
 	
 }
+
+MY_END_NAMESPACE

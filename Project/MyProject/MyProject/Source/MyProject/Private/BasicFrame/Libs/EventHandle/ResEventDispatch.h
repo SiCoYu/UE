@@ -3,6 +3,9 @@
 
 #include "EventDispatch.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class IDispatchObject;
 
@@ -15,5 +18,7 @@ public:
 	virtual ~ResEventDispatch();
 	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;
 };
+
+MY_END_NAMESPACE
 
 #endif

@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "TimerItemBase.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TimerItemBase::TimerItemBase()
 {
 	this->mInternal = 1;
@@ -78,3 +80,5 @@ bool TimerItemBase::isClientDispose()
 {
 	return false;
 }
+
+MY_END_NAMESPACE

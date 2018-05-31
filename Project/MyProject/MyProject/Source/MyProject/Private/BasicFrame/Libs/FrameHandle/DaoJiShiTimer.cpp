@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "DaoJiShiTimer.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void DaoJiShiTimer::OnTimer(float delta)
 {
 	if (this->mIsDisposed)
@@ -34,3 +36,5 @@ void DaoJiShiTimer::reset()
 	this->mCurLeftTimer = 0;
 	this->mIsDisposed = false;
 }
+
+MY_END_NAMESPACE

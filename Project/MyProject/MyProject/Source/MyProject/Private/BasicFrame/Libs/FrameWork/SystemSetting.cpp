@@ -1,6 +1,8 @@
 ﻿#include <MyProject.h>
 #include <SystemSetting.h>
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 std::string USERNAME = "username";
 std::string PASSWORD = "password";
 
@@ -23,3 +25,5 @@ std::string SystemSetting::getString(std::string key)
 {
     return "";
 }
+
+MY_END_NAMESPACE

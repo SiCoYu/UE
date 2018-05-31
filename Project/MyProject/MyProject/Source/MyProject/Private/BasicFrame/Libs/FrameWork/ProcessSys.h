@@ -1,6 +1,9 @@
 ﻿#pragma once
 
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 系统循环
@@ -17,3 +20,5 @@ public:
 	void ProcessNextFrame();
 	void Advance(float delta);
 };
+
+MY_END_NAMESPACE

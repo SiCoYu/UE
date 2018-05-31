@@ -3,6 +3,9 @@
 
 #include "MDictionary.h"
 #include "EventDispatchDelegate.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class EventDispatch;
 
@@ -23,5 +26,7 @@ public:
 	void clearGroupEventHandle(int groupId);
 	bool hasEventHandle(int groupId);
 };
+
+MY_END_NAMESPACE
 
 #endif

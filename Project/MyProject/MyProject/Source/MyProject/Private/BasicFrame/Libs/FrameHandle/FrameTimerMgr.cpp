@@ -4,6 +4,8 @@
 #include "FrameTimerItem.h"
 #include "UtilContainers.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 FrameTimerMgr::FrameTimerMgr()
 {
 
@@ -84,3 +86,5 @@ void FrameTimerMgr::Advance(float delta)
 
 	this->decDepth();
 }
+
+MY_END_NAMESPACE

@@ -2,6 +2,8 @@
 #include "ResInsEventDispatch.h"
 #include "UtilSysLibWrap.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ResInsEventDispatch::ResInsEventDispatch()
 {
 	this->mIsValid = true;
@@ -38,3 +40,5 @@ void ResInsEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 		UtilSysLibWrap::Destroy(this->mInsGO);
 	}
 }
+
+MY_END_NAMESPACE

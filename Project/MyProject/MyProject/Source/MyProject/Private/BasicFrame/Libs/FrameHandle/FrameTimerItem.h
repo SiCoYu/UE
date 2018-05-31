@@ -3,6 +3,9 @@
 
 #include "IDelayHandleItem.h"
 #include "TimerDelegate.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 定时器，这个是不断增长的
@@ -27,5 +30,7 @@ public:
 	void setClientDispose();
 	bool isClientDispose();
 };
+
+MY_END_NAMESPACE
 
 #endif

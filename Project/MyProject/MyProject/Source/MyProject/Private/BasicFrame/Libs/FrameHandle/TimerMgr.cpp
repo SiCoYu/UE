@@ -3,6 +3,8 @@
 #include "UtilContainers.h"
 #include "TimerItemBase.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TimerMgr::TimerMgr()
 {
 
@@ -86,3 +88,5 @@ void TimerMgr::Advance(float delta)
 
 	this->decDepth();
 }
+
+MY_END_NAMESPACE

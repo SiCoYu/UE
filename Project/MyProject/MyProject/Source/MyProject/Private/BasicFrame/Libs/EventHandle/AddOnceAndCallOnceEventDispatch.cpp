@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "AddOnceAndCallOnceEventDispatch.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void AddOnceAndCallOnceEventDispatch::addEventHandle(EventDispatchDelegate handle)
 {
 	if (!this->isExistEventHandle(handle))
@@ -14,3 +16,5 @@ void AddOnceAndCallOnceEventDispatch::dispatchEvent(IDispatchObject* dispatchObj
 	Super::dispatchEvent(dispatchObject);
 	this->clearEventHandle();
 }
+
+MY_END_NAMESPACE

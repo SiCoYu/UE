@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "AddOnceEventDispatch.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 AddOnceEventDispatch::AddOnceEventDispatch(int eventId_)
 	: EventDispatch(eventId_)
 {
@@ -15,3 +17,5 @@ void AddOnceEventDispatch::addEventHandle(EventDispatchDelegate handle)
 		Super::addEventHandle(handle);
 	}
 }
+
+MY_END_NAMESPACE

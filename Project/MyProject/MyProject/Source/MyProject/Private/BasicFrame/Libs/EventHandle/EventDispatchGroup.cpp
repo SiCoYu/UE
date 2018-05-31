@@ -4,6 +4,8 @@
 #include "UtilContainers.h"
 #include "EventDispatch.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 EventDispatchGroup::EventDispatchGroup()
 {
 	this->mIsInLoop = false;
@@ -100,3 +102,5 @@ bool EventDispatchGroup::hasEventHandle(int groupId)
 
 	return ret;
 }
+
+MY_END_NAMESPACE

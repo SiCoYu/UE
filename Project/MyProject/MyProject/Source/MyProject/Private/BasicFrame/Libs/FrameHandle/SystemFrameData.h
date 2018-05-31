@@ -3,6 +3,9 @@
 
 #include "Platform.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class SystemFrameData : public GObject
 {
@@ -22,5 +25,7 @@ public:
 	uint32 getTotalFrameCount();
 	void nextFrame(float delta);
 };
+
+MY_END_NAMESPACE
 
 #endif

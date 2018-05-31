@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "ShareData.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ShareData::ShareData()
 	: mTmpStr("")
 {
@@ -21,3 +23,5 @@ void ShareData::dispose()
 {
 
 }
+
+MY_END_NAMESPACE

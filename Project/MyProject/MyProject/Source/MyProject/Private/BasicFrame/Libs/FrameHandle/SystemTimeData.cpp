@@ -2,6 +2,8 @@
 #include "SystemTimeData.h"
 #include "UtilEngineWrap.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 SystemTimeData::SystemTimeData()
 {
 	this->mPreTime = 0;
@@ -54,3 +56,5 @@ void SystemTimeData::nextFrame()
 
 	this->mPreTime = this->mCurTime;
 }
+
+MY_END_NAMESPACE

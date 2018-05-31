@@ -5,11 +5,15 @@
 #include <string>
 #include "EventDispatchDelegate.h"
 #include "GkEncode.h"
+#include "PlatformDefine.h"
 
 using namespace NSEncode;
 
-class AddOnceAndCallOnceEventDispatch;
 class FArchive;
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+class AddOnceAndCallOnceEventDispatch;
 
 /**
  * @brief 仅支持本地文件操作，仅支持同步操作
@@ -105,3 +109,5 @@ public:
 	void writeByte(unsigned char* bytes, int offset = 0, int count = 0);
 	void writeLine(std::string text, GkEncode gkEncode = NSEncode::eUTF8);
 };
+
+MY_END_NAMESPACE

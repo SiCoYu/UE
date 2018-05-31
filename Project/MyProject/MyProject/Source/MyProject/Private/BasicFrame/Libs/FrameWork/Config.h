@@ -7,6 +7,9 @@
 #include "ResLoadType.h"
 #include "ResPathType.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 宏定义说明区域

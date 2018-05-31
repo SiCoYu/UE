@@ -4,6 +4,8 @@
 #include "TickProcessObject.h"
 #include "IDelayHandleItem.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TickMgr::TickMgr()
 {
 
@@ -104,3 +106,5 @@ void TickMgr::Advance(float delta)
 
 	this->decDepth();
 }
+
+MY_END_NAMESPACE

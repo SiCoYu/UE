@@ -4,6 +4,9 @@
 #include "DelayHandleMgrBase.h"
 #include <vector>
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class FrameTimerItem;
 
@@ -30,5 +33,7 @@ public:
 	virtual void delObject(IDelayHandleItem* delayObject) override;
 	void Advance(float delta);
 };
+
+MY_END_NAMESPACE
 
 #endif

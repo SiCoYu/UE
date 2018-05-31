@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "FrameTimerItem.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 FrameTimerItem::FrameTimerItem()
 {
 	this->mInternal = 1;
@@ -76,3 +78,5 @@ bool FrameTimerItem::isClientDispose()
 {
 	return false;
 }
+
+MY_END_NAMESPACE

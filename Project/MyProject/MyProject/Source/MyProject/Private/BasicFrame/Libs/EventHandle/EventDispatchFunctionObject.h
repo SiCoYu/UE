@@ -3,6 +3,9 @@
 
 #include "IDelayHandleItem.h"
 #include "EventDispatchDelegate.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class EventDispatchFunctionObject : public IDelayHandleItem
 {
@@ -15,5 +18,7 @@ public:
 	void setClientDispose();
 	bool isClientDispose();
 };
+
+MY_END_NAMESPACE
 
 #endif
