@@ -18,6 +18,8 @@
 #include <shellapi.h>
 #include "Windows/HideWindowsPlatformTypes.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TestMain::TestMain()
 {
 	this->mTestExtern = MY_NEW TestExtern();
@@ -65,3 +67,5 @@ void TestMain::runTest()
 	//this->mTestDownload->run();
 	//this->mTestLuaBind->run();
 }
+
+MY_END_NAMESPACE

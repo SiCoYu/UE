@@ -3,6 +3,8 @@
 #include "TestDownload.h"
 #include "DownloadParam.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void TestDownload::run()
 {
 	DownloadParam* downloadParam = MY_NEW DownloadParam();
@@ -10,3 +12,5 @@ void TestDownload::run()
 	GDownloadMgr->download(downloadParam);
 	MY_DELETE downloadParam;
 }
+
+MY_END_NAMESPACE

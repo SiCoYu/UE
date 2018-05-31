@@ -4,6 +4,9 @@
 #include "CoreInc.h"
 #include <string>
 #include "LuaBindInc.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TestClass : public GObject
 {
@@ -18,5 +21,7 @@ public:
 private:
 	std::string data_;
 };
+
+MY_END_NAMESPACE
 
 #endif

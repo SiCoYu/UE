@@ -1,6 +1,10 @@
 #ifndef __TestNetClientBuffer_H
 #define __TestNetClientBuffer_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 #include "MCircularBuffer.h"
 //#include "gtest/gtest.h"
 
@@ -22,5 +26,6 @@ public:
 	virtual ~MCircularBufferTest();
 };
 
+MY_END_NAMESPACE
 
-#endif				// __CIRCULARBUFFERTEST_H
+#endif				// __TestNetClientBuffer_H

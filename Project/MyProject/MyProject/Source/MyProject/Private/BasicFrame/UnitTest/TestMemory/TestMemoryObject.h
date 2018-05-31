@@ -2,6 +2,9 @@
 #define __TestMemoryObject_H
 
 #include "CoreInc.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TestMemoryObject : public GObject
 {
@@ -10,5 +13,7 @@ class TestMemoryObject : public GObject
 public:
 	void test();
 };
+
+MY_END_NAMESPACE
 
 #endif

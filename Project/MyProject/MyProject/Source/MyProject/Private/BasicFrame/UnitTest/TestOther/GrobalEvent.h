@@ -1,5 +1,10 @@
 #ifndef __GrobalEvent_H
 #define __GrobalEvent_H
+
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 //
 //#include "gtest/gtest.h"
 //
@@ -10,4 +15,6 @@
 //	virtual void TearDown();
 //};
 
-#endif				// __GLOBALEVENT_H
+MY_END_NAMESPACE
+
+#endif				// __GrobalEvent_H

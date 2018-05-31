@@ -2,6 +2,9 @@
 #define __TestMain_H
 
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class TestExtern;
 class TestSocket;
@@ -28,5 +31,7 @@ public:
 
 	void runTest();
 };
+
+MY_END_NAMESPACE
 
 #endif				// __TestMain_H

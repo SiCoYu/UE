@@ -2,6 +2,8 @@
 #include "TestLuaBind.h"
 #include "Prequisites.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void TestLuaBind::run()
 {
 	const char* str =
@@ -25,3 +27,5 @@ void TestLuaBind::run()
 
 	GLuaSystem->doString("require(\"MyLua.Module.Entry.MainEntry\")");
 }
+
+MY_END_NAMESPACE

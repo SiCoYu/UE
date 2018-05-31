@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "TestClass.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 TestClass::TestClass(const std::string& data)
 	: data_(data)
 {
@@ -139,3 +141,5 @@ int TestClass::Lua_StartWith(lua_State* L)
 //	luabridge::push(L, off);
 //	return 2;
 //}
+
+MY_END_NAMESPACE

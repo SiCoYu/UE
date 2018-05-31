@@ -3,6 +3,8 @@
 
 //#include <iostream>
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MCircularBufferTest::MCircularBufferTest()
 	: mCircularBuffer(4)
 {
@@ -93,3 +95,5 @@ void MCircularBufferTest::TearDown()
 //	c_buffer.pop();
 //	EXPECT_TRUE(c_buffer.count() == 0);
 //}
+
+MY_END_NAMESPACE

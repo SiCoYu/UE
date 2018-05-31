@@ -5,7 +5,11 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void TestMemory::run()
 {
 	this->mTestMemoryObject = MY_NEW TestMemoryObject();
 }
+
+MY_END_NAMESPACE

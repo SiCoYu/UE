@@ -3,6 +3,8 @@
 #include "TestClass.h"
 #include "LuaBindInc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void TestClassBind::bind(lua_State* L)
 {
 	luabridge::getGlobalNamespace(L)
@@ -14,3 +16,5 @@ void TestClassBind::bind(lua_State* L)
 		.addCFunction("startWith", &TestClass::Lua_StartWith)
 		.endClass();
 }
+
+MY_END_NAMESPACE

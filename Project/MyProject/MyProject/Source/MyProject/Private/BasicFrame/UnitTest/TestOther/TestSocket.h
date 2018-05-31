@@ -2,6 +2,7 @@
 #define __TestSocket_H
 
 #include "Windows/AllowWindowsPlatformTypes.h"
+#include "PlatformDefine.h"
 
 #ifdef USE_EXTERN_THREAD
 
@@ -12,6 +13,8 @@
 #endif	// USE_EXTERN_THREAD
 
 #include "Windows/HideWindowsPlatformTypes.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 #ifdef USE_EXTERN_THREAD
 
@@ -25,5 +28,7 @@ public:
 };
 
 #endif	// USE_EXTERN_THREAD
+
+MY_END_NAMESPACE
 
 #endif				// __TESTSOCKET_H
