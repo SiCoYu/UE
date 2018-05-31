@@ -23,15 +23,15 @@
 
         public void dispose()
         {
-            if(null != this.mNoPriorityProcessObjectList)
+            if(nullptr != this.mNoPriorityProcessObjectList)
             {
                 this.mNoPriorityProcessObjectList.dispose();
-                this.mNoPriorityProcessObjectList = null;
+                this.mNoPriorityProcessObjectList = nullptr;
             }
-            if (null != this.mDic)
+            if (nullptr != this.mDic)
             {
                 this.mDic.dispose();
-                this.mDic = null;
+                this.mDic = nullptr;
             }
         }
 
@@ -67,7 +67,7 @@
 
         public INoOrPriorityObject get(int index)
         {
-            INoOrPriorityObject ret = null;
+            INoOrPriorityObject ret = nullptr;
 
             if(index < this.count())
             {
@@ -81,7 +81,7 @@
         {
             bool ret = false;
 
-            if (null != item)
+            if (nullptr != item)
             {
                 if (this.mIsSpeedUpFind)
                 {
@@ -155,7 +155,7 @@
 
         public void addNoPriorityObject(INoOrPriorityObject noPriorityObject)
         {
-            if (null != noPriorityObject)
+            if (nullptr != noPriorityObject)
             {
                 if (!this.contains(noPriorityObject))
                 {
@@ -178,7 +178,7 @@
 
         public void removeNoPriorityObject(INoOrPriorityObject noPriorityObject)
         {
-            if (null != noPriorityObject)
+            if (nullptr != noPriorityObject)
             {
                 if (this.contains(noPriorityObject))
                 {

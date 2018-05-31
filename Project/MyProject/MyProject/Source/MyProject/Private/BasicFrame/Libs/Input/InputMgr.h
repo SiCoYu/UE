@@ -166,9 +166,9 @@ public:
 
 	static FHitResult lastHit;
 
-	//static UICamera current = null;
+	//static UICamera current = nullptr;
 
-	//static Camera currentCamera = null;
+	//static Camera currentCamera = nullptr;
 
 	static ControlScheme currentScheme;
 
@@ -217,7 +217,7 @@ public:
 
 	AActor* mTooltip;
 
-	// Camera mCam = null;
+	// Camera mCam = nullptr;
 	float mTooltipTime;
 	float mNextRaycast;
 

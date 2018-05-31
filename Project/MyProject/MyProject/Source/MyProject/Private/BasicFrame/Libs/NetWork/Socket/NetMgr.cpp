@@ -404,7 +404,7 @@ void NetMgr::send(bool bnet)
 	}
 	else
 	{
-		GLogSys->log("current socket null");
+		GLogSys->log("current socket nullptr");
 	}
 }
 

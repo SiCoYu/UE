@@ -166,7 +166,7 @@ void MByteBuffer::decLenDelta(int delta)
 //{
 //	len_ = (len_ == 0 ? length : len_);
 //
-//	byte[] retByte = null;
+//	byte[] retByte = nullptr;
 //	uint retSize = 0;
 //	Compress.CompressData(mDynBuffer.buff, position, len_, ref retByte, ref retSize, algorithm);
 //
@@ -182,7 +182,7 @@ void MByteBuffer::decLenDelta(int delta)
 //{
 //	len_ = (len_ == 0 ? length : len_);
 //
-//	byte[] retByte = null;
+//	byte[] retByte = nullptr;
 //	uint retSize = 0;
 //	Compress.DecompressData(mDynBuffer.buff, position, len_, ref retByte, ref retSize, algorithm);
 //
@@ -199,7 +199,7 @@ void MByteBuffer::decLenDelta(int delta)
 //#if OBSOLETE
 //	len_ = (len_ == 0 ? length : len_);
 //
-//	byte[] retByte = null;
+//	byte[] retByte = nullptr;
 //	// 只有 8 个字节的时候才加密
 //	uint leftCnt = len_ % 8;  // 剩余的数量
 //	uint cryptCnt = leftCnt;
@@ -223,7 +223,7 @@ void MByteBuffer::decLenDelta(int delta)
 //	uint leftLen_ = alignLen_ - len_;
 //	if (leftLen_ > 0)
 //	{
-//		if (m_padBytes == null)
+//		if (m_padBytes == nullptr)
 //		{
 //			m_padBytes = new byte[8];
 //		}
@@ -243,7 +243,7 @@ void MByteBuffer::decLenDelta(int delta)
 //		length = alignLen_;
 //	}
 //
-//	byte[] retByte = null;
+//	byte[] retByte = nullptr;
 //
 //	Crypt.encryptData(mDynBuffer.buff, position, alignLen_, ref retByte, cryptContext);  // 注意补齐不一定是 0 
 //	Array.Copy(m_padBytes, 0, mDynBuffer.buff, position + len_, leftLen_);       // 拷贝回去
@@ -259,7 +259,7 @@ void MByteBuffer::decLenDelta(int delta)
 //{
 //	len_ = (len_ == 0 ? length : len_);
 //
-//	byte[] retByte = null;
+//	byte[] retByte = nullptr;
 //
 //	if (0 == len_)
 //	{

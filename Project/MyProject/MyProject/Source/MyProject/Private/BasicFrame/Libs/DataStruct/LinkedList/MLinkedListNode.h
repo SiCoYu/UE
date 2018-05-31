@@ -16,9 +16,9 @@ protected:
 public:
 	MLinkedListNode()
     {
-        this.mLinkedList = null;
-        this.mPreNode = null;
-        this.mNextNode = null;
+        this.mLinkedList = nullptr;
+        this.mPreNode = nullptr;
+        this.mNextNode = nullptr;
     }
 
     void init()
@@ -35,9 +35,9 @@ public:
 
     void onDestroy()
     {
-        this.mLinkedList = null;
-        this.mPreNode = null;
-        this.mNextNode = null;
+        this.mLinkedList = nullptr;
+        this.mPreNode = nullptr;
+        this.mNextNode = nullptr;
     }
 
     void clear()
@@ -49,8 +49,8 @@ public:
 
     void onClear()
     {
-        this.mPreNode = null;
-        this.mNextNode = null;
+        this.mPreNode = nullptr;
+        this.mNextNode = nullptr;
     }
 
     // 这个接口尽量不要在接口内部调用，这个接口和逻辑关联可能更大一点，逻辑决定是否设置
@@ -87,12 +87,12 @@ public:
     // 如果是在头结点之前插入，List 中头结点就会仍然记录之前的头结点，会错误，这种情况需要逻辑避免，因为一个节点可能在几个列表中
     void insertBefore(MLinkedListNode node)
     {
-        if (null != this.mPreNode)
+        if (nullptr != this.mPreNode)
         {
             this.mPreNode.setNextNode(node);
             node.setPreNode(this.mPreNode);
         }
-        else if (null != this.mLinkedList)
+        else if (nullptr != this.mLinkedList)
         {
             this.mLinkedList.addHead(node);
         }
@@ -103,12 +103,12 @@ public:
 
     void insertAfter(MLinkedListNode node)
     {
-        if (null != this.mNextNode)
+        if (nullptr != this.mNextNode)
         {
             this.mNextNode.setPreNode(node);
             node.setNextNode(this.mNextNode);
         }
-        else if (null != this.mLinkedList)
+        else if (nullptr != this.mLinkedList)
         {
             this.mLinkedList.addTail(node);
         }
@@ -119,31 +119,31 @@ public:
 
     bool isPreNodeExist()
     {
-        return (null != this.mPreNode);
+        return (nullptr != this.mPreNode);
     }
 
     bool isNextNodeExist()
     {
-        return (null != this.mNextNode);
+        return (nullptr != this.mNextNode);
     }
 
     bool isPreAndNextNodeExist()
     {
-        return (null != this.mPreNode && null != this.mNextNode);
+        return (nullptr != this.mPreNode && nullptr != this.mNextNode);
     }
 
     void removeFormList()
     {
-        if (null != this.mLinkedList)
+        if (nullptr != this.mLinkedList)
         {
             this.mLinkedList.remove(this);
-            this.mLinkedList = null;
+            this.mLinkedList = nullptr;
         }
     }
 
     void addToList()
     {
-        if (null != this.mLinkedList)
+        if (nullptr != this.mLinkedList)
         {
             this.mLinkedList.addTail(this);
         }
@@ -152,12 +152,12 @@ public:
     // 获取当前节点到 Tail 数量
     int toTailCount()
     {
-        MLinkedListNode nextNode = null;
+        MLinkedListNode nextNode = nullptr;
         int count = 1;
 
         nextNode = this.getNextNode();
 
-        while (null != nextNode)
+        while (nullptr != nextNode)
         {
             nextNode = nextNode.getNextNode();
             count += 1;
@@ -169,12 +169,12 @@ public:
     // 获取当前节点到 Head 数量
     int toHeadCount()
     {
-        MLinkedListNode preNode = null;
+        MLinkedListNode preNode = nullptr;
         int count = 1;
 
         preNode = this.getPreNode();
 
-        while (null != preNode)
+        while (nullptr != preNode)
         {
             preNode = preNode.getPreNode();
             count += 1;
@@ -190,7 +190,7 @@ public:
 
     void reverse()
     {
-        if (null != this.mLinkedList)
+        if (nullptr != this.mLinkedList)
         {
             this.mLinkedList.reverse();
         }

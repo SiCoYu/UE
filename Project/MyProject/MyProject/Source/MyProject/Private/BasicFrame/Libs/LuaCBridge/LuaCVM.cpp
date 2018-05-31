@@ -152,7 +152,7 @@ void LuaCVM::setObject(std::vector<std::string>& remainingPath, LuaCObject* val)
 	lua_pushstring(L, remainingPath[remainingPath.size() - 1].c_str());
 
 	//可以释放先
-	//if (val == null)
+	//if (val == nullptr)
 	//{
 	//    LuaDLL.lua_gettable(L, -2);               
 	//    LuaTypes type = LuaDLL.lua_type(L, -1);

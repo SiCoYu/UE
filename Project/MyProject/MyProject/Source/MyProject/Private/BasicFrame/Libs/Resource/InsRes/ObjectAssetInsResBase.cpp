@@ -32,7 +32,7 @@ UObject* ObjectAssetInsResBase::InstantiateObject(std::string resName, bool isSe
 
 	if (nullptr == this->mGo)
 	{
-		GLogSys->log("ObjectAssetInsRes::InstantiateObject, Prefab is null");
+		GLogSys->log("ObjectAssetInsRes::InstantiateObject, Prefab is nullptr");
 	}
 	else
 	{

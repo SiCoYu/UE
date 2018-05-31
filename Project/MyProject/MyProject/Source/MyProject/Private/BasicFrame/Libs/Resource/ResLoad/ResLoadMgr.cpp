@@ -66,7 +66,7 @@ void ResLoadMgr::loadAsset(LoadParam* param)
 
 ResItem* ResLoadMgr::getResource(std::string path)
 {
-	// 如果 path == null ，程序会宕机
+	// 如果 path == nullptr ，程序会宕机
 	if (UtilMap::ContainsKey(this->mLoadData->mPath2Res, path))
 	{
 		return this->mLoadData->mPath2Res[path];

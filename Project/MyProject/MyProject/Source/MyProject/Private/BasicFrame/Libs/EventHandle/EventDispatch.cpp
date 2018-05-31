@@ -37,7 +37,7 @@ void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 	}
 	else
 	{
-		GLogSys->log("Event Handle is null");
+		GLogSys->log("Event Handle is nullptr");
 	}
 }
 

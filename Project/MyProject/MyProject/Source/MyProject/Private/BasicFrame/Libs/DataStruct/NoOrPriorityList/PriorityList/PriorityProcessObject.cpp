@@ -40,7 +40,7 @@
 
         public void onPutInPool()
         {
-            this.mPriorityObject = null;
+            this.mPriorityObject = nullptr;
             this.mPriority = 0.0f;
         }
 

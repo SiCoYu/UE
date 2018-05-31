@@ -74,7 +74,7 @@ std::vector<LuaCObject*> LuaCFunction::call(std::vector<LuaCObject*> args, std::
 std::vector<LuaCObject*> LuaCFunction::Call(std::vector<LuaCObject*> args)
 {
 	std::vector<int> returnTypes;
-	//return call(args, null);
+	//return call(args, nullptr);
 	return call(args, returnTypes);
 }
 
@@ -109,7 +109,7 @@ std::vector<LuaCObject*> LuaCFunction::Call(double arg1)
 	}
 
 	lua_settop(L, oldTop - 1);
-	//return null;
+	//return nullptr;
 	return objs;
 }
 

@@ -115,7 +115,7 @@ public:
 
     void set(int index, T value)
     {
-        if(null != this.mList[index])
+        if(nullptr != this.mList[index])
         {
             this.mList[index].resetIndex();
         }
@@ -194,7 +194,7 @@ public:
 
     void merge(MList<T> appendList)
     {
-        if(appendList != null)
+        if(appendList != nullptr)
         {
             foreach(T item in appendList.list())
             {

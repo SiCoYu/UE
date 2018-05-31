@@ -150,7 +150,7 @@ void UiMgr::_exitFormInternal(UiFormId formId)
 
 		// 释放加载的资源
 		//string path = mUiAttrSystem.getPath(formId);
-		//if (path != null)
+		//if (path != nullptr)
 		//{
 		//    Ctx.m_instance.mResLoadMgr.unload(path);
 		//}
@@ -295,7 +295,7 @@ void UiMgr::onCodeloadedByRes(ClassAssetInsRes* res)
 
 void UiMgr::onCodeLoadedByForm(UForm* form)
 {
-	//if (null != Ctx.m_instance.m_cbUIEvent)
+	//if (nullptr != Ctx.m_instance.m_cbUIEvent)
 	//{
 	//	Ctx.m_instance.m_cbUIEvent.onCodeFormLoaded(form);  // 资源加载完成
 	//}
@@ -358,7 +358,7 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 		this->_showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
 	}
 
-	//if (null != Ctx.m_instance.m_cbUIEvent)
+	//if (nullptr != Ctx.m_instance.m_cbUIEvent)
 	//{
 	//	if (mId2FormDic.ContainsKey(formId))      // 如果 onShow 中调用 exit 函数，并且没有设置 exitMode = false ，就会清除 mId2FormDic， 这个时候再调用这个函数，就会有问题，是不是添加延迟卸载
 	//	{

@@ -15,7 +15,7 @@ void UtilMsg::sendMsg(NullUserCmd& msg, bool bnet)
     }
     else
     {
-		GLogSys->log("socket buffer null");
+		GLogSys->log("socket buffer nullptr");
     }
     if (bnet)
     {
@@ -30,7 +30,7 @@ void UtilMsg::checkStr(std::string str)
 {
 	if (UtilStr::IsNullOrEmpty(str))
     {
-		GLogSys->log("str is null");
+		GLogSys->log("str is nullptr");
     }
 }
 

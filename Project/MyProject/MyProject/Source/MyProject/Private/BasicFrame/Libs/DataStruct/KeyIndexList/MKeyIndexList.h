@@ -84,7 +84,7 @@ public:
 
     TValue value(TKey key)
     {
-        TValue ret = null;
+        TValue ret = nullptr;
 
         if(this.mIndexDic.containsKey(key))
         {

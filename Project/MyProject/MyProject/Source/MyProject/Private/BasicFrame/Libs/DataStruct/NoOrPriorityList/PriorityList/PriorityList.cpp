@@ -27,15 +27,15 @@
 
         public void dispose()
         {
-            if(null != this.mPriorityProcessObjectList)
+            if(nullptr != this.mPriorityProcessObjectList)
             {
                 this.mPriorityProcessObjectList.dispose();
-                this.mPriorityProcessObjectList = null;
+                this.mPriorityProcessObjectList = nullptr;
             }
-            if(null != this.mDic)
+            if(nullptr != this.mDic)
             {
                 this.mDic.dispose();
-                this.mDic = null;
+                this.mDic = nullptr;
             }
         }
 
@@ -62,7 +62,7 @@
             while(index < listLen)
             {
                 NumIdBufferObjectFactory.deleteObject(this.mPriorityProcessObjectList.get(index));
-                this.mPriorityProcessObjectList.set(index, null);
+                this.mPriorityProcessObjectList.set(index, nullptr);
                 index += 1;
             }
 
@@ -81,7 +81,7 @@
 
         public INoOrPriorityObject get(int index)
         {
-            INoOrPriorityObject ret = null;
+            INoOrPriorityObject ret = nullptr;
 
             if(index < this.count())
             {
@@ -107,7 +107,7 @@
         {
             bool ret = false;
 
-            if (null != item)
+            if (nullptr != item)
             {
                 if (this.mIsSpeedUpFind)
                 {
@@ -143,7 +143,7 @@
 
         public void removeAt(int index)
         {
-            PriorityProcessObject priorityProcessObject = null;
+            PriorityProcessObject priorityProcessObject = nullptr;
             priorityProcessObject = this.mPriorityProcessObjectList.get(index);
 
             if (this.mIsSpeedUpFind)
@@ -155,10 +155,10 @@
                 this.mPriorityProcessObjectList.removeAt(index);
             }
 
-            if (null != priorityProcessObject)
+            if (nullptr != priorityProcessObject)
             {
                 NumIdBufferObjectFactory.deleteObject(priorityProcessObject);
-                priorityProcessObject = null;
+                priorityProcessObject = nullptr;
             }
         }
 
@@ -222,11 +222,11 @@
 
         public void addPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f)
         {
-            if (null != priorityObject)
+            if (nullptr != priorityObject)
             {
                 if (!this.contains(priorityObject))
                 {
-                    PriorityProcessObject priorityProcessObject = null;
+                    PriorityProcessObject priorityProcessObject = nullptr;
                     //priorityProcessObject = new PriorityProcessObject();
                     priorityProcessObject = NumIdBufferObjectFactory.newObject<PriorityProcessObject>(BufferType.eBT_PriorityProcessObject, true);
 

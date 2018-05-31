@@ -69,7 +69,7 @@ void NetModuleDispatchHandle::handleMsg(CmdDispatchInfo* cmdDispInfo)
 		GLogSys->log(UtilStr::Format("消息没有处理: byCmd = {0},  byParam = {1}", cmdDispInfo->byCmd, cmdDispInfo->byParam));
     }
 
-    //if(mLuaCSBridgeNetDispHandle != null)
+    //if(mLuaCSBridgeNetDispHandle != nullptr)
     //{
     //    mLuaCSBridgeNetDispHandle.handleMsg(msg, byCmd, byParam);
     //}

@@ -27,8 +27,8 @@ void EngineLoop::MainLoop()
 
 	// 处理客户端的各类消息
 	// 处理客户端自己的消息机制
-	//MsgRouteBase routeMsg = null;
-	//while ((routeMsg = Ctx.mInstance.mSysMsgRoute.pop()) != null)
+	//MsgRouteBase routeMsg = nullptr;
+	//while ((routeMsg = Ctx.mInstance.mSysMsgRoute.pop()) != nullptr)
 	//{
 	//	Ctx.mInstance.mMsgRouteNotify.handleMsg(routeMsg);
 	//}
@@ -36,10 +36,10 @@ void EngineLoop::MainLoop()
 	// 处理网络
 	//if (!Ctx.mInstance.mNetCmdNotify.isStopNetHandle)
 	//{
-	//    MByteBuffer ret = null;
-	//    while ((ret = Ctx.mInstance.mNetMgr.getMsg()) != null)
+	//    MByteBuffer ret = nullptr;
+	//    while ((ret = Ctx.mInstance.mNetMgr.getMsg()) != nullptr)
 	//    {
-	//        if (null != Ctx.mInstance.mNetCmdNotify)
+	//        if (nullptr != Ctx.mInstance.mNetCmdNotify)
 	//        {
 	//            Ctx.mInstance.mNetCmdNotify.addOneHandleMsg();
 	//            Ctx.mInstance.mNetCmdNotify.handleMsg(ret);       // CS 中处理
@@ -51,8 +51,8 @@ void EngineLoop::MainLoop()
 	// 填充数据到 KBEngine ，使用 KBEngine 引擎的逻辑解析
 	//if (!Ctx.mInstance.mNetCmdNotify.isStopNetHandle)
 	//{
-	//    MByteBuffer ret = null;
-	//    while ((ret = Ctx.mInstance.mNetMgr.getMsg_KBE()) != null)
+	//    MByteBuffer ret = nullptr;
+	//    while ((ret = Ctx.mInstance.mNetMgr.getMsg_KBE()) != nullptr)
 	//    {
 	//        Ctx.mInstance.mMKBEMainEntry.gameapp.pushBuffer(ret.dynBuffer.buffer, ret.dynBuffer.size);
 	//    }

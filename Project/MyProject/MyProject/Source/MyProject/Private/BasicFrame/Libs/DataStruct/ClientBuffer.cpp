@@ -85,7 +85,7 @@ public void ClientBuffer::setCryptKey(byte[] encrypt)
 
 public void ClientBuffer::checkDES()
 {
-	if (this->mCryptContext.m_cryptKey != null && this->mCryptContext.m_cryptAlgorithm != CryptAlgorithm.DES)
+	if (this->mCryptContext.m_cryptKey != nullptr && this->mCryptContext.m_cryptAlgorithm != CryptAlgorithm.DES)
 	{
 		this->mCryptContext.m_cryptAlgorithm = CryptAlgorithm.DES;
 	}

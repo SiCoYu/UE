@@ -36,9 +36,9 @@ public:
 		//        retObj = (T)mPoolList[idx];
 		//        mPoolList.RemoveAt(idx);
 		//        MethodInfo myMethodInfo = retObj.GetType().GetMethod("resetDefault");
-		//        if (myMethodInfo != null)
+		//        if (myMethodInfo != nullptr)
 		//        {
-		//            myMethodInfo.Invoke(retObj, null);
+		//            myMethodInfo.Invoke(retObj, nullptr);
 		//        }
 		//        return retObj;
 		//    }

@@ -66,7 +66,7 @@ bool InputMgr::getStickyPress()
 
 MRay InputMgr::getCurrentRay()
 {
-	//return (currentCamera != null && currentTouch != null) ?
+	//return (currentCamera != nullptr && currentTouch != nullptr) ?
 	//	currentCamera.ScreenPointToRay(currentTouch.pos) : new Ray();
 
 	return MRay();
@@ -90,7 +90,7 @@ bool InputMgr::getHandlesEvents()
 
 //Camera InputMgr::getCachedCamera()
 //{
-//	if (mCam == null)
+//	if (mCam == nullptr)
 //	mCam = Camera.main; return mCam;
 //}
 
@@ -99,7 +99,7 @@ bool InputMgr::getIsOverUI()
 	if (currentTouch != nullptr) return currentTouch->getIsOverUI();
 	if (hoveredObject == nullptr) return false;
 	if (hoveredObject == fallThrough) return false;
-	//return NGUITools.FindInParents<UIRoot>(hoveredObject) != null;
+	//return NGUITools.FindInParents<UIRoot>(hoveredObject) != nullptr;
 	return false;
 }
 
@@ -135,8 +135,8 @@ void InputMgr::SetSelection(AActor* go, ControlScheme scheme)
 
 	//	if (UICamera.list.size > 0)
 	//	{
-	//		UICamera cam = (mNextSelection != null) ? FindCameraForLayer(mNextSelection.layer) : UICamera.list[0];
-	//		if (cam != null) cam.StartCoroutine(cam.ChangeSelection());
+	//		UICamera cam = (mNextSelection != nullptr) ? FindCameraForLayer(mNextSelection.layer) : UICamera.list[0];
+	//		if (cam != nullptr) cam.StartCoroutine(cam.ChangeSelection());
 	//	}
 	//}
 }
@@ -144,21 +144,21 @@ void InputMgr::SetSelection(AActor* go, ControlScheme scheme)
 //System.Collections.IEnumerator InputMgr::ChangeSelection()
 //{
 //	yield return new WaitForEndOfFrame();
-//	if (onSelect != null) onSelect(mCurrentSelection, false);
+//	if (onSelect != nullptr) onSelect(mCurrentSelection, false);
 //	Notify(mCurrentSelection, "OnSelect", false);
 //	mCurrentSelection = mNextSelection;
-//	mNextSelection = null;
+//	mNextSelection = nullptr;
 //
-//	if (mCurrentSelection != null)
+//	if (mCurrentSelection != nullptr)
 //	{
 //		current = this;
 //		currentCamera = mCam;
 //		UICamera.currentScheme = mNextScheme;
-//		//inputHasFocus = (mCurrentSelection.GetComponent<UIInput>() != null);
+//		//inputHasFocus = (mCurrentSelection.GetComponent<UIInput>() != nullptr);
 //		inputHasFocus = false;
-//		if (onSelect != null) onSelect(mCurrentSelection, true);
+//		if (onSelect != nullptr) onSelect(mCurrentSelection, true);
 //		Notify(mCurrentSelection, "OnSelect", true);
-//		current = null;
+//		current = nullptr;
 //	}
 //	else inputHasFocus = false;
 //}
@@ -175,7 +175,7 @@ int InputMgr::getTouchCount()
 	//	if (mMouse[i].pressed != nullptr)
 	//		++count;
 
-	//if (controller.pressed != null)
+	//if (controller.pressed != nullptr)
 	//	++count;
 
 	//return count;
@@ -188,14 +188,14 @@ int InputMgr::getDragCount()
 	//int count = 0;
 
 	//foreach(KeyValuePair<int, MouseOrTouch> touch in mTouches)
-	//	if (touch.Value.dragged != null)
+	//	if (touch.Value.dragged != nullptr)
 	//		++count;
 
 	//for (int i = 0; i < mMouse.Length; ++i)
-	//	if (mMouse[i].dragged != null)
+	//	if (mMouse[i].dragged != nullptr)
 	//		++count;
 
-	//if (controller.dragged != null)
+	//if (controller.dragged != nullptr)
 	//	++count;
 
 	//return count;
@@ -206,7 +206,7 @@ int InputMgr::getDragCount()
 //Camera InputMgr::getMainCamera()
 //{
 //	UICamera mouse = eventHandler;
-//	return (mouse != null) ? mouse.cachedCamera : null;
+//	return (mouse != nullptr) ? mouse.cachedCamera : nullptr;
 //}
 //
 //UICamera InputMgr::getEventHandler()
@@ -215,10 +215,10 @@ int InputMgr::getDragCount()
 //	{
 //		// Invalid or inactive entry -- keep going
 //		UICamera cam = list.buffer[i];
-//		if (cam == null || !cam.enabled || !NGUITools.GetActive(cam.gameObject)) continue;
+//		if (cam == nullptr || !cam.enabled || !NGUITools.GetActive(cam.gameObject)) continue;
 //		return cam;
 //	}
-//	return null;
+//	return nullptr;
 //}
 
 //int InputMgr::CompareFunc(UICamera a, UICamera b)
@@ -230,15 +230,15 @@ int InputMgr::getDragCount()
 
 ARigidBodyBase* InputMgr::FindRootRigidbody(USceneComponent* trans)
 {
-//	while (trans != null)
+//	while (trans != nullptr)
 //	{
-//		//if (trans.GetComponent<UIPanel>() != null) return null;
+//		//if (trans.GetComponent<UIPanel>() != nullptr) return nullptr;
 //#if UNITY_5
 //		Rigidbody rb = trans.GetComponent<Rigidbody>();
 //#elif UNITY_4_6 || UNITY_4_5
 //		Rigidbody rb = trans.rigidbody;
 //#endif
-//		if (rb != null) return rb;
+//		if (rb != nullptr) return rb;
 //		trans = trans.parent;
 //	}
 	return nullptr;
@@ -246,15 +246,15 @@ ARigidBodyBase* InputMgr::FindRootRigidbody(USceneComponent* trans)
 
 ARigidBodyBase* InputMgr::FindRootRigidbody2D(USceneComponent* trans)
 {
-//	while (trans != null)
+//	while (trans != nullptr)
 //	{
-//		//if (trans.GetComponent<UIPanel>() != null) return null;
+//		//if (trans.GetComponent<UIPanel>() != nullptr) return nullptr;
 //#if UNITY_5
 //		Rigidbody2D rb = trans.GetComponent<Rigidbody2D>();
 //#elif UNITY_4_6 || UNITY_4_5
 //		Rigidbody2D rb = trans.rigidbody2D;
 //#endif
-//		if (rb != null) return rb;
+//		if (rb != nullptr) return rb;
 //		trans = trans.parent;
 //	}
 	return nullptr;
@@ -294,7 +294,7 @@ bool InputMgr::Raycast(FVector inPos)
 	//			if (!list[0].eventsGoToColliders)
 	//			{
 	//				Rigidbody rb = FindRootRigidbody(hoveredObject.transform);
-	//				if (rb != null) hoveredObject = rb.gameObject;
+	//				if (rb != nullptr) hoveredObject = rb.gameObject;
 	//			}
 	//			return true;
 	//		}
@@ -308,7 +308,7 @@ bool InputMgr::IsVisible(FVector worldPoint, AActor* go)
 {
 	//UIPanel panel = NGUITools.FindInParents<UIPanel>(go);
 
-	//while (panel != null)
+	//while (panel != nullptr)
 	//{
 	//    if (!panel.IsVisible(worldPoint)) return false;
 	//    panel = panel.parentPanel;
@@ -320,7 +320,7 @@ bool InputMgr::IsVisible(DepthEntry de)
 {
 	//UIPanel panel = NGUITools.FindInParents<UIPanel>(de.go);
 
-	//while (panel != null)
+	//while (panel != nullptr)
 	//{
 	//    if (!panel.IsVisible(de.point)) return false;
 	//    panel = panel.parentPanel;
@@ -347,9 +347,9 @@ bool InputMgr::IsHighlighted(AActor* go)
 //	{
 //		UICamera cam = list.buffer[i];
 //		Camera uc = cam.cachedCamera;
-//		if ((uc != null) && (uc.cullingMask & layerMask) != 0) return cam;
+//		if ((uc != nullptr) && (uc.cullingMask & layerMask) != 0) return cam;
 //	}
-//	return null;
+//	return nullptr;
 //}
 
 int InputMgr::GetDirection(FKey up, FKey down)
@@ -398,7 +398,7 @@ void InputMgr::Notify(AActor* go, std::string funcName, AActor* obj)
 	//{
 	//	go.SendMessage(funcName, obj, SendMessageOptions.DontRequireReceiver);
 
-	//	if (mGenericHandler != null && mGenericHandler != go)
+	//	if (mGenericHandler != nullptr && mGenericHandler != go)
 	//	{
 	//		mGenericHandler.SendMessage(funcName, obj, SendMessageOptions.DontRequireReceiver);
 	//	}
@@ -495,21 +495,21 @@ void InputMgr::Start()
 	//if (Application.isPlaying)
 	//{
 	//	// Always set a fallthrough object
-	//	if (fallThrough == null)
+	//	if (fallThrough == nullptr)
 	//	{
 	//		//UIRoot root = NGUITools.FindInParents<UIRoot>(gameObject);
 
-	//		//if (root != null)
+	//		//if (root != nullptr)
 	//		//{
 	//		//	fallThrough = root.gameObject;
 	//		//}
 	//		//else
 	//		//{
 	//		Transform t = transform;
-	//		fallThrough = (t.parent != null) ? t.parent.gameObject : gameObject;
+	//		fallThrough = (t.parent != nullptr) ? t.parent.gameObject : gameObject;
 	//		//}
 	//	}
-	//	if (cachedCamera != null)
+	//	if (cachedCamera != nullptr)
 	//	{
 	//		cachedCamera.eventMask = 0;
 	//	}
@@ -519,7 +519,7 @@ void InputMgr::Start()
 
 void InputMgr::Update()
 {
-//	if (cachedCamera == null)
+//	if (cachedCamera == nullptr)
 //	{
 //		return;
 //	}
@@ -537,39 +537,39 @@ void InputMgr::Update()
 //	else if (useMouse) ProcessMouse();
 //
 //	// Custom input processing
-//	if (onCustomInput != null) onCustomInput();
+//	if (onCustomInput != nullptr) onCustomInput();
 //
 //	// Clear the selection on the cancel key, but only if mouse input is allowed
-//	if (useMouse && mCurrentSelection != null)
+//	if (useMouse && mCurrentSelection != nullptr)
 //	{
 //		if (cancelKey0 != KeyCode.None && GetKeyDown(cancelKey0))
 //		{
 //			currentScheme = ControlScheme.Controller;
 //			currentKey = cancelKey0;
-//			selectedObject = null;
+//			selectedObject = nullptr;
 //		}
 //		else if (cancelKey1 != KeyCode.None && GetKeyDown(cancelKey1))
 //		{
 //			currentScheme = ControlScheme.Controller;
 //			currentKey = cancelKey1;
-//			selectedObject = null;
+//			selectedObject = nullptr;
 //		}
 //	}
 //
 //	// If nothing is selected, input focus is lost
-//	if (mCurrentSelection == null) inputHasFocus = false;
+//	if (mCurrentSelection == nullptr) inputHasFocus = false;
 //
 //	// Update the keyboard and joystick events
-//	if (mCurrentSelection != null) ProcessOthers();
+//	if (mCurrentSelection != nullptr) ProcessOthers();
 //
 //	// If it's time to show a tooltip, inform the object we're hovering over
-//	if (useMouse && mHover != null)
+//	if (useMouse && mHover != nullptr)
 //	{
 //		float scroll = !string.IsNullOrEmpty(scrollAxisName) ? GetAxis(scrollAxisName) : 0f;
 //
 //		if (scroll != 0f)
 //		{
-//			if (onScroll != null) onScroll(mHover, scroll);
+//			if (onScroll != nullptr) onScroll(mHover, scroll);
 //			Notify(mHover, "OnScroll", scroll);
 //		}
 //
@@ -580,7 +580,7 @@ void InputMgr::Update()
 //			ShowTooltip(true);
 //		}
 //	}
-//	current = null;
+//	current = nullptr;
 }
 
 void InputMgr::LateUpdate()
@@ -600,7 +600,7 @@ void InputMgr::LateUpdate()
 //
 //		//UIRoot.Broadcast("UpdateAnchors");
 //
-//		if (onScreenResize != null)
+//		if (onScreenResize != nullptr)
 //			onScreenResize();
 //	}
 }
@@ -644,7 +644,7 @@ void InputMgr::ProcessMouse()
 	//{
 	//	mNextRaycast = RealTime.time + 0.02f;
 	//	if (!Raycast(Input.mousePosition)) hoveredObject = fallThrough;
-	//	if (hoveredObject == null) hoveredObject = mGenericHandler;
+	//	if (hoveredObject == nullptr) hoveredObject = mGenericHandler;
 	//	for (int i = 0; i < 3; ++i) mMouse[i].current = hoveredObject;
 	//}
 
@@ -663,7 +663,7 @@ void InputMgr::ProcessMouse()
 	//		// Delay the tooltip
 	//		mTooltipTime = RealTime.time + tooltipDelay;
 	//	}
-	//	else if (mTooltip != null)
+	//	else if (mTooltip != nullptr)
 	//	{
 	//		// Hide the tooltip
 	//		ShowTooltip(false);
@@ -671,22 +671,22 @@ void InputMgr::ProcessMouse()
 	//}
 
 	//// Generic mouse move notifications
-	//if (posChanged && onMouseMove != null)
+	//if (posChanged && onMouseMove != nullptr)
 	//{
 	//	currentTouch = mMouse[0];
 	//	onMouseMove(currentTouch.delta);
-	//	currentTouch = null;
+	//	currentTouch = nullptr;
 	//}
 
 	//// The button was released over a different object -- remove the highlight from the previous
-	//if ((justPressed || !isPressed) && mHover != null && highlightChanged)
+	//if ((justPressed || !isPressed) && mHover != nullptr && highlightChanged)
 	//{
 	//	currentScheme = ControlScheme.Mouse;
 	//	currentTouch = mMouse[0];
-	//	if (mTooltip != null) ShowTooltip(false);
-	//	if (onHover != null) onHover(mHover, false);
+	//	if (mTooltip != nullptr) ShowTooltip(false);
+	//	if (onHover != nullptr) onHover(mHover, false);
 	//	Notify(mHover, "OnHover", false);
-	//	mHover = null;
+	//	mHover = nullptr;
 	//}
 
 	//// Process all 3 mouse buttons as individual touches
@@ -703,7 +703,7 @@ void InputMgr::ProcessMouse()
 
 	//	// We don't want to update the last camera while there is a touch happening
 	//	if (pressed) currentTouch.pressedCam = currentCamera;
-	//	else if (currentTouch.pressed != null) currentCamera = currentTouch.pressedCam;
+	//	else if (currentTouch.pressed != nullptr) currentCamera = currentTouch.pressedCam;
 
 	//	// Process the mouse events
 	//	ProcessTouch(pressed, unpressed);
@@ -717,10 +717,10 @@ void InputMgr::ProcessMouse()
 	//	mTooltipTime = RealTime.time + tooltipDelay;
 	//	mHover = mMouse[0].current;
 	//	currentTouch = mMouse[0];
-	//	if (onHover != null) onHover(mHover, true);
+	//	if (onHover != nullptr) onHover(mHover, true);
 	//	Notify(mHover, "OnHover", true);
 	//}
-	//currentTouch = null;
+	//currentTouch = nullptr;
 
 	//// Update the last value
 	//mMouse[0].last = mMouse[0].current;
@@ -748,14 +748,14 @@ void InputMgr::ProcessTouches()
 //
 //		// Raycast into the screen
 //		if (!Raycast(currentTouch.pos)) hoveredObject = fallThrough;
-//		if (hoveredObject == null) hoveredObject = mGenericHandler;
+//		if (hoveredObject == nullptr) hoveredObject = mGenericHandler;
 //		currentTouch.last = currentTouch.current;
 //		currentTouch.current = hoveredObject;
 //		lastTouchPosition = currentTouch.pos;
 //
 //		// We don't want to update the last camera while there is a touch happening
 //		if (pressed) currentTouch.pressedCam = currentCamera;
-//		else if (currentTouch.pressed != null) currentCamera = currentTouch.pressedCam;
+//		else if (currentTouch.pressed != nullptr) currentCamera = currentTouch.pressedCam;
 //
 //		// Double-tap support
 //		if (touch.tapCount > 1) currentTouch.clickTime = RealTime.time;
@@ -765,8 +765,8 @@ void InputMgr::ProcessTouches()
 //
 //		// If the touch has ended, remove it from the list
 //		if (unpressed) RemoveTouch(currentTouchID);
-//		currentTouch.last = null;
-//		currentTouch = null;
+//		currentTouch.last = nullptr;
+//		currentTouch = nullptr;
 //
 //		// Don't consider other touches
 //		if (!allowMultiTouch) break;
@@ -800,22 +800,22 @@ void InputMgr::ProcessFakeTouches()
 
 	//	// Raycast into the screen
 	//	if (!Raycast(currentTouch.pos)) hoveredObject = fallThrough;
-	//	if (hoveredObject == null) hoveredObject = mGenericHandler;
+	//	if (hoveredObject == nullptr) hoveredObject = mGenericHandler;
 	//	currentTouch.last = currentTouch.current;
 	//	currentTouch.current = hoveredObject;
 	//	lastTouchPosition = currentTouch.pos;
 
 	//	// We don't want to update the last camera while there is a touch happening
 	//	if (pressed) currentTouch.pressedCam = currentCamera;
-	//	else if (currentTouch.pressed != null) currentCamera = currentTouch.pressedCam;
+	//	else if (currentTouch.pressed != nullptr) currentCamera = currentTouch.pressedCam;
 
 	//	// Process the events from this touch
 	//	ProcessTouch(pressed, unpressed);
 
 	//	// If the touch has ended, remove it from the list
 	//	if (unpressed) RemoveTouch(currentTouchID);
-	//	currentTouch.last = null;
-	//	currentTouch = null;
+	//	currentTouch.last = nullptr;
+	//	currentTouch = nullptr;
 	//}
 }
 
@@ -857,7 +857,7 @@ void InputMgr::ProcessOthers()
 	//	currentTouch.last = currentTouch.current;
 	//	currentTouch.current = mCurrentSelection;
 	//	ProcessTouch(submitKeyDown, submitKeyUp);
-	//	currentTouch.last = null;
+	//	currentTouch.last = nullptr;
 	//}
 
 	//int vertical = 0;
@@ -888,7 +888,7 @@ void InputMgr::ProcessOthers()
 	//{
 	//	currentScheme = ControlScheme.Controller;
 	//	KeyCode key = vertical > 0 ? KeyCode.UpArrow : KeyCode.DownArrow;
-	//	if (onKey != null) onKey(mCurrentSelection, key);
+	//	if (onKey != nullptr) onKey(mCurrentSelection, key);
 	//	Notify(mCurrentSelection, "OnKey", key);
 	//}
 
@@ -896,7 +896,7 @@ void InputMgr::ProcessOthers()
 	//{
 	//	currentScheme = ControlScheme.Controller;
 	//	KeyCode key = horizontal > 0 ? KeyCode.RightArrow : KeyCode.LeftArrow;
-	//	if (onKey != null) onKey(mCurrentSelection, key);
+	//	if (onKey != nullptr) onKey(mCurrentSelection, key);
 	//	Notify(mCurrentSelection, "OnKey", key);
 	//}
 
@@ -904,7 +904,7 @@ void InputMgr::ProcessOthers()
 	//{
 	//	currentKey = KeyCode.Tab;
 	//	currentScheme = ControlScheme.Controller;
-	//	if (onKey != null) onKey(mCurrentSelection, KeyCode.Tab);
+	//	if (onKey != nullptr) onKey(mCurrentSelection, KeyCode.Tab);
 	//	Notify(mCurrentSelection, "OnKey", KeyCode.Tab);
 	//}
 
@@ -913,7 +913,7 @@ void InputMgr::ProcessOthers()
 	//{
 	//	currentKey = cancelKey0;
 	//	currentScheme = ControlScheme.Controller;
-	//	if (onKey != null) onKey(mCurrentSelection, KeyCode.Escape);
+	//	if (onKey != nullptr) onKey(mCurrentSelection, KeyCode.Escape);
 	//	Notify(mCurrentSelection, "OnKey", KeyCode.Escape);
 	//}
 
@@ -921,11 +921,11 @@ void InputMgr::ProcessOthers()
 	//{
 	//	currentKey = cancelKey1;
 	//	currentScheme = ControlScheme.Controller;
-	//	if (onKey != null) onKey(mCurrentSelection, KeyCode.Escape);
+	//	if (onKey != nullptr) onKey(mCurrentSelection, KeyCode.Escape);
 	//	Notify(mCurrentSelection, "OnKey", KeyCode.Escape);
 	//}
 
-	//currentTouch = null;
+	//currentTouch = nullptr;
 	//currentKey = KeyCode.None;
 }
 
@@ -943,28 +943,28 @@ void InputMgr::ProcessTouch(bool pressed, bool unpressed)
 	//// Send out the press message
 	//if (pressed)
 	//{
-	//	if (mTooltip != null) ShowTooltip(false);
+	//	if (mTooltip != nullptr) ShowTooltip(false);
 
 	//	currentTouch.pressStarted = true;
-	//	if (onPress != null) onPress(currentTouch.pressed, false);
+	//	if (onPress != nullptr) onPress(currentTouch.pressed, false);
 	//	Notify(currentTouch.pressed, "OnPress", false);
 	//	currentTouch.pressed = currentTouch.current;
 	//	currentTouch.dragged = currentTouch.current;
 	//	currentTouch.clickNotification = ClickNotification.BasedOnDelta;
 	//	currentTouch.totalDelta = Vector2.zero;
 	//	currentTouch.dragStarted = false;
-	//	if (onPress != null) onPress(currentTouch.pressed, true);
+	//	if (onPress != nullptr) onPress(currentTouch.pressed, true);
 	//	Notify(currentTouch.pressed, "OnPress", true);
 
 	//	// Update the selection
 	//	if (currentTouch.pressed != mCurrentSelection)
 	//	{
-	//		if (mTooltip != null) ShowTooltip(false);
+	//		if (mTooltip != nullptr) ShowTooltip(false);
 	//		currentScheme = ControlScheme.Touch;
 	//		selectedObject = currentTouch.pressed;
 	//	}
 	//}
-	//else if (currentTouch.pressed != null && (currentTouch.delta.sqrMagnitude != 0f || currentTouch.current != currentTouch.last))
+	//else if (currentTouch.pressed != nullptr && (currentTouch.delta.sqrMagnitude != 0f || currentTouch.current != currentTouch.last))
 	//{
 	//	// Keep track of the total movement
 	//	currentTouch.totalDelta += currentTouch.delta;
@@ -980,10 +980,10 @@ void InputMgr::ProcessTouch(bool pressed, bool unpressed)
 	//		// OnDragOver is sent for consistency, so that OnDragOut is always preceded by OnDragOver
 	//		isDragging = true;
 
-	//		if (onDragStart != null) onDragStart(currentTouch.dragged);
-	//		Notify(currentTouch.dragged, "OnDragStart", null);
+	//		if (onDragStart != nullptr) onDragStart(currentTouch.dragged);
+	//		Notify(currentTouch.dragged, "OnDragStart", nullptr);
 
-	//		if (onDragOver != null) onDragOver(currentTouch.last, currentTouch.dragged);
+	//		if (onDragOver != nullptr) onDragOver(currentTouch.last, currentTouch.dragged);
 	//		Notify(currentTouch.last, "OnDragOver", currentTouch.dragged);
 
 	//		isDragging = false;
@@ -999,29 +999,29 @@ void InputMgr::ProcessTouch(bool pressed, bool unpressed)
 	//	// If we're dragging the touch, send out drag events
 	//	if (currentTouch.dragStarted)
 	//	{
-	//		if (mTooltip != null) ShowTooltip(false);
+	//		if (mTooltip != nullptr) ShowTooltip(false);
 
 	//		isDragging = true;
 	//		bool isDisabled = (currentTouch.clickNotification == ClickNotification.None);
 
 	//		if (justStarted)
 	//		{
-	//			if (onDragStart != null) onDragStart(currentTouch.dragged);
-	//			Notify(currentTouch.dragged, "OnDragStart", null);
+	//			if (onDragStart != nullptr) onDragStart(currentTouch.dragged);
+	//			Notify(currentTouch.dragged, "OnDragStart", nullptr);
 
-	//			if (onDragOver != null) onDragOver(currentTouch.last, currentTouch.dragged);
+	//			if (onDragOver != nullptr) onDragOver(currentTouch.last, currentTouch.dragged);
 	//			Notify(currentTouch.current, "OnDragOver", currentTouch.dragged);
 	//		}
 	//		else if (currentTouch.last != currentTouch.current)
 	//		{
-	//			if (onDragStart != null) onDragStart(currentTouch.dragged);
+	//			if (onDragStart != nullptr) onDragStart(currentTouch.dragged);
 	//			Notify(currentTouch.last, "OnDragOut", currentTouch.dragged);
 
-	//			if (onDragOver != null) onDragOver(currentTouch.last, currentTouch.dragged);
+	//			if (onDragOver != nullptr) onDragOver(currentTouch.last, currentTouch.dragged);
 	//			Notify(currentTouch.current, "OnDragOver", currentTouch.dragged);
 	//		}
 
-	//		if (onDrag != null) onDrag(currentTouch.dragged, currentTouch.delta);
+	//		if (onDrag != nullptr) onDrag(currentTouch.dragged, currentTouch.delta);
 	//		Notify(currentTouch.dragged, "OnDrag", currentTouch.delta);
 
 	//		currentTouch.last = currentTouch.current;
@@ -1044,28 +1044,28 @@ void InputMgr::ProcessTouch(bool pressed, bool unpressed)
 	//if (unpressed)
 	//{
 	//	currentTouch.pressStarted = false;
-	//	if (mTooltip != null) ShowTooltip(false);
+	//	if (mTooltip != nullptr) ShowTooltip(false);
 
-	//	if (currentTouch.pressed != null)
+	//	if (currentTouch.pressed != nullptr)
 	//	{
 	//		// If there was a drag event in progress, make sure OnDragOut gets sent
 	//		if (currentTouch.dragStarted)
 	//		{
-	//			if (onDragOut != null) onDragOut(currentTouch.last, currentTouch.dragged);
+	//			if (onDragOut != nullptr) onDragOut(currentTouch.last, currentTouch.dragged);
 	//			Notify(currentTouch.last, "OnDragOut", currentTouch.dragged);
 
-	//			if (onDragEnd != null) onDragEnd(currentTouch.dragged);
-	//			Notify(currentTouch.dragged, "OnDragEnd", null);
+	//			if (onDragEnd != nullptr) onDragEnd(currentTouch.dragged);
+	//			Notify(currentTouch.dragged, "OnDragEnd", nullptr);
 	//		}
 
 	//		// Send the notification of a touch ending
-	//		if (onPress != null) onPress(currentTouch.pressed, false);
+	//		if (onPress != nullptr) onPress(currentTouch.pressed, false);
 	//		Notify(currentTouch.pressed, "OnPress", false);
 
 	//		// Send a hover message to the object
 	//		if (isMouse)
 	//		{
-	//			if (onHover != null) onHover(currentTouch.current, true);
+	//			if (onHover != nullptr) onHover(currentTouch.current, true);
 	//			Notify(currentTouch.current, "OnHover", true);
 	//		}
 	//		mHover = currentTouch.current;
@@ -1078,14 +1078,14 @@ void InputMgr::ProcessTouch(bool pressed, bool unpressed)
 	//		{
 	//			if (currentTouch.pressed != mCurrentSelection)
 	//			{
-	//				mNextSelection = null;
+	//				mNextSelection = nullptr;
 	//				mCurrentSelection = currentTouch.pressed;
-	//				if (onSelect != null) onSelect(currentTouch.pressed, true);
+	//				if (onSelect != nullptr) onSelect(currentTouch.pressed, true);
 	//				Notify(currentTouch.pressed, "OnSelect", true);
 	//			}
 	//			else
 	//			{
-	//				mNextSelection = null;
+	//				mNextSelection = nullptr;
 	//				mCurrentSelection = currentTouch.pressed;
 	//			}
 
@@ -1094,13 +1094,13 @@ void InputMgr::ProcessTouch(bool pressed, bool unpressed)
 	//			{
 	//				float time = RealTime.time;
 
-	//				if (onClick != null) onClick(currentTouch.pressed);
-	//				Notify(currentTouch.pressed, "OnClick", null);
+	//				if (onClick != nullptr) onClick(currentTouch.pressed);
+	//				Notify(currentTouch.pressed, "OnClick", nullptr);
 
 	//				if (currentTouch.clickTime + 0.35f > time)
 	//				{
-	//					if (onDoubleClick != null) onDoubleClick(currentTouch.pressed);
-	//					Notify(currentTouch.pressed, "OnDoubleClick", null);
+	//					if (onDoubleClick != nullptr) onDoubleClick(currentTouch.pressed);
+	//					Notify(currentTouch.pressed, "OnDoubleClick", nullptr);
 	//				}
 	//				currentTouch.clickTime = time;
 	//			}
@@ -1108,32 +1108,32 @@ void InputMgr::ProcessTouch(bool pressed, bool unpressed)
 	//		else if (currentTouch.dragStarted) // The button/touch was released on a different object
 	//		{
 	//			// Send a drop notification (for drag & drop)
-	//			if (onDrop != null) onDrop(currentTouch.current, currentTouch.dragged);
+	//			if (onDrop != nullptr) onDrop(currentTouch.current, currentTouch.dragged);
 	//			Notify(currentTouch.current, "OnDrop", currentTouch.dragged);
 	//		}
 	//	}
 	//	currentTouch.dragStarted = false;
-	//	currentTouch.pressed = null;
-	//	currentTouch.dragged = null;
+	//	currentTouch.pressed = nullptr;
+	//	currentTouch.dragged = nullptr;
 	//}
 }
 
 void InputMgr::ShowTooltip(bool val)
 {
 	//mTooltipTime = 0f;
-	//if (onTooltip != null) onTooltip(mTooltip, val);
+	//if (onTooltip != nullptr) onTooltip(mTooltip, val);
 	//Notify(mTooltip, "OnTooltip", val);
-	//if (!val) mTooltip = null;
+	//if (!val) mTooltip = nullptr;
 }
 
 // Ä£ÄâÍ£Ö¹ÍÏ·Å
 void InputMgr::simuStopDrag()
 {
-	//if (currentTouch != null)
+	//if (currentTouch != nullptr)
 	//{
 	//	currentTouch.dragStarted = false;
-	//	currentTouch.pressed = null;
-	//	currentTouch.dragged = null;
+	//	currentTouch.pressed = nullptr;
+	//	currentTouch.dragged = nullptr;
 	//}
 }
 
@@ -1147,7 +1147,7 @@ void InputMgr::OnApplicationPause()
 
 	//	foreach(KeyValuePair<int, MouseOrTouch> pair in mTouches)
 	//	{
-	//		if (pair.Value != null && pair.Value.pressed)
+	//		if (pair.Value != nullptr && pair.Value.pressed)
 	//		{
 	//			currentTouch = pair.Value;
 	//			currentTouchID = pair.Key;
@@ -1189,7 +1189,7 @@ void InputMgr::OnApplicationPause()
 	//		currentTouch.current = mCurrentSelection;
 	//		currentTouch.clickNotification = ClickNotification.None;
 	//		ProcessTouch(false, true);
-	//		currentTouch.last = null;
+	//		currentTouch.last = nullptr;
 	//	}
 	//}
 	//currentTouch = prev;

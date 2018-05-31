@@ -12,7 +12,7 @@ LoadedWebResMR::LoadedWebResMR()
 
 void LoadedWebResMR::resetDefault()
 {
-	//m_task = null;
+	//m_task = nullptr;
 }
 
 MY_END_NAMESPACE

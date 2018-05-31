@@ -127,7 +127,7 @@ void UForm::exit()
 // 界面代码创建后就调用
 void UForm::onInit()
 {
-	//if (m_luaCSBridgeForm != null)
+	//if (m_luaCSBridgeForm != nullptr)
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_INIT);
 	//}
@@ -141,7 +141,7 @@ void UForm::onInit()
 // 第一次显示之前会调用一次
 void UForm::onReady()
 {
-	//if (m_luaCSBridgeForm != null)
+	//if (m_luaCSBridgeForm != nullptr)
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_READY);
 	//}
@@ -159,7 +159,7 @@ void UForm::onShow()
 {
 	this->mIsVisible = true;
 
-	//if (m_luaCSBridgeForm != null)
+	//if (m_luaCSBridgeForm != nullptr)
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_SHOW);
 	//}
@@ -176,7 +176,7 @@ void UForm::onHide()
 {
 	this->mIsVisible = false;
 
-	//if (m_luaCSBridgeForm != null)
+	//if (m_luaCSBridgeForm != nullptr)
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_HIDE);
 	//}
@@ -193,7 +193,7 @@ void UForm::onExit()
 	this->mIsVisible = false;
 	this->mIsReady = false;
 
-	//if (m_luaCSBridgeForm != null)
+	//if (m_luaCSBridgeForm != nullptr)
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_EXIT);
 	//}

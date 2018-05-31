@@ -270,13 +270,13 @@ LuaCObject* LuaCScriptMgr::GetVarObject(lua_State* L, int stackPos)
 
 		//if (udata != -1)
 		//{
-		//	object obj = null;
+		//	object obj = nullptr;
 		//	GetTranslator(L).objects.TryGetValue(udata, out obj);
 		//	return obj;
 		//}
 		//else
 		//{
-		//	return null;
+		//	return nullptr;
 		//}
 	}
 	case LUA_TBOOLEAN:
@@ -503,7 +503,7 @@ void LuaCScriptMgr::PushVarObject(lua_State* L, LuaCObject* o)
 	//	{
 	//		UnityEngine.Object obj = (UnityEngine.Object)o;
 
-	//		if (obj == null)
+	//		if (obj == nullptr)
 	//		{
 	//			LuaDLL.lua_pushnil(L);
 	//		}
@@ -528,7 +528,7 @@ void LuaCScriptMgr::PushVarObject(lua_State* L, LuaCObject* o)
 	//	{
 	//		UnityEngine.TrackedReference obj = (UnityEngine.TrackedReference)o;
 
-	//		if (obj == null)
+	//		if (obj == nullptr)
 	//		{
 	//			LuaDLL.lua_pushnil(L);
 	//		}
@@ -755,7 +755,7 @@ bool LuaCScriptMgr::PushLuaTable(lua_State* L, std::string fullPath)
 //
 //void LuaCScriptMgr::Push(lua_State* L, UnityEngine.Object obj)
 //{
-//	PushObject(L, obj == null ? null : obj);
+//	PushObject(L, obj == nullptr ? nullptr : obj);
 //}
 
 void LuaCScriptMgr::split(std::string& s, std::string& delim, std::vector<std::string>* ret)

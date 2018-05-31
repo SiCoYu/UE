@@ -49,10 +49,10 @@ void HttpWebDownloadItem::downWithNoFileLen()
     //    saveFile = UtilLogic.combineVerPath(saveFile, mVersion);
     //}
 
-    //HttpWebRequest request = null;
-    //HttpWebResponse response = null;
-    //System.IO.Stream retStream = null;
-    //MDataStream fileStream = null;
+    //HttpWebRequest request = nullptr;
+    //HttpWebResponse response = nullptr;
+    //System.IO.Stream retStream = nullptr;
+    //MDataStream fileStream = nullptr;
 
     //try
     //{
@@ -61,13 +61,13 @@ void HttpWebDownloadItem::downWithNoFileLen()
     //    request.Method = "GET";
     //    request.ContentType = "application/x-www-form-urlencoded";
     //    request.KeepAlive = false;
-    //    request.Proxy = null;
+    //    request.Proxy = nullptr;
     //    request.Timeout = 5000;
 
     //    ServicePointManager.DefaultConnectionLimit = 50;
 
     //    // GetRequestStream 总是出错，因此只能使用 GET 方式
-    //    //StreamWriter requestWriter = null;
+    //    //StreamWriter requestWriter = nullptr;
     //    //Stream webStream = request.GetRequestStream();
     //    //requestWriter = new StreamWriter(webStream);
     //    //try
@@ -85,7 +85,7 @@ void HttpWebDownloadItem::downWithNoFileLen()
 
     //    if (UtilPath.existFile(saveFile))
     //    {
-    //        fileStream = new MDataStream(saveFile, null, FileMode.Append, FileAccess.Write);
+    //        fileStream = new MDataStream(saveFile, nullptr, FileMode.Append, FileAccess.Write);
     //        startPos = fileStream.getLength();
 
     //        fileStream.seek(startPos, SeekOrigin.Current); //移动文件流中的当前指针 
@@ -103,7 +103,7 @@ void HttpWebDownloadItem::downWithNoFileLen()
     //                UtilPath.createDirectory(path);
     //            }
 
-    //            fileStream = new MDataStream(origFile, null, FileMode.CreateNew, FileAccess.Write);
+    //            fileStream = new MDataStream(origFile, nullptr, FileMode.CreateNew, FileAccess.Write);
     //        }
     //        catch (Exception exp)
     //        {
@@ -140,14 +140,14 @@ void HttpWebDownloadItem::downWithNoFileLen()
 
     //    // 释放资源
     //    request.Abort();
-    //    request = null;
+    //    request = nullptr;
 
     //    response.Close();
-    //    response = null;
+    //    response = nullptr;
 
     //    retStream.Close();
     //    fileStream.dispose();
-    //    fileStream = null;
+    //    fileStream = nullptr;
 
     //    // 修改文件名字
     //    if (bNeedReName)
@@ -162,28 +162,28 @@ void HttpWebDownloadItem::downWithNoFileLen()
     //catch (Exception exp)
     //{
     //    // 释放资源
-    //    if (request != null)
+    //    if (request != nullptr)
     //    {
     //        request.Abort();
-    //        request = null;
+    //        request = nullptr;
     //    }
 
-    //    if (response != null)
+    //    if (response != nullptr)
     //    {
     //        response.Close();
-    //        response = null;
+    //        response = nullptr;
     //    }
 
-    //    if (retStream != null)
+    //    if (retStream != nullptr)
     //    {
     //        retStream.Close();
-    //        retStream = null;
+    //        retStream = nullptr;
     //    }
 
-    //    if (fileStream != null)
+    //    if (fileStream != nullptr)
     //    {
     //        fileStream.dispose();
-    //        fileStream = null;
+    //        fileStream = nullptr;
     //    }
 
     //    mRefCountResLoadResultNotify.resLoadState.setFailed();
@@ -203,10 +203,10 @@ void HttpWebDownloadItem::downWithFileLen()
     //    saveFile = UtilLogic.combineVerPath(saveFile, mVersion);
     //}
 
-    //HttpWebRequest request = null;
-    //HttpWebResponse response = null;
-    //System.IO.Stream retStream = null;
-    //MDataStream fileStream = null;
+    //HttpWebRequest request = nullptr;
+    //HttpWebResponse response = nullptr;
+    //System.IO.Stream retStream = nullptr;
+    //MDataStream fileStream = nullptr;
 
     //try
     //{
@@ -215,13 +215,13 @@ void HttpWebDownloadItem::downWithFileLen()
     //    request.Method = "GET";
     //    request.ContentType = "application/x-www-form-urlencoded";
     //    request.KeepAlive = false;
-    //    request.Proxy = null;
+    //    request.Proxy = nullptr;
     //    request.Timeout = 5000; // 在服务器上查找文件的最大等待时间
 
     //    ServicePointManager.DefaultConnectionLimit = 50;
 
     //    // GetRequestStream 总是出错，因此只能使用 GET 方式
-    //    //StreamWriter requestWriter = null;
+    //    //StreamWriter requestWriter = nullptr;
     //    //Stream webStream = request.GetRequestStream();
     //    //requestWriter = new StreamWriter(webStream);
     //    //try
@@ -240,13 +240,13 @@ void HttpWebDownloadItem::downWithFileLen()
 
     //    if (UtilPath.existFile(origFile))
     //    {
-    //        fileStream = new MDataStream(origFile, null, FileMode.Append, FileAccess.Write);
+    //        fileStream = new MDataStream(origFile, nullptr, FileMode.Append, FileAccess.Write);
     //        startPos = fileStream.getLength();
 
     //        if (contentLength - startPos <= 0)     // 文件已经完成
     //        {
     //            fileStream.dispose();
-    //            fileStream = null;
+    //            fileStream = nullptr;
 
     //            onRunTaskEnd();
 
@@ -268,7 +268,7 @@ void HttpWebDownloadItem::downWithFileLen()
     //                UtilPath.createDirectory(path);
     //            }
 
-    //            fileStream = new MDataStream(origFile, null, FileMode.CreateNew, FileAccess.Write);
+    //            fileStream = new MDataStream(origFile, nullptr, FileMode.CreateNew, FileAccess.Write);
     //        }
     //        catch (Exception exp)
     //        {
@@ -312,14 +312,14 @@ void HttpWebDownloadItem::downWithFileLen()
 
     //    // 释放资源
     //    request.Abort();
-    //    request = null;
+    //    request = nullptr;
 
     //    response.Close();
-    //    response = null;
+    //    response = nullptr;
 
     //    retStream.Close();
     //    fileStream.dispose();
-    //    fileStream = null;
+    //    fileStream = nullptr;
 
     //    // 修改文件名字
     //    if (bNeedReName)
@@ -329,7 +329,7 @@ void HttpWebDownloadItem::downWithFileLen()
 
     //    if (!isBytesValid)
     //    {
-    //        mBytes = null;
+    //        mBytes = nullptr;
     //    }
 
     //    if (readedLength == contentLength)
@@ -346,28 +346,28 @@ void HttpWebDownloadItem::downWithFileLen()
     //catch (Exception exp)
     //{
     //    // 释放资源
-    //    if (request != null)
+    //    if (request != nullptr)
     //    {
     //        request.Abort();
-    //        request = null;
+    //        request = nullptr;
     //    }
 
-    //    if (response != null)
+    //    if (response != nullptr)
     //    {
     //        response.Close();
-    //        response = null;
+    //        response = nullptr;
     //    }
 
-    //    if (retStream != null)
+    //    if (retStream != nullptr)
     //    {
     //        retStream.Close();
-    //        retStream = null;
+    //        retStream = nullptr;
     //    }
 
-    //    if (fileStream != null)
+    //    if (fileStream != nullptr)
     //    {
     //        fileStream.dispose();
-    //        fileStream = null;
+    //        fileStream = nullptr;
     //    }
 
     //    mRefCountResLoadResultNotify.resLoadState.setFailed();
