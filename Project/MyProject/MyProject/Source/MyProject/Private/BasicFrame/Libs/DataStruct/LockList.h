@@ -9,6 +9,9 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 线程安全列表， T 是 Object ，便于使用 Equal 比较地址
@@ -138,5 +141,7 @@ public:
 		}
 	}
 };
+
+MY_END_NAMESPACE
 
 #endif

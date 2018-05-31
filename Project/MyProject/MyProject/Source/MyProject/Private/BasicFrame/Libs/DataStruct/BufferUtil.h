@@ -1,6 +1,10 @@
 #ifndef __BufferUtil_H
 #define __BufferUtil_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 class BufferUtil
 {
 public:
@@ -10,4 +14,6 @@ public:
 	static void* memSwap(void* dest, void* source, size_t count);
 };
 
-#endif		// __BUFFERUTIL_H
+MY_END_NAMESPACE
+
+#endif		// __BufferUtil_H

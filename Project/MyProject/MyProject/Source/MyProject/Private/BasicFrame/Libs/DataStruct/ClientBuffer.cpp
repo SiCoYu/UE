@@ -10,6 +10,8 @@
 #include "UtilStr.h"
 #include "UtilMsg.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 ClientBuffer::ClientBuffer()
 {
 	this->mRawBuffer = MY_NEW MsgBuffer();
@@ -430,3 +432,5 @@ void ClientBuffer::UnCompressAndDecryptAllInOne()
 		this->mMsgBuffer->getCircularBuffer()->pushBackBA(this->mRawBuffer->getMsgBodyBA());      // 保存消息大小字段
 	}
 }
+
+MY_END_NAMESPACE

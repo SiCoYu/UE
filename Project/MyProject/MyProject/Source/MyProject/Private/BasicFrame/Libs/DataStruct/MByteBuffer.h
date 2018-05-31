@@ -14,6 +14,9 @@
 #include "BufferCV.h"
 #include "IDispatchObject.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 template <class T> class DynBuffer;
 
@@ -112,5 +115,7 @@ public:
 	MByteBuffer& readUnsignedLongByOffset(uint64& tmpUlong, uint32 offset);
 	//bool check();
 };
+
+MY_END_NAMESPACE
 
 #endif

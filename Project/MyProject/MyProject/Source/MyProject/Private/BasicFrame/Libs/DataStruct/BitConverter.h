@@ -2,6 +2,9 @@
 #define __BitConverter_H
 
 #include "MyProject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class BitConverter
 {
@@ -24,5 +27,7 @@ public:
 	static uint32 swapByteOrder(uint32 value);
 	static double swapByteOrder(double value);
 };
+
+MY_END_NAMESPACE
 
 #endif

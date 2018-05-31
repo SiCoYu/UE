@@ -3,6 +3,8 @@
 #include <assert.h>
 #include <string.h>
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void* BufferUtil::memSwap(void* dest, void* source, std::size_t count)
 {
 	assert((NULL != dest) && (NULL != source));
@@ -25,3 +27,5 @@ void* BufferUtil::memSwap(void* dest, void* source, std::size_t count)
 
 	return dest;
 }
+
+MY_END_NAMESPACE

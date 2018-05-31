@@ -10,6 +10,9 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 动态增长缓冲区，不分类型，就是 byte 缓冲区
@@ -151,5 +154,7 @@ public:
 		return ret;
 	}
 };
+
+MY_END_NAMESPACE
 
 #endif			// __DynBuffer_H

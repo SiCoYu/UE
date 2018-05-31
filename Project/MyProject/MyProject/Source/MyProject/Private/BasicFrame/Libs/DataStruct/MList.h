@@ -9,6 +9,9 @@
 
 #include "UtilStr.h"
 #include "UtilContainers.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
 * @brief 对系统 List 的封装
@@ -108,5 +111,7 @@ public:
 		return indexOf(item) != -1;
 	}
 };
+
+MY_END_NAMESPACE
 
 #endif

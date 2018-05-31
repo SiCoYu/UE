@@ -4,6 +4,8 @@
 #include "MyProject.h"
 #include "PlatformDefine.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 class MsgBuffer;
 template <class T> class DynBuffer;
 class MByteBuffer;
@@ -71,4 +73,6 @@ protected:
 	void UnCompressAndDecryptAllInOne();
 };
 
-#endif				// __NETCLIENTBUFFER_H
+MY_END_NAMESPACE
+
+#endif				// __ClientBuffer_H

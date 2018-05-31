@@ -3,6 +3,9 @@
 
 #include <map>
 #include "GContainerObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 template <class TKey, class TValue>
 class MDictionary : GContainerObject
@@ -39,5 +42,7 @@ public:
 };
 
 #include "MDictionary.inl"
+
+MY_END_NAMESPACE
 
 #endif

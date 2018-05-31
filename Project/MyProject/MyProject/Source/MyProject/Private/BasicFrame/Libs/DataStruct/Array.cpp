@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "Array.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 void Array::Copy(void* src, long srcIndex, void* dest, long destIndex, long length)
 {
 	char *tmp_source, *tmp_dest;

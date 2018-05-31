@@ -8,6 +8,8 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief 构造函数
  */
@@ -318,3 +320,5 @@ void MCircularBuffer::pushBackCB(MCircularBuffer* rhv)
 	//}
 	//rhv.clear();
 }
+
+MY_END_NAMESPACE

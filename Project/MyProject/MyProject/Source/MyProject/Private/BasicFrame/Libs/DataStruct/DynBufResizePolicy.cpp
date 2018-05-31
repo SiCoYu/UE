@@ -1,8 +1,15 @@
 #include "MyProject.h"
 #include "DynBufResizePolicy.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 // 获取一个最近的大小
-uint32 DynBufResizePolicy::getCloseSize(uint32 needSize, uint32 capacity, uint32 maxCapacity)
+uint32 DynBufResizePolicy::getCloseSize(
+	uint32 needSize, 
+	uint32 capacity, 
+	uint32 
+	maxCapacity
+)
 {
 	uint32 ret = 0;
 
@@ -33,3 +40,5 @@ uint32 DynBufResizePolicy::getCloseSize(uint32 needSize, uint32 capacity, uint32
 
 	return ret;
 }
+
+MY_END_NAMESPACE

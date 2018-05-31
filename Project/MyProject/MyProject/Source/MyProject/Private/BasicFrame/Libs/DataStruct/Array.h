@@ -1,6 +1,10 @@
 #ifndef __Array_H
 #define __Array_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief ÄÚ´æ²Ù×÷
  */

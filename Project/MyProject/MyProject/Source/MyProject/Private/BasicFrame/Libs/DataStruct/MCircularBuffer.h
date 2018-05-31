@@ -8,6 +8,9 @@
 #include "BufferCV.h"
 #include "DynBuffer.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 //template <class T> class DynBuffer<char>;
 class MByteBuffer;
@@ -55,5 +58,6 @@ public:
 	void pushBackCB(MCircularBuffer* rhv);
 };
 
+MY_END_NAMESPACE
 
-#endif				// __CIRCULARBUFFER_H
+#endif				// __MCircularBuffer_H

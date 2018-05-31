@@ -2,6 +2,9 @@
 #define __MsgBuffer_H
 
 #include "BufferCV.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MCircularBuffer;
 class MByteBuffer;
@@ -39,4 +42,6 @@ public:
 	bool popFront();
 };
 
-#endif				// __MSGBUFFER_H
+MY_END_NAMESPACE
+
+#endif				// __MsgBuffer_H

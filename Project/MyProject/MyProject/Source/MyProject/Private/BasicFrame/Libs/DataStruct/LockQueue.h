@@ -3,6 +3,9 @@
 
 #include <string>
 #include "LockList.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 template <class T>
 class LockQueue
@@ -27,5 +30,7 @@ public:
 		return mList.RemoveAt(0);
 	}
 };
+
+MY_END_NAMESPACE
 
 #endif

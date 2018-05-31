@@ -10,6 +10,8 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MByteBuffer::MByteBuffer(
 	uint32 initCapacity, 
 	uint32 maxCapacity, 
@@ -780,3 +782,5 @@ MByteBuffer& MByteBuffer::readUnsignedLongByOffset(uint64& tmpUlong, uint32 offs
 
 //    return true;
 //}
+
+MY_END_NAMESPACE

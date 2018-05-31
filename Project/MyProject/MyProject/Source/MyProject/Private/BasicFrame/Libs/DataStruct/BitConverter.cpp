@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "BitConverter.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 char BitConverter::ToChar(char* value, int startIndex)
 {
 	return value[startIndex];
@@ -92,3 +94,5 @@ double BitConverter::swapByteOrder(double value)
 	//return BitConverter.ToDouble(buffer, 0);
 	return 0;
 }
+
+MY_END_NAMESPACE

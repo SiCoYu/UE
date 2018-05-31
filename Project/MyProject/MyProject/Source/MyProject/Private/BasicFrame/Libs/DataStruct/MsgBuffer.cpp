@@ -4,6 +4,8 @@
 #include "MByteBuffer.h"
 #include "MsgCV.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MsgBuffer::MsgBuffer(uint32 initCapacity, uint32 maxCapacity)
 {
 	this->mCircularBuffer = MY_NEW MCircularBuffer(initCapacity, maxCapacity);
@@ -90,3 +92,5 @@ bool MsgBuffer::popFront()
 
 	return ret;
 }
+
+MY_END_NAMESPACE
