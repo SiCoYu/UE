@@ -1,4 +1,8 @@
-﻿#pragma once
+﻿#pragma once.
+
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief 优先级队列对象
@@ -54,3 +58,5 @@ class PriorityProcessObject : GObject
         return (int)BufferType.eBT_PriorityProcessObject;
     }
 };
+
+MY_END_NAMESPACE

@@ -1,6 +1,9 @@
 ﻿#pragma once
 
 #include "MList.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief MIndexList ，元素是保存一个在列表中的索引的，减少 Key 比较，加快查找
@@ -268,3 +271,5 @@ protected:
         }
     }
 };
+
+MY_END_NAMESPACE

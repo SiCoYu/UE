@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief 通过 Key 索引的列表
  */
@@ -98,3 +102,5 @@ class MKeyIndexList
         return this.mIndexDic.containsKey(key);
     }
 };
+
+MY_END_NAMESPACE

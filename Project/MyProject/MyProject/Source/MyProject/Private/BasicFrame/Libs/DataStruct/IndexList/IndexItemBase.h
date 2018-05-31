@@ -1,6 +1,9 @@
 ﻿#pragma once
 
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class IndexItemBase : public GObject
 {
@@ -38,3 +41,5 @@ public:
         this.mIndex = -1;
     }
 };
+
+MY_END_NAMESPACE

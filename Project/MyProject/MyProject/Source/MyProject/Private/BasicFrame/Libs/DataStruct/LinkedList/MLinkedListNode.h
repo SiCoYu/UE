@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 public class MLinkedListNode : GObject
 {
     // 一个节点可能在几个列表中，这个 list 字段主要是记录头和尾节点的，如果中间节点就在一个列表中，也可以设置这个字段
@@ -189,3 +193,5 @@ public class MLinkedListNode : GObject
         }
     }
 }
+
+MY_END_NAMESPACE

@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 public class MLinkedList : GContainerObject
 {
     protected MLinkedListNode mHeadNode;
@@ -275,3 +279,5 @@ public class MLinkedList : GContainerObject
         return str;
     }
 }
+
+MY_END_NAMESPACE

@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief 优先级队列，外部一定不能直接引用 PriorityProcessObject 类型的对象，内部会管理 PriorityProcessObject 的生命周期
  */
@@ -355,3 +359,5 @@ class PriorityList : GObject, INoOrPriorityList
         }
     }
 };
+
+MY_END_NAMESPACE
