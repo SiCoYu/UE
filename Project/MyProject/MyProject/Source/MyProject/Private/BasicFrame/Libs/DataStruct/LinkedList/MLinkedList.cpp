@@ -7,8 +7,8 @@
 
         public MLinkedList()
         {
-            this.mHeadNode = nullptr;
-            this.mTailNode = nullptr;
+            this->mHeadNode = nullptr;
+            this->mTailNode = nullptr;
         }
 
         public void init()
@@ -18,116 +18,116 @@
 
         public void dispose()
         {
-            this.mHeadNode = nullptr;
-            this.mTailNode = nullptr;
+            this->mHeadNode = nullptr;
+            this->mTailNode = nullptr;
         }
 
         public void clear()
         {
-            this.mHeadNode = nullptr;
-            this.mTailNode = nullptr;
+            this->mHeadNode = nullptr;
+            this->mTailNode = nullptr;
         }
 
         public bool isHeadExist()
         {
-            return (nullptr != this.mHeadNode);
+            return (nullptr != this->mHeadNode);
         }
 
         public MLinkedListNode getHead()
         {
-            return this.mHeadNode;
+            return this->mHeadNode;
         }
 
         public void addHead(MLinkedListNode node)
         {
-            if (nullptr != this.mHeadNode)
+            if (nullptr != this->mHeadNode)
             {
-                node.setNextNode(this.mHeadNode);
-                this.mHeadNode.setPreNode(node);
-                this.mHeadNode = node;
+                node.setNextNode(this->mHeadNode);
+                this->mHeadNode.setPreNode(node);
+                this->mHeadNode = node;
             }
             else
             {
-                this.mHeadNode = node;
-                this.mTailNode = node;
+                this->mHeadNode = node;
+                this->mTailNode = node;
             }
         }
 
         // 直接重新设置
         public void setHead(MLinkedListNode node)
         {
-            if (nullptr != this.mHeadNode)
+            if (nullptr != this->mHeadNode)
             {
-                node.setNextNode(this.mHeadNode.getNextNode());
+                node.setNextNode(this->mHeadNode.getNextNode());
 
-                if (nullptr != this.mHeadNode.getNextNode())
+                if (nullptr != this->mHeadNode.getNextNode())
                 {
-                    this.mHeadNode.getNextNode().setPreNode(node);
+                    this->mHeadNode.getNextNode().setPreNode(node);
                 }
 
-                this.mHeadNode = node;
+                this->mHeadNode = node;
             }
             else
             {
-                this.mHeadNode = node;
-                this.mTailNode = node;
+                this->mHeadNode = node;
+                this->mTailNode = node;
             }
         }
 
         public bool isTailExist()
         {
-            bool ret = (nullptr != this.mTailNode);
+            bool ret = (nullptr != this->mTailNode);
             return ret;
         }
 
         public bool isTailExistAndNoEqualHead()
         {
-            return (nullptr != this.mTailNode && this.mHeadNode != this.mTailNode);
+            return (nullptr != this->mTailNode && this->mHeadNode != this->mTailNode);
         }
 
         public bool isEmpty()
         {
-            return (nullptr == this.mHeadNode && nullptr == this.mTailNode);
+            return (nullptr == this->mHeadNode && nullptr == this->mTailNode);
         }
 
         public MLinkedListNode getTail()
         {
-            return this.mTailNode;
+            return this->mTailNode;
         }
 
         public void addTail(MLinkedListNode node)
         {
-            if (nullptr != this.mTailNode)
+            if (nullptr != this->mTailNode)
             {
-                node.setPreNode(this.mTailNode);
-                this.mTailNode.setNextNode(node);
-                this.mTailNode = node;
+                node.setPreNode(this->mTailNode);
+                this->mTailNode.setNextNode(node);
+                this->mTailNode = node;
             }
             else
             {
-                this.mHeadNode = node;
-                this.mTailNode = node;
+                this->mHeadNode = node;
+                this->mTailNode = node;
             }
         }
 
         // 直接重新设置
         public void setTail(MLinkedListNode node)
         {
-            if (nullptr != this.mTailNode)
+            if (nullptr != this->mTailNode)
             {
-                node.setPreNode(this.mTailNode.getPreNode());
+                node.setPreNode(this->mTailNode.getPreNode());
 
-                if (nullptr != this.mTailNode.getPreNode())
+                if (nullptr != this->mTailNode.getPreNode())
                 {
-                    this.mHeadNode.getPreNode().setNextNode(node);
+                    this->mHeadNode.getPreNode().setNextNode(node);
                 }
 
-                this.mTailNode = node;
+                this->mTailNode = node;
             }
             else
             {
-                this.mHeadNode = node;
-                this.mTailNode = node;
+                this->mHeadNode = node;
+                this->mTailNode = node;
             }
         }
 
@@ -150,7 +150,7 @@
                 }
                 else
                 {
-                    this.addTail(node);
+                    this->addTail(node);
                 }
             }
         }
@@ -174,20 +174,20 @@
                 }
                 else
                 {
-                    this.addHead(node);
+                    this->addHead(node);
                 }
             }
         }
 
         public void add(MLinkedListNode node)
         {
-            this.addTail(node);
+            this->addTail(node);
         }
 
         public int count()
         {
             MLinkedListNode tmpNode = nullptr;
-            tmpNode = this.mHeadNode;
+            tmpNode = this->mHeadNode;
             int count = 0;
 
             while (nullptr != tmpNode)
@@ -201,27 +201,27 @@
 
         public void reverse()
         {
-            if (!this.isEmpty())
+            if (!this->isEmpty())
             {
-                if (this.mHeadNode == this.mTailNode)
+                if (this->mHeadNode == this->mTailNode)
                 {
-                    this.remove(this.mTailNode);
-                    this.addHead(this.mHeadNode);
+                    this->remove(this->mTailNode);
+                    this->addHead(this->mHeadNode);
                 }
                 else
                 {
                     MLinkedListNode curNode = nullptr;
                     MLinkedListNode nextNode = nullptr;
 
-                    nextNode = this.mHeadNode.getNextNode();
+                    nextNode = this->mHeadNode.getNextNode();
 
                     while (nullptr != nextNode)
                     {
                         curNode = nextNode;
                         nextNode = nextNode.getNextNode();
 
-                        this.remove(curNode);
-                        this.addHead(curNode);
+                        this->remove(curNode);
+                        this->addHead(curNode);
                     }
                 }
             }
@@ -235,7 +235,7 @@
             }
             else
             {
-                this.mHeadNode = node.getNextNode();
+                this->mHeadNode = node.getNextNode();
             }
 
             if (nullptr != node.getNextNode())
@@ -244,7 +244,7 @@
             }
             else
             {
-                this.mTailNode = node.getPreNode();
+                this->mTailNode = node.getPreNode();
             }
 
             node.onClear();
@@ -254,7 +254,7 @@
         {
             string str = "";
             MLinkedListNode tmpNode = nullptr;
-            tmpNode = this.mHeadNode;
+            tmpNode = this->mHeadNode;
             bool isFirstNode = true;
 
             while (nullptr != tmpNode)

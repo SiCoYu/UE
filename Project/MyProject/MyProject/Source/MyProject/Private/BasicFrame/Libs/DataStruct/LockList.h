@@ -83,7 +83,7 @@ public:
 			{
 				if (item.Equals(elem))       // 地址比较
 				{
-					this.RemoveAt(idx);
+					this->RemoveAt(idx);
 					return true;
 				}
 
@@ -130,7 +130,7 @@ public:
 			{
 				if (item.Equals(elem))       // 地址比较
 				{
-					this.RemoveAt(idx);
+					this->RemoveAt(idx);
 					return idx;
 				}
 

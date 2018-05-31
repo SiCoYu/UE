@@ -17,68 +17,68 @@ protected:
 public:
 	MKeyIndexList()
     {
-        this.mList = new MList<TValue>();
-        this.mList.setIsSpeedUpFind(true);
-        this.mList.setIsOpKeepSort(true);
+        this->mList = new MList<TValue>();
+        this->mList.setIsSpeedUpFind(true);
+        this->mList.setIsOpKeepSort(true);
 
-        this.mIndexDic = new MDictionary<TKey, TValue>();
+        this->mIndexDic = new MDictionary<TKey, TValue>();
     }
 
     void clear()
     {
-        this.mList.clear();
-        this.mIndexDic.clear();
+        this->mList.clear();
+        this->mIndexDic.clear();
     }
 
     MList<TValue> getList()
     {
-        return this.mList;
+        return this->mList;
     }
 
     TValue get(int index)
     {
-        return this.mList.get(index);
+        return this->mList.get(index);
     }
 
     MDictionary<TKey, TValue> getIndexDic()
     {
-        return this.mIndexDic;
+        return this->mIndexDic;
     }
 
     void add(TKey key, TValue value)
     {
-        if(!this.mIndexDic.containsKey(key))
+        if(!this->mIndexDic.containsKey(key))
         {
-            this.mList.add(value);
-            this.mIndexDic.add(key, value);
+            this->mList.add(value);
+            this->mIndexDic.add(key, value);
         }
     }
 
     void addToFirst(TKey key, TValue value)
     {
-        this.mList.insert(0, value);
-        this.mIndexDic.add(key, value);
+        this->mList.insert(0, value);
+        this->mIndexDic.add(key, value);
     }
 
     void addToSecond(TKey key, TValue value)
     {
-        this.mList.insert(1, value);
-        this.mIndexDic.add(key, value);
+        this->mList.insert(1, value);
+        this->mIndexDic.add(key, value);
     }
 
     void remove(TKey key)
     {
-        if(this.mIndexDic.containsKey(key))
+        if(this->mIndexDic.containsKey(key))
         {
-            this.mList.remove(this.mIndexDic.value(key));
-            this.mIndexDic.remove(key);
+            this->mList.remove(this->mIndexDic.value(key));
+            this->mIndexDic.remove(key);
         }
     }
 
     TValue getAndRemoveByKey(TKey key)
     {
-        TValue item = this.value(key);
-        this.remove(key);
+        TValue item = this->value(key);
+        this->remove(key);
         return item;
     }
 
@@ -86,9 +86,9 @@ public:
     {
         TValue ret = nullptr;
 
-        if(this.mIndexDic.containsKey(key))
+        if(this->mIndexDic.containsKey(key))
         {
-            ret = this.mIndexDic.value(key);
+            ret = this->mIndexDic.value(key);
         }
 
         return ret;
@@ -96,12 +96,12 @@ public:
 
     int count()
     {
-        return this.mList.count();
+        return this->mList.count();
     }
 
     bool containsKey(TKey key)
     {
-        return this.mIndexDic.containsKey(key);
+        return this->mIndexDic.containsKey(key);
     }
 };
 

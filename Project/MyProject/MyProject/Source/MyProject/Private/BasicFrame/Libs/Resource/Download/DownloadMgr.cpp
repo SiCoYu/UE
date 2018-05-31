@@ -16,7 +16,7 @@ DownloadMgr::DownloadMgr()
 	this->mLoadData = MY_NEW DownloadData();
 	this->mLoadingDepth = 0;
 
-    //this.addMsgRouteHandle(MsgRouteId.eMRIDLoadedWebRes, onMsgRouteResLoad);
+    //this->addMsgRouteHandle(MsgRouteId.eMRIDLoadedWebRes, onMsgRouteResLoad);
 }
 
 void DownloadMgr::init()

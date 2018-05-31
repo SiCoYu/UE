@@ -13,7 +13,7 @@ protected:
 public:
 	IndexItemBase()
     {
-        this.mIndex = -1;
+        this->mIndex = -1;
     }
 
     void init()
@@ -28,17 +28,17 @@ public:
 
     int getIndex()
     {
-        return this.mIndex;
+        return this->mIndex;
     }
 
     void setIndex(int value)
     {
-        this.mIndex = value;
+        this->mIndex = value;
     }
 
     void resetIndex()
     {
-        this.mIndex = -1;
+        this->mIndex = -1;
     }
 };
 

@@ -14,10 +14,10 @@
 
         public PriorityList()
         {
-            this.mPriorityProcessObjectList = new MList<PriorityProcessObject>();
-            this.mPrioritySort = PrioritySort.ePS_Great;
-            this.mIsSpeedUpFind = false;
-            this.mIsOpKeepSort = false;
+            this->mPriorityProcessObjectList = new MList<PriorityProcessObject>();
+            this->mPrioritySort = PrioritySort.ePS_Great;
+            this->mIsSpeedUpFind = false;
+            this->mIsOpKeepSort = false;
         }
 
         public void init()
@@ -27,65 +27,65 @@
 
         public void dispose()
         {
-            if(nullptr != this.mPriorityProcessObjectList)
+            if(nullptr != this->mPriorityProcessObjectList)
             {
-                this.mPriorityProcessObjectList.dispose();
-                this.mPriorityProcessObjectList = nullptr;
+                this->mPriorityProcessObjectList.dispose();
+                this->mPriorityProcessObjectList = nullptr;
             }
-            if(nullptr != this.mDic)
+            if(nullptr != this->mDic)
             {
-                this.mDic.dispose();
-                this.mDic = nullptr;
+                this->mDic.dispose();
+                this->mDic = nullptr;
             }
         }
 
         public void setIsSpeedUpFind(bool value)
         {
-            this.mIsSpeedUpFind = value;
+            this->mIsSpeedUpFind = value;
 
-            if (this.mIsSpeedUpFind)
+            if (this->mIsSpeedUpFind)
             {
-                this.mDic = new MDictionary<INoOrPriorityObject, int>();
+                this->mDic = new MDictionary<INoOrPriorityObject, int>();
             }
         }
 
         public void setIsOpKeepSort(bool value)
         {
-            this.mIsOpKeepSort = value;
+            this->mIsOpKeepSort = value;
         }
 
         public void clear()
         {
             int index = 0;
-            int listLen = this.count();
+            int listLen = this->count();
 
             while(index < listLen)
             {
-                NumIdBufferObjectFactory.deleteObject(this.mPriorityProcessObjectList.get(index));
-                this.mPriorityProcessObjectList.set(index, nullptr);
+                NumIdBufferObjectFactory.deleteObject(this->mPriorityProcessObjectList.get(index));
+                this->mPriorityProcessObjectList.set(index, nullptr);
                 index += 1;
             }
 
-            this.mPriorityProcessObjectList.clear();
+            this->mPriorityProcessObjectList.clear();
 
-            if(this.mIsSpeedUpFind)
+            if(this->mIsSpeedUpFind)
             {
-                this.mDic.clear();
+                this->mDic.clear();
             }
         }
 
         public int count()
         {
-            return this.mPriorityProcessObjectList.count();
+            return this->mPriorityProcessObjectList.count();
         }
 
         public INoOrPriorityObject get(int index)
         {
             INoOrPriorityObject ret = nullptr;
 
-            if(index < this.count())
+            if(index < this->count())
             {
-                ret = this.mPriorityProcessObjectList.get(index).mPriorityObject;
+                ret = this->mPriorityProcessObjectList.get(index).mPriorityObject;
             }
 
             return ret;
@@ -95,9 +95,9 @@
         {
             float ret = 0;
 
-            if (index < this.count())
+            if (index < this->count())
             {
-                ret = this.mPriorityProcessObjectList.get(index).mPriority;
+                ret = this->mPriorityProcessObjectList.get(index).mPriority;
             }
 
             return ret;
@@ -109,18 +109,18 @@
 
             if (nullptr != item)
             {
-                if (this.mIsSpeedUpFind)
+                if (this->mIsSpeedUpFind)
                 {
-                    ret = this.mDic.containsKey(item);
+                    ret = this->mDic.containsKey(item);
                 }
                 else
                 {
                     int index = 0;
-                    int listLen = this.mPriorityProcessObjectList.count();
+                    int listLen = this->mPriorityProcessObjectList.count();
 
                     while (index < listLen)
                     {
-                        if (item == this.mPriorityProcessObjectList.get(index).mPriorityObject)
+                        if (item == this->mPriorityProcessObjectList.get(index).mPriorityObject)
                         {
                             ret = true;
                             break;
@@ -144,15 +144,15 @@
         public void removeAt(int index)
         {
             PriorityProcessObject priorityProcessObject = nullptr;
-            priorityProcessObject = this.mPriorityProcessObjectList.get(index);
+            priorityProcessObject = this->mPriorityProcessObjectList.get(index);
 
-            if (this.mIsSpeedUpFind)
+            if (this->mIsSpeedUpFind)
             {
-                this.effectiveRemove(this.mPriorityProcessObjectList.get(index).mPriorityObject);
+                this->effectiveRemove(this->mPriorityProcessObjectList.get(index).mPriorityObject);
             }
             else
             {
-                this.mPriorityProcessObjectList.removeAt(index);
+                this->mPriorityProcessObjectList.removeAt(index);
             }
 
             if (nullptr != priorityProcessObject)
@@ -167,21 +167,21 @@
             int retIndex = -1;
 
             int index = 0;
-            int listLen = this.mPriorityProcessObjectList.count();
+            int listLen = this->mPriorityProcessObjectList.count();
 
             while (index < listLen)
             {
-                if (PrioritySort.ePS_Less == this.mPrioritySort)
+                if (PrioritySort.ePS_Less == this->mPrioritySort)
                 {
-                    if (this.mPriorityProcessObjectList.get(index).mPriority >= priority)
+                    if (this->mPriorityProcessObjectList.get(index).mPriority >= priority)
                     {
                         retIndex = index;
                         break;
                     }
                 }
-                else if (PrioritySort.ePS_Great == this.mPrioritySort)
+                else if (PrioritySort.ePS_Great == this->mPrioritySort)
                 {
-                    if (this.mPriorityProcessObjectList.get(index).mPriority <= priority)
+                    if (this->mPriorityProcessObjectList.get(index).mPriority <= priority)
                     {
                         retIndex = index;
                         break;
@@ -199,11 +199,11 @@
             int retIndex = -1;
 
             int index = 0;
-            int listLen = this.mPriorityProcessObjectList.count();
+            int listLen = this->mPriorityProcessObjectList.count();
 
             while (index < listLen)
             {
-                if (this.mPriorityProcessObjectList.get(index).mPriorityObject == priorityObject)
+                if (this->mPriorityProcessObjectList.get(index).mPriorityObject == priorityObject)
                 {
                     retIndex = index;
                     break;
@@ -217,14 +217,14 @@
 
         public int getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject)
         {
-            return this.getIndexByPriorityObject(priorityObject);
+            return this->getIndexByPriorityObject(priorityObject);
         }
 
         public void addPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f)
         {
             if (nullptr != priorityObject)
             {
-                if (!this.contains(priorityObject))
+                if (!this->contains(priorityObject))
                 {
                     PriorityProcessObject priorityProcessObject = nullptr;
                     //priorityProcessObject = new PriorityProcessObject();
@@ -233,36 +233,36 @@
                     priorityProcessObject.mPriorityObject = priorityObject;
                     priorityProcessObject.mPriority = priority;
 
-                    if (!this.mIsOpKeepSort)
+                    if (!this->mIsOpKeepSort)
                     {
-                        this.mPriorityProcessObjectList.add(priorityProcessObject);
+                        this->mPriorityProcessObjectList.add(priorityProcessObject);
 
-                        if (this.mIsSpeedUpFind)
+                        if (this->mIsSpeedUpFind)
                         {
-                            this.mDic.add(priorityObject, this.mPriorityProcessObjectList.count() - 1);
+                            this->mDic.add(priorityObject, this->mPriorityProcessObjectList.count() - 1);
                         }
                     }
                     else
                     {
-                        int index = this.getIndexByPriority(priority);
+                        int index = this->getIndexByPriority(priority);
 
                         if (-1 == index)
                         {
-                            this.mPriorityProcessObjectList.add(priorityProcessObject);
+                            this->mPriorityProcessObjectList.add(priorityProcessObject);
 
-                            if (this.mIsSpeedUpFind)
+                            if (this->mIsSpeedUpFind)
                             {
-                                this.mDic.add(priorityObject, this.mPriorityProcessObjectList.count() - 1);
+                                this->mDic.add(priorityObject, this->mPriorityProcessObjectList.count() - 1);
                             }
                         }
                         else
                         {
-                            this.mPriorityProcessObjectList.insert(index, priorityProcessObject);
+                            this->mPriorityProcessObjectList.insert(index, priorityProcessObject);
 
-                            if (this.mIsSpeedUpFind)
+                            if (this->mIsSpeedUpFind)
                             {
-                                this.mDic.add(priorityObject, index);
-                                this.updateIndex(index + 1);
+                                this->mDic.add(priorityObject, index);
+                                this->updateIndex(index + 1);
                             }
                         }
                     }
@@ -279,19 +279,19 @@
 
         public void removePriorityObject(INoOrPriorityObject priorityObject)
         {
-            if (this.contains(priorityObject))
+            if (this->contains(priorityObject))
             {
-                if (this.mIsSpeedUpFind)
+                if (this->mIsSpeedUpFind)
                 {
-                    this.effectiveRemove(priorityObject);
+                    this->effectiveRemove(priorityObject);
                 }
                 else
                 {
-                    int index = this.getIndexByPriorityObject(priorityObject);
+                    int index = this->getIndexByPriorityObject(priorityObject);
 
                     if(-1 != index)
                     {
-                        this.mPriorityProcessObjectList.removeAt(index);
+                        this->mPriorityProcessObjectList.removeAt(index);
                     }
                 }
             }
@@ -299,12 +299,12 @@
 
         public void addNoOrPriorityObject(INoOrPriorityObject noPriorityObject, float priority = 0.0f)
         {
-            this.addPriorityObject(noPriorityObject, priority);
+            this->addPriorityObject(noPriorityObject, priority);
         }
 
         public void removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject)
         {
-            this.removePriorityObject(noPriorityObject);
+            this->removePriorityObject(noPriorityObject);
         }
 
         // 快速移除元素
@@ -312,30 +312,30 @@
         {
             bool ret = false;
 
-            if (this.mDic.containsKey(item))
+            if (this->mDic.containsKey(item))
             {
                 ret = true;
 
-                int index = this.mDic.value(item);
-                this.mDic.remove(item);
+                int index = this->mDic.value(item);
+                this->mDic.remove(item);
 
-                if (index == this.mPriorityProcessObjectList.count() - 1)    // 如果是最后一个元素，直接移除
+                if (index == this->mPriorityProcessObjectList.count() - 1)    // 如果是最后一个元素，直接移除
                 {
-                    this.mPriorityProcessObjectList.removeAt(index);
+                    this->mPriorityProcessObjectList.removeAt(index);
                 }
                 else
                 {
                     // 这样移除会使优先级顺序改变
-                    if (!this.mIsOpKeepSort)
+                    if (!this->mIsOpKeepSort)
                     {
-                        this.mPriorityProcessObjectList.set(index, this.mPriorityProcessObjectList.get(this.mPriorityProcessObjectList.count() - 1));
-                        this.mPriorityProcessObjectList.removeAt(this.mPriorityProcessObjectList.count() - 1);
-                        this.mDic.add(this.mPriorityProcessObjectList.get(index).mPriorityObject, index);
+                        this->mPriorityProcessObjectList.set(index, this->mPriorityProcessObjectList.get(this->mPriorityProcessObjectList.count() - 1));
+                        this->mPriorityProcessObjectList.removeAt(this->mPriorityProcessObjectList.count() - 1);
+                        this->mDic.add(this->mPriorityProcessObjectList.get(index).mPriorityObject, index);
                     }
                     else
                     {
-                        this.mPriorityProcessObjectList.removeAt(index);
-                        this.updateIndex(index);
+                        this->mPriorityProcessObjectList.removeAt(index);
+                        this->updateIndex(index);
                     }
                 }
             }
@@ -345,11 +345,11 @@
 
         protected void updateIndex(int index)
         {
-            int listLen = this.mPriorityProcessObjectList.count();
+            int listLen = this->mPriorityProcessObjectList.count();
 
             while (index < listLen)
             {
-                this.mDic.add(this.mPriorityProcessObjectList.get(index).mPriorityObject, index);
+                this->mDic.add(this->mPriorityProcessObjectList.get(index).mPriorityObject, index);
 
                 ++index;
             }

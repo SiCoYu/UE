@@ -28,7 +28,7 @@ void HttpWebDownloadItem::load()
 // 线程下载
 void HttpWebDownloadItem::runTask()
 {
-    //if(this.mFileLen == 0)
+    //if(this->mFileLen == 0)
     //{
     //    downWithNoFileLen();
     //}

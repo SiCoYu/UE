@@ -6,7 +6,7 @@
 
         public IndexItemBase()
         {
-            this.mIndex = -1;
+            this->mIndex = -1;
         }
 
         public void init()
@@ -21,17 +21,17 @@
 
         public int getIndex()
         {
-            return this.mIndex;
+            return this->mIndex;
         }
 
         public void setIndex(int value)
         {
-            this.mIndex = value;
+            this->mIndex = value;
         }
 
         public void resetIndex()
         {
-            this.mIndex = -1;
+            this->mIndex = -1;
         }
     }
 }

@@ -23,8 +23,8 @@ protected:
 public:
 	NoPriorityList()
     {
-        //this.mNoPriorityProcessObjectList = new MList<INoOrPriorityObject>();
-        this.mIsSpeedUpFind = false;
+        //this->mNoPriorityProcessObjectList = new MList<INoOrPriorityObject>();
+        this->mIsSpeedUpFind = false;
     }
 
     void init()
@@ -34,25 +34,25 @@ public:
 
     void dispose()
     {
-        if(nullptr != this.mNoPriorityProcessObjectList)
+        if(nullptr != this->mNoPriorityProcessObjectList)
         {
-            this.mNoPriorityProcessObjectList.dispose();
-            this.mNoPriorityProcessObjectList = nullptr;
+            this->mNoPriorityProcessObjectList.dispose();
+            this->mNoPriorityProcessObjectList = nullptr;
         }
-        if (nullptr != this.mDic)
+        if (nullptr != this->mDic)
         {
-            this.mDic.dispose();
-            this.mDic = nullptr;
+            this->mDic.dispose();
+            this->mDic = nullptr;
         }
     }
 
     void setIsSpeedUpFind(bool value)
     {
-        this.mIsSpeedUpFind = value;
+        this->mIsSpeedUpFind = value;
 
-        if (this.mIsSpeedUpFind)
+        if (this->mIsSpeedUpFind)
         {
-            this.mDic = new MDictionary<INoOrPriorityObject, int>();
+            this->mDic = new MDictionary<INoOrPriorityObject, int>();
         }
     }
 
@@ -63,26 +63,26 @@ public:
 
     void clear()
     {
-        this.mNoPriorityProcessObjectList.clear();
+        this->mNoPriorityProcessObjectList.clear();
 
-        if(this.mIsSpeedUpFind)
+        if(this->mIsSpeedUpFind)
         {
-            this.mDic.clear();
+            this->mDic.clear();
         }
     }
 
     int count()
     {
-        return this.mNoPriorityProcessObjectList.count();
+        return this->mNoPriorityProcessObjectList.count();
     }
 
     INoOrPriorityObject get(int index)
     {
         INoOrPriorityObject ret = nullptr;
 
-        if(index < this.count())
+        if(index < this->count())
         {
-            ret = this.mNoPriorityProcessObjectList.get(index);
+            ret = this->mNoPriorityProcessObjectList.get(index);
         }
 
         return ret;
@@ -94,18 +94,18 @@ public:
 
         if (nullptr != item)
         {
-            if (this.mIsSpeedUpFind)
+            if (this->mIsSpeedUpFind)
             {
-                ret = this.mDic.containsKey(item);
+                ret = this->mDic.containsKey(item);
             }
             else
             {
                 int index = 0;
-                int listLen = this.mNoPriorityProcessObjectList.count();
+                int listLen = this->mNoPriorityProcessObjectList.count();
 
                 while (index < listLen)
                 {
-                    if (item == this.mNoPriorityProcessObjectList.get(index))
+                    if (item == this->mNoPriorityProcessObjectList.get(index))
                     {
                         ret = true;
                         break;
@@ -128,13 +128,13 @@ public:
 
     void removeAt(int index)
     {
-        if (this.mIsSpeedUpFind)
+        if (this->mIsSpeedUpFind)
         {
-            this._effectiveRemove(this.mNoPriorityProcessObjectList[index]);
+            this->_effectiveRemove(this->mNoPriorityProcessObjectList[index]);
         }
         else
         {
-            this.mNoPriorityProcessObjectList.removeAt(index);
+            this->mNoPriorityProcessObjectList.removeAt(index);
         }
     }
 
@@ -143,11 +143,11 @@ public:
         int retIndex = -1;
 
         int index = 0;
-        int listLen = this.mNoPriorityProcessObjectList.count();
+        int listLen = this->mNoPriorityProcessObjectList.count();
 
         while (index < listLen)
         {
-            if (this.mNoPriorityProcessObjectList.get(index) == priorityObject)
+            if (this->mNoPriorityProcessObjectList.get(index) == priorityObject)
             {
                 retIndex = index;
                 break;
@@ -161,20 +161,20 @@ public:
 
     int getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject)
     {
-        return this.getIndexByNoPriorityObject(priorityObject);
+        return this->getIndexByNoPriorityObject(priorityObject);
     }
 
     void addNoPriorityObject(INoOrPriorityObject noPriorityObject)
     {
         if (nullptr != noPriorityObject)
         {
-            if (!this.contains(noPriorityObject))
+            if (!this->contains(noPriorityObject))
             {
-                this.mNoPriorityProcessObjectList.add(noPriorityObject);
+                this->mNoPriorityProcessObjectList.add(noPriorityObject);
 
-                if (this.mIsSpeedUpFind)
+                if (this->mIsSpeedUpFind)
                 {
-                    this.mDic.add(noPriorityObject, this.mNoPriorityProcessObjectList.count() - 1);
+                    this->mDic.add(noPriorityObject, this->mNoPriorityProcessObjectList.count() - 1);
                 }
             }
         }
@@ -191,19 +191,19 @@ public:
     {
         if (nullptr != noPriorityObject)
         {
-            if (this.contains(noPriorityObject))
+            if (this->contains(noPriorityObject))
             {
-                if (this.mIsSpeedUpFind)
+                if (this->mIsSpeedUpFind)
                 {
-                    this._effectiveRemove(noPriorityObject);
+                    this->_effectiveRemove(noPriorityObject);
                 }
                 else
                 {
-                    int index = this.getIndexByNoPriorityObject(noPriorityObject);
+                    int index = this->getIndexByNoPriorityObject(noPriorityObject);
 
                     if (-1 != index)
                     {
-                        this.mNoPriorityProcessObjectList.removeAt(index);
+                        this->mNoPriorityProcessObjectList.removeAt(index);
                     }
                 }
             }
@@ -219,12 +219,12 @@ public:
 
     void addNoOrPriorityObject(INoOrPriorityObject noPriorityObject, float priority = 0.0f)
     {
-        this.addNoPriorityObject(noPriorityObject);
+        this->addNoPriorityObject(noPriorityObject);
     }
 
     public void removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject)
     {
-        this.removeNoPriorityObject(noPriorityObject);
+        this->removeNoPriorityObject(noPriorityObject);
     }
 
 protected:
@@ -233,22 +233,22 @@ protected:
     {
         bool ret = false;
 
-        if (this.mDic.containsKey(item))
+        if (this->mDic.containsKey(item))
         {
             ret = true;
 
-            int idx = this.mDic[item];
-            this.mDic.remove(item);
+            int idx = this->mDic[item];
+            this->mDic.remove(item);
 
-            if (idx == this.mNoPriorityProcessObjectList.count() - 1)    // 如果是最后一个元素，直接移除
+            if (idx == this->mNoPriorityProcessObjectList.count() - 1)    // 如果是最后一个元素，直接移除
             {
-                this.mNoPriorityProcessObjectList.removeAt(idx);
+                this->mNoPriorityProcessObjectList.removeAt(idx);
             }
             else
             {
-                this.mNoPriorityProcessObjectList.set(idx, this.mNoPriorityProcessObjectList.get(this.mNoPriorityProcessObjectList.count() - 1));
-                this.mNoPriorityProcessObjectList.removeAt(this.mNoPriorityProcessObjectList.count() - 1);
-                this.mDic.add(this.mNoPriorityProcessObjectList.get(idx), idx);
+                this->mNoPriorityProcessObjectList.set(idx, this->mNoPriorityProcessObjectList.get(this->mNoPriorityProcessObjectList.count() - 1));
+                this->mNoPriorityProcessObjectList.removeAt(this->mNoPriorityProcessObjectList.count() - 1);
+                this->mDic.add(this->mNoPriorityProcessObjectList.get(idx), idx);
             }
         }
 
@@ -257,11 +257,11 @@ protected:
 
     void _updateIndex(int idx)
     {
-        int listLen = this.mNoPriorityProcessObjectList.count();
+        int listLen = this->mNoPriorityProcessObjectList.count();
 
         while (idx < listLen)
         {
-            this.mDic.add(this.mNoPriorityProcessObjectList.get(idx), idx);
+            this->mDic.add(this->mNoPriorityProcessObjectList.get(idx), idx);
 
             ++idx;
         }

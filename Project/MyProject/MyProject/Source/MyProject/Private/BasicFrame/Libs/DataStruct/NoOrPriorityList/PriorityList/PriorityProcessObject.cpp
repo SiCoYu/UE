@@ -10,38 +10,38 @@
 
         public PriorityProcessObject()
         {
-            this.onPutInPool();
+            this->onPutInPool();
         }
 
         public void putInPool()
         {
-            this.onPutInPool();
+            this->onPutInPool();
         }
 
         public void getFromPool()
         {
-            this.onGetFromPool();
+            this->onGetFromPool();
         }
 
         public void dispose()
         {
-            this.onPutInPool();
+            this->onPutInPool();
         }
 
         public void setIsUsePool(bool value)
         {
-            this.mIsUsePool = value;
+            this->mIsUsePool = value;
         }
 
         public bool isUsePool()
         {
-            return this.mIsUsePool;
+            return this->mIsUsePool;
         }
 
         public void onPutInPool()
         {
-            this.mPriorityObject = nullptr;
-            this.mPriority = 0.0f;
+            this->mPriorityObject = nullptr;
+            this->mPriority = 0.0f;
         }
 
         public void onGetFromPool()

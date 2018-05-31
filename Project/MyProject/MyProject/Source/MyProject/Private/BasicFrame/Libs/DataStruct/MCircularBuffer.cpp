@@ -302,8 +302,8 @@ void MCircularBuffer::pushBackCB(MCircularBuffer* rhv)
 		uint32 closeSize = DynBufResizePolicy::getCloseSize(rhv->getSize() + this->mDynBuffer->mSize, this->mDynBuffer->mCapacity, this->mDynBuffer->mMaxCapacity);
 		this->setCapacity(closeSize);
 	}
-	//this.mSize += rhv.size;
-	//this.mLast = this.mSize;
+	//this->mSize += rhv.size;
+	//this->mLast = this->mSize;
 
 	//mTmpBA.clear();
 	rhv->frontBA(mTmpBA, rhv->getSize());
