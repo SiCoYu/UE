@@ -4,7 +4,7 @@
 //#include <memory>	// shared_ptr
 
 //#define MySharedPtr std::shared_ptr
-#define MySharedPtr MyNS::SharedPtr
+#define MySharedPtr SharedPtr
 
 #include "MyPtrRefInfo.h"
 #include "TypeDef.h"
@@ -16,9 +16,9 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 /**
-	* @error SharedPtr = nnullptr, 这样赋值是错误的，直接将 this->mRefPtr 设置为 nullptr ，导致内存泄漏，置空要是用 setNull 接口
-	* @error UE4 Object 一定不能使用 SharedPtr ，因为 UE4 有自己一套内存分配策略
-	*/
+ * @error SharedPtr = nullptr, 这样赋值是错误的，直接将 this->mRefPtr 设置为 nullptr ，导致内存泄漏，置空要是用 setNull 接口
+ * @error UE4 Object 一定不能使用 SharedPtr ，因为 UE4 有自己一套内存分配策略
+ */
 template<class T> 
 class SharedPtr
 {
@@ -279,5 +279,7 @@ inline SharedPtr<T> dynamic_pointer_cast(SharedPtr<U> const & r)
 {
 	return r.template dynamicCast<T>();
 }
+
+#include "MySharedPointer.inl"
 
 MY_END_NAMESPACE
