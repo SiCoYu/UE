@@ -2,6 +2,7 @@
 
 #include "GObject.h"
 #include "BaseClassDef.h"
+#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

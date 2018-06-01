@@ -6,6 +6,7 @@
 #define MyWeakPtr std::weak_ptr
 
 #include "MyPtrRefInfo.h"
+#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

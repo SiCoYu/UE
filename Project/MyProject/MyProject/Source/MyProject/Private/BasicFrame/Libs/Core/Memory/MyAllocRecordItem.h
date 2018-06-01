@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-MY_END_NAMESPACE
+#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

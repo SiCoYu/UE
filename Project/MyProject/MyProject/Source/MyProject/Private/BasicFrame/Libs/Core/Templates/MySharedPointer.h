@@ -11,6 +11,7 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

@@ -7,6 +7,7 @@
 #include "DownloadParam.h"
 #include "BaseClassDef.h"
 #include "CoreInc.h"
+#include "DownloadType.h"
 #include "ResLoadPriority.h"
 
 class ResLoadState;

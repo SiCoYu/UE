@@ -2,6 +2,7 @@
 
 #include <string>
 #include <unordered_map>
+#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

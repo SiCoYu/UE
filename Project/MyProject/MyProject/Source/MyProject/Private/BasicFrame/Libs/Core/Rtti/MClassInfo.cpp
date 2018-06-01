@@ -4,6 +4,7 @@
 #include "TypeDef.h"
 #include "MClassFactory.h"
 #include <stdlib.h>
+#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

@@ -4,6 +4,7 @@
 #include "EventDispatchDelegate.h"
 #include "ResLoadType.h"
 #include "ResPackType.h"
+#include "DownloadType.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
