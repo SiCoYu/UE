@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MySharedPointer_H
+#define __MySharedPointer_H
 
 //#include "Templates/SharedPointer.h"	// TSharedPtr
 //#include <memory>	// shared_ptr
@@ -283,3 +284,5 @@ inline SharedPtr<T> dynamic_pointer_cast(SharedPtr<U> const & r)
 #include "MySharedPointer.inl"
 
 MY_END_NAMESPACE
+
+#endif
