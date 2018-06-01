@@ -26,4 +26,6 @@ public:
 	static void Clear(char* buff, int index, int length);
 };
 
+MY_END_NAMESPACE
+
 #endif

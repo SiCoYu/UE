@@ -20,4 +20,6 @@ public:
 	void setRayDirection(FVector value);
 };
 
+MY_END_NAMESPACE
+
 #endif

@@ -29,3 +29,5 @@ void ObjectPoolGroup::deleteObj(IPoolObject* obj)
 	//    this->mPoolList.Add(obj);
 	//}
 }
+
+MY_END_NAMESPACE

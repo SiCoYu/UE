@@ -27,3 +27,5 @@ void PointF::setY(float value)
 {
 	m_y = value;
 }
+
+MY_END_NAMESPACE

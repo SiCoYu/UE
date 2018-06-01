@@ -19,4 +19,6 @@ public:
 	void setY(float value);
 };
 
+MY_END_NAMESPACE
+
 #endif

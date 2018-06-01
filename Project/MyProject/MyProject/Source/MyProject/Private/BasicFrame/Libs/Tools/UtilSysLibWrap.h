@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __UtilSysLibWrap_H
+#define __UtilSysLibWrap_H
 
 #include "UObject/NameTypes.h"	// FName
 #include "UObject/ScriptDelegates.h"	// TScriptDelegate
@@ -29,3 +30,5 @@ public:
 #include "UtilSysLibWrap.inl"
 
 MY_END_NAMESPACE
+
+#endif

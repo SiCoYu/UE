@@ -22,3 +22,5 @@ void MRay::setRayDirection(FVector value)
 {
 	m_rayDirection = value;
 }
+
+MY_END_NAMESPACE

@@ -65,3 +65,5 @@ void Config::dispose()
 {
 
 }
+
+MY_END_NAMESPACE

@@ -41,3 +41,5 @@ void Array::Clear(char* buff, int index, int length)
 {
 	memset(buff + index, 0, length);
 }
+
+MY_END_NAMESPACE

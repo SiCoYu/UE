@@ -48,4 +48,6 @@ public:
 	void dispose();
 };
 
+MY_END_NAMESPACE
+
 #endif
