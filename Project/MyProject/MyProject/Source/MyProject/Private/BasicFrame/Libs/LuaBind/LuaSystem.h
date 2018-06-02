@@ -3,6 +3,10 @@
 #include "LuaBridgeInc.h"
 #include "GObject.h"
 
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
+
 /**
 * @brief œµÕ≥…Ë÷√
 */

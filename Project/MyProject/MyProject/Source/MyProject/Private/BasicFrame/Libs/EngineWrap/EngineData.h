@@ -2,10 +2,13 @@
 #define __EngineData_H
 
 #include "GObject.h"
+#include "PlatformDefine.h"
 
 class AActor;
 class APlayerController;
 class UMyGameEngineBase;
+
+MY_USING_NAMESPACE(MyNS)
 
 class EngineData : public GObject
 {

@@ -27,14 +27,18 @@ public:
 	const std::string GuoZai = "过载";
 };
 
+MY_END_NAMESPACE
+
 #include "MyProject.h"
 #include "TableItemBodyBase.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 
 /**
-    * @brief 卡牌基本表
-    */
+ * @brief 卡牌基本表
+ */
 class TableCardItemBody : TableItemBodyBase
 {
 public:

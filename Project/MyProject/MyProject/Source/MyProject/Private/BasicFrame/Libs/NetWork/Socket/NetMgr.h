@@ -30,8 +30,13 @@
 	#include <map>
 	#include <string>
 
+	MY_BEGIN_NAMESPACE(MyNS)
+
 	class UENetThread;
 	class UENetClient;
+
+	MY_END_NAMESPACE
+
 #endif
 
 MY_BEGIN_NAMESPACE(MyNS)

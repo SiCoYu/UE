@@ -4,6 +4,9 @@
 #include "TestStaticLib/TestStaticLibA.h"
 #include "TestStaticLib/TestStaticLibB.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 class TestExtern : public GObject 
 {
@@ -15,4 +18,4 @@ public:
 	TestExtern();
 };
 
-#endif				// __TESTEXTERN_H
+#endif				// __TestExtern_H

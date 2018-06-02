@@ -9,8 +9,6 @@
 
 #include "HAL/LowLevelMemTracker.h"
 
-MY_BEGIN_NAMESPACE(MyNS)
-
 #if MY_PLATFORM == MY_PLATFORM_WIN32 || MY_PLATFORM == MY_PLATFORM_WINRT
 #   include <windows.h>
 #   define My_OutputCString(str) ::OutputDebugStringA(str)
@@ -19,6 +17,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 #   define My_OutputCString(str) std::cerr << str
 #   define My_OutputWString(str) std::cerr << str
 #endif
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 MyMemoryTracker& MyMemoryTracker::get()
 {
@@ -150,7 +150,9 @@ void MyMemoryTracker::reportLeaks()
 		}
 
 		if (this->mDumpToStdOut)
+		{
 			My_OutputCString(os.str().c_str());
+		}
 
 		std::ofstream of;
 		of.open(this->mLeakFileName.c_str());

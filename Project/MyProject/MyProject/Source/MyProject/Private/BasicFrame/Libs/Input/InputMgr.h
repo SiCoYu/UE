@@ -9,6 +9,9 @@
 #include <map>
 #include "MRay.h"
 #include "IOEventDispatchDelegate.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 enum EMouseOrTouch
 {

@@ -4,9 +4,9 @@
 #include "GObject.h"
 #include "PlatformDefine.h"
 
-MY_BEGIN_NAMESPACE(MyNS)
-
 class FEvent;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MEvent : public GObject
 {

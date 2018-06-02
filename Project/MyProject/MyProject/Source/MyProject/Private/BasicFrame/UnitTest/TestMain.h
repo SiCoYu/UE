@@ -4,9 +4,10 @@
 #include "GObject.h"
 #include "PlatformDefine.h"
 
+class TestExtern;
+
 MY_BEGIN_NAMESPACE(MyNS)
 
-class TestExtern;
 class TestSocket;
 class TestUi;
 class TestDownload;

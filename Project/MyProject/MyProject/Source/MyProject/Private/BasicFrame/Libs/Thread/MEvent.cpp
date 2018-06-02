@@ -5,18 +5,18 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 MEvent::MEvent()
 {
-	mEvent = FPlatformProcess::GetSynchEventFromPool(true);
+	this->mEvent = FPlatformProcess::GetSynchEventFromPool(true);
 }
 
 MEvent::~MEvent()
 {
 	FPlatformProcess::ReturnSynchEventToPool(mEvent);
-	mEvent = nullptr;
+	this->mEvent = nullptr;
 }
 
 void MEvent::Wait()
 {
-	mEvent->Wait(MAX_uint32);
+	this->mEvent->Wait(MAX_uint32);
 }
 
 void MEvent::Reset()
@@ -26,12 +26,12 @@ void MEvent::Reset()
 
 void MEvent::Set()
 {
-	return mEvent->Trigger();
+	return this->mEvent->Trigger();
 }
 
 void MEvent::WaitOne()
 {
-	mEvent->Wait(MAX_uint32);
+	this->mEvent->Wait(MAX_uint32);
 }
 
 MY_END_NAMESPACE

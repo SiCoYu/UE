@@ -34,9 +34,7 @@ class MyStreamableManager;
 class DownloadMgr;
 class MFileSys;
 class SystemSetting;
-class LuaSystem;
 class ISceneEventNotify;
-class MyLatentActionManager;
 
 class SceneSys;
 class SystemTimeData;
@@ -56,6 +54,8 @@ class UGameInstance;
 
 class EngineData;
 class LogSys;
+class LuaSystem;
+class MyLatentActionManager;
 
 MY_USING_NAMESPACE(MyNS)
 

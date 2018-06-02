@@ -35,7 +35,9 @@ void MFileSys::init()
 	// 初始化 SandBox 文件系统
 	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	//FString OutputDirectory = GetOutputDirectoryOverride();
-	FString OutputDirectory = FPaths::GameDir();
+	// UE 4.19.2 warning C4996: 'FPaths::GameDir': FPaths::GameDir() has been superseded by FPaths::ProjectDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//FString OutputDirectory = FPaths::GameDir();
+	FString OutputDirectory = FPaths::ProjectDir();
 	this->mSandboxPlatformFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
 
 	MFileSys::initFileSys();

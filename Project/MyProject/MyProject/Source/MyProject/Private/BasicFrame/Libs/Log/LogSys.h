@@ -4,6 +4,9 @@
 #include "UnrealString.h"		// FString
 #include <string>
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 class LogSys : public GObject
 {

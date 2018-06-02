@@ -1,5 +1,8 @@
 ﻿#include "MyProject.h"
 #include "TimerItemBase.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -12,6 +15,36 @@ TimerItemBase::TimerItemBase()
 	this->mCurLeftTimer = 0;
 	this->mTimerDispatch = nullptr;
 	this->mIsDisposed = false;
+}
+
+TimerItemBase::~TimerItemBase()
+{
+
+}
+
+void TimerItemBase::init()
+{
+
+}
+
+void TimerItemBase::dispose()
+{
+
+}
+
+void addTimerEventHandle(EventDispatchDelegate handle)
+{
+	if (nullptr == this->mTimerDispatch)
+	{
+		this->mTimerDispatch = MY_NEW AddOnceEventDispatch();
+	}
+
+	this->mTimerDispatch->addEventHandle(handle);
+}
+
+void removeTimerEventHandle(EventDispatchDelegate handle)
+{
+	this->mTimerDispatch->removeEventHandle(handle);
 }
 
 void TimerItemBase::OnTimer(float delta)
@@ -45,10 +78,7 @@ void TimerItemBase::disposeAndDisp()
 {
 	this->mIsDisposed = true;
 
-	if (!this->mTimerDispatch.empty())
-	{
-		this->mTimerDispatch(this);
-	}
+	this->mTimerDispatch->dispatchEvent(this);
 }
 
 void TimerItemBase::checkAndDisp()
@@ -57,10 +87,7 @@ void TimerItemBase::checkAndDisp()
 	{
 		this->mCurLeftTimer = this->mCurLeftTimer - mInternal;
 
-		if (!this->mTimerDispatch.empty())
-		{
-			this->mTimerDispatch(this);
-		}
+		this->mTimerDispatch->dispatchEvent(this);
 	}
 }
 

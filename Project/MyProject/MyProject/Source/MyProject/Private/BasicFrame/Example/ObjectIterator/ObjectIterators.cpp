@@ -5,6 +5,9 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/StaticMeshActor.h"
 #include "UtilEngineWrap.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 void ObjectIterators::IteratorAllComponent()
 {
