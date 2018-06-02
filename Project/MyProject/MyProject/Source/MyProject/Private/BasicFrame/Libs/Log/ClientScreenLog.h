@@ -8,13 +8,14 @@
 
 #include <EngineGlobals.h>
 #include <Runtime/Engine/Classes/Engine/Engine.h>
-
 #include "MLogType.h"
+#include "PlatformDefine.h"
 
-// https://wiki.unrealengine.com/Logs,_Printing_Messages_To_Yourself_During_Runtime
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief Client Screen 客户端屏幕日志
+ * @ref https://wiki.unrealengine.com/Logs,_Printing_Messages_To_Yourself_During_Runtime
  */
 class ClientScreenLog
 {
@@ -24,5 +25,7 @@ public:
 	void warn(FString str, MLogType::MLogType type);
 	void error(FString str, MLogType::MLogType type);
 };
+
+MY_END_NAMESPACE
 
 #endif

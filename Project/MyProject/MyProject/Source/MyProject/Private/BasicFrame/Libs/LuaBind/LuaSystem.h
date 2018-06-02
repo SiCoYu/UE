@@ -2,10 +2,9 @@
 
 #include "LuaBridgeInc.h"
 #include "GObject.h"
-
 #include "PlatformDefine.h"
 
-MY_USING_NAMESPACE(MyNS)
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
 * @brief œµÕ≥…Ë÷√
@@ -27,3 +26,5 @@ public:
 
 	void doString(std::string str);
 };
+
+MY_END_NAMESPACE

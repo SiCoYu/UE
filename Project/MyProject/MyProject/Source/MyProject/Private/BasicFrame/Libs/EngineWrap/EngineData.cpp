@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "EngineData.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 EngineData::EngineData()
 {
 
@@ -50,3 +52,5 @@ void EngineData::setMyEngine(UMyGameEngineBase* myEngine)
 {
 	this->mMyEngine = myEngine;
 }
+
+MY_END_NAMESPACE

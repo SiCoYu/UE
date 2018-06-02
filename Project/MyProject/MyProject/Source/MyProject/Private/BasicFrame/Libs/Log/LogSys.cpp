@@ -1,6 +1,8 @@
 #include "MyProject.h"		// FString
 #include "LogSys.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 LogSys::LogSys()
 {
 
@@ -34,3 +36,5 @@ void LogSys::error(std::string message)
 {
 
 }
+
+MY_END_NAMESPACE

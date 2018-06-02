@@ -30,6 +30,14 @@ public class MyProject : ModuleRules
         // warning CS0618: “UnrealBuildTool.ModuleRules.UEBuildConfiguration”已过时:“The UEBuildConfiguration alias is deprecated in 4.18. Set the same properties on the ReadOnlyTargetRules instance passed into the ModuleRules constructor instead.”
         // UE 4.18
 
+        // Engine\Source\Programs\UnrealBuildTool\Configuration\ModuleRules.cs
+       // this.PCHUsage = PCHUsageMode.Default;
+
+        // https://docs.unrealengine.com/en-us/Programming/UnrealBuildSystem/Configuration
+        // http://api.unrealengine.com/CHN/Programming/UnrealBuildSystem/Configuration/
+        MinFilesUsingPrecompiledHeaderOverride = 1;
+        bFasterWithoutUnity = true;
+
 
         // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
         // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs
@@ -297,11 +305,6 @@ public class MyProject : ModuleRules
         //Definitions.Add("NO_GETADDRINFO");
         //Definitions.Add("ENABLE_EXCEPTIONS");
         //Definitions.Add("ENABLE_DETACH");
-
-        // https://docs.unrealengine.com/en-us/Programming/UnrealBuildSystem/Configuration
-        // http://api.unrealengine.com/CHN/Programming/UnrealBuildSystem/Configuration/
-        MinFilesUsingPrecompiledHeaderOverride = 1;
-        bFasterWithoutUnity = true;
 
         //PrivateIncludePaths.AddRange(
         //    new string[] {

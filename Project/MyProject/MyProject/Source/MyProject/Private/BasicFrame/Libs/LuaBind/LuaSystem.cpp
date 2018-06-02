@@ -17,6 +17,8 @@
 // "GeneratedScriptLibraries.inl"
 //extern void LuaRegisterExportedClasses(lua_State* InScriptContext);
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 LuaSystem::LuaSystem()
 {
 	this->L = nullptr;
@@ -81,3 +83,5 @@ void LuaSystem::doString(std::string str)
 {
 	luaL_dostring(this->L, str.c_str());
 }
+
+MY_END_NAMESPACE

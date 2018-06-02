@@ -6,7 +6,7 @@
 #include "GObject.h"
 #include "PlatformDefine.h"
 
-MY_USING_NAMESPACE(MyNS)
+MY_BEGIN_NAMESPACE(MyNS)
 
 class LogSys : public GObject
 {
@@ -22,5 +22,7 @@ public:
 	void log(std::string message);
 	void error(std::string message);
 };
+
+MY_END_NAMESPACE
 
 #endif

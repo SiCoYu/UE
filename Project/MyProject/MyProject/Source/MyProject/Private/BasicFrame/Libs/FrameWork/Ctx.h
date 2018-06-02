@@ -47,15 +47,15 @@ class TickMgr;
 class TimerMgr;
 class FrameTimerMgr;
 
-MY_END_NAMESPACE
-
-class UMyBluePrintBase;
-class UGameInstance;
-
 class EngineData;
 class LogSys;
 class LuaSystem;
 class MyLatentActionManager;
+
+MY_END_NAMESPACE
+
+class UMyBluePrintBase;
+class UGameInstance;
 
 MY_USING_NAMESPACE(MyNS)
 

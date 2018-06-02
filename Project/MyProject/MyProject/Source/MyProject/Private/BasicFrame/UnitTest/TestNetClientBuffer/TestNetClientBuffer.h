@@ -1,11 +1,11 @@
 #ifndef __TestNetClientBuffer_H
 #define __TestNetClientBuffer_H
 
+#include "MCircularBuffer.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-#include "MCircularBuffer.h"
 //#include "gtest/gtest.h"
 //
 //class CircularBufferTest : public testing::Test

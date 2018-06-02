@@ -5,7 +5,7 @@
 
 struct FLatentActionManager;
 
-MY_USING_NAMESPACE(MyNS)
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MyLatentActionManager : public GObject
 {
@@ -16,3 +16,5 @@ public:
 	void init();
 	void dispose();
 };
+
+MY_END_NAMESPACE

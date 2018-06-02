@@ -5,13 +5,15 @@
 #include "UnrealString.h"		// FString
 #include "Internationalization/Text.h"	// FText
 #include "GameFramework/PlayerController.h"
-
 #include "MLogType.h"
+#include "PlatformDefine.h"
 
-// https://wiki.unrealengine.com/Logs,_Printing_Messages_To_Yourself_During_Runtime
+MY_BEGIN_NAMESPACE(MyNS)
+
 
 /**
  * @brief Client ¥∞ø⁄»’÷æ, Pressing the ~ key in Unreal brings up the client console. 
+ * @ref https://wiki.unrealengine.com/Logs,_Printing_Messages_To_Yourself_During_Runtime
  */
 class ClientWinLog
 {
@@ -24,5 +26,7 @@ public:
 	void warn(FString str, MLogType::MLogType type);
 	void error(FString str, MLogType::MLogType type);
 };
+
+MY_END_NAMESPACE
 
 #endif

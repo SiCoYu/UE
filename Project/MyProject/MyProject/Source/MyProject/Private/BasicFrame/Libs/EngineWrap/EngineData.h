@@ -8,7 +8,7 @@ class AActor;
 class APlayerController;
 class UMyGameEngineBase;
 
-MY_USING_NAMESPACE(MyNS)
+MY_BEGIN_NAMESPACE(MyNS)
 
 class EngineData : public GObject
 {
@@ -35,4 +35,6 @@ public:
 	void setMyEngine(UMyGameEngineBase* myEngine);
 };
 
-#endif				// __ENGINEDATA_H
+MY_END_NAMESPACE
+
+#endif				// __EngineData_H
