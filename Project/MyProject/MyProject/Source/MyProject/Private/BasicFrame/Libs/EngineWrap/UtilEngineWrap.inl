@@ -2,6 +2,7 @@
 #error "UtilEngineWrap.inl file can only include in UtilEngineWrap.h"
 #endif
 
+MY_BEGIN_NAMESPACE(MyNS)
 
 template< class T >
 T UtilEngineWrap::Max(const TArray<T>& Values, int32* MaxIndex)
@@ -166,3 +167,5 @@ T* UtilEngineWrap::getComponentByClass(AActor* actor)
 
 	return ret;
 }
+
+MY_END_NAMESPACE

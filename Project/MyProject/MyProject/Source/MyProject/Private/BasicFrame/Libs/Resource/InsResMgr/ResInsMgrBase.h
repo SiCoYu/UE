@@ -93,8 +93,8 @@ public:
 	void unloadAll();
 };
 
-#include "ResInsMgrBase.inl"
-
 MY_END_NAMESPACE
+
+#include "ResInsMgrBase.inl"
 
 #endif

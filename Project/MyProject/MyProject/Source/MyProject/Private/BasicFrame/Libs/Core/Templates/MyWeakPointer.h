@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MyWeakPointer_H
+#define __MyWeakPointer_H
 
 //#include <memory>	// weak_ptr
 
@@ -6,6 +7,7 @@
 #define MyWeakPtr std::weak_ptr
 
 #include "MyPtrRefInfo.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -44,15 +46,15 @@ public:
 		: mRefPtr(r.mRefPtr)
 		, mRefInfo(r.mRefInfo)
 	{
-		if (mRefPtr)
+		if (this->mRefPtr)
 		{
-			mRefInfo->mWeakRefCount.Increment();
+			this->mRefInfo->mWeakRefCount.Increment();
 		}
 	}
 
 	WeakPtr& operator=(const WeakPtr& r)
 	{
-		if (mRefInfo == r.mRefInfo)
+		if (this->mRefInfo == r.mRefInfo)
 		{
 			return *this;
 		}
@@ -72,9 +74,9 @@ public:
 		: mRefPtr(r.mRefPtr)
 		, mRefInfo(r.mRefInfo)
 	{
-		if (mRefPtr)
+		if (this->mRefPtr)
 		{
-			mRefInfo->mWeakRefCount.Increment();
+			this->mRefInfo->mWeakRefCount.Increment();
 		}
 	}
 
@@ -87,7 +89,7 @@ public:
 #endif
 	WeakPtr& operator=(const WeakPtr<Y>& r)
 	{
-		if (mRefInfo == r.mRefInfo)
+		if (this->mRefInfo == r.mRefInfo)
 		{
 			return *this;
 		}
@@ -105,10 +107,10 @@ public:
 	template<typename Y>
 	WeakPtr<Y> staticCast() const
 	{
-		if (mRefPtr) 
+		if (this->mRefPtr)
 		{
-			mRefInfo->mWeakRefCount.Increment();
-			return WeakPtr<Y>(static_cast<Y*>(mRefPtr), mRefInfo);
+			this->mRefInfo->mWeakRefCount.Increment();
+			return WeakPtr<Y>(static_cast<Y*>(this->mRefPtr), this->mRefInfo);
 		}
 		else
 		{
@@ -119,11 +121,11 @@ public:
 	template<typename Y>
 	WeakPtr<Y> dynamicCast() const
 	{
-		Y* rep = dynamic_cast<Y*>(mRefPtr);
+		Y* rep = dynamic_cast<Y*>(this->mRefPtr);
 		if (rep) 
 		{
-			mRefInfo->mWeakRefCount.Increment();
-			return WeakPtr<Y>(rep, mRefInfo);
+			this->mRefInfo->mWeakRefCount.Increment();
+			return WeakPtr<Y>(rep, this->mRefInfo);
 		}
 		else
 		{
@@ -133,46 +135,46 @@ public:
 
 	inline T& operator*() const 
 	{ 
-		assert(mRefPtr); 
-		return *mRefPtr; 
+		my_assert(this->mRefPtr);
+		return *this->mRefPtr;
 	}
 
 	inline T* operator->() const 
 	{ 
-		assert(mRefPtr); 
-		return mRefPtr; 
+		my_assert(this->mRefPtr);
+		return this->mRefPtr;
 	}
 
 	inline T* get() const 
 	{ 
-		return mRefPtr; 
+		return this->mRefPtr;
 	}
 
 	void bind(T* rep) 
 	{
-		assert(!mRefPtr && !mRefInfo);
-		mRefInfo = MY_NEW SharedPtrInfo;
-		mRefPtr = rep;
+		my_assert(!this->mRefPtr && !this->mRefInfo);
+		this->mRefInfo = MY_NEW SharedPtrInfo;
+		this->mRefPtr = rep;
 	}
 
 	inline bool unique() const 
 	{ 
-		assert(mRefInfo && mRefInfo->mWeakRefCount.get()); return mRefInfo->mWeakRefCount.get() == 1; 
+		my_assert(this->mRefInfo && this->mRefInfo->mWeakRefCount.get()); return this->mRefInfo->mWeakRefCount.get() == 1;
 	}
 
 	unsigned int getRefCount() const
 	{ 
-		assert(mRefInfo && mRefInfo->mWeakRefCount.GetValue()); return mRefInfo->mWeakRefCount.GetValue();
+		my_assert(this->mRefInfo && this->mRefInfo->mWeakRefCount.GetValue()); return this->mRefInfo->mWeakRefCount.GetValue();
 	}
 
 	void setUseCount(unsigned value)
 	{ 
-		assert(mRefInfo); mRefInfo->mWeakRefCount.GetValue() = value; 
+		my_assert(this->mRefInfo); this->mRefInfo->mWeakRefCount.GetValue() = value;
 	}
 
 	T* getPointer() const 
 	{ 
-		return mRefPtr; 
+		return this->mRefPtr;
 	}
 
 	static void unspecified_bool(WeakPtr***)
@@ -183,22 +185,22 @@ public:
 
 	operator unspecified_bool_type() const
 	{
-		return mRefPtr == 0 ? 0 : unspecified_bool;
+		return this->mRefPtr == 0 ? 0 : unspecified_bool;
 	}
 
 	bool isNull(void) const 
 	{ 
-		return mRefPtr == 0; 
+		return this->mRefPtr == 0;
 	}
 
 	void setNull() 
 	{ 
-		reset(); 
+		this->reset();
 	}
 
 	void reset(void) 
 	{
-		release();
+		this->release();
 	}
 
 	void reset(T* rep) 
@@ -209,29 +211,30 @@ public:
 protected:
 	inline void release(void)
 	{
-		if (mRefPtr)
+		if (this->mRefPtr)
 		{
-			assert(mRefInfo);
-			if (mRefInfo->mWeakRefCount.Decrement() == 0)
+			my_assert(mRefInfo);
+
+			if (this->mRefInfo->mWeakRefCount.Decrement() == 0)
 			{
-				destroy();
+				this->destroy();
 			}
 		}
 
-		mRefPtr = 0;
-		mRefInfo = 0;
+		this->mRefPtr = 0;
+		this->mRefInfo = 0;
 	}
 
 	inline void destroy(void)
 	{
-		assert(mRefPtr && mRefInfo);
-		MY_DELETE mRefInfo;
+		my_assert(this->mRefPtr && this->mRefInfo);
+		MY_DELETE this->mRefInfo;
 	}
 
 	inline void swap(WeakPtr<T> &other)
 	{
-		std::swap(mRefPtr, other.mRefPtr);
-		std::swap(mRefInfo, other.mRefInfo);
+		std::swap(this->mRefPtr, other.mRefPtr);
+		std::swap(this->mRefInfo, other.mRefInfo);
 	}
 };
 
@@ -263,3 +266,7 @@ inline WeakPtr<T> dynamic_pointer_cast(WeakPtr<U> const & r)
 }
 
 MY_END_NAMESPACE
+
+#include "MySharedPointer.inl"
+
+#endif

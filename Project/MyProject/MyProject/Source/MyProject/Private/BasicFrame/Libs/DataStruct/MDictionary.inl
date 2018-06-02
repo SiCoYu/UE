@@ -4,6 +4,8 @@
 
 #include "UtilContainers.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 template <class TKey, class TValue>
 MDictionary<TKey, TValue>::MDictionary()
 {
@@ -132,3 +134,5 @@ bool MDictionary<TKey, TValue>::containsValue(TValue value)
 
 	return ret;
 }
+
+MY_END_NAMESPACE

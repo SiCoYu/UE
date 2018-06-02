@@ -6,6 +6,8 @@
 #include "ClassAssetInsRes.h"
 #include "Prequisites.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 //template <class T>
 //T* UiMgr::loadForm(UiFormId formId)
 //{
@@ -128,3 +130,5 @@ T*  UiMgr::loadAndShow(UiFormId formId)
 
 	return retForm;
 }
+
+MY_END_NAMESPACE

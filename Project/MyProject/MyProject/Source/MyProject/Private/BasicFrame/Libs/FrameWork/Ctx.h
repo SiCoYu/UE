@@ -13,7 +13,8 @@
 #include "CoreInc.h"
 #include "PlatformDefine.h"
 
-MY_USING_NAMESPACE(MyNS)
+// 类的声明和定义一定要完全一样，包括 namespace
+MY_BEGIN_NAMESPACE(MyNS)
 
 class UiMgr;
 class UGameInstance;
@@ -50,7 +51,12 @@ class DelayTaskMgr;
 class TickMgr;
 class TimerMgr;
 class FrameTimerMgr;
+
+MY_END_NAMESPACE
+
 class UMyBluePrintBase;
+
+MY_USING_NAMESPACE(MyNS)
 
 class Ctx : public Singleton<Ctx>
 {
@@ -198,4 +204,4 @@ public:
 #define GFrameTimerMgr GCtx->getFrameTimerMgr()
 #define GBPCtx GCtx->getBPCtx()
 
-#endif				// __CTX_H
+#endif				// __Ctx_H

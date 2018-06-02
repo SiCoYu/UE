@@ -281,8 +281,8 @@ inline SharedPtr<T> dynamic_pointer_cast(SharedPtr<U> const & r)
 	return r.template dynamicCast<T>();
 }
 
-#include "MySharedPointer.inl"
-
 MY_END_NAMESPACE
+
+#include "MySharedPointer.inl"
 
 #endif

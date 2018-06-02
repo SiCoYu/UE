@@ -34,6 +34,8 @@ public:
 	static bool FileExists(const std::string& InPath);
 };
 
+MY_END_NAMESPACE
+
 // Ä£°åÊµÏÖ
 #include "UtilPath.inl"
 
@@ -45,7 +47,5 @@ public:
 //
 //	return strStream.str();
 //}
-
-MY_END_NAMESPACE
 
 #endif

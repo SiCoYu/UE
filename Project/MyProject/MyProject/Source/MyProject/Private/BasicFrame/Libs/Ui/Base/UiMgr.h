@@ -90,8 +90,11 @@ public:
 	//void unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe);
 };
 
+MY_END_NAMESPACE
+
 #include "UiMgr.inl"			// 模板具体的实现
 
-MY_END_NAMESPACE
+// 如果 UiMgr.inl 中有包含系统头文件，相当于系统类声明的时候都包含名字空间了，与系统类的定义不相同，导致编译错误
+// MY_END_NAMESPACE
 
 #endif				// __UiMgr_H

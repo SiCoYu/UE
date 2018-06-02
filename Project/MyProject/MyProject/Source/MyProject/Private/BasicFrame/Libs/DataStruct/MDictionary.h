@@ -41,8 +41,8 @@ public:
 	bool containsValue(TValue value);
 };
 
-#include "MDictionary.inl"
-
 MY_END_NAMESPACE
+
+#include "MDictionary.inl"
 
 #endif

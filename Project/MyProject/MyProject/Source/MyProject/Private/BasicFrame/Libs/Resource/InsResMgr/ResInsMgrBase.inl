@@ -2,6 +2,8 @@
 #error "ResInsMgrBase.inl file can only include in ResInsMgrBase.h"
 #endif
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 template<class T>
 T* ResInsMgrBase::getAndSyncLoad(std::string path, EventDispatchDelegate handle)
 {
@@ -110,3 +112,5 @@ void ResInsMgrBase::load(LoadParam* param)
 		this->unloadNoRefResFromList();
 	}
 }
+
+MY_END_NAMESPACE

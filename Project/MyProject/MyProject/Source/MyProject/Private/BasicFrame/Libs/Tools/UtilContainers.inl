@@ -2,6 +2,8 @@
 #error "UtilContainers.inl file can only include in UtilContainers.h"
 #endif
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 //==================== vector ÇøÓò ===================
 template<class T>
 int UtilVector::IndexOf(std::vector<T>& vec, T& item)
@@ -170,3 +172,5 @@ bool UtilMap::Remove(std::map<TKey, TValue>& map, TKey& key)
 	}
 	return false;
 }
+
+MY_END_NAMESPACE

@@ -8,16 +8,18 @@
 #include "PlatformDefine.h"
 #include "Window.generated.h"
 
-// 不能使用宏定义，会编译报错
-//MY_USING_NAMESPACE(MyNS)
-
-using namespace MyNS;
-using namespace NSFormId;
-
+// 类的声明和定义一定要一样，包括 namespace
 namespace MyNS
 {
 	class UiLayer;
 }
+
+// 不能使用宏定义，会编译报错
+//MY_USING_NAMESPACE(MyNS)
+
+// 类的使用可以使 namespace::class ,或者 using namespace name
+using namespace MyNS;
+using namespace NSFormId;
 
 /**
  * @brief https://wiki.unrealengine.com/UMG,_How_to_extend_a_UUserWidget::_for_UMG_in_C%2B%2B.

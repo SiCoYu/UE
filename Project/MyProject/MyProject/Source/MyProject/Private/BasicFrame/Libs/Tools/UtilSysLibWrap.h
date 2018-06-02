@@ -27,8 +27,8 @@ public:
 	static void DestroyImmediate(AActor* actor, bool bNetForce = false, bool bShouldModifyLevel = true);
 };
 
-#include "UtilSysLibWrap.inl"
-
 MY_END_NAMESPACE
+
+#include "UtilSysLibWrap.inl"
 
 #endif

@@ -35,9 +35,13 @@ public:
 	static void Add(std::vector<T>& vec, T& item);
 };
 
+MY_END_NAMESPACE
+
 //================== list 区域 =========================
 
 #include <list>
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class UtilList
 {
@@ -66,9 +70,13 @@ public:
 	static T& At(std::list<T>& list, int index);
 };
 
+MY_END_NAMESPACE
+
 //=================== map 区域 ========================
 
 #include <map>
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class UtilMap
 {
@@ -82,9 +90,9 @@ public:
 	static bool Remove(std::map<TKey, TValue>& map, TKey& key);
 };
 
+MY_END_NAMESPACE
+
 //================== 实现区域 ====================
 #include "UtilContainers.inl"
-
-MY_END_NAMESPACE
 
 #endif
