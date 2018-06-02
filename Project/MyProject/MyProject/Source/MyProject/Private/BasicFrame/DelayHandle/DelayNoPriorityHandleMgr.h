@@ -1,48 +1,55 @@
-﻿namespace SDK.Lib
+﻿#pragma once
+
+#include "DelayNoOrPriorityHandleMgr.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+/**
+ * @brief 延迟优先级处理管理器
+ */
+class DelayNoPriorityHandleMgr : public DelayNoOrPriorityHandleMgr
 {
-    /**
-     * @brief 延迟优先级处理管理器
-     */
-    public class DelayNoPriorityHandleMgr : DelayNoOrPriorityHandleMgr
-    {
-        public DelayNoPriorityHandleMgr()
-        {
-            this.mDeferredAddQueue = new NoPriorityList();
-            this.mDeferredAddQueue.setIsSpeedUpFind(true);
-            this.mDeferredDelQueue = new NoPriorityList();
-            this.mDeferredDelQueue.setIsSpeedUpFind(true);
+public:
+	DelayNoPriorityHandleMgr()
+	{
+		this.mDeferredAddQueue = new NoPriorityList();
+		this.mDeferredAddQueue.setIsSpeedUpFind(true);
+		this.mDeferredDelQueue = new NoPriorityList();
+		this.mDeferredDelQueue.setIsSpeedUpFind(true);
 
-            this.mNoOrPriorityList = new NoPriorityList();
-            this.mNoOrPriorityList.setIsSpeedUpFind(true);
-        }
+		this.mNoOrPriorityList = new NoPriorityList();
+		this.mNoOrPriorityList.setIsSpeedUpFind(true);
+	}
 
-        override public void init()
-        {
-            base.init();
-        }
+	virtual void init() override
+	{
+		base.init();
+	}
 
-        override public void dispose()
-        {
-            this.mDeferredAddQueue.clear();
-            this.mDeferredAddQueue = null;
+	virtual void dispose() override
+	{
+		this.mDeferredAddQueue.clear();
+		this.mDeferredAddQueue = null;
 
-            this.mDeferredDelQueue.clear();
-            this.mDeferredDelQueue = null;
+		this.mDeferredDelQueue.clear();
+		this.mDeferredDelQueue = null;
 
-            this.mNoOrPriorityList.clear();
-            this.mNoOrPriorityList = null;
+		this.mNoOrPriorityList.clear();
+		this.mNoOrPriorityList = null;
 
-            base.dispose();
-        }
+		base.dispose();
+	}
 
-        public void addNoPriorityObject(INoOrPriorityObject priorityObject)
-        {
-            this.addNoOrPriorityObject(priorityObject);
-        }
+	void addNoPriorityObject(INoOrPriorityObject priorityObject)
+	{
+		this.addNoOrPriorityObject(priorityObject);
+	}
 
-        public void removeNoPriorityObject(ITickedObject tickObj)
-        {
-            this.removeNoOrPriorityObject(tickObj);
-        }
-    }
+	void removeNoPriorityObject(ITickedObject tickObj)
+	{
+		this.removeNoOrPriorityObject(tickObj);
+	}
 }
+
+MY_END_NAMESPACE

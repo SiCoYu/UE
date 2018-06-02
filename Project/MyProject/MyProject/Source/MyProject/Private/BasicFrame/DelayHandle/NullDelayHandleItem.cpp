@@ -1,18 +1,16 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "NullDelayHandleItem.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+void setClientDispose(bool isDispose)
 {
-    /**
-     * @brief 默认的接口实现
-     */
-    public class NullDelayHandleItem : IDelayHandleItem
-    {
-        public void setClientDispose(bool isDispose)
-        {
 
-        }
-
-        public bool isClientDispose()
-        {
-            return false;
-        }
-    }
 }
+
+bool isClientDispose()
+{
+	return false;
+}
+
+MY_END_NAMESPACE

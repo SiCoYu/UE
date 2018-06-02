@@ -1,26 +1,24 @@
-﻿namespace SDK.Lib
+﻿#include "MyProject.h"
+#include "NullDelayHandleItem.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+public DelayNoPriorityHandleMgrBase()
 {
-    /**
-     * @brief 当需要管理的对象可能在遍历中间添加的时候，需要这个管理器
-     */
-    public class DelayNoPriorityHandleMgrBase : DelayNoOrPriorityHandleMgrBase
-    {
-        public DelayNoPriorityHandleMgrBase()
-        {
-            this.mDeferredAddQueue = new NoPriorityList();
-            this.mDeferredAddQueue.setIsSpeedUpFind(true);
-            this.mDeferredDelQueue = new NoPriorityList();
-            this.mDeferredDelQueue.setIsSpeedUpFind(true);
-        }
-
-        override public void init()
-        {
-            base.init();
-        }
-
-        override public void dispose()
-        {
-            base.dispose();
-        }
-    }
+	this.mDeferredAddQueue = new NoPriorityList();
+	this.mDeferredAddQueue.setIsSpeedUpFind(true);
+	this.mDeferredDelQueue = new NoPriorityList();
+	this.mDeferredDelQueue.setIsSpeedUpFind(true);
 }
+
+virtual void init() override
+{
+	Super::init();
+}
+
+virtual void dispose() override
+{
+	Super::dispose();
+}
+
+MY_END_NAMESPACE
