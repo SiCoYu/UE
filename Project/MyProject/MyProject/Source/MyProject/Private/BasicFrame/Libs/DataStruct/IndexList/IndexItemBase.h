@@ -11,35 +11,14 @@ protected:
 	int mIndex;   // 索引
 
 public:
-	IndexItemBase()
-    {
-        this->mIndex = -1;
-    }
+	IndexItemBase();
+	
+    void init();
+    void dispose();
 
-    void init()
-    {
-
-    }
-
-    void dispose()
-    {
-
-    }
-
-    int getIndex()
-    {
-        return this->mIndex;
-    }
-
-    void setIndex(int value)
-    {
-        this->mIndex = value;
-    }
-
-    void resetIndex()
-    {
-        this->mIndex = -1;
-    }
+    int getIndex();
+    void setIndex(int value);
+    void resetIndex();
 };
 
 MY_END_NAMESPACE

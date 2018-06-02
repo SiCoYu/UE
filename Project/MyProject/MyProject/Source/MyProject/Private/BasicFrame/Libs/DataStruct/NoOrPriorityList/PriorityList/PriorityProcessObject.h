@@ -15,51 +15,16 @@ public:
     float mPriority;
 
 public:
-	PriorityProcessObject()
-    {
-        this->onPutInPool();
-    }
+	PriorityProcessObject();
 
-    void putInPool()
-    {
-        this->onPutInPool();
-    }
-
-    void getFromPool()
-    {
-        this->onGetFromPool();
-    }
-
-    void dispose()
-    {
-        this->onPutInPool();
-    }
-
-    void setIsUsePool(bool value)
-    {
-        this->mIsUsePool = value;
-    }
-
-	bool isUsePool()
-    {
-        return this->mIsUsePool;
-    }
-
-    void onPutInPool()
-    {
-        this->mPriorityObject = nullptr;
-        this->mPriority = 0.0f;
-    }
-
-    void onGetFromPool()
-    {
-
-    }
-
-    int getBufferType()
-    {
-        return (int)BufferType.eBT_PriorityProcessObject;
-    }
+    void putInPool();
+    void getFromPool();
+    void dispose();
+    void setIsUsePool(bool value);
+	bool isUsePool();
+    void onPutInPool();
+    void onGetFromPool();
+    int getBufferType();
 };
 
 MY_END_NAMESPACE

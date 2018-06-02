@@ -4,7 +4,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-enum PrioritySort
+enum class PrioritySort
 {
 	ePS_Less,       // 小于
 	ePS_Great,      // 大于
