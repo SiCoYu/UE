@@ -52,7 +52,7 @@ class NetMgr : public GObject, public INetMgr
 #endif
 {
 public:
-	typedef MDictionary<std::string, UENetClient*>::iterator ClientMapIte;
+	typedef typename MDictionary<std::string, UENetClient*>::Iterator ClientMapIte;
 private:
 #ifdef USE_EXTERN_THREAD
 	NetThread* mNetThread;

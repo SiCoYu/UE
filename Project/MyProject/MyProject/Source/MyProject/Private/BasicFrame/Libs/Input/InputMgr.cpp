@@ -117,8 +117,10 @@ void InputMgr::setGameObject(AActor* value)
 bool InputMgr::IsPressed(AActor* go)
 {
 	for (int i = 0; i < 3; ++i) if (mMouse[i].pressed == go) return true;
-	for(std::pair<int, MouseOrTouch> touch : mTouches) 
+	for (std::pair<int, MouseOrTouch> touch : mTouches.getData())
+	{
 		if (touch.second.pressed == go) return true;
+	}
 	if (controller.pressed == go) return true;
 	return false;
 }

@@ -40,22 +40,22 @@ bool NetCmdNotify::getBStopNetHandle()
 
 void NetCmdNotify::setBStopNetHandle(bool value)
 {
-	mIsStopNetHandle = value;
+	this->mIsStopNetHandle = value;
 }
 
 void NetCmdNotify::addOneNofity(NetModuleDispatchHandle* disp)
 {
-	if (UtilVector::IndexOf(mNetDispatchList, disp) == -1)
+	if (!this->mNetDispatchList.contains(disp))
     {
-        mNetDispatchList.push_back(disp);
+		this->mNetDispatchList.add(disp);
     }
 }
 
 void NetCmdNotify::removeOneNotify(NetModuleDispatchHandle* disp)
 {
-	if (UtilVector::IndexOf(mNetDispatchList, disp) != -1)
+	if (this->mNetDispatchList.contains(disp))
     {
-		UtilVector::Remove(mNetDispatchList, disp);
+		this->mNetDispatchList.remove(disp);
     }
 }
 
@@ -69,11 +69,11 @@ void NetCmdNotify::handleMsg(MByteBuffer* msg)
 		msg->readUnsignedInt8(byParam);
 		msg->setPos(0);
 
-		mCmdDispInfo->bu = msg;
-		mCmdDispInfo->byCmd = byCmd;
-		mCmdDispInfo->byParam = byParam;
+		this->mCmdDispInfo->bu = msg;
+		this->mCmdDispInfo->byCmd = byCmd;
+		this->mCmdDispInfo->byParam = byParam;
 
-		for (auto item : mNetDispatchList)
+		for (auto item : this->mNetDispatchList.getList())
 		{
 			item->handleMsg(mCmdDispInfo);
 		}
@@ -82,16 +82,16 @@ void NetCmdNotify::handleMsg(MByteBuffer* msg)
 
 void NetCmdNotify::addOneRevMsg()
 {
-    ++mRevMsgCnt;
+    ++this->mRevMsgCnt;
 
-	GLogSys->log(UtilStr::Format("接收到消息数量 {0}", mRevMsgCnt));
+	GLogSys->log(UtilStr::Format("接收到消息数量 {0}", this->mRevMsgCnt));
 }
 
 void NetCmdNotify::addOneHandleMsg()
 {
-    ++mHandleMsgCnt;
+    ++this->mHandleMsgCnt;
 
-	GLogSys->log(UtilStr::Format("处理消息数量 {0}", mHandleMsgCnt));
+	GLogSys->log(UtilStr::Format("处理消息数量 {0}", this->mHandleMsgCnt));
 }
 
 void NetCmdNotify::clearOneRevMsg()

@@ -24,13 +24,13 @@ void MFileSys::init()
 	std::string searchPath = "";
 
 	searchPath = path + "MyAsset/Lua/";
-	mLuaSearchPathList.push_back(searchPath);
+	mLuaSearchPathList.add(searchPath);
 
 	searchPath = path + "MyAsset/Lua/Socket/";
-	mLuaSearchPathList.push_back(searchPath);
+	mLuaSearchPathList.add(searchPath);
 
 	searchPath = path + "MyAsset/Lua/ZeroBraneStudio/";
-	mLuaSearchPathList.push_back(searchPath);
+	mLuaSearchPathList.add(searchPath);
 
 	// 初始化 SandBox 文件系统
 	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
@@ -95,7 +95,7 @@ std::string MFileSys::getLuaPath(std::string luaPackage)
 	std::string replace = UtilStr::replaceAllDistinct(luaPackage, old_value, new_value);
 	std::string fullPath;
 
-	for (auto searchPath : mLuaSearchPathList)
+	for (auto searchPath : this->mLuaSearchPathList.getList())
 	{
 		fullPath = searchPath + replace + ".lua";
 

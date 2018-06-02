@@ -42,13 +42,13 @@ Config::Config()
 
 	std::string value;
 	value = std::string("prefab");
-	UtilVector::Add(mPakExtNameList, value);
+	this->mPakExtNameList.add(value);
 	value = std::string("png");
-	UtilVector::Add(mPakExtNameList, value);
+	this->mPakExtNameList.add(value);
 	value = std::string("shader");
-	UtilVector::Add(mPakExtNameList, value);
+	this->mPakExtNameList.add(value);
 	value = std::string("unity");
-	UtilVector::Add(mPakExtNameList, value);
+	this->mPakExtNameList.add(value);
 }
 
 Config::~Config()

@@ -215,7 +215,8 @@ void NetMgr::closeSocket(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string key = strStream.str();
-	if (UtilMap::ContainsKey(mId2ClientDic, key))	// 如果没有这个 NetClient
+
+	if (this->mId2ClientDic.containsKey(key))	// 如果没有这个 NetClient
 	{
 		// 关闭 socket 之前要等待所有的数据都发送完成，如果发送一直超时，可能就卡在这很长时间
 		this->mId2ClientDic[key]->getMsgSendEndEvent()->Reset();        // 重置信号
@@ -224,7 +225,7 @@ void NetMgr::closeSocket(std::string ip, uint32 port)
 		this->mVisitMutex->Lock();
 		{
 			this->mId2ClientDic[key]->Disconnect();
-			UtilMap::Remove(mId2ClientDic, key);
+			this->mId2ClientDic.remove(key);
 		}
 		this->mVisitMutex->Unlock();
 		this->mCurClient = nullptr;
@@ -284,14 +285,15 @@ void NetMgr::openSocket_Inter(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string ipId = strStream.str();
-	if (!UtilMap::ContainsKey(mId2ClientDic, ipId))	// 如果没有这个 NetClient
+
+	if (!this->mId2ClientDic.containsKey(ipId))	// 如果没有这个 NetClient
 	{
-		mCurClient = MY_NEW UENetClient();
-		mId2ClientDic[ipId] = mCurClient;
+		this->mCurClient = MY_NEW UENetClient();
+		this->mId2ClientDic[ipId] = mCurClient;
 
-		mCurClient->connect(ip.c_str(), port);
+		this->mCurClient->connect(ip.c_str(), port);
 
-		testSendData(ip, port);
+		this->testSendData(ip, port);
 	}
 }
 #endif
@@ -301,7 +303,7 @@ void NetMgr::recAndSendMsg()
 #ifdef USE_EXTERN_THREAD
 	recAndSendMsg_Extern();
 #else
-	recAndSendMsg_Inter();
+	this->recAndSendMsg_Inter();
 #endif
 }
 
@@ -335,9 +337,10 @@ void NetMgr::testSendData(std::string ip, uint32 port)
 	std::stringstream strStream;
 	strStream << ip << "&" << port;
 	std::string ipId = strStream.str();
-	if (UtilMap::ContainsKey(mId2ClientDic, ipId))
+
+	if (this->mId2ClientDic.containsKey(ipId))
 	{
-		mId2ClientDic[ipId]->sendMsg();
+		this->mId2ClientDic[ipId]->sendMsg();
 	}
 }
 
@@ -348,8 +351,8 @@ void NetMgr::closeCurSocket()
 		std::string ip;
 		int port;
 
-		ip = mCurClient->mIp;
-		port = mCurClient->mPort;
+		ip = this->mCurClient->mIp;
+		port = this->mCurClient->mPort;
 
 		std::stringstream strStream;
 		strStream << ip << "&" << port;
@@ -359,17 +362,17 @@ void NetMgr::closeCurSocket()
 		//m_id2SocketDic[key].msgSendEndEvent.Reset();        // 重置信号
 		//m_id2SocketDic[key].msgSendEndEvent.WaitOne();      // 阻塞等待数据全部发送完成
 
-		if (UtilMap::ContainsKey(mId2ClientDic, key))
+		if (this->mId2ClientDic.containsKey(key))
 		{
 #ifdef NET_MULTHREAD
 			using (MLock mlock = MY_NEW MLock(mVisitMutex))
 #endif
 			{
-				mId2ClientDic[key]->Disconnect();
-				UtilMap::ContainsKey(mId2ClientDic, key);
+				this->mId2ClientDic[key]->Disconnect();
+				this->mId2ClientDic.containsKey(key);
 			}
 
-			mCurClient = nullptr;
+			this->mCurClient = nullptr;
 		}
 	}
 }
@@ -423,8 +426,10 @@ void NetMgr::sendAndRecData()
 		// 从原始缓冲区取数据，然后放到解压和解密后的消息缓冲区中
 		ClientMapIte _beginIte;
 		ClientMapIte _endIte;
-		_beginIte = mId2ClientDic.begin();
-		_endIte = mId2ClientDic.end();
+
+		_beginIte = this->mId2ClientDic.getData().begin();
+		_endIte = this->mId2ClientDic.getData().end();
+
 		for (; _beginIte != _endIte; ++_beginIte)
 		{
 			if (!_beginIte->second->getRecvThreadStart() && _beginIte->second->getIsConnected())

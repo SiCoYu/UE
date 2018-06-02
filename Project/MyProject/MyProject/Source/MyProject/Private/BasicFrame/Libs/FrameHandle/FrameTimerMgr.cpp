@@ -30,7 +30,8 @@ void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 {
 	// 检查当前是否已经在队列中
 	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
-	if (UtilVector::IndexOf(mTimerList, frameTimerItem) == -1)
+
+	if (!this->mTimerList.contains(frameTimerItem))
 	{
 		if (isInDepth())
 		{
@@ -38,7 +39,7 @@ void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 		}
 		else
 		{
-			this->mTimerList.push_back((FrameTimerItem*)delayObject);
+			this->mTimerList.add((FrameTimerItem*)delayObject);
 		}
 	}
 }
@@ -47,20 +48,22 @@ void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
 {
 	// 检查当前是否在队列中
 	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
-	if (UtilVector::IndexOf(mTimerList, frameTimerItem) != -1)
+
+	if (this->mTimerList.contains(frameTimerItem))
 	{
 		((FrameTimerItem*)delayObject)->mIsDisposed = true;
+
 		if (isInDepth())
 		{
 			DelayHandleMgrBase::addObject(delayObject);
 		}
 		else
 		{
-			for(FrameTimerItem* item : this->mTimerList)
+			for(FrameTimerItem* item : this->mTimerList.getList())
 			{
 				if (item == delayObject)
 				{
-					UtilVector::Remove(this->mTimerList, item);
+					this->mTimerList.remove(item);
 					break;
 				}
 			}
@@ -72,7 +75,7 @@ void FrameTimerMgr::Advance(float delta)
 {
 	this->incDepth();
 
-	for(FrameTimerItem* timerItem : this->mTimerList)
+	for(FrameTimerItem* timerItem : this->mTimerList.getList())
 	{
 		if (!timerItem->isClientDispose())
 		{
