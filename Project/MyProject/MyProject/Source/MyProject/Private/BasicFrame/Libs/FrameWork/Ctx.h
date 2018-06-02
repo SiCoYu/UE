@@ -19,7 +19,6 @@ MY_BEGIN_NAMESPACE(MyNS)
 class UiMgr;
 class INetMgr;
 class TableSys;
-class LogSys;
 class ShareData;
 class NetCmdNotify;
 class Config;
@@ -54,7 +53,9 @@ MY_END_NAMESPACE
 
 class UMyBluePrintBase;
 class UGameInstance;
+
 class EngineData;
+class LogSys;
 
 MY_USING_NAMESPACE(MyNS)
 

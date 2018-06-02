@@ -4,8 +4,6 @@
 #include "MaterialInsRes.h"
 #include "Prequisites.h"
 
-#include "PlatformDefine.h"
-
 MY_BEGIN_NAMESPACE(MyNS)
 
 AuxMaterialLoader::AuxMaterialLoader()

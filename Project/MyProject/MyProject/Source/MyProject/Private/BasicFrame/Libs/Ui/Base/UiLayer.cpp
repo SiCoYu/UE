@@ -4,7 +4,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-UiLayer::UiLayer(UiLayerId layerID)
+UiLayer::UiLayer(UiLayerId layerId)
 {
 
 }

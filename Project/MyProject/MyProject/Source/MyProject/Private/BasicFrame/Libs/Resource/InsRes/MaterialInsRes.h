@@ -6,20 +6,18 @@
 #include "ResInsBase.h"
 #include "PlatformDefine.h"
 
-MY_BEGIN_NAMESPACE(MyNS)
-
-/**
-* @brief
-UE4:C++中使用材质
-http://blog.csdn.net/lzt20007/article/details/51285926
-*/
-
 // class FMaterial;
 class UMaterialInterface;
 class UMaterial;
 class UMaterialInstance;
 class UMaterialInstanceDynamic;
 
+MY_BEGIN_NAMESPACE(MyNS)
+
+/**
+ * @brief UE4:C++中使用材质
+ * @url http://blog.csdn.net/lzt20007/article/details/51285926
+ */
 class MaterialInsRes : public ResInsBase
 {
 	M_DECLARE_SUPER_KW(ResInsBase);

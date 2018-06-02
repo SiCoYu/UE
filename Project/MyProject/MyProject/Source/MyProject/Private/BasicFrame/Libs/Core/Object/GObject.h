@@ -16,6 +16,7 @@ class GObject : public MyAllocatedObject
 
 public:
 	GObject();
+	virtual ~GObject();
 
 public:
 	int GetRefCount() const;
@@ -27,9 +28,6 @@ public:
 	bool IsA(const std::string& classInfoName) const;
 	const std::string& GetClassName() const;
 	static void DumpRefCountingLeaks();
-
-protected:
-	virtual ~GObject();
 
 private:
 	volatile int mRefCount;

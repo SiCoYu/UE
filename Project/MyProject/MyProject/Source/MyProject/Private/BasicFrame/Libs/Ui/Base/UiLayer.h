@@ -23,8 +23,9 @@ protected:
 	FSlateRenderTransform* mLayerTrans;                 // 当前所在层根节点转换
 	std::map<UiFormId, UForm*> mWinDic;        // 当前层所有的界面
 	std::string mActorName;
+
 public:
-	UiLayer(UiLayerId layerID);
+	UiLayer(UiLayerId layerId);
 	std::map<UiFormId, UForm*>& getWinDic();
 	FSlateRenderTransform& getLayerTrans();
 	void setLayerTrans(FSlateRenderTransform* rhv);

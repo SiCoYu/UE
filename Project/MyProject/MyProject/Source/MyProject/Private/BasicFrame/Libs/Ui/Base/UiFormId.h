@@ -2,7 +2,7 @@
 #define __UiFormId_H
 #include "PlatformDefine.h"
 
-MY_BEGIN_NAMESPACE(MyNS)
+//MY_BEGIN_NAMESPACE(MyNS)
 
 namespace NSFormId
 {
@@ -17,6 +17,6 @@ namespace NSFormId
 	};
 }
 
-MY_END_NAMESPACE
+//MY_END_NAMESPACE
 
 #endif				// __UiFormId_H
