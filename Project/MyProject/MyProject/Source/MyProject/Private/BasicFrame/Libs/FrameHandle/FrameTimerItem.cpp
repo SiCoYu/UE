@@ -14,6 +14,36 @@ FrameTimerItem::FrameTimerItem()
 	this->mIsDisposed = false;
 }
 
+FrameTimerItem::~TimerItemBase()
+{
+
+}
+
+void FrameTimerItem::init()
+{
+
+}
+
+void FrameTimerItem::dispose()
+{
+
+}
+
+void FrameTimerItem::addTimerEventHandle(EventDispatchDelegate handle)
+{
+	if (nullptr == this->mTimerDispatch)
+	{
+		this->mTimerDispatch = MY_NEW AddOnceEventDispatch();
+	}
+
+	this->mTimerDispatch->addEventHandle(handle);
+}
+
+void FrameTimerItem::removeTimerEventHandle(EventDispatchDelegate handle)
+{
+	this->mTimerDispatch->removeEventHandle(handle);
+}
+
 void FrameTimerItem::OnFrameTimer()
 {
 	if (this->mIsDisposed)
@@ -30,10 +60,7 @@ void FrameTimerItem::OnFrameTimer()
 		{
 			this->mCurLeftFrame = 0;
 
-			if (!mTimerDispatch.empty())
-			{
-				this->mTimerDispatch(this);
-			}
+			this->mTimerDispatch->dispatchEvent(this);
 		}
 	}
 	else
@@ -42,10 +69,7 @@ void FrameTimerItem::OnFrameTimer()
 		{
 			this->mIsDisposed = true;
 
-			if (!this->mTimerDispatch.empty())
-			{
-				this->mTimerDispatch(this);
-			}
+			this->mTimerDispatch->dispatchEvent(this);
 		}
 		else
 		{
@@ -53,10 +77,7 @@ void FrameTimerItem::OnFrameTimer()
 			{
 				this->mCurLeftFrame = 0;
 
-				if (!this->mTimerDispatch.empty())
-				{
-					this->mTimerDispatch(this);
-				}
+				this->mTimerDispatch->dispatchEvent(this);
 			}
 		}
 	}

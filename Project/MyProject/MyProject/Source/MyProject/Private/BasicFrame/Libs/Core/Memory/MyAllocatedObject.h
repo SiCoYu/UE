@@ -1,9 +1,5 @@
 #pragma once
 
-
-#ifdef __PlatformDefine_H
-#error aaaaaaa
-#endif
 #include <new>	// nothrow_t
 #include <stdlib.h>	// malloc, free
 #include "MyMemoryDefaultAlloc.h"
