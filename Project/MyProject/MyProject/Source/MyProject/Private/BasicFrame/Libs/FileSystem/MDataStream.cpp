@@ -138,7 +138,7 @@ void MDataStream::close()
 	}
 }
 
-std::string MDataStream::readText(int offset, int count, GkEncode encode)
+std::string MDataStream::readText(int offset, int count, MEncode encode)
 {
 	std::string retStr = "";
 	FString fStr;
@@ -168,7 +168,7 @@ unsigned char* MDataStream::readByte(int offset, int count)
 	return bytes;
 }
 
-void MDataStream::writeText(std::string text, GkEncode gkEncode)
+void MDataStream::writeText(std::string text, MEncode gkEncode)
 {
 	//Encoding encode = UtilSysLibWrap.convGkEncode2EncodingEncoding(gkEncode);
 	//FFileHelper::EEncodingOptions::Type encode = FFileHelper::EEncodingOptions::ForceUTF8;
@@ -184,7 +184,7 @@ void MDataStream::writeByte(unsigned char* bytes, int offset, int count)
 	FFileHelper::SaveArrayToFile(Array, UtilStr::convStdStr2TCHAR(mFilePath));
 }
 
-void MDataStream::writeLine(std::string text, GkEncode gkEncode)
+void MDataStream::writeLine(std::string text, MEncode gkEncode)
 {
 	//text = text + UtilSysLibWrap.CR_LF;
 	this->writeText(text, gkEncode);

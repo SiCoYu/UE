@@ -20,7 +20,7 @@ protected:
 	std::vector<UiLayer*> mLayerList;   // Canvas ÖÐµÄ Layer
 
 public:
-	UiCanvas(UiCanvasId canvasID);
+	UiCanvas(UiCanvasId canvasId);
 	void setActorName(std::string& rhv);
 	std::vector<UiLayer*>& getLayerList();
 	void findCanvasActor();

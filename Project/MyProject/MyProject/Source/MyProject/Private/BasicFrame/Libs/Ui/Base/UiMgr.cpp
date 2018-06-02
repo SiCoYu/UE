@@ -50,13 +50,13 @@ void UiMgr::createCanvas()
 {
 	int idx = 0;
 
-	for (idx = 0; idx < (int)eCanvas_Total; ++idx)
+	for (idx = 0; idx < (int)UiCanvasId::eCanvas_Total; ++idx)
 	{
 		this->mCanvasList.push_back(MY_NEW UiCanvas((UiCanvasId)idx));
 	}
 
-	this->mCanvasList[(int)eCanvas_50]->setActorName(LayerPath::ND_CV_UICanvas_50);
-	this->mCanvasList[(int)eCanvas_100]->setActorName(LayerPath::ND_CV_UICanvas_100);
+	this->mCanvasList[(int)UiCanvasId::eCanvas_50]->setActorName(LayerPath::ND_CV_UICanvas_50);
+	this->mCanvasList[(int)UiCanvasId::eCanvas_100]->setActorName(LayerPath::ND_CV_UICanvas_100);
 }
 
 // 关联每一层的对象
@@ -64,7 +64,7 @@ void UiMgr::findCanvasActor()
 {
 	int idx = 0;
 
-	for (idx = 0; idx < (int)eCanvas_Total; ++idx)
+	for (idx = 0; idx < (int)UiCanvasId::eCanvas_Total; ++idx)
 	{
 		this->mCanvasList[idx]->findCanvasActor();
 	}
@@ -85,7 +85,7 @@ void UiMgr::_showFormInternal(UiFormId formId)
 
 	if (form != nullptr)
 	{
-		if (!form->getIsReady() && form->getIsLoadWidgetRes())
+		if (!form->isReady())
 		{
 			form->onReady();
 		}
@@ -166,15 +166,17 @@ void UiMgr::addForm(UForm* form)
 	form->onInit();
 }
 
-UiLayer* UiMgr::getLayer(UiCanvasId canvasID, UiLayerId layerID)
+UiLayer* UiMgr::getLayer(UiCanvasId canvasId, UiLayerId layerId)
 {
 	UiLayer* layer = nullptr;
 
-	if (eCanvas_50 <= canvasID && canvasID <= eCanvas_100)
+	if (canvasId >= UiCanvasId::eCanvas_50 &&
+		canvasId <= UiCanvasId::eCanvas_100)
 	{
-		if (eBtmLayer <= layerID && layerID <= eTopLayer)
+		if (layerId <= UiLayerId::eBtmLayer &&
+			layerId <= UiLayerId::eTopLayer)
 		{
-			layer = this->mCanvasList[(int)canvasID]->getLayerList()[(int)layerID];
+			layer = this->mCanvasList[(int)canvasId]->getLayerList()[(int)layerId];
 		}
 	}
 
@@ -312,15 +314,15 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	UClass* WidgetClass = res->getClass();
 	UUMGWidget* WidgetObject = nullptr;
 
-	if (NSFormType::eWorld == attrItem->mUMGOuterType)
+	if (UMGOuterType::eWorld == attrItem->mUMGOuterType)
 	{
 
 	}
-	else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
+	else if (UMGOuterType::ePlayerController == attrItem->mUMGOuterType)
 	{
 		WidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
 	}
-	else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
+	else if (UMGOuterType::eGameInstance == attrItem->mUMGOuterType)
 	{
 
 	}
@@ -399,9 +401,9 @@ void UiMgr::onResize(int viewWidth, int viewHeight)
 	int canvasIdx = 0;
 	int layerIdx = 0;
 
-	for (canvasIdx = 0; canvasIdx < (int)eCanvas_Total; ++canvasIdx)
+	for (canvasIdx = 0; canvasIdx < (int)UiCanvasId::eCanvas_Total; ++canvasIdx)
 	{
-		for (layerIdx = 0; layerIdx <= (int)eMaxLayer; ++layerIdx)
+		for (layerIdx = 0; layerIdx <= (int)UiLayerId::eMaxLayer; ++layerIdx)
 		{
 			this->mCanvasList[canvasIdx]->getLayerList()[layerIdx]->onStageReSize();
 		}
@@ -432,7 +434,7 @@ void UiMgr::findSceneUIRootActor()
 // 根据场景类型卸载 UI，强制卸载
 //void UiMgr::unloadUIBySceneType(UISceneType unloadSceneType, UISceneType loadSceneTpe)
 //{
-//	foreach(UiFormId id in mId2FormDic.Keys)
+//	foreach(enum UiFormId id in mId2FormDic.Keys)
 //	{
 //		if (mUiAttrSystem.mId2AttrDic[id].canUnloadUIBySceneType(unloadSceneType, loadSceneTpe))
 //		{
@@ -440,7 +442,7 @@ void UiMgr::findSceneUIRootActor()
 //		}
 //	}
 //
-//	foreach(UiFormId id in mTmpList)
+//	foreach(enum UiFormId id in mTmpList)
 //	{
 //		exitForm(id, true);
 //	}

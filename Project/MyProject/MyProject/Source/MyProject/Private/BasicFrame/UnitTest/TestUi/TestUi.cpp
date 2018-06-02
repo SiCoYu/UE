@@ -8,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 void TestUi::run()
 {
-	GUiMgr->loadAndShow<UUiTestUMG>(NSFormId::eUiTestUMG);
+	GUiMgr->loadAndShow<UUiTestUMG>(UiFormId::eUiTestUMG);
 }
 
 MY_END_NAMESPACE

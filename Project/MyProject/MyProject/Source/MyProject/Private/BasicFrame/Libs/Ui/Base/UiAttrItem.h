@@ -11,9 +11,6 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-using namespace NSFormType;
-using namespace NSFormId;
-
 class UiAttrItem : public GObject
 {
 public:

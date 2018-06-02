@@ -19,7 +19,6 @@ namespace MyNS
 
 // 类的使用可以使 namespace::class ,或者 using namespace name
 using namespace MyNS;
-using namespace NSFormId;
 
 /**
  * @brief https://wiki.unrealengine.com/UMG,_How_to_extend_a_UUserWidget::_for_UMG_in_C%2B%2B.
@@ -53,7 +52,6 @@ protected:
 	int mWidth;
 	int mHeight;
 	UiLayer* mUiLayer;
-	bool mIsResReady;            // 资源是否已经加载并初始化
 
 public:
 	UWindow(const FObjectInitializer& ObjectInitializer);
@@ -65,9 +63,5 @@ public:
 	UiLayer* getUiLayer();
 	void setUiLayer(UiLayer* layer);
 	bool IsVisible();
-	bool getIsResReady();
-	void setIsResReady(bool value);
-	WinRender* getGuiWin();
-
-	virtual bool getIsReady();
+	WinRender* getWinRender();
 };

@@ -12,8 +12,6 @@ UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	this->mHitYMax = 30;
 	this->mAlignVertial = 0;
 	this->mAlignHorizontal = 0;
-	this->mIsResReady = false;
-
 	this->mWinRender = MY_NEW WinRender();
 }
 
@@ -52,22 +50,7 @@ bool UWindow::IsVisible()
 	return false;
 }
 
-bool UWindow::getIsResReady()
-{
-	return this->mIsResReady;
-}
-
-void UWindow::setIsResReady(bool value)
-{
-	this->mIsResReady = value;
-}
-
-WinRender* UWindow::getGuiWin()
+WinRender* UWindow::getWinRender()
 {
 	return this->mWinRender;
-}
-
-bool UWindow::getIsReady()
-{
-	return true;
 }

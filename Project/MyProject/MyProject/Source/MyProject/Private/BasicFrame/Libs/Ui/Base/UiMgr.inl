@@ -9,7 +9,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 //template <class T>
-//T* UiMgr::loadForm(UiFormId formId)
+//T* UiMgr::loadForm(enum UiFormId formId)
 //{
 //	if (nullptr == this->mId2FormDic[formId])
 //	{
@@ -64,15 +64,15 @@ T* UiMgr::loadForm(UiFormId formId)
 
 		//UUMGWidget* WidgetObject = nullptr;
 
-		//if (NSFormType::eWorld == attrItem->mUMGOuterType)
+		//if (UMGOuterType::eWorld == attrItem->mUMGOuterType)
 		//{
 
 		//}
-		//else if (NSFormType::ePlayerController == attrItem->mUMGOuterType)
+		//else if (UMGOuterType::ePlayerController == attrItem->mUMGOuterType)
 		//{
 		//	WidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
 		//}
-		//else if (NSFormType::eGameInstance == attrItem->mUMGOuterType)
+		//else if (UMGOuterType::eGameInstance == attrItem->mUMGOuterType)
 		//{
 
 		//}

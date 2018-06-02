@@ -1,6 +1,10 @@
 #pragma once
 
-enum UiLayerId
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+enum class UiLayerId
 {
 	eBtmLayer,                   // 最低层啊，一般不放东西，以备不时之需，目前放模糊的界面
 	eFirstLayer,                 // 第一层，聊天之类的主界面窗口
@@ -11,3 +15,5 @@ enum UiLayerId
 
 	eMaxLayer
 };
+
+MY_END_NAMESPACE

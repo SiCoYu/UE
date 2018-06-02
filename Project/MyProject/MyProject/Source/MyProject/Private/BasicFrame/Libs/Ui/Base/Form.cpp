@@ -30,12 +30,11 @@ UForm::UForm(const FObjectInitializer& ObjectInitializer)
 {
 	this->mIsExitMode = true;
 	this->mIsHideOnCreate = false;
-	this->mIsLoadWidgetRes = false;
 	this->mIsReady = false;
 	this->mIsBlurBg = false;
 	this->mIsHandleExitBtn = false;
-	this->mAlignVertial = (int)CENTER;
-	this->mAlignHorizontal = (int)CENTER;
+	this->mAlignVertial = (int)WindowAnchor::eCENTER;
+	this->mAlignHorizontal = (int)WindowAnchor::eCENTER;
 	this->mIsVisible = false;
 }
 
@@ -69,17 +68,7 @@ void UForm::setExitMode(bool value)
 	this->mIsExitMode = value;
 }
 
-bool UForm::getIsLoadWidgetRes()
-{
-	return this->mIsLoadWidgetRes;
-}
-
-void UForm::setIsLoadWidgetRes(bool value)
-{
-	this->mIsLoadWidgetRes = true;
-}
-
-bool UForm::getIsReady()
+bool UForm::isReady()
 {
 	return this->mIsReady;
 }
@@ -131,7 +120,7 @@ void UForm::onInit()
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_INIT);
 	//}
-	if (!this->mIsLoadWidgetRes)
+	if (!this->mIsReady)
 	{
 		// 默认会继续加载资源
 		GUiMgr->loadWidgetRes(this->getId());

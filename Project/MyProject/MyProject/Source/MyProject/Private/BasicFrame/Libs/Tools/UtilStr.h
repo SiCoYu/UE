@@ -1,5 +1,5 @@
-#ifndef __UtilStr_H_
-#define __UtilStr_H_
+#ifndef __UtilStr_H
+#define __UtilStr_H
 
 #include "CString.h"
 #include "UnrealString.h"	// FString

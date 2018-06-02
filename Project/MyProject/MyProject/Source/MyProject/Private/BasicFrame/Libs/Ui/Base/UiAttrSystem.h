@@ -10,8 +10,6 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-using namespace NSFormType;
-
 class UiAttrItem;
 
 class UiAttrSystem
@@ -30,7 +28,7 @@ public:
 
 protected:
 	void addItem(
-		UiFormId formId, 
+		UiFormId formId,
 		std::string widgetPath, 
 		FormType formType, 
 		UMGOuterType outerType

@@ -11,7 +11,7 @@ uint16 UtilTable::msCnt = 0;
 void UtilTable::readString(MByteBuffer* bytes, std::string& tmpStr)
 {
 	bytes->readUnsignedInt16(msCnt);
-	bytes->readMultiByte(tmpStr, msCnt, eUTF8);
+	bytes->readMultiByte(tmpStr, msCnt, MEncode::eUTF8);
 }
 
 MY_END_NAMESPACE

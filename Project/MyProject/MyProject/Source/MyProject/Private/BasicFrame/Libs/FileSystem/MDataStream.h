@@ -4,10 +4,8 @@
 #include "IDispatchObject.h"
 #include <string>
 #include "EventDispatchDelegate.h"
-#include "GkEncode.h"
+#include "MEncode.h"
 #include "PlatformDefine.h"
-
-using namespace NSEncode;
 
 class FArchive;
 
@@ -102,12 +100,12 @@ protected:
 	void close();
 
 public:
-	std::string readText(int offset = 0, int count = 0, GkEncode encode = NSEncode::eUTF8);
+	std::string readText(int offset = 0, int count = 0, MEncode encode = MEncode::eUTF8);
 	unsigned char* readByte(int offset = 0, int count = 0);
-	void writeText(std::string text, GkEncode gkEncode = NSEncode::eUTF8);
+	void writeText(std::string text, MEncode encode = MEncode::eUTF8);
 
 	void writeByte(unsigned char* bytes, int offset = 0, int count = 0);
-	void writeLine(std::string text, GkEncode gkEncode = NSEncode::eUTF8);
+	void writeLine(std::string text, MEncode encode = MEncode::eUTF8);
 };
 
 MY_END_NAMESPACE

@@ -23,7 +23,7 @@ GameSceneEventNotify::~GameSceneEventNotify()
 // 场景加载完成处理事件
 void GameSceneEventNotify::onLevelLoaded()
 {
-	GUiMgr->loadAndShow<UUiFunctionBar>(NSFormId::eUiFunctionBar);
+	GUiMgr->loadAndShow<UUiFunctionBar>(UiFormId::eUiFunctionBar);
 
     this->runTest();
 }

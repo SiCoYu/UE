@@ -5,21 +5,18 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-namespace NSFormType
+enum class FormType
 {
-	enum FormType
-	{
-		eUMG,
-		eSlate,
-	};
+	eUMG,
+	eSlate,
+};
 
-	enum UMGOuterType
-	{
-		eWorld,
-		ePlayerController,
-		eGameInstance,
-	};
-}
+enum class UMGOuterType
+{
+	eWorld,
+	ePlayerController,
+	eGameInstance,
+};
 
 MY_END_NAMESPACE
 

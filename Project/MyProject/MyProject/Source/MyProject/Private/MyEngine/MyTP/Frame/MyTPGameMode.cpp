@@ -84,7 +84,7 @@ void AMyTPGameMode::TestUi()
 {
 	// Test 加载 UIPack
 	//GUiMgr->loadForm<UUiPack>(eUiPack);
-	GUiMgr->loadForm<UUiTestCanvas>(eUiTestCanvas);
+	GUiMgr->loadForm<UUiTestCanvas>(UiFormId::eUiTestCanvas);
 }
 
 // https://wiki.unrealengine.com/Survival_Sample_Game:_Section_4

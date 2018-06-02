@@ -149,7 +149,7 @@ void AMyCharacterBase::TestUi()
 {
 	// Test 加载 UIPack
 	//GUiMgr->loadForm<UUiPack>(eUiPack);
-	GUiMgr->loadForm<UUiTestCanvas>(eUiTestCanvas);
+	GUiMgr->loadForm<UUiTestCanvas>(UiFormId::eUiTestCanvas);
 }
 
 void AMyCharacterBase::Tick(float DeltaTime)

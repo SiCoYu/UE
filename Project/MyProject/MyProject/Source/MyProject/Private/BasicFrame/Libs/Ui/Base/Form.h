@@ -9,7 +9,6 @@
 
 #include "Form.generated.h"
 
-using namespace NSFormId;
 using namespace MyNS;
 
 class UUserWidget;
@@ -28,18 +27,18 @@ protected:
 	//TSharedPtr<SWidget> m_outUserSlateWidget;
 	//TSharedRef<SWidget> m_rootWidget;
 
-	bool mIsExitMode;               // 关闭退出模式
-	bool mIsHideOnCreate;         // 创建后是否隐藏
+	bool mIsExitMode;				// 关闭退出模式
+	bool mIsHideOnCreate;			// 创建后是否隐藏
 	UiFormId mId;
-	bool mIsLoadWidgetRes;                // 是否应该加载窗口资源
-	bool mIsReady;            // 是否准备就绪
+	bool mIsReady;					// 是否准备就绪
 
-	bool mIsBlurBg;       // 是否模糊背景
-	bool mIsHandleExitBtn;       // 是否关联关闭按钮
+	bool mIsBlurBg;					// 是否模糊背景
+	bool mIsHandleExitBtn;			// 是否关联关闭按钮
 
 	// LuaCSBridgeForm mLuaCSBridgeForm;
-	std::string mFormName;            // 这个是 Lua 中传的标识符，会传给 Lua 使用，客户端自己不用
+	std::string mFormName;			// 这个是 Lua 中传的标识符，会传给 Lua 使用，客户端自己不用
 	bool mIsVisible;
+
 	AuxMUiClassLoader* mAuxMUIClassLoader;
 
 public:
@@ -54,7 +53,7 @@ public:
 	void setExitMode(bool value);
 	bool getIsLoadWidgetRes();
 	void setIsLoadWidgetRes(bool value);
-	bool getIsReady();
+	bool isReady();
 	std::string getFormName();
 	void setFormName(std::string value);
 	//LuaCSBridgeForm* UUMGForm::getLuaCSBridgeForm();

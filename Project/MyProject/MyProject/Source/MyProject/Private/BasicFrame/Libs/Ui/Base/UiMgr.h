@@ -13,8 +13,6 @@
 #include "GObject.h"
 #include "PlatformDefine.h"
 
-using namespace NSFormId;
-
 class UForm;
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -68,7 +66,7 @@ public:
 	void _exitFormInternal(UiFormId formId);
 	void addForm(UForm* form);
 
-	UiLayer* getLayer(UiCanvasId canvasID, UiLayerId layerID);
+	UiLayer* getLayer(UiCanvasId canvasID, UiLayerId layerId);
 
 	void addFormNoReady(UForm* form);
 	bool hasForm(UiFormId formId);

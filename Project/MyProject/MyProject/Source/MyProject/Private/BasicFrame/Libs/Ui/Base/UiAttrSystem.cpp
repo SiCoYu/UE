@@ -17,15 +17,15 @@ UiAttrSystem::UiAttrSystem()
 void UiAttrSystem::init()
 {
 	this->addItem(
-		NSFormId::eUiTestUMG, 
+		UiFormId::eUiTestUMG,
 		"WidgetBlueprint'/Game/MyAsset/Ui/UiTestUMG/UiTestUMG.UiTestUMG_C'", 
-		NSFormType::eUMG,
-		NSFormType::ePlayerController);
+		FormType::eUMG,
+		UMGOuterType::ePlayerController);
 	this->addItem(
-		NSFormId::eUiFunctionBar,
+		UiFormId::eUiFunctionBar,
 		"WidgetBlueprint'/Game/MyAsset/Ui/UiFunctionBar/UiFunctionBar.UiFunctionBar_C'",
-		NSFormType::eUMG,
-		NSFormType::ePlayerController);
+		FormType::eUMG,
+		UMGOuterType::ePlayerController);
 }
 
 void UiAttrSystem::dispose()
@@ -68,7 +68,7 @@ UiFormId UiAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType
 }
 
 void UiAttrSystem::addItem(
-	UiFormId formId, 
+	UiFormId formId,
 	std::string widgetPath, 
 	FormType formType, 
 	UMGOuterType outerType
