@@ -1,6 +1,10 @@
 ﻿#ifndef __DelayHandleObject_H
 #define __DelayHandleObject_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 class IDelayHandleItem;
 class DelayHandleParamBase;
 
@@ -13,5 +17,7 @@ public:
 public:
 	DelayHandleObject();
 };
+
+MY_END_NAMESPACE
 
 #endif

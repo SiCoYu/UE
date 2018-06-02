@@ -6,6 +6,7 @@
 #include <string>
 #include "Engine/StreamableManager.h"	 // FStreamableManager
 #include "GObject.h"
+#include "PlatformDefine.h"
 
 /**
  * @brief http://blog.csdn.net/yangxuan0261/article/details/54408683
@@ -15,6 +16,8 @@
  可以通过接口判断当前的异步模式是那种模式。
  const bool bIsMultithreaded = FAsyncLoadingThread::IsMultithreaded();
  */
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class MyStreamableManager : public GObject
 {
@@ -41,6 +44,8 @@ public:
 protected:
 	bool IsMultithreaded();
 };
+
+MY_END_NAMESPACE
 
 #include "MyStreamableManager.inl"
 

@@ -18,6 +18,7 @@
 #include "UObject/UObjectGlobals.h"	// DuplicateObject, CollectGarbage
 #include "AudioDevice.h"		// FAudioDevice
 #include <string>	// string
+#include "PlatformDefine.h"
 
 class UMyGameEngineBase;
 class UMyGameInstanceBase;
@@ -57,6 +58,7 @@ DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
 #define GETTIMERREMAINING(handle) (GetWorldTimerManager().GetTimerRemaining(handle))
 #define GETTIMERELAPSED(handle) (GetWorldTimerManager().GetTimerElapsed(handle))
 
+MY_BEGIN_NAMESPACE(MyNS)
 
 class UtilEngineWrap
 {
@@ -450,6 +452,8 @@ public:
 	// UObject\UObjectGlobals.h
 	static void collectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge = true);
 };
+
+MY_END_NAMESPACE
 
 #include "UtilEngineWrap.inl"
 

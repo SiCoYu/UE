@@ -6,6 +6,8 @@
 #include "IDelayHandleItem.h"
 #include "UtilContainers.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 DelayHandleMgrBase::DelayHandleMgrBase()
 {
 	mLoopDepth = 0;
@@ -161,3 +163,5 @@ bool DelayHandleMgrBase::isInDepth()
 {
 	return mLoopDepth > 0;
 }
+
+MY_END_NAMESPACE

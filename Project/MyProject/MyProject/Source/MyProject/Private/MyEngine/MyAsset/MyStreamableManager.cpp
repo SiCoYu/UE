@@ -11,6 +11,8 @@
 // error LNK2001: unresolved external symbol "private: static bool FAsyncLoadingThread::bThreadStarted" (?bThreadStarted@FAsyncLoadingThread@@0_NA)
 // #include "Private/Serialization/AsyncLoadingThread.h"		// FAsyncLoadingThread
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MyStreamableManager::MyStreamableManager()
 {
 	
@@ -72,3 +74,5 @@ bool MyStreamableManager::IsMultithreaded()
 	//return UtilEngineWrap::isMultithreaded();
 	return UtilEngineWrap::isInAsyncLoadingThread();
 }
+
+MY_END_NAMESPACE

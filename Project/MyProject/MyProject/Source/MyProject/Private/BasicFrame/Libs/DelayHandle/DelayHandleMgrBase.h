@@ -3,6 +3,9 @@
 
 #include "MList.h"
 #include "GObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class DelayHandleObject;
 class IDelayHandleItem;
@@ -42,5 +45,7 @@ public:
 	void decDepth();
 	bool isInDepth();
 };
+
+MY_END_NAMESPACE
 
 #endif
