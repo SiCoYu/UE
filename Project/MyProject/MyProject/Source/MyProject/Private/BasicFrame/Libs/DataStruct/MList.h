@@ -45,70 +45,80 @@ public:
 
 	std::vector<T>& getList()
 	{
-		return mList;
+		return this->mList;
 	}
 
 	int getUniqueId()
 	{
-		return mUniqueId;
+		return this->mUniqueId;
 	}
 
 	void setUniqueId(int value)
 	{
-		mUniqueId = value;
+		this->mUniqueId = value;
 	}
 
 	void add(T item)
 	{
-		mList.push_back(item);
+		this->mList.push_back(item);
 	}
 
 	bool remove(T item)
 	{
-		UtilVector::Remove(mList, item);
+		UtilVector::Remove(this->mList, item);
 		return true;
 	}
 
 	T& operator [] (int index)
 	{
-		return mList[index];
+		return this->mList[index];
 	}
 
 	void clear()
 	{
-		mList.clear();
+		this->mList.clear();
 	}
 
 	int count()
 	{
-		return mList.size();
+		return this->mList.size();
+	}
+
+	void remove(T& item)
+	{
+		int index = this->indexOf(item);
+
+		if (-1 != index)
+		{
+			this.removeAt(index);
+		}
 	}
 
 	void removeAt(int index)
 	{
-		UtilVector::RemoveAt(mList, index);
+		UtilVector::RemoveAt(this->mList, index);
 	}
 
 	int indexOf(T item)
 	{
-		return UtilVector::IndexOf(mList, item);
+		return UtilVector::IndexOf(this->mList, item);
 	}
 
 	void insert(int index, T item)
 	{
-		if (index <= count())
+		if (index <= this->count())
 		{
-			UtilVector::Insert(mList, index, item);
+			UtilVector::Insert(this->mList, index, item);
 		}
 		else
 		{
-			GLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, count()));
+			GLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, this->count()));
 		}
 	}
 
 	bool contains(T item)
 	{
-		return indexOf(item) != -1;
+		return this->indexOf(item) != -1;
 	}
 };
 

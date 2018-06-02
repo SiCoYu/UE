@@ -6,7 +6,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 PoolSys::PoolSys()
 {
-	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");
+	this->mPoolList = MY_NEW MLockList<IPoolObject*>("PoolList");
 }
 
 void PoolSys::init()

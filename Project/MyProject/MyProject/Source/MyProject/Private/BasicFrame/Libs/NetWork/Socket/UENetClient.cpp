@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "UENetClient.h"
-#include "ClientBuffer.h"
+#include "MClientBuffer.h"
 #include "SocketSubsystem.h"
 #include "Sockets.h"
 #include "MEvent.h"
@@ -9,10 +9,10 @@
 #include "Prequisites.h"
 #include "UtilStr.h"
 #include "MByteBuffer.h"
-#include "MsgBuffer.h"
+#include "MMsgBuffer.h"
 #include "UtilStr.h"
 #include "MCircularBuffer.h"
-#include "DynBuffer.h"
+#include "MDynBuffer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -21,7 +21,7 @@ UENetClient::UENetClient()
 	mIsConnected(false)
 {
 	this->mSocket = nullptr;
-	this->mClientBuffer = MY_NEW ClientBuffer();
+	this->mClientBuffer = MY_NEW MClientBuffer();
 	this->mStrDesc = "";
 	//mBoundEndpoint(FIPv4Address::Any, 0);
 
@@ -61,7 +61,7 @@ void UENetClient::Disconnect()
 
 }
 
-ClientBuffer* UENetClient::getClientBuffer()
+MClientBuffer* UENetClient::getClientBuffer()
 {
 	return this->mClientBuffer;
 }

@@ -1,5 +1,5 @@
-﻿#ifndef __DynBuffer_H
-#define __DynBuffer_H
+﻿#ifndef __MDynBuffer_H
+#define __MDynBuffer_H
 
 #include "Platform.h"
 #include <cstddef>
@@ -18,9 +18,9 @@ MY_BEGIN_NAMESPACE(MyNS)
  * @brief 动态增长缓冲区，不分类型，就是 byte 缓冲区
  */
 template <class T>
-class DynBuffer : public GObject
+class MDynBuffer : public GObject
 {
-	friend class ClientBuffer;
+	friend class MClientBuffer;
 
 public:
 	std::size_t mCapacity;
@@ -30,7 +30,7 @@ public:
 	bool mIsPodType;
 
 public:
-	DynBuffer(
+	MDynBuffer(
 		size_t initCapacity = BufferCV::INIT_CAPACITY, 
 		size_t maxCapacity = BufferCV::MAX_CAPACITY
 	)
@@ -42,7 +42,7 @@ public:
 		this->mIsPodType = false;
 	}
 
-	~DynBuffer()
+	~MDynBuffer()
 	{
 		this->dispose();
 	}
@@ -157,4 +157,4 @@ public:
 
 MY_END_NAMESPACE
 
-#endif			// __DynBuffer_H
+#endif			// __MDynBuffer_H

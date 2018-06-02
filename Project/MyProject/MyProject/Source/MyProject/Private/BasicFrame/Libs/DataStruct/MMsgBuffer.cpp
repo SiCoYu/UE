@@ -1,41 +1,41 @@
 #include "MyProject.h"
-#include "MsgBuffer.h"
+#include "MMsgBuffer.h"
 #include "MCircularBuffer.h"
 #include "MByteBuffer.h"
 #include "MsgCV.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-MsgBuffer::MsgBuffer(uint32 initCapacity, uint32 maxCapacity)
+MMsgBuffer::MMsgBuffer(uint32 initCapacity, uint32 maxCapacity)
 {
 	this->mCircularBuffer = MY_NEW MCircularBuffer(initCapacity, maxCapacity);
 	this->mHeaderBA = MY_NEW MByteBuffer();
 	this->mMsgBodyBA = MY_NEW MByteBuffer();
 }
 
-MsgBuffer::~MsgBuffer()
+MMsgBuffer::~MMsgBuffer()
 {
 	MY_DELETE this->mCircularBuffer;
 	MY_DELETE this->mHeaderBA;
 	MY_DELETE this->mMsgBodyBA;
 }
 
-MByteBuffer* MsgBuffer::getHeaderBA()
+MByteBuffer* MMsgBuffer::getHeaderBA()
 {
 	return this->mHeaderBA;
 }
 
-MByteBuffer* MsgBuffer::getMsgBodyBA()
+MByteBuffer* MMsgBuffer::getMsgBodyBA()
 {
 	return this->mMsgBodyBA;
 }
 
-MCircularBuffer* MsgBuffer::getCircularBuffer()
+MCircularBuffer* MMsgBuffer::getCircularBuffer()
 {
 	return this->mCircularBuffer;
 }
 
-bool MsgBuffer::checkHasMsg()
+bool MMsgBuffer::checkHasMsg()
 {
 	this->mCircularBuffer->frontBA(this->mHeaderBA, MsgCV::HEADER_SIZE);  // 将数据读取到 mHeaderBA
 	uint32 msglen = 0;
@@ -61,7 +61,7 @@ bool MsgBuffer::checkHasMsg()
 /**
 * @brief 获取前面的第一个完整的消息数据块
 */
-bool MsgBuffer::popFront()
+bool MMsgBuffer::popFront()
 {
 	bool ret = false;
 	if (this->mCircularBuffer->getSize() > MsgCV::HEADER_SIZE)         // 至少要是 DataCV.HEADER_SIZE 大小加 1 ，如果正好是 DataCV.HEADER_SIZE ，那只能说是只有大小字段，没有内容

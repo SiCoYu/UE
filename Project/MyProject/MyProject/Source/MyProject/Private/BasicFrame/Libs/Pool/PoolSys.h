@@ -1,7 +1,7 @@
 ﻿#ifndef __PoolSys_H
 #define __PoolSys_H
 
-#include "LockList.h"
+#include "MLockList.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
@@ -18,7 +18,7 @@ class IPoolObject;
 class PoolSys : public GObject
 {
 protected:
-	LockList<IPoolObject*>* mPoolList;
+	MLockList<IPoolObject*>* mPoolList;
 
 public:
 	PoolSys();

@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "NetMgr.h"
 #include "NetThread.h"
-#include "ClientBuffer.h"
+#include "MClientBuffer.h"
 #include <sstream>
 #include "MMutex.h"
 #include "UtilContainers.h"

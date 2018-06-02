@@ -18,7 +18,7 @@ MCircularBuffer::MCircularBuffer(
 	size_t maxCapacity
 )
 {
-	this->mDynBuffer = MY_NEW DynBuffer<char>(initCapacity, maxCapacity);
+	this->mDynBuffer = MY_NEW MDynBuffer<char>(initCapacity, maxCapacity);
 
 	this->mFirst = 0;
 	this->mLast = 0;

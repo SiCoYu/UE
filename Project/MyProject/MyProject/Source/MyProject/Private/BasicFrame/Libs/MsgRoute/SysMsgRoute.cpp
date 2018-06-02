@@ -4,7 +4,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 SysMsgRoute::SysMsgRoute(std::string name)
-	: LockQueue<MsgRouteBase>(name)
+	: MLockQueue<MsgRouteBase>(name)
 {
 
 }

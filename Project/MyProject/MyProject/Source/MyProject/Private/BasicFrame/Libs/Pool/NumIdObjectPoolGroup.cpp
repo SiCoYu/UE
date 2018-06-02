@@ -9,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 NumIdObjectPoolGroup::NumIdObjectPoolGroup()
 {
-	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");
+	this->mPoolList = MY_NEW MLockList<IPoolObject*>("PoolList");
 }
 
 void NumIdObjectPoolGroup::init()

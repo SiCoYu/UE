@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "ClientBuffer.h"
-#include "MsgBuffer.h"
-#include "DynBuffer.h"
+#include "MClientBuffer.h"
+#include "MMsgBuffer.h"
+#include "MDynBuffer.h"
 #include "MByteBuffer.h"
 #include "MCircularBuffer.h"
 #include "MMutex.h"
@@ -12,12 +12,12 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-ClientBuffer::ClientBuffer()
+MClientBuffer::MClientBuffer()
 {
-	this->mRawBuffer = MY_NEW MsgBuffer();
-	this->mMsgBuffer = MY_NEW MsgBuffer();
+	this->mRawBuffer = MY_NEW MMsgBuffer();
+	this->mMsgBuffer = MY_NEW MMsgBuffer();
 	//mSendTmpBA = MY_NEW MByteBuffer();
-	this->mSendTmpBuffer = MY_NEW MsgBuffer();
+	this->mSendTmpBuffer = MY_NEW MMsgBuffer();
 	this->mSocketSendBA = MY_NEW MByteBuffer();
 	//mSocketSendBA.mId = 1000;
 
@@ -35,7 +35,7 @@ ClientBuffer::ClientBuffer()
 #endif
 }
 
-ClientBuffer::~ClientBuffer()
+MClientBuffer::~MClientBuffer()
 {
 	MY_DELETE this->mRawBuffer;
 	MY_DELETE this->mMsgBuffer;
@@ -54,36 +54,36 @@ ClientBuffer::~ClientBuffer()
 #endif
 }
 
-DynBuffer<char>* ClientBuffer::getDynBuffer()
+MDynBuffer<char>* MClientBuffer::getDynBuffer()
 {
 	return this->mDynBuffer;
 }
 
 
-MsgBuffer* ClientBuffer::getSendTmpBuffer()
+MMsgBuffer* MClientBuffer::getSendTmpBuffer()
 {
 	return this->mSendTmpBuffer;
 }
 
-MByteBuffer* ClientBuffer::getSendBuffer()
+MByteBuffer* MClientBuffer::getSendBuffer()
 {
 	return this->mSocketSendBA;
 }
 
-MByteBuffer* ClientBuffer::getSendData()
+MByteBuffer* MClientBuffer::getSendData()
 {
 	return this->mSendData;
 }
 
 #ifdef MSG_ENCRIPT
-public void ClientBuffer::setCryptKey(byte[] encrypt)
+public void MClientBuffer::setCryptKey(byte[] encrypt)
 {
 	//mCryptContext.cryptAlgorithm = CryptAlgorithm.DES;
 	this->mCryptContext.m_cryptKey = encrypt;
 	Dec.DES_set_key_unchecked(this->mCryptContext.m_cryptKey, this->mCryptContext.m_cryptKeyArr[(int)CryptAlgorithm.DES]);
 }
 
-public void ClientBuffer::checkDES()
+public void MClientBuffer::checkDES()
 {
 	if (this->mCryptContext.m_cryptKey != nullptr && this->mCryptContext.m_cryptAlgorithm != CryptAlgorithm.DES)
 	{
@@ -92,17 +92,17 @@ public void ClientBuffer::checkDES()
 }
 #endif
 
-MsgBuffer* ClientBuffer::getRawBuffer()
+MMsgBuffer* MClientBuffer::getRawBuffer()
 {
 	return this->mRawBuffer;
 }
 
-void ClientBuffer::SetRevBufferSize(int32 size)
+void MClientBuffer::SetRevBufferSize(int32 size)
 {
-	this->mDynBuffer = MY_NEW DynBuffer<char>(size);
+	this->mDynBuffer = MY_NEW MDynBuffer<char>(size);
 }
 
-void ClientBuffer::moveDyn2Raw()
+void MClientBuffer::moveDyn2Raw()
 {
 	GLogSys->log(UtilStr::Format("移动动态数据消息数据到原始数据队列，消息长度　{0}", this->mDynBuffer->getSize()));
 	UtilMsg::formatBytes2Array(this->mDynBuffer->getBuffer(), this->mDynBuffer->getSize());
@@ -118,7 +118,7 @@ void ClientBuffer::moveDyn2Raw()
 	this->mRawBuffer->getCircularBuffer()->pushBackArr(this->mDynBuffer->getBuffer(), 0, this->mDynBuffer->getSize());
 }
 
-void ClientBuffer::moveRaw2Msg()
+void MClientBuffer::moveRaw2Msg()
 {
 	while (this->mRawBuffer->popFront())  // 如果有数据
 	{
@@ -127,7 +127,7 @@ void ClientBuffer::moveRaw2Msg()
 	}
 }
 
-void ClientBuffer::send(bool bnet)
+void MClientBuffer::send(bool bnet)
 {
 	this->mTmpData->clear();
 	this->mTmpData->writeUnsignedInt32(this->mSendData->getLength());      // 填充长度
@@ -160,7 +160,7 @@ void ClientBuffer::send(bool bnet)
 	}
 }
 
-MByteBuffer* ClientBuffer::getMsg()
+MByteBuffer* MClientBuffer::getMsg()
 {
 	MLock mlock(this->mReadMutex);
 	{
@@ -174,7 +174,7 @@ MByteBuffer* ClientBuffer::getMsg()
 }
 
 // 获取数据，然后压缩加密
-void ClientBuffer::getSocketSendData()
+void MClientBuffer::getSocketSendData()
 {
 	//mSocketSendBA.m_startTest = false;
 
@@ -209,7 +209,7 @@ void ClientBuffer::getSocketSendData()
 }
 
 // 压缩加密每一个包
-void ClientBuffer::CompressAndEncryptEveryOne()
+void MClientBuffer::CompressAndEncryptEveryOne()
 {
 	uint32 origMsgLen = 0;    // 原始的消息长度，后面判断头部是否添加压缩标志
 	uint32 compressMsgLen = 0;
@@ -296,7 +296,7 @@ void ClientBuffer::CompressAndEncryptEveryOne()
 }
 
 // 压缩解密作为一个包
-void ClientBuffer::CompressAndEncryptAllInOne()
+void MClientBuffer::CompressAndEncryptAllInOne()
 {
 #ifdef MSG_COMPRESS
 	uint origMsgLen = this->mSocketSendBA.length;       // 原始的消息长度，后面判断头部是否添加压缩标志
@@ -338,7 +338,7 @@ void ClientBuffer::CompressAndEncryptAllInOne()
 // |------------- 加密的整个消息  -------------------------------------|
 // |----4 Header----|-压缩的 body----|----4 Header----|-压缩的 body----|
 // |                |                |                |                |
-void ClientBuffer::UnCompressAndDecryptEveryOne()
+void MClientBuffer::UnCompressAndDecryptEveryOne()
 {
 #ifdef MSG_ENCRIPT
 	mRawBuffer.msgBodyBA.decrypt(mCryptContext, 0);
@@ -402,7 +402,7 @@ void ClientBuffer::UnCompressAndDecryptEveryOne()
 	}
 }
 
-void ClientBuffer::UnCompressAndDecryptAllInOne()
+void MClientBuffer::UnCompressAndDecryptAllInOne()
 {
 #ifdef MSG_ENCRIPT
 	this->mRawBuffer.msgBodyBA.decrypt(mCryptContext, 0);

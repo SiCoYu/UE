@@ -1,13 +1,13 @@
 #include "MyProject.h"
 #include "NetTCPClient.h"
-#include "ClientBuffer.h"
+#include "MClientBuffer.h"
 
 #ifdef USE_EXTERN_THREAD
 
 NetTCPClient::NetTCPClient(ISocketHandler& h)
 	: TcpSocket(h) 
 {
-	this->mClientBuffer = MY_NEW ClientBuffer();
+	this->mClientBuffer = MY_NEW MClientBuffer();
 }
 
 NetTCPClient::~NetTCPClient()
@@ -35,7 +35,7 @@ void NetTCPClient::OnRawData(const char *buf, size_t len)
 
 }
 
-ClientBuffer* NetTCPClient::getClientBuffer()
+MClientBuffer* NetTCPClient::getClientBuffer()
 {
 	return this->mClientBuffer;
 }

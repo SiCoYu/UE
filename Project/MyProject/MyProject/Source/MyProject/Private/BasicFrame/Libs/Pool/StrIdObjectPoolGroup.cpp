@@ -6,7 +6,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 StrIdObjectPoolGroup::StrIdObjectPoolGroup()
 {
-	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");
+	this->mPoolList = MY_NEW MLockList<IPoolObject*>("PoolList");
 }
 
 void StrIdObjectPoolGroup::init()

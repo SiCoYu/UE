@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "LockQueue.h"
+#include "MLockQueue.h"
 #include "ITask.h"
 #include <string>
 #include "PlatformDefine.h"
@@ -9,9 +9,9 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class TaskThreadPool;
 
-class TaskQueue : public LockQueue<ITask*>
+class TaskQueue : public MLockQueue<ITask*>
 {
-	typedef class LockQueue<ITask*> Super;
+	typedef class MLockQueue<ITask*> Super;
 
 public:
     TaskThreadPool* mTaskThreadPool;

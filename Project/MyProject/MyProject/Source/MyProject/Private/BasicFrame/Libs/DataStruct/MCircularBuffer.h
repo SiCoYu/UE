@@ -6,13 +6,13 @@
 #include <iostream>
 #include <vector>
 #include "BufferCV.h"
-#include "DynBuffer.h"
+#include "MDynBuffer.h"
 #include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-//template <class T> class DynBuffer<char>;
+//template <class T> class MDynBuffer<char>;
 class MByteBuffer;
 
 /**
@@ -21,7 +21,7 @@ class MByteBuffer;
 class MCircularBuffer : public GObject
 {
 protected:
-	DynBuffer<char>* mDynBuffer;
+	MDynBuffer<char>* mDynBuffer;
 	uint32 mFirst;             // 当前缓冲区数据的第一个索引
 	uint32 mLast;              // 当前缓冲区数据的最后一个索引的后面一个索引，浪费一个字节
 	MByteBuffer* mTmpBA;        // 临时数据

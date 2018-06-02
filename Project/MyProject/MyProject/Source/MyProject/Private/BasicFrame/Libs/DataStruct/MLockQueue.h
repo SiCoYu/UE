@@ -1,23 +1,23 @@
-﻿#ifndef __LockQueue_H
-#define __LockQueue_H
+﻿#ifndef __MLockQueue_H
+#define __MLockQueue_H
 
 #include <string>
-#include "LockList.h"
+#include "MLockList.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 template <class T>
-class LockQueue
+class MLockQueue
 {
 protected:
-	LockList<T> mList;
+	MLockList<T> mList;
 
 public:
-	LockQueue(std::string name)
+	MLockQueue(std::string name)
 		: mList(name)
 	{
-		//mList = new LockList<T>("name");
+		//mList = new MLockList<T>("name");
 	}
 
 	void push(T item)

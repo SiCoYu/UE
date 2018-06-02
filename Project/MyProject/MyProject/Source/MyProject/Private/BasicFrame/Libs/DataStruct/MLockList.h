@@ -1,7 +1,7 @@
-﻿#ifndef __LockList_H
-#define __LockList_H
+﻿#ifndef __MLockList_H
+#define __MLockList_H
 
-#include "DynBuffer.h"
+#include "MDynBuffer.h"
 #include "MMutex.h"
 #include "Platform.h"
 #include <string>
@@ -17,22 +17,22 @@ MY_BEGIN_NAMESPACE(MyNS)
  * @brief 线程安全列表， T 是 Object ，便于使用 Equal 比较地址
  */
 template <class T>
-class LockList
+class MLockList
 {
 protected:
-	DynBuffer<T> mDynamicBuffer;
+	MDynBuffer<T> mDynamicBuffer;
     MMutex* mVisitMutex;
     T mRetItem;
 
 public:
-	LockList(std::string name, uint32 initCapacity = 32/*BufferCV.INIT_ELEM_CAPACITY*/, uint32 maxCapacity = 8 * 1024 * 1024/*BufferCV.MAX_CAPACITY*/)
+	MLockList(std::string name, uint32 initCapacity = 32/*BufferCV.INIT_ELEM_CAPACITY*/, uint32 maxCapacity = 8 * 1024 * 1024/*BufferCV.MAX_CAPACITY*/)
 		: mDynamicBuffer(initCapacity, maxCapacity)
 	{
-		//mDynamicBuffer = new DynBuffer<T>(initCapacity, maxCapacity);
+		//mDynamicBuffer = new MDynBuffer<T>(initCapacity, maxCapacity);
 		this->mVisitMutex = MY_NEW MMutex();
 	}
 
-	~LockList()
+	~MLockList()
 	{
 		MY_DELETE this->mVisitMutex;
 	}

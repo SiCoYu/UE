@@ -12,7 +12,7 @@ class FSocket;
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class ClientBuffer;
+class MClientBuffer;
 class MEvent;
 class MMutex;
 
@@ -23,7 +23,7 @@ protected:
 	FIPv4Endpoint mBoundEndpoint;
 
 	FSocket* mSocket;
-	ClientBuffer* mClientBuffer;
+	MClientBuffer* mClientBuffer;
 
 	bool mIsRecvThreadStart;      // 接收线程是否启动
 	bool mIsConnected;
@@ -47,7 +47,7 @@ public:
 	bool getIsConnected();
 	void setIsConnected(bool value);
 
-	ClientBuffer* getClientBuffer();
+	MClientBuffer* getClientBuffer();
 
 	MEvent* getMsgSendEndEvent();
 	void setMsgSendEndEvent(MEvent* value);

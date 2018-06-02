@@ -1,5 +1,5 @@
-#ifndef __MsgBuffer_H
-#define __MsgBuffer_H
+#ifndef __MMsgBuffer_H
+#define __MMsgBuffer_H
 
 #include "BufferCV.h"
 #include "PlatformDefine.h"
@@ -12,9 +12,9 @@ class MByteBuffer;
 /**
  * @brief 消息缓冲区
  */
-class MsgBuffer
+class MMsgBuffer
 {
-	friend class ClientBuffer;
+	friend class MClientBuffer;
 
 protected:
 	MCircularBuffer* mCircularBuffer;    // 环形缓冲区
@@ -29,8 +29,8 @@ protected:
 	bool checkHasMsg();
 
 public:
-	MsgBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY);
-	~MsgBuffer();
+	MMsgBuffer(uint32 initCapacity = BufferCV::INIT_CAPACITY, uint32 maxCapacity = BufferCV::MAX_CAPACITY);
+	~MMsgBuffer();
 
 	MByteBuffer* getHeaderBA();
 	MByteBuffer* getMsgBodyBA();
@@ -44,4 +44,4 @@ public:
 
 MY_END_NAMESPACE
 
-#endif				// __MsgBuffer_H
+#endif				// __MMsgBuffer_H

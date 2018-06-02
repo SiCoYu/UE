@@ -9,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 ObjectPool::ObjectPool()
 {
-	this->mPoolList = MY_NEW LockList<IPoolObject*>("PoolList");
+	this->mPoolList = MY_NEW MLockList<IPoolObject*>("PoolList");
 }
 
 void ObjectPool::init()

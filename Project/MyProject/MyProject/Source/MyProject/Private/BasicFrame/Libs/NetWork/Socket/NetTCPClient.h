@@ -20,12 +20,12 @@ using namespace SOCKETS_NAMESPACE;
 
 #ifdef USE_EXTERN_THREAD
 
-class ClientBuffer;
+class MClientBuffer;
 
 class NetTCPClient : public TcpSocket
 {
 protected:
-	ClientBuffer* mClientBuffer;
+	MClientBuffer* mClientBuffer;
 
 public:
 	NetTCPClient(ISocketHandler& h);
@@ -35,7 +35,7 @@ public:
 	virtual void OnConnectFailed();
 	virtual void OnRawData(const char *buf, size_t len);
 	virtual void OnDelete();
-	ClientBuffer* getClientBuffer();
+	MClientBuffer* getClientBuffer();
 	void sendMsg();
 };
 

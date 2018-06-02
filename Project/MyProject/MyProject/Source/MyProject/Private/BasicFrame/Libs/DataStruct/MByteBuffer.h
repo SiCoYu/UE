@@ -9,7 +9,7 @@
 #include "MyProject.h"
 #include "Error.h"
 #include "Endian.h"
-#include "DynBuffer.h"
+#include "MDynBuffer.h"
 #include "MEncode.h"
 #include "BufferCV.h"
 #include "IDispatchObject.h"
@@ -18,7 +18,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-template <class T> class DynBuffer;
+template <class T> class MDynBuffer;
 
 class MByteBuffer : public GObject, public IDispatchObject
 {
@@ -27,7 +27,7 @@ public:
 	// bool m_startTest;        // 开始测试使用
 
 protected:
-	DynBuffer<char>* mDynBuffer;
+	MDynBuffer<char>* mDynBuffer;
 	uint32 mPos;          // 当前可以读取的位置索引
 	EEndian mEndian;          // 大端小端
 
@@ -41,7 +41,7 @@ public:
 		uint32 maxCapacity = BufferCV::MAX_CAPACITY, 
 		EEndian endian = eLITTLE_ENDIAN
 	);
-	DynBuffer<char>* getDynBuffer();
+	MDynBuffer<char>* getDynBuffer();
 	uint32 getBytesAvailable();
 	EEndian getEndian();
 	void setEndian(EEndian value);

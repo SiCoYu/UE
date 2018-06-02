@@ -1,7 +1,7 @@
 ﻿#ifndef __NumIdObjectPoolGroup_H
 #define __NumIdObjectPoolGroup_H
 
-#include "LockList.h"
+#include "MLockList.h"
 
 #include "PlatformDefine.h"
 
@@ -15,7 +15,7 @@ class IPoolObject;
 class NumIdObjectPoolGroup
 {
 protected:
-	LockList<IPoolObject*>* mPoolList;
+	MLockList<IPoolObject*>* mPoolList;
 
 public:
 	NumIdObjectPoolGroup();

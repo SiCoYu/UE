@@ -1,7 +1,7 @@
 ﻿#ifndef __ObjectPool_H
 #define __ObjectPool_H
 
-#include "LockList.h"
+#include "MLockList.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -14,7 +14,7 @@ class IPoolObject;
 class ObjectPool
 {
 protected:
-	LockList<IPoolObject*>* mPoolList;
+	MLockList<IPoolObject*>* mPoolList;
 
 public:
 	ObjectPool();
