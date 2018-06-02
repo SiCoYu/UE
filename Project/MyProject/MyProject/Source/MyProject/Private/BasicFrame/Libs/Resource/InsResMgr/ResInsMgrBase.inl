@@ -93,7 +93,7 @@ void ResInsMgrBase::load(LoadParam* param)
 {
 	++this->mLoadingDepth;
 
-	if (this->mPath2ResDiccontainsKey(param->mPath))
+	if (this->mPath2ResDic.containsKey(param->mPath))
 	{
 		this->loadWithResCreatedAndLoad(param);
 	}
