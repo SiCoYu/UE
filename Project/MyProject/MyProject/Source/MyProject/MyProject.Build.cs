@@ -5,8 +5,17 @@ using System.IO;
 
 /**
  * @reference https://wiki.unrealengine.com/Animation_Node,_Translate_With_Complete_Source_Code_and_Instructions
+ * Engine\Source\Programs\UnrealBuildTool\Platform\Windows\VCToolChain.cs
+ * // NOTE: Uncommenting this line will print includes as they are encountered by the preprocessor.  This can help with diagnosing include order problems.
+ * if (WindowsPlatform.bCompileWithClang && !WindowsPlatform.bUseVCCompilerArgs)
+ * {
+ *	   //Arguments.Add("-H");
+ * }
+ * else
+ * {
+ *	   //Arguments.Add("/showIncludes");
+ * }
  */
-
 public class MyProject : ModuleRules
 {
     //public MyProject(TargetInfo Target)
