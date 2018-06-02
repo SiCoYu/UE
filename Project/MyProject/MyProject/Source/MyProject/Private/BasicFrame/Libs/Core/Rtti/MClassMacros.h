@@ -21,7 +21,7 @@ public: \
     static type* Create(); \
 	*/ \
     static bool RegisterWithFactory(); \
-    virtual MClassInfo* GetClassInfo() const; \
+    virtual MClassInfo* GetMyClassInfo() const; \
 private:
 
 
@@ -43,14 +43,14 @@ public: \
 	static type* Create(); \
 	*/ \
     static bool RegisterWithFactory(); \
-    virtual MClassInfo* GetClassInfo() const; \
+    virtual MClassInfo* GetMyClassInfo() const; \
 private:
 
 
 #define M_DECLARE_ABSTRACT_CLASS(class_name) \
 public: \
     static MClassInfo CLASS_INFO; \
-    virtual MClassInfo* GetClassInfo() const; \
+    virtual MClassInfo* GetMyClassInfo() const; \
 private:
 
 
@@ -65,7 +65,7 @@ private:
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, &baseType::CLASS_INFO, sizeof(type)); \
 	*/ \
 	MClassInfo type::CLASS_INFO(#type, &baseType::CLASS_INFO, sizeof(type)); \
-    MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
+    MClassInfo* type::GetMyClassInfo() const { return &this->CLASS_INFO; } \
 	/* \
     GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
@@ -92,7 +92,7 @@ private:
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, &baseType::CLASS_INFO, sizeof(type)); \
 	*/ \
 	MClassInfo type::CLASS_INFO(#type, &baseType::CLASS_INFO, sizeof(type)); \
-    MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
+    MClassInfo* type::GetMyClassInfo() const { return &this->CLASS_INFO; } \
 	/* \
     GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
@@ -116,7 +116,7 @@ private:
     MClassInfo type::CLASS_INFO(#type, 0, &baseType::CLASS_INFO, 0); \
 	*/ \
 	MClassInfo type::CLASS_INFO(#type, &baseType::CLASS_INFO, 0); \
-    MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; }
+    MClassInfo* type::GetMyClassInfo() const { return &this->CLASS_INFO; }
 
 
 // warning C4668: 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
@@ -126,7 +126,7 @@ private:
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, 0, sizeof(type)); \
 	*/ \
 	MClassInfo type::CLASS_INFO(#type, 0, sizeof(type)); \
-    MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
+    MClassInfo* type::GetMyClassInfo() const { return &this->CLASS_INFO; } \
 	/* \
     GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \
@@ -153,7 +153,7 @@ private:
     MClassInfo type::CLASS_INFO(#type, type::FactoryCreator, 0, sizeof(type)); \
 	*/ \
 	MClassInfo type::CLASS_INFO(#type, 0, sizeof(type)); \
-    MClassInfo* type::GetClassInfo() const { return &this->CLASS_INFO; } \
+    MClassInfo* type::GetMyClassInfo() const { return &this->CLASS_INFO; } \
 	/* \
     GObject* type::FactoryCreator() { return type::Create(); } \
     type* type::Create() \

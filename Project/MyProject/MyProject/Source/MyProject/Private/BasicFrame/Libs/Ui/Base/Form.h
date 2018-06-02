@@ -51,8 +51,6 @@ public:
 	void setHideOnCreate(bool value);
 	bool getExitMode();
 	void setExitMode(bool value);
-	bool getIsLoadWidgetRes();
-	void setIsLoadWidgetRes(bool value);
 	bool isReady();
 	std::string getFormName();
 	void setFormName(std::string value);

@@ -26,7 +26,7 @@ public:
 	bool IsInstanceOf(const std::string& className) const;
 	bool IsA(const MClassInfo& classInfo) const;
 	bool IsA(const std::string& classInfoName) const;
-	const std::string& GetClassName() const;
+	const std::string& GetMyClassName() const;
 	static void DumpRefCountingLeaks();
 
 private:

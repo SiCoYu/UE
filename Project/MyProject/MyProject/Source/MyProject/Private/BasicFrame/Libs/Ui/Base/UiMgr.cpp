@@ -105,6 +105,7 @@ void UiMgr::_showFormInternal(UiFormId formId)
 void UiMgr::_hideFormInternal(UiFormId formId)
 {
 	UForm* form = this->getForm<UForm>(formId);
+
 	if (form != nullptr)
 	{
 		if (form->IsVisible())
@@ -329,7 +330,6 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 
 	WidgetObject->AddToViewport();
 
-	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
 	//mId2FormDic[formId]->mWinRender->mUiRoot = Cast<UUserWidget>(res->InstantiateObject(attrItem->mWidgetPath));
 	//this->mId2FormDic[formId]->mWinRender->mUiRoot = Cast<UUMGWidget>(res->InstantiateObject(attrItem->mWidgetPath));
 
@@ -358,6 +358,10 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	if(this->mId2FormDic[formId]->isVisible())
 	{
 		this->_showFormInternal(formId);   // 如果 onShow 中调用 exit 函数，就会清掉 mId2FormDic 中的内容。如果设置了 exitMode = false，就不会清掉 mId2FormDic ，就不会有问题
+	}
+	else
+	{
+		this->_hideFormInternal(formId);
 	}
 
 	//if (nullptr != Ctx.m_instance.m_cbUIEvent)

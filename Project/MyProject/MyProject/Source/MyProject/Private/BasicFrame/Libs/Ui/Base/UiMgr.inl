@@ -34,7 +34,7 @@ T* UiMgr::loadForm(UiFormId formId)
 
 	if (nullptr != form)     // 本地已经创建了这个窗口，
 	{
-		if (form->getIsResReady())      // 如果资源也已经加载进来了
+		if (form->isReady())      // 如果资源也已经加载进来了
 		{
 			//if (nullptr != Ctx.m_instance.m_cbUIEvent)
 			//{

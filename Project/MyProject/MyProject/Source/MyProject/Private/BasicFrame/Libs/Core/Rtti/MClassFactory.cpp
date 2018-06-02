@@ -62,7 +62,7 @@ bool MClassFactory::ClassExists(const std::string& className) const
     return this->mNameTable.find(className) != this->mNameTable.end();
 }
 
-const MClassInfo* MClassFactory::GetClassInfo(const std::string& className) const
+const MClassInfo* MClassFactory::GetMyClassInfo(const std::string& className) const
 {
     my_assert(className.length() > 0);
 	my_assert(this->ClassExists(className));

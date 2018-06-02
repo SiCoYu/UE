@@ -28,7 +28,7 @@ void MClassInfo::Construct(const char* className, const MClassInfo* parentClass,
 #ifdef MY_DEBUG
 		else
 		{
-			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetClassInfo(this->mName);
+			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetMyClassInfo(this->mName);
 			my_assert(0 != checkClassInfo);
 			if (checkClassInfo != this)
 			{

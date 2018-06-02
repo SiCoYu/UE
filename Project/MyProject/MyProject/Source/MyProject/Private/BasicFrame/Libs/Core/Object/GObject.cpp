@@ -46,27 +46,27 @@ int GObject::GetRefCount() const
 
 bool GObject::IsInstanceOf(const MClassInfo& other) const
 {
-	return this->GetClassInfo() == &other;
+	return this->GetMyClassInfo() == &other;
 }
 
 bool GObject::IsInstanceOf(const std::string& other) const
 {
-	return this->GetClassInfo()->GetName() == other;
+	return this->GetMyClassInfo()->GetName() == other;
 }
 
 bool GObject::IsA(const MClassInfo& other) const
 {
-	return this->GetClassInfo()->IsDerivedFrom(other);
+	return this->GetMyClassInfo()->IsDerivedFrom(other);
 }
 
 bool GObject::IsA(const std::string& other) const
 {
-	return this->GetClassInfo()->IsDerivedFrom(other);
+	return this->GetMyClassInfo()->IsDerivedFrom(other);
 }
 
-const std::string& GObject::GetClassName() const
+const std::string& GObject::GetMyClassName() const
 {
-	return this->GetClassInfo()->GetName();
+	return this->GetMyClassInfo()->GetName();
 }
 
 void GObject::DumpRefCountingLeaks()
