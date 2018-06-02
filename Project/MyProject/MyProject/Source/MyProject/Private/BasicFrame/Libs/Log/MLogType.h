@@ -5,12 +5,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-namespace MLogType
+enum class MLogType
 {
-	enum MLogType
-	{
-		eCom = 0,	// 普通日志
-	};
-}
+	eCom = 0,	// 普通日志
+};
+
+MY_END_NAMESPACE
 
 #endif

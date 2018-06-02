@@ -21,9 +21,9 @@ class ClientScreenLog
 {
 public:
 	ClientScreenLog();
-	void log(FString str, MLogType::MLogType type);
-	void warn(FString str, MLogType::MLogType type);
-	void error(FString str, MLogType::MLogType type);
+	void log(FString str, MLogType type);
+	void warn(FString str, MLogType type);
+	void error(FString str, MLogType type);
 };
 
 MY_END_NAMESPACE

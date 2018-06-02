@@ -31,15 +31,15 @@ void AuxMUiClassLoader::insPrefab()
 {
 	this->mWidgetClass = this->mPrefabRes->getClass();
 
-	if (NSFormType::eWorld == this->mUMGOuterType)
+	if (UMGOuterType::eWorld == this->mUMGOuterType)
 	{
 
 	}
-	else if (NSFormType::ePlayerController == this->mUMGOuterType)
+	else if (UMGOuterType::ePlayerController == this->mUMGOuterType)
 	{
 		this->mWidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), this->mWidgetClass);
 	}
-	else if (NSFormType::eGameInstance == this->mUMGOuterType)
+	else if (UMGOuterType::eGameInstance == this->mUMGOuterType)
 	{
 
 	}

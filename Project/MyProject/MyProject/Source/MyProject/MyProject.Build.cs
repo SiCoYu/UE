@@ -31,17 +31,19 @@ public class MyProject : ModuleRules
         // UE 4.18
 
         // Engine\Source\Programs\UnrealBuildTool\Configuration\ModuleRules.cs
-       // this.PCHUsage = PCHUsageMode.Default;
+        // this.PCHUsage = PCHUsageMode.Default;
 
         // https://docs.unrealengine.com/en-us/Programming/UnrealBuildSystem/Configuration
         // http://api.unrealengine.com/CHN/Programming/UnrealBuildSystem/Configuration/
-        MinFilesUsingPrecompiledHeaderOverride = 1;
-        bFasterWithoutUnity = true;
-
+        this.MinFilesUsingPrecompiledHeaderOverride = 1;
+        // 仅仅需要编译修改的少数几个文件
+        //bFasterWithoutUnity = true;
+        // 全部重新编译
+        this.bFasterWithoutUnity = false;
 
         // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
         // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs
-        PrivateIncludePaths.AddRange(
+        this.PrivateIncludePaths.AddRange(
             new string[] {
                 // Relative to MyProject/Plugins/MyScriptPlugin/Source , 包含插件头文件， MyProject\MyProject.uproject 包含插件根目录 AdditionalPluginDirectories
                 // ScriptPlugin 包含目录
@@ -230,7 +232,7 @@ public class MyProject : ModuleRules
         );
 
         // 添加需要包含的 Public 模块，包括头文件目录，库文件目录和库文件名字
-        PublicDependencyModuleNames.AddRange(
+        this.PublicDependencyModuleNames.AddRange(
             new string[] { 
                 "Core", 
                 "CoreUObject", 
@@ -254,7 +256,7 @@ public class MyProject : ModuleRules
         );
 
         // 添加需要包含的 Private 模块，包括头文件目录，库文件目录和库文件名字
-        PrivateDependencyModuleNames.AddRange(
+        this.PrivateDependencyModuleNames.AddRange(
             new string[] {
                 "Core",
                 "CoreUObject",  // CoreUObject\Private\Serialization\AsyncLoadingThread.h
@@ -281,7 +283,7 @@ public class MyProject : ModuleRules
         }
 
         // AnimGraphRuntime 模块的包含目录需要这样导入，参考 Engine.Build.cs
-        DynamicallyLoadedModuleNames.Add("AnimGraphRuntime");
+        this.DynamicallyLoadedModuleNames.Add("AnimGraphRuntime");
         // error: Module rules for 'MyProject' should not be dependent on modules which are also dynamically loaded: ScriptPlugin
         //DynamicallyLoadedModuleNames.Add("ScriptPlugin");
 
@@ -338,14 +340,14 @@ public class MyProject : ModuleRules
         //);
 
         // 添加对第三方库 PhysX_3.4 的引用头文件
-		// 现在接口参数修改了
+        // 现在接口参数修改了
         //AddEngineThirdPartyPrivateStaticDependencies(Target,
         //    "PhysX",
         //    "APEX"
         //    );
-		// 4.17 需要新的接口
-		AddEngineThirdPartyPrivateStaticDependencies(Target, "PhysX");
-		AddEngineThirdPartyPrivateStaticDependencies(Target, "APEX");
+        // 4.17 需要新的接口
+        this.AddEngineThirdPartyPrivateStaticDependencies(Target, "PhysX");
+        this.AddEngineThirdPartyPrivateStaticDependencies(Target, "APEX");
 
         //PublicSystemIncludePaths.Add("ThirdParty/hlslcc/hlslcc/src/hlslcc_lib");
         //RuntimeDependencies.Add(new RuntimeDependency("$(EngineDir)/Binaries/ThirdParty/ARM/Win32/astcenc.exe"));
@@ -387,12 +389,12 @@ public class MyProject : ModuleRules
         //string path = Path.Combine(ProjectPluginsPath, "MyScriptPlugin/Source/ScriptPlugin");
         //PublicLibraryPaths.Add(path);
 
-        loadThirdPartyInclude();
+        this.loadThirdPartyInclude();
         //LoadSockets(Target);
-        LoadTestExtern(Target);
+        this.LoadTestExtern(Target);
         //LoadGtest(Target);
-        LoadLua(Target);
-        LoadLuaSocket(Target);
+        this.LoadLua(Target);
+        this.LoadLuaSocket(Target);
     }
 
     /// <summary>

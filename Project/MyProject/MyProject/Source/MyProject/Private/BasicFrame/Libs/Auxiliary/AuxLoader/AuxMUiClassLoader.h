@@ -7,8 +7,6 @@
 #include "CoreInc.h"
 #include "PlatformDefine.h"
 
-using namespace NSFormType;
-
 class UClass;
 class UUMGWidget;
 

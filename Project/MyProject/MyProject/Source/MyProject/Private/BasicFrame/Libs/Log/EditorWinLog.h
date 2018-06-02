@@ -23,9 +23,9 @@ class EditorWinLog : public UObject
 {
 public:
 	EditorWinLog();
-	void log(FString str, MLogType::MLogType type);
-	void warn(FString str, MLogType::MLogType type);
-	void error(FString str, MLogType::MLogType type);
+	void log(FString str, MLogType type);
+	void warn(FString str, MLogType type);
+	void error(FString str, MLogType type);
 };
 
 #endif
