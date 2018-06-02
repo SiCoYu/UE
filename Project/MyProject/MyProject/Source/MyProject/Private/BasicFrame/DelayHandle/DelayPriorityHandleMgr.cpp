@@ -3,7 +3,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-DelayPriorityHandleMgr()
+DelayPriorityHandleMgr::DelayPriorityHandleMgr()
 {
 	this.mDeferredAddQueue = new NoPriorityList();
 	this.mDeferredAddQueue.setIsSpeedUpFind(true);
@@ -15,12 +15,12 @@ DelayPriorityHandleMgr()
 	this.mNoOrPriorityList.setIsOpKeepSort(true);
 }
 
-virtual void init() override
+void DelayPriorityHandleMgr::init()
 {
 	Super::init();
 }
 
-virtual void dispose() override
+void DelayPriorityHandleMgr::dispose()
 {
 	if (null != this.mDeferredAddQueue)
 	{
@@ -41,12 +41,12 @@ virtual void dispose() override
 	Super::dispose();
 }
 
-void addPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f)
+void DelayPriorityHandleMgr::addPriorityObject(INoOrPriorityObject priorityObject, float priority)
 {
 	this.addNoOrPriorityObject(priorityObject, priority);
 }
 
-void removePriorityObject(ITickedObject tickObj)
+void DelayPriorityHandleMgr::removePriorityObject(ITickedObject tickObj)
 {
 	this.removeNoOrPriorityObject(tickObj);
 }

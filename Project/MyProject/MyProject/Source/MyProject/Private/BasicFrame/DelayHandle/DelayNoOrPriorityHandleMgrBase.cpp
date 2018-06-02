@@ -3,7 +3,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-DelayNoOrPriorityHandleMgrBase()
+DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 {
 	this.mIsDispose = false;
 	this.mLoopDepth = new LoopDepth();
@@ -15,12 +15,12 @@ DelayNoOrPriorityHandleMgrBase()
 	}
 }
 
-virtual void init()
+virtual void DelayNoOrPriorityHandleMgrBase::init()
 {
 
 }
 
-virtual void dispose()
+virtual void DelayNoOrPriorityHandleMgrBase::dispose()
 {
 	this.mIsDispose = true;
 
@@ -41,13 +41,12 @@ virtual void dispose()
 	}
 }
 
-int getDebugUniqueId()
+int DelayNoOrPriorityHandleMgrBase::getDebugUniqueId()
 {
 	return this.mDebugUniqueId;
 }
 
-protected:
-virtual void _addObject(IDelayHandleItem delayObject, float priority = 0.0f)
+void DelayNoOrPriorityHandleMgrBase::_addObject(IDelayHandleItem delayObject, float priority)
 {
 	if(this.mLoopDepth._isInDepth())
 	{
@@ -65,7 +64,7 @@ virtual void _addObject(IDelayHandleItem delayObject, float priority = 0.0f)
 	}
 }
 
-virtual void _removeObject(IDelayHandleItem delayObject)
+void DelayNoOrPriorityHandleMgrBase::_removeObject(IDelayHandleItem delayObject)
 {
 	if (delayObject is INoOrPriorityObject)
 	{
@@ -90,8 +89,42 @@ virtual void _removeObject(IDelayHandleItem delayObject)
 	}
 }
 
-private:
-void _processDelayObjects(IDispatchObject DISPoBJ, uint eventId)
+// 只要调用会添加或者删除列表元素，就需要调用这个接口
+void DelayNoOrPriorityHandleMgrBase::_incDepth()
+{
+	this.mLoopDepth._incDepth();
+}
+
+// 只要调用会添加或者删除列表元素，就需要调用这个接口
+void DelayNoOrPriorityHandleMgrBase::_decDepth()
+{
+	if (null != this.mLoopDepth)
+	{
+		this.mLoopDepth._decDepth();
+	}
+	else
+	{
+		// 已经释放了资源，不用再处理了
+	}
+}
+
+bool DelayNoOrPriorityHandleMgrBase::_isInDepth()
+{
+	bool ret = false;
+
+	if (null != this.mLoopDepth)
+	{
+		ret = this.mLoopDepth._isInDepth();
+	}
+	else
+	{
+		// 资源已经释放
+	}
+
+	return ret;
+}
+
+void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject dispObj, uint eventId)
 {
 	int idx = 0;
 	// len 是 Python 的关键字
@@ -129,42 +162,6 @@ void _processDelayObjects(IDispatchObject DISPoBJ, uint eventId)
 			this.mDeferredDelQueue.clear();
 		}
 	}
-}
-
-// 只要调用会添加或者删除列表元素，就需要调用这个接口
-protected:
-void _incDepth()
-{
-	this.mLoopDepth._incDepth();
-}
-
-// 只要调用会添加或者删除列表元素，就需要调用这个接口
-void _decDepth()
-{
-	if (null != this.mLoopDepth)
-	{
-		this.mLoopDepth._decDepth();
-	}
-	else
-	{
-		// 已经释放了资源，不用再处理了
-	}
-}
-
-bool _isInDepth()
-{
-	bool ret = false;
-
-	if (null != this.mLoopDepth)
-	{
-		ret = this.mLoopDepth._isInDepth();
-	}
-	else
-	{
-		// 资源已经释放
-	}
-
-	return ret;
 }
 
 MY_END_NAMESPACE

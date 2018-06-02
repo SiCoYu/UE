@@ -11,34 +11,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 class DelayPriorityHandleMgrBase : DelayNoOrPriorityHandleMgrBase
 {
 public:
-	DelayPriorityHandleMgrBase()
-	{
-		this.mDeferredAddQueue = new PriorityList();
-		this.mDeferredAddQueue.setIsSpeedUpFind(true);
-		this.mDeferredDelQueue = new PriorityList();
-		this.mDeferredDelQueue.setIsSpeedUpFind(true);
-	}
+	DelayPriorityHandleMgrBase();
 
-	virtual void init() override
-	{
-		Super::init();
-	}
-
-	virtual void dispose() override
-	{
-		if(null != this.mDeferredAddQueue)
-		{
-			this.mDeferredAddQueue.dispose();
-			this.mDeferredAddQueue = null;
-		}
-		if (null != this.mDeferredDelQueue)
-		{
-			this.mDeferredDelQueue.dispose();
-			this.mDeferredDelQueue = null;
-		}
-
-		Super::dispose();
-	}
-}
+	virtual void init() override;
+	virtual void dispose() override;
+};
 
 MY_END_NAMESPACE

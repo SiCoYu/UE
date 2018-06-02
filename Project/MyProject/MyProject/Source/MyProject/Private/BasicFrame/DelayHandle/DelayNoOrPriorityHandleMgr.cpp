@@ -3,29 +3,38 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-DelayNoOrPriorityHandleMgr()
+DelayNoOrPriorityHandleMgr::DelayNoOrPriorityHandleMgr()
 {
 
 }
 
-virtual void init() override
+void DelayNoOrPriorityHandleMgr::init() 
 {
 	Super::init();
 }
 
-virtual void dispose() override
+void DelayNoOrPriorityHandleMgr::dispose()
 {
 	Super::dispose();
 }
 
-bool isEmpty()
+bool DelayNoOrPriorityHandleMgr::isEmpty()
 {
 	bool ret = (this.mNoOrPriorityList.count() == 0);
 	return ret;
 }
 
-protected:
-virtual void _addObject(IDelayHandleItem delayObject, float priority = 0.0f) override
+void DelayNoOrPriorityHandleMgr::addNoOrPriorityObject(INoOrPriorityObject priorityObject, float priority)
+{
+	this._addObject(priorityObject as IDelayHandleItem, priority);
+}
+
+void DelayNoOrPriorityHandleMgr::removeNoOrPriorityObject(ITickedObject tickObj)
+{
+	this._removeObject(tickObj as IDelayHandleItem);
+}
+
+void DelayNoOrPriorityHandleMgr::_addObject(IDelayHandleItem delayObject, float priority)
 {
 	if (null != delayObject)
 	{
@@ -50,7 +59,7 @@ virtual void _addObject(IDelayHandleItem delayObject, float priority = 0.0f) ove
 	}
 }
 
-virtual void _removeObject(IDelayHandleItem delayObject) override
+void DelayNoOrPriorityHandleMgr::_removeObject(IDelayHandleItem delayObject)
 {
 	if (null != delayObject)
 	{
@@ -73,17 +82,6 @@ virtual void _removeObject(IDelayHandleItem delayObject) override
 			Ctx.msInstance.mLogSys.log("DelayPriorityHandleMgr::_removeObject, failed", LogTypeId.eLogCommon);
 		}
 	}
-}
-
-public:
-void addNoOrPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f)
-{
-	this._addObject(priorityObject as IDelayHandleItem, priority);
-}
-
-void removeNoOrPriorityObject(ITickedObject tickObj)
-{
-	this._removeObject(tickObj as IDelayHandleItem);
 }
 
 MY_END_NAMESPACE

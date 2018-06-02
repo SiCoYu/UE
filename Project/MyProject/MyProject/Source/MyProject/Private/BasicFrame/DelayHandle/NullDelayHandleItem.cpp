@@ -3,12 +3,12 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-void setClientDispose(bool isDispose)
+void NullDelayHandleItem::setClientDispose(bool isDispose)
 {
 
 }
 
-bool isClientDispose()
+bool NullDelayHandleItem::isClientDispose()
 {
 	return false;
 }

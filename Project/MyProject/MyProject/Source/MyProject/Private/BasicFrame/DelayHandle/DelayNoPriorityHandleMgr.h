@@ -11,45 +11,11 @@ MY_BEGIN_NAMESPACE(MyNS)
 class DelayNoPriorityHandleMgr : public DelayNoOrPriorityHandleMgr
 {
 public:
-	DelayNoPriorityHandleMgr()
-	{
-		this.mDeferredAddQueue = new NoPriorityList();
-		this.mDeferredAddQueue.setIsSpeedUpFind(true);
-		this.mDeferredDelQueue = new NoPriorityList();
-		this.mDeferredDelQueue.setIsSpeedUpFind(true);
-
-		this.mNoOrPriorityList = new NoPriorityList();
-		this.mNoOrPriorityList.setIsSpeedUpFind(true);
-	}
-
-	virtual void init() override
-	{
-		base.init();
-	}
-
-	virtual void dispose() override
-	{
-		this.mDeferredAddQueue.clear();
-		this.mDeferredAddQueue = null;
-
-		this.mDeferredDelQueue.clear();
-		this.mDeferredDelQueue = null;
-
-		this.mNoOrPriorityList.clear();
-		this.mNoOrPriorityList = null;
-
-		base.dispose();
-	}
-
-	void addNoPriorityObject(INoOrPriorityObject priorityObject)
-	{
-		this.addNoOrPriorityObject(priorityObject);
-	}
-
-	void removeNoPriorityObject(ITickedObject tickObj)
-	{
-		this.removeNoOrPriorityObject(tickObj);
-	}
-}
+	DelayNoPriorityHandleMgr();
+	virtual void init() override;
+	virtual void dispose() override;
+	void addNoPriorityObject(INoOrPriorityObject priorityObject);
+	void removeNoPriorityObject(ITickedObject tickObj);
+};
 
 MY_END_NAMESPACE

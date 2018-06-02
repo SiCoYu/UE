@@ -10,23 +10,11 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class DelayNoPriorityHandleMgrBase : public DelayNoOrPriorityHandleMgrBase
 {
-	public DelayNoPriorityHandleMgrBase()
-	{
-		this.mDeferredAddQueue = new NoPriorityList();
-		this.mDeferredAddQueue.setIsSpeedUpFind(true);
-		this.mDeferredDelQueue = new NoPriorityList();
-		this.mDeferredDelQueue.setIsSpeedUpFind(true);
-	}
+public:
+	DelayNoPriorityHandleMgrBase();
 
-	virtual void init() override
-	{
-		Super::init();
-	}
-
-	virtual void dispose() override
-	{
-		Super::dispose();
-	}
-}
+	virtual void init() override;
+	virtual void dispose() override;
+};
 
 MY_END_NAMESPACE

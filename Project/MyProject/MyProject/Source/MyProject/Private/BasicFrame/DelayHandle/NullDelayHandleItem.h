@@ -10,15 +10,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 public class NullDelayHandleItem : IDelayHandleItem
 {
 public:
-	void setClientDispose(bool isDispose)
-	{
-
-	}
-
-	bool isClientDispose()
-	{
-		return false;
-	}
-}
+	void setClientDispose(bool isDispose);
+	bool isClientDispose();
+};
 
 MY_END_NAMESPACE

@@ -11,6 +11,6 @@ public class ListOptimizeOp
 {
 public:
 	int mIndex;
-}
+};
 
 MY_END_NAMESPACE

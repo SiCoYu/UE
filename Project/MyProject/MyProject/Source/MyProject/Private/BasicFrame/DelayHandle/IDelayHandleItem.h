@@ -11,6 +11,6 @@ class IDelayHandleItem
 {
 	virtual void setClientDispose(bool isDispose) = 0;
 	virtual bool isClientDispose() = 0;
-}
+};
 
 MY_END_NAMESPACE

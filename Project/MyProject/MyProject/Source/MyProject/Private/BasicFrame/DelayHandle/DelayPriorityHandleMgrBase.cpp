@@ -3,7 +3,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-DelayPriorityHandleMgrBase()
+DelayPriorityHandleMgrBase::DelayPriorityHandleMgrBase()
 {
 	this.mDeferredAddQueue = new PriorityList();
 	this.mDeferredAddQueue.setIsSpeedUpFind(true);
@@ -11,12 +11,12 @@ DelayPriorityHandleMgrBase()
 	this.mDeferredDelQueue.setIsSpeedUpFind(true);
 }
 
-virtual void init() override
+void DelayPriorityHandleMgrBase::init()
 {
 	Super::init();
 }
 
-virtual void dispose() override
+void DelayPriorityHandleMgrBase::dispose()
 {
 	if(null != this.mDeferredAddQueue)
 	{
