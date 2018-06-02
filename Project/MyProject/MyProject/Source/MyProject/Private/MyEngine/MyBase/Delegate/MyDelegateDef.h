@@ -2,6 +2,9 @@
 
 #include "IDispatchObject.h"
 #include "Delegates/DelegateCombinations.h"		// DECLARE_DELEGATE_OneParams
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 /**
  * @brief Delegate

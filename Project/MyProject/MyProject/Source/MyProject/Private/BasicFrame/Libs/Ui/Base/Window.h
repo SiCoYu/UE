@@ -14,7 +14,10 @@
 using namespace MyNS;
 using namespace NSFormId;
 
-class UiLayer;
+namespace MyNS
+{
+	class UiLayer;
+}
 
 /**
  * @brief https://wiki.unrealengine.com/UMG,_How_to_extend_a_UUserWidget::_for_UMG_in_C%2B%2B.

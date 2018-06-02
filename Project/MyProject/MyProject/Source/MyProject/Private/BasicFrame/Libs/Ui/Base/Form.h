@@ -13,7 +13,11 @@ using namespace NSFormId;
 using namespace MyNS;
 
 class UUserWidget;
-class PointF;
+
+namespace MyNS 
+{
+	class PointF;
+}
 
 UCLASS(config = Game)
 class UForm : public UWindow

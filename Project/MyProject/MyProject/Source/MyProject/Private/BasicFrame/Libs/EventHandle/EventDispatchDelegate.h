@@ -2,12 +2,18 @@
 #define __EventDispatchDelegate_H
 
 #include "FastDelegate.h"
+#include "PlatformDefine.h"
 
 //#include "MyDelegate/MySmDelegateCombinations.h"
+// EventDispatchDelegate.h
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class IDispatchObject;
 
-// EventDispatchDelegate.h
+MY_END_NAMESPACE
+
+MY_USING_NAMESPACE(MyNS)
 
 typedef fastdelegate::FastDelegate1<IDispatchObject*> EventDispatchDelegate;
 typedef fastdelegate::FastDelegate1<IDispatchObject*>* EventDispatchDelegatePtr;

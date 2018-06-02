@@ -41,8 +41,6 @@
 
 #include "Core.h"
 
-MY_BEGIN_NAMESPACE(MyNS)
-
 #ifdef USE_EXTERN_THREAD
 
 	#ifdef SOCKETS_NAMESPACE
@@ -50,6 +48,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 	#endif
 
 #endif
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 #ifdef USE_EXTERN_THREAD
 class MyHandler : public SocketHandler

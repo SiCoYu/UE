@@ -30,8 +30,6 @@
 	#include <map>
 	#include <string>
 
-	MY_USING_NAMESPACE(MyNS)
-
 	class UENetThread;
 	class UENetClient;
 #endif
@@ -40,6 +38,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class MMutex;
 class MByteBuffer;
+
 
 #ifdef USE_EXTERN_THREAD
 class NetMgr : public SocketHandler, public INetMgr

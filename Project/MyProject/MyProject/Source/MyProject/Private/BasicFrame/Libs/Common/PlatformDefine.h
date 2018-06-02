@@ -55,12 +55,12 @@
 #define MY_DEBUG_MODE 1
 #define MY_MEMORY_TRACKER 1
 
-//#define MY_BEGIN_NAMESPACE(NSName) namespace NSName {
-//#define MY_END_NAMESPACE }
-//#define MY_USING_NAMESPACE(NSName) using namespace NSName;
+#define MY_BEGIN_NAMESPACE(NSName) namespace NSName {
+#define MY_END_NAMESPACE }
+#define MY_USING_NAMESPACE(NSName) using namespace NSName;
 
-#define MY_BEGIN_NAMESPACE(NSName)
-#define MY_END_NAMESPACE
-#define MY_USING_NAMESPACE(NSName)
+//#define MY_BEGIN_NAMESPACE(NSName)
+//#define MY_END_NAMESPACE
+//#define MY_USING_NAMESPACE(NSName)
 
 #endif

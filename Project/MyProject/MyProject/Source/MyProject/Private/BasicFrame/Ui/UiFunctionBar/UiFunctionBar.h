@@ -7,7 +7,12 @@
 
 using namespace MyNS;
 
-class IDispatchObject;
+namespace MyNS
+{
+	class IDispatchObject;
+}
+
+using namespace MyNS;
 
 UCLASS(config = Game)
 class UUiFunctionBar : public UUMGForm
