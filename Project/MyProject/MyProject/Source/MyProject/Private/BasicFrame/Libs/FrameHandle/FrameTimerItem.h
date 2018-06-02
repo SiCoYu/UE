@@ -3,9 +3,8 @@
 
 #include "IDelayHandleItem.h"
 #include "EventDispatchDelegate.h"
+#include "IDispatchObject.h"
 #include "PlatformDefine.h"
-
-MY_USING_NAMESPACE(MyNS)
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -14,7 +13,7 @@ class AddOnceEventDispatch;
 /**
  * @brief 定时器，这个是不断增长的
  */
-class FrameTimerItem : public IDelayHandleItem
+class FrameTimerItem : public IDelayHandleItem, public IDispatchObject
 {
 public:
 	int mInternal;              // 帧数间隔
