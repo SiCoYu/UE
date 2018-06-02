@@ -38,7 +38,7 @@ void UiLayer::removeForm(UForm* form)
 {
 	if (this->mWinDic[form->getId()] != nullptr)
 	{
-		this->mWinDic.erase(form->getId());
+		this->mWinDic.remove(form->getId());
 	}
 }
 
@@ -55,8 +55,8 @@ void UiLayer::addForm(UForm* form)
 void UiLayer::onStageReSize()
 {
 	typename MDictionary<UiFormId, UForm*>::Iterator itBegin, itEnd;
-	itBegin = this->mWinDic.begin();
-	itEnd = this->mWinDic.end();
+	itBegin = this->mWinDic.getData().begin();
+	itEnd = this->mWinDic.getData().end();
 
 	for (; itBegin != itEnd; ++itBegin)
 	{
@@ -67,8 +67,8 @@ void UiLayer::onStageReSize()
 void UiLayer::closeAllForm()
 {
 	typename MDictionary<UiFormId, UForm*>::Iterator itBegin, itEnd;
-	itBegin = this->mWinDic.begin();
-	itEnd = this->mWinDic.end();
+	itBegin = this->mWinDic.getData().begin();
+	itEnd = this->mWinDic.getData().end();
 
 	for (; itBegin != itEnd; ++itBegin)
 	{

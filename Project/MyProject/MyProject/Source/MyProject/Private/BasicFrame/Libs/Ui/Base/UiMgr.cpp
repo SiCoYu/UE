@@ -4,7 +4,6 @@
 #include "UiAttrSystem.h"
 #include "LayerPath.h"
 #include "UtilEngineWrap.h"
-#include "UtilContainers.h"
 #include "UiLoadingItem.h"
 #include "Prequisites.h"
 #include "LoadParam.h"
@@ -52,7 +51,7 @@ void UiMgr::createCanvas()
 
 	for (idx = 0; idx < (int)UiCanvasId::eCanvas_Total; ++idx)
 	{
-		this->mCanvasList.push_back(MY_NEW UiCanvas((UiCanvasId)idx));
+		this->mCanvasList.add(MY_NEW UiCanvas((UiCanvasId)idx));
 	}
 
 	this->mCanvasList[(int)UiCanvasId::eCanvas_50]->setActorName(LayerPath::ND_CV_UICanvas_50);
@@ -142,7 +141,7 @@ void UiMgr::_exitFormInternal(UiFormId formId)
 	{
 		// 清理列表
 		UiLayer* layer = form->getUiLayer();
-		UtilMap::Remove(layer->getWinDic(), formId);
+		layer->getWinDic().remove(formId);
 
 		// 释放界面资源
 		form->onExit();
@@ -156,7 +155,7 @@ void UiMgr::_exitFormInternal(UiFormId formId)
 		//    Ctx.m_instance.mResLoadMgr.unload(path);
 		//}
 		UtilEngineWrap::UnloadUnusedAssets();       // 异步卸载共用资源
-		UtilMap::Remove(this->mId2FormDic, formId);
+		this->mId2FormDic.remove(formId);
 		form = nullptr;
 	}
 }
@@ -201,7 +200,7 @@ void UiMgr::addFormNoReady(UForm* form)
 
 bool UiMgr::hasForm(UiFormId formId)
 {
-	return UtilMap::ContainsKey(this->mId2FormDic, formId);
+	return this->mId2FormDic.containsKey(formId);
 }
 
 // 加载窗口控件资源，窗口资源都是从文件加载
@@ -209,7 +208,7 @@ void UiMgr::loadWidgetRes(UiFormId formId)
 {
 	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
 
-	if (!UtilMap::ContainsKey(this->mId2WidgetLoadingItemDic, formId))                       // 如果什么都没有创建，第一次加载
+	if (!this->mId2WidgetLoadingItemDic.containsKey(formId))                       // 如果什么都没有创建，第一次加载
 	{
 		this->mId2WidgetLoadingItemDic[formId] = new UiLoadingItem();
 		this->mId2WidgetLoadingItemDic[formId]->mId = formId;
@@ -266,7 +265,8 @@ void UiMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 			res->GetPath(), 
 			ePathCodePath
 		);  // 获取 FormId
-		UtilMap::Remove(mId2CodeLoadingItemDic, formId);
+
+		this->mId2CodeLoadingItemDic.remove(formId);
 	}
 }
 
@@ -282,7 +282,7 @@ void UiMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
 		UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathComUI);  // 获取 FormId
-		UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
+		this->mId2WidgetLoadingItemDic.remove(formId);
 		GLogSys->log("UiFormId =  ， Failed Prefab");
 	}
 }
@@ -291,7 +291,7 @@ void UiMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 void UiMgr::onCodeloadedByRes(ClassAssetInsRes* res)
 {
 	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->GetPath(), ePathCodePath);  // 获取 FormId
-	UtilMap::Remove(this->mId2CodeLoadingItemDic, formId);
+	this->mId2CodeLoadingItemDic.remove(formId);
 	this->addFormNoReady(this->mId2FormDic[formId]);
 	this->onCodeLoadedByForm(this->mId2FormDic[formId]);
 }
@@ -309,7 +309,7 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 {
 	std::string path = res->GetPath();
 	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
-	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
+	this->mId2WidgetLoadingItemDic.remove(formId);
 	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
 
 	UClass* WidgetClass = res->getClass();
@@ -382,7 +382,7 @@ void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 
 	std::string path = res->getOrigPath();
 	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
-	UtilMap::Remove(this->mId2WidgetLoadingItemDic, formId);
+	this->mId2WidgetLoadingItemDic.remove(formId);
 	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
 
 	UUMGWidget* WidgetObject = res->getWidgetObject();
@@ -417,7 +417,7 @@ void UiMgr::onResize(int viewWidth, int viewHeight)
 // 关闭所有显示的窗口
 void UiMgr::exitAllForm()
 {
-	for(std::pair<UiFormId, UForm*> keyValue : this->mId2FormDic)
+	for(std::pair<UiFormId, UForm*> keyValue : this->mId2FormDic.getData())
 	{
 		this->mTmpList.add(keyValue.first);
 	}

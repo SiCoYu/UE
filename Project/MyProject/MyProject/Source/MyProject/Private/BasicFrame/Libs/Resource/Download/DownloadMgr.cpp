@@ -195,7 +195,7 @@ void DownloadMgr::download(DownloadParam* param)
 {
     ++this->mLoadingDepth;
 
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), param->mResUniqueId))
+    if (this->mLoadData->mPath2LDItem.containsKey(param->mResUniqueId))
     {
 		this->downloadWithDownloading(param);
     }
@@ -222,7 +222,7 @@ DownloadItem* DownloadMgr::getAndDownload(DownloadParam* param)
 // 这个卸载有引用计数，如果有引用计数就卸载不了
 void DownloadMgr::undownload(std::string resUniqueId, EventDispatchDelegate loadEventHandle)
 {
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), resUniqueId))
+    if (this->mLoadData->mPath2LDItem.containsKey(resUniqueId))
     {
         // 移除事件监听器，因为很有可能移除的时候，资源还没加载完成，这个时候事件监听器中的处理函数列表还没有清理
 		this->mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
@@ -288,7 +288,7 @@ void DownloadMgr::unloadNoRefResFromList()
 // 不考虑引用计数，直接卸载
 void DownloadMgr::unloadNoRef(std::string resUniqueId)
 {
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), resUniqueId))
+    if (this->mLoadData->mPath2LDItem.containsKey(resUniqueId))
     {
 		this->mLoadData->mPath2LDItem[resUniqueId]->unload();
 		this->mLoadData->mPath2LDItem[resUniqueId]->reset();
@@ -346,7 +346,7 @@ void DownloadMgr::onLoaded(DownloadItem* item)
 {
 	std::string resUniqueId = item->getResUniqueId();
 
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), resUniqueId))
+    if (this->mLoadData->mPath2LDItem.containsKey(resUniqueId))
     {
 		this->mLoadData->mPath2LDItem[item->getResUniqueId()]->init();
     }
@@ -359,7 +359,7 @@ void DownloadMgr::onLoaded(DownloadItem* item)
 void DownloadMgr::onFailed(DownloadItem* item)
 {
     std::string resUniqueId = item->getResUniqueId();
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), resUniqueId))
+    if (this->mLoadData->mPath2LDItem.containsKey(resUniqueId))
     {
 		this->mLoadData->mPath2LDItem[resUniqueId]->failed();
     }

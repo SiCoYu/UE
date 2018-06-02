@@ -52,7 +52,7 @@ void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 
 void ResInsMgrBase::unload(std::string path, EventDispatchDelegate loadEventHandle)
 {
-	if (UtilMap::ContainsKey(this->mPath2ResDic.getData(), path))
+	if (this->mPath2ResDic.containsKey(path))
 	{
 		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
 		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
@@ -110,7 +110,7 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 	ResItem* res = (ResItem*)dispObj;
 	std::string path = res->getPath();
 
-	if (UtilMap::ContainsKey(this->mPath2ResDic.getData(), path))
+	if (this->mPath2ResDic.containsKey(path))
 	{
 		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getResLoadState()->copyFrom(res->getRefCountResLoadResultNotify()->getResLoadState());
 		if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
@@ -164,7 +164,7 @@ void ResInsMgrBase::unloadAll()
 {
 	// 卸载资源的时候保存的路径列表
 	MList<std::string> pathList;
-	for(std::pair<std::string, ResInsBase*> kv : this->mPath2ResDic)
+	for(std::pair<std::string, ResInsBase*> kv : this->mPath2ResDic.getData())
 	{
 		kv.second->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->clearEventHandle();
 		pathList.add(kv.first);

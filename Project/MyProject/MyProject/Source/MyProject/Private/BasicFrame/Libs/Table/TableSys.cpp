@@ -101,8 +101,8 @@ void TableSys::loadOneTable(TableId::TableId tableID)
 // 根据路径查找表的 Id
 TableId::TableId TableSys::getTableIDByPath(std::string& path)
 {
-	TableMapIte beginIte = this->mDicTable.begin();
-	TableMapIte endIte = this->mDicTable.end();
+	TableMapIte beginIte = this->mDicTable.getData().begin();
+	TableMapIte endIte = this->mDicTable.getData().end();
 
 	for(; beginIte != endIte; ++beginIte)
     {
@@ -171,14 +171,14 @@ void TableSys::readTable(TableId::TableId tableID, MByteBuffer* bytes)
         //{
             //item.parseAllByteArray<TableObjectItemBody>(bytes);
         //}
-        table->mList->push_back(item);
+        table->mList->add(item);
     }
 }
 
 // 查找表中的一项
 TableItemBase* TableSys::findDataItem(TableBase* table, uint32 id)
 {
-	int size = table->mList->size();
+	int size = table->mList->count();
 	int low = 0;
 	int high = size - 1;
 	int middle = 0;

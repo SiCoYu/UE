@@ -42,7 +42,7 @@ T* UiMgr::loadForm(UiFormId formId)
 			//}
 		}
 	}
-	else if (!UtilMap::ContainsKey(this->mId2CodeLoadingItemDic, formId))                       // 如果什么都没有创建，第一次加载
+	else if (!this->mId2CodeLoadingItemDic.containsKey(formId))                       // 如果什么都没有创建，第一次加载
 	{
 		//if (attrItem.m_bNeedLua)
 		//{
@@ -102,7 +102,7 @@ T* UiMgr::loadForm(UiFormId formId)
 template <class T>
 T* UiMgr::getForm(UiFormId formId)
 {
-	if (UtilMap::ContainsKey(this->mId2FormDic, formId))
+	if (this->mId2FormDic.containsKey(formId))
 	{
 		return Cast<T>(this->mId2FormDic[formId]);
 	}

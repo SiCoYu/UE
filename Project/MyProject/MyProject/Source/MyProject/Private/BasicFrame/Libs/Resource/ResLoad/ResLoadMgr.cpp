@@ -79,7 +79,7 @@ ResItem* ResLoadMgr::getResource(std::string path)
 
 LoadItem* ResLoadMgr::getLoadItem(std::string path)
 {
-	if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, path))
+	if (this->mLoadData->mPath2LDItem.containsKey(path))
 	{
 		return this->mLoadData->mPath2LDItem[path];
 	}
@@ -359,7 +359,7 @@ void ResLoadMgr::load(LoadParam* param)
 {
 	this->mLoadingDepth += 1;
 
-	if (UtilMap::ContainsKey(this->mLoadData->mPath2Res, param->mPath))
+	if (this->mLoadData->mPath2Res.containsKey(param->mPath))
 	{
 		this->loadWithResCreatedAndLoad(param);
 	}
@@ -390,7 +390,7 @@ ResItem* ResLoadMgr::getAndLoad(LoadParam* param)
 // 这个卸载有引用计数，如果有引用计数就卸载不了
 void ResLoadMgr::unload(std::string path, EventDispatchDelegate loadEventHandle)
 {
-	if (UtilMap::ContainsKey(mLoadData->mPath2Res, path))
+	if (this->mLoadData->mPath2Res.containsKey(path))
 	{
 		this->mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
 		this->mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
@@ -430,13 +430,13 @@ void ResLoadMgr::unloadNoRefResFromList()
 // 不考虑引用计数，直接卸载
 void ResLoadMgr::unloadNoRef(std::string path)
 {
-	if (UtilMap::ContainsKey(this->mLoadData->mPath2Res, path))
+	if (this->mLoadData->mPath2Res.containsKey(path))
 	{
 		this->mLoadData->mPath2Res[path]->unload();
 		this->mLoadData->mPath2Res[path]->reset();
 		UtilList::Add(this->mLoadData->mNoUsedResItem, this->mLoadData->mPath2Res[path]);
 
-		UtilMap::Remove(this->mLoadData->mPath2Res, path);
+		this->mLoadData->mPath2Res.remove(path);
 	}
 	else
 	{
@@ -467,7 +467,7 @@ void ResLoadMgr::onLoaded(LoadItem* item)
 {
 	std::string _path = item->getPath();
 
-	if (UtilMap::ContainsKey(this->mLoadData->mPath2Res, _path))
+	if (this->mLoadData->mPath2Res.containsKey(_path))
 	{
 		this->mLoadData->mPath2Res[item->getPath()]->init(this->mLoadData->mPath2LDItem[item->getPath()]);
 	}
@@ -481,7 +481,7 @@ void ResLoadMgr::onFailed(LoadItem* item)
 {
 	std::string path = item->getPath();
 
-	if (UtilMap::ContainsKey(this->mLoadData->mPath2Res, path))
+	if (this->mLoadData->mPath2Res.containsKey(path))
 	{
 		this->mLoadData->mPath2Res[path]->failed(mLoadData->mPath2LDItem[path]);
 	}
@@ -492,7 +492,7 @@ void ResLoadMgr::releaseLoadItem(LoadItem* item)
 	item->reset();
 	UtilList::Add(this->mLoadData->mNoUsedLDItem, item);
 	std::string _path = item->getPath();
-	UtilMap::Remove(this->mLoadData->mPath2LDItem, _path);
+	this->mLoadData->mPath2LDItem.remove(_path);
 }
 
 void ResLoadMgr::loadNextItem()

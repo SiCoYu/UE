@@ -1,6 +1,5 @@
 #include "MyProject.h"
 #include "UiAttrItem.h"
-#include "UtilContainers.h"
 #include "UiFormId.h"
 #include "UiAttrSystem.h"
 #include "MyMemoryConstructorFlag.h"
@@ -35,9 +34,9 @@ void UiAttrSystem::dispose()
 
 std::string UiAttrSystem::getPath(UiFormId id)
 {
-	if (UtilMap::ContainsKey(this->mId2AttrDic, id))
+	if (this->mId2AttrDic.containsKey(id))
 	{
-		return mId2AttrDic[id]->mWidgetPath;
+		return this->mId2AttrDic[id]->mWidgetPath;
 	}
 
 	return "";
@@ -46,7 +45,7 @@ std::string UiAttrSystem::getPath(UiFormId id)
 // 通过路径获取
 UiFormId UiAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
 {
-	for(auto keyValue : this->mId2AttrDic)
+	for(auto keyValue : this->mId2AttrDic.getData())
 	{
 		if (ePathComUI == pathType)
 		{

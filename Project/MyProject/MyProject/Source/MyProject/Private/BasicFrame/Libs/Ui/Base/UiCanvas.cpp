@@ -13,7 +13,7 @@ UiCanvas::UiCanvas(UiCanvasId canvasId)
 	int idx = 0;
 	for (idx = 0; idx < (int)UiLayerId::eMaxLayer; ++idx)
 	{
-		this->mLayerList.push_back(MY_NEW UiLayer((UiLayerId)idx));
+		this->mLayerList.add(MY_NEW UiLayer((UiLayerId)idx));
 	}
 
 	//if (eCanvas_50 == mCanvasId)
