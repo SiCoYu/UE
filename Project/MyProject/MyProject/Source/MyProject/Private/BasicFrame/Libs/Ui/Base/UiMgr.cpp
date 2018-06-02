@@ -386,7 +386,7 @@ void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
 
 	UUMGWidget* WidgetObject = res->getWidgetObject();
-	this->mId2FormDic[formId]->setIsLoadWidgetRes(true);
+
 	this->mId2FormDic[formId]->mWinRender->mUiRoot = WidgetObject;
 	UtilEngineWrap::SetActive(mId2FormDic[formId]->mWinRender->mUiRoot, false);      // 出发 onShow 事件
 
