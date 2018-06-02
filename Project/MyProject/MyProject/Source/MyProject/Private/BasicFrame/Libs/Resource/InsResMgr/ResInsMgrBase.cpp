@@ -52,7 +52,7 @@ void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 
 void ResInsMgrBase::unload(std::string path, EventDispatchDelegate loadEventHandle)
 {
-	if (UtilMap::ContainsKey(this->mPath2ResDic, path))
+	if (UtilMap::ContainsKey(this->mPath2ResDic.getData(), path))
 	{
 		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
 		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
@@ -101,7 +101,7 @@ void ResInsMgrBase::unloadNoRef(std::string path)
 		)
 	);
 
-	UtilMap::Remove(this->mPath2ResDic, path);
+	UtilMap::Remove(this->mPath2ResDic.getData(), path);
 	//UtilSysLibWrap.UnloadUnusedAssets();           // 异步卸载共用资源
 }
 
@@ -110,7 +110,7 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 	ResItem* res = (ResItem*)dispObj;
 	std::string path = res->getPath();
 
-	if (UtilMap::ContainsKey(this->mPath2ResDic, path))
+	if (UtilMap::ContainsKey(this->mPath2ResDic.getData(), path))
 	{
 		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getResLoadState()->copyFrom(res->getRefCountResLoadResultNotify()->getResLoadState());
 		if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())

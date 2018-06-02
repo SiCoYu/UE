@@ -247,7 +247,7 @@ void DownloadMgr::unloadAll()
     MList<std::string> resUniqueIdList;
 	std::string resUniqueId;
 
-    for(DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem)
+    for(DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem.getData())
     {
 		resUniqueId = kvValue.first;
         resUniqueIdList.add(resUniqueId);
@@ -288,12 +288,12 @@ void DownloadMgr::unloadNoRefResFromList()
 // 不考虑引用计数，直接卸载
 void DownloadMgr::unloadNoRef(std::string resUniqueId)
 {
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, resUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), resUniqueId))
     {
 		this->mLoadData->mPath2LDItem[resUniqueId]->unload();
 		this->mLoadData->mPath2LDItem[resUniqueId]->reset();
 		UtilList::Add(this->mLoadData->mNoUsedLDItem, this->mLoadData->mPath2LDItem[resUniqueId]);
-		UtilMap::Remove(this->mLoadData->mPath2LDItem, resUniqueId);
+		UtilMap::Remove(this->mLoadData->mPath2LDItem.getData(), resUniqueId);
 
         // 检查是否存在还没有执行的 LoadItem，如果存在就直接移除
 		this->removeWillLoadItem(resUniqueId);
@@ -346,7 +346,7 @@ void DownloadMgr::onLoaded(DownloadItem* item)
 {
 	std::string resUniqueId = item->getResUniqueId();
 
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, resUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), resUniqueId))
     {
 		this->mLoadData->mPath2LDItem[item->getResUniqueId()]->init();
     }
@@ -359,7 +359,7 @@ void DownloadMgr::onLoaded(DownloadItem* item)
 void DownloadMgr::onFailed(DownloadItem* item)
 {
     std::string resUniqueId = item->getResUniqueId();
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, resUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), resUniqueId))
     {
 		this->mLoadData->mPath2LDItem[resUniqueId]->failed();
     }
@@ -371,7 +371,7 @@ void DownloadMgr::releaseLoadItem(DownloadItem* item)
     item->reset();
 	UtilList::Add(mLoadData->mNoUsedLDItem, item);
 	UtilList::Remove(mLoadData->mWillLDItem, item);
-	UtilMap::Remove(mLoadData->mPath2LDItem, resUniqueId);
+	UtilMap::Remove(mLoadData->mPath2LDItem.getData(), resUniqueId);
 }
 
 void DownloadMgr::loadNextItem()
