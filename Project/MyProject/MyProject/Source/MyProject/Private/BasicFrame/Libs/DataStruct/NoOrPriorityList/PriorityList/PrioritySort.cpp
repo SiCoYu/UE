@@ -1,8 +1,6 @@
-﻿namespace SDK.Lib
-{
-    public enum PrioritySort
-    {
-        ePS_Less,       // 小于
-        ePS_Great,      // 大于
-    }
-}
+﻿#include "MyProject.h"
+#include "PrioritySort.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+MY_END_NAMESPACE

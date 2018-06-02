@@ -1,10 +1,6 @@
-﻿namespace SDK.Lib
-{
-    /**
-     * @brief 非优先级或者优先级对象接口
-     */
-    public interface INoOrPriorityObject
-    {
+﻿#include "MyProject.h"
+#include "INoOrPriorityObject.h"
 
-    }
-}
+MY_BEGIN_NAMESPACE(MyNS)
+
+MY_END_NAMESPACE

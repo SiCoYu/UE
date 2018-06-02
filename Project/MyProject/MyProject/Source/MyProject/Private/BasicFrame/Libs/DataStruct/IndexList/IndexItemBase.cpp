@@ -1,37 +1,6 @@
-﻿namespace SDK.Lib
-{
-    public class IndexItemBase : GObject
-    {
-        protected int mIndex;   // 索引
+﻿#include "MyProject.h"
+#include "IndexItemBase.h"
 
-        public IndexItemBase()
-        {
-            this->mIndex = -1;
-        }
+MY_BEGIN_NAMESPACE(MyNS)
 
-        public void init()
-        {
-
-        }
-
-        public void dispose()
-        {
-
-        }
-
-        public int getIndex()
-        {
-            return this->mIndex;
-        }
-
-        public void setIndex(int value)
-        {
-            this->mIndex = value;
-        }
-
-        public void resetIndex()
-        {
-            this->mIndex = -1;
-        }
-    }
-}
+MY_END_NAMESPACE

@@ -1,23 +1,6 @@
-﻿namespace SDK.Lib
-{
-    /**
-     * @brief 非优先级或者优先级列表
-     */
-    public interface INoOrPriorityList
-    {
-        void setIsSpeedUpFind(bool value);
-        void setIsOpKeepSort(bool value);
-        void init();
-        void dispose();
-        void clear();
-        int count();
+﻿#include "MyProject.h"
+#include "INoOrPriorityList.h"
 
-        INoOrPriorityObject get(int index);
-        bool contains(INoOrPriorityObject item);
-        void removeAt(int index);
-        int getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject);
+MY_BEGIN_NAMESPACE(MyNS)
 
-        void addNoOrPriorityObject(INoOrPriorityObject noPriorityObject, float priority = 0.0f);
-        void removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject);
-    }
-}
+MY_END_NAMESPACE
