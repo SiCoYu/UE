@@ -1,11 +1,12 @@
 ﻿#include "MyProject.h"
 #include "AuxMClassLoader.h"
 
-namespace MyNS
+MY_BEGIN_NAMESPACE(MyNS)
+
+AuxMClassLoader::AuxMClassLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
+	: Super(path, isNeedInsPrefab, isInsNeedCoroutine)
 {
-	AuxMClassLoader::AuxMClassLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
-		: Super(path, isNeedInsPrefab, isInsNeedCoroutine)
-	{
-		this->mResPackType = eClassType;
-	}
+	this->mResPackType = eClassType;
 }
+
+MY_END_NAMESPACE

@@ -10,11 +10,11 @@
 #include "UiLayerId.h"
 #include "PlatformDefine.h"
 
-MY_BEGIN_NAMESPACE(MyNS)
-
 using namespace NSFormId;
 
 class UForm;
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 class UiLayer : public GObject
 {

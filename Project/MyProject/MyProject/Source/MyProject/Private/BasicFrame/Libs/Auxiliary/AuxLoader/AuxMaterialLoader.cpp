@@ -4,168 +4,171 @@
 #include "MaterialInsRes.h"
 #include "Prequisites.h"
 
-namespace MyNS
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+AuxMaterialLoader::AuxMaterialLoader()
 {
-	AuxMaterialLoader::AuxMaterialLoader()
-    {
-		Super();
+	Super();
 
-        this->mMaterialRes = nullptr;
-        this->mMaterial = nullptr;
+    this->mMaterialRes = nullptr;
+    this->mMaterial = nullptr;
+}
+
+void AuxMaterialLoader::dispose()
+{
+	Super::dispose();
+}
+
+UMaterialInterface* AuxMaterialLoader::getMaterialInterface()
+{
+	return this->mMaterialDyn;
+}
+
+UMaterialInstanceDynamic* AuxMaterialLoader::getMaterialInterfaceDynamic()
+{
+	return this->mMaterialDyn;
+}
+
+std::string AuxMaterialLoader::getOrigPath()
+{
+    if (this->mMaterialRes != nullptr)
+    {
+        return this->mMaterialRes->getOrigPath();
     }
 
-    void AuxMaterialLoader::dispose()
+    return this->mPath;
+}
+
+void AuxMaterialLoader::syncLoad(
+    std::string path,
+	EventDispatchDelegate evtHandle,
+	EventDispatchDelegate progressHandle
+    )
+{
+    Super::syncLoad(
+        path,
+        evtHandle,
+        progressHandle
+        );
+
+    if (this->isInvalid())
     {
-		Super::dispose();
-    }
+        this->onStartLoad();
 
-	UMaterialInterface* AuxMaterialLoader::getMaterialInterface()
-	{
-		return this->mMaterialDyn;
-	}
-
-	UMaterialInstanceDynamic* AuxMaterialLoader::getMaterialInterfaceDynamic()
-	{
-		return this->mMaterialDyn;
-	}
-
-    std::string AuxMaterialLoader::getOrigPath()
-    {
-        if (this->mMaterialRes != nullptr)
-        {
-            return this->mMaterialRes->getOrigPath();
-        }
-
-        return this->mPath;
-    }
-
-    void AuxMaterialLoader::syncLoad(
-        std::string path,
-		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle
-        )
-    {
-        Super::syncLoad(
-            path,
-            evtHandle,
-            progressHandle
+        this->mMaterialRes = GMaterialInsResMgr->getAndSyncLoadRes(
+            path, 
+			nullptr,
+			nullptr,
+            this->mResLoadPriority
             );
+        this->onMaterialLoaded(this->mMaterialRes);
+    }
+    else if (this->hasLoadEnd())
+    {
+        //this->onMaterialLoaded(this->mMaterialRes);
+        this->onMaterialLoaded(nullptr);
+    }
+}
 
-        if (this->isInvalid())
+// 异步加载对象
+void AuxMaterialLoader::asyncLoad(
+    std::string path,
+	EventDispatchDelegate evtHandle,
+	EventDispatchDelegate progressHandle
+    )
+{
+	Super::asyncLoad(
+		path, 
+		evtHandle, 
+		progressHandle
+	);
+
+    if (this->isInvalid())
+    {
+        this->onStartLoad();
+
+        if (nullptr == progressHandle)
         {
-            this->onStartLoad();
-
-            this->mMaterialRes = GMaterialInsResMgr->getAndSyncLoadRes(
-                path, 
-				nullptr,
-				nullptr,
-                this->mResLoadPriority
-                );
-            this->onMaterialLoaded(this->mMaterialRes);
+            this->mMaterialRes = GMaterialInsResMgr->getAndAsyncLoadRes(
+                path,
+				EventDispatchDelegate(
+					this,
+					&AuxMaterialLoader::onMaterialLoaded
+				)
+            );
         }
-        else if (this->hasLoadEnd())
+        else
         {
-            //this->onMaterialLoaded(this->mMaterialRes);
-            this->onMaterialLoaded(nullptr);
+            this->mMaterialRes = GMaterialInsResMgr->getAndAsyncLoadRes(
+                path,
+				EventDispatchDelegate(
+					this,
+					&AuxMaterialLoader::onMaterialLoaded
+				),
+				EventDispatchDelegate(
+					this,
+					&AuxLoaderBase::onProgressEventHandle
+				)
+            );
         }
     }
-
-    // 异步加载对象
-    void AuxMaterialLoader::asyncLoad(
-        std::string path,
-		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle
-        )
+    else if (this->hasLoadEnd())
     {
-		Super::asyncLoad(
-			path, 
-			evtHandle, 
-			progressHandle
-		);
-
-        if (this->isInvalid())
-        {
-            this->onStartLoad();
-
-            if (nullptr == progressHandle)
-            {
-                this->mMaterialRes = GMaterialInsResMgr->getAndAsyncLoadRes(
-                    path,
-					EventDispatchDelegate(
-						this,
-						&AuxMaterialLoader::onMaterialLoaded
-					)
-                );
-            }
-            else
-            {
-                this->mMaterialRes = GMaterialInsResMgr->getAndAsyncLoadRes(
-                    path,
-					EventDispatchDelegate(
-						this,
-						&AuxMaterialLoader::onMaterialLoaded
-					),
-					EventDispatchDelegate(
-						this,
-						&AuxLoaderBase::onProgressEventHandle
-					)
-                );
-            }
-        }
-        else if (this->hasLoadEnd())
-        {
-            this->onMaterialLoaded(nullptr);
-        }
+        this->onMaterialLoaded(nullptr);
     }
+}
 
-    void AuxMaterialLoader::onMaterialLoaded(IDispatchObject* dispObj)
+void AuxMaterialLoader::onMaterialLoaded(IDispatchObject* dispObj)
+{
+    if (nullptr != dispObj)
     {
-        if (nullptr != dispObj)
+        this->mMaterialRes = (MaterialInsRes*)dispObj;
+
+        if (this->mMaterialRes->hasSuccessLoaded())
         {
-            this->mMaterialRes = (MaterialInsRes*)dispObj;
+            this->onLoaded();
 
-            if (this->mMaterialRes->hasSuccessLoaded())
-            {
-                this->onLoaded();
-
-                this->mMaterial = this->mMaterialRes->getMaterialInterface();
-				this->mMaterialDyn = this->mMaterialRes->getMaterialInterfaceDynamic();
-            }
-            else if (this->mMaterialRes->hasFailed())
-            {
-                this->onFailed();
-
-				GMaterialInsResMgr->unload(
-                    this->mMaterialRes->getResUniqueId(),
-					EventDispatchDelegate(
-						this,
-						&AuxMaterialLoader::onMaterialLoaded
-						)
-					);
-                this->mMaterialRes = nullptr;
-            }
+            this->mMaterial = this->mMaterialRes->getMaterialInterface();
+			this->mMaterialDyn = this->mMaterialRes->getMaterialInterfaceDynamic();
         }
-
-        if (nullptr != this->mResEventDispatch)
+        else if (this->mMaterialRes->hasFailed())
         {
-            this->mResEventDispatch->dispatchEvent(this);
-        }
-    }
+            this->onFailed();
 
-    void AuxMaterialLoader::unload()
-    {
-        if(nullptr != this->mMaterialRes)
-        {
 			GMaterialInsResMgr->unload(
                 this->mMaterialRes->getResUniqueId(),
 				EventDispatchDelegate(
 					this,
 					&AuxMaterialLoader::onMaterialLoaded
 					)
-                );
+				);
             this->mMaterialRes = nullptr;
         }
+    }
 
-		Super::unload();
+    if (nullptr != this->mResEventDispatch)
+    {
+        this->mResEventDispatch->dispatchEvent(this);
     }
 }
+
+void AuxMaterialLoader::unload()
+{
+    if(nullptr != this->mMaterialRes)
+    {
+		GMaterialInsResMgr->unload(
+            this->mMaterialRes->getResUniqueId(),
+			EventDispatchDelegate(
+				this,
+				&AuxMaterialLoader::onMaterialLoaded
+				)
+            );
+        this->mMaterialRes = nullptr;
+    }
+
+	Super::unload();
+}
+
+MY_END_NAMESPACE

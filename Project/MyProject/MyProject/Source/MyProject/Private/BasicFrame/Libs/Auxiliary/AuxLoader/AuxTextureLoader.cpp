@@ -4,162 +4,163 @@
 #include "TextureInsRes.h"
 #include "Prequisites.h"
 
-namespace MyNS
+MY_BEGIN_NAMESPACE(MyNS)
+
+AuxTextureLoader::AuxTextureLoader()
 {
-	AuxTextureLoader::AuxTextureLoader()
-    {
-		Super();
+	Super();
 
-        this->mTextureRes = nullptr;
-        this->mTexture = nullptr;
+    this->mTextureRes = nullptr;
+    this->mTexture = nullptr;
+}
+
+void AuxTextureLoader::dispose()
+{
+	Super::dispose();
+}
+
+UTexture* AuxTextureLoader::getTexture()
+{
+    return this->mTexture;
+}
+
+std::string AuxTextureLoader::getOrigPath()
+{
+    if (this->mTextureRes != nullptr)
+    {
+        return this->mTextureRes->getOrigPath();
     }
 
-    void AuxTextureLoader::dispose()
-    {
-		Super::dispose();
-    }
+    return this->mPath;
+}
 
-	UTexture* AuxTextureLoader::getTexture()
-    {
-        return this->mTexture;
-    }
+void AuxTextureLoader::syncLoad(
+    std::string path,
+	EventDispatchDelegate evtHandle,
+	EventDispatchDelegate progressHandle
+    )
+{
+    Super::syncLoad(
+        path,
+        evtHandle,
+        progressHandle
+        );
 
-    std::string AuxTextureLoader::getOrigPath()
+    if (this->isInvalid())
     {
-        if (this->mTextureRes != nullptr)
-        {
-            return this->mTextureRes->getOrigPath();
-        }
+        this->onStartLoad();
 
-        return this->mPath;
-    }
-
-    void AuxTextureLoader::syncLoad(
-        std::string path,
-		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle
-        )
-    {
-        Super::syncLoad(
-            path,
-            evtHandle,
-            progressHandle
+        this->mTextureRes = GTextureInsResMgr->getAndSyncLoadRes(
+            path, 
+			nullptr,
+			nullptr,
+            this->mResLoadPriority
             );
+        this->onTextureLoaded(this->mTextureRes);
+    }
+    else if (this->hasLoadEnd())
+    {
+        //this->onTextureLoaded(this->mTextureRes);
+        this->onTextureLoaded(nullptr);
+    }
+}
 
-        if (this->isInvalid())
+// 异步加载对象
+void AuxTextureLoader::asyncLoad(
+    std::string path,
+	EventDispatchDelegate evtHandle,
+	EventDispatchDelegate progressHandle
+    )
+{
+	Super::asyncLoad(
+		path, 
+		evtHandle, 
+		progressHandle
+	);
+
+    if (this->isInvalid())
+    {
+        this->onStartLoad();
+
+        if (nullptr == progressHandle)
         {
-            this->onStartLoad();
-
-            this->mTextureRes = GTextureInsResMgr->getAndSyncLoadRes(
-                path, 
-				nullptr,
-				nullptr,
-                this->mResLoadPriority
-                );
-            this->onTextureLoaded(this->mTextureRes);
+            this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
+                path,
+				EventDispatchDelegate(
+					this,
+					&AuxTextureLoader::onTextureLoaded
+				)
+            );
         }
-        else if (this->hasLoadEnd())
+        else
         {
-            //this->onTextureLoaded(this->mTextureRes);
-            this->onTextureLoaded(nullptr);
+            this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
+                path,
+				EventDispatchDelegate(
+					this,
+					&AuxTextureLoader::onTextureLoaded
+				),
+				EventDispatchDelegate(
+					this,
+					&AuxLoaderBase::onProgressEventHandle
+				)
+            );
         }
     }
-
-    // 异步加载对象
-    void AuxTextureLoader::asyncLoad(
-        std::string path,
-		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle
-        )
+    else if (this->hasLoadEnd())
     {
-		Super::asyncLoad(
-			path, 
-			evtHandle, 
-			progressHandle
-		);
-
-        if (this->isInvalid())
-        {
-            this->onStartLoad();
-
-            if (nullptr == progressHandle)
-            {
-                this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
-                    path,
-					EventDispatchDelegate(
-						this,
-						&AuxTextureLoader::onTextureLoaded
-					)
-                );
-            }
-            else
-            {
-                this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
-                    path,
-					EventDispatchDelegate(
-						this,
-						&AuxTextureLoader::onTextureLoaded
-					),
-					EventDispatchDelegate(
-						this,
-						&AuxLoaderBase::onProgressEventHandle
-					)
-                );
-            }
-        }
-        else if (this->hasLoadEnd())
-        {
-            this->onTextureLoaded(nullptr);
-        }
+        this->onTextureLoaded(nullptr);
     }
+}
 
-    void AuxTextureLoader::onTextureLoaded(IDispatchObject* dispObj)
+void AuxTextureLoader::onTextureLoaded(IDispatchObject* dispObj)
+{
+    if (nullptr != dispObj)
     {
-        if (nullptr != dispObj)
+        this->mTextureRes = (TextureInsRes*)dispObj;
+
+        if (this->mTextureRes->hasSuccessLoaded())
         {
-            this->mTextureRes = (TextureInsRes*)dispObj;
+            this->onLoaded();
 
-            if (this->mTextureRes->hasSuccessLoaded())
-            {
-                this->onLoaded();
-
-                this->mTexture = this->mTextureRes->getTexture();
-            }
-            else if (this->mTextureRes->hasFailed())
-            {
-                this->onFailed();
-
-				GTextureInsResMgr->unload(
-                    this->mTextureRes->getResUniqueId(),
-					EventDispatchDelegate(
-						this,
-						&AuxTextureLoader::onTextureLoaded
-						)
-					);
-                this->mTextureRes = nullptr;
-            }
+            this->mTexture = this->mTextureRes->getTexture();
         }
-
-        if (nullptr != this->mResEventDispatch)
+        else if (this->mTextureRes->hasFailed())
         {
-            this->mResEventDispatch->dispatchEvent(this);
-        }
-    }
+            this->onFailed();
 
-    void AuxTextureLoader::unload()
-    {
-        if(nullptr != this->mTextureRes)
-        {
 			GTextureInsResMgr->unload(
                 this->mTextureRes->getResUniqueId(),
 				EventDispatchDelegate(
 					this,
 					&AuxTextureLoader::onTextureLoaded
 					)
-                );
+				);
             this->mTextureRes = nullptr;
         }
+    }
 
-		Super::unload();
+    if (nullptr != this->mResEventDispatch)
+    {
+        this->mResEventDispatch->dispatchEvent(this);
     }
 }
+
+void AuxTextureLoader::unload()
+{
+    if(nullptr != this->mTextureRes)
+    {
+		GTextureInsResMgr->unload(
+            this->mTextureRes->getResUniqueId(),
+			EventDispatchDelegate(
+				this,
+				&AuxTextureLoader::onTextureLoaded
+				)
+            );
+        this->mTextureRes = nullptr;
+    }
+
+	Super::unload();
+}
+
+MY_END_NAMESPACE

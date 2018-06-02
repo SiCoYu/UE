@@ -7,346 +7,347 @@
 #include "ResInsEventDispatch.h"
 #include "ResLoadState.h"
 
-namespace MyNS
+MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(AuxMObjectLoaderBase, AuxLoaderBase)
+
+AuxMObjectLoaderBase::AuxMObjectLoaderBase(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
+	: Super(path)
 {
-	M_IMPLEMENT_AND_REGISTER_CLASS(AuxMObjectLoaderBase, AuxLoaderBase)
+	this->mIsInsNeedCoroutine = isInsNeedCoroutine;
+	this->mIsDestroySelf = true;
+	this->mIsNeedInsPrefab = isNeedInsPrefab;
 
-	AuxMObjectLoaderBase::AuxMObjectLoaderBase(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
-		: Super(path)
+	this->mIsSetInitOrientPos = false;
+	this->mIsSetFakePos = false;
+}
+
+void AuxMObjectLoaderBase::setIsInitOrientPos(bool isSet)
+{
+	this->mIsSetInitOrientPos = isSet;
+}
+
+void AuxMObjectLoaderBase::setIsFakePos(bool isSet)
+{
+	this->mIsSetFakePos = isSet;
+}
+
+void AuxMObjectLoaderBase::dispose()
+{
+	if (this->mIsDestroySelf)
 	{
-		this->mIsInsNeedCoroutine = isInsNeedCoroutine;
-		this->mIsDestroySelf = true;
-		this->mIsNeedInsPrefab = isNeedInsPrefab;
-
-		this->mIsSetInitOrientPos = false;
-		this->mIsSetFakePos = false;
-	}
-
-	void AuxMObjectLoaderBase::setIsInitOrientPos(bool isSet)
-	{
-		this->mIsSetInitOrientPos = isSet;
-	}
-
-	void AuxMObjectLoaderBase::setIsFakePos(bool isSet)
-	{
-		this->mIsSetFakePos = isSet;
-	}
-
-	void AuxMObjectLoaderBase::dispose()
-	{
-		if (this->mIsDestroySelf)
+		if (this->mSelfGo != nullptr)
 		{
-			if (this->mSelfGo != nullptr)
-			{
-				UtilSysLibWrap::DestroyImmediate(Cast<AActor>(this->mSelfGo));
-			}
-		}
-
-		Super::dispose();
-	}
-
-	UObject* AuxMObjectLoaderBase::getSelfGo()
-	{
-		return this->mSelfGo;
-	}
-
-	void AuxMObjectLoaderBase::setSelfGo(UObject* value)
-	{
-		this->mSelfGo = value;
-	}
-
-	bool AuxMObjectLoaderBase::isDestroySelf()
-	{
-		return this->mIsDestroySelf;
-	}
-
-	void AuxMObjectLoaderBase::setDestroySelf(bool value)
-	{
-		this->mIsDestroySelf = value;
-	}
-
-	std::string AuxMObjectLoaderBase::getOrigPath()
-	{
-		if (this->mPrefabRes != nullptr)
-		{
-			return this->mPrefabRes->getOrigPath();
-		}
-
-		return this->mPath;
-	}
-
-	void AuxMObjectLoaderBase::syncLoad(
-		std::string path, 
-		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle
-	)
-	{
-		Super::syncLoad(path, evtHandle);
-
-		if (this->isInvalid())
-		{
-			if (eClassType == this->mResPackType)
-			{
-				this->mPrefabRes = GClassAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
-			}
-			else if (eObjectType == this->mResPackType)
-			{
-				this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
-			}
-			this->onPrefabLoaded(mPrefabRes);
-		}
-		else if (this->hasLoadEnd())
-		{
-			this->onPrefabLoaded(mPrefabRes);
+			UtilSysLibWrap::DestroyImmediate(Cast<AActor>(this->mSelfGo));
 		}
 	}
 
-	// 异步加载对象
-	void AuxMObjectLoaderBase::asyncLoad(
-		std::string path, 
-		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle)
-	{
-		Super::asyncLoad(path, evtHandle);
+	Super::dispose();
+}
 
-		if (this->isInvalid())
-		{
-			if (eClassType == this->mResPackType)
-			{
-				this->mPrefabRes = GClassAssetInsMgr->getAndAsyncLoadRes(
-					path, 
-					MakeEventDispatchDelegate(
-						this, 
-						&AuxMObjectLoaderBase::onPrefabLoaded
-					)
-				);
-			}
-			else if (eObjectType == this->mResPackType)
-			{
-				this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(
-					path, 
-					MakeEventDispatchDelegate(
-						this, 
-						&AuxMObjectLoaderBase::onPrefabLoaded
-					)
-				);
-			}
-		}
-		else if (this->hasLoadEnd())
-		{
-			this->onPrefabLoaded(this->mPrefabRes);
-		}
+UObject* AuxMObjectLoaderBase::getSelfGo()
+{
+	return this->mSelfGo;
+}
+
+void AuxMObjectLoaderBase::setSelfGo(UObject* value)
+{
+	this->mSelfGo = value;
+}
+
+bool AuxMObjectLoaderBase::isDestroySelf()
+{
+	return this->mIsDestroySelf;
+}
+
+void AuxMObjectLoaderBase::setDestroySelf(bool value)
+{
+	this->mIsDestroySelf = value;
+}
+
+std::string AuxMObjectLoaderBase::getOrigPath()
+{
+	if (this->mPrefabRes != nullptr)
+	{
+		return this->mPrefabRes->getOrigPath();
 	}
 
-	void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
+	return this->mPath;
+}
+
+void AuxMObjectLoaderBase::syncLoad(
+	std::string path, 
+	EventDispatchDelegate evtHandle,
+	EventDispatchDelegate progressHandle
+)
+{
+	Super::syncLoad(path, evtHandle);
+
+	if (this->isInvalid())
 	{
-		if (nullptr != dispObj)
+		if (eClassType == this->mResPackType)
 		{
-			// 一定要从这里再次取值，因为如果这个资源已经加载，可能在返回之前就先调用这个函数，因此这个时候 mPrefabRes 还是空值
-			this->mPrefabRes = (ObjectAssetInsRes*)dispObj;
+			this->mPrefabRes = GClassAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
+		}
+		else if (eObjectType == this->mResPackType)
+		{
+			this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
+		}
+		this->onPrefabLoaded(mPrefabRes);
+	}
+	else if (this->hasLoadEnd())
+	{
+		this->onPrefabLoaded(mPrefabRes);
+	}
+}
 
-			if (this->mPrefabRes->hasSuccessLoaded())
+// 异步加载对象
+void AuxMObjectLoaderBase::asyncLoad(
+	std::string path, 
+	EventDispatchDelegate evtHandle,
+	EventDispatchDelegate progressHandle)
+{
+	Super::asyncLoad(path, evtHandle);
+
+	if (this->isInvalid())
+	{
+		if (eClassType == this->mResPackType)
+		{
+			this->mPrefabRes = GClassAssetInsMgr->getAndAsyncLoadRes(
+				path, 
+				MakeEventDispatchDelegate(
+					this, 
+					&AuxMObjectLoaderBase::onPrefabLoaded
+				)
+			);
+		}
+		else if (eObjectType == this->mResPackType)
+		{
+			this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(
+				path, 
+				MakeEventDispatchDelegate(
+					this, 
+					&AuxMObjectLoaderBase::onPrefabLoaded
+				)
+			);
+		}
+	}
+	else if (this->hasLoadEnd())
+	{
+		this->onPrefabLoaded(this->mPrefabRes);
+	}
+}
+
+void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
+{
+	if (nullptr != dispObj)
+	{
+		// 一定要从这里再次取值，因为如果这个资源已经加载，可能在返回之前就先调用这个函数，因此这个时候 mPrefabRes 还是空值
+		this->mPrefabRes = (ObjectAssetInsRes*)dispObj;
+
+		if (this->mPrefabRes->hasSuccessLoaded())
+		{
+			this->mResLoadState->setSuccessLoaded();
+
+			if (this->mIsNeedInsPrefab)
 			{
-				this->mResLoadState->setSuccessLoaded();
-
-				if (this->mIsNeedInsPrefab)
+				if (this->mIsInsNeedCoroutine)
 				{
-					if (this->mIsInsNeedCoroutine)
-					{
-						this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
-						this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabIns));
+					this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
+					this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabIns));
 
-						if (this->mIsSetFakePos)
-						{
-							this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
-						}
-						else
-						{
-							this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
-						}
+					if (this->mIsSetFakePos)
+					{
+						this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
 					}
 					else
 					{
-						if (this->mIsSetFakePos)
-						{
-							this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
-						}
-						else
-						{
-							this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
-						}
-
-						this->onAllFinish();
+						this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
 					}
 				}
 				else
 				{
+					if (this->mIsSetFakePos)
+					{
+						this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
+					}
+					else
+					{
+						this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
+					}
+
 					this->onAllFinish();
 				}
 			}
-			else if (this->mPrefabRes->hasFailed())
+			else
 			{
-				this->mResLoadState->setFailed();
-
-				GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
-				this->mPrefabRes = nullptr;
-
-				if (this->mResEventDispatch != nullptr)
-				{
-					this->mResEventDispatch->dispatchEvent(this);
-				}
+				this->onAllFinish();
 			}
 		}
-		else
+		else if (this->mPrefabRes->hasFailed())
 		{
+			this->mResLoadState->setFailed();
+
+			GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+			this->mPrefabRes = nullptr;
+
 			if (this->mResEventDispatch != nullptr)
 			{
 				this->mResEventDispatch->dispatchEvent(this);
 			}
 		}
 	}
-
-	void AuxMObjectLoaderBase::onPrefabIns(IDispatchObject* dispObj)
+	else
 	{
-		this->mResInsEventDispatch = (ResInsEventDispatch*)dispObj;
-		this->setSelfGo(this->mResInsEventDispatch->getInsGO());
-		this->onAllFinish();
-	}
-
-	// 所有的资源都加载完成
-	void AuxMObjectLoaderBase::onAllFinish()
-	{
-		if (this->mIsNeedInsPrefab)
-		{
-			if (this->mSelfGo != nullptr)
-			{
-				this->mResLoadState->setSuccessLoaded();
-			}
-			else
-			{
-				this->mResLoadState->setFailed();
-			}
-		}
-		else
-		{
-			if (nullptr != this->mPrefabRes && this->mPrefabRes->hasSuccessLoaded())
-			{
-				this->mResLoadState->setSuccessLoaded();
-			}
-			else
-			{
-				this->mResLoadState->setFailed();
-			}
-		}
-
 		if (this->mResEventDispatch != nullptr)
 		{
 			this->mResEventDispatch->dispatchEvent(this);
 		}
 	}
+}
 
-	void AuxMObjectLoaderBase::unload()
+void AuxMObjectLoaderBase::onPrefabIns(IDispatchObject* dispObj)
+{
+	this->mResInsEventDispatch = (ResInsEventDispatch*)dispObj;
+	this->setSelfGo(this->mResInsEventDispatch->getInsGO());
+	this->onAllFinish();
+}
+
+// 所有的资源都加载完成
+void AuxMObjectLoaderBase::onAllFinish()
+{
+	if (this->mIsNeedInsPrefab)
 	{
-		if (this->mPrefabRes != nullptr)
+		if (this->mSelfGo != nullptr)
 		{
-			GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
-			this->mPrefabRes = nullptr;
-		}
-
-		if (this->mResInsEventDispatch != nullptr)
-		{
-			this->mResInsEventDispatch->setIsValid(false);
-			this->mResInsEventDispatch = nullptr;
-		}
-
-		if (this->mResEventDispatch != nullptr)
-		{
-			this->mResEventDispatch->clearEventHandle();
-			this->mResEventDispatch = nullptr;
-		}
-	}
-
-	UObject* AuxMObjectLoaderBase::getGameObject()
-	{
-		return this->mSelfGo;
-	}
-
-	// 获取预制模板
-	UObject* AuxMObjectLoaderBase::getPrefabTmpl()
-	{
-		UObject* ret = nullptr;
-		if (nullptr != this->mPrefabRes)
-		{
-			ret = Cast<UObject>(this->mPrefabRes->getObject());
-		}
-		return ret;
-	}
-
-	void AuxMObjectLoaderBase::setClientDispose(bool isDispose)
-	{
-
-	}
-
-	bool AuxMObjectLoaderBase::isClientDispose()
-	{
-		return false;
-	}
-
-	UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle)
-	{
-		if (nullptr == this->mInsEventDispatch && nullptr != insHandle)
-		{
-			this->mInsEventDispatch = MY_NEW ResInsEventDispatch();
-		}
-		if (nullptr != insHandle)
-		{
-			this->mInsEventDispatch->addEventHandle(insHandle);
-		}
-
-		if (this->mIsInsNeedCoroutine)
-		{
-			if (nullptr == this->mResInsEventDispatch)
-			{
-				this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
-			}
-			this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this,&AuxMObjectLoaderBase::onInstantiateObjectFinish));
-
-			if (this->mIsSetFakePos)
-			{
-				this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
-			}
-			else
-			{
-				this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
-			}
+			this->mResLoadState->setSuccessLoaded();
 		}
 		else
 		{
-			if (this->mIsSetFakePos)
-			{
-				this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
-			}
-			else
-			{
-				this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
-			}
-
-			this->onInstantiateObjectFinish();
+			this->mResLoadState->setFailed();
 		}
-
-		return this->mSelfGo;
+	}
+	else
+	{
+		if (nullptr != this->mPrefabRes && this->mPrefabRes->hasSuccessLoaded())
+		{
+			this->mResLoadState->setSuccessLoaded();
+		}
+		else
+		{
+			this->mResLoadState->setFailed();
+		}
 	}
 
-	void AuxMObjectLoaderBase::onInstantiateObjectFinish(IDispatchObject* dispObj)
+	if (this->mResEventDispatch != nullptr)
 	{
-		if (nullptr != dispObj)
-		{
-			this->setSelfGo(this->mResInsEventDispatch->getInsGO());
-		}
-
-		if (nullptr != this->mInsEventDispatch)
-		{
-			this->mInsEventDispatch->dispatchEvent(this);
-		}
+		this->mResEventDispatch->dispatchEvent(this);
 	}
 }
+
+void AuxMObjectLoaderBase::unload()
+{
+	if (this->mPrefabRes != nullptr)
+	{
+		GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+		this->mPrefabRes = nullptr;
+	}
+
+	if (this->mResInsEventDispatch != nullptr)
+	{
+		this->mResInsEventDispatch->setIsValid(false);
+		this->mResInsEventDispatch = nullptr;
+	}
+
+	if (this->mResEventDispatch != nullptr)
+	{
+		this->mResEventDispatch->clearEventHandle();
+		this->mResEventDispatch = nullptr;
+	}
+}
+
+UObject* AuxMObjectLoaderBase::getGameObject()
+{
+	return this->mSelfGo;
+}
+
+// 获取预制模板
+UObject* AuxMObjectLoaderBase::getPrefabTmpl()
+{
+	UObject* ret = nullptr;
+	if (nullptr != this->mPrefabRes)
+	{
+		ret = Cast<UObject>(this->mPrefabRes->getObject());
+	}
+	return ret;
+}
+
+void AuxMObjectLoaderBase::setClientDispose(bool isDispose)
+{
+
+}
+
+bool AuxMObjectLoaderBase::isClientDispose()
+{
+	return false;
+}
+
+UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle)
+{
+	if (nullptr == this->mInsEventDispatch && nullptr != insHandle)
+	{
+		this->mInsEventDispatch = MY_NEW ResInsEventDispatch();
+	}
+	if (nullptr != insHandle)
+	{
+		this->mInsEventDispatch->addEventHandle(insHandle);
+	}
+
+	if (this->mIsInsNeedCoroutine)
+	{
+		if (nullptr == this->mResInsEventDispatch)
+		{
+			this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
+		}
+		this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this,&AuxMObjectLoaderBase::onInstantiateObjectFinish));
+
+		if (this->mIsSetFakePos)
+		{
+			this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
+		}
+		else
+		{
+			this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
+		}
+	}
+	else
+	{
+		if (this->mIsSetFakePos)
+		{
+			this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
+		}
+		else
+		{
+			this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
+		}
+
+		this->onInstantiateObjectFinish();
+	}
+
+	return this->mSelfGo;
+}
+
+void AuxMObjectLoaderBase::onInstantiateObjectFinish(IDispatchObject* dispObj)
+{
+	if (nullptr != dispObj)
+	{
+		this->setSelfGo(this->mResInsEventDispatch->getInsGO());
+	}
+
+	if (nullptr != this->mInsEventDispatch)
+	{
+		this->mInsEventDispatch->dispatchEvent(this);
+	}
+}
+
+MY_END_NAMESPACE

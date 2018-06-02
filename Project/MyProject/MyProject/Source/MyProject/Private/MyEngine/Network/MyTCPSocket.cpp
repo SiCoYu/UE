@@ -4,6 +4,9 @@
 #include "Templates/SharedPointer.h"
 #include "SocketSubsystem.h"
 #include "MyTCPSocket.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 void MyTCPSocket::Launch()
 {

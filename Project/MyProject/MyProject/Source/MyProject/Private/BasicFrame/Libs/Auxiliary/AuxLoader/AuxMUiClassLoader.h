@@ -5,33 +5,35 @@
 #include "FormType.h"
 #include "ResPackType.h"
 #include "CoreInc.h"
+#include "PlatformDefine.h"
 
 using namespace NSFormType;
 
 class UClass;
 class UUMGWidget;
 
-namespace MyNS
+MY_BEGIN_NAMESPACE(MyNS)
+
+/**
+ * @brief 预制
+ */
+class AuxMUiClassLoader : public AuxMObjectLoaderBase
 {
-    /**
-     * @brief 预制
-     */
-    class AuxMUiClassLoader : public AuxMObjectLoaderBase
-    {
-		M_DECLARE_CLASS(AuxMUiClassLoader, AuxMObjectLoaderBase)
+	M_DECLARE_CLASS(AuxMUiClassLoader, AuxMObjectLoaderBase)
 
-	protected:
-		UMGOuterType mUMGOuterType;
-		UClass* mWidgetClass;
-		UUMGWidget* mWidgetObject;
+protected:
+	UMGOuterType mUMGOuterType;
+	UClass* mWidgetClass;
+	UUMGWidget* mWidgetObject;
 
-	public:
-		AuxMUiClassLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
+public:
+	AuxMUiClassLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
 
-	public:
-		virtual void onPrefabLoaded(IDispatchObject* dispObj) override;
-		void setUMGOuterType(UMGOuterType value);
-		UUMGWidget* getWidgetObject();
-		void insPrefab();
-	};
-}
+public:
+	virtual void onPrefabLoaded(IDispatchObject* dispObj) override;
+	void setUMGOuterType(UMGOuterType value);
+	UUMGWidget* getWidgetObject();
+	void insPrefab();
+};
+
+MY_END_NAMESPACE
