@@ -1,5 +1,9 @@
 ﻿#include "MyProject.h"
 #include "FrameTimerItem.h"
+#include "AddOnceEventDispatch.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -14,7 +18,7 @@ FrameTimerItem::FrameTimerItem()
 	this->mIsDisposed = false;
 }
 
-FrameTimerItem::~TimerItemBase()
+FrameTimerItem::~FrameTimerItem()
 {
 
 }

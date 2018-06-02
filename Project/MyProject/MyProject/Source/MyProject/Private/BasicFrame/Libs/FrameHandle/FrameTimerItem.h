@@ -5,6 +5,8 @@
 #include "EventDispatchDelegate.h"
 #include "PlatformDefine.h"
 
+MY_USING_NAMESPACE(MyNS)
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 class AddOnceEventDispatch;
@@ -20,14 +22,14 @@ public:
     int mCurFrame;              // 当前已经调用的定时器的时间
     int mCurLeftFrame;          // 剩余帧数
     bool mIsInfineLoop;      // 是否是无限循环
-	AddOnceEventDispatch mTimerDispatch;       // 定时器分发
+	AddOnceEventDispatch* mTimerDispatch;       // 定时器分发
     bool mIsDisposed;             // 是否已经被释放
 
     //int m_preFrame = 0;
 
 public:
 	FrameTimerItem();
-	~FrameTimerItem();
+	virtual ~FrameTimerItem();
 
 	void init();
 	void dispose();

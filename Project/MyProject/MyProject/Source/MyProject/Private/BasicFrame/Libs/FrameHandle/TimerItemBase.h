@@ -3,12 +3,12 @@
 
 #include "PlatformDefine.h"
 #include "IDelayHandleItem.h"
+#include "IDispatchObject.h"
 #include "EventDispatchDelegate.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class AddOnceEventDispatch;
-class IDispatchObject;
 
 /**
  * @brief 定时器，这个是不断增长的
