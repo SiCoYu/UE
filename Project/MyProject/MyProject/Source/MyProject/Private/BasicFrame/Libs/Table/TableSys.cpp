@@ -39,7 +39,7 @@ void TableSys::dispose()
 }
 
 // 返回一个表
-std::vector<TableItemBase*>* TableSys::getTable(TableId::TableId tableID)
+MList<TableItemBase*>* TableSys::getTable(TableId::TableId tableID)
 {
 	TableBase* table = this->mDicTable[tableID];
 

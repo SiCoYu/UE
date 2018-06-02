@@ -1,5 +1,5 @@
 ﻿#ifndef __MDictionary_H
-#error "MDictionary.inl file can only include in MDictionary.h"
+	#error "MDictionary.inl file can only include in MDictionary.h"
 #endif
 
 #include "UtilContainers.h"
@@ -13,7 +13,7 @@ MDictionary<TKey, TValue>::MDictionary()
 }
 
 template <class TKey, class TValue>
-typename MDictionary<TKey, TValue>::Dictionary MDictionary<TKey, TValue>::getData()
+typename MDictionary<TKey, TValue>::DictionaryRef MDictionary<TKey, TValue>::getData()
 {
     return this->mData;
 }

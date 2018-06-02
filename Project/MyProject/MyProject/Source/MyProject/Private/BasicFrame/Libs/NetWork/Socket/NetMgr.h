@@ -27,7 +27,7 @@
 	#endif
 
 #else
-	#include <map>
+	#include "MDictionary.h"
 	#include <string>
 
 	MY_BEGIN_NAMESPACE(MyNS)
@@ -52,14 +52,14 @@ class NetMgr : public GObject, public INetMgr
 #endif
 {
 public:
-	typedef std::map<std::string, UENetClient*>::iterator ClientMapIte;
+	typedef MDictionary<std::string, UENetClient*>::iterator ClientMapIte;
 private:
 #ifdef USE_EXTERN_THREAD
 	NetThread* mNetThread;
 	Mutex* mMutex;
 #else
 	UENetThread* mNetThread;
-	std::map<std::string, UENetClient*> mId2ClientDic;
+	MDictionary<std::string, UENetClient*> mId2ClientDic;
 #endif
 	UENetClient* mCurClient;	// 当前正在使用的 Client
 	MMutex* mVisitMutex;

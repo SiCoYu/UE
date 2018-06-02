@@ -41,7 +41,7 @@ bool DownloadMgr::hasDownloadItem(std::string resUniqueId)
 {
 	DownloadItem* loadItemValue = nullptr;
 
-	for (DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem)
+	for (DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem.getData())
     {
 		loadItemValue = kvValue.second;
 
@@ -104,7 +104,7 @@ DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
 {
 	DownloadItem* loadItemValue = nullptr;
 
-    for (DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem)
+    for (DownloadData::KVPairs kvValue : this->mLoadData->mPath2LDItem.getData())
     {
 		loadItemValue = kvValue.second;
 
@@ -195,7 +195,7 @@ void DownloadMgr::download(DownloadParam* param)
 {
     ++this->mLoadingDepth;
 
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, param->mResUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), param->mResUniqueId))
     {
 		this->downloadWithDownloading(param);
     }
@@ -222,7 +222,7 @@ DownloadItem* DownloadMgr::getAndDownload(DownloadParam* param)
 // 这个卸载有引用计数，如果有引用计数就卸载不了
 void DownloadMgr::undownload(std::string resUniqueId, EventDispatchDelegate loadEventHandle)
 {
-    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem, resUniqueId))
+    if (UtilMap::ContainsKey(this->mLoadData->mPath2LDItem.getData(), resUniqueId))
     {
         // 移除事件监听器，因为很有可能移除的时候，资源还没加载完成，这个时候事件监听器中的处理函数列表还没有清理
 		this->mLoadData->mPath2LDItem[resUniqueId]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);

@@ -1,7 +1,7 @@
 ﻿#ifndef __ResInsMgrBase_H
 #define __ResInsMgrBase_H
 
-#include <map>
+#include "MDictionary.h"
 #include <string>
 #include "MList.h"
 #include "EventDispatchDelegate.h"
@@ -32,7 +32,7 @@ class IDispatchObject;
 class ResInsMgrBase : public GObject
 {
 public:
-	std::map<std::string, ResInsBase*> mPath2ResDic;
+	MDictionary<std::string, ResInsBase*> mPath2ResDic;
 
 protected:
 	MList<std::string> mZeroRefResIdList;      // 没有引用的资源 Id 列表

@@ -2,7 +2,7 @@
 #define __MFileSys_H
 
 #include <string>
-#include <vector>
+#include "MList.h"
 #include "GObject.h"
 #include "PlatformDefine.h"
 
@@ -27,7 +27,7 @@ protected:
 	// Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
 	// Engine\Source\Editor\UnrealEd\Private\CookOnTheFlyServer.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;
-	std::vector<std::string> mLuaSearchPathList;
+	MList<std::string> mLuaSearchPathList;
 
 public:
 	MFileSys();

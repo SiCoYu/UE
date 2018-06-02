@@ -1,7 +1,7 @@
 ﻿#ifndef __NetCmdNotify_H
 #define __NetCmdNotify_H
 
-#include <vector>
+#include "MList.h"
 #include "GObject.h"
 #include "PlatformDefine.h"
 
@@ -17,7 +17,7 @@ protected:
     int mRevMsgCnt;      // 接收到消息的数量
     int mHandleMsgCnt;   // 处理的消息的数量
 
-    std::vector<NetModuleDispatchHandle*> mNetDispatchList;
+	MList<NetModuleDispatchHandle*> mNetDispatchList;
     bool mIsStopNetHandle;       // 是否停止网络消息处理
 	CmdDispatchInfo* mCmdDispInfo;
 

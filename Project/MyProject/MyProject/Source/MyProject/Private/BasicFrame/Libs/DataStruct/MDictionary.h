@@ -12,17 +12,19 @@ class MDictionary : GContainerObject
 {
 public:
 	typedef std::map<TKey, TValue> Dictionary;
+	typedef std::map<TKey, TValue>& DictionaryRef;
 	// error C4346: 'iterator': dependent name is not a type
 	// typedef std::map<TKey, TValue>::iterator Iterator;
 	typedef typename std::map<TKey, TValue>::iterator Iterator;
 	typedef std::pair<TKey, TValue> ItemType;
+	typedef MDictionary<TKey, TValue>& MDictionaryRef;
 
 protected:
 	std::map<TKey, TValue> mData;
 
 public:
 	MDictionary();
-	Dictionary getData();
+	DictionaryRef getData();
 
 	void init();
 	void dispose();

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <vector>
+#include "MList.h"
 #include "UiLayer.h"
 #include "UiLayerId.h"
 #include "UiCanvasId.h"
@@ -17,12 +17,12 @@ class UiCanvas
 protected:
 	std::string mActorName;				// GameObject 的名字
 	UiCanvasId mCanvasId;				// CanvasID
-	std::vector<UiLayer*> mLayerList;   // Canvas 中的 Layer
+	MList<UiLayer*> mLayerList;   // Canvas 中的 Layer
 
 public:
 	UiCanvas(UiCanvasId canvasId);
 	void setActorName(std::string& rhv);
-	std::vector<UiLayer*>& getLayerList();
+	MList<UiLayer*>& getLayerList();
 	void findCanvasActor();
 };
 

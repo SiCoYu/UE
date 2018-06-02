@@ -1,7 +1,7 @@
 #ifndef __UiAttrSystem_H
 #define __UiAttrSystem_H
 
-#include <map>
+#include "MDictionary.h"
 #include "UiFormId.h"
 #include "FormType.h"
 #include <string>
@@ -15,7 +15,7 @@ class UiAttrItem;
 class UiAttrSystem
 {
 public:
-	std::map<UiFormId, UiAttrItem*> mId2AttrDic;
+	MDictionary<UiFormId, UiAttrItem*> mId2AttrDic;
 
 public:
 	UiAttrSystem();

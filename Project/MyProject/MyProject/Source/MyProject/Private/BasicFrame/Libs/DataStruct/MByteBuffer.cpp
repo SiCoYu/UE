@@ -223,13 +223,13 @@ void MByteBuffer::decLenDelta(int delta)
 //	uint leftLen_ = alignLen_ - len_;
 //	if (leftLen_ > 0)
 //	{
-//		if (m_padBytes == nullptr)
+//		if (mPadBytes == nullptr)
 //		{
-//			m_padBytes = new byte[8];
+//			mPadBytes = new byte[8];
 //		}
 //
 //		// 保存数据，然后补 0
-//		Array.Copy(mDynBuffer.buff, position + len_, m_padBytes, 0, leftLen_);
+//		Array.Copy(mDynBuffer.buff, position + len_, mPadBytes, 0, leftLen_);
 //		Array.Clear(mDynBuffer.buff, (int)(position + len_), (int)leftLen_);
 //	}
 //
@@ -246,7 +246,7 @@ void MByteBuffer::decLenDelta(int delta)
 //	byte[] retByte = nullptr;
 //
 //	Crypt.encryptData(mDynBuffer.buff, position, alignLen_, ref retByte, cryptContext);  // 注意补齐不一定是 0 
-//	Array.Copy(m_padBytes, 0, mDynBuffer.buff, position + len_, leftLen_);       // 拷贝回去
+//	Array.Copy(mPadBytes, 0, mDynBuffer.buff, position + len_, leftLen_);       // 拷贝回去
 //	replace(retByte, 0, alignLen_, position, len_);
 //
 //	//check();

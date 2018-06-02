@@ -41,7 +41,7 @@ void UiCanvas::setActorName(std::string& rhv)
 	this->mActorName = rhv;
 }
 
-std::vector<UiLayer*>& UiCanvas::getLayerList()
+MList<UiLayer*>& UiCanvas::getLayerList()
 {
 	return this->mLayerList;
 }

@@ -1,8 +1,8 @@
 #ifndef __TableSys_H
 #define __TableSys_H
 
-#include <map>
-#include <vector>
+#include "MDictionary.h"
+#include "MList.h"
 #include <string>
 #include "HAL/Platform.h"
 #include "TableId.h"
@@ -24,10 +24,10 @@ class MByteBuffer;
     */
 class TableSys : public GObject
 {
-	typedef std::map<TableId::TableId, TableBase*>::iterator TableMapIte;
+	typedef typename MDictionary<TableId::TableId, TableBase*>::Iterator TableMapIte;
 
 private:
-	std::map<TableId::TableId, TableBase*> mDicTable;
+	MDictionary<TableId::TableId, TableBase*> mDicTable;
 	MByteBuffer* mByteBuffer;
 	TArray<uint8> mArrayBuffer;
 
@@ -40,7 +40,7 @@ public:
 	void dispose();
 
     // 返回一个表
-	std::vector<TableItemBase*>* getTable(TableId::TableId tableID);
+	MList<TableItemBase*>* getTable(TableId::TableId tableID);
     // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
 	TableItemBase* getItem(TableId::TableId tableID, uint32 itemID);
     // 加载一个表

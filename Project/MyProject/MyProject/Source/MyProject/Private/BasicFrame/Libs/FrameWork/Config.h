@@ -2,7 +2,7 @@
 #define __Config_H
 
 #include <string>
-#include <vector>
+#include "MList.h"
 #include "Platform.h"
 #include "ResLoadType.h"
 #include "ResPathType.h"
@@ -37,7 +37,7 @@ public:
     std::string mDataPath;
     //public bool mIsNeedNet = false;                       // 是否需要网络
     std::string mNetLogPhp;       // Php 处理文件
-	std::vector<std::string> mPakExtNameList;       // 打包的扩展名字列表
+	MList<std::string> mPakExtNameList;       // 打包的扩展名字列表
 
 public:
 	Config();

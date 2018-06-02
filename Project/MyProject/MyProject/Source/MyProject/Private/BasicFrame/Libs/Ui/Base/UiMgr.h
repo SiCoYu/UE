@@ -1,7 +1,7 @@
 #ifndef __UiMgr_H
 #define __UiMgr_H
 
-#include <map>
+#include "MDictionary.h"
 #include "MList.h"
 #include "UiFormId.h"
 #include "EventDispatchDelegate.h"
@@ -31,12 +31,12 @@ class ClassAssetInsRes;
 class UiMgr : public GObject
 {
 protected:
-	std::map<UiFormId, UForm*> mId2FormDic;
-	std::vector<UiCanvas*> mCanvasList;
+	MDictionary<UiFormId, UForm*> mId2FormDic;
+	MList<UiCanvas*> mCanvasList;
 	UiAttrSystem* mUiAttrSystem;
 
-	std::map<UiFormId, UiLoadingItem*> mId2CodeLoadingItemDic;         // 记录当前代码正在加载的项
-	std::map<UiFormId, UiLoadingItem*> mId2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
+	MDictionary<UiFormId, UiLoadingItem*> mId2CodeLoadingItemDic;         // 记录当前代码正在加载的项
+	MDictionary<UiFormId, UiLoadingItem*> mId2WidgetLoadingItemDic;         // 记录当前窗口控件正在加载的项
 
 	MList<UiFormId> mTmpList;
 	//GameObject mSceneUIRootGo;           // 每一个场景都会有一个这样的节点，专门放一些 Scene 中 UI 的一些信息

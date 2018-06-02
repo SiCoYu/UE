@@ -6,7 +6,7 @@
 #include "UtilEngineWrap.h"
 //#include "FastDelegate.h"
 #include <string>
-#include <map>
+#include "MDictionary.h"
 #include "MRay.h"
 #include "IOEventDispatchDelegate.h"
 #include "PlatformDefine.h"
@@ -213,7 +213,7 @@ public:
 
 	static float mNextEvent;
 
-	static std::map<int, MouseOrTouch> mTouches;
+	static MDictionary<int, MouseOrTouch> mTouches;
 
 	static int mWidth;
 	static int mHeight;

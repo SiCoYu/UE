@@ -3,7 +3,7 @@
 #include "MyProject.h"
 
 #include <string>
-#include <map>
+#include "MDictionary.h"
 
 #include "UiFormId.h"
 #include "GObject.h"
@@ -19,12 +19,12 @@ class UiLayer : public GObject
 protected:
 	UiLayerId mLayer;	                        // UiFormId.FirstLayer定义
 	FSlateRenderTransform* mLayerTrans;			// 当前所在层根节点转换
-	std::map<UiFormId, UForm*> mWinDic;			// 当前层所有的界面
+	MDictionary<UiFormId, UForm*> mWinDic;			// 当前层所有的界面
 	std::string mActorName;
 
 public:
 	UiLayer(UiLayerId layerId);
-	std::map<UiFormId, UForm*>& getWinDic();
+	MDictionary<UiFormId, UForm*>& getWinDic();
 	FSlateRenderTransform& getLayerTrans();
 	void setLayerTrans(FSlateRenderTransform* rhv);
 	void setActorName(std::string& rhv);

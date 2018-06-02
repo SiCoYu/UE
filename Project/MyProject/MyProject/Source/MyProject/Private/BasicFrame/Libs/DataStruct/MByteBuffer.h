@@ -1,11 +1,7 @@
 #ifndef __MByteBuffer_H
 #define __MByteBuffer_H
 
-#include <vector>
-#include <list>
 #include <string>
-#include <map>
-
 #include "MyProject.h"
 #include "Error.h"
 #include "Endian.h"
@@ -31,7 +27,7 @@ protected:
 	uint32 mPos;          // 当前可以读取的位置索引
 	EEndian mEndian;          // 大端小端
 
-	char m_padBytes[8];
+	char mPadBytes[8];
 
 	//LuaCSBridgeByteBuffer m_luaCSBridgeByteBuffer;        // Lua 中的缓冲区
 

@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "InputMgr.h"
+#include "MDictionary.h"
 
 bool InputMgr::showTooltips = true;
 FVector2D InputMgr::lastTouchPosition = FVector2D::ZeroVector;
@@ -14,7 +15,7 @@ AActor* InputMgr::mNextSelection = nullptr;
 ControlScheme InputMgr::mNextScheme = Controller;
 
 float InputMgr::mNextEvent = 0;
-std::map<int, MouseOrTouch> InputMgr::mTouches;
+MDictionary<int, MouseOrTouch> InputMgr::mTouches;
 
 int InputMgr::mWidth = 0;
 int InputMgr::mHeight = 0;

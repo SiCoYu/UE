@@ -9,7 +9,7 @@ UiLayer::UiLayer(UiLayerId layerId)
 
 }
 
-std::map<UiFormId, UForm*>& UiLayer::getWinDic()
+MDictionary<UiFormId, UForm*>& UiLayer::getWinDic()
 {
 	return this->mWinDic;
 }
@@ -54,7 +54,7 @@ void UiLayer::addForm(UForm* form)
 
 void UiLayer::onStageReSize()
 {
-	std::map<UiFormId, UForm*>::iterator itBegin, itEnd;
+	typename MDictionary<UiFormId, UForm*>::Iterator itBegin, itEnd;
 	itBegin = this->mWinDic.begin();
 	itEnd = this->mWinDic.end();
 
@@ -66,7 +66,7 @@ void UiLayer::onStageReSize()
 
 void UiLayer::closeAllForm()
 {
-	std::map<UiFormId, UForm*>::iterator itBegin, itEnd;
+	typename MDictionary<UiFormId, UForm*>::Iterator itBegin, itEnd;
 	itBegin = this->mWinDic.begin();
 	itEnd = this->mWinDic.end();
 
