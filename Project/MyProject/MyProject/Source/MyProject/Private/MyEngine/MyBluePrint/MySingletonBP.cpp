@@ -1,6 +1,9 @@
 #include "MyProject.h"
 #include "MySingletonBP.h"
 #include "UtilEngineWrap.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS);
 
 UMySingletonBP* UMySingletonBP::msSingleton;
 

@@ -7,6 +7,7 @@
 #include "MyMemoryConstructorFlag.h"
 #include "PlatformDefine.h"
 
+// error C2323: 'MyNS::operator new': non-member operator new or delete functions may not be declared static or in a namespace other than the global namespace
 MY_USING_NAMESPACE(MyNS)
 
 //#ifdef new

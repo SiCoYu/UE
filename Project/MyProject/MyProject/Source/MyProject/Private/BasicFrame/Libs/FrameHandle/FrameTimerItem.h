@@ -2,7 +2,6 @@
 #define __FrameTimerItem_H
 
 #include "IDelayHandleItem.h"
-#include "TimerDelegate.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

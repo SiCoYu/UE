@@ -32,7 +32,7 @@ void TimerItemBase::dispose()
 
 }
 
-void addTimerEventHandle(EventDispatchDelegate handle)
+void TimerItemBase::addTimerEventHandle(EventDispatchDelegate handle)
 {
 	if (nullptr == this->mTimerDispatch)
 	{
@@ -42,7 +42,7 @@ void addTimerEventHandle(EventDispatchDelegate handle)
 	this->mTimerDispatch->addEventHandle(handle);
 }
 
-void removeTimerEventHandle(EventDispatchDelegate handle)
+void TimerItemBase::removeTimerEventHandle(EventDispatchDelegate handle)
 {
 	this->mTimerDispatch->removeEventHandle(handle);
 }

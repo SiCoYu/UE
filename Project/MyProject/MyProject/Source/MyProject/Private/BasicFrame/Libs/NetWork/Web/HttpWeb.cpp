@@ -1,6 +1,9 @@
 #include "MyProject.h"
 #include "HttpWeb.h"
 #include "UtilStr.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 HttpWeb::HttpWeb()
 {
