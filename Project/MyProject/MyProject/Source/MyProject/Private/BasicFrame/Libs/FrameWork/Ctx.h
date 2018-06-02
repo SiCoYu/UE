@@ -17,7 +17,6 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 class UiMgr;
-class UGameInstance;
 class EngineData;
 class INetMgr;
 class TableSys;
@@ -55,6 +54,7 @@ class FrameTimerMgr;
 MY_END_NAMESPACE
 
 class UMyBluePrintBase;
+class UGameInstance;
 
 MY_USING_NAMESPACE(MyNS)
 

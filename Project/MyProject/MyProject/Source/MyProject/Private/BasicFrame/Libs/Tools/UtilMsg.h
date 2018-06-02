@@ -1,5 +1,5 @@
-﻿#ifndef __UtilMsg_H_
-#define __UtilMsg_H_
+﻿#ifndef __UtilMsg_H
+#define __UtilMsg_H
 
 #include "Platform.h"		// uint32
 #include <string>
