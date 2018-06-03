@@ -158,7 +158,8 @@ void PriorityList::removeAt(int index)
 
 	if (nullptr != priorityProcessObject)
 	{
-		NumIdBufferObjectFactory.deleteObject(priorityProcessObject);
+		//NumIdBufferObjectFactory.deleteObject(priorityProcessObject);
+		MY_DELETE priorityProcessObject;
 		priorityProcessObject = nullptr;
 	}
 }
@@ -331,7 +332,7 @@ bool PriorityList::_effectiveRemove(INoOrPriorityObject* item)
 			{
 				this->mPriorityProcessObjectList.set(index, this->mPriorityProcessObjectList.get(this->mPriorityProcessObjectList.count() - 1));
 				this->mPriorityProcessObjectList.removeAt(this->mPriorityProcessObjectList.count() - 1);
-				this->mDic.add(this->mPriorityProcessObjectList.get(index).mPriorityObject, index);
+				this->mDic.add(this->mPriorityProcessObjectList.get(index)->mPriorityObject, index);
 			}
 			else
 			{
