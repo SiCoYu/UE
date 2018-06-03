@@ -30,7 +30,10 @@ protected:
 	void setCapacity(size_t newCapacity);
 
 public:
-	MCircularBuffer(size_t initCapacity = BufferCV::INIT_CAPACITY, size_t maxCapacity = BufferCV::MAX_CAPACITY);
+	MCircularBuffer(
+		size_t initCapacity = BufferCV::eINIT_CAPACITY, 
+		size_t maxCapacity = BufferCV::eMAX_CAPACITY
+	);
 	~MCircularBuffer();
 
 public:

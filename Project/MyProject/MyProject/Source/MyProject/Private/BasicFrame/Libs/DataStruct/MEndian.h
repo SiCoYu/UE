@@ -1,10 +1,10 @@
-#ifndef __EEndian_H
-#define __EEndian_H
+#ifndef __MEndian_H
+#define __MEndian_H
 
 /**
  * @brief 系统大小端定义
  */
-enum EEndian
+enum class MEndian
 {
 	eBIG_ENDIAN,         // 大端
 	eLITTLE_ENDIAN,      // 小端
@@ -22,7 +22,7 @@ static union
 class SystemEndian
 {
 public:
-	static EEndian msEndian;
+	static MEndian msEndian;
 };
 
 #endif

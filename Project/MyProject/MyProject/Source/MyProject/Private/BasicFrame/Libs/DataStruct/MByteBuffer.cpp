@@ -15,7 +15,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 MByteBuffer::MByteBuffer(
 	uint32 initCapacity, 
 	uint32 maxCapacity, 
-	EEndian endian
+	MEndian endian
 )
 {
 	this->mEndian = endian;        // 缓冲区默认是小端的数据，因为服务器是 linux 的
@@ -37,7 +37,7 @@ uint32 MByteBuffer::getBytesAvailable()
 	return (this->mDynBuffer->getSize() - this->mPos);
 }
 
-EEndian MByteBuffer::getEndian()
+MEndian MByteBuffer::getEndian()
 {
 	return this->mEndian;
 }

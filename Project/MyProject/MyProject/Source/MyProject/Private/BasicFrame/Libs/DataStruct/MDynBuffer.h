@@ -31,8 +31,8 @@ public:
 
 public:
 	MDynBuffer(
-		size_t initCapacity = BufferCV::INIT_CAPACITY, 
-		size_t maxCapacity = BufferCV::MAX_CAPACITY
+		size_t initCapacity = BufferCV::eINIT_CAPACITY, 
+		size_t maxCapacity = BufferCV::eMAX_CAPACITY
 	)
 		: mCapacity(initCapacity), 
 		  mMaxCapacity(maxCapacity)

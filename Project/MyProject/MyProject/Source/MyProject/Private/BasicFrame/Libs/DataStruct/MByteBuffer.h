@@ -25,7 +25,7 @@ public:
 protected:
 	MDynBuffer<char>* mDynBuffer;
 	uint32 mPos;          // 当前可以读取的位置索引
-	EEndian mEndian;          // 大端小端
+	MEndian mEndian;          // 大端小端
 
 	char mPadBytes[8];
 
@@ -33,14 +33,14 @@ protected:
 
 public:
 	MByteBuffer(
-		uint32 initCapacity = BufferCV::INIT_CAPACITY, 
-		uint32 maxCapacity = BufferCV::MAX_CAPACITY, 
-		EEndian endian = eLITTLE_ENDIAN
+		uint32 initCapacity = BufferCV::eINIT_CAPACITY, 
+		uint32 maxCapacity = BufferCV::eMAX_CAPACITY, 
+		MEndian endian = MEndian::eLITTLE_ENDIAN
 	);
 	MDynBuffer<char>* getDynBuffer();
 	uint32 getBytesAvailable();
-	EEndian getEndian();
-	void setEndian(EEndian value);
+	MEndian getEndian();
+	void setEndian(MEndian value);
 	uint32 getLength();
 	void setLength(uint32 value);
 	void setPos(uint32 pos);

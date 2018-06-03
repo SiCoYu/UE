@@ -25,7 +25,11 @@ protected:
     T mRetItem;
 
 public:
-	MLockList(std::string name, uint32 initCapacity = 32/*BufferCV.INIT_ELEM_CAPACITY*/, uint32 maxCapacity = 8 * 1024 * 1024/*BufferCV.MAX_CAPACITY*/)
+	MLockList(
+		std::string name, 
+		uint32 initCapacity = 32/*BufferCV.eINIT_ELEM_CAPACITY*/, 
+		uint32 maxCapacity = 8 * 1024 * 1024/*BufferCV.eMAX_CAPACITY*/
+	)
 		: mDynamicBuffer(initCapacity, maxCapacity)
 	{
 		//mDynamicBuffer = new MDynBuffer<T>(initCapacity, maxCapacity);
