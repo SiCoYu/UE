@@ -10,6 +10,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 class INoOrPriorityObject;
+class PriorityProcessObject;
 
 /**
  * @brief 优先级队列，外部一定不能直接引用 PriorityProcessObject 类型的对象，内部会管理 PriorityProcessObject 的生命周期
@@ -33,7 +34,7 @@ public:
     void setIsOpKeepSort(bool value);
     void clear();
     int count();
-    INoOrPriorityObject get(int index);
+    INoOrPriorityObject* get(int index);
     float getPriority(int index);
     bool contains(INoOrPriorityObject* item);
     void removeAt(int index);

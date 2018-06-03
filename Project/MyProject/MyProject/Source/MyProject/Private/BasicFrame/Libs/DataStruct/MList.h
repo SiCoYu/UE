@@ -35,10 +35,15 @@ public:
 	MList(int capacity);
 	~MList();
 
+	void init();
+	void dispose();
+
 	ListRef getList();
 	int getUniqueId();
 	void setUniqueId(int value);
 
+	T& get(int index);
+	void set(int index, T item);
 	void add(T item);
 	bool remove(T item);
 	T& operator [] (int index);

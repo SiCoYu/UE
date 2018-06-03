@@ -62,7 +62,7 @@ void DelayNoOrPriorityHandleMgr::_addObject(IDelayHandleItem* delayObject, float
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("DelayPriorityHandleMgr::_addObject, failed", LogTypeId::eLogCommon);
 		}
@@ -87,7 +87,7 @@ void DelayNoOrPriorityHandleMgr::_removeObject(IDelayHandleItem* delayObject)
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("DelayPriorityHandleMgr::_removeObject, failed", LogTypeId::eLogCommon);
 		}

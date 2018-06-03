@@ -22,9 +22,9 @@ DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 	this->mLoopDepth = MY_NEW LoopDepth();
 	this->mLoopDepth.setZeroHandle(MakeEventDispatchDelegate(this, this->_processDelayObjects));
 
-	if(MacroDef.DEBUG_SYS)
+	if(MacroDef::DEBUG_SYS)
 	{
-		this->mDebugUniqueId = (int)Ctx.msInstance.mDebugSys.mDebugPriorityHandleUniqueId.genNewId();
+		//this->mDebugUniqueId = (int)Ctx.msInstance.mDebugSys.mDebugPriorityHandleUniqueId.genNewId();
 	}
 }
 

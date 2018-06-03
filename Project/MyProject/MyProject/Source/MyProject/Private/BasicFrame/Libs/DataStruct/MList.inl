@@ -31,6 +31,30 @@ MList<T>::~MList()
 }
 
 template <typename T>
+void MList<T>::init()
+{
+
+}
+
+template <typename T>
+void MList<T>::dispose()
+{
+	this->clear();
+}
+
+template <typename T>
+T& MList<T>::get(int index)
+{
+	return this->mList[index];
+}
+
+template <typename T>
+void MList<T>::set(int index, T item)
+{
+	this->mList[index] = item;
+}
+
+template <typename T>
 typename MList<T>::ListRef MList<T>::getList()
 {
 	return this->mList;

@@ -20,19 +20,19 @@ void LoopDepth::dispose()
 {
 	if (nullptr != this->mIncHandle)
 	{
-		this->mIncHandle.clearEventHandle();
+		this->mIncHandle->clearEventHandle();
 		MY_DELETE this->mIncHandle;
 		this->mIncHandle = nullptr;
 	}
 	if (nullptr != this->mDecHandle)
 	{
-		this->mDecHandle.clearEventHandle();
+		this->mDecHandle->clearEventHandle();
 		MY_DELETE this->mDecHandle;
 		this->mDecHandle = nullptr;
 	}
 	if (nullptr != this->mZeroHandle)
 	{
-		this->mZeroHandle.clearEventHandle();
+		this->mZeroHandle->clearEventHandle();
 		MY_DELETE this->mZeroHandle;
 		this->mZeroHandle = nullptr;
 	}
@@ -65,7 +65,7 @@ void LoopDepth::setZeroHandle(EventDispatchDelegate handle)
 		this->mZeroHandle = MY_NEW AddOnceEventDispatch();
 	}
 
-	this->mZeroHandle.addEventHandle(handle);
+	this->mZeroHandle->addEventHandle(handle);
 }
 
 void LoopDepth::_incDepth()
@@ -74,7 +74,7 @@ void LoopDepth::_incDepth()
 
 	if (nullptr != this->mIncHandle)
 	{
-		this->mIncHandle.dispatchEvent(nullptr);
+		this->mIncHandle->dispatchEvent(nullptr);
 	}
 }
 
@@ -84,14 +84,14 @@ void LoopDepth::_decDepth()
 
 	if (nullptr != this->mDecHandle)
 	{
-		this->mDecHandle.dispatchEvent(nullptr);
+		this->mDecHandle->dispatchEvent(nullptr);
 	}
 
 	if (0 == this->mLoopDepth)
 	{
 		if (nullptr != this->mZeroHandle)
 		{
-			this->mZeroHandle.dispatchEvent(nullptr);
+			this->mZeroHandle->dispatchEvent(nullptr);
 		}
 	}
 

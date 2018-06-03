@@ -70,7 +70,7 @@ void TickObjectNoPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 		}
 		else
 		{
-			if (MacroDef.ENABLE_LOG)
+			if (MacroDef::ENABLE_LOG)
 			{
 				GLogSys->log("TickObjectNoPriorityMgr::_onExecAdvance, failed", LogTypeId::eLogCommon);
 			}

@@ -64,7 +64,7 @@ int NoPriorityList::count()
 
 INoOrPriorityObject* NoPriorityList::get(int index)
 {
-	INoOrPriorityObject ret = nullptr;
+	INoOrPriorityObject* ret = nullptr;
 
 	if(index < this->count())
 	{
@@ -103,9 +103,9 @@ bool NoPriorityList::contains(INoOrPriorityObject* item)
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("NoPriorityList::Contains, failed", LogTypeId.eLogNoPriorityListCheck);
+			GLogSys->log("NoPriorityList::Contains, failed", LogTypeId::eLogNoPriorityListCheck);
 		}
 	}
 
@@ -166,7 +166,7 @@ void NoPriorityList::addNoPriorityObject(INoOrPriorityObject* noPriorityObject)
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("NoPriorityList::addNoPriorityObject, failed", LogTypeId::eLogNoPriorityListCheck);
 		}
@@ -196,7 +196,7 @@ void NoPriorityList::removeNoPriorityObject(INoOrPriorityObject* noPriorityObjec
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("NoPriorityList::addNoPriorityObject, failed", LogTypeId::eLogNoPriorityListCheck);
 		}

@@ -29,7 +29,7 @@ void EventDispatch::setUniqueId(int value)
 // 相同的函数只能增加一次
 void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 {
-	EventDispatchFunctionObject* funcObject = new EventDispatchFunctionObject();
+	EventDispatchFunctionObject* funcObject = MY_NEW EventDispatchFunctionObject();
 	funcObject->mHandle = handle;
 	if (nullptr != handle)
 	{
@@ -77,7 +77,7 @@ void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 
 void EventDispatch::_removeObject(IDelayHandleItem* delayObject)
 {
-	if (this->isInDepth())
+	if (this->_isInDepth())
 	{
 		Super::_removeObject(delayObject);
 	}
@@ -94,7 +94,7 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 {
 	//try
 	//{
-	this->incDepth();
+	this->_incDepth();
 
 	for(auto handle : this->mHandleList.getList())
 	{
@@ -109,7 +109,7 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 	//	m_luaCSBridgeDispatch.handleGlobalEvent(mEventId, dispatchObject);
 	//}
 
-	this->decDepth();
+	this->_decDepth();
 	//}
 	//catch (Exception ex)
 	//{

@@ -4,13 +4,18 @@
 #include "Ctx.h"
 #include "LogSys.h"
 #include "LogTypeId.h"
+#include "PrioritySort.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "PriorityProcessObject.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 PriorityList::PriorityList()
 {
 	//this->mPriorityProcessObjectList = new MList<PriorityProcessObject>();
-	this->mPrioritySort = PrioritySort.ePS_Great;
+	this->mPrioritySort = PrioritySort::ePS_Great;
 	this->mIsSpeedUpFind = false;
 	this->mIsOpKeepSort = false;
 }
@@ -56,7 +61,8 @@ void PriorityList::clear()
 
 	while(index < listLen)
 	{
-		NumIdBufferObjectFactory.deleteObject(this->mPriorityProcessObjectList.get(index));
+		//NumIdBufferObjectFactory.deleteObject(this->mPriorityProcessObjectList.get(index));
+		MY_DELETE this->mPriorityProcessObjectList.get(index);
 		this->mPriorityProcessObjectList.set(index, nullptr);
 		index += 1;
 	}
@@ -80,7 +86,7 @@ INoOrPriorityObject* PriorityList::get(int index)
 
 	if(index < this->count())
 	{
-		ret = this->mPriorityProcessObjectList.get(index).mPriorityObject;
+		ret = this->mPriorityProcessObjectList.get(index)->mPriorityObject;
 	}
 
 	return ret;
@@ -98,7 +104,7 @@ float PriorityList::getPriority(int index)
 	return ret;
 }
 
-bool PriorityList::contains(INoOrPriorityObject item)
+bool PriorityList::contains(INoOrPriorityObject* item)
 {
 	bool ret = false;
 
@@ -127,7 +133,7 @@ bool PriorityList::contains(INoOrPriorityObject item)
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("PriorityList::Contains, failed", LogTypeId::eLogPriorityListCheck);
 		}
@@ -222,8 +228,8 @@ void PriorityList::addPriorityObject(INoOrPriorityObject* priorityObject, float 
 		if (!this->contains(priorityObject))
 		{
 			PriorityProcessObject* priorityProcessObject = nullptr;
-			//priorityProcessObject = new PriorityProcessObject();
-			priorityProcessObject = NumIdBufferObjectFactory.newObject<PriorityProcessObject>(BufferType.eBT_PriorityProcessObject, true);
+			priorityProcessObject = MY_NEW PriorityProcessObject();
+			//priorityProcessObject = NumIdBufferObjectFactory.newObject<PriorityProcessObject>(BufferType.eBT_PriorityProcessObject, true);
 
 			priorityProcessObject->mPriorityObject = priorityObject;
 			priorityProcessObject->mPriority = priority;
@@ -344,7 +350,7 @@ void PriorityList::_updateIndex(int index)
 
 	while (index < listLen)
 	{
-		this->mDic.add(this->mPriorityProcessObjectList.get(index).mPriorityObject, index);
+		this->mDic.add(this->mPriorityProcessObjectList.get(index)->mPriorityObject, index);
 
 		++index;
 	}
