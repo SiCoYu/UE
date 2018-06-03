@@ -4,7 +4,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 std::string Config::StreamingAssets = "StreamingAssets/";
-std::string Config::UIModelLayer = "UIModel";
+std::string Config::UiModelLayer = "UiModel";
 
 Config::Config()
 {

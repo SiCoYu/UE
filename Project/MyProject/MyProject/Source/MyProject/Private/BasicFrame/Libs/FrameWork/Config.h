@@ -23,7 +23,7 @@ class Config : public GObject
 {
 public:
     static std::string StreamingAssets;
-	static std::string UIModelLayer;
+	static std::string UiModelLayer;
 
 	std::string mIp;
     int mPort;
