@@ -15,17 +15,17 @@ void DaoJiShiTimer::OnTimer(float delta)
 
 	if (this->mIsInfineLoop)
 	{
-		this->checkAndDisp();
+		this->checkAndDispatch();
 	}
 	else
 	{
 		if (this->mCurTime <= 0)
 		{
-			this->disposeAndDisp();
+			this->disposeAndDispatch();
 		}
 		else
 		{
-			this->checkAndDisp();
+			this->checkAndDispatch();
 		}
 	}
 }

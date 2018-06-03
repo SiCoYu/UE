@@ -60,29 +60,29 @@ void TimerItemBase::OnTimer(float delta)
 
 	if (this->mIsInfineLoop)
 	{
-		this->checkAndDisp();
+		this->checkAndDispatch();
 	}
 	else
 	{
 		if (this->mCurTime >= this->mTotalTime)
 		{
-			this->disposeAndDisp();
+			this->disposeAndDispatch();
 		}
 		else
 		{
-			this->checkAndDisp();
+			this->checkAndDispatch();
 		}
 	}
 }
 
-void TimerItemBase::disposeAndDisp()
+void TimerItemBase::disposeAndDispatch()
 {
 	this->mIsDisposed = true;
 
 	this->mTimerDispatch->dispatchEvent(this);
 }
 
-void TimerItemBase::checkAndDisp()
+void TimerItemBase::checkAndDispatch()
 {
 	if (this->mCurLeftTimer >= this->mInternal)
 	{

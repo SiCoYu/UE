@@ -35,8 +35,8 @@ public:
 	void removeTimerEventHandle(EventDispatchDelegate handle);
 
 	virtual void OnTimer(float delta);
-	virtual void disposeAndDisp();
-	virtual void checkAndDisp();
+	virtual void disposeAndDispatch();
+	virtual void checkAndDispatch();
 	virtual void reset();
 	void setClientDispose();
 	bool isClientDispose();
