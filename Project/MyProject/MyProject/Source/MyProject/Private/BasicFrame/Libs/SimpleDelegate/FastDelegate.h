@@ -751,7 +751,7 @@ public:
 // possible to store the function pointer in the this pointer, using another 
 // horrible_cast. Invocation isn't any faster, but it saves 4 bytes, and
 // speeds up comparison and assignment. If C++ provided direct language support
-// for delegates, they would produce asm code that was almost identical to this.
+// for delegates, they would produce asm code that was almost identical to this->
 // Note that the Sun C++ and MSVC documentation explicitly state that they 
 // support static_cast between void * and function pointers.
 

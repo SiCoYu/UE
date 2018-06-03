@@ -1,116 +1,115 @@
 ﻿#pragma once
 
+#include "EventDispatchDelegate.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class LoopDepth
+class AddOnceEventDispatch;
+
+class LoopDepth
 {
-    private int mLoopDepth;         // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
-    private CallFuncObjectNoParam mIncHandle;     // 增加处理器
-    private CallFuncObjectNoParam mDecHandle;     // 减少处理器
-    private CallFuncObjectNoParam mZeroHandle;    // 减少到 0 处理器
+private:
+	int mLoopDepth;         // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
+	AddOnceEventDispatch* mIncHandle;     // 增加处理器
+	AddOnceEventDispatch* mDecHandle;     // 减少处理器
+	AddOnceEventDispatch* mZeroHandle;    // 减少到 0 处理器
 
-    public LoopDepth()
+public:
+	LoopDepth()
     {
-        this.mLoopDepth = 0;
-        this.mIncHandle = null;
-        this.mDecHandle = null;
-        this.mZeroHandle = null;
+        this->mLoopDepth = 0;
     }
 
-    public void init()
+    void init()
     {
 
     }
 
-    public void dispose()
+    void dispose()
     {
-        if(null != this.mIncHandle)
+        if(nullptr != this->mIncHandle)
         {
-            this.mIncHandle.dispose();
-            this.mIncHandle = null;
+            this->mIncHandle.clear();
         }
-        if(null != this.mDecHandle)
+        if(nullptr != this->mDecHandle)
         {
-            this.mDecHandle.dispose();
-            this.mDecHandle = null;
+            this->mDecHandle.clear();
         }
-        if (null != this.mZeroHandle)
+        if (nullptr != this->mZeroHandle)
         {
-            this.mZeroHandle.dispose();
-            this.mZeroHandle = null;
+            this->mZeroHandle.clear();
         }
     }
 
-    public void setIncHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> value, uint eventId)
+    void setIncHandle(EventDispatchDelegate handle)
     {
-        if(null == this.mIncHandle)
+        if(nullptr == this->mIncHandle)
         {
-            this.mIncHandle = new CallFuncObjectNoParam();
+            this->mIncHandle = new AddOnceEventDispatch();
         }
 
-        this.mIncHandle.setThisAndHandleNoParam(pThis, value, 0);
+        this->mIncHandle.addEventHandle(handle);
     }
 
-    public void setDecHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> value, uint eventId)
+    void setDecHandle(EventDispatchDelegate handle)
     {
-        if (null == this.mDecHandle)
+        if (nullptr == this->mDecHandle)
         {
-            this.mDecHandle = new CallFuncObjectNoParam();
+            this->mDecHandle = new AddOnceEventDispatch();
         }
 
-        this.mDecHandle.setThisAndHandleNoParam(pThis, value, eventId);
+        this->mDecHandle.addEventHandle(handle);
     }
 
-    public void setZeroHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> value, uint eventId)
+    void setZeroHandle(EventDispatchDelegate handle)
     {
-        if (null == this.mZeroHandle)
+        if (nullptr == this->mZeroHandle)
         {
-            this.mZeroHandle = new CallFuncObjectNoParam();
+            this->mZeroHandle = new AddOnceEventDispatch();
         }
 
-        this.mZeroHandle.setThisAndHandleNoParam(pThis, value, eventId);
+        this->mZeroHandle.addEventHandle(handle);
     }
 
-    public void _incDepth()
+    void _incDepth()
     {
-        ++this.mLoopDepth;
+        ++this->mLoopDepth;
 
-        if(null != this.mIncHandle)
+        if(nullptr != this->mIncHandle)
         {
-            this.mIncHandle.call();
+            this->mIncHandle.dispatchEvent(nullptr);
         }
     }
 
-    public void _decDepth()
+    void _decDepth()
     {
-        --this.mLoopDepth;
+        --this->mLoopDepth;
 
-        if (null != this.mDecHandle)
+        if (nullptr != this->mDecHandle)
         {
-            this.mDecHandle.call();
+            this->mDecHandle.dispatchEvent(nullptr);
         }
 
-        if(0 == this.mLoopDepth)
+        if(0 == this->mLoopDepth)
         {
-            if (null != this.mZeroHandle)
+            if (nullptr != this->mZeroHandle)
             {
-                this.mZeroHandle.call();
+                this->mZeroHandle.dispatchEvent(nullptr);
             }
         }
 
-        if(this.mLoopDepth < 0)
+        if(this->mLoopDepth < 0)
         {
-            this.mLoopDepth = 0;
+            this->mLoopDepth = 0;
             // 错误，不对称
-            UnityEngine.Debug.LogError("LoopDepth::_decDepth, Error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            //LogError("LoopDepth::_decDepth, Error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         }
     }
 
-    public bool _isInDepth()
+    bool _isInDepth()
     {
-        return this.mLoopDepth > 0;
+        return this->mLoopDepth > 0;
     }
 };
 
