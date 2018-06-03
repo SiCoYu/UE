@@ -32,10 +32,10 @@ void NoPriorityList::setIsSpeedUpFind(bool value)
 {
 	this->mIsSpeedUpFind = value;
 
-	if (this->mIsSpeedUpFind)
-	{
-		this->mDic = new MDictionary<INoOrPriorityObject, int>();
-	}
+	//if (this->mIsSpeedUpFind)
+	//{
+	//	this->mDic = new MDictionary<INoOrPriorityObject, int>();
+	//}
 }
 
 void NoPriorityList::setIsOpKeepSort(bool value)
@@ -58,7 +58,7 @@ int NoPriorityList::count()
 	return this->mNoPriorityProcessObjectList.count();
 }
 
-INoOrPriorityObject NoPriorityList::get(int index)
+INoOrPriorityObject* NoPriorityList::get(int index)
 {
 	INoOrPriorityObject ret = nullptr;
 
@@ -70,7 +70,7 @@ INoOrPriorityObject NoPriorityList::get(int index)
 	return ret;
 }
 
-bool NoPriorityList::contains(INoOrPriorityObject item)
+bool NoPriorityList::contains(INoOrPriorityObject* item)
 {
 	bool ret = false;
 
@@ -120,7 +120,7 @@ void NoPriorityList::removeAt(int index)
 	}
 }
 
-int NoPriorityList::getIndexByNoPriorityObject(INoOrPriorityObject priorityObject)
+int NoPriorityList::getIndexByNoPriorityObject(INoOrPriorityObject* priorityObject)
 {
 	int retIndex = -1;
 
@@ -141,12 +141,12 @@ int NoPriorityList::getIndexByNoPriorityObject(INoOrPriorityObject priorityObjec
 	return retIndex;
 }
 
-int NoPriorityList::getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject)
+int NoPriorityList::getIndexByNoOrPriorityObject(INoOrPriorityObject* priorityObject)
 {
 	return this->getIndexByNoPriorityObject(priorityObject);
 }
 
-void NoPriorityList::addNoPriorityObject(INoOrPriorityObject noPriorityObject)
+void NoPriorityList::addNoPriorityObject(INoOrPriorityObject* noPriorityObject)
 {
 	if (nullptr != noPriorityObject)
 	{
@@ -169,7 +169,7 @@ void NoPriorityList::addNoPriorityObject(INoOrPriorityObject noPriorityObject)
 	}
 }
 
-void NoPriorityList::removeNoPriorityObject(INoOrPriorityObject noPriorityObject)
+void NoPriorityList::removeNoPriorityObject(INoOrPriorityObject* noPriorityObject)
 {
 	if (nullptr != noPriorityObject)
 	{
@@ -199,18 +199,18 @@ void NoPriorityList::removeNoPriorityObject(INoOrPriorityObject noPriorityObject
 	}
 }
 
-void NoPriorityList::addNoOrPriorityObject(INoOrPriorityObject noPriorityObject, float priority = 0.0f)
+void NoPriorityList::addNoOrPriorityObject(INoOrPriorityObject* noPriorityObject, float priority)
 {
 	this->addNoPriorityObject(noPriorityObject);
 }
 
-void NoPriorityList::removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject)
+void NoPriorityList::removeNoOrPriorityObject(INoOrPriorityObject* noPriorityObject)
 {
 	this->removeNoPriorityObject(noPriorityObject);
 }
 
 // 快速移除元素
-bool NoPriorityList::_effectiveRemove(INoOrPriorityObject item)
+bool NoPriorityList::_effectiveRemove(INoOrPriorityObject* item)
 {
 	bool ret = false;
 

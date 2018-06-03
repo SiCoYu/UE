@@ -11,7 +11,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class PriorityProcessObject : public GObject
 {
 public:
-	INoOrPriorityObject mPriorityObject;
+	INoOrPriorityObject* mPriorityObject;
     float mPriority;
 
 public:

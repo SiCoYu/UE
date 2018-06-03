@@ -5,7 +5,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 PriorityList::PriorityList()
 {
-	this->mPriorityProcessObjectList = new MList<PriorityProcessObject>();
+	//this->mPriorityProcessObjectList = new MList<PriorityProcessObject>();
 	this->mPrioritySort = PrioritySort.ePS_Great;
 	this->mIsSpeedUpFind = false;
 	this->mIsOpKeepSort = false;
@@ -34,10 +34,10 @@ void PriorityList::setIsSpeedUpFind(bool value)
 {
 	this->mIsSpeedUpFind = value;
 
-	if (this->mIsSpeedUpFind)
-	{
-		this->mDic = new MDictionary<INoOrPriorityObject, int>();
-	}
+	//if (this->mIsSpeedUpFind)
+	//{
+	//	this->mDic = new MDictionary<INoOrPriorityObject, int>();
+	//}
 }
 
 void PriorityList::setIsOpKeepSort(bool value)
@@ -70,9 +70,9 @@ int PriorityList::count()
 	return this->mPriorityProcessObjectList.count();
 }
 
-INoOrPriorityObject PriorityList::get(int index)
+INoOrPriorityObject* PriorityList::get(int index)
 {
-	INoOrPriorityObject ret = nullptr;
+	INoOrPriorityObject* ret = nullptr;
 
 	if(index < this->count())
 	{
@@ -88,7 +88,7 @@ float PriorityList::getPriority(int index)
 
 	if (index < this->count())
 	{
-		ret = this->mPriorityProcessObjectList.get(index).mPriority;
+		ret = this->mPriorityProcessObjectList.get(index)->mPriority;
 	}
 
 	return ret;
@@ -111,7 +111,7 @@ bool PriorityList::contains(INoOrPriorityObject item)
 
 			while (index < listLen)
 			{
-				if (item == this->mPriorityProcessObjectList.get(index).mPriorityObject)
+				if (item == this->mPriorityProcessObjectList.get(index)->mPriorityObject)
 				{
 					ret = true;
 					break;
@@ -134,12 +134,12 @@ bool PriorityList::contains(INoOrPriorityObject item)
 
 void PriorityList::removeAt(int index)
 {
-	PriorityProcessObject priorityProcessObject = nullptr;
+	PriorityProcessObject* priorityProcessObject = nullptr;
 	priorityProcessObject = this->mPriorityProcessObjectList.get(index);
 
 	if (this->mIsSpeedUpFind)
 	{
-		this->_effectiveRemove(this->mPriorityProcessObjectList.get(index).mPriorityObject);
+		this->_effectiveRemove(this->mPriorityProcessObjectList.get(index)->mPriorityObject);
 	}
 	else
 	{
@@ -162,17 +162,17 @@ int PriorityList::getIndexByPriority(float priority)
 
 	while (index < listLen)
 	{
-		if (PrioritySort.ePS_Less == this->mPrioritySort)
+		if (PrioritySort::ePS_Less == this->mPrioritySort)
 		{
-			if (this->mPriorityProcessObjectList.get(index).mPriority >= priority)
+			if (this->mPriorityProcessObjectList.get(index)->mPriority >= priority)
 			{
 				retIndex = index;
 				break;
 			}
 		}
-		else if (PrioritySort.ePS_Great == this->mPrioritySort)
+		else if (PrioritySort::ePS_Great == this->mPrioritySort)
 		{
-			if (this->mPriorityProcessObjectList.get(index).mPriority <= priority)
+			if (this->mPriorityProcessObjectList.get(index)->mPriority <= priority)
 			{
 				retIndex = index;
 				break;
@@ -185,7 +185,7 @@ int PriorityList::getIndexByPriority(float priority)
 	return retIndex;
 }
 
-int PriorityList::getIndexByPriorityObject(INoOrPriorityObject priorityObject)
+int PriorityList::getIndexByPriorityObject(INoOrPriorityObject* priorityObject)
 {
 	int retIndex = -1;
 
@@ -194,7 +194,7 @@ int PriorityList::getIndexByPriorityObject(INoOrPriorityObject priorityObject)
 
 	while (index < listLen)
 	{
-		if (this->mPriorityProcessObjectList.get(index).mPriorityObject == priorityObject)
+		if (this->mPriorityProcessObjectList.get(index)->mPriorityObject == priorityObject)
 		{
 			retIndex = index;
 			break;
@@ -206,23 +206,23 @@ int PriorityList::getIndexByPriorityObject(INoOrPriorityObject priorityObject)
 	return retIndex;
 }
 
-int PriorityList::getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject)
+int PriorityList::getIndexByNoOrPriorityObject(INoOrPriorityObject* priorityObject)
 {
 	return this->getIndexByPriorityObject(priorityObject);
 }
 
-void PriorityList::addPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f)
+void PriorityList::addPriorityObject(INoOrPriorityObject* priorityObject, float priority)
 {
 	if (nullptr != priorityObject)
 	{
 		if (!this->contains(priorityObject))
 		{
-			PriorityProcessObject priorityProcessObject = nullptr;
+			PriorityProcessObject* priorityProcessObject = nullptr;
 			//priorityProcessObject = new PriorityProcessObject();
 			priorityProcessObject = NumIdBufferObjectFactory.newObject<PriorityProcessObject>(BufferType.eBT_PriorityProcessObject, true);
 
-			priorityProcessObject.mPriorityObject = priorityObject;
-			priorityProcessObject.mPriority = priority;
+			priorityProcessObject->mPriorityObject = priorityObject;
+			priorityProcessObject->mPriority = priority;
 
 			if (!this->mIsOpKeepSort)
 			{
@@ -268,7 +268,7 @@ void PriorityList::addPriorityObject(INoOrPriorityObject priorityObject, float p
 	}
 }
 
-void PriorityList::removePriorityObject(INoOrPriorityObject priorityObject)
+void PriorityList::removePriorityObject(INoOrPriorityObject* priorityObject)
 {
 	if (this->contains(priorityObject))
 	{
@@ -288,18 +288,18 @@ void PriorityList::removePriorityObject(INoOrPriorityObject priorityObject)
 	}
 }
 
-void PriorityList::addNoOrPriorityObject(INoOrPriorityObject noPriorityObject, float priority = 0.0f)
+void PriorityList::addNoOrPriorityObject(INoOrPriorityObject* noPriorityObject, float priority = 0.0f)
 {
 	this->addPriorityObject(noPriorityObject, priority);
 }
 
-void PriorityList::removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject)
+void PriorityList::removeNoOrPriorityObject(INoOrPriorityObject* noPriorityObject)
 {
 	this->removePriorityObject(noPriorityObject);
 }
 
 // 快速移除元素
-bool PriorityList::_effectiveRemove(INoOrPriorityObject item)
+bool PriorityList::_effectiveRemove(INoOrPriorityObject* item)
 {
 	bool ret = false;
 

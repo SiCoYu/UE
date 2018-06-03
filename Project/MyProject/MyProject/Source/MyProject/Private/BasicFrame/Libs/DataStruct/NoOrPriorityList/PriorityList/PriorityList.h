@@ -9,6 +9,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class INoOrPriorityObject;
+
 /**
  * @brief 优先级队列，外部一定不能直接引用 PriorityProcessObject 类型的对象，内部会管理 PriorityProcessObject 的生命周期
  */
@@ -33,18 +35,18 @@ public:
     int count();
     INoOrPriorityObject get(int index);
     float getPriority(int index);
-    bool contains(INoOrPriorityObject item);
+    bool contains(INoOrPriorityObject* item);
     void removeAt(int index);
     int getIndexByPriority(float priority);
-    int getIndexByPriorityObject(INoOrPriorityObject priorityObject);
-    int getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject);
-    void addPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f);
-    void removePriorityObject(INoOrPriorityObject priorityObject);
-    void addNoOrPriorityObject(INoOrPriorityObject noPriorityObject, float priority = 0.0f);
-    void removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject);
+    int getIndexByPriorityObject(INoOrPriorityObject* priorityObject);
+    int getIndexByNoOrPriorityObject(INoOrPriorityObject* priorityObject);
+    void addPriorityObject(INoOrPriorityObject* priorityObject, float priority = 0.0f);
+    void removePriorityObject(INoOrPriorityObject* priorityObject);
+    void addNoOrPriorityObject(INoOrPriorityObject* noPriorityObject, float priority = 0.0f);
+    void removeNoOrPriorityObject(INoOrPriorityObject* noPriorityObject);
     // 快速移除元素
 protected:
-	bool _effectiveRemove(INoOrPriorityObject item);
+	bool _effectiveRemove(INoOrPriorityObject* item);
     void _updateIndex(int index);
 };
 

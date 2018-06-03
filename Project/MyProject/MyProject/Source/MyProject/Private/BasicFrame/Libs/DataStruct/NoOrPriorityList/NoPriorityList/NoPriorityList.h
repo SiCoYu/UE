@@ -9,6 +9,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class INoOrPriorityObject;
+
 /**
  * @brief 优先级队列
  */
@@ -30,19 +32,19 @@ public:
     void clear();
     int count();
     INoOrPriorityObject get(int index);
-    bool contains(INoOrPriorityObject item);
+    bool contains(INoOrPriorityObject* item);
     void removeAt(int index);
 
-    int getIndexByNoPriorityObject(INoOrPriorityObject priorityObject);
-    int getIndexByNoOrPriorityObject(INoOrPriorityObject priorityObject);
-    void addNoPriorityObject(INoOrPriorityObject noPriorityObject);
-    void removeNoPriorityObject(INoOrPriorityObject noPriorityObject);
-    void addNoOrPriorityObject(INoOrPriorityObject noPriorityObject, float priority = 0.0f);
-    void removeNoOrPriorityObject(INoOrPriorityObject noPriorityObject);
+    int getIndexByNoPriorityObject(INoOrPriorityObject* priorityObject);
+    int getIndexByNoOrPriorityObject(INoOrPriorityObject* priorityObject);
+    void addNoPriorityObject(INoOrPriorityObject* noPriorityObject);
+    void removeNoPriorityObject(INoOrPriorityObject* noPriorityObject);
+    void addNoOrPriorityObject(INoOrPriorityObject* noPriorityObject, float priority = 0.0f);
+    void removeNoOrPriorityObject(INoOrPriorityObject* noPriorityObject);
 
 protected:
     // 快速移除元素
-    bool _effectiveRemove(INoOrPriorityObject item);
+    bool _effectiveRemove(INoOrPriorityObject* item);
     void _updateIndex(int idx);
 };
 
