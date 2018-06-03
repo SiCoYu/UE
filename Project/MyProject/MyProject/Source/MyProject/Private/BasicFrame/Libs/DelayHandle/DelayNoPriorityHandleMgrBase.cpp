@@ -1,14 +1,18 @@
 ﻿#include "MyProject.h"
 #include "NullDelayHandleItem.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "NoPriorityList.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 DelayNoPriorityHandleMgrBase::DelayNoPriorityHandleMgrBase()
 {
-	this->mDeferredAddQueue = new NoPriorityList();
-	this->mDeferredAddQueue.setIsSpeedUpFind(true);
-	this->mDeferredDelQueue = new NoPriorityList();
-	this->mDeferredDelQueue.setIsSpeedUpFind(true);
+	this->mDeferredAddQueue = MY_NEW NoPriorityList();
+	this->mDeferredAddQueue->setIsSpeedUpFind(true);
+	this->mDeferredDelQueue = MY_NEW NoPriorityList();
+	this->mDeferredDelQueue->setIsSpeedUpFind(true);
 }
 
 void DelayNoPriorityHandleMgrBase::init()

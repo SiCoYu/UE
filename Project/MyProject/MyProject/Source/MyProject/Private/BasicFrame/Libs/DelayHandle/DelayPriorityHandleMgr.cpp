@@ -1,18 +1,22 @@
 ﻿#include "MyProject.h"
 #include "DelayPriorityHandleMgr.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "NoPriorityList.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 DelayPriorityHandleMgr::DelayPriorityHandleMgr()
 {
-	this->mDeferredAddQueue = new NoPriorityList();
-	this->mDeferredAddQueue.setIsSpeedUpFind(true);
-	this->mDeferredDelQueue = new NoPriorityList();
-	this->mDeferredDelQueue.setIsSpeedUpFind(true);
+	this->mDeferredAddQueue = MY_NEW NoPriorityList();
+	this->mDeferredAddQueue->setIsSpeedUpFind(true);
+	this->mDeferredDelQueue = MY_NEW NoPriorityList();
+	this->mDeferredDelQueue->setIsSpeedUpFind(true);
 
-	this->mNoOrPriorityList = new PriorityList();
-	this->mNoOrPriorityList.setIsSpeedUpFind(true);
-	this->mNoOrPriorityList.setIsOpKeepSort(true);
+	this->mNoOrPriorityList = MY_NEW PriorityList();
+	this->mNoOrPriorityList->setIsSpeedUpFind(true);
+	this->mNoOrPriorityList->setIsOpKeepSort(true);
 }
 
 void DelayPriorityHandleMgr::init()
@@ -24,17 +28,20 @@ void DelayPriorityHandleMgr::dispose()
 {
 	if (nullptr != this->mDeferredAddQueue)
 	{
-		this->mDeferredAddQueue.clear();
+		this->mDeferredAddQueue->clear();
+		MY_DELETE this->mDeferredAddQueue;
 		this->mDeferredAddQueue = nullptr;
 	}
 	if (nullptr != this->mDeferredDelQueue)
 	{
 		this->mDeferredDelQueue.clear();
+		MY_DELETE this->mDeferredDelQueue;
 		this->mDeferredDelQueue = nullptr;
 	}
 	if (nullptr != this->mNoOrPriorityList)
 	{
 		this->mNoOrPriorityList.clear();
+		MY_DELETE this->mNoOrPriorityList;
 		this->mNoOrPriorityList = nullptr;
 	}
 

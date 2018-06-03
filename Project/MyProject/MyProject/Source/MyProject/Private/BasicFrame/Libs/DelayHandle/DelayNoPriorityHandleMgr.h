@@ -5,6 +5,9 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class INoOrPriorityObject;
+class ITickedObject;
+
 /**
  * @brief 延迟优先级处理管理器
  */

@@ -5,7 +5,7 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
-#include ""
+#include "EventDispatchDelegate.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -13,7 +13,7 @@ DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 {
 	this->mIsDispose = false;
 	this->mLoopDepth = MY_NEW LoopDepth();
-	this->mLoopDepth.setZeroHandle(nullptr, this->_processDelayObjects, 0);
+	this->mLoopDepth.setZeroHandle(MakeEventDispatchDelegate(this, this->_processDelayObjects));
 
 	if(MacroDef.DEBUG_SYS)
 	{
@@ -33,16 +33,19 @@ void DelayNoOrPriorityHandleMgrBase::dispose()
 	if (nullptr != this->mDeferredAddQueue)
 	{
 		this->mDeferredAddQueue.dispose();
+		MY_DELETE this->mDeferredAddQueue;
 		this->mDeferredAddQueue = nullptr;
 	}
 	if (nullptr != this->mDeferredDelQueue)
 	{
 		this->mDeferredDelQueue.dispose();
+		MY_DELETE this->mDeferredDelQueue;
 		this->mDeferredDelQueue = nullptr;
 	}
 	if (nullptr != this->mLoopDepth)
 	{
 		this->mLoopDepth.dispose();
+		MY_DELETE this->mLoopDepth;
 		this->mLoopDepth = nullptr;
 	}
 }
@@ -74,7 +77,7 @@ void DelayNoOrPriorityHandleMgrBase::_removeObject(IDelayHandleItem* delayObject
 {
 	if (delayObject)
 	{
-		if (this->mLoopDepth._isInDepth())
+		if (this->mLoopDepth->_isInDepth())
 		{
 			if (!this->mDeferredDelQueue.contains((INoOrPriorityObject*)delayObject))
 			{
@@ -83,7 +86,7 @@ void DelayNoOrPriorityHandleMgrBase::_removeObject(IDelayHandleItem* delayObject
 					this->mDeferredAddQueue.removeNoOrPriorityObject((INoOrPriorityObject*)delayObject);
 				}
 
-				delayObject.setClientDispose(true);
+				delayObject->setClientDispose(true);
 
 				this->mDeferredDelQueue.addNoOrPriorityObject((INoOrPriorityObject*)delayObject);
 			}
@@ -98,7 +101,7 @@ void DelayNoOrPriorityHandleMgrBase::_removeObject(IDelayHandleItem* delayObject
 // 只要调用会添加或者删除列表元素，就需要调用这个接口
 void DelayNoOrPriorityHandleMgrBase::_incDepth()
 {
-	this->mLoopDepth._incDepth();
+	this->mLoopDepth->_incDepth();
 }
 
 // 只要调用会添加或者删除列表元素，就需要调用这个接口
@@ -106,7 +109,7 @@ void DelayNoOrPriorityHandleMgrBase::_decDepth()
 {
 	if (nullptr != this->mLoopDepth)
 	{
-		this->mLoopDepth._decDepth();
+		this->mLoopDepth->_decDepth();
 	}
 	else
 	{
@@ -120,7 +123,7 @@ bool DelayNoOrPriorityHandleMgrBase::_isInDepth()
 
 	if (nullptr != this->mLoopDepth)
 	{
-		ret = this->mLoopDepth._isInDepth();
+		ret = this->mLoopDepth->_isInDepth();
 	}
 	else
 	{
@@ -130,13 +133,13 @@ bool DelayNoOrPriorityHandleMgrBase::_isInDepth()
 	return ret;
 }
 
-void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject dispObj, uint eventId)
+void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispObj, uint eventId)
 {
 	int idx = 0;
 	// len 是 Python 的关键字
 	int elemLen = 0;
 
-	if (!this->mLoopDepth._isInDepth())       // 只有全部退出循环后，才能处理添加删除
+	if (!this->mLoopDepth->_isInDepth())       // 只有全部退出循环后，才能处理添加删除
 	{
 		if (this->mDeferredAddQueue.count() > 0)
 		{
