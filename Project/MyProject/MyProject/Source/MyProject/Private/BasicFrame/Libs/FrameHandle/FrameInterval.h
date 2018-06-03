@@ -7,7 +7,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 帧间隔
  */
-public class FrameInterval
+class FrameInterval
 {
     protected int mInterval;   // 帧间隔
     protected int mTotalFrame;      // 总共帧
@@ -50,6 +50,6 @@ public class FrameInterval
 
         return ret;
     }
-}
+};
 
 MY_END_NAMESPACE

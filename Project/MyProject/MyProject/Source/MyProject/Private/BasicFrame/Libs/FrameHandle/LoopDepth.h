@@ -112,6 +112,6 @@ public class LoopDepth
     {
         return this.mLoopDepth > 0;
     }
-}
+};
 
 MY_END_NAMESPACE

@@ -7,7 +7,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 时间间隔
  */
-public class TimeInterval
+class TimeInterval
 {
     protected float mInterval;
     protected float mTotalTime;
@@ -91,6 +91,6 @@ public class TimeInterval
 
         return ret;
     }
-}
+};
 
 MY_END_NAMESPACE

@@ -69,6 +69,6 @@ public class NumInterval
 
         return ret;
     }
-}
+};
 
 MY_END_NAMESPACE

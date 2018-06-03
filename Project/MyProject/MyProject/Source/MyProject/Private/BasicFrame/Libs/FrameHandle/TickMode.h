@@ -4,11 +4,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public enum TickMode
+enum class TickMode
 {
-    eTM_Update,
-    eTM_FixedUpdate,
-    eTM_LateUpdate,
-}
+	eTM_Update,
+	eTM_FixedUpdate,
+	eTM_LateUpdate,
+};
 
 MY_END_NAMESPACE
