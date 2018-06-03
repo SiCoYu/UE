@@ -27,12 +27,12 @@ void LogSys::dispose()
 //{
 //}
 
-void LogSys::log(std::string message)
+void LogSys::log(std::string message, LogTypeId logTypeId)
 {
 
 }
 
-void LogSys::error(std::string message)
+void LogSys::error(std::string message, LogTypeId logTypeId)
 {
 
 }

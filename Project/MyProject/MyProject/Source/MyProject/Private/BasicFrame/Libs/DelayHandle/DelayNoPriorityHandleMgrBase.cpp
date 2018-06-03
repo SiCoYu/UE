@@ -4,8 +4,11 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "NoPriorityList.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(DelayNoPriorityHandleMgrBase, DelayNoOrPriorityHandleMgrBase)
 
 DelayNoPriorityHandleMgrBase::DelayNoPriorityHandleMgrBase()
 {

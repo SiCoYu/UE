@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "DelayNoOrPriorityHandleMgrBase.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -14,6 +16,8 @@ class IDelayHandleItem;
  */
 class DelayNoOrPriorityHandleMgr : public DelayNoOrPriorityHandleMgrBase
 {
+	M_DECLARE_CLASS(DelayNoOrPriorityHandleMgr, DelayNoOrPriorityHandleMgrBase)
+
 protected:
 	INoOrPriorityList mNoOrPriorityList;
 

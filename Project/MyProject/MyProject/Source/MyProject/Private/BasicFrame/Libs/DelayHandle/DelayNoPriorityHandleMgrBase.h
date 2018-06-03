@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "DelayNoOrPriorityHandleMgrBase.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -10,6 +12,8 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class DelayNoPriorityHandleMgrBase : public DelayNoOrPriorityHandleMgrBase
 {
+	M_DECLARE_CLASS(DelayNoPriorityHandleMgrBase, DelayNoOrPriorityHandleMgrBase)
+
 public:
 	DelayNoPriorityHandleMgrBase();
 

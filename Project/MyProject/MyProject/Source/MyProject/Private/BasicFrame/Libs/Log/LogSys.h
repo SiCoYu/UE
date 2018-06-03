@@ -4,6 +4,7 @@
 #include "UnrealString.h"		// FString
 #include <string>
 #include "GObject.h"
+#include "LogTypeId.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -19,8 +20,8 @@ public:
 	void dispose();
 
 	//void log(FString message);
-	void log(std::string message);
-	void error(std::string message);
+	void log(std::string message, LogTypeId logTypeId = LogTypeId.eLogCommon);
+	void error(std::string message, LogTypeId logTypeId = LogTypeId.eLogCommon);
 };
 
 MY_END_NAMESPACE

@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "DelayNoOrPriorityHandleMgr.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -13,6 +15,8 @@ class ITickedObject;
  */
 class DelayNoPriorityHandleMgr : public DelayNoOrPriorityHandleMgr
 {
+	M_DECLARE_CLASS(DelayNoPriorityHandleMgr, DelayNoOrPriorityHandleMgr)
+
 public:
 	DelayNoPriorityHandleMgr();
 	virtual void init() override;

@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -7,8 +10,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 默认的接口实现
  */
-public class NullDelayHandleItem : IDelayHandleItem
+class NullDelayHandleItem : public GObject, public IDelayHandleItem
 {
+	M_DECLARE_CLASS(NullDelayHandleItem, GObject)
+
 public:
 	void setClientDispose(bool isDispose);
 	bool isClientDispose();

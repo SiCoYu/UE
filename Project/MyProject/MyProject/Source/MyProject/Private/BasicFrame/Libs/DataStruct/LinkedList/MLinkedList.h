@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <string>
-#include "GContainerObject.h"
+#include "GObject.h"
 #include "MLinkedListNode.h"
 #include "PlatformDefine.h"
 
@@ -9,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class MLinkedListNode;
 
-class MLinkedList : public GContainerObject
+class MLinkedList : public GObject
 {
 protected:
 	MLinkedListNode* mHeadNode;

@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "GObject.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -8,12 +10,15 @@ MY_BEGIN_NAMESPACE(MyNS)
 class INoOrPriorityList;
 class LoopDepth;
 class IDispatchObject;
+class IDelayHandleItem;
 
 /**
  * @brief 当需要管理的对象可能在遍历中间添加的时候，需要这个管理器
  */
 class DelayNoOrPriorityHandleMgrBase : public GObject
 {
+	M_DECLARE_CLASS(DelayNoOrPriorityHandleMgrBase, GObject)
+
 protected:
 	INoOrPriorityList* mDeferredAddQueue;
 	INoOrPriorityList* mDeferredDelQueue;

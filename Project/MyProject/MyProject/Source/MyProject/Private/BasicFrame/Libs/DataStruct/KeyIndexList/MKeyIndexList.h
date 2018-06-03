@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -8,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  * @brief 通过 Key 索引的列表
  */
 template <class TKey, class TValue>
-class MKeyIndexList
+class MKeyIndexList : public GObject
 {
 protected:
 	MList<TValue> mList;              // 数据列表
