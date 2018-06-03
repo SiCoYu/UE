@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "MLinkedListNode.h"
+#include "MLinkedList.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -43,66 +44,66 @@ void MLinkedListNode::onClear()
 }
 
 // 这个接口尽量不要在接口内部调用，这个接口和逻辑关联可能更大一点，逻辑决定是否设置
-void MLinkedListNode::setLinkedList(MLinkedList list)
+void MLinkedListNode::setLinkedList(MLinkedList* list)
 {
 	this->mLinkedList = list;
 }
 
-MLinkedList MLinkedListNode::getLinkedList()
+MLinkedList* MLinkedListNode::getLinkedList()
 {
 	return this->mLinkedList;
 }
 
-void MLinkedListNode::setPreNode(MLinkedListNode node)
+void MLinkedListNode::setPreNode(MLinkedListNode* node)
 {
 	this->mPreNode = node;
 }
 
-MLinkedListNode MLinkedListNode::getPreNode()
+MLinkedListNode* MLinkedListNode::getPreNode()
 {
 	return this->mPreNode;
 }
 
-void MLinkedListNode::setNextNode(MLinkedListNode node)
+void MLinkedListNode::setNextNode(MLinkedListNode* node)
 {
 	this->mNextNode = node;
 }
 
-MLinkedListNode MLinkedListNode::getNextNode()
+MLinkedListNode* MLinkedListNode::getNextNode()
 {
 	return this->mNextNode;
 }
 
 // 如果是在头结点之前插入，List 中头结点就会仍然记录之前的头结点，会错误，这种情况需要逻辑避免，因为一个节点可能在几个列表中
-void MLinkedListNode::insertBefore(MLinkedListNode node)
+void MLinkedListNode::insertBefore(MLinkedListNode* node)
 {
 	if (nullptr != this->mPreNode)
 	{
-		this->mPreNode.setNextNode(node);
-		node.setPreNode(this->mPreNode);
+		this->mPreNode->setNextNode(node);
+		node->setPreNode(this->mPreNode);
 	}
 	else if (nullptr != this->mLinkedList)
 	{
 		this->mLinkedList.addHead(node);
 	}
 
-	node.setNextNode(this);
+	node->setNextNode(this);
 	this->mPreNode = node;
 }
 
-void MLinkedListNode::insertAfter(MLinkedListNode node)
+void MLinkedListNode::insertAfter(MLinkedListNode* node)
 {
 	if (nullptr != this->mNextNode)
 	{
-		this->mNextNode.setPreNode(node);
-		node.setNextNode(this->mNextNode);
+		this->mNextNode->setPreNode(node);
+		node->setNextNode(this->mNextNode);
 	}
 	else if (nullptr != this->mLinkedList)
 	{
 		this->mLinkedList.addTail(node);
 	}
 
-	node.setPreNode(this);
+	node->setPreNode(this);
 	this->mNextNode = node;
 }
 
@@ -141,14 +142,14 @@ void MLinkedListNode::addToList()
 // 获取当前节点到 Tail 数量
 int MLinkedListNode::toTailCount()
 {
-	MLinkedListNode nextNode = nullptr;
+	MLinkedListNode* nextNode = nullptr;
 	int count = 1;
 
 	nextNode = this->getNextNode();
 
 	while (nullptr != nextNode)
 	{
-		nextNode = nextNode.getNextNode();
+		nextNode = nextNode->getNextNode();
 		count += 1;
 	}
 
@@ -158,14 +159,14 @@ int MLinkedListNode::toTailCount()
 // 获取当前节点到 Head 数量
 int MLinkedListNode::toHeadCount()
 {
-	MLinkedListNode preNode = nullptr;
+	MLinkedListNode* preNode = nullptr;
 	int count = 1;
 
 	preNode = this->getPreNode();
 
 	while (nullptr != preNode)
 	{
-		preNode = preNode.getPreNode();
+		preNode = preNode->getPreNode();
 		count += 1;
 	}
 

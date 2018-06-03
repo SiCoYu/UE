@@ -51,7 +51,7 @@ public:
     void insert(int index, T item);
     bool contains(T item);
     //void sort(System.Comparison<T> comparer);
-    void merge(MList<T> appendList);
+    //void merge(MList<T> appendList);
 
     // 快速移除元素
 protected:
@@ -60,3 +60,5 @@ protected:
 };
 
 MY_END_NAMESPACE
+
+#include "MIndexList.inl"

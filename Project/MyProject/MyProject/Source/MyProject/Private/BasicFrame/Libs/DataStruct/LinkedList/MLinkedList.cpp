@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "MLinkedList.h"
+#include "MLinkedListNode.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -31,17 +32,17 @@ bool MLinkedList::isHeadExist()
 	return (nullptr != this->mHeadNode);
 }
 
-MLinkedListNode MLinkedList::getHead()
+MLinkedListNode* MLinkedList::getHead()
 {
 	return this->mHeadNode;
 }
 
-void MLinkedList::addHead(MLinkedListNode node)
+void MLinkedList::addHead(MLinkedListNode* node)
 {
 	if (nullptr != this->mHeadNode)
 	{
-		node.setNextNode(this->mHeadNode);
-		this->mHeadNode.setPreNode(node);
+		node->setNextNode(this->mHeadNode);
+		this->mHeadNode->setPreNode(node);
 		this->mHeadNode = node;
 	}
 	else
@@ -52,15 +53,15 @@ void MLinkedList::addHead(MLinkedListNode node)
 }
 
 // 直接重新设置
-void MLinkedList::setHead(MLinkedListNode node)
+void MLinkedList::setHead(MLinkedListNode* node)
 {
 	if (nullptr != this->mHeadNode)
 	{
-		node.setNextNode(this->mHeadNode.getNextNode());
+		node->setNextNode(this->mHeadNod->.getNextNode());
 
 		if (nullptr != this->mHeadNode.getNextNode())
 		{
-			this->mHeadNode.getNextNode().setPreNode(node);
+			this->mHeadNode->getNextNode()->setPreNode(node);
 		}
 
 		this->mHeadNode = node;
@@ -93,12 +94,12 @@ MLinkedListNode MLinkedList::getTail()
 	return this->mTailNode;
 }
 
-void MLinkedList::addTail(MLinkedListNode node)
+void MLinkedList::addTail(MLinkedListNode* node)
 {
 	if (nullptr != this->mTailNode)
 	{
-		node.setPreNode(this->mTailNode);
-		this->mTailNode.setNextNode(node);
+		node->setPreNode(this->mTailNode);
+		this->mTailNode->setNextNode(node);
 		this->mTailNode = node;
 	}
 	else
@@ -109,15 +110,15 @@ void MLinkedList::addTail(MLinkedListNode node)
 }
 
 // 直接重新设置
-void MLinkedList::setTail(MLinkedListNode node)
+void MLinkedList::setTail(MLinkedListNode* node)
 {
 	if (nullptr != this->mTailNode)
 	{
-		node.setPreNode(this->mTailNode.getPreNode());
+		node.setPreNode(this->mTailNode->getPreNode());
 
-		if (nullptr != this->mTailNode.getPreNode())
+		if (nullptr != this->mTailNode->getPreNode())
 		{
-			this->mHeadNode.getPreNode().setNextNode(node);
+			this->mHeadNode->getPreNode()->setNextNode(node);
 		}
 
 		this->mTailNode = node;
@@ -129,21 +130,21 @@ void MLinkedList::setTail(MLinkedListNode node)
 	}
 }
 
-void MLinkedList::insertAfterNode(MLinkedListNode preNode, MLinkedListNode node)
+void MLinkedList::insertAfterNode(MLinkedListNode* preNode, MLinkedListNode* node)
 {
 	if (nullptr != node)
 	{
 		if (nullptr != preNode)
 		{
-			var nextNode = preNode.getNextNode();
+			var nextNode = preNode->getNextNode();
 
-			node.setPreNode(preNode);
-			preNode.setNextNode(node);
+			node->setPreNode(preNode);
+			preNode->setNextNode(node);
 
 			if (nullptr != nextNode)
 			{
-				nextNode.setPreNode(node);
-				node.setNextNode(nextNode);
+				nextNode->setPreNode(node);
+				node->setNextNode(nextNode);
 			}
 		}
 		else
@@ -153,21 +154,21 @@ void MLinkedList::insertAfterNode(MLinkedListNode preNode, MLinkedListNode node)
 	}
 }
 
-void MLinkedList::insertBeforeNode(MLinkedListNode nextNode, MLinkedListNode node)
+void MLinkedList::insertBeforeNode(MLinkedListNode* nextNode, MLinkedListNode* node)
 {
 	if (nullptr != node)
 	{
 		if (nullptr != nextNode)
 		{
-			var preNode = node.getPreNode();
+			var preNode = node->getPreNode();
 
-			nextNode.setPreNode(node);
-			node.setNextNode(nextNode);
+			nextNode->setPreNode(node);
+			node->setNextNode(nextNode);
 
 			if (nullptr != preNode)
 			{
-				node.setPreNode(preNode);
-				preNode.setNextNode(node);
+				node->setPreNode(preNode);
+				preNode->setNextNode(node);
 			}
 		}
 		else
@@ -177,21 +178,21 @@ void MLinkedList::insertBeforeNode(MLinkedListNode nextNode, MLinkedListNode nod
 	}
 }
 
-void MLinkedList::add(MLinkedListNode node)
+void MLinkedList::add(MLinkedListNode* node)
 {
 	this->addTail(node);
 }
 
 int MLinkedList::count()
 {
-	MLinkedListNode tmpNode = nullptr;
+	MLinkedListNode* tmpNode = nullptr;
 	tmpNode = this->mHeadNode;
 	int count = 0;
 
 	while (nullptr != tmpNode)
 	{
 		count += 1;
-		tmpNode = tmpNode.getNextNode();
+		tmpNode = tmpNode->getNextNode();
 	}
 
 	return count;
@@ -208,10 +209,10 @@ void MLinkedList::reverse()
 		}
 		else
 		{
-			MLinkedListNode curNode = nullptr;
-			MLinkedListNode nextNode = nullptr;
+			MLinkedListNode* curNode = nullptr;
+			MLinkedListNode* nextNode = nullptr;
 
-			nextNode = this->mHeadNode.getNextNode();
+			nextNode = this->mHeadNode->getNextNode();
 
 			while (nullptr != nextNode)
 			{
@@ -225,24 +226,24 @@ void MLinkedList::reverse()
 	}
 }
 
-void MLinkedList::remove(MLinkedListNode node)
+void MLinkedList::remove(MLinkedListNode* node)
 {
 	if (nullptr != node.getPreNode())
 	{
-		node.getPreNode().setNextNode(node.getNextNode());
+		node->getPreNode()->setNextNode(node->getNextNode());
 	}
 	else
 	{
-		this->mHeadNode = node.getNextNode();
+		this->mHeadNode = node->getNextNode();
 	}
 
-	if (nullptr != node.getNextNode())
+	if (nullptr != node->getNextNode())
 	{
-		node.getNextNode().setPreNode(node.getPreNode());
+		node->getNextNode()->setPreNode(node->getPreNode());
 	}
 	else
 	{
-		this->mTailNode = node.getPreNode();
+		this->mTailNode = node->getPreNode();
 	}
 
 	node.onClear();
@@ -266,7 +267,7 @@ string MLinkedList::getStr()
 			str += "/n";
 		}
 
-		tmpNode = tmpNode.getNextNode();
+		tmpNode = tmpNode->getNextNode();
 		str += tmpNode.getStr();
 	}
 

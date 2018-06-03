@@ -6,11 +6,11 @@ MY_BEGIN_NAMESPACE(MyNS)
 template <class TKey, class TValue>
 MKeyIndexList::MKeyIndexList()
 {
-	this->mList = new MList<TValue>();
+	//this->mList = new MList<TValue>();
 	this->mList.setIsSpeedUpFind(true);
 	this->mList.setIsOpKeepSort(true);
 
-	this->mIndexDic = new MDictionary<TKey, TValue>();
+	//this->mIndexDic = new MDictionary<TKey, TValue>();
 }
 
 template <class TKey, class TValue>

@@ -6,11 +6,13 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class MLinkedListNode
+
 class MLinkedList : public GContainerObject
 {
 protected:
-	MLinkedListNode mHeadNode;
-    MLinkedListNode mTailNode;
+	MLinkedListNode* mHeadNode;
+    MLinkedListNode* mTailNode;
 
 public:
 	MLinkedList();
@@ -19,25 +21,25 @@ public:
     void dispose();
     void clear();
     bool isHeadExist();
-    MLinkedListNode getHead();
-    void addHead(MLinkedListNode node);
+    MLinkedListNode* getHead();
+    void addHead(MLinkedListNode* node);
 
     // 直接重新设置
-    void setHead(MLinkedListNode node);
+    void setHead(MLinkedListNode* node);
     bool isTailExist();
     bool isTailExistAndNoEqualHead();
     bool isEmpty();
     MLinkedListNode getTail();
 
-    void addTail(MLinkedListNode node);
+    void addTail(MLinkedListNode* node);
     // 直接重新设置
-    void setTail(MLinkedListNode node);
-    void insertAfterNode(MLinkedListNode preNode, MLinkedListNode node);
-    void insertBeforeNode(MLinkedListNode nextNode, MLinkedListNode node);
-    void add(MLinkedListNode node);
+    void setTail(MLinkedListNode* node);
+    void insertAfterNode(MLinkedListNode* preNode, MLinkedListNode* node);
+    void insertBeforeNode(MLinkedListNode* nextNode, MLinkedListNode* node);
+    void add(MLinkedListNode* node);
     int count();
     void reverse();
-    void remove(MLinkedListNode node);
+    void remove(MLinkedListNode* node);
     string getStr();
 };
 
