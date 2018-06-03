@@ -3,7 +3,7 @@
 
 #include <string>
 #include "MyProject.h"
-#include "Error.h"
+#include "MDebug.h"
 #include "Endian.h"
 #include "MDynBuffer.h"
 #include "MEncode.h"
