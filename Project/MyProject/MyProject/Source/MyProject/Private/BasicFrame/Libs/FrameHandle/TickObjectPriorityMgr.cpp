@@ -60,17 +60,17 @@ void TickObjectPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 {
 	int idx = 0;
 	int count = this->mNoOrPriorityList.count();
-	ITickedObject tickObject = null;
+	ITickedObject* tickObject = nullptr;
 
 	while (idx < count)
 	{
-		tickObject = this->mNoOrPriorityList.get(idx) as ITickedObject;
+		tickObject = (ITickedObject*)this->mNoOrPriorityList.get(idx);
 
-		if (null != (tickObject as IDelayHandleItem))
+		if (nullptr != (IDelayHandleItem*)tickObject)
 		{
-			if (!(tickObject as IDelayHandleItem).isClientDispose())
+			if (!(IDelayHandleItem*)tickObject)->isClientDispose())
 			{
-				tickObject.onTick(delta, tickMode);
+				tickObject->onTick(delta, tickMode);
 			}
 		}
 		else

@@ -18,7 +18,7 @@ public:
 	void dispose();
 
 	void ProcessNextFrame();
-	void Advance(float delta);
+	void advance(float delta);
 };
 
 MY_END_NAMESPACE

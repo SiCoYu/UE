@@ -36,7 +36,7 @@ public:
 	void addTimerEventHandle(EventDispatchDelegate handle);
 	void removeTimerEventHandle(EventDispatchDelegate handle);
 
-	virtual void OnFrameTimer();
+	virtual void onFrameTimer();
 	virtual void reset();
 	void setClientDispose();
 	bool isClientDispose();

@@ -23,17 +23,17 @@ void ProcessSys::dispose()
 void ProcessSys::ProcessNextFrame()
 {
 	GSystemTimeData->nextFrame();
-	this->Advance(GSystemTimeData->getDeltaSec());
+	this->advance(GSystemTimeData->getDeltaSec());
 }
 
-void ProcessSys::Advance(float delta)
+void ProcessSys::advance(float delta)
 {
 	//Ctx.mInstance.mFrameCollideMgr.clear();
 	GSystemFrameData->nextFrame(delta);
-	//Ctx.mInstance.mLuaSystem.advance(delta);        // lua 脚本 Advance
-	GTickMgr->Advance(delta);            // 心跳
-	GTimerMgr->Advance(delta);           // 定时器
-	GFrameTimerMgr->Advance(delta);      // 帧定时器
+	//Ctx.mInstance.mLuaSystem.advance(delta);        // lua 脚本 advance
+	GTickMgr->advance(delta);            // 心跳
+	GTimerMgr->advance(delta);           // 定时器
+	GFrameTimerMgr->advance(delta);      // 帧定时器
 }
 
 MY_END_NAMESPACE

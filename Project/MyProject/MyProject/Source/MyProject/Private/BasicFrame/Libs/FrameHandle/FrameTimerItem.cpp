@@ -48,7 +48,7 @@ void FrameTimerItem::removeTimerEventHandle(EventDispatchDelegate handle)
 	this->mTimerDispatch->removeEventHandle(handle);
 }
 
-void FrameTimerItem::OnFrameTimer()
+void FrameTimerItem::onFrameTimer()
 {
 	if (this->mIsDisposed)
 	{

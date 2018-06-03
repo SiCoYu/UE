@@ -1,9 +1,11 @@
 ﻿#ifndef __TickMgr_H
 #define __TickMgr_H
 
-#include "DelayHandleMgrBase.h"
+#include "TickObjectPriorityMgr.h"
 #include "MList.h"
-#include "BaseClassDef.h"
+#include "TickMode.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -14,9 +16,9 @@ class ITickedObject;
 /**
 * @brief 心跳管理器
 */
-class TickMgr : public DelayHandleMgrBase
+class TickMgr : public TickObjectPriorityMgr
 {
-	M_DECLARE_SUPER_KW(DelayHandleMgrBase)
+	M_DECLARE_CLASS(TickMgr, TickObjectPriorityMgr)
 
 protected:
 	MList<TickProcessObject*> mTickList;
@@ -28,11 +30,14 @@ public:
 public:
 	virtual void init();
 	virtual void dispose();
-
 	void addTick(ITickedObject* tickObj, float priority = 0.0f);
-	virtual void addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
-	virtual void delObject(IDelayHandleItem* delayObject) override;
-	void Advance(float delta);
+	void removeTick(ITickedObject* tickObj);
+	void advance(float delta, TickMode tickMode);
+
+protected:
+	virtual void _addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
+	virtual void _removeObject(IDelayHandleItem* delayObject) override;
+
 };
 
 MY_END_NAMESPACE

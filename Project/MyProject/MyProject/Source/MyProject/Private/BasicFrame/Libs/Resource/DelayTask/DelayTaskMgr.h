@@ -1,8 +1,9 @@
 #pragma once
 
+#include <list>
 #include "ITickedObject.h"
 #include "IDelayTask.h"
-#include <list>
+#include "TickMode.h"
 #include "GObject.h"
 #include "PlatformDefine.h"
 
@@ -27,7 +28,7 @@ public:
 	void init();
 	void dispose();
 
-	virtual void onTick(float delta) override;
+	virtual void onTick(float delta, TickMode tickMode) override;
 	void addTask(IDelayTask* task);
 	void execTask();
 };

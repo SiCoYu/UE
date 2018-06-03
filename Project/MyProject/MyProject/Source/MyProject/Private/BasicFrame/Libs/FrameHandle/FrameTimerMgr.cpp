@@ -2,8 +2,11 @@
 #include "FrameTimerMgr.h"
 #include "IDelayHandleItem.h"
 #include "FrameTimerItem.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(FrameTimerMgr, DelayPriorityHandleMgrBase)
 
 FrameTimerMgr::FrameTimerMgr()
 {
@@ -25,16 +28,16 @@ void FrameTimerMgr::dispose()
 	Super::dispose();
 }
 
-void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
+void FrameTimerMgr::_addObject(IDelayHandleItem* delayObject, float priority)
 {
 	// 检查当前是否已经在队列中
 	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
 
 	if (!this->mTimerList.contains(frameTimerItem))
 	{
-		if (isInDepth())
+		if (this->_isInDepth())
 		{
-			DelayHandleMgrBase::addObject(delayObject, priority);
+			Super::_addObject(delayObject, priority);
 		}
 		else
 		{
@@ -43,7 +46,7 @@ void FrameTimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
 	}
 }
 
-void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
+void FrameTimerMgr::_removeObject(IDelayHandleItem* delayObject)
 {
 	// 检查当前是否在队列中
 	FrameTimerItem* frameTimerItem = (FrameTimerItem*)delayObject;
@@ -52,9 +55,9 @@ void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
 	{
 		((FrameTimerItem*)delayObject)->mIsDisposed = true;
 
-		if (isInDepth())
+		if (this->_isInDepth())
 		{
-			DelayHandleMgrBase::addObject(delayObject);
+			Super::_addObject(delayObject);
 		}
 		else
 		{
@@ -70,23 +73,33 @@ void FrameTimerMgr::delObject(IDelayHandleItem* delayObject)
 	}
 }
 
-void FrameTimerMgr::Advance(float delta)
+void FrameTimerMgr::addFrameTimer(FrameTimerItem* timer, float priority)
 {
-	this->incDepth();
+	this._addObject(timer, priority);
+}
+
+void FrameTimerMgr::removeFrameTimer(FrameTimerItem* timer)
+{
+	this._removeObject(timer);
+}
+
+void FrameTimerMgr::advance(float delta)
+{
+	this->_incDepth();
 
 	for(FrameTimerItem* timerItem : this->mTimerList.getList())
 	{
 		if (!timerItem->isClientDispose())
 		{
-			timerItem->OnFrameTimer();
+			timerItem->onFrameTimer();
 		}
 		if (timerItem->mIsDisposed)
 		{
-			delObject(timerItem);
+			this->_removeObject(timerItem);
 		}
 	}
 
-	this->decDepth();
+	this->_decDepth();
 }
 
 MY_END_NAMESPACE

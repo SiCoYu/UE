@@ -2,9 +2,16 @@
 #include "TickMgr.h"
 #include "ITickedObject.h"
 #include "TickProcessObject.h"
+#include "MClassFactory.h"
 #include "IDelayHandleItem.h"
+#include "MacroDef.h"
+#include "Ctx.h"
+#include "LogSys.h"
+#include "LogTypeId.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(TickMgr, TickObjectPriorityMgr)
 
 TickMgr::TickMgr()
 {
@@ -28,83 +35,17 @@ void TickMgr::dispose()
 
 void TickMgr::addTick(ITickedObject* tickObj, float priority)
 {
-	this->addObject((IDelayHandleItem*)tickObj, priority);
+	this->_addObject((IDelayHandleItem*)tickObj, priority);
 }
 
-void TickMgr::addObject(IDelayHandleItem* delayObject, float priority)
+void TickMgr::removeTick(ITickedObject* tickObj)
 {
-	if (this->isInDepth())
-	{
-		DelayHandleMgrBase::addObject(delayObject, priority);
-	}
-	else
-	{
-		int position = -1;
-
-		for (int i = 0; i < mTickList.count(); i++)
-		{
-			if (this->mTickList[i] == nullptr)
-				continue;
-
-			if (this->mTickList[i]->mTickObject == (ITickedObject*)delayObject)
-			{
-				return;
-			}
-
-			if (this->mTickList[i]->mPriority < priority)
-			{
-				position = i;
-				break;
-			}
-		}
-
-		TickProcessObject* processObject = new TickProcessObject();
-		processObject->mTickObject = (ITickedObject*)delayObject;
-		processObject->mPriority = priority;
-
-		if (position < 0 || position >= mTickList.count())
-		{
-			this->mTickList.add(processObject);
-		}
-		else
-		{
-			this->mTickList.insert(position, processObject);
-		}
-	}
+	this._removeObject((IDelayHandleItem*)tickObj);
 }
 
-void TickMgr::delObject(IDelayHandleItem* delayObject)
+void TickMgr::advance(float delta, TickMode tickMode)
 {
-	if (this->isInDepth())
-	{
-		DelayHandleMgrBase::delObject(delayObject);
-	}
-	else
-	{
-		for(TickProcessObject* item : this->mTickList.getList())
-		{
-			if (item->mTickObject == (ITickedObject*)delayObject)
-			{
-				this->mTickList.remove(item);
-				break;
-			}
-		}
-	}
-}
-
-void TickMgr::Advance(float delta)
-{
-	this->incDepth();
-
-	for(TickProcessObject* tk : this->mTickList.getList())
-	{
-		if (!((IDelayHandleItem*)(tk->mTickObject))->isClientDispose())
-		{
-			((ITickedObject*)(tk->mTickObject))->onTick(delta);
-		}
-	}
-
-	this->decDepth();
+	base.advance(delta, tickMode);
 }
 
 MY_END_NAMESPACE
