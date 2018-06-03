@@ -4,7 +4,7 @@
 #include "UtilStr.h"
 #include "MByteBuffer.h"
 #include "AddOnceEventDispatch.h"
-#include "CmdDispatchInfo.h"
+#include "NetCmdDispatchInfo.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "MClassFactory.h"
@@ -59,7 +59,7 @@ void NetCmdDispatchHandle::removeParamHandle(int paramId, EventDispatchDelegate 
 	}
 }
 
-void NetCmdDispatchHandle::handleMsg(CmdDispatchInfo* cmd)
+void NetCmdDispatchHandle::handleMsg(NetCmdDispatchInfo* cmd)
 {
 	if (this->mId2HandleDic.containsKey(cmd->byParam))
 	{

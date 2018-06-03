@@ -9,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class NetModuleDispatchHandle;
 class MByteBuffer;
-class CmdDispatchInfo;
+class NetCmdDispatchInfo;
 
 class NetCmdNotify : public GObject
 {
@@ -19,7 +19,7 @@ protected:
 
 	MList<NetModuleDispatchHandle*> mNetDispatchList;
     bool mIsStopNetHandle;       // 是否停止网络消息处理
-	CmdDispatchInfo* mCmdDispInfo;
+	NetCmdDispatchInfo* mCmdDispInfo;
 
 public:
 	NetCmdNotify();

@@ -5,7 +5,7 @@
 #include "UtilStr.h"
 #include "NetCmdDispatchHandle.h"
 #include "AddOnceEventDispatch.h"
-#include "CmdDispatchInfo.h"
+#include "NetCmdDispatchInfo.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "MClassFactory.h"
@@ -56,7 +56,7 @@ void NetModuleDispatchHandle::removeCmdHandle(int cmdId, EventDispatchDelegate h
 	}
 }
 
-void NetModuleDispatchHandle::handleMsg(CmdDispatchInfo* cmdDispInfo)
+void NetModuleDispatchHandle::handleMsg(NetCmdDispatchInfo* cmdDispInfo)
 {
 	if (this->mId2DispatchDic.containsKey(cmdDispInfo->byCmd))
     {

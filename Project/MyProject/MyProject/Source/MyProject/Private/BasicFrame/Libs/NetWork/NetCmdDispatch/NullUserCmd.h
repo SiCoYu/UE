@@ -1,5 +1,5 @@
-#ifndef __stNullUserCmd_H
-#define __stNullUserCmd_H
+#ifndef __NullUserCmd_H
+#define __NullUserCmd_H
 
 #include "Platform.h"		// int8
 #include "PlatformDefine.h"

@@ -3,7 +3,7 @@
 #include "Prequisites.h"
 #include "UtilStr.h"
 #include "NetModuleDispatchHandle.h"
-#include "CmdDispatchInfo.h"
+#include "NetCmdDispatchInfo.h"
 #include "SafePointer.h"
 #include "MByteBuffer.h"
 
@@ -14,7 +14,7 @@ NetCmdNotify::NetCmdNotify()
 	  mHandleMsgCnt(0),
 	  mIsStopNetHandle(false)
 {
-	this->mCmdDispInfo = SAFE_NEW CmdDispatchInfo();
+	this->mCmdDispInfo = SAFE_NEW NetCmdDispatchInfo();
 }
 
 NetCmdNotify::~NetCmdNotify()

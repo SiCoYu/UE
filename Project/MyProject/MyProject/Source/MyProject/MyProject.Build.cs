@@ -101,7 +101,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/FrameWork",
                 "MyProject/Private/BasicFrame/Libs/FrameWork/Layer",
                 "MyProject/Private/BasicFrame/Libs/NetWork/Socket",
-                "MyProject/Private/BasicFrame/Libs/NetWork/CmdDispatch",
+                "MyProject/Private/BasicFrame/Libs/NetWork/NetCmdDispatch",
                 "MyProject/Private/BasicFrame/Libs/NetWork/Web",
 
                 "MyProject/Private/BasicFrame/Libs/Ui/Base",

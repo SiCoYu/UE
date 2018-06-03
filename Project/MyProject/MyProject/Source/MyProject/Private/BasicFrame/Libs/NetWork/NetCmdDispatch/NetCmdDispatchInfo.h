@@ -8,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 
-class CmdDispatchInfo : public IDispatchObject
+class NetCmdDispatchInfo : public IDispatchObject
 {
 public:
 	MByteBuffer* bu;

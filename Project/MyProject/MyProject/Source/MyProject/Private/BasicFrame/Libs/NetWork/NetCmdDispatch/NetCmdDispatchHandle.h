@@ -12,7 +12,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 class AddOnceEventDispatch;
-class CmdDispatchInfo;
+class NetCmdDispatchInfo;
 
 class NetCmdDispatchHandle : public GObject
 {
@@ -31,7 +31,7 @@ public:
 	void addParamHandle(int paramId, EventDispatchDelegate handle);
 	void removeParamHandle(int paramId, EventDispatchDelegate handle);
 
-	virtual void handleMsg(CmdDispatchInfo* cmd);
+	virtual void handleMsg(NetCmdDispatchInfo* cmd);
 };
 
 MY_END_NAMESPACE
