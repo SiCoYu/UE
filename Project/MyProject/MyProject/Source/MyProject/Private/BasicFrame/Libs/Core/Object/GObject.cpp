@@ -3,6 +3,7 @@
 #include "TypeDef.h"
 #include "MyMemoryAlloc.h"
 #include "MClassFactory.h"
+#include "MDebug.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -17,7 +18,7 @@ bool GObject::mIsInCreate = false;
 
 GObject::~GObject()
 {
-	my_assert(0 == this->mRefCount);
+	MY_ASSERT(0 == this->mRefCount);
 }
 
 GObject::GObject() :

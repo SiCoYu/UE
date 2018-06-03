@@ -4,6 +4,7 @@
 #include "MClassInfo.h"
 #include "MyMemoryAlloc.h"
 #include "TypeDef.h"
+#include "MDebug.h"
 
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
@@ -18,7 +19,7 @@ MClassFactory* MClassFactory::Instance()
     if (0 == MClassFactory::msSingleton)
     {
 		MClassFactory::msSingleton = MY_NEW MClassFactory;
-        my_assert(0 != MClassFactory::msSingleton);
+        MY_ASSERT(0 != MClassFactory::msSingleton);
     }
 
     return MClassFactory::msSingleton;
@@ -46,7 +47,7 @@ MClassFactory::~MClassFactory()
 
 void MClassFactory::Register(const MClassInfo* classInfo, const std::string& className)
 {
-    my_assert(0 != classInfo);
+    MY_ASSERT(0 != classInfo);
 
     if (this->ClassExists(className))
     {
@@ -58,21 +59,21 @@ void MClassFactory::Register(const MClassInfo* classInfo, const std::string& cla
 
 bool MClassFactory::ClassExists(const std::string& className) const
 {
-	my_assert(className.length() > 0);
+	MY_ASSERT(className.length() > 0);
     return this->mNameTable.find(className) != this->mNameTable.end();
 }
 
 const MClassInfo* MClassFactory::GetMyClassInfo(const std::string& className) const
 {
-    my_assert(className.length() > 0);
-	my_assert(this->ClassExists(className));
+    MY_ASSERT(className.length() > 0);
+	MY_ASSERT(this->ClassExists(className));
     //return this->mNameTable[className];
 	return this->mNameTable.find(className)->second;
 }
 
 //GObject* MClassFactory::Create(const std::string& className) const
 //{
-//	my_assert(className.length() > 0);
+//	MY_ASSERT(className.length() > 0);
 //    
 //    if (!this->ClassExists(className))
 //    {
@@ -81,7 +82,7 @@ const MClassInfo* MClassFactory::GetMyClassInfo(const std::string& className) co
 //	//const MClassInfo* classInfo = this->mNameTable[className];
 //    const MClassInfo* classInfo = this->mNameTable.find(className)->second;
 //
-//    my_assert(0 != classInfo);
+//    MY_ASSERT(0 != classInfo);
 //	GObject* newObject = classInfo->Create();
 //    return newObject;
 //}

@@ -2,6 +2,7 @@
 #include "MClassInfo.h"
 #include "GObject.h"
 #include "TypeDef.h"
+#include "MDebug.h"
 #include "MClassFactory.h"
 #include <stdlib.h>
 #include "PlatformDefine.h"
@@ -11,8 +12,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 //void MClassInfo::Construct(const char* className, Creator creatorFunc, const MClassInfo* parentClass, SizeT instSize)
 void MClassInfo::Construct(const char* className, const MClassInfo* parentClass, SizeT instSize)
 {
-	my_assert(0 != className);
-	my_assert(parentClass != this);
+	MY_ASSERT(0 != className);
+	MY_ASSERT(parentClass != this);
 
 	this->mParent = parentClass;
 	//this->mCreator = creatorFunc;
@@ -29,7 +30,7 @@ void MClassInfo::Construct(const char* className, const MClassInfo* parentClass,
 		else
 		{
 			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetMyClassInfo(this->mName);
-			my_assert(0 != checkClassInfo);
+			MY_ASSERT(0 != checkClassInfo);
 			if (checkClassInfo != this)
 			{
 				

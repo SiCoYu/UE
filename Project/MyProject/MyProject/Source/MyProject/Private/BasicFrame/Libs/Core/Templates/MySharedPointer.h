@@ -9,6 +9,7 @@
 
 #include "MyPtrRefInfo.h"
 #include "TypeDef.h"
+#include "MDebug.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
@@ -147,13 +148,13 @@ public:
 
 	inline T& operator*() const 
 	{ 
-		my_assert(this->mRefPtr);
+		MY_ASSERT(this->mRefPtr);
 		return *this->mRefPtr;
 	}
 
 	inline T* operator->() const 
 	{ 
-		my_assert(this->mRefPtr);
+		MY_ASSERT(this->mRefPtr);
 		return this->mRefPtr;
 	}
 
@@ -164,26 +165,26 @@ public:
 
 	void bind(T* rep) 
 	{
-		my_assert(!this->mRefPtr && !this->mRefInfo);
+		MY_ASSERT(!this->mRefPtr && !this->mRefInfo);
 		this->mRefInfo = MY_NEW SharedPtrInfo;
 		this->mRefPtr = rep;
 	}
 
 	inline bool unique() const 
 	{ 
-		my_assert(this->mRefInfo && this->mRefInfo->mRefCount.get());
+		MY_ASSERT(this->mRefInfo && this->mRefInfo->mRefCount.get());
 		return this->mRefInfo->mRefCount.get() == 1;
 	}
 
 	unsigned int getRefCount() const
 	{ 
-		my_assert(this->mRefInfo && this->mRefInfo->mRefCount.GetValue());
+		MY_ASSERT(this->mRefInfo && this->mRefInfo->mRefCount.GetValue());
 		return this->mRefInfo->mRefCount.GetValue();
 	}
 
 	void setUseCount(unsigned value)
 	{ 
-		my_assert(this->mRefInfo);
+		MY_ASSERT(this->mRefInfo);
 		this->mRefInfo->mRefCount.GetValue() = value;
 	}
 
@@ -228,7 +229,7 @@ protected:
 	{
 		if (this->mRefPtr)
 		{
-			my_assert(this->mRefInfo);
+			MY_ASSERT(this->mRefInfo);
 
 			if (this->mRefInfo->mRefCount.Decrement() == 0)
 			{
@@ -242,7 +243,7 @@ protected:
 
 	inline void destroy(void)
 	{
-		my_assert(this->mRefPtr && this->mRefInfo);
+		MY_ASSERT(this->mRefPtr && this->mRefInfo);
 		MY_DELETE this->mRefPtr;
 		MY_DELETE this->mRefInfo;
 	}

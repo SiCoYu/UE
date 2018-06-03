@@ -8,6 +8,7 @@
 
 #include "MyPtrRefInfo.h"
 #include "TypeDef.h"
+#include "MDebug.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -135,13 +136,13 @@ public:
 
 	inline T& operator*() const 
 	{ 
-		my_assert(this->mRefPtr);
+		MY_ASSERT(this->mRefPtr);
 		return *this->mRefPtr;
 	}
 
 	inline T* operator->() const 
 	{ 
-		my_assert(this->mRefPtr);
+		MY_ASSERT(this->mRefPtr);
 		return this->mRefPtr;
 	}
 
@@ -152,24 +153,24 @@ public:
 
 	void bind(T* rep) 
 	{
-		my_assert(!this->mRefPtr && !this->mRefInfo);
+		MY_ASSERT(!this->mRefPtr && !this->mRefInfo);
 		this->mRefInfo = MY_NEW SharedPtrInfo;
 		this->mRefPtr = rep;
 	}
 
 	inline bool unique() const 
 	{ 
-		my_assert(this->mRefInfo && this->mRefInfo->mWeakRefCount.get()); return this->mRefInfo->mWeakRefCount.get() == 1;
+		MY_ASSERT(this->mRefInfo && this->mRefInfo->mWeakRefCount.get()); return this->mRefInfo->mWeakRefCount.get() == 1;
 	}
 
 	unsigned int getRefCount() const
 	{ 
-		my_assert(this->mRefInfo && this->mRefInfo->mWeakRefCount.GetValue()); return this->mRefInfo->mWeakRefCount.GetValue();
+		MY_ASSERT(this->mRefInfo && this->mRefInfo->mWeakRefCount.GetValue()); return this->mRefInfo->mWeakRefCount.GetValue();
 	}
 
 	void setUseCount(unsigned value)
 	{ 
-		my_assert(this->mRefInfo); this->mRefInfo->mWeakRefCount.GetValue() = value;
+		MY_ASSERT(this->mRefInfo); this->mRefInfo->mWeakRefCount.GetValue() = value;
 	}
 
 	T* getPointer() const 
@@ -213,7 +214,7 @@ protected:
 	{
 		if (this->mRefPtr)
 		{
-			my_assert(mRefInfo);
+			MY_ASSERT(mRefInfo);
 
 			if (this->mRefInfo->mWeakRefCount.Decrement() == 0)
 			{
@@ -227,7 +228,7 @@ protected:
 
 	inline void destroy(void)
 	{
-		my_assert(this->mRefPtr && this->mRefInfo);
+		MY_ASSERT(this->mRefPtr && this->mRefInfo);
 		MY_DELETE this->mRefInfo;
 	}
 
