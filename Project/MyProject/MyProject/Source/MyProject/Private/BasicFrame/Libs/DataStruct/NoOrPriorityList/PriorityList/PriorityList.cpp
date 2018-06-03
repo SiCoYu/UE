@@ -1,5 +1,9 @@
 ﻿#include "MyProject.h"
 #include "PriorityList.h"
+#include "MacroDef.h"
+#include "Ctx.h"
+#include "LogSys.h"
+#include "LogTypeId.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -125,7 +129,7 @@ bool PriorityList::contains(INoOrPriorityObject item)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("PriorityList::Contains, failed", LogTypeId.eLogPriorityListCheck);
+			GLogSys->log("PriorityList::Contains, failed", LogTypeId::eLogPriorityListCheck);
 		}
 	}
 
@@ -263,7 +267,7 @@ void PriorityList::addPriorityObject(INoOrPriorityObject* priorityObject, float 
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("PriorityList::addPriorityObject, failed", LogTypeId.eLogPriorityListCheck);
+			GLogSys->log("PriorityList::addPriorityObject, failed", LogTypeId::eLogPriorityListCheck);
 		}
 	}
 }

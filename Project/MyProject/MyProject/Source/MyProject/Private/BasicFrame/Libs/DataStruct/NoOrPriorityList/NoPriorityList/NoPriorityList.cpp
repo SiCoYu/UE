@@ -1,5 +1,9 @@
 ﻿#include "MyProject.h"
 #include "NoPriorityList.h"
+#include "MacroDef.h"
+#include "Ctx.h"
+#include "LogSys.h"
+#include "LogTypeId.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -164,7 +168,7 @@ void NoPriorityList::addNoPriorityObject(INoOrPriorityObject* noPriorityObject)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("NoPriorityList::addNoPriorityObject, failed", LogTypeId.eLogNoPriorityListCheck);
+			GLogSys->log("NoPriorityList::addNoPriorityObject, failed", LogTypeId::eLogNoPriorityListCheck);
 		}
 	}
 }
@@ -194,7 +198,7 @@ void NoPriorityList::removeNoPriorityObject(INoOrPriorityObject* noPriorityObjec
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("NoPriorityList::addNoPriorityObject, failed", LogTypeId.eLogNoPriorityListCheck);
+			GLogSys->log("NoPriorityList::addNoPriorityObject, failed", LogTypeId::eLogNoPriorityListCheck);
 		}
 	}
 }

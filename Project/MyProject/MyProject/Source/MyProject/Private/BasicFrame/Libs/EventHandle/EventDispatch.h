@@ -36,16 +36,19 @@ public:
     //public LuaCSBridgeDispatch luaCSBridgeDispatch;
     // 相同的函数只能增加一次
 	virtual void addEventHandle(EventDispatchDelegate handle);
-	virtual void addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
 	void removeEventHandle(EventDispatchDelegate handle);
-	virtual void delObject(IDelayHandleItem* delayObject) override;
 	virtual void dispatchEvent(IDispatchObject* dispatchObject);
 	void clearEventHandle();
-    // 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
+	// 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
 	bool isExistEventHandle(EventDispatchDelegate handle);
 	void copyFrom(EventDispatch& rhv);
 	bool hasEventHandle();
 	int getEventHandleCount();
+
+protected:
+	virtual void _addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
+	
+	virtual void _removeObject(IDelayHandleItem* delayObject) override;
 };
 
 MY_END_NAMESPACE

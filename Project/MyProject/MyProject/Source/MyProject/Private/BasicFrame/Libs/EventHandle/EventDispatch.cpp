@@ -33,7 +33,7 @@ void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 	funcObject->mHandle = handle;
 	if (nullptr != handle)
 	{
-		this->addObject(funcObject);
+		this->_addObject(funcObject);
 	}
 	else
 	{
@@ -41,11 +41,11 @@ void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 	}
 }
 
-void EventDispatch::addObject(IDelayHandleItem* delayObject, float priority)
+void EventDispatch::_addObject(IDelayHandleItem* delayObject, float priority)
 {
-	if (this->isInDepth())
+	if (this->_isInDepth())
 	{
-		Super::addObject(delayObject, priority);
+		Super::_addObject(delayObject, priority);
 	}
 	else
 	{
@@ -67,7 +67,7 @@ void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 	}
 	if (idx < this->mHandleList.count())
 	{
-		this->delObject(this->mHandleList[idx]);
+		this->_removeObject(this->mHandleList[idx]);
 	}
 	else
 	{
@@ -75,11 +75,11 @@ void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 	}
 }
 
-void EventDispatch::delObject(IDelayHandleItem* delayObject)
+void EventDispatch::_removeObject(IDelayHandleItem* delayObject)
 {
 	if (this->isInDepth())
 	{
-		Super::delObject(delayObject);
+		Super::_removeObject(delayObject);
 	}
 	else
 	{
@@ -123,7 +123,7 @@ void EventDispatch::clearEventHandle()
 	{
 		for(auto item : mHandleList.getList())
 		{
-			this->delObject(item);
+			this->_removeObject(item);
 		}
 	}
 	else
