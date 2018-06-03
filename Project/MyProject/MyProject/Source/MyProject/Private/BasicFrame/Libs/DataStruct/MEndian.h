@@ -1,6 +1,10 @@
 #ifndef __MEndian_H
 #define __MEndian_H
 
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
 /**
  * @brief 系统大小端定义
  */
@@ -24,5 +28,7 @@ class SystemEndian
 public:
 	static MEndian msEndian;
 };
+
+MY_END_NAMESPACE
 
 #endif
