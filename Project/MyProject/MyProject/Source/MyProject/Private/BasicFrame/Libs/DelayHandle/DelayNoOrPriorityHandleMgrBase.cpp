@@ -1,12 +1,18 @@
 ﻿#include "MyProject.h"
 #include "DelayNoOrPriorityHandleMgrBase.h"
+#include "LoopDepth.h"
+#include "IDispatchObject.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include ""
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 {
 	this->mIsDispose = false;
-	this->mLoopDepth = new LoopDepth();
+	this->mLoopDepth = MY_NEW LoopDepth();
 	this->mLoopDepth.setZeroHandle(nullptr, this->_processDelayObjects, 0);
 
 	if(MacroDef.DEBUG_SYS)

@@ -5,6 +5,10 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class INoOrPriorityObject;
+class ITickedObject;
+class IDelayHandleItem;
+
 /**
  * @brief 延迟优先级处理管理器
  */
@@ -23,8 +27,8 @@ public:
 	void removeNoOrPriorityObject(ITickedObject* tickObj);
 
 protected:
-	virtual void _addObject(IDelayHandleItem delayObject, float priority = 0.0f) override;
-	virtual void _removeObject(IDelayHandleItem delayObject) override;
+	virtual void _addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
+	virtual void _removeObject(IDelayHandleItem* delayObject) override;
 };
 
 MY_END_NAMESPACE

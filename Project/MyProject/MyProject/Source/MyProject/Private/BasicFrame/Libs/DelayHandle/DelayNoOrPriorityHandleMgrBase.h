@@ -5,16 +5,20 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class INoOrPriorityList;
+class LoopDepth;
+class IDispatchObject;
+
 /**
  * @brief 当需要管理的对象可能在遍历中间添加的时候，需要这个管理器
  */
 class DelayNoOrPriorityHandleMgrBase : public GObject
 {
 protected:
-	INoOrPriorityList mDeferredAddQueue;
-	INoOrPriorityList mDeferredDelQueue;
+	INoOrPriorityList* mDeferredAddQueue;
+	INoOrPriorityList* mDeferredDelQueue;
 
-	LoopDepth mLoopDepth;         // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
+	LoopDepth* mLoopDepth;         // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
 	int mDebugUniqueId;           // 唯一 Id ，调试使用
 	bool mIsDispose;              // 是否被释放
 

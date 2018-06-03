@@ -1,5 +1,8 @@
 ﻿#include "MyProject.h"
 #include "DelayNoOrPriorityHandleMgr.h"
+#include "INoOrPriorityObject.h"
+#include "ITickedObject.h"
+#include "IDelayHandleItem.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
