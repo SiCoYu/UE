@@ -14,8 +14,8 @@ public:
 	DelayNoPriorityHandleMgr();
 	virtual void init() override;
 	virtual void dispose() override;
-	void addNoPriorityObject(INoOrPriorityObject priorityObject);
-	void removeNoPriorityObject(ITickedObject tickObj);
+	void addNoPriorityObject(INoOrPriorityObject* priorityObject);
+	void removeNoPriorityObject(ITickedObject* tickObj);
 };
 
 MY_END_NAMESPACE

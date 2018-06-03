@@ -15,8 +15,8 @@ public:
 	
 	virtual void init() override;
 	virtual void dispose() override;
-	void addPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f);
-	void removePriorityObject(ITickedObject tickObj);
+	void addPriorityObject(INoOrPriorityObject* priorityObject, float priority = 0.0f);
+	void removePriorityObject(ITickedObject* tickObj);
 };
 
 MY_END_NAMESPACE

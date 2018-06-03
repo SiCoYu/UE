@@ -19,8 +19,8 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 	bool isEmpty();
-	void addNoOrPriorityObject(INoOrPriorityObject priorityObject, float priority = 0.0f);
-	void removeNoOrPriorityObject(ITickedObject tickObj);
+	void addNoOrPriorityObject(INoOrPriorityObject* priorityObject, float priority = 0.0f);
+	void removeNoOrPriorityObject(ITickedObject* tickObj);
 
 protected:
 	virtual void _addObject(IDelayHandleItem delayObject, float priority = 0.0f) override;

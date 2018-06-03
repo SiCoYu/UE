@@ -26,15 +26,21 @@ public:
 	int getDebugUniqueId();
 
 protected:
-	virtual void _addObject(IDelayHandleItem delayObject, float priority = 0.0f);
-	virtual void _removeObject(IDelayHandleItem delayObject);
+	virtual void _addObject(
+		IDelayHandleItem* delayObject, 
+		float priority = 0.0f
+	);
+	virtual void _removeObject(IDelayHandleItem* delayObject);
 	// 只要调用会添加或者删除列表元素，就需要调用这个接口
 	void _incDepth();
 	void _decDepth();
 	bool _isInDepth();
 
 private:
-	void _processDelayObjects(IDispatchObject dispObj, uint eventId);
+	void _processDelayObjects(
+		IDispatchObject* dispObj, 
+		uint eventId
+	);
 };
 
 MY_END_NAMESPACE

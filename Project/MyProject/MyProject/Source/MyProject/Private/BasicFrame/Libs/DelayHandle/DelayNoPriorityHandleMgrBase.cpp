@@ -5,10 +5,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 DelayNoPriorityHandleMgrBase::DelayNoPriorityHandleMgrBase()
 {
-	this.mDeferredAddQueue = new NoPriorityList();
-	this.mDeferredAddQueue.setIsSpeedUpFind(true);
-	this.mDeferredDelQueue = new NoPriorityList();
-	this.mDeferredDelQueue.setIsSpeedUpFind(true);
+	this->mDeferredAddQueue = new NoPriorityList();
+	this->mDeferredAddQueue.setIsSpeedUpFind(true);
+	this->mDeferredDelQueue = new NoPriorityList();
+	this->mDeferredDelQueue.setIsSpeedUpFind(true);
 }
 
 void DelayNoPriorityHandleMgrBase::init()
