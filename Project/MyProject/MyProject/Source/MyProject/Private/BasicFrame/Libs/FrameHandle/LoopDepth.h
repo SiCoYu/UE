@@ -1,13 +1,14 @@
 ﻿#pragma once
 
 #include "EventDispatchDelegate.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class AddOnceEventDispatch;
 
-class LoopDepth
+class LoopDepth : public GObject
 {
 private:
 	int mLoopDepth;         // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
