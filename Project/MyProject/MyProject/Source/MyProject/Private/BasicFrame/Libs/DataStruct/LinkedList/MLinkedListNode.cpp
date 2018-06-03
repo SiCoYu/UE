@@ -84,7 +84,7 @@ void MLinkedListNode::insertBefore(MLinkedListNode* node)
 	}
 	else if (nullptr != this->mLinkedList)
 	{
-		this->mLinkedList.addHead(node);
+		this->mLinkedList->addHead(node);
 	}
 
 	node->setNextNode(this);
@@ -100,7 +100,7 @@ void MLinkedListNode::insertAfter(MLinkedListNode* node)
 	}
 	else if (nullptr != this->mLinkedList)
 	{
-		this->mLinkedList.addTail(node);
+		this->mLinkedList->addTail(node);
 	}
 
 	node->setPreNode(this);
@@ -126,7 +126,7 @@ void MLinkedListNode::removeFormList()
 {
 	if (nullptr != this->mLinkedList)
 	{
-		this->mLinkedList.remove(this);
+		this->mLinkedList->remove(this);
 		this->mLinkedList = nullptr;
 	}
 }
@@ -135,7 +135,7 @@ void MLinkedListNode::addToList()
 {
 	if (nullptr != this->mLinkedList)
 	{
-		this->mLinkedList.addTail(this);
+		this->mLinkedList->addTail(this);
 	}
 }
 
@@ -182,7 +182,7 @@ void MLinkedListNode::reverse()
 {
 	if (nullptr != this->mLinkedList)
 	{
-		this->mLinkedList.reverse();
+		this->mLinkedList->reverse();
 	}
 }
 

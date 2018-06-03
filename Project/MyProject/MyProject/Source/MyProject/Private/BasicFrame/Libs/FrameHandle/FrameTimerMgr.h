@@ -16,7 +16,7 @@ class FrameTimerItem;
 */
 class FrameTimerMgr : public DelayPriorityHandleMgrBase
 {
-	M_DECLARE_CLASS(GObject, MyAllocatedObject)
+	M_DECLARE_CLASS(FrameTimerMgr, DelayPriorityHandleMgrBase)
 
 protected:
 	MList<FrameTimerItem*> mTimerList;     // 当前所有的定时器列表

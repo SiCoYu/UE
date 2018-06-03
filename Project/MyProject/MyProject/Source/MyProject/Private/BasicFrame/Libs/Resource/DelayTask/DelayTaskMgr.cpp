@@ -28,7 +28,7 @@ void DelayTaskMgr::dispose()
 
 }
 
-void DelayTaskMgr::onTick(float delta)
+void DelayTaskMgr::onTick(float delta, TickMode tickMode)
 {
 	this->mCurFrame = GSystemFrameData->getTotalFrameCount();
 

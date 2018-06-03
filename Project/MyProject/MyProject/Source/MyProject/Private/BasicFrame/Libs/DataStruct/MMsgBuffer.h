@@ -30,8 +30,8 @@ protected:
 
 public:
 	MMsgBuffer(
-		uint32 initCapacity = BufferCV::eINIT_CAPACITY, 
-		uint32 maxCapacity = BufferCV::eMAX_CAPACITY
+		uint32 initCapacity = (uint32)BufferCV::eINIT_CAPACITY, 
+		uint32 maxCapacity = (uint32)BufferCV::eMAX_CAPACITY
 	);
 	~MMsgBuffer();
 

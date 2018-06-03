@@ -3,7 +3,7 @@
 #include "TableBase.h"
 #include "TableItemBase.h"
 #include "UtilStr.h"
-#include "Endian.h"
+#include "MEndian.h"
 #include "TableObject.h"
 #include "TableCard.h"
 #include "TableSkill.h"
@@ -39,51 +39,51 @@ void TableSys::dispose()
 }
 
 // 返回一个表
-MList<TableItemBase*>* TableSys::getTable(TableId::TableId tableID)
+MList<TableItemBase*>* TableSys::getTable(TableId tableId)
 {
-	TableBase* table = this->mDicTable[tableID];
+	TableBase* table = this->mDicTable[tableId];
 
 	if (nullptr == table)
 	{
-		this->loadOneTable(tableID);
-		table = this->mDicTable[tableID];
+		this->loadOneTable(tableId);
+		table = this->mDicTable[tableId];
 	}
 
 	return table->mList;
 }
 		
 // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
-TableItemBase* TableSys::getItem(TableId::TableId tableID, uint32 itemID)
+TableItemBase* TableSys::getItem(TableId tableId, uint32 itemID)
 {
-    TableBase* table = this->mDicTable[tableID];
+    TableBase* table = this->mDicTable[tableId];
 
 	if (nullptr == table->mByteBuffer)
 	{
-		this->loadOneTable(tableID);
-		table = this->mDicTable[tableID];
+		this->loadOneTable(tableId);
+		table = this->mDicTable[tableId];
 	}
 
     TableItemBase* ret = TableSys::findDataItem(table, itemID);
 
 	if (nullptr != ret && nullptr == ret->mItemBody)
     {
-		this->loadOneTableOneItemAll(tableID, table, ret);
+		this->loadOneTableOneItemAll(tableId, table, ret);
     }
 
     if (nullptr == ret)
     {
-		GLogSys->log(UtilStr::Format("table name: {0}, table Item {1} 加载失败", (int)tableID, itemID));
+		GLogSys->log(UtilStr::Format("table name: {0}, table Item {1} 加载失败", (int)tableId, itemID));
     }
 
 	return ret;
 }
 		
 // 加载一个表
-void TableSys::loadOneTable(TableId::TableId tableID)
+void TableSys::loadOneTable(TableId tableId)
 {
 	this->mByteBuffer->clear();
 	this->mArrayBuffer.Empty();
-	TableBase* table = this->mDicTable[tableID];
+	TableBase* table = this->mDicTable[tableId];
 
 	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//FString Filename = FString::Printf(TEXT("%s%s%s%s"), *FPaths::GameContentDir(), TEXT("/MyAsset/Table/"), ANSI_TO_TCHAR(table->mTableName.c_str()), TEXT(".txt"));
@@ -94,12 +94,12 @@ void TableSys::loadOneTable(TableId::TableId tableID)
 		this->mByteBuffer->setLength(mArrayBuffer.GetAllocatedSize());
 		this->mByteBuffer->writeBytes((char*)(this->mArrayBuffer.GetData()), 0, this->mArrayBuffer.GetAllocatedSize());
 		this->mByteBuffer->setPos(0);
-		this->readTable(tableID, mByteBuffer);
+		this->readTable(tableId, mByteBuffer);
 	}
 }
 
 // 根据路径查找表的 Id
-TableId::TableId TableSys::getTableIDByPath(std::string& path)
+TableId TableSys::getTableIDByPath(std::string& path)
 {
 	TableMapIte beginIte = this->mDicTable.getData().begin();
 	TableMapIte endIte = this->mDicTable.getData().end();
@@ -112,30 +112,30 @@ TableId::TableId TableSys::getTableIDByPath(std::string& path)
         }
     }
 
-	return (TableId::TableId)0;
+	return (TableId)0;
 }
 
 // 加载一个表中一项的所有内容
-void TableSys::loadOneTableOneItemAll(TableId::TableId tableID, TableBase* table, TableItemBase* itemBase)
+void TableSys::loadOneTableOneItemAll(TableId tableId, TableBase* table, TableItemBase* itemBase)
 {
-    if (TableId::TABLE_OBJECT == tableID)
+    if (TableId::TABLE_OBJECT == tableId)
     {
 		itemBase->parseBodyByteBuffer<TableObjectItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
-    else if (TableId::TABLE_CARD == tableID)
+    else if (TableId::TABLE_CARD == tableId)
     {
 		itemBase->parseBodyByteBuffer<TableCardItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
-	else if (TableId::TABLE_SKILL == tableID)  // 添加一个表的步骤四
+	else if (TableId::TABLE_SKILL == tableId)  // 添加一个表的步骤四
     {
 		itemBase->parseBodyByteBuffer<TableSkillItemBody>(table->mByteBuffer, itemBase->mItemHeader->mOffset);
     }
 }
 		
 // 获取一个表的名字
-std::string& TableSys::getTableName(TableId::TableId tableID)
+std::string& TableSys::getTableName(TableId tableId)
 {
-	TableBase* table = this->mDicTable[tableID];
+	TableBase* table = this->mDicTable[tableId];
 
 	if (nullptr != table)
 	{
@@ -146,9 +146,9 @@ std::string& TableSys::getTableName(TableId::TableId tableID)
 }
 
 // 读取一个表，仅仅读取表头
-void TableSys::readTable(TableId::TableId tableID, MByteBuffer* bytes)
+void TableSys::readTable(TableId tableId, MByteBuffer* bytes)
 {
-    TableBase* table = this->mDicTable[tableID];
+    TableBase* table = this->mDicTable[tableId];
 	table->mByteBuffer = bytes;
 
 	bytes->setEndian(eLITTLE_ENDIAN);
@@ -159,15 +159,15 @@ void TableSys::readTable(TableId::TableId tableID, MByteBuffer* bytes)
 
     for (i = 0; i < len; i++)
     {
-        //if (TableId.TABLE_OBJECT == tableID)
+        //if (TableId.TABLE_OBJECT == tableId)
         //{
         //    item = new TableItemObject();
         //}
         item = MY_NEW TableItemBase();
         item->parseHeaderByteBuffer(bytes);
         // 加载完整数据
-        //loadOneTableOneItemAll(tableID, table, item);
-        //if (TableId.TABLE_OBJECT == tableID)
+        //loadOneTableOneItemAll(tableId, table, item);
+        //if (TableId.TABLE_OBJECT == tableId)
         //{
             //item.parseAllByteArray<TableObjectItemBody>(bytes);
         //}

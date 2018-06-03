@@ -20,16 +20,16 @@ void NoPriorityList::init()
 
 void NoPriorityList::dispose()
 {
-	if(nullptr != this->mNoPriorityProcessObjectList)
-	{
+	//if(nullptr != this->mNoPriorityProcessObjectList)
+	//{
 		this->mNoPriorityProcessObjectList.dispose();
-		this->mNoPriorityProcessObjectList = nullptr;
-	}
-	if (nullptr != this->mDic)
-	{
+		//this->mNoPriorityProcessObjectList = nullptr;
+	//}
+	//if (nullptr != this->mDic)
+	//{
 		this->mDic.dispose();
-		this->mDic = nullptr;
-	}
+		//this->mDic = nullptr;
+	//}
 }
 
 void NoPriorityList::setIsSpeedUpFind(bool value)

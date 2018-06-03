@@ -74,17 +74,17 @@ void TimerMgr::_removeObject(IDelayHandleItem* delayObject)
 
 void TimerMgr::addTimer(TimerItemBase* delayObject, float priority = 0.0f)
 {
-	if (!this.mTimerList.contains(delayObject))
+	if (!this->mTimerList.contains(delayObject))
 	{
-		this._addObject(delayObject, priority);
+		this->_addObject(delayObject, priority);
 	}
 }
 
 void TimerMgr::removeTimer(TimerItemBase* timer)
 {
-	if (this.mTimerList.contains(timer))
+	if (this->mTimerList.contains(timer))
 	{
-		this._removeObject(timer);
+		this->_removeObject(timer);
 	}
 }
 

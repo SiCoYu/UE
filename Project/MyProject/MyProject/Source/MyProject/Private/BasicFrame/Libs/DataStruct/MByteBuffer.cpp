@@ -42,7 +42,7 @@ MEndian MByteBuffer::getEndian()
 	return this->mEndian;
 }
 
-void MByteBuffer::setEndian(EEndian value)
+void MByteBuffer::setEndian(MEndian value)
 {
 	this->mEndian = value;
 }

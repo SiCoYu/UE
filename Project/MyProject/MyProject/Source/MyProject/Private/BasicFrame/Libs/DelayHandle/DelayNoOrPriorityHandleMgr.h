@@ -19,7 +19,7 @@ class DelayNoOrPriorityHandleMgr : public DelayNoOrPriorityHandleMgrBase
 	M_DECLARE_CLASS(DelayNoOrPriorityHandleMgr, DelayNoOrPriorityHandleMgrBase)
 
 protected:
-	INoOrPriorityList mNoOrPriorityList;
+	INoOrPriorityList* mNoOrPriorityList;
 
 public:
 	DelayNoOrPriorityHandleMgr();

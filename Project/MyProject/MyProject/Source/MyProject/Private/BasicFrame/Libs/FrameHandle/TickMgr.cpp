@@ -40,7 +40,7 @@ void TickMgr::addTick(ITickedObject* tickObj, float priority)
 
 void TickMgr::removeTick(ITickedObject* tickObj)
 {
-	this._removeObject((IDelayHandleItem*)tickObj);
+	this->_removeObject((IDelayHandleItem*)tickObj);
 }
 
 void TickMgr::advance(float delta, TickMode tickMode)

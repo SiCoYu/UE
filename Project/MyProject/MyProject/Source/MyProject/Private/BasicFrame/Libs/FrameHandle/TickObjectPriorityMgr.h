@@ -30,6 +30,6 @@ public:
 	virtual void _onPreAdvance(float delta, TickMode tickMode);
 	virtual void _onExecAdvance(float delta, TickMode tickMode);
 	virtual void _onPostAdvance(float delta, TickMode tickMode);
-}
+};
 
 MY_END_NAMESPACE

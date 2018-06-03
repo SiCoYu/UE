@@ -4,7 +4,7 @@
 #include <string>
 #include "MyProject.h"
 #include "MDebug.h"
-#include "Endian.h"
+#include "MEndian.h"
 #include "MDynBuffer.h"
 #include "MEncode.h"
 #include "BufferCV.h"
@@ -33,8 +33,8 @@ protected:
 
 public:
 	MByteBuffer(
-		uint32 initCapacity = BufferCV::eINIT_CAPACITY, 
-		uint32 maxCapacity = BufferCV::eMAX_CAPACITY, 
+		uint32 initCapacity = (uint32)BufferCV::eINIT_CAPACITY,
+		uint32 maxCapacity = (uint32)BufferCV::eMAX_CAPACITY,
 		MEndian endian = MEndian::eLITTLE_ENDIAN
 	);
 	MDynBuffer<char>* getDynBuffer();

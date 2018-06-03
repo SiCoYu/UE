@@ -75,12 +75,12 @@ void FrameTimerMgr::_removeObject(IDelayHandleItem* delayObject)
 
 void FrameTimerMgr::addFrameTimer(FrameTimerItem* timer, float priority)
 {
-	this._addObject(timer, priority);
+	this->_addObject(timer, priority);
 }
 
 void FrameTimerMgr::removeFrameTimer(FrameTimerItem* timer)
 {
-	this._removeObject(timer);
+	this->_removeObject(timer);
 }
 
 void FrameTimerMgr::advance(float delta)

@@ -22,16 +22,16 @@ void PriorityList::init()
 
 void PriorityList::dispose()
 {
-	if(nullptr != this->mPriorityProcessObjectList)
-	{
+	//if(nullptr != this->mPriorityProcessObjectList)
+	//{
 		this->mPriorityProcessObjectList.dispose();
-		this->mPriorityProcessObjectList = nullptr;
-	}
-	if(nullptr != this->mDic)
-	{
+		//this->mPriorityProcessObjectList = nullptr;
+	//}
+	//if(nullptr != this->mDic)
+	//{
 		this->mDic.dispose();
-		this->mDic = nullptr;
-	}
+		//this->mDic = nullptr;
+	//}
 }
 
 void PriorityList::setIsSpeedUpFind(bool value)
@@ -265,7 +265,7 @@ void PriorityList::addPriorityObject(INoOrPriorityObject* priorityObject, float 
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("PriorityList::addPriorityObject, failed", LogTypeId::eLogPriorityListCheck);
 		}

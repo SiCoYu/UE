@@ -17,10 +17,10 @@ class INoOrPriorityObject;
 class PriorityList : public GObject, public  INoOrPriorityList
 {
 protected:
-	MList<PriorityProcessObject> mPriorityProcessObjectList;  // 优先级对象列表
+	MList<PriorityProcessObject*> mPriorityProcessObjectList;  // 优先级对象列表
     PrioritySort mPrioritySort;   // 排序方式
 
-    MDictionary<INoOrPriorityObject, int> mDic;   // 查找字典
+    MDictionary<INoOrPriorityObject*, int> mDic;   // 查找字典
     bool mIsSpeedUpFind;          // 是否开启查找
     bool mIsOpKeepSort;           // 操作的时候是否保持排序
 
