@@ -17,7 +17,7 @@ class EventDispatchFunctionObject;
  */
 class EventDispatch : public DelayPriorityHandleMgrBase
 {
-	M_DECLARE_SUPER_KW(DelayHandleMgrBase)
+	M_DECLARE_SUPER_KW(DelayPriorityHandleMgrBase)
 
 protected :
 	int mEventId;

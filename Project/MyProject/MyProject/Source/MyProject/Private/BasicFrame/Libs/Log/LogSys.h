@@ -20,8 +20,8 @@ public:
 	void dispose();
 
 	//void log(FString message);
-	void log(std::string message, LogTypeId logTypeId = LogTypeId.eLogCommon);
-	void error(std::string message, LogTypeId logTypeId = LogTypeId.eLogCommon);
+	void log(std::string message, LogTypeId logTypeId = LogTypeId::eLogCommon);
+	void error(std::string message, LogTypeId logTypeId = LogTypeId::eLogCommon);
 };
 
 MY_END_NAMESPACE

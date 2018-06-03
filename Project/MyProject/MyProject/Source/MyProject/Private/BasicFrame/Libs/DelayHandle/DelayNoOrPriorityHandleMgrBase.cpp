@@ -7,6 +7,10 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "EventDispatchDelegate.h"
 #include "MClassFactory.h"
+#include "MacroDef.h"
+#include "Ctx.h"
+#include "LogSys.h"
+#include "LogTypeId.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -97,7 +101,7 @@ void DelayNoOrPriorityHandleMgrBase::_removeObject(IDelayHandleItem* delayObject
 	}
 	else
 	{
-		Ctx.msInstance.mLogSys.log("delayObject is not INoOrPriorityObject", LogTypeId.eLogDataStruct);
+		GLogSys->log("delayObject is not INoOrPriorityObject", LogTypeId::eLogDataStruct);
 	}
 }
 

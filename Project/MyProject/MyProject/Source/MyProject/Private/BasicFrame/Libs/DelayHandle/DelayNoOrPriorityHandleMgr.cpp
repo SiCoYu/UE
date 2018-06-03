@@ -4,6 +4,10 @@
 #include "ITickedObject.h"
 #include "IDelayHandleItem.h"
 #include "MClassFactory.h"
+#include "MacroDef.h"
+#include "Ctx.h"
+#include "LogSys.h"
+#include "LogTypeId.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -60,7 +64,7 @@ void DelayNoOrPriorityHandleMgr::_addObject(IDelayHandleItem* delayObject, float
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("DelayPriorityHandleMgr::_addObject, failed", LogTypeId.eLogCommon);
+			GLogSys->log("DelayPriorityHandleMgr::_addObject, failed", LogTypeId::eLogCommon);
 		}
 	}
 }
@@ -85,7 +89,7 @@ void DelayNoOrPriorityHandleMgr::_removeObject(IDelayHandleItem* delayObject)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("DelayPriorityHandleMgr::_removeObject, failed", LogTypeId.eLogCommon);
+			GLogSys->log("DelayPriorityHandleMgr::_removeObject, failed", LogTypeId::eLogCommon);
 		}
 	}
 }
