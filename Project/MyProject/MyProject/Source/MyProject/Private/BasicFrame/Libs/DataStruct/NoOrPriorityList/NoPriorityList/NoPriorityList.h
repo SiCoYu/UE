@@ -31,7 +31,7 @@ public:
     void setIsOpKeepSort(bool value);
     void clear();
     int count();
-    INoOrPriorityObject get(int index);
+    INoOrPriorityObject* get(int index);
     bool contains(INoOrPriorityObject* item);
     void removeAt(int index);
 

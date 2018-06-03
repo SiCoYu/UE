@@ -22,6 +22,7 @@ uint32 DynBufResizePolicy::getCloseSize(
 		else
 		{
 			ret = 2 * capacity;
+
 			while (ret < needSize && ret < maxCapacity)
 			{
 				ret *= 2;

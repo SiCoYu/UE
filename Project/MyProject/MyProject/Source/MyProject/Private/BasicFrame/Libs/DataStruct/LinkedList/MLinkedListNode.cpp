@@ -173,7 +173,7 @@ int MLinkedListNode::toHeadCount()
 	return count;
 }
 
-string MLinkedListNode::getStr()
+std::string MLinkedListNode::getStr()
 {
 	return "";
 }

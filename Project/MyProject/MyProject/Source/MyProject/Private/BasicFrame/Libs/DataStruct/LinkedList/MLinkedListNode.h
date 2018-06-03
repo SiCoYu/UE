@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <string>
 #include "GObject.h"
 #include "PlatformDefine.h"
 
@@ -7,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class MLinkedList;
 
-public class MLinkedListNode : public GObject
+class MLinkedListNode : public GObject
 {
     // 一个节点可能在几个列表中，这个 list 字段主要是记录头和尾节点的，如果中间节点就在一个列表中，也可以设置这个字段
 protected:
@@ -44,7 +45,7 @@ public:
     int toTailCount();
     // 获取当前节点到 Head 数量
     int toHeadCount();
-    virtual string getStr();
+    virtual std::string getStr();
     void reverse();
 };
 

@@ -57,9 +57,9 @@ void MLinkedList::setHead(MLinkedListNode* node)
 {
 	if (nullptr != this->mHeadNode)
 	{
-		node->setNextNode(this->mHeadNod->.getNextNode());
+		node->setNextNode(this->mHeadNode->getNextNode());
 
-		if (nullptr != this->mHeadNode.getNextNode())
+		if (nullptr != this->mHeadNode->getNextNode())
 		{
 			this->mHeadNode->getNextNode()->setPreNode(node);
 		}
@@ -89,7 +89,7 @@ bool MLinkedList::isEmpty()
 	return (nullptr == this->mHeadNode && nullptr == this->mTailNode);
 }
 
-MLinkedListNode MLinkedList::getTail()
+MLinkedListNode* MLinkedList::getTail()
 {
 	return this->mTailNode;
 }
@@ -114,7 +114,7 @@ void MLinkedList::setTail(MLinkedListNode* node)
 {
 	if (nullptr != this->mTailNode)
 	{
-		node.setPreNode(this->mTailNode->getPreNode());
+		node->setPreNode(this->mTailNode->getPreNode());
 
 		if (nullptr != this->mTailNode->getPreNode())
 		{
@@ -136,7 +136,7 @@ void MLinkedList::insertAfterNode(MLinkedListNode* preNode, MLinkedListNode* nod
 	{
 		if (nullptr != preNode)
 		{
-			var nextNode = preNode->getNextNode();
+			MLinkedListNode* nextNode = preNode->getNextNode();
 
 			node->setPreNode(preNode);
 			preNode->setNextNode(node);
@@ -160,7 +160,7 @@ void MLinkedList::insertBeforeNode(MLinkedListNode* nextNode, MLinkedListNode* n
 	{
 		if (nullptr != nextNode)
 		{
-			var preNode = node->getPreNode();
+			MLinkedListNode* preNode = node->getPreNode();
 
 			nextNode->setPreNode(node);
 			node->setNextNode(nextNode);
@@ -217,7 +217,7 @@ void MLinkedList::reverse()
 			while (nullptr != nextNode)
 			{
 				curNode = nextNode;
-				nextNode = nextNode.getNextNode();
+				nextNode = nextNode->getNextNode();
 
 				this->remove(curNode);
 				this->addHead(curNode);
@@ -228,7 +228,7 @@ void MLinkedList::reverse()
 
 void MLinkedList::remove(MLinkedListNode* node)
 {
-	if (nullptr != node.getPreNode())
+	if (nullptr != node->getPreNode())
 	{
 		node->getPreNode()->setNextNode(node->getNextNode());
 	}
@@ -246,13 +246,13 @@ void MLinkedList::remove(MLinkedListNode* node)
 		this->mTailNode = node->getPreNode();
 	}
 
-	node.onClear();
+	node->onClear();
 }
 
-string MLinkedList::getStr()
+std::string MLinkedList::getStr()
 {
-	string str = "";
-	MLinkedListNode tmpNode = nullptr;
+	std::string str = "";
+	MLinkedListNode* tmpNode = nullptr;
 	tmpNode = this->mHeadNode;
 	bool isFirstNode = true;
 
@@ -268,7 +268,7 @@ string MLinkedList::getStr()
 		}
 
 		tmpNode = tmpNode->getNextNode();
-		str += tmpNode.getStr();
+		str += tmpNode->getStr();
 	}
 
 	return str;

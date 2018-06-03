@@ -1,12 +1,13 @@
 ﻿#pragma once
 
+#include <string>
 #include "GContainerObject.h"
 #include "MLinkedListNode.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class MLinkedListNode
+class MLinkedListNode;
 
 class MLinkedList : public GContainerObject
 {
@@ -29,7 +30,7 @@ public:
     bool isTailExist();
     bool isTailExistAndNoEqualHead();
     bool isEmpty();
-    MLinkedListNode getTail();
+    MLinkedListNode* getTail();
 
     void addTail(MLinkedListNode* node);
     // 直接重新设置
@@ -40,7 +41,7 @@ public:
     int count();
     void reverse();
     void remove(MLinkedListNode* node);
-    string getStr();
+    std::string getStr();
 };
 
 MY_END_NAMESPACE

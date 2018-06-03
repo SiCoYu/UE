@@ -4,7 +4,6 @@
 #include "Platform.h"
 #include <cstddef>
 #include <iostream>
-#include <vector>
 #include "BufferCV.h"
 #include "MDynBuffer.h"
 #include "GObject.h"
