@@ -33,11 +33,6 @@ public:
 	void addTick(ITickedObject* tickObj, float priority = 0.0f);
 	void removeTick(ITickedObject* tickObj);
 	void advance(float delta, TickMode tickMode);
-
-protected:
-	virtual void _addObject(IDelayHandleItem* delayObject, float priority = 0.0f) override;
-	virtual void _removeObject(IDelayHandleItem* delayObject) override;
-
 };
 
 MY_END_NAMESPACE
