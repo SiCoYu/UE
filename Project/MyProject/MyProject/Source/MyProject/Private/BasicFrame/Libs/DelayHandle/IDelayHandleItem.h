@@ -9,6 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class IDelayHandleItem
 {
+public:
 	virtual void setClientDispose(bool isDispose) = 0;
 	virtual bool isClientDispose() = 0;
 };
