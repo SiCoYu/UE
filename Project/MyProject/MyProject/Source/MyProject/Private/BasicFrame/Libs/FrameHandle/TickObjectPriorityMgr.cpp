@@ -68,7 +68,7 @@ void TickObjectPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 
 		if (nullptr != (IDelayHandleItem*)tickObject)
 		{
-			if (!(IDelayHandleItem*)tickObject)->isClientDispose())
+			if (!((IDelayHandleItem*)tickObject)->isClientDispose())
 			{
 				tickObject->onTick(delta, tickMode);
 			}

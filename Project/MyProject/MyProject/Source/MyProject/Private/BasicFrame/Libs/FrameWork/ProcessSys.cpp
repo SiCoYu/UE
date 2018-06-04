@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "ProcessSys.h"
 #include "Prequisites.h"
+#include "TickMode.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -31,7 +32,7 @@ void ProcessSys::advance(float delta)
 	//Ctx.mInstance.mFrameCollideMgr.clear();
 	GSystemFrameData->nextFrame(delta);
 	//Ctx.mInstance.mLuaSystem.advance(delta);        // lua 脚本 advance
-	GTickMgr->advance(delta);            // 心跳
+	GTickMgr->advance(delta, TickMode::eTM_Update);            // 心跳
 	GTimerMgr->advance(delta);           // 定时器
 	GFrameTimerMgr->advance(delta);      // 帧定时器
 }

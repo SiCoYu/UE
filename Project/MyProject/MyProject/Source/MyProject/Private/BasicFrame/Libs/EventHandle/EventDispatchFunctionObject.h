@@ -16,7 +16,7 @@ public:
 
 public:
 	EventDispatchFunctionObject();
-	void setClientDispose();
+	void setClientDispose(bool isDispose);
 	bool isClientDispose();
 };
 

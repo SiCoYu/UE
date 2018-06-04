@@ -119,7 +119,7 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 
 void EventDispatch::clearEventHandle()
 {
-	if (this->isInDepth())
+	if (this->_isInDepth())
 	{
 		for(auto item : mHandleList.getList())
 		{

@@ -45,7 +45,7 @@ void TickMgr::removeTick(ITickedObject* tickObj)
 
 void TickMgr::advance(float delta, TickMode tickMode)
 {
-	base.advance(delta, tickMode);
+	Super::advance(delta, tickMode);
 }
 
 MY_END_NAMESPACE

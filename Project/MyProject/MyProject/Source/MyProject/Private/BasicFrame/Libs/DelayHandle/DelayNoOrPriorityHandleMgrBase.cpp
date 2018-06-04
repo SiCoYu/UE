@@ -20,7 +20,12 @@ DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 {
 	this->mIsDispose = false;
 	this->mLoopDepth = MY_NEW LoopDepth();
-	this->mLoopDepth->setZeroHandle(MakeEventDispatchDelegate(this, &DelayNoOrPriorityHandleMgrBase::_processDelayObjects));
+	this->mLoopDepth->setZeroHandle(
+		MakeEventDispatchDelegate(
+			this, 
+			&DelayNoOrPriorityHandleMgrBase::_processDelayObjects
+		)
+	);
 
 	if(MacroDef::DEBUG_SYS)
 	{
@@ -140,7 +145,7 @@ bool DelayNoOrPriorityHandleMgrBase::_isInDepth()
 	return ret;
 }
 
-void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispObj, uint eventId)
+void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispObj/*, uint eventId*/)
 {
 	int idx = 0;
 	// len 是 Python 的关键字

@@ -28,7 +28,7 @@ template <class TKey, class TValue>
 void MDictionary<TKey, TValue>::dispose()
 {
     this->clear();
-    this->mData = nullptr;
+    //this->mData = nullptr;
 }
 
 template <class TKey, class TValue>
@@ -47,12 +47,14 @@ TValue& MDictionary<TKey, TValue>::operator[] (TKey key)
 template <class TKey, class TValue>
 TValue MDictionary<TKey, TValue>::value(TKey key)
 {
+	TValue value;
+
     if (UtilMap::ContainsKey(this->mData, key))
     {
-        return this->mData[key];
+		value = this->mData[key];
     }
 
-    return default(TValue);
+    return value;
 }
 
 template <class TKey, class TValue>
@@ -60,7 +62,7 @@ TKey MDictionary<TKey, TValue>::key(TValue value)
 {
 	Iterator curIterator = this->mData.begin();
 	Iterator endIterator = this->mData.end();
-	TKey key = default(TKey);
+	TKey key;
 
     while (curIterator != endIterator)
     {

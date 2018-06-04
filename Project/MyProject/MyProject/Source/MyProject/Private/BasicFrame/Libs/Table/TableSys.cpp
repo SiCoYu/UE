@@ -151,7 +151,7 @@ void TableSys::readTable(TableId tableId, MByteBuffer* bytes)
     TableBase* table = this->mDicTable[tableId];
 	table->mByteBuffer = bytes;
 
-	bytes->setEndian(eLITTLE_ENDIAN);
+	bytes->setEndian(MEndian::eLITTLE_ENDIAN);
 	uint32 len = 0;
 	bytes->readUnsignedInt32(len);
     uint32 i = 0;

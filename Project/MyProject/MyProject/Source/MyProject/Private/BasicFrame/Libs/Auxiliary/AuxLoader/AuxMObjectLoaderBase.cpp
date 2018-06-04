@@ -154,7 +154,12 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
 				if (this->mIsInsNeedCoroutine)
 				{
 					this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
-					this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabIns));
+					this->mResInsEventDispatch->addEventHandle(
+						MakeEventDispatchDelegate(
+							this, 
+							&AuxMObjectLoaderBase::onPrefabIns
+						)
+					);
 
 					if (this->mIsSetFakePos)
 					{
@@ -188,7 +193,13 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
 		{
 			this->mResLoadState->setFailed();
 
-			GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+			GObjectAssetInsMgr->unload(
+				this->mPrefabRes->getResUniqueId(), 
+				MakeEventDispatchDelegate(
+					this, 
+					&AuxMObjectLoaderBase::onPrefabLoaded
+				)
+			);
 			this->mPrefabRes = nullptr;
 
 			if (this->mResEventDispatch != nullptr)
@@ -249,7 +260,13 @@ void AuxMObjectLoaderBase::unload()
 {
 	if (this->mPrefabRes != nullptr)
 	{
-		GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+		GObjectAssetInsMgr->unload(
+			this->mPrefabRes->getResUniqueId(), 
+			MakeEventDispatchDelegate(
+				this, 
+				&AuxMObjectLoaderBase::onPrefabLoaded
+			)
+		);
 		this->mPrefabRes = nullptr;
 	}
 
@@ -309,26 +326,57 @@ UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle
 		{
 			this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
 		}
-		this->mResInsEventDispatch->addEventHandle(MakeEventDispatchDelegate(this,&AuxMObjectLoaderBase::onInstantiateObjectFinish));
+		this->mResInsEventDispatch->addEventHandle(
+			MakeEventDispatchDelegate(
+				this,
+				&AuxMObjectLoaderBase::onInstantiateObjectFinish
+			)
+		);
 
 		if (this->mIsSetFakePos)
 		{
-			this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat, this->mResInsEventDispatch);
+			this->mPrefabRes->InstantiateObject(
+				this->mPrefabRes->getPrefabName(), 
+				this->mIsSetInitOrientPos, 
+				UtilSysLibWrap::FAKE_POS, 
+				UtilMath::UnitQuat, 
+				this->mResInsEventDispatch
+			);
 		}
 		else
 		{
-			this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat, this->mResInsEventDispatch);
+			this->mPrefabRes->InstantiateObject(
+				this->mPrefabRes->getPrefabName(), 
+				this->mIsSetInitOrientPos, 
+				UtilMath::ZeroVec3, 
+				UtilMath::UnitQuat, 
+				this->mResInsEventDispatch
+			);
 		}
 	}
 	else
 	{
 		if (this->mIsSetFakePos)
 		{
-			this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
+			this->setSelfGo(
+				this->mPrefabRes->InstantiateObject(
+					this->mPrefabRes->getPrefabName(), 
+					this->mIsSetInitOrientPos, 
+					UtilSysLibWrap::FAKE_POS, 
+					UtilMath::UnitQuat
+				)
+			);
 		}
 		else
 		{
-			this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
+			this->setSelfGo(
+				this->mPrefabRes->InstantiateObject(
+					this->mPrefabRes->getPrefabName(), 
+					this->mIsSetInitOrientPos, 
+					UtilMath::ZeroVec3, 
+					UtilMath::UnitQuat
+				)
+			);
 		}
 
 		this->onInstantiateObjectFinish();

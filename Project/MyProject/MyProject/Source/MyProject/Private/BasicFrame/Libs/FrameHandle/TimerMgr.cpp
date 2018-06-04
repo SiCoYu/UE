@@ -27,7 +27,7 @@ void TimerMgr::dispose()
 	Super::dispose();
 }
 
-void TimerMgr::addObject(IDelayHandleItem* delayObject, float priority)
+void TimerMgr::_addObject(IDelayHandleItem* delayObject, float priority)
 {
 	// 检查当前是否已经在队列中
 	TimerItemBase* timerItemBase = (TimerItemBase*)delayObject;
@@ -72,7 +72,7 @@ void TimerMgr::_removeObject(IDelayHandleItem* delayObject)
 	}
 }
 
-void TimerMgr::addTimer(TimerItemBase* delayObject, float priority = 0.0f)
+void TimerMgr::addTimer(TimerItemBase* delayObject, float priority)
 {
 	if (!this->mTimerList.contains(delayObject))
 	{

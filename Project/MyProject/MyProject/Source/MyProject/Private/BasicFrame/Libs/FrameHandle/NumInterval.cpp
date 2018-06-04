@@ -8,7 +8,7 @@ NumInterval::NumInterval()
 	this->mTotalValue = 0;
 	this->mCurValue = 0;
 
-	this->mNumIntervalMode = NumIntervalMode.eNIM_Inc;
+	this->mNumIntervalMode = NumIntervalMode::eNIM_Inc;
 }
 
 void NumInterval::setTotalValue(float value)
@@ -23,7 +23,7 @@ void NumInterval::setCurValue(float value)
 
 void NumInterval::reset()
 {
-	if (NumIntervalMode.eNIM_Inc == this->mNumIntervalMode)
+	if (NumIntervalMode::eNIM_Inc == this->mNumIntervalMode)
 	{
 		this->mCurValue = 0;
 	}
@@ -37,7 +37,7 @@ bool NumInterval::canExec(float delta)
 {
 	bool ret = false;
 
-	if (NumIntervalMode.eNIM_Inc == this->mNumIntervalMode)
+	if (NumIntervalMode::eNIM_Inc == this->mNumIntervalMode)
 	{
 		this->mCurValue += delta;
 

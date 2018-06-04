@@ -8,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 数字间隔
  */
-public class NumInterval
+class NumInterval
 {
 protected:
 	float mTotalValue;

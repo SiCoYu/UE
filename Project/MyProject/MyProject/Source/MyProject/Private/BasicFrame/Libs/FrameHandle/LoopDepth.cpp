@@ -45,7 +45,7 @@ void LoopDepth::setIncHandle(EventDispatchDelegate handle)
 		this->mIncHandle = MY_NEW AddOnceEventDispatch();
 	}
 
-	this->mIncHandle.addEventHandle(handle);
+	this->mIncHandle->addEventHandle(handle);
 }
 
 void LoopDepth::setDecHandle(EventDispatchDelegate handle)
@@ -55,7 +55,7 @@ void LoopDepth::setDecHandle(EventDispatchDelegate handle)
 		this->mDecHandle = MY_NEW AddOnceEventDispatch();
 	}
 
-	this->mDecHandle.addEventHandle(handle);
+	this->mDecHandle->addEventHandle(handle);
 }
 
 void LoopDepth::setZeroHandle(EventDispatchDelegate handle)

@@ -8,9 +8,9 @@ EventDispatchFunctionObject::EventDispatchFunctionObject()
 	this->mIsClientDispose = false;
 }
 
-void EventDispatchFunctionObject::setClientDispose()
+void EventDispatchFunctionObject::setClientDispose(bool isDispose)
 {
-	this->mIsClientDispose = true;
+	this->mIsClientDispose = isDispose;
 }
 
 bool EventDispatchFunctionObject::isClientDispose()
