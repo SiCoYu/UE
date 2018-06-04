@@ -14,7 +14,7 @@ NetCmdNotify::NetCmdNotify()
 	  mHandleMsgCnt(0),
 	  mIsStopNetHandle(false)
 {
-	this->mCmdDispInfo = SAFE_NEW NetCmdDispatchInfo();
+	this->mCmdDispInfo = MY_NEW NetCmdDispatchInfo();
 }
 
 NetCmdNotify::~NetCmdNotify()

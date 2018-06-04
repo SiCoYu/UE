@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "BaseClassDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"

@@ -2,7 +2,6 @@
 
 //#include "UObject/UObjectGlobals.h"	// TSubobjectPtr
 //#include "MaterialShared.h"	// FMaterial
-#include "BaseClassDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
