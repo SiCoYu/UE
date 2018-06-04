@@ -299,7 +299,7 @@ void PriorityList::removePriorityObject(INoOrPriorityObject* priorityObject)
 	}
 }
 
-void PriorityList::addNoOrPriorityObject(INoOrPriorityObject* noPriorityObject, float priority = 0.0f)
+void PriorityList::addNoOrPriorityObject(INoOrPriorityObject* noPriorityObject, float priority)
 {
 	this->addPriorityObject(noPriorityObject, priority);
 }

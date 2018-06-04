@@ -59,12 +59,12 @@ void TickObjectPriorityMgr::_onPreAdvance(float delta, TickMode tickMode)
 void TickObjectPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 {
 	int idx = 0;
-	int count = this->mNoOrPriorityList.count();
+	int count = this->mNoOrPriorityList->count();
 	ITickedObject* tickObject = nullptr;
 
 	while (idx < count)
 	{
-		tickObject = (ITickedObject*)this->mNoOrPriorityList.get(idx);
+		tickObject = (ITickedObject*)this->mNoOrPriorityList->get(idx);
 
 		if (nullptr != (IDelayHandleItem*)tickObject)
 		{

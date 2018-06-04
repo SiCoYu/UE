@@ -37,13 +37,13 @@ void DelayPriorityHandleMgr::dispose()
 	}
 	if (nullptr != this->mDeferredDelQueue)
 	{
-		this->mDeferredDelQueue.clear();
+		this->mDeferredDelQueue->clear();
 		MY_DELETE this->mDeferredDelQueue;
 		this->mDeferredDelQueue = nullptr;
 	}
 	if (nullptr != this->mNoOrPriorityList)
 	{
-		this->mNoOrPriorityList.clear();
+		this->mNoOrPriorityList->clear();
 		MY_DELETE this->mNoOrPriorityList;
 		this->mNoOrPriorityList = nullptr;
 	}

@@ -25,12 +25,13 @@ void PriorityProcessObject::dispose()
 
 void PriorityProcessObject::setIsUsePool(bool value)
 {
-	this->mIsUsePool = value;
+	//this->mIsUsePool = value;
 }
 
 bool PriorityProcessObject::isUsePool()
 {
-	return this->mIsUsePool;
+	//return this->mIsUsePool;
+	return false;
 }
 
 void PriorityProcessObject::onPutInPool()

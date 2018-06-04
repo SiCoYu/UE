@@ -30,7 +30,7 @@ void DelayNoOrPriorityHandleMgr::dispose()
 
 bool DelayNoOrPriorityHandleMgr::isEmpty()
 {
-	bool ret = (this->mNoOrPriorityList.count() == 0);
+	bool ret = (this->mNoOrPriorityList->count() == 0);
 	return ret;
 }
 
@@ -54,9 +54,9 @@ void DelayNoOrPriorityHandleMgr::_addObject(IDelayHandleItem* delayObject, float
 		}
 		else
 		{
-			if (!this->mNoOrPriorityList.contains((INoOrPriorityObject*)delayObject))
+			if (!this->mNoOrPriorityList->contains((INoOrPriorityObject*)delayObject))
 			{
-				this->mNoOrPriorityList.addNoOrPriorityObject((INoOrPriorityObject*)delayObject, priority);
+				this->mNoOrPriorityList->addNoOrPriorityObject((INoOrPriorityObject*)delayObject, priority);
 			}
 		}
 	}
@@ -79,9 +79,9 @@ void DelayNoOrPriorityHandleMgr::_removeObject(IDelayHandleItem* delayObject)
 		}
 		else
 		{
-			if(this->mNoOrPriorityList.contains((INoOrPriorityObject*)delayObject))
+			if(this->mNoOrPriorityList->contains((INoOrPriorityObject*)delayObject))
 			{
-				this->mNoOrPriorityList.removeNoOrPriorityObject((INoOrPriorityObject*)delayObject);
+				this->mNoOrPriorityList->removeNoOrPriorityObject((INoOrPriorityObject*)delayObject);
 			}
 		}
 	}
