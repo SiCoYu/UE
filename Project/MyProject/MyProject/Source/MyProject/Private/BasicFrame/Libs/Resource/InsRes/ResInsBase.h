@@ -3,6 +3,7 @@
 
 #include "IDispatchObject.h"
 #include <string>
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -10,8 +11,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 class RefCountResLoadResultNotify;
 class ResItem;
 
-class ResInsBase : public IDispatchObject
+class ResInsBase : public GObject, public IDispatchObject
 {
+	M_DECLARE_CLASS(ResInsBase, GObject)
+
 protected:
 	RefCountResLoadResultNotify* mRefCountResLoadResultNotify;
 	bool mIsOrigResNeedImmeUnload;        // 原始资源是否需要立刻卸载

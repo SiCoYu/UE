@@ -3,7 +3,8 @@
 //#include "UObject/UObjectGlobals.h"	// TSubobjectPtr
 //#include "MaterialShared.h"	// FMaterial
 #include "BaseClassDef.h"
-#include "ResInsBase.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 // class FMaterial;
@@ -20,7 +21,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class MaterialInsRes : public ResInsBase
 {
-	M_DECLARE_SUPER_KW(ResInsBase);
+	M_DECLARE_CLASS(MaterialInsRes, ResInsBase);
 
 protected:
 	//FMaterial* mMaterial;

@@ -3,13 +3,15 @@
 #include "NonRefCountResLoadResultNotify.h"
 #include "ResLoadState.h"
 #include "LoadParam.h"
-
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(LoadItem, GObject)
 
 LoadItem::LoadItem()
 {

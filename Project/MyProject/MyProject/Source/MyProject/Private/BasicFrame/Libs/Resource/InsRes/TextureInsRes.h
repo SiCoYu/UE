@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include "BaseClassDef.h"
-#include "ResInsBase.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 class UTexture;
@@ -10,7 +11,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class TextureInsRes : public ResInsBase
 {
-	M_DECLARE_SUPER_KW(ResInsBase);
+	M_DECLARE_CLASS(TextureInsRes, ResInsBase);
 
 protected:
 	UTexture* mTexture;

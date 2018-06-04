@@ -3,6 +3,7 @@
 #include "ResLoadState.h"
 #include "ResLoadStateCV.h"
 #include "ResEventDispatch.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

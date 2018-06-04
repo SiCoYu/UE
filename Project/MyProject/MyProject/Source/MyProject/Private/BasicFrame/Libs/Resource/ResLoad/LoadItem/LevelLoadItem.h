@@ -3,7 +3,8 @@
 
 #include "LoadItem.h"
 #include <string>
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "MyDelegateDef.h"
 #include "IDispatchObject.h"
 #include "Delegates/IDelegateInstance.h"	// FDelegateHandle
@@ -18,7 +19,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 */
 class LevelLoadItem : public LoadItem
 {
-	M_DECLARE_SUPER_KW(LoadItem)
+	M_DECLARE_CLASS(LevelLoadItem, LoadItem)
 
 protected:
 	std::string mLevelName;

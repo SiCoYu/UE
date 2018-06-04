@@ -3,8 +3,11 @@
 #include "Engine/Texture.h"	// UTexture
 #include "TextureInsRes.h"
 #include "Prequisites.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(AuxTextureLoader, AuxLoaderBase)
 
 AuxTextureLoader::AuxTextureLoader()
 {

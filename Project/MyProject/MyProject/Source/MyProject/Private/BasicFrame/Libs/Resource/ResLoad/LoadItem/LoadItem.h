@@ -5,6 +5,9 @@
 #include "ResPackType.h"
 #include "ResLoadType.h"
 #include <string>
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -12,8 +15,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 class NonRefCountResLoadResultNotify;
 class LoadParam;
 
-class LoadItem : public IDispatchObject
+class LoadItem : public GObject, public IDispatchObject
 {
+	M_DECLARE_CLASS(LoadItem, GObject)
+
 protected:
     ResPackType mResPackType;
     ResLoadType mResLoadType;   // 资源加载类型

@@ -5,7 +5,8 @@
 #include "DownloadParam.h"
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -17,7 +18,7 @@ class DownloadItem;
  */
 class AuxDownloader : public AuxLoaderBase
 {
-	M_DECLARE_SUPER_KW(AuxLoaderBase)
+	M_DECLARE_CLASS(AuxDownloader, AuxLoaderBase)
 
 protected:
 	DownloadItem* mDownloadItem;

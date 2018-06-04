@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include "AuxLoaderBase.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "ResPackType.h"
 #include <string>		// std::string
 #include "EventDispatchDelegate.h"		// EventDispatchDelegate
@@ -16,7 +17,7 @@ class TextureInsRes;
 
 class AuxTextureLoader : public AuxLoaderBase
 {
-	M_DECLARE_SUPER_KW(AuxLoaderBase)
+	M_DECLARE_CLASS(AuxTextureLoader, AuxLoaderBase)
 
 protected :
 	TextureInsRes* mTextureRes;		// 纹理资源

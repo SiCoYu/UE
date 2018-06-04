@@ -2,8 +2,11 @@
 #include "EventDispatch.h"
 #include "Prequisites.h"
 #include "EventDispatchFunctionObject.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(EventDispatch, DelayPriorityHandleMgrBase)
 
 EventDispatch::EventDispatch(int eventId_)
 {

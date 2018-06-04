@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include "AuxMObjectLoaderBase.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "FormType.h"
 #include "ResPackType.h"
 #include "CoreInc.h"

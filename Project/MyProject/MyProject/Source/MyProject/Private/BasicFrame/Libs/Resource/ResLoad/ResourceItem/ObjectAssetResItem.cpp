@@ -5,8 +5,11 @@
 #include "RefCountResLoadResultNotify.h"	// RefCountResLoadResultNotify
 #include "ResLoadState.h"
 #include "ResEventDispatch.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(ObjectAssetResItem, ResItem)
 
 ObjectAssetResItem::ObjectAssetResItem()
 {

@@ -8,6 +8,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(ResInsBase, GObject)
+
 ResInsBase::ResInsBase()
 {
 #ifdef PKG_RES_LOAD

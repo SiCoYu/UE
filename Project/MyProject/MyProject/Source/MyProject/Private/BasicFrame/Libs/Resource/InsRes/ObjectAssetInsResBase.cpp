@@ -5,8 +5,11 @@
 #include "Prequisites.h"
 #include "ResInsEventDispatch.h"
 #include "MyGameInstanceBase.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(ObjectAssetInsResBase, ResInsBase)
 
 ObjectAssetInsResBase::ObjectAssetInsResBase()
 {

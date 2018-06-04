@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include "AuxMObjectLoaderBase.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "ResPackType.h"
 
 #include "PlatformDefine.h"
@@ -13,7 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class AuxMObjectLoader : public AuxMObjectLoaderBase
 {
-	M_DECLARE_SUPER_KW(AuxMObjectLoaderBase)
+	M_DECLARE_CLASS(AuxMObjectLoader, AuxMObjectLoaderBase)
 
 public:
 	AuxMObjectLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine);

@@ -1,8 +1,11 @@
 ﻿#include "MyProject.h"
 #include "ObjectAssetInsMgr.h"
 #include "ObjectAssetInsRes.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(ObjectAssetInsMgr, ResInsMgrBase)
 
 ObjectAssetInsMgr::ObjectAssetInsMgr()
 {

@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include "AuxLoaderBase.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include <string>
 #include "PlatformDefine.h"
 
@@ -15,7 +16,7 @@ class LoadParam;
  */
 class AuxLevelLoader : public AuxLoaderBase
 {
-	M_DECLARE_SUPER_KW(AuxLoaderBase)
+	M_DECLARE_CLASS(AuxLevelLoader, AuxLoaderBase)
 
 protected:
 	LevelResItem* mLevelResItem;

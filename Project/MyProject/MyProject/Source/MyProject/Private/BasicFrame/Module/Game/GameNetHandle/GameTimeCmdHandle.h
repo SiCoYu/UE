@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include "NetCmdDispatchHandle.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -10,7 +11,7 @@ class IDispatchObject;
 
 class GameTimeCmdHandle : public NetCmdDispatchHandle
 {
-	M_DECLARE_SUPER_KW(NetCmdDispatchHandle)
+	M_DECLARE_CLASS(GameTimeCmdHandle, NetCmdDispatchHandle)
 
 public:
 	GameTimeCmdHandle();

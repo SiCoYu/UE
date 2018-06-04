@@ -1,14 +1,15 @@
 ﻿#pragma once
 
 #include "GObject.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class GContainerObject : public GObject
 {
-	M_DECLARE_SUPER_KW(GObject)
+	M_DECLARE_CLASS(GContainerObject, GObject)
 
 public:
 	GContainerObject();

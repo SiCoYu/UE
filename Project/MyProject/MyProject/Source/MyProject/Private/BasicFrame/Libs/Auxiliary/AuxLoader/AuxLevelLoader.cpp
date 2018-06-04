@@ -4,8 +4,11 @@
 #include "LoadParam.h"
 #include "Prequisites.h"
 #include "LevelResItem.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(AuxLevelLoader, AuxLoaderBase)
 
 AuxLevelLoader::AuxLevelLoader(std::string path)
 	: Super(path)

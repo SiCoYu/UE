@@ -7,6 +7,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(ObjectAssetLoadItem, LoadItem)
+
 ObjectAssetLoadItem::ObjectAssetLoadItem()
 {
 	this->mResObject = nullptr;

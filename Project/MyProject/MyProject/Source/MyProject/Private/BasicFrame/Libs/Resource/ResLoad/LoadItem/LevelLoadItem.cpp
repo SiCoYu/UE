@@ -12,6 +12,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(LevelLoadItem, LoadItem)
+
 LevelLoadItem::LevelLoadItem()
 {
 	this->mMyDelegateLevelLoad = nullptr;

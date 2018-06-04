@@ -3,14 +3,17 @@
 
 #include "MDictionary.h"
 #include "EventDispatchDelegate.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class EventDispatch;
 
-class EventDispatchGroup
+class EventDispatchGroup : public GObject
 {
+	M_DECLARE_CLASS(EventDispatchGroup, GObject)
+
 protected:
 	MDictionary<int, EventDispatch*> mGroupId2DispatchDic;
     bool mIsInLoop;       // 是否是在循环遍历中

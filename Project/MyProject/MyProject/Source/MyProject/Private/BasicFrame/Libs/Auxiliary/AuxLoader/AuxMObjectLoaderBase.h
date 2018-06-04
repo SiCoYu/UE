@@ -3,7 +3,8 @@
 #include "AuxLoaderBase.h"
 #include <string>
 #include "EventDispatchDelegate.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "GameFramework/Actor.h"	// AActor
 #include "UObject/Object.h"	// UObject
 #include "ResPackType.h"

@@ -5,7 +5,8 @@
 #include <string>
 #include "Math/Vector.h"	// FVector
 #include "Math/Quat.h"	// FQuat
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "ResPackType.h"
 #include "PlatformDefine.h"
 
@@ -18,7 +19,7 @@ class ResInsEventDispatch;
 
 class ObjectAssetInsResBase : public ResInsBase
 {
-	M_DECLARE_SUPER_KW(ResInsBase)
+	M_DECLARE_CLASS(ObjectAssetInsResBase, ResInsBase)
 
 protected:
 	UObject* mGo;

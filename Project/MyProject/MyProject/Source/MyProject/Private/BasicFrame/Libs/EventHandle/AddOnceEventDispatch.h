@@ -3,7 +3,8 @@
 
 #include "EventDispatch.h"
 #include "EventDispatchDelegate.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -13,7 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class AddOnceEventDispatch : public EventDispatch
 {
-	M_DECLARE_SUPER_KW(EventDispatch)
+	M_DECLARE_CLASS(AddOnceEventDispatch, EventDispatch)
 
 public:
 	AddOnceEventDispatch(int eventId_ = 0);

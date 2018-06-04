@@ -3,7 +3,8 @@
 
 #include "LoadItem.h"
 #include "CoreUObject.h"	// UClass \ UObject
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -13,7 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class ClassAssetLoadItem : public LoadItem
 {
-	M_DECLARE_SUPER_KW(LoadItem)
+	M_DECLARE_CLASS(ClassAssetLoadItem, LoadItem)
 
 protected:
 	UClass* mResObject;		// uasset 类型的资源

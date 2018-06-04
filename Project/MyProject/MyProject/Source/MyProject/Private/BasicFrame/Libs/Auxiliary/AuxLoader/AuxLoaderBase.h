@@ -5,7 +5,8 @@
 #include <string>
 #include "EventDispatchDelegate.h"
 #include "DownloadParam.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "CoreInc.h"
 #include "DownloadType.h"
 #include "ResLoadPriority.h"

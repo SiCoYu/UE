@@ -2,8 +2,11 @@
 #include "TextureInsRes.h"
 #include "ResItem.h"
 #include "Engine/Texture.h"	// UTexture
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(TextureInsRes, ResInsBase)
 
 TextureInsRes::TextureInsRes()
 {

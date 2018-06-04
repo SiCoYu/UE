@@ -3,6 +3,8 @@
 
 #include "ResInsMgrBase.h"
 #include "ResPackType.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -15,6 +17,8 @@ class ClassAssetInsRes;
 
 class ClassAssetInsMgr : public ResInsMgrBase
 {
+	M_DECLARE_CLASS(ClassAssetInsMgr, ResInsMgrBase)
+
 public:
 	ClassAssetInsMgr();
 	virtual ~ClassAssetInsMgr();

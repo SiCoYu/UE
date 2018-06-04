@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include "AuxLoaderBase.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "ResPackType.h"
 #include <string>		// std::string
 #include "EventDispatchDelegate.h"		// EventDispatchDelegate
@@ -17,7 +18,7 @@ class IDispatchObject;
 
 class AuxMaterialLoader : public AuxLoaderBase
 {
-	M_DECLARE_SUPER_KW(AuxLoaderBase)
+	M_DECLARE_CLASS(AuxMaterialLoader, AuxLoaderBase)
 
 protected :
 	MaterialInsRes* mMaterialRes;		// 纹理资源

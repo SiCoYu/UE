@@ -2,8 +2,11 @@
 #include "AuxDownloader.h"
 #include "DownloadItem.h"
 #include "Prequisites.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(AuxDownloader, AuxLoaderBase)
 
 char* AuxDownloader::getBytes()
 {

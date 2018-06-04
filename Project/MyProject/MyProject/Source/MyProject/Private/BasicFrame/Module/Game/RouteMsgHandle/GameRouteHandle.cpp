@@ -3,8 +3,11 @@
 #include "MsgRouteBase.h"
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(GameRouteHandle, MsgRouteHandleBase)
 
 GameRouteHandle::GameRouteHandle()
 {

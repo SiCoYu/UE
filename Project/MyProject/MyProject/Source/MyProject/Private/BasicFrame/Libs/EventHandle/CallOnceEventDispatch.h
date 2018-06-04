@@ -2,7 +2,8 @@
 #define __CallOnceEventDispatch_H
 
 #include "EventDispatch.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -14,7 +15,7 @@ class IDispatchObject;
  */
 class CallOnceEventDispatch : public EventDispatch
 {
-	M_DECLARE_SUPER_KW(EventDispatch)
+	M_DECLARE_CLASS(CallOnceEventDispatch, EventDispatch)
 
 public:
 	CallOnceEventDispatch();

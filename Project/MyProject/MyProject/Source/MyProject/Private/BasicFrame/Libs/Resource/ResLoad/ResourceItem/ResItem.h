@@ -6,6 +6,9 @@
 #include "ResLoadType.h"
 #include <string>
 #include "Platform.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 class UObject;
@@ -16,8 +19,10 @@ class RefCountResLoadResultNotify;
 class LoadItem;
 class LoadParam;
 
-class ResItem : public IDispatchObject
+class ResItem : public GObject, public IDispatchObject
 {
+	M_DECLARE_CLASS(ResItem, GObject)
+
 protected :
 	ResPackType mResPackType;    // 资源打包类型
     ResLoadType mResLoadType;    // 资源加载类型

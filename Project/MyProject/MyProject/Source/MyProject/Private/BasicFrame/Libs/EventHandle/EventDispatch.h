@@ -4,7 +4,8 @@
 #include "DelayPriorityHandleMgrBase.h"
 #include "MList.h"
 #include "EventDispatchDelegate.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -17,7 +18,7 @@ class EventDispatchFunctionObject;
  */
 class EventDispatch : public DelayPriorityHandleMgrBase
 {
-	M_DECLARE_SUPER_KW(DelayPriorityHandleMgrBase)
+	M_DECLARE_CLASS(EventDispatch, DelayPriorityHandleMgrBase)
 
 protected :
 	int mEventId;

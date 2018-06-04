@@ -5,8 +5,11 @@
 #include "ResEventDispatch.h"
 #include "RefCount.h"
 #include "LoadParam.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(ResItem, GObject)
 
 ResItem::ResItem()
 {

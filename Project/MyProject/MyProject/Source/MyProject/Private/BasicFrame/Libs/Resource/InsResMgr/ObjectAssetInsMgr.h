@@ -3,7 +3,8 @@
 
 #include "ResInsMgrBase.h"
 #include "EventDispatchDelegate.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -15,7 +16,7 @@ class ObjectAssetInsRes;
  */
 class ObjectAssetInsMgr : public ResInsMgrBase
 {
-	M_DECLARE_SUPER_KW(ResInsMgrBase)
+	M_DECLARE_CLASS(ObjectAssetInsMgr, ResInsMgrBase)
 
 public:
 	ObjectAssetInsMgr();

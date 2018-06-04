@@ -5,8 +5,11 @@
 #include "Materials/MaterialInterface.h"	// UMaterialInterface
 #include "Materials/MaterialInstance.h"	// UMaterialInstance, class UMaterialInstance : public UMaterialInterface
 #include "Materials/Material.h"	// UMaterial, class UMaterial : public UMaterialInterface
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(MaterialInsRes, ResInsBase)
 
 MaterialInsRes::MaterialInsRes()
 {

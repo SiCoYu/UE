@@ -13,4 +13,3 @@
 #include "MClassMacros.h"
 #include "MClassInfo.h"
 #include "MClassFactory.h"
-#include "BaseClassDef.h"

@@ -5,6 +5,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(ResInsMgrBase, GObject)
+
 ResInsMgrBase::ResInsMgrBase()
 {
 	this->mLoadingDepth = 0;

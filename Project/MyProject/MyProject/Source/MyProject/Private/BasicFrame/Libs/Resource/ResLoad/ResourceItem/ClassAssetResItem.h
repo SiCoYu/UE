@@ -2,7 +2,8 @@
 #define __ClassAssetResItem_H
 
 #include "ResItem.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 class UClass;
@@ -14,7 +15,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class ClassAssetResItem : public ResItem
 {
-	M_DECLARE_SUPER_KW(ResItem)
+	M_DECLARE_CLASS(ClassAssetResItem, ResItem)
 
 protected:
 	UClass* mResObject;		// uasset 类型的资源

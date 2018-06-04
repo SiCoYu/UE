@@ -2,8 +2,11 @@
 #include "EventDispatchGroup.h"
 #include "Prequisites.h"
 #include "EventDispatch.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(EventDispatchGroup, GObject)
 
 EventDispatchGroup::EventDispatchGroup()
 {

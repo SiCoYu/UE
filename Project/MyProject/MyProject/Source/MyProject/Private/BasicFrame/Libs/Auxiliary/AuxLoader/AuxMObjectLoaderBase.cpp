@@ -6,6 +6,7 @@
 #include "Prequisites.h"
 #include "ResInsEventDispatch.h"
 #include "ResLoadState.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

@@ -1,8 +1,11 @@
 ﻿#include "MyProject.h"
 #include "TextureInsResMgr.h"
 #include "TextureInsRes.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(TextureInsResMgr, ResInsMgrBase)
 
 TextureInsResMgr::TextureInsResMgr()
 {

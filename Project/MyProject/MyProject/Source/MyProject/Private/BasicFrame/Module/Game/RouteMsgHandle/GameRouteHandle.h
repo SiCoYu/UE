@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include "MsgRouteHandleBase.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -10,7 +11,7 @@ class IDispatchObject;
 
 class GameRouteHandle : public MsgRouteHandleBase
 {
-	M_DECLARE_SUPER_KW(MsgRouteHandleBase)
+	M_DECLARE_CLASS(GameRouteHandle, MsgRouteHandleBase)
 
 public:
 	GameRouteHandle();

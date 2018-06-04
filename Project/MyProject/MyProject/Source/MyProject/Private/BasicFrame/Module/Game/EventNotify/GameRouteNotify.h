@@ -2,7 +2,7 @@
 
 #include "ISceneEventNotify.h"
 #include "MsgRouteDispatchHandle.h"
-#include "BaseClassDef.h"	// M_DECLARE_SUPER_KW
+#include "MClassInfo.h"
 #include "MClassMacros.h"	// M_DECLARE_CLASS
 #include "MClassInfo.h"		// MClassInfo
 #include "PlatformDefine.h"

@@ -2,7 +2,8 @@
 
 #include "EventDispatch.h"
 #include "IDispatchObject.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 class AActor;
@@ -17,7 +18,7 @@ class IDispatchObject;
 
 class ResInsEventDispatch : public EventDispatch, public IDispatchObject
 {
-	M_DECLARE_SUPER_KW(EventDispatch)
+	M_DECLARE_CLASS(ResInsEventDispatch, EventDispatch)
 
 protected:
 	bool mIsValid;

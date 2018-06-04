@@ -2,14 +2,15 @@
 #define __ObjectAssetInsRes_H
 
 #include "ObjectAssetInsResBase.h"
-#include "BaseClassDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class ObjectAssetInsRes : public ObjectAssetInsResBase
 {
-	M_DECLARE_SUPER_KW(ObjectAssetInsResBase)
+	M_DECLARE_CLASS(ObjectAssetInsRes, ObjectAssetInsResBase)
 
 public:
 	ObjectAssetInsRes();
