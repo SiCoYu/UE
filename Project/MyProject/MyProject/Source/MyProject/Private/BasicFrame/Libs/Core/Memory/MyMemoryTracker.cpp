@@ -84,7 +84,10 @@ void MyMemoryTracker::recordAlloc(
 {
 	if (this->mRecordEnable)
 	{
-		assert(this->mAllocations.find(ptr) == this->mAllocations.end() && "Double allocation with same address");
+		assert(
+			this->mAllocations.find(ptr) == this->mAllocations.end() && 
+			"Double allocation with same address"
+		);
 
 		this->mAllocations[ptr] = MyAllocRecordItem(
 			sz, 
