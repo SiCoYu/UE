@@ -194,7 +194,7 @@ void UiMgr::addFormNoReady(UForm* form)
 	form->setUiLayer(layer);
 	layer->addForm(form);
 
-	this->mId2FormDic[form->getId()] = form;
+	this->mId2FormDic.add(form->getId(), form);
 	form->init();        // 初始化
 }
 

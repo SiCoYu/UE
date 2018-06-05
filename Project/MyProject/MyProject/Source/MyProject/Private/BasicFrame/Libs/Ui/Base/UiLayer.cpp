@@ -49,7 +49,7 @@ UiLayerId UiLayer::getLayerID()
 
 void UiLayer::addForm(UForm* form)
 {
-	this->mWinDic[form->getId()] = form;
+	this->mWinDic.add(form->getId(), form);
 }
 
 void UiLayer::onStageReSize()
