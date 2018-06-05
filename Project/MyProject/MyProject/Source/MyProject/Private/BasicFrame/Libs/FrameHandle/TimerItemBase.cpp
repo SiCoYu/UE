@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "TimerItemBase.h"
-#include "AddOnceEventDispatch.h"
+#include "CallFuncObjectFixParam.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
@@ -37,15 +37,15 @@ void TimerItemBase::addTimerEventHandle(EventDispatchDelegate handle)
 {
 	if (nullptr == this->mTimerDispatch)
 	{
-		this->mTimerDispatch = MY_NEW AddOnceEventDispatch();
+		this->mTimerDispatch = MY_NEW CallFuncObjectFixParam();
 	}
 
-	this->mTimerDispatch->addEventHandle(handle);
+	this->mTimerDispatch->setEventHandle(handle);
 }
 
 void TimerItemBase::removeTimerEventHandle(EventDispatchDelegate handle)
 {
-	this->mTimerDispatch->removeEventHandle(handle);
+	this->mTimerDispatch->clearEventHandle(handle);
 }
 
 void TimerItemBase::OnTimer(float delta)

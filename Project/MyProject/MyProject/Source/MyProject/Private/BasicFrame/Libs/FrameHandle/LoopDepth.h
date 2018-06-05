@@ -6,15 +6,15 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class AddOnceEventDispatch;
+class CallFuncObjectNoParam;
 
 class LoopDepth : public GObject
 {
 private:
 	int mLoopDepth;         // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
-	AddOnceEventDispatch* mIncHandle;     // 增加处理器
-	AddOnceEventDispatch* mDecHandle;     // 减少处理器
-	AddOnceEventDispatch* mZeroHandle;    // 减少到 0 处理器
+	CallFuncObjectNoParam* mIncHandle;     // 增加处理器
+	CallFuncObjectNoParam* mDecHandle;     // 减少处理器
+	CallFuncObjectNoParam* mZeroHandle;    // 减少到 0 处理器
 
 public:
 	LoopDepth();

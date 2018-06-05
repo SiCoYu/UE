@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "LoopDepth.h"
-#include "AddOnceEventDispatch.h"
+#include "CallFuncObjectNoParam.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 
@@ -45,30 +45,30 @@ void LoopDepth::setIncHandle(EventDispatchDelegate handle)
 {
 	if (nullptr == this->mIncHandle)
 	{
-		this->mIncHandle = MY_NEW AddOnceEventDispatch();
+		this->mIncHandle = MY_NEW CallFuncObjectNoParam();
 	}
 
-	this->mIncHandle->addEventHandle(handle);
+	this->mIncHandle->setEventHandle(handle);
 }
 
 void LoopDepth::setDecHandle(EventDispatchDelegate handle)
 {
 	if (nullptr == this->mDecHandle)
 	{
-		this->mDecHandle = MY_NEW AddOnceEventDispatch();
+		this->mDecHandle = MY_NEW CallFuncObjectNoParam();
 	}
 
-	this->mDecHandle->addEventHandle(handle);
+	this->mDecHandle->setEventHandle(handle);
 }
 
 void LoopDepth::setZeroHandle(EventDispatchDelegate handle)
 {
 	if (nullptr == this->mZeroHandle)
 	{
-		this->mZeroHandle = MY_NEW AddOnceEventDispatch();
+		this->mZeroHandle = MY_NEW CallFuncObjectNoParam();
 	}
 
-	this->mZeroHandle->addEventHandle(handle);
+	this->mZeroHandle->setEventHandle(handle);
 }
 
 void LoopDepth::_incDepth()
