@@ -21,28 +21,25 @@ M_IMPLEMENT_AND_REGISTER_CLASS(DelayNoOrPriorityHandleMgrBase, GObject)
 DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 {
 	this->mIsDispose = false;
-}
 
-void DelayNoOrPriorityHandleMgrBase::init()
-{
-	this->mIsDispose = false;
-
-	if (nullptr == this->mLoopDepth)
-	{
-		// 如果在构造函数中执行，会递归构造 AddOnceEventDispatch ，造成死循环
-		this->mLoopDepth = MY_NEW LoopDepth();
-		this->mLoopDepth->setZeroHandle(
-			MakeEventDispatchDelegate(
-				this,
-				&DelayNoOrPriorityHandleMgrBase::_processDelayObjects
-			)
-		);
-	}
+	// 如果在构造函数中执行，会递归构造 AddOnceEventDispatch ，造成死循环
+	this->mLoopDepth = MY_NEW LoopDepth();
+	this->mLoopDepth->setZeroHandle(
+		MakeEventDispatchDelegate(
+			this,
+			&DelayNoOrPriorityHandleMgrBase::_processDelayObjects
+		)
+	);
 
 	if (MacroDef::DEBUG_SYS)
 	{
 		//this->mDebugUniqueId = (int)Ctx.msInstance.mDebugSys.mDebugPriorityHandleUniqueId.genNewId();
 	}
+}
+
+void DelayNoOrPriorityHandleMgrBase::init()
+{
+	
 }
 
 void DelayNoOrPriorityHandleMgrBase::dispose()
