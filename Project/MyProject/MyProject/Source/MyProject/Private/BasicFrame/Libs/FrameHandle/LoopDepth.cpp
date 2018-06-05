@@ -9,6 +9,9 @@ MY_BEGIN_NAMESPACE(MyNS)
 LoopDepth::LoopDepth()
 {
 	this->mLoopDepth = 0;
+	this->mIncHandle = nullptr;
+	this->mDecHandle = nullptr;
+	this->mZeroHandle = nullptr;
 }
 
 void LoopDepth::init()

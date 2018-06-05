@@ -2,9 +2,11 @@
 
 #include "MClassInfo.h"
 #include "MClassMacros.h"
+#include "ResInsBase.h"
 #include "PlatformDefine.h"
 
 class UTexture;
+class ResItem;
 
 MY_BEGIN_NAMESPACE(MyNS)
 

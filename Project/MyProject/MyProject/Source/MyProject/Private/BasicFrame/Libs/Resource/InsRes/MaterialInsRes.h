@@ -4,6 +4,7 @@
 //#include "MaterialShared.h"	// FMaterial
 #include "MClassInfo.h"
 #include "MClassMacros.h"
+#include "ResInsBase.h"
 #include "PlatformDefine.h"
 
 // class FMaterial;
@@ -13,6 +14,8 @@ class UMaterialInstance;
 class UMaterialInstanceDynamic;
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+class ResItem;
 
 /**
  * @brief UE4:C++中使用材质

@@ -5,6 +5,8 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "NoPriorityList.h"
 #include "MClassFactory.h"
+#include "NoPriorityList.h"
+#include "PriorityList.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

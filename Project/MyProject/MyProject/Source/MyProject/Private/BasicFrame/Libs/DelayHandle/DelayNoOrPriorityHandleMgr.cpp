@@ -8,6 +8,7 @@
 #include "Ctx.h"
 #include "LogSys.h"
 #include "LogTypeId.h"
+#include "INoOrPriorityList.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

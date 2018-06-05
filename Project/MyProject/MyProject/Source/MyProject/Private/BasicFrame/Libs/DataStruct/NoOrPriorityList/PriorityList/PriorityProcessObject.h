@@ -5,6 +5,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class INoOrPriorityObject;
+
 /**
  * @brief 优先级队列对象
  */

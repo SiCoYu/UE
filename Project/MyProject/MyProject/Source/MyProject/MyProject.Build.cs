@@ -37,9 +37,9 @@ public class MyProject : ModuleRules
         // http://api.unrealengine.com/CHN/Programming/UnrealBuildSystem/Configuration/
         this.MinFilesUsingPrecompiledHeaderOverride = 1;
         // 仅仅需要编译修改的少数几个文件
-        //bFasterWithoutUnity = true;
+        bFasterWithoutUnity = true;
         // 全部重新编译
-        this.bFasterWithoutUnity = false;
+        //this.bFasterWithoutUnity = false;
 
         // 添加类似 VS 工程中的包含目录，头文件就是相对于这些目录的
         // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs

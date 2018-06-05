@@ -1,8 +1,5 @@
 #include "MyProject.h"
 #include "EditorWinLog.h"
-#include "PlatformDefine.h"
-
-MY_USING_NAMESPACE(MyNS)
 
 //DEFINE_LOG_CATEGORY(ComLog);
 //DEFINE_LOG_CATEGORY(ComWarning);

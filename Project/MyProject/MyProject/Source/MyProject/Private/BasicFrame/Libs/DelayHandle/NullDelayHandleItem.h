@@ -3,6 +3,7 @@
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "GObject.h"
+#include "IDelayHandleItem.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
