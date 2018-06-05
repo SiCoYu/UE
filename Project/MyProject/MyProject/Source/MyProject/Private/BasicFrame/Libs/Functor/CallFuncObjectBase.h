@@ -9,7 +9,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 /**
- * @brief 类似 EventDispatch ，CallFuncObjectBase 提供简单的函数回调，EventDispatch 过于复杂
+ * @brief 类似 EventDispatch ，CallFuncObjectBase 提供单一的函数回调，EventDispatch 过于复杂，会提供一个列表
  */
 class CallFuncObjectBase : public GObject
 {
