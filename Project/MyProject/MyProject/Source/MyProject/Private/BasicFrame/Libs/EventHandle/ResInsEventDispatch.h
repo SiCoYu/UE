@@ -22,15 +22,15 @@ class ResInsEventDispatch : public EventDispatch, public IDispatchObject
 
 protected:
 	bool mIsValid;
-	AActor* mInsGO;
+	AActor* mInsActor;
 
 public:
 	ResInsEventDispatch();
 public:
 	void setIsValid(bool value);
 	bool getIsValid();
-	void setInsGO(AActor* go);
-	AActor* getInsGO();
+	void setInsActor(AActor* go);
+	AActor* getInsActor();
 	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;
 };
 

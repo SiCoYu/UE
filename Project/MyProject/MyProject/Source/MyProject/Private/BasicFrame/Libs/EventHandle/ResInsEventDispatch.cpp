@@ -22,14 +22,14 @@ bool ResInsEventDispatch::getIsValid()
 	return this->mIsValid;
 }
 
-void ResInsEventDispatch::setInsGO(AActor* go)
+void ResInsEventDispatch::setInsActor(AActor* go)
 {
-	this->mInsGO = go;
+	this->mInsActor = go;
 }
 
-AActor* ResInsEventDispatch::getInsGO()
+AActor* ResInsEventDispatch::getInsActor()
 {
-	return this->mInsGO;
+	return this->mInsActor;
 }
 
 void ResInsEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
@@ -40,7 +40,7 @@ void ResInsEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 	}
 	else
 	{
-		UtilSysLibWrap::Destroy(this->mInsGO);
+		UtilSysLibWrap::Destroy(this->mInsActor);
 	}
 }
 
