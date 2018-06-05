@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "CallFuncObjectBase.h"
 #include "IDispatchObject.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -36,7 +37,7 @@ void CallFuncObjectBase::setEventHandle(EventDispatchDelegate handle)
 	this->mHandle = handle;
 }
 
-void CallFuncObjectBase::clearEventHandle(EventDispatchDelegate handle)
+void CallFuncObjectBase::clearEventHandle()
 {
 	this->mHandle = nullptr;
 }

@@ -27,7 +27,7 @@ public:
 	virtual bool isValid();
 
 	virtual void setEventHandle(EventDispatchDelegate handle);
-	virtual void clearEventHandle(EventDispatchDelegate handle);
+	virtual void clearEventHandle();
 	virtual void dispatchEvent(IDispatchObject* dispObj);
 };
 

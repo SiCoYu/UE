@@ -7,7 +7,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class CallFuncObjectNoParam : CallFuncObjectBase
+class CallFuncObjectNoParam : public CallFuncObjectBase
 {
 	M_DECLARE_CLASS(CallFuncObjectNoParam, CallFuncObjectBase)
 

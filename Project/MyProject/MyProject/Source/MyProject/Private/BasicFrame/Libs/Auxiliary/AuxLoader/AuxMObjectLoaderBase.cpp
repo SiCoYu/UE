@@ -221,7 +221,7 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
 void AuxMObjectLoaderBase::onPrefabIns(IDispatchObject* dispObj)
 {
 	this->mResInsEventDispatch = (ResInsEventDispatch*)dispObj;
-	this->setSelfGo(this->mResInsEventDispatch->getInsGO());
+	this->setSelfGo(this->mResInsEventDispatch->getInsActor());
 	this->onAllFinish();
 }
 
@@ -390,7 +390,7 @@ void AuxMObjectLoaderBase::onInstantiateObjectFinish(IDispatchObject* dispObj)
 {
 	if (nullptr != dispObj)
 	{
-		this->setSelfGo(this->mResInsEventDispatch->getInsGO());
+		this->setSelfGo(this->mResInsEventDispatch->getInsActor());
 	}
 
 	if (nullptr != this->mInsEventDispatch)

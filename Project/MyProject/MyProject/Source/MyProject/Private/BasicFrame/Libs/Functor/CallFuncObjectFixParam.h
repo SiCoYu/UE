@@ -9,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class IDispatchObject;
 
-class CallFuncObjectFixParam : CallFuncObjectBase
+class CallFuncObjectFixParam : public CallFuncObjectBase
 {
 	M_DECLARE_CLASS(CallFuncObjectFixParam, CallFuncObjectBase)
 

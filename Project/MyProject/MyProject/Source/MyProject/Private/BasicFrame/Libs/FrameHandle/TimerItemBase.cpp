@@ -45,7 +45,7 @@ void TimerItemBase::addTimerEventHandle(EventDispatchDelegate handle)
 
 void TimerItemBase::removeTimerEventHandle(EventDispatchDelegate handle)
 {
-	this->mTimerDispatch->clearEventHandle(handle);
+	this->mTimerDispatch->clearEventHandle();
 }
 
 void TimerItemBase::OnTimer(float delta)

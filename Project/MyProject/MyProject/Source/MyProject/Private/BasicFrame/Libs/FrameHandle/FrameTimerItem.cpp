@@ -45,7 +45,7 @@ void FrameTimerItem::addTimerEventHandle(EventDispatchDelegate handle)
 
 void FrameTimerItem::removeTimerEventHandle(EventDispatchDelegate handle)
 {
-	this->mTimerDispatch->clearEventHandle(handle);
+	this->mTimerDispatch->clearEventHandle();
 }
 
 void FrameTimerItem::onFrameTimer()

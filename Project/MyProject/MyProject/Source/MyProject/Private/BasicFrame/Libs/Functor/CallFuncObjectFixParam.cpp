@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "CallFuncObjectFixParam.h"
 #include "IDispatchObject.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
