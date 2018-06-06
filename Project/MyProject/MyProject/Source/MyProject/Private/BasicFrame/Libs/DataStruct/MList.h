@@ -24,7 +24,7 @@ public:
 	typedef std::vector<T>& ListRef;
 	typedef typename std::vector<T>::iterator Iterator;
 	typedef MList<T>& MListRef;
-	typedef T& ItemRef;
+	typedef T& ValueTypeRef;
 
 protected:
 	std::vector<T> mList;

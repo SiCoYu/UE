@@ -4,7 +4,7 @@
 #include "UiFormId.h"
 #include "WinRender.h"
 #include "Blueprint/UserWidget.h"	// UUserWidget
-//#include "PlatformDefine.h"
+#include "MyUEObject.h"
 #include "PlatformDefine.h"
 #include "Window.generated.h"
 
@@ -28,7 +28,7 @@ using namespace MyNS;
 
 //UCLASS(abstract, config = Game)
 UCLASS(config = Game)
-class UWindow : public UObject
+class UWindow : public UMyUEObject
 //class UWindow : public UUserWidget
 {
 	GENERATED_BODY()

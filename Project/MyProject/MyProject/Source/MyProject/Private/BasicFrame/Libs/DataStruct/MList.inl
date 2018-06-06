@@ -86,7 +86,7 @@ bool MList<T>::remove(T item)
 }
 
 template <typename T>
-typename MList<T>::ItemRef MList<T>::operator [] (int index)
+typename MList<T>::ValueTypeRef MList<T>::operator [] (int index)
 {
 	return this->mList[index];
 }

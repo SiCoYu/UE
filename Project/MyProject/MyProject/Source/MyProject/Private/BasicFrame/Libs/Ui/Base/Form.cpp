@@ -120,11 +120,6 @@ void UForm::onInit()
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_INIT);
 	//}
-	if (!this->mIsReady)
-	{
-		// 默认会继续加载资源
-		GUiMgr->loadWidgetRes(this->getId());
-	}
 }
 
 // 第一次显示之前会调用一次

@@ -29,71 +29,64 @@ MY_BEGIN_NAMESPACE(MyNS)
 template <class T>
 T* UiMgr::loadForm(UiFormId formId)
 {
-	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
-	UForm* form = this->getForm<UForm>(formId);
+	//UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
 
-	if (nullptr != form)     // 本地已经创建了这个窗口，
+	//if (attrItem.m_bNeedLua)
+	//{
+	//	form = new Form();
+	//}
+	//else
+	//{
+	//	form = Ctx.m_instance.m_scriptDynLoad.getScriptObject(attrItem.m_scriptTypeName) as Form;
+	//}
+
+	//TSubclassOf<UUMGWidget> WidgetClass = UtilEngineWrap::FindClass<UUMGWidget>(*UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
+	//UClass* WidgetClass = UtilEngineWrap::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
+	//UClass* WidgetClass = GMyStreamableManager->SynchronousLoadType<UClass>(attrItem->mWidgetPath);
+
+	//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
+
+	//ClassAssetInsRes* asset = GClassAssetInsMgr->getAndSyncLoadClass(attrItem->mWidgetPath);
+	//UClass* WidgetClass = asset->getClass();
+
+	//UUMGWidget* WidgetObject = nullptr;
+
+	//if (UMGOuterType::eWorld == attrItem->mUMGOuterType)
+	//{
+
+	//}
+	//else if (UMGOuterType::ePlayerController == attrItem->mUMGOuterType)
+	//{
+	//	WidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
+	//}
+	//else if (UMGOuterType::eGameInstance == attrItem->mUMGOuterType)
+	//{
+
+	//}
+
+	//WidgetObject->AddToViewport();
+
+	UForm* form = NULL;
+
+	form = UtilEngineWrap::NewObject<T>();
+
+	if (nullptr != form)                   // 如果代码已经在本地
 	{
-		if (form->isReady())      // 如果资源也已经加载进来了
-		{
-			//if (nullptr != Ctx.m_instance.m_cbUIEvent)
-			//{
-			//	Ctx.m_instance.m_cbUIEvent.onCodeFormLoaded(window);  // 资源加载完成
-			//}
-		}
-	}
-	else if (!this->mId2CodeLoadingItemDic.containsKey(formId))                       // 如果什么都没有创建，第一次加载
-	{
+		form->setId(formId);
+
 		//if (attrItem.m_bNeedLua)
 		//{
-		//	form = new Form();
-		//}
-		//else
-		//{
-		//	form = Ctx.m_instance.m_scriptDynLoad.getScriptObject(attrItem.m_scriptTypeName) as Form;
+		//	form.luaCSBridgeForm = new LuaCSBridgeForm(attrItem.m_luaScriptTableName, form);
+		//	form.luaCSBridgeForm.DoFile(attrItem.m_luaScriptPath);
 		//}
 
-		//TSubclassOf<UUMGWidget> WidgetClass = UtilEngineWrap::FindClass<UUMGWidget>(*UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
-		//UClass* WidgetClass = UtilEngineWrap::MLoadClass<UUMGWidget>(nullptr, *UtilStr::ConvStdStr2FString(attrItem->mWidgetPath));
-		//UClass* WidgetClass = GMyStreamableManager->SynchronousLoadType<UClass>(attrItem->mWidgetPath);
+		//form->mWinRender->mUiRoot = WidgetObject;
 
-		//this->loadFromFile("WidgetBlueprint'/Game/MyAsset/Blueprints/Umg/UITestUMG/UITestUMG2.UITestUMG2_C'", MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
+		this->addFormNoReady(form);           // 仅仅是创建数据，资源还没有加载完成
+		//onCodeLoadedByForm(form);
 
-		//ClassAssetInsRes* asset = GClassAssetInsMgr->getAndSyncLoadClass(attrItem->mWidgetPath);
-		//UClass* WidgetClass = asset->getClass();
-
-		//UUMGWidget* WidgetObject = nullptr;
-
-		//if (UMGOuterType::eWorld == attrItem->mUMGOuterType)
-		//{
-
-		//}
-		//else if (UMGOuterType::ePlayerController == attrItem->mUMGOuterType)
-		//{
-		//	WidgetObject = UtilEngineWrap::CreateWidget<UUMGWidget>(GEngineData->getMainPlayerController(), WidgetClass);
-		//}
-		//else if (UMGOuterType::eGameInstance == attrItem->mUMGOuterType)
-		//{
-
-		//}
-
-		//WidgetObject->AddToViewport();
-		form = UtilEngineWrap::NewObject<T>();
-
-		if (nullptr != form)                   // 如果代码已经在本地
-		{
-			form->setId(formId);
-			//if (attrItem.m_bNeedLua)
-			//{
-			//	form.luaCSBridgeForm = new LuaCSBridgeForm(attrItem.m_luaScriptTableName, form);
-			//	form.luaCSBridgeForm.DoFile(attrItem.m_luaScriptPath);
-			//}
-
-			//form->mWinRender->mUiRoot = WidgetObject;
-
-			this->addFormNoReady(form);           // 仅仅是创建数据，资源还没有加载完成
-			//onCodeLoadedByForm(form);
-		}
+		// 默认会继续加载资源
+		this->loadWidgetRes(formId);
 	}
 
 	return Cast<T>(form);
@@ -102,14 +95,15 @@ T* UiMgr::loadForm(UiFormId formId)
 template <class T>
 T* UiMgr::getForm(UiFormId formId)
 {
+	// T* ret = nullptr;
+	T* ret = NULL;
+
 	if (this->mId2FormDic.containsKey(formId))
 	{
-		return Cast<T>(this->mId2FormDic[formId]);
+		ret = Cast<T>(this->mId2FormDic[formId]);
 	}
-	else
-	{
-		return nullptr;
-	}
+
+	return ret;
 }
 
 template <class T>

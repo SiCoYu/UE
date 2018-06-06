@@ -42,7 +42,7 @@ void UiLayer::removeForm(UForm* form)
 	}
 }
 
-UiLayerId UiLayer::getLayerID()
+UiLayerId UiLayer::getLayerId()
 {
 	return this->mLayer;
 }
