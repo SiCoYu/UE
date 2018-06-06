@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyProject.h"
-#include "UMyUEObject.generated.h"
+#include "MyUEObject.generated.h"
 
 /**
  * @brief 继承 UObject 的基类，空对象设置 NULL ，不要用 nullptr ，否则会挂掉
