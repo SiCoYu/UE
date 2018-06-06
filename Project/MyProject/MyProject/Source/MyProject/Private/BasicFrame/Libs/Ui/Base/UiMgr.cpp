@@ -173,7 +173,7 @@ UiLayer* UiMgr::getLayer(UiCanvasId canvasId, UiLayerId layerId)
 	if (canvasId >= UiCanvasId::eCanvas_50 &&
 		canvasId <= UiCanvasId::eCanvas_100)
 	{
-		if (layerId <= UiLayerId::eBtmLayer &&
+		if (layerId >= UiLayerId::eBtmLayer &&
 			layerId <= UiLayerId::eTopLayer)
 		{
 			layer = this->mCanvasList[(int)canvasId]->getLayerList()[(int)layerId];

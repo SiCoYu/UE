@@ -5,6 +5,7 @@
 #include "UiLayer.h"
 #include "UiLayerId.h"
 #include "UiCanvasId.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -12,7 +13,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
 * @brief 描述一个 Canvas
 */
-class UiCanvas
+class UiCanvas : public GObject
 {
 protected:
 	std::string mActorName;				// GameObject 的名字

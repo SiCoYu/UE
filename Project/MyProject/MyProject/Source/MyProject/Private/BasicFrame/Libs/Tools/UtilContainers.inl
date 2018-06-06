@@ -173,4 +173,10 @@ bool UtilMap::Remove(std::map<TKey, TValue>& map, TKey& key)
 	return false;
 }
 
+template<class TKey, class TValue>
+void UtilMap::insert(std::map<TKey, TValue>& map, TKey& key, TValue& value)
+{
+	map.insert(std::map<TKey, TValue>::value_type(key, value));
+}
+
 MY_END_NAMESPACE

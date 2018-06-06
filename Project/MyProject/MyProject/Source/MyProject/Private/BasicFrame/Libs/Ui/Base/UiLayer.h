@@ -4,7 +4,6 @@
 
 #include <string>
 #include "MDictionary.h"
-
 #include "UiFormId.h"
 #include "GObject.h"
 #include "UiLayerId.h"
@@ -30,7 +29,7 @@ public:
 	void setActorName(std::string& rhv);
 	bool hasForm(UForm* form);
 	void removeForm(UForm* form);
-	UiLayerId getLayerID();
+	UiLayerId getLayerId();
 	void addForm(UForm* form);
 	void onStageReSize();
 	void closeAllForm();

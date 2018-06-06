@@ -81,7 +81,8 @@ TKey MDictionary<TKey, TValue>::key(TValue value)
 template <class TKey, class TValue>
 void MDictionary<TKey, TValue>::add(TKey key, TValue value)
 {
-    this->mData[key] = value;
+    //this->mData[key] = value;
+	UtilMap::insert(this->mData, key, value);
 }
 
 template <class TKey, class TValue>

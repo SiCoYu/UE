@@ -88,6 +88,10 @@ public:
 	// É¾³ıÄ³¸ö key
 	template<class TKey, class TValue>
 	static bool Remove(std::map<TKey, TValue>& map, TKey& key);
+
+	// ²åÈë
+	template<class TKey, class TValue>
+	static void insert(std::map<TKey, TValue>& map, TKey& key, TValue& value);
 };
 
 MY_END_NAMESPACE
