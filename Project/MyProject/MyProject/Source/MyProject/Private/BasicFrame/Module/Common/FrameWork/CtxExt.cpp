@@ -28,7 +28,7 @@ void CtxExt::init()
 	this->mEntityData->init();
 }
 
-void Ctx::dispose()
+void CtxExt::dispose()
 {
 	this->mGameData->dispose();
 	this->mEntityData->dispose();

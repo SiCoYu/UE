@@ -18,7 +18,7 @@ public:
 		return T::msSingleton;
 	}
 
-	static void setSingletonPtr(T* value)
+	static T* setSingletonPtr(T* value)
 	{
 		if (nullptr == T::msSingleton)
 		{
