@@ -39,7 +39,7 @@ class MByteBuffer;
 /**
  * @brief 卡牌基本表
  */
-class TableCardItemBody : TableItemBodyBase
+class TableCardItemBody : public TableItemBodyBase
 {
 public:
 	std::string mName;        // 名称

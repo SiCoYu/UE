@@ -12,7 +12,7 @@ MY_BEGIN_NAMESPACE(MyNS)
     * @brief 技能基本表
     * // 添加一个表的步骤一
     */
-class TableSkillItemBody : TableItemBodyBase
+class TableSkillItemBody : public TableItemBodyBase
 {
 public:
 	std::string mName;               // 名称

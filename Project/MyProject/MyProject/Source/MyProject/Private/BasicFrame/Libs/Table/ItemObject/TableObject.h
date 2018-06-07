@@ -8,7 +8,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class TableObjectItemBody : TableItemBodyBase
+class TableObjectItemBody : public TableItemBodyBase
 {
 public:
     std::string mName;
