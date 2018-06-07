@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Ctx.h"
-#include "MySharedPtr.h"
+#include "MySharedPointer.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

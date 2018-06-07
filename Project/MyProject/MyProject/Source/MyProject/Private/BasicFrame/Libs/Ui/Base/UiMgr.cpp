@@ -213,7 +213,7 @@ void UiMgr::loadWidgetRes(UiFormId formId)
 
 	if (!this->mId2WidgetLoadingItemDic.containsKey(formId))                       // 如果什么都没有创建，第一次加载
 	{
-		this->mId2WidgetLoadingItemDic[formId] = new UiLoadingItem();
+		this->mId2WidgetLoadingItemDic[formId] = MY_NEW UiLoadingItem();
 		this->mId2WidgetLoadingItemDic[formId]->mId = formId;
 
 		//this->loadFromFile(attrItem->mWidgetPath, MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));

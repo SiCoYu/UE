@@ -106,7 +106,7 @@ protected:
 
 public:
 	Ctx();
-	~Ctx();
+	virtual ~Ctx();
 
 	virtual void construct();
 	virtual void init();

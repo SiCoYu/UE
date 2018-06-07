@@ -171,7 +171,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Module/Common/GameData",
                 "MyProject/Private/BasicFrame/Module/Common/Scene",
                 "MyProject/Private/BasicFrame/Module/Common/Scene/Entity",
-                "MyProject/Private/BasicFrame/Module/Common/Common/Entity",
+                "MyProject/Private/BasicFrame/Module/Common/Common",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/Ui/UiPack",
