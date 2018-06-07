@@ -18,6 +18,16 @@ public:
 		return T::msSingleton;
 	}
 
+	static void setSingletonPtr(T* value)
+	{
+		if (nullptr == T::msSingleton)
+		{
+			T::msSingleton = value;
+		}
+
+		return T::msSingleton;
+	}
+
 	static void deleteSingletonPtr()
 	{
 		if (nullptr != T::msSingleton)

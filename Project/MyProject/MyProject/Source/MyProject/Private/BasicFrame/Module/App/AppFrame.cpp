@@ -1,13 +1,16 @@
 #include "MyProject.h"
-#include "Prequisites.h"
 #include "AppFrame.h"
+#include "Prequisites.h"
+#include "DataPrequisites.h"
 
 void AppFrame::initApp()
 {
-	GCtx->construct();
+	CtxExt::setSingletonPtr(MY_NEW CtxExt());
+	GCtxExt->construct();
 }
 
 void AppFrame::quitApp()
 {
-	GCtx->deleteSingletonPtr();
+	GCtxExt->dispose();
+	GCtxExt->deleteSingletonPtr();
 }
