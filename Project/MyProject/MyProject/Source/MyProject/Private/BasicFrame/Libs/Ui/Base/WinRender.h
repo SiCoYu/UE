@@ -5,12 +5,16 @@
 #include "SlateWidget.h"
 #include "UMGWidget.h"
 #include "GObject.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class WinRender : public GObject
 {
+	M_DECLARE_CLASS(WinRender, GObject)
+
 public:
 	//UUserWidget* m_umgWidget;
 	//UUserWidget* mUiRoot;      // ui 根节点

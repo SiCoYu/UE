@@ -11,6 +11,8 @@
 #include "UiAttrSystem.h"
 #include "Form.h"
 #include "GObject.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 class UForm;
@@ -30,6 +32,8 @@ class ClassAssetInsRes;
  */
 class UiMgr : public GObject
 {
+	M_DECLARE_CLASS(UiMgr, GObject)
+
 protected:
 	MDictionary<UiFormId, UForm*> mId2FormDic;
 	MList<UiCanvas*> mCanvasList;

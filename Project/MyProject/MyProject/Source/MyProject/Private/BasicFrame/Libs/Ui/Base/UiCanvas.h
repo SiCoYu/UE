@@ -6,6 +6,8 @@
 #include "UiLayerId.h"
 #include "UiCanvasId.h"
 #include "GObject.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -15,6 +17,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 */
 class UiCanvas : public GObject
 {
+	M_DECLARE_CLASS(UiCanvas, GObject)
+
 protected:
 	std::string mActorName;				// GameObject µÄÃû×Ö
 	UiCanvasId mCanvasId;				// CanvasID

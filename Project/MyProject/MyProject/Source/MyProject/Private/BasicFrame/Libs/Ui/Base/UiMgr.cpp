@@ -17,8 +17,11 @@
 #include "ClassAssetInsRes.h"
 #include "AuxMUiClassLoader.h"
 #include "SafePointer.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(UiMgr, GObject)
 
 UiMgr::UiMgr()
 {

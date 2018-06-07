@@ -7,12 +7,16 @@
 #include "UiFormId.h"
 #include "FormType.h"
 #include "GObject.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class UiAttrItem : public GObject
 {
+	M_DECLARE_CLASS(UiAttrItem, GObject)
+
 public:
 	UiFormId mFormId;
 	std::string mCodePath;      // Âß¼­´úÂë path 

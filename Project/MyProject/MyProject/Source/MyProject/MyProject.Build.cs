@@ -165,6 +165,13 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Module/Game/GameNetHandle",
                 "MyProject/Private/BasicFrame/Module/Game/RouteMsgHandle",
 
+                "MyProject/Private/BasicFrame/Module/App",
+
+                "MyProject/Private/BasicFrame/Module/Common/FrameWork",
+                "MyProject/Private/BasicFrame/Module/Common/GameData",
+                "MyProject/Private/BasicFrame/Module/Common/Scene",
+                "MyProject/Private/BasicFrame/Module/Common/Scene/Entity",
+
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/Ui/UiPack",
                 "MyProject/Private/BasicFrame/Ui/UiTestCanvas",

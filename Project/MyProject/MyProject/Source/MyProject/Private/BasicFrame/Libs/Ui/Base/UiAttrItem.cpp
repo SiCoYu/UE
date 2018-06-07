@@ -2,8 +2,11 @@
 #include "UiAttrItem.h"
 #include "UiCanvasId.h"
 #include "UiLayerId.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(UiAttrItem, GObject)
 
 UiAttrItem::UiAttrItem()
 {

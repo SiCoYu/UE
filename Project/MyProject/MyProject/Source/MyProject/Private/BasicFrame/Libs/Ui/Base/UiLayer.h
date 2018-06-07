@@ -7,6 +7,8 @@
 #include "UiFormId.h"
 #include "GObject.h"
 #include "UiLayerId.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 class UForm;
@@ -15,6 +17,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class UiLayer : public GObject
 {
+	M_DECLARE_CLASS(UiLayer, GObject)
+
 protected:
 	UiLayerId mLayer;	                        // UiFormId.FirstLayer定义
 	FSlateRenderTransform* mLayerTrans;			// 当前所在层根节点转换

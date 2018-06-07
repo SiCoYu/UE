@@ -6,14 +6,19 @@
 #include "FormType.h"
 #include <string>
 #include "ResPathType.h"
+#include "GObject.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class UiAttrItem;
 
-class UiAttrSystem
+class UiAttrSystem : public GObject
 {
+	M_DECLARE_CLASS(UiAttrSystem, GObject)
+
 public:
 	MDictionary<UiFormId, UiAttrItem*> mId2AttrDic;
 
