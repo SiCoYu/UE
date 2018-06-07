@@ -6,9 +6,9 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class GameData : public GObject
+class EntityData : public GObject
 {
-	M_DECLARE_CLASS(GameData, GObject)
+	M_DECLARE_CLASS(EntityData, GObject)
 };
 
 MY_END_NAMESPACE

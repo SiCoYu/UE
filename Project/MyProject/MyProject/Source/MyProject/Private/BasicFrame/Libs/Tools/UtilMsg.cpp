@@ -9,6 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 void UtilMsg::sendMsg(NullUserCmd& msg, bool bnet)
 {
 	GShareData->mTmpBA = GNetMgr->getSendBA();
+
 	if (GShareData->mTmpBA != nullptr)
     {
 		msg.serialize(GShareData->mTmpBA);

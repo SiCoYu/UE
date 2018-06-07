@@ -91,7 +91,7 @@ Ctx::Ctx()
 
 Ctx::~Ctx()
 {
-	this->dispose();
+	//this->dispose();
 }
 
 void Ctx::construct()

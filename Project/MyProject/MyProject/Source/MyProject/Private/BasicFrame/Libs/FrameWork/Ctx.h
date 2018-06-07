@@ -108,9 +108,9 @@ public:
 	Ctx();
 	~Ctx();
 
-	void construct();
-	void init();
-	void dispose();
+	virtual void construct();
+	virtual void init();
+	virtual void dispose();
 	void beginPlay();
 	void mainLoop();
 	void addEventHandle();
