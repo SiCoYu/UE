@@ -2,6 +2,7 @@
 #define __ObjectPoolGroup_H
 
 #include "MLockList.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -11,7 +12,7 @@ class IPoolObject;
 /**
  * @brief 对象池
  */
-class ObjectPoolGroup
+class ObjectPoolGroup : public GObject
 {
 protected:
 	MLockList<IPoolObject*>* mPoolList;

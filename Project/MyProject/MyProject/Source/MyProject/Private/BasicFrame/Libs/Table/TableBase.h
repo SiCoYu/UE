@@ -3,6 +3,7 @@
 
 #include <string>
 #include "MList.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -10,7 +11,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class TableItemBase;
 class MByteBuffer;
 
-class TableBase
+class TableBase : public GObject
 {
 public:
 	std::string mResName;

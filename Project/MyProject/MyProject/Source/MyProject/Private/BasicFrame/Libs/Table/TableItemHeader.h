@@ -2,13 +2,14 @@
 #define __TableItemHeader_H
 
 #include "MyProject.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 
-class TableItemHeader
+class TableItemHeader : public GObject
 {
 public:
     uint32 mId;              // 唯一 Id

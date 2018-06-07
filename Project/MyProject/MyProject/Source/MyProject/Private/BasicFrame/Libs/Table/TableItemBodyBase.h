@@ -2,13 +2,14 @@
 #define __TableItemBodyBase_H
 
 #include "MyProject.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class MByteBuffer;
 
-class TableItemBodyBase
+class TableItemBodyBase : public GObject
 {
 public:
     // 解析主要数据部分

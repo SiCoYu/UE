@@ -13,7 +13,7 @@ class TableItemHeader;
 class TableItemBodyBase;
 class MByteBuffer;
 
-class TableItemBase
+class TableItemBase : public GObject
 {
 public:
 	TableItemHeader* mItemHeader;
