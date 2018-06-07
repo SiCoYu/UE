@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -9,7 +10,7 @@ class INoOrPriorityObject;
 /**
  * @brief 非优先级或者优先级列表
  */
-class INoOrPriorityList
+class INoOrPriorityList : public GObject
 {
 public:
     virtual void setIsSpeedUpFind(bool value) = 0;

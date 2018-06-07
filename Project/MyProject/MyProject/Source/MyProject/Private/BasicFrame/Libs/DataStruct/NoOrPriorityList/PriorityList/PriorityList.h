@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "GObject.h"
 #include "INoOrPriorityList.h"
 #include "MList.h"
 #include "PrioritySort.h"
@@ -15,7 +14,7 @@ class PriorityProcessObject;
 /**
  * @brief 优先级队列，外部一定不能直接引用 PriorityProcessObject 类型的对象，内部会管理 PriorityProcessObject 的生命周期
  */
-class PriorityList : public GObject, public  INoOrPriorityList
+class PriorityList : public INoOrPriorityList
 {
 protected:
 	MList<PriorityProcessObject*> mPriorityProcessObjectList;  // 优先级对象列表
