@@ -2,7 +2,6 @@
 
 #include "Ctx.h"
 #include "MySharedPointer.h"
-#include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -30,7 +29,7 @@ public:
 };
 
 #define GCtxExt CtxExt::getSingletonPtr()
-#define GTableSys GCtxExt->getGameData()
-#define GNetMgr GCtxExt->getEntityData()
+#define GGameData GCtxExt->getGameData()
+#define GEntityData GCtxExt->getEntityData()
 
 MY_END_NAMESPACE

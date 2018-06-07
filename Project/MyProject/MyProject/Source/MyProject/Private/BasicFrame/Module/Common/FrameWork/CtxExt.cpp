@@ -12,17 +12,17 @@ CtxExt::CtxExt()
 	this->mEntityData.setNull();
 }
 
-void Ctx::construct()
+void CtxExt::construct()
 {
-	Super::construct();
+	Ctx::construct();
 
 	this->mGameData = MySharedPtr<GameData>(MY_NEW GameData());
 	this->mEntityData = MySharedPtr<EntityData>(MY_NEW EntityData());
 }
 
-void Ctx::init()
+void CtxExt::init()
 {
-	Super::init();
+	Ctx::init();
 
 	this->mGameData->init();
 	this->mEntityData->init();
@@ -33,7 +33,7 @@ void Ctx::dispose()
 	this->mGameData->dispose();
 	this->mEntityData->dispose();
 
-	Super::dispose();
+	Ctx::dispose();
 }
 
 void CtxExt::setGameData(GameData* gameData)
