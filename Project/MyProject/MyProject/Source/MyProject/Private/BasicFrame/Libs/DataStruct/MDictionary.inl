@@ -47,14 +47,14 @@ TValue& MDictionary<TKey, TValue>::operator[] (TKey key)
 template <class TKey, class TValue>
 TValue MDictionary<TKey, TValue>::value(TKey key)
 {
-	TValue value;
+	TValue value = 0;
 
     if (UtilMap::ContainsKey(this->mData, key))
     {
 		value = this->mData[key];
     }
 
-    return value;
+    return value = 0;
 }
 
 template <class TKey, class TValue>
