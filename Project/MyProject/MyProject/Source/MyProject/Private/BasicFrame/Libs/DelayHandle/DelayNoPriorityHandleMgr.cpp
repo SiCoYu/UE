@@ -16,8 +16,8 @@ DelayNoPriorityHandleMgr::DelayNoPriorityHandleMgr()
 {
 	this->mDeferredAddQueue = MY_NEW NoPriorityList();
 	this->mDeferredAddQueue->setIsSpeedUpFind(true);
-	this->mDeferredDelQueue = MY_NEW NoPriorityList();
-	this->mDeferredDelQueue->setIsSpeedUpFind(true);
+	this->mDeferredRemoveQueue = MY_NEW NoPriorityList();
+	this->mDeferredRemoveQueue->setIsSpeedUpFind(true);
 
 	this->mNoOrPriorityList = MY_NEW NoPriorityList();
 	this->mNoOrPriorityList->setIsSpeedUpFind(true);
@@ -34,9 +34,9 @@ void DelayNoPriorityHandleMgr::dispose()
 	MY_DELETE(GObject*)this->mDeferredAddQueue;
 	this->mDeferredAddQueue = nullptr;
 
-	this->mDeferredDelQueue->clear();
-	MY_DELETE(GObject*)this->mDeferredDelQueue;
-	this->mDeferredDelQueue = nullptr;
+	this->mDeferredRemoveQueue->clear();
+	MY_DELETE(GObject*)this->mDeferredRemoveQueue;
+	this->mDeferredRemoveQueue = nullptr;
 
 	this->mNoOrPriorityList->clear();
 	MY_DELETE (GObject*)this->mNoOrPriorityList;

@@ -52,11 +52,11 @@ void DelayNoOrPriorityHandleMgrBase::dispose()
 		MY_DELETE (GObject*)this->mDeferredAddQueue;
 		this->mDeferredAddQueue = nullptr;
 	}
-	if (nullptr != this->mDeferredDelQueue)
+	if (nullptr != this->mDeferredRemoveQueue)
 	{
-		this->mDeferredDelQueue->dispose();
-		MY_DELETE(GObject*)this->mDeferredDelQueue;
-		this->mDeferredDelQueue = nullptr;
+		this->mDeferredRemoveQueue->dispose();
+		MY_DELETE(GObject*)this->mDeferredRemoveQueue;
+		this->mDeferredRemoveQueue = nullptr;
 	}
 	if (nullptr != this->mLoopDepth)
 	{
@@ -79,9 +79,9 @@ void DelayNoOrPriorityHandleMgrBase::_addObject(IDelayHandleItem* delayObject, f
 		if (!this->mDeferredAddQueue->contains((INoOrPriorityObject*)delayObject))
 		{
 			// 如果已经添加到删除列表中
-			if (this->mDeferredDelQueue->contains((INoOrPriorityObject*)delayObject))
+			if (this->mDeferredRemoveQueue->contains((INoOrPriorityObject*)delayObject))
 			{
-				this->mDeferredDelQueue->removeNoOrPriorityObject((INoOrPriorityObject*)delayObject);
+				this->mDeferredRemoveQueue->removeNoOrPriorityObject((INoOrPriorityObject*)delayObject);
 			}
 			
 			this->mDeferredAddQueue->addNoOrPriorityObject((INoOrPriorityObject*)delayObject, priority);
@@ -95,7 +95,7 @@ void DelayNoOrPriorityHandleMgrBase::_removeObject(IDelayHandleItem* delayObject
 	{
 		if (this->mLoopDepth->_isInDepth())
 		{
-			if (!this->mDeferredDelQueue->contains((INoOrPriorityObject*)delayObject))
+			if (!this->mDeferredRemoveQueue->contains((INoOrPriorityObject*)delayObject))
 			{
 				if (this->mDeferredAddQueue->contains((INoOrPriorityObject*)delayObject))    // 如果已经添加到删除列表中
 				{
@@ -104,7 +104,7 @@ void DelayNoOrPriorityHandleMgrBase::_removeObject(IDelayHandleItem* delayObject
 
 				delayObject->setClientDispose(true);
 
-				this->mDeferredDelQueue->addNoOrPriorityObject((INoOrPriorityObject*)delayObject);
+				this->mDeferredRemoveQueue->addNoOrPriorityObject((INoOrPriorityObject*)delayObject);
 			}
 		}
 	}
@@ -172,19 +172,19 @@ void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispO
 			this->mDeferredAddQueue->clear();
 		}
 
-		if (this->mDeferredDelQueue->count() > 0)
+		if (this->mDeferredRemoveQueue->count() > 0)
 		{
 			idx = 0;
-			elemLen = this->mDeferredDelQueue->count();
+			elemLen = this->mDeferredRemoveQueue->count();
 
 			while(idx < elemLen)
 			{
-				this->_removeObject((IDelayHandleItem*)this->mDeferredDelQueue->get(idx));
+				this->_removeObject((IDelayHandleItem*)this->mDeferredRemoveQueue->get(idx));
 
 				idx += 1;
 			}
 
-			this->mDeferredDelQueue->clear();
+			this->mDeferredRemoveQueue->clear();
 		}
 	}
 }
