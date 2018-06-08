@@ -3,7 +3,7 @@
 #include "INoOrPriorityList.h"
 #include "MList.h"
 #include "MDictionary.h"
-
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -13,7 +13,7 @@ class INoOrPriorityObject;
 /**
  * @brief 优先级队列，注意并不是继承 GContainerObject ，而是继承 GObject ，只有基本数据结构才继承 GContainerObject ，例如 MList , MDictionary
  */
-class NoPriorityList : public INoOrPriorityList
+class NoPriorityList : public GObject, public INoOrPriorityList
 {
 protected:
 	MList<INoOrPriorityObject*> mNoPriorityProcessObjectList;  // 优先级对象列表

@@ -49,13 +49,13 @@ void DelayNoOrPriorityHandleMgrBase::dispose()
 	if (nullptr != this->mDeferredAddQueue)
 	{
 		this->mDeferredAddQueue->dispose();
-		MY_DELETE this->mDeferredAddQueue;
+		MY_DELETE (GObject*)this->mDeferredAddQueue;
 		this->mDeferredAddQueue = nullptr;
 	}
 	if (nullptr != this->mDeferredDelQueue)
 	{
 		this->mDeferredDelQueue->dispose();
-		MY_DELETE this->mDeferredDelQueue;
+		MY_DELETE(GObject*)this->mDeferredDelQueue;
 		this->mDeferredDelQueue = nullptr;
 	}
 	if (nullptr != this->mLoopDepth)

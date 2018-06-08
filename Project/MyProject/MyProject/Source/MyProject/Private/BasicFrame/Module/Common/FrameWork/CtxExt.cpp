@@ -33,6 +33,9 @@ void CtxExt::dispose()
 	this->mGameData->dispose();
 	this->mEntityData->dispose();
 
+	this->mGameData.setNull();
+	this->mEntityData.setNull();
+
 	Ctx::dispose();
 }
 

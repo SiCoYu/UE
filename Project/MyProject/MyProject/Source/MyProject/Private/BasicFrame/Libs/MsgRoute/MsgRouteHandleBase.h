@@ -13,6 +13,8 @@ class AddOnceEventDispatch;
 
 class MsgRouteHandleBase : public GObject
 {
+	M_DECLARE_CLASS(MsgRouteHandleBase, GObject)
+
 public:
 	MDictionary<int, AddOnceEventDispatch*> mId2HandleDic;
 

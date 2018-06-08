@@ -5,12 +5,15 @@
 #include "IDispatchObject.h"
 #include "MsgRouteType.h"
 #include "MsgRouteId.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class MsgRouteBase : public IPoolObject, public IDispatchObject
+class MsgRouteBase : public GObject, public IPoolObject, public IDispatchObject
 {
+	M_DECLARE_CLASS(MsgRouteBase, GObject)
+
 public:
 	MsgRouteType mMsgType;
     MsgRouteId mMsgId;          // 只需要一个 Id 就行了

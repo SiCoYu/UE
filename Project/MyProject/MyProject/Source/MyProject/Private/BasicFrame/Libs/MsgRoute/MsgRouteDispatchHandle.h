@@ -13,6 +13,7 @@ class MsgRouteBase;
 class MsgRouteDispatchHandle : public GObject
 {
 	M_DECLARE_CLASS(MsgRouteDispatchHandle, GObject)
+
 protected:
 	EventDispatchGroup mEventDispatchGroup;
 

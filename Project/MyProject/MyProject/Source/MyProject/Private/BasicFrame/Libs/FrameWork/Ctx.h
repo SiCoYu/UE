@@ -51,6 +51,7 @@ class EngineData;
 class LogSys;
 class LuaSystem;
 class MyLatentActionManager;
+class GObject;
 
 MY_END_NAMESPACE
 
@@ -63,9 +64,10 @@ class Ctx : public Singleton<Ctx>
 {
 protected:
 	bool mIsInit;
+
 	MySharedPtr<UiMgr> mUiMgr;
 	MySharedPtr<EngineData> mEngineData;
-	MySharedPtr<INetMgr> mNetMgr;
+	MySharedPtr<INetMgr> mNetMgr;		// INetMgr 不是继承 GObject ，不能运行自己重载删除 delete 接口
 	MySharedPtr<TableSys> mTableSys;
 	MySharedPtr<LogSys> mLogSys;
 	MySharedPtr<ShareData> mShareData;
