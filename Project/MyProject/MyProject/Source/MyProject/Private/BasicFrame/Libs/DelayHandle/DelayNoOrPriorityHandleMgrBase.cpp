@@ -22,6 +22,9 @@ DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 {
 	this->mIsDispose = false;
 
+	this->mDeferredAddQueue = nullptr;
+	this->mDeferredRemoveQueue = nullptr;
+
 	// 如果在构造函数中执行，会递归构造 AddOnceEventDispatch ，造成死循环
 	this->mLoopDepth = MY_NEW LoopDepth();
 	this->mLoopDepth->setZeroHandle(
