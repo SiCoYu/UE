@@ -30,17 +30,24 @@ void DelayNoPriorityHandleMgr::init()
 
 void DelayNoPriorityHandleMgr::dispose()
 {
-	this->mDeferredAddQueue->clear();
-	MY_DELETE(GObject*)this->mDeferredAddQueue;
-	this->mDeferredAddQueue = nullptr;
-
-	this->mDeferredRemoveQueue->clear();
-	MY_DELETE(GObject*)this->mDeferredRemoveQueue;
-	this->mDeferredRemoveQueue = nullptr;
-
-	this->mNoOrPriorityList->clear();
-	MY_DELETE (GObject*)this->mNoOrPriorityList;
-	this->mNoOrPriorityList = nullptr;
+	if (nullptr != this->mDeferredAddQueue)
+	{
+		this->mDeferredAddQueue->clear();
+		MY_DELETE (GObject*)this->mDeferredAddQueue;
+		this->mDeferredAddQueue = nullptr;
+	}
+	if (nullptr != this->mDeferredRemoveQueue)
+	{
+		this->mDeferredRemoveQueue->clear();
+		MY_DELETE (GObject*)this->mDeferredRemoveQueue;
+		this->mDeferredRemoveQueue = nullptr;
+	}
+	if (nullptr != this->mNoOrPriorityList)
+	{
+		this->mNoOrPriorityList->clear();
+		MY_DELETE (GObject*)this->mNoOrPriorityList;
+		this->mNoOrPriorityList = nullptr;
+	}
 
 	Super::dispose();
 }

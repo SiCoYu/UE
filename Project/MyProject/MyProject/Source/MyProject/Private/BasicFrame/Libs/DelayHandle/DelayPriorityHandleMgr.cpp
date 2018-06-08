@@ -34,19 +34,19 @@ void DelayPriorityHandleMgr::dispose()
 	if (nullptr != this->mDeferredAddQueue)
 	{
 		this->mDeferredAddQueue->clear();
-		MY_DELETE this->mDeferredAddQueue;
+		MY_DELETE (GObject*)this->mDeferredAddQueue;
 		this->mDeferredAddQueue = nullptr;
 	}
 	if (nullptr != this->mDeferredRemoveQueue)
 	{
 		this->mDeferredRemoveQueue->clear();
-		MY_DELETE this->mDeferredRemoveQueue;
+		MY_DELETE (GObject*)this->mDeferredRemoveQueue;
 		this->mDeferredRemoveQueue = nullptr;
 	}
 	if (nullptr != this->mNoOrPriorityList)
 	{
 		this->mNoOrPriorityList->clear();
-		MY_DELETE this->mNoOrPriorityList;
+		MY_DELETE (GObject*)this->mNoOrPriorityList;
 		this->mNoOrPriorityList = nullptr;
 	}
 
