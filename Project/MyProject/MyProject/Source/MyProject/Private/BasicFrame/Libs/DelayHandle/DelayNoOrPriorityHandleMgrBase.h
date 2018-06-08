@@ -21,7 +21,7 @@ class DelayNoOrPriorityHandleMgrBase : public GObject
 
 protected:
 	INoOrPriorityList* mDeferredAddQueue;
-	INoOrPriorityList* mDeferredDelQueue;
+	INoOrPriorityList* mDeferredRemoveQueue;
 
 	LoopDepth* mLoopDepth;         // 是否在循环中，支持多层嵌套，就是循环中再次调用循环
 	int mDebugUniqueId;           // 唯一 Id ，调试使用

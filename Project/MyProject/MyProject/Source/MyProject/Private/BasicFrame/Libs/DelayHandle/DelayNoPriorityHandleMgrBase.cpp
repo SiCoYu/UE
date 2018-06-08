@@ -15,8 +15,8 @@ DelayNoPriorityHandleMgrBase::DelayNoPriorityHandleMgrBase()
 {
 	this->mDeferredAddQueue = MY_NEW NoPriorityList();
 	this->mDeferredAddQueue->setIsSpeedUpFind(true);
-	this->mDeferredDelQueue = MY_NEW NoPriorityList();
-	this->mDeferredDelQueue->setIsSpeedUpFind(true);
+	this->mDeferredRemoveQueue = MY_NEW NoPriorityList();
+	this->mDeferredRemoveQueue->setIsSpeedUpFind(true);
 }
 
 void DelayNoPriorityHandleMgrBase::init()

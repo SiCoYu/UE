@@ -231,6 +231,7 @@ void Ctx::dispose()
 
 	this->mUiMgr.setNull();
 	this->mEngineData.setNull();
+
 	// INetMgr 不继承 GObject ，不能运行自己的 delete 
 	MY_DELETE (GObject*)this->mNetMgr.getPointer();
 	this->mNetMgr.reset(0);
