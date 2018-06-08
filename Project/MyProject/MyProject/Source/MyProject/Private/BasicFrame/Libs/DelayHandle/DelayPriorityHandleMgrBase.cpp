@@ -28,13 +28,13 @@ void DelayPriorityHandleMgrBase::dispose()
 	if(nullptr != this->mDeferredAddQueue)
 	{
 		this->mDeferredAddQueue->dispose();
-		MY_DELETE this->mDeferredAddQueue;
+		MY_DELETE (GObject*)this->mDeferredAddQueue;
 		this->mDeferredAddQueue = nullptr;
 	}
 	if (nullptr != this->mDeferredRemoveQueue)
 	{
 		this->mDeferredRemoveQueue->dispose();
-		MY_DELETE this->mDeferredRemoveQueue;
+		MY_DELETE (GObject*)this->mDeferredRemoveQueue;
 		this->mDeferredRemoveQueue = nullptr;
 	}
 
