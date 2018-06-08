@@ -31,22 +31,27 @@ void DelayPriorityHandleMgr::init()
 
 void DelayPriorityHandleMgr::dispose()
 {
+	GObject* tmp = nullptr;
+
 	if (nullptr != this->mDeferredAddQueue)
 	{
 		this->mDeferredAddQueue->clear();
-		MY_DELETE (GObject*)this->mDeferredAddQueue;
+		tmp = (GObject*)this->mDeferredAddQueue;
+		MY_DELETE tmp;
 		this->mDeferredAddQueue = nullptr;
 	}
 	if (nullptr != this->mDeferredRemoveQueue)
 	{
 		this->mDeferredRemoveQueue->clear();
-		MY_DELETE (GObject*)this->mDeferredRemoveQueue;
+		tmp = (GObject*)this->mDeferredRemoveQueue;
+		MY_DELETE tmp;
 		this->mDeferredRemoveQueue = nullptr;
 	}
 	if (nullptr != this->mNoOrPriorityList)
 	{
 		this->mNoOrPriorityList->clear();
-		MY_DELETE (GObject*)this->mNoOrPriorityList;
+		tmp = (GObject*)this->mNoOrPriorityList;
+		MY_DELETE tmp;
 		this->mNoOrPriorityList = nullptr;
 	}
 
