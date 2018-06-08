@@ -100,6 +100,9 @@ T* UiMgr::getForm(UiFormId formId)
 
 	if (this->mId2FormDic.containsKey(formId))
 	{
+		// Error
+		// Engine\Source\Runtime\CoreUObject\Private\UObject\UObjectBaseUtility.cpp
+		// bool UObjectBaseUtility::IsA( const UClass* SomeBase ) const
 		ret = Cast<T>(this->mId2FormDic[formId]);
 	}
 
