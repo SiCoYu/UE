@@ -103,6 +103,7 @@ T* UiMgr::getForm(UiFormId formId)
 		// Error
 		// Engine\Source\Runtime\CoreUObject\Private\UObject\UObjectBaseUtility.cpp
 		// bool UObjectBaseUtility::IsA( const UClass* SomeBase ) const
+		// Cast<T>(0); 这样会宕机的注意
 		ret = Cast<T>(this->mId2FormDic[formId]);
 	}
 
