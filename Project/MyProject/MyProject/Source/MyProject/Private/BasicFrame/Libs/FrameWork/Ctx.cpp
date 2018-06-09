@@ -184,7 +184,9 @@ void Ctx::init()
 	this->mTickMgr->init();
 	this->mTimerMgr->init();
 	this->mFrameTimerMgr->init();
+
 	this->mBPCtx->init();
+	this->mMyNativeObjectReferencer->init();
 
 	this->addEventHandle();
 
@@ -232,7 +234,9 @@ void Ctx::dispose()
 	this->mTickMgr->dispose();
 	this->mTimerMgr->dispose();
 	this->mFrameTimerMgr->dispose();
+
 	this->mBPCtx->dispose();
+	this->mMyNativeObjectReferencer->dispose();
 
 	this->mUiMgr.setNull();
 	this->mEngineData.setNull();

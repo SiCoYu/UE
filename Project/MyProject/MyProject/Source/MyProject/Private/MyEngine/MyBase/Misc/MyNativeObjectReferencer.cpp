@@ -1,6 +1,11 @@
 #include "MyProject.h"
 #include "MyNativeObjectReferencer.h"
 
+FMyNativeObjectReferencer::FMyNativeObjectReferencer()
+{
+
+}
+
 void FMyNativeObjectReferencer::init()
 {
 	
