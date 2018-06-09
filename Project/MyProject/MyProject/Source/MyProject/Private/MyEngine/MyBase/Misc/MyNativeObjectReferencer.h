@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/GCObject.h"	// FGCObject
-#include "UObject/GCObject.h"	// FReferenceCollector	\ UObject
+#include "UObject/UObjectGlobals.h"	// FReferenceCollector \ UObject
 
 class FMyNativeObjectReferencer : FGCObject
 {

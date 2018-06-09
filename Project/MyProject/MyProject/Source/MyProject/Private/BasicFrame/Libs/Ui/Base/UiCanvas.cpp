@@ -64,7 +64,7 @@ void UiCanvas::dispose()
 		index += 1;
 	}
 
-	this->mLayerList.dispose();
+	this->mLayerList.clear();
 }
 
 void UiCanvas::setActorName(std::string& rhv)
