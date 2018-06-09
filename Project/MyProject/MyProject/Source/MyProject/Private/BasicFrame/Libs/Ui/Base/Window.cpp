@@ -12,7 +12,21 @@ UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	this->mHitYMax = 30;
 	this->mAlignVertial = 0;
 	this->mAlignHorizontal = 0;
+	this->mWinRender = nullptr;		// UObject 会生成 DefaultObject，这个会 new 一个对象，占用空间，因此在后面初始化
+}
+
+void UWindow::onInit()
+{
 	this->mWinRender = MY_NEW WinRender();
+}
+
+void UWindow::onExit()
+{
+	if (nullptr != this->mWinRender)
+	{
+		MY_DELETE this->mWinRender;
+		this->mWinRender = nullptr;
+	}
 }
 
 int UWindow::getPosX()

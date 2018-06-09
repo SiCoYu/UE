@@ -20,6 +20,9 @@ class UiAttrSystem : public GObject
 	M_DECLARE_CLASS(UiAttrSystem, GObject)
 
 public:
+	typedef typename MDictionary<UiFormId, UiAttrItem*>::Iterator Iterator;
+
+public:
 	MDictionary<UiFormId, UiAttrItem*> mId2AttrDic;
 
 public:

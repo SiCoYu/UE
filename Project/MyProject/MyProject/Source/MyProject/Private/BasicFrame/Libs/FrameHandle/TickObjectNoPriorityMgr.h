@@ -21,8 +21,6 @@ public:
 
 	virtual void init() override;
 	virtual void dispose() override;
-	void setClientDispose(bool isDispose);
-	bool isClientDispose();
 	void onTick(float delta, TickMode tickMode);
 	virtual void _onPreAdvance(float delta, TickMode tickMode);
 	virtual void _onExecAdvance(float delta, TickMode tickMode);

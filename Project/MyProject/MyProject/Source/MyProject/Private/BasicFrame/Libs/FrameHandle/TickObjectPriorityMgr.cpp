@@ -26,16 +26,6 @@ void TickObjectPriorityMgr::dispose()
 	Super::dispose();
 }
 
-void TickObjectPriorityMgr::setClientDispose(bool isDispose)
-{
-
-}
-
-bool TickObjectPriorityMgr::isClientDispose()
-{
-	return false;
-}
-
 void TickObjectPriorityMgr::onTick(float delta, TickMode tickMode)
 {
 	this->advance(delta, tickMode);

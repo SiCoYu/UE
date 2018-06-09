@@ -64,4 +64,7 @@ public:
 	void setUiLayer(UiLayer* layer);
 	bool IsVisible();
 	WinRender* getWinRender();
+
+	virtual void onInit();
+	virtual void onExit();
 };

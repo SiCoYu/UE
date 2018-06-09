@@ -13,6 +13,17 @@ class GObject : public MyAllocatedObject
 {
 	M_DECLARE_CLASS(GObject, MyAllocatedObject)
 
+private:
+	volatile int mRefCount;
+
+protected:
+	// warning C4668: 'My_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+#ifdef My_DEBUG
+	static bool mIsInCreate;
+	static MMutex mCriticalSection;
+#endif
+	bool mIsClientDispose;
+
 public:
 	GObject();
 	virtual ~GObject();
@@ -28,15 +39,8 @@ public:
 	const std::string& GetMyClassName() const;
 	static void DumpRefCountingLeaks();
 
-private:
-	volatile int mRefCount;
-
-// warning C4668: 'My_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
-#ifdef My_DEBUG
-protected:
-	static bool mIsInCreate;
-	static MMutex mCriticalSection;
-#endif
+	virtual void setClientDispose(bool isDispose);
+	virtual bool isClientDispose();
 };
 
 MY_END_NAMESPACE

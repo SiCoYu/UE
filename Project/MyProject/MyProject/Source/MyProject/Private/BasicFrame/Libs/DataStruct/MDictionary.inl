@@ -32,7 +32,7 @@ void MDictionary<TKey, TValue>::dispose()
 }
 
 template <class TKey, class TValue>
-int MDictionary<TKey, TValue>::getCount()
+int MDictionary<TKey, TValue>::count()
 {
     return this->mData.size();
 }
@@ -136,6 +136,18 @@ bool MDictionary<TKey, TValue>::containsValue(TValue value)
 	}
 
 	return ret;
+}
+
+template <class TKey, class TValue>
+typename MDictionary::Iterator MDictionary<TKey, TValue>::begin()
+{
+	return this->mData.begin();
+}
+
+template <class TKey, class TValue>
+typename MDictionary::Iterator MDictionary<TKey, TValue>::end()
+{
+	return this->mData.end();
 }
 
 MY_END_NAMESPACE

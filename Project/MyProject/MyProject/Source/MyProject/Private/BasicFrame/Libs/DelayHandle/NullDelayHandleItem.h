@@ -14,10 +14,6 @@ MY_BEGIN_NAMESPACE(MyNS)
 class NullDelayHandleItem : public GObject, public IDelayHandleItem
 {
 	M_DECLARE_CLASS(NullDelayHandleItem, GObject)
-
-public:
-	void setClientDispose(bool isDispose);
-	bool isClientDispose();
 };
 
 MY_END_NAMESPACE

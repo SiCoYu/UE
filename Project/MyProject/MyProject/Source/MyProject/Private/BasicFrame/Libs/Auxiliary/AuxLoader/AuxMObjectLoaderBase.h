@@ -69,8 +69,6 @@ public:
 
     // 获取预制模板
 	UObject* getPrefabTmpl();
-	void setClientDispose(bool isDispose);
-	bool isClientDispose();
 	UObject* InstantiateObject(EventDispatchDelegate insHandle = nullptr);
 	void onInstantiateObjectFinish(IDispatchObject* dispObj = nullptr);
 };

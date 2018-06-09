@@ -32,17 +32,28 @@ void UiAttrSystem::init()
 
 void UiAttrSystem::dispose()
 {
+	Iterator curIte = this->mId2AttrDic.begin();
+	Iterator endIte = this->mId2AttrDic.end();
 
+	while (curIte != endIte)
+	{
+		MY_DELETE curIte->second;
+		++curIte;
+	}
+
+	this->mId2AttrDic.clear();
 }
 
 std::string UiAttrSystem::getPath(UiFormId id)
 {
+	std::string ret = "";
+
 	if (this->mId2AttrDic.containsKey(id))
 	{
-		return this->mId2AttrDic[id]->mWidgetPath;
+		ret = this->mId2AttrDic[id]->mWidgetPath;
 	}
 
-	return "";
+	return ret;
 }
 
 // 通过路径获取

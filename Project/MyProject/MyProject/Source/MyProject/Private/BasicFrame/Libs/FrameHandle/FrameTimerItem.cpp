@@ -94,14 +94,4 @@ void FrameTimerItem::reset()
 	this->mIsDisposed = false;
 }
 
-void FrameTimerItem::setClientDispose()
-{
-
-}
-
-bool FrameTimerItem::isClientDispose()
-{
-	return false;
-}
-
 MY_END_NAMESPACE

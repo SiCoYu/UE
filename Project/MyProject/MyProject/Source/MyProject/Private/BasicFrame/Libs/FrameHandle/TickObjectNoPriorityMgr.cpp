@@ -26,16 +26,6 @@ void TickObjectNoPriorityMgr::dispose()
 	Super::dispose();
 }
 
-void TickObjectNoPriorityMgr::setClientDispose(bool isDispose)
-{
-
-}
-
-bool TickObjectNoPriorityMgr::isClientDispose()
-{
-	return false;
-}
-
 void TickObjectNoPriorityMgr::onTick(float delta, TickMode tickMode)
 {
 	this->_incDepth();

@@ -99,14 +99,4 @@ void TimerItemBase::reset()
 	this->mIsDisposed = false;
 }
 
-void TimerItemBase::setClientDispose()
-{
-
-}
-
-bool TimerItemBase::isClientDispose()
-{
-	return false;
-}
-
 MY_END_NAMESPACE

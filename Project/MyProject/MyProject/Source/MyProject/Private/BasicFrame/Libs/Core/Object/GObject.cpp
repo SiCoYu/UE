@@ -16,15 +16,15 @@ MMutex GObject::mCriticalSection;
 bool GObject::mIsInCreate = false;
 #endif
 
-GObject::~GObject()
-{
-	MY_ASSERT(0 == this->mRefCount);
-}
-
 GObject::GObject() :
 	mRefCount(0)
 {
+	this->mIsClientDispose = false;
+}
 
+GObject::~GObject()
+{
+	MY_ASSERT(0 == this->mRefCount);
 }
 
 void GObject::AddRef()
@@ -73,6 +73,16 @@ const std::string& GObject::GetMyClassName() const
 void GObject::DumpRefCountingLeaks()
 {
 
+}
+
+void GObject::setClientDispose(bool isDispose)
+{
+	this->mIsClientDispose = isDispose;
+}
+
+bool GObject::isClientDispose()
+{
+	return this->mIsClientDispose;
 }
 
 MY_END_NAMESPACE

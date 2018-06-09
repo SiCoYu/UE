@@ -300,16 +300,6 @@ UObject* AuxMObjectLoaderBase::getPrefabTmpl()
 	return ret;
 }
 
-void AuxMObjectLoaderBase::setClientDispose(bool isDispose)
-{
-
-}
-
-bool AuxMObjectLoaderBase::isClientDispose()
-{
-	return false;
-}
-
 UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle)
 {
 	if (nullptr == this->mInsEventDispatch && nullptr != insHandle)

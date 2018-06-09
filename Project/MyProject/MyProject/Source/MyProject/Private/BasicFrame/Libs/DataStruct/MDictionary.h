@@ -28,12 +28,11 @@ public:
 
 	void init();
 	void dispose();
-	int getCount();
+	int count();
 	TValue& operator[] (TKey key);
 
 	TValue value(TKey key);
 	TKey key(TValue value);
-	int count();
 	void add(TKey key, TValue value);
 	void remove(TKey key);
 	TValue getAndRemoveByKey(TKey key);
@@ -41,6 +40,9 @@ public:
 	bool tryGetValue(TKey key, TValue& value);
 	bool containsKey(TKey key);
 	bool containsValue(TValue value);
+
+	Iterator begin();
+	Iterator end();
 };
 
 MY_END_NAMESPACE

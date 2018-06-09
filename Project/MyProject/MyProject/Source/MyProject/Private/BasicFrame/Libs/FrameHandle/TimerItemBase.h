@@ -38,8 +38,6 @@ public:
 	virtual void disposeAndDispatch();
 	virtual void checkAndDispatch();
 	virtual void reset();
-	void setClientDispose();
-	bool isClientDispose();
 };
 
 MY_END_NAMESPACE

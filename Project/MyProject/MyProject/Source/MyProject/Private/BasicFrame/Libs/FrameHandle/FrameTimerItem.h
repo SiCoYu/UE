@@ -38,8 +38,6 @@ public:
 
 	virtual void onFrameTimer();
 	virtual void reset();
-	void setClientDispose();
-	bool isClientDispose();
 };
 
 MY_END_NAMESPACE

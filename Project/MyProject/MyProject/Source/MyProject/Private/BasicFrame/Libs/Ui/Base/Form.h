@@ -61,7 +61,7 @@ public:
 	//private void UUMGForm::hide();
 	virtual void exit();
 	// 界面代码创建后就调用
-	virtual void onInit();
+	virtual void onInit() override;
 	// 第一次显示之前会调用一次
 	virtual void onReady();
 	// 每一次显示都会调用一次
@@ -69,7 +69,7 @@ public:
 	// 每一次隐藏都会调用一次
 	virtual void onHide();
 	// 每一次关闭都会调用一次
-	virtual void onExit();
+	virtual void onExit() override;
 
 	bool isVisible();
 	/*
