@@ -55,6 +55,8 @@ void UiMgr::dispose()
 		uiCanvas = this->mCanvasList.get(index);
 		uiCanvas->dispose();
 		MY_DELETE uiCanvas;
+
+		index += 1;
 	}
 
 	this->mCanvasList.clear();

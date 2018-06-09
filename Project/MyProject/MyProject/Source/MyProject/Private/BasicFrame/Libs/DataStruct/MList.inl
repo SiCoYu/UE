@@ -45,14 +45,14 @@ void MList<T>::dispose()
 template <typename T>
 T& MList<T>::get(int index)
 {
+	T* ret = nullptr;
+
 	if (index < this->count())
 	{
-		return this->mList[index];
+		ret = &(this->mList[index]);
 	}
-	else
-	{
-		return 0;
-	}
+
+	return *ret;
 }
 
 template <typename T>
