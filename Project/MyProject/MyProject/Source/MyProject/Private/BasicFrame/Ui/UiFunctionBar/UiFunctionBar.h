@@ -30,6 +30,7 @@ public:
 	UUiFunctionBar(const FObjectInitializer& ObjectInitializer);
 
 public:
+	virtual void onInit() override;
 	virtual void onReady() override;
 	virtual void onExit() override;
 

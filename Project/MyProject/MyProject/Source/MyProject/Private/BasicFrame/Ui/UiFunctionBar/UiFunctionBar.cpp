@@ -16,6 +16,13 @@
 UUiFunctionBar::UUiFunctionBar(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	
+}
+
+void UUiFunctionBar::onInit()
+{
+	Super::onInit();
+
 	this->mTestButton = MySharedPtr<AuxButton>(MY_NEW AuxButton());
 	this->mTestComBtn = MY_NEW AuxButton();
 	this->mTestLoadTextureBtn = MY_NEW AuxButton();
