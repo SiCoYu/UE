@@ -3,22 +3,22 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-ClientWinLog::ClientWinLog()
+ClientWinLogDevice::ClientWinLogDevice()
 {
 
 }
 
-void ClientWinLog::log(FString str, MLogType type)
-{
-	this->mPlayerController->ClientMessage("aaa");
-}
-
-void ClientWinLog::warn(FString str, MLogType type)
+void ClientWinLogDevice::log(FString str, MLogType type)
 {
 	this->mPlayerController->ClientMessage("aaa");
 }
 
-void ClientWinLog::error(FString str, MLogType type)
+void ClientWinLogDevice::warn(FString str, MLogType type)
+{
+	this->mPlayerController->ClientMessage("aaa");
+}
+
+void ClientWinLogDevice::error(FString str, MLogType type)
 {
 	this->mPlayerController->ClientMessage("aaa");
 }

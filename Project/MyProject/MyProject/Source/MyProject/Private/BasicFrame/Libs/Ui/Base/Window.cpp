@@ -12,7 +12,7 @@ UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	this->mHitYMax = 30;
 	this->mAlignVertial = 0;
 	this->mAlignHorizontal = 0;
-	this->mWinRender = nullptr;		// UObject »áÉú³É DefaultObject£¬Õâ¸ö»á new Ò»¸ö¶ÔÏó£¬Õ¼ÓÃ¿Õ¼ä£¬Òò´ËÔÚºóÃæ³õÊ¼»¯
+	this->mWinRender = nullptr;		// UObject ä¼šç”Ÿæˆ DefaultObjectï¼Œè¿™ä¸ªä¼š new ä¸€ä¸ªå¯¹è±¡ï¼Œå ç”¨ç©ºé—´ï¼Œå› æ­¤åœ¨åé¢åˆå§‹åŒ–
 }
 
 void UWindow::onInit()

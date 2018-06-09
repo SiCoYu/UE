@@ -3,7 +3,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-FileLog::FileLogDevice()
+FileLogDevice::FileLogDevice()
 {
 
 }
