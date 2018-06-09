@@ -29,15 +29,19 @@ void NetCmdNotify::init()
 
 void NetCmdNotify::dispose()
 {
-
+	if (nullptr != this->mCmdDispInfo)
+	{
+		MY_DELETE this->mCmdDispInfo;
+		this->mCmdDispInfo = nullptr;
+	}
 }
 
-bool NetCmdNotify::getBStopNetHandle()
+bool NetCmdNotify::isStopNetHandle()
 {
 	return mIsStopNetHandle;
 }
 
-void NetCmdNotify::setBStopNetHandle(bool value)
+void NetCmdNotify::setIsStopNetHandle(bool value)
 {
 	this->mIsStopNetHandle = value;
 }

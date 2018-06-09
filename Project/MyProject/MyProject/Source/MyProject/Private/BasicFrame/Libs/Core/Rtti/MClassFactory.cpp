@@ -29,7 +29,7 @@ void MClassFactory::Destroy()
 {
     if (0 != MClassFactory::msSingleton)
     {
-		MY_DELETE(MClassFactory::msSingleton);
+		MY_DELETE MClassFactory::msSingleton;
 		MClassFactory::msSingleton = 0;
     }
 }

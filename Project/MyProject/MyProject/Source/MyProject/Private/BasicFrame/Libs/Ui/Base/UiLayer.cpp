@@ -12,6 +12,16 @@ UiLayer::UiLayer(UiLayerId layerId)
 
 }
 
+void UiLayer::init()
+{
+
+}
+
+void UiLayer::dispose()
+{
+	this->mWinDic.clear();
+}
+
 MDictionary<UiFormId, UForm*>& UiLayer::getWinDic()
 {
 	return this->mWinDic;

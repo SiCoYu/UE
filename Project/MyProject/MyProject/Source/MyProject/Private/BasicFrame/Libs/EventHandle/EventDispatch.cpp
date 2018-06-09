@@ -34,6 +34,7 @@ void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 {
 	EventDispatchFunctionObject* funcObject = MY_NEW EventDispatchFunctionObject();
 	funcObject->mHandle = handle;
+
 	if (nullptr != handle)
 	{
 		this->_addObject(funcObject);
@@ -89,6 +90,11 @@ void EventDispatch::_removeObject(IDelayHandleItem* delayObject)
 		if (!this->mHandleList.remove((EventDispatchFunctionObject*)delayObject))
 		{
 			GLogSys->log("Event Handle not exist");
+		}
+		
+		if (nullptr != delayObject)
+		{
+			MY_DELETE (EventDispatchFunctionObject*)delayObject;
 		}
 	}
 }

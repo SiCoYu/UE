@@ -26,6 +26,10 @@ protected:
 
 public:
 	UiCanvas(UiCanvasId canvasId);
+
+	void init();
+	void dispose();
+
 	void setActorName(std::string& rhv);
 	MList<UiLayer*>& getLayerList();
 	void findCanvasActor();

@@ -27,6 +27,10 @@ protected:
 
 public:
 	UiLayer(UiLayerId layerId);
+
+	void init();
+	void dispose();
+
 	MDictionary<UiFormId, UForm*>& getWinDic();
 	FSlateRenderTransform& getLayerTrans();
 	void setLayerTrans(FSlateRenderTransform* rhv);

@@ -13,10 +13,13 @@ UiCanvas::UiCanvas(UiCanvasId canvasId)
 {
 	this->mCanvasId = canvasId;
 
-	int idx = 0;
-	for (idx = 0; idx < (int)UiLayerId::eMaxLayer; ++idx)
+	int index = 0;
+	UiLayer* uiLayer = nullptr;
+
+	for (index = 0; index < (int)UiLayerId::eMaxLayer; ++index)
 	{
-		this->mLayerList.add(MY_NEW UiLayer((UiLayerId)idx));
+		uiLayer = MY_NEW UiLayer((UiLayerId)index);
+		this->mLayerList.add(uiLayer);
 	}
 
 	//if (eCanvas_50 == mCanvasId)
@@ -37,6 +40,27 @@ UiCanvas::UiCanvas(UiCanvasId canvasId)
 	//	this->mLayerList[(int)UiLayerId::eForthLayer].goName = LayerPath.ND_CV_UIForthLayer_Canvas_100;
 	//	this->mLayerList[(int)UiLayerId::eTopLayer].goName = LayerPath.ND_CV_UITopLayer_Canvas_100;
 	//}
+}
+
+void UiCanvas::init()
+{
+
+}
+
+void UiCanvas::dispose()
+{
+	int index = 0;
+	UiLayer* uiLayer = nullptr;
+
+	while (index < (int)UiLayerId::eMaxLayer)
+	{
+		uiLayer = this->mLayerList.get(index);
+		MY_DELETE uiLayer;
+
+		index += 1;
+	}
+
+	this->mLayerList.dispose();
 }
 
 void UiCanvas::setActorName(std::string& rhv)

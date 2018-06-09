@@ -22,6 +22,9 @@ public:
 
 public:
 	TableBase(std::string resname, std::string tablename);
+
+	void init();
+	void dispose();
 };
 
 MY_END_NAMESPACE

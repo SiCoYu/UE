@@ -49,7 +49,11 @@ void ResLoadMgr::init()
 
 void ResLoadMgr::dispose()
 {
-
+	if (nullptr != this->mLoadData)
+	{
+		MY_DELETE this->mLoadData;
+		this->mLoadData = nullptr;
+	}
 }
 
 // 重置加载设置

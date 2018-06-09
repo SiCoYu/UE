@@ -29,8 +29,8 @@ public:
 	void init();
 	void dispose();
 
-	bool getBStopNetHandle();
-	void setBStopNetHandle(bool value);
+	bool isStopNetHandle();
+	void setIsStopNetHandle(bool value);
 
 	void addOneNofity(NetModuleDispatchHandle* disp);
 	void removeOneNotify(NetModuleDispatchHandle* disp);

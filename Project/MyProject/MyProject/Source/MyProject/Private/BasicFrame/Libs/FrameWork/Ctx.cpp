@@ -279,6 +279,9 @@ void Ctx::dispose()
 	// 静态全局变量的清理工作
 	MyMemoryTracker::get().reportLeaks();
 	MyMemoryTracker::get().clear();
+
+	// 清除类库
+	MClassFactory::Destroy();
 }
 
 void Ctx::beginPlay()

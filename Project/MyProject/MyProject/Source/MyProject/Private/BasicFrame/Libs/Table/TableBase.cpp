@@ -17,4 +17,14 @@ TableBase::TableBase(std::string resname, std::string tablename)
 	this->mByteBuffer = nullptr;
 }
 
+void TableBase::init()
+{
+
+}
+
+void TableBase::dispose()
+{
+
+}
+
 MY_END_NAMESPACE

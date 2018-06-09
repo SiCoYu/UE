@@ -16,9 +16,18 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 TableSys::TableSys()
 {
-	this->mDicTable[TableId::TABLE_OBJECT] = MY_NEW TableBase("ObjectBase_client.bytes", "ObjectBase_client");
-	this->mDicTable[TableId::TABLE_CARD] = MY_NEW TableBase("CardBase_client.bytes", "CardBase_client");
-	this->mDicTable[TableId::TABLE_SKILL] = MY_NEW TableBase("SkillBase_client.bytes", "SkillBase_client");    // 添加一个表的步骤三
+	TableBase* tableBase = nullptr;
+	tableBase = MY_NEW TableBase("ObjectBase_client.bytes", "ObjectBase_client");
+	this->mDicTable[TableId::TABLE_OBJECT] = tableBase;
+	tableBase->init();
+
+	tableBase = MY_NEW TableBase("CardBase_client.bytes", "CardBase_client");
+	this->mDicTable[TableId::TABLE_CARD] = tableBase;
+	tableBase->init();
+
+	tableBase = MY_NEW TableBase("SkillBase_client.bytes", "SkillBase_client");
+	this->mDicTable[TableId::TABLE_SKILL] = tableBase;    // 添加一个表的步骤三
+	tableBase->init();
 
 	this->mByteBuffer = MY_NEW MByteBuffer();
 }
@@ -35,7 +44,24 @@ void TableSys::init()
 
 void TableSys::dispose()
 {
+	TableMapIte curIte = this->mDicTable.begin();
+	TableMapIte endIte = this->mDicTable.end();
 
+	while (curIte != endIte)
+	{
+		curIte.second->dispose();
+		MY_DELETE curIte.second;
+
+		++curIte;
+	}
+
+	this->mDicTable.clear();
+
+	if (nullptr != this->mByteBuffer)
+	{
+		MY_DELETE this->mByteBuffer;
+		this->mByteBuffer = nullptr;
+	}
 }
 
 // 返回一个表
