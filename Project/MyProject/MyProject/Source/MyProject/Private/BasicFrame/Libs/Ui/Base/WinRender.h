@@ -23,6 +23,13 @@ public:
 		SSlateWidget* mUiRoot_S;
 		UUMGWidget* mUiRoot;
 	};
+
+public:
+	WinRender();
+
+	void init();
+	void clear();
+	void dispose();
 };
 
 MY_END_NAMESPACE

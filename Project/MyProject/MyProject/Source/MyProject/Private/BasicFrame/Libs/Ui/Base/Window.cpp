@@ -18,12 +18,14 @@ UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 void UWindow::onInit()
 {
 	this->mWinRender = MY_NEW WinRender();
+	this->mWinRender->init();
 }
 
 void UWindow::onExit()
 {
 	if (nullptr != this->mWinRender)
 	{
+		this->mWinRender->dispose();
 		MY_DELETE this->mWinRender;
 		this->mWinRender = nullptr;
 	}

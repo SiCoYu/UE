@@ -146,10 +146,14 @@ void UiMgr::_exitFormInternal(UiFormId formId)
 		UiLayer* layer = form->getUiLayer();
 		layer->getWinDic().remove(formId);
 
+		SSlateWidget* uiRoot_S = form->mWinRender->mUiRoot_S;
+		UUMGWidget* uiRoot = form->mWinRender->mUiRoot;
+
 		// 释放界面资源
 		form->onExit();
-		UtilEngineWrap::Destroy(form->mWinRender->mUiRoot);
-		form->mWinRender->mUiRoot = nullptr;
+		//UtilEngineWrap::Destroy(form->mWinRender->mUiRoot);
+		//form->mWinRender->mUiRoot = nullptr;
+		UtilEngineWrap::Destroy(uiRoot);
 
 		// 释放加载的资源
 		//string path = mUiAttrSystem.getPath(formId);
