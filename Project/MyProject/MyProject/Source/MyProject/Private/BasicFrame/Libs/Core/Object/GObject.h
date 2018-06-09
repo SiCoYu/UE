@@ -5,11 +5,12 @@
 #include "MMutex.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
+#include "IDelayHandleItem.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class GObject : public MyAllocatedObject
+class GObject : public MyAllocatedObject, public IDelayHandleItem
 {
 	M_DECLARE_CLASS(GObject, MyAllocatedObject)
 

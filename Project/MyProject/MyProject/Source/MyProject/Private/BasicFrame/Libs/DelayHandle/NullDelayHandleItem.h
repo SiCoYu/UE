@@ -11,7 +11,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 默认的接口实现
  */
-class NullDelayHandleItem : public GObject, public IDelayHandleItem
+class NullDelayHandleItem : public GObject/*, public IDelayHandleItem*/
 {
 	M_DECLARE_CLASS(NullDelayHandleItem, GObject)
 };

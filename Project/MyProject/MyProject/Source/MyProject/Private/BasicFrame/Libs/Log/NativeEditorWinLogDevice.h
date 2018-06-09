@@ -1,5 +1,5 @@
-#ifndef __EditorWinLog_H
-#define __EditorWinLog_H
+#ifndef __NativeEditorWinLogDevice_H
+#define __NativeEditorWinLogDevice_H
 
 #include "Logging/LogMacros.h"
 #include "UnrealString.h"		// FString
@@ -23,10 +23,10 @@ MY_USING_NAMESPACE(MyNS)
  * @brief Editor 窗口日志
  * @brief MLogMacro.h 中使用 GetNameSafe，因此才继承 UObject
  */
-class EditorWinLog : public UObject
+class NativeEditorWinLogDevice : public UObject
 {
 public:
-	EditorWinLog();
+	NativeEditorWinLogDevice();
 	void log(FString str, MLogType type);
 	void warn(FString str, MLogType type);
 	void error(FString str, MLogType type);

@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "ClientWinLog.h"
+#include "ClientWinLogDevice.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

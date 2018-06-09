@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "EditorWinLog.h"
+#include "NativeEditorWinLogDevice.h"
 
 //DEFINE_LOG_CATEGORY(ComLog);
 //DEFINE_LOG_CATEGORY(ComWarning);
@@ -7,12 +7,12 @@
 
 DEFINE_LOG_CATEGORY(MLogMacro_LogCategory);
 
-EditorWinLog::EditorWinLog()
+NativeEditorWinLogDevice::NativeEditorWinLogDevice()
 {
 
 }
 
-void EditorWinLog::log(FString str, MLogType type)
+void NativeEditorWinLogDevice::log(FString str, MLogType type)
 {
 	//UE_LOG(YourLog, Log, str.GetCharArray().GetData());
 	//UE_LOG(YourLog, Log, *str);
@@ -22,14 +22,14 @@ void EditorWinLog::log(FString str, MLogType type)
 	MLogMacro_TRACE("aaa");
 }
 
-void EditorWinLog::warn(FString str, MLogType type)
+void NativeEditorWinLogDevice::warn(FString str, MLogType type)
 {
 	UE_LOG(ComWarning, Log, TEXT("aaa"));
 	MLogMacro_V_LOGM(ComLog, "aaa");
 	MLogMacro_TRACE("aaa");
 }
 
-void EditorWinLog::error(FString str, MLogType type)
+void NativeEditorWinLogDevice::error(FString str, MLogType type)
 {
 	UE_LOG(ComError, Log, TEXT("aaa"));
 	MLogMacro_V_LOGM(ComLog, "aaa");

@@ -1,9 +1,9 @@
 #include "MyProject.h"
-#include "FileLog.h"
+#include "NetLogDevice.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-FileLog::FileLog()
+NetLogDevice::NetLogDevice()
 {
 
 }

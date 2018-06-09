@@ -8,7 +8,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class EventDispatchFunctionObject : public GObject, public IDelayHandleItem
+class EventDispatchFunctionObject : public GObject/*, public IDelayHandleItem*/
 {
 public:
 	EventDispatchDelegate mHandle;

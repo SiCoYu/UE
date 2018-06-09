@@ -120,6 +120,8 @@ void UForm::onInit()
 	//{
 	//	m_luaCSBridgeForm.CallMethod(LuaCSBridgeForm.ON_INIT);
 	//}
+
+	Super::onInit();
 }
 
 // 第一次显示之前会调用一次
@@ -186,6 +188,8 @@ void UForm::onExit()
 	//{
 	//	GUiMgr->exitForm(UiFormId.eUIBlurBg);
 	//}
+
+	Super::onExit();
 }
 
 bool UForm::isVisible()

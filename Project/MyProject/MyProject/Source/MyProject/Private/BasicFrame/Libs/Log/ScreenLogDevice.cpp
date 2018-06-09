@@ -1,9 +1,9 @@
 #include "MyProject.h"
-#include "ScreenLog.h"
+#include "ScreenLogDevice.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-ScreenLog::ScreenLog()
+ScreenLogDevice::ScreenLogDevice()
 {
 
 }

@@ -14,7 +14,7 @@ class CallFuncObjectFixParam;
 /**
  * @brief 定时器，这个是不断增长的
  */
-class TimerItemBase : public GObject, public IDelayHandleItem, public IDispatchObject
+class TimerItemBase : public GObject, /*public IDelayHandleItem,*/ public IDispatchObject
 {
 public:
     float mInternal;        // 定时器间隔
