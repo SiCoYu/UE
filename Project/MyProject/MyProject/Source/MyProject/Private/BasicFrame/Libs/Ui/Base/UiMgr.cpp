@@ -50,9 +50,9 @@ void UiMgr::dispose()
 	int index = 0;
 	UiCanvas* uiCanvas = nullptr;
 
-	while (idx < (int)UiCanvasId::eCanvas_Total)
+	while (index < (int)UiCanvasId::eCanvas_Total)
 	{
-		uiCanvas = this->mCanvasList.get(uiCanvas);
+		uiCanvas = this->mCanvasList.get(index);
 		uiCanvas->dispose();
 		MY_DELETE uiCanvas;
 	}

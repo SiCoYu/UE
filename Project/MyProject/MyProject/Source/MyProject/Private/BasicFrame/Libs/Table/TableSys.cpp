@@ -49,8 +49,8 @@ void TableSys::dispose()
 
 	while (curIte != endIte)
 	{
-		curIte.second->dispose();
-		MY_DELETE curIte.second;
+		curIte->second->dispose();
+		MY_DELETE curIte->second;
 
 		++curIte;
 	}

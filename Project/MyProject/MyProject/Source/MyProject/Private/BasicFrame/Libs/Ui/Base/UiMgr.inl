@@ -104,6 +104,8 @@ T* UiMgr::getForm(UiFormId formId)
 		// Engine\Source\Runtime\CoreUObject\Private\UObject\UObjectBaseUtility.cpp
 		// bool UObjectBaseUtility::IsA( const UClass* SomeBase ) const
 		// Cast<T>(0); 这样会宕机的注意
+		MY_ASSERT(this->mId2FormDic[formId].IsA(UForm::GetClass()));
+
 		ret = Cast<T>(this->mId2FormDic[formId]);
 	}
 
