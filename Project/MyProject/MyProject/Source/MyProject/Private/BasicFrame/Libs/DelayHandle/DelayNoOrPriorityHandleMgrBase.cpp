@@ -108,7 +108,7 @@ void DelayNoOrPriorityHandleMgrBase::_removeObject(IDelayHandleItem* delayObject
 					this->mDeferredAddQueue->removeNoOrPriorityObject((INoOrPriorityObject*)delayObject);
 				}
 
-				delayObject->setClientDispose(true);
+				((GObject*)delayObject)->setClientDispose(true);
 
 				this->mDeferredRemoveQueue->addNoOrPriorityObject((INoOrPriorityObject*)delayObject);
 			}

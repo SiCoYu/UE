@@ -101,7 +101,7 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 
 	for(auto handle : this->mHandleList.getList())
 	{
-		if (!handle->mIsClientDispose)
+		if (!(GObject*)handle->isClientDispose())
 		{
 			handle->mHandle(dispatchObject);
 		}
