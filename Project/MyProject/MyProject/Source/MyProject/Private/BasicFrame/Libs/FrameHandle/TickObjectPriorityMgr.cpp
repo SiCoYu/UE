@@ -6,6 +6,7 @@
 #include "LogSys.h"
 #include "LogTypeId.h"
 #include "INoOrPriorityList.h"
+#include "GObject.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -59,7 +60,8 @@ void TickObjectPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 
 		if (nullptr != (IDelayHandleItem*)tickObject)
 		{
-			if (!((IDelayHandleItem*)tickObject)->isClientDispose())
+			//if (!((IDelayHandleItem*)tickObject)->isClientDispose())
+			if (!((GObject*)tickObject)->isClientDispose())
 			{
 				tickObject->onTick(delta, tickMode);
 			}

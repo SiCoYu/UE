@@ -94,7 +94,7 @@ void TimerMgr::advance(float delta)
 
 	for(TimerItemBase* timerItem : this->mTimerList.getList())
 	{
-		if (!timerItem->isClientDispose())
+		if (!(GObject*)timerItem->isClientDispose())
 		{
 			timerItem->OnTimer(delta);
 		}

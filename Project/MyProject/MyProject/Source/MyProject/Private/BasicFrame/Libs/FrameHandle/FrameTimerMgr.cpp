@@ -89,7 +89,7 @@ void FrameTimerMgr::advance(float delta)
 
 	for(FrameTimerItem* timerItem : this->mTimerList.getList())
 	{
-		if (!timerItem->isClientDispose())
+		if (!(GObject*)timerItem->isClientDispose())
 		{
 			timerItem->onFrameTimer();
 		}

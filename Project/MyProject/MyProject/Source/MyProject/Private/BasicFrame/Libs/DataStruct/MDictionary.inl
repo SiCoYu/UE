@@ -139,13 +139,13 @@ bool MDictionary<TKey, TValue>::containsValue(TValue value)
 }
 
 template <class TKey, class TValue>
-typename MDictionary::Iterator MDictionary<TKey, TValue>::begin()
+typename MDictionary<TKey, TValue>::Iterator MDictionary<TKey, TValue>::begin()
 {
 	return this->mData.begin();
 }
 
 template <class TKey, class TValue>
-typename MDictionary::Iterator MDictionary<TKey, TValue>::end()
+typename MDictionary<TKey, TValue>::Iterator MDictionary<TKey, TValue>::end()
 {
 	return this->mData.end();
 }

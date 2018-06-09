@@ -4,6 +4,7 @@
 #include "IDelayHandleItem.h"
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -13,7 +14,7 @@ class CallFuncObjectFixParam;
 /**
  * @brief 定时器，这个是不断增长的
  */
-class FrameTimerItem : public IDelayHandleItem, public IDispatchObject
+class FrameTimerItem : public GObject, public IDelayHandleItem, public IDispatchObject
 {
 public:
 	int mInternal;              // 帧数间隔
