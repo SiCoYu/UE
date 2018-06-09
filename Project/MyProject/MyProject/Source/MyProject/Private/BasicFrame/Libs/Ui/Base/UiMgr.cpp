@@ -44,6 +44,7 @@ void UiMgr::dispose()
 	if (nullptr != this->mUiAttrSystem)
 	{
 		this->mUiAttrSystem->dispose();
+		MY_DELETE this->mUiAttrSystem;
 		this->mUiAttrSystem = nullptr;
 	}
 

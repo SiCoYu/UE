@@ -2,6 +2,7 @@
 
 #include <string>
 #include <unordered_map>
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -9,7 +10,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class GObject;
 class MClassInfo;
 
-class MClassFactory
+class MClassFactory : GObject
 {
 	typedef std::unordered_map<std::string, const MClassInfo*> UMap;
 

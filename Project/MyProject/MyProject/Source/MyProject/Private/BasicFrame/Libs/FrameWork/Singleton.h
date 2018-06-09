@@ -1,8 +1,10 @@
 ﻿#ifndef __Singleton_H
 #define __Singleton_H
 
+#include "GObject.h"
+
 template<class T>
-class Singleton
+class Singleton : public GObject
 {
 private:
 	static T* msSingleton;

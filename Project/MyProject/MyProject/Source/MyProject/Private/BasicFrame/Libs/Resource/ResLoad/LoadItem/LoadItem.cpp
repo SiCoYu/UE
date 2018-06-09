@@ -20,7 +20,7 @@ LoadItem::LoadItem()
 
 LoadItem::~LoadItem()
 {
-	
+	MY_DELETE this->mNonRefCountResLoadResultNotify;
 }
 
 ResPackType LoadItem::getResPackType()
