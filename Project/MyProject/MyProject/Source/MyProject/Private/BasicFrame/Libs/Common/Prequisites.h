@@ -52,4 +52,6 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 
+#include "MyNativeObjectReferencer.h"
+
 #endif

@@ -208,6 +208,8 @@ public:
 	static FTimerManager& GetWorldTimerManager();
 
 	static void AddReferencedObjects(UObject* InThis, FReferenceCollector& Collector);
+	static void AddToRoot(UObject* InThis);
+	static void RemoveFromRoot(UObject* InThis);
 
 	// error C2272: 'GetLevel': modifiers not allowed on static member functions
 	//static ULevel* GetLevel(AActor* actor) const;

@@ -40,6 +40,7 @@
 //#include "MySingletonBP.h"
 #include "MyBluePrintBase.h"
 #include "MyMemoryTracker.h"
+#include "MyNativeObjectReferencer.h"
 
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
@@ -86,7 +87,9 @@ Ctx::Ctx()
 	this->mTickMgr.setNull();
 	this->mTimerMgr.setNull();
 	this->mFrameTimerMgr.setNull();
+
 	this->mBPCtx = nullptr;
+	this->mMyNativeObjectReferencer = nullptr;
 }
 
 Ctx::~Ctx()
@@ -140,6 +143,8 @@ void Ctx::construct()
 	this->mTickMgr = MySharedPtr<TickMgr>(MY_NEW TickMgr());
 	this->mTimerMgr = MySharedPtr<TimerMgr>(MY_NEW TimerMgr());
 	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(MY_NEW FrameTimerMgr());
+
+	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 
 	// 最后初始化 BluePrint 数据
 	// 这个时候还没有获取 GEngineData->getMainActor() ，使用会报错
@@ -501,6 +506,11 @@ MySharedPtr<FrameTimerMgr> Ctx::getFrameTimerMgr()
 UMyBluePrintBase* Ctx::getBPCtx()
 {
 	return this->mBPCtx;
+}
+
+MyNativeObjectReferencer* Ctx::getNativeObjectReferencer()
+{
+	return this->mMyNativeObjectReferencer;
 }
 
 void Ctx::addEventHandle()

@@ -429,6 +429,22 @@ void UtilEngineWrap::AddReferencedObjects(UObject* InThis, FReferenceCollector& 
 	AActor::AddReferencedObjects(InThis, Collector);
 }
 
+void UtilEngineWrap::AddToRoot(UObject* InThis)
+{
+	if (nullptr != InThis)
+	{
+		InThis->AddToRoot();
+	}
+}
+
+void UtilEngineWrap::RemoveFromRoot(UObject* InThis)
+{
+	if (nullptr != InThis)
+	{
+		InThis->RemoveFromRoot();
+	}
+}
+
 ULevel* UtilEngineWrap::GetLevel(AActor* actor)
 { 
 	return Cast<ULevel>(actor->GetOuter());

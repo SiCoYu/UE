@@ -55,6 +55,8 @@ class GObject;
 
 MY_END_NAMESPACE
 
+class MyNativeObjectReferencer;
+
 class UMyBluePrintBase;
 class UGameInstance;
 
@@ -100,7 +102,9 @@ protected:
 	MySharedPtr<TimerMgr> mTimerMgr;
 	MySharedPtr<FrameTimerMgr> mFrameTimerMgr;
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
+
 	UMyBluePrintBase* mBPCtx;
+	MyNativeObjectReferencer* mMyNativeObjectReferencer;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -155,9 +159,11 @@ public:
 	MySharedPtr<TickMgr> getTickMgr();
 	MySharedPtr<TimerMgr> getTimerMgr();
 	MySharedPtr<FrameTimerMgr> getFrameTimerMgr();
+
 	//MySharedPtr<UMyBluePrintBase> getBPCtx();
 	UMyBluePrintBase* getBPCtx();
-
+	MyNativeObjectReferencer* getNativeObjectReferencer();
+	
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去
 	 */
@@ -205,6 +211,8 @@ public:
 #define GTickMgr GCtx->getTickMgr()
 #define GTimerMgr GCtx->getTimerMgr()
 #define GFrameTimerMgr GCtx->getFrameTimerMgr()
+
 #define GBPCtx GCtx->getBPCtx()
+#define GNativeObjectReferencer GCtx->getNativeObjectReferencer()
 
 #endif				// __Ctx_H
