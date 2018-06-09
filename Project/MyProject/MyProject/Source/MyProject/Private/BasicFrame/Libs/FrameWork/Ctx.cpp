@@ -508,7 +508,7 @@ UMyBluePrintBase* Ctx::getBPCtx()
 	return this->mBPCtx;
 }
 
-MyNativeObjectReferencer* Ctx::getNativeObjectReferencer()
+FMyNativeObjectReferencer* Ctx::getNativeObjectReferencer()
 {
 	return this->mMyNativeObjectReferencer;
 }

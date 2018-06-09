@@ -55,7 +55,7 @@ class GObject;
 
 MY_END_NAMESPACE
 
-class MyNativeObjectReferencer;
+class FMyNativeObjectReferencer;
 
 class UMyBluePrintBase;
 class UGameInstance;
@@ -104,7 +104,7 @@ protected:
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
 
 	UMyBluePrintBase* mBPCtx;
-	MyNativeObjectReferencer* mMyNativeObjectReferencer;
+	FMyNativeObjectReferencer* mMyNativeObjectReferencer;
 
 #ifdef USE_EXTERN_THREAD
 	MySharedPtr<StdoutLog*> mStdoutLog;
@@ -162,7 +162,7 @@ public:
 
 	//MySharedPtr<UMyBluePrintBase> getBPCtx();
 	UMyBluePrintBase* getBPCtx();
-	MyNativeObjectReferencer* getNativeObjectReferencer();
+	FMyNativeObjectReferencer* getNativeObjectReferencer();
 	
 	/**
 	 *@brief 测试 Api，以后放到 UnitTest 中去

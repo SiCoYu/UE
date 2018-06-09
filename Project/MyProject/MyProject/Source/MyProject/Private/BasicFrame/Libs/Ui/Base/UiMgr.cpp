@@ -157,6 +157,8 @@ void UiMgr::_exitFormInternal(UiFormId formId)
 
 	if (form != nullptr)
 	{
+		GNativeObjectReferencer->removeObjectReference(form);
+
 		// 清理列表
 		UiLayer* layer = form->getUiLayer();
 		layer->getWinDic().remove(formId);
@@ -208,6 +210,8 @@ UiLayer* UiMgr::getLayer(UiCanvasId canvasId, UiLayerId layerId)
 // 内部接口
 void UiMgr::addFormNoReady(UForm* form)
 {
+	GNativeObjectReferencer->addObjectReference(form);
+
 	UiLayer* layer = this->getLayer(
 		this->mUiAttrSystem->mId2AttrDic[form->getId()]->mCanvasId, 
 		this->mUiAttrSystem->mId2AttrDic[form->getId()]->mLayerId
