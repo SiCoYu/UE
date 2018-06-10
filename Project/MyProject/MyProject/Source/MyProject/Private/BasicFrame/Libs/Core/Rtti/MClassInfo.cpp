@@ -29,7 +29,7 @@ void MClassInfo::Construct(const char* className, const MClassInfo* parentClass,
 #ifdef MY_DEBUG
 		else
 		{
-			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetMyClassInfo(this->mName);
+			const MClassInfo* checkClassInfo = MClassFactory::Instance()->GetMyClassInfoFromFactory(this->mName);
 			MY_ASSERT(0 != checkClassInfo);
 			if (checkClassInfo != this)
 			{

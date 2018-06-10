@@ -10,7 +10,8 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
-#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS)
 
 UMyGameInstanceBase::UMyGameInstanceBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

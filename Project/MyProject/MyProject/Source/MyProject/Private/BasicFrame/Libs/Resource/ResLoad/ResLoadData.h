@@ -4,6 +4,7 @@
 #include "MDictionary.h"
 #include <string>
 #include <list>
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -11,7 +12,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class LoadItem;
 class ResItem;
 
-class ResLoadData
+class ResLoadData : public GObject
 {
     // 因为资源有些需要协同程序，因此重复利用资源
 public:

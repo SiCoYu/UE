@@ -20,7 +20,7 @@ public:
 
     void Register(const MClassInfo* classInfo, const std::string& className);
     bool ClassExists(const std::string& className) const;
-    const MClassInfo* GetMyClassInfo(const std::string& className) const;
+    const MClassInfo* GetMyClassInfoFromFactory(const std::string& className) const;
 	//GObject* Create(const std::string& className) const;
 
 private:

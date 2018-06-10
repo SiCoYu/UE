@@ -63,7 +63,7 @@ bool MClassFactory::ClassExists(const std::string& className) const
     return this->mNameTable.find(className) != this->mNameTable.end();
 }
 
-const MClassInfo* MClassFactory::GetMyClassInfo(const std::string& className) const
+const MClassInfo* MClassFactory::GetMyClassInfoFromFactory(const std::string& className) const
 {
     MY_ASSERT(className.length() > 0);
 	MY_ASSERT(this->ClassExists(className));

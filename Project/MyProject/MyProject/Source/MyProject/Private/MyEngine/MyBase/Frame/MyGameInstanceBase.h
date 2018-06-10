@@ -1,9 +1,16 @@
 #pragma once
 
 #include "Engine/GameInstance.h"
+#include "PlatformDefine.h"
 #include "MyGameInstanceBase.generated.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 class AppFrame;
+
+MY_END_NAMESPACE
+
+MY_USING_NAMESPACE(MyNS)
 
 /**
  * @brief 
