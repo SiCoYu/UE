@@ -66,7 +66,7 @@
 	if(ptr) \
 	{ \
 		(ptr)->dispose(); \
-		delete(ptr); \
+		MY_DELETE(ptr); \
 		ptr = nullptr; \
 	} \
 }

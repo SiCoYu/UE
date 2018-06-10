@@ -46,11 +46,15 @@
 #include "FrameTimerMgr.h"
 
 
+#include "SafePointer.h"
+
+
 // ÄÚ´æ
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+
 
 #include "MyNativeObjectReferencer.h"
 

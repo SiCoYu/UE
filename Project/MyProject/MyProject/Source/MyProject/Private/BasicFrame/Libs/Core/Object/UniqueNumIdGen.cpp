@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "UniqueNumIdGen.h"
+#include <limits>
 #include "TypeDef.h"
 #include "MClassFactory.h"
 
@@ -15,7 +16,7 @@ UniqueNumIdGen::UniqueNumIdGen(uint baseUniqueId)
 
 uint UniqueNumIdGen::genNewId()
 {
-	if(uint.MaxValue == this->mCurId)
+	if(std::numeric_limits<uint>() == this->mCurId)
 	{
 		this->mPreIdx = this->mCurId;
 		this->mCurId = this->mBaseId;

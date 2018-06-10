@@ -1,12 +1,13 @@
 ﻿#ifndef __ResLoadState_H
 #define __ResLoadState_H
 
+#include "GObject.h"
 #include "ResLoadStateCV.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class ResLoadState
+class ResLoadState : public GObject
 {
 protected:
 	ResLoadStateCV mResLoadState;
