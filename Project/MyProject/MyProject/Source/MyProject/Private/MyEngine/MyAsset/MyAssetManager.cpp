@@ -17,7 +17,7 @@ void MyAssetManager::init()
 	{
 		UAssetManager& AssetManager = UAssetManager::Get();
 		TArray<FPrimaryAssetTypeInfo> TypeInfos;
-		Manager.GetPrimaryAssetTypeInfoList(TypeInfos);
+		AssetManager.GetPrimaryAssetTypeInfoList(TypeInfos);
 	}
 }
 
