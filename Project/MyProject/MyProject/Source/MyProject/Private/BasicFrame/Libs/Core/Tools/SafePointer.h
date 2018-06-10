@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+/**
+ * @file SafePointer.h
+ */
 // 已经不用了
 //#ifndef SAFE_NEW
 //#define SAFE_NEW new

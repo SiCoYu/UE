@@ -3,12 +3,13 @@
 
 #include <string>
 #include "MLockList.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 template <class T>
-class MLockQueue
+class MLockQueue : public GObject
 {
 protected:
 	MLockList<T> mList;

@@ -6,6 +6,7 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MClassFactory.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -67,6 +68,11 @@ void ResInsBase::failed(ResItem* res)
 void ResInsBase::unload()
 {
 
+}
+
+void ResInsBase::dispose()
+{
+	MY_SAFE_DISPOSE(this->mRefCountResLoadResultNotify);
 }
 
 RefCountResLoadResultNotify* ResInsBase::getRefCountResLoadResultNotify()

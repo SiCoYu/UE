@@ -23,6 +23,9 @@ public:
 	ResLoadResultNotify();
 	virtual ~ResLoadResultNotify();
 
+	void init();
+	void dispose();
+
 	ResLoadState* getResLoadState();
 	void setResLoadState(ResLoadState* value);
 	ResEventDispatch* getLoadResEventDispatch();

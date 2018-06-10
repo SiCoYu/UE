@@ -2,6 +2,7 @@
 #define __MClientBuffer_H
 
 #include "MyProject.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -15,7 +16,7 @@ class MMutex;
 /**
 * @brief 消息缓冲区
 */
-class MClientBuffer
+class MClientBuffer : public GObject
 {
 protected:
 	MMsgBuffer* mRawBuffer;			// 直接从服务器接收到的原始的数据，可能压缩和加密过

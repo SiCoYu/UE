@@ -1,6 +1,5 @@
 #include "MyProject.h"
 #include "MByteBuffer.h"
-
 //#include <sstream>
 #include "DynBufResizePolicy.h"
 #include "BitConverter.h"
@@ -9,6 +8,7 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -24,6 +24,16 @@ MByteBuffer::MByteBuffer(
 		maxCapacity
 		);
 	this->mDynBuffer->setPodType(true);
+}
+
+void MByteBuffer::init()
+{
+
+}
+
+void MByteBuffer::dispose()
+{
+	MY_SAFE_DISPOSE(this->mDynBuffer);
 }
 
 MDynBuffer<char>* MByteBuffer::getDynBuffer()

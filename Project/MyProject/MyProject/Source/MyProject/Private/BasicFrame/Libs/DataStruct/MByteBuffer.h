@@ -37,6 +37,10 @@ public:
 		uint32 maxCapacity = (uint32)BufferCV::eMAX_CAPACITY,
 		MEndian endian = MEndian::eLITTLE_ENDIAN
 	);
+
+	void init();
+	void dispose();
+
 	MDynBuffer<char>* getDynBuffer();
 	uint32 getBytesAvailable();
 	MEndian getEndian();

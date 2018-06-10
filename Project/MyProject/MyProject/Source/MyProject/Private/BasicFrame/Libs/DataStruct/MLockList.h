@@ -9,6 +9,7 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -17,7 +18,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  * @brief 线程安全列表， T 是 Object ，便于使用 Equal 比较地址
  */
 template <class T>
-class MLockList
+class MLockList : public GObject
 {
 protected:
 	MDynBuffer<T> mDynamicBuffer;

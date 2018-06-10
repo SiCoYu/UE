@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
-#include "IPoolObject.h"
 #include "PoolSys.h"
+#include "IPoolObject.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -16,7 +17,7 @@ void PoolSys::init()
 
 void PoolSys::dispose()
 {
-
+	MY_SAFE_DISPOSE(this->mPoolList);
 }
 
 void PoolSys::deleteObj(IPoolObject* obj)

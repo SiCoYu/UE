@@ -9,6 +9,7 @@
 
 #include "UtilStr.h"
 #include "UtilContainers.h"
+#include "GContainerObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -17,7 +18,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 * @brief 对系统 List 的封装
 */
 template <typename T>
-class MList
+class MList : GContainerObject
 {
 public:
 	typedef std::vector<T> List;

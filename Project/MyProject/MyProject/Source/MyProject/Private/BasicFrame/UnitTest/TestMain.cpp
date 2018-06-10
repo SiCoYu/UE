@@ -18,6 +18,8 @@
 #include <shellapi.h>
 #include "Windows/HideWindowsPlatformTypes.h"
 
+#include "SafePointer.h"
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 TestMain::TestMain()
@@ -47,7 +49,10 @@ void TestMain::init()
 
 void TestMain::dispose()
 {
-
+	MY_SAFE_DISPOSE(this->mTestExtern);
+	MY_SAFE_DISPOSE(this->mTestUI);
+	MY_SAFE_DISPOSE(this->mTestDownload);
+	MY_SAFE_DISPOSE(this->mTestLuaBind);
 }
 
 void TestMain::runTest()

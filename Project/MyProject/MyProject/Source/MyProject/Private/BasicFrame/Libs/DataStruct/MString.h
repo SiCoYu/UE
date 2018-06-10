@@ -5,6 +5,7 @@
 #include "Ctx.h"
 #include "LogSys.h"
 #include "UtilStr.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -12,7 +13,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
 * @brief 对系统 string 的封装
 */
-class MString
+class MString : public GObject
 {
 public:
 	typedef std::string String;

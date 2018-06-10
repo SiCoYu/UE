@@ -3,6 +3,7 @@
 #include "ResLoadState.h"
 #include "ResEventDispatch.h"
 #include "IDispatchObject.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -14,8 +15,18 @@ ResLoadResultNotify::ResLoadResultNotify()
 
 ResLoadResultNotify::~ResLoadResultNotify()
 {
-	MY_DELETE this->mResLoadState;
-	MY_DELETE this->mLoadResEventDispatch;
+	
+}
+
+void ResLoadResultNotify::init()
+{
+
+}
+
+void ResLoadResultNotify::dispose()
+{
+	MY_SAFE_DISPOSE(this->mResLoadState);
+	MY_SAFE_DISPOSE(this->mLoadResEventDispatch);
 }
 
 ResLoadState* ResLoadResultNotify::getResLoadState()

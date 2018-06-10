@@ -26,11 +26,13 @@ public:
 	ResInsBase();
 	// warning C4265: 'ResInsBase': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
 	virtual ~ResInsBase();
+
 	bool getIsOrigResNeedImmeUnload();
 	void setIsOrigResNeedImmeUnload(bool value);
 	std::string GetPath();
 	std::string getPrefabName();         // 只有 Prefab 资源才实现这个函数
 	void init(ResItem* res);
+	virtual void dispose();
 
 protected:
     // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重载了

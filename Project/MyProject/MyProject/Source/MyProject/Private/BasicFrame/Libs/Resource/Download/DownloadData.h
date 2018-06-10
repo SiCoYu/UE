@@ -1,8 +1,9 @@
 ﻿#pragma once
 
-#include "MDictionary.h"
 #include <string>
 #include <list>
+#include "MDictionary.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -13,7 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class DownloadItem;
 
-class DownloadData
+class DownloadData : public GObject
 {
 public:
 	typedef std::pair<std::string, DownloadItem*> KVPairs;

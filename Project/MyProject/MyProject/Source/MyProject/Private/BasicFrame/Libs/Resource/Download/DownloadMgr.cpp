@@ -6,6 +6,7 @@
 #include "ResLoadState.h"
 #include "HttpWebDownloadItem.h"
 #include "RefCount.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -28,7 +29,7 @@ void DownloadMgr::init()
 
 void DownloadMgr::dispose()
 {
-
+	MY_SAFE_DISPOSE(this->mLoadData);
 }
 
 void DownloadMgr::resetLoadParam(DownloadParam* loadParam)

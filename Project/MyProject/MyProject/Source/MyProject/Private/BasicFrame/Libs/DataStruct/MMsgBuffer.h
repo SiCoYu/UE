@@ -2,6 +2,7 @@
 #define __MMsgBuffer_H
 
 #include "BufferCV.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -12,7 +13,7 @@ class MByteBuffer;
 /**
  * @brief ÏûÏ¢»º³åÇø
  */
-class MMsgBuffer
+class MMsgBuffer : public GObject
 {
 	friend class MClientBuffer;
 
