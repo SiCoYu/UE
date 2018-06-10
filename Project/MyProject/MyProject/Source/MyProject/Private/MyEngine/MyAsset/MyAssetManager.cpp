@@ -1,22 +1,27 @@
 #include "MyProject.h"
 #include "MyAssetManager.h"
 
-UMyAssetManager::UMyAssetManager()
+MyAssetManager::MyAssetManager()
 {
 	
 }
 
-UMyAssetManager::~UMyAssetManager()
+//UMyAssetManager::~UMyAssetManager()
+//{
+//	
+//}
+
+void MyAssetManager::init()
 {
-	
+	if (UAssetManager::IsValid())
+	{
+		UAssetManager& AssetManager = UAssetManager::Get();
+		TArray<FPrimaryAssetTypeInfo> TypeInfos;
+		Manager.GetPrimaryAssetTypeInfoList(TypeInfos);
+	}
 }
 
-void UMyAssetManager::init()
-{
-
-}
-
-void UMyAssetManager::dispose()
+void MyAssetManager::dispose()
 {
 
 }

@@ -21,8 +21,8 @@ public class MyProjectEditor : ModuleRules
                 // Main area
                 "MyProjectEditor/Private/MyEngine",
                 "MyProjectEditor/Private/MyEngine/Animation",
-                "MyProjectEditor/Private/MyBase",
-				"MyProjectEditor/Private/MyAsset",
+                "MyProjectEditor/Private/MyEngine/MyBase",
+                "MyProjectEditor/Private/MyEngine/MyAsset",
 
                 // Example area
                 "MyProjectEditor/Private/MyEngine/AnimNode",
