@@ -16,7 +16,7 @@ UniqueNumIdGen::UniqueNumIdGen(uint baseUniqueId)
 
 uint UniqueNumIdGen::genNewId()
 {
-	if(std::numeric_limits<uint>() == this->mCurId)
+	if(std::numeric_limits<uint>::max() == this->mCurId)
 	{
 		this->mPreIdx = this->mCurId;
 		this->mCurId = this->mBaseId;
