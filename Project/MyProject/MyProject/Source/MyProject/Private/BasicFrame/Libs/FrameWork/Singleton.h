@@ -7,6 +7,8 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "PlatformDefine.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 template<class T>
 class Singleton : public GObject
 {
@@ -43,5 +45,7 @@ public:
 		}
 	}
 };
+
+MY_END_NAMESPACE
 
 #endif				// __Singleton_H
