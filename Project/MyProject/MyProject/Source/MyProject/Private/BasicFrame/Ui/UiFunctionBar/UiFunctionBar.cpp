@@ -77,10 +77,10 @@ void UUiFunctionBar::onExit()
 	this->mTestButton->dispose();
 	this->mTestButton.setNull();
 	
-	MY_SAFE_DISPOSE(nullptr != this->mTestComBtn);
-	MY_SAFE_DISPOSE(nullptr != this->mTestLoadTextureBtn);
-	MY_SAFE_DISPOSE(nullptr != this->mTestLoadMaterialBtn);
-	MY_SAFE_DISPOSE(nullptr != this->mTestChangeMaterialBtn);
+	MY_SAFE_DISPOSE(this->mTestComBtn);
+	MY_SAFE_DISPOSE(this->mTestLoadTextureBtn);
+	MY_SAFE_DISPOSE(this->mTestLoadMaterialBtn);
+	MY_SAFE_DISPOSE(this->mTestChangeMaterialBtn);
 
 	Super::onExit();
 }

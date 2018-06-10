@@ -22,9 +22,9 @@ void LoopDepth::init()
 
 void LoopDepth::dispose()
 {
-	MY_SAFE_DISPOSE((nullptr != this->mIncHandle);
-	MY_SAFE_DISPOSE((nullptr != this->mDecHandle);
-	MY_SAFE_DISPOSE((nullptr != this->mZeroHandle);
+	MY_SAFE_DISPOSE(this->mIncHandle);
+	MY_SAFE_DISPOSE(this->mDecHandle);
+	MY_SAFE_DISPOSE(this->mZeroHandle);
 }
 
 void LoopDepth::setIncHandle(EventDispatchDelegate handle)

@@ -24,7 +24,7 @@ void UWindow::onInit()
 
 void UWindow::onExit()
 {
-	MY_SAFE_DISPOSE(nullptr != this->mWinRender);
+	MY_SAFE_DISPOSE(this->mWinRender);
 }
 
 int UWindow::getPosX()

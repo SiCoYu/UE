@@ -41,7 +41,7 @@ void UiMgr::dispose()
 {
 	this->exitAllForm();
 
-	MY_SAFE_DISPOSE(nullptr != this->mUiAttrSystem);
+	MY_SAFE_DISPOSE(this->mUiAttrSystem);
 
 	int index = 0;
 	UiCanvas* uiCanvas = nullptr;

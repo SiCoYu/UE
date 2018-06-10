@@ -5,7 +5,17 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 EventDispatchFunctionObject::EventDispatchFunctionObject()
 {
-	this->mIsClientDispose = false;
+	
+}
+
+void EventDispatchFunctionObject::init()
+{
+
+}
+
+void EventDispatchFunctionObject::dispose()
+{
+
 }
 
 MY_END_NAMESPACE

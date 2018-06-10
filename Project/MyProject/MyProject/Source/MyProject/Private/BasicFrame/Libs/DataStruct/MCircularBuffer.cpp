@@ -7,6 +7,7 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -28,8 +29,18 @@ MCircularBuffer::MCircularBuffer(
 
 MCircularBuffer::~MCircularBuffer()
 {
-	MY_DELETE this->mDynBuffer;
-	MY_DELETE this->mTmpBA;
+	this->dispose();
+}
+
+void MCircularBuffer::init()
+{
+
+}
+
+void MCircularBuffer::dispose()
+{
+	MY_SAFE_DISPOSE(this->mDynBuffer);
+	MY_SAFE_DISPOSE(this->mTmpBA);
 }
 
 uint32 MCircularBuffer::getFirst()

@@ -29,7 +29,7 @@ void NetCmdNotify::init()
 
 void NetCmdNotify::dispose()
 {
-	MY_SAFE_DISPOSE((nullptr != this->mCmdDispInfo);
+	MY_SAFE_DISPOSE(this->mCmdDispInfo);
 }
 
 bool NetCmdNotify::isStopNetHandle()

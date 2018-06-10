@@ -37,6 +37,9 @@ public:
 	~MCircularBuffer();
 
 public:
+	void init();
+	void dispose();
+
 	uint32 getFirst();
 	uint32 getLast();
 	std::size_t getSize();

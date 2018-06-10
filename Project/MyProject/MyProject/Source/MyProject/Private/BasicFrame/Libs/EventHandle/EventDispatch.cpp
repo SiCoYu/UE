@@ -93,7 +93,8 @@ void EventDispatch::_removeObject(IDelayHandleItem* delayObject)
 			GLogSys->log("Event Handle not exist");
 		}
 
-		MY_SAFE_DISPOSE((EventDispatchFunctionObject*)delayObject);
+		EventDispatchFunctionObject* objPtr = (EventDispatchFunctionObject*)delayObject;
+		MY_SAFE_DISPOSE(objPtr);
 	}
 }
 

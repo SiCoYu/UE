@@ -50,7 +50,7 @@ void ResLoadMgr::init()
 
 void ResLoadMgr::dispose()
 {
-	MY_SAFE_DISPOSE(nullptr != this->mLoadData);
+	MY_SAFE_DISPOSE(this->mLoadData);
 }
 
 // 重置加载设置
