@@ -24,6 +24,16 @@ MCondition::~MCondition()
 	MY_DELETE this->mEvent;
 }
 
+void MCondition::init()
+{
+
+}
+
+void MCondition::dispose()
+{
+
+}
+
 bool MCondition::getCanEnterWait()
 {
     return this->mCanEnterWait;

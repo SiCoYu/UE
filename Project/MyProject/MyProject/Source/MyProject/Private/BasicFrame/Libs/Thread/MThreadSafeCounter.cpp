@@ -20,6 +20,16 @@ MThreadSafeCounter::~MThreadSafeCounter()
 
 }
 
+void MThreadSafeCounter::init()
+{
+
+}
+
+void MThreadSafeCounter::dispose()
+{
+
+}
+
 int MThreadSafeCounter::Increment()
 {
 	return mThreadSafeCounter.Increment();

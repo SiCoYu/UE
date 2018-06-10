@@ -10,6 +10,7 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "GObject.h"
+#include "SafePointer.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -39,7 +40,17 @@ public:
 
 	~MLockList()
 	{
-		MY_DELETE this->mVisitMutex;
+		
+	}
+
+	void init()
+	{
+
+	}
+
+	void dispose()
+	{
+		MY_SAFE_DISPOSE(this->mVisitMutex);
 	}
 
 	uint32 getCount()

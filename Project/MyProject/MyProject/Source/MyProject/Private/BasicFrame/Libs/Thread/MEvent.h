@@ -17,6 +17,9 @@ public:
 	MEvent();
 	~MEvent();
 
+	void init();
+	void dispose();
+
 	void Wait();
 	void Reset();
 	void Set();

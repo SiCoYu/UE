@@ -14,6 +14,16 @@ MEvent::~MEvent()
 	this->mEvent = nullptr;
 }
 
+void MEvent::init()
+{
+
+}
+
+void MEvent::dispose()
+{
+
+}
+
 void MEvent::Wait()
 {
 	this->mEvent->Wait(MAX_uint32);

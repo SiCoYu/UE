@@ -15,6 +15,16 @@ MThread::~MThread()
 	//delete mSyncEvent;
 }
 
+void MThread::init()
+{
+
+}
+
+void MThread::dispose()
+{
+
+}
+
 void MThread::setExitFlag(bool value)
 {
 	mIsExitFlag = value;

@@ -20,6 +20,9 @@ protected:
 public:
 	MLock(MMutex* mutex);
 	~MLock();
+
+	void init();
+	void dispose();
 };
 
 MY_END_NAMESPACE

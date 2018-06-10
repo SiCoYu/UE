@@ -16,6 +16,9 @@ public:
 	~MThreadSafeCounter();
 
 public:
+	void init();
+	void dispose();
+
 	int Increment();
 	int Add(int Amount);
 	int Decrement();

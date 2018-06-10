@@ -24,6 +24,9 @@ public:
 	MThread(std::string threadName = "");
 	~MThread();
 
+	void init();
+	void dispose();
+
 	void setExitFlag(bool value);
     // 函数区域
     /**

@@ -21,6 +21,16 @@ MMutex::~MMutex()
 #endif
 }
 
+void MMutex::init()
+{
+
+}
+
+void MMutex::dispose()
+{
+
+}
+
 #ifdef USE_EXTERN_THREAD
 Mutex* MMutex::getMutex()
 #else

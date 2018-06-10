@@ -40,6 +40,9 @@ public:
 	MMutex();
 	~MMutex();
 
+	void init();
+	void dispose();
+
 //#ifdef USE_EXTERN_THREAD
 //	Mutex* getMutex();
 //#else

@@ -15,4 +15,14 @@ MLock::~MLock()
     
 }
 
+void MLock::init()
+{
+
+}
+
+void MLock::dispose()
+{
+
+}
+
 MY_END_NAMESPACE

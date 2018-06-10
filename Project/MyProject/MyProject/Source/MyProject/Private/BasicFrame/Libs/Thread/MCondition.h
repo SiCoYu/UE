@@ -23,6 +23,9 @@ public:
 	MCondition(std::string name = "");
 	~MCondition();
 
+	void init();
+	void dispose();
+
 	bool getCanEnterWait();
 	void wait();
 	void notifyAll();

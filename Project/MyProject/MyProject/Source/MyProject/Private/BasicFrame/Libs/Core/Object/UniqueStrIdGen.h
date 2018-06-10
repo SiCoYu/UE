@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "UniqueNumIdGen.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"

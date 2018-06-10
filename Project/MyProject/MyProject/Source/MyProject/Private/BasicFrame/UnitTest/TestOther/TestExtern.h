@@ -8,7 +8,7 @@
 
 MY_USING_NAMESPACE(MyNS)
 
-class TestExtern : public GObject 
+class TestExtern : public TestBase
 {
 public:
 	TestStaticLibA* mTestStaticLibA;
