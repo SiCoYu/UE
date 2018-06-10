@@ -37,6 +37,16 @@ MClientBuffer::MClientBuffer()
 
 MClientBuffer::~MClientBuffer()
 {
+	this->dispose();
+}
+
+void MClientBuffer::init()
+{
+
+}
+
+void MClientBuffer::dispose()
+{
 	MY_DELETE this->mRawBuffer;
 	MY_DELETE this->mMsgBuffer;
 	MY_DELETE this->mSendTmpBuffer;
@@ -58,7 +68,6 @@ MDynBuffer<char>* MClientBuffer::getDynBuffer()
 {
 	return this->mDynBuffer;
 }
-
 
 MMsgBuffer* MClientBuffer::getSendTmpBuffer()
 {

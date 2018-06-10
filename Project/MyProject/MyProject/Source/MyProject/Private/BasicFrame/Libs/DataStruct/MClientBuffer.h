@@ -42,6 +42,9 @@ public:
 	MClientBuffer();
 	~MClientBuffer();
 
+	void init();
+	void dispose();
+
 	MDynBuffer<char>* getDynBuffer();
 	MMsgBuffer* getSendTmpBuffer();
 	MByteBuffer* getSendBuffer();
