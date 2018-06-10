@@ -2,6 +2,9 @@
 #define __Singleton_H
 
 #include "GObject.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 #include "PlatformDefine.h"
 
 template<class T>

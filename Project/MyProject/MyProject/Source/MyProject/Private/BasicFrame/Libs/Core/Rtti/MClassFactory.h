@@ -10,7 +10,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class GObject;
 class MClassInfo;
 
-class MClassFactory : GObject
+class MClassFactory : public GObject
 {
 	typedef std::unordered_map<std::string, const MClassInfo*> UMap;
 

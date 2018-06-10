@@ -7,6 +7,9 @@
 #include "MyOnlineSessionBase.h"
 #include "LogCategoryDef.h"
 #include "MyActorBase.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 #include "PlatformDefine.h"
 
 UMyGameInstanceBase::UMyGameInstanceBase(const FObjectInitializer& ObjectInitializer)
