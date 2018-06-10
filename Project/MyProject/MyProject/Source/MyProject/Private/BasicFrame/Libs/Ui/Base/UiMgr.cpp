@@ -41,12 +41,7 @@ void UiMgr::dispose()
 {
 	this->exitAllForm();
 
-	if (nullptr != this->mUiAttrSystem)
-	{
-		this->mUiAttrSystem->dispose();
-		MY_DELETE this->mUiAttrSystem;
-		this->mUiAttrSystem = nullptr;
-	}
+	MY_SAFE_DISPOSE(nullptr != this->mUiAttrSystem);
 
 	int index = 0;
 	UiCanvas* uiCanvas = nullptr;
@@ -54,8 +49,7 @@ void UiMgr::dispose()
 	while (index < (int)UiCanvasId::eCanvas_Total)
 	{
 		uiCanvas = this->mCanvasList.get(index);
-		uiCanvas->dispose();
-		MY_DELETE uiCanvas;
+		MY_SAFE_DISPOSE(uiCanvas);
 
 		index += 1;
 	}

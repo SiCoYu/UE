@@ -3,6 +3,7 @@
 #include "CallFuncObjectNoParam.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -21,24 +22,9 @@ void LoopDepth::init()
 
 void LoopDepth::dispose()
 {
-	if (nullptr != this->mIncHandle)
-	{
-		this->mIncHandle->clearEventHandle();
-		MY_DELETE this->mIncHandle;
-		this->mIncHandle = nullptr;
-	}
-	if (nullptr != this->mDecHandle)
-	{
-		this->mDecHandle->clearEventHandle();
-		MY_DELETE this->mDecHandle;
-		this->mDecHandle = nullptr;
-	}
-	if (nullptr != this->mZeroHandle)
-	{
-		this->mZeroHandle->clearEventHandle();
-		MY_DELETE this->mZeroHandle;
-		this->mZeroHandle = nullptr;
-	}
+	MY_SAFE_DISPOSE((nullptr != this->mIncHandle);
+	MY_SAFE_DISPOSE((nullptr != this->mDecHandle);
+	MY_SAFE_DISPOSE((nullptr != this->mZeroHandle);
 }
 
 void LoopDepth::setIncHandle(EventDispatchDelegate handle)

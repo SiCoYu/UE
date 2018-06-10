@@ -15,6 +15,10 @@ public:
 	MByteBuffer* bu;
     uint8 byCmd;
     uint8 byParam;
+
+public:
+	void init();
+	void dispose();
 };
 
 MY_END_NAMESPACE

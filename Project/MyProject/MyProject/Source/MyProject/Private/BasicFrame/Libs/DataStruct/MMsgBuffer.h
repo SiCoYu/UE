@@ -36,6 +36,9 @@ public:
 	);
 	~MMsgBuffer();
 
+	void init();
+	void dispose();
+
 	MByteBuffer* getHeaderBA();
 	MByteBuffer* getMsgBodyBA();
 	MCircularBuffer* getCircularBuffer();

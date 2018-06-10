@@ -7,7 +7,7 @@
 #include "Engine/LatentActionManager.h"
 #include "IDispatchObject.h"
 #include "EventDispatchDelegate.h"
-#include "SafePointer.h"	// SAFE_NEW
+#include "SafePointer.h"	// MY_SAFE_DISPOSE
 #include "MyFlyPawn.h"		// AMyFlyPawn
 #include "UtilEngineWrap.h"
 #include "AuxTextureLoader.h"
@@ -77,30 +77,10 @@ void UUiFunctionBar::onExit()
 	this->mTestButton->dispose();
 	this->mTestButton.setNull();
 	
-	if (nullptr != this->mTestComBtn)
-	{
-		this->mTestComBtn->dispose();
-		MY_DELETE this->mTestComBtn;
-		this->mTestComBtn = nullptr;
-	}
-	if (nullptr != this->mTestLoadTextureBtn)
-	{
-		this->mTestLoadTextureBtn->dispose();
-		MY_DELETE this->mTestLoadTextureBtn;
-		this->mTestLoadTextureBtn = nullptr;
-	}
-	if (nullptr != this->mTestLoadMaterialBtn)
-	{
-		this->mTestLoadMaterialBtn->dispose();
-		MY_DELETE this->mTestLoadMaterialBtn;
-		this->mTestLoadMaterialBtn = nullptr;
-	}
-	if (nullptr != this->mTestChangeMaterialBtn)
-	{
-		this->mTestChangeMaterialBtn->dispose();
-		MY_DELETE this->mTestChangeMaterialBtn;
-		this->mTestChangeMaterialBtn = nullptr;
-	}
+	MY_SAFE_DISPOSE(nullptr != this->mTestComBtn);
+	MY_SAFE_DISPOSE(nullptr != this->mTestLoadTextureBtn);
+	MY_SAFE_DISPOSE(nullptr != this->mTestLoadMaterialBtn);
+	MY_SAFE_DISPOSE(nullptr != this->mTestChangeMaterialBtn);
 
 	Super::onExit();
 }

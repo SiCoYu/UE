@@ -20,6 +20,9 @@ public:
 	RefCountResLoadResultNotify();
 	virtual ~RefCountResLoadResultNotify();
 
+	void init();
+	void dispose();
+
 	RefCount* getRefCount();
 	void setRefCount(RefCount* value);
 	virtual void copyFrom(ResLoadResultNotify* rhv) override;

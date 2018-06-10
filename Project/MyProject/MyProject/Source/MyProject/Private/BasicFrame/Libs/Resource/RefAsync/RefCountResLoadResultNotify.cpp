@@ -1,11 +1,11 @@
 ﻿#include "MyProject.h"
 #include "RefCountResLoadResultNotify.h"
 #include "RefCount.h"
-
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -16,7 +16,17 @@ RefCountResLoadResultNotify::RefCountResLoadResultNotify()
 
 RefCountResLoadResultNotify::~RefCountResLoadResultNotify()
 {
-	MY_DELETE this->mRefCount;
+	this->dispose();
+}
+
+void RefCountResLoadResultNotify::init()
+{
+
+}
+
+void RefCountResLoadResultNotify::dispose()
+{
+	MY_SAFE_DISPOSE(this->mRefCount);
 }
 
 RefCount* RefCountResLoadResultNotify::getRefCount()

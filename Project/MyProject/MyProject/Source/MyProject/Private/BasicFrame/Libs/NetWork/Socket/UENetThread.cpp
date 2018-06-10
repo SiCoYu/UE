@@ -2,11 +2,11 @@
 #include "UENetThread.h"
 #include "INetMgr.h"
 #include "MEvent.h"
-
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -19,7 +19,12 @@ UENetThread::UENetThread(INetMgr* pNetMgr, std::string mThreadName)
 
 UENetThread::~UENetThread()
 {
-	MY_DELETE this->mSyncEvent;
+	this->dispose();
+}
+
+void UENetThread::dispose()
+{
+	MY_SAFE_DISPOSE(this->mSyncEvent);
 }
 
 MEvent* UENetThread::getSyncEventPtr()

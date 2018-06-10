@@ -55,7 +55,7 @@ void UiCanvas::dispose()
 	while (index < (int)UiLayerId::eMaxLayer)
 	{
 		uiLayer = this->mLayerList.get(index);
-		MY_DELETE uiLayer;
+		MY_SAFE_DISPOSE(uiLayer);
 
 		index += 1;
 	}

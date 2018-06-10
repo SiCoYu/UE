@@ -3,6 +3,7 @@
 #include "MCircularBuffer.h"
 #include "MByteBuffer.h"
 #include "MsgCV.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -15,9 +16,19 @@ MMsgBuffer::MMsgBuffer(uint32 initCapacity, uint32 maxCapacity)
 
 MMsgBuffer::~MMsgBuffer()
 {
-	MY_DELETE this->mCircularBuffer;
-	MY_DELETE this->mHeaderBA;
-	MY_DELETE this->mMsgBodyBA;
+	this->dispose();
+}
+
+void MMsgBuffer::init()
+{
+
+}
+
+void MMsgBuffer::dispose()
+{
+	MY_SAFE_DISPOSE(this->mCircularBuffer);
+	MY_SAFE_DISPOSE(this->mHeaderBA);
+	MY_SAFE_DISPOSE(this->mMsgBodyBA);
 }
 
 MByteBuffer* MMsgBuffer::getHeaderBA()

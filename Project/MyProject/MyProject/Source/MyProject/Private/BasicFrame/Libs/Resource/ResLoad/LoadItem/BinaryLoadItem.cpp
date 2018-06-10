@@ -1,6 +1,7 @@
 #include "MyProject.h"
 #include "BinaryLoadItem.h"
 #include "MByteBuffer.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -37,7 +38,7 @@ void UBinaryLoadItem::loadFile(const FString& Filename)
 		{
 			MByteBuffer* pFileBU = MY_NEW MByteBuffer(arrayBuffer.GetAllocatedSize());
 			pFileBU->writeBytes((char*)(arrayBuffer.GetData()), 0, arrayBuffer.GetAllocatedSize());
-			MY_DELETE pFileBU;
+			MY_SAFE_DISPOSE(pFileBU);
 		}
 	}
 }

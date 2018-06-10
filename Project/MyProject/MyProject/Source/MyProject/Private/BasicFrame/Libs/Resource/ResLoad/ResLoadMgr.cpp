@@ -23,6 +23,7 @@
 #include "BinaryResItem.h"
 #include "LevelResItem.h"
 #include "UtilPath.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -49,11 +50,7 @@ void ResLoadMgr::init()
 
 void ResLoadMgr::dispose()
 {
-	if (nullptr != this->mLoadData)
-	{
-		MY_DELETE this->mLoadData;
-		this->mLoadData = nullptr;
-	}
+	MY_SAFE_DISPOSE(nullptr != this->mLoadData);
 }
 
 // 重置加载设置

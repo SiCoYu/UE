@@ -24,6 +24,9 @@ public:
 
 public:
 	ResLoadData();
+
+	void init();
+	void dispose();
 };
 
 MY_END_NAMESPACE

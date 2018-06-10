@@ -35,6 +35,9 @@ public:
 	LoadItem();
 	virtual ~LoadItem();
 
+	void init();
+	void dispose();
+
 	ResPackType getResPackType();
 	void setResPackType(ResPackType value);
 

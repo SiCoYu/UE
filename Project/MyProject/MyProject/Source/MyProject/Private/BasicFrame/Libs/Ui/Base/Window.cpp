@@ -4,6 +4,7 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "SafePointer.h"
 
 UWindow::UWindow(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -23,12 +24,7 @@ void UWindow::onInit()
 
 void UWindow::onExit()
 {
-	if (nullptr != this->mWinRender)
-	{
-		this->mWinRender->dispose();
-		MY_DELETE this->mWinRender;
-		this->mWinRender = nullptr;
-	}
+	MY_SAFE_DISPOSE(nullptr != this->mWinRender);
 }
 
 int UWindow::getPosX()

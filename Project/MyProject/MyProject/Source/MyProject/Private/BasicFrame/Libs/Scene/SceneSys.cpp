@@ -8,6 +8,7 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -28,8 +29,8 @@ void SceneSys::init()
 
 void SceneSys::dispose()
 {
-	MY_DELETE this->mOnSceneLoadedDispatch;
-	MY_DELETE this->mAuxLevelLoader;
+	MY_SAFE_DISPOSE(this->mOnSceneLoadedDispatch);
+	MY_SAFE_DISPOSE(this->mAuxLevelLoader);
 }
 
 Scene* SceneSys::getCurScene()

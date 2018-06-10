@@ -25,6 +25,7 @@ public:
 
 	MEvent* getSyncEventPtr();
 	virtual bool Init(void) override;
+	virtual void dispose();
 	virtual void Exit(void) override;
 	virtual uint32 Run(void) override;
 };

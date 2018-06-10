@@ -12,6 +12,7 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "SafePointer.h"
 
 #ifdef USE_EXTERN_THREAD
 	#include "NetTCPClient.h"
@@ -174,8 +175,6 @@ NetMgr::~NetMgr()
 #ifdef USE_EXTERN_THREAD
 	this->Release();
 #endif
-
-	MY_DELETE this->mVisitMutex;
 }
 
 void NetMgr::init()
@@ -185,6 +184,8 @@ void NetMgr::init()
 
 void NetMgr::dispose()
 {
+	MY_SAFE_DISPOSE(this->mVisitMutex);
+
 	this->quipNet();
 }
 

@@ -41,6 +41,9 @@ public:
 	UENetClient();
 	~UENetClient();
 
+	void init();
+	void dispose();
+
 	bool getRecvThreadStart();
 	void setRecvThreadStart(bool value);
 

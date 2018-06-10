@@ -14,4 +14,14 @@ UiAttrItem::UiAttrItem()
 	this->mLayerId = UiLayerId::eSecondLayer;
 }
 
+void UiAttrItem::init()
+{
+
+}
+
+void UiAttrItem::dispose()
+{
+
+}
+
 MY_END_NAMESPACE

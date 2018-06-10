@@ -8,6 +8,7 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
 #include "MClassFactory.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -20,7 +21,17 @@ LoadItem::LoadItem()
 
 LoadItem::~LoadItem()
 {
-	MY_DELETE this->mNonRefCountResLoadResultNotify;
+	this->dispose();
+}
+
+void LoadItem::init()
+{
+
+}
+
+void LoadItem::dispose()
+{
+	MY_SAFE_DISPOSE(this->mNonRefCountResLoadResultNotify);
 }
 
 ResPackType LoadItem::getResPackType()

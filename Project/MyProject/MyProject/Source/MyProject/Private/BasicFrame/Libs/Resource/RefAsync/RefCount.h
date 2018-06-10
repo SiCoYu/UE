@@ -17,6 +17,10 @@ protected:
 
 public:
 	RefCount();
+
+	void init();
+	void dispose();
+
 	uint32 getRefNum();
 	void setRefNum(int32 value);
 	void reset();

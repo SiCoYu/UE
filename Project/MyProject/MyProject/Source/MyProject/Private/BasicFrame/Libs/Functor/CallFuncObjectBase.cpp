@@ -19,12 +19,12 @@ void CallFuncObjectBase::init()
 
 void CallFuncObjectBase::dispose()
 {
-
+	this->clear();
 }
 
 void CallFuncObjectBase::clear()
 {
-
+	this->clearEventHandle();
 }
 
 bool CallFuncObjectBase::isValid()

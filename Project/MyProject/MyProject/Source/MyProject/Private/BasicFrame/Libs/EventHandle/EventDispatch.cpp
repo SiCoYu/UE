@@ -3,6 +3,7 @@
 #include "Prequisites.h"
 #include "EventDispatchFunctionObject.h"
 #include "MClassFactory.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -91,11 +92,8 @@ void EventDispatch::_removeObject(IDelayHandleItem* delayObject)
 		{
 			GLogSys->log("Event Handle not exist");
 		}
-		
-		if (nullptr != delayObject)
-		{
-			MY_DELETE (EventDispatchFunctionObject*)delayObject;
-		}
+
+		MY_SAFE_DISPOSE((EventDispatchFunctionObject*)delayObject);
 	}
 }
 

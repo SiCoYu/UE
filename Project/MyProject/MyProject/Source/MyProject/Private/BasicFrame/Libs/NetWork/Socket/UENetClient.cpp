@@ -13,6 +13,7 @@
 #include "UtilStr.h"
 #include "MCircularBuffer.h"
 #include "MDynBuffer.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -31,9 +32,19 @@ UENetClient::UENetClient()
 
 UENetClient::~UENetClient()
 {
-	MY_DELETE this->mClientBuffer;
-	MY_DELETE this->mMsgSendEndEvent;
-	MY_DELETE this->mSendMutex;
+	
+}
+
+void UENetClient::init()
+{
+
+}
+
+void UENetClient::dispose()
+{
+	MY_SAFE_DISPOSE(this->mClientBuffer);
+	MY_SAFE_DISPOSE(this->mMsgSendEndEvent);
+	MY_SAFE_DISPOSE(this->mSendMutex);
 }
 
 bool UENetClient::getRecvThreadStart()

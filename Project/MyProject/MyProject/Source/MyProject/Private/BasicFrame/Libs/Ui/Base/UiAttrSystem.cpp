@@ -6,6 +6,7 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MClassFactory.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -37,7 +38,7 @@ void UiAttrSystem::dispose()
 
 	while (curIte != endIte)
 	{
-		MY_DELETE curIte->second;
+		MY_SAFE_DISPOSE(curIte->second);
 		++curIte;
 	}
 

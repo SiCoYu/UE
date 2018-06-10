@@ -8,4 +8,14 @@ ResLoadData::ResLoadData()
 
 }
 
+void ResLoadData::init()
+{
+
+}
+
+void ResLoadData::dispose()
+{
+
+}
+
 MY_END_NAMESPACE

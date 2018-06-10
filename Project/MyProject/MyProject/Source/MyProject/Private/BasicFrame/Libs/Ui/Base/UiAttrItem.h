@@ -30,6 +30,9 @@ public:
 
 public:
 	UiAttrItem();
+
+	void init();
+	void dispose();
 };
 
 MY_END_NAMESPACE

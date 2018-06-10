@@ -8,6 +8,7 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -20,8 +21,7 @@ MCondition::MCondition(std::string name)
 
 MCondition::~MCondition()
 {
-	MY_DELETE this->mMutex;
-	MY_DELETE this->mEvent;
+	this->dispose();
 }
 
 void MCondition::init()
@@ -31,7 +31,8 @@ void MCondition::init()
 
 void MCondition::dispose()
 {
-
+	MY_SAFE_DISPOSE(this->mMutex);
+	MY_SAFE_DISPOSE(this->mEvent);
 }
 
 bool MCondition::getCanEnterWait()

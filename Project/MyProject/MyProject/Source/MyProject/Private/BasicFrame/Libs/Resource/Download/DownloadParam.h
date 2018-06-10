@@ -33,6 +33,9 @@ public:
 public:
 	DownloadParam();
 
+	void init();
+	void dispose();
+
 	void reset();
 	void setPath(std::string origPath);
 };

@@ -102,6 +102,7 @@ bool MDataStream::isValid()
 int MDataStream::getLength()
 {
 	int len = 0;
+
 	if (this->mFileOpState == eOpenSuccess)
 	{
 		if (this->mFileStream != nullptr)
@@ -122,7 +123,7 @@ void MDataStream::close()
 		if (this->mFileStream != nullptr)
 		{
 			Success = this->mFileStream->Close();
-			MY_DELETE this->mFileStream;
+			delete this->mFileStream;
 			this->mFileStream = nullptr;
 		}
 

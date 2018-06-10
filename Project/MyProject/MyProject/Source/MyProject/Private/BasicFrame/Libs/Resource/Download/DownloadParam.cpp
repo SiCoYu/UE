@@ -5,25 +5,35 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 DownloadParam::DownloadParam()
 {
-    reset();
+    this->reset();
+}
+
+void DownloadParam::init()
+{
+
+}
+
+void DownloadParam::dispose()
+{
+
 }
 
 void DownloadParam::reset()
 {
-    mResLoadType = eLoadWeb;
-    mDownloadType = eHttpWeb;
-    mIsWriteFile = true;
-    mFileLen = 0;
-	mVersion = "";
+	this->mResLoadType = eLoadWeb;
+	this->mDownloadType = eHttpWeb;
+	this->mIsWriteFile = true;
+	this->mFileLen = 0;
+	this->mVersion = "";
 }
 
 void DownloadParam::setPath(std::string origPath)
 {
-    mOrigPath = origPath;
-    mLoadPath = mOrigPath;
-    mLogicPath = mOrigPath;
-    mResUniqueId = mOrigPath;
-    mVersion = "4";
+	this->mOrigPath = origPath;
+	this->mLoadPath = mOrigPath;
+	this->mLogicPath = mOrigPath;
+	this->mResUniqueId = mOrigPath;
+	this->mVersion = "4";
 
     //mExtName = UtilPath.getFileExt(mOrigPath);
 

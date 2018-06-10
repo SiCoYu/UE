@@ -8,10 +8,21 @@ RefCount::RefCount()
 	this->mRefNum = 0;       // 引用计数从 1 改成 0 
 }
 
+void RefCount::init()
+{
+
+}
+
+void RefCount::dispose()
+{
+
+}
+
 uint32 RefCount::getRefNum()
 {
 	return this->mRefNum;
 }
+
 void RefCount::setRefNum(int32 value)
 {
 	this->mRefNum = value;
