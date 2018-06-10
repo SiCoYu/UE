@@ -1,0 +1,43 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{1783AB28-454F-783F-FA47-9F810A5BD003}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "MyProject",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "MyProjectEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ApexDestruction",
+			"Enabled": true
+		},
+		{
+			"Name": "MyPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "MyPluginWin",
+			"Enabled": true
+		},
+		{
+			"Name": "MyScriptPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "MyScriptGeneratorPlugin",
+			"Enabled": true
+		}
+	],
+	"AdditionalPluginDirectories": [
+		"../../../../../../../../MyProject/Plugins"
+	]
+}
