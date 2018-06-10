@@ -1,16 +1,13 @@
 #ifndef __AppFrame_H
 #define __AppFrame_H
 
-#include "GObject.h"
+#include "Singleton.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class AppFrame : public GObject
+class AppFrame : public Singleton<AppFrame>
 {
-public:
-	static AppFrame* msAppFrame;
-
 public:
 	static void initApp();
 	static void quitApp();

@@ -6,19 +6,16 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-AppFrame* AppFrame::msAppFrame = nullptr;
-
 void AppFrame::initApp()
 {
-	AppFrame::msAppFrame = MY_NEW AppFrame();
-	AppFrame::mAppFrame->init();
+	AppFrame::setSingletonPtr(MY_NEW AppFrame());
+	AppFrame::getSingletonPtr()->init();
 }
 
 void AppFrame::quitApp()
 {
-	AppFrame::mAppFrame->dispose();
-	MY_DELETE AppFrame::mAppFrame;
-	AppFrame::mAppFrame = nullptr;
+	AppFrame::getSingletonPtr()->dispose();
+	AppFrame::deleteSingletonPtr();
 
 	// 最后清理内存追踪
 	MyMemoryTracker::get().reportLeaks();
@@ -34,7 +31,7 @@ void AppFrame::init()
 void AppFrame::dispose()
 {
 	GCtxExt->dispose();
-	GCtxExt->deleteSingletonPtr();
+	CtxExt::deleteSingletonPtr();
 }
 
 MY_END_NAMESPACE
