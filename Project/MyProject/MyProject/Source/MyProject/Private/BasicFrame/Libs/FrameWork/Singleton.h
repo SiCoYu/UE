@@ -2,6 +2,7 @@
 #define __Singleton_H
 
 #include "GObject.h"
+#include "PlatformDefine.h"
 
 template<class T>
 class Singleton : public GObject
@@ -14,7 +15,7 @@ public:
 	{
 		if (nullptr == T::msSingleton)
 		{
-			T::msSingleton = new T();
+			T::msSingleton = MY_NEW T();
 		}
 
 		return T::msSingleton;
@@ -34,7 +35,7 @@ public:
 	{
 		if (nullptr != T::msSingleton)
 		{
-			delete T::msSingleton;
+			MY_DELETE T::msSingleton;
 			T::msSingleton = nullptr;
 		}
 	}

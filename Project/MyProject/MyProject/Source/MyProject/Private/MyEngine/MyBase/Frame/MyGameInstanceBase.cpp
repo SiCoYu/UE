@@ -7,6 +7,7 @@
 #include "MyOnlineSessionBase.h"
 #include "LogCategoryDef.h"
 #include "MyActorBase.h"
+#include "PlatformDefine.h"
 
 UMyGameInstanceBase::UMyGameInstanceBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -25,7 +26,7 @@ void UMyGameInstanceBase::Init()
 	Super::Init();
 
 	// UGameEngine 创建后，就创建 UGameInstance，这个是除 UGameEngine 外最早初始化的地方
-	this->mAppFrame = new AppFrame();
+	this->mAppFrame = MY_NEW AppFrame();
 	this->mAppFrame->initApp();
 }
 
@@ -34,6 +35,7 @@ void UMyGameInstanceBase::Shutdown()
 	Super::Shutdown();
 
 	this->mAppFrame->quitApp();
+	MY_DELETE this->mAppFrame;
 	this->mAppFrame = nullptr;
 }
 

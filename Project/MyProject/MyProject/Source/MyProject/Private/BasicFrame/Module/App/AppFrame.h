@@ -1,7 +1,9 @@
 #ifndef __AppFrame_H
 #define __AppFrame_H
 
-class AppFrame
+#include "GObject.h"
+
+class AppFrame : public GObject
 {
 public:
 	void initApp();
