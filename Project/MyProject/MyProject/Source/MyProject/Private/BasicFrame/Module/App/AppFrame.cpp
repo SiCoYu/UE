@@ -6,6 +6,10 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+// error LNK2001: unresolved external symbol "private: static class MyNS::AppFrame * MyNS::Singleton<class MyNS::AppFrame>::msSingleton" (?msSingleton@?$Singleton@VAppFrame@MyNS@@@MyNS@@0PEAVAppFrame@2@EA)
+// 偏特化
+template<> AppFrame* AppFrame::Singleton<AppFrame>::msSingleton = 0;
+
 void AppFrame::initApp()
 {
 	AppFrame::getSingletonPtr()->init();
