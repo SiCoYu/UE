@@ -39,7 +39,7 @@
 #include "TickPriority.h"
 //#include "MySingletonBP.h"
 #include "MyBluePrintBase.h"
-#include "MyMemoryTracker.h"
+// #include "MyMemoryTracker.h"
 #include "MyNativeObjectReferencer.h"
 
 // 偏特化
@@ -309,8 +309,8 @@ void Ctx::_postDispose()
 	MClassFactory::Destroy();
 
 	// 静态全局变量的清理工作，一定要最后清理
-	MyMemoryTracker::get().reportLeaks();
-	MyMemoryTracker::get().clear();
+	//MyMemoryTracker::get().reportLeaks();
+	//MyMemoryTracker::get().clear();
 }
 
 void Ctx::dispose()

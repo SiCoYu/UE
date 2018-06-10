@@ -42,6 +42,7 @@ MyMemoryTracker::~MyMemoryTracker()
 void MyMemoryTracker::clear()
 {
 	this->mAllocations.clear();
+	this->mTotalAllocations = 0;
 }
 
 void MyMemoryTracker::setReportFileName(const std::string& name)
@@ -113,7 +114,7 @@ void MyMemoryTracker::recordDealloc(void* ptr)
 		assert(ite != this->mAllocations.end() && "Unable to locate allocation unit");
 
 		this->mTotalAllocations -= ite->second.mBytes;
-		this->mAllocations.erase(i);
+		this->mAllocations.erase(ite);
 	}
 }
 
