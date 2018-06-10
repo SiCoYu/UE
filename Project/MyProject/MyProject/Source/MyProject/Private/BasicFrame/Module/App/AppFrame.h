@@ -9,8 +9,15 @@ MY_BEGIN_NAMESPACE(MyNS)
 class AppFrame : public GObject
 {
 public:
-	void initApp();
-	void quitApp();
+	static AppFrame* msAppFrame;
+
+public:
+	static void initApp();
+	static void quitApp();
+
+public:
+	void init();
+	void dispose();
 };
 
 MY_END_NAMESPACE
