@@ -156,9 +156,13 @@ void Ctx::construct()
 	//this->mBPCtx->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
 }
 
-void Ctx::init()
+void Ctx::_preInit()
 {
-	this->mIsInit = true;
+
+}
+
+void Ctx::_execInit()
+{
 	this->mMyStreamableManager->init();
 	this->mUiMgr->init();
 	this->mResLoadMgr->init();
@@ -187,17 +191,27 @@ void Ctx::init()
 
 	this->mBPCtx->init();
 	this->mMyNativeObjectReferencer->init();
+}
 
+void Ctx::_postInit()
+{
 	this->addEventHandle();
 
 	// 挂在目录
 	UtilEngineWrap::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
 }
 
-void Ctx::dispose()
+void Ctx::init()
 {
-	this->mIsInit = false;
+	this->mIsInit = true;
 
+	this->_preInit();
+	this->_execInit();
+	this->_postInit();
+}
+
+void Ctx::_preDispose()
+{
 	this->mUiMgr->dispose();
 	this->mEngineData->dispose();
 	this->mNetMgr->dispose();
@@ -237,12 +251,15 @@ void Ctx::dispose()
 
 	this->mBPCtx->dispose();
 	this->mMyNativeObjectReferencer->dispose();
+}
 
+void Ctx::_execDispose()
+{
 	this->mUiMgr.setNull();
 	this->mEngineData.setNull();
 
 	// INetMgr 不继承 GObject ，不能运行自己的 delete 
-	MY_DELETE (GObject*)this->mNetMgr.getPointer();
+	MY_DELETE(GObject*)this->mNetMgr.getPointer();
 	this->mNetMgr.reset(0);
 	this->mNetMgr.setNull();
 
@@ -284,13 +301,25 @@ void Ctx::dispose()
 	this->mTimerMgr.setNull();
 	this->mFrameTimerMgr.setNull();
 	this->mBPCtx = nullptr;
+}
 
-	// 静态全局变量的清理工作
-	MyMemoryTracker::get().reportLeaks();
-	MyMemoryTracker::get().clear();
-
+void Ctx::_postDispose()
+{
 	// 清除类库
 	MClassFactory::Destroy();
+
+	// 静态全局变量的清理工作，一定要最后清理
+	MyMemoryTracker::get().reportLeaks();
+	MyMemoryTracker::get().clear();
+}
+
+void Ctx::dispose()
+{
+	this->mIsInit = false;
+
+	this->_preDispose();
+	this->_execDispose();
+	this->_postDispose();
 }
 
 void Ctx::beginPlay()

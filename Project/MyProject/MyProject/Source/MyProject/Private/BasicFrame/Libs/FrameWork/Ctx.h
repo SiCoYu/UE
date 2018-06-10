@@ -110,6 +110,15 @@ protected:
 	MySharedPtr<StdoutLog*> mStdoutLog;
 #endif
 
+protected:
+	void _preInit();
+	void _execInit();
+	void _postInit();
+
+	void _preDispose();
+	void _execDispose();
+	void _postDispose();
+
 public:
 	Ctx();
 	virtual ~Ctx();
@@ -117,6 +126,7 @@ public:
 	virtual void construct();
 	virtual void init();
 	virtual void dispose();
+
 	void beginPlay();
 	void mainLoop();
 	void addEventHandle();

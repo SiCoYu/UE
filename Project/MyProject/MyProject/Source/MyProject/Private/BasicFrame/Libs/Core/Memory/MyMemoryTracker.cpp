@@ -109,10 +109,10 @@ void MyMemoryTracker::recordDealloc(void* ptr)
 			return;
 		}
 
-		AllocationMap::iterator i = this->mAllocations.find(ptr);
-		assert(i != this->mAllocations.end() && "Unable to locate allocation unit");
+		AllocationMap::iterator ite = this->mAllocations.find(ptr);
+		assert(ite != this->mAllocations.end() && "Unable to locate allocation unit");
 
-		this->mTotalAllocations -= i->second.mBytes;
+		this->mTotalAllocations -= ite->second.mBytes;
 		this->mAllocations.erase(i);
 	}
 }
