@@ -60,7 +60,7 @@ class FMyNativeObjectReferencer;
 class UMyBluePrintBase;
 class UGameInstance;
 
-MY_USING_NAMESPACE(MyNS)
+MY_BEGIN_NAMESPACE(MyNS)
 
 class Ctx : public Singleton<Ctx>
 {
@@ -224,5 +224,7 @@ public:
 
 #define GBPCtx GCtx->getBPCtx()
 #define GNativeObjectReferencer GCtx->getNativeObjectReferencer()
+
+MY_END_NAMESPACE
 
 #endif				// __Ctx_H

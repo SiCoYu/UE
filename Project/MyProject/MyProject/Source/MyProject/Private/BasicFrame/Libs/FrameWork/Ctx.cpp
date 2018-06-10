@@ -42,6 +42,8 @@
 // #include "MyMemoryTracker.h"
 #include "MyNativeObjectReferencer.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 // 偏特化
 template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
 
@@ -555,3 +557,5 @@ void Ctx::testApi()
 {
 	UtilEngineWrap::GameUserDir();
 }
+
+MY_END_NAMESPACE

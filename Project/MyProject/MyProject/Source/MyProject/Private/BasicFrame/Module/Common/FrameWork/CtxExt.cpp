@@ -6,6 +6,10 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+// 偏特化，这样构造的时候，即使通过多次继承 Singleton ，也会构造正确的类
+// error C2371: 'msSingleton': redefinition; different basic types
+//template<> CtxExt* CtxExt::Singleton<CtxExt>::msSingleton = 0;
+
 CtxExt::CtxExt()
 {
 	this->mGameData.setNull();

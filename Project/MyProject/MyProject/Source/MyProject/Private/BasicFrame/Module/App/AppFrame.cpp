@@ -8,7 +8,6 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 void AppFrame::initApp()
 {
-	AppFrame::setSingletonPtr(MY_NEW AppFrame());
 	AppFrame::getSingletonPtr()->init();
 }
 
@@ -25,12 +24,12 @@ void AppFrame::quitApp()
 void AppFrame::init()
 {
 	CtxExt::setSingletonPtr(MY_NEW CtxExt());
-	GCtxExt->construct();
+	CtxExt::getSingletonPtr()->construct();
 }
 
 void AppFrame::dispose()
 {
-	GCtxExt->dispose();
+	CtxExt::getSingletonPtr()->dispose();
 	CtxExt::deleteSingletonPtr();
 }
 
