@@ -1,7 +1,6 @@
-//#include "MyProjectEditor.h"
-#include "MyEditorEngineBase.h"
+#include "MyReimportManager.h"
 
-UMyEditorEngineBase::UMyEditorEngineBase(const class FObjectInitializer& PCIP)
+FMyReimportManager::FMyReimportManager(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 
