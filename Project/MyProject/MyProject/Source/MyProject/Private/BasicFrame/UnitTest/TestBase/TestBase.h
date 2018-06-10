@@ -10,6 +10,9 @@ class TestBase : public GObject
 {
 public:
 	virtual void run() = 0;
+
+	virtual void init();
+	virtual void dispose();
 };
 
 MY_END_NAMESPACE

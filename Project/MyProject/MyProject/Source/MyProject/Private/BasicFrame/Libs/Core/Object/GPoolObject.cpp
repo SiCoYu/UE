@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "GObjectBase.h"
+#include "GPoolObject.h"
 #include "TypeDef.h"
 #include "MClassFactory.h"
 
@@ -79,7 +79,7 @@ int GPoolObject::getNumUniqueId()
 	return this->mNumUniqueId;
 }
 
-void GPoolObject::setStrUniqueId(string value)
+void GPoolObject::setStrUniqueId(std::string value)
 {
 	this->mStrUniqueId = value;
 }

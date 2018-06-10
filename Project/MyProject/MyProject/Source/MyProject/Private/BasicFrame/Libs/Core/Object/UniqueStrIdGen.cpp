@@ -7,7 +7,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 M_IMPLEMENT_AND_REGISTER_CLASS(UniqueStrIdGen, GObject)
 
-UniqueStrIdGen::UniqueStrIdGen(string prefix, uint baseUniqueId)
+UniqueStrIdGen::UniqueStrIdGen(std::string prefix, uint baseUniqueId)
 	: Super(baseUniqueId)
 {
 	this->mPrefix = prefix;
@@ -15,7 +15,7 @@ UniqueStrIdGen::UniqueStrIdGen(string prefix, uint baseUniqueId)
 
 std::string UniqueStrIdGen::genNewStrId()
 {
-	this.mRetId = this->mPrefix + "_" + this->genNewId();
+	this->mRetId = this->mPrefix + "_" + this->genNewId();
 	return this->mRetId;
 }
 

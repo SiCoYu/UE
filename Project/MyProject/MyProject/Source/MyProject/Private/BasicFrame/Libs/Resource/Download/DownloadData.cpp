@@ -8,4 +8,14 @@ DownloadData::DownloadData()
     
 }
 
+void DownloadData::init()
+{
+
+}
+
+void DownloadData::dispose()
+{
+
+}
+
 MY_END_NAMESPACE

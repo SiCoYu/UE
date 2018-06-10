@@ -26,6 +26,9 @@ public:
 
 public:
 	DownloadData();
+
+	void init();
+	void dispose();
 };
 
 MY_END_NAMESPACE

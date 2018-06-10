@@ -14,11 +14,13 @@
 
 #include "Windows/HideWindowsPlatformTypes.h"
 
+#include "TestBase.h"
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 #ifdef USE_EXTERN_THREAD
 
-class TestSocket
+class TestSocket : public TestBase
 {
 public:
 	TcpSocket* mTcpSocket;
