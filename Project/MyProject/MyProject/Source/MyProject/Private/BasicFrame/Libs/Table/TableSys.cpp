@@ -49,19 +49,14 @@ void TableSys::dispose()
 
 	while (curIte != endIte)
 	{
-		curIte->second->dispose();
-		MY_DELETE curIte->second;
+		MY_SAFE_DISPOSE(curIte->second);
 
 		++curIte;
 	}
 
 	this->mDicTable.clear();
 
-	if (nullptr != this->mByteBuffer)
-	{
-		MY_DELETE this->mByteBuffer;
-		this->mByteBuffer = nullptr;
-	}
+	MY_SAFE_DISPOSE(this->mByteBuffer);
 }
 
 // 返回一个表
