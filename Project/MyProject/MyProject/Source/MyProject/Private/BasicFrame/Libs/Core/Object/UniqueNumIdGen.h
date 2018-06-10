@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "GObject.h"
 #include "TypeDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"

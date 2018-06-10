@@ -22,3 +22,8 @@ TestExtern::TestExtern()
 	this->mTestStaticLibB = (TestStaticLibB*)mTestStaticLibA;
 	this->mTestStaticLibA->testFunc("aaaaaaa");
 }
+
+void TestExtern::run()
+{
+
+}

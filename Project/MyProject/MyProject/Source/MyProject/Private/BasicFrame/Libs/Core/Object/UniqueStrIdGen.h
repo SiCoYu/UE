@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <sstream>
 #include "UniqueNumIdGen.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
@@ -27,9 +28,10 @@ public:
 protected:
 	std::string mPrefix;
 	std::string mRetId;
+	std::ostringstream mStrStream;
 
 public:
-	UniqueStrIdGen(string prefix, uint baseUniqueId);
+	UniqueStrIdGen(std::string prefix, uint baseUniqueId);
 	
 	std::string genNewStrId();
 	std::string getCurStrId();

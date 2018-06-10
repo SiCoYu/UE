@@ -2,6 +2,7 @@
 
 #include <string>
 #include "IPoolObject.h"
+#include "GObjectBase.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -18,7 +19,7 @@ protected:
 	std::string mStrUniqueId;
 
 public:
-	public GPoolObject();
+	GPoolObject();
 
 	virtual public void init();
 	virtual protected void onInit();
@@ -27,14 +28,14 @@ public:
 	virtual public void dispose();
 	virtual public void destroy();
 	virtual protected void onDestroy();
-	public bool isUsePool();
-	public void setIsUsePool(bool value);
-	public void putInPool();
-	public void getFromPool();
-	public void setNumUniqueId(int value);
-	public int getNumUniqueId();
-	public void setStrUniqueId(string value);
-	public std::string getStrUniqueId();
+	bool isUsePool();
+	void setIsUsePool(bool value);
+	void putInPool();
+	void getFromPool();
+	void setNumUniqueId(int value);
+	int getNumUniqueId();
+	void setStrUniqueId(std::string value);
+	std::string getStrUniqueId();
 };
 
 MY_END_NAMESPACE

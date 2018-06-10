@@ -15,7 +15,13 @@ UniqueStrIdGen::UniqueStrIdGen(std::string prefix, uint baseUniqueId)
 
 std::string UniqueStrIdGen::genNewStrId()
 {
-	this->mRetId = this->mPrefix + "_" + this->genNewId();
+	this->mStrStream.str("");
+
+	this->mStrStream << this->mPrefix;
+	this->mStrStream << "_";
+	this->mStrStream << this->genNewId();
+
+	this->mRetId = this->mStrStream.str();
 	return this->mRetId;
 }
 
@@ -26,12 +32,14 @@ std::string UniqueStrIdGen::getCurStrId()
 
 std::string UniqueStrIdGen::genStrIdById(uint id)
 {
-	this.mStringBuilder = new System.Text.StringBuilder();
-	this.mStringBuilder.Append(this.mPrefix);
-	this.mStringBuilder.Append('_');
-	this.mStringBuilder.Append(id);
-	this.mRetId = this.mStringBuilder.ToString();
-	return this.mRetId;
+	this->mStrStream.str("");
+
+	this->mStrStream << this->mPrefix;
+	this->mStrStream << "_";
+	this->mStrStream << id;
+
+	this->mRetId = this->mStrStream.str();
+	return this->mRetId;
 }
 
 MY_END_NAMESPACE

@@ -3,7 +3,7 @@
 
 #include "TestStaticLib/TestStaticLibA.h"
 #include "TestStaticLib/TestStaticLibB.h"
-#include "GObject.h"
+#include "TestBase.h"
 #include "PlatformDefine.h"
 
 MY_USING_NAMESPACE(MyNS)
@@ -16,6 +16,7 @@ public:
 
 public:
 	TestExtern();
+	virtual void run() override;
 };
 
 #endif				// __TestExtern_H
