@@ -14,6 +14,9 @@ protected:
 public:
 	ResLoadState();
 
+	void init();
+	void dispose();
+
 	ResLoadStateCV getResLoadState();
 	void setResLoadState(ResLoadStateCV value);
 	void reset();

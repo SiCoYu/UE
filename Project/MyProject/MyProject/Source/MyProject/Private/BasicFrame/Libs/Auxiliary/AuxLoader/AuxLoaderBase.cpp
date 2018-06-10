@@ -4,6 +4,7 @@
 #include "ResLoadStateCV.h"
 #include "ResEventDispatch.h"
 #include "MClassFactory.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -27,9 +28,16 @@ void AuxLoaderBase::reset()
 	this->mIsInvalid = true;
 }
 
+void AuxLoaderBase::init()
+{
+	this->mResLoadState->init();
+}
+
 void AuxLoaderBase::dispose()
 {
 	this->unload();
+
+	MY_SAFE_DISPOSE(this->mResLoadState);
 }
 
 bool AuxLoaderBase::hasSuccessLoaded()

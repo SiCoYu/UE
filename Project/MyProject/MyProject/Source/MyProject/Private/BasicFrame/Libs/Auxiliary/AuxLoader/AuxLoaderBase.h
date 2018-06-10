@@ -41,6 +41,7 @@ protected:
 	void reset();
 
 public:
+	virtual void init();
 	virtual void dispose();
 	bool hasSuccessLoaded();
 	bool hasFailed();

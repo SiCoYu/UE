@@ -8,6 +8,16 @@ ResLoadState::ResLoadState()
     this->mResLoadState = ResLoadStateCV::eNotLoad;
 }
 
+void ResLoadState::init()
+{
+	
+}
+
+void ResLoadState::dispose()
+{
+	
+}
+
 ResLoadStateCV ResLoadState::getResLoadState()
 {
 	return this->mResLoadState;

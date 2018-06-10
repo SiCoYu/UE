@@ -37,3 +37,37 @@
 //	} \
 //}
 //#endif
+
+#ifndef MY_SAFE_DELETE
+#define MY_SAFE_DELETE(ptr) \
+{ \
+	if(ptr) \
+	{ \
+		delete(ptr); \
+		ptr = nullptr; \
+	} \
+}
+#endif
+
+#ifndef MY_SAFE_DELETE_ARRAY
+#define MY_SAFE_DELETE_ARRAY(ptr) \
+{ \
+	if(ptr) \
+	{ \
+		delete[] (ptr); \
+		ptr = nullptr; \
+	} \
+}
+#endif
+
+#ifndef MY_SAFE_DISPOSE
+#define MY_SAFE_DISPOSE(ptr) \
+{ \
+	if(ptr) \
+	{ \
+		(ptr)->dispose(); \
+		delete(ptr); \
+		ptr = nullptr; \
+	} \
+}
+#endif

@@ -6,6 +6,7 @@
 #include "MyGameInstanceBase.h"	// UMyGameInstanceBase
 #include "UMGWidget.h"		// UUMGWidget
 #include "WindowAnchor.h"
+#include "SafePointer.h"
 
 void UForm::loadUWidget(const TCHAR* name)
 {
@@ -188,6 +189,8 @@ void UForm::onExit()
 	//{
 	//	GUiMgr->exitForm(UiFormId.eUIBlurBg);
 	//}
+
+	MY_SAFE_DISPOSE(this->mAuxMUIClassLoader);
 
 	Super::onExit();
 }
