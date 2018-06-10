@@ -44,7 +44,7 @@ public:
 
 	~MDynBuffer()
 	{
-		this->dispose();
+		//this->dispose();
 	}
 
 	void dispose()

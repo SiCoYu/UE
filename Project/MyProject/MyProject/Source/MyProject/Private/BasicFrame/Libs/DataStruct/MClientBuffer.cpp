@@ -37,7 +37,7 @@ MClientBuffer::MClientBuffer()
 
 MClientBuffer::~MClientBuffer()
 {
-	this->dispose();
+	//this->dispose();
 }
 
 void MClientBuffer::init()

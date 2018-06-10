@@ -16,7 +16,7 @@ RefCountResLoadResultNotify::RefCountResLoadResultNotify()
 
 RefCountResLoadResultNotify::~RefCountResLoadResultNotify()
 {
-	this->dispose();
+	//this->dispose();
 }
 
 void RefCountResLoadResultNotify::init()

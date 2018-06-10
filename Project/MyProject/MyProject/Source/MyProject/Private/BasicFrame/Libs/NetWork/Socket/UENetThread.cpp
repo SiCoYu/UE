@@ -19,7 +19,7 @@ UENetThread::UENetThread(INetMgr* pNetMgr, std::string mThreadName)
 
 UENetThread::~UENetThread()
 {
-	this->dispose();
+	//this->dispose();
 }
 
 void UENetThread::dispose()

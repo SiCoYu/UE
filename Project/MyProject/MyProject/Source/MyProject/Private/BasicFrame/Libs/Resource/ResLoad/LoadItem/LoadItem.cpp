@@ -21,7 +21,7 @@ LoadItem::LoadItem()
 
 LoadItem::~LoadItem()
 {
-	this->dispose();
+	//this->dispose();
 }
 
 void LoadItem::init()

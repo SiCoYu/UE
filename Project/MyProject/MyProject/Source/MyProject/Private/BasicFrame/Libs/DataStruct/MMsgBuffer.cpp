@@ -16,7 +16,7 @@ MMsgBuffer::MMsgBuffer(uint32 initCapacity, uint32 maxCapacity)
 
 MMsgBuffer::~MMsgBuffer()
 {
-	this->dispose();
+	//this->dispose();
 }
 
 void MMsgBuffer::init()

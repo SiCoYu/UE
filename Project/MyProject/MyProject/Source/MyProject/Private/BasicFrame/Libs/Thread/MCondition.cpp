@@ -21,7 +21,7 @@ MCondition::MCondition(std::string name)
 
 MCondition::~MCondition()
 {
-	this->dispose();
+	//this->dispose();
 }
 
 void MCondition::init()

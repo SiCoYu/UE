@@ -29,7 +29,7 @@ MCircularBuffer::MCircularBuffer(
 
 MCircularBuffer::~MCircularBuffer()
 {
-	this->dispose();
+	//this->dispose();
 }
 
 void MCircularBuffer::init()
