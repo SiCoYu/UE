@@ -60,7 +60,7 @@ void PriorityList::clear()
 {
 	int index = 0;
 	int listLen = this->count();
-	INoOrPriorityObject* ptr = nullptr;
+	PriorityProcessObject* ptr = nullptr;
 
 	while(index < listLen)
 	{
