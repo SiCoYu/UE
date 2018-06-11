@@ -268,20 +268,23 @@ void AuxMObjectLoaderBase::unload()
 				&AuxMObjectLoaderBase::onPrefabLoaded
 			)
 		);
+
 		this->mPrefabRes = nullptr;
 	}
 
 	if (this->mResInsEventDispatch != nullptr)
 	{
 		this->mResInsEventDispatch->setIsValid(false);
-		this->mResInsEventDispatch = nullptr;
+		MY_SAFE_DISPOSE(this->mResInsEventDispatch);
 	}
 
 	if (this->mResEventDispatch != nullptr)
 	{
 		this->mResEventDispatch->clearEventHandle();
-		this->mResEventDispatch = nullptr;
+		MY_SAFE_DISPOSE(this->mResEventDispatch);
 	}
+
+	Super::unload();
 }
 
 UObject* AuxMObjectLoaderBase::getGameObject()

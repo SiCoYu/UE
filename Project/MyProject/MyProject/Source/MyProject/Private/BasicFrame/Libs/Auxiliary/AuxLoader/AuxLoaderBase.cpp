@@ -35,8 +35,6 @@ void AuxLoaderBase::init()
 
 void AuxLoaderBase::dispose()
 {
-	this->unload();
-
 	MY_SAFE_DISPOSE(this->mResLoadState);
 	MY_SAFE_DISPOSE(this->mResEventDispatch);
 }
@@ -209,4 +207,4 @@ void AuxLoaderBase::onProgressEventHandle(IDispatchObject* dispObj)
 	}
 }
 
-	MY_END_NAMESPACE
+MY_END_NAMESPACE

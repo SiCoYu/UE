@@ -190,6 +190,7 @@ void UForm::onExit()
 	//	GUiMgr->exitForm(UiFormId.eUIBlurBg);
 	//}
 
+	this->mAuxMUIClassLoader->unload();
 	MY_SAFE_DISPOSE(this->mAuxMUIClassLoader);
 
 	Super::onExit();
