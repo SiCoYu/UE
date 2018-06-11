@@ -189,13 +189,13 @@ void AuxLoaderBase::unload()
 	if (this->mResEventDispatch != nullptr)
 	{
 		this->mResEventDispatch->clearEventHandle();
-		this->mResEventDispatch = nullptr;
+		MY_SAFE_DISPOSE(this->mResEventDispatch);
 	}
 
 	if (this->mProgressEventDispatch != nullptr)
 	{
 		this->mProgressEventDispatch->clearEventHandle();
-		this->mProgressEventDispatch = nullptr;
+		MY_SAFE_DISPOSE(this->mProgressEventDispatch);
 	}
 
 	this->reset();

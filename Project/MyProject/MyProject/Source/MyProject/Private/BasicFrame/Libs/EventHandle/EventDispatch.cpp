@@ -26,18 +26,20 @@ void EventDispatch::init()
 
 void EventDispatch::dispose()
 {
-	int index = 0;
-	int listLen = this->mHandleList.count();
+	//int index = 0;
+	//int listLen = this->mHandleList.count();
 
-	EventDispatchFunctionObject* handle = nullptr;
+	//EventDispatchFunctionObject* handle = nullptr;
 
-	while (index < listLen)
-	{
-		handle = this->mHandleList[index];
-		MY_SAFE_DISPOSE(handle);
+	//while (index < listLen)
+	//{
+	//	handle = this->mHandleList[index];
+	//	MY_SAFE_DISPOSE(handle);
 
-		index += 1;
-	}
+	//	index += 1;
+	//}
+
+	this->clearEventHandle();
 
 	Super::dispose();
 }
@@ -117,6 +119,7 @@ void EventDispatch::_removeObject(IDelayHandleItem* delayObject)
 	else
 	{
 		EventDispatchFunctionObject* ptr = (EventDispatchFunctionObject*)delayObject;
+
 		if (!this->mHandleList.remove(ptr))
 		{
 			GLogSys->log("Event Handle not exist");
@@ -156,12 +159,25 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 
 void EventDispatch::clearEventHandle()
 {
+	int index = 0;
+	int listLen = this->mHandleList.count();
+
+	EventDispatchFunctionObject* handle = nullptr;
+
+	while (index < listLen)
+	{
+		handle = this->mHandleList[index];
+		this->_removeObject(handle);
+
+		index += 1;
+	}
+
 	if (this->_isInDepth())
 	{
-		for(auto item : mHandleList.getList())
-		{
-			this->_removeObject(item);
-		}
+		//for(auto item : this->mHandleList.getList())
+		//{
+		//	this->_removeObject(item);
+		//}
 	}
 	else
 	{
