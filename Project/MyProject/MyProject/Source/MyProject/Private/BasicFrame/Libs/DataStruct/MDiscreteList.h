@@ -24,7 +24,7 @@ public:
 	typedef std::list<T> List;
 	typedef std::list<T>& ListRef;
 	typedef typename std::list<T>::iterator Iterator;
-	typedef MList<T>& MListRef;
+	typedef MDiscreteList<T>& MDiscreteListRef;
 	typedef T& ValueTypeRef;
 
 protected:
