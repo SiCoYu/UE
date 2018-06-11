@@ -70,7 +70,7 @@ void ResLoadMgr::dispose()
 
 	while (index < listLen)
 	{
-		res = resList.get(listLen);
+		res = resList.get(index);
 		this->unload(res->getPath(), nullptr);
 
 		index += 1;
@@ -85,7 +85,7 @@ void ResLoadMgr::dispose()
 
 	while (index < listLen)
 	{
-		res = this->mLoadData->mNoUsedResItemList.get(listLen);
+		res = this->mLoadData->mNoUsedResItemList.get(index);
 		res->unload();
 		MY_SAFE_DISPOSE(res);
 
@@ -117,7 +117,7 @@ void ResLoadMgr::dispose()
 
 	while (index < listLen)
 	{
-		loadItem = this->mLoadData->mWillLoadItemList.get(listLen);
+		loadItem = this->mLoadData->mWillLoadItemList.get(index);
 		loadItem->unload();
 		MY_SAFE_DISPOSE(loadItem);
 
@@ -132,7 +132,7 @@ void ResLoadMgr::dispose()
 
 	while (index < listLen)
 	{
-		loadItem = this->mLoadData->mNoUsedLoadItemList.get(listLen);
+		loadItem = this->mLoadData->mNoUsedLoadItemList.get(index);
 		loadItem->unload();
 		MY_SAFE_DISPOSE(loadItem);
 

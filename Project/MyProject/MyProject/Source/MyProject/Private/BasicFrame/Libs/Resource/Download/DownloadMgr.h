@@ -9,14 +9,13 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-/**
- * @brief 数据下载管理器
- */
-
 class DownloadData;
 class DownloadItem;
 class DownloadParam;
 
+/**
+ * @brief 数据下载管理器
+ */
 //class DownloadMgr : MsgRouteHandleBase
 class DownloadMgr : public GObject
 {

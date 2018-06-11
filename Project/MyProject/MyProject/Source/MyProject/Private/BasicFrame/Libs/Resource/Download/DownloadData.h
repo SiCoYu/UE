@@ -8,12 +8,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class DownloadItem;
+
 /**
  * @brief 下载数据
  */
-
-class DownloadItem;
-
 class DownloadData : public GObject
 {
 public:
