@@ -13,6 +13,7 @@
 #include "LogTypeId.h"
 #include "INoOrPriorityList.h"
 #include "IDelayHandleItem.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -50,26 +51,15 @@ void DelayNoOrPriorityHandleMgrBase::dispose()
 	this->mIsDispose = true;
 	GObject* tmp = nullptr;
 
-	if (nullptr != this->mDeferredAddQueue)
-	{
-		this->mDeferredAddQueue->dispose();
-		tmp = (GObject*)this->mDeferredAddQueue;
-		MY_DELETE tmp;
-		this->mDeferredAddQueue = nullptr;
-	}
-	if (nullptr != this->mDeferredRemoveQueue)
-	{
-		this->mDeferredRemoveQueue->dispose();
-		tmp = (GObject*)this->mDeferredRemoveQueue;
-		MY_DELETE tmp;
-		this->mDeferredRemoveQueue = nullptr;
-	}
-	if (nullptr != this->mLoopDepth)
-	{
-		this->mLoopDepth->dispose();
-		MY_DELETE this->mLoopDepth;
-		this->mLoopDepth = nullptr;
-	}
+	tmp = (GObject*)this->mDeferredAddQueue;
+	MY_SAFE_DISPOSE(tmp);
+	this->mDeferredAddQueue = nullptr;
+
+	tmp = (GObject*)this->mDeferredRemoveQueue;
+	MY_SAFE_DISPOSE(tmp);
+	this->mDeferredRemoveQueue = nullptr;
+
+	MY_SAFE_DISPOSE(this->mLoopDepth);
 }
 
 int DelayNoOrPriorityHandleMgrBase::getDebugUniqueId()
@@ -157,7 +147,7 @@ bool DelayNoOrPriorityHandleMgrBase::_isInDepth()
 
 void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispObj/*, uint eventId*/)
 {
-	int idx = 0;
+	int index = 0;
 	// len 是 Python 的关键字
 	int elemLen = 0;
 
@@ -165,14 +155,14 @@ void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispO
 	{
 		if (this->mDeferredAddQueue->count() > 0)
 		{
-			idx = 0;
+			index = 0;
 			elemLen = this->mDeferredAddQueue->count();
 
-			while(idx < elemLen)
+			while(index < elemLen)
 			{
-				this->_addObject((IDelayHandleItem*)this->mDeferredAddQueue->get(idx));
+				this->_addObject((IDelayHandleItem*)this->mDeferredAddQueue->get(index));
 
-				idx += 1;
+				index += 1;
 			}
 
 			this->mDeferredAddQueue->clear();
@@ -180,14 +170,14 @@ void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispO
 
 		if (this->mDeferredRemoveQueue->count() > 0)
 		{
-			idx = 0;
+			index = 0;
 			elemLen = this->mDeferredRemoveQueue->count();
 
-			while(idx < elemLen)
+			while(index < elemLen)
 			{
-				this->_removeObject((IDelayHandleItem*)this->mDeferredRemoveQueue->get(idx));
+				this->_removeObject((IDelayHandleItem*)this->mDeferredRemoveQueue->get(index));
 
-				idx += 1;
+				index += 1;
 			}
 
 			this->mDeferredRemoveQueue->clear();

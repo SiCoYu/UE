@@ -75,10 +75,10 @@ MList<UiLayer*>& UiCanvas::getLayerList()
 
 void UiCanvas::findCanvasActor()
 {
-	//int idx = 0;
-	//for (idx = 0; idx < (int)eMaxLayer; ++idx)
+	//int index = 0;
+	//for (index = 0; index < (int)eMaxLayer; ++index)
 	//{
-	//	mLayerList[idx].findLayerGOAndTrans();
+	//	mLayerList[index].findLayerGOAndTrans();
 	//}
 }
 

@@ -29,7 +29,7 @@ public:
 
 	bool getIsOrigResNeedImmeUnload();
 	void setIsOrigResNeedImmeUnload(bool value);
-	std::string GetPath();
+	std::string getPath();
 	std::string getPrefabName();         // 只有 Prefab 资源才实现这个函数
 	void init(ResItem* res);
 	virtual void dispose();

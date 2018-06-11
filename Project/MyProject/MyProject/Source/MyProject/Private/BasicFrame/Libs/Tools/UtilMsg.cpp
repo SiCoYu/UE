@@ -40,7 +40,7 @@ void UtilMsg::formatBytes2Array(char* bytes, uint32 len)
 {
     std::string str = "{ ";
     bool isFirst = true;
-    for (int idx = 0; idx < (int)len; ++idx)
+    for (int index = 0; index < (int)len; ++index)
     {
         if (isFirst)
         {
@@ -50,7 +50,7 @@ void UtilMsg::formatBytes2Array(char* bytes, uint32 len)
         {
             str += ", ";
         }
-        str += bytes[idx];
+        str += bytes[index];
     }
 
     str += " }";

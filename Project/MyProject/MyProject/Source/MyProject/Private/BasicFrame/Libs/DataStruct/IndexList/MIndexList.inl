@@ -205,27 +205,27 @@ bool MIndexList::_effectiveRemove(T item)
 {
 	bool ret = false;
 
-	int idx = item.getIndex();
+	int index = item.getIndex();
 
-	if (-1 != idx)
+	if (-1 != index)
 	{
 		ret = true;
 
-		if (idx == this->count() - 1)    // 如果是最后一个元素，直接移除
+		if (index == this->count() - 1)    // 如果是最后一个元素，直接移除
 		{
-			this->removeAt(idx);
+			this->removeAt(index);
 		}
 		else
 		{
 			if (!this->mIsOpKeepSort)
 			{
-				this->mList[idx] = this->mList[this->count() - 1];
+				this->mList[index] = this->mList[this->count() - 1];
 				this->removeAt(this->count() - 1);
 			}
 			else
 			{
-				this->removeAt(idx);
-				this->_updateIndex(idx);
+				this->removeAt(index);
+				this->_updateIndex(index);
 			}
 		}
 	}
@@ -234,15 +234,15 @@ bool MIndexList::_effectiveRemove(T item)
 }
 
 template <class T>
-void MIndexList::_updateIndex(int idx)
+void MIndexList::_updateIndex(int index)
 {
 	int len = this->count();
 
-	while(idx < len)
+	while(index < len)
 	{
-		this->mList[idx].setIndex(idx);
+		this->mList[index].setIndex(index);
 
-		++idx;
+		++index;
 	}
 }
 

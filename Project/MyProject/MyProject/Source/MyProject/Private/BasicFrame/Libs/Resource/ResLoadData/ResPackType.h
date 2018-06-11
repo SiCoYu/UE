@@ -8,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 资源包的类型
  */
-enum ResPackType
+enum class ResPackType
 {
 	eLevelType,     // 关卡，可以从本地或者服务器加载
 	eBundleType,    // 资源包，注意默认的打包 Resources 不包括在这里面，自己真正的单独打包，才在这里面，可以从本地或者服务器加载

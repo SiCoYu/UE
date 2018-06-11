@@ -37,6 +37,8 @@ void PriorityList::dispose()
 		this->mDic.dispose();
 		//this->mDic = nullptr;
 	//}
+
+	this->clear();
 }
 
 void PriorityList::setIsSpeedUpFind(bool value)

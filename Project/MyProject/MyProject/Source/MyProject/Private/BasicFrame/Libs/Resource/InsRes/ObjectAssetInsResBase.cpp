@@ -13,8 +13,8 @@ M_IMPLEMENT_AND_REGISTER_CLASS(ObjectAssetInsResBase, ResInsBase)
 
 ObjectAssetInsResBase::ObjectAssetInsResBase()
 {
-	this->mGo = nullptr;
-	this->mRetGO = nullptr;
+	this->mActor = nullptr;
+	this->mRetActor = nullptr;
 }
 
 ObjectAssetInsResBase::~ObjectAssetInsResBase()
@@ -24,24 +24,24 @@ ObjectAssetInsResBase::~ObjectAssetInsResBase()
 
 void ObjectAssetInsResBase::initImpl(ResItem* res)
 {
-	this->mGo = Cast<UClass>(res->getObject(res->getPrefabName()));
+	this->mActor = Cast<UClass>(res->getObject(res->getPrefabName()));
 
 	Super::initImpl(res);
 }
 
 UObject* ObjectAssetInsResBase::InstantiateObject(std::string resName, bool isSetInitOrientPos, FVector position, FQuat rotation, ResInsEventDispatch* evtHandle)
 {
-	this->mRetGO = nullptr;
+	this->mRetActor = nullptr;
 
-	if (nullptr == this->mGo)
+	if (nullptr == this->mActor)
 	{
 		GLogSys->log("ObjectAssetInsRes::InstantiateObject, Prefab is nullptr");
 	}
 	else
 	{
-		this->mRetGO = UtilEngineWrap::NewObject<UObject>(UtilEngineWrap::GetGameInstance(), Cast<UClass>(this->mGo));
+		this->mRetActor = UtilEngineWrap::NewObject<UObject>(UtilEngineWrap::GetGameInstance(), Cast<UClass>(this->mActor));
 
-		if (nullptr == mRetGO)
+		if (nullptr == mRetActor)
 		{
 			GLogSys->log("ObjectAssetInsRes::InstantiateObject, Can not instance data");
 		}
@@ -52,30 +52,30 @@ UObject* ObjectAssetInsResBase::InstantiateObject(std::string resName, bool isSe
 		evtHandle->dispatchEvent(nullptr);
 	}
 
-	return this->mRetGO;
+	return this->mRetActor;
 }
 
 UObject* ObjectAssetInsResBase::getObject()
 {
-	return this->mGo;
+	return this->mActor;
 }
 
 UClass* ObjectAssetInsResBase::getClass()
 {
-	return Cast<UClass>(this->mGo);
+	return Cast<UClass>(this->mActor);
 }
 
 void ObjectAssetInsResBase::unload()
 {
-	if (this->mGo != nullptr)
+	if (this->mActor != nullptr)
 	{
-		//UtilSysLibWrap.UnloadAsset(mGo);      // 强制卸载资源数据
-		//UtilSysLibWrap.DestroyImmediate(mGo, true);
+		//UtilSysLibWrap.UnloadAsset(mActor);      // 强制卸载资源数据
+		//UtilSysLibWrap.DestroyImmediate(mActor, true);
 		UtilEngineWrap::UnloadUnusedAssets();
-		this->mGo = nullptr;
+		this->mActor = nullptr;
 	}
 
-	this->mRetGO = nullptr;
+	this->mRetActor = nullptr;
 
 	Super::unload();
 }

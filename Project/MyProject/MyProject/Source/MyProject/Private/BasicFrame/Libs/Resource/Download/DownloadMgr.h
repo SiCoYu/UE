@@ -69,7 +69,7 @@ public:
 
 protected:
     // 添加无引用资源到 List
-	void addNoRefResID2List(std::string resUniqueId);
+	void addNoRefResId2List(std::string resUniqueId);
     // 卸载没有引用的资源列表中的资源
 	void unloadNoRefResFromList();
     // 不考虑引用计数，直接卸载

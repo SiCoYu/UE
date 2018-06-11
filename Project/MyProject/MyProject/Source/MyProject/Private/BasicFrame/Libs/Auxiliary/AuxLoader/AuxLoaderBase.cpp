@@ -38,6 +38,7 @@ void AuxLoaderBase::dispose()
 	this->unload();
 
 	MY_SAFE_DISPOSE(this->mResLoadState);
+	MY_SAFE_DISPOSE(this->mResEventDispatch);
 }
 
 bool AuxLoaderBase::hasSuccessLoaded()

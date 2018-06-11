@@ -2,6 +2,7 @@
 #include "ResInsMgrBase.h"
 #include "UtilStr.h"
 #include "ResItem.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -24,12 +25,37 @@ void ResInsMgrBase::init()
 
 void ResInsMgrBase::dispose()
 {
+	Iterator curIte = this->mPath2ResDic.begin();
+	Iterator endIte = this->mPath2ResDic.end();
 
+	MList<ResInsBase*> resInsList;
+
+	while (curIte != endIte)
+	{
+		resInsList.add(curIte->second);
+		++curIte;
+	}
+
+	this->mPath2ResDic.dispose();
+
+	int index = 0;
+	int listLen = resInsList.count();
+	ResInsBase* resIns = nullptr;
+
+	while (index < listLen)
+	{
+		resIns = resInsList.get(listLen);
+		this->unload(resIns->getPath(), nullptr);
+
+		index += 1;
+	}
+
+	resInsList.dispose();
 }
 
 ResPackType ResInsMgrBase::getResPackType()
 {
-	return eObjectType;
+	return ResPackType::eObjectType;
 }
 
 void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
@@ -62,7 +88,7 @@ void ResInsMgrBase::unload(std::string path, EventDispatchDelegate loadEventHand
 		{
 			if (this->mLoadingDepth != 0)       // 如果加载深度不是 0 的，说明正在加载，不能卸载对象
 			{
-				this->addNoRefResID2List(path);
+				this->addNoRefResId2List(path);
 			}
 			else
 			{
@@ -73,7 +99,7 @@ void ResInsMgrBase::unload(std::string path, EventDispatchDelegate loadEventHand
 }
 
 // 添加无引用资源到 List
-void ResInsMgrBase::addNoRefResID2List(std::string path)
+void ResInsMgrBase::addNoRefResId2List(std::string path)
 {
 	this->mZeroRefResIdList.add(path);
 }
@@ -88,12 +114,15 @@ void ResInsMgrBase::unloadNoRefResFromList()
 			this->unloadNoRef(path);
 		}
 	}
+
 	this->mZeroRefResIdList.clear();
 }
 
 void ResInsMgrBase::unloadNoRef(std::string path)
 {
-	this->mPath2ResDic[path]->unload();
+	ResInsBase* resIns = this->mPath2ResDic[path];
+	resIns->unload();
+
 	// 卸载加载的原始资源
 	GResLoadMgr->unload(
 		path, 
@@ -103,8 +132,10 @@ void ResInsMgrBase::unloadNoRef(std::string path)
 		)
 	);
 
-	UtilMap::Remove(this->mPath2ResDic.getData(), path);
+	this->mPath2ResDic.remove(path);
 	//UtilSysLibWrap.UnloadUnusedAssets();           // 异步卸载共用资源
+
+	MY_SAFE_DISPOSE(resIns);
 }
 
 void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)

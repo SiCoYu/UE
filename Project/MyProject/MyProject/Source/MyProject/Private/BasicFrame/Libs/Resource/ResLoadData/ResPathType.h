@@ -8,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 资源路径类型
  */
-enum ResPathType
+enum class ResPathType
 {
 	ePathScene,     // 场景路径
 	ePathSceneXml,  // 场景路径

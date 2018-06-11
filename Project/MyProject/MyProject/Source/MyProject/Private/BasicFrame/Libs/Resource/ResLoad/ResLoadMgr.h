@@ -70,7 +70,7 @@ public:
     // 添加无引用资源到 List
 
 protected:
-	void addNoRefResID2List(std::string path);
+	void addNoRefResId2List(std::string path);
     // 卸载没有引用的资源列表中的资源
 	void unloadNoRefResFromList();
     // 不考虑引用计数，直接卸载

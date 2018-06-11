@@ -50,6 +50,33 @@ void ResLoadMgr::init()
 
 void ResLoadMgr::dispose()
 {
+	typename ResLoadData::Iterator curIte = this->mLoadData->mPath2ResDic.begin();
+	typename ResLoadData::Iterator endIte = this->mLoadData->mPath2ResDic.end();
+
+	MList<ResItem*> resList;
+
+	while (curIte != endIte)
+	{
+		resList.add(curIte->second);
+		++curIte;
+	}
+
+	this->mLoadData->mPath2ResDic.dispose();
+
+	int index = 0;
+	int listLen = resList.count();
+	ResItem* res = nullptr;
+
+	while (index < listLen)
+	{
+		res = resList.get(listLen);
+		this->unload(res->getPath(), nullptr);
+
+		index += 1;
+	}
+
+	resList.dispose();
+
 	MY_SAFE_DISPOSE(this->mLoadData);
 }
 
@@ -68,9 +95,9 @@ void ResLoadMgr::loadAsset(LoadParam* param)
 ResItem* ResLoadMgr::getResource(std::string path)
 {
 	// 如果 path == nullptr ，程序会宕机
-	if (this->mLoadData->mPath2Res.containsKey(path))
+	if (this->mLoadData->mPath2ResDic.containsKey(path))
 	{
-		return this->mLoadData->mPath2Res[path];
+		return this->mLoadData->mPath2ResDic[path];
 	}
 	else
 	{
@@ -80,9 +107,9 @@ ResItem* ResLoadMgr::getResource(std::string path)
 
 LoadItem* ResLoadMgr::getLoadItem(std::string path)
 {
-	if (this->mLoadData->mPath2LDItem.containsKey(path))
+	if (this->mLoadData->mPath2LoadItemDic.containsKey(path))
 	{
-		return this->mLoadData->mPath2LDItem[path];
+		return this->mLoadData->mPath2LoadItemDic[path];
 	}
 	else
 	{
@@ -93,17 +120,17 @@ LoadItem* ResLoadMgr::getLoadItem(std::string path)
 void ResLoadMgr::loadData(LoadParam* param)
 {
 	// 链接不过
-	param->setResPackType(eDataType);
+	param->setResPackType(ResPackType::eDataType);
 
-	if (eLoadStreamingAssets == param->getResLoadType())
+	if (ResLoadType::eLoadStreamingAssets == param->getResLoadType())
 	{
 		param->setPath(UtilPath::Combine(GFileSys->getLocalReadDir(), param->getPath()));
 	}
-	else if (eLoadPersistentData == param->getResLoadType())
+	else if (ResLoadType::eLoadPersistentData == param->getResLoadType())
 	{
 		param->setPath(UtilPath::Combine(GFileSys->getLocalWriteDir(), param->getPath()));
 	}
-	else if (eLoadWeb == param->getResLoadType())
+	else if (ResLoadType::eLoadWeb == param->getResLoadType())
 	{
 		param->setPath(UtilPath::Combine(GCfg->mWebIP, param->getPath()));
 	}
@@ -117,7 +144,7 @@ void ResLoadMgr::loadData(LoadParam* param)
 // eBundleType 打包类型资源加载
 void ResLoadMgr::loadBundle(LoadParam* param)
 {
-	param->setResPackType(eBundleType);
+	param->setResPackType(ResPackType::eBundleType);
 	param->setResLoadType(GCfg->mResLoadType);
 
 	this->load(param);
@@ -138,7 +165,7 @@ void ResLoadMgr::loadLevel(LoadParam* param)
 	param.mResLoadType = ResLoadType.eStreamingAssets;
 	load(param);
 #else
-	param->setResPackType(eLevelType);
+	param->setResPackType(ResPackType::eLevelType);
 	param->setResLoadType(GCfg->mResLoadType);
 	load(param);
 #endif
@@ -165,8 +192,8 @@ void ResLoadMgr::loadResources(LoadParam* param)
 	param.mResLoadType = ResLoadType.eStreamingAssets;
 	return load(param);
 #else
-	param->setResPackType(eResourcesType);
-	param->setResLoadType(eLoadResource);
+	param->setResPackType(ResPackType::eResourcesType);
+	param->setResLoadType(ResLoadType::eLoadResource);
 	load(param);
 #endif
 }
@@ -175,7 +202,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 {
 	ResItem* resItem = this->findResFormPool(param->getResPackType());
 
-	if (eClassType == param->getResPackType())
+	if (ResPackType::eClassType == param->getResPackType())
 	{
 		if (nullptr == resItem)
 		{
@@ -184,7 +211,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 
 		((ClassAssetResItem*)resItem)->setPrefabName(param->getPrefabName());
 	}
-	else if (eObjectType == param->getResPackType())
+	else if (ResPackType::eObjectType == param->getResPackType())
 	{
 		if (nullptr == resItem)
 		{
@@ -209,7 +236,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	//		resItem = new BundleResItem();
 	//	}
 	//}
-	else if (eLevelType == param->getResPackType())
+	else if (ResPackType::eLevelType == param->getResPackType())
 	{
 		if (nullptr == resItem)
 		{
@@ -218,7 +245,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 
 		((LevelResItem*)resItem)->setLevelName(param->getLvlName());
 	}
-	else if (eDataType == param->getResPackType())
+	else if (ResPackType::eDataType == param->getResPackType())
 	{
 		if (nullptr == resItem)
 		{
@@ -241,14 +268,14 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 {
 	LoadItem* loadItem = this->findLoadItemFormPool(param->getResPackType());
 
-	if (eClassType == param->getResPackType())
+	if (ResPackType::eClassType == param->getResPackType())
 	{
 		if (nullptr == loadItem)
 		{
 			loadItem = MY_NEW ClassAssetLoadItem();
 		}
 	}
-	else if (eObjectType == param->getResPackType())
+	else if (ResPackType::eObjectType == param->getResPackType())
 	{
 		if (nullptr == loadItem)
 		{
@@ -269,7 +296,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	//		loadItem = new UBinaryLoadItem();
 	//	}
 	//}
-	else if (eLevelType == param->getResPackType())
+	else if (ResPackType::eLevelType == param->getResPackType())
 	{
 		if (nullptr == loadItem)
 		{
@@ -278,7 +305,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 
 		((LevelLoadItem*)loadItem)->setLevelName(param->getLvlName());
 	}
-	else if (eDataType == param->getResPackType())
+	else if (ResPackType::eDataType == param->getResPackType())
 	{
 		if (nullptr == loadItem)
 		{
@@ -300,19 +327,19 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 // 资源创建并且正在被加载
 void ResLoadMgr::loadWithResCreatedAndLoad(LoadParam* param)
 {
-	this->mLoadData->mPath2Res[param->mPath]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
-	if (this->mLoadData->mPath2Res[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
+	this->mLoadData->mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+	if (this->mLoadData->mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
 		if (param->getLoadEventHandle() != nullptr)
 		{
-			param->getLoadEventHandle()(this->mLoadData->mPath2Res[param->mPath]);
+			param->getLoadEventHandle()(this->mLoadData->mPath2ResDic[param->mPath]);
 		}
 	}
 	else
 	{
 		if (param->getLoadEventHandle() != nullptr)
 		{
-			this->mLoadData->mPath2Res[param->mPath]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
+			this->mLoadData->mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 		}
 	}
 
@@ -321,8 +348,8 @@ void ResLoadMgr::loadWithResCreatedAndLoad(LoadParam* param)
 
 void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem)
 {
-	this->mLoadData->mPath2Res[param->mPath] = resItem;
-	this->mLoadData->mPath2Res[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
+	this->mLoadData->mPath2ResDic[param->mPath] = resItem;
+	this->mLoadData->mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
 
 	LoadItem* loadItem = this->getLoadItem(param->mPath);
 
@@ -332,13 +359,13 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 
 		if (this->mCurNum < this->mMaxParral)
 		{
-			this->mLoadData->mPath2LDItem[param->mPath] = loadItem;
+			this->mLoadData->mPath2LoadItemDic[param->mPath] = loadItem;
 			loadItem->load();
 			this->mCurNum += 1;
 		}
 		else
 		{
-			UtilList::Add(this->mLoadData->mWillLDItem, loadItem);
+			UtilList::Add(this->mLoadData->mWillLoadItemList, loadItem);
 		}
 	}
 	else
@@ -360,13 +387,13 @@ void ResLoadMgr::load(LoadParam* param)
 {
 	this->mLoadingDepth += 1;
 
-	if (this->mLoadData->mPath2Res.containsKey(param->mPath))
+	if (this->mLoadData->mPath2ResDic.containsKey(param->mPath))
 	{
 		this->loadWithResCreatedAndLoad(param);
 	}
 	else if (param->getLoadRes() != nullptr)
 	{
-		this->loadWithResCreatedAndNotLoad(param, this->mLoadData->mPath2Res[param->mPath]);
+		this->loadWithResCreatedAndNotLoad(param, this->mLoadData->mPath2ResDic[param->mPath]);
 	}
 	else
 	{
@@ -391,15 +418,15 @@ ResItem* ResLoadMgr::getAndLoad(LoadParam* param)
 // 这个卸载有引用计数，如果有引用计数就卸载不了
 void ResLoadMgr::unload(std::string path, EventDispatchDelegate loadEventHandle)
 {
-	if (this->mLoadData->mPath2Res.containsKey(path))
+	if (this->mLoadData->mPath2ResDic.containsKey(path))
 	{
-		this->mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
-		this->mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
-		if (this->mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
+		this->mLoadData->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
+		this->mLoadData->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
+		if (this->mLoadData->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			if (this->mLoadingDepth != 0)
 			{
-				this->addNoRefResID2List(path);
+				this->addNoRefResId2List(path);
 			}
 			else
 			{
@@ -410,7 +437,7 @@ void ResLoadMgr::unload(std::string path, EventDispatchDelegate loadEventHandle)
 }
 
 // 添加无引用资源到 List
-void ResLoadMgr::addNoRefResID2List(std::string path)
+void ResLoadMgr::addNoRefResId2List(std::string path)
 {
 	this->mZeroRefResIdList.add(path);
 }
@@ -420,7 +447,7 @@ void ResLoadMgr::unloadNoRefResFromList()
 {
 	for(std::string path : this->mZeroRefResIdList.getList())
 	{
-		if (this->mLoadData->mPath2Res[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
+		if (this->mLoadData->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			this->unloadNoRef(path);
 		}
@@ -431,13 +458,15 @@ void ResLoadMgr::unloadNoRefResFromList()
 // 不考虑引用计数，直接卸载
 void ResLoadMgr::unloadNoRef(std::string path)
 {
-	if (this->mLoadData->mPath2Res.containsKey(path))
+	if (this->mLoadData->mPath2ResDic.containsKey(path))
 	{
-		this->mLoadData->mPath2Res[path]->unload();
-		this->mLoadData->mPath2Res[path]->reset();
-		UtilList::Add(this->mLoadData->mNoUsedResItem, this->mLoadData->mPath2Res[path]);
+		ResItem* res = nullptr;
+		res = this->mLoadData->mPath2ResDic[path];
+		res->unload();
+		res->reset();
 
-		this->mLoadData->mPath2Res.remove(path);
+		UtilList::Add(this->mLoadData->mNoUsedResItemList, res);
+		this->mLoadData->mPath2ResDic.remove(path);
 	}
 	else
 	{
@@ -468,9 +497,9 @@ void ResLoadMgr::onLoaded(LoadItem* item)
 {
 	std::string _path = item->getPath();
 
-	if (this->mLoadData->mPath2Res.containsKey(_path))
+	if (this->mLoadData->mPath2ResDic.containsKey(_path))
 	{
-		this->mLoadData->mPath2Res[item->getPath()]->init(this->mLoadData->mPath2LDItem[item->getPath()]);
+		this->mLoadData->mPath2ResDic[item->getPath()]->init(this->mLoadData->mPath2LoadItemDic[item->getPath()]);
 	}
 	else        // 如果资源已经没有使用的地方了
 	{
@@ -482,31 +511,31 @@ void ResLoadMgr::onFailed(LoadItem* item)
 {
 	std::string path = item->getPath();
 
-	if (this->mLoadData->mPath2Res.containsKey(path))
+	if (this->mLoadData->mPath2ResDic.containsKey(path))
 	{
-		this->mLoadData->mPath2Res[path]->failed(mLoadData->mPath2LDItem[path]);
+		this->mLoadData->mPath2ResDic[path]->failed(mLoadData->mPath2LoadItemDic[path]);
 	}
 }
 
 void ResLoadMgr::releaseLoadItem(LoadItem* item)
 {
 	item->reset();
-	UtilList::Add(this->mLoadData->mNoUsedLDItem, item);
+	UtilList::Add(this->mLoadData->mNoUsedLoadItemList, item);
 	std::string _path = item->getPath();
-	this->mLoadData->mPath2LDItem.remove(_path);
+	this->mLoadData->mPath2LoadItemDic.remove(_path);
 }
 
 void ResLoadMgr::loadNextItem()
 {
 	if (this->mCurNum < this->mMaxParral)
 	{
-		if (UtilList::Count(this->mLoadData->mWillLDItem) > 0)
+		if (UtilList::Count(this->mLoadData->mWillLoadItemList) > 0)
 		{
-			std::string path = ((LoadItem*)(UtilList::At(this->mLoadData->mWillLDItem, 0)))->getPath();
-			mLoadData->mPath2LDItem[path] = (LoadItem*)(UtilList::At(this->mLoadData->mWillLDItem, 0));
+			std::string path = ((LoadItem*)(UtilList::At(this->mLoadData->mWillLoadItemList, 0)))->getPath();
+			mLoadData->mPath2LoadItemDic[path] = (LoadItem*)(UtilList::At(this->mLoadData->mWillLoadItemList, 0));
 
-			UtilList::RemoveAt(this->mLoadData->mWillLDItem, 0);
-			this->mLoadData->mPath2LDItem[path]->load();
+			UtilList::RemoveAt(this->mLoadData->mWillLoadItemList, 0);
+			this->mLoadData->mPath2LoadItemDic[path]->load();
 
 			++this->mCurNum;
 		}
@@ -516,12 +545,12 @@ void ResLoadMgr::loadNextItem()
 ResItem* ResLoadMgr::findResFormPool(ResPackType type)
 {
 	this->mRetResItem = nullptr;
-	for(ResItem* item : this->mLoadData->mNoUsedResItem)
+	for(ResItem* item : this->mLoadData->mNoUsedResItemList)
 	{
 		if (item->getResPackType() == type)
 		{
 			this->mRetResItem = item;
-			UtilList::Remove(this->mLoadData->mNoUsedResItem, this->mRetResItem);
+			UtilList::Remove(this->mLoadData->mNoUsedResItemList, this->mRetResItem);
 			break;
 		}
 	}
@@ -533,12 +562,12 @@ LoadItem* ResLoadMgr::findLoadItemFormPool(ResPackType type)
 {
 	this->mRetLoadItem = nullptr;
 
-	for(LoadItem* item : this->mLoadData->mNoUsedLDItem)
+	for(LoadItem* item : this->mLoadData->mNoUsedLoadItemList)
 	{
 		if (item->getResPackType() == type)
 		{
 			this->mRetLoadItem = item;
-			UtilList::Remove(this->mLoadData->mNoUsedLDItem, this->mRetLoadItem);
+			UtilList::Remove(this->mLoadData->mNoUsedLoadItemList, this->mRetLoadItem);
 			break;
 		}
 	}

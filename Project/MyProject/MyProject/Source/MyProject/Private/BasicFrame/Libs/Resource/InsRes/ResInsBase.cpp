@@ -37,7 +37,7 @@ void ResInsBase::setIsOrigResNeedImmeUnload(bool value)
 	this->mIsOrigResNeedImmeUnload = value;
 }
 
-std::string ResInsBase::GetPath()
+std::string ResInsBase::getPath()
 {
 	return this->mPath;
 }

@@ -8,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 template<class T>
 int UtilVector::IndexOf(std::vector<T>& vec, T& item)
 {
-	int idx = -1;
+	int index = -1;
 	for (auto elem : vec)
 	{
 		if (elem == item)
@@ -17,7 +17,7 @@ int UtilVector::IndexOf(std::vector<T>& vec, T& item)
 		}
 	}
 
-	return idx;
+	return index;
 }
 
 template<class T>

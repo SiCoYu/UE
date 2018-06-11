@@ -35,6 +35,8 @@ class ResInsMgrBase : public GObject
 {
 	M_DECLARE_CLASS(ResInsMgrBase, GObject)
 
+	typedef typename MDictionary<std::string, ResInsBase*>::Iterator Iterator;
+
 public:
 	MDictionary<std::string, ResInsBase*> mPath2ResDic;
 
@@ -85,7 +87,7 @@ public:
 
 protected:
 	// 添加无引用资源到 List
-	void addNoRefResID2List(std::string path);
+	void addNoRefResId2List(std::string path);
     // 卸载没有引用的资源列表中的资源
 	void unloadNoRefResFromList();
 	void unloadNoRef(std::string path);

@@ -44,13 +44,13 @@ void TickObjectNoPriorityMgr::_onPreAdvance(float delta, TickMode tickMode)
 
 void TickObjectNoPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 {
-	int idx = 0;
+	int index = 0;
 	int count = this->mNoOrPriorityList->count();
 	ITickedObject* tickObject = nullptr;
 
-	while (idx < count)
+	while (index < count)
 	{
-		tickObject = (ITickedObject*)this->mNoOrPriorityList->get(idx);
+		tickObject = (ITickedObject*)this->mNoOrPriorityList->get(index);
 
 		if (nullptr != (IDelayHandleItem*)tickObject)
 		{
@@ -68,7 +68,7 @@ void TickObjectNoPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 			}
 		}
 
-		++idx;
+		++index;
 	}
 }
 

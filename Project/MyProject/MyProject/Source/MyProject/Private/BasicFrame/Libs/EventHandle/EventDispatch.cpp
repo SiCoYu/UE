@@ -19,6 +19,29 @@ EventDispatch::~EventDispatch()
 	
 }
 
+void EventDispatch::init()
+{
+	Super::init();
+}
+
+void EventDispatch::dispose()
+{
+	int index = 0;
+	int listLen = this->mHandleList.count();
+
+	EventDispatchFunctionObject* handle = nullptr;
+
+	while (index < listLen)
+	{
+		handle = this->mHandleList[index];
+		MY_SAFE_DISPOSE(handle);
+
+		index += 1;
+	}
+
+	Super::dispose();
+}
+
 int EventDispatch::getUniqueId()
 {
 	return this->mUniqueId;
@@ -61,18 +84,22 @@ void EventDispatch::_addObject(IDelayHandleItem* delayObject, float priority)
 
 void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 {
-	int idx = 0;
+	int index = 0;
+	int listLen = this->mHandleList.count();
 
-	for (idx = 0; idx < mHandleList.count(); ++idx)
+	while (index < listLen)
 	{
-		if (this->mHandleList[idx]->mHandle, handle)
+		if (this->mHandleList[index]->mHandle, handle)
 		{
 			break;
 		}
+
+		index += 1;
 	}
-	if (idx < this->mHandleList.count())
+
+	if (index < this->mHandleList.count())
 	{
-		this->_removeObject(this->mHandleList[idx]);
+		this->_removeObject(this->mHandleList[index]);
 	}
 	else
 	{

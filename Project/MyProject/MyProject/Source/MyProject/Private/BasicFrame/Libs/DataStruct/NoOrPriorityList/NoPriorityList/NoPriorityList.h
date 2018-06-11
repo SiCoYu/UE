@@ -44,7 +44,7 @@ public:
 protected:
     // 快速移除元素
     bool _effectiveRemove(INoOrPriorityObject* item);
-    void _updateIndex(int idx);
+    void _updateIndex(int index);
 };
 
 MY_END_NAMESPACE

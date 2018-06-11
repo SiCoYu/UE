@@ -56,7 +56,7 @@ public:
     // 快速移除元素
 protected:
 	bool _effectiveRemove(T item);
-    void _updateIndex(int idx);
+    void _updateIndex(int index);
 };
 
 MY_END_NAMESPACE

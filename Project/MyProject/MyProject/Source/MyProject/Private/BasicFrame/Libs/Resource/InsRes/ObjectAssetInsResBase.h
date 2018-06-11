@@ -22,8 +22,8 @@ class ObjectAssetInsResBase : public ResInsBase
 	M_DECLARE_CLASS(ObjectAssetInsResBase, ResInsBase)
 
 protected:
-	UObject* mGo;
-	UObject* mRetGO;
+	UObject* mActor;
+	UObject* mRetActor;
 	ResPackType mResPackType;    // 资源打包类型
 
 public:

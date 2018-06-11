@@ -28,13 +28,13 @@ public:
 	{
 		//T retObj = default(T);
 		//// 查找
-		//int idx = 0;
-		//for(idx = 0; idx < mPoolList.Count; ++idx)
+		//int index = 0;
+		//for(index = 0; index < mPoolList.Count; ++index)
 		//{
-		//    if (typeof(T) == mPoolList[idx].GetType())
+		//    if (typeof(T) == mPoolList[index].GetType())
 		//    {
-		//        retObj = (T)mPoolList[idx];
-		//        mPoolList.RemoveAt(idx);
+		//        retObj = (T)mPoolList[index];
+		//        mPoolList.RemoveAt(index);
 		//        MethodInfo myMethodInfo = retObj.GetType().GetMethod("resetDefault");
 		//        if (myMethodInfo != nullptr)
 		//        {

@@ -94,16 +94,16 @@ public:
 	{
 		MLock mlock(this->mVisitMutex);
 		{
-			int idx = 0;
+			int index = 0;
 			foreach(var elem in this->mDynamicBuffer.mBuffer)
 			{
 				if (item.Equals(elem))       // 地址比较
 				{
-					this->RemoveAt(idx);
+					this->RemoveAt(index);
 					return true;
 				}
 
-				++idx;
+				++index;
 			}
 			return false;
 		}
@@ -140,17 +140,17 @@ public:
 	{
 		MLock mlock(this->mVisitMutex);
 		{
-			int idx = 0;
+			int index = 0;
 
 			foreach(var elem in this->mDynamicBuffer.mBuffer)
 			{
 				if (item.Equals(elem))       // 地址比较
 				{
-					this->RemoveAt(idx);
-					return idx;
+					this->RemoveAt(index);
+					return index;
 				}
 
-				++idx;
+				++index;
 			}
 
 			return -1;

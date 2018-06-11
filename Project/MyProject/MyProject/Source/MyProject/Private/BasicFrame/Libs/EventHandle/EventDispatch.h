@@ -32,6 +32,10 @@ protected:
 public:
 	EventDispatch(int eventId_ = 0);
 	virtual ~EventDispatch();
+
+	virtual void init() override;
+	virtual void dispose() override;
+
 	int getUniqueId();
 	void setUniqueId(int value);
     //public LuaCSBridgeDispatch luaCSBridgeDispatch;

@@ -7,6 +7,7 @@
 #include "MClassFactory.h"
 #include "NoPriorityList.h"
 #include "PriorityList.h"
+#include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -33,27 +34,17 @@ void DelayPriorityHandleMgr::dispose()
 {
 	GObject* tmp = nullptr;
 
-	if (nullptr != this->mDeferredAddQueue)
-	{
-		this->mDeferredAddQueue->clear();
-		tmp = (GObject*)this->mDeferredAddQueue;
-		MY_DELETE tmp;
-		this->mDeferredAddQueue = nullptr;
-	}
-	if (nullptr != this->mDeferredRemoveQueue)
-	{
-		this->mDeferredRemoveQueue->clear();
-		tmp = (GObject*)this->mDeferredRemoveQueue;
-		MY_DELETE tmp;
-		this->mDeferredRemoveQueue = nullptr;
-	}
-	if (nullptr != this->mNoOrPriorityList)
-	{
-		this->mNoOrPriorityList->clear();
-		tmp = (GObject*)this->mNoOrPriorityList;
-		MY_DELETE tmp;
-		this->mNoOrPriorityList = nullptr;
-	}
+	tmp = (GObject*)this->mDeferredAddQueue;
+	MY_SAFE_DISPOSE(tmp);
+	this->mDeferredAddQueue = nullptr;
+
+	tmp = (GObject*)this->mDeferredRemoveQueue;
+	MY_SAFE_DISPOSE(tmp);
+	this->mDeferredRemoveQueue = nullptr;
+
+	tmp = (GObject*)this->mNoOrPriorityList;
+	MY_SAFE_DISPOSE(tmp);
+	this->mNoOrPriorityList = nullptr;
 
 	Super::dispose();
 }

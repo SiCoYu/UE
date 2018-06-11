@@ -14,11 +14,11 @@ TaskThreadPool::TaskThreadPool()
 void TaskThreadPool::initThreadPool(int numThread, TaskQueue* taskQueue)
 {
     //mList = new MList<TaskThread>(numThread);
-    int idx = 0;
-    for(idx = 0; idx < numThread; ++idx)
+    int index = 0;
+    for(index = 0; index < numThread; ++index)
     {
-        mList.add(MY_NEW TaskThread(UtilStr::Format("TaskThread%d", idx), taskQueue));
-        mList[idx]->start();
+        mList.add(MY_NEW TaskThread(UtilStr::Format("TaskThread%d", index), taskQueue));
+        mList[index]->start();
     }
 }
 

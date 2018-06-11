@@ -30,6 +30,8 @@ void NoPriorityList::dispose()
 		this->mDic.dispose();
 		//this->mDic = nullptr;
 	//}
+
+	this->clear();
 }
 
 void NoPriorityList::setIsSpeedUpFind(bool value)
@@ -222,33 +224,33 @@ bool NoPriorityList::_effectiveRemove(INoOrPriorityObject* item)
 	{
 		ret = true;
 
-		int idx = this->mDic[item];
+		int index = this->mDic[item];
 		this->mDic.remove(item);
 
-		if (idx == this->mNoPriorityProcessObjectList.count() - 1)    // 如果是最后一个元素，直接移除
+		if (index == this->mNoPriorityProcessObjectList.count() - 1)    // 如果是最后一个元素，直接移除
 		{
-			this->mNoPriorityProcessObjectList.removeAt(idx);
+			this->mNoPriorityProcessObjectList.removeAt(index);
 		}
 		else
 		{
-			this->mNoPriorityProcessObjectList.set(idx, this->mNoPriorityProcessObjectList.get(this->mNoPriorityProcessObjectList.count() - 1));
+			this->mNoPriorityProcessObjectList.set(index, this->mNoPriorityProcessObjectList.get(this->mNoPriorityProcessObjectList.count() - 1));
 			this->mNoPriorityProcessObjectList.removeAt(this->mNoPriorityProcessObjectList.count() - 1);
-			this->mDic.add(this->mNoPriorityProcessObjectList.get(idx), idx);
+			this->mDic.add(this->mNoPriorityProcessObjectList.get(index), index);
 		}
 	}
 
 	return ret;
 }
 
-void NoPriorityList::_updateIndex(int idx)
+void NoPriorityList::_updateIndex(int index)
 {
 	int listLen = this->mNoPriorityProcessObjectList.count();
 
-	while (idx < listLen)
+	while (index < listLen)
 	{
-		this->mDic.add(this->mNoPriorityProcessObjectList.get(idx), idx);
+		this->mDic.add(this->mNoPriorityProcessObjectList.get(index), index);
 
-		++idx;
+		++index;
 	}
 }
 

@@ -156,9 +156,9 @@ int loadLuaFromFileUseClosure(lua_State *L)
 
 int removeZeroAndEof(const char* buffer, int size)
 {
-	for (int idx = size - 1; idx >= 0; --idx)
+	for (int index = size - 1; index >= 0; --index)
 	{
-		if (buffer[idx] == 0 || buffer[idx] == -1)
+		if (buffer[index] == 0 || buffer[index] == -1)
 		{
 			--size;
 		}
