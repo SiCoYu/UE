@@ -9,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 DownloadItem::DownloadItem()
 {
-	this->mResLoadType = eLoadWeb;
+	this->mResLoadType = ResLoadType::eLoadWeb;
 	this->mRefCountResLoadResultNotify = MY_NEW RefCountResLoadResultNotify();
 	this->mAllLoadResEventDispatch = MY_NEW ResEventDispatch();
 }
@@ -42,7 +42,7 @@ void DownloadItem::setAllLoadResEventDispatch(ResEventDispatch* value)
 void DownloadItem::reset()
 {
 	this->mLoadPath = "";
-	this->mDownloadType = eHttpWeb;
+	this->mDownloadType = DownloadType::eHttpWeb;
 
 	this->mBytes = nullptr;
 }

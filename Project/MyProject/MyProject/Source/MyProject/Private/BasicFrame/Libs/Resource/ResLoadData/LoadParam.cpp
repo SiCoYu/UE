@@ -35,9 +35,9 @@ void LoadParam::init()
 	this->mIsResNeedCoroutine = false;
 	this->mIsLoadNeedCoroutine = false;
 	this->mLoadEventHandle = nullptr;
-	this->mResPackType = eNoneType;
+	this->mResPackType = ResPackType::eNoneType;
 
-	this->mResLoadType = eLoadNum;
+	this->mResLoadType = ResLoadType::eLoadNum;
 }
 
 void LoadParam::setPath(std::string path)

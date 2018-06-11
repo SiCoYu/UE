@@ -19,6 +19,18 @@ ObjectAssetLoadItem::~ObjectAssetLoadItem()
 	
 }
 
+void ObjectAssetLoadItem::init()
+{
+	Super::init();
+}
+
+void ObjectAssetLoadItem::dispose()
+{
+	this->mResObject = nullptr;
+
+	Super::dispose();
+}
+
 UObject* ObjectAssetLoadItem::getObject()
 {
 	return this->mResObject;

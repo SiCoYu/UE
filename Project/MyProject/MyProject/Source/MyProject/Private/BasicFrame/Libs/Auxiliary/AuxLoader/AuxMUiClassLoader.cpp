@@ -13,7 +13,7 @@ M_IMPLEMENT_AND_REGISTER_CLASS(AuxMUiClassLoader, AuxMObjectLoaderBase)
 AuxMUiClassLoader::AuxMUiClassLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
 	: Super(path, isNeedInsPrefab, isInsNeedCoroutine)
 {
-	this->mResPackType = eClassType;
+	this->mResPackType = ResPackType::eClassType;
 	this->mWidgetClass = nullptr;
 	this->mWidgetObject = nullptr;
 }

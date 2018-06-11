@@ -89,7 +89,7 @@ void MDiscreteList<T>::add(T& item)
 }
 
 template <typename T>
-bool MList<T>::remove(T& item)
+bool MDiscreteList<T>::remove(T& item)
 {
 	UtilList::Remove(this->mList, item);
 	return true;

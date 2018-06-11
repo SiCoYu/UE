@@ -9,7 +9,7 @@ M_IMPLEMENT_AND_REGISTER_CLASS(AuxMClassLoader, AuxMObjectLoaderBase)
 AuxMClassLoader::AuxMClassLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
 	: Super(path, isNeedInsPrefab, isInsNeedCoroutine)
 {
-	this->mResPackType = eClassType;
+	this->mResPackType = ResPackType::eClassType;
 }
 
 MY_END_NAMESPACE

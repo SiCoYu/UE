@@ -50,8 +50,9 @@ void ResLoadMgr::init()
 
 void ResLoadMgr::dispose()
 {
-	typename ResLoadData::Iterator curIte = this->mLoadData->mPath2ResDic.begin();
-	typename ResLoadData::Iterator endIte = this->mLoadData->mPath2ResDic.end();
+	// 卸载加载的资源
+	typename ResLoadData::ResItemIterator curIte = this->mLoadData->mPath2ResDic.begin();
+	typename ResLoadData::ResItemIterator endIte = this->mLoadData->mPath2ResDic.end();
 
 	MList<ResItem*> resList;
 
@@ -76,6 +77,68 @@ void ResLoadMgr::dispose()
 	}
 
 	resList.dispose();
+
+	// 卸载缓存的资源
+	index = 0;
+	listLen = this->mLoadData->mNoUsedResItemList.count();
+	res = nullptr;
+
+	while (index < listLen)
+	{
+		res = this->mLoadData->mNoUsedResItemList.get(listLen);
+		MY_SAFE_DISPOSE(res);
+
+		index += 1;
+	}
+
+	this->mLoadData->mNoUsedResItemList.dispose();
+
+	// 加载项
+	LoadItem* loadItem = nullptr;
+
+	// 卸载加载项
+	typename ResLoadData::LoadItemIterator curLoadItemIte = this->mLoadData->mPath2LoadItemDic.begin();
+	typename ResLoadData::LoadItemIterator endLoadItemIte = this->mLoadData->mPath2LoadItemDic.end();
+
+	while (curIte != endIte)
+	{
+		loadItem = curLoadItemIte->second;
+		loadItem->unload();
+		MY_SAFE_DISPOSE(loadItem);
+		++curIte;
+	}
+
+	this->mLoadData->mPath2LoadItemDic.dispose();
+
+	index = 0;
+	listLen = this->mLoadData->mWillLoadItemList.count();
+	loadItem = nullptr;
+
+	while (index < listLen)
+	{
+		loadItem = this->mLoadData->mWillLoadItemList.get(listLen);
+		loadItem->unload();
+		MY_SAFE_DISPOSE(loadItem);
+
+		index += 1;
+	}
+
+	this->mLoadData->mWillLoadItemList.dispose();
+
+	index = 0;
+	listLen = this->mLoadData->mNoUsedLoadItemList.count();
+	loadItem = nullptr;
+
+	while (index < listLen)
+	{
+		loadItem = this->mLoadData->mNoUsedLoadItemList.get(listLen);
+		loadItem->unload();
+		MY_SAFE_DISPOSE(loadItem);
+
+		index += 1;
+	}
+
+	this->mLoadData->mNoUsedLoadItemList.dispose();
 
 	MY_SAFE_DISPOSE(this->mLoadData);
 }
@@ -365,7 +428,7 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 		}
 		else
 		{
-			UtilList::Add(this->mLoadData->mWillLoadItemList, loadItem);
+			this->mLoadData->mWillLoadItemList.add(loadItem);
 		}
 	}
 	else
@@ -465,7 +528,7 @@ void ResLoadMgr::unloadNoRef(std::string path)
 		res->unload();
 		res->reset();
 
-		UtilList::Add(this->mLoadData->mNoUsedResItemList, res);
+		this->mLoadData->mNoUsedResItemList.add(res);
 		this->mLoadData->mPath2ResDic.remove(path);
 	}
 	else
@@ -520,7 +583,7 @@ void ResLoadMgr::onFailed(LoadItem* item)
 void ResLoadMgr::releaseLoadItem(LoadItem* item)
 {
 	item->reset();
-	UtilList::Add(this->mLoadData->mNoUsedLoadItemList, item);
+	this->mLoadData->mNoUsedLoadItemList.add(item);
 	std::string _path = item->getPath();
 	this->mLoadData->mPath2LoadItemDic.remove(_path);
 }
@@ -529,12 +592,12 @@ void ResLoadMgr::loadNextItem()
 {
 	if (this->mCurNum < this->mMaxParral)
 	{
-		if (UtilList::Count(this->mLoadData->mWillLoadItemList) > 0)
+		if (this->mLoadData->mWillLoadItemList.count() > 0)
 		{
-			std::string path = ((LoadItem*)(UtilList::At(this->mLoadData->mWillLoadItemList, 0)))->getPath();
-			mLoadData->mPath2LoadItemDic[path] = (LoadItem*)(UtilList::At(this->mLoadData->mWillLoadItemList, 0));
+			std::string path = ((LoadItem*)(this->mLoadData->mWillLoadItemList.get(0)))->getPath();
+			mLoadData->mPath2LoadItemDic[path] = (LoadItem*)(this->mLoadData->mWillLoadItemList.get(0));
 
-			UtilList::RemoveAt(this->mLoadData->mWillLoadItemList, 0);
+			this->mLoadData->mWillLoadItemList.removeAt(0);
 			this->mLoadData->mPath2LoadItemDic[path]->load();
 
 			++this->mCurNum;
@@ -545,12 +608,12 @@ void ResLoadMgr::loadNextItem()
 ResItem* ResLoadMgr::findResFormPool(ResPackType type)
 {
 	this->mRetResItem = nullptr;
-	for(ResItem* item : this->mLoadData->mNoUsedResItemList)
+	for(ResItem* item : this->mLoadData->mNoUsedResItemList.getList())
 	{
 		if (item->getResPackType() == type)
 		{
 			this->mRetResItem = item;
-			UtilList::Remove(this->mLoadData->mNoUsedResItemList, this->mRetResItem);
+			this->mLoadData->mNoUsedResItemList.remove(this->mRetResItem);
 			break;
 		}
 	}
@@ -562,12 +625,12 @@ LoadItem* ResLoadMgr::findLoadItemFormPool(ResPackType type)
 {
 	this->mRetLoadItem = nullptr;
 
-	for(LoadItem* item : this->mLoadData->mNoUsedLoadItemList)
+	for(LoadItem* item : this->mLoadData->mNoUsedLoadItemList.getList())
 	{
 		if (item->getResPackType() == type)
 		{
 			this->mRetLoadItem = item;
-			UtilList::Remove(this->mLoadData->mNoUsedLoadItemList, this->mRetLoadItem);
+			this->mLoadData->mNoUsedLoadItemList.remove(this->mRetLoadItem);
 			break;
 		}
 	}

@@ -29,6 +29,9 @@ protected:
 	void asyncLoad();
 
 public:
+	virtual void init() override;
+	virtual void dispose() override;
+
 	void onAsyncLoaded();
 	virtual UObject* getObject() override;
 	virtual void setObject(UObject* value) override;

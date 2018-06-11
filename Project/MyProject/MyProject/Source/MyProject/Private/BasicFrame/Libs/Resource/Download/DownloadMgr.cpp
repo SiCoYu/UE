@@ -52,7 +52,7 @@ bool DownloadMgr::hasDownloadItem(std::string resUniqueId)
         }
     }
 
-    for (DownloadItem* loadItem : this->mLoadData->mWillLoadItemList)
+    for (DownloadItem* loadItem : this->mLoadData->mWillLoadItemList.getList())
     {
         if (loadItem->getResUniqueId() == resUniqueId)
         {
@@ -115,7 +115,7 @@ DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
         }
     }
 
-    for (DownloadItem* loadItem : this->mLoadData->mWillLoadItemList)
+    for (DownloadItem* loadItem : this->mLoadData->mWillLoadItemList.getList())
     {
         if (loadItem->getResUniqueId() == resUniqueId)
         {
@@ -129,20 +129,24 @@ DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
 DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
 {
     DownloadItem* loadItem = this->findDownloadItemFormPool();
+
     if (loadItem == nullptr)
     {
-        if (param->mDownloadType == eHttpWeb)
+        if (param->mDownloadType == DownloadType::eHttpWeb)
         {
             loadItem = MY_NEW HttpWebDownloadItem();
         }
     }
+
     loadItem->setLoadParam(param);
+
     loadItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(
 		MakeEventDispatchDelegate(
 			this, 
 			&DownloadMgr::onLoadEventHandle
 		)
 	);
+
     loadItem->getAllLoadResEventDispatch()->addEventHandle(param->mLoadEventHandle);
 
     return loadItem;
@@ -151,6 +155,7 @@ DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
 void DownloadMgr::downloadWithDownloading(DownloadParam* param)
 {
 	this->mLoadData->mPath2LoadItemDic[param->mResUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+
     if (this->mLoadData->mPath2LoadItemDic[param->mResUniqueId]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
     {
         if (param->mLoadEventHandle != nullptr)
@@ -179,12 +184,13 @@ void DownloadMgr::downloadWithNotDownload(DownloadParam* param)
         {
             // 先增加，否则退出的时候可能是先减 1 ，导致越界出现很大的值
             ++this->mCurNum;
+
 			this->mLoadData->mPath2LoadItemDic[param->mResUniqueId] = loadItem;
 			this->mLoadData->mPath2LoadItemDic[param->mResUniqueId]->load();
         }
         else
         {
-            UtilList::Add(this->mLoadData->mWillLoadItemList, loadItem);
+            this->mLoadData->mWillLoadItemList.add(loadItem);
         }
     }
 
@@ -228,6 +234,7 @@ void DownloadMgr::undownload(std::string resUniqueId, EventDispatchDelegate load
         // 移除事件监听器，因为很有可能移除的时候，资源还没加载完成，这个时候事件监听器中的处理函数列表还没有清理
 		this->mLoadData->mPath2LoadItemDic[resUniqueId]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
 		this->mLoadData->mPath2LoadItemDic[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
+
         if (this->mLoadData->mPath2LoadItemDic[resUniqueId]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
         {
             if (this->mLoadingDepth != 0)
@@ -293,7 +300,7 @@ void DownloadMgr::unloadNoRef(std::string resUniqueId)
     {
 		this->mLoadData->mPath2LoadItemDic[resUniqueId]->unload();
 		this->mLoadData->mPath2LoadItemDic[resUniqueId]->reset();
-		UtilList::Add(this->mLoadData->mNoUsedLoadItemList, this->mLoadData->mPath2LoadItemDic[resUniqueId]);
+		this->mLoadData->mNoUsedLoadItemList.add(this->mLoadData->mPath2LoadItemDic[resUniqueId]);
 		UtilMap::Remove(this->mLoadData->mPath2LoadItemDic.getData(), resUniqueId);
 
         // 检查是否存在还没有执行的 LoadItem，如果存在就直接移除
@@ -307,7 +314,7 @@ void DownloadMgr::unloadNoRef(std::string resUniqueId)
 
 void DownloadMgr::removeWillLoadItem(std::string resUniqueId)
 {
-    for (DownloadItem* loadItem : this->mLoadData->mWillLoadItemList)
+    for (DownloadItem* loadItem : this->mLoadData->mWillLoadItemList.getList())
     {
         if (loadItem->getResUniqueId() == resUniqueId)
         {
@@ -370,20 +377,21 @@ void DownloadMgr::releaseLoadItem(DownloadItem* item)
 {
 	std::string resUniqueId = item->getResUniqueId();
     item->reset();
-	UtilList::Add(mLoadData->mNoUsedLoadItemList, item);
-	UtilList::Remove(mLoadData->mWillLoadItemList, item);
-	UtilMap::Remove(mLoadData->mPath2LoadItemDic.getData(), resUniqueId);
+	this->mLoadData->mNoUsedLoadItemList.add(item);
+	this->mLoadData->mWillLoadItemList.remove(item);
+	this->mLoadData->mPath2LoadItemDic.remove(resUniqueId);
 }
 
 void DownloadMgr::loadNextItem()
 {
     if (this->mCurNum < this->mMaxParral)
     {
-		if (UtilList::Count(this->mLoadData->mWillLoadItemList) > 0)
+		if (this->mLoadData->mWillLoadItemList.count() > 0)
         {
-            std::string resUniqueId = this->mLoadData->mWillLoadItemList.front()->getResUniqueId();
-			this->mLoadData->mPath2LoadItemDic[resUniqueId] = this->mLoadData->mWillLoadItemList.front();
-			UtilList::RemoveAt(this->mLoadData->mWillLoadItemList, 0);
+            std::string resUniqueId = this->mLoadData->mWillLoadItemList.get(0)->getResUniqueId();
+			this->mLoadData->mPath2LoadItemDic[resUniqueId] = this->mLoadData->mWillLoadItemList.get(0);
+
+			this->mLoadData->mWillLoadItemList.removeAt(0);
 			this->mLoadData->mPath2LoadItemDic[resUniqueId]->load();
 
             ++this->mCurNum;
@@ -395,10 +403,10 @@ DownloadItem* DownloadMgr::findDownloadItemFormPool()
 {
 	this->mRetLoadItem = nullptr;
 
-    for (DownloadItem* item : this->mLoadData->mNoUsedLoadItemList)
+    for (DownloadItem* item : this->mLoadData->mNoUsedLoadItemList.getList())
     {
 		this->mRetLoadItem = item;
-		UtilList::Remove(this->mLoadData->mNoUsedLoadItemList, this->mRetLoadItem);
+		this->mLoadData->mNoUsedLoadItemList.remove(this->mRetLoadItem);
         break;
     }
 

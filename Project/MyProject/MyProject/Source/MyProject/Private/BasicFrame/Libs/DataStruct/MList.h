@@ -44,16 +44,16 @@ public:
 	void setUniqueId(int value);
 
 	T& get(int index);
-	void set(int index, T item);
-	void add(T item);
-	bool remove(T item);
+	void set(int index, T& item);
+	void add(T& item);
+	bool remove(T& item);
 	T& operator [] (int index);
 	void clear();
 	int count();
 	void removeAt(int index);
-	int indexOf(T item);
-	void insert(int index, T item);
-	bool contains(T item);
+	int indexOf(T& item);
+	void insert(int index, T& item);
+	bool contains(T& item);
 };
 
 MY_END_NAMESPACE

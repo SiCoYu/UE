@@ -29,6 +29,18 @@ void ClassAssetLoadItem::setObject(UObject* value)
 	this->mResObject = Cast<UClass>(value);
 }
 
+void ClassAssetLoadItem::init()
+{
+	Super::init();
+}
+
+void ClassAssetLoadItem::dispose()
+{
+	this->mResObject = nullptr;
+
+	Super::dispose();
+}
+
 void ClassAssetLoadItem::syncLoad()
 {
 	this->mResObject = GMyStreamableManager->SynchronousLoadType<UClass>(this->mPath);

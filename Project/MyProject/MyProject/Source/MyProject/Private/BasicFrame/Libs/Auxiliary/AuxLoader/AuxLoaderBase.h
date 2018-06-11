@@ -86,7 +86,7 @@ protected:
 		EventDispatchDelegate handle = nullptr,
 		long fileLen = 0, 
 		bool isWriteFile = true, 
-		int downloadType = (int)eHttpWeb
+		int downloadType = (int)DownloadType::eHttpWeb
 	);
 	virtual void unload();
 };

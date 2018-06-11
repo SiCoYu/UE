@@ -30,7 +30,7 @@ protected:
 		EventDispatchDelegate dispObj = nullptr, 
 		long fileLen = 0, 
 		bool isWriteFile = true, 
-		int downloadType = (int)eHttpWeb
+		int downloadType = (int)DownloadType::eHttpWeb
 	) override;
     // 下载完成
 	void onDownloaded(IDispatchObject* dispObj);

@@ -29,6 +29,9 @@ public:
 	virtual ~ObjectAssetLoadItem();
 
 public:
+	virtual void init() override;
+	virtual void dispose() override;
+
 	void onAsyncLoaded();
 	UObject* getObject();
 	void setObject(UObject* value);

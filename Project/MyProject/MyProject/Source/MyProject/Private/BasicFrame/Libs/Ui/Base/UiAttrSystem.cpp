@@ -62,14 +62,14 @@ UiFormId UiAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType
 {
 	for(auto keyValue : this->mId2AttrDic.getData())
 	{
-		if (ePathComUI == pathType)
+		if (ResPathType::ePathComUI == pathType)
 		{
 			if (this->mId2AttrDic[keyValue.first]->mWidgetPath == resPath)
 			{
 				return keyValue.first;
 			}
 		}
-		else if (ePathCodePath == pathType)
+		else if (ResPathType::ePathCodePath == pathType)
 		{
 			if (this->mId2AttrDic[keyValue.first]->mCodePath == resPath)
 			{

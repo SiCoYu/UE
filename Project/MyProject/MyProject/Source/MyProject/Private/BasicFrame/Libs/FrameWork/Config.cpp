@@ -17,8 +17,8 @@ Config::Config()
 	this->mNetLogPhp = "/netlog/NetLog.php";
 
 	this->mResLoadType = ResLoadType::eLoadDisc;
-	this->mPathList[(int)ResLoadType::ePathScene] = "Scenes/";
-	this->mPathList[(int)ResLoadType::ePathSceneXml] = "Scenes/Xml/";
+	this->mPathList[(int)ResPathType::ePathScene] = "Scenes/";
+	this->mPathList[(int)ResPathType::ePathSceneXml] = "Scenes/Xml/";
 	this->mPathList[(int)ResPathType::ePathModule] = "Module/";
 	this->mPathList[(int)ResPathType::ePathComUI] = "UI/";
 	this->mPathList[(int)ResPathType::ePathComUIScene] = "UIScene/";

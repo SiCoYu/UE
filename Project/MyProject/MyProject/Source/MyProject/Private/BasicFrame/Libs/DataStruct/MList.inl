@@ -56,7 +56,7 @@ T& MList<T>::get(int index)
 }
 
 template <typename T>
-void MList<T>::set(int index, T item)
+void MList<T>::set(int index, T& item)
 {
 	this->mList[index] = item;
 }
@@ -80,13 +80,13 @@ void MList<T>::setUniqueId(int value)
 }
 
 template <typename T>
-void MList<T>::add(T item)
+void MList<T>::add(T& item)
 {
 	this->mList.push_back(item);
 }
 
 template <typename T>
-bool MList<T>::remove(T item)
+bool MList<T>::remove(T& item)
 {
 	UtilVector::Remove(this->mList, item);
 	return true;
@@ -117,13 +117,13 @@ void MList<T>::removeAt(int index)
 }
 
 template <typename T>
-int MList<T>::indexOf(T item)
+int MList<T>::indexOf(T& item)
 {
 	return UtilVector::IndexOf(this->mList, item);
 }
 
 template <typename T>
-void MList<T>::insert(int index, T item)
+void MList<T>::insert(int index, T& item)
 {
 	if (index <= this->count())
 	{
@@ -136,7 +136,7 @@ void MList<T>::insert(int index, T item)
 }
 
 template <typename T>
-bool MList<T>::contains(T item)
+bool MList<T>::contains(T& item)
 {
 	return this->indexOf(item) != -1;
 }

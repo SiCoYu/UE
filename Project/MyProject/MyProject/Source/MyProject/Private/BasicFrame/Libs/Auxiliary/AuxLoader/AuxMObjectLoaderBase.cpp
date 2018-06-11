@@ -112,7 +112,7 @@ void AuxMObjectLoaderBase::asyncLoad(
 
 	if (this->isInvalid())
 	{
-		if (eClassType == this->mResPackType)
+		if (ResPackType::eClassType == this->mResPackType)
 		{
 			this->mPrefabRes = GClassAssetInsMgr->getAndAsyncLoadRes(
 				path, 
