@@ -86,6 +86,7 @@ void ResLoadMgr::dispose()
 	while (index < listLen)
 	{
 		res = this->mLoadData->mNoUsedResItemList.get(listLen);
+		res->unload();
 		MY_SAFE_DISPOSE(res);
 
 		index += 1;

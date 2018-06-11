@@ -41,7 +41,8 @@ void FrameTimerMgr::_addObject(IDelayHandleItem* delayObject, float priority)
 		}
 		else
 		{
-			this->mTimerList.add((FrameTimerItem*)delayObject);
+			FrameTimerItem* ptr = (FrameTimerItem*)delayObject;
+			this->mTimerList.add(ptr);
 		}
 	}
 }

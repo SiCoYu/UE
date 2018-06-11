@@ -58,6 +58,8 @@ public:
 	virtual void reset();
     // 卸载
 	virtual void unload();
+	virtual void dispose();
+
 	virtual UObject* InstantiateObject(std::string resName);
 	virtual UObject* getObject(std::string resName);
 	virtual uint8* getBytes(std::string resName);            // 获取字节数据

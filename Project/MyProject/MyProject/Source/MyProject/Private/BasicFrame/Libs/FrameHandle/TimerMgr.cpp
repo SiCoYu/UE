@@ -40,7 +40,8 @@ void TimerMgr::_addObject(IDelayHandleItem* delayObject, float priority)
 		}
 		else
 		{
-			this->mTimerList.add((TimerItemBase*)delayObject);
+			TimerItemBase* ptr = (TimerItemBase*)delayObject;
+			this->mTimerList.add(ptr);
 		}
 	}
 }

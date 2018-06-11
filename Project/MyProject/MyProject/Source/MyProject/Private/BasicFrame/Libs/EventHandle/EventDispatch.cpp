@@ -78,7 +78,8 @@ void EventDispatch::_addObject(IDelayHandleItem* delayObject, float priority)
 	else
 	{
 		// 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-		this->mHandleList.add((EventDispatchFunctionObject*)delayObject);
+		EventDispatchFunctionObject* ptr = (EventDispatchFunctionObject*)delayObject;
+		this->mHandleList.add(ptr);
 	}
 }
 
@@ -115,7 +116,8 @@ void EventDispatch::_removeObject(IDelayHandleItem* delayObject)
 	}
 	else
 	{
-		if (!this->mHandleList.remove((EventDispatchFunctionObject*)delayObject))
+		EventDispatchFunctionObject* ptr = (EventDispatchFunctionObject*)delayObject;
+		if (!this->mHandleList.remove(ptr))
 		{
 			GLogSys->log("Event Handle not exist");
 		}

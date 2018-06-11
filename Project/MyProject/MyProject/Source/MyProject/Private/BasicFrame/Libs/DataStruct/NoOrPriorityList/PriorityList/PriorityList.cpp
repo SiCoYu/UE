@@ -60,12 +60,13 @@ void PriorityList::clear()
 {
 	int index = 0;
 	int listLen = this->count();
+	INoOrPriorityObject* ptr = nullptr;
 
 	while(index < listLen)
 	{
 		//NumIdBufferObjectFactory.deleteObject(this->mPriorityProcessObjectList.get(index));
 		MY_DELETE this->mPriorityProcessObjectList.get(index);
-		this->mPriorityProcessObjectList.set(index, nullptr);
+		this->mPriorityProcessObjectList.set(index, ptr);
 		index += 1;
 	}
 
