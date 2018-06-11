@@ -29,7 +29,7 @@ void ClassAssetInsMgr::dispose()
 
 ResPackType ClassAssetInsMgr::getResPackType()
 {
-	return eClassType;
+	return ResPackType::eClassType;
 }
 
 ClassAssetInsRes* ClassAssetInsMgr::getAndSyncLoadRes(std::string path, EventDispatchDelegate handle)

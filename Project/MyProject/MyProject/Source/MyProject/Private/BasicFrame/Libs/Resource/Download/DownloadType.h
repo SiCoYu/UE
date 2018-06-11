@@ -4,7 +4,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-enum DownloadType
+enum class DownloadType
 {
 	eHttpWeb,
 	eDownloadTypeTotal

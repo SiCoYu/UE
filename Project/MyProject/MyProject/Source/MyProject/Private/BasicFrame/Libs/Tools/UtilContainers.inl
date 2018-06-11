@@ -135,17 +135,37 @@ int UtilList::Add(std::list<T>& list, T& item)
 template<class T>
 T& UtilList::At(std::list<T>& list, int index)
 {
+	T* ret = nullptr;
+
 	if (index < list.size())
 	{
 		std::list<T>::iterator _beginIte;
 		_beginIte = list.begin();
 		std::advance(_beginIte, index);
-		return *_beginIte;
+		ret = &(*_beginIte);
 	}
 	
-	// 返回一个引用
-	static T m_defRef;		// 必须有一个默认的构造函数
-	return m_defRef;
+	return *ret;
+}
+
+template<class T>
+void UtilList::Insert(std::list<T>& list, int index, T& item)
+{
+	if (0 == index)
+	{
+		list.push_front(item);
+	}
+	else if (index >= list.size())
+	{
+		list.push_back(item);
+	}
+	else
+	{
+		std::list<T>iterator& _beginIte;
+		_beginIte = list.begin();
+		std::advance(_beginIte, index);
+		vec.insert(_beginIte, item);
+	}
 }
 
 //=================== map 区域 ========================

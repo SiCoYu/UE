@@ -51,15 +51,36 @@ void DelayNoOrPriorityHandleMgrBase::dispose()
 	this->mIsDispose = true;
 	GObject* tmp = nullptr;
 
-	tmp = (GObject*)this->mDeferredAddQueue;
-	MY_SAFE_DISPOSE(tmp);
-	this->mDeferredAddQueue = nullptr;
+	//tmp = (GObject*)this->mDeferredAddQueue;
+	//MY_SAFE_DISPOSE(tmp);
+	//this->mDeferredAddQueue = nullptr;
 
-	tmp = (GObject*)this->mDeferredRemoveQueue;
-	MY_SAFE_DISPOSE(tmp);
-	this->mDeferredRemoveQueue = nullptr;
+	//tmp = (GObject*)this->mDeferredRemoveQueue;
+	//MY_SAFE_DISPOSE(tmp);
+	//this->mDeferredRemoveQueue = nullptr;
 
-	MY_SAFE_DISPOSE(this->mLoopDepth);
+	//MY_SAFE_DISPOSE(this->mLoopDepth);
+
+	if (nullptr != this->mDeferredAddQueue)
+	{
+		this->mDeferredAddQueue->dispose();
+		tmp = (GObject*)this->mDeferredAddQueue;
+		MY_DELETE tmp;
+		this->mDeferredAddQueue = nullptr;
+	}
+	if (nullptr != this->mDeferredRemoveQueue)
+	{
+		this->mDeferredRemoveQueue->dispose();
+		tmp = (GObject*)this->mDeferredRemoveQueue;
+		MY_DELETE tmp;
+		this->mDeferredRemoveQueue = nullptr;
+	}
+	if (nullptr != this->mLoopDepth)
+	{
+		this->mLoopDepth->dispose();
+		MY_DELETE this->mLoopDepth;
+		this->mLoopDepth = nullptr;
+	}
 }
 
 int DelayNoOrPriorityHandleMgrBase::getDebugUniqueId()

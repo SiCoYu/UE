@@ -9,7 +9,7 @@ M_IMPLEMENT_AND_REGISTER_CLASS(ObjectAssetInsRes, ObjectAssetInsResBase)
 ObjectAssetInsRes::ObjectAssetInsRes()
 	: Super()
 {
-	this->mResPackType = eObjectType;
+	this->mResPackType = ResPackType::eObjectType;
 }
 
 MY_END_NAMESPACE

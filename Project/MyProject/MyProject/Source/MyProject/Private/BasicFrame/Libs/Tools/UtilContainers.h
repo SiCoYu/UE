@@ -62,12 +62,20 @@ public:
 	template<class T>
 	static int Add(std::list<T>& list, T& item);
 
+	/**
+	 * @brief  list不支持随机访问。所以没有 at(pos)和operator[]
+	 * @url https://blog.csdn.net/lanyzh0909/article/details/7567696
+	 */
 	// 获取一个元素
 	//template<class T>
 	//static T& operator[](std::list<T>& list, int index);
 
 	template<class T>
 	static T& At(std::list<T>& list, int index);
+
+	// 在指定索引位置插入一个值
+	template<class T>
+	static void Insert(std::list<T>& vec, int index, T& item);
 };
 
 MY_END_NAMESPACE

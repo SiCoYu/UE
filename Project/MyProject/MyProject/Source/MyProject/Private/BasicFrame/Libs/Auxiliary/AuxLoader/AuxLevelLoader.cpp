@@ -47,8 +47,8 @@ void AuxLevelLoader::syncLoad(
 		);
 		param->setIsResNeedCoroutine(false);
 		param->setIsLoadNeedCoroutine(false);
-		param->setResPackType(eLevelType);
-		param->setResLoadType(eLoadResource);
+		param->setResPackType(ResPackType::eLevelType);
+		param->setResLoadType(ResLoadType::eLoadResource);
 
 		GResLoadMgr->loadAsset(param);
 
@@ -90,8 +90,8 @@ void AuxLevelLoader::asyncLoad(
 		);
 		param->setIsResNeedCoroutine(true);
 		param->setIsLoadNeedCoroutine(true);
-		param->setResPackType(eLevelType);
-		param->setResLoadType(eLoadResource);
+		param->setResPackType(ResPackType::eLevelType);
+		param->setResLoadType(ResLoadType::eLoadResource);
 
 		GResLoadMgr->loadAsset(param);
 

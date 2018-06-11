@@ -287,7 +287,7 @@ void UiMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 	{
 		UiFormId formId = mUiAttrSystem->GetFormIDByPath(
 			res->getPath(), 
-			ePathCodePath
+			ResPathType::ePathCodePath
 		);  // 获取 FormId
 
 		this->mId2CodeLoadingItemDic.remove(formId);
@@ -305,7 +305,7 @@ void UiMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 	}
 	else if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
 	{
-		UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->getPath(), ePathComUI);  // 获取 FormId
+		UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->getPath(), ResPathType::ePathComUI);  // 获取 FormId
 		this->mId2WidgetLoadingItemDic.remove(formId);
 		GLogSys->log("UiFormId =  ， Failed Prefab");
 	}
@@ -314,7 +314,7 @@ void UiMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
 // 代码资源加载完成处理
 void UiMgr::onCodeloadedByRes(ClassAssetInsRes* res)
 {
-	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->getPath(), ePathCodePath);  // 获取 FormId
+	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(res->getPath(), ResPathType::ePathCodePath);  // 获取 FormId
 	this->mId2CodeLoadingItemDic.remove(formId);
 	this->addFormNoReady(this->mId2FormDic[formId]);
 	this->onCodeLoadedByForm(this->mId2FormDic[formId]);
@@ -332,7 +332,7 @@ void UiMgr::onCodeLoadedByForm(UForm* form)
 void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 {
 	std::string path = res->getPath();
-	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
+	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ResPathType::ePathComUI);  // 获取 FormId
 	this->mId2WidgetLoadingItemDic.remove(formId);
 	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
 
@@ -405,7 +405,7 @@ void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
 	AuxMUiClassLoader* res = (AuxMUiClassLoader*)dispObj;
 
 	std::string path = res->getOrigPath();
-	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ePathComUI);  // 获取 FormId
+	UiFormId formId = this->mUiAttrSystem->GetFormIDByPath(path, ResPathType::ePathComUI);  // 获取 FormId
 	this->mId2WidgetLoadingItemDic.remove(formId);
 	UiAttrItem* attrItem = this->mUiAttrSystem->mId2AttrDic[formId];
 

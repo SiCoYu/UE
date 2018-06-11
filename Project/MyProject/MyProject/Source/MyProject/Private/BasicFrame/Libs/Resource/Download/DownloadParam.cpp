@@ -20,8 +20,8 @@ void DownloadParam::dispose()
 
 void DownloadParam::reset()
 {
-	this->mResLoadType = eLoadWeb;
-	this->mDownloadType = eHttpWeb;
+	this->mResLoadType = ResLoadType::eLoadWeb;
+	this->mDownloadType = DownloadType::eHttpWeb;
 	this->mIsWriteFile = true;
 	this->mFileLen = 0;
 	this->mVersion = "";

@@ -86,11 +86,11 @@ void AuxMObjectLoaderBase::syncLoad(
 
 	if (this->isInvalid())
 	{
-		if (eClassType == this->mResPackType)
+		if (ResPackType::eClassType == this->mResPackType)
 		{
 			this->mPrefabRes = GClassAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
 		}
-		else if (eObjectType == this->mResPackType)
+		else if (ResPackType::eObjectType == this->mResPackType)
 		{
 			this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
 		}
@@ -122,7 +122,7 @@ void AuxMObjectLoaderBase::asyncLoad(
 				)
 			);
 		}
-		else if (eObjectType == this->mResPackType)
+		else if (ResPackType::eObjectType == this->mResPackType)
 		{
 			this->mPrefabRes = GObjectAssetInsMgr->getAndAsyncLoadRes(
 				path, 

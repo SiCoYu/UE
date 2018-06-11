@@ -9,7 +9,7 @@ M_IMPLEMENT_AND_REGISTER_CLASS(ClassAssetInsRes, ObjectAssetInsResBase)
 ClassAssetInsRes::ClassAssetInsRes()
 	: Super()
 {
-	this->mResPackType = eClassType;
+	this->mResPackType = ResPackType::eClassType;
 }
 
 ClassAssetInsRes::~ClassAssetInsRes()

@@ -32,7 +32,7 @@ public:
     std::string mWebIP;               // web 服务器
     int mWebPort;
 
-	std::string mPathList[eTotal];
+	std::string mPathList[ResPathType::eTotal];
     ResLoadType mResLoadType;   // 资源加载类型
     std::string mDataPath;
     //public bool mIsNeedNet = false;                       // 是否需要网络

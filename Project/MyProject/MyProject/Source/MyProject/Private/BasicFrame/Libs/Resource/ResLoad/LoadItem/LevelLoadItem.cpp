@@ -58,11 +58,14 @@ void LevelLoadItem::load()
 
 	//this->mOnLevelLoadDelegate = FMyDelegateDef::MyDelegateBaseHandle::CreateRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
 	//this->mOnLevelLoadDelegateHandle = this->mOnLevelLoadDelegate.Add(this->mOnLevelLoadDelegate);
-	this->mMyDelegateLevelLoad->mMyDelegateBaseEvent.BindRaw(this, &LevelLoadItem::assetAssetBundlesLevelLoaded);
+	this->mMyDelegateLevelLoad->mMyDelegateBaseEvent.BindRaw(
+		this, 
+		&LevelLoadItem::assetAssetBundlesLevelLoaded
+	);
 
-	if (eLoadResource == this->mResLoadType ||
-		eLoadStreamingAssets == mResLoadType ||
-		eLoadPersistentData == mResLoadType)
+	if (ResLoadType::eLoadResource == this->mResLoadType ||
+		ResLoadType::eLoadStreamingAssets == this->mResLoadType ||
+		ResLoadType::eLoadPersistentData == this->mResLoadType)
 	{
 		// 需要加载 AssetBundles 加载
 		if (this->mIsLoadNeedCoroutine)
@@ -74,7 +77,7 @@ void LevelLoadItem::load()
 			this->loadFromAssetBundle();
 		}
 	}
-	else if (eLoadWeb == mResLoadType)
+	else if (ResLoadType::eLoadWeb == this->mResLoadType)
 	{
 		//Ctx.mInstance.mCoroutineMgr.StartCoroutine(downloadAsset());
 	}
