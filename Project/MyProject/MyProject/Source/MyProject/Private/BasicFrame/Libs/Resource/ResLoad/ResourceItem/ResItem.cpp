@@ -120,6 +120,11 @@ void ResItem::unload()
 
 }
 
+void ResItem::dispose()
+{
+
+}
+
 UObject* ResItem::InstantiateObject(std::string resName)
 {
 	return nullptr;
