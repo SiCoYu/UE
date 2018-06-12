@@ -7,6 +7,9 @@
 #include "MDictionary.h"
 #include "MList.h"
 #include "TickMode.h"
+#include "TypeDef.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -17,7 +20,9 @@ class UniqueNumIdGen;
 
 class EntityMgrBase : public DelayPriorityHandleMgrBase, public ITickedObject, public INoOrPriorityObject
 {
-protected
+	M_DECLARE_CLASS(EntityMgrBase, DelayPriorityHandleMgrBase)
+
+protected:
 	MList<SceneEntityBase*> mSceneEntityList;
 	MDictionary<std::string, SceneEntityBase*> mId2EntityDic;
 	MDictionary<uint, SceneEntityBase*> mThisId2EntityDic;
@@ -49,7 +54,7 @@ public:
 	// 通过 Id 获取元素
 	SceneEntityBase* getEntityByThisId(uint thisId);
 	// 通过 Unique Id 获取元素，Unique Id 是客户端自己的唯一 id ，与服务器没有关系
-	SceneEntityBase getEntityByUniqueId(std::string uniqueId);
+	SceneEntityBase* getEntityByUniqueId(std::string uniqueId);
 	// 通过数组下标获取元素
 	SceneEntityBase* getEntityByIndex(int index);
 	std::string genNewStrId();

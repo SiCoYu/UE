@@ -4,6 +4,8 @@
 #include "GObject.h"
 #include "AuxComponent.h"
 #include "TickMode.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -13,7 +15,7 @@ class SceneEntityBase;
 /**
  * @brief 基本的渲染器，所有与显示有关的接口都在这里，这里基本只提供接口，最基本的实现在 BeingEntityRender 里面
  */
-public class EntityRenderBase : AuxComponent
+public class EntityRenderBase : public AuxComponent
 {
 protected:
 	SceneEntityBase* mEntity;  // Entity 数据
@@ -21,7 +23,7 @@ protected:
 public:
 	EntityRenderBase(SceneEntityBase* entity_)
 	{
-		this.mEntity = entity_;
+		this->mEntity = entity_;
 	}
 
 	virtual void setClientDispose(bool isDispose)
@@ -31,7 +33,7 @@ public:
 
 	virtual bool isClientDispose()
 	{
-		return this.mEntity.isClientDispose();
+		return this->mEntity.isClientDispose();
 	}
 
 	virtual void onTick(float delta, TickMode tickMode)
@@ -42,13 +44,13 @@ public:
 	// 初始化流程
 	override void init()
 	{
-		this.onInit();
+		this->onInit();
 	}
 
 	// 初始化事件，仅仅是变量初始化，初始化流程不修改
 	virtual void onInit()
 	{
-		this.setIsDestroySelf(false);
+		this->setIsDestroySelf(false);
 	}
 
 	// 销毁流程
@@ -60,7 +62,7 @@ public:
 	// 资源释放事件，仅仅是释放基本的资源，不修改销毁流程
 	override void onDestroy()
 	{
-		this.mEntity = null;
+		this->mEntity = nullptr;
 
 		base.onDestroy();
 	}
@@ -88,14 +90,14 @@ public:
 
 	bool isValid()
 	{
-		return null != this.mSelfActor;
+		return nullptr != this->mSelfActor;
 	}
 
 	UnityEngine.Vector3 getPos()
 	{
-		if(this.isValid())
+		if(this->isValid())
 		{
-			return this.transform().localPosition;
+			return this->transform().localPosition;
 		}
 
 		return UtilMath.ZeroVec3;
@@ -108,58 +110,58 @@ public:
 		base._onSelfChanged();
 
 		// 设置可视化
-		if (this.mEntity.IsVisible())
+		if (this->mEntity.IsVisible())
 		{
-			this.show();
+			this->show();
 		}
 		else
 		{
-			this.hide();
+			this->hide();
 		}
 
 		// 设置方向位置信息
-		this.setPos(this.mEntity.getPos());
-		this.setRotate(this.mEntity.getRotate());
-		this.setScale(this.mEntity.getScale());
+		this->setPos(this->mEntity.getPos());
+		this->setRotate(this->mEntity.getRotate());
+		this->setScale(this->mEntity.getScale());
 	}
 	
 	virtual void updateLocalTransform() override
 	{
-		if (this.mSelfActor)
+		if (this->mSelfActor)
 		{
-			if (this.mIsPosDirty)
+			if (this->mIsPosDirty)
 			{
-				this.mIsPosDirty = false;
+				this->mIsPosDirty = false;
 
-				UtilEngineWrap.setPos(this.mSelfActor.transform, this.mEntity.getPos());
+				UtilEngineWrap.setPos(this->mSelfActor.transform, this->mEntity.getPos());
 			}
-			if (this.mIsRotDirty)
+			if (this->mIsRotDirty)
 			{
-				this.mIsRotDirty = false;
+				this->mIsRotDirty = false;
 
-				//if (null != this.mRigidbody)
+				//if (nullptr != this->mRigidbody)
 				//{
-				//    if (!(this.mEntity as BeingEntity).isFreezeXZ())
+				//    if (!(this->mEntity as BeingEntity).isFreezeXZ())
 				//    {
-				//        UtilEngineWrap.setRigidbodyRot(this.mRigidbody, this.mEntity.getRotate());
+				//        UtilEngineWrap.setRigidbodyRot(this->mRigidbody, this->mEntity.getRotate());
 				//    }
 				//    else
 				//    {
-				//        UtilEngineWrap.setRot(this.mSelfActor.transform, this.mEntity.getRotate());
+				//        UtilEngineWrap.setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 				//    }
 				//}
 				//else
 				//{
-				//    UtilEngineWrap.setRot(this.mSelfActor.transform, this.mEntity.getRotate());
+				//    UtilEngineWrap.setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 				//}
 
-				UtilEngineWrap.setRot(this.mSelfActor.transform, this.mEntity.getRotate());
+				UtilEngineWrap.setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 			}
-			if (this.mIsScaleDirty)
+			if (this->mIsScaleDirty)
 			{
-				this.mIsScaleDirty = false;
+				this->mIsScaleDirty = false;
 
-				//UtilEngineWrap.setScale(this.mSelfActor.transform, this.mEntity.getScale());
+				//UtilEngineWrap.setScale(this->mSelfActor.transform, this->mEntity.getScale());
 			}
 		}
 	}

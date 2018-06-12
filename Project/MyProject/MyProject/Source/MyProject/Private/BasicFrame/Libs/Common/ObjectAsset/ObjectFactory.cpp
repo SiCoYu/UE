@@ -1,26 +1,32 @@
 #include "MyProject.h"
 #include "ObjectFactory.h"
+#include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-ObjectFactory()
+M_IMPLEMENT_AND_REGISTER_CLASS(ObjectFactory, BuildFactoryBase)
+
+ObjectFactory::ObjectFactory()
 {
 
 }
 
-void init()
+void ObjectFactory::init()
 {
 	
 }
 
-void dispose()
+void ObjectFactory::dispose()
 {
 	
 }
 
-GObject* createObject(typeUniqueId, assetUniqueId)
+GObject* ObjectFactory::createObject(
+	TypeUniqueId typeUniqueId,
+	AssetUniqueId assetUniqueId
+)
 {
-	var ret = null;
+	var ret = nullptr;
 	return ret;
 }
 

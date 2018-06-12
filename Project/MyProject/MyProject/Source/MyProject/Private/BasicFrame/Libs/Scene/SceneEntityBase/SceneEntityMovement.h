@@ -2,6 +2,8 @@
 
 #include "GObject.h"
 #include "IDispatchObject.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

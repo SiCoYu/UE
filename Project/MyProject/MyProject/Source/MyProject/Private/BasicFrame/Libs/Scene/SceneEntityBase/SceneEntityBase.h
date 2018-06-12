@@ -5,6 +5,8 @@
 #include "IDispatchObject.h"
 #include "ITickedObject.h"
 #include "INoOrPriorityObject.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -61,6 +63,7 @@ protected:
 	virtual void _onPostTick(float delta, TickMode tickMode);
 	
 public:
+	uint getThisId();
 	virtual GameObject gameObject();
 	virtual void setGameObject(GameObject rhv);
 	virtual void setPos(Vector3 pos);
