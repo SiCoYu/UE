@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <string>
 #include "GObject.h"
 #include "IDispatchObject.h"
 #include "ITickedObject.h"
@@ -88,7 +89,7 @@ public:
 	}
 
 	// 缓存回收
-	virtual public void onPutInPool()
+	virtual void onPutInPool()
 	{
 		this.mIsInPoolOrDispose = true;
 
@@ -100,7 +101,7 @@ public:
 		this.mRotate.clear();
 	}
 
-	virtual public void onGetFromPool()
+	virtual void onGetFromPool()
 	{
 		this.mPos = UtilMath.ZeroVec3;
 		this.mRotate.setRotateXYZW(0, 0, 0, 1);
@@ -109,7 +110,7 @@ public:
 		this.mIsVisible = false;        // 当前逻辑是否可见
 	}
 
-	virtual public void show()
+	virtual void show()
 	{
 		if (!this.mIsVisible)
 		{
@@ -125,7 +126,7 @@ public:
 		}
 	}
 
-	virtual public void hide()
+	virtual void hide()
 	{
 		if (this.mIsVisible)
 		{
@@ -141,12 +142,12 @@ public:
 		}
 	}
 
-	virtual public bool IsVisible()
+	virtual bool IsVisible()
 	{
 		return this.mIsVisible;
 	}
 
-	virtual public void setClientDispose(bool isDispose)
+	virtual void setClientDispose(bool isDispose)
 	{
 		if (null != this.mRender)
 		{
@@ -154,7 +155,7 @@ public:
 		}
 	}
 
-	public UnityEngine.GameObject getGameObject()
+	UnityEngine.GameObject getGameObject()
 	{
 		if(null != this.mRender)
 		{
@@ -165,7 +166,7 @@ public:
 	}
 
 	// 每一帧执行
-	virtual public void onTick(float delta, TickMode tickMode)
+	virtual void onTick(float delta, TickMode tickMode)
 	{
 		this._onPreTick(delta, tickMode);
 		this._onExecTick(delta, tickMode);
@@ -173,24 +174,26 @@ public:
 		if(null != this.mRender) this.mRender.onTick(delta, tickMode);
 	}
 
+protected:
 	// Tick 第一阶段执行
-	virtual protected void _onPreTick(float delta, TickMode tickMode)
+	virtual void _onPreTick(float delta, TickMode tickMode)
 	{
 
 	}
 
-	virtual protected void _onExecTick(float delta, TickMode tickMode)
+	virtual void _onExecTick(float delta, TickMode tickMode)
 	{
 
 	}
 
 	// Tick 第二阶段执行
-	virtual protected void _onPostTick(float delta, TickMode tickMode)
+	virtual void _onPostTick(float delta, TickMode tickMode)
 	{
 
 	}
 
-	virtual public GameObject gameObject()
+public:
+	virtual GameObject gameObject()
 	{
 		if (null != this.mRender)
 		{
@@ -200,7 +203,7 @@ public:
 		return null;
 	}
 
-	virtual public void setGameObject(GameObject rhv)
+	virtual void setGameObject(GameObject rhv)
 	{
 		if (null != this.mRender)
 		{
@@ -208,7 +211,7 @@ public:
 		}
 	}
 
-	virtual public void setPos(Vector3 pos)
+	virtual void setPos(Vector3 pos)
 	{
 		if (!UtilMath.isEqualVec3(this.mPos, pos) || this.mIsFirst)
 		{
@@ -234,7 +237,7 @@ public:
 		}
 	}
 
-	virtual public void setRenderPos(Vector3 pos)
+	virtual void setRenderPos(Vector3 pos)
 	{
 		if (!UtilEngineWrap.isInFakePos(pos) && !UtilMath.isEqualVec3(this.mPos, pos))
 		{
@@ -247,18 +250,18 @@ public:
 		}
 	}
 
-	public UnityEngine.Vector3 getPos()
+	UnityEngine.Vector3 getPos()
 	{
 		return this.mPos;
 	}
 
 	// 获取世界空间中的绝对位置
-	virtual public UnityEngine.Vector3 getFullPos()
+	virtual UnityEngine.Vector3 getFullPos()
 	{
 		return this.mPos;
 	}
 
-	virtual public void setRotate(Quaternion rotation)
+	virtual void setRotate(Quaternion rotation)
 	{
 		if (!UtilMath.isEqualQuat(this.mRotate.getRotate(), rotation))
 		{
@@ -283,14 +286,14 @@ public:
 	}
 
 	// 这个是单位方向向量
-	public void setRotateNormalDir(UnityEngine.Vector3 normalDir)
+	void setRotateNormalDir(UnityEngine.Vector3 normalDir)
 	{
 		UnityEngine.Quaternion quad = UtilMath.getRotateByOrient(normalDir);
 		this.setRotateEulerAngle(quad.eulerAngles);
 	}
 
 	// 这个是欧拉角
-	public void setRotateEulerAngle(UnityEngine.Vector3 rotation)
+	void setRotateEulerAngle(UnityEngine.Vector3 rotation)
 	{
 		if (!UtilMath.isEqualVec3(this.mRotate.getRotateEulerAngle(), rotation))
 		{
@@ -328,29 +331,29 @@ public:
 	}
 
 	// 获取前向向量
-	public UnityEngine.Vector3 getForward()
+	UnityEngine.Vector3 getForward()
 	{
 		UnityEngine.Vector3 forward = this.mRotate.getRotate() * UnityEngine.Vector3.forward;
 
 		return forward;
 	}
 
-	public UnityEngine.Quaternion getRotate()
+	UnityEngine.Quaternion getRotate()
 	{
 		return this.mRotate.getRotate();
 	}
 
-	public UnityEngine.Vector3 getRotateEulerAngle()
+	UnityEngine.Vector3 getRotateEulerAngle()
 	{
 		return this.mRotate.getRotateEulerAngle();
 	}
 
-	public Vector3 getScale()
+	Vector3 getScale()
 	{
 		return this.mScale;
 	}
 
-	virtual public void setScale(UnityEngine.Vector3 value)
+	virtual void setScale(UnityEngine.Vector3 value)
 	{
 		if (!UtilMath.isEqualVec3(this.mScale, value))
 		{
@@ -368,7 +371,7 @@ public:
 		}
 	}
 
-	public void setSelfName(string name)
+	void setSelfName(std::string name)
 	{
 		if (null != this.mRender)
 		{
@@ -378,23 +381,23 @@ public:
 	}
 
 	// 自动管理
-	virtual public void autoHandle()
+	virtual void autoHandle()
 	{
 
 	}
 
 	// 初始化渲染器
-	virtual public void initRender()
+	virtual void initRender()
 	{
 
 	}
 
-	virtual public void loadRenderRes()
+	virtual void loadRenderRes()
 	{
 
 	}
 
-	public EntityRenderBase getRender()
+	EntityRenderBase* getRender()
 	{
 		return this.mRender;
 	}
