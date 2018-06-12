@@ -6,23 +6,23 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 M_IMPLEMENT_AND_REGISTER_CLASS(EntityMgrBase, DelayPriorityHandleMgrBase)
 
-SceneEntityMovement(SceneEntityBase entity)
+SceneEntityMovement::SceneEntityMovement(SceneEntityBase entity)
 {
 	mTypeId = "SceneEntityMovement";
 	this->mEntity = entity;
 }
 
-virtual void init()
+void SceneEntityMovement::init()
 {
 
 }
 
-virtual void dispose()
+void SceneEntityMovement::dispose()
 {
 	this->mEntity = nullptr;
 }
 
-virtual void onTick(float delta, TickMode tickMode)
+void SceneEntityMovement::onTick(float delta, TickMode tickMode)
 {
 
 }

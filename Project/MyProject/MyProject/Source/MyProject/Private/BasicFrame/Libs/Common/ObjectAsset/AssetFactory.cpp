@@ -27,10 +27,7 @@ GObject* AssetFactory::createObject(
 	AssetUniqueId assetUniqueId
 )
 {
-	var ret = nullptr;
-	var tmpl = nullptr;
-
-	return ret;
+	return nullptr;
 }
 
 MY_END_NAMESPACE
