@@ -1,105 +1,13 @@
-var GlobalNS = require("GlobalNS").GlobalNS;
-require("ModuleLoad");
-GlobalNS.MLoader("Enum");
+#pragma once
 
-var M = GlobalNS.Enum();
-M.clsName = "AssetUniqueId";
-GlobalNS[M.clsName] = M;
+#include "GObject.h"
+#include "PlatformDefine.h"
 
-M.eAssetUId_FocusEntity = 1000;
-M.eAssetUId_GridEntity = 1001;
-M.eAssetUId_PanelPrefab = 1002;
+MY_BEGIN_NAMESPACE(MyNS)
 
-M.eAssetUId_GridLineEntity = 1003;
-M.eAssetUId_SparkEntity = 1004;
-M.eAssetUId_TrailEntity = 1005;
-M.eAssetUId_PanelFadeoutEntity = 1006;
-M.eAssetUId_BottomSparkStartEntity = 1007;
+enum class AssetUniqueId
+{
+	eAssetUId_TestEntity = 1000;
+};
 
-M.eAssetUId_MaskEntity0 = 1100;
-M.eAssetUId_MaskEntity1 = 1101;
-M.eAssetUId_MaskEntity2 = 1102;
-M.eAssetUId_MaskEntity3 = 1103;
-M.eAssetUId_MaskEntity4 = 1104;
-M.eAssetUId_MaskEntity5 = 1105;
-M.eAssetUId_MaskEntity6 = 1106;
-M.eAssetUId_MaskEntity7 = 1107;
-M.eAssetUId_MaskEntity8 = 1108;
-M.eAssetUId_MaskEntity9 = 1109;
-M.eAssetUId_MaskEntity10 = 1110;
-M.eAssetUId_MaskEntity11 = 1111;
-M.eAssetUId_MaskEntity12 = 1112;
-M.eAssetUId_MaskEntity13 = 1113;
-M.eAssetUId_MaskEntity14 = 1114;
-M.eAssetUId_MaskEntity15 = 1115;
-M.eAssetUId_MaskEntity16 = 1116;
-M.eAssetUId_MaskEntity17 = 1117;
-M.eAssetUId_MaskEntity18 = 1118;
-M.eAssetUId_MaskEntity19 = 1119;
-M.eAssetUId_MaskEntity20 = 1120;
-
-M.eAssetUId_SegmentEntity0 = 1200;
-M.eAssetUId_SegmentEntity1 = 1201;
-M.eAssetUId_SegmentEntity2 = 1202;
-M.eAssetUId_SegmentEntity3 = 1203;
-M.eAssetUId_SegmentEntity4 = 1204;
-M.eAssetUId_SegmentEntity5 = 1205;
-M.eAssetUId_SegmentEntity6 = 1206;
-M.eAssetUId_SegmentEntity7 = 1207;
-M.eAssetUId_SegmentEntity8 = 1208;
-M.eAssetUId_SegmentEntity9 = 1209;
-M.eAssetUId_SegmentEntity10 = 1210;
-M.eAssetUId_SegmentEntity11 = 1211;
-M.eAssetUId_SegmentEntity12 = 1212;
-M.eAssetUId_SegmentEntity13 = 1213;
-M.eAssetUId_SegmentEntity14 = 1214;
-M.eAssetUId_SegmentEntity15 = 1215;
-M.eAssetUId_SegmentEntity16 = 1216;
-M.eAssetUId_SegmentEntity17 = 1217;
-M.eAssetUId_SegmentEntity18 = 1218;
-M.eAssetUId_SegmentEntity19 = 1219;
-M.eAssetUId_SegmentEntity20 = 1220;
-
-M.eAssetUId_StartEntity0 = 1300;
-M.eAssetUId_StartEntity1 = 1301;
-M.eAssetUId_StartEntity2 = 1302;
-M.eAssetUId_StartEntity3 = 1303;
-M.eAssetUId_StartEntity4 = 1304;
-M.eAssetUId_StartEntity5 = 1305;
-M.eAssetUId_StartEntity6 = 1306;
-M.eAssetUId_StartEntity7 = 1307;
-M.eAssetUId_StartEntity8 = 1308;
-M.eAssetUId_StartEntity9 = 1309;
-M.eAssetUId_StartEntity10 = 1310;
-M.eAssetUId_StartEntity11 = 1311;
-M.eAssetUId_StartEntity12 = 1312;
-M.eAssetUId_StartEntity13 = 1313;
-M.eAssetUId_StartEntity14 = 1314;
-M.eAssetUId_StartEntity15 = 1315;
-M.eAssetUId_StartEntity16 = 1316;
-M.eAssetUId_StartEntity17 = 1317;
-M.eAssetUId_StartEntity18 = 1318;
-M.eAssetUId_StartEntity19 = 1319;
-M.eAssetUId_StartEntity20 = 1320;
-
-M.eAssetUId_SparkSegmentEntity0 = 1400;
-M.eAssetUId_SparkSegmentEntity1 = 1401;
-M.eAssetUId_SparkSegmentEntity2 = 1402;
-M.eAssetUId_SparkSegmentEntity3 = 1403;
-M.eAssetUId_SparkSegmentEntity4 = 1404;
-M.eAssetUId_SparkSegmentEntity5 = 1405;
-M.eAssetUId_SparkSegmentEntity6 = 1406;
-M.eAssetUId_SparkSegmentEntity7 = 1407;
-M.eAssetUId_SparkSegmentEntity8 = 1408;
-M.eAssetUId_SparkSegmentEntity9 = 1409;
-M.eAssetUId_SparkSegmentEntity10 = 1410;
-M.eAssetUId_SparkSegmentEntity11 = 1411;
-M.eAssetUId_SparkSegmentEntity12 = 1412;
-M.eAssetUId_SparkSegmentEntity13 = 1413;
-M.eAssetUId_SparkSegmentEntity14 = 1414;
-M.eAssetUId_SparkSegmentEntity15 = 1415;
-M.eAssetUId_SparkSegmentEntity16 = 1416;
-M.eAssetUId_SparkSegmentEntity17 = 1417;
-M.eAssetUId_SparkSegmentEntity18 = 1418;
-M.eAssetUId_SparkSegmentEntity19 = 1419;
-M.eAssetUId_SparkSegmentEntity20 = 1420;
+MY_END_NAMESPACE

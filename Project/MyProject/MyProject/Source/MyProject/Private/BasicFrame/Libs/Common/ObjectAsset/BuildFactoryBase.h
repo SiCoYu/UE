@@ -1,28 +1,33 @@
-var GlobalNS = require("GlobalNS").GlobalNS;
+#pragma once
 
-GlobalNS.MLoader("GObject");
+#include "GObject.h"
+#include "PlatformDefine.h"
 
-var M = GlobalNS.Class(GlobalNS.GObject);
-M.clsName = "BuildFactoryBase";
-GlobalNS[M.clsName] = M;
+MY_BEGIN_NAMESPACE(MyNS)
 
-M.prototype.ctor = function ()
+class BuildFactoryBase : public GObject
 {
+public:
+	BuildFactoryBase()
+	{
 
-}
+	}
 
-M.prototype.init = function ()
-{
-    
-}
+	void init()
+	{
+		
+	}
 
-M.prototype.dispose = function ()
-{
-    
-}
+	void dispose()
+	{
+		
+	}
 
-M.prototype.createObject = function (typeUniqueId, assetUniqueId)
-{
-    var ret = null;
-    return ret;
-}
+	GObject* createObject(typeUniqueId, assetUniqueId)
+	{
+		var ret = null;
+		return ret;
+	}
+};
+
+MY_END_NAMESPACE
