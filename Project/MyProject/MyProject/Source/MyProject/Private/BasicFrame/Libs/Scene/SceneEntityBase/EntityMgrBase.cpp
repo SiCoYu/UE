@@ -3,7 +3,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-EntityMgrBase()
+EntityMgrBase::EntityMgrBase()
 {
 	//this.mSceneEntityList = new MList<SceneEntityBase*>();
 	this.mSceneEntityList.setIsSpeedUpFind(true);
@@ -15,28 +15,27 @@ EntityMgrBase()
 	this.mUniqueNumIdGen = new UniqueNumIdGen(0);
 }
 
-virtual void init() override
+void EntityMgrBase::init()
 {
 
 }
 
-virtual void dispose() override
+void EntityMgrBase::dispose()
 {
 	this.clearAll();
 }
 
-UniqueNumIdGen* getUniqueNumIdGen()
+UniqueNumIdGen* EntityMgrBase::getUniqueNumIdGen()
 {
 	return this.mUniqueNumIdGen;
 }
 
-virtual void onPutInPool()
+void EntityMgrBase::onPutInPool()
 {
 	this.clearAll();
 }
 
-protected:
-virtual void _addObject(IDelayHandleItem* entity, float priority = 0.0f) override
+void EntityMgrBase::_addObject(IDelayHandleItem* entity, float priority)
 {
 	if (this._isInDepth())
 	{
@@ -51,7 +50,7 @@ virtual void _addObject(IDelayHandleItem* entity, float priority = 0.0f) overrid
 	}
 }
 
-virtual void _removeObject(IDelayHandleItem* entity) override
+void EntityMgrBase::_removeObject(IDelayHandleItem* entity)
 {
 	if (this._isInDepth())
 	{
@@ -66,8 +65,7 @@ virtual void _removeObject(IDelayHandleItem* entity) override
 	}
 }
 
-public:
-virtual void addEntity(SceneEntityBase* entity)
+void EntityMgrBase::addEntity(SceneEntityBase* entity)
 {
 	this._addObject(entity);
 
@@ -91,7 +89,7 @@ virtual void addEntity(SceneEntityBase* entity)
 	//entity.onInit();
 }
 
-virtual void removeEntity(SceneEntityBase* entity)
+void EntityMgrBase::removeEntity(SceneEntityBase* entity)
 {
 	this._removeObject(entity);
 
@@ -113,12 +111,12 @@ virtual void removeEntity(SceneEntityBase* entity)
 	}
 }
 
-bool Contains(SceneEntityBase entity)
+bool EntityMgrBase::Contains(SceneEntityBase entity)
 {
 	return this.mSceneEntityList.contains(entity);
 }
 
-virtual void onTick(float delta, TickMode tickMode)
+void EntityMgrBase::onTick(float delta, TickMode tickMode)
 {
 	this._incDepth();
 
@@ -127,8 +125,7 @@ virtual void onTick(float delta, TickMode tickMode)
 	this._decDepth();
 }
 
-protected:
-virtual void _onTickExec(float delta, TickMode tickMode)
+void EntityMgrBase::_onTickExec(float delta, TickMode tickMode)
 {
 	int idx = 0;
 	int count = this.mSceneEntityList.count();
@@ -148,9 +145,8 @@ virtual void _onTickExec(float delta, TickMode tickMode)
 	}
 }
 
-public:
 // 通过 Id 获取元素
-SceneEntityBase* getEntityByThisId(uint thisId)
+SceneEntityBase* EntityMgrBase::getEntityByThisId(uint thisId)
 {
 	SceneEntityBase* ret = null;
 
@@ -160,7 +156,7 @@ SceneEntityBase* getEntityByThisId(uint thisId)
 }
 
 // 通过 Unique Id 获取元素，Unique Id 是客户端自己的唯一 id ，与服务器没有关系
-SceneEntityBase getEntityByUniqueId(std::string uniqueId)
+SceneEntityBase EntityMgrBase::getEntityByUniqueId(std::string uniqueId)
 {
 	SceneEntityBase* ret = null;
 
@@ -170,7 +166,7 @@ SceneEntityBase getEntityByUniqueId(std::string uniqueId)
 }
 
 // 通过数组下标获取元素
-SceneEntityBase* getEntityByIndex(int index)
+SceneEntityBase* EntityMgrBase::getEntityByIndex(int index)
 {
 	if (index < this.mSceneEntityList.count())
 	{
@@ -180,37 +176,37 @@ SceneEntityBase* getEntityByIndex(int index)
 	return null;
 }
 
-std::string genNewStrId()
+std::string EntityMgrBase::genNewStrId()
 {
 	return this.mUniqueStrIdGen.genNewStrId();
 }
 
-std::string getCurStrId()
+std::string EntityMgrBase::getCurStrId()
 {
 	return this.mUniqueStrIdGen.getCurStrId();
 }
 
-uint getCurId()
+uint EntityMgrBase::getCurId()
 {
 	return this.mUniqueStrIdGen.getCurId();
 }
 
-std::string genStrIdById(uint id)
+std::string EntityMgrBase::genStrIdById(uint id)
 {
 	return this.mUniqueStrIdGen.genStrIdById(id);
 }
 
-int getEntityCount()
+int EntityMgrBase::getEntityCount()
 {
 	return this.mSceneEntityList.count();
 }
 
-MList<SceneEntityBase*> getSceneEntityList()
+MList<SceneEntityBase*> EntityMgrBase::getSceneEntityList()
 {
 	return this.mSceneEntityList;
 }
 
-virtual void clearAll()
+void EntityMgrBase::clearAll()
 {
 	this._incDepth();
 

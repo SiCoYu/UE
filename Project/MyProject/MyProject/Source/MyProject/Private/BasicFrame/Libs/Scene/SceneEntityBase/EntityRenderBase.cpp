@@ -3,79 +3,79 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-EntityRenderBase(SceneEntityBase* entity_)
+EntityRenderBase::EntityRenderBase(SceneEntityBase* entity_)
 {
 	this.mEntity = entity_;
 }
 
-virtual void setClientDispose(bool isDispose)
+void EntityRenderBase::setClientDispose(bool isDispose)
 {
 
 }
 
-virtual bool isClientDispose()
+bool EntityRenderBase::isClientDispose()
 {
 	return this.mEntity.isClientDispose();
 }
 
-virtual void onTick(float delta, TickMode tickMode)
+void EntityRenderBase::onTick(float delta, TickMode tickMode)
 {
 	
 }
 
 // 初始化流程
-override void init()
+void EntityRenderBase::init()
 {
 	this.onInit();
 }
 
 // 初始化事件，仅仅是变量初始化，初始化流程不修改
-virtual void onInit()
+void EntityRenderBase::onInit()
 {
 	this.setIsDestroySelf(false);
 }
 
 // 销毁流程
-override void dispose()
+void EntityRenderBase::dispose()
 {
 	base.dispose();
 }
 
 // 资源释放事件，仅仅是释放基本的资源，不修改销毁流程
-override void onDestroy()
+void EntityRenderBase::onDestroy()
 {
 	this.mEntity = null;
 
 	base.onDestroy();
 }
 
-virtual bool checkRender()
+bool EntityRenderBase::checkRender()
 {
 	return false;
 }
 
-virtual void load()
+void EntityRenderBase::load()
 {
 
 }
 
 // 场景对象不需要设置，因为如果设置了就检测不了隐藏显示了
-override void show()
+void EntityRenderBase::show()
 {
 	
 }
 
-override void hide()
+void EntityRenderBase::hide()
 {
 	
 }
 
-bool isValid()
+bool EntityRenderBase::isValid()
 {
 	return null != this.mSelfActor;
 }
 
-UnityEngine.Vector3 getPos()
+UnityEngine.Vector3 EntityRenderBase::getPos()
 {
 	if(this.isValid())
 	{
@@ -86,7 +86,7 @@ UnityEngine.Vector3 getPos()
 }
 
 // 资源加载完成，初始化一些基本资源
-virtual void _onSelfChanged() override
+void EntityRenderBase::_onSelfChanged() override
 {
 	// 一定要先查找组件
 	base._onSelfChanged();
@@ -107,7 +107,7 @@ virtual void _onSelfChanged() override
 	this.setScale(this.mEntity.getScale());
 }
 
-virtual void updateLocalTransform() override
+void EntityRenderBase::updateLocalTransform() override
 {
 	if (this.mSelfActor)
 	{
@@ -148,7 +148,7 @@ virtual void updateLocalTransform() override
 	}
 }
 
-virtual void setTexture(std::string path)
+void EntityRenderBase::setTexture(std::string path)
 {
 
 }

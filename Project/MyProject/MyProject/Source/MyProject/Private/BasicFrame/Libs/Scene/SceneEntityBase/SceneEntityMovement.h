@@ -15,26 +15,10 @@ protected:
 	SceneEntityBase* mEntity;          // 关联的实体
 
 public:
-	SceneEntityMovement(SceneEntityBase entity)
-	{
-		mTypeId = "SceneEntityMovement";
-		this.mEntity = entity;
-	}
-
-	virtual void init()
-	{
-
-	}
-
-	virtual void dispose()
-	{
-		this.mEntity = null;
-	}
-
-	virtual void onTick(float delta, TickMode tickMode)
-	{
-
-	}
-}
+	SceneEntityMovement(SceneEntityBase entity);
+	virtual void init();
+	virtual void dispose();
+	virtual void onTick(float delta, TickMode tickMode);
+};
 
 MY_END_NAMESPACE

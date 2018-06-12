@@ -3,37 +3,34 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-SceneEntityBase()
+SceneEntityBase::SceneEntityBase()
 {
 	this.mRotate = new MWrapQuaternion(0, 0, 0, 1);
 	this.mRender = null;
-	this.onGetFromPool();
 }
 
 // 这个接口调用之前，一定要先设置 ThisId ，调用 setThisId，必须先设置这个
-virtual void init()
+void SceneEntityBase::init()
 {
 	this.onInit();
 }
 
-protected:
-virtual void _onPreInit()
+void SceneEntityBase::_onPreInit()
 {
 
 }
 
-virtual void _onExecInit()
+void SceneEntityBase::_onExecInit()
 {
 
 }
 
-virtual void _onPostInit()
+void SceneEntityBase::_onPostInit()
 {
 
 }
 
-public:
-virtual void onInit()
+void SceneEntityBase::onInit()
 {
 	this._onPreInit();
 	this._onExecInit();
@@ -41,13 +38,13 @@ virtual void onInit()
 }
 
 // 释放接口
-virtual void dispose()
+void SceneEntityBase::dispose()
 {
 	this.onDestroy();
 }
 
 // 释放的时候回调的接口
-virtual void onDestroy()
+void SceneEntityBase::onDestroy()
 {
 	if (null != this.mRender)
 	{
@@ -65,7 +62,7 @@ virtual void onDestroy()
 }
 
 // 缓存回收
-virtual void onPutInPool()
+void SceneEntityBase::onPutInPool()
 {
 	this.mIsInPoolOrDispose = true;
 
@@ -77,7 +74,7 @@ virtual void onPutInPool()
 	this.mRotate.clear();
 }
 
-virtual void onGetFromPool()
+void SceneEntityBase::onGetFromPool()
 {
 	this.mPos = UtilMath.ZeroVec3;
 	this.mRotate.setRotateXYZW(0, 0, 0, 1);
@@ -86,7 +83,7 @@ virtual void onGetFromPool()
 	this.mIsVisible = false;        // 当前逻辑是否可见
 }
 
-virtual void show()
+void SceneEntityBase::show()
 {
 	if (!this.mIsVisible)
 	{
@@ -102,7 +99,7 @@ virtual void show()
 	}
 }
 
-virtual void hide()
+void SceneEntityBase::hide()
 {
 	if (this.mIsVisible)
 	{
@@ -118,12 +115,12 @@ virtual void hide()
 	}
 }
 
-virtual bool IsVisible()
+bool SceneEntityBase::IsVisible()
 {
 	return this.mIsVisible;
 }
 
-virtual void setClientDispose(bool isDispose)
+void SceneEntityBase::setClientDispose(bool isDispose)
 {
 	if (null != this.mRender)
 	{
@@ -131,7 +128,7 @@ virtual void setClientDispose(bool isDispose)
 	}
 }
 
-UnityEngine.GameObject getGameObject()
+UnityEngine.GameObject SceneEntityBase::getGameObject()
 {
 	if(null != this.mRender)
 	{
@@ -142,7 +139,7 @@ UnityEngine.GameObject getGameObject()
 }
 
 // 每一帧执行
-virtual void onTick(float delta, TickMode tickMode)
+void SceneEntityBase::onTick(float delta, TickMode tickMode)
 {
 	this._onPreTick(delta, tickMode);
 	this._onExecTick(delta, tickMode);
@@ -150,26 +147,24 @@ virtual void onTick(float delta, TickMode tickMode)
 	if(null != this.mRender) this.mRender.onTick(delta, tickMode);
 }
 
-protected:
 // Tick 第一阶段执行
-virtual void _onPreTick(float delta, TickMode tickMode)
+void SceneEntityBase::_onPreTick(float delta, TickMode tickMode)
 {
 
 }
 
-virtual void _onExecTick(float delta, TickMode tickMode)
+void SceneEntityBase::_onExecTick(float delta, TickMode tickMode)
 {
 
 }
 
 // Tick 第二阶段执行
-virtual void _onPostTick(float delta, TickMode tickMode)
+void SceneEntityBase::_onPostTick(float delta, TickMode tickMode)
 {
 
 }
 
-public:
-virtual GameObject gameObject()
+GameObject SceneEntityBase::gameObject()
 {
 	if (null != this.mRender)
 	{
@@ -179,7 +174,7 @@ virtual GameObject gameObject()
 	return null;
 }
 
-virtual void setGameObject(GameObject rhv)
+void SceneEntityBase::setGameObject(GameObject rhv)
 {
 	if (null != this.mRender)
 	{
@@ -187,7 +182,7 @@ virtual void setGameObject(GameObject rhv)
 	}
 }
 
-virtual void setPos(Vector3 pos)
+void SceneEntityBase::setPos(Vector3 pos)
 {
 	if (!UtilMath.isEqualVec3(this.mPos, pos) || this.mIsFirst)
 	{
@@ -213,7 +208,7 @@ virtual void setPos(Vector3 pos)
 	}
 }
 
-virtual void setRenderPos(Vector3 pos)
+void SceneEntityBase::setRenderPos(Vector3 pos)
 {
 	if (!UtilEngineWrap.isInFakePos(pos) && !UtilMath.isEqualVec3(this.mPos, pos))
 	{
@@ -226,18 +221,18 @@ virtual void setRenderPos(Vector3 pos)
 	}
 }
 
-UnityEngine.Vector3 getPos()
+UnityEngine.Vector3 SceneEntityBase::getPos()
 {
 	return this.mPos;
 }
 
 // 获取世界空间中的绝对位置
-virtual UnityEngine.Vector3 getFullPos()
+UnityEngine.Vector3 SceneEntityBase::getFullPos()
 {
 	return this.mPos;
 }
 
-virtual void setRotate(Quaternion rotation)
+void SceneEntityBase::setRotate(Quaternion rotation)
 {
 	if (!UtilMath.isEqualQuat(this.mRotate.getRotate(), rotation))
 	{
@@ -262,14 +257,14 @@ virtual void setRotate(Quaternion rotation)
 }
 
 // 这个是单位方向向量
-void setRotateNormalDir(UnityEngine.Vector3 normalDir)
+void SceneEntityBase::setRotateNormalDir(UnityEngine.Vector3 normalDir)
 {
 	UnityEngine.Quaternion quad = UtilMath.getRotateByOrient(normalDir);
 	this.setRotateEulerAngle(quad.eulerAngles);
 }
 
 // 这个是欧拉角
-void setRotateEulerAngle(UnityEngine.Vector3 rotation)
+void SceneEntityBase::setRotateEulerAngle(UnityEngine.Vector3 rotation)
 {
 	if (!UtilMath.isEqualVec3(this.mRotate.getRotateEulerAngle(), rotation))
 	{
@@ -307,29 +302,29 @@ void setRotateEulerAngle(UnityEngine.Vector3 rotation)
 }
 
 // 获取前向向量
-UnityEngine.Vector3 getForward()
+UnityEngine.Vector3 SceneEntityBase::getForward()
 {
 	UnityEngine.Vector3 forward = this.mRotate.getRotate() * UnityEngine.Vector3.forward;
 
 	return forward;
 }
 
-UnityEngine.Quaternion getRotate()
+UnityEngine.Quaternion SceneEntityBase::getRotate()
 {
 	return this.mRotate.getRotate();
 }
 
-UnityEngine.Vector3 getRotateEulerAngle()
+UnityEngine.Vector3 SceneEntityBase::getRotateEulerAngle()
 {
 	return this.mRotate.getRotateEulerAngle();
 }
 
-Vector3 getScale()
+Vector3 SceneEntityBase::getScale()
 {
 	return this.mScale;
 }
 
-virtual void setScale(UnityEngine.Vector3 value)
+virtual void SceneEntityBase::setScale(UnityEngine.Vector3 value)
 {
 	if (!UtilMath.isEqualVec3(this.mScale, value))
 	{
@@ -347,7 +342,7 @@ virtual void setScale(UnityEngine.Vector3 value)
 	}
 }
 
-void setSelfName(std::string name)
+void SceneEntityBase::setSelfName(std::string name)
 {
 	if (null != this.mRender)
 	{
@@ -357,23 +352,23 @@ void setSelfName(std::string name)
 }
 
 // 自动管理
-virtual void autoHandle()
+void SceneEntityBase::autoHandle()
 {
 
 }
 
 // 初始化渲染器
-virtual void initRender()
+void SceneEntityBase::initRender()
 {
 
 }
 
-virtual void loadRenderRes()
+void SceneEntityBase::loadRenderRes()
 {
 
 }
 
-EntityRenderBase* getRender()
+EntityRenderBase* SceneEntityBase::getRender()
 {
 	return this.mRender;
 }
