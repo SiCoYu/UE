@@ -17,6 +17,9 @@ AuxLoaderBase::AuxLoaderBase(std::string path)
 	this->mResLoadState = MY_NEW ResLoadState();
 	this->mResLoadPriority = ResLoadPriority::eRLP_Low_1000;
 
+	this->mResEventDispatch = nullptr;
+	this->mProgressEventDispatch = nullptr;
+
 	this->reset();
 }
 

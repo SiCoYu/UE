@@ -21,6 +21,11 @@ AuxMObjectLoaderBase::AuxMObjectLoaderBase(std::string path, bool isNeedInsPrefa
 
 	this->mIsSetInitOrientPos = false;
 	this->mIsSetFakePos = false;
+
+	this->mResInsEventDispatch = nullptr;
+	this->mSelfActor = nullptr;
+	this->mPrefabRes = nullptr;
+	this->mInsEventDispatch = nullptr;
 }
 
 void AuxMObjectLoaderBase::setIsInitOrientPos(bool isSet)
@@ -37,23 +42,23 @@ void AuxMObjectLoaderBase::dispose()
 {
 	if (this->mIsDestroySelf)
 	{
-		if (this->mSelfGo != nullptr)
+		if (this->mSelfActor != nullptr)
 		{
-			UtilSysLibWrap::DestroyImmediate(Cast<AActor>(this->mSelfGo));
+			UtilSysLibWrap::DestroyImmediate(Cast<AActor>(this->mSelfActor));
 		}
 	}
 
 	Super::dispose();
 }
 
-UObject* AuxMObjectLoaderBase::getSelfGo()
+UObject* AuxMObjectLoaderBase::getSelfActor()
 {
-	return this->mSelfGo;
+	return this->mSelfActor;
 }
 
-void AuxMObjectLoaderBase::setSelfGo(UObject* value)
+void AuxMObjectLoaderBase::setSelfActor(UObject* value)
 {
-	this->mSelfGo = value;
+	this->mSelfActor = value;
 }
 
 bool AuxMObjectLoaderBase::isDestroySelf()
@@ -175,11 +180,11 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
 				{
 					if (this->mIsSetFakePos)
 					{
-						this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
+						this->setSelfActor(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilSysLibWrap::FAKE_POS, UtilMath::UnitQuat));
 					}
 					else
 					{
-						this->setSelfGo(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
+						this->setSelfActor(this->mPrefabRes->InstantiateObject(this->mPrefabRes->getPrefabName(), this->mIsSetInitOrientPos, UtilMath::ZeroVec3, UtilMath::UnitQuat));
 					}
 
 					this->onAllFinish();
@@ -221,7 +226,7 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
 void AuxMObjectLoaderBase::onPrefabIns(IDispatchObject* dispObj)
 {
 	this->mResInsEventDispatch = (ResInsEventDispatch*)dispObj;
-	this->setSelfGo(this->mResInsEventDispatch->getInsActor());
+	this->setSelfActor(this->mResInsEventDispatch->getInsActor());
 	this->onAllFinish();
 }
 
@@ -230,7 +235,7 @@ void AuxMObjectLoaderBase::onAllFinish()
 {
 	if (this->mIsNeedInsPrefab)
 	{
-		if (this->mSelfGo != nullptr)
+		if (this->mSelfActor != nullptr)
 		{
 			this->mResLoadState->setSuccessLoaded();
 		}
@@ -289,7 +294,7 @@ void AuxMObjectLoaderBase::unload()
 
 UObject* AuxMObjectLoaderBase::getGameObject()
 {
-	return this->mSelfGo;
+	return this->mSelfActor;
 }
 
 // 获取预制模板
@@ -352,7 +357,7 @@ UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle
 	{
 		if (this->mIsSetFakePos)
 		{
-			this->setSelfGo(
+			this->setSelfActor(
 				this->mPrefabRes->InstantiateObject(
 					this->mPrefabRes->getPrefabName(), 
 					this->mIsSetInitOrientPos, 
@@ -363,7 +368,7 @@ UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle
 		}
 		else
 		{
-			this->setSelfGo(
+			this->setSelfActor(
 				this->mPrefabRes->InstantiateObject(
 					this->mPrefabRes->getPrefabName(), 
 					this->mIsSetInitOrientPos, 
@@ -376,14 +381,14 @@ UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle
 		this->onInstantiateObjectFinish();
 	}
 
-	return this->mSelfGo;
+	return this->mSelfActor;
 }
 
 void AuxMObjectLoaderBase::onInstantiateObjectFinish(IDispatchObject* dispObj)
 {
 	if (nullptr != dispObj)
 	{
-		this->setSelfGo(this->mResInsEventDispatch->getInsActor());
+		this->setSelfActor(this->mResInsEventDispatch->getInsActor());
 	}
 
 	if (nullptr != this->mInsEventDispatch)

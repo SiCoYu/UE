@@ -16,7 +16,11 @@ class AuxMClassLoader : public AuxMObjectLoaderBase
 	M_DECLARE_CLASS(AuxMClassLoader, AuxMObjectLoaderBase)
 
 public:
-	AuxMClassLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
+	AuxMClassLoader(
+		std::string path = "", 
+		bool isNeedInsPrefab = true, 
+		bool isInsNeedCoroutine = true
+	);
 };
 
 MY_END_NAMESPACE

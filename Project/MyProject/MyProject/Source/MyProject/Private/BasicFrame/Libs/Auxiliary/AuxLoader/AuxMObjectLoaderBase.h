@@ -24,7 +24,7 @@ class AuxMObjectLoaderBase : public AuxLoaderBase
 	M_DECLARE_CLASS(AuxMObjectLoaderBase, AuxLoaderBase)
 
 protected:
-	UObject* mSelfGo;                       // 加载的 GameObject
+	UObject* mSelfActor;                       // 加载的 GameObject
 	ObjectAssetInsResBase* mPrefabRes;                     // 预制资源
     ResInsEventDispatch* mResInsEventDispatch; // 实例化的时候使用的分发器
     bool mIsInsNeedCoroutine; // 实例化是否需要协程
@@ -43,8 +43,8 @@ public:
 
 	virtual void dispose() override;
 
-	UObject* getSelfGo();
-	void setSelfGo(UObject* value);
+	UObject* getSelfActor();
+	void setSelfActor(UObject* value);
 	bool isDestroySelf();
 	void setDestroySelf(bool value);
 	virtual std::string getOrigPath() override;
