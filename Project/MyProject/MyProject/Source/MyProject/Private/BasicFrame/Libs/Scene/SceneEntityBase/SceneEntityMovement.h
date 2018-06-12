@@ -1,36 +1,40 @@
-﻿namespace SDK.Lib
+﻿#pragma once
+
+#include "GObject.h"
+#include "IDispatchObject.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+/**
+ * @brief 移动类型
+ */
+class SceneEntityMovement : GObject, IDispatchObject
 {
-    /**
-     * @brief 移动类型
-     */
-    public class SceneEntityMovement : GObject, IDispatchObject
-    {
-        protected SceneEntityBase mEntity;          // 关联的实体
+protected:
+	SceneEntityBase* mEntity;          // 关联的实体
 
-        public SceneEntityMovement(SceneEntityBase entity)
-        {
-            mTypeId = "SceneEntityMovement";
-            this.mEntity = entity;
-        }
+public:
+	SceneEntityMovement(SceneEntityBase entity)
+	{
+		mTypeId = "SceneEntityMovement";
+		this.mEntity = entity;
+	}
 
-        virtual public void init()
-        {
+	virtual void init()
+	{
 
-        }
+	}
 
-        virtual public void dispose()
-        {
-            this.mEntity = null;
-        }
+	virtual void dispose()
+	{
+		this.mEntity = null;
+	}
 
-        virtual public void onPutInPool()
-        {
-            
-        }
+	virtual void onTick(float delta, TickMode tickMode)
+	{
 
-        virtual public void onTick(float delta, TickMode tickMode)
-        {
-
-        }
-    }
+	}
 }
+
+MY_END_NAMESPACE

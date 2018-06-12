@@ -251,18 +251,18 @@ struct TCallTraitsParamTypeHelper<T*, true>
 -----------------------------------------------------------------------------*/
 
 /**
- * TRemoveConst<> is modeled after boost's implementation.  It allows you to take a templatized type
+ * MyTRemoveConst<> is modeled after boost's implementation.  It allows you to take a templatized type
  * such as 'const Foo*' and use const_cast to convert that type to 'Foo*' without knowing about Foo.
  *
  *		MutablePtr = const_cast< RemoveConst< ConstPtrType >::Type >( ConstPtr );
  */
 template< class T >
-struct TRemoveConst
+struct MyTRemoveConst
 {
 	typedef T Type;
 };
 template< class T >
-struct TRemoveConst<const T>
+struct MyTRemoveConst<const T>
 {
 	typedef T Type;
 };	

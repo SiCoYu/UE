@@ -20,14 +20,14 @@ set UE4_BUILD_CONFIGURATION="Debug"
 ::Android environment variable
 ::Engine\Source\Programs\UnrealBuildTool\Android\UEBuildAndroid.cs
 ::When set environment variable, must restart visual studios
-::set ANDROID_HOME=D:\ProgramFiles\Android\sdk
-set ANDROID_HOME=D:\ProgramFiles\NVPACK\android-sdk-windows
-::set NDKROOT=D:\ProgramFiles\Android\android-ndk-r14b
-set NDKROOT=D:\ProgramFiles\NVPACK\android-ndk-r12b
-::set ANT_HOME=G:\ProgramFiles\apache-ant-1.9.7
-set ANT_HOME=D:\ProgramFiles\NVPACK\apache-ant-1.8.2
-::set JAVA_HOME=D:\ProgramFiles\Java\jdk1.8.0_31
-set JAVA_HOME=D:\ProgramFiles\NVPACK\jdk1.8.0_77
+set ANDROID_HOME=F:\ProgramFiles\NVPACK\android-sdk-windows
+::set ANDROID_HOME=D:\ProgramFiles\NVPACK\android-sdk-windows
+set NDKROOT=F:\ProgramFiles\NVPACK\android-ndk-r12b
+::set NDKROOT=D:\ProgramFiles\NVPACK\android-ndk-r12b
+set ANT_HOME=F:\ProgramFiles\NVPACK\apache-ant-1.8.2
+::set ANT_HOME=D:\ProgramFiles\NVPACK\apache-ant-1.8.2
+set JAVA_HOME=F:\ProgramFiles\NVPACK\jdk1.8.0_77
+::set JAVA_HOME=D:\ProgramFiles\NVPACK\jdk1.8.0_77
 
 ::UE4 environment variable
 ::Engine\Source\Programs\AutomationTool\AutomationUtils\Utils.cs
@@ -35,8 +35,8 @@ set JAVA_HOME=D:\ProgramFiles\NVPACK\jdk1.8.0_77
 ::Engine\Source\Programs\AutomationTool\AutomationUtils\Automation.cs
 ::set uebp_LOCAL_ROOT=1
 
-set UE4_CODE_ROOT_PATH="H:\Self\Self\unreal\UnrealEngine-git\UnrealEngine"
-::set UE4_CODE_ROOT_PATH="F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git"
+::set UE4_CODE_ROOT_PATH="H:\Self\Self\unreal\UnrealEngine-git\UnrealEngine"
+set UE4_CODE_ROOT_PATH="F:\File\opensource\UnrealEngine-4.0\UnrealEngine-git"
 ::set UE4_CODE_ROOT_PATH="D:\ProgramFiles\Epic Games\UE_4.16"
 echo "UE4_CODE_ROOT_PATH="%UE4_CODE_ROOT_PATH%
 
