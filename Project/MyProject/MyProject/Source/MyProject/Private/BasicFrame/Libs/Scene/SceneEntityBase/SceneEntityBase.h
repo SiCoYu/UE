@@ -9,6 +9,7 @@
 #include "Math/Quat.h"				// FQuat
 #include "Math/Rotator.h"			// FRotator
 #include "GameFramework/Actor.h"	// AActor
+#include "MWrapQuaternion.h"	// AActor
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -28,7 +29,7 @@ protected:
 	EntityRenderBase* mRender;
 
 	FVector mPos;			// 当前位置信息
-	FQuat mRotate;			// 当前方向信息
+	MWrapQuaternion mRotate;			// 当前方向信息
 	FVector mScale;			// 当前缩放信息
 
 	bool mIsVisible;          // 是否可见，数据是否可见

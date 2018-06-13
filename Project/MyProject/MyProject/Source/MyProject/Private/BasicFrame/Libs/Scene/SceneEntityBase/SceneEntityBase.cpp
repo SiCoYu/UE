@@ -1,10 +1,12 @@
 ﻿#include "MyProject.h"
 #include "SceneEntityBase.h"
+#include "UtilMath.h"
+#include "UtilEngineWrap.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(EntityMgrBase, DelayPriorityHandleMgrBase)
+M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityBase, DelayPriorityHandleMgrBase)
 
 SceneEntityBase::SceneEntityBase()
 {
@@ -67,23 +69,21 @@ void SceneEntityBase::onDestroy()
 // 缓存回收
 void SceneEntityBase::onPutInPool()
 {
-	this->mIsInPoolOrDispose = true;
-
-	if (nullptr != this->mRender)
+	/*if (nullptr != this->mRender)
 	{
 		this->mRender.putInPool();
 	}
 
-	this->mRotate.clear();
+	this->mRotate.clear();*/
 }
 
 void SceneEntityBase::onGetFromPool()
 {
-	this->mPos = UtilMath.ZeroVec3;
-	this->mRotate.setRotateXYZW(0, 0, 0, 1);
-	this->mScale = FVector.one;
+	//this->mPos = UtilMath.ZeroVec3;
+	//this->mRotate.setRotateXYZW(0, 0, 0, 1);
+	//this->mScale = UtilMath::OneVec3;
 
-	this->mIsVisible = false;        // 当前逻辑是否可见
+	//this->mIsVisible = false;        // 当前逻辑是否可见
 }
 
 void SceneEntityBase::show()
@@ -91,11 +91,10 @@ void SceneEntityBase::show()
 	if (!this->mIsVisible)
 	{
 		this->mIsVisible = true;
-		//this->mIsInScreenRange = true;   // 显示不一定在 Screen 可见
 
 		if (nullptr != this->mRender)
 		{
-			this->mRender.show();
+			this->mRender->show();
 		}
 
 		this->onClipShow();
@@ -107,14 +106,11 @@ void SceneEntityBase::hide()
 	if (this->mIsVisible)
 	{
 		this->mIsVisible = false;
-		this->mIsClipVisible = false;  // 逻辑隐藏，直接设定不在屏幕范围内
 
 		if (nullptr != this->mRender)
 		{
-			this->mRender.hide();
+			this->mRender->hide();
 		}
-
-		this->onClipHide();
 	}
 }
 
@@ -127,7 +123,7 @@ void SceneEntityBase::setClientDispose(bool isDispose)
 {
 	if (nullptr != this->mRender)
 	{
-		this->mRender.setClientDispose(isDispose);
+		this->mRender->setClientDispose(isDispose);
 	}
 }
 
@@ -135,7 +131,7 @@ AActor* SceneEntityBase::getActor()
 {
 	if(nullptr != this->mRender)
 	{
-		return this->mRender.getSelfActor();
+		return this->mRender->getSelfActor();
 	}
 
 	return nullptr;
@@ -147,7 +143,11 @@ void SceneEntityBase::onTick(float delta, TickMode tickMode)
 	this->_onPreTick(delta, tickMode);
 	this->_onExecTick(delta, tickMode);
 	this->_onPostTick(delta, tickMode);
-	if(nullptr != this->mRender) this->mRender.onTick(delta, tickMode);
+
+	if (nullptr != this->mRender)
+	{
+		this->mRender->onTick(delta, tickMode);
+	}
 }
 
 // Tick 第一阶段执行
@@ -176,7 +176,7 @@ AActor* SceneEntityBase::gameObject()
 {
 	if (nullptr != this->mRender)
 	{
-		return this->mRender.getSelfActor();
+		return this->mRender->getSelfActor();
 	}
 
 	return nullptr;
@@ -186,46 +186,28 @@ void SceneEntityBase::setGameObject(AActor* rhv)
 {
 	if (nullptr != this->mRender)
 	{
-		this->mRender.setSelfActor(rhv);
+		this->mRender->setSelfActor(rhv);
 	}
 }
 
 void SceneEntityBase::setPos(FVector pos)
 {
-	if (!UtilMath.isEqualVec3(this->mPos, pos) || this->mIsFirst)
+	if (!UtilMath::isEqualVec3(this->mPos, pos))
 	{
-		this->mIsFirst = false;
-		pos = Ctx.msInstance.mSceneSys.adjustPosInRange(this, pos);
-
 		this->mPos = pos;
 
 		if (nullptr != this->mRender)
 		{
-			this->mRender.setPos(pos);
-		}
-
-		if (MacroDef.ENABLE_SCENE2D_CLIP)
-		{
-			this->updateClip();
-		}
-
-		if (MacroDef.ENABLE_LOG)
-		{
-			Ctx.msInstance.mLogSys.log(string.Format("BeingEntity::setPos, BasicInfo is {0}, X = {1}, Y = {2}, Z = {3}", this->getBasicInfoStr(), this->mPos.x, this->mPos.y, this->mPos.z), LogTypeId.eLogBeingMove);
+			this->mRender->setPos(pos);
 		}
 	}
 }
 
 void SceneEntityBase::setRenderPos(FVector pos)
 {
-	if (!UtilEngineWrap::isInFakePos(pos) && !UtilMath.isEqualVec3(this->mPos, pos))
+	if (!UtilEngineWrap::isInFakePos(pos) && !UtilMath::isEqualVec3(this->mPos, pos))
 	{
 		this->mPos = pos;
-
-		if (MacroDef.ENABLE_LOG)
-		{
-			Ctx.msInstance.mLogSys.log(string.Format("BeingEntity::setRenderPos, BasicInfo is {0}, mPosX = {1}, mPosY = {2}, mPosZ = {3}", this->getBasicInfoStr(), this->mPos.x, this->mPos.y, this->mPos.z), LogTypeId.eLogBeingMove);
-		}
 	}
 }
 
@@ -242,24 +224,13 @@ FVector SceneEntityBase::getFullPos()
 
 void SceneEntityBase::setRotate(FQuat rotation)
 {
-	if (!UtilMath.isEqualQuat(this->mRotate.getRotate(), rotation))
+	if (!UtilMath::isEqualQuat(this->mRotate, rotation))
 	{
-		this->mRotate.setRotation(rotation);
+		this->mRotate =rotation;
 
-		// Player 是不更新转换的, FlyBulletFlock 也是不更新的
-		if (EntityType.eFlyBulletFlock != this->mEntityType &&
-			EntityType.ePlayerMain != this->getEntityType() &&
-			EntityType.ePlayerOther != this->getEntityType())
+		if (nullptr != this->mRender)
 		{
-			if (nullptr != this->mRender)
-			{
-				this->mRender.setRotate(rotation);
-			}
-		}
-
-		if (MacroDef.ENABLE_LOG)
-		{
-			Ctx.msInstance.mLogSys.log(string.Format("BeingEntity::setRotation, BasicInfo is {0}, X = {1}, Y = {2}, Z = {3}, W = {4}", this->getBasicInfoStr(), this->mRotate.getX(), this->mRotate.getY(), this->mRotate.getZ(), this->mRotate.getW()), LogTypeId.eLogBeingMove);
+			this->mRender->setRotate(rotation);
 		}
 	}
 }
@@ -276,35 +247,11 @@ void SceneEntityBase::setRotateEulerAngle(FVector rotation)
 {
 	if (!UtilMath.isEqualVec3(this->mRotate.getRotateEulerAngle(), rotation))
 	{
-		// 只能绕 Y 轴旋转
-		if (MacroDef.XZ_MODE)
-		{
-			rotation.x = 0;
-			rotation.z = 0;
-		}
-		else if (MacroDef.XY_MODE)
-		{
-			// 只能绕 Z 轴旋转
-			rotation.x = 0;
-			rotation.y = 0;
-		}
-
 		this->mRotate.setRotateEulerAngle(rotation);
 
-		// Player 是不更新转换的
-		if (EntityType.ePlayerMain != this->getEntityType() &&
-			EntityType.ePlayerOther != this->getEntityType() &&
-			EntityType.eFlyBulletFlock != this->getEntityType())
+		if (nullptr != this->mRender)
 		{
-			if (nullptr != this->mRender)
-			{
-				this->mRender.setRotate(this->mRotate.getRotate());
-			}
-		}
-
-		if (MacroDef.ENABLE_LOG)
-		{
-			Ctx.msInstance.mLogSys.log(string.Format("BeingEntity::setRotateEulerAngle, BasicInfo is {0}, X = {1}, Y = {2}, Z = {3}, W = {4}", this->getBasicInfoStr(), this->mRotate.getX(), this->mRotate.getY(), this->mRotate.getZ(), this->mRotate.getW()), LogTypeId.eLogBeingMove);
+			this->mRender->setRotate(this->mRotate->getRotate());
 		}
 	}
 }
@@ -312,19 +259,19 @@ void SceneEntityBase::setRotateEulerAngle(FVector rotation)
 // 获取前向向量
 FVector SceneEntityBase::getForward()
 {
-	FVector forward = this->mRotate.getRotate() * FVector.forward;
+	FVector forward = this->mRotate->getRotate() * FVector.forward;
 
 	return forward;
 }
 
 FQuat SceneEntityBase::getRotate()
 {
-	return this->mRotate.getRotate();
+	return this->mRotate->getRotate();
 }
 
 FVector SceneEntityBase::getRotateEulerAngle()
 {
-	return this->mRotate.getRotateEulerAngle();
+	return this->mRotate->getRotateEulerAngle();
 }
 
 FVector SceneEntityBase::getScale()
@@ -332,20 +279,15 @@ FVector SceneEntityBase::getScale()
 	return this->mScale;
 }
 
-virtual void SceneEntityBase::setScale(FVector value)
+void SceneEntityBase::setScale(FVector value)
 {
-	if (!UtilMath.isEqualVec3(this->mScale, value))
+	if (!UtilMath::isEqualVec3(this->mScale, value))
 	{
 		this->mScale = value;
 
 		if (nullptr != this->mRender)
 		{
-			this->mRender.setScale(this->mScale);
-		}
-
-		if (MacroDef.ENABLE_LOG)
-		{
-			Ctx.msInstance.mLogSys.log(string.Format("BeingEntity::setScale, BasicInfo is {0}, X = {1}, Y = {2}, Z = {3}", this->getBasicInfoStr(), this->mScale.x, this->mScale.y, this->mScale.z), LogTypeId.eLogBeingMove);
+			this->mRender->setScale(this->mScale);
 		}
 	}
 }
@@ -354,8 +296,7 @@ void SceneEntityBase::setSelfName(std::string name)
 {
 	if (nullptr != this->mRender)
 	{
-		if (!MacroDef.MOBILE_PLATFORM)
-			this->mRender.setSelfName(name);
+		this->mRender->setSelfName(name);
 	}
 }
 

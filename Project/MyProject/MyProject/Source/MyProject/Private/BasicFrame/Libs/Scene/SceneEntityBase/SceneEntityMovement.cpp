@@ -8,8 +8,6 @@ M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
 
 SceneEntityMovement::SceneEntityMovement(SceneEntityBase* entity)
 {
-	this->mTypeId = "SceneEntityMovement";
-
 	this->mEntity = entity;
 }
 
