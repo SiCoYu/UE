@@ -9,6 +9,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class SceneEntityBase;
+
 /**
  * @brief 移动类型
  */
@@ -18,7 +20,8 @@ protected:
 	SceneEntityBase* mEntity;          // 关联的实体
 
 public:
-	SceneEntityMovement(SceneEntityBase entity);
+	SceneEntityMovement(SceneEntityBase* entity);
+
 	virtual void init();
 	virtual void dispose();
 	virtual void onTick(float delta, TickMode tickMode);

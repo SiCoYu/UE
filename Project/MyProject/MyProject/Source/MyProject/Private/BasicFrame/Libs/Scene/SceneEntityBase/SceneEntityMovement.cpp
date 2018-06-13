@@ -4,11 +4,12 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(EntityMgrBase, DelayPriorityHandleMgrBase)
+M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
 
-SceneEntityMovement::SceneEntityMovement(SceneEntityBase entity)
+SceneEntityMovement::SceneEntityMovement(SceneEntityBase* entity)
 {
-	mTypeId = "SceneEntityMovement";
+	this->mTypeId = "SceneEntityMovement";
+
 	this->mEntity = entity;
 }
 

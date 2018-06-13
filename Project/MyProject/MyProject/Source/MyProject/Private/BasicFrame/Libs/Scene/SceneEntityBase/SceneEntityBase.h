@@ -18,8 +18,6 @@ public class SceneEntityBase : GObject, IDispatchObject, ITickedObject, INoOrPri
 {
 protected:
 	EntityRenderBase* mRender;
-	EntityType mEntityType;   // Entity 类型
-	string mEntityUniqueId;   // Entity 唯一 Id
 
 	UnityEngine.Vector3 mPos;         // 当前位置信息
 	MWrapQuaternion mRotate;   // 当前方向信息
