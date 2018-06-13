@@ -81,7 +81,7 @@ void SceneEntityBase::onGetFromPool()
 {
 	this->mPos = UtilMath.ZeroVec3;
 	this->mRotate.setRotateXYZW(0, 0, 0, 1);
-	this->mScale = Vector3.one;
+	this->mScale = FVector.one;
 
 	this->mIsVisible = false;        // 当前逻辑是否可见
 }
@@ -131,7 +131,7 @@ void SceneEntityBase::setClientDispose(bool isDispose)
 	}
 }
 
-UnityEngine.GameObject SceneEntityBase::getGameObject()
+UnityEngine.GameObject SceneEntityBase::getActor()
 {
 	if(nullptr != this->mRender)
 	{
@@ -190,7 +190,7 @@ void SceneEntityBase::setGameObject(GameObject rhv)
 	}
 }
 
-void SceneEntityBase::setPos(Vector3 pos)
+void SceneEntityBase::setPos(FVector pos)
 {
 	if (!UtilMath.isEqualVec3(this->mPos, pos) || this->mIsFirst)
 	{
@@ -216,7 +216,7 @@ void SceneEntityBase::setPos(Vector3 pos)
 	}
 }
 
-void SceneEntityBase::setRenderPos(Vector3 pos)
+void SceneEntityBase::setRenderPos(FVector pos)
 {
 	if (!UtilEngineWrap.isInFakePos(pos) && !UtilMath.isEqualVec3(this->mPos, pos))
 	{
@@ -229,18 +229,18 @@ void SceneEntityBase::setRenderPos(Vector3 pos)
 	}
 }
 
-UnityEngine.Vector3 SceneEntityBase::getPos()
+FVector SceneEntityBase::getPos()
 {
 	return this->mPos;
 }
 
 // 获取世界空间中的绝对位置
-UnityEngine.Vector3 SceneEntityBase::getFullPos()
+FVector SceneEntityBase::getFullPos()
 {
 	return this->mPos;
 }
 
-void SceneEntityBase::setRotate(Quaternion rotation)
+void SceneEntityBase::setRotate(FQuat rotation)
 {
 	if (!UtilMath.isEqualQuat(this->mRotate.getRotate(), rotation))
 	{
@@ -265,14 +265,14 @@ void SceneEntityBase::setRotate(Quaternion rotation)
 }
 
 // 这个是单位方向向量
-void SceneEntityBase::setRotateNormalDir(UnityEngine.Vector3 normalDir)
+void SceneEntityBase::setRotateNormalDir(FVector normalDir)
 {
-	UnityEngine.Quaternion quad = UtilMath.getRotateByOrient(normalDir);
+	FQuat quad = UtilMath.getRotateByOrient(normalDir);
 	this->setRotateEulerAngle(quad.eulerAngles);
 }
 
 // 这个是欧拉角
-void SceneEntityBase::setRotateEulerAngle(UnityEngine.Vector3 rotation)
+void SceneEntityBase::setRotateEulerAngle(FVector rotation)
 {
 	if (!UtilMath.isEqualVec3(this->mRotate.getRotateEulerAngle(), rotation))
 	{
@@ -310,29 +310,29 @@ void SceneEntityBase::setRotateEulerAngle(UnityEngine.Vector3 rotation)
 }
 
 // 获取前向向量
-UnityEngine.Vector3 SceneEntityBase::getForward()
+FVector SceneEntityBase::getForward()
 {
-	UnityEngine.Vector3 forward = this->mRotate.getRotate() * UnityEngine.Vector3.forward;
+	FVector forward = this->mRotate.getRotate() * FVector.forward;
 
 	return forward;
 }
 
-UnityEngine.Quaternion SceneEntityBase::getRotate()
+FQuat SceneEntityBase::getRotate()
 {
 	return this->mRotate.getRotate();
 }
 
-UnityEngine.Vector3 SceneEntityBase::getRotateEulerAngle()
+FVector SceneEntityBase::getRotateEulerAngle()
 {
 	return this->mRotate.getRotateEulerAngle();
 }
 
-Vector3 SceneEntityBase::getScale()
+FVector SceneEntityBase::getScale()
 {
 	return this->mScale;
 }
 
-virtual void SceneEntityBase::setScale(UnityEngine.Vector3 value)
+virtual void SceneEntityBase::setScale(FVector value)
 {
 	if (!UtilMath.isEqualVec3(this->mScale, value))
 	{

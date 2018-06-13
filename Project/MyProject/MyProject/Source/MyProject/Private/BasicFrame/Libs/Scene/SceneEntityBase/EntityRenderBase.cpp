@@ -79,7 +79,7 @@ bool EntityRenderBase::isValid()
 	return nullptr != this->mSelfActor;
 }
 
-UnityEngine.Vector3 EntityRenderBase::getPos()
+FVector EntityRenderBase::getPos()
 {
 	if(this->isValid())
 	{

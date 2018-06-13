@@ -5,11 +5,17 @@
 #include "IDispatchObject.h"
 #include "ITickedObject.h"
 #include "INoOrPriorityObject.h"
+#include "Math/Vector.h"			// FVector
+#include "Math/Quat.h"				// FQuat
+#include "Math/Rotator.h"			// FRotator
+#include "GameFramework/Actor.h"	// AActor
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+class EntityRenderBase;
 
 /**
  * @brief 场景中的实体，定义接口，逻辑相关的一些实现放在 BeingEntity 里面，例如: 地形， Player， Npc
@@ -19,9 +25,9 @@ class SceneEntityBase : public GObject, public IDispatchObject, public ITickedOb
 protected:
 	EntityRenderBase* mRender;
 
-	UnityEngine.Vector3 mPos;         // 当前位置信息
-	MWrapQuaternion mRotate;   // 当前方向信息
-	UnityEngine.Vector3 mScale;       // 当前缩放信息
+	FVector mPos;			// 当前位置信息
+	FQuat mRotate;			// 当前方向信息
+	FVector mScale;			// 当前缩放信息
 
 	bool mIsVisible;          // 是否可见，数据是否可见
 	uint mThisId;             // 唯一 Id
@@ -49,7 +55,7 @@ public:
 	virtual void hide();
 	virtual bool IsVisible();
 	virtual void setClientDispose(bool isDispose);
-	UnityEngine.GameObject getGameObject();
+	AActor* getActor();
 	// 每一帧执行
 	virtual void onTick(float delta, TickMode tickMode);
 	
@@ -62,24 +68,24 @@ protected:
 	
 public:
 	uint getThisId();
-	virtual GameObject gameObject();
-	virtual void setGameObject(GameObject rhv);
-	virtual void setPos(Vector3 pos);
-	virtual void setRenderPos(Vector3 pos);
-	UnityEngine.Vector3 getPos();
+	virtual AActor* gameObject();
+	virtual void setGameObject(AActor* rhv);
+	virtual void setPos(FVector pos);
+	virtual void setRenderPos(FVector pos);
+	FVector getPos();
 	// 获取世界空间中的绝对位置
-	virtual UnityEngine.Vector3 getFullPos();
-	virtual void setRotate(Quaternion rotation);
+	virtual FVector getFullPos();
+	virtual void setRotate(FQuat rotation);
 	// 这个是单位方向向量
-	void setRotateNormalDir(UnityEngine.Vector3 normalDir);
+	void setRotateNormalDir(FVector normalDir);
 	// 这个是欧拉角
-	void setRotateEulerAngle(UnityEngine.Vector3 rotation);
+	void setRotateEulerAngle(FVector rotation);
 	// 获取前向向量
-	UnityEngine.Vector3 getForward();
-	UnityEngine.Quaternion getRotate();
-	UnityEngine.Vector3 getRotateEulerAngle();
-	Vector3 getScale();
-	virtual void setScale(UnityEngine.Vector3 value);
+	FVector getForward();
+	FQuat getRotate();
+	FVector getRotateEulerAngle();
+	FVector getScale();
+	virtual void setScale(FVector value);
 	void setSelfName(std::string name);
 	// 自动管理
 	virtual void autoHandle();

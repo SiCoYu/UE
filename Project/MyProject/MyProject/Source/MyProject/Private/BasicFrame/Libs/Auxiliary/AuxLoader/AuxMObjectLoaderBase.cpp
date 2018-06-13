@@ -292,7 +292,7 @@ void AuxMObjectLoaderBase::unload()
 	Super::unload();
 }
 
-UObject* AuxMObjectLoaderBase::getGameObject()
+UObject* AuxMObjectLoaderBase::getActor()
 {
 	return this->mSelfActor;
 }

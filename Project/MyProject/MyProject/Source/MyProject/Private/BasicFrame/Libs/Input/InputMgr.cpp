@@ -274,7 +274,7 @@ bool InputMgr::Raycast(FVector inPos)
 
 	//	// Convert to view space
 	//	currentCamera = cam.cachedCamera;
-	//	Vector3 pos = currentCamera.ScreenToViewportPoint(inPos);
+	//	FVector pos = currentCamera.ScreenToViewportPoint(inPos);
 	//	if (float.IsNaN(pos.x) || float.IsNaN(pos.y)) continue;
 
 	//	// If it's outside the camera's viewport, do nothing

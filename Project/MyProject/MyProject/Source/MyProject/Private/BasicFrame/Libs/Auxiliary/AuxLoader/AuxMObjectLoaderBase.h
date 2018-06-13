@@ -65,7 +65,7 @@ public:
     // 所有的资源都加载完成
 	void onAllFinish();
 	virtual void unload() override;
-	UObject* getGameObject();
+	UObject* getActor();
 
     // 获取预制模板
 	UObject* getPrefabTmpl();

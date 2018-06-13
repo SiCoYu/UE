@@ -6,7 +6,9 @@
 //#include "ICUUtilities.h"
 
 #include "UObject/Object.h" // UObject : public UObjectBaseUtility
-#include "Math/Vector.h"	// FVector
+#include "Math/Vector.h"	// FVector,向量
+#include "Math/Quat.h"		// FQuat,四元数
+#include "Math/Rotator.h"	// FRotator,欧拉角
 #include "GameFramework/Actor.h"	// AActor
 #include "Components/StaticMeshComponent.h"		// UStaticMeshComponent
 #include "GenericPlatform/GenericPlatformMath.h"	// Max

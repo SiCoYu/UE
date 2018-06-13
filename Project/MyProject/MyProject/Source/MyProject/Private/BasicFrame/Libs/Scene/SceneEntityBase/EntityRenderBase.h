@@ -93,7 +93,7 @@ public:
 		return nullptr != this->mSelfActor;
 	}
 
-	UnityEngine.Vector3 getPos()
+	FVector getPos()
 	{
 		if(this->isValid())
 		{
