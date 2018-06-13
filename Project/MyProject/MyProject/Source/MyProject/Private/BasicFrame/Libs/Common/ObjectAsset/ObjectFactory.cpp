@@ -26,7 +26,7 @@ GObject* ObjectFactory::createObject(
 	AssetUniqueId assetUniqueId
 )
 {
-	var ret = nullptr;
+	GObject* ret = nullptr;
 	return ret;
 }
 

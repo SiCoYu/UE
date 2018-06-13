@@ -131,7 +131,7 @@ void SceneEntityBase::setClientDispose(bool isDispose)
 	}
 }
 
-UnityEngine.GameObject SceneEntityBase::getActor()
+AActor* SceneEntityBase::getActor()
 {
 	if(nullptr != this->mRender)
 	{

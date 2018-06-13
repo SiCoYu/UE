@@ -22,6 +22,8 @@ class EntityRenderBase;
  */
 class SceneEntityBase : public GObject, public IDispatchObject, public ITickedObject, public INoOrPriorityObject
 {
+	M_DECLARE_CLASS(SceneEntityBase, GObject)
+
 protected:
 	EntityRenderBase* mRender;
 

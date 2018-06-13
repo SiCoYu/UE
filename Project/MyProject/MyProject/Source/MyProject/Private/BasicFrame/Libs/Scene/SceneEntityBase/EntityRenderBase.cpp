@@ -42,7 +42,7 @@ void EntityRenderBase::onInit()
 // 销毁流程
 void EntityRenderBase::dispose()
 {
-	base.dispose();
+	Super::dispose();
 }
 
 // 资源释放事件，仅仅是释放基本的资源，不修改销毁流程
@@ -50,7 +50,7 @@ void EntityRenderBase::onDestroy()
 {
 	this->mEntity = nullptr;
 
-	base.onDestroy();
+	Super::onDestroy();
 }
 
 bool EntityRenderBase::checkRender()
@@ -93,7 +93,7 @@ FVector EntityRenderBase::getPos()
 void EntityRenderBase::_onSelfChanged() override
 {
 	// 一定要先查找组件
-	base._onSelfChanged();
+	Super::_onSelfChanged();
 
 	// 设置可视化
 	if (this->mEntity.IsVisible())

@@ -17,6 +17,8 @@ class SceneEntityBase;
  */
 class EntityRenderBase : public AuxComponent
 {
+	M_DECLARE_CLASS(EntityRenderBase, AuxComponent)
+
 protected:
 	SceneEntityBase* mEntity;  // Entity 数据
 
@@ -56,7 +58,7 @@ public:
 	// 销毁流程
 	override void dispose()
 	{
-		base.dispose();
+		Super::dispose();
 	}
 
 	// 资源释放事件，仅仅是释放基本的资源，不修改销毁流程
@@ -64,7 +66,7 @@ public:
 	{
 		this->mEntity = nullptr;
 
-		base.onDestroy();
+		Super::onDestroy();
 	}
 
 	virtual bool checkRender()
@@ -107,7 +109,7 @@ public:
 	virtual void _onSelfChanged() override
 	{
 		// 一定要先查找组件
-		base._onSelfChanged();
+		Super::_onSelfChanged();
 
 		// 设置可视化
 		if (this->mEntity.IsVisible())

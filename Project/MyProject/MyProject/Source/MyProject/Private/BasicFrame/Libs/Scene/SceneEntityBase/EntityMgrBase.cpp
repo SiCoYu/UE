@@ -49,7 +49,7 @@ void EntityMgrBase::_addObject(IDelayHandleItem* entity, float priority)
 {
 	if (this->_isInDepth())
 	{
-		base._addObject(entity);
+		Super::_addObject(entity);
 	}
 	else
 	{
@@ -64,7 +64,7 @@ void EntityMgrBase::_removeObject(IDelayHandleItem* entity)
 {
 	if (this->_isInDepth())
 	{
-		base._removeObject(entity);
+		Super::_removeObject(entity);
 	}
 	else
 	{
