@@ -10,7 +10,7 @@ M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityBase, DelayPriorityHandleMgrBase)
 
 SceneEntityBase::SceneEntityBase()
 {
-	this->mRotate = new MWrapQuaternion(0, 0, 0, 1);
+	this->mRotate = MWrapQuaternion(0, 0, 0, 1);
 	this->mRender = nullptr;
 }
 
@@ -226,7 +226,7 @@ void SceneEntityBase::setRotate(FQuat rotation)
 {
 	if (!UtilMath::isEqualQuat(this->mRotate, rotation))
 	{
-		this->mRotate =rotation;
+		this->mRotate.setRotation(rotation);
 
 		if (nullptr != this->mRender)
 		{
@@ -238,8 +238,8 @@ void SceneEntityBase::setRotate(FQuat rotation)
 // 这个是单位方向向量
 void SceneEntityBase::setRotateNormalDir(FVector normalDir)
 {
-	FQuat quad = UtilMath.getRotateByOrient(normalDir);
-	this->setRotateEulerAngle(quad.eulerAngles);
+	FQuat quad = UtilMath::getRotateByOrient(normalDir);
+	this->setRotateEulerAngle(UtilMath::Euler(quad));
 }
 
 // 这个是欧拉角
@@ -259,7 +259,7 @@ void SceneEntityBase::setRotateEulerAngle(FVector rotation)
 // 获取前向向量
 FVector SceneEntityBase::getForward()
 {
-	FVector forward = this->mRotate->getRotate() * FVector.forward;
+	FVector forward = this->mRotate->getRotate() * UtilMath::ForwardVec3;
 
 	return forward;
 }

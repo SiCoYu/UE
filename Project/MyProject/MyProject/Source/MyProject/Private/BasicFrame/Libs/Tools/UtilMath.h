@@ -13,16 +13,21 @@ class UtilMath
 public:
 	static const FVector ZeroVec3;
 	static const FVector OneVec3;
-	static const FQuat UnitQuat;
+	static const FVector ForwardVec3;
+	static const FVector UpVec3;
 
+	static const FQuat UnitQuat;
 	static const float EPSILON;
 
 public:
-	static FVector Euler(FRotator& rotator) const;
+	static FVector Euler(FRotator& rotator);
 	static FRotator MakeFromEuler(const FVector& Euler);
-	static FRotator Rotator(const FQuat& quat) const;
+	static FRotator Rotator(const FQuat& quat);
 	static FQuat MakeQuatFromEuler(const FVector& Euler);
-	static FVector Euler(const FQuat& quat) const;
+	static FVector Euler(const FQuat& quat);
+
+	static FVector Vector(const FQuat& quat);
+	static FRotator Rotator(const FQuat& quat);
 
 	static float abs(float value);
 	static bool isEqualVec3(FVector& a, FVector& b);

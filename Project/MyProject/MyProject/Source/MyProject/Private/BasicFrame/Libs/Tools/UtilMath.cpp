@@ -1,10 +1,13 @@
 #include "MyProject.h"
 #include "UtilMath.h"
+#include "MacroDef.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 FVector UtilMath::ZeroVec3 = FVector::ZeroVector;
 FVector UtilMath::OneVec3 = FVector::OneVector;
+FVector UtilMath::ForwardVec3 = FVector::ForwardVector;
+FVector UtilMath::UpVec3 = FVector::UpVector;
 FQuat UtilMath::UnitQuat = FQuat::Identity;
 float UtilMath::EPSILON = 1e-3f;
 
@@ -31,6 +34,16 @@ FQuat UtilMath::MakeQuatFromEuler(const FVector& Euler)
 FVector UtilMath::Euler(const FQuat& quat) const
 {
 	return quat.Euler();
+}
+
+FVector UtilMath::Vector(const FQuat& quat)
+{
+	return quat.Vector();
+}
+
+FRotator UtilMath::Rotator(const FQuat& quat)
+{
+	return quat.Rotator();
 }
 
 float UtilMath::abs(float value)
@@ -63,6 +76,22 @@ bool UtilMath::isEqualQuat(FQuat& a, FQuat& b)
 	}
 
 	return true;
+}
+
+FQuat UtilMath::getRotateByOrient(FVector& forward)
+{
+	FQuat retQuat = UtilMath::UnitQuat;
+
+	if (MacroDef.XZ_MODE)
+	{
+		retQuat = FQuat::FindBetween(UtilMath::ForwardVector, forward);
+	}
+	else if (MacroDef.XY_MODE)
+	{
+		retQuat = FQuat::FindBetween(UtilMath::UpVec3, forward);
+	}
+
+	return retQuat;
 }
 
 MY_END_NAMESPACE
