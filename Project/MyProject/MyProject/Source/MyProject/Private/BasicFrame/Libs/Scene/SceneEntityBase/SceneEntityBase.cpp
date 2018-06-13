@@ -172,7 +172,7 @@ uint SceneEntityBase::getThisId()
 	return this->mThisId;
 }
 
-GameObject SceneEntityBase::gameObject()
+AActor* SceneEntityBase::gameObject()
 {
 	if (nullptr != this->mRender)
 	{
@@ -182,7 +182,7 @@ GameObject SceneEntityBase::gameObject()
 	return nullptr;
 }
 
-void SceneEntityBase::setGameObject(GameObject rhv)
+void SceneEntityBase::setGameObject(AActor* rhv)
 {
 	if (nullptr != this->mRender)
 	{
@@ -218,7 +218,7 @@ void SceneEntityBase::setPos(FVector pos)
 
 void SceneEntityBase::setRenderPos(FVector pos)
 {
-	if (!UtilEngineWrap.isInFakePos(pos) && !UtilMath.isEqualVec3(this->mPos, pos))
+	if (!UtilEngineWrap::isInFakePos(pos) && !UtilMath.isEqualVec3(this->mPos, pos))
 	{
 		this->mPos = pos;
 

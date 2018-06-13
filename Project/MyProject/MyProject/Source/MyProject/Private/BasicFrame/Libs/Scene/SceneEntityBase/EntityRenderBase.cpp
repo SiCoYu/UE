@@ -119,7 +119,7 @@ void EntityRenderBase::updateLocalTransform() override
 		{
 			this->mIsPosDirty = false;
 
-			UtilEngineWrap.setPos(this->mSelfActor.transform, this->mEntity.getPos());
+			UtilEngineWrap::setPos(this->mSelfActor.transform, this->mEntity.getPos());
 		}
 		if (this->mIsRotDirty)
 		{
@@ -129,25 +129,25 @@ void EntityRenderBase::updateLocalTransform() override
 			//{
 			//    if (!(this->mEntity as BeingEntity).isFreezeXZ())
 			//    {
-			//        UtilEngineWrap.setRigidbodyRot(this->mRigidbody, this->mEntity.getRotate());
+			//        UtilEngineWrap::setRigidbodyRot(this->mRigidbody, this->mEntity.getRotate());
 			//    }
 			//    else
 			//    {
-			//        UtilEngineWrap.setRot(this->mSelfActor.transform, this->mEntity.getRotate());
+			//        UtilEngineWrap::setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 			//    }
 			//}
 			//else
 			//{
-			//    UtilEngineWrap.setRot(this->mSelfActor.transform, this->mEntity.getRotate());
+			//    UtilEngineWrap::setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 			//}
 
-			UtilEngineWrap.setRot(this->mSelfActor.transform, this->mEntity.getRotate());
+			UtilEngineWrap::setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 		}
 		if (this->mIsScaleDirty)
 		{
 			this->mIsScaleDirty = false;
 
-			//UtilEngineWrap.setScale(this->mSelfActor.transform, this->mEntity.getScale());
+			//UtilEngineWrap::setScale(this->mSelfActor.transform, this->mEntity.getScale());
 		}
 	}
 }

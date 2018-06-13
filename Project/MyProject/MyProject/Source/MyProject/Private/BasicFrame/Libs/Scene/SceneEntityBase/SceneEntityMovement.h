@@ -16,6 +16,8 @@ class SceneEntityBase;
  */
 class SceneEntityMovement : public GObject, public IDispatchObject
 {
+	M_DECLARE_CLASS(SceneEntityMovement, GObject)
+
 protected:
 	SceneEntityBase* mEntity;          // 关联的实体
 
