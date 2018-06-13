@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "AuxComponent.h"
+#include "UtilEngineWrap.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -156,7 +157,7 @@ void AuxComponent::setIsNeedPlaceHolderActor(bool value)
 	{
 		if (this->mPlaceHolderActor == nullptr)
 		{
-			this->mPlaceHolderActor = UtilEngineWrap::createGameObject("PlaceHolderGO");
+			//this->mPlaceHolderActor = UtilEngineWrap::createActor("PlaceHolderGO");
 		}
 	}
 }
@@ -180,7 +181,7 @@ bool AuxComponent::_isChange(AActor* srcActor, AActor* destActor)
 {
 	bool ret = false;
 
-	if (srcActor == nullptr || !srcActor.Equals(destActor))
+	if (srcActor == nullptr || srcActor != destActor))
 	{
 		ret = true;
 	}
@@ -205,8 +206,9 @@ void AuxComponent::linkPlaceHolder2Parent()
 {
 	if (this->mPlaceHolderActor == nullptr)
 	{
-		this->mPlaceHolderActor = UtilEngineWrap::createGameObject("PlaceHolderGO");
+		//this->mPlaceHolderActor = UtilEngineWrap::createActor("PlaceHolderGO");
 	}
+
 	UtilEngineWrap::SetParent(this->mPlaceHolderActor, this->mParentActor, false);
 }
 

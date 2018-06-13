@@ -11,13 +11,13 @@ MY_BEGIN_NAMESPACE(MyNS)
 class UtilMath
 {
 public:
-	static const FVector ZeroVec3;
-	static const FVector OneVec3;
-	static const FVector ForwardVec3;
-	static const FVector UpVec3;
+	static const FVector ZeroVec3 = FVector::ZeroVector;
+	static const FVector OneVec3 = FVector::OneVector;
+	static const FVector ForwardVec3 = FVector::ForwardVector;
+	static const FVector UpVec3 = FVector::UpVector;
 
-	static const FQuat UnitQuat;
-	static const float EPSILON;
+	static const FQuat UnitQuat = FQuat::Identity;
+	static const float EPSILON = 1e-3f;
 
 public:
 	static FVector Euler(FRotator& rotator);
@@ -25,13 +25,13 @@ public:
 	static FRotator Rotator(const FQuat& quat);
 	static FQuat MakeQuatFromEuler(const FVector& Euler);
 	static FVector Euler(const FQuat& quat);
-
 	static FVector Vector(const FQuat& quat);
-	static FRotator Rotator(const FQuat& quat);
 
 	static float abs(float value);
 	static bool isEqualVec3(FVector& a, FVector& b);
 	static bool isEqualQuat(FQuat& a, FQuat& b);
+
+	static FQuat getRotateByOrient(FVector& forward)
 };
 
 MY_END_NAMESPACE

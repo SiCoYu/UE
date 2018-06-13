@@ -1194,3 +1194,27 @@ void UtilEngineWrap::collectGarbage(EObjectFlags KeepFlags, bool bPerformFullPur
 {
 	::CollectGarbage(KeepFlags, bPerformFullPurge);
 }
+
+AActor* UtilEngineWrap::createActor(std::string name = "PlaceHolder")
+{
+	AActor* ret = NULL;
+
+	ret = UtilEngineWrap::NewObject<AActor>();
+
+	return ret;
+}
+
+void SetParent(AActor* child, AActor* parent, bool worldPositionStays)
+{
+	
+}
+
+void UtilEngineWrap::SetActive(AActor* target, bool bshow)
+{
+	UtilEngineWrap::setActorVisible(target);
+}
+
+bool UtilEngineWrap::IsActive(AActor* target)
+{
+	return false;
+}

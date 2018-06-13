@@ -28,7 +28,7 @@ protected:
 public:
 	AuxComponent();
 
-	virtual void init()
+	virtual void init();
 	virtual void dispose();
 	virtual void onDestroy();
 
