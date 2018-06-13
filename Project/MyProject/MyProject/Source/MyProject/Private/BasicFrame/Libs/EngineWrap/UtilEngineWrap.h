@@ -456,10 +456,10 @@ public:
 	// UObject\UObjectGlobals.h
 	static void collectGarbage(EObjectFlags KeepFlags, bool bPerformFullPurge = true);
 
-	public static AActor* createActor(std::string name = "PlaceHolder");
-	void SetParent(AActor* child, AActor* parent, bool worldPositionStays = true);
-	void SetActive(AActor* target, bool bshow);
-	bool IsActive(AActor* target);
+	static AActor* createActor(std::string name = "PlaceHolder");
+	static void SetParent(AActor* child, AActor* parent, bool worldPositionStays = true);
+	static void SetActive(AActor* target, bool bshow);
+	static bool IsActive(AActor* target);
 };
 
 MY_END_NAMESPACE
