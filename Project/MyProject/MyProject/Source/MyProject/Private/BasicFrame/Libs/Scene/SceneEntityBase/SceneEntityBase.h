@@ -14,7 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 场景中的实体，定义接口，逻辑相关的一些实现放在 BeingEntity 里面，例如: 地形， Player， Npc
  */
-public class SceneEntityBase : GObject, IDispatchObject, ITickedObject, INoOrPriorityObject
+class SceneEntityBase : public GObject, public IDispatchObject, public ITickedObject, public INoOrPriorityObject
 {
 protected:
 	EntityRenderBase* mRender;

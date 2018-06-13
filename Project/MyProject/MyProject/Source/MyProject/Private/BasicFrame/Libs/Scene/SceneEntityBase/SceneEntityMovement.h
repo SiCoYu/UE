@@ -14,7 +14,7 @@ class SceneEntityBase;
 /**
  * @brief 移动类型
  */
-class SceneEntityMovement : GObject, IDispatchObject
+class SceneEntityMovement : public GObject, public IDispatchObject
 {
 protected:
 	SceneEntityBase* mEntity;          // 关联的实体

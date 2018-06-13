@@ -3,6 +3,8 @@
 #include <string>
 #include "IPoolObject.h"
 #include "GObjectBase.h"
+#include "TypeUniqueId.h"
+#include "AssetUniqueId.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -17,6 +19,8 @@ protected:
 	bool mIsUsePool;      // 是否使用 Pool
 	int mNumUniqueId;
 	std::string mStrUniqueId;
+	TypeUniqueId mTypeUniqueId;
+	AssetUniqueId mAssetUniqueId;
 
 public:
 	GPoolObject();
