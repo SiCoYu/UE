@@ -14,7 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class ResItem;
 class ResInsBase;
 
-class LoadParam : public GObject, public IPoolObject
+class LoadParam : public GObject
 {
 public:
 	std::string mPath;                  // 资源路径，传递进来都是完成的路径，都是相对 Prefabs\Resources 开始的，例如 Table\CardBase_client.txt，然后内部解析后

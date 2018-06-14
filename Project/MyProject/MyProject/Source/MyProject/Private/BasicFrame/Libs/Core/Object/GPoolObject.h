@@ -2,7 +2,7 @@
 
 #include <string>
 #include "IPoolObject.h"
-#include "GObjectBase.h"
+#include "MyAllocatedObject.h"
 #include "TypeUniqueId.h"
 #include "AssetUniqueId.h"
 #include "MClassInfo.h"
@@ -11,35 +11,38 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class GPoolObject : public GObjectBase, public IPoolObject
+class GPoolObject : public MyAllocatedObject, public IPoolObject
 {
-	M_DECLARE_CLASS(GPoolObject, GObjectBase)
+	M_DECLARE_CLASS(GPoolObject, MyAllocatedObject)
 
 protected:
 	bool mIsUsePool;      // 是否使用 Pool
-	int mNumUniqueId;
-	std::string mStrUniqueId;
+	std::string mGlobalUniqueId;
 	TypeUniqueId mTypeUniqueId;
 	AssetUniqueId mAssetUniqueId;
 
 public:
 	GPoolObject();
 
-	virtual public void init();
-	virtual protected void onInit();
-	virtual protected void onGetFromPool();
-	virtual protected void onPutInPool();
-	virtual public void dispose();
-	virtual public void destroy();
-	virtual protected void onDestroy();
+	virtual void init();
+
+protected:
+	virtual void onInit();
+	virtual void onGetFromPool();
+	virtual void onPutInPool();
+	virtual void onDestroy();
+
+public:
+	virtual void dispose();
+	virtual void destroy();
 	bool isUsePool();
 	void setIsUsePool(bool value);
 	void putInPool();
 	void getFromPool();
-	void setNumUniqueId(int value);
-	int getNumUniqueId();
-	void setStrUniqueId(std::string value);
-	std::string getStrUniqueId();
+	void setGlobalUniqueId(std::string value);
+	std::string getGlobalUniqueId();
+
+	virtual void resetDefault() override;
 };
 
 MY_END_NAMESPACE

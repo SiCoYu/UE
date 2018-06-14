@@ -43,6 +43,7 @@ public:
 	virtual void hide() override;
 	bool isValid();
 	FVector getPos();
+	virtual void setScale(FVector value);
 	// 资源加载完成，初始化一些基本资源
 	virtual void _onSelfChanged() override;
 	virtual void updateLocalTransform() override;

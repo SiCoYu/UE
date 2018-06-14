@@ -7,7 +7,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(GObject, MyAllocatedObject)
+M_IMPLEMENT_AND_REGISTER_CLASS(GObject, GPoolObject)
 
 // warning C4668 : 'MY_DEBUG' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
 //#if MY_DEBUG

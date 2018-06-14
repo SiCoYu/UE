@@ -63,6 +63,7 @@ protected:
 	void linkPlaceHolder2Parent();
 	void linkSelf2Parent();
 
+public:
 	virtual void show();
 	virtual void hide();
 	virtual bool IsVisible();

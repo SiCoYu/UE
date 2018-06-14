@@ -7,6 +7,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class IPoolObject
 {
+public:
     virtual void resetDefault() = 0;
 };
 

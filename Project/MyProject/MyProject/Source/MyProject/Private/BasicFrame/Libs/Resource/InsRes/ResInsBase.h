@@ -31,8 +31,8 @@ public:
 	void setIsOrigResNeedImmeUnload(bool value);
 	std::string getPath();
 	std::string getPrefabName();         // 只有 Prefab 资源才实现这个函数
-	void init(ResItem* res);
-	virtual void dispose();
+	virtual void init(ResItem* res);
+	virtual void dispose() override;
 
 protected:
     // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重载了

@@ -4,6 +4,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+FVector UtilLogic::FAKE_POS = new FVector(-1000, 0, -1000);  // 默认隐藏到这个位置
+
 std::string UtilLogic::convScenePath2LevelName(std::string& path)
 {
 	int slashIdx = UtilStr::LastIndexOf(path, "/");
@@ -26,6 +28,11 @@ std::string UtilLogic::convScenePath2LevelName(std::string& path)
 	}
 
 	return retLevelName;
+}
+
+bool UtilLogic::isInFakePos(FVector pos)
+{
+	return UtilMath::isEqualVec3(pos, UtilLogic::FAKE_POS);
 }
 
 MY_END_NAMESPACE

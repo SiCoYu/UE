@@ -4,6 +4,7 @@
 #include "UtilMath.h"
 #include "UtilEngineWrap.h"
 #include "MWrapQuaternion.h"
+#include "UtilLogic.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -12,7 +13,7 @@ M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityBase, GObject)
 
 SceneEntityBase::SceneEntityBase()
 {
-	this->mRotate = MWrapQuaternion(0, 0, 0, 1);
+	//this->mRotate = MWrapQuaternion(0, 0, 0, 1);
 	this->mRender = nullptr;
 }
 
@@ -199,7 +200,7 @@ void SceneEntityBase::setPos(FVector pos)
 
 void SceneEntityBase::setRenderPos(FVector pos)
 {
-	if (!UtilEngineWrap::isInFakePos(pos) && !UtilMath::isEqualVec3(this->mPos, pos))
+	if (!UtilLogic::isInFakePos(pos) && !UtilMath::isEqualVec3(this->mPos, pos))
 	{
 		this->mPos = pos;
 	}
@@ -218,7 +219,7 @@ FVector SceneEntityBase::getFullPos()
 
 void SceneEntityBase::setRotate(FQuat rotation)
 {
-	if (!UtilMath::isEqualQuat(this->mRotate, rotation))
+	if (!UtilMath::isEqualQuat(this->mRotate.getRotate(), rotation))
 	{
 		this->mRotate.setRotation(rotation);
 
@@ -239,13 +240,14 @@ void SceneEntityBase::setRotateNormalDir(FVector normalDir)
 // 这个是欧拉角
 void SceneEntityBase::setRotateEulerAngle(FVector rotation)
 {
-	if (!UtilMath::isEqualVec3(this->mRotate.getRotateEulerAngle(), rotation))
+	FVector euler = this->mRotate.getRotateEulerAngle();
+	if (!UtilMath::isEqualVec3(euler, rotation))
 	{
 		this->mRotate.setRotateEulerAngle(rotation);
 
 		if (nullptr != this->mRender)
 		{
-			this->mRender->setRotate(this->mRotate->getRotate());
+			this->mRender->setRotate(this->mRotate.getRotate());
 		}
 	}
 }
@@ -253,19 +255,19 @@ void SceneEntityBase::setRotateEulerAngle(FVector rotation)
 // 获取前向向量
 FVector SceneEntityBase::getForward()
 {
-	FVector forward = this->mRotate->getRotate() * UtilMath::ForwardVec3;
+	FVector forward = this->mRotate.getRotate() * UtilMath::ForwardVec3;
 
 	return forward;
 }
 
 FQuat SceneEntityBase::getRotate()
 {
-	return this->mRotate->getRotate();
+	return this->mRotate.getRotate();
 }
 
 FVector SceneEntityBase::getRotateEulerAngle()
 {
-	return this->mRotate->getRotateEulerAngle();
+	return this->mRotate.getRotateEulerAngle();
 }
 
 FVector SceneEntityBase::getScale()

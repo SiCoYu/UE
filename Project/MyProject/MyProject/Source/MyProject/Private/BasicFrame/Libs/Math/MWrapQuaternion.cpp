@@ -3,24 +3,76 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-FVector& MRay::getRayOrigin()
+MWrapQuaternion::MWrapQuaternion()
 {
-	return m_rayOrigin;
+	this->mIsEulerAngleInvalid = true;
+	this->setRotation(FQuat(0, 0, 0, 0));
 }
 
-void MRay::setRayOrigin(FVector value)
+MWrapQuaternion::MWrapQuaternion(float x, float y, float z, float w)
 {
-	m_rayOrigin = value;
+	this->mIsEulerAngleInvalid = true;
+	this->setRotation(FQuat(x, y, z, w));
 }
 
-FVector& MRay::getRayDirection()
+void MWrapQuaternion::clear()
 {
-	return m_rayDirection;
+	this->mIsEulerAngleInvalid = true;
+	this->setRotation(FQuat(0, 0, 0, 1));
 }
 
-void MRay::setRayDirection(FVector value)
+void MWrapQuaternion::setRotateXYZW(float x, float y, float z, float w)
 {
-	m_rayDirection = value;
+	this->mIsEulerAngleInvalid = true;
+	this->mRotate = FQuat(x, y, z, w);
+}
+
+float MWrapQuaternion::getX()
+{
+	return this->mRotate.X;
+}
+
+float MWrapQuaternion::getY()
+{
+	return this->mRotate.Y;
+}
+
+float MWrapQuaternion::getZ()
+{
+	return this->mRotate.Z;
+}
+
+float MWrapQuaternion::getW()
+{
+	return this->mRotate.W;
+}
+
+FVector MWrapQuaternion::getRotateEulerAngle()
+{
+	if (this->mIsEulerAngleInvalid)
+	{
+		this->mRotateEulerAngle = this->mRotate.Euler();
+		this->mIsEulerAngleInvalid = false;
+	}
+
+	return this->mRotateEulerAngle;
+}
+
+void MWrapQuaternion::setRotateEulerAngle(FVector rotation)
+{
+	this->mRotateEulerAngle = rotation;
+	this->mRotate = FQuat::MakeFromEuler(rotation);
+}
+
+FQuat MWrapQuaternion::getRotate()
+{
+	return this->mRotate;
+}
+
+void MWrapQuaternion::setRotation(FQuat rotation)
+{
+	this->mIsEulerAngleInvalid = true;
+	this->mRotate = rotation;
 }
 
 MY_END_NAMESPACE

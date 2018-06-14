@@ -7,6 +7,7 @@
 #include "LogTypeId.h"
 #include "Ctx.h"
 #include "LogSys.h"
+#include "SafePointer.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -16,13 +17,13 @@ M_IMPLEMENT_AND_REGISTER_CLASS(EntityMgrBase, DelayPriorityHandleMgrBase)
 EntityMgrBase::EntityMgrBase()
 {
 	//this->mSceneEntityList = new MList<SceneEntityBase*>();
-	this->mSceneEntityList.setIsSpeedUpFind(true);
-	this->mSceneEntityList.setIsOpKeepSort(true);
+	//this->mSceneEntityList.setIsSpeedUpFind(true);
+	//this->mSceneEntityList.setIsOpKeepSort(true);
 
 	//this->mId2EntityDic = new MDictionary<std::string, SceneEntityBase>();
 	//this->mThisId2EntityDic = new MDictionary<uint, SceneEntityBase>();
 
-	this->mUniqueNumIdGen = new UniqueNumIdGen(0);
+	this->mUniqueNumIdGen = MY_NEW UniqueNumIdGen(0);
 }
 
 void EntityMgrBase::init()
@@ -53,9 +54,11 @@ void EntityMgrBase::_addObject(IDelayHandleItem* entity, float priority)
 	}
 	else
 	{
-		if (!this->mSceneEntityList.contains((SceneEntityBase*)entity))
+		SceneEntityBase* sceneEntity = (SceneEntityBase*)entity;
+
+		if (!this->mSceneEntityList.contains(sceneEntity))
 		{
-			this->mSceneEntityList.add((SceneEntityBase*)entity);
+			this->mSceneEntityList.add(sceneEntity);
 		}
 	}
 }
@@ -68,9 +71,11 @@ void EntityMgrBase::_removeObject(IDelayHandleItem* entity)
 	}
 	else
 	{
-		if (this->mSceneEntityList.contains((SceneEntityBase*)entity))
+		SceneEntityBase* sceneEntity = (SceneEntityBase*)entity;
+
+		if (this->mSceneEntityList.contains(sceneEntity))
 		{
-			this->mSceneEntityList.remove((SceneEntityBase*)entity);
+			this->mSceneEntityList.remove(sceneEntity);
 		}
 	}
 }
@@ -79,15 +84,15 @@ void EntityMgrBase::addEntity(SceneEntityBase* entity)
 {
 	this->_addObject(entity);
 
-	if(!this->mId2EntityDic.containsKey(entity->getEntityUniqueId()))
+	if(!this->mId2EntityDic.containsKey(entity->getGlobalUniqueId()))
 	{
-		this->mId2EntityDic[entity->getEntityUniqueId()] = entity;
+		this->mId2EntityDic[entity->getGlobalUniqueId()] = entity;
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys.log(
+			GLogSys->log(
 				"EntityMgrBase already exist key", 
 				LogTypeId::eLogCommon
 			);
@@ -106,15 +111,15 @@ void EntityMgrBase::removeEntity(SceneEntityBase* entity)
 {
 	this->_removeObject(entity);
 
-	if (this->mId2EntityDic.containsKey(entity->getEntityUniqueId()))
+	if (this->mId2EntityDic.containsKey(entity->getGlobalUniqueId()))
 	{
-		this->mId2EntityDic.remove(entity->getEntityUniqueId());
+		this->mId2EntityDic.remove(entity->getGlobalUniqueId());
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys.log(
+			GLogSys->log(
 				"EntityMgrBase::removeEntity, already remove key", 
 				LogTypeId::eLogCommon
 			);
@@ -172,11 +177,11 @@ SceneEntityBase* EntityMgrBase::getEntityByThisId(uint thisId)
 }
 
 // 通过 Unique Id 获取元素，Unique Id 是客户端自己的唯一 id ，与服务器没有关系
-SceneEntityBase EntityMgrBase::getEntityByUniqueId(std::string uniqueId)
+SceneEntityBase* EntityMgrBase::getEntityByUniqueId(std::string uniqueId)
 {
 	SceneEntityBase* ret = nullptr;
 
-	this->mId2EntityDic.tryGetValue(uniqueId, out ret);
+	this->mId2EntityDic.tryGetValue(uniqueId, ret);
 
 	return ret;
 }
@@ -194,22 +199,22 @@ SceneEntityBase* EntityMgrBase::getEntityByIndex(int index)
 
 std::string EntityMgrBase::genNewStrId()
 {
-	return this->mUniqueStrIdGen.genNewStrId();
+	return this->mUniqueStrIdGen->genNewStrId();
 }
 
 std::string EntityMgrBase::getCurStrId()
 {
-	return this->mUniqueStrIdGen.getCurStrId();
+	return this->mUniqueStrIdGen->getCurStrId();
 }
 
 uint EntityMgrBase::getCurId()
 {
-	return this->mUniqueStrIdGen.getCurId();
+	return this->mUniqueStrIdGen->getCurId();
 }
 
 std::string EntityMgrBase::genStrIdById(uint id)
 {
-	return this->mUniqueStrIdGen.genStrIdById(id);
+	return this->mUniqueStrIdGen->genStrIdById(id);
 }
 
 int EntityMgrBase::getEntityCount()
@@ -237,7 +242,8 @@ void EntityMgrBase::clearAll()
 
 		if (!entity->isClientDispose())
 		{
-			EntityNumIdBufferObjectFactory.deleteObject(entity);
+			//EntityNumIdBufferObjectFactory.deleteObject(entity);
+			MY_SAFE_DISPOSE(entity);
 		}
 
 		idx -= 1;

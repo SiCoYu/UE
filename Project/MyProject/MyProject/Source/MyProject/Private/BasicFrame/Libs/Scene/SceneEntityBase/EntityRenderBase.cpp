@@ -91,6 +91,11 @@ FVector EntityRenderBase::getPos()
 	return UtilMath::ZeroVec3;
 }
 
+void EntityRenderBase::setScale(FVector value)
+{
+
+}
+
 // 资源加载完成，初始化一些基本资源
 void EntityRenderBase::_onSelfChanged()
 {

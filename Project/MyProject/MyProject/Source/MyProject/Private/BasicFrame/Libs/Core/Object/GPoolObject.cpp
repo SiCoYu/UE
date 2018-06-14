@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(GPoolObject, GObjectBase)
+M_IMPLEMENT_AND_REGISTER_CLASS(GPoolObject, MyAllocatedObject)
 
 GPoolObject::GPoolObject()
 {
@@ -69,24 +69,19 @@ void GPoolObject::getFromPool()
 	this->onGetFromPool();
 }
 
-void GPoolObject::setNumUniqueId(int value)
+void GPoolObject::setGlobalUniqueId(std::string value)
 {
-	this->mNumUniqueId = value;
+	this->mGlobalUniqueId = value;
 }
 
-int GPoolObject::getNumUniqueId()
+std::string GPoolObject::getGlobalUniqueId()
 {
-	return this->mNumUniqueId;
+	return this->mGlobalUniqueId;
 }
 
-void GPoolObject::setStrUniqueId(std::string value)
+void GPoolObject::resetDefault()
 {
-	this->mStrUniqueId = value;
-}
 
-std::string GPoolObject::getStrUniqueId()
-{
-	return this->mStrUniqueId;
 }
 
 MY_END_NAMESPACE
