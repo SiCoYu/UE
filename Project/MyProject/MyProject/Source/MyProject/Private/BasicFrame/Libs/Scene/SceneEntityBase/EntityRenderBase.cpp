@@ -2,6 +2,7 @@
 #include "EntityRenderBase.h"
 #include "SceneEntityBase.h"
 #include "AuxComponent.h"
+#include "UtilMath.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -20,7 +21,7 @@ void EntityRenderBase::setClientDispose(bool isDispose)
 
 bool EntityRenderBase::isClientDispose()
 {
-	return this->mEntity.isClientDispose();
+	return this->mEntity->isClientDispose();
 }
 
 void EntityRenderBase::onTick(float delta, TickMode tickMode)
@@ -84,20 +85,20 @@ FVector EntityRenderBase::getPos()
 {
 	if(this->isValid())
 	{
-		return this->transform().localPosition;
+		//return this->transform().localPosition;
 	}
 
-	return UtilMath.ZeroVec3;
+	return UtilMath::ZeroVec3;
 }
 
 // 资源加载完成，初始化一些基本资源
-void EntityRenderBase::_onSelfChanged() override
+void EntityRenderBase::_onSelfChanged()
 {
 	// 一定要先查找组件
 	Super::_onSelfChanged();
 
 	// 设置可视化
-	if (this->mEntity.IsVisible())
+	if (this->mEntity->IsVisible())
 	{
 		this->show();
 	}
@@ -107,12 +108,12 @@ void EntityRenderBase::_onSelfChanged() override
 	}
 
 	// 设置方向位置信息
-	this->setPos(this->mEntity.getPos());
-	this->setRotate(this->mEntity.getRotate());
-	this->setScale(this->mEntity.getScale());
+	this->setPos(this->mEntity->getPos());
+	this->setRotate(this->mEntity->getRotate());
+	this->setScale(this->mEntity->getScale());
 }
 
-void EntityRenderBase::updateLocalTransform() override
+void EntityRenderBase::updateLocalTransform()
 {
 	if (this->mSelfActor)
 	{
@@ -120,7 +121,7 @@ void EntityRenderBase::updateLocalTransform() override
 		{
 			this->mIsPosDirty = false;
 
-			UtilEngineWrap::setPos(this->mSelfActor.transform, this->mEntity.getPos());
+			//UtilEngineWrap::setPos(this->mSelfActor.transform, this->mEntity.getPos());
 		}
 		if (this->mIsRotDirty)
 		{
@@ -142,7 +143,7 @@ void EntityRenderBase::updateLocalTransform() override
 			//    UtilEngineWrap::setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 			//}
 
-			UtilEngineWrap::setRot(this->mSelfActor.transform, this->mEntity.getRotate());
+			//UtilEngineWrap::setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 		}
 		if (this->mIsScaleDirty)
 		{
