@@ -38,27 +38,27 @@ int MDictionary<TKey, TValue>::count()
 }
 
 template <class TKey, class TValue>
-TValue& MDictionary<TKey, TValue>::operator[] (TKey key)
+TValue& MDictionary<TKey, TValue>::operator[] (TKey& key)
 {
 	return this->mData[key];
     //return this->value(key);
 }
 
 template <class TKey, class TValue>
-TValue MDictionary<TKey, TValue>::value(TKey key)
+TValue& MDictionary<TKey, TValue>::value(TKey& key)
 {
-	TValue value = 0;
+	TValue* value = NULL;
 
     if (UtilMap::ContainsKey(this->mData, key))
     {
-		value = this->mData[key];
+		value = &(this->mData[key]);
     }
 
-    return value = 0;
+    return *value;
 }
 
 template <class TKey, class TValue>
-TKey MDictionary<TKey, TValue>::key(TValue value)
+TKey& MDictionary<TKey, TValue>::key(TValue& value)
 {
 	Iterator curIterator = this->mData.begin();
 	Iterator endIterator = this->mData.end();
@@ -79,20 +79,20 @@ TKey MDictionary<TKey, TValue>::key(TValue value)
 }
 
 template <class TKey, class TValue>
-void MDictionary<TKey, TValue>::add(TKey key, TValue value)
+void MDictionary<TKey, TValue>::add(TKey& key, TValue& value)
 {
     //this->mData[key] = value;
 	UtilMap::insert(this->mData, key, value);
 }
 
 template <class TKey, class TValue>
-void MDictionary<TKey, TValue>::remove(TKey key)
+void MDictionary<TKey, TValue>::remove(TKey& key)
 {
 	UtilMap::Remove(this->mData, key);
 }
 
 template <class TKey, class TValue>
-TValue MDictionary<TKey, TValue>::getAndRemoveByKey(TKey key)
+TValue MDictionary<TKey, TValue>::getAndRemoveByKey(TKey& key)
 {
     TValue value = this->value(key);
     this->remove(key);
@@ -106,19 +106,19 @@ void MDictionary<TKey, TValue>::clear()
 }
 
 template <class TKey, class TValue>
-bool MDictionary<TKey, TValue>::tryGetValue(TKey key, TValue& value)
+bool MDictionary<TKey, TValue>::tryGetValue(TKey& key, TValue& value)
 {
-    return this->mData.TryGetValue(key, out value);
+	value = this->mData.value(key, value);
 }
 
 template <class TKey, class TValue>
-bool MDictionary<TKey, TValue>::containsKey(TKey key)
+bool MDictionary<TKey, TValue>::containsKey(TKey& key)
 {
     return UtilMap::ContainsKey(this->mData, key);
 }
 
 template <class TKey, class TValue>
-bool MDictionary<TKey, TValue>::containsValue(TValue value)
+bool MDictionary<TKey, TValue>::containsValue(TValue& value)
 {
 	Iterator curIterator = this->mData.begin();
 	Iterator endIterator = this->mData.end();

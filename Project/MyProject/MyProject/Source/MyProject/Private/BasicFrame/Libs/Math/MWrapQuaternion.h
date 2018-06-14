@@ -25,10 +25,10 @@ public:
 	float getY();
 	float getZ();
 	float getW();
-	FVector getRotateEulerAngle();
-	void setRotateEulerAngle(FVector rotation);
-	FQuat getRotate();
-	void setRotation(FQuat rotation);
+	FVector& getRotateEulerAngle();
+	void setRotateEulerAngle(FVector& rotation);
+	FQuat& getRotate();
+	void setRotation(FQuat& rotation);
 };
 
 MY_END_NAMESPACE

@@ -47,7 +47,7 @@ float MWrapQuaternion::getW()
 	return this->mRotate.W;
 }
 
-FVector MWrapQuaternion::getRotateEulerAngle()
+FVector& MWrapQuaternion::getRotateEulerAngle()
 {
 	if (this->mIsEulerAngleInvalid)
 	{
@@ -58,18 +58,18 @@ FVector MWrapQuaternion::getRotateEulerAngle()
 	return this->mRotateEulerAngle;
 }
 
-void MWrapQuaternion::setRotateEulerAngle(FVector rotation)
+void MWrapQuaternion::setRotateEulerAngle(FVector& rotation)
 {
 	this->mRotateEulerAngle = rotation;
 	this->mRotate = FQuat::MakeFromEuler(rotation);
 }
 
-FQuat MWrapQuaternion::getRotate()
+FQuat& MWrapQuaternion::getRotate()
 {
 	return this->mRotate;
 }
 
-void MWrapQuaternion::setRotation(FQuat rotation)
+void MWrapQuaternion::setRotation(FQuat& rotation)
 {
 	this->mIsEulerAngleInvalid = true;
 	this->mRotate = rotation;
