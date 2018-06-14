@@ -1,11 +1,12 @@
 ﻿#include "MyProject.h"
 #include "EntityRenderBase.h"
 #include "SceneEntityBase.h"
+#include "AuxComponent.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(EntityMgrBase, DelayPriorityHandleMgrBase)
+M_IMPLEMENT_AND_REGISTER_CLASS(EntityRenderBase, AuxComponent)
 
 EntityRenderBase::EntityRenderBase(SceneEntityBase* entity_)
 {

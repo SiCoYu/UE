@@ -35,16 +35,18 @@ public:
 	// 销毁流程
 	virtual void dispose() override;
 	// 资源释放事件，仅仅是释放基本的资源，不修改销毁流程
-	override void onDestroy();
+	virtual void onDestroy() override;
 	virtual bool checkRender();
 	virtual void load();
 	// 场景对象不需要设置，因为如果设置了就检测不了隐藏显示了
-	override void show();
-	override void hide();
+	virtual void show() override;
+	virtual void hide() override;
 	bool isValid();
 	FVector getPos();
 	// 资源加载完成，初始化一些基本资源
 	virtual void _onSelfChanged() override;
 	virtual void updateLocalTransform() override;
 	virtual void setTexture(std::string path);
-}
+};
+
+MY_END_NAMESPACE
