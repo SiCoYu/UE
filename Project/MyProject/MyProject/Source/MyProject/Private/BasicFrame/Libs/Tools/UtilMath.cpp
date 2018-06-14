@@ -5,14 +5,14 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 // error C2511: 'FVector MyNS::UtilMath::Euler(FRotator &) const': overloaded member function not found in 'MyNS::UtilMath'
-//FVector UtilMath::ZeroVec3 = FVector::ZeroVector;
-//FVector UtilMath::OneVec3 = FVector::OneVector;
-//FVector UtilMath::ForwardVec3 = FVector::ForwardVector;
-//FVector UtilMath::UpVec3 = FVector::UpVector;
-//FQuat UtilMath::UnitQuat = FQuat::Identity;
-//float UtilMath::EPSILON = 1e-3f;
+FVector UtilMath::ZeroVec3 = FVector::ZeroVector;
+FVector UtilMath::OneVec3 = FVector::OneVector;
+FVector UtilMath::ForwardVec3 = FVector::ForwardVector;
+FVector UtilMath::UpVec3 = FVector::UpVector;
+FQuat UtilMath::UnitQuat = FQuat::Identity;
+float UtilMath::EPSILON = 1e-3f;
 
-FVector UtilMath::Euler(FRotator& rotator) const
+FVector UtilMath::Euler(FRotator& rotator)
 {
 	return rotator.Euler();
 }
@@ -22,7 +22,7 @@ FRotator UtilMath::MakeFromEuler(const FVector& Euler)
 	return FRotator::MakeFromEuler(Euler);
 }
 
-FRotator UtilMath::Rotator(const FQuat& quat) const
+FRotator UtilMath::Rotator(const FQuat& quat)
 {
 	return quat.Rotator();
 }
@@ -32,7 +32,7 @@ FQuat UtilMath::MakeQuatFromEuler(const FVector& Euler)
 	return FQuat::MakeFromEuler(Euler);
 }
 
-FVector UtilMath::Euler(const FQuat& quat) const
+FVector UtilMath::Euler(const FQuat& quat)
 {
 	return quat.Euler();
 }
@@ -80,7 +80,7 @@ FQuat UtilMath::getRotateByOrient(FVector& forward)
 
 	if (MacroDef::XZ_MODE)
 	{
-		retQuat = FQuat::FindBetween(UtilMath::ForwardVector, forward);
+		retQuat = FQuat::FindBetween(UtilMath::ForwardVec3, forward);
 	}
 	else if (MacroDef::XY_MODE)
 	{

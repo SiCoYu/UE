@@ -1,12 +1,14 @@
 ﻿#include "MyProject.h"
 #include "SceneEntityBase.h"
+#include "EntityRenderBase.h"
 #include "UtilMath.h"
 #include "UtilEngineWrap.h"
+#include "MWrapQuaternion.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityBase, DelayPriorityHandleMgrBase)
+M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityBase, GObject)
 
 SceneEntityBase::SceneEntityBase()
 {
@@ -53,14 +55,8 @@ void SceneEntityBase::onDestroy()
 {
 	if (nullptr != this->mRender)
 	{
-		this->mRender.dispose();
+		this->mRender->dispose();
 		this->mRender = nullptr;
-	}
-
-	if(nullptr != this->mTDTile)
-	{
-		this->mTDTile.removeEntity(this);
-		this->mTDTile = nullptr;
 	}
 
 	this->setClientDispose(true);
@@ -96,8 +92,6 @@ void SceneEntityBase::show()
 		{
 			this->mRender->show();
 		}
-
-		this->onClipShow();
 	}
 }
 
@@ -245,7 +239,7 @@ void SceneEntityBase::setRotateNormalDir(FVector normalDir)
 // 这个是欧拉角
 void SceneEntityBase::setRotateEulerAngle(FVector rotation)
 {
-	if (!UtilMath.isEqualVec3(this->mRotate.getRotateEulerAngle(), rotation))
+	if (!UtilMath::isEqualVec3(this->mRotate.getRotateEulerAngle(), rotation))
 	{
 		this->mRotate.setRotateEulerAngle(rotation);
 

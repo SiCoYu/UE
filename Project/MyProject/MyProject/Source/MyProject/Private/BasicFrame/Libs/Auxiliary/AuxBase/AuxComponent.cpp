@@ -181,7 +181,7 @@ bool AuxComponent::_isChange(AActor* srcActor, AActor* destActor)
 {
 	bool ret = false;
 
-	if (srcActor == nullptr || srcActor != destActor))
+	if (srcActor == nullptr || srcActor != destActor)
 	{
 		ret = true;
 	}
