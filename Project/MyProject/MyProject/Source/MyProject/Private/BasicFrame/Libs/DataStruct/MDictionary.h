@@ -29,13 +29,13 @@ public:
 	void init();
 	void dispose();
 	int count();
-	TValue& operator[] (TKey& key);
+	TValue&& operator[] (TKey&& key);
 
-	TValue value(TKey& key);
-	TKey key(TValue& value);
+	TValue& value(TKey& key);
+	TKey& key(TValue& value);
 	void add(TKey& key, TValue& value);
 	void remove(TKey& key);
-	TValue getAndRemoveByKey(TKey& key);
+	TValue& getAndRemoveByKey(TKey& key);
 	void clear();
 	bool tryGetValue(TKey& key, TValue& value);
 	bool containsKey(TKey& key);

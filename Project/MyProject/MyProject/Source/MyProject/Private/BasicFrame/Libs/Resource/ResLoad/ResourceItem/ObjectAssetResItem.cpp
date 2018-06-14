@@ -21,9 +21,9 @@ ObjectAssetResItem::~ObjectAssetResItem()
 	
 }
 
-void ObjectAssetResItem::init(LoadItem* item)
+void ObjectAssetResItem::initWithLoad(LoadItem* item)
 {
-	Super::init(item);
+	Super::initWithLoad(item);
 
 	this->mResObject = Cast<UObject>(item->getObject());
 

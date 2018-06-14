@@ -38,7 +38,7 @@ int MDictionary<TKey, TValue>::count()
 }
 
 template <class TKey, class TValue>
-TValue& MDictionary<TKey, TValue>::operator[] (TKey& key)
+TValue&& MDictionary<TKey, TValue>::operator[] (TKey&& key)
 {
 	return this->mData[key];
     //return this->value(key);
@@ -92,7 +92,7 @@ void MDictionary<TKey, TValue>::remove(TKey& key)
 }
 
 template <class TKey, class TValue>
-TValue MDictionary<TKey, TValue>::getAndRemoveByKey(TKey& key)
+TValue& MDictionary<TKey, TValue>::getAndRemoveByKey(TKey& key)
 {
     TValue value = this->value(key);
     this->remove(key);

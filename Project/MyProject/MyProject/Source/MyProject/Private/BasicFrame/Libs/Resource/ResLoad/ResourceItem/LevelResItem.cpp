@@ -19,9 +19,10 @@ LevelResItem::~LevelResItem()
 	
 }
 
-void LevelResItem::init(LoadItem* item)
+void LevelResItem::initWithLoad(LoadItem* item)
 {
-	ResItem::init(item);
+	Super::initWithLoad(item);
+
 	this->mRefCountResLoadResultNotify->getLoadResEventDispatch()->dispatchEvent(this);
 }
 

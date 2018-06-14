@@ -21,7 +21,7 @@ public:
 	LevelResItem();
 	virtual ~LevelResItem();
 
-	virtual void init(LoadItem* item) override;
+	virtual void initWithLoad(LoadItem* item) override;
 	void setLevelName(std::string lvlName);
 };
 

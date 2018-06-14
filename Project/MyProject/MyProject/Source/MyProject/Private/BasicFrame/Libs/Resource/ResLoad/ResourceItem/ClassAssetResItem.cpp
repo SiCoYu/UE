@@ -21,7 +21,7 @@ ClassAssetResItem::~ClassAssetResItem()
 	
 }
 
-void ClassAssetResItem::init(LoadItem* item)
+void ClassAssetResItem::initWithLoad(LoadItem* item)
 {
 	Super::init(item);
 

@@ -27,7 +27,7 @@ public:
 public:
 	void setPrefabName(std::string prefabName);
 	virtual UObject* getObject(std::string resName) override;
-	virtual void init(LoadItem* item) override;
+	virtual void initWithLoad(LoadItem* item) override;
 	virtual void unload() override;
 };
 

@@ -53,11 +53,13 @@ public:
 	RefCountResLoadResultNotify* getRefCountResLoadResultNotify();
 	void setRefCountResLoadResultNotify(RefCountResLoadResultNotify* value);
 	virtual std::string getPrefabName();         // 只有 Prefab 资源才实现这个函数
-	virtual void init(LoadItem* item);
+	virtual void initWithLoad(LoadItem* item);
 	virtual void failed(LoadItem* item);
 	virtual void reset();
     // 卸载
 	virtual void unload();
+
+	virtual void init() override;
 	virtual void dispose();
 
 	virtual UObject* InstantiateObject(std::string resName);

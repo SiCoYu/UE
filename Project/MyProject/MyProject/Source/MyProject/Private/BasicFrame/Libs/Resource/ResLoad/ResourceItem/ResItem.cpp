@@ -96,8 +96,10 @@ std::string ResItem::getPrefabName()         // 只有 Prefab 资源才实现这
 	return "";
 }
 
-void ResItem::init(LoadItem* item)
+void ResItem::initWithLoad(LoadItem* item)
 {
+	this->init();
+
 	this->mRefCountResLoadResultNotify->getResLoadState()->setSuccessLoaded();
 }
 
@@ -118,6 +120,11 @@ void ResItem::reset()
 void ResItem::unload()
 {
 
+}
+
+void ResItem::init()
+{
+	Super::init();
 }
 
 void ResItem::dispose()
