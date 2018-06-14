@@ -44,7 +44,7 @@ protected:
 public:
 	virtual void addEntity(SceneEntityBase* entity);
 	virtual void removeEntity(SceneEntityBase* entity);
-	bool Contains(SceneEntityBase entity);
+	bool Contains(SceneEntityBase* entity);
 	virtual void onTick(float delta, TickMode tickMode);
 
 protected:

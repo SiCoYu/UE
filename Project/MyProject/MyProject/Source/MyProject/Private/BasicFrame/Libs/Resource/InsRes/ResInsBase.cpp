@@ -47,8 +47,9 @@ std::string ResInsBase::getPrefabName()         // 只有 Prefab 资源才实现
 	return "";
 }
 
-void ResInsBase::init(ResItem* res)
+void ResInsBase::initWithRes(ResItem* res)
 {
+	this->init();
 	this->initImpl(res);         // 内部初始化完成后，才分发事件
 	this->mRefCountResLoadResultNotify->onLoadEventHandle(this);
 }
@@ -68,6 +69,11 @@ void ResInsBase::failed(ResItem* res)
 void ResInsBase::unload()
 {
 
+}
+
+void ResInsBase::init()
+{
+	Super::init();
 }
 
 void ResInsBase::dispose()

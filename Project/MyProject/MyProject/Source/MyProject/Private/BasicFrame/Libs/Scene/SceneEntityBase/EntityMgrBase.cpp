@@ -132,7 +132,7 @@ void EntityMgrBase::removeEntity(SceneEntityBase* entity)
 	}
 }
 
-bool EntityMgrBase::Contains(SceneEntityBase entity)
+bool EntityMgrBase::Contains(SceneEntityBase* entity)
 {
 	return this->mSceneEntityList.contains(entity);
 }
