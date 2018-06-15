@@ -22,11 +22,11 @@ ObjectAssetInsResBase::~ObjectAssetInsResBase()
 	
 }
 
-void ObjectAssetInsResBase::initImpl(ResItem* res)
+void ObjectAssetInsResBase::_initWithResImpl(ResItem* res)
 {
 	this->mActor = Cast<UClass>(res->getObject(res->getPrefabName()));
 
-	Super::initImpl(res);
+	Super::_initWithResImpl(res);
 }
 
 UObject* ObjectAssetInsResBase::InstantiateObject(std::string resName, bool isSetInitOrientPos, FVector position, FQuat rotation, ResInsEventDispatch* evtHandle)

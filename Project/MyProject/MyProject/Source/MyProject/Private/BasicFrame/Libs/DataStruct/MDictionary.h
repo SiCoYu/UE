@@ -29,7 +29,7 @@ public:
 	void init();
 	void dispose();
 	int count();
-	TValue&& operator[] (TKey&& key);
+	TValue& operator[] (TKey& key);
 
 	TValue& value(TKey& key);
 	TKey& key(TValue& value);

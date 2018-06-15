@@ -1,24 +1,27 @@
 #include "MyProject.h"
-#include "MRay.h"
+#include "MWrapQuaternion.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 MWrapQuaternion::MWrapQuaternion()
 {
 	this->mIsEulerAngleInvalid = true;
-	this->setRotation(FQuat(0, 0, 0, 0));
+	FQuat rotation(0, 0, 0, 0);
+	this->setRotation(rotation);
 }
 
 MWrapQuaternion::MWrapQuaternion(float x, float y, float z, float w)
 {
 	this->mIsEulerAngleInvalid = true;
-	this->setRotation(FQuat(x, y, z, w));
+	FQuat rotation(x, y, z, w);
+	this->setRotation(rotation);
 }
 
 void MWrapQuaternion::clear()
 {
 	this->mIsEulerAngleInvalid = true;
-	this->setRotation(FQuat(0, 0, 0, 1));
+	FQuat rotation(0, 0, 0, 1);
+	this->setRotation(rotation);
 }
 
 void MWrapQuaternion::setRotateXYZW(float x, float y, float z, float w)

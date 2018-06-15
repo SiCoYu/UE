@@ -32,7 +32,7 @@ public:
 	virtual ~ObjectAssetInsResBase();
 
 protected:
-	virtual void initImpl(ResItem* res) override;
+	virtual void _initWithResImpl(ResItem* res) override;
 
 public:
 	UObject* InstantiateObject(std::string resName, bool isSetInitOrientPos = false, FVector position = FVector::ZeroVector, FQuat rotation = FQuat::Identity, ResInsEventDispatch* evtHandle = nullptr);

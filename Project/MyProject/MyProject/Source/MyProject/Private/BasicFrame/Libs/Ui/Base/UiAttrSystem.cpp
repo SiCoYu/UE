@@ -1,7 +1,7 @@
 #include "MyProject.h"
+#include "UiAttrSystem.h"
 #include "UiAttrItem.h"
 #include "UiFormId.h"
-#include "UiAttrSystem.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
@@ -60,18 +60,22 @@ std::string UiAttrSystem::getPath(UiFormId id)
 // 通过路径获取
 UiFormId UiAttrSystem::GetFormIDByPath(std::string resPath, ResPathType pathType)
 {
+	UiFormId formId;
+
 	for(auto keyValue : this->mId2AttrDic.getData())
 	{
+		formId = keyValue.first;
+
 		if (ResPathType::ePathComUI == pathType)
 		{
-			if (this->mId2AttrDic[keyValue.first]->mWidgetPath == resPath)
+			if (this->mId2AttrDic[formId]->mWidgetPath == resPath)
 			{
 				return keyValue.first;
 			}
 		}
 		else if (ResPathType::ePathCodePath == pathType)
 		{
-			if (this->mId2AttrDic[keyValue.first]->mCodePath == resPath)
+			if (this->mId2AttrDic[formId]->mCodePath == resPath)
 			{
 				return keyValue.first;
 			}

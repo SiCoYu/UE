@@ -17,16 +17,21 @@ MY_BEGIN_NAMESPACE(MyNS)
 TableSys::TableSys()
 {
 	TableBase* tableBase = nullptr;
+	TableId tableId;
+
 	tableBase = MY_NEW TableBase("ObjectBase_client.bytes", "ObjectBase_client");
-	this->mDicTable[TableId::TABLE_OBJECT] = tableBase;
+	tableId = TableId::TABLE_OBJECT;
+	this->mDicTable[tableId] = tableBase;
 	tableBase->init();
 
 	tableBase = MY_NEW TableBase("CardBase_client.bytes", "CardBase_client");
-	this->mDicTable[TableId::TABLE_CARD] = tableBase;
+	tableId = TableId::TABLE_CARD;
+	this->mDicTable[tableId] = tableBase;
 	tableBase->init();
 
 	tableBase = MY_NEW TableBase("SkillBase_client.bytes", "SkillBase_client");
-	this->mDicTable[TableId::TABLE_SKILL] = tableBase;    // 添加一个表的步骤三
+	tableId = TableId::TABLE_SKILL;
+	this->mDicTable[tableId] = tableBase;    // 添加一个表的步骤三
 	tableBase->init();
 
 	this->mByteBuffer = MY_NEW MByteBuffer();

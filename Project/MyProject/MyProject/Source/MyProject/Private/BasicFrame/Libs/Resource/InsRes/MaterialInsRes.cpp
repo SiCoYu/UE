@@ -26,13 +26,13 @@ UMaterialInstanceDynamic* MaterialInsRes::getMaterialInterfaceDynamic()
 	return this->mMaterialDyn;
 }
 
-void MaterialInsRes::initImpl(ResItem* res)
+void MaterialInsRes::_initWithResImpl(ResItem* res)
 {
 	// 获取资源单独保存
 	this->mMaterial = Cast<UMaterialInterface>(res->getObject(res->getPrefabName()));
 	this->mMaterialDyn = UMaterialInstanceDynamic::Create(this->mMaterial, nullptr);
 
-	Super::initImpl(res);
+	Super::_initWithResImpl(res);
 }
 
 void MaterialInsRes::unload()

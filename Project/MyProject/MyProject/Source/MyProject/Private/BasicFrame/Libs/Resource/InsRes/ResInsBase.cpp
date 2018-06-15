@@ -50,12 +50,12 @@ std::string ResInsBase::getPrefabName()         // 只有 Prefab 资源才实现
 void ResInsBase::initWithRes(ResItem* res)
 {
 	this->init();
-	this->initImpl(res);         // 内部初始化完成后，才分发事件
+	this->_initWithResImpl(res);         // 内部初始化完成后，才分发事件
 	this->mRefCountResLoadResultNotify->onLoadEventHandle(this);
 }
 
 // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重在了
-void ResInsBase::initImpl(ResItem* res)
+void ResInsBase::_initWithResImpl(ResItem* res)
 {
 
 }

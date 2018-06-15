@@ -244,7 +244,8 @@ void PriorityList::addPriorityObject(INoOrPriorityObject* priorityObject, float 
 
 				if (this->mIsSpeedUpFind)
 				{
-					this->mDic.add(priorityObject, this->mPriorityProcessObjectList.count() - 1);
+					int pos = this->mPriorityProcessObjectList.count() - 1;
+					this->mDic.add(priorityObject, pos);
 				}
 			}
 			else
@@ -257,7 +258,8 @@ void PriorityList::addPriorityObject(INoOrPriorityObject* priorityObject, float 
 
 					if (this->mIsSpeedUpFind)
 					{
-						this->mDic.add(priorityObject, this->mPriorityProcessObjectList.count() - 1);
+						int pos = this->mPriorityProcessObjectList.count() - 1;
+						this->mDic.add(priorityObject, pos);
 					}
 				}
 				else

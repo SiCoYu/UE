@@ -84,9 +84,11 @@ void EntityMgrBase::addEntity(SceneEntityBase* entity)
 {
 	this->_addObject(entity);
 
-	if(!this->mId2EntityDic.containsKey(entity->getGlobalUniqueId()))
+	std::string uniqueId = entity->getGlobalUniqueId();
+
+	if(!this->mId2EntityDic.containsKey(uniqueId))
 	{
-		this->mId2EntityDic[entity->getGlobalUniqueId()] = entity;
+		this->mId2EntityDic[uniqueId] = entity;
 	}
 	else
 	{
@@ -99,9 +101,11 @@ void EntityMgrBase::addEntity(SceneEntityBase* entity)
 		}
 	}
 
-	if (!this->mThisId2EntityDic.containsKey(entity->getThisId()))
+	uint thisId = entity->getThisId();
+
+	if (!this->mThisId2EntityDic.containsKey(thisId))
 	{
-		this->mThisId2EntityDic[entity->getThisId()] = entity;
+		this->mThisId2EntityDic[thisId] = entity;
 	}
 
 	//entity->onInit();
@@ -111,9 +115,11 @@ void EntityMgrBase::removeEntity(SceneEntityBase* entity)
 {
 	this->_removeObject(entity);
 
-	if (this->mId2EntityDic.containsKey(entity->getGlobalUniqueId()))
+	std::string uniqueId = entity->getGlobalUniqueId();
+
+	if (this->mId2EntityDic.containsKey(uniqueId))
 	{
-		this->mId2EntityDic.remove(entity->getGlobalUniqueId());
+		this->mId2EntityDic.remove(uniqueId);
 	}
 	else
 	{
@@ -126,9 +132,11 @@ void EntityMgrBase::removeEntity(SceneEntityBase* entity)
 		}
 	}
 
-	if (this->mThisId2EntityDic.containsKey(entity->getThisId()))
+	uint thisId = entity->getThisId();
+
+	if (this->mThisId2EntityDic.containsKey(thisId))
 	{
-		this->mThisId2EntityDic.remove(entity->getThisId());
+		this->mThisId2EntityDic.remove(thisId);
 	}
 }
 

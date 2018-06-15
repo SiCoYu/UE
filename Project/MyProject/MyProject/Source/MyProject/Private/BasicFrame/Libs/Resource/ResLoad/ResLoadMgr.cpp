@@ -559,11 +559,11 @@ void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
 
 void ResLoadMgr::onLoaded(LoadItem* item)
 {
-	std::string _path = item->getPath();
+	std::string path = item->getPath();
 
-	if (this->mLoadData->mPath2ResDic.containsKey(_path))
+	if (this->mLoadData->mPath2ResDic.containsKey(path))
 	{
-		this->mLoadData->mPath2ResDic[item->getPath()]->init(this->mLoadData->mPath2LoadItemDic[item->getPath()]);
+		this->mLoadData->mPath2ResDic.value(path)->initWithLoad(this->mLoadData->mPath2LoadItemDic.value(path));
 	}
 	else        // 如果资源已经没有使用的地方了
 	{

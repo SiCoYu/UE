@@ -4,7 +4,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(AuxWindow, GObject)
+M_IMPLEMENT_AND_REGISTER_CLASS(AuxWindow, AuxComponent)
 
 void AuxWindow::init()
 {

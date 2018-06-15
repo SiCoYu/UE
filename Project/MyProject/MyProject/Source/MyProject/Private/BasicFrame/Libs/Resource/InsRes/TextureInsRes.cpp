@@ -18,12 +18,12 @@ UTexture* TextureInsRes::getTexture()
 	return this->mTexture;
 }
 
-void TextureInsRes::initImpl(ResItem* res)
+void TextureInsRes::_initWithResImpl(ResItem* res)
 {
 	// 获取资源单独保存
 	this->mTexture = Cast<UTexture>(res->getObject(res->getPrefabName()));
 
-	Super::initImpl(res);
+	Super::_initWithResImpl(res);
 }
 
 void TextureInsRes::unload()

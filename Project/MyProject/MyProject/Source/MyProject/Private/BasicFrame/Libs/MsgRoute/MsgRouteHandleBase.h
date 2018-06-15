@@ -5,6 +5,7 @@
 #include "MsgRouteId.h"
 #include "EventDispatchDelegate.h"
 #include "GObject.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -16,7 +17,7 @@ class MsgRouteHandleBase : public GObject
 	M_DECLARE_CLASS(MsgRouteHandleBase, GObject)
 
 public:
-	MDictionary<int, AddOnceEventDispatch*> mId2HandleDic;
+	MDictionary<uint8, AddOnceEventDispatch*> mId2HandleDic;
 
 public:
 	MsgRouteHandleBase();

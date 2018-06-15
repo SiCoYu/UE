@@ -60,20 +60,23 @@ ResPackType ResInsMgrBase::getResPackType()
 
 void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 {
-	this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+	std::string path = param->getPath();
+	ResInsBase* resIns = this->mPath2ResDic[path];
 
-	if (this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
+	resIns->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+
+	if (resIns->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
 		if (!param->getLoadEventHandle().empty())
 		{
-			param->getLoadEventHandle()(this->mPath2ResDic[param->getPath()]);        // 直接通知上层完成加载
+			param->getLoadEventHandle()(resIns);        // 直接通知上层完成加载
 		}
 	}
 	else
 	{
 		if (!param->getLoadEventHandle().empty())
 		{
-			this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
+			resIns->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 		}
 	}
 }
@@ -82,9 +85,12 @@ void ResInsMgrBase::unload(std::string path, EventDispatchDelegate loadEventHand
 {
 	if (this->mPath2ResDic.containsKey(path))
 	{
-		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
-		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->decRef();
-		if (this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
+		ResInsBase* resIns = this->mPath2ResDic[path];
+
+		resIns->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(loadEventHandle);
+		resIns->getRefCountResLoadResultNotify()->getRefCount()->decRef();
+
+		if (resIns->getRefCountResLoadResultNotify()->getRefCount()->isNoRef())
 		{
 			if (this->mLoadingDepth != 0)       // 如果加载深度不是 0 的，说明正在加载，不能卸载对象
 			{
@@ -146,9 +152,10 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 	if (this->mPath2ResDic.containsKey(path))
 	{
 		this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getResLoadState()->copyFrom(res->getRefCountResLoadResultNotify()->getResLoadState());
+
 		if (res->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 		{
-			this->mPath2ResDic[path]->init(res);
+			this->mPath2ResDic[path]->initWithRes(res);
 
 			if (this->mPath2ResDic[path]->getIsOrigResNeedImmeUnload())
 			{

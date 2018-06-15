@@ -33,25 +33,26 @@ void NetCmdDispatchHandle::dispose()
 
 }
 
-void NetCmdDispatchHandle::addParamHandle(int paramId, EventDispatchDelegate handle)
+void NetCmdDispatchHandle::addParamHandle(uint8 paramId, EventDispatchDelegate handle)
 {
 	if (!this->mId2HandleDic.containsKey(paramId))
 	{
-		this->mId2HandleDic[paramId] = MY_NEW AddOnceEventDispatch();
+		AddOnceEventDispatch* addOnceEventDispatch = MY_NEW AddOnceEventDispatch();
+		this->mId2HandleDic.add(paramId, addOnceEventDispatch);
 	}
 	else
 	{
 		// 日志
 	}
 
-	this->mId2HandleDic[paramId]->addEventHandle(handle);
+	this->mId2HandleDic.value(paramId)->addEventHandle(handle);
 }
 
-void NetCmdDispatchHandle::removeParamHandle(int paramId, EventDispatchDelegate handle)
+void NetCmdDispatchHandle::removeParamHandle(uint8 paramId, EventDispatchDelegate handle)
 {
 	if (this->mId2HandleDic.containsKey(paramId))
 	{
-		this->mId2HandleDic[paramId]->removeEventHandle(handle);
+		this->mId2HandleDic.value(paramId)->removeEventHandle(handle);
 	}
 	else
 	{

@@ -37,7 +37,7 @@ public:
 
 protected:
     // 这个是内部初始化实现，初始化都重载这个，但是现在很多都是重载了
-	virtual void initImpl(ResItem* res);
+	virtual void _initWithResImpl(ResItem* res);
 
 public:
 	virtual void failed(ResItem* res);

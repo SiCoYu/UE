@@ -29,8 +29,8 @@ public:
 	virtual void init();
 	virtual void dispose();
 
-	void addCmdHandle(int cmdId, EventDispatchDelegate handle);
-	void removeCmdHandle(int cmdId, EventDispatchDelegate handle);
+	void addCmdHandle(uint8 cmdId, EventDispatchDelegate handle);
+	void removeCmdHandle(uint8 cmdId, EventDispatchDelegate handle);
 
 	virtual void handleMsg(NetCmdDispatchInfo* cmdDispInfo);
 };

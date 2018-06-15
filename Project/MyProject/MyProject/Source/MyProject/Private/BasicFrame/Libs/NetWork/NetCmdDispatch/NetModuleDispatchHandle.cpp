@@ -34,7 +34,7 @@ void NetModuleDispatchHandle::dispose()
 
 }
 
-void NetModuleDispatchHandle::addCmdHandle(int cmdId, EventDispatchDelegate handle)
+void NetModuleDispatchHandle::addCmdHandle(uint8 cmdId, EventDispatchDelegate handle)
 {
 	if (!this->mId2DispatchDic.containsKey(cmdId))
 	{
@@ -44,7 +44,7 @@ void NetModuleDispatchHandle::addCmdHandle(int cmdId, EventDispatchDelegate hand
 	this->mId2DispatchDic[cmdId]->addEventHandle(handle);
 }
 
-void NetModuleDispatchHandle::removeCmdHandle(int cmdId, EventDispatchDelegate handle)
+void NetModuleDispatchHandle::removeCmdHandle(uint8 cmdId, EventDispatchDelegate handle)
 {
 	if (this->mId2DispatchDic.containsKey(cmdId))
 	{
@@ -61,7 +61,7 @@ void NetModuleDispatchHandle::handleMsg(NetCmdDispatchInfo* cmdDispInfo)
 	if (this->mId2DispatchDic.containsKey(cmdDispInfo->byCmd))
     {
 		GLogSys->log(UtilStr::Format("处理消息: byCmd = {0},  byParam = {1}", cmdDispInfo->byCmd, cmdDispInfo->byParam));
-		this->mId2DispatchDic[cmdDispInfo->byCmd]->dispatchEvent(cmdDispInfo);
+		this->mId2DispatchDic.value(cmdDispInfo->byCmd)->dispatchEvent(cmdDispInfo);
     }
     else
     {

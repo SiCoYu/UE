@@ -43,7 +43,7 @@ public:
 	UMaterialInstanceDynamic* getMaterialInterfaceDynamic();
 
 protected:
-	virtual void initImpl(ResItem* res) override;
+	virtual void _initWithResImpl(ResItem* res) override;
 
 public:
 	virtual void unload() override;

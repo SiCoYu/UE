@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-FVector UtilLogic::FAKE_POS = new FVector(-1000, 0, -1000);  // Ä¬ÈÏÒş²Øµ½Õâ¸öÎ»ÖÃ
+FVector UtilLogic::FAKE_POS(-1000, 0, -1000);  // é»˜è®¤éšè—åˆ°è¿™ä¸ªä½ç½®
 
 std::string UtilLogic::convScenePath2LevelName(std::string& path)
 {

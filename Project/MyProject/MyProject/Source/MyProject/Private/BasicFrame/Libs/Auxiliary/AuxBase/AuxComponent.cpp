@@ -167,7 +167,7 @@ AActor* AuxComponent::getPlaceHolderActor()
 	return this->mPlaceHolderActor;
 }
 
-AActor* AuxComponent::setPlaceHolderActor(AActor* value)
+void AuxComponent::setPlaceHolderActor(AActor* value)
 {
 	this->mPlaceHolderActor = value;
 }

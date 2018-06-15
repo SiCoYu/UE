@@ -23,7 +23,7 @@ ClassAssetResItem::~ClassAssetResItem()
 
 void ClassAssetResItem::initWithLoad(LoadItem* item)
 {
-	Super::init(item);
+	Super::initWithLoad(item);
 
 	this->mResObject = Cast<UClass>(item->getObject());
 

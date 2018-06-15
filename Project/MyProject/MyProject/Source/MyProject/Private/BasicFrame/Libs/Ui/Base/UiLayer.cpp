@@ -44,14 +44,17 @@ void UiLayer::setActorName(std::string& rhv)
 
 bool UiLayer::hasForm(UForm* form)
 {
-	return this->mWinDic[form->getId()] != nullptr;
+	UiFormId formId = form->getId();
+	return this->mWinDic[formId] != nullptr;
 }
 
 void UiLayer::removeForm(UForm* form)
 {
-	if (this->mWinDic[form->getId()] != nullptr)
+	UiFormId formId = form->getId();
+
+	if (this->mWinDic[formId] != nullptr)
 	{
-		this->mWinDic.remove(form->getId());
+		this->mWinDic.remove(formId);
 	}
 }
 
@@ -62,12 +65,15 @@ UiLayerId UiLayer::getLayerId()
 
 void UiLayer::addForm(UForm* form)
 {
-	this->mWinDic.add(form->getId(), form);
+	UiFormId formId = form->getId();
+
+	this->mWinDic.add(formId, form);
 }
 
 void UiLayer::onStageReSize()
 {
-	typename MDictionary<UiFormId, UForm*>::Iterator itBegin, itEnd;
+	Iterator itBegin, itEnd;
+
 	itBegin = this->mWinDic.getData().begin();
 	itEnd = this->mWinDic.getData().end();
 
@@ -79,7 +85,8 @@ void UiLayer::onStageReSize()
 
 void UiLayer::closeAllForm()
 {
-	typename MDictionary<UiFormId, UForm*>::Iterator itBegin, itEnd;
+	Iterator itBegin, itEnd;
+
 	itBegin = this->mWinDic.getData().begin();
 	itEnd = this->mWinDic.getData().end();
 

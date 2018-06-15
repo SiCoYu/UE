@@ -162,7 +162,8 @@ void NoPriorityList::addNoPriorityObject(INoOrPriorityObject* noPriorityObject)
 
 			if (this->mIsSpeedUpFind)
 			{
-				this->mDic.add(noPriorityObject, this->mNoPriorityProcessObjectList.count() - 1);
+				int pos = this->mNoPriorityProcessObjectList.count() - 1;
+				this->mDic.add(noPriorityObject, pos);
 			}
 		}
 	}

@@ -6,6 +6,7 @@
 #include "MDictionary.h"
 #include "EventDispatchDelegate.h"	// FastDelegate1
 #include "GObject.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -28,8 +29,8 @@ public:
 	virtual void init();
 	virtual void dispose();
 
-	void addParamHandle(int paramId, EventDispatchDelegate handle);
-	void removeParamHandle(int paramId, EventDispatchDelegate handle);
+	void addParamHandle(uint8 paramId, EventDispatchDelegate handle);
+	void removeParamHandle(uint8 paramId, EventDispatchDelegate handle);
 
 	virtual void handleMsg(NetCmdDispatchInfo* cmd);
 };

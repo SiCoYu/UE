@@ -72,8 +72,9 @@ T* ResInsMgrBase::createResItem(LoadParam* param)
 template<class T>
 void ResInsMgrBase::loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
 {
-	this->mPath2ResDic[param->getPath()] = resItem;
-	this->mPath2ResDic[param->getPath()]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
+	std::string path = param->getPath();
+	this->mPath2ResDic[path] = resItem;
+	this->mPath2ResDic[path]->getRefCountResLoadResultNotify()->getResLoadState()->setLoading();
 
 	param->setLoadEventHandle(MakeEventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
 	GResLoadMgr->loadAsset(param);

@@ -209,15 +209,17 @@ void UiMgr::addFormNoReady(UForm* form)
 {
 	GNativeObjectReferencer->addObjectReference(form);
 
+	UiFormId formId = form->getId();
+
 	UiLayer* layer = this->getLayer(
-		this->mUiAttrSystem->mId2AttrDic[form->getId()]->mCanvasId, 
-		this->mUiAttrSystem->mId2AttrDic[form->getId()]->mLayerId
+		this->mUiAttrSystem->mId2AttrDic[formId]->mCanvasId,
+		this->mUiAttrSystem->mId2AttrDic[formId]->mLayerId
 	);
 
 	form->setUiLayer(layer);
 	layer->addForm(form);
 
-	this->mId2FormDic.add(form->getId(), form);
+	this->mId2FormDic.add(formId, form);
 	form->init();        // 初始化
 }
 

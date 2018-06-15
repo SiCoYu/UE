@@ -356,7 +356,7 @@ void DownloadMgr::onLoaded(DownloadItem* item)
 
     if (this->mLoadData->mPath2LoadItemDic.containsKey(resUniqueId))
     {
-		this->mLoadData->mPath2LoadItemDic[item->getResUniqueId()]->init();
+		this->mLoadData->mPath2LoadItemDic[resUniqueId]->init();
     }
     else        // 如果资源已经没有使用的地方了
     {

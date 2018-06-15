@@ -31,19 +31,23 @@ void MsgRouteHandleBase::dispose()
 
 void MsgRouteHandleBase::addMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle)
 {
-	if (!this->mId2HandleDic.containsKey((int)msgRouteId))
+	uint8 key = (uint8)msgRouteId;
+
+	if (!this->mId2HandleDic.containsKey(key))
 	{
-		this->mId2HandleDic[(int)msgRouteId] = MY_NEW AddOnceEventDispatch();
+		this->mId2HandleDic[key] = MY_NEW AddOnceEventDispatch();
 	}
 
-	this->mId2HandleDic[(int)msgRouteId]->addEventHandle(handle);
+	this->mId2HandleDic[key]->addEventHandle(handle);
 }
 
 void MsgRouteHandleBase::removeMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle)
 {
-	if (this->mId2HandleDic.containsKey((int)msgRouteId))
+	uint8 key = ((uint8)msgRouteId);
+
+	if (this->mId2HandleDic.containsKey(key))
 	{
-		this->mId2HandleDic[(int)msgRouteId]->removeEventHandle(handle);
+		this->mId2HandleDic[key]->removeEventHandle(handle);
 	}
 }
 
@@ -51,9 +55,9 @@ void MsgRouteHandleBase::handleMsg(IDispatchObject* dispObj, uint uniqueId)
 {
 	MsgRouteBase* msg = (MsgRouteBase*)dispObj;
 
-	int key = ((int)msg->mMsgId);
+	uint8 key = ((uint8)msg->mMsgId);
 
-	if (this->mId2HandleDic.containsKey((int)msg->mMsgId))
+	if (this->mId2HandleDic.containsKey(key))
 	{
 		this->mId2HandleDic[key]->dispatchEvent(msg);
 	}

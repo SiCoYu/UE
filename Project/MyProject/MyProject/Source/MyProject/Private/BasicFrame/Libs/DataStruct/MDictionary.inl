@@ -38,7 +38,7 @@ int MDictionary<TKey, TValue>::count()
 }
 
 template <class TKey, class TValue>
-TValue&& MDictionary<TKey, TValue>::operator[] (TKey&& key)
+TValue& MDictionary<TKey, TValue>::operator[] (TKey& key)
 {
 	return this->mData[key];
     //return this->value(key);

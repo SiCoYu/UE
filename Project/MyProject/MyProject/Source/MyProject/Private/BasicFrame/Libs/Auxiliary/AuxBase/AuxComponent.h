@@ -51,7 +51,7 @@ public:
 	bool isNeedPlaceHolderActor();
 	void setIsNeedPlaceHolderActor(bool value);
 	AActor* getPlaceHolderActor();
-	AActor* setPlaceHolderActor(AActor* value);
+	void setPlaceHolderActor(AActor* value);
 	bool isSelfValid();
 
 protected:

@@ -19,6 +19,8 @@ class UiLayer : public GObject
 {
 	M_DECLARE_CLASS(UiLayer, GObject)
 
+	typedef typename MDictionary<UiFormId, UForm*>::Iterator Iterator;
+
 protected:
 	UiLayerId mLayer;	                        // UiFormId.FirstLayer定义
 	FSlateRenderTransform* mLayerTrans;			// 当前所在层根节点转换
