@@ -1,180 +1,186 @@
-using UnityEngine;
+#pragma once
 
-namespace SDK.Lib
+#include "SceneEntityBase.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+/**
+ * @brief 主角
+ */
+public class PlayerMain : Player
 {
-    /**
-	 * @brief 主角
-	 */
-    public class PlayerMain : Player
+	protected MList<Vehicle2D> mNeighbors;
+
+	public SteerInfo mSteerInfo;
+
+	public PlayerMain()
 	{
-        protected MList<Vehicle2D> mNeighbors;
+		this.mTypeId = "PlayerMain";
+		this.mEntityType = EntityType.ePlayerMain;
+		this.mEntityUniqueId = Ctx.msInstance.mPlayerMgr.genNewStrId();
+		this.mMovement = new PlayerMainMovement(this);
+		this.mAttack = new PlayerMainAttack(this);
 
-        public SteerInfo mSteerInfo;
+		//this.mMutilRigidCalcPolicy = new MutilRigidCalcPolicy();
 
-        public PlayerMain()
+		this.mNeighbors = new MList<Vehicle2D>();
+		this.mNeighbors.setIsSpeedUpFind(true);
+		this.mSteerInfo = new SteerInfo();
+	}
+
+	override public void initRender()
+	{
+		if (null == this.mRender)
 		{
-            this.mTypeId = "PlayerMain";
-            this.mEntityType = EntityType.ePlayerMain;
-            this.mEntityUniqueId = Ctx.msInstance.mPlayerMgr.genNewStrId();
-            this.mMovement = new PlayerMainMovement(this);
-            this.mAttack = new PlayerMainAttack(this);
+			this.mRender = new PlayerMainRender(this);
+		}
 
-            //this.mMutilRigidCalcPolicy = new MutilRigidCalcPolicy();
+		this.mRender.init();
+		//this.mRender = null;        // 不需要渲染器
+	}
 
-            this.mNeighbors = new MList<Vehicle2D>();
-            this.mNeighbors.setIsSpeedUpFind(true);
-            this.mSteerInfo = new SteerInfo();
-        }
+	protected override void _onPreInit()
+	{
+		base._onPreInit();
 
-        override public void initRender()
-        {
-            if (null == this.mRender)
-            {
-                this.mRender = new PlayerMainRender(this);
-            }
+		//this.hide();    // PlayerMain 不显示，仅仅记录数据
 
-            this.mRender.init();
-            //this.mRender = null;        // 不需要渲染器
-        }
+		this.mMovement.init();
+		this.mAttack.init();
 
-        protected override void _onPreInit()
-        {
-            base._onPreInit();
+		//Ctx.msInstance.mGlobalDelegate.mMainChildMassChangedDispatch.addEventHandle(null, this.onChildMassChanged);
+		//this.mMutilRigidCalcPolicy.init();
+	}
 
-            //this.hide();    // PlayerMain 不显示，仅仅记录数据
+	protected override void _onPostInit()
+	{
+		base._onPostInit();
+	}
 
-            this.mMovement.init();
-            this.mAttack.init();
+	override public void dispose()
+	{
+		//this.mMutilRigidCalcPolicy.dispose();
+		if (null != Ctx.msInstance.mPlayerMgr)
+		{
+			Ctx.msInstance.mPlayerMgr.removeHero();
+		}
 
-            //Ctx.msInstance.mGlobalDelegate.mMainChildMassChangedDispatch.addEventHandle(null, this.onChildMassChanged);
-            //this.mMutilRigidCalcPolicy.init();
-        }
+		base.dispose();
+	}
 
-        protected override void _onPostInit()
-        {
-            base._onPostInit();
-        }
+	override public void putInPool()
+	{
+		Ctx.msInstance.mPlayerMgr.removeHero();
 
-        override public void dispose()
-        {
-            //this.mMutilRigidCalcPolicy.dispose();
-            if (null != Ctx.msInstance.mPlayerMgr)
-            {
-                Ctx.msInstance.mPlayerMgr.removeHero();
-            }
+		base.putInPool();
+	}
 
-            base.dispose();
-        }
+	public override void onPutInPool()
+	{
+		base.onPutInPool();
+	}
 
-        override public void putInPool()
-        {
-            Ctx.msInstance.mPlayerMgr.removeHero();
+	override public void autoHandle()
+	{
+		base.autoHandle();
 
-            base.putInPool();
-        }
+		Ctx.msInstance.mPlayerMgr.addHero(this);
+	}
 
-        public override void onPutInPool()
-        {
-            base.onPutInPool();
-        }
+	protected override void _onExecTick(float delta, TickMode tickMode)
+	{
+		base._onExecTick(delta, tickMode);
+	}
 
-        override public void autoHandle()
-        {
-            base.autoHandle();
+	protected override void _onPreTick(float delta, TickMode tickMode)
+	{
+		base._onPreTick(delta, tickMode);
+	}
 
-            Ctx.msInstance.mPlayerMgr.addHero(this);
-        }
+	protected override void _onPostTick(float delta, TickMode tickMode)
+	{
+		base._onPostTick(delta, tickMode);
 
-        protected override void _onExecTick(float delta, TickMode tickMode)
-        {
-            base._onExecTick(delta, tickMode);
-        }
+		//this.mMutilRigidCalcPolicy.onTick(delta, tickMode);
+	}
 
-        protected override void _onPreTick(float delta, TickMode tickMode)
-        {
-            base._onPreTick(delta, tickMode);
-        }
+	public void emitSnowBlock()
+	{
+		
+	}
 
-        protected override void _onPostTick(float delta, TickMode tickMode)
-        {
-            base._onPostTick(delta, tickMode);
+	override public void setName(string name)
+	{
+		base.setName(name);
+	}
 
-            //this.mMutilRigidCalcPolicy.onTick(delta, tickMode);
-        }
+	public void onChildChanged()
+	{
+		
+	}
+	
+	public void moveForwardByOrient(UnityEngine.Vector2 orient)
+	{
+		UnityEngine.Vector3 dir = UtilEngineWrap.convPosByMode(new UnityEngine.Vector3(orient.x, 0, orient.y));
+		UnityEngine.Quaternion quad = UtilMath.getRotateByOrient(dir) * (this.mMovement as PlayerMainMovement).getForwardRotate();
 
-        public void emitSnowBlock()
-        {
-            
-        }
+		this.setDestRotateEulerAngle(quad.eulerAngles, true);
+		(this.mMovement as PlayerMainMovement).moveForward();
+	}
 
-        override public void setName(string name)
-        {
-            base.setName(name);
-        }
+	// 摇杆按下，但是不移动
+	public void onPressButNoMove()
+	{
+		if (BeingState.eBSMoveCenter != this.mBeingState)
+		{
+			
+		}
+	}
 
-        public void onChildChanged()
-        {
-            
-        }
-        
-        public void moveForwardByOrient(UnityEngine.Vector2 orient)
-        {
-            UnityEngine.Vector3 dir = UtilEngineWrap.convPosByMode(new UnityEngine.Vector3(orient.x, 0, orient.y));
-            UnityEngine.Quaternion quad = UtilMath.getRotateByOrient(dir) * (this.mMovement as PlayerMainMovement).getForwardRotate();
+	public void stopMove()
+	{
+		(this.mMovement as PlayerMainMovement).stopMove();
+	}
 
-            this.setDestRotateEulerAngle(quad.eulerAngles, true);
-            (this.mMovement as PlayerMainMovement).moveForward();
-        }
+	//public bool isChildEnableRigidByThisId(uint thisId)
+	//{
+	//    PlayerMainChild child = this.mPlayerSplitMerge.mPlayerChildMgr.getEntityByThisId(thisId) as PlayerMainChild;
+	//    return this.mMutilRigidCalcPolicy.isChildEnableRigidByThisId(child);
+	//}
 
-        // 摇杆按下，但是不移动
-        public void onPressButNoMove()
-        {
-            if (BeingState.eBSMoveCenter != this.mBeingState)
-            {
-                
-            }
-        }
+	public void addVehicle(Vehicle2D vehicle)
+	{
+		if (!this.mNeighbors.contains(vehicle))
+		{
+			this.mNeighbors.add(vehicle);
+		}
+	}
 
-        public void stopMove()
-        {
-            (this.mMovement as PlayerMainMovement).stopMove();
-        }
+	public void removeVehicle(Vehicle2D vehicle)
+	{
+		if (this.mNeighbors.contains(vehicle))
+		{
+			this.mNeighbors.remove(vehicle);
+		}
+	}
 
-        //public bool isChildEnableRigidByThisId(uint thisId)
-        //{
-        //    PlayerMainChild child = this.mPlayerSplitMerge.mPlayerChildMgr.getEntityByThisId(thisId) as PlayerMainChild;
-        //    return this.mMutilRigidCalcPolicy.isChildEnableRigidByThisId(child);
-        //}
+	public MList<Vehicle2D> getNeighbors()
+	{
+		return this.mNeighbors;
+	}
 
-        public void addVehicle(Vehicle2D vehicle)
-        {
-            if (!this.mNeighbors.contains(vehicle))
-            {
-                this.mNeighbors.add(vehicle);
-            }
-        }
+	public override void setRotate(Quaternion rotation)
+	{
+		base.setRotate(rotation);
+	}
 
-        public void removeVehicle(Vehicle2D vehicle)
-        {
-            if (this.mNeighbors.contains(vehicle))
-            {
-                this.mNeighbors.remove(vehicle);
-            }
-        }
+	public override void setPos(UnityEngine.Vector3 pos)
+	{
+		base.setPos(pos);
+	}
+};
 
-        public MList<Vehicle2D> getNeighbors()
-        {
-            return this.mNeighbors;
-        }
-
-        public override void setRotate(Quaternion rotation)
-        {
-            base.setRotate(rotation);
-        }
-
-        public override void setPos(UnityEngine.Vector3 pos)
-        {
-            base.setPos(pos);
-        }
-    }
-}
+MY_END_NAMESPACE

@@ -1,389 +1,395 @@
-using UnityEngine;
+#pragma once
 
-namespace SDK.Lib
+#include "SceneEntityBase.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+/**
+ * @brief 场景中的玩家
+ */
+public class Player : BeingEntity
 {
-	/**
-	 * @brief 场景中的玩家
-	 */
-	public class Player : BeingEntity
+	public UniqueNumIdGen mUniqueNumIdGen;      // 子弹唯一 Id 生成
+	public UniqueNumIdGen mBulletIDGentor;
+
+	// 位置改变量，主要是暂时移动 child，以后改通知为服务器 child 位置，就不用这样修改了
+	protected UnityEngine.Vector3 mDeltaPos;
+
+	public uint mPlaneIndex = 0;//皮肤ID
+	public uint mBulletIndex = 0; //子弹ID
+	public uint mFormationIndex = 1;//阵形id
+	private uint mIsFastSpeed = 0;//0:正常速度 1:分裂速度
+	private bool mIsSpeedStateChanged = false;
+	protected EffectBase mNumEffect;    // 显示的数量特效
+	public int mRank = 0;
+	private int old_Rank = -1;
+
+	protected Vector3 mArrowDirectionScale;       // 箭头缩放
+	private System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+
+	public Player()
 	{
-        public UniqueNumIdGen mUniqueNumIdGen;      // 子弹唯一 Id 生成
-        public UniqueNumIdGen mBulletIDGentor;
+		//mSkinAniModel.m_modelList = new SkinSubModel[(int)ePlayerModelType.eModelTotal];
+		//int idx = 0;
+		//while (idx < (int)ePlayerModelType.eModelTotal)
+		//{
+		//    mSkinAniModel.m_modelList[idx] = new SkinSubModel();
+		//    ++idx;
+		//}
 
-        // 位置改变量，主要是暂时移动 child，以后改通知为服务器 child 位置，就不用这样修改了
-        protected UnityEngine.Vector3 mDeltaPos;
+		this.mUniqueNumIdGen = new UniqueNumIdGen(0);
+		this.mBulletIDGentor = new UniqueNumIdGen(0);
+	}
 
-        public uint mPlaneIndex = 0;//皮肤ID
-        public uint mBulletIndex = 0; //子弹ID
-        public uint mFormationIndex = 1;//阵形id
-        private uint mIsFastSpeed = 0;//0:正常速度 1:分裂速度
-        private bool mIsSpeedStateChanged = false;
-        protected EffectBase mNumEffect;    // 显示的数量特效
-        public int mRank = 0;
-        private int old_Rank = -1;
+	override protected void _onPreInit()
+	{
+		base._onPreInit();
 
-        protected Vector3 mArrowDirectionScale;       // 箭头缩放
-        private System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
-
-        public Player()
+		if(null != this.mAnimFSM)
 		{
-            //mSkinAniModel.m_modelList = new SkinSubModel[(int)ePlayerModelType.eModelTotal];
-            //int idx = 0;
-            //while (idx < (int)ePlayerModelType.eModelTotal)
-            //{
-            //    mSkinAniModel.m_modelList[idx] = new SkinSubModel();
-            //    ++idx;
-            //}
+			this.mAnimFSM.init();
+		}
+		if(null != this.mAnimatorControl)
+		{
+			this.mAnimatorControl.init();
+		}
+	}
 
-            this.mUniqueNumIdGen = new UniqueNumIdGen(0);
-            this.mBulletIDGentor = new UniqueNumIdGen(0);
-        }
+	protected override void _onPostInit()
+	{
+		base._onPostInit();
 
-        override protected void _onPreInit()
-        {
-            base._onPreInit();
+		if (this.getEntityType() == EntityType.ePlayerMain ||
+			this.getEntityType() == EntityType.ePlayerOther)
+		{
+			if (null == this.mHud)
+			{
+				this.mHud = Ctx.msInstance.mHudSystem.createHud(this);
+			}
 
-            if(null != this.mAnimFSM)
-            {
-                this.mAnimFSM.init();
-            }
-            if(null != this.mAnimatorControl)
-            {
-                this.mAnimatorControl.init();
-            }
-        }
+			this.mHud.init();
 
-        protected override void _onPostInit()
-        {
-            base._onPostInit();
+			if (this.mIsClipVisible)
+			{
+				this.mHud.onClipShow();
+			}
+			else
+			{
+				this.mHud.onClipHide();
+			}
+		}
+	}
 
-            if (this.getEntityType() == EntityType.ePlayerMain ||
-                this.getEntityType() == EntityType.ePlayerOther)
-            {
-                if (null == this.mHud)
-                {
-                    this.mHud = Ctx.msInstance.mHudSystem.createHud(this);
-                }
+	override public void onDestroy()
+	{
+		if (null != this.mNumEffect)
+		{
+			this.mNumEffect.dispose();
+			this.mNumEffect = null;
+		}
 
-                this.mHud.init();
+		base.onDestroy();
+	}
 
-                if (this.mIsClipVisible)
-                {
-                    this.mHud.onClipShow();
-                }
-                else
-                {
-                    this.mHud.onClipHide();
-                }
-            }
-        }
+	override public void onPutInPool()
+	{
+		this.mPlaneIndex = 0;
+		this.mBulletIndex = 0;
+		this.mFormationIndex = 1;
+		this.mIsFastSpeed = 0;//0:正常速度 1:分裂速度
+		this.mIsSpeedStateChanged = false;
+		this.mRank = 0;
+		this.old_Rank = -1;
 
-        override public void onDestroy()
-        {
-            if (null != this.mNumEffect)
-            {
-                this.mNumEffect.dispose();
-                this.mNumEffect = null;
-            }
+		if(null != this.mNumEffect)
+		{
+			EntityNumIdBufferObjectFactory.deleteObject(this.mNumEffect);
+			this.mNumEffect = null;
+		}
 
-            base.onDestroy();
-        }
+		base.onPutInPool();
+	}
 
-        override public void onPutInPool()
-        {
-            this.mPlaneIndex = 0;
-            this.mBulletIndex = 0;
-            this.mFormationIndex = 1;
-            this.mIsFastSpeed = 0;//0:正常速度 1:分裂速度
-            this.mIsSpeedStateChanged = false;
-            this.mRank = 0;
-            this.old_Rank = -1;
+	override public void autoHandle()
+	{
+		base.autoHandle();
+	}
 
-            if(null != this.mNumEffect)
-            {
-                EntityNumIdBufferObjectFactory.deleteObject(this.mNumEffect);
-                this.mNumEffect = null;
-            }
+	override public void initRender()
+	{
+		this.mRender = new PlayerRender(this);
+		this.mRender.init();
+	}
 
-            base.onPutInPool();
-        }
+	protected override void _onPreTick(float delta, TickMode tickMode)
+	{
+		base._onPreTick(delta, tickMode);
+	}
 
-        override public void autoHandle()
-        {
-            base.autoHandle();
-        }
+	protected override void _onPostTick(float delta, TickMode tickMode)
+	{
+		base._onPostTick(delta, tickMode);
 
-        override public void initRender()
-        {
-            this.mRender = new PlayerRender(this);
-            this.mRender.init();
-        }
+		if (null != this.mAnimFSM)
+		{
+			this.mAnimFSM.UpdateFSM();
+		}
+	}
 
-        protected override void _onPreTick(float delta, TickMode tickMode)
-        {
-            base._onPreTick(delta, tickMode);
-        }
+	public override void show()
+	{
+		base.show();
 
-        protected override void _onPostTick(float delta, TickMode tickMode)
-        {
-            base._onPostTick(delta, tickMode);
+		if (null != this.mNumEffect)
+		{
+			this.mNumEffect.show();
+		}
+	}
 
-            if (null != this.mAnimFSM)
-            {
-                this.mAnimFSM.UpdateFSM();
-            }
-        }
+	public override void hide()
+	{
+		base.hide();
 
-        public override void show()
-        {
-            base.show();
+		if (null != this.mNumEffect)
+		{
+			this.mNumEffect.hide();
+		}
+	}
 
-            if (null != this.mNumEffect)
-            {
-                this.mNumEffect.show();
-            }
-        }
+	override public void setPos(UnityEngine.Vector3 pos)
+	{
+		UnityEngine.Vector3 origPos = this.mPos;
+		base.setPos(pos);
+		this.mDeltaPos = this.mPos - origPos;
+	}
 
-        public override void hide()
-        {
-            base.hide();
+	override public void setDestPos(UnityEngine.Vector3 pos, bool immePos)
+	{
+		base.setDestPos(pos, immePos);
+	}
 
-            if (null != this.mNumEffect)
-            {
-                this.mNumEffect.hide();
-            }
-        }
+	public UnityEngine.Vector3 getDeltaPos()
+	{
+		return this.mDeltaPos;
+	}
 
-        override public void setPos(UnityEngine.Vector3 pos)
-        {
-            UnityEngine.Vector3 origPos = this.mPos;
-            base.setPos(pos);
-            this.mDeltaPos = this.mPos - origPos;
-        }
+	// 获取所有的 ChildMovement
+	public PlayerMovement[] getAllChildMovement()
+	{
+		return null;
+	}
 
-        override public void setDestPos(UnityEngine.Vector3 pos, bool immePos)
-        {
-            base.setDestPos(pos, immePos);
-        }
+	public MList<SceneEntityBase> getChildList()
+	{
+		return null;
+	}
 
-        public UnityEngine.Vector3 getDeltaPos()
-        {
-            return this.mDeltaPos;
-        }
+	public bool isExistThisId(uint thisId)
+	{
+		return false;
+	}
 
-        // 获取所有的 ChildMovement
-        public PlayerMovement[] getAllChildMovement()
-        {
-            return null;
-        }
+	public bool getIsDead()
+	{
+		return false;
+	}
 
-        public MList<SceneEntityBase> getChildList()
-        {
-            return null;
-        }
+	override public void attachToParentNode(EntityRenderBase render)
+	{
+		base.attachToParentNode(render);
 
-        public bool isExistThisId(uint thisId)
-        {
-            return false;
-        }
+		if (EntityType.ePlayerMain == this.mEntityType ||
+			EntityType.ePlayerOther == this.mEntityType)
+		{
+			this.mRender.attachToParentNode(render);
+		}
+	}
 
-        public bool getIsDead()
-        {
-            return false;
-        }
+	// 进入可见
+	override public void onClipShow()
+	{
+		base.onClipShow();
+		
+		if (null != this.mNumEffect)
+		{
+			this.mNumEffect.onClipShow();
+		}
 
-        override public void attachToParentNode(EntityRenderBase render)
-        {
-            base.attachToParentNode(render);
+		//标识
+		if(null != this.mHud)
+		{
+			this.mHud.setScore(stringBuilder.ToString());
+			if (this.mRank <= 0 || this.mRank > 3)
+			{
+				this.mHud.getRank().hide();
+			}
+			else
+			{
+				this.mHud.getRank().show();
+			}
+		}
+	}
 
-            if (EntityType.ePlayerMain == this.mEntityType ||
-                EntityType.ePlayerOther == this.mEntityType)
-            {
-                this.mRender.attachToParentNode(render);
-            }
-        }
+	// 离开可见
+	override public void onClipHide()
+	{
+		base.onClipHide();
 
-        // 进入可见
-        override public void onClipShow()
-        {
-            base.onClipShow();
-            
-            if (null != this.mNumEffect)
-            {
-                this.mNumEffect.onClipShow();
-            }
+		if(null != this.mNumEffect)
+		{
+			this.mNumEffect.onClipHide();
+		}
 
-            //标识
-            if(null != this.mHud)
-            {
-                this.mHud.setScore(stringBuilder.ToString());
-                if (this.mRank <= 0 || this.mRank > 3)
-                {
-                    this.mHud.getRank().hide();
-                }
-                else
-                {
-                    this.mHud.getRank().show();
-                }
-            }
-        }
+		if(null != this.mHud)
+		{
+			if (this.mRank >= 1 && this.mRank <= 3)
+			{
+				this.mHud.getRank().hide();
+			}
+		}
+	}
 
-        // 离开可见
-        override public void onClipHide()
-        {
-            base.onClipHide();
+	public void setScore(uint score)
+	{
+		stringBuilder.Remove(0, stringBuilder.Length);
+		if (score >= 0 && score < 1500)
+		{
+			stringBuilder.Append("<color=#FCFCFCFF>");
+			stringBuilder.Append(score);
+			stringBuilder.Append("</color>");
+		}
+		else if (score >= 1500 && score < 3000)
+		{
+			stringBuilder.Append("<color=#5CACEEFF>");
+			stringBuilder.Append(score);
+			stringBuilder.Append("</color>");
+		}
+		else if (score >= 3000 && score < 15000)
+		{
+			stringBuilder.Append("<color=#EEEE00FF>");
+			stringBuilder.Append(score);
+			stringBuilder.Append("</color>");
+		}
+		else if (score >= 15000 && score < 30000)
+		{
+			stringBuilder.Append("<color=#7CFC00FF>");
+			stringBuilder.Append(score);
+			stringBuilder.Append("</color>");
+		}
+		else if (score >= 30000 && score < 75000)
+		{
+			stringBuilder.Append("<color=#A020F0FF>");
+			stringBuilder.Append(score);
+			stringBuilder.Append("</color>");
+		}
+		else
+		{
+			stringBuilder.Append("<color=#EE0000FF>");
+			stringBuilder.Append(score);
+			stringBuilder.Append("</color>");
+		}
 
-            if(null != this.mNumEffect)
-            {
-                this.mNumEffect.onClipHide();
-            }
+		this.mHud.setScore(stringBuilder.ToString());
+	}
 
-            if(null != this.mHud)
-            {
-                if (this.mRank >= 1 && this.mRank <= 3)
-                {
-                    this.mHud.getRank().hide();
-                }
-            }
-        }
+	public void setRank(int rank)
+	{
+	}
 
-        public void setScore(uint score)
-        {
-            stringBuilder.Remove(0, stringBuilder.Length);
-            if (score >= 0 && score < 1500)
-            {
-                stringBuilder.Append("<color=#FCFCFCFF>");
-                stringBuilder.Append(score);
-                stringBuilder.Append("</color>");
-            }
-            else if (score >= 1500 && score < 3000)
-            {
-                stringBuilder.Append("<color=#5CACEEFF>");
-                stringBuilder.Append(score);
-                stringBuilder.Append("</color>");
-            }
-            else if (score >= 3000 && score < 15000)
-            {
-                stringBuilder.Append("<color=#EEEE00FF>");
-                stringBuilder.Append(score);
-                stringBuilder.Append("</color>");
-            }
-            else if (score >= 15000 && score < 30000)
-            {
-                stringBuilder.Append("<color=#7CFC00FF>");
-                stringBuilder.Append(score);
-                stringBuilder.Append("</color>");
-            }
-            else if (score >= 30000 && score < 75000)
-            {
-                stringBuilder.Append("<color=#A020F0FF>");
-                stringBuilder.Append(score);
-                stringBuilder.Append("</color>");
-            }
-            else
-            {
-                stringBuilder.Append("<color=#EE0000FF>");
-                stringBuilder.Append(score);
-                stringBuilder.Append("</color>");
-            }
+	public void setIsFastSpeed(uint state)
+	{
+		this.mIsFastSpeed = state;
+		this.mIsSpeedStateChanged = false;
+	}
 
-            this.mHud.setScore(stringBuilder.ToString());
-        }
+	public uint getIsFastSpeed()
+	{
+		return this.mIsFastSpeed;
+	}
 
-        public void setRank(int rank)
-        {
-        }
+	public bool getIsSpeedStateChanged()
+	{
+		return this.mIsSpeedStateChanged;
+	}
 
-        public void setIsFastSpeed(uint state)
-        {
-            this.mIsFastSpeed = state;
-            this.mIsSpeedStateChanged = false;
-        }
+	public void setIsSpeedStateChanged(bool value)
+	{
+		this.mIsSpeedStateChanged = value;
+	}
 
-        public uint getIsFastSpeed()
-        {
-            return this.mIsFastSpeed;
-        }
+	public void addNumEffect(float scaleFactor)
+	{
+		if (null == this.mNumEffect)
+		{
+			this.mNumEffect = Ctx.msInstance.mSceneEffectMgr.addLinkEffect(1, this.getEffectSocket());
+			(this.mNumEffect as LinkEffect).setLinkedEntity(this);
+			this.addSelfActorChangedHandle(this.mNumEffect, this.mNumEffect.onParentActorChangedHandle);
+			this.mNumEffect.setSortingOrder(this.getSortingOrder());
+			this.mNumEffect.setIsScaleAnim(true);
+		}
 
-        public bool getIsSpeedStateChanged()
-        {
-            return this.mIsSpeedStateChanged;
-        }
+		if(this.mIsClipVisible)
+		{
+			this.mNumEffect.onClipShow();
+		}
 
-        public void setIsSpeedStateChanged(bool value)
-        {
-            this.mIsSpeedStateChanged = value;
-        }
+		Vector3 scaleVector = this.mNumEffect.getScale();
+		scaleVector.x = scaleFactor;
+		scaleVector.y = scaleFactor;
+		scaleVector.z = scaleFactor;
+		this.mNumEffect.setScale(scaleVector);
 
-        public void addNumEffect(float scaleFactor)
-        {
-            if (null == this.mNumEffect)
-            {
-                this.mNumEffect = Ctx.msInstance.mSceneEffectMgr.addLinkEffect(1, this.getEffectSocket());
-                (this.mNumEffect as LinkEffect).setLinkedEntity(this);
-                this.addSelfActorChangedHandle(this.mNumEffect, this.mNumEffect.onParentActorChangedHandle);
-                this.mNumEffect.setSortingOrder(this.getSortingOrder());
-                this.mNumEffect.setIsScaleAnim(true);
-            }
+		this.mNumEffect.setRotate(this.getRotate());
+	}
 
-            if(this.mIsClipVisible)
-            {
-                this.mNumEffect.onClipShow();
-            }
+	public void removeNumEffect()
+	{
+		if(null != this.mNumEffect)
+		{
+			EntityNumIdBufferObjectFactory.deleteObject(this.mNumEffect);
+			this.mNumEffect = null;
+		}
+	}
 
-            Vector3 scaleVector = this.mNumEffect.getScale();
-            scaleVector.x = scaleFactor;
-            scaleVector.y = scaleFactor;
-            scaleVector.z = scaleFactor;
-            this.mNumEffect.setScale(scaleVector);
+	override public void setRotate(Quaternion rotation)
+	{
+		base.setRotate(rotation);
 
-            this.mNumEffect.setRotate(this.getRotate());
-        }
+		if (null != this.mNumEffect)
+		{
+			this.mNumEffect.setRotate(rotation);
+		}
+	}
 
-        public void removeNumEffect()
-        {
-            if(null != this.mNumEffect)
-            {
-                EntityNumIdBufferObjectFactory.deleteObject(this.mNumEffect);
-                this.mNumEffect = null;
-            }
-        }
+	override public int getSortingOrder()
+	{
+		return 0;
+	}
 
-        override public void setRotate(Quaternion rotation)
-        {
-            base.setRotate(rotation);
+	public EffectBase getNumEffect()
+	{
+		return this.mNumEffect;
+	}
 
-            if (null != this.mNumEffect)
-            {
-                this.mNumEffect.setRotate(rotation);
-            }
-        }
+	public void setArrowDirectionScale(float scale)
+	{
+		this.mArrowDirectionScale.x = scale;
+		this.mArrowDirectionScale.y = scale;
+		this.mArrowDirectionScale.z = scale;
 
-        override public int getSortingOrder()
-        {
-            return 0;
-        }
+		if(null != this.mRender)
+		{
+			this.mRender.updateArrowDirectionScale();
+		}
+	}
 
-        public EffectBase getNumEffect()
-        {
-            return this.mNumEffect;
-        }
+	override public Vector3 getArrowDirectionScale()
+	{
+		return this.mArrowDirectionScale;
+	}
+};
 
-        public void setArrowDirectionScale(float scale)
-        {
-            this.mArrowDirectionScale.x = scale;
-            this.mArrowDirectionScale.y = scale;
-            this.mArrowDirectionScale.z = scale;
-
-            if(null != this.mRender)
-            {
-                this.mRender.updateArrowDirectionScale();
-            }
-        }
-
-        override public Vector3 getArrowDirectionScale()
-        {
-            return this.mArrowDirectionScale;
-        }
-    }
-}
+MY_END_NAMESPACE
