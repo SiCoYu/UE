@@ -108,7 +108,15 @@ void MDictionary<TKey, TValue>::clear()
 template <class TKey, class TValue>
 bool MDictionary<TKey, TValue>::tryGetValue(TKey& key, TValue& value)
 {
-	value = this->mData.value(key, value);
+	bool ret = false;
+
+	if (this->containsKey(key))
+	{
+		value = this->value(key);
+		ret = true;
+	}
+
+	return ret;
 }
 
 template <class TKey, class TValue>
