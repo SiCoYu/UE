@@ -1204,7 +1204,7 @@ AActor* UtilEngineWrap::createActor(std::string name)
 	return ret;
 }
 
-void SetParent(AActor* child, AActor* parent, bool worldPositionStays)
+void UtilEngineWrap::SetParent(AActor* child, AActor* parent, bool worldPositionStays)
 {
 	
 }
