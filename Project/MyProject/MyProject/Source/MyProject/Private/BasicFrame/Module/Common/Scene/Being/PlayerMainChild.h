@@ -106,47 +106,6 @@ public class PlayerMainChild : PlayerChild
 		}
 	}
 
-	// 自己当前是否在分裂目标点的后面
-	public bool isBehindTargetPoint()
-	{
-		return false;
-	}
-
-	// 是否可以执行合并操作，能否合并只有一个冷却时间条件
-	override public bool canMerge()
-	{
-		bool ret = false;
-
-		return ret;
-	}
-
-	override public void addParentOrientChangedhandle()
-	{
-		(this.mMovement as PlayerMainChildMovement).addParentOrientChangedhandle();
-	}
-
-	// 接触跟随，但是不能融合
-	override public void contactWithAndFollowButNotMerge(BeingEntity bBeing)
-	{
-		PlayerMainChild otherChild = bBeing as PlayerMainChild;
-		if(null != otherChild)
-		{
-			UnityEngine.Quaternion quad = otherChild.getDestRotate();
-			this.setNotMergeRotate(quad);
-		}
-	}
-
-	// 移动到中心点
-	override public void moveToCenter()
-	{
-		
-	}
-
-	override public void setDestPos(UnityEngine.Vector3 pos, bool immePos)
-	{
-		base.setDestPos(pos, immePos);
-	}
-
 	override public void setRenderPos(UnityEngine.Vector3 pos)
 	{
 		if (!UtilEngineWrap.isInFakePos(pos) && !UtilMath.isEqualVec3(this.mPos, pos))
@@ -158,40 +117,6 @@ public class PlayerMainChild : PlayerChild
 				Ctx.msInstance.mLogSys.log(string.Format("BeingEntity::setRenderPos, BasicInfo is {0}, mPosX = {1}, mPosY = {2}, mPosZ = {3}", this.getBasicInfoStr(), this.mPos.x, this.mPos.y, this.mPos.z), LogTypeId.eLogBeingMove);
 			}
 		}
-	}
-
-	override public void updateState(Vehicle2D vehicle)
-	{
-		base.updateState(vehicle);
-		/*UnityEngine.Vector3 pos = vehicle.actor.transform.pos;//相对坐标
-		pos = this.mParentPlayer.getPos() + pos;//绝对坐标
-
-		mIsInDangerZone = isInDangerZone(pos);
-		if(!mIsInDangerZone)
-		{
-			curInTime = 0.0f;
-		}
-
-		if(mOldIsInDangerZone != mIsInDangerZone)
-		{
-			mOldIsInDangerZone = mIsInDangerZone;
-			if(mOldIsInDangerZone)
-			{
-				(this.mParentPlayer as PlayerMain).addDangerNum();
-			}
-			else
-			{
-				(this.mParentPlayer as PlayerMain).subDangerNum();
-			}
-		}*/
-	}
-	
-	override public void setPos(UnityEngine.Vector3 pos)
-	{
-		base.setPos(pos);
-
-		UnityEngine.Vector3 _pos = pos;//相对坐标
-		_pos = this.mParentPlayer.getPos() + _pos;//绝对坐标
 	}
 };
 

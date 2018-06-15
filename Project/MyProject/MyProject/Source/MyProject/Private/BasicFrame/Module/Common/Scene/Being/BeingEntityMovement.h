@@ -20,9 +20,6 @@ public class BeingEntityMovement : SceneEntityMovement
 	protected bool mIsRotateToDest; // 是否需要旋转到目标方向
 	protected bool mIsScaleToDest;  // 是否需要缩放到目标大小
 
-	protected float mAcceleration;  // 线性加速度
-	protected MoveWay mMoveWay;     // 移动方式
-
 	public BeingEntityMovement(SceneEntityBase entity)
 		: base(entity)
 	{
@@ -30,7 +27,6 @@ public class BeingEntityMovement : SceneEntityMovement
 		this.mIsMoveToDest = false;
 		this.mIsRotateToDest = false;
 		this.mIsScaleToDest = false;
-		this.mMoveWay = MoveWay.eServerMove;
 	}
 
 	override public void dispose()
@@ -43,7 +39,6 @@ public class BeingEntityMovement : SceneEntityMovement
 		this.mIsMoveToDest = false;
 		this.mIsRotateToDest = false;
 		this.mIsScaleToDest = false;
-		this.mMoveWay = MoveWay.eServerMove;
 
 		this.mLastPos = UtilMath.ZeroVec3;
 		this.mLastRotate = UtilMath.UnitQuat;
@@ -103,28 +98,8 @@ public class BeingEntityMovement : SceneEntityMovement
 
 		if (this.mIsMoveToDest)
 		{
-			if (MoveWay.eAutoPathMove == this.mMoveWay ||
-				MoveWay.eBirthMove == this.mMoveWay)
-			{
-				// 设置目标点移动,方向插值
-				// this.moveToDest(delta);
-				// 移动到目标点，方向不插值
-				this.moveToDestNoOrient(delta);
-			}
-			else if(MoveWay.eSeparateMove == this.mMoveWay)
-			{
-				// 设置前向方向移动
-				this.moveForwardToDest(delta);
-				//this.moveSeparateForwardToDest(delta);
-			}
-			else if(MoveWay.eIOControlMove == this.mMoveWay)
-			{
-				this.moveForwardToDestIOControl(delta);
-			}
-			else if(MoveWay.eMergeMove == this.mMoveWay)
-			{
-				this.moveToDestNoOrient(delta);
-			}
+			// 设置前向方向移动
+			this.moveForwardToDest(delta);
 		}
 	}
 
@@ -172,37 +147,7 @@ public class BeingEntityMovement : SceneEntityMovement
 			this.setIsMoveToDest(true);
 			this.mMoveWay = MoveWay.eIOControlMove;
 		}
-
-		//(this.mEntity as BeingEntity).setBeingState(BeingState.eBSIOControlWalk);
-
-		//UnityEngine.Vector3 localMove = new UnityEngine.Vector3(0.0f, 0.0f, (mEntity as BeingEntity).getMoveSpeed() * Ctx.msInstance.mSystemTimeData.deltaSec);
-
-		//this.addActorLocalDestOffset(localMove);
 	}
-
-	// 向前移动进行分离
-	public void moveForwardSeparate()
-	{
-		if (BeingState.eBSSeparation != (this.mEntity as BeingEntity).getBeingState())
-		{
-			(this.mEntity as BeingEntity).setBeingState(BeingState.eBSSeparation);
-
-			this.setIsMoveToDest(true);
-			this.mMoveWay = MoveWay.eSeparateMove;
-		}
-	}
-
-	// 向后移动
-	//virtual public void moveBack()
-	//{
-	//    (this.mEntity as BeingEntity).setBeingState(BeingState.BSWalk);
-
-	//    UnityEngine.Quaternion destRotate = this.mEntity.getRotate() * UnityEngine.Quaternion.Euler(new UnityEngine.Vector3(0, 180, 0));
-	//    (this.mEntity as BeingEntity).setDestRotate(destRotate.eulerAngles);
-
-	//    this.setIsMoveToDest(true);
-	//    this.mIsAutoPath = false;
-	//}
 
 	// 向左旋转
 	public void rotateLeft()
@@ -238,19 +183,6 @@ public class BeingEntityMovement : SceneEntityMovement
 	{
 		UnityEngine.Vector3 localMove = UtilEngineWrap.convPosByMode(new UnityEngine.Vector3(0.0f, 0.0f, (mEntity as BeingEntity).getMoveSpeed() * delta));
 		this.addActorLocalOffset(localMove);
-	}
-
-	public void moveForwardToDestIOControl(float delta)
-	{
-		UnityEngine.Vector3 localMove = UtilEngineWrap.convPosByMode(new UnityEngine.Vector3(0.0f, 0.0f, (mEntity as BeingEntity).getMoveSpeed() * Ctx.msInstance.mSystemTimeData.getFixedTimestep()));
-
-		this.addActorLocalDestOffset(localMove);
-	}
-
-	// 分裂向前移动，但是不根据真正的方向
-	virtual public void moveSeparateForwardToDest(float delta)
-	{
-
 	}
 
 	// 自动寻路移动
@@ -327,16 +259,6 @@ public class BeingEntityMovement : SceneEntityMovement
 		}
 	}
 
-	protected void checkAndUpdateDestRotate()
-	{
-		UnityEngine.Quaternion quat = UtilMath.getRotateByStartAndEndPoint(this.mEntity.getPos(), this.mDestPos);
-		if (!UtilMath.isEqualQuat(this.mDestRotate.getRotate(), quat))
-		{
-			// 计算最终方向
-			(this.mEntity as BeingEntity).setDestRotateEulerAngle(quat.eulerAngles, true);
-		}
-	}
-
 	// 旋转到目标方向
 	public void rotateToDest(float delta)
 	{
@@ -399,16 +321,6 @@ public class BeingEntityMovement : SceneEntityMovement
 		this.mIsScaleToDest = false;
 	}
 
-	public void forceMoveDest(UnityEngine.Vector3 destPos)
-	{
-		destPos = Ctx.msInstance.mSceneSys.adjustPosInRange(this.mEntity, destPos);
-
-		this.mDestPos = destPos;
-
-		this.setIsMoveToDest(true);
-		this.mMoveWay = MoveWay.eAutoPathMove;
-	}
-
 	// 移动到最终地点
 	//public void moveToPos(UnityEngine.Vector3 destPos)
 	public void setDestPos(UnityEngine.Vector3 destPos)
@@ -432,82 +344,6 @@ public class BeingEntityMovement : SceneEntityMovement
 			else
 			{
 				this.setIsMoveToDest(false);
-			}
-		}
-	}
-
-	// 向前移动出生
-	public void setDestPosForBirth(UnityEngine.Vector3 destPos)
-	{
-		if (!UtilMath.isEqualVec3(this.mDestPos, destPos))
-		{
-			destPos = Ctx.msInstance.mSceneSys.adjustPosInRange(this.mEntity, destPos);
-
-			this.mDestPos = destPos;
-
-			if (!UtilMath.isEqualVec3(mDestPos, mEntity.getPos()))
-			{
-				this.setIsMoveToDest(true);
-				this.mMoveWay = MoveWay.eBirthMove;
-
-				(this.mEntity as BeingEntity).setBeingState(BeingState.eBSBirth);
-
-				// 计算最终方向
-				this.setDestRotateEulerAngle(UtilMath.getRotateByStartAndEndPoint(this.mEntity.getPos(), this.mDestPos).eulerAngles);
-			}
-			else
-			{
-				this.setIsMoveToDest(false);
-			}
-		}
-	}
-
-	// 向前移动出生
-	public void setDestPosForMerge(UnityEngine.Vector3 destPos)
-	{
-		if (!UtilMath.isEqualVec3(this.mDestPos, destPos))
-		{
-			destPos = Ctx.msInstance.mSceneSys.adjustPosInRange(this.mEntity, destPos);
-
-			this.mDestPos = destPos;
-
-			if (!UtilMath.isEqualVec3(mDestPos, mEntity.getPos()))
-			{
-				this.setIsMoveToDest(true);
-				this.mMoveWay = MoveWay.eMergeMove;
-
-				(this.mEntity as BeingEntity).setBeingState(BeingState.eBSWalk);
-			}
-			else
-			{
-				this.setIsMoveToDest(false);
-
-				this.onArriveDestPos();
-			}
-		}
-	}
-
-	// 向前移动出生
-	public void setDestPosForMoveCenter(UnityEngine.Vector3 destPos)
-	{
-		if (!UtilMath.isEqualVec3(this.mDestPos, destPos))
-		{
-			destPos = Ctx.msInstance.mSceneSys.adjustPosInRange(this.mEntity, destPos);
-
-			this.mDestPos = destPos;
-
-			if (!UtilMath.isEqualVec3(mDestPos, mEntity.getPos()))
-			{
-				this.setIsMoveToDest(true);
-				this.mMoveWay = MoveWay.eAutoPathMove;
-
-				(this.mEntity as BeingEntity).setBeingState(BeingState.eBSMoveCenter);
-			}
-			else
-			{
-				this.setIsMoveToDest(false);
-
-				this.onArriveDestPos();
 			}
 		}
 	}
@@ -616,26 +452,6 @@ public class BeingEntityMovement : SceneEntityMovement
 		(this.mEntity as BeingEntity).setDestRotateEulerAngle(retQuat.eulerAngles, immeRotate);
 	}
 
-	virtual public void movePause()
-	{
-		(this.mEntity as BeingEntity).setBeingState(BeingState.eBSIdle);
-	}
-
-	virtual public void setForwardRotate(UnityEngine.Vector3 rotate)
-	{
-
-	}
-
-	virtual public void sendMoveMsg()
-	{
-		
-	}
-
-	virtual public void setSeparateForwardRotate(UnityEngine.Vector3 rotate)
-	{
-
-	}
-
 	public UnityEngine.Quaternion getDestRotate()
 	{
 		return this.mDestRotate.getRotate();
@@ -644,16 +460,6 @@ public class BeingEntityMovement : SceneEntityMovement
 	public UnityEngine.Vector3 getDestPos()
 	{
 		return this.mDestPos;
-	}
-
-	virtual public void setNotMergeRotate(UnityEngine.Quaternion quat)
-	{
-
-	}
-
-	virtual public void clearNotMerge()
-	{
-
 	}
 };
 
