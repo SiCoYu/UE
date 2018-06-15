@@ -1,15 +1,16 @@
 ﻿#pragma once
 
-#include "SceneEntityBase.h"
+#include "PlayerChild.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class PlayerOtherChild : PlayerChild
+class PlayerOtherChild : public PlayerChild
 {
-	public PlayerOtherChild()
+public:
+	PlayerOtherChild()
 	{
 		this.mTypeId = "PlayerOtherChild";
 		this.mEntityType = EntityType.ePlayerOtherChild;
@@ -18,7 +19,7 @@ public class PlayerOtherChild : PlayerChild
 		this.mEntityUniqueId = Ctx.msInstance.mPlayerMgr.genChildNewStrId();
 	}
 
-	override public void initRender()
+	virtual void initRender() override
 	{
 		if (!this.isPrefabPathValid())
 		{

@@ -1,15 +1,18 @@
 ﻿#pragma once
 
-#include "SceneEntityBase.h"
+#include "BeingEntityMovement.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class PlayerMovement : BeingEntityMovement
+class SceneEntityBase;
+
+class PlayerMovement : public BeingEntityMovement
 {
-	public PlayerMovement(SceneEntityBase entity)
+public:
+	PlayerMovement(SceneEntityBase* entity)
 		: base(entity)
 	{
 

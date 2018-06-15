@@ -1,19 +1,18 @@
 ﻿#pragma once
 
-#include "SceneEntityBase.h"
+#include "PlayerChildAttack.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class PlayerOtherChildAttack : PlayerChildAttack
-{
-	public PlayerOtherChildAttack(BeingEntity entity)
-		: base(entity)
-	{
+class SceneEntityBase;
 
-	}
+class PlayerOtherChildAttack : public PlayerChildAttack
+{
+public:
+	PlayerOtherChildAttack(SceneEntityBase* entity);
 };
 
 MY_END_NAMESPACE

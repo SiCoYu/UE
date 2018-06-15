@@ -1,24 +1,21 @@
 ﻿#pragma once
 
-#include "SceneEntityBase.h"
+#include "BeingEntityMovement.h"
+#include "TickMode.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class PlayerOtherMovement : BeingEntityMovement
+class SceneEntityBase;
+
+class PlayerOtherMovement : public BeingEntityMovement
 {
-	public PlayerOtherMovement(SceneEntityBase entity)
-		: base(entity)
-	{
+public:
+	PlayerOtherMovement(SceneEntityBase* entity);
 
-	}
-
-	override public void onTick(float delta, TickMode tickMode)
-	{
-		base.onTick(delta, tickMode);
-	}
+	virtual void onTick(float delta, TickMode tickMode) override;
 };
 
 MY_END_NAMESPACE
