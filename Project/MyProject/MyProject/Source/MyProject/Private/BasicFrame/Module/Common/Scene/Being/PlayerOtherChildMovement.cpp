@@ -1,16 +1,9 @@
-﻿namespace SDK.Lib
-{
-    public class PlayerOtherChildMovement : PlayerChildMovement
-    {
-        public PlayerOtherChildMovement(SceneEntityBase entity)
-            : base(entity)
-        {
+﻿#include "MyProject.h"
+#include "PlayerRender.h"
+#include "MClassFactory.h"
 
-        }
+MY_BEGIN_NAMESPACE(MyNS)
 
-        override public void onTick(float delta, TickMode tickMode)
-        {
-            base.onTick(delta, tickMode);
-        }
-    }
-}
+
+
+MY_END_NAMESPACE

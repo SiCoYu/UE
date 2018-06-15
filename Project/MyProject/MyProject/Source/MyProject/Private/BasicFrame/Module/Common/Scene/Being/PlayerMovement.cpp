@@ -1,11 +1,9 @@
-﻿namespace SDK.Lib
-{
-    public class PlayerMovement : BeingEntityMovement
-    {
-        public PlayerMovement(SceneEntityBase entity)
-            : base(entity)
-        {
+﻿#include "MyProject.h"
+#include "PlayerRender.h"
+#include "MClassFactory.h"
 
-        }
-    }
-}
+MY_BEGIN_NAMESPACE(MyNS)
+
+
+
+MY_END_NAMESPACE

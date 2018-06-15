@@ -1,11 +1,9 @@
-﻿namespace SDK.Lib
-{
-    public class PlayerOtherChildAttack : PlayerChildAttack
-    {
-        public PlayerOtherChildAttack(BeingEntity entity)
-            : base(entity)
-        {
+﻿#include "MyProject.h"
+#include "PlayerRender.h"
+#include "MClassFactory.h"
 
-        }
-    }
-}
+MY_BEGIN_NAMESPACE(MyNS)
+
+
+
+MY_END_NAMESPACE
