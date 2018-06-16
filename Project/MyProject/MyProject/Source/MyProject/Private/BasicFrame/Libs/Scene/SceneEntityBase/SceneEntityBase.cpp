@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "SceneEntityBase.h"
 #include "SceneEntityRenderBase.h"
-#include "UtilMath::h"
+#include "UtilMath.h"
 #include "UtilEngineWrap.h"
 #include "MWrapQuaternion.h"
 #include "UtilLogic.h"
@@ -241,6 +241,7 @@ void SceneEntityBase::setRotateNormalDir(FVector normalDir)
 void SceneEntityBase::setRotateEulerAngle(FVector rotation)
 {
 	FVector euler = this->mRotate.getRotateEulerAngle();
+
 	if (!UtilMath::isEqualVec3(euler, rotation))
 	{
 		this->mRotate.setRotateEulerAngle(rotation);

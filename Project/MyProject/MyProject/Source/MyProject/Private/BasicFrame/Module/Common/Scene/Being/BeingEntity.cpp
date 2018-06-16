@@ -1,12 +1,12 @@
 #include "MyProject.h"
 #include "BeingEntity.h"
 #include "BeingEntityMovement.h"
-#include "UtilMath::h"
+#include "UtilMath.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
+M_IMPLEMENT_AND_REGISTER_CLASS(BeingEntity, SceneEntityBase)
 
 BeingEntity::BeingEntity()
 {
