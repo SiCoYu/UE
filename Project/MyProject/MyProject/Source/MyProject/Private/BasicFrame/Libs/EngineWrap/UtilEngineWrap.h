@@ -460,6 +460,18 @@ public:
 	static void SetParent(AActor* child, AActor* parent, bool worldPositionStays = true);
 	static void SetActive(AActor* target, bool bshow);
 	static bool IsActive(AActor* target);
+
+	static FTransform GetTransform(AActor* target);
+
+	FVector getPos(AActor* actor);
+	void setPos(FTransform tran, FVector pos);
+	void setPosByActor(AActor* actor, FVector pos);
+	FVector getScale(AActor* actor);
+	void setScale(FTransform tran, FVector scale);
+	void setScaleByActor(AActor* actor, FVector scale);
+	FQuat getRotate(AActor* actor);
+	void setRotate(FTransform tran, FQuat rotate);
+	void setScaleByActor(AActor* actor, FQuat rotate);
 };
 
 MY_END_NAMESPACE

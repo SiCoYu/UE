@@ -3,6 +3,7 @@
 #include "SceneEntityBase.h"
 #include "SceneEntityRenderBase.h"
 #include "IDispatchObject.h"
+#include "UtilEngineWrap.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -47,39 +48,27 @@ void BeingEntityRender::attachToParentNode(SceneEntityRenderBase* render)
 
 void BeingEntityRender::updateLocalTransform()
 {
-	//if (this->mSelfActor)
-	//{
-	//	if (this->mIsPosDirty)
-	//	{
-	//		this->mIsPosDirty = false;
+	if (this->mSelfActor)
+	{
+		if (this->mIsPosDirty)
+		{
+			this->mIsPosDirty = false;
 
-	//		// 只有自己才是物理移动
-	//		if (MacroDef.PHYSIX_MOVE &&
-	//			(nullptr != this->mEntityRenderCom.mRigidbody || this->mEntityRenderCom.mRigidbody2D) && EntityType.ePlayerMainChild == this->mEntity.getEntityType())
-	//		{
-	//			UtilEngineWrap.setRigidbodyPos(this->mEntityRenderCom.mRigidbody, this->mEntity.getPos());
-	//			UtilEngineWrap.setRigidbody2DPos(this->mEntityRenderCom.mRigidbody2D, this->mEntity.getPos());
-	//		}
-	//		else
-	//		{
-	//			UtilEngineWrap.setPos(this->mSelfActor.transform, this->mEntity.getPos());
-	//		}
-	//		// 内部 2D 物理组件总是会移动，因此重置一下
-	//		UtilEngineWrap.resetRST(this->mEntityRenderCom.mColliderTrans);
-	//	}
-	//	if (this->mIsRotDirty)
-	//	{
-	//		this->mIsRotDirty = false;
+			UtilEngineWrap::setPosByActor(this->mSelfActor, this->mEntity->getPos());
+		}
+		if (this->mIsRotDirty)
+		{
+			this->mIsRotDirty = false;
 
-	//		UtilEngineWrap.setRot(this->mSelfActor.transform, this->mEntity.getRotate());
-	//	}
-	//	if (this->mIsScaleDirty)
-	//	{
-	//		this->mIsScaleDirty = false;
+			UtilEngineWrap::setRotByActor(this->mSelfActor, this->mEntity->getRotate());
+		}
+		if (this->mIsScaleDirty)
+		{
+			this->mIsScaleDirty = false;
 
-	//		//UtilEngineWrap.setScale(this->mSelfActor.transform, this->mEntity.getScale());
-	//	}
-	//}
+			UtilEngineWrap::setScaleByActor(this->mSelfActor, this->mEntity->getScale());
+		}
+	}
 }
 
 // 资源加载

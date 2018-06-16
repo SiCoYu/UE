@@ -1218,3 +1218,82 @@ bool UtilEngineWrap::IsActive(AActor* target)
 {
 	return false;
 }
+
+FTransform UtilEngineWrap::GetTransform(AActor* target)
+{
+	return target->GetTransform();
+}
+
+FVector UtilEngineWrap::getPos(AActor* actor)
+{
+	if (actor)
+	{
+		return actor.GetTransform().GetLocation();
+	}
+}
+
+void UtilEngineWrap::setPos(FTransform tran, FVector pos)
+{
+	// 如果使用物理，使用 Transform 移动的时候，不会遵守物理运算，如果设置了 UnityEngine.Rigidbody.constraints ，对应的移动也会移动
+	if (tran)
+	{
+		tran.SetLocation(pos);
+	}
+}
+
+void UtilEngineWrap::setPosByActor(AActor* actor, FVector pos)
+{
+	// 如果使用物理，使用 Transform 移动的时候，不会遵守物理运算，如果设置了 UnityEngine.Rigidbody.constraints ，对应的移动也会移动
+	if (actor)
+	{
+		actor.GetTransform().SetLocation(pos);
+	}
+}
+
+FVector UtilEngineWrap::getScale(AActor* actor)
+{
+	if (actor)
+	{
+		return actor.GetScale3D();
+	}
+}
+
+void UtilEngineWrap::setScale(FTransform tran, FVector scale)
+{
+	if (tran)
+	{
+		tran.SetScale3D(scale);
+	}
+}
+
+void UtilEngineWrap::setScaleByActor(AActor* actor, FVector scale)
+{
+	if (actor)
+	{
+		actor.GetTransform().SetScale3D(scale);
+	}
+}
+
+FQuat UtilEngineWrap::getRotate(AActor* actor)
+{
+	if (actor)
+	{
+		return actor.GetTransform().GetRotation();
+	}
+}
+
+void UtilEngineWrap::setRotate(FTransform tran, FQuat rotate)
+{
+	if (tran)
+	{
+		tran.SetRotation(rotate);
+	}
+}
+
+void UtilEngineWrap::setScaleByActor(AActor* actor, FQuat rotate)
+{
+	if (actor)
+	{
+		actor.GetTransform().SetRotation(scale);
+	}
+}

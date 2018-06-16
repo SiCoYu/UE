@@ -152,21 +152,21 @@ void BeingEntity::setDestRotate(FQuat rotate, bool immeRotate)
 
 void BeingEntity::setDestPosAndDestRotate(FVector targetPt, bool immePos, bool immeRotate)
 {
-	//if (immePos)
-	//{
-	//	this->setPos(targetPt);
-	//}
+	if (immePos)
+	{
+		this->setPos(targetPt);
+	}
 
-	//FQuat retQuat = UtilMath::getRotateByStartAndEndPoint(this->getPos(), targetPt);
+	FQuat retQuat = UtilMath::getRotateByStartAndEndPoint(this->getPos(), targetPt);
 
-	//if (immeRotate)
-	//{
-	//	this->setRotateEulerAngle(retQuat.eulerAngles);
-	//}
-	//if (nullptr != mMovement)
-	//{
-	//	((BeingEntityMovement*)this->mMovement)->setDestPos(targetPt);
-	//}
+	if (immeRotate)
+	{
+		this->setRotateEulerAngle(UtilMath::Euler(retQuat));
+	}
+	if (nullptr != mMovement)
+	{
+		((BeingEntityMovement*)this->mMovement)->setDestPos(targetPt);
+	}
 }
 
 void BeingEntity::setDestScale(float scale, bool immeScale)
