@@ -11,12 +11,14 @@ MY_BEGIN_NAMESPACE(MyNS)
 class SceneEntityBase;
 class IDispatchObject;
 class SceneEntityRenderBase;
+class AuxMObjectLoader;
 
 class BeingEntityRender : public SceneEntityRenderBase
 {
 	M_DECLARE_CLASS(BeingEntityRender, SceneEntityRenderBase)
 
 protected:
+	AuxMObjectLoader* mAuxPrefabLoader;
 	std::string mResPath;  // 资源目录
 
 public:

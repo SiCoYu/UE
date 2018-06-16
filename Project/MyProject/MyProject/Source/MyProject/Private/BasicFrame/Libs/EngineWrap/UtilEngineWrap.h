@@ -463,15 +463,15 @@ public:
 
 	static FTransform GetTransform(AActor* target);
 
-	FVector getPos(AActor* actor);
-	void setPos(FTransform tran, FVector pos);
-	void setPosByActor(AActor* actor, FVector pos);
-	FVector getScale(AActor* actor);
-	void setScale(FTransform tran, FVector scale);
-	void setScaleByActor(AActor* actor, FVector scale);
-	FQuat getRotate(AActor* actor);
-	void setRotate(FTransform tran, FQuat rotate);
-	void setScaleByActor(AActor* actor, FQuat rotate);
+	static FVector getPos(AActor* actor);
+	static void setPos(FTransform tran, FVector pos);
+	static void setPosByActor(AActor* actor, FVector pos);
+	static FVector getScale(AActor* actor);
+	static void setScale(FTransform tran, FVector scale);
+	static void setScaleByActor(AActor* actor, FVector scale);
+	static FQuat getRotate(AActor* actor);
+	static void setRotate(FTransform tran, FQuat rotate);
+	static void setRotateByActor(AActor* actor, FQuat rotate);
 };
 
 MY_END_NAMESPACE

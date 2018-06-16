@@ -4,6 +4,11 @@
 #include "SceneEntityRenderBase.h"
 #include "IDispatchObject.h"
 #include "UtilEngineWrap.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "EventDispatchDelegate.h"
+#include "AuxScenePrefabLoader.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -13,7 +18,7 @@ M_IMPLEMENT_AND_REGISTER_CLASS(BeingEntityRender, SceneEntityRenderBase)
 BeingEntityRender::BeingEntityRender(SceneEntityBase* entity_)
 	: Super(entity_)
 {
-
+	this->mAuxPrefabLoader = nullptr;
 }
 
 void BeingEntityRender::setResPath(std::string path)
@@ -60,7 +65,7 @@ void BeingEntityRender::updateLocalTransform()
 		{
 			this->mIsRotDirty = false;
 
-			UtilEngineWrap::setRotByActor(this->mSelfActor, this->mEntity->getRotate());
+			UtilEngineWrap::setRotateByActor(this->mSelfActor, this->mEntity->getRotate());
 		}
 		if (this->mIsScaleDirty)
 		{
@@ -74,23 +79,27 @@ void BeingEntityRender::updateLocalTransform()
 // 资源加载
 void BeingEntityRender::load()
 {
-	//if (nullptr == this->mAuxPrefabLoader)
-	//{
-	//	this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
-	//	this->mAuxPrefabLoader.setEntityType(this->mEntity.getEntityType());
-	//	this->mAuxPrefabLoader.setDestroySelf(true);
-	//	this->mAuxPrefabLoader.setIsNeedInsRes(true);
-	//	this->mAuxPrefabLoader.setIsInsNeedCoroutine(true);
-	//	this->mAuxPrefabLoader.setIsInitOrientPos(true);
-	//	this->mAuxPrefabLoader.setIsFakePos(true);
-	//}
+	if (nullptr == this->mAuxPrefabLoader)
+	{
+		//this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
+		this->mAuxPrefabLoader = MY_NEW AuxScenePrefabLoader();
+		//this->mAuxPrefabLoader->setEntityType(this->mEntity.getEntityType());
+		this->mAuxPrefabLoader->setDestroySelf(true);
+		this->mAuxPrefabLoader->setIsNeedInsRes(true);
+		this->mAuxPrefabLoader->setIsInsNeedCoroutine(true);
+		this->mAuxPrefabLoader->setIsInitOrientPos(true);
+		this->mAuxPrefabLoader->setIsFakePos(true);
+	}
 
-	//this->mAuxPrefabLoader.asyncLoad(this->mResPath, nullptr, this->onResLoaded);
+	this->mAuxPrefabLoader->asyncLoad(
+		this->mResPath, 
+		MakeEventDispatchDelegate(this, this->onResLoaded)
+	);
 }
 
 void BeingEntityRender::onResLoaded(IDispatchObject* dispObj, uint uniqueId)
 {
-	//this->setSelfActor(this->mAuxPrefabLoader.getGameObject());
+	this->setSelfActor(this->mAuxPrefabLoader->getActor());
 }
 
 void BeingEntityRender::_onSelfChanged()
