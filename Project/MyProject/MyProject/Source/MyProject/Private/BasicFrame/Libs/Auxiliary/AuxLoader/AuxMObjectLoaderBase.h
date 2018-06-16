@@ -40,6 +40,8 @@ public:
 	AuxMObjectLoaderBase(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
 	void setIsInitOrientPos(bool isSet);
 	void setIsFakePos(bool isSet);
+	void setIsNeedInsRes(bool value);
+	void setIsInsNeedCoroutine(bool value);
 
 	virtual void dispose() override;
 

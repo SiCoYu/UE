@@ -38,6 +38,16 @@ void AuxMObjectLoaderBase::setIsFakePos(bool isSet)
 	this->mIsSetFakePos = isSet;
 }
 
+void AuxMObjectLoaderBase::setIsNeedInsRes(bool value)
+{
+	this->mIsNeedInsPrefab = value;
+}
+
+void AuxMObjectLoaderBase::setIsInsNeedCoroutine(bool value)
+{
+	this->mIsInsNeedCoroutine = value;
+}
+
 void AuxMObjectLoaderBase::dispose()
 {
 	if (this->mIsDestroySelf)

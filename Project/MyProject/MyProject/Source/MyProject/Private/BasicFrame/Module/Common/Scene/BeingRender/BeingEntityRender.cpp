@@ -82,7 +82,11 @@ void BeingEntityRender::load()
 	if (nullptr == this->mAuxPrefabLoader)
 	{
 		//this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
-		this->mAuxPrefabLoader = MY_NEW AuxScenePrefabLoader();
+		this->mAuxPrefabLoader = MY_NEW AuxScenePrefabLoader(
+			this->mResPath,
+			true, 
+			true
+		);
 		//this->mAuxPrefabLoader->setEntityType(this->mEntity.getEntityType());
 		this->mAuxPrefabLoader->setDestroySelf(true);
 		this->mAuxPrefabLoader->setIsNeedInsRes(true);
@@ -97,7 +101,7 @@ void BeingEntityRender::load()
 	);
 }
 
-void BeingEntityRender::onResLoaded(IDispatchObject* dispObj, uint uniqueId)
+void BeingEntityRender::onResLoaded(IDispatchObject* dispObj/*, uint uniqueId*/)
 {
 	this->setSelfActor(this->mAuxPrefabLoader->getActor());
 }

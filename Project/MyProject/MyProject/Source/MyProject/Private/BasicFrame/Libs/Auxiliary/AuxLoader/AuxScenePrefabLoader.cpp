@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "AuxMObjectLoader.h"
+#include "AuxScenePrefabLoader.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
