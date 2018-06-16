@@ -172,7 +172,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Module/Common/FrameWork",
                 "MyProject/Private/BasicFrame/Module/Common/ProjectData",
                 "MyProject/Private/BasicFrame/Module/Common/Scene",
-                "MyProject/Private/BasicFrame/Module/Common/Scene/Entity",
+                "MyProject/Private/BasicFrame/Module/Common/Scene/Being",
+                "MyProject/Private/BasicFrame/Module/Common/Scene/BeingRender",
                 "MyProject/Private/BasicFrame/Module/Common/Common",
 
                 // UI ÇøÓò
