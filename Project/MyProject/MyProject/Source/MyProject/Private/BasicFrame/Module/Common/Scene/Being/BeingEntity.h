@@ -11,6 +11,7 @@
 #include "Math/Rotator.h"	// FRotator
 #include "BeingState.h"
 #include "TickMode.h"
+#include "BeingState.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -41,6 +42,8 @@ protected:
 	std::string mPrefabPath;   // 预制的目录
 
 	//protected FVector mHudPos;
+	BeingState mBeingState;
+	BeingSubState mBeingSubState;
 
 public:
 	BeingEntity();

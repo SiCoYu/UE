@@ -7,7 +7,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class SceneEntityBase
+class SceneEntityBase;
 
 class PlayerMainRender : public PlayerRender
 {

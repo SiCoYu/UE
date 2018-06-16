@@ -10,6 +10,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class SceneEntityBase;
 class IDispatchObject;
+class SceneEntityRenderBase;
 
 class BeingEntityRender : public SceneEntityRenderBase
 {
@@ -34,11 +35,10 @@ protected:
 
 public:
 	virtual void updateLocalTransform() override;
-
 	// 资源加载
 	virtual void load() override;
-
 	virtual void onResLoaded(IDispatchObject* dispObj, uint uniqueId);
+	virtual void attachToParentNode(SceneEntityRenderBase* render);
 
 protected:
 	virtual void _onSelfChanged() override;

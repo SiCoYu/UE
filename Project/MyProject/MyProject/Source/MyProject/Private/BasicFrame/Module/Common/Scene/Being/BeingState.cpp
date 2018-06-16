@@ -12,7 +12,7 @@ std::string AnimaionName::eBSIdle = "idle";
 
 BeingActId BeingStateTransit::convState2Act(BeingState state)
 {
-	return BeingActId.eActIdle;
+	return BeingActId::eActIdle;
 }
 
 MY_END_NAMESPACE

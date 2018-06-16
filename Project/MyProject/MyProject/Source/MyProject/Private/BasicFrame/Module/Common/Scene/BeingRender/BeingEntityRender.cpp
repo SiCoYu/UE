@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "BeingEntityRender.h"
 #include "SceneEntityBase.h"
+#include "SceneEntityRenderBase.h"
 #include "IDispatchObject.h"
 #include "MClassFactory.h"
 
@@ -35,6 +36,11 @@ void BeingEntityRender::onPutInPool()
 
 // 仅仅是释放资源
 void BeingEntityRender::releaseRes()
+{
+
+}
+
+void BeingEntityRender::attachToParentNode(SceneEntityRenderBase* render)
 {
 
 }

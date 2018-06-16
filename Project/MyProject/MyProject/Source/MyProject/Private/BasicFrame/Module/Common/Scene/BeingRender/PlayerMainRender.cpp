@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "PlayerMainRender.h"
 #include "SceneEntityBase.h"
+#include "UtilEngineWrap.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
