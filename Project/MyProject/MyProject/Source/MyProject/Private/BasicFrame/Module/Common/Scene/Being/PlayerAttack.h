@@ -9,6 +9,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 public class PlayerAttack : BeingEntityAttack
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 public:
 	PlayerAttack(BeingEntity* entity);
 };

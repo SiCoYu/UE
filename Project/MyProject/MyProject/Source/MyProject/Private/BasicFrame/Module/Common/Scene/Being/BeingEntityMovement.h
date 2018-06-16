@@ -9,13 +9,15 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 public class BeingEntityMovement : SceneEntityMovement
 {
-protected:
-	UnityEngine.Vector3 mLastPos;         // 之前位置信息
-	UnityEngine.Quaternion mLastRotate;   // 之前方向信息
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
 
-	UnityEngine.Vector3 mDestPos;         // 目的位置信息
+protected:
+	FVector mLastPos;         // 之前位置信息
+	FQuat mLastRotate;   // 之前方向信息
+
+	FVector mDestPos;         // 目的位置信息
 	MWrapQuaternion mDestRotate;   // 目的方向信息，欧拉角
-	UnityEngine.Vector3 mDestScale;         // 目标缩放大小
+	FVector mDestScale;         // 目标缩放大小
 
 	bool mIsMoveToDest;   // 是否需要移动到目标点
 	bool mIsRotateToDest; // 是否需要旋转到目标方向
@@ -33,14 +35,14 @@ public:
 
 	virtual void onTick(float delta, TickMode tickMode) override;
 	// 局部空间移动位置
-	virtual void addActorLocalOffset(UnityEngine.Vector3 DeltaLocation);
+	virtual void addActorLocalOffset(FVector DeltaLocation);
 	// 向目的前向移动
-	virtual void addActorLocalDestOffset(UnityEngine.Vector3 DeltaLocation);
+	virtual void addActorLocalDestOffset(FVector DeltaLocation);
 
 	// 向目的前向移动
-	virtual void addActorLocalDestOffsetNoOrient(UnityEngine.Vector3 DeltaLocation);
+	virtual void addActorLocalDestOffsetNoOrient(FVector DeltaLocation);
 	// 局部空间旋转
-	virtual void addLocalRotation(UnityEngine.Vector3 DeltaRotation);
+	virtual void addLocalRotation(FVector DeltaRotation);
 	// 向前移动
 	virtual void moveForward();
 	// 向左旋转
@@ -67,17 +69,17 @@ public:
 	// 缩放到目标带你
 	void onArriveDestScale();
 	// 移动到最终地点
-	//void moveToPos(UnityEngine.Vector3 destPos)
-	void setDestPos(UnityEngine.Vector3 destPos);
+	//void moveToPos(FVector destPos)
+	void setDestPos(FVector destPos);
 	// 直接到具体位置，不用移动
-	void gotoPos(UnityEngine.Vector3 destPos);
-	virtual void setDestRotateEulerAngle(UnityEngine.Vector3 destRotate);
-	virtual void setDestRotate(UnityEngine.Quaternion destRotate);
+	void gotoPos(FVector destPos);
+	virtual void setDestRotateEulerAngle(FVector destRotate);
+	virtual void setDestRotate(FQuat destRotate);
 
 	void setDestScale(float scale);
-	virtual void setDestPosAndDestRotate(UnityEngine.Vector3 targetPt, bool immePos, bool immeRotate);
-	UnityEngine.Quaternion getDestRotate();
-	UnityEngine.Vector3 getDestPos();
+	virtual void setDestPosAndDestRotate(FVector targetPt, bool immePos, bool immeRotate);
+	FQuat getDestRotate();
+	FVector getDestPos();
 };
 
 MY_END_NAMESPACE

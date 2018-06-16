@@ -22,20 +22,20 @@ void PlayerRender::_onSelfChanged()
  */
 void PlayerRender::dispose()
 {
-	base.dispose();
+	Super::dispose();
 }
 
 void PlayerRender::attachToParentNode(EntityRenderBase* render)
 {
-	if(this.isSelfValid() && render.isSelfValid())
+	if(this->isSelfValid() && render.isSelfValid())
 	{
-		UtilEngineWrap::SetParent(render.getSelfActor(), this.mSelfActor, false);
+		UtilEngineWrap::SetParent(render.getSelfActor(), this->mSelfActor, false);
 	}
 }
 
 void PlayerRender::onTick(float delta, TickMode tickMode)
 {
-	base.onTick(delta, tickMode);
+	Super::onTick(delta, tickMode);
 }
 
 MY_END_NAMESPACE

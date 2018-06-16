@@ -13,6 +13,8 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class PlayerMgr : public EntityMgrBase
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 protected:
 	PlayerMain* mHero;
 

@@ -1,6 +1,11 @@
 ﻿#pragma once
 
+#include "Math/Vector.h"	// FVector
+#include "Math/Quat.h"		// FQuat
+#include "Math/Rotator.h"	// FRotator
+
 #include "SceneEntityBase.h"
+#include "TickMode.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -9,45 +14,21 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 public class PlayerMainMovement : PlayerMovement
 {
-	protected UnityEngine.Quaternion mForwardRotate;     // 记录当前的前向
-	protected UnityEngine.Quaternion mRotate;
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
 
-	public PlayerMainMovement(SceneEntityBase entity)
-		: base(entity)
-	{
-		this.mForwardRotate = UtilMath.UnitQuat;
-		this.mRotate = UtilMath.UnitQuat;
-	}
+protected:
+	FQuat mForwardRotate;     // 记录当前的前向
+	FQuat mRotate;
 
-	override public void init()
-	{
-		base.init();
-	}
+public:
+	PlayerMainMovement(SceneEntityBase* entity);
 
-	override public void dispose()
-	{
-		base.dispose();
-	}
-
-	public override void onPutInPool()
-	{
-		base.onPutInPool();
-	}
-
-	override public void onTick(float delta, TickMode tickMode)
-	{
-		base.onTick(delta, tickMode);
-	}
-
-	public UnityEngine.Quaternion getForwardRotate()
-	{
-		return mForwardRotate;
-	}
-
-	override public void setForwardRotate(UnityEngine.Vector3 rotate)
-	{
-		mForwardRotate = UnityEngine.Quaternion.Euler(rotate);
-	}
+	virtual void init() override;
+	virtual void dispose() override;
+	virtual void onPutInPool() override;
+	virtual void onTick(float delta, TickMode tickMode) override;
+	FQuat getForwardRotate();
+	virtual void setForwardRotate(FVector rotate) override;
 };
 
 MY_END_NAMESPACE

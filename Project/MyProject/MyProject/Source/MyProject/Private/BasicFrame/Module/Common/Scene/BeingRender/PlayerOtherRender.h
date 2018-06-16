@@ -9,6 +9,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 public class PlayerOtherRender : PlayerRender
 {
+	M_DECLARE_CLASS(PlayerOtherRender, PlayerRender)
+
 public:
 	PlayerOtherRender(SceneEntityBase* entity_);
 

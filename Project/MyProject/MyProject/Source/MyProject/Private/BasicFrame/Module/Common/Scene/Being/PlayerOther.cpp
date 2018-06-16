@@ -10,74 +10,74 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 PlayerOther::PlayerOther()
 {
-	this.mMovement = new PlayerOtherMovement(this);
-	this.mAttack = new PlayerOtherAttack(this);
+	this->mMovement = new PlayerOtherMovement(this);
+	this->mAttack = new PlayerOtherAttack(this);
 }
 
 void PlayerOther::_onPostInit()
 {
-	base._onPostInit();
+	Super::_onPostInit();
 
-	//this.hide();
+	//this->hide();
 
-	this.mMovement.init();
-	this.mAttack.init();
+	this->mMovement.init();
+	this->mAttack.init();
 }
 
 void PlayerOther::initRender()
 {
-	if (null == this.mRender)
+	if (nullptr == this->mRender)
 	{
-		this.mRender = new PlayerOtherRender(this);
+		this->mRender = new PlayerOtherRender(this);
 	}
 
-	this.mRender.init();
+	this->mRender.init();
 }
 
 void PlayerOther::dispose()
 {
-	if (null != Ctx.msInstance.mPlayerMgr)
+	if (nullptr != Ctx.msInstance.mPlayerMgr)
 	{
 		Ctx.msInstance.mPlayerMgr.removePlayer(this);
 	}
 
-	base.dispose();
+	Super::dispose();
 }
 
 void PlayerOther::putInPool()
 {
 	Ctx.msInstance.mPlayerMgr.removePlayer(this);
 
-	base.putInPool();
+	Super::putInPool();
 }
 
 void PlayerOther::onPutInPool()
 {
-	if(null != Ctx.msInstance.mBeginnerGuideSys && 
+	if(nullptr != Ctx.msInstance.mBeginnerGuideSys && 
 	   Ctx.msInstance.mBeginnerGuideSys.isEnableGuide())
 	{
 		Ctx.msInstance.mBeginnerGuideSys.beatOneEnemy();
 	}
 
-	base.onPutInPool();
+	Super::onPutInPool();
 }
 
 void PlayerOther::autoHandle()
 {
-	base.autoHandle();
+	Super::autoHandle();
 
 	Ctx.msInstance.mPlayerMgr.addPlayer(this);
 }
 
-void PlayerOther::setPos(UnityEngine.Vector3 pos)
+void PlayerOther::setPos(FVector pos)
 {
-	base.setPos(pos);
+	Super::setPos(pos);
 	// 如果 Hero ，没有移动的时候，才更新，如果 Hero 在移动，直接通过相机移动更新
 	//if (!Ctx.msInstance.mPlayerMgr.isHeroMoving())
 	{
-		if (null != this.mHud)
+		if (nullptr != this->mHud)
 		{
-			this.mHud.onPosChanged();
+			this->mHud.onPosChanged();
 		}
 	}
 }

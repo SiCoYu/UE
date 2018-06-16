@@ -12,7 +12,7 @@ PlayerOtherMovement::PlayerOtherMovement(SceneEntityBase* entity)
 
 void PlayerOtherMovement::onTick(float delta, TickMode tickMode)
 {
-	base.onTick(delta, tickMode);
+	Super::onTick(delta, tickMode);
 }
 
 MY_END_NAMESPACE

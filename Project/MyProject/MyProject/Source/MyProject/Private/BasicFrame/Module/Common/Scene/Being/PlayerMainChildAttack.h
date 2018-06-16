@@ -9,6 +9,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 public class PlayerMainChildAttack : PlayerChildAttack
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 public:
 	PlayerMainChildAttack(BeingEntity entity)
 		: base(entity)
@@ -16,34 +18,19 @@ public:
 
 	}
 
-	virtual void overlapToEnter(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo) override
+	virtual void overlapToEnter(BeingEntity bBeingEntity, const FHitResult& SweepResult) override
 	{
 		
 	}
 
-	virtual void overlapToStay(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo) override
+	virtual void overlapToStay(BeingEntity bBeingEntity, const FHitResult& SweepResult) override
 	{
 		
 	}
 
-	virtual void overlapToExit(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo) override
+	virtual void overlapToExit(BeingEntity bBeingEntity, const FHitResult& SweepResult) override
 	{
 		
-	}
-
-	virtual void overlapToEnter2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo) override
-	{
-		
-	}
-
-	virtual void overlapToStay2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo) override
-	{
-		
-	}
-
-	virtual void overlapToExit2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo) override
-	{
-
 	}
 };
 

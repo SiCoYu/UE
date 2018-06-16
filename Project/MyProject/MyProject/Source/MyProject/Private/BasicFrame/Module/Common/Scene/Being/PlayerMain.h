@@ -12,6 +12,8 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 public class PlayerMain : Player
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 public:
 	PlayerMain();
 	

@@ -11,6 +11,8 @@ class SceneEntityBase;
 
 public class PlayerOtherAttack : BeingEntityAttack
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 public:
 	PlayerOtherAttack(SceneEntityBase* entity)
 		: base(entity)

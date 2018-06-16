@@ -16,6 +16,8 @@ class PlayerOtherRender;
  */
 class PlayerOther : public Player
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 public:
 	PlayerOther();
 
@@ -28,7 +30,7 @@ public:
 	virtual void putInPool() override;
 	virtual void onPutInPool() override;
 	virtual void autoHandle() override;
-	virtual void setPos(UnityEngine.Vector3 pos) override;
+	virtual void setPos(FVector pos) override;
 };
 
 MY_END_NAMESPACE

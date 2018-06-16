@@ -11,33 +11,33 @@ Player::Player()
 
 void Player::_onPreInit()
 {
-	base._onPreInit();
+	Super::_onPreInit();
 }
 
 void Player::_onPostInit()
 {
-	base._onPostInit();
+	Super::_onPostInit();
 }
 
 void Player::onDestroy()
 {
-	base.onDestroy();
+	Super::onDestroy();
 }
 
 void Player::onPutInPool()
 {
-	base.onPutInPool();
+	Super::onPutInPool();
 }
 
 void Player::autoHandle()
 {
-	base.autoHandle();
+	Super::autoHandle();
 }
 
 void Player::initRender()
 {
-	this.mRender = new PlayerRender(this);
-	this.mRender.init();
+	this->mRender = new PlayerRender(this);
+	this->mRender.init();
 }
 
 MY_END_NAMESPACE

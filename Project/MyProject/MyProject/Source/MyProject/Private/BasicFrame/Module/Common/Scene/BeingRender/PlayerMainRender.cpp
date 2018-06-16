@@ -13,61 +13,61 @@ PlayerMainRender::PlayerMainRender(SceneEntityBase* entity_)
 
 void PlayerMainRender::onInit()
 {
-	base.onInit();
+	Super::onInit();
 }
 
 void PlayerMainRender::_onSelfChanged()
 {
-	base._onSelfChanged();
+	Super::_onSelfChanged();
 }
 
 void PlayerMainRender::show()
 {
 	if (!IsVisible())
 	{
-		UtilEngineWrap.SetActive(this.mSelfActor, true);
+		UtilEngineWrap.SetActive(this->mSelfActor, true);
 	}
 }
 
 void PlayerMainRender::hide()
 {
-	if (this.IsVisible())
+	if (this->IsVisible())
 	{
-		UtilEngineWrap.SetActive(this.mSelfActor, false);
+		UtilEngineWrap.SetActive(this->mSelfActor, false);
 	}
 }
 
 // 资源加载
 void PlayerMainRender::load()
 {
-	if (null == this.mAuxPrefabLoader)
+	if (nullptr == this->mAuxPrefabLoader)
 	{
-		this.mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this.mResPath, true);
-		this.mAuxPrefabLoader.setEntityType(this.mEntity.getEntityType());
-		this.mAuxPrefabLoader.setDestroySelf(true);
-		this.mAuxPrefabLoader.setIsNeedInsRes(true);
-		this.mAuxPrefabLoader.setIsInsNeedCoroutine(false);
-		this.mAuxPrefabLoader.setIsInitOrientPos(true);
-		this.mAuxPrefabLoader.setIsFakePos(true);
+		this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
+		this->mAuxPrefabLoader.setEntityType(this->mEntity.getEntityType());
+		this->mAuxPrefabLoader.setDestroySelf(true);
+		this->mAuxPrefabLoader.setIsNeedInsRes(true);
+		this->mAuxPrefabLoader.setIsInsNeedCoroutine(false);
+		this->mAuxPrefabLoader.setIsInitOrientPos(true);
+		this->mAuxPrefabLoader.setIsFakePos(true);
 	}
 
 	// 这种直接同步加载
-	this.mAuxPrefabLoader.syncLoad(
-		this.mResPath,
-		null,
-		this.onResLoaded
+	this->mAuxPrefabLoader.syncLoad(
+		this->mResPath,
+		nullptr,
+		this->onResLoaded
 	);
 }
 
 void PlayerMainRender::updateLocalTransform()
 {
-	if (null != this.mSelfActor)
+	if (nullptr != this->mSelfActor)
 	{
-		if (this.mIsPosDirty)
+		if (this->mIsPosDirty)
 		{
-			this.mIsPosDirty = false;
+			this->mIsPosDirty = false;
 
-			UtilEngineWrap.setPos(this.mSelfActor.transform, this.mEntity.getPos());
+			UtilEngineWrap.setPos(this->mSelfActor.transform, this->mEntity.getPos());
 		}
 	}
 }

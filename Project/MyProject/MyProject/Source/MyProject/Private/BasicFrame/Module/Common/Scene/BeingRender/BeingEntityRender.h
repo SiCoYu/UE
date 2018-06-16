@@ -10,6 +10,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class BeingEntityRender : public EntityRenderBase
 {
+	M_DECLARE_CLASS(BeingEntityRender, EntityRenderBase)
+
 protected:
 	std::string mResPath;  // 资源目录
 
@@ -24,21 +26,21 @@ protected:
 
 	void setResPath(string path)
 	{
-		this.mResPath = path;
+		this->mResPath = path;
 	}
 
 	virtual void onDestroy() override
 	{
-		this.releaseRes();
+		this->releaseRes();
 
-		base.onDestroy();
+		Super::onDestroy();
 	}
 
 	virtual void onPutInPool() override
 	{
-		this.releaseRes();
+		this->releaseRes();
 
-		base.onPutInPool();
+		Super::onPutInPool();
 	}
 
 protected:
@@ -51,37 +53,37 @@ protected:
 public:
 	override void updateLocalTransform()
 	{
-		if (this.mSelfActor)
+		if (this->mSelfActor)
 		{
-			if (this.mIsPosDirty)
+			if (this->mIsPosDirty)
 			{
-				this.mIsPosDirty = false;
+				this->mIsPosDirty = false;
 
 				// 只有自己才是物理移动
 				if (MacroDef.PHYSIX_MOVE && 
-					(null != this.mEntityRenderCom.mRigidbody || this.mEntityRenderCom.mRigidbody2D) && EntityType.ePlayerMainChild == this.mEntity.getEntityType())
+					(nullptr != this->mEntityRenderCom.mRigidbody || this->mEntityRenderCom.mRigidbody2D) && EntityType.ePlayerMainChild == this->mEntity.getEntityType())
 				{
-					UtilEngineWrap.setRigidbodyPos(this.mEntityRenderCom.mRigidbody, this.mEntity.getPos());
-					UtilEngineWrap.setRigidbody2DPos(this.mEntityRenderCom.mRigidbody2D, this.mEntity.getPos());
+					UtilEngineWrap.setRigidbodyPos(this->mEntityRenderCom.mRigidbody, this->mEntity.getPos());
+					UtilEngineWrap.setRigidbody2DPos(this->mEntityRenderCom.mRigidbody2D, this->mEntity.getPos());
 				}
 				else
 				{
-					UtilEngineWrap.setPos(this.mSelfActor.transform, this.mEntity.getPos());
+					UtilEngineWrap.setPos(this->mSelfActor.transform, this->mEntity.getPos());
 				}
 				// 内部 2D 物理组件总是会移动，因此重置一下
-				UtilEngineWrap.resetRST(this.mEntityRenderCom.mColliderTrans);
+				UtilEngineWrap.resetRST(this->mEntityRenderCom.mColliderTrans);
 			}
-			if (this.mIsRotDirty)
+			if (this->mIsRotDirty)
 			{
-				this.mIsRotDirty = false;
+				this->mIsRotDirty = false;
 
-				UtilEngineWrap.setRot(this.mSelfActor.transform, this.mEntity.getRotate());
+				UtilEngineWrap.setRot(this->mSelfActor.transform, this->mEntity.getRotate());
 			}
-			if (this.mIsScaleDirty)
+			if (this->mIsScaleDirty)
 			{
-				this.mIsScaleDirty = false;
+				this->mIsScaleDirty = false;
 
-				//UtilEngineWrap.setScale(this.mSelfActor.transform, this.mEntity.getScale());
+				//UtilEngineWrap.setScale(this->mSelfActor.transform, this->mEntity.getScale());
 			}
 		}
 	}
@@ -89,29 +91,29 @@ public:
 	// 资源加载
 	override void load()
 	{
-		if (null == this.mAuxPrefabLoader)
+		if (nullptr == this->mAuxPrefabLoader)
 		{
-			this.mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this.mResPath, true);
-			this.mAuxPrefabLoader.setEntityType(this.mEntity.getEntityType());
-			this.mAuxPrefabLoader.setDestroySelf(true);
-			this.mAuxPrefabLoader.setIsNeedInsRes(true);
-			this.mAuxPrefabLoader.setIsInsNeedCoroutine(true);
-			this.mAuxPrefabLoader.setIsInitOrientPos(true);
-			this.mAuxPrefabLoader.setIsFakePos(true);
+			this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
+			this->mAuxPrefabLoader.setEntityType(this->mEntity.getEntityType());
+			this->mAuxPrefabLoader.setDestroySelf(true);
+			this->mAuxPrefabLoader.setIsNeedInsRes(true);
+			this->mAuxPrefabLoader.setIsInsNeedCoroutine(true);
+			this->mAuxPrefabLoader.setIsInitOrientPos(true);
+			this->mAuxPrefabLoader.setIsFakePos(true);
 		}
 
-		this.mAuxPrefabLoader.asyncLoad(this.mResPath, null, this.onResLoaded);
+		this->mAuxPrefabLoader.asyncLoad(this->mResPath, nullptr, this->onResLoaded);
 	}
 
 	virtual void onResLoaded(IDispatchObject dispObj, uint uniqueId)
 	{
-		this.setSelfActor(this.mAuxPrefabLoader.getGameObject());
+		this->setSelfActor(this->mAuxPrefabLoader.getGameObject());
 	}
 
 protected:
 	virtual void _onSelfChanged() override
 	{
-		base._onSelfChanged();
+		Super::_onSelfChanged();
 	}
 };
 

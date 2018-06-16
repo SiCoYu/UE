@@ -9,6 +9,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 public class PlayerMainChild : PlayerChild
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 public:
 	PlayerMainChild();
 	virtual void initRender() override;
@@ -25,7 +27,7 @@ public:
 	virtual void dispose() override;
 	virtual void putInPool() override;
 	virtual void setBeingState(BeingState state) override;
-	virtual void setRenderPos(UnityEngine.Vector3 pos) override;
+	virtual void setRenderPos(FVector pos) override;
 };
 
 MY_END_NAMESPACE

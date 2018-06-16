@@ -1,39 +1,26 @@
 ﻿#pragma once
 
-#include "SceneEntityBase.h"
+#include "PlayerChildMovement.h"
+#include "TickMode.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class PlayerMainChildMovement : PlayerChildMovement
+class SceneEntityBase;
+
+class PlayerMainChildMovement : public PlayerChildMovement
 {
-	public PlayerMainChildMovement(SceneEntityBase entity)
-		: base(entity)
-	{
-		
-	}
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
 
-	override public void init()
-	{
-		base.init();
-	}
+public:
+	PlayerMainChildMovement(SceneEntityBase* entity);
 
-	override public void dispose()
-	{
-		base.dispose();
-	}
-
-	public override void onPutInPool()
-	{
-		base.onPutInPool();
-	}
-
-	override public void onTick(float delta, TickMode tickMode)
-	{
-		base.onTick(delta, tickMode);
-	}
+	override void init();
+	override void dispose();
+	virtual void onPutInPool() override;
+	virtual void onTick(float delta, TickMode tickMode) override;
 };
 
 MY_END_NAMESPACE

@@ -29,32 +29,17 @@ void BeingEntityAttack::onTick(float delta, TickMode tickMode)
 
 }
 
-void BeingEntityAttack::overlapToEnter(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
+void BeingEntityAttack::overlapToEnter(BeingEntity bBeingEntity, const FHitResult& SweepResult)
 {
 	
 }
 
-void BeingEntityAttack::overlapToStay(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
+void BeingEntityAttack::overlapToStay(BeingEntity bBeingEntity, const FHitResult& SweepResult)
 {
 	
 }
 
-void BeingEntityAttack::overlapToExit(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
-{
-	
-}
-
-void BeingEntityAttack::overlapToEnter2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
-{
-	
-}
-
-void BeingEntityAttack::overlapToStay2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
-{
-	
-}
-
-void BeingEntityAttack::overlapToExit2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
+void BeingEntityAttack::overlapToExit(BeingEntity bBeingEntity, const FHitResult& SweepResult)
 {
 	
 }

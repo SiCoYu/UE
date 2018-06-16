@@ -12,6 +12,8 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class BeingEntityAttack
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 protected:
 	BeingEntity* mEntity;
 
@@ -23,12 +25,9 @@ public:
 	virtual void onPutInPool();
 
 	virtual void onTick(float delta, TickMode tickMode);
-	virtual void overlapToEnter(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo);
-	virtual void overlapToStay(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo);
-	virtual void overlapToExit(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo);
-	virtual void overlapToEnter2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo);
-	virtual void overlapToStay2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo);
-	virtual void overlapToExit2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo);
+	virtual void overlapToEnter(BeingEntity bBeingEntity, const FHitResult& SweepResult);
+	virtual void overlapToStay(BeingEntity bBeingEntity, const FHitResult& SweepResult);
+	virtual void overlapToExit(BeingEntity bBeingEntity, const FHitResult& SweepResult);
 };
 
 MY_END_NAMESPACE

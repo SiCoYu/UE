@@ -6,75 +6,75 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 PlayerMain::PlayerMain()
 {
-	this.mMovement = new PlayerMainMovement(this);
-	this.mAttack = new PlayerMainAttack(this);
+	this->mMovement = new PlayerMainMovement(this);
+	this->mAttack = new PlayerMainAttack(this);
 }
 
 void PlayerMain::initRender()
 {
-	if (null == this.mRender)
+	if (nullptr == this->mRender)
 	{
-		this.mRender = new PlayerMainRender(this);
+		this->mRender = new PlayerMainRender(this);
 	}
 
-	this.mRender.init();
+	this->mRender.init();
 }
 
 void PlayerMain::_onPreInit()
 {
-	base._onPreInit();
+	Super::_onPreInit();
 
-	this.mMovement.init();
-	this.mAttack.init();
+	this->mMovement.init();
+	this->mAttack.init();
 }
 
 void PlayerMain::_onPostInit()
 {
-	base._onPostInit();
+	Super::_onPostInit();
 }
 
 void PlayerMain::dispose()
 {
-	if (null != Ctx.msInstance.mPlayerMgr)
+	if (nullptr != Ctx.msInstance.mPlayerMgr)
 	{
 		Ctx.msInstance.mPlayerMgr.removeHero();
 	}
 
-	base.dispose();
+	Super::dispose();
 }
 
 void PlayerMain::putInPool()
 {
 	Ctx.msInstance.mPlayerMgr.removeHero();
 
-	base.putInPool();
+	Super::putInPool();
 }
 
 void PlayerMain::onPutInPool()
 {
-	base.onPutInPool();
+	Super::onPutInPool();
 }
 
 void PlayerMain::autoHandle()
 {
-	base.autoHandle();
+	Super::autoHandle();
 
 	Ctx.msInstance.mPlayerMgr.addHero(this);
 }
 
 void PlayerMain::_onExecTick(float delta, TickMode tickMode)
 {
-	base._onExecTick(delta, tickMode);
+	Super::_onExecTick(delta, tickMode);
 }
 
 void PlayerMain::_onPreTick(float delta, TickMode tickMode)
 {
-	base._onPreTick(delta, tickMode);
+	Super::_onPreTick(delta, tickMode);
 }
 
 void PlayerMain::_onPostTick(float delta, TickMode tickMode)
 {
-	base._onPostTick(delta, tickMode);
+	Super::_onPostTick(delta, tickMode);
 }
 
 MY_END_NAMESPACE

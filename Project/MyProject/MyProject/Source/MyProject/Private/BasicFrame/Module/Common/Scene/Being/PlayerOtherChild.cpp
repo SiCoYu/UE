@@ -9,23 +9,23 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 PlayerOtherChild::PlayerOtherChild()
 {
-	this.mMovement = new PlayerOtherChildMovement(this);
-	this.mAttack = new PlayerOtherChildAttack(this);
+	this->mMovement = new PlayerOtherChildMovement(this);
+	this->mAttack = new PlayerOtherChildAttack(this);
 }
 
 void PlayerOtherChild::initRender()
 {
-	if (!this.isPrefabPathValid())
+	if (!this->isPrefabPathValid())
 	{
-		this.setPrefabPath("World/Model/PlayerOther.prefab");
+		this->setPrefabPath("World/Model/PlayerOther.prefab");
 	}
 
-	if (null == this.mRender)
+	if (nullptr == this->mRender)
 	{
-		this.mRender = new PlayerOtherChildRender(this);
+		this->mRender = new PlayerOtherChildRender(this);
 	}
 
-	this.mRender.init();
+	this->mRender.init();
 }
 
 MY_END_NAMESPACE
