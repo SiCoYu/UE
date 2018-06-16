@@ -31,5 +31,6 @@ public:
 #define GCtxExt CtxExt::getSingletonPtr()
 #define GProjectData GCtxExt->getProjectData()
 #define GEntityData GCtxExt->getEntityData()
+#define GPlayerMgr GCtxExt->getProjectData->getPlayerMgr()
 
 MY_END_NAMESPACE

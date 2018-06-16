@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "BeingEntityRender.h"
+#include "PlayerRender.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
