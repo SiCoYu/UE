@@ -32,6 +32,7 @@ public:
 	static bool isEqualQuat(FQuat& a, FQuat& b);
 
 	static FQuat getRotateByOrient(FVector& forward);
+	static FQuat convQuatFromEuler(FVector& euler);
 };
 
 MY_END_NAMESPACE

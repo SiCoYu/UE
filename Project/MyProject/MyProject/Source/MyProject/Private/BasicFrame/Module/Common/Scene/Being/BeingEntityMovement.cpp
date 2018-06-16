@@ -1,8 +1,11 @@
 ﻿#include "MyProject.h"
 #include "BeingEntityMovement.h"
 #include "SceneEntityBase.h"
+#include "BeingEntity.h"
 #include "MWrapQuaternion.h"
 #include "UtilMath.h"
+#include "Ctx.h"
+#include "SystemTimeData.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -70,75 +73,67 @@ void BeingEntityMovement::onTick(float delta, TickMode tickMode)
 {
 	Super::onTick(delta, tickMode);
 
-	//if (this->mIsRotateToDest)
-	//{
-	//	this->rotateToDest(delta);
-	//}
+	if (this->mIsRotateToDest)
+	{
+		this->rotateToDest(delta);
+	}
 
-	//if (this->mIsScaleToDest)
-	//{
-	//	this->scaleToDest(delta);
-	//}
+	if (this->mIsScaleToDest)
+	{
+		this->scaleToDest(delta);
+	}
 
-	//if (this->mIsMoveToDest)
-	//{
-	//	// 设置前向方向移动
-	//	this->moveForwardToDest(delta);
-	//}
+	if (this->mIsMoveToDest)
+	{
+		// 设置前向方向移动
+		this->moveForwardToDest(delta);
+	}
 }
 
 // 局部空间移动位置
 void BeingEntityMovement::addActorLocalOffset(FVector DeltaLocation)
 {
-	//FVector localOffset = mEntity.getRotate() * DeltaLocation;
-	//mEntity.setPos(mEntity.getPos() + localOffset);
-
-	//this->sendMoveMsg();
+	FVector localOffset = this->mEntity->getRotate() * DeltaLocation;
+	this->mEntity->setPos(this->mEntity->getPos() + localOffset);
 }
 
 // 向目的前向移动
 void BeingEntityMovement::addActorLocalDestOffset(FVector DeltaLocation)
 {
-	//FVector localOffset = this->mDestRotate.getRotate() * DeltaLocation;
-	//mEntity.setPos(mEntity.getPos() + localOffset);
-
-	//this->sendMoveMsg();
+	FVector localOffset = this->mDestRotate.getRotate() * DeltaLocation;
+	this->mEntity->setPos(this->mEntity->getPos() + localOffset);
 }
 
 // 向目的前向移动
 void BeingEntityMovement::addActorLocalDestOffsetNoOrient(FVector DeltaLocation)
 {
-	//FVector localOffset = DeltaLocation;
-	//mEntity.setPos(mEntity.getPos() + localOffset);
-
-	//this->sendMoveMsg();
+	FVector localOffset = DeltaLocation;
+	this->mEntity->setPos(this->mEntity->getPos() + localOffset);
 }
 
 // 局部空间旋转
 void BeingEntityMovement::addLocalRotation(FVector DeltaRotation)
 {
-	//this->mEntity.setRotate(mEntity.getRotate() * UtilEngineWrap.convQuatFromEuler(DeltaRotation));
-
-	//this->sendMoveMsg();
+	this->mEntity->setRotate(this->mEntity->getRotate() * UtilMath::convQuatFromEuler(DeltaRotation));
 }
 
 // 向前移动
 void BeingEntityMovement::moveForward()
 {
-	//if (BeingState.eBSWalk != (this->mEntity as BeingEntity).getBeingState())
-	//{
-	//	(this->mEntity as BeingEntity).setBeingState(BeingState.eBSWalk);
-	//	this->setIsMoveToDest(true);
-	//	this->mMoveWay = MoveWay.eIOControlMove;
-	//}
+	if (BeingState::eBSWalk != ((BeingEntity*)this->mEntity)->getBeingState())
+	{
+		((BeingEntity*)this->mEntity)->setBeingState(BeingState::eBSWalk);
+		this->setIsMoveToDest(true);
+	}
 }
 
 // 向左旋转
 void BeingEntityMovement::rotateLeft()
 {
-	//float delta = Ctx.msInstance.mSystemTimeData.getFixedTimestep();
-	//FVector deltaRotation = new FVector(0.0f, (mEntity as BeingEntity).getRotateSpeed() * delta, 0.0f);
-	//this->addLocalRotation(deltaRotation);
+	float delta = GSystemTimeData->getFixedTimestep();
+
+	FVector deltaRotation(0.0f, ((BeingEntity*)this->mEntity)->getRotateSpeed() * delta, 0.0f);
+	this->addLocalRotation(deltaRotation);
 }
 
 // 向右旋转

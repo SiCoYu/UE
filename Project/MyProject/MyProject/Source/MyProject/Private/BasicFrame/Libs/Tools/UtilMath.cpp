@@ -90,4 +90,9 @@ FQuat UtilMath::getRotateByOrient(FVector& forward)
 	return retQuat;
 }
 
+FQuat UtilMath::convQuatFromEuler(FVector& euler)
+{
+	return UtilMath::MakeQuatFromEuler(euler);
+}
+
 MY_END_NAMESPACE
