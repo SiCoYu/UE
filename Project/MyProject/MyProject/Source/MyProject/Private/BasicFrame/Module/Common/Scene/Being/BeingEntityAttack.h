@@ -23,7 +23,7 @@ protected:
 	BeingEntity* mEntity;
 
 public:
-	BeingEntityAttack(BeingEntity* entity);
+	BeingEntityAttack(SceneEntityBase* entity);
 	
 	virtual void init();
 	virtual void dispose();

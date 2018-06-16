@@ -28,7 +28,7 @@ public:
 	MySharedPtr<EntityData> getEntityData();
 };
 
-#define GCtxExt CtxExt::getSingletonPtr()
+#define GCtxExt ((CtxExt*)(CtxExt::getSingletonPtr()))
 #define GProjectData GCtxExt->getProjectData()
 #define GEntityData GCtxExt->getEntityData()
 #define GPlayerMgr GCtxExt->getProjectData->getPlayerMgr()

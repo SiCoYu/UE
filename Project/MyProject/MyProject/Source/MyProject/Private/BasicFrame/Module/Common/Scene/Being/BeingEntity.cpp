@@ -2,6 +2,7 @@
 #include "BeingEntity.h"
 #include "BeingEntityMovement.h"
 #include "UtilMath.h"
+#include "UtilStr.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -45,8 +46,8 @@ void BeingEntity::onDestroy()
 
 void BeingEntity::onPutInPool()
 {
-	this->mBeingState = BeingState.eBSIdle;
-	this->mBeingSubState = BeingSubState.eBSSNone;
+	this->mBeingState = BeingState::eBSIdle;
+	this->mBeingSubState = BeingSubState::eBSSNone;
 
 	this->mRotateSpeed = 10;
 
@@ -131,11 +132,11 @@ void BeingEntity::setDestRotateEulerAngle(FVector rotate, bool immeRotate)
 	}
 	if (nullptr != mMovement)
 	{
-		(mMovement as BeingEntityMovement).setDestRotateEulerAngle(rotate);
+		((BeingEntityMovement*)this->mMovement)->setDestRotateEulerAngle(rotate);
 	}
 }
 
-void BeingEntity::setDestRotate(UnityEngine.Quaternion rotate, bool immeRotate)
+void BeingEntity::setDestRotate(FQuat rotate, bool immeRotate)
 {
 	if (immeRotate)
 	{
@@ -143,7 +144,7 @@ void BeingEntity::setDestRotate(UnityEngine.Quaternion rotate, bool immeRotate)
 	}
 	if (nullptr != mMovement)
 	{
-		(mMovement as BeingEntityMovement).setDestRotate(rotate);
+		((BeingEntityMovement*)this->mMovement)->setDestRotate(rotate);
 	}
 }
 
@@ -154,14 +155,15 @@ void BeingEntity::setDestPosAndDestRotate(FVector targetPt, bool immePos, bool i
 		this->setPos(targetPt);
 	}
 
-	UnityEngine.Quaternion retQuat = UtilMath::getRotateByStartAndEndPoint(this->getPos(), targetPt);
+	FQuat retQuat = UtilMath::getRotateByStartAndEndPoint(this->getPos(), targetPt);
+
 	if (immeRotate)
 	{
 		this->setRotateEulerAngle(retQuat.eulerAngles);
 	}
 	if (nullptr != mMovement)
 	{
-		(mMovement as BeingEntityMovement).setDestPos(targetPt);
+		((BeingEntityMovement*)this->mMovement)->setDestPos(targetPt);
 	}
 }
 
@@ -169,12 +171,12 @@ void BeingEntity::setDestScale(float scale, bool immeScale)
 {
 	if (immeScale)
 	{
-		this->setScale(new FVector(scale, scale, scale));
+		this->setScale(FVector(scale, scale, scale));
 	}
 
 	if (nullptr != mMovement)
 	{
-		(mMovement as BeingEntityMovement).setDestScale(scale);
+		((BeingEntityMovement*)this->mMovement)->setDestScale(scale);
 	}
 }
 
@@ -183,20 +185,20 @@ void BeingEntity::setForwardRotate(FVector rotate)
 {
 	if (nullptr != mMovement)
 	{
-		(mMovement as BeingEntityMovement).setForwardRotate(rotate);
+		((BeingEntityMovement*)this->mMovement)->setForwardRotate(rotate);
 	}
 }
 
 void BeingEntity::setName(std::string name)
 {
-	if (!string.IsNullOrEmpty(name))
+	if (!UtilStr::IsNullOrEmpty(name))
 	{
 		this->mName = name;
 
-		if (nullptr != this->mHud)
-		{
-			this->mHud.onNameChanged();
-		}
+		//if (nullptr != this->mHud)
+		//{
+		//	this->mHud.onNameChanged();
+		//}
 	}
 }
 
@@ -294,22 +296,22 @@ void BeingEntity::clearBeingSubState()
 	this->mBeingSubState = BeingSubState.eBSSNone;
 }
 
-void BeingEntity::overlapToEnter(BeingEntity bBeingEntity, const FHitResult& SweepResult)
+void BeingEntity::overlapToEnter(BeingEntity* bBeingEntity, const FHitResult& SweepResult)
 {
 	this->mAttack.overlapToEnter(bBeingEntity, collisionInfo);
 }
 
-void BeingEntity::overlapToStay(BeingEntity bBeingEntity, const FHitResult& SweepResult)
+void BeingEntity::overlapToStay(BeingEntity* bBeingEntity, const FHitResult& SweepResult)
 {
-	this->mAttack.overlapToStay(bBeingEntity, collisionInfo);
+	this->mAttack.overlapToStay(bBeingEntity*, collisionInfo);
 }
 
 void BeingEntity::overlapToExit(BeingEntity bBeingEntity, const FHitResult& SweepResult)
 {
-	this->mAttack.overlapToExit(bBeingEntity, collisionInfo);
+	this->mAttack.overlapToExit(bBeingEntity*, collisionInfo);
 }
 
-UnityEngine.Quaternion BeingEntity::getDestRotate()
+FQuat BeingEntity::getDestRotate()
 {
 	if (nullptr != this->mMovement)
 	{

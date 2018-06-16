@@ -1,15 +1,16 @@
 ﻿#include "MyProject.h"
 #include "BeingEntityAttack.h"
 #include "BeingEntity.h"
+#include "SceneEntityBase.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 M_IMPLEMENT_AND_REGISTER_CLASS(BeingEntityAttack, SceneEntityAttack)
 
-BeingEntityAttack::BeingEntityAttack(BeingEntity* entity)
+BeingEntityAttack::BeingEntityAttack(SceneEntityBase* entity)
 {
-	this->mEntity = entity;
+	this->mEntity = (BeingEntity*)entity;
 }
 
 void BeingEntityAttack::init()

@@ -6,6 +6,9 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "CtxExt.h"
+#include "ProjectData.h"
+#include "PlayerMgr.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -22,10 +25,8 @@ void PlayerOther::_onPostInit()
 {
 	Super::_onPostInit();
 
-	//this->hide();
-
-	this->mMovement.init();
-	this->mAttack.init();
+	this->mMovement->init();
+	this->mAttack->init();
 }
 
 void PlayerOther::initRender()
