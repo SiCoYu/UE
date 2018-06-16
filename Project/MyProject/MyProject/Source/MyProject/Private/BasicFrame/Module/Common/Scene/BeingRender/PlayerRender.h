@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "BeingEntityRender.h"
+#include "TickMode.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -8,6 +9,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 class SceneEntityBase;
+class SceneEntityRenderBase;
 
 /**
  * @brief Player 渲染器

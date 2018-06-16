@@ -6,6 +6,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerRender, BeingEntityRender)
+
 PlayerRender::PlayerRender(SceneEntityBase* entity_)
 	: base(entity_)
 {

@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "PlayerMainMovement.h"
 #include "SceneEntityBase.h"
+#include "UtilMath.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -8,9 +9,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 M_IMPLEMENT_AND_REGISTER_CLASS(PlayerMainMovement, PlayerMovement)
 
 PlayerMainMovement::PlayerMainMovement(SceneEntityBase* entity)
+	: Super(entity)
 {
-	Super(entity)
-
 	this->mForwardRotate = UtilMath::UnitQuat;
 	this->mRotate = UtilMath::UnitQuat;
 }
@@ -42,7 +42,7 @@ FQuat PlayerMainMovement::getForwardRotate()
 
 void PlayerMainMovement::setForwardRotate(FVector rotate)
 {
-	this->mForwardRotate = FQuat.Euler(rotate);
+	this->mForwardRotate = UtilMath::MakeQuatFromEuler(rotate);
 }
 
 MY_END_NAMESPACE

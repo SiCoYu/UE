@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "PlayerOtherMovement.h"
+#include "SceneEntityBase.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -7,8 +8,9 @@ MY_BEGIN_NAMESPACE(MyNS)
 M_IMPLEMENT_AND_REGISTER_CLASS(PlayerOtherMovement, BeingEntityMovement)
 
 PlayerOtherMovement::PlayerOtherMovement(SceneEntityBase* entity)
+	: Super(entity)
 {
-	Super(entity);
+	
 }
 
 void PlayerOtherMovement::onTick(float delta, TickMode tickMode)

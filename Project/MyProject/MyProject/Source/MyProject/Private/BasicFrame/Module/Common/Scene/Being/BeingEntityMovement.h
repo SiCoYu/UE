@@ -6,6 +6,7 @@
 
 #include "SceneEntityMovement.h"
 #include "TickMode.h"
+#include "MWrapQuaternion.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"

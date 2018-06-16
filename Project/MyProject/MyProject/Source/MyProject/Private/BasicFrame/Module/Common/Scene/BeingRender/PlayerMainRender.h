@@ -1,13 +1,15 @@
 ﻿#pragma once
 
-#include "BeingEntityRender.h"
+#include "PlayerRender.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class PlayerMainRender : PlayerRender
+class SceneEntityBase
+
+class PlayerMainRender : public PlayerRender
 {
 	M_DECLARE_CLASS(PlayerMainRender, PlayerRender)
 

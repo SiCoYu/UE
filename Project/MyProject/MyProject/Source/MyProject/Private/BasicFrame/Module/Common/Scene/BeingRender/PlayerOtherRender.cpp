@@ -5,8 +5,10 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerOtherRender, PlayerRender)
+
 PlayerOtherRender::PlayerOtherRender(SceneEntityBase* entity_)
-		: base(entity_)
+		: Super(entity_)
 {
 
 }
@@ -46,7 +48,7 @@ void PlayerOtherRender::updateLocalTransform()
 		{
 			this->mIsPosDirty = false;
 
-			UtilEngineWrap.setPos(this->mSelfActor.transform, this->mEntity.getPos());
+			UtilEngineWrap::setPos(this->mSelfActor.transform, this->mEntity.getPos());
 		}
 	}
 }

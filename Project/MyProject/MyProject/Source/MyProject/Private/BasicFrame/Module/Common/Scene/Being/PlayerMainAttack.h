@@ -9,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class BeingEntity;
 
-public class PlayerMainAttack : BeingEntityAttack
+class PlayerMainAttack : public BeingEntityAttack
 {
 	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
 

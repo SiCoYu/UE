@@ -39,7 +39,7 @@ enum class AnimaionEventId
 class AnimaionName
 {
 public:
-	static std::string eBSIdle = "idle";
+	static std::string eBSIdle;
 };
 
 /**

@@ -5,8 +5,10 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerMainRender, PlayerRender)
+
 PlayerMainRender::PlayerMainRender(SceneEntityBase* entity_)
-	: base(entity_)
+	: Super(entity_)
 {
 
 }
@@ -25,7 +27,7 @@ void PlayerMainRender::show()
 {
 	if (!IsVisible())
 	{
-		UtilEngineWrap.SetActive(this->mSelfActor, true);
+		UtilEngineWrap::SetActive(this->mSelfActor, true);
 	}
 }
 
@@ -33,7 +35,7 @@ void PlayerMainRender::hide()
 {
 	if (this->IsVisible())
 	{
-		UtilEngineWrap.SetActive(this->mSelfActor, false);
+		UtilEngineWrap::SetActive(this->mSelfActor, false);
 	}
 }
 
@@ -67,7 +69,7 @@ void PlayerMainRender::updateLocalTransform()
 		{
 			this->mIsPosDirty = false;
 
-			UtilEngineWrap.setPos(this->mSelfActor.transform, this->mEntity.getPos());
+			UtilEngineWrap::setPos(this->mSelfActor.transform, this->mEntity.getPos());
 		}
 	}
 }
