@@ -10,6 +10,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class PlayerOtherChildMovement : public PlayerChildMovement
 {
+	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+
 public:
 	PlayerOtherChildMovement(SceneEntityBase* entity);
 
