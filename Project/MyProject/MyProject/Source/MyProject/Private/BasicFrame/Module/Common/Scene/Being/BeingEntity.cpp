@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "BeingEntity.h"
+#include "SceneEntityRenderBase.h"
 #include "BeingEntityMovement.h"
 #include "BeingEntityAttack.h"
 #include "UtilMath.h"
@@ -304,19 +305,19 @@ void BeingEntity::overlapToEnter(BeingEntity* bBeingEntity, const FHitResult& Sw
 
 void BeingEntity::overlapToStay(BeingEntity* bBeingEntity, const FHitResult& SweepResult)
 {
-	this->mAttack->overlapToStay(bBeingEntity*, SweepResult);
+	this->mAttack->overlapToStay(bBeingEntity, SweepResult);
 }
 
-void BeingEntity::overlapToExit(BeingEntity bBeingEntity, const FHitResult& SweepResult)
+void BeingEntity::overlapToExit(BeingEntity* bBeingEntity, const FHitResult& SweepResult)
 {
-	this->mAttack->overlapToExit(bBeingEntity*, SweepResult);
+	this->mAttack->overlapToExit(bBeingEntity, SweepResult);
 }
 
 FQuat BeingEntity::getDestRotate()
 {
 	if (nullptr != this->mMovement)
 	{
-		return (this->mMovement as BeingEntityMovement).getDestRotate();
+		return ((BeingEntityMovement*)this->mMovement)->getDestRotate();
 	}
 
 	return UtilMath::UnitQuat;
