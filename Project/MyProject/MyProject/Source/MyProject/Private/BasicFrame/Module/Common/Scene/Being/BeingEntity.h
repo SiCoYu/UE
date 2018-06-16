@@ -92,9 +92,9 @@ public:
 
 	BeingSubState getBeingSubState();
 	void clearBeingSubState();
-	void overlapToEnter(BeingEntity bBeingEntity, const FHitResult& SweepResult);
-	void overlapToStay(BeingEntity bBeingEntity, const FHitResult& SweepResult);
-	void overlapToExit(BeingEntity bBeingEntity, const FHitResult& SweepResult);
+	void overlapToEnter(BeingEntity* bBeingEntity, const FHitResult& SweepResult);
+	void overlapToStay(BeingEntity* bBeingEntity, const FHitResult& SweepResult);
+	void overlapToExit(BeingEntity* bBeingEntity, const FHitResult& SweepResult);
 
 	FQuat getDestRotate();
 	// 预制目录是否有效

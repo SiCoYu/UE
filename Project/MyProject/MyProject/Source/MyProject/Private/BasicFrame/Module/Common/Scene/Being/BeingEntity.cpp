@@ -229,7 +229,7 @@ void BeingEntity::loadRenderRes()
 {
 	if (nullptr != this->mRender)
 	{
-		this->mRender.load();
+		this->mRender->load();
 	}
 }
 
@@ -249,12 +249,12 @@ void BeingEntity::_onPostTick(float delta, TickMode tickMode)
 {
 	if (nullptr != this->mMovement)
 	{
-		this->mMovement.onTick(delta, tickMode);
+		this->mMovement->onTick(delta, tickMode);
 	}
 
 	if (nullptr != this->mAttack)
 	{
-		this->mAttack.onTick(delta, tickMode);
+		this->mAttack->onTick(delta, tickMode);
 	}
 }
 
@@ -294,22 +294,22 @@ BeingSubState BeingEntity::getBeingSubState()
 
 void BeingEntity::clearBeingSubState()
 {
-	this->mBeingSubState = BeingSubState.eBSSNone;
+	this->mBeingSubState = BeingSubState::eBSSNone;
 }
 
 void BeingEntity::overlapToEnter(BeingEntity* bBeingEntity, const FHitResult& SweepResult)
 {
-	this->mAttack.overlapToEnter(bBeingEntity, collisionInfo);
+	this->mAttack->overlapToEnter(bBeingEntity, SweepResult);
 }
 
 void BeingEntity::overlapToStay(BeingEntity* bBeingEntity, const FHitResult& SweepResult)
 {
-	this->mAttack.overlapToStay(bBeingEntity*, collisionInfo);
+	this->mAttack->overlapToStay(bBeingEntity*, SweepResult);
 }
 
 void BeingEntity::overlapToExit(BeingEntity bBeingEntity, const FHitResult& SweepResult)
 {
-	this->mAttack.overlapToExit(bBeingEntity*, collisionInfo);
+	this->mAttack->overlapToExit(bBeingEntity*, SweepResult);
 }
 
 FQuat BeingEntity::getDestRotate()
@@ -325,7 +325,7 @@ FQuat BeingEntity::getDestRotate()
 // 预制目录是否有效
 bool BeingEntity::isPrefabPathValid()
 {
-	return !string.IsNullOrEmpty(this->mPrefabPath);
+	return !UtilStr::IsNullOrEmpty(this->mPrefabPath);
 }
 
 void BeingEntity::setPrefabPath(std::string path)
