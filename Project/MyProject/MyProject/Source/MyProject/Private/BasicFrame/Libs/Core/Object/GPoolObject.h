@@ -35,10 +35,11 @@ protected:
 public:
 	virtual void dispose();
 	virtual void destroy();
-	bool isUsePool();
-	void setIsUsePool(bool value);
-	void putInPool();
-	void getFromPool();
+
+	virtual bool isUsePool();
+	virtual void setIsUsePool(bool value);
+	virtual void putInPool();
+	virtual void getFromPool();
 	void setGlobalUniqueId(std::string value);
 	std::string getGlobalUniqueId();
 
