@@ -1,6 +1,7 @@
 #include "MyProject.h"
 #include "BeingEntity.h"
 #include "BeingEntityMovement.h"
+#include "BeingEntityAttack.h"
 #include "UtilMath.h"
 #include "UtilStr.h"
 #include "MClassFactory.h"
@@ -37,7 +38,7 @@ void BeingEntity::onDestroy()
 
 	if (nullptr != this->mAttack)
 	{
-		this->mAttack.dispose();
+		this->mAttack->dispose();
 		this->mAttack = nullptr;
 	}
 
@@ -66,7 +67,7 @@ void BeingEntity::onPutInPool()
 
 	if (nullptr != this->mAttack)
 	{
-		this->mAttack.onPutInPool();
+		this->mAttack->onPutInPool();
 	}
 
 	Super::onPutInPool();
@@ -77,7 +78,7 @@ void BeingEntity::setMoveSpeed(float value)
 	this->mMoveSpeed = value;
 }
 
-float BeingEntity::getMoveSpeed(bool isOrig = false)
+float BeingEntity::getMoveSpeed(bool isOrig)
 {
 	return this->mMoveSpeed;
 }
@@ -150,21 +151,21 @@ void BeingEntity::setDestRotate(FQuat rotate, bool immeRotate)
 
 void BeingEntity::setDestPosAndDestRotate(FVector targetPt, bool immePos, bool immeRotate)
 {
-	if (immePos)
-	{
-		this->setPos(targetPt);
-	}
+	//if (immePos)
+	//{
+	//	this->setPos(targetPt);
+	//}
 
-	FQuat retQuat = UtilMath::getRotateByStartAndEndPoint(this->getPos(), targetPt);
+	//FQuat retQuat = UtilMath::getRotateByStartAndEndPoint(this->getPos(), targetPt);
 
-	if (immeRotate)
-	{
-		this->setRotateEulerAngle(retQuat.eulerAngles);
-	}
-	if (nullptr != mMovement)
-	{
-		((BeingEntityMovement*)this->mMovement)->setDestPos(targetPt);
-	}
+	//if (immeRotate)
+	//{
+	//	this->setRotateEulerAngle(retQuat.eulerAngles);
+	//}
+	//if (nullptr != mMovement)
+	//{
+	//	((BeingEntityMovement*)this->mMovement)->setDestPos(targetPt);
+	//}
 }
 
 void BeingEntity::setDestScale(float scale, bool immeScale)

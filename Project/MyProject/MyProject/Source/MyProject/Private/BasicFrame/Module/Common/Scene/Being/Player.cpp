@@ -1,5 +1,9 @@
 #include "MyProject.h"
 #include "Player.h"
+#include "PlayerRender.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -38,8 +42,8 @@ void Player::autoHandle()
 
 void Player::initRender()
 {
-	this->mRender = new PlayerRender(this);
-	this->mRender.init();
+	this->mRender = MY_NEW PlayerRender(this);
+	this->mRender->init();
 }
 
 MY_END_NAMESPACE

@@ -9,6 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 M_IMPLEMENT_AND_REGISTER_CLASS(BeingEntityAttack, SceneEntityAttack)
 
 BeingEntityAttack::BeingEntityAttack(SceneEntityBase* entity)
+	: Super(entity)
 {
 	this->mEntity = (BeingEntity*)entity;
 }

@@ -1,6 +1,7 @@
 ﻿#include "MyProject.h"
 #include "PlayerRender.h"
 #include "SceneEntityBase.h"
+#include "SceneEntityRenderBase.h"
 #include "TickMode.h"
 #include "MClassFactory.h"
 
@@ -9,7 +10,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 M_IMPLEMENT_AND_REGISTER_CLASS(PlayerRender, BeingEntityRender)
 
 PlayerRender::PlayerRender(SceneEntityBase* entity_)
-	: base(entity_)
+	: Super(entity_)
 {
 	
 }
@@ -29,10 +30,10 @@ void PlayerRender::dispose()
 
 void PlayerRender::attachToParentNode(SceneEntityRenderBase* render)
 {
-	if(this->isSelfValid() && render.isSelfValid())
-	{
-		UtilEngineWrap::SetParent(render.getSelfActor(), this->mSelfActor, false);
-	}
+	//if(this->isSelfValid() && render.isSelfValid())
+	//{
+	//	UtilEngineWrap::SetParent(render.getSelfActor(), this->mSelfActor, false);
+	//}
 }
 
 void PlayerRender::onTick(float delta, TickMode tickMode)

@@ -24,7 +24,7 @@ void ProjectData::dispose()
 	this->mPlayerMgr.setNull();
 }
 
-MySharedPtr<PlayerMgr>& ProjectData::getPlayerMgr()
+MySharedPtr<PlayerMgr> ProjectData::getPlayerMgr()
 {
 	return this->mPlayerMgr;
 }

@@ -25,7 +25,7 @@ public:
 	void init();
 	void dispose();
 
-	MySharedPtr<PlayerMgr>& getPlayerMgr();
+	MySharedPtr<PlayerMgr> getPlayerMgr();
 	void setPlayerMgr(MySharedPtr<PlayerMgr>& value);
 };
 

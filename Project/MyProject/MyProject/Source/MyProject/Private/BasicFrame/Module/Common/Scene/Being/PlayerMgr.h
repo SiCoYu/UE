@@ -29,6 +29,8 @@ public:
 
 protected:
 	virtual void _onTickExec(float delta, TickMode tickMode) override;
+
+public:
 	void postUpdate();
 	PlayerMain* createHero();
 	void addHero(PlayerMain* hero);

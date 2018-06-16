@@ -26,7 +26,8 @@ public:
 
 	virtual void init();
 
-protected:
+//protected:
+public:
 	virtual void onInit();
 	virtual void onGetFromPool();
 	virtual void onPutInPool();
