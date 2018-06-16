@@ -10,43 +10,20 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 场景中的玩家
  */
-public class Player : BeingEntity
+class Player : BeingEntity
 {
-	public Player()
-	{
+public:
+	Player();
 
-	}
+protected:
+	virtual void _onPreInit() override;
+	virtual void _onPostInit() override;
 
-	override protected void _onPreInit()
-	{
-		base._onPreInit();
-	}
-
-	protected override void _onPostInit()
-	{
-		base._onPostInit();
-	}
-
-	override public void onDestroy()
-	{
-		base.onDestroy();
-	}
-
-	override public void onPutInPool()
-	{
-		base.onPutInPool();
-	}
-
-	override public void autoHandle()
-	{
-		base.autoHandle();
-	}
-
-	override public void initRender()
-	{
-		this.mRender = new PlayerRender(this);
-		this.mRender.init();
-	}
+public:
+	virtual void onDestroy() override;
+	virtual void onPutInPool() override;
+	virtual void autoHandle() override;
+	virtual void initRender() override;
 };
 
 MY_END_NAMESPACE

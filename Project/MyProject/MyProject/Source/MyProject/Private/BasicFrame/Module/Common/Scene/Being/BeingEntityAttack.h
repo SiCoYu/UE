@@ -12,62 +12,23 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class BeingEntityAttack
 {
-	protected BeingEntity mEntity;
+protected:
+	BeingEntity* mEntity;
 
-	public BeingEntityAttack(BeingEntity entity)
-	{
-		mEntity = entity;
-	}
+public:
+	BeingEntityAttack(BeingEntity* entity);
+	
+	virtual void init();
+	virtual void dispose();
+	virtual void onPutInPool();
 
-	virtual public void init()
-	{
-
-	}
-
-	virtual public void dispose()
-	{
-
-	}
-
-	virtual public void onPutInPool()
-	{
-
-	}
-
-	virtual public void onTick(float delta, TickMode tickMode)
-	{
-
-	}
-
-	virtual public void overlapToEnter(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
-	{
-		
-	}
-
-	virtual public void overlapToStay(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
-	{
-		
-	}
-
-	virtual public void overlapToExit(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
-	{
-		
-	}
-
-	virtual public void overlapToEnter2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
-	{
-		
-	}
-
-	virtual public void overlapToStay2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
-	{
-		
-	}
-
-	virtual public void overlapToExit2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
-	{
-		
-	}
+	virtual void onTick(float delta, TickMode tickMode);
+	virtual void overlapToEnter(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo);
+	virtual void overlapToStay(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo);
+	virtual void overlapToExit(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo);
+	virtual void overlapToEnter2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo);
+	virtual void overlapToStay2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo);
+	virtual void overlapToExit2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo);
 };
 
 MY_END_NAMESPACE

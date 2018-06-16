@@ -12,78 +12,25 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 public class PlayerMain : Player
 {
-	public PlayerMain()
-	{
-		this.mMovement = new PlayerMainMovement(this);
-		this.mAttack = new PlayerMainAttack(this);
-	}
+public:
+	PlayerMain();
+	
+	virtual void initRender() override;
 
-	override public void initRender()
-	{
-		if (null == this.mRender)
-		{
-			this.mRender = new PlayerMainRender(this);
-		}
+protected:
+	virtual void _onPreInit() override;
+	virtual void _onPostInit();
 
-		this.mRender.init();
-	}
+public:
+	virtual void dispose() override;
+	virtual void putInPool() override;
+	virtual void onPutInPool() override;
+	virtual void autoHandle() override;
 
-	protected override void _onPreInit()
-	{
-		base._onPreInit();
-
-		this.mMovement.init();
-		this.mAttack.init();
-	}
-
-	protected override void _onPostInit()
-	{
-		base._onPostInit();
-	}
-
-	override public void dispose()
-	{
-		if (null != Ctx.msInstance.mPlayerMgr)
-		{
-			Ctx.msInstance.mPlayerMgr.removeHero();
-		}
-
-		base.dispose();
-	}
-
-	override public void putInPool()
-	{
-		Ctx.msInstance.mPlayerMgr.removeHero();
-
-		base.putInPool();
-	}
-
-	public override void onPutInPool()
-	{
-		base.onPutInPool();
-	}
-
-	override public void autoHandle()
-	{
-		base.autoHandle();
-
-		Ctx.msInstance.mPlayerMgr.addHero(this);
-	}
-
-	protected override void _onExecTick(float delta, TickMode tickMode)
-	{
-		base._onExecTick(delta, tickMode);
-	}
-
-	protected override void _onPreTick(float delta, TickMode tickMode)
-	{
-		base._onPreTick(delta, tickMode);
-	}
-
-	protected override void _onPostTick(float delta, TickMode tickMode)
-	{
-		base._onPostTick(delta, tickMode);
-	}
+protected:
+	virtual void _onExecTick(float delta, TickMode tickMode) override;
+	virtual void _onPreTick(float delta, TickMode tickMode) override;
+	virtual void _onPostTick(float delta, TickMode tickMode) override;
 };
 
 MY_END_NAMESPACE

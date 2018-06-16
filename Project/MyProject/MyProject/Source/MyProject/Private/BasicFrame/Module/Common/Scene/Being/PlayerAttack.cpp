@@ -4,6 +4,10 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+PlayerAttack::PlayerAttack(BeingEntity* entity)
+	: base(entity)
+{
 
+}
 
 MY_END_NAMESPACE

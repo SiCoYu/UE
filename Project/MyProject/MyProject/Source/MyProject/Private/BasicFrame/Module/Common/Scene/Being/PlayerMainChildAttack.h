@@ -9,42 +9,42 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 public class PlayerMainChildAttack : PlayerChildAttack
 {
-	public PlayerMainChildAttack(BeingEntity entity)
+public:
+	PlayerMainChildAttack(BeingEntity entity)
 		: base(entity)
 	{
 
 	}
 
-	override public void overlapToEnter(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
+	virtual void overlapToEnter(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo) override
 	{
 		
 	}
 
-	override public void overlapToStay(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
+	virtual void overlapToStay(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo) override
 	{
 		
 	}
 
-	override public void overlapToExit(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo)
+	virtual void overlapToExit(BeingEntity bBeingEntity, UnityEngine.Collision collisionInfo) override
 	{
 		
 	}
 
-	override public void overlapToEnter2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
+	virtual void overlapToEnter2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo) override
 	{
 		
 	}
 
-	override public void overlapToStay2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
+	virtual void overlapToStay2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo) override
 	{
 		
 	}
 
-	override public void overlapToExit2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo)
+	virtual void overlapToExit2D(BeingEntity bBeingEntity, UnityEngine.Collision2D collisionInfo) override
 	{
 
 	}
-	
 };
 
 MY_END_NAMESPACE
