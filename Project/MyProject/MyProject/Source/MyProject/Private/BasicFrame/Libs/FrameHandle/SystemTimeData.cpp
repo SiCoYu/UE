@@ -49,13 +49,13 @@ void SystemTimeData::setCurTime(long value)
 
 float SystemTimeData::getFixedTimestep()
 {
-	return this.mDeltaSec;
+	return this->mDeltaSec;
 }
 
 // 获取固定帧率时间间隔
 float SystemTimeData::getFixFrameRateInterval()
 {
-	return this.mFixFrameRate;
+	return this->mFixFrameRate;
 }
 
 void SystemTimeData::nextFrame()
@@ -79,7 +79,7 @@ void SystemTimeData::nextFrame()
 		}
 	}
 
-	this.mDeltaSec *= this.mScale;
+	this->mDeltaSec *= this->mScale;
 }
 
 MY_END_NAMESPACE

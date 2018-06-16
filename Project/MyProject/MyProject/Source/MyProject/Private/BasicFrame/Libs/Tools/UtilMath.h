@@ -4,6 +4,7 @@
 #include "Math/Vector.h"	// FVector
 #include "Math/Quat.h"		// FQuat
 #include "Math/Rotator.h"	// FRotator
+#include "Math/TransformVectorized.h"	// FTransform
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -31,6 +32,26 @@ public:
 	static bool isEqualVec3(FVector& a, FVector& b);
 	static bool isEqualQuat(FQuat& a, FQuat& b);
 
+	// 获取单位前向向量
+	static FVector getNormalForwardVector(FTransform& transform);
+	/**
+	* @param curOrient 当前方向
+	* @param lookAt 观察点方向
+	* @ret 返回旋转到观察点向量的四元数，这个是两个方向向量的夹角，不是点之间的夹角
+	*/
+	static FQuat getRotateByLookatPoint(FQuat curOrient, FVector lookAt);
+	/**
+	* @param startPoint 开始点
+	* @param destPoint 目标点
+	* @ret 返回两个点之间的旋转的四元数，这个是两个点之间的夹角
+	*/
+	static FQuat getRotateByStartAndEndPoint(FVector startPoint, FVector destPoint);
+	/**
+	* @param startOrient 开始方向
+	* @param destOrient 目标方向
+	* @ret 返回两个向量之间的旋转的四元数，这个是两个向量之间的夹角
+	*/
+	static FQuat getRotateByStartAndEndOrient(FVector startOrient, FVector destOrient);
 	static FQuat getRotateByOrient(FVector& forward);
 	static FQuat convQuatFromEuler(FVector& euler);
 };

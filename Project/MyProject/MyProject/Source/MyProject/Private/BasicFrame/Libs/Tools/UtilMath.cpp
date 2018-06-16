@@ -74,6 +74,61 @@ bool UtilMath::isEqualQuat(FQuat& a, FQuat& b)
 	return true;
 }
 
+// 获取单位前向向量
+FVector UtilMath::getNormalForwardVector(FTransform& transform)
+{
+	FVector dir = transform.TransformPosition(UtilMath::ForwardVec3);
+	dir.Normalize();
+	return dir;
+}
+
+/**
+* @param curOrient 当前方向
+* @param lookAt 观察点方向
+* @ret 返回旋转到观察点向量的四元数，这个是两个方向向量的夹角，不是点之间的夹角
+*/
+FQuat UtilMath::getRotateByLookatPoint(FQuat curOrient, FVector lookAt)
+{
+	FVector curVec = curOrient * UtilMath::ForwardVec3;
+	FQuat retQuat = FQuat::FindBetweenVectors(curVec, lookAt);
+	return retQuat;
+}
+
+/**
+* @param startPoint 开始点
+* @param destPoint 目标点
+* @ret 返回两个点之间的旋转的四元数，这个是两个点之间的夹角
+*/
+FQuat UtilMath::getRotateByStartAndEndPoint(FVector startPoint, FVector destPoint)
+{
+	FQuat retQuat = UtilMath::UnitQuat;
+
+	if (MacroDef::XZ_MODE)
+	{
+		retQuat = FQuat::FindBetweenVectors(UtilMath::ForwardVec3, destPoint - startPoint);
+	}
+	else if (MacroDef::XY_MODE)
+	{
+		retQuat = FQuat::FindBetweenVectors(UtilMath::UpVec3, destPoint - startPoint);
+	}
+
+	return retQuat;
+}
+
+/**
+* @param startOrient 开始方向
+* @param destOrient 目标方向
+* @ret 返回两个向量之间的旋转的四元数，这个是两个向量之间的夹角
+*/
+FQuat UtilMath::getRotateByStartAndEndOrient(FVector startOrient, FVector destOrient)
+{
+	FQuat retQuat = UtilMath::UnitQuat;
+
+	retQuat = FQuat::FindBetweenVectors(startOrient, destOrient);
+
+	return retQuat;
+}
+
 FQuat UtilMath::getRotateByOrient(FVector& forward)
 {
 	FQuat retQuat = UtilMath::UnitQuat;
