@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(BeingEntity, SceneEntityBase)
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerMainAttack, BeingEntityAttack)
 
 PlayerMainAttack::PlayerMainAttack(BeingEntity* entity)
 	: Super(entity)

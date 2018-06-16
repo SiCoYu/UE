@@ -21,23 +21,23 @@ void PlayerOtherRender::onInit()
 // 资源加载
 void PlayerOtherRender::load()
 {
-	if (nullptr == this->mAuxPrefabLoader)
-	{
-		this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
-		this->mAuxPrefabLoader.setEntityType(this->mEntity.getEntityType());
-		this->mAuxPrefabLoader.setDestroySelf(true);
-		this->mAuxPrefabLoader.setIsNeedInsRes(true);
-		this->mAuxPrefabLoader.setIsInsNeedCoroutine(false);
-		this->mAuxPrefabLoader.setIsInitOrientPos(true);
-		this->mAuxPrefabLoader.setIsFakePos(true);
-	}
+	//if (nullptr == this->mAuxPrefabLoader)
+	//{
+	//	this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
+	//	this->mAuxPrefabLoader.setEntityType(this->mEntity.getEntityType());
+	//	this->mAuxPrefabLoader.setDestroySelf(true);
+	//	this->mAuxPrefabLoader.setIsNeedInsRes(true);
+	//	this->mAuxPrefabLoader.setIsInsNeedCoroutine(false);
+	//	this->mAuxPrefabLoader.setIsInitOrientPos(true);
+	//	this->mAuxPrefabLoader.setIsFakePos(true);
+	//}
 
-	// 这种直接同步加载
-	this->mAuxPrefabLoader.syncLoad(
-		this->mResPath,
-		nullptr, 
-		this->onResLoaded
-		);
+	//// 这种直接同步加载
+	//this->mAuxPrefabLoader.syncLoad(
+	//	this->mResPath,
+	//	nullptr, 
+	//	this->onResLoaded
+	//);
 }
 
 void PlayerOtherRender::updateLocalTransform()
@@ -48,7 +48,7 @@ void PlayerOtherRender::updateLocalTransform()
 		{
 			this->mIsPosDirty = false;
 
-			UtilEngineWrap::setPos(this->mSelfActor.transform, this->mEntity.getPos());
+			//UtilEngineWrap::setPos(this->mSelfActor.transform, this->mEntity.getPos());
 		}
 	}
 }

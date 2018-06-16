@@ -4,6 +4,9 @@
 #include "Player.h"
 #include "TickMode.h"
 #include "UtilMath.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -49,7 +52,7 @@ void PlayerMgr::postUpdate()
 
 PlayerMain* PlayerMgr::createHero()
 {
-	return new PlayerMain();
+	return MY_NEW PlayerMain();
 }
 
 void PlayerMgr::addHero(PlayerMain* hero)
@@ -93,7 +96,7 @@ void PlayerMgr::removePlayer(Player* player)
 
 void PlayerMgr::createPlayerMain()
 {
-	this->mHero = new PlayerMain();
+	this->mHero = MY_NEW PlayerMain();
 	this->mHero->init();
 	this->mHero->setDestPos(FVector(50, 1.3f, 50), true);
 	this->mHero->setDestRotateEulerAngle(UtilMath::Euler(UtilMath::UnitQuat), true);
