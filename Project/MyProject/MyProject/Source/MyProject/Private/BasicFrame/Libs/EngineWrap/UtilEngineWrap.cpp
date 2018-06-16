@@ -1226,10 +1226,14 @@ FTransform UtilEngineWrap::GetTransform(AActor* target)
 
 FVector UtilEngineWrap::getPos(AActor* actor)
 {
+	FVector ret;
+
 	if (actor)
 	{
-		return actor->GetTransform().GetLocation();
+		ret = actor->GetTransform().GetLocation();
 	}
+
+	return ret;
 }
 
 void UtilEngineWrap::setPos(FTransform tran, FVector pos)
@@ -1252,10 +1256,14 @@ void UtilEngineWrap::setPosByActor(AActor* actor, FVector pos)
 
 FVector UtilEngineWrap::getScale(AActor* actor)
 {
+	FVector ret;
+
 	if (actor)
 	{
-		return actor->GetTransform().GetScale3D();
+		ret = actor->GetTransform().GetScale3D();
 	}
+
+	return ret;
 }
 
 void UtilEngineWrap::setScale(FTransform tran, FVector scale)
@@ -1276,10 +1284,14 @@ void UtilEngineWrap::setScaleByActor(AActor* actor, FVector scale)
 
 FQuat UtilEngineWrap::getRotate(AActor* actor)
 {
+	FQuat ret;
+
 	if (actor)
 	{
-		return actor->GetTransform().GetRotation();
+		ret = actor->GetTransform().GetRotation();
 	}
+
+	return ret;
 }
 
 void UtilEngineWrap::setRotate(FTransform tran, FQuat rotate)

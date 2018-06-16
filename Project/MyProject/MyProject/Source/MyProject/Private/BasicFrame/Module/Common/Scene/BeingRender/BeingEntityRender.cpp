@@ -11,6 +11,8 @@
 #include "AuxScenePrefabLoader.h"
 #include "MClassFactory.h"
 
+#include "Templates/Casts.h"	// Cast
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 M_IMPLEMENT_AND_REGISTER_CLASS(BeingEntityRender, SceneEntityRenderBase)
@@ -97,13 +99,17 @@ void BeingEntityRender::load()
 
 	this->mAuxPrefabLoader->asyncLoad(
 		this->mResPath, 
-		MakeEventDispatchDelegate(this, this->onResLoaded)
+		MakeEventDispatchDelegate(
+			this,
+			&BeingEntityRender::onResLoaded
+		)
 	);
 }
 
 void BeingEntityRender::onResLoaded(IDispatchObject* dispObj/*, uint uniqueId*/)
 {
-	this->setSelfActor(this->mAuxPrefabLoader->getActor());
+	AActor* actor = Cast<AActor>(this->mAuxPrefabLoader->getActor());
+	this->setSelfActor(actor);
 }
 
 void BeingEntityRender::_onSelfChanged()

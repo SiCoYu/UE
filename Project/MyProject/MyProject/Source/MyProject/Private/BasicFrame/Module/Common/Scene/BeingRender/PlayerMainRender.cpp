@@ -2,6 +2,11 @@
 #include "PlayerMainRender.h"
 #include "SceneEntityBase.h"
 #include "UtilEngineWrap.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "EventDispatchDelegate.h"
+#include "AuxScenePrefabLoader.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -26,7 +31,7 @@ void PlayerMainRender::_onSelfChanged()
 
 void PlayerMainRender::show()
 {
-	if (!IsVisible())
+	if (!this->IsVisible())
 	{
 		UtilEngineWrap::SetActive(this->mSelfActor, true);
 	}
@@ -43,23 +48,26 @@ void PlayerMainRender::hide()
 // 资源加载
 void PlayerMainRender::load()
 {
-	//if (nullptr == this->mAuxPrefabLoader)
-	//{
-	//	this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
-	//	this->mAuxPrefabLoader.setEntityType(this->mEntity.getEntityType());
-	//	this->mAuxPrefabLoader.setDestroySelf(true);
-	//	this->mAuxPrefabLoader.setIsNeedInsRes(true);
-	//	this->mAuxPrefabLoader.setIsInsNeedCoroutine(false);
-	//	this->mAuxPrefabLoader.setIsInitOrientPos(true);
-	//	this->mAuxPrefabLoader.setIsFakePos(true);
-	//}
+	if (nullptr == this->mAuxPrefabLoader)
+	{
+		//this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
+		this->mAuxPrefabLoader = MY_NEW AuxScenePrefabLoader("", true, true);
+		//this->mAuxPrefabLoader.setEntityType(this->mEntity.getEntityType());
+		this->mAuxPrefabLoader->setDestroySelf(true);
+		this->mAuxPrefabLoader->setIsNeedInsRes(true);
+		this->mAuxPrefabLoader->setIsInsNeedCoroutine(false);
+		this->mAuxPrefabLoader->setIsInitOrientPos(true);
+		this->mAuxPrefabLoader->setIsFakePos(true);
+	}
 
-	//// 这种直接同步加载
-	//this->mAuxPrefabLoader.syncLoad(
-	//	this->mResPath,
-	//	nullptr,
-	//	this->onResLoaded
-	//);
+	// 这种直接同步加载
+	this->mAuxPrefabLoader->syncLoad(
+		this->mResPath,
+		MakeEventDispatchDelegate(
+			this, 
+			&BeingEntityRender::onResLoaded
+		)
+	);
 }
 
 void PlayerMainRender::updateLocalTransform()
@@ -70,7 +78,7 @@ void PlayerMainRender::updateLocalTransform()
 		{
 			this->mIsPosDirty = false;
 
-			//UtilEngineWrap::setPos(this->mSelfActor.transform, this->mEntity.getPos());
+			UtilEngineWrap::setPosByActor(this->mSelfActor, this->mEntity->getPos());
 		}
 	}
 }
