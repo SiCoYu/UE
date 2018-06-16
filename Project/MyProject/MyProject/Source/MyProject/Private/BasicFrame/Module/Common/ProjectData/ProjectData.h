@@ -6,12 +6,12 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class GameData : public GObject
+class ProjectData : public GObject
 {
-	M_DECLARE_CLASS(GameData, GObject)
+	M_DECLARE_CLASS(ProjectData, GObject)
 
 public:
-	GameData();
+	ProjectData();
 
 	void init();
 	void dispose();

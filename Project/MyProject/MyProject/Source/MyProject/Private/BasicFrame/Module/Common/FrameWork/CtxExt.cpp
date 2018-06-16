@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "CtxExt.h"
-#include "GameData.h"
+#include "ProjectData.h"
 #include "EntityData.h"
 #include "MClassFactory.h"
 
@@ -12,7 +12,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 CtxExt::CtxExt()
 {
-	this->mGameData.setNull();
+	this->mProjectData.setNull();
 	this->mEntityData.setNull();
 }
 
@@ -20,7 +20,7 @@ void CtxExt::construct()
 {
 	Ctx::construct();
 
-	this->mGameData = MySharedPtr<GameData>(MY_NEW GameData());
+	this->mProjectData = MySharedPtr<ProjectData>(MY_NEW ProjectData());
 	this->mEntityData = MySharedPtr<EntityData>(MY_NEW EntityData());
 }
 
@@ -28,29 +28,29 @@ void CtxExt::init()
 {
 	Ctx::init();
 
-	this->mGameData->init();
+	this->mProjectData->init();
 	this->mEntityData->init();
 }
 
 void CtxExt::dispose()
 {
-	this->mGameData->dispose();
+	this->mProjectData->dispose();
 	this->mEntityData->dispose();
 
-	this->mGameData.setNull();
+	this->mProjectData.setNull();
 	this->mEntityData.setNull();
 
 	Ctx::dispose();
 }
 
-void CtxExt::setGameData(GameData* gameData)
+void CtxExt::setProjectData(ProjectData* gameData)
 {
-	this->mGameData = gameData;
+	this->mProjectData = gameData;
 }
 
-MySharedPtr<GameData> CtxExt::getGameData()
+MySharedPtr<ProjectData> CtxExt::getProjectData()
 {
-	return this->mGameData;
+	return this->mProjectData;
 }
 
 void CtxExt::setEntityData(EntityData* entityData)

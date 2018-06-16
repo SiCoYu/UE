@@ -1,0 +1,24 @@
+#include "MyProject.h"
+#include "ProjectData.h"
+#include "MClassFactory.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(ProjectData, GObject)
+
+ProjectData::ProjectData()
+{
+
+}
+
+void ProjectData::init()
+{
+
+}
+
+void ProjectData::dispose()
+{
+
+}
+
+MY_END_NAMESPACE

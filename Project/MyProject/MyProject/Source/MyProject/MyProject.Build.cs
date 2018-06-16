@@ -170,7 +170,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Module/App",
 
                 "MyProject/Private/BasicFrame/Module/Common/FrameWork",
-                "MyProject/Private/BasicFrame/Module/Common/GameData",
+                "MyProject/Private/BasicFrame/Module/Common/ProjectData",
                 "MyProject/Private/BasicFrame/Module/Common/Scene",
                 "MyProject/Private/BasicFrame/Module/Common/Scene/Entity",
                 "MyProject/Private/BasicFrame/Module/Common/Common",
