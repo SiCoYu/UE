@@ -16,7 +16,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class EntityRenderBase;
+class SceneEntityRenderBase;
 
 /**
  * @brief 场景中的实体，定义接口，逻辑相关的一些实现放在 BeingEntity 里面，例如: 地形， Player， Npc
@@ -26,7 +26,7 @@ class SceneEntityBase : public GObject, public IDispatchObject, public ITickedOb
 	M_DECLARE_CLASS(SceneEntityBase, GObject)
 
 protected:
-	EntityRenderBase* mRender;
+	SceneEntityRenderBase* mRender;
 
 	FVector mPos;			// 当前位置信息
 	MWrapQuaternion mRotate;			// 当前方向信息
@@ -95,7 +95,7 @@ public:
 	// 初始化渲染器
 	virtual void initRender();
 	virtual void loadRenderRes();
-	EntityRenderBase* getRender();
+	SceneEntityRenderBase* getRender();
 };
 
 MY_END_NAMESPACE

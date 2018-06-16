@@ -12,6 +12,8 @@ class SceneEntityBase;
 
 class PlayerOtherMovement : public BeingEntityMovement
 {
+	M_DECLARE_CLASS(PlayerOtherMovement, BeingEntityMovement)
+
 public:
 	PlayerOtherMovement(SceneEntityBase* entity);
 

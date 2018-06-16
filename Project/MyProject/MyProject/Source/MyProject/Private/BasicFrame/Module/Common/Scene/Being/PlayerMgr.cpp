@@ -1,9 +1,12 @@
 #include "MyProject.h"
 #include "PlayerMgr.h"
 #include "PlayerMain.h"
+#include "Player.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerMgr, SceneEntityMgrBase)
 
 PlayerMgr::PlayerMgr()
 {

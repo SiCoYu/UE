@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "SceneEntityMovement.h"
+#include "SceneEntityBase.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

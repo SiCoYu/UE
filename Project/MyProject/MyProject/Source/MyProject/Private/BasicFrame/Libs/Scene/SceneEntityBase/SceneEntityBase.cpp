@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "SceneEntityBase.h"
-#include "EntityRenderBase.h"
+#include "SceneEntityRenderBase.h"
 #include "UtilMath.h"
 #include "UtilEngineWrap.h"
 #include "MWrapQuaternion.h"
@@ -313,7 +313,7 @@ void SceneEntityBase::loadRenderRes()
 
 }
 
-EntityRenderBase* SceneEntityBase::getRender()
+SceneEntityRenderBase* SceneEntityBase::getRender()
 {
 	return this->mRender;
 }

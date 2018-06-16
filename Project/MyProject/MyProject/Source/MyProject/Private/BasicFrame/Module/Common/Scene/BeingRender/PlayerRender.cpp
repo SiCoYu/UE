@@ -25,7 +25,7 @@ void PlayerRender::dispose()
 	Super::dispose();
 }
 
-void PlayerRender::attachToParentNode(EntityRenderBase* render)
+void PlayerRender::attachToParentNode(SceneEntityRenderBase* render)
 {
 	if(this->isSelfValid() && render.isSelfValid())
 	{

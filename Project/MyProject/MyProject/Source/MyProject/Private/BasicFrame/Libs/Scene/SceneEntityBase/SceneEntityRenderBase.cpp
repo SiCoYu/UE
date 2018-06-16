@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "EntityRenderBase.h"
+#include "SceneEntityRenderBase.h"
 #include "SceneEntityBase.h"
 #include "AuxComponent.h"
 #include "UtilMath.h"
@@ -7,81 +7,81 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(EntityRenderBase, AuxComponent)
+M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityRenderBase, AuxComponent)
 
-EntityRenderBase::EntityRenderBase(SceneEntityBase* entity_)
+SceneEntityRenderBase::SceneEntityRenderBase(SceneEntityBase* entity_)
 {
 	this->mEntity = entity_;
 }
 
-void EntityRenderBase::setClientDispose(bool isDispose)
+void SceneEntityRenderBase::setClientDispose(bool isDispose)
 {
 
 }
 
-bool EntityRenderBase::isClientDispose()
+bool SceneEntityRenderBase::isClientDispose()
 {
 	return this->mEntity->isClientDispose();
 }
 
-void EntityRenderBase::onTick(float delta, TickMode tickMode)
+void SceneEntityRenderBase::onTick(float delta, TickMode tickMode)
 {
 	
 }
 
 // 初始化流程
-void EntityRenderBase::init()
+void SceneEntityRenderBase::init()
 {
 	this->onInit();
 }
 
 // 初始化事件，仅仅是变量初始化，初始化流程不修改
-void EntityRenderBase::onInit()
+void SceneEntityRenderBase::onInit()
 {
 	this->setIsDestroySelf(false);
 }
 
 // 销毁流程
-void EntityRenderBase::dispose()
+void SceneEntityRenderBase::dispose()
 {
 	Super::dispose();
 }
 
 // 资源释放事件，仅仅是释放基本的资源，不修改销毁流程
-void EntityRenderBase::onDestroy()
+void SceneEntityRenderBase::onDestroy()
 {
 	this->mEntity = nullptr;
 
 	Super::onDestroy();
 }
 
-bool EntityRenderBase::checkRender()
+bool SceneEntityRenderBase::checkRender()
 {
 	return false;
 }
 
-void EntityRenderBase::load()
+void SceneEntityRenderBase::load()
 {
 
 }
 
 // 场景对象不需要设置，因为如果设置了就检测不了隐藏显示了
-void EntityRenderBase::show()
+void SceneEntityRenderBase::show()
 {
 	
 }
 
-void EntityRenderBase::hide()
+void SceneEntityRenderBase::hide()
 {
 	
 }
 
-bool EntityRenderBase::isValid()
+bool SceneEntityRenderBase::isValid()
 {
 	return nullptr != this->mSelfActor;
 }
 
-FVector EntityRenderBase::getPos()
+FVector SceneEntityRenderBase::getPos()
 {
 	if(this->isValid())
 	{
@@ -91,13 +91,13 @@ FVector EntityRenderBase::getPos()
 	return UtilMath::ZeroVec3;
 }
 
-void EntityRenderBase::setScale(FVector value)
+void SceneEntityRenderBase::setScale(FVector value)
 {
 
 }
 
 // 资源加载完成，初始化一些基本资源
-void EntityRenderBase::_onSelfChanged()
+void SceneEntityRenderBase::_onSelfChanged()
 {
 	// 一定要先查找组件
 	Super::_onSelfChanged();
@@ -118,7 +118,7 @@ void EntityRenderBase::_onSelfChanged()
 	this->setScale(this->mEntity->getScale());
 }
 
-void EntityRenderBase::updateLocalTransform()
+void SceneEntityRenderBase::updateLocalTransform()
 {
 	if (this->mSelfActor)
 	{
@@ -159,7 +159,7 @@ void EntityRenderBase::updateLocalTransform()
 	}
 }
 
-void EntityRenderBase::setTexture(std::string path)
+void SceneEntityRenderBase::setTexture(std::string path)
 {
 
 }

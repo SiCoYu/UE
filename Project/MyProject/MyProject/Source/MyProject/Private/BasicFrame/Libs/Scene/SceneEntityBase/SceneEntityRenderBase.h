@@ -15,15 +15,15 @@ class SceneEntityBase;
 /**
  * @brief 基本的渲染器，所有与显示有关的接口都在这里，这里基本只提供接口，最基本的实现在 BeingEntityRender 里面
  */
-class EntityRenderBase : public AuxComponent
+class SceneEntityRenderBase : public AuxComponent
 {
-	M_DECLARE_CLASS(EntityRenderBase, AuxComponent)
+	M_DECLARE_CLASS(SceneEntityRenderBase, AuxComponent)
 
 protected:
 	SceneEntityBase* mEntity;  // Entity 数据
 
 public:
-	EntityRenderBase(SceneEntityBase* entity_);
+	SceneEntityRenderBase(SceneEntityBase* entity_);
 
 	virtual void setClientDispose(bool isDispose);
 	virtual bool isClientDispose();

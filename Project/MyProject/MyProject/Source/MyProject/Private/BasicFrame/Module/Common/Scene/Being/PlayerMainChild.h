@@ -1,15 +1,16 @@
 ﻿#pragma once
 
-#include "SceneEntityBase.h"
+#include "PlayerChild.h"
+#include "PlayerChild.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class PlayerMainChild : PlayerChild
+class PlayerMainChild : public PlayerChild
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerMainChild, PlayerChild)
 
 public:
 	PlayerMainChild();

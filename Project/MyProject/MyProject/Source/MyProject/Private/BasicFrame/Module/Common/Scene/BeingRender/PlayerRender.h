@@ -30,7 +30,7 @@ public:
 	 * @brief 释放基本数据
 	 */
 	virtual void dispose() override;
-	virtual void attachToParentNode(EntityRenderBase* render) override;
+	virtual void attachToParentNode(SceneEntityRenderBase* render) override;
 	virtual void onTick(float delta, TickMode tickMode) override;
 };
 

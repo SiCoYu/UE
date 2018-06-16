@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SceneEntityBase.h"
+#include "SceneEntityMgrBase.h"
 #include "TickMode.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
@@ -8,12 +8,15 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class PlayerMain;
+class Player;
+
 /**
  * @brief 玩家管理器
  */
-class PlayerMgr : public EntityMgrBase
+class PlayerMgr : public SceneEntityMgrBase
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerMgr, SceneEntityMgrBase)
 
 protected:
 	PlayerMain* mHero;

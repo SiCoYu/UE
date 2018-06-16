@@ -1,15 +1,22 @@
 ﻿#pragma once
 
-#include "SceneEntityBase.h"
+#include "Math/Vector.h"	// FVector
+#include "Math/Quat.h"		// FQuat
+#include "Math/Rotator.h"	// FRotator
+
+#include "SceneEntityMovement.h"
+#include "TickMode.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class BeingEntityMovement : SceneEntityMovement
+class SceneEntityBase;
+
+class BeingEntityMovement : public SceneEntityMovement
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(BeingEntityMovement, SceneEntityMovement)
 
 protected:
 	FVector mLastPos;         // 之前位置信息

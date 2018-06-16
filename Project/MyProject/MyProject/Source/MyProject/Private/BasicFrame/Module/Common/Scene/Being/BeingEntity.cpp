@@ -6,6 +6,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
+
 BeingEntity::BeingEntity()
 {
 	this->mBeingState = BeingState::eBSIdle;
@@ -334,7 +336,7 @@ std::string BeingEntity::getPrefabPath()
 }
 
 // 关联到父节点
-void BeingEntity::attachToParentNode(EntityRenderBase* render)
+void BeingEntity::attachToParentNode(SceneEntityRenderBase* render)
 {
 
 }

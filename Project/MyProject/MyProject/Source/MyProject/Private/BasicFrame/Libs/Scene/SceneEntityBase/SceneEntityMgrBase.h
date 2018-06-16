@@ -18,9 +18,9 @@ class SceneEntityBase;
 class UniqueStrIdGen;
 class UniqueNumIdGen;
 
-class EntityMgrBase : public DelayPriorityHandleMgrBase, public ITickedObject, public INoOrPriorityObject
+class SceneEntityMgrBase : public DelayPriorityHandleMgrBase, public ITickedObject, public INoOrPriorityObject
 {
-	M_DECLARE_CLASS(EntityMgrBase, DelayPriorityHandleMgrBase)
+	M_DECLARE_CLASS(SceneEntityMgrBase, DelayPriorityHandleMgrBase)
 
 protected:
 	MList<SceneEntityBase*> mSceneEntityList;
@@ -30,7 +30,7 @@ protected:
 	UniqueNumIdGen* mUniqueNumIdGen;
 
 public:
-	EntityMgrBase();
+	SceneEntityMgrBase();
 
 	virtual void init() override;
 	virtual void dispose() override;

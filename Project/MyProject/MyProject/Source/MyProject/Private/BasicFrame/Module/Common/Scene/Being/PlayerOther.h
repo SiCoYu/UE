@@ -16,7 +16,7 @@ class PlayerOtherRender;
  */
 class PlayerOther : public Player
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerOther, Player)
 
 public:
 	PlayerOther();

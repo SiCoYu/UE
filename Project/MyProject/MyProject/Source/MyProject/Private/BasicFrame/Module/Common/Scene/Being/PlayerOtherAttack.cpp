@@ -5,10 +5,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-PlayerOtherAttack::PlayerOtherAttack(SceneEntityBase* entity)
-	: base(entity)
-{
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerOtherAttack, BeingEntityAttack)
 
+PlayerOtherAttack::PlayerOtherAttack(SceneEntityBase* entity)
+{
+	Super(entity);
 }
 
 MY_END_NAMESPACE

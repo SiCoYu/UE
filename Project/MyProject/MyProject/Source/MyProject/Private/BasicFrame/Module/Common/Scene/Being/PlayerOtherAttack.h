@@ -9,16 +9,12 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class SceneEntityBase;
 
-public class PlayerOtherAttack : BeingEntityAttack
+class PlayerOtherAttack : public BeingEntityAttack
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerOtherAttack, BeingEntityAttack)
 
 public:
-	PlayerOtherAttack(SceneEntityBase* entity)
-		: base(entity)
-	{
-
-	}
+	PlayerOtherAttack(SceneEntityBase* entity);
 };
 
 MY_END_NAMESPACE

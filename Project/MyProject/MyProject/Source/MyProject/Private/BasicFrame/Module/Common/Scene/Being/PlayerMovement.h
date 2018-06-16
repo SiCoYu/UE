@@ -11,14 +11,10 @@ class SceneEntityBase;
 
 class PlayerMovement : public BeingEntityMovement
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerMovement, BeingEntityMovement)
 
 public:
-	PlayerMovement(SceneEntityBase* entity)
-		: base(entity)
-	{
-
-	}
+	PlayerMovement(SceneEntityBase* entity);
 };
 
 MY_END_NAMESPACE

@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "EntityMgrBase.h"
+#include "SceneEntityMgrBase.h"
 #include "SceneEntityBase.h"
 #include "UniqueStrIdGen.h"
 #include "UniqueNumIdGen.h"
@@ -12,9 +12,9 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(EntityMgrBase, DelayPriorityHandleMgrBase)
+M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMgrBase, DelayPriorityHandleMgrBase)
 
-EntityMgrBase::EntityMgrBase()
+SceneEntityMgrBase::SceneEntityMgrBase()
 {
 	//this->mSceneEntityList = new MList<SceneEntityBase*>();
 	//this->mSceneEntityList.setIsSpeedUpFind(true);
@@ -26,27 +26,27 @@ EntityMgrBase::EntityMgrBase()
 	this->mUniqueNumIdGen = MY_NEW UniqueNumIdGen(0);
 }
 
-void EntityMgrBase::init()
+void SceneEntityMgrBase::init()
 {
 
 }
 
-void EntityMgrBase::dispose()
+void SceneEntityMgrBase::dispose()
 {
 	this->clearAll();
 }
 
-UniqueNumIdGen* EntityMgrBase::getUniqueNumIdGen()
+UniqueNumIdGen* SceneEntityMgrBase::getUniqueNumIdGen()
 {
 	return this->mUniqueNumIdGen;
 }
 
-void EntityMgrBase::onPutInPool()
+void SceneEntityMgrBase::onPutInPool()
 {
 	this->clearAll();
 }
 
-void EntityMgrBase::_addObject(IDelayHandleItem* entity, float priority)
+void SceneEntityMgrBase::_addObject(IDelayHandleItem* entity, float priority)
 {
 	if (this->_isInDepth())
 	{
@@ -63,7 +63,7 @@ void EntityMgrBase::_addObject(IDelayHandleItem* entity, float priority)
 	}
 }
 
-void EntityMgrBase::_removeObject(IDelayHandleItem* entity)
+void SceneEntityMgrBase::_removeObject(IDelayHandleItem* entity)
 {
 	if (this->_isInDepth())
 	{
@@ -80,7 +80,7 @@ void EntityMgrBase::_removeObject(IDelayHandleItem* entity)
 	}
 }
 
-void EntityMgrBase::addEntity(SceneEntityBase* entity)
+void SceneEntityMgrBase::addEntity(SceneEntityBase* entity)
 {
 	this->_addObject(entity);
 
@@ -95,7 +95,7 @@ void EntityMgrBase::addEntity(SceneEntityBase* entity)
 		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log(
-				"EntityMgrBase already exist key", 
+				"SceneEntityMgrBase already exist key", 
 				LogTypeId::eLogCommon
 			);
 		}
@@ -111,7 +111,7 @@ void EntityMgrBase::addEntity(SceneEntityBase* entity)
 	//entity->onInit();
 }
 
-void EntityMgrBase::removeEntity(SceneEntityBase* entity)
+void SceneEntityMgrBase::removeEntity(SceneEntityBase* entity)
 {
 	this->_removeObject(entity);
 
@@ -126,7 +126,7 @@ void EntityMgrBase::removeEntity(SceneEntityBase* entity)
 		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log(
-				"EntityMgrBase::removeEntity, already remove key", 
+				"SceneEntityMgrBase::removeEntity, already remove key", 
 				LogTypeId::eLogCommon
 			);
 		}
@@ -140,12 +140,12 @@ void EntityMgrBase::removeEntity(SceneEntityBase* entity)
 	}
 }
 
-bool EntityMgrBase::Contains(SceneEntityBase* entity)
+bool SceneEntityMgrBase::Contains(SceneEntityBase* entity)
 {
 	return this->mSceneEntityList.contains(entity);
 }
 
-void EntityMgrBase::onTick(float delta, TickMode tickMode)
+void SceneEntityMgrBase::onTick(float delta, TickMode tickMode)
 {
 	this->_incDepth();
 
@@ -154,7 +154,7 @@ void EntityMgrBase::onTick(float delta, TickMode tickMode)
 	this->_decDepth();
 }
 
-void EntityMgrBase::_onTickExec(float delta, TickMode tickMode)
+void SceneEntityMgrBase::_onTickExec(float delta, TickMode tickMode)
 {
 	int idx = 0;
 	int count = this->mSceneEntityList.count();
@@ -175,7 +175,7 @@ void EntityMgrBase::_onTickExec(float delta, TickMode tickMode)
 }
 
 // 通过 Id 获取元素
-SceneEntityBase* EntityMgrBase::getEntityByThisId(uint thisId)
+SceneEntityBase* SceneEntityMgrBase::getEntityByThisId(uint thisId)
 {
 	SceneEntityBase* ret = nullptr;
 
@@ -185,7 +185,7 @@ SceneEntityBase* EntityMgrBase::getEntityByThisId(uint thisId)
 }
 
 // 通过 Unique Id 获取元素，Unique Id 是客户端自己的唯一 id ，与服务器没有关系
-SceneEntityBase* EntityMgrBase::getEntityByUniqueId(std::string uniqueId)
+SceneEntityBase* SceneEntityMgrBase::getEntityByUniqueId(std::string uniqueId)
 {
 	SceneEntityBase* ret = nullptr;
 
@@ -195,7 +195,7 @@ SceneEntityBase* EntityMgrBase::getEntityByUniqueId(std::string uniqueId)
 }
 
 // 通过数组下标获取元素
-SceneEntityBase* EntityMgrBase::getEntityByIndex(int index)
+SceneEntityBase* SceneEntityMgrBase::getEntityByIndex(int index)
 {
 	if (index < this->mSceneEntityList.count())
 	{
@@ -205,37 +205,37 @@ SceneEntityBase* EntityMgrBase::getEntityByIndex(int index)
 	return nullptr;
 }
 
-std::string EntityMgrBase::genNewStrId()
+std::string SceneEntityMgrBase::genNewStrId()
 {
 	return this->mUniqueStrIdGen->genNewStrId();
 }
 
-std::string EntityMgrBase::getCurStrId()
+std::string SceneEntityMgrBase::getCurStrId()
 {
 	return this->mUniqueStrIdGen->getCurStrId();
 }
 
-uint EntityMgrBase::getCurId()
+uint SceneEntityMgrBase::getCurId()
 {
 	return this->mUniqueStrIdGen->getCurId();
 }
 
-std::string EntityMgrBase::genStrIdById(uint id)
+std::string SceneEntityMgrBase::genStrIdById(uint id)
 {
 	return this->mUniqueStrIdGen->genStrIdById(id);
 }
 
-int EntityMgrBase::getEntityCount()
+int SceneEntityMgrBase::getEntityCount()
 {
 	return this->mSceneEntityList.count();
 }
 
-MList<SceneEntityBase*> EntityMgrBase::getSceneEntityList()
+MList<SceneEntityBase*> SceneEntityMgrBase::getSceneEntityList()
 {
 	return this->mSceneEntityList;
 }
 
-void EntityMgrBase::clearAll()
+void SceneEntityMgrBase::clearAll()
 {
 	this->_incDepth();
 

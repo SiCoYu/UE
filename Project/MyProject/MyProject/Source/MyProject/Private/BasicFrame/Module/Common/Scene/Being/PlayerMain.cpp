@@ -4,6 +4,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
+
 PlayerMain::PlayerMain()
 {
 	this->mMovement = new PlayerMainMovement(this);

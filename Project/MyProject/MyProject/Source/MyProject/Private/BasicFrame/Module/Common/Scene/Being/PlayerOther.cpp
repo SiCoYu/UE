@@ -8,6 +8,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerOther, Player)
+
 PlayerOther::PlayerOther()
 {
 	this->mMovement = new PlayerOtherMovement(this);

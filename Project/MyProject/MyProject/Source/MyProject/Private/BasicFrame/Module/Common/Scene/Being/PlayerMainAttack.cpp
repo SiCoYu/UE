@@ -4,10 +4,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-PlayerMainAttack::PlayerMainAttack(BeingEntity* entity)
-	: base(entity)
-{
+M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
 
+PlayerMainAttack::PlayerMainAttack(BeingEntity* entity)
+{
+	Super(entity);
 }
 
 MY_END_NAMESPACE

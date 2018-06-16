@@ -4,7 +4,7 @@
 #include "Math/Quat.h"		// FQuat
 #include "Math/Rotator.h"	// FRotator
 
-#include "SceneEntityBase.h"
+#include "PlayerMovement.h"
 #include "TickMode.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
@@ -12,9 +12,9 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-public class PlayerMainMovement : PlayerMovement
+class PlayerMainMovement : public PlayerMovement
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerMainMovement, PlayerMovement)
 
 protected:
 	FQuat mForwardRotate;     // 记录当前的前向

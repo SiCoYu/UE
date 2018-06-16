@@ -100,7 +100,7 @@ public:
 	void setPrefabPath(std::string path);
 	std::string getPrefabPath();
 	// 关联到父节点
-	virtual void attachToParentNode(EntityRenderBase* render);
+	virtual void attachToParentNode(SceneEntityRenderBase* render);
 	void setMoveSpeedFactor(float value);
 };
 

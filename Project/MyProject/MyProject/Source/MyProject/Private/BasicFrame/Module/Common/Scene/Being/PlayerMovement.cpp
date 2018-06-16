@@ -1,14 +1,15 @@
 ﻿#include "MyProject.h"
 #include "PlayerMovement.h"
-#include "#include "PlayerMovement.h".h"
+#include "SceneEntityBase.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-PlayerMovement::PlayerMovement(SceneEntityBase* entity)
-	: base(entity)
-{
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerMovement, BeingEntityMovement)
 
+PlayerMovement::PlayerMovement(SceneEntityBase* entity)
+{
+	Super(entity);
 }
 
 MY_END_NAMESPACE

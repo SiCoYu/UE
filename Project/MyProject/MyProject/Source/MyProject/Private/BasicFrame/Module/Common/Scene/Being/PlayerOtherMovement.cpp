@@ -4,10 +4,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-PlayerOtherMovement::PlayerOtherMovement(SceneEntityBase* entity)
-		: base(entity)
-{
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerOtherMovement, BeingEntityMovement)
 
+PlayerOtherMovement::PlayerOtherMovement(SceneEntityBase* entity)
+{
+	Super(entity);
 }
 
 void PlayerOtherMovement::onTick(float delta, TickMode tickMode)

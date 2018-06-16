@@ -9,7 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class PlayerOtherChild : public PlayerChild
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerOtherChild, PlayerChild)
 
 public:
 	PlayerOtherChild();

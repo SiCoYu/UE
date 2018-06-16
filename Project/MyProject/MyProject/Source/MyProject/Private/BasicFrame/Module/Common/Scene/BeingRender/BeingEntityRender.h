@@ -1,16 +1,16 @@
 ﻿#pragma once
 
 #include <string>
-#include "EntityRenderBase.h"
+#include "SceneEntityRenderBase.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class BeingEntityRender : public EntityRenderBase
+class BeingEntityRender : public SceneEntityRenderBase
 {
-	M_DECLARE_CLASS(BeingEntityRender, EntityRenderBase)
+	M_DECLARE_CLASS(BeingEntityRender, SceneEntityRenderBase)
 
 protected:
 	std::string mResPath;  // 资源目录

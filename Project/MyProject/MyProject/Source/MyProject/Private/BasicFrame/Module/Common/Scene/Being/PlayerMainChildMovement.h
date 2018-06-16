@@ -12,7 +12,7 @@ class SceneEntityBase;
 
 class PlayerMainChildMovement : public PlayerChildMovement
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerMainChildMovement, PlayerChildMovement)
 
 public:
 	PlayerMainChildMovement(SceneEntityBase* entity);
