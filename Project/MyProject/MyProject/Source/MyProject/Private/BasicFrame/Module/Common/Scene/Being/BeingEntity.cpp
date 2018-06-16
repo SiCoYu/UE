@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "BeingEntity.h"
 #include "BeingEntityMovement.h"
-#include "UtilMath.h"
+#include "UtilMath::h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -154,7 +154,7 @@ void BeingEntity::setDestPosAndDestRotate(FVector targetPt, bool immePos, bool i
 		this->setPos(targetPt);
 	}
 
-	UnityEngine.Quaternion retQuat = UtilMath.getRotateByStartAndEndPoint(this->getPos(), targetPt);
+	UnityEngine.Quaternion retQuat = UtilMath::getRotateByStartAndEndPoint(this->getPos(), targetPt);
 	if (immeRotate)
 	{
 		this->setRotateEulerAngle(retQuat.eulerAngles);
@@ -316,7 +316,7 @@ UnityEngine.Quaternion BeingEntity::getDestRotate()
 		return (this->mMovement as BeingEntityMovement).getDestRotate();
 	}
 
-	return UtilMath.UnitQuat;
+	return UtilMath::UnitQuat;
 }
 
 // 预制目录是否有效

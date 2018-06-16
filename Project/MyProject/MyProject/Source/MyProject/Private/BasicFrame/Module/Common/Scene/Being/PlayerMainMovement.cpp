@@ -1,18 +1,18 @@
 ﻿#include "MyProject.h"
-#include "PlayerRender.h"
+#include "PlayerMainMovement.h"
 #include "SceneEntityBase.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerMainMovement, PlayerMovement)
 
 PlayerMainMovement::PlayerMainMovement(SceneEntityBase* entity)
 {
 	Super(entity)
 
-	this->mForwardRotate = UtilMath.UnitQuat;
-	this->mRotate = UtilMath.UnitQuat;
+	this->mForwardRotate = UtilMath::UnitQuat;
+	this->mRotate = UtilMath::UnitQuat;
 }
 
 void PlayerMainMovement::init()

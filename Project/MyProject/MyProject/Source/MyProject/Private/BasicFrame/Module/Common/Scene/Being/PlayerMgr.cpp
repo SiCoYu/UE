@@ -117,7 +117,7 @@ void PlayerMgr::createPlayerMain()
 	this->mHero = new PlayerMain();
 	this->mHero.init();
 	this->mHero.setDestPos(new FVector(50, 1.3f, 50f), true);
-	this->mHero.setDestRotateEulerAngle(UtilMath.UnitQuat.eulerAngles, true);
+	this->mHero.setDestRotateEulerAngle(UtilMath::UnitQuat.eulerAngles, true);
 }
 
 MY_END_NAMESPACE

@@ -1,15 +1,17 @@
 ﻿#include "MyProject.h"
 #include "BeingEntityMovement.h"
+#include "SceneEntityBase.h"
+#include "MWrapQuaternion.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
+M_IMPLEMENT_AND_REGISTER_CLASS(BeingEntityMovement, SceneEntityMovement)
 
 BeingEntityMovement::BeingEntityMovement(SceneEntityBase* entity)
-	: base(entity)
+	: Super(entity), 
+	mDestRotate(0, 0, 0, 1);
 {
-	this->mDestRotate = new MWrapQuaternion(0, 0, 0, 1);
 	this->mIsMoveToDest = false;
 	this->mIsRotateToDest = false;
 	this->mIsScaleToDest = false;
@@ -26,12 +28,12 @@ void BeingEntityMovement::onPutInPool()
 	this->mIsRotateToDest = false;
 	this->mIsScaleToDest = false;
 
-	this->mLastPos = UtilMath.ZeroVec3;
-	this->mLastRotate = UtilMath.UnitQuat;
+	this->mLastPos = UtilMath::ZeroVec3;
+	this->mLastRotate = UtilMath::UnitQuat;
 
-	this->mDestPos = UtilMath.ZeroVec3;
-	this->mDestRotate.setRotation(UtilMath.UnitQuat);
-	this->mDestScale = UtilMath.ZeroVec3;
+	this->mDestPos = UtilMath::ZeroVec3;
+	this->mDestRotate.setRotation(UtilMath::UnitQuat);
+	this->mDestScale = UtilMath::ZeroVec3;
 	this->mDestRotate.clear();
 
 	Super::onPutInPool();
@@ -249,7 +251,7 @@ void BeingEntityMovement::moveToDestNoOrient(float delta)
 void BeingEntityMovement::rotateToDest(float delta)
 {
 	// 方向插值
-	if (!UtilMath.isEqualVec3(mEntity.getRotateEulerAngle(), this->mDestRotate.getRotateEulerAngle()))
+	if (!UtilMath::isEqualVec3(mEntity.getRotateEulerAngle(), this->mDestRotate.getRotateEulerAngle()))
 	{
 		mEntity.setRotate(FQuat.Slerp(mEntity.getRotate(), this->mDestRotate.getRotate(), (mEntity as BeingEntity).getRotateSpeed() * delta));
 	}
@@ -262,7 +264,7 @@ void BeingEntityMovement::rotateToDest(float delta)
 // 旋转到目标方向
 void BeingEntityMovement::scaleToDest(float delta)
 {
-	if (!UtilMath.isEqualVec3(this->mDestScale, this->mEntity.getScale()))
+	if (!UtilMath::isEqualVec3(this->mDestScale, this->mEntity.getScale()))
 	{
 		float dist = 0.0f;
 		dist = FVector.Distance(this->mDestScale, this->mEntity.getScale());
@@ -311,13 +313,13 @@ void BeingEntityMovement::onArriveDestScale()
 //void BeingEntityMovement::moveToPos(FVector destPos)
 void BeingEntityMovement::setDestPos(FVector destPos)
 {
-	if (!UtilMath.isEqualVec3(this->mDestPos, destPos))
+	if (!UtilMath::isEqualVec3(this->mDestPos, destPos))
 	{
 		destPos = Ctx.msInstance.mSceneSys.adjustPosInRange(this->mEntity, destPos);
 
 		this->mDestPos = destPos;
 
-		if (!UtilMath.isEqualVec3(mDestPos, mEntity.getPos()))
+		if (!UtilMath::isEqualVec3(mDestPos, mEntity.getPos()))
 		{
 			this->setIsMoveToDest(true);
 			this->mMoveWay = MoveWay.eAutoPathMove;
@@ -325,7 +327,7 @@ void BeingEntityMovement::setDestPos(FVector destPos)
 			(this->mEntity as BeingEntity).setBeingState(BeingState.eBSWalk);
 
 			// 计算最终方向，太多调用太卡了，暂时不处理方向了
-			//this->setDestRotateEulerAngle(UtilMath.getRotateByStartAndEndPoint(this->mEntity.getPos(), this->mDestPos).eulerAngles);
+			//this->setDestRotateEulerAngle(UtilMath::getRotateByStartAndEndPoint(this->mEntity.getPos(), this->mDestPos).eulerAngles);
 		}
 		else
 		{
@@ -337,17 +339,17 @@ void BeingEntityMovement::setDestPos(FVector destPos)
 // 直接到具体位置，不用移动
 void BeingEntityMovement::gotoPos(FVector destPos)
 {
-	if (!UtilMath.isEqualVec3(this->mDestPos, destPos))
+	if (!UtilMath::isEqualVec3(this->mDestPos, destPos))
 	{
 		destPos = Ctx.msInstance.mSceneSys.adjustPosInRange(this->mEntity, destPos);
 
 		this->mDestPos = destPos;
 		this->setIsMoveToDest(false);
 
-		if (!UtilMath.isEqualVec3(mDestPos, mEntity.getPos()))
+		if (!UtilMath::isEqualVec3(mDestPos, mEntity.getPos()))
 		{
 			// 计算最终方向
-			this->setDestRotateEulerAngle(UtilMath.getRotateByStartAndEndPoint(this->mEntity.getPos(), this->mDestPos).eulerAngles);
+			this->setDestRotateEulerAngle(UtilMath::getRotateByStartAndEndPoint(this->mEntity.getPos(), this->mDestPos).eulerAngles);
 			this->mEntity.setRotate(this->mDestRotate.getRotate());
 			this->mEntity.setPos(this->mDestPos);
 
@@ -373,7 +375,7 @@ void BeingEntityMovement::setDestRotateEulerAngle(FVector destRotate)
 
 	this->mDestRotate.setRotateEulerAngle(destRotate);
 
-	if (!UtilMath.isEqualVec3(mEntity.getRotateEulerAngle(), destRotate))
+	if (!UtilMath::isEqualVec3(mEntity.getRotateEulerAngle(), destRotate))
 	{
 		this->mIsRotateToDest = true;
 	}
@@ -400,7 +402,7 @@ void BeingEntityMovement::setDestRotate(FQuat destRotate)
 
 	this->mDestRotate.setRotation(destRotate);
 
-	if (!UtilMath.isEqualQuat(mEntity.getRotate(), destRotate))
+	if (!UtilMath::isEqualQuat(mEntity.getRotate(), destRotate))
 	{
 		this->mIsRotateToDest = true;
 	}
@@ -412,7 +414,7 @@ void BeingEntityMovement::setDestRotate(FQuat destRotate)
 
 void BeingEntityMovement::setDestScale(float scale)
 {
-	if(UtilMath.isInvalidNum(scale))
+	if(UtilMath::isInvalidNum(scale))
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
@@ -421,7 +423,7 @@ void BeingEntityMovement::setDestScale(float scale)
 	}
 	this->mDestScale = new FVector(scale, scale, scale);
 
-	if (!UtilMath.isEqualVec3(this->mDestScale, this->mEntity.getScale()))
+	if (!UtilMath::isEqualVec3(this->mDestScale, this->mEntity.getScale()))
 	{
 		this->mIsScaleToDest = true;
 	}
@@ -433,7 +435,7 @@ void BeingEntityMovement::setDestScale(float scale)
 
 void BeingEntityMovement::setDestPosAndDestRotate(FVector targetPt, bool immePos, bool immeRotate)
 {
-	FQuat retQuat = UtilMath.getRotateByStartAndEndPoint(this->mEntity.getPos(), targetPt);
+	FQuat retQuat = UtilMath::getRotateByStartAndEndPoint(this->mEntity.getPos(), targetPt);
 	(this->mEntity as BeingEntity).setDestRotateEulerAngle(retQuat.eulerAngles, immeRotate);
 	(this->mEntity as BeingEntity).setDestRotateEulerAngle(retQuat.eulerAngles, immeRotate);
 }

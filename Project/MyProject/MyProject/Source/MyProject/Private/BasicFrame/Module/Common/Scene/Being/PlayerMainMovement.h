@@ -12,6 +12,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class SceneEntityBase;
+
 class PlayerMainMovement : public PlayerMovement
 {
 	M_DECLARE_CLASS(PlayerMainMovement, PlayerMovement)

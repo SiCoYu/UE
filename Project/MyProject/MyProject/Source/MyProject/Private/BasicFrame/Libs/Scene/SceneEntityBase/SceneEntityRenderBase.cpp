@@ -2,7 +2,7 @@
 #include "SceneEntityRenderBase.h"
 #include "SceneEntityBase.h"
 #include "AuxComponent.h"
-#include "UtilMath.h"
+#include "UtilMath::h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "SceneEntityBase.h"
 #include "SceneEntityRenderBase.h"
-#include "UtilMath.h"
+#include "UtilMath::h"
 #include "UtilEngineWrap.h"
 #include "MWrapQuaternion.h"
 #include "UtilLogic.h"
@@ -76,7 +76,7 @@ void SceneEntityBase::onPutInPool()
 
 void SceneEntityBase::onGetFromPool()
 {
-	//this->mPos = UtilMath.ZeroVec3;
+	//this->mPos = UtilMath::ZeroVec3;
 	//this->mRotate.setRotateXYZW(0, 0, 0, 1);
 	//this->mScale = UtilMath::OneVec3;
 

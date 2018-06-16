@@ -1,10 +1,13 @@
 #include "MyProject.h"
 #include "PlayerMain.h"
+#include "PlayerMainMovement.h"
+#include "PlayerMainAttack.h"
+#include "PlayerMainRender.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityMovement, GObject)
+M_IMPLEMENT_AND_REGISTER_CLASS(PlayerMain, Player)
 
 PlayerMain::PlayerMain()
 {

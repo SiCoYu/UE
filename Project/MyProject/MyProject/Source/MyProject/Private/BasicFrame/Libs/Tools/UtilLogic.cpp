@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "UtilLogic.h"
 #include "UtilStr.h"
-#include "UtilMath.h"
+#include "UtilMath::h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

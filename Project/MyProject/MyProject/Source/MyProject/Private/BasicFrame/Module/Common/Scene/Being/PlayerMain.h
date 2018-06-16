@@ -1,6 +1,7 @@
 #pragma once
 
-#include "SceneEntityBase.h"
+#include "Player.h"
+#include "TickMode.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -10,9 +11,9 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 主角
  */
-public class PlayerMain : Player
+class PlayerMain : public Player
 {
-	M_DECLARE_CLASS(BeingEntity, SceneEntityBase)
+	M_DECLARE_CLASS(PlayerMain, Player)
 
 public:
 	PlayerMain();
