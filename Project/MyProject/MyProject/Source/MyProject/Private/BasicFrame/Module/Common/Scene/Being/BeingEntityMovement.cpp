@@ -450,4 +450,9 @@ FVector BeingEntityMovement::getDestPos()
 	return this->mDestPos;
 }
 
+void BeingEntityMovement::setForwardRotate(FVector rotate)
+{
+
+}
+
 MY_END_NAMESPACE

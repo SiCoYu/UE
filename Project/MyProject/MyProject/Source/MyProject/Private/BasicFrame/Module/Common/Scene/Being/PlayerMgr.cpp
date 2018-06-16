@@ -2,6 +2,8 @@
 #include "PlayerMgr.h"
 #include "PlayerMain.h"
 #include "Player.h"
+#include "TickMode.h"
+#include "UtilMath.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -16,38 +18,25 @@ PlayerMgr::PlayerMgr()
 
 void PlayerMgr::_onTickExec(float delta, TickMode tickMode)
 {
-	if (TickMode.eTM_Update == tickMode)
+	if (TickMode::eTM_Update == tickMode)
 	{
 		int idx = 0;
 		int count = this->mSceneEntityList.count();
-		SceneEntityBase entity = nullptr;
+		SceneEntityBase* entity = nullptr;
 
 		while (idx < count)
 		{
 			entity = this->mSceneEntityList[idx];
 
-			if (Ctx.msInstance.mConfig.mIsActorMoveUseFixUpdate)
+			if (!entity->isClientDispose())
 			{
-				if (EntityType.ePlayerMain != entity.getEntityType())
-				{
-					if (!entity.isClientDispose())
-					{
-						entity.onTick(delta, tickMode);
-					}
-				}
-			}
-			else
-			{
-				if (!entity.isClientDispose())
-				{
-					entity.onTick(delta, tickMode);
-				}
+				entity->onTick(delta, tickMode);
 			}
 
 			++idx;
 		}
 	}
-	else if(TickMode.eTM_LateUpdate == tickMode)
+	else if(TickMode::eTM_LateUpdate == tickMode)
 	{
 		this->postUpdate();
 	}
@@ -67,13 +56,8 @@ void PlayerMgr::addHero(PlayerMain* hero)
 {
 	if (nullptr != hero)
 	{
-		this->mHero = hero as PlayerMain;
+		this->mHero = (PlayerMain*)hero;
 		this->addPlayer(this->mHero);
-
-		if (Ctx.msInstance.mConfig.mIsActorMoveUseFixUpdate)
-		{
-			Ctx.msInstance.mFixedTickMgr.addTick(this->mHero as ITickedObject);
-		}
 	}
 }
 
@@ -81,11 +65,6 @@ void PlayerMgr::removeHero()
 {
 	if (nullptr != this->mHero)
 	{
-		if (Ctx.msInstance.mConfig.mIsActorMoveUseFixUpdate && nullptr != Ctx.msInstance.mFixedTickMgr)
-		{
-			Ctx.msInstance.mFixedTickMgr.removeTick(this->mHero as ITickedObject);
-		}
-
 		this->removePlayer(this->mHero);
 		this->mHero = nullptr;
 	}
@@ -115,9 +94,9 @@ void PlayerMgr::removePlayer(Player* player)
 void PlayerMgr::createPlayerMain()
 {
 	this->mHero = new PlayerMain();
-	this->mHero.init();
-	this->mHero.setDestPos(new FVector(50, 1.3f, 50f), true);
-	this->mHero.setDestRotateEulerAngle(UtilMath::UnitQuat.eulerAngles, true);
+	this->mHero->init();
+	this->mHero->setDestPos(FVector(50, 1.3f, 50), true);
+	this->mHero->setDestRotateEulerAngle(UtilMath::Euler(UtilMath::UnitQuat), true);
 }
 
 MY_END_NAMESPACE

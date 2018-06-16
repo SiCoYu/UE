@@ -8,8 +8,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 M_IMPLEMENT_AND_REGISTER_CLASS(BeingEntity, SceneEntityBase)
 
 PlayerMainAttack::PlayerMainAttack(BeingEntity* entity)
+	: Super(entity)
 {
-	Super(entity);
+	// error C2512: 'MyNS::BeingEntityAttack': no appropriate default constructor available
+	// Super(entity);
 }
 
 MY_END_NAMESPACE

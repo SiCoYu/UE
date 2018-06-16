@@ -88,6 +88,8 @@ public:
 	virtual void setDestPosAndDestRotate(FVector targetPt, bool immePos, bool immeRotate);
 	FQuat getDestRotate();
 	FVector getDestPos();
+
+	virtual void setForwardRotate(FVector rotate);
 };
 
 MY_END_NAMESPACE
