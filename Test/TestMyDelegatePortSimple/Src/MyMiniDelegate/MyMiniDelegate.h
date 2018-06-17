@@ -4,7 +4,7 @@
 #include "MyMiniDelegateBase.h"
 #include "MyMiniMemFunPtrType.h"
 #include "MyMiniDelegateInstanceBase.h"
-#include "MyMiniDelegateInstanceImpl.h"
+#include "MyMiniMethodDelegateInstanceImpl.h"
 #include "MyMiniClosureDelegateInstanceImpl.h"
 
 namespace MyNS

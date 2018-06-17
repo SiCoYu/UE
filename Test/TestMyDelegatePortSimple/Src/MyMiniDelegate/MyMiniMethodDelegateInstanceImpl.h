@@ -1,5 +1,5 @@
-#ifndef __MyMiniDelegateInstanceImpl_H
-#define __MyMiniDelegateInstanceImpl_H
+#ifndef __MyMiniMethodDelegateInstanceImpl_H
+#define __MyMiniMethodDelegateInstanceImpl_H
 
 #include "MyMiniDelegateInstanceBase.h"
 
@@ -10,7 +10,7 @@ namespace MyNS
  * non specialized template declaration for delegate
  */
 template <typename T>
-class MyMiniDelegateInstanceImpl;
+class MyMiniMethodDelegateInstanceImpl;
 
 /**
  * specialization for member functions
@@ -21,12 +21,12 @@ class MyMiniDelegateInstanceImpl;
  *                      of the captured function
  */
 template <typename T, typename R, typename... ParamTypes>
-class MyMiniDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*func_type)(ParamTypes...);
 
-	MyMiniDelegateInstanceImpl(func_type func, T& callee)
+	MyMiniMethodDelegateInstanceImpl(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
     {}
@@ -36,12 +36,12 @@ public:
         return (callee_.*func_)(args...);
     }
 
-    bool operator==(const MyMiniDelegateInstanceImpl& other) const
+    bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
 
-    bool operator!= (const MyMiniDelegateInstanceImpl& other) const
+    bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
     {
         return !((*this) == other);
     }
@@ -60,12 +60,12 @@ private:
  * specialization for const member functions
  */
 template <typename T, typename R, typename... ParamTypes>
-class MyMiniDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*func_type)(ParamTypes...) const;
 
-	MyMiniDelegateInstanceImpl(func_type func, const T& callee)
+	MyMiniMethodDelegateInstanceImpl(func_type func, const T& callee)
         : callee_(callee)
         , func_(func)
     {}
@@ -75,11 +75,11 @@ public:
         return (callee_.*func_)(args...);
     }
 
-    bool operator==(const MyMiniDelegateInstanceImpl& other) const
+    bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const MyMiniDelegateInstanceImpl& other) const
+    bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
     {
         return !(*this == other);
     }
@@ -102,12 +102,12 @@ private:
  *                      of the captured function
  */
 template <typename R, typename... ParamTypes>
-class MyMiniDelegateInstanceImpl<R (*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MyMiniMethodDelegateInstanceImpl<R (*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (*func_type)(ParamTypes...);
 
-	MyMiniDelegateInstanceImpl(func_type func)
+	MyMiniMethodDelegateInstanceImpl(func_type func)
         : func_(func)
     {}
 
@@ -116,11 +116,12 @@ public:
         return (*func_)(args...);
     }
 
-    bool operator==(const MyMiniDelegateInstanceImpl& other) const
+    bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
     {
         return func_ == other.func_;
     }
-    bool operator!= (const MyMiniDelegateInstanceImpl& other) const
+
+    bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
     {
         return !((*this) == other);
     }
@@ -138,15 +139,15 @@ private:
  * function to deduce template parameters from call-context
  */
 template <typename F, typename T>
-MyMiniDelegateInstanceImpl<F>* make_delegate(F func, T& obj)
+MyMiniMethodDelegateInstanceImpl<F>* make_delegate(F func, T& obj)
 {
-    return new MyMiniDelegateInstanceImpl<F>(func, obj);
+    return new MyMiniMethodDelegateInstanceImpl<F>(func, obj);
 }
 
 template <typename T>
-MyMiniDelegateInstanceImpl<T>* make_delegate(T func)
+MyMiniMethodDelegateInstanceImpl<T>* make_delegate(T func)
 {
-    return new MyMiniDelegateInstanceImpl<T>(func);
+    return new MyMiniMethodDelegateInstanceImpl<T>(func);
 }
 
 } // namespace delegate

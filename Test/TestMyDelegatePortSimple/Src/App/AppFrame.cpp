@@ -2,7 +2,7 @@
 #include "MyMiniDelegateBase.h"
 #include "MyMiniDelegate.h"
 #include "MyMiniDelegateInstanceBase.h"
-#include "MyMiniDelegateInstanceImpl.h"
+#include "MyMiniMethodDelegateInstanceImpl.h"
 
 namespace MyNS
 {
