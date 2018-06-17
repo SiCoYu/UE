@@ -43,9 +43,9 @@ public:
 	// R (T::*)(ParamTypes...) 参数会报错
 	// error C2146: syntax error: missing ')' before identifier 'func'
 	template <typename UserClass, typename... VarTypes>
-	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type func, UserClass& callee, VarTypes... vars)
+	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass& callee, VarTypes... vars)
 	{
-		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars...);
+		make_delegate(func, callee, vars...);
 	}
 
 	// 模板自动推断 const 值

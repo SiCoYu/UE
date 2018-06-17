@@ -14,7 +14,7 @@ namespace MyNS
 			return false;
 		}
 
-		bool testHandleA(int a, char b, int c)
+		bool testHandleA(int c, int a, char b)
 		{
 			return true;
 		}
