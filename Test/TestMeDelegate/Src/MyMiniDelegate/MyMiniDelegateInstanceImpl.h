@@ -1,6 +1,8 @@
 #ifndef __MyMiniDelegateInstanceImpl_H
 #define __MyMiniDelegateInstanceImpl_H
 
+#include "MyMiniDelegateInstanceBase.h"
+
 namespace MyNS
 {
 // we have C++11 support...yeah!
@@ -8,7 +10,10 @@ namespace MyNS
  * non specialized template declaration for delegate
  */
 template <typename T>
-class MyMiniDelegateInstanceImpl;
+class MyMiniDelegateInstanceImpl : public MyMiniDelegateInstanceBase
+{
+
+};
 
 /**
  * specialization for member functions
@@ -19,12 +24,12 @@ class MyMiniDelegateInstanceImpl;
  *                      of the captured function
  */
 template <typename T, typename R, typename... Params>
-class MyMiniDelegateInstanceImpl<R (T::*)(Params...)>
+class MyMiniDelegateInstanceImpl<R (T::*)(Params...)> : public MyMiniDelegateInstanceBase
 {
 public:
     typedef R (T::*func_type)(Params...);
 
-    delegate(func_type func, T& callee)
+	MyMiniDelegateInstanceImpl(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
     {}
@@ -34,11 +39,11 @@ public:
         return (callee_.*func_)(args...);
     }
 
-    bool operator==(const delegate& other) const
+    bool operator==(const MyMiniDelegateInstanceImpl& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate& other) const
+    bool operator!= (const MyMiniDelegateInstanceImpl& other) const
     {
         return !((*this) == other);
     }
@@ -57,7 +62,7 @@ class MyMiniDelegateInstanceImpl<R (T::*)(Params...) const>
 public:
     typedef R (T::*func_type)(Params...) const;
 
-    delegate(func_type func, const T& callee)
+	MyMiniDelegateInstanceImpl(func_type func, const T& callee)
         : callee_(callee)
         , func_(func)
     {}
@@ -67,11 +72,11 @@ public:
         return (callee_.*func_)(args...);
     }
 
-    bool operator==(const delegate& other) const
+    bool operator==(const MyMiniDelegateInstanceImpl& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate& other) const
+    bool operator!= (const MyMiniDelegateInstanceImpl& other) const
     {
         return !(*this == other);
     }
@@ -94,7 +99,7 @@ class MyMiniDelegateInstanceImpl<R (*)(Params...)>
 public:
     typedef R (*func_type)(Params...);
 
-    delegate(func_type func)
+	MyMiniDelegateInstanceImpl(func_type func)
         : func_(func)
     {}
 
@@ -103,11 +108,11 @@ public:
         return (*func_)(args...);
     }
 
-    bool operator==(const delegate& other) const
+    bool operator==(const MyMiniDelegateInstanceImpl& other) const
     {
         return func_ == other.func_;
     }
-    bool operator!= (const delegate& other) const
+    bool operator!= (const MyMiniDelegateInstanceImpl& other) const
     {
         return !((*this) == other);
     }
@@ -120,45 +125,25 @@ private:
  * function to deduce template parameters from call-context
  */
 template <typename F, typename T>
-delegate<F> make_delegate(F func, T& obj)
+MyMiniDelegateInstanceImpl<F>* make_delegate(F func, T& obj)
 {
-    return MyMiniDelegateInstanceImpl<F>(func, obj);
+    return new MyMiniDelegateInstanceImpl<F>(func, obj);
 }
 
 template <typename T>
-delegate<T> make_delegate(T func)
+MyMiniDelegateInstanceImpl<T>* make_delegate(T func)
 {
-    return MyMiniDelegateInstanceImpl<T>(func);
+    return new MyMiniDelegateInstanceImpl<T>(func);
 }
-
-// a little backward compatilbility layer
-#define DELEGATE make_delegate
-#define DELEGATE_CONST make_delegate
-#define DELEGATE_FREE make_delegate
 
 /**
  * function to deduce template parameters from call-context
  */
 template <typename F, typename T>
-delegate<F> make_delegate(F func, T& obj)
+MyMiniDelegateInstanceImpl<F> make_delegate(F func, T& obj)
 {
     return MyMiniDelegateInstanceImpl<F>(func, obj);
 }
-
-// TODO:
-template <typename F, typename T>
-delegate<F> make_delegate(T& obj, F func)
-{
-	return MyMiniDelegateInstanceImpl<F>(func, obj);
-}
-
-template <typename T>
-delegate<T> make_delegate(T func)
-{
-    return MyMiniDelegateInstanceImpl<T>(func);
-}
-
-#endif // DELEGATES_CPP11_SUPPORT
 
 } // namespace delegate
 
