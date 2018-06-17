@@ -18,11 +18,7 @@ class AuxScenePrefabLoader : public AuxMObjectLoader
 	M_DECLARE_CLASS(AuxScenePrefabLoader, AuxMObjectLoader)
 
 public:
-	AuxScenePrefabLoader(
-		std::string path, 
-		bool isNeedInsPrefab, 
-		bool isInsNeedCoroutine
-	);
+	AuxScenePrefabLoader();
 };
 
 MY_END_NAMESPACE

@@ -10,8 +10,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 M_IMPLEMENT_AND_REGISTER_CLASS(AuxMUiClassLoader, AuxMObjectLoaderBase)
 
-AuxMUiClassLoader::AuxMUiClassLoader(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
-	: Super(path, isNeedInsPrefab, isInsNeedCoroutine)
+AuxMUiClassLoader::AuxMUiClassLoader()
+	: Super()
 {
 	this->mResPackType = ResPackType::eClassType;
 	this->mWidgetClass = nullptr;

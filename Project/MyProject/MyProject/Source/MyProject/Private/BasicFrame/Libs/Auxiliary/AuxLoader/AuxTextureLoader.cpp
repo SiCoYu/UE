@@ -10,9 +10,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 M_IMPLEMENT_AND_REGISTER_CLASS(AuxTextureLoader, AuxLoaderBase)
 
 AuxTextureLoader::AuxTextureLoader()
+	: Super()
 {
-	Super();
-
     this->mTextureRes = nullptr;
     this->mTexture = nullptr;
 }

@@ -22,7 +22,7 @@ protected:
 	LevelResItem* mLevelResItem;
 
 public:
-	AuxLevelLoader(std::string path = "");
+	AuxLevelLoader();
 	virtual void dispose() override;
 	virtual void syncLoad(
 		std::string path, 

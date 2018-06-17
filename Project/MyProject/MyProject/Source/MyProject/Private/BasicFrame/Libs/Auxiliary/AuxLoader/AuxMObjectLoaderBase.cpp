@@ -12,12 +12,12 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 M_IMPLEMENT_AND_REGISTER_CLASS(AuxMObjectLoaderBase, AuxLoaderBase)
 
-AuxMObjectLoaderBase::AuxMObjectLoaderBase(std::string path, bool isNeedInsPrefab, bool isInsNeedCoroutine)
-	: Super(path)
+AuxMObjectLoaderBase::AuxMObjectLoaderBase()
+	: Super()
 {
-	this->mIsInsNeedCoroutine = isInsNeedCoroutine;
+	this->mIsInsNeedCoroutine = true;
 	this->mIsDestroySelf = true;
-	this->mIsNeedInsPrefab = isNeedInsPrefab;
+	this->mIsNeedInsPrefab = true;
 
 	this->mIsSetInitOrientPos = false;
 	this->mIsSetFakePos = false;

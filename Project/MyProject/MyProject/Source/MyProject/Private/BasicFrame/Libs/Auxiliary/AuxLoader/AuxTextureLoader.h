@@ -25,6 +25,7 @@ protected :
 
 public:
 	AuxTextureLoader();
+
 	virtual void dispose() override;
 	UTexture* getTexture();
 	virtual std::string getOrigPath() override;

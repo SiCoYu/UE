@@ -99,7 +99,16 @@ public:
 		T* tmpbuff = MY_NEW T[value];   // 分配新的空间
 		memcpy(tmpbuff, this->mBuffer, this->mCapacity);
 
-		delete[] this->mBuffer;
+		//delete[] this->mBuffer;
+		if (this->mIsPodType)
+		{
+			MY_DELETE_BASE_TYPE_ARRAY(this->mBuffer, T, this->mCapacity);
+		}
+		else
+		{
+			MY_DELETE[] this->mBuffer;
+		}
+
 		this->mBuffer = tmpbuff;
 		this->mCapacity = value;
 	}

@@ -37,7 +37,7 @@ protected:
 	ResPackType mResPackType;    // 资源打包类型
 
 public:
-	AuxMObjectLoaderBase(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
+	AuxMObjectLoaderBase();
 	void setIsInitOrientPos(bool isSet);
 	void setIsFakePos(bool isSet);
 	void setIsNeedInsRes(bool value);

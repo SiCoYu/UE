@@ -26,7 +26,7 @@ protected:
 	UUMGWidget* mWidgetObject;
 
 public:
-	AuxMUiClassLoader(std::string path = "", bool isNeedInsPrefab = true, bool isInsNeedCoroutine = true);
+	AuxMUiClassLoader();
 
 public:
 	virtual void onPrefabLoaded(IDispatchObject* dispObj) override;

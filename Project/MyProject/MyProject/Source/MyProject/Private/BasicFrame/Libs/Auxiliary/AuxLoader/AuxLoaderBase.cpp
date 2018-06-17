@@ -10,10 +10,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 M_IMPLEMENT_AND_REGISTER_CLASS(AuxLoaderBase, GObject)
 
-AuxLoaderBase::AuxLoaderBase(std::string path)
+AuxLoaderBase::AuxLoaderBase()
 {
 	this->mResEventDispatch = nullptr;
-	this->mInitPath = path;
+	this->mInitPath = "";
 	this->mResLoadState = MY_NEW ResLoadState();
 	this->mResLoadPriority = ResLoadPriority::eRLP_Low_1000;
 
