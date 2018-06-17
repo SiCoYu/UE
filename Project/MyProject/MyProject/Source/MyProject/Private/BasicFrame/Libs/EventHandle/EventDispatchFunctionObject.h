@@ -23,7 +23,7 @@ public:
 	void init();
 	void dispose();
 
-	bool operator ! () const;
+	bool operator ! ();
 
 	virtual void clear();
 	virtual void clearEventHandle();

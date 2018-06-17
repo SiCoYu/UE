@@ -67,9 +67,9 @@ void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 
 	if (resIns->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
-		if (!param->getLoadEventHandle().empty())
+		if (nullptr != param->getLoadEventHandle())
 		{
-			param->getLoadEventHandle().call(resIns);        // 直接通知上层完成加载
+			param->getLoadEventHandle()(resIns, 0);        // 直接通知上层完成加载
 		}
 	}
 	else

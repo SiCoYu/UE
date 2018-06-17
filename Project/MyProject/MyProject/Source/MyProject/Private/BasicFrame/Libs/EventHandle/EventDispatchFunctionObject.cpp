@@ -21,7 +21,7 @@ void EventDispatchFunctionObject::dispose()
 	this->clear();
 }
 
-bool EventDispatchFunctionObject::operator ! () const
+bool EventDispatchFunctionObject::operator ! ()
 {
 	return this->empty();
 }
