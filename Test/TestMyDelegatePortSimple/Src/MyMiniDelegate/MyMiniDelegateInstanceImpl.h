@@ -40,10 +40,16 @@ public:
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
+
     bool operator!= (const MyMiniDelegateInstanceImpl& other) const
     {
         return !((*this) == other);
     }
+
+	virtual RetValType call(ParamTypes... Params) const override
+	{
+		return this->operator()(Params...);
+	}
 
 private:
     T& callee_;
@@ -77,6 +83,11 @@ public:
     {
         return !(*this == other);
     }
+
+	virtual RetValType call(ParamTypes... Params) const override
+	{
+		return this->operator()(Params...);
+	}
 
 private:
     const T& callee_;

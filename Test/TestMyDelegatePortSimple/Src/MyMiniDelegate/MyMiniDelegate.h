@@ -3,6 +3,7 @@
 
 #include "MyMiniDelegateBase.h"
 #include "MyMiniDelegateInstanceBase.h"
+#include "MyMiniMemFunPtrType.h"
 
 namespace MyNS
 {
@@ -26,8 +27,8 @@ public:
 
 	// R (T::*)(ParamTypes...) 参数会报错
 	// error C2146: syntax error: missing ')' before identifier 'func'
-	template <typename T>
-	void bindObjectHandle(R (T::*)(ParamTypes...) func, T& callee)
+	template <typename UserClass>
+	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(ParamTypes...)>::Type func, UserClass& callee)
 	{
 		this->mMyMiniDelegateInstance = make_delegate(func, callee);
 	}

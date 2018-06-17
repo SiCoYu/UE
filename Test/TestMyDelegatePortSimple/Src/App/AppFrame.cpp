@@ -60,14 +60,18 @@ namespace MyNS
 
 		//this->mCommonDelegate = MySmBaseDelegate<int, int, bool>::MySmBaseDelegate(10);
 
-		if (nullptr != this->mCommonDelegate)
-		{
-
-		}
+		//if (nullptr != this->mCommonDelegate)
+		//{
+		//
+		//}
 
 		MyMiniDelegate<bool, int, char>* aaa = new MyMiniDelegate<bool, int, char>();
 		aaa->bindStaticHandle(&testHandle);
 		bool ret = aaa->call(10, 'a');
+
+		TestA* testA = new TestA();
+		aaa->bindObjectHandle(&TestA::testHandle, *testA);
+		ret = aaa->call(10, 'a');
 	}
 
 	void AppFrame::dispose()
