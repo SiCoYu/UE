@@ -1,7 +1,7 @@
-#ifndef CLOSURE_H_
-#define CLOSURE_H_
+#ifndef __MyMiniClosure_H
+#define __MyMiniClosure_H
 
-namespace dlgt
+namespace MyNS
 {
 template <typename T>
 class closure;
@@ -79,6 +79,6 @@ closure2<F> make_closure2(F func, T &obj, B1 b1, B2 b2)
 {
     return closure2<F>(func, obj, b1, b2);
 }
-}// namespace dlgt
+}
 
 #endif /* CLOSURE_H_ */

@@ -1,5 +1,5 @@
-#ifndef __MyMiniDelegate_H
-#define __MyMiniDelegate_H
+#ifndef __MyMiniDelegateInstance_H
+#define __MyMiniDelegateInstance_H
 
 namespace MyNS
 {
@@ -8,7 +8,7 @@ namespace MyNS
  * non specialized template declaration for delegate
  */
 template <typename T>
-class MyMiniDelegate;
+class MyMiniDelegateInstance;
 
 /**
  * specialization for member functions
@@ -19,7 +19,7 @@ class MyMiniDelegate;
  *                      of the captured function
  */
 template <typename T, typename R, typename... Params>
-class MyMiniDelegate<R (T::*)(Params...)>
+class MyMiniDelegateInstance<R (T::*)(Params...)>
 {
 public:
     typedef R (T::*func_type)(Params...);
@@ -52,7 +52,7 @@ private:
  * specialization for const member functions
  */
 template <typename T, typename R, typename... Params>
-class MyMiniDelegate<R (T::*)(Params...) const>
+class MyMiniDelegateInstance<R (T::*)(Params...) const>
 {
 public:
     typedef R (T::*func_type)(Params...) const;
@@ -89,7 +89,7 @@ private:
  *                      of the captured function
  */
 template <typename R, typename... Params>
-class MyMiniDelegate<R (*)(Params...)>
+class MyMiniDelegateInstance<R (*)(Params...)>
 {
 public:
     typedef R (*func_type)(Params...);
@@ -122,13 +122,13 @@ private:
 template <typename F, typename T>
 delegate<F> make_delegate(F func, T& obj)
 {
-    return delegate<F>(func, obj);
+    return MyMiniDelegateInstance<F>(func, obj);
 }
 
 template <typename T>
 delegate<T> make_delegate(T func)
 {
-    return delegate<T>(func);
+    return MyMiniDelegateInstance<T>(func);
 }
 
 // a little backward compatilbility layer
@@ -142,20 +142,20 @@ delegate<T> make_delegate(T func)
 template <typename F, typename T>
 delegate<F> make_delegate(F func, T& obj)
 {
-    return MyMiniDelegate<F>(func, obj);
+    return MyMiniDelegateInstance<F>(func, obj);
 }
 
 // TODO:
 template <typename F, typename T>
 delegate<F> make_delegate(T& obj, F func)
 {
-	return MyMiniDelegate<F>(func, obj);
+	return MyMiniDelegateInstance<F>(func, obj);
 }
 
 template <typename T>
 delegate<T> make_delegate(T func)
 {
-    return delegate<T>(func);
+    return MyMiniDelegateInstance<T>(func);
 }
 
 #endif // DELEGATES_CPP11_SUPPORT
