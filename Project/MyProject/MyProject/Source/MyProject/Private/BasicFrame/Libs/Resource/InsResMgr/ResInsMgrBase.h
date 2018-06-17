@@ -19,6 +19,7 @@
 #include "LogSys.h"
 #include "ResPackType.h"
 #include "GObject.h"
+#include "TypeDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -93,7 +94,7 @@ protected:
 	void unloadNoRef(std::string path);
 
 public:
-	virtual void onLoadEventHandle(IDispatchObject* dispObj);
+	virtual void onLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
 	ResInsBase* getRes(std::string path);
     // 卸载所有的资源
 	void unloadAll();

@@ -1,13 +1,15 @@
 ﻿#ifndef __ResLoadMgr_H
 #define __ResLoadMgr_H
 
+#include <string>
+
 #include "MsgRouteHandleBase.h"
 #include "Platform.h"
-#include <string>
 #include "MList.h"
 #include "ResPackType.h"
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -77,7 +79,7 @@ protected:
 	void unloadNoRef(std::string path);
 
 public:
-	void onLoadEventHandle(IDispatchObject* dispObj);
+	void onLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
 	void onLoaded(LoadItem* item);
 	void onFailed(LoadItem* item);
 

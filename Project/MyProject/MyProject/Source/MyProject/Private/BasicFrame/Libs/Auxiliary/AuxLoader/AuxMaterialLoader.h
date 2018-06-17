@@ -1,10 +1,12 @@
 ﻿#pragma once
 
+#include <string>		// std::string
+
 #include "AuxLoaderBase.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "ResPackType.h"
-#include <string>		// std::string
+#include "TypeDef.h"
 #include "EventDispatchDelegate.h"		// EventDispatchDelegate
 #include "PlatformDefine.h"
 
@@ -27,6 +29,7 @@ protected :
 
 public:
 	AuxMaterialLoader();
+
 	virtual void dispose() override;
 
 	virtual std::string getOrigPath() override;
@@ -46,7 +49,7 @@ public:
 		EventDispatchDelegate progressHandle = nullptr
 	) override;
 
-	void onMaterialLoaded(IDispatchObject* dispObj);
+	void onMaterialLoaded(IDispatchObject* dispObj, uint eventId = 0);
 	virtual void unload() override;
 };
 

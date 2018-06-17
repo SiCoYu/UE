@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "FrameTimerItem.h"
-#include "CallFuncObjectFixParam.h"
+#include "EventDispatchFunctionObject.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
@@ -37,7 +37,7 @@ void FrameTimerItem::addTimerEventHandle(EventDispatchDelegate handle)
 {
 	if (nullptr == this->mTimerDispatch)
 	{
-		this->mTimerDispatch = MY_NEW CallFuncObjectFixParam();
+		this->mTimerDispatch = MY_NEW EventDispatchFunctionObject();
 	}
 
 	this->mTimerDispatch->setEventHandle(handle);
@@ -64,7 +64,7 @@ void FrameTimerItem::onFrameTimer()
 		{
 			this->mCurLeftFrame = 0;
 
-			this->mTimerDispatch->dispatchEvent(this);
+			this->mTimerDispatch->call(this);
 		}
 	}
 	else
@@ -73,7 +73,7 @@ void FrameTimerItem::onFrameTimer()
 		{
 			this->mIsDisposed = true;
 
-			this->mTimerDispatch->dispatchEvent(this);
+			this->mTimerDispatch->call(this);
 		}
 		else
 		{
@@ -81,7 +81,7 @@ void FrameTimerItem::onFrameTimer()
 			{
 				this->mCurLeftFrame = 0;
 
-				this->mTimerDispatch->dispatchEvent(this);
+				this->mTimerDispatch->call(this);
 			}
 		}
 	}

@@ -251,7 +251,8 @@ void UiMgr::loadWidgetRes(UiFormId formId)
 			attrItem->mWidgetPath, 
 			MakeEventDispatchDelegate(
 				this, 
-				&UiMgr::onWidgetAuxUIClassloadedByRes
+				&UiMgr::onWidgetAuxUIClassloadedByRes, 
+				0
 			)
 		);
 	}
@@ -277,7 +278,7 @@ void UiMgr::loadFromFile(
 }
 
 // 代码资源加载处理
-void UiMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
+void UiMgr::onCodeLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 {
 	ClassAssetInsRes* res = (ClassAssetInsRes*)dispObj;
 
@@ -297,7 +298,7 @@ void UiMgr::onCodeLoadEventHandle(IDispatchObject* dispObj)
 }
 
 // 窗口控件资源加载处理
-void UiMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj)
+void UiMgr::onWidgetLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 {
 	ClassAssetInsRes* res = (ClassAssetInsRes*)dispObj;
 
@@ -402,7 +403,7 @@ void UiMgr::onWidgetloadedByRes(ClassAssetInsRes* res)
 	//GClassAssetInsMgr->unload(path, MakeEventDispatchDelegate(this, &UiMgr::onWidgetLoadEventHandle));
 }
 
-void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj)
+void UiMgr::onWidgetAuxUIClassloadedByRes(IDispatchObject* dispObj, uint eventId)
 {
 	AuxMUiClassLoader* res = (AuxMUiClassLoader*)dispObj;
 

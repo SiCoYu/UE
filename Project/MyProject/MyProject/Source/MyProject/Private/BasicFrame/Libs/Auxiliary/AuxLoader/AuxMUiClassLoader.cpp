@@ -48,7 +48,7 @@ void AuxMUiClassLoader::insPrefab()
 	this->mWidgetObject->AddToViewport();
 }
 
-void AuxMUiClassLoader::onPrefabLoaded(IDispatchObject* dispObj)
+void AuxMUiClassLoader::onPrefabLoaded(IDispatchObject* dispObj, uint eventId)
 {
 	if (nullptr != dispObj)
 	{
@@ -83,7 +83,15 @@ void AuxMUiClassLoader::onPrefabLoaded(IDispatchObject* dispObj)
 		{
 			this->mResLoadState->setFailed();
 
-			GObjectAssetInsMgr->unload(this->mPrefabRes->getResUniqueId(), MakeEventDispatchDelegate(this, &AuxMObjectLoaderBase::onPrefabLoaded));
+			GObjectAssetInsMgr->unload(
+				this->mPrefabRes->getResUniqueId(), 
+				MakeEventDispatchDelegate(
+					this, 
+					&AuxMObjectLoaderBase::onPrefabLoaded, 
+					0
+				)
+			);
+
 			this->mPrefabRes = nullptr;
 
 			if (this->mResEventDispatch != nullptr)

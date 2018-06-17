@@ -31,7 +31,8 @@ DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 	this->mLoopDepth->setZeroHandle(
 		MakeEventDispatchDelegate(
 			this,
-			&DelayNoOrPriorityHandleMgrBase::_processDelayObjects
+			&DelayNoOrPriorityHandleMgrBase::_processDelayObjects, 
+			0
 		)
 	);
 
@@ -166,7 +167,7 @@ bool DelayNoOrPriorityHandleMgrBase::_isInDepth()
 	return ret;
 }
 
-void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispObj/*, uint eventId*/)
+void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispObj, uint eventId)
 {
 	int index = 0;
 	// len 是 Python 的关键字

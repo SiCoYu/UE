@@ -42,7 +42,8 @@ void AuxLevelLoader::syncLoad(
 		param->setLoadEventHandle(
 			MakeEventDispatchDelegate(
 				this, 
-				&AuxLevelLoader::onLevelLoaded
+				&AuxLevelLoader::onLevelLoaded, 
+				0
 			)
 		);
 		param->setIsResNeedCoroutine(false);
@@ -85,7 +86,8 @@ void AuxLevelLoader::asyncLoad(
 		param->setLoadEventHandle(
 			MakeEventDispatchDelegate(
 				this, 
-				&AuxLevelLoader::onLevelLoaded
+				&AuxLevelLoader::onLevelLoaded, 
+				0
 			)
 		);
 		param->setIsResNeedCoroutine(true);
@@ -103,7 +105,7 @@ void AuxLevelLoader::asyncLoad(
 	}
 }
 
-void AuxLevelLoader::onLevelLoaded(IDispatchObject* dispObj)
+void AuxLevelLoader::onLevelLoaded(IDispatchObject* dispObj, uint eventId)
 {
 	if (nullptr != dispObj)
 	{

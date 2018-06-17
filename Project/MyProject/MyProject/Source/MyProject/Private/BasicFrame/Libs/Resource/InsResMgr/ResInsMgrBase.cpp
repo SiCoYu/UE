@@ -69,7 +69,7 @@ void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 	{
 		if (!param->getLoadEventHandle().empty())
 		{
-			param->getLoadEventHandle()(resIns);        // 直接通知上层完成加载
+			param->getLoadEventHandle().call(resIns);        // 直接通知上层完成加载
 		}
 	}
 	else
@@ -134,7 +134,8 @@ void ResInsMgrBase::unloadNoRef(std::string path)
 		path, 
 		MakeEventDispatchDelegate(
 			this, 
-			&ResInsMgrBase::onLoadEventHandle
+			&ResInsMgrBase::onLoadEventHandle, 
+			0
 		)
 	);
 
@@ -144,7 +145,7 @@ void ResInsMgrBase::unloadNoRef(std::string path)
 	MY_SAFE_DISPOSE(resIns);
 }
 
-void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
+void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 {
 	ResItem* res = (ResItem*)dispObj;
 	std::string path = res->getPath();
@@ -164,7 +165,8 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 					path, 
 					MakeEventDispatchDelegate(
 						this, 
-						&ResInsMgrBase::onLoadEventHandle
+						&ResInsMgrBase::onLoadEventHandle, 
+						0
 					)
 				);
 			}
@@ -174,9 +176,10 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 			this->mPath2ResDic[path]->failed(res);
 			GResLoadMgr->unload(
 				path, 
-				EventDispatchDelegate(
+				MakeEventDispatchDelegate(
 					this, 
-					&ResInsMgrBase::onLoadEventHandle
+					&ResInsMgrBase::onLoadEventHandle, 
+					0
 				)
 			);
 		}
@@ -188,7 +191,8 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj)
 			path, 
 			MakeEventDispatchDelegate(
 				this, 
-				&ResInsMgrBase::onLoadEventHandle
+				&ResInsMgrBase::onLoadEventHandle, 
+				0
 			)
 		);
 	}
@@ -212,7 +216,14 @@ void ResInsMgrBase::unloadAll()
 
 	for(std::string path : pathList.getList())
 	{
-		this->unload(path, MakeEventDispatchDelegate(this, &ResInsMgrBase::onLoadEventHandle));
+		this->unload(
+			path, 
+			MakeEventDispatchDelegate(
+				this, 
+				&ResInsMgrBase::onLoadEventHandle, 
+				0
+			)
+		);
 	}
 
 	pathList.clear();

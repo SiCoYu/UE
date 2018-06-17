@@ -22,14 +22,16 @@ void GameRouteHandle::init()
 		MsgRouteId::eMRID_ThreadLog,
 		MakeEventDispatchDelegate(
 			this, 
-			&GameRouteHandle::threadLog
+			&GameRouteHandle::threadLog, 
+			0
 		)
 	);
     this->addMsgRouteHandle(
 		MsgRouteId::eMRID_SocketOpened, 
 		MakeEventDispatchDelegate(
 			this, 
-			&GameRouteHandle::onSocketOpened
+			&GameRouteHandle::onSocketOpened, 
+			0
 		)
 	);
 }
@@ -40,26 +42,28 @@ void GameRouteHandle::dispose()
 		MsgRouteId::eMRID_ThreadLog, 
 		MakeEventDispatchDelegate(
 			this, 
-			&GameRouteHandle::threadLog
+			&GameRouteHandle::threadLog, 
+			0
 		)
 	);
     this->removeMsgRouteHandle(
 		MsgRouteId::eMRID_SocketOpened, 
 		MakeEventDispatchDelegate(
 			this,
-			&GameRouteHandle::onSocketOpened
+			&GameRouteHandle::onSocketOpened, 
+			0
 		)
 	);
 
 	Super::dispose();
 }
 
-void GameRouteHandle::threadLog(IDispatchObject* dispObj)
+void GameRouteHandle::threadLog(IDispatchObject* dispObj, uint eventId)
 {
     MsgRouteBase* msg = (MsgRouteBase*)dispObj;
 }
 
-void GameRouteHandle::onSocketOpened(IDispatchObject* dispObj)
+void GameRouteHandle::onSocketOpened(IDispatchObject* dispObj, uint eventId)
 {
     
 }

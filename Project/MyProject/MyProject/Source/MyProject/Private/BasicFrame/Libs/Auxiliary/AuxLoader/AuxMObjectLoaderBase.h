@@ -1,7 +1,8 @@
 ﻿#pragma once
 
-#include "AuxLoaderBase.h"
 #include <string>
+
+#include "AuxLoaderBase.h"
 #include "EventDispatchDelegate.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
@@ -9,6 +10,7 @@
 #include "UObject/Object.h"	// UObject
 #include "ResPackType.h"
 #include "CoreInc.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -38,6 +40,7 @@ protected:
 
 public:
 	AuxMObjectLoaderBase();
+
 	void setIsInitOrientPos(bool isSet);
 	void setIsFakePos(bool isSet);
 	void setIsNeedInsRes(bool value);
@@ -56,14 +59,17 @@ public:
 		EventDispatchDelegate evtHandle = nullptr,
 		EventDispatchDelegate progressHandle = nullptr
 	) override;
+
     // 异步加载对象
 	virtual void asyncLoad(
 		std::string path, 
 		EventDispatchDelegate evtHandle,
 		EventDispatchDelegate progressHandle = nullptr
 	) override;
-	virtual void onPrefabLoaded(IDispatchObject* dispObj);
-	void onPrefabIns(IDispatchObject* dispObj);
+
+	virtual void onPrefabLoaded(IDispatchObject* dispObj, uint eventId = 0);
+	void onPrefabIns(IDispatchObject* dispObj, uint eventId = 0);
+
     // 所有的资源都加载完成
 	void onAllFinish();
 	virtual void unload() override;
@@ -72,7 +78,7 @@ public:
     // 获取预制模板
 	UObject* getPrefabTmpl();
 	UObject* InstantiateObject(EventDispatchDelegate insHandle = nullptr);
-	void onInstantiateObjectFinish(IDispatchObject* dispObj = nullptr);
+	void onInstantiateObjectFinish(IDispatchObject* dispObj = nullptr, uint eventId = 0);
 };
 
 MY_END_NAMESPACE

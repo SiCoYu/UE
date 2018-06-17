@@ -1,6 +1,6 @@
 ﻿#include "MyProject.h"
 #include "TimerItemBase.h"
-#include "CallFuncObjectFixParam.h"
+#include "EventDispatchFunctionObject.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
@@ -37,7 +37,7 @@ void TimerItemBase::addTimerEventHandle(EventDispatchDelegate handle)
 {
 	if (nullptr == this->mTimerDispatch)
 	{
-		this->mTimerDispatch = MY_NEW CallFuncObjectFixParam();
+		this->mTimerDispatch = MY_NEW EventDispatchFunctionObject();
 	}
 
 	this->mTimerDispatch->setEventHandle(handle);
@@ -79,7 +79,7 @@ void TimerItemBase::disposeAndDispatch()
 {
 	this->mIsDisposed = true;
 
-	this->mTimerDispatch->dispatchEvent(this);
+	this->mTimerDispatch->call(this);
 }
 
 void TimerItemBase::checkAndDispatch()
@@ -88,7 +88,7 @@ void TimerItemBase::checkAndDispatch()
 	{
 		this->mCurLeftTimer = this->mCurLeftTimer - mInternal;
 
-		this->mTimerDispatch->dispatchEvent(this);
+		this->mTimerDispatch->call(this);
 	}
 }
 

@@ -42,7 +42,8 @@ void AuxDownloader::download(
 		param->setPath(origPath);
 		param->mLoadEventHandle = MakeEventDispatchDelegate(
 			this, 
-			&AuxDownloader::onDownloaded
+			&AuxDownloader::onDownloaded, 
+			0
 		);
 		param->mFileLen = fileLen;
 		param->mIsWriteFile = isWriteFile;
@@ -57,7 +58,7 @@ void AuxDownloader::download(
 }
 
 // 下载完成
-void AuxDownloader::onDownloaded(IDispatchObject* dispObj)
+void AuxDownloader::onDownloaded(IDispatchObject* dispObj, uint eventId)
 {
 	if (nullptr != dispObj)
 	{

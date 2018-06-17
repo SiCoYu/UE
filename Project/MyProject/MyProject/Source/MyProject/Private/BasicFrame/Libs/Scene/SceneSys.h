@@ -1,9 +1,11 @@
 ﻿#pragma once
 
-#include "EventDispatchDelegate.h"
 #include <string>
+
+#include "EventDispatchDelegate.h"
 #include "AuxLevelLoader.h"	// AuxLevelLoader, Namespace 必须包含
 #include "GObject.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -35,7 +37,7 @@ public:
 	void loadScene(std::string filename, EventDispatchDelegate func);
 	void unloadScene();
 	void loadSceneRes(std::string filename);
-	void onSceneResLoadded(IDispatchObject* dispObj);
+	void onSceneResLoadded(IDispatchObject* dispObj, uint eventId = 0);
     // 卸载多有的场景
 	void unloadAll();
 };

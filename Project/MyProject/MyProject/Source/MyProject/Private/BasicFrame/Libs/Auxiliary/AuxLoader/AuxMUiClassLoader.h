@@ -6,6 +6,7 @@
 #include "FormType.h"
 #include "ResPackType.h"
 #include "CoreInc.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 class UClass;
@@ -29,7 +30,7 @@ public:
 	AuxMUiClassLoader();
 
 public:
-	virtual void onPrefabLoaded(IDispatchObject* dispObj) override;
+	virtual void onPrefabLoaded(IDispatchObject* dispObj, uint eventId = 0) override;
 	void setUMGOuterType(UMGOuterType value);
 	UUMGWidget* getWidgetObject();
 	void insPrefab();

@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "GObject.h"
+#include "TypeDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -39,7 +40,9 @@ protected:
 		IDelayHandleItem* delayObject, 
 		float priority = 0.0f
 	);
+
 	virtual void _removeObject(IDelayHandleItem* delayObject);
+
 	// 只要调用会添加或者删除列表元素，就需要调用这个接口
 	void _incDepth();
 	void _decDepth();
@@ -47,8 +50,8 @@ protected:
 
 private:
 	void _processDelayObjects(
-		IDispatchObject* dispObj/*, 
-		uint eventId*/
+		IDispatchObject* dispObj, 
+		uint eventId = 0
 	);
 };
 

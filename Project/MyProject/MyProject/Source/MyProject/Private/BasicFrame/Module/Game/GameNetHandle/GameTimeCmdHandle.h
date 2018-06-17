@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "NetCmdDispatchHandle.h"
+#include "TypeDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -19,7 +20,7 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 
-	void onParamHandle(IDispatchObject* dispObj);
+	void onParamHandle(IDispatchObject* dispObj, uint eventId = 0);
 };
 
 MY_END_NAMESPACE

@@ -9,7 +9,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class CallFuncObjectFixParam;
+class EventDispatchFunctionObject;
 
 /**
  * @brief 定时器，这个是不断增长的
@@ -22,7 +22,7 @@ public:
     int mCurFrame;              // 当前已经调用的定时器的时间
     int mCurLeftFrame;          // 剩余帧数
     bool mIsInfineLoop;      // 是否是无限循环
-	CallFuncObjectFixParam* mTimerDispatch;       // 定时器分发
+	EventDispatchFunctionObject* mTimerDispatch;       // 定时器分发
     bool mIsDisposed;             // 是否已经被释放
 
     //int m_preFrame = 0;

@@ -11,6 +11,7 @@
 #include "UiAttrSystem.h"
 #include "Form.h"
 #include "GObject.h"
+#include "TypeDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -78,12 +79,12 @@ public:
 	void loadWidgetRes(UiFormId formId);
 	void loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle);
 
-	void onCodeLoadEventHandle(IDispatchObject* dispObj);
-	void onWidgetLoadEventHandle(IDispatchObject* dispObj);
+	void onCodeLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
+	void onWidgetLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
 	void onCodeloadedByRes(ClassAssetInsRes* res);
 	void onCodeLoadedByForm(UForm* form);
 	void onWidgetloadedByRes(ClassAssetInsRes* res);
-	void onWidgetAuxUIClassloadedByRes(IDispatchObject* res);
+	void onWidgetAuxUIClassloadedByRes(IDispatchObject* res, uint eventId = 0);
 
 	void onResize(int viewWidth, int viewHeight);
 

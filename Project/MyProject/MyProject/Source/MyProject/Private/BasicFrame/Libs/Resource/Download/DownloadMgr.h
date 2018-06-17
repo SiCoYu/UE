@@ -1,10 +1,11 @@
 ﻿#pragma once
 
 #include <string>
-#include <list>
+
 #include "EventDispatchDelegate.h"
 #include "MList.h"
 #include "GObject.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -76,7 +77,7 @@ protected:
 
 public:
 	void removeWillLoadItem(std::string resUniqueId);
-	void onLoadEventHandle(IDispatchObject* dispObj);
+	void onLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
 	void onLoaded(DownloadItem* item);
 	void onFailed(DownloadItem* item);
 
@@ -85,7 +86,7 @@ protected:
 	void loadNextItem();
 	DownloadItem* findDownloadItemFormPool();
     // 资源加载完成，触发下一次加载
-	void onMsgRouteResLoad(IDispatchObject* dispObj);
+	void onMsgRouteResLoad(IDispatchObject* dispObj, uint eventId = 0);
 };
 
 MY_END_NAMESPACE

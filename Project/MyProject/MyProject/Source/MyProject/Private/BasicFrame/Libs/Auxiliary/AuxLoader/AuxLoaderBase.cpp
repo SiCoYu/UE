@@ -202,7 +202,7 @@ void AuxLoaderBase::unload()
 	this->reset();
 }
 
-void AuxLoaderBase::onProgressEventHandle(IDispatchObject* dispObj)
+void AuxLoaderBase::onProgressEventHandle(IDispatchObject* dispObj, uint eventId)
 {
 	if (nullptr != this->mProgressEventDispatch)
 	{

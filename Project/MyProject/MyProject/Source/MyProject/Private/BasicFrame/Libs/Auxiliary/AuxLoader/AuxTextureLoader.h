@@ -1,10 +1,12 @@
 ﻿#pragma once
 
+#include <string>		// std::string
+
 #include "AuxLoaderBase.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "ResPackType.h"
-#include <string>		// std::string
+#include "TypeDef.h"
 #include "EventDispatchDelegate.h"		// EventDispatchDelegate
 #include "PlatformDefine.h"
 
@@ -41,7 +43,7 @@ public:
 		EventDispatchDelegate evtHandle,
 		EventDispatchDelegate progressHandle = nullptr
 	) override;
-	void onTextureLoaded(IDispatchObject* dispObj);
+	void onTextureLoaded(IDispatchObject* dispObj, uint eventId = 0);
 	virtual void unload() override;
 };
 

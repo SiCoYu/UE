@@ -106,7 +106,8 @@ void UUiFunctionBar::onTestButtonTouch()
 		"/Game/MyAsset/Map/TestMap2", 
 		MakeEventDispatchDelegate(
 			this, 
-			&UUiFunctionBar::onLevelLoadedDispatch
+			&UUiFunctionBar::onLevelLoadedDispatch, 
+			0
 		)
 	);
 
@@ -152,7 +153,7 @@ void UUiFunctionBar::onLevelLoaded()
 	int num = 0;
 }
 
-void UUiFunctionBar::onLevelLoadedDispatch(IDispatchObject* dispObj)
+void UUiFunctionBar::onLevelLoadedDispatch(IDispatchObject* dispObj, uint eventId)
 {
 	int num = 0;
 }

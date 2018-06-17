@@ -133,7 +133,8 @@ void AuxMObjectLoaderBase::asyncLoad(
 				path, 
 				MakeEventDispatchDelegate(
 					this, 
-					&AuxMObjectLoaderBase::onPrefabLoaded
+					&AuxMObjectLoaderBase::onPrefabLoaded, 
+					0
 				)
 			);
 		}
@@ -143,7 +144,8 @@ void AuxMObjectLoaderBase::asyncLoad(
 				path, 
 				MakeEventDispatchDelegate(
 					this, 
-					&AuxMObjectLoaderBase::onPrefabLoaded
+					&AuxMObjectLoaderBase::onPrefabLoaded, 
+					0
 				)
 			);
 		}
@@ -154,7 +156,7 @@ void AuxMObjectLoaderBase::asyncLoad(
 	}
 }
 
-void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
+void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj, uint eventId)
 {
 	if (nullptr != dispObj)
 	{
@@ -173,7 +175,8 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
 					this->mResInsEventDispatch->addEventHandle(
 						MakeEventDispatchDelegate(
 							this, 
-							&AuxMObjectLoaderBase::onPrefabIns
+							&AuxMObjectLoaderBase::onPrefabIns, 
+							0
 						)
 					);
 
@@ -213,7 +216,8 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
 				this->mPrefabRes->getResUniqueId(), 
 				MakeEventDispatchDelegate(
 					this, 
-					&AuxMObjectLoaderBase::onPrefabLoaded
+					&AuxMObjectLoaderBase::onPrefabLoaded, 
+					0
 				)
 			);
 			this->mPrefabRes = nullptr;
@@ -233,7 +237,7 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj)
 	}
 }
 
-void AuxMObjectLoaderBase::onPrefabIns(IDispatchObject* dispObj)
+void AuxMObjectLoaderBase::onPrefabIns(IDispatchObject* dispObj, uint eventId)
 {
 	this->mResInsEventDispatch = (ResInsEventDispatch*)dispObj;
 	this->setSelfActor(this->mResInsEventDispatch->getInsActor());
@@ -280,7 +284,8 @@ void AuxMObjectLoaderBase::unload()
 			this->mPrefabRes->getResUniqueId(), 
 			MakeEventDispatchDelegate(
 				this, 
-				&AuxMObjectLoaderBase::onPrefabLoaded
+				&AuxMObjectLoaderBase::onPrefabLoaded, 
+				0
 			)
 		);
 
@@ -338,7 +343,8 @@ UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle
 		this->mResInsEventDispatch->addEventHandle(
 			MakeEventDispatchDelegate(
 				this,
-				&AuxMObjectLoaderBase::onInstantiateObjectFinish
+				&AuxMObjectLoaderBase::onInstantiateObjectFinish, 
+				0
 			)
 		);
 
@@ -394,7 +400,7 @@ UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle
 	return this->mSelfActor;
 }
 
-void AuxMObjectLoaderBase::onInstantiateObjectFinish(IDispatchObject* dispObj)
+void AuxMObjectLoaderBase::onInstantiateObjectFinish(IDispatchObject* dispObj, uint eventId)
 {
 	if (nullptr != dispObj)
 	{

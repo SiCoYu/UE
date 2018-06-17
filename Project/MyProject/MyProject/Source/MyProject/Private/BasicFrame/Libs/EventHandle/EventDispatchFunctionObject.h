@@ -4,12 +4,16 @@
 #include "GObject.h"
 #include "IDelayHandleItem.h"
 #include "EventDispatchDelegate.h"
+#include "MClassInfo.h"
+#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class EventDispatchFunctionObject : public GObject/*, public IDelayHandleItem*/
 {
+	M_DECLARE_CLASS(EventDispatchFunctionObject, GObject)
+
 public:
 	EventDispatchDelegate mHandle;
 
@@ -18,6 +22,16 @@ public:
 
 	void init();
 	void dispose();
+
+	bool operator ! () const;
+
+	virtual void clear();
+	virtual void clearEventHandle();
+
+	virtual bool empty();
+
+	virtual void setEventHandle(EventDispatchDelegate handle);
+	virtual void call(IDispatchObject* dispObj);
 };
 
 MY_END_NAMESPACE

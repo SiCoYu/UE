@@ -65,7 +65,8 @@ void PlayerMainRender::load()
 		this->mResPath,
 		MakeEventDispatchDelegate(
 			this, 
-			&BeingEntityRender::onResLoaded
+			&BeingEntityRender::onResLoaded, 
+			0
 		)
 	);
 }

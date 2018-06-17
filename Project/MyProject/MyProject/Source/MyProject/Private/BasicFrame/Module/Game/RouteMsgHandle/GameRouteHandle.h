@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "MsgRouteHandleBase.h"
+#include "TypeDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -20,8 +21,8 @@ public:
 	virtual void dispose() override;
 
 protected:
-	void threadLog(IDispatchObject* dispObj);
-	void onSocketOpened(IDispatchObject* dispObj);
+	void threadLog(IDispatchObject* dispObj, uint eventId = 0);
+	void onSocketOpened(IDispatchObject* dispObj, uint eventId = 0);
 };
 
 MY_END_NAMESPACE

@@ -88,9 +88,10 @@ void AuxTextureLoader::asyncLoad(
         {
             this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
                 path,
-				EventDispatchDelegate(
+				MakeEventDispatchDelegate(
 					this,
-					&AuxTextureLoader::onTextureLoaded
+					&AuxTextureLoader::onTextureLoaded, 
+					0
 				)
             );
         }
@@ -98,13 +99,15 @@ void AuxTextureLoader::asyncLoad(
         {
             this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
                 path,
-				EventDispatchDelegate(
+				MakeEventDispatchDelegate(
 					this,
-					&AuxTextureLoader::onTextureLoaded
+					&AuxTextureLoader::onTextureLoaded, 
+					0
 				),
-				EventDispatchDelegate(
+				MakeEventDispatchDelegate(
 					this,
-					&AuxLoaderBase::onProgressEventHandle
+					&AuxLoaderBase::onProgressEventHandle, 
+					0
 				)
             );
         }
@@ -115,7 +118,7 @@ void AuxTextureLoader::asyncLoad(
     }
 }
 
-void AuxTextureLoader::onTextureLoaded(IDispatchObject* dispObj)
+void AuxTextureLoader::onTextureLoaded(IDispatchObject* dispObj, uint eventId)
 {
     if (nullptr != dispObj)
     {

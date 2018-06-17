@@ -20,7 +20,8 @@ void GameTimeCmdHandle::init()
 		0, 
 		MakeEventDispatchDelegate(
 			this, 
-			&GameTimeCmdHandle::onParamHandle
+			&GameTimeCmdHandle::onParamHandle, 
+			0
 		)
 	);
 }
@@ -31,14 +32,15 @@ void GameTimeCmdHandle::dispose()
 		0, 
 		MakeEventDispatchDelegate(
 			this, 
-			&GameTimeCmdHandle::onParamHandle
+			&GameTimeCmdHandle::onParamHandle, 
+			0
 		)
 	);
 
 	Super::dispose();
 }
 
-void GameTimeCmdHandle::onParamHandle(IDispatchObject* dispObj)
+void GameTimeCmdHandle::onParamHandle(IDispatchObject* dispObj, uint eventId)
 {
 
 }

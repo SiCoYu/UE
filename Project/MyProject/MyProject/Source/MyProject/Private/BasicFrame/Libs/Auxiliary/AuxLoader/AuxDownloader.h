@@ -7,6 +7,7 @@
 #include "IDispatchObject.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -33,7 +34,7 @@ protected:
 		int downloadType = (int)DownloadType::eHttpWeb
 	) override;
     // 下载完成
-	void onDownloaded(IDispatchObject* dispObj);
+	void onDownloaded(IDispatchObject* dispObj, uint eventId = 0);
 };
 
 MY_END_NAMESPACE

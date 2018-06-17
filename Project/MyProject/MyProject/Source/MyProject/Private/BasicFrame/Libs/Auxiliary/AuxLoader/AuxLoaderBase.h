@@ -1,8 +1,10 @@
 ﻿#pragma once
 
+#include <string>
+
 #include "GObject.h"
 #include "IDispatchObject.h"
-#include <string>
+#include "TypeDef.h"
 #include "EventDispatchDelegate.h"
 #include "DownloadParam.h"
 #include "MClassInfo.h"
@@ -67,20 +69,23 @@ public:
 	// 实例化失败
 	void onInsFailed();
 
-	virtual void onProgressEventHandle(IDispatchObject* dispObj);
+	virtual void onProgressEventHandle(IDispatchObject* dispObj, uint eventId = 0);
 
 protected:
 	void addEventHandle(EventDispatchDelegate evtHandle = nullptr);
+
 	virtual void syncLoad(
 		std::string path, 
 		EventDispatchDelegate evtHandle = nullptr,
 		EventDispatchDelegate progressHandle = nullptr
 	);
+
 	virtual void asyncLoad(
 		std::string path, 
 		EventDispatchDelegate evtHandle,
 		EventDispatchDelegate progressHandle = nullptr
 	);
+
 	virtual void download(
 		std::string origPath, 
 		EventDispatchDelegate handle = nullptr,
@@ -88,6 +93,7 @@ protected:
 		bool isWriteFile = true, 
 		int downloadType = (int)DownloadType::eHttpWeb
 	);
+
 	virtual void unload();
 };
 

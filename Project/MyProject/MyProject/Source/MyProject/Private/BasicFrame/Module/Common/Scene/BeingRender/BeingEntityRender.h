@@ -1,7 +1,9 @@
 ﻿#pragma once
 
 #include <string>
+
 #include "SceneEntityRenderBase.h"
+#include "TypeDef.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -39,7 +41,7 @@ public:
 	virtual void updateLocalTransform() override;
 	// 资源加载
 	virtual void load() override;
-	virtual void onResLoaded(IDispatchObject* dispObj/*, uint uniqueId*/);
+	virtual void onResLoaded(IDispatchObject* dispObj, uint uniqueId = 0);
 	virtual void attachToParentNode(SceneEntityRenderBase* render);
 
 protected:

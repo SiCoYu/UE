@@ -381,7 +381,8 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 	loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(
 		MakeEventDispatchDelegate(
 			this, 
-			&ResLoadMgr::onLoadEventHandle
+			&ResLoadMgr::onLoadEventHandle, 
+			0
 		)
 	);
 
@@ -392,16 +393,17 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 void ResLoadMgr::loadWithResCreatedAndLoad(LoadParam* param)
 {
 	this->mLoadData->mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getRefCount()->incRef();
+
 	if (this->mLoadData->mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
-		if (param->getLoadEventHandle() != nullptr)
+		if (!param->getLoadEventHandle().empty())
 		{
-			param->getLoadEventHandle()(this->mLoadData->mPath2ResDic[param->mPath]);
+			param->getLoadEventHandle().call(this->mLoadData->mPath2ResDic[param->mPath]);
 		}
 	}
 	else
 	{
-		if (param->getLoadEventHandle() != nullptr)
+		if (!param->getLoadEventHandle().empty())
 		{
 			this->mLoadData->mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 		}
@@ -434,7 +436,13 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 	}
 	else
 	{
-		loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(MakeEventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
+		loadItem->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(
+			MakeEventDispatchDelegate(
+				this, 
+				&ResLoadMgr::onLoadEventHandle, 
+				0
+			)
+		);
 	}
 
 	this->resetLoadParam(param);
@@ -538,10 +546,17 @@ void ResLoadMgr::unloadNoRef(std::string path)
 	}
 }
 
-void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj)
+void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 {
 	LoadItem* item = (LoadItem*)dispObj;
-	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(MakeEventDispatchDelegate(this, &ResLoadMgr::onLoadEventHandle));
+
+	item->getNonRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(
+		MakeEventDispatchDelegate(
+			this, 
+			&ResLoadMgr::onLoadEventHandle, 
+			0
+		)
+	);
 
 	if (item->getNonRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
 	{

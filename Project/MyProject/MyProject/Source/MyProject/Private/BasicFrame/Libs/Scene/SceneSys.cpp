@@ -99,12 +99,13 @@ void SceneSys::loadSceneRes(std::string filename)
 		filename,
 		MakeEventDispatchDelegate(
 			this,
-			&SceneSys::onSceneResLoadded
+			&SceneSys::onSceneResLoadded, 
+			0
 		)
 	);
 }
 
-void SceneSys::onSceneResLoadded(IDispatchObject* dispObj)
+void SceneSys::onSceneResLoadded(IDispatchObject* dispObj, uint eventId)
 {
 	//ResItem res = dispObj as ResItem;
 	this->mOnSceneLoadedDispatch->dispatchEvent(mScene);

@@ -140,7 +140,7 @@ void EventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 	{
 		if (!(GObject*)handle->isClientDispose())
 		{
-			handle->mHandle(dispatchObject);
+			handle->call(dispatchObject);
 		}
 	}
 

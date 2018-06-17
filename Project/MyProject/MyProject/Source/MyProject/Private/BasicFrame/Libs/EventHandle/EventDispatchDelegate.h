@@ -2,6 +2,8 @@
 #define __EventDispatchDelegate_H
 
 #include "FastDelegate.h"
+
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 //#include "MyDelegate/MySmDelegateCombinations.h"
@@ -15,10 +17,15 @@ MY_END_NAMESPACE
 
 MY_USING_NAMESPACE(MyNS)
 
-typedef fastdelegate::FastDelegate1<IDispatchObject*> EventDispatchDelegate;
-typedef fastdelegate::FastDelegate1<IDispatchObject*>* EventDispatchDelegatePtr;
+//typedef fastdelegate::FastDelegate1<IDispatchObject*> EventDispatchDelegate;
+//typedef fastdelegate::FastDelegate1<IDispatchObject*>* EventDispatchDelegatePtr;
 
-#define MakeEventDispatchDelegate EventDispatchDelegate
+typedef fastdelegate::FastDelegate2<IDispatchObject*, uint> EventDispatchDelegate;
+typedef fastdelegate::FastDelegate2<IDispatchObject*, uint>* EventDispatchDelegatePtr;
+
+// fastdelegate::FastDelegate1 不支持闭包参数
+//#define MakeEventDispatchDelegate EventDispatchDelegate
+#define MakeEventDispatchDelegate(pThis,handle,param) fastdelegate::MakeDelegate(pThis, handle)
 
 //MY_DECLARE_DELEGATE_OneParam(EventDispatchDelegate, IDispatchObject*);
 //typedef EventDispatchDelegate* EventDispatchDelegatePtr;

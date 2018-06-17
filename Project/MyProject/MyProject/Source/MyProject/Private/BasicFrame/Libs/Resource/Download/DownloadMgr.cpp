@@ -143,7 +143,8 @@ DownloadItem* DownloadMgr::createDownloadItem(DownloadParam* param)
     loadItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(
 		MakeEventDispatchDelegate(
 			this, 
-			&DownloadMgr::onLoadEventHandle
+			&DownloadMgr::onLoadEventHandle,
+			0
 		)
 	);
 
@@ -160,7 +161,7 @@ void DownloadMgr::downloadWithDownloading(DownloadParam* param)
     {
         if (param->mLoadEventHandle != nullptr)
         {
-            param->mLoadEventHandle(this->mLoadData->mPath2LoadItemDic[param->mResUniqueId]);
+            param->mLoadEventHandle(this->mLoadData->mPath2LoadItemDic[param->mResUniqueId], 0);
         }
     }
     else
@@ -324,13 +325,14 @@ void DownloadMgr::removeWillLoadItem(std::string resUniqueId)
     }
 }
 
-void DownloadMgr::onLoadEventHandle(IDispatchObject* dispObj)
+void DownloadMgr::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 {
     DownloadItem* item = (DownloadItem*)dispObj;
     item->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->removeEventHandle(
 		MakeEventDispatchDelegate(
 			this, 
-			&DownloadMgr::onLoadEventHandle
+			&DownloadMgr::onLoadEventHandle, 
+			0
 		)
 	);
 
@@ -414,7 +416,7 @@ DownloadItem* DownloadMgr::findDownloadItemFormPool()
 }
 
 // 资源加载完成，触发下一次加载
-void DownloadMgr::onMsgRouteResLoad(IDispatchObject* dispObj)
+void DownloadMgr::onMsgRouteResLoad(IDispatchObject* dispObj, uint eventId)
 {
     /*MsgRouteBase msg = dispObj as MsgRouteBase;
     DownloadItem loadItem = (msg as LoadedWebResMR).m_task as DownloadItem;

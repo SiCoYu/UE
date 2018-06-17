@@ -3,6 +3,8 @@
 #include "UMGForm.h"
 #include "AuxButton.h"
 #include "MySharedPointer.h"
+#include "TypeDef.h"
+
 #include "UIFunctionBar.generated.h"
 
 using namespace MyNS;
@@ -51,5 +53,5 @@ public:
 	void onLevelLoaded();
 
 public:
-	void onLevelLoadedDispatch(IDispatchObject* dispObj);
+	void onLevelLoadedDispatch(IDispatchObject* dispObj, uint eventId = 0);
 };
