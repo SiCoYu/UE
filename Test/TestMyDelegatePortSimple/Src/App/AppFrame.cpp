@@ -13,6 +13,11 @@ namespace MyNS
 		{
 			return false;
 		}
+
+		bool testHandleA(int a, char b, int c)
+		{
+			return true;
+		}
 	};
 
 	bool testHandle(int a, char b)
@@ -72,6 +77,9 @@ namespace MyNS
 		TestA* testA = new TestA();
 		aaa->bindObjectHandle(&TestA::testHandle, *testA);
 		ret = aaa->call(10, 'a');
+
+		//aaa->bindObjectHandle(&TestA::testHandleA, *testA, 10);
+		//ret = aaa->call(10, 'a');
 	}
 
 	void AppFrame::dispose()

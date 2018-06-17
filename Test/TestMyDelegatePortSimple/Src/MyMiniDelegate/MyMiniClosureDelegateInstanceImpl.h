@@ -6,14 +6,46 @@
 namespace MyNS
 {
 
+// 函数指针泛化
+template <typename T>
+class MyMiniClosureDelegateInstanceImpl0;
+
+// 函数指针特化
+template <typename T, typename R, typename... ParamTypes, typename... VarTypes>
+class MyMiniClosureDelegateInstanceImpl0<R (T::*)(ParamTypes..., VarTypes...)> : public MyMiniDelegateInstanceBase<ParamTypes...>
+{
+public:
+	typedef R (T::*func_type)(ParamTypes...);
+
+	MyMiniClosureDelegateInstanceImpl0(func_type func, T &callee)
+		: callee_(&callee)
+		, func_(func)
+	{
+	}
+
+	R operator()(ParamTypes... args) const
+	{
+		return (callee_->*func_)(args...);
+	}
+
+	bool operator==(const MyMiniClosureDelegateInstanceImpl0 &other) const
+	{
+		return (callee_ == other.callee_) && (func_ == other.func_);
+	}
+
+private:
+	T *callee_;
+	func_type func_;
+};
+
 template <typename T>
 class MyMiniClosureDelegateInstanceImpl;
 
-template <typename T, typename R, typename B, typename... ParamTypes>
-class MyMiniClosureDelegateInstanceImpl<R (T::*)(B, Params...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+template <typename T, typename R, typename... ParamTypes, typename B>
+class MyMiniClosureDelegateInstanceImpl<R (T::*)(ParamTypes..., B)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
-    typedef R (T::*func_type)(B, Params...);
+    typedef R (T::*func_type)(ParamTypes..., B);
 
 	MyMiniClosureDelegateInstanceImpl(func_type func, T &callee, B bound)
         : callee_(&callee)
@@ -22,9 +54,9 @@ public:
     {
     }
 
-    R operator()(Params... args) const
+    R operator()(ParamTypes... args) const
     {
-        return (callee_->*func_)(bound_, args...);
+        return (callee_->*func_)(args..., bound_);
     }
 
     bool operator==(const MyMiniClosureDelegateInstanceImpl &other) const
@@ -42,11 +74,11 @@ private:
 template <typename T>
 class MyMiniClosureDelegateInstanceImpl2;
 
-template <typename T, typename R, typename B1, typename B2, typename... ParamTypes>
-class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+template <typename T, typename R, typename... ParamTypes, typename B1, typename B2>
+class MyMiniClosureDelegateInstanceImpl2<R (T::*)(ParamTypes..., B1, B2)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
-    typedef R (T::*func_type)(B1, B2, Params...);
+    typedef R (T::*func_type)(ParamTypes..., B1, B2);
 
 	MyMiniClosureDelegateInstanceImpl2(func_type func, T &callee, B1 bound1, B2 bound2)
         : callee_(&callee)
@@ -58,7 +90,7 @@ public:
 
     R operator()(ParamTypes... args) const
     {
-        return (callee_->*func_)(bound_, bound2_, args...);
+        return (callee_->*func_)(args..., bound_, bound2_);
     }
 
     bool operator==(const MyMiniClosureDelegateInstanceImpl2 &other) const
@@ -74,6 +106,12 @@ private:
     B2 bound2_;
 };
 
+template <typename F, typename T>
+MyMiniClosureDelegateInstanceImpl0<F> make_closure0(F func, T &obj)
+{
+	return new MyMiniClosureDelegateInstanceImpl0<F>(func, obj);
+}
+
 template <typename F, typename T, typename B>
 MyMiniClosureDelegateInstanceImpl<F> make_closure(F func, T &obj, B b)
 {
@@ -84,6 +122,24 @@ template <typename F, typename T, typename B1, typename B2>
 MyMiniClosureDelegateInstanceImpl2<F> make_closure2(F func, T &obj, B1 b1, B2 b2)
 {
     return new MyMiniClosureDelegateInstanceImpl2<F>(func, obj, b1, b2);
+}
+
+template <typename F, typename T, typename B>
+MyMiniClosureDelegateInstanceImpl<F> make_delegate(F func, T &obj)
+{
+	return make_closure0(func, obj);
+}
+
+template <typename F, typename T, typename B>
+MyMiniClosureDelegateInstanceImpl<F> make_delegate(F func, T &obj, B b)
+{
+	return make_closure(func, obj, b);
+}
+
+template <typename F, typename T, typename B1, typename B2>
+MyMiniClosureDelegateInstanceImpl2<F> make_delegate(F func, T &obj, B1 b1, B2 b2)
+{
+	return new make_closure2(func, obj, b1, b2);
 }
 
 }

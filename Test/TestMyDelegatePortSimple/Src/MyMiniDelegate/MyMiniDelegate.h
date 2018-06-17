@@ -2,8 +2,10 @@
 #define __MyMiniDelegate_H
 
 #include "MyMiniDelegateBase.h"
-#include "MyMiniDelegateInstanceBase.h"
 #include "MyMiniMemFunPtrType.h"
+#include "MyMiniDelegateInstanceBase.h"
+#include "MyMiniDelegateInstanceImpl.h"
+#include "MyMiniClosureDelegateInstanceImpl.h"
 
 namespace MyNS
 {
@@ -25,13 +27,39 @@ public:
 		return this->mMyMiniDelegateInstance->call(Params...);
 	}
 
-	// R (T::*)(ParamTypes...) 参数会报错
-	// error C2146: syntax error: missing ')' before identifier 'func'
 	template <typename UserClass>
 	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(ParamTypes...)>::Type func, UserClass& callee)
 	{
 		this->mMyMiniDelegateInstance = make_delegate(func, callee);
 	}
+
+	template <typename UserClass>
+	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(ParamTypes...)>::Type func, UserClass& callee)
+	{
+		this->mMyMiniDelegateInstance = make_delegate(func, callee);
+	}
+
+	// 模板自动推断 const 值
+	// R (T::*)(ParamTypes...) 参数会报错
+	// error C2146: syntax error: missing ')' before identifier 'func'
+	template <typename UserClass, typename... VarTypes>
+	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type func, UserClass& callee, VarTypes... vars)
+	{
+		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars...);
+	}
+
+	// 模板自动推断 const 值
+	template <typename UserClass, typename... VarTypes>
+	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type func, UserClass& callee, VarTypes... vars)
+	{
+		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars);
+	}
+
+	//template <typename... VarTypes>
+	//void bindStaticHandle(func_type func, VarTypes...)
+	//{
+	//	this->mMyMiniDelegateInstance = make_delegate(func, VarTypes...);
+	//}
 
 	void bindStaticHandle(func_type func)
 	{
