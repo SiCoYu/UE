@@ -30,7 +30,7 @@ void PlayerOtherRender::load()
 	if (nullptr == this->mAuxPrefabLoader)
 	{
 		//this->mAuxPrefabLoader = AssetStrIdBufferObjectFactory.newObject<AuxScenePrefabLoader>(this->mResPath, true);
-		this->mAuxPrefabLoader = MY_NEW AuxScenePrefabLoader("", true, true);
+		this->mAuxPrefabLoader = MY_NEW AuxScenePrefabLoader();
 		//this->mAuxPrefabLoader.setEntityType(this->mEntity.getEntityType());
 		this->mAuxPrefabLoader->setDestroySelf(true);
 		this->mAuxPrefabLoader->setIsNeedInsRes(true);

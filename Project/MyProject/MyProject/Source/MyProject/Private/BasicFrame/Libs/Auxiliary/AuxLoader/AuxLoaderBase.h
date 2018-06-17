@@ -35,7 +35,7 @@ protected:
 	ResLoadPriority mResLoadPriority;
 
 public:
-	AuxLoaderBase(std::string path = "");
+	AuxLoaderBase();
 
 protected:
 	void reset();
