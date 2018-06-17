@@ -11,11 +11,11 @@ template <typename T>
 class MyMiniClosureDelegateInstanceImpl;
 
 // 函数指针特化
-// 无法推断
+// 无法推断，可变模板参数要放在最后
 //template <typename T, typename R, typename... ParamTypes, typename B>
 //class MyMiniClosureDelegateInstanceImpl<R (T::*)(ParamTypes..., B)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 template <typename T, typename R, typename B, typename... ParamTypes>
-class MyMiniClosureDelegateInstanceImpl<R(T::*)(B, ParamTypes...)>
+class MyMiniClosureDelegateInstanceImpl<R(T::*)(B, ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*func_type)(B, ParamTypes...);
@@ -37,6 +37,11 @@ public:
         return (callee_ == other.callee_) && (func_ == other.func_) &&
                (bound_ == other.bound_);
     }
+
+	virtual RetValType call(ParamTypes... Params) const override
+	{
+		return this->operator()(Params...);
+	}
 
 private:
     T *callee_;

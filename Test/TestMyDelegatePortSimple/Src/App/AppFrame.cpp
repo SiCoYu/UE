@@ -79,7 +79,7 @@ namespace MyNS
 		ret = aaa->call(10, 'a');
 
 		aaa->bindObjectHandle(&TestA::testHandleA, *testA, 10);
-		ret = aaa->call(10, 'a');
+		ret = aaa->call(8, 'a');
 	}
 
 	void AppFrame::dispose()
