@@ -25,6 +25,11 @@ namespace MyNS
 		return false;
 	}
 
+	void testHandleB(int a, char b)
+	{
+		
+	}
+
 	AppFrame::AppFrame()
 	{
 		
@@ -80,6 +85,12 @@ namespace MyNS
 
 		aaa->bindObjectHandle(&TestA::testHandleA, *testA, 10);
 		ret = aaa->call(8, 'a');
+
+
+		MyMiniDelegate<void, int, char>* bbb = new MyMiniDelegate<void, int, char>();
+
+		bbb->bindStaticHandle(&testHandleB);
+		bbb->call(10, 'a');
 	}
 
 	void AppFrame::dispose()

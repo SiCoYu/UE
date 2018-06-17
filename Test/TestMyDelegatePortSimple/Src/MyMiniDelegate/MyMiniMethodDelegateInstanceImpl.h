@@ -79,6 +79,7 @@ public:
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
+
     bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
     {
         return !(*this == other);

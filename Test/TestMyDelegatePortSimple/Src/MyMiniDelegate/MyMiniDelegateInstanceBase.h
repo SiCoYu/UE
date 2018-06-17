@@ -10,10 +10,11 @@ public:
 	typedef R RetValType;
 
 public:
-	virtual RetValType call(ParamTypes... Params) const
-	{
-		return *((RetValType*)0);
-	}
+	// 为了支持返回值是 void ，需要设置成纯虚函数
+	virtual RetValType call(ParamTypes... Params) const = 0;
+	//{
+	//	return *((RetValType*)0);
+	//}
 };
 } // namespace delegate
 
