@@ -10,10 +10,7 @@ namespace MyNS
  * non specialized template declaration for delegate
  */
 template <typename T>
-class MyMiniDelegateInstanceImpl : public MyMiniDelegateInstanceBase
-{
-
-};
+class MyMiniDelegateInstanceImpl;
 
 /**
  * specialization for member functions
@@ -23,18 +20,18 @@ class MyMiniDelegateInstanceImpl : public MyMiniDelegateInstanceBase
  * \tparam params       variadic template list for possible arguments
  *                      of the captured function
  */
-template <typename T, typename R, typename... Params>
-class MyMiniDelegateInstanceImpl<R (T::*)(Params...)> : public MyMiniDelegateInstanceBase
+template <typename T, typename R, typename... ParamTypes>
+class MyMiniDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
-    typedef R (T::*func_type)(Params...);
+    typedef R (T::*func_type)(ParamTypes...);
 
 	MyMiniDelegateInstanceImpl(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
     {}
 
-    R operator()(Params... args) const
+    R operator()(ParamTypes... args) const
     {
         return (callee_.*func_)(args...);
     }
@@ -56,18 +53,18 @@ private:
 /**
  * specialization for const member functions
  */
-template <typename T, typename R, typename... Params>
-class MyMiniDelegateInstanceImpl<R (T::*)(Params...) const>
+template <typename T, typename R, typename... ParamTypes>
+class MyMiniDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
-    typedef R (T::*func_type)(Params...) const;
+    typedef R (T::*func_type)(ParamTypes...) const;
 
 	MyMiniDelegateInstanceImpl(func_type func, const T& callee)
         : callee_(callee)
         , func_(func)
     {}
 
-    R operator()(Params... args) const
+    R operator()(ParamTypes... args) const
     {
         return (callee_.*func_)(args...);
     }
@@ -93,17 +90,17 @@ private:
  * \tparam params       variadic template list for possible arguments
  *                      of the captured function
  */
-template <typename R, typename... Params>
-class MyMiniDelegateInstanceImpl<R (*)(Params...)>
+template <typename R, typename... ParamTypes>
+class MyMiniDelegateInstanceImpl<R (*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
-    typedef R (*func_type)(Params...);
+    typedef R (*func_type)(ParamTypes...);
 
 	MyMiniDelegateInstanceImpl(func_type func)
         : func_(func)
     {}
 
-    R operator()(Params... args) const
+    R operator()(ParamTypes... args) const
     {
         return (*func_)(args...);
     }
@@ -116,6 +113,11 @@ public:
     {
         return !((*this) == other);
     }
+
+	virtual RetValType call(ParamTypes... Params) const override
+	{
+		return this->operator()(Params...);
+	}
 
 private:
     func_type func_;
@@ -134,15 +136,6 @@ template <typename T>
 MyMiniDelegateInstanceImpl<T>* make_delegate(T func)
 {
     return new MyMiniDelegateInstanceImpl<T>(func);
-}
-
-/**
- * function to deduce template parameters from call-context
- */
-template <typename F, typename T>
-MyMiniDelegateInstanceImpl<F> make_delegate(F func, T& obj)
-{
-    return MyMiniDelegateInstanceImpl<F>(func, obj);
 }
 
 } // namespace delegate

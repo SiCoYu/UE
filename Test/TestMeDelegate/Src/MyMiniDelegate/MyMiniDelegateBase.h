@@ -5,7 +5,16 @@ namespace MyNS
 {
 class MyMiniDelegateBase
 {
+public:
+	MyMiniDelegateBase()
+	{
 
+	}
+
+	virtual ~MyMiniDelegateBase()
+	{
+
+	}
 };
 }
 

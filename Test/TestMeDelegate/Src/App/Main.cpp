@@ -21,5 +21,7 @@ bool testHandle(int a, char b)
 
 void main()
 {
-	MyMiniDelegateBase* aaa = new MyMiniDelegate<bool, int, char>();
+	MyMiniDelegate<bool, int, char>* aaa = new MyMiniDelegate<bool, int, char>();
+	aaa->bindStaticHandle(&testHandle);
+	bool ret = aaa->call(10, 'a');
 }

@@ -6,20 +6,31 @@
 
 namespace MyNS
 {
-template <typename R, typename... Params>
-class MyMiniDelegate : MyMiniDelegateBase
+// error C2243: 'type cast': conversion from 'MyNS::MyMiniDelegate<bool,int,char> *' to 'MyNS::MyMiniDelegateBase *' exists, but is inaccessible
+//class MyMiniDelegate : MyMiniDelegateBase
+template <typename R, typename... ParamTypes>
+class MyMiniDelegate : public MyMiniDelegateBase
 {
-	typedef R(*func_type)(Params...);
+public:
+	typedef R RetValType;
+	typedef R (*func_type) (ParamTypes...);
 
 protected:
-	MyMiniDelegateInstanceBase* mMyMiniDelegateInstance;
+	MyMiniDelegateInstanceBase<R, ParamTypes...>* mMyMiniDelegateInstance;
 
 public:
-	//template <typename T>
-	//void bindObjectHandle(R (T::*)(Params...) func, T& callee)
-	//{
-	//	this->mMyMiniDelegateInstance = make_delegate(func, callee);
-	//}
+	RetValType call(ParamTypes... Params) const
+	{
+		return this->mMyMiniDelegateInstance->call(Params...);
+	}
+
+	// R (T::*)(ParamTypes...) 参数会报错
+	// error C2146: syntax error: missing ')' before identifier 'func'
+	template <typename T>
+	void bindObjectHandle(R (T::*)(ParamTypes...) func, T& callee)
+	{
+		this->mMyMiniDelegateInstance = make_delegate(func, callee);
+	}
 
 	void bindStaticHandle(func_type func)
 	{
