@@ -1,7 +1,25 @@
 #include "AppFrame.h"
+#include "MyMiniDelegateBase.h"
+#include "MyMiniDelegate.h"
+#include "MyMiniDelegateInstanceBase.h"
+#include "MyMiniDelegateInstanceImpl.h"
 
 namespace MyNS
 {
+	class TestA
+	{
+	public:
+		bool testHandle(int a, char b)
+		{
+			return false;
+		}
+	};
+
+	bool testHandle(int a, char b)
+	{
+		return false;
+	}
+
 	AppFrame::AppFrame()
 	{
 		
@@ -14,11 +32,11 @@ namespace MyNS
 
 	void AppFrame::init()
 	{
-		this->mCommonDelegate.BindRaw(this, &AppFrame::handle);
-		this->mCommonDelegate.Execute(10, 10, true);
+		//this->mCommonDelegate.BindRaw(this, &AppFrame::handle);
+		//this->mCommonDelegate.Execute(10, 10, true);
 
-		this->mCommonDelegate.BindStatic(&MyNS::handle);
-		this->mCommonDelegate.Execute(10, 10, true);
+		//this->mCommonDelegate.BindStatic(&MyNS::handle);
+		//this->mCommonDelegate.Execute(10, 10, true);
 
 		//this->mCommonDelegate.BindStatic(&MyNS::staticHandle);
 		//this->mCommonDelegate.Execute(10, 10, true);
@@ -46,6 +64,10 @@ namespace MyNS
 		{
 
 		}
+
+		MyMiniDelegate<bool, int, char>* aaa = new MyMiniDelegate<bool, int, char>();
+		aaa->bindStaticHandle(&testHandle);
+		bool ret = aaa->call(10, 'a');
 	}
 
 	void AppFrame::dispose()

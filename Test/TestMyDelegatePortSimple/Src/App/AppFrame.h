@@ -3,8 +3,8 @@
 #include "MySmDelegateCombinations.h"
 
 // 不定义返回类型的时候， this->mCommonDelegate = MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(this, &AppFrame::handle); 这样写会报错
-//MY_DECLARE_DELEGATE_ThreeParams(MyCommonDelegate, int, int, bool);
-MY_DECLARE_DELEGATE_RetVal_ThreeParams(void, MyCommonDelegate, int, int, bool);
+MY_DECLARE_DELEGATE_ThreeParams(MyCommonDelegate, int, int, bool);
+//MY_DECLARE_DELEGATE_RetVal_ThreeParams(void, MyCommonDelegate, int, int, bool);
 #define MakeMemFunDelegate(pThis, handle) MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(pThis, handle)
 #define MakeStaticFunDelegate(handle) MySmBaseDelegate<void, int, int, bool>::MySmBaseDelegate(0, handle)
 

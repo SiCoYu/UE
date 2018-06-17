@@ -27,7 +27,7 @@ ELSEIF(LINUX)
 
 ENDIF()
 
-include_directories(Src Src/App Src/MyDelegate Src/Templates Src/HAL)
+include_directories(Src Src/App Src/MyDelegate Src/MyMiniDelegate Src/Templates Src/HAL)
 
 IF(DEBUG_mode)
     add_definitions(-DDEBUG)
