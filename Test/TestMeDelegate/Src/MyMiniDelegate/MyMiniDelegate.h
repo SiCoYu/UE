@@ -1,25 +1,12 @@
 #ifndef __MyMiniDelegate_H
 #define __MyMiniDelegate_H
 
+#include "MyMiniDelegateBase.h"
+
 namespace MyNS
 {
-// we have C++11 support...yeah!
-/**
- * non specialized template declaration for delegate
- */
-template <typename T>
-class MyMiniDelegate;
-
-/**
- * specialization for member functions
- *
- * \tparam T            class-type of the object who's member function to call
- * \tparam R            return type of the function that gets captured
- * \tparam params       variadic template list for possible arguments
- *                      of the captured function
- */
-template <typename T, typename R, typename... Params>
-class MyMiniDelegate<R (T::*)(Params...)>
+template <typename R, typename... Params>
+class MyMiniDelegate : MyMiniDelegateBase
 {
 public:
     typedef R (T::*func_type)(Params...);
@@ -48,10 +35,7 @@ private:
     func_type func_;
 };
 
-/**
- * specialization for const member functions
- */
-template <typename T, typename R, typename... Params>
+template <typename R, typename... Params>
 class MyMiniDelegate<R (T::*)(Params...) const>
 {
 public:
