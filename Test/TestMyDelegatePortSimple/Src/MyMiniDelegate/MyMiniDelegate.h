@@ -50,7 +50,7 @@ public:
 
 	// 模板自动推断 const 值
 	template <typename UserClass, typename... VarTypes>
-	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type func, UserClass& callee, VarTypes... vars)
+	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass& callee, VarTypes... vars)
 	{
 		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars);
 	}
