@@ -16,9 +16,9 @@ namespace MyNS
 
 		bool testHandleA(int c, int a, char b)
 		{
-			MyMiniDelegate<bool, int, char>* aaa = new MyMiniDelegate<bool, int, char>();
-			aaa->bindObjectHandle(&TestA::testHandleB, this, 10);
-			bool ret = aaa->call(8, 'a');
+			MyMiniDelegate<bool, int, char> aaa;
+			aaa.bindObjectHandle(&TestA::testHandleB, this, 10);
+			bool ret = aaa.call(8, 'a');
 			return true;
 		}
 
@@ -55,8 +55,8 @@ namespace MyNS
 
 	void AppFrame::init()
 	{
-		this->mCommonDelegate.BindRaw(this, &AppFrame::handle);
-		this->mCommonDelegate.Execute(10, 10, true);
+		//this->mCommonDelegate.BindRaw(this, &AppFrame::handle);
+		//this->mCommonDelegate.Execute(10, 10, true);
 
 		//this->mCommonDelegate.BindStatic(&MyNS::handle);
 		//this->mCommonDelegate.Execute(10, 10, true);
@@ -88,27 +88,27 @@ namespace MyNS
 		//
 		//}
 
-		MyMiniDelegate<bool, int, char>* aaa = new MyMiniDelegate<bool, int, char>();
-		aaa->bindStaticHandle(&testHandle);
-		bool ret = aaa->call(10, 'a');
+		MyMiniDelegate<bool, int, char> aaa;
+		aaa.bindStaticHandle(&testHandle);
+		bool ret = aaa.call(10, 'a');
 
 		TestA* testA = new TestA();
-		aaa->bindObjectHandle(&TestA::testHandle, testA);
-		ret = aaa->call(10, 'a');
+		aaa.bindObjectHandle(&TestA::testHandle, testA);
+		ret = aaa.call(10, 'a');
 
-		aaa->bindObjectHandle(&TestA::testHandleA, testA, 10);
-		ret = aaa->call(8, 'a');
+		aaa.bindObjectHandle(&TestA::testHandleA, testA, 10);
+		ret = aaa.call(8, 'a');
 
-		aaa->bindObjectHandle(&TestA::testHandleB, testA, 10);
-		ret = aaa->call(8, 'a');
+		aaa.bindObjectHandle(&TestA::testHandleB, testA, 10);
+		ret = aaa.call(8, 'a');
 
-		aaa->bindObjectHandle(&TestA::testHandleC, testA);
-		ret = aaa->call(8, 'a');
+		aaa.bindObjectHandle(&TestA::testHandleC, testA);
+		ret = aaa.call(8, 'a');
 
-		MyMiniDelegate<void, int, char>* bbb = new MyMiniDelegate<void, int, char>();
+		MyMiniDelegate<void, int, char> bbb;
 
-		bbb->bindStaticHandle(&testHandleB);
-		bbb->call(10, 'a');
+		bbb.bindStaticHandle(&testHandleB);
+		bbb.call(10, 'a');
 	}
 
 	void AppFrame::dispose()
