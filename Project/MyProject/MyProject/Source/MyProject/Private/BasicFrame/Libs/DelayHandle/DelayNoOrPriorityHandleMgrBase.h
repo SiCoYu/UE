@@ -50,8 +50,8 @@ protected:
 
 private:
 	void _processDelayObjects(
-		IDispatchObject* dispObj, 
-		uint eventId = 0
+		uint eventId, 
+		IDispatchObject* dispObj
 	);
 };
 

@@ -66,7 +66,7 @@ void PlayerMainRender::load()
 		MakeEventDispatchDelegate(
 			this, 
 			&BeingEntityRender::onResLoaded, 
-			0
+			(uint)0
 		)
 	);
 }

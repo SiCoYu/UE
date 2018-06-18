@@ -20,7 +20,7 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 
-	void onParamHandle(IDispatchObject* dispObj, uint eventId = 0);
+	void onParamHandle(uint eventId, IDispatchObject* dispObj);
 };
 
 MY_END_NAMESPACE

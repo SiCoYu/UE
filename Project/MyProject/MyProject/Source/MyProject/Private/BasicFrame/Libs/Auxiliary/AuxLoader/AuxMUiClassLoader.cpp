@@ -48,7 +48,7 @@ void AuxMUiClassLoader::insPrefab()
 	this->mWidgetObject->AddToViewport();
 }
 
-void AuxMUiClassLoader::onPrefabLoaded(IDispatchObject* dispObj, uint eventId)
+void AuxMUiClassLoader::onPrefabLoaded(uint eventId, IDispatchObject* dispObj)
 {
 	if (nullptr != dispObj)
 	{
@@ -88,7 +88,7 @@ void AuxMUiClassLoader::onPrefabLoaded(IDispatchObject* dispObj, uint eventId)
 				MakeEventDispatchDelegate(
 					this, 
 					&AuxMObjectLoaderBase::onPrefabLoaded, 
-					0
+					(uint)0
 				)
 			);
 

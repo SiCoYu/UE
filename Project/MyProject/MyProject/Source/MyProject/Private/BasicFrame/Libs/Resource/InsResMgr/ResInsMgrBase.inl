@@ -80,7 +80,7 @@ void ResInsMgrBase::loadWithResCreatedAndNotLoad(LoadParam* param, T* resItem)
 		MakeEventDispatchDelegate(
 			this, 
 			&ResInsMgrBase::onLoadEventHandle, 
-			0
+			(uint)0
 		)
 	);
 

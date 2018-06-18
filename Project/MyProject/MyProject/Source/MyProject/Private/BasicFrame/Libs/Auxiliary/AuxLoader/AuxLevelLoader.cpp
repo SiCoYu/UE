@@ -43,7 +43,7 @@ void AuxLevelLoader::syncLoad(
 			MakeEventDispatchDelegate(
 				this, 
 				&AuxLevelLoader::onLevelLoaded, 
-				0
+				(uint)0
 			)
 		);
 		param->setIsResNeedCoroutine(false);
@@ -56,11 +56,11 @@ void AuxLevelLoader::syncLoad(
 		GPoolSys->deleteObj(param);
 
 		this->mLevelResItem = (LevelResItem*)(GResLoadMgr->getResource(param->getResUniqueId()));
-		this->onLevelLoaded(this->mLevelResItem);
+		this->onLevelLoaded((uint)0, this->mLevelResItem);
 	}
 	else if (this->hasLoadEnd())
 	{
-		this->onLevelLoaded(this->mLevelResItem);
+		this->onLevelLoaded((uint)0, this->mLevelResItem);
 	}
 }
 
@@ -87,7 +87,7 @@ void AuxLevelLoader::asyncLoad(
 			MakeEventDispatchDelegate(
 				this, 
 				&AuxLevelLoader::onLevelLoaded, 
-				0
+				(uint)0
 			)
 		);
 		param->setIsResNeedCoroutine(true);
@@ -101,11 +101,11 @@ void AuxLevelLoader::asyncLoad(
 	}
 	else if (this->hasLoadEnd())
 	{
-		this->onLevelLoaded(this->mLevelResItem);
+		this->onLevelLoaded((uint)0, this->mLevelResItem);
 	}
 }
 
-void AuxLevelLoader::onLevelLoaded(IDispatchObject* dispObj, uint eventId)
+void AuxLevelLoader::onLevelLoaded(uint eventId, IDispatchObject* dispObj)
 {
 	if (nullptr != dispObj)
 	{
@@ -133,7 +133,7 @@ void AuxLevelLoader::unload()
 	{
 		GResLoadMgr->unload(
 			this->mLevelResItem->getResUniqueId(), 
-			nullptr
+			EventDispatchDelegate()
 		);
 	}
 

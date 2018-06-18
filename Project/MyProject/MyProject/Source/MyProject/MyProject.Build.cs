@@ -115,7 +115,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Input",
 
                 "MyProject/Private/BasicFrame/Libs/Thread",
-                "MyProject/Private/BasicFrame/Libs/SimpleDelegate",
+                "MyProject/Private/BasicFrame/Libs/MySimpleDelegate",
                 "MyProject/Private/BasicFrame/Libs/Tools",
                 "MyProject/Private/BasicFrame/Libs/DelayHandle",
                 "MyProject/Private/BasicFrame/Libs/EventHandle",

@@ -54,16 +54,16 @@ void AuxTextureLoader::syncLoad(
 
         this->mTextureRes = GTextureInsResMgr->getAndSyncLoadRes(
             path, 
-			nullptr,
-			nullptr,
+			EventDispatchDelegate(),
+			EventDispatchDelegate(),
             this->mResLoadPriority
             );
-        this->onTextureLoaded(this->mTextureRes);
+        this->onTextureLoaded((uint)0, this->mTextureRes);
     }
     else if (this->hasLoadEnd())
     {
         //this->onTextureLoaded(this->mTextureRes);
-        this->onTextureLoaded(nullptr);
+        this->onTextureLoaded((uint)0, nullptr);
     }
 }
 
@@ -84,14 +84,14 @@ void AuxTextureLoader::asyncLoad(
     {
         this->onStartLoad();
 
-        if (nullptr == progressHandle)
+        if (progressHandle.empty())
         {
             this->mTextureRes = GTextureInsResMgr->getAndAsyncLoadRes(
                 path,
 				MakeEventDispatchDelegate(
 					this,
 					&AuxTextureLoader::onTextureLoaded, 
-					0
+					(uint)0
 				)
             );
         }
@@ -102,23 +102,23 @@ void AuxTextureLoader::asyncLoad(
 				MakeEventDispatchDelegate(
 					this,
 					&AuxTextureLoader::onTextureLoaded, 
-					0
+					(uint)0
 				),
 				MakeEventDispatchDelegate(
 					this,
 					&AuxLoaderBase::onProgressEventHandle, 
-					0
+					(uint)0
 				)
             );
         }
     }
     else if (this->hasLoadEnd())
     {
-        this->onTextureLoaded(nullptr);
+        this->onTextureLoaded((uint)0, nullptr);
     }
 }
 
-void AuxTextureLoader::onTextureLoaded(IDispatchObject* dispObj, uint eventId)
+void AuxTextureLoader::onTextureLoaded(uint eventId, IDispatchObject* dispObj)
 {
     if (nullptr != dispObj)
     {
@@ -136,11 +136,13 @@ void AuxTextureLoader::onTextureLoaded(IDispatchObject* dispObj, uint eventId)
 
 			GTextureInsResMgr->unload(
                 this->mTextureRes->getResUniqueId(),
-				EventDispatchDelegate(
+				MakeEventDispatchDelegate(
 					this,
-					&AuxTextureLoader::onTextureLoaded
-					)
-				);
+					&AuxTextureLoader::onTextureLoaded, 
+					(uint)0
+				)
+			);
+
             this->mTextureRes = nullptr;
         }
     }
@@ -157,11 +159,13 @@ void AuxTextureLoader::unload()
     {
 		GTextureInsResMgr->unload(
             this->mTextureRes->getResUniqueId(),
-			EventDispatchDelegate(
+			MakeEventDispatchDelegate(
 				this,
-				&AuxTextureLoader::onTextureLoaded
-				)
-            );
+				&AuxTextureLoader::onTextureLoaded, 
+				(uint)0
+			)
+        );
+
         this->mTextureRes = nullptr;
     }
 

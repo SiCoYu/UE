@@ -38,18 +38,18 @@ public:
 
 	virtual void syncLoad(
 		std::string path,
-		EventDispatchDelegate evtHandle = nullptr,
-		EventDispatchDelegate progressHandle = nullptr
+		EventDispatchDelegate evtHandle = EventDispatchDelegate(),
+		EventDispatchDelegate progressHandle = EventDispatchDelegate()
 	) override;
 
     // 异步加载对象
 	virtual void asyncLoad(
 		std::string path,
 		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle = nullptr
+		EventDispatchDelegate progressHandle = EventDispatchDelegate()
 	) override;
 
-	void onMaterialLoaded(IDispatchObject* dispObj, uint eventId = 0);
+	void onMaterialLoaded(uint eventId, IDispatchObject* dispObj);
 	virtual void unload() override;
 };
 

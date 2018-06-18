@@ -77,7 +77,7 @@ protected:
 
 public:
 	void removeWillLoadItem(std::string resUniqueId);
-	void onLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
+	void onLoadEventHandle(uint eventId, IDispatchObject* dispObj);
 	void onLoaded(DownloadItem* item);
 	void onFailed(DownloadItem* item);
 
@@ -86,7 +86,7 @@ protected:
 	void loadNextItem();
 	DownloadItem* findDownloadItemFormPool();
     // 资源加载完成，触发下一次加载
-	void onMsgRouteResLoad(IDispatchObject* dispObj, uint eventId = 0);
+	void onMsgRouteResLoad(uint eventId, IDispatchObject* dispObj);
 };
 
 MY_END_NAMESPACE

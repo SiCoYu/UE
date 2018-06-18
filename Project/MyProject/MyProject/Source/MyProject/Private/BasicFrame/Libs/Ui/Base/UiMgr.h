@@ -79,12 +79,12 @@ public:
 	void loadWidgetRes(UiFormId formId);
 	void loadFromFile(std::string reaPath, EventDispatchDelegate onLoadEventHandle);
 
-	void onCodeLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
-	void onWidgetLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
+	void onCodeLoadEventHandle(uint eventId, IDispatchObject* dispObj);
+	void onWidgetLoadEventHandle(uint eventId, IDispatchObject* dispObj);
 	void onCodeloadedByRes(ClassAssetInsRes* res);
 	void onCodeLoadedByForm(UForm* form);
 	void onWidgetloadedByRes(ClassAssetInsRes* res);
-	void onWidgetAuxUIClassloadedByRes(IDispatchObject* res, uint eventId = 0);
+	void onWidgetAuxUIClassloadedByRes(uint eventId, IDispatchObject* res);
 
 	void onResize(int viewWidth, int viewHeight);
 

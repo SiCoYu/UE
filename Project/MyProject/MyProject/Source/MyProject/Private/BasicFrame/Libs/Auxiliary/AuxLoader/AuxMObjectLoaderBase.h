@@ -56,19 +56,19 @@ public:
 
 	virtual void syncLoad(
 		std::string path, 
-		EventDispatchDelegate evtHandle = nullptr,
-		EventDispatchDelegate progressHandle = nullptr
+		EventDispatchDelegate evtHandle = EventDispatchDelegate(),
+		EventDispatchDelegate progressHandle = EventDispatchDelegate()
 	) override;
 
     // 异步加载对象
 	virtual void asyncLoad(
 		std::string path, 
 		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle = nullptr
+		EventDispatchDelegate progressHandle = EventDispatchDelegate()
 	) override;
 
-	virtual void onPrefabLoaded(IDispatchObject* dispObj, uint eventId = 0);
-	void onPrefabIns(IDispatchObject* dispObj, uint eventId = 0);
+	virtual void onPrefabLoaded(uint eventId, IDispatchObject* dispObj);
+	void onPrefabIns(uint eventId, IDispatchObject* dispObj);
 
     // 所有的资源都加载完成
 	void onAllFinish();
@@ -77,8 +77,8 @@ public:
 
     // 获取预制模板
 	UObject* getPrefabTmpl();
-	UObject* InstantiateObject(EventDispatchDelegate insHandle = nullptr);
-	void onInstantiateObjectFinish(IDispatchObject* dispObj = nullptr, uint eventId = 0);
+	UObject* InstantiateObject(EventDispatchDelegate insHandle = EventDispatchDelegate());
+	void onInstantiateObjectFinish(uint eventId, IDispatchObject* dispObj = nullptr);
 };
 
 MY_END_NAMESPACE

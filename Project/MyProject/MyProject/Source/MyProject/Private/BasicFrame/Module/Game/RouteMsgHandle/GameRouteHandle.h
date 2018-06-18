@@ -21,8 +21,8 @@ public:
 	virtual void dispose() override;
 
 protected:
-	void threadLog(IDispatchObject* dispObj, uint eventId = 0);
-	void onSocketOpened(IDispatchObject* dispObj, uint eventId = 0);
+	void threadLog(uint eventId, IDispatchObject* dispObj);
+	void onSocketOpened(uint eventId, IDispatchObject* dispObj);
 };
 
 MY_END_NAMESPACE

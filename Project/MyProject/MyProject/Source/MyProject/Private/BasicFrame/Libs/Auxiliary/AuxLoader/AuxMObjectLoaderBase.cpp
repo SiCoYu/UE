@@ -109,11 +109,11 @@ void AuxMObjectLoaderBase::syncLoad(
 		{
 			this->mPrefabRes = GObjectAssetInsMgr->getAndSyncLoadRes(path, evtHandle);
 		}
-		this->onPrefabLoaded(mPrefabRes);
+		this->onPrefabLoaded((uint)0, this->mPrefabRes);
 	}
 	else if (this->hasLoadEnd())
 	{
-		this->onPrefabLoaded(mPrefabRes);
+		this->onPrefabLoaded((uint)0, this->mPrefabRes);
 	}
 }
 
@@ -134,7 +134,7 @@ void AuxMObjectLoaderBase::asyncLoad(
 				MakeEventDispatchDelegate(
 					this, 
 					&AuxMObjectLoaderBase::onPrefabLoaded, 
-					0
+					(uint)0
 				)
 			);
 		}
@@ -145,18 +145,18 @@ void AuxMObjectLoaderBase::asyncLoad(
 				MakeEventDispatchDelegate(
 					this, 
 					&AuxMObjectLoaderBase::onPrefabLoaded, 
-					0
+					(uint)0
 				)
 			);
 		}
 	}
 	else if (this->hasLoadEnd())
 	{
-		this->onPrefabLoaded(this->mPrefabRes);
+		this->onPrefabLoaded((uint)0, this->mPrefabRes);
 	}
 }
 
-void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj, uint eventId)
+void AuxMObjectLoaderBase::onPrefabLoaded(uint eventId, IDispatchObject* dispObj)
 {
 	if (nullptr != dispObj)
 	{
@@ -172,11 +172,12 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj, uint eventId
 				if (this->mIsInsNeedCoroutine)
 				{
 					this->mResInsEventDispatch = MY_NEW ResInsEventDispatch();
+
 					this->mResInsEventDispatch->addEventHandle(
 						MakeEventDispatchDelegate(
 							this, 
 							&AuxMObjectLoaderBase::onPrefabIns, 
-							0
+							(uint)0
 						)
 					);
 
@@ -217,9 +218,10 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj, uint eventId
 				MakeEventDispatchDelegate(
 					this, 
 					&AuxMObjectLoaderBase::onPrefabLoaded, 
-					0
+					(uint)0
 				)
 			);
+
 			this->mPrefabRes = nullptr;
 
 			if (this->mResEventDispatch != nullptr)
@@ -237,7 +239,7 @@ void AuxMObjectLoaderBase::onPrefabLoaded(IDispatchObject* dispObj, uint eventId
 	}
 }
 
-void AuxMObjectLoaderBase::onPrefabIns(IDispatchObject* dispObj, uint eventId)
+void AuxMObjectLoaderBase::onPrefabIns(uint eventId, IDispatchObject* dispObj)
 {
 	this->mResInsEventDispatch = (ResInsEventDispatch*)dispObj;
 	this->setSelfActor(this->mResInsEventDispatch->getInsActor());
@@ -285,7 +287,7 @@ void AuxMObjectLoaderBase::unload()
 			MakeEventDispatchDelegate(
 				this, 
 				&AuxMObjectLoaderBase::onPrefabLoaded, 
-				0
+				(uint)0
 			)
 		);
 
@@ -325,11 +327,11 @@ UObject* AuxMObjectLoaderBase::getPrefabTmpl()
 
 UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle)
 {
-	if (nullptr == this->mInsEventDispatch && nullptr != insHandle)
+	if (nullptr == this->mInsEventDispatch && !insHandle.empty())
 	{
 		this->mInsEventDispatch = MY_NEW ResInsEventDispatch();
 	}
-	if (nullptr != insHandle)
+	if (!insHandle.empty())
 	{
 		this->mInsEventDispatch->addEventHandle(insHandle);
 	}
@@ -344,7 +346,7 @@ UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle
 			MakeEventDispatchDelegate(
 				this,
 				&AuxMObjectLoaderBase::onInstantiateObjectFinish, 
-				0
+				(uint)0
 			)
 		);
 
@@ -394,13 +396,13 @@ UObject* AuxMObjectLoaderBase::InstantiateObject(EventDispatchDelegate insHandle
 			);
 		}
 
-		this->onInstantiateObjectFinish();
+		this->onInstantiateObjectFinish((uint)0, nullptr);
 	}
 
 	return this->mSelfActor;
 }
 
-void AuxMObjectLoaderBase::onInstantiateObjectFinish(IDispatchObject* dispObj, uint eventId)
+void AuxMObjectLoaderBase::onInstantiateObjectFinish(uint eventId, IDispatchObject* dispObj)
 {
 	if (nullptr != dispObj)
 	{

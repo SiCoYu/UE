@@ -94,7 +94,7 @@ protected:
 	void unloadNoRef(std::string path);
 
 public:
-	virtual void onLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
+	virtual void onLoadEventHandle(uint eventId, IDispatchObject* dispObj);
 	ResInsBase* getRes(std::string path);
     // 卸载所有的资源
 	void unloadAll();

@@ -37,7 +37,7 @@ public:
 	void loadScene(std::string filename, EventDispatchDelegate func);
 	void unloadScene();
 	void loadSceneRes(std::string filename);
-	void onSceneResLoadded(IDispatchObject* dispObj, uint eventId = 0);
+	void onSceneResLoadded(uint eventId, IDispatchObject* dispObj);
     // 卸载多有的场景
 	void unloadAll();
 };

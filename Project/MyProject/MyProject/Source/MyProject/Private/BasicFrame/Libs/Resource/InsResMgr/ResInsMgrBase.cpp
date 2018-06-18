@@ -45,7 +45,7 @@ void ResInsMgrBase::dispose()
 	while (index < listLen)
 	{
 		resIns = resInsList.get(listLen);
-		this->unload(resIns->getPath(), nullptr);
+		this->unload(resIns->getPath(), EventDispatchDelegate());
 
 		index += 1;
 	}
@@ -67,9 +67,11 @@ void ResInsMgrBase::loadWithResCreatedAndLoad(LoadParam* param)
 
 	if (resIns->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
-		if (nullptr != param->getLoadEventHandle())
+		if (!param->getLoadEventHandle().empty())
 		{
-			param->getLoadEventHandle()(resIns, 0);        // 直接通知上层完成加载
+			param->getLoadEventHandle()(
+				resIns
+			);        // 直接通知上层完成加载
 		}
 	}
 	else
@@ -135,7 +137,7 @@ void ResInsMgrBase::unloadNoRef(std::string path)
 		MakeEventDispatchDelegate(
 			this, 
 			&ResInsMgrBase::onLoadEventHandle, 
-			0
+			(uint)0
 		)
 	);
 
@@ -145,7 +147,7 @@ void ResInsMgrBase::unloadNoRef(std::string path)
 	MY_SAFE_DISPOSE(resIns);
 }
 
-void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
+void ResInsMgrBase::onLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	ResItem* res = (ResItem*)dispObj;
 	std::string path = res->getPath();
@@ -166,7 +168,7 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 					MakeEventDispatchDelegate(
 						this, 
 						&ResInsMgrBase::onLoadEventHandle, 
-						0
+						(uint)0
 					)
 				);
 			}
@@ -179,7 +181,7 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 				MakeEventDispatchDelegate(
 					this, 
 					&ResInsMgrBase::onLoadEventHandle, 
-					0
+					(uint)0
 				)
 			);
 		}
@@ -192,7 +194,7 @@ void ResInsMgrBase::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 			MakeEventDispatchDelegate(
 				this, 
 				&ResInsMgrBase::onLoadEventHandle, 
-				0
+				(uint)0
 			)
 		);
 	}
@@ -221,7 +223,7 @@ void ResInsMgrBase::unloadAll()
 			MakeEventDispatchDelegate(
 				this, 
 				&ResInsMgrBase::onLoadEventHandle, 
-				0
+				(uint)0
 			)
 		);
 	}

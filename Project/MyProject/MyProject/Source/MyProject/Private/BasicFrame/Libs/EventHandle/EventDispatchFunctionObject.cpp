@@ -48,7 +48,7 @@ void EventDispatchFunctionObject::clearEventHandle()
 
 void EventDispatchFunctionObject::call(IDispatchObject* dispObj)
 {
-	this->mHandle(dispObj, 0);
+	this->mHandle(dispObj);
 }
 
 MY_END_NAMESPACE

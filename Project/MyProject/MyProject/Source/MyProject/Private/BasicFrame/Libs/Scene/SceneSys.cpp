@@ -56,7 +56,7 @@ void SceneSys::loadScene(std::string filename, EventDispatchDelegate func)
 	// 加载新的场景
 	this->mScene = MY_NEW Scene();
 
-	if (func != nullptr)
+	if (!func.empty())
 	{
 		this->mOnSceneLoadedDispatch->addEventHandle(func);
 	}
@@ -100,12 +100,12 @@ void SceneSys::loadSceneRes(std::string filename)
 		MakeEventDispatchDelegate(
 			this,
 			&SceneSys::onSceneResLoadded, 
-			0
+			(uint)0
 		)
 	);
 }
 
-void SceneSys::onSceneResLoadded(IDispatchObject* dispObj, uint eventId)
+void SceneSys::onSceneResLoadded(uint eventId, IDispatchObject* dispObj)
 {
 	//ResItem res = dispObj as ResItem;
 	this->mOnSceneLoadedDispatch->dispatchEvent(mScene);

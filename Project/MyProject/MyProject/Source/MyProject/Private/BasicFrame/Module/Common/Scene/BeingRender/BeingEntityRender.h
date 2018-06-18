@@ -41,7 +41,7 @@ public:
 	virtual void updateLocalTransform() override;
 	// 资源加载
 	virtual void load() override;
-	virtual void onResLoaded(IDispatchObject* dispObj, uint uniqueId = 0);
+	virtual void onResLoaded(uint uniqueId, IDispatchObject* dispObj);
 	virtual void attachToParentNode(SceneEntityRenderBase* render);
 
 protected:

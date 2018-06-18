@@ -1,11 +1,11 @@
 ﻿#ifndef __InputMgr_H
 #define __InputMgr_H
 
+#include <string>
+
 #include "MyProject.h"
 #include "MCamera.h"
 #include "UtilEngineWrap.h"
-//#include "FastDelegate.h"
-#include <string>
 #include "MDictionary.h"
 #include "MRay.h"
 #include "IOEventDispatchDelegate.h"
@@ -101,8 +101,6 @@ public:
  */
 class InputMgr
 {
-	
-
 public:
 	//static BetterList<UICamera> list = new BetterList<UICamera>();
 
@@ -112,9 +110,9 @@ public:
 
 	static KeyEventDispatchDelegate GetKey;
 
-	static fastdelegate::FastDelegate1<const FName, float> GetAxis;
+	static AxisEventDispatchDelegate GetAxis;
 
-	static fastdelegate::FastDelegate1<void> onScreenResize;
+	static ScreenResizeEventDispatchDelegate onScreenResize;
 
 	EventType eventType;
 

@@ -22,7 +22,7 @@ MaterialInsRes* MaterialInsResMgr::getAndSyncLoadRes(
 	return Super::getAndSyncLoad<MaterialInsRes>(
 		path, 
 		handle
-		);
+	);
 }
 
 MaterialInsRes* MaterialInsResMgr::getAndAsyncLoadRes(

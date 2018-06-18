@@ -98,12 +98,12 @@ void BeingEntityRender::load()
 		MakeEventDispatchDelegate(
 			this,
 			&BeingEntityRender::onResLoaded, 
-			0
+			(uint)0
 		)
 	);
 }
 
-void BeingEntityRender::onResLoaded(IDispatchObject* dispObj, uint uniqueId)
+void BeingEntityRender::onResLoaded(uint uniqueId, IDispatchObject* dispObj)
 {
 	AActor* actor = Cast<AActor>(this->mAuxPrefabLoader->getActor());
 	this->setSelfActor(actor);

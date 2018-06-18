@@ -61,7 +61,7 @@ void EventDispatch::addEventHandle(EventDispatchDelegate handle)
 	EventDispatchFunctionObject* funcObject = MY_NEW EventDispatchFunctionObject();
 	funcObject->mHandle = handle;
 
-	if (nullptr != handle)
+	if (!handle.empty())
 	{
 		this->_addObject(funcObject);
 	}
@@ -92,7 +92,7 @@ void EventDispatch::removeEventHandle(EventDispatchDelegate handle)
 
 	while (index < listLen)
 	{
-		if (this->mHandleList[index]->mHandle, handle)
+		if (this->mHandleList[index]->mHandle == handle)
 		{
 			break;
 		}

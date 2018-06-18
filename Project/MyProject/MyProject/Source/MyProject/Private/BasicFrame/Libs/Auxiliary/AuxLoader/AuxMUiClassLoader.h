@@ -30,7 +30,7 @@ public:
 	AuxMUiClassLoader();
 
 public:
-	virtual void onPrefabLoaded(IDispatchObject* dispObj, uint eventId = 0) override;
+	virtual void onPrefabLoaded(uint eventId, IDispatchObject* dispObj) override;
 	void setUMGOuterType(UMGOuterType value);
 	UUMGWidget* getWidgetObject();
 	void insPrefab();

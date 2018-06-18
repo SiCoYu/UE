@@ -43,7 +43,7 @@ void AuxDownloader::download(
 		param->mLoadEventHandle = MakeEventDispatchDelegate(
 			this, 
 			&AuxDownloader::onDownloaded, 
-			0
+			(uint)0
 		);
 		param->mFileLen = fileLen;
 		param->mIsWriteFile = isWriteFile;
@@ -53,12 +53,12 @@ void AuxDownloader::download(
 	}
 	else if (this->hasLoadEnd())
 	{
-		this->onDownloaded(this->mDownloadItem);
+		this->onDownloaded((uint)0, this->mDownloadItem);
 	}
 }
 
 // 下载完成
-void AuxDownloader::onDownloaded(IDispatchObject* dispObj, uint eventId)
+void AuxDownloader::onDownloaded(uint eventId, IDispatchObject* dispObj)
 {
 	if (nullptr != dispObj)
 	{

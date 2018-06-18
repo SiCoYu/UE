@@ -28,13 +28,13 @@ protected:
 	// 下载一个资源
 	virtual void download(
 		std::string origPath, 
-		EventDispatchDelegate dispObj = nullptr, 
+		EventDispatchDelegate dispObj = EventDispatchDelegate(),
 		long fileLen = 0, 
 		bool isWriteFile = true, 
 		int downloadType = (int)DownloadType::eHttpWeb
 	) override;
     // 下载完成
-	void onDownloaded(IDispatchObject* dispObj, uint eventId = 0);
+	void onDownloaded(uint eventId, IDispatchObject* dispObj);
 };
 
 MY_END_NAMESPACE

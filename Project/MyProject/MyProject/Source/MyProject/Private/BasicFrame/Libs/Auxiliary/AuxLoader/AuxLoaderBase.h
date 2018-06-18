@@ -69,26 +69,26 @@ public:
 	// 实例化失败
 	void onInsFailed();
 
-	virtual void onProgressEventHandle(IDispatchObject* dispObj, uint eventId = 0);
+	virtual void onProgressEventHandle(uint eventId, IDispatchObject* dispObj);
 
 protected:
-	void addEventHandle(EventDispatchDelegate evtHandle = nullptr);
+	void addEventHandle(EventDispatchDelegate evtHandle = EventDispatchDelegate());
 
 	virtual void syncLoad(
 		std::string path, 
-		EventDispatchDelegate evtHandle = nullptr,
-		EventDispatchDelegate progressHandle = nullptr
+		EventDispatchDelegate evtHandle = EventDispatchDelegate(),
+		EventDispatchDelegate progressHandle = EventDispatchDelegate()
 	);
 
 	virtual void asyncLoad(
 		std::string path, 
 		EventDispatchDelegate evtHandle,
-		EventDispatchDelegate progressHandle = nullptr
+		EventDispatchDelegate progressHandle = EventDispatchDelegate()
 	);
 
 	virtual void download(
 		std::string origPath, 
-		EventDispatchDelegate handle = nullptr,
+		EventDispatchDelegate handle = EventDispatchDelegate(),
 		long fileLen = 0, 
 		bool isWriteFile = true, 
 		int downloadType = (int)DownloadType::eHttpWeb

@@ -107,7 +107,7 @@ void UUiFunctionBar::onTestButtonTouch()
 		MakeEventDispatchDelegate(
 			this, 
 			&UUiFunctionBar::onLevelLoadedDispatch, 
-			0
+			(uint)0
 		)
 	);
 
@@ -153,7 +153,7 @@ void UUiFunctionBar::onLevelLoaded()
 	int num = 0;
 }
 
-void UUiFunctionBar::onLevelLoadedDispatch(IDispatchObject* dispObj, uint eventId)
+void UUiFunctionBar::onLevelLoadedDispatch(uint eventId, IDispatchObject* dispObj)
 {
 	int num = 0;
 }

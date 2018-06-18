@@ -71,7 +71,7 @@ void ResLoadMgr::dispose()
 	while (index < listLen)
 	{
 		res = resList.get(index);
-		this->unload(res->getPath(), nullptr);
+		this->unload(res->getPath(), EventDispatchDelegate());
 
 		index += 1;
 	}
@@ -320,7 +320,7 @@ ResItem* ResLoadMgr::createResItem(LoadParam* param)
 	resItem->getRefCountResLoadResultNotify()->getRefCount()->incRef();
 	resItem->setLoadParam(param);
 
-	if (nullptr != param->getLoadEventHandle())
+	if (!param->getLoadEventHandle().empty())
 	{
 		resItem->getRefCountResLoadResultNotify()->getLoadResEventDispatch()->addEventHandle(param->getLoadEventHandle());
 	}
@@ -382,7 +382,7 @@ LoadItem* ResLoadMgr::createLoadItem(LoadParam* param)
 		MakeEventDispatchDelegate(
 			this, 
 			&ResLoadMgr::onLoadEventHandle, 
-			0
+			(uint)0
 		)
 	);
 
@@ -396,9 +396,11 @@ void ResLoadMgr::loadWithResCreatedAndLoad(LoadParam* param)
 
 	if (this->mLoadData->mPath2ResDic[param->mPath]->getRefCountResLoadResultNotify()->getResLoadState()->hasLoaded())
 	{
-		if (nullptr != param->getLoadEventHandle())
+		if (!param->getLoadEventHandle().empty())
 		{
-			param->getLoadEventHandle()(this->mLoadData->mPath2ResDic[param->mPath], 0);
+			param->getLoadEventHandle()(
+				this->mLoadData->mPath2ResDic[param->mPath]
+			);
 		}
 	}
 	else
@@ -440,7 +442,7 @@ void ResLoadMgr::loadWithResCreatedAndNotLoad(LoadParam* param, ResItem* resItem
 			MakeEventDispatchDelegate(
 				this, 
 				&ResLoadMgr::onLoadEventHandle, 
-				0
+				(uint)0
 			)
 		);
 	}
@@ -546,7 +548,7 @@ void ResLoadMgr::unloadNoRef(std::string path)
 	}
 }
 
-void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
+void ResLoadMgr::onLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	LoadItem* item = (LoadItem*)dispObj;
 
@@ -554,7 +556,7 @@ void ResLoadMgr::onLoadEventHandle(IDispatchObject* dispObj, uint eventId)
 		MakeEventDispatchDelegate(
 			this, 
 			&ResLoadMgr::onLoadEventHandle, 
-			0
+			(uint)0
 		)
 	);
 

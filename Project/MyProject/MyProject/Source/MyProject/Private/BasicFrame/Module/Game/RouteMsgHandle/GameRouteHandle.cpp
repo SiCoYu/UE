@@ -23,7 +23,7 @@ void GameRouteHandle::init()
 		MakeEventDispatchDelegate(
 			this, 
 			&GameRouteHandle::threadLog, 
-			0
+			(uint)0
 		)
 	);
     this->addMsgRouteHandle(
@@ -31,7 +31,7 @@ void GameRouteHandle::init()
 		MakeEventDispatchDelegate(
 			this, 
 			&GameRouteHandle::onSocketOpened, 
-			0
+			(uint)0
 		)
 	);
 }
@@ -43,7 +43,7 @@ void GameRouteHandle::dispose()
 		MakeEventDispatchDelegate(
 			this, 
 			&GameRouteHandle::threadLog, 
-			0
+			(uint)0
 		)
 	);
     this->removeMsgRouteHandle(
@@ -51,19 +51,19 @@ void GameRouteHandle::dispose()
 		MakeEventDispatchDelegate(
 			this,
 			&GameRouteHandle::onSocketOpened, 
-			0
+			(uint)0
 		)
 	);
 
 	Super::dispose();
 }
 
-void GameRouteHandle::threadLog(IDispatchObject* dispObj, uint eventId)
+void GameRouteHandle::threadLog(uint eventId, IDispatchObject* dispObj)
 {
     MsgRouteBase* msg = (MsgRouteBase*)dispObj;
 }
 
-void GameRouteHandle::onSocketOpened(IDispatchObject* dispObj, uint eventId)
+void GameRouteHandle::onSocketOpened(uint eventId, IDispatchObject* dispObj)
 {
     
 }

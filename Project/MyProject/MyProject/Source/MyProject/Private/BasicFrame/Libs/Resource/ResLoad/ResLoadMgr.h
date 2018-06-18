@@ -79,7 +79,7 @@ protected:
 	void unloadNoRef(std::string path);
 
 public:
-	void onLoadEventHandle(IDispatchObject* dispObj, uint eventId = 0);
+	void onLoadEventHandle(uint eventId, IDispatchObject* dispObj);
 	void onLoaded(LoadItem* item);
 	void onFailed(LoadItem* item);
 

@@ -53,5 +53,5 @@ public:
 	void onLevelLoaded();
 
 public:
-	void onLevelLoadedDispatch(IDispatchObject* dispObj, uint eventId = 0);
+	void onLevelLoadedDispatch(uint eventId, IDispatchObject* dispObj);
 };

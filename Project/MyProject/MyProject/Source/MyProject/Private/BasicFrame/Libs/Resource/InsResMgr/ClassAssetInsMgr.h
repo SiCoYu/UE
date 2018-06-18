@@ -28,8 +28,8 @@ public:
 	virtual void dispose() override;
 	virtual ResPackType getResPackType() override;
 
-	ClassAssetInsRes* getAndSyncLoadRes(std::string path, EventDispatchDelegate handle = nullptr);
-	ClassAssetInsRes* getAndAsyncLoadRes(std::string path, EventDispatchDelegate handle = nullptr);
+	ClassAssetInsRes* getAndSyncLoadRes(std::string path, EventDispatchDelegate handle = EventDispatchDelegate());
+	ClassAssetInsRes* getAndAsyncLoadRes(std::string path, EventDispatchDelegate handle = EventDispatchDelegate());
 };
 
 MY_END_NAMESPACE

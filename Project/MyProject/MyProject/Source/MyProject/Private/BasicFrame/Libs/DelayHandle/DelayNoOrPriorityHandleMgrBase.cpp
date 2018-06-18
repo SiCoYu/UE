@@ -32,7 +32,7 @@ DelayNoOrPriorityHandleMgrBase::DelayNoOrPriorityHandleMgrBase()
 		MakeEventDispatchDelegate(
 			this,
 			&DelayNoOrPriorityHandleMgrBase::_processDelayObjects, 
-			0
+			(uint)0
 		)
 	);
 
@@ -167,7 +167,7 @@ bool DelayNoOrPriorityHandleMgrBase::_isInDepth()
 	return ret;
 }
 
-void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(IDispatchObject* dispObj, uint eventId)
+void DelayNoOrPriorityHandleMgrBase::_processDelayObjects(uint eventId, IDispatchObject* dispObj)
 {
 	int index = 0;
 	// len 是 Python 的关键字

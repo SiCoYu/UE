@@ -82,7 +82,7 @@ void MDataStream::onAsyncOpened()
 
 void MDataStream::checkAndOpen(EventDispatchDelegate openedDisp)
 {
-	if (openedDisp != nullptr)
+	if (!openedDisp.empty())
 	{
 		this->addOpenedHandle(openedDisp);
 	}

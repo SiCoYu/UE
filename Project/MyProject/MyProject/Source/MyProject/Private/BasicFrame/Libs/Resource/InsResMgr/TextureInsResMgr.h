@@ -23,13 +23,13 @@ public:
 	TextureInsRes* getAndSyncLoadRes(
 		std::string path, 
 		EventDispatchDelegate handle, 
-		EventDispatchDelegate progressHandle = nullptr, 
+		EventDispatchDelegate progressHandle = EventDispatchDelegate(),
 		ResLoadPriority priority = ResLoadPriority::eRLP_Middle_1000
 	);
 	TextureInsRes* getAndAsyncLoadRes(
 		std::string path, 
 		EventDispatchDelegate handle,
-		EventDispatchDelegate progressHandle = nullptr,
+		EventDispatchDelegate progressHandle = EventDispatchDelegate(),
 		ResLoadPriority priority = ResLoadPriority::eRLP_Middle_1000
 	);
 };

@@ -34,7 +34,7 @@ void LoadParam::init()
 
 	this->mIsResNeedCoroutine = false;
 	this->mIsLoadNeedCoroutine = false;
-	this->mLoadEventHandle = nullptr;
+	this->mLoadEventHandle = EventDispatchDelegate();
 	this->mResPackType = ResPackType::eNoneType;
 
 	this->mResLoadType = ResLoadType::eLoadNum;

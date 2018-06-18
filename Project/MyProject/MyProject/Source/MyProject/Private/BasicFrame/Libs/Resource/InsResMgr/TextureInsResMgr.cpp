@@ -22,7 +22,7 @@ TextureInsRes* TextureInsResMgr::getAndSyncLoadRes(
 	return Super::getAndSyncLoad<TextureInsRes>(
 		path, 
 		handle
-		);
+	);
 }
 
 TextureInsRes* TextureInsResMgr::getAndAsyncLoadRes(

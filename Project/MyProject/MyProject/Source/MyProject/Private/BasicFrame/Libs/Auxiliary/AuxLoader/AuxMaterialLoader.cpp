@@ -10,9 +10,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 M_IMPLEMENT_AND_REGISTER_CLASS(AuxMaterialLoader, AuxLoaderBase)
 
 AuxMaterialLoader::AuxMaterialLoader()
+	: Super()
 {
-	Super();
-
     this->mMaterialRes = nullptr;
     this->mMaterial = nullptr;
 }
@@ -46,7 +45,7 @@ void AuxMaterialLoader::syncLoad(
     std::string path,
 	EventDispatchDelegate evtHandle,
 	EventDispatchDelegate progressHandle
-    )
+)
 {
     Super::syncLoad(
         path,
@@ -60,16 +59,17 @@ void AuxMaterialLoader::syncLoad(
 
         this->mMaterialRes = GMaterialInsResMgr->getAndSyncLoadRes(
             path, 
-			nullptr,
-			nullptr,
+			EventDispatchDelegate(),
+			EventDispatchDelegate(),
             this->mResLoadPriority
-            );
-        this->onMaterialLoaded(this->mMaterialRes);
+        );
+
+        this->onMaterialLoaded((uint)0, this->mMaterialRes);
     }
     else if (this->hasLoadEnd())
     {
         //this->onMaterialLoaded(this->mMaterialRes);
-        this->onMaterialLoaded(nullptr);
+        this->onMaterialLoaded((uint)0, nullptr);
     }
 }
 
@@ -78,7 +78,7 @@ void AuxMaterialLoader::asyncLoad(
     std::string path,
 	EventDispatchDelegate evtHandle,
 	EventDispatchDelegate progressHandle
-    )
+)
 {
 	Super::asyncLoad(
 		path, 
@@ -90,14 +90,14 @@ void AuxMaterialLoader::asyncLoad(
     {
         this->onStartLoad();
 
-        if (nullptr == progressHandle)
+        if (progressHandle.empty())
         {
             this->mMaterialRes = GMaterialInsResMgr->getAndAsyncLoadRes(
                 path,
 				MakeEventDispatchDelegate(
 					this,
 					&AuxMaterialLoader::onMaterialLoaded, 
-					0
+					(uint)0
 				)
             );
         }
@@ -108,23 +108,23 @@ void AuxMaterialLoader::asyncLoad(
 				MakeEventDispatchDelegate(
 					this,
 					&AuxMaterialLoader::onMaterialLoaded, 
-					0
-				),
+					(uint)0,
+				), 
 				MakeEventDispatchDelegate(
 					this,
 					&AuxLoaderBase::onProgressEventHandle, 
-					0
+					(uint)0,
 				)
             );
         }
     }
     else if (this->hasLoadEnd())
     {
-        this->onMaterialLoaded(nullptr);
+        this->onMaterialLoaded((uint)0, nullptr);
     }
 }
 
-void AuxMaterialLoader::onMaterialLoaded(IDispatchObject* dispObj, uint eventId)
+void AuxMaterialLoader::onMaterialLoaded(uint eventId, IDispatchObject* dispObj)
 {
     if (nullptr != dispObj)
     {
@@ -146,7 +146,7 @@ void AuxMaterialLoader::onMaterialLoaded(IDispatchObject* dispObj, uint eventId)
 				MakeEventDispatchDelegate(
 					this,
 					&AuxMaterialLoader::onMaterialLoaded, 
-					0
+					(uint)0
 				)
 			);
 
@@ -169,7 +169,7 @@ void AuxMaterialLoader::unload()
 			MakeEventDispatchDelegate(
 				this,
 				&AuxMaterialLoader::onMaterialLoaded, 
-				0
+				(uint)0
 			)
         );
 
