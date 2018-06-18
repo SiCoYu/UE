@@ -10,30 +10,30 @@ namespace MyNS
 	class MySmClosure<R (T::*)(B, Params...)>
 	{
 	public:
-		typedef R (T::*MethodPtrType)(B, Params...);
+		typedef R (T::*func_type)(B, Params...);
 
-		MySmClosure(MethodPtrType func, T &callee, B bound)
-			: mUserObject(&callee)
-			, mMethodPtr(func)
-			, mBound(bound)
+		MySmClosure(func_type func, T &callee, B bound)
+			: callee_(&callee)
+			, func_(func)
+			, bound_(bound)
 		{
 		}
 
 		R operator()(Params... args) const
 		{
-			return (mUserObject->*mMethodPtr)(mBound, args...);
+			return (callee_->*func_)(bound_, args...);
 		}
 
 		bool operator==(const closure &other) const
 		{
-			return (mUserObject == other.mUserObject) && (mMethodPtr == other.mMethodPtr) &&
-				   (mBound == other.mBound);
+			return (callee_ == other.callee_) && (func_ == other.func_) &&
+				   (bound_ == other.bound_);
 		}
 
 	private:
-		T *mUserObject;
-		MethodPtrType mMethodPtr;
-		B mBound;
+		T *callee_;
+		func_type func_;
+		B bound_;
 	};
 
 	template <typename T>
@@ -43,32 +43,32 @@ namespace MyNS
 	class MySmClosure2<R (T::*)(B1, B2, Params...)>
 	{
 	public:
-		typedef R (T::*MethodPtrType)(B1, B2, Params...);
+		typedef R (T::*func_type)(B1, B2, Params...);
 
-		MySmClosure2(MethodPtrType func, T &callee, B1 bound1, B2 bound2)
-			: mUserObject(&callee)
-			, mMethodPtr(func)
-			, mBound(bound1)
-			, mBound2(bound2)
+		MySmClosure2(func_type func, T &callee, B1 bound1, B2 bound2)
+			: callee_(&callee)
+			, func_(func)
+			, bound_(bound1)
+			, bound2_(bound2)
 		{
 		}
 
 		R operator()(Params... args) const
 		{
-			return (mUserObject->*mMethodPtr)(mBound, mBound2, args...);
+			return (callee_->*func_)(bound_, bound2_, args...);
 		}
 
 		bool operator==(const closure2 &other) const
 		{
-			return (mUserObject == other.mUserObject) && (mMethodPtr == other.mMethodPtr) &&
-				   (mBound == other.mBound) && (mBound2 == other.mBound2);
+			return (callee_ == other.callee_) && (func_ == other.func_) &&
+				   (bound_ == other.bound_) && (bound2_ == other.bound2_);
 		}
 
 	private:
-		T *mUserObject;
-		MethodPtrType mMethodPtr;
-		B1 mBound;
-		B2 mBound2;
+		T *callee_;
+		func_type func_;
+		B1 bound_;
+		B2 bound2_;
 	};
 	template <typename F, typename T, typename B>
 	closure<F> make_closure(F func, T &obj, B b)
