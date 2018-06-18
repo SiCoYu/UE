@@ -4,13 +4,13 @@
 #include "PlatformDefine.h"
 #include "MySimpleDelegateDef.h"
 
+struct FKey;
+class FName;
+
 /**
 * @brief IOEventDispatchDelegate.h
 */
 MY_BEGIN_NAMESPACE(MyNS)
-
-struct FKey;
-struct FName;
 
 /**
  * @file IOEventDispatchDelegate.h
@@ -18,6 +18,6 @@ struct FName;
 
 MY_MINI_DECLARE_DELEGATE_RetVal_OneParam(bool, KeyEventDispatchDelegate, FKey);
 MY_MINI_DECLARE_DELEGATE_RetVal_OneParam(float, AxisEventDispatchDelegate, FName);
-MY_MINI_DECLARE_DELEGATE(ScreenResizeEventDispatchDelegate,);
+MY_MINI_DECLARE_DELEGATE(ScreenResizeEventDispatchDelegate);
 
 MY_END_NAMESPACE

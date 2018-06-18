@@ -108,12 +108,12 @@ void AuxMaterialLoader::asyncLoad(
 				MakeEventDispatchDelegate(
 					this,
 					&AuxMaterialLoader::onMaterialLoaded, 
-					(uint)0,
+					(uint)0
 				), 
 				MakeEventDispatchDelegate(
 					this,
 					&AuxLoaderBase::onProgressEventHandle, 
-					(uint)0,
+					(uint)0
 				)
             );
         }
