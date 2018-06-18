@@ -26,14 +26,14 @@ class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MyMiniD
 public:
     typedef R (T::*func_type)(ParamTypes...);
 
-	MyMiniMethodDelegateInstanceImpl(func_type func, T& callee)
+	MyMiniMethodDelegateInstanceImpl(func_type func, T* callee)
         : callee_(callee)
         , func_(func)
     {}
 
     R operator()(ParamTypes... args) const
     {
-        return (callee_.*func_)(args...);
+        return (callee_->*func_)(args...);
     }
 
     bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
@@ -52,7 +52,7 @@ public:
 	}
 
 private:
-    T& callee_;
+    T* callee_;
     func_type func_;
 };
 
@@ -65,14 +65,14 @@ class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public M
 public:
     typedef R (T::*func_type)(ParamTypes...) const;
 
-	MyMiniMethodDelegateInstanceImpl(func_type func, const T& callee)
+	MyMiniMethodDelegateInstanceImpl(func_type func, const T* callee)
         : callee_(callee)
         , func_(func)
     {}
 
     R operator()(ParamTypes... args) const
     {
-        return (callee_.*func_)(args...);
+        return (callee_->*func_)(args...);
     }
 
     bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
@@ -91,7 +91,7 @@ public:
 	}
 
 private:
-    const T& callee_;
+    const T* callee_;
     func_type func_;
 };
 

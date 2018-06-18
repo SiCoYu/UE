@@ -20,8 +20,8 @@ class MyMiniClosureDelegateInstanceImpl<R(T::*)(B, ParamTypes...)> : public MyMi
 public:
     typedef R (T::*func_type)(B, ParamTypes...);
 
-	MyMiniClosureDelegateInstanceImpl(func_type func, T &callee, B bound)
-        : callee_(&callee)
+	MyMiniClosureDelegateInstanceImpl(func_type func, T* callee, B bound)
+        : callee_(callee)
         , func_(func)
         , bound_(bound)
     {
@@ -55,8 +55,8 @@ class MyMiniClosureDelegateInstanceImpl<R (T::*)(B, ParamTypes...) const> : publ
 public:
 	typedef R (T::*func_type)(B, ParamTypes...) const;
 
-	MyMiniClosureDelegateInstanceImpl(func_type func, T &callee, B bound)
-		: callee_(&callee)
+	MyMiniClosureDelegateInstanceImpl(func_type func, T* callee, B bound)
+		: callee_(callee)
 		, func_(func)
 		, bound_(bound)
 	{
@@ -79,6 +79,7 @@ public:
 	}
 
 private:
+	// 如果这个地方写 T *callee_ ，需要自己在调用的时候去掉指针常量
 	const T *callee_;
 	func_type func_;
 	B bound_;
@@ -93,8 +94,8 @@ class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...)> : publ
 public:
     typedef R (T::*func_type)(B1, B2, ParamTypes...);
 
-	MyMiniClosureDelegateInstanceImpl2(func_type func, T &callee, B1 bound1, B2 bound2)
-        : callee_(&callee)
+	MyMiniClosureDelegateInstanceImpl2(func_type func, T* callee, B1 bound1, B2 bound2)
+        : callee_(callee)
         , func_(func)
         , bound_(bound1)
         , bound2_(bound2)
@@ -125,8 +126,8 @@ class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...) const> 
 public:
 	typedef R (T::*func_type)(B1, B2, ParamTypes...) const;
 
-	MyMiniClosureDelegateInstanceImpl2(func_type func, T &callee, B1 bound1, B2 bound2)
-		: callee_(&callee)
+	MyMiniClosureDelegateInstanceImpl2(func_type func, T* callee, B1 bound1, B2 bound2)
+		: callee_(callee)
 		, func_(func)
 		, bound_(bound1)
 		, bound2_(bound2)
@@ -152,25 +153,25 @@ private:
 };
 
 template <typename F, typename T, typename B>
-MyMiniClosureDelegateInstanceImpl<F>* make_closure(F func, T &obj, B b)
+MyMiniClosureDelegateInstanceImpl<F>* make_closure(F func, T* obj, B b)
 {
     return new MyMiniClosureDelegateInstanceImpl<F>(func, obj, b);
 }
 
 template <typename F, typename T, typename B1, typename B2>
-MyMiniClosureDelegateInstanceImpl2<F>* make_closure2(F func, T &obj, B1 b1, B2 b2)
+MyMiniClosureDelegateInstanceImpl2<F>* make_closure2(F func, T* obj, B1 b1, B2 b2)
 {
     return new MyMiniClosureDelegateInstanceImpl2<F>(func, obj, b1, b2);
 }
 
 template <typename F, typename T, typename B>
-MyMiniClosureDelegateInstanceImpl<F>* make_delegate(F func, T &obj, B b)
+MyMiniClosureDelegateInstanceImpl<F>* make_delegate(F func, T* obj, B b)
 {
 	return make_closure(func, obj, b);
 }
 
 template <typename F, typename T, typename B1, typename B2>
-MyMiniClosureDelegateInstanceImpl2<F>* make_delegate(F func, T &obj, B1 b1, B2 b2)
+MyMiniClosureDelegateInstanceImpl2<F>* make_delegate(F func, T* obj, B1 b1, B2 b2)
 {
 	return new make_closure2(func, obj, b1, b2);
 }

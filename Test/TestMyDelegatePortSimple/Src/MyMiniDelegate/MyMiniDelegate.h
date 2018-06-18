@@ -28,13 +28,13 @@ public:
 	}
 
 	template <typename UserClass>
-	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(ParamTypes...)>::Type func, UserClass& callee)
+	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
 	{
 		this->mMyMiniDelegateInstance = make_delegate(func, callee);
 	}
 
 	template <typename UserClass>
-	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(ParamTypes...)>::Type func, UserClass& callee)
+	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
 	{
 		this->mMyMiniDelegateInstance = make_delegate(func, callee);
 	}
@@ -43,14 +43,14 @@ public:
 	// R (T::*)(ParamTypes...) 参数会报错
 	// error C2146: syntax error: missing ')' before identifier 'func'
 	template <typename UserClass, typename... VarTypes>
-	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass& callee, VarTypes... vars)
+	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
 	{
 		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars...);
 	}
 
 	// 模板自动推断 const 值
 	template <typename UserClass, typename... VarTypes>
-	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass& callee, VarTypes... vars)
+	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
 	{
 		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars...);
 	}
