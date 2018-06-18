@@ -102,6 +102,9 @@ private:
  * \tparam params       variadic template list for possible arguments
  *                      of the captured function
  */
+/**
+ * @brief 非成员函数没有 const 偏特化
+ */
 template <typename R, typename... ParamTypes>
 class MyMiniMethodDelegateInstanceImpl<R (*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
