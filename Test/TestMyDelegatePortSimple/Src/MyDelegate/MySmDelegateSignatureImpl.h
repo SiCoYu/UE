@@ -82,6 +82,8 @@ namespace MyNS
 		{
 		}
 
+		// 这段代码会导致死循环，因此注释掉
+		// warning C4717: 'MyNS::MySmBaseDelegate<void,int,int,bool>::MySmBaseDelegate<void,int,int,bool>': recursive on all control paths, function will cause runtime stack overflow
 		//template <typename T>
 		//inline MySmBaseDelegate(T param)
 		//{
@@ -133,22 +135,6 @@ namespace MyNS
 
 			return *this;
 		}
-
-		//inline bool operator!()
-		//{
-		//	return false;
-		//}
-
-		// warning C4717: 'MyNS::MySmBaseDelegate<void,int,int,bool>::MySmBaseDelegate<void,int,int,bool>': recursive on all control paths, function will cause runtime stack overflow
-		//friend inline bool operator != (MySmBaseDelegate rhl, std::nullptr_t)
-		//{
-		//	return false;
-		//}
-
-		//friend inline bool operator != (std::nullptr_t, MySmBaseDelegate rhl)
-		//{
-		//	return false;
-		//}
 
 	public:
 		template <typename... VarTypes>
