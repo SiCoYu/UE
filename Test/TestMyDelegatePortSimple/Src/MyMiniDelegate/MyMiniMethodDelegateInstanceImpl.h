@@ -15,10 +15,22 @@ class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MyMiniD
 public:
     typedef R (T::*MethodPtrType)(ParamTypes...);
 
+public:
 	MyMiniMethodDelegateInstanceImpl(MethodPtrType func, T* callee)
         : mUserObject(callee)
         , mMethodPtr(func)
     {}
+
+	virtual bool empty() override
+	{
+		return (!mUserObject || !mMethodPtr);
+	}
+
+	virtual void clear() override
+	{
+		mUserObject = nullptr;
+		mMethodPtr = nullptr;
+	}
 
     R operator()(ParamTypes... args) const
     {
@@ -51,10 +63,22 @@ class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public M
 public:
     typedef R (T::*MethodPtrType)(ParamTypes...) const;
 
+public:
 	MyMiniMethodDelegateInstanceImpl(MethodPtrType func, const T* callee)
         : mUserObject(callee)
         , mMethodPtr(func)
     {}
+
+	virtual bool empty() override
+	{
+		return (!mUserObject || !mMethodPtr);
+	}
+
+	virtual void clear() override
+	{
+		mUserObject = nullptr;
+		mMethodPtr = nullptr;
+	}
 
     R operator()(ParamTypes... args) const
     {
@@ -90,9 +114,20 @@ class MyMiniMethodDelegateInstanceImpl<R (*)(ParamTypes...)> : public MyMiniDele
 public:
     typedef R (*MethodPtrType)(ParamTypes...);
 
+public:
 	MyMiniMethodDelegateInstanceImpl(MethodPtrType func)
         : mMethodPtr(func)
     {}
+
+	virtual bool empty() override
+	{
+		return !mMethodPtr;
+	}
+
+	virtual void clear() override
+	{
+		mMethodPtr = nullptr;
+	}
 
     R operator()(ParamTypes... args) const
     {

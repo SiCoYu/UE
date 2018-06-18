@@ -15,6 +15,16 @@ public:
 	{
 
 	}
+
+	virtual bool empty()
+	{
+		return true;
+	}
+
+	virtual void clear()
+	{
+		
+	}
 };
 }
 

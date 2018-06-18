@@ -22,6 +22,16 @@ protected:
 	MyMiniDelegateInstanceBase<R, ParamTypes...>* mMyMiniDelegateInstance;
 
 public:
+	virtual bool empty() override
+	{
+		return true;
+	}
+
+	virtual void clear() override
+	{
+
+	}
+
 	RetValType call(ParamTypes... Params) const
 	{
 		return this->mMyMiniDelegateInstance->call(Params...);

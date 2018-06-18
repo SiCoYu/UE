@@ -20,12 +20,24 @@ class MyMiniClosureDelegateInstanceImpl<R(T::*)(B, ParamTypes...)> : public MyMi
 public:
     typedef R (T::*MethodPtrType)(B, ParamTypes...);
 
+public:
 	MyMiniClosureDelegateInstanceImpl(MethodPtrType func, T* callee, B bound)
         : mUserObject(callee)
         , mMethodPtr(func)
         , mBound(bound)
     {
     }
+
+	virtual bool empty() override
+	{
+		return (!mUserObject || !mMethodPtr);
+	}
+
+	virtual void clear() override
+	{
+		mUserObject = nullptr;
+		mMethodPtr = nullptr;
+	}
 
     R operator()(ParamTypes... args) const
     {
@@ -55,11 +67,23 @@ class MyMiniClosureDelegateInstanceImpl<R (T::*)(B, ParamTypes...) const> : publ
 public:
 	typedef R (T::*MethodPtrType)(B, ParamTypes...) const;
 
+public:
 	MyMiniClosureDelegateInstanceImpl(MethodPtrType func, T* callee, B bound)
 		: mUserObject(callee)
 		, mMethodPtr(func)
 		, mBound(bound)
 	{
+	}
+
+	virtual bool empty() override
+	{
+		return (!mUserObject || !mMethodPtr);
+	}
+
+	virtual void clear() override
+	{
+		mUserObject = nullptr;
+		mMethodPtr = nullptr;
 	}
 
 	R operator()(ParamTypes... args) const
@@ -94,6 +118,7 @@ class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...)> : publ
 public:
     typedef R (T::*MethodPtrType)(B1, B2, ParamTypes...);
 
+public:
 	MyMiniClosureDelegateInstanceImpl2(MethodPtrType func, T* callee, B1 bound1, B2 bound2)
         : mUserObject(callee)
         , mMethodPtr(func)
@@ -101,6 +126,17 @@ public:
         , mBound2(bound2)
     {
     }
+
+	virtual bool empty() override
+	{
+		return (!mUserObject || !mMethodPtr);
+	}
+
+	virtual void clear() override
+	{
+		mUserObject = nullptr;
+		mMethodPtr = nullptr;
+	}
 
     R operator()(ParamTypes... args) const
     {
@@ -126,12 +162,24 @@ class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...) const> 
 public:
 	typedef R (T::*MethodPtrType)(B1, B2, ParamTypes...) const;
 
+public:
 	MyMiniClosureDelegateInstanceImpl2(MethodPtrType func, T* callee, B1 bound1, B2 bound2)
 		: mUserObject(callee)
 		, mMethodPtr(func)
 		, mBound(bound1)
 		, mBound2(bound2)
 	{
+	}
+
+	virtual bool empty() override
+	{
+		return (!mUserObject || !mMethodPtr);
+	}
+
+	virtual void clear() override
+	{
+		mUserObject = nullptr;
+		mMethodPtr = nullptr;
 	}
 
 	R operator()(ParamTypes... args) const
