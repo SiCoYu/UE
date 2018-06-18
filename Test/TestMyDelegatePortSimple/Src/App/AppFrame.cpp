@@ -18,7 +18,8 @@ namespace MyNS
 		{
 			//MyMiniDelegate<bool, int, char> aaa;
 			AAA aaa;
-			aaa.bindObjectHandle(&TestA::testHandleB, this, 10);
+			//aaa.bindObjectHandle(&TestA::testHandleB, this, 10);
+			AAA().bindObjectHandle(&TestA::testHandleB, this, 10);
 			bool ret = aaa.call(8, 'a');
 			return true;
 		}
