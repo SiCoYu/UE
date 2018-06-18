@@ -30,13 +30,13 @@ public:
 	template <typename UserClass>
 	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
 	{
-		this->mMyMiniDelegateInstance = make_delegate(func, callee);
+		this->mMyMiniDelegateInstance = makeDelegate(func, callee);
 	}
 
 	template <typename UserClass>
 	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
 	{
-		this->mMyMiniDelegateInstance = make_delegate(func, callee);
+		this->mMyMiniDelegateInstance = makeDelegate(func, callee);
 	}
 
 	// 模板自动推断 const 值
@@ -45,25 +45,25 @@ public:
 	template <typename UserClass, typename... VarTypes>
 	void bindObjectHandle(typename MyMiniMemFunPtrType<false, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
 	{
-		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars...);
+		this->mMyMiniDelegateInstance = makeDelegate(func, callee, vars...);
 	}
 
 	// 模板自动推断 const 值
 	template <typename UserClass, typename... VarTypes>
 	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
 	{
-		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars...);
+		this->mMyMiniDelegateInstance = makeDelegate(func, callee, vars...);
 	}
 
 	//template <typename... VarTypes>
 	//void bindStaticHandle(MethodPtrType func, VarTypes...)
 	//{
-	//	this->mMyMiniDelegateInstance = make_delegate(func, VarTypes...);
+	//	this->mMyMiniDelegateInstance = makeDelegate(func, VarTypes...);
 	//}
 
 	void bindStaticHandle(MethodPtrType func)
 	{
-		this->mMyMiniDelegateInstance = make_delegate(func);
+		this->mMyMiniDelegateInstance = makeDelegate(func);
 	}
 };
 

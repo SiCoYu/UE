@@ -61,8 +61,8 @@ namespace MyNS
 
 	void AppFrame::init()
 	{
-		//this->mCommonDelegate.BindRaw(this, &AppFrame::handle);
-		//this->mCommonDelegate.Execute(10, 10, true);
+		this->mCommonDelegate.BindRaw(this, &AppFrame::handle);
+		this->mCommonDelegate.Execute(10, 10, true);
 
 		//this->mCommonDelegate.BindStatic(&MyNS::handle);
 		//this->mCommonDelegate.Execute(10, 10, true);

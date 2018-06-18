@@ -153,27 +153,27 @@ private:
 };
 
 template <typename F, typename T, typename B>
-MyMiniClosureDelegateInstanceImpl<F>* make_closure(F func, T* obj, B b)
+MyMiniClosureDelegateInstanceImpl<F>* makeClosure(F func, T* obj, B b)
 {
     return new MyMiniClosureDelegateInstanceImpl<F>(func, obj, b);
 }
 
 template <typename F, typename T, typename B1, typename B2>
-MyMiniClosureDelegateInstanceImpl2<F>* make_closure2(F func, T* obj, B1 b1, B2 b2)
+MyMiniClosureDelegateInstanceImpl2<F>* makeClosure2(F func, T* obj, B1 b1, B2 b2)
 {
     return new MyMiniClosureDelegateInstanceImpl2<F>(func, obj, b1, b2);
 }
 
 template <typename F, typename T, typename B>
-MyMiniClosureDelegateInstanceImpl<F>* make_delegate(F func, T* obj, B b)
+MyMiniClosureDelegateInstanceImpl<F>* makeDelegate(F func, T* obj, B b)
 {
-	return make_closure(func, obj, b);
+	return makeClosure(func, obj, b);
 }
 
 template <typename F, typename T, typename B1, typename B2>
-MyMiniClosureDelegateInstanceImpl2<F>* make_delegate(F func, T* obj, B1 b1, B2 b2)
+MyMiniClosureDelegateInstanceImpl2<F>* makeDelegate(F func, T* obj, B1 b1, B2 b2)
 {
-	return new make_closure2(func, obj, b1, b2);
+	return new makeClosure2(func, obj, b1, b2);
 }
 
 }

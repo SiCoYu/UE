@@ -119,13 +119,13 @@ private:
 };
 
 template <typename F, typename T>
-MyMiniMethodDelegateInstanceImpl<F>* make_delegate(F func, T& obj)
+MyMiniMethodDelegateInstanceImpl<F>* makeDelegate(F func, T& obj)
 {
     return new MyMiniMethodDelegateInstanceImpl<F>(func, obj);
 }
 
 template <typename T>
-MyMiniMethodDelegateInstanceImpl<T>* make_delegate(T func)
+MyMiniMethodDelegateInstanceImpl<T>* makeDelegate(T func)
 {
     return new MyMiniMethodDelegateInstanceImpl<T>(func);
 }
