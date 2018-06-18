@@ -8,8 +8,8 @@ source_group("Src\\App" FILES ${SRCS_App_FILES})
 file(GLOB SRCS_MyDelegate_FILES Src/MyDelegate/*.h Src/MyDelegate/*.cpp)
 source_group("Src\\MyDelegate" FILES ${SRCS_MyDelegate_FILES})
 
-file(GLOB SRCS_MyFastDelegate_FILES Src/MyFastDelegate/*.h Src/MyFastDelegate/*.cpp)
-source_group("Src\\MyFastDelegate" FILES ${SRCS_MyFastDelegate_FILES})
+file(GLOB SRCS_MySimpleDelegate_FILES Src/MySimpleDelegate/*.h Src/MySimpleDelegate/*.cpp)
+source_group("Src\\MySimpleDelegate" FILES ${SRCS_MySimpleDelegate_FILES})
 
 file(GLOB SRCS_Templates_FILES Src/Templates/*.h Src/Templates/*.cpp)
 source_group("Src\\Templates" FILES ${SRCS_Templates_FILES})
@@ -27,7 +27,7 @@ ELSEIF(LINUX)
 
 ENDIF()
 
-include_directories(Src Src/App Src/MyDelegate Src/MyFastDelegate Src/Templates Src/HAL)
+include_directories(Src Src/App Src/MyDelegate Src/MySimpleDelegate Src/Templates Src/HAL)
 
 IF(DEBUG_mode)
     add_definitions(-DDEBUG)
@@ -35,7 +35,7 @@ ENDIF()
 
 #ADD_DEFINITIONS(-DTEST)
 
-set(ALL_SRCS ${SRCS_App_FILES} ${SRCS_MyDelegate_FILES} ${SRCS_MyFastDelegate_FILES} ${SRCS_Templates_FILES} ${SRCS_HAL_FILES})
+set(ALL_SRCS ${SRCS_App_FILES} ${SRCS_MyDelegate_FILES} ${SRCS_MySimpleDelegate_FILES} ${SRCS_Templates_FILES} ${SRCS_HAL_FILES})
 
 ADD_EXECUTABLE(${PROJECT_NAME} WIN32 ${ALL_SRCS})
 
