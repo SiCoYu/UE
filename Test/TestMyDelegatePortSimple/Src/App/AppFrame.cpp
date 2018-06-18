@@ -1,11 +1,11 @@
 #include "AppFrame.h"
-#include "MyMiniDelegateBase.h"
-#include "MyMiniDelegate.h"
-#include "MyMiniDelegateInstanceBase.h"
-#include "MyMiniMethodDelegateInstanceImpl.h"
+#include "MyMiniDelegateDef.h"
 
 namespace MyNS
 {
+	MY_MINI_DECLARE_DELEGATE_RetVal_TwoParams(bool, AAA, int, char);
+	MY_MINI_DECLARE_DELEGATE_OneParam(BBB, char);
+
 	class TestA
 	{
 	public:
@@ -16,7 +16,8 @@ namespace MyNS
 
 		bool testHandleA(int c, int a, char b)
 		{
-			MyMiniDelegate<bool, int, char> aaa;
+			//MyMiniDelegate<bool, int, char> aaa;
+			AAA aaa;
 			aaa.bindObjectHandle(&TestA::testHandleB, this, 10);
 			bool ret = aaa.call(8, 'a');
 			return true;
@@ -30,6 +31,11 @@ namespace MyNS
 		bool testHandleC(int a, char b) const
 		{
 			return true;
+		}
+
+		void testHandleD(int a, char b)
+		{
+			
 		}
 	};
 
@@ -88,7 +94,8 @@ namespace MyNS
 		//
 		//}
 
-		MyMiniDelegate<bool, int, char> aaa;
+		//MyMiniDelegate<bool, int, char> aaa;
+		AAA aaa;
 		aaa.bindStaticHandle(&testHandle);
 		bool ret = aaa.call(10, 'a');
 
@@ -109,6 +116,10 @@ namespace MyNS
 
 		bbb.bindStaticHandle(&testHandleB);
 		bbb.call(10, 'a');
+
+		BBB fff;
+		fff.bindObjectHandle(&TestA::testHandleD, testA, 6);
+		fff.call('a');
 	}
 
 	void AppFrame::dispose()
