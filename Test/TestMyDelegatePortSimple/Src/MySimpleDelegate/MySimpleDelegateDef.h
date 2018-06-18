@@ -3,7 +3,7 @@
 #include "MySimpleDelegateBase.h"
 #include "MySimpleDelegate.h"
 #include "MySimpleDelegateInstanceBase.h"
-#include "MySimpleMethodDelegateInstanceImpl.h"
+#include "MySimpleMethodDelegateInstance.h"
 
 namespace MyNS
 {

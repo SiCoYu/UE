@@ -1,5 +1,5 @@
-#ifndef __MyMiniMethodDelegateInstanceImpl_H
-#define __MyMiniMethodDelegateInstanceImpl_H
+#ifndef __MyMiniMethodDelegateInstance_H
+#define __MyMiniMethodDelegateInstance_H
 
 #include "MySimpleDelegateInstanceBase.h"
 
@@ -7,16 +7,16 @@ namespace MyNS
 {
 
 template <typename T>
-class MySimpleMethodDelegateInstanceImpl;
+class MySimpleMethodDelegateInstance;
 
 template <typename T, typename R, typename... ParamTypes>
-class MySimpleMethodDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
+class MySimpleMethodDelegateInstance<R (T::*)(ParamTypes...)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*MethodPtrType)(ParamTypes...);
 
 public:
-	MySimpleMethodDelegateInstanceImpl(MethodPtrType func, T* callee)
+	MySimpleMethodDelegateInstance(MethodPtrType func, T* callee)
         : mUserObject(callee)
         , mMethodPtr(func)
     {}
@@ -37,12 +37,14 @@ public:
         return (mUserObject->*mMethodPtr)(args...);
     }
 
-    bool operator==(const MySimpleMethodDelegateInstanceImpl& other) const
+	virtual bool operator==(const MySimpleDelegateInstanceBase& other) const override
     {
-        return (&mUserObject == &other.mUserObject) && (mMethodPtr == other.mMethodPtr);
+		const MySimpleMethodDelegateInstance& rhv = (MySimpleMethodDelegateInstance&)other;
+
+        return (&mUserObject == &rhv.mUserObject) && (mMethodPtr == rhv.mMethodPtr);
     }
 
-    bool operator!= (const MySimpleMethodDelegateInstanceImpl& other) const
+	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
     {
         return !((*this) == other);
     }
@@ -58,13 +60,13 @@ private:
 };
 
 template <typename T, typename R, typename... ParamTypes>
-class MySimpleMethodDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
+class MySimpleMethodDelegateInstance<R (T::*)(ParamTypes...) const> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*MethodPtrType)(ParamTypes...) const;
 
 public:
-	MySimpleMethodDelegateInstanceImpl(MethodPtrType func, const T* callee)
+	MySimpleMethodDelegateInstance(MethodPtrType func, const T* callee)
         : mUserObject(callee)
         , mMethodPtr(func)
     {}
@@ -85,12 +87,14 @@ public:
         return (mUserObject->*mMethodPtr)(args...);
     }
 
-    bool operator==(const MySimpleMethodDelegateInstanceImpl& other) const
+	virtual bool operator==(const MySimpleDelegateInstanceBase& other) const override
     {
-        return (&mUserObject == &other.mUserObject) && (mMethodPtr == other.mMethodPtr);
+		const MySimpleMethodDelegateInstance& rhv = (MySimpleMethodDelegateInstance&)other;
+
+        return (&mUserObject == &rhv.mUserObject) && (mMethodPtr == rhv.mMethodPtr);
     }
 
-    bool operator!= (const MySimpleMethodDelegateInstanceImpl& other) const
+	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
     {
         return !(*this == other);
     }
@@ -109,13 +113,13 @@ private:
  * @brief 非成员函数没有 const 偏特化
  */
 template <typename R, typename... ParamTypes>
-class MySimpleMethodDelegateInstanceImpl<R (*)(ParamTypes...)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
+class MySimpleMethodDelegateInstance<R (*)(ParamTypes...)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (*MethodPtrType)(ParamTypes...);
 
 public:
-	MySimpleMethodDelegateInstanceImpl(MethodPtrType func)
+	MySimpleMethodDelegateInstance(MethodPtrType func)
         : mMethodPtr(func)
     {}
 
@@ -134,12 +138,14 @@ public:
         return (*mMethodPtr)(args...);
     }
 
-    bool operator==(const MySimpleMethodDelegateInstanceImpl& other) const
+	virtual bool operator==(const MySimpleDelegateInstanceBase& other) const override
     {
-        return mMethodPtr == other.mMethodPtr;
+		const MySimpleMethodDelegateInstance& rhv = (MySimpleMethodDelegateInstance&)other;
+
+        return mMethodPtr == rhv.mMethodPtr;
     }
 
-    bool operator!= (const MySimpleMethodDelegateInstanceImpl& other) const
+	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
     {
         return !((*this) == other);
     }
@@ -154,15 +160,15 @@ private:
 };
 
 template <typename F, typename T>
-MySimpleMethodDelegateInstanceImpl<F>* makeDelegate(F func, T& obj)
+MySimpleMethodDelegateInstance<F>* makeDelegate(F func, T& obj)
 {
-    return new MySimpleMethodDelegateInstanceImpl<F>(func, obj);
+    return new MySimpleMethodDelegateInstance<F>(func, obj);
 }
 
 template <typename T>
-MySimpleMethodDelegateInstanceImpl<T>* makeDelegate(T func)
+MySimpleMethodDelegateInstance<T>* makeDelegate(T func)
 {
-    return new MySimpleMethodDelegateInstanceImpl<T>(func);
+    return new MySimpleMethodDelegateInstance<T>(func);
 }
 
 }

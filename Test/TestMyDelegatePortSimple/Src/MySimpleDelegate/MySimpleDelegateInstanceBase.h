@@ -20,6 +20,16 @@ public:
 
 	}
 
+	virtual bool operator==(const MySimpleDelegateInstanceBase& other) const
+	{
+		return false;
+	}
+
+	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const
+	{
+		return !((*this) == other);
+	}
+
 	// 为了支持返回值是 void ，需要设置成纯虚函数
 	virtual RetValType call(ParamTypes... Params) const = 0;
 	//{

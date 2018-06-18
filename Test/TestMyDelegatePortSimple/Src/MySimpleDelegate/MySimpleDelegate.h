@@ -4,8 +4,8 @@
 #include "MySimpleDelegateBase.h"
 #include "MySimpleMemFunPtrType.h"
 #include "MySimpleDelegateInstanceBase.h"
-#include "MySimpleMethodDelegateInstanceImpl.h"
-#include "MySimpleClosureDelegateInstanceImpl.h"
+#include "MySimpleMethodDelegateInstance.h"
+#include "MySimpleClosureDelegateInstance.h"
 
 namespace MyNS
 {
@@ -18,7 +18,7 @@ public:
 	typedef R RetValType;
 	typedef R (*MethodPtrType) (ParamTypes...);
 
-protected:
+public:
 	MySimpleDelegateInstanceBase<R, ParamTypes...>* mMyMiniDelegateInstance;
 
 public:
@@ -32,13 +32,28 @@ public:
 
 	}
 
+	virtual bool equalTo(const MySimpleDelegate& other)
+	{
+		return this->mMyMiniDelegateInstance == other.mMyMiniDelegateInstance;
+	}
+
+	bool operator==(const MySimpleDelegate& other) const
+	{
+		return this->mMyMiniDelegateInstance == other.mMyMiniDelegateInstance;
+	}
+
+	bool operator!= (const MySimpleDelegate& other) const
+	{
+		return !((*this) == other);
+	}
+
 	virtual bool operator ! () const override
 	{
 		// const 函数中只能调用 const 接口
 		return this->empty();
 	}
 
-	RetValType operator()(ParamTypes... Params) const
+	RetValType operator () (ParamTypes... Params) const
 	{
 		return this->mMyMiniDelegateInstance->call(Params...);
 	}
