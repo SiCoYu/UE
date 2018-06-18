@@ -1,22 +1,22 @@
 #ifndef __MyMiniMethodDelegateInstanceImpl_H
 #define __MyMiniMethodDelegateInstanceImpl_H
 
-#include "MyMiniDelegateInstanceBase.h"
+#include "MySimpleDelegateInstanceBase.h"
 
 namespace MyNS
 {
 
 template <typename T>
-class MyMiniMethodDelegateInstanceImpl;
+class MySimpleMethodDelegateInstanceImpl;
 
 template <typename T, typename R, typename... ParamTypes>
-class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MySimpleMethodDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*MethodPtrType)(ParamTypes...);
 
 public:
-	MyMiniMethodDelegateInstanceImpl(MethodPtrType func, T* callee)
+	MySimpleMethodDelegateInstanceImpl(MethodPtrType func, T* callee)
         : mUserObject(callee)
         , mMethodPtr(func)
     {}
@@ -37,12 +37,12 @@ public:
         return (mUserObject->*mMethodPtr)(args...);
     }
 
-    bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
+    bool operator==(const MySimpleMethodDelegateInstanceImpl& other) const
     {
         return (&mUserObject == &other.mUserObject) && (mMethodPtr == other.mMethodPtr);
     }
 
-    bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
+    bool operator!= (const MySimpleMethodDelegateInstanceImpl& other) const
     {
         return !((*this) == other);
     }
@@ -58,13 +58,13 @@ private:
 };
 
 template <typename T, typename R, typename... ParamTypes>
-class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MySimpleMethodDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*MethodPtrType)(ParamTypes...) const;
 
 public:
-	MyMiniMethodDelegateInstanceImpl(MethodPtrType func, const T* callee)
+	MySimpleMethodDelegateInstanceImpl(MethodPtrType func, const T* callee)
         : mUserObject(callee)
         , mMethodPtr(func)
     {}
@@ -85,12 +85,12 @@ public:
         return (mUserObject->*mMethodPtr)(args...);
     }
 
-    bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
+    bool operator==(const MySimpleMethodDelegateInstanceImpl& other) const
     {
         return (&mUserObject == &other.mUserObject) && (mMethodPtr == other.mMethodPtr);
     }
 
-    bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
+    bool operator!= (const MySimpleMethodDelegateInstanceImpl& other) const
     {
         return !(*this == other);
     }
@@ -109,13 +109,13 @@ private:
  * @brief 非成员函数没有 const 偏特化
  */
 template <typename R, typename... ParamTypes>
-class MyMiniMethodDelegateInstanceImpl<R (*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MySimpleMethodDelegateInstanceImpl<R (*)(ParamTypes...)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (*MethodPtrType)(ParamTypes...);
 
 public:
-	MyMiniMethodDelegateInstanceImpl(MethodPtrType func)
+	MySimpleMethodDelegateInstanceImpl(MethodPtrType func)
         : mMethodPtr(func)
     {}
 
@@ -134,12 +134,12 @@ public:
         return (*mMethodPtr)(args...);
     }
 
-    bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
+    bool operator==(const MySimpleMethodDelegateInstanceImpl& other) const
     {
         return mMethodPtr == other.mMethodPtr;
     }
 
-    bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
+    bool operator!= (const MySimpleMethodDelegateInstanceImpl& other) const
     {
         return !((*this) == other);
     }
@@ -154,15 +154,15 @@ private:
 };
 
 template <typename F, typename T>
-MyMiniMethodDelegateInstanceImpl<F>* makeDelegate(F func, T& obj)
+MySimpleMethodDelegateInstanceImpl<F>* makeDelegate(F func, T& obj)
 {
-    return new MyMiniMethodDelegateInstanceImpl<F>(func, obj);
+    return new MySimpleMethodDelegateInstanceImpl<F>(func, obj);
 }
 
 template <typename T>
-MyMiniMethodDelegateInstanceImpl<T>* makeDelegate(T func)
+MySimpleMethodDelegateInstanceImpl<T>* makeDelegate(T func)
 {
-    return new MyMiniMethodDelegateInstanceImpl<T>(func);
+    return new MySimpleMethodDelegateInstanceImpl<T>(func);
 }
 
 }

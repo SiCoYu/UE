@@ -1,27 +1,27 @@
 #ifndef __MyMiniClosureDelegateInstanceImpl_H
 #define __MyMiniClosureDelegateInstanceImpl_H
 
-#include "MyMiniDelegateInstanceBase.h"
+#include "MySimpleDelegateInstanceBase.h"
 
 namespace MyNS
 {
 
 // 函数指针泛化
 template <typename T>
-class MyMiniClosureDelegateInstanceImpl;
+class MySimpleClosureDelegateInstanceImpl;
 
 // 函数指针特化
 // 无法推断，可变模板参数要放在最后，否则总是推断到上面的实现
 //template <typename T, typename R, typename... ParamTypes, typename B>
-//class MyMiniClosureDelegateInstanceImpl<R (T::*)(ParamTypes..., B)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+//class MySimpleClosureDelegateInstanceImpl<R (T::*)(ParamTypes..., B)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 template <typename T, typename R, typename B, typename... ParamTypes>
-class MyMiniClosureDelegateInstanceImpl<R(T::*)(B, ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MySimpleClosureDelegateInstanceImpl<R(T::*)(B, ParamTypes...)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*MethodPtrType)(B, ParamTypes...);
 
 public:
-	MyMiniClosureDelegateInstanceImpl(MethodPtrType func, T* callee, B bound)
+	MySimpleClosureDelegateInstanceImpl(MethodPtrType func, T* callee, B bound)
         : mUserObject(callee)
         , mMethodPtr(func)
         , mBound(bound)
@@ -44,7 +44,7 @@ public:
         return (mUserObject->*mMethodPtr)(mBound, args...);
     }
 
-    bool operator==(const MyMiniClosureDelegateInstanceImpl &other) const
+    bool operator==(const MySimpleClosureDelegateInstanceImpl &other) const
     {
         return (mUserObject == other.mUserObject) && (mMethodPtr == other.mMethodPtr) &&
                (mBound == other.mBound);
@@ -62,13 +62,13 @@ private:
 };
 
 template <typename T, typename R, typename B, typename... ParamTypes>
-class MyMiniClosureDelegateInstanceImpl<R (T::*)(B, ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MySimpleClosureDelegateInstanceImpl<R (T::*)(B, ParamTypes...) const> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
 	typedef R (T::*MethodPtrType)(B, ParamTypes...) const;
 
 public:
-	MyMiniClosureDelegateInstanceImpl(MethodPtrType func, T* callee, B bound)
+	MySimpleClosureDelegateInstanceImpl(MethodPtrType func, T* callee, B bound)
 		: mUserObject(callee)
 		, mMethodPtr(func)
 		, mBound(bound)
@@ -91,7 +91,7 @@ public:
 		return (mUserObject->*mMethodPtr)(mBound, args...);
 	}
 
-	bool operator==(const MyMiniClosureDelegateInstanceImpl &other) const
+	bool operator==(const MySimpleClosureDelegateInstanceImpl &other) const
 	{
 		return (mUserObject == other.mUserObject) && (mMethodPtr == other.mMethodPtr) &&
 			(mBound == other.mBound);
@@ -113,7 +113,7 @@ template <typename T>
 class MyMiniClosureDelegateInstanceImpl2;
 
 template <typename T, typename R, typename B1, typename B2, typename... ParamTypes>
-class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...)> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
     typedef R (T::*MethodPtrType)(B1, B2, ParamTypes...);
@@ -157,7 +157,7 @@ private:
 };
 
 template <typename T, typename R, typename B1, typename B2, typename... ParamTypes>
-class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...) const> : public MySimpleDelegateInstanceBase<R, ParamTypes...>
 {
 public:
 	typedef R (T::*MethodPtrType)(B1, B2, ParamTypes...) const;
@@ -201,9 +201,9 @@ private:
 };
 
 template <typename F, typename T, typename B>
-MyMiniClosureDelegateInstanceImpl<F>* makeClosure(F func, T* obj, B b)
+MySimpleClosureDelegateInstanceImpl<F>* makeClosure(F func, T* obj, B b)
 {
-    return new MyMiniClosureDelegateInstanceImpl<F>(func, obj, b);
+    return new MySimpleClosureDelegateInstanceImpl<F>(func, obj, b);
 }
 
 template <typename F, typename T, typename B1, typename B2>
@@ -213,7 +213,7 @@ MyMiniClosureDelegateInstanceImpl2<F>* makeClosure2(F func, T* obj, B1 b1, B2 b2
 }
 
 template <typename F, typename T, typename B>
-MyMiniClosureDelegateInstanceImpl<F>* makeDelegate(F func, T* obj, B b)
+MySimpleClosureDelegateInstanceImpl<F>* makeDelegate(F func, T* obj, B b)
 {
 	return makeClosure(func, obj, b);
 }

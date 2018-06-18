@@ -3,16 +3,16 @@
 namespace MyNS
 {
 	template <bool Const, typename Class, typename FuncType>
-	struct MyMiniMemFunPtrType;
+	struct MySimpleMemFunPtrType;
 
 	template <typename Class, typename RetType, typename... ArgTypes>
-	struct MyMiniMemFunPtrType<false, Class, RetType(ArgTypes...)>
+	struct MySimpleMemFunPtrType<false, Class, RetType(ArgTypes...)>
 	{
 		typedef RetType(Class::* Type)(ArgTypes...);
 	};
 
 	template <typename Class, typename RetType, typename... ArgTypes>
-	struct MyMiniMemFunPtrType<true, Class, RetType(ArgTypes...)>
+	struct MySimpleMemFunPtrType<true, Class, RetType(ArgTypes...)>
 	{
 		typedef RetType(Class::* Type)(ArgTypes...) const;
 	};

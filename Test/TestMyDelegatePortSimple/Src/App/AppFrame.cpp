@@ -1,5 +1,5 @@
 #include "AppFrame.h"
-#include "MyMiniDelegateDef.h"
+#include "MySimpleDelegateDef.h"
 
 namespace MyNS
 {
@@ -16,7 +16,7 @@ namespace MyNS
 
 		bool testHandleA(int c, int a, char b)
 		{
-			//MyMiniDelegate<bool, int, char> aaa;
+			//MySimpleDelegate<bool, int, char> aaa;
 			AAA aaa;
 			//aaa.bindObjectHandle(&TestA::testHandleB, this, 10);
 			AAA().bindObjectHandle(&TestA::testHandleB, this, 10);
@@ -95,7 +95,7 @@ namespace MyNS
 		//
 		//}
 
-		//MyMiniDelegate<bool, int, char> aaa;
+		//MySimpleDelegate<bool, int, char> aaa;
 		AAA aaa;
 		aaa.bindStaticHandle(&testHandle);
 		bool ret = aaa.call(10, 'a');
@@ -113,7 +113,7 @@ namespace MyNS
 		aaa.bindObjectHandle(&TestA::testHandleC, testA);
 		ret = aaa.call(8, 'a');
 
-		MyMiniDelegate<void, int, char> bbb;
+		MySimpleDelegate<void, int, char> bbb;
 
 		bbb.bindStaticHandle(&testHandleB);
 		bbb.call(10, 'a');

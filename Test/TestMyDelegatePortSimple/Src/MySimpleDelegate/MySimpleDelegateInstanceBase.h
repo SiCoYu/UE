@@ -4,7 +4,7 @@
 namespace MyNS
 {
 template <typename R, typename... ParamTypes>
-class MyMiniDelegateInstanceBase
+class MySimpleDelegateInstanceBase
 {
 public:
 	typedef R RetValType;

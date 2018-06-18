@@ -3,15 +3,15 @@
 
 namespace MyNS
 {
-class MyMiniDelegateBase
+class MySimpleDelegateBase
 {
 public:
-	MyMiniDelegateBase()
+	MySimpleDelegateBase()
 	{
 
 	}
 
-	virtual ~MyMiniDelegateBase()
+	virtual ~MySimpleDelegateBase()
 	{
 
 	}
