@@ -18,6 +18,16 @@ namespace MyNS
 		{
 			return true;
 		}
+
+		bool testHandleB(int c, int a, char b) const
+		{
+			return true;
+		}
+
+		bool testHandleC(int a, char b) const
+		{
+			return true;
+		}
 	};
 
 	bool testHandle(int a, char b)
@@ -86,6 +96,11 @@ namespace MyNS
 		aaa->bindObjectHandle(&TestA::testHandleA, *testA, 10);
 		ret = aaa->call(8, 'a');
 
+		aaa->bindObjectHandle(&TestA::testHandleB, *testA, 10);
+		ret = aaa->call(8, 'a');
+
+		aaa->bindObjectHandle(&TestA::testHandleC, *testA);
+		ret = aaa->call(8, 'a');
 
 		MyMiniDelegate<void, int, char>* bbb = new MyMiniDelegate<void, int, char>();
 

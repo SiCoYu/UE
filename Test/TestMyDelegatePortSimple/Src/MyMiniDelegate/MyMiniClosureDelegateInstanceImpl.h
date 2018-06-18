@@ -49,6 +49,41 @@ private:
     B bound_;
 };
 
+template <typename T, typename R, typename B, typename... ParamTypes>
+class MyMiniClosureDelegateInstanceImpl<R (T::*)(B, ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+{
+public:
+	typedef R (T::*func_type)(B, ParamTypes...) const;
+
+	MyMiniClosureDelegateInstanceImpl(func_type func, T &callee, B bound)
+		: callee_(&callee)
+		, func_(func)
+		, bound_(bound)
+	{
+	}
+
+	R operator()(ParamTypes... args) const
+	{
+		return (callee_->*func_)(bound_, args...);
+	}
+
+	bool operator==(const MyMiniClosureDelegateInstanceImpl &other) const
+	{
+		return (callee_ == other.callee_) && (func_ == other.func_) &&
+			(bound_ == other.bound_);
+	}
+
+	virtual RetValType call(ParamTypes... Params) const override
+	{
+		return this->operator()(Params...);
+	}
+
+private:
+	const T *callee_;
+	func_type func_;
+	B bound_;
+};
+
 template <typename T>
 class MyMiniClosureDelegateInstanceImpl2;
 
@@ -82,6 +117,38 @@ private:
     func_type func_;
     B1 bound_;
     B2 bound2_;
+};
+
+template <typename T, typename R, typename B1, typename B2, typename... ParamTypes>
+class MyMiniClosureDelegateInstanceImpl2<R (T::*)(B1, B2, ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
+{
+public:
+	typedef R (T::*func_type)(B1, B2, ParamTypes...) const;
+
+	MyMiniClosureDelegateInstanceImpl2(func_type func, T &callee, B1 bound1, B2 bound2)
+		: callee_(&callee)
+		, func_(func)
+		, bound_(bound1)
+		, bound2_(bound2)
+	{
+	}
+
+	R operator()(ParamTypes... args) const
+	{
+		return (callee_->*func_)(bound_, bound2_, args...);
+	}
+
+	bool operator==(const MyMiniClosureDelegateInstanceImpl2 &other) const
+	{
+		return (callee_ == other.callee_) && (func_ == other.func_) &&
+			(bound_ == other.bound_) && (bound2_ == other.bound2_);
+	}
+
+private:
+	const T *callee_;
+	func_type func_;
+	B1 bound_;
+	B2 bound2_;
 };
 
 template <typename F, typename T, typename B>

@@ -52,7 +52,7 @@ public:
 	template <typename UserClass, typename... VarTypes>
 	void bindObjectHandle(typename MyMiniMemFunPtrType<true, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass& callee, VarTypes... vars)
 	{
-		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars);
+		this->mMyMiniDelegateInstance = make_delegate(func, callee, vars...);
 	}
 
 	//template <typename... VarTypes>
