@@ -44,31 +44,35 @@ public:
 	}
 
 	template <typename UserClass>
-	void bindObjectHandle(typename MySimpleMemFunPtrType<false, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
+	MySimpleDelegate& bindObjectHandle(typename MySimpleMemFunPtrType<false, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
 	{
 		this->mMyMiniDelegateInstance = makeDelegate(func, callee);
+		return *(this);
 	}
 
 	template <typename UserClass>
-	void bindObjectHandle(typename MySimpleMemFunPtrType<true, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
+	MySimpleDelegate& bindObjectHandle(typename MySimpleMemFunPtrType<true, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
 	{
 		this->mMyMiniDelegateInstance = makeDelegate(func, callee);
+		return *(this);
 	}
 
 	// 模板自动推断 const 值
 	// R (T::*)(ParamTypes...) 参数会报错
 	// error C2146: syntax error: missing ')' before identifier 'func'
 	template <typename UserClass, typename... VarTypes>
-	void bindObjectHandle(typename MySimpleMemFunPtrType<false, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
+	MySimpleDelegate& bindObjectHandle(typename MySimpleMemFunPtrType<false, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
 	{
 		this->mMyMiniDelegateInstance = makeDelegate(func, callee, vars...);
+		return *(this);
 	}
 
 	// 模板自动推断 const 值
 	template <typename UserClass, typename... VarTypes>
-	void bindObjectHandle(typename MySimpleMemFunPtrType<true, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
+	MySimpleDelegate& bindObjectHandle(typename MySimpleMemFunPtrType<true, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
 	{
 		this->mMyMiniDelegateInstance = makeDelegate(func, callee, vars...);
+		return *(this);
 	}
 
 	//template <typename... VarTypes>
@@ -77,9 +81,10 @@ public:
 	//	this->mMyMiniDelegateInstance = makeDelegate(func, VarTypes...);
 	//}
 
-	void bindStaticHandle(MethodPtrType func)
+	MySimpleDelegate& bindStaticHandle(MethodPtrType func)
 	{
 		this->mMyMiniDelegateInstance = makeDelegate(func);
+		return *(this);
 	}
 };
 
