@@ -5,21 +5,10 @@
 
 namespace MyNS
 {
-// we have C++11 support...yeah!
-/**
- * non specialized template declaration for delegate
- */
+
 template <typename T>
 class MyMiniMethodDelegateInstanceImpl;
 
-/**
- * specialization for member functions
- *
- * \tparam T            class-type of the object who's member function to call
- * \tparam R            return type of the function that gets captured
- * \tparam params       variadic template list for possible arguments
- *                      of the captured function
- */
 template <typename T, typename R, typename... ParamTypes>
 class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
@@ -56,9 +45,6 @@ private:
     func_type func_;
 };
 
-/**
- * specialization for const member functions
- */
 template <typename T, typename R, typename... ParamTypes>
 class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
@@ -96,13 +82,6 @@ private:
 };
 
 /**
- * specialization for free functions
- *
- * \tparam R            return type of the function that gets captured
- * \tparam params       variadic template list for possible arguments
- *                      of the captured function
- */
-/**
  * @brief 非成员函数没有 const 偏特化
  */
 template <typename R, typename... ParamTypes>
@@ -139,9 +118,6 @@ private:
     func_type func_;
 };
 
-/**
- * function to deduce template parameters from call-context
- */
 template <typename F, typename T>
 MyMiniMethodDelegateInstanceImpl<F>* make_delegate(F func, T& obj)
 {
@@ -154,6 +130,6 @@ MyMiniMethodDelegateInstanceImpl<T>* make_delegate(T func)
     return new MyMiniMethodDelegateInstanceImpl<T>(func);
 }
 
-} // namespace delegate
+}
 
-#endif /* end of include guard */
+#endif

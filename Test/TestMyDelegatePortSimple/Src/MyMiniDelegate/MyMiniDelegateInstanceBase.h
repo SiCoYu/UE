@@ -16,6 +16,6 @@ public:
 	//	return *((RetValType*)0);
 	//}
 };
-} // namespace delegate
+}
 
-#endif /* end of include guard */
+#endif

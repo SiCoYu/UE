@@ -11,7 +11,7 @@ template <typename T>
 class MyMiniClosureDelegateInstanceImpl;
 
 // 函数指针特化
-// 无法推断，可变模板参数要放在最后
+// 无法推断，可变模板参数要放在最后，否则总是推断到上面的实现
 //template <typename T, typename R, typename... ParamTypes, typename B>
 //class MyMiniClosureDelegateInstanceImpl<R (T::*)(ParamTypes..., B)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 template <typename T, typename R, typename B, typename... ParamTypes>

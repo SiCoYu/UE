@@ -67,6 +67,6 @@ public:
 	}
 };
 
-} // namespace delegate
+}
 
-#endif /* end of include guard */
+#endif
