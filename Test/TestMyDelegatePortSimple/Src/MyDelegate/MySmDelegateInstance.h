@@ -22,21 +22,21 @@ namespace MyNS
 	class MySmDelegate<R (T::*)(Params...)>
 	{
 	public:
-		typedef R (T::*func_type)(Params...);
+		typedef R (T::*MethodPtrType)(Params...);
 
-		MySmDelegate(func_type func, T& callee)
-			: callee_(callee)
-			, func_(func)
+		MySmDelegate(MethodPtrType func, T& callee)
+			: mUserObject(callee)
+			, mMethodPtr(func)
 		{}
 
 		R operator()(Params... args) const
 		{
-			return (callee_.*func_)(args...);
+			return (mUserObject.*mMethodPtr)(args...);
 		}
 
 		bool operator==(const delegate& other) const
 		{
-			return (&callee_ == &other.callee_) && (func_ == other.func_);
+			return (&mUserObject == &other.mUserObject) && (mMethodPtr == other.mMethodPtr);
 		}
 		bool operator!= (const delegate& other) const
 		{
@@ -44,8 +44,8 @@ namespace MyNS
 		}
 
 	private:
-		T& callee_;
-		func_type func_;
+		T& mUserObject;
+		MethodPtrType mMethodPtr;
 	};
 
 	/**
@@ -55,21 +55,21 @@ namespace MyNS
 	class MySmDelegate<R (T::*)(Params...) const>
 	{
 	public:
-		typedef R (T::*func_type)(Params...) const;
+		typedef R (T::*MethodPtrType)(Params...) const;
 
-		MySmDelegate(func_type func, const T& callee)
-			: callee_(callee)
-			, func_(func)
+		MySmDelegate(MethodPtrType func, const T& callee)
+			: mUserObject(callee)
+			, mMethodPtr(func)
 		{}
 
 		R operator()(Params... args) const
 		{
-			return (callee_.*func_)(args...);
+			return (mUserObject.*mMethodPtr)(args...);
 		}
 
 		bool operator==(const delegate& other) const
 		{
-			return (&callee_ == &other.callee_) && (func_ == other.func_);
+			return (&mUserObject == &other.mUserObject) && (mMethodPtr == other.mMethodPtr);
 		}
 		bool operator!= (const delegate& other) const
 		{
@@ -77,8 +77,8 @@ namespace MyNS
 		}
 
 	private:
-		const T& callee_;
-		func_type func_;
+		const T& mUserObject;
+		MethodPtrType mMethodPtr;
 	};
 
 	/**
@@ -91,20 +91,20 @@ namespace MyNS
 	class MySmDelegate<R (*)(Params...)>
 	{
 	public:
-		typedef R (*func_type)(Params...);
+		typedef R (*MethodPtrType)(Params...);
 
-		MySmDelegate(func_type func)
-			: func_(func)
+		MySmDelegate(MethodPtrType func)
+			: mMethodPtr(func)
 		{}
 
 		R operator()(Params... args) const
 		{
-			return (*func_)(args...);
+			return (*mMethodPtr)(args...);
 		}
 
 		bool operator==(const delegate& other) const
 		{
-			return func_ == other.func_;
+			return mMethodPtr == other.mMethodPtr;
 		}
 		bool operator!= (const delegate& other) const
 		{
@@ -112,7 +112,7 @@ namespace MyNS
 		}
 
 	private:
-		func_type func_;
+		MethodPtrType mMethodPtr;
 	};
 
 	/**

@@ -16,7 +16,7 @@ class MyMiniDelegate : public MyMiniDelegateBase
 {
 public:
 	typedef R RetValType;
-	typedef R (*func_type) (ParamTypes...);
+	typedef R (*MethodPtrType) (ParamTypes...);
 
 protected:
 	MyMiniDelegateInstanceBase<R, ParamTypes...>* mMyMiniDelegateInstance;
@@ -56,12 +56,12 @@ public:
 	}
 
 	//template <typename... VarTypes>
-	//void bindStaticHandle(func_type func, VarTypes...)
+	//void bindStaticHandle(MethodPtrType func, VarTypes...)
 	//{
 	//	this->mMyMiniDelegateInstance = make_delegate(func, VarTypes...);
 	//}
 
-	void bindStaticHandle(func_type func)
+	void bindStaticHandle(MethodPtrType func)
 	{
 		this->mMyMiniDelegateInstance = make_delegate(func);
 	}

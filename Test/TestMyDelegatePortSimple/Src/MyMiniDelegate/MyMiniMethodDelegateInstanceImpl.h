@@ -13,21 +13,21 @@ template <typename T, typename R, typename... ParamTypes>
 class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
-    typedef R (T::*func_type)(ParamTypes...);
+    typedef R (T::*MethodPtrType)(ParamTypes...);
 
-	MyMiniMethodDelegateInstanceImpl(func_type func, T* callee)
-        : callee_(callee)
-        , func_(func)
+	MyMiniMethodDelegateInstanceImpl(MethodPtrType func, T* callee)
+        : mUserObject(callee)
+        , mMethodPtr(func)
     {}
 
     R operator()(ParamTypes... args) const
     {
-        return (callee_->*func_)(args...);
+        return (mUserObject->*mMethodPtr)(args...);
     }
 
     bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
     {
-        return (&callee_ == &other.callee_) && (func_ == other.func_);
+        return (&mUserObject == &other.mUserObject) && (mMethodPtr == other.mMethodPtr);
     }
 
     bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
@@ -41,29 +41,29 @@ public:
 	}
 
 private:
-    T* callee_;
-    func_type func_;
+    T* mUserObject;
+    MethodPtrType mMethodPtr;
 };
 
 template <typename T, typename R, typename... ParamTypes>
 class MyMiniMethodDelegateInstanceImpl<R (T::*)(ParamTypes...) const> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
-    typedef R (T::*func_type)(ParamTypes...) const;
+    typedef R (T::*MethodPtrType)(ParamTypes...) const;
 
-	MyMiniMethodDelegateInstanceImpl(func_type func, const T* callee)
-        : callee_(callee)
-        , func_(func)
+	MyMiniMethodDelegateInstanceImpl(MethodPtrType func, const T* callee)
+        : mUserObject(callee)
+        , mMethodPtr(func)
     {}
 
     R operator()(ParamTypes... args) const
     {
-        return (callee_->*func_)(args...);
+        return (mUserObject->*mMethodPtr)(args...);
     }
 
     bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
     {
-        return (&callee_ == &other.callee_) && (func_ == other.func_);
+        return (&mUserObject == &other.mUserObject) && (mMethodPtr == other.mMethodPtr);
     }
 
     bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
@@ -77,8 +77,8 @@ public:
 	}
 
 private:
-    const T* callee_;
-    func_type func_;
+    const T* mUserObject;
+    MethodPtrType mMethodPtr;
 };
 
 /**
@@ -88,20 +88,20 @@ template <typename R, typename... ParamTypes>
 class MyMiniMethodDelegateInstanceImpl<R (*)(ParamTypes...)> : public MyMiniDelegateInstanceBase<R, ParamTypes...>
 {
 public:
-    typedef R (*func_type)(ParamTypes...);
+    typedef R (*MethodPtrType)(ParamTypes...);
 
-	MyMiniMethodDelegateInstanceImpl(func_type func)
-        : func_(func)
+	MyMiniMethodDelegateInstanceImpl(MethodPtrType func)
+        : mMethodPtr(func)
     {}
 
     R operator()(ParamTypes... args) const
     {
-        return (*func_)(args...);
+        return (*mMethodPtr)(args...);
     }
 
     bool operator==(const MyMiniMethodDelegateInstanceImpl& other) const
     {
-        return func_ == other.func_;
+        return mMethodPtr == other.mMethodPtr;
     }
 
     bool operator!= (const MyMiniMethodDelegateInstanceImpl& other) const
@@ -115,7 +115,7 @@ public:
 	}
 
 private:
-    func_type func_;
+    MethodPtrType mMethodPtr;
 };
 
 template <typename F, typename T>
