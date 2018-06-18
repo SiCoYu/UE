@@ -145,7 +145,6 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Core/Tools",
 
                 "MyProject/Private/BasicFrame/Libs/LuaBind",
-                "MyProject/Private/BasicFrame/Libs/LuaCppInterface",
                 "MyProject/Private/BasicFrame/Libs/LuaCBridge",
                 "MyProject/Private/BasicFrame/Libs/Module",
                 "MyProject/Private/BasicFrame/Libs/Scene",
