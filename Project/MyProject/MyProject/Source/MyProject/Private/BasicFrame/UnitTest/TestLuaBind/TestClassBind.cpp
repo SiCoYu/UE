@@ -7,7 +7,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 void TestClassBind::bind(lua_State* L)
 {
-	luabridge::getGlobalNamespace(L)
+	//luabridge::getGlobalNamespace(L)
+	LuaBinding(L)
 		.beginClass<TestClass>("TestClass")
 		//.addConstructor<void(*)(void)>()  // 如果有多个构造函数,则只能导出一个
 		.addConstructor<void(*)(const std::string&)>()

@@ -6,7 +6,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 void TestGlocalBind::bind(lua_State* L)
 {
-	luabridge::getGlobalNamespace(L)
+	//luabridge::getGlobalNamespace(L)
+	LuaBinding(L)
 		.addFunction("sayHello", SayHello);
 }
 

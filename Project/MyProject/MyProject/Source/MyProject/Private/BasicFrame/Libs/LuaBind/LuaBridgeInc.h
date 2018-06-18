@@ -10,4 +10,8 @@ extern "C"
 	#include "luasocket.h"
 }  // extern "C"
 
-#include "LuaBridge/LuaBridge.h"
+// LuaBridge
+//#include "LuaBridge/LuaBridge.h"
+
+// LuaIntf
+#include "LuaIntf/LuaIntf.h"

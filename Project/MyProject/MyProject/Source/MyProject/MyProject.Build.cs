@@ -456,7 +456,7 @@ public class MyProject : ModuleRules
                 // ... add public include paths required here ...
                 Path.Combine(ThirdPartyPath, "Inc"),
                 Path.Combine(ThirdPartyPath, "Inc", "Lua"),
-                Path.Combine(ThirdPartyPath, "Inc", "LuaBridge"),
+                //Path.Combine(ThirdPartyPath, "Inc", "LuaBridge"),
                 Path.Combine(ThirdPartyPath, "Inc", "LuaSocket"),
             }
         );
