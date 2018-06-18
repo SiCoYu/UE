@@ -10,7 +10,7 @@ public:
 	typedef R RetValType;
 
 public:
-	virtual bool empty()
+	virtual bool empty() const
 	{
 		return true;
 	}

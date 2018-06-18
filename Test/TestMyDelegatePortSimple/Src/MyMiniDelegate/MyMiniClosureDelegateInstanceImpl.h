@@ -28,7 +28,7 @@ public:
     {
     }
 
-	virtual bool empty() override
+	virtual bool empty() const override
 	{
 		return (!mUserObject || !mMethodPtr);
 	}
@@ -75,7 +75,7 @@ public:
 	{
 	}
 
-	virtual bool empty() override
+	virtual bool empty() const override
 	{
 		return (!mUserObject || !mMethodPtr);
 	}
@@ -127,7 +127,7 @@ public:
     {
     }
 
-	virtual bool empty() override
+	virtual bool empty() const override
 	{
 		return (!mUserObject || !mMethodPtr);
 	}
@@ -171,7 +171,7 @@ public:
 	{
 	}
 
-	virtual bool empty() override
+	virtual bool empty() const override
 	{
 		return (!mUserObject || !mMethodPtr);
 	}

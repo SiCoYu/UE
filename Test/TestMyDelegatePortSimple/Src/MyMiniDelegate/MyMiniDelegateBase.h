@@ -16,7 +16,7 @@ public:
 
 	}
 
-	virtual bool empty()
+	virtual bool empty() const
 	{
 		return true;
 	}
@@ -24,6 +24,11 @@ public:
 	virtual void clear()
 	{
 		
+	}
+
+	virtual bool operator ! () const
+	{
+		return true;
 	}
 };
 }

@@ -22,14 +22,20 @@ protected:
 	MyMiniDelegateInstanceBase<R, ParamTypes...>* mMyMiniDelegateInstance;
 
 public:
-	virtual bool empty() override
+	virtual bool empty() const override
 	{
-		return true;
+		return this->mMyMiniDelegateInstance->empty();
 	}
 
 	virtual void clear() override
 	{
 
+	}
+
+	virtual bool operator ! () const override
+	{
+		// const 函数中只能调用 const 接口
+		return this->empty();
 	}
 
 	RetValType call(ParamTypes... Params) const
