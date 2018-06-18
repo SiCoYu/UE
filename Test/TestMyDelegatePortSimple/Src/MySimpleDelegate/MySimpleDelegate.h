@@ -38,6 +38,11 @@ public:
 		return this->empty();
 	}
 
+	RetValType operator()(ParamTypes... Params) const
+	{
+		return this->mMyMiniDelegateInstance->call(Params...);
+	}
+
 	RetValType call(ParamTypes... Params) const
 	{
 		return this->mMyMiniDelegateInstance->call(Params...);
