@@ -40,12 +40,12 @@ void FrameTimerItem::addTimerEventHandle(EventDispatchDelegate handle)
 		this->mTimerDispatch = MY_NEW EventDispatchFunctionObject();
 	}
 
-	this->mTimerDispatch->setEventHandle(handle);
+	this->mTimerDispatch->setFuncObject(handle);
 }
 
 void FrameTimerItem::removeTimerEventHandle(EventDispatchDelegate handle)
 {
-	this->mTimerDispatch->clearEventHandle();
+	this->mTimerDispatch->clearFuncObject();
 }
 
 void FrameTimerItem::onFrameTimer()

@@ -34,7 +34,7 @@ void LoopDepth::setIncHandle(EventDispatchDelegate handle)
 		this->mIncHandle = MY_NEW EventDispatchFunctionObject();
 	}
 
-	this->mIncHandle->setEventHandle(handle);
+	this->mIncHandle->setFuncObject(handle);
 }
 
 void LoopDepth::setDecHandle(EventDispatchDelegate handle)
@@ -44,7 +44,7 @@ void LoopDepth::setDecHandle(EventDispatchDelegate handle)
 		this->mDecHandle = MY_NEW EventDispatchFunctionObject();
 	}
 
-	this->mDecHandle->setEventHandle(handle);
+	this->mDecHandle->setFuncObject(handle);
 }
 
 void LoopDepth::setZeroHandle(EventDispatchDelegate handle)
@@ -54,7 +54,7 @@ void LoopDepth::setZeroHandle(EventDispatchDelegate handle)
 		this->mZeroHandle = MY_NEW EventDispatchFunctionObject();
 	}
 
-	this->mZeroHandle->setEventHandle(handle);
+	this->mZeroHandle->setFuncObject(handle);
 }
 
 void LoopDepth::_incDepth()

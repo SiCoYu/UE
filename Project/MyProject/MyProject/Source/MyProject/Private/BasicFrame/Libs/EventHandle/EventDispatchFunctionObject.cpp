@@ -28,7 +28,7 @@ bool EventDispatchFunctionObject::operator ! ()
 
 void EventDispatchFunctionObject::clear()
 {
-	this->clearEventHandle();
+	this->clearFuncObject();
 }
 
 bool EventDispatchFunctionObject::empty()
@@ -36,12 +36,12 @@ bool EventDispatchFunctionObject::empty()
 	return this->mHandle.empty();
 }
 
-void EventDispatchFunctionObject::setEventHandle(EventDispatchDelegate handle)
+void EventDispatchFunctionObject::setFuncObject(EventDispatchDelegate handle)
 {
 	this->mHandle = handle;
 }
 
-void EventDispatchFunctionObject::clearEventHandle()
+void EventDispatchFunctionObject::clearFuncObject()
 {
 	this->mHandle.clear();
 }

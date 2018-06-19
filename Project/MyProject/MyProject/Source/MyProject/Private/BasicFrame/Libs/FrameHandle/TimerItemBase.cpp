@@ -40,12 +40,12 @@ void TimerItemBase::addTimerEventHandle(EventDispatchDelegate handle)
 		this->mTimerDispatch = MY_NEW EventDispatchFunctionObject();
 	}
 
-	this->mTimerDispatch->setEventHandle(handle);
+	this->mTimerDispatch->setFuncObject(handle);
 }
 
 void TimerItemBase::removeTimerEventHandle(EventDispatchDelegate handle)
 {
-	this->mTimerDispatch->clearEventHandle();
+	this->mTimerDispatch->clearFuncObject();
 }
 
 void TimerItemBase::OnTimer(float delta)

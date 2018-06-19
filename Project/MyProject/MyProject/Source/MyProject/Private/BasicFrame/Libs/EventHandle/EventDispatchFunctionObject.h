@@ -26,11 +26,11 @@ public:
 	bool operator ! ();
 
 	virtual void clear();
-	virtual void clearEventHandle();
+	virtual void clearFuncObject();
 
 	virtual bool empty();
 
-	virtual void setEventHandle(EventDispatchDelegate handle);
+	virtual void setFuncObject(EventDispatchDelegate handle);
 	virtual void call(IDispatchObject* dispObj);
 };
 
