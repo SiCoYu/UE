@@ -9,8 +9,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 class MRay
 {
 protected:
-	FVector m_rayOrigin; 
-	FVector m_rayDirection;
+	FVector mRayOrigin; 
+	FVector mRayDirection;
 
 public:
 	FVector& getRayOrigin();

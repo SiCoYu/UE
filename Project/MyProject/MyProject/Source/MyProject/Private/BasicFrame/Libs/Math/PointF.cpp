@@ -5,27 +5,27 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 PointF::PointF(float x, float y)
 {
-	m_x = x;
-	m_y = y;
+	mX = x;
+	mY = y;
 }
 
 float PointF::getX()
 {
-	return m_x;
+	return mX;
 }
 void PointF::setX(float value)
 {
-	m_x = value;
+	mX = value;
 }
 
 float PointF::getY()
 {
-	return m_y;
+	return mY;
 }
 
 void PointF::setY(float value)
 {
-	m_y = value;
+	mY = value;
 }
 
 MY_END_NAMESPACE

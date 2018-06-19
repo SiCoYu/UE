@@ -10,8 +10,8 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class IModuleSys
 {
-    virtual void loadModule(ModuleId moduleID) = 0;
-	virtual void unloadModule(ModuleId moduleID) = 0;
+    virtual void loadModule(ModuleId moduleId) = 0;
+	virtual void unloadModule(ModuleId moduleId) = 0;
 };
 
 MY_END_NAMESPACE

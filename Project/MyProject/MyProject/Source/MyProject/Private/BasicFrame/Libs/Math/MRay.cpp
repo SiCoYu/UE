@@ -5,22 +5,22 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 FVector& MRay::getRayOrigin()
 {
-	return m_rayOrigin;
+	return mRayOrigin;
 }
 
 void MRay::setRayOrigin(FVector value)
 {
-	m_rayOrigin = value;
+	mRayOrigin = value;
 }
 
 FVector& MRay::getRayDirection()
 {
-	return m_rayDirection;
+	return mRayDirection;
 }
 
 void MRay::setRayDirection(FVector value)
 {
-	m_rayDirection = value;
+	mRayDirection = value;
 }
 
 MY_END_NAMESPACE

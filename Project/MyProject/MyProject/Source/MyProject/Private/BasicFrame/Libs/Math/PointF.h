@@ -8,8 +8,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 class PointF
 {
 protected:
-	float m_x;
-    float m_y;
+	float mX;
+    float mY;
 
 public:
 	PointF(float x, float y);
