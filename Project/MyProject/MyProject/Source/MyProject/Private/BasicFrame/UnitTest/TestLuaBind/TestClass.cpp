@@ -98,8 +98,15 @@ int TestClass::Lua_StartWith(lua_State* L)
 	bool result = StartWith(str, ignore_spaces, &off);
 
 	// 返回结果
-	luabridge::push(L, result);
-	luabridge::push(L, off);
+	//luabridge::push(L, result);
+	//luabridge::push(L, off);
+
+	/**
+	 * @url LuaIntf\LuaState.h
+	 */
+	LuaIntf::Lua::push(L, result);
+	LuaIntf::Lua::push(L, off);
+
 	return 2;  // 返回值有两个
 }
 
