@@ -21,7 +21,7 @@ void PromiseEventDispatch::setEventState(int value)
 	Super::dispatchEvent(nullptr);
 }
 
-void PromiseEventDispatch::clearEventState(int value)
+void PromiseEventDispatch::clearEventState()
 {
 	this->mIsValid = false;
 	this->mEventState = -1;
