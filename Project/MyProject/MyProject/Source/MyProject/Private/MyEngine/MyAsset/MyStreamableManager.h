@@ -4,7 +4,10 @@
 #define __MyStreamableManager_H
 
 #include <string>
+
 #include "Engine/StreamableManager.h"	 // FStreamableManager
+#include "UObject/SoftObjectPath.h"	// FStringAssetReference
+
 #include "GObject.h"
 #include "PlatformDefine.h"
 
@@ -40,6 +43,9 @@ public:
 	void RequestAsyncLoad(const std::string& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority = FStreamableManager::DefaultAsyncLoadPriority);
 
 	void RequestAsyncLoad(const FStringAssetReference& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority = FStreamableManager::DefaultAsyncLoadPriority);
+
+	bool isAsyncLoadComplete(const FSoftObjectPath& Target) const;
+	void unload(const FSoftObjectPath& Target);
 
 protected:
 	bool IsMultithreaded();
