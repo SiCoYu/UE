@@ -6,7 +6,7 @@
 #include <string>
 
 #include "Engine/StreamableManager.h"	 // FStreamableManager
-#include "UObject/SoftObjectPath.h"	// FStringAssetReference
+#include "UObject/SoftObjectPath.h"	// FStringAssetReference\FSoftObjectPath
 
 #include "GObject.h"
 #include "PlatformDefine.h"
@@ -22,6 +22,9 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+/**
+ * @brief 没有打包的时候，就是一个默认包，一个一个资源打包的时候，才会有 FPackage
+ */
 class MyStreamableManager : public GObject
 {
 public:

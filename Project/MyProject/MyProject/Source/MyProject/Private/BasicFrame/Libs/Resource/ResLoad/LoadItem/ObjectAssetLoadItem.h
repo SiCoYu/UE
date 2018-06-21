@@ -1,8 +1,9 @@
 ﻿#ifndef __ObjectAssetLoadItem_H
 #define __ObjectAssetLoadItem_H
 
+#include "CoreUObject.h"	// UObject
+#include "UObject/SoftObjectPath.h"	// FSoftObjectPath
 #include "LoadItem.h"
-#include "CoreUObject.h"	// UObject 
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "PlatformDefine.h"
@@ -18,7 +19,9 @@ class ObjectAssetLoadItem : public LoadItem
 
 protected:
 	UObject* mResObject;		// uasset 类型的资源
-	FStringAssetReference mAssetRef;	// 异步加载需要的
+	// //DEPRECATED(4.18, "FStringAssetReference was renamed to FSoftObjectPath as it is now not always a string and can also refer to a subobject")
+	//FStringAssetReference mAssetRef;	// 异步加载需要的
+	FSoftObjectPath mAssetRef;	// 异步加载需要的
 
 protected:
 	void syncLoad();
