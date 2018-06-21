@@ -67,10 +67,14 @@ void ObjectAssetLoadItem::asyncLoad()
 void ObjectAssetLoadItem::onAsyncLoaded()
 {
 	//this->mResObject = Cast<UClass>GMyStreamableManager->GetStreamed(this->mPath);
-	//this->mResObject = Cast<UClass>(this->mAssetRef.ResolveObject());
+
+	// 资源获取，里面也是调用 FindObject 接口
+	this->mResObject = Cast<UClass>(this->mAssetRef.ResolveObject());
+
+	// 直接获取资源
 	// Engine\Source\Runtime\GameplayAbilities\Private\GameplayCueManager.cpp
 	// OnGameplayCueNotifyAsyncLoadComplete
-	this->mResObject = UtilEngineWrap::FindObject<UObject>(nullptr, *this->mAssetRef.ToString());
+	//this->mResObject = UtilEngineWrap::FindObject<UObject>(nullptr, *this->mAssetRef.ToString());
 
 	//if (nullptr != this->mResObject)
 	if (ensure(this->mResObject))
