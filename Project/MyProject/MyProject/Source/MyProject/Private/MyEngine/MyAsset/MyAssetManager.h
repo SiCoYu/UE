@@ -2,6 +2,9 @@
 
 #include "Engine/AssetManager.h"	 // UAssetManager
 //#include "MyAssetManager.generated.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 /**
  * @brief http://blog.csdn.net/yangxuan0261/article/details/54408683
@@ -25,3 +28,5 @@ public:
 	void init();
 	void dispose();
 };
+
+MY_END_NAMESPACE

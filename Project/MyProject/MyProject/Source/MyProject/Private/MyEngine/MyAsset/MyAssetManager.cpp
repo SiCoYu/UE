@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "MyAssetManager.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MyAssetManager::MyAssetManager()
 {
 	

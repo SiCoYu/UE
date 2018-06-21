@@ -6,16 +6,12 @@
 #include "UObject/UObject.h"		// UObject
 
 #include "GObject.h"
-#include "MClassInfo.h"
-#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class MySoftObjectPath : public GObject
 {
-	M_DECLARE_CLASS(MySoftObjectPath, GObject)
-
 protected:
 	FSoftObjectPath mNativeSoftObjectPath;
 

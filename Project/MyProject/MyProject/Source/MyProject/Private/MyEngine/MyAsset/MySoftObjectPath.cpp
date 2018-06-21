@@ -1,6 +1,9 @@
 #include "MyProject.h"
 #include "MySoftObjectPath.h"
 #include "UtilStr.h"
+#include "MClassFactory.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
 
 MySoftObjectPath::MySoftObjectPath()
 {
@@ -31,3 +34,5 @@ UObject* MySoftObjectPath::resolveObject() const
 {
 	return this->mNativeSoftObjectPath.ResolveObject();
 }
+
+MY_END_NAMESPACE

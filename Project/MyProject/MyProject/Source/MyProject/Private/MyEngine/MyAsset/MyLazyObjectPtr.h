@@ -5,18 +5,15 @@
 #include "UObject/PersistentObjectPtr.h"		// TPersistentObjectPtr
 
 #include "GObject.h"
-#include "MClassInfo.h"
-#include "MClassMacros.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+template<class T = UObject>
 class MyLazyObjectPtr : public GObject
 {
-	M_DECLARE_CLASS(MySoftObjectPath, GObject)
-
 protected:
-	FLazyObjectPtr mNativeLazyObjectPtr;
+	TLazyObjectPtr<T> mNativeLazyObjectPtr;
 
 public:
 	MyLazyObjectPtr();
@@ -26,3 +23,5 @@ public:
 };
 
 MY_END_NAMESPACE
+
+#include "MyLazyObjectPtr.h"
