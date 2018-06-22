@@ -24,11 +24,11 @@ public:
 	PromiseEventDispatch();
 
 	void setEventState(int value);
-	void clearEventState(int value);
+	void clearEventState();
 	virtual void addEventHandle(
 		EventDispatchDelegate handle
 	) override;
-}
+};
 	
 MY_END_NAMESPACE
 
