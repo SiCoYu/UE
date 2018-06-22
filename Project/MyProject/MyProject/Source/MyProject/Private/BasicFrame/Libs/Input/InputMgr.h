@@ -13,6 +13,7 @@
 
 class AMyPlayerControllerBase;
 class UPlayerInput;
+class FKey;
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -31,6 +32,10 @@ public:
 
 	void init();
 	void dispose();
+
+	bool getKeyDown(FKey keyCode);
+	bool getKeyUp(FKey keyCode);
+	bool getKey(FKey keyCode);
 };
 
 MY_END_NAMESPACE
