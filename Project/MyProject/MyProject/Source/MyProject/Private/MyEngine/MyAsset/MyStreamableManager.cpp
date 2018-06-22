@@ -80,12 +80,12 @@ bool MyStreamableManager::IsMultithreaded()
 
 bool MyStreamableManager::isAsyncLoadComplete(const FSoftObjectPath& Target) const
 {
-
+	return this->mStreamableManager.IsAsyncLoadComplete(Target);
 }
 
 void MyStreamableManager::unload(const FSoftObjectPath& Target)
 {
-
+	this->mStreamableManager.Unload(Target);
 }
 
 MY_END_NAMESPACE
