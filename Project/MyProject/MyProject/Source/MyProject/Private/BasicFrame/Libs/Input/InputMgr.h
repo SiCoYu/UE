@@ -9,6 +9,7 @@
 #include "MDictionary.h"
 #include "MRay.h"
 #include "IOEventDispatchDelegate.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 class AMyPlayerControllerBase;
@@ -20,7 +21,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 输入管理器主要是控制场景中的对象的
  */
-class InputMgr
+class InputMgr : public GObject
 {
 protected:
 	AMyPlayerControllerBase* mPlayerController;

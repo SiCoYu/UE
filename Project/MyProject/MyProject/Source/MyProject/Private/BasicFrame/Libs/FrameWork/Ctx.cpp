@@ -36,6 +36,8 @@
 #include "TickMgr.h"
 #include "TimerMgr.h"
 #include "FrameTimerMgr.h"
+#include "InputMgr.h"
+
 #include "TickPriority.h"
 //#include "MySingletonBP.h"
 #include "MyBluePrintBase.h"
@@ -89,6 +91,7 @@ Ctx::Ctx()
 	this->mTickMgr.setNull();
 	this->mTimerMgr.setNull();
 	this->mFrameTimerMgr.setNull();
+	this->mInputMgr.setNull();
 
 	this->mBPCtx = nullptr;
 	this->mMyNativeObjectReferencer = nullptr;
@@ -145,6 +148,7 @@ void Ctx::construct()
 	this->mTickMgr = MySharedPtr<TickMgr>(MY_NEW TickMgr());
 	this->mTimerMgr = MySharedPtr<TimerMgr>(MY_NEW TimerMgr());
 	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(MY_NEW FrameTimerMgr());
+	this->mInputMgr = MySharedPtr<FrameTimerMgr>(MY_NEW InputMgr());
 
 	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 
@@ -190,6 +194,7 @@ void Ctx::_execInit()
 	this->mTickMgr->init();
 	this->mTimerMgr->init();
 	this->mFrameTimerMgr->init();
+	this->mInputMgr->init();
 
 	this->mBPCtx->init();
 	this->mMyNativeObjectReferencer->init();
@@ -250,6 +255,7 @@ void Ctx::_preDispose()
 	this->mTickMgr->dispose();
 	this->mTimerMgr->dispose();
 	this->mFrameTimerMgr->dispose();
+	this->mInputMgr->dispose();
 
 	this->mBPCtx->dispose();
 	this->mMyNativeObjectReferencer->dispose();
@@ -302,6 +308,8 @@ void Ctx::_execDispose()
 	this->mTickMgr.setNull();
 	this->mTimerMgr.setNull();
 	this->mFrameTimerMgr.setNull();
+	this->mInputMgr.setNull();
+
 	this->mBPCtx = nullptr;
 }
 
@@ -534,6 +542,11 @@ MySharedPtr<TimerMgr> Ctx::getTimerMgr()
 }
 
 MySharedPtr<FrameTimerMgr> Ctx::getFrameTimerMgr()
+{
+	return this->mFrameTimerMgr;
+}
+
+MySharedPtr<InputMgr> Ctx::getInputMgr()
 {
 	return this->mFrameTimerMgr;
 }

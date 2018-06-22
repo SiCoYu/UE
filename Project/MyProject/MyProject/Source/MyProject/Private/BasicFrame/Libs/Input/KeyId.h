@@ -6,9 +6,11 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 enum class KeyId
 {
-	None = 0,
-	A = 1,
-	Total = 2,
+	A = 0,
+	S = 1,
+	D = 2,
+	F = 3,
+	Total = 4,
 };
 
 MY_END_NAMESPACE

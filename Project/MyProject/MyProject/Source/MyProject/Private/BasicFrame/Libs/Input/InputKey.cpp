@@ -2,158 +2,173 @@
 #include "InputKey.h"
 #include "KeyId.h"
 #include "AddOnceEventDispatch.h"
-#include "InputCoreTypes.h"		// FKey
+#include "InputCoreTypes.h"		// FKey \ EKeys
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
+#include "Ctx.h"
+#include "InputMgr.h"
+
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-InputKey* InputKey::None = new InputKey(KeyId.None, "None");
-InputKey* InputKey::A = new InputKey(KeyId.A, "A");
+InputKey* InputKey::A = new InputKey(KeyId::A, EKeys::A, "A");
+InputKey* InputKey::S = new InputKey(KeyId::S, EKeys::S, "S");
+InputKey* InputKey::D = new InputKey(KeyId::D, EKeys::D, "D");
+InputKey* InputKey::F = new InputKey(KeyId::F, EKeys::F, "F");
 
 InputKey* InputKey::mInputKeyArray[(int)KeyId::Total];
 
-InputKey* InputKey::getInputKeyArray()
+InputKey** InputKey::getInputKeyArray()
 {
-	if (InputKey::mInputKeyArray == nullptr)
-	{
-		InputKey::mInputKeyArray = new InputKey[(int)KeyCode.Joystick8Button19 + 1];
-		InputKey::mInputKeyArray[(int)KeyCode.None] = None;
-		InputKey::mInputKeyArray[(int)KeyCode.A] = A;
-		InputKey::mInputKeyArray[(int)KeyCode.B] = B;
-		InputKey::mInputKeyArray[(int)KeyCode.C] = C;
-		InputKey::mInputKeyArray[(int)KeyCode.D] = D;
-	}
+	InputKey::mInputKeyArray[(int)KeyId::None] = InputKey::None;
+	InputKey::mInputKeyArray[(int)KeyId::A] = InputKey::A;
+	InputKey::mInputKeyArray[(int)KeyId::B] = InputKey::B;
+	InputKey::mInputKeyArray[(int)KeyId::C] = InputKey::C;
+	InputKey::mInputKeyArray[(int)KeyId::D] = InputKey::D;
 
 	return InputKey::mInputKeyArray;
 }
 
-static std::string codeToString(KeyId value)
+static std::string codeToString(FKey value)
 {
-	return mInputKeyArray[(int)value].getKeyDesc();
+	//return InputKey::mInputKeyArray[(int)value].getKeyDesc();
+	return "";
 }
 
-InputKey::InputKey(FKey keyCode, std::string keyDesc)
+InputKey::InputKey(KeyId keyId, FKey keyCode, std::string keyDesc)
 {
-	this.mKeyCode = keyCode;
-	this.mKeyDesc = keyDesc;
+	this->mKeyId = keyId;
+	this->mKeyCode = keyCode;
+	this->mKeyDesc = keyDesc;
 
-	this.mKeyState = false;
-	this.mKeyStateOld = false;
-	this.mJustPressed = false;
-	this.mJustReleased = false;
+	this->mKeyState = false;
+	this->mKeyStateOld = false;
+	this->mJustPressed = false;
+	this->mJustReleased = false;
 
-	this.mOnKeyUpDispatch = new AddOnceEventDispatch();
-	this.mOnKeyDownDispatch = new AddOnceEventDispatch();
-	this.mOnKeyPressDispatch = new AddOnceEventDispatch();
+	this->mOnKeyUpDispatch = MY_NEW AddOnceEventDispatch();
+	this->mOnKeyDownDispatch = MY_NEW AddOnceEventDispatch();
+	this->mOnKeyPressDispatch = MY_NEW AddOnceEventDispatch();
 }
 
-KeyCode InputKey::getKeyCode()
+FKey InputKey::getKeyId()
 {
-	return mKeyCode;
+	return this->mKeyId;
+}
+
+FKey InputKey::getKeyCode()
+{
+	return this->mKeyCode;
 }
 
 std::string InputKey::getKeyDesc()
 {
-	return mKeyDesc;
+	return this->mKeyDesc;
 }
 
 void InputKey::onTick(float delta, TickMode tickMode)
 {
-	if (Input.GetKeyDown(this.mKeyCode))
+	if (GInputMgr->getKeyDown(this->mKeyCode))
 	{
-		this._onKeyDown(this.mKeyCode);
+		this->_onKeyDown(this->mKeyCode);
 	}
 
-	if (Input.GetKeyUp(this.mKeyCode))
+	if (GInputMgr->getKeyUp(this->mKeyCode))
 	{
-		this._onKeyUp(this.mKeyCode);
+		this->_onKeyUp(this->mKeyCode);
 	}
 
-	if (Input.GetKey(this.mKeyCode))
+	if (GInputMgr->getKey(this->mKeyCode))
 	{
-		this._onKeyPress(this.mKeyCode);
+		this->_onKeyPress(this->mKeyCode);
 	}
 }
 
-void InputKey::_onKeyDown(KeyCode keyCode)
+void InputKey::_onKeyDown(FKey keyCode)
 {
-	if (nullptr != this.mOnKeyDownDispatch)
+	if (nullptr != this->mOnKeyDownDispatch)
 	{
-		this.mOnKeyDownDispatch.dispatchEvent(this);
+		this->mOnKeyDownDispatch->dispatchEvent(this);
 	}
 }
 
-void InputKey::_onKeyUp(KeyCode keyCode)
+void InputKey::_onKeyUp(FKey keyCode)
 {
-	if (null != this.mOnKeyUpDispatch)
+	if (nullptr != this->mOnKeyUpDispatch)
 	{
-		this.mOnKeyUpDispatch.dispatchEvent(this);
+		this->mOnKeyUpDispatch->dispatchEvent(this);
 	}
 }
 
-void InputKey::_onKeyPress(KeyCode keyCode)
+void InputKey::_onKeyPress(FKey keyCode)
 {
-	if (null != this.mOnKeyPressDispatch)
+	if (nullptr != this->mOnKeyPressDispatch)
 	{
-		this.mOnKeyPressDispatch.dispatchEvent(this);
+		this->mOnKeyPressDispatch->dispatchEvent(this);
 	}
 }
 
-void InputKey::addKeyListener(EventId evtId, EventDispatchDelegate handle)
+void InputKey::addKeyListener(InputEventId evtId, EventDispatchDelegate handle)
 {
-	if (EventId.KEYUP_EVENT == evtID)
+	if (InputEventId::KEYUP_EVENT == evtId)
 	{
-		mOnKeyUpDispatch.addEventHandle(null, handle);
+		this->mOnKeyUpDispatch.addEventHandle(handle);
 	}
-	else if (EventId.KEYDOWN_EVENT == evtID)
+	else if (InputEventId::KEYDOWN_EVENT == evtId)
 	{
-		mOnKeyDownDispatch.addEventHandle(null, handle);
+		this->mOnKeyDownDispatch.addEventHandle(handle);
 	}
-	else if (EventId.KEYPRESS_EVENT == evtID)
+	else if (InputEventId::KEYPRESS_EVENT == evtId)
 	{
-		mOnKeyPressDispatch.addEventHandle(null, handle);
+		this->mOnKeyPressDispatch.addEventHandle(handle);
 	}
 }
 
-void InputKey::removeKeyListener(EventId evtID, EventDispatchDelegate handle)
+void InputKey::removeKeyListener(InputEventId evtId, EventDispatchDelegate handle)
 {
-	if (EventId.KEYUP_EVENT == evtID)
+	if (InputEventId::KEYUP_EVENT == evtId)
 	{
-		mOnKeyUpDispatch.removeEventHandle(null, handle);
+		this->mOnKeyUpDispatch.removeEventHandle(handle);
 	}
-	else if (EventId.KEYDOWN_EVENT == evtID)
+	else if (InputEventId::KEYDOWN_EVENT == evtId)
 	{
-		mOnKeyDownDispatch.removeEventHandle(null, handle);
+		this->mOnKeyDownDispatch.removeEventHandle(handle);
 	}
-	else if (EventId.KEYPRESS_EVENT == evtID)
+	else if (InputEventId::KEYPRESS_EVENT == evtId)
 	{
-		mOnKeyPressDispatch.removeEventHandle(null, handle);
+		this->mOnKeyPressDispatch.removeEventHandle(handle);
 	}
 }
 
 // 是否还有需要处理的事件
 bool InputKey::hasEventHandle()
 {
-	if (this.mOnKeyUpDispatch.hasEventHandle())
+	bool ret = false;
+
+	if (this->mOnKeyUpDispatch->hasEventHandle())
 	{
-		return true;
+		ret = true;
 	}
-	if (this.mOnKeyDownDispatch.hasEventHandle())
+	if (this->mOnKeyDownDispatch->hasEventHandle())
 	{
-		return true;
+		ret = true;
 	}
-	if (this.mOnKeyPressDispatch.hasEventHandle())
+	if (this->mOnKeyPressDispatch->hasEventHandle())
 	{
-		return true;
+		ret = true;
 	}
 
-	return false;
+	return ret;
 }
 
 bool InputKey::keyJustPressed()
 {
-	if (Input.GetKey(this.mKeyCode))
+	bool ret = false;
+
+	if (GInputMgr->getKey(this->mKeyCode))
 	{
-		return true;
+		ret = true;
 	}
 
 	return false;
@@ -161,22 +176,26 @@ bool InputKey::keyJustPressed()
 
 bool InputKey::keyJustReleased()
 {
-	if (Input.GetKeyUp(this.mKeyCode))
+	bool ret = false;
+
+	if (GInputMgr->getKeyUp(this->mKeyCode))
 	{
-		return true;
+		ret = true;
 	}
 
-	return false;
+	return ret;
 }
 
 bool InputKey::isKeyDown()
 {
-	if (Input.GetKeyDown(this.mKeyCode))
+	bool ret = false;
+
+	if (GInputMgr->getKeyDown(this->mKeyCode))
 	{
-		return true;
+		ret = true;
 	}
 
-	return false;
+	ret = false;
 }
 
 MY_END_NAMESPACE

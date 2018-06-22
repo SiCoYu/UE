@@ -52,6 +52,7 @@ class LogSys;
 class LuaSystem;
 class MyLatentActionManager;
 class GObject;
+class InputMgr;
 
 MY_END_NAMESPACE
 
@@ -101,6 +102,7 @@ protected:
 	MySharedPtr<TickMgr> mTickMgr;
 	MySharedPtr<TimerMgr> mTimerMgr;
 	MySharedPtr<FrameTimerMgr> mFrameTimerMgr;
+	MySharedPtr<InputMgr> mInputMgr;
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
 
 	UMyBluePrintBase* mBPCtx;
@@ -169,6 +171,7 @@ public:
 	MySharedPtr<TickMgr> getTickMgr();
 	MySharedPtr<TimerMgr> getTimerMgr();
 	MySharedPtr<FrameTimerMgr> getFrameTimerMgr();
+	MySharedPtr<InputMgr> getInputMgr();
 
 	//MySharedPtr<UMyBluePrintBase> getBPCtx();
 	UMyBluePrintBase* getBPCtx();
@@ -221,6 +224,7 @@ public:
 #define GTickMgr GCtx->getTickMgr()
 #define GTimerMgr GCtx->getTimerMgr()
 #define GFrameTimerMgr GCtx->getFrameTimerMgr()
+#define GInputMgr GCtx->getInputMgr()
 
 #define GBPCtx GCtx->getBPCtx()
 #define GNativeObjectReferencer GCtx->getNativeObjectReferencer()

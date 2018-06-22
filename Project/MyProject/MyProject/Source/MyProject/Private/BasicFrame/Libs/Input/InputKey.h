@@ -5,7 +5,7 @@
 #include "IDispatchObject.h"
 #include "PlatformDefine.h"
 #include "KeyId.h"
-#include "EventId.h"
+#include "InputEventId.h"
 #include "TickMode.h"
 #include "EventDispatchDelegate.h"
 
@@ -20,10 +20,14 @@ class InputKey : public IDispatchObject
 public:
 	static InputKey* None;
     static InputKey* A;
+	static InputKey* S;
+	static InputKey* D;
+	static InputKey* F;
 
     static InputKey* mInputKeyArray[(int)KeyId::Total];
 
 private:
+	KeyId mKeyId;
 	FKey mKeyCode;
     std::string mKeyDesc;
 
@@ -44,11 +48,12 @@ public:
 	static InputKey** getInputKeyArray();
 
 public:
-	static std::string codeToString(KeyId value);
+	static std::string codeToString(FKey value);
 
 public:
-	InputKey(FKey keyCode, std::string keyDesc);
+	InputKey(KeyId keyId, FKey keyCode, std::string keyDesc);
 
+	KeyId getKeyId();
 	FKey getKeyCode();
 	std::string getKeyDesc();
 	void onTick(float delta, TickMode tickMode);
@@ -59,8 +64,9 @@ private:
 	void _onKeyPress(FKey keyCode);
 
 public:
-	void addKeyListener(EventId evtId, EventDispatchDelegate handle);
-	void removeKeyListener(EventId evtId, EventDispatchDelegate handle);
+	void addKeyListener(InputEventId evtId, EventDispatchDelegate handle);
+	void removeKeyListener(InputEventId evtId, EventDispatchDelegate handle);
+
     // 是否还有需要处理的事件
 	bool hasEventHandle();
 	bool keyJustPressed();

@@ -4,7 +4,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-enum class EventId
+enum class InputEventId
 {
 	KEYDOWN_EVENT = 2,
 	KEYUP_EVENT = 3,
