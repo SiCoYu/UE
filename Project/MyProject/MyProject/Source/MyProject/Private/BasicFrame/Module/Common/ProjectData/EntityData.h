@@ -14,7 +14,7 @@ class PlayerMgr;
  */
 class EntityData : public GObject
 {
-	M_DECLARE_CLASS(PlayerData, GObject)
+	M_DECLARE_CLASS(EntityData, GObject)
 
 protected:
 	MySharedPtr<PlayerMgr> mPlayerMgr;

@@ -21,16 +21,16 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 
-	void setProjectData(PlayerData* gameData);
-	MySharedPtr<PlayerData> getProjectData();
+	void setPlayerData(PlayerData* gameData);
+	MySharedPtr<PlayerData> getPlayerData();
 
 	void setEntityData(EntityData* entityData);
 	MySharedPtr<EntityData> getEntityData();
 };
 
 #define GCtxExt ((CtxExt*)(CtxExt::getSingletonPtr()))
-#define GProjectData GCtxExt->getProjectData()
+#define GPlayerData GCtxExt->getPlayerData()
 #define GEntityData GCtxExt->getEntityData()
-#define GPlayerMgr GProjectData->getPlayerMgr()
+#define GPlayerMgr GEntityData->getPlayerMgr()
 
 MY_END_NAMESPACE

@@ -27,3 +27,5 @@ void MyAssetManager::dispose()
 {
 
 }
+
+MY_END_NAMESPACE

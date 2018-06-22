@@ -43,12 +43,12 @@ void CtxExt::dispose()
 	Ctx::dispose();
 }
 
-void CtxExt::setProjectData(PlayerData* gameData)
+void CtxExt::setPlayerData(PlayerData* gameData)
 {
 	this->mPlayerData = gameData;
 }
 
-MySharedPtr<PlayerData> CtxExt::getProjectData()
+MySharedPtr<PlayerData> CtxExt::getPlayerData()
 {
 	return this->mPlayerData;
 }
