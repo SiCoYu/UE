@@ -14,13 +14,13 @@ class PlayerMgr;
  */
 class EntityData : public GObject
 {
-	M_DECLARE_CLASS(ProjectData, GObject)
+	M_DECLARE_CLASS(PlayerData, GObject)
 
 protected:
 	MySharedPtr<PlayerMgr> mPlayerMgr;
 
 public:
-	ProjectData();
+	EntityData();
 
 	void init();
 	void dispose();

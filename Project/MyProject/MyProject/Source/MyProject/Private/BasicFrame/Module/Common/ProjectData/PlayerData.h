@@ -14,7 +14,7 @@ class PlayerData : public GObject
 	M_DECLARE_CLASS(PlayerData, GObject)
 
 public:
-	EntityData();
+	PlayerData();
 
 	void init();
 	void dispose();

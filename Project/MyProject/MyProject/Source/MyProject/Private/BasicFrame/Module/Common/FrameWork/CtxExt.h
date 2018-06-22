@@ -5,13 +5,13 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class ProjectData;
+class PlayerData;
 class EntityData;
 
 class CtxExt : public Ctx
 {
 protected:
-	MySharedPtr<ProjectData> mProjectData;
+	MySharedPtr<PlayerData> mPlayerData;
 	MySharedPtr<EntityData> mEntityData;
 
 public:
@@ -21,8 +21,8 @@ public:
 	virtual void init() override;
 	virtual void dispose() override;
 
-	void setProjectData(ProjectData* gameData);
-	MySharedPtr<ProjectData> getProjectData();
+	void setProjectData(PlayerData* gameData);
+	MySharedPtr<PlayerData> getProjectData();
 
 	void setEntityData(EntityData* entityData);
 	MySharedPtr<EntityData> getEntityData();

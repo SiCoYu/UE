@@ -20,7 +20,7 @@ void MySoftObjectPath::setPath(FString Path)
 	this->mNativeSoftObjectPath.SetPath(Path);
 }
 
-void MySoftObjectPath::setPath(std::string Path)
+void MySoftObjectPath::setPath(std::string path)
 {
 	this->mNativeSoftObjectPath.SetPath(UtilStr::ConvStdStr2FString(path));
 }
