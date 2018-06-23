@@ -9,6 +9,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+MDictionary<int, MTouchDevice*> MTouchDevice::mTouches;
+
 MTouchDevice* MTouchDevice::GetTouch(int id)
 {
 	MTouchDevice* touch = nullptr;
