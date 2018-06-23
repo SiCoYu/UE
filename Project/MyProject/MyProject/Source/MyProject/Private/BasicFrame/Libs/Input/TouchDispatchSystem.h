@@ -1,126 +1,136 @@
 ﻿#pragma once
 
+#include "GObject.h"
+#include "TickMode.h"
+#include "InputEventId.h"
+#include "EventDispatchDelegate.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class AddOnceEventDispatch;
+class IDispatchObject;
+class MMouseOrTouch;
+
 /**
  * @brief 触碰后事件分发系统
  */
-public class TouchDispatchSystem
+class TouchDispatchSystem : public GObject
 {
-    private bool mHasTouch;
-    private bool mHasMultiTouch;
+private:
+	bool mHasTouch;
+    bool mHasMultiTouch;
 
-    private AddOnceEventDispatch mOnTouchBeganDispatch;         // 触碰开始
-    private AddOnceEventDispatch mOnTouchMovedDispatch;         // 触碰状态，但是移动
-    private AddOnceEventDispatch mOnTouchStationaryDispatch;    // 触碰状态但是不移动
-    private AddOnceEventDispatch mOnTouchEndedDispatch;         // 触碰结束
-    private AddOnceEventDispatch mOnTouchCanceledDispatch;      // 触碰取消
+    AddOnceEventDispatch* mOnTouchBeganDispatch;         // 触碰开始
+    AddOnceEventDispatch* mOnTouchMovedDispatch;         // 触碰状态，但是移动
+    AddOnceEventDispatch* mOnTouchStationaryDispatch;    // 触碰状态但是不移动
+    AddOnceEventDispatch* mOnTouchEndedDispatch;         // 触碰结束
+    AddOnceEventDispatch* mOnTouchCanceledDispatch;      // 触碰取消
 
-    private AddOnceEventDispatch mOnMultiTouchBeganDispatch;         // 触碰开始
-    private AddOnceEventDispatch mOnMultiTouchMovedDispatch;         // 触碰状态，但是移动
-    private AddOnceEventDispatch mOnMultiTouchStationaryDispatch;    // 触碰状态但是不移动
-    private AddOnceEventDispatch mOnMultiTouchEndedDispatch;         // 触碰结束
-    private AddOnceEventDispatch mOnMultiTouchCanceledDispatch;      // 触碰取消
+    AddOnceEventDispatch* mOnMultiTouchBeganDispatch;         // 触碰开始
+    AddOnceEventDispatch* mOnMultiTouchMovedDispatch;         // 触碰状态，但是移动
+    AddOnceEventDispatch* mOnMultiTouchStationaryDispatch;    // 触碰状态但是不移动
+    AddOnceEventDispatch* mOnMultiTouchEndedDispatch;         // 触碰结束
+    AddOnceEventDispatch* mOnMultiTouchCanceledDispatch;      // 触碰取消
 
-    public TouchDispatchSystem()
+public:
+	TouchDispatchSystem()
     {
-        this.mOnTouchBeganDispatch = new AddOnceEventDispatch();
-        this.mOnTouchMovedDispatch = new AddOnceEventDispatch();
-        this.mOnTouchStationaryDispatch = new AddOnceEventDispatch();
-        this.mOnTouchEndedDispatch = new AddOnceEventDispatch();
-        this.mOnTouchCanceledDispatch = new AddOnceEventDispatch();
+        this->mOnTouchBeganDispatch = MY_NEW AddOnceEventDispatch();
+        this->mOnTouchMovedDispatch = MY_NEW AddOnceEventDispatch();
+        this->mOnTouchStationaryDispatch = MY_NEW AddOnceEventDispatch();
+        this->mOnTouchEndedDispatch = MY_NEW AddOnceEventDispatch();
+        this->mOnTouchCanceledDispatch = MY_NEW AddOnceEventDispatch();
 
-        this.mOnMultiTouchBeganDispatch = new AddOnceEventDispatch();
-        this.mOnMultiTouchMovedDispatch = new AddOnceEventDispatch();
-        this.mOnMultiTouchStationaryDispatch = new AddOnceEventDispatch();
-        this.mOnMultiTouchEndedDispatch = new AddOnceEventDispatch();
-        this.mOnMultiTouchCanceledDispatch = new AddOnceEventDispatch();
+        this->mOnMultiTouchBeganDispatch = MY_NEW AddOnceEventDispatch();
+        this->mOnMultiTouchMovedDispatch = MY_NEW AddOnceEventDispatch();
+        this->mOnMultiTouchStationaryDispatch = MY_NEW AddOnceEventDispatch();
+        this->mOnMultiTouchEndedDispatch = MY_NEW AddOnceEventDispatch();
+        this->mOnMultiTouchCanceledDispatch = MY_NEW AddOnceEventDispatch();
     }
 
-    public void init()
-    {
-
-    }
-
-    public void dispose()
+    void init()
     {
 
     }
 
-    public void addTouchListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+    void dispose()
     {
-        if (InputEventId.TOUCHBEGIN_EVENT == evtID)
-        {
-            this.mOnTouchBeganDispatch.addEventHandle(null, handle);
-        }
-        else if (InputEventId.TOUCHMOVED_EVENT == evtID)
-        {
-            this.mOnTouchMovedDispatch.addEventHandle(null, handle);
-        }
-        else if (InputEventId.TOUCHSTATIONARY_EVENT == evtID)
-        {
-            this.mOnTouchStationaryDispatch.addEventHandle(null, handle);
-        }
-        else if (InputEventId.TOUCHENDED_EVENT == evtID)
-        {
-            this.mOnTouchEndedDispatch.addEventHandle(null, handle);
-        }
-        else if (InputEventId.TOUCHCANCELED_EVENT == evtID)
-        {
-            this.mOnTouchCanceledDispatch.addEventHandle(null, handle);
-        }
 
-        this.mHasTouch = true;
     }
 
-    public void removeTouchListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+    void addTouchListener(InputEventId evtId, EventDispatchDelegate handle)
     {
-        if (InputEventId.TOUCHBEGIN_EVENT == evtID)
+        if (InputEventId::TOUCHBEGIN_EVENT == evtId)
         {
-            this.mOnTouchBeganDispatch.removeEventHandle(null, handle);
+            this->mOnTouchBeganDispatch->addEventHandle(nullptr, handle);
         }
-        else if (InputEventId.TOUCHMOVED_EVENT == evtID)
+        else if (InputEventId::TOUCHMOVED_EVENT == evtId)
         {
-            this.mOnTouchMovedDispatch.removeEventHandle(null, handle);
+            this->mOnTouchMovedDispatch->addEventHandle(nullptr, handle);
         }
-        else if (InputEventId.TOUCHSTATIONARY_EVENT == evtID)
+        else if (InputEventId::TOUCHSTATIONARY_EVENT == evtId)
         {
-            this.mOnTouchStationaryDispatch.removeEventHandle(null, handle);
+            this->mOnTouchStationaryDispatch->addEventHandle(nullptr, handle);
         }
-        else if (InputEventId.TOUCHENDED_EVENT == evtID)
+        else if (InputEventId::TOUCHENDED_EVENT == evtId)
         {
-            this.mOnTouchEndedDispatch.removeEventHandle(null, handle);
+            this->mOnTouchEndedDispatch->addEventHandle(nullptr, handle);
         }
-        else if (InputEventId.TOUCHCANCELED_EVENT == evtID)
+        else if (InputEventId::TOUCHCANCELED_EVENT == evtId)
         {
-            this.mOnTouchCanceledDispatch.removeEventHandle(null, handle);
+            this->mOnTouchCanceledDispatch->addEventHandle(nullptr, handle);
         }
 
-        this.mHasTouch = this.hasEventHandle();
+        this->mHasTouch = true;
+    }
+
+    void removeTouchListener(InputEventId evtId, EventDispatchDelegate handle)
+    {
+        if (InputEventId::TOUCHBEGIN_EVENT == evtId)
+        {
+            this->mOnTouchBeganDispatch->removeEventHandle(nullptr, handle);
+        }
+        else if (InputEventId::TOUCHMOVED_EVENT == evtId)
+        {
+            this->mOnTouchMovedDispatch->removeEventHandle(nullptr, handle);
+        }
+        else if (InputEventId::TOUCHSTATIONARY_EVENT == evtId)
+        {
+            this->mOnTouchStationaryDispatch->removeEventHandle(nullptr, handle);
+        }
+        else if (InputEventId::TOUCHENDED_EVENT == evtId)
+        {
+            this->mOnTouchEndedDispatch->removeEventHandle(nullptr, handle);
+        }
+        else if (InputEventId::TOUCHCANCELED_EVENT == evtId)
+        {
+            this->mOnTouchCanceledDispatch->removeEventHandle(nullptr, handle);
+        }
+
+        this->mHasTouch = this->hasEventHandle();
     }
 
     // 是否还有需要处理的事件
-    public bool hasEventHandle()
+    bool hasEventHandle()
     {
-        if (this.mOnTouchBeganDispatch.hasEventHandle())
+        if (this->mOnTouchBeganDispatch->hasEventHandle())
         {
             return true;
         }
-        if (this.mOnTouchMovedDispatch.hasEventHandle())
+        if (this->mOnTouchMovedDispatch->hasEventHandle())
         {
             return true;
         }
-        if (this.mOnTouchStationaryDispatch.hasEventHandle())
+        if (this->mOnTouchStationaryDispatch->hasEventHandle())
         {
             return true;
         }
-        if (this.mOnTouchEndedDispatch.hasEventHandle())
+        if (this->mOnTouchEndedDispatch->hasEventHandle())
         {
             return true;
         }
-        if (this.mOnTouchCanceledDispatch.hasEventHandle())
+        if (this->mOnTouchCanceledDispatch->hasEventHandle())
         {
             return true;
         }
@@ -128,173 +138,175 @@ public class TouchDispatchSystem
         return false;
     }
 
-    public bool hasTouch()
+    bool hasTouch()
     {
-        return this.mHasTouch;
+        return this->mHasTouch;
     }
 
-    public void handleTouchBegan(MMouseOrTouch touch)
+    void handleTouchBegan(MMouseOrTouch* touch)
     {
-        if (null != this.mOnTouchBeganDispatch)
+        if (nullptr != this->mOnTouchBeganDispatch)
         {
-            this.mOnTouchBeganDispatch.dispatchEvent(touch);
+            this->mOnTouchBeganDispatch->dispatchEvent(touch);
         }
     }
 
-    public void handleTouchMoved(MMouseOrTouch touch)
+    void handleTouchMoved(MMouseOrTouch* touch)
     {
-        if (null != this.mOnTouchMovedDispatch)
+        if (nullptr != this->mOnTouchMovedDispatch)
         {
-            this.mOnTouchMovedDispatch.dispatchEvent(touch);
+            this->mOnTouchMovedDispatch->dispatchEvent(touch);
         }
     }
 
-    public void handleTouchStationary(MMouseOrTouch touch)
+    void handleTouchStationary(MMouseOrTouch* touch)
     {
-        if (null != this.mOnTouchStationaryDispatch)
+        if (nullptr != this->mOnTouchStationaryDispatch)
         {
-            this.mOnTouchStationaryDispatch.dispatchEvent(touch);
+            this->mOnTouchStationaryDispatch->dispatchEvent(touch);
         }
     }
 
-    public void handleTouchEnded(MMouseOrTouch touch)
+    void handleTouchEnded(MMouseOrTouch* touch)
     {
-        if (null != this.mOnTouchEndedDispatch)
+        if (nullptr != this->mOnTouchEndedDispatch)
         {
-            this.mOnTouchEndedDispatch.dispatchEvent(touch);
+            this->mOnTouchEndedDispatch->dispatchEvent(touch);
         }
     }
 
-    public void handleTouchCanceled(MMouseOrTouch touch)
+    void handleTouchCanceled(MMouseOrTouch* touch)
     {
-        if (null != this.mOnTouchCanceledDispatch)
+        if (nullptr != this->mOnTouchCanceledDispatch)
         {
-            this.mOnTouchCanceledDispatch.dispatchEvent(touch);
+            this->mOnTouchCanceledDispatch->dispatchEvent(touch);
         }
     }
 
     /********************************** Multi Touch *********************************/
-    public void addMultiTouchListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+    void addMultiTouchListener(InputEventId evtId, EventDispatchDelegate handle)
     {
-        if (InputEventId.MULTI_TOUCHBEGIN_EVENT == evtID)
+        if (InputEventId::MULTI_TOUCHBEGIN_EVENT == evtId)
         {
-            this.mOnMultiTouchBeganDispatch.addEventHandle(null, handle);
+            this->mOnMultiTouchBeganDispatch->addEventHandle(nullptr, handle);
         }
-        else if (InputEventId.MULTI_TOUCHMOVED_EVENT == evtID)
+        else if (InputEventId::MULTI_TOUCHMOVED_EVENT == evtId)
         {
-            this.mOnMultiTouchMovedDispatch.addEventHandle(null, handle);
+            this->mOnMultiTouchMovedDispatch->addEventHandle(nullptr, handle);
         }
-        else if (InputEventId.MULTI_TOUCHSTATIONARY_EVENT == evtID)
+        else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
         {
-            this.mOnMultiTouchStationaryDispatch.addEventHandle(null, handle);
+            this->mOnMultiTouchStationaryDispatch->addEventHandle(nullptr, handle);
         }
-        else if (InputEventId.MULTI_TOUCHENDED_EVENT == evtID)
+        else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
         {
-            this.mOnMultiTouchEndedDispatch.addEventHandle(null, handle);
+            this->mOnMultiTouchEndedDispatch->addEventHandle(nullptr, handle);
         }
-        else if (InputEventId.MULTI_TOUCHCANCELED_EVENT == evtID)
+        else if (InputEventId::MULTI_TOUCHCANCELED_EVENT == evtId)
         {
-            this.mOnMultiTouchCanceledDispatch.addEventHandle(null, handle);
+            this->mOnMultiTouchCanceledDispatch->addEventHandle(nullptr, handle);
         }
 
-        this.mHasMultiTouch = true;
+        this->mHasMultiTouch = true;
     }
 
-    public void removeMultiTouchListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+    void removeMultiTouchListener(InputEventId evtId, EventDispatchDelegate handle)
     {
-        if (InputEventId.MULTI_TOUCHBEGIN_EVENT == evtID)
+        if (InputEventId::MULTI_TOUCHBEGIN_EVENT == evtId)
         {
-            this.mOnMultiTouchBeganDispatch.removeEventHandle(null, handle);
+            this->mOnMultiTouchBeganDispatch->removeEventHandle(nullptr, handle);
         }
-        else if (InputEventId.MULTI_TOUCHMOVED_EVENT == evtID)
+        else if (InputEventId::MULTI_TOUCHMOVED_EVENT == evtId)
         {
-            this.mOnMultiTouchMovedDispatch.removeEventHandle(null, handle);
+            this->mOnMultiTouchMovedDispatch->removeEventHandle(nullptr, handle);
         }
-        else if (InputEventId.MULTI_TOUCHSTATIONARY_EVENT == evtID)
+        else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
         {
-            this.mOnMultiTouchStationaryDispatch.removeEventHandle(null, handle);
+            this->mOnMultiTouchStationaryDispatch->removeEventHandle(nullptr, handle);
         }
-        else if (InputEventId.MULTI_TOUCHENDED_EVENT == evtID)
+        else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
         {
-            this.mOnMultiTouchEndedDispatch.removeEventHandle(null, handle);
+            this->mOnMultiTouchEndedDispatch->removeEventHandle(nullptr, handle);
         }
-        else if (InputEventId.MULTI_TOUCHCANCELED_EVENT == evtID)
+        else if (InputEventId::MULTI_TOUCHCANCELED_EVENT == evtId)
         {
-            this.mOnMultiTouchCanceledDispatch.removeEventHandle(null, handle);
+            this->mOnMultiTouchCanceledDispatch->removeEventHandle(nullptr, handle);
         }
 
-        this.mHasMultiTouch = this.hasMultiEventHandle();
+        this->mHasMultiTouch = this->hasMultiEventHandle();
     }
 
     // 是否还有需要处理的事件
-    public bool hasMultiEventHandle()
+    bool hasMultiEventHandle()
     {
-        if (this.mOnMultiTouchBeganDispatch.hasEventHandle())
+		bool ret = false;
+
+        if (this->mOnMultiTouchBeganDispatch->hasEventHandle())
         {
-            return true;
+			ret = true;
         }
-        if (this.mOnMultiTouchMovedDispatch.hasEventHandle())
+        if (this->mOnMultiTouchMovedDispatch->hasEventHandle())
         {
-            return true;
+			ret = true;
         }
-        if (this.mOnMultiTouchStationaryDispatch.hasEventHandle())
+        if (this->mOnMultiTouchStationaryDispatch->hasEventHandle())
         {
-            return true;
+			ret = true;
         }
-        if (this.mOnMultiTouchEndedDispatch.hasEventHandle())
+        if (this->mOnMultiTouchEndedDispatch->hasEventHandle())
         {
-            return true;
+			ret = true;
         }
-        if (this.mOnMultiTouchCanceledDispatch.hasEventHandle())
+        if (this->mOnMultiTouchCanceledDispatch->hasEventHandle())
         {
-            return true;
+			ret = true;
         }
 
-        return false;
+        return ret;
     }
 
-    public bool hasMultiTouch()
+    bool hasMultiTouch()
     {
-        return this.mHasMultiTouch;
+        return this->mHasMultiTouch;
     }
 
-    public void handleMultiTouchBegan(IDispatchObject touch)
+    void handleMultiTouchBegan(IDispatchObject* touch)
     {
-        if (null != this.mOnMultiTouchBeganDispatch)
+        if (nullptr != this->mOnMultiTouchBeganDispatch)
         {
-            this.mOnMultiTouchBeganDispatch.dispatchEvent(touch);
-        }
-    }
-
-    public void handleMultiTouchMoved(IDispatchObject touch)
-    {
-        if (null != this.mOnMultiTouchMovedDispatch)
-        {
-            this.mOnMultiTouchMovedDispatch.dispatchEvent(touch);
+            this->mOnMultiTouchBeganDispatch->dispatchEvent(touch);
         }
     }
 
-    public void handleMultiTouchStationary(IDispatchObject touch)
+    void handleMultiTouchMoved(IDispatchObject* touch)
     {
-        if (null != this.mOnMultiTouchStationaryDispatch)
+        if (nullptr != this->mOnMultiTouchMovedDispatch)
         {
-            this.mOnMultiTouchStationaryDispatch.dispatchEvent(touch);
+            this->mOnMultiTouchMovedDispatch->dispatchEvent(touch);
         }
     }
 
-    public void handleMultiTouchEnded(IDispatchObject touch)
+    void handleMultiTouchStationary(IDispatchObject* touch)
     {
-        if (null != this.mOnMultiTouchEndedDispatch)
+        if (nullptr != this->mOnMultiTouchStationaryDispatch)
         {
-            this.mOnMultiTouchEndedDispatch.dispatchEvent(touch);
+            this->mOnMultiTouchStationaryDispatch->dispatchEvent(touch);
         }
     }
 
-    public void handleMultiTouchCanceled(IDispatchObject touch)
+    void handleMultiTouchEnded(IDispatchObject* touch)
     {
-        if (null != this.mOnMultiTouchCanceledDispatch)
+        if (nullptr != this->mOnMultiTouchEndedDispatch)
         {
-            this.mOnMultiTouchCanceledDispatch.dispatchEvent(touch);
+            this->mOnMultiTouchEndedDispatch->dispatchEvent(touch);
+        }
+    }
+
+    void handleMultiTouchCanceled(IDispatchObject* touch)
+    {
+        if (nullptr != this->mOnMultiTouchCanceledDispatch)
+        {
+            this->mOnMultiTouchCanceledDispatch->dispatchEvent(touch);
         }
     }
 };
