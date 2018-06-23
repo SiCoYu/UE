@@ -9,10 +9,11 @@ struct FKey;
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class GameSceneLogicNotify : public ISceneTouchNotify
+class GameSceneTouchNotify : public ISceneTouchNotify
 {
 public:
-	GameSceneLogicNotify();
+	GameSceneTouchNotify();
+
 	void onKeyDown(FKey keyCode);
 	void onKeyUp(FKey keyCode);
 	void onMouseDown();

@@ -3,27 +3,27 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-GameSceneLogicNotify::GameSceneLogicNotify()
+GameSceneTouchNotify::GameSceneTouchNotify()
 {
             
 }
 
-void GameSceneLogicNotify::onKeyDown(FKey keyCode)
+void GameSceneTouchNotify::onKeyDown(FKey keyCode)
 {
             
 }
 
-void GameSceneLogicNotify::onKeyUp(FKey keyCode)
+void GameSceneTouchNotify::onKeyUp(FKey keyCode)
 {
             
 }
 
-void GameSceneLogicNotify::onMouseDown()
+void GameSceneTouchNotify::onMouseDown()
 {
             
 }
 
-void GameSceneLogicNotify::onMouseUp()
+void GameSceneTouchNotify::onMouseUp()
 {
             
 }

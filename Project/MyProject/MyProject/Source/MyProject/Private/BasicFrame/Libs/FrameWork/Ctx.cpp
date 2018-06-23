@@ -52,6 +52,7 @@ template<> Ctx* Ctx::Singleton<Ctx>::msSingleton = 0;
 Ctx::Ctx()
 {
 	this->mIsInit = false;
+
 	this->mUiMgr.setNull();
 	this->mEngineData.setNull();
 	this->mNetMgr.setNull();
@@ -206,6 +207,9 @@ void Ctx::_postInit()
 
 	// 挂在目录
 	UtilEngineWrap::InsertMountPoint("/CacheData/", "E:/Self/Self/unreal/UE-GIT/UE-BP");
+
+	// 设置输出
+	this->mInputMgr->setPlayerController(UtilEngineWrap::GetPlayerController());
 }
 
 void Ctx::init()

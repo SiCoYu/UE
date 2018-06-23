@@ -25,6 +25,10 @@ class InputMgr : public GObject
 {
 protected:
 	AMyPlayerControllerBase* mPlayerController;
+
+	// GameFramework/PlayerInput.h
+	// UCLASS(Within = PlayerController, config = Input, transient)
+	// class ENGINE_API UPlayerInput : public UObject
 	UPlayerInput* mPlayerInput;
 
 public:
@@ -33,6 +37,9 @@ public:
 
 	void init();
 	void dispose();
+
+	void setPlayerController(AMyPlayerControllerBase* value);
+	void setPlayerInput(UPlayerInput* value);
 
 	bool getKeyDown(FKey keyCode);
 	bool getKeyUp(FKey keyCode);
