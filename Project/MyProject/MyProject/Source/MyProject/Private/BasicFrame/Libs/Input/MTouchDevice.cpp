@@ -107,6 +107,9 @@ void MTouchDevice::onTick(float delta, TickMode tickMode)
 	{
 		this->mTouchPhase = MTouchPhase::Began;
 
+		this->mTouchBegan = true;
+		this->mTouchEnd = false;
+
 		// 按下的时候，设置位置相同
 		this->mPos = *this->mNativeTouchPos;
 		this->mLastPos = this->mPos;
@@ -116,6 +119,9 @@ void MTouchDevice::onTick(float delta, TickMode tickMode)
 	else if (this->_isInMoved())
 	{
 		this->mTouchPhase = MTouchPhase::Moved;
+
+		this->mTouchBegan = false;
+		this->mTouchEnd = false;
 
 		// Up 的时候，先设置之前的位置，然后设置当前位置
 		this->mLastPos = this->mPos;
@@ -127,6 +133,9 @@ void MTouchDevice::onTick(float delta, TickMode tickMode)
 	{
 		this->mTouchPhase = MTouchPhase::Stationary;
 
+		this->mTouchBegan = false;
+		this->mTouchEnd = false;
+
 		// Press 的时候，先设置之前的位置，然后设置当前位置
 		this->mLastPos = this->mPos;
 		this->mPos = *this->mNativeTouchPos;
@@ -137,6 +146,9 @@ void MTouchDevice::onTick(float delta, TickMode tickMode)
 	{
 		this->mTouchPhase = MTouchPhase::Ended;
 
+		this->mTouchBegan = false;
+		this->mTouchEnd = true;
+
 		this->mLastPos = this->mPos;
 		this->mPos = *this->mNativeTouchPos;
 
@@ -145,6 +157,9 @@ void MTouchDevice::onTick(float delta, TickMode tickMode)
 	else if (this->_isInCanceled())
 	{
 		this->mTouchPhase = MTouchPhase::Canceled;
+
+		this->mTouchBegan = false;
+		this->mTouchEnd = true;
 
 		this->mLastPos = this->mPos;
 		this->mPos = *this->mNativeTouchPos;
@@ -166,7 +181,7 @@ void MTouchDevice::handleTouchMoved()
 	}
 }
 
-void handleTouchStationary()
+void MTouchDevice::handleTouchStationary()
 {
 	GInputMgr->handleTouchStationary(this);
 }

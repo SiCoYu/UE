@@ -4,6 +4,7 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "AddOnceEventDispatch.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -31,23 +32,23 @@ void MMouseDispatch::addMouseListener(InputEventId evtId, EventDispatchDelegate 
 {
 	if (InputEventId::MOUSEDOWN_EVENT == evtId)
 	{
-		this->mOnMouseDownDispatch->addEventHandle(nullptr, handle);
+		this->mOnMouseDownDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MOUSEUP_EVENT == evtId)
 	{
-		this->mOnMouseUpDispatch->addEventHandle(nullptr, handle);
+		this->mOnMouseUpDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MOUSEPRESS_EVENT == evtId)
 	{
-		this->mOnMousePressDispatch->addEventHandle(nullptr, handle);
+		this->mOnMousePressDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MOUSEMOVE_EVENT == evtId)
 	{
-		this->mOnMouseMoveDispatch->addEventHandle(nullptr, handle);
+		this->mOnMouseMoveDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MOUSEPRESS_MOVE_EVENT == evtId)
 	{
-		this->mOnMousePressMoveDispatch->addEventHandle(nullptr, handle);
+		this->mOnMousePressMoveDispatch->addEventHandle(handle);
 	}
 }
 
@@ -55,23 +56,23 @@ void MMouseDispatch::removeMouseListener(InputEventId evtId, EventDispatchDelega
 {
 	if (InputEventId::KEYUP_EVENT == evtId)
 	{
-		this->mOnMouseDownDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMouseDownDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::KEYDOWN_EVENT == evtId)
 	{
-		this->mOnMouseUpDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMouseUpDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::KEYPRESS_EVENT == evtId)
 	{
-		this->mOnMousePressDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMousePressDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MOUSEMOVE_EVENT == evtId)
 	{
-		this->mOnMouseMoveDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMouseMoveDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MOUSEPRESS_MOVE_EVENT == evtId)
 	{
-		this->mOnMousePressMoveDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMousePressMoveDispatch->removeEventHandle(handle);
 	}
 }
 

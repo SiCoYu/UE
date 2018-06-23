@@ -17,6 +17,9 @@ public:
     FVector mDelta;           // Delta since last update
     FVector mTotalDelta;      // Delta since the event started being tracked
 
+	bool mTouchBegan;
+	bool mTouchEnd;
+
     float mSensitivity;   // 灵敏度
     int mTouchIndex;  // 触碰索引或者鼠标 // 0 左键 1 右键 2 中键 
 

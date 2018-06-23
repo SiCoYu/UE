@@ -2,6 +2,8 @@
 #include "MultiTouchSet.h"
 #include "IDispatchObject.h"
 #include "MMouseOrTouch.h"
+#include "Ctx.h"
+#include "InputMgr.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -70,7 +72,7 @@ void MultiTouchSet::onTick(float delta, TickMode tickMode)
 	// 暂时只支持多触碰移动
 	if (isMove)
 	{
-		Ctx.msInstance.mInputMgr.handleMultiTouchMoved(this);
+		GInputMgr->handleMultiTouchMoved(this);
 	}
 }
 

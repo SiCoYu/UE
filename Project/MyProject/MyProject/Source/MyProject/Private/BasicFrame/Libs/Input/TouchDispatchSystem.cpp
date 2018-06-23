@@ -197,7 +197,7 @@ void TouchDispatchSystem::removeMultiTouchListener(InputEventId evtId, EventDisp
 	}
 	else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
 	{
-		this->mOnMultiTouchStationaryDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchStationaryDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
 	{

@@ -28,6 +28,7 @@ class AddOnceEventDispatch;
 class MultiTouchSet;
 class MMouseDispatch;
 class MMouseOrTouch;
+class IDispatchObject;
 
 /**
  * @brief 主要是场景消息处理， UI 消息单独走，这个主要是从硬件判断
@@ -77,11 +78,13 @@ protected:
 	MultiTouchSet* mMultiTouchSet;
 	// 鼠标模拟触碰
 	bool mMultiTouchEnabled;
-	bool mSimulateMouseWithTouches;
 	bool mTouchSupported;
 
 	// 鼠标
 	MMouseDispatch* mMouseDispatchArray[(int)MMouseDeviceType::eMouseTotalButton];
+
+public:
+	bool mSimulateMouseWithTouches;
 
 public:
 	InputMgr();
@@ -102,7 +105,7 @@ public:
 	bool GetMouseButtonDown(int mouseIndex);
 	bool GetMouseButtonUp(int mouseIndex);
 	bool GetMouseButton(int mouseIndex);
-	FVector GetMousePosition();
+	FVector GetMousePosition(int mouseIndex = 0);
 
 	// 逻辑事件处理
 	/**
@@ -153,11 +156,11 @@ public:
 	bool hasMultiEventHandle();
 	bool hasMultiTouch();
 
-	void handleMultiTouchBegan(IDispatchObject touch);
-	void handleMultiTouchMoved(IDispatchObject touch);
-	void handleMultiTouchStationary(IDispatchObject touch);
-	void handleMultiTouchEnded(IDispatchObject touch);
-	void handleMultiTouchCanceled(IDispatchObject touch);
+	void handleMultiTouchBegan(IDispatchObject* touch);
+	void handleMultiTouchMoved(IDispatchObject* touch);
+	void handleMultiTouchStationary(IDispatchObject* touch);
+	void handleMultiTouchEnded(IDispatchObject* touch);
+	void handleMultiTouchCanceled(IDispatchObject* touch);
 
 	/******************* Mouse Dispatch *********************/
 	// 是否还有需要处理的事件

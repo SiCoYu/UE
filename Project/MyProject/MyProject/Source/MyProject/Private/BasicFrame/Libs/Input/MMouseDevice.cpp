@@ -32,25 +32,34 @@ void MMouseDevice::onTick(float delta, TickMode tickMode)
 {
 	if (GInputMgr->GetMouseButtonDown(this->mTouchIndex))
 	{
+		this->mTouchBegan = true;
+		this->mTouchEnd = false;
+
 		// 按下的时候，设置位置相同
-		this->mPos = UnityEngine.Input.mousePosition;
+		this->mPos = GInputMgr->GetMousePosition(0);
 		this->mLastPos = this->mPos;
 
 		this->handleMouseDown();
 	}
 	else if (GInputMgr->GetMouseButtonUp(this->mTouchIndex))
 	{
+		this->mTouchBegan = false;
+		this->mTouchEnd = true;
+
 		// Up 的时候，先设置之前的位置，然后设置当前位置
 		this->mLastPos = this->mPos;
-		this->mPos = UnityEngine.Input.mousePosition;
+		this->mPos = GInputMgr->GetMousePosition(0);
 
 		this->handleMouseUp();
 	}
 	else if (GInputMgr->GetMouseButton(this->mTouchIndex))
 	{
+		this->mTouchBegan = false;
+		this->mTouchEnd = false;
+
 		// Press 的时候，先设置之前的位置，然后设置当前位置
 		this->mLastPos = this->mPos;
-		this->mPos = UnityEngine.Input.mousePosition;
+		this->mPos = GInputMgr->GetMousePosition(0);
 
 		if (this->isPosChanged())
 		{
@@ -63,6 +72,9 @@ void MMouseDevice::onTick(float delta, TickMode tickMode)
 	}
 	else if (this->isPosChanged())     // 位置不相等的时候，就是移动
 	{
+		this->mTouchBegan = false;
+		this->mTouchEnd = false;
+
 		// 鼠标移动
 		this->mLastPos = this->mPos;
 		this->mPos = GInputMgr->GetMousePosition();

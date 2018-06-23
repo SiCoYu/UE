@@ -14,7 +14,7 @@ public:
     static MMouseDevice* MouseRightButton;
     static MMouseDevice* MouseMiddleButton;
 
-    MMouseDevice* mMouse[MMouseDeviceType::eMouseTotalButton];
+	static MMouseDevice* mMouse[MMouseDeviceType::eMouseTotalButton];
 
 public:
 	static MMouseDevice* GetMouse(int button);

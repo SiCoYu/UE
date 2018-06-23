@@ -11,7 +11,10 @@
 #include "InputKey.h"
 #include "AddOnceEventDispatch.h"
 #include "MMouseDeviceType.h"
+#include "MMouseDevice.h"
 #include "UtilMath.h"
+#include "IDispatchObject.h"
+#include "MTouchDevice.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -40,9 +43,11 @@ InputMgr::InputMgr()
 
 	this->mMultiTouchSet = MY_NEW MultiTouchSet();
 
-	this->mMultiTouchEnabled = UnityEngine.Input.multiTouchEnabled;
+	//this->mMultiTouchEnabled = UnityEngine.Input.multiTouchEnabled;
+	this->mMultiTouchEnabled = false;
 	//this->mSimulateMouseWithTouches = UnityEngine.Input.simulateMouseWithTouches;
-	this->mTouchSupported = UnityEngine.Input.touchSupported;
+	//this->mTouchSupported = UnityEngine.Input.touchSupported;
+	this->mTouchSupported = true;
 	this->mSimulateMouseWithTouches = true;
 	//this->mMultiTouchEnabled = true;
 
@@ -57,17 +62,17 @@ InputMgr::~InputMgr()
 
 void InputMgr::init()
 {
-	InputKey.getInputKeyArray();
-	this->mMouseDispatchArray[0].init();
-	this->mMouseDispatchArray[1].init();
-	this->mMouseDispatchArray[2].init();
+	InputKey::getInputKeyArray();
+	this->mMouseDispatchArray[0]->init();
+	this->mMouseDispatchArray[1]->init();
+	this->mMouseDispatchArray[2]->init();
 }
 
 void InputMgr::dispose()
 {
-	this->mMouseDispatchArray[0].dispose();
-	this->mMouseDispatchArray[1].dispose();
-	this->mMouseDispatchArray[2].dispose();
+	this->mMouseDispatchArray[0]->dispose();
+	this->mMouseDispatchArray[1]->dispose();
+	this->mMouseDispatchArray[2]->dispose();
 }
 
 void InputMgr::setPlayerController(AMyPlayerControllerBase* value)
@@ -156,7 +161,7 @@ bool InputMgr::GetMouseButton(int mouseIndex)
 	return ret;
 }
 
-FVector InputMgr::GetMousePosition()
+FVector InputMgr::GetMousePosition(int mouseIndex)
 {
 	FVector ret = UtilMath::ZeroVec3;
 
@@ -174,8 +179,6 @@ FVector InputMgr::GetMousePosition()
 	}
 
 	return ret;
-
-	return 
 }
 
 void InputMgr::onTick(float delta, TickMode tickMode)
@@ -224,7 +227,7 @@ bool InputMgr::isAnyKeyDown()
 
 	while (index < listLen)
 	{
-		inputKey = InputKey::mInputKeyArray[index];
+		inputKey = InputKey::msInputKeyArray[index];
 
 		if (nullptr != inputKey)
 		{
@@ -243,7 +246,7 @@ void InputMgr::addKeyListener(InputKey* inputKey, InputEventId evtId, EventDispa
 {
 	inputKey->addKeyListener(evtId, handle);
 
-	this->addEventInputKey(inputKey);
+	this->_addEventInputKey(inputKey);
 }
 
 // 移除键盘 KeyInput 输入事件
@@ -253,25 +256,25 @@ void InputMgr::removeKeyListener(InputKey* inputKey, InputEventId evtId, EventDi
 
 	if (!inputKey->hasEventHandle())
 	{
-		this->removeEventInputKey(inputKey);
+		this->_removeEventInputKey(inputKey);
 	}
 }
 
 // 添加鼠标监听器
 void InputMgr::addMouseListener(MMouseDevice* mouse, InputEventId evtId, EventDispatchDelegate handle)
 {
-	this->mMouseDispatchArray[mouse.mTouchIndex].addMouseListener(evtId, handle);
-	this->addEventMouse(mouse);
+	this->mMouseDispatchArray[mouse->mTouchIndex]->addMouseListener(evtId, handle);
+	this->_addEventMouse(mouse);
 }
 
 // 移除鼠标监听器
 void InputMgr::removeMouseListener(MMouseDevice* mouse, InputEventId evtId, EventDispatchDelegate handle)
 {
-	this->mMouseDispatchArray[mouse.mTouchIndex].removeMouseListener(evtId, handle);
+	this->mMouseDispatchArray[mouse->mTouchIndex]->removeMouseListener(evtId, handle);
 
 	if (!this->hasEventHandle(mouse))
 	{
-		this->removeEventMouse(mouse);
+		this->_removeEventMouse(mouse);
 	}
 }
 
@@ -279,23 +282,23 @@ void InputMgr::addTouchListener(InputEventId evtId, EventDispatchDelegate handle
 {
 	if (InputEventId::TOUCHBEGIN_EVENT == evtId)
 	{
-		this->mOnTouchBeganDispatch->addEventHandle(nullptr, handle);
+		this->mOnTouchBeganDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHMOVED_EVENT == evtId)
 	{
-		this->mOnTouchMovedDispatch.addEventHandle(nullptr, handle);
+		this->mOnTouchMovedDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHSTATIONARY_EVENT == evtId)
 	{
-		this->mOnTouchStationaryDispatch.addEventHandle(nullptr, handle);
+		this->mOnTouchStationaryDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHENDED_EVENT == evtId)
 	{
-		this->mOnTouchEndedDispatch->addEventHandle(nullptr, handle);
+		this->mOnTouchEndedDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHCANCELED_EVENT == evtId)
 	{
-		this->mOnTouchCanceledDispatch->addEventHandle(nullptr, handle);
+		this->mOnTouchCanceledDispatch->addEventHandle(handle);
 	}
 
 	this->mHasTouch = true;
@@ -304,7 +307,7 @@ void InputMgr::addTouchListener(InputEventId evtId, EventDispatchDelegate handle
 	{
 		if (this->mSimulateMouseWithTouches)
 		{
-			this->addEventMouse(MMouseDevice::MouseLeftButton);
+			this->_addEventMouse(MMouseDevice::MouseLeftButton);
 		}
 	}
 }
@@ -313,23 +316,23 @@ void InputMgr::removeTouchListener(InputEventId evtId, EventDispatchDelegate han
 {
 	if (InputEventId::TOUCHBEGIN_EVENT == evtId)
 	{
-		this->mOnTouchBeganDispatch->removeEventHandle(nullptr, handle);
+		this->mOnTouchBeganDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHMOVED_EVENT == evtId)
 	{
-		this->mOnTouchMovedDispatch.removeEventHandle(nullptr, handle);
+		this->mOnTouchMovedDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHSTATIONARY_EVENT == evtId)
 	{
-		this->mOnTouchStationaryDispatch.removeEventHandle(nullptr, handle);
+		this->mOnTouchStationaryDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHENDED_EVENT == evtId)
 	{
-		this->mOnTouchEndedDispatch->removeEventHandle(nullptr, handle);
+		this->mOnTouchEndedDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHCANCELED_EVENT == evtId)
 	{
-		this->mOnTouchCanceledDispatch->removeEventHandle(nullptr, handle);
+		this->mOnTouchCanceledDispatch->removeEventHandle(handle);
 	}
 
 	this->mHasTouch = this->hasEventHandle();
@@ -342,7 +345,7 @@ void InputMgr::removeTouchListener(InputEventId evtId, EventDispatchDelegate han
 
 			if (!this->mHasMultiTouch)
 			{
-				this->removeEventMouse(MMouseDevice::MouseLeftButton);
+				this->_removeEventMouse(MMouseDevice::MouseLeftButton);
 			}
 		}
 	}
@@ -352,23 +355,23 @@ void InputMgr::addMultiTouchListener(InputEventId evtId, EventDispatchDelegate h
 {
 	if (InputEventId::MULTI_TOUCHBEGIN_EVENT == evtId)
 	{
-		this->mOnMultiTouchBeganDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchBeganDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHMOVED_EVENT == evtId)
 	{
-		this->mOnMultiTouchMovedDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchMovedDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
 	{
-		this->mOnMultiTouchStationaryDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchStationaryDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
 	{
-		this->mOnMultiTouchEndedDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchEndedDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHCANCELED_EVENT == evtId)
 	{
-		this->mOnMultiTouchCanceledDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchCanceledDispatch->addEventHandle(handle);
 	}
 
 	this->mHasMultiTouch = true;
@@ -377,7 +380,7 @@ void InputMgr::addMultiTouchListener(InputEventId evtId, EventDispatchDelegate h
 	{
 		if (this->mSimulateMouseWithTouches)
 		{
-			this->addEventMouse(MMouseDevice::MouseLeftButton);
+			this->_addEventMouse(MMouseDevice::MouseLeftButton);
 		}
 	}
 }
@@ -386,23 +389,23 @@ void InputMgr::removeMultiTouchListener(InputEventId evtId, EventDispatchDelegat
 {
 	if (InputEventId::MULTI_TOUCHBEGIN_EVENT == evtId)
 	{
-		this->mOnMultiTouchBeganDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchBeganDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHMOVED_EVENT == evtId)
 	{
-		this->mOnMultiTouchMovedDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchMovedDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
 	{
-		this->mOnMultiTouchStationaryDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchStationaryDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
 	{
-		this->mOnMultiTouchEndedDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchEndedDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHCANCELED_EVENT == evtId)
 	{
-		this->mOnMultiTouchCanceledDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchCanceledDispatch->removeEventHandle(handle);
 	}
 
 	this->mHasMultiTouch = this->hasMultiEventHandle();
@@ -415,7 +418,7 @@ void InputMgr::removeMultiTouchListener(InputEventId evtId, EventDispatchDelegat
 
 			if (!this->mHasTouch)
 			{
-				this->removeEventMouse(MMouseDevice::MouseLeftButton);
+				this->_removeEventMouse(MMouseDevice::MouseLeftButton);
 			}
 		}
 	}
@@ -472,20 +475,21 @@ void InputMgr::ProcessTouches(float delta, TickMode tickMode)
 {
 	if (this->hasTouch() || this->hasMultiTouch())
 	{
-		this->mMultiTouchSet.reset();
-
-		this->mCurrentScheme = MControlScheme.Touch;
-
+		this->mMultiTouchSet->reset();
+		this->mCurrentScheme = MControlScheme::Touch;
 		int index = 0;
+		FVector* touchPos;
+		FKey* touch;
 
-		while (index < UnityEngine.Input.touchCount)
+		while (index < EKeys::NUM_TOUCH_KEYS)
 		{
-			UnityEngine.Touch touch = UnityEngine.Input.GetTouch(index);
+			touchPos = &(this->mPlayerInput->Touches[index]);
+			touch = &(EKeys::TouchKeys[index]);
 
-			this->mCurrentTouchId = this->mMultiTouchEnabled ? touch.fingerId : 0;
+			this->mCurrentTouchId = this->mMultiTouchEnabled ? index : 0;
 			this->mCurrentTouch = MTouchDevice::GetTouch(this->mCurrentTouchId);
 
-			this->mCurrentTouch->setNativeTouch(touch, this->mCurrentTouchId);
+			this->mCurrentTouch->setNativeTouch(touchPos, touch, this->mCurrentTouchId);
 			this->mCurrentTouch->onTick(delta, tickMode);
 
 			if (this->hasMultiTouch())
@@ -512,11 +516,11 @@ bool InputMgr::hasEventHandle()
 	{
 		ret = true;
 	}
-	if (this->mOnTouchMovedDispatch.hasEventHandle())
+	if (this->mOnTouchMovedDispatch->hasEventHandle())
 	{
 		ret = true;
 	}
-	if (this->mOnTouchStationaryDispatch.hasEventHandle())
+	if (this->mOnTouchStationaryDispatch->hasEventHandle())
 	{
 		ret = true;
 	}
@@ -549,7 +553,7 @@ void InputMgr::handleTouchMoved(MMouseOrTouch* touch)
 {
 	if (nullptr != this->mOnTouchMovedDispatch)
 	{
-		this->mOnTouchMovedDispatch.dispatchEvent(touch);
+		this->mOnTouchMovedDispatch->dispatchEvent(touch);
 	}
 }
 
@@ -557,7 +561,7 @@ void InputMgr::handleTouchStationary(MMouseOrTouch* touch)
 {
 	if (nullptr != this->mOnTouchStationaryDispatch)
 	{
-		this->mOnTouchStationaryDispatch.dispatchEvent(touch);
+		this->mOnTouchStationaryDispatch->dispatchEvent(touch);
 	}
 }
 

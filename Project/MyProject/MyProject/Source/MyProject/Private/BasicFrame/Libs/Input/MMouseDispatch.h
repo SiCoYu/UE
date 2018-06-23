@@ -30,7 +30,7 @@ public:
 	void dispose();
 
 	void addMouseListener(InputEventId evtId, EventDispatchDelegate handle);
-	public void removeMouseListener(InputEventId evtId, EventDispatchDelegate handle);
+	void removeMouseListener(InputEventId evtId, EventDispatchDelegate handle);
     // 是否还有需要处理的事件
 	bool hasEventHandle();
 
