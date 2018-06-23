@@ -478,8 +478,8 @@ void InputMgr::ProcessTouches(float delta, TickMode tickMode)
 		this->mMultiTouchSet->reset();
 		this->mCurrentScheme = MControlScheme::Touch;
 		int index = 0;
-		FVector* touchPos;
-		FKey* touch;
+		const FVector* touchPos;
+		const FKey* touch;
 
 		while (index < EKeys::NUM_TOUCH_KEYS)
 		{

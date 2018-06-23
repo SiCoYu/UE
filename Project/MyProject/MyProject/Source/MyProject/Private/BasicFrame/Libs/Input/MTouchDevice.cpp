@@ -94,7 +94,7 @@ bool MTouchDevice::_isInCanceled()
 	return ret;
 }
 
-void MTouchDevice::setNativeTouch(FVector* touchPos, FKey* nativeTouch, int touchIndex)
+void MTouchDevice::setNativeTouch(const FVector* touchPos, const FKey* nativeTouch, int touchIndex)
 {
 	this->mNativeTouchPos = touchPos;
 	this->mNativeTouch = nativeTouch;

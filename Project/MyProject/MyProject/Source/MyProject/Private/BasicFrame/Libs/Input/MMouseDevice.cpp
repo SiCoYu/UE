@@ -5,9 +5,9 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-MMouseDevice* MMouseDevice::MouseLeftButton = MY_NEW MMouseDevice(0);
-MMouseDevice* MMouseDevice::MouseRightButton = MY_NEW MMouseDevice(1);
-MMouseDevice* MMouseDevice::MouseMiddleButton = MY_NEW MMouseDevice(2);
+MMouseDevice* MMouseDevice::MouseLeftButton = nullptr;
+MMouseDevice* MMouseDevice::MouseRightButton = nullptr;
+MMouseDevice* MMouseDevice::MouseMiddleButton = nullptr;
 
 MMouseDevice* MMouseDevice::mMouse[MMouseDeviceType::eMouseTotalButton];
 
@@ -15,6 +15,10 @@ MMouseDevice* MMouseDevice::GetMouse(int button)
 {
 	if (nullptr == MMouseDevice::mMouse[0])
 	{
+		MMouseDevice::MouseLeftButton = MY_NEW MMouseDevice(0);
+		MMouseDevice::MouseRightButton = MY_NEW MMouseDevice(1);
+		MMouseDevice::MouseMiddleButton = MY_NEW MMouseDevice(2);
+
 		MMouseDevice::mMouse[0] = MMouseDevice::MouseLeftButton;
 		MMouseDevice::mMouse[1] = MMouseDevice::MouseRightButton;
 		MMouseDevice::mMouse[2] = MMouseDevice::MouseMiddleButton;

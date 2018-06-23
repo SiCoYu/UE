@@ -27,14 +27,14 @@ protected:
 	 * // > 0 means that it's currently held down (anything besides an end message is held down)
 	 * Touches[Handle].Z = (Type == ETouchType::Ended) ? 0.0f : 1.0f;
 	 */
-	FVector* mNativeTouchPos;
+	const FVector* mNativeTouchPos;
 	/**
 	 * @code G:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Runtime\InputCore\Private\InputCoreTypes.cpp
 	 * static const int32 NUM_TOUCH_KEYS = 11;
 	 * static const FKey TouchKeys[NUM_TOUCH_KEYS];
 	 * const FKey EKeys::TouchKeys[NUM_TOUCH_KEYS];
 	 */
-	FKey* mNativeTouch;
+	const FKey* mNativeTouch;
 
 	MTouchPhase mTouchPhase;
 
@@ -50,7 +50,7 @@ public:
 	bool _isInEnded();
 	bool _isInCanceled();
 
-	void setNativeTouch(FVector* touchPos, FKey* nativeTouch, int touchIndex);
+	void setNativeTouch(const FVector* touchPos, const FKey* nativeTouch, int touchIndex);
 	void onTick(float delta, TickMode tickMode);
 
 	void handleTouchBegan();
