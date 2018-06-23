@@ -1,90 +1,42 @@
-﻿using UnityEngine;
+﻿#include "MyProject.h"
+#include "MMouseOrTouch.h"
 
-namespace SDK.Lib
+MY_BEGIN_NAMESPACE(MyNS)
+
+MMouseOrTouch::MMouseOrTouch()
 {
-    public class MMouseOrTouch : IDispatchObject
-    {
-        public KeyCode mKey = KeyCode.None;
-        public Vector2 mPos;             // Current position of the mouse or touch event
-        public Vector2 mLastPos;         // Previous position of the mouse or touch event
-        public Vector2 mDelta;           // Delta since last update
-        public Vector2 mTotalDelta;      // Delta since the event started being tracked
-
-        public Camera mPressedCam;       // Camera that the OnPress(true) was fired with
-
-        public GameObject mLast;         // Last object under the touch or mouse
-        public GameObject mCurrent;      // Current game object under the touch or mouse
-        public GameObject mPressed;      // Last game object to receive OnPress
-        public GameObject mDragged;      // Game object that's being dragged
-
-        public float mPressTime = 0f;    // When the touch event started
-        public float mClickTime = 0f;    // The last time a click event was sent out
-
-        public MClickNotification mClickNotification = MClickNotification.Always;
-        public bool mTouchBegan = true;
-        public bool mTouchEnd = true;
-        public bool mPressStarted = false;
-        public bool mDragStarted = false;
-        public int mIgnoreDelta = 0;
-
-        protected float mSensitivity;   // 灵敏度
-
-        public int mTouchIndex;  // 触碰索引或者鼠标 // 0 左键 1 右键 2 中键 
-
-        /// <summary>
-        /// Delta time since the touch operation started.
-        /// </summary>
-        public float deltaTime
-        {
-            get
-            {
-                return UtilInput.time - mPressTime;
-            }
-        }
-
-        public MMouseOrTouch()
-        {
-            this.mSensitivity = 0.1f;
-            this.mTouchIndex = 0;
-        }
-
-        public int getTouchIndex()
-        {
-            return this.mTouchIndex;
-        }
-
-        /// <summary>
-        /// Returns whether this touch is currently over a UI element.
-        /// </summary>
-        public bool isOverUI
-        {
-            get
-            {
-                // UGUI UI 判断当前摄像机是否在处理 UI 事件
-                return UtilEngineWrap.IsPointerOverGameObjectRaycast();
-            }
-        }
-
-        // 获取 X 方向移动的距离
-        public float getXOffset()
-        {
-            return (mPos.x - mLastPos.x) * this.mSensitivity;
-        }
-
-        // 获取 X 方向移动的距离
-        public float getYOffset()
-        {
-            return (mPos.y - mLastPos.y) * this.mSensitivity;
-        }
-
-        public bool isPosChanged()
-        {
-            if (this.mPos.x != this.mLastPos.x || this.mPos.y != this.mLastPos.y)
-            {
-                return true;
-            }
-
-            return false;
-        }
-    }
+	this->mSensitivity = 0.1f;
+	this->mTouchIndex = 0;
 }
+
+int MMouseOrTouch::getTouchIndex()
+{
+	return this->mTouchIndex;
+}
+
+// 获取 X 方向移动的距离
+float MMouseOrTouch::getXOffset()
+{
+	return (this->mPos.x - this->mLastPos.x) * this->mSensitivity;
+}
+
+// 获取 X 方向移动的距离
+float MMouseOrTouch::getYOffset()
+{
+	return (this->mPos.y - this->mLastPos.y) * this->mSensitivity;
+}
+
+bool MMouseOrTouch::isPosChanged()
+{
+	bool ret = false;
+
+	if (this->mPos.x != this->mLastPos.x ||
+		this->mPos.y != this->mLastPos.y)
+	{
+		ret = true;
+	}
+
+	return ret;
+}
+
+MY_END_NAMESPACE

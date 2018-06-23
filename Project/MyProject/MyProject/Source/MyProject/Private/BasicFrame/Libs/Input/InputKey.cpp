@@ -2,7 +2,6 @@
 #include "InputKey.h"
 #include "KeyId.h"
 #include "AddOnceEventDispatch.h"
-#include "InputCoreTypes.h"		// FKey \ EKeys
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"

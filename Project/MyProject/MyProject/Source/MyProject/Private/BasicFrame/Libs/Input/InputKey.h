@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <string>
+#include "InputCoreTypes.h"		// FKey \ EKeys
 
 #include "IDispatchObject.h"
 #include "PlatformDefine.h"
@@ -8,8 +9,6 @@
 #include "InputEventId.h"
 #include "TickMode.h"
 #include "EventDispatchDelegate.h"
-
-struct FKey;
 
 MY_BEGIN_NAMESPACE(MyNS)
 
