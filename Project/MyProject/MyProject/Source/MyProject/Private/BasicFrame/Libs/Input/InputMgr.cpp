@@ -3,13 +3,15 @@
 #include "MyPlayerControllerBase.h"		// AMyPlayerControllerBase
 #include "GameFramework/PlayerInput.h"	// UPlayerInput
 #include "InputCoreTypes.h"		// FKey
-#include "KeyState.h"	 // FKeyState
+#include "KeyState.h"			// FKeyState
 #include "MMouseOrTouch.h"
 #include "AddOnceEventDispatch.h"
 #include "MMouseDispatch.h"
 #include "MultiTouchSet.h"
 #include "InputKey.h"
 #include "AddOnceEventDispatch.h"
+#include "MMouseDeviceType.h"
+#include "UtilMath.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -92,6 +94,88 @@ bool InputMgr::getKeyUp(FKey keyCode)
 bool InputMgr::getKey(FKey keyCode)
 {
 	return !this->mPlayerInput->IsPressed(keyCode);
+}
+
+bool InputMgr::GetMouseButtonDown(int mouseIndex)
+{
+	bool ret = false;
+
+	if ((int)MMouseDeviceType::eMouseLeftButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton)->bDown;
+	}
+	else if ((int)MMouseDeviceType::eMouseRightButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->GetKeyState(EKeys::RightMouseButton)->bDown;
+	}
+	else if ((int)MMouseDeviceType::eMouseMiddleButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton)->bDown;
+	}
+
+	return ret;
+}
+
+bool InputMgr::GetMouseButtonUp(int mouseIndex)
+{
+	bool ret = false;
+
+	if ((int)MMouseDeviceType::eMouseLeftButton == mouseIndex)
+	{
+		ret = !this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton)->bDown;
+	}
+	else if ((int)MMouseDeviceType::eMouseRightButton == mouseIndex)
+	{
+		ret = !this->mPlayerInput->GetKeyState(EKeys::RightMouseButton)->bDown;
+	}
+	else if ((int)MMouseDeviceType::eMouseMiddleButton == mouseIndex)
+	{
+		ret = !this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton)->bDown;
+	}
+
+	return ret;
+}
+
+bool InputMgr::GetMouseButton(int mouseIndex)
+{
+	bool ret = false;
+
+	if ((int)MMouseDeviceType::eMouseLeftButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->IsPressed(EKeys::LeftMouseButton);
+	}
+	else if ((int)MMouseDeviceType::eMouseRightButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->IsPressed(EKeys::RightMouseButton);
+	}
+	else if ((int)MMouseDeviceType::eMouseMiddleButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->IsPressed(EKeys::MiddleMouseButton);
+	}
+
+	return ret;
+}
+
+FVector InputMgr::GetMousePosition()
+{
+	FVector ret = UtilMath::ZeroVec3;
+
+	if ((int)MMouseDeviceType::eMouseLeftButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton)->Value;
+	}
+	else if ((int)MMouseDeviceType::eMouseRightButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->GetKeyState(EKeys::RightMouseButton)->Value;
+	}
+	else if ((int)MMouseDeviceType::eMouseMiddleButton == mouseIndex)
+	{
+		ret = this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton)->Value;
+	}
+
+	return ret;
+
+	return 
 }
 
 void InputMgr::onTick(float delta, TickMode tickMode)

@@ -11,6 +11,8 @@
 #include "InputEventId.h"
 #include "EventDispatchDelegate.h"
 #include "MMouseDeviceType.h"
+#include "Math/Vector.h"	// FVector
+#include "MControlScheme.h"
 #include "PlatformDefine.h"
 
 class AMyPlayerControllerBase;
@@ -69,7 +71,7 @@ protected:
 	AddOnceEventDispatch* mOnDeviceOpDispatch;      // android返回按键操作
 	AddOnceEventDispatch* mOnDeviceHomeDispatch;      // androidHome按键操作
 
-															// 多触碰集合
+	// 多触碰集合
 	MultiTouchSet* mMultiTouchSet;
 	// 鼠标模拟触碰
 	bool mMultiTouchEnabled;
@@ -93,6 +95,12 @@ public:
 	bool getKeyDown(FKey keyCode);
 	bool getKeyUp(FKey keyCode);
 	bool getKey(FKey keyCode);
+
+	// MMouseDeviceType
+	bool GetMouseButtonDown(int mouseIndex);
+	bool GetMouseButtonUp(int mouseIndex);
+	bool GetMouseButton(int mouseIndex);
+	FVector GetMousePosition();
 
 	// 逻辑事件处理
 	/**

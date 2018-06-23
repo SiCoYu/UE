@@ -1,5 +1,7 @@
 ﻿#include "MyProject.h"
 #include "MMouseDevice.h"
+#include "Ctx.h"
+#include "InputMgr.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -28,34 +30,24 @@ MMouseDevice::MMouseDevice(int button)
 
 void MMouseDevice::onTick(float delta, TickMode tickMode)
 {
-	if (UnityEngine.Input.GetMouseButtonDown(this->mTouchIndex))
+	if (GInputMgr->GetMouseButtonDown(this->mTouchIndex))
 	{
-		this->mPressTime = RealTime.time;
-		this->mTouchBegan = true;
-		this->mTouchEnd = false;
-
 		// 按下的时候，设置位置相同
 		this->mPos = UnityEngine.Input.mousePosition;
 		this->mLastPos = this->mPos;
 
 		this->handleMouseDown();
 	}
-	else if (UnityEngine.Input.GetMouseButtonUp(this->mTouchIndex))
+	else if (GInputMgr->GetMouseButtonUp(this->mTouchIndex))
 	{
-		this->mTouchBegan = false;
-		this->mTouchEnd = true;
-
 		// Up 的时候，先设置之前的位置，然后设置当前位置
 		this->mLastPos = this->mPos;
 		this->mPos = UnityEngine.Input.mousePosition;
 
 		this->handleMouseUp();
 	}
-	else if (UnityEngine.Input.GetMouseButton(this->mTouchIndex))
+	else if (GInputMgr->GetMouseButton(this->mTouchIndex))
 	{
-		this->mTouchBegan = false;
-		this->mTouchEnd = false;
-
 		// Press 的时候，先设置之前的位置，然后设置当前位置
 		this->mLastPos = this->mPos;
 		this->mPos = UnityEngine.Input.mousePosition;
@@ -71,12 +63,9 @@ void MMouseDevice::onTick(float delta, TickMode tickMode)
 	}
 	else if (this->isPosChanged())     // 位置不相等的时候，就是移动
 	{
-		this->mTouchBegan = false;
-		this->mTouchEnd = false;
-
 		// 鼠标移动
 		this->mLastPos = this->mPos;
-		this->mPos = UnityEngine.Input.mousePosition;
+		this->mPos = GInputMgr->GetMousePosition();
 
 		this->handleMousePressOrMove();
 	}
@@ -84,37 +73,37 @@ void MMouseDevice::onTick(float delta, TickMode tickMode)
 
 void MMouseDevice::handleMouseDown()
 {
-	if (!Ctx.msInstance.mInputMgr.mSimulateMouseWithTouches)
+	if (!GInputMgr->mSimulateMouseWithTouches)
 	{
-		Ctx.msInstance.mInputMgr.handleMouseDown(this);
+		GInputMgr->handleMouseDown(this);
 	}
 	else
 	{
-		Ctx.msInstance.mInputMgr.handleTouchBegan(this);
+		GInputMgr->handleTouchBegan(this);
 	}
 }
 
 void MMouseDevice::handleMouseUp()
 {
-	if (!Ctx.msInstance.mInputMgr.mSimulateMouseWithTouches)
+	if (!GInputMgr->mSimulateMouseWithTouches)
 	{
-		Ctx.msInstance.mInputMgr.handleMouseUp(this);
+		GInputMgr->handleMouseUp(this);
 	}
 	else
 	{
-		Ctx.msInstance.mInputMgr.handleTouchEnded(this);
+		GInputMgr->handleTouchEnded(this);
 	}
 }
 
 void MMouseDevice::handleMousePress()
 {
-	if (!Ctx.msInstance.mInputMgr.mSimulateMouseWithTouches)
+	if (!GInputMgr->mSimulateMouseWithTouches)
 	{
-		Ctx.msInstance.mInputMgr.handleMousePress(this);
+		GInputMgr->handleMousePress(this);
 	}
 	else
 	{
-		Ctx.msInstance.mInputMgr.handleTouchStationary(this);
+		GInputMgr->handleTouchStationary(this);
 	}
 }
 
@@ -122,7 +111,7 @@ void MMouseDevice::handleMousePressOrMove()
 {
 	if (this->isPosChanged())
 	{
-		Ctx.msInstance.mInputMgr.handleMousePressOrMove(this);
+		GInputMgr->handleMousePressOrMove(this);
 	}
 }
 
@@ -130,13 +119,13 @@ void MMouseDevice::handleMousePressMove()
 {
 	if (this->isPosChanged())
 	{
-		if (!Ctx.msInstance.mInputMgr.mSimulateMouseWithTouches)
+		if (!GInputMgr->mSimulateMouseWithTouches)
 		{
-			Ctx.msInstance.mInputMgr.handleMousePressMove(this);
+			GInputMgr->handleMousePressMove(this);
 		}
 		else
 		{
-			Ctx.msInstance.mInputMgr.handleTouchMoved(this);
+			GInputMgr->handleTouchMoved(this);
 		}
 	}
 }
