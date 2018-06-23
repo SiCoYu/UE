@@ -60,7 +60,7 @@ void NetCmdDispatchHandle::removeParamHandle(uint8 paramId, EventDispatchDelegat
 	}
 }
 
-void NetCmdDispatchHandle::handleMsg(NetCmdDispatchInfo* cmd)
+void NetCmdDispatchHandle::handleMsg(uint eventId, NetCmdDispatchInfo* cmd)
 {
 	if (this->mId2HandleDic.containsKey(cmd->byParam))
 	{
