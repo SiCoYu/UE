@@ -1,10 +1,15 @@
-﻿namespace SDK.Lib
+﻿#pragma once
+
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+enum class MMouseDeviceType
 {
-    public enum MMouseDeviceType
-    {
-        eMouseLeftButton,
-        eMouseRightButton,
-        eMouseMiddleButton,
-		eMouseTotalButton,
-    }
-}
+	eMouseLeftButton,
+	eMouseRightButton,
+	eMouseMiddleButton,
+	eMouseTotalButton,
+};
+
+MY_END_NAMESPACE

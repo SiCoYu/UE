@@ -9,37 +9,40 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 InputMgr::InputMgr()
 {
-	this.mEventInputKeyList = new MList<InputKey>();
-	this.mEventMouseList = new MList<MMouseDevice>();
-	this.mHasAccelerationHandle = false;
+	mCurrentScheme = MControlScheme::Mouse;
+	mCurrentTouchId = -1;
 
-	this.mOnTouchBeganDispatch = new AddOnceEventDispatch();
-	this.mOnTouchMovedDispatch = new AddOnceEventDispatch();
-	this.mOnTouchStationaryDispatch = new AddOnceEventDispatch();
-	this.mOnTouchEndedDispatch = new AddOnceEventDispatch();
-	this.mOnTouchCanceledDispatch = new AddOnceEventDispatch();
+	this->mEventInputKeyList = new MList<InputKey>();
+	this->mEventMouseList = new MList<MMouseDevice>();
+	this->mHasAccelerationHandle = false;
 
-	this.mOnMultiTouchBeganDispatch = new AddOnceEventDispatch();
-	this.mOnMultiTouchMovedDispatch = new AddOnceEventDispatch();
-	this.mOnMultiTouchStationaryDispatch = new AddOnceEventDispatch();
-	this.mOnMultiTouchEndedDispatch = new AddOnceEventDispatch();
-	this.mOnMultiTouchCanceledDispatch = new AddOnceEventDispatch();
+	this->mOnTouchBeganDispatch = new AddOnceEventDispatch();
+	this->mOnTouchMovedDispatch = new AddOnceEventDispatch();
+	this->mOnTouchStationaryDispatch = new AddOnceEventDispatch();
+	this->mOnTouchEndedDispatch = new AddOnceEventDispatch();
+	this->mOnTouchCanceledDispatch = new AddOnceEventDispatch();
 
-	this.mMouseDispatchArray = new MMouseDispatch[3];
-	this.mMouseDispatchArray[0] = new MMouseDispatch();
-	this.mMouseDispatchArray[1] = new MMouseDispatch();
-	this.mMouseDispatchArray[2] = new MMouseDispatch();
+	this->mOnMultiTouchBeganDispatch = new AddOnceEventDispatch();
+	this->mOnMultiTouchMovedDispatch = new AddOnceEventDispatch();
+	this->mOnMultiTouchStationaryDispatch = new AddOnceEventDispatch();
+	this->mOnMultiTouchEndedDispatch = new AddOnceEventDispatch();
+	this->mOnMultiTouchCanceledDispatch = new AddOnceEventDispatch();
 
-	this.mMultiTouchSet = new MultiTouchSet();
+	this->mMouseDispatchArray = new MMouseDispatch[3];
+	this->mMouseDispatchArray[0] = new MMouseDispatch();
+	this->mMouseDispatchArray[1] = new MMouseDispatch();
+	this->mMouseDispatchArray[2] = new MMouseDispatch();
 
-	this.mMultiTouchEnabled = UnityEngine.Input.multiTouchEnabled;
-	//this.mSimulateMouseWithTouches = UnityEngine.Input.simulateMouseWithTouches;
-	this.mTouchSupported = UnityEngine.Input.touchSupported;
-	this.mSimulateMouseWithTouches = true;
-	//this.mMultiTouchEnabled = true;
+	this->mMultiTouchSet = new MultiTouchSet();
 
-	this.mOnDeviceOpDispatch = new AddOnceEventDispatch();
-	this.mOnDeviceHomeDispatch = new AddOnceEventDispatch();
+	this->mMultiTouchEnabled = UnityEngine.Input.multiTouchEnabled;
+	//this->mSimulateMouseWithTouches = UnityEngine.Input.simulateMouseWithTouches;
+	this->mTouchSupported = UnityEngine.Input.touchSupported;
+	this->mSimulateMouseWithTouches = true;
+	//this->mMultiTouchEnabled = true;
+
+	this->mOnDeviceOpDispatch = new AddOnceEventDispatch();
+	this->mOnDeviceHomeDispatch = new AddOnceEventDispatch();
 }
 
 InputMgr::~InputMgr()
@@ -50,16 +53,16 @@ InputMgr::~InputMgr()
 void InputMgr::init()
 {
 	InputKey.getInputKeyArray();
-	this.mMouseDispatchArray[0].init();
-	this.mMouseDispatchArray[1].init();
-	this.mMouseDispatchArray[2].init();
+	this->mMouseDispatchArray[0].init();
+	this->mMouseDispatchArray[1].init();
+	this->mMouseDispatchArray[2].init();
 }
 
 void InputMgr::dispose()
 {
-	this.mMouseDispatchArray[0].dispose();
-	this.mMouseDispatchArray[1].dispose();
-	this.mMouseDispatchArray[2].dispose();
+	this->mMouseDispatchArray[0].dispose();
+	this->mMouseDispatchArray[1].dispose();
+	this->mMouseDispatchArray[2].dispose();
 }
 
 void InputMgr::setPlayerController(AMyPlayerControllerBase* value)

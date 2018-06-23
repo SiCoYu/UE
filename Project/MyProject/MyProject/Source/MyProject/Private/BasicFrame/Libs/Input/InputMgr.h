@@ -7,6 +7,9 @@
 #include "GObject.h"
 #include "ITickedObject.h"
 #include "INoOrPriorityObject.h"
+#include "KeyId.h"
+#include "InputEventId.h"
+#include "EventDispatchDelegate.h"
 #include "PlatformDefine.h"
 
 class AMyPlayerControllerBase;
@@ -19,7 +22,7 @@ class InputKey;
 class MMouseDevice;
 class MTouchDevice;
 class AddOnceEventDispatch;
-class MultiTouchSet
+class MultiTouchSet;
 
 /**
  * @brief 主要是场景消息处理， UI 消息单独走，这个主要是从硬件判断
@@ -42,9 +45,9 @@ protected:
 	// 是否有重力感应事件
 	bool mHasAccelerationHandle;
 
-	MControlScheme mCurrentScheme = MControlScheme.Mouse;
-	int mCurrentTouchId = -1;
-	MTouchDevice* mCurrentTouch = null;
+	MControlScheme mCurrentScheme;
+	int mCurrentTouchId;
+	MTouchDevice* mCurrentTouch;
 
 	bool mHasTouch;
 	bool mHasMultiTouch;
@@ -94,471 +97,427 @@ public:
 	/**
 	* @inheritDoc
 	*/
-	public void onTick(float delta, TickMode tickMode)
+	void onTick(float delta, TickMode tickMode)
 	{
-		//handleAxis();
+		int index = 0;
 
-		// This function tracks which keys were just pressed (or released) within the last tick.
-		// It should be called at the beginning of the tick to give the most accurate responses possible.
-		int idx = 0;
-
-		for (idx = 0; idx < this.mEventInputKeyList.count(); idx++)
+		for (index = 0; index < this->mEventInputKeyList.count(); index++)
 		{
-			this.mEventInputKeyList[idx].onTick(delta, tickMode);
+			this->mEventInputKeyList[index]->onTick(delta, tickMode);
 		}
 
-		for (idx = 0; idx < this.mEventMouseList.count(); idx++)
+		for (index = 0; index < this->mEventMouseList.count(); index++)
 		{
-			this.mEventMouseList[idx].onTick(delta, tickMode);
+			this->mEventMouseList[index]->onTick(delta, tickMode);
 		}
 
-		this.ProcessTouches(delta, tickMode);
+		this->ProcessTouches(delta, tickMode);
 
-		if (this.mHasAccelerationHandle)
+		if (this->mHasAccelerationHandle)
 		{
-			MAcceleration.mAccelerationOne.onTick(delta, tickMode);
+			MAcceleration::mAccelerationOne->onTick(delta, tickMode);
 		}
+	}
 
-		//Andorid手机的返回键和Home键
-		if (UtilFileIO.isAndroidRuntime())
+	bool keyJustPressed(InputKey* inputKey)
+	{
+		return inputKey->keyJustPressed();
+	}
+
+	bool keyJustReleased(InputKey* inputKey)
+	{
+		return inputKey->keyJustReleased();
+	}
+
+	bool isKeyDown(InputKey* inputKey)
+	{
+		return inputKey->isKeyDown();
+	}
+
+	bool isAnyKeyDown()
+	{
+		int index = 0;
+		int listLen = (int)KeyId::Total;
+		InputKey* inputKey = nullptr;
+		bool ret = false;
+
+		while(index < listLen)
 		{
-			if (null != this.mOnDeviceOpDispatch && this.mOnDeviceOpDispatch.hasEventHandle())
+			inputKey = InputKey::mInputKeyArray[index];
+
+			if (nullptr != inputKey)
 			{
-				if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Escape))
-				{
-					this.mOnDeviceOpDispatch.dispatchEvent(null);
-				}
+				ret = inputKey->mKeyState;
+				break;
 			}
 
-			if (null != this.mOnDeviceHomeDispatch && this.mOnDeviceHomeDispatch.hasEventHandle())
-			{
-				if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Home))
-				{
-					this.mOnDeviceHomeDispatch.dispatchEvent(null);
-				}
-			}
+			index += 1;
 		}
-	}
 
-	//protected void handleAxis()
-	//{
-	//    float horizontal = Input.GetAxis("Horizontal");
-	//    float vertical = Input.GetAxis("Vertical");
-	//    if (horizontal != 0.0f || vertical != 0.0f)
-	//    {
-	//        if (mOnAxisDown != null)
-	//        {
-	//            mOnAxisDown();
-	//        }
-	//    }
-	//}
-
-	/**
-	* Returns whether or not a key was pressed since the last tick.
-	*/
-	public bool keyJustPressed(InputKey inputKey)
-	{
-		return inputKey.keyJustPressed();
-	}
-
-	/**
-	* Returns whether or not a key was released since the last tick.
-	*/
-	public bool keyJustReleased(InputKey inputKey)
-	{
-		return inputKey.keyJustReleased();
-	}
-
-	/**
-	* Returns whether or not a specific key is down.
-	*/
-	public bool isKeyDown(InputKey inputKey)
-	{
-		return inputKey.isKeyDown();
-	}
-
-	/**
-	* Returns true if any key is down.
-	*/
-	public bool isAnyKeyDown()
-	{
-		foreach(InputKey inputKey in InputKey.mInputKeyArray)
-		{
-			if (null != inputKey)
-			{
-				return inputKey.mKeyState;
-			}
-		}
-		return false;
+		return ret;
 	}
 
 	// 添加 KeyInput 输入事件
-	public void addKeyListener(InputKey inputKey, InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void addKeyListener(InputKey* inputKey, InputEventId evtId, EventDispatchDelegate handle)
 	{
-		inputKey.addKeyListener(evtID, handle);
+		inputKey->addKeyListener(evtId, handle);
 
-		this.addEventInputKey(inputKey);
+		this->addEventInputKey(inputKey);
 	}
 
 	// 移除键盘 KeyInput 输入事件
-	public void removeKeyListener(InputKey inputKey, InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void removeKeyListener(InputKey* inputKey, InputEventId evtId, EventDispatchDelegate handle)
 	{
-		inputKey.removeKeyListener(evtID, handle);
+		inputKey->removeKeyListener(evtId, handle);
 
-		if (!inputKey.hasEventHandle())
+		if (!inputKey->hasEventHandle())
 		{
-			this.removeEventInputKey(inputKey);
+			this->removeEventInputKey(inputKey);
 		}
 	}
 
 	// 添加鼠标监听器
-	public void addMouseListener(MMouseDevice mouse, InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void addMouseListener(MMouseDevice* mouse, InputEventId evtId, EventDispatchDelegate handle)
 	{
-		this.mMouseDispatchArray[mouse.mTouchIndex].addMouseListener(evtID, handle);
-		this.addEventMouse(mouse);
+		this->mMouseDispatchArray[mouse.mTouchIndex].addMouseListener(evtId, handle);
+		this->addEventMouse(mouse);
 	}
 
 	// 移除鼠标监听器
-	public void removeMouseListener(MMouseDevice mouse, InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void removeMouseListener(MMouseDevice* mouse, InputEventId evtId, EventDispatchDelegate handle)
 	{
-		this.mMouseDispatchArray[mouse.mTouchIndex].removeMouseListener(evtID, handle);
+		this->mMouseDispatchArray[mouse.mTouchIndex].removeMouseListener(evtId, handle);
 
-		if (!this.hasEventHandle(mouse))
+		if (!this->hasEventHandle(mouse))
 		{
-			this.removeEventMouse(mouse);
+			this->removeEventMouse(mouse);
 		}
 	}
 
-	public void addTouchListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void addTouchListener(InputEventId evtId, EventDispatchDelegate handle)
 	{
-		if (InputEventId.TOUCHBEGIN_EVENT == evtID)
+		if (InputEventId::TOUCHBEGIN_EVENT == evtId)
 		{
-			this.mOnTouchBeganDispatch.addEventHandle(null, handle);
+			this->mOnTouchBeganDispatch->addEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.TOUCHMOVED_EVENT == evtID)
+		else if (InputEventId::TOUCHMOVED_EVENT == evtId)
 		{
-			this.mOnTouchMovedDispatch.addEventHandle(null, handle);
+			this->mOnTouchMovedDispatch.addEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.TOUCHSTATIONARY_EVENT == evtID)
+		else if (InputEventId::TOUCHSTATIONARY_EVENT == evtId)
 		{
-			this.mOnTouchStationaryDispatch.addEventHandle(null, handle);
+			this->mOnTouchStationaryDispatch.addEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.TOUCHENDED_EVENT == evtID)
+		else if (InputEventId::TOUCHENDED_EVENT == evtId)
 		{
-			this.mOnTouchEndedDispatch.addEventHandle(null, handle);
+			this->mOnTouchEndedDispatch->addEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.TOUCHCANCELED_EVENT == evtID)
+		else if (InputEventId::TOUCHCANCELED_EVENT == evtId)
 		{
-			this.mOnTouchCanceledDispatch.addEventHandle(null, handle);
+			this->mOnTouchCanceledDispatch->addEventHandle(nullptr, handle);
 		}
 
-		this.mHasTouch = true;
+		this->mHasTouch = true;
 
-		if (!this.mTouchSupported)
+		if (!this->mTouchSupported)
 		{
-			if (this.mSimulateMouseWithTouches)
+			if (this->mSimulateMouseWithTouches)
 			{
-				this.addEventMouse(MMouseDevice.MouseLeftButton);
+				this->addEventMouse(MMouseDevice::MouseLeftButton);
 			}
 		}
 	}
 
-	public void removeTouchListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void removeTouchListener(InputEventId evtId, EventDispatchDelegate handle)
 	{
-		if (InputEventId.TOUCHBEGIN_EVENT == evtID)
+		if (InputEventId::TOUCHBEGIN_EVENT == evtId)
 		{
-			this.mOnTouchBeganDispatch.removeEventHandle(null, handle);
+			this->mOnTouchBeganDispatch->removeEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.TOUCHMOVED_EVENT == evtID)
+		else if (InputEventId::TOUCHMOVED_EVENT == evtId)
 		{
-			this.mOnTouchMovedDispatch.removeEventHandle(null, handle);
+			this->mOnTouchMovedDispatch.removeEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.TOUCHSTATIONARY_EVENT == evtID)
+		else if (InputEventId::TOUCHSTATIONARY_EVENT == evtId)
 		{
-			this.mOnTouchStationaryDispatch.removeEventHandle(null, handle);
+			this->mOnTouchStationaryDispatch.removeEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.TOUCHENDED_EVENT == evtID)
+		else if (InputEventId::TOUCHENDED_EVENT == evtId)
 		{
-			this.mOnTouchEndedDispatch.removeEventHandle(null, handle);
+			this->mOnTouchEndedDispatch->removeEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.TOUCHCANCELED_EVENT == evtID)
+		else if (InputEventId::TOUCHCANCELED_EVENT == evtId)
 		{
-			this.mOnTouchCanceledDispatch.removeEventHandle(null, handle);
+			this->mOnTouchCanceledDispatch->removeEventHandle(nullptr, handle);
 		}
 
-		this.mHasTouch = this.hasEventHandle();
+		this->mHasTouch = this->hasEventHandle();
 
-		if (!this.mTouchSupported && !this.mHasTouch)
+		if (!this->mTouchSupported && !this->mHasTouch)
 		{
-			if (this.mSimulateMouseWithTouches)
+			if (this->mSimulateMouseWithTouches)
 			{
-				this.mHasMultiTouch = this.hasMultiEventHandle();
+				this->mHasMultiTouch = this->hasMultiEventHandle();
 
-				if (!this.mHasMultiTouch)
+				if (!this->mHasMultiTouch)
 				{
-					this.removeEventMouse(MMouseDevice.MouseLeftButton);
+					this->removeEventMouse(MMouseDevice::MouseLeftButton);
 				}
 			}
 		}
 	}
 
-	public void addMultiTouchListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void addMultiTouchListener(InputEventId evtId, EventDispatchDelegate handle)
 	{
-		if (InputEventId.MULTI_TOUCHBEGIN_EVENT == evtID)
+		if (InputEventId::MULTI_TOUCHBEGIN_EVENT == evtId)
 		{
-			this.mOnMultiTouchBeganDispatch.addEventHandle(null, handle);
+			this->mOnMultiTouchBeganDispatch->addEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.MULTI_TOUCHMOVED_EVENT == evtID)
+		else if (InputEventId::MULTI_TOUCHMOVED_EVENT == evtId)
 		{
-			this.mOnMultiTouchMovedDispatch.addEventHandle(null, handle);
+			this->mOnMultiTouchMovedDispatch->addEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.MULTI_TOUCHSTATIONARY_EVENT == evtID)
+		else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
 		{
-			this.mOnMultiTouchStationaryDispatch.addEventHandle(null, handle);
+			this->mOnMultiTouchStationaryDispatch->addEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.MULTI_TOUCHENDED_EVENT == evtID)
+		else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
 		{
-			this.mOnMultiTouchEndedDispatch.addEventHandle(null, handle);
+			this->mOnMultiTouchEndedDispatch->addEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.MULTI_TOUCHCANCELED_EVENT == evtID)
+		else if (InputEventId::MULTI_TOUCHCANCELED_EVENT == evtId)
 		{
-			this.mOnMultiTouchCanceledDispatch.addEventHandle(null, handle);
+			this->mOnMultiTouchCanceledDispatch->addEventHandle(nullptr, handle);
 		}
 
-		this.mHasMultiTouch = true;
+		this->mHasMultiTouch = true;
 
-		if (!this.mTouchSupported)
+		if (!this->mTouchSupported)
 		{
-			if (this.mSimulateMouseWithTouches)
+			if (this->mSimulateMouseWithTouches)
 			{
-				this.addEventMouse(MMouseDevice.MouseLeftButton);
+				this->addEventMouse(MMouseDevice::MouseLeftButton);
 			}
 		}
 	}
 
-	public void removeMultiTouchListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void removeMultiTouchListener(InputEventId evtId, EventDispatchDelegate handle)
 	{
-		if (InputEventId.MULTI_TOUCHBEGIN_EVENT == evtID)
+		if (InputEventId::MULTI_TOUCHBEGIN_EVENT == evtId)
 		{
-			this.mOnMultiTouchBeganDispatch.removeEventHandle(null, handle);
+			this->mOnMultiTouchBeganDispatch->removeEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.MULTI_TOUCHMOVED_EVENT == evtID)
+		else if (InputEventId::MULTI_TOUCHMOVED_EVENT == evtId)
 		{
-			this.mOnMultiTouchMovedDispatch.removeEventHandle(null, handle);
+			this->mOnMultiTouchMovedDispatch->removeEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.MULTI_TOUCHSTATIONARY_EVENT == evtID)
+		else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
 		{
-			this.mOnMultiTouchStationaryDispatch.removeEventHandle(null, handle);
+			this->mOnMultiTouchStationaryDispatch->removeEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.MULTI_TOUCHENDED_EVENT == evtID)
+		else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
 		{
-			this.mOnMultiTouchEndedDispatch.removeEventHandle(null, handle);
+			this->mOnMultiTouchEndedDispatch->removeEventHandle(nullptr, handle);
 		}
-		else if (InputEventId.MULTI_TOUCHCANCELED_EVENT == evtID)
+		else if (InputEventId::MULTI_TOUCHCANCELED_EVENT == evtId)
 		{
-			this.mOnMultiTouchCanceledDispatch.removeEventHandle(null, handle);
+			this->mOnMultiTouchCanceledDispatch->removeEventHandle(nullptr, handle);
 		}
 
-		this.mHasMultiTouch = this.hasMultiEventHandle();
+		this->mHasMultiTouch = this->hasMultiEventHandle();
 
-		if (!this.mTouchSupported && !this.mHasMultiTouch)
+		if (!this->mTouchSupported && !this->mHasMultiTouch)
 		{
-			if (this.mSimulateMouseWithTouches)
+			if (this->mSimulateMouseWithTouches)
 			{
-				this.mHasTouch = this.hasEventHandle();
+				this->mHasTouch = this->hasEventHandle();
 
-				if (!this.mHasTouch)
+				if (!this->mHasTouch)
 				{
-					this.removeEventMouse(MMouseDevice.MouseLeftButton);
+					this->removeEventMouse(MMouseDevice::MouseLeftButton);
 				}
 			}
 		}
 	}
 
-	public void addAccelerationListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	void addAccelerationListener(InputEventId evtId, EventDispatchDelegate handle)
 	{
-		MAcceleration.mAccelerationOne.addAccelerationListener(evtID, handle);
-		this.mHasAccelerationHandle = true;
+		MAcceleration.mAccelerationOne.addAccelerationListener(evtId, handle);
+		this->mHasAccelerationHandle = true;
 	}
 
-	public void removeAccelerationListener(InputEventId evtID, MEventDispatchAction<IDispatchObject> handle)
+	public void removeAccelerationListener(InputEventId evtId, EventDispatchDelegate handle)
 	{
-		MAcceleration.mAccelerationOne.removeAccelerationListener(evtID, handle);
+		MAcceleration.mAccelerationOne.removeAccelerationListener(evtId, handle);
 		if (!MAcceleration.mAccelerationOne.hasEventHandle())
 		{
-			this.mHasAccelerationHandle = false;
+			this->mHasAccelerationHandle = false;
 		}
 	}
 
-	//public void addAxisListener(InputEventId evtID, Action cb)
-	//{
-	//    mOnAxisDown += cb;
-	//}
-
-	//public void removeAxisListener(InputEventId evtID, Action cb)
-	//{
-	//    mOnAxisDown -= cb;
-	//}
-
-	protected void addEventInputKey(InputKey inputKey)
+protected:
+	void _addEventInputKey(InputKey* inputKey)
 	{
-		if (-1 == this.mEventInputKeyList.indexOf(inputKey))
+		if (-1 == this->mEventInputKeyList.indexOf(inputKey))
 		{
-			this.mEventInputKeyList.add(inputKey);
+			this->mEventInputKeyList.add(inputKey);
 		}
 	}
 
-	protected void removeEventInputKey(InputKey inputKey)
+	void _removeEventInputKey(InputKey* inputKey)
 	{
-		if (-1 != this.mEventInputKeyList.indexOf(inputKey))
+		if (-1 != this->mEventInputKeyList.indexOf(inputKey))
 		{
-			this.mEventInputKeyList.remove(inputKey);
+			this->mEventInputKeyList.remove(inputKey);
 		}
 	}
 
-	protected void addEventMouse(MMouseDevice mouse)
+	void _addEventMouse(MMouseDevice* mouse)
 	{
-		if (-1 == this.mEventMouseList.indexOf(mouse))
+		if (-1 == this->mEventMouseList.indexOf(mouse))
 		{
-			this.mEventMouseList.add(mouse);
+			this->mEventMouseList.add(mouse);
 		}
 	}
 
-	protected void removeEventMouse(MMouseDevice mouse)
+	void _removeEventMouse(MMouseDevice* mouse)
 	{
-		if (-1 != this.mEventMouseList.indexOf(mouse))
+		if (-1 != this->mEventMouseList.indexOf(mouse))
 		{
-			this.mEventMouseList.remove(mouse);
+			this->mEventMouseList.remove(mouse);
 		}
 	}
 
-	public void ProcessTouches(float delta, TickMode tickMode)
+public:
+	void ProcessTouches(float delta, TickMode tickMode)
 	{
-		if (this.hasTouch() || this.hasMultiTouch())
+		if (this->hasTouch() || this->hasMultiTouch())
 		{
-			this.mMultiTouchSet.reset();
+			this->mMultiTouchSet.reset();
 
-			this.mCurrentScheme = MControlScheme.Touch;
+			this->mCurrentScheme = MControlScheme.Touch;
 
-			int idx = 0;
-			while (idx < UnityEngine.Input.touchCount)
+			int index = 0;
+			while (index < UnityEngine.Input.touchCount)
 			{
-				UnityEngine.Touch touch = UnityEngine.Input.GetTouch(idx);
+				UnityEngine.Touch touch = UnityEngine.Input.GetTouch(index);
 
-				this.mCurrentTouchId = this.mMultiTouchEnabled ? touch.fingerId : 0;
-				this.mCurrentTouch = MTouchDevice.GetTouch(this.mCurrentTouchId);
+				this->mCurrentTouchId = this->mMultiTouchEnabled ? touch.fingerId : 0;
+				this->mCurrentTouch = MTouchDevice.GetTouch(this->mCurrentTouchId);
 
-				this.mCurrentTouch.setNativeTouch(touch, this.mCurrentTouchId);
-				this.mCurrentTouch.onTick(delta, tickMode);
+				this->mCurrentTouch.setNativeTouch(touch, this->mCurrentTouchId);
+				this->mCurrentTouch.onTick(delta, tickMode);
 
-				if (this.hasMultiTouch())
+				if (this->hasMultiTouch())
 				{
-					this.mMultiTouchSet.addTouch(this.mCurrentTouch);
+					this->mMultiTouchSet.addTouch(this->mCurrentTouch);
 				}
 
-				++idx;
+				++index;
 			}
 
-			if (this.hasMultiTouch())
+			if (this->hasMultiTouch())
 			{
-				this.mMultiTouchSet.onTick(delta, tickMode);
+				this->mMultiTouchSet.onTick(delta, tickMode);
 			}
 		}
 	}
 
 	// 是否还有需要处理的事件
-	public bool hasEventHandle()
+	bool hasEventHandle()
 	{
-		if (this.mOnTouchBeganDispatch.hasEventHandle())
+		bool ret = false;
+
+		if (this->mOnTouchBeganDispatch->hasEventHandle())
 		{
-			return true;
+			ret = true;
 		}
-		if (this.mOnTouchMovedDispatch.hasEventHandle())
+		if (this->mOnTouchMovedDispatch.hasEventHandle())
 		{
-			return true;
+			ret = true;
 		}
-		if (this.mOnTouchStationaryDispatch.hasEventHandle())
+		if (this->mOnTouchStationaryDispatch.hasEventHandle())
 		{
-			return true;
+			ret = true;
 		}
-		if (this.mOnTouchEndedDispatch.hasEventHandle())
+		if (this->mOnTouchEndedDispatch->hasEventHandle())
 		{
-			return true;
+			ret = true;
 		}
-		if (this.mOnTouchCanceledDispatch.hasEventHandle())
+		if (this->mOnTouchCanceledDispatch->hasEventHandle())
 		{
-			return true;
+			ret = true;
 		}
 
-		return false;
+		return ret;
 	}
 
-	public bool hasTouch()
+	bool hasTouch()
 	{
-		return this.mHasTouch;
+		return this->mHasTouch;
 	}
 
-	public void handleTouchBegan(MMouseOrTouch touch)
+	void handleTouchBegan(MMouseOrTouch* touch)
 	{
-		if (null != this.mOnTouchBeganDispatch)
+		if (nullptr != this->mOnTouchBeganDispatch)
 		{
-			this.mOnTouchBeganDispatch.dispatchEvent(touch);
-		}
-	}
-
-	public void handleTouchMoved(MMouseOrTouch touch)
-	{
-		if (null != this.mOnTouchMovedDispatch)
-		{
-			this.mOnTouchMovedDispatch.dispatchEvent(touch);
+			this->mOnTouchBeganDispatch->dispatchEvent(touch);
 		}
 	}
 
-	public void handleTouchStationary(MMouseOrTouch touch)
+	void handleTouchMoved(MMouseOrTouch* touch)
 	{
-		if (null != this.mOnTouchStationaryDispatch)
+		if (nullptr != this->mOnTouchMovedDispatch)
 		{
-			this.mOnTouchStationaryDispatch.dispatchEvent(touch);
+			this->mOnTouchMovedDispatch.dispatchEvent(touch);
 		}
 	}
 
-	public void handleTouchEnded(MMouseOrTouch touch)
+	void handleTouchStationary(MMouseOrTouch* touch)
 	{
-		if (null != this.mOnTouchEndedDispatch)
+		if (nullptr != this->mOnTouchStationaryDispatch)
 		{
-			this.mOnTouchEndedDispatch.dispatchEvent(touch);
+			this->mOnTouchStationaryDispatch.dispatchEvent(touch);
 		}
 	}
 
-	public void handleTouchCanceled(MMouseOrTouch touch)
+	void handleTouchEnded(MMouseOrTouch* touch)
 	{
-		if (null != this.mOnTouchCanceledDispatch)
+		if (nullptr != this->mOnTouchEndedDispatch)
 		{
-			this.mOnTouchCanceledDispatch.dispatchEvent(touch);
+			this->mOnTouchEndedDispatch->dispatchEvent(touch);
+		}
+	}
+
+	void handleTouchCanceled(MMouseOrTouch* touch)
+	{
+		if (nullptr != this->mOnTouchCanceledDispatch)
+		{
+			this->mOnTouchCanceledDispatch->dispatchEvent(touch);
 		}
 	}
 
 	/********************************** Multi Touch *********************************/
 	// 是否还有需要处理的事件
-	public bool hasMultiEventHandle()
+	bool hasMultiEventHandle()
 	{
-		if (this.mOnMultiTouchBeganDispatch.hasEventHandle())
+		if (this->mOnMultiTouchBeganDispatch->hasEventHandle())
 		{
 			return true;
 		}
-		if (this.mOnMultiTouchMovedDispatch.hasEventHandle())
+		if (this->mOnMultiTouchMovedDispatch->hasEventHandle())
 		{
 			return true;
 		}
-		if (this.mOnMultiTouchStationaryDispatch.hasEventHandle())
+		if (this->mOnMultiTouchStationaryDispatch->hasEventHandle())
 		{
 			return true;
 		}
-		if (this.mOnMultiTouchEndedDispatch.hasEventHandle())
+		if (this->mOnMultiTouchEndedDispatch->hasEventHandle())
 		{
 			return true;
 		}
-		if (this.mOnMultiTouchCanceledDispatch.hasEventHandle())
+		if (this->mOnMultiTouchCanceledDispatch->hasEventHandle())
 		{
 			return true;
 		}
@@ -566,81 +525,81 @@ public:
 		return false;
 	}
 
-	public bool hasMultiTouch()
+	bool hasMultiTouch()
 	{
-		return this.mHasMultiTouch;
+		return this->mHasMultiTouch;
 	}
 
-	public void handleMultiTouchBegan(IDispatchObject touch)
+	void handleMultiTouchBegan(IDispatchObject touch)
 	{
-		if (null != this.mOnMultiTouchBeganDispatch)
+		if (nullptr != this->mOnMultiTouchBeganDispatch)
 		{
-			this.mOnMultiTouchBeganDispatch.dispatchEvent(touch);
+			this->mOnMultiTouchBeganDispatch->dispatchEvent(touch);
 		}
 	}
 
-	public void handleMultiTouchMoved(IDispatchObject touch)
+	void handleMultiTouchMoved(IDispatchObject touch)
 	{
-		if (null != this.mOnMultiTouchMovedDispatch)
+		if (nullptr != this->mOnMultiTouchMovedDispatch)
 		{
-			this.mOnMultiTouchMovedDispatch.dispatchEvent(touch);
+			this->mOnMultiTouchMovedDispatch->dispatchEvent(touch);
 		}
 	}
 
-	public void handleMultiTouchStationary(IDispatchObject touch)
+	void handleMultiTouchStationary(IDispatchObject touch)
 	{
-		if (null != this.mOnMultiTouchStationaryDispatch)
+		if (nullptr != this->mOnMultiTouchStationaryDispatch)
 		{
-			this.mOnMultiTouchStationaryDispatch.dispatchEvent(touch);
+			this->mOnMultiTouchStationaryDispatch->dispatchEvent(touch);
 		}
 	}
 
-	public void handleMultiTouchEnded(IDispatchObject touch)
+	void handleMultiTouchEnded(IDispatchObject touch)
 	{
-		if (null != this.mOnMultiTouchEndedDispatch)
+		if (nullptr != this->mOnMultiTouchEndedDispatch)
 		{
-			this.mOnMultiTouchEndedDispatch.dispatchEvent(touch);
+			this->mOnMultiTouchEndedDispatch->dispatchEvent(touch);
 		}
 	}
 
-	public void handleMultiTouchCanceled(IDispatchObject touch)
+	void handleMultiTouchCanceled(IDispatchObject touch)
 	{
-		if (null != this.mOnMultiTouchCanceledDispatch)
+		if (nullptr != this->mOnMultiTouchCanceledDispatch)
 		{
-			this.mOnMultiTouchCanceledDispatch.dispatchEvent(touch);
+			this->mOnMultiTouchCanceledDispatch->dispatchEvent(touch);
 		}
 	}
 
 	/******************* Mouse Dispatch *********************/
 	// 是否还有需要处理的事件
-	public bool hasEventHandle(MMouseDevice mouse)
+	bool hasEventHandle(MMouseDevice* mouse)
 	{
-		return this.mMouseDispatchArray[mouse.mTouchIndex].hasEventHandle();
+		return this->mMouseDispatchArray[mouse.mTouchIndex].hasEventHandle();
 	}
 
-	public void handleMouseDown(MMouseOrTouch mouse)
+	void handleMouseDown(MMouseOrTouch* mouse)
 	{
-		this.mMouseDispatchArray[mouse.mTouchIndex].handleMouseDown(mouse);
+		this->mMouseDispatchArray[mouse.mTouchIndex].handleMouseDown(mouse);
 	}
 
-	public void handleMouseUp(MMouseOrTouch mouse)
+	void handleMouseUp(MMouseOrTouch* mouse)
 	{
-		this.mMouseDispatchArray[mouse.mTouchIndex].handleMouseUp(mouse);
+		this->mMouseDispatchArray[mouse.mTouchIndex].handleMouseUp(mouse);
 	}
 
-	public void handleMousePress(MMouseOrTouch mouse)
+	void handleMousePress(MMouseOrTouch* mouse)
 	{
-		this.mMouseDispatchArray[mouse.mTouchIndex].handleMousePress(mouse);
+		this->mMouseDispatchArray[mouse.mTouchIndex].handleMousePress(mouse);
 	}
 
-	public void handleMousePressOrMove(MMouseOrTouch mouse)
+	void handleMousePressOrMove(MMouseOrTouch* mouse)
 	{
-		this.mMouseDispatchArray[mouse.mTouchIndex].handleMousePressOrMove(mouse);
+		this->mMouseDispatchArray[mouse.mTouchIndex].handleMousePressOrMove(mouse);
 	}
 
-	public void handleMousePressMove(MMouseOrTouch mouse)
+	void handleMousePressMove(MMouseOrTouch* mouse)
 	{
-		this.mMouseDispatchArray[mouse.mTouchIndex].handleMousePressMove(mouse);
+		this->mMouseDispatchArray[mouse.mTouchIndex].handleMousePressMove(mouse);
 	}
 };
 

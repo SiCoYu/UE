@@ -1,9 +1,14 @@
-﻿namespace SDK.Lib
+﻿#pragma once
+
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+enum class MControlScheme
 {
-    public enum MControlScheme
-    {
-        Mouse,
-        Touch,
-        Controller,
-    }
-}
+	Mouse,
+	Touch,
+	Controller,
+};
+
+MY_END_NAMESPACE
