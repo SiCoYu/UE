@@ -29,7 +29,7 @@ public:
 
 	void addMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle);
 	void removeMsgRouteHandle(MsgRouteId msgRouteId, EventDispatchDelegate handle);
-	virtual void handleMsg(IDispatchObject* dispObj, uint uniqueId);
+	virtual void handleMsg(uint eventId, IDispatchObject* dispObj);
 };
 
 MY_END_NAMESPACE

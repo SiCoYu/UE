@@ -32,11 +32,15 @@ void GameRouteNotify::dispose()
 {
     if(nullptr != this->mGameRouteHandle)
     {
+		// 转换到父类，否则会编译报错
+		MsgRouteHandleBase* tmp = (MsgRouteHandleBase*)this->mGameRouteHandle;
+
         this->removeRouteHandle(
 			(int)MsgRouteType::eMRT_BASIC, 
 			MakeEventDispatchDelegate(
-				this->mGameRouteHandle, 
-				&MsgRouteHandleBase::handleMsg
+				tmp,
+				&MsgRouteHandleBase::handleMsg, 
+				(uint)0
 			)
 		);
 

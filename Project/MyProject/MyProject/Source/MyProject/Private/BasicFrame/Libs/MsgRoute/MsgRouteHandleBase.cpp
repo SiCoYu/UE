@@ -51,7 +51,7 @@ void MsgRouteHandleBase::removeMsgRouteHandle(MsgRouteId msgRouteId, EventDispat
 	}
 }
 
-void MsgRouteHandleBase::handleMsg(IDispatchObject* dispObj, uint uniqueId)
+void MsgRouteHandleBase::handleMsg(uint eventId, IDispatchObject* dispObj)
 {
 	MsgRouteBase* msg = (MsgRouteBase*)dispObj;
 
