@@ -32,7 +32,7 @@ public:
 	void addParamHandle(uint8 paramId, EventDispatchDelegate handle);
 	void removeParamHandle(uint8 paramId, EventDispatchDelegate handle);
 
-	virtual void handleMsg(uint eventId, NetCmdDispatchInfo* cmd);
+	virtual void handleMsg(uint eventId, IDispatchObject* dispObj);
 };
 
 MY_END_NAMESPACE
