@@ -32,7 +32,7 @@ void GameNetNotify::init()
 	NetCmdDispatchHandle* tmp = (NetCmdDispatchHandle*)this->mNetCmdDispatchHandle;
 
 	this->addCmdHandle(
-		NullUserCmdCV::TIME_USERCMD,
+		(uint8)NullUserCmdCV::TIME_USERCMD,
 		MakeEventDispatchDelegate(
 			tmp,
 			&NetCmdDispatchHandle::handleMsg, 
@@ -48,7 +48,7 @@ void GameNetNotify::dispose()
 		NetCmdDispatchHandle* tmp = (NetCmdDispatchHandle*)this->mNetCmdDispatchHandle;
 
 		this->removeCmdHandle(
-			NullUserCmdCV::TIME_USERCMD,
+			(uint8)NullUserCmdCV::TIME_USERCMD,
 			MakeEventDispatchDelegate(
 				tmp,
 				&NetCmdDispatchHandle::handleMsg, 
