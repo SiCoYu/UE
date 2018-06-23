@@ -146,7 +146,6 @@ public class MyProject : ModuleRules
 
                 "MyProject/Private/BasicFrame/Libs/LuaBind",
                 "MyProject/Private/BasicFrame/Libs/LuaCBridge",
-                "MyProject/Private/BasicFrame/Libs/Module",
                 "MyProject/Private/BasicFrame/Libs/Scene",
                 "MyProject/Private/BasicFrame/Libs/Scene/SceneEntityBase",
 
@@ -173,6 +172,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Module/Common/Scene/Being",
                 "MyProject/Private/BasicFrame/Module/Common/Scene/BeingRender",
                 "MyProject/Private/BasicFrame/Module/Common/Common",
+                "MyProject/Private/BasicFrame/Module/Common/Module",
 
                 // UI ÇøÓò
                 "MyProject/Private/BasicFrame/Ui/UiPack",
