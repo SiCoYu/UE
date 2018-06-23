@@ -3,6 +3,9 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "MTouchPhase.h"
+#include "Ctx.h"
+#include "InputMgr.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -21,7 +24,74 @@ MTouchDevice* MTouchDevice::GetTouch(int id)
 
 MTouchDevice::MTouchDevice(int touchIndex)
 {
+	this->mTouchPhase = MTouchPhase::Null;
 	this->mTouchIndex = touchIndex;
+}
+
+bool MTouchDevice::_isInBegan()
+{
+	bool ret = false;
+
+	if (MTouchPhase::Null == this->mTouchPhase)
+	{
+		ret = (this->mNativeTouchPos->Z == 0.0f);
+	}
+
+	return ret;
+}
+
+bool MTouchDevice::_isInMoved()
+{
+	bool ret = false;
+
+	if (MTouchPhase::Null != this->mTouchPhase)
+	{
+		if (this->mPos != *this->mNativeTouchPos)
+		{
+			ret = true;
+		}
+	}
+
+	return ret;
+}
+
+bool MTouchDevice::_isInStationary()
+{
+	bool ret = false;
+
+	if (MTouchPhase::Null != this->mTouchPhase)
+	{
+		if (this->mPos == *this->mNativeTouchPos)
+		{
+			ret = true;
+		}
+	}
+
+	return ret;
+}
+
+bool MTouchDevice::_isInEnded()
+{
+	bool ret = false;
+
+	if (MTouchPhase::Null != this->mTouchPhase)
+	{
+		ret = (this->mNativeTouchPos->Z == 1.0f);
+	}
+
+	return ret;
+}
+
+bool MTouchDevice::_isInCanceled()
+{
+	bool ret = false;
+
+	if (MTouchPhase::Null != this->mTouchPhase)
+	{
+		ret = (this->mNativeTouchPos->Z == 1.0f);
+	}
+
+	return ret;
 }
 
 void MTouchDevice::setNativeTouch(FVector* touchPos, FKey* nativeTouch, int touchIndex)
@@ -33,57 +103,51 @@ void MTouchDevice::setNativeTouch(FVector* touchPos, FKey* nativeTouch, int touc
 
 void MTouchDevice::onTick(float delta, TickMode tickMode)
 {
-	if (this->mNativeTouch.phase == TouchPhase.Began)
+	if (this->_isInBegan())
 	{
-		this->mPressTime = RealTime.time;
-		this->mTouchBegan = true;
-		this->mTouchEnd = false;
+		this->mTouchPhase = MTouchPhase::Began;
 
 		// 按下的时候，设置位置相同
-		this->mPos = this->mNativeTouch.position;
+		this->mPos = *this->mNativeTouchPos;
 		this->mLastPos = this->mPos;
 
 		this->handleTouchBegan();
 	}
-	else if (this->mNativeTouch.phase == TouchPhase.Moved)
+	else if (this->_isInMoved())
 	{
-		this->mTouchBegan = false;
-		this->mTouchEnd = false;
+		this->mTouchPhase = MTouchPhase::Moved;
 
 		// Up 的时候，先设置之前的位置，然后设置当前位置
 		this->mLastPos = this->mPos;
-		this->mPos = this->mNativeTouch.position;
+		this->mPos = *this->mNativeTouchPos;
 
 		this->handleTouchMoved();
 	}
-	else if (this->mNativeTouch.phase == TouchPhase.Stationary)
+	else if (this->_isInStationary())
 	{
-		this->mTouchBegan = false;
-		this->mTouchEnd = false;
+		this->mTouchPhase = MTouchPhase::Stationary;
 
 		// Press 的时候，先设置之前的位置，然后设置当前位置
 		this->mLastPos = this->mPos;
-		this->mPos = this->mNativeTouch.position;
+		this->mPos = *this->mNativeTouchPos;
 
 		this->handleTouchStationary();
 	}
-	else if (this->mNativeTouch.phase == TouchPhase.Ended)
+	else if (this->_isInEnded())
 	{
-		this->mTouchBegan = false;
-		this->mTouchEnd = true;
+		this->mTouchPhase = MTouchPhase::Ended;
 
 		this->mLastPos = this->mPos;
-		this->mPos = this->mNativeTouch.position;
+		this->mPos = *this->mNativeTouchPos;
 
 		this->handleTouchEnded();
 	}
-	else if (this->mNativeTouch.phase == TouchPhase.Canceled)
+	else if (this->_isInCanceled())
 	{
-		this->mTouchBegan = false;
-		this->mTouchEnd = true;
+		this->mTouchPhase = MTouchPhase::Canceled;
 
 		this->mLastPos = this->mPos;
-		this->mPos = UnityEngine.Input.mousePosition;
+		this->mPos = *this->mNativeTouchPos;
 
 		this->handleTouchCanceled();
 	}
@@ -91,30 +155,30 @@ void MTouchDevice::onTick(float delta, TickMode tickMode)
 
 void MTouchDevice::handleTouchBegan()
 {
-	Ctx.msInstance.mInputMgr.handleTouchBegan(this);
+	GInputMgr->handleTouchBegan(this);
 }
 
 void MTouchDevice::handleTouchMoved()
 {
 	if (this->isPosChanged())
 	{
-		Ctx.msInstance.mInputMgr.handleTouchMoved(this);
+		GInputMgr->handleTouchMoved(this);
 	}
 }
 
 void handleTouchStationary()
 {
-	Ctx.msInstance.mInputMgr.handleTouchStationary(this);
+	GInputMgr->handleTouchStationary(this);
 }
 
 void MTouchDevice::handleTouchEnded()
 {
-	Ctx.msInstance.mInputMgr.handleTouchEnded(this);
+	GInputMgr->handleTouchEnded(this);
 }
 
 void MTouchDevice::handleTouchCanceled()
 {
-	Ctx.msInstance.mInputMgr.handleTouchCanceled(this);
+	GInputMgr->handleTouchCanceled(this);
 }
 
 MY_END_NAMESPACE

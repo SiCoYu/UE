@@ -7,6 +7,7 @@
 #include "MMouseOrTouch.h"
 #include "IDispatchObject.h"
 #include "MDictionary.h"
+#include "MTouchPhase.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -35,11 +36,19 @@ protected:
 	 */
 	FKey* mNativeTouch;
 
+	MTouchPhase mTouchPhase;
+
 public:
 	static MTouchDevice* GetTouch(int id);
 
 public:
 	MTouchDevice(int touchIndex);
+
+	bool _isInBegan();
+	bool _isInMoved();
+	bool _isInStationary();
+	bool _isInEnded();
+	bool _isInCanceled();
 
 	void setNativeTouch(FVector* touchPos, FKey* nativeTouch, int touchIndex);
 	void onTick(float delta, TickMode tickMode);
