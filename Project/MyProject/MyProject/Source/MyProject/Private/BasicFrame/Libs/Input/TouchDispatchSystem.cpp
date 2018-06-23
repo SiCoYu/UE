@@ -38,23 +38,23 @@ void TouchDispatchSystem::addTouchListener(InputEventId evtId, EventDispatchDele
 {
 	if (InputEventId::TOUCHBEGIN_EVENT == evtId)
 	{
-		this->mOnTouchBeganDispatch->addEventHandle(nullptr, handle);
+		this->mOnTouchBeganDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHMOVED_EVENT == evtId)
 	{
-		this->mOnTouchMovedDispatch->addEventHandle(nullptr, handle);
+		this->mOnTouchMovedDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHSTATIONARY_EVENT == evtId)
 	{
-		this->mOnTouchStationaryDispatch->addEventHandle(nullptr, handle);
+		this->mOnTouchStationaryDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHENDED_EVENT == evtId)
 	{
-		this->mOnTouchEndedDispatch->addEventHandle(nullptr, handle);
+		this->mOnTouchEndedDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHCANCELED_EVENT == evtId)
 	{
-		this->mOnTouchCanceledDispatch->addEventHandle(nullptr, handle);
+		this->mOnTouchCanceledDispatch->addEventHandle(handle);
 	}
 
 	this->mHasTouch = true;
@@ -64,23 +64,23 @@ void TouchDispatchSystem::removeTouchListener(InputEventId evtId, EventDispatchD
 {
 	if (InputEventId::TOUCHBEGIN_EVENT == evtId)
 	{
-		this->mOnTouchBeganDispatch->removeEventHandle(nullptr, handle);
+		this->mOnTouchBeganDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHMOVED_EVENT == evtId)
 	{
-		this->mOnTouchMovedDispatch->removeEventHandle(nullptr, handle);
+		this->mOnTouchMovedDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHSTATIONARY_EVENT == evtId)
 	{
-		this->mOnTouchStationaryDispatch->removeEventHandle(nullptr, handle);
+		this->mOnTouchStationaryDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHENDED_EVENT == evtId)
 	{
-		this->mOnTouchEndedDispatch->removeEventHandle(nullptr, handle);
+		this->mOnTouchEndedDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::TOUCHCANCELED_EVENT == evtId)
 	{
-		this->mOnTouchCanceledDispatch->removeEventHandle(nullptr, handle);
+		this->mOnTouchCanceledDispatch->removeEventHandle(handle);
 	}
 
 	this->mHasTouch = this->hasEventHandle();
@@ -163,23 +163,23 @@ void TouchDispatchSystem::addMultiTouchListener(InputEventId evtId, EventDispatc
 {
 	if (InputEventId::MULTI_TOUCHBEGIN_EVENT == evtId)
 	{
-		this->mOnMultiTouchBeganDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchBeganDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHMOVED_EVENT == evtId)
 	{
-		this->mOnMultiTouchMovedDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchMovedDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
 	{
-		this->mOnMultiTouchStationaryDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchStationaryDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
 	{
-		this->mOnMultiTouchEndedDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchEndedDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHCANCELED_EVENT == evtId)
 	{
-		this->mOnMultiTouchCanceledDispatch->addEventHandle(nullptr, handle);
+		this->mOnMultiTouchCanceledDispatch->addEventHandle(handle);
 	}
 
 	this->mHasMultiTouch = true;
@@ -189,11 +189,11 @@ void TouchDispatchSystem::removeMultiTouchListener(InputEventId evtId, EventDisp
 {
 	if (InputEventId::MULTI_TOUCHBEGIN_EVENT == evtId)
 	{
-		this->mOnMultiTouchBeganDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchBeganDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHMOVED_EVENT == evtId)
 	{
-		this->mOnMultiTouchMovedDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchMovedDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHSTATIONARY_EVENT == evtId)
 	{
@@ -201,11 +201,11 @@ void TouchDispatchSystem::removeMultiTouchListener(InputEventId evtId, EventDisp
 	}
 	else if (InputEventId::MULTI_TOUCHENDED_EVENT == evtId)
 	{
-		this->mOnMultiTouchEndedDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchEndedDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::MULTI_TOUCHCANCELED_EVENT == evtId)
 	{
-		this->mOnMultiTouchCanceledDispatch->removeEventHandle(nullptr, handle);
+		this->mOnMultiTouchCanceledDispatch->removeEventHandle(handle);
 	}
 
 	this->mHasMultiTouch = this->hasMultiEventHandle();

@@ -238,7 +238,7 @@ bool InputMgr::isAnyKeyDown()
 	return ret;
 }
 
-// Ìí¼Ó KeyInput ÊäÈëÊÂ¼þ
+// æ·»åŠ  KeyInput è¾“å…¥äº‹ä»¶
 void InputMgr::addKeyListener(InputKey* inputKey, InputEventId evtId, EventDispatchDelegate handle)
 {
 	inputKey->addKeyListener(evtId, handle);
@@ -246,7 +246,7 @@ void InputMgr::addKeyListener(InputKey* inputKey, InputEventId evtId, EventDispa
 	this->addEventInputKey(inputKey);
 }
 
-// ÒÆ³ý¼üÅÌ KeyInput ÊäÈëÊÂ¼þ
+// ç§»é™¤é”®ç›˜ KeyInput è¾“å…¥äº‹ä»¶
 void InputMgr::removeKeyListener(InputKey* inputKey, InputEventId evtId, EventDispatchDelegate handle)
 {
 	inputKey->removeKeyListener(evtId, handle);
@@ -257,14 +257,14 @@ void InputMgr::removeKeyListener(InputKey* inputKey, InputEventId evtId, EventDi
 	}
 }
 
-// Ìí¼ÓÊó±ê¼àÌýÆ÷
+// æ·»åŠ é¼ æ ‡ç›‘å¬å™¨
 void InputMgr::addMouseListener(MMouseDevice* mouse, InputEventId evtId, EventDispatchDelegate handle)
 {
 	this->mMouseDispatchArray[mouse.mTouchIndex].addMouseListener(evtId, handle);
 	this->addEventMouse(mouse);
 }
 
-// ÒÆ³ýÊó±ê¼àÌýÆ÷
+// ç§»é™¤é¼ æ ‡ç›‘å¬å™¨
 void InputMgr::removeMouseListener(MMouseDevice* mouse, InputEventId evtId, EventDispatchDelegate handle)
 {
 	this->mMouseDispatchArray[mouse.mTouchIndex].removeMouseListener(evtId, handle);
@@ -503,7 +503,7 @@ void InputMgr::ProcessTouches(float delta, TickMode tickMode)
 	}
 }
 
-// ÊÇ·ñ»¹ÓÐÐèÒª´¦ÀíµÄÊÂ¼þ
+// æ˜¯å¦è¿˜æœ‰éœ€è¦å¤„ç†çš„äº‹ä»¶
 bool InputMgr::hasEventHandle()
 {
 	bool ret = false;
@@ -578,7 +578,7 @@ void InputMgr::handleTouchCanceled(MMouseOrTouch* touch)
 }
 
 /********************************** Multi Touch *********************************/
-// ÊÇ·ñ»¹ÓÐÐèÒª´¦ÀíµÄÊÂ¼þ
+// æ˜¯å¦è¿˜æœ‰éœ€è¦å¤„ç†çš„äº‹ä»¶
 bool InputMgr::hasMultiEventHandle()
 {
 	bool ret = false;
@@ -653,7 +653,7 @@ void InputMgr::handleMultiTouchCanceled(IDispatchObject* touch)
 }
 
 /******************* Mouse Dispatch *********************/
-// ÊÇ·ñ»¹ÓÐÐèÒª´¦ÀíµÄÊÂ¼þ
+// æ˜¯å¦è¿˜æœ‰éœ€è¦å¤„ç†çš„äº‹ä»¶
 bool InputMgr::hasEventHandle(MMouseDevice* mouse)
 {
 	return this->mMouseDispatchArray[mouse->mTouchIndex]->hasEventHandle();

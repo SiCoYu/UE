@@ -29,6 +29,6 @@ public:
 	void handleMousePress();
 	void handleMousePressOrMove();
 	void handleMousePressMove();
-}
+};
 
 MY_END_NAMESPACE

@@ -14,7 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class MTouchDevice;
 
-class MTouchDevice : public MMouseOrTouch, public IDispatchObject
+class MTouchDevice : public MMouseOrTouch
 {
 public:
     static MDictionary<int, MTouchDevice*> mTouches;

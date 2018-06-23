@@ -26,6 +26,8 @@ class MMouseDevice;
 class MTouchDevice;
 class AddOnceEventDispatch;
 class MultiTouchSet;
+class MMouseDispatch;
+class MMouseOrTouch;
 
 /**
  * @brief 主要是场景消息处理， UI 消息单独走，这个主要是从硬件判断
@@ -79,7 +81,7 @@ protected:
 	bool mTouchSupported;
 
 	// 鼠标
-	MMouseDispatch* mMouseDispatchArray[MMouseDeviceType::eMouseTotalButton];
+	MMouseDispatch* mMouseDispatchArray[(int)MMouseDeviceType::eMouseTotalButton];
 
 public:
 	InputMgr();
