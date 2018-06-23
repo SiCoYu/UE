@@ -1,73 +1,31 @@
 ﻿#pragma once
 
-#include "IDispatchObject.h"
+#include "MList.h"
+#include "TickMode.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+class IDispatchObject;
+class MMouseOrTouch;
 
 /**
  * @brief 触碰集合
  */
 class MultiTouchSet : public IDispatchObject
 {
-    protected MList<MMouseOrTouch> mTouchList;
+protected:
+	MList<MMouseOrTouch*> mTouchList;
 
-    public MultiTouchSet()
-    {
-        this.mTouchList = new MList<MMouseOrTouch>();
-    }
+public:
+	MultiTouchSet();
 
-    public void reset()
-    {
-        this.mTouchList.clear();
-    }
+	void init();
+	void dispose();
+	void reset();
 
-    public void addTouch(MMouseOrTouch touch)
-    {
-        this.mTouchList.add(touch);
-    }
-
-    public void onTick(float delta, TickMode tickMode)
-    {
-        bool isTouchBegan = false;
-        bool isMove = false;
-        bool isStationary = false;
-        bool isEnd = false;
-
-        MMouseOrTouch touch = null;
-
-        int idx = 0;
-        int len = this.mTouchList.count();
-
-        while (idx < len)
-        {
-            touch = this.mTouchList[idx];
-            if(touch.mTouchBegan)
-            {
-                isTouchBegan = true;
-            }
-            else if(touch.mTouchEnd)
-            {
-                isEnd = true;
-            }
-            else if(touch.isPosChanged())
-            {
-                isMove = true;
-                break;
-            }
-            else
-            {
-                isStationary = true;
-            }
-            ++idx;
-        }
-
-        // 暂时只支持多触碰移动
-        if(isMove)
-        {
-            Ctx.msInstance.mInputMgr.handleMultiTouchMoved(this);
-        }
-    }
+	void addTouch(MMouseOrTouch* touch);
+	void onTick(float delta, TickMode tickMode);
 };
 
 MY_END_NAMESPACE

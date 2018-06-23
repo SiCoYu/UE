@@ -1,125 +1,54 @@
 ﻿#pragma once
 
+#include "InputCoreTypes.h"		// FKey \ EKeys
+#include "Math/Vector.h"		// FVector
+
+#include "TickMode.h"
 #include "MMouseOrTouch.h"
 #include "IDispatchObject.h"
+#include "MDictionary.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class MTouchDevice;
+
 class MTouchDevice : public MMouseOrTouch, public IDispatchObject
 {
-    static MDictionary<int, MTouchDevice> mTouches = new MDictionary<int, MTouchDevice>();
+public:
+    static MDictionary<int, MTouchDevice*> mTouches;
 
-    protected Touch mNativeTouch;   // Unity Touch
+protected:
+	/**
+	 * @brief UE4 Touch 信息
+	 * @code Engine\Source\Runtime\Engine\Private\UserInterface\PlayerInput.cpp
+	 * // update touched/untouched flag
+	 * // > 0 means that it's currently held down (anything besides an end message is held down)
+	 * Touches[Handle].Z = (Type == ETouchType::Ended) ? 0.0f : 1.0f;
+	 */
+	FVector* mNativeTouchPos;
+	/**
+	 * @code G:\File\opensource\UnrealEngine-4.0\UnrealEngine-git\Engine\Source\Runtime\InputCore\Private\InputCoreTypes.cpp
+	 * static const int32 NUM_TOUCH_KEYS = 11;
+	 * static const FKey TouchKeys[NUM_TOUCH_KEYS];
+	 * const FKey EKeys::TouchKeys[NUM_TOUCH_KEYS];
+	 */
+	FKey* mNativeTouch;
 
-    static public MTouchDevice GetTouch(int id)
-    {
-        MTouchDevice touch = null;
-            
-        if (!mTouches.tryGetValue(id, out touch))
-        {
-            touch = new MTouchDevice(id);
-            mTouches.add(id, touch);
-        }
-        return touch;
-    }
+public:
+	static MTouchDevice* GetTouch(int id);
 
-    public MTouchDevice(int touchIndex)
-    {
-        this.mTouchIndex = touchIndex;
-    }
+public:
+	MTouchDevice(int touchIndex);
 
-    public void setNativeTouch(Touch nativeTouch, int touchIndex)
-    {
-        this.mNativeTouch = nativeTouch;
-        this.mTouchIndex = touchIndex;
-    }
+	void setNativeTouch(FVector* touchPos, FKey* nativeTouch, int touchIndex);
+	void onTick(float delta, TickMode tickMode);
 
-    public void onTick(float delta, TickMode tickMode)
-    {
-        if (mNativeTouch.phase == TouchPhase.Began)
-        {
-            this.mPressTime = RealTime.time;
-            this.mTouchBegan = true;
-            this.mTouchEnd = false;
-
-            // 按下的时候，设置位置相同
-            this.mPos = this.mNativeTouch.position;
-            this.mLastPos = this.mPos;
-
-            this.handleTouchBegan();
-        }
-        else if (mNativeTouch.phase == TouchPhase.Moved)
-        {
-            this.mTouchBegan = false;
-            this.mTouchEnd = false;
-
-            // Up 的时候，先设置之前的位置，然后设置当前位置
-            this.mLastPos = this.mPos;
-            this.mPos = this.mNativeTouch.position;
-
-            this.handleTouchMoved();
-        }
-        else if (mNativeTouch.phase == TouchPhase.Stationary)
-        {
-            this.mTouchBegan = false;
-            this.mTouchEnd = false;
-
-            // Press 的时候，先设置之前的位置，然后设置当前位置
-            this.mLastPos = this.mPos;
-            this.mPos = this.mNativeTouch.position;
-
-            this.handleTouchStationary();
-        }
-        else if (mNativeTouch.phase == TouchPhase.Ended)
-        {
-            this.mTouchBegan = false;
-            this.mTouchEnd = true;
-
-            this.mLastPos = this.mPos;
-            this.mPos = this.mNativeTouch.position;
-
-            this.handleTouchEnded();
-        }
-        else if (mNativeTouch.phase == TouchPhase.Canceled)
-        {
-            this.mTouchBegan = false;
-            this.mTouchEnd = true;
-
-            this.mLastPos = this.mPos;
-            this.mPos = UnityEngine.Input.mousePosition;
-
-            this.handleTouchCanceled();
-        }
-    }
-
-    public void handleTouchBegan()
-    {
-        Ctx.msInstance.mInputMgr.handleTouchBegan(this);
-    }
-
-    public void handleTouchMoved()
-    {
-        if (this.isPosChanged())
-        {
-            Ctx.msInstance.mInputMgr.handleTouchMoved(this);
-        }
-    }
-
-    public void handleTouchStationary()
-    {
-        Ctx.msInstance.mInputMgr.handleTouchStationary(this);
-    }
-
-    public void handleTouchEnded()
-    {
-        Ctx.msInstance.mInputMgr.handleTouchEnded(this);
-    }
-
-    public void handleTouchCanceled()
-    {
-        Ctx.msInstance.mInputMgr.handleTouchCanceled(this);
-    }
+	void handleTouchBegan();
+	void handleTouchMoved();
+	void handleTouchStationary();
+	void handleTouchEnded();
+	void handleTouchCanceled();
 };
 
 MY_END_NAMESPACE
