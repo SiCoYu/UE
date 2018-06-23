@@ -9,7 +9,6 @@
 #include "Ctx.h"
 #include "InputMgr.h"
 
-
 MY_BEGIN_NAMESPACE(MyNS)
 
 InputKey* InputKey::A = new InputKey(KeyId::A, EKeys::A, "A");
@@ -17,17 +16,23 @@ InputKey* InputKey::S = new InputKey(KeyId::S, EKeys::S, "S");
 InputKey* InputKey::D = new InputKey(KeyId::D, EKeys::D, "D");
 InputKey* InputKey::F = new InputKey(KeyId::F, EKeys::F, "F");
 
-InputKey* InputKey::mInputKeyArray[(int)KeyId::Total];
+bool InputKey::msIsInit = false;
+
+InputKey* InputKey::msInputKeyArray[(int)KeyId::Total];
 
 InputKey** InputKey::getInputKeyArray()
 {
-	InputKey::mInputKeyArray[(int)KeyId::None] = InputKey::None;
-	InputKey::mInputKeyArray[(int)KeyId::A] = InputKey::A;
-	InputKey::mInputKeyArray[(int)KeyId::B] = InputKey::B;
-	InputKey::mInputKeyArray[(int)KeyId::C] = InputKey::C;
-	InputKey::mInputKeyArray[(int)KeyId::D] = InputKey::D;
+	if (!InputKey::msIsInit)
+	{
+		InputKey::msIsInit = true;
 
-	return InputKey::mInputKeyArray;
+		InputKey::msInputKeyArray[(int)KeyId::A] = InputKey::A;
+		InputKey::msInputKeyArray[(int)KeyId::S] = InputKey::S;
+		InputKey::msInputKeyArray[(int)KeyId::D] = InputKey::D;
+		InputKey::msInputKeyArray[(int)KeyId::F] = InputKey::F;
+	}
+
+	return InputKey::msInputKeyArray;
 }
 
 static std::string codeToString(FKey value)
@@ -52,7 +57,7 @@ InputKey::InputKey(KeyId keyId, FKey keyCode, std::string keyDesc)
 	this->mOnKeyPressDispatch = MY_NEW AddOnceEventDispatch();
 }
 
-FKey InputKey::getKeyId()
+KeyId InputKey::getKeyId()
 {
 	return this->mKeyId;
 }
@@ -113,15 +118,15 @@ void InputKey::addKeyListener(InputEventId evtId, EventDispatchDelegate handle)
 {
 	if (InputEventId::KEYUP_EVENT == evtId)
 	{
-		this->mOnKeyUpDispatch.addEventHandle(handle);
+		this->mOnKeyUpDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::KEYDOWN_EVENT == evtId)
 	{
-		this->mOnKeyDownDispatch.addEventHandle(handle);
+		this->mOnKeyDownDispatch->addEventHandle(handle);
 	}
 	else if (InputEventId::KEYPRESS_EVENT == evtId)
 	{
-		this->mOnKeyPressDispatch.addEventHandle(handle);
+		this->mOnKeyPressDispatch->addEventHandle(handle);
 	}
 }
 
@@ -129,15 +134,15 @@ void InputKey::removeKeyListener(InputEventId evtId, EventDispatchDelegate handl
 {
 	if (InputEventId::KEYUP_EVENT == evtId)
 	{
-		this->mOnKeyUpDispatch.removeEventHandle(handle);
+		this->mOnKeyUpDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::KEYDOWN_EVENT == evtId)
 	{
-		this->mOnKeyDownDispatch.removeEventHandle(handle);
+		this->mOnKeyDownDispatch->removeEventHandle(handle);
 	}
 	else if (InputEventId::KEYPRESS_EVENT == evtId)
 	{
-		this->mOnKeyPressDispatch.removeEventHandle(handle);
+		this->mOnKeyPressDispatch->removeEventHandle(handle);
 	}
 }
 
@@ -195,7 +200,7 @@ bool InputKey::isKeyDown()
 		ret = true;
 	}
 
-	ret = false;
+	return ret;
 }
 
 MY_END_NAMESPACE

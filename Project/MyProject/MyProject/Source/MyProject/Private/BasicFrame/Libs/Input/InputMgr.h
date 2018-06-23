@@ -14,7 +14,7 @@
 
 class AMyPlayerControllerBase;
 class UPlayerInput;
-class FKey;
+struct FKey;
 
 MY_BEGIN_NAMESPACE(MyNS)
 

@@ -18,13 +18,13 @@ class AddOnceEventDispatch;
 class InputKey : public IDispatchObject
 {
 public:
-	static InputKey* None;
     static InputKey* A;
 	static InputKey* S;
 	static InputKey* D;
 	static InputKey* F;
 
-    static InputKey* mInputKeyArray[(int)KeyId::Total];
+	static bool msIsInit;
+    static InputKey* msInputKeyArray[(int)KeyId::Total];
 
 private:
 	KeyId mKeyId;

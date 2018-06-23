@@ -148,7 +148,7 @@ void Ctx::construct()
 	this->mTickMgr = MySharedPtr<TickMgr>(MY_NEW TickMgr());
 	this->mTimerMgr = MySharedPtr<TimerMgr>(MY_NEW TimerMgr());
 	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(MY_NEW FrameTimerMgr());
-	this->mInputMgr = MySharedPtr<FrameTimerMgr>(MY_NEW InputMgr());
+	this->mInputMgr = MySharedPtr<InputMgr>(MY_NEW InputMgr());
 
 	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 
@@ -548,7 +548,7 @@ MySharedPtr<FrameTimerMgr> Ctx::getFrameTimerMgr()
 
 MySharedPtr<InputMgr> Ctx::getInputMgr()
 {
-	return this->mFrameTimerMgr;
+	return this->mInputMgr;
 }
 
 UMyBluePrintBase* Ctx::getBPCtx()
