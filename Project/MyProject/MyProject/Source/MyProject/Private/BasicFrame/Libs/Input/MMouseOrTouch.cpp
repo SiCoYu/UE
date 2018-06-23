@@ -17,21 +17,21 @@ int MMouseOrTouch::getTouchIndex()
 // 获取 X 方向移动的距离
 float MMouseOrTouch::getXOffset()
 {
-	return (this->mPos.x - this->mLastPos.x) * this->mSensitivity;
+	return (this->mPos.X - this->mLastPos.X) * this->mSensitivity;
 }
 
 // 获取 X 方向移动的距离
 float MMouseOrTouch::getYOffset()
 {
-	return (this->mPos.y - this->mLastPos.y) * this->mSensitivity;
+	return (this->mPos.Y - this->mLastPos.Y) * this->mSensitivity;
 }
 
 bool MMouseOrTouch::isPosChanged()
 {
 	bool ret = false;
 
-	if (this->mPos.x != this->mLastPos.x ||
-		this->mPos.y != this->mLastPos.y)
+	if (this->mPos.X != this->mLastPos.X ||
+		this->mPos.Y != this->mLastPos.Y)
 	{
 		ret = true;
 	}
