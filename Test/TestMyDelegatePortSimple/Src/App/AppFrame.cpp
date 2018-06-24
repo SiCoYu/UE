@@ -5,6 +5,7 @@ namespace MyNS
 {
 	MY_MINI_DECLARE_DELEGATE_RetVal_TwoParams(bool, AAA, int, char);
 	MY_MINI_DECLARE_DELEGATE_OneParam(BBB, char);
+	MY_MINI_DECLARE_DELEGATE_OneParam(CCC, char);
 
 	class TestA
 	{
@@ -48,6 +49,11 @@ namespace MyNS
 	void testHandleB(int a, char b)
 	{
 		
+	}
+
+	static void testHandleC(unsigned int a, char b)
+	{
+
 	}
 
 	AppFrame::AppFrame()
@@ -121,6 +127,10 @@ namespace MyNS
 		BBB fff;
 		fff.bindObjectHandle(&TestA::testHandleD, testA, 6);
 		fff.call('a');
+
+		CCC ggg;
+		ggg.bindStaticHandle(&testHandleC, (unsigned int)6);
+		ggg.call('a');
 	}
 
 	void AppFrame::dispose()
