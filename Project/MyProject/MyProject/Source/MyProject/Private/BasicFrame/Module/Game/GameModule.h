@@ -11,7 +11,7 @@ class GameRouteNotify;
 class GameNetNotify;
 class GameUiEventNotify;
 class GameSceneEventNotify;
-class GameSceneTouchNotify;
+class GameSceneInputNotify;
 
 class GameModule : public IGameModule
 {
@@ -21,7 +21,7 @@ protected:
     //GotoScene mGotoScene;
     GameUiEventNotify* mGameUiEventNotify;
 	GameSceneEventNotify* mGameSceneEventNotify;
-	GameSceneTouchNotify* mGameSceneTouchNotify;
+	GameSceneInputNotify* mGameSceneTouchNotify;
 
 public:
 	GameModule();

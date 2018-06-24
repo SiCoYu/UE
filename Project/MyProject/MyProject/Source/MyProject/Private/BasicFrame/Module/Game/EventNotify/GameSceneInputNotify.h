@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "ISceneTouchNotify.h"
+#include "ISceneInputNotify.h"
 #include "PlatformDefine.h"
 
 // error C4099: 'FKey': type name first seen using 'struct' now seen using 'class'
@@ -9,10 +9,10 @@ struct FKey;
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class GameSceneTouchNotify : public ISceneTouchNotify
+class GameSceneInputNotify : public ISceneInputNotify
 {
 public:
-	GameSceneTouchNotify();
+	GameSceneInputNotify();
 
 	void onKeyDown(FKey keyCode);
 	void onKeyUp(FKey keyCode);

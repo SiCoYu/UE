@@ -4,7 +4,7 @@
 #include "GameNetNotify.h"
 #include "GameUiEventNotify.h"
 #include "GameSceneEventNotify.h"
-#include "GameSceneTouchNotify.h"
+#include "GameSceneInputNotify.h"
 #include "SafePointer.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
@@ -50,7 +50,7 @@ void GameModule::initGVar()
 	Ctx.msInstance.mMsgRouteNotify.addOneNotify(this->mGameRouteNotify);
 
 	this->mGameSceneTouchNotify = MY_NEW GameSceneEventNotify();
-	this->mGameSceneTouchNotify = MY_NEW GameSceneTouchNotify();
+	this->mGameSceneTouchNotify = MY_NEW GameSceneInputNotify();
 
 	//this->mGotoScene.init();
 	//this->mGotoScene.addSceneHandle();
