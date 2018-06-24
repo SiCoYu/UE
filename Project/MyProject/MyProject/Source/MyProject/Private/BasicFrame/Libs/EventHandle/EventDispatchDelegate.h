@@ -16,6 +16,7 @@ MY_MINI_DECLARE_DELEGATE_OneParam(EventDispatchDelegate, IDispatchObject*);
 typedef EventDispatchDelegate* EventDispatchDelegatePtr;
 
 #define MakeEventDispatchDelegate(pThis,handle,param) EventDispatchDelegate().bindObjectHandle(handle, pThis, param)
+//#define MakeStaticEventDispatchDelegate(pThis,handle,param) EventDispatchDelegate().bindObjectHandle(handle, pThis, param)
 
 MY_END_NAMESPACE
 
