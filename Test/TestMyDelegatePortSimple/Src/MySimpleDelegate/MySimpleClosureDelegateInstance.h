@@ -134,7 +134,7 @@ public:
 public:
 	MySimpleClosureDelegateInstance(MethodPtrType func, B bound)
 		: mMethodPtr(func), 
-		  mBound(bound1)
+		  mBound(bound)
 	{
 	}
 
@@ -173,6 +173,7 @@ public:
 
 private:
 	MethodPtrType mMethodPtr;
+	B mBound;
 };
 
 template <typename T>

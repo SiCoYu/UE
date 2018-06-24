@@ -18,10 +18,10 @@ namespace MyNS
 		bool testHandleA(int c, int a, char b)
 		{
 			//MySimpleDelegate<bool, int, char> aaa;
-			AAA aaa;
+			//AAA aaa;
 			//aaa.bindObjectHandle(&TestA::testHandleB, this, 10);
-			AAA().bindObjectHandle(&TestA::testHandleB, this, 10);
-			bool ret = aaa.call(8, 'a');
+			//AAA().bindObjectHandle(&TestA::testHandleB, this, 10);
+			//bool ret = aaa.call(8, 'a');
 			return true;
 		}
 
@@ -51,7 +51,7 @@ namespace MyNS
 		
 	}
 
-	static void testHandleC(unsigned int a, char b)
+	static void testHandleC(int a, char b)
 	{
 
 	}
@@ -129,7 +129,7 @@ namespace MyNS
 		fff.call('a');
 
 		CCC ggg;
-		ggg.bindStaticHandle(&testHandleC, (unsigned int)6);
+		ggg.bindStaticHandle(&testHandleC, 6);
 		ggg.call('a');
 	}
 
