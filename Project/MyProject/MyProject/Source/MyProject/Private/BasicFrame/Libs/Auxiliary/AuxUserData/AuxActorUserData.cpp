@@ -14,7 +14,7 @@ void UAuxActorUserData::BeginPlay()
 
 void UAuxActorUserData::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	Super::BeginPlay(EndPlayReason);
+	Super::EndPlay(EndPlayReason);
 }
 
 void UAuxActorUserData::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
