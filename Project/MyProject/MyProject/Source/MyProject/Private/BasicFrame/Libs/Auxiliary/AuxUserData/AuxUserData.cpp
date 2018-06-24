@@ -12,7 +12,7 @@ void UAuxUserData::BeginPlay()
 
 }
 
-void UAppRoot::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void UAuxUserData::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 
 }
