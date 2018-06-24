@@ -2,6 +2,7 @@
 #include "CtxExt.h"
 #include "PlayerData.h"
 #include "EntityData.h"
+#include "ModuleSys.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -62,5 +63,16 @@ MySharedPtr<EntityData> CtxExt::getEntityData()
 {
 	return this->mEntityData;
 }
+
+void CtxExt::setModuleSys(ModuleSys* moduleSys)
+{
+	this->mModuleSys = moduleSys;
+}
+
+MySharedPtr<ModuleSys> CtxExt::getModuleSys()
+{
+	return this->mModuleSys;
+}
+
 
 MY_END_NAMESPACE

@@ -34,7 +34,7 @@ void GameModule::dispose()
 	//}
 	MY_SAFE_DISPOSE(this->mGameUiEventNotify);
 	MY_SAFE_DISPOSE(this->mGameSceneEventNotify);
-	MY_SAFE_DISPOSE(this->mGameSceneTouchNotify);
+	MY_SAFE_DISPOSE(this->mGameSceneInputNotify);
 }
 
 void GameModule::initGVar()
@@ -49,8 +49,8 @@ void GameModule::initGVar()
 	this->mGameRouteNotify.init();
 	Ctx.msInstance.mMsgRouteNotify.addOneNotify(this->mGameRouteNotify);
 
-	this->mGameSceneTouchNotify = MY_NEW GameSceneEventNotify();
-	this->mGameSceneTouchNotify = MY_NEW GameSceneInputNotify();
+	this->mGameSceneEventNotify = MY_NEW GameSceneEventNotify();
+	this->mGameScenInputNotify = MY_NEW GameSceneInputNotify();
 
 	//this->mGotoScene.init();
 	//this->mGotoScene.addSceneHandle();

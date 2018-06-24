@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "GObject.h"
 #include "IGameModule.h"
 #include "MClassInfo.h"
 #include "MClassMacros.h"
@@ -13,7 +14,7 @@ class GameUiEventNotify;
 class GameSceneEventNotify;
 class GameSceneInputNotify;
 
-class GameModule : public IGameModule
+class GameModule : public GObject, public IGameModule
 {
 protected:
 	GameRouteNotify* mGameRouteNotify;

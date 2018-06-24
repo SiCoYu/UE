@@ -21,11 +21,4 @@ public:
     static std::string AUTOUPDATEMN;
 };
 
-enum ModuleId
-{
-	LOGINMN,
-	GAMEMN,
-	AUTOUPDATEMN,
-};
-
 MY_END_NAMESPACE

@@ -13,6 +13,7 @@ class CtxExt : public Ctx
 protected:
 	MySharedPtr<PlayerData> mPlayerData;
 	MySharedPtr<EntityData> mEntityData;
+	MySharedPtr<ModuleSys> mModuleSys;
 
 public:
 	CtxExt();
@@ -26,11 +27,15 @@ public:
 
 	void setEntityData(EntityData* entityData);
 	MySharedPtr<EntityData> getEntityData();
+
+	void setModuleSys(ModuleSys* moduleSys);
+	MySharedPtr<ModuleSys> getModuleSys();
 };
 
 #define GCtxExt ((CtxExt*)(CtxExt::getSingletonPtr()))
 #define GPlayerData GCtxExt->getPlayerData()
 #define GEntityData GCtxExt->getEntityData()
 #define GPlayerMgr GEntityData->getPlayerMgr()
+#define GModuleSys GCtxExt->getModuleSys()
 
 MY_END_NAMESPACE
