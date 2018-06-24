@@ -8,6 +8,16 @@ GameSceneInputNotify::GameSceneInputNotify()
             
 }
 
+void GameSceneInputNotify::init()
+{
+
+}
+
+void GameSceneInputNotify::dispose()
+{
+
+}
+
 void GameSceneInputNotify::onKeyDown(FKey keyCode)
 {
             

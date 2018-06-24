@@ -8,6 +8,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 class PlayerData;
 class EntityData;
 class ModuleSys;
+class DataDelegate;
+class DataEventCmd;
 
 class CtxExt : public Ctx
 {
@@ -15,6 +17,8 @@ protected:
 	MySharedPtr<PlayerData> mPlayerData;
 	MySharedPtr<EntityData> mEntityData;
 	MySharedPtr<ModuleSys> mModuleSys;
+	MySharedPtr<DataDelegate> mDataDelegate;
+	MySharedPtr<DataEventCmd> mDataEventCmd;
 
 public:
 	CtxExt();
@@ -31,6 +35,9 @@ public:
 
 	void setModuleSys(ModuleSys* moduleSys);
 	MySharedPtr<ModuleSys> getModuleSys();
+
+	MySharedPtr<DataDelegate> getDataDelegate();
+	MySharedPtr<DataEventCmd> getDataEventCmd();
 };
 
 #define GCtxExt ((CtxExt*)(CtxExt::getSingletonPtr()))
@@ -38,5 +45,7 @@ public:
 #define GEntityData GCtxExt->getEntityData()
 #define GPlayerMgr GEntityData->getPlayerMgr()
 #define GModuleSys GCtxExt->getModuleSys()
+#define GDataDelegate GCtx->getDataDelegate()
+#define GDataEventCmd GCtx->getDataEventCmd()
 
 MY_END_NAMESPACE

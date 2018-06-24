@@ -44,17 +44,17 @@ void NetCmdNotify::setIsStopNetHandle(bool value)
 
 void NetCmdNotify::addOneNofity(NetModuleDispatchHandle* disp)
 {
-	if (!this->mNetDispatchList.contains(disp))
+	if (!this->mNetCmdNotify.contains(disp))
     {
-		this->mNetDispatchList.add(disp);
+		this->mNetCmdNotify.add(disp);
     }
 }
 
 void NetCmdNotify::removeOneNotify(NetModuleDispatchHandle* disp)
 {
-	if (this->mNetDispatchList.contains(disp))
+	if (this->mNetCmdNotify.contains(disp))
     {
-		this->mNetDispatchList.remove(disp);
+		this->mNetCmdNotify.remove(disp);
     }
 }
 
@@ -72,7 +72,7 @@ void NetCmdNotify::handleMsg(MByteBuffer* msg)
 		this->mCmdDispInfo->byCmd = byCmd;
 		this->mCmdDispInfo->byParam = byParam;
 
-		for (auto item : this->mNetDispatchList.getList())
+		for (auto item : this->mNetCmdNotify.getList())
 		{
 			item->handleMsg(mCmdDispInfo);
 		}

@@ -23,7 +23,6 @@
 #include "DownloadMgr.h"
 #include "SystemSetting.h"
 #include "LuaSystem.h"
-#include "GameSceneEventNotify.h"
 #include "MyLatentActionManager.h"
 
 #include "SceneSys.h"
@@ -37,6 +36,9 @@
 #include "TimerMgr.h"
 #include "FrameTimerMgr.h"
 #include "InputMgr.h"
+#include "MsgRouteNotify.h"
+#include "GlobalDelegate.h"
+#include "GlobalEventCmd.h"
 
 #include "TickPriority.h"
 //#include "MySingletonBP.h"
@@ -63,7 +65,7 @@ Ctx::Ctx()
 #endif
 
 	this->mLogSys.setNull();
-	this->mNetDispatchList.setNull();
+	this->mNetCmdNotify.setNull();
 	this->mShareData.setNull();
 	this->mConfig.setNull();
 
@@ -79,7 +81,6 @@ Ctx::Ctx()
 
 	this->mSystemSetting.setNull();
 	this->mLuaSystem.setNull();
-	this->mSceneEventNotify.setNull();
 	this->mMyLatentActionManager.setNull();
 
 	this->mSceneSys.setNull();
@@ -93,6 +94,9 @@ Ctx::Ctx()
 	this->mTimerMgr.setNull();
 	this->mFrameTimerMgr.setNull();
 	this->mInputMgr.setNull();
+	this->mMsgRouteNotify.setNull();
+	this->mGlobalDelegate.setNull();
+	this->mGlobalEventCmd.setNull();
 
 	this->mBPCtx = nullptr;
 	this->mMyNativeObjectReferencer = nullptr;
@@ -106,7 +110,7 @@ Ctx::~Ctx()
 void Ctx::construct()
 {
 	this->mShareData = MySharedPtr<ShareData>(MY_NEW ShareData());
-	this->mNetDispatchList = MySharedPtr<NetCmdNotify>(MY_NEW NetCmdNotify());
+	this->mNetCmdNotify = MySharedPtr<NetCmdNotify>(MY_NEW NetCmdNotify());
 	this->mLogSys = MySharedPtr<LogSys>(MY_NEW LogSys());
 	this->mEngineData = MySharedPtr<EngineData>(MY_NEW EngineData());
 
@@ -136,7 +140,6 @@ void Ctx::construct()
 	this->mFileSys = MySharedPtr<MFileSys>(MY_NEW MFileSys());
 	this->mSystemSetting = MySharedPtr<SystemSetting>(MY_NEW SystemSetting());
 	this->mLuaSystem = MySharedPtr<LuaSystem>(MY_NEW LuaSystem());
-	this->mSceneEventNotify = MySharedPtr<ISceneEventNotify>(MY_NEW GameSceneEventNotify());
 	this->mMyLatentActionManager = MySharedPtr<MyLatentActionManager>(MY_NEW MyLatentActionManager());
 
 	this->mSceneSys = MySharedPtr<SceneSys>(MY_NEW SceneSys());
@@ -150,6 +153,9 @@ void Ctx::construct()
 	this->mTimerMgr = MySharedPtr<TimerMgr>(MY_NEW TimerMgr());
 	this->mFrameTimerMgr = MySharedPtr<FrameTimerMgr>(MY_NEW FrameTimerMgr());
 	this->mInputMgr = MySharedPtr<InputMgr>(MY_NEW InputMgr());
+	this->mMsgRouteNotify = MySharedPtr<MsgRouteNotify>(MY_NEW MsgRouteNotify());
+	this->mGlobalDelegate = MySharedPtr<GlobalDelegate>(MY_NEW GlobalDelegate());
+	this->mGlobalEventCmd = MySharedPtr<GlobalEventCmd>(MY_NEW GlobalEventCmd());
 
 	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 
@@ -182,7 +188,6 @@ void Ctx::_execInit()
 	this->mFileSys->init();
 	this->mSystemSetting->init();
 	this->mLuaSystem->init();
-	this->mSceneEventNotify->init();
 	this->mMyLatentActionManager->init();
 
 	this->mSceneSys->init();
@@ -196,6 +201,9 @@ void Ctx::_execInit()
 	this->mTimerMgr->init();
 	this->mFrameTimerMgr->init();
 	this->mInputMgr->init();
+	this->mMsgRouteNotify->init();
+	this->mGlobalDelegate->init();
+	this->mGlobalEventCmd->init();
 
 	this->mBPCtx->init();
 	this->mMyNativeObjectReferencer->init();
@@ -229,7 +237,7 @@ void Ctx::_preDispose()
 	this->mTableSys->dispose();
 
 	this->mLogSys->dispose();
-	this->mNetDispatchList->dispose();
+	this->mNetCmdNotify->dispose();
 	this->mShareData->dispose();
 	this->mConfig->dispose();
 
@@ -246,7 +254,6 @@ void Ctx::_preDispose()
 
 	this->mSystemSetting->dispose();
 	this->mLuaSystem->dispose();
-	this->mSceneEventNotify->dispose();
 	this->mMyLatentActionManager->dispose();
 
 	this->mSceneSys->dispose();
@@ -260,6 +267,9 @@ void Ctx::_preDispose()
 	this->mTimerMgr->dispose();
 	this->mFrameTimerMgr->dispose();
 	this->mInputMgr->dispose();
+	this->mMsgRouteNotify->dispose();
+	this->mGlobalDelegate->dispose();
+	this->mGlobalEventCmd->dispose();
 
 	this->mBPCtx->dispose();
 	this->mMyNativeObjectReferencer->dispose();
@@ -282,7 +292,7 @@ void Ctx::_execDispose()
 #endif
 
 	this->mLogSys.setNull();
-	this->mNetDispatchList.setNull();
+	this->mNetCmdNotify.setNull();
 	this->mShareData.setNull();
 	this->mConfig.setNull();
 
@@ -299,7 +309,6 @@ void Ctx::_execDispose()
 
 	this->mSystemSetting.setNull();
 	this->mLuaSystem.setNull();
-	this->mSceneEventNotify.setNull();
 	this->mMyLatentActionManager.setNull();
 
 	this->mSceneSys.setNull();
@@ -313,6 +322,9 @@ void Ctx::_execDispose()
 	this->mTimerMgr.setNull();
 	this->mFrameTimerMgr.setNull();
 	this->mInputMgr.setNull();
+	this->mMsgRouteNotify.setNull();
+	this->mGlobalDelegate.setNull();
+	this->mGlobalEventCmd.setNull();
 
 	this->mBPCtx = nullptr;
 }
@@ -341,7 +353,7 @@ void Ctx::beginPlay()
 	if (!this->mIsInit)
 	{
 		this->init();
-		this->mSceneEventNotify->onLevelLoaded();
+		this->mGlobalDelegate->mCoreInitedEventDispatch->dispatchEvent(nullptr);
 
 		//testApi();
 
@@ -425,9 +437,9 @@ MySharedPtr<ShareData> Ctx::getShareData()
 	return this->mShareData;
 }
 
-MySharedPtr<NetCmdNotify> Ctx::getNetDispatchList()
+MySharedPtr<NetCmdNotify> Ctx::getNetCmdNotify()
 {
-	return this->mNetDispatchList;
+	return this->mNetCmdNotify;
 }
 
 MySharedPtr<Config> Ctx::getConfig()
@@ -495,11 +507,6 @@ MySharedPtr<LuaSystem> Ctx::getLuaSystem()
 	return this->mLuaSystem;
 }
 
-MySharedPtr<ISceneEventNotify> Ctx::getSceneEventCB()
-{
-	return this->mSceneEventNotify;
-}
-
 MySharedPtr<MyLatentActionManager> Ctx::getMyLatentActionManager()
 {
 	return this->mMyLatentActionManager;
@@ -553,6 +560,11 @@ MySharedPtr<FrameTimerMgr> Ctx::getFrameTimerMgr()
 MySharedPtr<InputMgr> Ctx::getInputMgr()
 {
 	return this->mInputMgr;
+}
+
+MySharedPtr<MsgRouteNotify> Ctx::getMsgRouteNotify()
+{
+	return this->mMsgRouteNotify;
 }
 
 UMyBluePrintBase* Ctx::getBPCtx()

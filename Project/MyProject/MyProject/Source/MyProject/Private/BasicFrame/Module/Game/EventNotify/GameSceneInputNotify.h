@@ -14,6 +14,9 @@ class GameSceneInputNotify : public ISceneInputNotify
 public:
 	GameSceneInputNotify();
 
+	void init();
+	void dispose();
+
 	void onKeyDown(FKey keyCode);
 	void onKeyUp(FKey keyCode);
 	void onMouseDown();

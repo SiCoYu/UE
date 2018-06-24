@@ -48,7 +48,7 @@ void GameModule::initGVar()
 	GNetCmdNotify->addOneNofity(this->mGameNetNotify);
 
 	this->mGameRouteNotify = MY_NEW GameRouteNotify();
-	this->mGameRouteNotify.init();
+	this->mGameRouteNotify->init();
 	GMsgRouteNotify->addOneNotify(this->mGameRouteNotify);
 
 	this->mGameSceneEventNotify = MY_NEW GameSceneEventNotify();

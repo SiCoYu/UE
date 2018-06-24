@@ -401,7 +401,7 @@ void MClientBuffer::UnCompressAndDecryptEveryOne()
 		}
 
 		GLogSys->log(UtilStr::Format("解压解密后消息起始索引 {0}, 消息长度　{1}, 消息 position 位置 {2}, 消息 size {3}", this->mRawBuffer->getMsgBodyBA()->getPos() - msglen, msglen, this->mRawBuffer->getMsgBodyBA()->getPos(), this->mRawBuffer->getMsgBodyBA()->getLength()));
-		GNetDispList->addOneRevMsg();
+		GNetCmdNotify->addOneRevMsg();
 
 		// Test 读取消息头
 		// MByteBuffer buff = getMsg();

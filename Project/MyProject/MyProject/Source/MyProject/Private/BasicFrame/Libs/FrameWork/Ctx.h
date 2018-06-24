@@ -34,7 +34,6 @@ class MyStreamableManager;
 class DownloadMgr;
 class MFileSys;
 class SystemSetting;
-class ISceneEventNotify;
 
 class SceneSys;
 class SystemTimeData;
@@ -53,6 +52,9 @@ class LuaSystem;
 class MyLatentActionManager;
 class GObject;
 class InputMgr;
+class MsgRouteNotify;
+class GlobalDelegate;
+class GlobalEventCmd;
 
 MY_END_NAMESPACE
 
@@ -74,7 +76,7 @@ protected:
 	MySharedPtr<TableSys> mTableSys;
 	MySharedPtr<LogSys> mLogSys;
 	MySharedPtr<ShareData> mShareData;
-	MySharedPtr<NetCmdNotify> mNetDispatchList;
+	MySharedPtr<NetCmdNotify> mNetCmdNotify;
 	MySharedPtr<Config> mConfig;
 	//MySharedPtr<LocalFileSys> mLocalFileSys;
 	MySharedPtr<PoolSys> mPoolSys;
@@ -89,7 +91,6 @@ protected:
 	MySharedPtr<MFileSys> mFileSys;
 	MySharedPtr<SystemSetting> mSystemSetting;
 	MySharedPtr<LuaSystem> mLuaSystem;
-	MySharedPtr<ISceneEventNotify> mSceneEventNotify;
 	MySharedPtr<MyLatentActionManager> mMyLatentActionManager;
 
 	MySharedPtr<SceneSys> mSceneSys;
@@ -103,6 +104,9 @@ protected:
 	MySharedPtr<TimerMgr> mTimerMgr;
 	MySharedPtr<FrameTimerMgr> mFrameTimerMgr;
 	MySharedPtr<InputMgr> mInputMgr;
+	MySharedPtr<MsgRouteNotify> mMsgRouteNotify;
+	MySharedPtr<GlobalDelegate> mGlobalDelegate;
+	MySharedPtr<GlobalEventCmd> mGlobalEventCmd;
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
 
 	UMyBluePrintBase* mBPCtx;
@@ -142,7 +146,7 @@ public:
 	MySharedPtr<TableSys> getTableSys();
 	MySharedPtr<LogSys> getLogSys();
 	MySharedPtr<ShareData> getShareData();
-	MySharedPtr<NetCmdNotify> getNetDispatchList();
+	MySharedPtr<NetCmdNotify> getNetCmdNotify();
 	MySharedPtr<Config> getConfig();
 	//MySharedPtr<LocalFileSys> getLocalFileSys();
 	MySharedPtr<PoolSys> getPoolSys();
@@ -158,7 +162,6 @@ public:
 	MySharedPtr<MFileSys> getFileSys();
 	MySharedPtr<SystemSetting> getSystemSetting();
 	MySharedPtr<LuaSystem> getLuaSystem();
-	MySharedPtr<ISceneEventNotify> getSceneEventCB();
 	MySharedPtr<MyLatentActionManager> getMyLatentActionManager();
 
 	MySharedPtr<SceneSys> getSceneSys();
@@ -172,6 +175,9 @@ public:
 	MySharedPtr<TimerMgr> getTimerMgr();
 	MySharedPtr<FrameTimerMgr> getFrameTimerMgr();
 	MySharedPtr<InputMgr> getInputMgr();
+	MySharedPtr<MsgRouteNotify> getMsgRouteNotify();
+	MySharedPtr<GlobalDelegate> getGlobalDelegate();
+	MySharedPtr<GlobalEventCmd> getGlobalEventCmd();
 
 	//MySharedPtr<UMyBluePrintBase> getBPCtx();
 	UMyBluePrintBase* getBPCtx();
@@ -194,7 +200,7 @@ public:
 #define GLogSys GCtx->getLogSys()
 #define GEngineData GCtx->getEngineData()
 #define GShareData GCtx->getShareData()
-#define GNetDispList GCtx->getNetDispatchList()
+#define GNetCmdNotify GCtx->getNetCmdNotify()
 #define GCfg GCtx->getConfig()
 #define GPoolSys GCtx->getPoolSys()
 #define GResLoadMgr GCtx->getResLoadMgr()
@@ -224,7 +230,11 @@ public:
 #define GTickMgr GCtx->getTickMgr()
 #define GTimerMgr GCtx->getTimerMgr()
 #define GFrameTimerMgr GCtx->getFrameTimerMgr()
+#define GMsgRouteNotify GCtx->getMsgRouteNotify()
 #define GInputMgr GCtx->getInputMgr()
+#define GMsgRouteNotify GCtx->getMsgRouteNotify()
+#define GGlobalDelegate GCtx->getGlobalDelegate()
+#define GGlobalEventCmd GCtx->getGlobalEventCmd()
 
 #define GBPCtx GCtx->getBPCtx()
 #define GNativeObjectReferencer GCtx->getNativeObjectReferencer()

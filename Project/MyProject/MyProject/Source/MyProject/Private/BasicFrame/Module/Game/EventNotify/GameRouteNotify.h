@@ -20,6 +20,7 @@ public:
 
 public:
 	GameRouteNotify();
+
 	virtual void init() override;
 	virtual void dispose() override;
 };
