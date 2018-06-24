@@ -7,6 +7,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class PlayerData;
 class EntityData;
+class ModuleSys;
 
 class CtxExt : public Ctx
 {

@@ -74,5 +74,4 @@ MySharedPtr<ModuleSys> CtxExt::getModuleSys()
 	return this->mModuleSys;
 }
 
-
 MY_END_NAMESPACE
