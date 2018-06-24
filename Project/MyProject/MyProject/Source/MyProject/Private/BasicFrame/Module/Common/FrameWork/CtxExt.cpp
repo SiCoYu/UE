@@ -29,8 +29,8 @@ void CtxExt::construct()
 	this->mPlayerData = MySharedPtr<PlayerData>(MY_NEW PlayerData());
 	this->mEntityData = MySharedPtr<EntityData>(MY_NEW EntityData());
 	this->mModuleSys = MySharedPtr<ModuleSys>(MY_NEW ModuleSys());
-	this->mDataDelegate = MySharedPtr<GlobalDelegate>(MY_NEW DataDelegate());
-	this->mDataEventCmd = MySharedPtr<GlobalEventCmd>(MY_NEW DataEventCmd());
+	this->mDataDelegate = MySharedPtr<DataDelegate>(MY_NEW DataDelegate());
+	this->mDataEventCmd = MySharedPtr<DataDelegate>(MY_NEW DataEventCmd());
 }
 
 void CtxExt::init()
@@ -91,12 +91,12 @@ MySharedPtr<ModuleSys> CtxExt::getModuleSys()
 	return this->mModuleSys;
 }
 
-MySharedPtr<DataDelegate> getDataDelegate()
+MySharedPtr<DataDelegate> CtxExt::getDataDelegate()
 {
 	return this->mDataDelegate;
 }
 
-MySharedPtr<DataEventCmd> getDataEventCmd()
+MySharedPtr<DataEventCmd> CtxExt::getDataEventCmd()
 {
 	return this->mDataEventCmd;
 }

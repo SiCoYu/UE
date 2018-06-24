@@ -52,7 +52,7 @@ void GameModule::initGVar()
 	GMsgRouteNotify->addOneNotify(this->mGameRouteNotify);
 
 	this->mGameSceneEventNotify = MY_NEW GameSceneEventNotify();
-	this->mGameScenInputNotify = MY_NEW GameSceneInputNotify();
+	this->mGameSceneInputNotify = MY_NEW GameSceneInputNotify();
 
 	//this->mGotoScene.init();
 	//this->mGotoScene.addSceneHandle();

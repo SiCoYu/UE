@@ -9,7 +9,11 @@ MY_BEGIN_NAMESPACE(MyNS)
 */
 class DataEventCmd
 {
+public:
+	DataEventCmd();
 
+	void init();
+	void dispose();
 };
 
 MY_END_NAMESPACE
