@@ -108,10 +108,19 @@ public:
 	}
 
 	// 使用闭包
+	// 这样写报错误
+	// error C2062: type 'int' unexpected
+	//template <typename... VarTypes>
+	//MySimpleDelegate& bindStaticHandle(typename MySimpleStaticFunPtrType<RetValType(VarTypes..., ParamTypes...)>::Type func, VarTypes...)
+	//{
+	//	this->mMyMiniDelegateInstance = makeDelegate(func, VarTypes...);
+	//	return *(this);
+	//}
+
 	template <typename... VarTypes>
-	MySimpleDelegate& bindStaticHandle(typename MySimpleStaticFunPtrType<RetValType(VarTypes..., ParamTypes...)>::Type func, VarTypes...)
+	MySimpleDelegate& bindStaticHandle(typename MySimpleStaticFunPtrType<RetValType(VarTypes..., ParamTypes...)>::Type func, VarTypes... vars)
 	{
-		this->mMyMiniDelegateInstance = makeDelegate(func, VarTypes...);
+		this->mMyMiniDelegateInstance = makeDelegate(func, vars...);
 		return *(this);
 	}
 };

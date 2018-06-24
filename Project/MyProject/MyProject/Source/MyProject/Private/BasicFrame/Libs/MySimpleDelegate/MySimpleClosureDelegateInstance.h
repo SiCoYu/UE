@@ -30,26 +30,27 @@ public:
 
 	virtual bool empty() const override
 	{
-		return (!mUserObject || !mMethodPtr);
+		return (!this->mUserObject || !this->mMethodPtr);
 	}
 
 	virtual void clear() override
 	{
-		mUserObject = nullptr;
-		mMethodPtr = nullptr;
+		this->mUserObject = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
     R operator()(ParamTypes... args) const
     {
-        return (mUserObject->*mMethodPtr)(mBound, args...);
+        return (this->mUserObject->*this->mMethodPtr)(mBound, args...);
     }
 
     virtual bool operator == (const MySimpleDelegateInstanceBase &other) const override
     {
 		const MySimpleClosureDelegateInstance& rhv = (MySimpleClosureDelegateInstance&)other;
 
-        return (mUserObject == rhv.mUserObject) && (mMethodPtr == rhv.mMethodPtr) &&
-               (mBound == rhv.mBound);
+        return ((this->mUserObject == rhv.mUserObject) && 
+			    (this->mMethodPtr == rhv.mMethodPtr) &&
+                (this->mBound == rhv.mBound));
     }
 
 	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
@@ -84,26 +85,27 @@ public:
 
 	virtual bool empty() const override
 	{
-		return (!mUserObject || !mMethodPtr);
+		return (!this->mUserObject || !this->mMethodPtr);
 	}
 
 	virtual void clear() override
 	{
-		mUserObject = nullptr;
-		mMethodPtr = nullptr;
+		this->mUserObject = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
 	R operator()(ParamTypes... args) const
 	{
-		return (mUserObject->*mMethodPtr)(mBound, args...);
+		return (this->mUserObject->*this->mMethodPtr)(mBound, args...);
 	}
 
 	bool operator == (const MySimpleDelegateInstanceBase &other) const
 	{
 		const MySimpleClosureDelegateInstance& rhv = (MySimpleClosureDelegateInstance&)other;
 
-		return (mUserObject == rhv.mUserObject) && (mMethodPtr == rhv.mMethodPtr) &&
-			(mBound == rhv.mBound);
+		return ((this->mUserObject == rhv.mUserObject) && 
+			    (this->mMethodPtr == rhv.mMethodPtr) &&
+			    (this->mBound == rhv.mBound));
 	}
 
 	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
@@ -132,31 +134,31 @@ public:
 public:
 	MySimpleClosureDelegateInstance(MethodPtrType func, B bound)
 		: mMethodPtr(func), 
-		  mBound(bound1)
+		  mBound(bound)
 	{
 	}
 
 	virtual bool empty() const override
 	{
-		return (!mMethodPtr);
+		return (!this->mMethodPtr);
 	}
 
 	virtual void clear() override
 	{
-		mMethodPtr = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
 	R operator()(ParamTypes... args) const
 	{
-		return (*mMethodPtr)(mBound, args...);
+		return (*this->mMethodPtr)(this->mBound, args...);
 	}
 
 	virtual bool operator == (const MySimpleDelegateInstanceBase &other) const override
 	{
 		const MySimpleClosureDelegateInstance& rhv = (MySimpleClosureDelegateInstance&)other;
 
-		return ((mMethodPtr == rhv.mMethodPtr) &&
-			(mBound == rhv.mBound));
+		return ((this->mMethodPtr == rhv.mMethodPtr) &&
+			    (this->mBound == rhv.mBound));
 	}
 
 	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
@@ -171,6 +173,7 @@ public:
 
 private:
 	MethodPtrType mMethodPtr;
+	B mBound;
 };
 
 template <typename T>
@@ -193,24 +196,26 @@ public:
 
 	virtual bool empty() const override
 	{
-		return (!mUserObject || !mMethodPtr);
+		return (!this->mUserObject || !this->mMethodPtr);
 	}
 
 	virtual void clear() override
 	{
-		mUserObject = nullptr;
-		mMethodPtr = nullptr;
+		this->mUserObject = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
     R operator()(ParamTypes... args) const
     {
-        return (mUserObject->*mMethodPtr)(mBound, mBound2, args...);
+        return (this->mUserObject->*this->mMethodPtr)(mBound, mBound2, args...);
     }
 
     bool operator==(const MyMiniClosureDelegateInstance2 &other) const
     {
-        return (mUserObject == other.mUserObject) && (mMethodPtr == other.mMethodPtr) &&
-               (mBound == other.mBound) && (mBound2 == other.mBound2);
+        return ((this->mUserObject == other.mUserObject) && 
+			    (this->mMethodPtr == other.mMethodPtr) &&
+                (this->mBound == other.mBound) && 
+			    (this->mBound2 == other.mBound2));
     }
 
 private:
@@ -233,28 +238,31 @@ public:
 		, mBound(bound1)
 		, mBound2(bound2)
 	{
+
 	}
 
 	virtual bool empty() const override
 	{
-		return (!mUserObject || !mMethodPtr);
+		return (!this->mUserObject || !this->mMethodPtr);
 	}
 
 	virtual void clear() override
 	{
-		mUserObject = nullptr;
-		mMethodPtr = nullptr;
+		this->mUserObject = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
 	R operator()(ParamTypes... args) const
 	{
-		return (mUserObject->*mMethodPtr)(mBound, mBound2, args...);
+		return (this->mUserObject->*this->mMethodPtr)(mBound, mBound2, args...);
 	}
 
 	bool operator==(const MyMiniClosureDelegateInstance2 &other) const
 	{
-		return (mUserObject == other.mUserObject) && (mMethodPtr == other.mMethodPtr) &&
-			(mBound == other.mBound) && (mBound2 == other.mBound2);
+		return ((this->mUserObject == other.mUserObject) && 
+			    (this->mMethodPtr == other.mMethodPtr) &&
+			    (this->mBound == other.mBound) && 
+			    (this->mBound2 == other.mBound2));
 	}
 
 private:
@@ -280,23 +288,24 @@ public:
 
 	virtual bool empty() const override
 	{
-		return (!mMethodPtr);
+		return (!this->mMethodPtr);
 	}
 
 	virtual void clear() override
 	{
-		mMethodPtr = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
 	R operator()(ParamTypes... args) const
 	{
-		return (*mMethodPtr)(mBound, mBound2, args...);
+		return (*this->mMethodPtr)(this->mBound, this->mBound2, args...);
 	}
 
 	bool operator==(const MyMiniClosureDelegateInstance2 &other) const
 	{
-		return ((mMethodPtr == other.mMethodPtr) &&
-			(mBound == other.mBound) && (mBound2 == other.mBound2));
+		return ((this->mMethodPtr == other.mMethodPtr) &&
+			    (this->mBound == other.mBound) && 
+			    (this->mBound2 == other.mBound2));
 	}
 
 private:

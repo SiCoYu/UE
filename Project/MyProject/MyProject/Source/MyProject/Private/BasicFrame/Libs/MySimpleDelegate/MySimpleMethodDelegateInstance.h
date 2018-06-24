@@ -19,29 +19,32 @@ public:
 	MySimpleMethodDelegateInstance(MethodPtrType func, T* callee)
         : mUserObject(callee)
         , mMethodPtr(func)
-    {}
+    {
+	
+	}
 
 	virtual bool empty() const override
 	{
-		return (!mUserObject || !mMethodPtr);
+		return (!this->mUserObject || !this->mMethodPtr);
 	}
 
 	virtual void clear() override
 	{
-		mUserObject = nullptr;
-		mMethodPtr = nullptr;
+		this->mUserObject = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
     R operator()(ParamTypes... args) const
     {
-        return (mUserObject->*mMethodPtr)(args...);
+        return (this->mUserObject->*this->mMethodPtr)(args...);
     }
 
 	virtual bool operator==(const MySimpleDelegateInstanceBase& other) const override
     {
 		const MySimpleMethodDelegateInstance& rhv = (MySimpleMethodDelegateInstance&)other;
 
-        return (&mUserObject == &rhv.mUserObject) && (mMethodPtr == rhv.mMethodPtr);
+        return ((&this->mUserObject == &rhv.mUserObject) && 
+			    (this->mMethodPtr == rhv.mMethodPtr));
     }
 
 	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
@@ -69,29 +72,32 @@ public:
 	MySimpleMethodDelegateInstance(MethodPtrType func, const T* callee)
         : mUserObject(callee)
         , mMethodPtr(func)
-    {}
+    {
+	
+	}
 
 	virtual bool empty() const override
 	{
-		return (!mUserObject || !mMethodPtr);
+		return (!this->mUserObject || !this->mMethodPtr);
 	}
 
 	virtual void clear() override
 	{
-		mUserObject = nullptr;
-		mMethodPtr = nullptr;
+		this->mUserObject = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
     R operator()(ParamTypes... args) const
     {
-        return (mUserObject->*mMethodPtr)(args...);
+        return (this->mUserObject->*mMethodPtr)(args...);
     }
 
 	virtual bool operator==(const MySimpleDelegateInstanceBase& other) const override
     {
 		const MySimpleMethodDelegateInstance& rhv = (MySimpleMethodDelegateInstance&)other;
 
-        return (&mUserObject == &rhv.mUserObject) && (mMethodPtr == rhv.mMethodPtr);
+        return ((&this->mUserObject == &rhv.mUserObject) && 
+			    (this->mMethodPtr == rhv.mMethodPtr));
     }
 
 	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
@@ -121,28 +127,30 @@ public:
 public:
 	MySimpleMethodDelegateInstance(MethodPtrType func)
         : mMethodPtr(func)
-    {}
+    {
+	
+	}
 
 	virtual bool empty() const override
 	{
-		return !mMethodPtr;
+		return !this->mMethodPtr;
 	}
 
 	virtual void clear() override
 	{
-		mMethodPtr = nullptr;
+		this->mMethodPtr = nullptr;
 	}
 
     R operator()(ParamTypes... args) const
     {
-        return (*mMethodPtr)(args...);
+        return (*this->mMethodPtr)(args...);
     }
 
 	virtual bool operator==(const MySimpleDelegateInstanceBase& other) const override
     {
 		const MySimpleMethodDelegateInstance& rhv = (MySimpleMethodDelegateInstance&)other;
 
-        return mMethodPtr == rhv.mMethodPtr;
+        return this->mMethodPtr == rhv.mMethodPtr;
     }
 
 	virtual bool operator!= (const MySimpleDelegateInstanceBase& other) const override
@@ -160,7 +168,7 @@ private:
 };
 
 template <typename F, typename T>
-MySimpleMethodDelegateInstance<F>* makeDelegate(F func, T& obj)
+MySimpleMethodDelegateInstance<F>* makeDelegate(F func, T* obj)
 {
     return new MySimpleMethodDelegateInstance<F>(func, obj);
 }
