@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "ISceneInputNotify.h"
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 // error C4099: 'FKey': type name first seen using 'struct' now seen using 'class'
@@ -19,8 +20,8 @@ public:
 	void init();
 	void dispose();
 
-	void onKeyDown(IDispatchObject* dispObj);
-	void onKeyUp(IDispatchObject* dispObj);
+	void onKeyDown(uint eventId, IDispatchObject* dispObj);
+	void onKeyUp(uint eventId, IDispatchObject* dispObj);
 	void onMouseDown();
 	void onMouseUp();
 };
