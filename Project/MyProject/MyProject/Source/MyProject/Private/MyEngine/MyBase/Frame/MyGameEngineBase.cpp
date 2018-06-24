@@ -20,8 +20,8 @@ void UMyGameEngineBase::Init(IEngineLoop* InEngineLoop)
 
 void UMyGameEngineBase::Tick(float DeltaSeconds, bool bIdleMode)
 {
-	if (nullptr != GCtx)
-	{
-		GCtx->mainLoop();
-	}
+	//if (nullptr != GCtx)
+	//{
+	//	GCtx->mainLoop();
+	//}
 }
