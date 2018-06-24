@@ -7,6 +7,7 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "Ctx.h"
 #include "InputMgr.h"
+#include "InputEventId.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

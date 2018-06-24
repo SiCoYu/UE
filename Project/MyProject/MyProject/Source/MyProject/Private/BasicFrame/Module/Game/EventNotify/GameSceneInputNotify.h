@@ -9,6 +9,8 @@ struct FKey;
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class IDispatchObject;
+
 class GameSceneInputNotify : public ISceneInputNotify
 {
 public:
@@ -17,8 +19,8 @@ public:
 	void init();
 	void dispose();
 
-	void onKeyDown(FKey keyCode);
-	void onKeyUp(FKey keyCode);
+	void onKeyDown(IDispatchObject* dispObj);
+	void onKeyUp(IDispatchObject* dispObj);
 	void onMouseDown();
 	void onMouseUp();
 };

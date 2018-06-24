@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "TypeDef.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -10,7 +11,7 @@ class IDispatchObject;
 /**
 * @brief 全局性的事件
 */
-class DataEventCmd
+class DataEventCmd : public GObject
 {
 public:
 	DataEventCmd();
