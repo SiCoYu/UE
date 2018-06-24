@@ -45,6 +45,7 @@
 #include "MyBluePrintBase.h"
 // #include "MyMemoryTracker.h"
 #include "MyNativeObjectReferencer.h"
+#include "AddOnceEventDispatch.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -565,6 +566,16 @@ MySharedPtr<InputMgr> Ctx::getInputMgr()
 MySharedPtr<MsgRouteNotify> Ctx::getMsgRouteNotify()
 {
 	return this->mMsgRouteNotify;
+}
+
+MySharedPtr<GlobalDelegate> Ctx::getGlobalDelegate()
+{
+	return this->mGlobalDelegate;
+}
+
+MySharedPtr<GlobalEventCmd> Ctx::getGlobalEventCmd()
+{
+	return this->mGlobalEventCmd;
 }
 
 UMyBluePrintBase* Ctx::getBPCtx()

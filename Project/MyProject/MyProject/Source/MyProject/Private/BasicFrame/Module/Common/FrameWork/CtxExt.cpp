@@ -18,8 +18,8 @@ CtxExt::CtxExt()
 	this->mPlayerData.setNull();
 	this->mEntityData.setNull();
 	this->mModuleSys.setNull();
-	this->mGlobalDelegate.setNull();
-	this->mGlobalEventCmd.setNull();
+	this->mDataDelegate.setNull();
+	this->mDataEventCmd.setNull();
 }
 
 void CtxExt::construct()
@@ -30,7 +30,7 @@ void CtxExt::construct()
 	this->mEntityData = MySharedPtr<EntityData>(MY_NEW EntityData());
 	this->mModuleSys = MySharedPtr<ModuleSys>(MY_NEW ModuleSys());
 	this->mDataDelegate = MySharedPtr<DataDelegate>(MY_NEW DataDelegate());
-	this->mDataEventCmd = MySharedPtr<DataDelegate>(MY_NEW DataEventCmd());
+	this->mDataEventCmd = MySharedPtr<DataEventCmd>(MY_NEW DataEventCmd());
 }
 
 void CtxExt::init()
@@ -54,9 +54,9 @@ void CtxExt::dispose()
 
 	this->mPlayerData.setNull();
 	this->mEntityData.setNull();
-	this->mModuleSys->setNull();
-	this->mDataDelegate->setNull();
-	this->mDataEventCmd->setNull();
+	this->mModuleSys.setNull();
+	this->mDataDelegate.setNull();
+	this->mDataEventCmd.setNull();
 
 	Ctx::dispose();
 }
