@@ -19,7 +19,7 @@ public:
 	void dispose();
 
 public:
-	static void onCoreInitedHandle(/*uint eventId, */IDispatchObject* dispObj);
+	static void onCoreInitedHandle(uint eventId, IDispatchObject* dispObj);
 };
 
 MY_END_NAMESPACE

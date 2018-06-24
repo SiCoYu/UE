@@ -19,7 +19,7 @@ void DataEventCmd::dispose()
 
 }
 
-void DataEventCmd::onCoreInitedHandle(/*uint eventId, */IDispatchObject* dispObj)
+void DataEventCmd::onCoreInitedHandle(uint eventId, IDispatchObject* dispObj)
 {
 
 }

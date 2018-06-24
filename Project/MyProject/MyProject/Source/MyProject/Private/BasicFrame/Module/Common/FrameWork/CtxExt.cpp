@@ -47,22 +47,10 @@ void CtxExt::init()
 	this->mDataDelegate->init();
 	this->mDataEventCmd->init();
 
-	//EventDispatchDelegate test = EventDispatchDelegate();
-	//test.bindStaticHandle(
-	//	&DataEventCmd::onCoreInitedHandle/*,
-	//	(uint)0*/
-	//);
-
-	//GGlobalDelegate->mCoreInitedEventDispatch->addEventHandle(
-	//	EventDispatchDelegate().bindStaticHandle(
-	//		&DataEventCmd::onCoreInitedHandle, 
-	//		(uint)0
-	//	)
-	//);
-
 	GGlobalDelegate->mCoreInitedEventDispatch->addEventHandle(
 		EventDispatchDelegate().bindStaticHandle(
-			&DataEventCmd::onCoreInitedHandle
+			&DataEventCmd::onCoreInitedHandle, 
+			(uint)0
 		)
 	);
 }
