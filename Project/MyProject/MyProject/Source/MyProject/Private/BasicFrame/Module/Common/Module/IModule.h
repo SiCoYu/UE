@@ -7,6 +7,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class IModule
 {
+public:
     virtual void init() = 0;
 	virtual void dispose() = 0;
 };

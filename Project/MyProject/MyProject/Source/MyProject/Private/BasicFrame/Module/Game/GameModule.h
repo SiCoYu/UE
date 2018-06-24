@@ -22,7 +22,7 @@ protected:
     //GotoScene mGotoScene;
     GameUiEventNotify* mGameUiEventNotify;
 	GameSceneEventNotify* mGameSceneEventNotify;
-	GameSceneInputNotify* mGameSceneTouchNotify;
+	GameSceneInputNotify* mGameSceneInputNotify;
 
 public:
 	GameModule();
