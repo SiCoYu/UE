@@ -3,6 +3,7 @@
 
 #include "MySimpleDelegateBase.h"
 #include "MySimpleMemFunPtrType.h"
+#include "MySimpleStaticFunPtrType.h"
 #include "MySimpleDelegateInstanceBase.h"
 #include "MySimpleMethodDelegateInstance.h"
 #include "MySimpleClosureDelegateInstance.h"
@@ -63,6 +64,7 @@ public:
 		return this->mMyMiniDelegateInstance->call(Params...);
 	}
 
+	// 使用函数
 	template <typename UserClass>
 	MySimpleDelegate& bindObjectHandle(typename MySimpleMemFunPtrType<false, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
 	{
@@ -70,6 +72,7 @@ public:
 		return *(this);
 	}
 
+	// 使用函数
 	template <typename UserClass>
 	MySimpleDelegate& bindObjectHandle(typename MySimpleMemFunPtrType<true, UserClass, RetValType(ParamTypes...)>::Type func, UserClass* callee)
 	{
@@ -77,6 +80,7 @@ public:
 		return *(this);
 	}
 
+	// 使用闭包
 	// 模板自动推断 const 值
 	// R (T::*)(ParamTypes...) 参数会报错
 	// error C2146: syntax error: missing ')' before identifier 'func'
@@ -87,6 +91,7 @@ public:
 		return *(this);
 	}
 
+	// 使用闭包
 	// 模板自动推断 const 值
 	template <typename UserClass, typename... VarTypes>
 	MySimpleDelegate& bindObjectHandle(typename MySimpleMemFunPtrType<true, UserClass, RetValType(VarTypes..., ParamTypes...)>::Type func, UserClass* callee, VarTypes... vars)
@@ -95,15 +100,18 @@ public:
 		return *(this);
 	}
 
-	//template <typename... VarTypes>
-	//void bindStaticHandle(MethodPtrType func, VarTypes...)
-	//{
-	//	this->mMyMiniDelegateInstance = makeDelegate(func, VarTypes...);
-	//}
-
+	// 使用函数
 	MySimpleDelegate& bindStaticHandle(MethodPtrType func)
 	{
 		this->mMyMiniDelegateInstance = makeDelegate(func);
+		return *(this);
+	}
+
+	// 使用闭包
+	template <typename... VarTypes>
+	MySimpleDelegate& bindStaticHandle(typename MySimpleStaticFunPtrType<RetValType(VarTypes..., ParamTypes...)>::Type func, VarTypes...)
+	{
+		this->mMyMiniDelegateInstance = makeDelegate(func, VarTypes...);
 		return *(this);
 	}
 };
