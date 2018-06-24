@@ -3,12 +3,20 @@
 #include "ModuleHandleItem.h"
 #include "GameModule.h"
 #include "SafePointer.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 ModuleSys::ModuleSys()
 {
 	this->_registerHandler();
+}
+
+ModuleSys::~ModuleSys()
+{
+
 }
 
 void ModuleSys::init()
@@ -37,8 +45,8 @@ void ModuleSys::loadModule(ModuleId moduleId)
 
 		if (ModuleId::GAMEMN == moduleId)
 		{
-			this->mType2ItemDic[moduleId]->mModule = MY_NEW GameModule();
-			this->mType2ItemDic[moduleId]->mModule->init();
+			this->mType2ItemDic[moduleId].mModule = MY_NEW GameModule();
+			this->mType2ItemDic[moduleId].mModule->init();
 		}
 	}
 	else
@@ -50,7 +58,7 @@ void ModuleSys::loadModule(ModuleId moduleId)
 void ModuleSys::unloadModule(ModuleId moduleId)
 {
 	this->mType2ItemDic[moduleId].mIsLoaded = false;
-	MY_SAFE_DISPOSE(this->mType2ItemDic[moduleId]->mModule);
+	MY_SAFE_DISPOSE(this->mType2ItemDic[moduleId].mModule);
 }
 
 MY_END_NAMESPACE
