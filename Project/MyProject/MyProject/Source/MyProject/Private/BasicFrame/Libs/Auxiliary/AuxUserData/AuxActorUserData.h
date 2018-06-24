@@ -1,18 +1,20 @@
 #pragma once
 
+#include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "AuxUserData.generated.h"
+#include "AuxActorUserData.generated.h"
 
 /**
  * @brief UAuxUserData， 组件根节点，在组件中保存用户数据
+ * @meta UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) ) ，没有这个，在编辑器中的 [AddComponent] 看不到组件
  */
-UCLASS()
-class UAuxUserData : public UActorComponent
+UCLASS( ClassGroup = (MyUserData), meta = (BlueprintSpawnableComponent) )
+class UAuxActorUserData : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
-	UAuxUserData(const FObjectInitializer& PCIP);
+	UAuxActorUserData(const FObjectInitializer& PCIP);
 
 public:
 	virtual void BeginPlay() override;

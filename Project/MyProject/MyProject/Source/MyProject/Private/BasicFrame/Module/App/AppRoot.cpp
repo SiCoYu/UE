@@ -10,16 +10,18 @@ UAppRoot::UAppRoot(const class FObjectInitializer& PCIP)
 
 void UAppRoot::BeginPlay()
 {
-
+	Super::BeginPlay();
 }
 
 void UAppRoot::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-
+	Super::EndPlay(EndPlayReason);
 }
 
 void UAppRoot::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
 	if (nullptr != GCtx)
 	{
 		GCtx->mainLoop();

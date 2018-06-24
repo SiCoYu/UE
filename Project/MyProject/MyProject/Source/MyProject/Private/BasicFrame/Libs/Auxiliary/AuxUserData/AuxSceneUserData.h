@@ -7,7 +7,7 @@
 #include "AuxSceneUserData.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(MyUserData), meta=(BlueprintSpawnableComponent) )
 class UAuxSceneUserData : public USceneComponent
 {
 	GENERATED_BODY()

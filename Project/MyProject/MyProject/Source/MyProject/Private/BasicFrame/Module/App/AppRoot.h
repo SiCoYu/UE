@@ -1,10 +1,10 @@
 #pragma once
 
-#include "AuxUserData.h"
+#include "AuxActorUserData.h"
 #include "AppRoot.generated.h"
 
-UCLASS()
-class UAppRoot : public UAuxUserData
+UCLASS( ClassGroup = (MyUserData), meta = (BlueprintSpawnableComponent) )
+class UAppRoot : public UAuxActorUserData
 {
 	GENERATED_BODY()
 
