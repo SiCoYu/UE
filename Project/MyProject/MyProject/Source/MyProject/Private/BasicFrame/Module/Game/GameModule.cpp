@@ -1,140 +1,71 @@
-﻿using SDK.Lib;
-using Game.UI;
+﻿#include "MyProject.h"
+#include "GameModule.h"
+#include "GameRouteNotify.h"
+#include "GameNetNotify.h"
+#include "GameUiEventNotify.h"
+#include "GameSceneEventNotify.h"
+#include "GameSceneTouchNotify.h"
+#include "SafePointer.h"
+#include "MyMemoryConstructorFlag.h"
+#include "MyMemoryAllocatorConfig.h"
+#include "MyMemoryDefaultAlloc.h"
 
-namespace Game.Game
+MY_BEGIN_NAMESPACE(MyNS)
+
+GameModule::GameModule()
 {
-    public class GameModule : IGameModule
-    {
-        public GameRouteNotify mGameRouteNotify;
-        public GameNetNotify mGameNetNotify;
-        protected GotoScene mGotoScene;
-        protected GameUiEventNotify mGameUiEventNotify;
-        protected GameSceneLogicNotify mGameSceneLogicNotify;
 
-        public GameModule()
-        {
-
-        }
-
-        public void init()
-        {
-            this.registerScriptType();
-            this.initGVar();
-            this.loadGameScene();
-        }
-
-        public void dispose()
-        {
-            if(null != this.mGameNetNotify)
-            {
-                this.mGameNetNotify.dispose();
-                this.mGameNetNotify = null;
-            }
-            if(null != this.mGameRouteNotify)
-            {
-                this.mGameRouteNotify.dispose();
-                this.mGameRouteNotify = null;
-            }
-            if (null != this.mGotoScene)
-            {
-                this.mGotoScene.dispose();
-                this.mGotoScene = null;
-            }
-            if(null != this.mGameUiEventNotify)
-            {
-                if (null != Ctx.msInstance.mGlobalDelegate)
-                {
-                    Ctx.msInstance.mGlobalDelegate.mFormCodeLoadedDispatch.removeEventHandle(
-                        this.mGameUiEventNotify,
-                        this.mGameUiEventNotify.onCodeFormLoaded,
-                        0
-                    );
-                    Ctx.msInstance.mGlobalDelegate.mFormWidgetLoadedDispatch.removeEventHandle(
-                        this.mGameUiEventNotify,
-                        this.mGameUiEventNotify.onWidgetLoaded,
-                        0
-                    );
-                }
-
-                this.mGameUiEventNotify.dispose();
-                this.mGameUiEventNotify = null;
-            }
-            if(null != CtxExt.msInstance.mSceneEventNotify)
-            {
-                CtxExt.msInstance.mSceneEventNotify = null;
-            }
-
-            this.unregisterScriptType();
-        }
-
-        public void initGVar()
-        {
-            this.mGotoScene = new GotoScene();
-
-            // 游戏逻辑处理
-            this.mGameUiEventNotify = new GameUiEventNotify();
-
-            Ctx.msInstance.mGlobalDelegate.mFormCodeLoadedDispatch.addEventHandle(
-                this.mGameUiEventNotify,
-                this.mGameUiEventNotify.onCodeFormLoaded,
-                0
-            );
-            Ctx.msInstance.mGlobalDelegate.mFormWidgetLoadedDispatch.addEventHandle(
-                this.mGameUiEventNotify,
-                this.mGameUiEventNotify.onWidgetLoaded,
-                0
-            );
-
-            this.mGameNetNotify = new GameNetNotify();
-            this.mGameNetNotify.init();
-            Ctx.msInstance.mNetCmdNotify.addOneNofity(this.mGameNetNotify);
-
-            this.mGameRouteNotify = new GameRouteNotify();
-            this.mGameRouteNotify.init();
-            Ctx.msInstance.mMsgRouteNotify.addOneNotify(this.mGameRouteNotify);
-
-            Ctx.msInstance.mNetCmdNotify.isStopNetHandle = false;     // 开始网络消息处理
-            CtxExt.msInstance.mSceneEventNotify = new GameSceneEventNotify();
-
-            this.mGameSceneLogicNotify = new GameSceneLogicNotify();
-
-            this.mGotoScene.init();
-            this.mGotoScene.addSceneHandle();
-        }
-
-        public void loadGameScene()
-        {
-            //this.mGotoScene.loadSceneByLevelName("TestScene.unity");
-
-            if (MacroDef.DISABLE_TEST_SCENE)
-            {
-                //this.mGotoScene.loadSceneByLevelName("NewWorldTest.unity");
-                this.mGotoScene.loadSceneByMapId((int)MapIdCV.eCommonMap);
-            }
-            else
-            {
-                this.mGotoScene.loadSceneByLevelName("TestShader.unity");
-            }
-        }
-
-        protected void registerScriptType()
-        {
-            Ctx.msInstance.mScriptDynLoad.registerScriptType("Game.UI.UiBlurBg", typeof(UiBlurBg));
-            Ctx.msInstance.mScriptDynLoad.registerScriptType("Game.UI.UiTest", typeof(UiTest));
-            Ctx.msInstance.mScriptDynLoad.registerScriptType("Game.UI.UiTerrainEdit", typeof(UiTerrainEdit));
-            Ctx.msInstance.mScriptDynLoad.registerScriptType("Game.UI.UiPack", typeof(UiPack));
-            Ctx.msInstance.mScriptDynLoad.registerScriptType("Game.UI.UiJoyStick", typeof(UiJoyStick));
-            Ctx.msInstance.mScriptDynLoad.registerScriptType("Game.UI.UiForwardForce", typeof(UiForwardForce));
-        }
-
-        protected void unregisterScriptType()
-        {
-            Ctx.msInstance.mScriptDynLoad.unregisterScriptType("Game.UI.UIBlurBg");
-            Ctx.msInstance.mScriptDynLoad.unregisterScriptType("Game.UI.UITest");
-            Ctx.msInstance.mScriptDynLoad.unregisterScriptType("Game.UI.UITerrainEdit");
-            Ctx.msInstance.mScriptDynLoad.unregisterScriptType("Game.UI.UIPack");
-            Ctx.msInstance.mScriptDynLoad.unregisterScriptType("Game.UI.UIJoyStick");
-            Ctx.msInstance.mScriptDynLoad.unregisterScriptType("Game.UI.UIForwardForce");
-        }
-    }
 }
+
+void GameModule::init()
+{
+	this->initGVar();
+	this->loadGameScene();
+}
+
+void GameModule::dispose()
+{
+	MY_SAFE_DISPOSE(this->mGameNetNotify);
+	MY_SAFE_DISPOSE(this->mGameRouteNotify);
+	//if (nullptr != this->mGotoScene)
+	//{
+	//    this->mGotoScene.dispose();
+	//    this->mGotoScene = nullptr;
+	//}
+	MY_SAFE_DISPOSE(this->mGameUiEventNotify);
+	MY_SAFE_DISPOSE(this->mGameSceneEventNotify);
+	MY_SAFE_DISPOSE(this->mGameSceneTouchNotify);
+}
+
+void GameModule::initGVar()
+{
+	//this->mGotoScene = new GotoScene();
+
+	this->mGameNetNotify = MY_NEW GameNetNotify();
+	this->mGameNetNotify.init();
+	Ctx.msInstance.mNetCmdNotify.addOneNofity(this->mGameNetNotify);
+
+	this->mGameRouteNotify = MY_NEW GameRouteNotify();
+	this->mGameRouteNotify.init();
+	Ctx.msInstance.mMsgRouteNotify.addOneNotify(this->mGameRouteNotify);
+
+	this->mGameSceneTouchNotify = MY_NEW GameSceneEventNotify();
+	this->mGameSceneTouchNotify = MY_NEW GameSceneTouchNotify();
+
+	//this->mGotoScene.init();
+	//this->mGotoScene.addSceneHandle();
+}
+
+void GameModule::loadGameScene()
+{
+	//if (MacroDef.DISABLE_TEST_SCENE)
+	//{
+	//    this->mGotoScene.loadSceneByMapId((int)MapIdCV.eCommonMap);
+	//}
+	//else
+	//{
+	//    this->mGotoScene.loadSceneByLevelName("TestShader.unity");
+	//}
+}
+
+MY_END_NAMESPACE
