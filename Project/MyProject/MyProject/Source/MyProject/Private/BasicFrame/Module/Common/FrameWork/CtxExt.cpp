@@ -1,10 +1,14 @@
 #include "MyProject.h"
 #include "CtxExt.h"
+#include "GlobalDelegate.h"
 #include "PlayerData.h"
 #include "EntityData.h"
 #include "ModuleSys.h"
 #include "DataDelegate.h"
 #include "DataEventCmd.h"
+#include "AddOnceEventDispatch.h"
+#include "EventDispatchDelegate.h"
+#include "TypeDef.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -42,6 +46,25 @@ void CtxExt::init()
 	this->mModuleSys->init();
 	this->mDataDelegate->init();
 	this->mDataEventCmd->init();
+
+	//EventDispatchDelegate test = EventDispatchDelegate();
+	//test.bindStaticHandle(
+	//	&DataEventCmd::onCoreInitedHandle/*,
+	//	(uint)0*/
+	//);
+
+	//GGlobalDelegate->mCoreInitedEventDispatch->addEventHandle(
+	//	EventDispatchDelegate().bindStaticHandle(
+	//		&DataEventCmd::onCoreInitedHandle, 
+	//		(uint)0
+	//	)
+	//);
+
+	GGlobalDelegate->mCoreInitedEventDispatch->addEventHandle(
+		EventDispatchDelegate().bindStaticHandle(
+			&DataEventCmd::onCoreInitedHandle
+		)
+	);
 }
 
 void CtxExt::dispose()

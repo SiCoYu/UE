@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "DataEventCmd.h"
+#include "IDispatchObject.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -14,6 +15,11 @@ void DataEventCmd::init()
 }
 
 void DataEventCmd::dispose()
+{
+
+}
+
+void DataEventCmd::onCoreInitedHandle(/*uint eventId, */IDispatchObject* dispObj)
 {
 
 }

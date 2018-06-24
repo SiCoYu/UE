@@ -13,7 +13,7 @@ class AddOnceEventDispatch;
 class GlobalDelegate : public GObject
 {
 public:
-	AddOnceEventDispatch* mCoreInitedEventDispatch;	// Core 初始化完成 
+	AddOnceEventDispatch* mCoreInitedEventDispatch;	// Core 初始化完成
 
 public:
 	GlobalDelegate();

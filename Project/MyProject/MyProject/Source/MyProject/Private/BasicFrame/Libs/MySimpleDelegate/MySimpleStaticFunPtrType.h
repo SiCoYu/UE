@@ -6,8 +6,8 @@ namespace MyNS
 	struct MySimpleStaticFunPtrType;
 
 	template <typename RetType, typename... ArgTypes>
-	struct MySimpleMemFunPtrType<RetType(ArgTypes...)>
+	struct MySimpleStaticFunPtrType<RetType(ArgTypes...)>
 	{
-		typedef RetType(Class::* Type)(ArgTypes...);
+		typedef RetType(* Type)(ArgTypes...);
 	};
 }

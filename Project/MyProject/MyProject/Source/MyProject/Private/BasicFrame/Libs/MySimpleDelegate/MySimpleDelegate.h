@@ -3,6 +3,7 @@
 
 #include "MySimpleDelegateBase.h"
 #include "MySimpleMemFunPtrType.h"
+#include "MySimpleStaticFunPtrType.h"
 #include "MySimpleDelegateInstanceBase.h"
 #include "MySimpleMethodDelegateInstance.h"
 #include "MySimpleClosureDelegateInstance.h"
@@ -107,11 +108,12 @@ public:
 	}
 
 	// Ê¹ÓÃ±Õ°ü
-	//template <typename... VarTypes>
-	//void bindStaticHandle(typename MySimpleStaticFunPtrType<RetValType(VarTypes..., ParamTypes...)>::Type func, VarTypes...)
-	//{
-	//	this->mMyMiniDelegateInstance = makeDelegate(func, VarTypes...);
-	//}
+	template <typename... VarTypes>
+	MySimpleDelegate& bindStaticHandle(typename MySimpleStaticFunPtrType<RetValType(VarTypes..., ParamTypes...)>::Type func, VarTypes...)
+	{
+		this->mMyMiniDelegateInstance = makeDelegate(func, VarTypes...);
+		return *(this);
+	}
 };
 
 }
