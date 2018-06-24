@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -7,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
 * @brief 全局性的事件
 */
-class GlobalEventCmd
+class GlobalEventCmd : public GObject
 {
 public:
 	GlobalEventCmd();

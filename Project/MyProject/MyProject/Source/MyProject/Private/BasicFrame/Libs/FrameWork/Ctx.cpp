@@ -591,6 +591,7 @@ FMyNativeObjectReferencer* Ctx::getNativeObjectReferencer()
 void Ctx::addEventHandle()
 {
 	this->mTickMgr->addTick(this->mDelayTaskMgr.get(), TickPriority::eTPDelayTaskMgr);
+	this->mTickMgr->addTick(this->mInputMgr.get(), TickPriority::eTPInputMgr);
 }
 
 void Ctx::testApi()

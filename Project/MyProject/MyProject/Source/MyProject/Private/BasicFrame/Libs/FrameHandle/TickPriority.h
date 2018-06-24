@@ -13,6 +13,7 @@ class TickPriority
 {
 public:
 	static float eTPDelayTaskMgr;       // DelayTaskMgr
+	static float eTPInputMgr;			// InputMgr
 };
 
 MY_END_NAMESPACE
