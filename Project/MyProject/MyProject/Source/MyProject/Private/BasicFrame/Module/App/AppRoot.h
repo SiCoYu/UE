@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Components/ActorComponent.h"
+#include "AuxUserData.h"
 #include "AppRoot.generated.h"
 
 UCLASS()
-class UAppRoot : public UActorComponent
+class UAppRoot : public UAuxUserData
 {
 	GENERATED_BODY()
 

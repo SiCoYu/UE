@@ -152,6 +152,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Auxiliary/AuxLoader",
                 "MyProject/Private/BasicFrame/Libs/Auxiliary/AuxUi",
                 "MyProject/Private/BasicFrame/Libs/Auxiliary/AuxBase",
+                "MyProject/Private/BasicFrame/Libs/Auxiliary/AuxUserData",
 
                 "MyProject/Private/BasicFrame/Libs/Engine",
                 "MyProject/Private/BasicFrame/Libs/Engine/HAL",
