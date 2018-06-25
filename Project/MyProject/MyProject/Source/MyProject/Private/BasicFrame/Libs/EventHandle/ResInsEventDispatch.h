@@ -16,7 +16,7 @@ class IDispatchObject;
  * @brief 资源实例化事件分发器
  */
 
-class ResInsEventDispatch : public EventDispatch, public IDispatchObject
+class ResInsEventDispatch : public EventDispatch/*, public IDispatchObject*/
 {
 	M_DECLARE_CLASS(ResInsEventDispatch, EventDispatch)
 

@@ -14,7 +14,7 @@ class SceneEntityBase;
 /**
  * @brief 移动类型
  */
-class SceneEntityAttack : public GObject, public IDispatchObject
+class SceneEntityAttack : public GObject/*, public IDispatchObject*/
 {
 	M_DECLARE_CLASS(SceneEntityAttack, GObject)
 

@@ -8,7 +8,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class MMouseOrTouch : public GObject, public IDispatchObject
+class MMouseOrTouch : public GObject/*, public IDispatchObject*/
 {
 public:
 	FKey mKey;

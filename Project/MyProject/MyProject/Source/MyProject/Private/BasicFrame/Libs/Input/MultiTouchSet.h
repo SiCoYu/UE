@@ -13,7 +13,7 @@ class MMouseOrTouch;
 /**
  * @brief 触碰集合
  */
-class MultiTouchSet : public GObject, public IDispatchObject
+class MultiTouchSet : public GObject/*, public IDispatchObject*/
 {
 protected:
 	MList<MMouseOrTouch*> mTouchList;

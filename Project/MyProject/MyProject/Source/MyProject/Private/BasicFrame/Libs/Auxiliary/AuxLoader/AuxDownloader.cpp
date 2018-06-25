@@ -2,6 +2,7 @@
 #include "AuxDownloader.h"
 #include "DownloadItem.h"
 #include "Prequisites.h"
+#include "EventDispatchDelegate.h"
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -53,7 +54,7 @@ void AuxDownloader::download(
 	}
 	else if (this->hasLoadEnd())
 	{
-		this->onDownloaded((uint)0, this->mDownloadItem);
+		this->onDownloaded(this->mDownloadItem);
 	}
 }
 

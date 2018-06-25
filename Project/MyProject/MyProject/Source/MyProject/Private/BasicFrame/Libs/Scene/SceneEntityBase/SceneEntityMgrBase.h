@@ -18,7 +18,7 @@ class SceneEntityBase;
 class UniqueStrIdGen;
 class UniqueNumIdGen;
 
-class SceneEntityMgrBase : public DelayPriorityHandleMgrBase, public ITickedObject, public INoOrPriorityObject
+class SceneEntityMgrBase : public DelayPriorityHandleMgrBase/*, public ITickedObject*//*, public INoOrPriorityObject*/
 {
 	M_DECLARE_CLASS(SceneEntityMgrBase, DelayPriorityHandleMgrBase)
 

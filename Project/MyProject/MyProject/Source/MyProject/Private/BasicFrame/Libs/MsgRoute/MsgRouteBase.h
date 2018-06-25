@@ -10,7 +10,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class MsgRouteBase : public GObject, public IDispatchObject
+class MsgRouteBase : public GObject/*, public IDispatchObject*/
 {
 	M_DECLARE_CLASS(MsgRouteBase, GObject)
 
