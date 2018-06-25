@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <string>
+
 #include "IDispatchObject.h"
 #include "ITask.h"
 #include "DownloadParam.h"
@@ -7,7 +9,7 @@
 #include "ResPackType.h"
 #include "RefCountResLoadResultNotify.h"
 #include "ResEventDispatch.h"
-#include <string>
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -15,7 +17,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 从网络下载数据
  */
-class DownloadItem : public ITask/*, public IDispatchObject*/
+class DownloadItem : public GObject, public ITask/*, public IDispatchObject*/
 {
 protected:
     char* mBytes;

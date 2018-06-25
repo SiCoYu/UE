@@ -54,7 +54,7 @@ void AuxDownloader::download(
 	}
 	else if (this->hasLoadEnd())
 	{
-		this->onDownloaded(this->mDownloadItem);
+		this->onDownloaded((uint)0, this->mDownloadItem);
 	}
 }
 
