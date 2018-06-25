@@ -2,7 +2,7 @@
 
 #include "GameFramework/OnlineSession.h"	// UOnlineSession
 #include "MyGameInstanceBase.h"
-#include "MyFlyGameInstance.generated.h"
+#include "MyTomGameInstance.generated.h"
 
 /**
  * @brief 
@@ -14,7 +14,7 @@
  */
 
 UCLASS(config=Game)
-class UMyFlyGameInstance : public UMyGameInstanceBase
+class UMyTomGameInstance : public UMyGameInstanceBase
 {
 public:
 	GENERATED_UCLASS_BODY()

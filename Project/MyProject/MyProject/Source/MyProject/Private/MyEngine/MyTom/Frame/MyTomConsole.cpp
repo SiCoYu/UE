@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyFlyConsole.h"
+#include "MyTomConsole.h"
 
-UMyFlyConsole::UMyFlyConsole(const FObjectInitializer& ObjectInitializer)
+UMyTomConsole::UMyTomConsole(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 

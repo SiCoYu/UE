@@ -2,4 +2,4 @@
 
 #include "Logging/LogMacros.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(MyLogFly, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(MyTomLog, Log, All);

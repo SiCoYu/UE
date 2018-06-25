@@ -1,14 +1,14 @@
 #pragma once
 
 #include "MyPlayerStartBase.h"
-#include "MyFlyPlayerStart.generated.h"
+#include "MyTomPlayerStart.generated.h"
 
 UCLASS(config=Game)
-class AMyFlyPlayerStart : public AMyPlayerStartBase
+class AMyTomPlayerStart : public AMyPlayerStartBase
 {
 	GENERATED_BODY()
 
 public:
-	AMyFlyPlayerStart(const FObjectInitializer& ObjectInitializer);
+	AMyTomPlayerStart(const FObjectInitializer& ObjectInitializer);
 	bool GetIsPlayerOnly();
 };

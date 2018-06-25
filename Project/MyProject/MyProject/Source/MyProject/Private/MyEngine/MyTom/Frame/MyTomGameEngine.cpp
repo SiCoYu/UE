@@ -1,11 +1,11 @@
 #include "MyProject.h"
-#include "MyFlyGameEngine.h"
+#include "MyTomGameEngine.h"
 #include "Prequisites.h"
 #include "MyFlyPhysicsCollisionHandler.h"
 #include "MyFlyAvoidanceManager.h"
 #include "MyFlyLocalPlayer.h"
 
-UMyFlyGameEngine::UMyFlyGameEngine(const FObjectInitializer& ObjectInitializer)
+UMyTomGameEngine::UMyTomGameEngine(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// 全局物理碰撞处理
@@ -15,7 +15,7 @@ UMyFlyGameEngine::UMyFlyGameEngine(const FObjectInitializer& ObjectInitializer)
 	this->LocalPlayerClass = UMyFlyLocalPlayer::StaticClass();
 }
 
-void UMyFlyGameEngine::Init(IEngineLoop* InEngineLoop)
+void UMyTomGameEngine::Init(IEngineLoop* InEngineLoop)
 {
 	// Note: Lots of important things happen in Super::Init(), including spawning the player pawn in-game and
 	// creating the renderer.

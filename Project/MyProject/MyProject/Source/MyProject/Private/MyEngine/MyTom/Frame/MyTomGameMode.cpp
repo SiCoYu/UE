@@ -1,9 +1,9 @@
 #include "MyProject.h"
-#include "MyFlyGameMode.h"
+#include "MyTomGameMode.h"
 #include "MyFlyPawn.h"
 #include "MyFlyPlayerController.h"
 
-AMyFlyGameMode::AMyFlyGameMode()
+AMyTomGameMode::AMyTomGameMode()
 {
 	// set default pawn class to our flying pawn
 	this->DefaultPawnClass = AMyFlyPawn::StaticClass();

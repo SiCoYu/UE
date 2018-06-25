@@ -1,13 +1,13 @@
 #include "MyProject.h"
-#include "MyFlyGameUserSettings.h"
+#include "MyTomGameUserSettings.h"
 
-UMyFlyGameUserSettings::UMyFlyGameUserSettings(const FObjectInitializer& ObjectInitializer)
+UMyTomGameUserSettings::UMyTomGameUserSettings(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	
 }
 
-void UMyFlyGameUserSettings::SetToDefaults()
+void UMyTomGameUserSettings::SetToDefaults()
 {
 	Super::SetToDefaults();
 }

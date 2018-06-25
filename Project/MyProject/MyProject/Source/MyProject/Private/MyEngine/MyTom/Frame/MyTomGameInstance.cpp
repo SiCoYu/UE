@@ -1,9 +1,9 @@
 ﻿#include "MyProject.h"
-#include "MyFlyGameInstance.h"
+#include "MyTomGameInstance.h"
 
 #include "MyFlyOnlineSession.h"
 
-UMyFlyGameInstance::UMyFlyGameInstance(const FObjectInitializer& ObjectInitializer)
+UMyTomGameInstance::UMyTomGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// 逻辑指针不要放在构造函数中，因为脚本会调用一次构造函数，这样就会申请多个指针
@@ -15,22 +15,22 @@ UMyFlyGameInstance::UMyFlyGameInstance(const FObjectInitializer& ObjectInitializ
 	//GetDefault<UInputSettings>()->DefaultViewportMouseCaptureMode = EMouseCaptureMode::CaptureDuringMouseDown;
 }
 
-void UMyFlyGameInstance::Init()
+void UMyTomGameInstance::Init()
 {
 	Super::Init();
 }
 
-void UMyFlyGameInstance::Shutdown()
+void UMyTomGameInstance::Shutdown()
 {
 	Super::Shutdown();
 }
 
-void UMyFlyGameInstance::FinishDestroy()
+void UMyTomGameInstance::FinishDestroy()
 {
 	Super::FinishDestroy();
 }
 
-TSubclassOf<UOnlineSession> UMyFlyGameInstance::GetOnlineSessionClass()
+TSubclassOf<UOnlineSession> UMyTomGameInstance::GetOnlineSessionClass()
 {
 	return UMyFlyOnlineSession::StaticClass();
 }
