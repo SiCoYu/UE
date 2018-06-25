@@ -9,7 +9,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class DelayTaskMgr : public GObject, public ITickedObject
+class DelayTaskMgr : public GObject/*, public ITickedObject*/
 {
 protected:
 	int mFrameInterval;	// Ö¡¼ä¸ô

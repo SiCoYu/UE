@@ -19,7 +19,7 @@ class LoadItem;
 class ResItem;
 class LoadParam;
 
-class ResLoadMgr : public MsgRouteHandleBase, public IDispatchObject
+class ResLoadMgr : public MsgRouteHandleBase/*, public IDispatchObject*/
 {
 protected:
 	uint32 mMaxParral;                             // 最多同时加载的内容

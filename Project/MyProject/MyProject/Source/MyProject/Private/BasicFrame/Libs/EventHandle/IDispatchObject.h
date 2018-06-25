@@ -10,8 +10,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class IDispatchObject
 {
-public:
-	IDispatchObject();
+	
 };
 
 MY_END_NAMESPACE

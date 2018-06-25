@@ -11,7 +11,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class RefCountResLoadResultNotify;
 class ResItem;
 
-class ResInsBase : public GObject, public IDispatchObject
+class ResInsBase : public GObject/*, public IDispatchObject*/
 {
 	M_DECLARE_CLASS(ResInsBase, GObject)
 

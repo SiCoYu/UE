@@ -15,7 +15,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 从网络下载数据
  */
-class DownloadItem : public ITask, public IDispatchObject
+class DownloadItem : public ITask/*, public IDispatchObject*/
 {
 protected:
     char* mBytes;

@@ -19,7 +19,7 @@ class RefCountResLoadResultNotify;
 class LoadItem;
 class LoadParam;
 
-class ResItem : public GObject, public IDispatchObject
+class ResItem : public GObject/*, public IDispatchObject*/
 {
 	M_DECLARE_CLASS(ResItem, GObject)
 

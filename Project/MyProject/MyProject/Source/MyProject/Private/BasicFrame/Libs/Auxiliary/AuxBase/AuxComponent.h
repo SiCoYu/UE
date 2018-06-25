@@ -11,7 +11,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class AuxComponent : public GObject, public IDispatchObject
+class AuxComponent : public GObject/*, public IDispatchObject*/
 {
 protected:
 	AActor* mSelfActor;      // 自己节点

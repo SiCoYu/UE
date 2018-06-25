@@ -21,7 +21,7 @@ class AddOnceAndCallOnceEventDispatch;
    FPlatformFileManager 是平台相关的具体文件系统操作
    class SANDBOXFILE_API FSandboxPlatformFile : public IPlatformFile ，FSandboxPlatformFile 沙盒文件系统
  */
-class MDataStream : public GObject, public IDispatchObject
+class MDataStream : public GObject/*, public IDispatchObject*/
 {
 	enum FileOpState
 	{

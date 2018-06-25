@@ -14,7 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 每一帧执行的对象管理器
  */
-class TickObjectPriorityMgr : public DelayPriorityHandleMgr, public ITickedObject, /*public IDelayHandleItem,*/ public INoOrPriorityObject
+class TickObjectPriorityMgr : public DelayPriorityHandleMgr/*, public ITickedObject*//*, public IDelayHandleItem*//*, public INoOrPriorityObject*/
 {
 	M_DECLARE_CLASS(TickObjectPriorityMgr, DelayPriorityHandleMgr)
 

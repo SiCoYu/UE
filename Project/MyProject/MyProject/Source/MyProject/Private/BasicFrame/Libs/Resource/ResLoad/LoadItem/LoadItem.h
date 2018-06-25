@@ -15,7 +15,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class NonRefCountResLoadResultNotify;
 class LoadParam;
 
-class LoadItem : public GObject, public IDispatchObject
+class LoadItem : public GObject/*, public IDispatchObject*/
 {
 	M_DECLARE_CLASS(LoadItem, GObject)
 

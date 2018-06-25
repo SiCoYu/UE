@@ -22,7 +22,7 @@ class ResEventDispatch;
 /**
  * @brief 资源加载器
  */
-class AuxLoaderBase : public GObject, public IDispatchObject
+class AuxLoaderBase : public GObject/*, public IDispatchObject*/
 {
 	M_DECLARE_CLASS(AuxLoaderBase, GObject)
 

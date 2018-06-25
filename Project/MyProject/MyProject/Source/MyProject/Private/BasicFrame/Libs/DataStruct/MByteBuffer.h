@@ -16,7 +16,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 template <class T> class MDynBuffer;
 
-class MByteBuffer : public GObject, public IDispatchObject
+class MByteBuffer : public GObject/*, public IDispatchObject*/
 {
 public:
 	// int mId;        // ≤‚ ‘ π”√

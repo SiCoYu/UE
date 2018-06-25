@@ -18,4 +18,10 @@ GObjectBase::~GObjectBase()
 	
 }
 
+// ITickedObject
+void GObjectBase::onTick(float delta, TickMode tickMode)
+{
+
+}
+
 MY_END_NAMESPACE

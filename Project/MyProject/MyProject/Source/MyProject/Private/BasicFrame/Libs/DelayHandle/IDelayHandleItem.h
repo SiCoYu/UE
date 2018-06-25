@@ -9,9 +9,10 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class IDelayHandleItem
 {
-public:
-	IDelayHandleItem() {};
-	virtual ~IDelayHandleItem() {};
+//public:
+//	IDelayHandleItem() {};
+	// 强制生成虚函数表
+//	virtual ~IDelayHandleItem() {};
 };
 
 MY_END_NAMESPACE
