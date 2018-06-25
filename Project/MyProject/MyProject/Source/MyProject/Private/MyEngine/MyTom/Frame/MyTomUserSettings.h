@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyGameUserSettingsBase.h"
-#include "MyFlyUserSettings.generated.h"
+#include "MyTomUserSettings.generated.h"
 
 /**
  * @brief
@@ -12,7 +12,7 @@
  */
 
 UCLASS()
-class UMyFlyUserSettings : public UMyGameUserSettingsBase
+class UMyTomUserSettings : public UMyGameUserSettingsBase
 {
 	GENERATED_UCLASS_BODY()
 };

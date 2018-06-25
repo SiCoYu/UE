@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyFlyUserSettings.h"
+#include "MyTomUserSettings.h"
 
-UMyFlyUserSettings::UMyFlyUserSettings(const FObjectInitializer& ObjectInitializer)
+UMyTomUserSettings::UMyTomUserSettings(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	

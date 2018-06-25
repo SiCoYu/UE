@@ -1,13 +1,13 @@
 #include "MyProject.h"
-#include "MyFlyPlayerStart.h"
+#include "MyTomPlayerStart.h"
 
-AMyFlyPlayerStart::AMyFlyPlayerStart(const class FObjectInitializer& PCIP)
+AMyTomPlayerStart::AMyTomPlayerStart(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 
 }
 
-bool AMyFlyPlayerStart::GetIsPlayerOnly()
+bool AMyTomPlayerStart::GetIsPlayerOnly()
 {
 	return true;
 }

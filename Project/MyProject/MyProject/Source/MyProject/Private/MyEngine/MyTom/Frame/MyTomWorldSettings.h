@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyWorldSettingsBase.h"	// UWorldSettings
-#include "MyFlyWorldSettings.generated.h"
+#include "MyTomWorldSettings.generated.h"
 
 /**
  * @brief MyWorldSettingsBase
@@ -10,7 +10,7 @@
  */
 
 UCLASS()
-class AMyFlyWorldSettings : public AMyWorldSettingsBase
+class AMyTomWorldSettings : public AMyWorldSettingsBase
 {
 	GENERATED_UCLASS_BODY()
 };

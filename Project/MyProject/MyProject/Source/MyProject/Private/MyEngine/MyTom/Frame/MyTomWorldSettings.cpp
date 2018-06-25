@@ -1,9 +1,9 @@
 #include "MyProject.h"
-#include "MyFlyWorldSettings.h"
+#include "MyTomWorldSettings.h"
 #include "MyFlyGameMode.h"
 #include "GameFramework/GameModeBase.h"
 
-AMyFlyWorldSettings::AMyFlyWorldSettings(const FObjectInitializer& ObjectInitializer)
+AMyTomWorldSettings::AMyTomWorldSettings(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	this->DefaultGameMode = AMyFlyGameMode::StaticClass();
