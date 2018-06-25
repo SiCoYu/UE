@@ -53,6 +53,7 @@ void TickObjectPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 	int index = 0;
 	int count = this->mNoOrPriorityList->count();
 	ITickedObject* tickObject = nullptr;
+	GObject* gObject = nullptr;
 
 	while (index < count)
 	{
@@ -61,9 +62,12 @@ void TickObjectPriorityMgr::_onExecAdvance(float delta, TickMode tickMode)
 		if (nullptr != (IDelayHandleItem*)tickObject)
 		{
 			//if (!((IDelayHandleItem*)tickObject)->isClientDispose())
-			if (!((GObject*)tickObject)->isClientDispose())
+
+			gObject = (GObject*)tickObject;
+
+			if (!gObject->isClientDispose())
 			{
-				((GObject*)tickObject)->onTick(delta, tickMode);
+				gObject->onTick(delta, tickMode);
 			}
 		}
 		else
