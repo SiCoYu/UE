@@ -6,5 +6,5 @@
 AMyTomWorldSettings::AMyTomWorldSettings(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	this->DefaultGameMode = AMyFlyGameMode::StaticClass();
+	this->DefaultGameMode = AMyTomGameMode::StaticClass();
 }

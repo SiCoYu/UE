@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyFlyPlayerCameraManager.h"
+#include "MyTomPlayerCameraManager.h"
 
-AMyFlyPlayerCameraManager::AMyFlyPlayerCameraManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+AMyTomPlayerCameraManager::AMyTomPlayerCameraManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	NormalFOV = 90.0f;
 	TargetingFOV = 60.0f;
@@ -10,7 +10,7 @@ AMyFlyPlayerCameraManager::AMyFlyPlayerCameraManager(const FObjectInitializer& O
 	bAlwaysApplyModifiers = true;
 }
 
-void AMyFlyPlayerCameraManager::UpdateCamera(float DeltaTime)
+void AMyTomPlayerCameraManager::UpdateCamera(float DeltaTime)
 {
 	Super::UpdateCamera(DeltaTime);
 }

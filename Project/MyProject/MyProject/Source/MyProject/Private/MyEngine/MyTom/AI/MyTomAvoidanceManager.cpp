@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyFlyAvoidanceManager.h"
+#include "MyTomAvoidanceManager.h"
 
-UMyFlyAvoidanceManager::UMyFlyAvoidanceManager(const class FObjectInitializer& PCIP)
+UMyTomAvoidanceManager::UMyTomAvoidanceManager(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 

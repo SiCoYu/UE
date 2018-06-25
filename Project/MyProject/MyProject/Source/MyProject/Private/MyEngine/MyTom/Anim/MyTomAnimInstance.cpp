@@ -1,18 +1,18 @@
 #include "MyProject.h"
-#include "MyFlyAnimInstance.h"
+#include "MyTomAnimInstance.h"
 
-UMyFlyAnimInstance::UMyFlyAnimInstance(const FObjectInitializer& ObjectInitializer)
+UMyTomAnimInstance::UMyTomAnimInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	
 }
 
-//void UMyAnimInstance::testA()
+//void UMyTomAnimInstance::testA()
 //{
 //
 //}
 //
-//void UMyAnimInstance::NativeInitializeAnimation()
+//void UMyTomAnimInstance::NativeInitializeAnimation()
 //{
 //	//Very Important Line
 //	Super::NativeInitializeAnimation();
@@ -22,7 +22,7 @@ UMyFlyAnimInstance::UMyFlyAnimInstance(const FObjectInitializer& ObjectInitializ
 //}
 //
 ////Tick
-//void UMyAnimInstance::NativeUpdateAnimation(float DeltaTimeX)
+//void UMyTomAnimInstance::NativeUpdateAnimation(float DeltaTimeX)
 //{
 //	//Very Important Line
 //	Super::NativeUpdateAnimation(DeltaTimeX);

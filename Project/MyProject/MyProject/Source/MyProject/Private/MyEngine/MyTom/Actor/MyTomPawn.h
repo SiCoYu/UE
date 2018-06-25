@@ -1,10 +1,10 @@
 #pragma once
 
 #include "MyPawnBase.h"
-#include "MyFlyPawn.generated.h"
+#include "MyTomPawn.generated.h"
 
 UCLASS(config=Game)
-class AMyFlyPawn : public AMyPawnBase
+class AMyTomPawn : public AMyPawnBase
 {
 	GENERATED_BODY()
 
@@ -22,7 +22,7 @@ protected:
 	class UCameraComponent* Camera;
 
 public:
-	AMyFlyPawn();
+	AMyTomPawn();
 
 	// Begin AActor overrides
 	virtual void Tick(float DeltaSeconds) override;

@@ -32,5 +32,5 @@ void UMyTomGameInstance::FinishDestroy()
 
 TSubclassOf<UOnlineSession> UMyTomGameInstance::GetOnlineSessionClass()
 {
-	return UMyFlyOnlineSession::StaticClass();
+	return UMyTomOnlineSession::StaticClass();
 }

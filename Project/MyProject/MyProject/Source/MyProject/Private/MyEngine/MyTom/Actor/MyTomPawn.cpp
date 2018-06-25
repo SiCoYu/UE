@@ -1,7 +1,7 @@
 #include "MyProject.h"
-#include "MyFlyPawn.h"
+#include "MyTomPawn.h"
 
-AMyFlyPawn::AMyFlyPawn()
+AMyTomPawn::AMyTomPawn()
 {
 	// Structure to hold one-time initialization
 	struct FConstructorStatics
@@ -40,7 +40,7 @@ AMyFlyPawn::AMyFlyPawn()
 	this->CurrentForwardSpeed = 500.f;
 }
 
-void AMyFlyPawn::Tick(float DeltaSeconds)
+void AMyTomPawn::Tick(float DeltaSeconds)
 {
 	const FVector LocalMove = FVector(CurrentForwardSpeed * DeltaSeconds, 0.f, 0.f);
 
@@ -60,7 +60,7 @@ void AMyFlyPawn::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 }
 
-void AMyFlyPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
+void AMyTomPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 
@@ -71,7 +71,7 @@ void AMyFlyPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Othe
 	this->SetActorRotation(FQuat::Slerp(CurrentRotation.Quaternion(), HitNormal.ToOrientationQuat(), 0.025f));
 }
 
-void AMyFlyPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+void AMyTomPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	check(PlayerInputComponent);
 
@@ -81,7 +81,7 @@ void AMyFlyPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyFlyPawn::MoveRightInput);
 }
 
-void AMyFlyPawn::ThrustInput(float Val)
+void AMyTomPawn::ThrustInput(float Val)
 {
 	// Is there no input?
 	bool bHasInput = !FMath::IsNearlyEqual(Val, 0.f);
@@ -93,7 +93,7 @@ void AMyFlyPawn::ThrustInput(float Val)
 	this->CurrentForwardSpeed = FMath::Clamp(NewForwardSpeed, MinSpeed, MaxSpeed);
 }
 
-void AMyFlyPawn::MoveUpInput(float Val)
+void AMyTomPawn::MoveUpInput(float Val)
 {
 	// Target pitch speed is based in input
 	float TargetPitchSpeed = (Val * TurnSpeed * -1.f);
@@ -105,7 +105,7 @@ void AMyFlyPawn::MoveUpInput(float Val)
 	this->CurrentPitchSpeed = FMath::FInterpTo(this->CurrentPitchSpeed, TargetPitchSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
 }
 
-void AMyFlyPawn::MoveRightInput(float Val)
+void AMyTomPawn::MoveRightInput(float Val)
 {
 	// Target yaw speed is based on input
 	float TargetYawSpeed = (Val * TurnSpeed);

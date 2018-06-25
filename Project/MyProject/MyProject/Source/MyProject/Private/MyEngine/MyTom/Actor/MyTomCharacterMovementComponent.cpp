@@ -1,17 +1,17 @@
 #include "MyProject.h"
-#include "MyFlyCharacterMovementComponent.h"
+#include "MyTomCharacterMovementComponent.h"
 
 //----------------------------------------------------------------------//
 // UPawnMovementComponent
 //----------------------------------------------------------------------//
-UMyFlyCharacterMovementComponent::UMyFlyCharacterMovementComponent(const FObjectInitializer& ObjectInitializer)
+UMyTomCharacterMovementComponent::UMyTomCharacterMovementComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// https://answers.unrealengine.com/questions/160397/hot-reload-how-to-use.html
 	this->bOrientRotationToMovement = true;
 }
 
-//float UMyFlyCharacterMovementComponent::GetMaxSpeed() const
+//float UMyTomCharacterMovementComponent::GetMaxSpeed() const
 //{
 //	float MaxSpeed = Super::GetMaxSpeed();
 //

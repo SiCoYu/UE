@@ -1,10 +1,10 @@
 #pragma once
 
 #include "MyCharacterMovementComponentBase.h"
-#include "MyFlyCharacterMovementComponent.generated.h"
+#include "MyTomCharacterMovementComponent.generated.h"
 
 UCLASS()
-class UMyFlyCharacterMovementComponent : public UMyCharacterMovementComponentBase
+class UMyTomCharacterMovementComponent : public UMyCharacterMovementComponentBase
 {
 	GENERATED_UCLASS_BODY()
 

@@ -1,8 +1,8 @@
 #include "MyProject.h"
-#include "MyFlyLocalPlayer.h"
+#include "MyTomLocalPlayer.h"
 //#include "MyGameInstanceBase.h"
 
-UMyFlyLocalPlayer::UMyFlyLocalPlayer(const FObjectInitializer& ObjectInitializer)
+UMyTomLocalPlayer::UMyTomLocalPlayer(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }
@@ -12,7 +12,7 @@ UMyFlyLocalPlayer::UMyFlyLocalPlayer(const FObjectInitializer& ObjectInitializer
 //	Super::SetControllerId(NewControllerId);
 //}
 //
-//UMyPersistentUser* UMyLocalPlayer::GetPersistentUser() const
+//UMyPersistentUser* UMyTomLocalPlayer::GetPersistentUser() const
 //{
 //	// if persistent data isn't loaded yet, load it
 //	if (PersistentUser == nullptr)
@@ -24,12 +24,12 @@ UMyFlyLocalPlayer::UMyFlyLocalPlayer(const FObjectInitializer& ObjectInitializer
 //	return PersistentUser;
 //}
 //
-//void UMyLocalPlayer::LoadPersistentUser()
+//void UMyTomLocalPlayer::LoadPersistentUser()
 //{
 //	FString SaveGameName = GetNickname();
 //}
 //
-//FString UMyLocalPlayer::GetNickname() const
+//FString UMyTomLocalPlayer::GetNickname() const
 //{
 //	FString UserNickName = Super::GetNickname();
 //

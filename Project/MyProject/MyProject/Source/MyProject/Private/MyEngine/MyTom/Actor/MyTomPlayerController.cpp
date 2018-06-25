@@ -1,15 +1,15 @@
 #include "MyProject.h"
-#include "MyFlyPlayerController.h"
+#include "MyTomPlayerController.h"
 #include "UtilEngineWrap.h"
 #include "MyFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"	// DOREPLIFETIME
 #include "MyFlowerActor.h"	// AMyFlowerActor
 #include "Blueprint/UserWidget.h"	// UUserWidget
-#include "MyFlyPlayerCameraManager.h"
+#include "MyTomPlayerCameraManager.h"
 #include "Prequisites.h"
 #include "UiTestCanvas.h"	// UUiTestCanvas
 
-AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectInitializer)
+AMyTomPlayerController::AMyTomPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	/* Initialize The Values */
@@ -19,10 +19,10 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 	/* Make sure the PawnClass is Replicated */
 	this->bReplicates = true;
 
-	this->PlayerCameraManagerClass = AMyFlyPlayerCameraManager::StaticClass();
+	this->PlayerCameraManagerClass = AMyTomPlayerCameraManager::StaticClass();
 }
 
-//void AMyPlayerController::BeginPlay()
+//void AMyTomPlayerController::BeginPlay()
 //{
 //	Super::BeginPlay();
 //
@@ -42,7 +42,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	//GCtx->beginPlay();
 //}
 //
-//void AMyPlayerController::ReceivedPlayer()
+//void AMyTomPlayerController::ReceivedPlayer()
 //{
 //	Super::ReceivedPlayer();
 //
@@ -50,20 +50,20 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	//GCtx->beginPlay();
 //}
 //
-//void AMyPlayerController::TestUi()
+//void AMyTomPlayerController::TestUi()
 //{
 //	// Test 加载 UIPack
 //	//GUiMgr->loadForm<UUiPack>(eUiPack);
 //	GUiMgr->loadForm<UUiTestCanvas>(eUiTestCanvas);
 //}
 //
-//void AMyPlayerController::BeginPlay_PawnClass()
+//void AMyTomPlayerController::BeginPlay_PawnClass()
 //{
 //	DeterminePawnClass();
 //}
 //
 //// Pawn Class
-//void AMyPlayerController::DeterminePawnClass_Implementation()
+//void AMyTomPlayerController::DeterminePawnClass_Implementation()
 //{
 //	if (IsLocalController()) //Only Do This Locally (NOT Client-Only, since Server wants this too!)
 //	{
@@ -86,7 +86,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	}
 //}
 //
-//bool AMyPlayerController::ServerSetPawn_Validate(TSubclassOf<APawn> InPawnClass)
+//bool AMyTomPlayerController::ServerSetPawn_Validate(TSubclassOf<APawn> InPawnClass)
 //{
 //	return true;
 //}
@@ -100,12 +100,12 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //}
 //
 //// Replication
-//void AMyPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+//void AMyTomPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 //{
 //	DOREPLIFETIME(AMyPlayerController, MyPawnClass);
 //}
 //
-//bool AMyPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
+//bool AMyTomPlayerController::IsActorWithinTheBoundsOfStreamedInLeve()
 //{
 //	bool ret = false;
 //	//Get the Currently Streamed Levels
@@ -140,12 +140,12 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	return ret;
 //}
 //
-//void AMyPlayerController::TauntTimer()
+//void AMyTomPlayerController::TauntTimer()
 //{
 //
 //}
 //
-//void AMyPlayerController::ServerTaunt_Implementation()
+//void AMyTomPlayerController::ServerTaunt_Implementation()
 //{
 //	// Only allow Taunt its been awhile since we last tried to commit Taunt.
 //	// TIMEXXX macros from https://wiki.unrealengine.com/Time_Macros
@@ -161,7 +161,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	}
 //}
 //
-//void AMyPlayerController::ExampleUsageOne()
+//void AMyTomPlayerController::ExampleUsageOne()
 //{
 //	//In player controller class
 //
@@ -188,7 +188,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	}
 //}
 //
-//void AMyPlayerController::ExampleUsageTwo()
+//void AMyTomPlayerController::ExampleUsageTwo()
 //{
 //	//In player controller class
 //
@@ -211,7 +211,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	}
 //}
 //
-//void AMyPlayerController::ExampleUsageThree()
+//void AMyTomPlayerController::ExampleUsageThree()
 //{
 //	//The trace data is stored here
 //	FHitResult HitData(ForceInit);
@@ -248,7 +248,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	}
 //}
 //
-//void AMyPlayerController::ExampleUsageFour()
+//void AMyTomPlayerController::ExampleUsageFour()
 //{
 //	//In player controller class
 //
@@ -279,7 +279,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //	}
 //}
 //
-//void AMyPlayerController::BeginPlay_UMGWidgets()
+//void AMyTomPlayerController::BeginPlay_UMGWidgets()
 //{
 //	// https://wiki.unrealengine.com/UMG,_Referencing_UMG_Widgets_in_Code
 //	if (wMainMenu) // Check if the Asset is assigned in the blueprint.
@@ -306,7 +306,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //
 ////timer to check when threads are done
 ////Please note timers must be in the game thread / main / normal thread
-//void AMyPlayerController::VictoryCheckAllThreadsDone()
+//void AMyTomPlayerController::VictoryCheckAllThreadsDone()
 //{
 //	if (VictoryMultiThreadTest::TasksAreComplete())
 //	{
@@ -326,7 +326,7 @@ AMyFlyPlayerController::AMyFlyPlayerController(const FObjectInitializer& ObjectI
 //}
 //
 ////Starting the Tasks / Threads
-//void AMyPlayerController::StartThreadTest()
+//void AMyTomPlayerController::StartThreadTest()
 //{
 //	VictoryMultiThreadTest::ThePC = this;
 //	VictoryMultiThreadTest::FindPrimes(50000); //first 50,000 prime numbers

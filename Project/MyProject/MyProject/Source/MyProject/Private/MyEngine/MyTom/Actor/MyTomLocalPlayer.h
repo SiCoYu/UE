@@ -3,11 +3,11 @@
 #pragma once
 
 #include "MyLocalPlayerBase.h"
-#include "MyFlyLocalPlayer.generated.h"
+#include "MyTomLocalPlayer.generated.h"
 
 //UCLASS(config=Engine, transient)
 UCLASS()
-class UMyFlyLocalPlayer : public UMyLocalPlayerBase
+class UMyTomLocalPlayer : public UMyLocalPlayerBase
 {
 	GENERATED_UCLASS_BODY()
 

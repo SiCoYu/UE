@@ -5,7 +5,7 @@
 #include "MyPawn.h"
 #include "Engine/EngineTypes.h"	// FTimerHandle
 #include "MyPlayerControllerBase.h"
-#include "MyFlyPlayerController.generated.h"
+#include "MyTomPlayerController.generated.h"
 
 /**
  * @brief APlayerController BeginPlayer 就说明可以运行了
@@ -16,7 +16,7 @@ class UUserWidget;
 
 //UCLASS(Within=Engine, transient, config=Engine)
 UCLASS(config = Game)
-class AMyFlyPlayerController : public AMyPlayerControllerBase
+class AMyTomPlayerController : public AMyPlayerControllerBase
 {
 	GENERATED_UCLASS_BODY()
 

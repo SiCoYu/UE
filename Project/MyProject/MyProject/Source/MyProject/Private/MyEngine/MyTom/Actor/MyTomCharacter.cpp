@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "MyFlyCharacter.h"
+#include "MyTomCharacter.h"
 #include "Prequisites.h"
 #include "UiFormId.h"
 #include "UiTestCanvas.h"
@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////
 // AMyCharacter
 
-AMyFlyCharacter::AMyFlyCharacter(const FObjectInitializer& ObjectInitializer)
+AMyTomCharacter::AMyTomCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	//// Set size for collision capsule
@@ -170,7 +170,7 @@ AMyFlyCharacter::AMyFlyCharacter(const FObjectInitializer& ObjectInitializer)
 //	return true;
 //}
 
-const UMyAnimInstanceBase* const AMyFlyCharacter::GetAnimInstance()
+const UMyAnimInstanceBase* const AMyTomCharacter::GetAnimInstance()
 {
 	UMyFlyAnimInstance* AnimInstance = nullptr;
 

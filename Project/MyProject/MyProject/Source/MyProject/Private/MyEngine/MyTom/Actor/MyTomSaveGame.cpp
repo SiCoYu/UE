@@ -1,8 +1,8 @@
 #include "MyProject.h"
-#include "MyFlySaveGame.h"
+#include "MyTomSaveGame.h"
 //#include "MyLocalPlayerBase.h"
 
-UMyFlySaveGame::UMyFlySaveGame(const FObjectInitializer& ObjectInitializer)
+UMyTomSaveGame::UMyTomSaveGame(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	
