@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyCharacterBase.h"
-#include "MyFlyCharacter.generated.h"
+#include "MyTomCharacter.generated.h"
 
 /**
  AMyCharacter 这个必须保存，基本所有全局对象都是根据 AMyCharacter 从 UGameplayStatics 中获取的
@@ -12,7 +12,7 @@ class UMyFlyAnimInstance;
 
 //UCLASS(config=Game, Abstract)
 UCLASS(config=Game)
-class AMyFlyCharacter : public AMyCharacterBase
+class AMyTomCharacter : public AMyCharacterBase
 {
 	GENERATED_BODY()
 
