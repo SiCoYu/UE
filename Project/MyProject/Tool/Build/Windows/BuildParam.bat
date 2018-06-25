@@ -66,9 +66,9 @@ set CLEAN_APP_FULL_PATH=%UE4_BATCH_FILES_FULL_PATH%"\Clean.bat"
 echo "CLEAN_APP_FULL_PATH="%CLEAN_APP_FULL_PATH%
 
 :: My App start
-::set MYPROJECT_ROOT_FULL_PATH=%BASE_DIR%"..\..\..\..\MyProject"
+set MYPROJECT_ROOT_FULL_PATH=%BASE_DIR%"..\..\..\..\MyProject"
 ::set MYPROJECT_ROOT_FULL_PATH="F:\File\opensource\UnrealEngine-4.0\UE-git\UE-BP\Client"
-set MYPROJECT_ROOT_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client"
+::set MYPROJECT_ROOT_FULL_PATH="H:\Self\Self\unreal\UE-GIT\UE-BP\Client"
 echo "MYPROJECT_ROOT_FULL_PATH="%MYPROJECT_ROOT_FULL_PATH%
 
 ::set MYPROJECT_CONFIG_FULL_PATH=%MYPROJECT_ROOT_FULL_PATH%"\MyProject.uproject"
@@ -95,3 +95,21 @@ echo "BIN_APP_PLATFORM="%BIN_APP_PLATFORM%
 
 set BIN_APP_START_MAP=%MYPROJECT_ROOT_FULL_PATH%\"Content\Maps\Example_Map.umap"
 echo "BIN_APP_START_MAP="%BIN_APP_START_MAP%
+
+set THIRDPARTY_ROOT=%MYPROJECT_ROOT_FULL_PATH%\"ThirdParty"
+echo "THIRDPARTY_ROOT="%THIRDPARTY_ROOT%
+
+set THIRDPARTY_SRC=%THIRDPARTY_ROOT%\"Src"
+echo "THIRDPARTY_SRC="%THIRDPARTY_SRC%
+
+set CMAKE_ROOT="G:\ProgramFiles\cmake-3.7.2-win64-x64\bin"
+echo "CMAKE_ROOT="%CMAKE_ROOT%
+
+set CMAKE_BIN=%CMAKE_ROOT%\"cmake.exe"
+echo "CMAKE_BIN="%CMAKE_BIN%
+
+set NDK_ROOT="G:\ProgramFiles\android\android-ndk-r17b"
+echo "NDK_ROOT="%NDK_ROOT%
+
+set NDK_TOOLCHAIN_FILE=%NDK_ROOT%\build\cmake\android.toolchain.cmake
+echo "NDK_TOOLCHAIN_FILE="%NDK_TOOLCHAIN_FILE%
