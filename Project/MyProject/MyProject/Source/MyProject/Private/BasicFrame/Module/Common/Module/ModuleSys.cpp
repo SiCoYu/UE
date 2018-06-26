@@ -58,7 +58,9 @@ void ModuleSys::loadModule(ModuleId moduleId)
 void ModuleSys::unloadModule(ModuleId moduleId)
 {
 	this->mType2ItemDic[moduleId].mIsLoaded = false;
-	MY_SAFE_DISPOSE(this->mType2ItemDic[moduleId].mModule);
+	GObject* objModule = (GObject*)(this->mType2ItemDic[moduleId].mModule);
+	MY_SAFE_DISPOSE(objModule);
+	this->mType2ItemDic[moduleId].mModule = nullptr;
 }
 
 MY_END_NAMESPACE
