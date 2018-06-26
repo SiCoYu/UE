@@ -1,5 +1,5 @@
 #include "MyProject.h"
-#include "MyFlyLog.h"
+#include "MyTomLog.h"
 
 DEFINE_LOG_CATEGORY(MyTomLog)
 

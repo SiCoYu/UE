@@ -9,5 +9,5 @@ class AMyTomGameMode : public AMyGameModeBase
 	GENERATED_BODY()
 
 public:
-	AMyFlyGameMode();
+	AMyTomGameMode();
 };
