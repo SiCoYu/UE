@@ -45,7 +45,7 @@
 #include "MyBluePrintBase.h"
 // #include "MyMemoryTracker.h"
 #include "MyNativeObjectReferencer.h"
-#include "AddOnceEventDispatch.h"
+#include "PromiseEventDispatch.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

@@ -6,7 +6,7 @@
 #include "ModuleSys.h"
 #include "DataDelegate.h"
 #include "DataEventCmd.h"
-#include "AddOnceEventDispatch.h"
+#include "PromiseEventDispatch.h"
 #include "EventDispatchDelegate.h"
 #include "TypeDef.h"
 #include "MClassFactory.h"
