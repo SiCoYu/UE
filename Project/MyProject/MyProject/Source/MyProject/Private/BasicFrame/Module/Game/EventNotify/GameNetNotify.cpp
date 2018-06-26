@@ -11,6 +11,8 @@
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "MClassFactory.h"
+#include "Ctx.h"
+#include "NetCmdNotify.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -39,6 +41,8 @@ void GameNetNotify::init()
 			(uint)0
 		)
 	);
+
+	GNetCmdNotify->addOneNofity(this);
 }
 
 void GameNetNotify::dispose()
@@ -61,6 +65,8 @@ void GameNetNotify::dispose()
     }
 
     Super::dispose();
+
+	GNetCmdNotify->removeOneNofity(this);
 }
 
 MY_END_NAMESPACE

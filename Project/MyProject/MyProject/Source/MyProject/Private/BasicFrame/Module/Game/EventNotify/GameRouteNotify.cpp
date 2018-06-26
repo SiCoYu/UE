@@ -12,6 +12,8 @@
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
 #include "MyMemoryAlloc.h"
+#include "Ctx.h"
+#include "MsgRouteNotify.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -26,6 +28,8 @@ void GameRouteNotify::init()
 {
     this->mGameRouteHandle = MY_NEW GameRouteHandle();
     this->mGameRouteHandle->init();
+
+	GMsgRouteNotify->addOneNotify(this);
 }
 
 void GameRouteNotify::dispose()
@@ -47,6 +51,8 @@ void GameRouteNotify::dispose()
         this->mGameRouteHandle->dispose();
         this->mGameRouteHandle = nullptr;
     }
+
+	GMsgRouteNotify->removeOneNotify(this);
 }
 
 MY_END_NAMESPACE

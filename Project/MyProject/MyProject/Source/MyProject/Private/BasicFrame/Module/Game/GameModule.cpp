@@ -9,8 +9,6 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
-#include "NetCmdNotify.h"
-#include "MsgRouteNotify.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -45,11 +43,9 @@ void GameModule::initGVar()
 
 	this->mGameNetNotify = MY_NEW GameNetNotify();
 	this->mGameNetNotify->init();
-	GNetCmdNotify->addOneNofity(this->mGameNetNotify);
 
 	this->mGameRouteNotify = MY_NEW GameRouteNotify();
 	this->mGameRouteNotify->init();
-	GMsgRouteNotify->addOneNotify(this->mGameRouteNotify);
 
 	this->mGameSceneEventNotify = MY_NEW GameSceneEventNotify();
 	this->mGameSceneInputNotify = MY_NEW GameSceneInputNotify();

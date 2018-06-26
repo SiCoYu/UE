@@ -26,7 +26,7 @@ void ModuleSys::init()
 
 void ModuleSys::dispose()
 {
-
+	this->unloadModule(ModuleId::GAMEMN);
 }
 
 void ModuleSys::_registerHandler()
