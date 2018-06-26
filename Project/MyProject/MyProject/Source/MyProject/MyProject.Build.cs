@@ -85,6 +85,12 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyTP/AI",
                 "MyProject/Private/MyEngine/MyTP/Anim",
 
+                "MyProject/Private/MyEngine/MyTom",
+                "MyProject/Private/MyEngine/MyTom/Actor",
+                "MyProject/Private/MyEngine/MyTom/Frame",
+                "MyProject/Private/MyEngine/MyTom/AI",
+                "MyProject/Private/MyEngine/MyTom/Anim",
+
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",
                 "MyProject/Private/BasicFrame/Libs/Common/ObjectAsset",
