@@ -66,7 +66,7 @@ void GameNetNotify::dispose()
 
     Super::dispose();
 
-	GNetCmdNotify->removeOneNofity(this);
+	GNetCmdNotify->removeOneNotify(this);
 }
 
 MY_END_NAMESPACE

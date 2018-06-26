@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "GObject.h"
 #include "ISceneInputNotify.h"
 #include "TypeDef.h"
 #include "PlatformDefine.h"
@@ -12,7 +13,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class IDispatchObject;
 
-class GameSceneInputNotify : public ISceneInputNotify
+class GameSceneInputNotify : public GObject, public ISceneInputNotify
 {
 public:
 	GameSceneInputNotify();
