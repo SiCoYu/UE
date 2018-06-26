@@ -1,7 +1,7 @@
 ﻿#include "MyProject.h"
 #include "MyTomGameInstance.h"
 
-#include "MyFlyOnlineSession.h"
+#include "MyTomOnlineSession.h"
 
 UMyTomGameInstance::UMyTomGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

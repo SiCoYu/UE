@@ -1,6 +1,6 @@
 #include "MyProject.h"
 #include "MyTomWorldSettings.h"
-#include "MyFlyGameMode.h"
+#include "MyTomGameMode.h"
 #include "GameFramework/GameModeBase.h"
 
 AMyTomWorldSettings::AMyTomWorldSettings(const FObjectInitializer& ObjectInitializer)
