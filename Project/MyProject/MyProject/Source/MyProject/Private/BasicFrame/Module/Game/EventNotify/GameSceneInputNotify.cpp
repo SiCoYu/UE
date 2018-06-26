@@ -28,7 +28,15 @@ void GameSceneInputNotify::init()
 
 void GameSceneInputNotify::dispose()
 {
-
+	GInputMgr->removeKeyListener(
+		InputKey::A,
+		InputEventId::KEYUP_EVENT,
+		MakeEventDispatchDelegate(
+			this,
+			&GameSceneInputNotify::onKeyUp,
+			(uint)0
+		)
+	);
 }
 
 void GameSceneInputNotify::onKeyDown(uint eventId, IDispatchObject* dispObj)

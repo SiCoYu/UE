@@ -48,7 +48,10 @@ void GameModule::initGVar()
 	this->mGameRouteNotify->init();
 
 	this->mGameSceneEventNotify = MY_NEW GameSceneEventNotify();
+	this->mGameSceneEventNotify->init();
+
 	this->mGameSceneInputNotify = MY_NEW GameSceneInputNotify();
+	this->mGameSceneInputNotify->init();
 
 	//this->mGotoScene.init();
 	//this->mGotoScene.addSceneHandle();
