@@ -9,6 +9,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class IDispatchObject;
+
 /**
  * @brief 记录状态的事件分发，永远不会漏掉事件
  */
@@ -25,9 +27,11 @@ public:
 
 	void setEventState(int value);
 	void clearEventState();
+
 	virtual void addEventHandle(
 		EventDispatchDelegate handle
 	) override;
+	virtual void dispatchEvent(IDispatchObject* dispatchObject) override;
 };
 	
 MY_END_NAMESPACE

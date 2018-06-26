@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class AddOnceEventDispatch;
+class PromiseEventDispatch;
 
 /**
 * @brief 全局性的事件
@@ -13,7 +13,7 @@ class AddOnceEventDispatch;
 class GlobalDelegate : public GObject
 {
 public:
-	AddOnceEventDispatch* mCoreInitedEventDispatch;	// Core 初始化完成
+	PromiseEventDispatch* mCoreInitedEventDispatch;	// Core 初始化完成
 
 public:
 	GlobalDelegate();

@@ -17,14 +17,22 @@ void PromiseEventDispatch::setEventState(int value)
 {
 	this->mIsValid = true;
 	this->mEventState = value;
-
-	Super::dispatchEvent(nullptr);
 }
 
 void PromiseEventDispatch::clearEventState()
 {
 	this->mIsValid = false;
 	this->mEventState = -1;
+}
+
+void PromiseEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
+{
+	if (!this->mIsValid)
+	{
+		this->setEventState(0);
+	}
+
+	Super::dispatchEvent(nullptr);
 }
 
 void PromiseEventDispatch::addEventHandle(
