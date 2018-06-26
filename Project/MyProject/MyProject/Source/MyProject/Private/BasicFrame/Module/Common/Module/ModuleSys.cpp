@@ -35,6 +35,7 @@ void ModuleSys::_registerHandler()
 
 	item.mModuleId = ModuleId::GAMEMN;
 	this->mType2ItemDic[item.mModuleId] = item;
+	this->mType2ItemDic[item.mModuleId].mModule = nullptr;
 }
 
 void ModuleSys::loadModule(ModuleId moduleId)
