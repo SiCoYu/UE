@@ -95,7 +95,8 @@ bool InputMgr::getKeyDown(FKey keyCode)
 
 	if (nullptr != keyState)
 	{
-		ret = keyState->bDown;
+		//ret = keyState->bDown;
+		ret = keyState->RawValueAccumulator.X > 0;
 	}
 
 	return ret;
@@ -110,7 +111,8 @@ bool InputMgr::getKeyUp(FKey keyCode)
 
 	if (nullptr != keyState)
 	{
-		ret = !keyState->bDown;
+		//ret = !keyState->bDown;
+		ret = keyState->RawValueAccumulator.X == 0;
 	}
 
 	return ret;
