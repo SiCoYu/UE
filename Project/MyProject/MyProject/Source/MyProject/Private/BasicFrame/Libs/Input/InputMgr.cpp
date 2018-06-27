@@ -88,34 +88,74 @@ void InputMgr::setPlayerInput(UPlayerInput* value)
 
 bool InputMgr::getKeyDown(FKey keyCode)
 {
-	return this->mPlayerInput->GetKeyState(keyCode)->bDown;
+	bool ret = false;
+	FKeyState* keyState = nullptr;
+
+	keyState = this->mPlayerInput->GetKeyState(keyCode);
+
+	if (nullptr != keyState)
+	{
+		ret = keyState->bDown;
+	}
+
+	return ret;
 }
 
 bool InputMgr::getKeyUp(FKey keyCode)
 {
-	return !this->mPlayerInput->GetKeyState(keyCode)->bDown;
+	bool ret = false;
+	FKeyState* keyState = nullptr;
+
+	keyState = this->mPlayerInput->GetKeyState(keyCode);
+
+	if (nullptr != keyState)
+	{
+		ret = !keyState->bDown;
+	}
+
+	return ret;
 }
 
 bool InputMgr::getKey(FKey keyCode)
 {
-	return !this->mPlayerInput->IsPressed(keyCode);
+	bool ret = false;
+
+	ret = this->mPlayerInput->IsPressed(keyCode);
+
+	return ret;
 }
 
 bool InputMgr::GetMouseButtonDown(int mouseIndex)
 {
 	bool ret = false;
+	FKeyState* keyState = nullptr;
 
 	if ((int)MMouseDeviceType::eMouseLeftButton == mouseIndex)
 	{
-		ret = this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton)->bDown;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = keyState->bDown;
+		}
 	}
 	else if ((int)MMouseDeviceType::eMouseRightButton == mouseIndex)
 	{
-		ret = this->mPlayerInput->GetKeyState(EKeys::RightMouseButton)->bDown;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::RightMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = keyState->bDown;
+		}
 	}
 	else if ((int)MMouseDeviceType::eMouseMiddleButton == mouseIndex)
 	{
-		ret = this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton)->bDown;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = keyState->bDown;
+		}
 	}
 
 	return ret;
@@ -124,18 +164,34 @@ bool InputMgr::GetMouseButtonDown(int mouseIndex)
 bool InputMgr::GetMouseButtonUp(int mouseIndex)
 {
 	bool ret = false;
+	FKeyState* keyState = nullptr;
 
 	if ((int)MMouseDeviceType::eMouseLeftButton == mouseIndex)
 	{
-		ret = !this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton)->bDown;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = !keyState->bDown;
+		}
 	}
 	else if ((int)MMouseDeviceType::eMouseRightButton == mouseIndex)
 	{
-		ret = !this->mPlayerInput->GetKeyState(EKeys::RightMouseButton)->bDown;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::RightMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = !keyState->bDown;
+		}
 	}
 	else if ((int)MMouseDeviceType::eMouseMiddleButton == mouseIndex)
 	{
-		ret = !this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton)->bDown;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = keyState->bDown;
+		}
 	}
 
 	return ret;
@@ -164,18 +220,34 @@ bool InputMgr::GetMouseButton(int mouseIndex)
 FVector InputMgr::GetMousePosition(int mouseIndex)
 {
 	FVector ret = UtilMath::ZeroVec3;
+	FKeyState* keyState = nullptr;
 
 	if ((int)MMouseDeviceType::eMouseLeftButton == mouseIndex)
 	{
-		ret = this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton)->Value;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::LeftMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = keyState->Value;
+		}
 	}
 	else if ((int)MMouseDeviceType::eMouseRightButton == mouseIndex)
 	{
-		ret = this->mPlayerInput->GetKeyState(EKeys::RightMouseButton)->Value;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::RightMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = keyState->Value;
+		}
 	}
 	else if ((int)MMouseDeviceType::eMouseMiddleButton == mouseIndex)
 	{
-		ret = this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton)->Value;
+		keyState = this->mPlayerInput->GetKeyState(EKeys::MiddleMouseButton);
+
+		if (nullptr != keyState)
+		{
+			ret = keyState->Value;
+		}
 	}
 
 	return ret;
@@ -220,23 +292,26 @@ bool InputMgr::isKeyDown(InputKey* inputKey)
 
 bool InputMgr::isAnyKeyDown()
 {
-	int index = 0;
-	int listLen = (int)KeyId::Total;
-	InputKey* inputKey = nullptr;
 	bool ret = false;
 
-	while (index < listLen)
-	{
-		inputKey = InputKey::msInputKeyArray[index];
+	//InputKey* inputKey = nullptr;
+	//int index = 0;
+	//int listLen = (int)KeyId::Total;
 
-		if (nullptr != inputKey)
-		{
-			ret = inputKey->mKeyState;
-			break;
-		}
+	//while (index < listLen)
+	//{
+	//	inputKey = InputKey::msInputKeyArray[index];
 
-		index += 1;
-	}
+	//	if (nullptr != inputKey)
+	//	{
+	//		ret = inputKey->mKeyState;
+	//		break;
+	//	}
+
+	//	index += 1;
+	//}
+
+	ret = this->mPlayerInput->IsPressed(EKeys::AnyKey);
 
 	return ret;
 }
