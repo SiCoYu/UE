@@ -22,6 +22,8 @@ PlayerMainRender::PlayerMainRender(SceneEntityBase* entity_)
 void PlayerMainRender::onInit()
 {
 	Super::onInit();
+
+	this->setSelfActor(UtilEngineWrap::getFirstCharacter());
 }
 
 void PlayerMainRender::_onSelfChanged()

@@ -1,9 +1,12 @@
 ﻿#include "MyProject.h"
 #include "GameSceneInputNotify.h"
 #include "Ctx.h"
+#include "EntityData.h"
+#include "PlayerMgr.h"
 #include "InputMgr.h"
 #include "InputKey.h"
 #include "InputEventId.h"
+#include "Math/Vector.h"	// FVector
 #include "EventDispatchDelegate.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -47,6 +50,10 @@ void GameSceneInputNotify::onKeyDown(uint eventId, IDispatchObject* dispObj)
 void GameSceneInputNotify::onKeyUp(uint eventId, IDispatchObject* dispObj)
 {
 	InputKey* keyCode = (InputKey*)dispObj;
+
+	GPlayerMgr->getHero()->getMovement()->addActorLocalOffset(
+		FVector(0, 0, 2);
+	);
 }
 
 void GameSceneInputNotify::onMouseDown()

@@ -21,6 +21,7 @@ void GameModule::init()
 {
 	this->initGVar();
 	this->loadGameScene();
+
 }
 
 void GameModule::dispose()

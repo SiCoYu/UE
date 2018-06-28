@@ -47,8 +47,11 @@ protected:
 
 public:
 	BeingEntity();
+
 	virtual void onDestroy() override;
 	virtual void onPutInPool() override;
+
+	SceneEntityMovement* getMovement();
 
 	virtual void setMoveSpeed(float value);
 	float getMoveSpeed(bool isOrig = false);

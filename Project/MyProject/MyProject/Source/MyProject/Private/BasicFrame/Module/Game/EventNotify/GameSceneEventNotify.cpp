@@ -20,14 +20,6 @@ GameSceneEventNotify::~GameSceneEventNotify()
 	
 }
 
-// 场景加载完成处理事件
-void GameSceneEventNotify::onLevelLoaded()
-{
-	GUiMgr->loadAndShow<UUiFunctionBar>(UiFormId::eUiFunctionBar);
-
-    this->runTest();
-}
-
 void GameSceneEventNotify::init()
 {
 
@@ -39,6 +31,14 @@ void GameSceneEventNotify::dispose()
 	this->mTestMain->dispose();
 	this->mTestMain.setNull();
 #endif
+}
+
+// 场景加载完成处理事件
+void GameSceneEventNotify::onLevelLoaded()
+{
+	GUiMgr->loadAndShow<UUiFunctionBar>(UiFormId::eUiFunctionBar);
+
+	this->runTest();
 }
 
 void GameSceneEventNotify::runTest()

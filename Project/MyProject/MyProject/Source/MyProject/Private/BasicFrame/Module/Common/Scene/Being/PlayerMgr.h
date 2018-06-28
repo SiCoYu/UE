@@ -38,6 +38,7 @@ public:
 
 	PlayerMain* getHero();
 	virtual void init() override;
+	void initHero();
 	void addPlayer(Player* player);
 	void removePlayer(Player* player);
 	void createPlayerMain();
