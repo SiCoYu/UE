@@ -20,7 +20,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class GObjectBase : public ITickedObject, public IDispatchObject, public INoOrPriorityObject, public IDelayHandleItem, , public IGameModule
+class GObjectBase : public ITickedObject, public IDispatchObject, public INoOrPriorityObject, public IDelayHandleItem, public IGameModule
 {
 	M_DECLARE_ROOT_CLASS(GObjectBase)
 
