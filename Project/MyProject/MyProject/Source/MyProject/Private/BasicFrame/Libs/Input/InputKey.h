@@ -32,10 +32,10 @@ private:
 
     // 键盘状态
 public:
-	bool mKeyState;
-    bool mKeyStateOld;
-    bool mJustPressed;
-    bool mJustReleased;
+	bool mKeyState;			// true: down, false:up
+    bool mKeyStateOld;		// 前一个状态
+    bool mJustPressed;		// 从 up 变换到 down 状态
+    bool mJustReleased;		// 从 down 变换到 up 状态
 
     // 事件处理
 private:
@@ -58,8 +58,11 @@ public:
 	void onTick(float delta, TickMode tickMode);
 
 private:
+	// down
 	void _onKeyDown(FKey keyCode);
+	// up
 	void _onKeyUp(FKey keyCode);
+	// press 一直按下
 	void _onKeyPress(FKey keyCode);
 
 public:

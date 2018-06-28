@@ -35,7 +35,7 @@ InputKey** InputKey::getInputKeyArray()
 	return InputKey::msInputKeyArray;
 }
 
-static std::string codeToString(FKey value)
+std::string InputKey::codeToString(FKey value)
 {
 	//return InputKey::mInputKeyArray[(int)value].getKeyDesc();
 	return "";
@@ -76,16 +76,53 @@ void InputKey::onTick(float delta, TickMode tickMode)
 {
 	if (GInputMgr->getKeyDown(this->mKeyCode))
 	{
-		this->_onKeyDown(this->mKeyCode);
-	}
+		this->mKeyStateOld = this->mKeyState;
+		this->mKeyState = true;
 
-	if (GInputMgr->getKeyUp(this->mKeyCode))
-	{
-		this->_onKeyUp(this->mKeyCode);
-	}
+		if (this->mKeyStateOld != this->mKeyState)
+		{
+			this->mJustPressed = true;
+			this->mJustReleased = false;
+		}
+		else
+		{
+			this->mJustPressed = false;
+			this->mJustReleased = false;
+		}
 
-	if (GInputMgr->getKey(this->mKeyCode))
+		if (this->mJustPressed)
+		{
+			this->_onKeyDown(this->mKeyCode);
+		}
+	}
+	else if (GInputMgr->getKeyUp(this->mKeyCode))
 	{
+		this->mKeyStateOld = this->mKeyState;
+		this->mKeyState = false;
+
+		if (this->mKeyStateOld != this->mKeyState)
+		{
+			this->mJustPressed = false;
+			this->mJustReleased = true;
+		}
+		else
+		{
+			this->mJustPressed = false;
+			this->mJustReleased = false;
+		}
+
+		if (this->mJustReleased)
+		{
+			this->_onKeyUp(this->mKeyCode);
+		}
+	}
+	else if (GInputMgr->getKey(this->mKeyCode))
+	{
+		this->mKeyStateOld = this->mKeyState;
+		this->mKeyState = true;
+		this->mJustPressed = false;
+		this->mJustReleased = false;
+
 		this->_onKeyPress(this->mKeyCode);
 	}
 }
