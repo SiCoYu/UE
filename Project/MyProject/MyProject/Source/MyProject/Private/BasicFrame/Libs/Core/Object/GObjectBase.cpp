@@ -24,4 +24,10 @@ void GObjectBase::onTick(float delta, TickMode tickMode)
 
 }
 
+// IGameModule
+void GObjectBase::loadGameScene()
+{
+
+}
+
 MY_END_NAMESPACE

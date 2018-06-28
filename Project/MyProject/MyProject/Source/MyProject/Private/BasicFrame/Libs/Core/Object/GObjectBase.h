@@ -10,6 +10,7 @@
 #include "IDispatchObject.h"
 #include "INoOrPriorityObject.h"
 #include "IDelayHandleItem.h"
+#include "IGameModule.h"
 
 #include "TickMode.h"
 
@@ -19,7 +20,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class GObjectBase : public ITickedObject, public IDispatchObject, public INoOrPriorityObject, public IDelayHandleItem
+class GObjectBase : public ITickedObject, public IDispatchObject, public INoOrPriorityObject, public IDelayHandleItem, , public IGameModule
 {
 	M_DECLARE_ROOT_CLASS(GObjectBase)
 
@@ -34,6 +35,9 @@ public:
 	// INoOrPriorityObject
 
 	// IDelayHandleItem
+
+	// IGameModule
+	virtual void loadGameScene();
 
 protected:
 	virtual ~GObjectBase();
