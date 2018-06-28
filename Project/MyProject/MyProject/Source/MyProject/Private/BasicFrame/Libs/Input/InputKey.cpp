@@ -116,7 +116,9 @@ void InputKey::onTick(float delta, TickMode tickMode)
 			this->_onKeyUp(this->mKeyCode);
 		}
 	}
-	else if (GInputMgr->getKey(this->mKeyCode))
+
+	// 一直按着
+	if (GInputMgr->getKey(this->mKeyCode))
 	{
 		this->mKeyStateOld = this->mKeyState;
 		this->mKeyState = true;
