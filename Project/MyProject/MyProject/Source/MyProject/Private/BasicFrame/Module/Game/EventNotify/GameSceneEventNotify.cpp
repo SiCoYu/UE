@@ -28,8 +28,11 @@ void GameSceneEventNotify::init()
 void GameSceneEventNotify::dispose()
 {
 #ifdef ENABLE_UNIT_TEST
-	this->mTestMain->dispose();
-	this->mTestMain.setNull();
+	if (!this->mTestMain.isNull())
+	{
+		this->mTestMain->dispose();
+		this->mTestMain.setNull();
+	}
 #endif
 }
 
