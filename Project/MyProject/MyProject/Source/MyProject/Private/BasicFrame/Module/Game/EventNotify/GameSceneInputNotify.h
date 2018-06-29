@@ -13,7 +13,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class IDispatchObject;
 
-class GameSceneInputNotify : public GObject, public ISceneInputNotify
+class GameSceneInputNotify : public GObject/*, public ISceneInputNotify*/
 {
 public:
 	GameSceneInputNotify();

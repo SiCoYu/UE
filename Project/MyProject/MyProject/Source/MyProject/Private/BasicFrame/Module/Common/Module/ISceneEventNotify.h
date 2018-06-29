@@ -1,11 +1,10 @@
 ﻿#pragma once
 
-#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class ISceneEventNotify : public GObject
+class ISceneEventNotify
 {
 public:
 	virtual void onLevelLoaded()

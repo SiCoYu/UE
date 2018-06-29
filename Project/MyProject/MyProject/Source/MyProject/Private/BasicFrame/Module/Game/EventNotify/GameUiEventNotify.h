@@ -1,13 +1,14 @@
 #pragma once
 
 #include "IUiEventNotify.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class Form;
 
-class GameUiEventNotify : public IUiEventNotify
+class GameUiEventNotify : public GObject/*, public IUiEventNotify*/
 {
 public:
 	GameUiEventNotify();

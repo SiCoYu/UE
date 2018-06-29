@@ -1,9 +1,9 @@
 ﻿#pragma once
 
+#include "GObject.h"
 #include "ISceneEventNotify.h"
 #include "MySharedPointer.h"
 #include "PlatformDefine.h"
-#include "GObject.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -11,8 +11,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 	class TestMain;
 #endif
 
-//class GameSceneEventNotify : public GObject, public ISceneEventNotify
-class GameSceneEventNotify : public ISceneEventNotify
+class GameSceneEventNotify : public GObject/*, public ISceneEventNotify*/
 {
 protected:
 #ifdef ENABLE_UNIT_TEST
@@ -23,10 +22,11 @@ public:
 	GameSceneEventNotify();
 	virtual ~GameSceneEventNotify();
 
-    // 场景加载完成处理事件
-	virtual void onLevelLoaded() override;
 	virtual void init() override;
 	virtual void dispose() override;
+
+	// 场景加载完成处理事件
+	virtual void onLevelLoaded() /*override*/;
  
 protected:
 	void runTest();
