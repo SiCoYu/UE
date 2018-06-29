@@ -18,6 +18,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class SceneEntityMovement;
 class BeingEntityAttack;
+class BeingEntityMovement;
 
 /**
  * @brief 生物 Entity，有感知，可以交互的
@@ -51,7 +52,7 @@ public:
 	virtual void onDestroy() override;
 	virtual void onPutInPool() override;
 
-	SceneEntityMovement* getMovement();
+	BeingEntityMovement* getMovement();
 
 	virtual void setMoveSpeed(float value);
 	float getMoveSpeed(bool isOrig = false);

@@ -9,6 +9,10 @@
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"
+#include "CtxExt.h"
+#include "EntityData.h"
+#include "PlayerMgr.h"
+#include "PlayerMain.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -22,6 +26,7 @@ void GameModule::init()
 	this->initGVar();
 	this->loadGameScene();
 
+	GPlayerMgr->initHero();
 }
 
 void GameModule::dispose()
