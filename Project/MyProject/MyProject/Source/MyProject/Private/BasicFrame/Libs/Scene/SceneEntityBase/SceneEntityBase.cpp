@@ -14,6 +14,8 @@ M_IMPLEMENT_AND_REGISTER_CLASS(SceneEntityBase, GObject)
 SceneEntityBase::SceneEntityBase()
 {
 	//this->mRotate = MWrapQuaternion(0, 0, 0, 1);
+	this->mPos = UtilMath::ZeroVec3;
+	this->mScale = UtilMath::OneVec3;
 	this->mRender = nullptr;
 }
 

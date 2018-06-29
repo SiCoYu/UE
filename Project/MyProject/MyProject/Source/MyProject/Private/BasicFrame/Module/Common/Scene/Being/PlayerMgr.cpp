@@ -53,7 +53,6 @@ void PlayerMgr::postUpdate()
 void PlayerMgr::initHero()
 {
 	PlayerMain* playerMain = this->createHero();
-	this->addHero(playerMain);
 	playerMain->init();
 }
 

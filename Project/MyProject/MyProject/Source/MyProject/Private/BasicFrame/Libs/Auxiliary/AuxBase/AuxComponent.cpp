@@ -11,6 +11,9 @@ AuxComponent::AuxComponent()
 	this->mIsRotDirty = false;
 	this->mIsDestroySelf = true;
 	this->mPreSelfActor = nullptr;
+	this->mSelfActor = nullptr;
+	this->mParentActor = nullptr;
+	this->mPlaceHolderActor = nullptr;
 }
 
 void AuxComponent::init()
@@ -37,7 +40,8 @@ void AuxComponent::onPreDestroy()
 
 void AuxComponent::onExecDestroy()
 {
-	if (this->mIsNeedPlaceHolderActor && this->mPlaceHolderActor != nullptr)
+	if (this->mIsNeedPlaceHolderActor && 
+		this->mPlaceHolderActor != nullptr)
 	{
 		//UtilEngineWrap::Destroy(this->mPlaceHolderActor);
 		this->mPlaceHolderActor = nullptr;
@@ -181,7 +185,8 @@ bool AuxComponent::_isChange(AActor* srcActor, AActor* destActor)
 {
 	bool ret = false;
 
-	if (srcActor == nullptr || srcActor != destActor)
+	if (srcActor == nullptr || 
+		srcActor != destActor)
 	{
 		ret = true;
 	}
@@ -209,14 +214,23 @@ void AuxComponent::linkPlaceHolder2Parent()
 		//this->mPlaceHolderActor = UtilEngineWrap::createActor("PlaceHolderGO");
 	}
 
-	UtilEngineWrap::SetParent(this->mPlaceHolderActor, this->mParentActor, false);
+	UtilEngineWrap::SetParent(
+		this->mPlaceHolderActor, 
+		this->mParentActor, 
+		false
+	);
 }
 
 void AuxComponent::linkSelf2Parent()
 {
-	if (nullptr != this->mSelfActor && nullptr != this->mParentActor)   // 现在可能还没有创建
+	if (nullptr != this->mSelfActor && 
+		nullptr != this->mParentActor)   // 现在可能还没有创建
 	{
-		UtilEngineWrap::SetParent(this->mSelfActor, this->mParentActor, false);
+		UtilEngineWrap::SetParent(
+			this->mSelfActor, 
+			this->mParentActor, 
+			false
+		);
 	}
 }
 
@@ -238,12 +252,14 @@ void AuxComponent::hide()
 
 bool AuxComponent::IsVisible()
 {
+	bool ret = false;
+
 	if (nullptr != this->mSelfActor)
 	{
-		return UtilEngineWrap::IsActive(this->mSelfActor);
+		ret = UtilEngineWrap::IsActive(this->mSelfActor);
 	}
 
-	return false;
+	return ret;
 }
 
 //Transform AuxComponent::transform()
