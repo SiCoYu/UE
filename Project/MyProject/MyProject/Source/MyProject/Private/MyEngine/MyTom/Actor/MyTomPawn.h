@@ -21,6 +21,8 @@ protected:
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
 
+	bool mIsBindInput;
+
 public:
 	AMyTomPawn();
 

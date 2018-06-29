@@ -3,6 +3,8 @@
 
 AMyTomPawn::AMyTomPawn()
 {
+	this->mIsBindInput = false;
+
 	// Structure to hold one-time initialization
 	struct FConstructorStatics
 	{
@@ -73,12 +75,15 @@ void AMyTomPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Othe
 
 void AMyTomPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-	check(PlayerInputComponent);
+	if (this->mIsBindInput)
+	{
+		check(PlayerInputComponent);
 
-	// Bind our control axis' to callback functions
-	PlayerInputComponent->BindAxis("Thrust", this, &AMyTomPawn::ThrustInput);
-	PlayerInputComponent->BindAxis("MoveUp", this, &AMyTomPawn::MoveUpInput);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AMyTomPawn::MoveRightInput);
+		// Bind our control axis' to callback functions
+		PlayerInputComponent->BindAxis("Thrust", this, &AMyTomPawn::ThrustInput);
+		PlayerInputComponent->BindAxis("MoveUp", this, &AMyTomPawn::MoveUpInput);
+		PlayerInputComponent->BindAxis("MoveRight", this, &AMyTomPawn::MoveRightInput);
+	}
 }
 
 void AMyTomPawn::ThrustInput(float Val)
