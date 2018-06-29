@@ -76,7 +76,7 @@ void BeingEntity::onPutInPool()
 
 SceneEntityMovement* BeingEntity::getMovement()
 {
-
+	return this->mMovement;
 }
 
 void BeingEntity::setMoveSpeed(float value)

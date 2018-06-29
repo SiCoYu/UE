@@ -50,7 +50,7 @@ void PlayerMgr::postUpdate()
    
 }
 
-PlayerMain* PlayerMgr::initHero()
+void PlayerMgr::initHero()
 {
 	PlayerMain* playerMain = this->createHero();
 	this->addHero(playerMain);

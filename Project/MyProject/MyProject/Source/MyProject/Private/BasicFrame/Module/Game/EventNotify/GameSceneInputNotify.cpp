@@ -1,13 +1,17 @@
 ﻿#include "MyProject.h"
 #include "GameSceneInputNotify.h"
-#include "Ctx.h"
-#include "EntityData.h"
-#include "PlayerMgr.h"
 #include "InputMgr.h"
 #include "InputKey.h"
 #include "InputEventId.h"
 #include "Math/Vector.h"	// FVector
 #include "EventDispatchDelegate.h"
+
+#include "Ctx.h"
+#include "CtxExt.h"
+#include "EntityData.h"
+#include "PlayerMgr.h"
+#include "PlayerMain.h"
+#include "BeingEntityMovement.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -52,7 +56,7 @@ void GameSceneInputNotify::onKeyUp(uint eventId, IDispatchObject* dispObj)
 	InputKey* keyCode = (InputKey*)dispObj;
 
 	GPlayerMgr->getHero()->getMovement()->addActorLocalOffset(
-		FVector(0, 0, 2);
+		FVector(0, 0, 2)
 	);
 }
 
