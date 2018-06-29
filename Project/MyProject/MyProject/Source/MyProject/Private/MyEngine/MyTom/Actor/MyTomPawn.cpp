@@ -3,8 +3,6 @@
 
 AMyTomPawn::AMyTomPawn()
 {
-	this->mIsBindInput = false;
-
 	// Structure to hold one-time initialization
 	struct FConstructorStatics
 	{
@@ -40,23 +38,29 @@ AMyTomPawn::AMyTomPawn()
 	this->MaxSpeed = 4000.f;
 	this->MinSpeed = 500.f;
 	this->CurrentForwardSpeed = 500.f;
+
+	this->mIsBindInput = false;
+	this->mEnableNativeTick = false;
 }
 
 void AMyTomPawn::Tick(float DeltaSeconds)
 {
-	const FVector LocalMove = FVector(CurrentForwardSpeed * DeltaSeconds, 0.f, 0.f);
+	if (mEnableNativeTick)
+	{
+		const FVector LocalMove = FVector(CurrentForwardSpeed * DeltaSeconds, 0.f, 0.f);
 
-	// Move plan forwards (with sweep so we stop when we collide with things)
-	this->AddActorLocalOffset(LocalMove, true);
+		// Move plan forwards (with sweep so we stop when we collide with things)
+		this->AddActorLocalOffset(LocalMove, true);
 
-	// Calculate change in rotation this frame
-	FRotator DeltaRotation(0,0,0);
-	DeltaRotation.Pitch = CurrentPitchSpeed * DeltaSeconds;
-	DeltaRotation.Yaw = CurrentYawSpeed * DeltaSeconds;
-	DeltaRotation.Roll = CurrentRollSpeed * DeltaSeconds;
+		// Calculate change in rotation this frame
+		FRotator DeltaRotation(0, 0, 0);
+		DeltaRotation.Pitch = CurrentPitchSpeed * DeltaSeconds;
+		DeltaRotation.Yaw = CurrentYawSpeed * DeltaSeconds;
+		DeltaRotation.Roll = CurrentRollSpeed * DeltaSeconds;
 
-	// Rotate plane
-	this->AddActorLocalRotation(DeltaRotation);
+		// Rotate plane
+		this->AddActorLocalRotation(DeltaRotation);
+	}
 
 	// Call any parent class Tick implementation
 	Super::Tick(DeltaSeconds);

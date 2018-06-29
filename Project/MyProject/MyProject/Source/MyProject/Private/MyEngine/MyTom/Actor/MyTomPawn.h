@@ -22,6 +22,7 @@ protected:
 	class UCameraComponent* Camera;
 
 	bool mIsBindInput;
+	bool mEnableNativeTick;
 
 public:
 	AMyTomPawn();
