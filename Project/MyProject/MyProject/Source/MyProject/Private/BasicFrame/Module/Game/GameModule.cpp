@@ -18,7 +18,11 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 GameModule::GameModule()
 {
-
+	this->mGameNetNotify = nullptr;
+	this->mGameRouteNotify = nullptr;
+	this->mGameUiEventNotify = nullptr;
+	this->mGameSceneEventNotify = nullptr;
+	this->mGameSceneInputNotify = nullptr;
 }
 
 void GameModule::init()
@@ -52,6 +56,9 @@ void GameModule::initGVar()
 
 	this->mGameRouteNotify = MY_NEW GameRouteNotify();
 	this->mGameRouteNotify->init();
+
+	this->mGameUiEventNotify = MY_NEW GameUiEventNotify();
+	this->mGameUiEventNotify->init();
 
 	this->mGameSceneEventNotify = MY_NEW GameSceneEventNotify();
 	this->mGameSceneEventNotify->init();

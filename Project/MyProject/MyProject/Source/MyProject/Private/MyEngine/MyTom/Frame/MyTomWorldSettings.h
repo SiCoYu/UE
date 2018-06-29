@@ -5,8 +5,9 @@
 
 /**
  * @brief MyWorldSettingsBase
- MyProject\Config\DefaultEngine.ini
- WorldSettingsClassName=/Script/MyProject.MyFlyWorldSettings
+ * MyProject\Config\DefaultEngine.ini
+ * WorldSettingsClassName=/Script/MyProject.MyFlyWorldSettings
+ * ¹¤¾ßÀ¸°´Å¥ [Project and Editor Settings] -- [World Settings]
  */
 
 UCLASS()
