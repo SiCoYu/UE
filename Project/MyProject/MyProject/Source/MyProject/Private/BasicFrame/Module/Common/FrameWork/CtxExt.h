@@ -10,6 +10,7 @@ class EntityData;
 class ModuleSys;
 class DataDelegate;
 class DataEventCmd;
+class SceneNavigation;
 
 class CtxExt : public Ctx
 {
@@ -19,6 +20,7 @@ protected:
 	MySharedPtr<ModuleSys> mModuleSys;
 	MySharedPtr<DataDelegate> mDataDelegate;
 	MySharedPtr<DataEventCmd> mDataEventCmd;
+	MySharedPtr<SceneNavigation> mSceneNavigation;
 
 public:
 	CtxExt();
@@ -38,6 +40,7 @@ public:
 
 	MySharedPtr<DataDelegate> getDataDelegate();
 	MySharedPtr<DataEventCmd> getDataEventCmd();
+	MySharedPtr<SceneNavigation> getSceneNavigation();
 };
 
 #define GCtxExt ((CtxExt*)(CtxExt::getSingletonPtr()))
@@ -47,5 +50,6 @@ public:
 #define GModuleSys GCtxExt->getModuleSys()
 #define GDataDelegate GCtx->getDataDelegate()
 #define GDataEventCmd GCtx->getDataEventCmd()
+#define GSceneNavigation GCtx->getSceneNavigation()
 
 MY_END_NAMESPACE

@@ -19,7 +19,6 @@ class GameModule : public GObject/*, public IGameModule*/
 protected:
 	GameRouteNotify* mGameRouteNotify;
 	GameNetNotify* mGameNetNotify;
-    //GotoScene mGotoScene;
     GameUiEventNotify* mGameUiEventNotify;
 	GameSceneEventNotify* mGameSceneEventNotify;
 	GameSceneInputNotify* mGameSceneInputNotify;

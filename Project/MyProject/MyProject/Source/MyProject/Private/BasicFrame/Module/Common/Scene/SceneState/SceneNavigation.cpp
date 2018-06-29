@@ -11,4 +11,9 @@ SceneNavigation::SceneNavigation()
 	
 }
 
+SceneNavigation::~SceneNavigation()
+{
+
+}
+
 MY_END_NAMESPACE

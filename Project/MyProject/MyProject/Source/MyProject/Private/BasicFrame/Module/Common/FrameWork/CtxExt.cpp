@@ -6,6 +6,7 @@
 #include "ModuleSys.h"
 #include "DataDelegate.h"
 #include "DataEventCmd.h"
+#include "SceneNavigation.h"
 #include "PromiseEventDispatch.h"
 #include "EventDispatchDelegate.h"
 #include "TypeDef.h"
@@ -24,6 +25,7 @@ CtxExt::CtxExt()
 	this->mModuleSys.setNull();
 	this->mDataDelegate.setNull();
 	this->mDataEventCmd.setNull();
+	this->mSceneNavigation.setNull();
 }
 
 void CtxExt::construct()
@@ -35,6 +37,7 @@ void CtxExt::construct()
 	this->mModuleSys = MySharedPtr<ModuleSys>(MY_NEW ModuleSys());
 	this->mDataDelegate = MySharedPtr<DataDelegate>(MY_NEW DataDelegate());
 	this->mDataEventCmd = MySharedPtr<DataEventCmd>(MY_NEW DataEventCmd());
+	this->mSceneNavigation = MySharedPtr<SceneNavigation>(MY_NEW SceneNavigation());
 }
 
 void CtxExt::init()
@@ -46,6 +49,9 @@ void CtxExt::init()
 	this->mModuleSys->init();
 	this->mDataDelegate->init();
 	this->mDataEventCmd->init();
+	this->mSceneNavigation->init();
+
+	//this->mSceneNavigation->addSceneHandle();
 
 	GGlobalDelegate->mCoreInitedEventDispatch->addEventHandle(
 		EventDispatchDelegate().bindStaticHandle(
@@ -62,12 +68,14 @@ void CtxExt::dispose()
 	this->mModuleSys->dispose();
 	this->mDataDelegate->dispose();
 	this->mDataEventCmd->dispose();
+	this->mSceneNavigation->dispose();
 
 	this->mPlayerData.setNull();
 	this->mEntityData.setNull();
 	this->mModuleSys.setNull();
 	this->mDataDelegate.setNull();
 	this->mDataEventCmd.setNull();
+	this->mSceneNavigation.setNull();
 
 	Ctx::dispose();
 }
@@ -110,6 +118,11 @@ MySharedPtr<DataDelegate> CtxExt::getDataDelegate()
 MySharedPtr<DataEventCmd> CtxExt::getDataEventCmd()
 {
 	return this->mDataEventCmd;
+}
+
+MySharedPtr<SceneNavigation> CtxExt::getSceneNavigation()
+{
+	return this->mSceneNavigation;
 }
 
 MY_END_NAMESPACE

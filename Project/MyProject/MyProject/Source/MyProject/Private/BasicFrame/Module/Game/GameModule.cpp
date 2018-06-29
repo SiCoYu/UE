@@ -13,6 +13,7 @@
 #include "EntityData.h"
 #include "PlayerMgr.h"
 #include "PlayerMain.h"
+#include "SceneNavigation.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -37,11 +38,6 @@ void GameModule::dispose()
 {
 	MY_SAFE_DISPOSE(this->mGameNetNotify);
 	MY_SAFE_DISPOSE(this->mGameRouteNotify);
-	//if (nullptr != this->mGotoScene)
-	//{
-	//    this->mGotoScene.dispose();
-	//    this->mGotoScene = nullptr;
-	//}
 	MY_SAFE_DISPOSE(this->mGameUiEventNotify);
 	MY_SAFE_DISPOSE(this->mGameSceneEventNotify);
 	MY_SAFE_DISPOSE(this->mGameSceneInputNotify);
@@ -49,8 +45,6 @@ void GameModule::dispose()
 
 void GameModule::initGVar()
 {
-	//this->mGotoScene = new GotoScene();
-
 	this->mGameNetNotify = MY_NEW GameNetNotify();
 	this->mGameNetNotify->init();
 
@@ -65,20 +59,17 @@ void GameModule::initGVar()
 
 	this->mGameSceneInputNotify = MY_NEW GameSceneInputNotify();
 	this->mGameSceneInputNotify->init();
-
-	//this->mGotoScene.init();
-	//this->mGotoScene.addSceneHandle();
 }
 
 void GameModule::loadGameScene()
 {
 	//if (MacroDef.DISABLE_TEST_SCENE)
 	//{
-	//    this->mGotoScene.loadSceneByMapId((int)MapIdCV.eCommonMap);
+	//    GSceneNavigation->loadSceneByMapId((int)MapIdCV.eCommonMap);
 	//}
 	//else
 	//{
-	//    this->mGotoScene.loadSceneByLevelName("TestShader.unity");
+	//    GSceneNavigation->loadSceneByLevelName("TestShader.unity");
 	//}
 }
 
