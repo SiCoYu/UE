@@ -1,13 +1,13 @@
 #include "MyProject.h"
 #include "MWrapQuaternion.h"
+#include "UtilMath.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 MWrapQuaternion::MWrapQuaternion()
 {
 	this->mIsEulerAngleInvalid = true;
-	FQuat rotation(0, 0, 0, 0);
-	this->setRotation(rotation);
+	this->setRotation(UtilMath::UnitQuat);
 }
 
 MWrapQuaternion::MWrapQuaternion(float x, float y, float z, float w)
