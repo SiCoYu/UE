@@ -13,6 +13,7 @@ class GameNetNotify;
 class GameUiEventNotify;
 class GameSceneEventNotify;
 class GameSceneInputNotify;
+class GameEventCmd;
 
 class GameModule : public GObject/*, public IGameModule*/
 {
@@ -22,6 +23,7 @@ protected:
     GameUiEventNotify* mGameUiEventNotify;
 	GameSceneEventNotify* mGameSceneEventNotify;
 	GameSceneInputNotify* mGameSceneInputNotify;
+	GameEventCmd* mGameEventCmd;
 
 public:
 	GameModule();

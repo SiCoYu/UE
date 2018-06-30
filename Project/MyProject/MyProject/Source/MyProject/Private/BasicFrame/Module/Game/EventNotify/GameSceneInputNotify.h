@@ -21,8 +21,11 @@ public:
 	void init();
 	void dispose();
 
-	void onKeyDown(uint eventId, IDispatchObject* dispObj);
-	void onKeyUp(uint eventId, IDispatchObject* dispObj);
+	void onAKeyUp(uint eventId, IDispatchObject* dispObj);
+	void onSKeyUp(uint eventId, IDispatchObject* dispObj);
+	void onDKeyUp(uint eventId, IDispatchObject* dispObj);
+	void onFKeyUp(uint eventId, IDispatchObject* dispObj);
+
 	void onMouseDown();
 	void onMouseUp();
 };

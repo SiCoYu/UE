@@ -27,7 +27,34 @@ void GameSceneInputNotify::init()
 		InputEventId::KEYUP_EVENT,
 		MakeEventDispatchDelegate(
 			this,
-			&GameSceneInputNotify::onKeyUp,
+			&GameSceneInputNotify::onAKeyUp,
+			(uint)0
+		)
+	);
+	GInputMgr->addKeyListener(
+		InputKey::S,
+		InputEventId::KEYUP_EVENT,
+		MakeEventDispatchDelegate(
+			this,
+			&GameSceneInputNotify::onSKeyUp,
+			(uint)0
+		)
+	);
+	GInputMgr->addKeyListener(
+		InputKey::D,
+		InputEventId::KEYUP_EVENT,
+		MakeEventDispatchDelegate(
+			this,
+			&GameSceneInputNotify::onDKeyUp,
+			(uint)0
+		)
+	);
+	GInputMgr->addKeyListener(
+		InputKey::F,
+		InputEventId::KEYUP_EVENT,
+		MakeEventDispatchDelegate(
+			this,
+			&GameSceneInputNotify::onFKeyUp,
 			(uint)0
 		)
 	);
@@ -40,18 +67,67 @@ void GameSceneInputNotify::dispose()
 		InputEventId::KEYUP_EVENT,
 		MakeEventDispatchDelegate(
 			this,
-			&GameSceneInputNotify::onKeyUp,
+			&GameSceneInputNotify::onAKeyUp,
+			(uint)0
+		)
+	);
+	GInputMgr->removeKeyListener(
+		InputKey::S,
+		InputEventId::KEYUP_EVENT,
+		MakeEventDispatchDelegate(
+			this,
+			&GameSceneInputNotify::onSKeyUp,
+			(uint)0
+		)
+	);
+	GInputMgr->removeKeyListener(
+		InputKey::D,
+		InputEventId::KEYUP_EVENT,
+		MakeEventDispatchDelegate(
+			this,
+			&GameSceneInputNotify::onDKeyUp,
+			(uint)0
+		)
+	);
+	GInputMgr->removeKeyListener(
+		InputKey::F,
+		InputEventId::KEYUP_EVENT,
+		MakeEventDispatchDelegate(
+			this,
+			&GameSceneInputNotify::onFKeyUp,
 			(uint)0
 		)
 	);
 }
 
-void GameSceneInputNotify::onKeyDown(uint eventId, IDispatchObject* dispObj)
+void GameSceneInputNotify::onAKeyUp(uint eventId, IDispatchObject* dispObj)
 {
 	InputKey* keyCode = (InputKey*)dispObj;
+
+	GPlayerMgr->getHero()->getMovement()->addActorLocalOffset(
+		FVector(0, 0, 2)
+	);
 }
 
-void GameSceneInputNotify::onKeyUp(uint eventId, IDispatchObject* dispObj)
+void GameSceneInputNotify::onSKeyUp(uint eventId, IDispatchObject* dispObj)
+{
+	InputKey* keyCode = (InputKey*)dispObj;
+
+	GPlayerMgr->getHero()->getMovement()->addActorLocalOffset(
+		FVector(0, 0, 2)
+	);
+}
+
+void GameSceneInputNotify::onDKeyUp(uint eventId, IDispatchObject* dispObj)
+{
+	InputKey* keyCode = (InputKey*)dispObj;
+
+	GPlayerMgr->getHero()->getMovement()->addActorLocalOffset(
+		FVector(0, 0, 2)
+	);
+}
+
+void GameSceneInputNotify::onFKeyUp(uint eventId, IDispatchObject* dispObj)
 {
 	InputKey* keyCode = (InputKey*)dispObj;
 

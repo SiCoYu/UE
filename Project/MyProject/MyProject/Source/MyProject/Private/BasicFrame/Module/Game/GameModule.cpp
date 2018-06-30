@@ -14,6 +14,7 @@
 #include "PlayerMgr.h"
 #include "PlayerMain.h"
 #include "SceneNavigation.h"
+#include "GameEventCmd.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -24,6 +25,7 @@ GameModule::GameModule()
 	this->mGameUiEventNotify = nullptr;
 	this->mGameSceneEventNotify = nullptr;
 	this->mGameSceneInputNotify = nullptr;
+	this->mGameEventCmd = nullptr;
 }
 
 void GameModule::init()
@@ -41,6 +43,7 @@ void GameModule::dispose()
 	MY_SAFE_DISPOSE(this->mGameUiEventNotify);
 	MY_SAFE_DISPOSE(this->mGameSceneEventNotify);
 	MY_SAFE_DISPOSE(this->mGameSceneInputNotify);
+	MY_SAFE_DISPOSE(this->mGameEventCmd);
 }
 
 void GameModule::initGVar()
@@ -59,6 +62,9 @@ void GameModule::initGVar()
 
 	this->mGameSceneInputNotify = MY_NEW GameSceneInputNotify();
 	this->mGameSceneInputNotify->init();
+
+	this->mGameEventCmd = MY_NEW GameEventCmd();
+	this->mGameEventCmd->init();
 }
 
 void GameModule::loadGameScene()
