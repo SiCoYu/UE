@@ -1236,7 +1236,7 @@ FVector UtilEngineWrap::getPos(AActor* actor)
 	return ret;
 }
 
-void UtilEngineWrap::setPos(FTransform tran, FVector pos)
+void UtilEngineWrap::setPos(FTransform& tran, FVector& pos)
 {
 	// 如果使用物理，使用 Transform 移动的时候，不会遵守物理运算，如果设置了 UnityEngine.Rigidbody.constraints ，对应的移动也会移动
 	if (tran.IsValid())
@@ -1245,12 +1245,14 @@ void UtilEngineWrap::setPos(FTransform tran, FVector pos)
 	}
 }
 
-void UtilEngineWrap::setPosByActor(AActor* actor, FVector pos)
+void UtilEngineWrap::setPosByActor(AActor* actor, FVector& pos)
 {
 	// 如果使用物理，使用 Transform 移动的时候，不会遵守物理运算，如果设置了 UnityEngine.Rigidbody.constraints ，对应的移动也会移动
 	if (actor)
 	{
-		actor->GetTransform().SetLocation(pos);
+		// 需要构造 Transform ，然后调用 AddActorWorldTransform ，因为 Transform 是一个结构体，不是引用
+		//actor->GetTransform().SetLocation(pos);
+		actor->AddActorWorldOffset(pos);
 	}
 }
 
@@ -1266,19 +1268,23 @@ FVector UtilEngineWrap::getScale(AActor* actor)
 	return ret;
 }
 
-void UtilEngineWrap::setScale(FTransform tran, FVector scale)
+void UtilEngineWrap::setScale(FTransform& tran, FVector& scale)
 {
 	if (tran.IsValid())
 	{
+		// 需要构造 Transform ，然后调用 AddActorWorldTransform ，因为 Transform 是一个结构体，不是引用
 		tran.SetScale3D(scale);
 	}
 }
 
-void UtilEngineWrap::setScaleByActor(AActor* actor, FVector scale)
+void UtilEngineWrap::setScaleByActor(AActor* actor, FVector& scale)
 {
 	if (actor)
 	{
-		actor->GetTransform().SetScale3D(scale);
+		// 需要构造 Transform ，然后调用 AddActorWorldTransform ，因为 Transform 是一个结构体，不是引用
+		//actor->GetTransform().SetScale3D(scale);
+		//actor->SetActorRelativeScale3D(scale);
+		actor->SetActorScale3D(scale);
 	}
 }
 
@@ -1294,7 +1300,7 @@ FQuat UtilEngineWrap::getRotate(AActor* actor)
 	return ret;
 }
 
-void UtilEngineWrap::setRotate(FTransform tran, FQuat rotate)
+void UtilEngineWrap::setRotate(FTransform& tran, FQuat& rotate)
 {
 	if (tran.IsValid())
 	{
@@ -1302,10 +1308,12 @@ void UtilEngineWrap::setRotate(FTransform tran, FQuat rotate)
 	}
 }
 
-void UtilEngineWrap::setRotateByActor(AActor* actor, FQuat rotate)
+void UtilEngineWrap::setRotateByActor(AActor* actor, FQuat& rotate)
 {
 	if (actor)
 	{
-		actor->GetTransform().SetRotation(rotate);
+		// 需要构造 Transform ，然后调用 AddActorWorldTransform ，因为 Transform 是一个结构体，不是引用
+		// actor->GetTransform().SetRotation(rotate);
+		actor->AddActorWorldRotation(rotate);
 	}
 }
