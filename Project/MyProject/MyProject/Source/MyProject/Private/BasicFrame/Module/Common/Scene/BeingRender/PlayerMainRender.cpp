@@ -83,7 +83,7 @@ void PlayerMainRender::updateLocalTransform()
 			this->mIsPosDirty = false;
 
 			FVector pos = this->mEntity->getPos();
-			UtilEngineWrap::setPosByActor(this->mSelfActor, this->mEntity->getPos());
+			UtilEngineWrap::setPosByActor(this->mSelfActor, pos);
 		}
 	}
 }
