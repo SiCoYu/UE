@@ -12,6 +12,8 @@
 #include "MClassFactory.h"
 
 #include "Templates/Casts.h"	// Cast
+#include "Math/Vector.h"	// FVector
+#include "Math/Quat.h"		// FQuat
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -61,19 +63,22 @@ void BeingEntityRender::updateLocalTransform()
 		{
 			this->mIsPosDirty = false;
 
-			UtilEngineWrap::setPosByActor(this->mSelfActor, this->mEntity->getPos());
+			FVector pos = this->mEntity->getPos();
+			UtilEngineWrap::setPosByActor(this->mSelfActor, pos);
 		}
 		if (this->mIsRotDirty)
 		{
 			this->mIsRotDirty = false;
 
-			UtilEngineWrap::setRotateByActor(this->mSelfActor, this->mEntity->getRotate());
+			FQuat rotate = this->mEntity->getRotate();
+			UtilEngineWrap::setRotateByActor(this->mSelfActor, rotate);
 		}
 		if (this->mIsScaleDirty)
 		{
 			this->mIsScaleDirty = false;
 
-			UtilEngineWrap::setScaleByActor(this->mSelfActor, this->mEntity->getScale());
+			FVector scale = this->mEntity->getScale();
+			UtilEngineWrap::setScaleByActor(this->mSelfActor, scale);
 		}
 	}
 }

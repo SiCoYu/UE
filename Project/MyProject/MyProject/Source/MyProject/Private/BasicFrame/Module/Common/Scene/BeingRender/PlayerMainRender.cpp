@@ -7,6 +7,7 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "EventDispatchDelegate.h"
 #include "AuxScenePrefabLoader.h"
+#include "Math/Vector.h"	// FVector
 #include "MClassFactory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -81,6 +82,7 @@ void PlayerMainRender::updateLocalTransform()
 		{
 			this->mIsPosDirty = false;
 
+			FVector pos = this->mEntity->getPos();
 			UtilEngineWrap::setPosByActor(this->mSelfActor, this->mEntity->getPos());
 		}
 	}

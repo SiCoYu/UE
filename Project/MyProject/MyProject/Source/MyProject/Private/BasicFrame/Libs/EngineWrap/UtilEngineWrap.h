@@ -467,7 +467,7 @@ public:
 	static void setPos(FTransform& tran, FVector& pos);
 	static void setPosByActor(AActor* actor, FVector& pos);
 	static FVector getScale(AActor* actor);
-	static void setScale(FTransform tran, FVector& scale);
+	static void setScale(FTransform& tran, FVector& scale);
 	static void setScaleByActor(AActor* actor, FVector& scale);
 	static FQuat getRotate(AActor* actor);
 	static void setRotate(FTransform& tran, FQuat& rotate);
