@@ -105,7 +105,7 @@ void GameSceneInputNotify::onAKeyUp(uint eventId, IDispatchObject* dispObj)
 	InputKey* keyCode = (InputKey*)dispObj;
 
 	GPlayerMgr->getHero()->getMovement()->addActorLocalOffset(
-		FVector(0, 0, 2)
+		FVector(-2, 0, 0)
 	);
 }
 
@@ -114,7 +114,7 @@ void GameSceneInputNotify::onSKeyUp(uint eventId, IDispatchObject* dispObj)
 	InputKey* keyCode = (InputKey*)dispObj;
 
 	GPlayerMgr->getHero()->getMovement()->addActorLocalOffset(
-		FVector(0, 0, 2)
+		FVector(2, 0, 0)
 	);
 }
 
@@ -132,7 +132,7 @@ void GameSceneInputNotify::onFKeyUp(uint eventId, IDispatchObject* dispObj)
 	InputKey* keyCode = (InputKey*)dispObj;
 
 	GPlayerMgr->getHero()->getMovement()->addActorLocalOffset(
-		FVector(0, 0, 2)
+		FVector(0, 0, -2)
 	);
 }
 
