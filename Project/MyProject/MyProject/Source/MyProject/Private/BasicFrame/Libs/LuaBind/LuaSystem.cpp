@@ -84,4 +84,9 @@ void LuaSystem::doString(std::string str)
 	luaL_dostring(this->L, str.c_str());
 }
 
+void LuaSystem::initLuaScript()
+{
+	loadLuaFromFile("MyLua.Module.Entry.MainEntry");
+}
+
 MY_END_NAMESPACE

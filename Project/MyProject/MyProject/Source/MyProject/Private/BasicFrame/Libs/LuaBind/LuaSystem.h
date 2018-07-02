@@ -23,8 +23,8 @@ public:
 	void dispose();
 
 	lua_State* getLuaVM();
-
 	void doString(std::string str);
+	void runLuaScript();
 };
 
 MY_END_NAMESPACE

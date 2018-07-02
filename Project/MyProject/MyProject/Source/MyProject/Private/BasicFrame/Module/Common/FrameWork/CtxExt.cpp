@@ -80,6 +80,11 @@ void CtxExt::dispose()
 	Ctx::dispose();
 }
 
+void CtxExt::run()
+{
+	Ctx::run();
+}
+
 void CtxExt::setPlayerData(PlayerData* gameData)
 {
 	this->mPlayerData = gameData;

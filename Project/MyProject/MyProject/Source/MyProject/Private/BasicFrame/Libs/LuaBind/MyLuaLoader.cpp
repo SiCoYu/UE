@@ -48,37 +48,7 @@ void addCClosureLualoader(lua_State *L)
 int loadLuaFromBufferUseFunction(lua_State *L)
 {
 	std::string fileName = luaL_checkstring(L, 1);
-	fileName = GFileSys->getLuaPath(fileName);
-
-	if (0 == fileName.length())
-	{
-		return 1;
-	}
-
-	int retCode = 0;
-
-	const char* fullPath = fileName.c_str();
-	FILE* hFile = nullptr;
-	hFile = fopen(fullPath, "r");
-
-	fseek(hFile, 0, SEEK_END);
-	int size = ftell(hFile);
-	fseek(hFile, 0, SEEK_SET);
-
-	char* buffer = new char[size];
-	memset(buffer, 0, size);
-	fread(buffer, size, 1, hFile);
-	size = removeZeroAndEof(buffer, size);
-
-	int fnameindex = lua_gettop(L) + 1;
-	lua_pushfstring(L, "@%s", fullPath);
-	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
-	lua_remove(L, fnameindex);
-
-	delete[] buffer;
-	fclose(hFile);
-
-	return retCode;
+	return loadLuaFromFile(fileName);
 }
 
 int loadLuaFromFileUseFunction(lua_State *L)
@@ -183,4 +153,39 @@ int checkResult(lua_State *L, int stat, const char *filename)
 		return luaL_error(L, "error loading module '%s' from file '%s':\n\t%s",
 			lua_tostring(L, 1), filename, lua_tostring(L, -1));
 	}
+}
+
+int loadLuaFromFile(std::string fileName)
+{
+	fileName = GFileSys->getLuaPath(fileName);
+
+	if (0 == fileName.length())
+	{
+		return 1;
+	}
+
+	int retCode = 0;
+
+	const char* fullPath = fileName.c_str();
+	FILE* hFile = nullptr;
+	hFile = fopen(fullPath, "r");
+
+	fseek(hFile, 0, SEEK_END);
+	int size = ftell(hFile);
+	fseek(hFile, 0, SEEK_SET);
+
+	char* buffer = new char[size];
+	memset(buffer, 0, size);
+	fread(buffer, size, 1, hFile);
+	size = removeZeroAndEof(buffer, size);
+
+	int fnameindex = lua_gettop(L) + 1;
+	lua_pushfstring(L, "@%s", fullPath);
+	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+	lua_remove(L, fnameindex);
+
+	delete[] buffer;
+	fclose(hFile);
+
+	return retCode;
 }

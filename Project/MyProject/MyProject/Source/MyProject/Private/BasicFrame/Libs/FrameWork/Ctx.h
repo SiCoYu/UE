@@ -132,6 +132,7 @@ public:
 	virtual void construct();
 	virtual void init();
 	virtual void dispose();
+	virtual void run();
 
 	void beginPlay();
 	void mainLoop();

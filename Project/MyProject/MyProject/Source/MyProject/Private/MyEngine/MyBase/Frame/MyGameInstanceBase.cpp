@@ -31,6 +31,7 @@ void UMyGameInstanceBase::Init()
 
 	// UGameEngine 创建后，就创建 UGameInstance，这个是除 UGameEngine 外最早初始化的地方
 	AppFrame::initApp();
+
 }
 
 void UMyGameInstanceBase::Shutdown()

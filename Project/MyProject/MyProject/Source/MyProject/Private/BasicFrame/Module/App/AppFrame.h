@@ -11,10 +11,12 @@ class AppFrame : public Singleton<AppFrame>
 public:
 	static void initApp();
 	static void quitApp();
+	static void runApp();
 
 public:
 	void init();
 	void dispose();
+	void run();
 };
 
 MY_END_NAMESPACE

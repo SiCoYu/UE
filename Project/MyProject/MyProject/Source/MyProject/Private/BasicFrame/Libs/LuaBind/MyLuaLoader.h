@@ -17,4 +17,6 @@ int loadLuaFromFileUseClosure(lua_State *L);
 int removeZeroAndEof(const char* buffer, int size);
 int checkResult(lua_State *L, int stat, const char *filename);
 
+int loadLuaFromFile(std::string fileName);
+
 #endif

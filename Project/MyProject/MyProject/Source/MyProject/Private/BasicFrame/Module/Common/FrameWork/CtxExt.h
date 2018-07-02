@@ -28,6 +28,7 @@ public:
 	virtual void construct() override;
 	virtual void init() override;
 	virtual void dispose() override;
+	virtual void run() override;
 
 	void setPlayerData(PlayerData* gameData);
 	MySharedPtr<PlayerData> getPlayerData();

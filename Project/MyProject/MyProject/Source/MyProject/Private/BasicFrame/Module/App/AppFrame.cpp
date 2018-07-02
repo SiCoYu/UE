@@ -25,10 +25,20 @@ void AppFrame::quitApp()
 	MyMemoryTracker::get().clear();
 }
 
+void AppFrame::runApp()
+{
+	AppFrame::getSingletonPtr()->run();
+}
+
 void AppFrame::init()
 {
 	CtxExt::setSingletonPtr(MY_NEW CtxExt());
 	CtxExt::getSingletonPtr()->construct();
+}
+
+void AppFrame::run()
+{
+	CtxExt::getSingletonPtr()->run();
 }
 
 void AppFrame::dispose()

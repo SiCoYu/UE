@@ -349,6 +349,11 @@ void Ctx::dispose()
 	this->_postDispose();
 }
 
+void Ctx::run()
+{
+	this->mLuaSystem->runLuaScript();
+}
+
 void Ctx::beginPlay()
 {
 	if (!this->mIsInit)
