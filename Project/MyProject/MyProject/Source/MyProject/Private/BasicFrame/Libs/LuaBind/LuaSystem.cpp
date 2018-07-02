@@ -91,7 +91,7 @@ void LuaSystem::doString(std::string str)
 
 void LuaSystem::runLuaScript()
 {
-	loadLuaFromFile("MyLua.Module.Entry.MainEntry");
+	loadLuaFromFile(this->mLuaState, "MyLua.Module.Entry.MainEntry");
 }
 
 int32 LuaSystem::onLuaPanic(lua_State *lua_State)

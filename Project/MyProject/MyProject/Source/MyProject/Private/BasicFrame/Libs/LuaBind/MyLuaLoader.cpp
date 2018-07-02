@@ -155,7 +155,7 @@ int checkResult(lua_State *L, int stat, const char *filename)
 	}
 }
 
-int loadLuaFromFile(std::string fileName)
+int loadLuaFromFile(lua_State *L, std::string fileName)
 {
 	fileName = GFileSys->getLuaPath(fileName);
 
