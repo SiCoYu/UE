@@ -222,11 +222,11 @@ function M:LoginOrCreateAccount_new(selectEnterMode)
          if string.len(self.nickname) > 0 and self:GetNickNameWordNum(self.nickname) < 9 then
              GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:setString(SDK.Lib.SystemSetting.NICKNAME, self.nickname);
          else
-             GCtx.mGameData:ShowMessageBox("昵称不能为空或多于8个字符"..self:GetNickNameWordNum(self.nickname));
+             GCtxExt.mPlayerData.mGameData:ShowMessageBox("昵称不能为空或多于8个字符"..self:GetNickNameWordNum(self.nickname));
              return;
          end
 
-         if not GCtx.mGameData.isRelogin then
+         if not GCtxExt.mPlayerData.mGameData.isRelogin then
              GlobalNS.CSSystem.Ctx.msInstance.mLoginSys.mLoginNetHandleCB:login();
          else
              GlobalNS.CSSystem.Ctx.msInstance.mLoginSys.mLoginNetHandleCB:relogin();
@@ -252,7 +252,7 @@ end
 
 function M:onStartGameBtnClk()
     --self:loginOrCreateAccount(SDK.Lib.SelectEnterMode.eLoginAccount);
-    if not GCtx.mGameData.isRelogin then
+    if not GCtxExt.mPlayerData.mGameData.isRelogin then
         self.mBgImage:show();
 	    self.mBarImage:show();
     end
@@ -276,7 +276,7 @@ end
 
 function M:onSignBtnClk()
     -- GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiSignPanel);
-    --GCtx.mGameData:ShowRollMessage("暂未开放");
+    --GCtxExt.mPlayerData.mGameData:ShowRollMessage("暂未开放");
     GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiShareSelfPanel);
 end
 
@@ -286,7 +286,7 @@ end
 
 function M:onShareBtnClk()
     --GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiAccountPanel);
-    GCtx.mGameData:ShowRollMessage("暂未开放");
+    GCtxExt.mPlayerData.mGameData:ShowRollMessage("暂未开放");
 end
 
 function M:onCorpsBtnClk()
@@ -302,8 +302,8 @@ function M:onRankBtnClk()
 end
 
 function M:onShopBtnClk()
-    GCtx.mGoodsData:init();--打开商店时加载配置
-    GCtx.mGoodsData.CurrentShopType = GlobalNS.UiFormId.eUiShop_SkinPanel;
+    GCtxExt.mPlayerData.mGoodsData:init();--打开商店时加载配置
+    GCtxExt.mPlayerData.mGoodsData.CurrentShopType = GlobalNS.UiFormId.eUiShop_SkinPanel;
     GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiShop_SkinPanel);
 end
 

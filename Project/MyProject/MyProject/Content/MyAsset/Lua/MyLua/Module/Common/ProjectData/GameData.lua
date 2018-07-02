@@ -1,7 +1,3 @@
---region *.lua
---Date
---此文件由[BabeLua]插件自动生成
-
 local M = GlobalNS.Class(GlobalNS.GObject);
 M.clsName = "GameData";
 GlobalNS[M.clsName] = M;
@@ -109,7 +105,7 @@ function M:ShowRollMessage(msg)
 end
 
 function M:returnStartGame()
-    GCtx.mGameData.isRelogin = true;
+    GCtxExt.mPlayerData.mGameData.isRelogin = true;
     self:clearResource();
     GlobalNS.CSSystem.Ctx.msInstance.mNetEventHandle:Disconnect();
 	GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiStartGame);
@@ -134,4 +130,3 @@ function M:clearResource()
 end
 
 return M;
---endregion

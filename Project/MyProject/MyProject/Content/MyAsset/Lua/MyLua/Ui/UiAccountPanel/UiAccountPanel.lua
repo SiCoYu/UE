@@ -74,14 +74,14 @@ function M:onReady()
     local Game_Data = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Game_Data");
 
     local zhenzhu = GlobalNS.UtilApi.getComByPath(Game_Data, "ZhenZhu", "Text");
-    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtx.mGoodsData.ZhenZhuId) then
-        local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtx.mGoodsData.ZhenZhuId);
+    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtxExt.mPlayerData.mGoodsData.ZhenZhuId) then
+        local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtxExt.mPlayerData.mGoodsData.ZhenZhuId);
         zhenzhu.text = "珍珠: "..num;
     end
 
     local haixing = GlobalNS.UtilApi.getComByPath(Game_Data, "HaiXing", "Text");
-    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtx.mGoodsData.HaiXingId) then
-        local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtx.mGoodsData.HaiXingId);
+    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtxExt.mPlayerData.mGoodsData.HaiXingId) then
+        local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtxExt.mPlayerData.mGoodsData.HaiXingId);
         haixing.text = "海星: "..num;
     end
 

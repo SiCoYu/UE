@@ -9,7 +9,7 @@ if(MacroDef.UNITY_EDITOR) then
     MLoader("mobdebug").start("127.0.0.1", 8172);
 end
 
-local _appSys = MLoader("MyLua.Module.App.AppSys");
+local _appSys = MLoader("MyLua.Module.App.AppFrame");
 
 _appSys.ctor();
 _appSys.init();

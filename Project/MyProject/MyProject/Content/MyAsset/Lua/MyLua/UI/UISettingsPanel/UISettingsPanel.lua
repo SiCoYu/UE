@@ -209,7 +209,7 @@ function M:onCloseBtnClk()
 end
 
 function M:onTipBtnClk()
-    GCtx.mGameData:ShowMessageBox("摇杆模式：使用左侧摇杆控制方向\n重力模式：使用重力控制方向，按\n                   下左侧界面时向前移动");
+    GCtxExt.mPlayerData.mGameData:ShowMessageBox("摇杆模式：使用左侧摇杆控制方向\n重力模式：使用重力控制方向，按\n                   下左侧界面时向前移动");
 end
 
 return M;

@@ -28,7 +28,7 @@ end
 function M:onReady()
     M.super.onReady(self);    
    
-    self:refreshScore(GCtx.mGameData.mMyScore); --加载完成主动刷新一次分数
+    self:refreshScore(GCtxExt.mPlayerData.mGameData.mMyScore); --加载完成主动刷新一次分数
 end
 
 function M:refreshScore(score)

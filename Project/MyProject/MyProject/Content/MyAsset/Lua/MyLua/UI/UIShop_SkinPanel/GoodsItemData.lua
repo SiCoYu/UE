@@ -40,10 +40,10 @@ function M:onUseBtnClk()
 end
 
 function M:onBuyBtnClk()
-	local haixing = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtx.mGoodsData.HaiXingId);
-    local zhenzhu = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtx.mGoodsData.ZhenZhuId);
+	local haixing = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtxExt.mPlayerData.mGoodsData.HaiXingId);
+    local zhenzhu = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtxExt.mPlayerData.mGoodsData.ZhenZhuId);
 
-    if self.m_NeedId == tonumber(GCtx.mGoodsData.HaiXingId) then
+    if self.m_NeedId == tonumber(GCtxExt.mPlayerData.mGoodsData.HaiXingId) then
         if haixing >= self.m_NeedNum then
             haixing = haixing - self.m_NeedNum;
         else
@@ -51,7 +51,7 @@ function M:onBuyBtnClk()
         end        
     end
 
-    if self.m_NeedId == tonumber(GCtx.mGoodsData.ZhenZhuId) then
+    if self.m_NeedId == tonumber(GCtxExt.mPlayerData.mGoodsData.ZhenZhuId) then
         if zhenzhu >= self.m_NeedNum then
             zhenzhu = zhenzhu - self.m_NeedNum;
         else

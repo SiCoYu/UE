@@ -1,7 +1,3 @@
---region *.lua
---Date
---此文件由[BabeLua]插件自动生成
-
 local M = GlobalNS.Class(GlobalNS.GObject);
 M.clsName = "SignData";
 GlobalNS[M.clsName] = M;
@@ -50,4 +46,3 @@ function M:setBtnState(index)
 end
 
 return M;
---endregion

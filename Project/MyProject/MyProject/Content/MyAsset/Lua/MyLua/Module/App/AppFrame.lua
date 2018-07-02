@@ -1,5 +1,7 @@
 --导入公用文件
 MLoader("MyLua.Libs.FrameWork.GCtx");
+--导入数据文件
+MLoader("MyLua.Libs.FrameWork.GCtxExt");
 --导入登陆模块
 MLoader("MyLua.Module.Login.LoginCommon");
 --导入游戏模块
@@ -8,7 +10,7 @@ MLoader("MyLua.Module.Game.GameCommon");
 -- 定义 Application 应用程序表
 
 local M = {};
-M.clsName = "AppSys";
+M.clsName = "AppFrame";
 GlobalNS[M.clsName] = M;
 local this = M;
 

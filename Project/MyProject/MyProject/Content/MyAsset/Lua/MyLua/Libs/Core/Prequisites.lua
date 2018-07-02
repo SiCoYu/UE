@@ -1,3 +1,6 @@
+--[[
+	@file Prequisites.lua
+]]
 -- 所有全局类都在这里加载
 MLoader("MyLua.Libs.Core.GlobalNS");      -- 加载自己的全局表
 
@@ -134,10 +137,6 @@ MLoader("MyLua.Libs.Network.PBFileList");
 MLoader("MyLua.Libs.Network.NetCommand");
 MLoader("MyLua.Libs.Network.NetMgr");
 MLoader("MyLua.Libs.Tools.UtilMsg");
-
--- 模块系统
-MLoader("MyLua.Libs.Module.IGameSys");
-MLoader("MyLua.Libs.Module.ILoginSys");
 
 -- 资源系统
 MLoader("MyLua.Libs.Resource.ResLoadData.ResPathType");

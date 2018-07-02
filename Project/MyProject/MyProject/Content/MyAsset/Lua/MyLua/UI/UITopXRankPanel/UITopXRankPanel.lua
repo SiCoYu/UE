@@ -69,7 +69,7 @@ function M:onReady()
     title = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.UpBG, "Title");
 	self.mDownBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(title,"Down_BtnTouch"));
 
-    if #self.listitems == GCtx.mGameData.top10Count then
+    if #self.listitems == GCtxExt.mPlayerData.mGameData.top10Count then
         self:showTopxRank();
     end
 end
@@ -79,7 +79,7 @@ function M:createItems()
     self.mListitemPrefab = self.mListitem_prefab:getPrefabTmpl();
     
     if nil ~= self.mListitemPrefab then
-        for i=1, GCtx.mGameData.top10Count do
+        for i=1, GCtxExt.mPlayerData.mGameData.top10Count do
             --用listitemprefab生成GameObject对象
             local listitem = GlobalNS.UtilApi.Instantiate(self.mListitemPrefab);
             listitem.transform.parent = self.mRankContent;
@@ -97,14 +97,14 @@ end
 
 function M:onPrefabLoaded(dispObj)
     self:createItems();
-    if #self.listitems == GCtx.mGameData.top10Count then
+    if #self.listitems == GCtxExt.mPlayerData.mGameData.top10Count then
         self:showTopxRank();
     end
 end
 
 function M:showTopxRank()
     --topx
-    for i=1, GCtx.mGameData.top10Count do
+    for i=1, GCtxExt.mPlayerData.mGameData.top10Count do
         local listitem = self.listitems[i].transform;
 
         --荣誉
@@ -139,7 +139,7 @@ function M:showTopxRank()
             Rank:SetActive(false);
         else
             Rank:SetActive(true);
-            if i == GCtx.mGameData.top10_myrank then
+            if i == GCtxExt.mPlayerData.mGameData.top10_myrank then
                 Ranktext.text = "<color=#32c832ff>"..i.."</color>";
             else
                 Ranktext.text = "" .. i;
@@ -148,32 +148,32 @@ function M:showTopxRank()
 
         --用户名
         local Name = GlobalNS.UtilApi.getComByPath(listitem, "name", "Text");        
-        if i == GCtx.mGameData.top10_myrank then
-            Name.text = "<color=#32c832ff>"..GCtx.mGameData.top10ranklist[i].m_name.."</color>";
+        if i == GCtxExt.mPlayerData.mGameData.top10_myrank then
+            Name.text = "<color=#32c832ff>"..GCtxExt.mPlayerData.mGameData.top10ranklist[i].m_name.."</color>";
         else
-            Name.text = GCtx.mGameData.top10ranklist[i].m_name;
+            Name.text = GCtxExt.mPlayerData.mGameData.top10ranklist[i].m_name;
         end
     end
 
     --我的排名
     local myHoner = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mMyRankArea, "rank");
     local myrank = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mMyRankArea, "rank_Text");
-    if GCtx.mGameData.top10_myrank > 3 then
+    if GCtxExt.mPlayerData.mGameData.top10_myrank > 3 then
         myHoner:SetActive(false);
         myrank:SetActive(true);
         local myRanktext = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "rank_Text", "Text");
-        myRanktext.text = "" .. GCtx.mGameData.top10_myrank;
+        myRanktext.text = "" .. GCtxExt.mPlayerData.mGameData.top10_myrank;
     else
         myrank:SetActive(false);
         myHoner:SetActive(true);
         local myhonerTransform = GlobalNS.UtilApi.GetComponent(myHoner, "RectTransform");
         self.myhoner = GlobalNS.new(GlobalNS.AuxImage);
         self.myhoner:setSelfGo(myHoner);
-        if GCtx.mGameData.top10_myrank == 1 then
+        if GCtxExt.mPlayerData.mGameData.top10_myrank == 1 then
             myhonerTransform.sizeDelta = Vector2.New(36, 26);
 			self.myhoner:setSpritePath("DefaultSkin/SkyWarSkin/topx1.png", "topx1");
             --self.myhoner:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_gold");
-        elseif GCtx.mGameData.top10_myrank == 2 then
+        elseif GCtxExt.mPlayerData.mGameData.top10_myrank == 2 then
             myhonerTransform.sizeDelta = Vector2.New(24, 24);
 			self.myhoner:setSpritePath("DefaultSkin/SkyWarSkin/topx2.png", "topx2");
             --self.myhoner:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_yin");
@@ -184,7 +184,7 @@ function M:showTopxRank()
         end
     end
     local myName = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "name", "Text");
-    myName.text = GCtx.mGameData.mMyName;
+    myName.text = GCtxExt.mPlayerData.mGameData.mMyName;
 end
 
 function M:onDropBtnClk()
@@ -233,7 +233,7 @@ end
 function M:updateUIData()
     self:clearResource();
     self:createItems();
-    if #self.listitems == GCtx.mGameData.top10Count then
+    if #self.listitems == GCtxExt.mPlayerData.mGameData.top10Count then
         self:showTopxRank();
     end
 end

@@ -1,7 +1,4 @@
 MLoader("MyLua.Libs.Core.Prequisites");
-MLoader("MyLua.Libs.GameData.GameData");
-MLoader("MyLua.Libs.GameData.GoodsData");
-MLoader("MyLua.Libs.GameData.SignData");
 MLoader("MyLua.Libs.Network.NetMgr");
 
 -- 全局变量表，自己定义的所有的变量都放在 GCtx 表中，不放在 GlobalNS 表中
@@ -25,7 +22,7 @@ function M.preInit()
 	
 	this.mTickMgr = GlobalNS.new(GlobalNS.TickMgr);
     this.mTimerMgr = GlobalNS.new(GlobalNS.TimerMgr);
-    this.mNetMgr = GlobalNS.NetMgr;     -- Net 使用原始的表
+    this.mNetMgr = GlobalNS.new(GlobalNS.NetMgr);     -- Net 使用原始的表
     this.mLogSys = GlobalNS.new(GlobalNS.LogSys);
 	
     this.mWidgetStyleMgr = GlobalNS.new(GlobalNS.WidgetStyleMgr);
@@ -34,10 +31,6 @@ function M.preInit()
 	
     this.mNetCmdNotify = GlobalNS.new(GlobalNS.NetCmdNotify);
 	this.mNetCmdNotify_KBE = GlobalNS.new(GlobalNS.NetCmdDispatchHandle_KBE);
-
-    this.mGameData = GlobalNS.new(GlobalNS.GameData);
-    this.mGoodsData = GlobalNS.new(GlobalNS.GoodsData);
-    this.mSignData = GlobalNS.new(GlobalNS.SignData);
 	this.mFrameUpdateStatistics = GlobalNS.new(GlobalNS.FrameUpdateStatistics);
 	
 	this.mStrIdPoolSys = GlobalNS.new(GlobalNS.StrIdPoolSys);
@@ -46,7 +39,7 @@ function M.preInit()
 	this.mSceneIdPoolSys = GlobalNS.new(GlobalNS.NumIdPoolSys);
 end
 
-function M.interInit()
+function M.execInit()
 	--主要执行 init 初始化
     GlobalNS.CSSystem.init();
     this.mNetMgr:init();
@@ -67,7 +60,7 @@ end
 
 function M.init()
     this.preInit();
-    this.interInit();
+    this.execInit();
     this.postInit();
 end
 

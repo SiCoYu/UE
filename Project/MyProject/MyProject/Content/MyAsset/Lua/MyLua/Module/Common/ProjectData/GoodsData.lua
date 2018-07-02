@@ -1,6 +1,3 @@
---region *.lua
---Date
---此文件由[BabeLua]插件自动生成
 local M = GlobalNS.Class(GlobalNS.GObject);
 M.clsName = "GoodsData";
 GlobalNS[M.clsName] = M;
@@ -60,7 +57,7 @@ end
 function M:getGoodsItems(shopType, goodsType, args)
     local isOwn = false;
     if nil ~= args then --自身已有的物品从服务器消息获取
-        if shopType ~= GCtx.mGoodsData.CurrentShopType then --服务器回复过迟
+        if shopType ~= GCtxExt.mPlayerData.mGoodsData.CurrentShopType then --服务器回复过迟
             return;
         else
             --处理服务器发来的个人物品数据
@@ -114,5 +111,3 @@ function M:BuyItem(goodsId)
 end
 
 return M;
-
---endregion
