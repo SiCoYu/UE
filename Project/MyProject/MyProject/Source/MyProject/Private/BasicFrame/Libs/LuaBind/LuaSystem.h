@@ -4,6 +4,8 @@
 #include "GObject.h"
 #include "PlatformDefine.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(LuaLog, Log, All);
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 /**
@@ -11,8 +13,11 @@ MY_BEGIN_NAMESPACE(MyNS)
 */
 class LuaSystem : public GObject
 {
+public:
+	static int32 onLuaPanic(lua_State *lua_State);
+
 protected:
-	lua_State* L;
+	lua_State* mLuaState;
 
 public:
 	LuaSystem();

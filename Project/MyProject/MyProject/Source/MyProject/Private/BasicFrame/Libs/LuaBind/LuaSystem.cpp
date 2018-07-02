@@ -17,11 +17,13 @@
 // "GeneratedScriptLibraries.inl"
 //extern void LuaRegisterExportedClasses(lua_State* InScriptContext);
 
+DEFINE_LOG_CATEGORY(LuaLog);
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 LuaSystem::LuaSystem()
 {
-	this->L = nullptr;
+	this->mLuaState = nullptr;
 }
 
 LuaSystem::~LuaSystem()
@@ -32,8 +34,11 @@ LuaSystem::~LuaSystem()
 void LuaSystem::init()
 {
 	// 打开基本库
-	this->L = luaL_newstate();
-	luaL_openlibs(this->L);
+	this->mLuaState = luaL_newstate();
+	luaL_openlibs(this->mLuaState);
+
+	// 报错回调
+	lua_atpanic(this->mLuaState, &LuaSystem::onLuaPanic);
 
 	// 导入 UE4 自己的类
 	// 参考 MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\LuaIntegration.cpp
@@ -41,52 +46,58 @@ void LuaSystem::init()
 	//LuaRegisterExportedClasses(this->L);
 	//LuaRegisterUnrealUtilities(this->L);
 	//UScriptContext* a = UtilEngineWrap::NewObject<UScriptContext>();
-	UScriptPluginExport::initPlugin(this->L);
+	UScriptPluginExport::initPlugin(this->mLuaState);
 
 	// 打开 Socket
-	lua_getglobal(this->L, "package");
-	lua_getfield(this->L, -1, "preload");
+	lua_getglobal(this->mLuaState, "package");
+	lua_getfield(this->mLuaState, -1, "preload");
 
-	lua_pushcfunction(this->L, luaopen_socket_core);
-	lua_setfield(this->L, -2, "socket.core");
+	lua_pushcfunction(this->mLuaState, luaopen_socket_core);
+	lua_setfield(this->mLuaState, -2, "socket.core");
 
-	lua_pushcfunction(this->L, luaopen_mime_core);
-	lua_setfield(this->L, -2, "mime.core");
+	lua_pushcfunction(this->mLuaState, luaopen_mime_core);
+	lua_setfield(this->mLuaState, -2, "mime.core");
 
-	lua_pop(this->L, 2);
+	lua_pop(this->mLuaState, 2);
 
-	lua_settop(this->L, 0);
+	lua_settop(this->mLuaState, 0);
 
 	// 绑定自定义加载器
-	//addCClosureLualoader(this->L);
-	addCFunctionLualoader(this->L);
+	//addCClosureLualoader(this->mLuaState);
+	addCFunctionLualoader(this->mLuaState);
 
 	// 绑定外部库
-	LuaCppBind::bind(this->L);
+	LuaCppBind::bind(this->mLuaState);
 }
 
 void LuaSystem::dispose()
 {
-	if (nullptr != this->L)
+	if (nullptr != this->mLuaState)
 	{
-		lua_close(L);
-		this->L = nullptr;
+		lua_close(this->mLuaState);
+		this->mLuaState = nullptr;
 	}
 }
 
 lua_State* LuaSystem::getLuaVM()
 {
-	return this->L;
+	return this->mLuaState;
 }
 
 void LuaSystem::doString(std::string str)
 {
-	luaL_dostring(this->L, str.c_str());
+	luaL_dostring(this->mLuaState, str.c_str());
 }
 
-void LuaSystem::initLuaScript()
+void LuaSystem::runLuaScript()
 {
 	loadLuaFromFile("MyLua.Module.Entry.MainEntry");
+}
+
+int32 LuaSystem::onLuaPanic(lua_State *lua_State)
+{
+	UE_LOG(LogScriptPlugin, Error, TEXT("PANIC: unprotected error in call to Lua API(%s)"), ANSI_TO_TCHAR(lua_tostring(lua_State, -1)));
+	return 0;
 }
 
 MY_END_NAMESPACE
