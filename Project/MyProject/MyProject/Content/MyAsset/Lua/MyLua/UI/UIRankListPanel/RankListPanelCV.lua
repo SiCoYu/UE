@@ -1,7 +1,7 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.StaticClass");
 
-MLoader("MyLua.UI.UIRankListPanel.RankListPanelNS");
+MLoader("MyLua.Ui.UiRankListPanel.RankListPanelNS");
 
 local M = GlobalNS.StaticClass();
 local this = M;

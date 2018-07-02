@@ -1,9 +1,9 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.DataStruct.MList");
-MLoader("MyLua.Libs.DelayHandle.DelayHandleMgrBase");
+MLoader("MyLua.Libs.DelayHandle.DelayPriorityHandleMgrBase");
 
-local M = GlobalNS.Class(GlobalNS.DelayHandleMgrBase);
+local M = GlobalNS.Class(GlobalNS.DelayPriorityHandleMgrBase);
 M.clsName = "FrameTimerMgr";
 GlobalNS[M.clsName] = M;
 
@@ -14,25 +14,25 @@ end
 
 function M:addObject(delayObject, priority)
     -- 检查当前是否已经在队列中
-    if self.mTimerList:IndexOf(delayObject) == -1 then
-        if self:bInDepth() then
+    if(not self.mTimerList:contains(delayObject)) then
+        if(self:isInDepth()) then
             M.super.addObject(self, delayObject, priority);
         else
-            self.mTimerList:Add(delayObject);
+            self.mTimerList:add(delayObject);
         end
     end
 end
 
 function M:removeObject(delayObject)
     -- 检查当前是否在队列中
-    if not self.mTimerList:IndexOf(delayObject) == -1 then
+    if(self.mTimerList:contains(delayObject)) then
         delayObject.mIsDisposed = true;
-        if self:bInDepth() then
+        if(self:isInDepth()) then
             M.super.addObject(self, delayObject);
         else
             for key, item in ipairs(self.mTimerList.list()) do
                 if item == delayObject then
-                    self.mTimerList:Remove(item);
+                    self.mTimerList:remove(item);
                     break;
                 end
             end

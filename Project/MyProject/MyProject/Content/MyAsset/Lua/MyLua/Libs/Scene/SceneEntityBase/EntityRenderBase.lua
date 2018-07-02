@@ -34,7 +34,7 @@ function M:transform()
     return nil;
 end
 
-function M:onTick(delta)
+function M:onTick(delta, tickMode)
     
 end
 
@@ -65,3 +65,5 @@ end
 function M:checkRender()
     return false;
 end
+
+return M;

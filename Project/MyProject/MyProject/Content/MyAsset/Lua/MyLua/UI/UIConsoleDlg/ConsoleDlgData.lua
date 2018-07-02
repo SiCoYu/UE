@@ -2,7 +2,7 @@ MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.Core.GObject");
 
-MLoader("MyLua.UI.UIConsoleDlg.ConsoleDlgNS");
+MLoader("MyLua.Ui.UiConsoleDlg.ConsoleDlgNS");
 
 --数据区
 local M = GlobalNS.Class(GlobalNS.GObject);
@@ -14,12 +14,16 @@ function M:ctor()
 end
 
 function M:init()
-    self.mId2HandleDic:Add("loadfile", self.loadfile);
+    self.mId2HandleDic:add("loadfile", self.loadfile);
+    self.mId2HandleDic:add("sendshit", self.sendShit);
 end
 
 function M:loadfile(params)
-    --MReload(params);
-    GCtx.mLogSys:log("asdffffffffffffff  " .. params, GlobalNS.LogTypeId.eLogCommon);
+    MReload(params);
+end
+
+function M:sendShit(params)
+    GlobalNS.CSSystem.emitSnowBlock();
 end
 
 function M:dtor()

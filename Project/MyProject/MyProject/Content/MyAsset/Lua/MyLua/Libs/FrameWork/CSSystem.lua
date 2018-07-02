@@ -13,6 +13,7 @@ function M.init()
     this.GlobalEventCmd = SDK.Lib.GlobalEventCmd;
     this.AuxPrefabLoader = SDK.Lib.AuxPrefabLoader;
 	this.AuxBytesLoader = SDK.Lib.AuxBytesLoader;
+	this.AuxSpriteAtlasLoader = SDK.Lib.AuxSpriteAtlasLoader;
 	this.UtilApi = SDK.Lib.UtilApi;
 	this.MFileSys = SDK.Lib.MFileSys;
 	this.EEndian = SDK.Lib.EEndian;
@@ -20,19 +21,18 @@ function M.init()
     this.ModuleId = SDK.Lib.ModuleId;
 end
 
---[[
-function M.setNeedUpdate(value)
-    
+-- 需要从外部更新 Lua 系统
+function M.setNeedUpdateFromExternal(value)
+    this.Ctx.msInstance.mLuaSystem:setNeedUpdateLua(value);
 end
-]]
 
 -- LogSys 日志区域
 function M.log(message, logTypeId)
-    if(this.Ctx.mInstance.mLogSys ~= nil) then
+    if(this.Ctx.msInstance.mLogSys ~= nil) then
         if(logTypeId == nil) then
             GlobalNS.UtilApi.error("CSSystem logTypeId is nil");
         else
-            this.Ctx.mInstance.mLogSys:lua_log(message, logTypeId);
+            this.Ctx.msInstance.mLogSys:lua_log(message, logTypeId);
         end
     else
         GlobalNS.UtilApi.error("CSSystem LogSys is nil");
@@ -40,11 +40,11 @@ function M.log(message, logTypeId)
 end
 
 function M.warn(message, logTypeId)
-    this.Ctx.mInstance.mLogSys:lua_warn(message, logTypeId);
+    this.Ctx.msInstance.mLogSys:lua_warn(message, logTypeId);
 end
 
 function M.error(message, logTypeId)
-    this.Ctx.mInstance.mLogSys:lua_error(message, logTypeId);
+    this.Ctx.msInstance.mLogSys:lua_error(message, logTypeId);
 end
 
 -- GlobalEventCmd 交互区域
@@ -58,11 +58,11 @@ end
 
 -- 网络区域
 function M.sendFromLua(id, buffer)
-    this.Ctx.mInstance.mLuaSystem:sendFromLua(id, buffer);
+    this.Ctx.msInstance.mLuaSystem:sendFromLua(id, buffer);
 end
 
 function M.sendFromLuaRpc(buffer)
-    this.Ctx.mInstance.mLuaSystem:sendFromLuaRpc(buffer);
+    this.Ctx.msInstance.mLuaSystem:sendFromLuaRpc(buffer);
 end
 
 function M.readLuaBufferToFile(file)
@@ -75,7 +75,19 @@ function M.addEventHandleByPath(go, path, luaTable, luaFunction)
 end
 
 function M.addEventHandleSelf(go, luaTable, luaFunction)
-    this.UtilApi.addEventHandle(go, luaTable, luaFunction, false);
+    this.UtilApi.addEventHandle(go, luaTable, luaFunction, 0, false);
+end
+
+function M.addButtonDownEventHandle(go, luaTable, luaFunction)
+    this.UtilApi.addButtonDownEventHandle(go, luaTable, luaFunction, 0);
+end
+
+function M.addButtonUpEventHandle(go, luaTable, luaFunction)
+    this.UtilApi.addButtonUpEventHandle(go, luaTable, luaFunction, 0);
+end
+
+function M.addButtonExitEventHandle(go, luaTable, luaFunction)
+    this.UtilApi.addButtonExitEventHandle(go, luaTable, luaFunction, 0);
 end
 
 function M.GoFindChildByName(name)
@@ -94,18 +106,35 @@ function M.SetRectTransformParent(child, parent, worldPositionStays)
     this.UtilApi.SetRectTransParent(child, parent, worldPositionStays);
 end
 
+function M.addToggleHandle(go, table, method)
+    this.UtilApi.addToggleHandle(go, table, method);
+end
+
 function M.buildByteBuffer()
-	return this.Ctx.mInstance.mFactoryBuild:buildByteBuffer();
+	return this.Ctx.msInstance.mFactoryBuild:buildByteBuffer();
 end
 
 --进行分裂
 function M.startSplit()
-	this.Ctx.mInstance.mPlayerMgr:startSplit();
+	this.Ctx.msInstance.mPlayerMgr:startSplit();
 end
 
 --吐一个小球
-function M.emitSnowBlock()
-	this.Ctx.mInstance.mPlayerMgr:emitSnowBlock();
+function M.Fire()
+	this.Ctx.msInstance.mPlayerMgr:FireInTheHole();
+end
+
+function M.startEmitSnowBlock()
+	this.Ctx.msInstance.mPlayerMgr:startEmitSnowBlock();
+end
+
+function M.stopEmitSnowBlock()
+	this.Ctx.msInstance.mPlayerMgr:stopEmitSnowBlock();
+end
+
+--设置 Lua 初始化完成
+function M.setLuaInited(value)
+	this.Ctx.msInstance.mLuaSystem:setLuaInited(value);
 end
 
 return M;

@@ -14,8 +14,8 @@ function M:ctor()
 
 end
 
-function M:onTickExec(delta)
-    M.super.onTickExec(self, delta);
+function M:onTickExec(delta, tickMode)
+    M.super.onTickExec(self, delta, tickMode);
 end
 
 function M:addFObject(being)
@@ -25,3 +25,5 @@ end
 function M:removeFObject(being)
     self:removeObject(being);
 end
+
+return M;

@@ -1,7 +1,7 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.StaticClass");
 
-MLoader("MyLua.UI.UIDefaultForm.DefaultFormNS");
+MLoader("MyLua.Ui.UIDefaultForm.DefaultFormNS");
 
 --常量区
 local M = GlobalNS.StaticClass();

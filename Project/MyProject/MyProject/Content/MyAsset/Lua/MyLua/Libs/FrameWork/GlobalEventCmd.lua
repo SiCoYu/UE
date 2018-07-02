@@ -34,6 +34,10 @@ end
 
 -- 场景加载完成
 function M.onSceneLoaded()
+	this.onUnitTest();
+end
+
+function M.onUnitTest()
 	if(MacroDef.UNIT_TEST) then
 		pTestMain = GlobalNS.new(GlobalNS.TestMain);
 		pTestMain:run();
@@ -43,14 +47,33 @@ end
 -- 主角加载完成
 function M.onPlayerMainLoaded()
     --加载场景上的UI组件，主角加载完成后再加载UI，否则UI拿不到主角数据
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UIFormId.eUIPlayerDataPanel);
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UIFormId.eUIOptionPanel);
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UIFormId.eUITopXRankPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiRankListPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiRelivePanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiShop_SkinPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiSettingsPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiMessagePanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiSignPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiDayAwardPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiOtherAwardPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiAccountPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiAccountAvatarPanel);
+
+    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiPlayerDataPanel);
+    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOptionPanel);
+    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiTopXRankPanel);
 end
 
 -- 帧循环
-function M.onAdvance(delta)
-	GCtx.mProcessSys:advance(delta);
+function M.onAdvance(delta, tickMode)
+	--测试 tick
+	--[[
+	if(nil == M.mTickItemBase) then
+		M.mTickItemBase = GlobalNS.new(GlobalNS.TickItemBase);
+		M.mTickItemBase:addSelfTick(0);
+	end
+	]]
+	
+	GCtx.mProcessSys:advance(delta, tickMode);
 end
 
 function M.openForm(formId)
@@ -65,15 +88,12 @@ function M.requireFile(filePath)
 	return MLoader(filePath);
 end
 
--- 用户昵称
-function M.getUserNickName()
-    if GCtx.mUiMgr:hasForm(GlobalNS.UIFormId.eUIStartGame) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UIFormId.eUIStartGame);
-        if nil ~= form and form:isVisible() then            
-            return form.username;
-        end
-    end
-    return "海盗一号";
+--场景加载进度, progress: [0, 1]
+function M.onSceneLoadProgress(progress)
+	local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiStartGame);
+	if(nil ~= form) then
+		form:setProgress(progress);
+	end
 end
 
 return M;

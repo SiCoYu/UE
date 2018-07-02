@@ -29,24 +29,30 @@ function M:call()
     
     if(nil ~= self.mThis and nil ~= self.mHandle) then
         func = function() 
-            return self.mHandle(self.mThis, self.mParam) 
+            return self.mHandle(self.mThis, self.mParam);
         end
-        flag, msg = xpcall(func, traceback)
+		
+        flag, msg = xpcall(func, traceback);
+		
         if(not flag) then
             GlobalNS.MDebug.traceback(nil, msg);
         end
-        return msg
+		
+        return msg;
     elseif nil ~= self.mHandle then
         func = function() 
-            self.func(self.mParam)
+            self.func(self.mParam);
         end
-        flag, msg = xpcall(func, traceback)
+		
+        flag, msg = xpcall(func, traceback);
+		
         if(not flag) then
             GlobalNS.MDebug.traceback(nil, msg);
         end
-        return msg
+		
+        return msg;
     else
-        return 0
+        return 0;
     end
 end
 

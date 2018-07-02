@@ -1,19 +1,19 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UIRankListPanel.RankListPanelNS");
-MLoader("MyLua.UI.UIRankListPanel.RankListPanelData");
-MLoader("MyLua.UI.UIRankListPanel.RankListPanelCV");
+MLoader("MyLua.Ui.UiRankListPanel.RankListPanelNS");
+MLoader("MyLua.Ui.UiRankListPanel.RankListPanelData");
+MLoader("MyLua.Ui.UiRankListPanel.RankListPanelCV");
 
 local M = GlobalNS.Class(GlobalNS.Form);
-M.clsName = "UIRankListPanel";
+M.clsName = "UiRankListPanel";
 GlobalNS.RankListPanelNS[M.clsName] = M;
 
 function M:ctor()
-	self.mId = GlobalNS.UIFormId.eUIRankListPanel;
+	self.mId = GlobalNS.UiFormId.eUiRankListPanel;
 	self.mData = GlobalNS.new(GlobalNS.RankListPanelNS.RankListPanelData);
 end
 
@@ -25,13 +25,18 @@ function M:onInit()
     M.super.onInit(self);
     --返回游戏按钮
 	self.mBackGameBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mBackGameBtn:addEventHandle(self, self.onBtnClk);
+	self.mBackGameBtn:addEventHandle(self, self.onBtnClk, 0);
 
     --listitem prefab
     self.mListitem_prefab = GlobalNS.new(GlobalNS.AuxPrefabLoader);
+	self.mListitem_prefab:setIsNeedInsPrefab(false);
 
     --listitems数组
     self.listitems = { };
+    self.avatarimages = { };
+    self.myavatar = nil;
+    self.honerimages = {};
+    self.myhoner = nil;
 end
 
 function M:onReady()
@@ -52,7 +57,7 @@ function M:onReady()
     self.mMyRankArea = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.RankBG, "MyRank");
 
     --加载listitem prefab
-	self.mListitem_prefab:asyncLoad("UI/UIRankListPanel/ListItem.prefab", self, self.onPrefabLoaded); 
+	self.mListitem_prefab:asyncLoad("UI/UiRankListPanel/ListItem.prefab", self, self.onPrefabLoaded, nil); 
     
     self:updateUIData();
 end
@@ -70,11 +75,27 @@ function M:onExit()
 end
 
 function M:onBtnClk()
+    if self.myavatar ~= nil then
+        self.myavatar:dispose();
+        self.myavatar = nil;
+    end
+    for i=1, #self.avatarimages do
+        self.avatarimages[i]:dispose();
+    end
+    self.avatarimages = {};
+
+    if self.myhoner ~= nil then
+        self.myhoner:dispose();
+        self.myhoner = nil;
+    end
+    for i=1, #self.honerimages do
+        self.honerimages[i]:dispose();
+    end
+    self.honerimages = {};
+    self.mListitem_prefab:dispose();
     self:exit();
-    GlobalNS.CSSystem.Ctx.mInstance.mPlayerMgr:dispose();
-	GCtx.mUiMgr:loadAndShow(GlobalNS.UIFormId.eUIStartGame);
-    --GlobalNS.CSSystem.Ctx.mInstance.mModuleSys:unloadModule(GlobalNS.CSSystem.ModuleId.GAMEMN);
-    GlobalNS.CSSystem.Ctx.mInstance.mModuleSys:loadModule(GlobalNS.CSSystem.ModuleId.LOGINMN);
+    
+    GCtx.mGameData:returnStartGame();
 end
 
 function M:onPrefabLoaded(dispObj)
@@ -104,28 +125,50 @@ function M:SetMyRankInfo()
         if(GCtx.mGameData.rankinfolist[i].m_rank == GCtx.mGameData.myRank) then
 
             --荣誉
-            local myHoner = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "Honer", "Image");
-            --myAvatar.Name = "Avatar/DefaultAvatar";
-            --Sprite avatarSprite = Resources.Load("Avatar/DefaultAvatar", typeof(Sprite)) as Sprite;
-            --myAvatar.overrideSprite = avatarSprite;
+            local myHoner = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mMyRankArea, "Honer");
+            if GCtx.mGameData.myRank > 3 then
+                myHoner:SetActive(false);
+            else
+                myHoner:SetActive(true);
+                self.myhoner = GlobalNS.new(GlobalNS.AuxImage);
+                self.myhoner:setSelfGo(myHoner);
+                if GCtx.mGameData.myRank == 1 then
+					self.myhoner:setSpritePath("DefaultSkin/SkyWarSkin/rank1.png", "rank1");
+                    --self.myhoner:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_gold");
+                elseif GCtx.mGameData.myRank == 2 then
+					self.myhoner:setSpritePath("DefaultSkin/SkyWarSkin/rank2.png", "rank2");
+                    --self.myhoner:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_yin");
+                else
+					self.myhoner:setSpritePath("DefaultSkin/SkyWarSkin/rank3.png", "rank3");
+                    --self.myhoner:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_tong");
+                end
+            end
 
             --排名
             local myRank = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "Rank", "Text");
             myRank.text = "" .. i;
 
             --头像
-            local myAvatar = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "Avatar", "Image");
-            --myAvatar.Name = "Avatar/DefaultAvatar";
-            --Sprite avatarSprite = Resources.Load("Avatar/DefaultAvatar", typeof(Sprite)) as Sprite;
-            --myAvatar.overrideSprite = avatarSprite;
+            local myAvatar = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mMyRankArea, "Avatar");
+            self.myavatar = GlobalNS.new(GlobalNS.AuxImage);
+            self.myavatar:setSelfGo(myAvatar);
+            local avatarindex = GCtx.mGameData.rankinfolist[i].m_avatarindex;
+            if avatarindex == 0 then
+                avatarindex = 1;
+            end
+			self.myavatar:setSpritePath("DefaultSkin/Avatar/"..avatarindex..".png", GlobalNS.UtilStr.tostring(avatarindex));
+            --self.myavatar:setSpritePath("DefaultSkin/Avatar/Avatar_RGB.png", GlobalNS.UtilStr.tostring(avatarindex));
 
             --用户名
             local myName = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "Name", "Text");
             myName.text = GCtx.mGameData.rankinfolist[i].m_name;
 
+            --[[
             --本轮质量
             local myMass = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "Mass", "Text");
-            myMass.text = GlobalNS.UtilMath.getShowMass(GCtx.mGameData.rankinfolist[i].m_radius);
+            local radius = GlobalNS.UtilMath.getRadiusByMass(GCtx.mGameData.rankinfolist[i].m_radius); --服务器传过来的是质量
+            myMass.text = GlobalNS.UtilMath.getShowMass(radius);
+            ]]--
 
             --吞食数量
             local mySwallowNum = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "SwallowNum", "Text");
@@ -142,30 +185,74 @@ function M:SetTopXRankInfo()
         local listitem = self.listitems[i].transform;
         
         --荣誉
-        local Honer = GlobalNS.UtilApi.getComByPath(listitem, "Honer", "Image");
-        --Sprite avatarSprite = Resources.Load("Avatar/DefaultAvatar", typeof(Sprite)) as Sprite;
-        --Avatar.overrideSprite = avatarSprite;
+        local Honer = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.listitems[i], "Honer");
+        if i > 3 then
+            Honer:SetActive(false);
+        else
+            Honer:SetActive(true);
+            local honer = GlobalNS.new(GlobalNS.AuxImage);
+            honer:setSelfGo(Honer);
+            if i == 1 then
+				honer:setSpritePath("DefaultSkin/SkyWarSkin/rank1.png", "rank1");
+                --honer:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_gold");
+            elseif i == 2 then
+				honer:setSpritePath("DefaultSkin/SkyWarSkin/rank2.png", "rank2");
+                --honer:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_yin");
+            else
+				honer:setSpritePath("DefaultSkin/SkyWarSkin/rank3.png", "rank3");
+                --honer:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_tong");
+            end
+            self.honerimages[i] = honer;
+         end
 
         --排名
         local Rank = GlobalNS.UtilApi.getComByPath(listitem, "Rank", "Text");
         Rank.text = "" .. i;
+        if GCtx.mGameData.rankinfolist[i].m_rank == GCtx.mGameData.myRank then
+            Rank.text = "<color=#32c832ff>"..i.."</color>";
+        end
 
         --头像
-        local Avatar = GlobalNS.UtilApi.getComByPath(listitem, "Avatar", "Image");
-        --Sprite avatarSprite = Resources.Load("Avatar/DefaultAvatar", typeof(Sprite)) as Sprite;
-        --Avatar.overrideSprite = avatarSprite;
+        local Avatar = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.listitems[i], "Avatar");
+        local avatarImage = GlobalNS.new(GlobalNS.AuxImage);
+        avatarImage:setSelfGo(Avatar);
+        local avatarindex = GCtx.mGameData.rankinfolist[i].m_avatarindex;
+        if avatarindex == 0 then
+            if GCtx.mGameData.rankinfolist[i].m_rank == GCtx.mGameData.myRank then
+                avatarindex = 1;
+            else
+                local _time = os.clock();
+                math.randomseed(_time + i);
+                avatarindex = math.random(1, 4);
+            end
+        end
+		avatarImage:setSpritePath("DefaultSkin/Avatar/"..avatarindex..".png", GlobalNS.UtilStr.tostring(avatarindex));
+        --avatarImage:setSpritePath("DefaultSkin/Avatar/Avatar_RGB.png", GlobalNS.UtilStr.tostring(avatarindex));
+        self.avatarimages[i] = avatarImage;
 
         --用户名
         local Name = GlobalNS.UtilApi.getComByPath(listitem, "Name", "Text");
         Name.text = GCtx.mGameData.rankinfolist[i].m_name;
+        if GCtx.mGameData.rankinfolist[i].m_rank == GCtx.mGameData.myRank then
+            Name.text = "<color=#32c832ff>"..GCtx.mGameData.rankinfolist[i].m_name.."</color>";
+        end
 
+        --[[
         --本轮质量
         local Mass = GlobalNS.UtilApi.getComByPath(listitem, "Mass", "Text");
-        Mass.text = GlobalNS.UtilMath.getShowMass(GCtx.mGameData.rankinfolist[i].m_radius);
+        local radius = GlobalNS.UtilMath.getRadiusByMass(GCtx.mGameData.rankinfolist[i].m_radius); --服务器传过来的是质量
+        Mass.text = GlobalNS.UtilMath.getShowMass(radius);
+        if GCtx.mGameData.rankinfolist[i].m_rank == GCtx.mGameData.myRank then
+            Mass.text = "<color=#32c832ff>"..GlobalNS.UtilMath.getShowMass(radius).."</color>";
+        end
+        ]]--
 
         --吞食数量
         local SwallowNum = GlobalNS.UtilApi.getComByPath(listitem, "SwallowNum", "Text");
-        SwallowNum.text = GCtx.mGameData.rankinfolist[i].m_swallownum;   
+        SwallowNum.text = GCtx.mGameData.rankinfolist[i].m_swallownum;
+        if GCtx.mGameData.rankinfolist[i].m_rank == GCtx.mGameData.myRank then
+            SwallowNum.text = "<color=#32c832ff>"..GCtx.mGameData.rankinfolist[i].m_swallownum.."</color>";
+        end
     end
 end
 

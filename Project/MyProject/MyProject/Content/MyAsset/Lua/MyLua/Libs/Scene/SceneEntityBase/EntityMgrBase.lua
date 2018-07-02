@@ -1,9 +1,9 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.Core.GObject");
-MLoader("MyLua.Libs.DelayHandle.DelayHandleMgrBase");
+MLoader("MyLua.Libs.DelayHandle.DelayPriorityHandleMgrBase");
 
-local M = GlobalNS.Class(GlobalNS.DelayHandleMgrBase);
+local M = GlobalNS.Class(GlobalNS.DelayPriorityHandleMgrBase);
 M.clsName = "EntityMgrBase";
 GlobalNS[M.clsName] = M;
 
@@ -15,33 +15,34 @@ function M:addObject(entity, priority)
     if(nil == priority) then
         priority = 0.0;
     end
-    if (self:bInDepth()) then
+	
+    if (self:isInDepth()) then
         M.super.addObject(self, entity);
     else
-        self.mSceneEntityList:Add(entity);
+        self.mSceneEntityList:add(entity);
     end
 end
 
 function M:removeObject(entity)
-    if (self:bInDepth()) then
+    if (self:isInDepth()) then
         M.super.removeObject(self, entity);
     else
-        self.mSceneEntityList:Remove(entity);
+        self.mSceneEntityList:remove(entity);
     end
 end
 
-function M:onTick(delta)
+function M:onTick(delta, tickMode)
     self:incDepth();
 
-    self:onTickExec(delta);
+    self:onTickExec(delta, tickMode);
 
     self:decDepth();
 end
 
-function M:onTickExec(delta)
+function M:onTickExec(delta, tickMode)
     for _, entity in ipairs(self.mSceneEntityList:list()) do
         if (not entity.getClientDispose()) then
-            entity.onTick(delta);
+            entity.onTick(delta, tickMode);
         end
     end
 end
@@ -57,3 +58,5 @@ end
 function M:getEntityByThisId(thisId)
     return nil;
 end
+
+return M;

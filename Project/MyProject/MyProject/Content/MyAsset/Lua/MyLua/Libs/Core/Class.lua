@@ -1,7 +1,6 @@
--- 定义一个类表
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 
+-- 定义一个类表
 local Class = function (super)
     local classType = {};        -- 返回的类表
     classType.ctor = false;      -- 默认是没有构造函数的

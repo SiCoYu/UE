@@ -2,7 +2,7 @@ MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.Core.GObject");
 
-MLoader("MyLua.UI.UIRelivePanel.RelivePanelNS");
+MLoader("MyLua.Ui.UiRelivePanel.RelivePanelNS");
 
 local M = GlobalNS.Class(GlobalNS.GObject);
 M.clsName = "RelivePanelData";

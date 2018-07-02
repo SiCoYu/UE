@@ -1,10 +1,10 @@
---[[
-    @brief 倒计时定时器
-]]
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.FrameHandle.TimerItemBase");
+
+--[[
+    @brief 倒计时定时器
+]]
 
 local M = GlobalNS.Class(GlobalNS.TimerItemBase);
 M.clsName = "DaoJiShiTimer";
@@ -40,17 +40,19 @@ function M:OnTimer(delta)
     self.mIntervalLeftTime = self.mIntervalLeftTime + delta;
 
     if self.mIsInfineLoop then
-        self:checkAndDisp();
+        self:checkAndDispatch();
     else
         if self.mCurRunTime <= 0 then
-            self:disposeAndDisp();
+            self:disposeAndDispatch();
         else
-            self:checkAndDisp();
+            self:checkAndDispatch();
         end
     end
 end
 
 function M:reset()
+	M.super.reset(self);
+	
     self.mCurRunTime = self.mTotalTime;
     self.mCurCallTime = 0;
     self.mIntervalLeftTime = 0;

@@ -1,7 +1,7 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.StaticClass");
 
-MLoader("MyLua.UI.UIConsoleDlg.ConsoleDlgNS");
+MLoader("MyLua.Ui.UiConsoleDlg.ConsoleDlgNS");
 
 --常量区
 local M = GlobalNS.StaticClass();

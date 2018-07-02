@@ -1,8 +1,7 @@
--- 类加载器，加载类使用，不要在使用这个，使用 ModuleImport.lua 这个
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.StaticClass");
 
+-- 类加载器，加载类使用，不要在使用这个，使用 ModuleImport.lua 这个
 local M = GlobalNS.StaticClass();
 M.clsName = "ClassLoader";     -- 记录类的名字，方便调试
 GlobalNS[M.clsName] = M;

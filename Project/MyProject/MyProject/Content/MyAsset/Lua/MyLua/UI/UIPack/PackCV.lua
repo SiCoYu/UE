@@ -1,7 +1,7 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.StaticClass");
 
-MLoader("MyLua.UI.UITest.PackNS");
+MLoader("MyLua.Ui.UiTest.PackNS");
 
 local M = GlobalNS.StaticClass();
 local this = M;

@@ -1,7 +1,7 @@
-MLoader("MyLua.Libs.Network.CmdDisp.NetModuleDispHandle");
+MLoader("MyLua.Libs.Network.CmdDispatch.NetModuleDispatchHandle");
 MLoader("MyLua.Module.Login.LoginNetHandle.LoginCmdHandle");
 
-local M = GlobalNS.Class(GlobalNS.NetModuleDispHandle);
+local M = GlobalNS.Class(GlobalNS.NetModuleDispatchHandle);
 M.clsName = "LoginNetHandleCB";
 GlobalNS[M.clsName] = M;
 

@@ -1,21 +1,21 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UITest.TestNS");
-MLoader("MyLua.UI.UITest.TestData");
-MLoader("MyLua.UI.UITest.TestCV");
+MLoader("MyLua.Ui.UiTest.TestNS");
+MLoader("MyLua.Ui.UiTest.TestData");
+MLoader("MyLua.Ui.UiTest.TestCV");
 
 local M = GlobalNS.Class(GlobalNS.Form);
-M.clsName = "UITest";
+M.clsName = "UiTest";
 GlobalNS.TestNS[M.clsName] = M;
 
 function M:ctor()
     --print("M:ctor()");
     --print(tostring(self));
-	self.mId = GlobalNS.UIFormId.eUITest;
+	self.mId = GlobalNS.UiFormId.eUiTest;
 	self.mData = GlobalNS.new(GlobalNS.TestNS.TestData);
 end
 
@@ -28,7 +28,7 @@ function M:onInit()
     --print("M:onInit()");
 	
 	self.mTestBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mTestBtn:addEventHandle(self, self.onBtnClk);
+	self.mTestBtn:addEventHandle(self, self.onBtnClk, 0);
 end
 
 function M:onReady()
@@ -36,7 +36,7 @@ function M:onReady()
     -- self.super.onReady(self)
     M.super.onReady(self);
     --print("M:onReady()");
-    --GlobalNS.CSImportToLua.UtilApi.addEventHandle(self.gameObject, self.onBtnClk);
+    --GlobalNS.CSImportToLua.UtilApi.addEventHandle(self.gameObject, self.onBtnClk, 0);
 	--SDK.Lib.UtilApi.addEventHandle(self.gameObject, "Button", self.onBtnClk);
 	--GlobalNS.UtilApi.addEventHandleByPath(self.mGuiWin, GlobalNS.TestNS.TestPath.BtnTest, self, self.onBtnClk);
 	self.mTestBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, GlobalNS.TestNS.TestPath.BtnTest));

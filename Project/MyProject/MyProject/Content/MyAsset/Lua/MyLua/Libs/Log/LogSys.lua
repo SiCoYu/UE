@@ -1,3 +1,11 @@
+MLoader("MyLua.Libs.Core.GlobalNS");
+MLoader("MyLua.Libs.Core.Class");
+MLoader("MyLua.Libs.Core.GObject");
+
+--[[
+	@brief 日志系统
+]]
+
 local M = GlobalNS.Class(GlobalNS.GObject);
 M.clsName = "LogSys";
 GlobalNS[M.clsName] = M;

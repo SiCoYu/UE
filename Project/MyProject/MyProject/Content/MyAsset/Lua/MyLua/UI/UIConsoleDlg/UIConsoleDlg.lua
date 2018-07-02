@@ -1,20 +1,20 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UIConsoleDlg.ConsoleDlgNS");
-MLoader("MyLua.UI.UIConsoleDlg.ConsoleDlgData");
-MLoader("MyLua.UI.UIConsoleDlg.ConsoleDlgCV");
+MLoader("MyLua.Ui.UiConsoleDlg.ConsoleDlgNS");
+MLoader("MyLua.Ui.UiConsoleDlg.ConsoleDlgData");
+MLoader("MyLua.Ui.UiConsoleDlg.ConsoleDlgCV");
 
 --UI区
 local M = GlobalNS.Class(GlobalNS.Form);
-M.clsName = "UIConsoleDlg";
+M.clsName = "UiConsoleDlg";
 GlobalNS.ConsoleDlgNS[M.clsName] = M;
 
 function M:ctor()
-	self.mId = GlobalNS.UIFormId.eUIConsoleDlg;
+	self.mId = GlobalNS.UiFormId.eUiConsoleDlg;
 	self.mData = GlobalNS.new(GlobalNS.ConsoleDlgNS.ConsoleDlgData);
 end
 
@@ -31,13 +31,13 @@ function M:onInit()
     self.log = "";
 	
 	self.mSendBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mSendBtn:addEventHandle(self, self.onSendBtnClk);
+	self.mSendBtn:addEventHandle(self, self.onSendBtnClk, 0);
 
     self.mExitBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mExitBtn:addEventHandle(self, self.onExitBtnClk);
+	self.mExitBtn:addEventHandle(self, self.onExitBtnClk, 0);
 
     self.mClearBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mClearBtn:addEventHandle(self, self.onClearBtnClk);
+	self.mClearBtn:addEventHandle(self, self.onClearBtnClk, 0);
 end
 
 function M:onReady()
@@ -62,7 +62,11 @@ function M:onReady()
 
     self.locklog = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "LockLog");
     self.locklogtoggle = GlobalNS.UtilApi.GetComponent(self.locklog, "Toggle");
-    --self.locklog:addEventHandle(self, self.onToggleChanged);
+    --self.locklog:addEventHandle(self, self.onToggleChanged, 0);
+
+    local cmdtoggle = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Cmd_Toggle");
+    self.ClientToggle = GlobalNS.UtilApi.getComByPath(cmdtoggle, "ClientToggle", "Toggle");
+    self.ServerToggle = GlobalNS.UtilApi.getComByPath(cmdtoggle, "ServerToggle", "Toggle");
 
     if self.locklogtoggle.isOn then
         GCtx.mLogSys:log("locked  ", GlobalNS.LogTypeId.eLogCommon);
@@ -83,6 +87,13 @@ end
 
 function M:onSendBtnClk()
 	local cmdtext = self.inputText.text;
+    if self.ClientToggle.isOn then
+        cmdtext = "client " .. cmdtext;
+    end
+    if self.ServerToggle.isOn then
+        cmdtext = "server " .. cmdtext;
+    end
+
     if string.len(cmdtext) > 0 then
         if string.find(cmdtext,"client") == 1 then
             self:doClientCmd(cmdtext);
@@ -105,11 +116,17 @@ function M:doClientCmd(str)
 end
 
 function M:doCmd(str)
-    local index = string.find(str,"=");
-    local cmd = string.sub(str, 1, index-1);
-    local params = string.sub(str, index+1);
-    if self.mData.mId2HandleDic:ContainsKey(cmd) then        
-        self.mData.mId2HandleDic:value(cmd)(params);
+    local index = string.find(str," ");
+    local cmd = nil;
+    local params = nil;
+    if index == nil then
+        cmd = str;
+    else
+        cmd = string.sub(str, 1, index-1);
+        params = string.sub(str, index+1);
+    end 
+    if self.mData.mId2HandleDic:containsKey(cmd) then        
+        self.mData.mId2HandleDic:value(cmd)(self.mData, params);
     else
         self:onSetLogText(cmd .. " <color=#FF0000>指令不存在</color>");
     end
@@ -122,7 +139,10 @@ function M:sendServerCmd(str)
     else
         local cmd = string.sub(str, index+1);
         --发送
-
+        --[[ for Kbe
+        self.heroentity = GlobalNS.CSSystem.Ctx.msInstance.mPlayerMgr:getHero():getEntity();
+        self.heroentity:cellCall("exeGMCommand", cmd);
+        ]]--
         self:onSetLogText("<color=#00FF00>[Server指令]</color> " .. str);
     end
 end

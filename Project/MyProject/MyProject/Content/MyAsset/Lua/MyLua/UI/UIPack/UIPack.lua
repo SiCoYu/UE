@@ -1,19 +1,19 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UITest.PackNS");
-MLoader("MyLua.UI.UITest.PackData");
-MLoader("MyLua.UI.UITest.PackCV");
+MLoader("MyLua.Ui.UiTest.PackNS");
+MLoader("MyLua.Ui.UiTest.PackData");
+MLoader("MyLua.Ui.UiTest.PackCV");
 
 local M = GlobalNS.Class(GlobalNS.Form);
-M.clsName = "UIPack";
+M.clsName = "UiPack";
 GlobalNS.TestNS[M.clsName] = M;
 
 function M:ctor()
-	self.mId = GlobalNS.UIFormId.eUIPack;
+	self.mId = GlobalNS.UiFormId.eUiPack;
 	self.mData = GlobalNS.new(GlobalNS.PackNS.PackData);
 end
 
@@ -24,7 +24,7 @@ end
 function M:onInit()
     M.super.onInit(self);
 	self.mTestBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mTestBtn:addEventHandle(self, self.onBtnClk);
+	self.mTestBtn:addEventHandle(self, self.onBtnClk, 0);
 end
 
 function M:onReady()

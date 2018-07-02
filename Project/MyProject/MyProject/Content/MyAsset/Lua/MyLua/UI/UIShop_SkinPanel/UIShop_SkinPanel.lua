@@ -1,21 +1,21 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UIShop_SkinPanel.Shop_SkinPanelNS");
-MLoader("MyLua.UI.UIShop_SkinPanel.Shop_SkinPanelData");
-MLoader("MyLua.UI.UIShop_SkinPanel.Shop_SkinPanelCV");
-MLoader("MyLua.UI.UIShop_SkinPanel.GoodsItemData");
+MLoader("MyLua.Ui.UiShop_SkinPanel.Shop_SkinPanelNS");
+MLoader("MyLua.Ui.UiShop_SkinPanel.Shop_SkinPanelData");
+MLoader("MyLua.Ui.UiShop_SkinPanel.Shop_SkinPanelCV");
+MLoader("MyLua.Ui.UiShop_SkinPanel.GoodsItemData");
 
 --UI区
 local M = GlobalNS.Class(GlobalNS.Form);
-M.clsName = "UIShop_SkinPanel";
+M.clsName = "UiShop_SkinPanel";
 GlobalNS.Shop_SkinPanelNS[M.clsName] = M;
 
 function M:ctor()
-	self.mId = GlobalNS.UIFormId.eUIShop_SkinPanel;
+	self.mId = GlobalNS.UiFormId.eUiShop_SkinPanel;
 	self.mData = GlobalNS.new(GlobalNS.Shop_SkinPanelNS.Shop_SkinPanelData);
 end
 
@@ -27,7 +27,7 @@ function M:onInit()
     M.super.onInit(self);
     --商店类别
     self.mSkinBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mSkinBtn:addEventHandle(self, self.onSkinBtnClk);
+	self.mSkinBtn:addEventHandle(self, self.onSkinBtnClk, 0);
     --[[待扩充
     self.mSkinBtn = GlobalNS.new(GlobalNS.AuxButton);
 	self.mSkinBtn:addEventHandle(self, self.onSkinBtnClk);
@@ -35,24 +35,26 @@ function M:onInit()
 	self.mSkinBtn:addEventHandle(self, self.onSkinBtnClk);
 	]]--
     self.mHaiXingBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mHaiXingBtn:addEventHandle(self, self.onHaiXingBtnClk);
+	self.mHaiXingBtn:addEventHandle(self, self.onHaiXingBtnClk, 0);
     self.mZhenZhuBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mZhenZhuBtn:addEventHandle(self, self.onZhenZhuBtnClk);
+	self.mZhenZhuBtn:addEventHandle(self, self.onZhenZhuBtnClk, 0);
     
     --物品类别
     self.mShapeBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mShapeBtn:addEventHandle(self, self.onShapeBtnClk);
+	self.mShapeBtn:addEventHandle(self, self.onShapeBtnClk, 0);
     self.mChildBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mChildBtn:addEventHandle(self, self.onChildBtnClk);    
+	self.mChildBtn:addEventHandle(self, self.onChildBtnClk, 0);
+    self.mFilterToggle = nil;
     --goodsitem prefab
     self.mGoodsitem_prefab = GlobalNS.new(GlobalNS.AuxPrefabLoader);
+	self.mGoodsitem_prefab:setIsNeedInsPrefab(false);
     self.isPrefabLoaded = false;
     --goodsitems gameobject数组
     self.goodsitems = { };
 
     --返回
 	self.mBackBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mBackBtn:addEventHandle(self, self.onBackBtnClk);
+	self.mBackBtn:addEventHandle(self, self.onBackBtnClk, 0);
 end
 
 function M:onReady()
@@ -79,25 +81,29 @@ function M:onReady()
     self.mShapeBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(Middle_TopPanel, "Shape_BtnTouch"));
     self.mChildBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(Middle_TopPanel, "Child_BtnTouch"));
     self.StateText = GlobalNS.UtilApi.getComByPath(Middle_TopPanel, "StateText", "Text");
+
+    self.mFilterToggle = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Middle_TopPanel, "FilterToggle")
+    GlobalNS.UtilApi.addToggleHandle(self.mFilterToggle, self, self.onValueChanged);
     --[[下拉列表待补充]]--
 
     self.scrollrect = GlobalNS.UtilApi.TransFindChildByPObjAndPath(MiddlePanel, "ScrollRect");
     local viewport =  GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.scrollrect, "Viewport");
     self.GoodsContentRect = GlobalNS.UtilApi.getComByPath(viewport, "Content", "RectTransform");
     self.Tip = GlobalNS.UtilApi.TransFindChildByPObjAndPath(MiddlePanel, "Tip");
+    self.Tip:SetActive(false);
     --加载goodsitems
-	self.mGoodsitem_prefab:asyncLoad("UI/UIShop_SkinPanel/GoodsItem.prefab", self, self.onPrefabLoaded);    
+	self.mGoodsitem_prefab:asyncLoad("UI/UiShop_SkinPanel/GoodsItem.prefab", self, self.onPrefabLoaded, nil);    
 
     --底部
     local BottomBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "BottomBGImage");
 	self.mBackBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(BottomBG, "Back_BtnTouch"));
 
     --货币
-    if not GlobalNS.CSSystem.Ctx.mInstance.mSystemSetting:hasKey(GCtx.mGoodsData.HaiXingId) then
+    if not GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtx.mGoodsData.HaiXingId) then
         self:refreshGoldNum(10000, 10000);
     else
-        local haixing = GlobalNS.CSSystem.Ctx.mInstance.mSystemSetting:getInt(GCtx.mGoodsData.HaiXingId);
-        local zhenzhu = GlobalNS.CSSystem.Ctx.mInstance.mSystemSetting:getInt(GCtx.mGoodsData.ZhenZhuId);
+        local haixing = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtx.mGoodsData.HaiXingId);
+        local zhenzhu = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtx.mGoodsData.ZhenZhuId);
         self:refreshGoldNum(haixing, zhenzhu);
     end
 end
@@ -115,7 +121,7 @@ function M:onExit()
 end
 
 function M:onSkinBtnClk()
-	GCtx.mGoodsData.CurrentShopType = GlobalNS.UIFormId.eUIShop_SkinPanel;
+	GCtx.mGoodsData.CurrentShopType = GlobalNS.UiFormId.eUiShop_SkinPanel;
 end
 --[[待扩充
 function M:onSkinBtnClk()
@@ -245,15 +251,30 @@ function M:SetGoodsItems(isOwn)
 end
 
 function M:refreshGoldNum(HaiXingNum, ZhenZhuNum)
-	GlobalNS.CSSystem.Ctx.mInstance.mSystemSetting:setInt(GCtx.mGoodsData.HaiXingId, HaiXingNum);
-    GlobalNS.CSSystem.Ctx.mInstance.mSystemSetting:setInt(GCtx.mGoodsData.ZhenZhuId, ZhenZhuNum);
+	GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:setInt(GCtx.mGoodsData.HaiXingId, HaiXingNum);
+    GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:setInt(GCtx.mGoodsData.ZhenZhuId, ZhenZhuNum);
 
     self.HaiXingNumText.text = HaiXingNum;
     self.ZhenZhuNumText.text = ZhenZhuNum;
 end
 
 function M:onBackBtnClk()
+    --清空
+    for i=1, #self.goodsitems do
+        local goodsitem = self.goodsitems[i];
+        GlobalNS.UtilApi.Destroy(goodsitem.m_go);
+    end
+    self.goodsitems = {};
+    self.mGoodsitem_prefab:dispose();
 	self:exit();
+end
+
+function M:onValueChanged(check)
+    if check then
+        GCtx.mLogSys:log("true", GlobalNS.LogTypeId.eLogCommon);
+    else
+        GCtx.mLogSys:log("false", GlobalNS.LogTypeId.eLogCommon);
+    end
 end
 
 return M;

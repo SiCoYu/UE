@@ -1,6 +1,6 @@
-MLoader("MyLua.Libs.Network.CmdDisp.NetCmdDispHandle");
+MLoader("MyLua.Libs.Network.CmdDispatch.NetCmdDispatchHandle");
 
-local M = GlobalNS.Class(GlobalNS.NetCmdDispHandle);
+local M = GlobalNS.Class(GlobalNS.NetCmdDispatchHandle);
 M.clsName = "LoginCmdHandle";
 GlobalNS[M.clsName] = M;
 

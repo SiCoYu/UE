@@ -28,7 +28,7 @@ function M:call()
     elseif nil ~= self.mHandle then
         return self.mHandle(unpack(self.mParam));
     else
-        return 0
+        return 0;
     end
 end
 

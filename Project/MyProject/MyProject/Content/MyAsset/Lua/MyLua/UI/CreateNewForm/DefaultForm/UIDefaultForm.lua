@@ -1,12 +1,12 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UIDefaultForm.DefaultFormNS");
-MLoader("MyLua.UI.UIDefaultForm.DefaultFormData");
-MLoader("MyLua.UI.UIDefaultForm.DefaultFormCV");
+MLoader("MyLua.Ui.UIDefaultForm.DefaultFormNS");
+MLoader("MyLua.Ui.UIDefaultForm.DefaultFormData");
+MLoader("MyLua.Ui.UIDefaultForm.DefaultFormCV");
 
 --UI区
 local M = GlobalNS.Class(GlobalNS.Form);
@@ -14,7 +14,7 @@ M.clsName = "UIDefaultForm";
 GlobalNS.DefaultFormNS[M.clsName] = M;
 
 function M:ctor()
-	self.mId = GlobalNS.UIFormId.eUIDefaultForm;
+	self.mId = GlobalNS.UiFormId.eUIDefaultForm;
 	self.mData = GlobalNS.new(GlobalNS.DefaultFormNS.DefaultFormData);
 end
 
@@ -26,7 +26,7 @@ function M:onInit()
     M.super.onInit(self);
 	
 	--self.mDefaultBtn = GlobalNS.new(GlobalNS.AuxButton);
-	--self.mDefaultBtn:addEventHandle(self, self.onBtnClk);
+	--self.mDefaultBtn:addEventHandle(self, self.onBtnClk, 0);
 end
 
 function M:onReady()

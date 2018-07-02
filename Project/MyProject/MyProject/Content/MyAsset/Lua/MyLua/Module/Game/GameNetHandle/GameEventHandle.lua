@@ -1,11 +1,10 @@
-MLoader("MyLua.Libs.Network.CmdDisp.NetCmdDispHandle_KBE");
+MLoader("MyLua.Libs.Network.CmdDispatch.NetCmdDispatchHandle_KBE");
 
-local M = GlobalNS.Class(GlobalNS.NetCmdDispHandle_KBE);
+local M = GlobalNS.Class(GlobalNS.NetCmdDispatchHandle_KBE);
 M.clsName = "GameEventHandle";
 GlobalNS[M.clsName] = M;
 
 function M:ctor()
-    
 end
 
 function M:dtor()
@@ -15,6 +14,11 @@ function M:dtor()
     GCtx.mNetCmdNotify_KBE:removeParamHandle("notifyTop10RankInfoList", self, self.notifyTop10RankInfoList);
     GCtx.mNetCmdNotify_KBE:removeParamHandle("notifyGameLeftSeconds", self, self.notifyGameLeftSeconds);
     GCtx.mNetCmdNotify_KBE:removeParamHandle("notifyResultRankInfoList", self, self.notifyResultRankInfoList);
+    GCtx.mNetCmdNotify_KBE:removeParamHandle("notifyNetworkInvalid", self, self.notifyNetworkInvalid);
+    GCtx.mNetCmdNotify_KBE:removeParamHandle("notifySomeMessage", self, self.notifySomeMessage);
+    GCtx.mNetCmdNotify_KBE:removeParamHandle("ShowNoticeMsg", self, self.ShowNoticeMsg);
+    GCtx.mNetCmdNotify_KBE:removeParamHandle("ShowEmoticon", self, self.ShowEmoticon);
+    GCtx.mNetCmdNotify_KBE:removeParamHandle("UpdateMyScore", self, self.UpdateMyScore);
 end
 
 function M:init()
@@ -24,6 +28,11 @@ function M:init()
     GCtx.mNetCmdNotify_KBE:addParamHandle("notifyTop10RankInfoList", self, self.notifyTop10RankInfoList);
     GCtx.mNetCmdNotify_KBE:addParamHandle("notifyGameLeftSeconds", self, self.notifyGameLeftSeconds);
     GCtx.mNetCmdNotify_KBE:addParamHandle("notifyResultRankInfoList", self, self.notifyResultRankInfoList);
+    GCtx.mNetCmdNotify_KBE:addParamHandle("notifyNetworkInvalid", self, self.notifyNetworkInvalid);
+    GCtx.mNetCmdNotify_KBE:addParamHandle("notifySomeMessage", self, self.notifySomeMessage);
+    GCtx.mNetCmdNotify_KBE:addParamHandle("ShowNoticeMsg", self, self.ShowNoticeMsg);
+    GCtx.mNetCmdNotify_KBE:addParamHandle("ShowEmoticon", self, self.ShowEmoticon);
+    GCtx.mNetCmdNotify_KBE:addParamHandle("UpdateMyScore", self, self.UpdateMyScore);
 end
 
 function M:dtor()
@@ -37,8 +46,8 @@ end
 function M:handleSendAndGetMessage(params)
     local msgName = params[0];
     if not self:filterMessage(msgName) then
-        if GCtx.mUiMgr:hasForm(GlobalNS.UIFormId.eUIConsoleDlg) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UIFormId.eUIConsoleDlg);
+        if GCtx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiConsoleDlg) then
+        local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiConsoleDlg);
             if nil ~= form and form.mIsReady then
                 form:onSetLogText(msgName);
             end
@@ -46,12 +55,18 @@ function M:handleSendAndGetMessage(params)
     end    
 end
 
-function M:filterMessage(msgname) --œ˚œ¢π˝¬À
+function M:filterMessage(msgname) --Ê∂àÊÅØËøáÊª§
     if string.find(msgname, "Client_onUpdateBasePosXZ") ~= nil or
        string.find(msgname, "Baseapp_onUpdateDataFromClient") ~= nil or
        string.find(msgname, "Client_onUpdateData_xyz") ~= nil or
        string.find(msgname, "Baseapp_onClientActiveTick") ~= nil or
-       string.find(msgname, "Client_onAppActiveTickCB") ~= nil
+       string.find(msgname, "Client_onAppActiveTickCB") ~= nil or
+       string.find(msgname, "Client_onEntityEnterWorld") ~= nil or
+       string.find(msgname, "Client_onUpdatePropertys") ~= nil or
+       string.find(msgname, "Client_setSpaceData") ~= nil or
+       string.find(msgname, "Client_onEntityLeaveWorldOptimized") ~= nil or
+       string.find(msgname, "Client_onRemoteMethodCall") ~= nil or
+       string.find(msgname, "Client_onUpdateData_xz") ~= nil
     then
         return true;
     else
@@ -60,40 +75,78 @@ function M:filterMessage(msgname) --œ˚œ¢π˝¬À
 end
 
 function M:Client_notifyReliveSeconds(params)
-    local reliveseconds = params[0]; --param «C#µƒ ˝◊È£¨¥”0ø™ º
-    local entityID = params[1];
-    local form = GCtx.mUiMgr:loadAndShow(GlobalNS.UIFormId.eUIRelivePanel);
-    if nil ~= form then 
-        form:Client_notifyReliveSeconds(reliveseconds, entityID);
-    end
+    local reliveTime = params[0]; --paramÊòØC#ÁöÑÊï∞ÁªÑÔºå‰ªé0ÂºÄÂßã
+    local enemyName = params[1];
+    local isKilledBySelf = params[2];
+
+    --ÈáçÁîüÂêéÂÅúÊ≠¢ÁßªÂä®
+    GlobalNS.CSSystem.Ctx.msInstance.mDataPlayer.mDataHero:setMoveVec(Vector2.New(0, 0));
+
+    GCtx.mGameData.reliveTime = reliveTime;
+    GCtx.mGameData.enemyName = enemyName;
+    GCtx.mGameData.iskilledbyself = isKilledBySelf;
+    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiRelivePanel);
 end
 
 function M:notifyTop10RankInfoList(params)
-    if GCtx.mUiMgr:hasForm(GlobalNS.UIFormId.eUITopXRankPanel) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UIFormId.eUITopXRankPanel);
-        if nil ~= form and form.mIsReady then            
-            form:onSetRankInfo(params);
-        end
-    end
+    GCtx.mGameData:setTop10RankList(params);
 end
 
 function M:notifyGameLeftSeconds(params)
     local leftseconds = params[0];
-    if GCtx.mUiMgr:hasForm(GlobalNS.UIFormId.eUIPlayerDataPanel) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UIFormId.eUIPlayerDataPanel);
-        if nil ~= form and form.mIsReady then
-            form:refreshLeftTime(leftseconds);
-        end
-    end    
+    GCtx.mGameData:setGameTime(leftseconds);
 end
 
 function M:notifyResultRankInfoList(params)
-    GCtx.mUiMgr:exitForm(GlobalNS.UIFormId.eUIPlayerDataPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UIFormId.eUIOptionPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UIFormId.eUITopXRankPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiPlayerDataPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiOptionPanel);
+    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiTopXRankPanel);
 
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UIFormId.eUIRankListPanel);
+    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiRankListPanel);
     GCtx.mGameData:setRankInfoList(params);
+    GCtx.mGameData:clearResource();
+end
+
+function M:notifyNetworkInvalid()
+    GCtx.mGameData.mMessageMethond = 1;
+    GCtx.mGameData:ShowMessageBox("Â∑≤‰∏éÊúçÂä°Âô®Êñ≠ÂºÄËøûÊé•");
+end
+
+function M:notifySomeMessage(params)
+    local msg = params[0];
+    GCtx.mGameData:ShowRollMessage(msg);
+end
+
+function M:ShowNoticeMsg()
+    local times = 0;
+    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("NoticeTimes") then
+        times = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt("NoticeTimes");
+    end
+    
+    if GlobalNS.CSSystem.Ctx.msInstance.mShareData.noticeTimes > times then
+        GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:setInt("NoticeTimes", times+1);
+        
+        local msg = string.gsub(GlobalNS.CSSystem.Ctx.msInstance.mShareData.noticeMsg, "\\n", "\n");
+        GCtx.mGameData:ShowMessageBox(msg);
+    end
+end
+
+function M:ShowEmoticon()
+    -- ÁªìÁÆóÊó∂Â∞±‰∏çÊòæÁ§∫‰∫Ü
+    local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiRankListPanel);
+    if nil == form or not form:isVisible() then            
+         GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiEmoticonPanel);
+    end
+end
+
+function M:UpdateMyScore(params)
+    local score = params[0];
+    local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiPlayerDataPanel);
+    if nil ~= form and form:isVisible() then
+        form:refreshScore(score);
+    else
+        GCtx.mGameData.mMyScore = score;
+    end
 end
 
 return M;

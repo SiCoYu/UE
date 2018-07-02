@@ -12,10 +12,12 @@ function M:ctor(...)
     self.m_Name = "";
     self.m_NeedId = 0;
     self.m_NeedNum = 0;
+    self.buyItemBtn = nil;
 end
 
 function M:dtor()
-
+    self.m_go:dispose();
+    self.buyItemBtn:dispose();
 end
 
 function M:init(_Prefab, _Content, _index, isOwn)
@@ -27,9 +29,9 @@ function M:init(_Prefab, _Content, _index, isOwn)
     self.buyItemBtn = GlobalNS.new(GlobalNS.AuxButton);
     self.buyItemBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.m_go, "BuyItem_BtnTouch"));
     if isOwn then
-        self.buyItemBtn:addEventHandle(self, self.onUseBtnClk);
+        self.buyItemBtn:addEventHandle(self, self.onUseBtnClk, 0);
     else
-        self.buyItemBtn:addEventHandle(self, self.onBuyBtnClk);
+        self.buyItemBtn:addEventHandle(self, self.onBuyBtnClk, 0);
     end
 end
 
@@ -38,8 +40,8 @@ function M:onUseBtnClk()
 end
 
 function M:onBuyBtnClk()
-	local haixing = GlobalNS.CSSystem.Ctx.mInstance.mSystemSetting:getInt(GCtx.mGoodsData.HaiXingId);
-    local zhenzhu = GlobalNS.CSSystem.Ctx.mInstance.mSystemSetting:getInt(GCtx.mGoodsData.ZhenZhuId);
+	local haixing = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtx.mGoodsData.HaiXingId);
+    local zhenzhu = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtx.mGoodsData.ZhenZhuId);
 
     if self.m_NeedId == tonumber(GCtx.mGoodsData.HaiXingId) then
         if haixing >= self.m_NeedNum then
@@ -57,8 +59,8 @@ function M:onBuyBtnClk()
         end
     end
 
-    if GCtx.mUiMgr:hasForm(GlobalNS.UIFormId.eUIShop_SkinPanel) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UIFormId.eUIShop_SkinPanel);
+    if GCtx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiShop_SkinPanel) then
+        local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiShop_SkinPanel);
         if nil ~= form and form.mIsReady then
             form:refreshGoldNum(haixing, zhenzhu);
         end

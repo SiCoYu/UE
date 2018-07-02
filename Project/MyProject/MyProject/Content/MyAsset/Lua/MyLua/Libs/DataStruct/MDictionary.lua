@@ -1,10 +1,10 @@
---[[
-    @brief 字典实现
-]]
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.Core.GObject");
+
+--[[
+    @brief 字典实现
+]]
 
 local M = GlobalNS.Class(GlobalNS.GObject);
 M.clsName = "MDictionary";
@@ -57,21 +57,21 @@ function M:key(value)
     return nil;
 end
 
-function M:Add(key, value)
+function M:add(key, value)
     self.mData[key] = value;
 end
 
-function M:Remove(key)
+function M:remove(key)
     -- table.remove 只能移除数组
     -- table.remove(self.mData, key);
     self.mData[key] = nil;
 end
 
-function M:Clear()
+function M:clear()
     self.mData = {};
 end
 
-function M:ContainsKey(key)
+function M:containsKey(key)
     --[[
     for key_, value_ in pairs(self.mData) do
         if key_ == key then
@@ -85,7 +85,7 @@ function M:ContainsKey(key)
     return self.mData[key] ~= nil;
 end
 
-function M:ContainsValue(value)
+function M:containsValue(value)
     for _, value_ in pairs(self.mData) do
         if value_ == value then
             return true;

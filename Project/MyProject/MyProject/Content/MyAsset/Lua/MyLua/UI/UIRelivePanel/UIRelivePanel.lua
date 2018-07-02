@@ -1,21 +1,21 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UIRelivePanel.RelivePanelNS");
-MLoader("MyLua.UI.UIRelivePanel.RelivePanelData");
-MLoader("MyLua.UI.UIRelivePanel.RelivePanelCV");
+MLoader("MyLua.Ui.UiRelivePanel.RelivePanelNS");
+MLoader("MyLua.Ui.UiRelivePanel.RelivePanelData");
+MLoader("MyLua.Ui.UiRelivePanel.RelivePanelCV");
 
 local M = GlobalNS.Class(GlobalNS.Form);
-M.clsName = "UIRelivePanel";
+M.clsName = "UiRelivePanel";
 GlobalNS.RelivePanelNS[M.clsName] = M;
 
 function M:ctor()
-	self.mId = GlobalNS.UIFormId.eUIRelivePanel;
+	self.mId = GlobalNS.UiFormId.eUiRelivePanel;
 	self.mData = GlobalNS.new(GlobalNS.RelivePanelNS.RelivePanelData);
-    self.mTimer = GlobalNS.new(GlobalNS.TimerItemBase);
+    self.mTimer = GlobalNS.new(GlobalNS.DaoJiShiTimer);
 end
 
 function M:dtor()
@@ -28,10 +28,10 @@ function M:onInit()
     self.roomFatherBtn = GlobalNS.new(GlobalNS.AuxButton);
 
     self.mBackRoomBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mBackRoomBtn:addEventHandle(self, self.onBtnBackRoomClk);
+	self.mBackRoomBtn:addEventHandle(self, self.onBtnBackRoomClk, 0);
 	
 	self.mReliveBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mReliveBtn:addEventHandle(self, self.onBtnReliveClk);
+	self.mReliveBtn:addEventHandle(self, self.onBtnReliveClk, 0);
 end
 
 function M:onReady()
@@ -45,7 +45,13 @@ function M:onReady()
 	self.mReliveBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
 			self.mGuiWin, 
 			GlobalNS.RelivePanelNS.RelivePanelPath.BtnRelive)
-		);    
+		);
+
+    if GCtx.mGameData.enemyId ~= 0 then
+        self:UpdateReliveTimeAndEnemyName(GCtx.mGameData.reliveTime, GCtx.mGameData.enemyName);
+    end 
+    
+    GlobalNS.CSSystem.Ctx.msInstance.mDataPlayer.mDataHero:setCanMove(false);
 end
 
 function M:onShow()
@@ -58,6 +64,8 @@ end
 
 function M:onExit()
     M.super.onExit(self);
+    self.mTimer:Stop();
+    GlobalNS.CSSystem.Ctx.msInstance.mDataPlayer.mDataHero:setCanMove(true);
 end
 
 function M:onBtnReliveClk()
@@ -66,25 +74,25 @@ function M:onBtnReliveClk()
 end
 
 function M:onBtnBackRoomClk()
-	GCtx.mLogSys:log("Back Room", GlobalNS.LogTypeId.eLogCommon);
+    self.mTimer:Stop();
+	GCtx.mGameData:returnStartGame();
 end
 
-function M:Client_notifyReliveSeconds(reliveseconds, entityID)
+function M:UpdateReliveTimeAndEnemyName(reliveseconds, enemyName)
     self.mReliveBtn:setText("立即复活（<color=#00FF01FF>" .. reliveseconds .. "</color>）");
-    local enemyname;
-    local entity = GlobalNS.CSSystem.Ctx.mInstance.mPlayerMgr:getEntityByThisId(entityID):getEntity();
-    
-    if nil ~= entity and nil ~= entity.mEntity_SDK then
-        enemyname = entity:getDefinedProperty("name");
+
+    if GCtx.mGameData.iskilledbyself then
+        self.roomFatherBtn:setText("你在危险区 <color=#CC0033FF>自杀了</color>");
+    else
+        self.roomFatherBtn:setText("你被  <color=#00FF01FF>" .. enemyName .. "</color>  击败了");
     end
-    self.roomFatherBtn:setText("你被  <color=#00FF01FF>" .. enemyname .. "</color> 吃掉了");
 
     self.mTimer:setTotalTime(reliveseconds);
-    self.mTimer:setFuncObject(self, self.onTick);
+    self.mTimer:setFuncObject(self, self.onTick, 0);
     self.mTimer:Start();
 end
 
-function M:onTick()
+function M:onTick(dispObj, eventId)
 	local lefttime = GlobalNS.UtilMath.ceil(self.mTimer:getLeftRunTime());
     if lefttime <= 0 then
         self:exit();

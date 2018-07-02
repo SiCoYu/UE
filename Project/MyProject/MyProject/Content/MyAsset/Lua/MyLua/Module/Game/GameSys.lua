@@ -15,7 +15,7 @@ end
 
 function M:init()
     local gameNetHandleCB = GlobalNS.new(GlobalNS.GameNetHandleCB);
-    GCtx.mNetCmdNotify:addOneDisp(gameNetHandleCB);    -- 设置网络模块处理
+    GCtx.mNetCmdNotify:addOneDispatch(gameNetHandleCB);    -- 设置网络模块处理
 
 	self.mGameNetHandleCB_KBE:init();
 end

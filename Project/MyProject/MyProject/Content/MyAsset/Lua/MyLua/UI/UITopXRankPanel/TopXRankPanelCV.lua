@@ -1,7 +1,7 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.StaticClass");
 
-MLoader("MyLua.UI.UITopXRankPanel.TopXRankPanelNS");
+MLoader("MyLua.Ui.UiTopXRankPanel.TopXRankPanelNS");
 
 --常量区
 local M = GlobalNS.StaticClass();
@@ -10,7 +10,7 @@ M.clsName = "TopXRankPanelPath";
 GlobalNS.TopXRankPanelNS[M.clsName] = M;
 
 function M.init()
-    M.BtnDrop = "Drop_BtnTouch";
+
 end
 
 M.init();

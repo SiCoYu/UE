@@ -1,7 +1,7 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.StaticClass");
 
-MLoader("MyLua.UI.UIStartGame.StartGameNS");
+MLoader("MyLua.Ui.UiStartGame.StartGameNS");
 
 local M = GlobalNS.StaticClass();
 local this = M;

@@ -1,7 +1,7 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.StaticClass");
 
-MLoader("MyLua.UI.UIShop_SkinPanel.Shop_SkinPanelNS");
+MLoader("MyLua.Ui.UiShop_SkinPanel.Shop_SkinPanelNS");
 
 --常量区
 local M = GlobalNS.StaticClass();

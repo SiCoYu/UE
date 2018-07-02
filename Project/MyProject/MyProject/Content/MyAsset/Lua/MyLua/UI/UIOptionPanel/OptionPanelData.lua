@@ -2,7 +2,7 @@ MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.Core.GObject");
 
-MLoader("MyLua.UI.UIOptionPanel.OptionPanelNS");
+MLoader("MyLua.Ui.UiOptionPanel.OptionPanelNS");
 
 --数据区
 local M = GlobalNS.Class(GlobalNS.GObject);

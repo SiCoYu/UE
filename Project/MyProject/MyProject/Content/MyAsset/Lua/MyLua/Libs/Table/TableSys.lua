@@ -16,13 +16,13 @@ GlobalNS[M.clsName] = M;
 
 function M:ctor()
 	self.mDicTable = GlobalNS.new(GlobalNS.MDictionary);
-    self.mDicTable:Add(GlobalNS.TableID.TABLE_OBJECT, GlobalNS.new(GlobalNS.TableBase, "ObjectBase_client.bytes", "ObjectBase_client"));
-    self.mDicTable:Add(GlobalNS.TableID.TABLE_CARD, GlobalNS.new(GlobalNS.TableBase, "CardBase_client.bytes", "CardBase_client"));
-    self.mDicTable:Add(GlobalNS.TableID.TABLE_SKILL, GlobalNS.new(GlobalNS.TableBase, "SkillBase_client.bytes", "SkillBase_client"));    -- 添加一个表的步骤三
-    self.mDicTable:Add(GlobalNS.TableID.TABLE_JOB, GlobalNS.new(GlobalNS.TableBase, "proBase_client.bytes", "proBase_client"));
-    self.mDicTable:Add(GlobalNS.TableID.TABLE_SPRITEANI, GlobalNS.new(GlobalNS.TableBase, "FrameAni_client.bytes", "FrameAni_client"));
-    self.mDicTable:Add(GlobalNS.TableID.TABLE_RACE, GlobalNS.new(GlobalNS.TableBase, "RaceBase_client.bytes", "RaceBase_client"));
-    self.mDicTable:Add(GlobalNS.TableID.TABLE_STATE, GlobalNS.new(GlobalNS.TableBase, "StateBase_client.bytes", "StateBase_client"));
+    self.mDicTable:add(GlobalNS.TableID.TABLE_OBJECT, GlobalNS.new(GlobalNS.TableBase, "ObjectBase_client.bytes", "ObjectBase_client"));
+    self.mDicTable:add(GlobalNS.TableID.TABLE_CARD, GlobalNS.new(GlobalNS.TableBase, "CardBase_client.bytes", "CardBase_client"));
+    self.mDicTable:add(GlobalNS.TableID.TABLE_SKILL, GlobalNS.new(GlobalNS.TableBase, "SkillBase_client.bytes", "SkillBase_client"));    -- 添加一个表的步骤三
+    self.mDicTable:add(GlobalNS.TableID.TABLE_JOB, GlobalNS.new(GlobalNS.TableBase, "proBase_client.bytes", "proBase_client"));
+    self.mDicTable:add(GlobalNS.TableID.TABLE_SPRITEANI, GlobalNS.new(GlobalNS.TableBase, "FrameAni_client.bytes", "FrameAni_client"));
+    self.mDicTable:add(GlobalNS.TableID.TABLE_RACE, GlobalNS.new(GlobalNS.TableBase, "RaceBase_client.bytes", "RaceBase_client"));
+    self.mDicTable:add(GlobalNS.TableID.TABLE_STATE, GlobalNS.new(GlobalNS.TableBase, "StateBase_client.bytes", "StateBase_client"));
 end
 
 -- 返回一个表
@@ -174,7 +174,7 @@ function M:readTable(tableID, bytes)
     while(i < count) do
         item = GlobalNS.new(GlobalNS.TableItemBase);
         item:parseHeaderByteBuffer(bytes);
-        table.mList:Add(item);
+        table.mList:add(item);
 		
 		i = i + 1
     end
@@ -182,7 +182,7 @@ end
 
 -- 查找表中的一项
 function M:findDataItem(table, id)
-	local size = table.mList:Count();
+	local size = table.mList:count();
 	local low = 0;
 	local high = size - 1;
 	local middle = 0;

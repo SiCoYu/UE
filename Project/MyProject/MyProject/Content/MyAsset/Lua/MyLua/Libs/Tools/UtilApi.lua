@@ -22,8 +22,16 @@ function M.getTextComp(go, path)
     return this.getComp(go, path, 'Text');
 end
 
+function M.getImageCompByPath(go, path)
+	return this.getComp(go, path, 'Image');
+end
+
+function M.getImageCompNoPath(go)
+	return M.GetComponent(go, 'Image');
+end
+
 function M.getComp(go, path, comptName)
-    local retgo = uiMgr:TransFindChildByPath(go, path);
+    local retgo = GlobalNS.CSSystem.TransFindChildByPObjAndPath(go, path);
     return M.GetComponent(retgo, comptName);
 end
 
@@ -76,29 +84,48 @@ function M.SetRectTransformParent(child, parent, worldPositionStays)
 end
 
 function M.SetActive(target, bShow)
-    target:SetActive(bShow);
+	if(nil ~= target and (GlobalNS.UtilApi.IsActive(target) ~= bShow)) then
+		target:SetActive(bShow);
+	end
 end
 
 function M.IsActive(target)
-    return target.activeSelf;
+	if(nil ~= target) then
+		return target.activeSelf;
+	end
+	
+	return false;
 end
 
 function M.AddComponent(target, name)
     target:AddComponent(name);
 end
 
-function M:setImageSprite(go, path)
-    M.GetComponent(go, 'Image').sprite = uiMgr:LoadSprite(path);
+function M.setImageSprite(go, path)
+	local auxSpriteAtlasLoader = GlobalNS.new(GlobalNS.AuxSpriteAtlasLoader);
+	auxSpriteAtlasLoader:syncLoad(path, nil, nil, nil);
+	local sprite = auxSpriteAtlasLoader:getSprite(path);
+	M.GetComponent(go, 'Image').sprite = sprite;
+	sprite = nil;
+end
+
+function M.setImageSpriteBySprite(image, sprite)
+	image.sprite = sprite;
 end
 
 function M.setSpriteRenderSprite(go, path)
-    local sprite = uiMgr:LoadSprite(path);
+    local auxSpriteAtlasLoader = GlobalNS.new(GlobalNS.AuxSpriteAtlasLoader);
+	auxSpriteAtlasLoader:syncLoad(path, nil, nil, nil);
+	local sprite = auxSpriteAtlasLoader:getSprite(path);
     M.GetComponent(go, 'SpriteRenderer').sprite = sprite;
 end
 
 function M.setSpriteRenderSpriteByGo(go, goPath, spritePath)
-    local sprite = uiMgr:LoadSprite(spritePath);
-    local spriteGo = uiMgr:TransFindChildByPath(goPath);
+	local auxSpriteAtlasLoader = GlobalNS.new(GlobalNS.AuxSpriteAtlasLoader);
+	auxSpriteAtlasLoader:syncLoad(path, nil, nil, nil);
+	local sprite = auxSpriteAtlasLoader:getSprite(spritePath);
+	
+    local spriteGo = GlobalNS.CSSystem.TransFindChildByPObjAndPath(go, goPath);
     M.GetComponent(spriteGo, 'SpriteRenderer').sprite = sprite;
 end
 
@@ -119,6 +146,10 @@ end
 
 function M.SetSiblingIndexToLastTwoByGo(go, index)
     go.transform:SetSiblingIndex(go.transform.parent.childCount - 1);
+end
+
+function M.addToggleHandle(go, table, method)
+    GlobalNS.CSSystem.addToggleHandle(go, table, method);
 end
 
 function M.getChildCount(trans)
@@ -148,16 +179,16 @@ end
 function M.modifyListByList(srcList, destList, cls)
     local index;
     local srcItem;
-    if srcList:Count() > destList:Count() then
-        index = srcList:Count() - 1;
-        while(index >= destList:Count()) do
+    if srcList:count() > destList:count() then
+        index = srcList:count() - 1;
+        while(index >= destList:count()) do
             srcItem = srcList:removeAtAndRet(index);
             srcItem:dtor();
             index = index - 1;
         end
     else
-        index = srcList:Count();
-        while(index < destList:Count()) do
+        index = srcList:count();
+        while(index < destList:count()) do
             srcItem = GlobalNS.new(cls);
             srcList:add(srcItem);
             index = index + 1;
@@ -172,6 +203,27 @@ function M.setRectTransformSizeDelta(go, width, height)
     sizeDelta.y = height;
 end
 
+function M.setRectScale(rectTrans, scale)
+	if (nil ~= rectTrans) then
+		rectTrans.localScale = scale;
+	end
+end
+
+function M.setGoRectScale(go, scale)
+	if (nil ~= go) then
+		local rectTransform = M.GetComponent(go, 'RectTransform');
+		if(nil ~= rectTransform) then
+			rectTransform.localScale = scale;
+		end
+	end
+end
+
+function M.setUGuiRectScale(uguiElement, scale)
+	if (nil ~= uguiElement) then
+		uguiElement.rectTransform.localScale = scale;
+	end
+end
+
 function M.enableBtn(go)
     local btn = M.GetComponent(go, 'Button');
     if(btn ~= nil) then
@@ -179,7 +231,7 @@ function M.enableBtn(go)
     end
 end
 
-function M.disableBtn()
+function M.disableBtn(go)
     local btn = M.GetComponent(go, 'Button');
     if(btn ~= nil) then
         btn.interactable = false;
@@ -333,8 +385,32 @@ function M.addEventHandleSelf(go, luaTable, luaFunction)
     GlobalNS.CSSystem.addEventHandleSelf(go, luaTable, luaFunction);
 end
 
-function M.RemoveListener(go, luaTable, func)
+function M.addButtonDownEventHandle(go, luaTable, luaFunction)
+    GlobalNS.CSSystem.addButtonDownEventHandle(go, luaTable, luaFunction, false);
+end
+
+function M.addButtonUpEventHandle(go, luaTable, luaFunction)
+    GlobalNS.CSSystem.addButtonUpEventHandle(go, luaTable, luaFunction, false);
+end
+
+function M.addButtonExitEventHandle(go, luaTable, luaFunction)
+    GlobalNS.CSSystem.addButtonExitEventHandle(go, luaTable, luaFunction, false);
+end
+
+function M.RemoveListener(go, luaTable, luaFunction)
     
+end
+
+function M.removeButtonDownEventHandle(go, luaTable, luaFunction)
+	
+end
+
+function M.removeButtonUpEventHandle(go, luaTable, luaFunction)
+	
+end
+
+function M.removeButtonExitEventHandle(go, luaTable, luaFunction)
+	
 end
 
 function getStrLen(str)

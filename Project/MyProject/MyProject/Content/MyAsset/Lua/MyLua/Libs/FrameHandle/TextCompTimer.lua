@@ -1,10 +1,10 @@
---[[
-    @brief 显示在文本组件上的倒计时定时器
-]]
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.FrameHandle.TimerItemBase");
+
+--[[
+    @brief 显示在文本组件上的倒计时定时器
+]]
 
 local M = GlobalNS.Class(GlobalNS.DaoJiShiTimer);
 M.clsName = "TextCompTimer";

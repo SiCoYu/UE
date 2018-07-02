@@ -1,14 +1,14 @@
+MLoader("MyLua.Libs.Core.GlobalNS");
+MLoader("MyLua.Libs.Core.Class");
+MLoader("MyLua.Libs.DataStruct.MList");
+MLoader("MyLua.Libs.DelayHandle.DelayPriorityHandleMgrBase");
+MLoader("MyLua.Libs.EventHandle.EventDispatchFunctionObject");
+
 --[[
     @brief 事件分发器
 ]]
 
-MLoader("MyLua.Libs.Core.GlobalNS");
-MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.DataStruct.MList");
-MLoader("MyLua.Libs.DelayHandle.DelayHandleMgrBase");
-MLoader("MyLua.Libs.EventHandle.EventDispatchFunctionObject");
-
-local M = GlobalNS.Class(GlobalNS.DelayHandleMgrBase);
+local M = GlobalNS.Class(GlobalNS.DelayPriorityHandleMgrBase);
 M.clsName = "EventDispatch";
 GlobalNS[M.clsName] = M;
 
@@ -35,10 +35,10 @@ function M:setUniqueId(value)
     --self.mHandleList.uniqueId = mUniqueId;
 end
 
-function M:addEventHandle(pThis, handle)
+function M:addEventHandle(pThis, handle, eventId)
     if (nil ~= handle) then
         local funcObject = GlobalNS.new(GlobalNS.EventDispatchFunctionObject);
-        funcObject:setFuncObject(pThis, handle);
+        funcObject:setFuncObject(pThis, handle, eventId);
         self:addObject(funcObject);
     else
         -- 日志
@@ -46,22 +46,24 @@ function M:addEventHandle(pThis, handle)
 end
 
 function M:addObject(delayObject, priority)
-    if (self:bInDepth()) then
+    if (self:isInDepth()) then
         M.super.addObject(self, delayObject, priority); -- super 使用需要自己填充 Self 参数
     else
         -- 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-        self.mHandleList:Add(delayObject);
+        self.mHandleList:add(delayObject);
     end
 end
 
-function M:removeEventHandle(handle, pThis)
+function M:removeEventHandle(handle, pThis, eventId)
     local idx = 0;
-    for idx = 0, self.mHandleList:Count() - 1, 1 do
-        if (self.mHandleList:at(idx):isEqual(handle, pThis)) then
+	
+    for idx = 0, self.mHandleList:count() - 1, 1 do
+        if (self.mHandleList:at(idx):isEqual(handle, pThis, eventId)) then
             break;
         end
     end
-    if (idx < self.mHandleList:Count()) then
+	
+    if (idx < self.mHandleList:count()) then
         self:removeObject(self.mHandleList[idx]);
     else
         -- 日志
@@ -69,10 +71,10 @@ function M:removeEventHandle(handle, pThis)
 end
 
 function M:removeObject(delayObject)
-    if (self:bInDepth()) then
+    if (self:isInDepth()) then
         M.super.removeObject(self, delayObject);
     else
-        if (self.mHandleList:Remove(delayObject) == false) then
+        if (self.mHandleList:remove(delayObject) == false) then
             -- 日志
         end
     end
@@ -91,31 +93,32 @@ function M:dispatchEvent(dispatchObject)
 end
 
 function M:clearEventHandle()
-    if (self:bInDepth()) then
+    if (self:isInDepth()) then
         for _, item in ipairs(self.mHandleList:list()) do
             self:removeObject(item);
         end
     else
-        self.mHandleList:Clear();
+        self.mHandleList:clear();
     end
 end
 
 -- 这个判断说明相同的函数只能加一次，但是如果不同资源使用相同的回调函数就会有问题，但是这个判断可以保证只添加一次函数，值得，因此不同资源需要不同回调函数
-function M:isExistEventHandle(pThis, handle)
-    local bFinded = false;
+function M:isExistEventHandle(pThis, handle, eventId)
+    local isFinded = false;
+	
     for _, item in ipairs(self.mHandleList:list()) do
-        if (item:isEqual(pThis, handle)) then
-            bFinded = true;
+        if (item:isEqual(pThis, handle, eventId)) then
+            isFinded = true;
             break;
         end
     end
 
-    return bFinded;
+    return isFinded;
 end
 
 function M:copyFrom(rhv)
     for _, handle in ipairs(rhv.handleList:list()) do
-        self.mHandleList:Add(handle);
+        self.mHandleList:add(handle);
     end
 end
 

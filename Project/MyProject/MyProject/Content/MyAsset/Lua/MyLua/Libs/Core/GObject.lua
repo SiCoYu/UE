@@ -1,8 +1,7 @@
--- 所有的类的基类
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 
+-- 所有的类的基类
 local M = GlobalNS.Class();
 M.clsName = "GObject";
 GlobalNS[M.clsName] = M;
@@ -63,7 +62,8 @@ function M.set(tbl, key, value)
     ]]
     
     -- 方法二:通过 rawget ，不查找 __index ，进行访问
-    local tbl = rawset(tbl, key, value);
+    rawset(tbl, key, value);
+	
     M.checkAttrRedef(tbl, key, value);
 end
 
@@ -71,7 +71,7 @@ M.__newindex = M.set;
 
 function M.checkAttrRedef(tbl, key, value)
     --测试相同属性定义导致的属性覆盖
-    if tbl.clsName ~= nil and tbl.clsName == 'Form' then
+    if(nil ~= tbl.clsName and 'Form' == tbl.clsName) then
         
     end
 end

@@ -1,10 +1,10 @@
---[[
-    @brief 定时器，这个是不断增长的
-]]
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.DelayHandle.IDelayHandleItem");
+
+--[[
+    @brief 定时器，这个是不断增长的
+]]
 
 local M = GlobalNS.Class(GlobalNS.IDelayHandleItem);
 M.clsName = "TimerItemBase";
@@ -17,13 +17,13 @@ function M:ctor()
     self.mCurCallTime = 0;         -- 当前定时器已经调用的时间
     self.mIsInfineLoop = false;     -- 是否是无限循环
     self.mIntervalLeftTime = 0;    -- 定时器调用间隔剩余时间
-    self.mTimerDisp = GlobalNS.new(GlobalNS.TimerFunctionObject);         -- 定时器分发
+    self.mTimerDispatch = GlobalNS.new(GlobalNS.TimerFunctionObject);         -- 定时器分发
     self.mIsDisposed = false;        -- 是否已经被释放
     self.mIsContinuous = false;     -- 是否是连续的定时器
 end
 
-function M:setFuncObject(pThis, func)
-    self.mTimerDisp:setPThisAndHandle(pThis, func);
+function M:setFuncObject(pThis, func, eventId)
+    self.mTimerDispatch:setPThisAndHandle(pThis, func, eventId);
 end
 
 function M:setTotalTime(value)
@@ -63,25 +63,25 @@ function M:OnTimer(delta)
     self.mIntervalLeftTime = self.mIntervalLeftTime + delta;
 
     if self.mIsInfineLoop then
-        self:checkAndDisp();
+        self:checkAndDispatch();
     else
         if self.mCurRunTime >= self.mTotalTime then
-            self:disposeAndDisp();
+            self:disposeAndDispatch();
         else
-            self:checkAndDisp();
+            self:checkAndDispatch();
         end
     end
 end
 
-function M:disposeAndDisp()
+function M:disposeAndDispatch()
     if(self.mIsContinuous) then
-        self:continueDisposeAndDisp();
+        self:continueDisposeAndDispatch();
     else
-        self:discontinueDisposeAndDisp();
+        self:discontinueDisposeAndDispatch();
     end
 end
 
-function M:continueDisposeAndDisp()
+function M:continueDisposeAndDispatch()
     self.mIsDisposed = true;
     
     while (self.mIntervalLeftTime >= self.mInternal and self.mCurCallTime < self.mTotalTime) do
@@ -89,52 +89,52 @@ function M:continueDisposeAndDisp()
         self.mIntervalLeftTime = self.mIntervalLeftTime - self.mInternal;
         self:onPreCallBack();
 
-        if (self.mTimerDisp:isValid()) then
-            self.mTimerDisp:call(self);
+        if (self.mTimerDispatch:isValid()) then
+            self.mTimerDispatch:call(self);
         end
     end
 end
 
-function M:discontinueDisposeAndDisp()
+function M:discontinueDisposeAndDispatch()
     self.mIsDisposed = true;
     self.mCurCallTime = self.mTotalTime;
     self:onPreCallBack();
     
-    if (self.mTimerDisp:isValid()) then
-        self.mTimerDisp:call(self);
+    if (self.mTimerDispatch:isValid()) then
+        self.mTimerDispatch:call(self);
     end
 end
 
-function M:checkAndDisp()
+function M:checkAndDispatch()
     if(self.mIsContinuous) then
-        self:continueCheckAndDisp();
+        self:continueCheckAndDispatch();
     else
-        self:discontinueCheckAndDisp();
+        self:discontinueCheckAndDispatch();
     end
 end
 
 -- 连续的定时器
-function M:continueCheckAndDisp()
+function M:continueCheckAndDispatch()
     while (self.mIntervalLeftTime >= self.mInternal) do
         self.mCurCallTime = self.mCurCallTime + self.mInternal;
         self.mIntervalLeftTime = self.mIntervalLeftTime - self.mInternal;
         self:onPreCallBack();
 
-        if (self.mTimerDisp:isValid()) then
-            self.mTimerDisp:call(self);
+        if (self.mTimerDispatch:isValid()) then
+            self.mTimerDispatch:call(self);
         end
     end
 end
 
 -- 不连续的定时器
-function M:discontinueCheckAndDisp()
+function M:discontinueCheckAndDispatch()
     if (self.mIntervalLeftTime >= self.mInternal) then
         self.mCurCallTime = self.mCurCallTime + ((math.floor(self.mIntervalLeftTime / self.mInternal)) * self.mInternal);
         self.mIntervalLeftTime = self.mIntervalLeftTime % self.mInternal;   -- 只保留余数
         self:onPreCallBack();
 
-        if (self.mTimerDisp:isValid()) then
-            self.mTimerDisp:call(self);
+        if (self.mTimerDispatch:isValid()) then
+            self.mTimerDispatch:call(self);
         end
     end
 end
@@ -154,11 +154,11 @@ function M:getClientDispose()
     return false;
 end
 
-function M:Start(priority)
+function M:start(priority)
     GCtx.mTimerMgr:addTimer(self);
 end
 
-function M:Stop()
+function M:stop()
     GCtx.mTimerMgr:removeObject(self);
 end
 

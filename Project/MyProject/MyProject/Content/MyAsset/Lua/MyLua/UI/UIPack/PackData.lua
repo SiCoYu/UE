@@ -2,7 +2,7 @@ MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.Core.GObject");
 
-MLoader("MyLua.UI.UITest.PackNS");
+MLoader("MyLua.Ui.UiTest.PackNS");
 
 local M = GlobalNS.Class(GlobalNS.GObject)
 M.clsName = "PackData"

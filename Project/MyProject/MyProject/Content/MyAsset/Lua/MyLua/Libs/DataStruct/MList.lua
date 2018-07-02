@@ -1,12 +1,13 @@
---[[
-    @brief 数组实现，类实现，数组的下标从 0 开始，但是 lua 中数组的下标从 1 开始
-]]
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.Core.GObject");
 MLoader("MyLua.Libs.Functor.CmpFuncObject");
 MLoader("MyLua.Libs.DataStruct.MListBase");
+MLoader("MyLua.Libs.DataStruct.MDictionary");
+
+--[[
+    @brief 数组实现，类实现，数组的下标从 0 开始，但是 lua 中数组的下标从 1 开始
+]]
 
 -- bug 提示，如果 require "MyLua.Libs.DataStruct.MListBase" 导入后，如果 clsName 不是 MListBase ，就会导致 GlobalNS.MListBase 为空，就会导致基类为空  
 local M = GlobalNS.Class(GlobalNS.MListBase);
@@ -15,6 +16,9 @@ GlobalNS[M.clsName] = M;
 
 function M:ctor()
     self.mData = {};
+	
+	self.mDic = GlobalNS.new(GlobalNS.MDictionary); 	-- 保存的索引是从 0 ，开始的，不是从 1 开始的
+	self.mIsSpeedUpFind = false; 	-- 是否加快查询，这个只适用于元素在列表中是唯一的，例如引用之类的，如果有相同的，就会有问题，注意了
 end
 
 function M:dtor()
@@ -22,7 +26,7 @@ function M:dtor()
 end
 
 -- 获取数组中元素的个数
-function M:getLen()
+function M:count()
 	local ret = 0;
     if (self.mData ~= nil) then
         ret = table.getn(self.mData);
@@ -43,72 +47,92 @@ function M:getAllLen()
     return ret;
 end
 
-function M:Count()
-    return self:getLen();
-end
-
 function M:list()
     return self.mData;
-end
-
-function M:Add(value)
-    self:add(value);
 end
 
 -- 表添加是从索引 1 开始的， ipairs 遍历也是从下表 1 开始的，因此，如果是 0 可能有问题，第 0 个元素不能遍历
 function M:add(value)
 	table.insert(self.mData, value);
-    -- self.mData[self:getLen() + 1] = value;
+    -- self.mData[self:count() + 1] = value;
+	
+	if (self.mIsSpeedUpFind) then
+		self.mDic:add(item, self:count() - 1);
+	end
 end
 
 -- 向列表中插入一个值
 function M:insert(index, value)
-    if(index < self:Count()) then
+    if(index < self:count()) then
         table.insert(self.mData, index + 1, value);
+		
+		if (self.mIsSpeedUpFind) then
+			self.mDic:add(value, index);
+			
+			self:updateIndex(index + 1);
+		end
     else
         self:add(value);
     end
 end
 
-function M:Remove(value)
-    return self:remove(value);
-end 
+function M:replace(index, value)
+	if(index < self:count()) then
+        self.mData[index] = value;
+		
+		if (self.mIsSpeedUpFind) then
+			self.mDic:add(value, index);
+		end
+    end
+end
 
 -- 移除列表中第一个相等的值
 function M:remove(value)
-    local idx = 1;
-    local bFind = false;
-    while( idx < self:getLen() + 1 ) do
-        if (self:cmpFunc(self.mData[idx], value) == 0) then
-            table.remove(self.mData, idx);
-            bFind = true
-            break;
-        end
-        idx = idx + 1;
-    end
-    
-    return bFind
+	if (self.mIsSpeedUpFind) then
+		self:effectiveRemove(value);
+	else
+		local idx = 1;
+		local bFind = false;
+		while( idx < self:count() + 1 ) do
+			if (self:cmpFunc(self.mData[idx], value) == 0) then
+				table.remove(self.mData, idx);
+				bFind = true;
+				break;
+			end
+			idx = idx + 1;
+		end
+		
+		return bFind
+	end
 end
 
 -- 移除所有相等的值
 function M:removeAllEqual(value)
-    local idx = self:getLen();
-    local bFind = false;
-    while( idx > 0 ) do
-        if (self:cmpFunc(self.mData[idx], value) == 0) then
-            table.remove(self.mData, idx);
-            bFind = true
-        end
-        idx = idx - 1;
-    end
-    
-    return bFind
+	if (self.mIsSpeedUpFind) then
+		return self:effectiveRemove(value);
+	else
+		local idx = self:count();
+		local bFind = false;
+		while( idx > 0 ) do
+			if (self:cmpFunc(self.mData[idx], value) == 0) then
+				table.remove(self.mData, idx);
+				bFind = true
+			end
+			idx = idx - 1;
+		end
+		
+		return bFind;
+	end
 end
 
 function M:removeAt(index)
-	if (index < self.Count()) then
-		table.remove(self.mData, index + 1);  	-- 需要添加 1 ，作为删除的索引
-		return true;
+	if (index < self.count()) then
+		if (self.mIsSpeedUpFind) then
+			return self:effectiveRemove(self:at(index));
+		else
+			table.remove(self.mData, index + 1);  	-- 需要添加 1 ，作为删除的索引
+			return true;
+		end
 	end
 	
 	return false;
@@ -116,7 +140,7 @@ end
 
 function M:removeAtAndRet(index)
     local ret;
-    if (index < self.Count()) then
+    if (index < self.count()) then
         ret = table.remove(self.mData, index + 1);    -- 需要添加 1 ，作为删除的索引
     end
     
@@ -124,29 +148,56 @@ function M:removeAtAndRet(index)
 end
 
 function M:at(index)
-    if (index < self:getLen()) then
+    if (index < self:count()) then
         return self.mData[index + 1];
     end
     
     return nil;
 end
 
-function M:IndexOf(value)
-    local idx = 1;
-    local bFind = false;
-    while (idx < self:getLen() + 1 ) do
-        if (self:cmpFunc(self.mData[idx], value) == 0) then
-            bFind = true;
-            break;
-        end
-        idx = idx + 1;
-    end
-    
-    if (bFind) then
-        return idx - 1;      -- 返回的是从 0 开始的下表
-    else
-        return -1;
-    end
+function M:get(index)
+	if (index < self:count()) then
+		return self.mData[index + 1];
+	end
+
+	return nil;
+end
+
+function M:set(index, value)
+	if (index < self:count()) then
+		self.mData[index + 1] = value;
+	end
+end
+
+function M:indexOf(value)
+	if (self.mIsSpeedUpFind) then
+		return self.mDic:value(value);
+	else
+		local idx = 1;
+		local bFind = false;
+		while (idx < self:count() + 1 ) do
+			if (self:cmpFunc(self.mData[idx], value) == 0) then
+				bFind = true;
+				break;
+			end
+			idx = idx + 1;
+		end
+		
+		if (bFind) then
+			return idx - 1;      -- 返回的是从 0 开始的下表
+		else
+			return -1;
+		end
+	end
+end
+
+-- 仅仅判断是否包含某个元素
+function M:contains(item)
+	if (self.mIsSpeedUpFind) then
+		return (self.mDic:value(item) ~= nil);
+	else
+		return (self:indexOf(item) ~= -1);
+	end
 end
 
 function M:find(value, pThis, func)
@@ -156,7 +207,7 @@ function M:find(value, pThis, func)
     end
     local index = 1;
     local bFind = false;
-    while(index < self:getLen() + 1) do
+    while(index < self:count() + 1) do
         if (self:cmpFunc(self.mData[index], value) == 0) then
             bFind = true;
             break;
@@ -187,7 +238,7 @@ function M:getOrCreate(value, cls, pThis, func)
     return item;
 end
 
-function M:Clear()
+function M:clear()
     self.mData = {};
 end
 
@@ -198,7 +249,7 @@ function M:sort(pThis, func)
         self:setFuncObject(pThis, func);
     end
     -- 目前采用插入排序
-    local len = self:getLen();
+    local len = self:count();
     local temp;
     local jIndex = 0;
     for index = 2, len, 1 do
@@ -212,6 +263,38 @@ function M:sort(pThis, func)
             self.mData[jIndex] = temp;
         end
     end
+end
+
+-- 快速移除元素
+function M:effectiveRemove(item)
+	local ret = false;
+
+	if (self.mDic:containsKey(item)) then
+		ret = true;
+
+		local idx = self.mDic:value(item);
+		self.mDic.Remove(item);
+
+		if (idx == self:count() - 1) then    -- 如果是最后一个元素，直接移除
+			self:removeAt(idx);
+		else
+			self.mList:replace(idx, self:at(self:count() - 1));
+			self.mList.RemoveAt(self:count() - 1);
+			self.mDic:add(self:at(idx), idx);
+		end
+	end
+
+	return ret;
+end
+
+function M:updateIndex(idx)
+	local len = self:count();
+
+	while(idx < len) do
+		self.mDic:add(self:at(idx), idx);
+
+		idx = idx + 1;
+	end
 end
 
 return M;

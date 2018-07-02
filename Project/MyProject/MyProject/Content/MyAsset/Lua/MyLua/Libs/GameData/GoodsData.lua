@@ -7,12 +7,12 @@ GlobalNS[M.clsName] = M;
 
 function M:ctor(...)
     --商品类别
-    self.CurrentShopType = GlobalNS.UIFormId.eUIShop_SkinPanel;
+    self.CurrentShopType = GlobalNS.UiFormId.eUiShop_SkinPanel;
     self.CurrentGoodsType = 1;
 
     --货币ID
-    self.HaiXingId = "666";
-    self.ZhenZhuId = "888";
+    self.HaiXingId = "HaiXing";
+    self.ZhenZhuId = "ZhenZhu";
 
     self.goodsCount = 0; --物品数量
     self.goodsitems = {}; --物品
@@ -29,30 +29,30 @@ end
 
 function M:init()
     --外形
-    self.shapeCount = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.shape.Length;
+    self.shapeCount = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.shape.Length;
     for i=1, self.shapeCount do
         self.shapeitems[i] = 
         {
-            m_goodsID = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.shape[i-1].mID;
-            m_goodsName = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.shape[i-1].mName;
-            m_needID = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.shape[i-1].mNeedID;
-            m_needNum = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.shape[i-1].mNeedNum;
-            m_hot = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.shape[i-1].mHot;
-            m_only = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.shape[i-1].mOnly;
+            m_goodsID = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.shape[i-1].mID;
+            m_goodsName = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.shape[i-1].mName;
+            m_needID = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.shape[i-1].mNeedID;
+            m_needNum = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.shape[i-1].mNeedNum;
+            m_hot = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.shape[i-1].mHot;
+            m_only = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.shape[i-1].mOnly;
         };
     end
 
     --鱼仔
-    self.childCount = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.child.Length;
+    self.childCount = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.child.Length;
     for i=1, self.childCount do
         self.childitems[i] = 
         {
-            m_goodsID = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.child[i-1].mID;
-            m_goodsName = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.child[i-1].mName;
-            m_needID = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.child[i-1].mNeedID;
-            m_needNum = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.child[i-1].mNeedNum;
-            m_hot = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.child[i-1].mHot;
-            m_only = GlobalNS.CSSystem.Ctx.mInstance.mSnowBallCfg.child[i-1].mOnly;
+            m_goodsID = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.child[i-1].mID;
+            m_goodsName = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.child[i-1].mName;
+            m_needID = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.child[i-1].mNeedID;
+            m_needNum = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.child[i-1].mNeedNum;
+            m_hot = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.child[i-1].mHot;
+            m_only = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.child[i-1].mOnly;
         };
     end
 end
@@ -79,7 +79,7 @@ function M:getGoodsItems(shopType, goodsType, args)
 end
 
 function M:SetGoodsItems(goodsType)
-    if self.CurrentShopType == GlobalNS.UIFormId.eUIShop_SkinPanel then
+    if self.CurrentShopType == GlobalNS.UiFormId.eUiShop_SkinPanel then
         if goodsType == 1 then --外形
             self.goodsCount = self.shapeCount;
             self.goodsitems = self.shapeitems;
@@ -93,7 +93,7 @@ function M:SetGoodsItems(goodsType)
 end
 
 function M:SetGoodsItemsFromServer(goodsType, args)
-    if self.CurrentShopType == GlobalNS.UIFormId.eUIShop_SkinPanel then
+    if self.CurrentShopType == GlobalNS.UiFormId.eUiShop_SkinPanel then
         if goodsType == 1 then --外形
         else --鱼仔
         end
@@ -103,7 +103,7 @@ function M:SetGoodsItemsFromServer(goodsType, args)
 end
 
 function M:BuyItem(goodsId)
-    if self.CurrentShopType == GlobalNS.UIFormId.eUIShop_SkinPanel then
+    if self.CurrentShopType == GlobalNS.UiFormId.eUiShop_SkinPanel then
         if self.CurrentGoodsType == 1 then
             
         else

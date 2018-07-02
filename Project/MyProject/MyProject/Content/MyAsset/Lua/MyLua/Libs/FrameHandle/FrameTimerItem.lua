@@ -1,10 +1,10 @@
---[[
-    @brief 定时器，这个是不断增长的
-]]
-
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 MLoader("MyLua.Libs.DelayHandle.IDelayHandleItem");
+
+--[[
+    @brief 定时器，这个是不断增长的
+]]
 
 local M = GlobalNS.Class(GlobalNS.IDelayHandleItem);
 M.clsName = "FrameTimerItem";
@@ -16,7 +16,7 @@ function M:ctor()
     self.mCurFrame = 0;
     self.mIsInfineLoop = false;
     self.mCurLeftFrame = 0;
-    self.mTimerDisp = nil;
+    self.mTimerDispatch = nil;
     self.mThis = nil
     self.mIsDisposed = false;
 end
@@ -33,21 +33,21 @@ function M:OnFrameTimer()
         if self.mCurLeftFrame == self.mInternal then
             self.mCurLeftFrame = 0;
 
-            if self.mTimerDisp ~= nil then
-                self:mTimerDisp(self);
+            if self.mTimerDispatch ~= nil then
+                self:mTimerDispatch(self);
             end
         end
     else
         if self.mCurFrame == self.mTotalFrameCount then
             self.mIsDisposed = true;
-            if self.mTimerDisp ~= nil then
-                self.mTimerDisp(self.mThis);
+            if self.mTimerDispatch ~= nil then
+                self.mTimerDispatch(self.mThis);
             end
         else
             if self.mCurLeftFrame == self.mInternal then
                 self.mCurLeftFrame = 0;
-                if self.mTimerDisp ~= nil then
-                    self.mTimerDisp(self.mThis);
+                if self.mTimerDispatch ~= nil then
+                    self.mTimerDispatch(self.mThis);
                 end
             end
         end

@@ -1,21 +1,25 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UIOptionPanel.OptionPanelNS");
-MLoader("MyLua.UI.UIOptionPanel.OptionPanelData");
-MLoader("MyLua.UI.UIOptionPanel.OptionPanelCV");
+MLoader("MyLua.Ui.UiOptionPanel.OptionPanelNS");
+MLoader("MyLua.Ui.UiOptionPanel.OptionPanelData");
+MLoader("MyLua.Ui.UiOptionPanel.OptionPanelCV");
 
 --UI区
 local M = GlobalNS.Class(GlobalNS.Form);
-M.clsName = "UIOptionPanel";
+M.clsName = "UiOptionPanel";
 GlobalNS.OptionPanelNS[M.clsName] = M;
 
 function M:ctor()
-	self.mId = GlobalNS.UIFormId.eUIOptionPanel;
+	self.mId = GlobalNS.UiFormId.eUiOptionPanel;
 	self.mData = GlobalNS.new(GlobalNS.OptionPanelNS.OptionPanelData);
+
+    self.mTimer = GlobalNS.new(GlobalNS.DaoJiShiTimer);
+    self.mCoolTime = 1;
+    self.mInterval = 0.01;
 end
 
 function M:dtor()
@@ -24,25 +28,53 @@ end
 
 function M:onInit()
     M.super.onInit(self);
-	
-	self.mSplitBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mSplitBtn:addEventHandle(self, self.onSplitBtnClk);
 
     self.mSwallowBtn = GlobalNS.new(GlobalNS.AuxButton);
-	self.mSwallowBtn:addEventHandle(self, self.onSwallowBtnClk);
+	self.mSwallowBtn:addEventHandle(self, self.onSwallowBtnClk, 0);
+	--self.mSwallowBtn:addDownEventHandle(self, self.onSwallowBtnDown, 0);
+	--self.mSwallowBtn:addUpEventHandle(self, self.onSwallowBtnUp, 0);
 end
 
 function M:onReady()
     M.super.onReady(self);
-	self.mSplitBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
-			self.mGuiWin, 
-			GlobalNS.OptionPanelNS.OptionPanelPath.BtnSplit)
-		);
 
     self.mSwallowBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
 			self.mGuiWin, 
 			GlobalNS.OptionPanelNS.OptionPanelPath.BtnSwallow)
 		);
+    self.mSwallowImage = GlobalNS.UtilApi.getComByPath(self.mGuiWin, GlobalNS.OptionPanelNS.OptionPanelPath.BtnSwallow, "Image");
+    GlobalNS.CSSystem.Ctx.msInstance.mGlobalDelegate.mMainChildNumChangedDispatch:addEventHandle(nil, nil, 0, self, self.refreshNum, 0);
+end
+
+function M:refreshNum()
+    if(GlobalNS.CSSystem.Ctx.msInstance.mPlayerMgr:getHero() ~= nil and
+       GlobalNS.CSSystem.Ctx.msInstance.mPlayerMgr:getHero().mPlayerSplitMerge ~= nil) then
+         local num = GlobalNS.CSSystem.Ctx.msInstance.mPlayerMgr:getHero().mPlayerSplitMerge.mPlayerChildMgr:getEntityCount();
+         if num > GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.mMaxShotNum then
+            self.mCoolTime = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.mMaxShotSeconds;
+         else
+            self.mCoolTime = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.mMinShotSeconds + num * GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.mShotInteval;
+         end
+         self.mCoolTime = GlobalNS.UtilMath.keepTwoDecimalPlaces(self.mCoolTime);
+    end
+end
+
+--射击冷却
+function M:Fire(totalTime)
+    self.mTimer.mIsDisposed = false;
+    self.mTimer:setTotalTime(totalTime);
+    self.mTimer.mInternal = self.mInterval;
+    self.mTimer:setFuncObject(self, self.onTick, 0);
+    self.mTimer:Start();
+end
+
+function M:onTick(dispObj, eventId)
+    local lefttime = GlobalNS.UtilMath.keepTwoDecimalPlaces(self.mTimer:getLeftRunTime());
+    self.mSwallowImage.fillAmount = lefttime / self.mCoolTime;
+	if lefttime <= 0 then
+        self.mSwallowImage.fillAmount = 1.0;
+        self.mSwallowBtn:enable();
+    end
 end
 
 function M:onShow()
@@ -55,6 +87,8 @@ end
 
 function M:onExit()
     M.super.onExit(self);
+    self.mTimer:Stop();
+    GlobalNS.CSSystem.Ctx.msInstance.mGlobalDelegate.mMainChildNumChangedDispatch:removeEventHandle(nil, nil, 0, self, self.refreshNum, 0);
 end
 
 function M:onSplitBtnClk()
@@ -62,8 +96,17 @@ function M:onSplitBtnClk()
 end
 
 function M:onSwallowBtnClk()
-	--GCtx.mLogSys:log("Swallow", GlobalNS.LogTypeId.eLogCommon);
-	GlobalNS.CSSystem.emitSnowBlock();
+	GlobalNS.CSSystem.Fire();
+    self.mSwallowBtn:disable();
+    self:Fire(self.mCoolTime);
+end
+
+function M:onSwallowBtnDown()
+	GlobalNS.CSSystem.startEmitSnowBlock();
+end
+
+function M:onSwallowBtnUp()
+	GlobalNS.CSSystem.stopEmitSnowBlock();
 end
 
 return M;

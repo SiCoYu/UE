@@ -1,19 +1,19 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.UI.UICore.Form");
+MLoader("MyLua.Libs.Ui.Base.Form");
 
-MLoader("MyLua.Libs.AuxComponent.AuxUIComponent.AuxButton");
+MLoader("MyLua.Libs.Auxiliary.AuxUIComponent.AuxButton");
 
-MLoader("MyLua.UI.UIPlayerDataPanel.PlayerDataPanelNS");
-MLoader("MyLua.UI.UIPlayerDataPanel.PlayerDataPanelData");
-MLoader("MyLua.UI.UIPlayerDataPanel.PlayerDataPanelCV");
+MLoader("MyLua.Ui.UiPlayerDataPanel.PlayerDataPanelNS");
+MLoader("MyLua.Ui.UiPlayerDataPanel.PlayerDataPanelData");
+MLoader("MyLua.Ui.UiPlayerDataPanel.PlayerDataPanelCV");
 
 local M = GlobalNS.Class(GlobalNS.Form);
-M.clsName = "UIPlayerDataPanel";
+M.clsName = "UiPlayerDataPanel";
 GlobalNS.PlayerDataPanelNS[M.clsName] = M;
 
 function M:ctor()
-	self.mId = GlobalNS.UIFormId.eUIPlayerDataPanel;
+	self.mId = GlobalNS.UiFormId.eUiPlayerDataPanel;
 	self.mData = GlobalNS.new(GlobalNS.PlayerDataPanelNS.PlayerDataPanelData);    
 end
 
@@ -26,17 +26,22 @@ function M:onInit()
 end
 
 function M:onReady()
-    M.super.onReady(self);
-    GlobalNS.CSSystem.Ctx.mInstance.mGlobalDelegate.mMainChildMassChangedDispatch:addEventHandle(nil, nil, self, self.refreshMass);
-    
-    self:refreshMass(); --加载完成主动刷新一次质量
+    M.super.onReady(self);    
+   
+    self:refreshScore(GCtx.mGameData.mMyScore); --加载完成主动刷新一次分数
 end
 
-function M:refreshMass()
-    --获取Mass_Text的Text组件
-    local mass = GlobalNS.CSSystem.Ctx.mInstance.mPlayerMgr:getHero().mPlayerSplitMerge:getAllChildMass();
-    self.mMass = GlobalNS.UtilApi.getComByPath(self.mGuiWin, "Mass_Text", "Text");
-    self.mMass.text = "重量：" .. GlobalNS.UtilMath.getShowMass(GlobalNS.UtilMath.getRadiusByMass(mass));
+function M:refreshScore(score)
+    if score == nil then
+        score = 0;
+    end
+	
+	if self.mGuiWin == nil then
+        return;
+    end
+	
+    self.mMass = GlobalNS.UtilApi.getComByPath(self.mGuiWin, "Mass_Text", "Text");         
+    self.mMass.text = "分数：" .. score;
 end
 
 function M:refreshLeftTime(leftseconds)
@@ -79,7 +84,6 @@ end
 
 function M:onExit()
     M.super.onExit(self);
-    GlobalNS.CSSystem.Ctx.mInstance.mGlobalDelegate.mMainChildMassChangedDispatch:removeEventHandle(nil, nil, self, self.refreshMass);
 end
 
 return M;
