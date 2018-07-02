@@ -48,7 +48,7 @@ void addCClosureLualoader(lua_State *L)
 int loadLuaFromBufferUseFunction(lua_State *L)
 {
 	std::string fileName = luaL_checkstring(L, 1);
-	return loadLuaFromFile(fileName);
+	return loadLuaFromFile(L, fileName);
 }
 
 int loadLuaFromFileUseFunction(lua_State *L)
