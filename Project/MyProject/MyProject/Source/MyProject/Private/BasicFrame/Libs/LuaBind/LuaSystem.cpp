@@ -96,7 +96,7 @@ void LuaSystem::runLuaScript()
 
 int32 LuaSystem::onLuaPanic(lua_State *lua_State)
 {
-	UE_LOG(LogScriptPlugin, Error, TEXT("PANIC: unprotected error in call to Lua API(%s)"), ANSI_TO_TCHAR(lua_tostring(lua_State, -1)));
+	UE_LOG(LuaLog, Error, TEXT("PANIC: unprotected error in call to Lua API(%s)"), ANSI_TO_TCHAR(lua_tostring(lua_State, -1)));
 	return 0;
 }
 
