@@ -21,6 +21,7 @@
 #include "AudioDevice.h"		// FAudioDevice
 #include <string>	// string
 #include "PlatformDefine.h"
+#include "Engine/EngineTypes.h"		// EWorldType
 
 class UMyGameEngineBase;
 class UMyGameInstanceBase;
@@ -472,6 +473,10 @@ public:
 	static FQuat getRotate(AActor* actor);
 	static void setRotate(FTransform& tran, FQuat& rotate);
 	static void setRotateByActor(AActor* actor, FQuat& rotate);
+
+	static EWorldType::Type getWorldType();
+	static bool isGameWorld();
+	static bool isEditorWorld();
 };
 
 MY_END_NAMESPACE

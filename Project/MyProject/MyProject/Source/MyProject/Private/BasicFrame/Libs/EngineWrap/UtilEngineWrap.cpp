@@ -1317,3 +1317,40 @@ void UtilEngineWrap::setRotateByActor(AActor* actor, FQuat& rotate)
 		actor->AddActorWorldRotation(rotate);
 	}
 }
+
+EWorldType::Type UtilEngineWrap::getWorldType()
+{
+	EWorldType::Type ret = EWorldType::Game;
+	UWorld* world = UtilEngineWrap::GetWorld();
+
+	if (nullptr != world)
+	{
+		ret = world->WorldType;
+	}
+
+	return ret;
+}
+
+bool UtilEngineWrap::isGameWorld()
+{
+	bool ret = false;
+
+	if (EWorldType::Game == UtilEngineWrap::getWorldType())
+	{
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool UtilEngineWrap::isEditorWorld()
+{
+	bool ret = false;
+
+	if (EWorldType::Editor == UtilEngineWrap::getWorldType())
+	{
+		ret = true;
+	}
+
+	return ret;
+}
