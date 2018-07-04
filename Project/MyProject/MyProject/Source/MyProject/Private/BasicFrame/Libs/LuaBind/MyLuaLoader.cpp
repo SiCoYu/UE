@@ -168,24 +168,39 @@ int loadLuaFromFile(lua_State *L, std::string fileName)
 
 	const char* fullPath = fileName.c_str();
 	FILE* hFile = nullptr;
-	hFile = fopen(fullPath, "r");
+	/**
+	 * @url http://www.cplusplus.com/reference/cstdio/fopen/
+	 * In order to open a file as a binary file, a "b" character has to be included in the mode string.
+	 */
+	hFile = fopen(fullPath, "rb");
+	int error = 0;
+	int size = 800;
 
-	fseek(hFile, 0, SEEK_END);
-	int size = ftell(hFile);
-	fseek(hFile, 0, SEEK_SET);
+	if (nullptr != hFile)
+	{
+		fseek(hFile, 0, SEEK_END);
+		error = ferror(hFile);
+		size = ftell(hFile);
+		error = ferror(hFile);
+		fseek(hFile, 0, SEEK_SET);
+		//rewind(hFile);
+		error = ferror(hFile);
 
-	char* buffer = new char[size];
-	memset(buffer, 0, size);
-	fread(buffer, size, 1, hFile);
-	size = removeZeroAndEof(buffer, size);
+		char* buffer = new char[size];
+		memset(buffer, 0, size);
+		size_t retSize = fread(buffer, size, 1, hFile);
+		error = ferror(hFile);
 
-	int fnameindex = lua_gettop(L) + 1;
-	lua_pushfstring(L, "@%s", fullPath);
-	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
-	lua_remove(L, fnameindex);
+		size = removeZeroAndEof(buffer, size);
 
-	delete[] buffer;
-	fclose(hFile);
+		int fnameindex = lua_gettop(L) + 1;
+		lua_pushfstring(L, "@%s", fullPath);
+		retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+		lua_remove(L, fnameindex);
+
+		delete[] buffer;
+		fclose(hFile);
+	}
 
 	return retCode;
 }
