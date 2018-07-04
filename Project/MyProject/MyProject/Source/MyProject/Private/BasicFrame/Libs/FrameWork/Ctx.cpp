@@ -385,6 +385,8 @@ void Ctx::beginPlay()
 		FString cmd = TEXT("init");
 		FOutputDeviceDebug device;
 		this->mBPCtx->CallFunctionByNameWithArguments(*cmd, device, NULL, true);
+
+		this->run();
 	}
 }
 
