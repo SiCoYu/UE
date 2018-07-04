@@ -2,7 +2,7 @@
 MacroDef = {};
 
 MacroDef.UNIT_TEST = true;
-MacroDef.UNITY_EDITOR = true;
+MacroDef.ENABLE_DEBUG = true;
 
 MacroDef.ENABLE_LOG = false;
 

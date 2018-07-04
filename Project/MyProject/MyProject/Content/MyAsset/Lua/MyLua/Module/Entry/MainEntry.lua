@@ -5,7 +5,7 @@ require "MyLua/Libs/Core/ModuleLoad";
 --加载宏定义
 MLoader("MyLua.Libs.FrameWork.MacroDef");
 --启动调试服务器连接
-if(MacroDef.UNITY_EDITOR) then
+if(MacroDef.ENABLE_DEBUG) then
     MLoader("mobdebug").start("127.0.0.1", 8172);
 end
 
