@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include "luaconf.h"
 #include "Prequisites.h"
+#include <iostream>		// ifstream
+#include <fstream>
 
 void addCFunctionLualoader(lua_State *L)
 {
@@ -174,7 +176,8 @@ int loadLuaFromFile(lua_State *L, std::string fileName)
 	 */
 	hFile = fopen(fullPath, "rb");
 	int error = 0;
-	int size = 800;
+	int size = 0;
+	char* buffer = nullptr;
 
 	if (nullptr != hFile)
 	{
@@ -186,10 +189,17 @@ int loadLuaFromFile(lua_State *L, std::string fileName)
 		//rewind(hFile);
 		error = ferror(hFile);
 
-		char* buffer = new char[size];
+		buffer = new char[size];
 		memset(buffer, 0, size);
 		size_t retSize = fread(buffer, size, 1, hFile);
 		error = ferror(hFile);
+
+		//size = 800;
+		//buffer = new char[size];
+
+		//std::ifstream infile;
+		//infile.open(fileName, std::ios::binary);
+		//infile.read(buffer, size);
 
 		size = removeZeroAndEof(buffer, size);
 
