@@ -24,16 +24,16 @@ void MFileSys::init()
 	std::string searchPath = "";
 
 	searchPath = path + "MyAsset/Lua/";
-	mLuaSearchPathList.add(searchPath);
+	this->mLuaSearchPathList.add(searchPath);
 
 	searchPath = path + "MyAsset/Lua/Socket/";
-	mLuaSearchPathList.add(searchPath);
+	this->mLuaSearchPathList.add(searchPath);
 
 	searchPath = path + "MyAsset/Lua/ZeroBraneStudio/";
-	mLuaSearchPathList.add(searchPath);
+	this->mLuaSearchPathList.add(searchPath);
 
 	// 初始化 SandBox 文件系统
-	//mSandboxPlatformFile = new FSandboxPlatformFile(false);
+	//this->mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	//FString OutputDirectory = GetOutputDirectoryOverride();
 	// UE 4.19.2 warning C4996: 'FPaths::GameDir': FPaths::GameDir() has been superseded by FPaths::ProjectDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//FString OutputDirectory = FPaths::GameDir();
