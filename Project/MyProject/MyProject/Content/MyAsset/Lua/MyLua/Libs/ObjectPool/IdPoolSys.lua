@@ -26,7 +26,7 @@ function M:dispose()
 	self.releaseAllObject();
 end
 
-function getObject(id)
+function M:getObject(id)
 	local ret = nil;
 
 	if (self.mId2PoolDic:containsKey(id)) then
