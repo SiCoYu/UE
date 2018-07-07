@@ -25,7 +25,9 @@ void TestLuaBind::run()
 		"ok, off = testClass:startWith(true, 'if', 'else')\n"
 		"print(ok, off)\n";
 
-	GLuaSystem->doString("require(\"MyLua.Module.Entry.MainEntry\")");
+	// 执行初始化代码
+	//GLuaSystem->doString("require(\"MyLua.Module.Entry.MainEntry\")");
+	//GLuaSystem->runLuaScript();
 }
 
 MY_END_NAMESPACE

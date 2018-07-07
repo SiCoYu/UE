@@ -91,7 +91,10 @@ void LuaSystem::doString(std::string str)
 
 void LuaSystem::runLuaScript()
 {
+	// 这个直接调用是不能成功执行的，很奇怪
 	//loadLuaFromFile(this->mLuaState, "MyLua.Module.Entry.MainEntry");
+	// 只有这样才能成功执行代码
+	this->doString("require(\"MyLua.Module.Entry.MainEntry\")");
 }
 
 int32 LuaSystem::onLuaPanic(lua_State *lua_State)
