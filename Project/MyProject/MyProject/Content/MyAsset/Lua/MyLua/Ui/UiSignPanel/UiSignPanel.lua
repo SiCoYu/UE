@@ -98,7 +98,7 @@ end
 
 function M:onExit()
     M.super.onExit(self);
-    GCtxExt.mPlayerData.mSignData.day = 0;
+    CtxExt.mPlayerData.mSignData.day = 0;
 end
 
 function M:onCloseBtnClk()
@@ -126,17 +126,17 @@ function M:onNextBtnClk()
 end
 
 function M:on3DaysBtnClk()
-    GCtxExt.mPlayerData.mSignData.rangeDay = 3;
+    CtxExt.mPlayerData.mSignData.rangeDay = 3;
 	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
 end
 
 function M:on5DaysBtnClk()
-    GCtxExt.mPlayerData.mSignData.rangeDay = 5;
+    CtxExt.mPlayerData.mSignData.rangeDay = 5;
 	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
 end
 
 function M:on7DaysBtnClk()
-    GCtxExt.mPlayerData.mSignData.rangeDay = 7;
+    CtxExt.mPlayerData.mSignData.rangeDay = 7;
 	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
 end
 
@@ -145,7 +145,7 @@ function M:onPrefabLoaded(dispObj)
     self.mItemprefab = self.mItem_prefab:getPrefabTmpl();
     self.isPrefabLoaded = true;
 
-    GCtxExt.mPlayerData.mSignData:getSignAwards(nil);
+    CtxExt.mPlayerData.mSignData:getSignAwards(nil);
 end
 
 function M:CreateItems()
@@ -161,7 +161,7 @@ function M:CreateItems()
     self.items = {};
 
     --重新生成
-    for i=1, GCtxExt.mPlayerData.mSignData.daysCount do
+    for i=1, CtxExt.mPlayerData.mSignData.daysCount do
         local item = GlobalNS.new(GlobalNS.ItemData);
         item:init(self.mItemprefab, self.Content, i);
 
@@ -175,7 +175,7 @@ end
 function M:updateUIData()
     self:CreateItems();
 
-    if #self.items == GCtxExt.mPlayerData.mSignData.daysCount then        
+    if #self.items == CtxExt.mPlayerData.mSignData.daysCount then        
         self:SetItems();
     end
 end
@@ -185,13 +185,13 @@ function M:SetItems()
     self.dateText.text = "mm月dd日";
     self.Tip.text = "已连续签到:x天";
 
-    for i=1, GCtxExt.mPlayerData.mSignData.daysCount do
+    for i=1, CtxExt.mPlayerData.mSignData.daysCount do
         local item = self.items[i].m_go;
         
         local day = GlobalNS.UtilEngineWrap.getComByPath(item, "Text", "Text");
         day.text = i;
 
-        if not GCtxExt.mPlayerData.mSignData.items[i].m_itemEnable then
+        if not CtxExt.mPlayerData.mSignData.items[i].m_itemEnable then
             GlobalNS.UtilEngineWrap.disableBtn(self.items[i].m_go);
         end
     end

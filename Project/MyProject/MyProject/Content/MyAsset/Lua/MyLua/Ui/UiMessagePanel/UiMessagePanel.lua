@@ -42,10 +42,10 @@ function M:onReady()
     self.rollMessageTextGo = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.rollMessageDlg, "MsgText");
     self.rollMessageText = GlobalNS.UtilEngineWrap.getComByPath(self.rollMessageDlg, "MsgText", "Text");
 
-    if 1 == GCtxExt.mPlayerData.mGameData.mMessageType then
-        self:ShowPopMessage(GCtxExt.mPlayerData.mGameData.mMessageText);
-    elseif(2 == GCtxExt.mPlayerData.mGameData.mMessageType) then
-        self:ShowRollMessage(GCtxExt.mPlayerData.mGameData.mMessageText);
+    if 1 == CtxExt.mPlayerData.mGameData.mMessageType then
+        self:ShowPopMessage(CtxExt.mPlayerData.mGameData.mMessageText);
+    elseif(2 == CtxExt.mPlayerData.mGameData.mMessageType) then
+        self:ShowRollMessage(CtxExt.mPlayerData.mGameData.mMessageText);
     else
 
     end    
@@ -67,11 +67,11 @@ end
 function M:onOKBtnClk()
     self:exit();
 
-    if 1 == GCtxExt.mPlayerData.mGameData.mMessageMethond then
-        GCtxExt.mPlayerData.mGameData:returnStartGame();
+    if 1 == CtxExt.mPlayerData.mGameData.mMessageMethond then
+        CtxExt.mPlayerData.mGameData:returnStartGame();
     end
 
-    GCtxExt.mPlayerData.mGameData.mMessageMethond = 0; --重置
+    CtxExt.mPlayerData.mGameData.mMessageMethond = 0; --重置
 end
 
 function M:ShowPopMessage(msg)

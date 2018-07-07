@@ -58,7 +58,7 @@ function M:onCloseBtnClk()
 end
 
 function M:UpdateUIData(args)
-    self.AwardName.text = "神杖 x" .. GCtxExt.mPlayerData.mSignData.day;
+    self.AwardName.text = "神杖 x" .. CtxExt.mPlayerData.mSignData.day;
 end
 
 return M;

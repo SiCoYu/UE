@@ -82,19 +82,19 @@ function M:Client_notifyReliveSeconds(params)
     --重生后停止移动
     GlobalNS.CSSystem.Ctx.msInstance.mDataPlayer.mDataHero:setMoveVec(Vector2.New(0, 0));
 
-    GCtxExt.mPlayerData.mGameData.reliveTime = reliveTime;
-    GCtxExt.mPlayerData.mGameData.enemyName = enemyName;
-    GCtxExt.mPlayerData.mGameData.iskilledbyself = isKilledBySelf;
+    CtxExt.mPlayerData.mGameData.reliveTime = reliveTime;
+    CtxExt.mPlayerData.mGameData.enemyName = enemyName;
+    CtxExt.mPlayerData.mGameData.iskilledbyself = isKilledBySelf;
     Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiRelivePanel);
 end
 
 function M:notifyTop10RankInfoList(params)
-    GCtxExt.mPlayerData.mGameData:setTop10RankList(params);
+    CtxExt.mPlayerData.mGameData:setTop10RankList(params);
 end
 
 function M:notifyGameLeftSeconds(params)
     local leftseconds = params[0];
-    GCtxExt.mPlayerData.mGameData:setGameTime(leftseconds);
+    CtxExt.mPlayerData.mGameData:setGameTime(leftseconds);
 end
 
 function M:notifyResultRankInfoList(params)
@@ -103,18 +103,18 @@ function M:notifyResultRankInfoList(params)
     Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiTopXRankPanel);
 
     Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiRankListPanel);
-    GCtxExt.mPlayerData.mGameData:setRankInfoList(params);
-    GCtxExt.mPlayerData.mGameData:clearResource();
+    CtxExt.mPlayerData.mGameData:setRankInfoList(params);
+    CtxExt.mPlayerData.mGameData:clearResource();
 end
 
 function M:notifyNetworkInvalid()
-    GCtxExt.mPlayerData.mGameData.mMessageMethond = 1;
-    GCtxExt.mPlayerData.mGameData:ShowMessageBox("已与服务器断开连接");
+    CtxExt.mPlayerData.mGameData.mMessageMethond = 1;
+    CtxExt.mPlayerData.mGameData:ShowMessageBox("已与服务器断开连接");
 end
 
 function M:notifySomeMessage(params)
     local msg = params[0];
-    GCtxExt.mPlayerData.mGameData:ShowRollMessage(msg);
+    CtxExt.mPlayerData.mGameData:ShowRollMessage(msg);
 end
 
 function M:ShowNoticeMsg()
@@ -127,7 +127,7 @@ function M:ShowNoticeMsg()
         GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:setInt("NoticeTimes", times+1);
         
         local msg = string.gsub(GlobalNS.CSSystem.Ctx.msInstance.mShareData.noticeMsg, "\\n", "\n");
-        GCtxExt.mPlayerData.mGameData:ShowMessageBox(msg);
+        CtxExt.mPlayerData.mGameData:ShowMessageBox(msg);
     end
 end
 
@@ -145,7 +145,7 @@ function M:UpdateMyScore(params)
     if nil ~= form and form:isVisible() then
         form:refreshScore(score);
     else
-        GCtxExt.mPlayerData.mGameData.mMyScore = score;
+        CtxExt.mPlayerData.mGameData.mMyScore = score;
     end
 end
 

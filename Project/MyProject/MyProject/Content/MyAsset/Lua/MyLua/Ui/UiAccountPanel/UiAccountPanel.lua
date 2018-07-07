@@ -74,14 +74,14 @@ function M:onReady()
     local Game_Data = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Game_Data");
 
     local zhenzhu = GlobalNS.UtilEngineWrap.getComByPath(Game_Data, "ZhenZhu", "Text");
-    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtxExt.mPlayerData.mGoodsData.ZhenZhuId) then
-        local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtxExt.mPlayerData.mGoodsData.ZhenZhuId);
+    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(CtxExt.mPlayerData.mGoodsData.ZhenZhuId) then
+        local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(CtxExt.mPlayerData.mGoodsData.ZhenZhuId);
         zhenzhu.text = "珍珠: "..num;
     end
 
     local haixing = GlobalNS.UtilEngineWrap.getComByPath(Game_Data, "HaiXing", "Text");
-    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtxExt.mPlayerData.mGoodsData.HaiXingId) then
-        local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtxExt.mPlayerData.mGoodsData.HaiXingId);
+    if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(CtxExt.mPlayerData.mGoodsData.HaiXingId) then
+        local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(CtxExt.mPlayerData.mGoodsData.HaiXingId);
         haixing.text = "海星: "..num;
     end
 

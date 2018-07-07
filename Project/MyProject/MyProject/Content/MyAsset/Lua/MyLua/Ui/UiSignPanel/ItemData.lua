@@ -34,12 +34,12 @@ function M:init(_Prefab, _Content, _day)
 end
 
 function M:onItemBtnClk()
-    if GCtxExt.mPlayerData.mSignData.day ~= 0 then
-        GCtxExt.mPlayerData.mSignData:setBtnState(GCtxExt.mPlayerData.mSignData.day);
+    if CtxExt.mPlayerData.mSignData.day ~= 0 then
+        CtxExt.mPlayerData.mSignData:setBtnState(CtxExt.mPlayerData.mSignData.day);
     end
     
     GlobalNS.UtilEngineWrap.disableBtn(self.m_go);
-	GCtxExt.mPlayerData.mSignData.day = self.day;
+	CtxExt.mPlayerData.mSignData.day = self.day;
 end
 
 return M;

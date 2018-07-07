@@ -1,8 +1,8 @@
 MLoader("MyLua.Module.Common.Common.DataPrequisites");
 
-GCtxExt = {};
-local M = GCtxExt;
-local this = GCtxExt;
+CtxExt = {};
+local M = CtxExt;
+local this = CtxExt;
 
 function M.ctor()
 	

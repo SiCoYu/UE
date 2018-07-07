@@ -47,8 +47,8 @@ function M:onReady()
 			GlobalNS.RelivePanelNS.RelivePanelPath.BtnRelive)
 		);
 
-    if GCtxExt.mPlayerData.mGameData.enemyId ~= 0 then
-        self:UpdateReliveTimeAndEnemyName(GCtxExt.mPlayerData.mGameData.reliveTime, GCtxExt.mPlayerData.mGameData.enemyName);
+    if CtxExt.mPlayerData.mGameData.enemyId ~= 0 then
+        self:UpdateReliveTimeAndEnemyName(CtxExt.mPlayerData.mGameData.reliveTime, CtxExt.mPlayerData.mGameData.enemyName);
     end 
     
     GlobalNS.CSSystem.Ctx.msInstance.mDataPlayer.mDataHero:setCanMove(false);
@@ -75,13 +75,13 @@ end
 
 function M:onBtnBackRoomClk()
     self.mTimer:Stop();
-	GCtxExt.mPlayerData.mGameData:returnStartGame();
+	CtxExt.mPlayerData.mGameData:returnStartGame();
 end
 
 function M:UpdateReliveTimeAndEnemyName(reliveseconds, enemyName)
     self.mReliveBtn:setText("立即复活（<color=#00FF01FF>" .. reliveseconds .. "</color>）");
 
-    if GCtxExt.mPlayerData.mGameData.iskilledbyself then
+    if CtxExt.mPlayerData.mGameData.iskilledbyself then
         self.roomFatherBtn:setText("你在危险区 <color=#CC0033FF>自杀了</color>");
     else
         self.roomFatherBtn:setText("你被  <color=#00FF01FF>" .. enemyName .. "</color>  击败了");

@@ -69,7 +69,7 @@ function M:onReady()
     title = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.UpBG, "Title");
 	self.mDownBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(title,"Down_BtnTouch"));
 
-    if #self.listitems == GCtxExt.mPlayerData.mGameData.top10Count then
+    if #self.listitems == CtxExt.mPlayerData.mGameData.top10Count then
         self:showTopxRank();
     end
 end
@@ -79,7 +79,7 @@ function M:createItems()
     self.mListitemPrefab = self.mListitem_prefab:getPrefabTmpl();
     
     if nil ~= self.mListitemPrefab then
-        for i=1, GCtxExt.mPlayerData.mGameData.top10Count do
+        for i=1, CtxExt.mPlayerData.mGameData.top10Count do
             --用listitemprefab生成GameObject对象
             local listitem = GlobalNS.UtilEngineWrap.Instantiate(self.mListitemPrefab);
             listitem.transform.parent = self.mRankContent;
@@ -97,14 +97,14 @@ end
 
 function M:onPrefabLoaded(dispObj)
     self:createItems();
-    if #self.listitems == GCtxExt.mPlayerData.mGameData.top10Count then
+    if #self.listitems == CtxExt.mPlayerData.mGameData.top10Count then
         self:showTopxRank();
     end
 end
 
 function M:showTopxRank()
     --topx
-    for i=1, GCtxExt.mPlayerData.mGameData.top10Count do
+    for i=1, CtxExt.mPlayerData.mGameData.top10Count do
         local listitem = self.listitems[i].transform;
 
         --荣誉
@@ -139,7 +139,7 @@ function M:showTopxRank()
             Rank:SetActive(false);
         else
             Rank:SetActive(true);
-            if i == GCtxExt.mPlayerData.mGameData.top10_myrank then
+            if i == CtxExt.mPlayerData.mGameData.top10_myrank then
                 Ranktext.text = "<color=#32c832ff>"..i.."</color>";
             else
                 Ranktext.text = "" .. i;
@@ -148,32 +148,32 @@ function M:showTopxRank()
 
         --用户名
         local Name = GlobalNS.UtilEngineWrap.getComByPath(listitem, "name", "Text");        
-        if i == GCtxExt.mPlayerData.mGameData.top10_myrank then
-            Name.text = "<color=#32c832ff>"..GCtxExt.mPlayerData.mGameData.top10ranklist[i].m_name.."</color>";
+        if i == CtxExt.mPlayerData.mGameData.top10_myrank then
+            Name.text = "<color=#32c832ff>"..CtxExt.mPlayerData.mGameData.top10ranklist[i].m_name.."</color>";
         else
-            Name.text = GCtxExt.mPlayerData.mGameData.top10ranklist[i].m_name;
+            Name.text = CtxExt.mPlayerData.mGameData.top10ranklist[i].m_name;
         end
     end
 
     --我的排名
     local myHoner = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mMyRankArea, "rank");
     local myrank = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mMyRankArea, "rank_Text");
-    if GCtxExt.mPlayerData.mGameData.top10_myrank > 3 then
+    if CtxExt.mPlayerData.mGameData.top10_myrank > 3 then
         myHoner:SetActive(false);
         myrank:SetActive(true);
         local myRanktext = GlobalNS.UtilEngineWrap.getComByPath(self.mMyRankArea, "rank_Text", "Text");
-        myRanktext.text = "" .. GCtxExt.mPlayerData.mGameData.top10_myrank;
+        myRanktext.text = "" .. CtxExt.mPlayerData.mGameData.top10_myrank;
     else
         myrank:SetActive(false);
         myHoner:SetActive(true);
         local myhonerTransform = GlobalNS.UtilEngineWrap.GetComponent(myHoner, "RectTransform");
         self.myhoner = GlobalNS.new(GlobalNS.AuxImage);
         self.myhoner:setSelfGo(myHoner);
-        if GCtxExt.mPlayerData.mGameData.top10_myrank == 1 then
+        if CtxExt.mPlayerData.mGameData.top10_myrank == 1 then
             myhonerTransform.sizeDelta = Vector2.New(36, 26);
 			self.myhoner:setSpritePath("DefaultSkin/SkyWarSkin/topx1.png", "topx1");
             --self.myhoner:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_gold");
-        elseif GCtxExt.mPlayerData.mGameData.top10_myrank == 2 then
+        elseif CtxExt.mPlayerData.mGameData.top10_myrank == 2 then
             myhonerTransform.sizeDelta = Vector2.New(24, 24);
 			self.myhoner:setSpritePath("DefaultSkin/SkyWarSkin/topx2.png", "topx2");
             --self.myhoner:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_yin");
@@ -184,7 +184,7 @@ function M:showTopxRank()
         end
     end
     local myName = GlobalNS.UtilEngineWrap.getComByPath(self.mMyRankArea, "name", "Text");
-    myName.text = GCtxExt.mPlayerData.mGameData.mMyName;
+    myName.text = CtxExt.mPlayerData.mGameData.mMyName;
 end
 
 function M:onDropBtnClk()
@@ -233,7 +233,7 @@ end
 function M:updateUIData()
     self:clearResource();
     self:createItems();
-    if #self.listitems == GCtxExt.mPlayerData.mGameData.top10Count then
+    if #self.listitems == CtxExt.mPlayerData.mGameData.top10Count then
         self:showTopxRank();
     end
 end

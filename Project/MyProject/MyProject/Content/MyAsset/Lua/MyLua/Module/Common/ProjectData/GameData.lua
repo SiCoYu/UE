@@ -113,7 +113,7 @@ function M:ShowRollMessage(msg)
 end
 
 function M:returnStartGame()
-    GCtxExt.mPlayerData.mGameData.isRelogin = true;
+    CtxExt.mPlayerData.mGameData.isRelogin = true;
     self:clearResource();
     GlobalNS.CSSystem.Ctx.msInstance.mNetEventHandle:Disconnect();
 	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiStartGame);
