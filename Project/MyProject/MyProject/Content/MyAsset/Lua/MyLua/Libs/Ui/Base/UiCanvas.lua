@@ -1,21 +1,9 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.Core.StaticClass");
 MLoader("MyLua.Libs.Core.GObject");
 MLoader("MyLua.Libs.Ui.Base.UiLayer");
+MLoader("MyLua.Libs.Ui.Base.UiCanvasId");
 
-local M = GlobalNS.StaticClass();
-M.clsName = "UiCanvasId";
-GlobalNS[M.clsName] = M;
-
-function M.ctor()
-	M.eUIFirstCanvas = 0;
-	M.eUISecondCanvas = 1;
-end
-
-M.ctor();
-
------------------------------
 M = GlobalNS.Class(GlobalNS.GObject);
 M.clsName = "UiCanvas";
 GlobalNS[M.clsName] = M;

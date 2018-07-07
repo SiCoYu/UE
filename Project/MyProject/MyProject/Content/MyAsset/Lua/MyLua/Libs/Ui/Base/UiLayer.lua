@@ -1,24 +1,9 @@
 MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
-MLoader("MyLua.Libs.Core.StaticClass");
 MLoader("MyLua.Libs.Core.GObject");
 
-local M = GlobalNS.StaticClass();
-M.clsName = "UiLayerId";
-GlobalNS[M.clsName] = M;
+MLoader("MyLua.Libs.Ui.Base.UiLayerId");
 
-function M.ctor()
-	M.eUIBtmLayer = 0;
-	M.eUIFirstLayer = 1;
-	M.eUISecondLayer = 2;
-	M.eUIThirdLayer = 3;
-	M.eUIForthLayer = 4;
-	M.eUITopLayer = 5;
-end
-
-M.ctor();
-
-------------------------------------
 M = GlobalNS.Class(GlobalNS.GObject);
 M.clsName = "UiLayer";
 GlobalNS[M.clsName] = M;

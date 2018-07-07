@@ -75,6 +75,8 @@ MLoader("MyLua.Libs.FrameHandle.LoopDepth");
 -- UI
 MLoader("MyLua.Libs.Ui.Base.FormMode");
 MLoader("MyLua.Libs.Ui.Base.UiFormId");
+MLoader("MyLua.Libs.Ui.Base.UiCanvasId");
+MLoader("MyLua.Libs.Ui.Base.UiLayerId");
 MLoader("MyLua.Libs.Ui.Base.UiLayer");
 MLoader("MyLua.Libs.Ui.Base.UiCanvas");
 MLoader("MyLua.Libs.Ui.Base.Form");
