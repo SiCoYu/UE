@@ -32,23 +32,23 @@ function M.preInit()
 	this.mNetCmdNotify_KBE = GlobalNS.new(GlobalNS.NetCmdDispatchHandle_KBE);
 	this.mFrameUpdateStatistics = GlobalNS.new(GlobalNS.FrameUpdateStatistics);
 	
-	this.mStrIdPoolSys = GlobalNS.new(GlobalNS.StrIdPoolSys);
-	this.mObjectStrIdPoolSys = GlobalNS.new(GlobalNS.StrIdPoolSys);
-	this.mObjectNumIdPoolSys = GlobalNS.new(GlobalNS.NumIdPoolSys);
-	this.mSceneIdPoolSys = GlobalNS.new(GlobalNS.NumIdPoolSys);
+	--this.mStrIdPoolSys = GlobalNS.new(GlobalNS.StrIdPoolSys);
+	--this.mObjectStrIdPoolSys = GlobalNS.new(GlobalNS.StrIdPoolSys);
+	--this.mObjectNumIdPoolSys = GlobalNS.new(GlobalNS.NumIdPoolSys);
+	--this.mSceneIdPoolSys = GlobalNS.new(GlobalNS.NumIdPoolSys);
 end
 
 function M.execInit()
 	--主要执行 init 初始化
-    GlobalNS.CSSystem.init();
-    this.mNetMgr:init();
-	GlobalNS.NoDestroyGo.init();
+    --GlobalNS.CSSystem.init();
+    --this.mNetMgr:init();
+	--GlobalNS.NoDestroyGo.init();
 	this.mUiMgr:init();
 	
 	this.mFrameUpdateStatistics:init();
-	this.mStrIdPoolSys.init();
-	this.mObjectNumIdPoolSys.init();
-	this.mSceneIdPoolSys.init();
+	--this.mStrIdPoolSys.init();
+	--this.mObjectNumIdPoolSys.init();
+	--this.mSceneIdPoolSys.init();
 end
 
 function M.postInit()

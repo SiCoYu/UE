@@ -1,4 +1,4 @@
-MLoader("MyLua.Libs.Core.DataPrequisites");
+MLoader("MyLua.Module.Common.Common.DataPrequisites");
 
 GCtxExt = {};
 local M = GCtxExt;
@@ -18,8 +18,8 @@ function M.preInit()
 end
 
 function M.execInit()
-	this.mPlayerData.init();
-	this.mEntityData.init();
+	this.mPlayerData:init();
+	this.mEntityData:init();
 end
 
 function M.postInit()

@@ -162,5 +162,5 @@ MLoader("MyLua.Libs.Table.UtilTable");
 MLoader("MyLua.Libs.Table.TableSys");
 
 -- ObjectPool
-MLoader("MyLua.Libs.ObjectPool.StrIdPoolSys");
-MLoader("MyLua.Libs.ObjectPool.NumIdPoolSys");
+--MLoader("MyLua.Libs.ObjectPool.StrIdPoolSys");
+--MLoader("MyLua.Libs.ObjectPool.NumIdPoolSys");
