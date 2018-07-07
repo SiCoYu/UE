@@ -10,7 +10,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class UtilLuaSysLibWrap
 {
 public:
-	static int LUA_MULTRET;
+	static int LUA_MULTRET;		// lua.h  LUA_MULTRET
 
 public:
 	inline static void PushTraceback(lua_State *L, lua_CFunction func)

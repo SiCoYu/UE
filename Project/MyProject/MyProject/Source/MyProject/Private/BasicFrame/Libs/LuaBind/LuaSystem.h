@@ -29,6 +29,7 @@ public:
 
 	lua_State* getLuaVM();
 	void doString(std::string str);
+	void doFile(std::string fileName);
 	void runLuaScript();
 };
 

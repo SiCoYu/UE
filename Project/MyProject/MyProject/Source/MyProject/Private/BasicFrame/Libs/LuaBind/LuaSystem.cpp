@@ -63,8 +63,8 @@ void LuaSystem::init()
 	lua_settop(this->mLuaState, 0);
 
 	// 绑定自定义加载器
-	//addCClosureLualoader(this->mLuaState);
-	addCFunctionLualoader(this->mLuaState);
+	// MyLuaLoader::addCClosureLualoader(this->mLuaState);
+	MyLuaLoader::addCFunctionLualoader(this->mLuaState);
 
 	// 绑定外部库
 	LuaCppBind::bind(this->mLuaState);
@@ -89,11 +89,16 @@ void LuaSystem::doString(std::string str)
 	luaL_dostring(this->mLuaState, str.c_str());
 }
 
+void LuaSystem::doFile(std::string fileName)
+{
+	luaL_dofile(this->mLuaState, fileName.c_str());
+}
+
 void LuaSystem::runLuaScript()
 {
-	// 这个直接调用是不能成功执行的，很奇怪
+	// 这个仅仅是加载代码，如果要执行，还要调用 lua_pcall 才能执行
 	//loadLuaFromFile(this->mLuaState, "MyLua.Module.Entry.MainEntry");
-	// 只有这样才能成功执行代码
+	// 这个是加载代码并执行
 	this->doString("require(\"MyLua.Module.Entry.MainEntry\")");
 }
 

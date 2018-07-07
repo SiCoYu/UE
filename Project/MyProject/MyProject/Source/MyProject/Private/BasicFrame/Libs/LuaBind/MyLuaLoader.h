@@ -1,5 +1,5 @@
-#ifndef __MyLuaLoader_H_
-#define __MyLuaLoader_H_
+#ifndef __MyLuaLoader_H
+#define __MyLuaLoader_H
 
 /**
  * @brief 具体参照 loadlib.c
@@ -7,16 +7,29 @@
 #include "lua.hpp"
 #include <string>
 
-void addCFunctionLualoader(lua_State *L);
-void addCClosureLualoader(lua_State *L);
-int loadLuaFromBufferUseFunction(lua_State *L);
-int loadLuaFromFileUseFunction(lua_State *L);
-int loadLuaFromBufferUseClosure(lua_State *L);
-int loadLuaFromFileUseClosure(lua_State *L);
-// 移除字符串缓冲区最后的 0 和 EOF(-1) 符号
-int removeZeroAndEof(const char* buffer, int size);
-int checkResult(lua_State *L, int stat, const char *filename);
+#include "PlatformDefine.h"
 
-int loadLuaFromFile(lua_State *L, std::string fileName);
+MY_BEGIN_NAMESPACE(MyNS)
+
+class MyLuaLoader
+{
+public:
+	// 移除字符串缓冲区最后的 0 和 EOF(-1) 符号
+	static int removeZeroAndEof(const char* buffer, int size);
+	static int checkResult(lua_State *L, int stat, const char *filename);
+
+	static void addCFunctionLualoader(lua_State *L);
+	static void addCClosureLualoader(lua_State *L);
+
+	static int loadLuaFromBufferUseFunction(lua_State *L);
+	static int loadLuaFromFileUseFunction(lua_State *L);
+
+	static int loadLuaFromBufferUseClosure(lua_State *L);
+	static int loadLuaFromFileUseClosure(lua_State *L);
+
+	static int loadLuaFromFile(lua_State *L, std::string fileName);
+};
+
+MY_END_NAMESPACE
 
 #endif
