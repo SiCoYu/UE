@@ -36,13 +36,13 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    self.roomFatherBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BackRoom"));
-    self.mBackRoomBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
+    self.roomFatherBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BackRoom"));
+    self.mBackRoomBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(
 			self.roomFatherBtn:getSelfGo(), 
 			GlobalNS.RelivePanelNS.RelivePanelPath.BtnBackRoom)
 		);
 
-	self.mReliveBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
+	self.mReliveBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(
 			self.mGuiWin, 
 			GlobalNS.RelivePanelNS.RelivePanelPath.BtnRelive)
 		);

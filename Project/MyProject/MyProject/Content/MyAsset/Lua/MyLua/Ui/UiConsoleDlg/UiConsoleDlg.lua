@@ -42,31 +42,31 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG_Image");
-	self.mSendBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG_Image");
+	self.mSendBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(
 			BG, 
 			GlobalNS.ConsoleDlgNS.ConsoleDlgPath.BtnSend)
 		);
-    self.mExitBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
+    self.mExitBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(
 			BG, 
 			GlobalNS.ConsoleDlgNS.ConsoleDlgPath.BtnExit)
 		);
-    self.mClearBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Clear_BtnTouch"));
+    self.mClearBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Clear_BtnTouch"));
 
-    self.mCmdInput = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "CmdInput");
-    self.inputText = GlobalNS.UtilApi.GetComponent(self.mCmdInput, "InputField");
+    self.mCmdInput = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "CmdInput");
+    self.inputText = GlobalNS.UtilEngineWrap.GetComponent(self.mCmdInput, "InputField");
 
-    self.viewbg = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "ViewBG");
-    --self.viewtxet = GlobalNS.UtilApi.getComByPath(self.viewbg, "ShowView", "InputField");
-    self.viewtxet = GlobalNS.UtilApi.getComByPath(self.viewbg, "ShowView", "Text");
+    self.viewbg = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "ViewBG");
+    --self.viewtxet = GlobalNS.UtilEngineWrap.getComByPath(self.viewbg, "ShowView", "InputField");
+    self.viewtxet = GlobalNS.UtilEngineWrap.getComByPath(self.viewbg, "ShowView", "Text");
 
-    self.locklog = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "LockLog");
-    self.locklogtoggle = GlobalNS.UtilApi.GetComponent(self.locklog, "Toggle");
+    self.locklog = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "LockLog");
+    self.locklogtoggle = GlobalNS.UtilEngineWrap.GetComponent(self.locklog, "Toggle");
     --self.locklog:addEventHandle(self, self.onToggleChanged, 0);
 
-    local cmdtoggle = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Cmd_Toggle");
-    self.ClientToggle = GlobalNS.UtilApi.getComByPath(cmdtoggle, "ClientToggle", "Toggle");
-    self.ServerToggle = GlobalNS.UtilApi.getComByPath(cmdtoggle, "ServerToggle", "Toggle");
+    local cmdtoggle = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Cmd_Toggle");
+    self.ClientToggle = GlobalNS.UtilEngineWrap.getComByPath(cmdtoggle, "ClientToggle", "Toggle");
+    self.ServerToggle = GlobalNS.UtilEngineWrap.getComByPath(cmdtoggle, "ServerToggle", "Toggle");
 
     if self.locklogtoggle.isOn then
         GCtx.mLogSys:log("locked  ", GlobalNS.LogTypeId.eLogCommon);
@@ -176,7 +176,7 @@ function M:onSetLogText(text)
         self.viewtxet.text = self.log;
     end
 
-    GlobalNS.UtilApi.GetComponent(self.viewbg, "ScrollRect").verticalNormalizedPosition = 0;
+    GlobalNS.UtilEngineWrap.GetComponent(self.viewbg, "ScrollRect").verticalNormalizedPosition = 0;
 end
 
 function M:onToggleChanged(value)

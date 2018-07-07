@@ -48,7 +48,7 @@ function M:decNum()
 	--[[
 	-- 说明错误增加和减少不对称
 	if(self.mTotalNum < 0) then
-		--GlobalNS.UtilApi.error("FrameUpdateStatistics decNum less zero");
+		--GlobalNS.UtilEngineWrap.error("FrameUpdateStatistics decNum less zero");
 		self.mTotalNum = 0;
 	end
 	

@@ -86,20 +86,20 @@ function M:onReady()
 end
 
 function M:initForm()
-    local bg_image = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG_Image");
+    local bg_image = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG_Image");
 
     --头像
-    self.mAvatarBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(bg_image, "AvatarBG");
-    --self.mAvatar = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "AvatarImage");
-    self.mAvatarBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "Avatar_BtnTouch"));
-    self.mGoldImage = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "GoldImage");
-    self.mLevelName = GlobalNS.UtilApi.getComByPath(self.mAvatarBG, "LevelName", "Text");
-    self.mStar1 = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "Star1");
-    self.mStar2 = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "Star2");
-    self.mStar3 = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "Star3");
-    self.mStar4 = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "Star4");
-    self.mStar5 = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "Star5");
-	self.mLevelNum = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mAvatarBG, "LevelNum");
+    self.mAvatarBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bg_image, "AvatarBG");
+    --self.mAvatar = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "AvatarImage");
+    self.mAvatarBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "Avatar_BtnTouch"));
+    self.mGoldImage = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "GoldImage");
+    self.mLevelName = GlobalNS.UtilEngineWrap.getComByPath(self.mAvatarBG, "LevelName", "Text");
+    self.mStar1 = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "Star1");
+    self.mStar2 = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "Star2");
+    self.mStar3 = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "Star3");
+    self.mStar4 = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "Star4");
+    self.mStar5 = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "Star5");
+	self.mLevelNum = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mAvatarBG, "LevelNum");
 
     --头像
     local index = 1;
@@ -118,42 +118,42 @@ function M:initForm()
     self.mLevelName.text = username;
 
     --昵称
-    self.mNameBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(bg_image, "NameBG");
-    self.mNickNameInput = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mNameBG, "MyName");
-    self.inputText = GlobalNS.UtilApi.GetComponent(self.mNickNameInput, "InputField");    
-    self.mNickNameBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mNameBG, "RandomName_BtnTouch"));
-    self.mStartGameBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(bg_image, "StartGame_BtnTouch"));
+    self.mNameBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bg_image, "NameBG");
+    self.mNickNameInput = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mNameBG, "MyName");
+    self.inputText = GlobalNS.UtilEngineWrap.GetComponent(self.mNickNameInput, "InputField");    
+    self.mNickNameBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mNameBG, "RandomName_BtnTouch"));
+    self.mStartGameBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bg_image, "StartGame_BtnTouch"));
     
     --功能设置区相关控件
-    self.mSettingsPanel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(bg_image, "SettingsPanel");
-    self.mSettingsAnimator = GlobalNS.UtilApi.GetComponent(self.mSettingsPanel, "Animator");
+    self.mSettingsPanel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bg_image, "SettingsPanel");
+    self.mSettingsAnimator = GlobalNS.UtilEngineWrap.GetComponent(self.mSettingsPanel, "Animator");
 
     --收缩按钮
-    self.mDropBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mSettingsPanel, "Drop_BtnTouch"));
+    self.mDropBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mSettingsPanel, "Drop_BtnTouch"));
     --签到按钮
-    self.mSignBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mSettingsPanel, "Sign_BtnTouch"));
+    self.mSignBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mSettingsPanel, "Sign_BtnTouch"));
     --设置按钮
-    self.mSettingBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mSettingsPanel, "Setting_BtnTouch"));
+    self.mSettingBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mSettingsPanel, "Setting_BtnTouch"));
     --分享按钮
-    self.mShareBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mSettingsPanel, "Share_BtnTouch"));
+    self.mShareBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mSettingsPanel, "Share_BtnTouch"));
     
     --底部按钮区
-    self.mBottomImage = GlobalNS.UtilApi.TransFindChildByPObjAndPath(bg_image, "BottomImage");
+    self.mBottomImage = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bg_image, "BottomImage");
     --战队按钮
-    self.mCorpsBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mBottomImage, "Corps_BtnTouch"));
+    self.mCorpsBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mBottomImage, "Corps_BtnTouch"));
     --关系按钮
-    self.mFriendBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mBottomImage, "Friend_BtnTouch"));
+    self.mFriendBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mBottomImage, "Friend_BtnTouch"));
     --排行按钮
-    self.mRankBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mBottomImage, "Ranking_BtnTouch"));
+    self.mRankBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mBottomImage, "Ranking_BtnTouch"));
     --商城按钮
-    self.mShopBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mBottomImage, "Shop_BtnTouch"));
+    self.mShopBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mBottomImage, "Shop_BtnTouch"));
 	
 	-- 进度条
-	self.mBarImage:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(bg_image, "ProgressBar/Bar"));
-	self.mBgImage:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(bg_image, "ProgressBar/BG"));
+	self.mBarImage:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bg_image, "ProgressBar/Bar"));
+	self.mBgImage:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bg_image, "ProgressBar/BG"));
 
     -- 联系我们
-    self.mEmailBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(bg_image, "Email_BtnTouch"));
+    self.mEmailBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bg_image, "Email_BtnTouch"));
 end
 
 function M:setUsernameAndPassword()

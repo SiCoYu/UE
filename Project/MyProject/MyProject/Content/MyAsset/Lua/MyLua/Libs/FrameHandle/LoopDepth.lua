@@ -65,7 +65,7 @@ function M:decDepth()
 
 	if(self.mLoopDepth < 0) then
 		-- 错误，不对称
-		GlobalNS.UtilApi.error("LoopDepth::decDepth, Error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		GlobalNS.UtilEngineWrap.error("LoopDepth::decDepth, Error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	end
 end
 

@@ -61,7 +61,7 @@ function M:getLayerGo(canvasId, layerId)
     if(layerId == nil) then
         layerId = GlobalNS.UiLayerId.eUISecondLayer;
     end
-    GlobalNS.UtilApi.assert(canvasId < self.m_canvasList:count());
+    GlobalNS.UtilEngineWrap.assert(canvasId < self.m_canvasList:count());
     return self.m_canvasList:at(canvasId):getLayerGo(layerId);
 end
 
@@ -85,7 +85,7 @@ function M:showFormNoClosePreForm(formId)
 		if(not self.mFormArr[formId]:isVisible()) then
 			self.mFormArr[formId]:onShow();
 			if(self.mFormArr[formId]:isReady()) then
-				GlobalNS.UtilApi.SetActive(self.mFormArr[formId].mGuiWin, true);
+				GlobalNS.UtilEngineWrap.SetActive(self.mFormArr[formId].mGuiWin, true);
 			end
 		end
         self.mCurFormIndex = formId;
@@ -149,9 +149,9 @@ end
 
 function M:hideFormNoOpenPreForm(formId)
     local form = self.mFormArr[formId];
-    if(form.mGuiWin ~= nil and GlobalNS.UtilApi.IsActive(form.mGuiWin)) then
+    if(form.mGuiWin ~= nil and GlobalNS.UtilEngineWrap.IsActive(form.mGuiWin)) then
         form:onHide();
-        GlobalNS.UtilApi.SetActive(form.mGuiWin, false);
+        GlobalNS.UtilEngineWrap.SetActive(form.mGuiWin, false);
         self.mCurFormIndex = -1;
     end
 end
@@ -249,11 +249,11 @@ function M:onFormPrefabLoaded(dispObj)
 	if(self.mFormArr[formId] ~= nil) then
 		local parent = self:getLayerGo(GlobalNS.UiAttrSystem[self.mFormArr[formId].mId].mCanvasId, GlobalNS.UiAttrSystem[self.mFormArr[formId].mId].mLayerId);
         self.mFormArr[formId].mGuiWin = self.mFormId2LoadItemDic:value(formId):getSelfGo();
-		GlobalNS.UtilApi.SetParent(self.mFormArr[formId].mGuiWin, parent, false);
-        GlobalNS.UtilApi.SetActive(self.mFormArr[formId].mGuiWin, false);     -- 加载完成后先隐藏，否则后面 showForm 判断会有问题
+		GlobalNS.UtilEngineWrap.SetParent(self.mFormArr[formId].mGuiWin, parent, false);
+        GlobalNS.UtilEngineWrap.SetActive(self.mFormArr[formId].mGuiWin, false);     -- 加载完成后先隐藏，否则后面 showForm 判断会有问题
         self.mFormArr[formId]:onReady();
 		if(self.mFormArr[formId]:isVisible()) then
-			GlobalNS.UtilApi.SetActive(self.mFormArr[formId].mGuiWin, true);
+			GlobalNS.UtilEngineWrap.SetActive(self.mFormArr[formId].mGuiWin, true);
 		end
 	else
 		self.mFormId2LoadItemDic:value(formId):dispose();

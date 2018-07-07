@@ -18,7 +18,7 @@ function M:dtor()
 end
 
 function M:init(_Prefab, _Content, _index)
-    self.m_go = GlobalNS.UtilApi.Instantiate(_Prefab);
+    self.m_go = GlobalNS.UtilEngineWrap.Instantiate(_Prefab);
     self.m_go.transform.parent = _Content;
     self.m_go.transform.localScale = Vector3.New(1.0, 1.0, 1.0);
     self.m_go.name = "Avatar" .. _index;

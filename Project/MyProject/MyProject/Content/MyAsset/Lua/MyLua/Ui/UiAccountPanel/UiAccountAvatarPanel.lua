@@ -43,22 +43,22 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
-    local TopBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "TitleBGImage");
-	self.mCloseBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(TopBG, "Close_BtnTouch"));
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
+    local TopBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "TitleBGImage");
+	self.mCloseBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(TopBG, "Close_BtnTouch"));
     
     --Avatar区
-    local MiddlePanel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "MiddlePanel");    
-    self.scrollrect = GlobalNS.UtilApi.TransFindChildByPObjAndPath(MiddlePanel, "ScrollRect");
-    local viewport =  GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.scrollrect, "Viewport");
-    self.AvatarContentRect = GlobalNS.UtilApi.getComByPath(viewport, "Content", "RectTransform");
+    local MiddlePanel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "MiddlePanel");    
+    self.scrollrect = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(MiddlePanel, "ScrollRect");
+    local viewport =  GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.scrollrect, "Viewport");
+    self.AvatarContentRect = GlobalNS.UtilEngineWrap.getComByPath(viewport, "Content", "RectTransform");
 
     --加载avataritems
 	self.mAvataritem_prefab:asyncLoad("UI/UiAccountPanel/AvatarItem.prefab", self, self.onPrefabLoaded, nil);    
 
     --底部
-    local BottomBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "BottomBGImage");
-	self.mOKBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(BottomBG, "OK_BtnTouch"));
+    local BottomBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "BottomBGImage");
+	self.mOKBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BottomBG, "OK_BtnTouch"));
 end
 
 function M:onShow()
@@ -98,7 +98,7 @@ function M:CreateAvatarItem()
     end
 
     --滚动到起始位置，默认会在中间
-    GlobalNS.UtilApi.GetComponent(self.scrollrect, "ScrollRect").verticalNormalizedPosition = 1;
+    GlobalNS.UtilEngineWrap.GetComponent(self.scrollrect, "ScrollRect").verticalNormalizedPosition = 1;
 end
 
 function M:updateUIData()   
@@ -117,10 +117,10 @@ end
 function M:SetAvatarItems(index)
     for i=1, self.mAvatarNum do
         --标识
-        local HotImage = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.avataritems[i].m_go, "Flag");
+        local HotImage = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.avataritems[i].m_go, "Flag");
         HotImage:SetActive(false);
     end
-    local HotImage = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.avataritems[index].m_go, "Flag");
+    local HotImage = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.avataritems[index].m_go, "Flag");
     HotImage:SetActive(true);
     self.index = index;
 end
@@ -157,7 +157,7 @@ function M:clearObj()
     for i=1, #self.avataritems do
         local avataritem = self.avataritems[i];
         GlobalNS.delete(avataritem.avatarItemBtn);
-        GlobalNS.UtilApi.Destroy(avataritem.m_go);
+        GlobalNS.UtilEngineWrap.Destroy(avataritem.m_go);
     end
     self.avataritems = {};
 end

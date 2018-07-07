@@ -120,7 +120,7 @@ MLoader("MyLua.Libs.FrameWork.Layer.LayerPath");
 MLoader("MyLua.Libs.Tools.MEndian");
 MLoader("MyLua.Libs.Tools.MEncode");
 MLoader("MyLua.Libs.Tools.UtilStr");
-MLoader("MyLua.Libs.Tools.UtilApi");
+MLoader("MyLua.Libs.Tools.UtilEngineWrap");
 MLoader("MyLua.Libs.Tools.UtilPath");
 MLoader("MyLua.Libs.Tools.UtilMath");
 MLoader("MyLua.Libs.Tools.UtilSysLibWrap");

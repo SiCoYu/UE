@@ -38,16 +38,16 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");    
-	self.mCloseBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");    
+	self.mCloseBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(
 			BG, 
 			GlobalNS.AccountPanelNS.AccountPanelPath.BtnClose)
 		);
-    self.mShareBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Share_BtnTouch"));
+    self.mShareBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Share_BtnTouch"));
 
-    local Avatar = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Avatar");
-    self.mAvatarBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(Avatar, "Avatar_BtnTouch"));
-    local Info = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Avatar, "Info");
+    local Avatar = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Avatar");
+    self.mAvatarBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Avatar, "Avatar_BtnTouch"));
+    local Info = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Avatar, "Info");
 
     --头像   
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("Avatar") then
@@ -56,7 +56,7 @@ function M:onReady()
     self:resetAvatar(self.index);
 
     --账号
-    local Name = GlobalNS.UtilApi.getComByPath(Info, "Name", "Text");
+    local Name = GlobalNS.UtilEngineWrap.getComByPath(Info, "Name", "Text");
     local username = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getString(SDK.Lib.SystemSetting.USERNAME);
     if username == nil then
         username = "游客";
@@ -64,40 +64,40 @@ function M:onReady()
     Name.text = username;
 
     --签名
-    self.Sign = GlobalNS.UtilApi.getComByPath(Info, "Sign", "InputField");
+    self.Sign = GlobalNS.UtilEngineWrap.getComByPath(Info, "Sign", "InputField");
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("SIGN") then
         local signText = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getString("SIGN");
         self.Sign.text = signText;
     end
     
     --游戏数据
-    local Game_Data = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Game_Data");
+    local Game_Data = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Game_Data");
 
-    local zhenzhu = GlobalNS.UtilApi.getComByPath(Game_Data, "ZhenZhu", "Text");
+    local zhenzhu = GlobalNS.UtilEngineWrap.getComByPath(Game_Data, "ZhenZhu", "Text");
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtxExt.mPlayerData.mGoodsData.ZhenZhuId) then
         local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtxExt.mPlayerData.mGoodsData.ZhenZhuId);
         zhenzhu.text = "珍珠: "..num;
     end
 
-    local haixing = GlobalNS.UtilApi.getComByPath(Game_Data, "HaiXing", "Text");
+    local haixing = GlobalNS.UtilEngineWrap.getComByPath(Game_Data, "HaiXing", "Text");
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtxExt.mPlayerData.mGoodsData.HaiXingId) then
         local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt(GCtxExt.mPlayerData.mGoodsData.HaiXingId);
         haixing.text = "海星: "..num;
     end
 
-    local HuiHe = GlobalNS.UtilApi.getComByPath(Game_Data, "HuiHe", "Text");
+    local HuiHe = GlobalNS.UtilEngineWrap.getComByPath(Game_Data, "HuiHe", "Text");
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("HuiHe") then
         local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt("HuiHe");
         HuiHe.text = "游戏回合数: "..num;
     end
 
-    local SwallowNum = GlobalNS.UtilApi.getComByPath(Game_Data, "SwallowNum", "Text");
+    local SwallowNum = GlobalNS.UtilEngineWrap.getComByPath(Game_Data, "SwallowNum", "Text");
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("SwallowNum") then
         local num = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt("SwallowNum");
         SwallowNum.text = "总吞噬人数: "..num;
     end
 
-    local MaxMass = GlobalNS.UtilApi.getComByPath(Game_Data, "MaxMass", "Text");
+    local MaxMass = GlobalNS.UtilEngineWrap.getComByPath(Game_Data, "MaxMass", "Text");
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("MaxMass") then
         local mass = GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getFloat("MaxMass");
         local radius = GlobalNS.UtilMath.getRadiusByMass(mass); --服务器传过来的是质量

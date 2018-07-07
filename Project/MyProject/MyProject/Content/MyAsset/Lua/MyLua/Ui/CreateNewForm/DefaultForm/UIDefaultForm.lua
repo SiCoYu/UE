@@ -31,7 +31,7 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-	--[[self.mDefaultBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
+	--[[self.mDefaultBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(
 			self.mGuiWin, 
 			GlobalNS.DefaultFormNS.DefaultFormPath.BtnDefault)
 		);

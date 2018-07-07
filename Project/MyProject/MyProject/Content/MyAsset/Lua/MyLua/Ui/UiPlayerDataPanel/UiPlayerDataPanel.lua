@@ -40,7 +40,7 @@ function M:refreshScore(score)
         return;
     end
 	
-    self.mMass = GlobalNS.UtilApi.getComByPath(self.mGuiWin, "Mass_Text", "Text");         
+    self.mMass = GlobalNS.UtilEngineWrap.getComByPath(self.mGuiWin, "Mass_Text", "Text");         
     self.mMass.text = "分数：" .. score;
 end
 
@@ -49,7 +49,7 @@ function M:refreshLeftTime(leftseconds)
     if self.mGuiWin == nil then
         return;
     end
-    self.mMass = GlobalNS.UtilApi.getComByPath(self.mGuiWin, "Time_Text", "Text");
+    self.mMass = GlobalNS.UtilEngineWrap.getComByPath(self.mGuiWin, "Time_Text", "Text");
     self.mMass.text = "时间：" .. self:getTimeText(leftseconds);
 end
 

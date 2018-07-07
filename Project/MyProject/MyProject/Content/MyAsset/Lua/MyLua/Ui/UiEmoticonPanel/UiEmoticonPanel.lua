@@ -37,10 +37,10 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-	local rollEmoticonDlg = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "RollEmoticonDlg");
+	local rollEmoticonDlg = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "RollEmoticonDlg");
 
-    self.Emoticon = GlobalNS.UtilApi.TransFindChildByPObjAndPath(rollEmoticonDlg, "Emoticon");
-    self.Emoticon_Big = GlobalNS.UtilApi.TransFindChildByPObjAndPath(rollEmoticonDlg, "Emoticon_Big");
+    self.Emoticon = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(rollEmoticonDlg, "Emoticon");
+    self.Emoticon_Big = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(rollEmoticonDlg, "Emoticon_Big");
     self.emoticon = GlobalNS.new(GlobalNS.AuxImage);
 
     local _time = os.clock();
@@ -80,9 +80,9 @@ function M:onTick(dispObj, eventId)
     local y = 187 * runval / interval;
     
     if self.emoticonindex <= 4 then
-        GlobalNS.UtilApi.GetComponent(self.Emoticon, "RectTransform").localPosition = Vector3.New(0, self.emoticonstart_y + y, 0); 
+        GlobalNS.UtilEngineWrap.GetComponent(self.Emoticon, "RectTransform").localPosition = Vector3.New(0, self.emoticonstart_y + y, 0); 
     else
-        GlobalNS.UtilApi.GetComponent(self.Emoticon_Big, "RectTransform").localPosition = Vector3.New(0, self.emoticonstart_y + y, 0); 
+        GlobalNS.UtilEngineWrap.GetComponent(self.Emoticon_Big, "RectTransform").localPosition = Vector3.New(0, self.emoticonstart_y + y, 0); 
     end 
     
     --

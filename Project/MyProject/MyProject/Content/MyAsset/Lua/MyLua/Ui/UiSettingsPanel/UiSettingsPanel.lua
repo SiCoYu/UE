@@ -34,8 +34,8 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
-	self.CloseBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
+	self.CloseBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(
 			BG, 
 			GlobalNS.SettingsPanelNS.SettingsPanelPath.CloseBtn)
 		);
@@ -47,13 +47,13 @@ function M:onReady()
 end
 
 function M:setBgMusic()
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
-    local Bg_Center = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Bg_Center");
-    local Op_Bg = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Bg_Center, "Op_Bg");
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
+    local Bg_Center = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Bg_Center");
+    local Op_Bg = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Bg_Center, "Op_Bg");
 
-    local Music_Switch = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Op_Bg, "Music_Switch");
-    local MusicModel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Music_Switch, "MusicModel");
-    self.BG_Music = GlobalNS.UtilApi.getComByPath(MusicModel, "BG_Music", "Toggle");
+    local Music_Switch = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Op_Bg, "Music_Switch");
+    local MusicModel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Music_Switch, "MusicModel");
+    self.BG_Music = GlobalNS.UtilEngineWrap.getComByPath(MusicModel, "BG_Music", "Toggle");
 
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("MusicModel") then
         if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt("MusicModel") == 1 then
@@ -67,15 +67,15 @@ function M:setBgMusic()
 end
 
 function M:setOptModel()
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
-    local Bg_Center = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Bg_Center");
-    local Op_Bg = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Bg_Center, "Op_Bg");
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
+    local Bg_Center = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Bg_Center");
+    local Op_Bg = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Bg_Center, "Op_Bg");
 
-    local Opt_Switch = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Op_Bg, "Opt_Switch");
-    local OpModel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Opt_Switch, "OptModel");
-    self.JoyStickOp = GlobalNS.UtilApi.getComByPath(OpModel, "JoyStick", "Toggle");
-    self.GravityOp = GlobalNS.UtilApi.getComByPath(OpModel, "Gravity", "Toggle");
-    self.TipBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(OpModel, "Tip_BtnTouch"));
+    local Opt_Switch = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Op_Bg, "Opt_Switch");
+    local OpModel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Opt_Switch, "OptModel");
+    self.JoyStickOp = GlobalNS.UtilEngineWrap.getComByPath(OpModel, "JoyStick", "Toggle");
+    self.GravityOp = GlobalNS.UtilEngineWrap.getComByPath(OpModel, "Gravity", "Toggle");
+    self.TipBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(OpModel, "Tip_BtnTouch"));
 
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("OptionModel") then
         if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt("OptionModel") == 1 then
@@ -92,18 +92,18 @@ function M:setOptModel()
 end
 
 function M:setServerAddr()
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
-    local Bg_Center = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Bg_Center");
-    local Op_Bg = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Bg_Center, "Op_Bg");
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
+    local Bg_Center = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Bg_Center");
+    local Op_Bg = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Bg_Center, "Op_Bg");
 
-    local Server_Switch = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Op_Bg, "Server_Switch");
-    local ServerAddr = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Server_Switch, "ServerAddr");
-    self.Server1 = GlobalNS.UtilApi.getComByPath(ServerAddr, "Server1", "Toggle");
-    self.Server2 = GlobalNS.UtilApi.getComByPath(ServerAddr, "Server2", "Toggle");
-    self.Server_input = GlobalNS.UtilApi.getComByPath(ServerAddr, "Server_input", "Toggle");
+    local Server_Switch = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Op_Bg, "Server_Switch");
+    local ServerAddr = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Server_Switch, "ServerAddr");
+    self.Server1 = GlobalNS.UtilEngineWrap.getComByPath(ServerAddr, "Server1", "Toggle");
+    self.Server2 = GlobalNS.UtilEngineWrap.getComByPath(ServerAddr, "Server2", "Toggle");
+    self.Server_input = GlobalNS.UtilEngineWrap.getComByPath(ServerAddr, "Server_input", "Toggle");
 
-    self.ip = GlobalNS.UtilApi.getComByPath(ServerAddr, "ip", "InputField");
-    self.port = GlobalNS.UtilApi.getComByPath(ServerAddr, "port", "InputField");
+    self.ip = GlobalNS.UtilEngineWrap.getComByPath(ServerAddr, "ip", "InputField");
+    self.port = GlobalNS.UtilEngineWrap.getComByPath(ServerAddr, "port", "InputField");
     self:setServerIP();
 
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("ServerAddr") then
@@ -144,13 +144,13 @@ function M:setServerIP()
 end
 
 function M:setSwallowState()
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
-    local Bg_Center = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Bg_Center");
-    local Op_Bg = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Bg_Center, "Op_Bg");
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
+    local Bg_Center = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Bg_Center");
+    local Op_Bg = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Bg_Center, "Op_Bg");
 
-    local Swallow_Switch = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Op_Bg, "Swallow_Switch");
-    local SwallowModel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Swallow_Switch, "SwallowModel");
-    self.BtnState = GlobalNS.UtilApi.getComByPath(SwallowModel, "BtnState", "Toggle");
+    local Swallow_Switch = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Op_Bg, "Swallow_Switch");
+    local SwallowModel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Swallow_Switch, "SwallowModel");
+    self.BtnState = GlobalNS.UtilEngineWrap.getComByPath(SwallowModel, "BtnState", "Toggle");
 
     if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey("SwallowModel") then
         if GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:getInt("SwallowModel") == 1 then

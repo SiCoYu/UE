@@ -59,44 +59,44 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
     --顶部
-    local TitleBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "TitleBGImage");
-	self.mSkinBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(TitleBG, "Skin_BtnTouch"));
+    local TitleBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "TitleBGImage");
+	self.mSkinBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(TitleBG, "Skin_BtnTouch"));
     --[[待扩充
-    self.mSkinBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(TitleBG, "Skin_BtnTouch"));
-    self.mSkinBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(TitleBG, "Skin_BtnTouch"));
+    self.mSkinBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(TitleBG, "Skin_BtnTouch"));
+    self.mSkinBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(TitleBG, "Skin_BtnTouch"));
     ]]--
-    local HaiXingBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(TitleBG, "HaiXingBG");
-    self.HaiXingNumText = GlobalNS.UtilApi.getComByPath(HaiXingBG, "Num", "Text");
-    self.mHaiXingBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(HaiXingBG, "HaiXing_BtnTouch"));
+    local HaiXingBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(TitleBG, "HaiXingBG");
+    self.HaiXingNumText = GlobalNS.UtilEngineWrap.getComByPath(HaiXingBG, "Num", "Text");
+    self.mHaiXingBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(HaiXingBG, "HaiXing_BtnTouch"));
 
-    local ZhenZhuBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(TitleBG, "ZhenZhuBG");
-    self.ZhenZhuNumText = GlobalNS.UtilApi.getComByPath(ZhenZhuBG, "Num", "Text");
-    self.mZhenZhuBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(ZhenZhuBG, "ZhenZhu_BtnTouch"));
+    local ZhenZhuBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(TitleBG, "ZhenZhuBG");
+    self.ZhenZhuNumText = GlobalNS.UtilEngineWrap.getComByPath(ZhenZhuBG, "Num", "Text");
+    self.mZhenZhuBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(ZhenZhuBG, "ZhenZhu_BtnTouch"));
 
     --商品区
-    local MiddlePanel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "MiddlePanel");
-    local Middle_TopPanel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(MiddlePanel, "TopPanel");
-    self.mShapeBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(Middle_TopPanel, "Shape_BtnTouch"));
-    self.mChildBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(Middle_TopPanel, "Child_BtnTouch"));
-    self.StateText = GlobalNS.UtilApi.getComByPath(Middle_TopPanel, "StateText", "Text");
+    local MiddlePanel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "MiddlePanel");
+    local Middle_TopPanel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(MiddlePanel, "TopPanel");
+    self.mShapeBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Middle_TopPanel, "Shape_BtnTouch"));
+    self.mChildBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Middle_TopPanel, "Child_BtnTouch"));
+    self.StateText = GlobalNS.UtilEngineWrap.getComByPath(Middle_TopPanel, "StateText", "Text");
 
-    self.mFilterToggle = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Middle_TopPanel, "FilterToggle")
-    GlobalNS.UtilApi.addToggleHandle(self.mFilterToggle, self, self.onValueChanged);
+    self.mFilterToggle = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Middle_TopPanel, "FilterToggle")
+    GlobalNS.UtilEngineWrap.addToggleHandle(self.mFilterToggle, self, self.onValueChanged);
     --[[下拉列表待补充]]--
 
-    self.scrollrect = GlobalNS.UtilApi.TransFindChildByPObjAndPath(MiddlePanel, "ScrollRect");
-    local viewport =  GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.scrollrect, "Viewport");
-    self.GoodsContentRect = GlobalNS.UtilApi.getComByPath(viewport, "Content", "RectTransform");
-    self.Tip = GlobalNS.UtilApi.TransFindChildByPObjAndPath(MiddlePanel, "Tip");
+    self.scrollrect = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(MiddlePanel, "ScrollRect");
+    local viewport =  GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.scrollrect, "Viewport");
+    self.GoodsContentRect = GlobalNS.UtilEngineWrap.getComByPath(viewport, "Content", "RectTransform");
+    self.Tip = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(MiddlePanel, "Tip");
     self.Tip:SetActive(false);
     --加载goodsitems
 	self.mGoodsitem_prefab:asyncLoad("UI/UiShop_SkinPanel/GoodsItem.prefab", self, self.onPrefabLoaded, nil);    
 
     --底部
-    local BottomBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "BottomBGImage");
-	self.mBackBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(BottomBG, "Back_BtnTouch"));
+    local BottomBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "BottomBGImage");
+	self.mBackBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BottomBG, "Back_BtnTouch"));
 
     --货币
     if not GlobalNS.CSSystem.Ctx.msInstance.mSystemSetting:hasKey(GCtxExt.mPlayerData.mGoodsData.HaiXingId) then
@@ -169,7 +169,7 @@ function M:CreateGoodsItem(isOwn)
     --清空
     for i=1, #self.goodsitems do
         local goodsitem = self.goodsitems[i];
-        GlobalNS.UtilApi.Destroy(goodsitem.m_go);
+        GlobalNS.UtilEngineWrap.Destroy(goodsitem.m_go);
     end
     self.goodsitems = {};
 
@@ -183,7 +183,7 @@ function M:CreateGoodsItem(isOwn)
     end
 
     --滚动到起始位置，默认会在中间
-    GlobalNS.UtilApi.GetComponent(self.scrollrect, "ScrollRect").verticalNormalizedPosition = 1;
+    GlobalNS.UtilEngineWrap.GetComponent(self.scrollrect, "ScrollRect").verticalNormalizedPosition = 1;
 end
 
 function M:updateUIData(isOwn)
@@ -209,21 +209,21 @@ function M:SetGoodsItems(isOwn)
         local goodsitem = self.goodsitems[i].m_go.transform;
         
         --热卖标识
-        local HotImage = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.goodsitems[i].m_go, "HotImage");
-        local Hot = GlobalNS.UtilApi.getComByPath(HotImage, "HotText", "Text");
+        local HotImage = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.goodsitems[i].m_go, "HotImage");
+        local Hot = GlobalNS.UtilEngineWrap.getComByPath(HotImage, "HotText", "Text");
         Hot.text = GCtxExt.mPlayerData.mGoodsData.goodsitems[i].m_hot;
 
         --形状
-        local Avatar = GlobalNS.UtilApi.getComByPath(goodsitem, "GoodsImage", "Image");
+        local Avatar = GlobalNS.UtilEngineWrap.getComByPath(goodsitem, "GoodsImage", "Image");
         --Sprite avatarSprite = Resources.Load("Avatar/DefaultAvatar", typeof(Sprite)) as Sprite;
         --Avatar.overrideSprite = avatarSprite;
 
         --物品名
-        local Name = GlobalNS.UtilApi.getComByPath(goodsitem, "GoodsName", "Text");
+        local Name = GlobalNS.UtilEngineWrap.getComByPath(goodsitem, "GoodsName", "Text");
         Name.text = GCtxExt.mPlayerData.mGoodsData.goodsitems[i].m_goodsName;        
 
         --材料数量
-        local BuyItemBtn = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.goodsitems[i].m_go, "BuyItem_BtnTouch");
+        local BuyItemBtn = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.goodsitems[i].m_go, "BuyItem_BtnTouch");
         if isOwn then --已拥有物品
             local usingStr = "使用";
             if GCtxExt.mPlayerData.mGoodsData.goodsitems[i].m_needNum == 0 then
@@ -231,15 +231,15 @@ function M:SetGoodsItems(isOwn)
             else
                 usingStr = "已使用";
             end
-            GlobalNS.UtilApi.getComByPath(BuyItemBtn, "Num", "Text").text = usingStr;
+            GlobalNS.UtilEngineWrap.getComByPath(BuyItemBtn, "Num", "Text").text = usingStr;
         else
-            GlobalNS.UtilApi.getComByPath(BuyItemBtn, "Num", "Text").text = GCtxExt.mPlayerData.mGoodsData.goodsitems[i].m_needNum;
-            --GlobalNS.UtilApi.getComByPath(BuyItemBtn, "Kind", "Image");
+            GlobalNS.UtilEngineWrap.getComByPath(BuyItemBtn, "Num", "Text").text = GCtxExt.mPlayerData.mGoodsData.goodsitems[i].m_needNum;
+            --GlobalNS.UtilEngineWrap.getComByPath(BuyItemBtn, "Kind", "Image");
         end
 
         --专属标识
-        local OnlyImage = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.goodsitems[i].m_go, "OnlyImage");
-        local Only = GlobalNS.UtilApi.getComByPath(OnlyImage, "OnlyText", "Text");
+        local OnlyImage = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.goodsitems[i].m_go, "OnlyImage");
+        local Only = GlobalNS.UtilEngineWrap.getComByPath(OnlyImage, "OnlyText", "Text");
         Only.text = GCtxExt.mPlayerData.mGoodsData.goodsitems[i].m_only;
 
         --商品数据
@@ -262,7 +262,7 @@ function M:onBackBtnClk()
     --清空
     for i=1, #self.goodsitems do
         local goodsitem = self.goodsitems[i];
-        GlobalNS.UtilApi.Destroy(goodsitem.m_go);
+        GlobalNS.UtilEngineWrap.Destroy(goodsitem.m_go);
     end
     self.goodsitems = {};
     self.mGoodsitem_prefab:dispose();

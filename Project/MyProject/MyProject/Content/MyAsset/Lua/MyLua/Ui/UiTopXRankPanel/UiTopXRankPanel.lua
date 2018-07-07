@@ -49,25 +49,25 @@ function M:onReady()
     M.super.onReady(self);
 
     --topx
-    self.topXBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "TopXBG");
-    local title = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.topXBG, "Title");
-	self.mDropBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(title,"Drop_BtnTouch"));
+    self.topXBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "TopXBG");
+    local title = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.topXBG, "Title");
+	self.mDropBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(title,"Drop_BtnTouch"));
     --获取ScrollRect的GameObject对象
-    self.mScrollRect = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.topXBG, "ScrollRect");
-    local viewport =  GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mScrollRect, "Viewport");
+    self.mScrollRect = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.topXBG, "ScrollRect");
+    local viewport =  GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mScrollRect, "Viewport");
     --获取ScrollRect下Content中的RectTransform组件
-    self.mRankContent = GlobalNS.UtilApi.getComByPath(viewport, "Content", "RectTransform");
+    self.mRankContent = GlobalNS.UtilEngineWrap.getComByPath(viewport, "Content", "RectTransform");
 
     --获取MyRank的GameObject对象
-    self.mMyRankArea = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.topXBG, "myrank");
+    self.mMyRankArea = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.topXBG, "myrank");
 
     --加载listitem prefab
 	self.mListitem_prefab:asyncLoad("UI/UiTopXRankPanel/TopxListItem.prefab", self, self.onPrefabLoaded, nil);
 
     --收起排行榜
-    self.UpBG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "UP_bg");
-    title = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.UpBG, "Title");
-	self.mDownBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(title,"Down_BtnTouch"));
+    self.UpBG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "UP_bg");
+    title = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.UpBG, "Title");
+	self.mDownBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(title,"Down_BtnTouch"));
 
     if #self.listitems == GCtxExt.mPlayerData.mGameData.top10Count then
         self:showTopxRank();
@@ -81,7 +81,7 @@ function M:createItems()
     if nil ~= self.mListitemPrefab then
         for i=1, GCtxExt.mPlayerData.mGameData.top10Count do
             --用listitemprefab生成GameObject对象
-            local listitem = GlobalNS.UtilApi.Instantiate(self.mListitemPrefab);
+            local listitem = GlobalNS.UtilEngineWrap.Instantiate(self.mListitemPrefab);
             listitem.transform.parent = self.mRankContent;
             listitem.transform.localScale = Vector3.New(1.0, 1.0, 1.0);
     
@@ -91,7 +91,7 @@ function M:createItems()
         end
     
         --滚动到起始位置，默认会在中间
-        GlobalNS.UtilApi.GetComponent(self.mScrollRect, "ScrollRect").verticalNormalizedPosition = 1;
+        GlobalNS.UtilEngineWrap.GetComponent(self.mScrollRect, "ScrollRect").verticalNormalizedPosition = 1;
     end
 end
 
@@ -108,12 +108,12 @@ function M:showTopxRank()
         local listitem = self.listitems[i].transform;
 
         --荣誉
-        local Honer = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.listitems[i], "rank");
+        local Honer = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.listitems[i], "rank");
         if i > 3 then
             Honer:SetActive(false);
         else
             Honer:SetActive(true);
-            local honerTransform = GlobalNS.UtilApi.GetComponent(Honer, "RectTransform");
+            local honerTransform = GlobalNS.UtilEngineWrap.GetComponent(Honer, "RectTransform");
             local honer = GlobalNS.new(GlobalNS.AuxImage);
             honer:setSelfGo(Honer);
             if i == 1 then
@@ -133,8 +133,8 @@ function M:showTopxRank()
          end
 
         --排名
-        local Rank = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.listitems[i], "rank_Text");
-        local Ranktext = GlobalNS.UtilApi.getComByPath(listitem, "rank_Text", "Text");
+        local Rank = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.listitems[i], "rank_Text");
+        local Ranktext = GlobalNS.UtilEngineWrap.getComByPath(listitem, "rank_Text", "Text");
         if i <= 3 then
             Rank:SetActive(false);
         else
@@ -147,7 +147,7 @@ function M:showTopxRank()
         end
 
         --用户名
-        local Name = GlobalNS.UtilApi.getComByPath(listitem, "name", "Text");        
+        local Name = GlobalNS.UtilEngineWrap.getComByPath(listitem, "name", "Text");        
         if i == GCtxExt.mPlayerData.mGameData.top10_myrank then
             Name.text = "<color=#32c832ff>"..GCtxExt.mPlayerData.mGameData.top10ranklist[i].m_name.."</color>";
         else
@@ -156,17 +156,17 @@ function M:showTopxRank()
     end
 
     --我的排名
-    local myHoner = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mMyRankArea, "rank");
-    local myrank = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mMyRankArea, "rank_Text");
+    local myHoner = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mMyRankArea, "rank");
+    local myrank = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mMyRankArea, "rank_Text");
     if GCtxExt.mPlayerData.mGameData.top10_myrank > 3 then
         myHoner:SetActive(false);
         myrank:SetActive(true);
-        local myRanktext = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "rank_Text", "Text");
+        local myRanktext = GlobalNS.UtilEngineWrap.getComByPath(self.mMyRankArea, "rank_Text", "Text");
         myRanktext.text = "" .. GCtxExt.mPlayerData.mGameData.top10_myrank;
     else
         myrank:SetActive(false);
         myHoner:SetActive(true);
-        local myhonerTransform = GlobalNS.UtilApi.GetComponent(myHoner, "RectTransform");
+        local myhonerTransform = GlobalNS.UtilEngineWrap.GetComponent(myHoner, "RectTransform");
         self.myhoner = GlobalNS.new(GlobalNS.AuxImage);
         self.myhoner:setSelfGo(myHoner);
         if GCtxExt.mPlayerData.mGameData.top10_myrank == 1 then
@@ -183,7 +183,7 @@ function M:showTopxRank()
             --self.myhoner:setSpritePath("DefaultSkin/GameOption/GameOption_RGB.png", "cup_tong");
         end
     end
-    local myName = GlobalNS.UtilApi.getComByPath(self.mMyRankArea, "name", "Text");
+    local myName = GlobalNS.UtilEngineWrap.getComByPath(self.mMyRankArea, "name", "Text");
     myName.text = GCtxExt.mPlayerData.mGameData.mMyName;
 end
 
@@ -225,7 +225,7 @@ function M:clearResource()
 
     for i=1, #self.listitems do
         local item = self.listitems[i];
-        GlobalNS.UtilApi.Destroy(item);
+        GlobalNS.UtilEngineWrap.Destroy(item);
     end
     self.listitems = { };
 end

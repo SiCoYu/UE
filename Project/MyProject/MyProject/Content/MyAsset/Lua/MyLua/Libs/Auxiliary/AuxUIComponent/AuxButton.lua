@@ -20,16 +20,16 @@ end
 
 function M:dispose()
 	if (self.mClickEventDispatch ~= nil) then
-        GlobalNS.UtilApi.RemoveListener(self.mBtn, self, self.onBtnClk);
+        GlobalNS.UtilEngineWrap.RemoveListener(self.mBtn, self, self.onBtnClk);
     end
 	if (self.mDownEventDispatch ~= nil) then
-        GlobalNS.UtilApi.removeButtonDownEventHandle(self.mBtn, self, self.onBtnClk);
+        GlobalNS.UtilEngineWrap.removeButtonDownEventHandle(self.mBtn, self, self.onBtnClk);
     end
 	if (self.mUpEventDispatch ~= nil) then
-        GlobalNS.UtilApi.removeButtonUpEventHandle(self.mBtn, self, self.onBtnClk);
+        GlobalNS.UtilEngineWrap.removeButtonUpEventHandle(self.mBtn, self, self.onBtnClk);
     end
 	if (self.mExitEventDispatch ~= nil) then
-        GlobalNS.UtilApi.removeButtonExitEventHandle(self.mBtn, self, self.onBtnClk);
+        GlobalNS.UtilEngineWrap.removeButtonExitEventHandle(self.mBtn, self, self.onBtnClk);
     end
 	
     if self.mImage ~= nil then
@@ -54,7 +54,7 @@ function M:AuxButton_1(...)
 	self.mExitEventDispatch = GlobalNS.new(GlobalNS.EventDispatch);
 	
     if (pntNode ~= nil) then
-        self.mSelfGo = GlobalNS.UtilApi.TransFindChildByPObjAndPath(pntNode, path);
+        self.mSelfGo = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(pntNode, path);
         self:updateBtnCom(nil);
     end
 end
@@ -66,12 +66,12 @@ function M:onSelfChanged()
 end
 
 function M:updateBtnCom(dispObj)
-    self.mBtn = GlobalNS.UtilApi.getComFromSelf(self.mSelfGo, GlobalNS.AuxUITypeId.Button);
-    --GlobalNS.UtilApi.addEventHandle(self.mBtn, self, self.onBtnClk);
-	GlobalNS.UtilApi.addEventHandleSelf(self.mSelfGo, self, self.onBtnClk);
-	GlobalNS.UtilApi.addButtonDownEventHandle(self.mSelfGo, self, self.OnPointerDown);
-	GlobalNS.UtilApi.addButtonUpEventHandle(self.mSelfGo, self, self.OnPointerUp);
-	GlobalNS.UtilApi.addButtonExitEventHandle(self.mSelfGo, self, self.OnPointerExit);
+    self.mBtn = GlobalNS.UtilEngineWrap.getComFromSelf(self.mSelfGo, GlobalNS.AuxUITypeId.Button);
+    --GlobalNS.UtilEngineWrap.addEventHandle(self.mBtn, self, self.onBtnClk);
+	GlobalNS.UtilEngineWrap.addEventHandleSelf(self.mSelfGo, self, self.onBtnClk);
+	GlobalNS.UtilEngineWrap.addButtonDownEventHandle(self.mSelfGo, self, self.OnPointerDown);
+	GlobalNS.UtilEngineWrap.addButtonUpEventHandle(self.mSelfGo, self, self.OnPointerUp);
+	GlobalNS.UtilEngineWrap.addButtonExitEventHandle(self.mSelfGo, self, self.OnPointerExit);
 
     if "" ~= self.mText then
         self:setText(self.mText);
@@ -128,7 +128,7 @@ function M:setText(text)
 
     if("" ~= self.mText) then
         if(self.mBtn ~= nil) then
-            local btn_text = GlobalNS.UtilApi.getComByPath(self.mSelfGo, "Text", "Text");
+            local btn_text = GlobalNS.UtilEngineWrap.getComByPath(self.mSelfGo, "Text", "Text");
             btn_text.text = self.mText;
         end
     end

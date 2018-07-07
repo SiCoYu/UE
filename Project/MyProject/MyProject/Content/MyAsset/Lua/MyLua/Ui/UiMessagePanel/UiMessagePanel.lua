@@ -34,13 +34,13 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    self.popMessageDlg = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "PopMessageDlg");
-    self.popMessageText = GlobalNS.UtilApi.getComByPath(self.popMessageDlg, "MsgText", "InputField");
-	self.mOKBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.popMessageDlg, "OK_BtnTouch"));
+    self.popMessageDlg = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "PopMessageDlg");
+    self.popMessageText = GlobalNS.UtilEngineWrap.getComByPath(self.popMessageDlg, "MsgText", "InputField");
+	self.mOKBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.popMessageDlg, "OK_BtnTouch"));
 
-    self.rollMessageDlg = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "RollMessageDlg");
-    self.rollMessageTextGo = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.rollMessageDlg, "MsgText");
-    self.rollMessageText = GlobalNS.UtilApi.getComByPath(self.rollMessageDlg, "MsgText", "Text");
+    self.rollMessageDlg = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "RollMessageDlg");
+    self.rollMessageTextGo = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.rollMessageDlg, "MsgText");
+    self.rollMessageText = GlobalNS.UtilEngineWrap.getComByPath(self.rollMessageDlg, "MsgText", "Text");
 
     if 1 == GCtxExt.mPlayerData.mGameData.mMessageType then
         self:ShowPopMessage(GCtxExt.mPlayerData.mGameData.mMessageText);
@@ -98,7 +98,7 @@ function M:onTick(dispObj, eventId)
     local interval = self.mRollTime / self.mInterval;
     local runval = runtime / self.mInterval;
     local y = 129 * runval / interval;
-    GlobalNS.UtilApi.GetComponent(self.rollMessageTextGo, "RectTransform").localPosition = Vector3.New(0, -43 + y, 0); 
+    GlobalNS.UtilEngineWrap.GetComponent(self.rollMessageTextGo, "RectTransform").localPosition = Vector3.New(0, -43 + y, 0); 
     --
 	if lefttime <= 0 then
         self:exit();

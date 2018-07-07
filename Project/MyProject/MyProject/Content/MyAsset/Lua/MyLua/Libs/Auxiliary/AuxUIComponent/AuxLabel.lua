@@ -10,9 +10,9 @@ GlobalNS[M.clsName] = M;
 
 function M:ctor(...)
     local params = {...};
-    if(GlobalNS.UtilApi.isString(params[2])) then
+    if(GlobalNS.UtilEngineWrap.isString(params[2])) then
         self:AuxLabel_1(...);
-    elseif(GlobalNS.UtilApi.isType(params[2], 'LabelStyleID')) then
+    elseif(GlobalNS.UtilEngineWrap.isType(params[2], 'LabelStyleID')) then
         self:AuxLabel_2(...);
     else
         self:AuxLabel_3(...);
@@ -25,8 +25,8 @@ function M:AuxLabel_1(...)
         styleId = GlobalNS.LabelStyleID.eLSID_None;
     end
     
-    self.mSelfGo = GlobalNS.UtilApi.TransFindChildByPObjAndPath(pntNode, path);
-    self.mText = GlobalNS.UtilApi.getComByPath(pntNode, path, GlobalNS.AuxUITypeId.Label);
+    self.mSelfGo = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(pntNode, path);
+    self.mText = GlobalNS.UtilEngineWrap.getComByPath(pntNode, path, GlobalNS.AuxUITypeId.Label);
     self.mLabelStyle = GCtx.mWidgetStyleMgr:GetWidgetStyle(GlobalNS.WidgetStyleID.eWSID_Text, styleId);
     if(self.mLabelStyle:needClearText()) then
         self.mText.text = "";
@@ -40,7 +40,7 @@ function M:AuxLabel_2(...)
     end
     
     self.mSelfGo = selfNode;
-    self.mText = GlobalNS.UtilApi.getComByPath(selfNode, GlobalNS.AuxUITypeId.Label);
+    self.mText = GlobalNS.UtilEngineWrap.getComByPath(selfNode, GlobalNS.AuxUITypeId.Label);
 end
 
 function M:AuxLabel_3(...)
@@ -51,8 +51,8 @@ function M:AuxLabel_3(...)
 end
 
 function M:setSelfGo(pntNode, path)
-    self.mSelfGo = GlobalNS.UtilApi.TransFindChildByPObjAndPath(pntNode, path);
-    self.mText = GlobalNS.UtilApi.getComByP(pntNode, path, GlobalNS.AuxUITypeId.Label);
+    self.mSelfGo = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(pntNode, path);
+    self.mText = GlobalNS.UtilEngineWrap.getComByP(pntNode, path, GlobalNS.AuxUITypeId.Label);
 end
 
 function M:setText(value)

@@ -38,11 +38,11 @@ end
 function M:onReady()
     M.super.onReady(self);
 
-    self.mSwallowBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(
+    self.mSwallowBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(
 			self.mGuiWin, 
 			GlobalNS.OptionPanelNS.OptionPanelPath.BtnSwallow)
 		);
-    self.mSwallowImage = GlobalNS.UtilApi.getComByPath(self.mGuiWin, GlobalNS.OptionPanelNS.OptionPanelPath.BtnSwallow, "Image");
+    self.mSwallowImage = GlobalNS.UtilEngineWrap.getComByPath(self.mGuiWin, GlobalNS.OptionPanelNS.OptionPanelPath.BtnSwallow, "Image");
     GlobalNS.CSSystem.Ctx.msInstance.mGlobalDelegate.mMainChildNumChangedDispatch:addEventHandle(nil, nil, 0, self, self.refreshNum, 0);
 end
 

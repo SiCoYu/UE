@@ -10,7 +10,7 @@ function M:ctor()
 
 end
 
-M.UtilApi = luanet.import_type("SDK.Lib.UtilApi");        -- 参数一定不能空
+M.UtilEngineWrap = luanet.import_type("SDK.Lib.UtilEngineWrap");        -- 参数一定不能空
 
 M.ctor();
 

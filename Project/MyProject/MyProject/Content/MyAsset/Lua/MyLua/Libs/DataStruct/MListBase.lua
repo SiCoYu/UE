@@ -36,8 +36,8 @@ end
 function M:cmpFunc(a, b)
 	if (self.mFunctor ~= nil and self.mFunctor:isValid()) then
 		return self.mFunctor:callTwoParam(a, b);
-    elseif(GlobalNS.UtilApi.isTypeEqual(a, b)) then
-        if(GlobalNS.UtilApi.isTable(a) or GlobalNS.UtilApi.isFunction(a) or GlobalNS.UtilApi.isBoolean(a)) then
+    elseif(GlobalNS.UtilEngineWrap.isTypeEqual(a, b)) then
+        if(GlobalNS.UtilEngineWrap.isTable(a) or GlobalNS.UtilEngineWrap.isFunction(a) or GlobalNS.UtilEngineWrap.isBoolean(a)) then
             -- 这个一定要放在第一行，因为如果是 table 比较，是可以进行 == 操作的，其实比较的是地址，但是不能进行 < 或者 > 比较操作，如果是表只进行 == 比较操作
             -- function 也只能进行 == 比较操作，不能进行 < 或者 > 比较操作
             if (a == b) then
@@ -45,7 +45,7 @@ function M:cmpFunc(a, b)
             else
                 return -1;
             end
-        elseif(GlobalNS.UtilApi.isNumber(a) or GlobalNS.UtilApi.isString(a)) then
+        elseif(GlobalNS.UtilEngineWrap.isNumber(a) or GlobalNS.UtilEngineWrap.isString(a)) then
             if (a == b) then
                 return 0;
             elseif (a < b) then

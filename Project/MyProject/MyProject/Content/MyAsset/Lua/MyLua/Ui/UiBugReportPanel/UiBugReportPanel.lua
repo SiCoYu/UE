@@ -34,13 +34,13 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    local BG = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
-	self.mCloseBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Close_BtnTouch"));
+    local BG = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "BG");
+	self.mCloseBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Close_BtnTouch"));
 
-    local Game_data = GlobalNS.UtilApi.TransFindChildByPObjAndPath(BG, "Game_Data");
-    local reportInput = GlobalNS.UtilApi.TransFindChildByPObjAndPath(Game_data, "BugReport_Input");
-    self.reportInputText = GlobalNS.UtilApi.GetComponent(reportInput, "InputField");
-    self.mReportBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(Game_data, "Report_BtnTouch"));
+    local Game_data = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(BG, "Game_Data");
+    local reportInput = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Game_data, "BugReport_Input");
+    self.reportInputText = GlobalNS.UtilEngineWrap.GetComponent(reportInput, "InputField");
+    self.mReportBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(Game_data, "Report_BtnTouch"));
 end
 
 function M:onShow()

@@ -21,13 +21,13 @@ function M:dtor()
 end
 
 function M:init(_Prefab, _Content, _index, isOwn)
-    self.m_go = GlobalNS.UtilApi.Instantiate(_Prefab);
+    self.m_go = GlobalNS.UtilEngineWrap.Instantiate(_Prefab);
     self.m_go.transform.parent = _Content;
     self.m_go.transform.localScale = Vector3.New(1.0, 1.0, 1.0);
     self.m_go.name = "GoodsItem" .. _index;
 
     self.buyItemBtn = GlobalNS.new(GlobalNS.AuxButton);
-    self.buyItemBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.m_go, "BuyItem_BtnTouch"));
+    self.buyItemBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.m_go, "BuyItem_BtnTouch"));
     if isOwn then
         self.buyItemBtn:addEventHandle(self, self.onUseBtnClk, 0);
     else

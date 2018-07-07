@@ -3,7 +3,7 @@ MLoader("MyLua.Libs.Core.StaticClass");
 
 local M = GlobalNS.StaticClass();
 local this = M;
-M.clsName = "UtilApi";
+M.clsName = "UtilEngineWrap";
 GlobalNS[M.clsName] = M;
 
 function M.ctor()
@@ -84,7 +84,7 @@ function M.SetRectTransformParent(child, parent, worldPositionStays)
 end
 
 function M.SetActive(target, bShow)
-	if(nil ~= target and (GlobalNS.UtilApi.IsActive(target) ~= bShow)) then
+	if(nil ~= target and (GlobalNS.UtilEngineWrap.IsActive(target) ~= bShow)) then
 		target:SetActive(bShow);
 	end
 end

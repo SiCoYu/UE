@@ -21,7 +21,7 @@ function M:dtor()
 end
 
 function M:init(_Prefab, _Content, _day)
-    self.m_go = GlobalNS.UtilApi.Instantiate(_Prefab);
+    self.m_go = GlobalNS.UtilEngineWrap.Instantiate(_Prefab);
     self.m_go.transform.parent = _Content;
     self.m_go.transform.localScale = Vector3.New(1.0, 1.0, 1.0);
     self.m_go.name = "Item" .. _day .. "BtnTouch";
@@ -38,7 +38,7 @@ function M:onItemBtnClk()
         GCtxExt.mPlayerData.mSignData:setBtnState(GCtxExt.mPlayerData.mSignData.day);
     end
     
-    GlobalNS.UtilApi.disableBtn(self.m_go);
+    GlobalNS.UtilEngineWrap.disableBtn(self.m_go);
 	GCtxExt.mPlayerData.mSignData.day = self.day;
 end
 

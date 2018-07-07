@@ -36,10 +36,10 @@ function M:onReady()
     -- self.super.onReady(self)
     M.super.onReady(self);
     --print("M:onReady()");
-    --GlobalNS.CSImportToLua.UtilApi.addEventHandle(self.gameObject, self.onBtnClk, 0);
-	--SDK.Lib.UtilApi.addEventHandle(self.gameObject, "Button", self.onBtnClk);
-	--GlobalNS.UtilApi.addEventHandleByPath(self.mGuiWin, GlobalNS.TestNS.TestPath.BtnTest, self, self.onBtnClk);
-	self.mTestBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, GlobalNS.TestNS.TestPath.BtnTest));
+    --GlobalNS.CSImportToLua.UtilEngineWrap.addEventHandle(self.gameObject, self.onBtnClk, 0);
+	--SDK.Lib.UtilEngineWrap.addEventHandle(self.gameObject, "Button", self.onBtnClk);
+	--GlobalNS.UtilEngineWrap.addEventHandleByPath(self.mGuiWin, GlobalNS.TestNS.TestPath.BtnTest, self, self.onBtnClk);
+	self.mTestBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, GlobalNS.TestNS.TestPath.BtnTest));
 end
 
 function M:onShow()

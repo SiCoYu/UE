@@ -31,12 +31,12 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-	self.mCloseBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "Close_BtnTouch"));
+	self.mCloseBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "Close_BtnTouch"));
 
-    self.Award = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "Award");
-    self.AwardName = GlobalNS.UtilApi.getComByPath(self.Award, "Name", "Text");
+    self.Award = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "Award");
+    self.AwardName = GlobalNS.UtilEngineWrap.getComByPath(self.Award, "Name", "Text");
 
-    self.Content = GlobalNS.UtilApi.getComByPath(self.mGuiWin, "Content", "Text");
+    self.Content = GlobalNS.UtilEngineWrap.getComByPath(self.mGuiWin, "Content", "Text");
 
     self:UpdateUIData(nil);
 end

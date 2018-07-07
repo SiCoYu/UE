@@ -11,7 +11,7 @@ function M:ctor(path)
 	self.mNativePrefabLoader = nil;
 
 	--[[
-	if(GlobalNS.UtilApi.isTrue(isNeedInsPrefab)) then
+	if(GlobalNS.UtilEngineWrap.isTrue(isNeedInsPrefab)) then
 		self.mIsNeedInsPrefab = isNeedInsPrefab;
 	else
 		self.mIsNeedInsPrefab = false;
@@ -20,7 +20,7 @@ function M:ctor(path)
 	self.mIsNeedInsPrefab = true;
 	
 	--[[
-	if(GlobalNS.UtilApi.isTrue(isNeedInsPrefab)) then
+	if(GlobalNS.UtilEngineWrap.isTrue(isNeedInsPrefab)) then
 		self.mIsInsNeedCoroutine = isInsNeedCoroutine;
 	else
 		self.mIsInsNeedCoroutine = false;

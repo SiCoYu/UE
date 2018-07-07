@@ -34,9 +34,9 @@ function M.ctor()
 end
 
 function M.init()
-	M.mNoDestroyGo = GlobalNS.UtilApi.GoFindChildByName(GlobalNS.NoDestroyId.ND_CV_NoDestroy);
-	M.mUIFirstCanvasGo = GlobalNS.UtilApi.GoFindChildByName(GlobalNS.NoDestroyId.ND_CV_UIFirstCanvas);
-	M.mUISecondCanvasGo = GlobalNS.UtilApi.GoFindChildByName(GlobalNS.NoDestroyId.ND_CV_UISecondCanvas);
+	M.mNoDestroyGo = GlobalNS.UtilEngineWrap.GoFindChildByName(GlobalNS.NoDestroyId.ND_CV_NoDestroy);
+	M.mUIFirstCanvasGo = GlobalNS.UtilEngineWrap.GoFindChildByName(GlobalNS.NoDestroyId.ND_CV_UIFirstCanvas);
+	M.mUISecondCanvasGo = GlobalNS.UtilEngineWrap.GoFindChildByName(GlobalNS.NoDestroyId.ND_CV_UISecondCanvas);
 end
 
 return M;

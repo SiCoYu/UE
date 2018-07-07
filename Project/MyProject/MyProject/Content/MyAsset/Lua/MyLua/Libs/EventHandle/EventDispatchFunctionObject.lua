@@ -48,7 +48,7 @@ function M:call(dispObj)
     elseif(nil ~= self.mHandle) then
         self.mHandle(dispObj, self.mEventId);
     else
-        GlobalNS.UtilApi.error("EventDispatchFunctionObject is InValid");        -- 抛出一个异常
+        GlobalNS.UtilEngineWrap.error("EventDispatchFunctionObject is InValid");        -- 抛出一个异常
     end
 end
 

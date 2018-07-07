@@ -39,7 +39,7 @@ end
 function M:onSelfChanged()
 	M.super.onSelfChanged(self);
 	
-	self.mNativeImage = GlobalNS.UtilApi.getImageCompNoPath(self.mSelfGo);
+	self.mNativeImage = GlobalNS.UtilEngineWrap.getImageCompNoPath(self.mSelfGo);
 	self:updateSprite();
 	
 	self:setGoRectScale();
@@ -47,7 +47,7 @@ end
 
 function M:setGoRectScale()
 	if(nil ~= self.mSelfGo) then
-		GlobalNS.UtilApi.setGoRectScale(self.mSelfGo, Vector3.New(self.mScale , 1.0, 1.0));
+		GlobalNS.UtilEngineWrap.setGoRectScale(self.mSelfGo, Vector3.New(self.mScale , 1.0, 1.0));
 	end
 end
 
@@ -73,7 +73,7 @@ end
 
 function M:updateSprite()
 	if(nil ~= self.mNativeImage and nil ~= self.mSprite) then
-		GlobalNS.UtilApi.setImageSpriteBySprite(self.mNativeImage, self.mSprite);
+		GlobalNS.UtilEngineWrap.setImageSpriteBySprite(self.mNativeImage, self.mSprite);
 	end
 end
 

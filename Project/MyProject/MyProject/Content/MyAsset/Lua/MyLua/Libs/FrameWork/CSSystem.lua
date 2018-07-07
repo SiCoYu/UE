@@ -14,7 +14,7 @@ function M.init()
     this.AuxPrefabLoader = SDK.Lib.AuxPrefabLoader;
 	this.AuxBytesLoader = SDK.Lib.AuxBytesLoader;
 	this.AuxSpriteAtlasLoader = SDK.Lib.AuxSpriteAtlasLoader;
-	this.UtilApi = SDK.Lib.UtilApi;
+	this.UtilEngineWrap = SDK.Lib.UtilEngineWrap;
 	this.MFileSys = SDK.Lib.MFileSys;
 	this.MEndian = SDK.Lib.MEndian;
 	this.MEncode = SDK.Lib.MEncode;
@@ -30,12 +30,12 @@ end
 function M.log(message, logTypeId)
     if(this.Ctx.msInstance.mLogSys ~= nil) then
         if(logTypeId == nil) then
-            GlobalNS.UtilApi.error("CSSystem logTypeId is nil");
+            GlobalNS.UtilEngineWrap.error("CSSystem logTypeId is nil");
         else
             this.Ctx.msInstance.mLogSys:lua_log(message, logTypeId);
         end
     else
-        GlobalNS.UtilApi.error("CSSystem LogSys is nil");
+        GlobalNS.UtilEngineWrap.error("CSSystem LogSys is nil");
     end
 end
 
@@ -69,45 +69,45 @@ function M.readLuaBufferToFile(file)
     return this.MFileSys.readLuaBufferToFile(file);
 end
 
--- UtilApi 接口
+-- UtilEngineWrap 接口
 function M.addEventHandleByPath(go, path, luaTable, luaFunction)
-    this.UtilApi.addEventHandle(go, path, luaTable, luaFunction);
+    this.UtilEngineWrap.addEventHandle(go, path, luaTable, luaFunction);
 end
 
 function M.addEventHandleSelf(go, luaTable, luaFunction)
-    this.UtilApi.addEventHandle(go, luaTable, luaFunction, 0, false);
+    this.UtilEngineWrap.addEventHandle(go, luaTable, luaFunction, 0, false);
 end
 
 function M.addButtonDownEventHandle(go, luaTable, luaFunction)
-    this.UtilApi.addButtonDownEventHandle(go, luaTable, luaFunction, 0);
+    this.UtilEngineWrap.addButtonDownEventHandle(go, luaTable, luaFunction, 0);
 end
 
 function M.addButtonUpEventHandle(go, luaTable, luaFunction)
-    this.UtilApi.addButtonUpEventHandle(go, luaTable, luaFunction, 0);
+    this.UtilEngineWrap.addButtonUpEventHandle(go, luaTable, luaFunction, 0);
 end
 
 function M.addButtonExitEventHandle(go, luaTable, luaFunction)
-    this.UtilApi.addButtonExitEventHandle(go, luaTable, luaFunction, 0);
+    this.UtilEngineWrap.addButtonExitEventHandle(go, luaTable, luaFunction, 0);
 end
 
 function M.GoFindChildByName(name)
-    return this.UtilApi.GoFindChildByName(name);
+    return this.UtilEngineWrap.GoFindChildByName(name);
 end
 
 function M.TransFindChildByPObjAndPath(pObject, path)
-    return this.UtilApi.TransFindChildByPObjAndPath(pObject, path);
+    return this.UtilEngineWrap.TransFindChildByPObjAndPath(pObject, path);
 end
 
 function M.SetParent(child, parent, worldPositionStays)
-    this.UtilApi.SetParent(child, parent, worldPositionStays);
+    this.UtilEngineWrap.SetParent(child, parent, worldPositionStays);
 end
 
 function M.SetRectTransformParent(child, parent, worldPositionStays)
-    this.UtilApi.SetRectTransParent(child, parent, worldPositionStays);
+    this.UtilEngineWrap.SetRectTransParent(child, parent, worldPositionStays);
 end
 
 function M.addToggleHandle(go, table, method)
-    this.UtilApi.addToggleHandle(go, table, method);
+    this.UtilEngineWrap.addToggleHandle(go, table, method);
 end
 
 function M.buildByteBuffer()

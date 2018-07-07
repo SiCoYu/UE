@@ -57,33 +57,33 @@ end
 
 function M:onReady()
     M.super.onReady(self);
-    local titlePanel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "TitlePanel");
-	self.mCloseBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(titlePanel, "Close_BtnTouch"));
+    local titlePanel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "TitlePanel");
+	self.mCloseBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(titlePanel, "Close_BtnTouch"));
 
-    local dataPanel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.mGuiWin, "DataPanel");
-    local bottomPanel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(dataPanel, "BottomPanel");
-	self.mSignBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(bottomPanel, "Sign_BtnTouch"));
+    local dataPanel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.mGuiWin, "DataPanel");
+    local bottomPanel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(dataPanel, "BottomPanel");
+	self.mSignBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(bottomPanel, "Sign_BtnTouch"));
 
-    local middlePanel = GlobalNS.UtilApi.TransFindChildByPObjAndPath(dataPanel, "MiddlePanel");
-    local date = GlobalNS.UtilApi.TransFindChildByPObjAndPath(middlePanel, "Date");
-    self.dateText = GlobalNS.UtilApi.getComByPath(date, "Text", "Text");
-    self.mBeforeBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(date, "Before_BtnTouch"));
-    self.mNextBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(date, "Next_BtnTouch"));
+    local middlePanel = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(dataPanel, "MiddlePanel");
+    local date = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(middlePanel, "Date");
+    self.dateText = GlobalNS.UtilEngineWrap.getComByPath(date, "Text", "Text");
+    self.mBeforeBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(date, "Before_BtnTouch"));
+    self.mNextBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(date, "Next_BtnTouch"));
 
-    local otherAward = GlobalNS.UtilApi.TransFindChildByPObjAndPath(middlePanel, "OtherAward");
-    self.Award3 = GlobalNS.UtilApi.TransFindChildByPObjAndPath(otherAward, "Award3");
-    self.m3DaysBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.Award3, "3Days_BtnTouch"));
-    self.Award5 = GlobalNS.UtilApi.TransFindChildByPObjAndPath(otherAward, "Award5");
-    self.m5DaysBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.Award5, "5Days_BtnTouch"));
-    self.Award7 = GlobalNS.UtilApi.TransFindChildByPObjAndPath(otherAward, "Award7");
-    self.m7DaysBtn:setSelfGo(GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.Award7, "7Days_BtnTouch"));
+    local otherAward = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(middlePanel, "OtherAward");
+    self.Award3 = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(otherAward, "Award3");
+    self.m3DaysBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.Award3, "3Days_BtnTouch"));
+    self.Award5 = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(otherAward, "Award5");
+    self.m5DaysBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.Award5, "5Days_BtnTouch"));
+    self.Award7 = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(otherAward, "Award7");
+    self.m7DaysBtn:setSelfGo(GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.Award7, "7Days_BtnTouch"));
 
-    local dayAward = GlobalNS.UtilApi.TransFindChildByPObjAndPath(middlePanel, "DayAward");
-    self.Tip = GlobalNS.UtilApi.getComByPath(dayAward, "Tip", "Text");
+    local dayAward = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(middlePanel, "DayAward");
+    self.Tip = GlobalNS.UtilEngineWrap.getComByPath(dayAward, "Tip", "Text");
 
-    self.scrollrect = GlobalNS.UtilApi.TransFindChildByPObjAndPath(dayAward, "ScrollRect");
-    local viewport =  GlobalNS.UtilApi.TransFindChildByPObjAndPath(self.scrollrect, "Viewport");
-    self.Content = GlobalNS.UtilApi.getComByPath(viewport, "Content", "RectTransform");
+    self.scrollrect = GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(dayAward, "ScrollRect");
+    local viewport =  GlobalNS.UtilEngineWrap.TransFindChildByPObjAndPath(self.scrollrect, "Viewport");
+    self.Content = GlobalNS.UtilEngineWrap.getComByPath(viewport, "Content", "RectTransform");
     --加载items
 	self.mItem_prefab:asyncLoad("UI/UiSignPanel/DayItem.prefab", self, self.onPrefabLoaded, nil);
 end
@@ -105,7 +105,7 @@ function M:onCloseBtnClk()
     --清空
     for i=1, #self.items do
         local item = self.items[i];
-        GlobalNS.UtilApi.Destroy(item.m_go);
+        GlobalNS.UtilEngineWrap.Destroy(item.m_go);
     end
     self.items = {};
     self.mItem_prefab:dispose();
@@ -156,7 +156,7 @@ function M:CreateItems()
     --清空
     for i=1, #self.items do
         local item = self.items[i];
-        GlobalNS.UtilApi.Destroy(item.m_go);
+        GlobalNS.UtilEngineWrap.Destroy(item.m_go);
     end
     self.items = {};
 
@@ -169,7 +169,7 @@ function M:CreateItems()
     end
 
     --滚动到起始位置，默认会在中间
-    --GlobalNS.UtilApi.GetComponent(self.scrollrect, "ScrollRect").verticalNormalizedPosition = 1;
+    --GlobalNS.UtilEngineWrap.GetComponent(self.scrollrect, "ScrollRect").verticalNormalizedPosition = 1;
 end
 
 function M:updateUIData()
@@ -188,17 +188,17 @@ function M:SetItems()
     for i=1, GCtxExt.mPlayerData.mSignData.daysCount do
         local item = self.items[i].m_go;
         
-        local day = GlobalNS.UtilApi.getComByPath(item, "Text", "Text");
+        local day = GlobalNS.UtilEngineWrap.getComByPath(item, "Text", "Text");
         day.text = i;
 
         if not GCtxExt.mPlayerData.mSignData.items[i].m_itemEnable then
-            GlobalNS.UtilApi.disableBtn(self.items[i].m_go);
+            GlobalNS.UtilEngineWrap.disableBtn(self.items[i].m_go);
         end
     end
 end
 
 function M:enableBtn(index)
-    GlobalNS.UtilApi.enableBtn(self.items[index].m_go);
+    GlobalNS.UtilEngineWrap.enableBtn(self.items[index].m_go);
 end
 
 return M;
