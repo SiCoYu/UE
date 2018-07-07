@@ -1,4 +1,8 @@
-MLoader("3rd/pbc/protobuf");
+MLoader("MyLua.Libs.FrameWork.MacroDef");
+
+if(MacroDef.ENABLE_PROTOBUF) then
+	MLoader("3rd/pbc/protobuf");
+end
 
 local M = {};
 M.clsName = "ProtobufUtil";
