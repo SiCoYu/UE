@@ -32,6 +32,7 @@ void GameModule::init()
 {
 	this->initGVar();
 	this->loadGameScene();
+	this->mGameSceneEventNotify->onLevelLoaded();
 
 	GPlayerMgr->initHero();
 }

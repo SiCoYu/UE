@@ -70,7 +70,7 @@ void TestMain::runTest()
 
 	//this->mTestUI->run()
 	//this->mTestDownload->run();
-	//this->mTestLuaBind->run();
+	this->mTestLuaBind->run();
 }
 
 MY_END_NAMESPACE
