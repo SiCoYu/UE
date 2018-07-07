@@ -13,7 +13,7 @@ M.clsName = "UiMgr";
 GlobalNS[M.clsName] = M;
 
 function M:ctor()
-    self.mFormArr = {};
+    self.mFormDic = {};
     self.mCurFormIndex = -1;
     self.mFormIdStack = GlobalNS.new(GlobalNS.MStack);
 	self.mFormId2LoadItemDic = GlobalNS.new(GlobalNS.MDictionary);
@@ -35,20 +35,20 @@ function M:init()
 end
 
 function M:initCanvas()
-    if(self.m_canvasList == nil) then
-        self.m_canvasList = GlobalNS.new(GlobalNS.MList);
+    if(self.mCanvasList == nil) then
+        self.mCanvasList = GlobalNS.new(GlobalNS.MList);
         
         local canvas = nil;
         -- eBtnCanvas，原来默认的放在这个上
         canvas = GlobalNS.new(GlobalNS.UiCanvas);
-        self.m_canvasList:add(canvas);
-        canvas:setGoName(GlobalNS.NoDestroyId.ND_CV_UIFirstCanvas);
+        self.mCanvasList:add(canvas);
+        canvas:setGoName(GlobalNS.LayerId.ND_CV_UIFirstCanvas);
         canvas:init();
         
         -- eFirstCanvas
         canvas = GlobalNS.new(GlobalNS.UiCanvas);
-        self.m_canvasList:add(canvas);
-        canvas:setGoName(GlobalNS.NoDestroyId.ND_CV_UISecondCanvas);
+        self.mCanvasList:add(canvas);
+        canvas:setGoName(GlobalNS.LayerId.ND_CV_UISecondCanvas);
         canvas:init();
     end
 end
@@ -61,14 +61,14 @@ function M:getLayerGo(canvasId, layerId)
     if(layerId == nil) then
         layerId = GlobalNS.UiLayerId.eUISecondLayer;
     end
-    GlobalNS.UtilEngineWrap.assert(canvasId < self.m_canvasList:count());
-    return self.m_canvasList:at(canvasId):getLayerGo(layerId);
+    GlobalNS.UtilEngineWrap.assert(canvasId < self.mCanvasList:count());
+    return self.mCanvasList:at(canvasId):getLayerGo(layerId);
 end
 
 function M:showForm(formId)
     -- 如果当前显示的不是需要显示的
 	-- 保证没有在显示之前删除
-	if(self.mFormArr[formId] ~= nil) then
+	if(self.mFormDic[formId] ~= nil) then
 		if(self.mCurFormIndex ~= formId) then
 			local curFormIndex_ = self.mCurFormIndex;
 			self:showFormNoClosePreForm(formId);
@@ -81,11 +81,11 @@ function M:showForm(formId)
 end
 
 function M:showFormNoClosePreForm(formId)
-    if(self.mFormArr[formId] ~= nil) then
-		if(not self.mFormArr[formId]:isVisible()) then
-			self.mFormArr[formId]:onShow();
-			if(self.mFormArr[formId]:isReady()) then
-				GlobalNS.UtilEngineWrap.SetActive(self.mFormArr[formId].mGuiWin, true);
+    if(self.mFormDic[formId] ~= nil) then
+		if(not self.mFormDic[formId]:isVisible()) then
+			self.mFormDic[formId]:onShow();
+			if(self.mFormDic[formId]:isReady()) then
+				GlobalNS.UtilEngineWrap.SetActive(self.mFormDic[formId].mGuiWin, true);
 			end
 		end
         self.mCurFormIndex = formId;
@@ -96,17 +96,17 @@ end
 
 -- 仅仅加载 lua 脚本，不加载资源
 function M:loadFormScript(formId, param)
-    if(self.mFormArr[formId] == nil) then
+    if(self.mFormDic[formId] == nil) then
         local codePath = GlobalNS.UiAttrSystem[formId].mLuaScriptPath;
         local formCls = GlobalNS.ClassLoader.loadClass(codePath);
-        self.mFormArr[formId] = GlobalNS.new(formCls, param);
-        self.mFormArr[formId]:onInit();
+        self.mFormDic[formId] = GlobalNS.new(formCls, param);
+        self.mFormDic[formId]:onInit();
     end
 end
 
 -- 加载脚本并且加载资源
 function M:loadForm(formId, param)
-    if(self.mFormArr[formId] == nil) then
+    if(self.mFormDic[formId] == nil) then
         self:loadFormScript(formId, param);
     end
     
@@ -122,18 +122,18 @@ function M:loadForm(formId, param)
 end
 
 function M:loadAndShow(formId, param)
-    if(self.mFormArr[formId] == nil or not self:hasLoadItem(formId)) then
+    if(self.mFormDic[formId] == nil or not self:hasLoadItem(formId)) then
         self:loadForm(formId, param);
     end
-	if(self.mFormArr[formId] ~= nil and not self.mFormArr[formId]:isHideOnCreate()) then
+	if(self.mFormDic[formId] ~= nil and not self.mFormDic[formId]:isHideOnCreate()) then
 		self:showForm(formId);
 	end
-    return self.mFormArr[formId];
+    return self.mFormDic[formId];
 end
 
 function M:hideForm(formId)
     local bFormVisible = false;
-    local form = self.mFormArr[formId];
+    local form = self.mFormDic[formId];
     if(form ~= nil) then
         bFormVisible = form:isVisible();
     end
@@ -148,7 +148,7 @@ function M:hideForm(formId)
 end
 
 function M:hideFormNoOpenPreForm(formId)
-    local form = self.mFormArr[formId];
+    local form = self.mFormDic[formId];
     if(form.mGuiWin ~= nil and GlobalNS.UtilEngineWrap.IsActive(form.mGuiWin)) then
         form:onHide();
         GlobalNS.UtilEngineWrap.SetActive(form.mGuiWin, false);
@@ -158,7 +158,7 @@ end
 
 function M:exitForm(formId)
     local bFormVisible = false;
-    local form = self.mFormArr[formId];
+    local form = self.mFormDic[formId];
     if(form ~= nil) then
         bFormVisible = form:isVisible();
     end
@@ -174,14 +174,14 @@ end
 
 -- 关闭当前窗口，不用打开之前的窗口
 function M:exitFormNoOpenPreForm(formId)
-    local form = self.mFormArr[formId];
+    local form = self.mFormDic[formId];
     -- 关闭当前窗口
     if(form ~= nil) then
         form:onHide();
         form:onExit();
         GlobalNS.delete(form);
         self:unloadLoadItem(formId);
-        self.mFormArr[formId] = nil;
+        self.mFormDic[formId] = nil;
         self.mCurFormIndex = -1;
     end
     
@@ -217,12 +217,12 @@ function M:pushAndHideForm(formId)
 end
 
 function M:getForm(formId)
-    return self.mFormArr[formId];
+    return self.mFormDic[formId];
 end
 
 function M:hasForm(formId)
     local has = false;
-    for _, value in pairs(self.mFormArr) do
+    for _, value in pairs(self.mFormDic) do
         if(value ~= nil) then
             has = true;
             break;
@@ -246,14 +246,14 @@ end
 -- dispObj : AuxUiPrefabLoader
 function M:onFormPrefabLoaded(dispObj)
 	local formId = dispObj:getFormId();
-	if(self.mFormArr[formId] ~= nil) then
-		local parent = self:getLayerGo(GlobalNS.UiAttrSystem[self.mFormArr[formId].mId].mCanvasId, GlobalNS.UiAttrSystem[self.mFormArr[formId].mId].mLayerId);
-        self.mFormArr[formId].mGuiWin = self.mFormId2LoadItemDic:value(formId):getSelfGo();
-		GlobalNS.UtilEngineWrap.SetParent(self.mFormArr[formId].mGuiWin, parent, false);
-        GlobalNS.UtilEngineWrap.SetActive(self.mFormArr[formId].mGuiWin, false);     -- 加载完成后先隐藏，否则后面 showForm 判断会有问题
-        self.mFormArr[formId]:onReady();
-		if(self.mFormArr[formId]:isVisible()) then
-			GlobalNS.UtilEngineWrap.SetActive(self.mFormArr[formId].mGuiWin, true);
+	if(self.mFormDic[formId] ~= nil) then
+		local parent = self:getLayerGo(GlobalNS.UiAttrSystem[self.mFormDic[formId].mId].mCanvasId, GlobalNS.UiAttrSystem[self.mFormDic[formId].mId].mLayerId);
+        self.mFormDic[formId].mGuiWin = self.mFormId2LoadItemDic:value(formId):getSelfGo();
+		GlobalNS.UtilEngineWrap.SetParent(self.mFormDic[formId].mGuiWin, parent, false);
+        GlobalNS.UtilEngineWrap.SetActive(self.mFormDic[formId].mGuiWin, false);     -- 加载完成后先隐藏，否则后面 showForm 判断会有问题
+        self.mFormDic[formId]:onReady();
+		if(self.mFormDic[formId]:isVisible()) then
+			GlobalNS.UtilEngineWrap.SetActive(self.mFormDic[formId].mGuiWin, true);
 		end
 	else
 		self.mFormId2LoadItemDic:value(formId):dispose();

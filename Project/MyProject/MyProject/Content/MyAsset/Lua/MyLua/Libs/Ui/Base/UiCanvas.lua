@@ -23,37 +23,37 @@ function M:init()
 	
 	layer = GlobalNS.new(GlobalNS.UiLayer);
 	self.mLayerList:add(layer);
-	layerName = string.format("%s/%s", self.mName, GlobalNS.NoDestroyId.ND_CV_UIBtmLayer);
+	layerName = string.format("%s/%s", self.mName, GlobalNS.LayerId.ND_CV_UIBtmLayer);
 	layer:setGoName(layerName);
 	layer:init();
 	
 	layer = GlobalNS.new(GlobalNS.UiLayer);
 	self.mLayerList:add(layer);
-	layerName = string.format("%s/%s", self.mName, GlobalNS.NoDestroyId.ND_CV_UIFirstLayer);
+	layerName = string.format("%s/%s", self.mName, GlobalNS.LayerId.ND_CV_UIFirstLayer);
 	layer:setGoName(layerName);
 	layer:init();
 	
 	layer = GlobalNS.new(GlobalNS.UiLayer);
 	self.mLayerList:add(layer);
-	layerName = string.format("%s/%s", self.mName, GlobalNS.NoDestroyId.ND_CV_UISecondLayer);
+	layerName = string.format("%s/%s", self.mName, GlobalNS.LayerId.ND_CV_UISecondLayer);
 	layer:setGoName(layerName);
 	layer:init();
 	
 	layer = GlobalNS.new(GlobalNS.UiLayer);
 	self.mLayerList:add(layer);
-	layerName = string.format("%s/%s", self.mName, GlobalNS.NoDestroyId.ND_CV_UIThirdLayer);
+	layerName = string.format("%s/%s", self.mName, GlobalNS.LayerId.ND_CV_UIThirdLayer);
 	layer:setGoName(layerName);
 	layer:init();
 	
 	layer = GlobalNS.new(GlobalNS.UiLayer);
 	self.mLayerList:add(layer);
-	layerName = string.format("%s/%s", self.mName, GlobalNS.NoDestroyId.ND_CV_UIForthLayer);
+	layerName = string.format("%s/%s", self.mName, GlobalNS.LayerId.ND_CV_UIForthLayer);
 	layer:setGoName(layerName);
 	layer:init();
 	
 	layer = GlobalNS.new(GlobalNS.UiLayer);
 	self.mLayerList:add(layer);
-	layerName = string.format("%s/%s", self.mName, GlobalNS.NoDestroyId.ND_CV_UITopLayer);
+	layerName = string.format("%s/%s", self.mName, GlobalNS.LayerId.ND_CV_UITopLayer);
 	layer:setGoName(layerName);
 	layer:init();
 end

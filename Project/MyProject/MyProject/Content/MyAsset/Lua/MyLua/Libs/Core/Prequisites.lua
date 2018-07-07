@@ -114,6 +114,7 @@ MLoader("MyLua.Libs.Auxiliary.AuxLoader.AuxDownloader");
 MLoader("MyLua.Libs.FrameWork.ProcessSys");
 MLoader("MyLua.Libs.FrameWork.CSSystem");
 MLoader("MyLua.Libs.FrameWork.Config");
+MLoader("MyLua.Libs.FrameWork.Layer.LayerId");
 MLoader("MyLua.Libs.FrameWork.Layer.LayerPath");
 
 -- 工具
