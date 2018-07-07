@@ -9,34 +9,58 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class UtilLuaSysLibWrap
 {
-	public static int LuaLoadBuffer(lua_State *L, const char * buff, int size, const char * name)
+public:
+	static int LUA_MULTRET;
+
+public:
+	inline static void PushTraceback(lua_State *L, lua_CFunction func)
+	{
+		lua_pushcclosure(L, func, 0);
+	}
+
+	inline static int LuaLoadBuffer(lua_State *L, const char * buff, int size, const char * name)
 	{
 		return luaL_loadbuffer(L, buff, size, name);
 	}
 
-	public static int LuaPCall(lua_State *L, int nArgs, int nResults, int errfunc)
+	inline static int LuaPCall(lua_State *L, int nArgs, int nResults, int errfunc)
 	{
 		return lua_pcall(L, nArgs, nResults, errfunc);
 	}
 
-	public static void LuaSetTop(lua_State *L, int newTop)
+	inline static void LuaSetTop(lua_State *L, int newTop)
 	{
 		lua_settop(L, newTop);
 	}
 
-	public static const char * LuaToString(lua_State *L, int index)
+	inline static const char* LuaToString(lua_State *L, int index)
 	{
 		return lua_tostring(L, index);
 	}
 
-	public static void LuaSetTop(lua_State *L, int newTop)
+	inline static void LuaSetTop(lua_State *L, int newTop)
 	{
 		lua_settop(L, newTop);
 	}
 
-	public static void LuaPushFunction(lua_State *L, lua_CFunction func)
+	inline static void LuaPushFunction(lua_State *L, lua_CFunction func)
 	{
 		lua_pushcclosure(L, func, 0);
+	}
+
+	inline static lua_CFunction LuaAtPanic(lua_State *L, lua_CFunction panic)
+	{
+		return lua_atpanic(L, panic);
+	}
+
+	inline static int LuaGetTop(lua_State *L, )
+	{
+		return lua_gettop(L);
+	}
+
+	inline static void LuaRemove(lua_State *L, int index)
+	{
+		lua_remove(L, index);
 	}
 };
 

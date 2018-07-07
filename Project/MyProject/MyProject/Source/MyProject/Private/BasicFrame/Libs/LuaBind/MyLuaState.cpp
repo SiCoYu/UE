@@ -3,6 +3,7 @@
 #include "LuaCppBind.h"
 #include "MyLuaLoader.h"
 #include "UtilEngineWrap.h"
+#include "UtilLuaSysLibWrap.h"
 
 //#include "MyScriptPlugin/Source/ScriptPlugin/Private/LuaIntegration.h"
 // Ïà¶ÔÓÚ MyProject\Plugins\MyScriptPlugin\Source
@@ -103,43 +104,34 @@ int32 MyLuaState::onLuaPanic(lua_State *lua_State)
 	return 0;
 }
 
-void MyLuaState::onLuaError(std::string error)
+void MyLuaState::_onLuaError(const char* error)
 {
 	
 }
 
-protected void LuaLoadBuffer(byte[] buffer, string chunkName)
+void MyLuaState::onLuaStackTrace(lua_State *lua_State)
 {
-	LuaDLL.tolua_pushtraceback(L);
-	int oldTop = LuaGetTop();
+	const char* err = UtilLuaSysLibWrap::LuaToString(this->mLuaState, -1);
+}
 
-	if (LuaLoadBuffer(buffer, buffer.Length, chunkName) == 0)
+void MyLuaState::_LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName)
+{
+	UtilLuaSysLibWrap::PushTraceback(this->mLuaState, &MyLuaState::onLuaStackTrace);
+	int oldTop = UtilLuaSysLibWrap::LuaGetTop(this->mLuaState);
+
+	if (UtilLuaSysLibWrap::LuaLoadBuffer(this->mLuaState, buffer, length, chunkName) == 0)
 	{
-		if (LuaPCall(0, LuaDLL.LUA_MULTRET, oldTop) == 0)
+		if (UtilLuaSysLibWrap::LuaPCall(this->mLuaState, 0, UtilLuaSysLibWrap::LUA_MULTRET, oldTop) == 0)
 		{
-			LuaSetTop(oldTop - 1);
+			UtilLuaSysLibWrap::LuaSetTop(this->mLuaState, oldTop - 1);
 			return;
 		}
 	}
 
-	string err = LuaToString(-1);
-	LuaSetTop(oldTop - 1);
-	throw new LuaException(err, LuaException.GetLastError());
-}
+	const char* err = UtilLuaSysLibWrap::LuaToString(this->mLuaState, -1);
+	UtilLuaSysLibWrap::LuaSetTop(this->mLuaState, oldTop - 1);
 
-protected void pushTraceback()
-{
-
-}
-
-public int LuaGetTop()
-{
-	return lua_gettop(L);
-}
-
-public int LuaLoadBuffer(byte[] buff, int size, string name)
-{
-	return LuaDLL.luaL_loadbuffer(L, buff, size, name);
+	this->_onLuaError(err);
 }
 
 MY_END_NAMESPACE

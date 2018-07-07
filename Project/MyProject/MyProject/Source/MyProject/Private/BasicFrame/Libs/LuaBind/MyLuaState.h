@@ -30,6 +30,13 @@ public:
 	lua_State* getLuaVM();
 	void doString(std::string str);
 	void runLuaScript();
+
+	static void onLuaStackTrace(lua_State *lua_State);
+
+protected:
+	void _onLuaError(const char* error);
+	
+	void _LuaLoadBuffer(const char* buffer, const char* chunkName);
 };
 
 MY_END_NAMESPACE
