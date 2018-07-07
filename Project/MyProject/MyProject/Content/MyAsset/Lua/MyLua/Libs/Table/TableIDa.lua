@@ -2,7 +2,7 @@ MLoader("MyLua.Libs.Core.GlobalNS");
 MLoader("MyLua.Libs.Core.Class");
 
 local M = GlobalNS.StaticClass();
-M.clsName = "TableID";
+M.clsName = "TableId";
 GlobalNS[M.clsName] = M;
 
 M.TABLE_OBJECT = 0;           -- 道具基本表
