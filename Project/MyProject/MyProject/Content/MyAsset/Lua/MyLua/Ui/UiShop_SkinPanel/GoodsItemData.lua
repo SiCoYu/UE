@@ -47,7 +47,7 @@ function M:onBuyBtnClk()
         if haixing >= self.m_NeedNum then
             haixing = haixing - self.m_NeedNum;
         else
-            GCtx.mLogSys:log("海星不足", GlobalNS.LogTypeId.eLogCommon);
+            Ctx.mLogSys:log("海星不足", GlobalNS.LogTypeId.eLogCommon);
         end        
     end
 
@@ -55,12 +55,12 @@ function M:onBuyBtnClk()
         if zhenzhu >= self.m_NeedNum then
             zhenzhu = zhenzhu - self.m_NeedNum;
         else
-            GCtx.mLogSys:log("珍珠不足", GlobalNS.LogTypeId.eLogCommon);
+            Ctx.mLogSys:log("珍珠不足", GlobalNS.LogTypeId.eLogCommon);
         end
     end
 
-    if GCtx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiShop_SkinPanel) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiShop_SkinPanel);
+    if Ctx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiShop_SkinPanel) then
+        local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiShop_SkinPanel);
         if nil ~= form and form.mIsReady then
             form:refreshGoldNum(haixing, zhenzhu);
         end

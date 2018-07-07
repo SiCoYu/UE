@@ -74,7 +74,7 @@ function M:contains(item)
 		end
 	else
 		if (MacroDef.ENABLE_LOG) then
-			GCtx.mLogSys:log("NoPriorityList::Contains, failed", GlobalNS.LogTypeId.eLogNoPriorityListCheck);
+			Ctx.mLogSys:log("NoPriorityList::Contains, failed", GlobalNS.LogTypeId.eLogNoPriorityListCheck);
 		end
 	end
 
@@ -122,7 +122,7 @@ function M:addNoPriorityObject(noPriorityObject)
 		end
 	else
 		if (MacroDef.ENABLE_LOG) then
-			GCtx.mLogSys:log("NoPriorityList::addNoPriorityObject, failed", GlobalNS.LogTypeId.eLogNoPriorityListCheck);
+			Ctx.mLogSys:log("NoPriorityList::addNoPriorityObject, failed", GlobalNS.LogTypeId.eLogNoPriorityListCheck);
 		end
 	end
 end
@@ -142,7 +142,7 @@ function M:removeNoPriorityObject(noPriorityObject)
 		end
 	else
 		if (MacroDef.ENABLE_LOG) then
-			GCtx.mLogSys:log("NoPriorityList::addNoPriorityObject, failed", GlobalNS.LogTypeId.eLogNoPriorityListCheck);
+			Ctx.mLogSys:log("NoPriorityList::addNoPriorityObject, failed", GlobalNS.LogTypeId.eLogNoPriorityListCheck);
 		end
 	end
 end

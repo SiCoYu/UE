@@ -69,7 +69,7 @@ function M:onReady()
     self.ServerToggle = GlobalNS.UtilEngineWrap.getComByPath(cmdtoggle, "ServerToggle", "Toggle");
 
     if self.locklogtoggle.isOn then
-        GCtx.mLogSys:log("locked  ", GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log("locked  ", GlobalNS.LogTypeId.eLogCommon);
     end
 end
 
@@ -171,7 +171,7 @@ function M:onSetLogText(text)
 
     self.log = self.log .. text .. "\n";
     if self.locklogtoggle.isOn then
-        GCtx.mLogSys:log("locked  ", GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log("locked  ", GlobalNS.LogTypeId.eLogCommon);
     else
         self.viewtxet.text = self.log;
     end
@@ -181,9 +181,9 @@ end
 
 function M:onToggleChanged(value)
     if value then
-        GCtx.mLogSys:log("locked  true", GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log("locked  true", GlobalNS.LogTypeId.eLogCommon);
     else
-        GCtx.mLogSys:log("locked  false", GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log("locked  false", GlobalNS.LogTypeId.eLogCommon);
     end
 end
 

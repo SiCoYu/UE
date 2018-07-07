@@ -1,9 +1,9 @@
 MLoader("MyLua.Libs.Core.Prequisites");
 
--- 全局变量表，自己定义的所有的变量都放在 GCtx 表中，不放在 GlobalNS 表中
-GCtx = {};
-local M = GCtx;
-local this = GCtx;
+-- 全局变量表，自己定义的所有的变量都放在 Ctx 表中，不放在 GlobalNS 表中
+Ctx = {};
+local M = Ctx;
+local this = Ctx;
 
 function M.ctor()
 	

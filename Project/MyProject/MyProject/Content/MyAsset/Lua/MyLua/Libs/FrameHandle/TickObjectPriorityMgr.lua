@@ -61,7 +61,7 @@ function M:_onExecAdvance(delta, tickMode)
 			end
 		else
 			if (MacroDef.ENABLE_LOG) then
-				GCtx.mLogSys:log("TickObjectPriorityMgr::_onExecAdvance, failed", GlobalNS.LogTypeId.eLogCommon);
+				Ctx.mLogSys:log("TickObjectPriorityMgr::_onExecAdvance, failed", GlobalNS.LogTypeId.eLogCommon);
 			end
 		end
 

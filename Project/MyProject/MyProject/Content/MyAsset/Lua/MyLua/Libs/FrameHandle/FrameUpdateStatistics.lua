@@ -62,7 +62,7 @@ end
 
 function M:checkUpdate()
 	local updateNum = 0;
-	updateNum = GCtx.mTimerMgr:getCount();
+	updateNum = Ctx.mTimerMgr:getCount();
 	
 	if(0 == updateNum) then
 		if(self.mIsEnableUpdate) then

@@ -15,7 +15,7 @@ end
 
 function M:init()
     local loginNetHandleCB = GlobalNS.new(GlobalNS.LoginNetHandleCB);
-    GCtx.mNetCmdNotify:addOneDispatch(loginNetHandleCB);    -- 设置网络模块处理
+    Ctx.mNetCmdNotify:addOneDispatch(loginNetHandleCB);    -- 设置网络模块处理
 end
 
 return M;

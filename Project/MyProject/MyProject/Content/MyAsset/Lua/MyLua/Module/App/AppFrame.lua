@@ -1,5 +1,5 @@
 --导入公用文件
-MLoader("MyLua.Libs.FrameWork.GCtx");
+MLoader("MyLua.Libs.FrameWork.Ctx");
 --导入数据文件
 MLoader("MyLua.Module.Common.FrameWork.GCtxExt");
 --导入登陆模块

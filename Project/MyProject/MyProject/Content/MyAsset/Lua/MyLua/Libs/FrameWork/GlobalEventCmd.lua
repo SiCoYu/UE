@@ -17,19 +17,19 @@ GlobalNS[M.clsName] = M;
 
 -- 接收消息
 function M.onReceiveToLua(id, buffer)
-    --GCtx.mLogSys:log("GlobalEventCmd::onReceiveToLua", GlobalNS.LogTypeId.eLogCommon);
-    GCtx.mNetMgr:receiveCmd(id, buffer);
+    --Ctx.mLogSys:log("GlobalEventCmd::onReceiveToLua", GlobalNS.LogTypeId.eLogCommon);
+    Ctx.mNetMgr:receiveCmd(id, buffer);
 end
 
 function M.onReceiveToLuaRpc(buffer, length)
-    --GCtx.mLogSys:log("GlobalEventCmd::onReceiveToLuaRpc", GlobalNS.LogTypeId.eLogCommon);
-    GCtx.mNetMgr:receiveCmdRpc(buffer, length);
+    --Ctx.mLogSys:log("GlobalEventCmd::onReceiveToLuaRpc", GlobalNS.LogTypeId.eLogCommon);
+    Ctx.mNetMgr:receiveCmdRpc(buffer, length);
 end
 
 -- 接收消息, KBE
 function M.onReceiveToLua_KBE(msgName, param)
-    --GCtx.mLogSys:log("GlobalEventCmd::onReceiveToLua_KBE", GlobalNS.LogTypeId.eLogCommon);
-	GCtx.mNetCmdNotify_KBE:handleMsg(msgName, param);
+    --Ctx.mLogSys:log("GlobalEventCmd::onReceiveToLua_KBE", GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mNetCmdNotify_KBE:handleMsg(msgName, param);
 end
 
 -- 场景加载完成
@@ -47,20 +47,20 @@ end
 -- 主角加载完成
 function M.onPlayerMainLoaded()
     --加载场景上的UI组件，主角加载完成后再加载UI，否则UI拿不到主角数据
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiRankListPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiRelivePanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiShop_SkinPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiSettingsPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiMessagePanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiSignPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiDayAwardPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiOtherAwardPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiAccountPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiAccountAvatarPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiRankListPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiRelivePanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiShop_SkinPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiSettingsPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiMessagePanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiSignPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiDayAwardPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiOtherAwardPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiAccountPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiAccountAvatarPanel);
 
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiPlayerDataPanel);
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOptionPanel);
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiTopXRankPanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiPlayerDataPanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOptionPanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiTopXRankPanel);
 end
 
 -- 帧循环
@@ -73,15 +73,15 @@ function M.onAdvance(delta, tickMode)
 	end
 	]]
 	
-	GCtx.mProcessSys:advance(delta, tickMode);
+	Ctx.mProcessSys:advance(delta, tickMode);
 end
 
 function M.openForm(formId)
-	GCtx.mUiMgr:loadAndShow(formId);
+	Ctx.mUiMgr:loadAndShow(formId);
 end
 
 function M.exitForm(formId)
-	GCtx.mUiMgr:exitForm(formId);
+	Ctx.mUiMgr:exitForm(formId);
 end
 
 function M.requireFile(filePath)
@@ -90,7 +90,7 @@ end
 
 --场景加载进度, progress: [0, 1]
 function M.onSceneLoadProgress(progress)
-	local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiStartGame);
+	local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiStartGame);
 	if(nil ~= form) then
 		form:setProgress(progress);
 	end

@@ -23,7 +23,7 @@ function M:run()
 end
 
 function M:testForm()
-	GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiTest);
+	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiTest);
 end
 
 return M;

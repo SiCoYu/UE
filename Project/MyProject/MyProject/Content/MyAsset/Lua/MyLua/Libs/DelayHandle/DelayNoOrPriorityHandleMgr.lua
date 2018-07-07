@@ -32,7 +32,7 @@ function M:addObject(delayObject, priority)
 		end
 	else
 		if (MacroDef.ENABLE_LOG) then
-			GCtx.mLogSys:log("DelayPriorityHandleMgr::addObject, failed", GlobalNS.LogTypeId.eLogCommon);
+			Ctx.mLogSys:log("DelayPriorityHandleMgr::addObject, failed", GlobalNS.LogTypeId.eLogCommon);
 		end
 	end
 end
@@ -46,7 +46,7 @@ function M:removeObject(delayObject)
 		end
 	else
 		if (MacroDef.ENABLE_LOG) then
-			GCtx.mLogSys:log("DelayPriorityHandleMgr::removeObject, failed", GlobalNS.LogTypeId.eLogCommon);
+			Ctx.mLogSys:log("DelayPriorityHandleMgr::removeObject, failed", GlobalNS.LogTypeId.eLogCommon);
 		end
 	end
 end

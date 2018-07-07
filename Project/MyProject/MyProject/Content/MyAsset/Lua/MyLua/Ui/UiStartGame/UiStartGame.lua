@@ -235,7 +235,7 @@ function M:LoginOrCreateAccount_new(selectEnterMode)
 end
 
 function M:onAvatarBtnClk()
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiAccountPanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiAccountPanel);
 end
 
 function M:onNickNameBtnClk()
@@ -275,40 +275,40 @@ function M:onDropBtnClk()
 end
 
 function M:onSignBtnClk()
-    -- GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiSignPanel);
+    -- Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiSignPanel);
     --GCtxExt.mPlayerData.mGameData:ShowRollMessage("暂未开放");
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiShareSelfPanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiShareSelfPanel);
 end
 
 function M:onSettingBtnClk()
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiSettingsPanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiSettingsPanel);
 end
 
 function M:onShareBtnClk()
-    --GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiAccountPanel);
+    --Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiAccountPanel);
     GCtxExt.mPlayerData.mGameData:ShowRollMessage("暂未开放");
 end
 
 function M:onCorpsBtnClk()
-    GCtx.mLogSys:log("Corps Btn Touch", GlobalNS.LogTypeId.eLogCommon);
+    Ctx.mLogSys:log("Corps Btn Touch", GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:onFriendBtnClk()
-    GCtx.mLogSys:log("Friend Btn Touch", GlobalNS.LogTypeId.eLogCommon);
+    Ctx.mLogSys:log("Friend Btn Touch", GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:onRankBtnClk()
-    GCtx.mLogSys:log("Rank Btn Touch", GlobalNS.LogTypeId.eLogCommon);
+    Ctx.mLogSys:log("Rank Btn Touch", GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:onShopBtnClk()
     GCtxExt.mPlayerData.mGoodsData:init();--打开商店时加载配置
     GCtxExt.mPlayerData.mGoodsData.CurrentShopType = GlobalNS.UiFormId.eUiShop_SkinPanel;
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiShop_SkinPanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiShop_SkinPanel);
 end
 
 function M:onEmailBtnClk()
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiBugReportPanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiBugReportPanel);
 end
 
 function M:setProgress(value)

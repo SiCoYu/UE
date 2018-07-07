@@ -114,30 +114,30 @@ function M:onCloseBtnClk()
 end
 
 function M:onSignBtnClk()
-	GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiDayAwardPanel);
+	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiDayAwardPanel);
 end
 
 function M:onBeforeBtnClk()
-	GCtx.mLogSys:log("Before", GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log("Before", GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:onNextBtnClk()
-	GCtx.mLogSys:log("next", GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log("next", GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:on3DaysBtnClk()
     GCtxExt.mPlayerData.mSignData.rangeDay = 3;
-	GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
+	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
 end
 
 function M:on5DaysBtnClk()
     GCtxExt.mPlayerData.mSignData.rangeDay = 5;
-	GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
+	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
 end
 
 function M:on7DaysBtnClk()
     GCtxExt.mPlayerData.mSignData.rangeDay = 7;
-	GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
+	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiOtherAwardPanel);
 end
 
 function M:onPrefabLoaded(dispObj)

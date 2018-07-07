@@ -11,7 +11,7 @@ GlobalNS[M.clsName] = M;
 
 -- 测试发送消息
 function M.testSendMsg()
-	local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiTest);
+	local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiTest);
 	if(form ~= nil) then
 		form:testSendMsg();
 	end

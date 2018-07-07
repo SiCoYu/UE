@@ -35,7 +35,7 @@ end
 function M.deleteObject(obj)
 	if(nil ~= obj) then
 		if(obj:isUsePool()) then
-			GCtx.mSceneIdPoolSys:returnObject(obj:getBufferType(), obj);
+			Ctx.mSceneIdPoolSys:returnObject(obj:getBufferType(), obj);
 			obj:putInPool();
 		else
 			obj:dispose();
@@ -45,7 +45,7 @@ end
 
 function M.getObject(entityType)
 	local ret = nil;
-	ret = GCtx.mSceneIdPoolSys:getObject(entityType);
+	ret = Ctx.mSceneIdPoolSys:getObject(entityType);
 
 	if(nil ~= ret) then
 		ret:getFromPool();

@@ -128,15 +128,15 @@ end
 function M:onOKBtnClk()
     self:clearObj();
     
-    if GCtx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiAccountPanel) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiAccountPanel);
+    if Ctx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiAccountPanel) then
+        local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiAccountPanel);
         if nil ~= form and form.mIsReady then
             form:resetAvatar(self.index);
         end
     end
 
-    if GCtx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiStartGame) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiStartGame);
+    if Ctx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiStartGame) then
+        local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiStartGame);
         if nil ~= form and form.mIsReady then
             form:resetAvatar(self.index);
         end

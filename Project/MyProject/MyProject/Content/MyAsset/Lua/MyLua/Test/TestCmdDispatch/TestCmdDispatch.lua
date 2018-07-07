@@ -17,7 +17,7 @@ end
 
 function M:init()
 	local testNetHandleCB = GlobalNS.new(GlobalNS.TestNetHandleCB);
-    GCtx.mNetCmdNotify:addOneDispatch(testNetHandleCB);    -- 设置网络模块处理
+    Ctx.mNetCmdNotify:addOneDispatch(testNetHandleCB);    -- 设置网络模块处理
 end
 
 function M:run()

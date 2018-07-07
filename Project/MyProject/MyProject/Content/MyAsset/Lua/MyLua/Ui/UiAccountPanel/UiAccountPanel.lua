@@ -124,7 +124,7 @@ function M:onBtnClk()
 end
 
 function M:onAvatarBtnClk()
-	GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiAccountAvatarPanel);
+	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiAccountAvatarPanel);
 end
 
 function M:onShareBtnClk()

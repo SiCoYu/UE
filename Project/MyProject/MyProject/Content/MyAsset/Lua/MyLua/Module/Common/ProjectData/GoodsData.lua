@@ -75,7 +75,7 @@ function M:getGoodsItems(shopType, goodsType, args)
         isOwn = false;
     end
 
-    local form = GCtx.mUiMgr:getForm(self.CurrentShopType);
+    local form = Ctx.mUiMgr:getForm(self.CurrentShopType);
     if nil ~= form and form.mIsReady then
         form:updateUIData(isOwn);
     end

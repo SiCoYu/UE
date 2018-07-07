@@ -84,7 +84,7 @@ function M:contains(item)
 		end
 	else
 		if (MacroDef.ENABLE_LOG) then
-			GCtx.mLogSys:log("PriorityList::Contains, failed", GlobalNS.LogTypeId.eLogPriorityListCheck);
+			Ctx.mLogSys:log("PriorityList::Contains, failed", GlobalNS.LogTypeId.eLogPriorityListCheck);
 		end
 	end
 
@@ -182,7 +182,7 @@ function M:addPriorityObject(priorityObject, priority)
 		end
 	else
 		if (MacroDef.ENABLE_LOG) then
-			GCtx.mLogSys:log("PriorityList::addPriorityObject, failed", GlobalNS.LogTypeId.eLogPriorityListCheck);
+			Ctx.mLogSys:log("PriorityList::addPriorityObject, failed", GlobalNS.LogTypeId.eLogPriorityListCheck);
 		end
 	end
 end

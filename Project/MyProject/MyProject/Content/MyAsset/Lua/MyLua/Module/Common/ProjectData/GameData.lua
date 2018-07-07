@@ -54,7 +54,7 @@ function M:setRankInfoList(args)
         };
     end
 
-    local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiRankListPanel);
+    local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiRankListPanel);
     if nil ~= form and form.mIsReady then
         form:updateUIData();
     end
@@ -74,8 +74,8 @@ function M:setTop10RankList(args)
         };
     end
 
-    if GCtx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiTopXRankPanel) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiTopXRankPanel);
+    if Ctx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiTopXRankPanel) then
+        local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiTopXRankPanel);
         if nil ~= form and form.mIsReady then            
             form:updateUIData();
         end
@@ -92,8 +92,8 @@ end
 
 function M:onTick(dispObj, eventId)
     local lefttime = GlobalNS.UtilMath.ceil(self.mTimer:getLeftRunTime());
-	if GCtx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiPlayerDataPanel) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiPlayerDataPanel);
+	if Ctx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiPlayerDataPanel) then
+        local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiPlayerDataPanel);
         if nil ~= form and form.mIsReady then
             form:refreshLeftTime(lefttime);
         end
@@ -103,20 +103,20 @@ end
 function M:ShowMessageBox(msg)
     self.mMessageType = 1;
     self.mMessageText = msg;
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiMessagePanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiMessagePanel);
 end
 
 function M:ShowRollMessage(msg)
     self.mMessageType = 2;
     self.mMessageText = msg;
-    GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiMessagePanel);
+    Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiMessagePanel);
 end
 
 function M:returnStartGame()
     GCtxExt.mPlayerData.mGameData.isRelogin = true;
     self:clearResource();
     GlobalNS.CSSystem.Ctx.msInstance.mNetEventHandle:Disconnect();
-	GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiStartGame);
+	Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiStartGame);
     --GlobalNS.CSSystem.Ctx.msInstance.mModuleSys:unloadModule(GlobalNS.CSSystem.ModuleId.GAMEMN);
     GlobalNS.CSSystem.Ctx.msInstance.mModuleSys:loadModule(GlobalNS.CSSystem.ModuleId.LOGINMN);
 end
@@ -131,10 +131,10 @@ function M:clearResource()
     GlobalNS.CSSystem.Ctx.msInstance.mFlyBulletFlockMgr:dispose();
 	GlobalNS.CSSystem.Ctx.msInstance.mHudSystem:dispose();
 
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiPlayerDataPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiOptionPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiTopXRankPanel);
-    GCtx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiRelivePanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiPlayerDataPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiOptionPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiTopXRankPanel);
+    Ctx.mUiMgr:exitForm(GlobalNS.UiFormId.eUiRelivePanel);
 end
 
 return M;

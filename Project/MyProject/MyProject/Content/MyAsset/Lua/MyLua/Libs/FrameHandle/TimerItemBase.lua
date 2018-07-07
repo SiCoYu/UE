@@ -155,11 +155,11 @@ function M:getClientDispose()
 end
 
 function M:start(priority)
-    GCtx.mTimerMgr:addTimer(self);
+    Ctx.mTimerMgr:addTimer(self);
 end
 
 function M:stop()
-    GCtx.mTimerMgr:removeObject(self);
+    Ctx.mTimerMgr:removeObject(self);
 end
 
 return M;

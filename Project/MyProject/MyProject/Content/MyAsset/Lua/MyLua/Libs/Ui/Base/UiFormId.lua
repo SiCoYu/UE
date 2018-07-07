@@ -12,30 +12,30 @@ end
 
 function M.init()
     --10000
-	this.eUiTest = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
+	this.eUiTest = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
     --10001
-	this.eUiStartGame = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
+	this.eUiStartGame = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
     --10002 依次类推... ...
-    this.eUiRankListPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiRelivePanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiPlayerDataPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiOptionPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiTopXRankPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiConsoleDlg = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-	this.eUiShop_SkinPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-	this.eUiPack = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiSettingsPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiMessagePanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiSignPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiDayAwardPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiOtherAwardPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiAccountPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiAccountAvatarPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiBugReportPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiEmoticonPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
-    this.eUiShareSelfPanel = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiRankListPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiRelivePanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiPlayerDataPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiOptionPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiTopXRankPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiConsoleDlg = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+	this.eUiShop_SkinPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+	this.eUiPack = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiSettingsPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiMessagePanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiSignPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiDayAwardPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiOtherAwardPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiAccountPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiAccountAvatarPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiBugReportPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiEmoticonPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
+    this.eUiShareSelfPanel = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
     --[[替换占位符(勿删)--]]
-	this.eUiCount = GCtx.mUiMgr.mUniqueNumIdGen:genNewId();
+	this.eUiCount = Ctx.mUiMgr.mUniqueNumIdGen:genNewId();
 end
 
 --静态表直接构造就行了，不会使用 new 操作符

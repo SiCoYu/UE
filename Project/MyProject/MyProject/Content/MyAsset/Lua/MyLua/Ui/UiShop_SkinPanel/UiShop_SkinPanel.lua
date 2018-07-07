@@ -125,20 +125,20 @@ function M:onSkinBtnClk()
 end
 --[[待扩充
 function M:onSkinBtnClk()
-	GCtx.mLogSys:log("Shop Skin Clk", GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log("Shop Skin Clk", GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:onSkinBtnClk()
-	GCtx.mLogSys:log("Shop Skin Clk", GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log("Shop Skin Clk", GlobalNS.LogTypeId.eLogCommon);
 end
 ]]--
 
 function M:onHaiXingBtnClk()
-	GCtx.mLogSys:log("海星： " .. self.HaiXingNumText.text, GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log("海星： " .. self.HaiXingNumText.text, GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:onZhenZhuBtnClk()
-	GCtx.mLogSys:log("珍珠： " .. self.ZhenZhuNumText.text, GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log("珍珠： " .. self.ZhenZhuNumText.text, GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:onShapeBtnClk()
@@ -271,9 +271,9 @@ end
 
 function M:onValueChanged(check)
     if check then
-        GCtx.mLogSys:log("true", GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log("true", GlobalNS.LogTypeId.eLogCommon);
     else
-        GCtx.mLogSys:log("false", GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log("false", GlobalNS.LogTypeId.eLogCommon);
     end
 end
 

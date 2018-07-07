@@ -24,13 +24,13 @@ end
 
 function M:addSelfTick(priority)
 	-- Test 延迟添加
-	-- GCtx.mTickMgr:incDepth();
-    GCtx.mTickMgr:addTick(self, priority);
-	-- GCtx.mTickMgr:decDepth();
+	-- Ctx.mTickMgr:incDepth();
+    Ctx.mTickMgr:addTick(self, priority);
+	-- Ctx.mTickMgr:decDepth();
 end
 
 function M:removeSelfTick()
-    GCtx.mTickMgr:removeTick(self);
+    Ctx.mTickMgr:removeTick(self);
 end
 
 return M;

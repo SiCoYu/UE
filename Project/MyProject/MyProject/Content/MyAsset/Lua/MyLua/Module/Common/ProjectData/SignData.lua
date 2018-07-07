@@ -40,14 +40,14 @@ function M:getSignAwards(awards)
         self.items[i].m_itemEnable = false;
     end
 
-    local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiSignPanel);
+    local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiSignPanel);
     if nil ~= form and form.mIsReady then
         form:updateUIData();
     end
 end
 
 function M:setBtnState(index)
-    local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiSignPanel);
+    local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiSignPanel);
     if nil ~= form and form.mIsReady then
         form:enableBtn(index);
     end

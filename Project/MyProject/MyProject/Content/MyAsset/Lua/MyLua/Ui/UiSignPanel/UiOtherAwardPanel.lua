@@ -61,7 +61,7 @@ function M:onCloseBtnClk()
 end
 
 function M:onGetBtnClk()
-	GCtx.mLogSys:log("领取奖励", GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log("领取奖励", GlobalNS.LogTypeId.eLogCommon);
 end
 
 function M:UpdateUIData(args)

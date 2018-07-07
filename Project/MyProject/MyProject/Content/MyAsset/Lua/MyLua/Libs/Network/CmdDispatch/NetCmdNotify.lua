@@ -37,7 +37,7 @@ end
 
 function M:handleMsg(msg)
     --if (false == mIsStopNetHandle) then -- 如果没有停止网络处理
-        GCtx.mLogSys:log("NetCmdNotify::handleMsg", GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log("NetCmdNotify::handleMsg", GlobalNS.LogTypeId.eLogCommon);
         for _, item in pairs(self.mNetDispatchList:list()) do
             item:handleMsg(msg);
         end

@@ -18,7 +18,7 @@ function M:handleTest(cmd)
 end
 
 function M:handleLoginResponse(cmd)
-	GCtx.mLogSys:log(cmd.result, GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log(cmd.result, GlobalNS.LogTypeId.eLogCommon);
 end
 
 return M;

@@ -60,7 +60,7 @@ function M:loadOneTable(tableID)
 	local table = self.mDicTable:value(tableID);
 	
 	local auxBytesLoader = GlobalNS.new(GlobalNS.AuxBytesLoader);
-	local path = GlobalNS.UtilPath.CombineTwo(GCtx.mConfig.mPathLst[GlobalNS.ResPathType.ePathTablePath], table.mResName);
+	local path = GlobalNS.UtilPath.CombineTwo(Ctx.mConfig.mPathLst[GlobalNS.ResPathType.ePathTablePath], table.mResName);
 	
 	auxBytesLoader:syncLoad(path, self, self.onLoadEventHandle);
 end
@@ -69,7 +69,7 @@ end
 function M:onLoadEventHandle(dispObj)
     self.mRes = dispObj;
     if (self.mRes:hasSuccessLoaded()) then
-        GCtx.mLogSys:log(self.mRes:getLogicPath(), GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log(self.mRes:getLogicPath(), GlobalNS.LogTypeId.eLogCommon);
 
         local bytes = self.mRes:getBytes();
         if (nil ~= bytes) then
@@ -80,7 +80,7 @@ function M:onLoadEventHandle(dispObj)
             self:readTable(self:getTableIDByPath(self.mRes:getLogicPath()), self.m_byteArray);
         end
     elseif (self.mRes:hasFailed()) then
-		GCtx.mLogSys:log(self.mRes:getLogicPath(), GlobalNS.LogTypeId.eLogCommon);
+		Ctx.mLogSys:log(self.mRes:getLogicPath(), GlobalNS.LogTypeId.eLogCommon);
     end
 
     -- 卸载资源
@@ -93,7 +93,7 @@ function M:getTableIDByPath(path)
 	local tablePath = "";
 	
     for key, value in pairs(self.mDicTable:getData()) do
-		tablePath = GlobalNS.UtilPath.CombineTwo(GCtx.mConfig.mPathLst[GlobalNS.ResPathType.ePathTablePath], value.mResName);
+		tablePath = GlobalNS.UtilPath.CombineTwo(Ctx.mConfig.mPathLst[GlobalNS.ResPathType.ePathTablePath], value.mResName);
         if (tablePath == path) then
             return key;
         end

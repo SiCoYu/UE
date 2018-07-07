@@ -33,22 +33,22 @@ end
 
 -- 显示
 function M:show()
-    GCtx.mUiMgr:showForm(self.mId);
+    Ctx.mUiMgr:showForm(self.mId);
 end
 
 -- 加载并显示
 function M:loadAndShow(param)
-    GCtx.mUiMgr:loadAndShow(self.mId, param);
+    Ctx.mUiMgr:loadAndShow(self.mId, param);
 end
 
 -- 隐藏
 function M:hide()
-    GCtx.mUiMgr:hideForm(self.mId); 
+    Ctx.mUiMgr:hideForm(self.mId); 
 end
 
 -- 退出
 function M:exit()
-    GCtx.mUiMgr:exitForm(self.mId);
+    Ctx.mUiMgr:exitForm(self.mId);
 end
 
 -- 界面代码创建后就调用

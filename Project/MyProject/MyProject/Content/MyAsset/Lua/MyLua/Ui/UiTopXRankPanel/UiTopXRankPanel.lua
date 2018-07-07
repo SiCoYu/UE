@@ -188,13 +188,13 @@ function M:showTopxRank()
 end
 
 function M:onDropBtnClk()
-    --GCtx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiConsoleDlg);
+    --Ctx.mUiMgr:loadAndShow(GlobalNS.UiFormId.eUiConsoleDlg);
     self.topXBG:SetActive(false);
     self.UpBG:SetActive(true);
 end
 
 function M:onDownBtnClk()
-    --GCtx.mUiMgr:exit(GlobalNS.UiFormId.eUiConsoleDlg);
+    --Ctx.mUiMgr:exit(GlobalNS.UiFormId.eUiConsoleDlg);
     self.topXBG:SetActive(true);
     self.UpBG:SetActive(false);
 end

@@ -51,7 +51,7 @@ function M:onExit()
 end
 
 function M:onBtnClk()
-	GCtx.mLogSys:log("Hello World", GlobalNS.LogTypeId.eLogCommon);
+	Ctx.mLogSys:log("Hello World", GlobalNS.LogTypeId.eLogCommon);
 end
 
 return M;

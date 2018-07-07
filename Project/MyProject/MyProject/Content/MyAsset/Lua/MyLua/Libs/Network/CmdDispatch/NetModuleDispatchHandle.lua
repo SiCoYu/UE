@@ -18,7 +18,7 @@ end
 
 function M:removeCmdHandle(cmdId, pThis, func, eventId)
     if(not self.mId2DispatchDic.ContainsKey(cmdId)) then
-        GCtx.mLogSys:log("Cmd Handle Not Register");
+        Ctx.mLogSys:log("Cmd Handle Not Register");
     end
 
     self.mId2DispatchDic[cmdId]:removeEventHandle(pThis, func, eventId);
@@ -30,10 +30,10 @@ function M:handleMsg(msg)
     --local byParam = msg.mByParam;
     --byParam = msg.readUnsignedInt8(byParam);
     --msg.setPos(0);
-    GCtx.mLogSys:log("NetModuleDispatchHandle Start handleMsg", GlobalNS.LogTypeId.eLogCommon);
+    Ctx.mLogSys:log("NetModuleDispatchHandle Start handleMsg", GlobalNS.LogTypeId.eLogCommon);
 	
     if(self.mId2DispatchDic:containsKey(msg.byCmd)) then
-        GCtx.mLogSys:log("NetModuleDispatchHandle In handleMsg", GlobalNS.LogTypeId.eLogCommon);
+        Ctx.mLogSys:log("NetModuleDispatchHandle In handleMsg", GlobalNS.LogTypeId.eLogCommon);
         --self.mCmdDispInfo.bu = msg.mMsgBody;
         --self.mCmdDispInfo.byCmd = byCmd;
         --self.mCmdDispInfo.byParam = byParam;

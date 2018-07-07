@@ -16,10 +16,10 @@ function M:advance(delta, tickMode)
     --print("ProcessSys:advance");
 	if(GlobalNS.TickMode.eTM_Update == tickMode) then
 		--定时器只处理这种模式
-		GCtx.mTimerMgr:Advance(delta);
+		Ctx.mTimerMgr:Advance(delta);
 	end
 	
-	--GCtx.mTickMgr:Advance(delta, tickMode);
+	--Ctx.mTickMgr:Advance(delta, tickMode);
 end
 
 return M;

@@ -35,8 +35,8 @@ function M:init(_Prefab, _Content, _index)
 end
 
 function M:onChoiceBtnClk()
-	if GCtx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiAccountAvatarPanel) then
-        local form = GCtx.mUiMgr:getForm(GlobalNS.UiFormId.eUiAccountAvatarPanel);
+	if Ctx.mUiMgr:hasForm(GlobalNS.UiFormId.eUiAccountAvatarPanel) then
+        local form = Ctx.mUiMgr:getForm(GlobalNS.UiFormId.eUiAccountAvatarPanel);
         if nil ~= form and form.mIsReady then
             form:SetAvatarItems(self.index);
         end

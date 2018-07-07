@@ -28,7 +28,7 @@ function M:addObject(delayObject, priority)
             self.mTimerList:add(delayObject);
         end
 		
-		GCtx.mFrameUpdateStatistics:incNum();
+		Ctx.mFrameUpdateStatistics:incNum();
     end
 end
 
@@ -47,7 +47,7 @@ function M:removeObject(delayObject)
             end
         end
 		
-		GCtx.mFrameUpdateStatistics:decNum();
+		Ctx.mFrameUpdateStatistics:decNum();
     end
 end
 
