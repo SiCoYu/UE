@@ -25,6 +25,7 @@ function M:dtor()
 end
 
 function M:init()
+	--[[
     --外形
     self.shapeCount = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.shape.Length;
     for i=1, self.shapeCount do
@@ -52,6 +53,11 @@ function M:init()
             m_only = GlobalNS.CSSystem.Ctx.msInstance.mSnowBallCfg.child[i-1].mOnly;
         };
     end
+	]]
+end
+
+function M:dispose()
+	
 end
 
 function M:getGoodsItems(shopType, goodsType, args)

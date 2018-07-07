@@ -15,6 +15,14 @@ function M:dtor()
     
 end
 
+function M:init()
+    
+end
+
+function M:dispose()
+    
+end
+
 function M:getSignAwards(awards)
     local index = math.random(28, 31);
     self.daysCount = index;

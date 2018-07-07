@@ -30,6 +30,14 @@ function M:dtor()
     
 end
 
+function M:init()
+    
+end
+
+function M:dispose()
+    
+end
+
 function M:setRankInfoList(args)
     local ranklist = args[0];
     self.myRank = args[1];

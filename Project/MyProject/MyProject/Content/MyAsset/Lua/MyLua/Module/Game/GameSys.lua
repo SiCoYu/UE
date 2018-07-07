@@ -1,4 +1,4 @@
-MLoader("MyLua.Libs.Module.IGameSys");
+MLoader("MyLua.Module.Common.Module.ILoginSys");
 MLoader("MyLua.Module.Game.EventCB.GameNetHandleCB");
 
 local M = GlobalNS.Class(GlobalNS.IGameSys);

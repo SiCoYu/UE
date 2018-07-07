@@ -38,7 +38,7 @@ function M:initCanvas()
     if(self.m_canvasList == nil) then
         self.m_canvasList = GlobalNS.new(GlobalNS.MList);
         
-        local canvas;
+        local canvas = nil;
         -- eBtnCanvas，原来默认的放在这个上
         canvas = GlobalNS.new(GlobalNS.UiCanvas);
         self.m_canvasList:add(canvas);

@@ -1,4 +1,4 @@
-MLoader("MyLua.Libs.Module.ILoginSys");
+MLoader("MyLua.Module.Common.Module.ILoginSys");
 MLoader("MyLua.Module.Login.EventCB.LoginNetHandleCB");
 
 local M = GlobalNS.Class(GlobalNS.ILoginSys);

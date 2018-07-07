@@ -121,6 +121,7 @@ MLoader("MyLua.Libs.Tools.UtilStr");
 MLoader("MyLua.Libs.Tools.UtilApi");
 MLoader("MyLua.Libs.Tools.UtilPath");
 MLoader("MyLua.Libs.Tools.UtilMath");
+MLoader("MyLua.Libs.Tools.UtilSysLibWrap");
 
 -- 日志
 MLoader("MyLua.Libs.Log.LogTypeId");
