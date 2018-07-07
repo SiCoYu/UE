@@ -5,12 +5,23 @@
 #include "LuaBridgeInc.h"
 #include "PlatformDefine.h"
 
+// 静态成员变量被 lua.h  LUA_MULTRET 宏定义替换成 -1 ，导致编译错误
+//#ifdef LUA_MULTRET
+//	#undef LUA_MULTRET
+//#endif
+
 MY_BEGIN_NAMESPACE(MyNS)
+
+// lua.h  LUA_MULTRET
+//#ifndef LUA_MULTRET
+//	#define LUA_MULTRET -1
+//#endif
 
 class UtilLuaSysLibWrap
 {
 public:
-	static int LUA_MULTRET;		// lua.h  LUA_MULTRET
+	// 被 lua.h  LUA_MULTRET 宏定义替换成 -1 ，导致编译错误
+	//static int LUA_MULTRET;		// lua.h  LUA_MULTRET
 
 public:
 	inline static void PushTraceback(lua_State *L, lua_CFunction func)
@@ -38,11 +49,6 @@ public:
 		return lua_tostring(L, index);
 	}
 
-	inline static void LuaSetTop(lua_State *L, int newTop)
-	{
-		lua_settop(L, newTop);
-	}
-
 	inline static void LuaPushFunction(lua_State *L, lua_CFunction func)
 	{
 		lua_pushcclosure(L, func, 0);
@@ -53,7 +59,7 @@ public:
 		return lua_atpanic(L, panic);
 	}
 
-	inline static int LuaGetTop(lua_State *L, )
+	inline static int LuaGetTop(lua_State *L)
 	{
 		return lua_gettop(L);
 	}

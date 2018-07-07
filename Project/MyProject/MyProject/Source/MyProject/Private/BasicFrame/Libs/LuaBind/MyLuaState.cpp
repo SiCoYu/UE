@@ -6,13 +6,13 @@
 #include "UtilLuaSysLibWrap.h"
 
 //#include "MyScriptPlugin/Source/ScriptPlugin/Private/LuaIntegration.h"
-// Ïà¶ÔÓÚ MyProject\Plugins\MyScriptPlugin\Source
+// ç›¸å¯¹äºŽ MyProject\Plugins\MyScriptPlugin\Source
 //#include "ScriptPlugin/Private/LuaIntegration.h"
 //#include "ScriptPlugin/Classes/ScriptContext.h"
 #include "ScriptPlugin/Classes/ScriptPluginExport.h"
 //#include "LuaIntegration.h"
 
-// ÕâÁ½¸ö½Ó¿Ú²»ÄÜµ¼³öÀ´
+// è¿™ä¸¤ä¸ªæŽ¥å£ä¸èƒ½å¯¼å‡ºæ¥
 // "ScriptPlugin/Private/LuaIntegration.cpp"
 //extern void LuaRegisterUnrealUtilities(lua_State* LuaState);
 // "GeneratedScriptLibraries.inl"
@@ -34,22 +34,22 @@ MyLuaState::~MyLuaState()
 
 void MyLuaState::init()
 {
-	// ´ò¿ª»ù±¾¿â
+	// æ‰“å¼€åŸºæœ¬åº“
 	this->mLuaState = luaL_newstate();
 	luaL_openlibs(this->mLuaState);
 
-	// ±¨´í»Øµ÷
-	lua_atpanic(this->mLuaState, &LuaSystem::onLuaPanic);
+	// æŠ¥é”™å›žè°ƒ
+	lua_atpanic(this->mLuaState, &MyLuaState::onLuaPanic);
 
-	// µ¼Èë UE4 ×Ô¼ºµÄÀà
-	// ²Î¿¼ MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\LuaIntegration.cpp
+	// å¯¼å…¥ UE4 è‡ªå·±çš„ç±»
+	// å‚è€ƒ MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\LuaIntegration.cpp
 	// bool FLuaContext::Initialize(const FString& Code, UObject* Owner)
 	//LuaRegisterExportedClasses(this->L);
 	//LuaRegisterUnrealUtilities(this->L);
 	//UScriptContext* a = UtilEngineWrap::NewObject<UScriptContext>();
 	UScriptPluginExport::initPlugin(this->mLuaState);
 
-	// ´ò¿ª Socket
+	// æ‰“å¼€ Socket
 	lua_getglobal(this->mLuaState, "package");
 	lua_getfield(this->mLuaState, -1, "preload");
 
@@ -63,11 +63,11 @@ void MyLuaState::init()
 
 	lua_settop(this->mLuaState, 0);
 
-	// °ó¶¨×Ô¶¨Òå¼ÓÔØÆ÷
-	//addCClosureLualoader(this->mLuaState);
-	addCFunctionLualoader(this->mLuaState);
+	// ç»‘å®šè‡ªå®šä¹‰åŠ è½½å™¨
+	//MyLuaLoader::addCClosureLualoader(this->mLuaState);
+	MyLuaLoader::addCFunctionLualoader(this->mLuaState);
 
-	// °ó¶¨Íâ²¿¿â
+	// ç»‘å®šå¤–éƒ¨åº“
 	LuaCppBind::bind(this->mLuaState);
 }
 
@@ -85,17 +85,14 @@ lua_State* MyLuaState::getLuaVM()
 	return this->mLuaState;
 }
 
-void MyLuaState::doString(std::string str)
+void MyLuaState::doString(const char* str)
 {
-	luaL_dostring(this->mLuaState, str.c_str());
+	luaL_dostring(this->mLuaState, str);
 }
 
-void MyLuaState::runLuaScript()
+void MyLuaState::doFile(const char* fileName)
 {
-	// Õâ¸öÖ±½Óµ÷ÓÃÊÇ²»ÄÜ³É¹¦Ö´ÐÐµÄ£¬ºÜÆæ¹Ö
-	//loadLuaFromFile(this->mLuaState, "MyLua.Module.Entry.MainEntry");
-	// Ö»ÓÐÕâÑù²ÅÄÜ³É¹¦Ö´ÐÐ´úÂë
-	this->doString("require(\"MyLua.Module.Entry.MainEntry\")");
+	luaL_dofile(this->mLuaState, fileName);
 }
 
 int32 MyLuaState::onLuaPanic(lua_State *lua_State)
@@ -109,9 +106,10 @@ void MyLuaState::_onLuaError(const char* error)
 	
 }
 
-void MyLuaState::onLuaStackTrace(lua_State *lua_State)
+int MyLuaState::onLuaStackTrace(lua_State *lua_State)
 {
-	const char* err = UtilLuaSysLibWrap::LuaToString(this->mLuaState, -1);
+	const char* err = UtilLuaSysLibWrap::LuaToString(lua_State, -1);
+	return 0;
 }
 
 void MyLuaState::_LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName)
@@ -121,7 +119,7 @@ void MyLuaState::_LuaLoadBuffer(const char* buffer, size_t length, const char* c
 
 	if (UtilLuaSysLibWrap::LuaLoadBuffer(this->mLuaState, buffer, length, chunkName) == 0)
 	{
-		if (UtilLuaSysLibWrap::LuaPCall(this->mLuaState, 0, UtilLuaSysLibWrap::LUA_MULTRET, oldTop) == 0)
+		if (UtilLuaSysLibWrap::LuaPCall(this->mLuaState, 0, LUA_MULTRET, oldTop) == 0)
 		{
 			UtilLuaSysLibWrap::LuaSetTop(this->mLuaState, oldTop - 1);
 			return;

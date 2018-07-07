@@ -25,7 +25,7 @@ void TestLuaBind::run()
 		"ok, off = testClass:startWith(true, 'if', 'else')\n"
 		"print(ok, off)\n";
 
-	// Ö´ÐÐ³õÊ¼»¯´úÂë
+	// æ‰§è¡Œåˆå§‹åŒ–ä»£ç 
 	//GLuaSystem->doString("require(\"MyLua.Module.Entry.MainEntry\")");
 	//GLuaSystem->runLuaScript();
 }

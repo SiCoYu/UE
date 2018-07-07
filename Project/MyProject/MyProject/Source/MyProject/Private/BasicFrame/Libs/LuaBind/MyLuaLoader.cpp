@@ -83,7 +83,7 @@ void MyLuaLoader::addCClosureLualoader(lua_State *L)
 int MyLuaLoader::loadLuaFromBufferUseFunction(lua_State *L)
 {
 	std::string fileName = luaL_checkstring(L, 1);
-	return loadLuaFromFile(L, fileName);
+	return MyLuaLoader::loadLuaFromFile(L, fileName);
 }
 
 int loadLuaFromFileUseFunction(lua_State *L)
@@ -97,7 +97,8 @@ int loadLuaFromFileUseFunction(lua_State *L)
 	}
 
 	int retCode = 0;
-	retCode = checkResult(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
+	retCode = MyLuaLoader::checkResult(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
+
 	return retCode;
 }
 
@@ -135,7 +136,7 @@ int MyLuaLoader::loadLuaFromBufferUseClosure(lua_State *L)
 
 	int fnameindex = lua_gettop(L) + 1;
 	lua_pushfstring(L, "@%s", fullPath);
-	retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+	retCode = MyLuaLoader::checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
 	lua_remove(L, fnameindex);
 
 	delete[] buffer;
@@ -155,18 +156,18 @@ int MyLuaLoader::loadLuaFromFileUseClosure(lua_State *L)
 	}
 
 	int retCode = 0;
-	retCode = checkResult(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
+	retCode = MyLuaLoader::checkResult(L, (LUA_OK == luaL_loadfile(L, fileName.c_str())), fileName.c_str());
 	return retCode;
 }
 
-// 这个仅仅是加载代码，如果要执行，还要调用 lua_pcall 才能执行
+// 杩欎釜浠呬粎鏄姞杞戒唬鐮侊紝濡傛灉瑕佹墽琛岋紝杩樿璋冪敤 lua_pcall 鎵嶈兘鎵ц
 int MyLuaLoader::loadLuaFromFile(lua_State *L, std::string fileName)
 {
 	fileName = GFileSys->getLuaPath(fileName);
 
 	if (0 == fileName.length())
 	{
-		// 加载失败返回 1
+		// 鍔犺浇澶辫触杩斿洖 1
 		return 1;
 	}
 	else
@@ -203,7 +204,7 @@ int MyLuaLoader::loadLuaFromFile(lua_State *L, std::string fileName)
 
 			int fnameindex = lua_gettop(L) + 1;
 			lua_pushfstring(L, "@%s", fullPath);
-			retCode = checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
+			retCode = MyLuaLoader::checkResult(L, (LUA_OK == luaL_loadbuffer(L, buffer, size, fileName.c_str())), fileName.c_str());
 			lua_remove(L, fnameindex);
 
 			delete[] buffer;

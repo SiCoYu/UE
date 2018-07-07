@@ -28,15 +28,14 @@ public:
 	void dispose();
 
 	lua_State* getLuaVM();
-	void doString(std::string str);
-	void runLuaScript();
+	void doString(const char* str);
+	void doFile(const char* fileName);
 
-	static void onLuaStackTrace(lua_State *lua_State);
+	static int onLuaStackTrace(lua_State *lua_State);
 
 protected:
 	void _onLuaError(const char* error);
-	
-	void _LuaLoadBuffer(const char* buffer, const char* chunkName);
+	void _LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName);
 };
 
 MY_END_NAMESPACE

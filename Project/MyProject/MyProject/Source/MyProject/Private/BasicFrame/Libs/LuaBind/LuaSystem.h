@@ -4,7 +4,7 @@
 #include "GObject.h"
 #include "PlatformDefine.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(LuaLog, Log, All);
+//DECLARE_LOG_CATEGORY_EXTERN(LuaLog, Log, All);
 
 MY_BEGIN_NAMESPACE(MyNS)
 
