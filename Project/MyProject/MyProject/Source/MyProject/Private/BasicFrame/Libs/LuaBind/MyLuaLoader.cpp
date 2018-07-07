@@ -189,8 +189,8 @@ int loadLuaFromFile(lua_State *L, std::string fileName)
 		//rewind(hFile);
 		error = ferror(hFile);
 
-		buffer = new char[size];
-		memset(buffer, 0, size);
+		buffer = new char[size + 1];
+		memset(buffer, 0, size + 1);
 		size_t retSize = fread(buffer, size, 1, hFile);
 		error = ferror(hFile);
 
