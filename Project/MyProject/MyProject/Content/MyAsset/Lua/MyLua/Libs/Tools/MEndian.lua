@@ -3,7 +3,7 @@ MLoader("MyLua.Libs.Core.StaticClass");
 
 local M = GlobalNS.StaticClass();
 local this = M;
-M.clsName = "EEndian";
+M.clsName = "MEndian";
 GlobalNS[M.clsName] = M;
 
 M.eBIG_ENDIAN = 0;         -- 大端

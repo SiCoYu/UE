@@ -3,7 +3,7 @@ MLoader("MyLua.Libs.Core.StaticClass");
 
 local M = GlobalNS.StaticClass();
 local this = M;
-M.clsName = "GkEncode";
+M.clsName = "MEncode";
 GlobalNS[M.clsName] = M;
 
 M.UTF8 = 0;

@@ -16,8 +16,8 @@ function M.init()
 	this.AuxSpriteAtlasLoader = SDK.Lib.AuxSpriteAtlasLoader;
 	this.UtilApi = SDK.Lib.UtilApi;
 	this.MFileSys = SDK.Lib.MFileSys;
-	this.EEndian = SDK.Lib.EEndian;
-	this.GkEncode = SDK.Lib.GkEncode;
+	this.MEndian = SDK.Lib.MEndian;
+	this.MEncode = SDK.Lib.MEncode;
     this.ModuleId = SDK.Lib.ModuleId;
 end
 

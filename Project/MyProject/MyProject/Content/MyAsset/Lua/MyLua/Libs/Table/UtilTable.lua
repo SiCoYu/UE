@@ -14,7 +14,7 @@ end
 
 function M.readString(bytes, tmpStr)
     _, this.msCnt = bytes:readUnsignedInt16(this.msCnt);
-    _, tmpStr = bytes:readMultiByte(tmpStr, this.msCnt, GlobalNS.CSSystem.GkEncode.eUTF8);
+    _, tmpStr = bytes:readMultiByte(tmpStr, this.msCnt, GlobalNS.CSSystem.MEncode.eUTF8);
 	return tmpStr;
 end
 

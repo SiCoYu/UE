@@ -163,8 +163,8 @@ function M:readTable(tableID, bytes)
     local table = self.mDicTable:value(tableID);
     table.mByteBuffer = bytes;
 
-    --bytes:setEndian(GlobalNS.EEndian.eLITTLE_ENDIAN);
-	bytes:setEndian(GlobalNS.CSSystem.EEndian.eLITTLE_ENDIAN);
+    --bytes:setEndian(GlobalNS.MEndian.eLITTLE_ENDIAN);
+	bytes:setEndian(GlobalNS.CSSystem.MEndian.eLITTLE_ENDIAN);
 	--local tmp = nil;
     local count = 0;
     --tmp, count = bytes:readUnsignedInt32(count);
