@@ -42,7 +42,7 @@ function M.execInit()
 	--主要执行 init 初始化
     --GlobalNS.CSSystem.init();
     --this.mNetMgr:init();
-	--GlobalNS.NoDestroyGo.init();
+	--GlobalNS.LayerPath.init();
 	this.mUiMgr:init();
 	
 	this.mFrameUpdateStatistics:init();

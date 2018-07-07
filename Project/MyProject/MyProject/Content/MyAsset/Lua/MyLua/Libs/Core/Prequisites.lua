@@ -112,7 +112,7 @@ MLoader("MyLua.Libs.Auxiliary.AuxLoader.AuxDownloader");
 MLoader("MyLua.Libs.FrameWork.ProcessSys");
 MLoader("MyLua.Libs.FrameWork.CSSystem");
 MLoader("MyLua.Libs.FrameWork.Config");
-MLoader("MyLua.Libs.FrameWork.NoDestroyGo");
+MLoader("MyLua.Libs.FrameWork.Layer.LayerPath");
 
 -- 工具
 MLoader("MyLua.Libs.Tools.MEndian");
@@ -143,7 +143,7 @@ MLoader("MyLua.Libs.Tools.UtilMsg");
 MLoader("MyLua.Libs.Resource.ResLoadData.ResPathType");
 
 -- 表系统
-MLoader("MyLua.Libs.Table.TableID");
+MLoader("MyLua.Libs.Table.TableId");
 
 MLoader("MyLua.Libs.Table.TableItemBodyBase");
 

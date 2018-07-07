@@ -26,7 +26,7 @@ M.ctor();
 
 -----------------------
 M = GlobalNS.StaticClass();
-M.clsName = "NoDestroyGo";
+M.clsName = "LayerPath";
 GlobalNS[M.clsName] = M;
 
 function M.ctor()

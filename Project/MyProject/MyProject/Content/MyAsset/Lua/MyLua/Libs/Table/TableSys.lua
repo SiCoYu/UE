@@ -16,13 +16,13 @@ GlobalNS[M.clsName] = M;
 
 function M:ctor()
 	self.mDicTable = GlobalNS.new(GlobalNS.MDictionary);
-    self.mDicTable:add(GlobalNS.TableID.TABLE_OBJECT, GlobalNS.new(GlobalNS.TableBase, "ObjectBase_client.bytes", "ObjectBase_client"));
-    self.mDicTable:add(GlobalNS.TableID.TABLE_CARD, GlobalNS.new(GlobalNS.TableBase, "CardBase_client.bytes", "CardBase_client"));
-    self.mDicTable:add(GlobalNS.TableID.TABLE_SKILL, GlobalNS.new(GlobalNS.TableBase, "SkillBase_client.bytes", "SkillBase_client"));    -- 添加一个表的步骤三
-    self.mDicTable:add(GlobalNS.TableID.TABLE_JOB, GlobalNS.new(GlobalNS.TableBase, "proBase_client.bytes", "proBase_client"));
-    self.mDicTable:add(GlobalNS.TableID.TABLE_SPRITEANI, GlobalNS.new(GlobalNS.TableBase, "FrameAni_client.bytes", "FrameAni_client"));
-    self.mDicTable:add(GlobalNS.TableID.TABLE_RACE, GlobalNS.new(GlobalNS.TableBase, "RaceBase_client.bytes", "RaceBase_client"));
-    self.mDicTable:add(GlobalNS.TableID.TABLE_STATE, GlobalNS.new(GlobalNS.TableBase, "StateBase_client.bytes", "StateBase_client"));
+    self.mDicTable:add(GlobalNS.TableId.TABLE_OBJECT, GlobalNS.new(GlobalNS.TableBase, "ObjectBase_client.bytes", "ObjectBase_client"));
+    self.mDicTable:add(GlobalNS.TableId.TABLE_CARD, GlobalNS.new(GlobalNS.TableBase, "CardBase_client.bytes", "CardBase_client"));
+    self.mDicTable:add(GlobalNS.TableId.TABLE_SKILL, GlobalNS.new(GlobalNS.TableBase, "SkillBase_client.bytes", "SkillBase_client"));    -- 添加一个表的步骤三
+    self.mDicTable:add(GlobalNS.TableId.TABLE_JOB, GlobalNS.new(GlobalNS.TableBase, "proBase_client.bytes", "proBase_client"));
+    self.mDicTable:add(GlobalNS.TableId.TABLE_SPRITEANI, GlobalNS.new(GlobalNS.TableBase, "FrameAni_client.bytes", "FrameAni_client"));
+    self.mDicTable:add(GlobalNS.TableId.TABLE_RACE, GlobalNS.new(GlobalNS.TableBase, "RaceBase_client.bytes", "RaceBase_client"));
+    self.mDicTable:add(GlobalNS.TableId.TABLE_STATE, GlobalNS.new(GlobalNS.TableBase, "StateBase_client.bytes", "StateBase_client"));
 end
 
 -- 返回一个表
@@ -104,43 +104,43 @@ end
 
 -- 加载一个表中一项的所有内容
 function M:loadOneTableOneItemAll(tableID, table, itemBase)
-    if (GlobalNS.TableID.TABLE_OBJECT == tableID) then
+    if (GlobalNS.TableId.TABLE_OBJECT == tableID) then
         itemBase:parseBodyByteBuffer(
 			table.mByteBuffer, 
 			itemBase.mItemHeader.mOffset, 
 			GlobalNS.TableObjectItemBody
 			);
-    elseif (GlobalNS.TableID.TABLE_CARD == tableID) then
+    elseif (GlobalNS.TableId.TABLE_CARD == tableID) then
         itemBase:parseBodyByteBuffer(
 			table.mByteBuffer, 
 			itemBase.mItemHeader.mOffset, 
 			GlobalNS.TableCardItemBody
 			);
-    elseif (GlobalNS.TableID.TABLE_SKILL == tableID) then  -- 添加一个表的步骤四
+    elseif (GlobalNS.TableId.TABLE_SKILL == tableID) then  -- 添加一个表的步骤四
         itemBase:parseBodyByteBuffer(
 			table.mByteBuffer, 
 			itemBase.mItemHeader.mOffset, 
 			GlobalNS.TableSkillItemBody
 			);
-    elseif (GlobalNS.TableID.TABLE_JOB == tableID) then
+    elseif (GlobalNS.TableId.TABLE_JOB == tableID) then
         itemBase:parseBodyByteBuffer(
 			table.mByteBuffer, 
 			itemBase.mItemHeader.mOffset, 
 			GlobalNS.TableJobItemBody
 			);
-    elseif (GlobalNS.TableID.TABLE_SPRITEANI == tableID) then
+    elseif (GlobalNS.TableId.TABLE_SPRITEANI == tableID) then
         itemBase:parseBodyByteBuffer(
 			table.mByteBuffer, 
 			itemBase.mItemHeader.mOffset, 
 			GlobalNS.TableSpriteAniItemBody
 			);
-    elseif (GlobalNS.TableID.TABLE_RACE == tableID) then
+    elseif (GlobalNS.TableId.TABLE_RACE == tableID) then
         itemBase:parseBodyByteBuffer(
 			table.mByteBuffer, 
 			itemBase.mItemHeader.mOffset, 
 			GlobalNS.TableRaceItemBody
 			);
-    elseif (GlobalNS.TableID.TABLE_STATE == tableID) then
+    elseif (GlobalNS.TableId.TABLE_STATE == tableID) then
         itemBase:parseBodyByteBuffer(
 			table.mByteBuffer, 
 			itemBase.mItemHeader.mOffset, 

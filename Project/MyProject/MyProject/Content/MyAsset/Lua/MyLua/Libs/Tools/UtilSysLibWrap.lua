@@ -11,6 +11,8 @@ function M.init()
 	--[[
 	@brief 关于lua5.2中table.getn方法不能用的代替方案
 	@url https://blog.csdn.net/zhuoyuetec/article/details/22192855
+	@brief 5.2的table没有getn这个函数了。用#操作符来取长度。
+	@url http://tieba.baidu.com/p/3259196700
 	]]
 	if(string.find(_VERSION, "5.3")) then
 		table.getn = function (t)

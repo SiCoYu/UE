@@ -33,7 +33,7 @@ function M:setGoName(name)
 end
 
 function M:init()
-	--self.mGo = GlobalNS.UtilApi.TransFindChildByPObjAndPath(GlobalNS.NoDestroyGo.mNoDestroyGo, self.mName);
+	--self.mGo = GlobalNS.UtilApi.TransFindChildByPObjAndPath(GlobalNS.LayerPath.mNoDestroyGo, self.mName);
 end
 
 function M:getLayerGo()
