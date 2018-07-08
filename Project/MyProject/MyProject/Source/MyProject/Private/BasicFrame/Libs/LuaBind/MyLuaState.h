@@ -31,7 +31,8 @@ public:
 	void onLuaError(const char* error);
 
 	lua_State* getLuaVM();
-	void doString(const char* str);
+
+	void doString(const char* chunk, const char* chunkName);
 	void doFile(const char* fileName);
 
 	void LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName);

@@ -101,9 +101,13 @@ MyLuaState* LuaSystem::getMyLuaState()
 	return this->mLuaState;
 }
 
-void LuaSystem::doString(std::string str)
+/**
+ * @param filename 这个是指 require 填入的 lua 模块的名字，例如 aaa.bbb.ccc ,不是完整的文件路径
+ */
+void LuaSystem::doString(std::string chunk, std::string filename)
 {
-	this->mLuaState->doString(str.c_str());
+	filename = this->mLuaState->LuaChunkName(filename.c_str());
+	this->mLuaState->doString(chunk.c_str(), filename.c_str());
 }
 
 void LuaSystem::doFile(std::string fileName)
@@ -115,8 +119,10 @@ void LuaSystem::runLuaScript()
 {
 	// 这个仅仅是加载代码，如果要执行，还要调用 lua_pcall 才能执行
 	//loadLuaFromFile(this->mLuaState, "MyLua.Module.Entry.MainEntry");
-	// 这个是加载代码并执行
-	this->doString("require(\"MyLua.Module.Entry.MainEntry\")");
+	// 这个是加载代码并执行，但是会先进入 LuaVM ，然后才加载
+	//this->doString("require(\"MyLua.Module.Entry.MainEntry\")", "MyLua.Module.Entry.MainEntry");
+	// 这个是加载代码并执行，不会先进入 LuaVM ，直接加载
+	this->doFile("MyLua.Module.Entry.MainEntry");
 }
 
 //int32 LuaSystem::onLuaPanic(lua_State *lua_State)

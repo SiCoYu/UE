@@ -89,8 +89,8 @@ void MyLuaState::_addLuaLoader()
 {
 	// 绑定自定义加载器
 	//MyLuaLoader::addCClosureLualoader(this->mLuaState, &MyLuaLoader::loadLuaFromBufferUseClosure);
-	MyLuaLoader::addCFunctionLualoader(this->mLuaState, &MyLuaLoader::loadLuaFromBufferUseFunction);
-	//MyLuaLoader::addCFunctionLualoader(this->mLuaState);
+	//MyLuaLoader::addCFunctionLualoader(this->mLuaState, &MyLuaLoader::loadLuaFromBufferUseFunction);
+	MyLuaLoader::addCFunctionLualoader(this->mLuaState, &MyLuaLoader::Loader);
 }
 
 void MyLuaState::_openLuaSocket()
@@ -129,9 +129,9 @@ int MyLuaState::onLuaStackTrace(lua_State *lua_State)
 	return 0;
 }
 
-void MyLuaState::doString(const char* str)
+void MyLuaState::doString(const char* chunk, const char* chunkName)
 {
-	luaL_dostring(this->mLuaState, str);
+	this->LuaLoadBuffer(chunk, strlen(chunk), chunkName);
 }
 
 void MyLuaState::doFile(const char* fileName)
