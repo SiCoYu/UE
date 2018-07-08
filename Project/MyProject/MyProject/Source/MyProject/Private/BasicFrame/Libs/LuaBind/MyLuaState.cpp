@@ -6,6 +6,9 @@
 #include "UtilEngineWrap.h"
 #include "UtilLuaSysLibWrap.h"
 #include "MacroDef.h"
+#include "Ctx.h"
+#include "LuaSystem.h"
+#include "LuaFileUtil.h"
 
 //#include "MyScriptPlugin/Source/ScriptPlugin/Private/LuaIntegration.h"
 // 相对于 MyProject\Plugins\MyScriptPlugin\Source
@@ -109,7 +112,7 @@ void MyLuaState::doString(const char* str)
 	luaL_dostring(this->mLuaState, str);
 }
 
-void MyLuaState::DoFile(const char* fileName)
+void MyLuaState::doFile(const char* fileName)
 {
 	const char* buffer = this->LoadFileBuffer(fileName);
 	fileName = this->LuaChunkName(fileName);
@@ -125,7 +128,7 @@ const char* MyLuaState::LoadFileBuffer(const char* fileName)
 	{
 		string error = string.Format("cannot open {0}: No such file or directory", fileName);
 		error += GLuaSystem->getLuaFileUtil()->FindFileError(fileName);
-		GLuaSystem->getMyLuaState()->onLuaError(error);
+		this->onLuaError(error);
 	}
 
 	return buffer;

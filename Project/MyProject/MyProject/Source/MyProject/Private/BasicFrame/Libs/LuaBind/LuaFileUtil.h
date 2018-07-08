@@ -25,6 +25,7 @@ public:
 
 	bool AddSearchPath(std::string path, bool front = false);
 	bool RemoveSearchPath(std::string path);
+	std::string FindFile(std::string fileName);
 	const char* ReadFile(std::string fileName, int& outSize);
 	std::string FindFileError(std::string fileName);
 

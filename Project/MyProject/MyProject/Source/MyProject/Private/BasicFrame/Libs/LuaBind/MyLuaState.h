@@ -14,6 +14,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class MyLuaState : public GObject
 {
 public:
+	static int onLuaStackTrace(lua_State *lua_State);
 	static int32 onLuaPanic(lua_State *lua_State);
 
 protected:
@@ -24,9 +25,6 @@ public:
 	~MyLuaState();
 
 public:
-	static int onLuaStackTrace(lua_State *lua_State);
-	static int32 onLuaPanic(lua_State *lua_State);
-
 	void init();
 	void dispose();
 

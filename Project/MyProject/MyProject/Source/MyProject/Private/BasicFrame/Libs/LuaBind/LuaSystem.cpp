@@ -4,6 +4,7 @@
 #include "MyLuaLoader.h"
 #include "UtilEngineWrap.h"
 #include "MyLuaState.h"
+#include "LuaFileUtil.h"
 #include "MyMemoryConstructorFlag.h"
 #include "MyMemoryAllocatorConfig.h"
 #include "MyMemoryDefaultAlloc.h"

@@ -227,12 +227,13 @@ int MyLuaLoader::loadLuaFromFile(lua_State *L, std::string fileName)
 static int Loader(lua_State *L)
 {
 	std::string fileName = lua_tostring(L, 1);
-	const char* buffer = GLuaSystem->getLuaFileUtil()->ReadFile(fileName);
+	int size = 0;
+	const char* buffer = GLuaSystem->getLuaFileUtil()->ReadFile(fileName, size);
 
 	if (buffer == nullptr)
 	{
 		std::string error = GLuaSystem->getLuaFileUtil()->FindFileError(fileName);
-		lua_pushstring(L, error);
+		lua_pushstring(L, error.c_str());
 		return 1;
 	}
 
@@ -241,7 +242,9 @@ static int Loader(lua_State *L)
 		fileName = GLuaSystem->getLuaFileUtil()->FindFile(fileName);
 	}
 
-	if (luaL_loadbuffer(L, buffer, buffer.Length, "@" + fileName) != 0)
+	fileName = "@" + fileName;
+
+	if (luaL_loadbuffer(L, buffer, size, fileName.c_str() != 0)
 	{
 		std::string err = lua_tostring(L, -1);
 		GLuaSystem->getMyLuaState()->onLuaError(err);

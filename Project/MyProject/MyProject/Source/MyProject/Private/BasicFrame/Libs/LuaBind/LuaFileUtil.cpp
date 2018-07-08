@@ -4,6 +4,8 @@
 #include "UtilStr.h"
 #include "UtilPath.h"
 #include "MyLuaLoader.h"
+#include "UtilPath.h"
+#include "Containers/UnrealString.h"		// FString
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -15,7 +17,18 @@ LuaFileUtil::LuaFileUtil()
 
 void LuaFileUtil::init()
 {
+	FString contentPath = UtilPath::GameContentDir();
+	std::string path = UtilStr::ConvFString2StdStr(contentPath);
+	std::string searchPath = "";
 
+	searchPath = path + "MyAsset/Lua/";
+	this->mSearchPathList.add(searchPath);
+
+	searchPath = path + "MyAsset/Lua/Socket/";
+	this->mSearchPathList.add(searchPath);
+
+	searchPath = path + "MyAsset/Lua/ZeroBraneStudio/";
+	this->mSearchPathList.add(searchPath);
 }
 
 void LuaFileUtil::dispose()
@@ -43,11 +56,11 @@ void LuaFileUtil::_mallocBuffer(size_t size)
 
 std::string LuaFileUtil::_getLuaPath(std::string luaPackage)
 {
-	std::string fullPath = UtilStr.msDefaultStr;
+	std::string fullPath = UtilStr::msDefaultStr;
 
-	if (UtilStr::IsNullOrEmpty(fileName))
+	if (UtilStr::IsNullOrEmpty(luaPackage))
 	{
-		fullPath = UtilStr.msDefaultStr;
+		fullPath = UtilStr::msDefaultStr;
 	}
 	else
 	{
@@ -76,7 +89,7 @@ std::string LuaFileUtil::_getLuaPath(std::string luaPackage)
 
 bool LuaFileUtil::AddSearchPath(std::string path, bool front = false)
 {
-	int index = this->mSearchPathList.IndexOf(path);
+	int index = this->mSearchPathList.indexOf(path);
 
 	if (index >= 0)
 	{
@@ -85,11 +98,11 @@ bool LuaFileUtil::AddSearchPath(std::string path, bool front = false)
 
 	if (front)
 	{
-		this->mSearchPathList.Insert(0, path);
+		this->mSearchPathList.insert(0, path);
 	}
 	else
 	{
-		this->mSearchPathList.Add(path);
+		this->mSearchPathList.add(path);
 	}
 
 	return true;
@@ -97,11 +110,11 @@ bool LuaFileUtil::AddSearchPath(std::string path, bool front = false)
 
 bool LuaFileUtil::RemoveSearchPath(std::string path)
 {
-	int index = this->mSearchPathList.IndexOf(path);
+	int index = this->mSearchPathList.indexOf(path);
 
 	if (index >= 0)
 	{
-		this->mSearchPathList.RemoveAt(index);
+		this->mSearchPathList.removeAt(index);
 		return true;
 	}
 
@@ -146,7 +159,7 @@ const char* LuaFileUtil::ReadFile(std::string fileName, int& outSize)
 			fseek(hFile, 0, SEEK_SET);
 			error = ferror(hFile);
 
-			this->_mallocBuffer();
+			this->_mallocBuffer(size + 1);
 
 			size_t retSize = fread(this->mBuffer, size, 1, hFile);
 			error = ferror(hFile);
