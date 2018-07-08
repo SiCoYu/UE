@@ -49,4 +49,44 @@ void UtilLuaSysLibWrap::LuaRemove(lua_State *L, int index)
 	lua_remove(L, index);
 }
 
+void UtilLuaSysLibWrap::LuaSetGlobal(lua_State *L, const char* name)
+{
+	lua_setglobal(L, name);
+}
+
+void UtilLuaSysLibWrap::LuaGetGlobal(lua_State *L, const char* name)
+{
+	lua_getglobal(L, name);
+}
+
+void UtilLuaSysLibWrap::LuaGetField(lua_State *L, int index, const char* key)
+{
+	lua_getfield(L, index, key);
+}
+
+void UtilLuaSysLibWrap::LuaRawGet(lua_State *L, int idx)
+{
+	lua_rawget(L, idx);
+}
+
+void UtilLuaSysLibWrap::LuaRawGetI(lua_State *L, int tableIndex, int index)
+{
+	lua_rawgeti(L, tableIndex, index);
+}
+
+void UtilLuaSysLibWrap::LuaPushString(lua_State *L, const char* str)
+{
+	lua_pushstring(L, str);
+}
+
+void UtilLuaSysLibWrap::LuaSetField(lua_State *L, int idx, const char* key)
+{
+	lua_setfield(L, idx, key);
+}
+
+void UtilLuaSysLibWrap::LuaPop(lua_State *L, int amount)
+{
+	lua_pop(L, amount);
+}
+
 MY_END_NAMESPACE

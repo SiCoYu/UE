@@ -34,41 +34,14 @@ public:
 	inline static lua_CFunction LuaAtPanic(lua_State *L, lua_CFunction panic);
 	inline static int LuaGetTop(lua_State *L);
 	inline static void LuaRemove(lua_State *L, int index);
-	inline static  void LuaSetGlobal(lua_State *L, const char* name)
-	{
-		lua_setglobal(L, name);
-	}
-
-	inline static void LuaGetGlobal(lua_State *L, const char* name)
-	{
-		lua_getglobal(L, name);
-	}
-	inline static void LuaGetField(lua_State *L, int index, const char* key)
-	{
-		lua_getfield(L, index, key);
-	}
-
-	inline static void LuaRawGet(lua_State *L, int idx)
-	{
-		lua_rawget(L, idx);
-	}
-
-	inline static void LuaRawGetI(lua_State *L, int tableIndex, int index)
-	{
-		lua_rawgeti(L, tableIndex, index);
-	}
-	inline static void LuaPushString(lua_State *L, const char* str)
-	{
-		lua_pushstring(L, str);
-	}
-	inline static void LuaSetField(lua_State *L, int idx, string key)
-	{
-		lua_setfield(L, idx, key);
-	}
-	inline static void LuaPop(lua_State *L, int amount)
-	{
-		lua_pop(L, amount);
-	}
+	inline static void LuaSetGlobal(lua_State *L, const char* name);
+	inline static void LuaGetGlobal(lua_State *L, const char* name);
+	inline static void LuaGetField(lua_State *L, int index, const char* key);
+	inline static void LuaRawGet(lua_State *L, int idx);
+	inline static void LuaRawGetI(lua_State *L, int tableIndex, int index);
+	inline static void LuaPushString(lua_State *L, const char* str);
+	inline static void LuaSetField(lua_State *L, int idx, const char* key);
+	inline static void LuaPop(lua_State *L, int amount);
 };
 
 MY_END_NAMESPACE
