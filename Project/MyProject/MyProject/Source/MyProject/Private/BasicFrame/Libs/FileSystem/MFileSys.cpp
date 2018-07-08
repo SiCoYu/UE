@@ -19,6 +19,19 @@ MFileSys::MFileSys()
 
 void MFileSys::init()
 {
+	FString contentPath = UtilPath::GameContentDir();
+	std::string path = UtilStr::ConvFString2StdStr(contentPath);
+	std::string searchPath = "";
+
+	searchPath = path + "MyAsset/Lua/";
+	this->mLuaSearchPathList.add(searchPath);
+
+	searchPath = path + "MyAsset/Lua/Socket/";
+	this->mLuaSearchPathList.add(searchPath);
+
+	searchPath = path + "MyAsset/Lua/ZeroBraneStudio/";
+	this->mLuaSearchPathList.add(searchPath);
+
 	// 初始化 SandBox 文件系统
 	//this->mSandboxPlatformFile = new FSandboxPlatformFile(false);
 	//FString OutputDirectory = GetOutputDirectoryOverride();
@@ -74,34 +87,34 @@ void MFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 
 }
 
-//std::string MFileSys::getLuaPath(std::string luaPackage)
-//{
-//	std::string old_value = ".";
-//	std::string new_value = "/";
-//
-//	std::string replace = UtilStr::replaceAllDistinct(luaPackage, old_value, new_value);
-//	std::string fullPath;
-//
-//	for (auto searchPath : this->mLuaSearchPathList.getList())
-//	{
-//		fullPath = searchPath + replace + ".lua";
-//
-//		if (UtilPath::FileExists(fullPath))
-//		{
-//			break;
-//		}
-//		else
-//		{
-//			fullPath = "";
-//		}
-//	}
-//
-//	return fullPath;
-//}
+std::string MFileSys::getLuaPath(std::string luaPackage)
+{
+	std::string old_value = ".";
+	std::string new_value = "/";
 
-//void MFileSys::addSearchPath(std::string path)
-//{
-//	
-//}
+	std::string replace = UtilStr::replaceAllDistinct(luaPackage, old_value, new_value);
+	std::string fullPath;
+
+	for (auto searchPath : this->mLuaSearchPathList.getList())
+	{
+		fullPath = searchPath + replace + ".lua";
+
+		if (UtilPath::FileExists(fullPath))
+		{
+			break;
+		}
+		else
+		{
+			fullPath = "";
+		}
+	}
+
+	return fullPath;
+}
+
+void MFileSys::addSearchPath(std::string path)
+{
+
+}
 
 MY_END_NAMESPACE

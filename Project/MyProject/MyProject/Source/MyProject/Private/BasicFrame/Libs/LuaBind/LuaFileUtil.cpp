@@ -87,7 +87,7 @@ std::string LuaFileUtil::_getLuaPath(std::string luaPackage)
 	return fullPath;
 }
 
-bool LuaFileUtil::AddSearchPath(std::string path, bool front = false)
+bool LuaFileUtil::AddSearchPath(std::string path, bool front)
 {
 	int index = this->mSearchPathList.indexOf(path);
 
@@ -123,7 +123,7 @@ bool LuaFileUtil::RemoveSearchPath(std::string path)
 
 std::string LuaFileUtil::FindFile(std::string fileName)
 {
-	return this->_getLuaPath();
+	return this->_getLuaPath(fileName);
 }
 
 const char* LuaFileUtil::ReadFile(std::string fileName, int& outSize)

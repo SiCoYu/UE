@@ -10,7 +10,7 @@
 #include "UtilLuaSysLibWrap.h"
 #include "MacroDef.h"
 #include "Ctx.h"
-#include "LyaSystem.h"
+#include "LuaSystem.h"
 #include "LuaFileUtil.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

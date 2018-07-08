@@ -114,21 +114,21 @@ void MyLuaState::doString(const char* str)
 
 void MyLuaState::doFile(const char* fileName)
 {
-	const char* buffer = this->LoadFileBuffer(fileName);
+	int size = 0;
+	const char* buffer = this->LoadFileBuffer(fileName, size);
 	fileName = this->LuaChunkName(fileName);
-	this->LuaLoadBuffer(buffer, fileName);
+	this->LuaLoadBuffer(buffer, size, fileName);
 }
 
-const char* MyLuaState::LoadFileBuffer(const char* fileName)
+const char* MyLuaState::LoadFileBuffer(const char* fileName, int& outSize)
 {
-	int size = 0;
-	const char* buffer = GLuaSystem->getLuaFileUtil()->ReadFile(fileName, size);
+	const char* buffer = GLuaSystem->getLuaFileUtil()->ReadFile(fileName, outSize);
 
 	if (buffer == nullptr)
 	{
-		string error = string.Format("cannot open {0}: No such file or directory", fileName);
+		std::string error = UtilStr::Format("cannot open {0}: No such file or directory", fileName);
 		error += GLuaSystem->getLuaFileUtil()->FindFileError(fileName);
-		this->onLuaError(error);
+		this->onLuaError(error.c_str());
 	}
 
 	return buffer;
@@ -165,7 +165,7 @@ void MyLuaState::LuaLoadBuffer(const char* buffer, size_t length, const char* ch
 	const char* err = UtilLuaSysLibWrap::LuaToString(this->mLuaState, -1);
 	UtilLuaSysLibWrap::LuaSetTop(this->mLuaState, oldTop - 1);
 
-	this->_onLuaError(err);
+	this->onLuaError(err);
 }
 
 MY_END_NAMESPACE

@@ -35,7 +35,7 @@ public:
 	void doFile(const char* fileName);
 
 	void LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName);
-	const char* LoadFileBuffer(const char* fileName);
+	const char* LoadFileBuffer(const char* fileName, int& outSize);
 	const char* LuaChunkName(const char* name);
 };
 

@@ -13,9 +13,9 @@ MY_BEGIN_NAMESPACE(MyNS)
 class LoadParam;
 
 /**
- * @brief 本地文件系统
- Engine\Source\Runtime\Launch\Private\Android\AndroidJNI.cpp
- */
+* @brief 本地文件系统
+Engine\Source\Runtime\Launch\Private\Android\AndroidJNI.cpp
+*/
 class MFileSys : public GObject
 {
 public:
@@ -27,7 +27,7 @@ protected:
 	// Engine\Source\Editor\UnrealEd\Private\Commandlets\CookCommandlet.cpp
 	// Engine\Source\Editor\UnrealEd\Private\CookOnTheFlyServer.cpp
 	FSandboxPlatformFile* mSandboxPlatformFile;
-	//MList<std::string> mLuaSearchPathList;
+	MList<std::string> mLuaSearchPathList;
 
 public:
 	MFileSys();
@@ -37,15 +37,15 @@ public:
 	void dispose();
 
 	FSandboxPlatformFile* getSandboxPlatformFile();
-	//std::string getLuaPath(std::string luaPackage);
+	std::string getLuaPath(std::string luaPackage);
 
 protected:
 	static void initFileSys();
 
 public:
-    // 获取本地可以读取的目录，但是不能写
+	// 获取本地可以读取的目录，但是不能写
 	static std::string getLocalReadDir();
-    // 获取本地可以写的目录
+	// 获取本地可以写的目录
 	static std::string getLocalWriteDir();
 	// 获取真正的加载参数
 	static void modifyLoadParam(std::string resPath, LoadParam* param);
@@ -65,7 +65,7 @@ public:
 	// Engine\Source\Runtime\Launch\Private\Android\AndroidJNI.cpp
 	// GFilePathBase = FString(nativePathString);
 
-	//void addSearchPath(std::string path);
+	void addSearchPath(std::string path);
 };
 
 MY_END_NAMESPACE
