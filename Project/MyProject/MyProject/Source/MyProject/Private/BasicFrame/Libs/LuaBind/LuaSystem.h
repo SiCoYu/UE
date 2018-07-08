@@ -37,6 +37,9 @@ public:
 	lua_State* getLuaVM();
 	MyLuaState* getMyLuaState();
 
+	/**
+	 * @param filename 这个是指 require 填入的 lua 模块的名字，例如 aaa.bbb.ccc ,不是完整的文件路径
+	 */
 	void doString(std::string chunk, std::string filename);
 	void doFile(std::string fileName);
 

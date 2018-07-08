@@ -19,6 +19,7 @@ public:
 
 protected:
 	lua_State* mLuaState;
+	std::string mFileFullPath;
 
 public:
 	MyLuaState();

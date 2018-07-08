@@ -51,6 +51,7 @@ void LuaFileUtil::_mallocBuffer(size_t size)
 
 		this->mBufferSize = 2 * size;
 		this->mBuffer = new char[this->mBufferSize];
+		memset(this->mBuffer, 0, this->mBufferSize);
 	}
 }
 

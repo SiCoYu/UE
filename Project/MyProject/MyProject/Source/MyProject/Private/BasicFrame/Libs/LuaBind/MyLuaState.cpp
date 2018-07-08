@@ -158,16 +158,16 @@ const char* MyLuaState::LoadFileBuffer(const char* fileName, int& outSize)
 
 const char* MyLuaState::LuaChunkName(const char* name)
 {
-	std::string ret = "";
+	this->mFileFullPath = "";
 
 	if (MacroDef::ENABLE_LUA_DEBUG)
 	{
-		ret = GLuaSystem->getLuaFileUtil()->FindFile(name);
+		this->mFileFullPath = GLuaSystem->getLuaFileUtil()->FindFile(name);
 	}
 
-	ret = "@" + ret;
+	this->mFileFullPath = "@" + this->mFileFullPath;
 
-	return ret.c_str();
+	return this->mFileFullPath.c_str();
 }
 
 void MyLuaState::LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName)
