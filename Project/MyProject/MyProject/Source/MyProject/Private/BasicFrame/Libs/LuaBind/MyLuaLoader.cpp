@@ -12,6 +12,7 @@
 #include "Ctx.h"
 #include "LuaSystem.h"
 #include "LuaFileUtil.h"
+#include "MyLuaState.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -46,26 +47,32 @@ int MyLuaLoader::checkResult(lua_State *L, int stat, const char *filename)
 	}
 }
 
-void MyLuaLoader::addCFunctionLualoader(lua_State *L)
+void MyLuaLoader::addCFunctionLualoader(lua_State *L, lua_CFunction handle)
 {
+	int top = lua_gettop(L);
+
 	lua_getglobal(L, "package");
 	lua_getfield(L, -1, "searchers");
+
 	int loaderTable = lua_gettop(L);
 
+	// 操作 searchers 表
 	for (int e = (int)lua_rawlen(L, loaderTable) + 1; e > 1; e--)
 	{
 		lua_rawgeti(L, loaderTable, e - 1);
 		lua_rawseti(L, loaderTable, e);
 	}
 
-	lua_pushcfunction(L, loadLuaFromBufferUseFunction);
+	lua_pushcfunction(L, handle);
 	lua_rawseti(L, loaderTable, 1);
 
-	lua_settop(L, 0);
+	lua_settop(L, top);
 }
 
-void MyLuaLoader::addCClosureLualoader(lua_State *L)
+void MyLuaLoader::addCClosureLualoader(lua_State *L, lua_CFunction handle)
 {
+	int top = lua_gettop(L);
+
 	lua_getglobal(L, "package");
 	int package = lua_gettop(L);
 	lua_getfield(L, -1, "searchers");
@@ -79,10 +86,10 @@ void MyLuaLoader::addCClosureLualoader(lua_State *L)
 
 	lua_pushvalue(L, package);
 	lua_pushinteger(L, 100);
-	lua_pushcclosure(L, loadLuaFromBufferUseClosure, 2);
+	lua_pushcclosure(L, handle, 2);
 	lua_rawseti(L, loaderTable, 1);
 
-	lua_settop(L, 0);
+	lua_settop(L, top);
 }
 
 int MyLuaLoader::loadLuaFromBufferUseFunction(lua_State *L)
@@ -224,7 +231,7 @@ int MyLuaLoader::loadLuaFromFile(lua_State *L, std::string fileName)
 	}
 }
 
-static int Loader(lua_State *L)
+int MyLuaLoader::Loader(lua_State *L)
 {
 	std::string fileName = lua_tostring(L, 1);
 	int size = 0;
@@ -244,10 +251,10 @@ static int Loader(lua_State *L)
 
 	fileName = "@" + fileName;
 
-	if (luaL_loadbuffer(L, buffer, size, fileName.c_str() != 0)
+	if (luaL_loadbuffer(L, buffer, size, fileName.c_str()) != 0)
 	{
 		std::string err = lua_tostring(L, -1);
-		GLuaSystem->getMyLuaState()->onLuaError(err);
+		GLuaSystem->getMyLuaState()->onLuaError(err.c_str());
 	}
 
 	return 1;

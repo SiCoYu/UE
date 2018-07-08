@@ -46,31 +46,14 @@ void MyLuaState::init()
 	// 报错回调
 	lua_atpanic(this->mLuaState, &MyLuaState::onLuaPanic);
 
-	// 导入 UE4 自己的类
-	// 参考 MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\LuaIntegration.cpp
-	// bool FLuaContext::Initialize(const FString& Code, UObject* Owner)
-	//LuaRegisterExportedClasses(this->L);
-	//LuaRegisterUnrealUtilities(this->L);
-	//UScriptContext* a = UtilEngineWrap::NewObject<UScriptContext>();
-	UScriptPluginExport::initPlugin(this->mLuaState);
+	this->_addLuaLoader();
 
-	// 打开 Socket
-	lua_getglobal(this->mLuaState, "package");
-	lua_getfield(this->mLuaState, -1, "preload");
+	if (MacroDef::ENABLE_LUA_DEBUG)
+	{
+		this->_openLuaSocket();
+	}
 
-	lua_pushcfunction(this->mLuaState, luaopen_socket_core);
-	lua_setfield(this->mLuaState, -2, "socket.core");
-
-	lua_pushcfunction(this->mLuaState, luaopen_mime_core);
-	lua_setfield(this->mLuaState, -2, "mime.core");
-
-	lua_pop(this->mLuaState, 2);
-
-	lua_settop(this->mLuaState, 0);
-
-	// 绑定自定义加载器
-	//MyLuaLoader::addCClosureLualoader(this->mLuaState);
-	MyLuaLoader::addCFunctionLualoader(this->mLuaState);
+	this->_registerEngineType();
 
 	// 绑定外部库
 	LuaCppBind::bind(this->mLuaState);
@@ -88,6 +71,45 @@ void MyLuaState::dispose()
 lua_State* MyLuaState::getLuaVM()
 {
 	return this->mLuaState;
+}
+
+void MyLuaState::_registerEngineType()
+{
+	// 导入 UE4 自己的类
+	// 参考 MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\LuaIntegration.cpp
+	// bool FLuaContext::Initialize(const FString& Code, UObject* Owner)
+	//LuaRegisterExportedClasses(this->L);
+	//LuaRegisterUnrealUtilities(this->L);
+	//UScriptContext* a = UtilEngineWrap::NewObject<UScriptContext>();
+
+	UScriptPluginExport::initPlugin(this->mLuaState);
+}
+
+void MyLuaState::_addLuaLoader()
+{
+	// 绑定自定义加载器
+	//MyLuaLoader::addCClosureLualoader(this->mLuaState, &MyLuaLoader::loadLuaFromBufferUseClosure);
+	MyLuaLoader::addCFunctionLualoader(this->mLuaState, &MyLuaLoader::loadLuaFromBufferUseFunction);
+	//MyLuaLoader::addCFunctionLualoader(this->mLuaState);
+}
+
+void MyLuaState::_openLuaSocket()
+{
+	// 打开 Socket
+	int top = lua_gettop(this->mLuaState);
+
+	lua_getglobal(this->mLuaState, "package");
+	lua_getfield(this->mLuaState, -1, "preload");
+
+	lua_pushcfunction(this->mLuaState, luaopen_socket_core);
+	lua_setfield(this->mLuaState, -2, "socket.core");
+
+	lua_pushcfunction(this->mLuaState, luaopen_mime_core);
+	lua_setfield(this->mLuaState, -2, "mime.core");
+
+	lua_pop(this->mLuaState, 2);
+
+	lua_settop(this->mLuaState, top);
 }
 
 int32 MyLuaState::onLuaPanic(lua_State *lua_State)

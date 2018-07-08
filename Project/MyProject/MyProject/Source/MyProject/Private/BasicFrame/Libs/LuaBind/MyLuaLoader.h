@@ -18,8 +18,8 @@ public:
 	static int removeZeroAndEof(const char* buffer, int size);
 	static int checkResult(lua_State *L, int stat, const char *filename);
 
-	static void addCFunctionLualoader(lua_State *L);
-	static void addCClosureLualoader(lua_State *L);
+	static void addCFunctionLualoader(lua_State *L, lua_CFunction handle);
+	static void addCClosureLualoader(lua_State *L, lua_CFunction handle);
 
 	static int loadLuaFromBufferUseFunction(lua_State *L);
 	static int loadLuaFromFileUseFunction(lua_State *L);

@@ -37,6 +37,11 @@ public:
 	void LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName);
 	const char* LoadFileBuffer(const char* fileName, int& outSize);
 	const char* LuaChunkName(const char* name);
+
+protected:
+	void _registerEngineType();
+	void _addLuaLoader();
+	void _openLuaSocket();
 };
 
 MY_END_NAMESPACE
