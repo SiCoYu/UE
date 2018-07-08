@@ -24,49 +24,50 @@ public:
 	//static int LUA_MULTRET;		// lua.h  LUA_MULTRET
 
 public:
-	inline static void PushTraceback(lua_State *L, lua_CFunction func)
+	inline static void PushTraceback(lua_State *L, lua_CFunction func);
+	inline static int LuaLoadBuffer(lua_State *L, const char * buff, int size, const char * name);
+	inline static int LuaPCall(lua_State *L, int nArgs, int nResults, int errfunc);
+	inline static void LuaSetTop(lua_State *L, int newTop);
+
+	inline static const char* LuaToString(lua_State *L, int index);
+	inline static void LuaPushFunction(lua_State *L, lua_CFunction func);
+	inline static lua_CFunction LuaAtPanic(lua_State *L, lua_CFunction panic);
+	inline static int LuaGetTop(lua_State *L);
+	inline static void LuaRemove(lua_State *L, int index);
+	inline static  void LuaSetGlobal(lua_State *L, const char* name)
 	{
-		lua_pushcclosure(L, func, 0);
+		lua_setglobal(L, name);
 	}
 
-	inline static int LuaLoadBuffer(lua_State *L, const char * buff, int size, const char * name)
+	inline static void LuaGetGlobal(lua_State *L, const char* name)
 	{
-		return luaL_loadbuffer(L, buff, size, name);
+		lua_getglobal(L, name);
+	}
+	inline static void LuaGetField(lua_State *L, int index, const char* key)
+	{
+		lua_getfield(L, index, key);
 	}
 
-	inline static int LuaPCall(lua_State *L, int nArgs, int nResults, int errfunc)
+	inline static void LuaRawGet(lua_State *L, int idx)
 	{
-		return lua_pcall(L, nArgs, nResults, errfunc);
+		lua_rawget(L, idx);
 	}
 
-	inline static void LuaSetTop(lua_State *L, int newTop)
+	inline static void LuaRawGetI(lua_State *L, int tableIndex, int index)
 	{
-		lua_settop(L, newTop);
+		lua_rawgeti(L, tableIndex, index);
 	}
-
-	inline static const char* LuaToString(lua_State *L, int index)
+	inline static void LuaPushString(lua_State *L, const char* str)
 	{
-		return lua_tostring(L, index);
+		lua_pushstring(L, str);
 	}
-
-	inline static void LuaPushFunction(lua_State *L, lua_CFunction func)
+	inline static void LuaSetField(lua_State *L, int idx, string key)
 	{
-		lua_pushcclosure(L, func, 0);
+		lua_setfield(L, idx, key);
 	}
-
-	inline static lua_CFunction LuaAtPanic(lua_State *L, lua_CFunction panic)
+	inline static void LuaPop(lua_State *L, int amount)
 	{
-		return lua_atpanic(L, panic);
-	}
-
-	inline static int LuaGetTop(lua_State *L)
-	{
-		return lua_gettop(L);
-	}
-
-	inline static void LuaRemove(lua_State *L, int index)
-	{
-		lua_remove(L, index);
+		lua_pop(L, amount);
 	}
 };
 

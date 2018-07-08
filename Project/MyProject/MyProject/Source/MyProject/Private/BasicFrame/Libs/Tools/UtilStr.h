@@ -6,6 +6,7 @@
 #include "NameTypes.h"		// FName
 #include "Internationalization/Text.h"	// FText
 #include <string>
+#include <vector>
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -51,6 +52,9 @@ public:
 
 	static std::string& replaceAll(std::string& str, const  std::string& old_value, const std::string& new_value);
 	static std::string& replaceAllDistinct(std::string& str, const  std::string& old_value, const std::string& new_value);
+
+	//注意：当字符串为空时，也会返回一个空字符串  
+	static void split(std::string& s, std::string& delim, std::vector< std::string >* ret);
 };
 
 MY_END_NAMESPACE

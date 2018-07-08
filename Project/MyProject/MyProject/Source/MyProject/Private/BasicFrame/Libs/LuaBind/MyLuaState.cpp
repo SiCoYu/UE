@@ -9,6 +9,7 @@
 #include "Ctx.h"
 #include "LuaSystem.h"
 #include "LuaFileUtil.h"
+#include <vector>
 
 //#include "MyScriptPlugin/Source/ScriptPlugin/Private/LuaIntegration.h"
 // 相对于 MyProject\Plugins\MyScriptPlugin\Source
@@ -110,6 +111,34 @@ void MyLuaState::_openLuaSocket()
 	lua_pop(this->mLuaState, 2);
 
 	lua_settop(this->mLuaState, top);
+}
+
+void MyLuaState::_InitPackagePath()
+{
+	UtilLuaSysLibWrap::LuaGetGlobal(this->mLuaState, "package");
+	UtilLuaSysLibWrap::LuaGetField(this->mLuaState, -1, "path");
+	std::string current = UtilLuaSysLibWrap::LuaToString(this->mLuaState, -1);
+
+	std::vector<std::string> strList;
+	std::string delim = ";";
+	UtilStr::split(current, delim, &strList);
+	std::string path;
+	std::string old_value = "\\";
+	std::string new_value = "/";
+
+	for (int i = 0; i < strList.size(); i++)
+	{
+		if (!UtilStr::IsNullOrEmpty(strList[i]))
+		{
+			path = UtilStr::replaceAllDistinct(strList[i], old_value, new_value);
+			GLuaSystem->getLuaFileUtil()->AddSearchPath(path);
+		}
+	}
+
+	// 清空 Lua 中的查找目录
+	UtilLuaSysLibWrap::LuaPushString(this->mLuaState, "");
+	UtilLuaSysLibWrap::LuaSetField(this->mLuaState, -3, "path");
+	UtilLuaSysLibWrap::LuaPop(this->mLuaState, 2);
 }
 
 int32 MyLuaState::onLuaPanic(lua_State *lua_State)

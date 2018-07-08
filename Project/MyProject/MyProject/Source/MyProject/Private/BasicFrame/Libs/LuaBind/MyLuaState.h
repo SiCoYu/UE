@@ -44,6 +44,7 @@ protected:
 	void _registerEngineType();
 	void _addLuaLoader();
 	void _openLuaSocket();
+	void _InitPackagePath()
 };
 
 MY_END_NAMESPACE
