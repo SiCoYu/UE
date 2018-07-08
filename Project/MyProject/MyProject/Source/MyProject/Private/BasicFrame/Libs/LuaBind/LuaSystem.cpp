@@ -88,7 +88,7 @@ void LuaSystem::dispose()
 
 LuaFileUtil* LuaSystem::getLuaFileUtil()
 {
-	return mLuaFileUtil;
+	return this->mLuaFileUtil;
 }
 
 lua_State* LuaSystem::getLuaVM()

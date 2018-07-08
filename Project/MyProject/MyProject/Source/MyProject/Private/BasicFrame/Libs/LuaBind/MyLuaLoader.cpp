@@ -18,15 +18,18 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 int MyLuaLoader::removeZeroAndEof(const char* buffer, int size)
 {
-	for (int index = size - 1; index >= 0; --index)
+	if (nullptr != buffer)
 	{
-		if (buffer[index] == 0 || buffer[index] == -1)
+		for (int index = size - 1; index >= 0; --index)
 		{
-			--size;
-		}
-		else
-		{
-			break;
+			if (buffer[index] == 0 || buffer[index] == -1)
+			{
+				--size;
+			}
+			else
+			{
+				break;
+			}
 		}
 	}
 

@@ -148,7 +148,6 @@ const char* LuaFileUtil::ReadFile(std::string fileName, int& outSize)
 		hFile = fopen(fullPath, "rb");
 		int error = 0;
 		int size = 0;
-		char* buffer = nullptr;
 
 		if (nullptr != hFile)
 		{
@@ -164,7 +163,7 @@ const char* LuaFileUtil::ReadFile(std::string fileName, int& outSize)
 			size_t retSize = fread(this->mBuffer, size, 1, hFile);
 			error = ferror(hFile);
 
-			size = MyLuaLoader::removeZeroAndEof(buffer, size);
+			size = MyLuaLoader::removeZeroAndEof(this->mBuffer, size);
 			outSize = size;
 
 			fclose(hFile);
