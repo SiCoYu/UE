@@ -149,7 +149,8 @@ int32 MyLuaState::onLuaPanic(lua_State *lua_State)
 
 void MyLuaState::onLuaError(const char* error)
 {
-	UE_LOG(LuaLog, Error, TEXT("PANIC: unprotected error in call to Lua API(%s)"), error);
+	// ANSI_TO_TCHAR(error) ，一定要转换成 Unicode 编码，否则 log 窗口显示乱码
+	UE_LOG(LuaLog, Error, TEXT("(%s)"), ANSI_TO_TCHAR(error));
 }
 
 int MyLuaState::onLuaStackTrace(lua_State *lua_State)
@@ -157,6 +158,11 @@ int MyLuaState::onLuaStackTrace(lua_State *lua_State)
 	const char* error = UtilLuaSysLibWrap::LuaToString(lua_State, -1);
 	GLuaSystem->getMyLuaState()->onLuaError(error);
 
+	return 0;
+}
+
+int MyLuaState::Collect(lua_State *lua_State)
+{
 	return 0;
 }
 

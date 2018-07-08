@@ -16,6 +16,7 @@ class MyLuaState : public GObject
 public:
 	static int onLuaStackTrace(lua_State *lua_State);
 	static int32 onLuaPanic(lua_State *lua_State);
+	static int Collect(lua_State *lua_State);
 
 protected:
 	lua_State* mLuaState;
