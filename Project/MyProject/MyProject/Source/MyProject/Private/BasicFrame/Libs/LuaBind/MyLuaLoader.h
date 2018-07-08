@@ -28,6 +28,8 @@ public:
 	static int loadLuaFromFileUseClosure(lua_State *L);
 
 	static int loadLuaFromFile(lua_State *L, std::string fileName);
+
+	static int Loader(lua_State *L);
 };
 
 MY_END_NAMESPACE

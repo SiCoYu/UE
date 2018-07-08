@@ -1,9 +1,11 @@
 #include <MyProject.h>
 #include "MyLuaState.h"
+#include <string>
 #include "LuaCppBind.h"
 #include "MyLuaLoader.h"
 #include "UtilEngineWrap.h"
 #include "UtilLuaSysLibWrap.h"
+#include "MacroDef.h"
 
 //#include "MyScriptPlugin/Source/ScriptPlugin/Private/LuaIntegration.h"
 // 相对于 MyProject\Plugins\MyScriptPlugin\Source
@@ -85,25 +87,15 @@ lua_State* MyLuaState::getLuaVM()
 	return this->mLuaState;
 }
 
-void MyLuaState::doString(const char* str)
-{
-	luaL_dostring(this->mLuaState, str);
-}
-
-void MyLuaState::doFile(const char* fileName)
-{
-	luaL_dofile(this->mLuaState, fileName);
-}
-
 int32 MyLuaState::onLuaPanic(lua_State *lua_State)
 {
 	UE_LOG(LuaLog, Error, TEXT("PANIC: unprotected error in call to Lua API(%s)"), ANSI_TO_TCHAR(lua_tostring(lua_State, -1)));
 	return 0;
 }
 
-void MyLuaState::_onLuaError(const char* error)
+void MyLuaState::onLuaError(const char* error)
 {
-	
+	UE_LOG(LuaLog, Error, TEXT("PANIC: unprotected error in call to Lua API(%s)"), error);
 }
 
 int MyLuaState::onLuaStackTrace(lua_State *lua_State)
@@ -112,7 +104,48 @@ int MyLuaState::onLuaStackTrace(lua_State *lua_State)
 	return 0;
 }
 
-void MyLuaState::_LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName)
+void MyLuaState::doString(const char* str)
+{
+	luaL_dostring(this->mLuaState, str);
+}
+
+void MyLuaState::DoFile(const char* fileName)
+{
+	const char* buffer = this->LoadFileBuffer(fileName);
+	fileName = this->LuaChunkName(fileName);
+	this->LuaLoadBuffer(buffer, fileName);
+}
+
+const char* MyLuaState::LoadFileBuffer(const char* fileName)
+{
+	int size = 0;
+	const char* buffer = GLuaSystem->getLuaFileUtil()->ReadFile(fileName, size);
+
+	if (buffer == nullptr)
+	{
+		string error = string.Format("cannot open {0}: No such file or directory", fileName);
+		error += GLuaSystem->getLuaFileUtil()->FindFileError(fileName);
+		GLuaSystem->getMyLuaState()->onLuaError(error);
+	}
+
+	return buffer;
+}
+
+const char* MyLuaState::LuaChunkName(const char* name)
+{
+	std::string ret = "";
+
+	if (MacroDef::ENABLE_LUA_DEBUG)
+	{
+		ret = GLuaSystem->getLuaFileUtil()->FindFile(name);
+	}
+
+	ret = "@" + ret;
+
+	return ret.c_str();
+}
+
+void MyLuaState::LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName)
 {
 	UtilLuaSysLibWrap::PushTraceback(this->mLuaState, &MyLuaState::onLuaStackTrace);
 	int oldTop = UtilLuaSysLibWrap::LuaGetTop(this->mLuaState);

@@ -7,6 +7,11 @@
 #include "Prequisites.h"
 //#include <iostream>		// ifstream
 //#include <fstream>
+#include "UtilLuaSysLibWrap.h"
+#include "MacroDef.h"
+#include "Ctx.h"
+#include "LyaSystem.h"
+#include "LuaFileUtil.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -217,6 +222,32 @@ int MyLuaLoader::loadLuaFromFile(lua_State *L, std::string fileName)
 
 		return retCode;
 	}
+}
+
+static int Loader(lua_State *L)
+{
+	std::string fileName = lua_tostring(L, 1);
+	const char* buffer = GLuaSystem->getLuaFileUtil()->ReadFile(fileName);
+
+	if (buffer == nullptr)
+	{
+		std::string error = GLuaSystem->getLuaFileUtil()->FindFileError(fileName);
+		lua_pushstring(L, error);
+		return 1;
+	}
+
+	if (MacroDef::ENABLE_LUA_DEBUG)
+	{
+		fileName = GLuaSystem->getLuaFileUtil()->FindFile(fileName);
+	}
+
+	if (luaL_loadbuffer(L, buffer, buffer.Length, "@" + fileName) != 0)
+	{
+		std::string err = lua_tostring(L, -1);
+		GLuaSystem->getMyLuaState()->onLuaError(err);
+	}
+
+	return 1;
 }
 
 MY_END_NAMESPACE

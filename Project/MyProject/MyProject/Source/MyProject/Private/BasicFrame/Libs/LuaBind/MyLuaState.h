@@ -24,18 +24,21 @@ public:
 	~MyLuaState();
 
 public:
+	static int onLuaStackTrace(lua_State *lua_State);
+	static int32 onLuaPanic(lua_State *lua_State);
+
 	void init();
 	void dispose();
+
+	void onLuaError(const char* error);
 
 	lua_State* getLuaVM();
 	void doString(const char* str);
 	void doFile(const char* fileName);
 
-	static int onLuaStackTrace(lua_State *lua_State);
-
-protected:
-	void _onLuaError(const char* error);
-	void _LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName);
+	void LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName);
+	const char* LoadFileBuffer(const char* fileName);
+	const char* LuaChunkName(const char* name);
 };
 
 MY_END_NAMESPACE

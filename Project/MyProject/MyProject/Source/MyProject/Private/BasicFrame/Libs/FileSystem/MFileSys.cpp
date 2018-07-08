@@ -87,34 +87,34 @@ void MFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
 
 }
 
-std::string MFileSys::getLuaPath(std::string luaPackage)
-{
-	std::string old_value = ".";
-	std::string new_value = "/";
+//std::string MFileSys::getLuaPath(std::string luaPackage)
+//{
+//	std::string old_value = ".";
+//	std::string new_value = "/";
+//
+//	std::string replace = UtilStr::replaceAllDistinct(luaPackage, old_value, new_value);
+//	std::string fullPath;
+//
+//	for (auto searchPath : this->mLuaSearchPathList.getList())
+//	{
+//		fullPath = searchPath + replace + ".lua";
+//
+//		if (UtilPath::FileExists(fullPath))
+//		{
+//			break;
+//		}
+//		else
+//		{
+//			fullPath = "";
+//		}
+//	}
+//
+//	return fullPath;
+//}
 
-	std::string replace = UtilStr::replaceAllDistinct(luaPackage, old_value, new_value);
-	std::string fullPath;
-
-	for (auto searchPath : this->mLuaSearchPathList.getList())
-	{
-		fullPath = searchPath + replace + ".lua";
-
-		if (UtilPath::FileExists(fullPath))
-		{
-			break;
-		}
-		else
-		{
-			fullPath = "";
-		}
-	}
-
-	return fullPath;
-}
-
-void MFileSys::addSearchPath(std::string path)
-{
-	
-}
+//void MFileSys::addSearchPath(std::string path)
+//{
+//	
+//}
 
 MY_END_NAMESPACE
