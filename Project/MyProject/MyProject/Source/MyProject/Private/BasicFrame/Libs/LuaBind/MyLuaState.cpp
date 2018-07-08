@@ -154,7 +154,9 @@ void MyLuaState::onLuaError(const char* error)
 
 int MyLuaState::onLuaStackTrace(lua_State *lua_State)
 {
-	const char* err = UtilLuaSysLibWrap::LuaToString(lua_State, -1);
+	const char* error = UtilLuaSysLibWrap::LuaToString(lua_State, -1);
+	GLuaSystem->getMyLuaState()->onLuaError(error);
+
 	return 0;
 }
 
@@ -202,6 +204,7 @@ const char* MyLuaState::LuaChunkName(const char* name)
 void MyLuaState::LuaLoadBuffer(const char* buffer, size_t length, const char* chunkName)
 {
 	UtilLuaSysLibWrap::PushTraceback(this->mLuaState, &MyLuaState::onLuaStackTrace);
+
 	int oldTop = UtilLuaSysLibWrap::LuaGetTop(this->mLuaState);
 
 	if (UtilLuaSysLibWrap::LuaLoadBuffer(this->mLuaState, buffer, length, chunkName) == 0)
