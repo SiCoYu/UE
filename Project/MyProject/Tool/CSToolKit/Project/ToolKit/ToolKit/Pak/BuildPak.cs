@@ -10,21 +10,26 @@ namespace ToolKit
      */
     public class BuildPak
     {
-        protected string mUE4EngineRootPath;
+        protected string mUE4EngineRootPath;    // UE4 Engine 根目录
+        protected string mProjectRootPath;      // Project 根目录
         protected string mOutPath;
         protected bool mIsBuildPakSuccess;
         protected List<string> mBuildPakFileList;   // 打包文件列表
 
         public BuildPak()
         {
-            this.mUE4EngineRootPath = "";
-            this.mOutPath = "";
+            this.mUE4EngineRootPath = @"D:\File\Self\UE\UnrealEngine";
+            this.mProjectRootPath = @"D:\File\Self\UE\UE\Project\MyProject\MyProject";
+            this.mOutPath = @"D:\File\Self\UE\UE\Project\MyProject\Test";
             this.mIsBuildPakSuccess = false;
+            this.mBuildPakFileList = new List<string>();
         }
 
         public void init()
         {
-
+            this.addPakFile("BaseMaterial.uasset");
+            this.addPakFile("GrayMaterial.uasset");
+            this.addPakFile("UFO.uasset");
         }
 
         public void dispose()
@@ -50,6 +55,12 @@ namespace ToolKit
         public void setOutPath(string value)
         {
             this.mOutPath = value;
+        }
+
+        public void addPakFile(string fileName)
+        {
+            fileName = this.mProjectRootPath + "/" + @"Content\MyAsset\MyFly\Flying\Meshes" + "/" + fileName;
+            this.mBuildPakFileList.Add(fileName);
         }
 
         public void build()
