@@ -1,6 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Text;
 
 namespace ToolKit
 {
@@ -10,93 +10,79 @@ namespace ToolKit
      */
     public class BuildPak
     {
-        private void Btn_MultipleBuild_Click(object sender, EventArgs e)
+        protected string mUE4EngineRootPath;
+        protected string mOutPath;
+        protected bool mIsBuildPakSuccess;
+        protected List<string> mBuildPakFileList;   // 打包文件列表
+
+        public BuildPak()
         {
-            //sb,sw,textWirter均是为了生成Json字符串而使用的  
-            StringBuilder sb = new StringBuilder();
-            StringWriter sw = new StringWriter(sb);
-            //JsonTextWriter textWriter = new JsonTextWriter(sw);
-            //textWriter.Formatting = Formatting.Indented;
-            DateTime Today = DateTime.UtcNow;
-            int second = Today.Second;
-
-            //生成文件的MD5值  
-            string fileMD5 = StrToMD5(second.ToString());
-
-            //textWriter.WriteStartObject();
-            //textWriter.WritePropertyName("FileVersion");
-            //textWriter.WriteStartObject();
-            //textWriter.WritePropertyName("MD5");
-            //textWriter.WriteValue(fileMD5);
-            //textWriter.WriteEndObject();
-
-            // 检查选中的引擎根目录,其目录下是否包含有UnrealPak.exe文件  
-            if (!File.Exists(TextBox_MultipleEnginePath.Text + @"\Engine\Binaries\Win64\UnrealPak.exe"))
-            {
-                MessageBox.Show("打包失败，没有找到 UnrealPak.exe，引擎路径不存在！");
-                Btn_MultipleBuild.Enabled = true;
-                Btn_MultipleBuild.Text = "打包";
-                return;
-            }
-
-            textWriter.WritePropertyName("Files");
-            textWriter.WriteStartArray();
-
-            //根据多选框选中的文件来对文件进行打包  
-            string[] assetNameArray = TextBox_MultipleUassetPath.Text.Split(' ');
-            for (int i = 0; i < assetNameArray.Length; i++)
-            {
-                string assetFullName = assetNameArray[i].Replace('\\', '/');
-                string[] assetArray = assetFullName.Split('/');
-                string assetName = assetArray[assetArray.Length - 1].Replace(".uasset", "");
-                string assetMD5 = StrToMD5(assetName + second.ToString());
-                string outPath = TextBox_MultipleOutPath.Text + "\\" + assetName + ".pak";
-
-                //通过Process相关类来多次调用UnrealPak.exe程序来打包  
-                ProcessStartInfo info = new ProcessStartInfo();
-                info.FileName = TextBox_MultipleEnginePath.Text + @"\Engine\Binaries\Win64\UnrealPak.exe";
-                info.Arguments = @outPath + @" " + @assetFullName;
-                info.WindowStyle = ProcessWindowStyle.Minimized;
-                Process process = Process.Start(info);
-                process.WaitForExit();
-
-                //将文件的信息写入到Json文件中  
-                textWriter.WriteStartObject();
-                textWriter.WritePropertyName("FileName");
-                textWriter.WriteValue(assetName);
-                textWriter.WritePropertyName("MD5");
-                textWriter.WriteValue(assetMD5);
-                textWriter.WriteEndObject();
-            }
-            MessageBox.Show("生成pak完毕！");
-            textWriter.WriteEndArray();
-            textWriter.WriteEndObject();
-
-            Btn_MultipleBuild.Text = "打包";
-            Btn_MultipleBuild.Enabled = true;
-
-            string saveData =
-                TextBox_MultipleEnginePath.Text + ";" +
-                TextBox_MultipleUassetPath.Text + ";" +
-                TextBox_MultipleOutPath.Text;
-            File.WriteAllText(Environment.CurrentDirectory + "/save.txt", saveData);
-
-            //生成Version.txt文件  
-            File.WriteAllText(TextBox_MultipleOutPath.Text + "/Version.txt", sb.ToString());
+            this.mUE4EngineRootPath = "";
+            this.mOutPath = "";
+            this.mIsBuildPakSuccess = false;
         }
-        
-        public string StrToMD5(string str)
-        {
-            byte[] data = Encoding.GetEncoding("GB2312").GetBytes(str);
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] OutBytes = md5.ComputeHash(data);
 
-            string OutString = "";
-            for (int i = 0; i < OutBytes.Length; i++)
+        public void init()
+        {
+
+        }
+
+        public void dispose()
+        {
+
+        }
+
+        public string getUE4EngineRootPath()
+        {
+            return this.mUE4EngineRootPath;
+        }
+
+        public void setUE4EngineRootPath(string value)
+        {
+            this.mUE4EngineRootPath = value;
+        }
+
+        public string getOutPath()
+        {
+            return this.mOutPath;
+        }
+
+        public void setOutPath(string value)
+        {
+            this.mOutPath = value;
+        }
+
+        public void build()
+        {
+            // 检查选中的引擎根目录,其目录下是否包含有UnrealPak.exe文件  
+            if (!File.Exists(this.mUE4EngineRootPath + @"\Engine\Binaries\Win64\UnrealPak.exe"))
             {
-                OutString += OutBytes[i].ToString("x2");
+                this.mIsBuildPakSuccess = false;
             }
-            return OutString.ToLower();
+            else
+            {
+                //根据多选框选中的文件来对文件进行打包  
+                int index = 0;
+                int listLen = this.mBuildPakFileList.Count;
+
+                while(index < listLen)
+                {
+                    string assetFullName = this.mBuildPakFileList[index].Replace('\\', '/');
+                    string[] assetArray = assetFullName.Split('/');
+                    string assetName = assetArray[assetArray.Length - 1].Replace(".uasset", "");
+                    string outPath = this.mOutPath + "\\" + assetName + ".pak";
+
+                    //通过Process相关类来多次调用UnrealPak.exe程序来打包  
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.FileName = this.mUE4EngineRootPath + @"\Engine\Binaries\Win64\UnrealPak.exe";
+                    info.Arguments = @outPath + @" " + @assetFullName;
+                    info.WindowStyle = ProcessWindowStyle.Minimized;
+                    Process process = Process.Start(info);
+                    process.WaitForExit();
+
+                    index += 1;
+                }
+            }
         }
     }
 }
