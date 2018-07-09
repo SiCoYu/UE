@@ -65,35 +65,69 @@ namespace ToolKit
 
         public void build()
         {
-            // 检查选中的引擎根目录,其目录下是否包含有UnrealPak.exe文件  
+            // 检查选中的引擎根目录,其目录下是否包含有[UnrealPak.exe]文件
             if (!File.Exists(this.mUE4EngineRootPath + @"\Engine\Binaries\Win64\UnrealPak.exe"))
             {
                 this.mIsBuildPakSuccess = false;
             }
             else
             {
-                //根据多选框选中的文件来对文件进行打包  
-                int index = 0;
-                int listLen = this.mBuildPakFileList.Count;
-
-                while(index < listLen)
-                {
-                    string assetFullName = this.mBuildPakFileList[index].Replace('\\', '/');
-                    string[] assetArray = assetFullName.Split('/');
-                    string assetName = assetArray[assetArray.Length - 1].Replace(".uasset", "");
-                    string outPath = this.mOutPath + "\\" + assetName + ".pak";
-
-                    //通过Process相关类来多次调用UnrealPak.exe程序来打包  
-                    ProcessStartInfo info = new ProcessStartInfo();
-                    info.FileName = this.mUE4EngineRootPath + @"\Engine\Binaries\Win64\UnrealPak.exe";
-                    info.Arguments = @outPath + @" " + @assetFullName;
-                    info.WindowStyle = ProcessWindowStyle.Minimized;
-                    Process process = Process.Start(info);
-                    process.WaitForExit();
-
-                    index += 1;
-                }
+                this._buildOneToOne();
+                this._buildMultiToOne();
             }
+        }
+
+        public void _buildOneToOne()
+        {
+            int index = 0;
+            int listLen = this.mBuildPakFileList.Count;
+            string assetFullName = "";
+            string[] assetArray = null;
+            string assetName = "";
+            string outPath = "";
+
+            while (index < listLen)
+            {
+                assetFullName = this.mBuildPakFileList[index].Replace('\\', '/');
+                assetArray = assetFullName.Split('/');
+                assetName = assetArray[assetArray.Length - 1].Replace(".uasset", "");
+                outPath = this.mOutPath + "\\" + assetName + ".pak";
+
+                //通过[Process]相关类来多次调用[UnrealPak.exe]程序来打包  
+                ProcessStartInfo info = new ProcessStartInfo();
+                info.FileName = this.mUE4EngineRootPath + @"\Engine\Binaries\Win64\UnrealPak.exe";
+                info.Arguments = @outPath + @" " + @assetFullName;
+                info.WindowStyle = ProcessWindowStyle.Minimized;
+                Process process = Process.Start(info);
+                process.WaitForExit();
+
+                index += 1;
+            }
+        }
+
+        public void _buildMultiToOne()
+        {
+            int index = 0;
+            int listLen = this.mBuildPakFileList.Count;
+            string outPath = this.mOutPath + "\\" + "MultiOne" + ".pak";
+            string cmdParams = outPath;
+            string assetFullName = "";
+
+            while (index < listLen)
+            {
+                assetFullName = this.mBuildPakFileList[index].Replace('\\', '/');
+                cmdParams = cmdParams + @" " + @assetFullName;
+
+                index += 1;
+            }
+
+            //通过[Process]相关类来多次调用[UnrealPak.exe]程序来打包  
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = this.mUE4EngineRootPath + @"\Engine\Binaries\Win64\UnrealPak.exe";
+            info.Arguments = cmdParams;
+            info.WindowStyle = ProcessWindowStyle.Minimized;
+            Process process = Process.Start(info);
+            process.WaitForExit();
         }
     }
 }
