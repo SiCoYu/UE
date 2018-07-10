@@ -10,6 +10,7 @@ enum class LogTypeId
 	eLogDataStruct,		// 数据结构日志
 	eLogPriorityListCheck,
 	eLogNoPriorityListCheck, 
+	eLogDownload,		// 下载
 };
 
 MY_END_NAMESPACE

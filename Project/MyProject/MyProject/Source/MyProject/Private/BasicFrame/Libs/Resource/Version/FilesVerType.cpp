@@ -1,10 +1,8 @@
-﻿namespace SDK.Lib
-{
-    public enum FilesVerType
-    {
-        eResourceVer,
-        eStreamingAssetsVer,
-        ePersistentDataVer,
-        eWebVer,
-    }
-}
+﻿#include "MyProject.h"
+#include "FilesVerType.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+
+
+MY_END_NAMESPACE

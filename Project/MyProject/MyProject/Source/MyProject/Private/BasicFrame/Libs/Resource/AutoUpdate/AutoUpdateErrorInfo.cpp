@@ -1,27 +1,8 @@
-﻿namespace SDK.Lib
-{
-    /**
-     * @brief 自动更新错误原因
-     */
-    public class AutoUpdateErrorInfo
-    {
-        protected AutoUpdateErrorCode mAutoUpdateErrorCode;
-        protected string mAutoUpdateErrorDesc;
+﻿#include "MyProject.h"
+#include "AutoUpdateErrorInfo.h"
 
-        public AutoUpdateErrorInfo()
-        {
-            this.mAutoUpdateErrorCode = AutoUpdateErrorCode.eErrorNo;
-            this.mAutoUpdateErrorDesc = "";
-        }
+MY_BEGIN_NAMESPACE(MyNS)
 
-        public AutoUpdateErrorCode getErrorCode()
-        {
-            return this.mAutoUpdateErrorCode;
-        }
 
-        public void setErrorCode(AutoUpdateErrorCode value)
-        {
-            this.mAutoUpdateErrorCode = value;
-        }
-    }
-}
+
+MY_END_NAMESPACE
