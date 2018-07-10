@@ -5,6 +5,10 @@
 #include <string>
 #include "EventDispatchDelegate.h"
 #include "MEncode.h"
+#include "FileOpState.h"
+#include "MFileAccess.h"
+#include "MFileMode.h"
+#include "MSeekOrigin.h"
 #include "PlatformDefine.h"
 
 class FArchive;
@@ -23,39 +27,6 @@ class AddOnceAndCallOnceEventDispatch;
  */
 class MDataStream : public GObject/*, public IDispatchObject*/
 {
-	enum FileOpState
-	{
-		eNoOp = 0,      // 无操作
-		eOpening = 1,   // 打开中
-		eOpenSuccess = 2,   // 打开成功
-		eOpenFail = 3,      // 打开失败
-		eOpenClose = 4,     // 关闭
-	};
-
-	enum MFileMode
-	{
-		eCreateNew = 1,
-		eCreate = 2,
-		eOpen = 3,
-		eOpenOrCreate = 4,
-		eTruncate = 5,
-		eAppend = 6
-	};
-
-	enum MFileAccess
-	{
-		eRead = 1,
-		eWrite = 2,
-		eReadWrite = 3
-	};
-
-	enum MSeekOrigin
-	{
-		eBegin = 0,
-		eCurrent = 1,
-		eEnd = 2
-	};
-
 protected:
 	FArchive* mFileStream;
 	std::string mFilePath;

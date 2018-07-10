@@ -8,6 +8,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 class AddOnceEventDispatch;
+class FileVerInfo;
 
 /**
  * @brief 一组文件的统计信息
@@ -45,7 +46,7 @@ public:
 	bool hasLoadFailed();
 
 	// 增加更新的文件
-	void addLoadingPath(std::string path, FileVerInfo fileVerInfo /*, bool isAddTotalNum = false*/);
+	void addLoadingPath(std::string path, FileVerInfo* fileVerInfo /*, bool isAddTotalNum = false*/);
 	void removeLoadingPath(std::string path/*, bool isDecTotalNum = false*/);
 	void addLoadedPath(std::string path/*, bool isAddTotalNum = false*/);
 	void addFailedPath(std::string path/*, bool isAddTotalNum = false*/);
@@ -62,9 +63,9 @@ public:
 	void logDownloadDetailInfo();
 
 	// 获取当前资源是否更新了
-	bool isResUpdatedByResPath(string path);
+	bool isResUpdatedByResPath(std::string path);
 	// 获取当前资源是否更新了
-	bool isResUpdatedByABPath(string path);
+	bool isResUpdatedByABPath(std::string path);
 	void addProgressHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> handle);
 	void removeProgressHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> handle);
 };
