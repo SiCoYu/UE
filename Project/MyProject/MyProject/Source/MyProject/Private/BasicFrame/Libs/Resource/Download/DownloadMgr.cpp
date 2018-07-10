@@ -7,6 +7,9 @@
 #include "HttpWebDownloadItem.h"
 #include "RefCount.h"
 #include "SafePointer.h"
+#include "Ctx.h"
+#include "LogTypeId.h"
+#include "LogSys.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -72,33 +75,37 @@ void DownloadMgr::resetDownloadParam(DownloadParam* loadParam)
 // 资源是否已经加载，包括成功和失败
 bool DownloadMgr::isDownloaded(std::string path)
 {
+	bool ret = false;
+
     DownloadItem* downloadItem = this->getDownloadItem(path);
     if (downloadItem == nullptr)
     {
-        return false;
+        ret = false;
     }
     else if (downloadItem->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded() ||
         downloadItem->getRefCountResLoadResultNotify()->getResLoadState()->hasFailed())
     {
-        return true;
+        ret = true;
     }
 
-    return false;
+    return ret;
 }
 
 bool DownloadMgr::isSuccessDownLoaded(std::string resUniqueId)
 {
+	bool ret = false;
+
     DownloadItem* downloadItem = this->getDownloadItem(resUniqueId);
     if (downloadItem == nullptr)
     {
-        return false;
+		ret = false;
     }
     else if (downloadItem->getRefCountResLoadResultNotify()->getResLoadState()->hasSuccessLoaded())
     {
-        return true;
+		ret = true;
     }
 
-    return false;
+    return ret;
 }
 
 DownloadItem* DownloadMgr::getDownloadItem(std::string resUniqueId)
@@ -311,7 +318,7 @@ void DownloadMgr::unloadNoRef(std::string resUniqueId)
     }
     else
     {
-                
+		GLogSys->log("DownloadMgr::unloadNoRef, no resUniqueId", LogTypeId::eLogDownload);
     }
 }
 
@@ -420,9 +427,9 @@ DownloadItem* DownloadMgr::findDownloadItemFormPool()
 // 资源加载完成，触发下一次加载
 void DownloadMgr::onMsgRouteResLoad(uint eventId, IDispatchObject* dispObj)
 {
-    /*MsgRouteBase msg = dispObj as MsgRouteBase;
-    DownloadItem loadItem = (msg as LoadedWebResMR).m_task as DownloadItem;
-    loadItem.handleResult();*/
+    //MsgRouteBase msg = dispObj as MsgRouteBase;
+    //DownloadItem loadItem = (msg as LoadedWebResMR).m_task as DownloadItem;
+    //loadItem.handleResult();
 }
 
 MY_END_NAMESPACE
