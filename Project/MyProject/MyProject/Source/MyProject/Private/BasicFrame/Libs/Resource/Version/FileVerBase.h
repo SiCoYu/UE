@@ -1,35 +1,40 @@
 ﻿#pragma once
 
+#include <string.h>
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+class AddOnceAndCallOnceEventDispatch;
+
 class FileVerBase
 {
-    public string mCurVer;              // 当前程序的版本号
-    public FileVerInfo mFileVerInfo;    // 这个主要是记录文件版本的版本
+public:
+	std::string mCurVer;              // 当前程序的版本号
+    FileVerInfo* mFileVerInfo;    // 这个主要是记录文件版本的版本
 
-    public string mMajorVersion;    // 主版本
-    public string mMinorVersion;    // 次版本
-    public string mPatchVersion;    // 补丁版本
-    public string mTimeStamp;       // 时间戳
+	std::string mMajorVersion;    // 主版本
+	std::string mMinorVersion;    // 次版本
+	std::string mPatchVersion;    // 补丁版本
+	std::string mTimeStamp;       // 时间戳
 
-    public bool mIsMiniLoadSuccess;
-    public bool mIsVerLoadSuccess;
+    bool mIsMiniLoadSuccess;
+    bool mIsVerLoadSuccess;
 
-    public AddOnceAndCallOnceEventDispatch mMiniLoadedDispatch;
-    public AddOnceAndCallOnceEventDispatch mLoadedDispatch;
+    AddOnceAndCallOnceEventDispatch* mMiniLoadedDispatch;
+    AddOnceAndCallOnceEventDispatch mLoadedDispatch;
 
-    public FileVerBase()
+public:
+	FileVerBase()
     {
         this.mIsMiniLoadSuccess = false;
         this.mIsVerLoadSuccess = false;
 
         this.mCurVer = "";           // 当前版本，当前日期，例如 201606091136-201606091136-0(主版本-次版本-补丁版本)
-        this.mFileVerInfo = new FileVerInfo();
+        this.mFileVerInfo = MY_NEW FileVerInfo();
 
-        this.mMiniLoadedDispatch = new AddOnceAndCallOnceEventDispatch();
-        this.mLoadedDispatch = new AddOnceAndCallOnceEventDispatch();
+        this.mMiniLoadedDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
+        this.mLoadedDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
 
         this.mMajorVersion = "0";    // 主版本
         this.mMinorVersion = "0";    // 次版本
@@ -37,34 +42,34 @@ class FileVerBase
         this.mTimeStamp = "0";       // 时间戳
     }
 
-    public string getDetailVersionString()
+    std::string getDetailVersionString()
     {
-        string ret = "";
+		std::string ret = "";
 
         ret = string.Format("{0}-{1}-{2}-{3}", this.mMajorVersion, this.mMinorVersion, this.mPatchVersion, this.mTimeStamp);
 
         return ret;
     }
 
-    public string getDotVersionString()
+    std::string getDotVersionString()
     {
-        string ret = "";
+		std::string ret = "";
 
         ret = string.Format("{0}.{1}.{2}", this.mMajorVersion, this.mMinorVersion, this.mPatchVersion);
 
         return ret;
     }
 
-    public string getVersionString()
+    std::string getVersionString()
     {
-        string ret = "";
+		std::string ret = "";
 
         ret = string.Format("{0}-{1}-{2}", this.mMajorVersion, this.mMinorVersion, this.mPatchVersion);
 
         return ret;
     }
 
-    public void saveMiniVerToPersistentPath()
+    void std::saveMiniVerToPersistentPath()
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -99,13 +104,13 @@ class FileVerBase
         }
     }
 
-    public void parseMiniFile(string text)
+    void parseMiniFile(string text)
     {
-        string[] lineSplitStr = { UtilEngineWrap.CR_LF };
-        string[] equalSplitStr = { UtilEngineWrap.SEPARATOR };
-        string[] lineList = text.Split(lineSplitStr, StringSplitOptions.RemoveEmptyEntries);
+		std::string[] lineSplitStr = { UtilEngineWrap.CR_LF };
+		std::string[] equalSplitStr = { UtilEngineWrap.SEPARATOR };
+		std::string[] lineList = text.Split(lineSplitStr, StringSplitOptions.RemoveEmptyEntries);
         int lineIdx = 0;
-        string[] equalList = null;
+		std::string[] equalList = null;
 
         // 第一行是版本号
         lineIdx = 0;
@@ -181,7 +186,8 @@ class FileVerBase
     }
 
     // 这个主要是解析版本文件的
-    protected void loadFormText(string text, MDictionary<string, FileVerInfo> dic, MDictionary<string, FileVerInfo> abDic)
+protected:
+	void _loadFormText(string text, MDictionary<string, FileVerInfo> dic, MDictionary<string, FileVerInfo> abDic)
     {
         string[] lineSplitStr = { UtilEngineWrap.CR_LF };
         string[] equalSplitStr = { UtilEngineWrap.SEPARATOR };

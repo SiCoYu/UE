@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <string>
+#include "MDictionary.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -9,34 +11,36 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 class ResRedirect
 {
-    protected MDictionary<string, ResRedirectItem> mOrigPath2ItemDic;   // 原始的资源加载目录
-    protected MDictionary<string, ResRedirectItem> mABPath2ItemDic;     // AB 资源加载目录
+protected:
+	MDictionary<std::string, ResRedirectItem> mOrigPath2ItemDic;   // 原始的资源加载目录
+    MDictionary<std::string, ResRedirectItem> mABPath2ItemDic;     // AB 资源加载目录
 
-    public ResRedirect()
+public:
+	ResRedirect()
     {
-        this.mOrigPath2ItemDic = new MDictionary<string, ResRedirectItem>();
-        this.mABPath2ItemDic = new MDictionary<string, ResRedirectItem>();
+        this.mOrigPath2ItemDic = MY_NEW MDictionary<string, ResRedirectItem>();
+        this.mABPath2ItemDic = MY_NEW MDictionary<string, ResRedirectItem>();
     }
 
-    public void init()
+    void init()
     {
             
     }
 
-    public void dispose()
+    void dispose()
     {
 
     }
 
     // 清理之前缓存信息
-    public void clearCacheInfo()
+    void clearCacheInfo()
     {
         this.mOrigPath2ItemDic.clear();
         this.mABPath2ItemDic.clear();
     }
 
     // 资源是否可以重定向，只有在 Version_S.txt 或者在 Version_P.txt 中的资源才能判断是存在的
-    public bool canResRedirect(string origPath, bool isABAsset)
+    bool canResRedirect(string origPath, bool isABAsset)
     {
         bool ret = false;
 
@@ -47,7 +51,7 @@ class ResRedirect
     }
 
     // isABAsset 是否是 AssetBundles 资源目录
-    public ResRedirectItem getResRedirectItem(string origPath, bool isABAsset)
+    ResRedirectItem getResRedirectItem(string origPath, bool isABAsset)
     {
         ResRedirectItem item = null;
         FileVerInfo fileVerInfo = null;

@@ -1,26 +1,33 @@
 ﻿#pragma once
 
+#include <string>
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+class ServerVer;
+class LocalVer;
+class AddOnceAndCallOnceEventDispatch;
 
 /**
  * @brief 版本系统，文件格式   path=value
  */
 class VersionSys
 {
-    public ServerVer mServerVer;
-    public LocalVer mLocalVer;
+public:
+	ServerVer* mServerVer;
+    LocalVer* mLocalVer;
 
-    public AddOnceAndCallOnceEventDispatch mMiniLoadResultDispatch;
-    public AddOnceAndCallOnceEventDispatch mLoadResultDispatch;
+    AddOnceAndCallOnceEventDispatch* mMiniLoadResultDispatch;
+    AddOnceAndCallOnceEventDispatch* mLoadResultDispatch;
 
-    public bool mIsNeedUpdateApp;       // 是否需要更新 App
-    public bool mIsNeedUpdateVerFile;   // 是否需要更新版本文件
+    bool mIsNeedUpdateApp;       // 是否需要更新 App
+    bool mIsNeedUpdateVerFile;   // 是否需要更新版本文件
 
-    public string mMiniVer;    // mini 版本文件版本号
+    std::string mMiniVer;    // mini 版本文件版本号
 
-    public VersionSys()
+public:
+	VersionSys()
     {
         this.mMiniVer = UtilEngineWrap.Range(0, int.MaxValue).ToString();
         this.mMiniLoadResultDispatch = new AddOnceAndCallOnceEventDispatch();
@@ -30,19 +37,19 @@ class VersionSys
         this.mLocalVer = new LocalVer();
     }
 
-    public void init()
+    void init()
     {
             
     }
 
-    public void loadAllLocalVer()
+    void loadAllLocalVer()
     {
         this.mLocalVer.loadAllLocalVer();
     }
 
-    public string getMajorVersion()
+    std::string getMajorVersion()
     {
-        string ret = "";
+        std::string ret = "";
 
         if(this.mServerVer.mIsMiniLoadSuccess)
         {
@@ -56,9 +63,9 @@ class VersionSys
         return ret;
     }
 
-    public string getMinorVersion()
+    std::string getMinorVersion()
     {
-        string ret = "";
+		std::string ret = "";
 
         if (this.mServerVer.mIsMiniLoadSuccess)
         {
@@ -72,9 +79,9 @@ class VersionSys
         return ret;
     }
 
-    public string getPatchVersion()
+	std::string getPatchVersion()
     {
-        string ret = "";
+		std::string ret = "";
 
         if (this.mServerVer.mIsMiniLoadSuccess)
         {
@@ -88,9 +95,9 @@ class VersionSys
         return ret;
     }
 
-    public string getTimeStamp()
+	std::string getTimeStamp()
     {
-        string ret = "";
+		std::string ret = "";
 
         if (this.mServerVer.mIsMiniLoadSuccess)
         {
@@ -104,9 +111,9 @@ class VersionSys
         return ret;
     }
 
-    public string getDetailVersionString()
+	std::string getDetailVersionString()
     {
-        string ret = "";
+		std::string ret = "";
 
         if (this.mServerVer.mIsMiniLoadSuccess)
         {
@@ -120,9 +127,9 @@ class VersionSys
         return ret;
     }
 
-    public string getDotVersionString()
+	std::string getDotVersionString()
     {
-        string ret = "";
+		std::string ret = "";
 
         if (this.mServerVer.mIsMiniLoadSuccess)
         {
@@ -136,9 +143,9 @@ class VersionSys
         return ret;
     }
 
-    public string getVersionString()
+	std::string getVersionString()
     {
-        string ret = "";
+		std::string ret = "";
 
         if (this.mServerVer.mIsMiniLoadSuccess)
         {
@@ -152,7 +159,7 @@ class VersionSys
         return ret;
     }
 
-    public void loadWebMiniVerFile()
+    void loadWebMiniVerFile()
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -163,7 +170,7 @@ class VersionSys
         this.mServerVer.loadMiniVerFile();
     }
 
-    public void loadWebVerFile()
+    void loadWebVerFile()
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -226,7 +233,7 @@ class VersionSys
         }
     }
 
-    public void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
+    void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
     {
         if (this.mServerVer.mIsMiniLoadSuccess)
         {
@@ -260,7 +267,7 @@ class VersionSys
         this.mMiniLoadResultDispatch.dispatchEvent(null);
     }
 
-    public void onWebVerLoaded(IDispatchObject dispObj, uint uniqueId)
+    void onWebVerLoaded(IDispatchObject dispObj, uint uniqueId)
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -270,7 +277,7 @@ class VersionSys
         this.mLoadResultDispatch.dispatchEvent(null);
     }
 
-    public string getFileVer(string path)
+	std::string getFileVer(string path)
     {
         if(this.mIsNeedUpdateVerFile)
         {
@@ -291,7 +298,7 @@ class VersionSys
     }
 
     // 保存 VerFileName.VER_MINI 版本文件和 VerFileName.VER_P 版本文件到 Persistent 文件夹
-    public void saveWebMiniOrPVerToPersistentPath()
+    void saveWebMiniOrPVerToPersistentPath()
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -307,7 +314,7 @@ class VersionSys
     }
 
     // 如果 WebVerFile 版本文件更细了，就更新本地版本文件
-    public void updateLocalVerFile()
+    void updateLocalVerFile()
     {
         if(null != this.mLocalVer.mPath2Ver_P_Dic)
         {

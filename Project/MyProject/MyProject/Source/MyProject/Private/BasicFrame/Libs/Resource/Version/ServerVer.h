@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+#include <string>
+#include "MDictionary.h"
+#include "FileVerBase.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -7,19 +10,21 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 一个位置的所有版本 Resources \ StreamingAssets \ Application.persistentDataPath \ web 
  */
-public class ServerVer : FileVerBase
+public class ServerVer : public FileVerBase
 {
     // MiniVersion 必须每一次从服务器上下载
-    public MDictionary<string, FileVerInfo> mPath2HashDic;      // Resources 路径到版本信息
-    public MDictionary<string, FileVerInfo> mABPath2HashDic;    // AB 资源包路径到版本信息
+public:
+	MDictionary<string, FileVerInfo> mPath2HashDic;      // Resources 路径到版本信息
+    MDictionary<string, FileVerInfo> mABPath2HashDic;    // AB 资源包路径到版本信息
 
-    public ServerVer()
+public:
+	ServerVer()
     {
         this.mPath2HashDic = new MDictionary<string, FileVerInfo>();
         this.mABPath2HashDic = new MDictionary<string, FileVerInfo>();
     }
 
-    virtual public void loadMiniVerFile()
+    virtual void loadMiniVerFile()
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -41,7 +46,8 @@ public class ServerVer : FileVerBase
     }
 
     // 加载一个表完成
-    protected void onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
+protected:
+	void _onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -86,7 +92,8 @@ public class ServerVer : FileVerBase
     }
 
     // 加载版本文件
-    public void loadVerFile()
+public:
+	void loadVerFile()
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -108,7 +115,7 @@ public class ServerVer : FileVerBase
     }
 
     // 加载一个表完成
-    protected void onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
+    void _onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
     {
         if (MacroDef.ENABLE_LOG)
         {
@@ -146,7 +153,8 @@ public class ServerVer : FileVerBase
         this.mLoadedDispatch.dispatchEvent(null);
     }
 
-    public void savePVerToPersistentPath()
+public:
+	void savePVerToPersistentPath()
     {
         if (MacroDef.ENABLE_LOG)
         {
