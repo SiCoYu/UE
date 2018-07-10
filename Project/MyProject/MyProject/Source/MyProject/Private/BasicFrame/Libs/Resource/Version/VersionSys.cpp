@@ -1,12 +1,17 @@
 ﻿#include "MyProject.h"
 #include "VersionSys.h"
 #include "UtilMath.h"
+#include "AddOnceAndCallOnceEventDispatch.h"
+#include "ServerVer.h"
+#include "LocalVer.h"
+#include "MConvert.h"
+#include "MConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 VersionSys::VersionSys()
 {
-	this->mMiniVer = UtilMath::range(0, UtilMath::msIntMaxValue).ToString();
+	this->mMiniVer = MConvert::convInt2Str(UtilMath::range(0, UtilMath::msIntMaxValue));
 	this->mMiniLoadResultDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
 	this->mLoadResultDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
 
@@ -21,7 +26,7 @@ void init()
 
 void loadAllLocalVer()
 {
-	this->mLocalVer.loadAllLocalVer();
+	this->mLocalVer->loadAllLocalVer();
 }
 
 std::string VersionSys::getMajorVersion()
