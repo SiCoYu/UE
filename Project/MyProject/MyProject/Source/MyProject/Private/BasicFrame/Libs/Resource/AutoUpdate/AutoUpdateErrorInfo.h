@@ -1,27 +1,36 @@
-﻿namespace SDK.Lib
+﻿#pragma once
+
+#include <string>
+#include "AutoUpdateErrorCode.h"
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+/**
+ * @brief 自动更新错误原因
+ */
+class AutoUpdateErrorInfo
 {
-    /**
-     * @brief 自动更新错误原因
-     */
-    public class AutoUpdateErrorInfo
+protected:
+	AutoUpdateErrorCode mAutoUpdateErrorCode;
+    std::string mAutoUpdateErrorDesc;
+
+public:
+	AutoUpdateErrorInfo()
     {
-        protected AutoUpdateErrorCode mAutoUpdateErrorCode;
-        protected string mAutoUpdateErrorDesc;
-
-        public AutoUpdateErrorInfo()
-        {
-            this.mAutoUpdateErrorCode = AutoUpdateErrorCode.eErrorNo;
-            this.mAutoUpdateErrorDesc = "";
-        }
-
-        public AutoUpdateErrorCode getErrorCode()
-        {
-            return this.mAutoUpdateErrorCode;
-        }
-
-        public void setErrorCode(AutoUpdateErrorCode value)
-        {
-            this.mAutoUpdateErrorCode = value;
-        }
+        this.mAutoUpdateErrorCode = AutoUpdateErrorCode.eErrorNo;
+        this.mAutoUpdateErrorDesc = "";
     }
-}
+
+    AutoUpdateErrorCode getErrorCode()
+    {
+        return this.mAutoUpdateErrorCode;
+    }
+
+    void setErrorCode(AutoUpdateErrorCode value)
+    {
+        this.mAutoUpdateErrorCode = value;
+    }
+};
+
+MY_END_NAMESPACE
