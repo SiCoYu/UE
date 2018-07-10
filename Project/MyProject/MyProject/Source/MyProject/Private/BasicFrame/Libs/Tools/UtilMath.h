@@ -19,6 +19,7 @@ public:
 
 	static /*const*/ FQuat UnitQuat/* = FQuat::Identity*/;
 	static /*const*/ float EPSILON/* = 1e-3f*/;
+	static int msIntMaxValue;
 
 public:
 	static FVector Euler(FRotator& rotator);
@@ -54,6 +55,10 @@ public:
 	static FQuat getRotateByStartAndEndOrient(FVector startOrient, FVector destOrient);
 	static FQuat getRotateByOrient(FVector& forward);
 	static FQuat convQuatFromEuler(FVector& euler);
+
+	// [a, b]
+	static int range(int a, int b);
+	static float unitRange();
 };
 
 MY_END_NAMESPACE

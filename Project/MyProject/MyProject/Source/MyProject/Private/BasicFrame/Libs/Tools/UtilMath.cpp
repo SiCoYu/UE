@@ -1,6 +1,10 @@
 #include "MyProject.h"
 #include "UtilMath.h"
 #include "MacroDef.h"
+#include <cstdlib>		// srand \ rand
+#include <ctime>		// time
+#include <stdlib.h>		// RAND_MAX
+#include <limits>		// std::numeric_limits<int>
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -11,6 +15,7 @@ FVector UtilMath::ForwardVec3 = FVector::ForwardVector;
 FVector UtilMath::UpVec3 = FVector::UpVector;
 FQuat UtilMath::UnitQuat = FQuat::Identity;
 float UtilMath::EPSILON = 1e-3f;
+int UtilMath::msIntMaxValue = std::numeric_limits<int>::max();
 
 FVector UtilMath::Euler(FRotator& rotator)
 {
@@ -148,6 +153,27 @@ FQuat UtilMath::getRotateByOrient(FVector& forward)
 FQuat UtilMath::convQuatFromEuler(FVector& euler)
 {
 	return UtilMath::MakeQuatFromEuler(euler);
+}
+
+int UtilMath::range(int a, int b)
+{
+	// 取得(0, x)的随机整数：rand() % x；
+	// 取得(a, b)的随机整数：rand() % (b - a)；
+	// 取得[a, b)的随机整数：rand() % (b - a) + a；
+	// 取得[a, b]的随机整数：rand() % (b - a + 1) + a；
+	// 取得(a, b]的随机整数：rand() % (b - a) + a + 1；
+	float ret = 0;
+	srand((unsigned)time(NULL));
+	ret = rand() % (b - a + 1) + a;
+	return ret;
+}
+
+float UtilMath::unitRange()
+{
+	float ret = 0;
+	srand((unsigned)time(NULL));
+	ret = rand() / RAND_MAX;
+	return ret;
 }
 
 MY_END_NAMESPACE
