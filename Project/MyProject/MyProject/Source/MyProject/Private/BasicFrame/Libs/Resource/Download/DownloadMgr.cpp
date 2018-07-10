@@ -304,7 +304,7 @@ void DownloadMgr::unloadNoRef(std::string resUniqueId)
 		this->mLoadData->mPath2LoadItemDic[resUniqueId]->unload();
 		this->mLoadData->mPath2LoadItemDic[resUniqueId]->reset();
 		this->mLoadData->mNoUsedLoadItemList.add(this->mLoadData->mPath2LoadItemDic[resUniqueId]);
-		UtilMap::Remove(this->mLoadData->mPath2LoadItemDic.getData(), resUniqueId);
+		this->mLoadData->mPath2LoadItemDic.remove(resUniqueId);
 
         // 检查是否存在还没有执行的 LoadItem，如果存在就直接移除
 		this->removeWillLoadItem(resUniqueId);
