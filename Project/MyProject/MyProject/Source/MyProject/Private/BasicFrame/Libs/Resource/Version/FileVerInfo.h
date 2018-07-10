@@ -15,10 +15,7 @@ public:
     int mFileSize;      // 文件大小
 
 public:
-	bool isNoVerInfo()
-    {
-        return this->mFileSize == 0;
-    }
+	bool isNoVerInfo();
 };
 
 MY_END_NAMESPACE

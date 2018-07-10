@@ -19,31 +19,12 @@ public:
     FileVerInfo* mFileVerInfo;        // 文件的基本信息
 
 public:
-	ResRedirectItem(string origPath = "", int redirect = (int)ResLoadType.eLoadResource)
-    {
-        this->mOrigPath = origPath;
-        this->mResLoadType = (ResLoadType)redirect;
-    }
+	ResRedirectItem(std::string origPath = "", int redirect = (int)ResLoadType.eLoadResource);
 
-    bool isRedirectR()
-    {
-        return this->mResLoadType == ResLoadType.eLoadResource;
-    }
-
-    bool isRedirectS()
-    {
-        return this->mResLoadType == ResLoadType.eLoadStreamingAssets;
-    }
-
-    bool isRedirectP()
-    {
-        return this->mResLoadType == ResLoadType.eLoadLocalPersistentData;
-    }
-
-    bool isRedirectW()
-    {
-        return this->mResLoadType == ResLoadType.eLoadWeb;
-    }
+	bool isRedirectR();
+	bool isRedirectS();
+	bool isRedirectP();
+	bool isRedirectW();
 };
 
 MY_END_NAMESPACE

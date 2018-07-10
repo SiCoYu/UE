@@ -16,21 +16,10 @@ protected:
     std::string mAutoUpdateErrorDesc;
 
 public:
-	AutoUpdateErrorInfo()
-    {
-        this->mAutoUpdateErrorCode = AutoUpdateErrorCode.eErrorNo;
-        this->mAutoUpdateErrorDesc = "";
-    }
+	AutoUpdateErrorInfo();
 
-    AutoUpdateErrorCode getErrorCode()
-    {
-        return this->mAutoUpdateErrorCode;
-    }
-
-    void setErrorCode(AutoUpdateErrorCode value)
-    {
-        this->mAutoUpdateErrorCode = value;
-    }
+	AutoUpdateErrorCode getErrorCode();
+	void setErrorCode(AutoUpdateErrorCode value);
 };
 
 MY_END_NAMESPACE
