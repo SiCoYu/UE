@@ -17,7 +17,7 @@ public:
 public:
 	bool isNoVerInfo()
     {
-        return this.mFileSize == 0;
+        return this->mFileSize == 0;
     }
 };
 

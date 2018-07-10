@@ -18,18 +18,18 @@ protected:
 public:
 	AutoUpdateErrorInfo()
     {
-        this.mAutoUpdateErrorCode = AutoUpdateErrorCode.eErrorNo;
-        this.mAutoUpdateErrorDesc = "";
+        this->mAutoUpdateErrorCode = AutoUpdateErrorCode.eErrorNo;
+        this->mAutoUpdateErrorDesc = "";
     }
 
     AutoUpdateErrorCode getErrorCode()
     {
-        return this.mAutoUpdateErrorCode;
+        return this->mAutoUpdateErrorCode;
     }
 
     void setErrorCode(AutoUpdateErrorCode value)
     {
-        this.mAutoUpdateErrorCode = value;
+        this->mAutoUpdateErrorCode = value;
     }
 };
 

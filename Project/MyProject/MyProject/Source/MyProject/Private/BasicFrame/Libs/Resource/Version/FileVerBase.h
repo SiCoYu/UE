@@ -27,26 +27,26 @@ public:
 public:
 	FileVerBase()
     {
-        this.mIsMiniLoadSuccess = false;
-        this.mIsVerLoadSuccess = false;
+        this->mIsMiniLoadSuccess = false;
+        this->mIsVerLoadSuccess = false;
 
-        this.mCurVer = "";           // 当前版本，当前日期，例如 201606091136-201606091136-0(主版本-次版本-补丁版本)
-        this.mFileVerInfo = MY_NEW FileVerInfo();
+        this->mCurVer = "";           // 当前版本，当前日期，例如 201606091136-201606091136-0(主版本-次版本-补丁版本)
+        this->mFileVerInfo = MY_NEW FileVerInfo();
 
-        this.mMiniLoadedDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
-        this.mLoadedDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
+        this->mMiniLoadedDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
+        this->mLoadedDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
 
-        this.mMajorVersion = "0";    // 主版本
-        this.mMinorVersion = "0";    // 次版本
-        this.mPatchVersion = "0";    // 补丁版本
-        this.mTimeStamp = "0";       // 时间戳
+        this->mMajorVersion = "0";    // 主版本
+        this->mMinorVersion = "0";    // 次版本
+        this->mPatchVersion = "0";    // 补丁版本
+        this->mTimeStamp = "0";       // 时间戳
     }
 
     std::string getDetailVersionString()
     {
 		std::string ret = "";
 
-        ret = string.Format("{0}-{1}-{2}-{3}", this.mMajorVersion, this.mMinorVersion, this.mPatchVersion, this.mTimeStamp);
+        ret = string.Format("{0}-{1}-{2}-{3}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion, this->mTimeStamp);
 
         return ret;
     }
@@ -55,7 +55,7 @@ public:
     {
 		std::string ret = "";
 
-        ret = string.Format("{0}.{1}.{2}", this.mMajorVersion, this.mMinorVersion, this.mPatchVersion);
+        ret = string.Format("{0}.{1}.{2}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion);
 
         return ret;
     }
@@ -64,7 +64,7 @@ public:
     {
 		std::string ret = "";
 
-        ret = string.Format("{0}-{1}-{2}", this.mMajorVersion, this.mMinorVersion, this.mPatchVersion);
+        ret = string.Format("{0}-{1}-{2}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion);
 
         return ret;
     }
@@ -76,7 +76,7 @@ public:
             Ctx.msInstance.mLogSys.log("FileVerBase::saveMiniVerToPersistentPath, start", LogTypeId.eLogAutoUpdate);
         }
 
-        if (!this.mFileVerInfo.isNoVerInfo())
+        if (!this->mFileVerInfo.isNoVerInfo())
         {
             if (MacroDef.ENABLE_LOG)
             {
@@ -93,10 +93,10 @@ public:
             MDataStream dataStream = new MDataStream(path, null, MFileMode.eCreateNew, MFileAccess.eWrite);
             dataStream.open();
 
-            string line = string.Format("Version={0}", this.mCurVer);
+            string line = string.Format("Version={0}", this->mCurVer);
             dataStream.writeLine(line);
 
-            line = string.Format("{0}={1}={2}={3}={4}", this.mFileVerInfo.mOrigPath, this.mFileVerInfo.mResUniqueId, this.mFileVerInfo.mLoadPath, this.mFileVerInfo.mFileMd5, this.mFileVerInfo.mFileSize);
+            line = string.Format("{0}={1}={2}={3}={4}", this->mFileVerInfo.mOrigPath, this->mFileVerInfo.mResUniqueId, this->mFileVerInfo.mLoadPath, this->mFileVerInfo.mFileMd5, this->mFileVerInfo.mFileSize);
             dataStream.writeLine(line);
 
             dataStream.dispose();
@@ -122,17 +122,17 @@ public:
 
             if (equalList.Length >= 2)
             {
-                this.mCurVer = equalList[1];
+                this->mCurVer = equalList[1];
 
                 string[] verSplitStr = { "&" };
-                string[] verStrList = this.mCurVer.Split(verSplitStr, StringSplitOptions.RemoveEmptyEntries);
+                string[] verStrList = this->mCurVer.Split(verSplitStr, StringSplitOptions.RemoveEmptyEntries);
 
                 if(verStrList.Length == 4)
                 {
-                    this.mMajorVersion = verStrList[0];
-                    this.mMinorVersion = verStrList[1];
-                    this.mPatchVersion = verStrList[2];
-                    this.mTimeStamp = verStrList[3];
+                    this->mMajorVersion = verStrList[0];
+                    this->mMinorVersion = verStrList[1];
+                    this->mPatchVersion = verStrList[2];
+                    this->mTimeStamp = verStrList[3];
                 }
             }
             else
@@ -162,11 +162,11 @@ public:
 
             if (equalList.Length >= 5)
             {
-                this.mFileVerInfo.mOrigPath = equalList[0];
-                this.mFileVerInfo.mResUniqueId = equalList[1];
-                this.mFileVerInfo.mLoadPath = equalList[2];
-                this.mFileVerInfo.mFileMd5 = equalList[3];
-                this.mFileVerInfo.mFileSize = Int32.Parse(equalList[4]);
+                this->mFileVerInfo.mOrigPath = equalList[0];
+                this->mFileVerInfo.mResUniqueId = equalList[1];
+                this->mFileVerInfo.mLoadPath = equalList[2];
+                this->mFileVerInfo.mFileMd5 = equalList[3];
+                this->mFileVerInfo.mFileSize = Int32.Parse(equalList[4]);
             }
             else
             {

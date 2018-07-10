@@ -18,8 +18,8 @@ protected:
 public:
 	ResRedirect()
     {
-        this.mOrigPath2ItemDic = MY_NEW MDictionary<string, ResRedirectItem>();
-        this.mABPath2ItemDic = MY_NEW MDictionary<string, ResRedirectItem>();
+        this->mOrigPath2ItemDic = MY_NEW MDictionary<string, ResRedirectItem>();
+        this->mABPath2ItemDic = MY_NEW MDictionary<string, ResRedirectItem>();
     }
 
     void init()
@@ -35,8 +35,8 @@ public:
     // 清理之前缓存信息
     void clearCacheInfo()
     {
-        this.mOrigPath2ItemDic.clear();
-        this.mABPath2ItemDic.clear();
+        this->mOrigPath2ItemDic.clear();
+        this->mABPath2ItemDic.clear();
     }
 
     // 资源是否可以重定向，只有在 Version_S.txt 或者在 Version_P.txt 中的资源才能判断是存在的
@@ -58,15 +58,15 @@ public:
 
         if (!isABAsset)
         {
-            if (this.mOrigPath2ItemDic.containsKey(origPath))
+            if (this->mOrigPath2ItemDic.containsKey(origPath))
             {
-                item = this.mOrigPath2ItemDic[origPath];
+                item = this->mOrigPath2ItemDic[origPath];
             }
             else
             {
                 // 从版本系统中获取
                 item = new ResRedirectItem(origPath, (int)ResLoadType.eLoadResource);
-                this.mOrigPath2ItemDic[origPath] = item;
+                this->mOrigPath2ItemDic[origPath] = item;
 
                 item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer.getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
                 item.mFileVerInfo = fileVerInfo;
@@ -74,15 +74,15 @@ public:
         }
         else
         {
-            if (this.mABPath2ItemDic.containsKey(origPath))
+            if (this->mABPath2ItemDic.containsKey(origPath))
             {
-                item = this.mABPath2ItemDic[origPath];
+                item = this->mABPath2ItemDic[origPath];
             }
             else
             {
                 // 从版本系统中获取
                 item = new ResRedirectItem(origPath, (int)ResLoadType.eLoadStreamingAssets);
-                this.mABPath2ItemDic[origPath] = item;
+                this->mABPath2ItemDic[origPath] = item;
 
                 item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer.getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
                 item.mFileVerInfo = fileVerInfo;

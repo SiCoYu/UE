@@ -20,8 +20,8 @@ public:
 public:
 	ServerVer()
     {
-        this.mPath2HashDic = new MDictionary<string, FileVerInfo>();
-        this.mABPath2HashDic = new MDictionary<string, FileVerInfo>();
+        this->mPath2HashDic = new MDictionary<string, FileVerInfo>();
+        this->mABPath2HashDic = new MDictionary<string, FileVerInfo>();
     }
 
     virtual void loadMiniVerFile()
@@ -36,7 +36,7 @@ public:
         auxDownload.download(
             VerFileName.VER_MINI,
             null, 
-            this.onMiniLoadEventHandle,
+            this->onMiniLoadEventHandle,
             null, 
             null, 
             0, 
@@ -71,10 +71,10 @@ protected:
                 //byte[] outBytes = null;
                 //uint outLen = 0;
                 //MLzma.DecompressStrLZMA(textAsset, (uint)textAsset.Length, ref outBytes, ref outLen);
-                this.parseMiniFile(System.Text.Encoding.UTF8.GetString(textAsset));
+                this->parseMiniFile(System.Text.Encoding.UTF8.GetString(textAsset));
             }
 
-            this.mIsMiniLoadSuccess = true;
+            this->mIsMiniLoadSuccess = true;
         }
         else if (downloadItem.hasFailed())
         {
@@ -83,12 +83,12 @@ protected:
                 Ctx.msInstance.mLogSys.log("ServerVer::onMiniLoadEventHandle, error", LogTypeId.eLogAutoUpdate);
             }
 
-            this.mIsMiniLoadSuccess = false;
+            this->mIsMiniLoadSuccess = false;
         }
 
         downloadItem.dispose();
 
-        this.mMiniLoadedDispatch.dispatchEvent(null);
+        this->mMiniLoadedDispatch.dispatchEvent(null);
     }
 
     // 加载版本文件
@@ -105,7 +105,7 @@ public:
         auxDownload.download(
             VerFileName.VER_P,
             null,
-            this.onVerLoadEventHandle, 
+            this->onVerLoadEventHandle, 
             null,
             null,
             0, 
@@ -135,10 +135,10 @@ public:
 
             if (textAsset != null)
             {
-                this.loadFormText(System.Text.Encoding.UTF8.GetString(textAsset), this.mPath2HashDic, this.mABPath2HashDic);
+                this->loadFormText(System.Text.Encoding.UTF8.GetString(textAsset), this->mPath2HashDic, this->mABPath2HashDic);
             }
 
-            this.mIsVerLoadSuccess = true;
+            this->mIsVerLoadSuccess = true;
         }
         else if (downloadItem.hasFailed())
         {
@@ -147,10 +147,10 @@ public:
                 Ctx.msInstance.mLogSys.log(string.Format("ServerVer::onVerLoadEventHandle, failed, origPath = {0}", downloadItem.getOrigPath()), LogTypeId.eLogAutoUpdate);
             }
 
-            this.mIsVerLoadSuccess = false;
+            this->mIsVerLoadSuccess = false;
         }
 
-        this.mLoadedDispatch.dispatchEvent(null);
+        this->mLoadedDispatch.dispatchEvent(null);
     }
 
 public:
@@ -174,7 +174,7 @@ public:
         string line = "";
         FileVerInfo fileVerInfo = null;
 
-        foreach (System.Collections.Generic.KeyValuePair<string, FileVerInfo> kv in this.mPath2HashDic.getData())
+        foreach (System.Collections.Generic.KeyValuePair<string, FileVerInfo> kv in this->mPath2HashDic.getData())
         {
             fileVerInfo = kv.Value;
 

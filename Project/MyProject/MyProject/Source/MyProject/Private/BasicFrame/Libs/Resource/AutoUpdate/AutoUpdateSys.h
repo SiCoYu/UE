@@ -22,9 +22,9 @@ protected:
 public:
 	AutoUpdateSys()
     {
-        this.mFileGroup = MY_NEW FileGroup();
-        this.mOnUpdateEndDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
-        this.mAutoUpdateErrorInfo = MY_NEW AutoUpdateErrorInfo();
+        this->mFileGroup = MY_NEW FileGroup();
+        this->mOnUpdateEndDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
+        this->mAutoUpdateErrorInfo = MY_NEW AutoUpdateErrorInfo();
     }
 
     void init()
@@ -39,34 +39,34 @@ public:
 
     FileGroup* getFileGroup()
     {
-        return this.mFileGroup;
+        return this->mFileGroup;
     }
 
     AutoUpdateErrorCode* getAutoUpdateErrorCode()
     {
-        return this.mAutoUpdateErrorInfo.getErrorCode();
+        return this->mAutoUpdateErrorInfo.getErrorCode();
     }
 
     void setAutoUpdateErrorCode(AutoUpdateErrorCode value)
     {
-        this.mAutoUpdateErrorInfo.setErrorCode(value);
+        this->mAutoUpdateErrorInfo.setErrorCode(value);
     }
 
     AddOnceAndCallOnceEventDispatch* getUpdateEndDispatch()
     {
-        return this.mOnUpdateEndDispatch;
+        return this->mOnUpdateEndDispatch;
     }
 
     void startUpdate()
     {
-        this.loadWebMiniVersion();
+        this->loadWebMiniVersion();
     }
 
     // 成功更新
     bool isUpdateSuccess()
     {
-        //return this.mFileGroup.isUpdateSuccess();
-        return this.mAutoUpdateErrorInfo.getErrorCode() == AutoUpdateErrorCode.eErrorNo;
+        //return this->mFileGroup.isUpdateSuccess();
+        return this->mAutoUpdateErrorInfo.getErrorCode() == AutoUpdateErrorCode.eErrorNo;
     }
 
     // 成功更新，并且重新下载 Version_P.txt，并且成功更新需要更新的资源文件
@@ -74,7 +74,7 @@ public:
     {
         bool ret = false;
 
-        if (this.isUpdateSuccess())
+        if (this->isUpdateSuccess())
         {
             if (Ctx.msInstance.mVersionSys.mIsNeedUpdateVerFile &&
                 Ctx.msInstance.mVersionSys.mServerVer.mIsVerLoadSuccess)
@@ -122,7 +122,7 @@ protected:
             Ctx.msInstance.mLogSys.log("AutoUpdateSys::loadWebMiniVersion", LogTypeId.eLogAutoUpdate);
         }
 
-        Ctx.msInstance.mVersionSys.mMiniLoadResultDispatch.addEventHandle(null, this.onWebMiniVerLoadResult);
+        Ctx.msInstance.mVersionSys.mMiniLoadResultDispatch.addEventHandle(null, this->onWebMiniVerLoadResult);
         Ctx.msInstance.mVersionSys.loadWebMiniVerFile();
     }
 
@@ -138,23 +138,23 @@ protected:
         // 如果 Mini 文件没有从服务器下载成功
         if (!Ctx.msInstance.mVersionSys.mServerVer.mIsMiniLoadSuccess)
         {
-            this.setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebVersionMiniFailed);
-            this.downloadWebMiniFail();
+            this->setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebVersionMiniFailed);
+            this->downloadWebMiniFail();
         }
         else if (Ctx.msInstance.mVersionSys.mIsNeedUpdateApp) // 如果需要更新
         {
-            this.downloadApp();
+            this->downloadApp();
         }
         else if (Ctx.msInstance.mVersionSys.mIsNeedUpdateVerFile) // 如果需要更新版本文件
         {
             // 本地文件版本必须要加载
-            Ctx.msInstance.mVersionSys.mLoadResultDispatch.addEventHandle(null, this.onWebVerLoadResult);
+            Ctx.msInstance.mVersionSys.mLoadResultDispatch.addEventHandle(null, this->onWebVerLoadResult);
             Ctx.msInstance.mVersionSys.loadWebVerFile();
         }
         else
         {
             // 没有任何改变，直接进入游戏
-            this.onUpdateEnd();          // 更新结束
+            this->onUpdateEnd();          // 更新结束
         }
     }
 
@@ -173,7 +173,7 @@ protected:
             }
 
             // 开始正式加载文件
-            this.loadAllUpdateFile();
+            this->loadAllUpdateFile();
         }
         else
         {
@@ -182,8 +182,8 @@ protected:
                 Ctx.msInstance.mLogSys.log("AutoUpdateSys::onWebVerLoadResult, mIsVerLoadSuccess is false", LogTypeId.eLogAutoUpdate);
             }
 
-            this.setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebVersionPFailed);
-            this.onUpdateEnd();          // 更新结束
+            this->setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebVersionPFailed);
+            this->onUpdateEnd();          // 更新结束
         }
     }
 
@@ -196,7 +196,7 @@ protected:
             Ctx.msInstance.mLogSys.log("AutoUpdateSys::downloadWebMiniFail", LogTypeId.eLogAutoUpdate);
         }
 
-        this.onUpdateEnd();
+        this->onUpdateEnd();
     }
 
     // 下载 App 文件
@@ -212,15 +212,15 @@ protected:
 
     void _loadAllUpdateFile()
     {
-        this.mFileGroup.reset();
-        this.mFileGroup.setTotalNum(Ctx.msInstance.mVersionSys.mServerVer.mABPath2HashDic.getData().Count - this.getExcludeUpdateFileNum());
+        this->mFileGroup.reset();
+        this->mFileGroup.setTotalNum(Ctx.msInstance.mVersionSys.mServerVer.mABPath2HashDic.getData().Count - this->getExcludeUpdateFileNum());
 
         if (MacroDef.ENABLE_LOG)
         {
-            Ctx.msInstance.mLogSys.log(string.Format("AutoUpdateSys::loadAllUpdateFile, Start, total = {0}", this.mFileGroup.getTotalNum()), LogTypeId.eLogAutoUpdate);
+            Ctx.msInstance.mLogSys.log(string.Format("AutoUpdateSys::loadAllUpdateFile, Start, total = {0}", this->mFileGroup.getTotalNum()), LogTypeId.eLogAutoUpdate);
         }
 
-        //this.checkIsNeedUpdateManifest();
+        //this->checkIsNeedUpdateManifest();
 
         bool isFileInStreaming = false;
         bool isFileInPersistent = false;
@@ -231,7 +231,7 @@ protected:
 
         foreach (KeyValuePair<string, FileVerInfo> kv in dic)
         {
-            if(this.isIncludeUpdateList(kv.Key))
+            if(this->isIncludeUpdateList(kv.Key))
             {
                 isFileInStreaming = false;
                 isFileInPersistent = false;
@@ -260,24 +260,24 @@ protected:
 
                     if (isNeedUpdateFile)
                     {
-                        this.mFileGroup.addLoadingPath(kv.Key, kv.Value);
-                        this.loadOneUpdateFile(kv.Key, kv.Value);
+                        this->mFileGroup.addLoadingPath(kv.Key, kv.Value);
+                        this->loadOneUpdateFile(kv.Key, kv.Value);
                     }
                     else
                     {
-                        this.mFileGroup.addLoadedPath(kv.Key);
-                        this.mFileGroup.incCurNum();
+                        this->mFileGroup.addLoadedPath(kv.Key);
+                        this->mFileGroup.incCurNum();
                     }
                 }
                 else
                 {
-                    this.mFileGroup.addLoadingPath(kv.Key, kv.Value);
-                    this.loadOneUpdateFile(kv.Key, kv.Value);
+                    this->mFileGroup.addLoadingPath(kv.Key, kv.Value);
+                    this->loadOneUpdateFile(kv.Key, kv.Value);
                 }
             }
         }
 
-        this._checkUpdateEnd();
+        this->_checkUpdateEnd();
 
         if (MacroDef.ENABLE_LOG)
         {
@@ -317,7 +317,7 @@ protected:
         auxDownload.download(
             path, 
             null, 
-            this.onLoadEventHandle,
+            this->onLoadEventHandle,
             null, 
             null, 
             0, 
@@ -328,7 +328,7 @@ protected:
 
     void _onLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
     {
-        this.mFileGroup.incCurNum();
+        this->mFileGroup.incCurNum();
 
         AuxDownloader downloader = dispObj as AuxDownloader;
 
@@ -336,23 +336,23 @@ protected:
         {
             if (MacroDef.ENABLE_LOG)
             {
-                Ctx.msInstance.mLogSys.log(string.Format("AutoUpdateSys::onLoadEventHandle, success, CurIndex = {0}, path = {1}", this.mFileGroup.getCurNum(), downloader.getOrigPath()), LogTypeId.eLogAutoUpdate);
+                Ctx.msInstance.mLogSys.log(string.Format("AutoUpdateSys::onLoadEventHandle, success, CurIndex = {0}, path = {1}", this->mFileGroup.getCurNum(), downloader.getOrigPath()), LogTypeId.eLogAutoUpdate);
             }
 
-            this.mFileGroup.addLoadedPath(downloader.getOrigPath());
+            this->mFileGroup.addLoadedPath(downloader.getOrigPath());
         }
         else if (downloader.hasFailed())
         {
             if (MacroDef.ENABLE_LOG)
             {
-                Ctx.msInstance.mLogSys.log(string.Format("AutoUpdateSys::onLoadEventHandle, fail, CurNum = {0}, path = {1}", this.mFileGroup.getCurNum(), downloader.getOrigPath()), LogTypeId.eLogAutoUpdate);
+                Ctx.msInstance.mLogSys.log(string.Format("AutoUpdateSys::onLoadEventHandle, fail, CurNum = {0}, path = {1}", this->mFileGroup.getCurNum(), downloader.getOrigPath()), LogTypeId.eLogAutoUpdate);
             }
 
-            this.mFileGroup.addFailedPath(downloader.getOrigPath());
+            this->mFileGroup.addFailedPath(downloader.getOrigPath());
         }
 
-        this.mFileGroup.removeLoadingPath(downloader.getOrigPath());
-        this.checkUpdateEnd();
+        this->mFileGroup.removeLoadingPath(downloader.getOrigPath());
+        this->checkUpdateEnd();
 
         downloader.dispose();
     }
@@ -361,17 +361,17 @@ protected:
     {
         if (MacroDef.ENABLE_LOG)
         {
-            Ctx.msInstance.mLogSys.log(string.Format("AutoUpdateSys::checkUpdateEnd, curNum = {0}, totalNum = {1}", this.mFileGroup.getCurNum(), this.mFileGroup.getTotalNum()), LogTypeId.eLogAutoUpdate);
+            Ctx.msInstance.mLogSys.log(string.Format("AutoUpdateSys::checkUpdateEnd, curNum = {0}, totalNum = {1}", this->mFileGroup.getCurNum(), this->mFileGroup.getTotalNum()), LogTypeId.eLogAutoUpdate);
         }
 
-        if (this.mFileGroup.isCurEqTotal())
+        if (this->mFileGroup.isCurEqTotal())
         {
-            if(this.mFileGroup.hasLoadFailed())
+            if(this->mFileGroup.hasLoadFailed())
             {
-                this.setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebResFailed);
+                this->setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebResFailed);
             }
 
-            this.onUpdateEnd();
+            this->onUpdateEnd();
         }
     }
 
@@ -381,11 +381,11 @@ public:
         if (MacroDef.ENABLE_LOG)
         {
             Ctx.msInstance.mLogSys.log("AutoUpdateSys::onUpdateEnd, end", LogTypeId.eLogAutoUpdate);
-            this.mFileGroup.logDownloadDetailInfo();
+            this->mFileGroup.logDownloadDetailInfo();
         }
 
         // 保存信息到本地
-        if (this.isUpdateWebVersionPSuccessAndAllUpdateSuccess())     // 更新文件成功，将版本文件写入本地
+        if (this->isUpdateWebVersionPSuccessAndAllUpdateSuccess())     // 更新文件成功，将版本文件写入本地
         {
             // 保存 VerFileName.VER_MINI 版本文件和 VerFileName.VER_P 版本文件到 Persistent 文件夹
             Ctx.msInstance.mVersionSys.saveWebMiniOrPVerToPersistentPath();
@@ -396,7 +396,7 @@ public:
         Ctx.msInstance.mResRedirect.clearCacheInfo();
 
         // 通知上层
-        this.mOnUpdateEndDispatch.dispatchEvent(null);
+        this->mOnUpdateEndDispatch.dispatchEvent(null);
     }
 
     // 是否在更新列表中

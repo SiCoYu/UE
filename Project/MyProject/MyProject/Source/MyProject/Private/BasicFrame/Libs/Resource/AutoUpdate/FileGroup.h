@@ -31,84 +31,84 @@ protected:
 public:
 	FileGroup()
 	{
-		this.mCurNum = 0;
-		this.mTotalNum = 0;
-		this.mCurMemSize = 0;
-		this.mTotalMemSize = 0;
+		this->mCurNum = 0;
+		this->mTotalNum = 0;
+		this->mCurMemSize = 0;
+		this->mTotalMemSize = 0;
 
-		this.mProgressDispatch = new AddOnceEventDispatch();
+		this->mProgressDispatch = new AddOnceEventDispatch();
 
-		this.reset();
+		this->reset();
 	}
 
 	bool isUpdateSuccess()
 	{
-		return (this.mCurNum == this.mTotalNum &&
-			   0 == this.mFailedPath.count() &&
-			   0 == this.mLoadingPath.count());
+		return (this->mCurNum == this->mTotalNum &&
+			   0 == this->mFailedPath.count() &&
+			   0 == this->mLoadingPath.count());
 	}
 
 	bool isCurEqTotal()
 	{
-		return this.mCurNum == this.mTotalNum;
+		return this->mCurNum == this->mTotalNum;
 	}
 
 	void reset()
 	{
-		this.mCurNum = 0;
-		this.mTotalNum = 0;
+		this->mCurNum = 0;
+		this->mTotalNum = 0;
 
-		this.mLoadingPath.clear();
-		this.mLoadedPath.clear();
-		this.mFailedPath.clear();
+		this->mLoadingPath.clear();
+		this->mLoadedPath.clear();
+		this->mFailedPath.clear();
 	}
 
 	void setTotalNum(int value)
 	{
-		this.mTotalNum = value;
+		this->mTotalNum = value;
 	}
 
 	int getTotalNum()
 	{
-		return this.mTotalNum;
+		return this->mTotalNum;
 	}
 
 	void incCurNum()
 	{
-		this.mCurNum += 1;
+		this->mCurNum += 1;
 	}
 
 	int getCurNum()
 	{
-		return this.mCurNum;
+		return this->mCurNum;
 	}
 
 	// 有正在加载的内容
 	bool hasLoading()
 	{
-		return this.mLoadingPath.count() > 0;
+		return this->mLoadingPath.count() > 0;
 	}
 
 	// 有加载失败的
 	bool hasLoadFailed()
 	{
-		return this.mFailedPath.count() > 0;
+		return this->mFailedPath.count() > 0;
 	}
 
 	// 增加更新的文件
 	void addLoadingPath(std::string path, FileVerInfo fileVerInfo /*, bool isAddTotalNum = false*/)
 	{
-		this.mTotalMemSize += fileVerInfo.mFileSize;
+		this->mTotalMemSize += fileVerInfo.mFileSize;
 
-		this.mLoadingPath.add(path);
-		this.mUpdatePathDic.add(path, true);    // 开始加载设置加载标志
+		this->mLoadingPath.add(path);
+		this->mUpdatePathDic.add(path, true);    // 开始加载设置加载标志
 
 		//if(isAddTotalNum)
 		//{
-		//    this.mTotalNum += 1;
+		//    this->mTotalNum += 1;
 		//}
 
-		//this.mProgressDispatch.dispatchEvent(null);
+		//this->mProgressDispatch.dispatchEvent(null);
 	}
 
 	void removeLoadingPath(std::string path/*, bool isDecTotalNum = false*/)
@@ -117,47 +117,47 @@ public:
 
 		if (null != fileVerInfo)
 		{
-			this.mCurMemSize += fileVerInfo.mFileSize;
+			this->mCurMemSize += fileVerInfo.mFileSize;
 		}
 
-		this.mLoadingPath.remove(path);
+		this->mLoadingPath.remove(path);
 
 		//if (isDecTotalNum)
 		//{
-		//    this.mTotalNum -= 1;
+		//    this->mTotalNum -= 1;
 		//}
 
-		this.mProgressDispatch.dispatchEvent(null);
+		this->mProgressDispatch.dispatchEvent(null);
 	}
 
 	void addLoadedPath(std::string path/*, bool isAddTotalNum = false*/)
 	{
-		this.mLoadedPath.add(path);
+		this->mLoadedPath.add(path);
 
 		//if (isAddTotalNum)
 		//{
-		//    this.mTotalNum += 1;
+		//    this->mTotalNum += 1;
 		//}
 	}
 
 	void addFailedPath(std::string path/*, bool isAddTotalNum = false*/)
 	{
-		this.mFailedPath.add(path);
-		this.mUpdatePathDic.remove(path);   // 如果加载失败，就是没有更新的资源，需要移除这个更新的资源
+		this->mFailedPath.add(path);
+		this->mUpdatePathDic.remove(path);   // 如果加载失败，就是没有更新的资源，需要移除这个更新的资源
 
 		//if (isAddTotalNum)
 		//{
-		//    this.mTotalNum += 1;
+		//    this->mTotalNum += 1;
 		//}
 
-		//this.mProgressDispatch.dispatchEvent(null);
+		//this->mProgressDispatch.dispatchEvent(null);
 	}
 
 	// 获取进度 [0, 100]
 	int getProgress()
 	{
-		int curNum = this.mLoadedPath.count() + this.mFailedPath.count();
-		int totalNum = this.mLoadingPath.count() + this.mLoadedPath.count() + this.mFailedPath.count();
+		int curNum = this->mLoadedPath.count() + this->mFailedPath.count();
+		int totalNum = this->mLoadingPath.count() + this->mLoadedPath.count() + this->mFailedPath.count();
 
 		int progress = 0;
 
@@ -172,13 +172,13 @@ public:
 	// 获取文件加载内存大小
 	int getAllNeedUpdateMenSize()
 	{
-		return this.mTotalMemSize;
+		return this->mTotalMemSize;
 	}
 
 	// 获取当前加载的文件大小
 	int getCurUpdatedMenSize()
 	{
-		return this.mCurMemSize;
+		return this->mCurMemSize;
 	}
 
 	// 获取加载进度描述
@@ -186,7 +186,7 @@ public:
 	{
 		string ret = "";
 
-		ret = string.Format("{0}M/{1}M", UtilMath.integerWithFract((float)this.mCurMemSize / UtilMath.OneM, 2), UtilMath.integerWithFract((float)this.mTotalMemSize / UtilMath.OneM, 2));
+		ret = string.Format("{0}M/{1}M", UtilMath.integerWithFract((float)this->mCurMemSize / UtilMath.OneM, 2), UtilMath.integerWithFract((float)this->mTotalMemSize / UtilMath.OneM, 2));
 
 		return ret;
 	}
@@ -194,16 +194,16 @@ public:
 	// 输出下载详细日志
 	void logDownloadDetailInfo()
 	{
-		Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, mCurNum = {0}, mTotalNum = {1}", this.mCurNum, this.mTotalNum), LogTypeId.eLogAutoUpdate);
+		Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, mCurNum = {0}, mTotalNum = {1}", this->mCurNum, this->mTotalNum), LogTypeId.eLogAutoUpdate);
 
 		int index = 0;
-		int listLen = this.mLoadingPath.count();
+		int listLen = this->mLoadingPath.count();
 
 		Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** LoadingPath start **********", LogTypeId.eLogAutoUpdate);
 
 		while (index < listLen)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, LoadingPath = {1}", index, this.mLoadingPath[index]), LogTypeId.eLogAutoUpdate);
+			Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, LoadingPath = {1}", index, this->mLoadingPath[index]), LogTypeId.eLogAutoUpdate);
 
 			index += 1;
 		}
@@ -211,13 +211,13 @@ public:
 		Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** LoadingPath end **********", LogTypeId.eLogAutoUpdate);
 
 		index = 0;
-		listLen = this.mLoadedPath.count();
+		listLen = this->mLoadedPath.count();
 
 		Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** mLoadedPath start **********", LogTypeId.eLogAutoUpdate);
 
 		while (index < listLen)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mLoadedPath = {1}", index, this.mLoadedPath[index]), LogTypeId.eLogAutoUpdate);
+			Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mLoadedPath = {1}", index, this->mLoadedPath[index]), LogTypeId.eLogAutoUpdate);
 
 			index += 1;
 		}
@@ -225,13 +225,13 @@ public:
 		Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** mLoadedPath end **********", LogTypeId.eLogAutoUpdate);
 
 		index = 0;
-		listLen = this.mFailedPath.count();
+		listLen = this->mFailedPath.count();
 
 		Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** mFailedPath start **********", LogTypeId.eLogAutoUpdate);
 
 		while (index < listLen)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mFailedPath = {1}", index, this.mFailedPath[index]), LogTypeId.eLogAutoUpdate);
+			Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mFailedPath = {1}", index, this->mFailedPath[index]), LogTypeId.eLogAutoUpdate);
 
 			index += 1;
 		}
@@ -248,7 +248,7 @@ public:
 
 		if (null != resRedirectItem)
 		{
-			ret = this.isResUpdatedByABPath(resRedirectItem.mFileVerInfo.mLoadPath);
+			ret = this->isResUpdatedByABPath(resRedirectItem.mFileVerInfo.mLoadPath);
 		}
 
 		return ret;
@@ -258,18 +258,18 @@ public:
 	bool isResUpdatedByABPath(string path)
 	{
 		bool ret = false;
-		this.mUpdatePathDic.tryGetValue(path, out ret);
+		this->mUpdatePathDic.tryGetValue(path, out ret);
 		return ret;
 	}
 
 	void addProgressHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> handle)
 	{
-		this.mProgressDispatch.addEventHandle(pThis, handle);
+		this->mProgressDispatch.addEventHandle(pThis, handle);
 	}
 
 	void removeProgressHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> handle)
 	{
-		this.mProgressDispatch.removeEventHandle(pThis, handle);
+		this->mProgressDispatch.removeEventHandle(pThis, handle);
 	}
 };
 

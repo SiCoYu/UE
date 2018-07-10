@@ -21,28 +21,28 @@ public:
 public:
 	ResRedirectItem(string origPath = "", int redirect = (int)ResLoadType.eLoadResource)
     {
-        this.mOrigPath = origPath;
-        this.mResLoadType = (ResLoadType)redirect;
+        this->mOrigPath = origPath;
+        this->mResLoadType = (ResLoadType)redirect;
     }
 
     bool isRedirectR()
     {
-        return this.mResLoadType == ResLoadType.eLoadResource;
+        return this->mResLoadType == ResLoadType.eLoadResource;
     }
 
     bool isRedirectS()
     {
-        return this.mResLoadType == ResLoadType.eLoadStreamingAssets;
+        return this->mResLoadType == ResLoadType.eLoadStreamingAssets;
     }
 
     bool isRedirectP()
     {
-        return this.mResLoadType == ResLoadType.eLoadLocalPersistentData;
+        return this->mResLoadType == ResLoadType.eLoadLocalPersistentData;
     }
 
     bool isRedirectW()
     {
-        return this.mResLoadType == ResLoadType.eLoadWeb;
+        return this->mResLoadType == ResLoadType.eLoadWeb;
     }
 };
 
