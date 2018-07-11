@@ -143,7 +143,7 @@ std::string getVersionString()
 
 void loadWebMiniVerFile()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("VersionSys::loadWebMiniVerFile", LogTypeId::eLogAutoUpdate);
 	}
@@ -154,21 +154,21 @@ void loadWebMiniVerFile()
 
 void loadWebVerFile()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("VersionSys::loadWebVerFile, start", LogTypeId::eLogAutoUpdate);
 	}
 
 	if (this->mLocalVer.mIsVerLoadSuccess)
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("VersionSys::loadWebVerFile, mLocalVer.mIsVerLoadSuccess is true", LogTypeId::eLogAutoUpdate);
 		}
 
 		if (this->mIsNeedUpdateVerFile)
 		{
-			if (MacroDef.ENABLE_LOG)
+			if (MacroDef::ENABLE_LOG)
 			{
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId::eLogAutoUpdate);
 			}
@@ -178,7 +178,7 @@ void loadWebVerFile()
 		}
 		else
 		{
-			if (MacroDef.ENABLE_LOG)
+			if (MacroDef::ENABLE_LOG)
 			{
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is false", LogTypeId::eLogAutoUpdate);
 			}
@@ -188,14 +188,14 @@ void loadWebVerFile()
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("VersionSys::loadWebVerFile, mLocalVer.mIsVerLoadSuccess is false", LogTypeId::eLogAutoUpdate);
 		}
 
 		if (this->mIsNeedUpdateVerFile)
 		{
-			if (MacroDef.ENABLE_LOG)
+			if (MacroDef::ENABLE_LOG)
 			{
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId::eLogAutoUpdate);
 			}
@@ -205,7 +205,7 @@ void loadWebVerFile()
 		}
 		else
 		{
-			if (MacroDef.ENABLE_LOG)
+			if (MacroDef::ENABLE_LOG)
 			{
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is false", LogTypeId::eLogAutoUpdate);
 			}
@@ -229,14 +229,14 @@ void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
 
 																															 //this->mIsNeedUpdateVerFile = true;         // 测试强制更新
 
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("VersionSys::onWebMiniLoaded, loaded, mIsNeedUpdateApp = {0}, mIsNeedUpdateVerFile = {1}", this->mIsNeedUpdateApp.ToString(), this->mIsNeedUpdateVerFile.ToString()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("VersionSys::onWebMiniLoaded, loaded, mIsNeedUpdateApp = {0}, mIsNeedUpdateVerFile = {1}", this->mIsNeedUpdateApp.ToString(), this->mIsNeedUpdateVerFile.ToString()), LogTypeId::eLogAutoUpdate);
 		}
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("VersionSys::onWebMiniLoaded, failed", LogTypeId::eLogAutoUpdate);
 		}
@@ -251,7 +251,7 @@ void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
 
 void onWebVerLoaded(IDispatchObject* dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("VersionSys::onWebVerLoaded", LogTypeId::eLogAutoUpdate);
 	}
@@ -282,7 +282,7 @@ std::string getFileVer(std::string path)
 // 保存 VerFileName::VER_MINI 版本文件和 VerFileName::VER_P 版本文件到 Persistent 文件夹
 void saveWebMiniOrPVerToPersistentPath()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("VersionSys::saveWebMiniOrPVerToPersistentPath", LogTypeId::eLogAutoUpdate);
 	}

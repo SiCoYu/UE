@@ -4,6 +4,10 @@
 #include "AddOnceAndCallOnceEventDispatch.h"
 #include "UtilStr.h"
 #include "MacroDef.h"
+#include "MyMemory.h"
+#include "DataStream.h"
+#include "SafePointer.h"
+#include <vector>
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -72,34 +76,34 @@ void FileVerBase::saveMiniVerToPersistentPath()
 			UtilFileIO::deleteFile(path);
 		}
 
-		MDataStream dataStream = new MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
-		dataStream.open();
+		MDataStream* dataStream = MY_NEW MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
+		dataStream->open();
 
-		std::string line = string.Format("Version={0}", this->mCurVer);
-		dataStream.writeLine(line);
+		std::string line = UtilStr::Format("Version={0}", this->mCurVer);
+		dataStream->writeLine(line);
 
-		line = string.Format("{0}={1}={2}={3}={4}", this->mFileVerInfo.mOrigPath, this->mFileVerInfo.mResUniqueId, this->mFileVerInfo.mLoadPath, this->mFileVerInfo.mFileMd5, this->mFileVerInfo.mFileSize);
-		dataStream.writeLine(line);
+		line = UtilStr::Format("{0}={1}={2}={3}={4}", this->mFileVerInfo.mOrigPath, this->mFileVerInfo.mResUniqueId, this->mFileVerInfo.mLoadPath, this->mFileVerInfo.mFileMd5, this->mFileVerInfo.mFileSize);
+		dataStream->writeLine(line);
 
-		dataStream.dispose();
-		dataStream = nullptr;
+		MY_SAFE_DISPOSE(dataStream);
 	}
 }
 
-void FileVerBase::parseMiniFile(string text)
+void FileVerBase::parseMiniFile(std::string text)
 {
-	std::string[] lineSplitStr = { UtilEngineWrap.CR_LF };
-	std::string[] equalSplitStr = { UtilEngineWrap.SEPARATOR };
-	std::string[] lineList = text.Split(lineSplitStr, StringSplitOptions.RemoveEmptyEntries);
+	std::string lineSplitStr = UtilEngineWrap::CR_LF;
+	std::string equalSplitStr = UtilEngineWrap::SEPARATOR;
+	std::vector<std::string> lineList;
+	UtilStr::split(text, lineSplitStr, &lineList);
 	int lineIdx = 0;
-	std::string[] equalList = nullptr;
+	std::vector<std::string> equalList;
 
 	// 第一行是版本号
 	lineIdx = 0;
 
-	if (lineList.Length > 0)
+	if (lineList.size() > 0)
 	{
-		UtilStr.removeLastCR(ref lineList[lineIdx]);
+		UtilStr::removeLastCR(lineList[lineIdx]);
 		equalList = lineList[lineIdx].Split(equalSplitStr, StringSplitOptions.RemoveEmptyEntries);
 
 		if (equalList.Length >= 2)
@@ -119,26 +123,26 @@ void FileVerBase::parseMiniFile(string text)
 		}
 		else
 		{
-			if (MacroDef.ENABLE_ERROR)
+			if (MacroDef::ENABLE_ERROR)
 			{
-				GLogSys->error(string.Format("FileVerBase::parseMiniFile, curversion error, content = {0}", text), LogTypeId::eErrorDownload);
+				GLogSys->error(UtilStr::Format("FileVerBase::parseMiniFile, curversion error, content = {0}", text), LogTypeId::eErrorDownload);
 			}
 		}
 	}
 	else
 	{
-		if (MacroDef.ENABLE_ERROR)
+		if (MacroDef::ENABLE_ERROR)
 		{
-			GLogSys->error(string.Format("FileVerBase::parseMiniFile, LessEqual 0 error, content = {0}", text), LogTypeId::eErrorDownload);
+			GLogSys->error(UtilStr::Format("FileVerBase::parseMiniFile, LessEqual 0 error, content = {0}", text), LogTypeId::eErrorDownload);
 		}
 	}
 
 	// 第二行是版本的版本
 	lineIdx = 1;
 
-	if (lineList.Length > 1)
+	if (lineList.size() > 1)
 	{
-		UtilStr.removeLastCR(ref lineList[lineIdx]);
+		UtilStr::removeLastCR(lineList[lineIdx]);
 
 		equalList = lineList[lineIdx].Split(equalSplitStr, StringSplitOptions.RemoveEmptyEntries);
 
@@ -152,17 +156,17 @@ void FileVerBase::parseMiniFile(string text)
 		}
 		else
 		{
-			if (MacroDef.ENABLE_ERROR)
+			if (MacroDef::ENABLE_ERROR)
 			{
-				GLogSys->error(string.Format("FileVerBase::parseMiniFile, version info error, content = {0}", text), LogTypeId::eErrorDownload);
+				GLogSys->error(UtilStr::Format("FileVerBase::parseMiniFile, version info error, content = {0}", text), LogTypeId::eErrorDownload);
 			}
 		}
 	}
 	else
 	{
-		if (MacroDef.ENABLE_ERROR)
+		if (MacroDef::ENABLE_ERROR)
 		{
-			GLogSys->error(string.Format("FileVerBase::parseMiniFile, less equal 1 error, content = {0}", text), LogTypeId::eErrorDownload);
+			GLogSys->error(UtilStr::Format("FileVerBase::parseMiniFile, less equal 1 error, content = {0}", text), LogTypeId::eErrorDownload);
 		}
 	}
 }
@@ -170,8 +174,8 @@ void FileVerBase::parseMiniFile(string text)
 // 这个主要是解析版本文件的
 void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> dic, MDictionary<string, FileVerInfo> abDic)
 {
-	string[] lineSplitStr = { UtilEngineWrap.CR_LF };
-	string[] equalSplitStr = { UtilEngineWrap.SEPARATOR };
+	string[] lineSplitStr = { UtilEngineWrap::CR_LF };
+	string[] equalSplitStr = { UtilEngineWrap::SEPARATOR };
 	string[] lineList = text.Split(lineSplitStr, StringSplitOptions.RemoveEmptyEntries);
 
 	int lineIdx = 0;
@@ -180,7 +184,7 @@ void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> di
 
 	while (lineIdx < lineList.Length)
 	{
-		UtilStr.removeLastCR(ref lineList[lineIdx]);
+		UtilStr::removeLastCR(ref lineList[lineIdx]);
 
 		equalList = lineList[lineIdx].Split(equalSplitStr, StringSplitOptions.RemoveEmptyEntries);
 
@@ -204,9 +208,9 @@ void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> di
 		}
 		else
 		{
-			if (MacroDef.ENABLE_ERROR)
+			if (MacroDef::ENABLE_ERROR)
 			{
-				GLogSys->error(string.Format("FileVerBase::loadFormText, version info error, content = {0}", lineList[lineIdx]), LogTypeId::eErrorDownload);
+				GLogSys->error(UtilStr::Format("FileVerBase::loadFormText, version info error, content = {0}", lineList[lineIdx]), LogTypeId::eErrorDownload);
 			}
 		}
 

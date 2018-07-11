@@ -36,7 +36,7 @@ void ServerVer::loadMiniVerFile()
 // 加载一个表完成
 void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("ServerVer::onMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
@@ -45,7 +45,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 
 	if (downloadItem.hasSuccessLoaded())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("ServerVer::onMiniLoadEventHandle, loaded", LogTypeId::eLogAutoUpdate);
 		}
@@ -65,7 +65,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 	}
 	else if (downloadItem.hasFailed())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("ServerVer::onMiniLoadEventHandle, error", LogTypeId::eLogAutoUpdate);
 		}
@@ -81,7 +81,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 // 加载版本文件
 void ServerVer::loadVerFile()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("ServerVer::loadVerFile", LogTypeId::eLogAutoUpdate);
 	}
@@ -103,7 +103,7 @@ void ServerVer::loadVerFile()
 // 加载一个表完成
 void ServerVer::_onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("ServerVer::onVerLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
@@ -112,9 +112,9 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 
 	if (downloadItem.hasSuccessLoaded())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("ServerVer::onVerLoadEventHandle, loaded, origPath = {0}", downloadItem.getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("ServerVer::onVerLoadEventHandle, loaded, origPath = {0}", downloadItem.getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
 		byte[] textAsset = downloadItem.getBytes();
@@ -128,9 +128,9 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 	}
 	else if (downloadItem.hasFailed())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("ServerVer::onVerLoadEventHandle, failed, origPath = {0}", downloadItem.getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("ServerVer::onVerLoadEventHandle, failed, origPath = {0}", downloadItem.getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
 		this->mIsVerLoadSuccess = false;
@@ -141,7 +141,7 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 
 void ServerVer::savePVerToPersistentPath()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("ServerVer::savePVerToPersistentPath, start", LogTypeId::eLogAutoUpdate);
 	}
@@ -163,7 +163,7 @@ void ServerVer::savePVerToPersistentPath()
 	{
 		fileVerInfo = kv.Value;
 
-		line = string.Format("{0}={1}={2}={3}={4}", fileVerInfo.mOrigPath, fileVerInfo.mResUniqueId, fileVerInfo.mLoadPath, fileVerInfo.mFileMd5, fileVerInfo.mFileSize);
+		line = UtilStr::Format("{0}={1}={2}={3}={4}", fileVerInfo.mOrigPath, fileVerInfo.mResUniqueId, fileVerInfo.mLoadPath, fileVerInfo.mFileMd5, fileVerInfo.mFileSize);
 		dataStream.writeLine(line);
 	}
 

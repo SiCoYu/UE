@@ -34,14 +34,14 @@ string LocalVer::getInstallVersionString()
 {
 	string ret = "";
 
-	ret = string.Format("{0}-{1}-{2}", this->mInstallMajorVersion, this->mInstallMinorVersion, this->mInstallPatchVersion);
+	ret = UtilStr::Format("{0}-{1}-{2}", this->mInstallMajorVersion, this->mInstallMinorVersion, this->mInstallPatchVersion);
 
 	return ret;
 }
 
 void LocalVer::loadMiniVerFile()
 {
-	//if (MacroDef.ENABLE_LOG)
+	//if (MacroDef::ENABLE_LOG)
 	//{
 	//    GLogSys->log("LocalVer::loadMiniVerFile, Persistent", LogTypeId::eLogAutoUpdate);
 	//}
@@ -53,7 +53,7 @@ void LocalVer::loadMiniVerFile()
 	//// 如果读取没有成功，就从 StreamingAssetsPath (不再从 Resources) 目录下读取， StreamingAssetsPath android 下读取非 AssetBundles 需要异步
 	//if (this->mFileVerInfo.isNoVerInfo())
 	//{
-	//    if (MacroDef.ENABLE_LOG)
+	//    if (MacroDef::ENABLE_LOG)
 	//    {
 	//        GLogSys->log("LocalVer::loadMiniVerFile, StreamingAssets", LogTypeId::eLogAutoUpdate);
 	//    }
@@ -72,7 +72,7 @@ void LocalVer::loadMiniVerFile()
 
 void LocalVer::loadStreamingAssetsMiniVerFile()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::loadStreamingAssetsMiniVerFile, StreamingAssets", LogTypeId::eLogAutoUpdate);
 	}
@@ -86,7 +86,7 @@ void LocalVer::loadStreamingAssetsMiniVerFile()
 
 void LocalVer::loadPersistentMiniVerFile()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::loadPersistentMiniVerFile, Persistent", LogTypeId::eLogAutoUpdate);
 	}
@@ -98,7 +98,7 @@ void LocalVer::loadPersistentMiniVerFile()
 
 void LocalVer::onStreamingMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::onStreamingMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
@@ -117,7 +117,7 @@ void LocalVer::onStreamingMiniLoadEventHandle(IDispatchObject dispObj, uint uniq
 
 void LocalVer::onPersistentMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::onPersistentMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
@@ -131,7 +131,7 @@ void LocalVer::onPersistentMiniLoadEventHandle(IDispatchObject dispObj, uint uni
 
 void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::onMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
@@ -140,7 +140,7 @@ void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 
 	if (this->mMiniDataStream.isValid())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("LocalVer::onMiniLoadEventHandle, success", LogTypeId::eLogAutoUpdate);
 		}
@@ -184,9 +184,9 @@ void LocalVer::loadLocalSVer()
 {
 	string path = UtilFileIO::combine(MFileSys::msDataStreamStreamingAssetsPath, VerFileName::VER_S);
 
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
-		GLogSys->log(string.Format("LocalVer::loadLocalSVer, path = {0}", path), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(UtilStr::Format("LocalVer::loadLocalSVer, path = {0}", path), LogTypeId::eLogAutoUpdate);
 	}
 
 	// 不要从 StreamingAssets 这个目录下加载 VerFileName::VER_S ，因为在 Android 上是异步加载的，因此直接放在 Resources 目录下，但是现在是不再向 Resources 目录下，本地都放在 StreamingAssets 目录
@@ -198,7 +198,7 @@ void LocalVer::loadLocalSVer()
 
 void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::onSVerLoaded", LogTypeId::eLogAutoUpdate);
 	}
@@ -209,9 +209,9 @@ void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
 	{
 		string text = this->mSDataStream.readText();
 
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("LocalVer::onSVerLoaded, success, text = {0}", text), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("LocalVer::onSVerLoaded, success, text = {0}", text), LogTypeId::eLogAutoUpdate);
 		}
 
 		//this->mSDataStream.seek(0, MSeekOrigin.eBegin);
@@ -227,7 +227,7 @@ void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
 
 void LocalVer::loadLocalPVer()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::loadLocalPVer", LogTypeId::eLogAutoUpdate);
 	}
@@ -238,7 +238,7 @@ void LocalVer::loadLocalPVer()
 
 void LocalVer::onPVerLoaded(IDispatchObject dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::onPVerLoaded", LogTypeId::eLogAutoUpdate);
 	}
@@ -247,7 +247,7 @@ void LocalVer::onPVerLoaded(IDispatchObject dispObj, uint uniqueId)
 
 	if (this->mPDataStream.isValid())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("LocalVer::onPVerLoaded, success", LogTypeId::eLogAutoUpdate);
 		}

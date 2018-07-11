@@ -78,9 +78,9 @@ ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
 
 	if (nullptr == item.mFileVerInfo)
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("ResRedirectItem::getResRedirectItem, cannot find load item, origPath = {0}", origPath), LogTypeId::eLogResLoader);
+			GLogSys->log(UtilStr::Format("ResRedirectItem::getResRedirectItem, cannot find load item, origPath = {0}", origPath), LogTypeId::eLogResLoader);
 		}
 
 		fileVerInfo = new FileVerInfo();
@@ -94,9 +94,9 @@ ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("ResRedirectItem::getResRedirectItem, find load item, origPath = {0}, mResLoadType = {1}", origPath, item.mResLoadType), LogTypeId::eLogResLoader);
+			GLogSys->log(UtilStr::Format("ResRedirectItem::getResRedirectItem, find load item, origPath = {0}, mResLoadType = {1}", origPath, item.mResLoadType), LogTypeId::eLogResLoader);
 		}
 	}
 
