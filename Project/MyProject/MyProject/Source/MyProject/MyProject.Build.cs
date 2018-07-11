@@ -93,6 +93,7 @@ public class MyProject : ModuleRules
 
                 // Libs ÇøÓò
                 "MyProject/Private/BasicFrame/Libs/Common",
+                "MyProject/Private/BasicFrame/Libs/Common/MiniInc",
                 "MyProject/Private/BasicFrame/Libs/Common/ObjectAsset",
 
                 "MyProject/Private/BasicFrame/Libs/DataStruct",
