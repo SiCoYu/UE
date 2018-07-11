@@ -57,6 +57,7 @@ class GlobalDelegate;
 class GlobalEventCmd;
 class ResRedirectItem;
 class VersionSys;
+class AutoClearSys;
 
 MY_END_NAMESPACE
 
@@ -111,6 +112,7 @@ protected:
 	MySharedPtr<GlobalEventCmd> mGlobalEventCmd;
 	MySharedPtr<ResRedirectItem> mResRedirectItem;
 	MySharedPtr<VersionSys> mVersionSys;
+	MySharedPtr<AutoClearSys> mAutoClearSys;
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
 
 	UMyBluePrintBase* mBPCtx;
@@ -185,6 +187,7 @@ public:
 	MySharedPtr<GlobalEventCmd> getGlobalEventCmd();
 	MySharedPtr<ResRedirectItem> getResRedirectItem();
 	MySharedPtr<VersionSys> getVersionSys();
+	MySharedPtr<AutoClearSys> getAutoClearSys();
 
 	//MySharedPtr<UMyBluePrintBase> getBPCtx();
 	UMyBluePrintBase* getBPCtx();

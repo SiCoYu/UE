@@ -165,6 +165,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Engine/HAL",
                 "MyProject/Private/BasicFrame/Libs/Engine/MyDelegate",
                 "MyProject/Private/BasicFrame/Libs/Engine/Templates",
+                "MyProject/Private/BasicFrame/Libs/Misc",
 
                 "MyProject/Private/BasicFrame/Module",
                 "MyProject/Private/BasicFrame/Module/Game",

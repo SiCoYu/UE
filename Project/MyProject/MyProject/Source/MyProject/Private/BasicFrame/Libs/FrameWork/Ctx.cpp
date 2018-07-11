@@ -41,6 +41,7 @@
 #include "GlobalEventCmd.h"
 #include "ResRedirectItem.h"
 #include "VersionSys.h"
+#include "AutoClearSys.h"
 
 #include "TickPriority.h"
 //#include "MySingletonBP.h"
@@ -100,6 +101,7 @@ Ctx::Ctx()
 	this->mMsgRouteNotify.setNull();
 	this->mGlobalDelegate.setNull();
 	this->mGlobalEventCmd.setNull();
+	this->mAutoClearSys.setNull();
 
 	this->mBPCtx = nullptr;
 	this->mMyNativeObjectReferencer = nullptr;
@@ -603,6 +605,11 @@ MySharedPtr<ResRedirectItem> Ctx::getResRedirectItem()
 MySharedPtr<VersionSys> Ctx::getVersionSys()
 {
 	return this->mVersionSys;
+}
+
+MySharedPtr<AutoClearSys> Ctx::getAutoClearSys()
+{
+	return this->mAutoClearSys;
 }
 
 UMyBluePrintBase* Ctx::getBPCtx()
