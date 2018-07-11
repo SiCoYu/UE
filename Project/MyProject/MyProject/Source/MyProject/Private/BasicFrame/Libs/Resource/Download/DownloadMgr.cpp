@@ -8,7 +8,7 @@
 #include "RefCount.h"
 #include "SafePointer.h"
 #include "Ctx.h"
-#include "LogTypeId.h"
+#include "LogTypeId::h"
 #include "LogSys.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

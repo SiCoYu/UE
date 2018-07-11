@@ -145,10 +145,10 @@ void loadWebMiniVerFile()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("VersionSys::loadWebMiniVerFile", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("VersionSys::loadWebMiniVerFile", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->mServerVer.mMiniLoadedDispatch.addEventHandle(null, this->onWebMiniLoaded);
+	this->mServerVer.mMiniLoadedDispatch.addEventHandle(nullptr, this->onWebMiniLoaded);
 	this->mServerVer.loadMiniVerFile();
 }
 
@@ -156,61 +156,61 @@ void loadWebVerFile()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("VersionSys::loadWebVerFile, start", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("VersionSys::loadWebVerFile, start", LogTypeId::eLogAutoUpdate);
 	}
 
 	if (this->mLocalVer.mIsVerLoadSuccess)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("VersionSys::loadWebVerFile, mLocalVer.mIsVerLoadSuccess is true", LogTypeId.eLogAutoUpdate);
+			GLogSys->log("VersionSys::loadWebVerFile, mLocalVer.mIsVerLoadSuccess is true", LogTypeId::eLogAutoUpdate);
 		}
 
 		if (this->mIsNeedUpdateVerFile)
 		{
 			if (MacroDef.ENABLE_LOG)
 			{
-				Ctx.msInstance.mLogSys.log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId.eLogAutoUpdate);
+				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mServerVer.mLoadedDispatch.addEventHandle(null, this->onWebVerLoaded);
+			this->mServerVer.mLoadedDispatch.addEventHandle(nullptr, this->onWebVerLoaded);
 			this->mServerVer.loadVerFile();
 		}
 		else
 		{
 			if (MacroDef.ENABLE_LOG)
 			{
-				Ctx.msInstance.mLogSys.log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is false", LogTypeId.eLogAutoUpdate);
+				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is false", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mLoadResultDispatch.dispatchEvent(null);
+			this->mLoadResultDispatch.dispatchEvent(nullptr);
 		}
 	}
 	else
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("VersionSys::loadWebVerFile, mLocalVer.mIsVerLoadSuccess is false", LogTypeId.eLogAutoUpdate);
+			GLogSys->log("VersionSys::loadWebVerFile, mLocalVer.mIsVerLoadSuccess is false", LogTypeId::eLogAutoUpdate);
 		}
 
 		if (this->mIsNeedUpdateVerFile)
 		{
 			if (MacroDef.ENABLE_LOG)
 			{
-				Ctx.msInstance.mLogSys.log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId.eLogAutoUpdate);
+				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mServerVer.mLoadedDispatch.addEventHandle(null, this->onWebVerLoaded);
+			this->mServerVer.mLoadedDispatch.addEventHandle(nullptr, this->onWebVerLoaded);
 			this->mServerVer.loadVerFile();
 		}
 		else
 		{
 			if (MacroDef.ENABLE_LOG)
 			{
-				Ctx.msInstance.mLogSys.log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is false", LogTypeId.eLogAutoUpdate);
+				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is false", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mLoadResultDispatch.dispatchEvent(null);
+			this->mLoadResultDispatch.dispatchEvent(nullptr);
 		}
 	}
 }
@@ -220,9 +220,9 @@ void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
 	if (this->mServerVer.mIsMiniLoadSuccess)
 	{
 		// 删除旧 mini 版本，修改新版本文件名字
-		//UtilFileIO.deleteFile(Path.Combine(MFileSys.getLocalWriteDir(), VerFileName.VER_P));
+		//UtilFileIO::deleteFile(Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_P));
 		// 修改新的版本文件名字
-		//UtilFileIO.renameFile(UtilLogic.combineVerPath(Path.Combine(MFileSys.getLocalWriteDir(), VerFileName.VER_MINI), m_miniVer), Path.Combine(MFileSys.getLocalWriteDir(), VerFileName.VER_MINI));
+		//UtilFileIO::renameFile(UtilLogic.combineVerPath(Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_MINI), m_miniVer), Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_MINI));
 
 		this->mIsNeedUpdateApp = (this->mLocalVer.mMajorVersion != this->mServerVer.mMajorVersion);      // 如果版本不一致，需要重新加载 App
 		this->mIsNeedUpdateVerFile = (this->mLocalVer.mFileVerInfo.mFileMd5 != this->mServerVer.mFileVerInfo.mFileMd5);      // 如果版本不一致，需要重新加载版本文件
@@ -231,14 +231,14 @@ void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
 
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("VersionSys::onWebMiniLoaded, loaded, mIsNeedUpdateApp = {0}, mIsNeedUpdateVerFile = {1}", this->mIsNeedUpdateApp.ToString(), this->mIsNeedUpdateVerFile.ToString()), LogTypeId.eLogAutoUpdate);
+			GLogSys->log(string.Format("VersionSys::onWebMiniLoaded, loaded, mIsNeedUpdateApp = {0}, mIsNeedUpdateVerFile = {1}", this->mIsNeedUpdateApp.ToString(), this->mIsNeedUpdateVerFile.ToString()), LogTypeId::eLogAutoUpdate);
 		}
 	}
 	else
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("VersionSys::onWebMiniLoaded, failed", LogTypeId.eLogAutoUpdate);
+			GLogSys->log("VersionSys::onWebMiniLoaded, failed", LogTypeId::eLogAutoUpdate);
 		}
 
 		// 如果没有加载到服务器版本文件，就不用更新了
@@ -246,17 +246,17 @@ void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
 		this->mIsNeedUpdateVerFile = false;
 	}
 
-	this->mMiniLoadResultDispatch.dispatchEvent(null);
+	this->mMiniLoadResultDispatch.dispatchEvent(nullptr);
 }
 
 void onWebVerLoaded(IDispatchObject* dispObj, uint uniqueId)
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("VersionSys::onWebVerLoaded", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("VersionSys::onWebVerLoaded", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->mLoadResultDispatch.dispatchEvent(null);
+	this->mLoadResultDispatch.dispatchEvent(nullptr);
 }
 
 std::string getFileVer(std::string path)
@@ -279,12 +279,12 @@ std::string getFileVer(std::string path)
 	return "";
 }
 
-// 保存 VerFileName.VER_MINI 版本文件和 VerFileName.VER_P 版本文件到 Persistent 文件夹
+// 保存 VerFileName::VER_MINI 版本文件和 VerFileName::VER_P 版本文件到 Persistent 文件夹
 void saveWebMiniOrPVerToPersistentPath()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("VersionSys::saveWebMiniOrPVerToPersistentPath", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("VersionSys::saveWebMiniOrPVerToPersistentPath", LogTypeId::eLogAutoUpdate);
 	}
 
 	this->mServerVer.saveMiniVerToPersistentPath();
@@ -298,7 +298,7 @@ void saveWebMiniOrPVerToPersistentPath()
 // 如果 WebVerFile 版本文件更细了，就更新本地版本文件
 void updateLocalVerFile()
 {
-	if (null != this->mLocalVer.mPath2Ver_P_Dic)
+	if (nullptr != this->mLocalVer.mPath2Ver_P_Dic)
 	{
 		this->mLocalVer.mPath2Ver_P_Dic.clear();
 		this->mLocalVer.mABPath2Ver_P_Dic.clear();
@@ -307,8 +307,8 @@ void updateLocalVerFile()
 	this->mLocalVer.mPath2Ver_P_Dic = this->mServerVer.mPath2HashDic;
 	this->mLocalVer.mABPath2Ver_P_Dic = this->mServerVer.mABPath2HashDic;
 
-	this->mServerVer.mPath2HashDic = null;
-	this->mServerVer.mABPath2HashDic = null;
+	this->mServerVer.mPath2HashDic = nullptr;
+	this->mServerVer.mABPath2HashDic = nullptr;
 }
 
 MY_END_NAMESPACE

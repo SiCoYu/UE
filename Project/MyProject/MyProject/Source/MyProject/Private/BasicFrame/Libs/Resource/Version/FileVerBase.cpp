@@ -1,5 +1,9 @@
 ﻿#include "MyProject.h"
 #include "FileVerBase.h"
+#include "FileVerInfo.h"
+#include "AddOnceAndCallOnceEventDispatch.h"
+#include "UtilStr.h"
+#include "MacroDef.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -24,7 +28,7 @@ std::string FileVerBase::getDetailVersionString()
 {
 	std::string ret = "";
 
-	ret = string.Format("{0}-{1}-{2}-{3}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion, this->mTimeStamp);
+	ret = UtilStr::Format("{0}-{1}-{2}-{3}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion, this->mTimeStamp);
 
 	return ret;
 }
@@ -33,7 +37,7 @@ std::string FileVerBase::getDotVersionString()
 {
 	std::string ret = "";
 
-	ret = string.Format("{0}.{1}.{2}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion);
+	ret = UtilStr::Format("{0}.{1}.{2}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion);
 
 	return ret;
 }
@@ -42,43 +46,43 @@ std::string FileVerBase::getVersionString()
 {
 	std::string ret = "";
 
-	ret = string.Format("{0}-{1}-{2}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion);
+	ret = UtilStr::Format("{0}-{1}-{2}", this->mMajorVersion, this->mMinorVersion, this->mPatchVersion);
 
 	return ret;
 }
 
 void FileVerBase::saveMiniVerToPersistentPath()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("FileVerBase::saveMiniVerToPersistentPath, start", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("FileVerBase::saveMiniVerToPersistentPath, start", LogTypeId::eLogAutoUpdate);
 	}
 
 	if (!this->mFileVerInfo.isNoVerInfo())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("FileVerBase::saveMiniVerToPersistentPath, isNoVerInfo is false", LogTypeId.eLogAutoUpdate);
+			GLogSys->log("FileVerBase::saveMiniVerToPersistentPath, isNoVerInfo is false", LogTypeId::eLogAutoUpdate);
 		}
 
-		string path = UtilFileIO.combine(MFileSys.msPersistentDataPath, VerFileName.VER_MINI);
+		std::string path = UtilFileIO::combine(MFileSys::msPersistentDataPath, VerFileName::VER_MINI);
 
-		if (UtilFileIO.existFile(path))
+		if (UtilFileIO::existFile(path))
 		{
-			UtilFileIO.deleteFile(path);
+			UtilFileIO::deleteFile(path);
 		}
 
-		MDataStream dataStream = new MDataStream(path, null, MFileMode.eCreateNew, MFileAccess.eWrite);
+		MDataStream dataStream = new MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
 		dataStream.open();
 
-		string line = string.Format("Version={0}", this->mCurVer);
+		std::string line = string.Format("Version={0}", this->mCurVer);
 		dataStream.writeLine(line);
 
 		line = string.Format("{0}={1}={2}={3}={4}", this->mFileVerInfo.mOrigPath, this->mFileVerInfo.mResUniqueId, this->mFileVerInfo.mLoadPath, this->mFileVerInfo.mFileMd5, this->mFileVerInfo.mFileSize);
 		dataStream.writeLine(line);
 
 		dataStream.dispose();
-		dataStream = null;
+		dataStream = nullptr;
 	}
 }
 
@@ -88,7 +92,7 @@ void FileVerBase::parseMiniFile(string text)
 	std::string[] equalSplitStr = { UtilEngineWrap.SEPARATOR };
 	std::string[] lineList = text.Split(lineSplitStr, StringSplitOptions.RemoveEmptyEntries);
 	int lineIdx = 0;
-	std::string[] equalList = null;
+	std::string[] equalList = nullptr;
 
 	// 第一行是版本号
 	lineIdx = 0;
@@ -117,7 +121,7 @@ void FileVerBase::parseMiniFile(string text)
 		{
 			if (MacroDef.ENABLE_ERROR)
 			{
-				Ctx.msInstance.mLogSys.error(string.Format("FileVerBase::parseMiniFile, curversion error, content = {0}", text), LogTypeId.eErrorDownload);
+				GLogSys->error(string.Format("FileVerBase::parseMiniFile, curversion error, content = {0}", text), LogTypeId::eErrorDownload);
 			}
 		}
 	}
@@ -125,7 +129,7 @@ void FileVerBase::parseMiniFile(string text)
 	{
 		if (MacroDef.ENABLE_ERROR)
 		{
-			Ctx.msInstance.mLogSys.error(string.Format("FileVerBase::parseMiniFile, LessEqual 0 error, content = {0}", text), LogTypeId.eErrorDownload);
+			GLogSys->error(string.Format("FileVerBase::parseMiniFile, LessEqual 0 error, content = {0}", text), LogTypeId::eErrorDownload);
 		}
 	}
 
@@ -150,7 +154,7 @@ void FileVerBase::parseMiniFile(string text)
 		{
 			if (MacroDef.ENABLE_ERROR)
 			{
-				Ctx.msInstance.mLogSys.error(string.Format("FileVerBase::parseMiniFile, version info error, content = {0}", text), LogTypeId.eErrorDownload);
+				GLogSys->error(string.Format("FileVerBase::parseMiniFile, version info error, content = {0}", text), LogTypeId::eErrorDownload);
 			}
 		}
 	}
@@ -158,7 +162,7 @@ void FileVerBase::parseMiniFile(string text)
 	{
 		if (MacroDef.ENABLE_ERROR)
 		{
-			Ctx.msInstance.mLogSys.error(string.Format("FileVerBase::parseMiniFile, less equal 1 error, content = {0}", text), LogTypeId.eErrorDownload);
+			GLogSys->error(string.Format("FileVerBase::parseMiniFile, less equal 1 error, content = {0}", text), LogTypeId::eErrorDownload);
 		}
 	}
 }
@@ -171,8 +175,8 @@ void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> di
 	string[] lineList = text.Split(lineSplitStr, StringSplitOptions.RemoveEmptyEntries);
 
 	int lineIdx = 0;
-	string[] equalList = null;
-	FileVerInfo fileInfo = null;
+	string[] equalList = nullptr;
+	FileVerInfo fileInfo = nullptr;
 
 	while (lineIdx < lineList.Length)
 	{
@@ -193,7 +197,7 @@ void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> di
 			//dic[fileInfo.mResUniqueId] = fileInfo;
 			dic[fileInfo.mOrigPath] = fileInfo;
 
-			if (null != abDic && !abDic.containsKey(fileInfo.mLoadPath))
+			if (nullptr != abDic && !abDic.containsKey(fileInfo.mLoadPath))
 			{
 				abDic[fileInfo.mLoadPath] = fileInfo;
 			}
@@ -202,7 +206,7 @@ void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> di
 		{
 			if (MacroDef.ENABLE_ERROR)
 			{
-				Ctx.msInstance.mLogSys.error(string.Format("FileVerBase::loadFormText, version info error, content = {0}", lineList[lineIdx]), LogTypeId.eErrorDownload);
+				GLogSys->error(string.Format("FileVerBase::loadFormText, version info error, content = {0}", lineList[lineIdx]), LogTypeId::eErrorDownload);
 			}
 		}
 
@@ -212,63 +216,63 @@ void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> di
 	int index = 0;
 	int listLen = 0;
 
-	if (null != lineSplitStr)
+	if (nullptr != lineSplitStr)
 	{
 		index = 0;
 		listLen = lineSplitStr.Length;
 
 		while (index < listLen)
 		{
-			lineSplitStr[index] = null;
+			lineSplitStr[index] = nullptr;
 			index += 1;
 		}
 
-		lineSplitStr = null;
+		lineSplitStr = nullptr;
 	}
 
-	if (null != equalSplitStr)
+	if (nullptr != equalSplitStr)
 	{
 		index = 0;
 		listLen = equalSplitStr.Length;
 
 		while (index < listLen)
 		{
-			equalSplitStr[index] = null;
+			equalSplitStr[index] = nullptr;
 			index += 1;
 		}
 
-		equalSplitStr = null;
+		equalSplitStr = nullptr;
 	}
 
-	if (null != lineList)
+	if (nullptr != lineList)
 	{
 		index = 0;
 		listLen = lineList.Length;
 
 		while (index < listLen)
 		{
-			lineList[index] = null;
+			lineList[index] = nullptr;
 			index += 1;
 		}
 
-		lineList = null;
+		lineList = nullptr;
 	}
 
-	if (null != equalList)
+	if (nullptr != equalList)
 	{
 		index = 0;
 		listLen = equalList.Length;
 
 		while (index < listLen)
 		{
-			equalList[index] = null;
+			equalList[index] = nullptr;
 			index += 1;
 		}
 
-		equalList = null;
+		equalList = nullptr;
 	}
 
-	fileInfo = null;
+	fileInfo = nullptr;
 }
 
 MY_END_NAMESPACE

@@ -82,14 +82,14 @@ void FileGroup::addLoadingPath(std::string path, FileVerInfo fileVerInfo /*, boo
 	//    this->mTotalNum += 1;
 	//}
 
-	//this->mProgressDispatch.dispatchEvent(null);
+	//this->mProgressDispatch.dispatchEvent(nullptr);
 }
 
 void FileGroup::removeLoadingPath(std::string path/*, bool isDecTotalNum = false*/)
 {
 	FileVerInfo fileVerInfo = Ctx.msInstance.mVersionSys.mServerVer.mABPath2HashDic[path];
 
-	if (null != fileVerInfo)
+	if (nullptr != fileVerInfo)
 	{
 		this->mCurMemSize += fileVerInfo.mFileSize;
 	}
@@ -101,7 +101,7 @@ void FileGroup::removeLoadingPath(std::string path/*, bool isDecTotalNum = false
 	//    this->mTotalNum -= 1;
 	//}
 
-	this->mProgressDispatch.dispatchEvent(null);
+	this->mProgressDispatch.dispatchEvent(nullptr);
 }
 
 void FileGroup::addLoadedPath(std::string path/*, bool isAddTotalNum = false*/)
@@ -124,7 +124,7 @@ void FileGroup::addFailedPath(std::string path/*, bool isAddTotalNum = false*/)
 	//    this->mTotalNum += 1;
 	//}
 
-	//this->mProgressDispatch.dispatchEvent(null);
+	//this->mProgressDispatch.dispatchEvent(nullptr);
 }
 
 // 获取进度 [0, 100]
@@ -168,49 +168,49 @@ string FileGroup::getProgressDesc()
 // 输出下载详细日志
 void FileGroup::logDownloadDetailInfo()
 {
-	Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, mCurNum = {0}, mTotalNum = {1}", this->mCurNum, this->mTotalNum), LogTypeId.eLogAutoUpdate);
+	GLogSys->log(string.Format("FileGroup::logDownloadDetailInfo, mCurNum = {0}, mTotalNum = {1}", this->mCurNum, this->mTotalNum), LogTypeId::eLogAutoUpdate);
 
 	int index = 0;
 	int listLen = this->mLoadingPath.count();
 
-	Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** LoadingPath start **********", LogTypeId.eLogAutoUpdate);
+	GLogSys->log("FileGroup::logDownloadDetailInfo, ********** LoadingPath start **********", LogTypeId::eLogAutoUpdate);
 
 	while (index < listLen)
 	{
-		Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, LoadingPath = {1}", index, this->mLoadingPath[index]), LogTypeId.eLogAutoUpdate);
+		GLogSys->log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, LoadingPath = {1}", index, this->mLoadingPath[index]), LogTypeId::eLogAutoUpdate);
 
 		index += 1;
 	}
 
-	Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** LoadingPath end **********", LogTypeId.eLogAutoUpdate);
+	GLogSys->log("FileGroup::logDownloadDetailInfo, ********** LoadingPath end **********", LogTypeId::eLogAutoUpdate);
 
 	index = 0;
 	listLen = this->mLoadedPath.count();
 
-	Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** mLoadedPath start **********", LogTypeId.eLogAutoUpdate);
+	GLogSys->log("FileGroup::logDownloadDetailInfo, ********** mLoadedPath start **********", LogTypeId::eLogAutoUpdate);
 
 	while (index < listLen)
 	{
-		Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mLoadedPath = {1}", index, this->mLoadedPath[index]), LogTypeId.eLogAutoUpdate);
+		GLogSys->log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mLoadedPath = {1}", index, this->mLoadedPath[index]), LogTypeId::eLogAutoUpdate);
 
 		index += 1;
 	}
 
-	Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** mLoadedPath end **********", LogTypeId.eLogAutoUpdate);
+	GLogSys->log("FileGroup::logDownloadDetailInfo, ********** mLoadedPath end **********", LogTypeId::eLogAutoUpdate);
 
 	index = 0;
 	listLen = this->mFailedPath.count();
 
-	Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** mFailedPath start **********", LogTypeId.eLogAutoUpdate);
+	GLogSys->log("FileGroup::logDownloadDetailInfo, ********** mFailedPath start **********", LogTypeId::eLogAutoUpdate);
 
 	while (index < listLen)
 	{
-		Ctx.msInstance.mLogSys.log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mFailedPath = {1}", index, this->mFailedPath[index]), LogTypeId.eLogAutoUpdate);
+		GLogSys->log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mFailedPath = {1}", index, this->mFailedPath[index]), LogTypeId::eLogAutoUpdate);
 
 		index += 1;
 	}
 
-	Ctx.msInstance.mLogSys.log("FileGroup::logDownloadDetailInfo, ********** mFailedPath end **********", LogTypeId.eLogAutoUpdate);
+	GLogSys->log("FileGroup::logDownloadDetailInfo, ********** mFailedPath end **********", LogTypeId::eLogAutoUpdate);
 }
 
 // 获取当前资源是否更新了
@@ -220,7 +220,7 @@ bool FileGroup::isResUpdatedByResPath(string path)
 
 	ResRedirectItem resRedirectItem = Ctx.msInstance.mResRedirect.getResRedirectItem(ShaderCollectPath.StartShaderCollect, false);
 
-	if (null != resRedirectItem)
+	if (nullptr != resRedirectItem)
 	{
 		ret = this->isResUpdatedByABPath(resRedirectItem.mFileVerInfo.mLoadPath);
 	}

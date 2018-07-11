@@ -43,11 +43,11 @@ void LocalVer::loadMiniVerFile()
 {
 	//if (MacroDef.ENABLE_LOG)
 	//{
-	//    Ctx.msInstance.mLogSys.log("LocalVer::loadMiniVerFile, Persistent", LogTypeId.eLogAutoUpdate);
+	//    GLogSys->log("LocalVer::loadMiniVerFile, Persistent", LogTypeId::eLogAutoUpdate);
 	//}
 
 	//// 先从 PersistentPath 目录下读取,各个平台都可以同步读取
-	//this->mMiniDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamPersistentDataPath, VerFileName.VER_MINI), this->onPersistentMiniLoadEventHandle);
+	//this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_MINI), this->onPersistentMiniLoadEventHandle);
 	//this->mMiniDataStream.open();
 
 	//// 如果读取没有成功，就从 StreamingAssetsPath (不再从 Resources) 目录下读取， StreamingAssetsPath android 下读取非 AssetBundles 需要异步
@@ -55,17 +55,17 @@ void LocalVer::loadMiniVerFile()
 	//{
 	//    if (MacroDef.ENABLE_LOG)
 	//    {
-	//        Ctx.msInstance.mLogSys.log("LocalVer::loadMiniVerFile, StreamingAssets", LogTypeId.eLogAutoUpdate);
+	//        GLogSys->log("LocalVer::loadMiniVerFile, StreamingAssets", LogTypeId::eLogAutoUpdate);
 	//    }
 
 	//    this->mIsMiniLoaded = false;     // 重新设置成 false ，防止后面的因为异步加载完成后，再调用一次的时候，会调用外面两次
 
-	//    //this->mMiniDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamResourcesPath, "Constant", VerFileName.VER_MINI), this->onMiniLoadEventHandle);
-	//    this->mMiniDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamStreamingAssetsPath, VerFileName.VER_MINI), this->onStreamingMiniLoadEventHandle);
+	//    //this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_MINI), this->onMiniLoadEventHandle);
+	//    this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamStreamingAssetsPath, VerFileName::VER_MINI), this->onStreamingMiniLoadEventHandle);
 	//    this->mMiniDataStream.open();
 	//}
 
-	////this->mMiniLoadedDispatch.dispatchEvent(null);
+	////this->mMiniLoadedDispatch.dispatchEvent(nullptr);
 
 	this->loadStreamingAssetsMiniVerFile();
 }
@@ -74,13 +74,13 @@ void LocalVer::loadStreamingAssetsMiniVerFile()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("LocalVer::loadStreamingAssetsMiniVerFile, StreamingAssets", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("LocalVer::loadStreamingAssetsMiniVerFile, StreamingAssets", LogTypeId::eLogAutoUpdate);
 	}
 
 	this->mIsMiniLoaded = false;     // 重新设置成 false ，防止后面的因为异步加载完成后，再调用一次的时候，会调用外面两次
 
-									 //this->mMiniDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamResourcesPath, "Constant", VerFileName.VER_MINI), this->onMiniLoadEventHandle);
-	this->mMiniDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamStreamingAssetsPath, VerFileName.VER_MINI), this->onStreamingMiniLoadEventHandle);
+									 //this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_MINI), this->onMiniLoadEventHandle);
+	this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamStreamingAssetsPath, VerFileName::VER_MINI), this->onStreamingMiniLoadEventHandle);
 	this->mMiniDataStream.open();
 }
 
@@ -88,11 +88,11 @@ void LocalVer::loadPersistentMiniVerFile()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("LocalVer::loadPersistentMiniVerFile, Persistent", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("LocalVer::loadPersistentMiniVerFile, Persistent", LogTypeId::eLogAutoUpdate);
 	}
 
 	// 先从 PersistentPath 目录下读取,各个平台都可以同步读取
-	this->mMiniDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamPersistentDataPath, VerFileName.VER_MINI), this->onPersistentMiniLoadEventHandle);
+	this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_MINI), this->onPersistentMiniLoadEventHandle);
 	this->mMiniDataStream.open();
 }
 
@@ -100,7 +100,7 @@ void LocalVer::onStreamingMiniLoadEventHandle(IDispatchObject dispObj, uint uniq
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("LocalVer::onStreamingMiniLoadEventHandle", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("LocalVer::onStreamingMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
 	this->onMiniLoadEventHandle(dispObj, 0);
@@ -119,7 +119,7 @@ void LocalVer::onPersistentMiniLoadEventHandle(IDispatchObject dispObj, uint uni
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("LocalVer::onPersistentMiniLoadEventHandle", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("LocalVer::onPersistentMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
 	this->onMiniLoadEventHandle(dispObj, 0);
@@ -133,7 +133,7 @@ void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("LocalVer::onMiniLoadEventHandle", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("LocalVer::onMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
 	this->mMiniDataStream = dispObj as MDataStream;
@@ -142,16 +142,16 @@ void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("LocalVer::onMiniLoadEventHandle, success", LogTypeId.eLogAutoUpdate);
+			GLogSys->log("LocalVer::onMiniLoadEventHandle, success", LogTypeId::eLogAutoUpdate);
 		}
 
 		this->parseMiniFile(this->mMiniDataStream.readText());
 	}
 
 	this->mMiniDataStream.dispose();
-	this->mMiniDataStream = null;
+	this->mMiniDataStream = nullptr;
 
-	//this->mMiniLoadedDispatch.dispatchEvent(null);
+	//this->mMiniLoadedDispatch.dispatchEvent(nullptr);
 
 	//this->mIsMiniLoaded = true;
 	//this->onAllVerLoaded();
@@ -160,7 +160,7 @@ void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 // 加载 Resources 文件夹下文件对应的版本系统，目前没有了
 void LocalVer::loadLocalRVer()
 {
-	this->mRDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamResourcesPath, "Constant", VerFileName.VER_R), onRVerLoaded);
+	this->mRDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_R), onRVerLoaded);
 	this->mRDataStream.open();
 }
 
@@ -174,7 +174,7 @@ void LocalVer::onRVerLoaded(IDispatchObject dispObj, uint uniqueId)
 	}
 
 	this->mRDataStream.dispose();
-	this->mRDataStream = null;
+	this->mRDataStream = nullptr;
 
 	this->onAllVerLoaded();
 }
@@ -182,17 +182,17 @@ void LocalVer::onRVerLoaded(IDispatchObject dispObj, uint uniqueId)
 // Android 下 StreamingAssets 目录访问只能是异步的，因此需要等待这个访问完成才行
 void LocalVer::loadLocalSVer()
 {
-	string path = UtilFileIO.combine(MFileSys.msDataStreamStreamingAssetsPath, VerFileName.VER_S);
+	string path = UtilFileIO::combine(MFileSys::msDataStreamStreamingAssetsPath, VerFileName::VER_S);
 
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log(string.Format("LocalVer::loadLocalSVer, path = {0}", path), LogTypeId.eLogAutoUpdate);
+		GLogSys->log(string.Format("LocalVer::loadLocalSVer, path = {0}", path), LogTypeId::eLogAutoUpdate);
 	}
 
-	// 不要从 StreamingAssets 这个目录下加载 VerFileName.VER_S ，因为在 Android 上是异步加载的，因此直接放在 Resources 目录下，但是现在是不再向 Resources 目录下，本地都放在 StreamingAssets 目录
+	// 不要从 StreamingAssets 这个目录下加载 VerFileName::VER_S ，因为在 Android 上是异步加载的，因此直接放在 Resources 目录下，但是现在是不再向 Resources 目录下，本地都放在 StreamingAssets 目录
 
 	this->mSDataStream = new MDataStream(path, this->onSVerLoaded);
-	//this->mSDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamResourcesPath, "Constant", VerFileName.VER_S), this->onSVerLoaded);
+	//this->mSDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_S), this->onSVerLoaded);
 	this->mSDataStream.open();
 }
 
@@ -200,7 +200,7 @@ void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("LocalVer::onSVerLoaded", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("LocalVer::onSVerLoaded", LogTypeId::eLogAutoUpdate);
 	}
 
 	this->mSDataStream = dispObj as MDataStream;
@@ -211,7 +211,7 @@ void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
 
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("LocalVer::onSVerLoaded, success, text = {0}", text), LogTypeId.eLogAutoUpdate);
+			GLogSys->log(string.Format("LocalVer::onSVerLoaded, success, text = {0}", text), LogTypeId::eLogAutoUpdate);
 		}
 
 		//this->mSDataStream.seek(0, MSeekOrigin.eBegin);
@@ -219,7 +219,7 @@ void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
 	}
 
 	this->mSDataStream.dispose();
-	this->mSDataStream = null;
+	this->mSDataStream = nullptr;
 
 	this->mIsVerSLoaded = true;
 	this->onAllVerLoaded();
@@ -229,10 +229,10 @@ void LocalVer::loadLocalPVer()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("LocalVer::loadLocalPVer", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("LocalVer::loadLocalPVer", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->mPDataStream = new MDataStream(UtilFileIO.combine(MFileSys.msDataStreamPersistentDataPath, VerFileName.VER_P), this->onPVerLoaded);
+	this->mPDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_P), this->onPVerLoaded);
 	this->mPDataStream.open();
 }
 
@@ -240,7 +240,7 @@ void LocalVer::onPVerLoaded(IDispatchObject dispObj, uint uniqueId)
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("LocalVer::onPVerLoaded", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("LocalVer::onPVerLoaded", LogTypeId::eLogAutoUpdate);
 	}
 
 	this->mPDataStream = dispObj as MDataStream;
@@ -249,14 +249,14 @@ void LocalVer::onPVerLoaded(IDispatchObject dispObj, uint uniqueId)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("LocalVer::onPVerLoaded, success", LogTypeId.eLogAutoUpdate);
+			GLogSys->log("LocalVer::onPVerLoaded, success", LogTypeId::eLogAutoUpdate);
 		}
 
 		this->loadFormText(this->mPDataStream.readText(), this->mPath2Ver_P_Dic, this->mABPath2Ver_P_Dic);
 	}
 
 	this->mPDataStream.dispose();
-	this->mPDataStream = null;
+	this->mPDataStream = nullptr;
 
 	this->mIsVerPLoaded = true;
 	this->onAllVerLoaded();
@@ -266,7 +266,7 @@ void LocalVer::onAllVerLoaded()
 {
 	if (this->mIsMiniLoaded && this->mIsVerSLoaded && this->mIsVerPLoaded)
 	{
-		this->mLoadedDispatch.dispatchEvent(null);
+		this->mLoadedDispatch.dispatchEvent(nullptr);
 		Ctx.msInstance.setIsLocalVerLoaded(true);
 	}
 }

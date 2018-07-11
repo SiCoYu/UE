@@ -16,17 +16,17 @@ void ServerVer::loadMiniVerFile()
 {
 	if (MacroDef::ENABLE_LOG)
 	{
-		GLogSys.log("ServerVer::loadMiniVerFile", LogTypeId.eLogAutoUpdate);
+		GLogSys.log("ServerVer::loadMiniVerFile", LogTypeId::eLogAutoUpdate);
 	}
 
 	AuxDownloader auxDownload = new AuxDownloader();
 	auxDownload.setVersion(UtilSysLibWrap.getRandomVersion());
 	auxDownload.download(
-		VerFileName.VER_MINI,
-		null,
+		VerFileName::VER_MINI,
+		nullptr,
 		this->onMiniLoadEventHandle,
-		null,
-		null,
+		nullptr,
+		nullptr,
 		0,
 		false,
 		(int)DownloadType.eWebRequest
@@ -38,7 +38,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("ServerVer::onMiniLoadEventHandle", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("ServerVer::onMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
 	AuxDownloader downloadItem = dispObj as AuxDownloader;
@@ -47,15 +47,15 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("ServerVer::onMiniLoadEventHandle, loaded", LogTypeId.eLogAutoUpdate);
+			GLogSys->log("ServerVer::onMiniLoadEventHandle, loaded", LogTypeId::eLogAutoUpdate);
 		}
 
 		byte[] textAsset = downloadItem.getBytes();
 
-		if (textAsset != null)
+		if (textAsset != nullptr)
 		{
 			// Lzma 解压缩
-			//byte[] outBytes = null;
+			//byte[] outBytes = nullptr;
 			//uint outLen = 0;
 			//MLzma.DecompressStrLZMA(textAsset, (uint)textAsset.Length, ref outBytes, ref outLen);
 			this->parseMiniFile(System.Text.Encoding.UTF8.GetString(textAsset));
@@ -67,7 +67,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log("ServerVer::onMiniLoadEventHandle, error", LogTypeId.eLogAutoUpdate);
+			GLogSys->log("ServerVer::onMiniLoadEventHandle, error", LogTypeId::eLogAutoUpdate);
 		}
 
 		this->mIsMiniLoadSuccess = false;
@@ -75,7 +75,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 
 	downloadItem.dispose();
 
-	this->mMiniLoadedDispatch.dispatchEvent(null);
+	this->mMiniLoadedDispatch.dispatchEvent(nullptr);
 }
 
 // 加载版本文件
@@ -83,17 +83,17 @@ void ServerVer::loadVerFile()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("ServerVer::loadVerFile", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("ServerVer::loadVerFile", LogTypeId::eLogAutoUpdate);
 	}
 
 	AuxDownloader auxDownload = new AuxDownloader();
 	auxDownload.setVersion(UtilSysLibWrap.getRandomVersion());
 	auxDownload.download(
-		VerFileName.VER_P,
-		null,
+		VerFileName::VER_P,
+		nullptr,
 		this->onVerLoadEventHandle,
-		null,
-		null,
+		nullptr,
+		nullptr,
 		0,
 		false,
 		(int)DownloadType.eWebRequest
@@ -105,7 +105,7 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("ServerVer::onVerLoadEventHandle", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("ServerVer::onVerLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
 	AuxDownloader downloadItem = dispObj as AuxDownloader;
@@ -114,12 +114,12 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("ServerVer::onVerLoadEventHandle, loaded, origPath = {0}", downloadItem.getOrigPath()), LogTypeId.eLogAutoUpdate);
+			GLogSys->log(string.Format("ServerVer::onVerLoadEventHandle, loaded, origPath = {0}", downloadItem.getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
 		byte[] textAsset = downloadItem.getBytes();
 
-		if (textAsset != null)
+		if (textAsset != nullptr)
 		{
 			this->loadFormText(System.Text.Encoding.UTF8.GetString(textAsset), this->mPath2HashDic, this->mABPath2HashDic);
 		}
@@ -130,34 +130,34 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("ServerVer::onVerLoadEventHandle, failed, origPath = {0}", downloadItem.getOrigPath()), LogTypeId.eLogAutoUpdate);
+			GLogSys->log(string.Format("ServerVer::onVerLoadEventHandle, failed, origPath = {0}", downloadItem.getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
 		this->mIsVerLoadSuccess = false;
 	}
 
-	this->mLoadedDispatch.dispatchEvent(null);
+	this->mLoadedDispatch.dispatchEvent(nullptr);
 }
 
 void ServerVer::savePVerToPersistentPath()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
-		Ctx.msInstance.mLogSys.log("ServerVer::savePVerToPersistentPath, start", LogTypeId.eLogAutoUpdate);
+		GLogSys->log("ServerVer::savePVerToPersistentPath, start", LogTypeId::eLogAutoUpdate);
 	}
 
-	string path = UtilFileIO.combine(MFileSys.msPersistentDataPath, VerFileName.VER_P);
+	string path = UtilFileIO::combine(MFileSys::msPersistentDataPath, VerFileName::VER_P);
 
-	if (UtilFileIO.existFile(path))
+	if (UtilFileIO::existFile(path))
 	{
-		UtilFileIO.deleteFile(path);
+		UtilFileIO::deleteFile(path);
 	}
 
-	MDataStream dataStream = new MDataStream(path, null, MFileMode.eCreateNew, MFileAccess.eWrite);
+	MDataStream dataStream = new MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
 	dataStream.open();
 
 	string line = "";
-	FileVerInfo fileVerInfo = null;
+	FileVerInfo fileVerInfo = nullptr;
 
 	foreach(System.Collections.Generic.KeyValuePair<string, FileVerInfo> kv in this->mPath2HashDic.getData())
 	{
@@ -168,7 +168,7 @@ void ServerVer::savePVerToPersistentPath()
 	}
 
 	dataStream.dispose();
-	dataStream = null;
+	dataStream = nullptr;
 }
 
 MY_END_NAMESPACE

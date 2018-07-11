@@ -40,8 +40,8 @@ bool ResRedirect::canResRedirect(string origPath, bool isABAsset)
 // isABAsset 是否是 AssetBundles 资源目录
 ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
 {
-	ResRedirectItem item = null;
-	FileVerInfo fileVerInfo = null;
+	ResRedirectItem item = nullptr;
+	FileVerInfo fileVerInfo = nullptr;
 
 	if (!isABAsset)
 	{
@@ -76,17 +76,17 @@ ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
 		}
 	}
 
-	if (null == item.mFileVerInfo)
+	if (nullptr == item.mFileVerInfo)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("ResRedirectItem::getResRedirectItem, cannot find load item, origPath = {0}", origPath), LogTypeId.eLogResLoader);
+			GLogSys->log(string.Format("ResRedirectItem::getResRedirectItem, cannot find load item, origPath = {0}", origPath), LogTypeId::eLogResLoader);
 		}
 
 		fileVerInfo = new FileVerInfo();
 		fileVerInfo.mOrigPath = origPath;
-		fileVerInfo.mResUniqueId = UtilFileIO.getFilePathNoExt(origPath);
-		fileVerInfo.mLoadPath = UtilFileIO.getFilePathNoExt(origPath);
+		fileVerInfo.mResUniqueId = UtilFileIO::getFilePathNoExt(origPath);
+		fileVerInfo.mLoadPath = UtilFileIO::getFilePathNoExt(origPath);
 		fileVerInfo.mFileMd5 = "error";
 		fileVerInfo.mFileSize = 0;
 
@@ -96,7 +96,7 @@ ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
-			Ctx.msInstance.mLogSys.log(string.Format("ResRedirectItem::getResRedirectItem, find load item, origPath = {0}, mResLoadType = {1}", origPath, item.mResLoadType), LogTypeId.eLogResLoader);
+			GLogSys->log(string.Format("ResRedirectItem::getResRedirectItem, find load item, origPath = {0}, mResLoadType = {1}", origPath, item.mResLoadType), LogTypeId::eLogResLoader);
 		}
 	}
 
