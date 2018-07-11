@@ -198,7 +198,7 @@ void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> di
 			fileInfo.mResUniqueId = equalList[1];
 			fileInfo.mLoadPath = equalList[2];
 			fileInfo.mFileMd5 = equalList[3];
-			fileInfo.mFileSize = MConvert::convStr2Int(equalList[4]);
+			fileInfo.mFileSize = UtilConvert::convStr2Int(equalList[4]);
 
 			//dic[fileInfo.mResUniqueId] = fileInfo;
 			dic[fileInfo.mOrigPath] = fileInfo;

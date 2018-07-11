@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class MConvert
+class UtilConvert
 {
 public:
 	std::string convInt2Str(int value);

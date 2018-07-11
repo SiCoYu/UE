@@ -4,13 +4,13 @@
 #include "AddOnceAndCallOnceEventDispatch.h"
 #include "ServerVer.h"
 #include "LocalVer.h"
-#include "MConvert.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 VersionSys::VersionSys()
 {
-	this->mMiniVer = MConvert::convInt2Str(UtilMath::range(0, UtilMath::msIntMaxValue));
+	this->mMiniVer = UtilConvert::convInt2Str(UtilMath::range(0, UtilMath::msIntMaxValue));
 	this->mMiniLoadResultDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
 	this->mLoadResultDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
 
@@ -32,13 +32,13 @@ std::string VersionSys::getMajorVersion()
 {
 	std::string ret = "";
 
-	if (this->mServerVer.mIsMiniLoadSuccess)
+	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
-		ret = this->mServerVer.mMajorVersion;
+		ret = this->mServerVer->mMajorVersion;
 	}
 	else
 	{
-		ret = this->mLocalVer.mMajorVersion;
+		ret = this->mLocalVer->mMajorVersion;
 	}
 
 	return ret;
@@ -48,13 +48,13 @@ std::string getMinorVersion()
 {
 	std::string ret = "";
 
-	if (this->mServerVer.mIsMiniLoadSuccess)
+	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
-		ret = this->mServerVer.mMinorVersion;
+		ret = this->mServerVer->mMinorVersion;
 	}
 	else
 	{
-		ret = this->mLocalVer.mMinorVersion;
+		ret = this->mLocalVer->mMinorVersion;
 	}
 
 	return ret;
@@ -64,13 +64,13 @@ std::string getPatchVersion()
 {
 	std::string ret = "";
 
-	if (this->mServerVer.mIsMiniLoadSuccess)
+	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
-		ret = this->mServerVer.mPatchVersion;
+		ret = this->mServerVer->mPatchVersion;
 	}
 	else
 	{
-		ret = this->mLocalVer.mPatchVersion;
+		ret = this->mLocalVer->mPatchVersion;
 	}
 
 	return ret;
@@ -80,13 +80,13 @@ std::string getTimeStamp()
 {
 	std::string ret = "";
 
-	if (this->mServerVer.mIsMiniLoadSuccess)
+	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
-		ret = this->mServerVer.mTimeStamp;
+		ret = this->mServerVer->mTimeStamp;
 	}
 	else
 	{
-		ret = this->mLocalVer.mTimeStamp;
+		ret = this->mLocalVer->mTimeStamp;
 	}
 
 	return ret;
@@ -96,13 +96,13 @@ std::string getDetailVersionString()
 {
 	std::string ret = "";
 
-	if (this->mServerVer.mIsMiniLoadSuccess)
+	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
-		ret = this->mServerVer.getDetailVersionString();
+		ret = this->mServerVer->getDetailVersionString();
 	}
 	else
 	{
-		ret = this->mLocalVer.getDetailVersionString();
+		ret = this->mLocalVer->getDetailVersionString();
 	}
 
 	return ret;
@@ -112,13 +112,13 @@ std::string getDotVersionString()
 {
 	std::string ret = "";
 
-	if (this->mServerVer.mIsMiniLoadSuccess)
+	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
-		ret = this->mServerVer.getDotVersionString();
+		ret = this->mServerVer->getDotVersionString();
 	}
 	else
 	{
-		ret = this->mLocalVer.getDotVersionString();
+		ret = this->mLocalVer->getDotVersionString();
 	}
 
 	return ret;
@@ -128,13 +128,13 @@ std::string getVersionString()
 {
 	std::string ret = "";
 
-	if (this->mServerVer.mIsMiniLoadSuccess)
+	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
-		ret = this->mServerVer.getVersionString();
+		ret = this->mServerVer->getVersionString();
 	}
 	else
 	{
-		ret = this->mLocalVer.getVersionString();
+		ret = this->mLocalVer->getVersionString();
 	}
 
 	return ret;
@@ -147,8 +147,8 @@ void loadWebMiniVerFile()
 		GLogSys->log("VersionSys::loadWebMiniVerFile", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->mServerVer.mMiniLoadedDispatch.addEventHandle(nullptr, this->onWebMiniLoaded);
-	this->mServerVer.loadMiniVerFile();
+	this->mServerVer->mMiniLoadedDispatch->addEventHandle(nullptr, this->onWebMiniLoaded);
+	this->mServerVer->loadMiniVerFile();
 }
 
 void loadWebVerFile()
@@ -158,11 +158,11 @@ void loadWebVerFile()
 		GLogSys->log("VersionSys::loadWebVerFile, start", LogTypeId::eLogAutoUpdate);
 	}
 
-	if (this->mLocalVer.mIsVerLoadSuccess)
+	if (this->mLocalVer->mIsVerLoadSuccess)
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log("VersionSys::loadWebVerFile, mLocalVer.mIsVerLoadSuccess is true", LogTypeId::eLogAutoUpdate);
+			GLogSys->log("VersionSys::loadWebVerFile, mLocalVer->mIsVerLoadSuccess is true", LogTypeId::eLogAutoUpdate);
 		}
 
 		if (this->mIsNeedUpdateVerFile)
@@ -172,8 +172,8 @@ void loadWebVerFile()
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mServerVer.mLoadedDispatch.addEventHandle(nullptr, this->onWebVerLoaded);
-			this->mServerVer.loadVerFile();
+			this->mServerVer->mLoadedDispatch->addEventHandle(nullptr, this->onWebVerLoaded);
+			this->mServerVer->loadVerFile();
 		}
 		else
 		{
@@ -182,14 +182,14 @@ void loadWebVerFile()
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is false", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mLoadResultDispatch.dispatchEvent(nullptr);
+			this->mLoadResultDispatch->dispatchEvent(nullptr);
 		}
 	}
 	else
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log("VersionSys::loadWebVerFile, mLocalVer.mIsVerLoadSuccess is false", LogTypeId::eLogAutoUpdate);
+			GLogSys->log("VersionSys::loadWebVerFile, mLocalVer->mIsVerLoadSuccess is false", LogTypeId::eLogAutoUpdate);
 		}
 
 		if (this->mIsNeedUpdateVerFile)
@@ -199,8 +199,8 @@ void loadWebVerFile()
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mServerVer.mLoadedDispatch.addEventHandle(nullptr, this->onWebVerLoaded);
-			this->mServerVer.loadVerFile();
+			this->mServerVer->mLoadedDispatch->addEventHandle(nullptr, this->onWebVerLoaded);
+			this->mServerVer->loadVerFile();
 		}
 		else
 		{
@@ -209,22 +209,22 @@ void loadWebVerFile()
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is false", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mLoadResultDispatch.dispatchEvent(nullptr);
+			this->mLoadResultDispatch->dispatchEvent(nullptr);
 		}
 	}
 }
 
 void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
 {
-	if (this->mServerVer.mIsMiniLoadSuccess)
+	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
 		// 删除旧 mini 版本，修改新版本文件名字
 		//UtilFileIO::deleteFile(Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_P));
 		// 修改新的版本文件名字
 		//UtilFileIO::renameFile(UtilLogic.combineVerPath(Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_MINI), m_miniVer), Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_MINI));
 
-		this->mIsNeedUpdateApp = (this->mLocalVer.mMajorVersion != this->mServerVer.mMajorVersion);      // 如果版本不一致，需要重新加载 App
-		this->mIsNeedUpdateVerFile = (this->mLocalVer.mFileVerInfo.mFileMd5 != this->mServerVer.mFileVerInfo.mFileMd5);      // 如果版本不一致，需要重新加载版本文件
+		this->mIsNeedUpdateApp = (this->mLocalVer->mMajorVersion != this->mServerVer->mMajorVersion);      // 如果版本不一致，需要重新加载 App
+		this->mIsNeedUpdateVerFile = (this->mLocalVer->mFileVerInfo.mFileMd5 != this->mServerVer->mFileVerInfo.mFileMd5);      // 如果版本不一致，需要重新加载版本文件
 
 																															 //this->mIsNeedUpdateVerFile = true;         // 测试强制更新
 
@@ -255,23 +255,23 @@ void onWebVerLoaded(IDispatchObject* dispObj, uint uniqueId)
 		GLogSys->log("VersionSys::onWebVerLoaded", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->mLoadResultDispatch.dispatchEvent(nullptr);
+	this->mLoadResultDispatch->dispatchEvent(nullptr);
 }
 
 std::string getFileVer(std::string path)
 {
 	if (this->mIsNeedUpdateVerFile)
 	{
-		if (this->mServerVer.mPath2HashDic.containsKey(path))
+		if (this->mServerVer->mPath2HashDic.containsKey(path))
 		{
-			return this->mServerVer.mPath2HashDic[path].mFileMd5;
+			return this->mServerVer->mPath2HashDic[path].mFileMd5;
 		}
 	}
 	else
 	{
-		if (this->mLocalVer.mPath2Ver_P_Dic.containsKey(path))
+		if (this->mLocalVer->mPath2Ver_P_Dic.containsKey(path))
 		{
-			return this->mLocalVer.mPath2Ver_P_Dic[path].mFileMd5;
+			return this->mLocalVer->mPath2Ver_P_Dic[path].mFileMd5;
 		}
 	}
 
@@ -286,28 +286,28 @@ void saveWebMiniOrPVerToPersistentPath()
 		GLogSys->log("VersionSys::saveWebMiniOrPVerToPersistentPath", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->mServerVer.saveMiniVerToPersistentPath();
+	this->mServerVer->saveMiniVerToPersistentPath();
 
 	if (this->mIsNeedUpdateVerFile)
 	{
-		this->mServerVer.savePVerToPersistentPath();
+		this->mServerVer->savePVerToPersistentPath();
 	}
 }
 
 // 如果 WebVerFile 版本文件更细了，就更新本地版本文件
 void updateLocalVerFile()
 {
-	if (nullptr != this->mLocalVer.mPath2Ver_P_Dic)
+	if (nullptr != this->mLocalVer->mPath2Ver_P_Dic)
 	{
-		this->mLocalVer.mPath2Ver_P_Dic.clear();
-		this->mLocalVer.mABPath2Ver_P_Dic.clear();
+		this->mLocalVer->mPath2Ver_P_Dic.clear();
+		this->mLocalVer->mABPath2Ver_P_Dic.clear();
 	}
 
-	this->mLocalVer.mPath2Ver_P_Dic = this->mServerVer.mPath2HashDic;
-	this->mLocalVer.mABPath2Ver_P_Dic = this->mServerVer.mABPath2HashDic;
+	this->mLocalVer->mPath2Ver_P_Dic = this->mServerVer->mPath2HashDic;
+	this->mLocalVer->mABPath2Ver_P_Dic = this->mServerVer->mABPath2HashDic;
 
-	this->mServerVer.mPath2HashDic = nullptr;
-	this->mServerVer.mABPath2HashDic = nullptr;
+	this->mServerVer->mPath2HashDic = nullptr;
+	this->mServerVer->mABPath2HashDic = nullptr;
 }
 
 MY_END_NAMESPACE

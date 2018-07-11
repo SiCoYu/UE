@@ -1,11 +1,11 @@
 #include "MyProject.h"
-#include "MConvert.h"
+#include "UtilConvert.h"
 #include <sstream>	// stringstream
 #include <string>     // std::string, std::stoi
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-std::string MConvert::convInt2Str(int value)
+std::string UtilConvert::convInt2Str(int value)
 {
 	std::string ret;
 	stringstream stream;
@@ -14,7 +14,7 @@ std::string MConvert::convInt2Str(int value)
 	return ret;
 }
 
-int MConvert::convStr2Int(std::string value)
+int UtilConvert::convStr2Int(std::string value)
 {
 	int ret = 0;
 	std::stoi(value, nullptr, 10);

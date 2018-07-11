@@ -75,7 +75,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 
 	downloadItem.dispose();
 
-	this->mMiniLoadedDispatch.dispatchEvent(nullptr);
+	this->mMiniLoadedDispatch->dispatchEvent(nullptr);
 }
 
 // 加载版本文件
@@ -136,7 +136,7 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 		this->mIsVerLoadSuccess = false;
 	}
 
-	this->mLoadedDispatch.dispatchEvent(nullptr);
+	this->mLoadedDispatch->dispatchEvent(nullptr);
 }
 
 void ServerVer::savePVerToPersistentPath()

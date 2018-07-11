@@ -58,7 +58,7 @@ void LocalVer::loadMiniVerFile()
 	//    this->mMiniDataStream.open();
 	//}
 
-	////this->mMiniLoadedDispatch.dispatchEvent(nullptr);
+	////this->mMiniLoadedDispatch->dispatchEvent(nullptr);
 
 	this->loadStreamingAssetsMiniVerFile();
 }
@@ -144,7 +144,7 @@ void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 	this->mMiniDataStream.dispose();
 	this->mMiniDataStream = nullptr;
 
-	//this->mMiniLoadedDispatch.dispatchEvent(nullptr);
+	//this->mMiniLoadedDispatch->dispatchEvent(nullptr);
 
 	//this->mIsMiniLoaded = true;
 	//this->onAllVerLoaded();
@@ -259,7 +259,7 @@ void LocalVer::onAllVerLoaded()
 {
 	if (this->mIsMiniLoaded && this->mIsVerSLoaded && this->mIsVerPLoaded)
 	{
-		this->mLoadedDispatch.dispatchEvent(nullptr);
+		this->mLoadedDispatch->dispatchEvent(nullptr);
 		Ctx.msInstance.setIsLocalVerLoaded(true);
 	}
 }

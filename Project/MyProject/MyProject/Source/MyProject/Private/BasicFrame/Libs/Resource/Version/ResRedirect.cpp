@@ -55,7 +55,7 @@ ResRedirectItem ResRedirect::getResRedirectItem(std::string origPath, bool isABA
 			item = MY_NEW ResRedirectItem(origPath, (int)ResLoadType.eLoadResource);
 			this->mOrigPath2ItemDic[origPath] = item;
 
-			item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer.getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
+			item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer->getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
 			item.mFileVerInfo = fileVerInfo;
 		}
 	}
@@ -71,7 +71,7 @@ ResRedirectItem ResRedirect::getResRedirectItem(std::string origPath, bool isABA
 			item = MY_NEW ResRedirectItem(origPath, (int)ResLoadType.eLoadStreamingAssets);
 			this->mABPath2ItemDic[origPath] = item;
 
-			item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer.getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
+			item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer->getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
 			item.mFileVerInfo = fileVerInfo;
 		}
 	}

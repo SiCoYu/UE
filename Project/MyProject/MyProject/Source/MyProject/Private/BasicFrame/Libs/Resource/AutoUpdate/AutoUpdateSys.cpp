@@ -60,7 +60,7 @@ bool isUpdateWebVersionPSuccessAndAllUpdateSuccess()
 	if (this->isUpdateSuccess())
 	{
 		if (Ctx.msInstance.mVersionSys.mIsNeedUpdateVerFile &&
-			Ctx.msInstance.mVersionSys.mServerVer.mIsVerLoadSuccess)
+			Ctx.msInstance.mVersionSys.mServerVer->mIsVerLoadSuccess)
 		{
 			ret = true;
 		}
@@ -76,19 +76,19 @@ void _checkIsNeedUpdateManifest()
 	FileVerInfo serverManifestInfo = nullptr;
 	FileVerInfo localManifestInfo = nullptr;
 
-	if (Ctx.msInstance.mVersionSys.mServerVer.mABPath2HashDic.containsKey(platformManifestName))
+	if (Ctx.msInstance.mVersionSys.mServerVer->mABPath2HashDic.containsKey(platformManifestName))
 	{
-		serverManifestInfo = Ctx.msInstance.mVersionSys.mServerVer.mABPath2HashDic[platformManifestName];
+		serverManifestInfo = Ctx.msInstance.mVersionSys.mServerVer->mABPath2HashDic[platformManifestName];
 	}
-	if (Ctx.msInstance.mVersionSys.mLocalVer.mABPath2Ver_P_Dic.containsKey(platformManifestName))
+	if (Ctx.msInstance.mVersionSys.mLocalVer->mABPath2Ver_P_Dic.containsKey(platformManifestName))
 	{
-		localManifestInfo = Ctx.msInstance.mVersionSys.mLocalVer.mABPath2Ver_P_Dic[platformManifestName];
+		localManifestInfo = Ctx.msInstance.mVersionSys.mLocalVer->mABPath2Ver_P_Dic[platformManifestName];
 	}
 	else
 	{
-		if (Ctx.msInstance.mVersionSys.mLocalVer.mABPath2Ver_S_Dic.containsKey(platformManifestName))
+		if (Ctx.msInstance.mVersionSys.mLocalVer->mABPath2Ver_S_Dic.containsKey(platformManifestName))
 		{
-			localManifestInfo = Ctx.msInstance.mVersionSys.mLocalVer.mABPath2Ver_S_Dic[platformManifestName];
+			localManifestInfo = Ctx.msInstance.mVersionSys.mLocalVer->mABPath2Ver_S_Dic[platformManifestName];
 		}
 	}
 
@@ -119,7 +119,7 @@ void onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId)
 	UtilMsg.sendHttpEventLog((uint)EventLogId.eEL_3);
 
 	// 如果 Mini 文件没有从服务器下载成功
-	if (!Ctx.msInstance.mVersionSys.mServerVer.mIsMiniLoadSuccess)
+	if (!Ctx.msInstance.mVersionSys.mServerVer->mIsMiniLoadSuccess)
 	{
 		this->setAutoUpdateErrorCode(AutoUpdateErrorCode::eErrorDownloadWebVersionMiniFailed);
 		this->downloadWebMiniFail();
@@ -131,7 +131,7 @@ void onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId)
 	else if (Ctx.msInstance.mVersionSys.mIsNeedUpdateVerFile) // 如果需要更新版本文件
 	{
 		// 本地文件版本必须要加载
-		Ctx.msInstance.mVersionSys.mLoadResultDispatch.addEventHandle(nullptr, this->onWebVerLoadResult);
+		Ctx.msInstance.mVersionSys.mLoadResultDispatch->addEventHandle(nullptr, this->onWebVerLoadResult);
 		Ctx.msInstance.mVersionSys.loadWebVerFile();
 	}
 	else
@@ -148,7 +148,7 @@ void onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
 		GLogSys->log("AutoUpdateSys::onWebVerLoadResult, start", LogTypeId::eLogAutoUpdate);
 	}
 
-	if (Ctx.msInstance.mVersionSys.mServerVer.mIsVerLoadSuccess) // 如果需要更新版本文件
+	if (Ctx.msInstance.mVersionSys.mServerVer->mIsVerLoadSuccess) // 如果需要更新版本文件
 	{
 		if (MacroDef.ENABLE_LOG)
 		{
@@ -196,7 +196,7 @@ void _downloadApp()
 void _loadAllUpdateFile()
 {
 	this->mFileGroup.reset();
-	this->mFileGroup.setTotalNum(Ctx.msInstance.mVersionSys.mServerVer.mABPath2HashDic.getData().Count - this->getExcludeUpdateFileNum());
+	this->mFileGroup.setTotalNum(Ctx.msInstance.mVersionSys.mServerVer->mABPath2HashDic.getData().Count - this->getExcludeUpdateFileNum());
 
 	if (MacroDef.ENABLE_LOG)
 	{
@@ -210,7 +210,7 @@ void _loadAllUpdateFile()
 	bool isNeedUpdateFile = false;
 	FileVerInfo fileVerInfo = nullptr;
 
-	Dictionary<string, FileVerInfo> dic = Ctx.msInstance.mVersionSys.mServerVer.mABPath2HashDic.getData();
+	Dictionary<string, FileVerInfo> dic = Ctx.msInstance.mVersionSys.mServerVer->mABPath2HashDic.getData();
 
 	foreach(KeyValuePair<string, FileVerInfo> kv in dic)
 	{
@@ -220,19 +220,19 @@ void _loadAllUpdateFile()
 			isFileInPersistent = false;
 			fileVerInfo = nullptr;
 
-			isFileInPersistent = Ctx.msInstance.mVersionSys.mLocalVer.mABPath2Ver_P_Dic.containsKey(kv.Key);
+			isFileInPersistent = Ctx.msInstance.mVersionSys.mLocalVer->mABPath2Ver_P_Dic.containsKey(kv.Key);
 
 			if (isFileInPersistent)
 			{
-				fileVerInfo = Ctx.msInstance.mVersionSys.mLocalVer.mABPath2Ver_P_Dic[kv.Key];
+				fileVerInfo = Ctx.msInstance.mVersionSys.mLocalVer->mABPath2Ver_P_Dic[kv.Key];
 			}
 			else
 			{
-				isFileInStreaming = Ctx.msInstance.mVersionSys.mLocalVer.mABPath2Ver_S_Dic.containsKey(kv.Key);
+				isFileInStreaming = Ctx.msInstance.mVersionSys.mLocalVer->mABPath2Ver_S_Dic.containsKey(kv.Key);
 
 				if (isFileInStreaming)
 				{
-					fileVerInfo = Ctx.msInstance.mVersionSys.mLocalVer.mABPath2Ver_S_Dic[kv.Key];
+					fileVerInfo = Ctx.msInstance.mVersionSys.mLocalVer->mABPath2Ver_S_Dic[kv.Key];
 				}
 			}
 
@@ -278,9 +278,9 @@ void _loadOneUpdateFile(string path, FileVerInfo fileInfo)
 		GLogSys->log(string.Format("AutoUpdateSys::loadOneUpdateFile, add path = {0}", path), LogTypeId::eLogAutoUpdate);
 	}
 
-	if (Ctx.msInstance.mVersionSys.mLocalVer.mPath2Ver_P_Dic.containsKey(path))
+	if (Ctx.msInstance.mVersionSys.mLocalVer->mPath2Ver_P_Dic.containsKey(path))
 	{
-		//string checkPath = Path.Combine(MFileSys::getLocalWriteDir(), UtilLogic.combineVerPath(path, Ctx.msInstance.mVersionSys.mLocalVer.mPath2Ver_P_Dic[path].mFileMd5));
+		//string checkPath = Path.Combine(MFileSys::getLocalWriteDir(), UtilLogic.combineVerPath(path, Ctx.msInstance.mVersionSys.mLocalVer->mPath2Ver_P_Dic[path].mFileMd5));
 
 		string checkPath = UtilFileIO::combine(MFileSys::getLocalWriteDir(), path);
 
