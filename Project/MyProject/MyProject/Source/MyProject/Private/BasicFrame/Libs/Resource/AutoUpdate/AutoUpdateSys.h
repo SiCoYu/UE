@@ -8,6 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class FileGroup;
 class AddOnceAndCallOnceEventDispatch;
 class AutoUpdateErrorInfo;
+class FileVerInfo;
 
 /**
  * @brief 自动更新系统
@@ -38,8 +39,8 @@ public:
 protected:
 	void _checkIsNeedUpdateManifest();
 	void loadWebMiniVersion();
-	void onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId);
-	void onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId);
+	void onWebMiniVerLoadResult(IDispatchObject* dispObj, uint uniqueId);
+	void onWebVerLoadResult(IDispatchObject* idspObj, uint uniqueId);
 
     // 下载基本的 Web 文件失败
 protected:
@@ -48,8 +49,8 @@ protected:
 	void _downloadApp();
 
 	void _loadAllUpdateFile();
-	void _loadOneUpdateFile(string path, FileVerInfo fileInfo);
-	void _onLoadEventHandle(IDispatchObject dispObj, uint uniqueId);
+	void _loadOneUpdateFile(std::string path, FileVerInfo* fileInfo);
+	void _onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId);
 	void _checkUpdateEnd();
 
 public:
@@ -57,7 +58,7 @@ public:
 
     // 是否在更新列表中
 protected:
-	bool _isIncludeUpdateList(string path);
+	bool _isIncludeUpdateList(std::string path);
     // 获取无需从服务器更新的文件数量
 	int _getExcludeUpdateFileNum();
 };

@@ -163,6 +163,7 @@ void Ctx::construct()
 	this->mGlobalEventCmd = MySharedPtr<GlobalEventCmd>(MY_NEW GlobalEventCmd());
 	this->mResRedirectItem = MySharedPtr<ResRedirectItem>(MY_NEW ResRedirectItem());
 	this->mVersionSys = MySharedPtr<VersionSys>(MY_NEW VersionSys());
+	this->mAutoClearSys = MySharedPtr<AutoClearSys>(MY_NEW AutoClearSys());
 
 	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 
@@ -213,6 +214,7 @@ void Ctx::_execInit()
 	this->mGlobalEventCmd->init();
 	this->mResRedirectItem->init();
 	this->mVersionSys->init();
+	this->mAutoClearSys->init();
 
 	this->mBPCtx->init();
 	this->mMyNativeObjectReferencer->init();
@@ -281,6 +283,7 @@ void Ctx::_preDispose()
 	this->mGlobalEventCmd->dispose();
 	this->mResRedirectItem->dispose();
 	this->mVersionSys->dispose();
+	this->mAutoClearSys->dispose();
 
 	this->mBPCtx->dispose();
 	this->mMyNativeObjectReferencer->dispose();
@@ -338,6 +341,7 @@ void Ctx::_execDispose()
 	this->mGlobalEventCmd.setNull();
 	this->mResRedirectItem.setNull();
 	this->mVersionSys.setNull();
+	this->mAutoClearSys.setNull();
 
 	this->mBPCtx = nullptr;
 }

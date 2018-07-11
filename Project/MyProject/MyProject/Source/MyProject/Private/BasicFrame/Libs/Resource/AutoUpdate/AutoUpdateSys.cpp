@@ -1,5 +1,19 @@
 ﻿#include "MyProject.h"
-#include "RenderTargetMgr.h"
+#include "AutoUpdateSys.h"
+#include "MyMemoryInc.h"
+#include "FileGroup.h"
+#include "AddOnceAndCallOnceEventDispatch.h"
+#include "AutoUpdateErrorInfo.h"
+#include "AutoUpdateErrorCode.h"
+#include "VersionInc.h"
+#include "LogInc.h"
+#include "MacroDef.h"
+#include "FileVerInfo.h"
+#include "MDictionary.h"
+#include "AuxDownloader.h"
+#include "VerFileName.h"
+#include "AuxDownloader.h"
+#include "UtilStr.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -27,12 +41,12 @@ FileGroup* AutoUpdateSys::getFileGroup()
 
 AutoUpdateErrorCode* AutoUpdateSys::getAutoUpdateErrorCode()
 {
-	return this->mAutoUpdateErrorInfo.getErrorCode();
+	return this->mAutoUpdateErrorInfo->getErrorCode();
 }
 
 void AutoUpdateSys::setAutoUpdateErrorCode(AutoUpdateErrorCode value)
 {
-	this->mAutoUpdateErrorInfo.setErrorCode(value);
+	this->mAutoUpdateErrorInfo->setErrorCode(value);
 }
 
 AddOnceAndCallOnceEventDispatch* AutoUpdateSys::getUpdateEndDispatch()
@@ -48,8 +62,8 @@ void AutoUpdateSys::startUpdate()
 // 成功更新
 bool AutoUpdateSys::isUpdateSuccess()
 {
-	//return this->mFileGroup.isUpdateSuccess();
-	return this->mAutoUpdateErrorInfo.getErrorCode() == AutoUpdateErrorCode::eErrorNo;
+	//return this->mFileGroup->isUpdateSuccess();
+	return this->mAutoUpdateErrorInfo->getErrorCode() == AutoUpdateErrorCode::eErrorNo;
 }
 
 // 成功更新，并且重新下载 Version_P.txt，并且成功更新需要更新的资源文件
@@ -71,9 +85,9 @@ bool AutoUpdateSys::isUpdateWebVersionPSuccessAndAllUpdateSuccess()
 
 void AutoUpdateSys::_checkIsNeedUpdateManifest()
 {
-	string platformManifestName = UtilEngineWrap.getManifestName();
-	FileVerInfo serverManifestInfo = nullptr;
-	FileVerInfo localManifestInfo = nullptr;
+	std::string platformManifestName = UtilEngineWrap::getManifestName();
+	FileVerInfo* serverManifestInfo = nullptr;
+	FileVerInfo* localManifestInfo = nullptr;
 
 	if (GVersionSys->mServerVer->mABPath2HashDic.containsKey(platformManifestName))
 	{
@@ -91,7 +105,7 @@ void AutoUpdateSys::_checkIsNeedUpdateManifest()
 		}
 	}
 
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::checkIsNeedUpdateManifest, mIsNeedUpdateManifest is false", LogTypeId::eLogAutoUpdate);
 	}
@@ -99,23 +113,23 @@ void AutoUpdateSys::_checkIsNeedUpdateManifest()
 
 void AutoUpdateSys::loadWebMiniVersion()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::loadWebMiniVersion", LogTypeId::eLogAutoUpdate);
 	}
 
-	GVersionSys->mMiniLoadResultDispatch.addEventHandle(nullptr, this->onWebMiniVerLoadResult);
+	GVersionSys->mMiniLoadResultDispatch->addEventHandle(nullptr, this->onWebMiniVerLoadResult);
 	GVersionSys->loadWebMiniVerFile();
 }
 
 void AutoUpdateSys::onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::onWebMiniVerLoadResult", LogTypeId::eLogAutoUpdate);
 	}
 
-	UtilMsg.sendHttpEventLog((uint)EventLogId.eEL_3);
+	UtilMsg::sendHttpEventLog((uint)EventLogId.eEL_3);
 
 	// 如果 Mini 文件没有从服务器下载成功
 	if (!GVersionSys->mServerVer->mIsMiniLoadSuccess)
@@ -142,14 +156,14 @@ void AutoUpdateSys::onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueI
 
 void AutoUpdateSys::onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::onWebVerLoadResult, start", LogTypeId::eLogAutoUpdate);
 	}
 
 	if (GVersionSys->mServerVer->mIsVerLoadSuccess) // 如果需要更新版本文件
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("AutoUpdateSys::onWebVerLoadResult, mIsVerLoadSuccess is true", LogTypeId::eLogAutoUpdate);
 		}
@@ -159,7 +173,7 @@ void AutoUpdateSys::onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
 	}
 	else
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("AutoUpdateSys::onWebVerLoadResult, mIsVerLoadSuccess is false", LogTypeId::eLogAutoUpdate);
 		}
@@ -172,7 +186,7 @@ void AutoUpdateSys::onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
 // 下载基本的 Web 文件失败
 void AutoUpdateSys::_downloadWebMiniFail()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::downloadWebMiniFail", LogTypeId::eLogAutoUpdate);
 	}
@@ -183,22 +197,22 @@ void AutoUpdateSys::_downloadWebMiniFail()
 // 下载 App 文件
 void AutoUpdateSys::_downloadApp()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::downloadApp", LogTypeId::eLogAutoUpdate);
 	}
 
-	Ctx.msInstance.mUiMgr.loadAndShowForm(UiFormId.eUiAppDownload);
+	GUiMgr->loadAndShowForm(UiFormId::eUiAppDownload);
 }
 
 void AutoUpdateSys::_loadAllUpdateFile()
 {
-	this->mFileGroup.reset();
-	this->mFileGroup.setTotalNum(GVersionSys->mServerVer->mABPath2HashDic.getData().Count - this->getExcludeUpdateFileNum());
+	this->mFileGroup->reset();
+	this->mFileGroup->setTotalNum(GVersionSys->mServerVer->mABPath2HashDic.getData().Count - this->getExcludeUpdateFileNum());
 
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
-		GLogSys->log(string.Format("AutoUpdateSys::loadAllUpdateFile, Start, total = {0}", this->mFileGroup.getTotalNum()), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(UtilStr::Format("AutoUpdateSys::loadAllUpdateFile, Start, total = {0}", this->mFileGroup->getTotalNum()), LogTypeId::eLogAutoUpdate);
 	}
 
 	//this->checkIsNeedUpdateManifest();
@@ -206,85 +220,95 @@ void AutoUpdateSys::_loadAllUpdateFile()
 	bool isFileInStreaming = false;
 	bool isFileInPersistent = false;
 	bool isNeedUpdateFile = false;
-	FileVerInfo fileVerInfo = nullptr;
+	FileVerInfo* fileVerInfo = nullptr;
 
-	Dictionary<string, FileVerInfo> dic = GVersionSys->mServerVer->mABPath2HashDic.getData();
+	typename MDictionary<std::string, FileVerInfo*>::Dictionary& dic = GVersionSys->mServerVer->mABPath2HashDic.getData();
+	std::string kvKey;
+	FileVerInfo* kvValue = nullptr;
+	ServerVer::Path2HashDicIterator beginIte;
+	ServerVer::Path2HashDicIterator endIte;
 
-	foreach(KeyValuePair<string, FileVerInfo> kv in dic)
+	beginIte = GVersionSys->mServerVer->mABPath2HashDic.begin();
+	endIte = GVersionSys->mServerVer->mABPath2HashDic.end();
+
+	while(beginIte != endIte)
 	{
-		if (this->isIncludeUpdateList(kv.Key))
+		kvKey = beginIte->first;
+		kvValue = beginIte->second;
+
+		if (this->isIncludeUpdateList(kvKey))
 		{
 			isFileInStreaming = false;
 			isFileInPersistent = false;
 			fileVerInfo = nullptr;
 
-			isFileInPersistent = GVersionSys->mLocalVer->mABPath2Ver_P_Dic.containsKey(kv.Key);
+			isFileInPersistent = GVersionSys->mLocalVer->mABPath2Ver_P_Dic.containsKey(kvKey);
 
 			if (isFileInPersistent)
 			{
-				fileVerInfo = GVersionSys->mLocalVer->mABPath2Ver_P_Dic[kv.Key];
+				fileVerInfo = GVersionSys->mLocalVer->mABPath2Ver_P_Dic[kvKey];
 			}
 			else
 			{
-				isFileInStreaming = GVersionSys->mLocalVer->mABPath2Ver_S_Dic.containsKey(kv.Key);
+				isFileInStreaming = GVersionSys->mLocalVer->mABPath2Ver_S_Dic.containsKey(kvKey);
 
 				if (isFileInStreaming)
 				{
-					fileVerInfo = GVersionSys->mLocalVer->mABPath2Ver_S_Dic[kv.Key];
+					fileVerInfo = GVersionSys->mLocalVer->mABPath2Ver_S_Dic[kvKey];
 				}
 			}
 
 			if (isFileInPersistent || isFileInStreaming)
 			{
-				isNeedUpdateFile = fileVerInfo->mFileMd5 != kv.Value.mFileMd5;
+				isNeedUpdateFile = fileVerInfo->mFileMd5 != kvValue->mFileMd5;
 				//isNeedUpdateFile = true;    // 强制更新
 
 				if (isNeedUpdateFile)
 				{
-					this->mFileGroup.addLoadingPath(kv.Key, kv.Value);
-					this->loadOneUpdateFile(kv.Key, kv.Value);
+					this->mFileGroup->addLoadingPath(kvKey, kvValue);
+					this->loadOneUpdateFile(kvKey, kvValue);
 				}
 				else
 				{
-					this->mFileGroup.addLoadedPath(kv.Key);
-					this->mFileGroup.incCurNum();
+					this->mFileGroup->addLoadedPath(kvKey);
+					this->mFileGroup->incCurNum();
 				}
 			}
 			else
 			{
-				this->mFileGroup.addLoadingPath(kv.Key, kv.Value);
-				this->loadOneUpdateFile(kv.Key, kv.Value);
+				this->mFileGroup->addLoadingPath(kvKey, kvValue);
+				this->loadOneUpdateFile(kvKey, kvValue);
 			}
 		}
 	}
 
 	this->_checkUpdateEnd();
 
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::loadAllUpdateFile, End", LogTypeId::eLogAutoUpdate);
 	}
 }
 
-void AutoUpdateSys::_loadOneUpdateFile(string path, FileVerInfo fileInfo)
+void AutoUpdateSys::_loadOneUpdateFile(std::string path, FileVerInfo* fileInfo)
 {
 	//string loadPath = UtilEngineWrap.combineVerPath(path, fileInfo.m_fileMd5);
 	//mLoadingPath.add(loadPath);
 
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
-		GLogSys->log(string.Format("AutoUpdateSys::loadOneUpdateFile, add path = {0}", path), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(UtilStr::Format("AutoUpdateSys::loadOneUpdateFile, add path = {0}", path), LogTypeId::eLogAutoUpdate);
 	}
 
 	if (GVersionSys->mLocalVer->mPath2Ver_P_Dic.containsKey(path))
 	{
 		//string checkPath = Path.Combine(MFileSys::getLocalWriteDir(), UtilLogic.combineVerPath(path, GVersionSys->mLocalVer->mPath2Ver_P_Dic[path].mFileMd5));
 
-		string checkPath = UtilFileIO::combine(MFileSys::getLocalWriteDir(), path);
+		std::string checkPath = UtilFileIO::combine(MFileSys::getLocalWriteDir(), path);
 
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("AutoUpdateSys::loadOneUpdateFile, delete path = {0}", checkPath), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("AutoUpdateSys::loadOneUpdateFile, delete path = {0}", checkPath), LogTypeId::eLogAutoUpdate);
 		}
 
 		UtilFileIO::deleteFile(checkPath);     // 删除当前目录下已经有的 old 文件
@@ -292,7 +316,7 @@ void AutoUpdateSys::_loadOneUpdateFile(string path, FileVerInfo fileInfo)
 
 	//UtilEngineWrap.delFileNoVer(path);     // 删除当前目录下已经有的 old 文件
 
-	AuxDownloader auxDownload = new AuxDownloader();
+	AuxDownloader* auxDownload = MY_NEW AuxDownloader();
 	auxDownload->setVersion(fileInfo.mFileMd5);
 	auxDownload->setIsNeedUncompress(true);
 	auxDownload->download(
@@ -307,47 +331,47 @@ void AutoUpdateSys::_loadOneUpdateFile(string path, FileVerInfo fileInfo)
 	);
 }
 
-void AutoUpdateSys::_onLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
+void AutoUpdateSys::_onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 {
-	this->mFileGroup.incCurNum();
+	this->mFileGroup->incCurNum();
 
-	AuxDownloader downloader = dispObj as AuxDownloader;
+	AuxDownloader downloader = (AuxDownloader*)dispObj;
 
 	if (downloader.hasSuccessLoaded())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("AutoUpdateSys::onLoadEventHandle, success, CurIndex = {0}, path = {1}", this->mFileGroup.getCurNum(), downloader.getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("AutoUpdateSys::onLoadEventHandle, success, CurIndex = {0}, path = {1}", this->mFileGroup->getCurNum(), downloader->getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
-		this->mFileGroup.addLoadedPath(downloader.getOrigPath());
+		this->mFileGroup->addLoadedPath(downloader->getOrigPath());
 	}
 	else if (downloader.hasFailed())
 	{
-		if (MacroDef.ENABLE_LOG)
+		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(string.Format("AutoUpdateSys::onLoadEventHandle, fail, CurNum = {0}, path = {1}", this->mFileGroup.getCurNum(), downloader.getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("AutoUpdateSys::onLoadEventHandle, fail, CurNum = {0}, path = {1}", this->mFileGroup->getCurNum(), downloader->getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
-		this->mFileGroup.addFailedPath(downloader.getOrigPath());
+		this->mFileGroup->addFailedPath(downloader->getOrigPath());
 	}
 
-	this->mFileGroup.removeLoadingPath(downloader.getOrigPath());
+	this->mFileGroup->removeLoadingPath(downloader->getOrigPath());
 	this->checkUpdateEnd();
 
-	downloader.dispose();
+	downloader->dispose();
 }
 
 void AutoUpdateSys::_checkUpdateEnd()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
-		GLogSys->log(string.Format("AutoUpdateSys::checkUpdateEnd, curNum = {0}, totalNum = {1}", this->mFileGroup.getCurNum(), this->mFileGroup.getTotalNum()), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(UtilStr::Format("AutoUpdateSys::checkUpdateEnd, curNum = {0}, totalNum = {1}", this->mFileGroup->getCurNum(), this->mFileGroup->getTotalNum()), LogTypeId::eLogAutoUpdate);
 	}
 
-	if (this->mFileGroup.isCurEqTotal())
+	if (this->mFileGroup->isCurEqTotal())
 	{
-		if (this->mFileGroup.hasLoadFailed())
+		if (this->mFileGroup->hasLoadFailed())
 		{
 			this->setAutoUpdateErrorCode(AutoUpdateErrorCode::eErrorDownloadWebResFailed);
 		}
@@ -358,10 +382,10 @@ void AutoUpdateSys::_checkUpdateEnd()
 
 void AutoUpdateSys::onUpdateEnd()
 {
-	if (MacroDef.ENABLE_LOG)
+	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::onUpdateEnd, end", LogTypeId::eLogAutoUpdate);
-		this->mFileGroup.logDownloadDetailInfo();
+		this->mFileGroup->logDownloadDetailInfo();
 	}
 
 	// 保存信息到本地
@@ -373,14 +397,14 @@ void AutoUpdateSys::onUpdateEnd()
 	}
 
 	// 清理缓存重定向信息，因为之前信息可能是更新之前的定向，更新后需要重新生成一次
-	Ctx.msInstance.mResRedirect.clearCacheInfo();
+	GResRedirect->clearCacheInfo();
 
 	// 通知上层
 	this->mOnUpdateEndDispatch.dispatchEvent(nullptr);
 }
 
 // 是否在更新列表中
-bool AutoUpdateSys::_isIncludeUpdateList(string path)
+bool AutoUpdateSys::_isIncludeUpdateList(std::string path)
 {
 	bool ret = true;
 

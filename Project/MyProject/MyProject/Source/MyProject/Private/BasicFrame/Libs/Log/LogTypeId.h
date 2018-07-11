@@ -11,6 +11,7 @@ enum class LogTypeId
 	eLogPriorityListCheck,
 	eLogNoPriorityListCheck, 
 	eLogDownload,		// обть
+	eLogAutoUpdate,
 };
 
 MY_END_NAMESPACE

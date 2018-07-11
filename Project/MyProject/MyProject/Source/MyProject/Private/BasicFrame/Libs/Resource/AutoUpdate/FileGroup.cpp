@@ -1,6 +1,10 @@
 ﻿#include "MyProject.h"
 #include "FileGroup.h"
 #include "MyMemoryInc.h"
+#include "LogInc.h"
+#include "AddOnceEventDispatch.h"
+#include "UtilMath.h"
+#include "UtilStr.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -71,7 +75,7 @@ bool FileGroup::hasLoadFailed()
 }
 
 // 增加更新的文件
-void FileGroup::addLoadingPath(std::string& path, FileVerInfo& fileVerInfo /*, bool isAddTotalNum = false*/)
+void FileGroup::addLoadingPath(std::string& path, FileVerInfo* fileVerInfo /*, bool isAddTotalNum = false*/)
 {
 	this->mTotalMemSize += fileVerInfo->mFileSize;
 
@@ -83,7 +87,7 @@ void FileGroup::addLoadingPath(std::string& path, FileVerInfo& fileVerInfo /*, b
 	//    this->mTotalNum += 1;
 	//}
 
-	//this->mProgressDispatch.dispatchEvent(nullptr);
+	//this->mProgressDispatch->dispatchEvent(nullptr);
 }
 
 void FileGroup::removeLoadingPath(std::string& path/*, bool isDecTotalNum = false*/)
@@ -102,7 +106,7 @@ void FileGroup::removeLoadingPath(std::string& path/*, bool isDecTotalNum = fals
 	//    this->mTotalNum -= 1;
 	//}
 
-	this->mProgressDispatch.dispatchEvent(nullptr);
+	this->mProgressDispatch->dispatchEvent(nullptr);
 }
 
 void FileGroup::addLoadedPath(std::string& path/*, bool isAddTotalNum = false*/)
@@ -125,7 +129,7 @@ void FileGroup::addFailedPath(std::string& path/*, bool isAddTotalNum = false*/)
 	//    this->mTotalNum += 1;
 	//}
 
-	//this->mProgressDispatch.dispatchEvent(nullptr);
+	//this->mProgressDispatch->dispatchEvent(nullptr);
 }
 
 // 获取进度 [0, 100]
@@ -157,11 +161,11 @@ int FileGroup::getCurUpdatedMenSize()
 }
 
 // 获取加载进度描述
-string FileGroup::getProgressDesc()
+std::string FileGroup::getProgressDesc()
 {
-	string ret = "";
+	std::string ret = "";
 
-	ret = string.Format("{0}M/{1}M", UtilMath.integerWithFract((float)this->mCurMemSize / UtilMath.OneM, 2), UtilMath.integerWithFract((float)this->mTotalMemSize / UtilMath.OneM, 2));
+	ret = UtilStr::Format("{0}M/{1}M", UtilMath::integerWithFract((float)this->mCurMemSize / UtilMath.OneM, 2), UtilMath::integerWithFract((float)this->mTotalMemSize / UtilMath.OneM, 2));
 
 	return ret;
 }
@@ -169,7 +173,7 @@ string FileGroup::getProgressDesc()
 // 输出下载详细日志
 void FileGroup::logDownloadDetailInfo()
 {
-	GLogSys->log(string.Format("FileGroup::logDownloadDetailInfo, mCurNum = {0}, mTotalNum = {1}", this->mCurNum, this->mTotalNum), LogTypeId::eLogAutoUpdate);
+	GLogSys->log(UtilStr::Format("FileGroup::logDownloadDetailInfo, mCurNum = {0}, mTotalNum = {1}", this->mCurNum, this->mTotalNum), LogTypeId::eLogAutoUpdate);
 
 	int index = 0;
 	int listLen = this->mLoadingPath.count();
@@ -178,7 +182,7 @@ void FileGroup::logDownloadDetailInfo()
 
 	while (index < listLen)
 	{
-		GLogSys->log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, LoadingPath = {1}", index, this->mLoadingPath[index]), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(UtilStr::Format("FileGroup::logDownloadDetailInfo, index = {0}, LoadingPath = {1}", index, this->mLoadingPath[index]), LogTypeId::eLogAutoUpdate);
 
 		index += 1;
 	}
@@ -192,7 +196,7 @@ void FileGroup::logDownloadDetailInfo()
 
 	while (index < listLen)
 	{
-		GLogSys->log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mLoadedPath = {1}", index, this->mLoadedPath[index]), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(UtilStr::Format("FileGroup::logDownloadDetailInfo, index = {0}, mLoadedPath = {1}", index, this->mLoadedPath[index]), LogTypeId::eLogAutoUpdate);
 
 		index += 1;
 	}
@@ -206,7 +210,7 @@ void FileGroup::logDownloadDetailInfo()
 
 	while (index < listLen)
 	{
-		GLogSys->log(string.Format("FileGroup::logDownloadDetailInfo, index = {0}, mFailedPath = {1}", index, this->mFailedPath[index]), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(UtilStr::Format("FileGroup::logDownloadDetailInfo, index = {0}, mFailedPath = {1}", index, this->mFailedPath[index]), LogTypeId::eLogAutoUpdate);
 
 		index += 1;
 	}
@@ -215,36 +219,36 @@ void FileGroup::logDownloadDetailInfo()
 }
 
 // 获取当前资源是否更新了
-bool FileGroup::isResUpdatedByResPath(string path)
+bool FileGroup::isResUpdatedByResPath(std::string path)
 {
 	bool ret = false;
 
-	ResRedirectItem resRedirectItem = Ctx.msInstance.mResRedirect.getResRedirectItem(ShaderCollectPath.StartShaderCollect, false);
+	ResRedirectItem* resRedirectItem = GResRedirect->getResRedirectItem(ShaderCollectPath.StartShaderCollect, false);
 
 	if (nullptr != resRedirectItem)
 	{
-		ret = this->isResUpdatedByABPath(resRedirectItem.mFileVerInfo->mLoadPath);
+		ret = this->isResUpdatedByABPath(resRedirectItem->mFileVerInfo->mLoadPath);
 	}
 
 	return ret;
 }
 
 // 获取当前资源是否更新了
-bool FileGroup::isResUpdatedByABPath(string path)
+bool FileGroup::isResUpdatedByABPath(std::string path)
 {
 	bool ret = false;
-	this->mUpdatePathDic.tryGetValue(path, out ret);
+	this->mUpdatePathDic.tryGetValue(path, ret);
 	return ret;
 }
 
-void FileGroup::addProgressHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> handle)
+void FileGroup::addProgressHandle(EventDispatchDelegate handle)
 {
-	this->mProgressDispatch.addEventHandle(pThis, handle);
+	this->mProgressDispatch->addEventHandle(handle);
 }
 
-void FileGroup::removeProgressHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> handle)
+void FileGroup::removeProgressHandle(EventDispatchDelegate handle)
 {
-	this->mProgressDispatch.removeEventHandle(pThis, handle);
+	this->mProgressDispatch->removeEventHandle(handle);
 }
 
 MY_END_NAMESPACE

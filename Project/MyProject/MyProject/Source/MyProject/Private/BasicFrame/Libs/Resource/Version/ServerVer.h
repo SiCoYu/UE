@@ -15,6 +15,7 @@ class FileVerInfo;
  */
 class ServerVer : public FileVerBase
 {
+public:
 	typedef typename MDictionary<std::string, FileVerInfo*>::Iterator Path2HashDicIterator;
 
     // MiniVersion 必须每一次从服务器上下载

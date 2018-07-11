@@ -3,6 +3,7 @@
 #include <string>
 #include "MList.h"
 #include "GObject.h"
+#include "EventDispatchDelegate.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -58,7 +59,7 @@ public:
 	// 获取当前加载的文件大小
 	int getCurUpdatedMenSize();
 	// 获取加载进度描述
-	string getProgressDesc();
+	std::string getProgressDesc();
 	// 输出下载详细日志
 	void logDownloadDetailInfo();
 
@@ -66,8 +67,8 @@ public:
 	bool isResUpdatedByResPath(std::string path);
 	// 获取当前资源是否更新了
 	bool isResUpdatedByABPath(std::string path);
-	void addProgressHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> handle);
-	void removeProgressHandle(ICalleeObject pThis, MEventDispatchAction<IDispatchObject> handle);
+	void addProgressHandle(EventDispatchDelegate handle);
+	void removeProgressHandle(EventDispatchDelegate handle);
 };
 
 MY_END_NAMESPACE
