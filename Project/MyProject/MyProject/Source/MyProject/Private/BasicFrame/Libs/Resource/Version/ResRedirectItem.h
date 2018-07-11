@@ -19,7 +19,7 @@ public:
     FileVerInfo* mFileVerInfo;        // 文件的基本信息
 
 public:
-	ResRedirectItem(std::string origPath = "", int redirect = (int)ResLoadType.eLoadResource);
+	ResRedirectItem(std::string origPath = "", int redirect = (int)ResLoadType::eLoadResource);
 
 	bool isRedirectR();
 	bool isRedirectS();

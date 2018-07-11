@@ -142,7 +142,7 @@ void ResInsMgrBase::unloadNoRef(std::string path)
 	);
 
 	this->mPath2ResDic.remove(path);
-	//UtilSysLibWrap.UnloadUnusedAssets();           // 异步卸载共用资源
+	//UtilSysLibWrap::UnloadUnusedAssets();           // 异步卸载共用资源
 
 	MY_SAFE_DISPOSE(resIns);
 }

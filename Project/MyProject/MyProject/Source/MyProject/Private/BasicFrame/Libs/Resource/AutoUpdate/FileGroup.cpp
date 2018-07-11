@@ -73,7 +73,7 @@ bool FileGroup::hasLoadFailed()
 // 增加更新的文件
 void FileGroup::addLoadingPath(std::string& path, FileVerInfo& fileVerInfo /*, bool isAddTotalNum = false*/)
 {
-	this->mTotalMemSize += fileVerInfo.mFileSize;
+	this->mTotalMemSize += fileVerInfo->mFileSize;
 
 	this->mLoadingPath.add(path);
 	this->mUpdatePathDic.add(path, true);    // 开始加载设置加载标志
@@ -88,11 +88,11 @@ void FileGroup::addLoadingPath(std::string& path, FileVerInfo& fileVerInfo /*, b
 
 void FileGroup::removeLoadingPath(std::string& path/*, bool isDecTotalNum = false*/)
 {
-	FileVerInfo fileVerInfo = Ctx.msInstance.mVersionSys.mServerVer->mABPath2HashDic[path];
+	FileVerInfo fileVerInfo = GVersionSys->mServerVer->mABPath2HashDic[path];
 
 	if (nullptr != fileVerInfo)
 	{
-		this->mCurMemSize += fileVerInfo.mFileSize;
+		this->mCurMemSize += fileVerInfo->mFileSize;
 	}
 
 	this->mLoadingPath.remove(path);
@@ -223,7 +223,7 @@ bool FileGroup::isResUpdatedByResPath(string path)
 
 	if (nullptr != resRedirectItem)
 	{
-		ret = this->isResUpdatedByABPath(resRedirectItem.mFileVerInfo.mLoadPath);
+		ret = this->isResUpdatedByABPath(resRedirectItem.mFileVerInfo->mLoadPath);
 	}
 
 	return ret;

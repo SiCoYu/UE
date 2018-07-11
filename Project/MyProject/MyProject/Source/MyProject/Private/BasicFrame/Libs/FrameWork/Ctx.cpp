@@ -39,6 +39,8 @@
 #include "MsgRouteNotify.h"
 #include "GlobalDelegate.h"
 #include "GlobalEventCmd.h"
+#include "ResRedirectItem.h"
+#include "VersionSys.h"
 
 #include "TickPriority.h"
 //#include "MySingletonBP.h"
@@ -157,6 +159,8 @@ void Ctx::construct()
 	this->mMsgRouteNotify = MySharedPtr<MsgRouteNotify>(MY_NEW MsgRouteNotify());
 	this->mGlobalDelegate = MySharedPtr<GlobalDelegate>(MY_NEW GlobalDelegate());
 	this->mGlobalEventCmd = MySharedPtr<GlobalEventCmd>(MY_NEW GlobalEventCmd());
+	this->mResRedirectItem = MySharedPtr<ResRedirectItem>(MY_NEW ResRedirectItem());
+	this->mVersionSys = MySharedPtr<VersionSys>(MY_NEW VersionSys());
 
 	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 
@@ -205,6 +209,8 @@ void Ctx::_execInit()
 	this->mMsgRouteNotify->init();
 	this->mGlobalDelegate->init();
 	this->mGlobalEventCmd->init();
+	this->mResRedirectItem->init();
+	this->mVersionSys->init();
 
 	this->mBPCtx->init();
 	this->mMyNativeObjectReferencer->init();
@@ -271,6 +277,8 @@ void Ctx::_preDispose()
 	this->mMsgRouteNotify->dispose();
 	this->mGlobalDelegate->dispose();
 	this->mGlobalEventCmd->dispose();
+	this->mResRedirectItem->dispose();
+	this->mVersionSys->dispose();
 
 	this->mBPCtx->dispose();
 	this->mMyNativeObjectReferencer->dispose();
@@ -326,6 +334,8 @@ void Ctx::_execDispose()
 	this->mMsgRouteNotify.setNull();
 	this->mGlobalDelegate.setNull();
 	this->mGlobalEventCmd.setNull();
+	this->mResRedirectItem.setNull();
+	this->mVersionSys.setNull();
 
 	this->mBPCtx = nullptr;
 }
@@ -583,6 +593,16 @@ MySharedPtr<GlobalDelegate> Ctx::getGlobalDelegate()
 MySharedPtr<GlobalEventCmd> Ctx::getGlobalEventCmd()
 {
 	return this->mGlobalEventCmd;
+}
+
+MySharedPtr<ResRedirectItem> Ctx::getResRedirectItem()
+{
+	return this->mResRedirectItem;
+}
+
+MySharedPtr<VersionSys> Ctx::getVersionSys()
+{
+	return this->mVersionSys;
 }
 
 UMyBluePrintBase* Ctx::getBPCtx()

@@ -44,7 +44,7 @@ void MaterialInsRes::unload()
 		this->mMaterial = nullptr;
 
 		// 这个接口肯定可以
-		//UtilSysLibWrap.UnloadUnusedAssets();
+		//UtilSysLibWrap::UnloadUnusedAssets();
 	}
 
 	Super::unload();

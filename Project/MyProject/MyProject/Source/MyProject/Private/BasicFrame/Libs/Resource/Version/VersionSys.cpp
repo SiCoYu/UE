@@ -224,7 +224,7 @@ void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
 		//UtilFileIO::renameFile(UtilLogic.combineVerPath(Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_MINI), m_miniVer), Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_MINI));
 
 		this->mIsNeedUpdateApp = (this->mLocalVer->mMajorVersion != this->mServerVer->mMajorVersion);      // 如果版本不一致，需要重新加载 App
-		this->mIsNeedUpdateVerFile = (this->mLocalVer->mFileVerInfo.mFileMd5 != this->mServerVer->mFileVerInfo.mFileMd5);      // 如果版本不一致，需要重新加载版本文件
+		this->mIsNeedUpdateVerFile = (this->mLocalVer->mFileVerInfo->mFileMd5 != this->mServerVer->mFileVerInfo->mFileMd5);      // 如果版本不一致，需要重新加载版本文件
 
 																															 //this->mIsNeedUpdateVerFile = true;         // 测试强制更新
 

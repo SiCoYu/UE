@@ -4,6 +4,13 @@
 #include "MacroDef.h"
 #include "LogInc.h"
 #include "MyMemoryInc.h"
+#include "AuxDownloader.h"
+#include "UtilSysLibWrap.h"
+#include "VerFileName.h"
+#include "DownloadType.h"
+#include "UtilStr.h"
+#include "MFileSys.h"
+#include "MDataStream.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -20,8 +27,8 @@ void ServerVer::loadMiniVerFile()
 	}
 
 	AuxDownloader* auxDownload = MY_NEW AuxDownloader();
-	auxDownload.setVersion(UtilSysLibWrap.getRandomVersion());
-	auxDownload.download(
+	auxDownload->setVersion(UtilSysLibWrap::getRandomVersion());
+	auxDownload->download(
 		VerFileName::VER_MINI,
 		nullptr,
 		this->onMiniLoadEventHandle,
@@ -29,7 +36,7 @@ void ServerVer::loadMiniVerFile()
 		nullptr,
 		0,
 		false,
-		(int)DownloadType.eWebRequest
+		(int)DownloadType::eWebRequest
 	);
 }
 
@@ -41,16 +48,16 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 		GLogSys->log("ServerVer::onMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
-	AuxDownloader downloadItem = dispObj as AuxDownloader;
+	AuxDownloader* downloadItem = (AuxDownloader*)dispObj;
 
-	if (downloadItem.hasSuccessLoaded())
+	if (downloadItem->hasSuccessLoaded())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("ServerVer::onMiniLoadEventHandle, loaded", LogTypeId::eLogAutoUpdate);
 		}
 
-		byte[] textAsset = downloadItem.getBytes();
+		char* textAsset = downloadItem->getBytes();
 
 		if (textAsset != nullptr)
 		{
@@ -63,7 +70,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 
 		this->mIsMiniLoadSuccess = true;
 	}
-	else if (downloadItem.hasFailed())
+	else if (downloadItem->hasFailed())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
@@ -73,7 +80,7 @@ void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 		this->mIsMiniLoadSuccess = false;
 	}
 
-	downloadItem.dispose();
+	downloadItem->dispose();
 
 	this->mMiniLoadedDispatch->dispatchEvent(nullptr);
 }
@@ -86,9 +93,9 @@ void ServerVer::loadVerFile()
 		GLogSys->log("ServerVer::loadVerFile", LogTypeId::eLogAutoUpdate);
 	}
 
-	AuxDownloader auxDownload = new AuxDownloader();
-	auxDownload.setVersion(UtilSysLibWrap.getRandomVersion());
-	auxDownload.download(
+	AuxDownloader* auxDownload = MY_NEW AuxDownloader();
+	auxDownload->setVersion(UtilSysLibWrap::getRandomVersion());
+	auxDownload->download(
 		VerFileName::VER_P,
 		nullptr,
 		this->onVerLoadEventHandle,
@@ -96,7 +103,7 @@ void ServerVer::loadVerFile()
 		nullptr,
 		0,
 		false,
-		(int)DownloadType.eWebRequest
+		(int)DownloadType::eWebRequest
 	);
 }
 
@@ -108,16 +115,16 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 		GLogSys->log("ServerVer::onVerLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
-	AuxDownloader downloadItem = dispObj as AuxDownloader;
+	AuxDownloader* downloadItem = (AuxDownloader*)dispObj;
 
-	if (downloadItem.hasSuccessLoaded())
+	if (downloadItem->hasSuccessLoaded())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("ServerVer::onVerLoadEventHandle, loaded, origPath = {0}", downloadItem.getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("ServerVer::onVerLoadEventHandle, loaded, origPath = {0}", downloadItem->getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
-		byte[] textAsset = downloadItem.getBytes();
+		char* textAsset = downloadItem->getBytes();
 
 		if (textAsset != nullptr)
 		{
@@ -126,11 +133,11 @@ void ServerVer::_onVerLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 
 		this->mIsVerLoadSuccess = true;
 	}
-	else if (downloadItem.hasFailed())
+	else if (downloadItem->hasFailed())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("ServerVer::onVerLoadEventHandle, failed, origPath = {0}", downloadItem.getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("ServerVer::onVerLoadEventHandle, failed, origPath = {0}", downloadItem->getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
 		this->mIsVerLoadSuccess = false;
@@ -146,28 +153,31 @@ void ServerVer::savePVerToPersistentPath()
 		GLogSys->log("ServerVer::savePVerToPersistentPath, start", LogTypeId::eLogAutoUpdate);
 	}
 
-	string path = UtilFileIO::combine(MFileSys::msPersistentDataPath, VerFileName::VER_P);
+	std::string path = UtilFileIO::combine(MFileSys::msPersistentDataPath, VerFileName::VER_P);
 
 	if (UtilFileIO::existFile(path))
 	{
 		UtilFileIO::deleteFile(path);
 	}
 
-	MDataStream dataStream = MY_NEW MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
-	dataStream.open();
+	MDataStream* dataStream = MY_NEW MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
+	dataStream->open();
 
-	string line = "";
-	FileVerInfo fileVerInfo = nullptr;
+	std::string line = "";
+	FileVerInfo* fileVerInfo = nullptr;
 
-	foreach(System.Collections.Generic.KeyValuePair<string, FileVerInfo> kv in this->mPath2HashDic.getData())
+	Path2HashDicIterator beginIte = this->mPath2HashDic.begin();
+	Path2HashDicIterator endIte = this->mPath2HashDic.end();
+
+	while(beginIte != endIte)
 	{
-		fileVerInfo = kv.Value;
+		fileVerInfo = beginIte->second;
 
-		line = UtilStr::Format("{0}={1}={2}={3}={4}", fileVerInfo.mOrigPath, fileVerInfo.mResUniqueId, fileVerInfo.mLoadPath, fileVerInfo.mFileMd5, fileVerInfo.mFileSize);
-		dataStream.writeLine(line);
+		line = UtilStr::Format("{0}={1}={2}={3}={4}", fileVerInfo->mOrigPath, fileVerInfo->mResUniqueId, fileVerInfo->mLoadPath, fileVerInfo->mFileMd5, fileVerInfo->mFileSize);
+		dataStream->writeLine(line);
 	}
 
-	dataStream.dispose();
+	dataStream->dispose();
 	dataStream = nullptr;
 }
 

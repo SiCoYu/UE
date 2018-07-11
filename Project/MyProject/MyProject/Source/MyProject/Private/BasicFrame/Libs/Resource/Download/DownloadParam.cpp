@@ -37,7 +37,7 @@ void DownloadParam::setPath(std::string origPath)
 
     //mExtName = UtilPath.getFileExt(mOrigPath);
 
-    //if(mExtName == UtilSysLibWrap.UNITY3D)
+    //if(mExtName == UtilSysLibWrap::UNITY3D)
     //{
     //    mResPackType = eBundleType;
     //}

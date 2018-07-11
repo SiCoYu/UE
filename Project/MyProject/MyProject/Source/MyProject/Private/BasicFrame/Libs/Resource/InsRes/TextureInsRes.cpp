@@ -35,7 +35,7 @@ void TextureInsRes::unload()
 		this->mTexture = nullptr;
 
 		// 这个接口肯定可以
-		//UtilSysLibWrap.UnloadUnusedAssets();
+		//UtilSysLibWrap::UnloadUnusedAssets();
 	}
 
 	Super::unload();

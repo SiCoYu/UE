@@ -226,7 +226,7 @@ void ResLoadMgr::loadLevel(LoadParam* param)
 	load(param);
 #elif defined UnPKG_RES_LOAD
 	param.mResPackType = ResPackType.eUnPakLevelType;
-	param.mResLoadType = ResLoadType.eStreamingAssets;
+	param.mResLoadType = ResLoadType::eStreamingAssets;
 	load(param);
 #else
 	param->setResPackType(ResPackType::eLevelType);
@@ -253,7 +253,7 @@ void ResLoadMgr::loadResources(LoadParam* param)
 #elif defined UnPKG_RES_LOAD
 	// 判断资源所在的目录，是在 StreamingAssets 目录还是在 persistentData 目录下，目前由于没有完成，只能从 StreamingAssets 目录下加载
 	param.mResPackType = ResPackType.eUnPakType;
-	param.mResLoadType = ResLoadType.eStreamingAssets;
+	param.mResLoadType = ResLoadType::eStreamingAssets;
 	return load(param);
 #else
 	param->setResPackType(ResPackType::eResourcesType);

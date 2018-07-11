@@ -62,7 +62,7 @@ void FileVerBase::saveMiniVerToPersistentPath()
 		GLogSys->log("FileVerBase::saveMiniVerToPersistentPath, start", LogTypeId::eLogAutoUpdate);
 	}
 
-	if (!this->mFileVerInfo.isNoVerInfo())
+	if (!this->mFileVerInfo->isNoVerInfo())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
@@ -82,7 +82,7 @@ void FileVerBase::saveMiniVerToPersistentPath()
 		std::string line = UtilStr::Format("Version={0}", this->mCurVer);
 		dataStream->writeLine(line);
 
-		line = UtilStr::Format("{0}={1}={2}={3}={4}", this->mFileVerInfo.mOrigPath, this->mFileVerInfo.mResUniqueId, this->mFileVerInfo.mLoadPath, this->mFileVerInfo.mFileMd5, this->mFileVerInfo.mFileSize);
+		line = UtilStr::Format("{0}={1}={2}={3}={4}", this->mFileVerInfo->mOrigPath, this->mFileVerInfo->mResUniqueId, this->mFileVerInfo->mLoadPath, this->mFileVerInfo->mFileMd5, this->mFileVerInfo->mFileSize);
 		dataStream->writeLine(line);
 
 		MY_SAFE_DISPOSE(dataStream);
@@ -149,11 +149,11 @@ void FileVerBase::parseMiniFile(std::string text)
 
 		if (equalList.size() >= 5)
 		{
-			this->mFileVerInfo.mOrigPath = equalList[0];
-			this->mFileVerInfo.mResUniqueId = equalList[1];
-			this->mFileVerInfo.mLoadPath = equalList[2];
-			this->mFileVerInfo.mFileMd5 = equalList[3];
-			this->mFileVerInfo.mFileSize = Int32.Parse(equalList[4]);
+			this->mFileVerInfo->mOrigPath = equalList[0];
+			this->mFileVerInfo->mResUniqueId = equalList[1];
+			this->mFileVerInfo->mLoadPath = equalList[2];
+			this->mFileVerInfo->mFileMd5 = equalList[3];
+			this->mFileVerInfo->mFileSize = Int32.Parse(equalList[4]);
 		}
 		else
 		{

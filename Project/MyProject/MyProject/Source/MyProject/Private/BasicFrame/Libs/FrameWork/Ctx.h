@@ -55,6 +55,8 @@ class InputMgr;
 class MsgRouteNotify;
 class GlobalDelegate;
 class GlobalEventCmd;
+class ResRedirectItem;
+class VersionSys;
 
 MY_END_NAMESPACE
 
@@ -107,6 +109,8 @@ protected:
 	MySharedPtr<MsgRouteNotify> mMsgRouteNotify;
 	MySharedPtr<GlobalDelegate> mGlobalDelegate;
 	MySharedPtr<GlobalEventCmd> mGlobalEventCmd;
+	MySharedPtr<ResRedirectItem> mResRedirectItem;
+	MySharedPtr<VersionSys> mVersionSys;
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
 
 	UMyBluePrintBase* mBPCtx;
@@ -179,6 +183,8 @@ public:
 	MySharedPtr<MsgRouteNotify> getMsgRouteNotify();
 	MySharedPtr<GlobalDelegate> getGlobalDelegate();
 	MySharedPtr<GlobalEventCmd> getGlobalEventCmd();
+	MySharedPtr<ResRedirectItem> getResRedirectItem();
+	MySharedPtr<VersionSys> getVersionSys();
 
 	//MySharedPtr<UMyBluePrintBase> getBPCtx();
 	UMyBluePrintBase* getBPCtx();
@@ -236,6 +242,8 @@ public:
 #define GMsgRouteNotify GCtx->getMsgRouteNotify()
 #define GGlobalDelegate GCtx->getGlobalDelegate()
 #define GGlobalEventCmd GCtx->getGlobalEventCmd()
+#define GResRedirectItem GCtx->getResRedirectItem()
+#define GVersionSys GCtx->getVersionSys()
 
 #define GBPCtx GCtx->getBPCtx()
 #define GNativeObjectReferencer GCtx->getNativeObjectReferencer()

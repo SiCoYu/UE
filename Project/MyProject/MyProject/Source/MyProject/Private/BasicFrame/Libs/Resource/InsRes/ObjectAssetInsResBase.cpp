@@ -69,8 +69,8 @@ void ObjectAssetInsResBase::unload()
 {
 	if (this->mActor != nullptr)
 	{
-		//UtilSysLibWrap.UnloadAsset(mActor);      // 强制卸载资源数据
-		//UtilSysLibWrap.DestroyImmediate(mActor, true);
+		//UtilSysLibWrap::UnloadAsset(mActor);      // 强制卸载资源数据
+		//UtilSysLibWrap::DestroyImmediate(mActor, true);
 		UtilEngineWrap::UnloadUnusedAssets();
 		this->mActor = nullptr;
 	}

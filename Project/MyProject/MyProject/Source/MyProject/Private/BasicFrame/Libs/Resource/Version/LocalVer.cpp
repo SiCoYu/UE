@@ -1,6 +1,8 @@
 ﻿#include "MyProject.h"
 #include "LocalVer.h"
 #include "MDataStream.h"
+#include "MyMemoryInc.h"
+#include "ResLoadType.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -44,7 +46,7 @@ void LocalVer::loadMiniVerFile()
 	//this->mMiniDataStream.open();
 
 	//// 如果读取没有成功，就从 StreamingAssetsPath (不再从 Resources) 目录下读取， StreamingAssetsPath android 下读取非 AssetBundles 需要异步
-	//if (this->mFileVerInfo.isNoVerInfo())
+	//if (this->mFileVerInfo->isNoVerInfo())
 	//{
 	//    if (MacroDef::ENABLE_LOG)
 	//    {
@@ -85,7 +87,7 @@ void LocalVer::loadPersistentMiniVerFile()
 	}
 
 	// 先从 PersistentPath 目录下读取,各个平台都可以同步读取
-	this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_MINI), this->onPersistentMiniLoadEventHandle);
+	this->mMiniDataStream = MY_NEW MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_MINI), this->onPersistentMiniLoadEventHandle);
 	this->mMiniDataStream.open();
 }
 
@@ -154,19 +156,19 @@ void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 void LocalVer::loadLocalRVer()
 {
 	this->mRDataStream = MY_NEW MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_R), onRVerLoaded);
-	this->mRDataStream.open();
+	this->mRDataStream->open();
 }
 
 void LocalVer::onRVerLoaded(IDispatchObject* dispObj, uint uniqueId)
 {
 	this->mRDataStream = (MDataStream*)dispObj;
 
-	if (this->mRDataStream.isValid())
+	if (this->mRDataStream->isValid())
 	{
 		this->loadFormText(this->mRDataStream.readText(), this->mPath2Ver_R_Dic, this->mABPath2Ver_R_Dic);
 	}
 
-	this->mRDataStream.dispose();
+	this->mRDataStream->dispose();
 	this->mRDataStream = nullptr;
 
 	this->onAllVerLoaded();
@@ -186,7 +188,7 @@ void LocalVer::loadLocalSVer()
 
 	this->mSDataStream = MY_NEW MDataStream(path, this->onSVerLoaded);
 	//this->mSDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_S), this->onSVerLoaded);
-	this->mSDataStream.open();
+	this->mSDataStream->open();
 }
 
 void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
@@ -198,7 +200,7 @@ void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
 
 	this->mSDataStream = (MDataStream*)dispObj;
 
-	if (this->mSDataStream.isValid())
+	if (this->mSDataStream->isValid())
 	{
 		std::string text = this->mSDataStream.readText();
 
@@ -211,7 +213,7 @@ void LocalVer::onSVerLoaded(IDispatchObject dispObj, uint uniqueId)
 		this->loadFormText(text, this->mPath2Ver_S_Dic, this->mABPath2Ver_S_Dic);
 	}
 
-	this->mSDataStream.dispose();
+	this->mSDataStream->dispose();
 	this->mSDataStream = nullptr;
 
 	this->mIsVerSLoaded = true;
@@ -226,7 +228,7 @@ void LocalVer::loadLocalPVer()
 	}
 
 	this->mPDataStream = MY_NEW MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_P), this->onPVerLoaded);
-	this->mPDataStream.open();
+	this->mPDataStream->open();
 }
 
 void LocalVer::onPVerLoaded(IDispatchObject dispObj, uint uniqueId)
@@ -248,7 +250,7 @@ void LocalVer::onPVerLoaded(IDispatchObject dispObj, uint uniqueId)
 		this->loadFormText(this->mPDataStream.readText(), this->mPath2Ver_P_Dic, this->mABPath2Ver_P_Dic);
 	}
 
-	this->mPDataStream.dispose();
+	this->mPDataStream->dispose();
 	this->mPDataStream = nullptr;
 
 	this->mIsVerPLoaded = true;
@@ -269,59 +271,59 @@ int LocalVer::getFileVerInfo(std::string& origPath, FileVerInfo& fileVerInfo, bo
 	// 在 Resources 中资源是大写，在 AssetBundles 中包含的资源名字是小写，但是 StreamingAssets 或者 Persistent 中不是 AssetBundles 形式的资源，仍然是大写
 	std::string lowerOrigPath = origPath.ToLower();
 	std::string md5 = "";
-	ResLoadType resLoadType = ResLoadType.eLoadResource;
+	ResLoadType resLoadType = ResLoadType::eLoadResource;
 
 	if (!isABAsset)
 	{
-		resLoadType = ResLoadType.eLoadResource;
+		resLoadType = ResLoadType::eLoadResource;
 
 		// 这个目录只要有就记录，例如 Windows.unity3d 这种 manifest 文件就是大写的，其它的资源目录都是小写的，为了兼容，检查大写和小写
 		if (this->mPath2Ver_P_Dic.containsKey(origPath))
 		{
-			this->analyzeHash(this->mPath2Ver_P_Dic[origPath], ResLoadType.eLoadLocalPersistentData, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mPath2Ver_P_Dic[origPath], ResLoadType::eLoadLocalPersistentData, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 		else if (this->mPath2Ver_P_Dic.containsKey(lowerOrigPath))
 		{
-			this->analyzeHash(this->mPath2Ver_P_Dic[lowerOrigPath], ResLoadType.eLoadLocalPersistentData, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mPath2Ver_P_Dic[lowerOrigPath], ResLoadType::eLoadLocalPersistentData, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 
 		if (this->mPath2Ver_S_Dic.containsKey(origPath))
 		{
 			// 如果两个 Hash 码是相同，就说明资源定向在 StreamAsset 目录里面
-			this->analyzeHash(this->mPath2Ver_S_Dic[origPath], ResLoadType.eLoadStreamingAssets, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mPath2Ver_S_Dic[origPath], ResLoadType::eLoadStreamingAssets, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 		else if (this->mPath2Ver_S_Dic.containsKey(lowerOrigPath))
 		{
-			this->analyzeHash(this->mPath2Ver_S_Dic[lowerOrigPath], ResLoadType.eLoadStreamingAssets, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mPath2Ver_S_Dic[lowerOrigPath], ResLoadType::eLoadStreamingAssets, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 
 		if (this->mPath2Ver_R_Dic.containsKey(origPath))
 		{
-			this->analyzeHash(this->mPath2Ver_R_Dic[origPath], ResLoadType.eLoadResource, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mPath2Ver_R_Dic[origPath], ResLoadType::eLoadResource, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 	}
 	else
 	{
-		resLoadType = ResLoadType.eLoadStreamingAssets;
+		resLoadType = ResLoadType::eLoadStreamingAssets;
 
 		// 这个目录只要有就记录
 		if (this->mABPath2Ver_P_Dic.containsKey(lowerOrigPath))
 		{
-			this->analyzeHash(this->mABPath2Ver_P_Dic[lowerOrigPath], ResLoadType.eLoadLocalPersistentData, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mABPath2Ver_P_Dic[lowerOrigPath], ResLoadType::eLoadLocalPersistentData, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 		else if (this->mABPath2Ver_P_Dic.containsKey(origPath))
 		{
-			this->analyzeHash(this->mABPath2Ver_P_Dic[origPath], ResLoadType.eLoadLocalPersistentData, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mABPath2Ver_P_Dic[origPath], ResLoadType::eLoadLocalPersistentData, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 
 		if (this->mABPath2Ver_S_Dic.containsKey(lowerOrigPath))
 		{
 			// 如果两个 Hash 码是相同，就说明资源定向在 StreamAsset 目录里面
-			this->analyzeHash(this->mABPath2Ver_S_Dic[lowerOrigPath], ResLoadType.eLoadStreamingAssets, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mABPath2Ver_S_Dic[lowerOrigPath], ResLoadType::eLoadStreamingAssets, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 		else if (this->mABPath2Ver_S_Dic.containsKey(origPath))
 		{
-			this->analyzeHash(this->mABPath2Ver_S_Dic[origPath], ResLoadType.eLoadStreamingAssets, ref fileVerInfo, ref md5, ref resLoadType);
+			this->analyzeHash(this->mABPath2Ver_S_Dic[origPath], ResLoadType::eLoadStreamingAssets, ref fileVerInfo, ref md5, ref resLoadType);
 		}
 	}
 
@@ -346,7 +348,7 @@ void LocalVer::analyzeHash(
 	else if (string.IsNullOrEmpty(md5))     // 如果没有 md5 ，就返回 srcFileVerInfo
 	{
 		fileVerInfo = srcFileVerInfo;
-		md5 = fileVerInfo.mFileMd5;
+		md5 = fileVerInfo->mFileMd5;
 		resLoadType = defaultResLoadType;
 	}
 }

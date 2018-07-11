@@ -137,7 +137,7 @@ void UForm::onReady()
 
 	if (this->mIsHandleExitBtn)
 	{
-		//UtilSysLibWrap.addEventHandle(mWinRender.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
+		//UtilSysLibWrap::addEventHandle(mWinRender.mUiRoot, "BtnClose", onExitBtnClick); // 关闭事件
 	}
 }
 

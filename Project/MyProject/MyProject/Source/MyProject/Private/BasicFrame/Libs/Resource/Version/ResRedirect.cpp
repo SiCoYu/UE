@@ -1,6 +1,9 @@
 ﻿#include "MyProject.h"
 #include "ResRedirect.h"
-#include "MyMemory.h"
+#include "MyMemoryInc.h"
+#include "ResRedirectItem.h"
+#include "VersionInc.h"
+#include "MyMemoryInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -31,17 +34,17 @@ bool ResRedirect::canResRedirect(std::string origPath, bool isABAsset)
 {
 	bool ret = false;
 
-	ResRedirectItem redirectItem = Ctx.msInstance.mResRedirect.getResRedirectItem(origPath, isABAsset);
-	ret = !redirectItem.mFileVerInfo.isNoVerInfo();
+	ResRedirectItem* redirectItem = this->getResRedirectItem(origPath, isABAsset);
+	ret = !redirectItem->mFileVerInfo->isNoVerInfo();
 
 	return ret;
 }
 
 // isABAsset 是否是 AssetBundles 资源目录
-ResRedirectItem ResRedirect::getResRedirectItem(std::string origPath, bool isABAsset)
+ResRedirectItem* ResRedirect::getResRedirectItem(std::string origPath, bool isABAsset)
 {
-	ResRedirectItem item = nullptr;
-	FileVerInfo fileVerInfo = nullptr;
+	ResRedirectItem* item = nullptr;
+	FileVerInfo* fileVerInfo = nullptr;
 
 	if (!isABAsset)
 	{
@@ -52,11 +55,11 @@ ResRedirectItem ResRedirect::getResRedirectItem(std::string origPath, bool isABA
 		else
 		{
 			// 从版本系统中获取
-			item = MY_NEW ResRedirectItem(origPath, (int)ResLoadType.eLoadResource);
+			item = MY_NEW ResRedirectItem(origPath, (int)ResLoadType::eLoadResource);
 			this->mOrigPath2ItemDic[origPath] = item;
 
-			item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer->getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
-			item.mFileVerInfo = fileVerInfo;
+			item->mResLoadType = (ResLoadType)GVersionSys->mLocalVer->getFileVerInfo(origPath, fileVerInfo, isABAsset);
+			item->mFileVerInfo = fileVerInfo;
 		}
 	}
 	else
@@ -68,11 +71,11 @@ ResRedirectItem ResRedirect::getResRedirectItem(std::string origPath, bool isABA
 		else
 		{
 			// 从版本系统中获取
-			item = MY_NEW ResRedirectItem(origPath, (int)ResLoadType.eLoadStreamingAssets);
+			item = MY_NEW ResRedirectItem(origPath, (int)ResLoadType::eLoadStreamingAssets);
 			this->mABPath2ItemDic[origPath] = item;
 
-			item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer->getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
-			item.mFileVerInfo = fileVerInfo;
+			item->mResLoadType = (ResLoadType)GVersionSys->mLocalVer->getFileVerInfo(origPath, fileVerInfo, isABAsset);
+			item->mFileVerInfo = fileVerInfo;
 		}
 	}
 
@@ -84,13 +87,13 @@ ResRedirectItem ResRedirect::getResRedirectItem(std::string origPath, bool isABA
 		}
 
 		fileVerInfo = MY_NEW FileVerInfo();
-		fileVerInfo.mOrigPath = origPath;
-		fileVerInfo.mResUniqueId = UtilFileIO::getFilePathNoExt(origPath);
-		fileVerInfo.mLoadPath = UtilFileIO::getFilePathNoExt(origPath);
-		fileVerInfo.mFileMd5 = "error";
-		fileVerInfo.mFileSize = 0;
+		fileVerInfo->mOrigPath = origPath;
+		fileVerInfo->mResUniqueId = UtilFileIO::getFilePathNoExt(origPath);
+		fileVerInfo->mLoadPath = UtilFileIO::getFilePathNoExt(origPath);
+		fileVerInfo->mFileMd5 = "error";
+		fileVerInfo->mFileSize = 0;
 
-		item.mFileVerInfo = fileVerInfo;
+		item->mFileVerInfo = fileVerInfo;
 	}
 	else
 	{
