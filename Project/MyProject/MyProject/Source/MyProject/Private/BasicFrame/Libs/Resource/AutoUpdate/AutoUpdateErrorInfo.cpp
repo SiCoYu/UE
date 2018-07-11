@@ -5,7 +5,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 AutoUpdateErrorInfo::AutoUpdateErrorInfo()
 {
-	this->mAutoUpdateErrorCode = AutoUpdateErrorCode.eErrorNo;
+	this->mAutoUpdateErrorCode = AutoUpdateErrorCode::eErrorNo;
 	this->mAutoUpdateErrorDesc = "";
 }
 

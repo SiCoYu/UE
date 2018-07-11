@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "FileGroup.h"
+#include "MyMemoryInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -10,7 +11,7 @@ FileGroup::FileGroup()
 	this->mCurMemSize = 0;
 	this->mTotalMemSize = 0;
 
-	this->mProgressDispatch = new AddOnceEventDispatch();
+	this->mProgressDispatch = MY_NEW AddOnceEventDispatch();
 
 	this->reset();
 }
@@ -70,7 +71,7 @@ bool FileGroup::hasLoadFailed()
 }
 
 // 增加更新的文件
-void FileGroup::addLoadingPath(std::string path, FileVerInfo fileVerInfo /*, bool isAddTotalNum = false*/)
+void FileGroup::addLoadingPath(std::string& path, FileVerInfo& fileVerInfo /*, bool isAddTotalNum = false*/)
 {
 	this->mTotalMemSize += fileVerInfo.mFileSize;
 
@@ -85,7 +86,7 @@ void FileGroup::addLoadingPath(std::string path, FileVerInfo fileVerInfo /*, boo
 	//this->mProgressDispatch.dispatchEvent(nullptr);
 }
 
-void FileGroup::removeLoadingPath(std::string path/*, bool isDecTotalNum = false*/)
+void FileGroup::removeLoadingPath(std::string& path/*, bool isDecTotalNum = false*/)
 {
 	FileVerInfo fileVerInfo = Ctx.msInstance.mVersionSys.mServerVer.mABPath2HashDic[path];
 
@@ -104,7 +105,7 @@ void FileGroup::removeLoadingPath(std::string path/*, bool isDecTotalNum = false
 	this->mProgressDispatch.dispatchEvent(nullptr);
 }
 
-void FileGroup::addLoadedPath(std::string path/*, bool isAddTotalNum = false*/)
+void FileGroup::addLoadedPath(std::string& path/*, bool isAddTotalNum = false*/)
 {
 	this->mLoadedPath.add(path);
 
@@ -114,7 +115,7 @@ void FileGroup::addLoadedPath(std::string path/*, bool isAddTotalNum = false*/)
 	//}
 }
 
-void FileGroup::addFailedPath(std::string path/*, bool isAddTotalNum = false*/)
+void FileGroup::addFailedPath(std::string& path/*, bool isAddTotalNum = false*/)
 {
 	this->mFailedPath.add(path);
 	this->mUpdatePathDic.remove(path);   // 如果加载失败，就是没有更新的资源，需要移除这个更新的资源

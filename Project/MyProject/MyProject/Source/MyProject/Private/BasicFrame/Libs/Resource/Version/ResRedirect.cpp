@@ -1,12 +1,12 @@
 ﻿#include "MyProject.h"
 #include "ResRedirect.h"
+#include "MyMemory.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 ResRedirect::ResRedirect()
 {
-	this->mOrigPath2ItemDic = MY_NEW MDictionary<string, ResRedirectItem>();
-	this->mABPath2ItemDic = MY_NEW MDictionary<string, ResRedirectItem>();
+
 }
 
 void ResRedirect::init()
@@ -27,7 +27,7 @@ void ResRedirect::clearCacheInfo()
 }
 
 // 资源是否可以重定向，只有在 Version_S.txt 或者在 Version_P.txt 中的资源才能判断是存在的
-bool ResRedirect::canResRedirect(string origPath, bool isABAsset)
+bool ResRedirect::canResRedirect(std::string origPath, bool isABAsset)
 {
 	bool ret = false;
 
@@ -38,7 +38,7 @@ bool ResRedirect::canResRedirect(string origPath, bool isABAsset)
 }
 
 // isABAsset 是否是 AssetBundles 资源目录
-ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
+ResRedirectItem ResRedirect::getResRedirectItem(std::string origPath, bool isABAsset)
 {
 	ResRedirectItem item = nullptr;
 	FileVerInfo fileVerInfo = nullptr;
@@ -52,7 +52,7 @@ ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
 		else
 		{
 			// 从版本系统中获取
-			item = new ResRedirectItem(origPath, (int)ResLoadType.eLoadResource);
+			item = MY_NEW ResRedirectItem(origPath, (int)ResLoadType.eLoadResource);
 			this->mOrigPath2ItemDic[origPath] = item;
 
 			item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer.getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
@@ -68,7 +68,7 @@ ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
 		else
 		{
 			// 从版本系统中获取
-			item = new ResRedirectItem(origPath, (int)ResLoadType.eLoadStreamingAssets);
+			item = MY_NEW ResRedirectItem(origPath, (int)ResLoadType.eLoadStreamingAssets);
 			this->mABPath2ItemDic[origPath] = item;
 
 			item.mResLoadType = (ResLoadType)Ctx.msInstance.mVersionSys.mLocalVer.getFileVerInfo(origPath, ref fileVerInfo, isABAsset);
@@ -83,7 +83,7 @@ ResRedirectItem ResRedirect::getResRedirectItem(string origPath, bool isABAsset)
 			GLogSys->log(UtilStr::Format("ResRedirectItem::getResRedirectItem, cannot find load item, origPath = {0}", origPath), LogTypeId::eLogResLoader);
 		}
 
-		fileVerInfo = new FileVerInfo();
+		fileVerInfo = MY_NEW FileVerInfo();
 		fileVerInfo.mOrigPath = origPath;
 		fileVerInfo.mResUniqueId = UtilFileIO::getFilePathNoExt(origPath);
 		fileVerInfo.mLoadPath = UtilFileIO::getFilePathNoExt(origPath);

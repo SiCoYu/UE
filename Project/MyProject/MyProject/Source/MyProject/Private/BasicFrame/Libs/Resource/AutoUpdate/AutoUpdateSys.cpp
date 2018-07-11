@@ -49,7 +49,7 @@ void startUpdate()
 bool isUpdateSuccess()
 {
 	//return this->mFileGroup.isUpdateSuccess();
-	return this->mAutoUpdateErrorInfo.getErrorCode() == AutoUpdateErrorCode.eErrorNo;
+	return this->mAutoUpdateErrorInfo.getErrorCode() == AutoUpdateErrorCode::eErrorNo;
 }
 
 // 成功更新，并且重新下载 Version_P.txt，并且成功更新需要更新的资源文件
@@ -121,7 +121,7 @@ void onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId)
 	// 如果 Mini 文件没有从服务器下载成功
 	if (!Ctx.msInstance.mVersionSys.mServerVer.mIsMiniLoadSuccess)
 	{
-		this->setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebVersionMiniFailed);
+		this->setAutoUpdateErrorCode(AutoUpdateErrorCode::eErrorDownloadWebVersionMiniFailed);
 		this->downloadWebMiniFail();
 	}
 	else if (Ctx.msInstance.mVersionSys.mIsNeedUpdateApp) // 如果需要更新
@@ -165,7 +165,7 @@ void onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
 			GLogSys->log("AutoUpdateSys::onWebVerLoadResult, mIsVerLoadSuccess is false", LogTypeId::eLogAutoUpdate);
 		}
 
-		this->setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebVersionPFailed);
+		this->setAutoUpdateErrorCode(AutoUpdateErrorCode::eErrorDownloadWebVersionPFailed);
 		this->onUpdateEnd();          // 更新结束
 	}
 }
@@ -351,7 +351,7 @@ void _checkUpdateEnd()
 	{
 		if (this->mFileGroup.hasLoadFailed())
 		{
-			this->setAutoUpdateErrorCode(AutoUpdateErrorCode.eErrorDownloadWebResFailed);
+			this->setAutoUpdateErrorCode(AutoUpdateErrorCode::eErrorDownloadWebResFailed);
 		}
 
 		this->onUpdateEnd();

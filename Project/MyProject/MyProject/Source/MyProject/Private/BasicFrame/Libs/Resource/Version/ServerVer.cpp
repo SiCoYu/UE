@@ -3,13 +3,13 @@
 #include "IDispatchObject.h"
 #include "MacroDef.h"
 #include "LogInc.h"
+#include "MyMemoryInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 ServerVer::ServerVer()
 {
-	this->mPath2HashDic = MY_NEW MDictionary<string, FileVerInfo>();
-	this->mABPath2HashDic = MY_NEW MDictionary<string, FileVerInfo>();
+
 }
 
 void ServerVer::loadMiniVerFile()
@@ -19,7 +19,7 @@ void ServerVer::loadMiniVerFile()
 		GLogSys.log("ServerVer::loadMiniVerFile", LogTypeId::eLogAutoUpdate);
 	}
 
-	AuxDownloader auxDownload = new AuxDownloader();
+	AuxDownloader* auxDownload = MY_NEW AuxDownloader();
 	auxDownload.setVersion(UtilSysLibWrap.getRandomVersion());
 	auxDownload.download(
 		VerFileName::VER_MINI,
@@ -101,7 +101,7 @@ void ServerVer::loadVerFile()
 }
 
 // 加载一个表完成
-void ServerVer::_onVerLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
+void ServerVer::_onVerLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -153,7 +153,7 @@ void ServerVer::savePVerToPersistentPath()
 		UtilFileIO::deleteFile(path);
 	}
 
-	MDataStream dataStream = new MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
+	MDataStream dataStream = MY_NEW MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
 	dataStream.open();
 
 	string line = "";
