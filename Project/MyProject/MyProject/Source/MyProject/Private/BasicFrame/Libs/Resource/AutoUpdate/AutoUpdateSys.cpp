@@ -3,57 +3,57 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-AutoUpdateSys()
+AutoUpdateSys::AutoUpdateSys()
 {
 	this->mFileGroup = MY_NEW FileGroup();
 	this->mOnUpdateEndDispatch = MY_NEW AddOnceAndCallOnceEventDispatch();
 	this->mAutoUpdateErrorInfo = MY_NEW AutoUpdateErrorInfo();
 }
 
-void init()
+void AutoUpdateSys::init()
 {
 
 }
 
-void dispose()
+void AutoUpdateSys::dispose()
 {
 
 }
 
-FileGroup* getFileGroup()
+FileGroup* AutoUpdateSys::getFileGroup()
 {
 	return this->mFileGroup;
 }
 
-AutoUpdateErrorCode* getAutoUpdateErrorCode()
+AutoUpdateErrorCode* AutoUpdateSys::getAutoUpdateErrorCode()
 {
 	return this->mAutoUpdateErrorInfo.getErrorCode();
 }
 
-void setAutoUpdateErrorCode(AutoUpdateErrorCode value)
+void AutoUpdateSys::setAutoUpdateErrorCode(AutoUpdateErrorCode value)
 {
 	this->mAutoUpdateErrorInfo.setErrorCode(value);
 }
 
-AddOnceAndCallOnceEventDispatch* getUpdateEndDispatch()
+AddOnceAndCallOnceEventDispatch* AutoUpdateSys::getUpdateEndDispatch()
 {
 	return this->mOnUpdateEndDispatch;
 }
 
-void startUpdate()
+void AutoUpdateSys::startUpdate()
 {
 	this->loadWebMiniVersion();
 }
 
 // 成功更新
-bool isUpdateSuccess()
+bool AutoUpdateSys::isUpdateSuccess()
 {
 	//return this->mFileGroup.isUpdateSuccess();
 	return this->mAutoUpdateErrorInfo.getErrorCode() == AutoUpdateErrorCode::eErrorNo;
 }
 
 // 成功更新，并且重新下载 Version_P.txt，并且成功更新需要更新的资源文件
-bool isUpdateWebVersionPSuccessAndAllUpdateSuccess()
+bool AutoUpdateSys::isUpdateWebVersionPSuccessAndAllUpdateSuccess()
 {
 	bool ret = false;
 
@@ -69,8 +69,7 @@ bool isUpdateWebVersionPSuccessAndAllUpdateSuccess()
 	return ret;
 }
 
-protected:
-void _checkIsNeedUpdateManifest()
+void AutoUpdateSys::_checkIsNeedUpdateManifest()
 {
 	string platformManifestName = UtilEngineWrap.getManifestName();
 	FileVerInfo serverManifestInfo = nullptr;
@@ -98,7 +97,7 @@ void _checkIsNeedUpdateManifest()
 	}
 }
 
-void loadWebMiniVersion()
+void AutoUpdateSys::loadWebMiniVersion()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
@@ -109,7 +108,7 @@ void loadWebMiniVersion()
 	GVersionSys->loadWebMiniVerFile();
 }
 
-void onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId)
+void AutoUpdateSys::onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId)
 {
 	if (MacroDef.ENABLE_LOG)
 	{
@@ -141,7 +140,7 @@ void onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId)
 	}
 }
 
-void onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
+void AutoUpdateSys::onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
 {
 	if (MacroDef.ENABLE_LOG)
 	{
@@ -171,8 +170,7 @@ void onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
 }
 
 // 下载基本的 Web 文件失败
-protected:
-void _downloadWebMiniFail()
+void AutoUpdateSys::_downloadWebMiniFail()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
@@ -183,7 +181,7 @@ void _downloadWebMiniFail()
 }
 
 // 下载 App 文件
-void _downloadApp()
+void AutoUpdateSys::_downloadApp()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
@@ -193,7 +191,7 @@ void _downloadApp()
 	Ctx.msInstance.mUiMgr.loadAndShowForm(UiFormId.eUiAppDownload);
 }
 
-void _loadAllUpdateFile()
+void AutoUpdateSys::_loadAllUpdateFile()
 {
 	this->mFileGroup.reset();
 	this->mFileGroup.setTotalNum(GVersionSys->mServerVer->mABPath2HashDic.getData().Count - this->getExcludeUpdateFileNum());
@@ -268,7 +266,7 @@ void _loadAllUpdateFile()
 	}
 }
 
-void _loadOneUpdateFile(string path, FileVerInfo fileInfo)
+void AutoUpdateSys::_loadOneUpdateFile(string path, FileVerInfo fileInfo)
 {
 	//string loadPath = UtilEngineWrap.combineVerPath(path, fileInfo.m_fileMd5);
 	//mLoadingPath.add(loadPath);
@@ -309,7 +307,7 @@ void _loadOneUpdateFile(string path, FileVerInfo fileInfo)
 	);
 }
 
-void _onLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
+void AutoUpdateSys::_onLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 {
 	this->mFileGroup.incCurNum();
 
@@ -340,7 +338,7 @@ void _onLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 	downloader.dispose();
 }
 
-void _checkUpdateEnd()
+void AutoUpdateSys::_checkUpdateEnd()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
@@ -358,8 +356,7 @@ void _checkUpdateEnd()
 	}
 }
 
-public:
-void onUpdateEnd()
+void AutoUpdateSys::onUpdateEnd()
 {
 	if (MacroDef.ENABLE_LOG)
 	{
@@ -383,8 +380,7 @@ void onUpdateEnd()
 }
 
 // 是否在更新列表中
-protected:
-bool _isIncludeUpdateList(string path)
+bool AutoUpdateSys::_isIncludeUpdateList(string path)
 {
 	bool ret = true;
 
@@ -398,7 +394,7 @@ bool _isIncludeUpdateList(string path)
 }
 
 // 获取无需从服务器更新的文件数量
-int _getExcludeUpdateFileNum()
+int AutoUpdateSys::_getExcludeUpdateFileNum()
 {
 	// VerFileName::VER_P 文件除外
 	return 1;
