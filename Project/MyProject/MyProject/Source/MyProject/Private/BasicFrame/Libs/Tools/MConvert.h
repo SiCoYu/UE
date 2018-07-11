@@ -9,6 +9,7 @@ class MConvert
 {
 public:
 	std::string convInt2Str(int value);
+	int convStr2Int(std::string value);
 };
 
 MY_END_NAMESPACE

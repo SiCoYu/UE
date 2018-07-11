@@ -5,7 +5,6 @@
 #include "ServerVer.h"
 #include "LocalVer.h"
 #include "MConvert.h"
-#include "MConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

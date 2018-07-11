@@ -186,4 +186,15 @@ void UtilStr::split(std::string& s, std::string& delim, std::vector< std::string
 	}
 }
 
+static public void removeLastCR(std::string& srcStr)
+{
+	if (!UtilStr::IsNullOrEmpty(srcStr))
+	{
+		if (srcStr[srcStr.length() - 1] == Symbolic.CR)
+		{
+			srcStr = srcStr.Substring(0, srcStr.length() - 1);
+		}
+	}
+}
+
 MY_END_NAMESPACE
