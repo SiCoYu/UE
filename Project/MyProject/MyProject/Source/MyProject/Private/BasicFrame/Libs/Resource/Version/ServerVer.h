@@ -27,10 +27,10 @@ public:
 	ServerVer();
 
 	virtual void loadMiniVerFile();
-	void _onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId);
+	void _onMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj);
 	void loadVerFile();
     // 加载一个表完成
-	void _onVerLoadEventHandle(IDispatchObject* dispObj, uint uniqueId);
+	void _onVerLoadEventHandle(uint eventId, IDispatchObject* dispObj);
 	void savePVerToPersistentPath();
 };
 

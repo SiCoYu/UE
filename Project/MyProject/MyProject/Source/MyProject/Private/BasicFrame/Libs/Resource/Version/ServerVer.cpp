@@ -41,7 +41,7 @@ void ServerVer::loadMiniVerFile()
 }
 
 // 加载一个表完成
-void ServerVer::_onMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
+void ServerVer::_onMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -108,7 +108,7 @@ void ServerVer::loadVerFile()
 }
 
 // 加载一个表完成
-void ServerVer::_onVerLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
+void ServerVer::_onVerLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{

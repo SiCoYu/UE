@@ -1,11 +1,13 @@
 ﻿#pragma once
 
 #include <string.h>
+#include "MDictionary.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
 class AddOnceAndCallOnceEventDispatch;
+class FileVerInfo;
 
 class FileVerBase
 {
@@ -22,7 +24,7 @@ public:
     bool mIsVerLoadSuccess;
 
     AddOnceAndCallOnceEventDispatch* mMiniLoadedDispatch;
-    AddOnceAndCallOnceEventDispatch mLoadedDispatch;
+    AddOnceAndCallOnceEventDispatch* mLoadedDispatch;
 
 public:
 	FileVerBase();
@@ -32,8 +34,8 @@ public:
 
 	std::string getVersionString();
 	void saveMiniVerToPersistentPath();
-	void parseMiniFile(string text);
-	void _loadFormText(string text, MDictionary<string, FileVerInfo> dic, MDictionary<string, FileVerInfo> abDic);
+	void parseMiniFile(std::string text);
+	void _loadFormText(std::string text, MDictionary<std::string, FileVerInfo*>& dic, MDictionary<std::string, FileVerInfo*>& abDic);
 };
 
 MY_END_NAMESPACE

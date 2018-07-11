@@ -18,12 +18,12 @@ VersionSys::VersionSys()
 	this->mLocalVer = MY_NEW LocalVer();
 }
 
-void init()
+void VersionSys::init()
 {
 
 }
 
-void loadAllLocalVer()
+void VersionSys::loadAllLocalVer()
 {
 	this->mLocalVer->loadAllLocalVer();
 }
@@ -44,7 +44,7 @@ std::string VersionSys::getMajorVersion()
 	return ret;
 }
 
-std::string getMinorVersion()
+std::string VersionSys::getMinorVersion()
 {
 	std::string ret = "";
 
@@ -60,7 +60,7 @@ std::string getMinorVersion()
 	return ret;
 }
 
-std::string getPatchVersion()
+std::string VersionSys::getPatchVersion()
 {
 	std::string ret = "";
 
@@ -76,7 +76,7 @@ std::string getPatchVersion()
 	return ret;
 }
 
-std::string getTimeStamp()
+std::string VersionSys::getTimeStamp()
 {
 	std::string ret = "";
 
@@ -92,7 +92,7 @@ std::string getTimeStamp()
 	return ret;
 }
 
-std::string getDetailVersionString()
+std::string VersionSys::getDetailVersionString()
 {
 	std::string ret = "";
 
@@ -108,7 +108,7 @@ std::string getDetailVersionString()
 	return ret;
 }
 
-std::string getDotVersionString()
+std::string VersionSys::getDotVersionString()
 {
 	std::string ret = "";
 
@@ -124,7 +124,7 @@ std::string getDotVersionString()
 	return ret;
 }
 
-std::string getVersionString()
+std::string VersionSys::getVersionString()
 {
 	std::string ret = "";
 
@@ -140,7 +140,7 @@ std::string getVersionString()
 	return ret;
 }
 
-void loadWebMiniVerFile()
+void VersionSys::loadWebMiniVerFile()
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -151,7 +151,7 @@ void loadWebMiniVerFile()
 	this->mServerVer->loadMiniVerFile();
 }
 
-void loadWebVerFile()
+void VersionSys::loadWebVerFile()
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -214,7 +214,7 @@ void loadWebVerFile()
 	}
 }
 
-void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
+void VersionSys::onWebMiniLoaded(uint eventId, IDispatchObject* dispObj)
 {
 	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
@@ -248,7 +248,7 @@ void onWebMiniLoaded(IDispatchObject dispObj, uint uniqueId)
 	this->mMiniLoadResultDispatch.dispatchEvent(nullptr);
 }
 
-void onWebVerLoaded(IDispatchObject* dispObj, uint uniqueId)
+void VersionSys::onWebVerLoaded(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -258,7 +258,7 @@ void onWebVerLoaded(IDispatchObject* dispObj, uint uniqueId)
 	this->mLoadResultDispatch->dispatchEvent(nullptr);
 }
 
-std::string getFileVer(std::string path)
+std::string VersionSys::getFileVer(std::string path)
 {
 	if (this->mIsNeedUpdateVerFile)
 	{
@@ -279,7 +279,7 @@ std::string getFileVer(std::string path)
 }
 
 // 保存 VerFileName::VER_MINI 版本文件和 VerFileName::VER_P 版本文件到 Persistent 文件夹
-void saveWebMiniOrPVerToPersistentPath()
+void VersionSys::saveWebMiniOrPVerToPersistentPath()
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -295,7 +295,7 @@ void saveWebMiniOrPVerToPersistentPath()
 }
 
 // 如果 WebVerFile 版本文件更细了，就更新本地版本文件
-void updateLocalVerFile()
+void VersionSys::updateLocalVerFile()
 {
 	if (nullptr != this->mLocalVer->mPath2Ver_P_Dic)
 	{

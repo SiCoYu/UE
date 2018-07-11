@@ -173,7 +173,7 @@ void FileVerBase::parseMiniFile(std::string text)
 }
 
 // 这个主要是解析版本文件的
-void FileVerBase::_loadFormText(string text, MDictionary<string, FileVerInfo> dic, MDictionary<string, FileVerInfo> abDic)
+void FileVerBase::_loadFormText(string text, MDictionary<std::string, FileVerInfo*>& dic, MDictionary<std::string, FileVerInfo*>& abDic)
 {
 	std::string lineSplitStr = UtilEngineWrap::CR_LF;
 	std::string equalSplitStr = UtilEngineWrap::SEPARATOR;

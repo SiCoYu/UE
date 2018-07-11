@@ -42,8 +42,8 @@ public:
 	std::string getVersionString();
 	void loadWebMiniVerFile();
 	void loadWebVerFile();
-	void onWebMiniLoaded(IDispatchObject* dispObj, uint uniqueId);
-	void onWebVerLoaded(IDispatchObject* dispObj, uint uniqueId);
+	void onWebMiniLoaded(uint eventId, IDispatchObject* dispObj);
+	void onWebVerLoaded(uint eventId, IDispatchObject* dispObj);
 	std::string getFileVer(std::string path);
     // 保存 VerFileName::VER_MINI 版本文件和 VerFileName::VER_P 版本文件到 Persistent 文件夹
 	void saveWebMiniOrPVerToPersistentPath();
