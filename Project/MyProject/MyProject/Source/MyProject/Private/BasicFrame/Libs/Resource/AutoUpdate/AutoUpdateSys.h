@@ -52,11 +52,11 @@ protected:
 
 	void _loadAllUpdateFile();
 	void _loadOneUpdateFile(std::string path, FileVerInfo* fileInfo);
-	void _onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId);
 	void _checkUpdateEnd();
 
 public:
 	void onUpdateEnd();
+	void onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId);
 
     // 是否在更新列表中
 protected:

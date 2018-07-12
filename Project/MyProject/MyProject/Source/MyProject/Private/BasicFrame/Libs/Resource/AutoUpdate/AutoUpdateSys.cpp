@@ -10,7 +10,6 @@
 #include "MacroDef.h"
 #include "FileVerInfo.h"
 #include "MDictionary.h"
-#include "AuxDownloader.h"
 #include "VerFileName.h"
 #include "AuxDownloader.h"
 #include "UtilStr.h"
@@ -19,6 +18,8 @@
 #include "LocalVer.h"
 #include "EventDispatchDelegate.h"
 #include "VersionInc.h"
+#include "MFileSys.h"
+#include "DownloadType.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -146,11 +147,11 @@ void AutoUpdateSys::onWebMiniVerLoadResult(uint eventId, IDispatchObject* dispOb
 	if (!GVersionSys->mServerVer->mIsMiniLoadSuccess)
 	{
 		this->setAutoUpdateErrorCode(AutoUpdateErrorCode::eErrorDownloadWebVersionMiniFailed);
-		this->downloadWebMiniFail();
+		this->_downloadWebMiniFail();
 	}
 	else if (GVersionSys->mIsNeedUpdateApp) // 如果需要更新
 	{
-		this->downloadApp();
+		this->_downloadApp();
 	}
 	else if (GVersionSys->mIsNeedUpdateVerFile) // 如果需要更新版本文件
 	{
@@ -186,7 +187,7 @@ void AutoUpdateSys::onWebVerLoadResult(uint eventId, IDispatchObject* idspObj)
 		}
 
 		// 开始正式加载文件
-		this->loadAllUpdateFile();
+		this->_loadAllUpdateFile();
 	}
 	else
 	{
@@ -225,7 +226,7 @@ void AutoUpdateSys::_downloadApp()
 void AutoUpdateSys::_loadAllUpdateFile()
 {
 	this->mFileGroup->reset();
-	this->mFileGroup->setTotalNum(GVersionSys->mServerVer->mABPath2HashDic.getData().Count - this->getExcludeUpdateFileNum());
+	this->mFileGroup->setTotalNum(GVersionSys->mServerVer->mABPath2HashDic.count() - this->_getExcludeUpdateFileNum());
 
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -253,7 +254,7 @@ void AutoUpdateSys::_loadAllUpdateFile()
 		kvKey = beginIte->first;
 		kvValue = beginIte->second;
 
-		if (this->isIncludeUpdateList(kvKey))
+		if (this->_isIncludeUpdateList(kvKey))
 		{
 			isFileInStreaming = false;
 			isFileInPersistent = false;
@@ -339,7 +340,7 @@ void AutoUpdateSys::_loadOneUpdateFile(std::string path, FileVerInfo* fileInfo)
 	auxDownload->download(
 		path,
 		nullptr,
-		this->onLoadEventHandle,
+		&AutoUpdateSys::onLoadEventHandle,
 		nullptr,
 		nullptr,
 		0,
@@ -348,11 +349,11 @@ void AutoUpdateSys::_loadOneUpdateFile(std::string path, FileVerInfo* fileInfo)
 	);
 }
 
-void AutoUpdateSys::_onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
+void AutoUpdateSys::onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 {
 	this->mFileGroup->incCurNum();
 
-	AuxDownloader downloader = (AuxDownloader*)dispObj;
+	AuxDownloader* downloader = (AuxDownloader*)dispObj;
 
 	if (downloader.hasSuccessLoaded())
 	{

@@ -12,6 +12,7 @@ enum class UiFormId
 	eUiTestCanvas,	// ²âÊÔ Canvas
 	eUiTestUMG,		// ²âÊÔ UMG
 	eUiFunctionBar,	// µ×ÏÂ¹¦ÄÜÀ¸
+	eUiAppDownload,
 	eUiTotal
 };
 

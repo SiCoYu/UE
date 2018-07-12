@@ -6,7 +6,8 @@
 #include "UtilMath.h"
 #include "UtilStr.h"
 #include "VersionInc.h"
-#include "VersionInc.h"
+#include "FileVerInfo.h"
+#include "ServerVer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -82,7 +83,8 @@ void FileGroup::addLoadingPath(std::string& path, FileVerInfo* fileVerInfo /*, b
 	this->mTotalMemSize += fileVerInfo->mFileSize;
 
 	this->mLoadingPath.add(path);
-	this->mUpdatePathDic.add(path, true);    // 开始加载设置加载标志
+	bool value = true;
+	this->mUpdatePathDic.add(path, value);    // 开始加载设置加载标志
 
 	//if(isAddTotalNum)
 	//{
@@ -167,7 +169,7 @@ std::string FileGroup::getProgressDesc()
 {
 	std::string ret = "";
 
-	ret = UtilStr::Format("{0}M/{1}M", UtilMath::integerWithFract((float)this->mCurMemSize / UtilMath.OneM, 2), UtilMath::integerWithFract((float)this->mTotalMemSize / UtilMath.OneM, 2));
+	ret = UtilStr::Format("{0}M/{1}M", UtilMath::integerWithFract((float)this->mCurMemSize / UtilMath::OneM, 2), UtilMath::integerWithFract((float)this->mTotalMemSize / UtilMath.OneM, 2));
 
 	return ret;
 }

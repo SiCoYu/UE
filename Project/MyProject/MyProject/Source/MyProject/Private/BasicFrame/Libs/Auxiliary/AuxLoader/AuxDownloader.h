@@ -24,7 +24,9 @@ class AuxDownloader : public AuxLoaderBase
 protected:
 	DownloadItem* mDownloadItem;
 
+public:
 	char* getBytes();
+
 	// 下载一个资源
 	virtual void download(
 		std::string origPath, 
@@ -35,6 +37,9 @@ protected:
 	) override;
     // 下载完成
 	void onDownloaded(uint eventId, IDispatchObject* dispObj);
+
+	void setVersion(std::string version);
+	void setIsNeedUncompress(bool value);
 };
 
 MY_END_NAMESPACE

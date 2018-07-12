@@ -82,4 +82,14 @@ void AuxDownloader::onDownloaded(uint eventId, IDispatchObject* dispObj)
 	}
 }
 
+void AuxDownloader::setVersion(std::string version)
+{
+
+}
+
+void AuxDownloader::setIsNeedUncompress(bool value)
+{
+
+}
+
 MY_END_NAMESPACE
