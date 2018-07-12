@@ -48,10 +48,10 @@ public:
 	bool hasLoadFailed();
 
 	// 增加更新的文件
-	void addLoadingPath(std::string path, FileVerInfo* fileVerInfo /*, bool isAddTotalNum = false*/);
-	void removeLoadingPath(std::string path/*, bool isDecTotalNum = false*/);
-	void addLoadedPath(std::string path/*, bool isAddTotalNum = false*/);
-	void addFailedPath(std::string path/*, bool isAddTotalNum = false*/);
+	void addLoadingPath(std::string& path, FileVerInfo* fileVerInfo /*, bool isAddTotalNum = false*/);
+	void removeLoadingPath(std::string& path/*, bool isDecTotalNum = false*/);
+	void addLoadedPath(std::string& path/*, bool isAddTotalNum = false*/);
+	void addFailedPath(std::string& path/*, bool isAddTotalNum = false*/);
 	// 获取进度 [0, 100]
 	int getProgress();
 

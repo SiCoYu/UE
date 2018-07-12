@@ -94,7 +94,7 @@ void FileGroup::addLoadingPath(std::string& path, FileVerInfo* fileVerInfo /*, b
 
 void FileGroup::removeLoadingPath(std::string& path/*, bool isDecTotalNum = false*/)
 {
-	FileVerInfo fileVerInfo = GVersionSys->mServerVer->mABPath2HashDic[path];
+	FileVerInfo* fileVerInfo = GVersionSys->mServerVer->mABPath2HashDic[path];
 
 	if (nullptr != fileVerInfo)
 	{

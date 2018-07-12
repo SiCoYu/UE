@@ -182,7 +182,8 @@ float UtilMath::unitRange()
 float UtilMath::mod(float a, float b)
 {
 	float ret = 0;
-	ret = a % b;
+	//ret = a % b;
+	ret = fmod(a, b);
 	return ret;
 }
 
@@ -190,7 +191,8 @@ float UtilMath::mod(float a, float b)
 int UtilMath::integer(float a)
 {
 	int ret = 0;
-	ret = (int)(a - a % 1);
+	//ret = (int)(a - a % 1);
+	ret = (int)(a - fmod(a, 1));
 	return ret;
 }
 
@@ -198,7 +200,8 @@ int UtilMath::integer(float a)
 float UtilMath::fract(float a)
 {
 	float ret = 0;
-	ret = a % 1;
+	//ret = a % 1;
+	ret = fmod(a, 1);
 	return ret;
 }
 
@@ -206,8 +209,9 @@ float UtilMath::fract(float a)
 float UtilMath::integerWithFract(float a, int fractNum)
 {
 	float ret = 0;
-	float modValue = (float)1 / Math.pow(10, fractNum);
-	ret = a - a % modValue;
+	float modValue = (float)1 / pow(10, fractNum);
+	//ret = a - a % modValue;
+	ret = a - fmod(a, modValue);
 	return ret;
 }
 
