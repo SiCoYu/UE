@@ -18,6 +18,7 @@
 #include "UtilEngineWrap.h"
 #include "LocalVer.h"
 #include "EventDispatchDelegate.h"
+#include "VersionInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -122,18 +123,24 @@ void AutoUpdateSys::loadWebMiniVersion()
 		GLogSys->log("AutoUpdateSys::loadWebMiniVersion", LogTypeId::eLogAutoUpdate);
 	}
 
-	GVersionSys->mMiniLoadResultDispatch->addEventHandle(nullptr, this->onWebMiniVerLoadResult);
+	GVersionSys->mMiniLoadResultDispatch->addEventHandle(
+		MakeEventDispatchDelegate(
+			this, 
+			&AutoUpdateSys::onWebMiniVerLoadResult, 
+			(uint)0
+		)
+	);
 	GVersionSys->loadWebMiniVerFile();
 }
 
-void AutoUpdateSys::onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueId)
+void AutoUpdateSys::onWebMiniVerLoadResult(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("AutoUpdateSys::onWebMiniVerLoadResult", LogTypeId::eLogAutoUpdate);
 	}
 
-	UtilMsg::sendHttpEventLog((uint)EventLogId.eEL_3);
+	//UtilMsg::sendHttpEventLog((uint)EventLogId.eEL_3);
 
 	// 如果 Mini 文件没有从服务器下载成功
 	if (!GVersionSys->mServerVer->mIsMiniLoadSuccess)
@@ -287,7 +294,7 @@ void AutoUpdateSys::_loadAllUpdateFile()
 			else
 			{
 				this->mFileGroup->addLoadingPath(kvKey, kvValue);
-				this->loadOneUpdateFile(kvKey, kvValue);
+				this->_loadOneUpdateFile(kvKey, kvValue);
 			}
 		}
 	}
@@ -327,7 +334,7 @@ void AutoUpdateSys::_loadOneUpdateFile(std::string path, FileVerInfo* fileInfo)
 	//UtilEngineWrap.delFileNoVer(path);     // 删除当前目录下已经有的 old 文件
 
 	AuxDownloader* auxDownload = MY_NEW AuxDownloader();
-	auxDownload->setVersion(fileInfo.mFileMd5);
+	auxDownload->setVersion(fileInfo->mFileMd5);
 	auxDownload->setIsNeedUncompress(true);
 	auxDownload->download(
 		path,
@@ -410,7 +417,7 @@ void AutoUpdateSys::onUpdateEnd()
 	GResRedirect->clearCacheInfo();
 
 	// 通知上层
-	this->mOnUpdateEndDispatch.dispatchEvent(nullptr);
+	this->mOnUpdateEndDispatch->dispatchEvent(nullptr);
 }
 
 // 是否在更新列表中

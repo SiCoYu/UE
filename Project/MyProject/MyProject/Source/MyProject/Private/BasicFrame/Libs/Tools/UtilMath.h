@@ -21,8 +21,8 @@ public:
 	static /*const*/ float EPSILON/* = 1e-3f*/;
 	static int msIntMaxValue;
 
-	static int OneK = 1024;
-	static int OneM = 1024 * 1024;
+	static int OneK;
+	static int OneM;
 
 public:
 	static FVector Euler(FRotator& rotator);

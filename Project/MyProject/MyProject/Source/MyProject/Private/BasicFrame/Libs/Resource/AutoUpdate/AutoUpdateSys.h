@@ -41,8 +41,8 @@ public:
 protected:
 	void _checkIsNeedUpdateManifest();
 	void loadWebMiniVersion();
-	void onWebMiniVerLoadResult(IDispatchObject* dispObj, uint uniqueId);
-	void onWebVerLoadResult(IDispatchObject* idspObj, uint uniqueId);
+	void onWebMiniVerLoadResult(uint eventId, IDispatchObject* dispObj);
+	void onWebVerLoadResult(uint eventId, IDispatchObject* idspObj);
 
     // 下载基本的 Web 文件失败
 protected:
