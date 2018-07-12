@@ -477,6 +477,7 @@ public:
 	static EWorldType::Type getWorldType();
 	static bool isGameWorld();
 	static bool isEditorWorld();
+	static std::string getManifestName();
 };
 
 MY_END_NAMESPACE

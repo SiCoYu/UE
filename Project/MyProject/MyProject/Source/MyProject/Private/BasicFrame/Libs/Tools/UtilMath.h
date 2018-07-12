@@ -21,6 +21,9 @@ public:
 	static /*const*/ float EPSILON/* = 1e-3f*/;
 	static int msIntMaxValue;
 
+	static int OneK = 1024;
+	static int OneM = 1024 * 1024;
+
 public:
 	static FVector Euler(FRotator& rotator);
 	static FRotator MakeFromEuler(const FVector& Euler);
@@ -59,6 +62,16 @@ public:
 	// [a, b]
 	static int range(int a, int b);
 	static float unitRange();
+
+	// 取余
+	static float mod(float a, float b);
+	// 取整
+	static int integer(float a);
+
+	// 取小数
+	static float fract(float a);
+	// 精确到小数点后几位
+	static float integerWithFract(float a, int fractNum);
 };
 
 MY_END_NAMESPACE

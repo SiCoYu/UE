@@ -14,6 +14,10 @@
 #include "VerFileName.h"
 #include "AuxDownloader.h"
 #include "UtilStr.h"
+#include "ServerVer.h"
+#include "UtilEngineWrap.h"
+#include "LocalVer.h"
+#include "EventDispatchDelegate.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -39,7 +43,7 @@ FileGroup* AutoUpdateSys::getFileGroup()
 	return this->mFileGroup;
 }
 
-AutoUpdateErrorCode* AutoUpdateSys::getAutoUpdateErrorCode()
+AutoUpdateErrorCode AutoUpdateSys::getAutoUpdateErrorCode()
 {
 	return this->mAutoUpdateErrorInfo->getErrorCode();
 }
@@ -144,7 +148,13 @@ void AutoUpdateSys::onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueI
 	else if (GVersionSys->mIsNeedUpdateVerFile) // 如果需要更新版本文件
 	{
 		// 本地文件版本必须要加载
-		GVersionSys->mLoadResultDispatch->addEventHandle(nullptr, this->onWebVerLoadResult);
+		GVersionSys->mLoadResultDispatch->addEventHandle(
+			MakeEventDispatchDelegate(
+				this, 
+				&AutoUpdateSys::onWebVerLoadResult, 
+				(uint)0
+			)
+		);
 		GVersionSys->loadWebVerFile();
 	}
 	else
@@ -154,7 +164,7 @@ void AutoUpdateSys::onWebMiniVerLoadResult(IDispatchObject dispObj, uint uniqueI
 	}
 }
 
-void AutoUpdateSys::onWebVerLoadResult(IDispatchObject idspObj, uint uniqueId)
+void AutoUpdateSys::onWebVerLoadResult(uint eventId, IDispatchObject* idspObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -225,8 +235,8 @@ void AutoUpdateSys::_loadAllUpdateFile()
 	typename MDictionary<std::string, FileVerInfo*>::Dictionary& dic = GVersionSys->mServerVer->mABPath2HashDic.getData();
 	std::string kvKey;
 	FileVerInfo* kvValue = nullptr;
-	ServerVer::Path2HashDicIterator beginIte;
-	ServerVer::Path2HashDicIterator endIte;
+	typename ServerVer::Path2HashDicIterator beginIte;
+	typename ServerVer::Path2HashDicIterator endIte;
 
 	beginIte = GVersionSys->mServerVer->mABPath2HashDic.begin();
 	endIte = GVersionSys->mServerVer->mABPath2HashDic.end();
@@ -266,7 +276,7 @@ void AutoUpdateSys::_loadAllUpdateFile()
 				if (isNeedUpdateFile)
 				{
 					this->mFileGroup->addLoadingPath(kvKey, kvValue);
-					this->loadOneUpdateFile(kvKey, kvValue);
+					this->_loadOneUpdateFile(kvKey, kvValue);
 				}
 				else
 				{

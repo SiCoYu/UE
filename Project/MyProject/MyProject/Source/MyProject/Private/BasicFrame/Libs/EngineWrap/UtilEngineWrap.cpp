@@ -1354,3 +1354,8 @@ bool UtilEngineWrap::isEditorWorld()
 
 	return ret;
 }
+
+std::string UtilEngineWrap::getManifestName()
+{
+	return "";
+}

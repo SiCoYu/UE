@@ -5,6 +5,7 @@
 #include <ctime>		// time
 #include <stdlib.h>		// RAND_MAX
 #include <limits>		// std::numeric_limits<int>
+#include <cmath>
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -16,6 +17,8 @@ FVector UtilMath::UpVec3 = FVector::UpVector;
 FQuat UtilMath::UnitQuat = FQuat::Identity;
 float UtilMath::EPSILON = 1e-3f;
 int UtilMath::msIntMaxValue = std::numeric_limits<int>::max();
+int UtilMath::OneK = 1024;
+int UtilMath::OneM = 1024 * 1024;
 
 FVector UtilMath::Euler(FRotator& rotator)
 {
@@ -173,6 +176,38 @@ float UtilMath::unitRange()
 	float ret = 0;
 	srand((unsigned)time(NULL));
 	ret = rand() / RAND_MAX;
+	return ret;
+}
+
+float UtilMath::mod(float a, float b)
+{
+	float ret = 0;
+	ret = a % b;
+	return ret;
+}
+
+// 取整
+int UtilMath::integer(float a)
+{
+	int ret = 0;
+	ret = (int)(a - a % 1);
+	return ret;
+}
+
+// 取小数
+float UtilMath::fract(float a)
+{
+	float ret = 0;
+	ret = a % 1;
+	return ret;
+}
+
+// 精确到小数点后几位
+float UtilMath::integerWithFract(float a, int fractNum)
+{
+	float ret = 0;
+	float modValue = (float)1 / Math.pow(10, fractNum);
+	ret = a - a % modValue;
 	return ret;
 }
 

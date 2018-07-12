@@ -5,6 +5,8 @@
 #include "AddOnceEventDispatch.h"
 #include "UtilMath.h"
 #include "UtilStr.h"
+#include "VersionInc.h"
+#include "VersionInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -223,7 +225,7 @@ bool FileGroup::isResUpdatedByResPath(std::string path)
 {
 	bool ret = false;
 
-	ResRedirectItem* resRedirectItem = GResRedirect->getResRedirectItem(ShaderCollectPath.StartShaderCollect, false);
+	ResRedirectItem* resRedirectItem = GResRedirect->getResRedirectItem("ShaderCollectPath.StartShaderCollect", false);
 
 	if (nullptr != resRedirectItem)
 	{
