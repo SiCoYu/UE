@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "AutoUpdateErrorCode.h"
 #include "GObject.h"
 #include "PlatformDefine.h"
 
@@ -9,6 +10,7 @@ class FileGroup;
 class AddOnceAndCallOnceEventDispatch;
 class AutoUpdateErrorInfo;
 class FileVerInfo;
+class IDispatchObject;
 
 /**
  * @brief 自动更新系统
@@ -27,7 +29,7 @@ public:
 	void dispose();
 
 	FileGroup* getFileGroup();
-	AutoUpdateErrorCode* getAutoUpdateErrorCode();
+	AutoUpdateErrorCode getAutoUpdateErrorCode();
 	void setAutoUpdateErrorCode(AutoUpdateErrorCode value);
 	AddOnceAndCallOnceEventDispatch* getUpdateEndDispatch();
 	void startUpdate();

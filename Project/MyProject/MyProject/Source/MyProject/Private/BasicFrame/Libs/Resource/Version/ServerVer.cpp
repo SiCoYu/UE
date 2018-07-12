@@ -19,6 +19,11 @@ ServerVer::ServerVer()
 
 }
 
+ServerVer::~ServerVer()
+{
+
+}
+
 void ServerVer::loadMiniVerFile()
 {
 	if (MacroDef::ENABLE_LOG)

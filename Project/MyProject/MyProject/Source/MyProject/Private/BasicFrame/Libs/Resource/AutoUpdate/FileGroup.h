@@ -4,6 +4,7 @@
 #include "MList.h"
 #include "GObject.h"
 #include "EventDispatchDelegate.h"
+#include "MDictionary.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

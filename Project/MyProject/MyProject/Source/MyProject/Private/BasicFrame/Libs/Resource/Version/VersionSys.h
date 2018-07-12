@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <string>
+#include "TypeDef.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -8,6 +9,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class ServerVer;
 class LocalVer;
 class AddOnceAndCallOnceEventDispatch;
+class IDispatchObject;
 
 /**
  * @brief 版本系统，文件格式   path=value

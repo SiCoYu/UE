@@ -8,9 +8,9 @@ MY_BEGIN_NAMESPACE(MyNS)
 std::string UtilConvert::convInt2Str(int value)
 {
 	std::string ret;
-	stringstream stream;
+	std::stringstream stream;
 	stream << value;
-	ret = stream.str();   //此处也可以用 stream>>string_temp  
+	ret = stream.str();   //姝ゅ涔熷彲浠ョ敤 stream>>string_temp  
 	return ret;
 }
 

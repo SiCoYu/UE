@@ -44,7 +44,7 @@ protected:
      * @brief 仅支持同步操作，目前无视参数 isSyncMode 和 evtDisp。FileMode.CreateNew 如果文件已经存在就抛出异常，FileMode.Append 和 FileAccess.Write 要同时使用
      */
 public:
-	MDataStream(std::string filePath, EventDispatchDelegate openedDisp = EventDispatchDelegate(), MFileMode mode = eOpen, MFileAccess access = eRead, bool isSyncMode = true);
+	MDataStream(std::string filePath, EventDispatchDelegate openedDisp = EventDispatchDelegate(), MFileMode mode = MFileMode::eOpen, MFileAccess access = MFileAccess::eRead, bool isSyncMode = true);
 
 public:
 	void seek(long offset, MSeekOrigin origin);

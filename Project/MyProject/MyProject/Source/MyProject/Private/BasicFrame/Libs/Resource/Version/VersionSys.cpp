@@ -5,6 +5,9 @@
 #include "ServerVer.h"
 #include "LocalVer.h"
 #include "UtilConvert.h"
+#include "MacroDef.h"
+#include "EventDispatchDelegate.h"
+#include "IDispatchObject.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -147,7 +150,13 @@ void VersionSys::loadWebMiniVerFile()
 		GLogSys->log("VersionSys::loadWebMiniVerFile", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->mServerVer->mMiniLoadedDispatch->addEventHandle(nullptr, this->onWebMiniLoaded);
+	this->mServerVer->mMiniLoadedDispatch->addEventHandle(
+		MakeEventDispatchDelegate(
+			this, 
+			&VersionSys::onWebMiniLoaded,
+			(uint)0
+		)
+	);
 	this->mServerVer->loadMiniVerFile();
 }
 
@@ -172,7 +181,13 @@ void VersionSys::loadWebVerFile()
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mServerVer->mLoadedDispatch->addEventHandle(nullptr, this->onWebVerLoaded);
+			this->mServerVer->mLoadedDispatch->addEventHandle(
+				MakeEventDispatchDelegate(
+					this,
+					&VersionSys::onWebVerLoaded,
+					(uint)0
+				)
+			);
 			this->mServerVer->loadVerFile();
 		}
 		else
@@ -199,7 +214,13 @@ void VersionSys::loadWebVerFile()
 				GLogSys->log("VersionSys::loadWebVerFile, mIsNeedUpdateVerFile is true", LogTypeId::eLogAutoUpdate);
 			}
 
-			this->mServerVer->mLoadedDispatch->addEventHandle(nullptr, this->onWebVerLoaded);
+			this->mServerVer->mLoadedDispatch->addEventHandle(
+				MakeEventDispatchDelegate(
+					this,
+					&VersionSys::onWebVerLoaded,
+					(uint)0
+				)
+			);
 			this->mServerVer->loadVerFile();
 		}
 		else
@@ -297,7 +318,7 @@ void VersionSys::saveWebMiniOrPVerToPersistentPath()
 // 如果 WebVerFile 版本文件更细了，就更新本地版本文件
 void VersionSys::updateLocalVerFile()
 {
-	if (nullptr != this->mLocalVer->mPath2Ver_P_Dic)
+	//if (nullptr != this->mLocalVer->mPath2Ver_P_Dic)
 	{
 		this->mLocalVer->mPath2Ver_P_Dic.clear();
 		this->mLocalVer->mABPath2Ver_P_Dic.clear();
@@ -306,8 +327,8 @@ void VersionSys::updateLocalVerFile()
 	this->mLocalVer->mPath2Ver_P_Dic = this->mServerVer->mPath2HashDic;
 	this->mLocalVer->mABPath2Ver_P_Dic = this->mServerVer->mABPath2HashDic;
 
-	this->mServerVer->mPath2HashDic = nullptr;
-	this->mServerVer->mABPath2HashDic = nullptr;
+	//this->mServerVer->mPath2HashDic = nullptr;
+	//this->mServerVer->mABPath2HashDic = nullptr;
 }
 
 MY_END_NAMESPACE

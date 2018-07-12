@@ -8,8 +8,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 class UtilConvert
 {
 public:
-	std::string convInt2Str(int value);
-	int convStr2Int(std::string value);
+	static std::string convInt2Str(int value);
+	static int convStr2Int(std::string value);
 };
 
 MY_END_NAMESPACE

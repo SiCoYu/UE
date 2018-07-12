@@ -17,6 +17,7 @@ enum class ResLoadType
 
 	eLoadStreamingAssets,   // 从 StreamingAssets 加载
 	eLoadPersistentData,
+	eLoadLocalPersistentData,
 	eLoadNum
 };
 

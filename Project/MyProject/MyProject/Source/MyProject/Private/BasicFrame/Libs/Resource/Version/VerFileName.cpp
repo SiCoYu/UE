@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "VersionSys.h"
+#include "VerFileName.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

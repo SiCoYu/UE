@@ -25,6 +25,7 @@ public:
 
 public:
 	ServerVer();
+	~ServerVer();
 
 	virtual void loadMiniVerFile();
 	void _onMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj);

@@ -21,7 +21,7 @@ void AutoClearSys::dispose()
 // 是否是安装后第一次启动
 bool AutoClearSys::isFirstStartUpAfterInstalled()
 {
-	//bool ret = false;
+	bool ret = false;
 
 	//if (UtilFileIO.existFile(this.mInstallFlagFileFullPath))
 	//{
@@ -57,7 +57,7 @@ bool AutoClearSys::isFirstStartUpAfterInstalled()
 	//	Ctx.msInstance.mLogSys.log(string.Format("AutoClearSys::isFirstStartUpAfterInstalled, ret = {0}", ret.ToString()), LogTypeId.eLogAutoClear);
 	//}
 
-	//return ret;
+	return ret;
 }
 
 // 清理保存的文件
