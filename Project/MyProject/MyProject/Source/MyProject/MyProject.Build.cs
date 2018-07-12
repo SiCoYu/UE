@@ -137,6 +137,8 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Resource/InsRes",
                 "MyProject/Private/BasicFrame/Libs/Resource/Download",
                 "MyProject/Private/BasicFrame/Libs/Resource/DelayTask",
+                "MyProject/Private/BasicFrame/Libs/Resource/Version",
+                "MyProject/Private/BasicFrame/Libs/Resource/AutoUpdate",
 
                 "MyProject/Private/BasicFrame/Libs/Pool",
                 "MyProject/Private/BasicFrame/Libs/MsgRoute",
