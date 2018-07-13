@@ -8,6 +8,8 @@
 #include "MDataStream.h"
 #include "SafePointer.h"
 #include <vector>
+#include "VerFileName.h"
+#include "Symbolic.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -173,7 +175,7 @@ void FileVerBase::parseMiniFile(std::string text)
 }
 
 // 这个主要是解析版本文件的
-void FileVerBase::_loadFormText(string text, MDictionary<std::string, FileVerInfo*>& dic, MDictionary<std::string, FileVerInfo*>& abDic)
+void FileVerBase::_loadFormText(std::string text, MDictionary<std::string, FileVerInfo*>& dic, MDictionary<std::string, FileVerInfo*>& abDic)
 {
 	std::string lineSplitStr = UtilEngineWrap::CR_LF;
 	std::string equalSplitStr = UtilEngineWrap::SEPARATOR;

@@ -221,7 +221,7 @@ void AutoUpdateSys::_downloadApp()
 		GLogSys->log("AutoUpdateSys::downloadApp", LogTypeId::eLogAutoUpdate);
 	}
 
-	GUiMgr->loadAndShow(UiFormId::eUiAppDownload);
+	GUiMgr->loadAndShow<UForm>(UiFormId::eUiAppDownload);
 }
 
 void AutoUpdateSys::_loadAllUpdateFile()

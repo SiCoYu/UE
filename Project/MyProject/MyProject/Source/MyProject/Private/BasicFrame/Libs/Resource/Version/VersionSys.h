@@ -30,7 +30,9 @@ public:
 
 public:
 	VersionSys();
+
 	void init();
+	void dispose();
 
 	void loadAllLocalVer();
 

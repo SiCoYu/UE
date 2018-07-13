@@ -51,7 +51,7 @@ void MDataStream::syncOpenFileStream()
 		//{
 		FString path = UtilStr::ConvStdStr2FString(this->mFilePath);
 
-		if (FileOpState::eRead == this->mAccess)
+		if (MFileAccess::eRead == this->mAccess)
 		{
 			this->mFileStream = IFileManager::Get().CreateFileReader(*path);
 		}

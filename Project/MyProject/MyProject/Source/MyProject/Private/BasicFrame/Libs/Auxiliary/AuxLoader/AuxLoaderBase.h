@@ -89,6 +89,7 @@ protected:
 	virtual void download(
 		std::string origPath, 
 		EventDispatchDelegate handle = EventDispatchDelegate(),
+		EventDispatchDelegate progressHandle = EventDispatchDelegate(),
 		long fileLen = 0, 
 		bool isWriteFile = true, 
 		int downloadType = (int)DownloadType::eHttpWeb

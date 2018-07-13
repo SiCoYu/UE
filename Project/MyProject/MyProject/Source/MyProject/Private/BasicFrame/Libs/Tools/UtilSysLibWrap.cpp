@@ -44,7 +44,8 @@ std::string UtilSysLibWrap::getRandomVersion()
 {
 	std::string ret = "";
 
-	ret = ctime(time(NULL));
+	time_t curTime = time(NULL);
+	ret = ctime(&curTime);
 
 	return ret;
 }

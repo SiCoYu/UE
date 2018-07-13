@@ -14,6 +14,7 @@
 #include "EventDispatchDelegate.h"
 #include "DownloadType.h"
 #include "FileVerInfo.h"
+#include "AddOnceAndCallOnceEventDispatch.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -108,10 +109,12 @@ void ServerVer::loadVerFile()
 	auxDownload->setVersion(UtilSysLibWrap::getRandomVersion());
 	auxDownload->download(
 		VerFileName::VER_P,
-		nullptr,
-		this->onVerLoadEventHandle,
-		nullptr,
-		nullptr,
+		MakeEventDispatchDelegate(
+			this, 
+			this->onVerLoadEventHandle, 
+			(uint)0
+		),
+		EventDispatchDelegate(),
 		0,
 		false,
 		(int)DownloadType::eWebRequest

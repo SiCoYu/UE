@@ -173,6 +173,7 @@ void AuxLoaderBase::asyncLoad(
 void AuxLoaderBase::download(
 	std::string origPath, 
 	EventDispatchDelegate handle, 
+	EventDispatchDelegate progressHandle,
 	long fileLen, 
 	bool isWriteFile, 
 	int downloadType

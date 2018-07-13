@@ -32,6 +32,7 @@ void AuxDownloader::download(
 	Super::download(
 		origPath, 
 		loadHandle,
+		progressHandle,
 		fileLen, 
 		isWriteFile, 
 		downloadType
