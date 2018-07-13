@@ -60,7 +60,7 @@ bool MPakFileStream::_mountPakToFileSystem(FString& pakFileFullPath, FString& mo
 
 void MPakFileStream::mount()
 {
-	if (MPakFileSystem::mountPakToFileSystem(this->mPakFilePath, this->mMountPoint))
+	if (this->_mountPakToFileSystem(this->mPakFilePath, this->mMountPoint))
 	{
 		this->mMountState = MMountState::eSuccess;
 

@@ -23,6 +23,7 @@ public:
 	static FString GameDir();
 	static FString GameContentDir();
 
+	static FString EngineContentDir();
 	static FString GameSavedDir();
 	static FString GameLogDir();
 
