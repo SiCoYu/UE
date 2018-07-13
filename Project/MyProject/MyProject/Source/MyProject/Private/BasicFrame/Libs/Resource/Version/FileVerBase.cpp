@@ -157,7 +157,7 @@ void FileVerBase::parseMiniFile(std::string text)
 			this->mFileVerInfo->mResUniqueId = equalList[1];
 			this->mFileVerInfo->mLoadPath = equalList[2];
 			this->mFileVerInfo->mFileMd5 = equalList[3];
-			this->mFileVerInfo->mFileSize = UtilConvert.convStr2Int(equalList[4]);
+			this->mFileVerInfo->mFileSize = UtilConvert::convStr2Int(equalList[4]);
 		}
 		else
 		{
@@ -207,7 +207,7 @@ void FileVerBase::_loadFormText(std::string text, MDictionary<std::string, FileV
 			//dic[fileInfo->mResUniqueId] = fileInfo;
 			dic[fileInfo->mOrigPath] = fileInfo;
 
-			if (nullptr != abDic && !abDic.containsKey(fileInfo->mLoadPath))
+			if (!abDic.containsKey(fileInfo->mLoadPath))
 			{
 				abDic[fileInfo->mLoadPath] = fileInfo;
 			}
