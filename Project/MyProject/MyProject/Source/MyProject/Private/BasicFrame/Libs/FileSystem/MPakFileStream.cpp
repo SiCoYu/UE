@@ -1,5 +1,8 @@
 #include "MyProject.h"
 #include "MPakFileStream.h"
+#include "GenericPlatform/GenericPlatformFile.h"	// IPlatformFile
+#include "HAL/PlatformFilemanager.h"		// FPlatformFileManager
+#include "IPlatformFilePak.h"			// FPakPlatformFile \ FPakFile
 #include "MPakFileSystem.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

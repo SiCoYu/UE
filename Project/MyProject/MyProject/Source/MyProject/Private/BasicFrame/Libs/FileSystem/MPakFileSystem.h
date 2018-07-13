@@ -24,6 +24,7 @@ public:
 	void init();
 	void dispose();
 
+	MPakFileStream* getPakFileStream(FString& pakFileFullPath);
 	MPakFileStream* mountOnePak(FString& pakFileFullPath, FString& mountPoint);
 };
 

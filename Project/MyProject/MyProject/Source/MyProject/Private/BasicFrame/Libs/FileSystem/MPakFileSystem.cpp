@@ -83,9 +83,11 @@ void MPakFileSystem::dispose()
 
 MPakFileStream* MPakFileSystem::mountOnePak(FString& pakFileFullPath, FString& mountPoint)
 {
+	MPakFileStream* pakFileStream = nullptr;
+
 	if (!this->mPath2PakFileStreamDic.containsKey(pakFileFullPath))
 	{
-		MPakFileStream* pakFileStream = MY_NEW MPakFileStream();
+		pakFileStream = MY_NEW MPakFileStream();
 		this->mPath2PakFileStreamDic.add(pakFileFullPath, pakFileStream);
 
 		pakFileStream->setPakFilePath(pakFileFullPath);
@@ -94,6 +96,12 @@ MPakFileStream* MPakFileSystem::mountOnePak(FString& pakFileFullPath, FString& m
 		pakFileStream->init();
 		pakFileStream->mount();
 	}
+	else
+	{
+		pakFileStream = this->mPath2PakFileStreamDic.value(pakFileFullPath);
+	}
+
+	return pakFileStream;
 }
 
 MY_END_NAMESPACE

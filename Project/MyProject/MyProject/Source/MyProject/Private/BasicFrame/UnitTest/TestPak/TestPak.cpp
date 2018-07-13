@@ -5,6 +5,7 @@
 #include "UtilEngineWrap.h"
 #include "UtilFileIO.h"
 #include "MPakFileSystem.h"
+#include "MPakFileStream.h"
 #include "Ctx.h"
 #include "MySoftObjectPath.h"
 #include "MyStreamableManager.h"
