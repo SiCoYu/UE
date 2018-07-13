@@ -57,7 +57,7 @@ UObject* MyStreamableManager::SynchronousLoad(std::string& path)
 UObject* MyStreamableManager::SynchronousLoad(FSoftObjectPath& path)
 {
 	UObject* obj = NULL;
-	UObject = this->mStreamableManager.LoadSynchronous(path, true);
+	obj = this->mStreamableManager.LoadSynchronous(path, true);
 	return obj;
 }
 
