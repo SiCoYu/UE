@@ -332,7 +332,8 @@ void LocalVer::_onAllVerLoaded()
 int LocalVer::getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bool isABAsset)
 {
 	// 在 Resources 中资源是大写，在 AssetBundles 中包含的资源名字是小写，但是 StreamingAssets 或者 Persistent 中不是 AssetBundles 形式的资源，仍然是大写
-	std::string lowerOrigPath = UtilStr::toLower(origPath);
+	UtilStr::toLower(origPath);
+	std::string lowerOrigPath = origPath;
 	std::string md5 = "";
 	ResLoadType resLoadType = ResLoadType::eLoadResource;
 
