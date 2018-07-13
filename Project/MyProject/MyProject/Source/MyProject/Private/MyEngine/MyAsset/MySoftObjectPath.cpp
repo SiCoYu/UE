@@ -35,4 +35,9 @@ UObject* MySoftObjectPath::resolveObject() const
 	return this->mNativeSoftObjectPath.ResolveObject();
 }
 
+FSoftObjectPath& MySoftObjectPath::getNativeSoftObjectPath()
+{
+	return this->mNativeSoftObjectPath;
+}
+
 MY_END_NAMESPACE

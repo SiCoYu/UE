@@ -54,6 +54,13 @@ UObject* MyStreamableManager::SynchronousLoad(std::string& path)
 	return this->mStreamableManager.LoadSynchronous(assetRef, true);
 }
 
+UObject* MyStreamableManager::SynchronousLoad(FSoftObjectPath& path)
+{
+	UObject* obj = NULL;
+	UObject = this->mStreamableManager.LoadSynchronous(path, true);
+	return obj;
+}
+
 void MyStreamableManager::RequestAsyncLoad(const std::string& TargetToStream, FStreamableDelegate DelegateToCall, TAsyncLoadPriority Priority)
 {
 	FStringAssetReference assetRef;

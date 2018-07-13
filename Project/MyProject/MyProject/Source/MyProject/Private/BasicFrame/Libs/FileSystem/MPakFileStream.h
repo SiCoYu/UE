@@ -25,6 +25,8 @@ public:
 	void setPakFilePath(FString& value);
 	void setMountPath(FString& value);
 	void mount();
+	FString getSoftPathStrByIndex(int index);
+	int getSoftPathCount();
 
 protected:
 	FString _getSoftPathStr(FString& fileFullPathInPak);

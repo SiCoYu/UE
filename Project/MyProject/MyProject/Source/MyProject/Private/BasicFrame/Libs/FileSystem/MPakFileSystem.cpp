@@ -81,7 +81,7 @@ void MPakFileSystem::dispose()
 
 }
 
-void MPakFileSystem::mountOnePak(FString& pakFileFullPath, FString& mountPoint)
+MPakFileStream* MPakFileSystem::mountOnePak(FString& pakFileFullPath, FString& mountPoint)
 {
 	if (!this->mPath2PakFileStreamDic.containsKey(pakFileFullPath))
 	{

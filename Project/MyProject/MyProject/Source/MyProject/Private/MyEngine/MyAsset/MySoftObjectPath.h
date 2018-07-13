@@ -23,6 +23,8 @@ public:
 	void setPath(std::string Path);
 	UObject* tryLoad() const;
 	UObject* resolveObject() const;
+
+	FSoftObjectPath& getNativeSoftObjectPath();
 };
 
 MY_END_NAMESPACE

@@ -39,6 +39,7 @@ public:
 	//UObject* GetStreamed(std::string const& path);
 
 	UObject* SynchronousLoad(std::string& path);
+	UObject* SynchronousLoad(FSoftObjectPath& path);
 
 	template< typename T >
 	T* SynchronousLoadType(std::string& path);

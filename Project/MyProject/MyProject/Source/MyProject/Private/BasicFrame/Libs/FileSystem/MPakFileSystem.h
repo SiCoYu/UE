@@ -24,7 +24,7 @@ public:
 	void init();
 	void dispose();
 
-	void mountOnePak(FString& pakFileFullPath, FString& mountPoint);
+	MPakFileStream* mountOnePak(FString& pakFileFullPath, FString& mountPoint);
 };
 
 MY_END_NAMESPACE

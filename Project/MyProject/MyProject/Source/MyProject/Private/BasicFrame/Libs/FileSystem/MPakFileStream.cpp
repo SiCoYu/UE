@@ -73,3 +73,15 @@ void MPakFileStream::mount()
 		this->mMountState = MMountState::eFail;
 	}
 }
+
+FString MPakFileStream::getSoftPathStrByIndex(int index)
+{
+	FString ret;
+	ret = this->mFileList[index];
+	return ret;
+}
+
+int MPakFileStream::getSoftPathCount()
+{
+	return this->mFileList.
+}
