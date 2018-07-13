@@ -1,11 +1,12 @@
 ﻿#pragma once
 
 #include <string>
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class VerFileName
+class VerFileName : public GObject
 {
 public:
     static std::string VER_R;

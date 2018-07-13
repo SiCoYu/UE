@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <string>
+#include "GObject.h"
 #include "AutoUpdateErrorCode.h"
 #include "PlatformDefine.h"
 
@@ -9,7 +10,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 自动更新错误原因
  */
-class AutoUpdateErrorInfo
+class AutoUpdateErrorInfo : public GObject
 {
 protected:
 	AutoUpdateErrorCode mAutoUpdateErrorCode;

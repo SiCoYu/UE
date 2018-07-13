@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <string.h>
+#include "GObject.h"
 #include "MDictionary.h"
 #include "PlatformDefine.h"
 
@@ -9,7 +10,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class AddOnceAndCallOnceEventDispatch;
 class FileVerInfo;
 
-class FileVerBase
+class FileVerBase : public GObject
 {
 public:
 	std::string mCurVer;              // 当前程序的版本号

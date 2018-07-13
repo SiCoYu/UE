@@ -139,7 +139,7 @@ std::string UtilFileIO::getFileExt(std::string& path)
 }
 
 // 获取文件名字，没有路径，但是有扩展名字
-std::string getFileNameWithExt(std::string& fullPath)
+std::string UtilFileIO::getFileNameWithExt(std::string& fullPath)
 {
 	int index = fullPath.find_last_of('/');
 	std::string ret = "";
@@ -161,7 +161,7 @@ std::string getFileNameWithExt(std::string& fullPath)
 }
 
 // 获取文件名字，没有扩展名字
-std::string getFileNameNoExt(std::string& fullPath)
+std::string UtilFileIO::getFileNameNoExt(std::string& fullPath)
 {
 	int index = fullPath.find_last_of('/');
 	std::string ret = "";
@@ -189,7 +189,7 @@ std::string getFileNameNoExt(std::string& fullPath)
 }
 
 // 获取文件路径，没有文件名字
-std::string getFilePathNoName(std::string& fullPath)
+std::string UtilFileIO::getFilePathNoName(std::string& fullPath)
 {
 	int index = fullPath.find_last_of('/');
 	std::string ret = "";
@@ -210,13 +210,13 @@ std::string getFilePathNoName(std::string& fullPath)
 	return ret;
 }
 
-std::string getFileDir(std::string& fullPath)
+std::string UtilFileIO::getFileDir(std::string& fullPath)
 {
 	return UtilFileIO::getFilePathNoName(fullPath);
 }
 
 // 获取文件路径，没有文件名字扩展
-std::string getFilePathNoExt(std::string& fullPath)
+std::string UtilFileIO::getFilePathNoExt(std::string& fullPath)
 {
 	int index = 0;
 	std::string ret = fullPath;
@@ -231,7 +231,7 @@ std::string getFilePathNoExt(std::string& fullPath)
 }
 
 // 获取当前文件的父目录名字
-std::string getFileParentDirName(std::string& fullPath)
+std::string UtilFileIO::getFileParentDirName(std::string& fullPath)
 {
 	std::string parentDir = "";
 	int lastSlashIndex = -1;

@@ -1,11 +1,12 @@
 ﻿#pragma once
 
 #include <string>
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class FileVerInfo
+class FileVerInfo : public GObject
 {
 public:
 	std::string mOrigPath;    // 原始加载路径

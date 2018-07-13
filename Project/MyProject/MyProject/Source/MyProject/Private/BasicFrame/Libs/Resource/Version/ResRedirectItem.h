@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <string>
+#include "GObject.h"
 #include "ResLoadType.h"
 #include "PlatformDefine.h"
 
@@ -11,7 +12,7 @@ class FileVerInfo;
 /**
  *@brief 资源重定向 Item
  */
-class ResRedirectItem
+class ResRedirectItem : public GObject
 {
 public:
 	std::string mOrigPath;             // 资源原始目录，就是逻辑加载资源的目录
