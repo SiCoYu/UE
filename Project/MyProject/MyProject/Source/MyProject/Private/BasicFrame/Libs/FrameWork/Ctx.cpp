@@ -42,6 +42,7 @@
 #include "ResRedirect.h"
 #include "VersionSys.h"
 #include "AutoClearSys.h"
+#include "MPakFileSystem.h"
 
 #include "TickPriority.h"
 //#include "MySingletonBP.h"
@@ -102,6 +103,7 @@ Ctx::Ctx()
 	this->mGlobalDelegate.setNull();
 	this->mGlobalEventCmd.setNull();
 	this->mAutoClearSys.setNull();
+	this->mPakFileSystem.setNull();
 
 	this->mBPCtx = nullptr;
 	this->mMyNativeObjectReferencer = nullptr;
@@ -164,6 +166,7 @@ void Ctx::construct()
 	this->mResRedirect = MySharedPtr<ResRedirect>(MY_NEW ResRedirect());
 	this->mVersionSys = MySharedPtr<VersionSys>(MY_NEW VersionSys());
 	this->mAutoClearSys = MySharedPtr<AutoClearSys>(MY_NEW AutoClearSys());
+	this->mPakFileSystem = MySharedPtr<PakFileSystem>(MY_NEW PakFileSystem());
 
 	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 
@@ -215,6 +218,7 @@ void Ctx::_execInit()
 	this->mResRedirect->init();
 	this->mVersionSys->init();
 	this->mAutoClearSys->init();
+	this->mPakFileSystem->init();
 
 	this->mBPCtx->init();
 	this->mMyNativeObjectReferencer->init();
@@ -284,6 +288,7 @@ void Ctx::_preDispose()
 	this->mResRedirect->dispose();
 	this->mVersionSys->dispose();
 	this->mAutoClearSys->dispose();
+	this->mPakFileSystem->dispose();
 
 	this->mBPCtx->dispose();
 	this->mMyNativeObjectReferencer->dispose();
@@ -342,6 +347,7 @@ void Ctx::_execDispose()
 	this->mResRedirect.setNull();
 	this->mVersionSys.setNull();
 	this->mAutoClearSys.setNull();
+	this->mPakFileSystem.setNull();
 
 	this->mBPCtx = nullptr;
 }
@@ -614,6 +620,11 @@ MySharedPtr<VersionSys> Ctx::getVersionSys()
 MySharedPtr<AutoClearSys> Ctx::getAutoClearSys()
 {
 	return this->mAutoClearSys;
+}
+
+MySharedPtr<MPakFileSystem> Ctx::getPakFileSystem()
+{
+	return this->mPakFileSystem;
 }
 
 UMyBluePrintBase* Ctx::getBPCtx()

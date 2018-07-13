@@ -23,8 +23,10 @@ public:
 
 	//2>Ctx.cpp.obj : error LNK2019 : unresolved external symbol "public: void __cdecl MyNS::ResRedirect::init(void)" (? init@ResRedirect@MyNS@@QEAAXXZ) referenced in function "protected: void __cdecl MyNS::Ctx::_execInit(void)" (? _execInit@Ctx@MyNS@@IEAAXXZ)
 	//	2>Ctx.cpp.obj : error LNK2019 : unresolved external symbol "public: void __cdecl MyNS::ResRedirect::dispose(void)" (? dispose@ResRedirect@MyNS@@QEAAXXZ) referenced in function "protected: void __cdecl MyNS::Ctx::_preDispose(void)" (? _preDispose@Ctx@MyNS@@IEAAXXZ)
-	virtual void init() override;
-	virtual void dispose() override;
+	//virtual void init() override;
+	//virtual void dispose() override;
+	void init();
+	void dispose();
 
     // 清理之前缓存信息
 	void clearCacheInfo();

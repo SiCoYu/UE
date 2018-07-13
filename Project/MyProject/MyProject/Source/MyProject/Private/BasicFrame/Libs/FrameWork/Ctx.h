@@ -58,6 +58,7 @@ class GlobalEventCmd;
 class ResRedirect;
 class VersionSys;
 class AutoClearSys;
+class MPakFileSystem;
 
 MY_END_NAMESPACE
 
@@ -113,6 +114,7 @@ protected:
 	MySharedPtr<ResRedirect> mResRedirect;
 	MySharedPtr<VersionSys> mVersionSys;
 	MySharedPtr<AutoClearSys> mAutoClearSys;
+	MySharedPtr<MPakFileSystem> mPakFileSystem;
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
 
 	UMyBluePrintBase* mBPCtx;
@@ -188,6 +190,7 @@ public:
 	MySharedPtr<ResRedirect> getResRedirect();
 	MySharedPtr<VersionSys> getVersionSys();
 	MySharedPtr<AutoClearSys> getAutoClearSys();
+	MySharedPtr<MPakFileSystem> getPakFileSystem();
 
 	//MySharedPtr<UMyBluePrintBase> getBPCtx();
 	UMyBluePrintBase* getBPCtx();
@@ -248,6 +251,7 @@ public:
 #define GResRedirect GCtx->getResRedirect()
 #define GVersionSys GCtx->getVersionSys()
 #define GAutoClearSys GCtx->getAutoClearSys()
+#define GPakFileSystem GCtx->getPakFileSystem()
 
 #define GBPCtx GCtx->getBPCtx()
 #define GNativeObjectReferencer GCtx->getNativeObjectReferencer()
