@@ -188,10 +188,12 @@ void LocalVer::onMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 // 加载 Resources 文件夹下文件对应的版本系统，目前没有了
 void LocalVer::loadLocalRVer()
 {
+	std::string param = "Constant";
+
 	this->mRDataStream = MY_NEW MDataStream(
 		UtilFileIO::combine(
 			MFileSys::msDataStreamResourcesPath, 
-			"Constant", 
+			param,
 			VerFileName::VER_R
 		), 
 		MakeEventDispatchDelegate(

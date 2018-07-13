@@ -1,5 +1,6 @@
 ﻿#include "MyProject.h"
 #include "FileVerBase.h"
+#include <vector>
 #include "FileVerInfo.h"
 #include "AddOnceAndCallOnceEventDispatch.h"
 #include "UtilStr.h"
@@ -7,11 +8,11 @@
 #include "MyMemoryInc.h"
 #include "MDataStream.h"
 #include "SafePointer.h"
-#include <vector>
 #include "VerFileName.h"
 #include "Symbolic.h"
 #include "MFileSys.h"
 #include "UtilConvert.h"
+#include "UtilFileIO.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

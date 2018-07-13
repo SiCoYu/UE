@@ -51,7 +51,7 @@ protected:
 	void _downloadApp();
 
 	void _loadAllUpdateFile();
-	void _loadOneUpdateFile(std::string path&, FileVerInfo* fileInfo);
+	void _loadOneUpdateFile(std::string& path, FileVerInfo* fileInfo);
 	void _checkUpdateEnd();
 
 public:
