@@ -5,6 +5,7 @@
 #include <sstream>
 #include "Containers/UnrealString.h"
 #include "IPlatformFileSandboxWrapper.h"	// FSandboxPlatformFile
+#include "UtilStr.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
