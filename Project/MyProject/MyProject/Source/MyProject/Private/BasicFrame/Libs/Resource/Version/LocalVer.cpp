@@ -14,6 +14,8 @@
 #include "MacroDef.h"
 #include "EventDispatchDelegate.h"
 #include "MiscInc.h"
+#include "AddOnceAndCallOnceEventDispatch.h"
+#include "UtilStr.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -328,7 +330,7 @@ void LocalVer::_onAllVerLoaded()
 int LocalVer::getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bool isABAsset)
 {
 	// 在 Resources 中资源是大写，在 AssetBundles 中包含的资源名字是小写，但是 StreamingAssets 或者 Persistent 中不是 AssetBundles 形式的资源，仍然是大写
-	std::string lowerOrigPath = origPath.ToLower();
+	std::string lowerOrigPath = UtilStr::toLower(origPath);
 	std::string md5 = "";
 	ResLoadType resLoadType = ResLoadType::eLoadResource;
 
@@ -339,26 +341,26 @@ int LocalVer::getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bo
 		// 这个目录只要有就记录，例如 Windows.unity3d 这种 manifest 文件就是大写的，其它的资源目录都是小写的，为了兼容，检查大写和小写
 		if (this->mPath2Ver_P_Dic.containsKey(origPath))
 		{
-			this->analyzeHash(this->mPath2Ver_P_Dic[origPath], ResLoadType::eLoadLocalPersistentData, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mPath2Ver_P_Dic[origPath], ResLoadType::eLoadLocalPersistentData, fileVerInfo, md5, resLoadType);
 		}
 		else if (this->mPath2Ver_P_Dic.containsKey(lowerOrigPath))
 		{
-			this->analyzeHash(this->mPath2Ver_P_Dic[lowerOrigPath], ResLoadType::eLoadLocalPersistentData, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mPath2Ver_P_Dic[lowerOrigPath], ResLoadType::eLoadLocalPersistentData, fileVerInfo, md5, resLoadType);
 		}
 
 		if (this->mPath2Ver_S_Dic.containsKey(origPath))
 		{
 			// 如果两个 Hash 码是相同，就说明资源定向在 StreamAsset 目录里面
-			this->analyzeHash(this->mPath2Ver_S_Dic[origPath], ResLoadType::eLoadStreamingAssets, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mPath2Ver_S_Dic[origPath], ResLoadType::eLoadStreamingAssets, fileVerInfo, md5, resLoadType);
 		}
 		else if (this->mPath2Ver_S_Dic.containsKey(lowerOrigPath))
 		{
-			this->analyzeHash(this->mPath2Ver_S_Dic[lowerOrigPath], ResLoadType::eLoadStreamingAssets, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mPath2Ver_S_Dic[lowerOrigPath], ResLoadType::eLoadStreamingAssets, fileVerInfo, md5, resLoadType);
 		}
 
 		if (this->mPath2Ver_R_Dic.containsKey(origPath))
 		{
-			this->analyzeHash(this->mPath2Ver_R_Dic[origPath], ResLoadType::eLoadResource, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mPath2Ver_R_Dic[origPath], ResLoadType::eLoadResource, fileVerInfo, md5, resLoadType);
 		}
 	}
 	else
@@ -368,21 +370,21 @@ int LocalVer::getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bo
 		// 这个目录只要有就记录
 		if (this->mABPath2Ver_P_Dic.containsKey(lowerOrigPath))
 		{
-			this->analyzeHash(this->mABPath2Ver_P_Dic[lowerOrigPath], ResLoadType::eLoadLocalPersistentData, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mABPath2Ver_P_Dic[lowerOrigPath], ResLoadType::eLoadLocalPersistentData, fileVerInfo, md5, resLoadType);
 		}
 		else if (this->mABPath2Ver_P_Dic.containsKey(origPath))
 		{
-			this->analyzeHash(this->mABPath2Ver_P_Dic[origPath], ResLoadType::eLoadLocalPersistentData, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mABPath2Ver_P_Dic[origPath], ResLoadType::eLoadLocalPersistentData, fileVerInfo, md5, resLoadType);
 		}
 
 		if (this->mABPath2Ver_S_Dic.containsKey(lowerOrigPath))
 		{
 			// 如果两个 Hash 码是相同，就说明资源定向在 StreamAsset 目录里面
-			this->analyzeHash(this->mABPath2Ver_S_Dic[lowerOrigPath], ResLoadType::eLoadStreamingAssets, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mABPath2Ver_S_Dic[lowerOrigPath], ResLoadType::eLoadStreamingAssets, fileVerInfo, md5, resLoadType);
 		}
 		else if (this->mABPath2Ver_S_Dic.containsKey(origPath))
 		{
-			this->analyzeHash(this->mABPath2Ver_S_Dic[origPath], ResLoadType::eLoadStreamingAssets, fileVerInfo, md5, resLoadType);
+			this->_analyzeHash(this->mABPath2Ver_S_Dic[origPath], ResLoadType::eLoadStreamingAssets, fileVerInfo, md5, resLoadType);
 		}
 	}
 

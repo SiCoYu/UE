@@ -11,6 +11,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 std::string MFileSys::msPersistentDataPath = "";
 std::string MFileSys::msStreamingAssetsPath = "";
 std::string MFileSys::msDataStreamStreamingAssetsPath = "";
+std::string MFileSys::msDataStreamPersistentDataPath = "";
+str::string MFileSys::msDataStreamResourcesPath;
 
 MFileSys::MFileSys()
 {

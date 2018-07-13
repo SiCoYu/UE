@@ -42,18 +42,18 @@ public:
 	static bool existFile(std::string& fullFilPath);
 	static bool deleteFile(std::string& fullFilPath);
 	// 获取扩展名
-	std::string UtilFileIO::getFileExt(std::string& path);
+	static std::string UtilFileIO::getFileExt(std::string& path);
 	// 获取文件名字，没有路径，但是有扩展名字
-	std::string getFileNameWithExt(std::string& fullPath);
+	static std::string getFileNameWithExt(std::string& fullPath);
 	// 获取文件名字，没有扩展名字
-	std::string getFileNameNoExt(std::string& fullPath);
+	static std::string getFileNameNoExt(std::string& fullPath);
 	// 获取文件路径，没有文件名字
-	std::string getFilePathNoName(std::string& fullPath);
-	std::string getFileDir(std::string& fullPath);
+	static std::string getFilePathNoName(std::string& fullPath);
+	static std::string getFileDir(std::string& fullPath);
 	// 获取文件路径，没有文件名字扩展
-	std::string getFilePathNoExt(std::string& fullPath);
+	static std::string getFilePathNoExt(std::string& fullPath);
 	// 获取当前文件的父目录名字
-	std::string getFileParentDirName(std::string& fullPath);
+	static std::string getFileParentDirName(std::string& fullPath);
 };
 
 MY_END_NAMESPACE

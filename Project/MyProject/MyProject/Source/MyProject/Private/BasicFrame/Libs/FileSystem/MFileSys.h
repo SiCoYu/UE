@@ -22,6 +22,8 @@ public:
 	static std::string msPersistentDataPath;		// 可写目录
 	static std::string msStreamingAssetsPath;		// 只读目录
 	static std::string msDataStreamStreamingAssetsPath;
+	static std::string msDataStreamPersistentDataPath; 
+	static std::string msDataStreamResourcesPath;
 
 protected:
 	// 编辑器 Sandbox 文件系统

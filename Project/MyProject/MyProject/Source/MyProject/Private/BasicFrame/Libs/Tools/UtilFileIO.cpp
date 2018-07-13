@@ -122,7 +122,7 @@ bool UtilFileIO::deleteFile(std::string& fullFilPath)
 	IFileManager::Get().Delete(UtilStr::convStdStr2TCHAR(fullFilPath));
 }
 
-// »ñÈ¡À©Õ¹Ãû
+// è·å–æ‰©å±•å
 std::string UtilFileIO::getFileExt(std::string& path)
 {
 	std::string extName = "";
@@ -137,7 +137,7 @@ std::string UtilFileIO::getFileExt(std::string& path)
 	return extName;
 }
 
-// »ñÈ¡ÎÄ¼şÃû×Ö£¬Ã»ÓĞÂ·¾¶£¬µ«ÊÇÓĞÀ©Õ¹Ãû×Ö
+// è·å–æ–‡ä»¶åå­—ï¼Œæ²¡æœ‰è·¯å¾„ï¼Œä½†æ˜¯æœ‰æ‰©å±•åå­—
 std::string getFileNameWithExt(std::string& fullPath)
 {
 	int index = fullPath.find_last_of('/');
@@ -159,7 +159,7 @@ std::string getFileNameWithExt(std::string& fullPath)
 	return ret;
 }
 
-// »ñÈ¡ÎÄ¼şÃû×Ö£¬Ã»ÓĞÀ©Õ¹Ãû×Ö
+// è·å–æ–‡ä»¶åå­—ï¼Œæ²¡æœ‰æ‰©å±•åå­—
 std::string getFileNameNoExt(std::string& fullPath)
 {
 	int index = fullPath.find_last_of('/');
@@ -187,7 +187,7 @@ std::string getFileNameNoExt(std::string& fullPath)
 	return ret;
 }
 
-// »ñÈ¡ÎÄ¼şÂ·¾¶£¬Ã»ÓĞÎÄ¼şÃû×Ö
+// è·å–æ–‡ä»¶è·¯å¾„ï¼Œæ²¡æœ‰æ–‡ä»¶åå­—
 std::string getFilePathNoName(std::string& fullPath)
 {
 	int index = fullPath.find_last_of('/');
@@ -214,7 +214,7 @@ std::string getFileDir(std::string& fullPath)
 	return UtilFileIO::getFilePathNoName(fullPath);
 }
 
-// »ñÈ¡ÎÄ¼şÂ·¾¶£¬Ã»ÓĞÎÄ¼şÃû×ÖÀ©Õ¹
+// è·å–æ–‡ä»¶è·¯å¾„ï¼Œæ²¡æœ‰æ–‡ä»¶åå­—æ‰©å±•
 std::string getFilePathNoExt(std::string& fullPath)
 {
 	int index = 0;
@@ -229,13 +229,13 @@ std::string getFilePathNoExt(std::string& fullPath)
 	return ret;
 }
 
-// »ñÈ¡µ±Ç°ÎÄ¼şµÄ¸¸Ä¿Â¼Ãû×Ö
+// è·å–å½“å‰æ–‡ä»¶çš„çˆ¶ç›®å½•åå­—
 std::string getFileParentDirName(std::string& fullPath)
 {
 	std::string parentDir = "";
 	int lastSlashIndex = -1;
 
-	// Èç¹ûÊÇÎÄ¼ş
+	// å¦‚æœæ˜¯æ–‡ä»¶
 	if (UtilFileIO::existFile(fullPath))
 	{
 		lastSlashIndex = fullPath.find_last_of("/");

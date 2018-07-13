@@ -310,7 +310,7 @@ void AutoUpdateSys::_loadAllUpdateFile()
 	}
 }
 
-void AutoUpdateSys::_loadOneUpdateFile(std::string path, FileVerInfo* fileInfo)
+void AutoUpdateSys::_loadOneUpdateFile(std::string& path, FileVerInfo* fileInfo)
 {
 	//string loadPath = UtilEngineWrap.combineVerPath(path, fileInfo.m_fileMd5);
 	//mLoadingPath.add(loadPath);
@@ -324,7 +324,8 @@ void AutoUpdateSys::_loadOneUpdateFile(std::string path, FileVerInfo* fileInfo)
 	{
 		//string checkPath = Path.Combine(MFileSys::getLocalWriteDir(), UtilLogic.combineVerPath(path, GVersionSys->mLocalVer->mPath2Ver_P_Dic[path].mFileMd5));
 
-		std::string checkPath = UtilFileIO::combine(MFileSys::getLocalWriteDir(), path);
+		std::string localWritePath = MFileSys::getLocalWriteDir();
+		std::string checkPath = UtilFileIO::combine(localWritePath, path);
 
 		if (MacroDef::ENABLE_LOG)
 		{
@@ -341,17 +342,19 @@ void AutoUpdateSys::_loadOneUpdateFile(std::string path, FileVerInfo* fileInfo)
 	auxDownload->setIsNeedUncompress(true);
 	auxDownload->download(
 		path,
-		nullptr,
-		&AutoUpdateSys::onLoadEventHandle,
-		nullptr,
-		nullptr,
+		MakeEventDispatchDelegate(
+			this, 
+			&AutoUpdateSys::onLoadEventHandle, 
+			(uint)0
+		),
+		EventDispatchDelegate(),
 		0,
 		true,
 		(int)DownloadType::eWebRequest
 	);
 }
 
-void AutoUpdateSys::onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
+void AutoUpdateSys::onLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	std::string refPath;
 
@@ -429,7 +432,7 @@ void AutoUpdateSys::onUpdateEnd()
 }
 
 // 是否在更新列表中
-bool AutoUpdateSys::_isIncludeUpdateList(std::string path)
+bool AutoUpdateSys::_isIncludeUpdateList(std::string& path)
 {
 	bool ret = true;
 

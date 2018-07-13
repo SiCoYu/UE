@@ -9,6 +9,7 @@
 #include "FileVerInfo.h"
 #include "LocalVer.h"
 #include "LogInc.h"
+#include "UtilFileIO.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

@@ -10,6 +10,7 @@
 #include "UObject/WeakObjectPtr.h"	// FWeakObjectPtr
 //#include "Math/Vector.h"	// FVector
 //#include "GameFramework/Actor.h"	// AActor
+// warning C4996: 'UObjectHeaderDeprecatedWarning': Including UObject.h has been deprecated. Please include Object.h instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 #include "UObject/Object.h"		// UObject
 //#include "Blueprint/UserWidget.h"	// UUserWidget
 

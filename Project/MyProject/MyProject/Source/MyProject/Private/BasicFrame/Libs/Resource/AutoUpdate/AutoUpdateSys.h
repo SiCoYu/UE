@@ -51,7 +51,7 @@ protected:
 	void _downloadApp();
 
 	void _loadAllUpdateFile();
-	void _loadOneUpdateFile(std::string path, FileVerInfo* fileInfo);
+	void _loadOneUpdateFile(std::string path&, FileVerInfo* fileInfo);
 	void _checkUpdateEnd();
 
 public:
@@ -60,7 +60,7 @@ public:
 
     // 是否在更新列表中
 protected:
-	bool _isIncludeUpdateList(std::string path);
+	bool _isIncludeUpdateList(std::string& path);
     // 获取无需从服务器更新的文件数量
 	int _getExcludeUpdateFileNum();
 };
