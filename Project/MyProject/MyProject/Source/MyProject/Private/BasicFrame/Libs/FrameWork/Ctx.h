@@ -247,6 +247,7 @@ public:
 #define GGlobalEventCmd GCtx->getGlobalEventCmd()
 #define GResRedirect GCtx->getResRedirect()
 #define GVersionSys GCtx->getVersionSys()
+#define GAutoClearSys GCtx->getAutoClearSys()
 
 #define GBPCtx GCtx->getBPCtx()
 #define GNativeObjectReferencer GCtx->getNativeObjectReferencer()

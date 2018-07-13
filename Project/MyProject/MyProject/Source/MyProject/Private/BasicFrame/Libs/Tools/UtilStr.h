@@ -58,6 +58,9 @@ public:
 	static void removeLastCR(std::string& srcStr);
 	static void toLower(std::string& str);
 	static void toUpper(std::string& str);
+
+	static inline int lastIndexOf(std::string& str, std::string& delim);
+	static inline int length(std::string& str);
 };
 
 MY_END_NAMESPACE

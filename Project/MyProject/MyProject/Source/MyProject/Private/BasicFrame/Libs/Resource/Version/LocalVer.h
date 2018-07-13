@@ -68,7 +68,7 @@ protected:
 	void _onAllVerLoaded();
 
 public:
-	int getFileVerInfo(std::string origPath, FileVerInfo* fileVerInfo, bool isABAsset);
+	int getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bool isABAsset);
     // 比较 Hash 码
 protected:
 	void _analyzeHash(

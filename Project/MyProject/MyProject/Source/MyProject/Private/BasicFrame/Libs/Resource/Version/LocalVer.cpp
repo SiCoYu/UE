@@ -207,7 +207,7 @@ void LocalVer::onRVerLoaded(uint eventId, IDispatchObject* dispObj)
 
 	if (this->mRDataStream->isValid())
 	{
-		this->_loadFormText(this->mRDataStream.readText(), this->mPath2Ver_R_Dic, this->mABPath2Ver_R_Dic);
+		this->_loadFormText(this->mRDataStream->readText(), this->mPath2Ver_R_Dic, this->mABPath2Ver_R_Dic);
 	}
 
 	this->mRDataStream->dispose();
@@ -306,7 +306,7 @@ void LocalVer::onPVerLoaded(uint eventId, IDispatchObject* dispObj)
 			GLogSys->log("LocalVer::onPVerLoaded, success", LogTypeId::eLogAutoUpdate);
 		}
 
-		this->_loadFormText(this->mPDataStream.readText(), this->mPath2Ver_P_Dic, this->mABPath2Ver_P_Dic);
+		this->_loadFormText(this->mPDataStream->readText(), this->mPath2Ver_P_Dic, this->mABPath2Ver_P_Dic);
 	}
 
 	this->mPDataStream->dispose();
@@ -325,7 +325,7 @@ void LocalVer::_onAllVerLoaded()
 	}
 }
 
-int LocalVer::_getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bool isABAsset)
+int LocalVer::getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bool isABAsset)
 {
 	// 在 Resources 中资源是大写，在 AssetBundles 中包含的资源名字是小写，但是 StreamingAssets 或者 Persistent 中不是 AssetBundles 形式的资源，仍然是大写
 	std::string lowerOrigPath = origPath.ToLower();
@@ -390,7 +390,7 @@ int LocalVer::_getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, b
 }
 
 // 比较 Hash 码
-void LocalVer::analyzeHash(
+void LocalVer::_analyzeHash(
 	FileVerInfo* srcFileVerInfo,
 	ResLoadType defaultResLoadType,
 	FileVerInfo* fileVerInfo,

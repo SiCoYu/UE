@@ -21,6 +21,7 @@ class MFileSys : public GObject
 public:
 	static std::string msPersistentDataPath;		// 可写目录
 	static std::string msStreamingAssetsPath;		// 只读目录
+	static std::string msDataStreamStreamingAssetsPath;
 
 protected:
 	// 编辑器 Sandbox 文件系统

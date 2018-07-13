@@ -32,6 +32,28 @@ public:
 	static void NormalizeDirectoryName(FString& InPath);
 
 	static bool FileExists(const std::string& InPath);
+
+	static std::string combine(
+		std::string& path0, 
+		std::string& path1, 
+		std::string& path2 = UtilStr::msDefaultStr,
+		std::string& path3 = UtilStr::msDefaultStr
+	);
+	static bool existFile(std::string& fullFilPath);
+	static bool deleteFile(std::string& fullFilPath);
+	// 获取扩展名
+	std::string UtilFileIO::getFileExt(std::string& path);
+	// 获取文件名字，没有路径，但是有扩展名字
+	std::string getFileNameWithExt(std::string& fullPath);
+	// 获取文件名字，没有扩展名字
+	std::string getFileNameNoExt(std::string& fullPath);
+	// 获取文件路径，没有文件名字
+	std::string getFilePathNoName(std::string& fullPath);
+	std::string getFileDir(std::string& fullPath);
+	// 获取文件路径，没有文件名字扩展
+	std::string getFilePathNoExt(std::string& fullPath);
+	// 获取当前文件的父目录名字
+	std::string getFileParentDirName(std::string& fullPath);
 };
 
 MY_END_NAMESPACE
