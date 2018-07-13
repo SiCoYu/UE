@@ -246,9 +246,9 @@ void VersionSys::onWebMiniLoaded(uint eventId, IDispatchObject* dispObj)
 	if (this->mServerVer->mIsMiniLoadSuccess)
 	{
 		// 删除旧 mini 版本，修改新版本文件名字
-		//UtilFileIO::deleteFile(Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_P));
+		//UtilFileIO::deleteFile(Path.Combine(MFileSystem::getLocalWriteDir(), VerFileName::VER_P));
 		// 修改新的版本文件名字
-		//UtilFileIO::renameFile(UtilLogic.combineVerPath(Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_MINI), m_miniVer), Path.Combine(MFileSys::getLocalWriteDir(), VerFileName::VER_MINI));
+		//UtilFileIO::renameFile(UtilLogic.combineVerPath(Path.Combine(MFileSystem::getLocalWriteDir(), VerFileName::VER_MINI), m_miniVer), Path.Combine(MFileSystem::getLocalWriteDir(), VerFileName::VER_MINI));
 
 		this->mIsNeedUpdateApp = (this->mLocalVer->mMajorVersion != this->mServerVer->mMajorVersion);      // 如果版本不一致，需要重新加载 App
 		this->mIsNeedUpdateVerFile = (this->mLocalVer->mFileVerInfo->mFileMd5 != this->mServerVer->mFileVerInfo->mFileMd5);      // 如果版本不一致，需要重新加载版本文件

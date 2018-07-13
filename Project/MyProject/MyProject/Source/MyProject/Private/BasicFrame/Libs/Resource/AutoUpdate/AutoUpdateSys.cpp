@@ -18,7 +18,7 @@
 #include "LocalVer.h"
 #include "EventDispatchDelegate.h"
 #include "VersionInc.h"
-#include "MFileSys.h"
+#include "MFileSystem.h"
 #include "DownloadType.h"
 #include "UiBaseInc.h"
 #include "UtilFileIO.h"
@@ -322,9 +322,9 @@ void AutoUpdateSys::_loadOneUpdateFile(std::string& path, FileVerInfo* fileInfo)
 
 	if (GVersionSys->mLocalVer->mPath2Ver_P_Dic.containsKey(path))
 	{
-		//string checkPath = Path.Combine(MFileSys::getLocalWriteDir(), UtilLogic.combineVerPath(path, GVersionSys->mLocalVer->mPath2Ver_P_Dic[path].mFileMd5));
+		//string checkPath = Path.Combine(MFileSystem::getLocalWriteDir(), UtilLogic.combineVerPath(path, GVersionSys->mLocalVer->mPath2Ver_P_Dic[path].mFileMd5));
 
-		std::string localWritePath = MFileSys::getLocalWriteDir();
+		std::string localWritePath = MFileSystem::getLocalWriteDir();
 		std::string checkPath = UtilFileIO::combine(localWritePath, path);
 
 		if (MacroDef::ENABLE_LOG)

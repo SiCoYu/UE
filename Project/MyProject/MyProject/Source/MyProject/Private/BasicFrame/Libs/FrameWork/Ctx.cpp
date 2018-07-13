@@ -11,7 +11,7 @@
 #include "NetCmdNotify.h"
 #include "LogSys.h"
 #include "Config.h"
-#include "MFileSys.h"
+#include "MFileSystem.h"
 #include "PoolSys.h"
 
 #include "ResLoadMgr.h"
@@ -142,7 +142,7 @@ void Ctx::construct()
 
 	this->mPoolSys = MySharedPtr<PoolSys>(MY_NEW PoolSys());
 	this->mDownloadMgr = MySharedPtr<DownloadMgr>(MY_NEW DownloadMgr());
-	this->mFileSys = MySharedPtr<MFileSys>(MY_NEW MFileSys());
+	this->mFileSys = MySharedPtr<MFileSystem>(MY_NEW MFileSystem());
 	this->mSystemSetting = MySharedPtr<SystemSetting>(MY_NEW SystemSetting());
 	this->mLuaSystem = MySharedPtr<LuaSystem>(MY_NEW LuaSystem());
 	this->mMyLatentActionManager = MySharedPtr<MyLatentActionManager>(MY_NEW MyLatentActionManager());
@@ -516,7 +516,7 @@ MySharedPtr<DownloadMgr> Ctx::getDownloadMgr()
 	return this->mDownloadMgr;
 }
 
-MySharedPtr<MFileSys> Ctx::getFileSys()
+MySharedPtr<MFileSystem> Ctx::getFileSys()
 {
 	return this->mFileSys;
 }

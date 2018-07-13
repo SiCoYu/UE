@@ -409,7 +409,7 @@ public:
 	void TestFileReadUnCompressed(FString _path);
 
 	static bool IsPendingKill(AActor* actor);
-	static void Destroy(AActor* actor);
+	//static void Destroy(AActor* actor);
 	
 	// Engine\Source\Runtime\Core\Private\Misc\Core.cpp	\ GFrameNumber \ GFrameNumberRenderThread
 	static uint32 getFrameNumber();

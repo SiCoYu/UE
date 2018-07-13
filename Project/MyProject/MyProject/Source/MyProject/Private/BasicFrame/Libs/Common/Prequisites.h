@@ -28,7 +28,7 @@
 #include "MaterialInsResMgr.h"
 #include "MyStreamableManager.h"
 #include "DownloadMgr.h"
-#include "MFileSys.h"
+#include "MFileSystem.h"
 #include "SystemSetting.h"
 #include "LuaSystem.h"
 #include "GameSceneEventNotify.h"

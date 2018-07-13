@@ -56,7 +56,7 @@ protected:
 
 public:
 	void onUpdateEnd();
-	void onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId);
+	void onLoadEventHandle(uint eventId, IDispatchObject* dispObj);
 
     // 是否在更新列表中
 protected:

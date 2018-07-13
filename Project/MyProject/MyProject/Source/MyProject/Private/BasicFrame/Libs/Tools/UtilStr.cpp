@@ -200,12 +200,12 @@ void UtilStr::removeLastCR(std::string& srcStr)
 	}
 }
 
-std::string UtilStr::toLower(std::string& str)
+void UtilStr::toLower(std::string& str)
 {
 	transform(str.begin(), str.end(), str.begin(), ::tolower);
 }
 
-std::string UtilStr::toUpper(std::string& str)
+void UtilStr::toUpper(std::string& str)
 {
 	transform(str.begin(), str.end(), str.begin(), ::toupper);
 }

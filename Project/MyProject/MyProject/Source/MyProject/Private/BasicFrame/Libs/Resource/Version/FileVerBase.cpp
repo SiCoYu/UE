@@ -10,7 +10,7 @@
 #include "SafePointer.h"
 #include "VerFileName.h"
 #include "Symbolic.h"
-#include "MFileSys.h"
+#include "MFileSystem.h"
 #include "UtilConvert.h"
 #include "UtilFileIO.h"
 
@@ -74,7 +74,7 @@ void FileVerBase::saveMiniVerToPersistentPath()
 			GLogSys->log("FileVerBase::saveMiniVerToPersistentPath, isNoVerInfo is false", LogTypeId::eLogAutoUpdate);
 		}
 
-		std::string path = UtilFileIO::combine(MFileSys::msPersistentDataPath, VerFileName::VER_MINI);
+		std::string path = UtilFileIO::combine(MFileSystem::msPersistentDataPath, VerFileName::VER_MINI);
 
 		if (UtilFileIO::existFile(path))
 		{

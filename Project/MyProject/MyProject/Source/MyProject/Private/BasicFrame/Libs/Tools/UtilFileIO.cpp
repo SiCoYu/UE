@@ -120,6 +120,7 @@ bool UtilFileIO::existFile(std::string& fullFilPath)
 bool UtilFileIO::deleteFile(std::string& fullFilPath)
 {
 	IFileManager::Get().Delete(UtilStr::convStdStr2TCHAR(fullFilPath));
+	return true;
 }
 
 // 获取扩展名

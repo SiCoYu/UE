@@ -9,7 +9,7 @@
 #include "VerFileName.h"
 #include "DownloadType.h"
 #include "UtilStr.h"
-#include "MFileSys.h"
+#include "MFileSystem.h"
 #include "MDataStream.h"
 #include "EventDispatchDelegate.h"
 #include "DownloadType.h"
@@ -169,7 +169,7 @@ void ServerVer::savePVerToPersistentPath()
 		GLogSys->log("ServerVer::savePVerToPersistentPath, start", LogTypeId::eLogAutoUpdate);
 	}
 
-	std::string path = UtilFileIO::combine(MFileSys::msPersistentDataPath, VerFileName::VER_P);
+	std::string path = UtilFileIO::combine(MFileSystem::msPersistentDataPath, VerFileName::VER_P);
 
 	if (UtilFileIO::existFile(path))
 	{

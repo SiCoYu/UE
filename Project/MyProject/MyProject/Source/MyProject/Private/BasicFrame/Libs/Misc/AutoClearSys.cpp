@@ -5,7 +5,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 AutoClearSys::AutoClearSys()
 {
-	//this.mInstallFlagFileFullPath = string.Format("{0}/{1}", MFileSys.msDataStreamPersistentDataPath, "InstallFlagFile.txt");
+	//this.mInstallFlagFileFullPath = string.Format("{0}/{1}", MFileSystem.msDataStreamPersistentDataPath, "InstallFlagFile.txt");
 }
 
 void AutoClearSys::init()
@@ -65,10 +65,10 @@ void AutoClearSys::clearFiles()
 {
 	//if (MacroDef.ENABLE_LOG)
 	//{
-	//	Ctx.msInstance.mLogSys.log(string.Format("AutoClearSys::clearFiles, path = {0}", MFileSys.msDataStreamPersistentDataPath), LogTypeId.eLogAutoClear);
+	//	Ctx.msInstance.mLogSys.log(string.Format("AutoClearSys::clearFiles, path = {0}", MFileSystem.msDataStreamPersistentDataPath), LogTypeId.eLogAutoClear);
 	//}
 
-	//UtilFileIO.clearDirectory(MFileSys.msDataStreamPersistentDataPath);
+	//UtilFileIO.clearDirectory(MFileSystem.msDataStreamPersistentDataPath);
 }
 
 // 写入安装标志

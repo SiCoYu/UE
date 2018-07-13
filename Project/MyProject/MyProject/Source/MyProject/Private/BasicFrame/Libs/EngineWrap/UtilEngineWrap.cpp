@@ -999,13 +999,13 @@ bool UtilEngineWrap::IsPendingKill(AActor* actor)
 	return ret;
 }
 
-void UtilEngineWrap::Destroy(AActor* actor)
-{
-	if (nullptr != actor)
-	{
-		actor->Destroy();
-	}
-}
+//void UtilEngineWrap::Destroy(AActor* actor)
+//{
+//	if (nullptr != actor)
+//	{
+//		actor->Destroy();
+//	}
+//}
 
 uint32 UtilEngineWrap::getFrameNumber()
 {

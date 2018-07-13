@@ -6,7 +6,7 @@
 #include "IDispatchObject.h"
 #include "FileVerInfo.h"
 #include "MDataStream.h"
-#include "MFileSys.h"
+#include "MFileSystem.h"
 #include "UtilFileIO.h"
 #include "LogInc.h"
 #include "VerFileName.h"
@@ -55,7 +55,7 @@ void LocalVer::loadMiniVerFile()
 	//}
 
 	//// 先从 PersistentPath 目录下读取,各个平台都可以同步读取
-	//this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_MINI), this->onPersistentMiniLoadEventHandle);
+	//this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSystem::msDataStreamPersistentDataPath, VerFileName::VER_MINI), this->onPersistentMiniLoadEventHandle);
 	//this->mMiniDataStream.open();
 
 	//// 如果读取没有成功，就从 StreamingAssetsPath (不再从 Resources) 目录下读取， StreamingAssetsPath android 下读取非 AssetBundles 需要异步
@@ -68,8 +68,8 @@ void LocalVer::loadMiniVerFile()
 
 	//    this->mIsMiniLoaded = false;     // 重新设置成 false ，防止后面的因为异步加载完成后，再调用一次的时候，会调用外面两次
 
-	//    //this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_MINI), this->onMiniLoadEventHandle);
-	//    this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamStreamingAssetsPath, VerFileName::VER_MINI), this->onStreamingMiniLoadEventHandle);
+	//    //this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSystem::msDataStreamResourcesPath, "Constant", VerFileName::VER_MINI), this->onMiniLoadEventHandle);
+	//    this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSystem::msDataStreamStreamingAssetsPath, VerFileName::VER_MINI), this->onStreamingMiniLoadEventHandle);
 	//    this->mMiniDataStream.open();
 	//}
 
@@ -87,10 +87,10 @@ void LocalVer::loadStreamingAssetsMiniVerFile()
 
 	this->mIsMiniLoaded = false;     // 重新设置成 false ，防止后面的因为异步加载完成后，再调用一次的时候，会调用外面两次
 
-	//this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_MINI), this->onMiniLoadEventHandle);
+	//this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSystem::msDataStreamResourcesPath, "Constant", VerFileName::VER_MINI), this->onMiniLoadEventHandle);
 	this->mMiniDataStream = MY_NEW MDataStream(
 		UtilFileIO::combine(
-			MFileSys::msDataStreamStreamingAssetsPath, 
+			MFileSystem::msDataStreamStreamingAssetsPath, 
 			VerFileName::VER_MINI
 		), 
 		MakeEventDispatchDelegate(
@@ -112,7 +112,7 @@ void LocalVer::loadPersistentMiniVerFile()
 	// 先从 PersistentPath 目录下读取,各个平台都可以同步读取
 	this->mMiniDataStream = MY_NEW MDataStream(
 		UtilFileIO::combine(
-			MFileSys::msDataStreamPersistentDataPath, 
+			MFileSystem::msDataStreamPersistentDataPath, 
 			VerFileName::VER_MINI
 		), 
 		MakeEventDispatchDelegate(
@@ -192,7 +192,7 @@ void LocalVer::loadLocalRVer()
 
 	this->mRDataStream = MY_NEW MDataStream(
 		UtilFileIO::combine(
-			MFileSys::msDataStreamResourcesPath, 
+			MFileSystem::msDataStreamResourcesPath, 
 			param,
 			VerFileName::VER_R
 		), 
@@ -223,7 +223,7 @@ void LocalVer::onRVerLoaded(uint eventId, IDispatchObject* dispObj)
 // Android 下 StreamingAssets 目录访问只能是异步的，因此需要等待这个访问完成才行
 void LocalVer::loadLocalSVer()
 {
-	std::string path = UtilFileIO::combine(MFileSys::msDataStreamStreamingAssetsPath, VerFileName::VER_S);
+	std::string path = UtilFileIO::combine(MFileSystem::msDataStreamStreamingAssetsPath, VerFileName::VER_S);
 
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -240,7 +240,7 @@ void LocalVer::loadLocalSVer()
 			(uint)0
 		)
 	);
-	//this->mSDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_S), this->onSVerLoaded);
+	//this->mSDataStream = new MDataStream(UtilFileIO::combine(MFileSystem::msDataStreamResourcesPath, "Constant", VerFileName::VER_S), this->onSVerLoaded);
 	this->mSDataStream->open();
 }
 
@@ -282,7 +282,7 @@ void LocalVer::loadLocalPVer()
 
 	this->mPDataStream = MY_NEW MDataStream(
 		UtilFileIO::combine(
-			MFileSys::msDataStreamPersistentDataPath, 
+			MFileSystem::msDataStreamPersistentDataPath, 
 			VerFileName::VER_P
 		), 
 		MakeEventDispatchDelegate(

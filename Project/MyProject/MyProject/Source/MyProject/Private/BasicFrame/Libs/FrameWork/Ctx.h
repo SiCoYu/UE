@@ -32,7 +32,7 @@ class TextureInsResMgr;
 class MaterialInsResMgr;
 class MyStreamableManager;
 class DownloadMgr;
-class MFileSys;
+class MFileSystem;
 class SystemSetting;
 
 class SceneSys;
@@ -91,7 +91,7 @@ protected:
 
 	MySharedPtr<MyStreamableManager> mMyStreamableManager;
 	MySharedPtr<DownloadMgr> mDownloadMgr;
-	MySharedPtr<MFileSys> mFileSys;
+	MySharedPtr<MFileSystem> mFileSys;
 	MySharedPtr<SystemSetting> mSystemSetting;
 	MySharedPtr<LuaSystem> mLuaSystem;
 	MySharedPtr<MyLatentActionManager> mMyLatentActionManager;
@@ -166,7 +166,7 @@ public:
 
 	MySharedPtr<MyStreamableManager> getMyStreamableManager();
 	MySharedPtr<DownloadMgr> getDownloadMgr();
-	MySharedPtr<MFileSys> getFileSys();
+	MySharedPtr<MFileSystem> getFileSys();
 	MySharedPtr<SystemSetting> getSystemSetting();
 	MySharedPtr<LuaSystem> getLuaSystem();
 	MySharedPtr<MyLatentActionManager> getMyLatentActionManager();

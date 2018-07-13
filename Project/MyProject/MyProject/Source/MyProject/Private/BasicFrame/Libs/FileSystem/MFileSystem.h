@@ -16,7 +16,7 @@ class LoadParam;
 * @brief 本地文件系统
 Engine\Source\Runtime\Launch\Private\Android\AndroidJNI.cpp
 */
-class MFileSys : public GObject
+class MFileSystem : public GObject
 {
 public:
 	static std::string msPersistentDataPath;		// 可写目录
@@ -33,7 +33,7 @@ protected:
 	MList<std::string> mLuaSearchPathList;
 
 public:
-	MFileSys();
+	MFileSystem();
 
 public:
 	void init();

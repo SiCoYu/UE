@@ -1,5 +1,5 @@
 ﻿#include "MyProject.h"
-#include "MFileSys.h"
+#include "MFileSystem.h"
 #include "Containers/UnrealString.h"		// FString
 #include "HAL/PlatformFilemanager.h"		// FPlatformFileManager
 #include "IPlatformFileSandboxWrapper.h"	// FSandboxPlatformFile
@@ -8,19 +8,19 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-std::string MFileSys::msPersistentDataPath = "";
-std::string MFileSys::msStreamingAssetsPath = "";
-std::string MFileSys::msDataStreamStreamingAssetsPath = "";
-std::string MFileSys::msDataStreamPersistentDataPath = "";
-str::string MFileSys::msDataStreamResourcesPath;
+std::string MFileSystem::msPersistentDataPath = "";
+std::string MFileSystem::msStreamingAssetsPath = "";
+std::string MFileSystem::msDataStreamStreamingAssetsPath = "";
+std::string MFileSystem::msDataStreamPersistentDataPath = "";
+std::string MFileSystem::msDataStreamResourcesPath = "";
 
-MFileSys::MFileSys()
+MFileSystem::MFileSystem()
 {
 	// 初始化 SandBox 文件系统
 	this->mSandboxPlatformFile = new FSandboxPlatformFile(false);
 }
 
-void MFileSys::init()
+void MFileSystem::init()
 {
 	FString contentPath = UtilFileIO::GameContentDir();
 	std::string path = UtilStr::ConvFString2StdStr(contentPath);
@@ -43,20 +43,20 @@ void MFileSys::init()
 	FString OutputDirectory = FPaths::ProjectDir();
 	this->mSandboxPlatformFile->Initialize(&FPlatformFileManager::Get().GetPlatformFile(), *FString::Printf(TEXT("-sandbox=\"%s\""), *OutputDirectory));
 
-	MFileSys::initFileSys();
+	MFileSystem::initFileSys();
 }
 
-void MFileSys::dispose()
+void MFileSystem::dispose()
 {
 	delete this->mSandboxPlatformFile;
 }
 
-FSandboxPlatformFile* MFileSys::getSandboxPlatformFile()
+FSandboxPlatformFile* MFileSystem::getSandboxPlatformFile()
 {
 	return this->mSandboxPlatformFile;
 }
 
-void MFileSys::initFileSys()
+void MFileSystem::initFileSys()
 {
 	// Engine\Source\Runtime\OpenGLDrv\Private\OpenGLShaders.cpp
 	FString CacheFolderPath;
@@ -67,30 +67,30 @@ void MFileSys::initFileSys()
 	CacheFolderPath = UtilFileIO::GameSavedDir() / TEXT("ProgramBinaryCache");
 #endif
 
-	MFileSys::msPersistentDataPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
+	MFileSystem::msPersistentDataPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
 
 	CacheFolderPath = UtilFileIO::GameContentDir();
-	MFileSys::msStreamingAssetsPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
+	MFileSystem::msStreamingAssetsPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
 }
 
 // 获取本地可以读取的目录，但是不能写
-std::string MFileSys::getLocalReadDir()
+std::string MFileSystem::getLocalReadDir()
 {
-	return MFileSys::msStreamingAssetsPath;
+	return MFileSystem::msStreamingAssetsPath;
 }
 
 // 获取本地可以写的目录
-std::string MFileSys::getLocalWriteDir()
+std::string MFileSystem::getLocalWriteDir()
 {
-	return MFileSys::msPersistentDataPath;
+	return MFileSystem::msPersistentDataPath;
 }
 
-void MFileSys::modifyLoadParam(std::string resPath, LoadParam* param)
+void MFileSystem::modifyLoadParam(std::string resPath, LoadParam* param)
 {
 
 }
 
-std::string MFileSys::getLuaPath(std::string luaPackage)
+std::string MFileSystem::getLuaPath(std::string luaPackage)
 {
 	std::string old_value = ".";
 	std::string new_value = "/";
@@ -115,7 +115,7 @@ std::string MFileSys::getLuaPath(std::string luaPackage)
 	return fullPath;
 }
 
-void MFileSys::addSearchPath(std::string path)
+void MFileSystem::addSearchPath(std::string path)
 {
 
 }
