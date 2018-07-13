@@ -44,7 +44,8 @@ FString UtilFileIO::GameContentDir()
 
 FString UtilFileIO::EngineContentDir()
 {
-	return FPaths::EngineContentDir();
+	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::EngineContentDir());
+	return ThePath;
 }
 
 FString UtilFileIO::GameSavedDir()

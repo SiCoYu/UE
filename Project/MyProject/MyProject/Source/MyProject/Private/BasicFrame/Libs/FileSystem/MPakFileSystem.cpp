@@ -91,7 +91,7 @@ MPakFileStream* MPakFileSystem::mountOnePak(FString& pakFileFullPath, FString& m
 		this->mPath2PakFileStreamDic.add(pakFileFullPath, pakFileStream);
 
 		pakFileStream->setPakFilePath(pakFileFullPath);
-		pakFileStream->setPakFilePath(mountPoint);
+		pakFileStream->setMountPath(mountPoint);
 
 		pakFileStream->init();
 		pakFileStream->mount();
