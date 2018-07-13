@@ -57,7 +57,7 @@ public:
 	static void split(std::string& s, std::string& delim, std::vector< std::string >* ret);
 	static void removeLastCR(std::string& srcStr);
 	static void toLower(std::string& str);
-	static void toUpper(std::string& str)
+	static void toUpper(std::string& str);
 };
 
 MY_END_NAMESPACE
