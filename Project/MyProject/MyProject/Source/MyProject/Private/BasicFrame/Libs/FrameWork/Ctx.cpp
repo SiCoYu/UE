@@ -166,7 +166,7 @@ void Ctx::construct()
 	this->mResRedirect = MySharedPtr<ResRedirect>(MY_NEW ResRedirect());
 	this->mVersionSys = MySharedPtr<VersionSys>(MY_NEW VersionSys());
 	this->mAutoClearSys = MySharedPtr<AutoClearSys>(MY_NEW AutoClearSys());
-	this->mPakFileSystem = MySharedPtr<PakFileSystem>(MY_NEW PakFileSystem());
+	this->mPakFileSystem = MySharedPtr<MPakFileSystem>(MY_NEW MPakFileSystem());
 
 	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 

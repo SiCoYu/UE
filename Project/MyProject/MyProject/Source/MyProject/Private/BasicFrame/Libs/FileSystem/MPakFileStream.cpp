@@ -69,7 +69,9 @@ void MPakFileStream::mount()
 	{
 		this->mMountState = MMountState::eSuccess;
 
-		FPakFile pakFile(*this->mPakFilePath, false);
+		IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+		FPakFile pakFile(&PlatformFile, *this->mPakFilePath, false);
+
 		pakFile.SetMountPoint(*this->mMountPoint);
 		pakFile.FindFilesAtPath(this->mFileList, *pakFile.GetMountPoint(), true, false, true);
 	}
