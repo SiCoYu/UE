@@ -40,6 +40,24 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 	return assetName;
 }
 
+bool MPakFileStream::_mountPakToFileSystem(FString& pakFileFullPath, FString& mountPoint)
+{
+	bool ret = false;
+
+	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+
+	FPakPlatformFile* PakPlatformFile = new FPakPlatformFile();
+	PakPlatformFile->Initialize(&PlatformFile, TEXT(""));
+	FPlatformFileManager::Get().SetPlatformFile(*PakPlatformFile);
+
+	if (PakPlatformFile->Mount(*pakFileFullPath, 0, *mountPoint))
+	{
+		ret = true;
+	}
+
+	return ret;
+}
+
 void MPakFileStream::mount()
 {
 	if (MPakFileSystem::mountPakToFileSystem(this->mPakFilePath, this->mMountPoint))

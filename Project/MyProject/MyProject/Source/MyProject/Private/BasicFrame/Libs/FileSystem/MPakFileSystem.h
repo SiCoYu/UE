@@ -21,8 +21,6 @@ protected:
 public:
 	MPakFileSystem();
 
-	static bool mountPakToFileSystem(FString& pakFileFullPath, FString& mountPoint);
-
 	void init();
 	void dispose();
 
