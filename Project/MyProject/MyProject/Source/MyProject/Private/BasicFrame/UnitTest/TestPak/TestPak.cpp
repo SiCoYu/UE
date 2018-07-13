@@ -18,7 +18,7 @@ void TestPak::run()
 
 	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
 	MySoftObjectPath softObjectPath;
-	softObjectPath.setPath();
+	softObjectPath.setPath(pakFileStream->getSoftPathStrByIndex(0));
 	GMyStreamableManager->SynchronousLoad(softObjectPath.getNativeSoftObjectPath());
 }
 

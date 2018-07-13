@@ -2,6 +2,8 @@
 #include "MPakFileStream.h"
 #include "MPakFileSystem.h"
 
+MY_BEGIN_NAMESPACE(MyNS)
+
 MPakFileStream::MPakFileStream()
 {
 	this->mMountState = MMountState::eNull;
@@ -83,5 +85,7 @@ FString MPakFileStream::getSoftPathStrByIndex(int index)
 
 int MPakFileStream::getSoftPathCount()
 {
-	return this->mFileList.
+	return this->mFileList.Num();
 }
+
+MY_END_NAMESPACE

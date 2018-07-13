@@ -7,7 +7,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 /**
- * @brief ue4  pak ¼ÓÔØ
+ * @brief ue4  pak åŠ è½½
  * @url https://blog.csdn.net/sh15285118586/article/details/79648596
  * @url https://blog.csdn.net/u014532636/article/details/72844367
  * @url https://blog.csdn.net/u011047958/article/details/78539991
@@ -15,40 +15,40 @@ MY_BEGIN_NAMESPACE(MyNS)
  */
 //void MPakFileSystem::LoadPakComplete()
 //{
-//	//Èç¹ûÄãÏëÖ±½Ó¼ÓÔØ±¾µØµÄpakµÄ»°,·½·¨µÄ²ÎÊıÁĞ±íÉ¾µô,È»ºó°ÑSaveArrayToFileÕâ¾ä»°Ò²É¾ÁË,SaveContentDirÌîĞ´ÄãÒª¼ÓÔØµÄÂ·¾¶¾Í¿ÉÒÔÁË...
-//		//1.°ÑÏÂÔØºÃµÄÎÄ¼ş±£´æÆğÀ´
+//	//å¦‚æœä½ æƒ³ç›´æ¥åŠ è½½æœ¬åœ°çš„pakçš„è¯,æ–¹æ³•çš„å‚æ•°åˆ—è¡¨åˆ æ‰,ç„¶åæŠŠSaveArrayToFileè¿™å¥è¯ä¹Ÿåˆ äº†,SaveContentDirå¡«å†™ä½ è¦åŠ è½½çš„è·¯å¾„å°±å¯ä»¥äº†...
+//		//1.æŠŠä¸‹è½½å¥½çš„æ–‡ä»¶ä¿å­˜èµ·æ¥
 //	FString SaveContentDir = FPaths::GameContentDir() + TEXT("OutPak.pak");
-//	//2.¼ÓÔØ¸Õ²Å±£´æµÄÎÄ¼ş
-//	//»ñÈ¡µ±Ç°Ê¹ÓÃµÄÆ½Ì¨,ÕâÀïÊ¹ÓÃµÄÊÇWIN64Æ½Ì¨
+//	//2.åŠ è½½åˆšæ‰ä¿å­˜çš„æ–‡ä»¶
+//	//è·å–å½“å‰ä½¿ç”¨çš„å¹³å°,è¿™é‡Œä½¿ç”¨çš„æ˜¯WIN64å¹³å°
 //	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-//	//³õÊ¼»¯PakPlatformFile
+//	//åˆå§‹åŒ–PakPlatformFile
 //	FPakPlatformFile* PakPlatformFile = new FPakPlatformFile();
 //	PakPlatformFile->Initialize(&PlatformFile, TEXT(""));
 //	FPlatformFileManager::Get().SetPlatformFile(*PakPlatformFile);
 //
-//	//»ñÈ¡PakÎÄ¼ş
+//	//è·å–Pakæ–‡ä»¶
 //	FPakFile PakFile(*SaveContentDir, false);
 //	UE_LOG(LogClass, Log, TEXT("get PakFile..."))
-//	//ÉèÖÃpakÎÄ¼şµÄMountµã. 
-//	FString MountPoint(FPaths::EngineContentDir()); //"/../../../Engine/Content/"¶ÔÓ¦Â·¾¶
+//	//è®¾ç½®pakæ–‡ä»¶çš„Mountç‚¹. 
+//	FString MountPoint(FPaths::EngineContentDir()); //"/../../../Engine/Content/"å¯¹åº”è·¯å¾„
 //	PakFile.SetMountPoint(*MountPoint);
-//	//¶ÔpakÎÄ¼şmountµ½Ç°ÃæÉè¶¨µÄMountPoint
+//	//å¯¹pakæ–‡ä»¶mountåˆ°å‰é¢è®¾å®šçš„MountPoint
 //	if (PakPlatformFile->Mount(*SaveContentDir, 0, *MountPoint))
 //	{
 //		UE_LOG(LogClass, Log, TEXT("Mount Success"));
 //		TArray<FString> FileList;
-//		//µÃµ½PakÎÄ¼şÖĞMountPointÂ·¾¶ÏÂµÄËùÓĞÎÄ¼ş
+//		//å¾—åˆ°Pakæ–‡ä»¶ä¸­MountPointè·¯å¾„ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
 //		PakFile.FindFilesAtPath(FileList, *PakFile.GetMountPoint(), true, false, true);
 //		FStreamableManager StreamableManager;
-//		//¶ÔÎÄ¼şµÄÂ·¾¶½øĞĞ´¦Àí,×ª»»³ÉStaticLoadObjectµÄÄÇÖÖÂ·¾¶¸ñÊ½
+//		//å¯¹æ–‡ä»¶çš„è·¯å¾„è¿›è¡Œå¤„ç†,è½¬æ¢æˆStaticLoadObjectçš„é‚£ç§è·¯å¾„æ ¼å¼
 //		FString AssetName = FileList[0];
 //		FString AssetShortName = FPackageName::GetShortName(AssetName);
 //		FString LeftStr;
 //		FString RightStr;
 //		AssetShortName.Split(TEXT("."), &LeftStr, &RightStr);
-//		AssetName = TEXT("/Engine/") + LeftStr + TEXT(".") + LeftStr;    //ÎÒÃÇ¼ÓÔØµÄÊ±ºòÓÃµÄÊÇÕâ¸öÂ·¾¶
+//		AssetName = TEXT("/Engine/") + LeftStr + TEXT(".") + LeftStr;    //æˆ‘ä»¬åŠ è½½çš„æ—¶å€™ç”¨çš„æ˜¯è¿™ä¸ªè·¯å¾„
 //		FStringAssetReference reference = AssetName;
-//		//¼ÓÔØUObject
+//		//åŠ è½½UObject
 //		UObject* LoadObject = StreamableManager.SynchronousLoad(reference);
 //		if (LoadObject != nullptr)
 //		{
