@@ -8,6 +8,7 @@
 #include "MacroDef.h"
 #include "EventDispatchDelegate.h"
 #include "IDispatchObject.h"
+#include "FileVerInfo.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -22,6 +23,11 @@ VersionSys::VersionSys()
 }
 
 void VersionSys::init()
+{
+
+}
+
+void VersionSys::dispose()
 {
 
 }
@@ -251,7 +257,7 @@ void VersionSys::onWebMiniLoaded(uint eventId, IDispatchObject* dispObj)
 
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("VersionSys::onWebMiniLoaded, loaded, mIsNeedUpdateApp = {0}, mIsNeedUpdateVerFile = {1}", this->mIsNeedUpdateApp.ToString(), this->mIsNeedUpdateVerFile.ToString()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(UtilStr::Format("VersionSys::onWebMiniLoaded, loaded, mIsNeedUpdateApp = {0}, mIsNeedUpdateVerFile = {1}", this->mIsNeedUpdateApp, this->mIsNeedUpdateVerFile), LogTypeId::eLogAutoUpdate);
 		}
 	}
 	else
@@ -266,7 +272,7 @@ void VersionSys::onWebMiniLoaded(uint eventId, IDispatchObject* dispObj)
 		this->mIsNeedUpdateVerFile = false;
 	}
 
-	this->mMiniLoadResultDispatch.dispatchEvent(nullptr);
+	this->mMiniLoadResultDispatch->dispatchEvent(nullptr);
 }
 
 void VersionSys::onWebVerLoaded(uint eventId, IDispatchObject* dispObj)
@@ -281,22 +287,24 @@ void VersionSys::onWebVerLoaded(uint eventId, IDispatchObject* dispObj)
 
 std::string VersionSys::getFileVer(std::string path)
 {
+	std::string ret = "";
+
 	if (this->mIsNeedUpdateVerFile)
 	{
 		if (this->mServerVer->mPath2HashDic.containsKey(path))
 		{
-			return this->mServerVer->mPath2HashDic[path].mFileMd5;
+			ret = this->mServerVer->mPath2HashDic[path]->mFileMd5;
 		}
 	}
 	else
 	{
 		if (this->mLocalVer->mPath2Ver_P_Dic.containsKey(path))
 		{
-			return this->mLocalVer->mPath2Ver_P_Dic[path].mFileMd5;
+			ret = this->mLocalVer->mPath2Ver_P_Dic[path]->mFileMd5;
 		}
 	}
 
-	return "";
+	return ret;
 }
 
 // 保存 VerFileName::VER_MINI 版本文件和 VerFileName::VER_P 版本文件到 Persistent 文件夹

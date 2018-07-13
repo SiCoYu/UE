@@ -13,7 +13,7 @@ MDataStream::MDataStream(std::string filePath, EventDispatchDelegate openedDisp,
 	this->mFilePath = filePath;
 	this->mMode = mode;
 	this->mAccess = access;
-	this->mFileOpState = eNoOp;
+	this->mFileOpState = FileOpState::eNoOp;
 	this->mIsSyncMode = isSyncMode;
 
 	this->checkAndOpen(openedDisp);
@@ -21,7 +21,7 @@ MDataStream::MDataStream(std::string filePath, EventDispatchDelegate openedDisp,
 
 void MDataStream::seek(long offset, MSeekOrigin origin)
 {
-    if(this->mFileOpState == eOpenSuccess)
+    if(this->mFileOpState == FileOpState::eOpenSuccess)
     {
 		this->mFileStream->Seek(offset);
     }
@@ -44,14 +44,14 @@ void MDataStream::dispose()
 
 void MDataStream::syncOpenFileStream()
 {
-	if (this->mFileOpState == eNoOp)
+	if (this->mFileOpState == FileOpState::eNoOp)
 	{
-		this->mFileOpState = eOpening;
+		this->mFileOpState = FileOpState::eOpening;
 		//try
 		//{
 		FString path = UtilStr::ConvStdStr2FString(this->mFilePath);
 
-		if (eRead == this->mAccess)
+		if (FileOpState::eRead == this->mAccess)
 		{
 			this->mFileStream = IFileManager::Get().CreateFileReader(*path);
 		}
@@ -60,7 +60,7 @@ void MDataStream::syncOpenFileStream()
 			this->mFileStream = IFileManager::Get().CreateFileWriter(*path);
 		}
 
-		this->mFileOpState = eOpenSuccess;
+		this->mFileOpState = FileOpState::eOpenSuccess;
 		//}
 		//catch (Exception exp)
 		//{
@@ -87,7 +87,7 @@ void MDataStream::checkAndOpen(EventDispatchDelegate openedDisp)
 		this->addOpenedHandle(openedDisp);
 	}
 
-	if (this->mFileOpState == eNoOp)
+	if (this->mFileOpState == FileOpState::eNoOp)
 	{
 		this->syncOpenFileStream();
 	}
@@ -95,7 +95,7 @@ void MDataStream::checkAndOpen(EventDispatchDelegate openedDisp)
 
 bool MDataStream::isValid()
 {
-	return mFileOpState == eOpenSuccess;
+	return mFileOpState == FileOpState::eOpenSuccess;
 }
 
 // 获取总共长度
@@ -103,7 +103,7 @@ int MDataStream::getLength()
 {
 	int len = 0;
 
-	if (this->mFileOpState == eOpenSuccess)
+	if (this->mFileOpState == FileOpState::eOpenSuccess)
 	{
 		if (this->mFileStream != nullptr)
 		{
@@ -116,7 +116,7 @@ int MDataStream::getLength()
 
 void MDataStream::close()
 {
-	if (this->mFileOpState == eOpenSuccess)
+	if (this->mFileOpState == FileOpState::eOpenSuccess)
 	{
 		bool Success = false;
 
@@ -129,12 +129,12 @@ void MDataStream::close()
 
 		if (Success)
 		{
-			this->mFileOpState = eOpenClose;
-			this->mFileOpState = eNoOp;
+			this->mFileOpState = FileOpState::eOpenClose;
+			this->mFileOpState = FileOpState::eNoOp;
 		}
 		else
 		{
-			this->mFileOpState = eOpenFail;
+			this->mFileOpState = FileOpState::eOpenFail;
 		}
 	}
 }

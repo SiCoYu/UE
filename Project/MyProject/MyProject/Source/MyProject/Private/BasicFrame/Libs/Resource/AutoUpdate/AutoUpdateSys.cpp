@@ -20,6 +20,7 @@
 #include "VersionInc.h"
 #include "MFileSys.h"
 #include "DownloadType.h"
+#include "UiBaseInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -220,7 +221,7 @@ void AutoUpdateSys::_downloadApp()
 		GLogSys->log("AutoUpdateSys::downloadApp", LogTypeId::eLogAutoUpdate);
 	}
 
-	GUiMgr->loadAndShowForm(UiFormId::eUiAppDownload);
+	GUiMgr->loadAndShow(UiFormId::eUiAppDownload);
 }
 
 void AutoUpdateSys::_loadAllUpdateFile()
@@ -351,31 +352,36 @@ void AutoUpdateSys::_loadOneUpdateFile(std::string path, FileVerInfo* fileInfo)
 
 void AutoUpdateSys::onLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
 {
+	std::string refPath;
+
 	this->mFileGroup->incCurNum();
 
 	AuxDownloader* downloader = (AuxDownloader*)dispObj;
 
-	if (downloader.hasSuccessLoaded())
+	if (downloader->hasSuccessLoaded())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log(UtilStr::Format("AutoUpdateSys::onLoadEventHandle, success, CurIndex = {0}, path = {1}", this->mFileGroup->getCurNum(), downloader->getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
-		this->mFileGroup->addLoadedPath(downloader->getOrigPath());
+		refPath = downloader->getOrigPath();
+		this->mFileGroup->addLoadedPath(refPath);
 	}
-	else if (downloader.hasFailed())
+	else if (downloader->hasFailed())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log(UtilStr::Format("AutoUpdateSys::onLoadEventHandle, fail, CurNum = {0}, path = {1}", this->mFileGroup->getCurNum(), downloader->getOrigPath()), LogTypeId::eLogAutoUpdate);
 		}
 
-		this->mFileGroup->addFailedPath(downloader->getOrigPath());
+		refPath = downloader->getOrigPath();
+		this->mFileGroup->addFailedPath(refPath);
 	}
 
-	this->mFileGroup->removeLoadingPath(downloader->getOrigPath());
-	this->checkUpdateEnd();
+	refPath = downloader->getOrigPath();
+	this->mFileGroup->removeLoadingPath(refPath);
+	this->_checkUpdateEnd();
 
 	downloader->dispose();
 }

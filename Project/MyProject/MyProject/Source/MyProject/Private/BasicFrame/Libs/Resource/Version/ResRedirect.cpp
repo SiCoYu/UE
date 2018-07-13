@@ -4,6 +4,11 @@
 #include "ResRedirectItem.h"
 #include "VersionInc.h"
 #include "MyMemoryInc.h"
+#include "MacroDef.h"
+#include "UtilStr.h"
+#include "FileVerInfo.h"
+#include "LocalVer.h"
+#include "LogInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -79,7 +84,7 @@ ResRedirectItem* ResRedirect::getResRedirectItem(std::string origPath, bool isAB
 		}
 	}
 
-	if (nullptr == item.mFileVerInfo)
+	if (nullptr == item->mFileVerInfo)
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
@@ -99,7 +104,7 @@ ResRedirectItem* ResRedirect::getResRedirectItem(std::string origPath, bool isAB
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("ResRedirectItem::getResRedirectItem, find load item, origPath = {0}, mResLoadType = {1}", origPath, item.mResLoadType), LogTypeId::eLogResLoader);
+			GLogSys->log(UtilStr::Format("ResRedirectItem::getResRedirectItem, find load item, origPath = {0}, mResLoadType = {1}", origPath, item->mResLoadType), LogTypeId::eLogResLoader);
 		}
 	}
 

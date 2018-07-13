@@ -1,6 +1,7 @@
 #ifndef __UtilSysLibWrap_H
 #define __UtilSysLibWrap_H
 
+#include <string>
 #include "UObject/NameTypes.h"	// FName
 #include "UObject/ScriptDelegates.h"	// TScriptDelegate
 #include "UObject/WeakObjectPtr.h"	// FWeakObjectPtr
@@ -25,6 +26,8 @@ public:
 
 	static void Destroy(AActor* actor, bool bNetForce = false, bool bShouldModifyLevel = true);
 	static void DestroyImmediate(AActor* actor, bool bNetForce = false, bool bShouldModifyLevel = true);
+
+	static std::string getRandomVersion();
 };
 
 MY_END_NAMESPACE

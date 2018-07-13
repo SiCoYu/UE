@@ -6,7 +6,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 char Symbolic::CR = '\r';  // 13
 char Symbolic::LF = '\n';  // 10
 
-std::string CR_LF = "\n";       // �س����У� Mac ���漴ʹд�� "\r\n"����ȡ������Ҳֻ�� "\n"��������� Windows ��Ҳֻд�� "\n"�������� "\r\n"
-std::string SEPARATOR = "=";    // �ָ���
+std::string CR_LF = "\n";       // 回车换行， Mac 下面即使写入 "\r\n"，读取出来后，也只有 "\n"，因此这里 Windows 下也只写入 "\n"，而不是 "\r\n"
+std::string SEPARATOR = "=";    // 分隔符
 
 MY_END_NAMESPACE

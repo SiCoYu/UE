@@ -28,7 +28,7 @@ public:
     // 资源是否可以重定向，只有在 Version_S.txt 或者在 Version_P.txt 中的资源才能判断是存在的
 	bool canResRedirect(std::string origPath, bool isABAsset);
     // isABAsset 是否是 AssetBundles 资源目录
-	ResRedirectItem getResRedirectItem(std::string origPath, bool isABAsset);
+	ResRedirectItem* getResRedirectItem(std::string origPath, bool isABAsset);
 };
 
 MY_END_NAMESPACE

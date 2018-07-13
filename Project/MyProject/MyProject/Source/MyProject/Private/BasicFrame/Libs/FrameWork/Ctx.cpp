@@ -39,7 +39,7 @@
 #include "MsgRouteNotify.h"
 #include "GlobalDelegate.h"
 #include "GlobalEventCmd.h"
-#include "ResRedirectItem.h"
+#include "ResRedirect.h"
 #include "VersionSys.h"
 #include "AutoClearSys.h"
 
@@ -161,7 +161,7 @@ void Ctx::construct()
 	this->mMsgRouteNotify = MySharedPtr<MsgRouteNotify>(MY_NEW MsgRouteNotify());
 	this->mGlobalDelegate = MySharedPtr<GlobalDelegate>(MY_NEW GlobalDelegate());
 	this->mGlobalEventCmd = MySharedPtr<GlobalEventCmd>(MY_NEW GlobalEventCmd());
-	this->mResRedirectItem = MySharedPtr<ResRedirectItem>(MY_NEW ResRedirectItem());
+	this->mResRedirect = MySharedPtr<ResRedirect>(MY_NEW ResRedirect());
 	this->mVersionSys = MySharedPtr<VersionSys>(MY_NEW VersionSys());
 	this->mAutoClearSys = MySharedPtr<AutoClearSys>(MY_NEW AutoClearSys());
 
@@ -212,7 +212,7 @@ void Ctx::_execInit()
 	this->mMsgRouteNotify->init();
 	this->mGlobalDelegate->init();
 	this->mGlobalEventCmd->init();
-	this->mResRedirectItem->init();
+	this->mResRedirect->init();
 	this->mVersionSys->init();
 	this->mAutoClearSys->init();
 
@@ -281,7 +281,7 @@ void Ctx::_preDispose()
 	this->mMsgRouteNotify->dispose();
 	this->mGlobalDelegate->dispose();
 	this->mGlobalEventCmd->dispose();
-	this->mResRedirectItem->dispose();
+	this->mResRedirect->dispose();
 	this->mVersionSys->dispose();
 	this->mAutoClearSys->dispose();
 
@@ -339,7 +339,7 @@ void Ctx::_execDispose()
 	this->mMsgRouteNotify.setNull();
 	this->mGlobalDelegate.setNull();
 	this->mGlobalEventCmd.setNull();
-	this->mResRedirectItem.setNull();
+	this->mResRedirect.setNull();
 	this->mVersionSys.setNull();
 	this->mAutoClearSys.setNull();
 
@@ -601,9 +601,9 @@ MySharedPtr<GlobalEventCmd> Ctx::getGlobalEventCmd()
 	return this->mGlobalEventCmd;
 }
 
-MySharedPtr<ResRedirectItem> Ctx::getResRedirectItem()
+MySharedPtr<ResRedirect> Ctx::getResRedirect()
 {
-	return this->mResRedirectItem;
+	return this->mResRedirect;
 }
 
 MySharedPtr<VersionSys> Ctx::getVersionSys()

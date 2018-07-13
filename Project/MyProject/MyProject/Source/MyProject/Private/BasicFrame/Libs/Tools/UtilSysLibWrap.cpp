@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "UtilSysLibWrap.h"
+#include <ctime>
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -37,6 +38,15 @@ void UtilSysLibWrap::DestroyImmediate(AActor* actor, bool bNetForce, bool bShoul
 	{
 		actor->Destroy(bNetForce, bShouldModifyLevel);
 	}
+}
+
+std::string UtilSysLibWrap::getRandomVersion()
+{
+	std::string ret = "";
+
+	ret = ctime(time(NULL));
+
+	return ret;
 }
 
 MY_END_NAMESPACE

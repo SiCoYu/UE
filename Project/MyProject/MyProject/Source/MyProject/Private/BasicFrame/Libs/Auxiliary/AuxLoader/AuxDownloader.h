@@ -30,7 +30,8 @@ public:
 	// 下载一个资源
 	virtual void download(
 		std::string origPath, 
-		EventDispatchDelegate dispObj = EventDispatchDelegate(),
+		EventDispatchDelegate loadHandle = EventDispatchDelegate(),
+		EventDispatchDelegate progressHandle = EventDispatchDelegate(),
 		long fileLen = 0, 
 		bool isWriteFile = true, 
 		int downloadType = (int)DownloadType::eHttpWeb

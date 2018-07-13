@@ -4,8 +4,8 @@
 #include "AddOnceAndCallOnceEventDispatch.h"
 #include "UtilStr.h"
 #include "MacroDef.h"
-#include "MyMemory.h"
-#include "DataStream.h"
+#include "MyMemoryInc.h"
+#include "MDataStream.h"
 #include "SafePointer.h"
 #include <vector>
 

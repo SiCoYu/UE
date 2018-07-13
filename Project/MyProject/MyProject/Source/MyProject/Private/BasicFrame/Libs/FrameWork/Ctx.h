@@ -55,7 +55,7 @@ class InputMgr;
 class MsgRouteNotify;
 class GlobalDelegate;
 class GlobalEventCmd;
-class ResRedirectItem;
+class ResRedirect;
 class VersionSys;
 class AutoClearSys;
 
@@ -110,7 +110,7 @@ protected:
 	MySharedPtr<MsgRouteNotify> mMsgRouteNotify;
 	MySharedPtr<GlobalDelegate> mGlobalDelegate;
 	MySharedPtr<GlobalEventCmd> mGlobalEventCmd;
-	MySharedPtr<ResRedirectItem> mResRedirectItem;
+	MySharedPtr<ResRedirect> mResRedirect;
 	MySharedPtr<VersionSys> mVersionSys;
 	MySharedPtr<AutoClearSys> mAutoClearSys;
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
@@ -185,7 +185,7 @@ public:
 	MySharedPtr<MsgRouteNotify> getMsgRouteNotify();
 	MySharedPtr<GlobalDelegate> getGlobalDelegate();
 	MySharedPtr<GlobalEventCmd> getGlobalEventCmd();
-	MySharedPtr<ResRedirectItem> getResRedirectItem();
+	MySharedPtr<ResRedirect> getResRedirect();
 	MySharedPtr<VersionSys> getVersionSys();
 	MySharedPtr<AutoClearSys> getAutoClearSys();
 
@@ -245,7 +245,7 @@ public:
 #define GMsgRouteNotify GCtx->getMsgRouteNotify()
 #define GGlobalDelegate GCtx->getGlobalDelegate()
 #define GGlobalEventCmd GCtx->getGlobalEventCmd()
-#define GResRedirectItem GCtx->getResRedirectItem()
+#define GResRedirect GCtx->getResRedirect()
 #define GVersionSys GCtx->getVersionSys()
 
 #define GBPCtx GCtx->getBPCtx()

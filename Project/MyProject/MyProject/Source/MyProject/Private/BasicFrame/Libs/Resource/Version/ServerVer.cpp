@@ -11,6 +11,9 @@
 #include "UtilStr.h"
 #include "MFileSys.h"
 #include "MDataStream.h"
+#include "EventDispatchDelegate.h"
+#include "DownloadType.h"
+#include "FileVerInfo.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -28,17 +31,19 @@ void ServerVer::loadMiniVerFile()
 {
 	if (MacroDef::ENABLE_LOG)
 	{
-		GLogSys.log("ServerVer::loadMiniVerFile", LogTypeId::eLogAutoUpdate);
+		GLogSys->log("ServerVer::loadMiniVerFile", LogTypeId::eLogAutoUpdate);
 	}
 
 	AuxDownloader* auxDownload = MY_NEW AuxDownloader();
 	auxDownload->setVersion(UtilSysLibWrap::getRandomVersion());
 	auxDownload->download(
 		VerFileName::VER_MINI,
-		nullptr,
-		this->onMiniLoadEventHandle,
-		nullptr,
-		nullptr,
+		MakeEventDispatchDelegate(
+			this,
+			&ServerVer::onMiniLoadEventHandle,
+			(uint)0
+		),
+		EventDispatchDelegate(),
 		0,
 		false,
 		(int)DownloadType::eWebRequest
@@ -46,7 +51,7 @@ void ServerVer::loadMiniVerFile()
 }
 
 // 加载一个表完成
-void ServerVer::_onMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj)
+void ServerVer::onMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -70,7 +75,8 @@ void ServerVer::_onMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 			//byte[] outBytes = nullptr;
 			//uint outLen = 0;
 			//MLzma.DecompressStrLZMA(textAsset, (uint)textAsset.Length, ref outBytes, ref outLen);
-			this->parseMiniFile(System.Text.Encoding.UTF8.GetString(textAsset));
+			//this->parseMiniFile(System.Text.Encoding.UTF8.GetString(textAsset));
+			this->parseMiniFile(textAsset);
 		}
 
 		this->mIsMiniLoadSuccess = true;
@@ -113,7 +119,7 @@ void ServerVer::loadVerFile()
 }
 
 // 加载一个表完成
-void ServerVer::_onVerLoadEventHandle(uint eventId, IDispatchObject* dispObj)
+void ServerVer::onVerLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -133,7 +139,8 @@ void ServerVer::_onVerLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 
 		if (textAsset != nullptr)
 		{
-			this->loadFormText(System.Text.Encoding.UTF8.GetString(textAsset), this->mPath2HashDic, this->mABPath2HashDic);
+			//this->loadFormText(System.Text.Encoding.UTF8.GetString(textAsset), this->mPath2HashDic, this->mABPath2HashDic);
+			this->loadFormText(textAsset, this->mPath2HashDic, this->mABPath2HashDic);
 		}
 
 		this->mIsVerLoadSuccess = true;
@@ -165,7 +172,7 @@ void ServerVer::savePVerToPersistentPath()
 		UtilFileIO::deleteFile(path);
 	}
 
-	MDataStream* dataStream = MY_NEW MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
+	MDataStream* dataStream = MY_NEW MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess::eWrite);
 	dataStream->open();
 
 	std::string line = "";

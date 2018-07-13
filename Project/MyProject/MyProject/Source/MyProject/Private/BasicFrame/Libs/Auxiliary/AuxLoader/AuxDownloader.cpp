@@ -22,7 +22,8 @@ char* AuxDownloader::getBytes()
 // 下载一个资源
 void AuxDownloader::download(
 	std::string origPath, 
-	EventDispatchDelegate dispObj, 
+	EventDispatchDelegate loadHandle,
+	EventDispatchDelegate progressHandle,
 	long fileLen, 
 	bool isWriteFile, 
 	int downloadType
@@ -30,7 +31,7 @@ void AuxDownloader::download(
 {
 	Super::download(
 		origPath, 
-		dispObj, 
+		loadHandle,
 		fileLen, 
 		isWriteFile, 
 		downloadType

@@ -169,7 +169,7 @@ std::string FileGroup::getProgressDesc()
 {
 	std::string ret = "";
 
-	ret = UtilStr::Format("{0}M/{1}M", UtilMath::integerWithFract((float)this->mCurMemSize / UtilMath::OneM, 2), UtilMath::integerWithFract((float)this->mTotalMemSize / UtilMath.OneM, 2));
+	ret = UtilStr::Format("{0}M/{1}M", UtilMath::integerWithFract((float)this->mCurMemSize / UtilMath::OneM, 2), UtilMath::integerWithFract((float)this->mTotalMemSize / UtilMath::OneM, 2));
 
 	return ret;
 }
