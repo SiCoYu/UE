@@ -12,15 +12,17 @@ class TestSocket;
 class TestUi;
 class TestDownload;
 class TestLuaBind;
+class TestPak;
 
 class TestMain : public GObject
 {
 public:
 	TestExtern* mTestExtern;
 	TestSocket* mTestSocket;
-	TestUi* mTestUI;
+	TestUi* mTestUi;
 	TestDownload* mTestDownload;
 	TestLuaBind* mTestLuaBind;
+	TestPak* mTestPak;
 
 public:
 	TestMain();

@@ -2,7 +2,8 @@
 #include "TestMain.h"
 #include "TestExtern.h"
 #include "TestSocket.h"
-#include "TestUI.h"
+#include "TestUi.h"
+#include "TestPak.h"
 
 //#include "gtest/gtest.h"
 #include "GrobalEvent.h"
@@ -32,9 +33,10 @@ TestMain::TestMain()
 
 #endif	// USE_EXTERN_THREAD
 
-	this->mTestUI = MY_NEW TestUi();
+	this->mTestUi = MY_NEW TestUi();
 	this->mTestDownload = MY_NEW TestDownload();
 	this->mTestLuaBind = MY_NEW TestLuaBind();
+	this->mTestPak = MY_NEW TestPak();
 }
 
 TestMain::~TestMain()
@@ -50,7 +52,7 @@ void TestMain::init()
 void TestMain::dispose()
 {
 	MY_SAFE_DISPOSE(this->mTestExtern);
-	MY_SAFE_DISPOSE(this->mTestUI);
+	MY_SAFE_DISPOSE(this->mTestUi);
 	MY_SAFE_DISPOSE(this->mTestDownload);
 	MY_SAFE_DISPOSE(this->mTestLuaBind);
 }
@@ -70,7 +72,8 @@ void TestMain::runTest()
 
 	//this->mTestUI->run()
 	//this->mTestDownload->run();
-	this->mTestLuaBind->run();
+	//this->mTestLuaBind->run();
+	this->mTestPak->run();
 }
 
 MY_END_NAMESPACE
