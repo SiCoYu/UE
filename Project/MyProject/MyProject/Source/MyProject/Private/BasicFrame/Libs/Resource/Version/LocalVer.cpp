@@ -11,6 +11,9 @@
 #include "LogInc.h"
 #include "VerFileName.h"
 #include "MiscInc.h"
+#include "MacroDef.h"
+#include "EventDispatchDelegate.h"
+#include "MiscInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -83,8 +86,18 @@ void LocalVer::loadStreamingAssetsMiniVerFile()
 	this->mIsMiniLoaded = false;     // 重新设置成 false ，防止后面的因为异步加载完成后，再调用一次的时候，会调用外面两次
 
 	//this->mMiniDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_MINI), this->onMiniLoadEventHandle);
-	this->mMiniDataStream = MY_NEW MDataStream(UtilFileIO::combine(MFileSys::msDataStreamStreamingAssetsPath, VerFileName::VER_MINI), this->onStreamingMiniLoadEventHandle);
-	this->mMiniDataStream.open();
+	this->mMiniDataStream = MY_NEW MDataStream(
+		UtilFileIO::combine(
+			MFileSys::msDataStreamStreamingAssetsPath, 
+			VerFileName::VER_MINI
+		), 
+		MakeEventDispatchDelegate(
+			this, 
+			&LocalVer::onStreamingMiniLoadEventHandle, 
+			(uint)0
+		)
+	);
+	this->mMiniDataStream->open();
 }
 
 void LocalVer::loadPersistentMiniVerFile()
@@ -95,18 +108,28 @@ void LocalVer::loadPersistentMiniVerFile()
 	}
 
 	// 先从 PersistentPath 目录下读取,各个平台都可以同步读取
-	this->mMiniDataStream = MY_NEW MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_MINI), this->onPersistentMiniLoadEventHandle);
+	this->mMiniDataStream = MY_NEW MDataStream(
+		UtilFileIO::combine(
+			MFileSys::msDataStreamPersistentDataPath, 
+			VerFileName::VER_MINI
+		), 
+		MakeEventDispatchDelegate(
+			this,
+			&LocalVer::onPersistentMiniLoadEventHandle,
+			(uint)0
+		)
+	);
 	this->mMiniDataStream->open();
 }
 
-void LocalVer::onStreamingMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
+void LocalVer::onStreamingMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::onStreamingMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->onMiniLoadEventHandle(dispObj, 0);
+	this->onMiniLoadEventHandle(0, dispObj);
 
 	this->mInstallMajorVersion = this->mMajorVersion;
 	this->mInstallMinorVersion = this->mMinorVersion;
@@ -118,21 +141,21 @@ void LocalVer::onStreamingMiniLoadEventHandle(IDispatchObject dispObj, uint uniq
 	this->loadPersistentMiniVerFile();
 }
 
-void LocalVer::onPersistentMiniLoadEventHandle(IDispatchObject* dispObj, uint uniqueId)
+void LocalVer::onPersistentMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
 		GLogSys->log("LocalVer::onPersistentMiniLoadEventHandle", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->onMiniLoadEventHandle(dispObj, 0);
+	this->onMiniLoadEventHandle(0, dispObj);
 
 	// 设置本地加载完成标志
 	this->mIsMiniLoaded = true;
-	this->onAllVerLoaded();
+	this->_onAllVerLoaded();
 }
 
-void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
+void LocalVer::onMiniLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 {
 	if (MacroDef::ENABLE_LOG)
 	{
@@ -141,17 +164,17 @@ void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 
 	this->mMiniDataStream = (MDataStream*)dispObj;
 
-	if (this->mMiniDataStream.isValid())
+	if (this->mMiniDataStream->isValid())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("LocalVer::onMiniLoadEventHandle, success", LogTypeId::eLogAutoUpdate);
 		}
 
-		this->parseMiniFile(this->mMiniDataStream.readText());
+		this->parseMiniFile(this->mMiniDataStream->readText());
 	}
 
-	this->mMiniDataStream.dispose();
+	this->mMiniDataStream->dispose();
 	this->mMiniDataStream = nullptr;
 
 	//this->mMiniLoadedDispatch->dispatchEvent(nullptr);
@@ -163,23 +186,34 @@ void LocalVer::onMiniLoadEventHandle(IDispatchObject dispObj, uint uniqueId)
 // 加载 Resources 文件夹下文件对应的版本系统，目前没有了
 void LocalVer::loadLocalRVer()
 {
-	this->mRDataStream = MY_NEW MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_R), onRVerLoaded);
+	this->mRDataStream = MY_NEW MDataStream(
+		UtilFileIO::combine(
+			MFileSys::msDataStreamResourcesPath, 
+			"Constant", 
+			VerFileName::VER_R
+		), 
+		MakeEventDispatchDelegate(
+			this,
+			&LocalVer::onRVerLoaded,
+			(uint)0
+		)
+	);
 	this->mRDataStream->open();
 }
 
-void LocalVer::onRVerLoaded(IDispatchObject* dispObj, uint uniqueId)
+void LocalVer::onRVerLoaded(uint eventId, IDispatchObject* dispObj)
 {
 	this->mRDataStream = (MDataStream*)dispObj;
 
 	if (this->mRDataStream->isValid())
 	{
-		this->loadFormText(this->mRDataStream.readText(), this->mPath2Ver_R_Dic, this->mABPath2Ver_R_Dic);
+		this->_loadFormText(this->mRDataStream.readText(), this->mPath2Ver_R_Dic, this->mABPath2Ver_R_Dic);
 	}
 
 	this->mRDataStream->dispose();
 	this->mRDataStream = nullptr;
 
-	this->onAllVerLoaded();
+	this->_onAllVerLoaded();
 }
 
 // Android 下 StreamingAssets 目录访问只能是异步的，因此需要等待这个访问完成才行
@@ -194,7 +228,14 @@ void LocalVer::loadLocalSVer()
 
 	// 不要从 StreamingAssets 这个目录下加载 VerFileName::VER_S ，因为在 Android 上是异步加载的，因此直接放在 Resources 目录下，但是现在是不再向 Resources 目录下，本地都放在 StreamingAssets 目录
 
-	this->mSDataStream = MY_NEW MDataStream(path, this->onSVerLoaded);
+	this->mSDataStream = MY_NEW MDataStream(
+		path, 
+		MakeEventDispatchDelegate(
+			this,
+			&LocalVer::onSVerLoaded,
+			(uint)0
+		)
+	);
 	//this->mSDataStream = new MDataStream(UtilFileIO::combine(MFileSys::msDataStreamResourcesPath, "Constant", VerFileName::VER_S), this->onSVerLoaded);
 	this->mSDataStream->open();
 }
@@ -210,7 +251,7 @@ void LocalVer::onSVerLoaded(uint eventId, IDispatchObject* dispObj)
 
 	if (this->mSDataStream->isValid())
 	{
-		std::string text = this->mSDataStream.readText();
+		std::string text = this->mSDataStream->readText();
 
 		if (MacroDef::ENABLE_LOG)
 		{
@@ -218,14 +259,14 @@ void LocalVer::onSVerLoaded(uint eventId, IDispatchObject* dispObj)
 		}
 
 		//this->mSDataStream.seek(0, MSeekOrigin.eBegin);
-		this->loadFormText(text, this->mPath2Ver_S_Dic, this->mABPath2Ver_S_Dic);
+		this->_loadFormText(text, this->mPath2Ver_S_Dic, this->mABPath2Ver_S_Dic);
 	}
 
 	this->mSDataStream->dispose();
 	this->mSDataStream = nullptr;
 
 	this->mIsVerSLoaded = true;
-	this->onAllVerLoaded();
+	this->_onAllVerLoaded();
 }
 
 void LocalVer::loadLocalPVer()
@@ -235,7 +276,17 @@ void LocalVer::loadLocalPVer()
 		GLogSys->log("LocalVer::loadLocalPVer", LogTypeId::eLogAutoUpdate);
 	}
 
-	this->mPDataStream = MY_NEW MDataStream(UtilFileIO::combine(MFileSys::msDataStreamPersistentDataPath, VerFileName::VER_P), this->onPVerLoaded);
+	this->mPDataStream = MY_NEW MDataStream(
+		UtilFileIO::combine(
+			MFileSys::msDataStreamPersistentDataPath, 
+			VerFileName::VER_P
+		), 
+		MakeEventDispatchDelegate(
+			this,
+			&LocalVer::onPVerLoaded,
+			(uint)0
+		)
+	);
 	this->mPDataStream->open();
 }
 
@@ -248,33 +299,33 @@ void LocalVer::onPVerLoaded(uint eventId, IDispatchObject* dispObj)
 
 	this->mPDataStream = (MDataStream*)dispObj;
 
-	if (this->mPDataStream.isValid())
+	if (this->mPDataStream->isValid())
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
 			GLogSys->log("LocalVer::onPVerLoaded, success", LogTypeId::eLogAutoUpdate);
 		}
 
-		this->loadFormText(this->mPDataStream.readText(), this->mPath2Ver_P_Dic, this->mABPath2Ver_P_Dic);
+		this->_loadFormText(this->mPDataStream.readText(), this->mPath2Ver_P_Dic, this->mABPath2Ver_P_Dic);
 	}
 
 	this->mPDataStream->dispose();
 	this->mPDataStream = nullptr;
 
 	this->mIsVerPLoaded = true;
-	this->onAllVerLoaded();
+	this->_onAllVerLoaded();
 }
 
-void LocalVer::onAllVerLoaded()
+void LocalVer::_onAllVerLoaded()
 {
 	if (this->mIsMiniLoaded && this->mIsVerSLoaded && this->mIsVerPLoaded)
 	{
 		this->mLoadedDispatch->dispatchEvent(nullptr);
-		Ctx.msInstance.setIsLocalVerLoaded(true);
+		//Ctx.msInstance.setIsLocalVerLoaded(true);
 	}
 }
 
-int LocalVer::getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bool isABAsset)
+int LocalVer::_getFileVerInfo(std::string& origPath, FileVerInfo* fileVerInfo, bool isABAsset)
 {
 	// 在 Resources 中资源是大写，在 AssetBundles 中包含的资源名字是小写，但是 StreamingAssets 或者 Persistent 中不是 AssetBundles 形式的资源，仍然是大写
 	std::string lowerOrigPath = origPath.ToLower();
@@ -353,7 +404,7 @@ void LocalVer::analyzeHash(
 		fileVerInfo = srcFileVerInfo;
 		resLoadType = defaultResLoadType;
 	}
-	else if (string.IsNullOrEmpty(md5))     // 如果没有 md5 ，就返回 srcFileVerInfo
+	else if (UtilStr::IsNullOrEmpty(md5))     // 如果没有 md5 ，就返回 srcFileVerInfo
 	{
 		fileVerInfo = srcFileVerInfo;
 		md5 = fileVerInfo->mFileMd5;

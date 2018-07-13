@@ -1,6 +1,8 @@
 #include "MyProject.h"
 #include "UtilStr.h"
 #include "Symbolic.h"
+#include <cctype>		// tolower
+#include <algorithm>	// transform
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -187,7 +189,7 @@ void UtilStr::split(std::string& s, std::string& delim, std::vector< std::string
 	}
 }
 
-static public void removeLastCR(std::string& srcStr)
+void UtilStr::removeLastCR(std::string& srcStr)
 {
 	if (!UtilStr::IsNullOrEmpty(srcStr))
 	{
@@ -196,6 +198,16 @@ static public void removeLastCR(std::string& srcStr)
 			srcStr = srcStr.substr(0, srcStr.length() - 1);
 		}
 	}
+}
+
+void UtilStr::toLower(std::string& str)
+{
+	transform(str.begin(), str.end(), str.begin(), ::tolower);
+}
+
+void UtilStr::toUpper(std::string& str)
+{
+	transform(str.begin(), str.end(), str.begin(), ::toupper);
 }
 
 MY_END_NAMESPACE
