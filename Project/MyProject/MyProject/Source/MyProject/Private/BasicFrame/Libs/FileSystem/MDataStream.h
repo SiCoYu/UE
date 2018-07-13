@@ -47,6 +47,8 @@ public:
 	MDataStream(std::string filePath, EventDispatchDelegate openedDisp = EventDispatchDelegate(), MFileMode mode = MFileMode::eOpen, MFileAccess access = MFileAccess::eRead, bool isSyncMode = true);
 
 public:
+	void open();
+
 	void seek(long offset, MSeekOrigin origin);
 	void addOpenedHandle(EventDispatchDelegate openedDisp = EventDispatchDelegate());
 	void dispose();

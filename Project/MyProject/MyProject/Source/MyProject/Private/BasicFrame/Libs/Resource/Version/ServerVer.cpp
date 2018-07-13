@@ -111,7 +111,7 @@ void ServerVer::loadVerFile()
 		VerFileName::VER_P,
 		MakeEventDispatchDelegate(
 			this, 
-			this->onVerLoadEventHandle, 
+			&ServerVer::onVerLoadEventHandle,
 			(uint)0
 		),
 		EventDispatchDelegate(),
@@ -143,7 +143,7 @@ void ServerVer::onVerLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 		if (textAsset != nullptr)
 		{
 			//this->loadFormText(System.Text.Encoding.UTF8.GetString(textAsset), this->mPath2HashDic, this->mABPath2HashDic);
-			this->loadFormText(textAsset, this->mPath2HashDic, this->mABPath2HashDic);
+			this->_loadFormText(textAsset, this->mPath2HashDic, this->mABPath2HashDic);
 		}
 
 		this->mIsVerLoadSuccess = true;
@@ -175,7 +175,7 @@ void ServerVer::savePVerToPersistentPath()
 		UtilFileIO::deleteFile(path);
 	}
 
-	MDataStream* dataStream = MY_NEW MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess::eWrite);
+	MDataStream* dataStream = MY_NEW MDataStream(path, EventDispatchDelegate(), MFileMode::eCreateNew, MFileAccess::eWrite);
 	dataStream->open();
 
 	std::string line = "";

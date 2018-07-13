@@ -19,6 +19,11 @@ MDataStream::MDataStream(std::string filePath, EventDispatchDelegate openedDisp,
 	this->checkAndOpen(openedDisp);
 }
 
+void MDataStream::open()
+{
+
+}
+
 void MDataStream::seek(long offset, MSeekOrigin origin)
 {
     if(this->mFileOpState == FileOpState::eOpenSuccess)

@@ -3,6 +3,16 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+void FileVerInfo::init()
+{
+
+}
+
+void FileVerInfo::dispose()
+{
+
+}
+
 bool FileVerInfo::isNoVerInfo()
 {
 	return this->mFileSize == 0;

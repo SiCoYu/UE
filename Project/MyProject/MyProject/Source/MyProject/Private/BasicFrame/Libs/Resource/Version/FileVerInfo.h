@@ -15,6 +15,9 @@ public:
     int mFileSize;      // 文件大小
 
 public:
+	void init();
+	void dispose();
+
 	bool isNoVerInfo();
 };
 

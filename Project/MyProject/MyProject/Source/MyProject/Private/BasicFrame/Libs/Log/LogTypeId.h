@@ -13,6 +13,7 @@ enum class LogTypeId
 	eLogDownload,		// обть
 	eLogAutoUpdate,
 	eLogResLoader,
+	eErrorDownload,
 };
 
 MY_END_NAMESPACE

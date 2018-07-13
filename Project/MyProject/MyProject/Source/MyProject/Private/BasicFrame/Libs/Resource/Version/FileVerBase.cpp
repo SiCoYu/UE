@@ -10,6 +10,8 @@
 #include <vector>
 #include "VerFileName.h"
 #include "Symbolic.h"
+#include "MFileSys.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -78,7 +80,7 @@ void FileVerBase::saveMiniVerToPersistentPath()
 			UtilFileIO::deleteFile(path);
 		}
 
-		MDataStream* dataStream = MY_NEW MDataStream(path, nullptr, MFileMode::eCreateNew, MFileAccess.eWrite);
+		MDataStream* dataStream = MY_NEW MDataStream(path, EventDispatchDelegate(), MFileMode::eCreateNew, MFileAccess::eWrite);
 		dataStream->open();
 
 		std::string line = UtilStr::Format("Version={0}", this->mCurVer);
@@ -155,7 +157,7 @@ void FileVerBase::parseMiniFile(std::string text)
 			this->mFileVerInfo->mResUniqueId = equalList[1];
 			this->mFileVerInfo->mLoadPath = equalList[2];
 			this->mFileVerInfo->mFileMd5 = equalList[3];
-			this->mFileVerInfo->mFileSize = Int32.Parse(equalList[4]);
+			this->mFileVerInfo->mFileSize = UtilConvert.convStr2Int(equalList[4]);
 		}
 		else
 		{
@@ -177,10 +179,10 @@ void FileVerBase::parseMiniFile(std::string text)
 // 这个主要是解析版本文件的
 void FileVerBase::_loadFormText(std::string text, MDictionary<std::string, FileVerInfo*>& dic, MDictionary<std::string, FileVerInfo*>& abDic)
 {
-	std::string lineSplitStr = UtilEngineWrap::CR_LF;
-	std::string equalSplitStr = UtilEngineWrap::SEPARATOR;
+	std::string lineSplitStr = Symbolic::CR_LF;
+	std::string equalSplitStr = Symbolic::SEPARATOR;
 	std::vector<std::string> lineList;
-	UtilStr::split(text, lineSplitStr, &lineList)
+	UtilStr::split(text, lineSplitStr, &lineList);
 
 	int lineIdx = 0;
 	std::vector<std::string> equalList;
@@ -196,18 +198,18 @@ void FileVerBase::_loadFormText(std::string text, MDictionary<std::string, FileV
 		{
 			fileInfo = MY_NEW FileVerInfo();
 
-			fileInfo.mOrigPath = equalList[0];
-			fileInfo.mResUniqueId = equalList[1];
-			fileInfo.mLoadPath = equalList[2];
-			fileInfo.mFileMd5 = equalList[3];
-			fileInfo.mFileSize = UtilConvert::convStr2Int(equalList[4]);
+			fileInfo->mOrigPath = equalList[0];
+			fileInfo->mResUniqueId = equalList[1];
+			fileInfo->mLoadPath = equalList[2];
+			fileInfo->mFileMd5 = equalList[3];
+			fileInfo->mFileSize = UtilConvert::convStr2Int(equalList[4]);
 
-			//dic[fileInfo.mResUniqueId] = fileInfo;
-			dic[fileInfo.mOrigPath] = fileInfo;
+			//dic[fileInfo->mResUniqueId] = fileInfo;
+			dic[fileInfo->mOrigPath] = fileInfo;
 
-			if (nullptr != abDic && !abDic.containsKey(fileInfo.mLoadPath))
+			if (nullptr != abDic && !abDic.containsKey(fileInfo->mLoadPath))
 			{
-				abDic[fileInfo.mLoadPath] = fileInfo;
+				abDic[fileInfo->mLoadPath] = fileInfo;
 			}
 		}
 		else
@@ -224,52 +226,52 @@ void FileVerBase::_loadFormText(std::string text, MDictionary<std::string, FileV
 	int index = 0;
 	int listLen = 0;
 
-	if (nullptr != lineSplitStr)
+	if (!UtilStr::IsNullOrEmpty(lineSplitStr))
 	{
 		index = 0;
-		listLen = lineSplitStr.Length;
+		listLen = lineSplitStr.length();
 
 		while (index < listLen)
 		{
-			lineSplitStr[index] = nullptr;
+			lineSplitStr[index] = '\0';
 			index += 1;
 		}
 
 		lineSplitStr = nullptr;
 	}
 
-	if (nullptr != equalSplitStr)
+	if (!UtilStr::IsNullOrEmpty(equalSplitStr))
 	{
 		index = 0;
 		listLen = equalSplitStr.Length;
 
 		while (index < listLen)
 		{
-			equalSplitStr[index] = nullptr;
+			equalSplitStr[index] = '\0';
 			index += 1;
 		}
 
 		equalSplitStr = nullptr;
 	}
 
-	if (nullptr != lineList)
+	if (lineList.size() > 0)
 	{
 		index = 0;
-		listLen = lineList.Length;
+		listLen = lineList.size();
 
 		while (index < listLen)
 		{
-			lineList[index] = nullptr;
+			lineList[index] = "";
 			index += 1;
 		}
 
-		lineList = nullptr;
+		lineList.clear();
 	}
 
-	if (nullptr != equalList)
+	if (equalList.size() > 0)
 	{
 		index = 0;
-		listLen = equalList.Length;
+		listLen = equalList.size();
 
 		while (index < listLen)
 		{
@@ -277,7 +279,7 @@ void FileVerBase::_loadFormText(std::string text, MDictionary<std::string, FileV
 			index += 1;
 		}
 
-		equalList = nullptr;
+		equalList.clear();
 	}
 
 	MY_SAFE_DISPOSE(fileInfo);

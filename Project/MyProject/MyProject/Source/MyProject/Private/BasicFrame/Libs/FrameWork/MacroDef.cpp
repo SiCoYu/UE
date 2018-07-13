@@ -4,6 +4,7 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 bool MacroDef::ENABLE_LOG = false;
+bool MacroDef::ENABLE_ERROR = false;
 bool MacroDef::DEBUG_SYS = false;
 bool MacroDef::XZ_MODE = true;
 bool MacroDef::XY_MODE = true;
