@@ -54,7 +54,7 @@ void AuxMObjectLoaderBase::dispose()
 	{
 		if (this->mSelfActor != nullptr)
 		{
-			UtilSysLibWrap::DestroyImmediate(Cast<AActor>(this->mSelfActor));
+			UtilEngineWrap::DestroyImmediate(Cast<AActor>(this->mSelfActor));
 		}
 	}
 

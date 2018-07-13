@@ -15,6 +15,7 @@
 #include "DownloadType.h"
 #include "FileVerInfo.h"
 #include "AddOnceAndCallOnceEventDispatch.h"
+#include "UtilFileIO.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

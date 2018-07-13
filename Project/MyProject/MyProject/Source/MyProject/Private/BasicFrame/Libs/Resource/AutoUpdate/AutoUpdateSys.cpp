@@ -21,6 +21,7 @@
 #include "MFileSys.h"
 #include "DownloadType.h"
 #include "UiBaseInc.h"
+#include "UtilFileIO.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 

@@ -1,4 +1,4 @@
-#ifndef __UtilPath_H
+#ifndef __UtilFileIO_H
 #error "UtilFileIO.inl file can only include in UtilFileIO.h"
 #endif
 

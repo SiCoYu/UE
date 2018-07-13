@@ -116,7 +116,7 @@ void FileVerBase::parseMiniFile(std::string text)
 
 			std::string verSplitStr = "&" ;
 			std::vector<std::string> verStrList;
-			UtilStr::split(this->mCurVer, verSplitStr, &verStrList)
+			UtilStr::split(this->mCurVer, verSplitStr, &verStrList);
 
 			if (verStrList.size() == 4)
 			{

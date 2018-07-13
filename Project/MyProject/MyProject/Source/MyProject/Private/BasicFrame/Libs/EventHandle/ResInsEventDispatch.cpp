@@ -40,7 +40,7 @@ void ResInsEventDispatch::dispatchEvent(IDispatchObject* dispatchObject)
 	}
 	else
 	{
-		UtilSysLibWrap::Destroy(this->mInsActor);
+		UtilEngineWrap::Destroy(this->mInsActor);
 	}
 }
 
