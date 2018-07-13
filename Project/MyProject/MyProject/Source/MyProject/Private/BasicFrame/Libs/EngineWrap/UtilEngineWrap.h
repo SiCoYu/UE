@@ -5,6 +5,14 @@
 #include "Core.h"		// "Platform.h" 已经包含在 "Core.h" 中了
 //#include "ICUUtilities.h"
 
+#include "UObject/NameTypes.h"	// FName
+#include "UObject/ScriptDelegates.h"	// TScriptDelegate
+#include "UObject/WeakObjectPtr.h"	// FWeakObjectPtr
+//#include "Math/Vector.h"	// FVector
+//#include "GameFramework/Actor.h"	// AActor
+#include "UObject/Object.h"		// UObject
+//#include "Blueprint/UserWidget.h"	// UUserWidget
+
 #include "UObject/Object.h" // UObject : public UObjectBaseUtility
 #include "Math/Vector.h"	// FVector,向量
 #include "Math/Quat.h"		// FQuat,四元数
@@ -478,6 +486,11 @@ public:
 	static bool isGameWorld();
 	static bool isEditorWorld();
 	static std::string getManifestName();
+
+	static TScriptDelegate<FWeakObjectPtr> addUObjectButtonClickHandle(UUserWidget* widget, const FName& buttonName, UObject* pThis, const FName& functionName);
+
+	static void Destroy(AActor* actor, bool bNetForce = false, bool bShouldModifyLevel = true);
+	static void DestroyImmediate(AActor* actor, bool bNetForce = false, bool bShouldModifyLevel = true);
 };
 
 MY_END_NAMESPACE

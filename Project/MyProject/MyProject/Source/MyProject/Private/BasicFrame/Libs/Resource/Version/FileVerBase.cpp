@@ -243,7 +243,7 @@ void FileVerBase::_loadFormText(std::string text, MDictionary<std::string, FileV
 	if (!UtilStr::IsNullOrEmpty(equalSplitStr))
 	{
 		index = 0;
-		listLen = equalSplitStr.Length;
+		listLen = equalSplitStr.length();
 
 		while (index < listLen)
 		{

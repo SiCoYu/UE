@@ -1,29 +1,29 @@
 #include "MyProject.h"
+#include "UtilFileIO.h"
 #include "Containers/UnrealString.h"
 #include "Misc/Paths.h"
 #include "Core.h"
 #include "CoreGlobals.h"
 #include "HAL/FileManager.h"
 #include "Prequisites.h"
-#include "UtilPath.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-FString UtilPath::BaseDir()
+FString UtilFileIO::BaseDir()
 {
 	//InstallDir/WindowsNoEditor/GameName/Binaries/Win64
 	const FString ThePath = FString(FPlatformProcess::BaseDir());
 	return ThePath;
 }
 
-FString UtilPath::RootDir()
+FString UtilFileIO::RootDir()
 {
 	//InstallDir/WindowsNoEditor/
 	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::RootDir());
 	return ThePath;
 }
 
-FString UtilPath::GameDir()
+FString UtilFileIO::GameDir()
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameDir': FPaths::GameDir() has been superseded by FPaths::ProjectDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName
@@ -32,7 +32,7 @@ FString UtilPath::GameDir()
 	return ThePath;
 }
 
-FString UtilPath::GameContentDir()
+FString UtilFileIO::GameContentDir()
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Content
@@ -41,7 +41,7 @@ FString UtilPath::GameContentDir()
 	return ThePath;
 }
 
-FString UtilPath::GameSavedDir()
+FString UtilFileIO::GameSavedDir()
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameSavedDir': FPaths::GameSavedDir() has been superseded by FPaths::ProjectSavedDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Saved
@@ -50,7 +50,7 @@ FString UtilPath::GameSavedDir()
 	return ThePath;
 }
 
-FString UtilPath::GameLogDir()
+FString UtilFileIO::GameLogDir()
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameLogDir': FPaths::GameLogDir() has been superseded by FPaths::ProjectLogDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Saved/Logs
@@ -59,14 +59,14 @@ FString UtilPath::GameLogDir()
 	return ThePath;
 }
 
-FString UtilPath::GetFilenameOnDisk(FString FullFilename)
+FString UtilFileIO::GetFilenameOnDisk(FString FullFilename)
 {
 	IFileManager& FileManager = IFileManager::Get();
 	FString DiskFilename = FileManager.GetFilenameOnDisk(*FullFilename);
 	return DiskFilename;
 }
 
-FString UtilPath::ConvertToSandboxPath(FString FullFilename)
+FString UtilFileIO::ConvertToSandboxPath(FString FullFilename)
 {
 	//const FString ThePath = FPaths::ConvertToSandboxPath(FPaths::GameLogDir());
 	//IFileManager& FileManager = IFileManager::Get();
@@ -74,17 +74,17 @@ FString UtilPath::ConvertToSandboxPath(FString FullFilename)
 	return DiskFilename;
 }
 
-FString UtilPath::FPaths_ConvertToSandboxPath(FString FullFilename)
+FString UtilFileIO::FPaths_ConvertToSandboxPath(FString FullFilename)
 {
 	return FPaths::ConvertToSandboxPath(FullFilename, TEXT("aaaa"));
 }
 
-void UtilPath::NormalizeDirectoryName(FString& InPath)
+void UtilFileIO::NormalizeDirectoryName(FString& InPath)
 {
 	FPaths::NormalizeDirectoryName(InPath);
 }
 
-bool UtilPath::FileExists(const std::string& InPath)
+bool UtilFileIO::FileExists(const std::string& InPath)
 {
 	FString convPath = UtilStr::ConvStdStr2FString(const_cast<std::string&>(InPath));
 	return FPaths::FileExists(convPath);

@@ -22,7 +22,7 @@
 #include "ObjectAssetResItem.h"
 #include "BinaryResItem.h"
 #include "LevelResItem.h"
-#include "UtilPath.h"
+#include "UtilFileIO.h"
 #include "SafePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -188,15 +188,15 @@ void ResLoadMgr::loadData(LoadParam* param)
 
 	if (ResLoadType::eLoadStreamingAssets == param->getResLoadType())
 	{
-		param->setPath(UtilPath::Combine(GFileSys->getLocalReadDir(), param->getPath()));
+		param->setPath(UtilFileIO::Combine(GFileSys->getLocalReadDir(), param->getPath()));
 	}
 	else if (ResLoadType::eLoadPersistentData == param->getResLoadType())
 	{
-		param->setPath(UtilPath::Combine(GFileSys->getLocalWriteDir(), param->getPath()));
+		param->setPath(UtilFileIO::Combine(GFileSys->getLocalWriteDir(), param->getPath()));
 	}
 	else if (ResLoadType::eLoadWeb == param->getResLoadType())
 	{
-		param->setPath(UtilPath::Combine(GCfg->mWebIP, param->getPath()));
+		param->setPath(UtilFileIO::Combine(GCfg->mWebIP, param->getPath()));
 	}
 	//if (!string.IsNullOrEmpty(param.mVersion))
 	//{

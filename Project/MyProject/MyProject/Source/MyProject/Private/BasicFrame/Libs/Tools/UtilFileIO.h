@@ -1,5 +1,5 @@
-#ifndef __UtilPath_H
-#define __UtilPath_H
+#ifndef __UtilFileIO_H
+#define __UtilFileIO_H
 
 #include <string>
 #include <sstream>
@@ -9,7 +9,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class UtilPath
+class UtilFileIO
 {
 public:
 	// 结合路径到完整的目录，目前只支持两个，需要的继续添加
@@ -37,10 +37,10 @@ public:
 MY_END_NAMESPACE
 
 // 模板实现
-#include "UtilPath.inl"
+#include "UtilFileIO.inl"
 
 //template<class T0, class T1>
-//static std::string UtilPath::Combine(T0 param0, T1 param1)
+//static std::string UtilFileIO::Combine(T0 param0, T1 param1)
 //{
 //	std::stringstream strStream;
 //	strStream << param0 << "/" << "param1";

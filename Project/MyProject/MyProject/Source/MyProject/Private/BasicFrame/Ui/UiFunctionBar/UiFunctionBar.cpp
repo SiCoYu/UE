@@ -34,7 +34,7 @@ void UUiFunctionBar::onReady()
 {
 	Super::onReady();
 
-	//UtilSysLibWrap::addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
+	//UtilEngineWrap::addUObjectButtonClickHandle(mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 	//this->mTestButton->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::ButtonTest.c_str(), this, "onTestButtonTouch");
 	//this->mTestComBtn->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::TestComBtn.c_str(), this, "onTestComBtnTouch");
 	//this->mTestComBtn->addUObjectButtonClickHandle(this->mWinRender->mUiRoot, FunctionBarCV::TestLoadTextureBtn.c_str(), this, "onTestLoadTextureBtnTouch");

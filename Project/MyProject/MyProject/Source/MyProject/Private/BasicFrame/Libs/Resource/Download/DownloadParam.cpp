@@ -35,7 +35,7 @@ void DownloadParam::setPath(std::string origPath)
 	this->mResUniqueId = mOrigPath;
 	this->mVersion = "4";
 
-    //mExtName = UtilPath.getFileExt(mOrigPath);
+    //mExtName = UtilFileIO.getFileExt(mOrigPath);
 
     //if(mExtName == UtilSysLibWrap::UNITY3D)
     //{

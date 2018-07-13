@@ -83,7 +83,7 @@ void HttpWebDownloadItem::downWithNoFileLen()
     //    long readedLength = 0;
     //    long startPos = 0;
 
-    //    if (UtilPath.existFile(saveFile))
+    //    if (UtilFileIO.existFile(saveFile))
     //    {
     //        fileStream = new MDataStream(saveFile, nullptr, FileMode.Append, FileAccess.Write);
     //        startPos = fileStream.getLength();
@@ -96,11 +96,11 @@ void HttpWebDownloadItem::downWithNoFileLen()
 
     //        try
     //        {
-    //            string path = UtilPath.getFilePathNoName(origFile);
+    //            string path = UtilFileIO.getFilePathNoName(origFile);
 
-    //            if (!UtilPath.existDirectory(path))
+    //            if (!UtilFileIO.existDirectory(path))
     //            {
-    //                UtilPath.createDirectory(path);
+    //                UtilFileIO.createDirectory(path);
     //            }
 
     //            fileStream = new MDataStream(origFile, nullptr, FileMode.CreateNew, FileAccess.Write);
@@ -152,7 +152,7 @@ void HttpWebDownloadItem::downWithNoFileLen()
     //    // 修改文件名字
     //    if (bNeedReName)
     //    {
-    //        UtilPath.renameFile(origFile, saveFile);
+    //        UtilFileIO.renameFile(origFile, saveFile);
     //    }
 
     //    mRefCountResLoadResultNotify.resLoadState.setSuccessLoaded();
@@ -238,7 +238,7 @@ void HttpWebDownloadItem::downWithFileLen()
     //    long readedLength = 0;
     //    long startPos = 0;
 
-    //    if (UtilPath.existFile(origFile))
+    //    if (UtilFileIO.existFile(origFile))
     //    {
     //        fileStream = new MDataStream(origFile, nullptr, FileMode.Append, FileAccess.Write);
     //        startPos = fileStream.getLength();
@@ -261,11 +261,11 @@ void HttpWebDownloadItem::downWithFileLen()
 
     //        try
     //        {
-    //            string path = UtilPath.getFilePathNoName(origFile);
+    //            string path = UtilFileIO.getFilePathNoName(origFile);
 
-    //            if (!UtilPath.existDirectory(path))
+    //            if (!UtilFileIO.existDirectory(path))
     //            {
-    //                UtilPath.createDirectory(path);
+    //                UtilFileIO.createDirectory(path);
     //            }
 
     //            fileStream = new MDataStream(origFile, nullptr, FileMode.CreateNew, FileAccess.Write);
@@ -324,7 +324,7 @@ void HttpWebDownloadItem::downWithFileLen()
     //    // 修改文件名字
     //    if (bNeedReName)
     //    {
-    //        UtilPath.renameFile(origFile, saveFile);
+    //        UtilFileIO.renameFile(origFile, saveFile);
     //    }
 
     //    if (!isBytesValid)

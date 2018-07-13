@@ -4,7 +4,7 @@
 #include "HAL/PlatformFilemanager.h"		// FPlatformFileManager
 #include "IPlatformFileSandboxWrapper.h"	// FSandboxPlatformFile
 #include "UtilStr.h"
-#include "UtilPath.h"
+#include "UtilFileIO.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -19,7 +19,7 @@ MFileSys::MFileSys()
 
 void MFileSys::init()
 {
-	FString contentPath = UtilPath::GameContentDir();
+	FString contentPath = UtilFileIO::GameContentDir();
 	std::string path = UtilStr::ConvFString2StdStr(contentPath);
 	std::string searchPath = "";
 
@@ -61,12 +61,12 @@ void MFileSys::initFileSys()
 	extern FString GExternalFilePath;
 	CacheFolderPath = GExternalFilePath / TEXT("ProgramBinaryCache");
 #else
-	CacheFolderPath = UtilPath::GameSavedDir() / TEXT("ProgramBinaryCache");
+	CacheFolderPath = UtilFileIO::GameSavedDir() / TEXT("ProgramBinaryCache");
 #endif
 
 	MFileSys::msPersistentDataPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
 
-	CacheFolderPath = UtilPath::GameContentDir();
+	CacheFolderPath = UtilFileIO::GameContentDir();
 	MFileSys::msStreamingAssetsPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
 }
 
@@ -99,7 +99,7 @@ std::string MFileSys::getLuaPath(std::string luaPackage)
 	{
 		fullPath = searchPath + replace + ".lua";
 
-		if (UtilPath::FileExists(fullPath))
+		if (UtilFileIO::FileExists(fullPath))
 		{
 			break;
 		}

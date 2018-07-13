@@ -2,9 +2,9 @@
 #include "LuaFileUtil.h"
 #include <string.h>
 #include "UtilStr.h"
-#include "UtilPath.h"
+#include "UtilFileIO.h"
 #include "MyLuaLoader.h"
-#include "UtilPath.h"
+#include "UtilFileIO.h"
 #include "Containers/UnrealString.h"		// FString
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -17,7 +17,7 @@ LuaFileUtil::LuaFileUtil()
 
 void LuaFileUtil::init()
 {
-	FString contentPath = UtilPath::GameContentDir();
+	FString contentPath = UtilFileIO::GameContentDir();
 	std::string path = UtilStr::ConvFString2StdStr(contentPath);
 	std::string searchPath = "";
 
@@ -74,7 +74,7 @@ std::string LuaFileUtil::_getLuaPath(std::string luaPackage)
 		{
 			fullPath = searchPath + replace + ".lua";
 
-			if (UtilPath::FileExists(fullPath))
+			if (UtilFileIO::FileExists(fullPath))
 			{
 				break;
 			}
