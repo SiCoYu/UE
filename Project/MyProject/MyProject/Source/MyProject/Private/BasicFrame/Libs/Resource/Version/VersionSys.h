@@ -2,7 +2,7 @@
 
 #include <string>
 #include "TypeDef.h"
-#include "GObject.h"
+//#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -15,7 +15,7 @@ class IDispatchObject;
 /**
  * @brief 版本系统，文件格式   path=value
  */
-class VersionSys : public GObject
+class VersionSys/* : public GObject*/
 {
 public:
 	ServerVer* mServerVer;
@@ -32,8 +32,11 @@ public:
 public:
 	VersionSys();
 
-	void init();
-	void dispose();
+	// 继承 GObject 就会有链接错误
+	//2>Ctx.cpp.obj : error LNK2019 : unresolved external symbol "public: void __cdecl MyNS::VersionSys::init(void)" (? init@VersionSys@MyNS@@QEAAXXZ) referenced in function "protected: void __cdecl MyNS::Ctx::_execInit(void)" (? _execInit@Ctx@MyNS@@IEAAXXZ)
+	//	2>Ctx.cpp.obj : error LNK2019 : unresolved external symbol "public: void __cdecl MyNS::VersionSys::dispose(void)" (? dispose@VersionSys@MyNS@@QEAAXXZ) referenced in function "protected: void __cdecl MyNS::Ctx::_preDispose(void)" (? _preDispose@Ctx@MyNS@@IEAAXXZ)
+	virtual void init() override;
+	virtual void dispose() override;
 
 	void loadAllLocalVer();
 

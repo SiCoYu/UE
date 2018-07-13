@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <string>
-#include "GObject.h"
+//#include "GObject.h"
 #include "MDictionary.h"
 #include "PlatformDefine.h"
 
@@ -12,7 +12,7 @@ class ResRedirectItem;
 /**
  * @brief 资源重定向，确定资源最终位置
  */
-class ResRedirect : public GObject
+class ResRedirect/* : public GObject*/
 {
 protected:
 	MDictionary<std::string, ResRedirectItem*> mOrigPath2ItemDic;   // 原始的资源加载目录
@@ -21,8 +21,10 @@ protected:
 public:
 	ResRedirect();
 
-	void init();
-	void dispose();
+	//2>Ctx.cpp.obj : error LNK2019 : unresolved external symbol "public: void __cdecl MyNS::ResRedirect::init(void)" (? init@ResRedirect@MyNS@@QEAAXXZ) referenced in function "protected: void __cdecl MyNS::Ctx::_execInit(void)" (? _execInit@Ctx@MyNS@@IEAAXXZ)
+	//	2>Ctx.cpp.obj : error LNK2019 : unresolved external symbol "public: void __cdecl MyNS::ResRedirect::dispose(void)" (? dispose@ResRedirect@MyNS@@QEAAXXZ) referenced in function "protected: void __cdecl MyNS::Ctx::_preDispose(void)" (? _preDispose@Ctx@MyNS@@IEAAXXZ)
+	virtual void init() override;
+	virtual void dispose() override;
 
     // 清理之前缓存信息
 	void clearCacheInfo();
