@@ -9,6 +9,7 @@
 #include "Ctx.h"
 #include "MySoftObjectPath.h"
 #include "MyStreamableManager.h"
+#include "VersionSysN.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -21,6 +22,8 @@ void TestPak::run()
 	MySoftObjectPath softObjectPath;
 	softObjectPath.setPath(pakFileStream->getSoftPathStrByIndex(0));
 	GMyStreamableManager->SynchronousLoad(softObjectPath.getNativeSoftObjectPath());
+
+	VersionSysN* a = MY_NEW VersionSysN();
 }
 
 MY_END_NAMESPACE
