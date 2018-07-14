@@ -19,9 +19,16 @@ void TestPak::run()
 	FString mountPoint(UtilFileIO::EngineContentDir());
 
 	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
+
 	MySoftObjectPath softObjectPath;
+
 	softObjectPath.setPath(pakFileStream->getSoftPathStrByIndex(0));
 	GMyStreamableManager->SynchronousLoad(softObjectPath.getNativeSoftObjectPath());
+
+	softObjectPath.setPath(pakFileStream->getSoftPathStrByIndex(1));
+	GMyStreamableManager->SynchronousLoad(softObjectPath.getNativeSoftObjectPath());
+
+	GPakFileSystem->mountBaseFileSystem();
 
 	VersionSysN* a = MY_NEW VersionSysN();
 }

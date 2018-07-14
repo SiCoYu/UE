@@ -75,6 +75,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 class UtilEngineWrap
 {
 public:
+	static FString msClassObjectSuffix;
+
 	static UMyGameInstanceBase* GetGameInstance();
 	static UWorld* GetWorld();
 	static void showCursor();

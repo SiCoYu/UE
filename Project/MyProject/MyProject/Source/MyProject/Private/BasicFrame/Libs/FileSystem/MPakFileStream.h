@@ -31,7 +31,6 @@ public:
 
 protected:
 	FString _getSoftPathStr(FString& fileFullPathInPak);
-	bool _mountPakToFileSystem(FString& pakFileFullPath, FString& mountPoint);
 };
 
 MY_END_NAMESPACE

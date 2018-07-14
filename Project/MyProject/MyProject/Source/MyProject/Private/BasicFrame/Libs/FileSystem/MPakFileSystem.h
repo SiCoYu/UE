@@ -5,6 +5,9 @@
 #include "MDictionary.h"
 #include "PlatformDefine.h"
 
+class FPakPlatformFile;
+class IPlatformFile;
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 class MPakFileStream;
@@ -16,6 +19,8 @@ class MPakFileStream;
 class MPakFileSystem : public GObject
 {
 protected:
+	FPakPlatformFile* mPakPlatformFile;
+	IPlatformFile* mBasePlatformFile;	// 原始基础平台文件
 	MDictionary<FString, MPakFileStream*> mPath2PakFileStreamDic;
 
 public:
@@ -26,6 +31,9 @@ public:
 
 	MPakFileStream* getPakFileStream(FString& pakFileFullPath);
 	MPakFileStream* mountOnePak(FString& pakFileFullPath, FString& mountPoint);
+
+	bool mountPakFileSystem(FString& pakFileFullPath, FString& mountPoint);
+	bool mountBaseFileSystem();
 };
 
 MY_END_NAMESPACE

@@ -26,6 +26,8 @@
 
 DEFINE_LOG_CATEGORY(MyLog);
 
+FString UtilEngineWrap::msClassObjectSuffix = "_C";
+
 UMyGameInstanceBase* UtilEngineWrap::GetGameInstance()
 {
 	return Cast<UMyGameInstanceBase>(UGameplayStatics::GetGameInstance(GEngineData->getMainActor()));

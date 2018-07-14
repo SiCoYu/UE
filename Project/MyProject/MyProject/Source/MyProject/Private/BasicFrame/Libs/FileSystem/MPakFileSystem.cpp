@@ -68,12 +68,14 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 MPakFileSystem::MPakFileSystem()
 {
-
+	this->mPakPlatformFile = nullptr;
+	this->mBasePlatformFile = nullptr;
 }
 
 void MPakFileSystem::init()
 {
-
+	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+	this->mBasePlatformFile = &PlatformFile;
 }
 
 void MPakFileSystem::dispose()
@@ -102,6 +104,31 @@ MPakFileStream* MPakFileSystem::mountOnePak(FString& pakFileFullPath, FString& m
 	}
 
 	return pakFileStream;
+}
+
+bool MPakFileStream::mountPakFileSystem(FString& pakFileFullPath, FString& mountPoint)
+{
+	bool ret = false;
+
+	if (nullptr == this->mPakPlatformFile)
+	{
+		this->mPakPlatformFile = new FPakPlatformFile();
+		this->mPakPlatformFile->Initialize(this->mBasePlatformFile, TEXT(""));
+	}
+
+	FPlatformFileManager::Get().SetPlatformFile(*this->mPakPlatformFile);
+
+	if (this->mPakPlatformFile->Mount(*pakFileFullPath, 0, *mountPoint))
+	{
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool MPakFileStream::mountBaseFileSystem()
+{
+	FPlatformFileManager::Get().SetPlatformFile(*(this->mBasePlatformFile));
 }
 
 MY_END_NAMESPACE

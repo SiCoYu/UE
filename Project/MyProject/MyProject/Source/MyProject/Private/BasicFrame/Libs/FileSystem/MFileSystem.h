@@ -2,6 +2,7 @@
 #define __MFileSys_H
 
 #include <string>
+#include "Containers/UnrealString.h"	// FString
 #include "MList.h"
 #include "GObject.h"
 #include "PlatformDefine.h"
@@ -24,6 +25,9 @@ public:
 	static std::string msDataStreamStreamingAssetsPath;
 	static std::string msDataStreamPersistentDataPath; 
 	static std::string msDataStreamResourcesPath;
+
+	static FString msProjectContentPathPrefix;
+	static FString msEngineContentPathPrefix;
 
 protected:
 	// 编辑器 Sandbox 文件系统

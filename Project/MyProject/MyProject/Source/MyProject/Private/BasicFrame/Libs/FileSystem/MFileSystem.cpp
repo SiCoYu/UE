@@ -14,6 +14,9 @@ std::string MFileSystem::msDataStreamStreamingAssetsPath = "";
 std::string MFileSystem::msDataStreamPersistentDataPath = "";
 std::string MFileSystem::msDataStreamResourcesPath = "";
 
+FString MFileSystem::msProjectContentPathPrefix = TEXT("/Game/");
+FString MFileSystem::msEngineContentPathPrefix = TEXT("/Engine/");
+
 MFileSystem::MFileSystem()
 {
 	// 初始化 SandBox 文件系统

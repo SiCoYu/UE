@@ -4,6 +4,8 @@
 #include "HAL/PlatformFilemanager.h"		// FPlatformFileManager
 #include "IPlatformFilePak.h"			// FPakPlatformFile \ FPakFile
 #include "MPakFileSystem.h"
+#include "MFileSystem.h"
+#include "UtilEngineWrap.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -40,32 +42,14 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 
 	FString assetShortName = FPackageName::GetShortName(fileFullPathInPak);
 	assetShortName.Split(TEXT("."), &leftStr, &rightStr);
-	assetName = TEXT("/Engine/") + leftStr + TEXT(".") + leftStr;
+	assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
 
 	return assetName;
 }
 
-bool MPakFileStream::_mountPakToFileSystem(FString& pakFileFullPath, FString& mountPoint)
-{
-	bool ret = false;
-
-	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-
-	FPakPlatformFile* PakPlatformFile = new FPakPlatformFile();
-	PakPlatformFile->Initialize(&PlatformFile, TEXT(""));
-	FPlatformFileManager::Get().SetPlatformFile(*PakPlatformFile);
-
-	if (PakPlatformFile->Mount(*pakFileFullPath, 0, *mountPoint))
-	{
-		ret = true;
-	}
-
-	return ret;
-}
-
 void MPakFileStream::mount()
 {
-	if (this->_mountPakToFileSystem(this->mPakFilePath, this->mMountPoint))
+	if (GPakFileSystem->mountPakToFileSystem(this->mPakFilePath, this->mMountPoint))
 	{
 		this->mMountState = MMountState::eSuccess;
 
