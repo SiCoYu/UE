@@ -5,6 +5,7 @@
 #include "GObject.h"
 #include "MMountState.h"
 #include "MMountPosType.h"
+#include "MPakAssetClassObjectType.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -17,6 +18,7 @@ protected:
 	FString mMountPoint;
 	MMountState mMountState;
 	MMountPosType mMountPosType;
+	MPakAssetClassObjectType mPakAssetClassObjectType;
 	TArray<FString> mFileList;
 
 public:

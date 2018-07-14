@@ -13,6 +13,7 @@ MPakFileStream::MPakFileStream()
 {
 	this->mMountState = MMountState::eNull;
 	this->mMountPosType = MMountPosType::eEngine;
+	this->mPakAssetClassObjectType = MPakAssetClassObjectType::eObject;
 }
 
 void MPakFileStream::init()
@@ -44,15 +45,28 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 	FString assetShortName = FPackageName::GetShortName(fileFullPathInPak);
 	assetShortName.Split(TEXT("."), &leftStr, &rightStr);
 
+	// 挂载到 Project ，目前挂载到工程师不能读取的
 	if (MMountPosType::eProject == this->mMountPosType)
 	{
-		//assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
-		assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr;
+		if (MPakAssetClassObjectType::eObject == this->mPakAssetClassObjectType)
+		{
+			assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr;
+		}
+		else if (MPakAssetClassObjectType::eClass == this->mPakAssetClassObjectType)
+		{
+			assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+		}
 	}
-	else
+	else	// 挂在到 Engine，目前挂载到引擎是可以读取的
 	{
-		//assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
-		assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
+		if (MPakAssetClassObjectType::eObject == this->mPakAssetClassObjectType)
+		{
+			assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+		}
+		else if (MPakAssetClassObjectType::eClass == this->mPakAssetClassObjectType)
+		{
+			assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
+		}
 	}
 
 	return assetName;
