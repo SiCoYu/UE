@@ -19,7 +19,7 @@ MPakFileStream::MPakFileStream()
 
 void MPakFileStream::init()
 {
-
+	this->_resolveInfo();
 }
 
 void MPakFileStream::dispose()
@@ -30,7 +30,6 @@ void MPakFileStream::dispose()
 void MPakFileStream::setPakFilePath(FString& value)
 {
 	this->mPakFilePath = value;
-	this->_resolveInfo();
 }
 
 void MPakFileStream::setMountPath(FString& value)
@@ -52,22 +51,50 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 	{
 		if (MPakAssetClassObjectType::eObject == this->mPakAssetClassObjectType)
 		{
-			assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr;
+			if (this->mMountRelPath.Len() > 0)
+			{
+				assetName = MFileSystem::msProjectContentPathPrefix + this->mMountRelPath + TEXT("/") + leftStr + TEXT(".") + leftStr;
+			}
+			else
+			{
+				assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr;
+			}
 		}
 		else if (MPakAssetClassObjectType::eClass == this->mPakAssetClassObjectType)
 		{
-			assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+			if (this->mMountRelPath.Len() > 0)
+			{
+				assetName = MFileSystem::msProjectContentPathPrefix + this->mMountRelPath + TEXT("/") + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+			}
+			else
+			{
+				assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+			}
 		}
 	}
 	else	// 挂在到 Engine，目前挂载到引擎是可以读取的
 	{
 		if (MPakAssetClassObjectType::eObject == this->mPakAssetClassObjectType)
 		{
-			assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+			if (this->mMountRelPath.Len() > 0)
+			{
+				assetName = MFileSystem::msEngineContentPathPrefix + this->mMountRelPath + TEXT("/") + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+			}
+			else
+			{
+				assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+			}
 		}
 		else if (MPakAssetClassObjectType::eClass == this->mPakAssetClassObjectType)
 		{
-			assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
+			if (this->mMountRelPath.Len() > 0)
+			{
+				assetName = MFileSystem::msEngineContentPathPrefix + this->mMountRelPath + TEXT("/") + leftStr + TEXT(".") + leftStr;
+			}
+			else
+			{
+				assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
+			}
 		}
 	}
 
@@ -130,7 +157,16 @@ void MPakFileStream::_resolveInfo()
 		this->mPakAssetClassObjectType = MPakAssetClassObjectType::eObject;
 	}
 
-	this->mMountPoint = UtilFileIO::EngineContentDir(false) + UtilFileIO::convStreamingAssetsPathToMountPath(this->mPakFilePath);
+	this->mMountRelPath = UtilFileIO::convStreamingAssetsPathToMountPath(this->mPakFilePath);
+
+	if (this->mMountRelPath.Len() > 0)
+	{
+		this->mMountPoint = UtilFileIO::EngineContentDir(false) + this->mMountRelPath;
+	}
+	else
+	{
+		this->mMountPoint = UtilFileIO::EngineContentDir(false);
+	}
 }
 
 MY_END_NAMESPACE

@@ -386,6 +386,10 @@ FString UtilFileIO::convStreamingAssetsPathToMountPath(FString& streamingAssetsP
 	{
 		ret = ret.Mid(0, lastSlashIndex);
 	}
+	else
+	{
+		ret = TEXT("");		// 类似 Project/Content/aaa.pak
+	}
 
 	return ret;
 }
