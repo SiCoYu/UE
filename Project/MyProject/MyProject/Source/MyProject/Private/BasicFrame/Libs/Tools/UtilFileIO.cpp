@@ -359,4 +359,28 @@ std::string UtilFileIO::getFileParentDirName(std::string& fullPath)
 	return parentDir;
 }
 
+/**
+ * @brief 例如 StreamingAssets 的 Pak 目录为 Project/Content/MyStreamingAssets/aaa/bbb/ccc/MultiOne.pak , 挂载目录就是 Engine/Content/MyStreamingAssets/aaa/bbb/ccc
+ */
+FString UtilFileIO::convStreamingAssetsPathToMountPath(FString& streamingAssetsPath)
+{
+	FString ret;
+	int contentIndex = -1;
+	int lastSlashIndex = -1;
+
+
+}
+
+bool UtilFileIO::isBluePrints(FString& filePath)
+{
+	bool ret = false;
+
+	if (-1 != filePath.indexOf(UtilEngineWrap::msBlueprints))
+	{
+		ret = true;
+	}
+
+	return ret;
+}
+
 MY_END_NAMESPACE

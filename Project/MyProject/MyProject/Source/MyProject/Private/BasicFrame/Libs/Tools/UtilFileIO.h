@@ -56,6 +56,10 @@ public:
 	static std::string getFilePathNoExt(std::string& fullPath);
 	// 获取当前文件的父目录名字
 	static std::string getFileParentDirName(std::string& fullPath);
+
+	// 转换 StreamingAssets 到 Mount 目录
+	static FString convStreamingAssetsPathToMountPath(FString& streamingAssetsPath);
+	static bool isBluePrints(FString& filePath);
 };
 
 MY_END_NAMESPACE

@@ -76,6 +76,8 @@ class UtilEngineWrap
 {
 public:
 	static FString msClassObjectSuffix;
+	static FString msContent;
+	static FString msBlueprints;
 
 	static UMyGameInstanceBase* GetGameInstance();
 	static UWorld* GetWorld();
