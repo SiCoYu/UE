@@ -157,6 +157,11 @@ void MPakFileStream::_resolveInfo()
 		this->mPakAssetClassObjectType = MPakAssetClassObjectType::eObject;
 	}
 
+	/**
+	 * @brief this->mPakFilePath 是 MyProject/Content/MyStreamingAssets/MultiOne.pak, 去掉 MyProject/Content/ 和 /MultiOne.pak ，取剩余部分 MyStreamingAssets ，如果剩余部分没有，例如 MyProject/Content/MultiOne.pak ， this->mPakFilePath 就是 ""
+	 * this->mMountPoint 就是 ../../../Engine/Content/ + this->mPakFilePath
+	 * 最终获取目录就是 "/Engine/" + this->mPakFilePath + AssetName + "." + AssetName + "_C" , "_C" 可选
+	 */
 	this->mMountRelPath = UtilFileIO::convStreamingAssetsPathToMountPath(this->mPakFilePath);
 
 	if (this->mMountRelPath.Len() > 0)
