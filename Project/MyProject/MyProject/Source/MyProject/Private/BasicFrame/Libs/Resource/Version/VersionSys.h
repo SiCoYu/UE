@@ -2,7 +2,7 @@
 
 #include <string>
 #include "TypeDef.h"
-//#include "GObject.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -15,7 +15,7 @@ class IDispatchObject;
 /**
  * @brief 版本系统，文件格式   path=value
  */
-class VersionSys/* : public GObject*/
+class VersionSys : public GObject
 {
 public:
 	ServerVer* mServerVer;

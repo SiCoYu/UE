@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <string>
-//#include "GObject.h"
+#include "GObject.h"
 #include "MDictionary.h"
 #include "PlatformDefine.h"
 
@@ -12,7 +12,7 @@ class ResRedirectItem;
 /**
  * @brief 资源重定向，确定资源最终位置
  */
-class ResRedirect/* : public GObject*/
+class ResRedirect : public GObject
 {
 protected:
 	MDictionary<std::string, ResRedirectItem*> mOrigPath2ItemDic;   // 原始的资源加载目录

@@ -19,8 +19,8 @@ class MPakFileStream;
 class MPakFileSystem : public GObject
 {
 protected:
-	FPakPlatformFile* mPakPlatformFile;
-	IPlatformFile* mBasePlatformFile;	// 原始基础平台文件
+	//FPakPlatformFile* mPakPlatformFile;
+	//IPlatformFile* mBasePlatformFile;	// 原始基础平台文件
 	MDictionary<FString, MPakFileStream*> mPath2PakFileStreamDic;
 
 public:

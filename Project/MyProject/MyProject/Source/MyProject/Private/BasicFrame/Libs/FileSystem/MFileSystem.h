@@ -8,6 +8,7 @@
 #include "PlatformDefine.h"
 
 class FSandboxPlatformFile;
+class IPlatformFile;
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -16,6 +17,7 @@ class LoadParam;
 /**
  * @brief 本地文件系统
  * @url Engine\Source\Runtime\Launch\Private\Android\AndroidJNI.cpp
+ * IFileManager 就是对当前的文件系统进行操作， 会调用 FPlatformFileManager 的 GetPlatformFile 获取当前文件系统，而 FPlatformFileManager 是管理当前所有文件系统的，当前可能有物理文件系统， Pak 文件系统，一个是管理器，一个是操作当前文件系统的接口
  */
 class MFileSystem : public GObject
 {
@@ -28,6 +30,17 @@ public:
 
 	static FString msProjectContentPathPrefix;
 	static FString msEngineContentPathPrefix;
+
+	// Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp
+	// IPlatformFile* PlatformFile = ConditionallyCreateFileWrapper(TEXT("PakFile"), CurrentPlatformFile, CmdLine);
+	static FString PakFile;
+	static FString CachedReadFile;
+	static FString SandboxFile;
+	static FString StreamingFile;
+	static FString NetworkFile;
+	static FString ProfileFile;
+	static FString FileOpenLog;
+	static FString LogFile;
 
 protected:
 	// 编辑器 Sandbox 文件系统
@@ -73,6 +86,10 @@ public:
 	// GFilePathBase = FString(nativePathString);
 
 	void addSearchPath(std::string path);
+	IPlatformFile* GetPlatformFile();
+	void SetPlatformFile(IPlatformFile& NewTopmostPlatformFile);
+	IPlatformFile* FindPlatformFile(const TCHAR* Name);
+	IPlatformFile* GetPlatformFile(const TCHAR* Name);
 };
 
 MY_END_NAMESPACE

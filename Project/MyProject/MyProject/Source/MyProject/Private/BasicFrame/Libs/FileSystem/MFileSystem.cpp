@@ -5,6 +5,8 @@
 #include "IPlatformFileSandboxWrapper.h"	// FSandboxPlatformFile
 #include "UtilStr.h"
 #include "UtilFileIO.h"
+#include "GenericPlatform/GenericPlatformFile.h"		// IPlatformFile
+#include "HAL/PlatformFilemanager.h"	// FPlatformFileManager
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -16,6 +18,15 @@ std::string MFileSystem::msDataStreamResourcesPath = "";
 
 FString MFileSystem::msProjectContentPathPrefix = TEXT("/Game/");
 FString MFileSystem::msEngineContentPathPrefix = TEXT("/Engine/");
+
+FString MFileSystem::PakFile = TEXT("PakFile");
+FString MFileSystem::CachedReadFile = TEXT("CachedReadFile");
+FString MFileSystem::SandboxFile = TEXT("SandboxFile");
+FString MFileSystem::StreamingFile = TEXT("StreamingFile");
+FString MFileSystem::NetworkFile = TEXT("NetworkFile");
+FString MFileSystem::ProfileFile = TEXT("ProfileFile");
+FString MFileSystem::FileOpenLog = TEXT("FileOpenLog");
+FString MFileSystem::LogFile = TEXT("LogFile");
 
 MFileSystem::MFileSystem()
 {
@@ -121,6 +132,27 @@ std::string MFileSystem::getLuaPath(std::string luaPackage)
 void MFileSystem::addSearchPath(std::string path)
 {
 
+}
+
+IPlatformFile* MFileSystem::GetPlatformFile()
+{
+	IPlatformFile* CurrentPlatformFile = &FPlatformFileManager::Get().GetPlatformFile();
+	return CurrentPlatformFile;
+}
+
+void MFileSystem::SetPlatformFile(IPlatformFile& NewTopmostPlatformFile)
+{
+	FPlatformFileManager::Get().SetPlatformFile(NewTopmostPlatformFile);
+}
+
+IPlatformFile* MFileSystem::FindPlatformFile(const TCHAR* Name)
+{
+	return FPlatformFileManager::Get().FindPlatformFile(Name);
+}
+
+IPlatformFile* MFileSystem::GetPlatformFile(const TCHAR* Name)
+{
+	return FPlatformFileManager::Get().GetPlatformFile(Name);
 }
 
 MY_END_NAMESPACE

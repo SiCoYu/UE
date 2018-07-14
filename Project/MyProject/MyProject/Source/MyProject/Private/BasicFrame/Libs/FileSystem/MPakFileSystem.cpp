@@ -4,6 +4,8 @@
 #include "MyMemoryInc.h"
 #include "IPlatformFilePak.h"		// FPakFile
 #include "UtilFileIO.h"
+#include "MFileSystem.h"
+#include "Ctx.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -71,14 +73,14 @@ void MPakFileSystem::testLoadPak()
 
 MPakFileSystem::MPakFileSystem()
 {
-	this->mPakPlatformFile = nullptr;
-	this->mBasePlatformFile = nullptr;
+	//this->mPakPlatformFile = nullptr;
+	//this->mBasePlatformFile = nullptr;
 }
 
 void MPakFileSystem::init()
 {
-	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-	this->mBasePlatformFile = &PlatformFile;
+	//IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+	//this->mBasePlatformFile = &PlatformFile;
 }
 
 void MPakFileSystem::dispose()
@@ -113,15 +115,25 @@ bool MPakFileSystem::mountPakFileSystem(FString& pakFileFullPath, FString& mount
 {
 	bool ret = false;
 
-	if (nullptr == this->mPakPlatformFile)
-	{
-		this->mPakPlatformFile = new FPakPlatformFile();
-		this->mPakPlatformFile->Initialize(this->mBasePlatformFile, TEXT(""));
-	}
+	//if (nullptr == this->mPakPlatformFile)
+	//{
+	//	this->mPakPlatformFile = new FPakPlatformFile();
+	//	this->mPakPlatformFile->Initialize(this->mBasePlatformFile, TEXT(""));
+	//}
 
-	FPlatformFileManager::Get().SetPlatformFile(*this->mPakPlatformFile);
+	// Case 只能转换继承自 UObject 对象之间的转化
+	// Engine\Source\Runtime\CoreUObject\Public\Templates\Casts.h
+	//template <typename To, typename From>
+	//FORCEINLINE To* Cast(From* Src)
+	//{
+	//	return TCastImpl<From, To>::DoCast(Src);
+	//}
+	//FPakPlatformFile* pakPlatformFile = Cast<FPakPlatformFile>(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
+	FPakPlatformFile* pakPlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
 
-	if (this->mPakPlatformFile->Mount(*pakFileFullPath, 0, *mountPoint))
+	GFileSys->SetPlatformFile(*pakPlatformFile);
+
+	if (pakPlatformFile->Mount(*pakFileFullPath, 0, *mountPoint))
 	{
 		ret = true;
 	}
@@ -131,7 +143,9 @@ bool MPakFileSystem::mountPakFileSystem(FString& pakFileFullPath, FString& mount
 
 bool MPakFileSystem::mountBaseFileSystem()
 {
-	FPlatformFileManager::Get().SetPlatformFile(*(this->mBasePlatformFile));
+	//FPlatformFileManager::Get().SetPlatformFile(*(this->mBasePlatformFile));
+	IPlatformFile& physicalPlatformFile = IPlatformFile::GetPlatformPhysical();
+	GFileSys->SetPlatformFile(physicalPlatformFile);
 	return true;
 }
 
