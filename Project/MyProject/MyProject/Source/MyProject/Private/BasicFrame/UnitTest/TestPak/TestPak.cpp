@@ -17,10 +17,38 @@ void TestPak::run()
 {
 	//GPakFileSystem->testLoadPak();
 
+	//this->_testA();
+	//this->_testB();
+	this->_testC();
+
+	VersionSysN* a = MY_NEW VersionSysN();
+}
+
+void TestPak::_testA()
+{
 	// 一定是相对目录，绝对目录是加载不了资源的
 	//FString pakFileFullPath = UtilFileIO::GameContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
+	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/Cube.pak");
 	//FString mountPoint(UtilFileIO::EngineContentDir(true));
+	FString mountPoint(UtilFileIO::EngineContentDir(false));
+	//FString mountPoint(UtilFileIO::GameContentDir(false));
+
+	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
+
+	MySoftObjectPath softObjectPath;
+
+	softObjectPath.setPath(pakFileStream->getSoftPathStrByIndex(0));
+	GMyStreamableManager->SynchronousLoad(softObjectPath.getNativeSoftObjectPath());
+
+	GPakFileSystem->mountBaseFileSystem();
+}
+
+void TestPak::_testB()
+{
+	// 一定是相对目录，绝对目录是加载不了资源的
+	//FString pakFileFullPath = UtilFileIO::GameContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
 	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
+	//FString mountPoint(UtilFileIO::EngineContentDir(true));
 	FString mountPoint(UtilFileIO::EngineContentDir(false));
 	//FString mountPoint(UtilFileIO::GameContentDir(false));
 
@@ -35,8 +63,39 @@ void TestPak::run()
 	GMyStreamableManager->SynchronousLoad(softObjectPath.getNativeSoftObjectPath());
 
 	GPakFileSystem->mountBaseFileSystem();
+}
 
-	VersionSysN* a = MY_NEW VersionSysN();
+void TestPak::_testC()
+{
+	// 一定是相对目录，绝对目录是加载不了资源的
+	//FString pakFileFullPath = UtilFileIO::GameContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
+	//FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
+	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/Cube.pak");
+	//FString mountPoint(UtilFileIO::EngineContentDir(true));
+	FString mountPoint(UtilFileIO::EngineContentDir(false));
+	//FString mountPoint(UtilFileIO::GameContentDir(false));
+
+	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
+
+	MySoftObjectPath softObjectPath;
+
+	softObjectPath.setPath(pakFileStream->getSoftPathStrByIndex(0));
+	GMyStreamableManager->SynchronousLoad(softObjectPath.getNativeSoftObjectPath());
+
+
+	pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("PakTest.pak");
+	//FString mountPoint(UtilFileIO::EngineContentDir(true));
+	mountPoint = UtilFileIO::EngineContentDir(false);
+	//FString mountPoint(UtilFileIO::GameContentDir(false));
+
+	pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
+
+	MySoftObjectPath bSoftObjectPath;
+
+	bSoftObjectPath.setPath(pakFileStream->getSoftPathStrByIndex(0));
+	GMyStreamableManager->SynchronousLoad(bSoftObjectPath.getNativeSoftObjectPath());
+
+	GPakFileSystem->mountBaseFileSystem();
 }
 
 MY_END_NAMESPACE
