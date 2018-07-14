@@ -27,6 +27,7 @@ public:
 	void mount();
 	FString getSoftPathStrByIndex(int index);
 	int getSoftPathCount();
+	FString getAssetPathInPakByIndex(int index);
 
 protected:
 	FString _getSoftPathStr(FString& fileFullPathInPak);

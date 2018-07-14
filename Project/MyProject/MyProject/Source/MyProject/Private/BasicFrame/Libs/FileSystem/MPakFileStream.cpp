@@ -81,10 +81,17 @@ void MPakFileStream::mount()
 	}
 }
 
-FString MPakFileStream::getSoftPathStrByIndex(int index)
+FString MPakFileStream::getAssetPathInPakByIndex(int index)
 {
 	FString ret;
 	ret = this->mFileList[index];
+	return ret;
+}
+
+FString MPakFileStream::getSoftPathStrByIndex(int index)
+{
+	FString ret;
+	ret = this->_getSoftPathStr(this->mFileList[index]);
 	return ret;
 }
 
