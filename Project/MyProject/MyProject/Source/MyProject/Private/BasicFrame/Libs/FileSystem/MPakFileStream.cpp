@@ -78,22 +78,22 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 		{
 			if (this->mMountRelPath.Len() > 0)
 			{
-				assetName = MFileSystem::msEngineContentPathPrefix + this->mMountRelPath + TEXT("/") + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+				assetName = MFileSystem::msEngineContentPathPrefix + this->mMountRelPath + TEXT("/") + leftStr + TEXT(".") + leftStr;
 			}
 			else
 			{
-				assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+				assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
 			}
 		}
 		else if (MPakAssetClassObjectType::eClass == this->mPakAssetClassObjectType)
 		{
 			if (this->mMountRelPath.Len() > 0)
 			{
-				assetName = MFileSystem::msEngineContentPathPrefix + this->mMountRelPath + TEXT("/") + leftStr + TEXT(".") + leftStr;
+				assetName = MFileSystem::msEngineContentPathPrefix + this->mMountRelPath + TEXT("/") + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
 			}
 			else
 			{
-				assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
+				assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
 			}
 		}
 	}
