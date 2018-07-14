@@ -42,7 +42,8 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 
 	FString assetShortName = FPackageName::GetShortName(fileFullPathInPak);
 	assetShortName.Split(TEXT("."), &leftStr, &rightStr);
-	assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+	//assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+	assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
 
 	return assetName;
 }

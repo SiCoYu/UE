@@ -19,13 +19,13 @@ public:
 
 	// https://wiki.unrealengine.com/Packaged_Game_Paths,_Obtain_Directories_Based_on_Executable_Location
 	static FString BaseDir();
-	static FString RootDir();
-	static FString GameDir();
-	static FString GameContentDir();
+	static FString RootDir(bool isAbsPath = true);
+	static FString GameDir(bool isAbsPath = true);
+	static FString GameContentDir(bool isAbsPath = true);
 
-	static FString EngineContentDir();
-	static FString GameSavedDir();
-	static FString GameLogDir();
+	static FString EngineContentDir(bool isAbsPath = true);
+	static FString GameSavedDir(bool isAbsPath = true);
+	static FString GameLogDir(bool isAbsPath = true);
 
 	static FString GetFilenameOnDisk(FString FullFilename);
 	static FString ConvertToSandboxPath(FString FullFilename);

@@ -17,52 +17,112 @@ FString UtilFileIO::BaseDir()
 	return ThePath;
 }
 
-FString UtilFileIO::RootDir()
+FString UtilFileIO::RootDir(bool isAbsPath)
 {
 	//InstallDir/WindowsNoEditor/
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::RootDir());
+	FString ThePath;
+
+	if (isAbsPath)
+	{
+		ThePath = FPaths::ConvertRelativePathToFull(FPaths::RootDir());
+	}
+	else
+	{
+		ThePath = FPaths::RootDir();
+	}
+
 	return ThePath;
 }
 
-FString UtilFileIO::GameDir()
+FString UtilFileIO::GameDir(bool isAbsPath)
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameDir': FPaths::GameDir() has been superseded by FPaths::ProjectDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName
 	//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameDir());
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
+	FString ThePath;
+
+	if (isAbsPath)
+	{
+		ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
+	}
+	else
+	{
+		ThePath = FPaths::ProjectDir();
+	}
+
 	return ThePath;
 }
 
-FString UtilFileIO::GameContentDir()
+FString UtilFileIO::GameContentDir(bool isAbsPath)
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Content
 	//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameContentDir());
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectContentDir());
+	FString ThePath;
+
+	if (isAbsPath)
+	{
+		ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectContentDir());
+	}
+	else
+	{
+		ThePath = FPaths::ProjectContentDir();
+	}
+
 	return ThePath;
 }
 
-FString UtilFileIO::EngineContentDir()
+FString UtilFileIO::EngineContentDir(bool isAbsPath)
 {
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::EngineContentDir());
+	FString ThePath;
+
+	if(isAbsPath)
+	{
+		ThePath = FPaths::ConvertRelativePathToFull(FPaths::EngineContentDir());
+	}
+	else
+	{
+		ThePath = FPaths::EngineContentDir();
+	}
+
 	return ThePath;
 }
 
-FString UtilFileIO::GameSavedDir()
+FString UtilFileIO::GameSavedDir(bool isAbsPath)
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameSavedDir': FPaths::GameSavedDir() has been superseded by FPaths::ProjectSavedDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Saved
 	//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameSavedDir());
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir());
+	FString ThePath;
+
+	if (isAbsPath)
+	{
+		ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir());
+	}
+	else
+	{
+		ThePath = FPaths::ProjectSavedDir();
+	}
+
 	return ThePath;
 }
 
-FString UtilFileIO::GameLogDir()
+FString UtilFileIO::GameLogDir(bool isAbsPath)
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameLogDir': FPaths::GameLogDir() has been superseded by FPaths::ProjectLogDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Saved/Logs
 	//const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::GameLogDir());
-	const FString ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectLogDir());
+	FString ThePath;
+
+	if (isAbsPath)
+	{
+		ThePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectLogDir());
+	}
+	else
+	{
+		ThePath = FPaths::ProjectLogDir();
+	}
+
 	return ThePath;
 }
 

@@ -3,6 +3,7 @@
 #include "MPakFileStream.h"
 #include "MyMemoryInc.h"
 #include "IPlatformFilePak.h"		// FPakFile
+#include "UtilFileIO.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -17,7 +18,8 @@ void MPakFileSystem::testLoadPak()
 {
 	//如果你想直接加载本地的pak的话,方法的参数列表删掉,然后把SaveArrayToFile这句话也删了,SaveContentDir填写你要加载的路径就可以了...
 		//1.把下载好的文件保存起来
-	FString SaveContentDir = FPaths::GameContentDir() + TEXT("MultiOne.pak");
+	//FString SaveContentDir = FPaths::GameContentDir() + TEXT("MultiOne.pak");
+	FString SaveContentDir = UtilFileIO::GameContentDir(false) + TEXT("MultiOne.pak");
 	//2.加载刚才保存的文件
 	//获取当前使用的平台,这里使用的是WIN64平台
 	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
@@ -30,7 +32,8 @@ void MPakFileSystem::testLoadPak()
 	FPakFile PakFile(&PlatformFile, *SaveContentDir, false);
 	//UE_LOG(LogClass, Log, TEXT("get PakFile..."))
 	//设置pak文件的Mount点. 
-	FString MountPoint(FPaths::EngineContentDir()); //"/../../../Engine/Content/"对应路径
+	//FString MountPoint(FPaths::EngineContentDir()); //"/../../../Engine/Content/"对应路径
+	FString MountPoint(UtilFileIO::EngineContentDir(false));
 	PakFile.SetMountPoint(*MountPoint);
 	//对pak文件mount到前面设定的MountPoint
 	if (PakPlatformFile->Mount(*SaveContentDir, 0, *MountPoint))

@@ -15,10 +15,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 void TestPak::run()
 {
-	GPakFileSystem->testLoadPak();
+	//GPakFileSystem->testLoadPak();
 
-	FString pakFileFullPath = UtilFileIO::GameContentDir() + TEXT("MyAsset/Pak/MultiOne.pak");
-	FString mountPoint(UtilFileIO::EngineContentDir());
+	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
+	FString mountPoint(UtilFileIO::EngineContentDir(false));
 
 	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
 
