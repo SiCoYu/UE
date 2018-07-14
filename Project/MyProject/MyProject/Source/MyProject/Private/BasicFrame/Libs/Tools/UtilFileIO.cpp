@@ -4,9 +4,10 @@
 #include "Misc/Paths.h"
 #include "Core.h"
 #include "CoreGlobals.h"
-#include "HAL/FileManager.h"
+#include "HAL/FileManager.h"		// IFileManager
 #include "Prequisites.h"
 #include "UtilStr.h"
+#include "Symbolic.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -368,14 +369,32 @@ FString UtilFileIO::convStreamingAssetsPathToMountPath(FString& streamingAssetsP
 	int contentIndex = -1;
 	int lastSlashIndex = -1;
 
+	contentIndex = streamingAssetsPath.Find(UtilEngineWrap::msContent);
 
+	if (-1 != contentIndex)
+	{
+		ret = streamingAssetsPath.Mid(contentIndex + UtilEngineWrap::msContent.Len(), streamingAssetsPath.Len() - (contentIndex + UtilEngineWrap::msContent.Len()));
+	}
+	else
+	{
+		ret = streamingAssetsPath;
+	}
+
+	lastSlashIndex = ret.Find(Symbolic::DIR_SEPARATOR);
+
+	if (-1 != lastSlashIndex)
+	{
+		ret = ret.Mid(0, lastSlashIndex);
+	}
+
+	return ret;
 }
 
 bool UtilFileIO::isBluePrints(FString& filePath)
 {
 	bool ret = false;
 
-	if (-1 != filePath.indexOf(UtilEngineWrap::msBlueprints))
+	if (-1 != filePath.Find(UtilEngineWrap::msBlueprints))
 	{
 		ret = true;
 	}

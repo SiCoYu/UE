@@ -27,8 +27,8 @@
 DEFINE_LOG_CATEGORY(MyLog);
 
 FString UtilEngineWrap::msClassObjectSuffix = TEXT("_C");
-FString UtilEngineWrap::msContent = TEXT("Content");
-FString UtilEngineWrap::msBlueprints = TEXT("MyBlueprints");
+FString UtilEngineWrap::msContent = TEXT("/Content/");
+FString UtilEngineWrap::msBlueprints = TEXT("/MyBlueprints/");
 
 UMyGameInstanceBase* UtilEngineWrap::GetGameInstance()
 {

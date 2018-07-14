@@ -3,7 +3,7 @@
 
 #include <string>
 #include <sstream>
-#include "Containers/UnrealString.h"
+#include "Containers/UnrealString.h"		// FString
 #include "IPlatformFileSandboxWrapper.h"	// FSandboxPlatformFile
 #include "UtilStr.h"
 #include "PlatformDefine.h"

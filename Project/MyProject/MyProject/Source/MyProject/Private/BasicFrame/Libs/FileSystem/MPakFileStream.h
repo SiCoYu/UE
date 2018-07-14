@@ -35,6 +35,7 @@ public:
 	FString getAssetPathInPakByIndex(int index);
 
 	void setMountPosType(MMountPosType value);
+	void _resolveInfo();
 
 protected:
 	FString _getSoftPathStr(FString& fileFullPathInPak);

@@ -6,6 +6,7 @@
 #include "MPakFileSystem.h"
 #include "MFileSystem.h"
 #include "UtilEngineWrap.h"
+#include "UtilFileIO.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -29,6 +30,7 @@ void MPakFileStream::dispose()
 void MPakFileStream::setPakFilePath(FString& value)
 {
 	this->mPakFilePath = value;
+	this->_resolveInfo();
 }
 
 void MPakFileStream::setMountPath(FString& value)
@@ -115,6 +117,20 @@ int MPakFileStream::getSoftPathCount()
 void MPakFileStream::setMountPosType(MMountPosType value)
 {
 	this->mMountPosType = value;
+}
+
+void MPakFileStream::_resolveInfo()
+{
+	if (UtilFileIO::isBluePrints(this->mPakFilePath))
+	{
+		this->mPakAssetClassObjectType = MPakAssetClassObjectType::eClass;
+	}
+	else
+	{
+		this->mPakAssetClassObjectType = MPakAssetClassObjectType::eObject;
+	}
+
+	this->mMountPoint = UtilFileIO::EngineContentDir(false) + UtilFileIO::convStreamingAssetsPathToMountPath(this->mPakFilePath);
 }
 
 MY_END_NAMESPACE
