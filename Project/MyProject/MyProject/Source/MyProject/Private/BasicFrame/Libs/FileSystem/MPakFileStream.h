@@ -4,6 +4,7 @@
 #include "Containers/UnrealString.h"	// FString
 #include "GObject.h"
 #include "MMountState.h"
+#include "MMountPosType.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -11,9 +12,11 @@ MY_BEGIN_NAMESPACE(MyNS)
 class MPakFileStream : public GObject
 {
 protected:
+	// 一定是相对目录，绝对目录是加载不了资源的
 	FString mPakFilePath;
 	FString mMountPoint;
 	MMountState mMountState;
+	MMountPosType mMountPosType;
 	TArray<FString> mFileList;
 
 public:
@@ -28,6 +31,8 @@ public:
 	FString getSoftPathStrByIndex(int index);
 	int getSoftPathCount();
 	FString getAssetPathInPakByIndex(int index);
+
+	void setMountPosType(MMountPosType value);
 
 protected:
 	FString _getSoftPathStr(FString& fileFullPathInPak);

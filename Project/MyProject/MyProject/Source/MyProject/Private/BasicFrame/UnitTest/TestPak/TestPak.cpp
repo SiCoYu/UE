@@ -17,8 +17,12 @@ void TestPak::run()
 {
 	//GPakFileSystem->testLoadPak();
 
+	// 一定是相对目录，绝对目录是加载不了资源的
+	//FString pakFileFullPath = UtilFileIO::GameContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
+	//FString mountPoint(UtilFileIO::EngineContentDir(true));
 	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
-	FString mountPoint(UtilFileIO::EngineContentDir(false));
+	//FString mountPoint(UtilFileIO::EngineContentDir(false));
+	FString mountPoint(UtilFileIO::GameContentDir(false));
 
 	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
 
