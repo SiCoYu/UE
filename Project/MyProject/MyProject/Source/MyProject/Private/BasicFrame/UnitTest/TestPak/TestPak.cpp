@@ -24,6 +24,7 @@ void TestPak::run()
 	VersionSysN* a = MY_NEW VersionSysN();
 }
 
+// 一个 pak 包一个资源
 void TestPak::_testA()
 {
 	// 一定是相对目录，绝对目录是加载不了资源的
@@ -43,6 +44,7 @@ void TestPak::_testA()
 	GPakFileSystem->mountBaseFileSystem();
 }
 
+// 一个 pak 包多个资源
 void TestPak::_testB()
 {
 	// 一定是相对目录，绝对目录是加载不了资源的
@@ -65,6 +67,7 @@ void TestPak::_testB()
 	GPakFileSystem->mountBaseFileSystem();
 }
 
+// 两个个 pak 包，每个包一个资源
 void TestPak::_testC()
 {
 	// 一定是相对目录，绝对目录是加载不了资源的
