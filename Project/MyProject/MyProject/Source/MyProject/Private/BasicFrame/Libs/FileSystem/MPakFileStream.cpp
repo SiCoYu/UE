@@ -49,7 +49,7 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 
 void MPakFileStream::mount()
 {
-	if (GPakFileSystem->mountPakToFileSystem(this->mPakFilePath, this->mMountPoint))
+	if (GPakFileSystem->mountPakFileSystem(this->mPakFilePath, this->mMountPoint))
 	{
 		this->mMountState = MMountState::eSuccess;
 

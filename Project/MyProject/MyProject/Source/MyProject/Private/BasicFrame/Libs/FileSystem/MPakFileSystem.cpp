@@ -106,7 +106,7 @@ MPakFileStream* MPakFileSystem::mountOnePak(FString& pakFileFullPath, FString& m
 	return pakFileStream;
 }
 
-bool MPakFileStream::mountPakFileSystem(FString& pakFileFullPath, FString& mountPoint)
+bool MPakFileSystem::mountPakFileSystem(FString& pakFileFullPath, FString& mountPoint)
 {
 	bool ret = false;
 
@@ -126,9 +126,10 @@ bool MPakFileStream::mountPakFileSystem(FString& pakFileFullPath, FString& mount
 	return ret;
 }
 
-bool MPakFileStream::mountBaseFileSystem()
+bool MPakFileSystem::mountBaseFileSystem()
 {
 	FPlatformFileManager::Get().SetPlatformFile(*(this->mBasePlatformFile));
+	return true;
 }
 
 MY_END_NAMESPACE
