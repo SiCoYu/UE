@@ -12,7 +12,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 MPakFileStream::MPakFileStream()
 {
 	this->mMountState = MMountState::eNull;
-	this->mMountPosType = MMountPosType::eProject;
+	this->mMountPosType = MMountPosType::eEngine;
 }
 
 void MPakFileStream::init()
@@ -46,13 +46,13 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 
 	if (MMountPosType::eProject == this->mMountPosType)
 	{
-		assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
-		//assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr;
+		//assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+		assetName = MFileSystem::msProjectContentPathPrefix + leftStr + TEXT(".") + leftStr;
 	}
 	else
 	{
-		assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
-		//assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
+		//assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr + UtilEngineWrap::msClassObjectSuffix;
+		assetName = MFileSystem::msEngineContentPathPrefix + leftStr + TEXT(".") + leftStr;
 	}
 
 	return assetName;
@@ -78,7 +78,7 @@ void MPakFileStream::mount()
 
 // mPakFilePath : G:/UE/Project/MyProject/MyProject/Content/MyStreamingAssets/MultiOne.pak
 // mMountPoint : G:/File/opensource/UnrealEngine-4.0/UnrealEngine-git/Engine/Content/
-// getAssetPathInPakByIndex£º G:/File/opensource/UnrealEngine-4.0/UnrealEngine-git/Engine/Content/pak/MyAsset/
+// getAssetPathInPakByIndexï¼š G:/File/opensource/UnrealEngine-4.0/UnrealEngine-git/Engine/Content/pak/MyAsset/
 FString MPakFileStream::getAssetPathInPakByIndex(int index)
 {
 	FString ret;

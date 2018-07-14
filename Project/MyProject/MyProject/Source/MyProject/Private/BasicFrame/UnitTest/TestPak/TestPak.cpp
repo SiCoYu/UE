@@ -17,12 +17,12 @@ void TestPak::run()
 {
 	//GPakFileSystem->testLoadPak();
 
-	// Ò»¶¨ÊÇÏà¶ÔÄ¿Â¼£¬¾ø¶ÔÄ¿Â¼ÊÇ¼ÓÔØ²»ÁË×ÊÔ´µÄ
+	// ä¸€å®šæ˜¯ç›¸å¯¹ç›®å½•ï¼Œç»å¯¹ç›®å½•æ˜¯åŠ è½½ä¸äº†èµ„æºçš„
 	//FString pakFileFullPath = UtilFileIO::GameContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
 	//FString mountPoint(UtilFileIO::EngineContentDir(true));
 	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
-	//FString mountPoint(UtilFileIO::EngineContentDir(false));
-	FString mountPoint(UtilFileIO::GameContentDir(false));
+	FString mountPoint(UtilFileIO::EngineContentDir(false));
+	//FString mountPoint(UtilFileIO::GameContentDir(false));
 
 	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
 
