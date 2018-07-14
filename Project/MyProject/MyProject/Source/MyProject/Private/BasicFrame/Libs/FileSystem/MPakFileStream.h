@@ -20,6 +20,7 @@ protected:
 	MMountPosType mMountPosType;
 	MPakAssetClassObjectType mPakAssetClassObjectType;
 	TArray<FString> mFileList;
+	FString mMountRelPath;	// ¹ÒÔØÏà¶ÔÄ¿Â¼
 
 public:
 	MPakFileStream();
