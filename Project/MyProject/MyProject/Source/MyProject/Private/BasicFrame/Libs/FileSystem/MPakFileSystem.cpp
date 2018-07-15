@@ -129,9 +129,22 @@ bool MPakFileSystem::mountPakFileSystem(FString& pakFileFullPath, FString& mount
 	//	return TCastImpl<From, To>::DoCast(Src);
 	//}
 	//FPakPlatformFile* pakPlatformFile = Cast<FPakPlatformFile>(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
+
+	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+
 	FPakPlatformFile* pakPlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
 
-	GFileSys->SetPlatformFile(*pakPlatformFile);
+	if (nullptr == pakPlatformFile)
+	{
+		pakPlatformFile = new FPakPlatformFile();
+		pakPlatformFile->Initialize(&PlatformFile, TEXT(""));
+
+		GFileSys->SetPlatformFile(*pakPlatformFile);
+	}
+	else if(&PlatformFile != pakPlatformFile)
+	{
+		GFileSys->SetPlatformFile(*pakPlatformFile);
+	}
 
 	if (pakPlatformFile->Mount(*pakFileFullPath, 0, *mountPoint))
 	{
@@ -147,6 +160,37 @@ bool MPakFileSystem::mountBaseFileSystem()
 	IPlatformFile& physicalPlatformFile = IPlatformFile::GetPlatformPhysical();
 	GFileSys->SetPlatformFile(physicalPlatformFile);
 	return true;
+}
+
+FPakFile* MPakFileSystem::getPakFileByPath(FString& InPakFilename)
+{
+	FPakPlatformFile* pakPlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
+
+	for (int PakIndex = 0; PakIndex < pakPlatformFile->PakFiles.Num(); PakIndex++)
+	{
+		if (pakPlatformFile->PakFiles[PakIndex].PakFile->GetFilename() == InPakFilename)
+		{
+			return pakPlatformFile->PakFiles[PakIndex].PakFile;
+		}
+	}
+
+	return nullptr;
+}
+
+const FPakEntry* MPakFileSystem::getFileInPakByPath(FString& path)
+{
+	FPakPlatformFile* PlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
+
+	FPakFile* pakFile = nullptr;
+	const FPakEntry* pakEntry = PlatformFile->FindFileInPakFiles(*this->mPakFilePath, &pakFile);
+
+	return pakEntry;
+}
+
+bool MPakFileSystem::Unmount(const TCHAR* InPakFilename)
+{
+	FPakPlatformFile* PlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
+	PlatformFile->Unmount(InPakFilename);
 }
 
 MY_END_NAMESPACE

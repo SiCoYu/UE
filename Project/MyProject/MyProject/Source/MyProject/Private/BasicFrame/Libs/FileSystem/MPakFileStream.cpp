@@ -7,6 +7,7 @@
 #include "MFileSystem.h"
 #include "UtilEngineWrap.h"
 #include "UtilFileIO.h"
+#include "FileSystemInc.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -24,7 +25,7 @@ void MPakFileStream::init()
 
 void MPakFileStream::dispose()
 {
-
+	GPakFileSystem->Unmount(*(this->mPakFilePath));
 }
 
 void MPakFileStream::setPakFilePath(FString& value)
@@ -103,19 +104,28 @@ FString MPakFileStream::_getSoftPathStr(FString& fileFullPathInPak)
 
 void MPakFileStream::mount()
 {
-	if (GPakFileSystem->mountPakFileSystem(this->mPakFilePath, this->mMountPoint))
+	if (MMountState::eNull == this->mMountState ||
+		MMountState::eFail == this->mMountState)
 	{
-		this->mMountState = MMountState::eSuccess;
+		if (GPakFileSystem->mountPakFileSystem(this->mPakFilePath, this->mMountPoint))
+		{
+			this->mMountState = MMountState::eSuccess;
 
-		IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-		FPakFile pakFile(&PlatformFile, *this->mPakFilePath, false);
+			//IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+			//IPlatformFile& PlatformFile = FPlatformFileManager::Get().FindPlatformFile(MFileSystem::PakFile);
+			//FPakFile pakFile(&PlatformFile, *this->mPakFilePath, false);
 
-		pakFile.SetMountPoint(*this->mMountPoint);
-		pakFile.FindFilesAtPath(this->mFileList, *pakFile.GetMountPoint(), true, false, true);
-	}
-	else
-	{
-		this->mMountState = MMountState::eFail;
+			//pakFile.SetMountPoint(*this->mMountPoint);
+			//pakFile.FindFilesAtPath(this->mFileList, *pakFile.GetMountPoint(), true, false, true);
+
+			FPakFile* pakFile = nullptr;
+			pakFile = GPakFileSystem->getPakFileByPath(this->mPakFilePath);
+			pakFile->FindFilesAtPath(this->mFileList, *(pakFile->GetMountPoint()), true, false, true);
+		}
+		else
+		{
+			this->mMountState = MMountState::eFail;
+		}
 	}
 }
 

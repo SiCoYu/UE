@@ -7,6 +7,8 @@
 
 class FPakPlatformFile;
 class IPlatformFile;
+struct FPakEntry;
+class FPakFile;
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -36,6 +38,10 @@ public:
 
 	bool mountPakFileSystem(FString& pakFileFullPath, FString& mountPoint);
 	bool mountBaseFileSystem();
+
+	FPakFile* getPakFileByPath(FString& path);
+	const FPakEntry* getFileInPakByPath(FString& path);
+	bool Unmount(const TCHAR* InPakFilename);
 };
 
 MY_END_NAMESPACE
