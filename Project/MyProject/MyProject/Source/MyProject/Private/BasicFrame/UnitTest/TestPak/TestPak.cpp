@@ -9,7 +9,6 @@
 #include "Ctx.h"
 #include "MySoftObjectPath.h"
 #include "MyStreamableManager.h"
-#include "VersionSysN.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -20,8 +19,6 @@ void TestPak::run()
 	//this->_testA();
 	//this->_testB();
 	this->_testC();
-
-	VersionSysN* a = MY_NEW VersionSysN();
 }
 
 // 一个 pak 包一个资源

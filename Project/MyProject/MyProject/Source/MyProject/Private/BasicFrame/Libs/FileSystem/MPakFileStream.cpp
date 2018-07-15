@@ -112,19 +112,20 @@ void MPakFileStream::mount()
 			this->mMountState = MMountState::eSuccess;
 
 			//IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-			//IPlatformFile& PlatformFile = FPlatformFileManager::Get().FindPlatformFile(MFileSystem::PakFile);
-			//FPakFile pakFile(&PlatformFile, *this->mPakFilePath, false);
+			IPlatformFile& PlatformFile = *(FPlatformFileManager::Get().FindPlatformFile(*MFileSystem::PakFile));
+			// FPakFile 文件 FPakPlatformFile::Mount 会生成，但是并没有提供接口获取这个 FPakFile ，可能是因为多线程访问的原因，因此自己需要重新生成一个 FPakFile
+			FPakFile pakFile(&PlatformFile, *this->mPakFilePath, false);
 
-			//pakFile.SetMountPoint(*this->mMountPoint);
-			//pakFile.FindFilesAtPath(this->mFileList, *pakFile.GetMountPoint(), true, false, true);
+			pakFile.SetMountPoint(*this->mMountPoint);
+			pakFile.FindFilesAtPath(this->mFileList, *pakFile.GetMountPoint(), true, false, true);
 
-			FPakFile* pakFile = nullptr;
+			//FPakFile* pakFile = nullptr;
 			//pakFile = GPakFileSystem->getPakFileByPath(this->mPakFilePath);
 			//pakFile->FindFilesAtPath(this->mFileList, *(pakFile->GetMountPoint()), true, false, true);
 
-			FPakPlatformFile* pakPlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
-			pakPlatformFile->FindFileInPakFiles(*this->mPakFilePath, &pakFile);
-			pakFile->FindFilesAtPath(this->mFileList, *(pakFile->GetMountPoint()), true, false, true);
+			//FPakPlatformFile* pakPlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
+			//pakPlatformFile->FindFileInPakFiles(*this->mPakFilePath, &pakFile);
+			//pakFile->FindFilesAtPath(this->mFileList, *(pakFile->GetMountPoint()), true, false, true);
 		}
 		else
 		{
