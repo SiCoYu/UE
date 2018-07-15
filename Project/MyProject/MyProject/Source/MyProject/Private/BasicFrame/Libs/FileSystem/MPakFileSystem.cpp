@@ -162,27 +162,27 @@ bool MPakFileSystem::mountBaseFileSystem()
 	return true;
 }
 
-FPakFile* MPakFileSystem::getPakFileByPath(FString& InPakFilename)
-{
-	FPakPlatformFile* pakPlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
-
-	for (int PakIndex = 0; PakIndex < pakPlatformFile->PakFiles.Num(); PakIndex++)
-	{
-		if (pakPlatformFile->PakFiles[PakIndex].PakFile->GetFilename() == InPakFilename)
-		{
-			return pakPlatformFile->PakFiles[PakIndex].PakFile;
-		}
-	}
-
-	return nullptr;
-}
+//FPakFile* MPakFileSystem::getPakFileByPath(FString& InPakFilename)
+//{
+//	FPakPlatformFile* pakPlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
+//
+//	for (int PakIndex = 0; PakIndex < pakPlatformFile->PakFiles.Num(); PakIndex++)
+//	{
+//		if (pakPlatformFile->PakFiles[PakIndex].PakFile->GetFilename() == InPakFilename)
+//		{
+//			return pakPlatformFile->PakFiles[PakIndex].PakFile;
+//		}
+//	}
+//
+//	return nullptr;
+//}
 
 const FPakEntry* MPakFileSystem::getFileInPakByPath(FString& path)
 {
 	FPakPlatformFile* PlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
 
 	FPakFile* pakFile = nullptr;
-	const FPakEntry* pakEntry = PlatformFile->FindFileInPakFiles(*this->mPakFilePath, &pakFile);
+	const FPakEntry* pakEntry = PlatformFile->FindFileInPakFiles(*path, &pakFile);
 
 	return pakEntry;
 }
@@ -191,6 +191,7 @@ bool MPakFileSystem::Unmount(const TCHAR* InPakFilename)
 {
 	FPakPlatformFile* PlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
 	PlatformFile->Unmount(InPakFilename);
+	return true;
 }
 
 MY_END_NAMESPACE

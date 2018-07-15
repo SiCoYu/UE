@@ -119,7 +119,11 @@ void MPakFileStream::mount()
 			//pakFile.FindFilesAtPath(this->mFileList, *pakFile.GetMountPoint(), true, false, true);
 
 			FPakFile* pakFile = nullptr;
-			pakFile = GPakFileSystem->getPakFileByPath(this->mPakFilePath);
+			//pakFile = GPakFileSystem->getPakFileByPath(this->mPakFilePath);
+			//pakFile->FindFilesAtPath(this->mFileList, *(pakFile->GetMountPoint()), true, false, true);
+
+			FPakPlatformFile* pakPlatformFile = (FPakPlatformFile*)(GFileSys->FindPlatformFile(*MFileSystem::PakFile));
+			pakPlatformFile->FindFileInPakFiles(*this->mPakFilePath, &pakFile);
 			pakFile->FindFilesAtPath(this->mFileList, *(pakFile->GetMountPoint()), true, false, true);
 		}
 		else

@@ -39,7 +39,7 @@ public:
 	bool mountPakFileSystem(FString& pakFileFullPath, FString& mountPoint);
 	bool mountBaseFileSystem();
 
-	FPakFile* getPakFileByPath(FString& path);
+	//FPakFile* getPakFileByPath(FString& path);
 	const FPakEntry* getFileInPakByPath(FString& path);
 	bool Unmount(const TCHAR* InPakFilename);
 };
