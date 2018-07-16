@@ -34,6 +34,7 @@ void MyAssetRegistry::_testA()
 	FString objectPath = TEXT("");
 
 	// AssetRegistryModule.Get 返回 IAssetRegistry， Runtime\AssetRegistry\Public\IAssetRegistry.h ， UAssetRegistryImpl 接口 Engine\Source\Runtime\AssetRegistry\Private\AssetRegistry.h 
+	FAssetRegistryModule& AssetRegistryModule = FModuleManager::Get().LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry"));
 	FAssetData AssetData = AssetRegistryModule.Get().GetAssetByObjectPath(*objectPath);
 
 	if (AssetData.IsValid())
