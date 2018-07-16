@@ -4,6 +4,7 @@
 #include "AssetData.h"	// FAssetData
 #include "Engine/Texture2D.h"		// UTexture2D 
 #include "AssetRegistryModule.h"	// FAssetRegistryModule
+#include "IAssetRegistry.h"		// IAssetRegistry
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -27,6 +28,19 @@ void MyAssetRegistry::dispose()
 
 }
 
+FAssetRegistryModule& MyAssetRegistry::getAssetRegistryModule()
+{
+	FAssetRegistryModule& AssetRegistryModule = FModuleManager::Get().LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry"));
+	return AssetRegistryModule;
+}
+
+IAssetRegistry& MyAssetRegistry::getAssetRegistry()
+{
+	FAssetRegistryModule& AssetRegistryModule = FModuleManager::Get().LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry"));
+	IAssetRegistry& AssetRegistry = AssetRegistryModule.Get();
+	return AssetRegistry;
+}
+
 void MyAssetRegistry::_testA()
 {
 	// Engine\Plugins\2D\Paper2D\Source\Paper2DEditor\Private\PaperSpriteFactory.cpp
@@ -34,7 +48,7 @@ void MyAssetRegistry::_testA()
 	FString objectPath = TEXT("");
 
 	// AssetRegistryModule.Get 返回 IAssetRegistry， Runtime\AssetRegistry\Public\IAssetRegistry.h ， UAssetRegistryImpl 接口 Engine\Source\Runtime\AssetRegistry\Private\AssetRegistry.h 
-	FAssetRegistryModule& AssetRegistryModule = FModuleManager::Get().LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry"));
+	FAssetRegistryModule& AssetRegistryModule = this->getAssetRegistryModule();
 	FAssetData AssetData = AssetRegistryModule.Get().GetAssetByObjectPath(*objectPath);
 
 	if (AssetData.IsValid())
@@ -44,6 +58,12 @@ void MyAssetRegistry::_testA()
 
 		}
 	}
+}
+
+void MyAssetRegistry::GetDependencies(FName PackageName, TArray<FName>& OutDependencies, EAssetRegistryDependencyType::Type InDependencyType)
+{
+	FAssetRegistryModule& AssetRegistryModule = this->getAssetRegistryModule();
+	AssetRegistryModule.GetDependencies(PackageName, OutDependencies, InDependencyType);
 }
 
 MY_END_NAMESPACE
