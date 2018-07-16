@@ -4,6 +4,7 @@
 #include "UObject/NameTypes.h"	// FName
 #include "Containers/Array.h"	// TArray
 #include "Misc/AssetRegistryInterface.h"	// EAssetRegistryDependencyType
+#include "AssetData.h"	// FAssetData
 #include "GObject.h"
 #include "PlatformDefine.h"
 
@@ -30,6 +31,7 @@ public:
 	FAssetRegistryModule& getAssetRegistryModule();
 	IAssetRegistry& getAssetRegistry()/* const*/;
 	void GetDependencies(FName PackageName, TArray<FName>& OutDependencies, EAssetRegistryDependencyType::Type InDependencyType = EAssetRegistryDependencyType::All);
+	// Engine\Source\Runtime\AssetRegistry\Private\AssetRegistry.h
 	FAssetData GetAssetByObjectPath(const FName ObjectPath, bool bIncludeOnlyOnDiskAssets = false);
 };
 
