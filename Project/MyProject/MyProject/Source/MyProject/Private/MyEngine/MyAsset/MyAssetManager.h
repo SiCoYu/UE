@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Engine/AssetManager.h"	 // UAssetManager
+#include "UObject/PrimaryAssetId.h"		// FPrimaryAssetId
+#include "Engine/AssetManager.h"		// UAssetManager
+#include "AssetData.h"			// FAssetData
 //#include "MyAssetManager.generated.h"
 #include "PlatformDefine.h"
 
@@ -26,6 +28,8 @@ public:
 
 	void init();
 	void dispose();
+
+	FPrimaryAssetId getPrimaryAssetIdFromAssetData(const FAssetData& AssetData)
 };
 
 MY_END_NAMESPACE
