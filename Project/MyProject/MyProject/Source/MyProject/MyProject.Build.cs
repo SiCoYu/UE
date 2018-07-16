@@ -208,6 +208,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/UnitTest/TestOther",
                 "MyProject/Private/BasicFrame/UnitTest/TestLuaBind",
                 "MyProject/Private/BasicFrame/UnitTest/TestPak",
+                "MyProject/Private/BasicFrame/UnitTest/TestAsset",
 
                 // Example
                 "MyProject/Private/BasicFrame/Example/AccessMesh",
