@@ -59,6 +59,8 @@ class ResRedirect;
 class VersionSys;
 class AutoClearSys;
 class MPakFileSystem;
+class MyAssetManager;
+class MyAssetRegistry;
 
 MY_END_NAMESPACE
 
@@ -115,6 +117,9 @@ protected:
 	MySharedPtr<VersionSys> mVersionSys;
 	MySharedPtr<AutoClearSys> mAutoClearSys;
 	MySharedPtr<MPakFileSystem> mPakFileSystem;
+	MySharedPtr<MyAssetManager> mMyAssetManager;
+	MySharedPtr<MyAssetRegistry> mMyAssetRegistry;
+
 	//MySharedPtr<UMyBluePrintBase> mBPCtx;
 
 	UMyBluePrintBase* mBPCtx;
@@ -191,6 +196,8 @@ public:
 	MySharedPtr<VersionSys> getVersionSys();
 	MySharedPtr<AutoClearSys> getAutoClearSys();
 	MySharedPtr<MPakFileSystem> getPakFileSystem();
+	MySharedPtr<MyAssetManager> getMyAssetManager();
+	MySharedPtr<MyAssetRegistry> getMyAssetRegistry();
 
 	//MySharedPtr<UMyBluePrintBase> getBPCtx();
 	UMyBluePrintBase* getBPCtx();
@@ -252,6 +259,8 @@ public:
 #define GVersionSys GCtx->getVersionSys()
 #define GAutoClearSys GCtx->getAutoClearSys()
 #define GPakFileSystem GCtx->getPakFileSystem()
+#define GMyAssetManager GCtx->getMyAssetManager()
+#define GMyAssetRegistry GCtx->getMyAssetRegistry()
 
 #define GBPCtx GCtx->getBPCtx()
 #define GNativeObjectReferencer GCtx->getNativeObjectReferencer()

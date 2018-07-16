@@ -43,6 +43,8 @@
 #include "VersionSys.h"
 #include "AutoClearSys.h"
 #include "MPakFileSystem.h"
+#include "MyAssetManager.h"
+#include "MyAssetRegistry.h"
 
 #include "TickPriority.h"
 //#include "MySingletonBP.h"
@@ -104,6 +106,8 @@ Ctx::Ctx()
 	this->mGlobalEventCmd.setNull();
 	this->mAutoClearSys.setNull();
 	this->mPakFileSystem.setNull();
+	this->mMyAssetManager.setNull();
+	this->mMyAssetRegistry.setNull();
 
 	this->mBPCtx = nullptr;
 	this->mMyNativeObjectReferencer = nullptr;
@@ -167,6 +171,8 @@ void Ctx::construct()
 	this->mVersionSys = MySharedPtr<VersionSys>(MY_NEW VersionSys());
 	this->mAutoClearSys = MySharedPtr<AutoClearSys>(MY_NEW AutoClearSys());
 	this->mPakFileSystem = MySharedPtr<MPakFileSystem>(MY_NEW MPakFileSystem());
+	this->mMyAssetManager = MySharedPtr<MyAssetManager>(MY_NEW MyAssetManager());
+	this->mMyAssetRegistry = MySharedPtr<MyAssetRegistry>(MY_NEW MyAssetRegistry());
 
 	this->mMyNativeObjectReferencer = new FMyNativeObjectReferencer();
 
@@ -219,6 +225,8 @@ void Ctx::_execInit()
 	this->mVersionSys->init();
 	this->mAutoClearSys->init();
 	this->mPakFileSystem->init();
+	this->mMyAssetManager->init();
+	this->mMyAssetRegistry->init();
 
 	this->mBPCtx->init();
 	this->mMyNativeObjectReferencer->init();
@@ -289,6 +297,8 @@ void Ctx::_preDispose()
 	this->mVersionSys->dispose();
 	this->mAutoClearSys->dispose();
 	this->mPakFileSystem->dispose();
+	this->mMyAssetManager->dispose();
+	this->mMyAssetRegistry->dispose();
 
 	this->mBPCtx->dispose();
 	this->mMyNativeObjectReferencer->dispose();
@@ -348,6 +358,8 @@ void Ctx::_execDispose()
 	this->mVersionSys.setNull();
 	this->mAutoClearSys.setNull();
 	this->mPakFileSystem.setNull();
+	this->mMyAssetManager.setNull();
+	this->mMyAssetRegistry.setNull();
 
 	this->mBPCtx = nullptr;
 }
@@ -625,6 +637,16 @@ MySharedPtr<AutoClearSys> Ctx::getAutoClearSys()
 MySharedPtr<MPakFileSystem> Ctx::getPakFileSystem()
 {
 	return this->mPakFileSystem;
+}
+
+MySharedPtr<MyAssetManager> Ctx::getMyAssetManager()
+{
+	return this->mMyAssetManager;
+}
+
+MySharedPtr<MyAssetRegistry> Ctx::getMyAssetRegistry()
+{
+	return this->mMyAssetRegistry;
 }
 
 UMyBluePrintBase* Ctx::getBPCtx()
