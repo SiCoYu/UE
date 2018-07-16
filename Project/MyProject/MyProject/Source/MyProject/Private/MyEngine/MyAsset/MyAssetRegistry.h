@@ -29,8 +29,8 @@ public:
 
 	FAssetRegistryModule& getAssetRegistryModule();
 	IAssetRegistry& getAssetRegistry()/* const*/;
-	void _testA();
 	void GetDependencies(FName PackageName, TArray<FName>& OutDependencies, EAssetRegistryDependencyType::Type InDependencyType = EAssetRegistryDependencyType::All);
+	FAssetData GetAssetByObjectPath(const FName ObjectPath, bool bIncludeOnlyOnDiskAssets = false);
 };
 
 MY_END_NAMESPACE

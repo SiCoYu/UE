@@ -9,6 +9,10 @@ class TestAsset : public TestBase
 {
 public:
 	virtual void run() override;
+
+protected:
+	void _testDep();
+	void _testGetAssetData();
 };
 
 MY_END_NAMESPACE
