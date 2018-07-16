@@ -7,7 +7,9 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 /**
+ * @brief 资源的基本管理使用，例如加载卸载资源
  * @src Engine\Source\Runtime\Engine\Classes\Engine\AssetManager.h
+ * @src Engine\Source\Runtime\Engine\Private\AssetManager.cpp
  * @ref Engine\Plugins\Editor\AssetManagerEditor\Source\AssetManagerEditor\Private\AssetManagerEditorModule.cpp
  */
 

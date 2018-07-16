@@ -33,7 +33,7 @@ void MyAssetRegistry::_testA()
 	// UObject* UPaperSpriteFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn)
 	FString objectPath = TEXT("");
 
-	// AssetRegistryModule.Get ·µ»Ø IAssetRegistry£¬ Runtime\AssetRegistry\Public\IAssetRegistry.h £¬ UAssetRegistryImpl ½Ó¿Ú Engine\Source\Runtime\AssetRegistry\Private\AssetRegistry.h 
+	// AssetRegistryModule.Get è¿”å› IAssetRegistryï¼Œ Runtime\AssetRegistry\Public\IAssetRegistry.h ï¼Œ UAssetRegistryImpl æ¥å£ Engine\Source\Runtime\AssetRegistry\Private\AssetRegistry.h 
 	FAssetData AssetData = AssetRegistryModule.Get().GetAssetByObjectPath(*objectPath);
 
 	if (AssetData.IsValid())
