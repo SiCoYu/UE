@@ -29,7 +29,7 @@ public:
 	void init();
 	void dispose();
 
-	FPrimaryAssetId getPrimaryAssetIdFromAssetData(const FAssetData& AssetData)
+	FPrimaryAssetId getPrimaryAssetIdFromAssetData(const FAssetData& AssetData);
 };
 
 MY_END_NAMESPACE
