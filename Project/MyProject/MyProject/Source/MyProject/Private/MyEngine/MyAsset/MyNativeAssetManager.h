@@ -12,4 +12,6 @@ class UMyNativeAssetManager : public UAssetManager
 public:
 	UMyNativeAssetManager();
 	~UMyNativeAssetManager();
+
+	virtual void StartInitialLoading() override;
 };

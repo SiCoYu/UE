@@ -10,3 +10,8 @@ UMyNativeAssetManager::~UMyNativeAssetManager()
 {
 	
 }
+
+void UMyNativeAssetManager::StartInitialLoading()
+{
+	Super::StartInitialLoading();
+}

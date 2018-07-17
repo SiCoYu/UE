@@ -18,7 +18,7 @@ void TestAsset::run()
 void TestAsset::_testDep()
 {
 	TArray<FName> OutDependencies;
-	GMyAssetRegistry->GetDependencies(TEXT(""), OutDependencies);
+	GMyAssetRegistry->GetDependencies(TEXT("Blueprint'/Game/MyAsset/MyTom/PakTest.PakTest'"), OutDependencies);
 }
 
 void TestAsset::_testGetAssetData()

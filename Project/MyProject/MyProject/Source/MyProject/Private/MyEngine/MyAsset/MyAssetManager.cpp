@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "MyAssetManager.h"
+#include "MyNativeAssetManager.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -32,7 +33,10 @@ FPrimaryAssetId MyAssetManager::getPrimaryAssetIdFromAssetData(const FAssetData&
 {
 	// Engine\Plugins\Editor\AssetManagerEditor\Source\AssetManagerEditor\Private\AssetManagerEditorModule.cpp
 	// TSharedRef<SWidget> IAssetManagerEditorModule::MakePrimaryAssetIdSelector(FOnGetPrimaryAssetDisplayText OnGetDisplayText, FOnSetPrimaryAssetId OnSetId, bool bAllowClear, TArray<FPrimaryAssetType> AllowedTypes)
+
 	UAssetManager& Manager = UAssetManager::Get();
+	//UMyNativeAssetManager& Manager = UMyNativeAssetManager::Get();
+
 	FPrimaryAssetId AssetId;
 
 	if (AssetData.IsValid())
