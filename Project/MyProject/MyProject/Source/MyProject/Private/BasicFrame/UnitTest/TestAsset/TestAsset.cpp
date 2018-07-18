@@ -12,7 +12,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 void TestAsset::run()
 {
-	
+	this->_testDep();
 }
 
 void TestAsset::_testDep()
