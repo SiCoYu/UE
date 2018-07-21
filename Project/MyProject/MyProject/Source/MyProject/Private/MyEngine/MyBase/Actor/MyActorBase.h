@@ -23,4 +23,6 @@ public:
 	// ue4-控制台执行方法: http://blog.csdn.net/yangxuan0261/article/details/53969564
 	UFUNCTION(Exec)
 	void execInConsole();
+
+	virtual void NotifyHit(class UPrimitiveComponent* MyComp, AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 };

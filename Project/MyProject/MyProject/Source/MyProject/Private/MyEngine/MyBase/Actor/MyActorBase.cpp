@@ -26,3 +26,8 @@ void AMyActorBase::execInConsole()
 {
 	UE_LOG(ComWarning, Warning, TEXT("name:%s, Say hello"), *mName);
 }
+
+void AMyActorBase::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
+{
+	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+}
