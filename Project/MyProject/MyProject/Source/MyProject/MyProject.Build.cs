@@ -304,6 +304,7 @@ public class MyProject : ModuleRules
                 "ScriptPlugin",     // ScriptPlugin 插件
                 // error : Could not find definition for module 'MyScriptPlugin' (referenced via Target -> MyProject.Build.cs)
                 //"MyScriptPlugin",     // ScriptPlugin 插件
+                "NavigationSystem",     // UE 4.20 error LNK2019: unresolved external symbol "__declspec(dllimport) public: static class UClass * __cdecl UNavigationSystemV1::StaticClass(void)" (__imp_?StaticClass@UNavigationSystemV1@@SAPEAVUClass@@XZ), 不添加会有链接错误， 4.20 之前如果不添加 NavigationSystem 引用，直接使用时没有链接错误的
             }
         );
 
@@ -334,6 +335,7 @@ public class MyProject : ModuleRules
             PublicDefinitions.Add("_CRT_SECURE_NO_WARNINGS");
             PublicDefinitions.Add("__WIN32__");
             // VS 2017: error C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+            // 添加后出现 warning C4005: 'WIN32_LEAN_AND_MEAN': macro redefinition
             PublicDefinitions.Add("WIN32_LEAN_AND_MEAN");
         }
         //Definitions.Add("WIN32_LEAN_AND_MEAN");
