@@ -10,16 +10,25 @@
 #include "UObject/Class.h"
 #include "UObject/NameTypes.h"
 
+// 是否调用导出的 C 注册到 Lua 函数
+//#define MY_ENABLE_CALL_LUA_REGISTER
+
 // 声明必须放在 #include "GeneratedScriptLibraries.inl" 包含文件前面，因为 #include "GeneratedScriptLibraries.inl" 中包含的其它文件需要使用这个接口
 // MyProject\MyProject\Plugins\MyScriptPlugin\Source\ScriptPlugin\Private\ScriptPlugin.cpp
+#ifdef ENABLE_CALL_LUA_REGISTER
 UProperty* FindScriptPropertyHelper(UClass* Class, FName PropertyName);
+#endif
 
 // MyProject\Plugins\MyScriptPlugin\Intermediate\Build\Win64\UE4Editor\Inc\ScriptPlugin\GeneratedScriptLibraries.inl
 // LuaRegisterExportedClasses
+#ifdef MY_ENABLE_CALL_LUA_REGISTER
 #include "GeneratedScriptLibraries.inl"
+#endif
 
+#ifdef MY_ENABLE_CALL_LUA_REGISTER
 // Forward declaration - definition is in generated inl function.
 void LuaRegisterExportedClasses(lua_State* InScriptContext);
+#endif
 
 void FLuaUtils::RegisterLibrary(lua_State* LuaState, const luaL_Reg Lib[], const ANSICHAR* LibName)
 {
@@ -624,7 +633,11 @@ bool FLuaContext::Initialize(const FString& Code, UObject* Owner)
 	bool bResult = false;
 	LuaState = LuaNewState();
 	luaL_openlibs(LuaState);
+
+#ifdef MY_ENABLE_CALL_LUA_REGISTER
 	LuaRegisterExportedClasses(LuaState);
+#endif
+
 	LuaRegisterUnrealUtilities(LuaState);
 
 	if (luaL_loadstring(LuaState, TCHAR_TO_ANSI(*Code)) == 0)
