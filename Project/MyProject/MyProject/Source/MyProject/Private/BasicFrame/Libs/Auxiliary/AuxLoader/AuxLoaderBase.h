@@ -54,7 +54,7 @@ public:
 	void setPath(std::string path);
 	void updatePath(std::string path);
 	bool isInvalid();
-	virtual std::string getOrigPath();
+	virtual std::string& getOrigPath();
 
 	// 真正的开始加载
 	void onStartLoad();

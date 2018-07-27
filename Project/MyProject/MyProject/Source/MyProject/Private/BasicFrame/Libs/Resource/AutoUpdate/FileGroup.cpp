@@ -8,6 +8,7 @@
 #include "VersionInc.h"
 #include "FileVerInfo.h"
 #include "ServerVer.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -169,7 +170,11 @@ std::string FileGroup::getProgressDesc()
 {
 	std::string ret = "";
 
-	ret = UtilStr::Format("{0}M/{1}M", UtilMath::integerWithFract((float)this->mCurMemSize / UtilMath::OneM, 2), UtilMath::integerWithFract((float)this->mTotalMemSize / UtilMath::OneM, 2));
+	ret = UtilStr::Format(
+		"{0}M/{1}M", 
+		UtilConvert::convFloat2Str(UtilMath::integerWithFract((float)this->mCurMemSize / UtilMath::OneM, 2)),
+		UtilConvert::convFloat2Str(UtilMath::integerWithFract((float)this->mTotalMemSize / UtilMath::OneM, 2))
+	);
 
 	return ret;
 }
@@ -177,7 +182,14 @@ std::string FileGroup::getProgressDesc()
 // 输出下载详细日志
 void FileGroup::logDownloadDetailInfo()
 {
-	GLogSys->log(UtilStr::Format("FileGroup::logDownloadDetailInfo, mCurNum = {0}, mTotalNum = {1}", this->mCurNum, this->mTotalNum), LogTypeId::eLogAutoUpdate);
+	GLogSys->log(
+		UtilStr::Format(
+			"FileGroup::logDownloadDetailInfo, mCurNum = {0}, mTotalNum = {1}", 
+			UtilConvert::convFloat2Str(this->mCurNum), 
+			UtilConvert::convFloat2Str(this->mTotalNum)
+		), 
+		LogTypeId::eLogAutoUpdate
+	);
 
 	int index = 0;
 	int listLen = this->mLoadingPath.count();
@@ -186,7 +198,14 @@ void FileGroup::logDownloadDetailInfo()
 
 	while (index < listLen)
 	{
-		GLogSys->log(UtilStr::Format("FileGroup::logDownloadDetailInfo, index = {0}, LoadingPath = {1}", index, this->mLoadingPath[index]), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(
+			UtilStr::Format(
+				"FileGroup::logDownloadDetailInfo, index = {0}, LoadingPath = {1}", 
+				UtilConvert::convFloat2Str(index), 
+				this->mLoadingPath[index]
+			), 
+			LogTypeId::eLogAutoUpdate
+		);
 
 		index += 1;
 	}
@@ -200,7 +219,14 @@ void FileGroup::logDownloadDetailInfo()
 
 	while (index < listLen)
 	{
-		GLogSys->log(UtilStr::Format("FileGroup::logDownloadDetailInfo, index = {0}, mLoadedPath = {1}", index, this->mLoadedPath[index]), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(
+			UtilStr::Format(
+				"FileGroup::logDownloadDetailInfo, index = {0}, mLoadedPath = {1}", 
+				UtilConvert::convFloat2Str(index), 
+				this->mLoadedPath[index]
+			), 
+			LogTypeId::eLogAutoUpdate
+		);
 
 		index += 1;
 	}
@@ -214,7 +240,14 @@ void FileGroup::logDownloadDetailInfo()
 
 	while (index < listLen)
 	{
-		GLogSys->log(UtilStr::Format("FileGroup::logDownloadDetailInfo, index = {0}, mFailedPath = {1}", index, this->mFailedPath[index]), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(
+			UtilStr::Format(
+				"FileGroup::logDownloadDetailInfo, index = {0}, mFailedPath = {1}", 
+				UtilConvert::convFloat2Str(index), 
+				this->mFailedPath[index]
+			), 
+			LogTypeId::eLogAutoUpdate
+		);
 
 		index += 1;
 	}

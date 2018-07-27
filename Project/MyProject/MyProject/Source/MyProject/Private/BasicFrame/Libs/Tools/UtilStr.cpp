@@ -7,10 +7,51 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 std::string UtilStr::msDefaultStr = "";
+std::string UtilStr::msFormatVar0 = "{0}";
+std::string UtilStr::msFormatVar1 = "{1}";
+std::string UtilStr::msFormatVar2 = "{2}";
+std::string UtilStr::msFormatVar3 = "{3}";
+std::string UtilStr::msFormatVar4 = "{4}";
+std::string UtilStr::msFormatVar5 = "{5}";
+std::string UtilStr::msFormatVar6 = "{6}";
+std::string UtilStr::msFormatVar7 = "{7}";
+std::string UtilStr::msFormatVar8 = "{8}";
+std::string UtilStr::msFormatVar9 = "{9}";
 
-std::string UtilStr::Format(const char * format, ...)
+//std::string UtilStr::Format(const char * format, ...)
+//{
+//	return "";
+//}
+
+std::string UtilStr::Format(
+	std::string formatStr,
+	std::string& var0,
+	std::string& var1,
+	std::string& var2,
+	std::string& var3,
+	std::string& var4,
+	std::string& var5,
+	std::string& var6,
+	std::string& var7,
+	std::string& var8,
+	std::string& var9
+)
 {
-	return "";
+	std::string ret = UtilStr::msDefaultStr;
+	std::string::size_type pos(0);
+
+	if (!UtilStr::IsNullOrEmpty(formatStr))
+	{
+		if (!UtilStr::IsNullOrEmpty(var0))
+		{
+			if ((pos = formatStr.find(UtilStr::msFormatVar0, pos)) != std::string::npos)
+			{
+				formatStr = formatStr.replace(pos, UtilStr::msFormatVar0.length(), var0);
+			}
+		}
+	}
+
+	return ret;
 }
 
 bool UtilStr::IsNullOrEmpty(std::string& value)
@@ -138,14 +179,15 @@ FText UtilStr::ConvStdStr2FText(std::string& stdStr)
 	return FText::FromString(fStr);
 }
 
-std::string& UtilStr::replaceAll(std::string& str, const  std::string& old_value, const std::string& new_value)
+std::string& UtilStr::replaceAll(std::string& srcStr, const  std::string& old_value, const std::string& new_value)
 {
 	while (true)
 	{
 		std::string::size_type pos(0);
-		if ((pos = str.find(old_value)) != std::string::npos)
+
+		if ((pos = srcStr.find(old_value)) != std::string::npos)
 		{
-			str.replace(pos, old_value.length(), new_value);
+			srcStr.replace(pos, old_value.length(), new_value);
 		}
 		else 
 		{
@@ -153,16 +195,16 @@ std::string& UtilStr::replaceAll(std::string& str, const  std::string& old_value
 		}
 	}
 
-	return str;
+	return srcStr;
 }
 
-std::string& UtilStr::replaceAllDistinct(std::string& str, const  std::string& old_value, const std::string& new_value)
+std::string& UtilStr::replaceAllDistinct(std::string& srcStr, const  std::string& old_value, const std::string& new_value)
 {
 	for (std::string::size_type pos(0); pos != std::string::npos; pos += new_value.length())
 	{
-		if ((pos = str.find(old_value, pos)) != std::string::npos)
+		if ((pos = srcStr.find(old_value, pos)) != std::string::npos)
 		{
-			str.replace(pos, old_value.length(), new_value);
+			srcStr.replace(pos, old_value.length(), new_value);
 		}
 		else 
 		{ 
@@ -170,22 +212,24 @@ std::string& UtilStr::replaceAllDistinct(std::string& str, const  std::string& o
 		}
 	}
 
-	return str;
+	return srcStr;
 }
 
-void UtilStr::split(std::string& s, std::string& delim, std::vector< std::string >* ret)
+void UtilStr::split(std::string& srcStr, std::string& delim, std::vector< std::string >* ret)
 {
 	size_t last = 0;
-	size_t index = s.find_first_of(delim, last);
+	size_t index = srcStr.find_first_of(delim, last);
+
 	while (index != std::string::npos)
 	{
-		ret->push_back(s.substr(last, index - last));
+		ret->push_back(srcStr.substr(last, index - last));
 		last = index + 1;
-		index = s.find_first_of(delim, last);
+		index = srcStr.find_first_of(delim, last);
 	}
+
 	if (index - last>0)
 	{
-		ret->push_back(s.substr(last, index - last));
+		ret->push_back(srcStr.substr(last, index - last));
 	}
 }
 
@@ -200,14 +244,14 @@ void UtilStr::removeLastCR(std::string& srcStr)
 	}
 }
 
-void UtilStr::toLower(std::string& str)
+void UtilStr::toLower(std::string& srcStr)
 {
-	transform(str.begin(), str.end(), str.begin(), ::tolower);
+	transform(srcStr.begin(), srcStr.end(), srcStr.begin(), ::tolower);
 }
 
-void UtilStr::toUpper(std::string& str)
+void UtilStr::toUpper(std::string& srcStr)
 {
-	transform(str.begin(), str.end(), str.begin(), ::toupper);
+	transform(srcStr.begin(), srcStr.end(), srcStr.begin(), ::toupper);
 }
 
 MY_END_NAMESPACE

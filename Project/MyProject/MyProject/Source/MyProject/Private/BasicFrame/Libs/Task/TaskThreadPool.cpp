@@ -3,6 +3,7 @@
 #include "UtilStr.h"
 #include "TaskThread.h"
 #include "TaskQueue.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -18,7 +19,13 @@ void TaskThreadPool::initThreadPool(int numThread, TaskQueue* taskQueue)
 
     for(index = 0; index < numThread; ++index)
     {
-		TaskThread* ptr = MY_NEW TaskThread(UtilStr::Format("TaskThread%d", index), taskQueue);
+		TaskThread* ptr = MY_NEW TaskThread(
+			UtilStr::Format(
+				"TaskThread%d", 
+				UtilConvert::convInt2Str(index)
+			), 
+			taskQueue
+		);
         this->mList.add(ptr);
 
 		this->mList[index]->start();

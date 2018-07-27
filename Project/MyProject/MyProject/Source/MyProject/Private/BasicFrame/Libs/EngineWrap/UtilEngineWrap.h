@@ -386,7 +386,8 @@ public:
 	static void LoadStreamLevel(const UObject* WorldContextObject, std::string LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo);
 	static void UnloadStreamLevel(const UObject* WorldContextObject, FName LevelName, FLatentActionInfo LatentInfo);
 
-	static UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId);
+	// VS2017 : error C4596: 'GetLocalPlayerFromControllerId': illegal qualified name in member declaration
+	static UMyLocalPlayerBase* GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId);
 
 	static int GetNumLocalPlayers();
 

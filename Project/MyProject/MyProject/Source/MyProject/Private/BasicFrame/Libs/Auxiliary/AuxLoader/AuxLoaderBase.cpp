@@ -94,7 +94,7 @@ bool AuxLoaderBase::isInvalid()
 	return this->mIsInvalid;
 }
 
-std::string AuxLoaderBase::getOrigPath()
+std::string& AuxLoaderBase::getOrigPath()
 {
 	return this->mPath;
 }

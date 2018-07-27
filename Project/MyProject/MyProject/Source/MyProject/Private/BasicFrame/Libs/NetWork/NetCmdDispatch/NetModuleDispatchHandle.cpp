@@ -9,6 +9,7 @@
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "MClassFactory.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -60,12 +61,24 @@ void NetModuleDispatchHandle::handleMsg(NetCmdDispatchInfo* cmdDispInfo)
 {
 	if (this->mId2DispatchDic.containsKey(cmdDispInfo->byCmd))
     {
-		GLogSys->log(UtilStr::Format("处理消息: byCmd = {0},  byParam = {1}", cmdDispInfo->byCmd, cmdDispInfo->byParam));
+		GLogSys->log(
+			UtilStr::Format(
+				"Handle Msg: byCmd = {0},  byParam = {1}", 
+				UtilConvert::convInt2Str(cmdDispInfo->byCmd),
+				UtilConvert::convInt2Str(cmdDispInfo->byParam)
+			)
+		);
 		this->mId2DispatchDic.value(cmdDispInfo->byCmd)->dispatchEvent(cmdDispInfo);
     }
     else
     {
-		GLogSys->log(UtilStr::Format("消息没有处理: byCmd = {0},  byParam = {1}", cmdDispInfo->byCmd, cmdDispInfo->byParam));
+		GLogSys->log(
+			UtilStr::Format(
+				"Handle Msg: byCmd = {0},  byParam = {1}", 
+				UtilConvert::convInt2Str(cmdDispInfo->byCmd),
+				UtilConvert::convInt2Str(cmdDispInfo->byParam)
+			)
+		);
     }
 
     //if(mLuaCSBridgeNetDispHandle != nullptr)

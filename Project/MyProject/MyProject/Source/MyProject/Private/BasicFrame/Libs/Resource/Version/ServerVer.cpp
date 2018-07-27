@@ -16,6 +16,7 @@
 #include "FileVerInfo.h"
 #include "AddOnceAndCallOnceEventDispatch.h"
 #include "UtilFileIO.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -136,7 +137,13 @@ void ServerVer::onVerLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("ServerVer::onVerLoadEventHandle, loaded, origPath = {0}", downloadItem->getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(
+				UtilStr::Format(
+					"ServerVer::onVerLoadEventHandle, loaded, origPath = {0}", 
+					downloadItem->getOrigPath()
+				), 
+				LogTypeId::eLogAutoUpdate
+			);
 		}
 
 		char* textAsset = downloadItem->getBytes();
@@ -189,7 +196,14 @@ void ServerVer::savePVerToPersistentPath()
 	{
 		fileVerInfo = beginIte->second;
 
-		line = UtilStr::Format("{0}={1}={2}={3}={4}", fileVerInfo->mOrigPath, fileVerInfo->mResUniqueId, fileVerInfo->mLoadPath, fileVerInfo->mFileMd5, fileVerInfo->mFileSize);
+		line = UtilStr::Format(
+			"{0}={1}={2}={3}={4}", 
+			fileVerInfo->mOrigPath, 
+			fileVerInfo->mResUniqueId, 
+			fileVerInfo->mLoadPath, 
+			fileVerInfo->mFileMd5, 
+			UtilConvert::convInt2Str(fileVerInfo->mFileSize)
+		);
 		dataStream->writeLine(line);
 	}
 

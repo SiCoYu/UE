@@ -7,6 +7,7 @@
 
 #include "UtilStr.h"
 #include "UtilContainers.h"
+#include "UtilConvert.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -131,7 +132,13 @@ void MList<T>::insert(int index, T& item)
 	}
 	else
 	{
-		GLogSys->log(UtilStr::Format("Insert Failed index={0}, Count={1}", index, this->count()));
+		GLogSys->log(
+			UtilStr::Format(
+				"Insert Failed index={0}, Count={1}", 
+				UtilConvert::convInt2Str(index),
+				UtilConvert::convInt2Str(this->count())
+			)
+		);
 	}
 }
 

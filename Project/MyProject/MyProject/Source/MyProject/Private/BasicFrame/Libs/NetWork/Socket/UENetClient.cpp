@@ -14,6 +14,7 @@
 #include "MCircularBuffer.h"
 #include "MDynBuffer.h"
 #include "SafePointer.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -137,7 +138,12 @@ void UENetClient::Send()
 		}
 	}
 
-	GLogSys->log(UtilStr::Format("开始发送字节数 {0} ", this->mClientBuffer->getSendBuffer()->getBytesAvailable()));
+	GLogSys->log(
+		UtilStr::Format(
+			"Start Send Byte Num {0} ", 
+			UtilConvert::convInt2Str(this->mClientBuffer->getSendBuffer()->getBytesAvailable())
+			)
+		);
 
 	bool ret = true;
 	int bytesSent = 0;
@@ -148,16 +154,26 @@ void UENetClient::Send()
 	{
 		this->mMsgSendEndEvent->Set();        // 发生异常，通知等待线程，所有数据都发送完成，防止等待线程不能解锁
 		// 输出日志
-		GLogSys->error("发送失败");
+		GLogSys->error("Send Fail");
 		//Disconnect(0);
 	}
 	else
 	{
-		GLogSys->log(UtilStr::Format("结束发送字节数 {0} ", bytesSent));
+		GLogSys->log(
+			UtilStr::Format(
+				"End send byte num {0} ", 
+				UtilConvert::convInt2Str(bytesSent)
+			)
+		);
 
 		if (this->mClientBuffer->getSendBuffer()->getLength() < this->mClientBuffer->getSendBuffer()->getPos() + bytesSent)
 		{
-			GLogSys->log(UtilStr::Format("结束发送字节数错误 {0}", bytesSent));
+			GLogSys->log(
+				UtilStr::Format(
+					"End send byte num error {0}", 
+					UtilConvert::convInt2Str(bytesSent)
+				)
+			);
 			this->mClientBuffer->getSendBuffer()->setPos(this->mClientBuffer->getSendBuffer()->getLength());
 		}
 		else
@@ -185,13 +201,18 @@ void UENetClient::Receive()
 
 		if (!ret)
 		{
-			GLogSys->error("接收数据出错");
+			GLogSys->error("Receive data error");
 		}
 		else
 		{
 			if (bytesRead > 0)
 			{
-				GLogSys->log(UtilStr::Format("接收到数据 {0}", bytesRead));
+				GLogSys->log(
+					UtilStr::Format(
+						"Received data {0}", 
+						UtilConvert::convInt2Str(bytesRead)
+					)
+				);
 				this->mClientBuffer->getDynBuffer()->setSize(bytesRead);	// 设置读取大小
 				this->mClientBuffer->moveDyn2Raw();             // 将接收到的数据放到原始数据队列
 				this->mClientBuffer->moveRaw2Msg();             // 将完整的消息移动到消息缓冲区

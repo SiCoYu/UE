@@ -24,7 +24,7 @@ public:
 	TableSkillItemBody();
 	virtual ~TableSkillItemBody();
 
-	virtual void TableSkillItemBody::parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
+	virtual void parseBodyByteBuffer(MByteBuffer* bytes, uint32 offset);
 };
 
 MY_END_NAMESPACE

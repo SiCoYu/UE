@@ -2,6 +2,7 @@
 #include "UtilMsg.h"
 #include "Prequisites.h"
 #include "UtilStr.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -21,7 +22,11 @@ void UtilMsg::sendMsg(NullUserCmd& msg, bool bnet)
     if (bnet)
     {
         // 打印日志
-		GShareData->mTmpStr = UtilStr::Format("发送消息: byCmd = {0}, byParam = {1}", msg.byCmd, msg.byParam);
+		GShareData->mTmpStr = UtilStr::Format(
+			"Send msg: byCmd = {0}, byParam = {1}", 
+			UtilConvert::convInt2Str(msg.byCmd),
+			UtilConvert::convInt2Str(msg.byParam)
+		);
 		GLogSys->log(GShareData->mTmpStr);
     }
 	GNetMgr->send(bnet);

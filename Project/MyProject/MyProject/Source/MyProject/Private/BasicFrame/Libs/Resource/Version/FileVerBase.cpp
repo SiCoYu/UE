@@ -87,7 +87,14 @@ void FileVerBase::saveMiniVerToPersistentPath()
 		std::string line = UtilStr::Format("Version={0}", this->mCurVer);
 		dataStream->writeLine(line);
 
-		line = UtilStr::Format("{0}={1}={2}={3}={4}", this->mFileVerInfo->mOrigPath, this->mFileVerInfo->mResUniqueId, this->mFileVerInfo->mLoadPath, this->mFileVerInfo->mFileMd5, this->mFileVerInfo->mFileSize);
+		line = UtilStr::Format(
+			"{0}={1}={2}={3}={4}", 
+			this->mFileVerInfo->mOrigPath, 
+			this->mFileVerInfo->mResUniqueId, 
+			this->mFileVerInfo->mLoadPath, 
+			this->mFileVerInfo->mFileMd5, 
+			UtilConvert::convInt2Str(this->mFileVerInfo->mFileSize)
+		);
 		dataStream->writeLine(line);
 
 		MY_SAFE_DISPOSE(dataStream);

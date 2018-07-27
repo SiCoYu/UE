@@ -22,6 +22,7 @@
 #include "DownloadType.h"
 #include "UiBaseInc.h"
 #include "UtilFileIO.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -232,7 +233,13 @@ void AutoUpdateSys::_loadAllUpdateFile()
 
 	if (MacroDef::ENABLE_LOG)
 	{
-		GLogSys->log(UtilStr::Format("AutoUpdateSys::loadAllUpdateFile, Start, total = {0}", this->mFileGroup->getTotalNum()), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(
+			UtilStr::Format(
+				"AutoUpdateSys::loadAllUpdateFile, Start, total = {0}", 
+				UtilConvert::convFloat2Str(this->mFileGroup->getTotalNum())
+			), 
+			LogTypeId::eLogAutoUpdate
+		);
 	}
 
 	//this->checkIsNeedUpdateManifest();
@@ -366,7 +373,13 @@ void AutoUpdateSys::onLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("AutoUpdateSys::onLoadEventHandle, success, CurIndex = {0}, path = {1}", this->mFileGroup->getCurNum(), downloader->getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(
+				UtilStr::Format(
+					"AutoUpdateSys::onLoadEventHandle, success, CurIndex = {0}, path = {1}", 
+					UtilConvert::convFloat2Str(this->mFileGroup->getCurNum()), 
+					downloader->getOrigPath()), 
+				LogTypeId::eLogAutoUpdate
+			);
 		}
 
 		refPath = downloader->getOrigPath();
@@ -376,7 +389,14 @@ void AutoUpdateSys::onLoadEventHandle(uint eventId, IDispatchObject* dispObj)
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("AutoUpdateSys::onLoadEventHandle, fail, CurNum = {0}, path = {1}", this->mFileGroup->getCurNum(), downloader->getOrigPath()), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(
+				UtilStr::Format(
+					"AutoUpdateSys::onLoadEventHandle, fail, CurNum = {0}, path = {1}", 
+					UtilConvert::convFloat2Str(this->mFileGroup->getCurNum()), 
+					downloader->getOrigPath()
+				), 
+				LogTypeId::eLogAutoUpdate
+			);
 		}
 
 		refPath = downloader->getOrigPath();
@@ -394,7 +414,13 @@ void AutoUpdateSys::_checkUpdateEnd()
 {
 	if (MacroDef::ENABLE_LOG)
 	{
-		GLogSys->log(UtilStr::Format("AutoUpdateSys::checkUpdateEnd, curNum = {0}, totalNum = {1}", this->mFileGroup->getCurNum(), this->mFileGroup->getTotalNum()), LogTypeId::eLogAutoUpdate);
+		GLogSys->log(UtilStr::Format(
+				"AutoUpdateSys::checkUpdateEnd, curNum = {0}, totalNum = {1}", 
+				UtilConvert::convFloat2Str(this->mFileGroup->getCurNum()), 
+				UtilConvert::convFloat2Str(this->mFileGroup->getTotalNum())
+			), 
+			LogTypeId::eLogAutoUpdate
+		);
 	}
 
 	if (this->mFileGroup->isCurEqTotal())

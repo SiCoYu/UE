@@ -8,6 +8,7 @@
 #include "MClassInfo.h"
 #include "MClassMacros.h"
 #include "MClassFactory.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -70,7 +71,13 @@ void NetCmdDispatchHandle::handleMsg(uint eventId, IDispatchObject* dispObj)
 	}
 	else
 	{
-		GLogSys->log(UtilStr::Format("消息没有处理: byCmd = {0},  byParam = {1}", cmd->byCmd, cmd->byParam));
+		GLogSys->log(
+			UtilStr::Format(
+				"Msg Not Handle: byCmd = {0}, byParam = {1}", 
+				UtilConvert::convInt2Str(cmd->byCmd),
+				UtilConvert::convInt2Str(cmd->byParam)
+			)
+		);
 	}
 }
 

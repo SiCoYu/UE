@@ -10,6 +10,7 @@
 #include "LocalVer.h"
 #include "LogInc.h"
 #include "UtilFileIO.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -105,7 +106,11 @@ ResRedirectItem* ResRedirect::getResRedirectItem(std::string origPath, bool isAB
 	{
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("ResRedirectItem::getResRedirectItem, find load item, origPath = {0}, mResLoadType = {1}", origPath, item->mResLoadType), LogTypeId::eLogResLoader);
+			GLogSys->log(
+				UtilStr::Format(
+					"ResRedirectItem::getResRedirectItem, find load item, origPath = {0}, mResLoadType = {1}", 
+					origPath, 
+					UtilConvert::convInt2Str((int)(item->mResLoadType))), LogTypeId::eLogResLoader);
 		}
 	}
 

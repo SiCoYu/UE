@@ -6,6 +6,7 @@
 #include "NetCmdDispatchInfo.h"
 #include "SafePointer.h"
 #include "MByteBuffer.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -83,26 +84,36 @@ void NetCmdNotify::addOneRevMsg()
 {
     ++this->mRevMsgCnt;
 
-	GLogSys->log(UtilStr::Format("接收到消息数量 {0}", this->mRevMsgCnt));
+	GLogSys->log(
+		UtilStr::Format(
+			"Receive Msg Num {0}", 
+			UtilConvert::convInt2Str(this->mRevMsgCnt)
+		)
+	);
 }
 
 void NetCmdNotify::addOneHandleMsg()
 {
     ++this->mHandleMsgCnt;
 
-	GLogSys->log(UtilStr::Format("处理消息数量 {0}", this->mHandleMsgCnt));
+	GLogSys->log(
+		UtilStr::Format(
+			"Handle Msg Num {0}", 
+			UtilConvert::convInt2Str(this->mHandleMsgCnt)
+		)
+	);
 }
 
 void NetCmdNotify::clearOneRevMsg()
 {
     mRevMsgCnt = 0;
-	GLogSys->log("清理接收消息数量");
+	GLogSys->log("Clear Receive Msg Num");
 }
 
 void NetCmdNotify::clearOneHandleMsg()
 {
     mHandleMsgCnt = 0;
-	GLogSys->log("清理处理消息数量");
+	GLogSys->log("Clear Handle Msg Num");
 }
 
 MY_END_NAMESPACE

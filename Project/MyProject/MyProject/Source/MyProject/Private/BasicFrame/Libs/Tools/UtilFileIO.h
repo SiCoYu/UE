@@ -44,7 +44,7 @@ public:
 	static bool existFile(std::string& fullFilPath);
 	static bool deleteFile(std::string& fullFilPath);
 	// 获取扩展名
-	static std::string UtilFileIO::getFileExt(std::string& path);
+	static std::string getFileExt(std::string& path);
 	// 获取文件名字，没有路径，但是有扩展名字
 	static std::string getFileNameWithExt(std::string& fullPath);
 	// 获取文件名字，没有扩展名字

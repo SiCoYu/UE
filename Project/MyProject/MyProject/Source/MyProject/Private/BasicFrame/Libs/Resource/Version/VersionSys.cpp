@@ -257,7 +257,14 @@ void VersionSys::onWebMiniLoaded(uint eventId, IDispatchObject* dispObj)
 
 		if (MacroDef::ENABLE_LOG)
 		{
-			GLogSys->log(UtilStr::Format("VersionSys::onWebMiniLoaded, loaded, mIsNeedUpdateApp = {0}, mIsNeedUpdateVerFile = {1}", this->mIsNeedUpdateApp, this->mIsNeedUpdateVerFile), LogTypeId::eLogAutoUpdate);
+			GLogSys->log(
+				UtilStr::Format(
+					"VersionSys::onWebMiniLoaded, loaded, mIsNeedUpdateApp = {0}, mIsNeedUpdateVerFile = {1}", 
+					UtilConvert::convBool2Str(this->mIsNeedUpdateApp), 
+					UtilConvert::convBool2Str(this->mIsNeedUpdateVerFile)
+				), 
+				LogTypeId::eLogAutoUpdate
+			);
 		}
 	}
 	else

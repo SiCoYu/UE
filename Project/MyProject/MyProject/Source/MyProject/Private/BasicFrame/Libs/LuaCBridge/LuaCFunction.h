@@ -20,19 +20,19 @@ public:
 	LuaCFunction(int reference, lua_State* l);
 	~LuaCFunction();
 
-	std::vector<LuaCObject*> LuaCFunction::call(std::vector<LuaCObject*> args, std::vector<int> returnTypes);
+	std::vector<LuaCObject*> call(std::vector<LuaCObject*> args, std::vector<int> returnTypes);
 	std::vector<LuaCObject*> Call(std::vector<LuaCObject*> args);
-	std::vector<LuaCObject*> LuaCFunction::Call();
-	std::vector<LuaCObject*> LuaCFunction::Call(double arg1);
-	int LuaCFunction::BeginPCall();
-	bool LuaCFunction::PCall(int oldTop, int args);
-	std::vector<LuaCObject*> LuaCFunction::PopValues(int oldTop);
-	void LuaCFunction::EndPCall(int oldTop);
-	lua_State* LuaCFunction::GetLuaState();
-	void LuaCFunction::push(lua_State* luaState);
-	void LuaCFunction::push();
-	std::string LuaCFunction::ToString();
-	int LuaCFunction::GetReference();
+	std::vector<LuaCObject*> Call();
+	std::vector<LuaCObject*> Call(double arg1);
+	int BeginPCall();
+	bool PCall(int oldTop, int args);
+	std::vector<LuaCObject*> PopValues(int oldTop);
+	void EndPCall(int oldTop);
+	lua_State* GetLuaState();
+	void push(lua_State* luaState);
+	void push();
+	std::string ToString();
+	int GetReference();
 };
 
 #endif
