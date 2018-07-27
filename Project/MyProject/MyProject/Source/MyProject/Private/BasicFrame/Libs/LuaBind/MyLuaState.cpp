@@ -185,9 +185,10 @@ const char* MyLuaState::LoadFileBuffer(const char* fileName, int& outSize)
 
 	if (buffer == nullptr)
 	{
+		std::string var0 = fileName;
 		std::string error = UtilStr::Format(
 			"cannot open {0}: No such file or directory", 
-			fileName
+			var0
 		);
 		error += GLuaSystem->getLuaFileUtil()->FindFileError(fileName);
 		this->onLuaError(error.c_str());

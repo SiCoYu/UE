@@ -26,7 +26,7 @@ UTexture* AuxTextureLoader::getTexture()
     return this->mTexture;
 }
 
-std::string AuxTextureLoader::getOrigPath()
+std::string& AuxTextureLoader::getOrigPath()
 {
     if (this->mTextureRes != nullptr)
     {

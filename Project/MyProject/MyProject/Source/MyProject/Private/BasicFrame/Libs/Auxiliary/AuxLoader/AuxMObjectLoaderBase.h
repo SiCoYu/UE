@@ -52,7 +52,7 @@ public:
 	void setSelfActor(UObject* value);
 	bool isDestroySelf();
 	void setDestroySelf(bool value);
-	virtual std::string getOrigPath() override;
+	virtual std::string& getOrigPath() override;
 
 	virtual void syncLoad(
 		std::string path, 

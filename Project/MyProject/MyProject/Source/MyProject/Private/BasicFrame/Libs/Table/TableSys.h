@@ -42,7 +42,7 @@ public:
     // 返回一个表
 	MList<TableItemBase*>* getTable(TableId tableId);
     // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
-	TableItemBase* getItem(TableId tableId, uint32 itemID);
+	TableItemBase* getItem(TableId tableId, uint32 itemId);
     // 加载一个表
 	void loadOneTable(TableId tableId);
     // 加载一个表完成

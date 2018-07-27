@@ -32,7 +32,7 @@ public:
 
 	virtual void dispose() override;
 
-	virtual std::string getOrigPath() override;
+	virtual std::string& getOrigPath() override;
 	UMaterialInterface* getMaterialInterface();
 	UMaterialInstanceDynamic* getMaterialInterfaceDynamic();
 

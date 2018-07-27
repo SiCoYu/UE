@@ -81,7 +81,7 @@ void AuxMObjectLoaderBase::setDestroySelf(bool value)
 	this->mIsDestroySelf = value;
 }
 
-std::string AuxMObjectLoaderBase::getOrigPath()
+std::string& AuxMObjectLoaderBase::getOrigPath()
 {
 	if (this->mPrefabRes != nullptr)
 	{

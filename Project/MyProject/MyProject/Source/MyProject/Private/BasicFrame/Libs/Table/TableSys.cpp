@@ -11,6 +11,7 @@
 #include "TableItemBodyBase.h"
 #include "MByteBuffer.h"
 #include "Prequisites.h"
+#include "UtilConvert.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -79,7 +80,7 @@ MList<TableItemBase*>* TableSys::getTable(TableId tableId)
 }
 		
 // 返回一个表中一项，返回的时候表中数据全部加载到 Item 中
-TableItemBase* TableSys::getItem(TableId tableId, uint32 itemID)
+TableItemBase* TableSys::getItem(TableId tableId, uint32 itemId)
 {
     TableBase* table = this->mDicTable[tableId];
 
@@ -89,7 +90,7 @@ TableItemBase* TableSys::getItem(TableId tableId, uint32 itemID)
 		table = this->mDicTable[tableId];
 	}
 
-    TableItemBase* ret = TableSys::findDataItem(table, itemID);
+    TableItemBase* ret = TableSys::findDataItem(table, itemId);
 
 	if (nullptr != ret && nullptr == ret->mItemBody)
     {
@@ -98,7 +99,13 @@ TableItemBase* TableSys::getItem(TableId tableId, uint32 itemID)
 
     if (nullptr == ret)
     {
-		GLogSys->log(UtilStr::Format("table name: {0}, table Item {1} 加载失败", (int)tableId, itemID));
+		GLogSys->log(
+			UtilStr::Format(
+				"table name: {0}, table Item {1} load fail", 
+				UtilConvert::convInt2Str((int)tableId),
+				UtilConvert::convInt2Str(itemId)
+			)
+		);
     }
 
 	return ret;

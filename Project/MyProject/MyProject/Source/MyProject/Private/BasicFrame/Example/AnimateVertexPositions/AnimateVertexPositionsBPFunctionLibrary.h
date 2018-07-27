@@ -14,12 +14,12 @@ class UAnimateVertexPositionsBPFunctionLibrary : public UBlueprintFunctionLibrar
 	GENERATED_UCLASS_BODY()
 
 public:
-	bool UAnimateVertexPositionsBPFunctionLibrary::AnimatedVertex__GetAnimatedVertexLocations(
+	bool AnimatedVertex__GetAnimatedVertexLocations(
 		USkeletalMeshComponent* Mesh,
 		TArray<FVector>& Locations,
 		TArray<FMatrix>& CachedRefToLocals,
 		const FSkeletalMeshLODRenderData& Model,
 		FSkinWeightVertexBuffer& SkinWeightBuffer,
 		bool PerformPawnVelocityCorrection
-		);
+	);
 };

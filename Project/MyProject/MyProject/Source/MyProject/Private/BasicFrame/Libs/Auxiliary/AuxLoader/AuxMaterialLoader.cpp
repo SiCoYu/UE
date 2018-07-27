@@ -31,7 +31,7 @@ UMaterialInstanceDynamic* AuxMaterialLoader::getMaterialInterfaceDynamic()
 	return this->mMaterialDyn;
 }
 
-std::string AuxMaterialLoader::getOrigPath()
+std::string& AuxMaterialLoader::getOrigPath()
 {
     if (this->mMaterialRes != nullptr)
     {

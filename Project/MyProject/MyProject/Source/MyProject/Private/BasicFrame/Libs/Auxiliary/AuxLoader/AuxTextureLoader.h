@@ -30,7 +30,7 @@ public:
 
 	virtual void dispose() override;
 	UTexture* getTexture();
-	virtual std::string getOrigPath() override;
+	virtual std::string& getOrigPath() override;
 
 	virtual void syncLoad(
 		std::string path,

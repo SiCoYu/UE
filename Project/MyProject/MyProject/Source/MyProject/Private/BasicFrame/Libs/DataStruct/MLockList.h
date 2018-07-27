@@ -11,6 +11,7 @@
 #include "MyMemoryDefaultAlloc.h"
 #include "GObject.h"
 #include "SafePointer.h"
+#include "Array.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)

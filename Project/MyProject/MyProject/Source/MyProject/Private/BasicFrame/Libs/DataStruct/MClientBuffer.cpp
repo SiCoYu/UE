@@ -113,7 +113,12 @@ void MClientBuffer::SetRevBufferSize(int32 size)
 
 void MClientBuffer::moveDyn2Raw()
 {
-	GLogSys->log(UtilStr::Format("移动动态数据消息数据到原始数据队列，消息长度　{0}", this->mDynBuffer->getSize()));
+	GLogSys->log(
+		UtilStr::Format(
+			"Move dynamic data msg data to orig data queue, msg length, {0}", 
+			UtilConvert::convInt2Str(this->mDynBuffer->getSize())
+		)
+	);
 	UtilMsg::formatBytes2Array(this->mDynBuffer->getBuffer(), this->mDynBuffer->getSize());
 
 #ifdef MSG_ENCRIPT
@@ -384,7 +389,12 @@ void MClientBuffer::UnCompressAndDecryptEveryOne()
 		else
 #endif
 		{
-			GLogSys->log(UtilStr::Format("消息不需要解压缩，消息原始长度　{0}", msglen));
+			GLogSys->log(
+				UtilStr::Format(
+					"Msg not need uncompress, origin msg length {0}", 
+					UtilConvert::convInt2Str(msglen)
+				)
+			);
 			this->mRawBuffer->getMsgBodyBA()->incPosDelta(msglen);
 		}
 
@@ -397,10 +407,21 @@ void MClientBuffer::UnCompressAndDecryptEveryOne()
 #endif
 		{
 			this->mMsgBuffer->getCircularBuffer()->pushBackBA(this->mUnCompressHeaderBA);             // 保存消息大小字段
-			this->mMsgBuffer->getCircularBuffer()->pushBackArr(this->mRawBuffer->getMsgBodyBA()->getDynBuffer()->getBuffer(), this->mRawBuffer->getMsgBodyBA()->getPos() - msglen, msglen);      // 保存消息大小字段
+			this->mMsgBuffer->getCircularBuffer()->pushBackArr(
+				this->mRawBuffer->getMsgBodyBA()->getDynBuffer()->getBuffer(), 
+				this->mRawBuffer->getMsgBodyBA()->getPos() - msglen, 
+				msglen
+			);      // 保存消息大小字段
 		}
 
-		GLogSys->log(UtilStr::Format("解压解密后消息起始索引 {0}, 消息长度　{1}, 消息 position 位置 {2}, 消息 size {3}", this->mRawBuffer->getMsgBodyBA()->getPos() - msglen, msglen, this->mRawBuffer->getMsgBodyBA()->getPos(), this->mRawBuffer->getMsgBodyBA()->getLength()));
+		GLogSys->log(UtilStr::Format(
+				"Uncompress decrypt msg start index {0}, msg length {1}, msg position {2}, msg size {3}", 
+				UtilConvert::convInt2Str(this->mRawBuffer->getMsgBodyBA()->getPos() - msglen), 
+				UtilConvert::convInt2Str(msglen),
+				UtilConvert::convInt2Str(this->mRawBuffer->getMsgBodyBA()->getPos()),
+				UtilConvert::convInt2Str(this->mRawBuffer->getMsgBodyBA()->getLength())
+			)
+		);
 		GNetCmdNotify->addOneRevMsg();
 
 		// Test 读取消息头
