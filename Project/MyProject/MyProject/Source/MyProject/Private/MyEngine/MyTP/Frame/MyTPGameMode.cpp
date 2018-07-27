@@ -15,6 +15,8 @@
 #include "MyGameState.h"
 #include "MyTPGameSession.h"
 #include "MySpectatorPawn.h"
+#include "AI/Navigation/NavigationTypes.h"		// FNavigationSystem
+#include "NavigationSystem.h"		// UNavigationSystemV1
 
 AMyTPGameMode::AMyTPGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -121,8 +123,12 @@ void AMyTPGameMode::RestartPlayer(class AController* NewPlayer)
 	// ref: UnrealEngine\Engine\Source\Runtime\Engine\Private\AI\Navigation\NavigationSystem.cpp
 	// FVector UNavigationSystem::GetRandomReachablePointInRadius(UObject* WorldContextObject, const FVector& Origin, float Radius, ANavigationData* NavData, TSubclassOf<UNavigationQueryFilter> FilterClass)
 	UWorld* World = GEngine->GetWorldFromContextObject(NewPlayer, EGetWorldErrorMode::LogAndReturnNull);
-	UNavigationSystem* NavSys = UNavigationSystem::GetCurrent(World);
+	// UE4.20 error C2039: 'GetRandomReachablePointInRadius': is not a member of 'UNavigationSystem'， UE 4.20 导航系统改成 UNavigationSystemV1
+	//UNavigationSystem* NavSys = UNavigationSystem::GetCurrent(World);
+	UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(World);
 	FNavLocation StartLocation;
+	// UE4.20 error C2039: 'GetRandomReachablePointInRadius': is not a member of 'UNavigationSystem'
+	//bool ret = NavSys->GetRandomReachablePointInRadius(SpawnOrigin, 250.0f, StartLocation);
 	bool ret = NavSys->GetRandomReachablePointInRadius(SpawnOrigin, 250.0f, StartLocation);
 
 	// Try to create a pawn to use of the default class for this player

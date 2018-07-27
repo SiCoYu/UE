@@ -111,7 +111,9 @@ bool AMyPlayerControllerBase::IsActorWithinTheBoundsOfStreamedInLeve()
 {
 	bool ret = false;
 	//Get the Currently Streamed Levels
-	const TArray<ULevelStreaming*>& StreamedLevels = GetWorld()->StreamingLevels;
+	// UE 4.20 error C2248: 'UWorld::StreamingLevels': cannot access private member declared in class 'UWorld'
+	//const TArray<ULevelStreaming*>& StreamedLevels = GetWorld()->StreamingLevels;
+	const TArray<ULevelStreaming*>& StreamedLevels = GetWorld()->GetStreamingLevels();
 
 	for (const ULevelStreaming* EachLevelStreaming : StreamedLevels)
 	{

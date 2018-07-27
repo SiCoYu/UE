@@ -66,7 +66,7 @@ void LoadParam::setOrigPath(std::string value)
 	this->mOrigPath = value;
 }
 
-std::string LoadParam::getOrigPath()
+std::string& LoadParam::getOrigPath()
 {
 	return this->mOrigPath;
 }

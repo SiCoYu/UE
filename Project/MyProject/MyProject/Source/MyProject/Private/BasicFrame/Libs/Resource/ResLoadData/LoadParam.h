@@ -59,7 +59,7 @@ public:
 	std::string getResUniqueId();
 
 	void setOrigPath(std::string value);
-	std::string getOrigPath();
+	std::string& getOrigPath();
 
 	void setPathNoExt(std::string value);
 	std::string getPathNoExt();

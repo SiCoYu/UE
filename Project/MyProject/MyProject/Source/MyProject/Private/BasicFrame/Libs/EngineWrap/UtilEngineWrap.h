@@ -46,6 +46,7 @@ class UMaterialInterface;
 class UWidget;
 class UPrimitiveComponent;
 class UMaterialInstanceDynamic;
+class UNavigationSystemV1;
 
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLog, Log, All);
@@ -384,7 +385,7 @@ public:
 	static void OpenLevel(const UObject* WorldContextObject, std::string LevelName, bool bAbsolute, FString Options);
 	static void LoadStreamLevel(const UObject* WorldContextObject, FName LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo);
 	static void LoadStreamLevel(const UObject* WorldContextObject, std::string LevelName, bool bMakeVisibleAfterLoad, bool bShouldBlockOnLoad, FLatentActionInfo LatentInfo);
-	static void UnloadStreamLevel(const UObject* WorldContextObject, FName LevelName, FLatentActionInfo LatentInfo);
+	static void UnloadStreamLevel(const UObject* WorldContextObject, FName LevelName, FLatentActionInfo LatentInfo, bool bShouldBlockOnUnload);
 
 	// VS2017 : error C4596: 'GetLocalPlayerFromControllerId': illegal qualified name in member declaration
 	static UMyLocalPlayerBase* GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId);
@@ -497,6 +498,7 @@ public:
 
 	static void Destroy(AActor* actor, bool bNetForce = false, bool bShouldModifyLevel = true);
 	static void DestroyImmediate(AActor* actor, bool bNetForce = false, bool bShouldModifyLevel = true);
+	static UNavigationSystemV1* getCurrentNavigationSystemV1();
 };
 
 MY_END_NAMESPACE

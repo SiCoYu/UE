@@ -23,6 +23,8 @@
 #include "CoreGlobals.h"	// IsInAsyncLoadingThread
 #include "Components/Widget.h"	// UWidget
 #include "Components/PrimitiveComponent.h"		// UPrimitiveComponent
+#include "AI/Navigation/NavigationTypes.h"		// FNavigationSystem
+#include "NavigationSystem.h"		// UNavigationSystemV1 
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -669,9 +671,10 @@ void UtilEngineWrap::LoadStreamLevel(const UObject* WorldContextObject, std::str
 	UGameplayStatics::LoadStreamLevel(WorldContextObject, name, bMakeVisibleAfterLoad, bShouldBlockOnLoad, LatentInfo);
 }
 
-void UtilEngineWrap::UnloadStreamLevel(const UObject* WorldContextObject, FName LevelName, FLatentActionInfo LatentInfo)
+void UtilEngineWrap::UnloadStreamLevel(const UObject* WorldContextObject, FName LevelName, FLatentActionInfo LatentInfo, bool bShouldBlockOnUnload)
 {
-	UGameplayStatics::UnloadStreamLevel(WorldContextObject, LevelName, LatentInfo);
+	// UE 4.20 error C2660: 'UGameplayStatics::UnloadStreamLevel': function does not take 3 arguments ， 4.20 新增加了最后一个参数
+	UGameplayStatics::UnloadStreamLevel(WorldContextObject, LevelName, LatentInfo, bShouldBlockOnUnload);
 }
 
 UMyLocalPlayerBase* UtilEngineWrap::GetLocalPlayerFromControllerId(const UGameViewportClient* InViewport, const int32 ControllerId)
@@ -1396,4 +1399,10 @@ void UtilEngineWrap::DestroyImmediate(AActor* actor, bool bNetForce, bool bShoul
 	{
 		actor->Destroy(bNetForce, bShouldModifyLevel);
 	}
+}
+
+UNavigationSystemV1* UtilEngineWrap::getCurrentNavigationSystemV1()
+{
+	// ref Engine\Source\Runtime\Engine\Classes\AI\NavigationSystemBase.h
+	return FNavigationSystem::GetCurrent<UNavigationSystemV1>(UtilEngineWrap::GetWorld());
 }

@@ -57,7 +57,7 @@ void DownloadItem::setLoadPath(std::string value)
 	this->mLoadPath = value;
 }
 
-std::string DownloadItem::getOrigPath()
+std::string& DownloadItem::getOrigPath()
 {
 	return this->mOrigPath;
 }

@@ -91,7 +91,7 @@ void ResInsBase::setRefCountResLoadResultNotify(RefCountResLoadResultNotify* val
 	this->mRefCountResLoadResultNotify = value;
 }
 
-std::string ResInsBase::getOrigPath()
+std::string& ResInsBase::getOrigPath()
 {
 	return this->mPath;
 }

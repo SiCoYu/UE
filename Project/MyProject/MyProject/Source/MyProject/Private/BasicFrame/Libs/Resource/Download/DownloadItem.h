@@ -55,7 +55,7 @@ public:
 
 	std::string getLoadPath();
 	void setLoadPath(std::string value);
-	std::string getOrigPath();
+	std::string& getOrigPath();
 	void setOrigPath(std::string value);
 	DownloadType getDownloadType();
 	void setDownloadType(DownloadType value);

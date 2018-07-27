@@ -47,7 +47,7 @@ public:
 
 	bool hasSuccessLoaded();
 	bool hasFailed();
-	virtual std::string getOrigPath();
+	virtual std::string& getOrigPath();
 	virtual std::string getResUniqueId();
 };
 

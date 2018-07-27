@@ -21,7 +21,9 @@ AModularPawn::AModularPawn(const class FObjectInitializer& PCIP)
 		// USkinnedMeshComponent::bChartDistanceFactor': bChartDistanceFactor is no longer useful, please remove references to it Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 		//Body->bChartDistanceFactor = true;
 		Body->SetCollisionProfileName(CollisionProfileName);
-		Body->bGenerateOverlapEvents = false;
+		// UE 4.20 error C2248 : 'UPrimitiveComponent::bGenerateOverlapEvents' : cannot access private member declared in class 'UPrimitiveComponent'
+		//Body->bGenerateOverlapEvents = false;
+		Body->SetGenerateOverlapEvents(false);
 
 		// Mesh acts as the head, as well as the parent for both animation and attachment.
 		//Body->AttachParent = Mesh;
@@ -44,7 +46,9 @@ AModularPawn::AModularPawn(const class FObjectInitializer& PCIP)
 		// 'USkinnedMeshComponent::bChartDistanceFactor': bChartDistanceFactor is no longer useful, please remove references to it Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 		//Legs->bChartDistanceFactor = true;
 		Legs->SetCollisionProfileName(CollisionProfileName);
-		Legs->bGenerateOverlapEvents = false;
+		// UE 4.20 error C2248: 'UPrimitiveComponent::bGenerateOverlapEvents': cannot access private member declared in class 'UPrimitiveComponent'
+		//Legs->bGenerateOverlapEvents = false;
+		Legs->SetGenerateOverlapEvents(false);
 
 		// Mesh acts as the head, as well as the parent for both animation and attachment.
 		//Legs->AttachParent = Mesh;
