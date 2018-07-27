@@ -184,7 +184,8 @@ const FPakEntry* MPakFileSystem::getFileInPakByPath(FString& path)
 	FPakFile* pakFile = nullptr;
 	// UE 4.20 error C2440: 'initializing': cannot convert from 'bool' to 'const FPakEntry *'
 	//const FPakEntry* pakEntry = PlatformFile->FindFileInPakFiles(*path, &pakFile, pakEntry);
-	const FPakEntry* pakEntry = nullptr;
+	//const FPakEntry* pakEntry = nullptr;
+	FPakEntry* pakEntry = nullptr;
 	bool ret = PlatformFile->FindFileInPakFiles(*path, &pakFile, pakEntry);
 
 	return pakEntry;
