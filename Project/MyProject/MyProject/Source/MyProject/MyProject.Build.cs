@@ -333,6 +333,8 @@ public class MyProject : ModuleRules
             //Definitions.Add("__WIN32__");
             PublicDefinitions.Add("_CRT_SECURE_NO_WARNINGS");
             PublicDefinitions.Add("__WIN32__");
+            // VS 2017: error C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+            PublicDefinitions.Add("WIN32_LEAN_AND_MEAN");
         }
         //Definitions.Add("WIN32_LEAN_AND_MEAN");
         //Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
