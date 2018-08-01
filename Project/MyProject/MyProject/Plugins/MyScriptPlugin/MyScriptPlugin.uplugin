@@ -18,28 +18,32 @@
 	
 	"Modules" :
 	[
-		{
-			"Name" : "ScriptGeneratorPlugin",
-			"Type" : "Program",
-			"LoadingPhase" : "PostConfigInit"
-		},
-		{
-			"Name" : "ScriptPlugin",
-			"Type" : "Runtime",
-			"LoadingPhase" : "PreDefault",
-			"BlacklistPlatforms" :
-			[
-				"Linux"
-			]
-		},
-		{
-			"Name" : "ScriptEditorPlugin",
-			"Type" : "Editor",
-			"LoadingPhase" : "Default",
-			"BlacklistPlatforms" :
-			[
-				"Linux"
-			]
-		}
+    {
+      "Name": "ScriptGeneratorPlugin",
+			"Type": "Program",
+			"LoadingPhase": "PostConfigInit",
+      "BlacklistPlatforms": [
+        "Linux"
+      ],
+      "WhitelistPlatforms": [ "Win64", "Win32", "Mac", "Android", "IOS" ]
+    },
+    {
+      "Name": "ScriptPlugin",
+      "Type": "Runtime",
+      "LoadingPhase": "PreDefault",
+      "BlacklistPlatforms": [
+        "Linux"
+      ],
+      "WhitelistPlatforms": [ "Win64", "Win32", "Mac", "Android", "IOS" ]
+    },
+    {
+      "Name": "ScriptEditorPlugin",
+      "Type": "Editor",
+      "LoadingPhase": "Default",
+      "BlacklistPlatforms": [
+        "Linux"
+      ],
+      "WhitelistPlatforms": [ "Win64", "Win32", "Mac", "Android", "IOS" ]
+    }
 	]
 }
