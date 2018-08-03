@@ -39,9 +39,11 @@ public class MyProjectEditorTarget : TargetRules
          * // Try to add any the other plugins that are valid
 		 * if(Rules.bBuildAllPlugins)
          */
+        // UE 4.20 warning CS0618: “UnrealBuildTool.TargetRules.bBuildAllPlugins”已过时:“bBuildAllPlugins has been deprecated. Use bPrecompile to build all modules which are not part of the target.”
         // UnrealEngine\Engine\Source\UE4Editor.Target.cs
         // 奇怪这个设置后，MyProject\Plugins\MyPlugin 才会编译
-        this.bBuildAllPlugins = true;
+        //this.bBuildAllPlugins = true;
+        this.bPrecompile = true;
 
         // warning : SetupBinaries() is deprecated in the 4.16 release. From the constructor in your .target.cs file, use ExtraModuleNames.Add("Foo") to add modules to your target, or set LaunchModuleName = "Foo" to override the name of the launch module for program targets.
         // https://answers.unrealengine.com/questions/41509/extending-editor-engine.html
