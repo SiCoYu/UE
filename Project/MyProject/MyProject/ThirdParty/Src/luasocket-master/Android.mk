@@ -63,6 +63,8 @@ LOCAL_CFLAGS += -DTEST_DEF -fPIC -DANDROID
 
 include $(BUILD_SHARED_LIBRARY)
 
+LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
+
 # 依赖第三方库，检查这个库必须存在
 include $(CLEAR_VARS)
  
