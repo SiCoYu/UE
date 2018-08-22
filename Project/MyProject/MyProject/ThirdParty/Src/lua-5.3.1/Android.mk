@@ -104,8 +104,11 @@ $(info "info: TARGET_ARCH_ABI = $(TARGET_ARCH_ABI)")
 #	copy_from += etc/vold.conf
 #endif
 
-APP_OPTIM := debug
-APP_OPTIM := release
+ifeq ($(MY_DEBUG),DEBUG)
+	APP_OPTIM := debug
+else
+	APP_OPTIM := release
+endif
 
 # 拷贝文件
 # PRODUCT_COPY_FILES += $(MY_THIRD_PARTY_ROOT_PATH)/Inc/Lua/lua.h:$(MY_PROJECT_ROOT_PATH)/src/lua.h
