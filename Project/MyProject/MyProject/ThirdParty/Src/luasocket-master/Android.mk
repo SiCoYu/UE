@@ -53,7 +53,7 @@ LOCAL_CFLAGS += -DTEST_DEF -fPIC -DANDROID
 #LOCAL_CPPFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 
-LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/libs/x86_64 -llibLua
+#LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/libs/x86_64/libLua.so
 
 # 连接静态库
 # LOCAL_STATIC_LIBRARIES += libLua
@@ -62,3 +62,10 @@ LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/libs/x86_64 -llibLua
 #LOCAL_SHARED_LIBRARIES += libLua
 
 include $(BUILD_SHARED_LIBRARY)
+
+# 依赖第三方库，检查这个库必须存在
+include $(CLEAR_VARS)
+ 
+LOCAL_MODULE := libLua
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../lua-5.3.1/libs/x86_64/libLua.so
+include $(PREBUILT_SHARED_LIBRARY)
