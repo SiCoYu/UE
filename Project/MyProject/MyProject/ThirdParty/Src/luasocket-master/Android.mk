@@ -60,7 +60,7 @@ LOCAL_CFLAGS += -DTEST_DEF -fPIC -DANDROID
 #LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/obj/local/x86_64/libLua.a
 
 # 链接标志
-#LOCAL_LDFLAGS := -Wl,--unresolved-symbols=ignore-all
+LOCAL_LDFLAGS := -Wl,--unresolved-symbols=ignore-all
 
 # 连接静态库
 # LOCAL_STATIC_LIBRARIES += libLua
