@@ -93,13 +93,13 @@ echo "THIRDPARTY_ROOT="%THIRDPARTY_ROOT%
 set THIRDPARTY_SRC=%THIRDPARTY_ROOT%\"Src"
 echo "THIRDPARTY_SRC="%THIRDPARTY_SRC%
 
-set CMAKE_ROOT="G:\ProgramFiles\cmake-3.7.2-win64-x64\bin"
+set CMAKE_ROOT="D:\ProgramFiles\cmake-3.11.3-win64-x64\bin"
 echo "CMAKE_ROOT="%CMAKE_ROOT%
 
 set CMAKE_BIN=%CMAKE_ROOT%\"cmake.exe"
 echo "CMAKE_BIN="%CMAKE_BIN%
 
-set NDK_ROOT="G:\ProgramFiles\android\android-ndk-r17b"
+set NDK_ROOT="C:\ProgramFiles\Android\android-ndk-r17b"
 echo "NDK_ROOT="%NDK_ROOT%
 
 set NDK_TOOLCHAIN_FILE=%NDK_ROOT%\build\cmake\android.toolchain.cmake
