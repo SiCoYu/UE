@@ -78,8 +78,7 @@ LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/src/lvm.c \
 	$(LOCAL_PATH)/src/lvm.h \
 	$(LOCAL_PATH)/src/lzio.c \
-	$(LOCAL_PATH)/src/lzio.h \
-	$(TARGET_ARCH_ABI)/libLua.so
+	$(LOCAL_PATH)/src/lzio.h
 
 LOCAL_CFLAGS += -DTEST_DEF -fPIC
 #LOCAL_CXXFLAGS += -DGL_GLEXT_PROTOTYPES
@@ -97,3 +96,9 @@ LOCAL_CFLAGS += -DTEST_DEF -fPIC
 
 # 构建为动态态库
 include $(BUILD_SHARED_LIBRARY)
+
+#TARGET_ARCH := arm
+
+#TARGET_ARCH_ABI := armeabi-v7a
+
+#include $(BUILD_EXECUTABLE)
