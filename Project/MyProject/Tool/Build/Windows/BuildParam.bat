@@ -1,15 +1,6 @@
 ::echo off
 echo on
 
-set BASE_DIR=%~dp0
-set DRIVER=%BASE_DIR:~0,2%
-
-echo "BASE_DIR="%BASE_DIR%
-echo "DRIVER="%DRIVER%
-
-%DRIVER%
-cd %BASE_DIR%
-
 rem UNITY Path
 set BuildParam=""
 
