@@ -53,11 +53,11 @@ LOCAL_CFLAGS += -DTEST_DEF -fPIC -DANDROID
 #LOCAL_CXXFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_CPPFLAGS += -DGL_GLEXT_PROTOTYPES
 
-# 加载库
+#添加需要链接的系统库，如ndk编译，需要链接的log/android等
 #LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 
-#LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/libs/x86_64/libLua.so
-#LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/obj/local/x86_64/libLua.a
+#LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/libs/$(TARGET_ARCH_ABI)/libLua.so
+#LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/obj/local/$(TARGET_ARCH_ABI)/libLua.a
 
 # 链接标志
 LOCAL_LDFLAGS := -Wl,--unresolved-symbols=ignore-all
@@ -76,8 +76,8 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
  
 LOCAL_MODULE := libLua
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../lua-5.3.1/libs/x86_64/libLua.so
-#LOCAL_SRC_FILES := $(LOCAL_PATH)/../lua-5.3.1/obj/local/x86_64/libLua.a
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../lua-5.3.1/libs/$(TARGET_ARCH_ABI)/libLua.so
+#LOCAL_SRC_FILES := $(LOCAL_PATH)/../lua-5.3.1/obj/local/$(TARGET_ARCH_ABI)/libLua.a
 
 include $(PREBUILT_SHARED_LIBRARY)
 #include $(PREBUILT_STATIC_LIBRARY)
