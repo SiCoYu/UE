@@ -1,12 +1,7 @@
 #http://aigo.iteye.com/blog/2288694
 #http://www.cnblogs.com/hesiming/archive/2011/03/15/1984444.html
-LOCAL_PATH := $(call my-dir)
 
-###########################
-#
-# shared library
-#
-###########################
+LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
@@ -14,71 +9,74 @@ LOCAL_MODULE := Lua
 
 LOCAL_MODULE_FILENAME := libLua
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/src
+MY_PROJECT_ROOT_PATH = $(LOCAL_PATH)
+MY_THIRD_PARTY_ROOT_PATH = $(MY_PROJECT_ROOT_PATH)/../..
+
+LOCAL_C_INCLUDES := $(MY_PROJECT_ROOT_PATH)/src
 
 #LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 
 LOCAL_SRC_FILES := \
-	$(LOCAL_PATH)/src/lapi.c \
-	$(LOCAL_PATH)/src/lapi.h \
-	$(LOCAL_PATH)/src/lauxlib.c \
-	$(LOCAL_PATH)/src/lauxlib.h \
-	$(LOCAL_PATH)/src/lbaselib.c \
-	$(LOCAL_PATH)/src/lbitlib.c \
-	$(LOCAL_PATH)/src/lcode.c \
-	$(LOCAL_PATH)/src/lcode.h \
-	$(LOCAL_PATH)/src/lcorolib.c \
-	$(LOCAL_PATH)/src/lctype.c \
-	$(LOCAL_PATH)/src/lctype.h \
-	$(LOCAL_PATH)/src/ldblib.c \
-	$(LOCAL_PATH)/src/ldebug.c \
-	$(LOCAL_PATH)/src/ldebug.h \
-	$(LOCAL_PATH)/src/ldo.c \
-	$(LOCAL_PATH)/src/ldo.h \
-	$(LOCAL_PATH)/src/ldump.c \
-	$(LOCAL_PATH)/src/lfunc.c \
-	$(LOCAL_PATH)/src/lfunc.h \
-	$(LOCAL_PATH)/src/lgc.c \
-	$(LOCAL_PATH)/src/lgc.h \
-	$(LOCAL_PATH)/src/linit.c \
-	$(LOCAL_PATH)/src/liolib.c \
-	$(LOCAL_PATH)/src/llex.c \
-	$(LOCAL_PATH)/src/llex.h \
-	$(LOCAL_PATH)/src/llimits.h \
-	$(LOCAL_PATH)/src/lmathlib.c \
-	$(LOCAL_PATH)/src/lmem.c \
-	$(LOCAL_PATH)/src/lmem.h \
-	$(LOCAL_PATH)/src/loadlib.c \
-	$(LOCAL_PATH)/src/lobject.c \
-	$(LOCAL_PATH)/src/lobject.h \
-	$(LOCAL_PATH)/src/lopcodes.c \
-	$(LOCAL_PATH)/src/lopcodes.h \
-	$(LOCAL_PATH)/src/loslib.c \
-	$(LOCAL_PATH)/src/lparser.c \
-	$(LOCAL_PATH)/src/lparser.h \
-	$(LOCAL_PATH)/src/lprefix.h \
-	$(LOCAL_PATH)/src/lstate.c \
-	$(LOCAL_PATH)/src/lstate.h \
-	$(LOCAL_PATH)/src/lstring.c \
-	$(LOCAL_PATH)/src/lstring.h \
-	$(LOCAL_PATH)/src/lstrlib.c \
-	$(LOCAL_PATH)/src/ltable.c \
-	$(LOCAL_PATH)/src/ltable.h \
-	$(LOCAL_PATH)/src/ltablib.c \
-	$(LOCAL_PATH)/src/ltm.c \
-	$(LOCAL_PATH)/src/ltm.h \
-	$(LOCAL_PATH)/src/lua.c \
-	$(LOCAL_PATH)/src/lua.h \
-	$(LOCAL_PATH)/src/lua.hpp \
-	$(LOCAL_PATH)/src/luaconf.h \
-	$(LOCAL_PATH)/src/lualib.h \
-	$(LOCAL_PATH)/src/lundump.c \
-	$(LOCAL_PATH)/src/lundump.h \
-	$(LOCAL_PATH)/src/lutf8lib.c \
-	$(LOCAL_PATH)/src/lvm.c \
-	$(LOCAL_PATH)/src/lvm.h \
-	$(LOCAL_PATH)/src/lzio.c \
-	$(LOCAL_PATH)/src/lzio.h
+	$(MY_PROJECT_ROOT_PATH)/src/lapi.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lapi.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lauxlib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lauxlib.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lbaselib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lbitlib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lcode.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lcode.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lcorolib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lctype.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lctype.h \
+	$(MY_PROJECT_ROOT_PATH)/src/ldblib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/ldebug.c \
+	$(MY_PROJECT_ROOT_PATH)/src/ldebug.h \
+	$(MY_PROJECT_ROOT_PATH)/src/ldo.c \
+	$(MY_PROJECT_ROOT_PATH)/src/ldo.h \
+	$(MY_PROJECT_ROOT_PATH)/src/ldump.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lfunc.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lfunc.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lgc.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lgc.h \
+	$(MY_PROJECT_ROOT_PATH)/src/linit.c \
+	$(MY_PROJECT_ROOT_PATH)/src/liolib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/llex.c \
+	$(MY_PROJECT_ROOT_PATH)/src/llex.h \
+	$(MY_PROJECT_ROOT_PATH)/src/llimits.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lmathlib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lmem.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lmem.h \
+	$(MY_PROJECT_ROOT_PATH)/src/loadlib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lobject.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lobject.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lopcodes.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lopcodes.h \
+	$(MY_PROJECT_ROOT_PATH)/src/loslib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lparser.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lparser.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lprefix.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lstate.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lstate.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lstring.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lstring.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lstrlib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/ltable.c \
+	$(MY_PROJECT_ROOT_PATH)/src/ltable.h \
+	$(MY_PROJECT_ROOT_PATH)/src/ltablib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/ltm.c \
+	$(MY_PROJECT_ROOT_PATH)/src/ltm.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lua.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lua.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lua.hpp \
+	$(MY_PROJECT_ROOT_PATH)/src/luaconf.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lualib.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lundump.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lundump.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lutf8lib.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lvm.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lvm.h \
+	$(MY_PROJECT_ROOT_PATH)/src/lzio.c \
+	$(MY_PROJECT_ROOT_PATH)/src/lzio.h
 
 LOCAL_CFLAGS += -DTEST_DEF -fPIC
 #LOCAL_CXXFLAGS += -DGL_GLEXT_PROTOTYPES
@@ -91,14 +89,28 @@ LOCAL_CFLAGS += -DTEST_DEF -fPIC
 # 用于预构建动态库（后面可被连接）
 # include $(PREBUILT_SHARED_LIBRARY)
 
+#TARGET_ARCH := arm
+# $(TARGET_ARCH_ABI)/libLua.so
+#TARGET_ARCH_ABI := armeabi-v7a
+#$(warning "TARGET_ARCH_ABI = $(TARGET_ARCH_ABI), TARGET_ARCH =$(TARGET_ARCH)")
+
+$(warning "warning: TARGET_PLATFORM = $(TARGET_PLATFORM)")
+#$(info "info: TARGET_PLATFORM = $(TARGET_PLATFORM)")
+#$(message "message: TARGET_PLATFORM = $(TARGET_PLATFORM)")
+$(info "info: TARGET_ARCH_ABI = $(TARGET_ARCH_ABI)")
+
+#条件编译
+#ifeq ($(TARGET_PRODUCT),generic)
+#	copy_from += etc/vold.conf
+#endif
+
+# 拷贝文件
+# PRODUCT_COPY_FILES += $(MY_THIRD_PARTY_ROOT_PATH)/Inc/Lua/lua.h:$(MY_PROJECT_ROOT_PATH)/src/lua.h
+
 # 构建为静态态库
 # include $(BUILD_STATIC_LIBRARY)
 
 # 构建为动态态库
 include $(BUILD_SHARED_LIBRARY)
-
-#TARGET_ARCH := arm
-# $(TARGET_ARCH_ABI)/libLua.so
-#TARGET_ARCH_ABI := armeabi-v7a
 
 #include $(BUILD_EXECUTABLE)
