@@ -15,6 +15,6 @@
 
 APP_ABI := x86_64
 APP_PLATFORM := android-22
-APP_STL := gnustl_static
+APP_STL := c++_static
 NDK_TOOLCHAIN_VERSION := clang
 APP_BUILD_SCRIPT := Android.mk

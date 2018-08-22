@@ -78,11 +78,22 @@ LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/src/lvm.c \
 	$(LOCAL_PATH)/src/lvm.h \
 	$(LOCAL_PATH)/src/lzio.c \
-	$(LOCAL_PATH)/src/lzio.h
+	$(LOCAL_PATH)/src/lzio.h \
+	$(TARGET_ARCH_ABI)/libLua.so
 
 LOCAL_CFLAGS += -DTEST_DEF -fPIC
 #LOCAL_CXXFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_CPPFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 
+# 用于预构建静态库（后面可被连接）
+#include $(PREBUILT_STATIC_LIBRARY)
+
+# 用于预构建动态库（后面可被连接）
+# include $(PREBUILT_SHARED_LIBRARY)
+
+# 构建为静态态库
+# include $(BUILD_STATIC_LIBRARY)
+
+# 构建为动态态库
 include $(BUILD_SHARED_LIBRARY)
