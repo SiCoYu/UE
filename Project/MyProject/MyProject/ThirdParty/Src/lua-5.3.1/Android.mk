@@ -98,7 +98,7 @@ LOCAL_CFLAGS += -DTEST_DEF -fPIC
 include $(BUILD_SHARED_LIBRARY)
 
 #TARGET_ARCH := arm
-
+# $(TARGET_ARCH_ABI)/libLua.so
 #TARGET_ARCH_ABI := armeabi-v7a
 
 #include $(BUILD_EXECUTABLE)
