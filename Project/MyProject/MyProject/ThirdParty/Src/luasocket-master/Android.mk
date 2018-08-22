@@ -42,13 +42,13 @@ LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/src/timeout.c \
 	$(LOCAL_PATH)/src/udp.h \
 	$(LOCAL_PATH)/src/udp.c \
-	$(LOCAL_PATH)/src/wsocket.h \
-	$(LOCAL_PATH)/src/wsocket.c \
+	$(LOCAL_PATH)/src/usocket.h \
+	$(LOCAL_PATH)/src/usocket.c \
 	 \
 	$(LOCAL_PATH)/src/mime.h \
 	$(LOCAL_PATH)/src/mime.c
 
-LOCAL_CFLAGS += -DTEST_DEF -fPIC
+LOCAL_CFLAGS += -DTEST_DEF -fPIC -DANDROID
 #LOCAL_CXXFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_CPPFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
@@ -59,6 +59,6 @@ LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/libs/x86_64 -llibLua
 # LOCAL_STATIC_LIBRARIES += libLua
 
 # 连接动态库
-# LOCAL_SHARED_LIBRARIES += libLua
+#LOCAL_SHARED_LIBRARIES += libLua
 
 include $(BUILD_SHARED_LIBRARY)
