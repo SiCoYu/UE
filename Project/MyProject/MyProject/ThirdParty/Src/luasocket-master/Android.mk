@@ -10,79 +10,53 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := Lua
+LOCAL_MODULE := LuaSocket
 
-LOCAL_MODULE_FILENAME := libLua
+LOCAL_MODULE_FILENAME := libLuaSocket
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/src
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/src \
+					$(LOCAL_PATH)/../lua-5.3.1/src
 
 #LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 
 LOCAL_SRC_FILES := \
-	$(LOCAL_PATH)/src/lapi.c \
-	$(LOCAL_PATH)/src/lapi.h \
-	$(LOCAL_PATH)/src/lauxlib.c \
-	$(LOCAL_PATH)/src/lauxlib.h \
-	$(LOCAL_PATH)/src/lbaselib.c \
-	$(LOCAL_PATH)/src/lbitlib.c \
-	$(LOCAL_PATH)/src/lcode.c \
-	$(LOCAL_PATH)/src/lcode.h \
-	$(LOCAL_PATH)/src/lcorolib.c \
-	$(LOCAL_PATH)/src/lctype.c \
-	$(LOCAL_PATH)/src/lctype.h \
-	$(LOCAL_PATH)/src/ldblib.c \
-	$(LOCAL_PATH)/src/ldebug.c \
-	$(LOCAL_PATH)/src/ldebug.h \
-	$(LOCAL_PATH)/src/ldo.c \
-	$(LOCAL_PATH)/src/ldo.h \
-	$(LOCAL_PATH)/src/ldump.c \
-	$(LOCAL_PATH)/src/lfunc.c \
-	$(LOCAL_PATH)/src/lfunc.h \
-	$(LOCAL_PATH)/src/lgc.c \
-	$(LOCAL_PATH)/src/lgc.h \
-	$(LOCAL_PATH)/src/linit.c \
-	$(LOCAL_PATH)/src/liolib.c \
-	$(LOCAL_PATH)/src/llex.c \
-	$(LOCAL_PATH)/src/llex.h \
-	$(LOCAL_PATH)/src/llimits.h \
-	$(LOCAL_PATH)/src/lmathlib.c \
-	$(LOCAL_PATH)/src/lmem.c \
-	$(LOCAL_PATH)/src/lmem.h \
-	$(LOCAL_PATH)/src/loadlib.c \
-	$(LOCAL_PATH)/src/lobject.c \
-	$(LOCAL_PATH)/src/lobject.h \
-	$(LOCAL_PATH)/src/lopcodes.c \
-	$(LOCAL_PATH)/src/lopcodes.h \
-	$(LOCAL_PATH)/src/loslib.c \
-	$(LOCAL_PATH)/src/lparser.c \
-	$(LOCAL_PATH)/src/lparser.h \
-	$(LOCAL_PATH)/src/lprefix.h \
-	$(LOCAL_PATH)/src/lstate.c \
-	$(LOCAL_PATH)/src/lstate.h \
-	$(LOCAL_PATH)/src/lstring.c \
-	$(LOCAL_PATH)/src/lstring.h \
-	$(LOCAL_PATH)/src/lstrlib.c \
-	$(LOCAL_PATH)/src/ltable.c \
-	$(LOCAL_PATH)/src/ltable.h \
-	$(LOCAL_PATH)/src/ltablib.c \
-	$(LOCAL_PATH)/src/ltm.c \
-	$(LOCAL_PATH)/src/ltm.h \
-	$(LOCAL_PATH)/src/lua.c \
-	$(LOCAL_PATH)/src/lua.h \
-	$(LOCAL_PATH)/src/lua.hpp \
-	$(LOCAL_PATH)/src/luaconf.h \
-	$(LOCAL_PATH)/src/lualib.h \
-	$(LOCAL_PATH)/src/lundump.c \
-	$(LOCAL_PATH)/src/lundump.h \
-	$(LOCAL_PATH)/src/lutf8lib.c \
-	$(LOCAL_PATH)/src/lvm.c \
-	$(LOCAL_PATH)/src/lvm.h \
-	$(LOCAL_PATH)/src/lzio.c \
-	$(LOCAL_PATH)/src/lzio.h
+	$(LOCAL_PATH)/src/auxiliar.h \
+	$(LOCAL_PATH)/src/auxiliar.c \
+	$(LOCAL_PATH)/src/buffer.h \
+	$(LOCAL_PATH)/src/buffer.c \
+	$(LOCAL_PATH)/src/except.h \
+	$(LOCAL_PATH)/src/except.c \
+	$(LOCAL_PATH)/src/inet.h \
+	$(LOCAL_PATH)/src/inet.c \
+	$(LOCAL_PATH)/src/io.h \
+	$(LOCAL_PATH)/src/io.c \
+	$(LOCAL_PATH)/src/luasocket.h \
+	$(LOCAL_PATH)/src/luasocket.c \
+	$(LOCAL_PATH)/src/options.h \
+	$(LOCAL_PATH)/src/options.c \
+	$(LOCAL_PATH)/src/select.h \
+	$(LOCAL_PATH)/src/select.c \
+	$(LOCAL_PATH)/src/tcp.h \
+	$(LOCAL_PATH)/src/tcp.c \
+	$(LOCAL_PATH)/src/timeout.h \
+	$(LOCAL_PATH)/src/timeout.c \
+	$(LOCAL_PATH)/src/udp.h \
+	$(LOCAL_PATH)/src/udp.c \
+	$(LOCAL_PATH)/src/wsocket.h \
+	$(LOCAL_PATH)/src/wsocket.c \
+	 \
+	$(LOCAL_PATH)/src/mime.h \
+	$(LOCAL_PATH)/src/mime.c
 
 LOCAL_CFLAGS += -DTEST_DEF -fPIC
 #LOCAL_CXXFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_CPPFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
+
+# 连接静态库
+# LOCAL_STATIC_LIBRARIES += libLua
+
+# 连接动态库
+LOCAL_SHARED_LIBRARIES += libLua
 
 include $(BUILD_SHARED_LIBRARY)
