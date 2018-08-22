@@ -10,4 +10,4 @@ echo "DRIVER="%DRIVER%
 %DRIVER%
 cd %BASE_DIR%
 
-C:\ProgramFiles\Android\android-ndk-r17b\ndk-build.cmd NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_APPLICATION_MK=./Application.mk
+G:\ProgramFiles\android\android-ndk-r17b\ndk-build.cmd NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_APPLICATION_MK=./Application.mk

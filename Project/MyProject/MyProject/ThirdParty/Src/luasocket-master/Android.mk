@@ -48,12 +48,19 @@ LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/src/mime.h \
 	$(LOCAL_PATH)/src/mime.c
 
+# 编译标志
 LOCAL_CFLAGS += -DTEST_DEF -fPIC -DANDROID
 #LOCAL_CXXFLAGS += -DGL_GLEXT_PROTOTYPES
 #LOCAL_CPPFLAGS += -DGL_GLEXT_PROTOTYPES
+
+# 加载库
 #LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 
 #LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/libs/x86_64/libLua.so
+#LOCAL_LDFLAGS += -L$(LOCAL_PATH)/../lua-5.3.1/obj/local/x86_64/libLua.a
+
+# 链接标志
+#LOCAL_LDFLAGS := -Wl,--unresolved-symbols=ignore-all
 
 # 连接静态库
 # LOCAL_STATIC_LIBRARIES += libLua
@@ -63,11 +70,14 @@ LOCAL_CFLAGS += -DTEST_DEF -fPIC -DANDROID
 
 include $(BUILD_SHARED_LIBRARY)
 
-LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
+#LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
 
 # 依赖第三方库，检查这个库必须存在
 include $(CLEAR_VARS)
  
 LOCAL_MODULE := libLua
 LOCAL_SRC_FILES := $(LOCAL_PATH)/../lua-5.3.1/libs/x86_64/libLua.so
+#LOCAL_SRC_FILES := $(LOCAL_PATH)/../lua-5.3.1/obj/local/x86_64/libLua.a
+
 include $(PREBUILT_SHARED_LIBRARY)
+#include $(PREBUILT_STATIC_LIBRARY)
