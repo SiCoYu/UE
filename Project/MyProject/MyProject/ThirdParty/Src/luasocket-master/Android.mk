@@ -14,39 +14,41 @@ LOCAL_MODULE := LuaSocket
 
 LOCAL_MODULE_FILENAME := libLuaSocket
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/src \
-					$(LOCAL_PATH)/../lua-5.3.1/src
+MY_PROJECT_ROOT_PATH = $(LOCAL_PATH)
+
+LOCAL_C_INCLUDES := $(MY_PROJECT_ROOT_PATH)/src \
+					$(MY_PROJECT_ROOT_PATH)/../lua-5.3.1/src
 
 #LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 
 LOCAL_SRC_FILES := \
-	$(LOCAL_PATH)/src/auxiliar.h \
-	$(LOCAL_PATH)/src/auxiliar.c \
-	$(LOCAL_PATH)/src/buffer.h \
-	$(LOCAL_PATH)/src/buffer.c \
-	$(LOCAL_PATH)/src/except.h \
-	$(LOCAL_PATH)/src/except.c \
-	$(LOCAL_PATH)/src/inet.h \
-	$(LOCAL_PATH)/src/inet.c \
-	$(LOCAL_PATH)/src/io.h \
-	$(LOCAL_PATH)/src/io.c \
-	$(LOCAL_PATH)/src/luasocket.h \
-	$(LOCAL_PATH)/src/luasocket.c \
-	$(LOCAL_PATH)/src/options.h \
-	$(LOCAL_PATH)/src/options.c \
-	$(LOCAL_PATH)/src/select.h \
-	$(LOCAL_PATH)/src/select.c \
-	$(LOCAL_PATH)/src/tcp.h \
-	$(LOCAL_PATH)/src/tcp.c \
-	$(LOCAL_PATH)/src/timeout.h \
-	$(LOCAL_PATH)/src/timeout.c \
-	$(LOCAL_PATH)/src/udp.h \
-	$(LOCAL_PATH)/src/udp.c \
-	$(LOCAL_PATH)/src/usocket.h \
-	$(LOCAL_PATH)/src/usocket.c \
+	$(MY_PROJECT_ROOT_PATH)/src/auxiliar.h \
+	$(MY_PROJECT_ROOT_PATH)/src/auxiliar.c \
+	$(MY_PROJECT_ROOT_PATH)/src/buffer.h \
+	$(MY_PROJECT_ROOT_PATH)/src/buffer.c \
+	$(MY_PROJECT_ROOT_PATH)/src/except.h \
+	$(MY_PROJECT_ROOT_PATH)/src/except.c \
+	$(MY_PROJECT_ROOT_PATH)/src/inet.h \
+	$(MY_PROJECT_ROOT_PATH)/src/inet.c \
+	$(MY_PROJECT_ROOT_PATH)/src/io.h \
+	$(MY_PROJECT_ROOT_PATH)/src/io.c \
+	$(MY_PROJECT_ROOT_PATH)/src/luasocket.h \
+	$(MY_PROJECT_ROOT_PATH)/src/luasocket.c \
+	$(MY_PROJECT_ROOT_PATH)/src/options.h \
+	$(MY_PROJECT_ROOT_PATH)/src/options.c \
+	$(MY_PROJECT_ROOT_PATH)/src/select.h \
+	$(MY_PROJECT_ROOT_PATH)/src/select.c \
+	$(MY_PROJECT_ROOT_PATH)/src/tcp.h \
+	$(MY_PROJECT_ROOT_PATH)/src/tcp.c \
+	$(MY_PROJECT_ROOT_PATH)/src/timeout.h \
+	$(MY_PROJECT_ROOT_PATH)/src/timeout.c \
+	$(MY_PROJECT_ROOT_PATH)/src/udp.h \
+	$(MY_PROJECT_ROOT_PATH)/src/udp.c \
+	$(MY_PROJECT_ROOT_PATH)/src/usocket.h \
+	$(MY_PROJECT_ROOT_PATH)/src/usocket.c \
 	 \
-	$(LOCAL_PATH)/src/mime.h \
-	$(LOCAL_PATH)/src/mime.c
+	$(MY_PROJECT_ROOT_PATH)/src/mime.h \
+	$(MY_PROJECT_ROOT_PATH)/src/mime.c
 
 # 编译标志
 LOCAL_CFLAGS += -DTEST_DEF -fPIC -DANDROID
