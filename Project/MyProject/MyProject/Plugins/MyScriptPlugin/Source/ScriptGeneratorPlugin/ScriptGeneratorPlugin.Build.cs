@@ -41,7 +41,9 @@ namespace UnrealBuildTool.Rules
 				new string[]
 				{
 					// ... add private dependencies that you statically link with here ...
-					"Projects",
+                    "Core",
+                    "CoreUObject",
+                    "Projects",
 				}
 				);
 
@@ -73,8 +75,9 @@ namespace UnrealBuildTool.Rules
             loadThirdPartyInclude();
             LoadLua(Target);
 
+            // UE 4.20 warning C4005: 'HACK_HEADER_GENERATOR': macro redefinition
             PublicDefinitions.Add("HACK_HEADER_GENERATOR=1");
-		}
+        }
 
         protected string ModulePath
         {

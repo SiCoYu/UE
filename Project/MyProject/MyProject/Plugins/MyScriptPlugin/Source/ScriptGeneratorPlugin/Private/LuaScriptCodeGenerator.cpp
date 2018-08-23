@@ -2,7 +2,7 @@
 
 #include "LuaScriptCodeGenerator.h"
 #include "ScriptGeneratorLog.h"
-#include "UObject/ErrorException.h"
+#include "UObject/ErrorException.h"		 // FError
 
 // error C2027: use of undefined type 'UProperty'
 #include "UObject/UnrealType.h"		// UProperty
