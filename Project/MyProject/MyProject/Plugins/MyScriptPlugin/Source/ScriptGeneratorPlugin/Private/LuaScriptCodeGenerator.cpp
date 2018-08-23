@@ -98,6 +98,7 @@ FString FLuaScriptCodeGenerator::InitializeFunctionDispatchParam(UFunction* Func
 			}
 			else
 			{
+				//FError::Throwf(TEXT("Unsupported function param struct type: %s"), *StructProp->Struct->GetName());
 				FError::Throwf(TEXT("Unsupported function param struct type: %s"), *StructProp->Struct->GetName());
 			}
 		}
@@ -111,6 +112,7 @@ FString FLuaScriptCodeGenerator::InitializeFunctionDispatchParam(UFunction* Func
 		}
 		else
 		{
+			//FError::Throwf(TEXT("Unsupported function param type: %s"), *Param->GetClass()->GetName());
 			FError::Throwf(TEXT("Unsupported function param type: %s"), *Param->GetClass()->GetName());
 		}
 
@@ -192,6 +194,7 @@ FString FLuaScriptCodeGenerator::GenerateReturnValueHandler(const FString& Class
 			}
 			else
 			{
+				//FError::Throwf(TEXT("Unsupported function return value struct type: %s"), *StructProp->Struct->GetName());
 				FError::Throwf(TEXT("Unsupported function return value struct type: %s"), *StructProp->Struct->GetName());
 			}
 		}
@@ -201,6 +204,7 @@ FString FLuaScriptCodeGenerator::GenerateReturnValueHandler(const FString& Class
 		}
 		else
 		{
+			//FError::Throwf(TEXT("Unsupported function return type: %s"), *ReturnValue->GetClass()->GetName());
 			FError::Throwf(TEXT("Unsupported function return type: %s"), *ReturnValue->GetClass()->GetName());
 		}
 
