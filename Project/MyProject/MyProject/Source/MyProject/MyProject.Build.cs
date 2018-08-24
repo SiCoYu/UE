@@ -425,13 +425,16 @@ public class MyProject : ModuleRules
         //string path = Path.Combine(this.getMyProjectPluginsPath(), "MyScriptPlugin/Source/ScriptPlugin");
         //PublicLibraryPaths.Add(path);
 
-        this.loadThirdPartyInclude();
+        this.loadThirdPartyInc();
 
         //LoadSockets(Target);
         //this.LoadTestExtern(Target);
         //LoadGtest(Target);
-        this.LoadLua(Target);
-        this.LoadLuaSocket(Target);
+        //this.LoadLua(Target);
+        //this.LoadLuaSocket(Target);
+
+        this.loadThirdLib(Target, "Lua");
+        this.loadThirdLib(Target, "LuaSocket");
     }
 
     /**
@@ -476,7 +479,7 @@ public class MyProject : ModuleRules
         return ret;
     }
 
-    private void loadThirdPartyInclude()
+    private void loadThirdPartyInc()
     {
         PublicIncludePaths.AddRange(
             new string[] 
@@ -594,180 +597,180 @@ public class MyProject : ModuleRules
     // 加载 Lua
     //private bool LoadLua(TargetInfo Target)
     // 4.17
-    private bool LoadLua(ReadOnlyTargetRules Target)
-    {
-        string librariesPath = "";
+    //private bool LoadLua(ReadOnlyTargetRules Target)
+    //{
+    //    string librariesPath = "";
 
-        if (UnrealTargetPlatform.Mac == Target.Platform)
-        {
+    //    if (UnrealTargetPlatform.Mac == Target.Platform)
+    //    {
 
-        }
-        else if(UnrealTargetPlatform.Win32 == Target.Platform)
-        {
-            /**
-             * @brief bDebugBuildsActuallyUseDebugCRT 开启这个会有很多链接错误，因此暂时不开启
-             * @ref Engine\Source\Programs\UnrealBuildTool\Configuration\TargetRules.cs
-             * @ref Engine\Saved\UnrealBuildTool\BuildConfiguration.xml
-             */
-            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
-                Target.bDebugBuildsActuallyUseDebugCRT */)
-            {
-                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win32", "Lua_d.lib");
-                PublicAdditionalLibraries.Add(librariesPath);
-            }
-            else
-            {
-                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win32", "Lua.lib");
-                PublicAdditionalLibraries.Add(librariesPath);
-            }
-        }
-        else if (UnrealTargetPlatform.Win64 == Target.Platform)
-        {
-            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
-                Target.bDebugBuildsActuallyUseDebugCRT */)
-            {
-                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win64", "Lua_d.lib");
-                PublicAdditionalLibraries.Add(librariesPath);
-            }
-            else
-            {
-                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win64", "Lua.lib");
-                PublicAdditionalLibraries.Add(librariesPath);
-            }
-        }
-        else if (UnrealTargetPlatform.Android == Target.Platform)
-        {
-            // UE4.19.1 error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
-            //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
-            //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
+    //    }
+    //    else if(UnrealTargetPlatform.Win32 == Target.Platform)
+    //    {
+    //        /**
+    //         * @brief bDebugBuildsActuallyUseDebugCRT 开启这个会有很多链接错误，因此暂时不开启
+    //         * @ref Engine\Source\Programs\UnrealBuildTool\Configuration\TargetRules.cs
+    //         * @ref Engine\Saved\UnrealBuildTool\BuildConfiguration.xml
+    //         */
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT */)
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win32", "Lua_d.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //        else
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win32", "Lua.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.Win64 == Target.Platform)
+    //    {
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT */)
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win64", "Lua_d.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //        else
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win64", "Lua.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.Android == Target.Platform)
+    //    {
+    //        // UE4.19.1 error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
+    //        //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+    //        //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
 
-            // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
-            //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
-            //RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
+    //        // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
+    //        //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+    //        //RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
 
-            //PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLua.so");
+    //        //PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLua.so");
 
-            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/armv7");
-            PublicLibraryPaths.Add(librariesPath);
-            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/arm64");
-            PublicLibraryPaths.Add(librariesPath);
-            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/x86");
-            PublicLibraryPaths.Add(librariesPath);
-            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/x86_64");
-            PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/armv7");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/arm64");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/x86");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/x86_64");
+    //        PublicLibraryPaths.Add(librariesPath);
 
-            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
-                Target.bDebugBuildsActuallyUseDebugCRT */)
-            {
-                PublicAdditionalLibraries.Add("Lua_d");
-            }
-            else
-            {
-                PublicAdditionalLibraries.Add("Lua");
-            }
-        }
-        else if (UnrealTargetPlatform.IOS == Target.Platform)
-        {
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT */)
+    //        {
+    //            PublicAdditionalLibraries.Add("Lua_d");
+    //        }
+    //        else
+    //        {
+    //            PublicAdditionalLibraries.Add("Lua");
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.IOS == Target.Platform)
+    //    {
 
-        }
-        else
-        {
-            throw new System.Exception("Not support platform");
-        }
+    //    }
+    //    else
+    //    {
+    //        throw new System.Exception("Not support platform");
+    //    }
 
-        return true;
-    }
+    //    return true;
+    //}
 
     //private bool LoadLuaSocket(TargetInfo Target)
     // 4.17
-    private bool LoadLuaSocket(ReadOnlyTargetRules Target)
-    {
-        /**
-         * @brief UnrealTargetPlatform
-         * @url Engine\Source\Programs\UnrealBuildTool\Configuration\UEBuildTarget.cs
-         */
-        string librariesPath = "";
+    //private bool LoadLuaSocket(ReadOnlyTargetRules Target)
+    //{
+    //    /**
+    //     * @brief UnrealTargetPlatform
+    //     * @url Engine\Source\Programs\UnrealBuildTool\Configuration\UEBuildTarget.cs
+    //     */
+    //    string librariesPath = "";
 
-        if (UnrealTargetPlatform.Mac == Target.Platform)
-        {
+    //    if (UnrealTargetPlatform.Mac == Target.Platform)
+    //    {
 
-        }
-        else if(UnrealTargetPlatform.Win32 == Target.Platform)
-        {
-            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
-                Target.bDebugBuildsActuallyUseDebugCRT */)
-            {
-                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win32", "LuaSocket_d.lib");
-                PublicAdditionalLibraries.Add(librariesPath);
-            }
-            else
-            {
-                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win32", "LuaSocket.lib");
-                PublicAdditionalLibraries.Add(librariesPath);
-            }
-        }
-        else if (UnrealTargetPlatform.Win64 == Target.Platform)
-        {
-            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
-                Target.bDebugBuildsActuallyUseDebugCRT*/)
-            {
-                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win64", "LuaSocket_d.lib");
-                PublicAdditionalLibraries.Add(librariesPath);
-            }
-            else
-            {
-                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win64", "LuaSocket_d.lib");
-                PublicAdditionalLibraries.Add(librariesPath);
-            }
-        }
-        else if (UnrealTargetPlatform.Android == Target.Platform)
-        {
-            /**
-             * @brief AndroidToolChain
-             * @url Engine\Source\Programs\UnrealBuildTool\Platform\Android\AndroidToolChain.cs
-             * @ref Engine\Source\ThirdParty\GoogleVR\GoogleVR.Build.cs
-             * @brief Target.UEThirdPartySourceDirectory \ 
-             */
-            // error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
-            // string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
-            //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
+    //    }
+    //    else if(UnrealTargetPlatform.Win32 == Target.Platform)
+    //    {
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT */)
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win32", "LuaSocket_d.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //        else
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win32", "LuaSocket.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.Win64 == Target.Platform)
+    //    {
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT*/)
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win64", "LuaSocket_d.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //        else
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win64", "LuaSocket_d.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.Android == Target.Platform)
+    //    {
+    //        /**
+    //         * @brief AndroidToolChain
+    //         * @url Engine\Source\Programs\UnrealBuildTool\Platform\Android\AndroidToolChain.cs
+    //         * @ref Engine\Source\ThirdParty\GoogleVR\GoogleVR.Build.cs
+    //         * @brief Target.UEThirdPartySourceDirectory \ 
+    //         */
+    //        // error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
+    //        // string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+    //        //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
 
-            // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
-            //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
-            //RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
+    //        // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
+    //        //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+    //        //RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
 
-            //PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLuaSocket.so");
+    //        //PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLuaSocket.so");
 
-            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/armv7");
-            PublicLibraryPaths.Add(librariesPath);
-            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/arm64");
-            PublicLibraryPaths.Add(librariesPath);
-            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/x86");
-            PublicLibraryPaths.Add(librariesPath);
-            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/x86_64");
-            PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/armv7");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/arm64");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/x86");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/x86_64");
+    //        PublicLibraryPaths.Add(librariesPath);
 
-            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
-                Target.bDebugBuildsActuallyUseDebugCRT */)
-            {
-                PublicAdditionalLibraries.Add("libLuaSocket_d");
-            }
-            else
-            {
-                PublicAdditionalLibraries.Add("libLuaSocket");
-            }
-        }
-        else if (UnrealTargetPlatform.IOS == Target.Platform)
-        {
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT */)
+    //        {
+    //            PublicAdditionalLibraries.Add("libLuaSocket_d");
+    //        }
+    //        else
+    //        {
+    //            PublicAdditionalLibraries.Add("libLuaSocket");
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.IOS == Target.Platform)
+    //    {
 
-        }
-        else
-        {
-            throw new System.Exception("Not support platform");
-        }
+    //    }
+    //    else
+    //    {
+    //        throw new System.Exception("Not support platform");
+    //    }
 
-        return true;
-    }
+    //    return true;
+    //}
 
     // 加载 ProjectEditor
     //private bool LoadMyProjectEditor(TargetInfo Target)
@@ -789,6 +792,156 @@ public class MyProject : ModuleRules
                     "MyProjectEditor",
                 }
             );
+        }
+
+        return true;
+    }
+
+    //private bool loadThirdLib(ReadOnlyTargetRules Target, string libName)
+    //{
+    //    string librariesPath = "";
+
+    //    if (UnrealTargetPlatform.Mac == Target.Platform)
+    //    {
+
+    //    }
+    //    else if (UnrealTargetPlatform.Win32 == Target.Platform)
+    //    {
+    //        /**
+    //         * @brief bDebugBuildsActuallyUseDebugCRT 开启这个会有很多链接错误，因此暂时不开启
+    //         * @ref Engine\Source\Programs\UnrealBuildTool\Configuration\TargetRules.cs
+    //         * @ref Engine\Saved\UnrealBuildTool\BuildConfiguration.xml
+    //         */
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT */)
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win32", libName + "_d.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //        else
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win32", libName + ".lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.Win64 == Target.Platform)
+    //    {
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT */)
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win64", libName + "_d.lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //        else
+    //        {
+    //            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win64", libName + ".lib");
+    //            PublicAdditionalLibraries.Add(librariesPath);
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.Android == Target.Platform)
+    //    {
+    //        // UE4.19.1 error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
+    //        //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
+    //        //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
+
+    //        // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
+    //        //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
+    //        //RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
+
+    //        //PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLua.so");
+
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/armv7");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/arm64");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/x86");
+    //        PublicLibraryPaths.Add(librariesPath);
+    //        librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/x86_64");
+    //        PublicLibraryPaths.Add(librariesPath);
+
+    //        if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+    //            Target.bDebugBuildsActuallyUseDebugCRT */)
+    //        {
+    //            PublicAdditionalLibraries.Add(libName + "_d");
+    //        }
+    //        else
+    //        {
+    //            PublicAdditionalLibraries.Add(libName);
+    //        }
+    //    }
+    //    else if (UnrealTargetPlatform.IOS == Target.Platform)
+    //    {
+
+    //    }
+    //    else
+    //    {
+    //        throw new System.Exception("Not support platform");
+    //    }
+
+    //    return true;
+    //}
+
+    private bool loadThirdLib(ReadOnlyTargetRules Target, string libName)
+    {
+        string librariesPath = "";
+
+        if (UnrealTargetPlatform.Mac == Target.Platform)
+        {
+
+        }
+        else if (UnrealTargetPlatform.Win32 == Target.Platform)
+        {
+            if (UnrealTargetConfiguration.Debug == Target.Configuration)
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", libName, "Win32", libName + "_d.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+            else
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", libName, "Win32", libName + ".lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+        }
+        else if (UnrealTargetPlatform.Win64 == Target.Platform)
+        {
+            if (UnrealTargetConfiguration.Debug == Target.Configuration)
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", libName, "Win64", libName + "_d.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+            else
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", libName, "Win64", libName + ".lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+        }
+        else if (UnrealTargetPlatform.Android == Target.Platform)
+        {
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", libName, "Android/armv7");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", libName, "Android/arm64");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", libName, "Android/x86");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", libName, "Android/x86_64");
+            PublicLibraryPaths.Add(librariesPath);
+
+            if (UnrealTargetConfiguration.Debug == Target.Configuration)
+            {
+                PublicAdditionalLibraries.Add(libName + "_d");
+            }
+            else
+            {
+                PublicAdditionalLibraries.Add(libName);
+            }
+        }
+        else if (UnrealTargetPlatform.IOS == Target.Platform)
+        {
+
+        }
+        else
+        {
+            throw new System.Exception("Not support platform");
         }
 
         return true;
