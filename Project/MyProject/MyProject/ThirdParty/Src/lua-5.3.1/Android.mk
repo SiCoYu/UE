@@ -120,3 +120,8 @@ endif
 include $(BUILD_SHARED_LIBRARY)
 
 #include $(BUILD_EXECUTABLE)
+
+# 拷贝文件
+#$(info "src = $(MY_PROJECT_ROOT_PATH)/src/lua.h")
+#$(info "dest = $(MY_THIRD_PARTY_ROOT_PATH)/Inc/Lua/lua.h")
+#PRODUCT_COPY_FILES += F:/Proj/aaa.h:F:/Proj/TestQQ/project.json
