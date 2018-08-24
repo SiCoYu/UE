@@ -77,7 +77,7 @@ namespace UnrealBuildTool.Rules
             this.loadThirdLib(Target, "Lua");
 
             // UE 4.20 warning C4005: 'HACK_HEADER_GENERATOR': macro redefinition
-            PublicDefinitions.Add("HACK_HEADER_GENERATOR=1");
+            //PublicDefinitions.Add("HACK_HEADER_GENERATOR=1");
         }
 
         protected string getMyModulePath()

@@ -99,7 +99,14 @@ FString FLuaScriptCodeGenerator::InitializeFunctionDispatchParam(UFunction* Func
 			else
 			{
 				//FError::Throwf(TEXT("Unsupported function param struct type: %s"), *StructProp->Struct->GetName());
+				/**
+				 *@ref Engine\Source\Runtime\CoreUObject\Private\UObject\Class.cpp
+				 */
+#if HACK_HEADER_GENERATOR
 				FError::Throwf(TEXT("Unsupported function param struct type: %s"), *StructProp->Struct->GetName());
+#else
+				UE_LOG(LogClass, Fatal, TEXT("Unsupported function param struct type: %s"), *StructProp->Struct->GetName());
+#endif
 			}
 		}
 		else if (Param->IsA(UClassProperty::StaticClass()))
@@ -113,7 +120,14 @@ FString FLuaScriptCodeGenerator::InitializeFunctionDispatchParam(UFunction* Func
 		else
 		{
 			//FError::Throwf(TEXT("Unsupported function param type: %s"), *Param->GetClass()->GetName());
+			/**
+			*@ref Engine\Source\Runtime\CoreUObject\Private\UObject\Class.cpp
+			*/
+#if HACK_HEADER_GENERATOR
 			FError::Throwf(TEXT("Unsupported function param type: %s"), *Param->GetClass()->GetName());
+#else
+			UE_LOG(LogClass, Fatal, TEXT("Unsupported function param type: %s"), *Param->GetClass()->GetName());
+#endif
 		}
 
 		if (false == isLinearColorToColor)
@@ -195,7 +209,14 @@ FString FLuaScriptCodeGenerator::GenerateReturnValueHandler(const FString& Class
 			else
 			{
 				//FError::Throwf(TEXT("Unsupported function return value struct type: %s"), *StructProp->Struct->GetName());
+				/**
+				*@ref Engine\Source\Runtime\CoreUObject\Private\UObject\Class.cpp
+				*/
+#if HACK_HEADER_GENERATOR
 				FError::Throwf(TEXT("Unsupported function return value struct type: %s"), *StructProp->Struct->GetName());
+#else
+				UE_LOG(LogClass, Fatal, TEXT("Unsupported function return value struct type: %s"), *StructProp->Struct->GetName());
+#endif
 			}
 		}
 		else if (ReturnValue->IsA(UObjectPropertyBase::StaticClass()))
@@ -205,7 +226,14 @@ FString FLuaScriptCodeGenerator::GenerateReturnValueHandler(const FString& Class
 		else
 		{
 			//FError::Throwf(TEXT("Unsupported function return type: %s"), *ReturnValue->GetClass()->GetName());
+			/**
+			*@ref Engine\Source\Runtime\CoreUObject\Private\UObject\Class.cpp
+			*/
+#if HACK_HEADER_GENERATOR
 			FError::Throwf(TEXT("Unsupported function return type: %s"), *ReturnValue->GetClass()->GetName());
+#else
+			UE_LOG(LogClass, Fatal, TEXT("Unsupported function return type: %s"), *ReturnValue->GetClass()->GetName());
+#endif
 		}
 
 		return FString::Printf(TEXT("%s\r\n\treturn 1;"), *Initializer);
