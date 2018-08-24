@@ -104,10 +104,13 @@ $(info "info: TARGET_ARCH_ABI = $(TARGET_ARCH_ABI)")
 #	copy_from += etc/vold.conf
 #endif
 
+# 这个地方空白一定要用空格，不要用 Tab ，否则会出现错误
 ifeq ($(MY_DEBUG),DEBUG)
-	APP_OPTIM := debug
+    APP_OPTIM := debug
+    $(info "Debug Mode")
 else
-	APP_OPTIM := release
+    APP_OPTIM := release
+    $(info "Release Mode")
 endif
 
 # 拷贝文件
