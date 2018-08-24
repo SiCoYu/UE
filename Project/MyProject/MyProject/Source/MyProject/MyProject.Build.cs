@@ -348,7 +348,7 @@ public class MyProject : ModuleRules
         //    new string[] {
         //        "Coupling/Private",
         //        // ... add other private include paths required here ...
-        //        Path.Combine(ThirdPartyPath, "v8", "include"),
+        //        Path.Combine(this.getMyProjectThirdPartyPath(), "v8", "include"),
         //    }
         //);
 
@@ -422,48 +422,58 @@ public class MyProject : ModuleRules
         //UEBuildConfiguration.BuildConfiguration.bForceDebugUnrealHeaderTool = true;
 
         // 添加 ScriptPlugin 目录
-        //string path = Path.Combine(ProjectPluginsPath, "MyScriptPlugin/Source/ScriptPlugin");
+        //string path = Path.Combine(this.getMyProjectPluginsPath(), "MyScriptPlugin/Source/ScriptPlugin");
         //PublicLibraryPaths.Add(path);
 
         this.loadThirdPartyInclude();
+
         //LoadSockets(Target);
-        this.LoadTestExtern(Target);
+        //this.LoadTestExtern(Target);
         //LoadGtest(Target);
         this.LoadLua(Target);
         this.LoadLuaSocket(Target);
     }
 
-    /// <summary>
-    /// Accessor for the Module's path
-    /// </summary>
-    protected string ModulePath
+    /**
+     * @brief 获取自己模块目录
+     */
+    protected string getMyModulePath()
     {
-        get
-        {
-            // “UnrealBuildTool.RulesCompiler.GetModuleFilename(string)”已过时:“GetModuleFilename is deprecated, use the ModuleDirectory property on any ModuleRules instead to get a path to your module.”
-            //return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name));
-            //return Path.GetDirectoryName(ModuleDirectory);    // 不是这样获取
-            return ModuleDirectory;      // 参照 Engine\Plugins\Runtime\Nvidia\Ansel\Source\Ansel\Ansel.Build.cs 实现
-        }
+        // “UnrealBuildTool.RulesCompiler.GetModuleFilename(string)”已过时:“GetModuleFilename is deprecated, use the ModuleDirectory property on any ModuleRules instead to get a path to your module.”
+        //return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name));
+        //return Path.GetDirectoryName(ModuleDirectory);    // 不是这样获取
+        return ModuleDirectory;      // 参照 Engine\Plugins\Runtime\Nvidia\Ansel\Source\Ansel\Ansel.Build.cs 实现
     }
 
-    protected string ProjectPluginsPath
+    protected string getMyProjectPluginsPath()
     {
-        get
-        {
-            return Path.GetFullPath(Path.Combine(ModulePath, "../..", "Plugins"));
-        }
+        string ret = "";
+        ret = Path.GetFullPath(Path.Combine(this.getMyModulePath(), "../..", "Plugins"));
+        return ret;
     }
 
-    /// <summary>
-    /// Accessor for thee ThirdParty Path.
-    /// </summary>
-    protected string ThirdPartyPath
+    /**
+     * @brief 获取自己工程的第三方目录
+     */
+    protected string getMyProjectThirdPartyPath()
     {
-        get
-        {
-            return Path.GetFullPath(Path.Combine(ModulePath, "../..", "ThirdParty"));
-        }
+        string ret = "";
+
+        ret = Path.GetFullPath(Path.Combine(this.getMyModulePath(), "../..", "ThirdParty"));
+
+        return ret;
+    }
+
+    /**
+     * @brief 获取引擎第三方目录
+     */
+    protected string getEngineThirdPartyPath()
+    {
+        string ret = "";
+
+        ret = Target.UEThirdPartySourceDirectory;
+
+        return ret;
     }
 
     private void loadThirdPartyInclude()
@@ -472,10 +482,10 @@ public class MyProject : ModuleRules
             new string[] 
             {
                 // ... add public include paths required here ...
-                Path.Combine(ThirdPartyPath, "Inc"),
-                Path.Combine(ThirdPartyPath, "Inc", "Lua"),
-                //Path.Combine(ThirdPartyPath, "Inc", "LuaBridge"),
-                Path.Combine(ThirdPartyPath, "Inc", "LuaSocket"),
+                Path.Combine(this.getMyProjectThirdPartyPath(), "Inc"),
+                Path.Combine(this.getMyProjectThirdPartyPath(), "Inc", "Lua"),
+                //Path.Combine(this.getMyProjectThirdPartyPath(), "Inc", "LuaBridge"),
+                Path.Combine(this.getMyProjectThirdPartyPath(), "Inc", "LuaSocket"),
             }
         );
     }
@@ -483,126 +493,186 @@ public class MyProject : ModuleRules
     // https://wiki.unrealengine.com/Linking_Static_Libraries_Using_The_Build_System
     //private bool LoadSockets_bak(TargetInfo Target)
     // 4.17
-    private bool LoadSockets_bak(ReadOnlyTargetRules Target)
-    {
-        // https://wiki.unrealengine.com/Integrating_OpenCV_Into_Unreal_Engine_4
-        // UE4.9.1 error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
-        //bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && BuildConfiguration.bDebugBuildsActuallyUseDebugCRT;
-        bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && Target.bDebugBuildsActuallyUseDebugCRT;
+    //private bool LoadSockets_bak(ReadOnlyTargetRules Target)
+    //{
+    //    // https://wiki.unrealengine.com/Integrating_OpenCV_Into_Unreal_Engine_4
+    //    // UE4.9.1 error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
+    //    //bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && BuildConfiguration.bDebugBuildsActuallyUseDebugCRT;
+    //    bool isdebug = Target.Configuration == UnrealTargetConfiguration.Debug && Target.bDebugBuildsActuallyUseDebugCRT;
 
-        if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
-        {
-            //string PlatformString;
-            string LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets");
+    //    if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+    //    {
+    //        //string PlatformString;
+    //        string LibrariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Sockets");
 
-            if (Target.Platform == UnrealTargetPlatform.Win64)
-            {
-                //PlatformString = "x64";
-                //LibrariesPath = Path.Combine(LibrariesPath, "Win64");
+    //        if (Target.Platform == UnrealTargetPlatform.Win64)
+    //        {
+    //            //PlatformString = "x64";
+    //            //LibrariesPath = Path.Combine(LibrariesPath, "Win64");
 
-                if (Target.Configuration == UnrealTargetConfiguration.Debug)
-                {
-                    LibrariesPath = Path.Combine(LibrariesPath, "Debug");
-                }
-            }
-            else
-            {
-                //PlatformString = "ia32";
-                //LibrariesPath = Path.Combine(LibrariesPath, "Win32");
-            }
+    //            if (Target.Configuration == UnrealTargetConfiguration.Debug)
+    //            {
+    //                LibrariesPath = Path.Combine(LibrariesPath, "Debug");
+    //            }
+    //        }
+    //        else
+    //        {
+    //            //PlatformString = "ia32";
+    //            //LibrariesPath = Path.Combine(LibrariesPath, "Win32");
+    //        }
 
-            //LibrariesPath = Path.Combine(LibrariesPath, "Debug");
+    //        //LibrariesPath = Path.Combine(LibrariesPath, "Debug");
 
-            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "icui18n.lib"));
-            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "icuuc.lib"));
-            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_base.lib"));
-            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_libbase.lib"));
-            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_nosnapshot.lib"));
-            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_snapshot.lib"));
+    //        //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "icui18n.lib"));
+    //        //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "icuuc.lib"));
+    //        //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_base.lib"));
+    //        //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_libbase.lib"));
+    //        //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_nosnapshot.lib"));
+    //        //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "v8_snapshot.lib"));
 
-            //PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "v8", "Includes"));
+    //        //PublicIncludePaths.Add(Path.Combine(this.getMyProjectThirdPartyPath(), "v8", "Includes"));
 
-            //Definitions.Add(string.Format("WITH_COUPLING=1"));
+    //        //Definitions.Add(string.Format("WITH_COUPLING=1"));
 
-            if (Target.Configuration == UnrealTargetConfiguration.Debug)
-            {
-                // 添加库目录
-                // PublicLibraryPaths.Add(LuaLibDirectory);
-                PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets.lib"));
+    //        if (Target.Configuration == UnrealTargetConfiguration.Debug)
+    //        {
+    //            // 添加库目录
+    //            // PublicLibraryPaths.Add(LuaLibDirectory);
+    //            PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets.lib"));
 
-                //Add Dynamic Libraries (Debug Version)
-                //PublicDelayLoadDLLs.Add("opencv_world300d.dll");
-            }
-            else
-            {
-                PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets.lib"));
-            }
+    //            //Add Dynamic Libraries (Debug Version)
+    //            //PublicDelayLoadDLLs.Add("opencv_world300d.dll");
+    //        }
+    //        else
+    //        {
+    //            PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "Sockets.lib"));
+    //        }
 
-            return true;
-        }
+    //        return true;
+    //    }
 
-        //Definitions.Add(string.Format("WITH_COUPLING=0"));
-        return false;
-    }
+    //    //Definitions.Add(string.Format("WITH_COUPLING=0"));
+    //    return false;
+    //}
 
     //private bool LoadSockets(TargetInfo Target)
     // 4.17
-    private bool LoadSockets(ReadOnlyTargetRules Target)
-    {
-        string LibrariesPath;
+    //private bool LoadSockets(ReadOnlyTargetRules Target)
+    //{
+    //    string LibrariesPath;
 
-        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Sockets", "Sockets_d.lib");
-        PublicAdditionalLibraries.Add(LibrariesPath);
+    //    LibrariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Sockets", "Sockets_d.lib");
+    //    PublicAdditionalLibraries.Add(LibrariesPath);
 
-        return true;
-    }
+    //    return true;
+    //}
 
     //private bool LoadTestExtern(TargetInfo Target)
     // 4.17
-    private bool LoadTestExtern(ReadOnlyTargetRules Target)
-    {
-        string LibrariesPath;
-        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "TestStaticLib", "TestStaticLib_d.lib");
+    //private bool LoadTestExtern(ReadOnlyTargetRules Target)
+    //{
+    //    string LibrariesPath;
+    //    LibrariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "TestStaticLib", "TestStaticLib_d.lib");
 
-        PublicAdditionalLibraries.Add(LibrariesPath);
+    //    PublicAdditionalLibraries.Add(LibrariesPath);
 
-        return true;
-    }
+    //    return true;
+    //}
 
     //private bool LoadGtest(TargetInfo Target)
     // 4.17
-    private bool LoadGtest(ReadOnlyTargetRules Target)
-    {
-        string LibrariesPath;
+    //private bool LoadGtest(ReadOnlyTargetRules Target)
+    //{
+    //    string LibrariesPath;
 
-        LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "gtest", "gtest_d.lib");
-        PublicAdditionalLibraries.Add(LibrariesPath);
+    //    LibrariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "gtest", "gtest_d.lib");
+    //    PublicAdditionalLibraries.Add(LibrariesPath);
 
-        return true;
-    }
+    //    return true;
+    //}
 
     // 加载 Lua
     //private bool LoadLua(TargetInfo Target)
     // 4.17
     private bool LoadLua(ReadOnlyTargetRules Target)
     {
-        if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+        string librariesPath = "";
+
+        if (UnrealTargetPlatform.Mac == Target.Platform)
         {
-            string LibrariesPath;
-            LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "Lua", "Lua_d.lib");
-            PublicAdditionalLibraries.Add(LibrariesPath);
+
         }
-        else if (Target.Platform == UnrealTargetPlatform.Android)
+        else if(UnrealTargetPlatform.Win32 == Target.Platform)
+        {
+            /**
+             * @brief bDebugBuildsActuallyUseDebugCRT 开启这个会有很多链接错误，因此暂时不开启
+             * @ref Engine\Source\Programs\UnrealBuildTool\Configuration\TargetRules.cs
+             * @ref Engine\Saved\UnrealBuildTool\BuildConfiguration.xml
+             */
+            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+                Target.bDebugBuildsActuallyUseDebugCRT */)
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win32", "Lua_d.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+            else
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win32", "Lua.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+        }
+        else if (UnrealTargetPlatform.Win64 == Target.Platform)
+        {
+            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+                Target.bDebugBuildsActuallyUseDebugCRT */)
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win64", "Lua_d.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+            else
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Win64", "Lua.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+        }
+        else if (UnrealTargetPlatform.Android == Target.Platform)
         {
             // UE4.19.1 error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
             //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
-            string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
+            //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
 
             // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
             //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
-            RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
+            //RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
 
-            PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLua.so");
+            //PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLua.so");
+
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/armv7");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/arm64");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/x86");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "Lua", "Android/x86_64");
+            PublicLibraryPaths.Add(librariesPath);
+
+            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+                Target.bDebugBuildsActuallyUseDebugCRT */)
+            {
+                PublicAdditionalLibraries.Add("Lua_d");
+            }
+            else
+            {
+                PublicAdditionalLibraries.Add("Lua");
+            }
+        }
+        else if (UnrealTargetPlatform.IOS == Target.Platform)
+        {
+
+        }
+        else
+        {
+            throw new System.Exception("Not support platform");
         }
 
         return true;
@@ -612,23 +682,88 @@ public class MyProject : ModuleRules
     // 4.17
     private bool LoadLuaSocket(ReadOnlyTargetRules Target)
     {
-        if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+        /**
+         * @brief UnrealTargetPlatform
+         * @url Engine\Source\Programs\UnrealBuildTool\Configuration\UEBuildTarget.cs
+         */
+        string librariesPath = "";
+
+        if (UnrealTargetPlatform.Mac == Target.Platform)
         {
-            string LibrariesPath;
-            LibrariesPath = Path.Combine(ThirdPartyPath, "Lib", "LuaSocket", "LuaSocket_d.lib");
-            PublicAdditionalLibraries.Add(LibrariesPath);
+
         }
-        else if (Target.Platform == UnrealTargetPlatform.Android)
+        else if(UnrealTargetPlatform.Win32 == Target.Platform)
         {
+            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+                Target.bDebugBuildsActuallyUseDebugCRT */)
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win32", "LuaSocket_d.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+            else
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win32", "LuaSocket.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+        }
+        else if (UnrealTargetPlatform.Win64 == Target.Platform)
+        {
+            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+                Target.bDebugBuildsActuallyUseDebugCRT*/)
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win64", "LuaSocket_d.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+            else
+            {
+                librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LuaSocket", "Win64", "LuaSocket_d.lib");
+                PublicAdditionalLibraries.Add(librariesPath);
+            }
+        }
+        else if (UnrealTargetPlatform.Android == Target.Platform)
+        {
+            /**
+             * @brief AndroidToolChain
+             * @url Engine\Source\Programs\UnrealBuildTool\Platform\Android\AndroidToolChain.cs
+             * @ref Engine\Source\ThirdParty\GoogleVR\GoogleVR.Build.cs
+             * @brief Target.UEThirdPartySourceDirectory \ 
+             */
             // error CS0122: “UnrealBuildTool.BuildConfiguration”不可访问，因为它受保护级别限制
             // string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
-            string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
+            //string BuildPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
 
             // UE4.19.1 warning CS0618: “UnrealBuildTool.ModuleRules.ReceiptPropertyList.Add(UnrealBuildTool.ReceiptProperty)”已过时:“Constructing a ReceiptProperty object is deprecated. Call RuntimeDependencies.Add() with the path to the file to stage.”
             //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(BuildPath, "My_APL_armv7.xml")));
-            RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
+            //RuntimeDependencies.Add(Path.Combine(BuildPath, "My_APL_armv7.xml"));
 
-            PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLuaSocket.so");
+            //PublicAdditionalLibraries.Add(BuildPath + "/armv7/libLuaSocket.so");
+
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/armv7");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/arm64");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/x86");
+            PublicLibraryPaths.Add(librariesPath);
+            librariesPath = Path.Combine(this.getMyProjectThirdPartyPath(), "Lib", "LibSocket", "Android/x86_64");
+            PublicLibraryPaths.Add(librariesPath);
+
+            if (UnrealTargetConfiguration.Debug == Target.Configuration/* &&
+                Target.bDebugBuildsActuallyUseDebugCRT */)
+            {
+                PublicAdditionalLibraries.Add("libLuaSocket_d");
+            }
+            else
+            {
+                PublicAdditionalLibraries.Add("libLuaSocket");
+            }
+        }
+        else if (UnrealTargetPlatform.IOS == Target.Platform)
+        {
+
+        }
+        else
+        {
+            throw new System.Exception("Not support platform");
         }
 
         return true;
