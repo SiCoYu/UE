@@ -16,11 +16,11 @@ TestExtern::TestExtern()
 	//mTestStaticLibA = dynamic_cast<TestStaticLibA*>(mTestStaticLibB);
 	//mTestStaticLibA->testFunc("aaaaaaa");
 
-	this->mTestStaticLibA = new TestStaticLibB();
-	this->mTestStaticLibA->testFunc("aaaaaaa");
+	//this->mTestStaticLibA = new TestStaticLibB();
+	//this->mTestStaticLibA->testFunc("aaaaaaa");
 
-	this->mTestStaticLibB = (TestStaticLibB*)mTestStaticLibA;
-	this->mTestStaticLibA->testFunc("aaaaaaa");
+	//this->mTestStaticLibB = (TestStaticLibB*)mTestStaticLibA;
+	//this->mTestStaticLibA->testFunc("aaaaaaa");
 }
 
 void TestExtern::run()
