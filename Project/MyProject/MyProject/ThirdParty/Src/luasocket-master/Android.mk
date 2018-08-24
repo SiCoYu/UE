@@ -70,6 +70,15 @@ LOCAL_LDFLAGS := -Wl,--unresolved-symbols=ignore-all
 # 连接动态库
 #LOCAL_SHARED_LIBRARIES += libLua
 
+# 这个地方空白一定要用空格，不要用 Tab ，否则会出现错误
+ifeq ($(MY_DEBUG),DEBUG)
+    APP_OPTIM := debug
+    $(info "Debug Mode")
+else
+    APP_OPTIM := release
+    $(info "Release Mode")
+endif
+
 include $(BUILD_SHARED_LIBRARY)
 
 #LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
