@@ -20,8 +20,8 @@
 	[
     {
       "Name": "ScriptGeneratorPlugin",
-      "Type": "RuntimeAndProgram",
-      "LoadingPhase": "PostConfigInit",
+			"Type": "Program", 	// Engine\Source\Programs\UnrealBuildTool\System\ModuleDescriptor.cs , ModuleHostType::Program
+			"LoadingPhase": "PostConfigInit",
       "BlacklistPlatforms": [
         "Linux"
       ],
