@@ -4,7 +4,9 @@ namespace ToolSet
 {
     public class CtxExt : Ctx
     {
-        public ExcelCtx mExcelCtx;
+		static public CtxExt msExtInstance;
+
+		public ExcelCtx mExcelCtx;
 		public TestMain mTestMain;
 
         public CtxExt()
@@ -16,8 +18,9 @@ namespace ToolSet
         {
             if (null == Ctx.msInstance)
             {
-                Ctx.msInstance = new CtxExt();
-            }
+				CtxExt.msExtInstance = new CtxExt();
+				Ctx.msInstance = CtxExt.msExtInstance;
+			}
 
             return Ctx.msInstance;
         }

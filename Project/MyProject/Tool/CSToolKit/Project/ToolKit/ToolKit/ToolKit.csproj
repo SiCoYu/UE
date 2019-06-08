@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\App\Common\FrameWork\ProjectConfig.cs" />
     <Compile Include="Source\App\ExcelReadWrite\Base\ExportCustom.cs" />
     <Compile Include="Source\App\ExcelReadWrite\Base\ExportSheetToCuctom.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ExcelCtx.cs" />
@@ -58,7 +59,7 @@
     <Compile Include="Source\App\ExcelReadWrite\ExportJson\ExportJson.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ExportJson\ExportSheetToJson.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\SheetHeadMode.cs" />
-    <Compile Include="Source\App\Frame\CtxExt.cs" />
+    <Compile Include="Source\App\Common\FrameWork\CtxExt.cs" />
     <Compile Include="Source\App\Frame\AppFrame.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\FieldDefineItem.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\FieldFactory.cs" />
@@ -69,15 +70,13 @@
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHeadItem.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableSheet.cs" />
     <Compile Include="Source\App\Module\MainEntry.cs" />
-    <Compile Include="Source\App\Tool\UtilExcel.cs" />
-    <Compile Include="Source\Extern\fastJSON\dynamic.cs" />
-    <Compile Include="Source\Extern\fastJSON\Formatter.cs" />
-    <Compile Include="Source\Extern\fastJSON\Getters.cs" />
-    <Compile Include="Source\Extern\fastJSON\JSON.cs" />
-    <Compile Include="Source\Extern\fastJSON\JsonParser.cs" />
-    <Compile Include="Source\Extern\fastJSON\JsonSerializer.cs" />
-    <Compile Include="Source\Extern\fastJSON\Reflection.cs" />
-    <Compile Include="Source\Extern\fastJSON\SafeDictionary.cs" />
+    <Compile Include="Source\App\Common\Tools\UtilExcel.cs" />
+    <Compile Include="Source\Extern\Mono.Xml\MiniParser.cs" />
+    <Compile Include="Source\Extern\Mono.Xml\SecurityParser.cs" />
+    <Compile Include="Source\Extern\Mono.Xml\SmallXmlParser.cs" />
+    <Compile Include="Source\Extern\SimpleJSON\SimpleJSON.cs" />
+    <Compile Include="Source\Extern\SimpleJSON\SimpleJSONBinary.cs" />
+    <Compile Include="Source\Extern\SimpleJSON\SimpleJSONUnity.cs" />
     <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxBoolProperty.cs" />
     <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxFloatProperty.cs" />
     <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxIntProperty.cs" />
