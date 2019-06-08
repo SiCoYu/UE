@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FBCAD30D-10C3-4E7C-AB34-1CE30A5AEDC6}</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{A682F958-7B38-4D57-A2C6-6DC4F1037DDA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleApplication1</RootNamespace>
-    <AssemblyName>ConsoleApplication1</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ExportExcelToJson</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,40 +19,240 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>ExcelExport</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Pak\BuildPak.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\Base\ExportCustom.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\Base\ExportSheetToCuctom.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExcelCtx.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExcelRead\ExcelOpState.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExcelRead\ExcelReader.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExportCsvFromJson\ExportCsvFromJson.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExportCsvFromJson\Data\ExportCsvFromJsonData.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExportCsvFromJson\ExportSheetToCsvFromJson.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExportCsvFromJson\Data\LevelJson.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExportCsv\ExportCsv.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExportCsv\ExportSheetToCsv.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExportJson\ExportJson.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ExportJson\ExportSheetToJson.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\SheetHeadMode.cs" />
+    <Compile Include="Source\App\Frame\CtxExt.cs" />
+    <Compile Include="Source\App\Frame\AppFrame.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\FieldDefineItem.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\FieldFactory.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\FieldType.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableBody.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableBodyRow.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHead.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHeadItem.cs" />
+    <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableSheet.cs" />
+    <Compile Include="Source\App\MergeMultiFileToOne\MergeFile.cs" />
+    <Compile Include="Source\App\MergeMultiFileToOne\MergeFileCtx.cs" />
+    <Compile Include="Source\App\Module\MainEntry.cs" />
+    <Compile Include="Source\App\Tool\UtilExcel.cs" />
+    <Compile Include="Source\Extern\fastJSON\dynamic.cs" />
+    <Compile Include="Source\Extern\fastJSON\Formatter.cs" />
+    <Compile Include="Source\Extern\fastJSON\Getters.cs" />
+    <Compile Include="Source\Extern\fastJSON\JSON.cs" />
+    <Compile Include="Source\Extern\fastJSON\JsonParser.cs" />
+    <Compile Include="Source\Extern\fastJSON\JsonSerializer.cs" />
+    <Compile Include="Source\Extern\fastJSON\Reflection.cs" />
+    <Compile Include="Source\Extern\fastJSON\SafeDictionary.cs" />
+    <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxBoolProperty.cs" />
+    <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxFloatProperty.cs" />
+    <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxIntProperty.cs" />
+    <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxPropertyBase.cs" />
+    <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxRecordIntProperty.cs" />
+    <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxStrProperty.cs" />
+    <Compile Include="Source\Libs\Core\Debug\MProfileInfo.cs" />
+    <Compile Include="Source\Libs\Core\Debug\MProfiler.cs" />
+    <Compile Include="Source\Libs\Core\Debug\Stats.cs" />
+    <Compile Include="Source\Libs\Core\Debug\StatsColors.cs" />
+    <Compile Include="Source\Libs\Core\GContainerObject.cs" />
+    <Compile Include="Source\Libs\Core\GObject.cs" />
+    <Compile Include="Source\Libs\Core\GObjectBase.cs" />
+    <Compile Include="Source\Libs\Core\GPoolObject.cs" />
+    <Compile Include="Source\Libs\Core\Memory\MMalloc.cs" />
+    <Compile Include="Source\Libs\Core\UniqueNumIdGen.cs" />
+    <Compile Include="Source\Libs\Core\UniqueStrIdGen.cs" />
+    <Compile Include="Source\Libs\Crypt\Crypt.cs" />
+    <Compile Include="Source\Libs\Crypt\CryptShare\CryptUtil.cs" />
+    <Compile Include="Source\Libs\Crypt\Des\Des.cs" />
+    <Compile Include="Source\Libs\Crypt\Rc5\RC5.cs" />
+    <Compile Include="Source\Libs\DataStruct\BufferCV.cs" />
+    <Compile Include="Source\Libs\DataStruct\DynBufResizePolicy.cs" />
+    <Compile Include="Source\Libs\DataStruct\IndexList\IndexItemBase.cs" />
+    <Compile Include="Source\Libs\DataStruct\IndexList\MIndexList.cs" />
+    <Compile Include="Source\Libs\DataStruct\KeyIndexList\IKeyIndexValue.cs" />
+    <Compile Include="Source\Libs\DataStruct\KeyIndexList\MKeyIndexList.cs" />
+    <Compile Include="Source\Libs\DataStruct\LinkedList\MLinkedList.cs" />
+    <Compile Include="Source\Libs\DataStruct\LinkedList\MLinkedListNode.cs" />
+    <Compile Include="Source\Libs\DataStruct\MByteBuffer.cs" />
+    <Compile Include="Source\Libs\DataStruct\MCircularBuffer.cs" />
+    <Compile Include="Source\Libs\DataStruct\MDictionary.cs" />
+    <Compile Include="Source\Libs\DataStruct\MDynBuffer.cs" />
+    <Compile Include="Source\Libs\DataStruct\MHashMap.cs" />
+    <Compile Include="Source\Libs\DataStruct\MList.cs" />
+    <Compile Include="Source\Libs\DataStruct\MLockList.cs" />
+    <Compile Include="Source\Libs\DataStruct\MLockQueue.cs" />
+    <Compile Include="Source\Libs\DataStruct\MMsgBuffer.cs" />
+    <Compile Include="Source\Libs\DataStruct\MQueue.cs" />
+    <Compile Include="Source\Libs\DataStruct\MsgCV.cs" />
+    <Compile Include="Source\Libs\DataStruct\MString.cs" />
+    <Compile Include="Source\Libs\DataStruct\NoOrPriorityList\INoOrPriorityList.cs" />
+    <Compile Include="Source\Libs\DataStruct\NoOrPriorityList\INoOrPriorityObject.cs" />
+    <Compile Include="Source\Libs\DataStruct\NoOrPriorityList\NoPriorityList\NoPriorityList.cs" />
+    <Compile Include="Source\Libs\DataStruct\NoOrPriorityList\PriorityList\PriorityList.cs" />
+    <Compile Include="Source\Libs\DataStruct\NoOrPriorityList\PriorityList\PriorityProcessObject.cs" />
+    <Compile Include="Source\Libs\DataStruct\NoOrPriorityList\PriorityList\PrioritySort.cs" />
+    <Compile Include="Source\Libs\DelayHandle\DelayNoOrPriorityHandleMgr.cs" />
+    <Compile Include="Source\Libs\DelayHandle\DelayNoOrPriorityHandleMgrBase.cs" />
+    <Compile Include="Source\Libs\DelayHandle\DelayNoPriorityHandleMgr.cs" />
+    <Compile Include="Source\Libs\DelayHandle\DelayNoPriorityHandleMgrBase.cs" />
+    <Compile Include="Source\Libs\DelayHandle\DelayPriorityHandleMgr.cs" />
+    <Compile Include="Source\Libs\DelayHandle\DelayPriorityHandleMgrBase.cs" />
+    <Compile Include="Source\Libs\DelayHandle\IDelayHandleItem.cs" />
+    <Compile Include="Source\Libs\DelayHandle\ListOptimizeOp.cs" />
+    <Compile Include="Source\Libs\DelayHandle\NullDelayHandleItem.cs" />
+    <Compile Include="Source\Libs\EventHandle\AddOnceAndCallOnceEventDispatch.cs" />
+    <Compile Include="Source\Libs\EventHandle\AddOnceEventDispatch.cs" />
+    <Compile Include="Source\Libs\EventHandle\CallOnceEventDispatch.cs" />
+    <Compile Include="Source\Libs\EventHandle\EventDispatch.cs" />
+    <Compile Include="Source\Libs\EventHandle\EventDispatchFunctionObject.cs" />
+    <Compile Include="Source\Libs\EventHandle\EventDispatchGroup.cs" />
+    <Compile Include="Source\Libs\EventHandle\EventDispatchTypeId.cs" />
+    <Compile Include="Source\Libs\EventHandle\ICalleeObject.cs" />
+    <Compile Include="Source\Libs\EventHandle\IDispatchObject.cs" />
+    <Compile Include="Source\Libs\EventHandle\NullCalleeObject.cs" />
+    <Compile Include="Source\Libs\EventHandle\ResEventDispatch.cs" />
+    <Compile Include="Source\Libs\FileSystem\FileOpState.cs" />
+    <Compile Include="Source\Libs\FileSystem\FilePlatformAndPath.cs" />
+    <Compile Include="Source\Libs\FileSystem\MFileAccess.cs" />
+    <Compile Include="Source\Libs\FileSystem\MFileMode.cs" />
+    <Compile Include="Source\Libs\FileSystem\MFileStream.cs" />
+    <Compile Include="Source\Libs\FileSystem\MSeekOrigin.cs" />
+    <Compile Include="Source\Libs\FrameHandle\DaoJiShiTimer.cs" />
+    <Compile Include="Source\Libs\FrameHandle\FixedTickMgr.cs" />
+    <Compile Include="Source\Libs\FrameHandle\FrameInterval.cs" />
+    <Compile Include="Source\Libs\FrameHandle\FrameTimerItem.cs" />
+    <Compile Include="Source\Libs\FrameHandle\FrameTimerMgr.cs" />
+    <Compile Include="Source\Libs\FrameHandle\IResizeObject.cs" />
+    <Compile Include="Source\Libs\FrameHandle\ITickedObject.cs" />
+    <Compile Include="Source\Libs\FrameHandle\LateTickMgr.cs" />
+    <Compile Include="Source\Libs\FrameHandle\LogicTickMgr.cs" />
+    <Compile Include="Source\Libs\FrameHandle\LoopDepth.cs" />
+    <Compile Include="Source\Libs\FrameHandle\NumInterval.cs" />
+    <Compile Include="Source\Libs\FrameHandle\NumIntervalMode.cs" />
+    <Compile Include="Source\Libs\FrameHandle\SystemFrameData.cs" />
+    <Compile Include="Source\Libs\FrameHandle\SystemTimeData.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TickMgr.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TickMode.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TickObjectNoPriorityMgr.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TickObjectPriorityMgr.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TickPriority.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TimeInterval.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TimerFunctionObject.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TimerItemBase.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TimerMgr.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TimerType.cs" />
+    <Compile Include="Source\Libs\FrameHandle\TimeSegment.cs" />
+    <Compile Include="Source\Libs\FrameWork\Config.cs" />
+    <Compile Include="Source\Libs\FrameWork\Ctx.cs" />
+    <Compile Include="Source\Libs\FrameWork\DebugSys.cs" />
+    <Compile Include="Source\Libs\FrameWork\EngineLoop.cs" />
+    <Compile Include="Source\Libs\FrameWork\Event\SystemEvent.cs" />
+    <Compile Include="Source\Libs\FrameWork\Event\SystemEventId.cs" />
+    <Compile Include="Source\Libs\FrameWork\GlobalDelegate.cs" />
+    <Compile Include="Source\Libs\FrameWork\GlobalEventCmd.cs" />
+    <Compile Include="Source\Libs\FrameWork\IMyDispose.cs" />
+    <Compile Include="Source\Libs\FrameWork\MacroDef.cs" />
+    <Compile Include="Source\Libs\FrameWork\MDelegate.cs" />
+    <Compile Include="Source\Libs\FrameWork\ProcessSys.cs" />
+    <Compile Include="Source\Libs\FrameWork\Singleton.cs" />
+    <Compile Include="Source\Libs\Log\FileLogDevice.cs" />
+    <Compile Include="Source\Libs\Log\LogColor.cs" />
+    <Compile Include="Source\Libs\Log\LogDeviceBase.cs" />
+    <Compile Include="Source\Libs\Log\LogSys.cs" />
+    <Compile Include="Source\Libs\Log\LogTypeId.cs" />
+    <Compile Include="Source\Libs\Log\NetLogDevice.cs" />
+    <Compile Include="Source\Libs\Log\WinLogDevice.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgCmd\LoadedWebResMR.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgCmd\SocketCloseedMR.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgCmd\SocketOpenedMR.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgCmd\ThreadLogMR.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgRouteBase.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgRouteDispatchHandle.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgRouteHandleBase.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgRouteId.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgRouteNotify.cs" />
+    <Compile Include="Source\Libs\MsgRoute\MsgRouteType.cs" />
+    <Compile Include="Source\Libs\MsgRoute\SysMsgRoute.cs" />
+    <Compile Include="Source\Libs\Task\ITask.cs" />
+    <Compile Include="Source\Libs\Task\TaskQueue.cs" />
+    <Compile Include="Source\Libs\Task\TaskThread.cs" />
+    <Compile Include="Source\Libs\Task\TaskThreadPool.cs" />
+    <Compile Include="Source\Libs\Thread\MCondition.cs" />
+    <Compile Include="Source\Libs\Thread\MEvent.cs" />
+    <Compile Include="Source\Libs\Thread\MInterlocked.cs" />
+    <Compile Include="Source\Libs\Thread\MLock.cs" />
+    <Compile Include="Source\Libs\Thread\MMutex.cs" />
+    <Compile Include="Source\Libs\Thread\MThread.cs" />
+    <Compile Include="Source\Libs\Tools\AngleUnit.cs" />
+    <Compile Include="Source\Libs\Tools\CompressionAlgorithm.cs" />
+    <Compile Include="Source\Libs\Tools\CryptAlgorithm.cs" />
+    <Compile Include="Source\Libs\Tools\MEndian.cs" />
+    <Compile Include="Source\Libs\Tools\MEncode.cs" />
+    <Compile Include="Source\Libs\Tools\MArray.cs" />
+    <Compile Include="Source\Libs\Tools\MBitConverter.cs" />
+    <Compile Include="Source\Libs\Tools\MSearchOption.cs" />
+    <Compile Include="Source\Libs\Tools\PlatformDefine.cs" />
+    <Compile Include="Source\Libs\Tools\SimpleJson.cs" />
+    <Compile Include="Source\Libs\Tools\Symbolic.cs" />
+    <Compile Include="Source\Libs\Tools\SystemEndian.cs" />
+    <Compile Include="Source\Libs\Tools\UAssert.cs" />
+    <Compile Include="Source\Libs\Tools\UtilByte.cs" />
+    <Compile Include="Source\Libs\Tools\UtilFileIO.cs" />
+    <Compile Include="Source\Libs\Tools\UtilHash.cs" />
+    <Compile Include="Source\Libs\Tools\UtilJson.cs" />
+    <Compile Include="Source\Libs\Tools\UtilLogic.cs" />
+    <Compile Include="Source\Libs\Tools\UtilStr.cs" />
+    <Compile Include="Source\Libs\Tools\UtilSysLibWrap.cs" />
+    <Compile Include="Source\Libs\Tools\UtilTime.cs" />
+    <Compile Include="Source\Libs\Tools\UtilXml.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
 </Project>

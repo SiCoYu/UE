@@ -1,22 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolKit", "ToolKit\ToolKit.csproj", "{FBCAD30D-10C3-4E7C-AB34-1CE30A5AEDC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolKit", "ToolKit\ToolKit.csproj", "{A682F958-7B38-4D57-A2C6-6DC4F1037DDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FBCAD30D-10C3-4E7C-AB34-1CE30A5AEDC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBCAD30D-10C3-4E7C-AB34-1CE30A5AEDC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBCAD30D-10C3-4E7C-AB34-1CE30A5AEDC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBCAD30D-10C3-4E7C-AB34-1CE30A5AEDC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A682F958-7B38-4D57-A2C6-6DC4F1037DDA}.Debug|x86.ActiveCfg = Debug|x86
+		{A682F958-7B38-4D57-A2C6-6DC4F1037DDA}.Debug|x86.Build.0 = Debug|x86
+		{A682F958-7B38-4D57-A2C6-6DC4F1037DDA}.Release|x86.ActiveCfg = Release|x86
+		{A682F958-7B38-4D57-A2C6-6DC4F1037DDA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCFD3985-80A6-49CF-B1F1-9E3815184E14}
 	EndGlobalSection
 EndGlobal
