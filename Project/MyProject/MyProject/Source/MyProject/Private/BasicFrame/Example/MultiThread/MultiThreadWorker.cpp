@@ -8,11 +8,14 @@
 FMultiThreadWorker* FMultiThreadWorker::Runnable = NULL;
 //***********************************************************
 
+// UE4 4.22 error C5038: data member 'FMultiThreadWorker::TotalPrimesToFind' will be initialized after data member 'FMultiThreadWorker::StopTaskCounter'
 FMultiThreadWorker::FMultiThreadWorker(TArray<uint32>& TheArray, const int32 IN_TotalPrimesToFind, AMyPlayerControllerBase* IN_PC)
 	: ThePC(IN_PC)
-	, TotalPrimesToFind(IN_TotalPrimesToFind)
+	//, TotalPrimesToFind(IN_TotalPrimesToFind)
+	//, StopTaskCounter(0)
 	, StopTaskCounter(0)
 	, PrimesFoundCount(0)
+	, TotalPrimesToFind(IN_TotalPrimesToFind)
 {
 	//Link to where data should be stored
 	PrimeNumbers = &TheArray;

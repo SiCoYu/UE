@@ -165,7 +165,9 @@ void FAnimNode_VictoryTurnInPlace::Update_AnyThread(const FAnimationUpdateContex
 
 	//***************************************
 	// Evaluate Graph, see AnimNode_Base, AnimNodeBase.h
-	EvaluateGraphExposedInputs.Execute(Context);
+	// error C2065: 'EvaluateGraphExposedInputs': undeclared identifier
+	//EvaluateGraphExposedInputs.Execute(Context);
+	this->GetEvaluateGraphExposedInputs().Execute(Context);
 	//***************************************
 }
 

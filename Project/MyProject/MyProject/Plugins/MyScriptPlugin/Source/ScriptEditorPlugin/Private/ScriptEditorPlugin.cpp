@@ -60,7 +60,9 @@ public:
 	virtual bool CanCompile(const UBlueprint* Blueprint) override;
 
 	virtual void PreCompile(UBlueprint* Blueprint) override;
-	virtual void Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results, TArray<UObject*>* ObjLoaded) override;
+	//virtual void Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results, TArray<UObject*>* ObjLoaded) override;
+	// UE4 4.22 没有 TArray<UObject*>* ObjLoaded 这个参数
+	virtual void Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results) override;
 	virtual void PostCompile(UBlueprint* Blueprint) override;
 };
 
@@ -90,11 +92,13 @@ void FScriptEditorPlugin::PreCompile(UBlueprint* Blueprint)
 
 }
 
-void FScriptEditorPlugin::Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results, TArray<UObject*>* ObjLoaded)
+// UE4 4.22 error C2511: 'void FScriptEditorPlugin::Compile(UBlueprint *,const FKismetCompilerOptions &,FCompilerResultsLog &,TArray<UObject *,FDefaultAllocator> *)': overloaded member function not found in 'FScriptEditorPlugin'
+//void FScriptEditorPlugin::Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results, TArray<UObject*>* ObjLoaded)
+void FScriptEditorPlugin::Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results)
 {
 	if ( UScriptBlueprint* ScriptBlueprint = Cast<UScriptBlueprint>(Blueprint) )
 	{
-		FScriptBlueprintCompiler Compiler(ScriptBlueprint, Results, CompileOptions, ObjLoaded);
+		FScriptBlueprintCompiler Compiler(ScriptBlueprint, Results, CompileOptions/*, ObjLoaded*/);
 		Compiler.Compile();
 		check(Compiler.NewClass);
 	}

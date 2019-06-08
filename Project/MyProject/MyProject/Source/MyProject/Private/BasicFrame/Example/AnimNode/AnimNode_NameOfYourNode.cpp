@@ -44,7 +44,9 @@ void FAnimNode_NameOfYourNode::Update_AnyThread(const FAnimationUpdateContext & 
 {
 	//***************************************
 	// Evaluate Graph, see AnimNode_Base, AnimNodeBase.h
-	EvaluateGraphExposedInputs.Execute(Context);
+	// UE$ 4.22 error C2065: 'EvaluateGraphExposedInputs': undeclared identifier
+	//EvaluateGraphExposedInputs.Execute(Context);
+	this->GetEvaluateGraphExposedInputs().Execute(Context);
 	//***************************************
 
 	//EDITOR

@@ -25,6 +25,8 @@
 #include "Components/PrimitiveComponent.h"		// UPrimitiveComponent
 #include "AI/Navigation/NavigationTypes.h"		// FNavigationSystem
 #include "NavigationSystem.h"		// UNavigationSystemV1 
+#include "Serialization/ArchiveSaveCompressedProxy.h"		// FArchiveSaveCompressedProxy
+#include "Serialization/ArchiveLoadCompressedProxy.h"	// FArchiveSaveCompressedProxy 不加这个编译报错
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -780,8 +782,12 @@ void UtilEngineWrap::TestFileWriteCompressed(FString _path)
 	// Compress File 
 	//tmp compressed data array
 	TArray<uint8> CompressedData;
+	// UE4 4.22 warning C4996: 'FArchiveSaveCompressedProxy::FArchiveSaveCompressedProxy': Use the FName version of FArchiveSaveCompressedProxy constructor Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//FArchiveSaveCompressedProxy Compressor =
+	//	FArchiveSaveCompressedProxy(CompressedData, ECompressionFlags::COMPRESS_ZLIB);
+	// @ref Engine\Source\Runtime\Core\Private\GenericPlatform\GenericPlatformSymbolication.cpp
 	FArchiveSaveCompressedProxy Compressor =
-		FArchiveSaveCompressedProxy(CompressedData, ECompressionFlags::COMPRESS_ZLIB);
+		FArchiveSaveCompressedProxy(CompressedData, NAME_Zlib, ECompressionFlags::COMPRESS_ZLIB);
 
 	//Send entire binary array/archive to compressor
 	Compressor << ToBinary;
@@ -834,9 +840,12 @@ void UtilEngineWrap::TestFileReadCompressed(FString _path)
 		return;
 	}
 
+	// UE4 4.22 warning C4996: 'FArchiveLoadCompressedProxy::FArchiveLoadCompressedProxy': Use the FName version of FArchiveLoadCompressedProxy constructor Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	// Decompress File 
+	// FArchiveLoadCompressedProxy Decompressor =
+	//	FArchiveLoadCompressedProxy(CompressedData, ECompressionFlags::COMPRESS_ZLIB);
 	FArchiveLoadCompressedProxy Decompressor =
-		FArchiveLoadCompressedProxy(CompressedData, ECompressionFlags::COMPRESS_ZLIB);
+		FArchiveLoadCompressedProxy(CompressedData, NAME_Zlib, ECompressionFlags::COMPRESS_ZLIB);
 
 	//Decompression Error?
 	if (Decompressor.GetError())

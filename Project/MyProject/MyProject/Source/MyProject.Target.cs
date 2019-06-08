@@ -8,7 +8,10 @@ public class MyProjectTarget : TargetRules
     //public MyProjectTarget(TargetInfo Target)
     public MyProjectTarget(TargetInfo Target) : base(Target)
     {
-        this.Type = TargetType.Game;
+		// UE4 4.22
+		//this.WindowsPlatform.PCHMemoryAllocationFactor = 4096;
+
+		this.Type = TargetType.Game;
         // UE4 4.17
         this.bUseStaticCRT = false;
 

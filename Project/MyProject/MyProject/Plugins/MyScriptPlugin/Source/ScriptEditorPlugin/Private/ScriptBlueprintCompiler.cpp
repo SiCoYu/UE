@@ -15,8 +15,8 @@
 
 ///-------------------------------------------------------------
 
-FScriptBlueprintCompiler::FScriptBlueprintCompiler(UScriptBlueprint* SourceSketch, FCompilerResultsLog& InMessageLog, const FKismetCompilerOptions& InCompilerOptions, TArray<UObject*>* InObjLoaded)
-	: Super(SourceSketch, InMessageLog, InCompilerOptions, InObjLoaded)
+FScriptBlueprintCompiler::FScriptBlueprintCompiler(UScriptBlueprint* SourceSketch, FCompilerResultsLog& InMessageLog, const FKismetCompilerOptions& InCompilerOptions/*, TArray<UObject*>* InObjLoaded*/)
+	: Super(SourceSketch, InMessageLog, InCompilerOptions/*, InObjLoaded*/)	   // UE4 4.22 FKismetCompilerContext 构造函数只有两个参数
 	, NewScriptBlueprintClass(NULL)
 	, ContextProperty(NULL)
 {

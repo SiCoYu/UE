@@ -7,10 +7,13 @@
 /////////////////////////////////////////////////////
 // UJoySoftEdgeImage
 
+// UE4 4.22 error C5038: data member 'UMyUMGImage::ColorAndOpacity' will be initialized after data member 'UMyUMGImage::Thickness'
 UMyUMGImage::UMyUMGImage(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, ColorAndOpacity(FLinearColor(0, 0, 1, 0.0333))
+	//, ColorAndOpacity(FLinearColor(0, 0, 1, 0.0333))
+	//, Thickness(24)
 	, Thickness(24)
+	, ColorAndOpacity(FLinearColor(0, 0, 1, 0.0333))
 {
 	//Default Values Set Here, see above
 }

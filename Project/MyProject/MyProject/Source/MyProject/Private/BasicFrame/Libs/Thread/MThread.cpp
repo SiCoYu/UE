@@ -4,8 +4,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+// error C5038: data member 'MyNS::MThread::mThreadName' will be initialized after data member 'MyNS::MThread::mIsExitFlag'
 MThread::MThread(std::string threadName)
-	: mThreadName(threadName), mIsExitFlag(false)
+	//: mThreadName(threadName), mIsExitFlag(false)
+	: mIsExitFlag(false)
+	, mThreadName(threadName)
 {
 	//mSyncEvent = new MEvent();
 }

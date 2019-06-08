@@ -1,6 +1,8 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 using System.IO;
 using UnrealBuildTool;
+// UE4.22 Log.TraceVerbose ≤È’“≤ªµΩ
+using Tools.DotNETCommon;
 
 namespace UnrealBuildTool.Rules
 {

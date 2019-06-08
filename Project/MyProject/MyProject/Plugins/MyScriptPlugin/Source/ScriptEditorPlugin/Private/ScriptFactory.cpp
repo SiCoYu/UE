@@ -87,7 +87,9 @@ UObject* UScriptFactory::FactoryCreateText(UClass* InClass, UObject* InParent, F
 		// Need to make sure we compile with the new source code
 		FKismetEditorUtilities::CompileBlueprint(NewBlueprint);
 
-		FEditorDelegates::OnAssetPostImport.Broadcast(this, NewBlueprint);
+		// UE4 4.22 warning C4996: 'FEditorDelegates::OnAssetPostImport': Use the ImportSubsystem instead. GEditor->GetEditorSubsystem<UImportSubsystem>() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//FEditorDelegates::OnAssetPostImport.Broadcast(this, NewBlueprint);
+		GEditor->GetEditorSubsystem<UImportSubsystem>()->BroadcastAssetPostImport(this, NewBlueprint);
 	}
 	else
 	{
