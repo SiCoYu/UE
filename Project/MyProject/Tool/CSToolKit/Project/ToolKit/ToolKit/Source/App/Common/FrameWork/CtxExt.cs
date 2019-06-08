@@ -6,11 +6,13 @@ namespace ToolSet
     {
 		static public CtxExt msExtInstance;
 
+		public ProjectConfig mProjectConfig;
 		public ExcelCtx mExcelCtx;
 		public TestMain mTestMain;
 
         public CtxExt()
         {
+			this.mProjectConfig = new ProjectConfig();
 			this.mTestMain = new TestMain();
 		}
 
@@ -37,7 +39,9 @@ namespace ToolSet
         {
             base._execInit();
 
-            this.mExcelCtx._execInit();
+			this.mProjectConfig.init();
+
+			this.mExcelCtx._execInit();
 			this.mTestMain.init();
 		}
 
@@ -55,7 +59,10 @@ namespace ToolSet
         {
             base._execDispose();
 
-            this.mExcelCtx._execDispose();
+			this.mProjectConfig.dispose();
+			this.mProjectConfig = null;
+
+			this.mExcelCtx._execDispose();
             this.mExcelCtx = null;
 
 			this.mTestMain.dispose();

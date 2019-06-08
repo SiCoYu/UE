@@ -2,27 +2,27 @@ namespace ToolSet
 {
 	public class TestMain
 	{
-		public TestBuildPak mTestBuildPak;
+		public TestBuildOnePak mTestBuildOnePak;
 
 		public TestMain()
 		{
-			this.mTestBuildPak = new TestBuildPak();
+			this.mTestBuildOnePak = new TestBuildOnePak();
 		}
 
 		public void init()
 		{
-			this.mTestBuildPak.init();
+			this.mTestBuildOnePak.init();
 		}
 
 		public void dispose()
 		{
-			this.mTestBuildPak.dispose();
-			this.mTestBuildPak = null;
+			this.mTestBuildOnePak.dispose();
+			this.mTestBuildOnePak = null;
 		}
 
 		public void run()
 		{
-			this.mTestBuildPak.run();
+			this.mTestBuildOnePak.run();
 		}
 	}
 }

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<Config>
+	<Project>
+		<ProjectPath EngineRootPath="Resources/DefaultSkin" ProjectRootPath="true" />
+		<PakPath OutPath="Resources/DefaultSkin" />
+	</Project>
+</Config>

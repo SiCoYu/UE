@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <Config>
 	<Project>
-		<ProjectPath EngineRootPath="Resources/DefaultSkin" ProjectRootPath="true" />
-		<PakPath OutPath="Resources/DefaultSkin" />
+		<ProjectPath EngineRootPath="G:/UnrealEngine-git" ProjectRootPath="G:/UE/Project/MyProject/MyProject" />
+		<PakPath OutPath="G:/UE/Project/MyProject/TestPak" />
 	</Project>
 </Config>

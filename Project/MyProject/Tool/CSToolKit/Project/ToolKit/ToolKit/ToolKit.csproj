@@ -6,7 +6,7 @@
     <ProjectGuid>{A682F958-7B38-4D57-A2C6-6DC4F1037DDA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>ExportExcelToJson</AssemblyName>
+    <AssemblyName>ToolKit</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -31,7 +31,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>ExcelExport</RootNamespace>
+    <RootNamespace>ToolKit</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -237,6 +237,7 @@
     <Compile Include="Source\Libs\Tools\UtilXml.cs" />
     <Compile Include="Source\Test\TestBase\TestBase.cs" />
     <Compile Include="Source\Test\TestBase\TestMain.cs" />
+    <Compile Include="Source\Test\TestPak\TestBuildOnePak.cs" />
     <Compile Include="Source\Test\TestPak\TestBuildPak.cs" />
   </ItemGroup>
   <ItemGroup />

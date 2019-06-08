@@ -8,7 +8,7 @@ namespace ToolSet
      * @ref UE4资源热更新 
      * @url http://blog.csdn.net/liulong1567/article/details/71597892
      */
-    public class TestBuildPak : TestBase
+    public class TestBuildOnePak : TestBase
 	{
         protected string mUE4EngineRootPath;    // UE4 Engine 根目录
         protected string mProjectRootPath;      // Project 根目录
@@ -16,11 +16,8 @@ namespace ToolSet
         protected bool mIsBuildPakSuccess;
         protected List<string> mBuildPakFileList;   // 打包文件列表
 
-        public TestBuildPak()
+        public TestBuildOnePak()
         {
-            this.mUE4EngineRootPath = @"D:\File\Self\UE\UnrealEngine";
-            this.mProjectRootPath = @"D:\File\Self\UE\UE\Project\MyProject\MyProject";
-            this.mOutPath = @"D:\File\Self\UE\UE\Project\MyProject\Test";
             this.mIsBuildPakSuccess = false;
             this.mBuildPakFileList = new List<string>();
         }
@@ -29,7 +26,11 @@ namespace ToolSet
         {
 			base.init();
 
-            this.addPakFile("BaseMaterial.uasset");
+			this.mUE4EngineRootPath = CtxExt.msExtInstance.mProjectConfig.getEngineRootPath();
+			this.mProjectRootPath = CtxExt.msExtInstance.mProjectConfig.getProjectRootPath();
+			this.mOutPath = CtxExt.msExtInstance.mProjectConfig.getPakOutPath();
+
+			this.addPakFile("BaseMaterial.uasset");
             this.addPakFile("GrayMaterial.uasset");
             this.addPakFile("UFO.uasset");
         }
@@ -42,6 +43,8 @@ namespace ToolSet
 		public override void run()
 		{
 			base.run();
+
+			this.build();
 		}
 
 		public string getUE4EngineRootPath()
