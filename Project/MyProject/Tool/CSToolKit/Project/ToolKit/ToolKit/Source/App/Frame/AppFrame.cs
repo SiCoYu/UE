@@ -17,8 +17,8 @@ namespace ToolSet
 
         public void dispose()
         {
-            
-        }
+			Ctx.msInstance.dispose();
+		}
 
         public void run()
         {

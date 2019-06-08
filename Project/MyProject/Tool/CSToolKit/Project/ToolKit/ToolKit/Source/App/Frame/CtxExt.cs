@@ -5,12 +5,12 @@ namespace ToolSet
     public class CtxExt : Ctx
     {
         public ExcelCtx mExcelCtx;
-        public MergeFileCtx mMergeFileCtx;
+		public TestMain mTestMain;
 
         public CtxExt()
         {
-
-        }
+			this.mTestMain = new TestMain();
+		}
 
         public static Ctx instance()
         {
@@ -28,8 +28,6 @@ namespace ToolSet
 
             this.mExcelCtx = new ExcelCtx();
             this.mExcelCtx._preInit();
-            this.mMergeFileCtx = new MergeFileCtx();
-            this.mMergeFileCtx._preInit();
         }
 
         override protected void _execInit()
@@ -37,8 +35,8 @@ namespace ToolSet
             base._execInit();
 
             this.mExcelCtx._execInit();
-            this.mMergeFileCtx._execInit();
-        }
+			this.mTestMain.init();
+		}
 
         override protected void _postInit()
         {
@@ -56,9 +54,10 @@ namespace ToolSet
 
             this.mExcelCtx._execDispose();
             this.mExcelCtx = null;
-            this.mMergeFileCtx._execDispose();
-            this.mMergeFileCtx = null;
-        }
+
+			this.mTestMain.dispose();
+			this.mTestMain = null;
+		}
 
         override protected void _postDispose()
         {
@@ -69,10 +68,9 @@ namespace ToolSet
         {
             base.run();
 
-            this.mExcelCtx.mExportJson.export();
-            //this.mMergeFileCtx.mMergeFile.mergeFile();
-            //this.mExcelCtx.mExportCsv.export();
-            //this.mExcelCtx.mExportCsvFromJson.export();
-        }
+			//this.mExcelCtx.mExportJson.export();
+			//this.mExcelCtx.mExportCsv.export();
+			this.mTestMain.run();
+		}
     }
 }

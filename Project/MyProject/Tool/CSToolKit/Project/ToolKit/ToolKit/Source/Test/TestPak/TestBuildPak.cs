@@ -2,21 +2,21 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace ToolKit
+namespace ToolSet
 {
     /**
      * @ref UE4资源热更新 
      * @url http://blog.csdn.net/liulong1567/article/details/71597892
      */
-    public class BuildPak
-    {
+    public class TestBuildPak : TestBase
+	{
         protected string mUE4EngineRootPath;    // UE4 Engine 根目录
         protected string mProjectRootPath;      // Project 根目录
         protected string mOutPath;
         protected bool mIsBuildPakSuccess;
         protected List<string> mBuildPakFileList;   // 打包文件列表
 
-        public BuildPak()
+        public TestBuildPak()
         {
             this.mUE4EngineRootPath = @"D:\File\Self\UE\UnrealEngine";
             this.mProjectRootPath = @"D:\File\Self\UE\UE\Project\MyProject\MyProject";
@@ -25,19 +25,27 @@ namespace ToolKit
             this.mBuildPakFileList = new List<string>();
         }
 
-        public void init()
+        public override void init()
         {
+			base.init();
+
             this.addPakFile("BaseMaterial.uasset");
             this.addPakFile("GrayMaterial.uasset");
             this.addPakFile("UFO.uasset");
         }
 
-        public void dispose()
+        public override void dispose()
         {
-
+			base.dispose();
         }
 
-        public string getUE4EngineRootPath()
+		public override void run()
+		{
+			base.run();
+
+		}
+
+		public string getUE4EngineRootPath()
         {
             return this.mUE4EngineRootPath;
         }
