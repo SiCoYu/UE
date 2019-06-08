@@ -76,7 +76,6 @@
     <Compile Include="Source\Extern\Mono.Xml\SmallXmlParser.cs" />
     <Compile Include="Source\Extern\SimpleJSON\SimpleJSON.cs" />
     <Compile Include="Source\Extern\SimpleJSON\SimpleJSONBinary.cs" />
-    <Compile Include="Source\Extern\SimpleJSON\SimpleJSONUnity.cs" />
     <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxBoolProperty.cs" />
     <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxFloatProperty.cs" />
     <Compile Include="Source\Libs\Auxiliary\AuxProperty\AuxIntProperty.cs" />
@@ -225,7 +224,6 @@
     <Compile Include="Source\Libs\Tools\MBitConverter.cs" />
     <Compile Include="Source\Libs\Tools\MSearchOption.cs" />
     <Compile Include="Source\Libs\Tools\PlatformDefine.cs" />
-    <Compile Include="Source\Libs\Tools\SimpleJson.cs" />
     <Compile Include="Source\Libs\Tools\Symbolic.cs" />
     <Compile Include="Source\Libs\Tools\SystemEndian.cs" />
     <Compile Include="Source\Libs\Tools\UAssert.cs" />
