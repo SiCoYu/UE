@@ -204,5 +204,11 @@ namespace ToolSet
 		{
 
 		}
+
+		protected void _unpackOnePak()
+		{
+			// https://forums.unrealengine.com/community/general-discussion/105459-unpacking-a-pak-file
+			// D:\EpicGames\4.12\Engine\Binaries\Win64\UnrealPak.exe C:\Users\Vlad\Desktop\YourPak.pak C:\Users\Vlad\Desktop -test
+		}
 	}
 }
