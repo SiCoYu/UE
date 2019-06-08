@@ -256,5 +256,13 @@ namespace SDK.Lib
             ret = Uri.UnescapeDataString(param);
             return ret;
         }
+
+		public static void writeConsoleFromProcess(System.Diagnostics.Process process)
+		{
+			System.Console.WriteLine("StandardOutput:");
+			System.Console.WriteLine(process.StandardOutput.ReadToEnd());
+			System.Console.WriteLine("StandardError:");
+			System.Console.WriteLine(process.StandardError.ReadToEnd());
+		}
     }
 }
