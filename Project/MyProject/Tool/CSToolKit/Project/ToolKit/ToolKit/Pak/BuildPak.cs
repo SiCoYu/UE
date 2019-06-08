@@ -121,7 +121,7 @@ namespace ToolKit
                 index += 1;
             }
 
-            //通过[Process]相关类来多次调用[UnrealPak.exe]程序来打包  
+            // 通过 [Process] 相关类来多次调用 [UnrealPak.exe] 程序来打包  
             ProcessStartInfo info = new ProcessStartInfo();
             info.FileName = this.mUE4EngineRootPath + @"\Engine\Binaries\Win64\UnrealPak.exe";
             info.Arguments = cmdParams;
