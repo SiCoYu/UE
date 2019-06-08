@@ -35,10 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -57,10 +53,6 @@
     <Compile Include="Source\App\ExcelReadWrite\ExcelCtx.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ExcelRead\ExcelOpState.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ExcelRead\ExcelReader.cs" />
-    <Compile Include="Source\App\ExcelReadWrite\ExportCsvFromJson\ExportCsvFromJson.cs" />
-    <Compile Include="Source\App\ExcelReadWrite\ExportCsvFromJson\Data\ExportCsvFromJsonData.cs" />
-    <Compile Include="Source\App\ExcelReadWrite\ExportCsvFromJson\ExportSheetToCsvFromJson.cs" />
-    <Compile Include="Source\App\ExcelReadWrite\ExportCsvFromJson\Data\LevelJson.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ExportCsv\ExportCsv.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ExportCsv\ExportSheetToCsv.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ExportJson\ExportJson.cs" />
@@ -76,8 +68,6 @@
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHead.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHeadItem.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableSheet.cs" />
-    <Compile Include="Source\App\MergeMultiFileToOne\MergeFile.cs" />
-    <Compile Include="Source\App\MergeMultiFileToOne\MergeFileCtx.cs" />
     <Compile Include="Source\App\Module\MainEntry.cs" />
     <Compile Include="Source\App\Tool\UtilExcel.cs" />
     <Compile Include="Source\Extern\fastJSON\dynamic.cs" />
@@ -243,12 +233,14 @@
     <Compile Include="Source\Libs\Tools\UtilByte.cs" />
     <Compile Include="Source\Libs\Tools\UtilFileIO.cs" />
     <Compile Include="Source\Libs\Tools\UtilHash.cs" />
-    <Compile Include="Source\Libs\Tools\UtilJson.cs" />
     <Compile Include="Source\Libs\Tools\UtilLogic.cs" />
     <Compile Include="Source\Libs\Tools\UtilStr.cs" />
     <Compile Include="Source\Libs\Tools\UtilSysLibWrap.cs" />
     <Compile Include="Source\Libs\Tools\UtilTime.cs" />
     <Compile Include="Source\Libs\Tools\UtilXml.cs" />
+    <Compile Include="Source\Test\TestBase\TestBase.cs" />
+    <Compile Include="Source\Test\TestBase\TestMain.cs" />
+    <Compile Include="Source\Test\TestPak\TestBuildPak.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
