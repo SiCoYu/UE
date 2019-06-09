@@ -1,4 +1,6 @@
-﻿public class AssetRegister
+﻿using SDK.Lib;
+
+public class AssetRegister
 {
 	public AssetRegister()
 	{
@@ -22,6 +24,16 @@
 
 	protected void _parseConfig()
 	{
+		string path = "";
+		MFileStream fileStream = new MFileStream(path);
+		fileStream.open();
+		string text = fileStream.readText();
 
+		SimpleJSON.JSONNode rootNode = SimpleJSON.JSON.Parse(text);
+		SimpleJSON.JSONNode dependencyNode = null;
+		foreach (SimpleJSON.JSONNode assetNode in rootNode.Children)
+		{
+			assetNode
+		}
 	}
 }
