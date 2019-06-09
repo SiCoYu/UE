@@ -4,7 +4,8 @@ using UnrealBuildTool;
 
 public class ExportAssetDependecies : ModuleRules
 {
-	public ExportAssetDependecies(TargetInfo Target)
+	//public ExportAssetDependecies(TargetInfo Target)
+	public ExportAssetDependecies(ReadOnlyTargetRules Target) : base(Target)
 	{
 		
 		PublicIncludePaths.AddRange(
