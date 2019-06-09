@@ -242,6 +242,7 @@
     <Compile Include="Source\Libs\Tools\UtilTime.cs" />
     <Compile Include="Source\Libs\Tools\UtilSimpleJson.cs" />
     <Compile Include="Source\Libs\Tools\UtilXml.cs" />
+    <Compile Include="Source\Test\TestAssetRegister\TestAssetRegister.cs" />
     <Compile Include="Source\Test\TestBase\TestBase.cs" />
     <Compile Include="Source\Test\TestBase\TestMain.cs" />
     <Compile Include="Source\Test\TestPak\TestBuildOnePak.cs" />
