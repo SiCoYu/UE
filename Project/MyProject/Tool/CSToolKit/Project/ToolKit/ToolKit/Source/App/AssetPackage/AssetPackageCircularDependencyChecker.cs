@@ -60,9 +60,9 @@ namespace ToolSet
             if (!this.AssetPath2ChildAssetDic.ContainsKey(childAssetBundleItem.GetAsbShortName()) &&
                 childAssetBundleItem != this)
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("AddChild, Parent {0} , Child {1}", this._AssetBundleShortName, childAssetBundleItem.GetAsbShortName()));
+                    UtilDebug.Log(string.Format("AddChild, Parent {0} , Child {1}", this._AssetBundleShortName, childAssetBundleItem.GetAsbShortName()));
                 }
 
                 this.ChildDependencyList.Add(childAssetBundleItem);
@@ -70,9 +70,9 @@ namespace ToolSet
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("AddChild, {0} already exist", childAssetBundleItem.GetAsbShortName()));
+                    UtilDebug.Log(string.Format("AddChild, {0} already exist", childAssetBundleItem.GetAsbShortName()));
                 }
             }
         }
@@ -81,18 +81,18 @@ namespace ToolSet
         {
             if (!this.AssetPath2ParentAssetDic.ContainsKey(parentAssetBundleItem.GetAsbShortName()))
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("AddParent, Parent {0} , Child {1}", this._AssetBundleShortName, parentAssetBundleItem.GetAsbShortName()));
+                    UtilDebug.Log(string.Format("AddParent, Parent {0} , Child {1}", this._AssetBundleShortName, parentAssetBundleItem.GetAsbShortName()));
                 }
 
                 this.ParentReferenceList.Add(parentAssetBundleItem);
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("AddParent, {0} already exist", parentAssetBundleItem.GetAsbShortName()));
+                    UtilDebug.Log(string.Format("AddParent, {0} already exist", parentAssetBundleItem.GetAsbShortName()));
                 }
             }
         }
@@ -126,9 +126,9 @@ namespace ToolSet
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("assetItemlist is null, {0}", this._AssetBundleShortName));
+                    UtilDebug.Log(string.Format("assetItemlist is null, {0}", this._AssetBundleShortName));
                 }
             }
         }
@@ -183,9 +183,9 @@ namespace ToolSet
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} already in {1}", assetItemV2.AssetRelativePathStartWithAssets, this._AssetBundleShortName));
+                    UtilDebug.Log(string.Format("{0} already in {1}", assetItemV2.AssetRelativePathStartWithAssets, this._AssetBundleShortName));
                 }
             }
         }
@@ -201,7 +201,7 @@ namespace ToolSet
                     ret = this._AssetPathList[index];
                     break;
                 }
-                else if (!AssetBundleBuilderUtilV2.IsSameParentDir(assetItemV2.AssetRelativePathStartWithAssets, this._AssetPathList[index]))
+                else if (!AssetPackageUtil.IsSameParentDir(assetItemV2.AssetRelativePathStartWithAssets, this._AssetPathList[index]))
                 {
                     if (assetItemV2.AssetRelativePathStartWithAssets.StartsWith(this._AssetPathList[index], System.StringComparison.CurrentCultureIgnoreCase))
                     {
@@ -232,9 +232,9 @@ namespace ToolSet
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    UnityEngine.Debug.LogError(string.Format("_AssetItemList is null"));
+                    UtilDebug.LogError(string.Format("_AssetItemList is null"));
                 }
             }
 
@@ -343,18 +343,18 @@ namespace ToolSet
                                 //}
                                 //else
                                 //{
-                                //    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                                //    if (AssetPackageUtil.ENABLE_ERROR_LOG)
                                 //    {
-                                //        UnityEngine.Debug.LogError(string.Format("error already exist orig"));
+                                //        UtilDebug.LogError(string.Format("error already exist orig"));
                                 //    }
                                 //}
                             }
                             else
                             {
-                                if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                                if (AssetPackageUtil.ENABLE_ERROR_LOG)
                                 {
-                                    //UnityEngine.Debug.LogError(string.Format("error already exist"));
-                                    UnityEngine.Debug.Log(string.Format("error already exist"));
+                                    //UtilDebug.LogError(string.Format("error already exist"));
+                                    UtilDebug.Log(string.Format("error already exist"));
                                 }
                             }
                         }
@@ -409,9 +409,9 @@ namespace ToolSet
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    UnityEngine.Debug.LogError(string.Format("error < 2"));
+                    UtilDebug.LogError(string.Format("error < 2"));
                 }
             }
         }
@@ -456,9 +456,7 @@ namespace ToolSet
         protected List<CDCAssetBundleItemV2> _FolderPolicyAssetBundleItemList;
         protected List<CDCAssetBundleItemV2> _SingleDependencyAssetBundleItemList;
         // 基本数据
-        protected AssetBundleBuilderSingleDependencyContextV2 _AssetBuildContext;
-        protected List<StreamingAssetBundleEntry> _AssetBundleEntryList;
-        protected StreamingAssetBundleEntry _SingleDependencyAssetEntity = null;
+        protected AssetPackageGraphSingleDependency _AssetBuildContext;
 
         protected List<CircularDependencyItemV2> _CircularDependencyItemList;
 
@@ -493,23 +491,20 @@ namespace ToolSet
             this._SingleDependencyAssetBundleItemList = null;
             this._AssetBuildContext.Dispose();
             this._AssetBuildContext = null;
-            this._AssetBundleEntryList.Clear();
-            this._AssetBundleEntryList = null;
-            this._SingleDependencyAssetEntity = null;
             this._CircularDependencyItemList.Clear();
             this._CircularDependencyItemList = null;
         }
 
         public void _WriteCircularDependencyManifest(string fileName)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteCircularDependencyManifest, start"));
+                UtilDebug.Log(string.Format("_WriteCircularDependencyManifest, start"));
             }
 
             if (string.IsNullOrEmpty(fileName))
             {
-                fileName = AssetBundleBuilderUtilV2.GetOrCreateAssetManifestDirectory();
+                fileName = AssetPackageUtil.GetOrCreateAssetManifestDirectory();
                 fileName = string.Format("{0}/{1}.txt", fileName, "CircularDependencyManifest");
             }
 
@@ -526,22 +521,22 @@ namespace ToolSet
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteCircularDependencyManifest, end"));
+                UtilDebug.Log(string.Format("_WriteCircularDependencyManifest, end"));
             }
         }
 
         public void _WriteCircularDependencyAssetBundleManifest(string fileName)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteCircularDependencyAssetBundleManifest, start"));
+                UtilDebug.Log(string.Format("_WriteCircularDependencyAssetBundleManifest, start"));
             }
 
             if (string.IsNullOrEmpty(fileName))
             {
-                fileName = AssetBundleBuilderUtilV2.GetOrCreateAssetManifestDirectory();
+                fileName = AssetPackageUtil.GetOrCreateAssetManifestDirectory();
                 fileName = string.Format("{0}/{1}.txt", fileName, "CircularDependencyAssetBundleManifest");
             }
 
@@ -558,16 +553,15 @@ namespace ToolSet
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteCircularDependencyAssetBundleManifest, end"));
+                UtilDebug.Log(string.Format("_WriteCircularDependencyAssetBundleManifest, end"));
             }
         }
 
         protected void _InitAssetEntity()
         {
-            this._AssetBundleEntryList = StreamingAssetBundleEntry.LoadConfig();
-            AssetBundleBuilderUtilV2.PreProcessAssetEntityByNewPolicy(this._AssetBundleEntryList, ref this._SingleDependencyAssetEntity);
+            
         }
 
         protected bool _IsCircularDependency(CDCAssetBundleItemV2 assetBundleItem, Stack<CDCAssetBundleItemV2> stack)
@@ -581,36 +575,36 @@ namespace ToolSet
 
         protected void _CollectAllAssetAndDependencyList()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_CollectAllAssetAndDependencyList, start"));
+                UtilDebug.Log(string.Format("_CollectAllAssetAndDependencyList, start"));
             }
 
             string rootPath = "Assets/AsbRes";
-            this._AssetBuildContext = new AssetBundleBuilderSingleDependencyContextV2();
+            this._AssetBuildContext = new AssetPackageGraphSingleDependency();
             this._AssetBuildContext.AddCollectRootPath(rootPath);
             this._AssetBuildContext.AddExcludeAssetBundleFileExtName("meta");
             this._AssetBuildContext.AddExcludeAssetBundleFileExtName("DS_Store");
 
-            string path = "";
+            //string path = "";
 
-            if (null != this._SingleDependencyAssetEntity)
-            {
-                for (int index = 0; index < this._SingleDependencyAssetEntity.assetPathList.Count; ++index)
-                {
-                    path = this._SingleDependencyAssetEntity.assetPathList[index];
+            //if (null != this._SingleDependencyAssetEntity)
+            //{
+            //    for (int index = 0; index < this._SingleDependencyAssetEntity.assetPathList.Count; ++index)
+            //    {
+            //        path = this._SingleDependencyAssetEntity.assetPathList[index];
 
-                    if (Directory.Exists(path))
-                    {
-                        this._AssetBuildContext.AddIncludeAssetBundlePath(path);
-                    }
-                    else
-                    {
-                        // 只支持顶级目录设置
-                        UnityEngine.Debug.LogError(string.Format("BuildAssetEntityBySingleDependencyPolicy, error, {0} is file", path));
-                    }
-                }
-            }
+            //        if (Directory.Exists(path))
+            //        {
+            //            this._AssetBuildContext.AddIncludeAssetBundlePath(path);
+            //        }
+            //        else
+            //        {
+            //            // 只支持顶级目录设置
+            //            UtilDebug.LogError(string.Format("BuildAssetEntityBySingleDependencyPolicy, error, {0} is file", path));
+            //        }
+            //    }
+            //}
 
             this._AssetBuildContext.OutAssetManifest();
 
@@ -619,17 +613,17 @@ namespace ToolSet
             this._FolderPolicyAssetItemList = this._AssetBuildContext.GetExcludeAssetItemList();
             this._CollectAssetPath2AssetDic = this._AssetBuildContext.GetAssetPath2AssetDic();
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_CollectAllAssetAndDependencyList, end"));
+                UtilDebug.Log(string.Format("_CollectAllAssetAndDependencyList, end"));
             }
         }
 
         protected void _AddOneAssetItemToFolderPolicyAssetBundleItem(AssetItemV2 assetItem)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_AddOneAssetItemToFolderPolicyAssetBundleItem, start"));
+                UtilDebug.Log(string.Format("_AddOneAssetItemToFolderPolicyAssetBundleItem, start"));
             }
 
             CDCAssetBundleItemV2 curAssetBundleItem = null;
@@ -653,56 +647,56 @@ namespace ToolSet
             {
                 bestMatchAssetBundleItem.AddAssetItem(assetItem);
 
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} addto {1}", assetItem.AssetRelativePathStartWithAssets, bestMatchAssetBundleItem.GetAsbShortName()));
+                    UtilDebug.Log(string.Format("{0} addto {1}", assetItem.AssetRelativePathStartWithAssets, bestMatchAssetBundleItem.GetAsbShortName()));
                 }
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    UnityEngine.Debug.LogError(string.Format("{0} not find assetbundleitem", assetItem.AssetRelativePathStartWithAssets));
+                    UtilDebug.LogError(string.Format("{0} not find assetbundleitem", assetItem.AssetRelativePathStartWithAssets));
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_AddOneAssetItemToFolderPolicyAssetBundleItem, end"));
+                UtilDebug.Log(string.Format("_AddOneAssetItemToFolderPolicyAssetBundleItem, end"));
             }
         }
 
         protected void _FindAssetBundleItemDependency(CDCAssetBundleItemV2 assetBundleItem)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_FindAssetBundleItemDependency, start"));
+                UtilDebug.Log(string.Format("_FindAssetBundleItemDependency, start"));
             }
 
             Stack<CDCAssetBundleItemV2> stack = new Stack<CDCAssetBundleItemV2>();
             this._DepthFirstFindAssetBundleItemDependency(assetBundleItem, stack);
             stack.Clear();
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_FindAssetBundleItemDependency, end"));
+                UtilDebug.Log(string.Format("_FindAssetBundleItemDependency, end"));
             }
         }
 
         protected void _AddOneCircularDependency(CDCAssetBundleItemV2 assetBundleItem, Stack<CDCAssetBundleItemV2> stack)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_AddOneCircularDependency, start");
+                UtilDebug.Log("_AddOneCircularDependency, start");
             }
 
             CircularDependencyItemV2 item = new CircularDependencyItemV2();
             this._CircularDependencyItemList.Add(item);
             item.AddCircularDependencyFirstAssetBundleItem(assetBundleItem, stack);
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_AddOneCircularDependency, end");
+                UtilDebug.Log("_AddOneCircularDependency, end");
             }
         }
 
@@ -711,17 +705,17 @@ namespace ToolSet
             // 循环依赖检测
             //if (this._IsCircularDependency(assetBundleItem, stack))
             //{
-            //    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+            //    if (AssetPackageUtil.ENABLE_ERROR_LOG)
             //    {
-            //        UnityEngine.Debug.LogError(string.Format("_DepthFirstFindDependency, CircularDependency {0}", assetBundleItem.GetAsbShortName()));
+            //        UtilDebug.LogError(string.Format("_DepthFirstFindDependency, CircularDependency {0}", assetBundleItem.GetAsbShortName()));
             //    }
             //}
 
             if (!assetBundleItem.IsCollectedDependency)
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("_DepthFirstFindAssetBundleItemDependency, {0}", assetBundleItem.GetAsbShortName()));
+                    UtilDebug.Log(string.Format("_DepthFirstFindAssetBundleItemDependency, {0}", assetBundleItem.GetAsbShortName()));
                 }
 
                 stack.Push(assetBundleItem);
@@ -744,36 +738,36 @@ namespace ToolSet
                     }
                     else
                     {
-                        if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                        if (AssetPackageUtil.ENABLE_ERROR_LOG)
                         {
-                            UnityEngine.Debug.LogError(string.Format("_DepthFirstFindAssetBundleItemDependency, {0} same dependency", dependencyArray[index].GetAsbShortName()));
+                            UtilDebug.LogError(string.Format("_DepthFirstFindAssetBundleItemDependency, {0} same dependency", dependencyArray[index].GetAsbShortName()));
                         }
                     }
                 }
 
                 CDCAssetBundleItemV2 assetBundleItemPop = stack.Pop();
-                UnityEngine.Debug.Assert(assetBundleItemPop == assetBundleItem);
+                UtilDebug.Assert(assetBundleItemPop == assetBundleItem);
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_DepthFirstFindAssetBundleItemDependency, end");
+                UtilDebug.Log("_DepthFirstFindAssetBundleItemDependency, end");
             }
         }
 
         protected void _DepthFirstBuildOneAssetBundleItem(CDCAssetBundleItemV2 assetBundleItemV2, Stack<CDCAssetBundleItemV2> stack)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_DepthFirstBuildOneAssetBundleItem, start");
+                UtilDebug.Log("_DepthFirstBuildOneAssetBundleItem, start");
             }
 
             // 循环依赖检测
             if (this._IsCircularDependency(assetBundleItemV2, stack))
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    //UnityEngine.Debug.LogError(string.Format("_DepthFirstFindDependency, CircularDependency {0}", assetBundleItemV2.GetAsbShortName()));
+                    //UtilDebug.LogError(string.Format("_DepthFirstFindDependency, CircularDependency {0}", assetBundleItemV2.GetAsbShortName()));
                 }
 
                 this._AddOneCircularDependency(assetBundleItemV2, stack);
@@ -794,20 +788,20 @@ namespace ToolSet
                 }
 
                 CDCAssetBundleItemV2 assetBundleItemPop = stack.Pop();
-                UnityEngine.Debug.Assert(assetBundleItemPop == assetBundleItemV2);
+                UtilDebug.Assert(assetBundleItemPop == assetBundleItemV2);
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_DepthFirstBuildOneAssetBundleItem, end");
+                UtilDebug.Log("_DepthFirstBuildOneAssetBundleItem, end");
             }
         }
 
         protected virtual void _FindOneAssetBundleItemCircularDependency(CDCAssetBundleItemV2 assetBundleItem)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_FindOneAssetBundleItemCircularDependency, start");
+                UtilDebug.Log("_FindOneAssetBundleItemCircularDependency, start");
             }
 
             if (!assetBundleItem.IsFindCircularDependency)
@@ -817,17 +811,17 @@ namespace ToolSet
                 stack.Clear();
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_FindOneAssetBundleItemCircularDependency, end");
+                UtilDebug.Log("_FindOneAssetBundleItemCircularDependency, end");
             }
         }
 
         private void _CheckIfAssetUniqueInAssetBundle()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_CheckIfAssetUniqueInAssetBundle, start");
+                UtilDebug.Log("_CheckIfAssetUniqueInAssetBundle, start");
             }
 
             Dictionary<string, AssetItemV2> uniqueAssetCheckerDic = new Dictionary<string, AssetItemV2>();
@@ -840,9 +834,9 @@ namespace ToolSet
             {
                 if (!this._AllAssetBundleItemList[aIndex].IsFindCircularDependency)
                 {
-                    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                    if (AssetPackageUtil.ENABLE_ERROR_LOG)
                     {
-                        UnityEngine.Debug.LogError(string.Format("{0} not FindCircularDependency", this._AllAssetBundleItemList[aIndex].GetAsbShortName()));
+                        UtilDebug.LogError(string.Format("{0} not FindCircularDependency", this._AllAssetBundleItemList[aIndex].GetAsbShortName()));
                     }
                 }
 
@@ -861,9 +855,9 @@ namespace ToolSet
                         }
                         else
                         {
-                            if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                            if (AssetPackageUtil.ENABLE_ERROR_LOG)
                             {
-                                UnityEngine.Debug.LogError(string.Format("{0} in diff assetbundle", assetItem.AssetRelativePathStartWithAssets));
+                                UtilDebug.LogError(string.Format("{0} in diff assetbundle", assetItem.AssetRelativePathStartWithAssets));
                             }
                         }
 
@@ -872,32 +866,32 @@ namespace ToolSet
                 }
                 else
                 {
-                    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                    if (AssetPackageUtil.ENABLE_ERROR_LOG)
                     {
-                        UnityEngine.Debug.LogError(string.Format("{0} is null", curAssetBundleItem.GetAsbShortName()));
+                        UtilDebug.LogError(string.Format("{0} is null", curAssetBundleItem.GetAsbShortName()));
                     }
                 }
             }
 
             if (totalFile != this._CollectAllAssetItemList.Count)
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    UnityEngine.Debug.LogError(string.Format("{0} not equal {1}", totalFile, this._CollectAllAssetItemList.Count));
+                    UtilDebug.LogError(string.Format("{0} not equal {1}", totalFile, this._CollectAllAssetItemList.Count));
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_CheckIfAssetUniqueInAssetBundle, end");
+                UtilDebug.Log("_CheckIfAssetUniqueInAssetBundle, end");
             }
         }
 
         protected void _BuildAssetBundleItemList()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_BuildAssetBundleItemList, start");
+                UtilDebug.Log("_BuildAssetBundleItemList, start");
             }
 
             CDCAssetBundleItemV2 cdcAssetBundleItemV2 = null;
@@ -915,15 +909,15 @@ namespace ToolSet
             }
 
             // 生成 Folder
-            for (int index = 0; index < this._AssetBundleEntryList.Count; ++index)
-            {
-                cdcAssetBundleItemV2 = new CDCAssetBundleItemV2();
-                this._AllAssetBundleItemList.Add(cdcAssetBundleItemV2);
-                this._FolderPolicyAssetBundleItemList.Add(cdcAssetBundleItemV2);
-                cdcAssetBundleItemV2.SetAssetBundleBuildPolicy(AssetBundleBuildPolicy.eFolder);
-                cdcAssetBundleItemV2.SetAsbShortName(this._AssetBundleEntryList[index].name);
-                cdcAssetBundleItemV2.SetAssetPathList(this._AssetBundleEntryList[index].assetPathList);
-            }
+            //for (int index = 0; index < this._AssetBundleEntryList.Count; ++index)
+            //{
+            //    cdcAssetBundleItemV2 = new CDCAssetBundleItemV2();
+            //    this._AllAssetBundleItemList.Add(cdcAssetBundleItemV2);
+            //    this._FolderPolicyAssetBundleItemList.Add(cdcAssetBundleItemV2);
+            //    cdcAssetBundleItemV2.SetAssetBundleBuildPolicy(AssetBundleBuildPolicy.eFolder);
+            //    cdcAssetBundleItemV2.SetAsbShortName(this._AssetBundleEntryList[index].name);
+            //    cdcAssetBundleItemV2.SetAssetPathList(this._AssetBundleEntryList[index].assetPathList);
+            //}
 
             // 遍历 Folder Policy
             for (int index = 0; index < this._FolderPolicyAssetItemList.Count; ++index)
@@ -931,17 +925,17 @@ namespace ToolSet
                 this._AddOneAssetItemToFolderPolicyAssetBundleItem(this._FolderPolicyAssetItemList[index]);
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_BuildAssetBundleItemList, end");
+                UtilDebug.Log("_BuildAssetBundleItemList, end");
             }
         }
 
         protected void _CollectAssetBundleItemDependency()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_CollectAssetBundleItemDependency, start");
+                UtilDebug.Log("_CollectAssetBundleItemDependency, start");
             }
 
             CDCAssetBundleItemV2 assetBundleItem = null;
@@ -954,17 +948,17 @@ namespace ToolSet
                 this._FindAssetBundleItemDependency(assetBundleItem);
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_CollectAssetBundleItemDependency, end");
+                UtilDebug.Log("_CollectAssetBundleItemDependency, end");
             }
         }
 
         protected void _CheckAssetBundleItemIsValid()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_CheckAssetBundleItemIsValid, start");
+                UtilDebug.Log("_CheckAssetBundleItemIsValid, start");
             }
 
             CDCAssetBundleItemV2 assetBundleItemV2 = null;
@@ -975,24 +969,24 @@ namespace ToolSet
 
                 if (null == assetBundleItemV2.GetAssetItemList())
                 {
-                    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                    if (AssetPackageUtil.ENABLE_ERROR_LOG)
                     {
-                        UnityEngine.Debug.Log(string.Format("{0} error", assetBundleItemV2.GetAsbShortName()));
+                        UtilDebug.Log(string.Format("{0} error", assetBundleItemV2.GetAsbShortName()));
                     }
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_CheckAssetBundleItemIsValid, end");
+                UtilDebug.Log("_CheckAssetBundleItemIsValid, end");
             }
         }
 
         protected virtual void _FindAssetBundleItemCircularDependency()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_FindAssetBundleItemCircularDependency, start");
+                UtilDebug.Log("_FindAssetBundleItemCircularDependency, start");
             }
 
             CDCAssetBundleItemV2 assetBundleItemV2 = null;
@@ -1018,48 +1012,48 @@ namespace ToolSet
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_FindAssetBundleItemCircularDependency, end");
+                UtilDebug.Log("_FindAssetBundleItemCircularDependency, end");
             }
         }
 
         private void _CheckAssetCorrect()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_CheckAssetCorrect, start");
+                UtilDebug.Log("_CheckAssetCorrect, start");
             }
 
             this._CheckIfAssetUniqueInAssetBundle();
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_CheckAssetCorrect, end");
+                UtilDebug.Log("_CheckAssetCorrect, end");
             }
         }
 
         private void _WriteManifest()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_WriteManifest, start");
+                UtilDebug.Log("_WriteManifest, start");
             }
 
             this._WriteCircularDependencyManifest("");
             this._WriteCircularDependencyAssetBundleManifest("");
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("_WriteManifest, end");
+                UtilDebug.Log("_WriteManifest, end");
             }
         }
 
         public void CheckCircularDependency()
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("CheckCircularDependency, start");
+                UtilDebug.Log("CheckCircularDependency, start");
             }
 
             this._InitAssetEntity();
@@ -1071,9 +1065,9 @@ namespace ToolSet
             this._CheckAssetCorrect();
             this._WriteManifest();
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log("CheckCircularDependency, end");
+                UtilDebug.Log("CheckCircularDependency, end");
             }
         }
     }

@@ -52,7 +52,9 @@
     <Compile Include="Source\App\AssetPackage\AssetPackageFilePathAndNameChecker.cs" />
     <Compile Include="Source\App\AssetPackage\AssetPackageGraph.cs" />
     <Compile Include="Source\App\AssetPackage\AssetPackageUtil.cs" />
+    <Compile Include="Source\App\AssetPackage\AssetRegister.cs" />
     <Compile Include="Source\App\Common\FrameWork\ProjectConfig.cs" />
+    <Compile Include="Source\App\Common\Tools\UtilDebug.cs" />
     <Compile Include="Source\App\ExcelReadWrite\Base\ExportCustom.cs" />
     <Compile Include="Source\App\ExcelReadWrite\Base\ExportSheetToCuctom.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ExcelCtx.cs" />

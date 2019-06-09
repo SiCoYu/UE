@@ -44,21 +44,21 @@ namespace ToolSet
 
         protected void _WriteMaxLengthInvalidFileNameManifest(string fileName)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteInvalidFileNameManifest, start"));
+                UtilDebug.Log(string.Format("_WriteInvalidFileNameManifest, start"));
             }
 
             if (string.IsNullOrEmpty(fileName))
             {
-                fileName = AssetBundleBuilderUtilV2.GetOrCreateAssetManifestDirectory();
+                fileName = AssetPackageUtil.GetOrCreateAssetManifestDirectory();
                 fileName = string.Format("{0}/{1}.txt", fileName, "MaxLengthInvalidFileNameManifest");
             }
             if (File.Exists(fileName))
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} exist, delete", fileName));
+                    UtilDebug.Log(string.Format("{0} exist, delete", fileName));
                 }
 
                 try
@@ -67,17 +67,17 @@ namespace ToolSet
                 }
                 catch (Exception exp)
                 {
-                    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                    if (AssetPackageUtil.ENABLE_ERROR_LOG)
                     {
-                        UnityEngine.Debug.LogError(string.Format("{0} delete, error {1}", fileName, exp.Message));
+                        UtilDebug.LogError(string.Format("{0} delete, error {1}", fileName, exp.Message));
                     }
                 }
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} not exist", fileName));
+                    UtilDebug.Log(string.Format("{0} not exist", fileName));
                 }
             }
 
@@ -108,7 +108,7 @@ namespace ToolSet
             }
             catch (Exception exp)
             {
-                UnityEngine.Debug.Log(string.Format("error {0}", exp.Message));
+                UtilDebug.Log(string.Format("error {0}", exp.Message));
 
                 if (null != fileStream)
                 {
@@ -127,29 +127,29 @@ namespace ToolSet
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteInvalidFileNameManifest, end"));
+                UtilDebug.Log(string.Format("_WriteInvalidFileNameManifest, end"));
             }
         }
 
         protected void _WriteMaxLengthInvalidFilePathManifest(string fileName)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteInvalidFilePathManifest, start"));
+                UtilDebug.Log(string.Format("_WriteInvalidFilePathManifest, start"));
             }
 
             if (string.IsNullOrEmpty(fileName))
             {
-                fileName = AssetBundleBuilderUtilV2.GetOrCreateAssetManifestDirectory();
+                fileName = AssetPackageUtil.GetOrCreateAssetManifestDirectory();
                 fileName = string.Format("{0}/{1}.txt", fileName, "MaxLengthInvalidFilePathManifest");
             }
             if (File.Exists(fileName))
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} exist, delete", fileName));
+                    UtilDebug.Log(string.Format("{0} exist, delete", fileName));
                 }
 
                 try
@@ -158,17 +158,17 @@ namespace ToolSet
                 }
                 catch (Exception exp)
                 {
-                    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                    if (AssetPackageUtil.ENABLE_ERROR_LOG)
                     {
-                        UnityEngine.Debug.LogError(string.Format("{0} delete, error {1}", fileName, exp.Message));
+                        UtilDebug.LogError(string.Format("{0} delete, error {1}", fileName, exp.Message));
                     }
                 }
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} not exist", fileName));
+                    UtilDebug.Log(string.Format("{0} not exist", fileName));
                 }
             }
 
@@ -199,7 +199,7 @@ namespace ToolSet
             }
             catch (Exception exp)
             {
-                UnityEngine.Debug.Log(string.Format("error {0}", exp.Message));
+                UtilDebug.Log(string.Format("error {0}", exp.Message));
 
                 if (null != fileStream)
                 {
@@ -218,29 +218,29 @@ namespace ToolSet
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteInvalidFilePathManifest, end"));
+                UtilDebug.Log(string.Format("_WriteInvalidFilePathManifest, end"));
             }
         }
 
         protected void _WriteHasSpaceInvalidFilePathManifest(string fileName)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteHasSpaceInvalidFilePathManifest, start"));
+                UtilDebug.Log(string.Format("_WriteHasSpaceInvalidFilePathManifest, start"));
             }
 
             if (string.IsNullOrEmpty(fileName))
             {
-                fileName = AssetBundleBuilderUtilV2.GetOrCreateAssetManifestDirectory();
+                fileName = AssetPackageUtil.GetOrCreateAssetManifestDirectory();
                 fileName = string.Format("{0}/{1}.txt", fileName, "HasSpaceInvalidFilePathManifest");
             }
             if (File.Exists(fileName))
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} exist, delete", fileName));
+                    UtilDebug.Log(string.Format("{0} exist, delete", fileName));
                 }
 
                 try
@@ -249,17 +249,17 @@ namespace ToolSet
                 }
                 catch (Exception exp)
                 {
-                    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                    if (AssetPackageUtil.ENABLE_ERROR_LOG)
                     {
-                        UnityEngine.Debug.LogError(string.Format("{0} delete, error {1}", fileName, exp.Message));
+                        UtilDebug.LogError(string.Format("{0} delete, error {1}", fileName, exp.Message));
                     }
                 }
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} not exist", fileName));
+                    UtilDebug.Log(string.Format("{0} not exist", fileName));
                 }
             }
 
@@ -290,7 +290,7 @@ namespace ToolSet
             }
             catch (Exception exp)
             {
-                UnityEngine.Debug.Log(string.Format("error {0}", exp.Message));
+                UtilDebug.Log(string.Format("error {0}", exp.Message));
 
                 if (null != fileStream)
                 {
@@ -309,29 +309,29 @@ namespace ToolSet
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteHasSpaceInvalidFilePathManifest, end"));
+                UtilDebug.Log(string.Format("_WriteHasSpaceInvalidFilePathManifest, end"));
             }
         }
 
         protected void _WriteStageAssetFilePathManifest(string fileName)
         {
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteStageAssetFilePathManifest, start"));
+                UtilDebug.Log(string.Format("_WriteStageAssetFilePathManifest, start"));
             }
 
             if (string.IsNullOrEmpty(fileName))
             {
-                fileName = AssetBundleBuilderUtilV2.GetOrCreateAssetManifestDirectory();
+                fileName = AssetPackageUtil.GetOrCreateAssetManifestDirectory();
                 fileName = string.Format("{0}/{1}.txt", fileName, "StageAssetFilePathManifest");
             }
             if (File.Exists(fileName))
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} exist, delete", fileName));
+                    UtilDebug.Log(string.Format("{0} exist, delete", fileName));
                 }
 
                 try
@@ -340,17 +340,17 @@ namespace ToolSet
                 }
                 catch (Exception exp)
                 {
-                    if (AssetBundleBuilderUtilV2.ENABLE_ERROR_LOG)
+                    if (AssetPackageUtil.ENABLE_ERROR_LOG)
                     {
-                        UnityEngine.Debug.LogError(string.Format("{0} delete, error {1}", fileName, exp.Message));
+                        UtilDebug.LogError(string.Format("{0} delete, error {1}", fileName, exp.Message));
                     }
                 }
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("{0} not exist", fileName));
+                    UtilDebug.Log(string.Format("{0} not exist", fileName));
                 }
             }
 
@@ -374,7 +374,7 @@ namespace ToolSet
             }
             catch (Exception exp)
             {
-                UnityEngine.Debug.Log(string.Format("error {0}", exp.Message));
+                UtilDebug.Log(string.Format("error {0}", exp.Message));
 
                 if (null != fileStream)
                 {
@@ -393,18 +393,18 @@ namespace ToolSet
                 }
             }
 
-            if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+            if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UnityEngine.Debug.Log(string.Format("_WriteStageAssetFilePathManifest, end"));
+                UtilDebug.Log(string.Format("_WriteStageAssetFilePathManifest, end"));
             }
         }
 
         protected void _OnMaxLengthInvalidFileNameHandle(string fullPath)
         {
-            if ("meta" != AssetBundleBuilderUtilV2.GetFileExtName(fullPath))
+            if ("meta" != AssetPackageUtil.GetFileExtName(fullPath))
             {
-                string fileName = AssetBundleBuilderUtilV2.GetRelativePathStartWithAsset(fullPath);
-                if (AssetBundleBuilderUtilV2.GetAssetBundleFileNameLengthByFilePath(fileName) > 100)
+                string fileName = AssetPackageUtil.GetRelativePathStartWithAsset(fullPath);
+                if (AssetPackageUtil.GetAssetBundleFileNameLengthByFilePath(fileName) > 100)
                 {
                     this._MaxLengthInvalidFileNameList.Add(fileName);
                 }
@@ -415,24 +415,24 @@ namespace ToolSet
         {
             if (Directory.Exists(rootPath))
             {
-                AssetBundleBuilderUtilV2.TraverseDir(rootPath, true, this._OnMaxLengthInvalidFileNameHandle);
+                AssetPackageUtil.TraverseDir(rootPath, true, this._OnMaxLengthInvalidFileNameHandle);
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("_CollectInvalidFileNameByRootDir, {0} path not exist", rootPath));
+                    UtilDebug.Log(string.Format("_CollectInvalidFileNameByRootDir, {0} path not exist", rootPath));
                 }
             }
         }
 
         protected void _OnMaxLengthInvalidFilePathHandle(string fullPath)
         {
-            if ("meta" != AssetBundleBuilderUtilV2.GetFileExtName(fullPath))
+            if ("meta" != AssetPackageUtil.GetFileExtName(fullPath))
             {
-                if (AssetBundleBuilderUtilV2.GetAssetBundleFilePathLengthByFilePath(fullPath) > 255)
+                if (AssetPackageUtil.GetAssetBundleFilePathLengthByFilePath(fullPath) > 255)
                 {
-                    string fileName = AssetBundleBuilderUtilV2.GetRelativePathStartWithAsset(fullPath);
+                    string fileName = AssetPackageUtil.GetRelativePathStartWithAsset(fullPath);
                     this._MaxLengthInvalidFilePathList.Add(fileName);
                 }
             }
@@ -442,24 +442,24 @@ namespace ToolSet
         {
             if (Directory.Exists(rootPath))
             {
-                AssetBundleBuilderUtilV2.TraverseDir(rootPath, true, this._OnMaxLengthInvalidFilePathHandle);
+                AssetPackageUtil.TraverseDir(rootPath, true, this._OnMaxLengthInvalidFilePathHandle);
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("_CollectInvalidFilePathByRootDir, {0} path not exist", rootPath));
+                    UtilDebug.Log(string.Format("_CollectInvalidFilePathByRootDir, {0} path not exist", rootPath));
                 }
             }
         }
 
         protected void _OnHasSpaceInvalidFilePathHandle(string fullPath)
         {
-            if ("meta" != AssetBundleBuilderUtilV2.GetFileExtName(fullPath))
+            if ("meta" != AssetPackageUtil.GetFileExtName(fullPath))
             {
-                if (AssetBundleBuilderUtilV2.HasSpceInPath(fullPath))
+                if (AssetPackageUtil.HasSpceInPath(fullPath))
                 {
-                    string fileName = AssetBundleBuilderUtilV2.GetRelativePathStartWithAsset(fullPath);
+                    string fileName = AssetPackageUtil.GetRelativePathStartWithAsset(fullPath);
                     this._HasSpaceInvalidFilePathList.Add(fileName);
                 }
             }
@@ -467,10 +467,10 @@ namespace ToolSet
 
         protected void _OnStageAssetFilePathHandle(string fullPath)
         {
-            if ("prefab" == AssetBundleBuilderUtilV2.GetFileExtName(fullPath))
+            if ("prefab" == AssetPackageUtil.GetFileExtName(fullPath))
             {
-                string fileName = AssetBundleBuilderUtilV2.GetRelativePathStartWithAsset(fullPath);
-                fileName = AssetBundleBuilderUtilV2.GetFileNameNoExt(fileName);
+                string fileName = AssetPackageUtil.GetRelativePathStartWithAsset(fullPath);
+                fileName = AssetPackageUtil.GetFileNameNoExt(fileName);
                 fileName = fileName.Substring("Assets/AsbRes/".Length);
                 fileName = string.Format("pathList.Add(\"{0}\");", fileName);
                 this._StagePrefabAssetPath.Add(fileName);
@@ -481,13 +481,13 @@ namespace ToolSet
         {
             if (Directory.Exists(rootPath))
             {
-                AssetBundleBuilderUtilV2.TraverseDir(rootPath, true, this._OnHasSpaceInvalidFilePathHandle);
+                AssetPackageUtil.TraverseDir(rootPath, true, this._OnHasSpaceInvalidFilePathHandle);
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("_CollectHasSpaceInvalidFilePathByRootDir, {0} path not exist", rootPath));
+                    UtilDebug.Log(string.Format("_CollectHasSpaceInvalidFilePathByRootDir, {0} path not exist", rootPath));
                 }
             }
         }
@@ -496,41 +496,41 @@ namespace ToolSet
         {
             if (Directory.Exists(rootPath))
             {
-                AssetBundleBuilderUtilV2.TraverseDir(rootPath, true, this._OnStageAssetFilePathHandle);
+                AssetPackageUtil.TraverseDir(rootPath, true, this._OnStageAssetFilePathHandle);
             }
             else
             {
-                if (AssetBundleBuilderUtilV2.ENABLE_COMMON_LOG)
+                if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UnityEngine.Debug.Log(string.Format("_CollectHasSpaceInvalidFilePathByRootDir, {0} path not exist", rootPath));
+                    UtilDebug.Log(string.Format("_CollectHasSpaceInvalidFilePathByRootDir, {0} path not exist", rootPath));
                 }
             }
         }
 
         public void CollectMaxLengthInvalidFileName()
         {
-            string fullPath = AssetBundleBuilderUtilV2.GetFullPathByRelativePathStartWithAsset(this._RootPath);
+            string fullPath = AssetPackageUtil.GetFullPathByRelativePathStartWithAsset(this._RootPath);
             this._CollectMaxLengthInvalidFileNameByRootDir(fullPath);
             this._WriteMaxLengthInvalidFileNameManifest("");
         }
 
         public void CollectMaxLengthInvalidFilePath()
         {
-            string fullPath = AssetBundleBuilderUtilV2.GetFullPathByRelativePathStartWithAsset(this._RootPath);
+            string fullPath = AssetPackageUtil.GetFullPathByRelativePathStartWithAsset(this._RootPath);
             this._CollectMaxLengthInvalidFilePathByRootDir(fullPath);
             this._WriteMaxLengthInvalidFilePathManifest("");
         }
 
         public void CollectHasSpaceInvalidFilePath()
         {
-            string fullPath = AssetBundleBuilderUtilV2.GetFullPathByRelativePathStartWithAsset(this._RootPath);
+            string fullPath = AssetPackageUtil.GetFullPathByRelativePathStartWithAsset(this._RootPath);
             this._CollectHasSpaceInvalidFilePathByRootDir(fullPath);
             this._WriteHasSpaceInvalidFilePathManifest("");
         }
 
         public void CollectStageAssetFilePath()
         {
-            string fullPath = AssetBundleBuilderUtilV2.GetFullPathByRelativePathStartWithAsset(this._RootPath);
+            string fullPath = AssetPackageUtil.GetFullPathByRelativePathStartWithAsset(this._RootPath);
             this._CollectStageAssetFilePathByRootDir(fullPath);
             this._WriteStageAssetFilePathManifest("");
         }
