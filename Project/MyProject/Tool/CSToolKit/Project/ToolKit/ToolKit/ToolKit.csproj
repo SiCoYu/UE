@@ -240,6 +240,7 @@
     <Compile Include="Source\Libs\Tools\UtilStr.cs" />
     <Compile Include="Source\Libs\Tools\UtilSysLibWrap.cs" />
     <Compile Include="Source\Libs\Tools\UtilTime.cs" />
+    <Compile Include="Source\Libs\Tools\UtilSimpleJson.cs" />
     <Compile Include="Source\Libs\Tools\UtilXml.cs" />
     <Compile Include="Source\Test\TestBase\TestBase.cs" />
     <Compile Include="Source\Test\TestBase\TestMain.cs" />

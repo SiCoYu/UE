@@ -31,9 +31,13 @@ public class AssetRegister
 
 		SimpleJSON.JSONNode rootNode = SimpleJSON.JSON.Parse(text);
 		SimpleJSON.JSONNode dependencyNode = null;
+		string key = null;
+		string[] dependencyArray = null;
+
 		foreach (SimpleJSON.JSONNode assetNode in rootNode.Children)
 		{
-			assetNode
+			key = assetNode.Value;
+			dependencyArray = assetNode["DependenciesInGameContentDir"];
 		}
 	}
 }
