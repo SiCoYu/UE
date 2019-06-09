@@ -19,6 +19,13 @@ namespace ToolSet
         protected List<string> mBuildPakFileList;   // 打包文件列表
 		protected bool mIsEncrypt;
 		protected bool mIsCompress;
+		protected bool mIsExportDependencies;
+		protected bool mIsEnableAbslog;
+		protected bool mIsEnableOrder;
+		protected bool mIsWindowsPlatform;
+		protected bool mIsTest;
+		protected bool mIsList;
+		protected bool mIsExtract;
 		protected string mPakOtherParams;
 
 		public TestBuildOnePak()
@@ -27,6 +34,15 @@ namespace ToolSet
             this.mBuildPakFileList = new List<string>();
 			this.mIsEncrypt = false;
 			this.mIsCompress = false;
+			this.mIsExportDependencies = true;
+			this.mIsEnableAbslog = true;
+			this.mIsEnableOrder = false;
+			this.mIsWindowsPlatform = true;
+			this.mIsTest = false;
+			this.mIsList = false;
+			this.mIsExtract = false;
+
+			this.mPakOtherParams = " -UTF8Output";
 		}
 
         public override void init()
@@ -36,33 +52,7 @@ namespace ToolSet
 			this.mUE4EngineRootPath = CtxExt.msExtInstance.mProjectConfig.getEngineRootPath();
 			this.mProjectRootPath = CtxExt.msExtInstance.mProjectConfig.getProjectRootPath();
 			this.mPakOutPath = CtxExt.msExtInstance.mProjectConfig.getPakOutPath();
-			string logFile = string.Format("{0}/Pak.log", this.mPakOutPath);
-
-			if (this.mIsCompress)
-			{
-				if (this.mIsEncrypt)
-				{
-					this.mPakOtherParams = string.Format(" -order={0} -UTF8Output {1} {2}", logFile, "-encrypt", "-compress");
-				}
-				else
-				{
-					this.mPakOtherParams = string.Format(" -order={0} -UTF8Output {1}", logFile, "-compress");
-				}
-			}
-			else
-			{
-				if (this.mIsEncrypt)
-				{
-					this.mPakOtherParams = string.Format(" -order={0} -UTF8Output {1}", logFile, "-encrypt");
-				}
-				else
-				{
-					this.mPakOtherParams = string.Format(" -order={0} -UTF8Output", logFile);
-				}
-			}
-
-			//this.mPakOtherParams = "";
-			this.mPakOtherParams = " -UTF8Output";
+			this._initCommandLineParams();
 
 			this.addPakFile("BaseMaterial.uasset");
             this.addPakFile("GrayMaterial.uasset");
@@ -79,6 +69,56 @@ namespace ToolSet
 			base.run();
 
 			this.build();
+		}
+
+		protected void _initCommandLineParams()
+		{
+			string logFile = string.Format("{0}/Pak.log", this.mPakOutPath);
+			string exportDependenciesFile = string.Format("{0}/DependenciesFile.txt", this.mPakOutPath);
+			string orderFile = string.Format("{0}/Order.txt", this.mPakOutPath);
+			string extractPath = string.Format("{0}/Extract", this.mPakOutPath);
+
+			if (this.mIsEncrypt)
+			{
+				this.mPakOtherParams = string.Format("{0} {1}", this.mPakOtherParams, "-encrypt");
+			}
+			if (this.mIsCompress)
+			{
+				this.mPakOtherParams = string.Format("{0} {1}", this.mPakOtherParams, "-compress");
+			}
+			if (this.mIsExportDependencies)
+			{
+				this.mPakOtherParams = string.Format("{0} -ExportDependencies={1} -NoAssetRegistryCache -ForceDependsGathering", this.mPakOtherParams, exportDependenciesFile);
+			}
+			if (this.mIsEnableAbslog)
+			{
+				this.mPakOtherParams = string.Format("{0} -abslog={1}", this.mPakOtherParams, logFile);
+			}
+			if (this.mIsEnableOrder)
+			{
+				this.mPakOtherParams = string.Format("{0} -order={1}", this.mPakOtherParams, orderFile);
+			}
+			if (this.mIsWindowsPlatform)
+			{
+				this.mPakOtherParams = string.Format("{0} -platform={1}", this.mPakOtherParams, "Windows");
+			}
+			if (this.mIsTest)
+			{
+				this.mPakOtherParams = string.Format("{0} -Test", this.mPakOtherParams);
+			}
+			if (this.mIsList)
+			{
+				this.mPakOtherParams = string.Format("{0} -List={1}", this.mPakOtherParams, "Windows");
+			}
+			if (this.mIsExtract)
+			{
+				if (UtilFileIO.existDirectory(extractPath))
+				{
+					UtilFileIO.createDirectory(extractPath, true);
+				}
+
+				this.mPakOtherParams = string.Format("{0} -Extract {1}", this.mPakOtherParams, extractPath);
+			}
 		}
 
 		public string getUE4EngineRootPath()
