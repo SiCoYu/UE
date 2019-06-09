@@ -12,7 +12,13 @@ using System.IO; //路径获取需要用到IO
 // https://wiki.unrealengine.com/An_Introduction_to_UE4_Plugins
 public class MyPlugin : ModuleRules
 {
-    private string ModulePath //当前TestPlugin.Build.cs文件所在的路径
+	// UE4 4.22 warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h") from UE 4.21 onwards.
+	public MyPlugin(ReadOnlyTargetRules Target) : base(Target)
+	{
+
+	}
+
+	private string ModulePath //当前TestPlugin.Build.cs文件所在的路径
     {
         // error CS0619: “UnrealBuildTool.RulesCompiler.GetModuleFilename(string)”已过时:“GetModuleFilename is deprecated, use the ModuleDirectory property on any ModuleRules instead to get a path to your module.”
         //get { return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name)); }

@@ -7,7 +7,9 @@ public class ExportAssetDependecies : ModuleRules
 	//public ExportAssetDependecies(TargetInfo Target)
 	public ExportAssetDependecies(ReadOnlyTargetRules Target) : base(Target)
 	{
-		
+		// UE4 4.22  warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Public/ExportAssetDependecies.h") from UE 4.21 onwards.
+
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				"ExportAssetDependecies/Public"
