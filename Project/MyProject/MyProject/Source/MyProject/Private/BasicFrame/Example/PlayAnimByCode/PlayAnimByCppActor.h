@@ -3,12 +3,18 @@
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Animation/SkeletalMeshActor.h"
+#include "Runtime/Engine/Classes/Animation/BlendSpace1D.h"
+#include "Runtime/Engine/Classes/Animation/AnimSequence.h"
 #include "PlayAnimByCppActor.generated.h"
 
 /**
  * @ref https://aigo.iteye.com/blog/2283454
  * @ref https://aigo.iteye.com/blog/2285001
 */
+
+class UBlendSpace1D;
+class UAnimSequence;
+class UStaticMeshComponent;
 
 UCLASS(config = Game)
 class APlayAnimByCppActor : public AActor
@@ -18,10 +24,13 @@ class APlayAnimByCppActor : public AActor
 private:
 	UStaticMeshComponent* MyStaticMesh;
 
+public:
+	// LogCompile: Error: BlueprintReadOnly should not be used on private members
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Anims")
-		UBlendSpace1D* BlendSpace;
+	UBlendSpace1D* BlendSpace;
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Anims");
+	// LogCompile: Error: BlueprintReadOnly should not be used on private members
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Anims")
 	UAnimSequence* MyAnimSequence;
 
 public:
