@@ -25,7 +25,7 @@ public class MyProjectEditor : ModuleRules
                 "MyProjectEditor/Private/MyEngine/MyAsset",
 
                 // Example area
-                "MyProjectEditor/Private/MyEngine/AnimNode",
+                "MyProjectEditor/Private/MyEngine/Example/AnimNode",
                 "MyProjectEditor/Private/MyEngine/Example/CppAndBlueprint"
             }
 		);

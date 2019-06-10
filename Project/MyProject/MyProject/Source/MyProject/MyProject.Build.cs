@@ -47,8 +47,8 @@ public class MyProject : ModuleRules
             new string[] {
                 // Relative to MyProject/Plugins/MyScriptPlugin/Source , 包含插件头文件， MyProject\MyProject.uproject 包含插件根目录 AdditionalPluginDirectories
                 // ScriptPlugin 包含目录
-			    "ScriptPlugin/Classes",
-                "ScriptPlugin/Private",
+			    //"ScriptPlugin/Classes",
+                //"ScriptPlugin/Private",
 
                 // Player 区域
                 "MyProject/Private/MyEngine",
@@ -60,7 +60,6 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/Network",
                 "MyProject/Private/MyEngine/Network/Web",
                 "MyProject/Private/MyEngine/MyAsset",
-                "MyProject/Private/MyEngine/AI",
                 "MyProject/Private/MyEngine/MyBluePrint",
 
                 "MyProject/Private/MyEngine/MyBase",
@@ -118,7 +117,7 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Log",
                 "MyProject/Private/BasicFrame/Libs/Table",
                 "MyProject/Private/BasicFrame/Libs/Table/ItemObject",
-                "MyProject/Private/BasicFrame/Libs/Util",
+				"MyProject/Private/BasicFrame/Libs/Tools",
                 "MyProject/Private/BasicFrame/Libs/Input",
 
                 "MyProject/Private/BasicFrame/Libs/Thread",
@@ -169,22 +168,22 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BasicFrame/Libs/Engine/Templates",
                 "MyProject/Private/BasicFrame/Libs/Misc",
 
-                "MyProject/Private/BasicFrame/Module",
-                "MyProject/Private/BasicFrame/Module/Game",
-                "MyProject/Private/BasicFrame/Module/Game/EventNotify",
-                "MyProject/Private/BasicFrame/Module/Game/GameNetHandle",
-                "MyProject/Private/BasicFrame/Module/Game/RouteMsgHandle",
+				"MyProject/Private/BasicFrame/App",
+				"MyProject/Private/BasicFrame/App/Module/Game",
+				"MyProject/Private/BasicFrame/App/Module/Game/EventNotify",
+				"MyProject/Private/BasicFrame/App/Module/Game/GameNetHandle",
+				"MyProject/Private/BasicFrame/App/Module/Game/RouteMsgHandle",
 
-                "MyProject/Private/BasicFrame/Module/App",
+				"MyProject/Private/BasicFrame/App/Frame",
 
-                "MyProject/Private/BasicFrame/Module/Common/FrameWork",
-                "MyProject/Private/BasicFrame/Module/Common/ProjectData",
-                "MyProject/Private/BasicFrame/Module/Common/Scene",
-                "MyProject/Private/BasicFrame/Module/Common/Scene/SceneState",
-                "MyProject/Private/BasicFrame/Module/Common/Scene/Being",
-                "MyProject/Private/BasicFrame/Module/Common/Scene/BeingRender",
-                "MyProject/Private/BasicFrame/Module/Common/Common",
-                "MyProject/Private/BasicFrame/Module/Common/Module",
+				"MyProject/Private/BasicFrame/App/Common/FrameWork",
+				"MyProject/Private/BasicFrame/App/Common/ProjectData",
+				"MyProject/Private/BasicFrame/App/Common/Scene",
+				"MyProject/Private/BasicFrame/App/Common/Scene/SceneState",
+				"MyProject/Private/BasicFrame/App/Common/Scene/Being",
+				"MyProject/Private/BasicFrame/App/Common/Scene/BeingRender",
+				"MyProject/Private/BasicFrame/App/Common/Common",
+				"MyProject/Private/BasicFrame/App/Common/Module",
 
                 // UI 区域
                 "MyProject/Private/BasicFrame/Ui/UiPack",
@@ -253,9 +252,7 @@ public class MyProject : ModuleRules
         PublicIncludePaths.AddRange(
             new string[] {
                 "MyProject/Public/MyEngine",
-                "MyProject/Public/MyEngine/Player",
                 "MyProject/Public/MyEngine/Ui",
-                "MyProject/Public/MyEngine/Persist",
                 // Plugin 需要单独包含头文件
                 // Relative to Engine\Plugins\Runtime\ApexDestruction\Source , 包含插件头文件
                 // DestructibleActor.h 包含目录
