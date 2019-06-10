@@ -5,11 +5,6 @@ using UnrealBuildTool;
 public class MyPluginWin : ModuleRules
 {
 	// UE4 4.22 warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h") from UE 4.21 onwards.
-	public MyPluginWin(ReadOnlyTargetRules Target) : base(Target)
-	{
-
-	}
-
 	//public MyPluginWin(TargetInfo Target)
 	public MyPluginWin(ReadOnlyTargetRules Target) : base(Target)
     {

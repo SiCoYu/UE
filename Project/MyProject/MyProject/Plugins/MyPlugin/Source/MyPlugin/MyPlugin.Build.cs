@@ -13,40 +13,9 @@ using System.IO; //路径获取需要用到IO
 public class MyPlugin : ModuleRules
 {
 	// UE4 4.22 warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h") from UE 4.21 onwards.
+	//public MyPlugin(TargetInfo Target)
+	// 4.17
 	public MyPlugin(ReadOnlyTargetRules Target) : base(Target)
-	{
-
-	}
-
-	private string ModulePath //当前TestPlugin.Build.cs文件所在的路径
-    {
-        // error CS0619: “UnrealBuildTool.RulesCompiler.GetModuleFilename(string)”已过时:“GetModuleFilename is deprecated, use the ModuleDirectory property on any ModuleRules instead to get a path to your module.”
-        //get { return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name)); }
-        get
-        {
-            return ModuleDirectory;
-        }
-    }
-
-    private string ThirdPartyPath //这个插件引用的第三方库的目录
-    {
-        get
-        {
-            return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/"));
-        }
-    }
-
-    private string MyTestLibPath //第三方库MyTestLib的目录
-    {
-        get
-        {
-            return Path.GetFullPath(Path.Combine(ThirdPartyPath, "MyTestLib"));
-        }
-    }
-
-    //public MyPlugin(TargetInfo Target)
-    // 4.17
-    public MyPlugin(ReadOnlyTargetRules Target) : base(Target)
     {
         PublicIncludePaths.AddRange( //公有文件搜索路径
             new string[] 
@@ -93,7 +62,33 @@ public class MyPlugin : ModuleRules
         //LoadThirdPartyLib(Target); //加载第三方库
     }
 
-    public bool LoadThirdPartyLib(TargetInfo Target)
+	private string ModulePath //当前TestPlugin.Build.cs文件所在的路径
+	{
+		// error CS0619: “UnrealBuildTool.RulesCompiler.GetModuleFilename(string)”已过时:“GetModuleFilename is deprecated, use the ModuleDirectory property on any ModuleRules instead to get a path to your module.”
+		//get { return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name)); }
+		get
+		{
+			return ModuleDirectory;
+		}
+	}
+
+	private string ThirdPartyPath //这个插件引用的第三方库的目录
+	{
+		get
+		{
+			return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/"));
+		}
+	}
+
+	private string MyTestLibPath //第三方库MyTestLib的目录
+	{
+		get
+		{
+			return Path.GetFullPath(Path.Combine(ThirdPartyPath, "MyTestLib"));
+		}
+	}
+
+	public bool LoadThirdPartyLib(TargetInfo Target)
     {
         bool isLibrarySupported = false;
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))//平台判断
