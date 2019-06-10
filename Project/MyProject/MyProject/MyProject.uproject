@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{499E0F57-469E-F16E-7D64-E2A938518269}",
+	"EngineAssociation": "{A5254C67-4B6C-CFF9-007D-F4ABC99222B8}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -34,13 +34,11 @@
 		{
 			"Name": "MyScriptPlugin",
 			"Enabled": true
-		}
-		,
+		},
 		{
 			"Name": "ExportAssetDependecies",
 			"Enabled": true
-		}
-		,
+		},
 		{
 			"Name": "ExportPak",
 			"Enabled": true
