@@ -1,6 +1,7 @@
 #include "MyProject.h"
 #include "PlayAnimByCppActor.h"
 #include "Components/SkeletalMeshComponent.h"	// USkeletalMeshComponent
+#include "Animation/AnimSingleNodeInstance.h"
 
 APlayAnimByCppActor::APlayAnimByCppActor(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
@@ -53,10 +54,6 @@ void APlayAnimByCppActor::PlayMontage()
 		{
 			MyAnimTimer = AnimInstance->Montage_Play(MyMontage);
 			GetWorldTimerManager().SetTimer(this->PauseMontageTimerHandle, this, &APlayAnimByCppActor::PauseMontageFunc, MyAnimTimer, false);
-
-
-			//FTimerDelegate TimerDelegate = FTimerDelegate::CreateUObject(this, &APlayAnimByCppActor::PauseMontageFunc);
-			//UtilEngineWrap::GetWorldTimerManager().SetTimer(OneSecTimerHandle, TimerDelegate, 0.01, true);
 		}
 	}
 }

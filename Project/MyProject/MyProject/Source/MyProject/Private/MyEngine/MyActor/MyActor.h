@@ -153,30 +153,76 @@ void AMyActor::SetLinearLimits(
 
 	switch (XLim)
 	{
-	case 0: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Free); break;
-	case 1: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Limited); break;
-	case 2: Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Locked); break;
+	case 0: 
+	{
+		Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Free);
+		break;
+	}
+	case 1: 
+	{
+		Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Limited);
+		break;
+	}
+	case 2: 
+	{
+		Constraint.SetLinearXMotion(ELinearConstraintMotion::LCM_Locked);
+		break;
+	}
 	}
 	switch (YLim)
 	{
-	case 0: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Free); break;
-	case 1: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Limited); break;
-	case 2: Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Locked); break;
+	case 0: 
+	{
+		Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Free);
+		break;
+	}
+	case 1: 
+	{
+		Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Limited);
+		break;
+	}
+	case 2: 
+	{
+		Constraint.SetLinearYMotion(ELinearConstraintMotion::LCM_Locked);
+		break;
+	}
 	}
 	switch (ZLim)
 	{
-	case 0: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Free); break;
-	case 1: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Limited); break;
-	case 2: Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Locked); break;
+	case 0: 
+	{
+		Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Free);
+		break;
+	}
+	case 1: 
+	{
+		Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Limited);
+		break;
+	}
+	case 2: 
+	{
+		Constraint.SetLinearZMotion(ELinearConstraintMotion::LCM_Locked);
+		break;
+	}
 	}
 
 	Constraint.SetLinearLimitSize(Size);
 
-	if (SoftLimit) Constraint.bLinearLimitSoft_DEPRECATED = 1;
-	else Constraint.bLinearLimitSoft_DEPRECATED = 0;
+	if (SoftLimit)
+	{
+		//Constraint.bLinearLimitSoft_DEPRECATED = 1;
+		Constraint.ProfileInstance.LinearLimit.bSoftConstraint = 1;
+	}
+	else
+	{
+		//Constraint.bLinearLimitSoft_DEPRECATED = 0;
+		Constraint.ProfileInstance.LinearLimit.bSoftConstraint = 1;
+	}
 
-	Constraint.LinearLimitStiffness_DEPRECATED = SoftStiffness;
-	Constraint.LinearLimitDamping_DEPRECATED = SoftDampening;
+	//Constraint.LinearLimitStiffness_DEPRECATED = SoftStiffness;
+	//Constraint.LinearLimitDamping_DEPRECATED = SoftDampening;
+	Constraint.ProfileInstance.LinearLimit.Stiffness = 1;
+	Constraint.ProfileInstance.LinearLimit.Damping = 1;
 }
  
 void AMyActor::SetAngularLimits(
@@ -193,31 +239,87 @@ void AMyActor::SetAngularLimits(
 {
 	switch (S1Lim)
 	{
-	case 0: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Free, Swing1LimitAngle); break;
-	case 1: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Limited, Swing1LimitAngle); break;
-	case 2: Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked, Swing1LimitAngle); break;
+	case 0: 
+	{
+		Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Free, Swing1LimitAngle);
+		break;
+	}
+	case 1: 
+	{
+		Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Limited, Swing1LimitAngle);
+		break;
+	}
+	case 2: 
+	{
+		Constraint.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked, Swing1LimitAngle);
+		break;
+	}
 	}
 	switch (S2Lim)
 	{
-	case 0: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Free, Swing2LimitAngle); break;
-	case 1: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Limited, Swing2LimitAngle); break;
-	case 2: Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Locked, Swing2LimitAngle); break;
+	case 0: 
+	{
+		Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Free, Swing2LimitAngle);
+		break;
+	}
+	case 1: 
+	{
+		Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Limited, Swing2LimitAngle);
+		break;
+	}
+	case 2: 
+	{
+		Constraint.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Locked, Swing2LimitAngle);
+		break;
+	}
 	}
 	switch (TLim)
 	{
-	case 0: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Free, TwistLimitAngle); break;
-	case 1: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Limited, TwistLimitAngle); break;
-	case 2: Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked, TwistLimitAngle); break;
+	case 0: 
+	{
+		Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Free, TwistLimitAngle);
+		break;
+	}
+	case 1: 
+	{
+		Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Limited, TwistLimitAngle);
+		break;
+	}
+	case 2: 
+	{
+		Constraint.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked, TwistLimitAngle);
+		break;
+	}
 	}
 
-	if (SoftSwingLimit) Constraint.bSwingLimitSoft_DEPRECATED = 1;
-	else Constraint.bSwingLimitSoft_DEPRECATED = 0;
+	if (SoftSwingLimit)
+	{
+		//Constraint.bSwingLimitSoft_DEPRECATED = 1;
+		Constraint.ProfileInstance.ConeLimit.Swing1Motion = ACM_Limited;
+	}
+	else
+	{
+		//Constraint.bSwingLimitSoft_DEPRECATED = 0;
+		Constraint.ProfileInstance.ConeLimit.Swing1Motion = ACM_Free;
+	}
 
-	if (SoftTwistLimit) Constraint.bTwistLimitSoft_DEPRECATED = 1;
-	else Constraint.bTwistLimitSoft_DEPRECATED = 0;
+	if (SoftTwistLimit)
+	{
+		//Constraint.bTwistLimitSoft_DEPRECATED = 1;
+		Constraint.ProfileInstance.TwistLimit.bSoftConstraint = 1;
+	}
+	else
+	{
+		//Constraint.bTwistLimitSoft_DEPRECATED = 0;
+		Constraint.ProfileInstance.TwistLimit.bSoftConstraint = 0;
+	}
 
-	Constraint.SwingLimitStiffness_DEPRECATED = SwingStiff;
-	Constraint.SwingLimitDamping_DEPRECATED = SwingDamp;
-	Constraint.TwistLimitStiffness_DEPRECATED = TwistStiff;
-	Constraint.TwistLimitDamping_DEPRECATED = TwistDamp;
+	//Constraint.SwingLimitStiffness_DEPRECATED = SwingStiff;
+	//Constraint.SwingLimitDamping_DEPRECATED = SwingDamp;
+	//Constraint.TwistLimitStiffness_DEPRECATED = TwistStiff;
+	//Constraint.TwistLimitDamping_DEPRECATED = TwistDamp;
+	Constraint.ProfileInstance.ConeLimit.Stiffness = SwingStiff;
+	Constraint.ProfileInstance.ConeLimit.Damping = SwingDamp;
+	Constraint.ProfileInstance.TwistLimit.Stiffness = TwistStiff;
+	Constraint.ProfileInstance.TwistLimit.Damping = TwistDamp;
 }
