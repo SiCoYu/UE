@@ -5,6 +5,7 @@
 #include "Runtime/Engine/Classes/Animation/SkeletalMeshActor.h"
 #include "Runtime/Engine/Classes/Animation/BlendSpace1D.h"
 #include "Runtime/Engine/Classes/Animation/AnimSequence.h"
+#include "Animation/AnimMontage.h"
 #include "PlayAnimByCppActor.generated.h"
 
 /**
@@ -15,6 +16,7 @@
 class UBlendSpace1D;
 class UAnimSequence;
 class UStaticMeshComponent;
+class UAnimMontage;
 
 UCLASS(config = Game)
 class APlayAnimByCppActor : public AActor
@@ -23,6 +25,8 @@ class APlayAnimByCppActor : public AActor
 
 private:
 	UStaticMeshComponent* MyStaticMesh;
+	float MyAnimTimer;
+	FTimerHandle PauseMontageTimerHandle;
 
 public:
 	// LogCompile: Error: BlueprintReadOnly should not be used on private members
@@ -33,6 +37,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Anims")
 	UAnimSequence* MyAnimSequence;
 
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Anims")
+	UAnimMontage* MyMontage;
+
 public:
 	APlayAnimByCppActor(const FObjectInitializer& ObjectInitializer);
 
@@ -40,6 +47,7 @@ public:
 	void PlayBlendSpaceAnim();
 	void PlayAnimSequence();
 	void PlayMontage();
+	void PauseMontageFunc();
 
 	void SetAnimInstanceClass(UClass* NewClass);
 };
