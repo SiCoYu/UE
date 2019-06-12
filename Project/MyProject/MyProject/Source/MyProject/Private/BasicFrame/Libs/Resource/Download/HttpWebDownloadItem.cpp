@@ -21,8 +21,8 @@ void HttpWebDownloadItem::load()
     //Ctx.mInstance.mCoroutineMgr.StartCoroutine(coroutWebDown());
     //Ctx.mInstance.mTaskQueue.push(this);
 
-	mHttpWeb = new HttpWeb();
-	mHttpWeb->download("");
+	this->mHttpWeb = new HttpWeb();
+	this->mHttpWeb->download("");
 }
 
 // 线程下载
