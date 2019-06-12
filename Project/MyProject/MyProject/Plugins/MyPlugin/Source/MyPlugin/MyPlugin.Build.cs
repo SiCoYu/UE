@@ -12,12 +12,16 @@ using System.IO; //路径获取需要用到IO
 // https://wiki.unrealengine.com/An_Introduction_to_UE4_Plugins
 public class MyPlugin : ModuleRules
 {
-	// UE4 4.22 warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h") from UE 4.21 onwards.
 	//public MyPlugin(TargetInfo Target)
 	// 4.17
 	public MyPlugin(ReadOnlyTargetRules Target) : base(Target)
     {
-        PublicIncludePaths.AddRange( //公有文件搜索路径
+		// To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
+		//this.PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		// UE4 4.22 warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h") from UE 4.21 onwards.
+		this.PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h";
+		PublicIncludePaths.AddRange( //公有文件搜索路径
             new string[] 
             {
                 "MyPlugin/Public"

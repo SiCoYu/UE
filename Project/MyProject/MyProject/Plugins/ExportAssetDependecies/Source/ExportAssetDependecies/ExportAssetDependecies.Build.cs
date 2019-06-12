@@ -9,6 +9,7 @@ public class ExportAssetDependecies : ModuleRules
 	{
 		// UE4 4.22  warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Public/ExportAssetDependecies.h") from UE 4.21 onwards.
 
+		// To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
 
 		PublicIncludePaths.AddRange(
 			new string[] {

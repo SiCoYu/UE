@@ -22,11 +22,15 @@ public class MyProject : ModuleRules
     // 4.17
     public MyProject(ReadOnlyTargetRules Target) : base(Target)
     {
-        // To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
-        //this.PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+		// To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
+		//this.PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        // UE4 4.17
-        this.bUseRTTI = true;
+		// UE4 4.22
+		// warning: Modules must specify an explicit precompiled header (eg.PrivatePCHHeaderFile = "Public/MyEngine/MyProject.h") from UE 4.21 onwards.
+		this.PrivatePCHHeaderFile = "Public/MyEngine/MyProject.h";
+
+		// UE4 4.17
+		this.bUseRTTI = true;
         // warning CS0618: ¡°UnrealBuildTool.ModuleRules.UEBuildConfiguration¡±ÒÑ¹ýÊ±:¡°The UEBuildConfiguration alias is deprecated in 4.18. Set the same properties on the ReadOnlyTargetRules instance passed into the ModuleRules constructor instead.¡±
         // UE 4.18
 

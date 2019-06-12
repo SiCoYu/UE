@@ -4,11 +4,15 @@ using UnrealBuildTool;
 
 public class MyPluginWin : ModuleRules
 {
-	// UE4 4.22 warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h") from UE 4.21 onwards.
 	//public MyPluginWin(TargetInfo Target)
 	public MyPluginWin(ReadOnlyTargetRules Target) : base(Target)
     {
-		
+		// To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
+		//this.PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		// UE4 4.22 warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h") from UE 4.21 onwards.
+		this.PrivatePCHHeaderFile = "Private/MyPluginWinPrivatePCH.h";
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				"MyPluginWin/Public"
