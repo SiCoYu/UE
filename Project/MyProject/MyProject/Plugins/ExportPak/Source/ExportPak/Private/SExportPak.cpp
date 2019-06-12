@@ -1,3 +1,4 @@
+#include "ExportPakPrivatePCH.h"
 #include "SExportPak.h"
 #include "Styling/SlateTypes.h"
 #include "Widgets/Layout/SBorder.h"

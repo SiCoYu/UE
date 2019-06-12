@@ -1,6 +1,6 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
-
-#include "ExportAssetDependecies.h"
+#include "ExportAssetDependeciesPrivatePCH.h"
+//#include "ExportAssetDependecies.h"
 #include "ExportAssetDependeciesStyle.h"
 #include "ExportAssetDependeciesCommands.h"
 
@@ -266,7 +266,9 @@ void FExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FDepe
     auto JsonWirter = TJsonWriterFactory<>::Create(&OutputString);
     FJsonSerializer::Serialize(RootJsonObject.ToSharedRef(), JsonWirter);
 
-    FString ResultFileFilename = FPaths::Combine(FPaths::GameSavedDir(), TEXT("ExportAssetDependecies"), TEXT("/AssetDependencies.json"));
+	// UE$ 4.22 warning C4996: 'FPaths::GameSavedDir': FPaths::GameSavedDir() has been superseded by FPaths::ProjectSavedDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+    //FString ResultFileFilename = FPaths::Combine(FPaths::GameSavedDir(), TEXT("ExportAssetDependecies"), TEXT("/AssetDependencies.json"));
+	FString ResultFileFilename = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("ExportAssetDependecies"), TEXT("/AssetDependencies.json"));
     ResultFileFilename = FPaths::ConvertRelativePathToFull(ResultFileFilename);
 
     // Attention to FFileHelper::EEncodingOptions::ForceUTF8 here. 

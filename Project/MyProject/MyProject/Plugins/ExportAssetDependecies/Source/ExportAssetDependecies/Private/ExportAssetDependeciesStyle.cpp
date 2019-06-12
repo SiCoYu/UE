@@ -1,6 +1,6 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
-
-#include "ExportAssetDependecies.h"
+#include "ExportAssetDependeciesPrivatePCH.h"
+//#include "ExportAssetDependecies.h"
 
 #include "ExportAssetDependeciesStyle.h"
 #include "SlateGameResources.h"

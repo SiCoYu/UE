@@ -7,9 +7,10 @@ public class ExportPak : ModuleRules
 	public ExportPak(ReadOnlyTargetRules Target) : base(Target)
 	{
 		// To compile this module without implicit precompiled headers, add "PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;" to MyProject.build.cs.
-		this.PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;;
+		//this.PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;;
 
 		// UE4 4.22 warning : Modules must specify an explicit precompiled header (eg. PrivatePCHHeaderFile = "Private/MyPluginPrivatePCH.h") from UE 4.21 onwards.
+		this.PrivatePCHHeaderFile = "Private/ExportPakPrivatePCH.h";
 
 		PublicIncludePaths.AddRange(
 			new string[] {
