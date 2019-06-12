@@ -89,7 +89,7 @@ void FExportAssetDependeciesModule::ShutdownModule()
 
 void FExportAssetDependeciesModule::PluginButtonClicked()
 {
-    // TODO ArcEcho
+    // TODO
     // Should check whether the game content is dirty.
 
     // If loading assets
@@ -131,7 +131,7 @@ void FExportAssetDependeciesModule::ExportAssetDependecies()
         return;
     }
 
-    // TODO ArcEcho
+    // TODO
     // 1.Check input paths validation
     // 2.Check it has valid package path.
     if (CurrentSettings->PackagesToExport.Num() == 0)

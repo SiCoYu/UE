@@ -310,7 +310,7 @@ void GenerateIndividualPakFiles(const TArray<FString>& PackagesToHandle, const F
 		FString ProjectName = FPaths::GetBaseFilename(FPaths::GetProjectFilePath());
 		FString IntermediateDirectory = FPaths::GetPath(TargetAssetFilepath).Replace(*FPaths::ProjectDir(), TEXT(""), ESearchCase::CaseSensitive);
 
-		// TODO ArcEcho: Now it is hard-coded to WindowsNoEditor
+		// TODO: Now it is hard-coded to WindowsNoEditor
 		FString TargetCookedAssetDirectory = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("Cooked/WindowsNoEditor"), ProjectName, IntermediateDirectory);
 
 		FCookedAssetFileVisitor CookedAssetFileVisitor(Filename);
@@ -446,7 +446,7 @@ void GenerateBatchPakFiles(const TArray<FString>& PackagesToHandle, const FStrin
 		FString ProjectName = FPaths::GetBaseFilename(FPaths::GetProjectFilePath());
 		FString IntermediateDirectory = FPaths::GetPath(TargetAssetFilepath).Replace(*FPaths::ProjectDir(), TEXT(""), ESearchCase::CaseSensitive);
 
-		// TODO ArcEcho: Now it is hard-coded to WindowsNoEditor
+		// TODO: Now it is hard-coded to WindowsNoEditor
 		FString TargetCookedAssetDirectory = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("Cooked/WindowsNoEditor"), ProjectName, IntermediateDirectory);
 
 		FCookedAssetFileVisitor CookedAssetFileVisitor(Filename);
