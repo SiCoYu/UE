@@ -67,8 +67,11 @@ FText UAnimGraphNode_TranslateWith::GetNodeTitle(ENodeTitleType::Type TitleType)
 void UAnimGraphNode_TranslateWith::CreateOutputPins()
 {
 	const UAnimationGraphSchema* Schema = GetDefault<UAnimationGraphSchema>();
+	// ref Engine\Source\Runtime\Engine\Private\EdGraph\EdGraphNode.cpp
+	// return CreatePin(Dir, PinCategory, PinSubCategory, PinSubCategoryObject, PinName, FEdGraphPinType::ToPinContainerType(bIsArray, bIsSet, bIsMap), bIsReference, bIsConst, Index, ValueTerminalType);
 	// UE 4.19.2  warning C4996: 'UEdGraphNode::CreatePin': Use version that supplies Pin Category, SubCategory, and Name as an FName and uses PinContainerType instead of separate booleans for array, set, and map. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	CreatePin(EGPD_Output, Schema->PC_Struct, TEXT(""), FComponentSpacePoseLink::StaticStruct(), /*bIsArray=*/ false, /*bIsReference=*/ false, TEXT("Pose"));
+	//CreatePin(EGPD_Output, Schema->PC_Struct, TEXT(""), FComponentSpacePoseLink::StaticStruct(), TEXT("Pose"), FEdGraphPinType::ToPinContainerType(false, false, false));
 }
 
 #undef LOCTEXT_NAMESPACE
