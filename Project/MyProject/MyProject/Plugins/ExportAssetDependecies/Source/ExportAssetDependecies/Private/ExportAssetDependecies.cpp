@@ -158,7 +158,10 @@ void FExportAssetDependeciesModule::ExportAssetDependecies()
     {
         FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry"));
 
-        FStringAssetReference AssetRef = PackageFilePath.FilePath;
+		// UE_DEPRECATED(4.18, "FStringAssetReference was renamed to FSoftObjectPath as it is now not always a string and can also refer to a subobject")
+		// Engine\Source\Runtime\CoreUObject\Public\UObject\SoftObjectPath.h
+        //FStringAssetReference AssetRef = PackageFilePath.FilePath;
+		FSoftObjectPath AssetRef = PackageFilePath.FilePath;
         FString TargetLongPackageName = AssetRef.GetLongPackageName();
 
 
