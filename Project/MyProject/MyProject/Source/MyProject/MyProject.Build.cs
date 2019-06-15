@@ -285,7 +285,8 @@ public class MyProject : ModuleRules
                 //"UnrealEd", // UUnrealEdEngine \ UEditorEngine
                 "ApplicationCore",  // "HAL/PlatformApplicationMisc.h" 中的 FPlatformApplicationMisc::ClipboardCopy
                 "ScriptPlugin",     // ScriptPlugin 插件
-            }
+				"AssetRegistry",	// AssetDataTagMap.h
+			}
         );
 
         // 添加需要包含的 Private 模块，包括头文件目录，库文件目录和库文件名字
