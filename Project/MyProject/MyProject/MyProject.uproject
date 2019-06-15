@@ -45,6 +45,6 @@
 		}
 	],
 	"AdditionalPluginDirectories": [
-		"../../../../../../../../MyProject/Plugins"
+		"MyProject/Plugins"
 	]
 }
