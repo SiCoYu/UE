@@ -43,8 +43,10 @@ FAssetData UObjectLibraryLoad::GetAssetDataFromPath()
 		//{
 		//	return AssetData;
 		//}
-
-		const FFindTagResult FoundTypeNameString = AssetData.TagsAndValues.FindTag(GET_MEMBER_NAME_CHECKED(UStaticMesh, bAutoComputeLODScreenSize));
+		// Engine\Source\Runtime\AssetRegistry\Public\AssetDataTagMap.h
+		// #if !USE_COMPACT_ASSET_REGISTRY
+		// struct FFindTagResult
+		const FAssetDataTagMapSharedView::FFindTagResult FoundTypeNameString = AssetData.TagsAndValues.FindTag(GET_MEMBER_NAME_CHECKED(UStaticMesh, bAutoComputeLODScreenSize));
 
 		if (FoundTypeNameString.GetValue().Contains(TEXT("FooType")))
 		{
