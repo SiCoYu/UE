@@ -15,7 +15,9 @@ AModularPawn::AModularPawn(const class FObjectInitializer& PCIP)
 		Body->AlwaysLoadOnClient = true;
 		Body->AlwaysLoadOnServer = true;
 		Body->bOwnerNoSee = false;
-		Body->MeshComponentUpdateFlag = EMeshComponentUpdateFlag::AlwaysTickPose;
+		// UE4 4.22  warning C4996: 'USkinnedMeshComponent::MeshComponentUpdateFlag': MeshComponentUpdateFlag has been renamed VisibilityBasedAnimTickOption Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//Body->MeshComponentUpdateFlag = EMeshComponentUpdateFlag::AlwaysTickPose;
+		Body->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPose;
 		Body->bCastDynamicShadow = true;
 		Body->PrimaryComponentTick.TickGroup = TG_PrePhysics;
 		// USkinnedMeshComponent::bChartDistanceFactor': bChartDistanceFactor is no longer useful, please remove references to it Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
@@ -40,7 +42,9 @@ AModularPawn::AModularPawn(const class FObjectInitializer& PCIP)
 		Legs->AlwaysLoadOnClient = true;
 		Legs->AlwaysLoadOnServer = true;
 		Legs->bOwnerNoSee = false;
-		Legs->MeshComponentUpdateFlag = EMeshComponentUpdateFlag::AlwaysTickPose;
+		// UE4 4.22 warning C4996: 'USkinnedMeshComponent::MeshComponentUpdateFlag': MeshComponentUpdateFlag has been renamed VisibilityBasedAnimTickOption Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+		//Legs->MeshComponentUpdateFlag = EMeshComponentUpdateFlag::AlwaysTickPose;
+		Legs->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPose;
 		Legs->bCastDynamicShadow = true;
 		Legs->PrimaryComponentTick.TickGroup = TG_PrePhysics;
 		// 'USkinnedMeshComponent::bChartDistanceFactor': bChartDistanceFactor is no longer useful, please remove references to it Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.

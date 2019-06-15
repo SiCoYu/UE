@@ -1,5 +1,6 @@
 #include "MyProject.h"
 #include "ObjectLibraryLoad.h"
+#include "AssetDataTagMap.h"	// AssetRegistry Module
 
 UObjectLibraryLoad::UObjectLibraryLoad(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
@@ -34,10 +35,18 @@ FAssetData UObjectLibraryLoad::GetAssetDataFromPath()
 
 		// 这一行原来是这样的，但是不知道这么修改， UAssetObject 是一个类型， TypeName 是类型中的一个属性
 		//const FString* FoundTypeNameString = AssetData.TagsAndValues.Find(GET_MEMBER_NAME_CHECKED(UAssetObject, TypeName));
+		// UE4 4.22 warning C4996: 'FAssetDataTagMapSharedView::Find': FAssetDataTagMapSharedView::Find is not compatible with USE_COMPACT_ASSET_REGISTRY, use FindTag instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 		// 静态成员检查
-		const FString* FoundTypeNameString = AssetData.TagsAndValues.Find(GET_MEMBER_NAME_CHECKED(UStaticMesh, bAutoComputeLODScreenSize));
+		//const FString* FoundTypeNameString = AssetData.TagsAndValues.Find(GET_MEMBER_NAME_CHECKED(UStaticMesh, bAutoComputeLODScreenSize));
 
-		if (FoundTypeNameString && FoundTypeNameString->Contains(TEXT("FooType")))
+		//if (FoundTypeNameString && FoundTypeNameString->Contains(TEXT("FooType")))
+		//{
+		//	return AssetData;
+		//}
+
+		const FFindTagResult FoundTypeNameString = AssetData.TagsAndValues.FindTag(GET_MEMBER_NAME_CHECKED(UStaticMesh, bAutoComputeLODScreenSize));
+
+		if (FoundTypeNameString.GetValue().Contains(TEXT("FooType")))
 		{
 			return AssetData;
 		}

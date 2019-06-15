@@ -53,8 +53,9 @@ void MPakFileSystem::testLoadPak()
 		AssetShortName.Split(TEXT("."), &LeftStr, &RightStr);
 		AssetName = TEXT("/Engine/") + LeftStr + TEXT(".") + LeftStr;    //我们加载的时候用的是这个路径
 		FStringAssetReference reference = AssetName;
+		// UE4 4.22 warning C4996: 'FStreamableManager::SynchronousLoad': Call LoadSynchronous with bManageActiveHandle=true instead if you want the manager to keep the handle alive Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 		//加载UObject
-		UObject* LoadObject = StreamableManager.SynchronousLoad(reference);
+		UObject* LoadObject = StreamableManager.LoadSynchronous(reference, true);
 		if (LoadObject != nullptr)
 		{
 			//UE_LOG(LogClass, Log, TEXT("Object Load Success..."));

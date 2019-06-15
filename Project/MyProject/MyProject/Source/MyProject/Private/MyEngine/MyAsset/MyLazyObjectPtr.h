@@ -1,6 +1,8 @@
 #pragma once
 
-#include "UObject/UObject.h"	// UObject
+// UE4 4.22 warning C4996: 'UObjectHeaderDeprecatedWarning': Including UObject.h has been deprecated. Please include Object.h instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+//#include "UObject/UObject.h"	// UObject
+#include "UObject/Object.h"	// UObject
 #include "UObject/LazyObjectPtr.h"	// FLazyObjectPtr
 #include "UObject/PersistentObjectPtr.h"		// TPersistentObjectPtr
 
