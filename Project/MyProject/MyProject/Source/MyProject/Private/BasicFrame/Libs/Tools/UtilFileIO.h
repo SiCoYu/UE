@@ -7,6 +7,7 @@
 #include "IPlatformFileSandboxWrapper.h"	// FSandboxPlatformFile
 #include "UtilStr.h"
 #include "PlatformDefine.h"
+#include "GenericPlatform/GenericPlatformFile.h"	// FDirectoryVisitor
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -45,8 +46,13 @@ public:
 		std::string& path3 = UtilStr::msDefaultStr
 	);
 	static bool existFile(std::string& fullFilePath);
+	static bool existFile(std::string& fullFilePath);
 	static bool deleteFile(std::string& fullFilePath);
 	static bool DeleteFile(FString& absoluteFilePath);
+	static bool IsFile(FString& absoluteFilePath);
+	static bool IsDirectory(FString& absoluteFilePath);
+	static void Normalize(FString& path);
+
 	// 获取扩展名
 	static std::string getFileExt(std::string& path);
 	// 获取文件名字，没有路径，但是有扩展名字
@@ -75,6 +81,13 @@ public:
 
 	static bool CreateDirectory(const FString& absoluteFilePath, bool isRecurse = false);
 	static bool createDirectory(std::string& absoluteFilePath, bool isRecurse = false);
+	static void traverseDirectory(
+		FString& absoluteSourcePath,
+		FString& absoluteDestinationPath
+		IPlatformFile::FDirectoryVisitor& fileHandle,
+		bool isRecurse = false,
+		bool isCreateDestPath = false
+	);
 };
 
 MY_END_NAMESPACE

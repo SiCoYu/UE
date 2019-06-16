@@ -197,6 +197,21 @@ bool UtilFileIO::DeleteFile(FString& absoluteFilePath)
 	return ret;
 }
 
+bool UtilFileIO::IsFile(FString& absoluteFilePath)
+{
+	return FPaths::FileExists(absoluteFilePath);
+}
+
+bool UtilFileIO::IsDirectory(FString& absoluteFilePath)
+{
+	return FPaths::DirectoryExists(absoluteFilePath);
+}
+
+void UtilFileIO::Normalize(FString& path)
+{
+	return FPaths::NormalizeFilename(path);
+}
+
 // 获取扩展名
 std::string UtilFileIO::getFileExt(std::string& path)
 {
@@ -504,6 +519,28 @@ bool UtilFileIO::createDirectory(std::string& path, bool isRecurse)
 {
 	const FString& tmpPath = UtilStr::ConvStdStr2FString(path);
 	return UtilFileIO::CreateDirectory(tmpPath, isRecurse);
+}
+
+void UtilFileIO::traverseDirectory(
+	FString& absoluteSourcePath,
+	FString& absoluteDestinationPath
+	IPlatformFile::FDirectoryVisitor& fileHandle,
+	bool isRecurse = false,
+	bool isCreateDestPath = false
+)
+{
+	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+	if (PlatformFile.DirectoryExists(*absoluteSourcePath))
+	{
+		if (!isRecurse)
+		{
+			PlatformFile.IterateDirectory(*absoluteSourcePath, fileHandle);
+		}
+		else
+		{
+			PlatformFile.IterateDirectoryRecursively(*absoluteSourcePath, fileHandle);
+		}
+	}
 }
 
 MY_END_NAMESPACE
