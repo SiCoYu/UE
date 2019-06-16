@@ -563,11 +563,11 @@ bool UtilFileIO::GetAllFile(FString& absoluteSourcePath, TArray<FString>& Filena
 		absoluteDestinationPath,
 		MakeMyTraverseDirectoryDelegate(
 			directoryVisitorHandle, 
-			MyDirectoryVisitorHandle::OnVisitFileHandle
+			&MyDirectoryVisitorHandle::OnVisitFileHandle
 		),
 		MakeMyTraverseDirectoryDelegate(
 			directoryVisitorHandle,
-			MyDirectoryVisitorHandle::OnVisitDirectoryHandle
+			&MyDirectoryVisitorHandle::OnVisitDirectoryHandle
 		),
 		Recursive
 	);
@@ -577,17 +577,17 @@ bool UtilFileIO::GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& D
 {
 	FString absoluteDestinationPath;
 
-	MyDirectoryVisitorHandle directoryVisitorHandle(absoluteSourcePath);
+	MyDirectoryVisitorHandle directoryVisitorHandle(DirsOut);
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
 		MakeMyTraverseDirectoryDelegate(
 			directoryVisitorHandle,
-			MyDirectoryVisitorHandle::OnVisitFileHandle
+			&MyDirectoryVisitorHandle::OnVisitFileHandle
 		),
 		MakeMyTraverseDirectoryDelegate(
 			directoryVisitorHandle,
-			MyDirectoryVisitorHandle::OnVisitDirectoryHandle
+			&MyDirectoryVisitorHandle::OnVisitDirectoryHandle
 		),
 		Recursive
 	);

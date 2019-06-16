@@ -3,8 +3,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+// error C2059: syntax error: 'this'
+// error C2530: 'MyNS::MyDirectoryVisitorHandle::mFileArray': references must be initialized
 MyDirectoryVisitorHandle::MyDirectoryVisitorHandle(TArray<FString>& outArray)
-	: this->mFileArray(outArray)
+//	: this->mFileArray(outArray)
+	: mFileArray(outArray)
 {
 
 }
