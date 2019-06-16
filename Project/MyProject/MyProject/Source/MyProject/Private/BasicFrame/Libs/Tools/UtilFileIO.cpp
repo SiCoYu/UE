@@ -559,7 +559,7 @@ bool UtilFileIO::GetAllFile(FString& absoluteSourcePath, TArray<FString>& Filena
 {
 	FString absoluteDestinationPath;
 
-	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = My_NEW MyDirectoryVisitorHandle(DirsOut);
+	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = MY_NEW MyDirectoryVisitorHandle(FilenamesOut);
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
