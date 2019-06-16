@@ -577,7 +577,7 @@ bool UtilFileIO::GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& D
 {
 	FString absoluteDestinationPath;
 
-	MyDirectoryVisitorHandle directoryVisitorHandle(FilenamesOut);
+	MyDirectoryVisitorHandle directoryVisitorHandle(absoluteSourcePath);
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
