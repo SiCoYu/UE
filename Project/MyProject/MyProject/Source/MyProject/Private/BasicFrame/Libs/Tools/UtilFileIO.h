@@ -27,6 +27,7 @@ public:
 	static FString RootDir(bool isAbsPath = true);
 	static FString GameDir(bool isAbsPath = true);
 	static FString GameContentDir(bool isAbsPath = true);
+	static FString GamePluginsDir();
 
 	static FString EngineContentDir(bool isAbsPath = true);
 	static FString GameSavedDir(bool isAbsPath = true);
@@ -92,6 +93,7 @@ public:
 	);
 	static bool GetAllFile(FString& absoluteSourcePath, TArray<FString>& FilenamesOut, bool Recursive = false, const FString& FilterByExtension = "");
 	static bool GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& DirsOut, bool Recursive = false, const FString& ContainsStr = "");
+	static bool LoadFileToString(FString& absolutePath, FString& resultStr);
 };
 
 MY_END_NAMESPACE

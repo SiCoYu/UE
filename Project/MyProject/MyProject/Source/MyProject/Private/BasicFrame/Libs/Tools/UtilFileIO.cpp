@@ -132,6 +132,11 @@ FString UtilFileIO::GameLogDir(bool isAbsPath)
 	return ThePath;
 }
 
+FString UtilFileIO::GamePluginsDir()
+{
+	return FPaths::GamePluginsDir();
+}
+
 FString UtilFileIO::GetFilenameOnDisk(FString FullFilename)
 {
 	IFileManager& FileManager = IFileManager::Get();
@@ -581,7 +586,7 @@ bool UtilFileIO::GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& D
 {
 	FString absoluteDestinationPath;
 
-	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = My_NEW MyDirectoryVisitorHandle(DirsOut);
+	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = MY_NEW MyDirectoryVisitorHandle(DirsOut);
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
@@ -597,6 +602,24 @@ bool UtilFileIO::GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& D
 	);
 
 	return true;
+}
+
+bool UtilFileIO::LoadFileToString(FString& absolutePath, FString& resultStr)
+{
+	bool ret = false;
+
+	if (!absolutePath.IsEmpty())
+	{
+		if (FPaths::FileExists(absolutePath))
+		{
+			if (FFileHelper::LoadFileToString(resultStr, *absolutePath))
+			{
+				ret = true;
+			}
+		}
+	}
+
+	return ret;
 }
 
 MY_END_NAMESPACE
