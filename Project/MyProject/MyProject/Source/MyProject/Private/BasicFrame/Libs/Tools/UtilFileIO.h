@@ -8,6 +8,7 @@
 #include "UtilStr.h"
 #include "PlatformDefine.h"
 #include "GenericPlatform/GenericPlatformFile.h"	// FDirectoryVisitor
+#include "MyFileDelegate.h"		// MyTraverseDirectoryDelegate
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -46,7 +47,7 @@ public:
 		std::string& path3 = UtilStr::msDefaultStr
 	);
 	static bool existFile(std::string& fullFilePath);
-	static bool existFile(std::string& fullFilePath);
+	static bool ExistFile(FString& fullFilePath);
 	static bool deleteFile(std::string& fullFilePath);
 	static bool DeleteFile(FString& absoluteFilePath);
 	static bool IsFile(FString& absoluteFilePath);
@@ -83,8 +84,9 @@ public:
 	static bool createDirectory(std::string& absoluteFilePath, bool isRecurse = false);
 	static void traverseDirectory(
 		FString& absoluteSourcePath,
-		FString& absoluteDestinationPath
-		IPlatformFile::FDirectoryVisitor& fileHandle,
+		FString& absoluteDestinationPath, 
+		MyTraverseDirectoryDelegate dirHandle, 
+		MyTraverseDirectoryDelegate fileHandle,
 		bool isRecurse = false,
 		bool isCreateDestPath = false
 	);

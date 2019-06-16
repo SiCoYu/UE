@@ -8,6 +8,7 @@
 #include "Prequisites.h"
 #include "UtilStr.h"
 #include "Symbolic.h"
+#include "MyDirectoryVisitor.h" // MyDirectoryVisitor
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -181,7 +182,12 @@ std::string UtilFileIO::combine(
 
 bool UtilFileIO::existFile(std::string& fullFilePath)
 {
-	return FileExists(fullFilePath);
+	return UtilFileIO::FileExists(fullFilePath);
+}
+
+bool UtilFileIO::ExistFile(FString& fullFilePath)
+{
+	return FPaths::FileExists(fullFilePath);
 }
 
 bool UtilFileIO::deleteFile(std::string& fullFilePath)
@@ -467,7 +473,7 @@ int64 UtilFileIO::FileSize(const FString& absoluteFilePath)
 
 	if (!FPlatformFileManager::Get().GetPlatformFile().FileExists(*absoluteFilePath))
 	{
-		int64 FileSize = FPlatformFileManager::Get().GetPlatformFile().FileSize(*absoluteFilePath);
+		FileSize = FPlatformFileManager::Get().GetPlatformFile().FileSize(*absoluteFilePath);
 	}
 
 	return FileSize;
@@ -523,22 +529,24 @@ bool UtilFileIO::createDirectory(std::string& path, bool isRecurse)
 
 void UtilFileIO::traverseDirectory(
 	FString& absoluteSourcePath,
-	FString& absoluteDestinationPath
-	IPlatformFile::FDirectoryVisitor& fileHandle,
-	bool isRecurse = false,
-	bool isCreateDestPath = false
+	FString& absoluteDestinationPath, 
+	MyTraverseDirectoryDelegate dirHandle, 
+	MyTraverseDirectoryDelegate fileHandle,
+	bool isRecurse,
+	bool isCreateDestPath
 )
 {
 	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
 	if (PlatformFile.DirectoryExists(*absoluteSourcePath))
 	{
+		MyDirectoryVisitor directoryVisitor = MyDirectoryVisitor(fileHandle, dirHandle);
 		if (!isRecurse)
 		{
-			PlatformFile.IterateDirectory(*absoluteSourcePath, fileHandle);
+			PlatformFile.IterateDirectory(*absoluteSourcePath, directoryVisitor);
 		}
 		else
 		{
-			PlatformFile.IterateDirectoryRecursively(*absoluteSourcePath, fileHandle);
+			PlatformFile.IterateDirectoryRecursively(*absoluteSourcePath, directoryVisitor);
 		}
 	}
 }
