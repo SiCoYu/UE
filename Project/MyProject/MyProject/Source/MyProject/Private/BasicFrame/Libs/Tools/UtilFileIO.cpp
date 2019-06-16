@@ -11,6 +11,7 @@
 #include "MyDirectoryVisitor.h" // MyDirectoryVisitor
 #include "MyDirectoryVisitorHandle.h"
 #include "MyFileDelegate.h"
+#include "MyScopePointer.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -557,40 +558,44 @@ bool UtilFileIO::GetAllFile(FString& absoluteSourcePath, TArray<FString>& Filena
 {
 	FString absoluteDestinationPath;
 
-	MyDirectoryVisitorHandle directoryVisitorHandle(FilenamesOut);
+	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = My_NEW MyDirectoryVisitorHandle(DirsOut);
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
 		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
-			directoryVisitorHandle, 
+			directoryVisitorHandle.get(), 
 			&MyDirectoryVisitorHandle::OnVisitFileHandle
 		),
 		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
-			directoryVisitorHandle,
+			directoryVisitorHandle.get(),
 			&MyDirectoryVisitorHandle::OnVisitDirectoryHandle
 		),
 		Recursive
 	);
+
+	return true;
 }
 
 bool UtilFileIO::GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& DirsOut, bool Recursive, const FString& ContainsStr)
 {
 	FString absoluteDestinationPath;
 
-	MyDirectoryVisitorHandle directoryVisitorHandle(DirsOut);
+	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = My_NEW MyDirectoryVisitorHandle(DirsOut);
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
 		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
-			directoryVisitorHandle,
+			directoryVisitorHandle.get(),
 			&MyDirectoryVisitorHandle::OnVisitFileHandle
 		),
 		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
-			directoryVisitorHandle,
+			directoryVisitorHandle.get(),
 			&MyDirectoryVisitorHandle::OnVisitDirectoryHandle
 		),
 		Recursive
 	);
+
+	return true;
 }
 
 MY_END_NAMESPACE
