@@ -12,6 +12,7 @@
 #include "MyDirectoryVisitorHandle.h"
 #include "MyFileDelegate.h"
 #include "MyScopePointer.h"
+#include "MyMemoryAllocatorConfig.h"	// MY_NEW
 
 MY_BEGIN_NAMESPACE(MyNS)
 
