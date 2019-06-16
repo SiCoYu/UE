@@ -10,6 +10,9 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+/**
+ * @ref https://wiki.unrealengine.com/File_Management,_Create_Folders,_Delete_Files,_and_More
+ */
 class UtilFileIO
 {
 public:
@@ -41,8 +44,9 @@ public:
 		std::string& path2 = UtilStr::msDefaultStr,
 		std::string& path3 = UtilStr::msDefaultStr
 	);
-	static bool existFile(std::string& fullFilPath);
-	static bool deleteFile(std::string& fullFilPath);
+	static bool existFile(std::string& fullFilePath);
+	static bool deleteFile(std::string& fullFilePath);
+	static bool DeleteFile(FString& absoluteFilePath);
 	// 获取扩展名
 	static std::string getFileExt(std::string& path);
 	// 获取文件名字，没有路径，但是有扩展名字
@@ -60,6 +64,17 @@ public:
 	// 转换 StreamingAssets 到 Mount 目录
 	static FString convStreamingAssetsPathToMountPath(FString& streamingAssetsPath);
 	static bool isBluePrints(FString& filePath);
+
+	// Directory
+	static bool DirectoryExists(const FString& absoluteFilePath);
+	static bool existDirectory(std::string& absoluteFilePath);
+	static bool CheckOrCreateDirectory(const FString& absoluteFilePath);
+	static int64 FileSize(const FString& absoluteFilePath);
+	static bool MoveFile(const FString& absoluteSourcePath, const FString& absoluteDestinationPath);
+	static bool RenameFile(const FString& absoluteSourcePath, const FString& absoluteDestinationPath);
+
+	static bool CreateDirectory(const FString& absoluteFilePath, bool isRecurse = false);
+	static bool createDirectory(std::string& absoluteFilePath, bool isRecurse = false);
 };
 
 MY_END_NAMESPACE
