@@ -90,6 +90,8 @@ public:
 		bool isRecurse = false,
 		bool isCreateDestPath = false
 	);
+	static bool GetAllFile(FString& absoluteSourcePath, TArray<FString>& FilenamesOut, bool Recursive = false, const FString& FilterByExtension = "");
+	static bool GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& DirsOut, bool Recursive = false, const FString& ContainsStr = "");
 };
 
 MY_END_NAMESPACE

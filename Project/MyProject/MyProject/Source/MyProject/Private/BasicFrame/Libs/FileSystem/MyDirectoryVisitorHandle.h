@@ -7,15 +7,16 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class MyDirectoryVisitor : public IPlatformFile::FDirectoryVisitor	//GenericPlatformFile.h
+class MyDirectoryVisitorHandle
 {
 public:
-	MyDirectoryVisitor(MyTraverseDirectoryDelegate fileVisitDelegate, MyTraverseDirectoryDelegate directoryVisitDelegate);
-	virtual bool Visit(const TCHAR* FilenameOrDirectory, bool bIsDirectory) override;
+	MyDirectoryVisitorHandle(TArray<FString>& outArray);
+
+	bool OnVisitFileHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName);
+	bool OnVisitDirectoryHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName);
 
 private:
-	MyTraverseDirectoryDelegate mFileVisitDelegate;
-	MyTraverseDirectoryDelegate mDirectoryVisitDelegate;
+	TArray<FString>& mFileArray;
 };
 
 MY_END_NAMESPACE

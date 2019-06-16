@@ -9,6 +9,8 @@
 #include "UtilStr.h"
 #include "Symbolic.h"
 #include "MyDirectoryVisitor.h" // MyDirectoryVisitor
+#include "MyDirectoryVisitorHandle.h"
+#include "MyFileDelegate.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -549,6 +551,46 @@ void UtilFileIO::traverseDirectory(
 			PlatformFile.IterateDirectoryRecursively(*absoluteSourcePath, directoryVisitor);
 		}
 	}
+}
+
+bool UtilFileIO::GetAllFile(FString& absoluteSourcePath, TArray<FString>& FilenamesOut, bool Recursive, const FString& FilterByExtension)
+{
+	FString absoluteDestinationPath;
+
+	MyDirectoryVisitorHandle directoryVisitorHandle(FilenamesOut);
+	UtilFileIO::traverseDirectory(
+		absoluteSourcePath,
+		absoluteDestinationPath,
+		MakeMyTraverseDirectoryDelegate(
+			directoryVisitorHandle, 
+			MyDirectoryVisitorHandle::OnVisitFileHandle
+		),
+		MakeMyTraverseDirectoryDelegate(
+			directoryVisitorHandle,
+			MyDirectoryVisitorHandle::OnVisitDirectoryHandle
+		),
+		Recursive
+	);
+}
+
+bool UtilFileIO::GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& DirsOut, bool Recursive, const FString& ContainsStr)
+{
+	FString absoluteDestinationPath;
+
+	MyDirectoryVisitorHandle directoryVisitorHandle(FilenamesOut);
+	UtilFileIO::traverseDirectory(
+		absoluteSourcePath,
+		absoluteDestinationPath,
+		MakeMyTraverseDirectoryDelegate(
+			directoryVisitorHandle,
+			MyDirectoryVisitorHandle::OnVisitFileHandle
+		),
+		MakeMyTraverseDirectoryDelegate(
+			directoryVisitorHandle,
+			MyDirectoryVisitorHandle::OnVisitDirectoryHandle
+		),
+		Recursive
+	);
 }
 
 MY_END_NAMESPACE

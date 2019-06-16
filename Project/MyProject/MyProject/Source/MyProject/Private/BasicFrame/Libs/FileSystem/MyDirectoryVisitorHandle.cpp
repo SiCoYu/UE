@@ -1,24 +1,22 @@
 ﻿#include "MyProject.h"
-#include "MyDirectoryVisitor.h"
+#include "MyDirectoryVisitorHandle.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-MyDirectoryVisitor::MyDirectoryVisitor(MyTraverseDirectoryDelegate fileVisitDelegate, MyTraverseDirectoryDelegate directoryVisitDelegate)
+MyDirectoryVisitorHandle::MyDirectoryVisitorHandle(TArray<FString>& outArray)
+	: this->mFileArray(outArray)
 {
-	this->mFileVisitDelegate = fileVisitDelegate;
-	this->mDirectoryVisitDelegate = directoryVisitDelegate;
+
 }
 
-bool MyDirectoryVisitor::Visit(const TCHAR* FilenameOrDirectory, bool bIsDirectory)
+bool MyDirectoryVisitorHandle::OnVisitFileHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
 {
-	if (bIsDirectory)
-	{
-		return this->mDirectoryVisitDelegate.call(FilenameOrDirectory, FString(), FString());
-	}
-	else
-	{
-		return this->mFileVisitDelegate.call(FilenameOrDirectory, FString(), FString());
-	}
+	this->mFileArray.Push(absoluteSourcePath);
+}
+
+bool MyDirectoryVisitorHandle::OnVisitDirectoryHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
+{
+	this->mFileArray.Push(absoluteSourcePath);
 }
 
 MY_END_NAMESPACE
