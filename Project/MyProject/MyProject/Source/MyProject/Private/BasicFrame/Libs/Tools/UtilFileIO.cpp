@@ -561,11 +561,11 @@ bool UtilFileIO::GetAllFile(FString& absoluteSourcePath, TArray<FString>& Filena
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
-		MakeMyTraverseDirectoryDelegate(
+		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
 			directoryVisitorHandle, 
 			&MyDirectoryVisitorHandle::OnVisitFileHandle
 		),
-		MakeMyTraverseDirectoryDelegate(
+		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
 			directoryVisitorHandle,
 			&MyDirectoryVisitorHandle::OnVisitDirectoryHandle
 		),
@@ -581,11 +581,11 @@ bool UtilFileIO::GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& D
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
-		MakeMyTraverseDirectoryDelegate(
+		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
 			directoryVisitorHandle,
 			&MyDirectoryVisitorHandle::OnVisitFileHandle
 		),
-		MakeMyTraverseDirectoryDelegate(
+		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
 			directoryVisitorHandle,
 			&MyDirectoryVisitorHandle::OnVisitDirectoryHandle
 		),

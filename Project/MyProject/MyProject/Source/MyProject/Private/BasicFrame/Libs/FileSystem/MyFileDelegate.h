@@ -16,8 +16,8 @@ class IDispatchObject;
 MY_MINI_DECLARE_DELEGATE_RetVal_ThreeParams(bool, MyTraverseDirectoryDelegate, FString, FString, FString);
 typedef MyTraverseDirectoryDelegate* MyTraverseDirectoryDelegatePtr;
 
-#define MakeMyTraverseDirectoryDelegate(pThis,handle,param) MyTraverseDirectoryDelegate().bindObjectHandle(handle, pThis, param)
-#define MakeStaticMyTraverseDirectoryDelegate(handle,param) MyTraverseDirectoryDelegate().bindStaticHandle(handle, param)
+#define MAKE_TRAVERSE_DIRECTORY_DELEGATE(pThis,handle) MyTraverseDirectoryDelegate().bindObjectHandle(handle, pThis)
+#define MAKE_STATIC_TRAVERSE_DIRECTORY_DELEGATE(handle) MyTraverseDirectoryDelegate().bindStaticHandle(handle)
 
 MY_END_NAMESPACE
 

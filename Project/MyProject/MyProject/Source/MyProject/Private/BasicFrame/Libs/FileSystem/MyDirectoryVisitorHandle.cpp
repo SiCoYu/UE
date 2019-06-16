@@ -15,11 +15,13 @@ MyDirectoryVisitorHandle::MyDirectoryVisitorHandle(TArray<FString>& outArray)
 bool MyDirectoryVisitorHandle::OnVisitFileHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
 {
 	this->mFileArray.Push(absoluteSourcePath);
+	return true;
 }
 
 bool MyDirectoryVisitorHandle::OnVisitDirectoryHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
 {
 	this->mFileArray.Push(absoluteSourcePath);
+	return true;
 }
 
 MY_END_NAMESPACE
