@@ -310,4 +310,5 @@ void FMyExportAssetDependeciesModule::AddToolbarExtension(FToolBarBuilder& Build
 
 #undef LOCTEXT_NAMESPACE
 
-IMPLEMENT_MODULE(FMyExportAssetDependeciesModule, MyExportAssetDependecies)
+// MyExportAssetDependecies 模块名字，就是文件夹的名字， FMyExportAssetDependeciesModule 模块类名字
+//IMPLEMENT_MODULE(FMyExportAssetDependeciesModule, MyExportAssetDependecies)

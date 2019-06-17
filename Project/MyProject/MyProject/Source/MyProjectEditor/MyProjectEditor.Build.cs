@@ -38,7 +38,8 @@ public class MyProjectEditor : ModuleRules
 
 
 
-
+				//********** MyProject **********
+				// MyProject 尽量包含目录只包含 MyProject/Private 和 MyProject/Public， 这样别的模块如果引用当前模块，就只需要添加包含模块 MyProject，这样就会添加包含目录 MyProject/Private 和 MyProject/Public 引用的模块就不用添加这么多包含目录了 
 				// Player 区域
                 "MyProject/Private/MyEngine",
 				"MyProject/Private/MyEngine/UI/Widgets",
@@ -268,8 +269,13 @@ public class MyProjectEditor : ModuleRules
                 "AnimGraphRuntime",
                 "AnimationEditor",
                 "GeometryMode",
-                "MyProject", 
-            }
+				"Json",				// Json
+				"JsonUtilities",	// Json
+				"XmlParser",		// Xml
+				// error LNK2019: unresolved external symbol "__declspec(dllimport) public: static class IPluginManager & __cdecl IPluginManager::Get(void)" (__imp_?Get@IPluginManager@@SAAEAV1@XZ) referenced in function "private: static class TSharedRef<class FSlateStyleSet,0> __cdecl FMyExportAssetDependeciesStyle::Create(void)" (?Create@FMyExportAssetDependeciesStyle@@CA?AV?$TSharedRef@VFSlateStyleSet@@$0A@@@XZ)
+				"Projects",
+				"MyProject", 
+			}
         );
  
         PrivateDependencyModuleNames.AddRange(
@@ -294,8 +300,13 @@ public class MyProjectEditor : ModuleRules
 
                 "AnimGraphRuntime",
                 "GeometryMode",
-                "MyProject", 
-            }
+				"Json",				// Json
+				"JsonUtilities",	// Json
+				"XmlParser",		// Xml
+				// error LNK2019: unresolved external symbol "__declspec(dllimport) public: static class IPluginManager & __cdecl IPluginManager::Get(void)" (__imp_?Get@IPluginManager@@SAAEAV1@XZ) referenced in function "private: static class TSharedRef<class FSlateStyleSet,0> __cdecl FMyExportAssetDependeciesStyle::Create(void)" (?Create@FMyExportAssetDependeciesStyle@@CA?AV?$TSharedRef@VFSlateStyleSet@@$0A@@@XZ)
+				"Projects",
+				"MyProject",
+			}
         );
 
         // AnimGraphRuntime 模块的包含目录需要这样导入，参考 Engine.Build.cs

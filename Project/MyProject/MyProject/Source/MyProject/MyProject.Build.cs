@@ -49,6 +49,7 @@ public class MyProject : ModuleRules
         // Engine\Plugins\Developer\BlankPlugin\Source\BlankPlugin\BlankPlugin.Build.cs
         this.PrivateIncludePaths.AddRange(
             new string[] {
+				// MyProject 尽量包含目录只包含 MyProject/Private 和 MyProject/Public， 这样别的模块如果引用当前模块，就只需要添加包含模块 MyProject，这样就会添加包含目录 MyProject/Private 和 MyProject/Public 引用的模块就不用添加这么多包含目录了
                 // Relative to MyProject/Plugins/MyScriptPlugin/Source , 包含插件头文件， MyProject\MyProject.uproject 包含插件根目录 AdditionalPluginDirectories
                 // ScriptPlugin 包含目录
 			    //"ScriptPlugin/Classes",

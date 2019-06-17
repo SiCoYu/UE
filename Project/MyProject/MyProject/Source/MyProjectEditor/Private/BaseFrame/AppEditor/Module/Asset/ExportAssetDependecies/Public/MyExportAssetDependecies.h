@@ -12,13 +12,15 @@ struct FMyDependicesInfo;
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLogExportAssetDependecies, Log, All);
 
-class FMyExportAssetDependeciesModule : public IModuleInterface
+class FMyExportAssetDependeciesModule/* : public IModuleInterface*/
 {
 public:
 
     /** IModuleInterface implementation */
-    virtual void StartupModule() override;
-    virtual void ShutdownModule() override;
+    //virtual void StartupModule() override;
+    //virtual void ShutdownModule() override;
+	void StartupModule();
+	void ShutdownModule();
 
     /** This function will be bound to Command. */
     void PluginButtonClicked();
