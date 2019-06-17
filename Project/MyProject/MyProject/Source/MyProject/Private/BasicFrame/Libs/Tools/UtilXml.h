@@ -7,6 +7,9 @@
 #include "Internationalization/Text.h"	// FText
 #include "PlatformDefine.h"
 
+class FXmlFile;
+class FXmlNode;
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 /**
@@ -16,7 +19,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 class UtilXml
 {
 	static bool loadXmlFromFile(FString& absolutePath, FXmlFile** xmlFile);
-	static bool loadXmlFromStr(FString& absolutePath);
+	static bool loadXmlFromStr(FString& absolutePath, FXmlFile** xmlFile);
 	static FXmlNode* getRootNode(FXmlFile* xmlFile);
 	static bool getNodeAttrStr(FXmlNode* xmlNode, FString inKey, FString& outValue);
 };

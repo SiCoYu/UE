@@ -21,7 +21,7 @@ public:
 	static bool loadJsonFromFile(FString& absolutePath, TSharedPtr<FJsonObject>& rRoot);
 	static bool loadJsonFromStr(FString& absolutePath, TSharedPtr<FJsonObject>& rRoot);
 	static bool getJsonAttrStr(TSharedPtr<FJsonObject>& jsonObject, FString& inKey, FString& outValue);
-	static bool getJsonAttrArray(TSharedPtr<FJsonObject>& jsonObject, FString& inKey, TArray< TSharedPtr<FJsonValue> >& outValue);
+	static bool getJsonAttrArray(TSharedPtr<FJsonObject>& jsonObject, FString& inKey, const TArray< TSharedPtr<FJsonValue> >*& outValue);
 	static bool convertJsonValueAsString(TSharedPtr<FJsonValue>& jsonValue, FString& outValue);
 };
 

@@ -36,11 +36,11 @@ bool UtilJson::getJsonAttrStr(TSharedPtr<FJsonObject>& jsonObject, FString& inKe
 	return ret;
 }
 
-bool UtilJson::getJsonAttrArray(TSharedPtr<FJsonObject>& jsonObject, FString& inKey, TArray< TSharedPtr<FJsonValue> >& outValue)
+bool UtilJson::getJsonAttrArray(TSharedPtr<FJsonObject>& jsonObject, FString& inKey, const TArray< TSharedPtr<FJsonValue> >*& outValue)
 {
 	bool ret = false;
 
-	if (jsonObject->TryGetArrayField(&outValue))
+	if (jsonObject->TryGetArrayField(inKey, &outValue))
 	{
 		ret = true;
 	}
