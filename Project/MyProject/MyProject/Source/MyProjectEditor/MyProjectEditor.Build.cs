@@ -273,7 +273,8 @@ public class MyProjectEditor : ModuleRules
 				"JsonUtilities",	// Json
 				"XmlParser",		// Xml
 				// error LNK2019: unresolved external symbol "__declspec(dllimport) public: static class IPluginManager & __cdecl IPluginManager::Get(void)" (__imp_?Get@IPluginManager@@SAAEAV1@XZ) referenced in function "private: static class TSharedRef<class FSlateStyleSet,0> __cdecl FMyExportAssetDependeciesStyle::Create(void)" (?Create@FMyExportAssetDependeciesStyle@@CA?AV?$TSharedRef@VFSlateStyleSet@@$0A@@@XZ)
-				"Projects",
+				"Projects", 
+				// 添加依赖模块，就添加两个目录， MyProject.build.cs 所在目录的父目录 G:\UE\Project\MyProject\MyProject\Source，并不会添加 MyProject.build.cs 所在目录的 Private 目录 G:\UE\Project\MyProject\MyProject\Source\MyProject\Private 
 				"MyProject", 
 			}
         );
