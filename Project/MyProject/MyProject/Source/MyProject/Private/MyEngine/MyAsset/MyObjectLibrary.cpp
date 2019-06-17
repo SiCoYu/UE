@@ -1,51 +1,31 @@
 #include "MyProject.h"
-#include "MyAssetManager.h"
-#include "MyNativeAssetManager.h"
+#include "MyObjectLibrary.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-MyAssetManager::MyAssetManager()
+MyObjectLibrary::MyObjectLibrary()
 {
 	
 }
 
-//UMyAssetManager::~UMyAssetManager()
+//UMyObjectLibrary::~UMyObjectLibrary()
 //{
 //	
 //}
 
-void MyAssetManager::init()
+void MyObjectLibrary::init()
 {
-	if (UAssetManager::IsValid())
-	{
-		UAssetManager& AssetManager = UAssetManager::Get();
-		TArray<FPrimaryAssetTypeInfo> TypeInfos;
-		AssetManager.GetPrimaryAssetTypeInfoList(TypeInfos);
-	}
+	mObjectLibrary = ConstructObject<UObjectLibrary>(UObjectLibrary::StaticClass());
 }
 
-void MyAssetManager::dispose()
+void MyObjectLibrary::dispose()
 {
 
 }
 
-FPrimaryAssetId MyAssetManager::getPrimaryAssetIdFromAssetData(const FAssetData& AssetData)
+int32 MyObjectLibrary::LoadAssetDataFromPath(const FString& Path)
 {
-	// Engine\Plugins\Editor\AssetManagerEditor\Source\AssetManagerEditor\Private\AssetManagerEditorModule.cpp
-	// TSharedRef<SWidget> IAssetManagerEditorModule::MakePrimaryAssetIdSelector(FOnGetPrimaryAssetDisplayText OnGetDisplayText, FOnSetPrimaryAssetId OnSetId, bool bAllowClear, TArray<FPrimaryAssetType> AllowedTypes)
-
-	UAssetManager& Manager = UAssetManager::Get();
-	//UMyNativeAssetManager& Manager = UMyNativeAssetManager::Get();
-
-	FPrimaryAssetId AssetId;
-
-	if (AssetData.IsValid())
-	{
-		AssetId = Manager.GetPrimaryAssetIdForData(AssetData);
-		ensure(AssetId.IsValid());
-	}
-
-	return AssetId;
+	mObjectLibrary->LoadAssetDataFromPath(Path);
 }
 
 MY_END_NAMESPACE
