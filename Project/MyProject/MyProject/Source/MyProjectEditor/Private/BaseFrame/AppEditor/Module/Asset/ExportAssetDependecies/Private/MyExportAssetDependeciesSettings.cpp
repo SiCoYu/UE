@@ -1,6 +1,7 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
-#include "MyExportAssetDependecies.h"
+// error : Expected MyExportAssetDependeciesSettings.h to be first header included.
 #include "ExportAssetDependeciesSettings.h"
+#include "MyExportAssetDependecies.h"
 #include "UObject/ConstructorHelpers.h"
 
 #define LOCTEXT_NAMESPACE "MyExportAssetDependecies"

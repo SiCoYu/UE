@@ -34,7 +34,7 @@ public class MyProjectEditor : ModuleRules
 				"MyProjectEditor/Private/BaseFrame/AppEditor/Module/Asset/ExportAssetDependecies/Public",
 
 				// UnitTest
-				"MyProjectEditor/Private/BaseFrame/AppEditor/UnitTest/TestAssetGraph",
+				"MyProjectEditor/Private/BaseFrame/UnitTest/TestAssetGraph",
 			}
 		);
 

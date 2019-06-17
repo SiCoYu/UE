@@ -1,7 +1,7 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
-#include "MyExportAssetDependecies.h"
-
+// error : Expected MyExportAssetDependeciesStyle.h to be first header included.
 #include "MyExportAssetDependeciesStyle.h"
+#include "MyExportAssetDependecies.h"
 #include "SlateGameResources.h"
 #include "IPluginManager.h"
 
