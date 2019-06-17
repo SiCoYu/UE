@@ -126,7 +126,7 @@ void FMyExportAssetDependeciesModule::ExportAssetDependecies()
     auto CurrentSettings = GetMutableDefault<UMyExportAssetDependeciesSettings>();
     if (!CurrentSettings)
     {
-        UE_LOG(LogExportAssetDependecies, Error, TEXT("Cannot read ExportAssetDependeciesSettings"));
+        UE_LOG(MyLogExportAssetDependecies, Error, TEXT("Cannot read ExportAssetDependeciesSettings"));
         return;
     }
 
@@ -147,7 +147,7 @@ void FMyExportAssetDependeciesModule::ExportAssetDependecies()
             Info.bUseSuccessFailIcons = true;
             FSlateNotificationManager::Get().AddNotification(Info)->SetCompletionState(SNotificationItem::CS_Fail);
 
-            UE_LOG(LogExportAssetDependecies, Log, TEXT("No valid target packages set."));
+            UE_LOG(MyLogExportAssetDependecies, Log, TEXT("No valid target packages set."));
             return;
         }
     }
@@ -174,7 +174,7 @@ void FMyExportAssetDependeciesModule::ExportAssetDependecies()
                 bool  bResult = AssetRegistryModule.Get().GetAssetsByPackageName(FName(*TargetLongPackageName), AssetDataList);
                 if (!bResult || AssetDataList.Num() == 0)
                 {
-                    UE_LOG(LogExportAssetDependecies, Error, TEXT("Failed to get AssetData of  %s, please check."), *TargetLongPackageName);
+                    UE_LOG(MyLogExportAssetDependecies, Error, TEXT("Failed to get AssetData of  %s, please check."), *TargetLongPackageName);
                     return;
                 }
 
@@ -231,7 +231,7 @@ void FMyExportAssetDependeciesModule::GatherDependenciesInfoRecursively(FAssetRe
     }
 }
 
-void FMyExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FDependicesInfo> &DependicesInfos)
+void FMyExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FMyDependicesInfo> &DependicesInfos)
 {
     TSharedPtr<FJsonObject> RootJsonObject = MakeShareable(new FJsonObject);
     for (auto &DependicesInfoEntry : DependicesInfos)

@@ -8,7 +8,7 @@ class FToolBarBuilder;
 class FMenuBuilder;
 class UMyExportAssetDependeciesSettings;
 class FAssetRegistryModule;
-struct FDependicesInfo;
+struct FMyDependicesInfo;
 
 DECLARE_LOG_CATEGORY_EXTERN(MyLogExportAssetDependecies, Log, All);
 
@@ -33,7 +33,7 @@ private:
         TArray<FString> &DependicesInGameContentDir, TArray<FString> &OtherDependices);
 
     /** This will save the dependencies information to the OutputPath/AssetDependencies.json */
-    void SaveDependicesInfo(const TMap<FString, FDependicesInfo> &DependicesInfos);
+    void SaveDependicesInfo(const TMap<FString, FMyDependicesInfo> &DependicesInfos);
 
 private:
     TSharedPtr<class FUICommandList> PluginCommands;
