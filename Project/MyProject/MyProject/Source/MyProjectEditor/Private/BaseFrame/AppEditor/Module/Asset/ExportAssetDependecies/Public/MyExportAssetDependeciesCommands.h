@@ -5,7 +5,7 @@
 #include "SlateBasics.h"
 #include "MyExportAssetDependeciesStyle.h"
 
-class FMyExportAssetDependeciesCommands : public TCommands<FExportAssetDependeciesCommands>
+class FMyExportAssetDependeciesCommands : public TCommands<FMyExportAssetDependeciesCommands>
 {
 public:
 
