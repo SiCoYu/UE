@@ -286,6 +286,9 @@ public class MyProject : ModuleRules
                 "ApplicationCore",  // "HAL/PlatformApplicationMisc.h" ÖÐµÄ FPlatformApplicationMisc::ClipboardCopy
                 "ScriptPlugin",     // ScriptPlugin ²å¼þ
 				"AssetRegistry",	// AssetDataTagMap.h
+				"Json",				// Json
+				"JsonUtilities",	// Json
+				"XmlParser",		// Xml
 			}
         );
 
