@@ -9,7 +9,7 @@
 * Settings for export asset dependencies.
 */
 UCLASS(config = Game, defaultconfig)
-class EXPORTASSETDEPENDECIES_API UMyExportAssetDependeciesSettings : public UObject
+class /*EXPORTASSETDEPENDECIES_API*/ UMyExportAssetDependeciesSettings : public UObject
 {
     GENERATED_UCLASS_BODY()
 

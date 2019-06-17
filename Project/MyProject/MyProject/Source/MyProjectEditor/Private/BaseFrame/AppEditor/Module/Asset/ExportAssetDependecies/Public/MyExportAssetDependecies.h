@@ -22,13 +22,12 @@ public:
 
     /** This function will be bound to Command. */
     void PluginButtonClicked();
+	void ExportAssetDependecies();
 
 private:
 
     void AddToolbarExtension(FToolBarBuilder& Builder);
     void AddMenuExtension(FMenuBuilder& Builder);
-
-    void ExportAssetDependecies();
 
     void GatherDependenciesInfoRecursively(FAssetRegistryModule &AssetRegistryModule, const FString &TargetLongPackageName,
         TArray<FString> &DependicesInGameContentDir, TArray<FString> &OtherDependices);

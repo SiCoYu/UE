@@ -43,7 +43,7 @@ void FMyExportAssetDependeciesModule::StartupModule()
 
     PluginCommands->MapAction(
         FMyExportAssetDependeciesCommands::Get().PluginAction,
-        FExecuteAction::CreateRaw(this, &MyFExportAssetDependeciesModule::PluginButtonClicked),
+        FExecuteAction::CreateRaw(this, &FMyExportAssetDependeciesModule::PluginButtonClicked),
         FCanExecuteAction());
 
     FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
@@ -86,7 +86,7 @@ void FMyExportAssetDependeciesModule::ShutdownModule()
     FMyExportAssetDependeciesCommands::Unregister();
 }
 
-void FExportAssetDependeciesModule::PluginButtonClicked()
+void FMyExportAssetDependeciesModule::PluginButtonClicked()
 {
     // TODO
     // Should check whether the game content is dirty.
