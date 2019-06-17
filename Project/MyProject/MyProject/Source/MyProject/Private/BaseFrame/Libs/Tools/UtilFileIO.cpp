@@ -16,6 +16,11 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+FString UtilFileIO::Combine(FString& param0, FString& param1)
+{
+	return FPaths::Combine(param0, param1);
+}
+
 FString UtilFileIO::BaseDir()
 {
 	//InstallDir/WindowsNoEditor/GameName/Binaries/Win64
@@ -40,7 +45,7 @@ FString UtilFileIO::RootDir(bool isAbsPath)
 	return ThePath;
 }
 
-FString UtilFileIO::GameDir(bool isAbsPath)
+FString UtilFileIO::ProjectDir(bool isAbsPath)
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameDir': FPaths::GameDir() has been superseded by FPaths::ProjectDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName
@@ -59,7 +64,7 @@ FString UtilFileIO::GameDir(bool isAbsPath)
 	return ThePath;
 }
 
-FString UtilFileIO::GameContentDir(bool isAbsPath)
+FString UtilFileIO::ProjectContentDir(bool isAbsPath)
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameContentDir': FPaths::GameContentDir() has been superseded by FPaths::ProjectContentDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Content
@@ -94,7 +99,7 @@ FString UtilFileIO::EngineContentDir(bool isAbsPath)
 	return ThePath;
 }
 
-FString UtilFileIO::GameSavedDir(bool isAbsPath)
+FString UtilFileIO::ProjectSavedDir(bool isAbsPath)
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameSavedDir': FPaths::GameSavedDir() has been superseded by FPaths::ProjectSavedDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Saved
@@ -113,7 +118,7 @@ FString UtilFileIO::GameSavedDir(bool isAbsPath)
 	return ThePath;
 }
 
-FString UtilFileIO::GameLogDir(bool isAbsPath)
+FString UtilFileIO::ProjectLogDir(bool isAbsPath)
 {
 	// UE 4.19.1 warning C4996: 'FPaths::GameLogDir': FPaths::GameLogDir() has been superseded by FPaths::ProjectLogDir(). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//InstallDir/WindowsNoEditor/GameName/Saved/Logs
@@ -132,9 +137,14 @@ FString UtilFileIO::GameLogDir(bool isAbsPath)
 	return ThePath;
 }
 
-FString UtilFileIO::GamePluginsDir()
+FString UtilFileIO::ProjectPluginsDir()
 {
-	return FPaths::GamePluginsDir();
+	return FPaths::ProjectPluginsDir();
+}
+
+FString UtilFileIO::ProjectPersistentDownloadDir()
+{
+	return FPaths::ProjectPersistentDownloadDir();
 }
 
 FString UtilFileIO::GetFilenameOnDisk(FString FullFilename)
@@ -620,6 +630,46 @@ bool UtilFileIO::LoadFileToString(FString& absolutePath, FString& resultStr)
 	}
 
 	return ret;
+}
+
+FString UtilFileIO::GetAndroidFileBasePath()
+{
+#if PLATFORM_ANDROID
+	extern FString GFilePathBase;
+	return GFilePathBase + FString("/UE4Game/") + FApp::GetGameName() + FString("/");
+#else
+	return FString("");
+#endif
+}
+
+FString UtilFileIO::ConvertRelativePathToFull(FString& relativePath)
+{
+	return FPaths::ConvertRelativePathToFull(relativePath);
+}
+
+FString UtilFileIO::GetFileBasePath()
+{
+	return FPaths::GetFileBasePath();
+}
+
+FString UtilFileIO::TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension = TEXT(""))
+{
+	FPackageName::TryConvertLongPackageNameToFilename(InLongPackageName, OutFilename, InExtension);
+}
+
+bool UtilFileIO::TryConvertFilenameToLongPackageName(const FString& InFilename, FString& OutPackageName, FString* OutFailureReason = nullptr)
+{
+	FPackageName::TryConvertFilenameToLongPackageName(InFilename, OutPackageName, OutFailureReason);
+}
+
+void UtilFileIO::RegisterMountPoint(const FString& RootPath, const FString& ContentPath)
+{
+	FPackageName::RegisterMountPoint(RootPath, ContentPath);
+}
+
+void UtilFileIO::UnRegisterMountPoint(const FString& RootPath, const FString& ContentPath)
+{
+	FPackageName::UnRegisterMountPoint(RootPath, ContentPath);
 }
 
 MY_END_NAMESPACE

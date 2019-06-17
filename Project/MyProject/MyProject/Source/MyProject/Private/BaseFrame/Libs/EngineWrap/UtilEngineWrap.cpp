@@ -1415,3 +1415,19 @@ UNavigationSystemV1* UtilEngineWrap::getCurrentNavigationSystemV1()
 	// ref Engine\Source\Runtime\Engine\Classes\AI\NavigationSystemBase.h
 	return FNavigationSystem::GetCurrent<UNavigationSystemV1>(UtilEngineWrap::GetWorld());
 }
+
+FString UtilEngineWrap::OpenDirectoryDialog(FString& InitialDir)
+{
+	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
+	if (DesktopPlatform)
+	{
+		FString FolderName;
+		const FString Title = LOCTEXT("BrowseForFolderTitle", "Choose a directory to monitor").ToString();
+		const bool bFolderSelected = DesktopPlatform->OpenDirectoryDialog(FSlateApplication::Get().FindBestParentWindowHandleForDialogs(nullptr), Title, InitialDir, FolderName);
+		if (bFolderSelected)
+		{
+			FolderName /= TEXT("");
+		}
+		return FolderName;
+	}
+}

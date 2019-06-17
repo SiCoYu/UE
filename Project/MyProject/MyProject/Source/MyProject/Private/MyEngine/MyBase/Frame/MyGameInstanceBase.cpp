@@ -72,3 +72,33 @@ bool UMyGameInstanceBase::ProcessConsoleExec(const TCHAR* Cmd, FOutputDevice& Ar
 
 	return ret;
 }
+
+void UMyGameInstanceBase::LoadMapAsync(FName LevelName)
+{
+	mCachedLevelName = LevelName;
+
+	// Check whether requested map exists, this could be very slow if LevelName is a short package name
+	FString LongPackageName;
+	bool bOutSuccess = FPackageName::SearchForPackageOnDisk(LevelName.ToString(), &LongPackageName);
+	if (!bOutSuccess)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Map not found"));
+		return;
+	}
+
+	int32 value = LoadPackageAsync(LongPackageName, FLoadPackageAsyncDelegate::CreateUObject(this, &UMyGameInstanceBase::FinishedStreamingLevel));
+	UE_LOG(LogTemp, Error, TEXT("Loading Map %s async"), *LongPackageName);
+}
+
+void UMyGameInstanceBase::FinishedStreamingLevel(const FName& PackageName, UPackage* InLevelPackage, EAsyncLoadingResult::Type Result)
+{
+	if (InLevelPackage)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Finished Loading"));
+
+		mLevelPackage = InLevelPackage;
+		mLevelPackage->AddToRoot();
+
+		//OnFinishedLevelLoad.Broadcast();
+	}
+}

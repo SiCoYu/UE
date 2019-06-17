@@ -12,6 +12,8 @@ MY_END_NAMESPACE
 
 MY_USING_NAMESPACE(MyNS)
 
+class LevelPackage;
+
 /**
  * @brief 
  https://wiki.unrealengine.com/Solus_C%2B%2B_Tutorials
@@ -29,6 +31,8 @@ public:
 
 protected:
 	AppFrame* mAppFrame;
+	FName mCachedLevelName;
+	LevelPackage* mLevelPackage;
 
 public:
 	//virtual void Tick(float DeltaSeconds) override;
@@ -41,4 +45,8 @@ public:
 
 	// ue4-控制台执行方法: http://blog.csdn.net/yangxuan0261/article/details/53969564
 	virtual bool ProcessConsoleExec(const TCHAR* Cmd, FOutputDevice& Ar, UObject* Executor) override;
+
+	// https://answers.unrealengine.com/questions/599789/view.html
+	void UMyGameInstanceBase::LoadMapAsync(FName LevelName);
+	void FinishedStreamingLevel(const FName& PackageName, UPackage* InLevelPackage, EAsyncLoadingResult::Type Result);
 };

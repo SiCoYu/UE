@@ -13,6 +13,8 @@ public:
 protected:
 	void _testDep();
 	void _testGetAssetData();
+	// http://www.90cg.com/wordpress/ue4_unreal-asset-loading/
+	void _testLoadAndPackageName();
 };
 
 MY_END_NAMESPACE

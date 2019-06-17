@@ -21,17 +21,21 @@ public:
 	// 结合路径到完整的目录，目前只支持两个，需要的继续添加
 	template<class T0, class T1>
 	static std::string Combine(T0 param0, T1 param1);
+	static FString Combine(FString& param0, FString& param1);
 
+	// https://answers.unrealengine.com/questions/498328/androidconvertrelativepathtofull-didnt-work.html
+	// From speaking to one of our Android developers, this is intended and BaseDir() should be returning nothing when on mobile devices, seeing as the folders from your PC do not exist on the device and it wouldn't make much sense to replace the relative path with the full original path. 
 	// https://wiki.unrealengine.com/Packaged_Game_Paths,_Obtain_Directories_Based_on_Executable_Location
 	static FString BaseDir();
 	static FString RootDir(bool isAbsPath = true);
-	static FString GameDir(bool isAbsPath = true);
-	static FString GameContentDir(bool isAbsPath = true);
-	static FString GamePluginsDir();
+	static FString ProjectDir(bool isAbsPath = true);
+	static FString ProjectContentDir(bool isAbsPath = true);
+	static FString ProjectPluginsDir();
 
 	static FString EngineContentDir(bool isAbsPath = true);
-	static FString GameSavedDir(bool isAbsPath = true);
-	static FString GameLogDir(bool isAbsPath = true);
+	static FString ProjectSavedDir(bool isAbsPath = true);
+	static FString ProjectLogDir(bool isAbsPath = true);
+	static FString ProjectPersistentDownloadDir();
 
 	static FString GetFilenameOnDisk(FString FullFilename);
 	static FString ConvertToSandboxPath(FString FullFilename);
@@ -94,6 +98,17 @@ public:
 	static bool GetAllFile(FString& absoluteSourcePath, TArray<FString>& FilenamesOut, bool Recursive = false, const FString& FilterByExtension = "");
 	static bool GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& DirsOut, bool Recursive = false, const FString& ContainsStr = "");
 	static bool LoadFileToString(FString& absolutePath, FString& resultStr);
+
+	// https://answers.unrealengine.com/questions/498328/androidconvertrelativepathtofull-didnt-work.html
+	static FString GetAndroidFileBasePath();
+	// https://answers.unrealengine.com/questions/498328/androidconvertrelativepathtofull-didnt-work.html
+	// You shouldn't try to read or write to GetFileBasePath() directly since anything here is possibly inside another file wrapper. You should read and write native files to GExternalFilePath instead. If you really need to get this, though, you can do it like so:
+	static FString ConvertRelativePathToFull(FString& relativePath);
+	static FString GetFileBasePath();
+	static FString TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension = TEXT(""));
+	static bool TryConvertFilenameToLongPackageName(const FString& InFilename, FString& OutPackageName, FString* OutFailureReason = nullptr);
+	static void RegisterMountPoint(const FString& RootPath, const FString& ContentPath);
+	static void UnRegisterMountPoint(const FString& RootPath, const FString& ContentPath);
 };
 
 MY_END_NAMESPACE

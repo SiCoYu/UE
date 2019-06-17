@@ -19,4 +19,8 @@ public:
 public:
 	UFUNCTION(Exec)
 	virtual void execInConsole(FString _str, int32 _num);
+
+	// https://blog.csdn.net/ywjun0919/article/details/89246174
+	FString CreateStreamInstance(UWorld* World, const FString& LongPackageName, const FVector Location, const FRotator Rotation);
+	void LoadMap(const FString& LevelName);
 };
