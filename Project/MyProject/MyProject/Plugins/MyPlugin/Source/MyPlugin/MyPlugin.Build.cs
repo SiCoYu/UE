@@ -40,8 +40,9 @@ public class MyPlugin : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core"
+                "Core",
                 // ... add other public dependencies that you statically link with here ...
+				"MyProjectEditor",
             }
         );
 
@@ -53,7 +54,8 @@ public class MyPlugin : ModuleRules
                 "Slate",
                 "SlateCore",
                 // ... add private dependencies that you statically link with here ...  
-            }
+				"MyProjectEditor",
+			}
         );
 
         DynamicallyLoadedModuleNames.AddRange(

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "BaseFrame/UnitTest/TestModuleReference/TestModuleReferenceSubDir/TestModuleReferenceSubDir.h"
 #include "TestPluginCharacter.generated.h"
 
 /**
@@ -11,6 +12,9 @@ UCLASS()
 class ATestPluginCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+protected:
+	TestModuleReferenceSubDir mTestModuleReferenceSubDir;
 
 public:
 	// Sets default values for this character\'s properties
