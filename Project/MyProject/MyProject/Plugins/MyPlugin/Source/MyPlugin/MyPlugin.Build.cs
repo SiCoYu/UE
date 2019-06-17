@@ -26,9 +26,8 @@ public class MyPlugin : ModuleRules
             {
                 "MyPlugin/Public", 
                 // ... add public include paths required here ...
-				// 添加了这个目录，也不能相对于这个目录，会解释成  warning : Referenced directory 'G:\UE\Project\MyProject\MyProject\Plugins\MyPlugin\Source\MyProjectEditor\Private' does not exist.
-				// 插件不能引用 MyProjectEditor 
-				// "MyProjectEditor/Public", 
+				// 添加了这个目录，也不能相对于这个目录，会解释成  warning : Referenced directory 'G:\UE\Project\MyProject\MyProject\Plugins\MyPlugin\Source\MyProjectEditor\Private' does not exist. ，相对于 MyPlugin.Build.cs 所在的 Source 目录 G:\UE\Project\MyProject\MyProject\Plugins\MyPlugin\Source
+				"../../../Source/MyProjectEditor/Public", 
 			}
         );
 
@@ -37,7 +36,7 @@ public class MyPlugin : ModuleRules
             {
                 "MyPlugin/Private",  //私有文件搜索路径
                 // ... add other private include paths required here ...
-				// "MyProjectEditor/Private",
+				"../../../Source/MyProjectEditor/Private",
 			}
         );
 
