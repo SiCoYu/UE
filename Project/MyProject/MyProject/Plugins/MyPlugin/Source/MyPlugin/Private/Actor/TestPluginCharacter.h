@@ -1,8 +1,8 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-//#include "MyProjectEditor/Private/BaseFrame/UnitTest/TestModuleReference/TestModuleReferenceSubDir/TestModuleReferenceSubDir.h"
-#include "BaseFrame/UnitTest/TestModuleReference/TestModuleReferenceSubDir/TestModuleReferenceSubDir.h"
+//#include "MyProjectEditor/Private/BaseFrame/UnitTest/TestModuleReference/TestModuleReferenceSubDir/TestModuleReferenceSubDirByOther.h"
+#include "BaseFrame/UnitTest/TestModuleReference/TestModuleReferenceSubDir/TestModuleReferenceSubDirByOther.h"
 #include "TestPluginCharacter.generated.h"
 
 /**
@@ -15,7 +15,7 @@ class ATestPluginCharacter : public ACharacter
 	GENERATED_BODY()
 
 protected:
-	TestModuleReferenceSubDir mTestModuleReferenceSubDir;
+	TestModuleReferenceSubDirByOther mTestModuleReferenceSubDirByOther;
 
 public:
 	// Sets default values for this character\'s properties
