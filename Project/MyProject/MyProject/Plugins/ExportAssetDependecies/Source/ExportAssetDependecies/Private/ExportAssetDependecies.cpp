@@ -23,6 +23,7 @@
 #include "PlatformFilemanager.h"
 #include "FileHelper.h"
 #include "json.h"
+#include "UtilFileIO.h"
 
 DEFINE_LOG_CATEGORY(LogExportAssetDependecies);
 
@@ -42,10 +43,16 @@ void FExportAssetDependeciesModule::StartupModule()
 
     PluginCommands = MakeShareable(new FUICommandList);
 
+	/**
     PluginCommands->MapAction(
         FExportAssetDependeciesCommands::Get().PluginAction,
         FExecuteAction::CreateRaw(this, &FExportAssetDependeciesModule::PluginButtonClicked),
         FCanExecuteAction());
+	*/
+	PluginCommands->MapAction(
+		FExportAssetDependeciesCommands::Get().PluginAction,
+		FExecuteAction::CreateRaw(this, &FExportAssetDependeciesModule::onExportAllPluginButtonClicked),
+		FCanExecuteAction());
 
     FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 
@@ -108,6 +115,12 @@ void FExportAssetDependeciesModule::PluginButtonClicked()
     }
 }
 
+void FExportAssetDependeciesModule::onExportAllPluginButtonClicked()
+{
+	TArray<FString> outFileList;
+	FString absoluteContentPath = UtilFileIO::GameContentDir();
+	UtilFileIO::GetAllFile(absoluteContentPath, outFileList, Recursive);
+}
 
 void FExportAssetDependeciesModule::AddMenuExtension(FMenuBuilder& Builder)
 {
