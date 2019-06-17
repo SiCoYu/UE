@@ -26,8 +26,16 @@ public class MyProjectEditor : ModuleRules
 
                 // Example area
                 "MyProjectEditor/Private/MyEngine/Example/AnimNode",
-                "MyProjectEditor/Private/MyEngine/Example/CppAndBlueprint"
-            }
+                "MyProjectEditor/Private/MyEngine/Example/CppAndBlueprint",
+
+				// BaseFrame
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Common/EngineWrap",
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Module/Asset/ExportAssetDependecies/Private",
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Module/Asset/ExportAssetDependecies/Public",
+
+				// UnitTest
+				"MyProjectEditor/Private/BaseFrame/AppEditor/UnitTest/TestAssetGraph",
+			}
 		);
 
         PublicIncludePaths.AddRange(

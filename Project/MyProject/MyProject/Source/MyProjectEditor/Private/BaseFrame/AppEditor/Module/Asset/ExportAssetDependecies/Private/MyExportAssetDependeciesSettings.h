@@ -1,15 +1,15 @@
 #pragma once
 
-#include "ExportAssetDependecies.h"
+#include "MyExportAssetDependecies.h"
 #include "CoreMinimal.h"
 #include "Engine/EngineTypes.h"
-#include "ExportAssetDependeciesSettings.generated.h"
+#include "MyExportAssetDependeciesSettings.generated.h"
 
 /**
 * Settings for export asset dependencies.
 */
 UCLASS(config = Game, defaultconfig)
-class EXPORTASSETDEPENDECIES_API UExportAssetDependeciesSettings : public UObject
+class EXPORTASSETDEPENDECIES_API UMyExportAssetDependeciesSettings : public UObject
 {
     GENERATED_UCLASS_BODY()
 

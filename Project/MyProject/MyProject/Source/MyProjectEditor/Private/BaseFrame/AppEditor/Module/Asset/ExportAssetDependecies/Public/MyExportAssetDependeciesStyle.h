@@ -3,7 +3,7 @@
 
 #include "SlateBasics.h"
 
-class FExportAssetDependeciesStyle
+class FMyExportAssetDependeciesStyle
 {
 public:
 

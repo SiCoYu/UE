@@ -1,14 +1,13 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
-#include "ExportAssetDependeciesPrivatePCH.h"
-//#include "ExportAssetDependecies.h"
+#include "MyExportAssetDependecies.h"
 
-#include "ExportAssetDependeciesStyle.h"
+#include "MyExportAssetDependeciesStyle.h"
 #include "SlateGameResources.h"
 #include "IPluginManager.h"
 
-TSharedPtr< FSlateStyleSet > FExportAssetDependeciesStyle::StyleInstance = NULL;
+TSharedPtr< FSlateStyleSet > FMyExportAssetDependeciesStyle::StyleInstance = NULL;
 
-void FExportAssetDependeciesStyle::Initialize()
+void FMyExportAssetDependeciesStyle::Initialize()
 {
     if (!StyleInstance.IsValid())
     {
@@ -17,14 +16,14 @@ void FExportAssetDependeciesStyle::Initialize()
     }
 }
 
-void FExportAssetDependeciesStyle::Shutdown()
+void FMyExportAssetDependeciesStyle::Shutdown()
 {
     FSlateStyleRegistry::UnRegisterSlateStyle(*StyleInstance);
     ensure(StyleInstance.IsUnique());
     StyleInstance.Reset();
 }
 
-FName FExportAssetDependeciesStyle::GetStyleSetName()
+FName FMyExportAssetDependeciesStyle::GetStyleSetName()
 {
     static FName StyleSetName(TEXT("ExportAssetDependeciesStyle"));
     return StyleSetName;
@@ -40,7 +39,7 @@ const FVector2D Icon16x16(16.0f, 16.0f);
 const FVector2D Icon20x20(20.0f, 20.0f);
 const FVector2D Icon40x40(40.0f, 40.0f);
 
-TSharedRef< FSlateStyleSet > FExportAssetDependeciesStyle::Create()
+TSharedRef< FSlateStyleSet > FMyExportAssetDependeciesStyle::Create()
 {
     TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet("ExportAssetDependeciesStyle"));
     Style->SetContentRoot(IPluginManager::Get().FindPlugin("ExportAssetDependecies")->GetBaseDir() / TEXT("Resources"));
@@ -56,7 +55,7 @@ TSharedRef< FSlateStyleSet > FExportAssetDependeciesStyle::Create()
 #undef TTF_FONT
 #undef OTF_FONT
 
-void FExportAssetDependeciesStyle::ReloadTextures()
+void FMyExportAssetDependeciesStyle::ReloadTextures()
 {
     if (FSlateApplication::IsInitialized())
     {
@@ -64,7 +63,7 @@ void FExportAssetDependeciesStyle::ReloadTextures()
     }
 }
 
-const ISlateStyle& FExportAssetDependeciesStyle::Get()
+const ISlateStyle& FMyExportAssetDependeciesStyle::Get()
 {
     return *StyleInstance;
 }

@@ -6,13 +6,13 @@
 
 class FToolBarBuilder;
 class FMenuBuilder;
-class UExportAssetDependeciesSettings;
+class UMyExportAssetDependeciesSettings;
 class FAssetRegistryModule;
 struct FDependicesInfo;
 
-DECLARE_LOG_CATEGORY_EXTERN(LogExportAssetDependecies, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(MyLogExportAssetDependecies, Log, All);
 
-class FExportAssetDependeciesModule : public IModuleInterface
+class FMyExportAssetDependeciesModule : public IModuleInterface
 {
 public:
 

@@ -1,10 +1,9 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
-#include "ExportAssetDependeciesPrivatePCH.h"
-//#include "ExportAssetDependecies.h"
-#include "ExportAssetDependeciesStyle.h"
-#include "ExportAssetDependeciesCommands.h"
+#include "MyExportAssetDependecies.h"
+#include "MyExportAssetDependeciesStyle.h"
+#include "MyExportAssetDependeciesCommands.h"
 
-#include "ExportAssetDependeciesSettings.h"
+#include "MyExportAssetDependeciesSettings.h"
 #include "SlateBasics.h"
 #include "SlateExtras.h"
 
@@ -24,41 +23,41 @@
 #include "FileHelper.h"
 #include "json.h"
 
-DEFINE_LOG_CATEGORY(LogExportAssetDependecies);
+DEFINE_LOG_CATEGORY(MyLogExportAssetDependecies);
 
 
-static const FName ExportAssetDependeciesTabName("ExportAssetDependecies");
+static const FName MyExportAssetDependeciesTabName("ExportAssetDependecies");
 
-#define LOCTEXT_NAMESPACE "FExportAssetDependeciesModule"
+#define LOCTEXT_NAMESPACE "FMyExportAssetDependeciesModule"
 
-void FExportAssetDependeciesModule::StartupModule()
+void FMyExportAssetDependeciesModule::StartupModule()
 {
     // This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 
-    FExportAssetDependeciesStyle::Initialize();
-    FExportAssetDependeciesStyle::ReloadTextures();
+    FMyExportAssetDependeciesStyle::Initialize();
+    FMyExportAssetDependeciesStyle::ReloadTextures();
 
-    FExportAssetDependeciesCommands::Register();
+    FMyExportAssetDependeciesCommands::Register();
 
     PluginCommands = MakeShareable(new FUICommandList);
 
     PluginCommands->MapAction(
-        FExportAssetDependeciesCommands::Get().PluginAction,
-        FExecuteAction::CreateRaw(this, &FExportAssetDependeciesModule::PluginButtonClicked),
+        FMyExportAssetDependeciesCommands::Get().PluginAction,
+        FExecuteAction::CreateRaw(this, &MyFExportAssetDependeciesModule::PluginButtonClicked),
         FCanExecuteAction());
 
     FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 
     {
         TSharedPtr<FExtender> MenuExtender = MakeShareable(new FExtender());
-        MenuExtender->AddMenuExtension("WindowLayout", EExtensionHook::After, PluginCommands, FMenuExtensionDelegate::CreateRaw(this, &FExportAssetDependeciesModule::AddMenuExtension));
+        MenuExtender->AddMenuExtension("WindowLayout", EExtensionHook::After, PluginCommands, FMenuExtensionDelegate::CreateRaw(this, &FMyExportAssetDependeciesModule::AddMenuExtension));
 
         LevelEditorModule.GetMenuExtensibilityManager()->AddExtender(MenuExtender);
     }
 
     {
         TSharedPtr<FExtender> ToolbarExtender = MakeShareable(new FExtender);
-        ToolbarExtender->AddToolBarExtension("Settings", EExtensionHook::After, PluginCommands, FToolBarExtensionDelegate::CreateRaw(this, &FExportAssetDependeciesModule::AddToolbarExtension));
+        ToolbarExtender->AddToolBarExtension("Settings", EExtensionHook::After, PluginCommands, FToolBarExtensionDelegate::CreateRaw(this, &FMyExportAssetDependeciesModule::AddToolbarExtension));
 
         LevelEditorModule.GetToolBarExtensibilityManager()->AddExtender(ToolbarExtender);
     }
@@ -69,22 +68,22 @@ void FExportAssetDependeciesModule::StartupModule()
         if (SettingsModule != nullptr)
         {
             // ClassViewer Editor Settings
-            SettingsModule->RegisterSettings("Project", "Game", "ExportAssetDependencies",
-                LOCTEXT("ExportAssetDependenciesSettingsName", "Export Asset Dependencies"),
-                LOCTEXT("ExportAssetDependenciesSettingsDescription", "Export Asset Dependencies."),
-                GetMutableDefault<UExportAssetDependeciesSettings>()
+            SettingsModule->RegisterSettings("Project", "Game", "MyExportAssetDependencies",
+                LOCTEXT("MyExportAssetDependenciesSettingsName", "Export Asset Dependencies"),
+                LOCTEXT("MyExportAssetDependenciesSettingsDescription", "Export Asset Dependencies."),
+                GetMutableDefault<UMyExportAssetDependeciesSettings>()
             );
         }
     }
 }
 
-void FExportAssetDependeciesModule::ShutdownModule()
+void FMyExportAssetDependeciesModule::ShutdownModule()
 {
     // This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
     // we call this function before unloading the module.
-    FExportAssetDependeciesStyle::Shutdown();
+    FMyExportAssetDependeciesStyle::Shutdown();
 
-    FExportAssetDependeciesCommands::Unregister();
+    FMyExportAssetDependeciesCommands::Unregister();
 }
 
 void FExportAssetDependeciesModule::PluginButtonClicked()
@@ -99,7 +98,7 @@ void FExportAssetDependeciesModule::PluginButtonClicked()
         // We are still discovering assets, listen for the completion delegate before building the graph
         if (!AssetRegistryModule.Get().OnFilesLoaded().IsBoundToObject(this))
         {
-            AssetRegistryModule.Get().OnFilesLoaded().AddRaw(this, &FExportAssetDependeciesModule::ExportAssetDependecies);
+            AssetRegistryModule.Get().OnFilesLoaded().AddRaw(this, &FMyExportAssetDependeciesModule::ExportAssetDependecies);
         }
     }
     else
@@ -109,22 +108,22 @@ void FExportAssetDependeciesModule::PluginButtonClicked()
 }
 
 
-void FExportAssetDependeciesModule::AddMenuExtension(FMenuBuilder& Builder)
+void FMyExportAssetDependeciesModule::AddMenuExtension(FMenuBuilder& Builder)
 {
-    Builder.AddMenuEntry(FExportAssetDependeciesCommands::Get().PluginAction);
+    Builder.AddMenuEntry(FMyExportAssetDependeciesCommands::Get().PluginAction);
 }
 
-struct FDependicesInfo
+struct FMyDependicesInfo
 {
     TArray<FString> DependicesInGameContentDir;
     TArray<FString> OtherDependices;
     FString AssetClassString;
 };
 
-void FExportAssetDependeciesModule::ExportAssetDependecies()
+void FMyExportAssetDependeciesModule::ExportAssetDependecies()
 {
     // Validate settings
-    auto CurrentSettings = GetMutableDefault<UExportAssetDependeciesSettings>();
+    auto CurrentSettings = GetMutableDefault<UMyExportAssetDependeciesSettings>();
     if (!CurrentSettings)
     {
         UE_LOG(LogExportAssetDependecies, Error, TEXT("Cannot read ExportAssetDependeciesSettings"));
@@ -143,7 +142,7 @@ void FExportAssetDependeciesModule::ExportAssetDependecies()
             SettingsModule->ShowViewer("Project", "Game", "ExportAssetDependencies");
 
             // UE4 API to show an editor notification.
-            auto Message = LOCTEXT("ExportAssetDependeciesNoValidTargetPackages", "No valid target packages set.");
+            auto Message = LOCTEXT("MyExportAssetDependeciesNoValidTargetPackages", "No valid target packages set.");
             FNotificationInfo Info(Message);
             Info.bUseSuccessFailIcons = true;
             FSlateNotificationManager::Get().AddNotification(Info)->SetCompletionState(SNotificationItem::CS_Fail);
@@ -153,7 +152,7 @@ void FExportAssetDependeciesModule::ExportAssetDependecies()
         }
     }
 
-    TMap<FString, FDependicesInfo> DependicesInfos;
+    TMap<FString, FMyDependicesInfo> DependicesInfos;
     for (auto &PackageFilePath : CurrentSettings->PackagesToExport)
     {
         FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry"));
@@ -181,7 +180,7 @@ void FExportAssetDependeciesModule::ExportAssetDependecies()
 
                 if (AssetDataList.Num() > 1)
                 {
-                    UE_LOG(LogExportAssetDependecies, Error, TEXT("Got multiple AssetData of  %s, please check."), *TargetLongPackageName);
+                    UE_LOG(MyLogExportAssetDependecies, Error, TEXT("Got multiple AssetData of  %s, please check."), *TargetLongPackageName);
                 }
 
                 DependicesInfoEntry.AssetClassString = AssetDataList[0].AssetClass.ToString();
@@ -198,7 +197,7 @@ void FExportAssetDependeciesModule::ExportAssetDependecies()
     SaveDependicesInfo(DependicesInfos);
 }
 
-void FExportAssetDependeciesModule::GatherDependenciesInfoRecursively(FAssetRegistryModule &AssetRegistryModule,
+void FMyExportAssetDependeciesModule::GatherDependenciesInfoRecursively(FAssetRegistryModule &AssetRegistryModule,
     const FString &TargetLongPackageName,
     TArray<FString> &DependicesInGameContentDir,
     TArray<FString> &OtherDependices)
@@ -232,7 +231,7 @@ void FExportAssetDependeciesModule::GatherDependenciesInfoRecursively(FAssetRegi
     }
 }
 
-void FExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FDependicesInfo> &DependicesInfos)
+void FMyExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FDependicesInfo> &DependicesInfos)
 {
     TSharedPtr<FJsonObject> RootJsonObject = MakeShareable(new FJsonObject);
     for (auto &DependicesInfoEntry : DependicesInfos)
@@ -296,19 +295,19 @@ void FExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FDepe
 
         FSlateNotificationManager::Get().AddNotification(Info)->SetCompletionState(SNotificationItem::CS_Success);
 
-        UE_LOG(LogExportAssetDependecies, Log, TEXT("%s. At %s"), *Message.ToString(), *ResultFileFilename);
+        UE_LOG(MyLogExportAssetDependecies, Log, TEXT("%s. At %s"), *Message.ToString(), *ResultFileFilename);
     }
     else
     {
-        UE_LOG(LogExportAssetDependecies, Error, TEXT("Failed to export %s"), *ResultFileFilename);
+        UE_LOG(MyLogExportAssetDependecies, Error, TEXT("Failed to export %s"), *ResultFileFilename);
     }
 }
 
-void FExportAssetDependeciesModule::AddToolbarExtension(FToolBarBuilder& Builder)
+void FMyExportAssetDependeciesModule::AddToolbarExtension(FToolBarBuilder& Builder)
 {
-    Builder.AddToolBarButton(FExportAssetDependeciesCommands::Get().PluginAction);
+    Builder.AddToolBarButton(FMyExportAssetDependeciesCommands::Get().PluginAction);
 }
 
 #undef LOCTEXT_NAMESPACE
 
-IMPLEMENT_MODULE(FExportAssetDependeciesModule, ExportAssetDependecies)
+IMPLEMENT_MODULE(FMyExportAssetDependeciesModule, MyExportAssetDependecies)
