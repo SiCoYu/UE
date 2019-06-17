@@ -26,6 +26,7 @@ public class MyPlugin : ModuleRules
             {
                 "MyPlugin/Public", 
                 // ... add public include paths required here ...
+				// 添加了这个目录，也不能相对于这个目录
 				"MyProjectEditor/Public", 
 			}
         );
