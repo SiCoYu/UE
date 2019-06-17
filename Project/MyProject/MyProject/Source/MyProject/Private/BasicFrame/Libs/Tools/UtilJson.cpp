@@ -40,7 +40,7 @@ bool UtilJson::getJsonAttrArray(TSharedPtr<FJsonObject>& jsonObject, FString& in
 {
 	bool ret = false;
 
-	if (jsonObject->TryGetArrayField(inKey, &outValue))
+	if (jsonObject->TryGetArrayField(inKey, outValue))
 	{
 		ret = true;
 	}
