@@ -12,7 +12,7 @@ MY_END_NAMESPACE
 
 MY_USING_NAMESPACE(MyNS)
 
-class LevelPackage;
+class UPackage;
 
 /**
  * @brief 
@@ -32,7 +32,7 @@ public:
 protected:
 	AppFrame* mAppFrame;
 	FName mCachedLevelName;
-	LevelPackage* mLevelPackage;
+	UPackage* mLevelPackage;
 
 public:
 	//virtual void Tick(float DeltaSeconds) override;
@@ -47,6 +47,6 @@ public:
 	virtual bool ProcessConsoleExec(const TCHAR* Cmd, FOutputDevice& Ar, UObject* Executor) override;
 
 	// https://answers.unrealengine.com/questions/599789/view.html
-	void UMyGameInstanceBase::LoadMapAsync(FName LevelName);
+	void LoadMapAsync(FName LevelName);
 	void FinishedStreamingLevel(const FName& PackageName, UPackage* InLevelPackage, EAsyncLoadingResult::Type Result);
 };

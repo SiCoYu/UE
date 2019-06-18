@@ -21,7 +21,7 @@ void MPakFileSystem::testLoadPak()
 	//如果你想直接加载本地的pak的话,方法的参数列表删掉,然后把SaveArrayToFile这句话也删了,SaveContentDir填写你要加载的路径就可以了...
 		//1.把下载好的文件保存起来
 	//FString SaveContentDir = FPaths::GameContentDir() + TEXT("MultiOne.pak");
-	FString SaveContentDir = UtilFileIO::GameContentDir(false) + TEXT("MultiOne.pak");
+	FString SaveContentDir = UtilFileIO::ProjectContentDir(false) + TEXT("MultiOne.pak");
 	//2.加载刚才保存的文件
 	//获取当前使用的平台,这里使用的是WIN64平台
 	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();

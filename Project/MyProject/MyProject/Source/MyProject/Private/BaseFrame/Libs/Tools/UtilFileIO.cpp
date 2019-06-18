@@ -649,15 +649,16 @@ FString UtilFileIO::ConvertRelativePathToFull(FString& relativePath)
 
 FString UtilFileIO::GetFileBasePath()
 {
-	return FPaths::GetFileBasePath();
+	//return FPaths::GetFileBasePath();
+	return "";
 }
 
-FString UtilFileIO::TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension = TEXT(""))
+FString UtilFileIO::TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension)
 {
 	FPackageName::TryConvertLongPackageNameToFilename(InLongPackageName, OutFilename, InExtension);
 }
 
-bool UtilFileIO::TryConvertFilenameToLongPackageName(const FString& InFilename, FString& OutPackageName, FString* OutFailureReason = nullptr)
+bool UtilFileIO::TryConvertFilenameToLongPackageName(const FString& InFilename, FString& OutPackageName, FString* OutFailureReason)
 {
 	FPackageName::TryConvertFilenameToLongPackageName(InFilename, OutPackageName, OutFailureReason);
 }

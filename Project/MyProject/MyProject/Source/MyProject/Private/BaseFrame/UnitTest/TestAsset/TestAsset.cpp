@@ -8,6 +8,8 @@
 #include "AssetData.h"	// FAssetData
 #include "Engine/Texture2D.h"		// UTexture2D 
 
+#include "WidgetBlueprint.h"		// Engine\Source\Editor\UMGEditor\Public\WidgetBlueprint.h
+
 MY_BEGIN_NAMESPACE(MyNS)
 
 void TestAsset::run()

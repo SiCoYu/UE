@@ -25,8 +25,8 @@ void TestPak::run()
 void TestPak::_testA()
 {
 	// 一定是相对目录，绝对目录是加载不了资源的
-	//FString pakFileFullPath = UtilFileIO::GameContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
-	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/Cube.pak");
+	//FString pakFileFullPath = UtilFileIO::ProjectContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
+	FString pakFileFullPath = UtilFileIO::ProjectContentDir(false) + TEXT("MyStreamingAssets/Cube.pak");
 	//FString mountPoint(UtilFileIO::EngineContentDir(true));
 	FString mountPoint(UtilFileIO::EngineContentDir(false));
 	//FString mountPoint(UtilFileIO::GameContentDir(false));
@@ -68,12 +68,12 @@ void TestPak::_testB()
 void TestPak::_testC()
 {
 	// 一定是相对目录，绝对目录是加载不了资源的
-	//FString pakFileFullPath = UtilFileIO::GameContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
-	//FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
-	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/MyBlueprints/Cube.pak");
+	//FString pakFileFullPath = UtilFileIO::ProjectContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
+	//FString pakFileFullPath = UtilFileIO::ProjectContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
+	FString pakFileFullPath = UtilFileIO::ProjectContentDir(false) + TEXT("MyStreamingAssets/MyBlueprints/Cube.pak");
 	//FString mountPoint(UtilFileIO::EngineContentDir(true));
 	FString mountPoint(UtilFileIO::EngineContentDir(false));
-	//FString mountPoint(UtilFileIO::GameContentDir(false));
+	//FString mountPoint(UtilFileIO::ProjectContentDir(false));
 
 	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
 

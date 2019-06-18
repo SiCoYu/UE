@@ -118,8 +118,8 @@ void FExportAssetDependeciesModule::PluginButtonClicked()
 void FExportAssetDependeciesModule::onExportAllPluginButtonClicked()
 {
 	TArray<FString> outFileList;
-	FString absoluteContentPath = UtilFileIO::GameContentDir();
-	UtilFileIO::GetAllFile(absoluteContentPath, outFileList, Recursive);
+	FString absoluteContentPath = UtilFileIO::ProjectContentDir();
+	UtilFileIO::GetAllFile(absoluteContentPath, outFileList, true);
 }
 
 void FExportAssetDependeciesModule::AddMenuExtension(FMenuBuilder& Builder)

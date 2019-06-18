@@ -17,7 +17,7 @@ LuaFileUtil::LuaFileUtil()
 
 void LuaFileUtil::init()
 {
-	FString contentPath = UtilFileIO::GameContentDir();
+	FString contentPath = UtilFileIO::ProjectContentDir();
 	std::string path = UtilStr::ConvFString2StdStr(contentPath);
 	std::string searchPath = "";
 
