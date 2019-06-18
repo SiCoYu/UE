@@ -36,7 +36,7 @@ MFileSystem::MFileSystem()
 
 void MFileSystem::init()
 {
-	FString contentPath = UtilFileIO::GameContentDir();
+	FString contentPath = UtilFileIO::ProjectContentDir();
 	std::string path = UtilStr::ConvFString2StdStr(contentPath);
 	std::string searchPath = "";
 
@@ -78,12 +78,12 @@ void MFileSystem::initFileSys()
 	extern FString GExternalFilePath;
 	CacheFolderPath = GExternalFilePath / TEXT("ProgramBinaryCache");
 #else
-	CacheFolderPath = UtilFileIO::GameSavedDir() / TEXT("ProgramBinaryCache");
+	CacheFolderPath = UtilFileIO::ProjectSavedDir() / TEXT("ProgramBinaryCache");
 #endif
 
 	MFileSystem::msPersistentDataPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
 
-	CacheFolderPath = UtilFileIO::GameContentDir();
+	CacheFolderPath = UtilFileIO::ProjectContentDir();
 	MFileSystem::msStreamingAssetsPath = UtilStr::ConvFString2StdStr(CacheFolderPath);
 }
 
