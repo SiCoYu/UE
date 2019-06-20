@@ -28,7 +28,7 @@ public:
 	void init();
 	void dispose();
 
-	int32 LoadAssetDataFromPath(const FString& Path)
+	int32 LoadAssetDataFromPath(const FString& Path);
 };
 
 MY_END_NAMESPACE

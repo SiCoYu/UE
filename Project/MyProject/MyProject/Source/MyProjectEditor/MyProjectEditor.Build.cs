@@ -278,6 +278,7 @@ public class MyProjectEditor : ModuleRules
 				"MyProject", 
 				"DesktopPlatform",  // Developer\DesktopPlatform
 				"UMGEditor",		// Editor
+				"Paper2D",			// Paper2D
 			}
 		);
  
@@ -311,6 +312,7 @@ public class MyProjectEditor : ModuleRules
 				"MyProject",
 				"DesktopPlatform",  // Developer\DesktopPlatform
 				"UMGEditor",		// Editor
+				"Paper2D",			// Paper2D
 			}
         );
 

@@ -1,5 +1,7 @@
 #include "MyProject.h"
 #include "MyObjectLibrary.h"
+#include "Engine/ObjectLibrary.h"	// ObjectLibrary
+#include "UObject/UObjectGlobals.h"	  // Engine\Source\Runtime\CoreUObject\Public\UObject\UObjectGlobals.h    ConstructObject
 
 MY_BEGIN_NAMESPACE(MyNS)
 
@@ -15,7 +17,7 @@ MyObjectLibrary::MyObjectLibrary()
 
 void MyObjectLibrary::init()
 {
-	mObjectLibrary = ConstructObject<UObjectLibrary>(UObjectLibrary::StaticClass());
+	this->mObjectLibrary = ConstructObject<UObjectLibrary>(UObjectLibrary::StaticClass());
 }
 
 void MyObjectLibrary::dispose()

@@ -24,6 +24,9 @@
 #include "FileHelper.h"
 #include "json.h"
 #include "UtilFileIO.h"
+#include "PlatformDefine.h"
+
+MY_USING_NAMESPACE(MyNS);
 
 DEFINE_LOG_CATEGORY(LogExportAssetDependecies);
 

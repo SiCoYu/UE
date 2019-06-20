@@ -45,11 +45,11 @@ void TestPak::_testA()
 void TestPak::_testB()
 {
 	// 一定是相对目录，绝对目录是加载不了资源的
-	//FString pakFileFullPath = UtilFileIO::GameContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
-	FString pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
+	//FString pakFileFullPath = UtilFileIO::ProjectContentDir(true) + TEXT("MyStreamingAssets/MultiOne.pak");
+	FString pakFileFullPath = UtilFileIO::ProjectContentDir(false) + TEXT("MyStreamingAssets/MultiOne.pak");
 	//FString mountPoint(UtilFileIO::EngineContentDir(true));
 	FString mountPoint(UtilFileIO::EngineContentDir(false));
-	//FString mountPoint(UtilFileIO::GameContentDir(false));
+	//FString mountPoint(UtilFileIO::ProjectContentDir(false));
 
 	MPakFileStream* pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
 
@@ -83,10 +83,10 @@ void TestPak::_testC()
 	GMyStreamableManager->SynchronousLoad(softObjectPath.getNativeSoftObjectPath());
 
 
-	pakFileFullPath = UtilFileIO::GameContentDir(false) + TEXT("PakTest.pak");
+	pakFileFullPath = UtilFileIO::ProjectContentDir(false) + TEXT("PakTest.pak");
 	//FString mountPoint(UtilFileIO::EngineContentDir(true));
 	mountPoint = UtilFileIO::EngineContentDir(false);
-	//FString mountPoint(UtilFileIO::GameContentDir(false));
+	//FString mountPoint(UtilFileIO::ProjectContentDir(false));
 
 	pakFileStream = GPakFileSystem->mountOnePak(pakFileFullPath, mountPoint);
 

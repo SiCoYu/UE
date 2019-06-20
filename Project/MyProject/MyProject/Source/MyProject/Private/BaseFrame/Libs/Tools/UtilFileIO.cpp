@@ -653,7 +653,7 @@ FString UtilFileIO::GetFileBasePath()
 	return "";
 }
 
-FString UtilFileIO::TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension)
+bool UtilFileIO::TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension)
 {
 	return FPackageName::TryConvertLongPackageNameToFilename(InLongPackageName, OutFilename, InExtension);
 }

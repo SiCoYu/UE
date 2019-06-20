@@ -105,7 +105,7 @@ public:
 	// You shouldn't try to read or write to GetFileBasePath() directly since anything here is possibly inside another file wrapper. You should read and write native files to GExternalFilePath instead. If you really need to get this, though, you can do it like so:
 	static FString ConvertRelativePathToFull(FString& relativePath);
 	static FString GetFileBasePath();
-	static FString TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension = TEXT(""));
+	static bool TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension = TEXT(""));
 	static bool TryConvertFilenameToLongPackageName(const FString& InFilename, FString& OutPackageName, FString* OutFailureReason = nullptr);
 	static void RegisterMountPoint(const FString& RootPath, const FString& ContentPath);
 	static void UnRegisterMountPoint(const FString& RootPath, const FString& ContentPath);
