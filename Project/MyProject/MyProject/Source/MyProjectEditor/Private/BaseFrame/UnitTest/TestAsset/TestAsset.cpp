@@ -1,4 +1,4 @@
-﻿#include "MyProjectEditor.h"
+﻿//#include "MyProjectEditor.h"
 #include "TestAsset.h"
 #include "MyAssetRegistry.h"
 #include "Ctx.h"
@@ -48,7 +48,9 @@ void TestAsset::_testLoadAndPackageName()
 		FStringAssetReference testAssetRef = " /Game/UMG/NewWidgetBlueprint ";
 		UObject* pObject = testAssetRef.TryLoad();
 		UWidgetBlueprint* pWidgetBlueprint = Cast<UWidgetBlueprint>(pObject);
-		auto widget = CreateWidget<UUserWidget>(this, pWidgetBlueprint->GeneratedClass);
+		//error C2664 : 'WidgetT *CreateWidget<UUserWidget,MyNS::TestAsset>(OwnerT *,TSubclassOf<UUserWidget>,FName)' : cannot convert argument 2 from 'TSubclassOf<UObject>' to 'TSubclassOf<UUserWidget>'
+		//auto widget = CreateWidget<UUserWidget>(this, pWidgetBlueprint->GeneratedClass);
+		auto widget = CreateWidget<UUserWidget>(this, Cast<UUserWidget>(pWidgetBlueprint->GeneratedClass));
 		// do something
 		// widget->AddToViewport();
 		FString pathName1 = FPackageName::LongPackageNameToFilename(pObject->GetPathName(), FPackageName::GetAssetPackageExtension());
