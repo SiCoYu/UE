@@ -660,7 +660,7 @@ bool UtilFileIO::TryConvertLongPackageNameToFilename(const FString& InLongPackag
 
 bool UtilFileIO::TryConvertFilenameToLongPackageName(const FString& InFilename, FString& OutPackageName, FString* OutFailureReason)
 {
-	FPackageName::TryConvertFilenameToLongPackageName(InFilename, OutPackageName, OutFailureReason);
+	return FPackageName::TryConvertFilenameToLongPackageName(InFilename, OutPackageName, OutFailureReason);
 }
 
 void UtilFileIO::RegisterMountPoint(const FString& RootPath, const FString& ContentPath)

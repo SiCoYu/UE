@@ -29,7 +29,8 @@ public class MyProjectEditor : ModuleRules
                 "MyProjectEditor/Private/MyEngine/Example/CppAndBlueprint",
 
 				// BaseFrame
-				"MyProjectEditor/Private/BaseFrame/AppEditor/Common/EngineWrap",
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Libs/EngineWrap",
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Common/Common",
 				"MyProjectEditor/Private/BaseFrame/AppEditor/Module/Asset/ExportAssetDependecies/Private",
 				"MyProjectEditor/Private/BaseFrame/AppEditor/Module/Asset/ExportAssetDependecies/Public",
 

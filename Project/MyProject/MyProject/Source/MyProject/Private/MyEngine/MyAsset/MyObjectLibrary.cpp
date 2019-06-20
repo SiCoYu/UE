@@ -17,7 +17,8 @@ MyObjectLibrary::MyObjectLibrary()
 
 void MyObjectLibrary::init()
 {
-	this->mObjectLibrary = ConstructObject<UObjectLibrary>(UObjectLibrary::StaticClass());
+	//this->mObjectLibrary = ConstructObject<UObjectLibrary>(UObjectLibrary::StaticClass());
+	this->mObjectLibrary = ::NewObject<UObjectLibrary>(UObjectLibrary::StaticClass());
 }
 
 void MyObjectLibrary::dispose()

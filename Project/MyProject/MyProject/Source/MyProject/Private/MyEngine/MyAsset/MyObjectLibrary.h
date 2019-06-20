@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Engine/ObjectLibrary.h"		// UObjectLibrary
+#include "HAL/Platform.h"		// int32
+#include "Containers/UnrealString.h"	// FString
+//#include "Engine/ObjectLibrary.h"		// UObjectLibrary
 #include "PlatformDefine.h"
 
 class UObjectLibrary;
