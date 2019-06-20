@@ -500,7 +500,7 @@ public:
 	static void DestroyImmediate(AActor* actor, bool bNetForce = false, bool bShouldModifyLevel = true);
 	static UNavigationSystemV1* getCurrentNavigationSystemV1();
 	// https://blog.csdn.net/qq_35221523/article/details/80254292
-	static FString OpenDirectoryDialog(FString& InitialDir);
+	//static FString OpenDirectoryDialog(FString& InitialDir);
 };
 
 MY_END_NAMESPACE

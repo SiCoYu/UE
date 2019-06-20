@@ -29,8 +29,8 @@
 #include "Serialization/ArchiveLoadCompressedProxy.h"	// FArchiveSaveCompressedProxy 不加这个编译报错
 
 // TODO: Developer
-#include "IDesktopPlatform.h"	// Engine\Source\Developer\DesktopPlatform\Public\IDesktopPlatform.h
-#include "DesktopPlatformModule.h"	// Engine\Source\Developer\DesktopPlatform\Public\DesktopPlatformModule.h
+//#include "IDesktopPlatform.h"	// Engine\Source\Developer\DesktopPlatform\Public\IDesktopPlatform.h
+//#include "DesktopPlatformModule.h"	// Engine\Source\Developer\DesktopPlatform\Public\DesktopPlatformModule.h
 
 DEFINE_LOG_CATEGORY(MyLog);
 
@@ -1420,21 +1420,21 @@ UNavigationSystemV1* UtilEngineWrap::getCurrentNavigationSystemV1()
 	return FNavigationSystem::GetCurrent<UNavigationSystemV1>(UtilEngineWrap::GetWorld());
 }
 
-FString UtilEngineWrap::OpenDirectoryDialog(FString& InitialDir)
-{
-	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
-
-	if (DesktopPlatform)
-	{
-		FString FolderName;
-		const FString Title = LOCTEXT("BrowseForFolderTitle", "Choose a directory to monitor").ToString();
-		const bool bFolderSelected = DesktopPlatform->OpenDirectoryDialog(FSlateApplication::Get().FindBestParentWindowHandleForDialogs(nullptr), Title, InitialDir, FolderName);
-
-		if (bFolderSelected)
-		{
-			FolderName /= TEXT("");
-		}
-
-		return FolderName;
-	}
-}
+//FString UtilEngineWrap::OpenDirectoryDialog(FString& InitialDir)
+//{
+//	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
+//
+//	if (DesktopPlatform)
+//	{
+//		FString FolderName;
+//		const FString Title = LOCTEXT("BrowseForFolderTitle", "Choose a directory to monitor").ToString();
+//		const bool bFolderSelected = DesktopPlatform->OpenDirectoryDialog(FSlateApplication::Get().FindBestParentWindowHandleForDialogs(nullptr), Title, InitialDir, FolderName);
+//
+//		if (bFolderSelected)
+//		{
+//			FolderName /= TEXT("");
+//		}
+//
+//		return FolderName;
+//	}
+//}
