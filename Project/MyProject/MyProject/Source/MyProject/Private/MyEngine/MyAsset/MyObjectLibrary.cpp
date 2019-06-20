@@ -28,7 +28,7 @@ void MyObjectLibrary::dispose()
 
 int32 MyObjectLibrary::LoadAssetDataFromPath(const FString& Path)
 {
-	mObjectLibrary->LoadAssetDataFromPath(Path);
+	return this->mObjectLibrary->LoadAssetDataFromPath(Path);
 }
 
 MY_END_NAMESPACE
