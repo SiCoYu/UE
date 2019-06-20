@@ -26,21 +26,33 @@
 
 // 编辑器定义
 #ifdef WITH_EDITOR
-	#define	MY_WITH_EDITOR
+	#ifndef MY_WITH_EDITOR
+		#define	MY_WITH_EDITOR
+	#endif
 #else
-	#undef	MY_WITH_EDITOR
+	#ifdef MY_WITH_EDITOR
+		#undef	MY_WITH_EDITOR
+	#endif
 #endif
 
 #ifdef UE_BUILD_SHIPPING
-	#define	MY_UE_BUILD_SHIPPING
+	#ifndef MY_UE_BUILD_SHIPPING
+		#define	MY_UE_BUILD_SHIPPING
+	#endif
 #else
-	#undef	MY_UE_BUILD_SHIPPING
+	#ifdef MY_UE_BUILD_SHIPPING
+		#undef	MY_UE_BUILD_SHIPPING
+	#endif
 #endif
 
 #ifdef UE_BUILD_TEST
-	#define	MY_UE_BUILD_TEST
+	#ifndef MY_UE_BUILD_TEST
+		#define	MY_UE_BUILD_TEST
+	#endif
 #else
-	#undef	MY_UE_BUILD_TEST
+	#ifndef MY_UE_BUILD_TEST
+		#undef	MY_UE_BUILD_TEST
+	#endif
 #endif
 
 // 定义平台类型
