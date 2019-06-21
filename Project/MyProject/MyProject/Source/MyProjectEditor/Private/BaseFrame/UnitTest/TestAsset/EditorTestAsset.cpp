@@ -21,7 +21,8 @@ void EditorTestAsset::run()
 void EditorTestAsset::_testDep()
 {
 	TArray<FName> OutDependencies;
-	GMyAssetRegistry->GetDependencies(TEXT("Blueprint'/Game/MyAsset/MyTom/PakTest.PakTest'"), OutDependencies);
+	// 这个是两个模块变量，不是一个模块变量
+	//GMyAssetRegistry->GetDependencies(TEXT("Blueprint'/Game/MyAsset/MyTom/PakTest.PakTest'"), OutDependencies);
 }
 //
 //void TestAsset::_testGetAssetData()
