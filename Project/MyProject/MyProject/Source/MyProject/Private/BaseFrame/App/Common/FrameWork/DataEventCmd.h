@@ -11,7 +11,7 @@ class IDispatchObject;
 /**
 * @brief 全局性的事件
 */
-class DataEventCmd : public GObject
+class MYPROJECT_API DataEventCmd : public GObject
 {
 public:
 	DataEventCmd();

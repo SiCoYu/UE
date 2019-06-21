@@ -8,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 全局性的事件
  */
-class DataDelegate : public GObject
+class MYPROJECT_API DataDelegate : public GObject
 {
 public:
 	DataDelegate();
