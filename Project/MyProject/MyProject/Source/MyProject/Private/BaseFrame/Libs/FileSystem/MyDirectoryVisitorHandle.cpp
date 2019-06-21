@@ -5,22 +5,48 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 // error C2059: syntax error: 'this'
 // error C2530: 'MyNS::MyDirectoryVisitorHandle::mFileArray': references must be initialized
-MyDirectoryVisitorHandle::MyDirectoryVisitorHandle(TArray<FString>& outArray)
+MyDirectoryVisitorHandle::MyDirectoryVisitorHandle(TArray<FString>& outFileArrayRef, TArray<FString>& outDirectoryArrayRef)
 //	: this->mFileArray(outArray)
-	: mFileArray(outArray)
+	: mFileArrayRef(outFileArrayRef)
+	, mDirectoryArrayRef(outDirectoryArrayRef)
 {
 
 }
 
-bool MyDirectoryVisitorHandle::OnVisitFileHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
+MyDirectoryVisitorHandle::MyDirectoryVisitorHandle(TArray<FString>* outFileArrayPtr, TArray<FString>* outDirectoryArrayPtr)
+	: this->mFileArrayPtr(outFileArrayPtr)
+	, this->mDirectoryArrayPtr(outDirectoryArrayPtr)
 {
-	this->mFileArray.Push(absoluteSourcePath);
+
+}
+
+bool MyDirectoryVisitorHandle::OnVisitFileHandleRef(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
+{
+	this->mFileArrayRef.Push(absoluteSourcePath);
 	return true;
 }
 
-bool MyDirectoryVisitorHandle::OnVisitDirectoryHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
+bool MyDirectoryVisitorHandle::OnVisitDirectoryHandleRef(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
 {
-	this->mFileArray.Push(absoluteSourcePath);
+	this->mDirectoryArrayRef.Push(absoluteSourcePath);
+	return true;
+}
+
+bool MyDirectoryVisitorHandle::OnVisitFileHandlePtr(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
+{
+	if (nullptr != this->mFileArrayPtr)
+	{
+		this->mFileArrayPtr->Push(absoluteSourcePath);
+	}
+	return true;
+}
+
+bool MyDirectoryVisitorHandle::OnVisitDirectoryHandlePtr(FString absoluteSourcePath, FString absoluteDestPath, FString fileName)
+{
+	if (nullptr != this->mDirectoryArrayPtr)
+	{
+		this->mDirectoryArrayPtr->Push(absoluteSourcePath);
+	}
 	return true;
 }
 

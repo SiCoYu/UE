@@ -574,17 +574,17 @@ bool UtilFileIO::GetAllFile(FString& absoluteSourcePath, TArray<FString>& Filena
 {
 	FString absoluteDestinationPath;
 
-	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = MY_NEW MyDirectoryVisitorHandle(FilenamesOut);
+	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = MY_NEW MyDirectoryVisitorHandle(&FilenamesOut, nullptr);
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
 		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
-			directoryVisitorHandle.get(), 
-			&MyDirectoryVisitorHandle::OnVisitFileHandle
+			directoryVisitorHandle.get(),
+			&MyDirectoryVisitorHandle::OnVisitDirectoryHandlePtr
 		),
 		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
-			directoryVisitorHandle.get(),
-			&MyDirectoryVisitorHandle::OnVisitDirectoryHandle
+			directoryVisitorHandle.get(), 
+			&MyDirectoryVisitorHandle::OnVisitFileHandlePtr
 		),
 		Recursive
 	);
@@ -596,17 +596,17 @@ bool UtilFileIO::GetAllDirectory(FString& absoluteSourcePath, TArray<FString>& D
 {
 	FString absoluteDestinationPath;
 
-	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = MY_NEW MyDirectoryVisitorHandle(DirsOut);
+	MyScopePointer<MyDirectoryVisitorHandle> directoryVisitorHandle = MY_NEW MyDirectoryVisitorHandle(nullptr, &DirsOut);
 	UtilFileIO::traverseDirectory(
 		absoluteSourcePath,
 		absoluteDestinationPath,
 		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
 			directoryVisitorHandle.get(),
-			&MyDirectoryVisitorHandle::OnVisitFileHandle
+			&MyDirectoryVisitorHandle::OnVisitDirectoryHandlePtr
 		),
 		MAKE_TRAVERSE_DIRECTORY_DELEGATE(
 			directoryVisitorHandle.get(),
-			&MyDirectoryVisitorHandle::OnVisitDirectoryHandle
+			&MyDirectoryVisitorHandle::OnVisitFileHandlePtr
 		),
 		Recursive
 	);
