@@ -1,5 +1,5 @@
 ﻿//#include "MyProjectEditor.h"
-#include "TestAsset.h"
+#include "EditorTestAsset.h"
 #include "MyAssetRegistry.h"
 #include "Ctx.h"
 #include "UObject/NameTypes.h"	// FName
