@@ -52,7 +52,7 @@ void TestAsset::_testLoadAndPackageName()
 		//auto widget = CreateWidget<UUserWidget>(this, pWidgetBlueprint->GeneratedClass);
 		// error C2664: 'WidgetT *CreateWidget<UUserWidget,MyNS::TestAsset>(OwnerT *,TSubclassOf<UUserWidget>,FName)': cannot convert argument 2 from 'T *' to 'TSubclassOf<UUserWidget>'
 		//auto widget = CreateWidget<UUserWidget>(this, Cast<UUserWidget>(pWidgetBlueprint->GeneratedClass));
-		auto widget = CreateWidget<UUserWidget>(this, Cast<TSubclassOf<UUserWidget>>(pWidgetBlueprint->GeneratedClass));
+		//auto widget = CreateWidget<UUserWidget>(this, Cast<TSubclassOf<UUserWidget>>(pWidgetBlueprint->GeneratedClass));
 		// do something
 		// widget->AddToViewport();
 		FString pathName1 = FPackageName::LongPackageNameToFilename(pObject->GetPathName(), FPackageName::GetAssetPackageExtension());
