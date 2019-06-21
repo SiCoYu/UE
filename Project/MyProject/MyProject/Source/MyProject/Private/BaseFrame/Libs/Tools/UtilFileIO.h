@@ -15,7 +15,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @ref https://wiki.unrealengine.com/File_Management,_Create_Folders,_Delete_Files,_and_More
  */
-class UtilFileIO
+// error LNK2019: unresolved external symbol "public: static class FString __cdecl MyNS::UtilFileIO::ProjectContentDir(bool)" (?ProjectContentDir@UtilFileIO@MyNS@@SA?AVFString@@_N@Z) referenced in function "public: void __cdecl FExportAssetDependeciesModule::onExportAllPluginButtonClicked(void)" (?onExportAllPluginButtonClicked@FExportAssetDependeciesModule@@QEAAXXZ)
+class MYPROJECT_API UtilFileIO
 {
 public:
 	// 结合路径到完整的目录，目前只支持两个，需要的继续添加
