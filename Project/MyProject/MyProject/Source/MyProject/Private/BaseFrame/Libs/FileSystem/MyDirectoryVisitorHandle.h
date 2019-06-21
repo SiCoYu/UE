@@ -10,13 +10,21 @@ MY_BEGIN_NAMESPACE(MyNS)
 class MyDirectoryVisitorHandle
 {
 public:
-	MyDirectoryVisitorHandle(TArray<FString>& outArray);
+	MyDirectoryVisitorHandle(TArray<FString>& outFileArrayRef, TArray<FString>& outDirectoryArrayRef);
+	MyDirectoryVisitorHandle(TArray<FString>* outFileArrayPtr, TArray<FString>* outDirectoryArrayPtr);
 
-	bool OnVisitFileHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName);
-	bool OnVisitDirectoryHandle(FString absoluteSourcePath, FString absoluteDestPath, FString fileName);
+	bool OnVisitFileHandleRef(FString absoluteSourcePath, FString absoluteDestPath, FString fileName);
+	bool OnVisitDirectoryHandleRef(FString absoluteSourcePath, FString absoluteDestPath, FString fileName);
+
+	bool OnVisitFileHandlePtr(FString absoluteSourcePath, FString absoluteDestPath, FString fileName);
+	bool OnVisitDirectoryHandlePtr(FString absoluteSourcePath, FString absoluteDestPath, FString fileName);
 
 private:
-	TArray<FString>& mFileArray;
+	TArray<FString>& mFileArrayRef;
+	TArray<FString>& mDirectoryArrayRef;
+
+	TArray<FString>* mFileArrayPtr;
+	TArray<FString>* mDirectoryArrayPtr;
 };
 
 MY_END_NAMESPACE
