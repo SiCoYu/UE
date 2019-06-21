@@ -11,7 +11,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class MyAllocatedObject : public GObjectBase
+class MYPROJECT_API MyAllocatedObject : public GObjectBase
 {
 	M_DECLARE_CLASS(MyAllocatedObject, GObjectBase)
 

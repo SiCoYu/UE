@@ -5,13 +5,13 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class TestAsset : public TestBase
+class EditorTestAsset : public TestBase
 {
-//public:
-//	virtual void run() override;
-//
-//protected:
-//	void _testDep();
+public:
+	virtual void run() override;
+
+protected:
+	void _testDep();
 //	void _testGetAssetData();
 //	// http://www.90cg.com/wordpress/ue4_unreal-asset-loading/
 //	void _testLoadAndPackageName();

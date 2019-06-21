@@ -12,6 +12,8 @@ class DataDelegate;
 class DataEventCmd;
 class SceneNavigation;
 
+// 一点加  MYPROJECT_API ，就会出现 error C4150: deletion of pointer to incomplete type 'MyNS::SceneNavigation'; no destructor called
+//class MYPROJECT_API CtxExt : public Ctx
 class CtxExt : public Ctx
 {
 protected:

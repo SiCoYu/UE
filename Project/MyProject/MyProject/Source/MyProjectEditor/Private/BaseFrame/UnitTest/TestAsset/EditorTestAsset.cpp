@@ -13,16 +13,16 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-//void TestAsset::run()
-//{
-//	this->_testDep();
-//}
-//
-//void TestAsset::_testDep()
-//{
-//	TArray<FName> OutDependencies;
-//	GMyAssetRegistry->GetDependencies(TEXT("Blueprint'/Game/MyAsset/MyTom/PakTest.PakTest'"), OutDependencies);
-//}
+void EditorTestAsset::run()
+{
+	this->_testDep();
+}
+
+void EditorTestAsset::_testDep()
+{
+	TArray<FName> OutDependencies;
+	GMyAssetRegistry->GetDependencies(TEXT("Blueprint'/Game/MyAsset/MyTom/PakTest.PakTest'"), OutDependencies);
+}
 //
 //void TestAsset::_testGetAssetData()
 //{
