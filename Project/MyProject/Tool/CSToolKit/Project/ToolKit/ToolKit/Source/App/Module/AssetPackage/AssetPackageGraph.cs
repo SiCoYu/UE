@@ -248,7 +248,9 @@ namespace ToolSet
 
         public AssetPackageGraph()
         {
-            this._CollectRootPathList = new List<string>();
+			this.mAssetRegister = new AssetRegister();
+
+			this._CollectRootPathList = new List<string>();
             this._IncludeAssetBundlePathList = new List<string>();
             this._ExcludeAssetBundlePathList = new List<string>(); 
             this._ExcludeAssetBundleFileList = new List<string>();
@@ -269,7 +271,8 @@ namespace ToolSet
 
         public void Init()
         {
-            this._CheckIncludeAndExcludePath();
+			this.mAssetRegister.init();
+			this._CheckIncludeAndExcludePath();
         }
 
         public void Dispose()
@@ -295,7 +298,9 @@ namespace ToolSet
 
             this._RecordAllFile2OrigPathDic.Clear();
             this._Changed2OrigPathDic.Clear();
-        }
+
+			this.mAssetRegister.dispose();
+		}
 
         public void SetFileNamePostFix(string value)
         {
