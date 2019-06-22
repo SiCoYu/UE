@@ -24,7 +24,9 @@
 #include "FileHelper.h"
 #include "json.h"
 #include "UtilFileIO.h"
+#include "UtilNaiveArray.h"
 #include "PlatformDefine.h"
+#include "DependicesInfo.h"
 
 MY_USING_NAMESPACE(MyNS);
 
@@ -123,19 +125,29 @@ void FExportAssetDependeciesModule::onExportAllPluginButtonClicked()
 	TArray<FString> outFileList;
 	FString absoluteContentPath = UtilFileIO::ProjectContentDir();
 	UtilFileIO::GetAllFile(absoluteContentPath, outFileList, true);
+
+	TMap<FString, FDependicesInfo> DependicesInfos;
+	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry"));
+
+	int index = 0;
+	int arrayLenth = UtilNaiveArray::Num(outFileList);
+	while (index < arrayLenth)
+	{
+		this->_ExportOneAssetDependeciesByLongPackageName(
+			outFileList[index],
+			DependicesInfos,
+			AssetRegistryModule
+		);
+		++index;
+	}
+
+	this->SaveDependicesInfo(DependicesInfos);
 }
 
 void FExportAssetDependeciesModule::AddMenuExtension(FMenuBuilder& Builder)
 {
     Builder.AddMenuEntry(FExportAssetDependeciesCommands::Get().PluginAction);
 }
-
-struct FDependicesInfo
-{
-    TArray<FString> DependicesInGameContentDir;
-    TArray<FString> OtherDependices;
-    FString AssetClassString;
-};
 
 void FExportAssetDependeciesModule::ExportAssetDependecies()
 {
@@ -318,6 +330,37 @@ void FExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FDepe
     {
         UE_LOG(LogExportAssetDependecies, Error, TEXT("Failed to export %s"), *ResultFileFilename);
     }
+}
+
+void FExportAssetDependeciesModule::_ExportOneAssetDependeciesByLongPackageName(const FString& TargetLongPackageName, TMap<FString, FDependicesInfo>& DependicesInfos, const FAssetRegistryModule& AssetRegistryModule)
+{
+	if (FPackageName::DoesPackageExist(TargetLongPackageName))
+	{
+		auto& DependicesInfoEntry = DependicesInfos.Add(TargetLongPackageName);
+
+		// Try get asset type.
+		{
+			TArray<FAssetData> AssetDataList;
+			bool  bResult = AssetRegistryModule.Get().GetAssetsByPackageName(FName(*TargetLongPackageName), AssetDataList);
+			if (!bResult || AssetDataList.Num() == 0)
+			{
+				UE_LOG(LogExportAssetDependecies, Error, TEXT("Failed to get AssetData of  %s, please check."), *TargetLongPackageName);
+				return;
+			}
+
+			if (AssetDataList.Num() > 1)
+			{
+				UE_LOG(LogExportAssetDependecies, Error, TEXT("Got multiple AssetData of  %s, please check."), *TargetLongPackageName);
+			}
+
+			DependicesInfoEntry.AssetClassString = AssetDataList[0].AssetClass.ToString();
+		}
+
+		this->GatherDependenciesInfoRecursively(AssetRegistryModule, TargetLongPackageName, DependicesInfoEntry.DependicesInGameContentDir, DependicesInfoEntry.OtherDependices);
+	}
+
+	TArray<FName>  ACs;
+	AssetRegistryModule.Get().GetAncestorClassNames(*TargetLongPackageName, ACs);
 }
 
 void FExportAssetDependeciesModule::AddToolbarExtension(FToolBarBuilder& Builder)
