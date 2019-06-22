@@ -663,6 +663,7 @@ bool UtilFileIO::TryConvertFilenameToLongPackageName(const FString& InFilename, 
 	return FPackageName::TryConvertFilenameToLongPackageName(InFilename, OutPackageName, OutFailureReason);
 }
 
+// LongPackageName 如果是绝对路径竟然也返回 true
 bool UtilFileIO::DoesPackageExist(const FString& LongPackageName, const FGuid* Guid, FString* OutFilename, bool InAllowTextFormats)
 {
 	return FPackageName::DoesPackageExist(LongPackageName, Guid, OutFilename, InAllowTextFormats);
