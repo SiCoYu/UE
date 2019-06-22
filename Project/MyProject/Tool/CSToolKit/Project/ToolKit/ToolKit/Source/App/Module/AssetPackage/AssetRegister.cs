@@ -22,6 +22,9 @@ public class AssetRegisterDependencyItem
 
 public class AssetRegisterItem
 {
+	protected string mLongPackageName;
+	protected string mAbsolutePackagePath;
+
 	protected MList<AssetRegisterDependencyItem> mAssetDependencyList;
 	protected MList<AssetRegisterDependencyItem> mAssetDependencyOtherList;
 
@@ -29,6 +32,28 @@ public class AssetRegisterItem
 	{
 		this.mAssetDependencyList = new MList<AssetRegisterDependencyItem>();
 		this.mAssetDependencyOtherList = new MList<AssetRegisterDependencyItem>();
+	}
+
+	public string GetLongPackageName()
+	{
+		return this.mLongPackageName;
+	}
+
+	public void SetLongPackageName(string path)
+	{
+		this.mLongPackageName = path;
+
+		UtilUE4EngineWrap.TryConvertLongPackageNameToFilename(ref this.mLongPackageName, ref this.mAbsolutePackagePath);
+	}
+
+	public string GetAbsolutePackagePath()
+	{
+		return this.mAbsolutePackagePath;
+	}
+
+	public void SetAbsolutePackagePath(string path)
+	{
+		this.mAbsolutePackagePath = path;
 	}
 
 	public void addDependencyInAssetPath(string path)
@@ -96,7 +121,7 @@ public class AssetRegister
 
 	protected void _parseConfig()
 	{
-		string path = "G:/UE/Project/MyProject/Tool/CSToolKit/Project/ToolKit/ToolKit/Config/AssetDependecies.json";
+		string path = string.Format("{0}/AssetDependecies/AssetDependecies.json", UtilUE4EngineWrap.ProjectSavedDir());
 		MFileStream fileStream = new MFileStream(path);
 		fileStream.open();
 		string text = fileStream.readText();
@@ -118,6 +143,7 @@ public class AssetRegister
 			assetRegisterItem = new AssetRegisterItem();
 			this.mAssetPath2RegisterDic.add(key, assetRegisterItem);
 
+			assetRegisterItem.SetLongPackageName(kvData.Key);
 			valueNode = kvData.Value["DependenciesInGameContentDir"];
 			valueNodeArray = valueNode.AsArray;
 

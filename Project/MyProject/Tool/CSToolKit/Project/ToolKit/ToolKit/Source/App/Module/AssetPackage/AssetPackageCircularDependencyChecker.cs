@@ -456,7 +456,7 @@ namespace ToolSet
         protected List<CDCAssetBundleItemV2> _FolderPolicyAssetBundleItemList;
         protected List<CDCAssetBundleItemV2> _SingleDependencyAssetBundleItemList;
         // 基本数据
-        protected AssetPackageGraphSingleDependency _AssetBuildContext;
+        protected SingleDependencyAssetPackageGraph _AssetBuildContext;
 
         protected List<CircularDependencyItemV2> _CircularDependencyItemList;
 
@@ -581,7 +581,7 @@ namespace ToolSet
             }
 
             string rootPath = "Assets/AsbRes";
-            this._AssetBuildContext = new AssetPackageGraphSingleDependency();
+            this._AssetBuildContext = new SingleDependencyAssetPackageGraph();
             this._AssetBuildContext.AddCollectRootPath(rootPath);
             this._AssetBuildContext.AddExcludeAssetBundleFileExtName("meta");
             this._AssetBuildContext.AddExcludeAssetBundleFileExtName("DS_Store");

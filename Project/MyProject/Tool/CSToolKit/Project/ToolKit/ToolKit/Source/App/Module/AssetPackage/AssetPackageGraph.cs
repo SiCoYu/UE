@@ -135,7 +135,7 @@ namespace ToolSet
     {
         // 没有扩展名字，从 AssetBundleBuilderV2.ASB_RES_PATH_SLASH 后开始的
         protected string _AssetBundleShortName;
-        // 扩展名字  unity3d，从 AssetBundleBuilderV2.ASB_RES_PATH_SLASH 后开始的小写
+        // 扩展名字 unity3d，从 AssetBundleBuilderV2.ASB_RES_PATH_SLASH 后开始的小写
         protected string _AssetBundleName;
         public List<AssetItemV2> AssetItemList;
 
@@ -1929,17 +1929,17 @@ namespace ToolSet
         }
     }
 
-    public class AssetPackageGraphSingleDependency : AssetPackageGraph
+    public class SingleDependencyAssetPackageGraph : AssetPackageGraph
 	{
-        public AssetPackageGraphSingleDependency()
+        public SingleDependencyAssetPackageGraph()
         {
 
         }
     }
 
-    public class AssetPackageGraphSingleFile : AssetPackageGraph
+    public class SingleFileAssetPackageGraph : AssetPackageGraph
 	{
-        public AssetPackageGraphSingleFile()
+        public SingleFileAssetPackageGraph()
         {
 
         }
