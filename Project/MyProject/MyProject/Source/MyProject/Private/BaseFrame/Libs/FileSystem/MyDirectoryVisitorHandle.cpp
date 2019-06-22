@@ -14,8 +14,11 @@ MyDirectoryVisitorHandle::MyDirectoryVisitorHandle(TArray<FString>& outFileArray
 }
 
 MyDirectoryVisitorHandle::MyDirectoryVisitorHandle(TArray<FString>* outFileArrayPtr, TArray<FString>* outDirectoryArrayPtr)
-	: this->mFileArrayPtr(outFileArrayPtr)
-	, this->mDirectoryArrayPtr(outDirectoryArrayPtr)
+	: mFileArrayPtr(outFileArrayPtr)
+	, mDirectoryArrayPtr(outDirectoryArrayPtr)
+	, mFileArrayRef(*outFileArrayPtr)
+	, mDirectoryArrayRef(*
+		outDirectoryArrayPtr)
 {
 
 }
