@@ -37,7 +37,7 @@ private:
 
     /** This will save the dependencies information to the OutputPath/AssetDependencies.json */
     void SaveDependicesInfo(const TMap<FString, FDependicesInfo> &DependicesInfos);
-	void _ExportOneAssetDependeciesByLongPackageName(const FString& TargetLongPackageName, TMap<FString, FDependicesInfo>& DependicesInfos, const FAssetRegistryModule& AssetRegistryModule);
+	void _ExportOneAssetDependeciesByLongPackageName(const FString& TargetLongPackageName, TMap<FString, FDependicesInfo>& DependicesInfos, FAssetRegistryModule& AssetRegistryModule);
 
 private:
     TSharedPtr<class FUICommandList> PluginCommands;

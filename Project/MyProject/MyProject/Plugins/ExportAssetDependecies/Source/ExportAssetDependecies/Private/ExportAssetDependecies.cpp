@@ -332,7 +332,7 @@ void FExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FDepe
     }
 }
 
-void FExportAssetDependeciesModule::_ExportOneAssetDependeciesByLongPackageName(const FString& TargetLongPackageName, TMap<FString, FDependicesInfo>& DependicesInfos, const FAssetRegistryModule& AssetRegistryModule)
+void FExportAssetDependeciesModule::_ExportOneAssetDependeciesByLongPackageName(const FString& TargetLongPackageName, TMap<FString, FDependicesInfo>& DependicesInfos, FAssetRegistryModule& AssetRegistryModule)
 {
 	if (FPackageName::DoesPackageExist(TargetLongPackageName))
 	{
