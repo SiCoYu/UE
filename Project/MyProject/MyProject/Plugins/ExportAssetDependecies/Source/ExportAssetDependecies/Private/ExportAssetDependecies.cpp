@@ -131,13 +131,18 @@ void FExportAssetDependeciesModule::onExportAllPluginButtonClicked()
 
 	int index = 0;
 	int arrayLenth = UtilNaiveArray::Num(outFileList);
+	FString LongPackageName;
+
 	while (index < arrayLenth)
 	{
-		this->_ExportOneAssetDependeciesByLongPackageName(
-			outFileList[index],
-			DependicesInfos,
-			AssetRegistryModule
-		);
+		if (UtilFileIO::TryConvertFilenameToLongPackageName(outFileList[index], LongPackageName))
+		{
+			this->_ExportOneAssetDependeciesByLongPackageName(
+				LongPackageName,
+				DependicesInfos,
+				AssetRegistryModule
+			);
+		}
 		++index;
 	}
 
@@ -334,7 +339,7 @@ void FExportAssetDependeciesModule::SaveDependicesInfo(const TMap<FString, FDepe
 
 void FExportAssetDependeciesModule::_ExportOneAssetDependeciesByLongPackageName(const FString& TargetLongPackageName, TMap<FString, FDependicesInfo>& DependicesInfos, FAssetRegistryModule& AssetRegistryModule)
 {
-	if (FPackageName::DoesPackageExist(TargetLongPackageName))
+	if (UtilFileIO::DoesPackageExist(TargetLongPackageName))
 	{
 		auto& DependicesInfoEntry = DependicesInfos.Add(TargetLongPackageName);
 
