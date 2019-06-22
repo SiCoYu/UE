@@ -108,6 +108,7 @@ public:
 	static FString GetFileBasePath();
 	static bool TryConvertLongPackageNameToFilename(const FString& InLongPackageName, FString& OutFilename, const FString& InExtension = TEXT(""));
 	static bool TryConvertFilenameToLongPackageName(const FString& InFilename, FString& OutPackageName, FString* OutFailureReason = nullptr);
+	static bool DoesPackageExist(const FString& LongPackageName, const FGuid* Guid = NULL, FString* OutFilename = NULL, bool InAllowTextFormats = true);
 	static void RegisterMountPoint(const FString& RootPath, const FString& ContentPath);
 	static void UnRegisterMountPoint(const FString& RootPath, const FString& ContentPath);
 };
