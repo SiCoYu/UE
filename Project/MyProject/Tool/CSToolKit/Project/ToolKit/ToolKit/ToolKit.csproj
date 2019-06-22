@@ -48,11 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\App\AssetPackage\AssetPackageCircularDependencyChecker.cs" />
-    <Compile Include="Source\App\AssetPackage\AssetPackageFilePathAndNameChecker.cs" />
-    <Compile Include="Source\App\AssetPackage\AssetPackageGraph.cs" />
-    <Compile Include="Source\App\AssetPackage\AssetPackageUtil.cs" />
-    <Compile Include="Source\App\AssetPackage\AssetRegister.cs" />
     <Compile Include="Source\App\Common\FrameWork\ProjectConfig.cs" />
     <Compile Include="Source\App\Common\Tools\UtilDebug.cs" />
     <Compile Include="Source\App\ExcelReadWrite\Base\ExportCustom.cs" />
@@ -75,8 +70,12 @@
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHead.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHeadItem.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableSheet.cs" />
-    <Compile Include="Source\App\Module\MainEntry.cs" />
+    <Compile Include="Source\App\Module\AssetPackage\AssetPackageCircularDependencyChecker.cs" />
+    <Compile Include="Source\App\Module\AssetPackage\AssetPackageFilePathAndNameChecker.cs" />
+    <Compile Include="Source\App\Module\AssetPackage\AssetPackageGraph.cs" />
+    <Compile Include="Source\App\Module\AssetPackage\AssetPackageUtil.cs" />
     <Compile Include="Source\App\Common\Tools\UtilExcel.cs" />
+    <Compile Include="Source\App\Module\ProjectState\Entry\MainEntry.cs" />
     <Compile Include="Source\Extern\Mono.Xml\MiniParser.cs" />
     <Compile Include="Source\Extern\Mono.Xml\SecurityParser.cs" />
     <Compile Include="Source\Extern\Mono.Xml\SmallXmlParser.cs" />
@@ -241,6 +240,7 @@
     <Compile Include="Source\Libs\Tools\UtilSysLibWrap.cs" />
     <Compile Include="Source\Libs\Tools\UtilTime.cs" />
     <Compile Include="Source\Libs\Tools\UtilSimpleJson.cs" />
+    <Compile Include="Source\Libs\Tools\UtilUE4EngineWrap.cs" />
     <Compile Include="Source\Libs\Tools\UtilXml.cs" />
     <Compile Include="Source\Test\TestAssetRegister\TestAssetRegister.cs" />
     <Compile Include="Source\Test\TestBase\TestBase.cs" />
