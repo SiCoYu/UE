@@ -19,14 +19,18 @@ namespace ToolSet
 		{
 			List<AssetBundleBuild> assetBundleBuildList = assetPackageGraph.GetAssetBundleBuildList();
 
-			if (assetBundleBuildList.Count > 0)
+			int index = 0;
+
+			while (index < assetBundleBuildList.Count)
 			{
 				BuildOneAssetPackageByAssetGraph buildOneAssetPackage = new BuildOneAssetPackageByAssetGraph();
-				buildOneAssetPackage.SetAssetBundleBuild(assetBundleBuildList[0]);
+				buildOneAssetPackage.SetAssetBundleBuild(assetBundleBuildList[index]);
 				buildOneAssetPackage.init();
 				buildOneAssetPackage.buildAssetPackage();
 				buildOneAssetPackage.dispose();
 				buildOneAssetPackage = null;
+
+				++index;
 			}
 		}
 

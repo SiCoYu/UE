@@ -30,6 +30,12 @@
 			return ret;
 		}
 
+		public static string PackageOutDir()
+		{
+			string ret = CtxExt.msExtInstance.mProjectConfig.getPakOutPath();
+			return ret;
+		}
+
 		public static bool TryConvertLongPackageNameToFilename(ref string InLongPackageName, ref string OutFilename)
 		{
 			string noPrefixPackageName = InLongPackageName.Substring(DEFAULT_MOUNT_POINT.Length + 1);

@@ -150,8 +150,8 @@ namespace ToolSet
         {
             UtilDebug.Assert(this.AssetItemList.Count > 0, "InitAssetBundleName error");
 
-			//string origPath = this.AssetItemList[0].AssetLongPackageName;
-			string origPath = this.AssetItemList[0].AssetAbsolutePath;
+			string origPath = this.AssetItemList[0].AssetLongPackageName;
+			origPath = string.Format("{0}{1}", UtilUE4EngineWrap.PackageOutDir(), origPath);
 			origPath = assetContext.GetAndCheckAssetBundleFileNameLength(origPath);
 
             this._AssetBundleName = AssetPackageUtil.ChangeExtNameDotToUnderlineAndAddAssetBundleExt(origPath);
