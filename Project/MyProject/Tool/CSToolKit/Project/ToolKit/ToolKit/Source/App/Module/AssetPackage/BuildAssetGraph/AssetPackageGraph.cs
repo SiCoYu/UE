@@ -150,8 +150,9 @@ namespace ToolSet
         {
             UtilDebug.Assert(this.AssetItemList.Count > 0, "InitAssetBundleName error");
 
-            string origPath = this.AssetItemList[0].AssetLongPackageName;
-            origPath = assetContext.GetAndCheckAssetBundleFileNameLength(origPath);
+			//string origPath = this.AssetItemList[0].AssetLongPackageName;
+			string origPath = this.AssetItemList[0].AssetAbsolutePath;
+			origPath = assetContext.GetAndCheckAssetBundleFileNameLength(origPath);
 
             this._AssetBundleName = AssetPackageUtil.ChangeExtNameDotToUnderlineAndAddAssetBundleExt(origPath);
 
@@ -334,7 +335,13 @@ namespace ToolSet
             return this._AssetBundleItemList;
         }
 
-        public void AddCollectRootPath(string absolutePathWithContent)
+		protected void _CheckAllInitData()
+		{
+			UtilDebug.Assert(this._CollectRootPathList.Count > 0, "_CollectRootPathList not set path");
+			UtilDebug.Assert(this._IncludeAssetBundlePathList.Count > 0, "_IncludeAssetBundlePathList not set path");
+		}
+
+		public void AddCollectRootPath(string absolutePathWithContent)
         {
             if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
@@ -354,7 +361,7 @@ namespace ToolSet
             }
 
             UtilDebug.Assert(!string.IsNullOrEmpty(relativePathStartWithAsset), "path is null");
-            UtilDebug.Assert(0 == relativePathStartWithAsset.IndexOf("Assets/"), "path is not start with Asset");
+            UtilDebug.Assert(0 == relativePathStartWithAsset.IndexOf(UtilUE4EngineWrap.DEFAULT_MOUNT_POINT), "path is not start with /Game");
 
             for (int index = 0; index < this._ExcludeAssetBundlePathList.Count; ++index)
             {
@@ -1850,8 +1857,9 @@ namespace ToolSet
 
                 for (int indexItem = 0; indexItem < assetBundleItem.AssetItemList.Count; ++indexItem)
                 {
-                    assetBundleBuild.assetNames[indexItem] = assetBundleItem.AssetItemList[indexItem].AssetLongPackageName;
-                }
+					//assetBundleBuild.assetNames[indexItem] = assetBundleItem.AssetItemList[indexItem].AssetLongPackageName;
+					assetBundleBuild.assetNames[indexItem] = assetBundleItem.AssetItemList[indexItem].AssetAbsolutePath;
+				}
 
                 this._AssetBundleBuildList.Add(assetBundleBuild);
             }
@@ -1884,7 +1892,8 @@ namespace ToolSet
                 UtilDebug.Log("OutAssetManifest, start");
             }
 
-            this._CollectAllAssetList();
+			this._CheckAllInitData();
+			this._CollectAllAssetList();
             this._CollectAssetDependency();
             this._BuildAssetBundleItemList();
             this._CheckAssetCorrect();
@@ -1903,7 +1912,8 @@ namespace ToolSet
                 UtilDebug.Log("BuildAssetBundleItemInfo, start");
             }
 
-            this._CollectAllAssetList();
+			this._CheckAllInitData();
+			this._CollectAllAssetList();
             this._CollectAssetDependency();
             this._BuildAssetBundleItemList();
             this._CheckAssetCorrect();
@@ -1922,7 +1932,8 @@ namespace ToolSet
                 UtilDebug.Log("BuildAssetBundle, start");
             }
 
-            this._CollectAllAssetList();
+			this._CheckAllInitData();
+			this._CollectAllAssetList();
             this._CollectAssetDependency();
             this._BuildAssetBundleItemList();
             this._CheckAssetCorrect();

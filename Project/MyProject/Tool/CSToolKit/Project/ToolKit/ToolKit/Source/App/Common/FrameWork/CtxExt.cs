@@ -90,6 +90,9 @@ namespace ToolSet
 			this.mAssetPackageCtx.mSingleDependencyGraph.AddCollectRootPath(
 				UtilUE4EngineWrap.ProjectContentDir()
 			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddIncludeAssetBundlePath(
+				UtilUE4EngineWrap.DEFAULT_MOUNT_POINT
+			);
 			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
 				"txt"
 			);
@@ -105,7 +108,8 @@ namespace ToolSet
 			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
 				  "pak"
 			);
-			this.mAssetPackageCtx.mSingleDependencyGraph.OutAssetManifest();
+			//this.mAssetPackageCtx.mSingleDependencyGraph.OutAssetManifest();
+			this.mAssetPackageCtx.mSingleDependencyGraph.BuildAssetBundle();
 			this.mTestMain.run();
 		}
     }
