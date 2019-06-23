@@ -61,6 +61,7 @@ namespace ToolSet
 		public void addDependencyInAssetPath(string path)
 		{
 			AssetRegisterDependencyItem item = new AssetRegisterDependencyItem();
+			path = UtilSimpleJson.removeJsonKeyQuotes(ref path);
 			item.setAssetPath(path);
 			this.mAssetDependencyList.add(item);
 		}
@@ -68,6 +69,7 @@ namespace ToolSet
 		public void addDependencyInOtherPath(string path)
 		{
 			AssetRegisterDependencyItem item = new AssetRegisterDependencyItem();
+			path = UtilSimpleJson.removeJsonKeyQuotes(ref path);
 			item.setAssetPath(path);
 			this.mAssetDependencyOtherList.add(item);
 		}
@@ -141,6 +143,7 @@ namespace ToolSet
 			foreach (System.Collections.Generic.KeyValuePair<string, SimpleJSON.JSONNode> kvData in rootNode)
 			{
 				key = kvData.Key;
+				key = UtilSimpleJson.removeJsonKeyQuotes(ref key);
 
 				assetRegisterItem = new AssetRegisterItem();
 				this.mAssetPath2RegisterDic.add(key, assetRegisterItem);

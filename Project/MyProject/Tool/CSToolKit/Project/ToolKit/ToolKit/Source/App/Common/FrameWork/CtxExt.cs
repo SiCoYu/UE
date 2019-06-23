@@ -87,6 +87,24 @@ namespace ToolSet
 
 			//this.mExcelCtx.mExportJson.export();
 			//this.mExcelCtx.mExportCsv.export();
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddCollectRootPath(
+				UtilUE4EngineWrap.ProjectContentDir()
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				"txt"
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				"zip"
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				"lua"
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				 "py"
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				  "pak"
+			);
 			this.mAssetPackageCtx.mSingleDependencyGraph.OutAssetManifest();
 			this.mTestMain.run();
 		}
