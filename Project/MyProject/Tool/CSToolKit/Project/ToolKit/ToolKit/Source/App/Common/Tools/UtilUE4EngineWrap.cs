@@ -4,7 +4,8 @@
 	{
 		public const string DEFAULT_MOUNT_POINT = "/Game";
 		public const string DEFAULT_PHYSICS_FOLDER = "Content";
-		public const string DEFAULT_PHYSICS_FOLDER_WITH_SLASH = "Content/";
+		public const string DEFAULT_PHYSICS_FOLDER_WITH_SLASH_PREFIX = "/Content";
+		public const string DEFAULT_PHYSICS_FOLDER_WITH_SLASH_SUFFIX = "Content/";
 		public const string ASSET_DOT_EXT = ".uasset";
 		public const string ASSET_EXT = "uasset";
 		public const string MAP_DOT_EXT = ".umap";
@@ -20,6 +21,12 @@
 		public static string ProjectContentDir()
 		{
 			string ret = string.Format("{0}/{1}", CtxExt.msExtInstance.mProjectConfig.getProjectRootPath(), DEFAULT_PHYSICS_FOLDER);
+			return ret;
+		}
+
+		public static string ProjectDir()
+		{
+			string ret = string.Format("{0}", CtxExt.msExtInstance.mProjectConfig.getProjectRootPath());
 			return ret;
 		}
 

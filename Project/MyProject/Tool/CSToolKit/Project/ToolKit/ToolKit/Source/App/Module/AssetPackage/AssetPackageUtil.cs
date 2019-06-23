@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SDK.Lib;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -13,7 +14,6 @@ namespace ToolSet
         public const bool ENABLE_COMMON_LOG = true;
         public const bool ENABLE_ERROR_LOG = true;
         public const bool ENABLE_PROFILE_LOG = false;
-		public const string PROJECT_CONTENT_ROOT = "";
 
 		public static void BuildAssetBundle(AssetPackageGraph assetPackageGraph)
 		{
@@ -22,9 +22,9 @@ namespace ToolSet
 
 		public static string GetOrCreateAssetManifestDirectory(bool isCreateDirectory = true)
         {
-            string rootPath = PROJECT_CONTENT_ROOT;
-            rootPath = rootPath.Replace("\\", "/");
-            rootPath = rootPath.Substring(0, PROJECT_CONTENT_ROOT.IndexOf("/Asset"));
+            string rootPath = UtilUE4EngineWrap.ProjectContentDir();
+            rootPath = UtilFileIO.normalPath(rootPath);
+            rootPath = rootPath.Substring(0, rootPath.IndexOf(UtilUE4EngineWrap.DEFAULT_PHYSICS_FOLDER_WITH_SLASH_PREFIX));
             string outputPath = string.Format("{0}/Output/AssetBundlesV2/Windows", rootPath);
 
             if (isCreateDirectory)
@@ -290,7 +290,7 @@ namespace ToolSet
         public static string GetFullPathByRelativePathStartWithAsset(string relativeAssetPathWithAsset)
         {
 			UtilDebug.Assert(0 == relativeAssetPathWithAsset.IndexOf("Asset"), "GetFullPathByRelativePathWithAsset, name error");
-            string fullPathBeforeAsset = PROJECT_CONTENT_ROOT;
+			string fullPathBeforeAsset = UtilUE4EngineWrap.ProjectContentDir();
             fullPathBeforeAsset = fullPathBeforeAsset.Replace("\\", "/");
             fullPathBeforeAsset = fullPathBeforeAsset.Substring(0, fullPathBeforeAsset.LastIndexOf("/Asset"));
             return string.Format("{0}/{1}", fullPathBeforeAsset, relativeAssetPathWithAsset);
