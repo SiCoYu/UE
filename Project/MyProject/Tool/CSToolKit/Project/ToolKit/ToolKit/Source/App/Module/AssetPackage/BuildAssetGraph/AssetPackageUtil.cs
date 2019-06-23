@@ -1,4 +1,5 @@
 ﻿using SDK.Lib;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ToolSet
@@ -16,7 +17,17 @@ namespace ToolSet
 
 		public static void BuildAssetBundle(AssetPackageGraph assetPackageGraph)
 		{
+			List<AssetBundleBuild> assetBundleBuildList = assetPackageGraph.GetAssetBundleBuildList();
 
+			if (assetBundleBuildList.Count > 0)
+			{
+				BuildOneAssetPackageByAssetGraph buildOneAssetPackage = new BuildOneAssetPackageByAssetGraph();
+				buildOneAssetPackage.SetAssetBundleBuild(assetBundleBuildList[0]);
+				buildOneAssetPackage.init();
+				buildOneAssetPackage.buildAssetPackage();
+				buildOneAssetPackage.dispose();
+				buildOneAssetPackage = null;
+			}
 		}
 
 		public static string GetOrCreateAssetManifestDirectory(bool isCreateDirectory = true)
