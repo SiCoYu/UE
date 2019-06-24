@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using SDK.Lib;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace ToolSet
 {
@@ -13,18 +12,33 @@ namespace ToolSet
         public const bool ENABLE_COMMON_LOG = true;
         public const bool ENABLE_ERROR_LOG = true;
         public const bool ENABLE_PROFILE_LOG = false;
-		public const string PROJECT_CONTENT_ROOT = "";
+		public const string ASSETBUNDLE_EXT = "pak";
+		public const string ASSETBUNDLE_DOT_EXT = ".pak";
 
 		public static void BuildAssetBundle(AssetPackageGraph assetPackageGraph)
 		{
+			List<AssetBundleBuild> assetBundleBuildList = assetPackageGraph.GetAssetBundleBuildList();
 
+			int index = 0;
+
+			while (index < assetBundleBuildList.Count)
+			{
+				BuildOneAssetPackageByAssetGraph buildOneAssetPackage = new BuildOneAssetPackageByAssetGraph();
+				buildOneAssetPackage.SetAssetBundleBuild(assetBundleBuildList[index]);
+				buildOneAssetPackage.init();
+				buildOneAssetPackage.buildAssetPackage();
+				buildOneAssetPackage.dispose();
+				buildOneAssetPackage = null;
+
+				++index;
+			}
 		}
 
 		public static string GetOrCreateAssetManifestDirectory(bool isCreateDirectory = true)
         {
-            string rootPath = PROJECT_CONTENT_ROOT;
-            rootPath = rootPath.Replace("\\", "/");
-            rootPath = rootPath.Substring(0, PROJECT_CONTENT_ROOT.IndexOf("/Asset"));
+            string rootPath = UtilUE4EngineWrap.ProjectContentDir();
+            rootPath = UtilFileIO.normalPath(rootPath);
+            rootPath = rootPath.Substring(0, rootPath.IndexOf(UtilUE4EngineWrap.DEFAULT_PHYSICS_FOLDER_WITH_SLASH_PREFIX));
             string outputPath = string.Format("{0}/Output/AssetBundlesV2/Windows", rootPath);
 
             if (isCreateDirectory)
@@ -184,11 +198,11 @@ namespace ToolSet
 
             if (string.IsNullOrEmpty(fileExtName))
             {
-                assetBundleFileNameLen = filePathNoFileName.Length + "/".Length + fileNameNoExtName.Length + "_".Length + 32 + ".unity3d".Length;
+                assetBundleFileNameLen = filePathNoFileName.Length + "/".Length + fileNameNoExtName.Length + "_".Length + 32 + ASSETBUNDLE_DOT_EXT.Length;
             }
             else
             {
-                assetBundleFileNameLen = filePathNoFileName.Length + "/".Length + fileNameNoExtName.Length + "_".Length + fileExtName.Length + "_".Length + 32 + ".unity3d".Length;
+                assetBundleFileNameLen = filePathNoFileName.Length + "/".Length + fileNameNoExtName.Length + "_".Length + fileExtName.Length + "_".Length + 32 + ASSETBUNDLE_DOT_EXT.Length;
             }
 
             return assetBundleFileNameLen;
@@ -202,11 +216,11 @@ namespace ToolSet
 
             if (string.IsNullOrEmpty(fileExtName))
             {
-                assetBundleFileNameLen = fileNameNoExtName.Length + "_".Length + 32 + ".unity3d".Length;
+                assetBundleFileNameLen = fileNameNoExtName.Length + "_".Length + 32 + ASSETBUNDLE_DOT_EXT.Length;
             }
             else
             {
-                assetBundleFileNameLen = fileNameNoExtName.Length + "_".Length + fileExtName.Length + "_".Length + 32 + ".unity3d".Length;
+                assetBundleFileNameLen = fileNameNoExtName.Length + "_".Length + fileExtName.Length + "_".Length + 32 + ASSETBUNDLE_DOT_EXT.Length;
             }
 
             return assetBundleFileNameLen;
@@ -218,11 +232,11 @@ namespace ToolSet
 
             if (string.IsNullOrEmpty(fileExtName))
             {
-                assetBundleFileNameLen = fileNameNoExtName.Length + "_".Length + 32 + ".unity3d".Length;
+                assetBundleFileNameLen = fileNameNoExtName.Length + "_".Length + 32 + ASSETBUNDLE_DOT_EXT.Length;
             }
             else
             {
-                assetBundleFileNameLen = fileNameNoExtName.Length + "_".Length + fileExtName.Length + "_".Length + 32 + ".unity3d".Length;
+                assetBundleFileNameLen = fileNameNoExtName.Length + "_".Length + fileExtName.Length + "_".Length + 32 + ASSETBUNDLE_DOT_EXT.Length;
             }
 
             return assetBundleFileNameLen;
@@ -265,7 +279,7 @@ namespace ToolSet
 
         public static string ReplaceExtNameToAssetBundle(string assetPath)
         {
-            string assetBundlePath = AssetPackageUtil.GetFileNameNoExt(assetPath) + ".unity3d";
+            string assetBundlePath = AssetPackageUtil.GetFileNameNoExt(assetPath) + ASSETBUNDLE_DOT_EXT;
             return assetBundlePath;
         }
 
@@ -277,11 +291,11 @@ namespace ToolSet
 
             if (string.IsNullOrEmpty(fileExtName))
             {
-                assetBundlePath = string.Format("{0}.unity3d", fileNameNoExtName);
+                assetBundlePath = string.Format("{0}.{1}", fileNameNoExtName, ASSETBUNDLE_EXT);
             }
             else
             {
-                assetBundlePath = string.Format("{0}_{1}.unity3d", fileNameNoExtName, fileExtName);
+                assetBundlePath = string.Format("{0}_{1}.{2}", fileNameNoExtName, fileExtName, ASSETBUNDLE_EXT);
             }
 
             return assetBundlePath;
@@ -290,7 +304,7 @@ namespace ToolSet
         public static string GetFullPathByRelativePathStartWithAsset(string relativeAssetPathWithAsset)
         {
 			UtilDebug.Assert(0 == relativeAssetPathWithAsset.IndexOf("Asset"), "GetFullPathByRelativePathWithAsset, name error");
-            string fullPathBeforeAsset = PROJECT_CONTENT_ROOT;
+			string fullPathBeforeAsset = UtilUE4EngineWrap.ProjectContentDir();
             fullPathBeforeAsset = fullPathBeforeAsset.Replace("\\", "/");
             fullPathBeforeAsset = fullPathBeforeAsset.Substring(0, fullPathBeforeAsset.LastIndexOf("/Asset"));
             return string.Format("{0}/{1}", fullPathBeforeAsset, relativeAssetPathWithAsset);

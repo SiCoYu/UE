@@ -185,7 +185,7 @@ namespace ToolSet
             {
                 if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    UtilDebug.Log(string.Format("{0} already in {1}", assetItemV2.AssetRelativePathStartWithAssets, this._AssetBundleShortName));
+                    UtilDebug.Log(string.Format("{0} already in {1}", assetItemV2.AssetLongPackageName, this._AssetBundleShortName));
                 }
             }
         }
@@ -196,14 +196,14 @@ namespace ToolSet
 
             for (int index = 0; index < this._AssetPathList.Count; ++index)
             {
-                if(assetItemV2.AssetRelativePathStartWithAssets.Equals(this._AssetPathList[index], System.StringComparison.CurrentCultureIgnoreCase))
+                if(assetItemV2.AssetLongPackageName.Equals(this._AssetPathList[index], System.StringComparison.CurrentCultureIgnoreCase))
                 {
                     ret = this._AssetPathList[index];
                     break;
                 }
-                else if (!AssetPackageUtil.IsSameParentDir(assetItemV2.AssetRelativePathStartWithAssets, this._AssetPathList[index]))
+                else if (!AssetPackageUtil.IsSameParentDir(assetItemV2.AssetLongPackageName, this._AssetPathList[index]))
                 {
-                    if (assetItemV2.AssetRelativePathStartWithAssets.StartsWith(this._AssetPathList[index], System.StringComparison.CurrentCultureIgnoreCase))
+                    if (assetItemV2.AssetLongPackageName.StartsWith(this._AssetPathList[index], System.StringComparison.CurrentCultureIgnoreCase))
                     {
                         ret = this._AssetPathList[index];
                         break;
@@ -226,7 +226,7 @@ namespace ToolSet
             {
                 for (int index = 0; index < this._AssetItemList.Count; ++index)
                 {
-                    stringBuilder.Append(this._AssetItemList[index].AssetRelativePathStartWithAssets);
+                    stringBuilder.Append(this._AssetItemList[index].AssetLongPackageName);
                     stringBuilder.Append("\n");
                 }
             }
@@ -330,16 +330,16 @@ namespace ToolSet
 
                     for (int cIndex = 0; cIndex < nextAssetItemDependencyList.Count; ++cIndex)
                     {
-                        if (nextAssetItemList[aIndex].AssetRelativePathStartWithAssets == nextAssetItemDependencyList[cIndex].AssetRelativePathStartWithAssets)
+                        if (nextAssetItemList[aIndex].AssetLongPackageName == nextAssetItemDependencyList[cIndex].AssetLongPackageName)
                         {
-                            if (!circularDependencyAssetPathList.Contains(nextAssetItemList[aIndex].AssetRelativePathStartWithAssets))
+                            if (!circularDependencyAssetPathList.Contains(nextAssetItemList[aIndex].AssetLongPackageName))
                             {
-                                circularDependencyAssetPathList.Add(nextAssetItemList[aIndex].AssetRelativePathStartWithAssets);
+                                circularDependencyAssetPathList.Add(nextAssetItemList[aIndex].AssetLongPackageName);
 
-                                //if (!circularOrigAssetPathList.Contains(firstAssetItemList[bIndex].AssetRelativePathStartWithAssets))
+                                //if (!circularOrigAssetPathList.Contains(firstAssetItemList[bIndex].AssetLongPackageName))
                                 //{
                                 // circularDependencyAssetPathList 添加， circularOrigAssetPathList 必须也添加，一个资源依赖多个资源
-                                circularOrigAssetPathList.Add(firstAssetItemList[bIndex].AssetRelativePathStartWithAssets);
+                                circularOrigAssetPathList.Add(firstAssetItemList[bIndex].AssetLongPackageName);
                                 //}
                                 //else
                                 //{
@@ -456,7 +456,7 @@ namespace ToolSet
         protected List<CDCAssetBundleItemV2> _FolderPolicyAssetBundleItemList;
         protected List<CDCAssetBundleItemV2> _SingleDependencyAssetBundleItemList;
         // 基本数据
-        protected AssetPackageGraphSingleDependency _AssetBuildContext;
+        protected SingleDependencyAssetPackageGraph _AssetBuildContext;
 
         protected List<CircularDependencyItemV2> _CircularDependencyItemList;
 
@@ -581,7 +581,7 @@ namespace ToolSet
             }
 
             string rootPath = "Assets/AsbRes";
-            this._AssetBuildContext = new AssetPackageGraphSingleDependency();
+            this._AssetBuildContext = new SingleDependencyAssetPackageGraph();
             this._AssetBuildContext.AddCollectRootPath(rootPath);
             this._AssetBuildContext.AddExcludeAssetBundleFileExtName("meta");
             this._AssetBuildContext.AddExcludeAssetBundleFileExtName("DS_Store");
@@ -649,14 +649,14 @@ namespace ToolSet
 
                 if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UtilDebug.Log(string.Format("{0} addto {1}", assetItem.AssetRelativePathStartWithAssets, bestMatchAssetBundleItem.GetAsbShortName()));
+                    UtilDebug.Log(string.Format("{0} addto {1}", assetItem.AssetLongPackageName, bestMatchAssetBundleItem.GetAsbShortName()));
                 }
             }
             else
             {
                 if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    UtilDebug.LogError(string.Format("{0} not find assetbundleitem", assetItem.AssetRelativePathStartWithAssets));
+                    UtilDebug.LogError(string.Format("{0} not find assetbundleitem", assetItem.AssetLongPackageName));
                 }
             }
 
@@ -849,15 +849,15 @@ namespace ToolSet
                     {
                         assetItem = curAssetItemList[bIndex];
 
-                        if (!uniqueAssetCheckerDic.ContainsKey(assetItem.AssetRelativePathStartWithAssets))
+                        if (!uniqueAssetCheckerDic.ContainsKey(assetItem.AssetLongPackageName))
                         {
-                            uniqueAssetCheckerDic.Add(assetItem.AssetRelativePathStartWithAssets, assetItem);
+                            uniqueAssetCheckerDic.Add(assetItem.AssetLongPackageName, assetItem);
                         }
                         else
                         {
                             if (AssetPackageUtil.ENABLE_ERROR_LOG)
                             {
-                                UtilDebug.LogError(string.Format("{0} in diff assetbundle", assetItem.AssetRelativePathStartWithAssets));
+                                UtilDebug.LogError(string.Format("{0} in diff assetbundle", assetItem.AssetLongPackageName));
                             }
                         }
 

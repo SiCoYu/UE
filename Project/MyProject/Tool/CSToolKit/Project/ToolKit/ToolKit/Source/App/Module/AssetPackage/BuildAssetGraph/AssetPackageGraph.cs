@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SDK.Lib;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -21,7 +22,8 @@ namespace ToolSet
         public bool IsCollectedDependency = false;
         public bool IsIncludeAssetBundleItem = true;   // 是否是需要包含在输入列表的资源
 
-        public string AssetRelativePathStartWithAssets;
+		public string AssetAbsolutePath;
+		public string AssetLongPackageName;
         public List<AssetItemV2> ChildDependencyList;
         public Dictionary<string, AssetItemV2> AssetPath2ChildAssetDic;
         public List<AssetItemV2> ParentReferenceList;
@@ -90,42 +92,42 @@ namespace ToolSet
 
         public void AddChild(AssetItemV2 childAssetItem)
         {
-            if (!this.AssetPath2ChildAssetDic.ContainsKey(childAssetItem.AssetRelativePathStartWithAssets))
+            if (!this.AssetPath2ChildAssetDic.ContainsKey(childAssetItem.AssetLongPackageName))
             {
                 if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UtilDebug.Log(string.Format("AddChild, Parent {0} , Child {1}", this.AssetRelativePathStartWithAssets, childAssetItem.AssetRelativePathStartWithAssets));
+                    UtilDebug.Log(string.Format("AddChild, Parent {0} , Child {1}", this.AssetLongPackageName, childAssetItem.AssetLongPackageName));
                 }
 
                 this.ChildDependencyList.Add(childAssetItem);
-                this.AssetPath2ChildAssetDic.Add(childAssetItem.AssetRelativePathStartWithAssets, childAssetItem);
+                this.AssetPath2ChildAssetDic.Add(childAssetItem.AssetLongPackageName, childAssetItem);
             }
             else
             {
                 if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UtilDebug.Log(string.Format("AddChild, {0} already exist", childAssetItem.AssetRelativePathStartWithAssets));
+                    UtilDebug.Log(string.Format("AddChild, {0} already exist", childAssetItem.AssetLongPackageName));
                 }
             }
         }
 
         public void AddParent(AssetItemV2 parentAssetItem)
         {
-            if (!this.AssetPath2ParentAssetDic.ContainsKey(parentAssetItem.AssetRelativePathStartWithAssets))
+            if (!this.AssetPath2ParentAssetDic.ContainsKey(parentAssetItem.AssetLongPackageName))
             {
                 if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UtilDebug.Log(string.Format("AddParent, Parent {0} , Child {1}", parentAssetItem.AssetRelativePathStartWithAssets, this.AssetRelativePathStartWithAssets));
+                    UtilDebug.Log(string.Format("AddParent, Parent {0} , Child {1}", parentAssetItem.AssetLongPackageName, this.AssetLongPackageName));
                 }
 
                 this.ParentReferenceList.Add(parentAssetItem);
-                this.AssetPath2ParentAssetDic.Add(parentAssetItem.AssetRelativePathStartWithAssets, parentAssetItem);
+                this.AssetPath2ParentAssetDic.Add(parentAssetItem.AssetLongPackageName, parentAssetItem);
             }
             else
             {
                 if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UtilDebug.Log(string.Format("AddParent, {0} already exist", parentAssetItem.AssetRelativePathStartWithAssets));
+                    UtilDebug.Log(string.Format("AddParent, {0} already exist", parentAssetItem.AssetLongPackageName));
                 }
             }
         }
@@ -135,7 +137,7 @@ namespace ToolSet
     {
         // 没有扩展名字，从 AssetBundleBuilderV2.ASB_RES_PATH_SLASH 后开始的
         protected string _AssetBundleShortName;
-        // 扩展名字  unity3d，从 AssetBundleBuilderV2.ASB_RES_PATH_SLASH 后开始的小写
+        // 扩展名字 unity3d，从 AssetBundleBuilderV2.ASB_RES_PATH_SLASH 后开始的小写
         protected string _AssetBundleName;
         public List<AssetItemV2> AssetItemList;
 
@@ -148,8 +150,9 @@ namespace ToolSet
         {
             UtilDebug.Assert(this.AssetItemList.Count > 0, "InitAssetBundleName error");
 
-            string origPath = this.AssetItemList[0].AssetRelativePathStartWithAssets;
-            origPath = assetContext.GetAndCheckAssetBundleFileNameLength(origPath);
+			string origPath = this.AssetItemList[0].AssetLongPackageName;
+			origPath = string.Format("{0}{1}", UtilUE4EngineWrap.PackageOutDir(), origPath);
+			origPath = assetContext.GetAndCheckAssetBundleFileNameLength(origPath);
 
             this._AssetBundleName = AssetPackageUtil.ChangeExtNameDotToUnderlineAndAddAssetBundleExt(origPath);
 
@@ -185,7 +188,7 @@ namespace ToolSet
 
             for (int index = 0; index < this.AssetItemList.Count; ++index)
             {
-                nameList.Add(this.AssetItemList[index].AssetRelativePathStartWithAssets);
+                nameList.Add(this.AssetItemList[index].AssetLongPackageName);
             }
 
             return nameList;
@@ -199,7 +202,7 @@ namespace ToolSet
             {
                 assetItem = new AssetItemV2();
                 this.AssetItemList.Add(assetItem);
-                assetItem.AssetRelativePathStartWithAssets = nameList[index];
+                assetItem.AssetLongPackageName = nameList[index];
             }
         }
 
@@ -248,7 +251,9 @@ namespace ToolSet
 
         public AssetPackageGraph()
         {
-            this._CollectRootPathList = new List<string>();
+			this.mAssetRegister = new AssetRegister();
+
+			this._CollectRootPathList = new List<string>();
             this._IncludeAssetBundlePathList = new List<string>();
             this._ExcludeAssetBundlePathList = new List<string>(); 
             this._ExcludeAssetBundleFileList = new List<string>();
@@ -269,7 +274,8 @@ namespace ToolSet
 
         public void Init()
         {
-            this._CheckIncludeAndExcludePath();
+			this.mAssetRegister.init();
+			this._CheckIncludeAndExcludePath();
         }
 
         public void Dispose()
@@ -295,7 +301,9 @@ namespace ToolSet
 
             this._RecordAllFile2OrigPathDic.Clear();
             this._Changed2OrigPathDic.Clear();
-        }
+
+			this.mAssetRegister.dispose();
+		}
 
         public void SetFileNamePostFix(string value)
         {
@@ -327,17 +335,22 @@ namespace ToolSet
             return this._AssetBundleItemList;
         }
 
-        public void AddCollectRootPath(string relativePathStartWithAsset)
+		protected void _CheckAllInitData()
+		{
+			UtilDebug.Assert(this._CollectRootPathList.Count > 0, "_CollectRootPathList not set path");
+			UtilDebug.Assert(this._IncludeAssetBundlePathList.Count > 0, "_IncludeAssetBundlePathList not set path");
+		}
+
+		public void AddCollectRootPath(string absolutePathWithContent)
         {
             if (AssetPackageUtil.ENABLE_COMMON_LOG)
             {
-                UtilDebug.Log(string.Format("AddRootPath, {0}", relativePathStartWithAsset));
+                UtilDebug.Log(string.Format("AddRootPath, {0}", absolutePathWithContent));
             }
-            UtilDebug.Assert(!string.IsNullOrEmpty(relativePathStartWithAsset), "path is null");
-            UtilDebug.Assert(0 == relativePathStartWithAsset.IndexOf("Assets/"), "path is not start with Asset");
+            UtilDebug.Assert(!string.IsNullOrEmpty(absolutePathWithContent), "path is null");
+            UtilDebug.Assert(-1 != absolutePathWithContent.IndexOf(UtilUE4EngineWrap.DEFAULT_PHYSICS_FOLDER), "path is not include content");
 
-            string fullPath = AssetPackageUtil.GetFullPathByRelativePathStartWithAsset(relativePathStartWithAsset);
-            this._CollectRootPathList.Add(fullPath);
+            this._CollectRootPathList.Add(absolutePathWithContent);
         }
 
         public void AddIncludeAssetBundlePath(string relativePathStartWithAsset)
@@ -348,7 +361,7 @@ namespace ToolSet
             }
 
             UtilDebug.Assert(!string.IsNullOrEmpty(relativePathStartWithAsset), "path is null");
-            UtilDebug.Assert(0 == relativePathStartWithAsset.IndexOf("Assets/"), "path is not start with Asset");
+            UtilDebug.Assert(0 == relativePathStartWithAsset.IndexOf(UtilUE4EngineWrap.DEFAULT_MOUNT_POINT), "path is not start with /Game");
 
             for (int index = 0; index < this._ExcludeAssetBundlePathList.Count; ++index)
             {
@@ -451,9 +464,9 @@ namespace ToolSet
 
         protected void _AddAssetItem(AssetItemV2 assetItem)
         {
-            if (!this._CollectAssetPath2AssetDic.ContainsKey(assetItem.AssetRelativePathStartWithAssets))
+            if (!this._CollectAssetPath2AssetDic.ContainsKey(assetItem.AssetLongPackageName))
             {
-                this._CollectAssetPath2AssetDic.Add(assetItem.AssetRelativePathStartWithAssets, assetItem);
+                this._CollectAssetPath2AssetDic.Add(assetItem.AssetLongPackageName, assetItem);
                 this._CollectAllAssetItemList.Add(assetItem);
 
                 if (assetItem.IsIncludeAssetBundleItem)
@@ -469,7 +482,7 @@ namespace ToolSet
             {
                 if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UtilDebug.Log(string.Format("AddAssetItem, {0} is already", assetItem.AssetRelativePathStartWithAssets));
+                    UtilDebug.Log(string.Format("AddAssetItem, {0} is already", assetItem.AssetLongPackageName));
                 }
             }
         }
@@ -507,15 +520,15 @@ namespace ToolSet
                 {
                     assetItem = assetBundleItem.AssetItemList[indexY];
 
-                    if (!path2FlagDic.ContainsKey(assetItem.AssetRelativePathStartWithAssets))
+                    if (!path2FlagDic.ContainsKey(assetItem.AssetLongPackageName))
                     {
-                        path2FlagDic.Add(assetItem.AssetRelativePathStartWithAssets, true);
+                        path2FlagDic.Add(assetItem.AssetLongPackageName, true);
                     }
                     else
                     {
                         if (AssetPackageUtil.ENABLE_ERROR_LOG)
                         {
-                            UtilDebug.LogError(string.Format("_CheckAssetUniqueInAssetBundleItem, diff {0} error", assetItem.AssetRelativePathStartWithAssets));
+                            UtilDebug.LogError(string.Format("_CheckAssetUniqueInAssetBundleItem, diff {0} error", assetItem.AssetLongPackageName));
                         }
                     }
                 }
@@ -534,7 +547,7 @@ namespace ToolSet
 
                         for (int index = 0; index < this._CollectIncludeAssetItemList.Count; ++index)
                         {
-                            if (kvData.Key == this._CollectIncludeAssetItemList[index].AssetRelativePathStartWithAssets)
+                            if (kvData.Key == this._CollectIncludeAssetItemList[index].AssetLongPackageName)
                             {
                                 isFind = true;
                                 break;
@@ -553,7 +566,7 @@ namespace ToolSet
 
                         foreach (KeyValuePair<string, bool> kvData in path2FlagDic)
                         {
-                            if (kvData.Key == this._CollectIncludeAssetItemList[index].AssetRelativePathStartWithAssets)
+                            if (kvData.Key == this._CollectIncludeAssetItemList[index].AssetLongPackageName)
                             {
                                 isFind = true;
                                 break;
@@ -562,7 +575,7 @@ namespace ToolSet
 
                         if (!isFind)
                         {
-                            UtilDebug.LogError(string.Format("_CheckAssetUniqueInAssetBundleItem, List error, {0} not find", this._CollectIncludeAssetItemList[index].AssetRelativePathStartWithAssets));
+                            UtilDebug.LogError(string.Format("_CheckAssetUniqueInAssetBundleItem, List error, {0} not find", this._CollectIncludeAssetItemList[index].AssetLongPackageName));
                         }
                     }
                 }
@@ -586,13 +599,13 @@ namespace ToolSet
             string maxDepthIncludePath = "";
             string maxDepthExcludePath = "";
 
-            ret = !_ExcludeAssetBundleFileList.Contains(assetItem.AssetRelativePathStartWithAssets);
+            ret = !_ExcludeAssetBundleFileList.Contains(assetItem.AssetLongPackageName);
 
             if (ret)
             {
                 for (int index = 0; index < this._IncludeAssetBundlePathList.Count; ++index)
                 {
-                    if (0 == assetItem.AssetRelativePathStartWithAssets.IndexOf(this._IncludeAssetBundlePathList[index]))
+                    if (0 == assetItem.AssetLongPackageName.IndexOf(this._IncludeAssetBundlePathList[index]))
                     {
                         if (maxDepthIncludePath.Length < this._IncludeAssetBundlePathList[index].Length)
                         {
@@ -605,7 +618,7 @@ namespace ToolSet
                 {
                     for (int index = 0; index < this._ExcludeAssetBundlePathList.Count; ++index)
                     {
-                        if (0 == assetItem.AssetRelativePathStartWithAssets.IndexOf(this._ExcludeAssetBundlePathList[index]))
+                        if (0 == assetItem.AssetLongPackageName.IndexOf(this._ExcludeAssetBundlePathList[index]))
                         {
                             if (maxDepthExcludePath.Length < this._ExcludeAssetBundlePathList[index].Length)
                             {
@@ -871,7 +884,7 @@ namespace ToolSet
                     for (int indexY = 0; indexY < assetBundleItem.AssetItemList.Count; ++indexY)
                     {
                         assetItem = assetBundleItem.AssetItemList[indexY];
-                        byteArray = Encoding.UTF8.GetBytes(string.Format("{0}\n", assetItem.AssetRelativePathStartWithAssets));
+                        byteArray = Encoding.UTF8.GetBytes(string.Format("{0}\n", assetItem.AssetLongPackageName));
                         fileStream.Write(byteArray, 0, byteArray.Length);
                     }
 
@@ -965,13 +978,13 @@ namespace ToolSet
                 for (int indexX = 0; indexX < this._CollectAllAssetItemList.Count; ++indexX)
                 {
                     assetItem = this._CollectAllAssetItemList[indexX];
-                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n", assetItem.AssetRelativePathStartWithAssets));
+                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n", assetItem.AssetLongPackageName));
                     fileStream.Write(byteArray, 0, byteArray.Length);
 
                     for (int indexY = 0; indexY < assetItem.ChildDependencyList.Count; ++indexY)
                     {
                         dependencyAssetItem = assetItem.ChildDependencyList[indexY];
-                        byteArray = Encoding.UTF8.GetBytes(string.Format("{0}\n", dependencyAssetItem.AssetRelativePathStartWithAssets));
+                        byteArray = Encoding.UTF8.GetBytes(string.Format("{0}\n", dependencyAssetItem.AssetLongPackageName));
                         fileStream.Write(byteArray, 0, byteArray.Length);
                     }
 
@@ -1065,7 +1078,7 @@ namespace ToolSet
                 for (int indexX = 0; indexX < this._CollectIncludeAssetItemList.Count; ++indexX)
                 {
                     assetItem = this._CollectIncludeAssetItemList[indexX];
-                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n", assetItem.AssetRelativePathStartWithAssets));
+                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n", assetItem.AssetLongPackageName));
                     fileStream.Write(byteArray, 0, byteArray.Length);
 
                     for (int indexY = 0; indexY < assetItem.ChildDependencyList.Count; ++indexY)
@@ -1073,7 +1086,7 @@ namespace ToolSet
                         dependencyAssetItem = assetItem.ChildDependencyList[indexY];
                         if (dependencyAssetItem.IsIncludeAssetBundleItem)
                         {
-                            byteArray = Encoding.UTF8.GetBytes(string.Format("{0}\n", dependencyAssetItem.AssetRelativePathStartWithAssets));
+                            byteArray = Encoding.UTF8.GetBytes(string.Format("{0}\n", dependencyAssetItem.AssetLongPackageName));
                             fileStream.Write(byteArray, 0, byteArray.Length);
                         }
                     }
@@ -1168,7 +1181,7 @@ namespace ToolSet
                 for (int indexX = 0; indexX < this._CollectExcludeAssetItemList.Count; ++indexX)
                 {
                     assetItem = this._CollectExcludeAssetItemList[indexX];
-                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n", assetItem.AssetRelativePathStartWithAssets));
+                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n", assetItem.AssetLongPackageName));
                     fileStream.Write(byteArray, 0, byteArray.Length);
 
                     for (int indexY = 0; indexY < assetItem.ChildDependencyList.Count; ++indexY)
@@ -1177,7 +1190,7 @@ namespace ToolSet
 
                         if (!dependencyAssetItem.IsIncludeAssetBundleItem)
                         {
-                            byteArray = Encoding.UTF8.GetBytes(string.Format("{0}\n", dependencyAssetItem.AssetRelativePathStartWithAssets));
+                            byteArray = Encoding.UTF8.GetBytes(string.Format("{0}\n", dependencyAssetItem.AssetLongPackageName));
                             fileStream.Write(byteArray, 0, byteArray.Length);
                         }
                     }
@@ -1268,7 +1281,7 @@ namespace ToolSet
                 for (int indexX = 0; indexX < this._CollectAllAssetItemList.Count; ++indexX)
                 {
                     assetItem = this._CollectAllAssetItemList[indexX];
-                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n\n", assetItem.AssetRelativePathStartWithAssets));
+                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n\n", assetItem.AssetLongPackageName));
                     fileStream.Write(byteArray, 0, byteArray.Length);
                 }
 
@@ -1357,7 +1370,7 @@ namespace ToolSet
                 for (int indexX = 0; indexX < this._CollectIncludeAssetItemList.Count; ++indexX)
                 {
                     assetItem = this._CollectIncludeAssetItemList[indexX];
-                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n\n", assetItem.AssetRelativePathStartWithAssets));
+                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n\n", assetItem.AssetLongPackageName));
                     fileStream.Write(byteArray, 0, byteArray.Length);
                 }
 
@@ -1454,7 +1467,7 @@ namespace ToolSet
                 for (int indexX = 0; indexX < this._CollectExcludeAssetItemList.Count; ++indexX)
                 {
                     assetItem = this._CollectExcludeAssetItemList[indexX];
-                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n\n", assetItem.AssetRelativePathStartWithAssets));
+                    byteArray = Encoding.UTF8.GetBytes(string.Format("AssetName:{0}\n\n", assetItem.AssetLongPackageName));
                     fileStream.Write(byteArray, 0, byteArray.Length);
                 }
 
@@ -1528,7 +1541,7 @@ namespace ToolSet
             {
                 if (AssetPackageUtil.ENABLE_ERROR_LOG)
                 {
-                    UtilDebug.LogError(string.Format("_DepthFirstFindDependency, CircularDependency {0}", assetItem.AssetRelativePathStartWithAssets));
+                    UtilDebug.LogError(string.Format("_DepthFirstFindDependency, CircularDependency {0}", assetItem.AssetLongPackageName));
                 }
             }
 
@@ -1536,14 +1549,14 @@ namespace ToolSet
             {
                 if (AssetPackageUtil.ENABLE_COMMON_LOG)
                 {
-                    UtilDebug.Log(string.Format("_DepthFirstFindDependency, {0}", assetItem.AssetRelativePathStartWithAssets));
+                    UtilDebug.Log(string.Format("_DepthFirstFindDependency, {0}", assetItem.AssetLongPackageName));
                 }
 
                 stack.Push(assetItem);
 
                 assetItem.IsCollectedDependency = true;
 
-                string[] dependencyArray = this.mAssetRegister.GetDependencies(assetItem.AssetRelativePathStartWithAssets, false);
+                string[] dependencyArray = this.mAssetRegister.GetDependencies(assetItem.AssetLongPackageName, false);
                 AssetItemV2 depencyAssetItem = null;
                 string dependencyPath = "";
 
@@ -1551,7 +1564,7 @@ namespace ToolSet
                 {
                     dependencyPath = dependencyArray[index];
 
-                    if (assetItem.AssetRelativePathStartWithAssets != dependencyPath)
+                    if (assetItem.AssetLongPackageName != dependencyPath)
                     {
                         if (this._CollectAssetPath2AssetDic.TryGetValue(dependencyPath, out depencyAssetItem))
                         {
@@ -1606,7 +1619,7 @@ namespace ToolSet
                 {
                     if (AssetPackageUtil.ENABLE_COMMON_LOG)
                     {
-                        UtilDebug.Log(string.Format("_DepthFirstBuildOneAssetBundleItem, exclude {0}", assetItem.AssetRelativePathStartWithAssets));
+                        UtilDebug.Log(string.Format("_DepthFirstBuildOneAssetBundleItem, exclude {0}", assetItem.AssetLongPackageName));
                     }
                 }
 
@@ -1628,7 +1641,7 @@ namespace ToolSet
                     {
                         if (AssetPackageUtil.ENABLE_COMMON_LOG)
                         {
-                            UtilDebug.Log(string.Format("_DepthFirstBuildOneAssetBundleItem, error {0}", assetItem.AssetRelativePathStartWithAssets));
+                            UtilDebug.Log(string.Format("_DepthFirstBuildOneAssetBundleItem, error {0}", assetItem.AssetLongPackageName));
                         }
                     }
                 }
@@ -1683,7 +1696,7 @@ namespace ToolSet
 
                 for (int index = 0; index < assetBundleItem.AssetItemList.Count; ++index)
                 {
-                    UtilDebug.Log(string.Format("Child Asset: {0}", assetBundleItem.AssetItemList[index].AssetRelativePathStartWithAssets));
+                    UtilDebug.Log(string.Format("Child Asset: {0}", assetBundleItem.AssetItemList[index].AssetLongPackageName));
                 }
 
                 UtilDebug.Log("_OutDetailAssetBundleInfo, end");
@@ -1725,13 +1738,15 @@ namespace ToolSet
                 if (this._IsIncludeInCollectList(fullPath))
                 {
                     AssetItemV2 assetItem = new AssetItemV2();
-                    assetItem.AssetRelativePathStartWithAssets = AssetPackageUtil.GetRelativePathStartWithAsset(fullPath);
+					fullPath = UtilFileIO.normalPath(fullPath);
+					assetItem.AssetAbsolutePath = fullPath;
+					assetItem.AssetLongPackageName = UtilUE4EngineWrap.ConvertFilenameToLongPackageName(ref fullPath);
                     assetItem.IsIncludeAssetBundleItem = this._IsIncludeAssetBundleItemList(assetItem);
                     this._AddAssetItem(assetItem);
 
                     if (AssetPackageUtil.ENABLE_COMMON_LOG)
                     {
-                        UtilDebug.Log(string.Format("_OnFileHandle, {0}", assetItem.AssetRelativePathStartWithAssets));
+                        UtilDebug.Log(string.Format("_OnFileHandle, {0}", assetItem.AssetLongPackageName));
                     }
                 }
             }
@@ -1842,8 +1857,9 @@ namespace ToolSet
 
                 for (int indexItem = 0; indexItem < assetBundleItem.AssetItemList.Count; ++indexItem)
                 {
-                    assetBundleBuild.assetNames[indexItem] = assetBundleItem.AssetItemList[indexItem].AssetRelativePathStartWithAssets;
-                }
+					//assetBundleBuild.assetNames[indexItem] = assetBundleItem.AssetItemList[indexItem].AssetLongPackageName;
+					assetBundleBuild.assetNames[indexItem] = assetBundleItem.AssetItemList[indexItem].AssetAbsolutePath;
+				}
 
                 this._AssetBundleBuildList.Add(assetBundleBuild);
             }
@@ -1876,7 +1892,8 @@ namespace ToolSet
                 UtilDebug.Log("OutAssetManifest, start");
             }
 
-            this._CollectAllAssetList();
+			this._CheckAllInitData();
+			this._CollectAllAssetList();
             this._CollectAssetDependency();
             this._BuildAssetBundleItemList();
             this._CheckAssetCorrect();
@@ -1895,7 +1912,8 @@ namespace ToolSet
                 UtilDebug.Log("BuildAssetBundleItemInfo, start");
             }
 
-            this._CollectAllAssetList();
+			this._CheckAllInitData();
+			this._CollectAllAssetList();
             this._CollectAssetDependency();
             this._BuildAssetBundleItemList();
             this._CheckAssetCorrect();
@@ -1914,7 +1932,8 @@ namespace ToolSet
                 UtilDebug.Log("BuildAssetBundle, start");
             }
 
-            this._CollectAllAssetList();
+			this._CheckAllInitData();
+			this._CollectAllAssetList();
             this._CollectAssetDependency();
             this._BuildAssetBundleItemList();
             this._CheckAssetCorrect();
@@ -1929,17 +1948,17 @@ namespace ToolSet
         }
     }
 
-    public class AssetPackageGraphSingleDependency : AssetPackageGraph
+    public class SingleDependencyAssetPackageGraph : AssetPackageGraph
 	{
-        public AssetPackageGraphSingleDependency()
+        public SingleDependencyAssetPackageGraph()
         {
 
         }
     }
 
-    public class AssetPackageGraphSingleFile : AssetPackageGraph
+    public class SingleFileAssetPackageGraph : AssetPackageGraph
 	{
-        public AssetPackageGraphSingleFile()
+        public SingleFileAssetPackageGraph()
         {
 
         }

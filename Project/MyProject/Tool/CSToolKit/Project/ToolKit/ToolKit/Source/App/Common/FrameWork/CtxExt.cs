@@ -8,6 +8,7 @@ namespace ToolSet
 
 		public ProjectConfig mProjectConfig;
 		public ExcelCtx mExcelCtx;
+		public AssetPackageCtx mAssetPackageCtx;
 		public TestMain mTestMain;
 
         public CtxExt()
@@ -33,7 +34,9 @@ namespace ToolSet
 
             this.mExcelCtx = new ExcelCtx();
             this.mExcelCtx._preInit();
-        }
+
+			this.mAssetPackageCtx = new AssetPackageCtx();
+		}
 
         override protected void _execInit()
         {
@@ -42,6 +45,7 @@ namespace ToolSet
 			this.mProjectConfig.init();
 
 			this.mExcelCtx._execInit();
+			this.mAssetPackageCtx.init();
 			this.mTestMain.init();
 		}
 
@@ -65,6 +69,9 @@ namespace ToolSet
 			this.mExcelCtx._execDispose();
             this.mExcelCtx = null;
 
+			this.mAssetPackageCtx.dispose();
+			this.mAssetPackageCtx = null;
+
 			this.mTestMain.dispose();
 			this.mTestMain = null;
 		}
@@ -80,6 +87,29 @@ namespace ToolSet
 
 			//this.mExcelCtx.mExportJson.export();
 			//this.mExcelCtx.mExportCsv.export();
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddCollectRootPath(
+				UtilUE4EngineWrap.ProjectContentDir()
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddIncludeAssetBundlePath(
+				UtilUE4EngineWrap.DEFAULT_MOUNT_POINT
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				"txt"
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				"zip"
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				"lua"
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				 "py"
+			);
+			this.mAssetPackageCtx.mSingleDependencyGraph.AddExcludeAssetBundleFileExtName(
+				  "pak"
+			);
+			//this.mAssetPackageCtx.mSingleDependencyGraph.OutAssetManifest();
+			this.mAssetPackageCtx.mSingleDependencyGraph.BuildAssetBundle();
 			this.mTestMain.run();
 		}
     }

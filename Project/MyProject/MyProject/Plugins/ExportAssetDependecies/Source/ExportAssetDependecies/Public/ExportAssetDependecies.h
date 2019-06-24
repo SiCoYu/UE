@@ -3,12 +3,13 @@
 #pragma once
 
 #include "ModuleManager.h"
+#include "DependicesInfo.h"
 
 class FToolBarBuilder;
 class FMenuBuilder;
 class UExportAssetDependeciesSettings;
 class FAssetRegistryModule;
-struct FDependicesInfo;
+//struct FDependicesInfo;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogExportAssetDependecies, Log, All);
 
@@ -36,6 +37,7 @@ private:
 
     /** This will save the dependencies information to the OutputPath/AssetDependencies.json */
     void SaveDependicesInfo(const TMap<FString, FDependicesInfo> &DependicesInfos);
+	void _ExportOneAssetDependeciesByLongPackageName(const FString& TargetLongPackageName, TMap<FString, FDependicesInfo>& DependicesInfos, FAssetRegistryModule& AssetRegistryModule);
 
 private:
     TSharedPtr<class FUICommandList> PluginCommands;

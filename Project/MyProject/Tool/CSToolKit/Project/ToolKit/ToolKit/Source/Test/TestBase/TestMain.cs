@@ -27,8 +27,8 @@ namespace ToolSet
 
 		public void run()
 		{
-			this.mTestBuildOnePak.run();
-			this.mTestAssetRegister.run();
+			//this.mTestBuildOnePak.run();
+			//this.mTestAssetRegister.run();
 		}
 	}
 }

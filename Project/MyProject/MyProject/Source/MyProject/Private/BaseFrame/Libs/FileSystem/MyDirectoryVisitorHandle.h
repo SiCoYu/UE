@@ -3,11 +3,14 @@
 #include "Containers/UnrealString.h"	// FString
 #include "GenericPlatform/GenericPlatformFile.h"	// FDirectoryVisitor
 #include "MyFileDelegate.h"
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class MyDirectoryVisitorHandle
+// error C2247: 'MyNS::MyAllocatedObject::operator new' not accessible because 'MyNS::MyDirectoryVisitorHandle' uses 'private' to inherit from 'MyNS::GObject'
+//class MyDirectoryVisitorHandle : GObject
+class MyDirectoryVisitorHandle : public GObject
 {
 public:
 	MyDirectoryVisitorHandle(TArray<FString>& outFileArrayRef, TArray<FString>& outDirectoryArrayRef);
