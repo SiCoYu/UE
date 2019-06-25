@@ -161,8 +161,9 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BaseFrame/Libs/LuaCBridge",
                 "MyProject/Private/BaseFrame/Libs/Scene",
                 "MyProject/Private/BaseFrame/Libs/Scene/SceneEntityBase",
+				"MyProject/Private/BaseFrame/Libs/Scene/Animation",
 
-                "MyProject/Private/BaseFrame/Libs/Auxiliary/AuxLoader",
+				"MyProject/Private/BaseFrame/Libs/Auxiliary/AuxLoader",
                 "MyProject/Private/BaseFrame/Libs/Auxiliary/AuxUi",
                 "MyProject/Private/BaseFrame/Libs/Auxiliary/AuxBase",
                 "MyProject/Private/BaseFrame/Libs/Auxiliary/AuxUserData",
