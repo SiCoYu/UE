@@ -78,3 +78,10 @@ void UMyAnimInstanceBase::AnimNotify_End(UAnimNotify * Notify)
 	//FString str = FString::Printf(TEXT("--- AnimNotify_End"));
 	//GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Yellow, str);
 }
+
+bool UMyAnimInstanceBase::HandleNotify(const FAnimNotifyEvent& AnimNotifyEvent)
+{
+	Super::HandleNotify(AnimNotifyEvent);
+
+
+}

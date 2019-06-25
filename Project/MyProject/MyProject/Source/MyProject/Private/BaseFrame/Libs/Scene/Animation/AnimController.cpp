@@ -19,4 +19,10 @@ void AnimController::dispose()
 
 }
 
+// 添加动画 Notify
+void AnimController::addAnimEventHandle()
+{
+
+}
+
 MY_END_NAMESPACE

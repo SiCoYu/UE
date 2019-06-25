@@ -57,4 +57,7 @@ public:
 
 	// Engine\Source\Runtime\Engine\Classes\Animation\AnimInstance.h
 	// void TriggerSingleAnimNotify(const FAnimNotifyEvent* AnimNotifyEvent);
+
+public:
+	virtual bool HandleNotify(const FAnimNotifyEvent& AnimNotifyEvent) override;
 };

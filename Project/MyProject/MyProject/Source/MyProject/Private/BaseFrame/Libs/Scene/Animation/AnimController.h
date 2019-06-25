@@ -21,6 +21,8 @@ public:
 public:
 	void init();
 	void dispose();
+
+	void addAnimEventHandle();
 };
 
 MY_END_NAMESPACE
