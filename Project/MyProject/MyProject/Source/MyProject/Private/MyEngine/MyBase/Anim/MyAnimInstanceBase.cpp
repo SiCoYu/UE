@@ -81,7 +81,11 @@ void UMyAnimInstanceBase::AnimNotify_End(UAnimNotify * Notify)
 
 bool UMyAnimInstanceBase::HandleNotify(const FAnimNotifyEvent& AnimNotifyEvent)
 {
-	Super::HandleNotify(AnimNotifyEvent);
+	return Super::HandleNotify(AnimNotifyEvent);
+}
 
-
+float UMyAnimInstanceBase::getUnitPlayTime(int32 AssetPlayerIndex)
+{
+	float ret = this->GetInstanceAssetPlayerTimeFraction(AssetPlayerIndex);
+	return ret;
 }

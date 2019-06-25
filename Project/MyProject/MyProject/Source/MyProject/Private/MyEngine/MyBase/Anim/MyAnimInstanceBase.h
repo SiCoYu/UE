@@ -2,6 +2,8 @@
 
 #include "Math/Rotator.h"
 #include "Animation/AnimInstance.h"
+#include "HAL/Platform.h"	// int32
+#include "Animation/AnimTypes.h"	// FAnimNotifyEvent
 #include "MyAnimInstanceBase.generated.h"
 
 /**
@@ -60,4 +62,7 @@ public:
 
 public:
 	virtual bool HandleNotify(const FAnimNotifyEvent& AnimNotifyEvent) override;
+
+public:
+	float getUnitPlayTime(int32 AssetPlayerIndex);
 };
