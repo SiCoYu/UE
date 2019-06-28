@@ -75,4 +75,14 @@
 //#define MY_END_NAMESPACE
 //#define MY_USING_NAMESPACE(NSName)
 
+// ref http://www.bubuko.com/infodetail-1170925.html
+
+#ifdef PLATFORM_WIN32
+#define DLL_EXPORT_TEMPLATE_CLASS(TemplateClass) template class __declspec(dllexport) TemplateClass
+#define DLL_IMPORT_TEMPLATE_CLASS(TemplateClass) template class __declspec(dllimport) TemplateClass
+#else
+#define DLL_EXPORT_TEMPLATE_CLASS(TemplateClass)
+#define DLL_IMPORT_TEMPLATE_CLASS(TemplateClass)	
+#endif
+
 #endif

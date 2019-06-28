@@ -7,6 +7,8 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
+DLL_EXPORT_TEMPLATE_CLASS(MySharedPtr<PlayerMgr>);
+
 class PlayerMgr;
 
 /**
