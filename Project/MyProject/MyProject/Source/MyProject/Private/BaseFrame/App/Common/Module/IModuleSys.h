@@ -8,7 +8,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 模块系统
  */
-class IModuleSys
+class MYPROJECT_API IModuleSys
 {
     virtual void loadModule(ModuleId moduleId) = 0;
 	virtual void unloadModule(ModuleId moduleId) = 0;

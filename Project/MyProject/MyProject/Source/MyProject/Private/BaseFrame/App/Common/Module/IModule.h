@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class IModule
+class MYPROJECT_API IModule
 {
 public:
     virtual void init() = 0;

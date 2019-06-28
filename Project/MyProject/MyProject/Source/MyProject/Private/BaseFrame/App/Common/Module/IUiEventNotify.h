@@ -6,7 +6,7 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class Form;
 
-class IUiEventNotify
+class MYPROJECT_API IUiEventNotify
 {
 public:
     virtual void onCodeFormLoaded(Form* form) = 0;

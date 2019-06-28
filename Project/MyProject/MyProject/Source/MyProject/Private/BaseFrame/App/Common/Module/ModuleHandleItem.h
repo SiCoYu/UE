@@ -10,7 +10,7 @@ class IModule;
 /**
  * @brief 单一模块处理 Item 
  */
-class ModuleHandleItem
+class MYPROJECT_API ModuleHandleItem
 {
 public:
 	ModuleId mModuleId;

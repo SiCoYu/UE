@@ -4,7 +4,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class ISceneInputNotify
+class MYPROJECT_API ISceneInputNotify
 {
 
 };

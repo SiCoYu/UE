@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class ModulePath
+class MYPROJECT_API ModulePath
 {
 public:
 	static std::string LOGINMN;
@@ -13,7 +13,7 @@ public:
     static std::string AUTOUPDATEMN;
 };
 
-class ModuleName
+class MYPROJECT_API ModuleName
 {
 public:
     static std::string LOGINMN;

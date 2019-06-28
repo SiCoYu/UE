@@ -4,7 +4,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class ISceneEventNotify
+class MYPROJECT_API ISceneEventNotify
 {
 public:
 	virtual void onLevelLoaded()

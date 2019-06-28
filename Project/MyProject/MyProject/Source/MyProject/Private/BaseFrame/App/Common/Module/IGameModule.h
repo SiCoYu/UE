@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class IGameModule : public IModule
+class MYPROJECT_API IGameModule : public IModule
 {
 	//virtual void loadGameScene() = 0;
 };
