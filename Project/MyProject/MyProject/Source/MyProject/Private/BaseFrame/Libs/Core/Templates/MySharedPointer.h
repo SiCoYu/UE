@@ -22,7 +22,7 @@ MY_BEGIN_NAMESPACE(MyNS)
  * @error UE4 Object 一定不能使用 SharedPtr ，因为 UE4 有自己一套内存分配策略
  */
 template<class T> 
-class SharedPtr
+class MYPROJECT_API SharedPtr
 {
 	template<typename Y>
 	friend class SharedPtr;
