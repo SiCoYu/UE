@@ -345,55 +345,56 @@ public class MyProject : ModuleRules
             //Definitions.Add("__WIN32__");
             PublicDefinitions.Add("_CRT_SECURE_NO_WARNINGS");
             PublicDefinitions.Add("__WIN32__");
-            // VS 2017: error C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
-            // 添加后出现 warning C4005: 'WIN32_LEAN_AND_MEAN': macro redefinition
-            PublicDefinitions.Add("WIN32_LEAN_AND_MEAN");
-        }
-        //Definitions.Add("WIN32_LEAN_AND_MEAN");
-        //Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
-        //Definitions.Add("NO_GETADDRINFO");
-        //Definitions.Add("ENABLE_EXCEPTIONS");
-        //Definitions.Add("ENABLE_DETACH");
+			// VS 2017: error C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+			// 添加后出现 warning C4005: 'WIN32_LEAN_AND_MEAN': macro redefinition
+			// 注释掉会出现 error C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+			PublicDefinitions.Add("WIN32_LEAN_AND_MEAN");
+		}
+		//Definitions.Add("WIN32_LEAN_AND_MEAN");
+		//Definitions.Add("_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH");
+		//Definitions.Add("NO_GETADDRINFO");
+		//Definitions.Add("ENABLE_EXCEPTIONS");
+		//Definitions.Add("ENABLE_DETACH");
 
-        //PrivateIncludePaths.AddRange(
-        //    new string[] {
-        //        "Coupling/Private",
-        //        // ... add other private include paths required here ...
-        //        Path.Combine(this.getMyProjectThirdPartyPath(), "v8", "include"),
-        //    }
-        //);
+		//PrivateIncludePaths.AddRange(
+		//    new string[] {
+		//        "Coupling/Private",
+		//        // ... add other private include paths required here ...
+		//        Path.Combine(this.getMyProjectThirdPartyPath(), "v8", "include"),
+		//    }
+		//);
 
-        //PublicDependencyModuleNames.AddRange(
-        //    new string[]
-        //    {
-        //        "Engine",
-        //        "Core",
-        //        // ... add other public dependencies that you statically link with here ...
-        //    }
-        //);
+		//PublicDependencyModuleNames.AddRange(
+		//    new string[]
+		//    {
+		//        "Engine",
+		//        "Core",
+		//        // ... add other public dependencies that you statically link with here ...
+		//    }
+		//);
 
-        //PrivateDependencyModuleNames.AddRange(
-        //    new string[]
-        //    {
-        //        // ... add private dependencies that you statically link with here ...
-        //    }
-        //);
+		//PrivateDependencyModuleNames.AddRange(
+		//    new string[]
+		//    {
+		//        // ... add private dependencies that you statically link with here ...
+		//    }
+		//);
 
-        //DynamicallyLoadedModuleNames.AddRange(
-        //    new string[]
-        //    {
-        //        // ... add any modules that your module loads dynamically here ...
-        //    }
-        //);
+		//DynamicallyLoadedModuleNames.AddRange(
+		//    new string[]
+		//    {
+		//        // ... add any modules that your module loads dynamically here ...
+		//    }
+		//);
 
-        // 添加对第三方库 PhysX_3.4 的引用头文件
-        // 现在接口参数修改了
-        //AddEngineThirdPartyPrivateStaticDependencies(Target,
-        //    "PhysX",
-        //    "APEX"
-        //    );
-        // 4.17 需要新的接口
-        this.AddEngineThirdPartyPrivateStaticDependencies(Target, "PhysX");
+		// 添加对第三方库 PhysX_3.4 的引用头文件
+		// 现在接口参数修改了
+		//AddEngineThirdPartyPrivateStaticDependencies(Target,
+		//    "PhysX",
+		//    "APEX"
+		//    );
+		// 4.17 需要新的接口
+		this.AddEngineThirdPartyPrivateStaticDependencies(Target, "PhysX");
         this.AddEngineThirdPartyPrivateStaticDependencies(Target, "APEX");
 
         //PublicSystemIncludePaths.Add("ThirdParty/hlslcc/hlslcc/src/hlslcc_lib");
