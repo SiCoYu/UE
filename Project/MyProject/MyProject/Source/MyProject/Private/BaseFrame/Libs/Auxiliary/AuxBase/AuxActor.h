@@ -5,7 +5,7 @@
 
 MY_BEGIN_NAMESPACE(MyNS)
 
-class AuxActor : public GObject
+class MYPROJECT_API AuxActor : public GObject
 {
 protected:
 
