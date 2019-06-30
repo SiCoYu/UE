@@ -12,6 +12,8 @@ private:
 	FString mName;
 
 public:
+	// 缺少这个，子类构造报错，error C2664: 'AMyActorBase::AMyActorBase(AMyActorBase &&)': cannot convert argument 1 from 'const FObjectInitializer' to 'FVTableHelper &'
+	AMyActorBase(const FObjectInitializer& ObjectInitializer);
 	AMyActorBase();
 	virtual ~AMyActorBase();
 

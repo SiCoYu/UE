@@ -2,6 +2,12 @@
 #include "MyActorBase.h"
 #include "LogCategoryDef.h"
 
+AMyActorBase::AMyActorBase(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+
+}
+
 AMyActorBase::AMyActorBase()
 {
 	
