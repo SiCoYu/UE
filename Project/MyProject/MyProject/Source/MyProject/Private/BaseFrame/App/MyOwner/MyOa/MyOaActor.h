@@ -8,5 +8,5 @@ class UMyAnimInstanceBase;
 UCLASS()
 class AMyOaActor : public AMyActorBase
 {
-	GENERATED_BODY()
+	GENERATED_UCLASS_BODY()
 };
