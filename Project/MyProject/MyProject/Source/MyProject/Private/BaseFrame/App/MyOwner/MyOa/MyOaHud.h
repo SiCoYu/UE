@@ -5,7 +5,7 @@
 #include "MyOaHud.generated.h"
 
 UCLASS()
-class AMyOaHUD : public AMyHudBase
+class AMyOaHud : public AMyHudBase
 {
 	GENERATED_UCLASS_BODY()
 };

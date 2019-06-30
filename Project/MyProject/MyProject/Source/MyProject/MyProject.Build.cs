@@ -76,8 +76,9 @@ public class MyProject : ModuleRules
                 "MyProject/Private/MyEngine/MyBase/Misc",
                 "MyProject/Private/MyEngine/MyBase/HAL",
                 "MyProject/Private/MyEngine/MyBase/Tick",
+				"MyProject/Private/MyEngine/MyBase/Ui",
 
-                "MyProject/Private/MyEngine/MyFly",
+				"MyProject/Private/MyEngine/MyFly",
                 "MyProject/Private/MyEngine/MyFly/Actor",
                 "MyProject/Private/MyEngine/MyFly/Frame",
                 "MyProject/Private/MyEngine/MyFly/AI",
@@ -203,6 +204,9 @@ public class MyProject : ModuleRules
                 "MyProject/Private/BaseFrame/Ui/UiSlateStyleSet",
                 "MyProject/Private/BaseFrame/Ui/UiTestUMG",
                 "MyProject/Private/BaseFrame/Ui/UiFunctionBar",
+
+				// MyOwner
+				"MyProject/Private/BaseFrame/App/MyOwner/MyOa",
 
                 // Test ÇøÓò
                 "MyProject/Private/BaseFrame/UnitTest",
