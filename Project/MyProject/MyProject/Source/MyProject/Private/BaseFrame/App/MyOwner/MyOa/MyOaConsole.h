@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyConsoleBase.h"		// UConsole
-#include "MyTomConsole.generated.h"
+#include "MyOaConsole.generated.h"
 
 UCLASS()
 class UMyOaConsole : public UMyConsoleBase

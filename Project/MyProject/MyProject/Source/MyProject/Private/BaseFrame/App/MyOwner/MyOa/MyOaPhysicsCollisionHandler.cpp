@@ -1,7 +1,7 @@
 #include "MyProject.h"
 #include "MyOaPhysicsCollisionHandler.h"
 
-UMyOaPhysicsCollisionHandler::UMyTomPhysicsCollisionHandler(const FObjectInitializer& ObjectInitializer)
+UMyOaPhysicsCollisionHandler::UMyOaPhysicsCollisionHandler(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 
