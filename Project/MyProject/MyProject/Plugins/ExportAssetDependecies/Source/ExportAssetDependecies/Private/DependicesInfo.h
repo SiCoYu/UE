@@ -8,4 +8,6 @@ struct FDependicesInfo
 	TArray<FString> DependicesInGameContentDir;
 	TArray<FString> OtherDependices;
 	FString AssetClassString;
+
+	FDependicesInfo();
 };
