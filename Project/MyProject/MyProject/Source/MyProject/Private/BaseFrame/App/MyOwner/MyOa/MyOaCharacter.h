@@ -3,10 +3,11 @@
 #include "MyCharacterBase.h"
 #include "MyOaCharacter.generated.h"
 
+UCLASS()
 class AMyOaCharacter : public AMyCharacterBase
 {
 	GENERATED_BODY()
 
 public:
-	AMyTPCharacter(const FObjectInitializer& ObjectInitializer);
+	AMyOaCharacter(const FObjectInitializer& ObjectInitializer);
 };

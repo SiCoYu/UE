@@ -17,24 +17,7 @@
 
 AMyHudBase::AMyHudBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<UFont> BigFontOb(TEXT("/Game/MyAsset/Font/Roboto51"));
-	BigFont = BigFontOb.Object;
-	HUDDark = FColor(110, 124, 131, 255);
-	AHUD* aa = dynamic_cast<AHUD*>(this);
-
-	//static ConstructorHelpers::FClassFinder<UUserWidget> aaa(TEXT("/Game/Blueprints/NewWidgetBlueprint"));
-
-	//if (aaa.Class != NULL)
-	//{
-	//	TSubclassOf<class UUserWidget> WidgetClass = aaa.Class;
-	//	UUserWidget* PawnToFit = WidgetClass->GetDefaultObject<UUserWidget>();
-
-		//NewWidget = Cast<UUserWidget>(StaticConstructObject(*WidgetClass));
-		//NewWidget->AddToViewport();
-	//}
-
-	ChatFontTTF = "TTF/comicbd.ttf";
-	ChatInputFontSize = 24;
+	
 }
 
 void AMyHudBase::DrawHUD()

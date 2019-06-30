@@ -6,7 +6,11 @@
 
 // minimalapi 不能在 Windows 下 导出 dll 符号
 //UCLASS(minimalapi)
+UCLASS()
 class AMyOaGameMode : public AMyGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	AMyOaGameMode(const FObjectInitializer& ObjectInitializer);
 };
