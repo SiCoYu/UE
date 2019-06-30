@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <string>
+#include "GObject.h"
 #include "PlatformDefine.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
@@ -10,7 +11,7 @@ class MDataStream;
 /**
  * @brief 覆盖安装后自动清理之前下载的数据，防止有老的数据存在
  */
-class AutoClearSys
+class AutoClearSys : public GObject
 {
 protected:
 	std::string mInstallFlagFileFullPath;        // 检测的文件名字
