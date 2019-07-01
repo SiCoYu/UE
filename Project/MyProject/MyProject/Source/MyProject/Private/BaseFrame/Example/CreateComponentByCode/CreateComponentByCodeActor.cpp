@@ -4,6 +4,7 @@
 #include "Animation/AnimSingleNodeInstance.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"		// UBehaviorTreeComponent
 #include  "BehaviorTree/BehaviorTree.h"		// UBehaviorTree
+#include "Engine/EngineTypes.h"	// FAttachmentTransformRules
 
 //ACreateComponentByCodeActor::ACreateComponentByCodeActor(const class FObjectInitializer& PCIP)
 //	: Super(PCIP)
@@ -25,7 +26,7 @@ void ACreateComponentByCodeActor::createSkeletalMeshComponent()
 	//	this->RootComponent = this->mMeshCompPtr;
 	// warning C4996: 'USceneComponent::AttachTo': This function is deprecated, please use AttachToComponent instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
 	//this->mMeshCompPtr->AttachTo(this->RootComponent);
-	this->mMeshCompPtr->AttachToComponent(this->RootComponent);
+	this->mMeshCompPtr->AttachToComponent(this->RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 void ACreateComponentByCodeActor::createBehaviorTreeComponent()
