@@ -173,9 +173,9 @@ const UMyAnimInstanceBase* const AMyCharacterBase::GetAnimInstance()
 {
 	UMyAnimInstanceBase* AnimInstance = nullptr;
 
-	if (nullptr != GetMesh())
+	if (nullptr != this->GetMesh())
 	{
-		AnimInstance = Cast<UMyAnimInstanceBase>(GetMesh()->GetAnimInstance());
+		AnimInstance = Cast<UMyAnimInstanceBase>(this->GetMesh()->GetAnimInstance());
 	}
 
 	return AnimInstance;

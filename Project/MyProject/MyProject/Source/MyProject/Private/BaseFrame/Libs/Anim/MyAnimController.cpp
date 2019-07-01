@@ -18,8 +18,11 @@ void MyAnimController::dispose()
 void MyAnimController::setActor(AActor* actor)
 {
 	this->mActorPtr = actor;
-	USkeletalMeshComponent* Mesh = this->mActorPtr->FindComponentByClass<USkeletalMeshComponent>();
-	this->mAnimInstancePtr = Cast<UMyAnimInstanceBase>(Mesh->GetAnimInstance());
+	this->mMeshComp = this->mActorPtr->FindComponentByClass<USkeletalMeshComponent>();
+	this->mAnimInstancePtr = Cast<UMyAnimInstanceBase>(this->mMeshComp->GetAnimInstance());
+	this->mSkeletalMesh = this->mMeshComp->SkeletalMesh;
+	this->mSkeleton = this->mSkeletalMesh->Skeleton;
+	//this->mMesh = this->mSkeletalMesh->BodySetup;
 }
 
 MY_END_NAMESPACE

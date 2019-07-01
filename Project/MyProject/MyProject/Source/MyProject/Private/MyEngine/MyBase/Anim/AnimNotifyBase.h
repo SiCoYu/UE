@@ -15,4 +15,7 @@ UCLASS()
 class UAnimNotifyBase : public UAnimNotify
 {
 	GENERATED_UCLASS_BODY()
+
+public:
+	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation) override;
 };

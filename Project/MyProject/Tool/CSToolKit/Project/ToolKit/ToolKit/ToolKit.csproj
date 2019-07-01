@@ -48,6 +48,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\App\AssetPackage\AssetPackageCtx.cs" />
+    <Compile Include="Source\App\AssetPackage\BuildAssetGraph\AssetPackageCircularDependencyChecker.cs" />
+    <Compile Include="Source\App\AssetPackage\BuildAssetGraph\AssetPackageFilePathAndNameChecker.cs" />
+    <Compile Include="Source\App\AssetPackage\BuildAssetGraph\AssetPackageGraph.cs" />
+    <Compile Include="Source\App\AssetPackage\BuildAssetGraph\AssetPackageUtil.cs" />
+    <Compile Include="Source\App\AssetPackage\BuildAssetGraph\AssetRegister.cs" />
+    <Compile Include="Source\App\AssetPackage\BuildAssetPackage\BuildOneAssetPackageBase.cs" />
+    <Compile Include="Source\App\AssetPackage\BuildAssetPackage\BuildOneAssetPackageByAssetGraph.cs" />
+    <Compile Include="Source\App\AssetPackage\BuildAssetPackage\BuildOneAssetPackageByFile.cs" />
     <Compile Include="Source\App\Common\FrameWork\ProjectConfig.cs" />
     <Compile Include="Source\App\Common\Tools\UtilDebug.cs" />
     <Compile Include="Source\App\Common\Tools\UtilUE4EngineWrap.cs" />
@@ -71,17 +80,8 @@
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHead.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableHeadItem.cs" />
     <Compile Include="Source\App\ExcelReadWrite\ImportExcel\TableSheet.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\AssetPackageCtx.cs" />
     <Compile Include="Source\App\Common\Tools\UtilExcel.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\BuildAssetGraph\AssetPackageCircularDependencyChecker.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\BuildAssetGraph\AssetPackageFilePathAndNameChecker.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\BuildAssetGraph\AssetPackageGraph.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\BuildAssetGraph\AssetPackageUtil.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\BuildAssetGraph\AssetRegister.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\BuildAssetPackage\BuildOneAssetPackageBase.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\BuildAssetPackage\BuildOneAssetPackageByAssetGraph.cs" />
-    <Compile Include="Source\App\Module\AssetPackage\BuildAssetPackage\BuildOneAssetPackageByFile.cs" />
-    <Compile Include="Source\App\Module\ProjectState\Entry\MainEntry.cs" />
+    <Compile Include="Source\App\Module\Entry\MainEntry.cs" />
     <Compile Include="Source\Extern\Mono.Xml\MiniParser.cs" />
     <Compile Include="Source\Extern\Mono.Xml\SecurityParser.cs" />
     <Compile Include="Source\Extern\Mono.Xml\SmallXmlParser.cs" />

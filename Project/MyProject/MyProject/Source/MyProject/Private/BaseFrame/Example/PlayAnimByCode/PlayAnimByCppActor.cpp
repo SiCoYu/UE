@@ -70,5 +70,8 @@ void APlayAnimByCppActor::SetAnimInstanceClass(UClass* NewClass)
 	{
 		UAnimBlueprintGeneratedClass* MeshAnim = LoadObject<UAnimBlueprintGeneratedClass>(NULL, TEXT("/Game/Character/HeroTPP_AnimBlueprint.HeroTPP_AnimBlueprint"));
 		Mesh->SetAnimInstanceClass(MeshAnim);
+		// UE_DEPRECATED(4.11, "This property is deprecated. Please use AnimClass instead")
+		//Mesh->AnimBlueprintGeneratedClass = MeshAnim;
+		//Mesh->AnimClass = MeshAnim;
 	}
 }

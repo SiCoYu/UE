@@ -89,3 +89,8 @@ float UMyAnimInstanceBase::getUnitPlayTime(int32 AssetPlayerIndex)
 	float ret = this->GetInstanceAssetPlayerTimeFraction(AssetPlayerIndex);
 	return ret;
 }
+
+void UMyAnimInstanceBase::onMyTriggerSingleAnimNotify(FString NotifyName)
+{
+
+}

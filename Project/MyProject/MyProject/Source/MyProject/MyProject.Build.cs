@@ -298,6 +298,7 @@ public class MyProject : ModuleRules
 				"XmlParser",		// Xml
 				//"DesktopPlatform",  // Developer\DesktopPlatform
 				//"UMGEditor",		// Editor
+				"AIModule",		// UBehaviorTreeComponent
 			}
         );
 
@@ -321,6 +322,7 @@ public class MyProject : ModuleRules
                 "NavigationSystem",     // UE 4.20 error LNK2019: unresolved external symbol "__declspec(dllimport) public: static class UClass * __cdecl UNavigationSystemV1::StaticClass(void)" (__imp_?StaticClass@UNavigationSystemV1@@SAPEAVUClass@@XZ), 不添加会有链接错误， 4.20 之前如果不添加 NavigationSystem 引用，直接使用时没有链接错误的
 				//"DesktopPlatform",  // Developer\DesktopPlatform
 				//"UMGEditor",		// Editor
+				"AIModule",		// UBehaviorTreeComponent
 			}
         );
 
