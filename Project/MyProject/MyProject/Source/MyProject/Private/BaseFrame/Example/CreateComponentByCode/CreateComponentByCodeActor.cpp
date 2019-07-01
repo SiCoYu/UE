@@ -3,12 +3,13 @@
 #include "Components/SkeletalMeshComponent.h"	// USkeletalMeshComponent
 #include "Animation/AnimSingleNodeInstance.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"		// UBehaviorTreeComponent
+#include  "BehaviorTree/BehaviorTree.h"		// UBehaviorTree
 
-ACreateComponentByCodeActor::ACreateComponentByCodeActor(const class FObjectInitializer& PCIP)
-	: Super(PCIP)
-{
-
-}
+//ACreateComponentByCodeActor::ACreateComponentByCodeActor(const class FObjectInitializer& PCIP)
+//	: Super(PCIP)
+//{
+//
+//}
 
 void ACreateComponentByCodeActor::createSkeletalMeshComponent()
 {
@@ -22,11 +23,14 @@ void ACreateComponentByCodeActor::createSkeletalMeshComponent()
 	this->mMeshCompPtr->SetAnimInstanceClass(ap);
 	this->mMeshCompPtr->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
 	//	this->RootComponent = this->mMeshCompPtr;
-	this->mMeshCompPtr->AttachTo(this->RootComponent);
+	// warning C4996: 'USceneComponent::AttachTo': This function is deprecated, please use AttachToComponent instead. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+	//this->mMeshCompPtr->AttachTo(this->RootComponent);
+	this->mMeshCompPtr->AttachToComponent(this->RootComponent);
 }
 
 void ACreateComponentByCodeActor::createBehaviorTreeComponent()
 {
 	this->mBehaviorTreeCompPtr = this->CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("NpcBehaviorTree"));
-	this->mBehaviorTreeCompPtr->
+	UBehaviorTree* BehaviorTree = LoadObject<UBehaviorTree>(UBehaviorTree::StaticClass(), TEXT("BehaviorTree'/Game/UBehaviorTree/ThirdPerson_BehaviorTreeBP.ThirdPerson_BehaviorTreeBP'"));
+	this->mBehaviorTreeCompPtr->StartTree(*BehaviorTree);
 }
