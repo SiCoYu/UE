@@ -1,8 +1,13 @@
-﻿namespace Libs
+﻿#pragma once
+
+#include "PlatformDefine.h"
+
+MY_BEGIN_NAMESPACE(MyNS)
+
+enum class SoundResType
 {
-    public enum SoundResType
-    {
-        eSRT_Prefab,
-        eSRT_Clip,
-    }
-}
+	eSRT_Prefab,
+	eSRT_Clip,
+};
+
+MY_END_NAMESPACE
