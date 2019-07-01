@@ -22,7 +22,7 @@ void MyAnimController::setActor(AActor* actor)
 	this->mAnimInstancePtr = Cast<UMyAnimInstanceBase>(this->mMeshComp->GetAnimInstance());
 	this->mSkeletalMesh = this->mMeshComp->SkeletalMesh;
 	this->mSkeleton = this->mSkeletalMesh->Skeleton;
-	this->mMesh = this->mSkeletalMesh->BodySetup;
+	//this->mMesh = this->mSkeletalMesh->BodySetup;
 }
 
 MY_END_NAMESPACE
