@@ -13,6 +13,6 @@ void UAnimNotifyBase::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase
 	UMyAnimInstanceBase* animInstance = Cast<UMyAnimInstanceBase>(MeshComp->GetAnimInstance());
 	if (nullptr != animInstance)
 	{
-		animInstance->onMyTriggerSingleAnimNotify(*(Cast<FAnimNotifyEvent>(this->GetOuter())));
+		animInstance->onMyTriggerSingleAnimNotify(this->GetNotifyName());
 	}
 }

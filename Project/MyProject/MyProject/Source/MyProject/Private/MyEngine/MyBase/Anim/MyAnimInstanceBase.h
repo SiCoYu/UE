@@ -65,5 +65,5 @@ public:
 
 public:
 	float getUnitPlayTime(int32 AssetPlayerIndex);
-	virtual float onMyTriggerSingleAnimNotify(const FAnimNotifyEvent& AnimNotifyEvent);
+	virtual void onMyTriggerSingleAnimNotify(FString NotifyName);
 };

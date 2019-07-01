@@ -90,7 +90,7 @@ float UMyAnimInstanceBase::getUnitPlayTime(int32 AssetPlayerIndex)
 	return ret;
 }
 
-float UMyAnimInstanceBase::onMyTriggerSingleAnimNotify(const FAnimNotifyEvent& AnimNotifyEvent)
+void UMyAnimInstanceBase::onMyTriggerSingleAnimNotify(FString NotifyName)
 {
 
 }
