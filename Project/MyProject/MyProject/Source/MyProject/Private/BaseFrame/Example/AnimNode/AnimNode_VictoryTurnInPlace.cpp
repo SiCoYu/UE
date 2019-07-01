@@ -1,9 +1,7 @@
 // Copyright 1998-2013 Epic Games, Inc. All Rights Reserved.
 
 #include "MyProject.h"
-
 #include "Animation/AnimInstanceProxy.h"	// FAnimInstanceProxy
-
 #include "AnimNode_VictoryTurnInPlace.h"
 
 //#include "AnimationRuntime.h"
@@ -94,6 +92,7 @@ void FAnimNode_VictoryTurnInPlace::DetermineUseTurnPose()
 	//BlendDurationMult = FMath::GetMappedRangeValue(RangeIn, RangeOut, TurnAmountThisTick);
 	BlendDurationMult = FMath::GetMappedRangeValueClamped(RangeIn, RangeOut, TurnAmountThisTick);
 }
+
 void FAnimNode_VictoryTurnInPlace::UpdateBlendAlpha()
 {
 	if (BlendingIntoTurnPose)
@@ -109,6 +108,7 @@ void FAnimNode_VictoryTurnInPlace::UpdateBlendAlpha()
 		else BlendAlpha -= InternalBlendDuration;
 	}
 }
+
 void FAnimNode_VictoryTurnInPlace::Update_AnyThread(const FAnimationUpdateContext & Context)
 {
 	//EDITOR
