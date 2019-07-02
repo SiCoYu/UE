@@ -282,6 +282,7 @@ public class MyProjectEditor : ModuleRules
 				"DesktopPlatform",  // Developer\DesktopPlatform
 				"UMGEditor",		// Editor
 				"Paper2D",			// Paper2D
+				"AssetTools",		// AssetRegistryModule
 			}
 		);
  
@@ -316,6 +317,7 @@ public class MyProjectEditor : ModuleRules
 				"DesktopPlatform",  // Developer\DesktopPlatform
 				"UMGEditor",		// Editor
 				"Paper2D",			// Paper2D
+				"AssetTools",		// AssetRegistryModule
 			}
         );
 
