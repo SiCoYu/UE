@@ -23,6 +23,10 @@ class AMyCharacterBase : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+public:
+	int mHealth;
+
 public:
 	AMyCharacterBase(const FObjectInitializer& ObjectInitializer);
 

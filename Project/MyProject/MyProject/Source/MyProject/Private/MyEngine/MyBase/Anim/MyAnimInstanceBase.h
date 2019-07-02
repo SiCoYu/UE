@@ -64,6 +64,7 @@ public:
 	virtual bool HandleNotify(const FAnimNotifyEvent& AnimNotifyEvent) override;
 
 public:
-	float getUnitPlayTime(int32 AssetPlayerIndex);
+	float getCurUnitAnimTime(int32 AssetPlayerIndex);
 	virtual void onMyTriggerSingleAnimNotify(FString NotifyName);
+	FName getCurStateNameInStateMachine(FName MachineName);
 };

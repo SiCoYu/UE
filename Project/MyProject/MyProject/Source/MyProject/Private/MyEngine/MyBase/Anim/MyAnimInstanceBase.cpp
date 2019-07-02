@@ -1,5 +1,7 @@
 #include "MyProject.h"
 #include "MyAnimInstanceBase.h"
+#include "MyCharacterBase.h"
+#include "Animation/AnimNode_StateMachine.h"	  // FAnimNode_StateMachine
 
 UMyAnimInstanceBase::UMyAnimInstanceBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -23,7 +25,7 @@ void UMyAnimInstanceBase::NativeInitializeAnimation()
 	Super::NativeInitializeAnimation();
 
 	//Cache the owning pawn for use in Tick
-	mOwnerActor = TryGetPawnOwner();
+	this->mOwnerActor = this->TryGetPawnOwner();
 }
 
 //Tick
@@ -33,50 +35,50 @@ void UMyAnimInstanceBase::NativeUpdateAnimation(float DeltaTimeX)
 	Super::NativeUpdateAnimation(DeltaTimeX);
 
 	//Always Check Pointers
-	if (!mOwnerActor)
+	if (!this->mOwnerActor)
 	{
 		return;
 	}
 
 	//Set whether moving or not
-	IsMoving = (mOwnerActor->GetVelocity().SizeSquared() > 25);
+	this->IsMoving = (this->mOwnerActor->GetVelocity().SizeSquared() > 25);
 }
 
 bool UMyAnimInstanceBase::IsInMoving()
 {
-	//ACharacter* character = GetOwnerActor();
-	//if (!character)
-	//	return false;
+	ACharacter* character = Cast<ACharacter>(this->GetOwnerActor());
+	if (!character)
+		return false;
 
-	//float wallSpeed = FVector::DotProduct(character->GetVelocity(), character->GetActorRotation().Vector());
-	//return wallSpeed > 0.f ? true : false;
-	return false;
+	float wallSpeed = FVector::DotProduct(character->GetVelocity(), character->GetActorRotation().Vector());
+	return wallSpeed > 0.f ? true : false;
 }
 
 AActor* UMyAnimInstanceBase::GetOwnerActor()
 {
-	if (!mOwnerActor)
+	if (!this->mOwnerActor)
 	{
-		APawn* owner = TryGetPawnOwner();
-		mOwnerActor = owner ? Cast<ACharacter>(owner) : nullptr;
+		APawn* owner = this->TryGetPawnOwner();
+		this->mOwnerActor = owner ? Cast<ACharacter>(owner) : nullptr;
 	}
-	return mOwnerActor;
+
+	return this->mOwnerActor;
 }
 
 void UMyAnimInstanceBase::AnimNotify_Begin(UAnimNotify * Notify)
 {
-	//AMyChar* mychar = Cast<AMyChar>(GetOwnerChar());
-	//if (mychar)
-	//{
-	//	FString str = FString::Printf(TEXT("--- AnimNotify_Begin - %d"), mychar->mHealth);
-	//	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Green, str);
-	//}
+	AMyCharacterBase* myChar = Cast<AMyCharacterBase>(this->GetOwnerActor());
+	if (myChar)
+	{
+		FString str = FString::Printf(TEXT("--- AnimNotify_Begin - %d"), myChar->mHealth);
+		GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Green, str);
+	}
 }
 
 void UMyAnimInstanceBase::AnimNotify_End(UAnimNotify * Notify)
 {
-	//FString str = FString::Printf(TEXT("--- AnimNotify_End"));
-	//GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Yellow, str);
+	FString str = FString::Printf(TEXT("--- AnimNotify_End"));
+	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Yellow, str);
 }
 
 bool UMyAnimInstanceBase::HandleNotify(const FAnimNotifyEvent& AnimNotifyEvent)
@@ -84,7 +86,7 @@ bool UMyAnimInstanceBase::HandleNotify(const FAnimNotifyEvent& AnimNotifyEvent)
 	return Super::HandleNotify(AnimNotifyEvent);
 }
 
-float UMyAnimInstanceBase::getUnitPlayTime(int32 AssetPlayerIndex)
+float UMyAnimInstanceBase::getCurUnitAnimTime(int32 AssetPlayerIndex)
 {
 	float ret = this->GetInstanceAssetPlayerTimeFraction(AssetPlayerIndex);
 	return ret;
@@ -93,4 +95,11 @@ float UMyAnimInstanceBase::getUnitPlayTime(int32 AssetPlayerIndex)
 void UMyAnimInstanceBase::onMyTriggerSingleAnimNotify(FString NotifyName)
 {
 
+}
+
+FName UMyAnimInstanceBase::getCurStateNameInStateMachine(FName MachineName)
+{
+	int32 MachineIndex = this->GetStateMachineIndex(MachineName);
+	FAnimNode_StateMachine* StateMachine = this->GetStateMachineInstance(MachineIndex);
+	return StateMachine->GetCurrentStateName();
 }
