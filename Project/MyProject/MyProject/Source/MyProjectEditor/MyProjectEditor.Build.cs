@@ -31,8 +31,10 @@ public class MyProjectEditor : ModuleRules
 				// BaseFrame
 				"MyProjectEditor/Private/BaseFrame/AppEditor/Libs/EngineWrap",
 				"MyProjectEditor/Private/BaseFrame/AppEditor/Common/Common",
-				"MyProjectEditor/Private/BaseFrame/AppEditor/Module/Asset/ExportAssetDependecies/Private",
-				"MyProjectEditor/Private/BaseFrame/AppEditor/Module/Asset/ExportAssetDependecies/Public",
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Asset/ExportAssetDependecies/Private",
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Asset/ExportAssetDependecies/Public",
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Asset/ImportFbx",
+				"MyProjectEditor/Private/BaseFrame/AppEditor/Asset/PackageOperation",
 
 				// UnitTest
 				"MyProjectEditor/Private/BaseFrame/UnitTest/TestAssetGraph",
