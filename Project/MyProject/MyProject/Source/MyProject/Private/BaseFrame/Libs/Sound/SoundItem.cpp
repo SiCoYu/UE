@@ -1,7 +1,10 @@
 #include "MyProject.h"
 #include "SoundItem.h"
+#include "Prequisites.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(SoundItem, GObject)
 
 SoundItem::SoundItem()
 {
@@ -11,12 +14,12 @@ SoundItem::SoundItem()
 // 所有都执行完成后调用
 void SoundItem::init()
 {
-    //base.init();
+	Super::init();
 }
 
 void SoundItem::onInit()
 {
-    //base.onInit();
+	Super::onInit();
 
     this->mPath = "";
     this->mUniqueStrId = "";
@@ -60,7 +63,7 @@ void SoundItem::destroy()
 
 void SoundItem::onDestroy()
 {
-    //base.onDestroy();
+	Super::onDestroy();
 }
 
 // 清理并且销毁

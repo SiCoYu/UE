@@ -8,8 +8,10 @@ MY_BEGIN_NAMESPACE(MyNS)
 /**
  * @brief 直接加载声音文件
  */
-	class SoundClipItem : public SoundItem
+class SoundClipItem : public SoundItem
 {
+	M_DECLARE_CLASS(SoundClipItem, SoundItem)
+
 protected:
 	bool mIsLoaded;          // 资源是否加载完成
 	bool mIsDontDestroy;     // 是否不销毁

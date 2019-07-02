@@ -1,7 +1,10 @@
 ﻿#include "MyProject.h"
-#include "SoundItem.h"
+#include "SoundParam.h"
+#include "Prequisites.h"
 
 MY_BEGIN_NAMESPACE(MyNS)
+
+M_IMPLEMENT_AND_REGISTER_CLASS(SoundParam, GObject)
 
 SoundParam::SoundParam()
 {

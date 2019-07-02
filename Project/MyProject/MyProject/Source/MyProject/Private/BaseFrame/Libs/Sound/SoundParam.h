@@ -7,6 +7,8 @@ MY_BEGIN_NAMESPACE(MyNS)
 
 class SoundParam : GObject
 {
+	M_DECLARE_CLASS(SoundParam, GObject)
+
 public:
 	FString mPath = "";      // 音乐路径
 	bool mIsLoop = true;    // 是否循环播放

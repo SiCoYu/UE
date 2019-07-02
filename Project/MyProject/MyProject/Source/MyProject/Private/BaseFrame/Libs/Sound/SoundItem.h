@@ -9,10 +9,12 @@
 MY_BEGIN_NAMESPACE(MyNS)
 
 /**
-    * @brief 音乐和音效都是这个类
-    */
+ * @brief 音乐和音效都是这个类
+ */
 class SoundItem : public GObject
 {
+	M_DECLARE_CLASS(SoundItem, GObject)
+
 public:
 	FString mPath;           // 资源目录
     FString mUniqueStrId;       // 资源唯一 Id
