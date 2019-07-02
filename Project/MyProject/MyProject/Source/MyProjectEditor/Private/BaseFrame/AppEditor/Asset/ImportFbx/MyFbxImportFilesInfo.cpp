@@ -19,28 +19,28 @@
 #include "Factories/FbxFactory.h"
 #include "Factories/MaterialInstanceConstantFactoryNew.h"
 
-FMyFbxImportFilesInfo::FMyFbxImportFilesInfo(const FString & FilePath_EluXml)
+FMyFbxImportFilesInfo::FMyFbxImportFilesInfo(const FString & FilePath_MyFbxXml)
 {
 	IFileManager& FileManager = IFileManager::Get();
 
-	this->FilePath_EluXml = FilePath_EluXml;
-	FString XmlDirPath = FPaths::GetPath(FilePath_EluXml);
+	this->FilePath_MyFbxXml = FilePath_MyFbxXml;
+	FString XmlDirPath = FPaths::GetPath(FilePath_MyFbxXml);
 
-	this->DirPath_EluObject = FPaths::GetPath(XmlDirPath);
-	this->DirName_EluObject = FPaths::GetBaseFilename(this->DirPath_EluObject);
+	this->DirPath_MyFbxObject = FPaths::GetPath(XmlDirPath);
+	this->DirName_MyFbxObject = FPaths::GetBaseFilename(this->DirPath_MyFbxObject);
 
-	FString EluModelDirPath = this->DirPath_EluObject + FString("/") + UMyFbxProcessor::DirName_EluModels;
-	TArray<FString> FileNames_EluModels;
+	FString MyFbxModelDirPath = this->DirPath_MyFbxObject + FString("/") + UMyFbxProcessor::DirName_MyFbxModels;
+	TArray<FString> FileNames_MyFbxModels;
 
-	FileManager.FindFiles(FileNames_EluModels, *EluModelDirPath, *FString("fbx"));
+	FileManager.FindFiles(FileNames_MyFbxModels, *MyFbxModelDirPath, *FString("fbx"));
 
-	for (FString& EluModelFileName : FileNames_EluModels)
+	for (FString& MyFbxModelFileName : FileNames_MyFbxModels)
 	{
-		FString EluModelFilePath = EluModelDirPath + FString("/") + EluModelFileName;
-		this->FilePaths_EluModels.Add(EluModelFilePath);
+		FString MyFbxModelFilePath = MyFbxModelDirPath + FString("/") + MyFbxModelFileName;
+		this->FilePaths_MyFbxModels.Add(MyFbxModelFilePath);
 	}
 
-	FileNames_EluModels.Empty();
+	FileNames_MyFbxModels.Empty();
 
 	TArray<FString> FileNames_Xml;
 	FileManager.FindFiles(FileNames_Xml, *XmlDirPath, *FString("xml"));
@@ -79,19 +79,19 @@ FMyFbxImportFilesInfo::FMyFbxImportFilesInfo(const FString & FilePath_EluXml)
 
 	}
 
-	FString DirPath_EluAnimations = this->DirPath_EluObject + FString("/") + UMyFbxProcessor::DirName_EluAnimations;
-	TArray<FString> FileNames_EluAnimations;
+	FString DirPath_MyFbxAnimations = this->DirPath_MyFbxObject + FString("/") + UMyFbxProcessor::DirName_MyFbxAnimations;
+	TArray<FString> FileNames_MyFbxAnimations;
 
-	FileManager.FindFiles(FileNames_EluAnimations, *DirPath_EluAnimations, *FString("fbx"));
+	FileManager.FindFiles(FileNames_MyFbxAnimations, *DirPath_MyFbxAnimations, *FString("fbx"));
 
-	for (FString& FileName_EluAnimation: FileNames_EluAnimations)
+	for (FString& FileName_MyFbxAnimation: FileNames_MyFbxAnimations)
 	{
-		FString FilePath_EluAnimation = DirPath_EluAnimations + FString("/") + FileName_EluAnimation;
-		this->FilePaths_EluAnimations.Add(FilePath_EluAnimation);
+		FString FilePath_MyFbxAnimation = DirPath_MyFbxAnimations + FString("/") + FileName_MyFbxAnimation;
+		this->FilePaths_MyFbxAnimations.Add(FilePath_MyFbxAnimation);
 	}
 
-	FileNames_EluAnimations.Empty();
+	FileNames_MyFbxAnimations.Empty();
 
-	UMyFbxProcessor::ParseEluXmlForMaterials(this->FilePath_EluXml, this->Map_EluMatsInfo);
+	UMyFbxProcessor::ParseMyFbxXmlForMaterials(this->FilePath_MyFbxXml, this->Map_MyFbxMatsInfo);
 
 }

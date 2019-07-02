@@ -7,20 +7,20 @@
 
 struct MYPROJECTEDITOR_API FMyFbxImportFilesInfo
 {
-	FString DirPath_EluObject;
-	FString DirName_EluObject;
+	FString DirPath_MyFbxObject;
+	FString DirName_MyFbxObject;
 
-	TArray<FString> FilePaths_EluModels;
-	TSet<FString> FilePaths_EluAnimations;
+	TArray<FString> FilePaths_MyFbxModels;
+	TSet<FString> FilePaths_MyFbxAnimations;
 
 	FString FilePath_AnimationXml;
 	FString FilePath_AnimationEventXml;
 	FString FilePath_AnimationInfoXml;
 	FString FilePath_AnimationSoundEventXml;
-	FString FilePath_EluXml;
+	FString FilePath_MyFbxXml;
 	FString FilePath_SceneXml;
 
-	TMap<FString, FMyFbxMatInfo> Map_EluMatsInfo;
+	TMap<FString, FMyFbxMatInfo> Map_MyFbxMatsInfo;
 
-	FMyFbxImportFilesInfo(const FString& FilePath_EluXml);
+	FMyFbxImportFilesInfo(const FString& FilePath_MyFbxXml);
 };
