@@ -11,6 +11,9 @@ UAnimNotifyBase::UAnimNotifyBase(const FObjectInitializer& ObjectInitializer)
 void UAnimNotifyBase::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
 {
 	UMyAnimInstanceBase* animInstance = Cast<UMyAnimInstanceBase>(MeshComp->GetAnimInstance());
+	//AActor* actor = Cast<AActor>(MeshComp->GetOuter());
+	//animInstance = actor->FindComponentByClass<UMyAnimInstanceBase>();
+
 	if (nullptr != animInstance)
 	{
 		animInstance->onMyTriggerSingleAnimNotify(this->GetNotifyName());
