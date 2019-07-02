@@ -29,6 +29,44 @@ http://www.chinaar.com/UE4/1817.html
 Demo下载 链接：http://pan.baidu.com/s/1eQRwhGI 密码：5ji2
 File:CharacterCreator.rar
 
+==============
+SolidCoreGames/AssimpLoader
+https://github.com/SolidCoreGames/AssimpLoader
+
+File:AssimpLoader-master.zip
+
+=============
+rahulshekhawat/raiderz-fbx-auto-importer-ue4
+https://github.com/rahulshekhawat/raiderz-fbx-auto-importer-ue4
+
+File:raiderz-fbx-auto-importer-ue4-master.zip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
