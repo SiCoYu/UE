@@ -1,7 +1,15 @@
 #pragma once
 
+#include "Containers/UnrealString.h"	// FString
+
 class MYPROJECTEDITOR_API PackageOperation
 {
+protected:
+	FString PackageName;
+	FString TextureName;
+	int TextureWidth;
+	int TextureHeight;
+
 public:
 	PackageOperation();
 	/**
