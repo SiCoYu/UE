@@ -2,6 +2,7 @@
 
 #include "PlatformDefine.h"
 
+//class UWidgetBlueprint;
 class UWidgetBlueprintGeneratedClass;
 
 /**
@@ -10,5 +11,9 @@ class UWidgetBlueprintGeneratedClass;
 class MyWidgetBlueprintGeneratedClass
 {
 protected:
+	//UWidgetBlueprint* mWidgetBlueprint;
 	UWidgetBlueprintGeneratedClass* mBlueprintGeneratedClass;
+
+public:
+	void test_0();
 };
