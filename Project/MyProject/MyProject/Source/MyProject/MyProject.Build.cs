@@ -299,6 +299,7 @@ public class MyProject : ModuleRules
 				//"DesktopPlatform",  // Developer\DesktopPlatform
 				//"UMGEditor",		// Editor
 				"AIModule",		// UBehaviorTreeComponent
+				"ControlRig",	// UControlRigBlueprintGeneratedClass
 			}
         );
 
@@ -323,6 +324,7 @@ public class MyProject : ModuleRules
 				//"DesktopPlatform",  // Developer\DesktopPlatform
 				//"UMGEditor",		// Editor
 				"AIModule",		// UBehaviorTreeComponent
+				"ControlRig",	// UControlRigBlueprintGeneratedClass
 			}
         );
 
