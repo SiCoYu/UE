@@ -4,6 +4,9 @@
 
 class UBlueprintGeneratedClass;
 
+/**
+ * @brief 既有资源，又有脚本
+ */
 class MyBlueprintGeneratedClass
 {
 protected:
