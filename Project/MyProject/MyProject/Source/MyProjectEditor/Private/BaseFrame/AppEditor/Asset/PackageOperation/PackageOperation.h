@@ -34,8 +34,8 @@ public:
 	 * UWidgetBlueprintFactory::FactoryCreateNew()
 	 * UAnimBlueprintFactory::FactoryCreateNew()
 	 * @brief Python ±à¼­Æ÷µ¼Èë¶¯»­, Creating the AnimationBlueprint
-     * UnrealEnginePython/tutorials/YourFirstAutomatedPipeline.md
-	 * https://github.com/20tab/UnrealEnginePython/blob/master/tutorials/YourFirstAutomatedPipeline.md
+     * @brief UnrealEnginePython/tutorials/YourFirstAutomatedPipeline.md
+	 * @ref https://github.com/20tab/UnrealEnginePython/blob/master/tutorials/YourFirstAutomatedPipeline.md
 	 */
 	void createAndSaveOneAnimBlueprint_Test();
 };

@@ -10,6 +10,7 @@
 #include "Factories/AnimBlueprintFactory.h"	// UAnimBlueprintFactory
 #include "Animation/AnimInstance.h"		// UAnimInstance
 #include "Animation/AnimBlueprint.h"	// UAnimBlueprint
+#include "K2Node_CustomEvent.h"			// UK2Node_CustomEvent
 
 PackageOperation::PackageOperation()
 {
@@ -155,5 +156,21 @@ void PackageOperation::createAndSaveOneAnimBlueprint_Test()
 
 	FAssetRegistryModule::AssetCreated(animBlueprint);
 
-	animBlueprint->UbergraphPages[0]->AddNode();
+	/**
+	 * @ref https://github.com/20tab/UnrealEnginePython/blob/master/Source/UnrealEnginePython/Private/Blueprint/UEPyEdGraph.cpp
+	 * @ref http://api.unrealengine.com/INT/API/Editor/BlueprintGraph/UK2Node_CustomEvent/index.html
+	 */
+	// UEdGraphNode* NodeToAdd = NewObject<UEdGraphNode>();
+	// NodeToAdd->ImportCustomProperties
+	UK2Node_CustomEvent* NodeToAdd = NewObject<UK2Node_CustomEvent>();
+
+	NodeToAdd->NodePosX = 0;
+	NodeToAdd->NodePosY = -400;
+	FString ResultString("aaa");
+	NodeToAdd->AppendName(ResultString);
+
+	animBlueprint->UbergraphPages[0]->AddNode(NodeToAdd);
+
+	FBPVariableDescription VariableDescription = NewObject<FBPVariableDescription>();
+	animBlueprint->NewVariables.Add(VariableDescription)
 }
