@@ -1,13 +1,19 @@
 #include "PackageOperation.h"
 #include "EngineMinimal.h"
 #include "AssetRegistryModule.h"
+#include "Factories/MaterialFactoryNew.h"	// UMaterialFactoryNew
+#include "Materials/MaterialExpressionMultiply.h"	// UMaterialExpressionMultiply
+#include "Materials/MaterialExpressionAppendVector.h"	// UMaterialExpressionAppendVector
+#include "Materials/MaterialExpressionTextureCoordinate.h"	// UMaterialExpressionTextureCoordinate
+#include "Materials/MaterialExpressionScalarParameter.h"	// UMaterialExpressionScalarParameter
+#include "ComponentReregisterContext.h"	// FGlobalComponentReregisterContext 
 
 PackageOperation::PackageOperation()
 {
 
 }
 
-void PackageOperation::saveOneTexture()
+void PackageOperation::createAndSaveOneTexture()
 {
 	//创建名为PackageName值的包
 	//PackageName为FString类型
@@ -71,4 +77,66 @@ void PackageOperation::saveOneTexture()
 	bool bSaved = UPackage::SavePackage(Package, NewTexture, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone, *PackageFileName, GError, nullptr, true, true, SAVE_NoError);
 
 	delete[] Pixels;
+}
+
+void PackageOperation::createAndSaveOneMaterial()
+{
+	FString MaterialBaseName = "M_Material";
+	FString PackageName = "/Game/";
+	PackageName += MaterialBaseName;
+	UPackage* Package = CreatePackage(NULL, *PackageName);
+
+	// create an unreal material asset
+	auto MaterialFactory = NewObject<UMaterialFactoryNew>();
+	UMaterial* UnrealMaterial = (UMaterial*)MaterialFactory->FactoryCreateNew(UMaterial::StaticClass(), Package, *MaterialBaseName, RF_Standalone | RF_Public, NULL, GWarn);
+	FAssetRegistryModule::AssetCreated(UnrealMaterial);
+	Package->FullyLoad();
+	Package->SetDirtyFlag(true);
+
+	// Tiling system
+	UMaterialExpressionMultiply* Multiply = NewObject<UMaterialExpressionMultiply>(UnrealMaterial);
+	UnrealMaterial->Expressions.Add(Multiply);
+
+	// Diffuse
+	FStringAssetReference DiffuseAssetPath("/Game/T_Texture");
+	UTexture* DiffuseTexture = Cast<UTexture>(DiffuseAssetPath.TryLoad());
+	if (DiffuseTexture)
+	{
+		// make texture sampler
+		UMaterialExpressionTextureSample* TextureExpression = NewObject<UMaterialExpressionTextureSample>(UnrealMaterial);
+		TextureExpression->Texture = DiffuseTexture;
+		TextureExpression->SamplerType = SAMPLERTYPE_Color;
+		UnrealMaterial->Expressions.Add(TextureExpression);
+		UnrealMaterial->BaseColor.Expression = TextureExpression;
+
+		// Tiling
+		TextureExpression->Coordinates.Expression = Multiply;
+	}
+
+
+	// Tiling
+	UMaterialExpressionAppendVector* Append = NewObject<UMaterialExpressionAppendVector>(UnrealMaterial);
+	UnrealMaterial->Expressions.Add(Append);
+	Multiply->B.Expression = Append;
+	UMaterialExpressionTextureCoordinate* TexCoords = NewObject<UMaterialExpressionTextureCoordinate>(UnrealMaterial);
+	UnrealMaterial->Expressions.Add(TexCoords);
+	Multiply->A.Expression = TexCoords;
+	UMaterialExpressionScalarParameter* XParam = NewObject<UMaterialExpressionScalarParameter>(UnrealMaterial);
+	UMaterialExpressionScalarParameter* YParam = NewObject<UMaterialExpressionScalarParameter>(UnrealMaterial);
+	UnrealMaterial->Expressions.Add(XParam);
+	UnrealMaterial->Expressions.Add(YParam);
+	XParam->ParameterName = "TextureRepeatX";
+	XParam->DefaultValue = 1;
+	YParam->ParameterName = "TextureRepeatY";
+	YParam->DefaultValue = 1;
+	Append->A.Expression = XParam;
+	Append->B.Expression = YParam;
+
+	// let the material update itself if necessary
+	UnrealMaterial->PreEditChange(NULL);
+	UnrealMaterial->PostEditChange();
+
+	// make sure that any static meshes, etc using this material will stop using the FMaterialResource of the original
+	// material, and will use the new FMaterialResource created when we make a new UMaterial in place
+	FGlobalComponentReregisterContext RecreateComponents;
 }

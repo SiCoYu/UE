@@ -18,5 +18,9 @@ public:
 	 * @ref https://isaratech.com/ue4-programmatically-create-a-new-material-and-inner-nodes/
      * @ref https://isaratech.com/save-a-procedurally-generated-texture-as-a-new-asset/
 	 */
-	void saveOneTexture();
+	void createAndSaveOneTexture();
+	/**
+	 * @ref https://isaratech.com/ue4-programmatically-create-a-new-material-and-inner-nodes/
+	 */
+	void createAndSaveOneMaterial();
 };
