@@ -26,6 +26,10 @@ public:
 	void dispose();
 
 	void setActor(AActor* actor);
+	/**
+	 * @ref https://answers.unrealengine.com/questions/569609/view.html
+	 */
+	void setAnimBlueprint_Test();
 };
 
 MY_END_NAMESPACE

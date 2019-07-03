@@ -7,6 +7,9 @@
 #include "Materials/MaterialExpressionTextureCoordinate.h"	// UMaterialExpressionTextureCoordinate
 #include "Materials/MaterialExpressionScalarParameter.h"	// UMaterialExpressionScalarParameter
 #include "ComponentReregisterContext.h"	// FGlobalComponentReregisterContext 
+#include "Factories/AnimBlueprintFactory.h"	// UAnimBlueprintFactory
+#include "Animation/AnimInstance.h"		// UAnimInstance
+#include "Animation/AnimBlueprint.h"	// UAnimBlueprint
 
 PackageOperation::PackageOperation()
 {
@@ -139,4 +142,18 @@ void PackageOperation::createAndSaveOneMaterial()
 	// make sure that any static meshes, etc using this material will stop using the FMaterialResource of the original
 	// material, and will use the new FMaterialResource created when we make a new UMaterial in place
 	FGlobalComponentReregisterContext RecreateComponents;
+}
+
+void PackageOperation::createAndSaveOneAnimBlueprint_Test()
+{
+	FString AnimBlueprintName = "M_AnimBlueprint";
+	FString PackageName = "/Game/";
+	PackageName += AnimBlueprintName;
+
+	UAnimBlueprintFactory* AnimBlueprintFactory = NewObject<UAnimBlueprintFactory>();
+	UAnimBlueprint* animBlueprint = AnimBlueprintFactory->FactoryCreateNew(UAnimBlueprint::StaticClass(), nullptr, *AnimBlueprintName, RF_Standalone | RF_Public, NULL, GWarn);
+
+	FAssetRegistryModule::AssetCreated(animBlueprint);
+
+	animBlueprint->UbergraphPages[0]->AddNode();
 }
